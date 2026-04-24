@@ -1,0 +1,11 @@
+# System
+.DS_Store
+
+# Sensitive / runtime
+container.json
+
+# Large binary sources (keep text, ignore large downloads)
+sources/*.pdf
+sources/*.html
+sources/*.mp4
+sources/*.mp3
