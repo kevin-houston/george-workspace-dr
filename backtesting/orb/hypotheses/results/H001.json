@@ -1,0 +1,39 @@
+{
+  "hypothesis": "H001",
+  "symbol": "QQQ",
+  "period": "2016-01-01 to 2022-12-31",
+  "hl_mode": {
+    "total_trades": 157,
+    "win_rate": 0.3185,
+    "avg_win": 691.53,
+    "avg_loss": -262.78,
+    "profit_factor": 1.23,
+    "sharpe": 1.405,
+    "max_drawdown": -0.1319,
+    "calmar": 3.382,
+    "total_return": 0.2584,
+    "annualized_return": 0.4461,
+    "final_equity": 31459.13,
+    "exit_breakdown": {
+      "stop": 102,
+      "eod": 55
+    }
+  },
+  "atr_mode": {
+    "total_trades": 155,
+    "win_rate": 0.1226,
+    "avg_win": 1464.13,
+    "avg_loss": -119.95,
+    "profit_factor": 1.705,
+    "sharpe": 2.047,
+    "max_drawdown": -0.1116,
+    "calmar": 7.618,
+    "total_return": 0.4602,
+    "annualized_return": 0.8505,
+    "final_equity": 36504.85,
+    "exit_breakdown": {
+      "stop": 136,
+      "eod": 19
+    }
+  }
+}

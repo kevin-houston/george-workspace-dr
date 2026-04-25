@@ -1,7 +1,7 @@
 ---
 updated: 2026-04-25
 sources_indexed: 0
-pages: 17
+pages: 18
 ---
 
 # Wiki Index
@@ -34,6 +34,7 @@ When answering a query:
 - [Research Log 2026-04-24](trading/research-log/2026-04-24.md) — session 1: tools and data sources
 - [Research Log 2026-04-25](trading/research-log/2026-04-25.md) — session 2: prediction markets deep dive
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — macro regime modeling, after-tax returns, real-world costs
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — falsifiable experiment cards; H001 REJECTED (ATR mode dominates ORB H/L mode)
 - [Kalshi](trading/prediction-markets/kalshi.md) — primary prediction market platform; CFTC-regulated, economic events, Python SDK
 - [Polymarket](trading/prediction-markets/polymarket.md) — secondary; highest global volume, blockchain-based, US re-entry Dec 2025
 - [Other Prediction Market Platforms](trading/prediction-markets/other-platforms.md) — PredictIt, Manifold, IBKR/CME, emerging platforms
