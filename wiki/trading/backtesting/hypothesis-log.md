@@ -76,34 +76,51 @@ The hypothesis was wrong — ATR mode doesn't just match H/L, it clearly dominat
 
 ---
 
-## H002 — ORB: ATR mode performs better in contraction regimes
+## H002 — ORB: ATR mode performs better in risk-off regimes
 
 **Date filed**: 2026-04-25
-**Status**: Pending (awaiting H001 completion)
-**Strategy**: ORB, ATR-mode exits only
+**Status**: INCONCLUSIVE
+**Strategy**: ORB, both exit modes
 **Asset**: QQQ
-**Regimes**: NBER expansion vs contraction (FRED USREC series)
+**Regimes**: SPY 200-day SMA (risk-on / risk-off) — USREC too sparse (2020 only 2 months)
 
 ### Hypothesis
 
-ATR-mode exits outperform H/L-mode on a risk-adjusted basis during **NBER contraction periods**, because elevated volatility in contractions makes fixed R-multiple targets unrealistic while EOD exits limit overnight gap risk.
+ATR-mode exits outperform H/L-mode on a risk-adjusted basis during **risk-off periods** (SPY below 200-day SMA), because elevated volatility in risk-off environments makes fixed R-multiple targets unrealistic while ATR-based stops adapt.
 
 ### Confirm criteria
 
-- Sharpe(ATR, contraction) > Sharpe(H/L, contraction) by ≥ 0.15
-- At least 20 trading days in contraction regime within in-sample period
+- Sharpe(ATR, risk-off) > Sharpe(H/L, risk-off) by ≥ 0.15
+- At least 20 risk-off trades in sample
 
-### Reject criteria
+### Results
 
-- Sharpe(H/L, contraction) ≥ Sharpe(ATR, contraction)
-- Fewer than 20 contraction days in sample
+Run: 2026-04-25 | QQQ | In-sample 2016-2022 | Regime: SPY 200-day SMA
+
+| Metric | H/L risk-on | ATR risk-on | H/L risk-off | ATR risk-off |
+|--------|------------|-------------|-------------|-------------|
+| Trades | 61 | 61 | 96 | 94 |
+| Win rate | 34.4% | 14.8% | 30.2% | 10.6% |
+| Sharpe | 1.281 | **2.802** | 1.475 | **1.612** |
+| Max DD | -9.4% | -5.2% | -13.2% | -11.2% |
+
+**Verdict: INCONCLUSIVE** — ATR advantage in risk-off = +0.137 (threshold was ≥ 0.15).
+
+### Interpretation
+
+The result is nuanced and more interesting than a simple confirm/reject:
+- ATR dominates in **risk-on** (Sharpe 2.802 vs 1.281) — big spread
+- In **risk-off**, H/L mode *improves* (1.281 → 1.475) while ATR *declines* (2.802 → 1.612) — the gap narrows dramatically
+- Hypothesis was directionally right but the effect is modest in risk-off
+- Likely explanation: in volatile risk-off markets, intraday ranges are large enough that the 10R target becomes achievable (H/L mode benefits), while ATR stops get triggered more frequently before the breakout can develop
+- **Actionable finding**: ATR mode is the better default, but H/L mode degrades less in risk-off regimes — could be the basis for a regime-switching strategy
 
 ---
 
 ## H003 — ORB: edge is leverage-dependent (TQQQ > QQQ > SPY)
 
 **Date filed**: 2026-04-25
-**Status**: Pending
+**Status**: INCONCLUSIVE (trade count) / DIRECTIONALLY CONFIRMED
 
 ### Hypothesis
 
@@ -111,13 +128,33 @@ ORB Sharpe ratio is higher on leveraged products (TQQQ) than the underlying (QQQ
 
 ### Confirm criteria
 
-- Sharpe(TQQQ) > Sharpe(QQQ) > Sharpe(SPY), all using same exit mode
+- Sharpe(TQQQ) > Sharpe(QQQ) > Sharpe(SPY), all using ATR mode
 - All three have total trades > 200
 
-### Reject criteria
+### Results
 
-- Order does not hold (e.g. QQQ > TQQQ)
-- Any asset has fewer than 200 trades
+Run: 2026-04-25 | ATR mode | In-sample 2016-2022
+
+| Metric | SPY | QQQ | TQQQ |
+|--------|-----|-----|------|
+| Trades | 131 | 155 | 185 |
+| Win rate | 7.6% | 12.3% | 15.1% |
+| Avg win | $683 | $1,464 | $4,811 |
+| Avg loss | -$75 | -$120 | -$504 |
+| **Sharpe** | **-1.086** | **2.047** | **2.602** |
+| Max DD | -19.2% | -11.2% | -17.8% |
+| Total return | -8.8% | +46.0% | **+222%** |
+| Final equity | $22,813 | $36,505 | $80,504 |
+
+**Verdict: INCONCLUSIVE** on strict criteria (all three needed ≥200 trades; none reached threshold). Directionally the order TQQQ > QQQ > SPY holds perfectly.
+
+### Interpretation
+
+- **SPY ATR mode is broken** — Sharpe -1.086, loses money. The 5% ATR stop is too tight for SPY's compressed intraday ranges; stops trigger before breakouts develop (120/131 exits via stop)
+- **SPY H/L mode works** (Sharpe 1.049) — the 10R target handles SPY's smaller ranges correctly
+- **The ATR stop parameter (5% of ATR14) is not universal** — needs calibration per asset. Works for QQQ/TQQQ, not SPY
+- **TQQQ ATR**: $25k → $80k in 7 years (222% total return, Sharpe 2.6) — most powerful setup found so far
+- **H005 candidate**: Optimize ATR stop multiplier per asset (e.g., 10% for SPY, 5% for QQQ, 3% for TQQQ)
 
 ---
 

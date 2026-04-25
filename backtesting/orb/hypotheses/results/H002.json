@@ -1,0 +1,79 @@
+{
+  "hypothesis": "H002",
+  "regime_method": "SPY 200-day SMA",
+  "results": {
+    "risk-on": {
+      "hl": {
+        "total_trades": 61,
+        "win_rate": 0.3443,
+        "avg_win": 586.18,
+        "avg_loss": -260.57,
+        "profit_factor": 1.181,
+        "sharpe": 1.281,
+        "max_drawdown": -0.0939,
+        "calmar": 10.438,
+        "total_return": 0.1798,
+        "annualized_return": 0.9797,
+        "final_equity": 29494.12,
+        "exit_breakdown": {
+          "stop": 37,
+          "eod": 24
+        }
+      },
+      "atr": {
+        "total_trades": 61,
+        "win_rate": 0.1475,
+        "avg_win": 1097.42,
+        "avg_loss": -88.37,
+        "profit_factor": 2.149,
+        "sharpe": 2.802,
+        "max_drawdown": -0.0517,
+        "calmar": 19.567,
+        "total_return": 0.1842,
+        "annualized_return": 1.0109,
+        "final_equity": 29605.96,
+        "exit_breakdown": {
+          "stop": 52,
+          "eod": 9
+        }
+      }
+    },
+    "risk-off": {
+      "hl": {
+        "total_trades": 96,
+        "win_rate": 0.3021,
+        "avg_win": 767.82,
+        "avg_loss": -264.1,
+        "profit_factor": 1.258,
+        "sharpe": 1.475,
+        "max_drawdown": -0.1319,
+        "calmar": 6.278,
+        "total_return": 0.2584,
+        "annualized_return": 0.8281,
+        "final_equity": 31459.13,
+        "exit_breakdown": {
+          "stop": 65,
+          "eod": 31
+        }
+      },
+      "atr": {
+        "total_trades": 94,
+        "win_rate": 0.1064,
+        "avg_win": 1794.18,
+        "avg_loss": -139.5,
+        "profit_factor": 1.531,
+        "sharpe": 1.612,
+        "max_drawdown": -0.1116,
+        "calmar": 15.755,
+        "total_return": 0.4602,
+        "annualized_return": 1.7591,
+        "final_equity": 36504.85,
+        "exit_breakdown": {
+          "stop": 84,
+          "eod": 10
+        }
+      }
+    }
+  },
+  "verdict": "INCONCLUSIVE \u2014 difference below threshold"
+}

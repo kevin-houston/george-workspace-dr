@@ -1,0 +1,117 @@
+{
+  "hypothesis": "H003",
+  "mode": "atr",
+  "results": {
+    "SPY": {
+      "atr": {
+        "total_trades": 131,
+        "win_rate": 0.0763,
+        "avg_win": 683.3,
+        "avg_loss": -74.55,
+        "profit_factor": 0.758,
+        "sharpe": -1.086,
+        "max_drawdown": -0.1916,
+        "calmar": -0.843,
+        "total_return": -0.0875,
+        "annualized_return": -0.1615,
+        "final_equity": 22813.01,
+        "exit_breakdown": {
+          "stop": 120,
+          "eod": 11
+        }
+      },
+      "hl": {
+        "total_trades": 131,
+        "win_rate": 0.2214,
+        "avg_win": 860.65,
+        "avg_loss": -202.61,
+        "profit_factor": 1.208,
+        "sharpe": 1.049,
+        "max_drawdown": -0.2463,
+        "calmar": 1.447,
+        "total_return": 0.1717,
+        "annualized_return": 0.3564,
+        "final_equity": 29292.74,
+        "exit_breakdown": {
+          "stop": 100,
+          "eod": 25,
+          "target": 6
+        }
+      }
+    },
+    "QQQ": {
+      "atr": {
+        "total_trades": 155,
+        "win_rate": 0.1226,
+        "avg_win": 1464.13,
+        "avg_loss": -119.95,
+        "profit_factor": 1.705,
+        "sharpe": 2.047,
+        "max_drawdown": -0.1116,
+        "calmar": 7.618,
+        "total_return": 0.4602,
+        "annualized_return": 0.8505,
+        "final_equity": 36504.85,
+        "exit_breakdown": {
+          "stop": 136,
+          "eod": 19
+        }
+      },
+      "hl": {
+        "total_trades": 157,
+        "win_rate": 0.3185,
+        "avg_win": 691.53,
+        "avg_loss": -262.78,
+        "profit_factor": 1.23,
+        "sharpe": 1.405,
+        "max_drawdown": -0.1319,
+        "calmar": 3.382,
+        "total_return": 0.2584,
+        "annualized_return": 0.4461,
+        "final_equity": 31459.13,
+        "exit_breakdown": {
+          "stop": 102,
+          "eod": 55
+        }
+      }
+    },
+    "TQQQ": {
+      "atr": {
+        "total_trades": 185,
+        "win_rate": 0.1514,
+        "avg_win": 4810.59,
+        "avg_loss": -504.41,
+        "profit_factor": 1.701,
+        "sharpe": 2.602,
+        "max_drawdown": -0.1777,
+        "calmar": 22.046,
+        "total_return": 2.2202,
+        "annualized_return": 3.9183,
+        "final_equity": 80504.47,
+        "exit_breakdown": {
+          "stop": 157,
+          "eod": 28
+        }
+      },
+      "hl": {
+        "total_trades": 190,
+        "win_rate": 0.3579,
+        "avg_win": 568.74,
+        "avg_loss": -257.57,
+        "profit_factor": 1.231,
+        "sharpe": 1.311,
+        "max_drawdown": -0.1281,
+        "calmar": 3.136,
+        "total_return": 0.29,
+        "annualized_return": 0.4018,
+        "final_equity": 32250.34,
+        "exit_breakdown": {
+          "stop": 112,
+          "eod": 77,
+          "target": 1
+        }
+      }
+    }
+  },
+  "verdict": "INCONCLUSIVE \u2014 fewer than 200 trades for: ['SPY', 'QQQ', 'TQQQ']"
+}
