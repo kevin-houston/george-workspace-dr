@@ -1,7 +1,7 @@
 ---
 updated: 2026-04-25
 sources_indexed: 0
-pages: 15
+pages: 17
 ---
 
 # Wiki Index
@@ -26,6 +26,8 @@ When answering a query:
 - [Project Index](trading/index.md) — phases, decisions, API access status
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
 - [Backtrader vs Vectorbt](trading/tools/backtrader-vs-vectorbt.md) — framework comparison; Backtrader for classical/paper, Vectorbt for fast optimization
+- [Kraken CLI](trading/tools/kraken-cli.md) — official Kraken AI-native CLI; 151 MCP tools, paper trading built-in, crypto/forex/xStocks
+- [OpenAlgo](trading/tools/openalgo.md) — open-source algo trading platform; India-only now, US broker support on 2026 roadmap
 - [Polygon.io](trading/data-sources/polygon.md) — market data (free: EOD only; paid: options, ticks, Greeks)
 - [Alpaca](trading/data-sources/alpaca.md) — broker + data; paper trading; 10yr 1-min data free
 - [Free Data Sources](trading/data-sources/free-data.md) — EDGAR (EdgarTools), Alpha Vantage, Finnhub; avoid yfinance
