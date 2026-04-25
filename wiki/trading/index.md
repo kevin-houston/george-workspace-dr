@@ -35,6 +35,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 | 2026-04-24 | Focus: equities and options first | Kevin's priority |
 | 2026-04-24 | Data: Polygon.io free tier + Alpaca free tier | Both accounts exist; keys in OneCLI |
 | 2026-04-24 | Paper trading via Alpaca | Kevin has existing paper account |
+| 2026-04-24 | Backtesting must model macro regimes + after-tax returns | Kevin's requirement — real-world accuracy |
 
 ## API access
 

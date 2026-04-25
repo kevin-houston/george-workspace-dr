@@ -30,6 +30,7 @@ When answering a query:
 - [Alpaca](trading/data-sources/alpaca.md) — broker + data; paper trading; 10yr 1-min data free
 - [Free Data Sources](trading/data-sources/free-data.md) — EDGAR (EdgarTools), Alpha Vantage, Finnhub; avoid yfinance
 - [Research Log 2026-04-24](trading/research-log/2026-04-24.md) — session 1 findings
+- [Backtesting Design Principles](trading/backtesting/design-principles.md) — macro regime modeling, after-tax returns, real-world costs
 
 ### Disaster Recovery
 
