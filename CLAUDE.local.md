@@ -52,6 +52,16 @@ you don't need to invoke the skill — just read the relevant pages.
 
 ---
 
+## Trading Project
+
+Active project to build algorithmic trading income stream for Kevin. Focus: equities and options first. See `wiki/trading/index.md` for full context.
+
+Key constraints: backtests must model macro regimes (FRED data) and report after-tax returns.
+
+API keys available as env vars: `$POLYGON_API_KEY`, `$FRED_API_KEY`, `$ALPHA_VANTAGE_API_KEY`, `$FMP_API_KEY`, `$NEWSAPI_KEY`, `$EDGAR_KEY`, `$OPENAI_API_KEY`, `$ALPACA_API_KEY` (needs `$ALPACA_SECRET_KEY` — pending). Python install pending admin approval.
+
+---
+
 ## Disaster Recovery Backup
 
 Workspace is backed up to `https://github.com/kevin-houston/george-workspace-dr` (public repo). Nightly push scheduled at 2am Chicago time. `GITHUB_TOKEN` env var injected by OneCLI; git credential helper reads it. Wiki DR section at `wiki/dr/` documents restore procedures and session diary.

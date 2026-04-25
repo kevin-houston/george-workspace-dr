@@ -39,8 +39,14 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 
 ## API access
 
-| Service | Status | Key location |
-|---------|--------|-------------|
-| Polygon.io | Free account | OneCLI vault |
-| Alpaca (paper) | Account exists | OneCLI vault |
-| GitHub | Active | `$GITHUB_TOKEN` env var |
+| Service | Env var | Status |
+|---------|---------|--------|
+| Polygon.io | `$POLYGON_API_KEY` | ✓ Tested — free tier, EOD bars |
+| FRED | `$FRED_API_KEY` | ✓ Tested — macro data (Fed funds, GDP, etc.) |
+| Alpha Vantage | `$ALPHA_VANTAGE_API_KEY` | ✓ Present |
+| Financial Modeling Prep | `$FMP_API_KEY` | ✓ Present — fundamentals |
+| NewsAPI | `$NEWSAPI_KEY` | ✓ Present — sentiment/news |
+| EDGAR | `$EDGAR_KEY` | ✓ Present |
+| OpenAI | `$OPENAI_API_KEY` | ✓ Present — ML/NLP tasks |
+| Alpaca (paper) | `$ALPACA_API_KEY` | ⚠️ Partial — needs `$ALPACA_SECRET_KEY` |
+| GitHub | `$GITHUB_TOKEN` | ✓ Active |
