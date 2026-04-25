@@ -49,3 +49,13 @@ requires.
 Use `/wiki` (the Skill tool) for structured ingest, query, or lint workflows. For
 quick queries where you can answer directly from memory of recent wiki contents,
 you don't need to invoke the skill — just read the relevant pages.
+
+---
+
+## Disaster Recovery Backup (IN PROGRESS)
+
+Goal: back up `/workspace/agent/` to GitHub repo `kevin-houston/george-workspace-dr`.
+
+**Status (2026-04-24):** Local git repo initialized at `/workspace/agent/` with initial commit. Remote added as `https://github.com/kevin-houston/george-workspace-dr.git`. Blocked on GitHub auth — Kevin added a Personal Access Token to the OneCLI vault under `github.com`, but the vault proxy (CONNECT tunnel) doesn't auto-inject it for HTTPS git operations. Need to resolve credential access before first push.
+
+**Next step:** Figure out how the vault credential is accessible (env var? credential helper API?), OR have Kevin share the token directly once so git credential store can be seeded. Then set up nightly scheduled push. After that: write DR diary wiki pages.

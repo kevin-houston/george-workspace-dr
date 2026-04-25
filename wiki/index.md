@@ -1,7 +1,7 @@
 ---
 updated: 2026-04-24
 sources_indexed: 0
-pages: 0
+pages: 3
 ---
 
 # Wiki Index
@@ -21,5 +21,9 @@ When answering a query:
 
 ## Categories
 
-*(empty — ingest your first source to populate)*
+### Disaster Recovery
+
+- [DR Overview](dr/overview.md) — restore procedure, what survives, what to tell a fresh George
+- [Git Backup Setup](dr/git-backup.md) — git repo config, current status, blocked items
+- [Session Diary](dr/diary.md) — append-only log of sessions; narrative recovery layer
 
