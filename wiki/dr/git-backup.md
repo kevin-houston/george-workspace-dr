@@ -1,6 +1,6 @@
 ---
 updated: 2026-04-24
-status: IN PROGRESS — blocked on GitHub auth
+status: COMPLETE
 ---
 
 # Git Backup Setup
@@ -14,17 +14,16 @@ Push `/workspace/agent/` to `https://github.com/kevin-houston/george-workspace-d
 - Local git repo initialized at `/workspace/agent/` ✓
 - Initial commit made ✓
 - Remote set to `https://github.com/kevin-houston/george-workspace-dr.git` ✓
-- GitHub repo created on remote: **NOT YET** — blocked on auth
-- Nightly push scheduled: **NOT YET**
+- GitHub repo created on remote ✓
+- Credential helper configured (reads `$GITHUB_TOKEN` env var) ✓
+- Nightly push scheduled at 2am Chicago time ✓
 
-## Blocked: credential access
+## Credential mechanism
 
-Kevin added a GitHub Personal Access Token to the OneCLI vault (`github.com`). However, the vault proxy uses CONNECT tunnels for HTTPS — it cannot inject the token as an HTTP header into encrypted git traffic. The token is not surfacing as an env var either.
-
-**Outstanding question:** How does the OneCLI vault surface the GitHub token to the container? Options to explore:
-- Env var injection (not yet visible)
-- A credential helper API endpoint
-- Kevin sharing the token directly for one-time git credential store seeding
+`GITHUB_TOKEN` env var is injected by OneCLI into the container. Git credential helper reads it:
+```
+credential.helper = !f() { echo "username=kevin-houston"; echo "password=$GITHUB_TOKEN"; }; f
+```
 
 ## Setup steps (once auth is resolved)
 
