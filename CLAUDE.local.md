@@ -52,10 +52,6 @@ you don't need to invoke the skill — just read the relevant pages.
 
 ---
 
-## Disaster Recovery Backup (IN PROGRESS)
+## Disaster Recovery Backup
 
-Goal: back up `/workspace/agent/` to GitHub repo `kevin-houston/george-workspace-dr`.
-
-**Status (2026-04-24):** Local git repo initialized at `/workspace/agent/` with initial commit. Remote added as `https://github.com/kevin-houston/george-workspace-dr.git`. Blocked on GitHub auth — Kevin added a Personal Access Token to the OneCLI vault under `github.com`, but the vault proxy (CONNECT tunnel) doesn't auto-inject it for HTTPS git operations. Need to resolve credential access before first push.
-
-**Next step:** Figure out how the vault credential is accessible (env var? credential helper API?), OR have Kevin share the token directly once so git credential store can be seeded. Then set up nightly scheduled push. After that: write DR diary wiki pages.
+Workspace is backed up to `https://github.com/kevin-houston/george-workspace-dr` (public repo). Nightly push scheduled at 2am Chicago time. `GITHUB_TOKEN` env var injected by OneCLI; git credential helper reads it. Wiki DR section at `wiki/dr/` documents restore procedures and session diary.
