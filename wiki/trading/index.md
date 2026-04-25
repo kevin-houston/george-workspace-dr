@@ -48,5 +48,5 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 | NewsAPI | `$NEWSAPI_KEY` | ✓ Present — sentiment/news |
 | EDGAR | `$EDGAR_KEY` | ✓ Present |
 | OpenAI | `$OPENAI_API_KEY` | ✓ Present — ML/NLP tasks |
-| Alpaca (paper) | `$ALPACA_API_KEY` | ⚠️ Partial — needs `$ALPACA_SECRET_KEY` |
+| Alpaca (paper) | `$ALPACA_API_KEY` + `$ALPACA_SECRET` | ✓ Active — $102k portfolio, $204k buying power |
 | GitHub | `$GITHUB_TOKEN` | ✓ Active |

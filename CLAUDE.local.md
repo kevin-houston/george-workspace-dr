@@ -58,7 +58,7 @@ Active project to build algorithmic trading income stream for Kevin. Focus: equi
 
 Key constraints: backtests must model macro regimes (FRED data) and report after-tax returns.
 
-API keys available as env vars: `$POLYGON_API_KEY`, `$FRED_API_KEY`, `$ALPHA_VANTAGE_API_KEY`, `$FMP_API_KEY`, `$NEWSAPI_KEY`, `$EDGAR_KEY`, `$OPENAI_API_KEY`, `$ALPACA_API_KEY` (needs `$ALPACA_SECRET_KEY` — pending). Python install pending admin approval.
+API keys available as env vars: `$POLYGON_API_KEY`, `$FRED_API_KEY`, `$ALPHA_VANTAGE_API_KEY`, `$FMP_API_KEY`, `$NEWSAPI_KEY`, `$EDGAR_KEY`, `$OPENAI_API_KEY`, `$ALPACA_API_KEY`, `$ALPACA_SECRET` (note: secret is ALPACA_SECRET not ALPACA_SECRET_KEY). Python 3.11 installed. Venv at `/workspace/agent/venv/`. Alpaca paper account active: ~$102k portfolio, ~$204k buying power.
 
 ---
 
