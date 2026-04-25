@@ -1,7 +1,7 @@
 ---
 updated: 2026-04-24
 sources_indexed: 0
-pages: 3
+pages: 10
 ---
 
 # Wiki Index
@@ -20,6 +20,16 @@ When answering a query:
 ---
 
 ## Categories
+
+### Trading & Prediction Markets
+
+- [Project Index](trading/index.md) — phases, decisions, API access status
+- [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
+- [Backtrader vs Vectorbt](trading/tools/backtrader-vs-vectorbt.md) — framework comparison; Backtrader for classical/paper, Vectorbt for fast optimization
+- [Polygon.io](trading/data-sources/polygon.md) — market data (free: EOD only; paid: options, ticks, Greeks)
+- [Alpaca](trading/data-sources/alpaca.md) — broker + data; paper trading; 10yr 1-min data free
+- [Free Data Sources](trading/data-sources/free-data.md) — EDGAR (EdgarTools), Alpha Vantage, Finnhub; avoid yfinance
+- [Research Log 2026-04-24](trading/research-log/2026-04-24.md) — session 1 findings
 
 ### Disaster Recovery
 
