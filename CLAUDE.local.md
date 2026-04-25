@@ -58,6 +58,8 @@ Active project to build algorithmic trading income stream for Kevin. Focus: equi
 
 Key constraints: backtests must model macro regimes (FRED data) and report after-tax returns.
 
+Kraken CLI v0.3.2 installed at `/home/node/.cargo/bin/kraken`. Paper account initialized ($10k USD). MCP server (`kraken mcp -s all`) submitted for admin approval — once live, I'll have 151 native trading tools. Complements Alpaca: Kraken for crypto/forex/derivatives, Alpaca for equities/options.
+
 API keys available as env vars: `$POLYGON_API_KEY`, `$FRED_API_KEY`, `$ALPHA_VANTAGE_API_KEY`, `$FMP_API_KEY`, `$NEWSAPI_KEY`, `$EDGAR_KEY`, `$OPENAI_API_KEY`, `$ALPACA_API_KEY`, `$ALPACA_SECRET` (note: secret is ALPACA_SECRET not ALPACA_SECRET_KEY). Python 3.11 installed. Venv at `/workspace/agent/venv/`. Alpaca paper account active: ~$102k portfolio, ~$204k buying power.
 
 ---
