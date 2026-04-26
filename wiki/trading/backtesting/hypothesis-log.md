@@ -174,3 +174,69 @@ ORB Sharpe ratio in the out-of-sample period (2023–2026) is materially lower t
 ### Reject criteria
 
 - Out-of-sample Sharpe within 30% of in-sample Sharpe
+
+---
+
+## H005 — Dual Momentum Sector Rotation outperforms buy-and-hold SPY on risk-adjusted basis
+
+**Date filed**: 2026-04-25
+**Status**: CONFIRMED (in-sample) / REJECTED (out-of-sample)
+**Strategy**: Sector ETF rotation (§4.1, §4.1.2 from Kakushadze & Serur 2018)
+**Source**: `backtesting/daily/run_h005.py`
+**Universe**: XLK, XLF, XLV, XLE, XLY, XLP, XLI, XLU, XLB (9 SPDR sectors)
+**Parameters**: 12-1 month formation, top-3 sectors, monthly rebalance; SPY SMA(200) absolute filter → TLT refuge
+**In-sample**: 2005-01-01 → 2019-12-31
+**Out-of-sample**: 2020-01-01 → 2026-04-01 (viewed but LOCKED — no parameter changes allowed)
+
+### Hypothesis
+
+Dual momentum sector rotation (relative sector momentum + SPY absolute momentum filter) will produce a **higher Calmar ratio** than buy-and-hold SPY over the in-sample period, primarily by reducing max drawdown during bear markets.
+
+### Confirm criteria
+
+- Calmar(DualMom) > Calmar(BH_SPY)
+- Max drawdown(DualMom) ≤ 70% of max drawdown(BH_SPY)
+- After-tax return within 3% of buy-and-hold
+
+### Reject criteria
+
+- Calmar(DualMom) ≤ Calmar(BH_SPY)
+
+### Results
+
+**IN-SAMPLE (2005–2019)**
+
+| Strategy | Ann.Ret | After-Tax | Sharpe | MaxDD | Calmar |
+|----------|---------|-----------|--------|-------|--------|
+| BH SPY | 9.0% | 7.2% (LTCG) | 0.291 | -55.2% | 0.164 |
+| Sector Momentum | 7.7% | 4.8% (STCG) | 0.222 | -48.9% | 0.156 |
+| **Dual Momentum** | **9.6%** | **6.1%** | **0.351** | **-28.1%** | **0.343** |
+| MA 10/30 SPY | 3.6% | 2.3% | -0.083 | -23.8% | 0.151 |
+
+**OUT-OF-SAMPLE (2020–2026)**
+
+| Strategy | Ann.Ret | After-Tax | Sharpe | MaxDD | Calmar |
+|----------|---------|-----------|--------|-------|--------|
+| BH SPY | 13.6% | **10.8% (LTCG)** | 0.478 | -33.7% | 0.402 |
+| Sector Momentum | **15.6%** | 9.8% (STCG) | **0.572** | **-27.1%** | **0.577** |
+| Dual Momentum | 10.3% | 6.5% | 0.343 | -29.6% | 0.349 |
+| MA 10/30 SPY | 7.4% | 4.6% | 0.232 | -19.8% | 0.372 |
+
+**In-sample verdict: CONFIRMED** — Dual Momentum Calmar = 0.343 vs SPY 0.164 (2.1× better). Max DD cut from -55.2% to -28.1% (49% reduction, threshold was 70%).
+
+**Out-of-sample verdict: REJECTED** — Dual Momentum Calmar 0.349 < SPY Calmar 0.402. After-tax return 6.5% vs SPY 10.8%.
+
+### Interpretation
+
+The in-sample story is strong: dual momentum's SPY/TLT filter worked very well during the 2008-2009 financial crisis, halving max drawdown at minimal return cost. This is the classic Antonacci (2014) result.
+
+The out-of-sample degradation has a specific cause: **2022 rate shock**. When the Fed hiked aggressively, both SPY and TLT fell simultaneously — TLT lost ~25% in 2022, destroying the safe-haven logic. The strategy's Achilles heel is assuming bonds are uncorrelated with equities during downturns, which broke in 2022.
+
+**Key finding on taxes**: Raw sector momentum beats SPY by 2% gross OOS (15.6% vs 13.6%), but STCG tax rate (37%) applied to monthly rebalancing **erases the entire gross advantage** — after-tax comes out 9.8% vs SPY's 10.8% LTCG. This is exactly the tax efficiency argument from the design principles: high-turnover strategies need ~1.5–2× gross return to beat buy-and-hold after taxes.
+
+**Actionable insights**:
+1. Dual momentum's drawdown protection works in "traditional" bear markets (2008 type) but fails in rate-shock bears (2022 type)
+2. Tax drag is real and kills monthly-rebalancing advantage — need to extend holding periods or use tax-deferred accounts
+3. Regime-switching needs a richer model: SPY vs TLT is insufficient; need "risk-off with rising rates" → short duration refuge (e.g., SGOV/BIL)
+
+**Next hypothesis (H006)**: Test dual momentum with SGOV (3-month T-bills) as refuge instead of TLT, addressing the 2022 failure mode.

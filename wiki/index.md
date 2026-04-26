@@ -1,7 +1,7 @@
 ---
 updated: 2026-04-25
-sources_indexed: 0
-pages: 18
+sources_indexed: 1
+pages: 19
 ---
 
 # Wiki Index
@@ -33,6 +33,7 @@ When answering a query:
 - [Free Data Sources](trading/data-sources/free-data.md) — EDGAR (EdgarTools), Alpha Vantage, Finnhub; avoid yfinance
 - [Research Log 2026-04-24](trading/research-log/2026-04-24.md) — session 1: tools and data sources
 - [Research Log 2026-04-25](trading/research-log/2026-04-25.md) — session 2: prediction markets deep dive
+- [151 Trading Strategies (Kakushadze & Serur)](trading/strategies/151-trading-strategies.md) — comprehensive strategy catalog; 151+ strategies with formulas; Tier 1/2/3 implementation priority
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — macro regime modeling, after-tax returns, real-world costs
 - [Hypothesis Log](trading/backtesting/hypothesis-log.md) — falsifiable experiment cards; H001 REJECTED (ATR mode dominates ORB H/L mode)
 - [Kalshi](trading/prediction-markets/kalshi.md) — primary prediction market platform; CFTC-regulated, economic events, Python SDK
