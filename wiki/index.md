@@ -1,7 +1,7 @@
 ---
-updated: 2026-04-25
+updated: 2026-04-26
 sources_indexed: 1
-pages: 19
+pages: 22
 ---
 
 # Wiki Index
@@ -26,14 +26,17 @@ When answering a query:
 - [Project Index](trading/index.md) — phases, decisions, API access status
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
 - [Backtrader vs Vectorbt](trading/tools/backtrader-vs-vectorbt.md) — framework comparison; Backtrader for classical/paper, Vectorbt for fast optimization
+- [LEAN / QuantConnect](trading/tools/lean-quantconnect.md) — open-source backtesting + live trading engine; best for options; requires Docker (pending install)
 - [Kraken CLI](trading/tools/kraken-cli.md) — official Kraken AI-native CLI; 151 MCP tools, paper trading built-in, crypto/forex/xStocks
 - [OpenAlgo](trading/tools/openalgo.md) — open-source algo trading platform; India-only now, US broker support on 2026 roadmap
 - [Polygon.io](trading/data-sources/polygon.md) — market data (free: EOD only; paid: options, ticks, Greeks)
 - [Alpaca](trading/data-sources/alpaca.md) — broker + data; paper trading; 10yr 1-min data free
 - [Free Data Sources](trading/data-sources/free-data.md) — EDGAR (EdgarTools), Alpha Vantage, Finnhub; avoid yfinance
+- [Options Data Sources](trading/data-sources/options-data.md) — ThetaData (cheapest), ORATS (best IV surface), Polygon/Alpaca (real-time only; no history)
 - [Research Log 2026-04-24](trading/research-log/2026-04-24.md) — session 1: tools and data sources
 - [Research Log 2026-04-25](trading/research-log/2026-04-25.md) — session 2: prediction markets deep dive
 - [151 Trading Strategies (Kakushadze & Serur)](trading/strategies/151-trading-strategies.md) — comprehensive strategy catalog; 151+ strategies with formulas; Tier 1/2/3 implementation priority
+- [Options Income Strategies](trading/algorithms/options-income-strategies.md) — iron condor, CSP/wheel, covered calls, VRP harvesting; win rates, returns, LEAN implementation notes
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — macro regime modeling, after-tax returns, real-world costs
 - [Hypothesis Log](trading/backtesting/hypothesis-log.md) — falsifiable experiment cards; H001 REJECTED (ATR mode dominates ORB H/L mode)
 - [Kalshi](trading/prediction-markets/kalshi.md) — primary prediction market platform; CFTC-regulated, economic events, Python SDK
