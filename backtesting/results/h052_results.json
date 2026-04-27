@@ -1,0 +1,408 @@
+{
+  "strategy": "H052 \u2014 Practical 4-Component Blend: H042 Bundle + H045 Treasury Rotation",
+  "description": "IS/OOS validated sweep of H045 allocation in the H042 blend. H045 replaces a fraction of H042 proportionally. Identifies practical allocation that maximises OOS Sharpe without overfitting bond bull.",
+  "design": {
+    "h042_base_weights": {
+      "w_h041a": 0.56,
+      "w_h026": 0.16,
+      "w_h037b": 0.28
+    },
+    "note": "At any H045 allocation w, actual weights = H042_base \u00d7 (1-w) + H045 \u00d7 w",
+    "h045_grid": [
+      0.0,
+      0.1,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.5
+    ]
+  },
+  "periods": {
+    "full": {
+      "start": "2008-01-31",
+      "end": "2026-04-30",
+      "n_months": 220
+    },
+    "IS": {
+      "start": "2008-01-31",
+      "end": "2017-12-31",
+      "n_months": 120
+    },
+    "OOS": {
+      "start": "2018-01-31",
+      "end": "2026-04-30",
+      "n_months": 100
+    }
+  },
+  "grid_results": [
+    {
+      "h045_w": 0.0,
+      "weights": {
+        "w_h041a": 0.56,
+        "w_h026": 0.16,
+        "w_h037b": 0.28,
+        "w_h045": 0.0
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.147,
+        "sharpe": 1.8674,
+        "max_drawdown": -0.0902,
+        "calmar": 1.6302,
+        "ann_vol": 0.0787,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1527,
+        "sharpe": 2.073,
+        "max_drawdown": -0.0902,
+        "calmar": 1.6929,
+        "ann_vol": 0.0736,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1403,
+        "sharpe": 1.6546,
+        "max_drawdown": -0.0879,
+        "calmar": 1.5956,
+        "ann_vol": 0.0848,
+        "n_months": 100
+      },
+      "deg_pct": -20.18
+    },
+    {
+      "h045_w": 0.1,
+      "weights": {
+        "w_h041a": 0.504,
+        "w_h026": 0.144,
+        "w_h037b": 0.252,
+        "w_h045": 0.1
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1372,
+        "sharpe": 1.9036,
+        "max_drawdown": -0.0823,
+        "calmar": 1.6678,
+        "ann_vol": 0.0721,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1426,
+        "sharpe": 2.121,
+        "max_drawdown": -0.0823,
+        "calmar": 1.7341,
+        "ann_vol": 0.0673,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1307,
+        "sharpe": 1.6804,
+        "max_drawdown": -0.0751,
+        "calmar": 1.7407,
+        "ann_vol": 0.0778,
+        "n_months": 100
+      },
+      "deg_pct": -20.77
+    },
+    {
+      "h045_w": 0.2,
+      "weights": {
+        "w_h041a": 0.448,
+        "w_h026": 0.128,
+        "w_h037b": 0.224,
+        "w_h045": 0.2
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1274,
+        "sharpe": 1.9429,
+        "max_drawdown": -0.0743,
+        "calmar": 1.7145,
+        "ann_vol": 0.0656,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1327,
+        "sharpe": 2.1737,
+        "max_drawdown": -0.0743,
+        "calmar": 1.7851,
+        "ann_vol": 0.061,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1211,
+        "sharpe": 1.7078,
+        "max_drawdown": -0.0652,
+        "calmar": 1.8591,
+        "ann_vol": 0.0709,
+        "n_months": 100
+      },
+      "deg_pct": -21.43
+    },
+    {
+      "h045_w": 0.25,
+      "weights": {
+        "w_h041a": 0.42,
+        "w_h026": 0.12,
+        "w_h037b": 0.21,
+        "w_h045": 0.25
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1225,
+        "sharpe": 1.9634,
+        "max_drawdown": -0.0703,
+        "calmar": 1.7422,
+        "ann_vol": 0.0624,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1277,
+        "sharpe": 2.2015,
+        "max_drawdown": -0.0703,
+        "calmar": 1.8154,
+        "ann_vol": 0.058,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1164,
+        "sharpe": 1.7219,
+        "max_drawdown": -0.063,
+        "calmar": 1.8467,
+        "ann_vol": 0.0676,
+        "n_months": 100
+      },
+      "deg_pct": -21.79
+    },
+    {
+      "h045_w": 0.3,
+      "weights": {
+        "w_h041a": 0.392,
+        "w_h026": 0.112,
+        "w_h037b": 0.196,
+        "w_h045": 0.3
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1176,
+        "sharpe": 1.9841,
+        "max_drawdown": -0.0663,
+        "calmar": 1.7736,
+        "ann_vol": 0.0593,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1227,
+        "sharpe": 2.2299,
+        "max_drawdown": -0.0663,
+        "calmar": 1.8498,
+        "ann_vol": 0.055,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1116,
+        "sharpe": 1.736,
+        "max_drawdown": -0.0616,
+        "calmar": 1.8123,
+        "ann_vol": 0.0643,
+        "n_months": 100
+      },
+      "deg_pct": -22.15
+    },
+    {
+      "h045_w": 0.35,
+      "weights": {
+        "w_h041a": 0.364,
+        "w_h026": 0.104,
+        "w_h037b": 0.182,
+        "w_h045": 0.35
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1127,
+        "sharpe": 2.0048,
+        "max_drawdown": -0.0623,
+        "calmar": 1.8093,
+        "ann_vol": 0.0562,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1177,
+        "sharpe": 2.2584,
+        "max_drawdown": -0.0623,
+        "calmar": 1.8888,
+        "ann_vol": 0.0521,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1068,
+        "sharpe": 1.7498,
+        "max_drawdown": -0.061,
+        "calmar": 1.7525,
+        "ann_vol": 0.061,
+        "n_months": 100
+      },
+      "deg_pct": -22.52
+    },
+    {
+      "h045_w": 0.4,
+      "weights": {
+        "w_h041a": 0.336,
+        "w_h026": 0.096,
+        "w_h037b": 0.168,
+        "w_h045": 0.4
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1079,
+        "sharpe": 2.0249,
+        "max_drawdown": -0.0604,
+        "calmar": 1.7873,
+        "ann_vol": 0.0533,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1127,
+        "sharpe": 2.2864,
+        "max_drawdown": -0.0583,
+        "calmar": 1.9337,
+        "ann_vol": 0.0493,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1021,
+        "sharpe": 1.763,
+        "max_drawdown": -0.0604,
+        "calmar": 1.691,
+        "ann_vol": 0.0579,
+        "n_months": 100
+      },
+      "deg_pct": -22.89
+    },
+    {
+      "h045_w": 0.5,
+      "weights": {
+        "w_h041a": 0.28,
+        "w_h026": 0.08,
+        "w_h037b": 0.14,
+        "w_h045": 0.5
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.0981,
+        "sharpe": 2.0597,
+        "max_drawdown": -0.0592,
+        "calmar": 1.6578,
+        "ann_vol": 0.0476,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1028,
+        "sharpe": 2.3359,
+        "max_drawdown": -0.0502,
+        "calmar": 2.0463,
+        "ann_vol": 0.044,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.0925,
+        "sharpe": 1.7846,
+        "max_drawdown": -0.0592,
+        "calmar": 1.5633,
+        "ann_vol": 0.0519,
+        "n_months": 100
+      },
+      "deg_pct": -23.6
+    }
+  ],
+  "preferred_allocation": {
+    "note": "H045=50% \u2014 strictly improves OOS Sharpe vs H042",
+    "weights": {
+      "w_h041a": 0.28,
+      "w_h026": 0.08,
+      "w_h037b": 0.14,
+      "w_h045": 0.5
+    },
+    "full": {
+      "label": "",
+      "cagr": 0.0981,
+      "sharpe": 2.0597,
+      "max_drawdown": -0.0592,
+      "calmar": 1.6578,
+      "ann_vol": 0.0476,
+      "n_months": 220
+    },
+    "IS": {
+      "label": "",
+      "cagr": 0.1028,
+      "sharpe": 2.3359,
+      "max_drawdown": -0.0502,
+      "calmar": 2.0463,
+      "ann_vol": 0.044,
+      "n_months": 120
+    },
+    "OOS": {
+      "label": "",
+      "cagr": 0.0925,
+      "sharpe": 1.7846,
+      "max_drawdown": -0.0592,
+      "calmar": 1.5633,
+      "ann_vol": 0.0519,
+      "n_months": 100
+    },
+    "deg_pct": -23.6
+  },
+  "best_oos_allocation": {
+    "h045_w": 0.5,
+    "weights": {
+      "w_h041a": 0.28,
+      "w_h026": 0.08,
+      "w_h037b": 0.14,
+      "w_h045": 0.5
+    },
+    "oos_sharpe": 1.7846
+  },
+  "best_full_allocation": {
+    "h045_w": 0.5,
+    "weights": {
+      "w_h041a": 0.28,
+      "w_h026": 0.08,
+      "w_h037b": 0.14,
+      "w_h045": 0.5
+    },
+    "full_sharpe": 2.0597
+  },
+  "comparisons": {
+    "H042_full_sharpe": 1.9492,
+    "H042_OOS_sharpe": 1.768,
+    "H047_full_sharpe": 2.1128,
+    "H047_OOS_sharpe_approx": 1.7
+  },
+  "verdict": {
+    "summary": "PARTIALLY CONFIRMED \u2014 H045 improves OOS Sharpe but with high IS/OOS degradation",
+    "oos_improves_vs_h042": true,
+    "preferred_deg_lt_20pct": false,
+    "preferred_oos_sharpe": 1.7846,
+    "preferred_h045_allocation": 0.5
+  },
+  "run_date": "2026-04-27"
+}

@@ -1,0 +1,218 @@
+{
+  "strategy": "H051 \u2014 IS/OOS Validation of H050 (H045 + H037b)",
+  "description": "Tests whether H050's 2-component simplicity produces better OOS robustness than H047 (4-component, 23.8% IS/OOS degradation). IS: 2008-01\u21922017-12 / OOS: 2018-01\u21922026-04 (same split as H049).",
+  "h050_reference": {
+    "full_period_weights": {
+      "w_h045": 0.82,
+      "w_h037b": 0.18
+    },
+    "full_period_sharpe": 1.9109
+  },
+  "comparison_benchmarks": {
+    "H042_IS_OOS_degradation_pct": -9.3,
+    "H047_IS_OOS_degradation_pct": -23.8
+  },
+  "periods": {
+    "full": {
+      "start": "2008-01-31",
+      "end": "2026-04-30",
+      "n_months": 220
+    },
+    "IS": {
+      "start": "2008-01-31",
+      "end": "2017-12-31",
+      "n_months": 120
+    },
+    "OOS": {
+      "start": "2018-01-31",
+      "end": "2026-04-30",
+      "n_months": 100
+    }
+  },
+  "correlations": {
+    "full_period": 0.0102,
+    "IS_period": 0.1203,
+    "OOS_period": -0.0927
+  },
+  "IS_optimization": {
+    "is_opt_weights": {
+      "w_h045": 0.8,
+      "w_h037b": 0.2
+    },
+    "is_opt_sharpe": 2.115,
+    "is_performance": {
+      "label": "IS (IS-optimal weights)",
+      "cagr": 0.0726,
+      "sharpe": 2.115,
+      "max_drawdown": -0.0169,
+      "calmar": 4.3059,
+      "ann_vol": 0.0343,
+      "n_months": 120
+    }
+  },
+  "OOS_results": {
+    "IS_optimal_weights": {
+      "label": "OOS (IS-optimal weights)",
+      "cagr": 0.0592,
+      "sharpe": 1.6811,
+      "max_drawdown": -0.0316,
+      "calmar": 1.8749,
+      "ann_vol": 0.0352,
+      "n_months": 100
+    },
+    "full_period_weights": {
+      "label": "OOS (full-period 82/18)",
+      "cagr": 0.0578,
+      "sharpe": 1.692,
+      "max_drawdown": -0.0338,
+      "calmar": 1.7085,
+      "ann_vol": 0.0342,
+      "n_months": 100
+    }
+  },
+  "full_period_at_full_weights": {
+    "label": "Full (full-period 82/18)",
+    "cagr": 0.0648,
+    "sharpe": 1.9199,
+    "max_drawdown": -0.0338,
+    "calmar": 1.9161,
+    "ann_vol": 0.0338,
+    "n_months": 220
+  },
+  "degradation": {
+    "is_to_oos_pct_IS_weights": -20.52,
+    "full_to_oos_pct_full_weights": -11.46
+  },
+  "component_performance": {
+    "IS": {
+      "h045": {
+        "label": "H045 IS",
+        "cagr": 0.0536,
+        "sharpe": 1.7014,
+        "max_drawdown": -0.0218,
+        "calmar": 2.4653,
+        "ann_vol": 0.0315,
+        "n_months": 120
+      },
+      "h037b": {
+        "label": "H037b IS",
+        "cagr": 0.1472,
+        "sharpe": 1.4381,
+        "max_drawdown": -0.0735,
+        "calmar": 2.0027,
+        "ann_vol": 0.1023,
+        "n_months": 120
+      }
+    },
+    "OOS": {
+      "h045": {
+        "label": "H045 OOS",
+        "cagr": 0.0451,
+        "sharpe": 1.3296,
+        "max_drawdown": -0.0628,
+        "calmar": 0.7191,
+        "ann_vol": 0.034,
+        "n_months": 100
+      },
+      "h037b": {
+        "label": "H037b OOS",
+        "cagr": 0.1094,
+        "sharpe": 0.8728,
+        "max_drawdown": -0.2174,
+        "calmar": 0.5033,
+        "ann_vol": 0.1254,
+        "n_months": 100
+      }
+    },
+    "component_degradations": {
+      "h045_pct": -21.85,
+      "h037b_pct": -39.31
+    }
+  },
+  "walk_forward": {
+    "n_folds": 5,
+    "method": "expanding window",
+    "fold_details": [
+      {
+        "fold": 2,
+        "train_start": "2008-01-31",
+        "train_end": "2011-08-31",
+        "train_months": 44,
+        "test_start": "2011-09-30",
+        "test_end": "2015-04-30",
+        "test_months": 44,
+        "opt_weights": {
+          "w_h045": 0.82,
+          "w_h037b": 0.18
+        },
+        "is_sharpe": 2.8571,
+        "oos_sharpe": 1.4597,
+        "oos_cagr": 0.0448,
+        "oos_maxdd": -0.0113
+      },
+      {
+        "fold": 3,
+        "train_start": "2008-01-31",
+        "train_end": "2015-04-30",
+        "train_months": 88,
+        "test_start": "2015-05-31",
+        "test_end": "2018-12-31",
+        "test_months": 44,
+        "opt_weights": {
+          "w_h045": 0.82,
+          "w_h037b": 0.18
+        },
+        "is_sharpe": 2.1531,
+        "oos_sharpe": 1.8355,
+        "oos_cagr": 0.0393,
+        "oos_maxdd": -0.0193
+      },
+      {
+        "fold": 4,
+        "train_start": "2008-01-31",
+        "train_end": "2018-12-31",
+        "train_months": 132,
+        "test_start": "2019-01-31",
+        "test_end": "2022-08-31",
+        "test_months": 44,
+        "opt_weights": {
+          "w_h045": 0.82,
+          "w_h037b": 0.18
+        },
+        "is_sharpe": 2.0034,
+        "oos_sharpe": 1.6444,
+        "oos_cagr": 0.0612,
+        "oos_maxdd": -0.0245
+      },
+      {
+        "fold": 5,
+        "train_start": "2008-01-31",
+        "train_end": "2022-08-31",
+        "train_months": 176,
+        "test_start": "2022-09-30",
+        "test_end": "2026-04-30",
+        "test_months": 44,
+        "opt_weights": {
+          "w_h045": 0.82,
+          "w_h037b": 0.18
+        },
+        "is_sharpe": 1.9079,
+        "oos_sharpe": 1.9466,
+        "oos_cagr": 0.0655,
+        "oos_maxdd": -0.018
+      }
+    ],
+    "avg_oos_sharpe": 1.7216,
+    "std_oos_sharpe": 0.1858,
+    "avg_is_sharpe": 2.2304,
+    "wf_degradation_pct": -22.81
+  },
+  "verdict": {
+    "summary": "PARTIALLY CONFIRMED \u2014 Moderate degradation but OOS Sharpe investable",
+    "h047_comparison": "BETTER OOS robustness than H047 (20.5% vs 23.8%)",
+    "oos_sharpe_IS_weights": 1.6811,
+    "oos_sharpe_full_weights": 1.692,
+    "degradation_IS_weights_pct": -20.52
+  },
+  "run_date": "2026-04-27"
+}
