@@ -1,7 +1,7 @@
 ---
-updated: 2026-04-24
+updated: 2026-04-26
 status: active
-phase: 1 — research
+phase: 2 — backtesting
 ---
 
 # Trading & Prediction Markets Project
@@ -12,8 +12,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 
 | Phase | Status | Description |
 |-------|--------|-------------|
-| 1 | Active | Research & wiki-building |
-| 2 | Pending | Backtesting infrastructure |
+| 1 | ✅ Done | Research & wiki-building |
+| 2 | Active | Backtesting infrastructure + hypothesis testing |
 | 3 | Pending | Paper trading (Alpaca) |
 | 4 | Pending | Live trading |
 
@@ -36,6 +36,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 | 2026-04-24 | Data: Polygon.io free tier + Alpaca free tier | Both accounts exist; keys in OneCLI |
 | 2026-04-24 | Paper trading via Alpaca | Kevin has existing paper account |
 | 2026-04-24 | Backtesting must model macro regimes + after-tax returns | Kevin's requirement — real-world accuracy |
+| 2026-04-26 | yfinance as data fallback (Alpaca SDK not installable in container) | Alpaca module unavailable; yfinance works for EOD |
+| 2026-04-26 | BIL preferred over TLT as risk-off refuge in dual momentum (H006 result) | TLT has duration risk; BIL immune to rate-hike bears |
 
 ## API access
 
@@ -50,3 +52,4 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 | OpenAI | `$OPENAI_API_KEY` | ✓ Present — ML/NLP tasks |
 | Alpaca (paper) | `$ALPACA_API_KEY` + `$ALPACA_SECRET` | ✓ Active — $102k portfolio, $204k buying power |
 | GitHub | `$GITHUB_TOKEN` | ✓ Active |
+| Massive.com | `$MASSIVE_KEY` | ✓ Active — delayed prices, options contract reference; Polygon backend |

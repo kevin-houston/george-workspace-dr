@@ -1,0 +1,44 @@
+[
+  {
+    "id": "IC-2026-04-26-001",
+    "strategy": "iron_condor",
+    "status": "open",
+    "entered": "2026-04-26",
+    "expiry": "2026-06-12",
+    "dte_entry": 47,
+    "underlying": "SPY",
+    "spy_price_entry": 713.94,
+    "vix_entry": 20.0,
+    "qty": 1,
+    "legs": {
+      "long_put": {
+        "strike": 645.0,
+        "ticker": null,
+        "entry_price": 1.4424993888846274
+      },
+      "short_put": {
+        "strike": 670,
+        "ticker": null,
+        "entry_price": 4.412287194753006
+      },
+      "short_call": {
+        "strike": 775,
+        "ticker": null,
+        "entry_price": 3.9148871339066034
+      },
+      "long_call": {
+        "strike": 800.0,
+        "ticker": null,
+        "entry_price": 1.559597474213298
+      }
+    },
+    "net_credit": 5.325077465561684,
+    "max_profit": 532.5077465561684,
+    "max_loss": 1967.4922534438317,
+    "target_profit": 2.662538732780842,
+    "stop_loss_credit": 10.650154931123367,
+    "pnl": 0.0,
+    "exit_reason": null,
+    "exited": null
+  }
+]

@@ -8,6 +8,8 @@ priority: high (Kevin's explicit focus: equities + options)
 
 Goal: generate systematic income via options premium collection. Ranked by evidence strength and implementability.
 
+**Related pages**: [LEAN / QuantConnect](../tools/lean-quantconnect.md) — backtesting engine for these strategies | [Options Data Sources](../data-sources/options-data.md) — where to get historical Greeks/IV | [Hypothesis Log](../backtesting/hypothesis-log.md) — H007 (iron condor backtest, pending)
+
 ---
 
 ## Strategy 1: Iron Condor / Iron Butterfly

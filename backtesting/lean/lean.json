@@ -1,0 +1,28 @@
+{
+    "data-folder": "/workspace/agent/backtesting/lean/data",
+    "organization-id": "",
+    "user-id": "",
+    "api-token": "",
+    "job-organization-id": "",
+    "log-handler": "QuantConnect.Logging.CompositeLogHandler",
+    "messaging-handler": "QuantConnect.Messaging.Messaging",
+    "api-handler": "QuantConnect.Api.Api",
+    "map-file-provider": "QuantConnect.Data.Auxiliary.LocalDiskMapFileProvider",
+    "factor-file-provider": "QuantConnect.Data.Auxiliary.LocalDiskFactorFileProvider",
+    "data-provider": "QuantConnect.Lean.Engine.DataFeeds.DefaultDataProvider",
+    "alpha-handler": "QuantConnect.Algorithm.CSharp.Alphas.NullAlphaHandler",
+    "data-channel-provider": "DataChannelProvider",
+    "environments": {
+        "backtesting": {
+            "live-mode": false,
+            "setup-handler": "QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler",
+            "result-handler": "QuantConnect.Lean.Engine.Results.BacktestingResultHandler",
+            "data-feed-handler": "QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed",
+            "real-time-handler": "QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler",
+            "history-provider": "QuantConnect.Lean.Engine.HistoricalData.SubscriptionDataReaderHistoryProvider",
+            "transaction-handler": "QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler"
+        }
+    },
+    "id": "Local",
+    "file-database-last-update": "04/26/2026 18:29:21"
+}

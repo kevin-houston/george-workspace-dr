@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "kraken": {
+      "command": "/home/node/.cargo/bin/kraken",
+      "args": [
+        "mcp",
+        "-s",
+        "all"
+      ],
+      "env": {}
+    }
+  },
+  "packages": {
+    "apt": [
+      "python3",
+      "python3-pip",
+      "python3-venv",
+      "docker.io",
+      "docker.io"
+    ],
+    "npm": []
+  },
+  "imageTag": "nanoclaw-agent-v2-e8646342:ag-1776989405001-o24n90",
+  "additionalMounts": [],
+  "skills": "all",
+  "groupName": "George",
+  "assistantName": "George",
+  "agentGroupId": "ag-1776989405001-o24n90"
+}

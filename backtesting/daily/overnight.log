@@ -1,0 +1,129 @@
+========================================================================
+  Overnight Backtest  H008 – H017
+  Started : 2026-04-26 21:41:38
+  Est. completion in ~15 minutes
+========================================================================
+
+
+────────────────────────────────────────────────────────────────────────
+H008 — Dual MA Crossover on SPY (2003–2026)
+────────────────────────────────────────────────────────────────────────
+  SMA(10,30)        CAGR +6.7%  Sharpe 0.209  MaxDD -28.4%  WinRate 57.6%
+  SMA(20,50)        CAGR +6.3%  Sharpe 0.160  MaxDD -28.9%  WinRate 54.3%
+  SMA(50,100)       CAGR +7.1%  Sharpe 0.219  MaxDD -34.2%  WinRate 54.0%
+  SMA(50,200)       CAGR +8.3%  Sharpe 0.293  MaxDD -33.7%  WinRate 55.0%
+  BH_SPY            CAGR +10.9%  Sharpe 0.347  MaxDD -55.2%
+
+  Winner (best Sharpe): SMA(50,200) — Sharpe 0.293
+  ✓ H008 done: Sharpe 0.29, CAGR 8.3%  [0.0min elapsed]
+
+────────────────────────────────────────────────────────────────────────
+H009 — IBS Mean-Reversion on SPY + Sector Cross-Section (2003–2026)
+────────────────────────────────────────────────────────────────────────
+  Downloading OHLC for ['SPY'] (2003-01-01 → 2026-04-01)...
+  Cached OHLC 5848 rows → f95dc9ca_ohlc_2003-01-01_2026-04-01.parquet
+  SPY IBS:   CAGR +13.1%  Sharpe 0.627  MaxDD -24.3%
+  SPY B&H:   CAGR +10.8%  Sharpe 0.346  MaxDD -55.2%
+  Running cross-sectional IBS on 9 sectors...
+  Downloading OHLC for ['XLK', 'XLF', 'XLV', 'XLE', 'XLY', 'XLP', 'XLI', 'XLU', 'XLB'] (2003-01-01 → 2026-04-01)...
+  Cached OHLC 5848 rows → bbd7441d_ohlc_2003-01-01_2026-04-01.parquet
+  XS IBS (long bottom 3): CAGR +12.9%  Sharpe 0.447  MaxDD -40.5%
+  ✓ H009 done: Sharpe 0.63, CAGR 13.1%  [0.1min elapsed]
+
+────────────────────────────────────────────────────────────────────────
+H010 — Multi-Asset Trend Following (2007–2026)
+────────────────────────────────────────────────────────────────────────
+  Trend Following:  CAGR +7.5%  Sharpe 0.251  MaxDD -33.2%
+  60/40 SPY+TLT:    CAGR +8.3%  Sharpe 0.335  MaxDD -29.9%
+  ✓ H010 done: Sharpe 0.25, CAGR 7.5%  [0.2min elapsed]
+
+────────────────────────────────────────────────────────────────────────
+H011 — Low-Volatility Anomaly on Sectors (2003–2026)
+────────────────────────────────────────────────────────────────────────
+  Low-Vol Sectors:  CAGR +10.8%  Sharpe 0.445  MaxDD -38.1%
+  SPY B&H:          CAGR +10.7%  Sharpe 0.340  MaxDD -55.2%
+  ✓ H011 done: Sharpe 0.45, CAGR 10.8%  [0.2min elapsed]
+
+────────────────────────────────────────────────────────────────────────
+H012 — Price Momentum on Sectors 12-1 (2003–2026)
+────────────────────────────────────────────────────────────────────────
+  Sector Mom 12-1:  CAGR +10.1%  Sharpe 0.310  MaxDD -39.6%
+  SPY B&H:          CAGR +10.2%  Sharpe 0.312  MaxDD -55.2%
+  ✓ H012 done: Sharpe 0.31, CAGR 10.1%  [0.2min elapsed]
+
+────────────────────────────────────────────────────────────────────────
+H013 — Donchian Channel Breakout on SPY (2003–2026)
+────────────────────────────────────────────────────────────────────────
+  Donchian(20)      CAGR +8.4%  Sharpe 0.228  MaxDD -51.5%
+  Donchian(55)      CAGR +8.4%  Sharpe 0.230  MaxDD -51.5%
+  BH_SPY            CAGR +10.9%  Sharpe 0.347  MaxDD -55.2%
+
+  Best: BH_SPY — Sharpe 0.347
+  ✓ H013 done: Sharpe 0.35, CAGR 10.9%  [0.2min elapsed]
+
+────────────────────────────────────────────────────────────────────────
+H014 — Mean-Reversion After Large Down Days (2003–2026)
+────────────────────────────────────────────────────────────────────────
+  Signals (ret < -1.5%): 370
+  Avg 5-day fwd return (signal): +0.51%
+  Hit rate (signal): 58.6%
+  Avg 5-day fwd return (random): +0.31%
+  Hit rate (random): 61.0%
+  t-stat: 0.911   p-value: 0.3628
+  ✓ H014 done:   [0.2min elapsed]
+  Edge (signal minus random): +0.198%
+
+────────────────────────────────────────────────────────────────────────
+H015 — Seasonal Patterns / Sell in May (2003–2026)
+────────────────────────────────────────────────────────────────────────
+
+  Month-by-month average returns:
+    Jan: +0.33%
+    Feb: +0.24%
+    Mar: +0.74%
+    Apr: +1.93%
+    May: +1.12%
+    Jun: +0.38%
+    Jul: +2.33%
+    Aug: +0.35%
+    Sep: -0.30%
+    Oct: +1.16%
+    Nov: +2.46%
+    Dec: +0.97%
+
+  Nov–Apr CAGR (equiv): +14.1%  avg monthly: +1.103%  n=140
+  May–Oct CAGR (equiv): +10.5%  avg monthly: +0.839%  n=138
+  t-stat: 0.528   p-value: 0.5976
+  Sell-in-May premium: +0.264% per month
+  Statistically significant (p<0.05): False
+  ✓ H015 done:   [0.2min elapsed]
+
+────────────────────────────────────────────────────────────────────────
+H016 — Multi-Asset Momentum + Carry Blend (2007–2026)
+────────────────────────────────────────────────────────────────────────
+  Momentum+Carry:   CAGR +13.6%  Sharpe 0.784  MaxDD -20.0%
+  SPY B&H:          CAGR +10.6%  Sharpe 0.313  MaxDD -51.8%
+  ✓ H016 done: Sharpe 0.78, CAGR 13.6%  [0.2min elapsed]
+
+────────────────────────────────────────────────────────────────────────
+H017 — VIX-Filtered Iron Condor (VIX > 15 only) (2007–2026)
+────────────────────────────────────────────────────────────────────────
+  Downloading SPY + ^VIX + ^IRX...
+  Data: 2007-01-03 → 2026-03-31  (4841 trading days)
+  Running unfiltered condor (H007 baseline)...
+  Running VIX > 15.0 filtered condor...
+
+  Unfiltered:   CAGR -1.6%  Win 67%  Sharpe -0.379  MaxDD -35.2%  Trades 231
+  VIX>15 Filter:  CAGR -0.8%  Win 69%  Sharpe -0.224  MaxDD -26.3%  Trades 160
+  SPY B&H:      CAGR +10.3%  MaxDD -55.2%
+  ✓ H017 done: Sharpe -0.22, CAGR -0.8%  [0.4min elapsed]
+
+========================================================================
+  All hypotheses complete in 0.4 minutes
+  Results saved to: /workspace/agent/backtesting/daily/overnight_results.json
+
+========================================================================
+  Updating hypothesis log...
+  Hypothesis log updated: /workspace/agent/wiki/trading/backtesting/hypothesis-log.md
+========================================================================
+  DONE

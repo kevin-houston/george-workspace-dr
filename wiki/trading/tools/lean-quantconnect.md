@@ -127,9 +127,46 @@ class IronCondorAlgorithm(QCAlgorithm):
 
 ---
 
+## Running LEAN without the CLI (Docker-in-Docker workaround)
+
+The LEAN CLI has a Docker-in-Docker path issue when running in a container: it creates temp files in `/tmp` of the container but the Docker daemon (on the host) can't find those paths.
+
+**Workaround**: run LEAN's Docker image directly using host filesystem paths.
+
+Host path mapping: container `/workspace/agent/` = host `/home/kevin/nc/nanoclaw-v2/groups/dm-with-kevin/`
+
+```bash
+HOST=/home/kevin/nc/nanoclaw-v2/groups/dm-with-kevin/backtesting/lean
+docker run --name lean_run \
+  -v "$HOST/lean-docker-config.json:/Lean/Launcher/bin/Debug/config.json:ro" \
+  -v "$HOST/BuyHold:/Lean/Launcher/bin/Debug/Algorithm.Python/BuyHold:ro" \
+  quantconnect/lean:latest
+docker cp lean_run:/Lean/Launcher/bin/Debug/BuyHoldSPY.json ./results/
+docker rm lean_run
+```
+
+Helper script: `backtesting/lean/run_lean.sh <AlgorithmName> [config_file]`
+
+**Validated**: SPY buy-and-hold 2019–2021 gave 24.8% CAGR, 33.5% max DD — matches reality.
+
+## Algorithm Status
+
+| Algorithm | File | Status |
+|-----------|------|--------|
+| Iron Condor (H007) | `backtesting/lean/IronCondor/main.py` | ✅ Written — needs options data |
+| Buy-and-Hold test | `backtesting/lean/BuyHold/main.py` | ✅ Validated |
+
+Iron condor implements: monthly entry, 45-DTE, 16-delta shorts, 5-pt wings, tastytrade exit rules (50% profit / 2× loss / 21 DTE).
+
+**Options data gap**: LEAN image has only 1 day of SPY options data (2023-08-03). Full backtest requires QC account (org tier, paid) or ThetaData subscription ($35/month).
+
+See [Options Income Strategies](../algorithms/options-income-strategies.md) for strategy background and [Hypothesis Log](../backtesting/hypothesis-log.md) for H007 card.
+
+---
+
 ## Next Steps
 
-1. Get Kevin's answer on QuantConnect account (for cloud path)
-2. Admin approve Docker + .NET (for local path)
-3. Build iron condor backtest as first LEAN algorithm
+1. Get Kevin's answer on QuantConnect account (for cloud path — no Docker needed)
+2. Admin approve Docker (for local path)
+3. Run `lean backtest "IronCondor"` — algorithm ready
 4. Compare LEAN results to manual calculations to validate engine accuracy

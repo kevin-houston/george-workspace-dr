@@ -77,18 +77,21 @@ ANN (neural network) price predictor, Naïve Bayes Bernoulli sentiment analysis.
 
 ## Implementation Priority
 
+See [Hypothesis Log](../backtesting/hypothesis-log.md) for results of all experiments derived from this source.
+
 ### Tier 1 — Implement Now (EOD data, no derivatives, clean backtesting)
 
-1. **Dual-Momentum Sector Rotation** (§4.1.2) — H005
+1. **Dual-Momentum Sector Rotation** (§4.1.2) — H005 (CONFIRMED IS / REJECTED OOS); H006 (BIL variant, CONFIRMED improvement)
    - Symbols: XLK, XLF, XLV, XLE, XLY, XLP, XLI, XLU, XLB + SPY (absolute filter) + TLT (refuge)
    - Data back to 1999 (most sectors); XLRE only from 2015
    
 2. **Sector Rotation + MA Filter** (§4.1.1) — H005 variant
 
-3. **Dual MA Crossover on SPY** (§3.12) — H007
+3. **Dual MA Crossover on SPY** (§3.12) — H008
    - Parameters: SMA(10)/SMA(30), SMA(50)/SMA(200)
+   - Note: H007 is reserved for iron condor LEAN backtest (options)
 
-4. **IBS Mean-Reversion on ETFs** (§4.4) — H008
+4. **IBS Mean-Reversion on ETFs** (§4.4) — H009
 
 ### Tier 2 — Next Phase
 

@@ -1,0 +1,304 @@
+{
+  "h008": {
+    "winner": "SMA(50,200)",
+    "best_sharpe": 0.2931,
+    "combos": {
+      "SMA(10,30)": {
+        "cagr": 0.0672,
+        "sharpe": 0.2088,
+        "max_drawdown": -0.2838,
+        "calmar": 0.2367,
+        "total_return": 3.5173,
+        "ann_vol": 0.1109,
+        "win_rate_monthly": 0.5755,
+        "fast_period": 10,
+        "slow_period": 30
+      },
+      "SMA(20,50)": {
+        "cagr": 0.0626,
+        "sharpe": 0.1604,
+        "max_drawdown": -0.2889,
+        "calmar": 0.2168,
+        "total_return": 3.0924,
+        "ann_vol": 0.1161,
+        "win_rate_monthly": 0.5432,
+        "fast_period": 20,
+        "slow_period": 50
+      },
+      "SMA(50,100)": {
+        "cagr": 0.0714,
+        "sharpe": 0.2192,
+        "max_drawdown": -0.3422,
+        "calmar": 0.2087,
+        "total_return": 3.9562,
+        "ann_vol": 0.1251,
+        "win_rate_monthly": 0.5396,
+        "fast_period": 50,
+        "slow_period": 100
+      },
+      "SMA(50,200)": {
+        "cagr": 0.0831,
+        "sharpe": 0.2931,
+        "max_drawdown": -0.3372,
+        "calmar": 0.2463,
+        "total_return": 5.3651,
+        "ann_vol": 0.1332,
+        "win_rate_monthly": 0.5504,
+        "fast_period": 50,
+        "slow_period": 200
+      },
+      "BH_SPY": {
+        "cagr": 0.1086,
+        "sharpe": 0.3468,
+        "max_drawdown": -0.5519,
+        "calmar": 0.1968,
+        "total_return": 9.9334,
+        "ann_vol": 0.1862,
+        "win_rate_monthly": 0.6727
+      }
+    },
+    "benchmark": {
+      "cagr": 0.1086,
+      "sharpe": 0.3468,
+      "max_drawdown": -0.5519,
+      "calmar": 0.1968,
+      "total_return": 9.9334,
+      "ann_vol": 0.1862,
+      "win_rate_monthly": 0.6727
+    },
+    "period": "2003-01-01 \u2192 2026-04-01"
+  },
+  "h009": {
+    "spy_ibs": {
+      "cagr": 0.1307,
+      "sharpe": 0.627,
+      "max_drawdown": -0.2434,
+      "calmar": 0.5371,
+      "total_return": 16.2905,
+      "ann_vol": 0.1383,
+      "win_rate_monthly": 0.6403
+    },
+    "spy_bh": {
+      "cagr": 0.1085,
+      "sharpe": 0.3461,
+      "max_drawdown": -0.5519,
+      "calmar": 0.1965,
+      "total_return": 9.8999,
+      "ann_vol": 0.1862,
+      "win_rate_monthly": 0.6727
+    },
+    "crosssectional_ibs": {
+      "cagr": 0.1291,
+      "sharpe": 0.4474,
+      "max_drawdown": -0.4047,
+      "calmar": 0.3189,
+      "total_return": 15.716,
+      "ann_vol": 0.1902,
+      "win_rate_monthly": 0.6871
+    },
+    "params": {
+      "buy_thresh": 0.2,
+      "sell_thresh": 0.8,
+      "max_hold": 5
+    },
+    "period": "2003-01-01 \u2192 2026-04-01"
+  },
+  "h010": {
+    "trend_following": {
+      "cagr": 0.0751,
+      "sharpe": 0.2507,
+      "max_drawdown": -0.3317,
+      "calmar": 0.2265,
+      "total_return": 2.7966,
+      "ann_vol": 0.1243,
+      "win_rate_monthly": 0.6154
+    },
+    "benchmark_6040": {
+      "cagr": 0.0829,
+      "sharpe": 0.3354,
+      "max_drawdown": -0.2992,
+      "calmar": 0.2769,
+      "total_return": 3.3302,
+      "ann_vol": 0.1158,
+      "win_rate_monthly": 0.6606
+    },
+    "universe": [
+      "SPY",
+      "TLT",
+      "GLD",
+      "DBC",
+      "VNQ"
+    ],
+    "cash_etf": "SHY",
+    "period": "2007-01-01 \u2192 2026-04-01"
+  },
+  "h011": {
+    "low_vol_bottom3": {
+      "cagr": 0.1079,
+      "sharpe": 0.4452,
+      "max_drawdown": -0.3811,
+      "calmar": 0.2831,
+      "total_return": 9.1523,
+      "ann_vol": 0.1435,
+      "win_rate_monthly": 0.6605
+    },
+    "benchmark_spy": {
+      "cagr": 0.1073,
+      "sharpe": 0.34,
+      "max_drawdown": -0.5519,
+      "calmar": 0.1944,
+      "total_return": 9.0308,
+      "ann_vol": 0.1861,
+      "win_rate_monthly": 0.6679
+    },
+    "vol_period": 126,
+    "period": "2003-01-01 \u2192 2026-04-01"
+  },
+  "h012": {
+    "momentum_12_1": {
+      "cagr": 0.1014,
+      "sharpe": 0.3104,
+      "max_drawdown": -0.3962,
+      "calmar": 0.256,
+      "total_return": 6.7078,
+      "ann_vol": 0.1849,
+      "win_rate_monthly": 0.6541
+    },
+    "benchmark_spy": {
+      "cagr": 0.1024,
+      "sharpe": 0.3121,
+      "max_drawdown": -0.5519,
+      "calmar": 0.1856,
+      "total_return": 7.7134,
+      "ann_vol": 0.1872,
+      "win_rate_monthly": 0.6654
+    },
+    "top_n": 3,
+    "period": "2003-01-01 \u2192 2026-04-01"
+  },
+  "h013": {
+    "combos": {
+      "Donchian(20)": {
+        "cagr": 0.0838,
+        "sharpe": 0.2277,
+        "max_drawdown": -0.5148,
+        "calmar": 0.1627,
+        "total_return": 5.4216,
+        "ann_vol": 0.1746,
+        "win_rate_monthly": 0.5162
+      },
+      "Donchian(55)": {
+        "cagr": 0.0843,
+        "sharpe": 0.2301,
+        "max_drawdown": -0.5148,
+        "calmar": 0.1637,
+        "total_return": 5.4216,
+        "ann_vol": 0.1751,
+        "win_rate_monthly": 0.5181
+      },
+      "BH_SPY": {
+        "cagr": 0.1086,
+        "sharpe": 0.3468,
+        "max_drawdown": -0.5519,
+        "calmar": 0.1968,
+        "total_return": 9.9334,
+        "ann_vol": 0.1862,
+        "win_rate_monthly": 0.6727
+      }
+    },
+    "winner": "BH_SPY",
+    "period": "2003-01-01 \u2192 2026-04-01"
+  },
+  "h014": {
+    "n_signals": 370,
+    "threshold": -0.015,
+    "hold_days": 5,
+    "avg_forward_return": 0.00506,
+    "hit_rate": 0.5865,
+    "random_avg_forward_return": 0.00308,
+    "random_hit_rate": 0.61,
+    "t_stat": 0.9111,
+    "p_value": 0.3628,
+    "edge": 0.00198,
+    "period": "2003-01-01 \u2192 2026-04-01"
+  },
+  "h015": {
+    "month_avg_returns": {
+      "Jan": 0.00326,
+      "Feb": 0.00237,
+      "Mar": 0.00745,
+      "Apr": 0.01929,
+      "May": 0.01116,
+      "Jun": 0.00381,
+      "Jul": 0.02332,
+      "Aug": 0.00348,
+      "Sep": -0.00303,
+      "Oct": 0.01158,
+      "Nov": 0.02462,
+      "Dec": 0.00971
+    },
+    "nov_apr_cagr_equiv": 0.1407,
+    "may_oct_cagr_equiv": 0.1054,
+    "nov_apr_avg_monthly": 0.01103,
+    "may_oct_avg_monthly": 0.00839,
+    "t_stat": 0.5285,
+    "p_value": 0.5976,
+    "seasonal_premium_monthly": 0.00264,
+    "period": "2003-01-01 \u2192 2026-04-01"
+  },
+  "h016": {
+    "momentum_carry_blend": {
+      "cagr": 0.1359,
+      "sharpe": 0.7843,
+      "max_drawdown": -0.2003,
+      "calmar": 0.6782,
+      "total_return": 8.1086,
+      "ann_vol": 0.1171,
+      "win_rate_monthly": 0.6972
+    },
+    "benchmark_spy": {
+      "cagr": 0.1063,
+      "sharpe": 0.313,
+      "max_drawdown": -0.5185,
+      "calmar": 0.2049,
+      "total_return": 5.2868,
+      "ann_vol": 0.1989,
+      "win_rate_monthly": 0.6651
+    },
+    "assets": [
+      "SPY",
+      "TLT",
+      "GLD"
+    ],
+    "cash_etf": "SHY",
+    "period": "2007-01-01 \u2192 2026-04-01"
+  },
+  "h017": {
+    "unfiltered_h007_baseline": {
+      "cagr": -0.016,
+      "total_ret": -0.2668,
+      "max_dd": -0.3519,
+      "calmar": -0.0455,
+      "sharpe": -0.3793,
+      "win_rate": 0.671,
+      "n_trades": 231,
+      "final": 73322.03
+    },
+    "vix_filtered": {
+      "cagr": -0.0077,
+      "total_ret": -0.1391,
+      "max_dd": -0.2629,
+      "calmar": -0.0295,
+      "sharpe": -0.2238,
+      "win_rate": 0.6937,
+      "n_trades": 160,
+      "final": 86092.81
+    },
+    "benchmark_spy": {
+      "cagr": 0.1027,
+      "max_drawdown": -0.5519
+    },
+    "vix_threshold": 15.0,
+    "period": "2007-01-01 \u2192 2026-04-01"
+  }
+}
