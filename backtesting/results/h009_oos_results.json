@@ -1,0 +1,6456 @@
+{
+  "strategy": "H009_IBS",
+  "ticker": "SPY",
+  "rules": {
+    "ibs_buy_threshold": 0.2,
+    "ibs_sell_threshold": 0.8,
+    "max_hold_days": 5,
+    "allocation_pct": 100,
+    "transaction_costs": false,
+    "signal_note": "Both buy and sell use PREVIOUS day IBS (no look-ahead). hold_days = 0 at entry open; force-exit at open when hold_days >= MAX_HOLD (i.e., 5 full sessions)."
+  },
+  "in_sample": {
+    "period": "IS  (2003-2016)",
+    "start": "2003-01-02",
+    "end": "2016-12-30",
+    "cagr_pct": 11.547,
+    "sharpe": 0.9613,
+    "max_dd_pct": -31.748,
+    "n_trades": 436,
+    "win_rate_pct": 69.72,
+    "avg_hold_days": 2.71,
+    "avg_pnl_pct": 0.375,
+    "final_equity": 4.611544
+  },
+  "out_of_sample": {
+    "period": "OOS (2017-2026)",
+    "start": "2017-01-03",
+    "end": "2026-04-24",
+    "cagr_pct": 7.237,
+    "sharpe": 0.6552,
+    "max_dd_pct": -21.897,
+    "n_trades": 275,
+    "win_rate_pct": 63.64,
+    "avg_hold_days": 2.7,
+    "avg_pnl_pct": 0.253,
+    "final_equity": 1.913223
+  },
+  "full_period": {
+    "period": "FULL(2003-2026)",
+    "start": "2003-01-02",
+    "end": "2026-04-24",
+    "cagr_pct": 9.864,
+    "sharpe": 0.8459,
+    "max_dd_pct": -31.748,
+    "n_trades": 711,
+    "win_rate_pct": 67.51,
+    "avg_hold_days": 2.71,
+    "avg_pnl_pct": 0.329,
+    "final_equity": 8.931064
+  },
+  "oos_degradation_pct": 31.84,
+  "is_trades": [
+    {
+      "entry_date": "2003-01-22",
+      "exit_date": "2003-01-29",
+      "entry_price": 57.979608300750435,
+      "exit_price": 55.79159601085867,
+      "hold_days": 5,
+      "pnl_pct": -3.7738,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-01-31",
+      "exit_date": "2003-02-03",
+      "entry_price": 54.962114132405326,
+      "exit_price": 56.26181687298106,
+      "hold_days": 1,
+      "pnl_pct": 2.3647,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-02-06",
+      "exit_date": "2003-02-11",
+      "entry_price": 55.105779898228654,
+      "exit_price": 55.10577457942579,
+      "hold_days": 3,
+      "pnl_pct": -0.0,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-02-13",
+      "exit_date": "2003-02-14",
+      "entry_price": 53.65583013440348,
+      "exit_price": 53.799467434847344,
+      "hold_days": 1,
+      "pnl_pct": 0.2677,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-02-25",
+      "exit_date": "2003-02-26",
+      "entry_price": 54.178318475559,
+      "exit_price": 54.87716553304583,
+      "hold_days": 1,
+      "pnl_pct": 1.2899,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-02-27",
+      "exit_date": "2003-03-06",
+      "entry_price": 54.66816594879394,
+      "exit_price": 54.126058995195805,
+      "hold_days": 5,
+      "pnl_pct": -0.9916,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-03-11",
+      "exit_date": "2003-03-13",
+      "entry_price": 53.21815550947563,
+      "exit_price": 53.67536590624177,
+      "hold_days": 2,
+      "pnl_pct": 0.8591,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-03-25",
+      "exit_date": "2003-04-01",
+      "entry_price": 56.8821330147138,
+      "exit_price": 55.90506868361467,
+      "hold_days": 5,
+      "pnl_pct": -1.7177,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-04-04",
+      "exit_date": "2003-04-11",
+      "entry_price": 57.99041961964315,
+      "exit_price": 57.81338385330399,
+      "hold_days": 5,
+      "pnl_pct": -0.3053,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-04-14",
+      "exit_date": "2003-04-15",
+      "entry_price": 57.36085025535303,
+      "exit_price": 58.25928079058625,
+      "hold_days": 1,
+      "pnl_pct": 1.5663,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-04-17",
+      "exit_date": "2003-04-21",
+      "entry_price": 57.90517658969984,
+      "exit_price": 58.928190483233685,
+      "hold_days": 1,
+      "pnl_pct": 1.7667,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-04-28",
+      "exit_date": "2003-05-05",
+      "entry_price": 59.30857865453862,
+      "exit_price": 61.295532266616476,
+      "hold_days": 5,
+      "pnl_pct": 3.3502,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-05-09",
+      "exit_date": "2003-05-12",
+      "entry_price": 60.875840677104875,
+      "exit_price": 61.31522796797166,
+      "hold_days": 1,
+      "pnl_pct": 0.7218,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-05-20",
+      "exit_date": "2003-05-28",
+      "entry_price": 60.86929344467591,
+      "exit_price": 62.8562909173719,
+      "hold_days": 5,
+      "pnl_pct": 3.2644,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-05-30",
+      "exit_date": "2003-06-02",
+      "entry_price": 62.88908832986138,
+      "exit_price": 63.95797544672009,
+      "hold_days": 1,
+      "pnl_pct": 1.6996,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-06-09",
+      "exit_date": "2003-06-11",
+      "entry_price": 64.77115506321043,
+      "exit_price": 65.02692697671417,
+      "hold_days": 2,
+      "pnl_pct": 0.3949,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-06-20",
+      "exit_date": "2003-06-27",
+      "entry_price": 66.0713047687025,
+      "exit_price": 64.99195909813467,
+      "hold_days": 5,
+      "pnl_pct": -1.6336,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-06-30",
+      "exit_date": "2003-07-02",
+      "entry_price": 64.64312303180647,
+      "exit_price": 65.0051301465367,
+      "hold_days": 2,
+      "pnl_pct": 0.56,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-07-15",
+      "exit_date": "2003-07-22",
+      "entry_price": 66.72289094808069,
+      "exit_price": 64.95250970433257,
+      "hold_days": 5,
+      "pnl_pct": -2.6533,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-07-25",
+      "exit_date": "2003-07-28",
+      "entry_price": 64.93272147593309,
+      "exit_price": 66.05815208288723,
+      "hold_days": 1,
+      "pnl_pct": 1.7332,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-07-29",
+      "exit_date": "2003-08-05",
+      "entry_price": 65.90678865099328,
+      "exit_price": 64.76821538038175,
+      "hold_days": 5,
+      "pnl_pct": -1.7276,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-08-06",
+      "exit_date": "2003-08-08",
+      "entry_price": 63.63618236609674,
+      "exit_price": 64.7089894368977,
+      "hold_days": 2,
+      "pnl_pct": 1.6858,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-08-25",
+      "exit_date": "2003-08-27",
+      "entry_price": 65.62379977269617,
+      "exit_price": 65.84753804318352,
+      "hold_days": 2,
+      "pnl_pct": 0.3409,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-09-25",
+      "exit_date": "2003-09-30",
+      "entry_price": 66.99885254765319,
+      "exit_price": 66.38444754060878,
+      "hold_days": 3,
+      "pnl_pct": -0.917,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-10-20",
+      "exit_date": "2003-10-21",
+      "entry_price": 69.00727985003621,
+      "exit_price": 69.25174020106454,
+      "hold_days": 1,
+      "pnl_pct": 0.3543,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-11-03",
+      "exit_date": "2003-11-06",
+      "entry_price": 69.86618960215503,
+      "exit_price": 69.76706810194494,
+      "hold_days": 3,
+      "pnl_pct": -0.1419,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-11-10",
+      "exit_date": "2003-11-13",
+      "entry_price": 69.85955347100224,
+      "exit_price": 70.03794575722677,
+      "hold_days": 3,
+      "pnl_pct": 0.2554,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-11-17",
+      "exit_date": "2003-11-18",
+      "entry_price": 69.31120587227946,
+      "exit_price": 69.52921399532569,
+      "hold_days": 1,
+      "pnl_pct": 0.3145,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-11-19",
+      "exit_date": "2003-11-24",
+      "entry_price": 68.7298030178286,
+      "exit_price": 69.16585823020492,
+      "hold_days": 3,
+      "pnl_pct": 0.6344,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-12-04",
+      "exit_date": "2003-12-05",
+      "entry_price": 70.80431984966276,
+      "exit_price": 70.7713106010066,
+      "hold_days": 1,
+      "pnl_pct": -0.0466,
+      "win": 0
+    },
+    {
+      "entry_date": "2003-12-08",
+      "exit_date": "2003-12-09",
+      "entry_price": 70.52023607509909,
+      "exit_price": 71.28661623794838,
+      "hold_days": 1,
+      "pnl_pct": 1.0868,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-12-10",
+      "exit_date": "2003-12-12",
+      "entry_price": 70.54007147769526,
+      "exit_price": 71.33284673998422,
+      "hold_days": 2,
+      "pnl_pct": 1.1239,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-12-16",
+      "exit_date": "2003-12-18",
+      "entry_price": 71.14127164130561,
+      "exit_price": 71.71607306581944,
+      "hold_days": 2,
+      "pnl_pct": 0.808,
+      "win": 1
+    },
+    {
+      "entry_date": "2003-12-29",
+      "exit_date": "2003-12-30",
+      "entry_price": 73.08378878921849,
+      "exit_price": 73.74095316827216,
+      "hold_days": 1,
+      "pnl_pct": 0.8992,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-01-12",
+      "exit_date": "2004-01-13",
+      "entry_price": 74.7101049019458,
+      "exit_price": 75.06855391425113,
+      "hold_days": 1,
+      "pnl_pct": 0.4798,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-01-28",
+      "exit_date": "2004-02-04",
+      "entry_price": 76.32314291557203,
+      "exit_price": 75.13491827900545,
+      "hold_days": 5,
+      "pnl_pct": -1.5568,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-02-05",
+      "exit_date": "2004-02-09",
+      "entry_price": 75.12165653239833,
+      "exit_price": 76.11734375666936,
+      "hold_days": 2,
+      "pnl_pct": 1.3254,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-02-13",
+      "exit_date": "2004-02-23",
+      "entry_price": 76.88070368976909,
+      "exit_price": 76.48241810137168,
+      "hold_days": 5,
+      "pnl_pct": -0.5181,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-03-03",
+      "exit_date": "2004-03-04",
+      "entry_price": 76.50233941605359,
+      "exit_price": 76.81433080388118,
+      "hold_days": 1,
+      "pnl_pct": 0.4078,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-03-09",
+      "exit_date": "2004-03-15",
+      "entry_price": 76.40280020095592,
+      "exit_price": 74.52425574512236,
+      "hold_days": 4,
+      "pnl_pct": -2.4587,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-03-22",
+      "exit_date": "2004-03-26",
+      "entry_price": 73.6331006509394,
+      "exit_price": 73.91284435243827,
+      "hold_days": 4,
+      "pnl_pct": 0.3799,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-04-14",
+      "exit_date": "2004-04-21",
+      "entry_price": 75.0119885296352,
+      "exit_price": 74.73883247301379,
+      "hold_days": 5,
+      "pnl_pct": -0.3641,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-05-03",
+      "exit_date": "2004-05-04",
+      "entry_price": 74.18596944799958,
+      "exit_price": 74.77217176241605,
+      "hold_days": 1,
+      "pnl_pct": 0.7902,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-05-10",
+      "exit_date": "2004-05-13",
+      "entry_price": 72.90038384610479,
+      "exit_price": 73.11351087587106,
+      "hold_days": 3,
+      "pnl_pct": 0.2924,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-05-20",
+      "exit_date": "2004-05-26",
+      "entry_price": 72.90704197147429,
+      "exit_price": 74.3791713615097,
+      "hold_days": 4,
+      "pnl_pct": 2.0192,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-06-04",
+      "exit_date": "2004-06-08",
+      "entry_price": 75.25843811035156,
+      "exit_price": 76.18437435071955,
+      "hold_days": 2,
+      "pnl_pct": 1.2303,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-06-10",
+      "exit_date": "2004-06-14",
+      "entry_price": 75.96455482802745,
+      "exit_price": 75.81798414196923,
+      "hold_days": 1,
+      "pnl_pct": -0.1929,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-06-22",
+      "exit_date": "2004-06-23",
+      "entry_price": 75.6334209200146,
+      "exit_price": 75.95436400086122,
+      "hold_days": 1,
+      "pnl_pct": 0.4243,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-06-25",
+      "exit_date": "2004-07-02",
+      "entry_price": 76.48919648224154,
+      "exit_price": 75.65350018852638,
+      "hold_days": 5,
+      "pnl_pct": -1.0926,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-07-16",
+      "exit_date": "2004-07-21",
+      "entry_price": 74.59048967946265,
+      "exit_price": 74.75765209944782,
+      "hold_days": 3,
+      "pnl_pct": 0.2241,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-07-22",
+      "exit_date": "2004-07-29",
+      "entry_price": 73.11303242380652,
+      "exit_price": 73.90189550749164,
+      "hold_days": 5,
+      "pnl_pct": 1.079,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-08-04",
+      "exit_date": "2004-08-11",
+      "entry_price": 73.46731829516636,
+      "exit_price": 71.98983733169482,
+      "hold_days": 5,
+      "pnl_pct": -2.0111,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-08-31",
+      "exit_date": "2004-09-01",
+      "entry_price": 73.98210443541839,
+      "exit_price": 74.17601895496388,
+      "hold_days": 1,
+      "pnl_pct": 0.2621,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-09-07",
+      "exit_date": "2004-09-13",
+      "entry_price": 75.2389897815294,
+      "exit_price": 75.75379426699146,
+      "hold_days": 4,
+      "pnl_pct": 0.6842,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-09-16",
+      "exit_date": "2004-09-23",
+      "entry_price": 75.44625560669957,
+      "exit_price": 74.92111839177517,
+      "hold_days": 5,
+      "pnl_pct": -0.696,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-09-24",
+      "exit_date": "2004-09-30",
+      "entry_price": 74.63246789226731,
+      "exit_price": 74.88753110527195,
+      "hold_days": 4,
+      "pnl_pct": 0.3418,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-10-05",
+      "exit_date": "2004-10-07",
+      "entry_price": 76.4316105910841,
+      "exit_price": 76.7874364683109,
+      "hold_days": 2,
+      "pnl_pct": 0.4655,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-10-08",
+      "exit_date": "2004-10-12",
+      "entry_price": 75.96172126870592,
+      "exit_price": 75.32390616745133,
+      "hold_days": 2,
+      "pnl_pct": -0.8397,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-10-14",
+      "exit_date": "2004-10-19",
+      "entry_price": 74.97483215615115,
+      "exit_price": 75.20307472795346,
+      "hold_days": 3,
+      "pnl_pct": 0.3044,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-10-20",
+      "exit_date": "2004-10-22",
+      "entry_price": 74.10211925902381,
+      "exit_price": 74.64586212533627,
+      "hold_days": 2,
+      "pnl_pct": 0.7338,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-10-25",
+      "exit_date": "2004-10-27",
+      "entry_price": 73.67912809201941,
+      "exit_price": 74.77342928511828,
+      "hold_days": 2,
+      "pnl_pct": 1.4852,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-11-10",
+      "exit_date": "2004-11-15",
+      "entry_price": 78.58660950751687,
+      "exit_price": 79.78912538533325,
+      "hold_days": 3,
+      "pnl_pct": 1.5302,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-11-22",
+      "exit_date": "2004-11-23",
+      "entry_price": 78.89358271161949,
+      "exit_price": 79.40529823741406,
+      "hold_days": 1,
+      "pnl_pct": 0.6486,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-11-29",
+      "exit_date": "2004-12-02",
+      "entry_price": 79.9843625002487,
+      "exit_price": 80.19310947534629,
+      "hold_days": 3,
+      "pnl_pct": 0.261,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-12-06",
+      "exit_date": "2004-12-09",
+      "entry_price": 80.2671890258789,
+      "exit_price": 79.54673043665242,
+      "hold_days": 3,
+      "pnl_pct": -0.8976,
+      "win": 0
+    },
+    {
+      "entry_date": "2004-12-27",
+      "exit_date": "2004-12-30",
+      "entry_price": 81.99257154390102,
+      "exit_price": 82.1278729249481,
+      "hold_days": 3,
+      "pnl_pct": 0.165,
+      "win": 1
+    },
+    {
+      "entry_date": "2004-12-31",
+      "exit_date": "2005-01-07",
+      "entry_price": 82.06022319640948,
+      "exit_price": 80.48399783679692,
+      "hold_days": 5,
+      "pnl_pct": -1.9208,
+      "win": 0
+    },
+    {
+      "entry_date": "2005-01-14",
+      "exit_date": "2005-01-19",
+      "entry_price": 79.80746546646638,
+      "exit_price": 80.79516519936867,
+      "hold_days": 2,
+      "pnl_pct": 1.2376,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-01-20",
+      "exit_date": "2005-01-27",
+      "entry_price": 79.75335434549785,
+      "exit_price": 79.27980905278329,
+      "hold_days": 5,
+      "pnl_pct": -0.5938,
+      "win": 0
+    },
+    {
+      "entry_date": "2005-02-08",
+      "exit_date": "2005-02-14",
+      "entry_price": 81.29576169915221,
+      "exit_price": 81.64756698590402,
+      "hold_days": 4,
+      "pnl_pct": 0.4327,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-02-18",
+      "exit_date": "2005-02-22",
+      "entry_price": 81.34313359656777,
+      "exit_price": 81.11314135864183,
+      "hold_days": 1,
+      "pnl_pct": -0.2827,
+      "win": 0
+    },
+    {
+      "entry_date": "2005-02-23",
+      "exit_date": "2005-02-24",
+      "entry_price": 80.4568966587369,
+      "exit_price": 80.66663315231632,
+      "hold_days": 1,
+      "pnl_pct": 0.2607,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-03-10",
+      "exit_date": "2005-03-15",
+      "entry_price": 81.99256955810789,
+      "exit_price": 82.14142500464409,
+      "hold_days": 3,
+      "pnl_pct": 0.1815,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-03-16",
+      "exit_date": "2005-03-23",
+      "entry_price": 80.97781903244525,
+      "exit_price": 79.42819031708153,
+      "hold_days": 5,
+      "pnl_pct": -1.9136,
+      "win": 0
+    },
+    {
+      "entry_date": "2005-03-28",
+      "exit_date": "2005-03-31",
+      "entry_price": 79.74740740268845,
+      "exit_price": 80.27035329067611,
+      "hold_days": 3,
+      "pnl_pct": 0.6558,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-04-01",
+      "exit_date": "2005-04-08",
+      "entry_price": 80.56919056162033,
+      "exit_price": 80.93595499692236,
+      "hold_days": 5,
+      "pnl_pct": 0.4552,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-04-11",
+      "exit_date": "2005-04-13",
+      "entry_price": 80.33825891799242,
+      "exit_price": 80.52165139553584,
+      "hold_days": 2,
+      "pnl_pct": 0.2283,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-04-14",
+      "exit_date": "2005-04-20",
+      "entry_price": 79.73382551015733,
+      "exit_price": 78.36190836065099,
+      "hold_days": 4,
+      "pnl_pct": -1.7206,
+      "win": 0
+    },
+    {
+      "entry_date": "2005-04-21",
+      "exit_date": "2005-04-22",
+      "entry_price": 77.96121424595398,
+      "exit_price": 78.6064157684363,
+      "hold_days": 1,
+      "pnl_pct": 0.8276,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-04-27",
+      "exit_date": "2005-05-02",
+      "entry_price": 78.00874052872346,
+      "exit_price": 78.83054692977589,
+      "hold_days": 3,
+      "pnl_pct": 1.0535,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-05-09",
+      "exit_date": "2005-05-12",
+      "entry_price": 79.60479077073205,
+      "exit_price": 79.67949494591508,
+      "hold_days": 3,
+      "pnl_pct": 0.0938,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-05-13",
+      "exit_date": "2005-05-17",
+      "entry_price": 78.98675838139857,
+      "exit_price": 79.06147382347673,
+      "hold_days": 2,
+      "pnl_pct": 0.0946,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-06-01",
+      "exit_date": "2005-06-03",
+      "entry_price": 81.17365063114008,
+      "exit_price": 81.87319088520151,
+      "hold_days": 2,
+      "pnl_pct": 0.8618,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-06-08",
+      "exit_date": "2005-06-10",
+      "entry_price": 81.79171583541468,
+      "exit_price": 81.87997450669158,
+      "hold_days": 2,
+      "pnl_pct": 0.1079,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-06-24",
+      "exit_date": "2005-06-29",
+      "entry_price": 81.74673621090925,
+      "exit_price": 82.08087566936605,
+      "hold_days": 3,
+      "pnl_pct": 0.4087,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-06-30",
+      "exit_date": "2005-07-06",
+      "entry_price": 81.97855996766826,
+      "exit_price": 82.09450670915335,
+      "hold_days": 3,
+      "pnl_pct": 0.1414,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-07-07",
+      "exit_date": "2005-07-08",
+      "entry_price": 80.66255019310677,
+      "exit_price": 81.80810556175368,
+      "hold_days": 1,
+      "pnl_pct": 1.4202,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-08-08",
+      "exit_date": "2005-08-15",
+      "entry_price": 83.97654185627104,
+      "exit_price": 84.02429178332626,
+      "hold_days": 5,
+      "pnl_pct": 0.0569,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-08-17",
+      "exit_date": "2005-08-24",
+      "entry_price": 83.32195056684188,
+      "exit_price": 83.15146783415717,
+      "hold_days": 5,
+      "pnl_pct": -0.2046,
+      "win": 0
+    },
+    {
+      "entry_date": "2005-08-25",
+      "exit_date": "2005-08-26",
+      "entry_price": 82.7491631802884,
+      "exit_price": 82.83781995631311,
+      "hold_days": 1,
+      "pnl_pct": 0.1071,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-08-29",
+      "exit_date": "2005-08-30",
+      "entry_price": 82.10818808001906,
+      "exit_price": 82.68094978995057,
+      "hold_days": 1,
+      "pnl_pct": 0.6976,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-09-14",
+      "exit_date": "2005-09-21",
+      "entry_price": 84.37892591890025,
+      "exit_price": 83.40271576439517,
+      "hold_days": 5,
+      "pnl_pct": -1.1569,
+      "win": 0
+    },
+    {
+      "entry_date": "2005-09-22",
+      "exit_date": "2005-09-29",
+      "entry_price": 82.82743851793033,
+      "exit_price": 83.23836020701738,
+      "hold_days": 5,
+      "pnl_pct": 0.4961,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-10-04",
+      "exit_date": "2005-10-11",
+      "entry_price": 84.08749164627764,
+      "exit_price": 81.48522843581651,
+      "hold_days": 5,
+      "pnl_pct": -3.0947,
+      "win": 0
+    },
+    {
+      "entry_date": "2005-10-12",
+      "exit_date": "2005-10-17",
+      "entry_price": 81.0743447845336,
+      "exit_price": 81.35512469886696,
+      "hold_days": 3,
+      "pnl_pct": 0.3463,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-10-19",
+      "exit_date": "2005-10-20",
+      "entry_price": 80.46489975288863,
+      "exit_price": 81.82764829322112,
+      "hold_days": 1,
+      "pnl_pct": 1.6936,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-10-21",
+      "exit_date": "2005-10-25",
+      "entry_price": 81.00590352704081,
+      "exit_price": 81.98518371582031,
+      "hold_days": 2,
+      "pnl_pct": 1.2089,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-10-27",
+      "exit_date": "2005-10-31",
+      "entry_price": 81.62905782853035,
+      "exit_price": 82.37550953260971,
+      "hold_days": 2,
+      "pnl_pct": 0.9144,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-11-01",
+      "exit_date": "2005-11-03",
+      "entry_price": 82.5740941965242,
+      "exit_price": 83.64927172234377,
+      "hold_days": 2,
+      "pnl_pct": 1.3021,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-11-29",
+      "exit_date": "2005-12-06",
+      "entry_price": 86.73088503638304,
+      "exit_price": 87.00480571176584,
+      "hold_days": 5,
+      "pnl_pct": 0.3158,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-12-07",
+      "exit_date": "2005-12-14",
+      "entry_price": 86.81304401522578,
+      "exit_price": 87.10069113374237,
+      "hold_days": 5,
+      "pnl_pct": 0.3313,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-12-19",
+      "exit_date": "2005-12-23",
+      "entry_price": 87.24572758692513,
+      "exit_price": 87.28013149434483,
+      "hold_days": 4,
+      "pnl_pct": 0.0394,
+      "win": 1
+    },
+    {
+      "entry_date": "2005-12-28",
+      "exit_date": "2006-01-04",
+      "entry_price": 86.56414381630819,
+      "exit_price": 87.33520828552525,
+      "hold_days": 4,
+      "pnl_pct": 0.8907,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-01-23",
+      "exit_date": "2006-01-30",
+      "entry_price": 86.88771631953739,
+      "exit_price": 88.42292785644531,
+      "hold_days": 5,
+      "pnl_pct": 1.7669,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-01-31",
+      "exit_date": "2006-02-02",
+      "entry_price": 88.3402958281119,
+      "exit_price": 88.1888910059065,
+      "hold_days": 2,
+      "pnl_pct": -0.1714,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-02-03",
+      "exit_date": "2006-02-10",
+      "entry_price": 87.14241240307194,
+      "exit_price": 87.03915982360756,
+      "hold_days": 5,
+      "pnl_pct": -0.1185,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-02-22",
+      "exit_date": "2006-02-27",
+      "entry_price": 88.65010496049449,
+      "exit_price": 89.08382224866462,
+      "hold_days": 3,
+      "pnl_pct": 0.4892,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-03-01",
+      "exit_date": "2006-03-02",
+      "entry_price": 88.53307439963444,
+      "exit_price": 88.73962655688364,
+      "hold_days": 1,
+      "pnl_pct": 0.2333,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-03-06",
+      "exit_date": "2006-03-08",
+      "entry_price": 88.90485365699824,
+      "exit_price": 87.9134931872614,
+      "hold_days": 2,
+      "pnl_pct": -1.1151,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-03-10",
+      "exit_date": "2006-03-13",
+      "entry_price": 87.92036849204482,
+      "exit_price": 88.6982792134581,
+      "hold_days": 1,
+      "pnl_pct": 0.8848,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-03-22",
+      "exit_date": "2006-03-23",
+      "entry_price": 89.51412583379553,
+      "exit_price": 90.03250510070204,
+      "hold_days": 1,
+      "pnl_pct": 0.5791,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-03-29",
+      "exit_date": "2006-04-05",
+      "entry_price": 89.44498701009675,
+      "exit_price": 90.27442211186676,
+      "hold_days": 5,
+      "pnl_pct": 0.9273,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-04-10",
+      "exit_date": "2006-04-18",
+      "entry_price": 89.6730728149414,
+      "exit_price": 89.11324824058882,
+      "hold_days": 5,
+      "pnl_pct": -0.6243,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-04-27",
+      "exit_date": "2006-05-03",
+      "entry_price": 89.78365068705044,
+      "exit_price": 90.64763543417794,
+      "hold_days": 4,
+      "pnl_pct": 0.9623,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-05-09",
+      "exit_date": "2006-05-16",
+      "entry_price": 91.5254404373756,
+      "exit_price": 89.68688119180365,
+      "hold_days": 5,
+      "pnl_pct": -2.0088,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-05-18",
+      "exit_date": "2006-05-25",
+      "entry_price": 88.02118537696052,
+      "exit_price": 87.72398070365195,
+      "hold_days": 5,
+      "pnl_pct": -0.3377,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-05-31",
+      "exit_date": "2006-06-01",
+      "entry_price": 87.51662923096404,
+      "exit_price": 88.04190527134125,
+      "hold_days": 1,
+      "pnl_pct": 0.6002,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-06-06",
+      "exit_date": "2006-06-13",
+      "entry_price": 87.92442042845457,
+      "exit_price": 85.52602432310753,
+      "hold_days": 5,
+      "pnl_pct": -2.7278,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-06-14",
+      "exit_date": "2006-06-15",
+      "entry_price": 84.90398253820769,
+      "exit_price": 85.67120376572052,
+      "hold_days": 1,
+      "pnl_pct": 0.9036,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-06-19",
+      "exit_date": "2006-06-26",
+      "entry_price": 87.05648962286926,
+      "exit_price": 86.45947185059943,
+      "hold_days": 5,
+      "pnl_pct": -0.6858,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-06-28",
+      "exit_date": "2006-06-29",
+      "entry_price": 86.21645736013481,
+      "exit_price": 86.91765651622754,
+      "hold_days": 1,
+      "pnl_pct": 0.8133,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-07-13",
+      "exit_date": "2006-07-19",
+      "entry_price": 87.09120382593039,
+      "exit_price": 86.20953074886387,
+      "hold_days": 4,
+      "pnl_pct": -1.0124,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-07-21",
+      "exit_date": "2006-07-25",
+      "entry_price": 86.88293777183583,
+      "exit_price": 87.45915173433737,
+      "hold_days": 2,
+      "pnl_pct": 0.6632,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-08-10",
+      "exit_date": "2006-08-11",
+      "entry_price": 87.87568303396222,
+      "exit_price": 88.28528371082486,
+      "hold_days": 1,
+      "pnl_pct": 0.4661,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-08-15",
+      "exit_date": "2006-08-21",
+      "entry_price": 89.03504009717321,
+      "exit_price": 90.3749130082197,
+      "hold_days": 4,
+      "pnl_pct": 1.5049,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-09-01",
+      "exit_date": "2006-09-11",
+      "entry_price": 91.04137987320986,
+      "exit_price": 90.15273243605694,
+      "hold_days": 5,
+      "pnl_pct": -0.9761,
+      "win": 0
+    },
+    {
+      "entry_date": "2006-10-03",
+      "exit_date": "2006-10-05",
+      "entry_price": 92.66198392122406,
+      "exit_price": 94.07748393288786,
+      "hold_days": 2,
+      "pnl_pct": 1.5276,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-11-02",
+      "exit_date": "2006-11-07",
+      "entry_price": 95.18615828803993,
+      "exit_price": 96.36459334241935,
+      "hold_days": 3,
+      "pnl_pct": 1.238,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-11-28",
+      "exit_date": "2006-11-29",
+      "entry_price": 96.39249806928318,
+      "exit_price": 97.25011953342153,
+      "hold_days": 1,
+      "pnl_pct": 0.8897,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-12-08",
+      "exit_date": "2006-12-13",
+      "entry_price": 98.40765568212477,
+      "exit_price": 99.17469054851762,
+      "hold_days": 3,
+      "pnl_pct": 0.7794,
+      "win": 1
+    },
+    {
+      "entry_date": "2006-12-18",
+      "exit_date": "2006-12-26",
+      "entry_price": 99.94456304733067,
+      "exit_price": 98.73157379152275,
+      "hold_days": 5,
+      "pnl_pct": -1.2137,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-01-03",
+      "exit_date": "2007-01-09",
+      "entry_price": 99.74121533501338,
+      "exit_price": 99.08213011784139,
+      "hold_days": 4,
+      "pnl_pct": -0.6608,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-01-26",
+      "exit_date": "2007-01-31",
+      "entry_price": 99.96560510661106,
+      "exit_price": 100.00770132778132,
+      "hold_days": 3,
+      "pnl_pct": 0.0421,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-02-28",
+      "exit_date": "2007-03-07",
+      "entry_price": 98.4370475370229,
+      "exit_price": 97.87613674424661,
+      "hold_days": 5,
+      "pnl_pct": -0.5698,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-03-08",
+      "exit_date": "2007-03-15",
+      "entry_price": 98.5422375689184,
+      "exit_price": 97.4414002614747,
+      "hold_days": 5,
+      "pnl_pct": -1.1171,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-04-24",
+      "exit_date": "2007-04-26",
+      "entry_price": 104.34641679743072,
+      "exit_price": 105.23344554631821,
+      "hold_days": 2,
+      "pnl_pct": 0.8501,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-05-01",
+      "exit_date": "2007-05-04",
+      "entry_price": 104.48022440912138,
+      "exit_price": 106.12041925424234,
+      "hold_days": 3,
+      "pnl_pct": 1.5699,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-05-11",
+      "exit_date": "2007-05-14",
+      "entry_price": 105.41645333845938,
+      "exit_price": 106.19781975578037,
+      "hold_days": 1,
+      "pnl_pct": 0.7412,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-05-22",
+      "exit_date": "2007-05-30",
+      "entry_price": 107.49311029333565,
+      "exit_price": 106.62021997576805,
+      "hold_days": 5,
+      "pnl_pct": -0.812,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-06-07",
+      "exit_date": "2007-06-11",
+      "entry_price": 106.69064940693049,
+      "exit_price": 106.24712255564201,
+      "hold_days": 2,
+      "pnl_pct": -0.4157,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-06-13",
+      "exit_date": "2007-06-14",
+      "entry_price": 105.94445324581037,
+      "exit_price": 107.04256636371194,
+      "hold_days": 1,
+      "pnl_pct": 1.0365,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-06-18",
+      "exit_date": "2007-06-20",
+      "entry_price": 108.43716228230083,
+      "exit_price": 108.57854206807173,
+      "hold_days": 2,
+      "pnl_pct": 0.1304,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-06-21",
+      "exit_date": "2007-06-22",
+      "entry_price": 106.8111066330842,
+      "exit_price": 107.1221610825569,
+      "hold_days": 1,
+      "pnl_pct": 0.2912,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-06-27",
+      "exit_date": "2007-06-28",
+      "entry_price": 104.72552244977005,
+      "exit_price": 106.31623840332031,
+      "hold_days": 1,
+      "pnl_pct": 1.5189,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-07-11",
+      "exit_date": "2007-07-12",
+      "entry_price": 106.57777374084877,
+      "exit_price": 107.72310448427055,
+      "hold_days": 1,
+      "pnl_pct": 1.0746,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-07-18",
+      "exit_date": "2007-07-25",
+      "entry_price": 109.038114184956,
+      "exit_price": 107.47569514970917,
+      "hold_days": 5,
+      "pnl_pct": -1.4329,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-07-30",
+      "exit_date": "2007-07-31",
+      "entry_price": 103.17011656503934,
+      "exit_price": 104.86690316821978,
+      "hold_days": 1,
+      "pnl_pct": 1.6446,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-08-01",
+      "exit_date": "2007-08-02",
+      "entry_price": 102.63988339407106,
+      "exit_price": 103.75693263345283,
+      "hold_days": 1,
+      "pnl_pct": 1.0883,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-08-06",
+      "exit_date": "2007-08-07",
+      "entry_price": 101.9541429950169,
+      "exit_price": 103.17717379451004,
+      "hold_days": 1,
+      "pnl_pct": 1.1996,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-08-10",
+      "exit_date": "2007-08-17",
+      "entry_price": 102.08135438514299,
+      "exit_price": 102.86610655739867,
+      "hold_days": 5,
+      "pnl_pct": 0.7688,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-08-28",
+      "exit_date": "2007-08-30",
+      "entry_price": 103.33270742279137,
+      "exit_price": 102.83075150764698,
+      "hold_days": 2,
+      "pnl_pct": -0.4858,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-09-21",
+      "exit_date": "2007-09-28",
+      "entry_price": 108.47564296391762,
+      "exit_price": 108.57511023353172,
+      "hold_days": 5,
+      "pnl_pct": 0.0917,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-10-22",
+      "exit_date": "2007-10-23",
+      "entry_price": 105.74084983039558,
+      "exit_price": 107.5877648811534,
+      "hold_days": 1,
+      "pnl_pct": 1.7466,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-11-02",
+      "exit_date": "2007-11-07",
+      "entry_price": 107.63745836886127,
+      "exit_price": 106.86322439121872,
+      "hold_days": 3,
+      "pnl_pct": -0.7193,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-11-08",
+      "exit_date": "2007-11-14",
+      "entry_price": 105.12291460978207,
+      "exit_price": 105.99657134288853,
+      "hold_days": 4,
+      "pnl_pct": 0.8311,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-11-23",
+      "exit_date": "2007-11-26",
+      "entry_price": 101.62798731231179,
+      "exit_price": 102.5940574589389,
+      "hold_days": 1,
+      "pnl_pct": 0.9506,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-11-27",
+      "exit_date": "2007-11-29",
+      "entry_price": 100.68325328113934,
+      "exit_price": 104.14970562031078,
+      "hold_days": 2,
+      "pnl_pct": 3.4429,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-12-05",
+      "exit_date": "2007-12-07",
+      "entry_price": 105.08027488342572,
+      "exit_price": 107.55930497297943,
+      "hold_days": 2,
+      "pnl_pct": 2.3592,
+      "win": 1
+    },
+    {
+      "entry_date": "2007-12-12",
+      "exit_date": "2007-12-14",
+      "entry_price": 107.30359883444991,
+      "exit_price": 105.08025039216024,
+      "hold_days": 2,
+      "pnl_pct": -2.072,
+      "win": 0
+    },
+    {
+      "entry_date": "2007-12-17",
+      "exit_date": "2007-12-21",
+      "entry_price": 104.14261374691426,
+      "exit_price": 105.23795706939175,
+      "hold_days": 4,
+      "pnl_pct": 1.0518,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-01-02",
+      "exit_date": "2008-01-09",
+      "entry_price": 104.63815109122025,
+      "exit_price": 99.32523140079654,
+      "hold_days": 5,
+      "pnl_pct": -5.0774,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-01-16",
+      "exit_date": "2008-01-24",
+      "entry_price": 98.08982293908463,
+      "exit_price": 96.03319041029742,
+      "hold_days": 5,
+      "pnl_pct": -2.0967,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-01-28",
+      "exit_date": "2008-01-29",
+      "entry_price": 95.16198666544655,
+      "exit_price": 97.19004161354295,
+      "hold_days": 1,
+      "pnl_pct": 2.1312,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-01-31",
+      "exit_date": "2008-02-04",
+      "entry_price": 95.26194639387586,
+      "exit_price": 99.4109134684386,
+      "hold_days": 2,
+      "pnl_pct": 4.3553,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-02-05",
+      "exit_date": "2008-02-12",
+      "entry_price": 97.07579728453429,
+      "exit_price": 96.3402623553486,
+      "hold_days": 5,
+      "pnl_pct": -0.7577,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-02-15",
+      "exit_date": "2008-02-19",
+      "entry_price": 96.04751087756104,
+      "exit_price": 97.63276748532161,
+      "hold_days": 1,
+      "pnl_pct": 1.6505,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-03-07",
+      "exit_date": "2008-03-12",
+      "entry_price": 92.66975206386952,
+      "exit_price": 94.79063234761718,
+      "hold_days": 3,
+      "pnl_pct": 2.2886,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-03-13",
+      "exit_date": "2008-03-19",
+      "entry_price": 92.55548573897055,
+      "exit_price": 95.79038514126322,
+      "hold_days": 4,
+      "pnl_pct": 3.4951,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-03-20",
+      "exit_date": "2008-03-28",
+      "entry_price": 93.32945601369387,
+      "exit_price": 95.43936274692646,
+      "hold_days": 5,
+      "pnl_pct": 2.2607,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-03-31",
+      "exit_date": "2008-04-02",
+      "entry_price": 94.21934872926272,
+      "exit_price": 98.35296315145868,
+      "hold_days": 2,
+      "pnl_pct": 4.3872,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-04-08",
+      "exit_date": "2008-04-09",
+      "entry_price": 97.73574786687657,
+      "exit_price": 98.03721583261932,
+      "hold_days": 1,
+      "pnl_pct": 0.3085,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-04-14",
+      "exit_date": "2008-04-17",
+      "entry_price": 95.58284199162041,
+      "exit_price": 97.61383282277806,
+      "hold_days": 3,
+      "pnl_pct": 2.1248,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-04-21",
+      "exit_date": "2008-04-28",
+      "entry_price": 99.19979994684519,
+      "exit_price": 100.38390140278972,
+      "hold_days": 5,
+      "pnl_pct": 1.1937,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-05-01",
+      "exit_date": "2008-05-02",
+      "entry_price": 99.30741600503437,
+      "exit_price": 102.14930253897182,
+      "hold_days": 1,
+      "pnl_pct": 2.8617,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-05-08",
+      "exit_date": "2008-05-13",
+      "entry_price": 100.28348298103501,
+      "exit_price": 101.04412700757901,
+      "hold_days": 3,
+      "pnl_pct": 0.7585,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-05-15",
+      "exit_date": "2008-05-16",
+      "entry_price": 101.216367737388,
+      "exit_price": 102.52249371509883,
+      "hold_days": 1,
+      "pnl_pct": 1.2904,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-05-22",
+      "exit_date": "2008-05-30",
+      "entry_price": 100.06093442758467,
+      "exit_price": 100.8073050552736,
+      "hold_days": 5,
+      "pnl_pct": 0.7459,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-06-09",
+      "exit_date": "2008-06-16",
+      "entry_price": 98.21664901609472,
+      "exit_price": 97.2764963092835,
+      "hold_days": 5,
+      "pnl_pct": -0.9572,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-06-18",
+      "exit_date": "2008-06-25",
+      "entry_price": 96.65934685619766,
+      "exit_price": 95.000765530863,
+      "hold_days": 5,
+      "pnl_pct": -1.7159,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-06-27",
+      "exit_date": "2008-07-02",
+      "entry_price": 92.51970704532953,
+      "exit_price": 92.88751555857189,
+      "hold_days": 3,
+      "pnl_pct": 0.3975,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-07-03",
+      "exit_date": "2008-07-09",
+      "entry_price": 91.67587284224885,
+      "exit_price": 91.95714877441503,
+      "hold_days": 3,
+      "pnl_pct": 0.3068,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-07-10",
+      "exit_date": "2008-07-17",
+      "entry_price": 89.74298607339115,
+      "exit_price": 90.25502951004393,
+      "hold_days": 5,
+      "pnl_pct": 0.5706,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-07-25",
+      "exit_date": "2008-07-30",
+      "entry_price": 90.79597718112959,
+      "exit_price": 91.67585583406208,
+      "hold_days": 3,
+      "pnl_pct": 0.9691,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-08-01",
+      "exit_date": "2008-08-06",
+      "entry_price": 91.683074657799,
+      "exit_price": 92.33215897814893,
+      "hold_days": 3,
+      "pnl_pct": 0.708,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-08-26",
+      "exit_date": "2008-08-28",
+      "entry_price": 91.6109572188399,
+      "exit_price": 93.24094592163112,
+      "hold_days": 2,
+      "pnl_pct": 1.7793,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-09-02",
+      "exit_date": "2008-09-08",
+      "entry_price": 93.78183859412152,
+      "exit_price": 92.34660817572642,
+      "hold_days": 4,
+      "pnl_pct": -1.5304,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-09-10",
+      "exit_date": "2008-09-12",
+      "entry_price": 89.35351949427,
+      "exit_price": 89.64196308113681,
+      "hold_days": 2,
+      "pnl_pct": 0.3228,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-09-16",
+      "exit_date": "2008-09-17",
+      "entry_price": 84.52845181056301,
+      "exit_price": 86.28823059887496,
+      "hold_days": 1,
+      "pnl_pct": 2.0819,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-09-18",
+      "exit_date": "2008-09-25",
+      "entry_price": 85.14147889585348,
+      "exit_price": 86.61360991531903,
+      "hold_days": 5,
+      "pnl_pct": 1.729,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-09-30",
+      "exit_date": "2008-10-01",
+      "entry_price": 82.34096981052629,
+      "exit_price": 83.6176854000802,
+      "hold_days": 1,
+      "pnl_pct": 1.5505,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-10-03",
+      "exit_date": "2008-10-10",
+      "entry_price": 81.86946465512527,
+      "exit_price": 62.93633270570495,
+      "hold_days": 5,
+      "pnl_pct": -23.126,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-10-16",
+      "exit_date": "2008-10-17",
+      "entry_price": 66.22240935039571,
+      "exit_price": 66.73018360703709,
+      "hold_days": 1,
+      "pnl_pct": 0.7668,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-10-22",
+      "exit_date": "2008-10-24",
+      "entry_price": 67.60795639626203,
+      "exit_price": 60.977722899708056,
+      "hold_days": 2,
+      "pnl_pct": -9.8069,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-10-28",
+      "exit_date": "2008-10-29",
+      "entry_price": 63.3570573413917,
+      "exit_price": 68.02142406734632,
+      "hold_days": 1,
+      "pnl_pct": 7.362,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-10-30",
+      "exit_date": "2008-10-31",
+      "entry_price": 69.47952028008055,
+      "exit_price": 68.97172531295527,
+      "hold_days": 1,
+      "pnl_pct": -0.7309,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-11-07",
+      "exit_date": "2008-11-10",
+      "entry_price": 66.48358145669788,
+      "exit_price": 69.06601750508035,
+      "hold_days": 1,
+      "pnl_pct": 3.8843,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-11-13",
+      "exit_date": "2008-11-14",
+      "entry_price": 62.47930844991404,
+      "exit_price": 64.85864109325313,
+      "hold_days": 1,
+      "pnl_pct": 3.8082,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-11-17",
+      "exit_date": "2008-11-19",
+      "entry_price": 62.660670793085764,
+      "exit_price": 62.31975804643129,
+      "hold_days": 2,
+      "pnl_pct": -0.5441,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-11-20",
+      "exit_date": "2008-11-28",
+      "entry_price": 58.12688175373232,
+      "exit_price": 64.2928274104796,
+      "hold_days": 5,
+      "pnl_pct": 10.6077,
+      "win": 1
+    },
+    {
+      "entry_date": "2008-12-02",
+      "exit_date": "2008-12-03",
+      "entry_price": 60.54975406335534,
+      "exit_price": 60.49895748224654,
+      "hold_days": 1,
+      "pnl_pct": -0.0839,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-12-10",
+      "exit_date": "2008-12-15",
+      "entry_price": 65.51877465924628,
+      "exit_price": 64.575760142619,
+      "hold_days": 3,
+      "pnl_pct": -1.4393,
+      "win": 0
+    },
+    {
+      "entry_date": "2008-12-22",
+      "exit_date": "2008-12-29",
+      "entry_price": 64.77821839260717,
+      "exit_price": 63.79827692831626,
+      "hold_days": 4,
+      "pnl_pct": -1.5128,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-01-21",
+      "exit_date": "2009-01-22",
+      "entry_price": 59.92239620247132,
+      "exit_price": 60.273414786666585,
+      "hold_days": 1,
+      "pnl_pct": 0.5858,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-01-30",
+      "exit_date": "2009-02-06",
+      "entry_price": 62.145509957471226,
+      "exit_price": 62.05775947976343,
+      "hold_days": 5,
+      "pnl_pct": -0.1412,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-02-11",
+      "exit_date": "2009-02-13",
+      "entry_price": 61.02665700874058,
+      "exit_price": 61.099757963900636,
+      "hold_days": 2,
+      "pnl_pct": 0.1198,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-02-17",
+      "exit_date": "2009-02-24",
+      "entry_price": 58.620677940164036,
+      "exit_price": 55.05927247003779,
+      "hold_days": 5,
+      "pnl_pct": -6.0753,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-02-27",
+      "exit_date": "2009-03-06",
+      "entry_price": 54.123225180048415,
+      "exit_price": 50.75193005091294,
+      "hold_days": 5,
+      "pnl_pct": -6.2289,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-03-10",
+      "exit_date": "2009-03-11",
+      "entry_price": 50.83235604237362,
+      "exit_price": 53.384608715196926,
+      "hold_days": 1,
+      "pnl_pct": 5.0209,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-03-17",
+      "exit_date": "2009-03-18",
+      "entry_price": 55.629664576285315,
+      "exit_price": 56.90213474478612,
+      "hold_days": 1,
+      "pnl_pct": 2.2874,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-03-20",
+      "exit_date": "2009-03-24",
+      "entry_price": 58.00912638108466,
+      "exit_price": 59.835720683694504,
+      "hold_days": 2,
+      "pnl_pct": 3.1488,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-03-25",
+      "exit_date": "2009-03-27",
+      "entry_price": 59.828347418357694,
+      "exit_price": 60.432305679789444,
+      "hold_days": 2,
+      "pnl_pct": 1.0095,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-04-08",
+      "exit_date": "2009-04-13",
+      "entry_price": 60.43966518009483,
+      "exit_price": 62.54613219733042,
+      "hold_days": 2,
+      "pnl_pct": 3.4852,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-04-15",
+      "exit_date": "2009-04-16",
+      "entry_price": 61.750693296834754,
+      "exit_price": 63.29002840105125,
+      "hold_days": 1,
+      "pnl_pct": 2.4928,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-04-21",
+      "exit_date": "2009-04-22",
+      "entry_price": 60.99942413981669,
+      "exit_price": 62.08211809930342,
+      "hold_days": 1,
+      "pnl_pct": 1.7749,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-05-12",
+      "exit_date": "2009-05-19",
+      "entry_price": 67.48824311737802,
+      "exit_price": 67.15683039899217,
+      "hold_days": 5,
+      "pnl_pct": -0.4911,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-05-21",
+      "exit_date": "2009-05-27",
+      "entry_price": 65.88997356568271,
+      "exit_price": 67.34833187197238,
+      "hold_days": 3,
+      "pnl_pct": 2.2133,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-05-28",
+      "exit_date": "2009-05-29",
+      "entry_price": 66.62651359354408,
+      "exit_price": 67.33358179866451,
+      "hold_days": 1,
+      "pnl_pct": 1.0612,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-06-12",
+      "exit_date": "2009-06-15",
+      "entry_price": 69.52844093517184,
+      "exit_price": 69.20438824938248,
+      "hold_days": 1,
+      "pnl_pct": -0.4661,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-06-17",
+      "exit_date": "2009-06-24",
+      "entry_price": 67.466152049714,
+      "exit_price": 66.78064300085505,
+      "hold_days": 5,
+      "pnl_pct": -1.0161,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-07-02",
+      "exit_date": "2009-07-07",
+      "entry_price": 67.49915022357942,
+      "exit_price": 66.44736825587607,
+      "hold_days": 2,
+      "pnl_pct": -1.5582,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-07-08",
+      "exit_date": "2009-07-14",
+      "entry_price": 65.61779864425824,
+      "exit_price": 66.94362942099988,
+      "hold_days": 4,
+      "pnl_pct": 2.0205,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-07-17",
+      "exit_date": "2009-07-21",
+      "entry_price": 69.66935854720485,
+      "exit_price": 71.01001310046232,
+      "hold_days": 2,
+      "pnl_pct": 1.9243,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-07-31",
+      "exit_date": "2009-08-04",
+      "entry_price": 73.0691297700918,
+      "exit_price": 74.06165761105896,
+      "hold_days": 2,
+      "pnl_pct": 1.3583,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-08-26",
+      "exit_date": "2009-08-28",
+      "entry_price": 76.17262395121259,
+      "exit_price": 77.2022006163255,
+      "hold_days": 2,
+      "pnl_pct": 1.3516,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-09-02",
+      "exit_date": "2009-09-04",
+      "entry_price": 73.90613218589326,
+      "exit_price": 74.69864422239858,
+      "hold_days": 2,
+      "pnl_pct": 1.0723,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-09-24",
+      "exit_date": "2009-09-29",
+      "entry_price": 79.19228998747401,
+      "exit_price": 79.26671428093137,
+      "hold_days": 3,
+      "pnl_pct": 0.094,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-09-30",
+      "exit_date": "2009-10-06",
+      "entry_price": 79.15511343344045,
+      "exit_price": 77.97178085727732,
+      "hold_days": 4,
+      "pnl_pct": -1.495,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-10-22",
+      "exit_date": "2009-10-23",
+      "entry_price": 80.51699366668352,
+      "exit_price": 81.63333484085256,
+      "hold_days": 1,
+      "pnl_pct": 1.3865,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-10-27",
+      "exit_date": "2009-10-30",
+      "entry_price": 79.65374201577161,
+      "exit_price": 79.11046811217433,
+      "hold_days": 3,
+      "pnl_pct": -0.682,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-11-02",
+      "exit_date": "2009-11-04",
+      "entry_price": 77.49547562573896,
+      "exit_price": 78.52251943040443,
+      "hold_days": 2,
+      "pnl_pct": 1.3253,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-11-05",
+      "exit_date": "2009-11-06",
+      "entry_price": 78.63411363817092,
+      "exit_price": 79.08063735704813,
+      "hold_days": 1,
+      "pnl_pct": 0.5678,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-11-13",
+      "exit_date": "2009-11-18",
+      "entry_price": 81.35057183319684,
+      "exit_price": 82.8017507459914,
+      "hold_days": 3,
+      "pnl_pct": 1.7839,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-11-24",
+      "exit_date": "2009-11-25",
+      "entry_price": 82.60830437510968,
+      "exit_price": 82.7348127367283,
+      "hold_days": 1,
+      "pnl_pct": 0.1531,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-12-04",
+      "exit_date": "2009-12-10",
+      "entry_price": 83.23340451291361,
+      "exit_price": 82.38499095656529,
+      "hold_days": 4,
+      "pnl_pct": -1.0193,
+      "win": 0
+    },
+    {
+      "entry_date": "2009-12-18",
+      "exit_date": "2009-12-21",
+      "entry_price": 82.45441495331161,
+      "exit_price": 82.87344614146318,
+      "hold_days": 1,
+      "pnl_pct": 0.5082,
+      "win": 1
+    },
+    {
+      "entry_date": "2009-12-30",
+      "exit_date": "2010-01-05",
+      "entry_price": 83.9733577442153,
+      "exit_price": 84.74399617837582,
+      "hold_days": 3,
+      "pnl_pct": 0.9177,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-01-22",
+      "exit_date": "2010-01-28",
+      "entry_price": 83.20267413141444,
+      "exit_price": 82.44695224310622,
+      "hold_days": 4,
+      "pnl_pct": -0.9083,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-02-01",
+      "exit_date": "2010-02-02",
+      "entry_price": 80.92055088415118,
+      "exit_price": 81.75111014915842,
+      "hold_days": 1,
+      "pnl_pct": 1.0264,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-02-05",
+      "exit_date": "2010-02-08",
+      "entry_price": 79.73087512300845,
+      "exit_price": 79.8655587798935,
+      "hold_days": 1,
+      "pnl_pct": 0.1689,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-02-09",
+      "exit_date": "2010-02-12",
+      "entry_price": 80.15738818824984,
+      "exit_price": 80.05260292817151,
+      "hold_days": 3,
+      "pnl_pct": -0.1307,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-02-24",
+      "exit_date": "2010-02-25",
+      "entry_price": 82.40954148292472,
+      "exit_price": 81.73613644850695,
+      "hold_days": 1,
+      "pnl_pct": -0.8171,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-03-26",
+      "exit_date": "2010-04-05",
+      "entry_price": 87.80521330311942,
+      "exit_price": 88.84201357358945,
+      "hold_days": 5,
+      "pnl_pct": 1.1808,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-04-27",
+      "exit_date": "2010-05-04",
+      "entry_price": 90.64511929673039,
+      "exit_price": 89.4129686338641,
+      "hold_days": 5,
+      "pnl_pct": -1.3593,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-05-14",
+      "exit_date": "2010-05-21",
+      "entry_price": 86.49043211914665,
+      "exit_price": 79.57088080160376,
+      "hold_days": 5,
+      "pnl_pct": -8.0004,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-05-25",
+      "exit_date": "2010-05-26",
+      "entry_price": 78.96983450472372,
+      "exit_price": 81.50172479047848,
+      "hold_days": 1,
+      "pnl_pct": 3.2061,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-05-27",
+      "exit_date": "2010-05-28",
+      "entry_price": 82.03513292571354,
+      "exit_price": 83.12456707713469,
+      "hold_days": 1,
+      "pnl_pct": 1.328,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-06-02",
+      "exit_date": "2010-06-03",
+      "entry_price": 81.20120771757503,
+      "exit_price": 83.13206272790433,
+      "hold_days": 1,
+      "pnl_pct": 2.3779,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-06-07",
+      "exit_date": "2010-06-09",
+      "entry_price": 80.54007431936374,
+      "exit_price": 80.57009130746226,
+      "hold_days": 2,
+      "pnl_pct": 0.0373,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-06-10",
+      "exit_date": "2010-06-11",
+      "entry_price": 81.03594062817211,
+      "exit_price": 81.28385234054389,
+      "hold_days": 1,
+      "pnl_pct": 0.3059,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-06-15",
+      "exit_date": "2010-06-16",
+      "entry_price": 82.85412119297169,
+      "exit_price": 83.71057338226429,
+      "hold_days": 1,
+      "pnl_pct": 1.0337,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-06-23",
+      "exit_date": "2010-06-30",
+      "entry_price": 82.76517150446348,
+      "exit_price": 78.44724535691113,
+      "hold_days": 5,
+      "pnl_pct": -5.2171,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-07-01",
+      "exit_date": "2010-07-08",
+      "entry_price": 77.86598213078797,
+      "exit_price": 80.77225980436968,
+      "hold_days": 4,
+      "pnl_pct": 3.7324,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-07-19",
+      "exit_date": "2010-07-21",
+      "entry_price": 80.81001821102647,
+      "exit_price": 82.31224347445315,
+      "hold_days": 2,
+      "pnl_pct": 1.859,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-07-22",
+      "exit_date": "2010-07-26",
+      "entry_price": 81.78380367893152,
+      "exit_price": 83.48982311218974,
+      "hold_days": 2,
+      "pnl_pct": 2.086,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-08-12",
+      "exit_date": "2010-08-19",
+      "entry_price": 81.26294351435392,
+      "exit_price": 82.4480896880928,
+      "hold_days": 5,
+      "pnl_pct": 1.4584,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-08-24",
+      "exit_date": "2010-08-26",
+      "entry_price": 79.97964632047889,
+      "exit_price": 80.34951655389733,
+      "hold_days": 2,
+      "pnl_pct": 0.4625,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-08-31",
+      "exit_date": "2010-09-02",
+      "entry_price": 79.20212545046343,
+      "exit_price": 82.07067237789089,
+      "hold_days": 2,
+      "pnl_pct": 3.6218,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-09-08",
+      "exit_date": "2010-09-13",
+      "entry_price": 82.93121822014284,
+      "exit_price": 84.98450419370627,
+      "hold_days": 3,
+      "pnl_pct": 2.4759,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-09-28",
+      "exit_date": "2010-09-29",
+      "entry_price": 86.83589654295007,
+      "exit_price": 86.80553431124153,
+      "hold_days": 1,
+      "pnl_pct": -0.035,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-10-26",
+      "exit_date": "2010-10-27",
+      "entry_price": 89.62871691220244,
+      "exit_price": 89.46934674662532,
+      "hold_days": 1,
+      "pnl_pct": -0.1778,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-11-16",
+      "exit_date": "2010-11-22",
+      "entry_price": 90.53185082938751,
+      "exit_price": 90.83543590564555,
+      "hold_days": 4,
+      "pnl_pct": 0.3353,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-11-29",
+      "exit_date": "2010-11-30",
+      "entry_price": 89.9323282137767,
+      "exit_price": 89.53766688145862,
+      "hold_days": 1,
+      "pnl_pct": -0.4388,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-12-08",
+      "exit_date": "2010-12-09",
+      "entry_price": 93.33230137064159,
+      "exit_price": 94.08360548299703,
+      "hold_days": 1,
+      "pnl_pct": 0.805,
+      "win": 1
+    },
+    {
+      "entry_date": "2010-12-14",
+      "exit_date": "2010-12-17",
+      "entry_price": 94.67556808605923,
+      "exit_price": 94.66232012639377,
+      "hold_days": 3,
+      "pnl_pct": -0.014,
+      "win": 0
+    },
+    {
+      "entry_date": "2010-12-30",
+      "exit_date": "2011-01-06",
+      "entry_price": 95.97448660373615,
+      "exit_price": 97.41645273338972,
+      "hold_days": 5,
+      "pnl_pct": 1.5024,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-01-24",
+      "exit_date": "2011-01-25",
+      "entry_price": 97.87417198361857,
+      "exit_price": 98.2327577232899,
+      "hold_days": 1,
+      "pnl_pct": 0.3664,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-01-31",
+      "exit_date": "2011-02-01",
+      "entry_price": 97.70636385661652,
+      "exit_price": 98.76680339669291,
+      "hold_days": 1,
+      "pnl_pct": 1.0853,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-02-23",
+      "exit_date": "2011-02-28",
+      "entry_price": 100.51387869041814,
+      "exit_price": 101.33016562569061,
+      "hold_days": 3,
+      "pnl_pct": 0.8121,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-03-02",
+      "exit_date": "2011-03-04",
+      "entry_price": 99.75096041925443,
+      "exit_price": 101.74978901009948,
+      "hold_days": 2,
+      "pnl_pct": 2.0038,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-03-11",
+      "exit_date": "2011-03-18",
+      "entry_price": 98.81257827004384,
+      "exit_price": 98.72079404052269,
+      "hold_days": 5,
+      "pnl_pct": -0.0929,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-03-21",
+      "exit_date": "2011-03-25",
+      "entry_price": 99.11154919267449,
+      "exit_price": 100.55974871901822,
+      "hold_days": 4,
+      "pnl_pct": 1.4612,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-03-29",
+      "exit_date": "2011-03-30",
+      "entry_price": 100.27625065758916,
+      "exit_price": 101.56347701687748,
+      "hold_days": 1,
+      "pnl_pct": 1.2837,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-05-17",
+      "exit_date": "2011-05-18",
+      "entry_price": 101.67076527247237,
+      "exit_price": 102.0921993679724,
+      "hold_days": 1,
+      "pnl_pct": 0.4145,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-05-23",
+      "exit_date": "2011-05-27",
+      "entry_price": 101.12672681028592,
+      "exit_price": 102.19182370243881,
+      "hold_days": 4,
+      "pnl_pct": 1.0532,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-06-02",
+      "exit_date": "2011-06-09",
+      "entry_price": 101.11144439698354,
+      "exit_price": 98.66715626651187,
+      "hold_days": 5,
+      "pnl_pct": -2.4174,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-06-16",
+      "exit_date": "2011-06-21",
+      "entry_price": 97.35690311957386,
+      "exit_price": 98.84062824098376,
+      "hold_days": 3,
+      "pnl_pct": 1.524,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-06-23",
+      "exit_date": "2011-06-24",
+      "entry_price": 97.91658845246987,
+      "exit_price": 98.77130813359028,
+      "hold_days": 1,
+      "pnl_pct": 0.8729,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-06-27",
+      "exit_date": "2011-06-29",
+      "entry_price": 97.70865887773272,
+      "exit_price": 100.25745035213886,
+      "hold_days": 2,
+      "pnl_pct": 2.6086,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-07-13",
+      "exit_date": "2011-07-18",
+      "entry_price": 101.71278553289136,
+      "exit_price": 100.93512524494678,
+      "hold_days": 3,
+      "pnl_pct": -0.7646,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-07-28",
+      "exit_date": "2011-08-04",
+      "entry_price": 100.56546386145789,
+      "exit_price": 95.80672459333825,
+      "hold_days": 5,
+      "pnl_pct": -4.732,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-08-05",
+      "exit_date": "2011-08-10",
+      "entry_price": 93.75844293070297,
+      "exit_price": 88.75325776574435,
+      "hold_days": 3,
+      "pnl_pct": -5.3384,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-08-11",
+      "exit_date": "2011-08-16",
+      "entry_price": 87.21319865317537,
+      "exit_price": 91.99507920522596,
+      "hold_days": 3,
+      "pnl_pct": 5.483,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-08-19",
+      "exit_date": "2011-08-24",
+      "entry_price": 86.98217173532208,
+      "exit_price": 89.46937130545935,
+      "hold_days": 3,
+      "pnl_pct": 2.8594,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-08-26",
+      "exit_date": "2011-08-29",
+      "entry_price": 89.08435989909606,
+      "exit_price": 92.06438154666371,
+      "hold_days": 1,
+      "pnl_pct": 3.3452,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-09-02",
+      "exit_date": "2011-09-07",
+      "entry_price": 91.18655748705581,
+      "exit_price": 91.44834060292287,
+      "hold_days": 2,
+      "pnl_pct": 0.2871,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-09-09",
+      "exit_date": "2011-09-13",
+      "entry_price": 90.61672295717621,
+      "exit_price": 90.13161897226944,
+      "hold_days": 2,
+      "pnl_pct": -0.5353,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-09-21",
+      "exit_date": "2011-09-27",
+      "entry_price": 93.05926133421325,
+      "exit_price": 91.74341832660883,
+      "hold_days": 4,
+      "pnl_pct": -1.414,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-09-29",
+      "exit_date": "2011-10-05",
+      "entry_price": 90.59791631606706,
+      "exit_price": 87.1690483915403,
+      "hold_days": 4,
+      "pnl_pct": -3.7847,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-10-18",
+      "exit_date": "2011-10-21",
+      "entry_price": 92.98961691886637,
+      "exit_price": 95.27292295733552,
+      "hold_days": 3,
+      "pnl_pct": 2.4554,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-10-26",
+      "exit_date": "2011-10-27",
+      "entry_price": 96.24818488901794,
+      "exit_price": 98.78693500774253,
+      "hold_days": 1,
+      "pnl_pct": 2.6377,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-11-01",
+      "exit_date": "2011-11-04",
+      "entry_price": 94.45247198769738,
+      "exit_price": 96.92931541228491,
+      "hold_days": 3,
+      "pnl_pct": 2.6223,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-11-10",
+      "exit_date": "2011-11-17",
+      "entry_price": 96.58876908795399,
+      "exit_price": 95.8611806522104,
+      "hold_days": 5,
+      "pnl_pct": -0.7533,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-11-25",
+      "exit_date": "2011-12-01",
+      "entry_price": 90.07930859102345,
+      "exit_price": 96.63518975344823,
+      "hold_days": 4,
+      "pnl_pct": 7.2779,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-12-05",
+      "exit_date": "2011-12-12",
+      "entry_price": 98.17549279566273,
+      "exit_price": 96.7126052631376,
+      "hold_days": 5,
+      "pnl_pct": -1.4901,
+      "win": 0
+    },
+    {
+      "entry_date": "2011-12-14",
+      "exit_date": "2011-12-21",
+      "entry_price": 94.86272333586595,
+      "exit_price": 96.53147532650802,
+      "hold_days": 5,
+      "pnl_pct": 1.7591,
+      "win": 1
+    },
+    {
+      "entry_date": "2011-12-29",
+      "exit_date": "2011-12-30",
+      "entry_price": 97.55183674484732,
+      "exit_price": 98.15939174017329,
+      "hold_days": 1,
+      "pnl_pct": 0.6228,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-01-03",
+      "exit_date": "2012-01-05",
+      "entry_price": 99.51471547369353,
+      "exit_price": 98.93055378092969,
+      "hold_days": 2,
+      "pnl_pct": -0.587,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-02-16",
+      "exit_date": "2012-02-17",
+      "entry_price": 104.8191648604779,
+      "exit_price": 106.3380466950323,
+      "hold_days": 1,
+      "pnl_pct": 1.449,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-03-28",
+      "exit_date": "2012-03-30",
+      "entry_price": 110.38715291960386,
+      "exit_price": 110.24632776941093,
+      "hold_days": 2,
+      "pnl_pct": -0.1276,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-04-10",
+      "exit_date": "2012-04-13",
+      "entry_price": 107.92279227669434,
+      "exit_price": 108.32961222193278,
+      "hold_days": 3,
+      "pnl_pct": 0.377,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-04-16",
+      "exit_date": "2012-04-18",
+      "entry_price": 107.83677252820189,
+      "exit_price": 108.32178756401744,
+      "hold_days": 2,
+      "pnl_pct": 0.4498,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-04-23",
+      "exit_date": "2012-04-24",
+      "entry_price": 106.81972135427041,
+      "exit_price": 107.10915274728212,
+      "hold_days": 1,
+      "pnl_pct": 0.271,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-05-04",
+      "exit_date": "2012-05-09",
+      "entry_price": 108.36875288583674,
+      "exit_price": 105.69319316031657,
+      "hold_days": 3,
+      "pnl_pct": -2.4689,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-05-15",
+      "exit_date": "2012-05-22",
+      "entry_price": 104.84823084195088,
+      "exit_price": 103.51042687757278,
+      "hold_days": 5,
+      "pnl_pct": -1.2759,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-05-31",
+      "exit_date": "2012-06-06",
+      "entry_price": 103.04105089908657,
+      "exit_price": 101.67978793839463,
+      "hold_days": 4,
+      "pnl_pct": -1.3211,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-06-08",
+      "exit_date": "2012-06-11",
+      "entry_price": 103.04103711342368,
+      "exit_price": 104.96557703537086,
+      "hold_days": 1,
+      "pnl_pct": 1.8677,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-06-12",
+      "exit_date": "2012-06-13",
+      "entry_price": 103.10361591467286,
+      "exit_price": 103.68258222197888,
+      "hold_days": 1,
+      "pnl_pct": 0.5615,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-06-22",
+      "exit_date": "2012-06-28",
+      "entry_price": 104.69162477733646,
+      "exit_price": 104.03104692986625,
+      "hold_days": 4,
+      "pnl_pct": -0.631,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-07-11",
+      "exit_date": "2012-07-16",
+      "entry_price": 105.54093915713979,
+      "exit_price": 106.50813856960171,
+      "hold_days": 3,
+      "pnl_pct": 0.9164,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-07-23",
+      "exit_date": "2012-07-30",
+      "entry_price": 105.74540011243731,
+      "exit_price": 108.93024808579615,
+      "hold_days": 5,
+      "pnl_pct": 3.0118,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-08-01",
+      "exit_date": "2012-08-06",
+      "entry_price": 109.07178767051442,
+      "exit_price": 109.87390863738214,
+      "hold_days": 3,
+      "pnl_pct": 0.7354,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-08-07",
+      "exit_date": "2012-08-09",
+      "entry_price": 110.2356509043308,
+      "exit_price": 110.32212687372562,
+      "hold_days": 2,
+      "pnl_pct": 0.0784,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-08-22",
+      "exit_date": "2012-08-27",
+      "entry_price": 111.19499869488874,
+      "exit_price": 111.58035475853946,
+      "hold_days": 3,
+      "pnl_pct": 0.3466,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-09-11",
+      "exit_date": "2012-09-14",
+      "entry_price": 112.92506070407953,
+      "exit_price": 115.50445226162175,
+      "hold_days": 3,
+      "pnl_pct": 2.2842,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-09-24",
+      "exit_date": "2012-10-01",
+      "entry_price": 114.75328276025692,
+      "exit_price": 114.2552627708017,
+      "hold_days": 5,
+      "pnl_pct": -0.434,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-10-10",
+      "exit_date": "2012-10-16",
+      "entry_price": 113.98643864759498,
+      "exit_price": 114.44496030165085,
+      "hold_days": 4,
+      "pnl_pct": 0.4023,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-10-22",
+      "exit_date": "2012-10-23",
+      "entry_price": 113.17215639198793,
+      "exit_price": 112.15228711600976,
+      "hold_days": 1,
+      "pnl_pct": -0.9012,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-10-25",
+      "exit_date": "2012-11-02",
+      "entry_price": 112.27880138256496,
+      "exit_price": 113.59115026875827,
+      "hold_days": 4,
+      "pnl_pct": 1.1688,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-11-05",
+      "exit_date": "2012-11-12",
+      "entry_price": 111.74909414675184,
+      "exit_price": 109.56705995241944,
+      "hold_days": 5,
+      "pnl_pct": -1.9526,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-11-15",
+      "exit_date": "2012-11-19",
+      "entry_price": 107.50366552789342,
+      "exit_price": 109.02158343215544,
+      "hold_days": 2,
+      "pnl_pct": 1.412,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-11-28",
+      "exit_date": "2012-11-29",
+      "entry_price": 110.49206415713378,
+      "exit_price": 112.25508897637577,
+      "hold_days": 1,
+      "pnl_pct": 1.5956,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-12-04",
+      "exit_date": "2012-12-07",
+      "entry_price": 111.82024162869934,
+      "exit_price": 112.6819557744816,
+      "hold_days": 3,
+      "pnl_pct": 0.7706,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-12-13",
+      "exit_date": "2012-12-18",
+      "entry_price": 113.38557299234846,
+      "exit_price": 113.84413425131689,
+      "hold_days": 3,
+      "pnl_pct": 0.4044,
+      "win": 1
+    },
+    {
+      "entry_date": "2012-12-20",
+      "exit_date": "2012-12-21",
+      "entry_price": 114.14451356651202,
+      "exit_price": 113.19455176970197,
+      "hold_days": 1,
+      "pnl_pct": -0.8322,
+      "win": 0
+    },
+    {
+      "entry_date": "2012-12-31",
+      "exit_date": "2013-01-02",
+      "entry_price": 111.1960788044534,
+      "exit_price": 115.53533052596421,
+      "hold_days": 1,
+      "pnl_pct": 3.9023,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-01-31",
+      "exit_date": "2013-02-04",
+      "entry_price": 119.34112816296572,
+      "exit_price": 119.68346400342557,
+      "hold_days": 2,
+      "pnl_pct": 0.2869,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-02-05",
+      "exit_date": "2013-02-07",
+      "entry_price": 119.70739312871537,
+      "exit_price": 120.39212496720805,
+      "hold_days": 2,
+      "pnl_pct": 0.572,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-02-21",
+      "exit_date": "2013-02-25",
+      "entry_price": 120.19304979656103,
+      "exit_price": 121.52270916496222,
+      "hold_days": 2,
+      "pnl_pct": 1.1063,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-02-26",
+      "exit_date": "2013-02-27",
+      "entry_price": 119.20575841331885,
+      "exit_price": 119.34115253646063,
+      "hold_days": 1,
+      "pnl_pct": 0.1136,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-03-01",
+      "exit_date": "2013-03-04",
+      "entry_price": 120.29656963081824,
+      "exit_price": 120.83001603097894,
+      "hold_days": 1,
+      "pnl_pct": 0.4434,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-03-22",
+      "exit_date": "2013-03-25",
+      "entry_price": 123.83860839754706,
+      "exit_price": 124.76626308253567,
+      "hold_days": 1,
+      "pnl_pct": 0.7491,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-04-04",
+      "exit_date": "2013-04-08",
+      "entry_price": 124.30245561746877,
+      "exit_price": 124.1745035589042,
+      "hold_days": 2,
+      "pnl_pct": -0.1029,
+      "win": 0
+    },
+    {
+      "entry_date": "2013-04-16",
+      "exit_date": "2013-04-17",
+      "entry_price": 124.9901633590173,
+      "exit_price": 124.9901872833656,
+      "hold_days": 1,
+      "pnl_pct": 0.0,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-05-02",
+      "exit_date": "2013-05-03",
+      "entry_price": 126.90153599761031,
+      "exit_price": 128.8688908748228,
+      "hold_days": 1,
+      "pnl_pct": 1.5503,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-05-17",
+      "exit_date": "2013-05-20",
+      "entry_price": 132.71563028180645,
+      "exit_price": 133.3793736300228,
+      "hold_days": 1,
+      "pnl_pct": 0.5001,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-05-23",
+      "exit_date": "2013-05-28",
+      "entry_price": 131.28410048498696,
+      "exit_price": 133.58730814155697,
+      "hold_days": 2,
+      "pnl_pct": 1.7544,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-06-03",
+      "exit_date": "2013-06-04",
+      "entry_price": 131.0202012797447,
+      "exit_price": 131.50810554133005,
+      "hold_days": 1,
+      "pnl_pct": 0.3724,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-06-06",
+      "exit_date": "2013-06-07",
+      "entry_price": 128.91694306725515,
+      "exit_price": 131.0361702892277,
+      "hold_days": 1,
+      "pnl_pct": 1.6439,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-06-13",
+      "exit_date": "2013-06-14",
+      "entry_price": 129.28480613624177,
+      "exit_price": 131.18008248236848,
+      "hold_days": 1,
+      "pnl_pct": 1.466,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-06-17",
+      "exit_date": "2013-06-19",
+      "entry_price": 131.3880131808403,
+      "exit_price": 132.43574123656066,
+      "hold_days": 2,
+      "pnl_pct": 0.7974,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-06-20",
+      "exit_date": "2013-06-27",
+      "entry_price": 129.44474976437866,
+      "exit_price": 129.5186614572287,
+      "hold_days": 5,
+      "pnl_pct": 0.0571,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-06-28",
+      "exit_date": "2013-07-08",
+      "entry_price": 129.1407769713292,
+      "exit_price": 131.73753693379916,
+      "hold_days": 5,
+      "pnl_pct": 2.0108,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-07-24",
+      "exit_date": "2013-07-26",
+      "entry_price": 136.50512641940787,
+      "exit_price": 135.24286161950974,
+      "hold_days": 2,
+      "pnl_pct": -0.9247,
+      "win": 0
+    },
+    {
+      "entry_date": "2013-08-01",
+      "exit_date": "2013-08-02",
+      "entry_price": 136.66593507992957,
+      "exit_price": 136.89902854174488,
+      "hold_days": 1,
+      "pnl_pct": 0.1706,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-08-15",
+      "exit_date": "2013-08-22",
+      "entry_price": 134.5916625461083,
+      "exit_price": 132.57368525007152,
+      "hold_days": 5,
+      "pnl_pct": -1.4993,
+      "win": 0
+    },
+    {
+      "entry_date": "2013-08-27",
+      "exit_date": "2013-09-04",
+      "entry_price": 132.13954447217682,
+      "exit_price": 132.19582619752347,
+      "hold_days": 5,
+      "pnl_pct": 0.0426,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-09-20",
+      "exit_date": "2013-09-27",
+      "entry_price": 139.2224755392473,
+      "exit_price": 136.4029759588223,
+      "hold_days": 5,
+      "pnl_pct": -2.0252,
+      "win": 0
+    },
+    {
+      "entry_date": "2013-10-08",
+      "exit_date": "2013-10-11",
+      "entry_price": 135.2396104568452,
+      "exit_price": 136.45953611989586,
+      "hold_days": 3,
+      "pnl_pct": 0.902,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-10-16",
+      "exit_date": "2013-10-17",
+      "entry_price": 137.92175863686197,
+      "exit_price": 138.44692437964733,
+      "hold_days": 1,
+      "pnl_pct": 0.3808,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-11-01",
+      "exit_date": "2013-11-05",
+      "entry_price": 142.20360166292204,
+      "exit_price": 142.3004888598186,
+      "hold_days": 2,
+      "pnl_pct": 0.0681,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-11-08",
+      "exit_date": "2013-11-11",
+      "entry_price": 141.2745382954414,
+      "exit_price": 143.09218251607146,
+      "hold_days": 1,
+      "pnl_pct": 1.2866,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-12-06",
+      "exit_date": "2013-12-09",
+      "entry_price": 145.96022811177562,
+      "exit_price": 146.60656079113545,
+      "hold_days": 1,
+      "pnl_pct": 0.4428,
+      "win": 1
+    },
+    {
+      "entry_date": "2013-12-11",
+      "exit_date": "2013-12-18",
+      "entry_price": 146.08141648423324,
+      "exit_price": 144.5464293169058,
+      "hold_days": 5,
+      "pnl_pct": -1.0508,
+      "win": 0
+    },
+    {
+      "entry_date": "2014-01-07",
+      "exit_date": "2014-01-13",
+      "entry_price": 148.71835651673857,
+      "exit_price": 149.18951240239576,
+      "hold_days": 4,
+      "pnl_pct": 0.3168,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-01-14",
+      "exit_date": "2014-01-15",
+      "entry_price": 148.06854817166,
+      "exit_price": 149.53872266746006,
+      "hold_days": 1,
+      "pnl_pct": 0.9929,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-01-27",
+      "exit_date": "2014-01-29",
+      "entry_price": 145.44489548747322,
+      "exit_price": 144.24269604051906,
+      "hold_days": 2,
+      "pnl_pct": -0.8266,
+      "win": 0
+    },
+    {
+      "entry_date": "2014-02-04",
+      "exit_date": "2014-02-07",
+      "entry_price": 142.1064363839021,
+      "exit_price": 144.83569691925305,
+      "hold_days": 3,
+      "pnl_pct": 1.9206,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-02-20",
+      "exit_date": "2014-02-27",
+      "entry_price": 148.86458762405798,
+      "exit_price": 149.92864904887574,
+      "hold_days": 5,
+      "pnl_pct": 0.7148,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-03-14",
+      "exit_date": "2014-03-19",
+      "entry_price": 150.14792439631572,
+      "exit_price": 152.4466389957693,
+      "hold_days": 3,
+      "pnl_pct": 1.531,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-03-24",
+      "exit_date": "2014-03-31",
+      "entry_price": 152.43417069732124,
+      "exit_price": 152.29548856082428,
+      "hold_days": 5,
+      "pnl_pct": -0.091,
+      "win": 0
+    },
+    {
+      "entry_date": "2014-04-07",
+      "exit_date": "2014-04-09",
+      "entry_price": 151.70801058058916,
+      "exit_price": 151.4225534722548,
+      "hold_days": 2,
+      "pnl_pct": -0.1882,
+      "win": 0
+    },
+    {
+      "entry_date": "2014-04-11",
+      "exit_date": "2014-04-16",
+      "entry_price": 148.5996701842255,
+      "exit_price": 151.31645276886337,
+      "hold_days": 3,
+      "pnl_pct": 1.8283,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-05-07",
+      "exit_date": "2014-05-08",
+      "entry_price": 152.89924709376828,
+      "exit_price": 153.14393286950093,
+      "hold_days": 1,
+      "pnl_pct": 0.16,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-06-25",
+      "exit_date": "2014-06-26",
+      "entry_price": 159.2718589488944,
+      "exit_price": 160.35391210383145,
+      "hold_days": 1,
+      "pnl_pct": 0.6794,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-07-18",
+      "exit_date": "2014-07-21",
+      "entry_price": 160.96054549147752,
+      "exit_price": 161.5672453280435,
+      "hold_days": 1,
+      "pnl_pct": 0.3769,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-07-30",
+      "exit_date": "2014-08-05",
+      "entry_price": 162.02621440800695,
+      "exit_price": 158.29633798279252,
+      "hold_days": 4,
+      "pnl_pct": -2.302,
+      "win": 0
+    },
+    {
+      "entry_date": "2014-08-08",
+      "exit_date": "2014-08-11",
+      "entry_price": 156.95190915610848,
+      "exit_price": 159.0095059805407,
+      "hold_days": 1,
+      "pnl_pct": 1.311,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-08-12",
+      "exit_date": "2014-08-15",
+      "entry_price": 158.71435575125793,
+      "exit_price": 161.05897560882212,
+      "hold_days": 3,
+      "pnl_pct": 1.4773,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-08-27",
+      "exit_date": "2014-08-29",
+      "entry_price": 164.30517470108325,
+      "exit_price": 164.32156726050255,
+      "hold_days": 2,
+      "pnl_pct": 0.01,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-09-24",
+      "exit_date": "2014-09-25",
+      "entry_price": 163.10480583374672,
+      "exit_price": 163.92843236805624,
+      "hold_days": 1,
+      "pnl_pct": 0.505,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-09-26",
+      "exit_date": "2014-09-30",
+      "entry_price": 162.0012052903277,
+      "exit_price": 162.81654730076258,
+      "hold_days": 2,
+      "pnl_pct": 0.5033,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-10-02",
+      "exit_date": "2014-10-09",
+      "entry_price": 159.92569450619212,
+      "exit_price": 161.69652761135188,
+      "hold_days": 5,
+      "pnl_pct": 1.1073,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-10-10",
+      "exit_date": "2014-10-17",
+      "entry_price": 158.69857860206253,
+      "exit_price": 155.18187068795575,
+      "hold_days": 5,
+      "pnl_pct": -2.216,
+      "win": 0
+    },
+    {
+      "entry_date": "2014-10-23",
+      "exit_date": "2014-10-27",
+      "entry_price": 160.2881596838315,
+      "exit_price": 161.20233545533773,
+      "hold_days": 2,
+      "pnl_pct": 0.5703,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-12-11",
+      "exit_date": "2014-12-18",
+      "entry_price": 167.91462458509903,
+      "exit_price": 168.6228955164108,
+      "hold_days": 5,
+      "pnl_pct": 0.4218,
+      "win": 1
+    },
+    {
+      "entry_date": "2014-12-26",
+      "exit_date": "2015-01-05",
+      "entry_price": 172.51002867949322,
+      "exit_price": 169.08157077807908,
+      "hold_days": 5,
+      "pnl_pct": -1.9874,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-01-06",
+      "exit_date": "2015-01-09",
+      "entry_price": 167.3589967812379,
+      "exit_price": 170.92834095694033,
+      "hold_days": 3,
+      "pnl_pct": 2.1327,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-01-16",
+      "exit_date": "2015-01-20",
+      "entry_price": 164.60961945005315,
+      "exit_price": 167.61571710165006,
+      "hold_days": 1,
+      "pnl_pct": 1.8262,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-01-26",
+      "exit_date": "2015-01-27",
+      "entry_price": 169.5287243661273,
+      "exit_price": 168.0878077907268,
+      "hold_days": 1,
+      "pnl_pct": -0.85,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-01-29",
+      "exit_date": "2015-01-30",
+      "entry_price": 165.9428918715796,
+      "exit_price": 166.10028674764584,
+      "hold_days": 1,
+      "pnl_pct": 0.0948,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-02-02",
+      "exit_date": "2015-02-03",
+      "entry_price": 165.66961155632973,
+      "exit_price": 168.11266728315633,
+      "hold_days": 1,
+      "pnl_pct": 1.4747,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-03-02",
+      "exit_date": "2015-03-03",
+      "entry_price": 174.55560652086209,
+      "exit_price": 175.1270126646053,
+      "hold_days": 1,
+      "pnl_pct": 0.3273,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-03-09",
+      "exit_date": "2015-03-13",
+      "entry_price": 172.03800928010043,
+      "exit_price": 171.2347075656587,
+      "hold_days": 4,
+      "pnl_pct": -0.4669,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-03-24",
+      "exit_date": "2015-03-30",
+      "entry_price": 174.56110680667695,
+      "exit_price": 172.1737718668186,
+      "hold_days": 4,
+      "pnl_pct": -1.3676,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-04-01",
+      "exit_date": "2015-04-07",
+      "entry_price": 171.6829941309399,
+      "exit_price": 172.90577669260682,
+      "hold_days": 3,
+      "pnl_pct": 0.7122,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-04-08",
+      "exit_date": "2015-04-10",
+      "entry_price": 172.64791585986887,
+      "exit_price": 174.02042145731085,
+      "hold_days": 2,
+      "pnl_pct": 0.795,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-04-14",
+      "exit_date": "2015-04-15",
+      "entry_price": 173.72931260025123,
+      "exit_price": 174.72745898397835,
+      "hold_days": 1,
+      "pnl_pct": 0.5745,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-04-28",
+      "exit_date": "2015-04-29",
+      "entry_price": 175.3014595076419,
+      "exit_price": 174.99364127570007,
+      "hold_days": 1,
+      "pnl_pct": -0.1756,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-05-06",
+      "exit_date": "2015-05-13",
+      "entry_price": 174.31992371713588,
+      "exit_price": 175.07688485791567,
+      "hold_days": 5,
+      "pnl_pct": 0.4342,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-05-14",
+      "exit_date": "2015-05-15",
+      "entry_price": 175.71737799269627,
+      "exit_price": 176.71559143066406,
+      "hold_days": 1,
+      "pnl_pct": 0.5681,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-05-26",
+      "exit_date": "2015-05-28",
+      "entry_price": 176.68229454624878,
+      "exit_price": 176.6240348118037,
+      "hold_days": 2,
+      "pnl_pct": -0.033,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-06-01",
+      "exit_date": "2015-06-08",
+      "entry_price": 176.29968873706432,
+      "exit_price": 174.38644350417422,
+      "hold_days": 5,
+      "pnl_pct": -1.0852,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-06-09",
+      "exit_date": "2015-06-16",
+      "entry_price": 173.39659118652344,
+      "exit_price": 173.7958129477088,
+      "hold_days": 5,
+      "pnl_pct": 0.2302,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-06-25",
+      "exit_date": "2015-07-02",
+      "entry_price": 176.45507963075502,
+      "exit_price": 173.92234343145523,
+      "hold_days": 5,
+      "pnl_pct": -1.4353,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-07-09",
+      "exit_date": "2015-07-13",
+      "entry_price": 173.06138922156467,
+      "exit_price": 174.6913649093545,
+      "hold_days": 2,
+      "pnl_pct": 0.9418,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-07-27",
+      "exit_date": "2015-07-29",
+      "entry_price": 172.97776141377452,
+      "exit_price": 175.10094767161476,
+      "hold_days": 2,
+      "pnl_pct": 1.2274,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-08-21",
+      "exit_date": "2015-08-27",
+      "entry_price": 168.62282605901513,
+      "exit_price": 164.6858505688254,
+      "hold_days": 4,
+      "pnl_pct": -2.3348,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-09-04",
+      "exit_date": "2015-09-09",
+      "entry_price": 161.2002328982286,
+      "exit_price": 166.60837339724293,
+      "hold_days": 2,
+      "pnl_pct": 3.3549,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-09-10",
+      "exit_date": "2015-09-14",
+      "entry_price": 162.62954276977638,
+      "exit_price": 164.62734674878465,
+      "hold_days": 2,
+      "pnl_pct": 1.2284,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-09-18",
+      "exit_date": "2015-09-25",
+      "entry_price": 164.4413530496671,
+      "exit_price": 163.54225885128184,
+      "hold_days": 5,
+      "pnl_pct": -0.5468,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-09-29",
+      "exit_date": "2015-10-01",
+      "entry_price": 158.19003749953106,
+      "exit_price": 161.39125928266085,
+      "hold_days": 2,
+      "pnl_pct": 2.0237,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-10-14",
+      "exit_date": "2015-10-16",
+      "entry_price": 168.19712927755262,
+      "exit_price": 170.42370831618695,
+      "hold_days": 2,
+      "pnl_pct": 1.3238,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-10-22",
+      "exit_date": "2015-10-23",
+      "entry_price": 170.54977767333122,
+      "exit_price": 174.13757825267706,
+      "hold_days": 1,
+      "pnl_pct": 2.1037,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-11-02",
+      "exit_date": "2015-11-03",
+      "entry_price": 175.03656523216836,
+      "exit_price": 176.42297110123278,
+      "hold_days": 1,
+      "pnl_pct": 0.7921,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-11-12",
+      "exit_date": "2015-11-17",
+      "entry_price": 173.5073939278004,
+      "exit_price": 173.07889073209276,
+      "hold_days": 3,
+      "pnl_pct": -0.247,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-12-01",
+      "exit_date": "2015-12-02",
+      "entry_price": 175.9776852937027,
+      "exit_price": 176.969165891774,
+      "hold_days": 1,
+      "pnl_pct": 0.5634,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-12-03",
+      "exit_date": "2015-12-07",
+      "entry_price": 175.46509145374574,
+      "exit_price": 175.80125253179295,
+      "hold_days": 2,
+      "pnl_pct": 0.1916,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-12-14",
+      "exit_date": "2015-12-15",
+      "entry_price": 169.78518000646062,
+      "exit_price": 171.99501575336515,
+      "hold_days": 1,
+      "pnl_pct": 1.3015,
+      "win": 1
+    },
+    {
+      "entry_date": "2015-12-18",
+      "exit_date": "2015-12-22",
+      "entry_price": 171.38726360206792,
+      "exit_price": 171.3450246180387,
+      "hold_days": 2,
+      "pnl_pct": -0.0246,
+      "win": 0
+    },
+    {
+      "entry_date": "2015-12-31",
+      "exit_date": "2016-01-05",
+      "entry_price": 173.3820759484194,
+      "exit_price": 170.22931438900892,
+      "hold_days": 2,
+      "pnl_pct": -1.8184,
+      "win": 0
+    },
+    {
+      "entry_date": "2016-01-08",
+      "exit_date": "2016-01-15",
+      "entry_price": 164.9804741804424,
+      "exit_price": 157.8636269070395,
+      "hold_days": 5,
+      "pnl_pct": -4.3138,
+      "win": 0
+    },
+    {
+      "entry_date": "2016-01-26",
+      "exit_date": "2016-01-27",
+      "entry_price": 159.25826297444084,
+      "exit_price": 160.23871884423306,
+      "hold_days": 1,
+      "pnl_pct": 0.6156,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-02-08",
+      "exit_date": "2016-02-16",
+      "entry_price": 157.01836981803837,
+      "exit_price": 159.55408289790063,
+      "hold_days": 5,
+      "pnl_pct": 1.6149,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-02-24",
+      "exit_date": "2016-02-25",
+      "entry_price": 161.12618197413295,
+      "exit_price": 163.74641133250677,
+      "hold_days": 1,
+      "pnl_pct": 1.6262,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-02-29",
+      "exit_date": "2016-03-02",
+      "entry_price": 164.91278514796258,
+      "exit_price": 167.13578995688582,
+      "hold_days": 2,
+      "pnl_pct": 1.348,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-03-09",
+      "exit_date": "2016-03-14",
+      "entry_price": 168.50507970117934,
+      "exit_price": 170.87178917388536,
+      "hold_days": 3,
+      "pnl_pct": 1.4045,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-03-24",
+      "exit_date": "2016-03-28",
+      "entry_price": 171.617052313188,
+      "exit_price": 172.98495254878787,
+      "hold_days": 1,
+      "pnl_pct": 0.7971,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-04-01",
+      "exit_date": "2016-04-04",
+      "entry_price": 173.613589689065,
+      "exit_price": 175.72062303336168,
+      "hold_days": 1,
+      "pnl_pct": 1.2136,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-04-06",
+      "exit_date": "2016-04-07",
+      "entry_price": 173.47770275458515,
+      "exit_price": 174.28481745221296,
+      "hold_days": 1,
+      "pnl_pct": 0.4653,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-04-12",
+      "exit_date": "2016-04-13",
+      "entry_price": 173.50316446745788,
+      "exit_price": 175.8650253736056,
+      "hold_days": 1,
+      "pnl_pct": 1.3613,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-04-29",
+      "exit_date": "2016-05-03",
+      "entry_price": 175.62717685365052,
+      "exit_price": 175.45721991339903,
+      "hold_days": 2,
+      "pnl_pct": -0.0968,
+      "win": 0
+    },
+    {
+      "entry_date": "2016-05-12",
+      "exit_date": "2016-05-19",
+      "entry_price": 176.1113770380545,
+      "exit_price": 173.36721827580124,
+      "hold_days": 5,
+      "pnl_pct": -1.5582,
+      "win": 0
+    },
+    {
+      "entry_date": "2016-06-14",
+      "exit_date": "2016-06-17",
+      "entry_price": 176.71458780328072,
+      "exit_price": 176.92480509140793,
+      "hold_days": 3,
+      "pnl_pct": 0.119,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-06-21",
+      "exit_date": "2016-06-24",
+      "entry_price": 177.88980833850454,
+      "exit_price": 173.90166613914232,
+      "hold_days": 3,
+      "pnl_pct": -2.2419,
+      "win": 0
+    },
+    {
+      "entry_date": "2016-06-27",
+      "exit_date": "2016-06-29",
+      "entry_price": 172.1593818753128,
+      "exit_price": 174.93494221304724,
+      "hold_days": 2,
+      "pnl_pct": 1.6122,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-08-17",
+      "exit_date": "2016-08-18",
+      "entry_price": 186.17367586661427,
+      "exit_price": 186.46402395322087,
+      "hold_days": 1,
+      "pnl_pct": 0.156,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-08-24",
+      "exit_date": "2016-08-31",
+      "entry_price": 186.85691334206635,
+      "exit_price": 185.8405984014118,
+      "hold_days": 5,
+      "pnl_pct": -0.5439,
+      "win": 0
+    },
+    {
+      "entry_date": "2016-09-12",
+      "exit_date": "2016-09-13",
+      "entry_price": 181.38271431036313,
+      "exit_price": 183.4750047502392,
+      "hold_days": 1,
+      "pnl_pct": 1.1535,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-09-21",
+      "exit_date": "2016-09-22",
+      "entry_price": 183.88683120645484,
+      "exit_price": 186.25575622696041,
+      "hold_days": 1,
+      "pnl_pct": 1.2883,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-09-26",
+      "exit_date": "2016-09-28",
+      "entry_price": 184.55631536636452,
+      "exit_price": 185.25158459916122,
+      "hold_days": 2,
+      "pnl_pct": 0.3767,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-10-17",
+      "exit_date": "2016-10-24",
+      "entry_price": 182.8997605452408,
+      "exit_price": 184.53917910143065,
+      "hold_days": 5,
+      "pnl_pct": 0.8963,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-10-26",
+      "exit_date": "2016-11-02",
+      "entry_price": 183.00282358133228,
+      "exit_price": 180.80543095021665,
+      "hold_days": 5,
+      "pnl_pct": -1.2007,
+      "win": 0
+    },
+    {
+      "entry_date": "2016-11-04",
+      "exit_date": "2016-11-08",
+      "entry_price": 179.31195648407876,
+      "exit_price": 182.55639262330328,
+      "hold_days": 2,
+      "pnl_pct": 1.8094,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-11-29",
+      "exit_date": "2016-12-06",
+      "entry_price": 189.27705629439058,
+      "exit_price": 189.87791102034856,
+      "hold_days": 5,
+      "pnl_pct": 0.3174,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-12-15",
+      "exit_date": "2016-12-22",
+      "entry_price": 194.11799956689399,
+      "exit_price": 194.77872047125206,
+      "hold_days": 5,
+      "pnl_pct": 0.3404,
+      "win": 1
+    },
+    {
+      "entry_date": "2016-12-29",
+      "exit_date": "2016-12-30",
+      "entry_price": 193.8117086894327,
+      "exit_price": 192.99142456054688,
+      "hold_days": 1,
+      "pnl_pct": -0.4232,
+      "win": 0,
+      "open_at_end": true
+    }
+  ],
+  "oos_trades": [
+    {
+      "entry_date": "2017-01-10",
+      "exit_date": "2017-01-12",
+      "entry_price": 195.53842206594092,
+      "exit_price": 195.55576466721047,
+      "hold_days": 2,
+      "pnl_pct": 0.0089,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-03-03",
+      "exit_date": "2017-03-10",
+      "entry_price": 205.6313990674059,
+      "exit_price": 205.45869499173256,
+      "hold_days": 5,
+      "pnl_pct": -0.084,
+      "win": 0
+    },
+    {
+      "entry_date": "2017-03-20",
+      "exit_date": "2017-03-27",
+      "entry_price": 205.53740145185947,
+      "exit_price": 201.115011690091,
+      "hold_days": 5,
+      "pnl_pct": -2.1516,
+      "win": 0
+    },
+    {
+      "entry_date": "2017-04-03",
+      "exit_date": "2017-04-05",
+      "entry_price": 204.47086407829386,
+      "exit_price": 204.8697080740373,
+      "hold_days": 2,
+      "pnl_pct": 0.1951,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-04-06",
+      "exit_date": "2017-04-12",
+      "entry_price": 203.72509255115142,
+      "exit_price": 203.55172344427427,
+      "hold_days": 4,
+      "pnl_pct": -0.0851,
+      "win": 0
+    },
+    {
+      "entry_date": "2017-04-17",
+      "exit_date": "2017-04-18",
+      "entry_price": 202.1381802716339,
+      "exit_price": 202.66720650587894,
+      "hold_days": 1,
+      "pnl_pct": 0.2617,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-04-20",
+      "exit_date": "2017-04-25",
+      "entry_price": 203.04003523197187,
+      "exit_price": 206.30048655645427,
+      "hold_days": 3,
+      "pnl_pct": 1.6058,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-04-27",
+      "exit_date": "2017-05-04",
+      "entry_price": 207.04621534919443,
+      "exit_price": 207.0982577994396,
+      "hold_days": 5,
+      "pnl_pct": 0.0251,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-05-18",
+      "exit_date": "2017-05-25",
+      "entry_price": 204.4101211476201,
+      "exit_price": 209.15339780863192,
+      "hold_days": 5,
+      "pnl_pct": 2.3205,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-06-07",
+      "exit_date": "2017-06-13",
+      "entry_price": 211.23448820149852,
+      "exit_price": 211.56405995993757,
+      "hold_days": 4,
+      "pnl_pct": 0.156,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-06-21",
+      "exit_date": "2017-06-28",
+      "entry_price": 212.14263180401596,
+      "exit_price": 211.30610569003233,
+      "hold_days": 5,
+      "pnl_pct": -0.3943,
+      "win": 0
+    },
+    {
+      "entry_date": "2017-07-03",
+      "exit_date": "2017-07-06",
+      "entry_price": 211.63723424751635,
+      "exit_price": 210.77452926181044,
+      "hold_days": 2,
+      "pnl_pct": -0.4076,
+      "win": 0
+    },
+    {
+      "entry_date": "2017-07-07",
+      "exit_date": "2017-07-10",
+      "entry_price": 210.18202412838315,
+      "exit_price": 210.96622937527616,
+      "hold_days": 1,
+      "pnl_pct": 0.3731,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-08-11",
+      "exit_date": "2017-08-18",
+      "entry_price": 212.6305533368164,
+      "exit_price": 211.65465348444366,
+      "hold_days": 5,
+      "pnl_pct": -0.459,
+      "win": 0
+    },
+    {
+      "entry_date": "2017-08-25",
+      "exit_date": "2017-08-30",
+      "entry_price": 213.39738103994065,
+      "exit_price": 213.3363887339727,
+      "hold_days": 3,
+      "pnl_pct": -0.0286,
+      "win": 0
+    },
+    {
+      "entry_date": "2017-10-24",
+      "exit_date": "2017-10-30",
+      "entry_price": 224.70199674286374,
+      "exit_price": 224.5881819289029,
+      "hold_days": 4,
+      "pnl_pct": -0.0507,
+      "win": 0
+    },
+    {
+      "entry_date": "2017-11-20",
+      "exit_date": "2017-11-22",
+      "entry_price": 226.0505717221622,
+      "exit_price": 227.67934950661527,
+      "hold_days": 2,
+      "pnl_pct": 0.7205,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-12-05",
+      "exit_date": "2017-12-11",
+      "entry_price": 230.47280883789062,
+      "exit_price": 233.20498657226562,
+      "hold_days": 4,
+      "pnl_pct": 1.1855,
+      "win": 1
+    },
+    {
+      "entry_date": "2017-12-14",
+      "exit_date": "2017-12-21",
+      "entry_price": 233.88798745715712,
+      "exit_price": 235.65555446583778,
+      "hold_days": 5,
+      "pnl_pct": 0.7557,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-01-02",
+      "exit_date": "2018-01-03",
+      "entry_price": 235.74358610597346,
+      "exit_price": 236.72941257737043,
+      "hold_days": 1,
+      "pnl_pct": 0.4182,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-01-30",
+      "exit_date": "2018-02-06",
+      "entry_price": 248.73497236772113,
+      "exit_price": 228.7902729165111,
+      "hold_days": 5,
+      "pnl_pct": -8.0185,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-02-08",
+      "exit_date": "2018-02-12",
+      "entry_price": 235.89318792389273,
+      "exit_price": 232.21409312002078,
+      "hold_days": 2,
+      "pnl_pct": -1.5596,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-02-22",
+      "exit_date": "2018-02-26",
+      "entry_price": 238.6129835706596,
+      "exit_price": 242.86418600441795,
+      "hold_days": 2,
+      "pnl_pct": 1.7816,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-02-28",
+      "exit_date": "2018-03-05",
+      "entry_price": 242.64414414191137,
+      "exit_price": 235.6467947883253,
+      "hold_days": 3,
+      "pnl_pct": -2.8838,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-03-14",
+      "exit_date": "2018-03-21",
+      "entry_price": 244.5188714747904,
+      "exit_price": 239.39194422523158,
+      "hold_days": 5,
+      "pnl_pct": -2.0967,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-03-22",
+      "exit_date": "2018-03-27",
+      "entry_price": 236.74964866306775,
+      "exit_price": 235.21206754040583,
+      "hold_days": 3,
+      "pnl_pct": -0.6495,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-04-12",
+      "exit_date": "2018-04-19",
+      "entry_price": 234.40783544147104,
+      "exit_price": 238.28720246831307,
+      "hold_days": 5,
+      "pnl_pct": 1.655,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-05-01",
+      "exit_date": "2018-05-02",
+      "entry_price": 233.17950476361585,
+      "exit_price": 233.96604976962223,
+      "hold_days": 1,
+      "pnl_pct": 0.3373,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-05-03",
+      "exit_date": "2018-05-04",
+      "entry_price": 231.7567896085878,
+      "exit_price": 231.1028283116458,
+      "hold_days": 1,
+      "pnl_pct": -0.2822,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-05-23",
+      "exit_date": "2018-05-24",
+      "entry_price": 239.63049171237495,
+      "exit_price": 241.16806657189602,
+      "hold_days": 1,
+      "pnl_pct": 0.6416,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-06-14",
+      "exit_date": "2018-06-18",
+      "entry_price": 246.55863540507366,
+      "exit_price": 244.54118038098923,
+      "hold_days": 2,
+      "pnl_pct": -0.8182,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-06-25",
+      "exit_date": "2018-07-02",
+      "entry_price": 242.72150867695257,
+      "exit_price": 239.23299268750813,
+      "hold_days": 5,
+      "pnl_pct": -1.4373,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-07-05",
+      "exit_date": "2018-07-06",
+      "entry_price": 241.59418373643135,
+      "exit_price": 242.45532447169143,
+      "hold_days": 1,
+      "pnl_pct": 0.3564,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-07-23",
+      "exit_date": "2018-07-24",
+      "entry_price": 248.05633212913037,
+      "exit_price": 250.13340147989928,
+      "hold_days": 1,
+      "pnl_pct": 0.8373,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-08-10",
+      "exit_date": "2018-08-15",
+      "entry_price": 251.60688541151606,
+      "exit_price": 250.6572194899151,
+      "hold_days": 3,
+      "pnl_pct": -0.3774,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-09-11",
+      "exit_date": "2018-09-12",
+      "entry_price": 255.08655922474992,
+      "exit_price": 256.5866962429352,
+      "hold_days": 1,
+      "pnl_pct": 0.5881,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-09-18",
+      "exit_date": "2018-09-21",
+      "entry_price": 257.04837133519743,
+      "exit_price": 261.3415677622902,
+      "hold_days": 3,
+      "pnl_pct": 1.6702,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-09-24",
+      "exit_date": "2018-10-01",
+      "entry_price": 259.7812233520926,
+      "exit_price": 260.4679039507607,
+      "hold_days": 5,
+      "pnl_pct": 0.2643,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-10-11",
+      "exit_date": "2018-10-17",
+      "entry_price": 247.0660251943881,
+      "exit_price": 250.06201262855035,
+      "hold_days": 4,
+      "pnl_pct": 1.2126,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-10-25",
+      "exit_date": "2018-10-31",
+      "entry_price": 238.4167363242791,
+      "exit_price": 241.3324447206018,
+      "hold_days": 4,
+      "pnl_pct": 1.2229,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-11-01",
+      "exit_date": "2018-11-02",
+      "entry_price": 242.17955305340146,
+      "exit_price": 244.9883093263752,
+      "hold_days": 1,
+      "pnl_pct": 1.1598,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-11-13",
+      "exit_date": "2018-11-16",
+      "entry_price": 243.50813288464084,
+      "exit_price": 242.3490465910176,
+      "hold_days": 3,
+      "pnl_pct": -0.476,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-11-20",
+      "exit_date": "2018-11-27",
+      "entry_price": 236.61545191890372,
+      "exit_price": 237.48931889071778,
+      "hold_days": 4,
+      "pnl_pct": 0.3693,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-12-06",
+      "exit_date": "2018-12-07",
+      "entry_price": 237.1148392029293,
+      "exit_price": 240.27140589901015,
+      "hold_days": 1,
+      "pnl_pct": 1.3312,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-12-10",
+      "exit_date": "2018-12-11",
+      "entry_price": 234.84100980401226,
+      "exit_price": 238.6663422202357,
+      "hold_days": 1,
+      "pnl_pct": 1.6289,
+      "win": 1
+    },
+    {
+      "entry_date": "2018-12-13",
+      "exit_date": "2018-12-20",
+      "entry_price": 237.6498437028021,
+      "exit_price": 222.79450353410618,
+      "hold_days": 5,
+      "pnl_pct": -6.2509,
+      "win": 0
+    },
+    {
+      "entry_date": "2018-12-24",
+      "exit_date": "2018-12-27",
+      "entry_price": 214.39122646068466,
+      "exit_price": 217.55724826813972,
+      "hold_days": 2,
+      "pnl_pct": 1.4767,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-01-04",
+      "exit_date": "2019-01-07",
+      "entry_price": 222.05962162643488,
+      "exit_price": 226.63375331616336,
+      "hold_days": 1,
+      "pnl_pct": 2.0599,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-02-26",
+      "exit_date": "2019-02-28",
+      "entry_price": 250.34727476000455,
+      "exit_price": 250.19495902945238,
+      "hold_days": 2,
+      "pnl_pct": -0.0608,
+      "win": 0
+    },
+    {
+      "entry_date": "2019-03-07",
+      "exit_date": "2019-03-11",
+      "entry_price": 248.2844846321337,
+      "exit_price": 246.87645973005192,
+      "hold_days": 2,
+      "pnl_pct": -0.5671,
+      "win": 0
+    },
+    {
+      "entry_date": "2019-03-25",
+      "exit_date": "2019-04-01",
+      "entry_price": 251.21581875244794,
+      "exit_price": 256.4677058809414,
+      "hold_days": 5,
+      "pnl_pct": 2.0906,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-04-18",
+      "exit_date": "2019-04-22",
+      "entry_price": 261.33221402417837,
+      "exit_price": 260.49445510855935,
+      "hold_days": 1,
+      "pnl_pct": -0.3206,
+      "win": 0
+    },
+    {
+      "entry_date": "2019-04-25",
+      "exit_date": "2019-04-29",
+      "entry_price": 263.151932239352,
+      "exit_price": 264.4040756501018,
+      "hold_days": 2,
+      "pnl_pct": 0.4758,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-05-02",
+      "exit_date": "2019-05-06",
+      "entry_price": 262.75559336209204,
+      "exit_price": 260.5664233591096,
+      "hold_days": 2,
+      "pnl_pct": -0.8332,
+      "win": 0
+    },
+    {
+      "entry_date": "2019-05-29",
+      "exit_date": "2019-06-05",
+      "entry_price": 251.25194750081982,
+      "exit_price": 254.33273809572097,
+      "hold_days": 5,
+      "pnl_pct": 1.2262,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-06-11",
+      "exit_date": "2019-06-18",
+      "entry_price": 262.1339625158368,
+      "exit_price": 262.49435005792014,
+      "hold_days": 5,
+      "pnl_pct": 0.1375,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-06-24",
+      "exit_date": "2019-07-01",
+      "entry_price": 266.3417218465642,
+      "exit_price": 268.55960231230983,
+      "hold_days": 5,
+      "pnl_pct": 0.8327,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-07-18",
+      "exit_date": "2019-07-19",
+      "entry_price": 269.02119714332446,
+      "exit_price": 271.6010788909573,
+      "hold_days": 1,
+      "pnl_pct": 0.959,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-07-22",
+      "exit_date": "2019-07-24",
+      "entry_price": 269.401450445639,
+      "exit_price": 270.83167149437855,
+      "hold_days": 2,
+      "pnl_pct": 0.5309,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-08-02",
+      "exit_date": "2019-08-07",
+      "entry_price": 265.9978254506385,
+      "exit_price": 257.4435115429368,
+      "hold_days": 3,
+      "pnl_pct": -3.2159,
+      "win": 0
+    },
+    {
+      "entry_date": "2019-08-15",
+      "exit_date": "2019-08-19",
+      "entry_price": 257.87800948700215,
+      "exit_price": 264.4952017841978,
+      "hold_days": 2,
+      "pnl_pct": 2.566,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-08-21",
+      "exit_date": "2019-08-27",
+      "entry_price": 264.7575936082407,
+      "exit_price": 262.096260273788,
+      "hold_days": 4,
+      "pnl_pct": -1.0052,
+      "win": 0
+    },
+    {
+      "entry_date": "2019-09-20",
+      "exit_date": "2019-09-26",
+      "entry_price": 273.1463852597346,
+      "exit_price": 270.6637446747886,
+      "hold_days": 4,
+      "pnl_pct": -0.9089,
+      "win": 0
+    },
+    {
+      "entry_date": "2019-10-02",
+      "exit_date": "2019-10-04",
+      "entry_price": 265.0891114666045,
+      "exit_price": 264.7616621869322,
+      "hold_days": 2,
+      "pnl_pct": -0.1235,
+      "win": 0
+    },
+    {
+      "entry_date": "2019-10-08",
+      "exit_date": "2019-10-15",
+      "entry_price": 264.6707162327089,
+      "exit_price": 270.18159946292667,
+      "hold_days": 5,
+      "pnl_pct": 2.0822,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-10-23",
+      "exit_date": "2019-10-24",
+      "entry_price": 271.664068797207,
+      "exit_price": 273.64656905775985,
+      "hold_days": 1,
+      "pnl_pct": 0.7298,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-12-03",
+      "exit_date": "2019-12-04",
+      "entry_price": 280.68533256414935,
+      "exit_price": 282.5495390662209,
+      "hold_days": 1,
+      "pnl_pct": 0.6642,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-12-10",
+      "exit_date": "2019-12-17",
+      "entry_price": 285.3867795968124,
+      "exit_price": 290.9341084994999,
+      "hold_days": 5,
+      "pnl_pct": 1.9438,
+      "win": 1
+    },
+    {
+      "entry_date": "2019-12-18",
+      "exit_date": "2019-12-20",
+      "entry_price": 291.0068891101069,
+      "exit_price": 292.857943759728,
+      "hold_days": 2,
+      "pnl_pct": 0.6361,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-01-23",
+      "exit_date": "2020-01-24",
+      "entry_price": 302.1520504997015,
+      "exit_price": 303.80617720247466,
+      "hold_days": 1,
+      "pnl_pct": 0.5474,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-01-30",
+      "exit_date": "2020-01-31",
+      "entry_price": 296.42212914324796,
+      "exit_price": 298.8347496867189,
+      "hold_days": 1,
+      "pnl_pct": 0.8139,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-02-03",
+      "exit_date": "2020-02-06",
+      "entry_price": 295.49906033977834,
+      "exit_price": 305.14955406449695,
+      "hold_days": 3,
+      "pnl_pct": 3.2658,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-02-25",
+      "exit_date": "2020-03-02",
+      "entry_price": 296.0382446469935,
+      "exit_price": 272.5244912250123,
+      "hold_days": 4,
+      "pnl_pct": -7.9428,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-03-04",
+      "exit_date": "2020-03-05",
+      "entry_price": 279.7532286727096,
+      "exit_price": 278.7114427448358,
+      "hold_days": 1,
+      "pnl_pct": -0.3724,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-03-10",
+      "exit_date": "2020-03-11",
+      "entry_price": 260.12333967774066,
+      "exit_price": 256.5226281848996,
+      "hold_days": 1,
+      "pnl_pct": -1.3842,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-03-13",
+      "exit_date": "2020-03-16",
+      "entry_price": 240.42941305337604,
+      "exit_price": 220.40659381646842,
+      "hold_days": 1,
+      "pnl_pct": -8.3279,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-03-17",
+      "exit_date": "2020-03-18",
+      "entry_price": 223.93413457519435,
+      "exit_price": 215.9012131690979,
+      "hold_days": 1,
+      "pnl_pct": -3.5872,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-03-23",
+      "exit_date": "2020-03-25",
+      "entry_price": 209.76168442600684,
+      "exit_price": 225.0946467428511,
+      "hold_days": 2,
+      "pnl_pct": 7.3097,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-04-02",
+      "exit_date": "2020-04-03",
+      "entry_price": 225.38883620204277,
+      "exit_price": 230.50895788891833,
+      "hold_days": 1,
+      "pnl_pct": 2.2717,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-04-08",
+      "exit_date": "2020-04-09",
+      "entry_price": 246.3199769013974,
+      "exit_price": 255.16297227897329,
+      "hold_days": 1,
+      "pnl_pct": 3.59,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-04-21",
+      "exit_date": "2020-04-27",
+      "entry_price": 254.38168814110765,
+      "exit_price": 262.09412629154366,
+      "hold_days": 4,
+      "pnl_pct": 3.0318,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-04-29",
+      "exit_date": "2020-05-05",
+      "entry_price": 267.98647324976343,
+      "exit_price": 263.4913676039255,
+      "hold_days": 4,
+      "pnl_pct": -1.6774,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-05-07",
+      "exit_date": "2020-05-11",
+      "entry_price": 264.51171080796263,
+      "exit_price": 266.89254797828886,
+      "hold_days": 2,
+      "pnl_pct": 0.9001,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-05-13",
+      "exit_date": "2020-05-15",
+      "entry_price": 262.9581454558485,
+      "exit_price": 259.5662538142252,
+      "hold_days": 2,
+      "pnl_pct": -1.2899,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-05-20",
+      "exit_date": "2020-05-26",
+      "entry_price": 271.9299425834225,
+      "exit_price": 277.54654029417327,
+      "hold_days": 3,
+      "pnl_pct": 2.0655,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-05-29",
+      "exit_date": "2020-06-01",
+      "entry_price": 278.03375713092686,
+      "exit_price": 279.100077323199,
+      "hold_days": 1,
+      "pnl_pct": 0.3835,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-06-11",
+      "exit_date": "2020-06-16",
+      "entry_price": 286.306935800571,
+      "exit_price": 290.00223585408537,
+      "hold_days": 3,
+      "pnl_pct": 1.2907,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-06-24",
+      "exit_date": "2020-06-26",
+      "entry_price": 286.0711358531049,
+      "exit_price": 282.67343082724625,
+      "hold_days": 2,
+      "pnl_pct": -1.1877,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-06-29",
+      "exit_date": "2020-06-30",
+      "entry_price": 278.28780803699664,
+      "exit_price": 280.66983265552534,
+      "hold_days": 1,
+      "pnl_pct": 0.856,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-07-06",
+      "exit_date": "2020-07-09",
+      "entry_price": 292.10019917073765,
+      "exit_price": 292.534094306912,
+      "hold_days": 3,
+      "pnl_pct": 0.1485,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-07-14",
+      "exit_date": "2020-07-15",
+      "entry_price": 289.2656652398442,
+      "exit_price": 297.6768282673625,
+      "hold_days": 1,
+      "pnl_pct": 2.9078,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-07-29",
+      "exit_date": "2020-07-30",
+      "entry_price": 297.4090950917843,
+      "exit_price": 297.2059723944225,
+      "hold_days": 1,
+      "pnl_pct": -0.0683,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-08-12",
+      "exit_date": "2020-08-19",
+      "entry_price": 309.70722946844614,
+      "exit_price": 313.0403457388199,
+      "hold_days": 5,
+      "pnl_pct": 1.0762,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-09-01",
+      "exit_date": "2020-09-02",
+      "entry_price": 323.34417391191676,
+      "exit_price": 327.46208615275333,
+      "hold_days": 1,
+      "pnl_pct": 1.2735,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-09-09",
+      "exit_date": "2020-09-16",
+      "entry_price": 311.6553299341424,
+      "exit_price": 315.3116463788061,
+      "hold_days": 5,
+      "pnl_pct": 1.1732,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-09-17",
+      "exit_date": "2020-09-22",
+      "entry_price": 307.9714762809404,
+      "exit_price": 304.5785896576303,
+      "hold_days": 3,
+      "pnl_pct": -1.1017,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-09-24",
+      "exit_date": "2020-09-28",
+      "entry_price": 297.7652958983576,
+      "exit_price": 308.8890949296322,
+      "hold_days": 2,
+      "pnl_pct": 3.7358,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-10-07",
+      "exit_date": "2020-10-09",
+      "entry_price": 313.43129285943087,
+      "exit_price": 320.32811028649445,
+      "hold_days": 2,
+      "pnl_pct": 2.2004,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-10-15",
+      "exit_date": "2020-10-16",
+      "entry_price": 318.61322292977366,
+      "exit_price": 323.4798383039487,
+      "hold_days": 1,
+      "pnl_pct": 1.5274,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-10-19",
+      "exit_date": "2020-10-23",
+      "entry_price": 323.19250376305786,
+      "exit_price": 320.6710851896819,
+      "hold_days": 4,
+      "pnl_pct": -0.7802,
+      "win": 0
+    },
+    {
+      "entry_date": "2020-10-28",
+      "exit_date": "2020-11-04",
+      "entry_price": 307.8508304573768,
+      "exit_price": 315.97126216053266,
+      "hold_days": 5,
+      "pnl_pct": 2.6378,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-11-10",
+      "exit_date": "2020-11-16",
+      "entry_price": 327.6790464420353,
+      "exit_price": 334.6221097113151,
+      "hold_days": 4,
+      "pnl_pct": 2.1189,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-11-19",
+      "exit_date": "2020-11-20",
+      "entry_price": 329.63500754078495,
+      "exit_price": 331.39617710485027,
+      "hold_days": 1,
+      "pnl_pct": 0.5343,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-11-23",
+      "exit_date": "2020-11-25",
+      "entry_price": 331.1923113139346,
+      "exit_price": 336.61515677967736,
+      "hold_days": 2,
+      "pnl_pct": 1.6374,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-12-10",
+      "exit_date": "2020-12-14",
+      "entry_price": 338.6915901201066,
+      "exit_price": 341.7228170082681,
+      "hold_days": 2,
+      "pnl_pct": 0.895,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-12-15",
+      "exit_date": "2020-12-16",
+      "entry_price": 340.5733606765333,
+      "exit_price": 342.81666375897925,
+      "hold_days": 1,
+      "pnl_pct": 0.6587,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-12-24",
+      "exit_date": "2020-12-28",
+      "entry_price": 342.65811576810853,
+      "exit_price": 346.06534457269254,
+      "hold_days": 1,
+      "pnl_pct": 0.9944,
+      "win": 1
+    },
+    {
+      "entry_date": "2020-12-30",
+      "exit_date": "2021-01-07",
+      "entry_price": 346.62398934581523,
+      "exit_price": 350.1242211986964,
+      "hold_days": 5,
+      "pnl_pct": 1.0098,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-01-15",
+      "exit_date": "2021-01-25",
+      "entry_price": 350.70146508008384,
+      "exit_price": 357.1714012989788,
+      "hold_days": 5,
+      "pnl_pct": 1.8449,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-01-27",
+      "exit_date": "2021-02-02",
+      "entry_price": 353.95962605082,
+      "exit_price": 353.4290158638977,
+      "hold_days": 4,
+      "pnl_pct": -0.1499,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-02-22",
+      "exit_date": "2021-02-24",
+      "entry_price": 360.3272738044918,
+      "exit_price": 359.64763206401153,
+      "hold_days": 2,
+      "pnl_pct": -0.1886,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-02-26",
+      "exit_date": "2021-03-02",
+      "entry_price": 357.804410993549,
+      "exit_price": 362.8966935413863,
+      "hold_days": 2,
+      "pnl_pct": 1.4232,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-03-03",
+      "exit_date": "2021-03-08",
+      "entry_price": 359.1449892511198,
+      "exit_price": 358.09305771331407,
+      "hold_days": 3,
+      "pnl_pct": -0.2929,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-03-09",
+      "exit_date": "2021-03-15",
+      "entry_price": 359.200787117016,
+      "exit_price": 367.0952268783871,
+      "hold_days": 4,
+      "pnl_pct": 2.1978,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-03-19",
+      "exit_date": "2021-03-26",
+      "entry_price": 364.1412265877475,
+      "exit_price": 365.12205174013434,
+      "hold_days": 5,
+      "pnl_pct": 0.2694,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-04-15",
+      "exit_date": "2021-04-16",
+      "entry_price": 386.42604779835347,
+      "exit_price": 389.7044266833597,
+      "hold_days": 1,
+      "pnl_pct": 0.8484,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-05-11",
+      "exit_date": "2021-05-18",
+      "entry_price": 385.82834392591514,
+      "exit_price": 388.3501253478743,
+      "hold_days": 5,
+      "pnl_pct": 0.6536,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-05-19",
+      "exit_date": "2021-05-20",
+      "entry_price": 380.0564000490199,
+      "exit_price": 384.61426075481825,
+      "hold_days": 1,
+      "pnl_pct": 1.1993,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-05-24",
+      "exit_date": "2021-06-01",
+      "entry_price": 389.7884757512618,
+      "exit_price": 394.67323638964024,
+      "hold_days": 5,
+      "pnl_pct": 1.2532,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-06-02",
+      "exit_date": "2021-06-07",
+      "entry_price": 392.61842198763014,
+      "exit_price": 394.69185530536356,
+      "hold_days": 3,
+      "pnl_pct": 0.5281,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-06-10",
+      "exit_date": "2021-06-14",
+      "entry_price": 395.0373870494079,
+      "exit_price": 396.4104469975744,
+      "hold_days": 2,
+      "pnl_pct": 0.3476,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-06-21",
+      "exit_date": "2021-06-22",
+      "entry_price": 390.5577162541795,
+      "exit_price": 394.352740461739,
+      "hold_days": 1,
+      "pnl_pct": 0.9717,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-06-24",
+      "exit_date": "2021-06-29",
+      "entry_price": 398.1383434268328,
+      "exit_price": 400.9400223650543,
+      "hold_days": 3,
+      "pnl_pct": 0.7037,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-07-14",
+      "exit_date": "2021-07-21",
+      "entry_price": 409.8606803722424,
+      "exit_price": 405.1192467876088,
+      "hold_days": 5,
+      "pnl_pct": -1.1568,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-08-03",
+      "exit_date": "2021-08-04",
+      "entry_price": 410.8352364844253,
+      "exit_price": 412.0908364864167,
+      "hold_days": 1,
+      "pnl_pct": 0.3056,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-08-05",
+      "exit_date": "2021-08-06",
+      "entry_price": 412.5031195904007,
+      "exit_price": 414.26472732503214,
+      "hold_days": 1,
+      "pnl_pct": 0.4271,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-08-19",
+      "exit_date": "2021-08-23",
+      "entry_price": 408.8018064511608,
+      "exit_price": 417.13215804647064,
+      "hold_days": 2,
+      "pnl_pct": 2.0377,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-08-27",
+      "exit_date": "2021-08-30",
+      "entry_price": 418.9687063675384,
+      "exit_price": 422.5762498396636,
+      "hold_days": 1,
+      "pnl_pct": 0.8611,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-09-02",
+      "exit_date": "2021-09-10",
+      "entry_price": 424.77834425136786,
+      "exit_price": 422.64186111668704,
+      "hold_days": 5,
+      "pnl_pct": -0.503,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-09-13",
+      "exit_date": "2021-09-16",
+      "entry_price": 420.39303344599693,
+      "exit_price": 419.15611403582216,
+      "hold_days": 3,
+      "pnl_pct": -0.2942,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-09-20",
+      "exit_date": "2021-09-27",
+      "entry_price": 408.8048283528595,
+      "exit_price": 416.25933916263614,
+      "hold_days": 5,
+      "pnl_pct": 1.8235,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-09-29",
+      "exit_date": "2021-10-06",
+      "entry_price": 409.09622503378733,
+      "exit_price": 403.53117578451554,
+      "hold_days": 5,
+      "pnl_pct": -1.3603,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-10-08",
+      "exit_date": "2021-10-14",
+      "entry_price": 413.1289992900791,
+      "exit_price": 412.7529748558683,
+      "hold_days": 4,
+      "pnl_pct": -0.091,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-10-27",
+      "exit_date": "2021-10-29",
+      "entry_price": 429.0814956872959,
+      "exit_price": 428.53631168742606,
+      "hold_days": 2,
+      "pnl_pct": -0.1271,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-11-12",
+      "exit_date": "2021-11-15",
+      "entry_price": 437.23160434083906,
+      "exit_price": 440.54063749790726,
+      "hold_days": 1,
+      "pnl_pct": 0.7568,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-11-22",
+      "exit_date": "2021-11-24",
+      "entry_price": 442.65573171479053,
+      "exit_price": 438.1152611459688,
+      "hold_days": 2,
+      "pnl_pct": -1.0257,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-11-29",
+      "exit_date": "2021-12-03",
+      "entry_price": 436.24460804442816,
+      "exit_price": 431.6384796087184,
+      "hold_days": 4,
+      "pnl_pct": -1.0559,
+      "win": 0
+    },
+    {
+      "entry_date": "2021-12-10",
+      "exit_date": "2021-12-13",
+      "entry_price": 441.0951763940727,
+      "exit_price": 441.99763801115,
+      "hold_days": 1,
+      "pnl_pct": 0.2046,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-12-14",
+      "exit_date": "2021-12-16",
+      "entry_price": 435.3233478323497,
+      "exit_price": 444.23494635106454,
+      "hold_days": 2,
+      "pnl_pct": 2.0471,
+      "win": 1
+    },
+    {
+      "entry_date": "2021-12-31",
+      "exit_date": "2022-01-04",
+      "entry_price": 448.69175768390534,
+      "exit_price": 452.0689260726104,
+      "hold_days": 2,
+      "pnl_pct": 0.7527,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-01-06",
+      "exit_date": "2022-01-11",
+      "entry_price": 441.38079236108484,
+      "exit_price": 438.8715364116939,
+      "hold_days": 3,
+      "pnl_pct": -0.5685,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-01-14",
+      "exit_date": "2022-01-18",
+      "entry_price": 435.0604113490844,
+      "exit_price": 433.6926049827335,
+      "hold_days": 1,
+      "pnl_pct": -0.3144,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-01-20",
+      "exit_date": "2022-01-25",
+      "entry_price": 428.04193941787696,
+      "exit_price": 408.52416133637433,
+      "hold_days": 3,
+      "pnl_pct": -4.5598,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-01-28",
+      "exit_date": "2022-01-31",
+      "entry_price": 408.16568303658295,
+      "exit_price": 416.2406973417306,
+      "hold_days": 1,
+      "pnl_pct": 1.9784,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-02-04",
+      "exit_date": "2022-02-09",
+      "entry_price": 421.0612140470099,
+      "exit_price": 429.4286550758493,
+      "hold_days": 3,
+      "pnl_pct": 1.9872,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-02-14",
+      "exit_date": "2022-02-16",
+      "entry_price": 414.9954550498575,
+      "exit_price": 418.7783192186944,
+      "hold_days": 2,
+      "pnl_pct": 0.9115,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-02-18",
+      "exit_date": "2022-02-25",
+      "entry_price": 412.5522705879942,
+      "exit_price": 405.26959895160047,
+      "hold_days": 4,
+      "pnl_pct": -1.7653,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-03-08",
+      "exit_date": "2022-03-11",
+      "entry_price": 395.84556504942634,
+      "exit_price": 403.8640420157582,
+      "hold_days": 3,
+      "pnl_pct": 2.0257,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-03-14",
+      "exit_date": "2022-03-16",
+      "entry_price": 397.04370305998077,
+      "exit_price": 405.5337798825797,
+      "hold_days": 2,
+      "pnl_pct": 2.1383,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-03-24",
+      "exit_date": "2022-03-25",
+      "entry_price": 421.981331093405,
+      "exit_price": 426.92085470819296,
+      "hold_days": 1,
+      "pnl_pct": 1.1706,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-04-01",
+      "exit_date": "2022-04-04",
+      "entry_price": 428.95539653095295,
+      "exit_price": 428.7849436648192,
+      "hold_days": 1,
+      "pnl_pct": -0.0397,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-04-06",
+      "exit_date": "2022-04-13",
+      "entry_price": 422.8802358321869,
+      "exit_price": 414.4962000276668,
+      "hold_days": 5,
+      "pnl_pct": -1.9826,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-04-18",
+      "exit_date": "2022-04-20",
+      "entry_price": 413.341833148195,
+      "exit_price": 422.90860721160914,
+      "hold_days": 2,
+      "pnl_pct": 2.3145,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-04-22",
+      "exit_date": "2022-04-26",
+      "entry_price": 413.43653595611335,
+      "exit_price": 402.95176302506155,
+      "hold_days": 2,
+      "pnl_pct": -2.536,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-04-27",
+      "exit_date": "2022-04-29",
+      "entry_price": 394.8232059633786,
+      "exit_price": 400.83211704855785,
+      "hold_days": 2,
+      "pnl_pct": 1.5219,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-05-02",
+      "exit_date": "2022-05-03",
+      "entry_price": 389.93102468617633,
+      "exit_price": 392.7131004763314,
+      "hold_days": 1,
+      "pnl_pct": 0.7135,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-05-10",
+      "exit_date": "2022-05-16",
+      "entry_price": 382.75827972149085,
+      "exit_price": 378.4905892750784,
+      "hold_days": 4,
+      "pnl_pct": -1.115,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-05-19",
+      "exit_date": "2022-05-24",
+      "entry_price": 367.7408696651366,
+      "exit_price": 371.4691925228241,
+      "hold_days": 3,
+      "pnl_pct": 1.0138,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-06-09",
+      "exit_date": "2022-06-16",
+      "entry_price": 387.34765697732666,
+      "exit_price": 350.6038334285706,
+      "hold_days": 5,
+      "pnl_pct": -9.486,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-06-29",
+      "exit_date": "2022-07-05",
+      "entry_price": 362.3062541919747,
+      "exit_price": 357.22181596212545,
+      "hold_days": 3,
+      "pnl_pct": -1.4034,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-07-19",
+      "exit_date": "2022-07-20",
+      "entry_price": 366.91550902545094,
+      "exit_price": 372.98831383414614,
+      "hold_days": 1,
+      "pnl_pct": 1.6551,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-08-12",
+      "exit_date": "2022-08-15",
+      "entry_price": 401.0810138483799,
+      "exit_price": 403.685016179176,
+      "hold_days": 1,
+      "pnl_pct": 0.6492,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-08-23",
+      "exit_date": "2022-08-26",
+      "entry_price": 392.40421793285645,
+      "exit_price": 398.5721469924399,
+      "hold_days": 3,
+      "pnl_pct": 1.5718,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-08-29",
+      "exit_date": "2022-09-02",
+      "entry_price": 382.23539449766605,
+      "exit_price": 380.41065862148133,
+      "hold_days": 4,
+      "pnl_pct": -0.4774,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-09-06",
+      "exit_date": "2022-09-08",
+      "entry_price": 373.61557203339373,
+      "exit_price": 375.76332221027627,
+      "hold_days": 2,
+      "pnl_pct": 0.5749,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-09-14",
+      "exit_date": "2022-09-19",
+      "entry_price": 374.88902163325827,
+      "exit_price": 364.77741710532587,
+      "hold_days": 3,
+      "pnl_pct": -2.6972,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-09-22",
+      "exit_date": "2022-09-29",
+      "entry_price": 359.357154295279,
+      "exit_price": 350.03404240715685,
+      "hold_days": 5,
+      "pnl_pct": -2.5944,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-10-03",
+      "exit_date": "2022-10-05",
+      "entry_price": 344.56611454293574,
+      "exit_price": 356.31307797444373,
+      "hold_days": 2,
+      "pnl_pct": 3.4092,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-10-07",
+      "exit_date": "2022-10-14",
+      "entry_price": 352.09525889115315,
+      "exit_price": 351.6944243183575,
+      "hold_days": 5,
+      "pnl_pct": -0.1138,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-10-17",
+      "exit_date": "2022-10-18",
+      "entry_price": 347.3620658478121,
+      "exit_price": 357.9735862808012,
+      "hold_days": 1,
+      "pnl_pct": 3.0549,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-10-21",
+      "exit_date": "2022-10-24",
+      "entry_price": 348.42137072610865,
+      "exit_price": 358.69884913927166,
+      "hold_days": 1,
+      "pnl_pct": 2.9497,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-10-27",
+      "exit_date": "2022-10-31",
+      "entry_price": 365.55039117436706,
+      "exit_price": 368.7663054799875,
+      "hold_days": 2,
+      "pnl_pct": 0.8797,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-11-02",
+      "exit_date": "2022-11-08",
+      "entry_price": 366.3424479641309,
+      "exit_price": 363.68004778364957,
+      "hold_days": 4,
+      "pnl_pct": -0.7268,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-11-10",
+      "exit_date": "2022-11-11",
+      "entry_price": 370.30264142200895,
+      "exit_price": 377.49774318306464,
+      "hold_days": 1,
+      "pnl_pct": 1.943,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-11-15",
+      "exit_date": "2022-11-18",
+      "entry_price": 382.80348568869397,
+      "exit_price": 379.54944898801807,
+      "hold_days": 3,
+      "pnl_pct": -0.8501,
+      "win": 0
+    },
+    {
+      "entry_date": "2022-11-29",
+      "exit_date": "2022-12-01",
+      "entry_price": 377.9367417321205,
+      "exit_price": 390.07504041496463,
+      "hold_days": 2,
+      "pnl_pct": 3.2117,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-12-12",
+      "exit_date": "2022-12-13",
+      "entry_price": 376.0855229503339,
+      "exit_price": 391.4586555975836,
+      "hold_days": 1,
+      "pnl_pct": 4.0877,
+      "win": 1
+    },
+    {
+      "entry_date": "2022-12-29",
+      "exit_date": "2022-12-30",
+      "entry_price": 363.9313264054412,
+      "exit_price": 364.8994905444754,
+      "hold_days": 1,
+      "pnl_pct": 0.266,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-01-10",
+      "exit_date": "2023-01-11",
+      "entry_price": 371.2361840133922,
+      "exit_price": 376.0102256287862,
+      "hold_days": 1,
+      "pnl_pct": 1.286,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-01-19",
+      "exit_date": "2023-01-23",
+      "entry_price": 373.2588930285292,
+      "exit_price": 380.31458203818664,
+      "hold_days": 2,
+      "pnl_pct": 1.8903,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-01-31",
+      "exit_date": "2023-02-01",
+      "entry_price": 384.5421605238492,
+      "exit_price": 388.45345165426824,
+      "hold_days": 1,
+      "pnl_pct": 1.0171,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-02-09",
+      "exit_date": "2023-02-13",
+      "entry_price": 397.27307383439006,
+      "exit_price": 391.8183051444725,
+      "hold_days": 2,
+      "pnl_pct": -1.3731,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-02-17",
+      "exit_date": "2023-02-21",
+      "entry_price": 389.26831273199565,
+      "exit_price": 386.39234798566156,
+      "hold_days": 1,
+      "pnl_pct": -0.7388,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-02-22",
+      "exit_date": "2023-03-01",
+      "entry_price": 382.998812451563,
+      "exit_price": 379.05878003283976,
+      "hold_days": 5,
+      "pnl_pct": -1.0287,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-03-07",
+      "exit_date": "2023-03-14",
+      "entry_price": 387.6960878154249,
+      "exit_price": 374.35173718346283,
+      "hold_days": 5,
+      "pnl_pct": -3.442,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-03-23",
+      "exit_date": "2023-03-27",
+      "entry_price": 380.1974338773298,
+      "exit_price": 383.11324113581304,
+      "hold_days": 2,
+      "pnl_pct": 0.7669,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-04-13",
+      "exit_date": "2023-04-14",
+      "entry_price": 393.75631259262076,
+      "exit_price": 397.24953269593004,
+      "hold_days": 1,
+      "pnl_pct": 0.8872,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-04-26",
+      "exit_date": "2023-04-28",
+      "entry_price": 391.38909943441206,
+      "exit_price": 395.9793118624164,
+      "hold_days": 2,
+      "pnl_pct": 1.1728,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-05-02",
+      "exit_date": "2023-05-09",
+      "entry_price": 399.1356149746384,
+      "exit_price": 395.63287211761855,
+      "hold_days": 5,
+      "pnl_pct": -0.8776,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-05-10",
+      "exit_date": "2023-05-12",
+      "entry_price": 398.27913768761357,
+      "exit_price": 397.8365674670435,
+      "hold_days": 2,
+      "pnl_pct": -0.1111,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-05-17",
+      "exit_date": "2023-05-18",
+      "entry_price": 396.8068622851723,
+      "exit_price": 399.2607196795313,
+      "hold_days": 1,
+      "pnl_pct": 0.6184,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-05-24",
+      "exit_date": "2023-05-30",
+      "entry_price": 396.8742131296412,
+      "exit_price": 406.1219771957275,
+      "hold_days": 3,
+      "pnl_pct": 2.3301,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-06-08",
+      "exit_date": "2023-06-09",
+      "entry_price": 410.5389180982335,
+      "exit_price": 413.75304850629004,
+      "hold_days": 1,
+      "pnl_pct": 0.7829,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-06-20",
+      "exit_date": "2023-06-23",
+      "entry_price": 422.52444796434224,
+      "exit_price": 418.1586622892244,
+      "hold_days": 3,
+      "pnl_pct": -1.0333,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-06-27",
+      "exit_date": "2023-06-28",
+      "entry_price": 417.59847607026,
+      "exit_price": 420.2063045276252,
+      "hold_days": 1,
+      "pnl_pct": 0.6245,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-07-10",
+      "exit_date": "2023-07-11",
+      "entry_price": 423.2295437531058,
+      "exit_price": 425.4220646553444,
+      "hold_days": 1,
+      "pnl_pct": 0.518,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-07-24",
+      "exit_date": "2023-07-31",
+      "entry_price": 437.9012750217946,
+      "exit_price": 441.80343186125066,
+      "hold_days": 5,
+      "pnl_pct": 0.8911,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-08-03",
+      "exit_date": "2023-08-08",
+      "entry_price": 432.7531252299224,
+      "exit_price": 432.7917203880473,
+      "hold_days": 3,
+      "pnl_pct": 0.0089,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-08-10",
+      "exit_date": "2023-08-15",
+      "entry_price": 432.89797658868093,
+      "exit_price": 431.0434905199487,
+      "hold_days": 3,
+      "pnl_pct": -0.4284,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-08-16",
+      "exit_date": "2023-08-22",
+      "entry_price": 427.36356217125825,
+      "exit_price": 426.1272091701829,
+      "hold_days": 4,
+      "pnl_pct": -0.2893,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-08-23",
+      "exit_date": "2023-08-24",
+      "entry_price": 424.263004912033,
+      "exit_price": 429.51743829068363,
+      "hold_days": 1,
+      "pnl_pct": 1.2385,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-08-25",
+      "exit_date": "2023-08-29",
+      "entry_price": 423.71247141677657,
+      "exit_price": 427.5470082557006,
+      "hold_days": 2,
+      "pnl_pct": 0.905,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-09-01",
+      "exit_date": "2023-09-11",
+      "entry_price": 437.7081084262502,
+      "exit_price": 432.94631377147886,
+      "hold_days": 5,
+      "pnl_pct": -1.0879,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-09-13",
+      "exit_date": "2023-09-20",
+      "entry_price": 430.99515498419896,
+      "exit_price": 430.3733120632257,
+      "hold_days": 5,
+      "pnl_pct": -0.1443,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-09-21",
+      "exit_date": "2023-09-26",
+      "entry_price": 422.31861839300336,
+      "exit_price": 415.91160628125357,
+      "hold_days": 3,
+      "pnl_pct": -1.5171,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-09-27",
+      "exit_date": "2023-10-04",
+      "entry_price": 413.97300260416256,
+      "exit_price": 409.107224446792,
+      "hold_days": 5,
+      "pnl_pct": -1.1754,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-10-19",
+      "exit_date": "2023-10-26",
+      "entry_price": 417.714450283055,
+      "exit_price": 403.65982284727204,
+      "hold_days": 5,
+      "pnl_pct": -3.3646,
+      "win": 0
+    },
+    {
+      "entry_date": "2023-10-27",
+      "exit_date": "2023-11-01",
+      "entry_price": 401.4692254760225,
+      "exit_price": 406.32532025886866,
+      "hold_days": 3,
+      "pnl_pct": 1.2096,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-11-10",
+      "exit_date": "2023-11-13",
+      "entry_price": 422.58998243152627,
+      "exit_price": 425.74020750909324,
+      "hold_days": 1,
+      "pnl_pct": 0.7455,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-11-30",
+      "exit_date": "2023-12-01",
+      "entry_price": 441.4910541020233,
+      "exit_price": 441.77216442546705,
+      "hold_days": 1,
+      "pnl_pct": 0.0637,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-12-07",
+      "exit_date": "2023-12-11",
+      "entry_price": 442.87718005735604,
+      "exit_price": 445.5717675539386,
+      "hold_days": 2,
+      "pnl_pct": 0.6084,
+      "win": 1
+    },
+    {
+      "entry_date": "2023-12-21",
+      "exit_date": "2023-12-22",
+      "entry_price": 458.7065232314146,
+      "exit_price": 461.16881437336167,
+      "hold_days": 1,
+      "pnl_pct": 0.5368,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-01-05",
+      "exit_date": "2024-01-09",
+      "entry_price": 454.96940287212124,
+      "exit_price": 459.2320864754785,
+      "hold_days": 2,
+      "pnl_pct": 0.9369,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-01-25",
+      "exit_date": "2024-01-26",
+      "entry_price": 474.52136032734217,
+      "exit_price": 474.53109852869903,
+      "hold_days": 1,
+      "pnl_pct": 0.0021,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-02-01",
+      "exit_date": "2024-02-02",
+      "entry_price": 471.65035080339914,
+      "exit_price": 476.53591254829524,
+      "hold_days": 1,
+      "pnl_pct": 1.0358,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-02-20",
+      "exit_date": "2024-02-22",
+      "entry_price": 484.3897552215933,
+      "exit_price": 490.51131764803023,
+      "hold_days": 2,
+      "pnl_pct": 1.2638,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-02-27",
+      "exit_date": "2024-02-28",
+      "entry_price": 493.1292673855463,
+      "exit_price": 491.7959350516518,
+      "hold_days": 1,
+      "pnl_pct": -0.2704,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-03-05",
+      "exit_date": "2024-03-08",
+      "entry_price": 496.5744479650044,
+      "exit_price": 501.6546542384204,
+      "hold_days": 3,
+      "pnl_pct": 1.0231,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-03-11",
+      "exit_date": "2024-03-12",
+      "entry_price": 496.8080468189585,
+      "exit_price": 499.6985003866654,
+      "hold_days": 1,
+      "pnl_pct": 0.5818,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-03-19",
+      "exit_date": "2024-03-20",
+      "entry_price": 499.9819506807113,
+      "exit_price": 503.515925395574,
+      "hold_days": 1,
+      "pnl_pct": 0.7068,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-03-22",
+      "exit_date": "2024-03-28",
+      "entry_price": 509.7053331319063,
+      "exit_price": 510.77917463931885,
+      "hold_days": 4,
+      "pnl_pct": 0.2107,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-04-01",
+      "exit_date": "2024-04-03",
+      "entry_price": 511.38448570971826,
+      "exit_price": 505.41963827630406,
+      "hold_days": 2,
+      "pnl_pct": -1.1664,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-04-05",
+      "exit_date": "2024-04-12",
+      "entry_price": 502.23702229721215,
+      "exit_price": 502.1492186619509,
+      "hold_days": 5,
+      "pnl_pct": -0.0175,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-04-16",
+      "exit_date": "2024-04-23",
+      "entry_price": 492.9432762462562,
+      "exit_price": 489.85833417865257,
+      "hold_days": 5,
+      "pnl_pct": -0.6258,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-05-01",
+      "exit_date": "2024-05-03",
+      "entry_price": 489.4678380773352,
+      "exit_price": 499.01550940056416,
+      "hold_days": 2,
+      "pnl_pct": 1.9506,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-05-17",
+      "exit_date": "2024-05-20",
+      "entry_price": 516.2461019816988,
+      "exit_price": 516.9880819887991,
+      "hold_days": 1,
+      "pnl_pct": 0.1437,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-05-24",
+      "exit_date": "2024-06-03",
+      "entry_price": 515.3089561408403,
+      "exit_price": 516.4511771729021,
+      "hold_days": 5,
+      "pnl_pct": 0.2217,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-06-25",
+      "exit_date": "2024-06-26",
+      "entry_price": 532.7787868983022,
+      "exit_price": 532.4848968900385,
+      "hold_days": 1,
+      "pnl_pct": -0.0552,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-07-01",
+      "exit_date": "2024-07-02",
+      "entry_price": 534.3848928648134,
+      "exit_price": 532.4946896868087,
+      "hold_days": 1,
+      "pnl_pct": -0.3537,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-07-10",
+      "exit_date": "2024-07-11",
+      "entry_price": 545.5891159264746,
+      "exit_price": 549.8690906630567,
+      "hold_days": 1,
+      "pnl_pct": 0.7845,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-07-12",
+      "exit_date": "2024-07-17",
+      "entry_price": 546.1375661846453,
+      "exit_price": 547.2834441243654,
+      "hold_days": 3,
+      "pnl_pct": 0.2098,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-07-18",
+      "exit_date": "2024-07-23",
+      "entry_price": 546.9994291163081,
+      "exit_price": 543.1113522241114,
+      "hold_days": 3,
+      "pnl_pct": -0.7108,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-07-24",
+      "exit_date": "2024-07-31",
+      "entry_price": 537.5483785668235,
+      "exit_price": 537.6658891932146,
+      "hold_days": 5,
+      "pnl_pct": 0.0219,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-08-08",
+      "exit_date": "2024-08-09",
+      "entry_price": 513.1126009988247,
+      "exit_price": 518.8909162499233,
+      "hold_days": 1,
+      "pnl_pct": 1.1261,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-08-23",
+      "exit_date": "2024-08-26",
+      "entry_price": 547.9985298599797,
+      "exit_price": 551.5732410031779,
+      "hold_days": 1,
+      "pnl_pct": 0.6523,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-08-30",
+      "exit_date": "2024-09-03",
+      "entry_price": 549.2128659703031,
+      "exit_price": 548.9191307501956,
+      "hold_days": 1,
+      "pnl_pct": -0.0535,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-09-09",
+      "exit_date": "2024-09-11",
+      "entry_price": 533.425248105456,
+      "exit_price": 537.3917487162622,
+      "hold_days": 2,
+      "pnl_pct": 0.7436,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-09-19",
+      "exit_date": "2024-09-25",
+      "entry_price": 559.2418737919741,
+      "exit_price": 561.0849426444706,
+      "hold_days": 4,
+      "pnl_pct": 0.3296,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-10-16",
+      "exit_date": "2024-10-17",
+      "entry_price": 569.5728070987392,
+      "exit_price": 575.5949797580469,
+      "hold_days": 1,
+      "pnl_pct": 1.0573,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-10-18",
+      "exit_date": "2024-10-25",
+      "entry_price": 573.7873532764656,
+      "exit_price": 571.2723713678375,
+      "hold_days": 5,
+      "pnl_pct": -0.4383,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-10-28",
+      "exit_date": "2024-11-04",
+      "entry_price": 572.3234997428319,
+      "exit_price": 561.1242574334378,
+      "hold_days": 5,
+      "pnl_pct": -1.9568,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-11-15",
+      "exit_date": "2024-11-20",
+      "entry_price": 579.3378226480269,
+      "exit_price": 579.9861823753545,
+      "hold_days": 3,
+      "pnl_pct": 0.1119,
+      "win": 1
+    },
+    {
+      "entry_date": "2024-12-06",
+      "exit_date": "2024-12-13",
+      "entry_price": 596.7458937244957,
+      "exit_price": 595.7242008087076,
+      "hold_days": 5,
+      "pnl_pct": -0.1712,
+      "win": 0
+    },
+    {
+      "entry_date": "2024-12-19",
+      "exit_date": "2024-12-24",
+      "entry_price": 580.9490228826561,
+      "exit_price": 587.5370230202848,
+      "hold_days": 3,
+      "pnl_pct": 1.134,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-01-08",
+      "exit_date": "2025-01-14",
+      "entry_price": 580.282291853868,
+      "exit_price": 576.0043111010004,
+      "hold_days": 3,
+      "pnl_pct": -0.7372,
+      "win": 0
+    },
+    {
+      "entry_date": "2025-02-03",
+      "exit_date": "2025-02-05",
+      "entry_price": 584.1954832564219,
+      "exit_price": 592.0516161255263,
+      "hold_days": 2,
+      "pnl_pct": 1.3448,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-02-10",
+      "exit_date": "2025-02-12",
+      "entry_price": 595.3931329282537,
+      "exit_price": 590.6322360789388,
+      "hold_days": 2,
+      "pnl_pct": -0.7996,
+      "win": 0
+    },
+    {
+      "entry_date": "2025-02-24",
+      "exit_date": "2025-03-03",
+      "entry_price": 593.4118132885562,
+      "exit_price": 587.6553155599406,
+      "hold_days": 5,
+      "pnl_pct": -0.9701,
+      "win": 0
+    },
+    {
+      "entry_date": "2025-03-14",
+      "exit_date": "2025-03-17",
+      "entry_price": 548.1583018697701,
+      "exit_price": 554.7426421700422,
+      "hold_days": 1,
+      "pnl_pct": 1.2012,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-03-27",
+      "exit_date": "2025-04-01",
+      "entry_price": 560.7517355574175,
+      "exit_price": 551.1321177898429,
+      "hold_days": 3,
+      "pnl_pct": -1.7155,
+      "win": 0
+    },
+    {
+      "entry_date": "2025-04-04",
+      "exit_date": "2025-04-10",
+      "entry_price": 517.7349353008444,
+      "exit_price": 526.1385878330984,
+      "hold_days": 4,
+      "pnl_pct": 1.6232,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-04-16",
+      "exit_date": "2025-04-24",
+      "entry_price": 525.6541223320015,
+      "exit_price": 530.6369834977514,
+      "hold_days": 5,
+      "pnl_pct": 0.9479,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-05-02",
+      "exit_date": "2025-05-09",
+      "entry_price": 558.329587021111,
+      "exit_price": 560.0597310271954,
+      "hold_days": 5,
+      "pnl_pct": 0.3099,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-05-22",
+      "exit_date": "2025-05-28",
+      "entry_price": 576.0563267018498,
+      "exit_price": 584.8555180607121,
+      "hold_days": 3,
+      "pnl_pct": 1.5275,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-05-29",
+      "exit_date": "2025-06-03",
+      "entry_price": 586.3384441000501,
+      "exit_price": 585.6266079138771,
+      "hold_days": 3,
+      "pnl_pct": -0.1214,
+      "win": 0
+    },
+    {
+      "entry_date": "2025-06-05",
+      "exit_date": "2025-06-11",
+      "entry_price": 590.8566609128592,
+      "exit_price": 597.3423765043648,
+      "hold_days": 4,
+      "pnl_pct": 1.0977,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-06-18",
+      "exit_date": "2025-06-24",
+      "entry_price": 591.6574895866379,
+      "exit_price": 599.2470472798032,
+      "hold_days": 3,
+      "pnl_pct": 1.2828,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-07-16",
+      "exit_date": "2025-07-17",
+      "entry_price": 618.4937831556223,
+      "exit_price": 619.1482908768893,
+      "hold_days": 1,
+      "pnl_pct": 0.1058,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-07-22",
+      "exit_date": "2025-07-24",
+      "entry_price": 623.8087114591411,
+      "exit_price": 629.2624631630094,
+      "hold_days": 2,
+      "pnl_pct": 0.8743,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-07-25",
+      "exit_date": "2025-07-28",
+      "entry_price": 629.7484116245431,
+      "exit_price": 632.1182610848412,
+      "hold_days": 1,
+      "pnl_pct": 0.3763,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-08-01",
+      "exit_date": "2025-08-05",
+      "entry_price": 621.032217506902,
+      "exit_price": 626.476110377079,
+      "hold_days": 2,
+      "pnl_pct": 0.8766,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-08-06",
+      "exit_date": "2025-08-07",
+      "entry_price": 623.7590952688204,
+      "exit_price": 630.8886820702932,
+      "hold_days": 1,
+      "pnl_pct": 1.143,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-08-26",
+      "exit_date": "2025-08-27",
+      "entry_price": 636.7985773675441,
+      "exit_price": 639.148612992103,
+      "hold_days": 1,
+      "pnl_pct": 0.369,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-10-13",
+      "exit_date": "2025-10-20",
+      "entry_price": 656.9095884512618,
+      "exit_price": 663.5418206897375,
+      "hold_days": 5,
+      "pnl_pct": 1.0096,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-10-31",
+      "exit_date": "2025-11-07",
+      "entry_price": 681.1614729090464,
+      "exit_price": 664.1284090392404,
+      "hold_days": 5,
+      "pnl_pct": -2.5006,
+      "win": 0
+    },
+    {
+      "entry_date": "2025-11-14",
+      "exit_date": "2025-11-21",
+      "entry_price": 661.6128286383953,
+      "exit_price": 651.3412595795126,
+      "hold_days": 5,
+      "pnl_pct": -1.5525,
+      "win": 0
+    },
+    {
+      "entry_date": "2025-12-10",
+      "exit_date": "2025-12-11",
+      "entry_price": 678.6955405173951,
+      "exit_price": 681.2609148661827,
+      "hold_days": 1,
+      "pnl_pct": 0.378,
+      "win": 1
+    },
+    {
+      "entry_date": "2025-12-18",
+      "exit_date": "2025-12-22",
+      "entry_price": 673.7635606688432,
+      "exit_price": 682.0772531068674,
+      "hold_days": 2,
+      "pnl_pct": 1.2339,
+      "win": 1
+    },
+    {
+      "entry_date": "2026-01-02",
+      "exit_date": "2026-01-07",
+      "entry_price": 683.842447277036,
+      "exit_price": 690.3047811958188,
+      "hold_days": 3,
+      "pnl_pct": 0.945,
+      "win": 1
+    },
+    {
+      "entry_date": "2026-01-08",
+      "exit_date": "2026-01-13",
+      "entry_price": 686.9439569075789,
+      "exit_price": 693.595779418591,
+      "hold_days": 3,
+      "pnl_pct": 0.9683,
+      "win": 1
+    },
+    {
+      "entry_date": "2026-01-21",
+      "exit_date": "2026-01-28",
+      "entry_price": 677.7989248999835,
+      "exit_price": 695.1515053497095,
+      "hold_days": 5,
+      "pnl_pct": 2.5601,
+      "win": 1
+    },
+    {
+      "entry_date": "2026-02-11",
+      "exit_date": "2026-02-19",
+      "entry_price": 694.4933668556342,
+      "exit_price": 681.9775120282383,
+      "hold_days": 5,
+      "pnl_pct": -1.8022,
+      "win": 0
+    },
+    {
+      "entry_date": "2026-03-13",
+      "exit_date": "2026-03-20",
+      "entry_price": 667.4472371497842,
+      "exit_price": 656.510009765625,
+      "hold_days": 5,
+      "pnl_pct": -1.6387,
+      "win": 0
+    },
+    {
+      "entry_date": "2026-03-24",
+      "exit_date": "2026-03-31",
+      "entry_price": 651.3200073242188,
+      "exit_price": 638.9400024414062,
+      "hold_days": 5,
+      "pnl_pct": -1.9008,
+      "win": 0
+    },
+    {
+      "entry_date": "2026-04-22",
+      "exit_date": "2026-04-23",
+      "entry_price": 709.1500244140625,
+      "exit_price": 709.5,
+      "hold_days": 1,
+      "pnl_pct": 0.0494,
+      "win": 1
+    }
+  ]
+}

@@ -11,33 +11,110 @@
     "vix_entry": 20.0,
     "qty": 1,
     "legs": {
-      "long_put": {
-        "strike": 645.0,
-        "ticker": null,
-        "entry_price": 1.4424993888846274
-      },
-      "short_put": {
-        "strike": 670,
-        "ticker": null,
-        "entry_price": 4.412287194753006
-      },
-      "short_call": {
-        "strike": 775,
-        "ticker": null,
-        "entry_price": 3.9148871339066034
-      },
-      "long_call": {
-        "strike": 800.0,
-        "ticker": null,
-        "entry_price": 1.559597474213298
-      }
+      "long_put":   { "strike": 645.0, "entry_price": 1.44 },
+      "short_put":  { "strike": 670,   "entry_price": 4.41 },
+      "short_call": { "strike": 775,   "entry_price": 3.91 },
+      "long_call":  { "strike": 800.0, "entry_price": 1.56 }
     },
-    "net_credit": 5.325077465561684,
-    "max_profit": 532.5077465561684,
-    "max_loss": 1967.4922534438317,
-    "target_profit": 2.662538732780842,
-    "stop_loss_credit": 10.650154931123367,
-    "pnl": 0.0,
+    "net_credit": 5.33,
+    "max_profit": 533,
+    "max_loss": 1967,
+    "target_profit": 2.66,
+    "stop_loss_credit": 10.65,
+    "pnl": null,
+    "exit_reason": null,
+    "exited": null,
+    "notes": "SPY iron condor, 10/25-wide wings, 47 DTE"
+  },
+  {
+    "id": "WMT-CS-2026-04-27",
+    "strategy": "bull_call_spread",
+    "status": "open",
+    "entered": "2026-04-27",
+    "expiry": "2026-06-19",
+    "dte_entry": 53,
+    "underlying": "WMT",
+    "spot_entry": 129.30,
+    "iv_entry": 0.235,
+    "qty": 1,
+    "legs": {
+      "long_call":  { "strike": 130, "entry_price": 4.67, "delta": 0.522 },
+      "short_call": { "strike": 140, "entry_price": 1.40, "delta": 0.220 }
+    },
+    "net_debit": 3.27,
+    "max_profit": 6.73,
+    "max_loss": 3.27,
+    "breakeven": 133.27,
+    "net_delta": 0.302,
+    "reward_risk": 2.1,
+    "thesis": "WMT near-term support; earnings May 21 expected catalyst. Defined-risk way to play bounce/beat.",
+    "key_dates": {
+      "earnings": "2026-05-21",
+      "expiry": "2026-06-19"
+    },
+    "pnl": null,
+    "exit_reason": null,
+    "exited": null
+  },
+  {
+    "id": "DLTR-CS-2026-04-27",
+    "strategy": "bull_call_spread",
+    "status": "open",
+    "entered": "2026-04-27",
+    "expiry": "2026-07-17",
+    "dte_entry": 81,
+    "underlying": "DLTR",
+    "spot_entry": 99.82,
+    "iv_entry": 0.411,
+    "qty": 1,
+    "legs": {
+      "long_call":  { "strike": 100, "entry_price": 7.85, "delta": 0.554 },
+      "short_call": { "strike": 115, "entry_price": 2.86, "delta": 0.272 }
+    },
+    "net_debit": 4.99,
+    "max_profit": 10.01,
+    "max_loss": 4.99,
+    "breakeven": 104.99,
+    "net_delta": 0.282,
+    "reward_risk": 2.0,
+    "thesis": "DLTR at $100 support after deep selloff. High IV means expensive but spread caps cost. Earnings ~Jun 2-3 is binary event — spread survives bad print; benefits from resolution.",
+    "key_dates": {
+      "earnings_est": "2026-06-02",
+      "expiry": "2026-07-17"
+    },
+    "pnl": null,
+    "exit_reason": null,
+    "exited": null
+  },
+  {
+    "id": "DLTR-RR-2026-04-27",
+    "strategy": "risk_reversal",
+    "status": "open",
+    "entered": "2026-04-27",
+    "dte_entry_put": 53,
+    "dte_entry_call": 81,
+    "underlying": "DLTR",
+    "spot_entry": 99.82,
+    "iv_entry": 0.411,
+    "qty": 1,
+    "legs": {
+      "short_put":  { "strike": 95,  "expiry": "2026-06-19", "entry_price": 3.58, "delta": -0.329 },
+      "long_call":  { "strike": 110, "expiry": "2026-07-17", "entry_price": 4.10, "delta":  0.356 }
+    },
+    "net_cost": 0.51,
+    "net_delta": 0.685,
+    "thesis": "Near-zero-cost directional play. Short Jun $95P funds the Jul $110C. Assignment risk if DLTR < $95 at Jun expiry (~$4.82 below current). Captures recovery above $110.",
+    "key_dates": {
+      "put_expiry": "2026-06-19",
+      "earnings_est": "2026-06-02",
+      "call_expiry": "2026-07-17"
+    },
+    "risks": {
+      "assignment_threshold": 95.0,
+      "current_vs_put_strike": -4.82,
+      "max_loss_if_assigned": "~$9,500 on 100 shares at $95"
+    },
+    "pnl": null,
     "exit_reason": null,
     "exited": null
   }

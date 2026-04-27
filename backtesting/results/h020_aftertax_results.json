@@ -1,0 +1,456 @@
+{
+  "strategy": "H020 After-Tax Analysis",
+  "universe": [
+    "SPY",
+    "QQQ",
+    "TLT",
+    "GLD",
+    "IEF"
+  ],
+  "period": "2008-01-01 \u2192 2026-04-25",
+  "tax_rates": {
+    "stcg": 0.37,
+    "ltcg": 0.2
+  },
+  "pretax": {
+    "cagr": 0.0769,
+    "sharpe": 0.6309,
+    "max_drawdown": -0.2441,
+    "calmar": 0.3149,
+    "ann_vol": 0.1218,
+    "win_rate": 0.5436,
+    "n_years": 18.2,
+    "final_value": 386086.17
+  },
+  "aftertax": {
+    "cagr": 0.0505,
+    "sharpe": 0.4081,
+    "max_drawdown": -0.2522,
+    "calmar": 0.2002,
+    "ann_vol": 0.1238,
+    "win_rate": 0.5399,
+    "n_years": 18.2,
+    "final_value": 245706.53
+  },
+  "spy_bh": {
+    "cagr": 0.1113,
+    "sharpe": 0.5599,
+    "max_drawdown": -0.5187,
+    "calmar": 0.2145,
+    "ann_vol": 0.1987,
+    "win_rate": 0.551,
+    "n_years": 18.3,
+    "final_value": 689826.5
+  },
+  "tax_breakdown": {
+    "total_stcg_gains": 280832.42,
+    "total_ltcg_gains": 32070.56,
+    "total_stcg_losses": 93894.73,
+    "total_ltcg_losses": 1167.98,
+    "total_tax_paid": 75528.56,
+    "stcg_pct_of_gains": 89.75,
+    "ltcg_pct_of_gains": 10.25,
+    "n_stcg_sales": 128,
+    "n_ltcg_sales": 18,
+    "n_st_losses": 92,
+    "n_lt_losses": 4,
+    "stcg_carryforward": 0.0,
+    "ltcg_carryforward": -643.04
+  },
+  "avg_holding_periods": {
+    "IEF": {
+      "avg_days": 144.7,
+      "median_days": 92.0,
+      "min_days": 30,
+      "max_days": 426,
+      "n_sales": 69,
+      "pct_lt": 5.8
+    },
+    "GLD": {
+      "avg_days": 129.7,
+      "median_days": 76.5,
+      "min_days": 28,
+      "max_days": 456,
+      "n_sales": 30,
+      "pct_lt": 10.0
+    },
+    "TLT": {
+      "avg_days": 119.1,
+      "median_days": 61.0,
+      "min_days": 28,
+      "max_days": 455,
+      "n_sales": 35,
+      "pct_lt": 8.6
+    },
+    "QQQ": {
+      "avg_days": 111.2,
+      "median_days": 106.0,
+      "min_days": 29,
+      "max_days": 245,
+      "n_sales": 44,
+      "pct_lt": 0.0
+    },
+    "SPY": {
+      "avg_days": 212.5,
+      "median_days": 122.5,
+      "min_days": 29,
+      "max_days": 852,
+      "n_sales": 64,
+      "pct_lt": 18.8
+    }
+  },
+  "sale_events_sample": [
+    {
+      "date": "2008-09-30",
+      "ticker": "IEF",
+      "days_held": 243,
+      "gain": 767.32,
+      "type": "STCG"
+    },
+    {
+      "date": "2008-09-30",
+      "ticker": "IEF",
+      "days_held": 183,
+      "gain": -2.04,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2008-09-30",
+      "ticker": "IEF",
+      "days_held": 92,
+      "gain": 2.64,
+      "type": "STCG"
+    },
+    {
+      "date": "2008-09-30",
+      "ticker": "IEF",
+      "days_held": 30,
+      "gain": -0.42,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2008-10-31",
+      "ticker": "GLD",
+      "days_held": 31,
+      "gain": -7980.32,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2009-04-30",
+      "ticker": "TLT",
+      "days_held": 455,
+      "gain": 3427.93,
+      "type": "LTCG"
+    },
+    {
+      "date": "2009-04-30",
+      "ticker": "TLT",
+      "days_held": 426,
+      "gain": 39.19,
+      "type": "LTCG"
+    },
+    {
+      "date": "2009-04-30",
+      "ticker": "TLT",
+      "days_held": 365,
+      "gain": 1.88,
+      "type": "LTCG"
+    },
+    {
+      "date": "2009-04-30",
+      "ticker": "TLT",
+      "days_held": 334,
+      "gain": 28.85,
+      "type": "STCG"
+    },
+    {
+      "date": "2009-04-30",
+      "ticker": "TLT",
+      "days_held": 273,
+      "gain": 27.42,
+      "type": "STCG"
+    },
+    {
+      "date": "2009-04-30",
+      "ticker": "TLT",
+      "days_held": 89,
+      "gain": -114.1,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2009-06-30",
+      "ticker": "GLD",
+      "days_held": 61,
+      "gain": 1975.1,
+      "type": "STCG"
+    },
+    {
+      "date": "2009-09-30",
+      "ticker": "TLT",
+      "days_held": 92,
+      "gain": 2499.58,
+      "type": "STCG"
+    },
+    {
+      "date": "2009-09-30",
+      "ticker": "TLT",
+      "days_held": 61,
+      "gain": 32.71,
+      "type": "STCG"
+    },
+    {
+      "date": "2009-10-31",
+      "ticker": "QQQ",
+      "days_held": 31,
+      "gain": -1515.79,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2009-11-30",
+      "ticker": "SPY",
+      "days_held": 30,
+      "gain": 2968.75,
+      "type": "STCG"
+    },
+    {
+      "date": "2009-12-31",
+      "ticker": "IEF",
+      "days_held": 426,
+      "gain": 2110.12,
+      "type": "LTCG"
+    },
+    {
+      "date": "2009-12-31",
+      "ticker": "IEF",
+      "days_held": 396,
+      "gain": -95.58,
+      "type": "LT_LOSS"
+    },
+    {
+      "date": "2009-12-31",
+      "ticker": "IEF",
+      "days_held": 365,
+      "gain": -47.96,
+      "type": "LT_LOSS"
+    },
+    {
+      "date": "2009-12-31",
+      "ticker": "IEF",
+      "days_held": 214,
+      "gain": -13.87,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2009-12-31",
+      "ticker": "IEF",
+      "days_held": 122,
+      "gain": -5.38,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2009-12-31",
+      "ticker": "IEF",
+      "days_held": 92,
+      "gain": -8.56,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2009-12-31",
+      "ticker": "IEF",
+      "days_held": 31,
+      "gain": -39.46,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2010-05-31",
+      "ticker": "SPY",
+      "days_held": 151,
+      "gain": -690.2,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2010-05-31",
+      "ticker": "SPY",
+      "days_held": 120,
+      "gain": 42.36,
+      "type": "STCG"
+    },
+    {
+      "date": "2010-05-31",
+      "ticker": "SPY",
+      "days_held": 31,
+      "gain": -14.53,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2010-06-30",
+      "ticker": "QQQ",
+      "days_held": 212,
+      "gain": -599.09,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2010-06-30",
+      "ticker": "QQQ",
+      "days_held": 150,
+      "gain": 2.19,
+      "type": "STCG"
+    },
+    {
+      "date": "2010-07-31",
+      "ticker": "IEF",
+      "days_held": 31,
+      "gain": 421.26,
+      "type": "STCG"
+    },
+    {
+      "date": "2010-09-30",
+      "ticker": "TLT",
+      "days_held": 61,
+      "gain": 2655.24,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-02-28",
+      "ticker": "GLD",
+      "days_held": 273,
+      "gain": 6733.58,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-02-28",
+      "ticker": "GLD",
+      "days_held": 212,
+      "gain": 277.37,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-02-28",
+      "ticker": "GLD",
+      "days_held": 181,
+      "gain": 127.07,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-02-28",
+      "ticker": "GLD",
+      "days_held": 28,
+      "gain": 99.78,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-04-30",
+      "ticker": "SPY",
+      "days_held": 61,
+      "gain": 1485.58,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-06-30",
+      "ticker": "IEF",
+      "days_held": 273,
+      "gain": -462.43,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-06-30",
+      "ticker": "IEF",
+      "days_held": 242,
+      "gain": -27.74,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-06-30",
+      "ticker": "IEF",
+      "days_held": 212,
+      "gain": -0.81,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-06-30",
+      "ticker": "IEF",
+      "days_held": 181,
+      "gain": 53.45,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-06-30",
+      "ticker": "IEF",
+      "days_held": 122,
+      "gain": 10.61,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-06-30",
+      "ticker": "IEF",
+      "days_held": 91,
+      "gain": 2.71,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-07-31",
+      "ticker": "SPY",
+      "days_held": 31,
+      "gain": -1036.1,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-08-31",
+      "ticker": "IEF",
+      "days_held": 31,
+      "gain": 2360.39,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-09-30",
+      "ticker": "SPY",
+      "days_held": 30,
+      "gain": -3580.1,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-10-31",
+      "ticker": "IEF",
+      "days_held": 31,
+      "gain": -617.45,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-11-30",
+      "ticker": "TLT",
+      "days_held": 30,
+      "gain": 954.37,
+      "type": "STCG"
+    },
+    {
+      "date": "2011-12-31",
+      "ticker": "QQQ",
+      "days_held": 245,
+      "gain": -2254.19,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-12-31",
+      "ticker": "QQQ",
+      "days_held": 214,
+      "gain": -36.83,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-12-31",
+      "ticker": "QQQ",
+      "days_held": 184,
+      "gain": -6.86,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-12-31",
+      "ticker": "QQQ",
+      "days_held": 122,
+      "gain": 49.21,
+      "type": "STCG"
+    }
+  ],
+  "total_sale_events": 242,
+  "cagr_drag": 0.0264
+}
