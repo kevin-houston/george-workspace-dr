@@ -1,0 +1,457 @@
+{
+  "strategy": "H044 \u2014 Volatility Targeting Applied to H042",
+  "description": "Scales H042 (H041a 56% / H026 16% / H037b 28%) monthly based on 21-day EWM realized vol. Target vols tested: 8%, 10%, 12%. Scale factor capped at 1.5\u00d7 (max leverage) and floored at 0.3\u00d7. Undeployed fraction earns SHY cash return (~0.3%/month).",
+  "parameters": {
+    "h042_weights": {
+      "h041a": 0.56,
+      "h026": 0.16,
+      "h037b": 0.28
+    },
+    "ewm_halflife_days": 21,
+    "scale_cap": 1.5,
+    "scale_floor": 0.3,
+    "cash_return_monthly": 0.003
+  },
+  "common_window": {
+    "start": "2003-08-01",
+    "end": "2026-04-24",
+    "n_days": 5719
+  },
+  "h042_baseline": {
+    "cagr": 0.1466,
+    "sharpe": 1.5398,
+    "max_drawdown": -0.1577,
+    "calmar": 0.9291,
+    "ann_vol": 0.0952,
+    "n_days": 5719
+  },
+  "h044_vol_targeting": {
+    "target_8pct": {
+      "target_vol": 0.08,
+      "stats": {
+        "cagr": 0.1444,
+        "sharpe": 1.633,
+        "max_drawdown": -0.1345,
+        "calmar": 1.0735,
+        "ann_vol": 0.0884,
+        "n_days": 5719
+      },
+      "scale_factor_summary": {
+        "mean": 0.9914,
+        "median": 0.9535,
+        "min": 0.3,
+        "max": 1.5,
+        "pct_above_1": 0.4447,
+        "pct_at_cap": 0.0892,
+        "pct_at_floor": 0.0037
+      },
+      "regime_analysis": {
+        "GFC 2008-09": {
+          "period": "2008-01-01 \u2014 2009-12-31",
+          "h042_unscaled": {
+            "cagr": 0.2202,
+            "sharpe": 1.9487,
+            "max_drawdown": -0.1146,
+            "calmar": 1.9212,
+            "ann_vol": 0.113,
+            "n_days": 505
+          },
+          "h044_scaled": {
+            "cagr": 0.1594,
+            "sharpe": 1.7308,
+            "max_drawdown": -0.0801,
+            "calmar": 1.9902,
+            "ann_vol": 0.0921,
+            "n_days": 505
+          },
+          "scale_factor": {
+            "mean_scale": 0.8688,
+            "min_scale": 0.3791,
+            "max_scale": 1.4427
+          }
+        },
+        "COVID 2020": {
+          "period": "2020-01-01 \u2014 2020-12-31",
+          "h042_unscaled": {
+            "cagr": 0.2177,
+            "sharpe": 1.6546,
+            "max_drawdown": -0.1577,
+            "calmar": 1.3799,
+            "ann_vol": 0.1316,
+            "n_days": 253
+          },
+          "h044_scaled": {
+            "cagr": 0.144,
+            "sharpe": 1.4708,
+            "max_drawdown": -0.1198,
+            "calmar": 1.2027,
+            "ann_vol": 0.0979,
+            "n_days": 253
+          },
+          "scale_factor": {
+            "mean_scale": 0.7823,
+            "min_scale": 0.3486,
+            "max_scale": 1.5
+          }
+        },
+        "Rate shock 2022": {
+          "period": "2022-01-01 \u2014 2022-12-31",
+          "h042_unscaled": {
+            "cagr": 0.0053,
+            "sharpe": 0.0532,
+            "max_drawdown": -0.0946,
+            "calmar": 0.0558,
+            "ann_vol": 0.0992,
+            "n_days": 251
+          },
+          "h044_scaled": {
+            "cagr": -0.0026,
+            "sharpe": -0.0306,
+            "max_drawdown": -0.0882,
+            "calmar": 0.0298,
+            "ann_vol": 0.0858,
+            "n_days": 251
+          },
+          "scale_factor": {
+            "mean_scale": 0.8601,
+            "min_scale": 0.6577,
+            "max_scale": 1.0086
+          }
+        },
+        "Low-vol 2012-14": {
+          "period": "2012-01-01 \u2014 2014-12-31",
+          "h042_unscaled": {
+            "cagr": 0.1823,
+            "sharpe": 2.3806,
+            "max_drawdown": -0.0511,
+            "calmar": 3.5663,
+            "ann_vol": 0.0766,
+            "n_days": 754
+          },
+          "h044_scaled": {
+            "cagr": 0.1906,
+            "sharpe": 2.3071,
+            "max_drawdown": -0.0566,
+            "calmar": 3.3669,
+            "ann_vol": 0.0826,
+            "n_days": 754
+          },
+          "scale_factor": {
+            "mean_scale": 1.0527,
+            "min_scale": 0.6406,
+            "max_scale": 1.5
+          }
+        },
+        "Low-vol 2016-17": {
+          "period": "2016-01-01 \u2014 2017-12-31",
+          "h042_unscaled": {
+            "cagr": 0.1628,
+            "sharpe": 2.7263,
+            "max_drawdown": -0.0261,
+            "calmar": 6.2444,
+            "ann_vol": 0.0597,
+            "n_days": 503
+          },
+          "h044_scaled": {
+            "cagr": 0.2034,
+            "sharpe": 2.5087,
+            "max_drawdown": -0.0326,
+            "calmar": 6.2337,
+            "ann_vol": 0.0811,
+            "n_days": 503
+          },
+          "scale_factor": {
+            "mean_scale": 1.3354,
+            "min_scale": 0.8596,
+            "max_scale": 1.5
+          }
+        }
+      }
+    },
+    "target_10pct": {
+      "target_vol": 0.1,
+      "stats": {
+        "cagr": 0.1644,
+        "sharpe": 1.561,
+        "max_drawdown": -0.1485,
+        "calmar": 1.1069,
+        "ann_vol": 0.1053,
+        "n_days": 5719
+      },
+      "scale_factor_summary": {
+        "mean": 1.1778,
+        "median": 1.1836,
+        "min": 0.3538,
+        "max": 1.5,
+        "pct_above_1": 0.74,
+        "pct_at_cap": 0.2497,
+        "pct_at_floor": 0.0
+      },
+      "regime_analysis": {
+        "GFC 2008-09": {
+          "period": "2008-01-01 \u2014 2009-12-31",
+          "h042_unscaled": {
+            "cagr": 0.2202,
+            "sharpe": 1.9487,
+            "max_drawdown": -0.1146,
+            "calmar": 1.9212,
+            "ann_vol": 0.113,
+            "n_days": 505
+          },
+          "h044_scaled": {
+            "cagr": 0.1885,
+            "sharpe": 1.728,
+            "max_drawdown": -0.0961,
+            "calmar": 1.9612,
+            "ann_vol": 0.1091,
+            "n_days": 505
+          },
+          "scale_factor": {
+            "mean_scale": 1.0419,
+            "min_scale": 0.4738,
+            "max_scale": 1.5
+          }
+        },
+        "COVID 2020": {
+          "period": "2020-01-01 \u2014 2020-12-31",
+          "h042_unscaled": {
+            "cagr": 0.2177,
+            "sharpe": 1.6546,
+            "max_drawdown": -0.1577,
+            "calmar": 1.3799,
+            "ann_vol": 0.1316,
+            "n_days": 253
+          },
+          "h044_scaled": {
+            "cagr": 0.1722,
+            "sharpe": 1.4583,
+            "max_drawdown": -0.1485,
+            "calmar": 1.1593,
+            "ann_vol": 0.1181,
+            "n_days": 253
+          },
+          "scale_factor": {
+            "mean_scale": 0.9467,
+            "min_scale": 0.4358,
+            "max_scale": 1.5
+          }
+        },
+        "Rate shock 2022": {
+          "period": "2022-01-01 \u2014 2022-12-31",
+          "h042_unscaled": {
+            "cagr": 0.0053,
+            "sharpe": 0.0532,
+            "max_drawdown": -0.0946,
+            "calmar": 0.0558,
+            "ann_vol": 0.0992,
+            "n_days": 251
+          },
+          "h044_scaled": {
+            "cagr": -0.0133,
+            "sharpe": -0.1245,
+            "max_drawdown": -0.1126,
+            "calmar": 0.1185,
+            "ann_vol": 0.1072,
+            "n_days": 251
+          },
+          "scale_factor": {
+            "mean_scale": 1.0752,
+            "min_scale": 0.8222,
+            "max_scale": 1.2607
+          }
+        },
+        "Low-vol 2012-14": {
+          "period": "2012-01-01 \u2014 2014-12-31",
+          "h042_unscaled": {
+            "cagr": 0.1823,
+            "sharpe": 2.3806,
+            "max_drawdown": -0.0511,
+            "calmar": 3.5663,
+            "ann_vol": 0.0766,
+            "n_days": 754
+          },
+          "h044_scaled": {
+            "cagr": 0.2226,
+            "sharpe": 2.257,
+            "max_drawdown": -0.0709,
+            "calmar": 3.1413,
+            "ann_vol": 0.0986,
+            "n_days": 754
+          },
+          "scale_factor": {
+            "mean_scale": 1.2668,
+            "min_scale": 0.8008,
+            "max_scale": 1.5
+          }
+        },
+        "Low-vol 2016-17": {
+          "period": "2016-01-01 \u2014 2017-12-31",
+          "h042_unscaled": {
+            "cagr": 0.1628,
+            "sharpe": 2.7263,
+            "max_drawdown": -0.0261,
+            "calmar": 6.2444,
+            "ann_vol": 0.0597,
+            "n_days": 503
+          },
+          "h044_scaled": {
+            "cagr": 0.2271,
+            "sharpe": 2.6013,
+            "max_drawdown": -0.0349,
+            "calmar": 6.5152,
+            "ann_vol": 0.0873,
+            "n_days": 503
+          },
+          "scale_factor": {
+            "mean_scale": 1.456,
+            "min_scale": 1.0745,
+            "max_scale": 1.5
+          }
+        }
+      }
+    },
+    "target_12pct": {
+      "target_vol": 0.12,
+      "stats": {
+        "cagr": 0.1767,
+        "sharpe": 1.4881,
+        "max_drawdown": -0.1766,
+        "calmar": 1.0007,
+        "ann_vol": 0.1187,
+        "n_days": 5719
+      },
+      "scale_factor_summary": {
+        "mean": 1.3135,
+        "median": 1.4204,
+        "min": 0.4245,
+        "max": 1.5,
+        "pct_above_1": 0.8731,
+        "pct_at_cap": 0.4447,
+        "pct_at_floor": 0.0
+      },
+      "regime_analysis": {
+        "GFC 2008-09": {
+          "period": "2008-01-01 \u2014 2009-12-31",
+          "h042_unscaled": {
+            "cagr": 0.2202,
+            "sharpe": 1.9487,
+            "max_drawdown": -0.1146,
+            "calmar": 1.9212,
+            "ann_vol": 0.113,
+            "n_days": 505
+          },
+          "h044_scaled": {
+            "cagr": 0.2152,
+            "sharpe": 1.751,
+            "max_drawdown": -0.1113,
+            "calmar": 1.9336,
+            "ann_vol": 0.1229,
+            "n_days": 505
+          },
+          "scale_factor": {
+            "mean_scale": 1.171,
+            "min_scale": 0.5686,
+            "max_scale": 1.5
+          }
+        },
+        "COVID 2020": {
+          "period": "2020-01-01 \u2014 2020-12-31",
+          "h042_unscaled": {
+            "cagr": 0.2177,
+            "sharpe": 1.6546,
+            "max_drawdown": -0.1577,
+            "calmar": 1.3799,
+            "ann_vol": 0.1316,
+            "n_days": 253
+          },
+          "h044_scaled": {
+            "cagr": 0.197,
+            "sharpe": 1.4249,
+            "max_drawdown": -0.1766,
+            "calmar": 1.1156,
+            "ann_vol": 0.1382,
+            "n_days": 253
+          },
+          "scale_factor": {
+            "mean_scale": 1.1071,
+            "min_scale": 0.523,
+            "max_scale": 1.5
+          }
+        },
+        "Rate shock 2022": {
+          "period": "2022-01-01 \u2014 2022-12-31",
+          "h042_unscaled": {
+            "cagr": 0.0053,
+            "sharpe": 0.0532,
+            "max_drawdown": -0.0946,
+            "calmar": 0.0558,
+            "ann_vol": 0.0992,
+            "n_days": 251
+          },
+          "h044_scaled": {
+            "cagr": -0.0243,
+            "sharpe": -0.1889,
+            "max_drawdown": -0.1364,
+            "calmar": 0.178,
+            "ann_vol": 0.1285,
+            "n_days": 251
+          },
+          "scale_factor": {
+            "mean_scale": 1.2885,
+            "min_scale": 0.9866,
+            "max_scale": 1.5
+          }
+        },
+        "Low-vol 2012-14": {
+          "period": "2012-01-01 \u2014 2014-12-31",
+          "h042_unscaled": {
+            "cagr": 0.1823,
+            "sharpe": 2.3806,
+            "max_drawdown": -0.0511,
+            "calmar": 3.5663,
+            "ann_vol": 0.0766,
+            "n_days": 754
+          },
+          "h044_scaled": {
+            "cagr": 0.2444,
+            "sharpe": 2.2233,
+            "max_drawdown": -0.0771,
+            "calmar": 3.1708,
+            "ann_vol": 0.1099,
+            "n_days": 754
+          },
+          "scale_factor": {
+            "mean_scale": 1.4129,
+            "min_scale": 0.9609,
+            "max_scale": 1.5
+          }
+        },
+        "Low-vol 2016-17": {
+          "period": "2016-01-01 \u2014 2017-12-31",
+          "h042_unscaled": {
+            "cagr": 0.1628,
+            "sharpe": 2.7263,
+            "max_drawdown": -0.0261,
+            "calmar": 6.2444,
+            "ann_vol": 0.0597,
+            "n_days": 503
+          },
+          "h044_scaled": {
+            "cagr": 0.2315,
+            "sharpe": 2.5908,
+            "max_drawdown": -0.0385,
+            "calmar": 6.006,
+            "ann_vol": 0.0893,
+            "n_days": 503
+          },
+          "scale_factor": {
+            "mean_scale": 1.4906,
+            "min_scale": 1.2894,
+            "max_scale": 1.5
+          }
+        }
+      }
+    }
+  },
+  "run_date": "2026-04-27"
+}

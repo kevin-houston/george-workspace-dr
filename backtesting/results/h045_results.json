@@ -1,0 +1,704 @@
+{
+  "strategy": "H045 \u2014 Treasury ETF Momentum Rotation (Pure Fixed-Income)",
+  "description": "7-bond-ETF universe (SHY/IEI/IEF/TLT/TIP/HYG/LQD) rotated by rank(12m_mom) + rank(inv_6m_vol), holding top-2 at 50/50, monthly rebalance. Tests whether yield-curve regime shifts create exploitable momentum.",
+  "universe": [
+    "SHY",
+    "IEI",
+    "IEF",
+    "TLT",
+    "TIP",
+    "HYG",
+    "LQD"
+  ],
+  "benchmark": "AGG",
+  "signal": "rank(12m_mom) + rank(inv_6m_vol), hold top-2 at 50/50",
+  "rebalance": "monthly",
+  "periods": {
+    "full": {
+      "start": "2007-01-01",
+      "end": "2026-04-27"
+    },
+    "is": {
+      "start": "2007-01-01",
+      "end": "2016-12-31"
+    },
+    "oos": {
+      "start": "2017-01-01",
+      "end": "2026-04-27"
+    }
+  },
+  "stats": {
+    "full_h045": {
+      "label": "H045 full",
+      "cagr": 0.0488,
+      "sharpe": 1.505,
+      "max_drawdown": -0.0628,
+      "calmar": 0.7773,
+      "ann_vol": 0.0324,
+      "n_months": 219,
+      "start": "2008-02-29",
+      "end": "2026-04-30"
+    },
+    "full_agg": {
+      "label": "AGG full",
+      "cagr": 0.031,
+      "sharpe": 0.6718,
+      "max_drawdown": -0.1713,
+      "calmar": 0.181,
+      "ann_vol": 0.0462,
+      "n_months": 231,
+      "start": "2007-02-28",
+      "end": "2026-04-30"
+    },
+    "is_h045": {
+      "label": "H045 IS",
+      "cagr": 0.0548,
+      "sharpe": 1.6807,
+      "max_drawdown": -0.0218,
+      "calmar": 2.5197,
+      "ann_vol": 0.0326,
+      "n_months": 107,
+      "start": "2008-02-29",
+      "end": "2016-12-31"
+    },
+    "is_agg": {
+      "label": "AGG IS",
+      "cagr": 0.0422,
+      "sharpe": 1.0677,
+      "max_drawdown": -0.0431,
+      "calmar": 0.9774,
+      "ann_vol": 0.0395,
+      "n_months": 119,
+      "start": "2007-02-28",
+      "end": "2016-12-31"
+    },
+    "oos_h045": {
+      "label": "H045 OOS",
+      "cagr": 0.046,
+      "sharpe": 1.3511,
+      "max_drawdown": -0.0628,
+      "calmar": 0.7327,
+      "ann_vol": 0.034,
+      "n_months": 99,
+      "start": "2018-02-28",
+      "end": "2026-04-30"
+    },
+    "oos_agg": {
+      "label": "AGG OOS",
+      "cagr": 0.0193,
+      "sharpe": 0.3663,
+      "max_drawdown": -0.1713,
+      "calmar": 0.1124,
+      "ann_vol": 0.0526,
+      "n_months": 111,
+      "start": "2017-02-28",
+      "end": "2026-04-30"
+    }
+  },
+  "sharpe_alpha_vs_agg": {
+    "is": 0.613,
+    "oos": 0.9848,
+    "interpretation": {
+      "is": "higher is better; IS 2007-2016 includes low-rate bull market",
+      "oos": "OOS 2017-2026 includes 2022 rate-hike cycle \u2014 true out-of-sample test"
+    }
+  },
+  "holdings_analysis": {
+    "full_period": {
+      "label": "Full period",
+      "total_months": 220,
+      "hold_counts": {
+        "TIP": 54,
+        "SHY": 136,
+        "IEI": 81,
+        "IEF": 36,
+        "LQD": 44,
+        "HYG": 87,
+        "TLT": 2
+      },
+      "hold_frequency": {
+        "SHY": 0.618,
+        "HYG": 0.395,
+        "IEI": 0.368,
+        "TIP": 0.245,
+        "LQD": 0.2,
+        "IEF": 0.164,
+        "TLT": 0.009
+      }
+    },
+    "is_period": {
+      "label": "IS 2007-2016",
+      "total_months": 108,
+      "hold_counts": {
+        "TIP": 32,
+        "SHY": 54,
+        "IEI": 46,
+        "IEF": 23,
+        "LQD": 32,
+        "HYG": 28,
+        "TLT": 1
+      },
+      "hold_frequency": {
+        "SHY": 0.5,
+        "IEI": 0.426,
+        "TIP": 0.296,
+        "LQD": 0.296,
+        "HYG": 0.259,
+        "IEF": 0.213,
+        "TLT": 0.009
+      }
+    },
+    "oos_period": {
+      "label": "OOS 2017-2026",
+      "total_months": 100,
+      "hold_counts": {
+        "HYG": 48,
+        "LQD": 10,
+        "SHY": 72,
+        "TIP": 21,
+        "IEI": 35,
+        "IEF": 13,
+        "TLT": 1
+      },
+      "hold_frequency": {
+        "SHY": 0.72,
+        "HYG": 0.48,
+        "IEI": 0.35,
+        "TIP": 0.21,
+        "IEF": 0.13,
+        "LQD": 0.1,
+        "TLT": 0.01
+      }
+    },
+    "by_year": {
+      "2008": {
+        "top": [
+          "SHY",
+          "TIP",
+          "IEI",
+          "IEF"
+        ],
+        "counts": {
+          "TIP": 7,
+          "SHY": 10,
+          "IEI": 5,
+          "IEF": 2
+        },
+        "n_months": 12
+      },
+      "2009": {
+        "top": [
+          "SHY",
+          "IEI",
+          "LQD",
+          "IEF",
+          "TIP"
+        ],
+        "counts": {
+          "SHY": 9,
+          "IEI": 8,
+          "IEF": 2,
+          "LQD": 3,
+          "TIP": 2
+        },
+        "n_months": 12
+      },
+      "2010": {
+        "top": [
+          "LQD",
+          "SHY",
+          "HYG",
+          "IEF",
+          "TIP",
+          "IEI"
+        ],
+        "counts": {
+          "LQD": 9,
+          "SHY": 4,
+          "HYG": 4,
+          "TIP": 2,
+          "IEF": 3,
+          "IEI": 2
+        },
+        "n_months": 12
+      },
+      "2011": {
+        "top": [
+          "TIP",
+          "LQD",
+          "HYG",
+          "IEI",
+          "IEF"
+        ],
+        "counts": {
+          "LQD": 6,
+          "IEI": 4,
+          "HYG": 6,
+          "TIP": 7,
+          "IEF": 1
+        },
+        "n_months": 12
+      },
+      "2012": {
+        "top": [
+          "TIP",
+          "IEF",
+          "LQD",
+          "HYG",
+          "IEI"
+        ],
+        "counts": {
+          "IEF": 6,
+          "TIP": 11,
+          "IEI": 1,
+          "LQD": 4,
+          "HYG": 2
+        },
+        "n_months": 12
+      },
+      "2013": {
+        "top": [
+          "SHY",
+          "HYG",
+          "IEI",
+          "TIP"
+        ],
+        "counts": {
+          "HYG": 6,
+          "SHY": 11,
+          "TIP": 1,
+          "IEI": 6
+        },
+        "n_months": 12
+      },
+      "2014": {
+        "top": [
+          "LQD",
+          "SHY",
+          "HYG",
+          "IEF",
+          "TLT",
+          "IEI"
+        ],
+        "counts": {
+          "SHY": 5,
+          "HYG": 5,
+          "LQD": 8,
+          "TLT": 1,
+          "IEF": 4,
+          "IEI": 1
+        },
+        "n_months": 12
+      },
+      "2015": {
+        "top": [
+          "IEI",
+          "SHY",
+          "IEF",
+          "LQD"
+        ],
+        "counts": {
+          "IEF": 1,
+          "IEI": 12,
+          "LQD": 1,
+          "SHY": 10
+        },
+        "n_months": 12
+      },
+      "2016": {
+        "top": [
+          "IEI",
+          "SHY",
+          "HYG",
+          "IEF",
+          "TIP",
+          "LQD"
+        ],
+        "counts": {
+          "SHY": 5,
+          "IEI": 7,
+          "IEF": 4,
+          "LQD": 1,
+          "HYG": 5,
+          "TIP": 2
+        },
+        "n_months": 12
+      },
+      "2017": {
+        "top": [
+          "HYG",
+          "SHY",
+          "LQD",
+          "TIP"
+        ],
+        "counts": {
+          "SHY": 10,
+          "HYG": 11,
+          "TIP": 1,
+          "LQD": 2
+        },
+        "n_months": 12
+      },
+      "2018": {
+        "top": [
+          "SHY",
+          "HYG",
+          "IEI",
+          "TIP",
+          "LQD"
+        ],
+        "counts": {
+          "HYG": 7,
+          "LQD": 1,
+          "SHY": 11,
+          "TIP": 2,
+          "IEI": 3
+        },
+        "n_months": 12
+      },
+      "2019": {
+        "top": [
+          "IEI",
+          "LQD",
+          "IEF",
+          "SHY",
+          "HYG"
+        ],
+        "counts": {
+          "IEI": 10,
+          "IEF": 4,
+          "LQD": 7,
+          "SHY": 2,
+          "HYG": 1
+        },
+        "n_months": 12
+      },
+      "2020": {
+        "top": [
+          "IEF",
+          "IEI",
+          "TIP",
+          "SHY",
+          "LQD",
+          "HYG",
+          "TLT"
+        ],
+        "counts": {
+          "HYG": 1,
+          "LQD": 2,
+          "TIP": 3,
+          "IEI": 5,
+          "IEF": 9,
+          "SHY": 3,
+          "TLT": 1
+        },
+        "n_months": 12
+      },
+      "2021": {
+        "top": [
+          "SHY",
+          "HYG",
+          "TIP",
+          "IEI"
+        ],
+        "counts": {
+          "TIP": 5,
+          "IEI": 1,
+          "SHY": 11,
+          "HYG": 7
+        },
+        "n_months": 12
+      },
+      "2022": {
+        "top": [
+          "SHY",
+          "TIP",
+          "IEI"
+        ],
+        "counts": {
+          "SHY": 12,
+          "TIP": 6,
+          "IEI": 6
+        },
+        "n_months": 12
+      },
+      "2023": {
+        "top": [
+          "SHY",
+          "IEI",
+          "HYG",
+          "TIP"
+        ],
+        "counts": {
+          "SHY": 12,
+          "IEI": 6,
+          "HYG": 5,
+          "TIP": 1
+        },
+        "n_months": 12
+      },
+      "2024": {
+        "top": [
+          "HYG",
+          "SHY",
+          "TIP"
+        ],
+        "counts": {
+          "SHY": 9,
+          "HYG": 12,
+          "TIP": 3
+        },
+        "n_months": 12
+      },
+      "2025": {
+        "top": [
+          "HYG",
+          "SHY",
+          "IEI",
+          "TIP"
+        ],
+        "counts": {
+          "SHY": 8,
+          "HYG": 11,
+          "IEI": 4,
+          "TIP": 1
+        },
+        "n_months": 12
+      },
+      "2026": {
+        "top": [
+          "HYG",
+          "SHY"
+        ],
+        "counts": {
+          "HYG": 4,
+          "SHY": 4
+        },
+        "n_months": 4
+      }
+    }
+  },
+  "recent_holdings": [
+    {
+      "month": "2025-11-30",
+      "holdings": [
+        "HYG",
+        "IEI"
+      ],
+      "scores": {
+        "SHY": 9.0,
+        "IEI": 10.0,
+        "IEF": 9.0,
+        "TLT": 2.0,
+        "TIP": 9.0,
+        "HYG": 11.0,
+        "LQD": 6.0
+      },
+      "mom_12m": {
+        "SHY": 0.049,
+        "IEI": 0.0627,
+        "IEF": 0.064,
+        "TLT": 0.0026,
+        "TIP": 0.0559,
+        "HYG": 0.0722,
+        "LQD": 0.0579
+      },
+      "vol_6m": {
+        "SHY": 0.0113,
+        "IEI": 0.0227,
+        "IEF": 0.0284,
+        "TLT": 0.0612,
+        "TIP": 0.0205,
+        "HYG": 0.0234,
+        "LQD": 0.0304
+      }
+    },
+    {
+      "month": "2025-12-31",
+      "holdings": [
+        "HYG",
+        "SHY"
+      ],
+      "scores": {
+        "SHY": 9.0,
+        "IEI": 9.0,
+        "IEF": 8.0,
+        "TLT": 2.0,
+        "TIP": 7.0,
+        "HYG": 13.0,
+        "LQD": 8.0
+      },
+      "mom_12m": {
+        "SHY": 0.0495,
+        "IEI": 0.0696,
+        "IEF": 0.0803,
+        "TLT": 0.0425,
+        "TIP": 0.0676,
+        "HYG": 0.0859,
+        "LQD": 0.079
+      },
+      "vol_6m": {
+        "SHY": 0.0109,
+        "IEI": 0.0231,
+        "IEF": 0.0325,
+        "TLT": 0.0741,
+        "TIP": 0.0253,
+        "HYG": 0.0151,
+        "LQD": 0.0324
+      }
+    },
+    {
+      "month": "2026-01-31",
+      "holdings": [
+        "HYG",
+        "SHY"
+      ],
+      "scores": {
+        "SHY": 9.0,
+        "IEI": 9.0,
+        "IEF": 8.0,
+        "TLT": 2.0,
+        "TIP": 7.0,
+        "HYG": 13.0,
+        "LQD": 8.0
+      },
+      "mom_12m": {
+        "SHY": 0.0477,
+        "IEI": 0.0643,
+        "IEF": 0.0712,
+        "TLT": 0.037,
+        "TIP": 0.0587,
+        "HYG": 0.0779,
+        "LQD": 0.0764
+      },
+      "vol_6m": {
+        "SHY": 0.0086,
+        "IEI": 0.0207,
+        "IEF": 0.03,
+        "TLT": 0.0707,
+        "TIP": 0.0248,
+        "HYG": 0.0133,
+        "LQD": 0.031
+      }
+    },
+    {
+      "month": "2026-02-28",
+      "holdings": [
+        "HYG",
+        "SHY"
+      ],
+      "scores": {
+        "SHY": 9.0,
+        "IEI": 9.0,
+        "IEF": 9.0,
+        "TLT": 2.0,
+        "TIP": 7.0,
+        "HYG": 12.0,
+        "LQD": 8.0
+      },
+      "mom_12m": {
+        "SHY": 0.0456,
+        "IEI": 0.0616,
+        "IEF": 0.0678,
+        "TLT": 0.0266,
+        "TIP": 0.0495,
+        "HYG": 0.0675,
+        "LQD": 0.066
+      },
+      "vol_6m": {
+        "SHY": 0.0041,
+        "IEI": 0.0206,
+        "IEF": 0.0386,
+        "TLT": 0.0914,
+        "TIP": 0.021,
+        "HYG": 0.0132,
+        "LQD": 0.0324
+      }
+    },
+    {
+      "month": "2026-03-31",
+      "holdings": [
+        "HYG",
+        "SHY"
+      ],
+      "scores": {
+        "SHY": 10.0,
+        "IEI": 9.0,
+        "IEF": 6.0,
+        "TLT": 2.0,
+        "TIP": 7.0,
+        "HYG": 13.0,
+        "LQD": 9.0
+      },
+      "mom_12m": {
+        "SHY": 0.0361,
+        "IEI": 0.04,
+        "IEF": 0.0395,
+        "TLT": -0.0049,
+        "TIP": 0.0282,
+        "HYG": 0.0689,
+        "LQD": 0.0487
+      },
+      "vol_6m": {
+        "SHY": 0.0123,
+        "IEI": 0.0345,
+        "IEF": 0.0569,
+        "TLT": 0.1077,
+        "TIP": 0.0319,
+        "HYG": 0.0216,
+        "LQD": 0.0431
+      }
+    },
+    {
+      "month": "2026-04-30",
+      "holdings": [
+        "HYG",
+        "SHY"
+      ],
+      "scores": {
+        "SHY": 10.0,
+        "IEI": 7.0,
+        "IEF": 6.0,
+        "TLT": 2.0,
+        "TIP": 9.0,
+        "HYG": 13.0,
+        "LQD": 9.0
+      },
+      "mom_12m": {
+        "SHY": 0.0309,
+        "IEI": 0.0301,
+        "IEF": 0.0333,
+        "TLT": 0.0131,
+        "TIP": 0.0403,
+        "HYG": 0.0852,
+        "LQD": 0.0618
+      },
+      "vol_6m": {
+        "SHY": 0.0123,
+        "IEI": 0.0343,
+        "IEF": 0.0564,
+        "TLT": 0.1054,
+        "TIP": 0.0365,
+        "HYG": 0.0299,
+        "LQD": 0.0453
+      }
+    }
+  ],
+  "h045_vs_h042": {
+    "correlation_to_h041a": 0.4751,
+    "n_common_months": 219,
+    "interpretation": "Moderate correlation (0.30 \u2264 |r| < 0.50) \u2192 partial diversifier"
+  },
+  "is_oos_delta": {
+    "cagr_is": 0.0548,
+    "cagr_oos": 0.046,
+    "sharpe_is": 1.6807,
+    "sharpe_oos": 1.3511,
+    "max_drawdown_is": -0.0218,
+    "max_drawdown_oos": -0.0628,
+    "note": "OOS includes 2022 rate-hike cycle \u2014 hardest test for bond momentum"
+  },
+  "verdict": "Strong OOS outperformance \u2014 yield-curve momentum is robust; real diversifier candidate",
+  "hypothesis_result": "SUPPORTED",
+  "run_date": "2026-04-27"
+}

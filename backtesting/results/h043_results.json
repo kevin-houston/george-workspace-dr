@@ -1,0 +1,232 @@
+{
+  "strategy": "H043 \u2014 IS/OOS Validation + Walk-Forward of H042",
+  "description": "Formal overfitting check: optimize weights on IS (2003-2016), apply to OOS (2017-2026)",
+  "h042_reference": {
+    "weights": {
+      "w_h041a": 0.56,
+      "w_h026": 0.16,
+      "w_h037b": 0.28
+    },
+    "full_period_sharpe": 1.9492,
+    "full_period_maxdd": -0.0902
+  },
+  "periods": {
+    "full": {
+      "start": "2003-08-31",
+      "end": "2026-04-30",
+      "n_months": 273
+    },
+    "IS": {
+      "start": "2003-08-31",
+      "end": "2016-12-31",
+      "n_months": 161,
+      "n_years": 13.4
+    },
+    "OOS": {
+      "start": "2017-01-31",
+      "end": "2026-04-30",
+      "n_months": 112,
+      "n_years": 9.3
+    }
+  },
+  "IS_optimization": {
+    "method": "101-step grid search, max-Sharpe",
+    "is_opt_weights": {
+      "w_h041a": 0.42,
+      "w_h026": 0.22,
+      "w_h037b": 0.36
+    },
+    "is_performance": {
+      "cagr": 0.1446,
+      "sharpe": 2.1452,
+      "max_drawdown": -0.0808,
+      "calmar": 1.7886,
+      "ann_vol": 0.0674,
+      "n_months": 161
+    }
+  },
+  "OOS_results": {
+    "is_optimal_weights": {
+      "cagr": 0.1408,
+      "sharpe": 1.6653,
+      "max_drawdown": -0.1143,
+      "calmar": 1.2317,
+      "ann_vol": 0.0846,
+      "n_months": 112
+    },
+    "full_period_weights": {
+      "cagr": 0.1431,
+      "sharpe": 1.768,
+      "max_drawdown": -0.0879,
+      "calmar": 1.6284,
+      "ann_vol": 0.081,
+      "n_months": 112
+    }
+  },
+  "full_period_at_full_weights": {
+    "cagr": 0.1449,
+    "sharpe": 1.9492,
+    "max_drawdown": -0.0902,
+    "calmar": 1.607,
+    "ann_vol": 0.0743,
+    "n_months": 273
+  },
+  "component_performance": {
+    "IS": {
+      "h041a": {
+        "cagr": 0.1505,
+        "sharpe": 1.6594,
+        "max_drawdown": -0.134,
+        "calmar": 1.1237,
+        "ann_vol": 0.0907,
+        "n_months": 161
+      },
+      "h026": {
+        "cagr": 0.1517,
+        "sharpe": 1.4281,
+        "max_drawdown": -0.2553,
+        "calmar": 0.5942,
+        "ann_vol": 0.1062,
+        "n_months": 161
+      },
+      "h037b": {
+        "cagr": 0.1265,
+        "sharpe": 1.3641,
+        "max_drawdown": -0.0735,
+        "calmar": 1.7216,
+        "ann_vol": 0.0927,
+        "n_months": 161
+      }
+    },
+    "OOS": {
+      "h041a": {
+        "cagr": 0.1504,
+        "sharpe": 1.6651,
+        "max_drawdown": -0.1374,
+        "calmar": 1.095,
+        "ann_vol": 0.0903,
+        "n_months": 112
+      },
+      "h026": {
+        "cagr": 0.1717,
+        "sharpe": 1.3657,
+        "max_drawdown": -0.1701,
+        "calmar": 1.0093,
+        "ann_vol": 0.1257,
+        "n_months": 112
+      },
+      "h037b": {
+        "cagr": 0.104,
+        "sharpe": 0.8724,
+        "max_drawdown": -0.2174,
+        "calmar": 0.4783,
+        "ann_vol": 0.1192,
+        "n_months": 112
+      }
+    }
+  },
+  "degradation": {
+    "is_to_oos_sharpe_pct_is_weights": -22.37,
+    "full_to_oos_sharpe_pct_full_weights": -9.3,
+    "note": "Negative = OOS Sharpe lower than IS/full-period Sharpe (expected; positive = OOS beats IS)"
+  },
+  "walk_forward": {
+    "n_folds": 5,
+    "method": "expanding window: train on all data before test fold",
+    "fold_details": [
+      {
+        "fold": 2,
+        "train_start": "2003-08-31",
+        "train_end": "2008-01-31",
+        "train_months": 54,
+        "test_start": "2008-02-29",
+        "test_end": "2012-07-31",
+        "test_months": 54,
+        "is_opt_weights": {
+          "w_h041a": 0.4333,
+          "w_h026": 0.5667,
+          "w_h037b": 0.0
+        },
+        "is_sharpe": 2.6776,
+        "is_cagr": 0.1602,
+        "oos_sharpe": 1.0489,
+        "oos_cagr": 0.1151,
+        "oos_maxdd": -0.1257
+      },
+      {
+        "fold": 3,
+        "train_start": "2003-08-31",
+        "train_end": "2012-07-31",
+        "train_months": 108,
+        "test_start": "2012-08-31",
+        "test_end": "2017-01-31",
+        "test_months": 54,
+        "is_opt_weights": {
+          "w_h041a": 0.4,
+          "w_h026": 0.2333,
+          "w_h037b": 0.3667
+        },
+        "is_sharpe": 1.9081,
+        "is_cagr": 0.1394,
+        "oos_sharpe": 2.9132,
+        "oos_cagr": 0.158,
+        "oos_maxdd": -0.0236
+      },
+      {
+        "fold": 4,
+        "train_start": "2003-08-31",
+        "train_end": "2017-01-31",
+        "train_months": 162,
+        "test_start": "2017-02-28",
+        "test_end": "2021-07-31",
+        "test_months": 54,
+        "is_opt_weights": {
+          "w_h041a": 0.4,
+          "w_h026": 0.2333,
+          "w_h037b": 0.3667
+        },
+        "is_sharpe": 2.1653,
+        "is_cagr": 0.1456,
+        "oos_sharpe": 1.7525,
+        "oos_cagr": 0.1614,
+        "oos_maxdd": -0.1179
+      },
+      {
+        "fold": 5,
+        "train_start": "2003-08-31",
+        "train_end": "2021-07-31",
+        "train_months": 216,
+        "test_start": "2021-08-31",
+        "test_end": "2026-04-30",
+        "test_months": 57,
+        "is_opt_weights": {
+          "w_h041a": 0.6,
+          "w_h026": 0.2,
+          "w_h037b": 0.2
+        },
+        "is_sharpe": 2.1161,
+        "is_cagr": 0.1563,
+        "oos_sharpe": 1.3587,
+        "oos_cagr": 0.1161,
+        "oos_maxdd": -0.086
+      }
+    ],
+    "avg_oos_sharpe": 1.7683,
+    "std_oos_sharpe": 0.7065,
+    "avg_is_sharpe": 2.2168,
+    "wf_degradation_pct": -20.23
+  },
+  "verdict": {
+    "overfitting_risk": "MODERATE overfit risk \u2014 meaningful degradation but OOS Sharpe remains investable",
+    "oos_sharpe_is_weights": 1.6653,
+    "oos_sharpe_full_weights": 1.768,
+    "is_sharpe": 2.1452,
+    "sharpe_deg_is_weights_pct": -22.37,
+    "sharpe_deg_full_weights_pct": -9.3,
+    "comparable_strategies": {
+      "H020_degradation_pct": -6.7,
+      "H031_implicit": "not measured"
+    }
+  },
+  "run_date": "2026-04-27"
+}
