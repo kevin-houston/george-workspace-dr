@@ -1,0 +1,112 @@
+{
+  "strategy": "H026 \u2014 Sector ETF Momentum Rotation",
+  "universe": [
+    "XLK",
+    "XLE",
+    "XLF",
+    "XLV",
+    "XLI",
+    "XLB",
+    "XLU",
+    "XLRE",
+    "XLY",
+    "XLP",
+    "XLC"
+  ],
+  "signal": "rank(12m_momentum) + rank(inv_6m_vol), hold top-3 equal weight",
+  "rebalance": "monthly",
+  "full_start": "2000-01-01",
+  "full_end": "2026-04-25",
+  "is_cutoff": "2015-12-31",
+  "oos_start": "2016-01-01",
+  "ticker_starts": {
+    "XLK": "2000-01-03",
+    "XLE": "2000-01-03",
+    "XLF": "2000-01-03",
+    "XLV": "2000-01-03",
+    "XLI": "2000-01-03",
+    "XLB": "2000-01-03",
+    "XLU": "2000-01-03",
+    "XLRE": "2015-10-08",
+    "XLY": "2000-01-03",
+    "XLP": "2000-01-03",
+    "XLC": "2018-06-19"
+  },
+  "results": {
+    "full_period": {
+      "h026": {
+        "cagr": 0.1416,
+        "sharpe": 0.8721,
+        "max_drawdown": -0.317,
+        "calmar": 0.4466,
+        "ann_vol": 0.1623,
+        "win_rate": 0.5607,
+        "n_years": 25.3
+      },
+      "spy_bh": {
+        "cagr": 0.0874,
+        "sharpe": 0.4479,
+        "max_drawdown": -0.5519,
+        "calmar": 0.1583,
+        "ann_vol": 0.1951,
+        "win_rate": 0.5464,
+        "n_years": 25.3
+      }
+    },
+    "in_sample": {
+      "h026": {
+        "cagr": 0.1212,
+        "sharpe": 0.7419,
+        "max_drawdown": -0.2934,
+        "calmar": 0.4133,
+        "ann_vol": 0.1634,
+        "win_rate": 0.556,
+        "n_years": 15.0
+      },
+      "spy_bh": {
+        "cagr": 0.0477,
+        "sharpe": 0.2349,
+        "max_drawdown": -0.5519,
+        "calmar": 0.0864,
+        "ann_vol": 0.2031,
+        "win_rate": 0.5434,
+        "n_years": 15.0
+      }
+    },
+    "out_of_sample": {
+      "h026": {
+        "cagr": 0.171,
+        "sharpe": 1.0335,
+        "max_drawdown": -0.317,
+        "calmar": 0.5395,
+        "ann_vol": 0.1655,
+        "win_rate": 0.564,
+        "n_years": 9.3
+      },
+      "spy_bh": {
+        "cagr": 0.1494,
+        "sharpe": 0.7968,
+        "max_drawdown": -0.3372,
+        "calmar": 0.443,
+        "ann_vol": 0.1874,
+        "win_rate": 0.5514,
+        "n_years": 9.3
+      }
+    }
+  },
+  "oos_degradation_pct_sharpe": -39.3,
+  "h020_monthly_corr": 0.4829,
+  "sector_frequency": {
+    "XLF": 107,
+    "XLI": 87,
+    "XLP": 144,
+    "XLU": 103,
+    "XLB": 63,
+    "XLY": 89,
+    "XLV": 117,
+    "XLE": 38,
+    "XLK": 101,
+    "XLRE": 23,
+    "XLC": 40
+  }
+}

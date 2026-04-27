@@ -1,0 +1,399 @@
+{
+  "strategy": "H022 \u2014 Tax-Efficient H020 (Minimum-Hold Rule)",
+  "universe": [
+    "SPY",
+    "QQQ",
+    "TLT",
+    "GLD",
+    "IEF"
+  ],
+  "period": "2008-01-01 \u2192 2026-04-25",
+  "tax_rates": {
+    "stcg": 0.37,
+    "ltcg": 0.2
+  },
+  "pretax": {
+    "cagr": 0.086,
+    "sharpe": 0.7025,
+    "max_drawdown": -0.2935,
+    "calmar": 0.2931,
+    "ann_vol": 0.1225,
+    "win_rate": 0.5507,
+    "n_years": 18.2,
+    "final_value": 450796.41
+  },
+  "aftertax": {
+    "cagr": 0.0654,
+    "sharpe": 0.5241,
+    "max_drawdown": -0.3123,
+    "calmar": 0.2094,
+    "ann_vol": 0.1248,
+    "win_rate": 0.549,
+    "n_years": 18.2,
+    "final_value": 317621.42
+  },
+  "spy_bh": {
+    "cagr": 0.1113,
+    "sharpe": 0.5599,
+    "max_drawdown": -0.5187,
+    "calmar": 0.2145,
+    "ann_vol": 0.1987,
+    "win_rate": 0.551,
+    "n_years": 18.3,
+    "final_value": 689826.5
+  },
+  "comparison_table": {
+    "h020_pretax": {
+      "cagr": 0.0769,
+      "sharpe": 0.6309,
+      "max_drawdown": -0.2441,
+      "calmar": 0.3149,
+      "ann_vol": 0.1218,
+      "win_rate": 0.5436,
+      "n_years": 18.2,
+      "final_value": 386086.17
+    },
+    "h020_aftertax": {
+      "cagr": 0.0505,
+      "sharpe": 0.4081,
+      "max_drawdown": -0.2522,
+      "calmar": 0.2002,
+      "ann_vol": 0.1238,
+      "win_rate": 0.5399,
+      "n_years": 18.2,
+      "final_value": 245706.53
+    },
+    "h022_pretax": {
+      "cagr": 0.086,
+      "sharpe": 0.7025,
+      "max_drawdown": -0.2935,
+      "calmar": 0.2931,
+      "ann_vol": 0.1225,
+      "win_rate": 0.5507,
+      "n_years": 18.2,
+      "final_value": 450796.41
+    },
+    "h022_aftertax": {
+      "cagr": 0.0654,
+      "sharpe": 0.5241,
+      "max_drawdown": -0.3123,
+      "calmar": 0.2094,
+      "ann_vol": 0.1248,
+      "win_rate": 0.549,
+      "n_years": 18.2,
+      "final_value": 317621.42
+    }
+  },
+  "tax_breakdown": {
+    "total_stcg_gains": 36226.5,
+    "total_ltcg_gains": 322499.26,
+    "total_stcg_losses": 33052.48,
+    "total_ltcg_losses": 44047.52,
+    "total_tax_paid": 64458.28,
+    "stcg_pct_of_gains": 10.1,
+    "ltcg_pct_of_gains": 89.9,
+    "n_stcg_sales": 5,
+    "n_ltcg_sales": 20,
+    "n_st_losses": 6,
+    "n_lt_losses": 4,
+    "stcg_carryforward": -20523.09,
+    "ltcg_carryforward": 0.0
+  },
+  "hold_rule_stats": {
+    "hold_overrides": 107,
+    "forced_exits": 11,
+    "h020_stcg_pct": 89.75,
+    "h022_stcg_pct": 10.1
+  },
+  "avg_holding_periods": {
+    "TLT": {
+      "avg_days": 334.7,
+      "median_days": 365.0,
+      "min_days": 214,
+      "max_days": 455,
+      "n_sales": 7,
+      "pct_lt": 71.4
+    },
+    "IEF": {
+      "avg_days": 472.0,
+      "median_days": 411.5,
+      "min_days": 365,
+      "max_days": 700,
+      "n_sales": 6,
+      "pct_lt": 100.0
+    },
+    "GLD": {
+      "avg_days": 243.7,
+      "median_days": 276.0,
+      "min_days": 30,
+      "max_days": 426,
+      "n_sales": 7,
+      "pct_lt": 42.9
+    },
+    "SPY": {
+      "avg_days": 413.0,
+      "median_days": 426.0,
+      "min_days": 60,
+      "max_days": 852,
+      "n_sales": 7,
+      "pct_lt": 71.4
+    },
+    "QQQ": {
+      "avg_days": 330.6,
+      "median_days": 365.0,
+      "min_days": 121,
+      "max_days": 486,
+      "n_sales": 8,
+      "pct_lt": 62.5
+    }
+  },
+  "sale_events_sample": [
+    {
+      "date": "2009-04-30",
+      "ticker": "TLT",
+      "days_held": 455,
+      "gain": 4363.8,
+      "type": "LTCG"
+    },
+    {
+      "date": "2009-12-31",
+      "ticker": "IEF",
+      "days_held": 700,
+      "gain": 3283.26,
+      "type": "LTCG"
+    },
+    {
+      "date": "2010-01-31",
+      "ticker": "GLD",
+      "days_held": 276,
+      "gain": 10874.85,
+      "type": "STCG"
+    },
+    {
+      "date": "2010-05-31",
+      "ticker": "SPY",
+      "days_held": 151,
+      "gain": -809.77,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2011-01-31",
+      "ticker": "QQQ",
+      "days_held": 365,
+      "gain": 16797.46,
+      "type": "LTCG"
+    },
+    {
+      "date": "2011-05-31",
+      "ticker": "GLD",
+      "days_held": 365,
+      "gain": 13792.82,
+      "type": "LTCG"
+    },
+    {
+      "date": "2012-02-29",
+      "ticker": "QQQ",
+      "days_held": 274,
+      "gain": 7305.75,
+      "type": "STCG"
+    },
+    {
+      "date": "2012-08-31",
+      "ticker": "IEF",
+      "days_held": 578,
+      "gain": 12496.63,
+      "type": "LTCG"
+    },
+    {
+      "date": "2012-09-30",
+      "ticker": "TLT",
+      "days_held": 214,
+      "gain": 5313.9,
+      "type": "STCG"
+    },
+    {
+      "date": "2013-03-31",
+      "ticker": "QQQ",
+      "days_held": 182,
+      "gain": 1012.38,
+      "type": "STCG"
+    },
+    {
+      "date": "2013-12-31",
+      "ticker": "SPY",
+      "days_held": 487,
+      "gain": 26163.99,
+      "type": "LTCG"
+    },
+    {
+      "date": "2014-03-31",
+      "ticker": "TLT",
+      "days_held": 365,
+      "gain": -3461.73,
+      "type": "LT_LOSS"
+    },
+    {
+      "date": "2014-12-31",
+      "ticker": "QQQ",
+      "days_held": 365,
+      "gain": 14923.39,
+      "type": "LTCG"
+    },
+    {
+      "date": "2015-08-31",
+      "ticker": "SPY",
+      "days_held": 518,
+      "gain": 6714.95,
+      "type": "LTCG"
+    },
+    {
+      "date": "2015-12-31",
+      "ticker": "TLT",
+      "days_held": 365,
+      "gain": -1661.09,
+      "type": "LT_LOSS"
+    },
+    {
+      "date": "2016-04-30",
+      "ticker": "QQQ",
+      "days_held": 121,
+      "gain": -4760.94,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2016-08-31",
+      "ticker": "IEF",
+      "days_held": 366,
+      "gain": 6342.46,
+      "type": "LTCG"
+    },
+    {
+      "date": "2016-11-30",
+      "ticker": "TLT",
+      "days_held": 214,
+      "gain": -5314.03,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2018-03-31",
+      "ticker": "QQQ",
+      "days_held": 486,
+      "gain": 34820.0,
+      "type": "LTCG"
+    },
+    {
+      "date": "2018-07-31",
+      "ticker": "GLD",
+      "days_held": 122,
+      "gain": -8738.05,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2018-12-31",
+      "ticker": "SPY",
+      "days_held": 852,
+      "gain": 20149.28,
+      "type": "LTCG"
+    },
+    {
+      "date": "2019-10-31",
+      "ticker": "IEF",
+      "days_held": 457,
+      "gain": 15551.66,
+      "type": "LTCG"
+    },
+    {
+      "date": "2019-11-30",
+      "ticker": "GLD",
+      "days_held": 30,
+      "gain": -3903.91,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2019-12-31",
+      "ticker": "TLT",
+      "days_held": 365,
+      "gain": 15091.27,
+      "type": "LTCG"
+    },
+    {
+      "date": "2020-02-29",
+      "ticker": "SPY",
+      "days_held": 60,
+      "gain": -9525.79,
+      "type": "ST_LOSS"
+    },
+    {
+      "date": "2021-02-28",
+      "ticker": "QQQ",
+      "days_held": 456,
+      "gain": 64954.35,
+      "type": "LTCG"
+    },
+    {
+      "date": "2021-02-28",
+      "ticker": "GLD",
+      "days_held": 365,
+      "gain": 10233.02,
+      "type": "LTCG"
+    },
+    {
+      "date": "2022-02-28",
+      "ticker": "IEF",
+      "days_held": 365,
+      "gain": -3075.69,
+      "type": "LT_LOSS"
+    },
+    {
+      "date": "2022-04-30",
+      "ticker": "SPY",
+      "days_held": 426,
+      "gain": 13464.76,
+      "type": "LTCG"
+    },
+    {
+      "date": "2023-02-28",
+      "ticker": "TLT",
+      "days_held": 365,
+      "gain": -35849.01,
+      "type": "LT_LOSS"
+    },
+    {
+      "date": "2023-06-30",
+      "ticker": "GLD",
+      "days_held": 426,
+      "gain": 967.78,
+      "type": "LTCG"
+    },
+    {
+      "date": "2024-02-29",
+      "ticker": "IEF",
+      "days_held": 366,
+      "gain": 1559.44,
+      "type": "LTCG"
+    },
+    {
+      "date": "2024-07-31",
+      "ticker": "SPY",
+      "days_held": 397,
+      "gain": 30996.99,
+      "type": "LTCG"
+    },
+    {
+      "date": "2024-11-30",
+      "ticker": "GLD",
+      "days_held": 122,
+      "gain": 11719.62,
+      "type": "STCG"
+    },
+    {
+      "date": "2025-03-31",
+      "ticker": "QQQ",
+      "days_held": 396,
+      "gain": 9831.94,
+      "type": "LTCG"
+    }
+  ],
+  "total_sale_events": 35,
+  "cagr_drag": 0.0206
+}

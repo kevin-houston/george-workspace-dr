@@ -1,0 +1,5127 @@
+{
+  "strategy": "H027",
+  "description": "Yield-Curve-Conditioned Bond Signal",
+  "hypothesis": "Inverted yield curve (10Y < 2Y) signals recession risk \u2192 TLT outperforms. Steep curve (spread >= 50bps) signals growth regime \u2192 SPY outperforms.",
+  "period": {
+    "start": "2003-01-01",
+    "end": "2026-04-25"
+  },
+  "parameters": {
+    "spread_series": "FRED T10Y2Y (10Y minus 2Y Treasury yield)",
+    "inversion_threshold": 0.0,
+    "steep_threshold_h027b": 0.005,
+    "rebalance": "monthly, first trading day",
+    "cash_instrument": "SHY"
+  },
+  "h027a": {
+    "description": "Long TLT when inverted, else Cash (SHY)",
+    "stats": {
+      "label": "H027a",
+      "n_months": 279,
+      "total_return": 0.243,
+      "cagr": 0.0094,
+      "sharpe": 0.1878,
+      "max_drawdown": -0.2872,
+      "monthly_mean": 0.000924,
+      "monthly_std": 0.017043
+    },
+    "regime_breakdown": {
+      "CASH": {
+        "months": 242,
+        "pct_time": 0.8674,
+        "avg_monthly_return": 0.001436
+      },
+      "TLT": {
+        "months": 37,
+        "pct_time": 0.1326,
+        "avg_monthly_return": -0.00242
+      }
+    },
+    "correlation_to_h020": -0.0016
+  },
+  "h027b": {
+    "description": "Long TLT when inverted, SPY when steep (>=50bps), else Cash",
+    "stats": {
+      "label": "H027b",
+      "n_months": 279,
+      "total_return": 5.9719,
+      "cagr": 0.0871,
+      "sharpe": 0.5916,
+      "max_drawdown": -0.5289,
+      "monthly_mean": 0.008132,
+      "monthly_std": 0.047619
+    },
+    "regime_breakdown": {
+      "CASH": {
+        "months": 2,
+        "pct_time": 0.0072,
+        "avg_monthly_return": 0.003152
+      },
+      "SPY": {
+        "months": 240,
+        "pct_time": 0.8602,
+        "avg_monthly_return": 0.0098
+      },
+      "TLT": {
+        "months": 37,
+        "pct_time": 0.1326,
+        "avg_monthly_return": -0.00242
+      }
+    },
+    "correlation_to_h020": -0.123
+  },
+  "benchmarks": {
+    "tlt_buy_hold": {
+      "label": "TLT Buy-Hold",
+      "n_months": 279,
+      "total_return": 1.1663,
+      "cagr": 0.0338,
+      "sharpe": 0.3127,
+      "max_drawdown": -0.4761,
+      "monthly_mean": 0.003529,
+      "monthly_std": 0.039094
+    },
+    "spy_buy_hold": {
+      "label": "SPY Buy-Hold",
+      "n_months": 279,
+      "total_return": 11.7014,
+      "cagr": 0.1155,
+      "sharpe": 0.8298,
+      "max_drawdown": -0.5078,
+      "monthly_mean": 0.010034,
+      "monthly_std": 0.041886
+    }
+  },
+  "spread_stats": {
+    "mean_spread": 1.0666,
+    "pct_inverted": 0.1341,
+    "pct_steep_50bps": 0.8627,
+    "pct_neutral": 0.0033
+  },
+  "trades_h027a": [
+    {
+      "entry_date": "2003-02-03",
+      "exit_date": "2003-03-03",
+      "spread": 2.28,
+      "regime": "CASH",
+      "monthly_return": 0.004837,
+      "equity_before": 100.0,
+      "equity_after": 100.4837
+    },
+    {
+      "entry_date": "2003-03-03",
+      "exit_date": "2003-04-01",
+      "spread": 2.18,
+      "regime": "CASH",
+      "monthly_return": 0.001238,
+      "equity_before": 100.4837,
+      "equity_after": 100.6081
+    },
+    {
+      "entry_date": "2003-04-01",
+      "exit_date": "2003-05-01",
+      "spread": 2.32,
+      "regime": "CASH",
+      "monthly_return": 0.001821,
+      "equity_before": 100.6081,
+      "equity_after": 100.7913
+    },
+    {
+      "entry_date": "2003-05-01",
+      "exit_date": "2003-06-02",
+      "spread": 2.38,
+      "regime": "CASH",
+      "monthly_return": 0.00312,
+      "equity_before": 100.7913,
+      "equity_after": 101.1058
+    },
+    {
+      "entry_date": "2003-06-02",
+      "exit_date": "2003-07-01",
+      "spread": 2.04,
+      "regime": "CASH",
+      "monthly_return": 0.002204,
+      "equity_before": 101.1058,
+      "equity_after": 101.3286
+    },
+    {
+      "entry_date": "2003-07-01",
+      "exit_date": "2003-08-01",
+      "spread": 2.22,
+      "regime": "CASH",
+      "monthly_return": -0.00615,
+      "equity_before": 101.3286,
+      "equity_after": 100.7055
+    },
+    {
+      "entry_date": "2003-08-01",
+      "exit_date": "2003-09-02",
+      "spread": 2.69,
+      "regime": "CASH",
+      "monthly_return": -0.000697,
+      "equity_before": 100.7055,
+      "equity_after": 100.6353
+    },
+    {
+      "entry_date": "2003-09-02",
+      "exit_date": "2003-10-01",
+      "spread": 2.5,
+      "regime": "CASH",
+      "monthly_return": 0.011034,
+      "equity_before": 100.6353,
+      "equity_after": 101.7457
+    },
+    {
+      "entry_date": "2003-10-01",
+      "exit_date": "2003-11-03",
+      "spread": 2.46,
+      "regime": "CASH",
+      "monthly_return": -0.004829,
+      "equity_before": 101.7457,
+      "equity_after": 101.2544
+    },
+    {
+      "entry_date": "2003-11-03",
+      "exit_date": "2003-12-01",
+      "spread": 2.48,
+      "regime": "CASH",
+      "monthly_return": -0.001365,
+      "equity_before": 101.2544,
+      "equity_after": 101.1162
+    },
+    {
+      "entry_date": "2003-12-01",
+      "exit_date": "2004-01-02",
+      "spread": 2.28,
+      "regime": "CASH",
+      "monthly_return": 0.009794,
+      "equity_before": 101.1162,
+      "equity_after": 102.1065
+    },
+    {
+      "entry_date": "2004-01-02",
+      "exit_date": "2004-02-02",
+      "spread": 2.43,
+      "regime": "CASH",
+      "monthly_return": 0.004,
+      "equity_before": 102.1065,
+      "equity_after": 102.5149
+    },
+    {
+      "entry_date": "2004-02-02",
+      "exit_date": "2004-03-01",
+      "spread": 2.32,
+      "regime": "CASH",
+      "monthly_return": 0.004158,
+      "equity_before": 102.5149,
+      "equity_after": 102.9411
+    },
+    {
+      "entry_date": "2004-03-01",
+      "exit_date": "2004-04-01",
+      "spread": 2.33,
+      "regime": "CASH",
+      "monthly_return": 0.001932,
+      "equity_before": 102.9411,
+      "equity_after": 103.1401
+    },
+    {
+      "entry_date": "2004-04-01",
+      "exit_date": "2004-05-03",
+      "spread": 2.26,
+      "regime": "CASH",
+      "monthly_return": -0.008991,
+      "equity_before": 103.1401,
+      "equity_after": 102.2128
+    },
+    {
+      "entry_date": "2004-05-03",
+      "exit_date": "2004-06-01",
+      "spread": 2.22,
+      "regime": "CASH",
+      "monthly_return": -0.001906,
+      "equity_before": 102.2128,
+      "equity_after": 102.0179
+    },
+    {
+      "entry_date": "2004-06-01",
+      "exit_date": "2004-07-01",
+      "spread": 2.12,
+      "regime": "CASH",
+      "monthly_return": 0.001434,
+      "equity_before": 102.0179,
+      "equity_after": 102.1642
+    },
+    {
+      "entry_date": "2004-07-01",
+      "exit_date": "2004-08-02",
+      "spread": 1.92,
+      "regime": "CASH",
+      "monthly_return": 0.003347,
+      "equity_before": 102.1642,
+      "equity_after": 102.5061
+    },
+    {
+      "entry_date": "2004-08-02",
+      "exit_date": "2004-09-01",
+      "spread": 1.82,
+      "regime": "CASH",
+      "monthly_return": 0.006879,
+      "equity_before": 102.5061,
+      "equity_after": 103.2112
+    },
+    {
+      "entry_date": "2004-09-01",
+      "exit_date": "2004-10-01",
+      "spread": 1.72,
+      "regime": "CASH",
+      "monthly_return": -0.001925,
+      "equity_before": 103.2112,
+      "equity_after": 103.0126
+    },
+    {
+      "entry_date": "2004-10-01",
+      "exit_date": "2004-11-01",
+      "spread": 1.51,
+      "regime": "CASH",
+      "monthly_return": 0.00303,
+      "equity_before": 103.0126,
+      "equity_after": 103.3247
+    },
+    {
+      "entry_date": "2004-11-01",
+      "exit_date": "2004-12-01",
+      "spread": 1.49,
+      "regime": "CASH",
+      "monthly_return": -0.004453,
+      "equity_before": 103.3247,
+      "equity_after": 102.8646
+    },
+    {
+      "entry_date": "2004-12-01",
+      "exit_date": "2005-01-03",
+      "spread": 1.34,
+      "regime": "CASH",
+      "monthly_return": 0.00177,
+      "equity_before": 102.8646,
+      "equity_after": 103.0466
+    },
+    {
+      "entry_date": "2005-01-03",
+      "exit_date": "2005-02-01",
+      "spread": 1.16,
+      "regime": "CASH",
+      "monthly_return": -0.000233,
+      "equity_before": 103.0466,
+      "equity_after": 103.0226
+    },
+    {
+      "entry_date": "2005-02-01",
+      "exit_date": "2005-03-01",
+      "spread": 0.85,
+      "regime": "CASH",
+      "monthly_return": -0.003041,
+      "equity_before": 103.0226,
+      "equity_after": 102.7093
+    },
+    {
+      "entry_date": "2005-03-01",
+      "exit_date": "2005-04-01",
+      "spread": 0.77,
+      "regime": "CASH",
+      "monthly_return": 0.000991,
+      "equity_before": 102.7093,
+      "equity_after": 102.8111
+    },
+    {
+      "entry_date": "2005-04-01",
+      "exit_date": "2005-05-02",
+      "spread": 0.7,
+      "regime": "CASH",
+      "monthly_return": 0.004707,
+      "equity_before": 102.8111,
+      "equity_after": 103.2951
+    },
+    {
+      "entry_date": "2005-05-02",
+      "exit_date": "2005-06-01",
+      "spread": 0.55,
+      "regime": "CASH",
+      "monthly_return": 0.005814,
+      "equity_before": 103.2951,
+      "equity_after": 103.8957
+    },
+    {
+      "entry_date": "2005-06-01",
+      "exit_date": "2005-07-01",
+      "spread": 0.4,
+      "regime": "CASH",
+      "monthly_return": -0.002273,
+      "equity_before": 103.8957,
+      "equity_after": 103.6595
+    },
+    {
+      "entry_date": "2005-07-01",
+      "exit_date": "2005-08-01",
+      "spread": 0.28,
+      "regime": "CASH",
+      "monthly_return": -0.001598,
+      "equity_before": 103.6595,
+      "equity_after": 103.4939
+    },
+    {
+      "entry_date": "2005-08-01",
+      "exit_date": "2005-09-01",
+      "spread": 0.26,
+      "regime": "CASH",
+      "monthly_return": 0.008424,
+      "equity_before": 103.4939,
+      "equity_after": 104.3657
+    },
+    {
+      "entry_date": "2005-09-01",
+      "exit_date": "2005-10-03",
+      "spread": 0.18,
+      "regime": "CASH",
+      "monthly_return": -0.004645,
+      "equity_before": 104.3657,
+      "equity_after": 103.8809
+    },
+    {
+      "entry_date": "2005-10-03",
+      "exit_date": "2005-11-01",
+      "spread": 0.16,
+      "regime": "CASH",
+      "monthly_return": -9.9e-05,
+      "equity_before": 103.8809,
+      "equity_after": 103.8706
+    },
+    {
+      "entry_date": "2005-11-01",
+      "exit_date": "2005-12-01",
+      "spread": 0.17,
+      "regime": "CASH",
+      "monthly_return": 0.002631,
+      "equity_before": 103.8706,
+      "equity_after": 104.1439
+    },
+    {
+      "entry_date": "2005-12-01",
+      "exit_date": "2006-01-03",
+      "spread": 0.07,
+      "regime": "CASH",
+      "monthly_return": 0.00586,
+      "equity_before": 104.1439,
+      "equity_after": 104.7542
+    },
+    {
+      "entry_date": "2006-01-03",
+      "exit_date": "2006-02-01",
+      "spread": -0.02,
+      "regime": "TLT",
+      "monthly_return": -0.015474,
+      "equity_before": 104.7542,
+      "equity_after": 103.1333
+    },
+    {
+      "entry_date": "2006-02-01",
+      "exit_date": "2006-03-01",
+      "spread": -0.01,
+      "regime": "TLT",
+      "monthly_return": 0.008419,
+      "equity_before": 103.1333,
+      "equity_after": 104.0016
+    },
+    {
+      "entry_date": "2006-03-01",
+      "exit_date": "2006-04-03",
+      "spread": -0.14,
+      "regime": "TLT",
+      "monthly_return": -0.039587,
+      "equity_before": 104.0016,
+      "equity_after": 99.8844
+    },
+    {
+      "entry_date": "2006-04-03",
+      "exit_date": "2006-05-01",
+      "spread": 0.04,
+      "regime": "CASH",
+      "monthly_return": 0.002168,
+      "equity_before": 99.8844,
+      "equity_after": 100.101
+    },
+    {
+      "entry_date": "2006-05-01",
+      "exit_date": "2006-06-01",
+      "spread": 0.2,
+      "regime": "CASH",
+      "monthly_return": 0.003498,
+      "equity_before": 100.101,
+      "equity_after": 100.4512
+    },
+    {
+      "entry_date": "2006-06-01",
+      "exit_date": "2006-07-03",
+      "spread": 0.08,
+      "regime": "CASH",
+      "monthly_return": 0.00098,
+      "equity_before": 100.4512,
+      "equity_after": 100.5497
+    },
+    {
+      "entry_date": "2006-07-03",
+      "exit_date": "2006-08-01",
+      "spread": -0.01,
+      "regime": "TLT",
+      "monthly_return": 0.022548,
+      "equity_before": 100.5497,
+      "equity_after": 102.8168
+    },
+    {
+      "entry_date": "2006-08-01",
+      "exit_date": "2006-09-01",
+      "spread": 0.02,
+      "regime": "CASH",
+      "monthly_return": 0.008046,
+      "equity_before": 102.8168,
+      "equity_after": 103.6441
+    },
+    {
+      "entry_date": "2006-09-01",
+      "exit_date": "2006-10-02",
+      "spread": -0.05,
+      "regime": "TLT",
+      "monthly_return": 0.021593,
+      "equity_before": 103.6441,
+      "equity_after": 105.8821
+    },
+    {
+      "entry_date": "2006-10-02",
+      "exit_date": "2006-11-01",
+      "spread": -0.07,
+      "regime": "TLT",
+      "monthly_return": 0.011276,
+      "equity_before": 105.8821,
+      "equity_after": 107.076
+    },
+    {
+      "entry_date": "2006-11-01",
+      "exit_date": "2006-12-01",
+      "spread": -0.1,
+      "regime": "TLT",
+      "monthly_return": 0.020041,
+      "equity_before": 107.076,
+      "equity_after": 109.2219
+    },
+    {
+      "entry_date": "2006-12-01",
+      "exit_date": "2007-01-03",
+      "spread": -0.16,
+      "regime": "TLT",
+      "monthly_return": -0.022513,
+      "equity_before": 109.2219,
+      "equity_after": 106.7631
+    },
+    {
+      "entry_date": "2007-01-03",
+      "exit_date": "2007-02-01",
+      "spread": -0.12,
+      "regime": "TLT",
+      "monthly_return": -0.018138,
+      "equity_before": 106.7631,
+      "equity_after": 104.8266
+    },
+    {
+      "entry_date": "2007-02-01",
+      "exit_date": "2007-03-01",
+      "spread": -0.11,
+      "regime": "TLT",
+      "monthly_return": 0.034479,
+      "equity_before": 104.8266,
+      "equity_after": 108.4409
+    },
+    {
+      "entry_date": "2007-03-01",
+      "exit_date": "2007-04-02",
+      "spread": -0.09,
+      "regime": "TLT",
+      "monthly_return": -0.014746,
+      "equity_before": 108.4409,
+      "equity_after": 106.8418
+    },
+    {
+      "entry_date": "2007-04-02",
+      "exit_date": "2007-05-01",
+      "spread": 0.07,
+      "regime": "CASH",
+      "monthly_return": 0.002443,
+      "equity_before": 106.8418,
+      "equity_after": 107.1028
+    },
+    {
+      "entry_date": "2007-05-01",
+      "exit_date": "2007-06-01",
+      "spread": 0.03,
+      "regime": "CASH",
+      "monthly_return": -0.000763,
+      "equity_before": 107.1028,
+      "equity_after": 107.0211
+    },
+    {
+      "entry_date": "2007-06-01",
+      "exit_date": "2007-07-02",
+      "spread": -0.02,
+      "regime": "TLT",
+      "monthly_return": 0.000324,
+      "equity_before": 107.0211,
+      "equity_after": 107.0557
+    },
+    {
+      "entry_date": "2007-07-02",
+      "exit_date": "2007-08-01",
+      "spread": 0.16,
+      "regime": "CASH",
+      "monthly_return": 0.007404,
+      "equity_before": 107.0557,
+      "equity_after": 107.8484
+    },
+    {
+      "entry_date": "2007-08-01",
+      "exit_date": "2007-09-04",
+      "spread": 0.22,
+      "regime": "CASH",
+      "monthly_return": 0.011421,
+      "equity_before": 107.8484,
+      "equity_after": 109.0801
+    },
+    {
+      "entry_date": "2007-09-04",
+      "exit_date": "2007-10-01",
+      "spread": 0.39,
+      "regime": "CASH",
+      "monthly_return": 0.005781,
+      "equity_before": 109.0801,
+      "equity_after": 109.7107
+    },
+    {
+      "entry_date": "2007-10-01",
+      "exit_date": "2007-11-01",
+      "spread": 0.62,
+      "regime": "CASH",
+      "monthly_return": 0.007829,
+      "equity_before": 109.7107,
+      "equity_after": 110.5695
+    },
+    {
+      "entry_date": "2007-11-01",
+      "exit_date": "2007-12-03",
+      "spread": 0.54,
+      "regime": "CASH",
+      "monthly_return": 0.016929,
+      "equity_before": 110.5695,
+      "equity_after": 112.4414
+    },
+    {
+      "entry_date": "2007-12-03",
+      "exit_date": "2008-01-02",
+      "spread": 0.93,
+      "regime": "CASH",
+      "monthly_return": 0.00256,
+      "equity_before": 112.4414,
+      "equity_after": 112.7293
+    },
+    {
+      "entry_date": "2008-01-02",
+      "exit_date": "2008-02-01",
+      "spread": 0.99,
+      "regime": "CASH",
+      "monthly_return": 0.015803,
+      "equity_before": 112.7293,
+      "equity_after": 114.5107
+    },
+    {
+      "entry_date": "2008-02-01",
+      "exit_date": "2008-03-03",
+      "spread": 1.5,
+      "regime": "CASH",
+      "monthly_return": 0.009266,
+      "equity_before": 114.5107,
+      "equity_after": 115.5718
+    },
+    {
+      "entry_date": "2008-03-03",
+      "exit_date": "2008-04-01",
+      "spread": 1.88,
+      "regime": "CASH",
+      "monthly_return": -0.001125,
+      "equity_before": 115.5718,
+      "equity_after": 115.4417
+    },
+    {
+      "entry_date": "2008-04-01",
+      "exit_date": "2008-05-01",
+      "spread": 1.83,
+      "regime": "CASH",
+      "monthly_return": -0.006547,
+      "equity_before": 115.4417,
+      "equity_after": 114.6859
+    },
+    {
+      "entry_date": "2008-05-01",
+      "exit_date": "2008-06-02",
+      "spread": 1.48,
+      "regime": "CASH",
+      "monthly_return": 0.000283,
+      "equity_before": 114.6859,
+      "equity_after": 114.7184
+    },
+    {
+      "entry_date": "2008-06-02",
+      "exit_date": "2008-07-01",
+      "spread": 1.4,
+      "regime": "CASH",
+      "monthly_return": 0.000229,
+      "equity_before": 114.7184,
+      "equity_after": 114.7446
+    },
+    {
+      "entry_date": "2008-07-01",
+      "exit_date": "2008-08-01",
+      "spread": 1.36,
+      "regime": "CASH",
+      "monthly_return": 0.004792,
+      "equity_before": 114.7446,
+      "equity_after": 115.2944
+    },
+    {
+      "entry_date": "2008-08-01",
+      "exit_date": "2008-09-02",
+      "spread": 1.47,
+      "regime": "CASH",
+      "monthly_return": 0.005742,
+      "equity_before": 115.2944,
+      "equity_after": 115.9564
+    },
+    {
+      "entry_date": "2008-09-02",
+      "exit_date": "2008-10-01",
+      "spread": 1.47,
+      "regime": "CASH",
+      "monthly_return": 0.009647,
+      "equity_before": 115.9564,
+      "equity_after": 117.0751
+    },
+    {
+      "entry_date": "2008-10-01",
+      "exit_date": "2008-11-03",
+      "spread": 1.85,
+      "regime": "CASH",
+      "monthly_return": 0.009787,
+      "equity_before": 117.0751,
+      "equity_after": 118.2209
+    },
+    {
+      "entry_date": "2008-11-03",
+      "exit_date": "2008-12-01",
+      "spread": 2.45,
+      "regime": "CASH",
+      "monthly_return": 0.010823,
+      "equity_before": 118.2209,
+      "equity_after": 119.5003
+    },
+    {
+      "entry_date": "2008-12-01",
+      "exit_date": "2009-01-02",
+      "spread": 1.93,
+      "regime": "CASH",
+      "monthly_return": -0.001358,
+      "equity_before": 119.5003,
+      "equity_after": 119.3381
+    },
+    {
+      "entry_date": "2009-01-02",
+      "exit_date": "2009-02-02",
+      "spread": 1.49,
+      "regime": "CASH",
+      "monthly_return": 0.001878,
+      "equity_before": 119.3381,
+      "equity_after": 119.5623
+    },
+    {
+      "entry_date": "2009-02-02",
+      "exit_date": "2009-03-02",
+      "spread": 1.93,
+      "regime": "CASH",
+      "monthly_return": -0.000127,
+      "equity_before": 119.5623,
+      "equity_after": 119.5471
+    },
+    {
+      "entry_date": "2009-03-02",
+      "exit_date": "2009-04-01",
+      "spread": 2.02,
+      "regime": "CASH",
+      "monthly_return": 0.002509,
+      "equity_before": 119.5471,
+      "equity_after": 119.8471
+    },
+    {
+      "entry_date": "2009-04-01",
+      "exit_date": "2009-05-01",
+      "spread": 1.9,
+      "regime": "CASH",
+      "monthly_return": -0.002176,
+      "equity_before": 119.8471,
+      "equity_after": 119.5863
+    },
+    {
+      "entry_date": "2009-05-01",
+      "exit_date": "2009-06-01",
+      "spread": 2.25,
+      "regime": "CASH",
+      "monthly_return": 0.000489,
+      "equity_before": 119.5863,
+      "equity_after": 119.6448
+    },
+    {
+      "entry_date": "2009-06-01",
+      "exit_date": "2009-07-01",
+      "spread": 2.55,
+      "regime": "CASH",
+      "monthly_return": 0.00086,
+      "equity_before": 119.6448,
+      "equity_after": 119.7477
+    },
+    {
+      "entry_date": "2009-07-01",
+      "exit_date": "2009-08-03",
+      "spread": 2.42,
+      "regime": "CASH",
+      "monthly_return": -0.001294,
+      "equity_before": 119.7477,
+      "equity_after": 119.5928
+    },
+    {
+      "entry_date": "2009-08-03",
+      "exit_date": "2009-09-01",
+      "spread": 2.39,
+      "regime": "CASH",
+      "monthly_return": 0.006328,
+      "equity_before": 119.5928,
+      "equity_after": 120.3495
+    },
+    {
+      "entry_date": "2009-09-01",
+      "exit_date": "2009-10-01",
+      "spread": 2.43,
+      "regime": "CASH",
+      "monthly_return": 0.002553,
+      "equity_before": 120.3495,
+      "equity_after": 120.6568
+    },
+    {
+      "entry_date": "2009-10-01",
+      "exit_date": "2009-11-02",
+      "spread": 2.36,
+      "regime": "CASH",
+      "monthly_return": 0.000477,
+      "equity_before": 120.6568,
+      "equity_after": 120.7143
+    },
+    {
+      "entry_date": "2009-11-02",
+      "exit_date": "2009-12-01",
+      "spread": 2.51,
+      "regime": "CASH",
+      "monthly_return": 0.006097,
+      "equity_before": 120.7143,
+      "equity_after": 121.4503
+    },
+    {
+      "entry_date": "2009-12-01",
+      "exit_date": "2010-01-04",
+      "spread": 2.54,
+      "regime": "CASH",
+      "monthly_return": -0.007341,
+      "equity_before": 121.4503,
+      "equity_after": 120.5587
+    },
+    {
+      "entry_date": "2010-01-04",
+      "exit_date": "2010-02-01",
+      "spread": 2.71,
+      "regime": "CASH",
+      "monthly_return": 0.006187,
+      "equity_before": 120.5587,
+      "equity_after": 121.3046
+    },
+    {
+      "entry_date": "2010-02-01",
+      "exit_date": "2010-03-01",
+      "spread": 2.81,
+      "regime": "CASH",
+      "monthly_return": 0.001857,
+      "equity_before": 121.3046,
+      "equity_after": 121.5298
+    },
+    {
+      "entry_date": "2010-03-01",
+      "exit_date": "2010-04-01",
+      "spread": 2.8,
+      "regime": "CASH",
+      "monthly_return": -0.002873,
+      "equity_before": 121.5298,
+      "equity_after": 121.1807
+    },
+    {
+      "entry_date": "2010-04-01",
+      "exit_date": "2010-05-03",
+      "spread": 2.82,
+      "regime": "CASH",
+      "monthly_return": 0.002376,
+      "equity_before": 121.1807,
+      "equity_after": 121.4687
+    },
+    {
+      "entry_date": "2010-05-03",
+      "exit_date": "2010-06-01",
+      "spread": 2.72,
+      "regime": "CASH",
+      "monthly_return": 0.00553,
+      "equity_before": 121.4687,
+      "equity_after": 122.1405
+    },
+    {
+      "entry_date": "2010-06-01",
+      "exit_date": "2010-07-01",
+      "spread": 2.55,
+      "regime": "CASH",
+      "monthly_return": 0.003854,
+      "equity_before": 122.1405,
+      "equity_after": 122.6112
+    },
+    {
+      "entry_date": "2010-07-01",
+      "exit_date": "2010-08-02",
+      "spread": 2.36,
+      "regime": "CASH",
+      "monthly_return": 0.002035,
+      "equity_before": 122.6112,
+      "equity_after": 122.8608
+    },
+    {
+      "entry_date": "2010-08-02",
+      "exit_date": "2010-09-01",
+      "spread": 2.39,
+      "regime": "CASH",
+      "monthly_return": 0.002021,
+      "equity_before": 122.8608,
+      "equity_after": 123.1091
+    },
+    {
+      "entry_date": "2010-09-01",
+      "exit_date": "2010-10-01",
+      "spread": 2.0,
+      "regime": "CASH",
+      "monthly_return": 0.001958,
+      "equity_before": 123.1091,
+      "equity_after": 123.3502
+    },
+    {
+      "entry_date": "2010-10-01",
+      "exit_date": "2010-11-01",
+      "spread": 2.11,
+      "regime": "CASH",
+      "monthly_return": 0.002455,
+      "equity_before": 123.3502,
+      "equity_after": 123.6531
+    },
+    {
+      "entry_date": "2010-11-01",
+      "exit_date": "2010-12-01",
+      "spread": 2.29,
+      "regime": "CASH",
+      "monthly_return": -0.003979,
+      "equity_before": 123.6531,
+      "equity_after": 123.161
+    },
+    {
+      "entry_date": "2010-12-01",
+      "exit_date": "2011-01-03",
+      "spread": 2.36,
+      "regime": "CASH",
+      "monthly_return": -0.000379,
+      "equity_before": 123.161,
+      "equity_after": 123.1143
+    },
+    {
+      "entry_date": "2011-01-03",
+      "exit_date": "2011-02-01",
+      "spread": 2.69,
+      "regime": "CASH",
+      "monthly_return": 0.000451,
+      "equity_before": 123.1143,
+      "equity_after": 123.1699
+    },
+    {
+      "entry_date": "2011-02-01",
+      "exit_date": "2011-03-01",
+      "spread": 2.84,
+      "regime": "CASH",
+      "monthly_return": 0.000489,
+      "equity_before": 123.1699,
+      "equity_after": 123.2301
+    },
+    {
+      "entry_date": "2011-03-01",
+      "exit_date": "2011-04-01",
+      "spread": 2.73,
+      "regime": "CASH",
+      "monthly_return": -0.001108,
+      "equity_before": 123.2301,
+      "equity_after": 123.0936
+    },
+    {
+      "entry_date": "2011-04-01",
+      "exit_date": "2011-05-02",
+      "spread": 2.67,
+      "regime": "CASH",
+      "monthly_return": 0.00437,
+      "equity_before": 123.0936,
+      "equity_after": 123.6315
+    },
+    {
+      "entry_date": "2011-05-02",
+      "exit_date": "2011-06-01",
+      "spread": 2.71,
+      "regime": "CASH",
+      "monthly_return": 0.004474,
+      "equity_before": 123.6315,
+      "equity_after": 124.1847
+    },
+    {
+      "entry_date": "2011-06-01",
+      "exit_date": "2011-07-01",
+      "spread": 2.6,
+      "regime": "CASH",
+      "monthly_return": -0.001056,
+      "equity_before": 124.1847,
+      "equity_after": 124.0536
+    },
+    {
+      "entry_date": "2011-07-01",
+      "exit_date": "2011-08-01",
+      "spread": 2.73,
+      "regime": "CASH",
+      "monthly_return": 0.002862,
+      "equity_before": 124.0536,
+      "equity_after": 124.4086
+    },
+    {
+      "entry_date": "2011-08-01",
+      "exit_date": "2011-09-01",
+      "spread": 2.46,
+      "regime": "CASH",
+      "monthly_return": 0.004077,
+      "equity_before": 124.4086,
+      "equity_after": 124.9158
+    },
+    {
+      "entry_date": "2011-09-01",
+      "exit_date": "2011-10-03",
+      "spread": 2.03,
+      "regime": "CASH",
+      "monthly_return": -0.001075,
+      "equity_before": 124.9158,
+      "equity_after": 124.7815
+    },
+    {
+      "entry_date": "2011-10-03",
+      "exit_date": "2011-11-01",
+      "spread": 1.67,
+      "regime": "CASH",
+      "monthly_return": 0.000214,
+      "equity_before": 124.7815,
+      "equity_after": 124.8082
+    },
+    {
+      "entry_date": "2011-11-01",
+      "exit_date": "2011-12-01",
+      "spread": 1.92,
+      "regime": "CASH",
+      "monthly_return": 0.000414,
+      "equity_before": 124.8082,
+      "equity_after": 124.8599
+    },
+    {
+      "entry_date": "2011-12-01",
+      "exit_date": "2012-01-03",
+      "spread": 1.83,
+      "regime": "CASH",
+      "monthly_return": -0.00013,
+      "equity_before": 124.8599,
+      "equity_after": 124.8436
+    },
+    {
+      "entry_date": "2012-01-03",
+      "exit_date": "2012-02-01",
+      "spread": 1.64,
+      "regime": "CASH",
+      "monthly_return": 0.001077,
+      "equity_before": 124.8436,
+      "equity_after": 124.978
+    },
+    {
+      "entry_date": "2012-02-01",
+      "exit_date": "2012-03-01",
+      "spread": 1.61,
+      "regime": "CASH",
+      "monthly_return": -0.001242,
+      "equity_before": 124.978,
+      "equity_after": 124.8228
+    },
+    {
+      "entry_date": "2012-03-01",
+      "exit_date": "2012-04-02",
+      "spread": 1.68,
+      "regime": "CASH",
+      "monthly_return": -0.000357,
+      "equity_before": 124.8228,
+      "equity_after": 124.7783
+    },
+    {
+      "entry_date": "2012-04-02",
+      "exit_date": "2012-05-01",
+      "spread": 1.9,
+      "regime": "CASH",
+      "monthly_return": 0.001757,
+      "equity_before": 124.7783,
+      "equity_after": 124.9975
+    },
+    {
+      "entry_date": "2012-05-01",
+      "exit_date": "2012-06-01",
+      "spread": 1.68,
+      "regime": "CASH",
+      "monthly_return": 0.000687,
+      "equity_before": 124.9975,
+      "equity_after": 125.0834
+    },
+    {
+      "entry_date": "2012-06-01",
+      "exit_date": "2012-07-02",
+      "spread": 1.32,
+      "regime": "CASH",
+      "monthly_return": -0.000758,
+      "equity_before": 125.0834,
+      "equity_after": 124.9885
+    },
+    {
+      "entry_date": "2012-07-02",
+      "exit_date": "2012-08-01",
+      "spread": 1.34,
+      "regime": "CASH",
+      "monthly_return": 0.00173,
+      "equity_before": 124.9885,
+      "equity_after": 125.2048
+    },
+    {
+      "entry_date": "2012-08-01",
+      "exit_date": "2012-09-04",
+      "spread": 1.28,
+      "regime": "CASH",
+      "monthly_return": 0.000166,
+      "equity_before": 125.2048,
+      "equity_after": 125.2256
+    },
+    {
+      "entry_date": "2012-09-04",
+      "exit_date": "2012-10-01",
+      "spread": 1.35,
+      "regime": "CASH",
+      "monthly_return": 0.000261,
+      "equity_before": 125.2256,
+      "equity_after": 125.2583
+    },
+    {
+      "entry_date": "2012-10-01",
+      "exit_date": "2012-11-01",
+      "spread": 1.42,
+      "regime": "CASH",
+      "monthly_return": -0.000948,
+      "equity_before": 125.2583,
+      "equity_after": 125.1396
+    },
+    {
+      "entry_date": "2012-11-01",
+      "exit_date": "2012-12-03",
+      "spread": 1.42,
+      "regime": "CASH",
+      "monthly_return": 0.000592,
+      "equity_before": 125.1396,
+      "equity_after": 125.2137
+    },
+    {
+      "entry_date": "2012-12-03",
+      "exit_date": "2013-01-02",
+      "spread": 1.37,
+      "regime": "CASH",
+      "monthly_return": -0.000106,
+      "equity_before": 125.2137,
+      "equity_after": 125.2004
+    },
+    {
+      "entry_date": "2013-01-02",
+      "exit_date": "2013-02-01",
+      "spread": 1.53,
+      "regime": "CASH",
+      "monthly_return": 0.000249,
+      "equity_before": 125.2004,
+      "equity_after": 125.2315
+    },
+    {
+      "entry_date": "2013-02-01",
+      "exit_date": "2013-03-01",
+      "spread": 1.75,
+      "regime": "CASH",
+      "monthly_return": 0.000925,
+      "equity_before": 125.2315,
+      "equity_after": 125.3473
+    },
+    {
+      "entry_date": "2013-03-01",
+      "exit_date": "2013-04-01",
+      "spread": 1.64,
+      "regime": "CASH",
+      "monthly_return": 0.000212,
+      "equity_before": 125.3473,
+      "equity_after": 125.374
+    },
+    {
+      "entry_date": "2013-04-01",
+      "exit_date": "2013-05-01",
+      "spread": 1.62,
+      "regime": "CASH",
+      "monthly_return": 0.000793,
+      "equity_before": 125.374,
+      "equity_after": 125.4734
+    },
+    {
+      "entry_date": "2013-05-01",
+      "exit_date": "2013-06-03",
+      "spread": 1.48,
+      "regime": "CASH",
+      "monthly_return": -0.001219,
+      "equity_before": 125.4734,
+      "equity_after": 125.3205
+    },
+    {
+      "entry_date": "2013-06-03",
+      "exit_date": "2013-07-01",
+      "spread": 1.86,
+      "regime": "CASH",
+      "monthly_return": -0.000865,
+      "equity_before": 125.3205,
+      "equity_after": 125.2121
+    },
+    {
+      "entry_date": "2013-07-01",
+      "exit_date": "2013-08-01",
+      "spread": 2.16,
+      "regime": "CASH",
+      "monthly_return": 0.000807,
+      "equity_before": 125.2121,
+      "equity_after": 125.3132
+    },
+    {
+      "entry_date": "2013-08-01",
+      "exit_date": "2013-09-03",
+      "spread": 2.29,
+      "regime": "CASH",
+      "monthly_return": -0.000972,
+      "equity_before": 125.3132,
+      "equity_after": 125.1913
+    },
+    {
+      "entry_date": "2013-09-03",
+      "exit_date": "2013-10-01",
+      "spread": 2.39,
+      "regime": "CASH",
+      "monthly_return": 0.00235,
+      "equity_before": 125.1913,
+      "equity_after": 125.4855
+    },
+    {
+      "entry_date": "2013-10-01",
+      "exit_date": "2013-11-01",
+      "spread": 2.31,
+      "regime": "CASH",
+      "monthly_return": 0.000581,
+      "equity_before": 125.4855,
+      "equity_after": 125.5583
+    },
+    {
+      "entry_date": "2013-11-01",
+      "exit_date": "2013-12-02",
+      "spread": 2.26,
+      "regime": "CASH",
+      "monthly_return": 0.000699,
+      "equity_before": 125.5583,
+      "equity_after": 125.6461
+    },
+    {
+      "entry_date": "2013-12-02",
+      "exit_date": "2014-01-02",
+      "spread": 2.47,
+      "regime": "CASH",
+      "monthly_return": -0.000699,
+      "equity_before": 125.6461,
+      "equity_after": 125.5583
+    },
+    {
+      "entry_date": "2014-01-02",
+      "exit_date": "2014-02-03",
+      "spread": 2.66,
+      "regime": "CASH",
+      "monthly_return": 0.001813,
+      "equity_before": 125.5583,
+      "equity_after": 125.7859
+    },
+    {
+      "entry_date": "2014-02-03",
+      "exit_date": "2014-03-03",
+      "spread": 2.33,
+      "regime": "CASH",
+      "monthly_return": 0.000686,
+      "equity_before": 125.7859,
+      "equity_after": 125.8722
+    },
+    {
+      "entry_date": "2014-03-03",
+      "exit_date": "2014-04-01",
+      "spread": 2.33,
+      "regime": "CASH",
+      "monthly_return": -0.002235,
+      "equity_before": 125.8722,
+      "equity_after": 125.5909
+    },
+    {
+      "entry_date": "2014-04-01",
+      "exit_date": "2014-05-01",
+      "spread": 2.29,
+      "regime": "CASH",
+      "monthly_return": 0.001671,
+      "equity_before": 125.5909,
+      "equity_after": 125.8008
+    },
+    {
+      "entry_date": "2014-05-01",
+      "exit_date": "2014-06-02",
+      "spread": 2.25,
+      "regime": "CASH",
+      "monthly_return": 0.0011,
+      "equity_before": 125.8008,
+      "equity_after": 125.9392
+    },
+    {
+      "entry_date": "2014-06-02",
+      "exit_date": "2014-07-01",
+      "spread": 2.11,
+      "regime": "CASH",
+      "monthly_return": -0.000532,
+      "equity_before": 125.9392,
+      "equity_after": 125.8722
+    },
+    {
+      "entry_date": "2014-07-01",
+      "exit_date": "2014-08-01",
+      "spread": 2.06,
+      "regime": "CASH",
+      "monthly_return": 0.000912,
+      "equity_before": 125.8722,
+      "equity_after": 125.987
+    },
+    {
+      "entry_date": "2014-08-01",
+      "exit_date": "2014-09-02",
+      "spread": 2.05,
+      "regime": "CASH",
+      "monthly_return": -0.000261,
+      "equity_before": 125.987,
+      "equity_after": 125.9541
+    },
+    {
+      "entry_date": "2014-09-02",
+      "exit_date": "2014-10-01",
+      "spread": 1.87,
+      "regime": "CASH",
+      "monthly_return": 0.001184,
+      "equity_before": 125.9541,
+      "equity_after": 126.1032
+    },
+    {
+      "entry_date": "2014-10-01",
+      "exit_date": "2014-11-03",
+      "spread": 1.94,
+      "regime": "CASH",
+      "monthly_return": 0.001406,
+      "equity_before": 126.1032,
+      "equity_after": 126.2806
+    },
+    {
+      "entry_date": "2014-11-03",
+      "exit_date": "2014-12-01",
+      "spread": 1.85,
+      "regime": "CASH",
+      "monthly_return": 0.00117,
+      "equity_before": 126.2806,
+      "equity_after": 126.4283
+    },
+    {
+      "entry_date": "2014-12-01",
+      "exit_date": "2015-01-02",
+      "spread": 1.71,
+      "regime": "CASH",
+      "monthly_return": -0.001852,
+      "equity_before": 126.4283,
+      "equity_after": 126.1942
+    },
+    {
+      "entry_date": "2015-01-02",
+      "exit_date": "2015-02-02",
+      "spread": 1.5,
+      "regime": "CASH",
+      "monthly_return": 0.004885,
+      "equity_before": 126.1942,
+      "equity_after": 126.8106
+    },
+    {
+      "entry_date": "2015-02-02",
+      "exit_date": "2015-03-02",
+      "spread": 1.21,
+      "regime": "CASH",
+      "monthly_return": -0.003403,
+      "equity_before": 126.8106,
+      "equity_after": 126.3791
+    },
+    {
+      "entry_date": "2015-03-02",
+      "exit_date": "2015-04-01",
+      "spread": 1.37,
+      "regime": "CASH",
+      "monthly_return": 0.003747,
+      "equity_before": 126.3791,
+      "equity_after": 126.8526
+    },
+    {
+      "entry_date": "2015-04-01",
+      "exit_date": "2015-05-01",
+      "spread": 1.38,
+      "regime": "CASH",
+      "monthly_return": -0.00053,
+      "equity_before": 126.8526,
+      "equity_after": 126.7854
+    },
+    {
+      "entry_date": "2015-05-01",
+      "exit_date": "2015-06-01",
+      "spread": 1.47,
+      "regime": "CASH",
+      "monthly_return": 0.0002,
+      "equity_before": 126.7854,
+      "equity_after": 126.8107
+    },
+    {
+      "entry_date": "2015-06-01",
+      "exit_date": "2015-07-01",
+      "spread": 1.51,
+      "regime": "CASH",
+      "monthly_return": 9.4e-05,
+      "equity_before": 126.8107,
+      "equity_after": 126.8226
+    },
+    {
+      "entry_date": "2015-07-01",
+      "exit_date": "2015-08-03",
+      "spread": 1.71,
+      "regime": "CASH",
+      "monthly_return": 0.001629,
+      "equity_before": 126.8226,
+      "equity_after": 127.0292
+    },
+    {
+      "entry_date": "2015-08-03",
+      "exit_date": "2015-09-01",
+      "spread": 1.53,
+      "regime": "CASH",
+      "monthly_return": -0.000471,
+      "equity_before": 127.0292,
+      "equity_after": 126.9693
+    },
+    {
+      "entry_date": "2015-09-01",
+      "exit_date": "2015-10-01",
+      "spread": 1.47,
+      "regime": "CASH",
+      "monthly_return": 0.002595,
+      "equity_before": 126.9693,
+      "equity_after": 127.2988
+    },
+    {
+      "entry_date": "2015-10-01",
+      "exit_date": "2015-11-02",
+      "spread": 1.42,
+      "regime": "CASH",
+      "monthly_return": -0.001989,
+      "equity_before": 127.2988,
+      "equity_after": 127.0456
+    },
+    {
+      "entry_date": "2015-11-02",
+      "exit_date": "2015-12-01",
+      "spread": 1.41,
+      "regime": "CASH",
+      "monthly_return": -0.001403,
+      "equity_before": 127.0456,
+      "equity_after": 126.8673
+    },
+    {
+      "entry_date": "2015-12-01",
+      "exit_date": "2016-01-04",
+      "spread": 1.27,
+      "regime": "CASH",
+      "monthly_return": -0.000792,
+      "equity_before": 126.8673,
+      "equity_after": 126.7668
+    },
+    {
+      "entry_date": "2016-01-04",
+      "exit_date": "2016-02-01",
+      "spread": 1.21,
+      "regime": "CASH",
+      "monthly_return": 0.004676,
+      "equity_before": 126.7668,
+      "equity_after": 127.3596
+    },
+    {
+      "entry_date": "2016-02-01",
+      "exit_date": "2016-03-01",
+      "spread": 1.18,
+      "regime": "CASH",
+      "monthly_return": 0.000317,
+      "equity_before": 127.3596,
+      "equity_after": 127.3999
+    },
+    {
+      "entry_date": "2016-03-01",
+      "exit_date": "2016-04-01",
+      "spread": 0.96,
+      "regime": "CASH",
+      "monthly_return": 0.002134,
+      "equity_before": 127.3999,
+      "equity_after": 127.6718
+    },
+    {
+      "entry_date": "2016-04-01",
+      "exit_date": "2016-05-02",
+      "spread": 1.05,
+      "regime": "CASH",
+      "monthly_return": 0.000576,
+      "equity_before": 127.6718,
+      "equity_after": 127.7454
+    },
+    {
+      "entry_date": "2016-05-02",
+      "exit_date": "2016-06-01",
+      "spread": 1.06,
+      "regime": "CASH",
+      "monthly_return": -0.001519,
+      "equity_before": 127.7454,
+      "equity_after": 127.5513
+    },
+    {
+      "entry_date": "2016-06-01",
+      "exit_date": "2016-07-01",
+      "spread": 0.97,
+      "regime": "CASH",
+      "monthly_return": 0.00708,
+      "equity_before": 127.5513,
+      "equity_after": 128.4543
+    },
+    {
+      "entry_date": "2016-07-01",
+      "exit_date": "2016-08-01",
+      "spread": 0.91,
+      "regime": "CASH",
+      "monthly_return": -0.001161,
+      "equity_before": 128.4543,
+      "equity_after": 128.3052
+    },
+    {
+      "entry_date": "2016-08-01",
+      "exit_date": "2016-09-01",
+      "spread": 0.79,
+      "regime": "CASH",
+      "monthly_return": -0.001525,
+      "equity_before": 128.3052,
+      "equity_after": 128.1095
+    },
+    {
+      "entry_date": "2016-09-01",
+      "exit_date": "2016-10-03",
+      "spread": 0.78,
+      "regime": "CASH",
+      "monthly_return": 0.000695,
+      "equity_before": 128.1095,
+      "equity_after": 128.1985
+    },
+    {
+      "entry_date": "2016-10-03",
+      "exit_date": "2016-11-01",
+      "spread": 0.83,
+      "regime": "CASH",
+      "monthly_return": -0.000342,
+      "equity_before": 128.1985,
+      "equity_after": 128.1546
+    },
+    {
+      "entry_date": "2016-11-01",
+      "exit_date": "2016-12-01",
+      "spread": 0.98,
+      "regime": "CASH",
+      "monthly_return": -0.005183,
+      "equity_before": 128.1546,
+      "equity_after": 127.4904
+    },
+    {
+      "entry_date": "2016-12-01",
+      "exit_date": "2017-01-03",
+      "spread": 1.26,
+      "regime": "CASH",
+      "monthly_return": 0.000368,
+      "equity_before": 127.4904,
+      "equity_after": 127.5373
+    },
+    {
+      "entry_date": "2017-01-03",
+      "exit_date": "2017-02-01",
+      "spread": 1.25,
+      "regime": "CASH",
+      "monthly_return": 0.001552,
+      "equity_before": 127.5373,
+      "equity_after": 127.7352
+    },
+    {
+      "entry_date": "2017-02-01",
+      "exit_date": "2017-03-01",
+      "spread": 1.26,
+      "regime": "CASH",
+      "monthly_return": -7.1e-05,
+      "equity_before": 127.7352,
+      "equity_after": 127.7262
+    },
+    {
+      "entry_date": "2017-03-01",
+      "exit_date": "2017-04-03",
+      "spread": 1.14,
+      "regime": "CASH",
+      "monthly_return": 0.002347,
+      "equity_before": 127.7262,
+      "equity_after": 128.0259
+    },
+    {
+      "entry_date": "2017-04-03",
+      "exit_date": "2017-05-01",
+      "spread": 1.13,
+      "regime": "CASH",
+      "monthly_return": 0.000259,
+      "equity_before": 128.0259,
+      "equity_after": 128.059
+    },
+    {
+      "entry_date": "2017-05-01",
+      "exit_date": "2017-06-01",
+      "spread": 1.01,
+      "regime": "CASH",
+      "monthly_return": 0.001232,
+      "equity_before": 128.059,
+      "equity_after": 128.2168
+    },
+    {
+      "entry_date": "2017-06-01",
+      "exit_date": "2017-07-03",
+      "spread": 0.93,
+      "regime": "CASH",
+      "monthly_return": -0.001338,
+      "equity_before": 128.2168,
+      "equity_after": 128.0452
+    },
+    {
+      "entry_date": "2017-07-03",
+      "exit_date": "2017-08-01",
+      "spread": 0.93,
+      "regime": "CASH",
+      "monthly_return": 0.002976,
+      "equity_before": 128.0452,
+      "equity_after": 128.4263
+    },
+    {
+      "entry_date": "2017-08-01",
+      "exit_date": "2017-09-01",
+      "spread": 0.96,
+      "regime": "CASH",
+      "monthly_return": 0.001442,
+      "equity_before": 128.4263,
+      "equity_after": 128.6116
+    },
+    {
+      "entry_date": "2017-09-01",
+      "exit_date": "2017-10-02",
+      "spread": 0.79,
+      "regime": "CASH",
+      "monthly_return": -0.00091,
+      "equity_before": 128.6116,
+      "equity_after": 128.4945
+    },
+    {
+      "entry_date": "2017-10-02",
+      "exit_date": "2017-11-01",
+      "spread": 0.86,
+      "regime": "CASH",
+      "monthly_return": -0.001799,
+      "equity_before": 128.4945,
+      "equity_after": 128.2633
+    },
+    {
+      "entry_date": "2017-11-01",
+      "exit_date": "2017-12-01",
+      "spread": 0.78,
+      "regime": "CASH",
+      "monthly_return": -0.001794,
+      "equity_before": 128.2633,
+      "equity_after": 128.0332
+    },
+    {
+      "entry_date": "2017-12-01",
+      "exit_date": "2018-01-02",
+      "spread": 0.64,
+      "regime": "CASH",
+      "monthly_return": -0.000786,
+      "equity_before": 128.0332,
+      "equity_after": 127.9327
+    },
+    {
+      "entry_date": "2018-01-02",
+      "exit_date": "2018-02-01",
+      "spread": 0.51,
+      "regime": "CASH",
+      "monthly_return": -0.002911,
+      "equity_before": 127.9327,
+      "equity_after": 127.5602
+    },
+    {
+      "entry_date": "2018-02-01",
+      "exit_date": "2018-03-01",
+      "spread": 0.58,
+      "regime": "CASH",
+      "monthly_return": 0.000793,
+      "equity_before": 127.5602,
+      "equity_after": 127.6613
+    },
+    {
+      "entry_date": "2018-03-01",
+      "exit_date": "2018-04-02",
+      "spread": 0.62,
+      "regime": "CASH",
+      "monthly_return": 0.001366,
+      "equity_before": 127.6613,
+      "equity_after": 127.8356
+    },
+    {
+      "entry_date": "2018-04-02",
+      "exit_date": "2018-05-01",
+      "spread": 0.47,
+      "regime": "CASH",
+      "monthly_return": -0.003079,
+      "equity_before": 127.8356,
+      "equity_after": 127.442
+    },
+    {
+      "entry_date": "2018-05-01",
+      "exit_date": "2018-06-01",
+      "spread": 0.46,
+      "regime": "CASH",
+      "monthly_return": 0.003199,
+      "equity_before": 127.442,
+      "equity_after": 127.8497
+    },
+    {
+      "entry_date": "2018-06-01",
+      "exit_date": "2018-07-02",
+      "spread": 0.43,
+      "regime": "CASH",
+      "monthly_return": 0.00108,
+      "equity_before": 127.8497,
+      "equity_after": 127.9878
+    },
+    {
+      "entry_date": "2018-07-02",
+      "exit_date": "2018-08-01",
+      "spread": 0.33,
+      "regime": "CASH",
+      "monthly_return": -0.000384,
+      "equity_before": 127.9878,
+      "equity_after": 127.9386
+    },
+    {
+      "entry_date": "2018-08-01",
+      "exit_date": "2018-09-04",
+      "spread": 0.29,
+      "regime": "CASH",
+      "monthly_return": 0.003143,
+      "equity_before": 127.9386,
+      "equity_after": 128.3407
+    },
+    {
+      "entry_date": "2018-09-04",
+      "exit_date": "2018-10-01",
+      "spread": 0.24,
+      "regime": "CASH",
+      "monthly_return": -0.00148,
+      "equity_before": 128.3407,
+      "equity_after": 128.1508
+    },
+    {
+      "entry_date": "2018-10-01",
+      "exit_date": "2018-11-01",
+      "spread": 0.24,
+      "regime": "CASH",
+      "monthly_return": 0.002365,
+      "equity_before": 128.1508,
+      "equity_after": 128.4538
+    },
+    {
+      "entry_date": "2018-11-01",
+      "exit_date": "2018-12-03",
+      "spread": 0.28,
+      "regime": "CASH",
+      "monthly_return": 0.002433,
+      "equity_before": 128.4538,
+      "equity_after": 128.7664
+    },
+    {
+      "entry_date": "2018-12-03",
+      "exit_date": "2019-01-02",
+      "spread": 0.21,
+      "regime": "CASH",
+      "monthly_return": 0.008544,
+      "equity_before": 128.7664,
+      "equity_after": 129.8665
+    },
+    {
+      "entry_date": "2019-01-02",
+      "exit_date": "2019-02-01",
+      "spread": 0.21,
+      "regime": "CASH",
+      "monthly_return": 0.001218,
+      "equity_before": 129.8665,
+      "equity_after": 130.0247
+    },
+    {
+      "entry_date": "2019-02-01",
+      "exit_date": "2019-03-01",
+      "spread": 0.18,
+      "regime": "CASH",
+      "monthly_return": 0.001363,
+      "equity_before": 130.0247,
+      "equity_after": 130.2019
+    },
+    {
+      "entry_date": "2019-03-01",
+      "exit_date": "2019-04-01",
+      "spread": 0.21,
+      "regime": "CASH",
+      "monthly_return": 0.005911,
+      "equity_before": 130.2019,
+      "equity_after": 130.9715
+    },
+    {
+      "entry_date": "2019-04-01",
+      "exit_date": "2019-05-01",
+      "spread": 0.14,
+      "regime": "CASH",
+      "monthly_return": 0.001978,
+      "equity_before": 130.9715,
+      "equity_after": 131.2306
+    },
+    {
+      "entry_date": "2019-05-01",
+      "exit_date": "2019-06-03",
+      "spread": 0.24,
+      "regime": "CASH",
+      "monthly_return": 0.010006,
+      "equity_before": 131.2306,
+      "equity_after": 132.5436
+    },
+    {
+      "entry_date": "2019-06-03",
+      "exit_date": "2019-07-01",
+      "spread": 0.19,
+      "regime": "CASH",
+      "monthly_return": 0.002081,
+      "equity_before": 132.5436,
+      "equity_after": 132.8194
+    },
+    {
+      "entry_date": "2019-07-01",
+      "exit_date": "2019-08-01",
+      "spread": 0.25,
+      "regime": "CASH",
+      "monthly_return": 0.002843,
+      "equity_before": 132.8194,
+      "equity_after": 133.1969
+    },
+    {
+      "entry_date": "2019-08-01",
+      "exit_date": "2019-09-03",
+      "spread": 0.13,
+      "regime": "CASH",
+      "monthly_return": 0.005742,
+      "equity_before": 133.1969,
+      "equity_after": 133.9618
+    },
+    {
+      "entry_date": "2019-09-03",
+      "exit_date": "2019-10-01",
+      "spread": 0.0,
+      "regime": "CASH",
+      "monthly_return": -0.000998,
+      "equity_before": 133.9618,
+      "equity_after": 133.8281
+    },
+    {
+      "entry_date": "2019-10-01",
+      "exit_date": "2019-11-01",
+      "spread": 0.05,
+      "regime": "CASH",
+      "monthly_return": 0.001415,
+      "equity_before": 133.8281,
+      "equity_after": 134.0174
+    },
+    {
+      "entry_date": "2019-11-01",
+      "exit_date": "2019-12-02",
+      "spread": 0.17,
+      "regime": "CASH",
+      "monthly_return": -0.000189,
+      "equity_before": 134.0174,
+      "equity_after": 133.992
+    },
+    {
+      "entry_date": "2019-12-02",
+      "exit_date": "2020-01-02",
+      "spread": 0.17,
+      "regime": "CASH",
+      "monthly_return": 0.002331,
+      "equity_before": 133.992,
+      "equity_after": 134.3044
+    },
+    {
+      "entry_date": "2020-01-02",
+      "exit_date": "2020-02-03",
+      "spread": 0.34,
+      "regime": "CASH",
+      "monthly_return": 0.005019,
+      "equity_before": 134.3044,
+      "equity_after": 134.9785
+    },
+    {
+      "entry_date": "2020-02-03",
+      "exit_date": "2020-03-02",
+      "spread": 0.18,
+      "regime": "CASH",
+      "monthly_return": 0.00865,
+      "equity_before": 134.9785,
+      "equity_after": 136.146
+    },
+    {
+      "entry_date": "2020-03-02",
+      "exit_date": "2020-04-01",
+      "spread": 0.27,
+      "regime": "CASH",
+      "monthly_return": 0.013511,
+      "equity_before": 136.146,
+      "equity_after": 137.9855
+    },
+    {
+      "entry_date": "2020-04-01",
+      "exit_date": "2020-05-01",
+      "spread": 0.47,
+      "regime": "CASH",
+      "monthly_return": 0.000599,
+      "equity_before": 137.9855,
+      "equity_after": 138.0681
+    },
+    {
+      "entry_date": "2020-05-01",
+      "exit_date": "2020-06-01",
+      "spread": 0.44,
+      "regime": "CASH",
+      "monthly_return": 0.000577,
+      "equity_before": 138.0681,
+      "equity_after": 138.1478
+    },
+    {
+      "entry_date": "2020-06-01",
+      "exit_date": "2020-07-01",
+      "spread": 0.49,
+      "regime": "CASH",
+      "monthly_return": 1.1e-05,
+      "equity_before": 138.1478,
+      "equity_after": 138.1493
+    },
+    {
+      "entry_date": "2020-07-01",
+      "exit_date": "2020-08-03",
+      "spread": 0.5,
+      "regime": "CASH",
+      "monthly_return": 0.001272,
+      "equity_before": 138.1493,
+      "equity_after": 138.325
+    },
+    {
+      "entry_date": "2020-08-03",
+      "exit_date": "2020-09-01",
+      "spread": 0.44,
+      "regime": "CASH",
+      "monthly_return": -0.000473,
+      "equity_before": 138.325,
+      "equity_after": 138.2595
+    },
+    {
+      "entry_date": "2020-09-01",
+      "exit_date": "2020-10-01",
+      "spread": 0.58,
+      "regime": "CASH",
+      "monthly_return": -0.0,
+      "equity_before": 138.2595,
+      "equity_after": 138.2595
+    },
+    {
+      "entry_date": "2020-10-01",
+      "exit_date": "2020-11-02",
+      "spread": 0.56,
+      "regime": "CASH",
+      "monthly_return": -0.000243,
+      "equity_before": 138.2595,
+      "equity_after": 138.2259
+    },
+    {
+      "entry_date": "2020-11-02",
+      "exit_date": "2020-12-01",
+      "spread": 0.74,
+      "regime": "CASH",
+      "monthly_return": -0.000313,
+      "equity_before": 138.2259,
+      "equity_after": 138.1827
+    },
+    {
+      "entry_date": "2020-12-01",
+      "exit_date": "2021-01-04",
+      "spread": 0.68,
+      "regime": "CASH",
+      "monthly_return": 0.001066,
+      "equity_before": 138.1827,
+      "equity_after": 138.3299
+    },
+    {
+      "entry_date": "2021-01-04",
+      "exit_date": "2021-02-01",
+      "spread": 0.8,
+      "regime": "CASH",
+      "monthly_return": 0.000232,
+      "equity_before": 138.3299,
+      "equity_after": 138.362
+    },
+    {
+      "entry_date": "2021-02-01",
+      "exit_date": "2021-03-01",
+      "spread": 1.0,
+      "regime": "CASH",
+      "monthly_return": -0.000787,
+      "equity_before": 138.362,
+      "equity_after": 138.2531
+    },
+    {
+      "entry_date": "2021-03-01",
+      "exit_date": "2021-04-01",
+      "spread": 1.3,
+      "regime": "CASH",
+      "monthly_return": -0.000475,
+      "equity_before": 138.2531,
+      "equity_after": 138.1873
+    },
+    {
+      "entry_date": "2021-04-01",
+      "exit_date": "2021-05-03",
+      "spread": 1.58,
+      "regime": "CASH",
+      "monthly_return": 0.000487,
+      "equity_before": 138.1873,
+      "equity_after": 138.2547
+    },
+    {
+      "entry_date": "2021-05-03",
+      "exit_date": "2021-06-01",
+      "spread": 1.49,
+      "regime": "CASH",
+      "monthly_return": 0.000487,
+      "equity_before": 138.2547,
+      "equity_after": 138.322
+    },
+    {
+      "entry_date": "2021-06-01",
+      "exit_date": "2021-07-01",
+      "spread": 1.44,
+      "regime": "CASH",
+      "monthly_return": -0.001704,
+      "equity_before": 138.322,
+      "equity_after": 138.0863
+    },
+    {
+      "entry_date": "2021-07-01",
+      "exit_date": "2021-08-02",
+      "spread": 1.2,
+      "regime": "CASH",
+      "monthly_return": 0.002229,
+      "equity_before": 138.0863,
+      "equity_after": 138.3941
+    },
+    {
+      "entry_date": "2021-08-02",
+      "exit_date": "2021-09-01",
+      "spread": 1.05,
+      "regime": "CASH",
+      "monthly_return": -0.000776,
+      "equity_before": 138.3941,
+      "equity_after": 138.2867
+    },
+    {
+      "entry_date": "2021-09-01",
+      "exit_date": "2021-10-01",
+      "spread": 1.1,
+      "regime": "CASH",
+      "monthly_return": -0.000452,
+      "equity_before": 138.2867,
+      "equity_after": 138.2243
+    },
+    {
+      "entry_date": "2021-10-01",
+      "exit_date": "2021-11-01",
+      "spread": 1.24,
+      "regime": "CASH",
+      "monthly_return": -0.004282,
+      "equity_before": 138.2243,
+      "equity_after": 137.6324
+    },
+    {
+      "entry_date": "2021-11-01",
+      "exit_date": "2021-12-01",
+      "spread": 1.07,
+      "regime": "CASH",
+      "monthly_return": -0.0,
+      "equity_before": 137.6324,
+      "equity_after": 137.6324
+    },
+    {
+      "entry_date": "2021-12-01",
+      "exit_date": "2022-01-03",
+      "spread": 0.91,
+      "regime": "CASH",
+      "monthly_return": -0.003406,
+      "equity_before": 137.6324,
+      "equity_after": 137.1637
+    },
+    {
+      "entry_date": "2022-01-03",
+      "exit_date": "2022-02-01",
+      "spread": 0.79,
+      "regime": "CASH",
+      "monthly_return": -0.005817,
+      "equity_before": 137.1637,
+      "equity_after": 136.3657
+    },
+    {
+      "entry_date": "2022-02-01",
+      "exit_date": "2022-03-01",
+      "spread": 0.61,
+      "regime": "CASH",
+      "monthly_return": -0.001942,
+      "equity_before": 136.3657,
+      "equity_after": 136.1009
+    },
+    {
+      "entry_date": "2022-03-01",
+      "exit_date": "2022-04-01",
+      "spread": 0.39,
+      "regime": "CASH",
+      "monthly_return": -0.018342,
+      "equity_before": 136.1009,
+      "equity_after": 133.6046
+    },
+    {
+      "entry_date": "2022-04-01",
+      "exit_date": "2022-05-02",
+      "spread": 0.04,
+      "regime": "CASH",
+      "monthly_return": -0.002959,
+      "equity_before": 133.6046,
+      "equity_after": 133.2092
+    },
+    {
+      "entry_date": "2022-05-02",
+      "exit_date": "2022-06-01",
+      "spread": 0.19,
+      "regime": "CASH",
+      "monthly_return": 0.004163,
+      "equity_before": 133.2092,
+      "equity_after": 133.7638
+    },
+    {
+      "entry_date": "2022-06-01",
+      "exit_date": "2022-07-01",
+      "spread": 0.32,
+      "regime": "CASH",
+      "monthly_return": -0.001092,
+      "equity_before": 133.7638,
+      "equity_after": 133.6177
+    },
+    {
+      "entry_date": "2022-07-01",
+      "exit_date": "2022-08-01",
+      "spread": 0.06,
+      "regime": "CASH",
+      "monthly_return": 0.001061,
+      "equity_before": 133.6177,
+      "equity_after": 133.7595
+    },
+    {
+      "entry_date": "2022-08-01",
+      "exit_date": "2022-09-01",
+      "spread": -0.22,
+      "regime": "TLT",
+      "monthly_return": -0.085041,
+      "equity_before": 133.7595,
+      "equity_after": 122.3844
+    },
+    {
+      "entry_date": "2022-09-01",
+      "exit_date": "2022-10-03",
+      "spread": -0.3,
+      "regime": "TLT",
+      "monthly_return": -0.050384,
+      "equity_before": 122.3844,
+      "equity_after": 116.2182
+    },
+    {
+      "entry_date": "2022-10-03",
+      "exit_date": "2022-11-01",
+      "spread": -0.39,
+      "regime": "TLT",
+      "monthly_return": -0.065702,
+      "equity_before": 116.2182,
+      "equity_after": 108.5824
+    },
+    {
+      "entry_date": "2022-11-01",
+      "exit_date": "2022-12-01",
+      "spread": -0.41,
+      "regime": "TLT",
+      "monthly_return": 0.095503,
+      "equity_before": 108.5824,
+      "equity_after": 118.9524
+    },
+    {
+      "entry_date": "2022-12-01",
+      "exit_date": "2023-01-03",
+      "spread": -0.7,
+      "regime": "TLT",
+      "monthly_return": -0.038338,
+      "equity_before": 118.9524,
+      "equity_after": 114.392
+    },
+    {
+      "entry_date": "2023-01-03",
+      "exit_date": "2023-02-01",
+      "spread": -0.53,
+      "regime": "TLT",
+      "monthly_return": 0.068976,
+      "equity_before": 114.392,
+      "equity_after": 122.2823
+    },
+    {
+      "entry_date": "2023-02-01",
+      "exit_date": "2023-03-01",
+      "spread": -0.69,
+      "regime": "TLT",
+      "monthly_return": -0.069908,
+      "equity_before": 122.2823,
+      "equity_after": 113.7338
+    },
+    {
+      "entry_date": "2023-03-01",
+      "exit_date": "2023-04-03",
+      "spread": -0.89,
+      "regime": "TLT",
+      "monthly_return": 0.064763,
+      "equity_before": 113.7338,
+      "equity_after": 121.0995
+    },
+    {
+      "entry_date": "2023-04-03",
+      "exit_date": "2023-05-01",
+      "spread": -0.58,
+      "regime": "TLT",
+      "monthly_return": -0.03011,
+      "equity_before": 121.0995,
+      "equity_after": 117.4532
+    },
+    {
+      "entry_date": "2023-05-01",
+      "exit_date": "2023-06-01",
+      "spread": -0.6,
+      "regime": "TLT",
+      "monthly_return": 0.002561,
+      "equity_before": 117.4532,
+      "equity_after": 117.754
+    },
+    {
+      "entry_date": "2023-06-01",
+      "exit_date": "2023-07-03",
+      "spread": -0.76,
+      "regime": "TLT",
+      "monthly_return": -0.007405,
+      "equity_before": 117.754,
+      "equity_after": 116.882
+    },
+    {
+      "entry_date": "2023-07-03",
+      "exit_date": "2023-08-01",
+      "spread": -1.06,
+      "regime": "TLT",
+      "monthly_return": -0.035947,
+      "equity_before": 116.882,
+      "equity_after": 112.6804
+    },
+    {
+      "entry_date": "2023-08-01",
+      "exit_date": "2023-09-01",
+      "spread": -0.91,
+      "regime": "TLT",
+      "monthly_return": -0.030625,
+      "equity_before": 112.6804,
+      "equity_after": 109.2296
+    },
+    {
+      "entry_date": "2023-09-01",
+      "exit_date": "2023-10-02",
+      "spread": -0.76,
+      "regime": "TLT",
+      "monthly_return": -0.080597,
+      "equity_before": 109.2296,
+      "equity_after": 100.426
+    },
+    {
+      "entry_date": "2023-10-02",
+      "exit_date": "2023-11-01",
+      "spread": -0.44,
+      "regime": "TLT",
+      "monthly_return": -0.01769,
+      "equity_before": 100.426,
+      "equity_after": 98.6494
+    },
+    {
+      "entry_date": "2023-11-01",
+      "exit_date": "2023-12-01",
+      "spread": -0.19,
+      "regime": "TLT",
+      "monthly_return": 0.096175,
+      "equity_before": 98.6494,
+      "equity_after": 108.137
+    },
+    {
+      "entry_date": "2023-12-01",
+      "exit_date": "2024-01-02",
+      "spread": -0.36,
+      "regime": "TLT",
+      "monthly_return": 0.060617,
+      "equity_before": 108.137,
+      "equity_after": 114.6919
+    },
+    {
+      "entry_date": "2024-01-02",
+      "exit_date": "2024-02-01",
+      "spread": -0.35,
+      "regime": "TLT",
+      "monthly_return": 0.002503,
+      "equity_before": 114.6919,
+      "equity_after": 114.979
+    },
+    {
+      "entry_date": "2024-02-01",
+      "exit_date": "2024-03-01",
+      "spread": -0.28,
+      "regime": "TLT",
+      "monthly_return": -0.035354,
+      "equity_before": 114.979,
+      "equity_after": 110.914
+    },
+    {
+      "entry_date": "2024-03-01",
+      "exit_date": "2024-04-01",
+      "spread": -0.39,
+      "regime": "TLT",
+      "monthly_return": -0.017083,
+      "equity_before": 110.914,
+      "equity_after": 109.0193
+    },
+    {
+      "entry_date": "2024-04-01",
+      "exit_date": "2024-05-01",
+      "spread": -0.39,
+      "regime": "TLT",
+      "monthly_return": -0.03976,
+      "equity_before": 109.0193,
+      "equity_after": 104.6847
+    },
+    {
+      "entry_date": "2024-05-01",
+      "exit_date": "2024-06-03",
+      "spread": -0.35,
+      "regime": "TLT",
+      "monthly_return": 0.037862,
+      "equity_before": 104.6847,
+      "equity_after": 108.6483
+    },
+    {
+      "entry_date": "2024-06-03",
+      "exit_date": "2024-07-01",
+      "spread": -0.38,
+      "regime": "TLT",
+      "monthly_return": -0.015328,
+      "equity_before": 108.6483,
+      "equity_after": 106.9829
+    },
+    {
+      "entry_date": "2024-07-01",
+      "exit_date": "2024-08-01",
+      "spread": -0.35,
+      "regime": "TLT",
+      "monthly_return": 0.063594,
+      "equity_before": 106.9829,
+      "equity_after": 113.7864
+    },
+    {
+      "entry_date": "2024-08-01",
+      "exit_date": "2024-09-03",
+      "spread": -0.2,
+      "regime": "TLT",
+      "monthly_return": 0.028939,
+      "equity_before": 113.7864,
+      "equity_after": 117.0792
+    },
+    {
+      "entry_date": "2024-09-03",
+      "exit_date": "2024-10-01",
+      "spread": 0.0,
+      "regime": "CASH",
+      "monthly_return": 0.007302,
+      "equity_before": 117.0792,
+      "equity_after": 117.9341
+    },
+    {
+      "entry_date": "2024-10-01",
+      "exit_date": "2024-11-01",
+      "spread": 0.15,
+      "regime": "CASH",
+      "monthly_return": -0.0072,
+      "equity_before": 117.9341,
+      "equity_after": 117.085
+    },
+    {
+      "entry_date": "2024-11-01",
+      "exit_date": "2024-12-02",
+      "spread": 0.12,
+      "regime": "CASH",
+      "monthly_return": 0.00323,
+      "equity_before": 117.085,
+      "equity_after": 117.4631
+    },
+    {
+      "entry_date": "2024-12-02",
+      "exit_date": "2025-01-02",
+      "spread": 0.05,
+      "regime": "CASH",
+      "monthly_return": 0.002321,
+      "equity_before": 117.4631,
+      "equity_after": 117.7358
+    },
+    {
+      "entry_date": "2025-01-02",
+      "exit_date": "2025-02-03",
+      "spread": 0.33,
+      "regime": "CASH",
+      "monthly_return": 0.003329,
+      "equity_before": 117.7358,
+      "equity_after": 118.1277
+    },
+    {
+      "entry_date": "2025-02-03",
+      "exit_date": "2025-03-03",
+      "spread": 0.36,
+      "regime": "CASH",
+      "monthly_return": 0.008701,
+      "equity_before": 118.1277,
+      "equity_after": 119.1555
+    },
+    {
+      "entry_date": "2025-03-03",
+      "exit_date": "2025-04-01",
+      "spread": 0.25,
+      "regime": "CASH",
+      "monthly_return": 0.004126,
+      "equity_before": 119.1555,
+      "equity_after": 119.6472
+    },
+    {
+      "entry_date": "2025-04-01",
+      "exit_date": "2025-05-01",
+      "spread": 0.34,
+      "regime": "CASH",
+      "monthly_return": 0.00568,
+      "equity_before": 119.6472,
+      "equity_after": 120.3268
+    },
+    {
+      "entry_date": "2025-05-01",
+      "exit_date": "2025-06-02",
+      "spread": 0.57,
+      "regime": "CASH",
+      "monthly_return": -0.001309,
+      "equity_before": 120.3268,
+      "equity_after": 120.1693
+    },
+    {
+      "entry_date": "2025-06-02",
+      "exit_date": "2025-07-01",
+      "spread": 0.52,
+      "regime": "CASH",
+      "monthly_return": 0.005634,
+      "equity_before": 120.1693,
+      "equity_after": 120.8463
+    },
+    {
+      "entry_date": "2025-07-01",
+      "exit_date": "2025-08-01",
+      "spread": 0.52,
+      "regime": "CASH",
+      "monthly_return": 0.005107,
+      "equity_before": 120.8463,
+      "equity_after": 121.4635
+    },
+    {
+      "entry_date": "2025-08-01",
+      "exit_date": "2025-09-02",
+      "spread": 0.43,
+      "regime": "CASH",
+      "monthly_return": 0.003361,
+      "equity_before": 121.4635,
+      "equity_after": 121.8717
+    },
+    {
+      "entry_date": "2025-09-02",
+      "exit_date": "2025-10-01",
+      "spread": 0.64,
+      "regime": "CASH",
+      "monthly_return": 0.004551,
+      "equity_before": 121.8717,
+      "equity_after": 122.4264
+    },
+    {
+      "entry_date": "2025-10-01",
+      "exit_date": "2025-11-03",
+      "spread": 0.56,
+      "regime": "CASH",
+      "monthly_return": 0.00221,
+      "equity_before": 122.4264,
+      "equity_after": 122.697
+    },
+    {
+      "entry_date": "2025-11-03",
+      "exit_date": "2025-12-01",
+      "spread": 0.51,
+      "regime": "CASH",
+      "monthly_return": 0.003491,
+      "equity_before": 122.697,
+      "equity_after": 123.1254
+    },
+    {
+      "entry_date": "2025-12-01",
+      "exit_date": "2026-01-02",
+      "spread": 0.55,
+      "regime": "CASH",
+      "monthly_return": 0.004293,
+      "equity_before": 123.1254,
+      "equity_after": 123.6539
+    },
+    {
+      "entry_date": "2026-01-02",
+      "exit_date": "2026-02-02",
+      "spread": 0.71,
+      "regime": "CASH",
+      "monthly_return": 0.001085,
+      "equity_before": 123.6539,
+      "equity_after": 123.788
+    },
+    {
+      "entry_date": "2026-02-02",
+      "exit_date": "2026-03-02",
+      "spread": 0.74,
+      "regime": "CASH",
+      "monthly_return": 0.004022,
+      "equity_before": 123.788,
+      "equity_after": 124.2859
+    },
+    {
+      "entry_date": "2026-03-02",
+      "exit_date": "2026-04-01",
+      "spread": 0.59,
+      "regime": "CASH",
+      "monthly_return": -0.002935,
+      "equity_before": 124.2859,
+      "equity_after": 123.9212
+    },
+    {
+      "entry_date": "2026-04-01",
+      "exit_date": "2026-04-24",
+      "spread": 0.51,
+      "regime": "CASH",
+      "monthly_return": 0.003037,
+      "equity_before": 123.9212,
+      "equity_after": 124.2975
+    }
+  ],
+  "trades_h027b": [
+    {
+      "entry_date": "2003-02-03",
+      "exit_date": "2003-03-03",
+      "spread": 2.28,
+      "regime": "SPY",
+      "monthly_return": -0.024817,
+      "equity_before": 100.0,
+      "equity_after": 97.5183
+    },
+    {
+      "entry_date": "2003-03-03",
+      "exit_date": "2003-04-01",
+      "spread": 2.18,
+      "regime": "SPY",
+      "monthly_return": 0.027315,
+      "equity_before": 97.5183,
+      "equity_after": 100.182
+    },
+    {
+      "entry_date": "2003-04-01",
+      "exit_date": "2003-05-01",
+      "spread": 2.32,
+      "regime": "SPY",
+      "monthly_return": 0.068109,
+      "equity_before": 100.182,
+      "equity_after": 107.0052
+    },
+    {
+      "entry_date": "2003-05-01",
+      "exit_date": "2003-06-02",
+      "spread": 2.38,
+      "regime": "SPY",
+      "monthly_return": 0.059303,
+      "equity_before": 107.0052,
+      "equity_after": 113.351
+    },
+    {
+      "entry_date": "2003-06-02",
+      "exit_date": "2003-07-01",
+      "spread": 2.04,
+      "regime": "SPY",
+      "monthly_return": 0.015777,
+      "equity_before": 113.351,
+      "equity_after": 115.1393
+    },
+    {
+      "entry_date": "2003-07-01",
+      "exit_date": "2003-08-01",
+      "spread": 2.22,
+      "regime": "SPY",
+      "monthly_return": -0.000203,
+      "equity_before": 115.1393,
+      "equity_after": 115.116
+    },
+    {
+      "entry_date": "2003-08-01",
+      "exit_date": "2003-09-02",
+      "spread": 2.69,
+      "regime": "SPY",
+      "monthly_return": 0.043549,
+      "equity_before": 115.116,
+      "equity_after": 120.1292
+    },
+    {
+      "entry_date": "2003-09-02",
+      "exit_date": "2003-10-01",
+      "spread": 2.5,
+      "regime": "SPY",
+      "monthly_return": -0.003192,
+      "equity_before": 120.1292,
+      "equity_after": 119.7457
+    },
+    {
+      "entry_date": "2003-10-01",
+      "exit_date": "2003-11-03",
+      "spread": 2.46,
+      "regime": "SPY",
+      "monthly_return": 0.038303,
+      "equity_before": 119.7457,
+      "equity_after": 124.3323
+    },
+    {
+      "entry_date": "2003-11-03",
+      "exit_date": "2003-12-01",
+      "spread": 2.48,
+      "regime": "SPY",
+      "monthly_return": 0.015191,
+      "equity_before": 124.3323,
+      "equity_after": 126.2209
+    },
+    {
+      "entry_date": "2003-12-01",
+      "exit_date": "2004-01-02",
+      "spread": 2.28,
+      "regime": "SPY",
+      "monthly_return": 0.038621,
+      "equity_before": 126.2209,
+      "equity_after": 131.0957
+    },
+    {
+      "entry_date": "2004-01-02",
+      "exit_date": "2004-02-02",
+      "spread": 2.43,
+      "regime": "SPY",
+      "monthly_return": 0.024633,
+      "equity_before": 131.0957,
+      "equity_after": 134.325
+    },
+    {
+      "entry_date": "2004-02-02",
+      "exit_date": "2004-03-01",
+      "spread": 2.32,
+      "regime": "SPY",
+      "monthly_return": 0.019216,
+      "equity_before": 134.325,
+      "equity_after": 136.9062
+    },
+    {
+      "entry_date": "2004-03-01",
+      "exit_date": "2004-04-01",
+      "spread": 2.33,
+      "regime": "SPY",
+      "monthly_return": -0.017056,
+      "equity_before": 136.9062,
+      "equity_after": 134.5712
+    },
+    {
+      "entry_date": "2004-04-01",
+      "exit_date": "2004-05-03",
+      "spread": 2.26,
+      "regime": "SPY",
+      "monthly_return": -0.014325,
+      "equity_before": 134.5712,
+      "equity_after": 132.6434
+    },
+    {
+      "entry_date": "2004-05-03",
+      "exit_date": "2004-06-01",
+      "spread": 2.22,
+      "regime": "SPY",
+      "monthly_return": 0.004993,
+      "equity_before": 132.6434,
+      "equity_after": 133.3057
+    },
+    {
+      "entry_date": "2004-06-01",
+      "exit_date": "2004-07-01",
+      "spread": 2.12,
+      "regime": "SPY",
+      "monthly_return": 0.005699,
+      "equity_before": 133.3057,
+      "equity_after": 134.0654
+    },
+    {
+      "entry_date": "2004-07-01",
+      "exit_date": "2004-08-02",
+      "spread": 1.92,
+      "regime": "SPY",
+      "monthly_return": -0.016558,
+      "equity_before": 134.0654,
+      "equity_after": 131.8455
+    },
+    {
+      "entry_date": "2004-08-02",
+      "exit_date": "2004-09-01",
+      "spread": 1.82,
+      "regime": "SPY",
+      "monthly_return": 0.002251,
+      "equity_before": 131.8455,
+      "equity_after": 132.1423
+    },
+    {
+      "entry_date": "2004-09-01",
+      "exit_date": "2004-10-01",
+      "spread": 1.72,
+      "regime": "SPY",
+      "monthly_return": 0.02518,
+      "equity_before": 132.1423,
+      "equity_after": 135.4697
+    },
+    {
+      "entry_date": "2004-10-01",
+      "exit_date": "2004-11-01",
+      "spread": 1.51,
+      "regime": "SPY",
+      "monthly_return": -0.001232,
+      "equity_before": 135.4697,
+      "equity_after": 135.3028
+    },
+    {
+      "entry_date": "2004-11-01",
+      "exit_date": "2004-12-01",
+      "spread": 1.49,
+      "regime": "SPY",
+      "monthly_return": 0.053506,
+      "equity_before": 135.3028,
+      "equity_after": 142.5423
+    },
+    {
+      "entry_date": "2004-12-01",
+      "exit_date": "2005-01-03",
+      "spread": 1.34,
+      "regime": "SPY",
+      "monthly_return": 0.01374,
+      "equity_before": 142.5423,
+      "equity_after": 144.5008
+    },
+    {
+      "entry_date": "2005-01-03",
+      "exit_date": "2005-02-01",
+      "spread": 1.16,
+      "regime": "SPY",
+      "monthly_return": -0.011554,
+      "equity_before": 144.5008,
+      "equity_after": 142.8312
+    },
+    {
+      "entry_date": "2005-02-01",
+      "exit_date": "2005-03-01",
+      "spread": 0.85,
+      "regime": "SPY",
+      "monthly_return": 0.019511,
+      "equity_before": 142.8312,
+      "equity_after": 145.6179
+    },
+    {
+      "entry_date": "2005-03-01",
+      "exit_date": "2005-04-01",
+      "spread": 0.77,
+      "regime": "SPY",
+      "monthly_return": -0.027541,
+      "equity_before": 145.6179,
+      "equity_after": 141.6075
+    },
+    {
+      "entry_date": "2005-04-01",
+      "exit_date": "2005-05-02",
+      "spread": 0.7,
+      "regime": "SPY",
+      "monthly_return": -0.008771,
+      "equity_before": 141.6075,
+      "equity_after": 140.3654
+    },
+    {
+      "entry_date": "2005-05-02",
+      "exit_date": "2005-06-01",
+      "spread": 0.55,
+      "regime": "SPY",
+      "monthly_return": 0.035223,
+      "equity_before": 140.3654,
+      "equity_after": 145.3096
+    },
+    {
+      "entry_date": "2005-06-01",
+      "exit_date": "2005-07-01",
+      "spread": 0.4,
+      "regime": "SPY",
+      "monthly_return": -0.004046,
+      "equity_before": 145.3096,
+      "equity_after": 144.7216
+    },
+    {
+      "entry_date": "2005-07-01",
+      "exit_date": "2005-08-01",
+      "spread": 0.28,
+      "regime": "SPY",
+      "monthly_return": 0.034468,
+      "equity_before": 144.7216,
+      "equity_after": 149.7099
+    },
+    {
+      "entry_date": "2005-08-01",
+      "exit_date": "2005-09-01",
+      "spread": 0.26,
+      "regime": "SPY",
+      "monthly_return": -0.009382,
+      "equity_before": 149.7099,
+      "equity_after": 148.3054
+    },
+    {
+      "entry_date": "2005-09-01",
+      "exit_date": "2005-10-03",
+      "spread": 0.18,
+      "regime": "SPY",
+      "monthly_return": 0.005159,
+      "equity_before": 148.3054,
+      "equity_after": 149.0705
+    },
+    {
+      "entry_date": "2005-10-03",
+      "exit_date": "2005-11-01",
+      "spread": 0.16,
+      "regime": "SPY",
+      "monthly_return": -0.01721,
+      "equity_before": 149.0705,
+      "equity_after": 146.505
+    },
+    {
+      "entry_date": "2005-11-01",
+      "exit_date": "2005-12-01",
+      "spread": 0.17,
+      "regime": "SPY",
+      "monthly_return": 0.051456,
+      "equity_before": 146.505,
+      "equity_after": 154.0436
+    },
+    {
+      "entry_date": "2005-12-01",
+      "exit_date": "2006-01-03",
+      "spread": 0.07,
+      "regime": "SPY",
+      "monthly_return": 0.00538,
+      "equity_before": 154.0436,
+      "equity_after": 154.8723
+    },
+    {
+      "entry_date": "2006-01-03",
+      "exit_date": "2006-02-01",
+      "spread": -0.02,
+      "regime": "TLT",
+      "monthly_return": -0.015474,
+      "equity_before": 154.8723,
+      "equity_after": 152.4759
+    },
+    {
+      "entry_date": "2006-02-01",
+      "exit_date": "2006-03-01",
+      "spread": -0.01,
+      "regime": "TLT",
+      "monthly_return": 0.008419,
+      "equity_before": 152.4759,
+      "equity_after": 153.7596
+    },
+    {
+      "entry_date": "2006-03-01",
+      "exit_date": "2006-04-03",
+      "spread": -0.14,
+      "regime": "TLT",
+      "monthly_return": -0.039587,
+      "equity_before": 153.7596,
+      "equity_after": 147.6727
+    },
+    {
+      "entry_date": "2006-04-03",
+      "exit_date": "2006-05-01",
+      "spread": 0.04,
+      "regime": "SPY",
+      "monthly_return": 0.005165,
+      "equity_before": 147.6727,
+      "equity_after": 148.4354
+    },
+    {
+      "entry_date": "2006-05-01",
+      "exit_date": "2006-06-01",
+      "spread": 0.2,
+      "regime": "SPY",
+      "monthly_return": -0.012807,
+      "equity_before": 148.4354,
+      "equity_after": 146.5344
+    },
+    {
+      "entry_date": "2006-06-01",
+      "exit_date": "2006-07-03",
+      "spread": 0.08,
+      "regime": "SPY",
+      "monthly_return": -0.002836,
+      "equity_before": 146.5344,
+      "equity_after": 146.1188
+    },
+    {
+      "entry_date": "2006-07-03",
+      "exit_date": "2006-08-01",
+      "spread": -0.01,
+      "regime": "TLT",
+      "monthly_return": 0.022548,
+      "equity_before": 146.1188,
+      "equity_after": 149.4135
+    },
+    {
+      "entry_date": "2006-08-01",
+      "exit_date": "2006-09-01",
+      "spread": 0.02,
+      "regime": "SPY",
+      "monthly_return": 0.033014,
+      "equity_before": 149.4135,
+      "equity_after": 154.3462
+    },
+    {
+      "entry_date": "2006-09-01",
+      "exit_date": "2006-10-02",
+      "spread": -0.05,
+      "regime": "TLT",
+      "monthly_return": 0.021593,
+      "equity_before": 154.3462,
+      "equity_after": 157.679
+    },
+    {
+      "entry_date": "2006-10-02",
+      "exit_date": "2006-11-01",
+      "spread": -0.07,
+      "regime": "TLT",
+      "monthly_return": 0.011276,
+      "equity_before": 157.679,
+      "equity_after": 159.4569
+    },
+    {
+      "entry_date": "2006-11-01",
+      "exit_date": "2006-12-01",
+      "spread": -0.1,
+      "regime": "TLT",
+      "monthly_return": 0.020041,
+      "equity_before": 159.4569,
+      "equity_after": 162.6526
+    },
+    {
+      "entry_date": "2006-12-01",
+      "exit_date": "2007-01-03",
+      "spread": -0.16,
+      "regime": "TLT",
+      "monthly_return": -0.022513,
+      "equity_before": 162.6526,
+      "equity_after": 158.9909
+    },
+    {
+      "entry_date": "2007-01-03",
+      "exit_date": "2007-02-01",
+      "spread": -0.12,
+      "regime": "TLT",
+      "monthly_return": -0.018138,
+      "equity_before": 158.9909,
+      "equity_after": 156.1071
+    },
+    {
+      "entry_date": "2007-02-01",
+      "exit_date": "2007-03-01",
+      "spread": -0.11,
+      "regime": "TLT",
+      "monthly_return": 0.034479,
+      "equity_before": 156.1071,
+      "equity_after": 161.4895
+    },
+    {
+      "entry_date": "2007-03-01",
+      "exit_date": "2007-04-02",
+      "spread": -0.09,
+      "regime": "TLT",
+      "monthly_return": -0.014746,
+      "equity_before": 161.4895,
+      "equity_after": 159.1081
+    },
+    {
+      "entry_date": "2007-04-02",
+      "exit_date": "2007-05-01",
+      "spread": 0.07,
+      "regime": "SPY",
+      "monthly_return": 0.045793,
+      "equity_before": 159.1081,
+      "equity_after": 166.3942
+    },
+    {
+      "entry_date": "2007-05-01",
+      "exit_date": "2007-06-01",
+      "spread": 0.03,
+      "regime": "SPY",
+      "monthly_return": 0.036389,
+      "equity_before": 166.3942,
+      "equity_after": 172.4491
+    },
+    {
+      "entry_date": "2007-06-01",
+      "exit_date": "2007-07-02",
+      "spread": -0.02,
+      "regime": "TLT",
+      "monthly_return": 0.000324,
+      "equity_before": 172.4491,
+      "equity_after": 172.5049
+    },
+    {
+      "entry_date": "2007-07-02",
+      "exit_date": "2007-08-01",
+      "spread": 0.16,
+      "regime": "SPY",
+      "monthly_return": -0.035312,
+      "equity_before": 172.5049,
+      "equity_after": 166.4135
+    },
+    {
+      "entry_date": "2007-08-01",
+      "exit_date": "2007-09-04",
+      "spread": 0.22,
+      "regime": "SPY",
+      "monthly_return": 0.018098,
+      "equity_before": 166.4135,
+      "equity_after": 169.4251
+    },
+    {
+      "entry_date": "2007-09-04",
+      "exit_date": "2007-10-01",
+      "spread": 0.39,
+      "regime": "SPY",
+      "monthly_return": 0.039924,
+      "equity_before": 169.4251,
+      "equity_after": 176.1893
+    },
+    {
+      "entry_date": "2007-10-01",
+      "exit_date": "2007-11-01",
+      "spread": 0.62,
+      "regime": "SPY",
+      "monthly_return": -0.021192,
+      "equity_before": 176.1893,
+      "equity_after": 172.4554
+    },
+    {
+      "entry_date": "2007-11-01",
+      "exit_date": "2007-12-03",
+      "spread": 0.54,
+      "regime": "SPY",
+      "monthly_return": -0.022181,
+      "equity_before": 172.4554,
+      "equity_after": 168.6302
+    },
+    {
+      "entry_date": "2007-12-03",
+      "exit_date": "2008-01-02",
+      "spread": 0.93,
+      "regime": "SPY",
+      "monthly_return": -0.013413,
+      "equity_before": 168.6302,
+      "equity_after": 166.3684
+    },
+    {
+      "entry_date": "2008-01-02",
+      "exit_date": "2008-02-01",
+      "spread": 0.99,
+      "regime": "SPY",
+      "monthly_return": -0.036914,
+      "equity_before": 166.3684,
+      "equity_after": 160.2271
+    },
+    {
+      "entry_date": "2008-02-01",
+      "exit_date": "2008-03-03",
+      "spread": 1.5,
+      "regime": "SPY",
+      "monthly_return": -0.04356,
+      "equity_before": 160.2271,
+      "equity_after": 153.2476
+    },
+    {
+      "entry_date": "2008-03-03",
+      "exit_date": "2008-04-01",
+      "spread": 1.88,
+      "regime": "SPY",
+      "monthly_return": 0.028363,
+      "equity_before": 153.2476,
+      "equity_after": 157.5941
+    },
+    {
+      "entry_date": "2008-04-01",
+      "exit_date": "2008-05-01",
+      "spread": 1.83,
+      "regime": "SPY",
+      "monthly_return": 0.033013,
+      "equity_before": 157.5941,
+      "equity_after": 162.7968
+    },
+    {
+      "entry_date": "2008-05-01",
+      "exit_date": "2008-06-02",
+      "spread": 1.48,
+      "regime": "SPY",
+      "monthly_return": -0.015731,
+      "equity_before": 162.7968,
+      "equity_after": 160.2358
+    },
+    {
+      "entry_date": "2008-06-02",
+      "exit_date": "2008-07-01",
+      "spread": 1.4,
+      "regime": "SPY",
+      "monthly_return": -0.071115,
+      "equity_before": 160.2358,
+      "equity_after": 148.8407
+    },
+    {
+      "entry_date": "2008-07-01",
+      "exit_date": "2008-08-01",
+      "spread": 1.36,
+      "regime": "SPY",
+      "monthly_return": -0.017292,
+      "equity_before": 148.8407,
+      "equity_after": 146.2669
+    },
+    {
+      "entry_date": "2008-08-01",
+      "exit_date": "2008-09-02",
+      "spread": 1.47,
+      "regime": "SPY",
+      "monthly_return": 0.014505,
+      "equity_before": 146.2669,
+      "equity_after": 148.3885
+    },
+    {
+      "entry_date": "2008-09-02",
+      "exit_date": "2008-10-01",
+      "spread": 1.47,
+      "regime": "SPY",
+      "monthly_return": -0.087962,
+      "equity_before": 148.3885,
+      "equity_after": 135.336
+    },
+    {
+      "entry_date": "2008-10-01",
+      "exit_date": "2008-11-03",
+      "spread": 1.85,
+      "regime": "SPY",
+      "monthly_return": -0.163277,
+      "equity_before": 135.336,
+      "equity_after": 113.2387
+    },
+    {
+      "entry_date": "2008-11-03",
+      "exit_date": "2008-12-01",
+      "spread": 2.45,
+      "regime": "SPY",
+      "monthly_return": -0.154464,
+      "equity_before": 113.2387,
+      "equity_after": 95.7474
+    },
+    {
+      "entry_date": "2008-12-01",
+      "exit_date": "2009-01-02",
+      "spread": 1.93,
+      "regime": "SPY",
+      "monthly_return": 0.14133,
+      "equity_before": 95.7474,
+      "equity_after": 109.2794
+    },
+    {
+      "entry_date": "2009-01-02",
+      "exit_date": "2009-02-02",
+      "spread": 1.49,
+      "regime": "SPY",
+      "monthly_return": -0.111661,
+      "equity_before": 109.2794,
+      "equity_after": 97.0771
+    },
+    {
+      "entry_date": "2009-02-02",
+      "exit_date": "2009-03-02",
+      "spread": 1.93,
+      "regime": "SPY",
+      "monthly_return": -0.145071,
+      "equity_before": 97.0771,
+      "equity_after": 82.994
+    },
+    {
+      "entry_date": "2009-03-02",
+      "exit_date": "2009-04-01",
+      "spread": 2.02,
+      "regime": "SPY",
+      "monthly_return": 0.156376,
+      "equity_before": 82.994,
+      "equity_after": 95.9723
+    },
+    {
+      "entry_date": "2009-04-01",
+      "exit_date": "2009-05-01",
+      "spread": 1.9,
+      "regime": "SPY",
+      "monthly_return": 0.084258,
+      "equity_before": 95.9723,
+      "equity_after": 104.0588
+    },
+    {
+      "entry_date": "2009-05-01",
+      "exit_date": "2009-06-01",
+      "spread": 2.25,
+      "regime": "SPY",
+      "monthly_return": 0.07828,
+      "equity_before": 104.0588,
+      "equity_after": 112.2045
+    },
+    {
+      "entry_date": "2009-06-01",
+      "exit_date": "2009-07-01",
+      "spread": 2.55,
+      "regime": "SPY",
+      "monthly_return": -0.020243,
+      "equity_before": 112.2045,
+      "equity_after": 109.9332
+    },
+    {
+      "entry_date": "2009-07-01",
+      "exit_date": "2009-08-03",
+      "spread": 2.42,
+      "regime": "SPY",
+      "monthly_return": 0.087837,
+      "equity_before": 109.9332,
+      "equity_after": 119.5894
+    },
+    {
+      "entry_date": "2009-08-03",
+      "exit_date": "2009-09-01",
+      "spread": 2.39,
+      "regime": "SPY",
+      "monthly_return": -0.00239,
+      "equity_before": 119.5894,
+      "equity_after": 119.3035
+    },
+    {
+      "entry_date": "2009-09-01",
+      "exit_date": "2009-10-01",
+      "spread": 2.43,
+      "regime": "SPY",
+      "monthly_return": 0.03254,
+      "equity_before": 119.3035,
+      "equity_after": 123.1857
+    },
+    {
+      "entry_date": "2009-10-01",
+      "exit_date": "2009-11-02",
+      "spread": 2.36,
+      "regime": "SPY",
+      "monthly_return": 0.01311,
+      "equity_before": 123.1857,
+      "equity_after": 124.8007
+    },
+    {
+      "entry_date": "2009-11-02",
+      "exit_date": "2009-12-01",
+      "spread": 2.51,
+      "regime": "SPY",
+      "monthly_return": 0.066909,
+      "equity_before": 124.8007,
+      "equity_after": 133.1511
+    },
+    {
+      "entry_date": "2009-12-01",
+      "exit_date": "2010-01-04",
+      "spread": 2.54,
+      "regime": "SPY",
+      "monthly_return": 0.023721,
+      "equity_before": 133.1511,
+      "equity_after": 136.3096
+    },
+    {
+      "entry_date": "2010-01-04",
+      "exit_date": "2010-02-01",
+      "spread": 2.71,
+      "regime": "SPY",
+      "monthly_return": -0.037678,
+      "equity_before": 136.3096,
+      "equity_after": 131.1737
+    },
+    {
+      "entry_date": "2010-02-01",
+      "exit_date": "2010-03-01",
+      "spread": 2.81,
+      "regime": "SPY",
+      "monthly_return": 0.025949,
+      "equity_before": 131.1737,
+      "equity_after": 134.5775
+    },
+    {
+      "entry_date": "2010-03-01",
+      "exit_date": "2010-04-01",
+      "spread": 2.8,
+      "regime": "SPY",
+      "monthly_return": 0.057156,
+      "equity_before": 134.5775,
+      "equity_after": 142.2694
+    },
+    {
+      "entry_date": "2010-04-01",
+      "exit_date": "2010-05-03",
+      "spread": 2.82,
+      "regime": "SPY",
+      "monthly_return": 0.021646,
+      "equity_before": 142.2694,
+      "equity_after": 145.349
+    },
+    {
+      "entry_date": "2010-05-03",
+      "exit_date": "2010-06-01",
+      "spread": 2.72,
+      "regime": "SPY",
+      "monthly_return": -0.106522,
+      "equity_before": 145.349,
+      "equity_after": 129.8661
+    },
+    {
+      "entry_date": "2010-06-01",
+      "exit_date": "2010-07-01",
+      "spread": 2.55,
+      "regime": "SPY",
+      "monthly_return": -0.039813,
+      "equity_before": 129.8661,
+      "equity_after": 124.6958
+    },
+    {
+      "entry_date": "2010-07-01",
+      "exit_date": "2010-08-02",
+      "spread": 2.36,
+      "regime": "SPY",
+      "monthly_return": 0.097314,
+      "equity_before": 124.6958,
+      "equity_after": 136.8303
+    },
+    {
+      "entry_date": "2010-08-02",
+      "exit_date": "2010-09-01",
+      "spread": 2.39,
+      "regime": "SPY",
+      "monthly_return": -0.038134,
+      "equity_before": 136.8303,
+      "equity_after": 131.6125
+    },
+    {
+      "entry_date": "2010-09-01",
+      "exit_date": "2010-10-01",
+      "spread": 2.0,
+      "regime": "SPY",
+      "monthly_return": 0.06236,
+      "equity_before": 131.6125,
+      "equity_after": 139.8198
+    },
+    {
+      "entry_date": "2010-10-01",
+      "exit_date": "2010-11-01",
+      "spread": 2.11,
+      "regime": "SPY",
+      "monthly_return": 0.034203,
+      "equity_before": 139.8198,
+      "equity_after": 144.6021
+    },
+    {
+      "entry_date": "2010-11-01",
+      "exit_date": "2010-12-01",
+      "spread": 2.29,
+      "regime": "SPY",
+      "monthly_return": 0.020923,
+      "equity_before": 144.6021,
+      "equity_after": 147.6275
+    },
+    {
+      "entry_date": "2010-12-01",
+      "exit_date": "2011-01-03",
+      "spread": 2.36,
+      "regime": "SPY",
+      "monthly_return": 0.055435,
+      "equity_before": 147.6275,
+      "equity_after": 155.8113
+    },
+    {
+      "entry_date": "2011-01-03",
+      "exit_date": "2011-02-01",
+      "spread": 2.69,
+      "regime": "SPY",
+      "monthly_return": 0.029044,
+      "equity_before": 155.8113,
+      "equity_after": 160.3366
+    },
+    {
+      "entry_date": "2011-02-01",
+      "exit_date": "2011-03-01",
+      "spread": 2.84,
+      "regime": "SPY",
+      "monthly_return": 0.001454,
+      "equity_before": 160.3366,
+      "equity_after": 160.5697
+    },
+    {
+      "entry_date": "2011-03-01",
+      "exit_date": "2011-04-01",
+      "spread": 2.73,
+      "regime": "SPY",
+      "monthly_return": 0.021373,
+      "equity_before": 160.5697,
+      "equity_after": 164.0015
+    },
+    {
+      "entry_date": "2011-04-01",
+      "exit_date": "2011-05-02",
+      "spread": 2.67,
+      "regime": "SPY",
+      "monthly_return": 0.023057,
+      "equity_before": 164.0015,
+      "equity_after": 167.783
+    },
+    {
+      "entry_date": "2011-05-02",
+      "exit_date": "2011-06-01",
+      "spread": 2.71,
+      "regime": "SPY",
+      "monthly_return": -0.031934,
+      "equity_before": 167.783,
+      "equity_after": 162.425
+    },
+    {
+      "entry_date": "2011-06-01",
+      "exit_date": "2011-07-01",
+      "spread": 2.6,
+      "regime": "SPY",
+      "monthly_return": 0.02058,
+      "equity_before": 162.425,
+      "equity_after": 165.7677
+    },
+    {
+      "entry_date": "2011-07-01",
+      "exit_date": "2011-08-01",
+      "spread": 2.73,
+      "regime": "SPY",
+      "monthly_return": -0.038381,
+      "equity_before": 165.7677,
+      "equity_after": 159.4054
+    },
+    {
+      "entry_date": "2011-08-01",
+      "exit_date": "2011-09-01",
+      "spread": 2.46,
+      "regime": "SPY",
+      "monthly_return": -0.060879,
+      "equity_before": 159.4054,
+      "equity_after": 149.701
+    },
+    {
+      "entry_date": "2011-09-01",
+      "exit_date": "2011-10-03",
+      "spread": 2.03,
+      "regime": "SPY",
+      "monthly_return": -0.086335,
+      "equity_before": 149.701,
+      "equity_after": 136.7766
+    },
+    {
+      "entry_date": "2011-10-03",
+      "exit_date": "2011-11-01",
+      "spread": 1.67,
+      "regime": "SPY",
+      "monthly_return": 0.109797,
+      "equity_before": 136.7766,
+      "equity_after": 151.7943
+    },
+    {
+      "entry_date": "2011-11-01",
+      "exit_date": "2011-12-01",
+      "spread": 1.92,
+      "regime": "SPY",
+      "monthly_return": 0.024344,
+      "equity_before": 151.7943,
+      "equity_after": 155.4896
+    },
+    {
+      "entry_date": "2011-12-01",
+      "exit_date": "2012-01-03",
+      "spread": 1.83,
+      "regime": "SPY",
+      "monthly_return": 0.026716,
+      "equity_before": 155.4896,
+      "equity_after": 159.6436
+    },
+    {
+      "entry_date": "2012-01-03",
+      "exit_date": "2012-02-01",
+      "spread": 1.64,
+      "regime": "SPY",
+      "monthly_return": 0.03898,
+      "equity_before": 159.6436,
+      "equity_after": 165.8666
+    },
+    {
+      "entry_date": "2012-02-01",
+      "exit_date": "2012-03-01",
+      "spread": 1.61,
+      "regime": "SPY",
+      "monthly_return": 0.039707,
+      "equity_before": 165.8666,
+      "equity_after": 172.4527
+    },
+    {
+      "entry_date": "2012-03-01",
+      "exit_date": "2012-04-02",
+      "spread": 1.68,
+      "regime": "SPY",
+      "monthly_return": 0.034354,
+      "equity_before": 172.4527,
+      "equity_after": 178.3772
+    },
+    {
+      "entry_date": "2012-04-02",
+      "exit_date": "2012-05-01",
+      "spread": 1.9,
+      "regime": "SPY",
+      "monthly_return": -0.007756,
+      "equity_before": 178.3772,
+      "equity_after": 176.9938
+    },
+    {
+      "entry_date": "2012-05-01",
+      "exit_date": "2012-06-01",
+      "spread": 1.68,
+      "regime": "SPY",
+      "monthly_return": -0.089385,
+      "equity_before": 176.9938,
+      "equity_after": 161.1733
+    },
+    {
+      "entry_date": "2012-06-01",
+      "exit_date": "2012-07-02",
+      "spread": 1.32,
+      "regime": "SPY",
+      "monthly_return": 0.070672,
+      "equity_before": 161.1733,
+      "equity_after": 172.5637
+    },
+    {
+      "entry_date": "2012-07-02",
+      "exit_date": "2012-08-01",
+      "spread": 1.34,
+      "regime": "SPY",
+      "monthly_return": 0.007912,
+      "equity_before": 172.5637,
+      "equity_after": 173.9289
+    },
+    {
+      "entry_date": "2012-08-01",
+      "exit_date": "2012-09-04",
+      "spread": 1.28,
+      "regime": "SPY",
+      "monthly_return": 0.025002,
+      "equity_before": 173.9289,
+      "equity_after": 178.2774
+    },
+    {
+      "entry_date": "2012-09-04",
+      "exit_date": "2012-10-01",
+      "spread": 1.35,
+      "regime": "SPY",
+      "monthly_return": 0.029005,
+      "equity_before": 178.2774,
+      "equity_after": 183.4484
+    },
+    {
+      "entry_date": "2012-10-01",
+      "exit_date": "2012-11-01",
+      "spread": 1.42,
+      "regime": "SPY",
+      "monthly_return": -0.01053,
+      "equity_before": 183.4484,
+      "equity_after": 181.5167
+    },
+    {
+      "entry_date": "2012-11-01",
+      "exit_date": "2012-12-03",
+      "spread": 1.42,
+      "regime": "SPY",
+      "monthly_return": -0.009662,
+      "equity_before": 181.5167,
+      "equity_after": 179.7629
+    },
+    {
+      "entry_date": "2012-12-03",
+      "exit_date": "2013-01-02",
+      "spread": 1.37,
+      "regime": "SPY",
+      "monthly_return": 0.039914,
+      "equity_before": 179.7629,
+      "equity_after": 186.938
+    },
+    {
+      "entry_date": "2013-01-02",
+      "exit_date": "2013-02-01",
+      "spread": 1.53,
+      "regime": "SPY",
+      "monthly_return": 0.035465,
+      "equity_before": 186.938,
+      "equity_after": 193.5678
+    },
+    {
+      "entry_date": "2013-02-01",
+      "exit_date": "2013-03-01",
+      "spread": 1.75,
+      "regime": "SPY",
+      "monthly_return": 0.005752,
+      "equity_before": 193.5678,
+      "equity_after": 194.6813
+    },
+    {
+      "entry_date": "2013-03-01",
+      "exit_date": "2013-04-01",
+      "spread": 1.64,
+      "regime": "SPY",
+      "monthly_return": 0.030465,
+      "equity_before": 194.6813,
+      "equity_after": 200.6123
+    },
+    {
+      "entry_date": "2013-04-01",
+      "exit_date": "2013-05-01",
+      "spread": 1.62,
+      "regime": "SPY",
+      "monthly_return": 0.014291,
+      "equity_before": 200.6123,
+      "equity_after": 203.4791
+    },
+    {
+      "entry_date": "2013-05-01",
+      "exit_date": "2013-06-03",
+      "spread": 1.48,
+      "regime": "SPY",
+      "monthly_return": 0.038349,
+      "equity_before": 203.4791,
+      "equity_after": 211.2823
+    },
+    {
+      "entry_date": "2013-06-03",
+      "exit_date": "2013-07-01",
+      "spread": 1.86,
+      "regime": "SPY",
+      "monthly_return": -0.012997,
+      "equity_before": 211.2823,
+      "equity_after": 208.5362
+    },
+    {
+      "entry_date": "2013-07-01",
+      "exit_date": "2013-08-01",
+      "spread": 2.16,
+      "regime": "SPY",
+      "monthly_return": 0.057635,
+      "equity_before": 208.5362,
+      "equity_after": 220.5552
+    },
+    {
+      "entry_date": "2013-08-01",
+      "exit_date": "2013-09-03",
+      "spread": 2.29,
+      "regime": "SPY",
+      "monthly_return": -0.036739,
+      "equity_before": 220.5552,
+      "equity_after": 212.4522
+    },
+    {
+      "entry_date": "2013-09-03",
+      "exit_date": "2013-10-01",
+      "spread": 2.39,
+      "regime": "SPY",
+      "monthly_return": 0.035132,
+      "equity_before": 212.4522,
+      "equity_after": 219.9161
+    },
+    {
+      "entry_date": "2013-10-01",
+      "exit_date": "2013-11-01",
+      "spread": 2.31,
+      "regime": "SPY",
+      "monthly_return": 0.040569,
+      "equity_before": 219.9161,
+      "equity_after": 228.838
+    },
+    {
+      "entry_date": "2013-11-01",
+      "exit_date": "2013-12-02",
+      "spread": 2.26,
+      "regime": "SPY",
+      "monthly_return": 0.024516,
+      "equity_before": 228.838,
+      "equity_after": 234.4482
+    },
+    {
+      "entry_date": "2013-12-02",
+      "exit_date": "2014-01-02",
+      "spread": 2.47,
+      "regime": "SPY",
+      "monthly_return": 0.018739,
+      "equity_before": 234.4482,
+      "equity_after": 238.8417
+    },
+    {
+      "entry_date": "2014-01-02",
+      "exit_date": "2014-02-03",
+      "spread": 2.66,
+      "regime": "SPY",
+      "monthly_return": -0.047835,
+      "equity_before": 238.8417,
+      "equity_after": 227.4166
+    },
+    {
+      "entry_date": "2014-02-03",
+      "exit_date": "2014-03-03",
+      "spread": 2.33,
+      "regime": "SPY",
+      "monthly_return": 0.062066,
+      "equity_before": 227.4166,
+      "equity_after": 241.5314
+    },
+    {
+      "entry_date": "2014-03-03",
+      "exit_date": "2014-04-01",
+      "spread": 2.33,
+      "regime": "SPY",
+      "monthly_return": 0.022169,
+      "equity_before": 241.5314,
+      "equity_after": 246.886
+    },
+    {
+      "entry_date": "2014-04-01",
+      "exit_date": "2014-05-01",
+      "spread": 2.29,
+      "regime": "SPY",
+      "monthly_return": 0.000425,
+      "equity_before": 246.886,
+      "equity_after": 246.991
+    },
+    {
+      "entry_date": "2014-05-01",
+      "exit_date": "2014-06-02",
+      "spread": 2.25,
+      "regime": "SPY",
+      "monthly_return": 0.024265,
+      "equity_before": 246.991,
+      "equity_after": 252.9843
+    },
+    {
+      "entry_date": "2014-06-02",
+      "exit_date": "2014-07-01",
+      "spread": 2.11,
+      "regime": "SPY",
+      "monthly_return": 0.026305,
+      "equity_before": 252.9843,
+      "equity_after": 259.6389
+    },
+    {
+      "entry_date": "2014-07-01",
+      "exit_date": "2014-08-01",
+      "spread": 2.06,
+      "regime": "SPY",
+      "monthly_return": -0.022992,
+      "equity_before": 259.6389,
+      "equity_after": 253.6694
+    },
+    {
+      "entry_date": "2014-08-01",
+      "exit_date": "2014-09-02",
+      "spread": 2.05,
+      "regime": "SPY",
+      "monthly_return": 0.04213,
+      "equity_before": 253.6694,
+      "equity_after": 264.3566
+    },
+    {
+      "entry_date": "2014-09-02",
+      "exit_date": "2014-10-01",
+      "spread": 1.87,
+      "regime": "SPY",
+      "monthly_return": -0.026676,
+      "equity_before": 264.3566,
+      "equity_after": 257.3045
+    },
+    {
+      "entry_date": "2014-10-01",
+      "exit_date": "2014-11-03",
+      "spread": 1.94,
+      "regime": "SPY",
+      "monthly_return": 0.038179,
+      "equity_before": 257.3045,
+      "equity_after": 267.128
+    },
+    {
+      "entry_date": "2014-11-03",
+      "exit_date": "2014-12-01",
+      "spread": 1.85,
+      "regime": "SPY",
+      "monthly_return": 0.019775,
+      "equity_before": 267.128,
+      "equity_after": 272.4104
+    },
+    {
+      "entry_date": "2014-12-01",
+      "exit_date": "2015-01-02",
+      "spread": 1.71,
+      "regime": "SPY",
+      "monthly_return": 0.003907,
+      "equity_before": 272.4104,
+      "equity_after": 273.4747
+    },
+    {
+      "entry_date": "2015-01-02",
+      "exit_date": "2015-02-02",
+      "spread": 1.5,
+      "regime": "SPY",
+      "monthly_return": -0.017086,
+      "equity_before": 273.4747,
+      "equity_after": 268.802
+    },
+    {
+      "entry_date": "2015-02-02",
+      "exit_date": "2015-03-02",
+      "spread": 1.21,
+      "regime": "SPY",
+      "monthly_return": 0.049871,
+      "equity_before": 268.802,
+      "equity_after": 282.2075
+    },
+    {
+      "entry_date": "2015-03-02",
+      "exit_date": "2015-04-01",
+      "spread": 1.37,
+      "regime": "SPY",
+      "monthly_return": -0.02534,
+      "equity_before": 282.2075,
+      "equity_after": 275.0564
+    },
+    {
+      "entry_date": "2015-04-01",
+      "exit_date": "2015-05-01",
+      "spread": 1.38,
+      "regime": "SPY",
+      "monthly_return": 0.024404,
+      "equity_before": 275.0564,
+      "equity_after": 281.769
+    },
+    {
+      "entry_date": "2015-05-01",
+      "exit_date": "2015-06-01",
+      "spread": 1.47,
+      "regime": "SPY",
+      "monthly_return": 0.004034,
+      "equity_before": 281.769,
+      "equity_after": 282.9056
+    },
+    {
+      "entry_date": "2015-06-01",
+      "exit_date": "2015-07-01",
+      "spread": 1.51,
+      "regime": "SPY",
+      "monthly_return": -0.014467,
+      "equity_before": 282.9056,
+      "equity_after": 278.8129
+    },
+    {
+      "entry_date": "2015-07-01",
+      "exit_date": "2015-08-03",
+      "spread": 1.71,
+      "regime": "SPY",
+      "monthly_return": 0.011037,
+      "equity_before": 278.8129,
+      "equity_after": 281.8901
+    },
+    {
+      "entry_date": "2015-08-03",
+      "exit_date": "2015-09-01",
+      "spread": 1.53,
+      "regime": "SPY",
+      "monthly_return": -0.085896,
+      "equity_before": 281.8901,
+      "equity_after": 257.677
+    },
+    {
+      "entry_date": "2015-09-01",
+      "exit_date": "2015-10-01",
+      "spread": 1.47,
+      "regime": "SPY",
+      "monthly_return": 0.007086,
+      "equity_before": 257.677,
+      "equity_after": 259.5028
+    },
+    {
+      "entry_date": "2015-10-01",
+      "exit_date": "2015-11-02",
+      "spread": 1.42,
+      "regime": "SPY",
+      "monthly_return": 0.09504,
+      "equity_before": 259.5028,
+      "equity_after": 284.1659
+    },
+    {
+      "entry_date": "2015-11-02",
+      "exit_date": "2015-12-01",
+      "spread": 1.41,
+      "regime": "SPY",
+      "monthly_return": 0.001378,
+      "equity_before": 284.1659,
+      "equity_after": 284.5575
+    },
+    {
+      "entry_date": "2015-12-01",
+      "exit_date": "2016-01-04",
+      "spread": 1.27,
+      "regime": "SPY",
+      "monthly_return": -0.040173,
+      "equity_before": 284.5575,
+      "equity_after": 273.1261
+    },
+    {
+      "entry_date": "2016-01-04",
+      "exit_date": "2016-02-01",
+      "spread": 1.21,
+      "regime": "SPY",
+      "monthly_return": -0.036663,
+      "equity_before": 273.1261,
+      "equity_after": 263.1125
+    },
+    {
+      "entry_date": "2016-02-01",
+      "exit_date": "2016-03-01",
+      "spread": 1.18,
+      "regime": "SPY",
+      "monthly_return": 0.023031,
+      "equity_before": 263.1125,
+      "equity_after": 269.1723
+    },
+    {
+      "entry_date": "2016-03-01",
+      "exit_date": "2016-04-01",
+      "spread": 0.96,
+      "regime": "SPY",
+      "monthly_return": 0.049857,
+      "equity_before": 269.1723,
+      "equity_after": 282.5924
+    },
+    {
+      "entry_date": "2016-04-01",
+      "exit_date": "2016-05-02",
+      "spread": 1.05,
+      "regime": "SPY",
+      "monthly_return": 0.005075,
+      "equity_before": 282.5924,
+      "equity_after": 284.0264
+    },
+    {
+      "entry_date": "2016-05-02",
+      "exit_date": "2016-06-01",
+      "spread": 1.06,
+      "regime": "SPY",
+      "monthly_return": 0.011059,
+      "equity_before": 284.0264,
+      "equity_after": 287.1676
+    },
+    {
+      "entry_date": "2016-06-01",
+      "exit_date": "2016-07-01",
+      "spread": 0.97,
+      "regime": "SPY",
+      "monthly_return": 0.003527,
+      "equity_before": 287.1676,
+      "equity_after": 288.1804
+    },
+    {
+      "entry_date": "2016-07-01",
+      "exit_date": "2016-08-01",
+      "spread": 0.91,
+      "regime": "SPY",
+      "monthly_return": 0.033441,
+      "equity_before": 288.1804,
+      "equity_after": 297.8176
+    },
+    {
+      "entry_date": "2016-08-01",
+      "exit_date": "2016-09-01",
+      "spread": 0.79,
+      "regime": "SPY",
+      "monthly_return": 0.002074,
+      "equity_before": 297.8176,
+      "equity_after": 298.4354
+    },
+    {
+      "entry_date": "2016-09-01",
+      "exit_date": "2016-10-03",
+      "spread": 0.78,
+      "regime": "SPY",
+      "monthly_return": -0.002392,
+      "equity_before": 298.4354,
+      "equity_after": 297.7215
+    },
+    {
+      "entry_date": "2016-10-03",
+      "exit_date": "2016-11-01",
+      "spread": 0.83,
+      "regime": "SPY",
+      "monthly_return": -0.022106,
+      "equity_before": 297.7215,
+      "equity_after": 291.1401
+    },
+    {
+      "entry_date": "2016-11-01",
+      "exit_date": "2016-12-01",
+      "spread": 0.98,
+      "regime": "SPY",
+      "monthly_return": 0.040567,
+      "equity_before": 291.1401,
+      "equity_after": 302.9507
+    },
+    {
+      "entry_date": "2016-12-01",
+      "exit_date": "2017-01-03",
+      "spread": 1.26,
+      "regime": "SPY",
+      "monthly_return": 0.031869,
+      "equity_before": 302.9507,
+      "equity_after": 312.6056
+    },
+    {
+      "entry_date": "2017-01-03",
+      "exit_date": "2017-02-01",
+      "spread": 1.25,
+      "regime": "SPY",
+      "monthly_return": 0.010566,
+      "equity_before": 312.6056,
+      "equity_after": 315.9087
+    },
+    {
+      "entry_date": "2017-02-01",
+      "exit_date": "2017-03-01",
+      "spread": 1.26,
+      "regime": "SPY",
+      "monthly_return": 0.053423,
+      "equity_before": 315.9087,
+      "equity_after": 332.7853
+    },
+    {
+      "entry_date": "2017-03-01",
+      "exit_date": "2017-04-03",
+      "spread": 1.14,
+      "regime": "SPY",
+      "monthly_return": -0.014289,
+      "equity_before": 332.7853,
+      "equity_after": 328.0302
+    },
+    {
+      "entry_date": "2017-04-03",
+      "exit_date": "2017-05-01",
+      "spread": 1.13,
+      "regime": "SPY",
+      "monthly_return": 0.014235,
+      "equity_before": 328.0302,
+      "equity_after": 332.6998
+    },
+    {
+      "entry_date": "2017-05-01",
+      "exit_date": "2017-06-01",
+      "spread": 1.01,
+      "regime": "SPY",
+      "monthly_return": 0.019608,
+      "equity_before": 332.6998,
+      "equity_after": 339.2233
+    },
+    {
+      "entry_date": "2017-06-01",
+      "exit_date": "2017-07-03",
+      "spread": 0.93,
+      "regime": "SPY",
+      "monthly_return": 0.000128,
+      "equity_before": 339.2233,
+      "equity_after": 339.2668
+    },
+    {
+      "entry_date": "2017-07-03",
+      "exit_date": "2017-08-01",
+      "spread": 0.93,
+      "regime": "SPY",
+      "monthly_return": 0.021097,
+      "equity_before": 339.2668,
+      "equity_after": 346.4244
+    },
+    {
+      "entry_date": "2017-08-01",
+      "exit_date": "2017-09-01",
+      "spread": 0.96,
+      "regime": "SPY",
+      "monthly_return": 0.002103,
+      "equity_before": 346.4244,
+      "equity_after": 347.1528
+    },
+    {
+      "entry_date": "2017-09-01",
+      "exit_date": "2017-10-02",
+      "spread": 0.79,
+      "regime": "SPY",
+      "monthly_return": 0.023129,
+      "equity_before": 347.1528,
+      "equity_after": 355.182
+    },
+    {
+      "entry_date": "2017-10-02",
+      "exit_date": "2017-11-01",
+      "spread": 0.86,
+      "regime": "SPY",
+      "monthly_return": 0.02049,
+      "equity_before": 355.182,
+      "equity_after": 362.4595
+    },
+    {
+      "entry_date": "2017-11-01",
+      "exit_date": "2017-12-01",
+      "spread": 0.78,
+      "regime": "SPY",
+      "monthly_return": 0.027069,
+      "equity_before": 362.4595,
+      "equity_after": 372.271
+    },
+    {
+      "entry_date": "2017-12-01",
+      "exit_date": "2018-01-02",
+      "spread": 0.64,
+      "regime": "SPY",
+      "monthly_return": 0.021492,
+      "equity_before": 372.271,
+      "equity_after": 380.2719
+    },
+    {
+      "entry_date": "2018-01-02",
+      "exit_date": "2018-02-01",
+      "spread": 0.51,
+      "regime": "SPY",
+      "monthly_return": 0.047661,
+      "equity_before": 380.2719,
+      "equity_after": 398.3961
+    },
+    {
+      "entry_date": "2018-02-01",
+      "exit_date": "2018-03-01",
+      "spread": 0.58,
+      "regime": "SPY",
+      "monthly_return": -0.049293,
+      "equity_before": 398.3961,
+      "equity_after": 378.758
+    },
+    {
+      "entry_date": "2018-03-01",
+      "exit_date": "2018-04-02",
+      "spread": 0.62,
+      "regime": "SPY",
+      "monthly_return": -0.034363,
+      "equity_before": 378.758,
+      "equity_after": 365.7429
+    },
+    {
+      "entry_date": "2018-04-02",
+      "exit_date": "2018-05-01",
+      "spread": 0.47,
+      "regime": "SPY",
+      "monthly_return": 0.029169,
+      "equity_before": 365.7429,
+      "equity_after": 376.4111
+    },
+    {
+      "entry_date": "2018-05-01",
+      "exit_date": "2018-06-01",
+      "spread": 0.46,
+      "regime": "SPY",
+      "monthly_return": 0.032531,
+      "equity_before": 376.4111,
+      "equity_after": 388.656
+    },
+    {
+      "entry_date": "2018-06-01",
+      "exit_date": "2018-07-02",
+      "spread": 0.43,
+      "regime": "SPY",
+      "monthly_return": -0.001898,
+      "equity_before": 388.656,
+      "equity_after": 387.9184
+    },
+    {
+      "entry_date": "2018-07-02",
+      "exit_date": "2018-08-01",
+      "spread": 0.33,
+      "regime": "SPY",
+      "monthly_return": 0.033105,
+      "equity_before": 387.9184,
+      "equity_after": 400.7605
+    },
+    {
+      "entry_date": "2018-08-01",
+      "exit_date": "2018-09-04",
+      "spread": 0.29,
+      "regime": "SPY",
+      "monthly_return": 0.031867,
+      "equity_before": 400.7605,
+      "equity_after": 413.5314
+    },
+    {
+      "entry_date": "2018-09-04",
+      "exit_date": "2018-10-01",
+      "spread": 0.24,
+      "regime": "SPY",
+      "monthly_return": 0.011182,
+      "equity_before": 413.5314,
+      "equity_after": 418.1554
+    },
+    {
+      "entry_date": "2018-10-01",
+      "exit_date": "2018-11-01",
+      "spread": 0.24,
+      "regime": "SPY",
+      "monthly_return": -0.062455,
+      "equity_before": 418.1554,
+      "equity_after": 392.0395
+    },
+    {
+      "entry_date": "2018-11-01",
+      "exit_date": "2018-12-03",
+      "spread": 0.28,
+      "regime": "SPY",
+      "monthly_return": 0.021169,
+      "equity_before": 392.0395,
+      "equity_after": 400.3387
+    },
+    {
+      "entry_date": "2018-12-03",
+      "exit_date": "2019-01-02",
+      "spread": 0.21,
+      "regime": "SPY",
+      "monthly_return": -0.09903,
+      "equity_before": 400.3387,
+      "equity_after": 360.6932
+    },
+    {
+      "entry_date": "2019-01-02",
+      "exit_date": "2019-02-01",
+      "spread": 0.21,
+      "regime": "SPY",
+      "monthly_return": 0.079463,
+      "equity_before": 360.6932,
+      "equity_after": 389.3549
+    },
+    {
+      "entry_date": "2019-02-01",
+      "exit_date": "2019-03-01",
+      "spread": 0.18,
+      "regime": "SPY",
+      "monthly_return": 0.038362,
+      "equity_before": 389.3549,
+      "equity_after": 404.2913
+    },
+    {
+      "entry_date": "2019-03-01",
+      "exit_date": "2019-04-01",
+      "spread": 0.21,
+      "regime": "SPY",
+      "monthly_return": 0.023782,
+      "equity_before": 404.2913,
+      "equity_after": 413.9062
+    },
+    {
+      "entry_date": "2019-04-01",
+      "exit_date": "2019-05-01",
+      "spread": 0.14,
+      "regime": "SPY",
+      "monthly_return": 0.020922,
+      "equity_before": 413.9062,
+      "equity_after": 422.5658
+    },
+    {
+      "entry_date": "2019-05-01",
+      "exit_date": "2019-06-03",
+      "spread": 0.24,
+      "regime": "SPY",
+      "monthly_return": -0.05908,
+      "equity_before": 422.5658,
+      "equity_after": 397.6008
+    },
+    {
+      "entry_date": "2019-06-03",
+      "exit_date": "2019-07-01",
+      "spread": 0.19,
+      "regime": "SPY",
+      "monthly_return": 0.082048,
+      "equity_before": 397.6008,
+      "equity_after": 430.2232
+    },
+    {
+      "entry_date": "2019-07-01",
+      "exit_date": "2019-08-01",
+      "spread": 0.25,
+      "regime": "SPY",
+      "monthly_return": -0.002773,
+      "equity_before": 430.2232,
+      "equity_after": 429.03
+    },
+    {
+      "entry_date": "2019-08-01",
+      "exit_date": "2019-09-03",
+      "spread": 0.13,
+      "regime": "SPY",
+      "monthly_return": -0.013906,
+      "equity_before": 429.03,
+      "equity_after": 423.064
+    },
+    {
+      "entry_date": "2019-09-03",
+      "exit_date": "2019-10-01",
+      "spread": 0.0,
+      "regime": "CASH",
+      "monthly_return": -0.000998,
+      "equity_before": 423.064,
+      "equity_after": 422.6418
+    },
+    {
+      "entry_date": "2019-10-01",
+      "exit_date": "2019-11-01",
+      "spread": 0.05,
+      "regime": "SPY",
+      "monthly_return": 0.043991,
+      "equity_before": 422.6418,
+      "equity_after": 441.2344
+    },
+    {
+      "entry_date": "2019-11-01",
+      "exit_date": "2019-12-02",
+      "spread": 0.17,
+      "regime": "SPY",
+      "monthly_return": 0.017966,
+      "equity_before": 441.2344,
+      "equity_after": 449.1615
+    },
+    {
+      "entry_date": "2019-12-02",
+      "exit_date": "2020-01-02",
+      "spread": 0.17,
+      "regime": "SPY",
+      "monthly_return": 0.047578,
+      "equity_before": 449.1615,
+      "equity_after": 470.5317
+    },
+    {
+      "entry_date": "2020-01-02",
+      "exit_date": "2020-02-03",
+      "spread": 0.34,
+      "regime": "SPY",
+      "monthly_return": -0.002309,
+      "equity_before": 470.5317,
+      "equity_after": 469.4455
+    },
+    {
+      "entry_date": "2020-02-03",
+      "exit_date": "2020-03-02",
+      "spread": 0.18,
+      "regime": "SPY",
+      "monthly_return": -0.046372,
+      "equity_before": 469.4455,
+      "equity_after": 447.6765
+    },
+    {
+      "entry_date": "2020-03-02",
+      "exit_date": "2020-04-01",
+      "spread": 0.27,
+      "regime": "SPY",
+      "monthly_return": -0.198947,
+      "equity_before": 447.6765,
+      "equity_after": 358.6125
+    },
+    {
+      "entry_date": "2020-04-01",
+      "exit_date": "2020-05-01",
+      "spread": 0.47,
+      "regime": "SPY",
+      "monthly_return": 0.148852,
+      "equity_before": 358.6125,
+      "equity_after": 411.9927
+    },
+    {
+      "entry_date": "2020-05-01",
+      "exit_date": "2020-06-01",
+      "spread": 0.44,
+      "regime": "SPY",
+      "monthly_return": 0.080484,
+      "equity_before": 411.9927,
+      "equity_after": 445.1515
+    },
+    {
+      "entry_date": "2020-06-01",
+      "exit_date": "2020-07-01",
+      "spread": 0.49,
+      "regime": "SPY",
+      "monthly_return": 0.020738,
+      "equity_before": 445.1515,
+      "equity_after": 454.383
+    },
+    {
+      "entry_date": "2020-07-01",
+      "exit_date": "2020-08-03",
+      "spread": 0.5,
+      "regime": "SPY",
+      "monthly_return": 0.058837,
+      "equity_before": 454.383,
+      "equity_after": 481.1175
+    },
+    {
+      "entry_date": "2020-08-03",
+      "exit_date": "2020-09-01",
+      "spread": 0.44,
+      "regime": "SPY",
+      "monthly_return": 0.072417,
+      "equity_before": 481.1175,
+      "equity_after": 515.9587
+    },
+    {
+      "entry_date": "2020-09-01",
+      "exit_date": "2020-10-01",
+      "spread": 0.58,
+      "regime": "SPY",
+      "monthly_return": -0.040303,
+      "equity_before": 515.9587,
+      "equity_after": 495.164
+    },
+    {
+      "entry_date": "2020-10-01",
+      "exit_date": "2020-11-02",
+      "spread": 0.56,
+      "regime": "SPY",
+      "monthly_return": -0.020294,
+      "equity_before": 495.164,
+      "equity_after": 485.1149
+    },
+    {
+      "entry_date": "2020-11-02",
+      "exit_date": "2020-12-01",
+      "spread": 0.74,
+      "regime": "SPY",
+      "monthly_return": 0.10848,
+      "equity_before": 485.1149,
+      "equity_after": 537.7401
+    },
+    {
+      "entry_date": "2020-12-01",
+      "exit_date": "2021-01-04",
+      "spread": 0.68,
+      "regime": "SPY",
+      "monthly_return": 0.011863,
+      "equity_before": 537.7401,
+      "equity_after": 544.1192
+    },
+    {
+      "entry_date": "2021-01-04",
+      "exit_date": "2021-02-01",
+      "spread": 0.8,
+      "regime": "SPY",
+      "monthly_return": 0.020174,
+      "equity_before": 544.1192,
+      "equity_after": 555.0963
+    },
+    {
+      "entry_date": "2021-02-01",
+      "exit_date": "2021-03-01",
+      "spread": 1.0,
+      "regime": "SPY",
+      "monthly_return": 0.035483,
+      "equity_before": 555.0963,
+      "equity_after": 574.793
+    },
+    {
+      "entry_date": "2021-03-01",
+      "exit_date": "2021-04-01",
+      "spread": 1.3,
+      "regime": "SPY",
+      "monthly_return": 0.031681,
+      "equity_before": 574.793,
+      "equity_after": 593.0028
+    },
+    {
+      "entry_date": "2021-04-01",
+      "exit_date": "2021-05-03",
+      "spread": 1.58,
+      "regime": "SPY",
+      "monthly_return": 0.043908,
+      "equity_before": 593.0028,
+      "equity_after": 619.0404
+    },
+    {
+      "entry_date": "2021-05-03",
+      "exit_date": "2021-06-01",
+      "spread": 1.49,
+      "regime": "SPY",
+      "monthly_return": 0.003515,
+      "equity_before": 619.0404,
+      "equity_after": 621.2164
+    },
+    {
+      "entry_date": "2021-06-01",
+      "exit_date": "2021-07-01",
+      "spread": 1.44,
+      "regime": "SPY",
+      "monthly_return": 0.028994,
+      "equity_before": 621.2164,
+      "equity_after": 639.2282
+    },
+    {
+      "entry_date": "2021-07-01",
+      "exit_date": "2021-08-02",
+      "spread": 1.2,
+      "regime": "SPY",
+      "monthly_return": 0.016635,
+      "equity_before": 639.2282,
+      "equity_after": 649.8615
+    },
+    {
+      "entry_date": "2021-08-02",
+      "exit_date": "2021-09-01",
+      "spread": 1.05,
+      "regime": "SPY",
+      "monthly_return": 0.032473,
+      "equity_before": 649.8615,
+      "equity_after": 670.9647
+    },
+    {
+      "entry_date": "2021-09-01",
+      "exit_date": "2021-10-01",
+      "spread": 1.1,
+      "regime": "SPY",
+      "monthly_return": -0.035788,
+      "equity_before": 670.9647,
+      "equity_after": 646.9525
+    },
+    {
+      "entry_date": "2021-10-01",
+      "exit_date": "2021-11-01",
+      "spread": 1.24,
+      "regime": "SPY",
+      "monthly_return": 0.059414,
+      "equity_before": 646.9525,
+      "equity_after": 685.3906
+    },
+    {
+      "entry_date": "2021-11-01",
+      "exit_date": "2021-12-01",
+      "spread": 1.07,
+      "regime": "SPY",
+      "monthly_return": -0.020737,
+      "equity_before": 685.3906,
+      "equity_after": 671.1775
+    },
+    {
+      "entry_date": "2021-12-01",
+      "exit_date": "2022-01-03",
+      "spread": 0.91,
+      "regime": "SPY",
+      "monthly_return": 0.064125,
+      "equity_before": 671.1775,
+      "equity_after": 714.2167
+    },
+    {
+      "entry_date": "2022-01-03",
+      "exit_date": "2022-02-01",
+      "spread": 0.79,
+      "regime": "SPY",
+      "monthly_return": -0.05183,
+      "equity_before": 714.2167,
+      "equity_after": 677.1985
+    },
+    {
+      "entry_date": "2022-02-01",
+      "exit_date": "2022-03-01",
+      "spread": 0.61,
+      "regime": "SPY",
+      "monthly_return": -0.050712,
+      "equity_before": 677.1985,
+      "equity_after": 642.8563
+    },
+    {
+      "entry_date": "2022-03-01",
+      "exit_date": "2022-04-01",
+      "spread": 0.39,
+      "regime": "SPY",
+      "monthly_return": 0.056624,
+      "equity_before": 642.8563,
+      "equity_after": 679.2573
+    },
+    {
+      "entry_date": "2022-04-01",
+      "exit_date": "2022-05-02",
+      "spread": 0.04,
+      "regime": "SPY",
+      "monthly_return": -0.084871,
+      "equity_before": 679.2573,
+      "equity_after": 621.6077
+    },
+    {
+      "entry_date": "2022-05-02",
+      "exit_date": "2022-06-01",
+      "spread": 0.19,
+      "regime": "SPY",
+      "monthly_return": -0.011798,
+      "equity_before": 621.6077,
+      "equity_after": 614.274
+    },
+    {
+      "entry_date": "2022-06-01",
+      "exit_date": "2022-07-01",
+      "spread": 0.32,
+      "regime": "SPY",
+      "monthly_return": -0.065195,
+      "equity_before": 614.274,
+      "equity_after": 574.2265
+    },
+    {
+      "entry_date": "2022-07-01",
+      "exit_date": "2022-08-01",
+      "spread": 0.06,
+      "regime": "SPY",
+      "monthly_return": 0.077458,
+      "equity_before": 574.2265,
+      "equity_after": 618.7048
+    },
+    {
+      "entry_date": "2022-08-01",
+      "exit_date": "2022-09-01",
+      "spread": -0.22,
+      "regime": "TLT",
+      "monthly_return": -0.085041,
+      "equity_before": 618.7048,
+      "equity_after": 566.0896
+    },
+    {
+      "entry_date": "2022-09-01",
+      "exit_date": "2022-10-03",
+      "spread": -0.3,
+      "regime": "TLT",
+      "monthly_return": -0.050384,
+      "equity_before": 566.0896,
+      "equity_after": 537.5675
+    },
+    {
+      "entry_date": "2022-10-03",
+      "exit_date": "2022-11-01",
+      "spread": -0.39,
+      "regime": "TLT",
+      "monthly_return": -0.065702,
+      "equity_before": 537.5675,
+      "equity_after": 502.2483
+    },
+    {
+      "entry_date": "2022-11-01",
+      "exit_date": "2022-12-01",
+      "spread": -0.41,
+      "regime": "TLT",
+      "monthly_return": 0.095503,
+      "equity_before": 502.2483,
+      "equity_after": 550.2146
+    },
+    {
+      "entry_date": "2022-12-01",
+      "exit_date": "2023-01-03",
+      "spread": -0.7,
+      "regime": "TLT",
+      "monthly_return": -0.038338,
+      "equity_before": 550.2146,
+      "equity_after": 529.1206
+    },
+    {
+      "entry_date": "2023-01-03",
+      "exit_date": "2023-02-01",
+      "spread": -0.53,
+      "regime": "TLT",
+      "monthly_return": 0.068976,
+      "equity_before": 529.1206,
+      "equity_after": 565.6172
+    },
+    {
+      "entry_date": "2023-02-01",
+      "exit_date": "2023-03-01",
+      "spread": -0.69,
+      "regime": "TLT",
+      "monthly_return": -0.069908,
+      "equity_before": 565.6172,
+      "equity_after": 526.076
+    },
+    {
+      "entry_date": "2023-03-01",
+      "exit_date": "2023-04-03",
+      "spread": -0.89,
+      "regime": "TLT",
+      "monthly_return": 0.064763,
+      "equity_before": 526.076,
+      "equity_after": 560.1462
+    },
+    {
+      "entry_date": "2023-04-03",
+      "exit_date": "2023-05-01",
+      "spread": -0.58,
+      "regime": "TLT",
+      "monthly_return": -0.03011,
+      "equity_before": 560.1462,
+      "equity_after": 543.2802
+    },
+    {
+      "entry_date": "2023-05-01",
+      "exit_date": "2023-06-01",
+      "spread": -0.6,
+      "regime": "TLT",
+      "monthly_return": 0.002561,
+      "equity_before": 543.2802,
+      "equity_after": 544.6714
+    },
+    {
+      "entry_date": "2023-06-01",
+      "exit_date": "2023-07-03",
+      "spread": -0.76,
+      "regime": "TLT",
+      "monthly_return": -0.007405,
+      "equity_before": 544.6714,
+      "equity_after": 540.6383
+    },
+    {
+      "entry_date": "2023-07-03",
+      "exit_date": "2023-08-01",
+      "spread": -1.06,
+      "regime": "TLT",
+      "monthly_return": -0.035947,
+      "equity_before": 540.6383,
+      "equity_after": 521.2037
+    },
+    {
+      "entry_date": "2023-08-01",
+      "exit_date": "2023-09-01",
+      "spread": -0.91,
+      "regime": "TLT",
+      "monthly_return": -0.030625,
+      "equity_before": 521.2037,
+      "equity_after": 505.2419
+    },
+    {
+      "entry_date": "2023-09-01",
+      "exit_date": "2023-10-02",
+      "spread": -0.76,
+      "regime": "TLT",
+      "monthly_return": -0.080597,
+      "equity_before": 505.2419,
+      "equity_after": 464.5208
+    },
+    {
+      "entry_date": "2023-10-02",
+      "exit_date": "2023-11-01",
+      "spread": -0.44,
+      "regime": "TLT",
+      "monthly_return": -0.01769,
+      "equity_before": 464.5208,
+      "equity_after": 456.3032
+    },
+    {
+      "entry_date": "2023-11-01",
+      "exit_date": "2023-12-01",
+      "spread": -0.19,
+      "regime": "TLT",
+      "monthly_return": 0.096175,
+      "equity_before": 456.3032,
+      "equity_after": 500.188
+    },
+    {
+      "entry_date": "2023-12-01",
+      "exit_date": "2024-01-02",
+      "spread": -0.36,
+      "regime": "TLT",
+      "monthly_return": 0.060617,
+      "equity_before": 500.188,
+      "equity_after": 530.5077
+    },
+    {
+      "entry_date": "2024-01-02",
+      "exit_date": "2024-02-01",
+      "spread": -0.35,
+      "regime": "TLT",
+      "monthly_return": 0.002503,
+      "equity_before": 530.5077,
+      "equity_after": 531.8356
+    },
+    {
+      "entry_date": "2024-02-01",
+      "exit_date": "2024-03-01",
+      "spread": -0.28,
+      "regime": "TLT",
+      "monthly_return": -0.035354,
+      "equity_before": 531.8356,
+      "equity_after": 513.0332
+    },
+    {
+      "entry_date": "2024-03-01",
+      "exit_date": "2024-04-01",
+      "spread": -0.39,
+      "regime": "TLT",
+      "monthly_return": -0.017083,
+      "equity_before": 513.0332,
+      "equity_after": 504.269
+    },
+    {
+      "entry_date": "2024-04-01",
+      "exit_date": "2024-05-01",
+      "spread": -0.39,
+      "regime": "TLT",
+      "monthly_return": -0.03976,
+      "equity_before": 504.269,
+      "equity_after": 484.2196
+    },
+    {
+      "entry_date": "2024-05-01",
+      "exit_date": "2024-06-03",
+      "spread": -0.35,
+      "regime": "TLT",
+      "monthly_return": 0.037862,
+      "equity_before": 484.2196,
+      "equity_after": 502.5529
+    },
+    {
+      "entry_date": "2024-06-03",
+      "exit_date": "2024-07-01",
+      "spread": -0.38,
+      "regime": "TLT",
+      "monthly_return": -0.015328,
+      "equity_before": 502.5529,
+      "equity_after": 494.8497
+    },
+    {
+      "entry_date": "2024-07-01",
+      "exit_date": "2024-08-01",
+      "spread": -0.35,
+      "regime": "TLT",
+      "monthly_return": 0.063594,
+      "equity_before": 494.8497,
+      "equity_after": 526.3191
+    },
+    {
+      "entry_date": "2024-08-01",
+      "exit_date": "2024-09-03",
+      "spread": -0.2,
+      "regime": "TLT",
+      "monthly_return": 0.028939,
+      "equity_before": 526.3191,
+      "equity_after": 541.5501
+    },
+    {
+      "entry_date": "2024-09-03",
+      "exit_date": "2024-10-01",
+      "spread": 0.0,
+      "regime": "CASH",
+      "monthly_return": 0.007302,
+      "equity_before": 541.5501,
+      "equity_after": 545.5047
+    },
+    {
+      "entry_date": "2024-10-01",
+      "exit_date": "2024-11-01",
+      "spread": 0.15,
+      "regime": "SPY",
+      "monthly_return": 0.004256,
+      "equity_before": 545.5047,
+      "equity_after": 547.8264
+    },
+    {
+      "entry_date": "2024-11-01",
+      "exit_date": "2024-12-02",
+      "spread": 0.12,
+      "regime": "SPY",
+      "monthly_return": 0.057071,
+      "equity_before": 547.8264,
+      "equity_after": 579.0915
+    },
+    {
+      "entry_date": "2024-12-02",
+      "exit_date": "2025-01-02",
+      "spread": 0.05,
+      "regime": "SPY",
+      "monthly_return": -0.0282,
+      "equity_before": 579.0915,
+      "equity_after": 562.7613
+    },
+    {
+      "entry_date": "2025-01-02",
+      "exit_date": "2025-02-03",
+      "spread": 0.33,
+      "regime": "SPY",
+      "monthly_return": 0.022458,
+      "equity_before": 562.7613,
+      "equity_after": 575.4
+    },
+    {
+      "entry_date": "2025-02-03",
+      "exit_date": "2025-03-03",
+      "spread": 0.36,
+      "regime": "SPY",
+      "monthly_return": -0.02342,
+      "equity_before": 575.4,
+      "equity_after": 561.9238
+    },
+    {
+      "entry_date": "2025-03-03",
+      "exit_date": "2025-04-01",
+      "spread": 0.25,
+      "regime": "SPY",
+      "monthly_return": -0.036166,
+      "equity_before": 561.9238,
+      "equity_after": 541.6014
+    },
+    {
+      "entry_date": "2025-04-01",
+      "exit_date": "2025-05-01",
+      "spread": 0.34,
+      "regime": "SPY",
+      "monthly_return": -0.004457,
+      "equity_before": 541.6014,
+      "equity_after": 539.1877
+    },
+    {
+      "entry_date": "2025-05-01",
+      "exit_date": "2025-06-02",
+      "spread": 0.57,
+      "regime": "SPY",
+      "monthly_return": 0.06131,
+      "equity_before": 539.1877,
+      "equity_after": 572.2455
+    },
+    {
+      "entry_date": "2025-06-02",
+      "exit_date": "2025-07-01",
+      "spread": 0.52,
+      "regime": "SPY",
+      "monthly_return": 0.045159,
+      "equity_before": 572.2455,
+      "equity_after": 598.0874
+    },
+    {
+      "entry_date": "2025-07-01",
+      "exit_date": "2025-08-01",
+      "spread": 0.52,
+      "regime": "SPY",
+      "monthly_return": 0.006589,
+      "equity_before": 598.0874,
+      "equity_after": 602.0284
+    },
+    {
+      "entry_date": "2025-08-01",
+      "exit_date": "2025-09-02",
+      "spread": 0.43,
+      "regime": "SPY",
+      "monthly_return": 0.029837,
+      "equity_before": 602.0284,
+      "equity_after": 619.9909
+    },
+    {
+      "entry_date": "2025-09-02",
+      "exit_date": "2025-10-01",
+      "spread": 0.64,
+      "regime": "SPY",
+      "monthly_return": 0.046907,
+      "equity_before": 619.9909,
+      "equity_after": 649.0729
+    },
+    {
+      "entry_date": "2025-10-01",
+      "exit_date": "2025-11-03",
+      "spread": 0.56,
+      "regime": "SPY",
+      "monthly_return": 0.022275,
+      "equity_before": 649.0729,
+      "equity_after": 663.5313
+    },
+    {
+      "entry_date": "2025-11-03",
+      "exit_date": "2025-12-01",
+      "spread": 0.51,
+      "regime": "SPY",
+      "monthly_return": -0.004493,
+      "equity_before": 663.5313,
+      "equity_after": 660.5502
+    },
+    {
+      "entry_date": "2025-12-01",
+      "exit_date": "2026-01-02",
+      "spread": 0.55,
+      "regime": "SPY",
+      "monthly_return": 0.007231,
+      "equity_before": 660.5502,
+      "equity_after": 665.3263
+    },
+    {
+      "entry_date": "2026-01-02",
+      "exit_date": "2026-02-02",
+      "spread": 0.71,
+      "regime": "SPY",
+      "monthly_return": 0.017916,
+      "equity_before": 665.3263,
+      "equity_after": 677.2467
+    },
+    {
+      "entry_date": "2026-02-02",
+      "exit_date": "2026-03-02",
+      "spread": 0.74,
+      "regime": "SPY",
+      "monthly_return": -0.012985,
+      "equity_before": 677.2467,
+      "equity_after": 668.4525
+    },
+    {
+      "entry_date": "2026-03-02",
+      "exit_date": "2026-04-01",
+      "spread": 0.59,
+      "regime": "SPY",
+      "monthly_return": -0.042761,
+      "equity_before": 668.4525,
+      "equity_after": 639.8686
+    },
+    {
+      "entry_date": "2026-04-01",
+      "exit_date": "2026-04-24",
+      "spread": 0.51,
+      "regime": "SPY",
+      "monthly_return": 0.089586,
+      "equity_before": 639.8686,
+      "equity_after": 697.1915
+    }
+  ]
+}
