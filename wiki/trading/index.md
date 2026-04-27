@@ -1,7 +1,7 @@
 ---
-updated: 2026-04-26
+updated: 2026-04-27
 status: active
-phase: 2 — backtesting
+phase: 2→3 — backtesting complete, paper trading ready
 ---
 
 # Trading & Prediction Markets Project
@@ -20,8 +20,10 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 ## Wiki sections
 
 - [Algorithms](algorithms/) — trading strategy catalog
+  - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
+  - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
 - [Backtesting](backtesting/) — setup, results, methodology
 - [Paper Trading](paper-trading/) — Alpaca results log
@@ -38,6 +40,9 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 | 2026-04-24 | Backtesting must model macro regimes + after-tax returns | Kevin's requirement — real-world accuracy |
 | 2026-04-26 | yfinance as data fallback (Alpaca SDK not installable in container) | Alpaca module unavailable; yfinance works for EOD |
 | 2026-04-26 | BIL preferred over TLT as risk-off refuge in dual momentum (H006 result) | TLT has duration risk; BIL immune to rate-hike bears |
+| 2026-04-27 | H020 (5-asset rotation) supersedes H016 as primary ETF strategy | Sharpe 1.23 vs 0.78; 6.7% OOS degradation (vs 50% typical); generalizes across universes |
+| 2026-04-27 | H018 blend (H020 + H009, 50/50) is the target portfolio for Phase 3 | Sharpe 1.255, MaxDD -18.4%, corr=0.31 — diversification benefit confirmed |
+| 2026-04-27 | Use alpaca-py (not alpaca-trade-api) for all Alpaca automation | legacy SDK deprecated Dec 2022 |
 
 ## API access
 
