@@ -1,0 +1,274 @@
+{
+  "strategy": "H031b \u2014 H020 + H026 + H037b Three-Way Blend",
+  "description": "H031 with H009 replaced by H037b (gap-down filter -0.5%). Tests whether improved signal quality translates to a better portfolio.",
+  "common_window": {
+    "start": "2003-08-31",
+    "end": "2026-04-30",
+    "n_months": 273,
+    "n_years": 22.8
+  },
+  "gap_filter_threshold": -0.005,
+  "monthly_correlations": {
+    "h020_h026": 0.4851,
+    "h020_h037b": 0.1695,
+    "h026_h037b": 0.387
+  },
+  "standalone": {
+    "h020": {
+      "cagr": 0.1463,
+      "sharpe": 1.5732,
+      "max_drawdown": -0.1922,
+      "calmar": 0.7616,
+      "ann_vol": 0.093,
+      "n_months": 273
+    },
+    "h026": {
+      "cagr": 0.1599,
+      "sharpe": 1.397,
+      "max_drawdown": -0.2553,
+      "calmar": 0.6261,
+      "ann_vol": 0.1144,
+      "n_months": 273
+    },
+    "h037b": {
+      "cagr": 0.1172,
+      "sharpe": 1.1245,
+      "max_drawdown": -0.2174,
+      "calmar": 0.5391,
+      "ann_vol": 0.1042,
+      "n_months": 273
+    }
+  },
+  "blend_grid": [
+    {
+      "w_h020": 0.5,
+      "w_h026": 0.2,
+      "w_h037b": 0.3,
+      "cagr": 0.1427,
+      "sharpe": 1.8828,
+      "max_drawdown": -0.0926,
+      "calmar": 1.5408,
+      "ann_vol": 0.0758,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.6,
+      "w_h026": 0.1,
+      "w_h037b": 0.3,
+      "cagr": 0.1411,
+      "sharpe": 1.8673,
+      "max_drawdown": -0.0908,
+      "calmar": 1.5548,
+      "ann_vol": 0.0756,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.6,
+      "w_h026": 0.2,
+      "w_h037b": 0.2,
+      "cagr": 0.1453,
+      "sharpe": 1.8644,
+      "max_drawdown": -0.1135,
+      "calmar": 1.2807,
+      "ann_vol": 0.078,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.5,
+      "w_h026": 0.3,
+      "w_h037b": 0.2,
+      "cagr": 0.1469,
+      "sharpe": 1.8639,
+      "max_drawdown": -0.1123,
+      "calmar": 1.3071,
+      "ann_vol": 0.0788,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.4,
+      "w_h026": 0.3,
+      "w_h037b": 0.3,
+      "cagr": 0.1442,
+      "sharpe": 1.8601,
+      "max_drawdown": -0.1106,
+      "calmar": 1.3035,
+      "ann_vol": 0.0775,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.5,
+      "w_h026": 0.1,
+      "w_h037b": 0.4,
+      "cagr": 0.1384,
+      "sharpe": 1.8534,
+      "max_drawdown": -0.0967,
+      "calmar": 1.4315,
+      "ann_vol": 0.0747,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.4,
+      "w_h026": 0.2,
+      "w_h037b": 0.4,
+      "cagr": 0.1399,
+      "sharpe": 1.8469,
+      "max_drawdown": -0.1143,
+      "calmar": 1.2235,
+      "ann_vol": 0.0757,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.4,
+      "w_h026": 0.4,
+      "w_h037b": 0.2,
+      "cagr": 0.1483,
+      "sharpe": 1.8293,
+      "max_drawdown": -0.1113,
+      "calmar": 1.3325,
+      "ann_vol": 0.081,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.7,
+      "w_h026": 0.1,
+      "w_h037b": 0.2,
+      "cagr": 0.1437,
+      "sharpe": 1.8287,
+      "max_drawdown": -0.1152,
+      "calmar": 1.2472,
+      "ann_vol": 0.0786,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.6,
+      "w_h026": 0.3,
+      "w_h037b": 0.1,
+      "cagr": 0.1494,
+      "sharpe": 1.8203,
+      "max_drawdown": -0.1358,
+      "calmar": 1.1,
+      "ann_vol": 0.0821,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.5,
+      "w_h026": 0.4,
+      "w_h037b": 0.1,
+      "cagr": 0.1509,
+      "sharpe": 1.8075,
+      "max_drawdown": -0.1347,
+      "calmar": 1.1198,
+      "ann_vol": 0.0835,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.7,
+      "w_h026": 0.2,
+      "w_h037b": 0.1,
+      "cagr": 0.1478,
+      "sharpe": 1.8011,
+      "max_drawdown": -0.1421,
+      "calmar": 1.0397,
+      "ann_vol": 0.0821,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.4,
+      "w_h026": 0.1,
+      "w_h037b": 0.5,
+      "cagr": 0.1355,
+      "sharpe": 1.7846,
+      "max_drawdown": -0.1199,
+      "calmar": 1.1297,
+      "ann_vol": 0.0759,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.6,
+      "w_h026": 0.4,
+      "w_h037b": 0.0,
+      "cagr": 0.1533,
+      "sharpe": 1.7481,
+      "max_drawdown": -0.1606,
+      "calmar": 0.9545,
+      "ann_vol": 0.0877,
+      "n_months": 273
+    },
+    {
+      "w_h020": 0.7,
+      "w_h026": 0.3,
+      "w_h037b": 0.0,
+      "cagr": 0.1517,
+      "sharpe": 1.742,
+      "max_drawdown": -0.1685,
+      "calmar": 0.9008,
+      "ann_vol": 0.0871,
+      "n_months": 273
+    }
+  ],
+  "optimal": {
+    "max_sharpe": {
+      "w_h020": 0.51,
+      "w_h026": 0.2,
+      "w_h037b": 0.29,
+      "cagr": 0.143,
+      "sharpe": 1.8833,
+      "max_drawdown": -0.092,
+      "calmar": 1.554,
+      "ann_vol": 0.0759,
+      "n_months": 273
+    },
+    "min_maxdd": {
+      "w_h020": 0.62,
+      "w_h026": 0.0,
+      "w_h037b": 0.38,
+      "cagr": 0.1373,
+      "sharpe": 1.8237,
+      "max_drawdown": -0.0753,
+      "calmar": 1.8249,
+      "ann_vol": 0.0753,
+      "n_months": 273
+    }
+  },
+  "fixed_weight_comparison": {
+    "weights": {
+      "w_h020": 0.56,
+      "w_h026": 0.19,
+      "w_h037b": 0.25
+    },
+    "description": "H031 optimal weights (56/19/25) applied to H037b instead of H009",
+    "stats": {
+      "w_h020": 0.56,
+      "w_h026": 0.19,
+      "w_h037b": 0.25,
+      "cagr": 0.1439,
+      "sharpe": 1.8791,
+      "max_drawdown": -0.1017,
+      "calmar": 1.4147,
+      "ann_vol": 0.0766,
+      "n_months": 273
+    }
+  },
+  "h031_reference": {
+    "weights": {
+      "w_h020": 0.56,
+      "w_h026": 0.19,
+      "w_h009": 0.25
+    },
+    "cagr": 0.1463,
+    "sharpe": 1.843,
+    "max_drawdown": -0.1152,
+    "ann_vol": 0.0794,
+    "calmar": 1.269,
+    "n_months": 273,
+    "source": "H031 continuous max-Sharpe result"
+  },
+  "vs_h031": {
+    "sharpe_delta_same_weights": 0.0361,
+    "sharpe_delta_reoptimised": 0.0403,
+    "maxdd_delta_same_weights": 0.0135,
+    "maxdd_delta_reoptimised": 0.0232,
+    "verdict": "H037b signal improvement carries through to portfolio"
+  },
+  "run_date": "2026-04-27"
+}

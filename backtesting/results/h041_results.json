@@ -1,0 +1,325 @@
+{
+  "strategy": "H041 \u2014 International Equity Expansion of H020",
+  "signal": "rank(12m_momentum) + rank(inv_6m_vol), hold top-2 equal weight (50/50)",
+  "rebalance": "monthly",
+  "full_start": "2003-01-01",
+  "full_end": "2026-04-27",
+  "is_cutoff": "2017-12-31",
+  "oos_start": "2018-01-01",
+  "note": "Fresh IS/OOS split: IS through 2017 (never used in H020 dev), OOS 2018-2026",
+  "h020_baseline": {
+    "universe": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "IEF"
+    ],
+    "full_period_stats": {
+      "cagr": 0.1324,
+      "sharpe": 1.1694,
+      "max_drawdown": -0.1785,
+      "calmar": 0.7416,
+      "ann_vol": 0.1132,
+      "win_rate": 0.5593,
+      "n_years": 22.3
+    },
+    "is_stats": {
+      "cagr": 0.1257,
+      "sharpe": 1.1465,
+      "max_drawdown": -0.1359,
+      "calmar": 0.9245,
+      "ann_vol": 0.1096,
+      "win_rate": 0.5604,
+      "n_years": 14.0
+    },
+    "oos_stats": {
+      "cagr": 0.1516,
+      "sharpe": 1.2598,
+      "max_drawdown": -0.1785,
+      "calmar": 0.8489,
+      "ann_vol": 0.1203,
+      "win_rate": 0.5586,
+      "n_years": 7.3
+    },
+    "oos_degradation_pct_sharpe": -9.9,
+    "holding_frequency": {
+      "SPY": {
+        "count": 160,
+        "pct": 0.597
+      },
+      "IEF": {
+        "count": 149,
+        "pct": 0.556
+      },
+      "QQQ": {
+        "count": 101,
+        "pct": 0.3769
+      },
+      "TLT": {
+        "count": 70,
+        "pct": 0.2612
+      },
+      "GLD": {
+        "count": 56,
+        "pct": 0.209
+      }
+    }
+  },
+  "h041a": {
+    "universe": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "IEF",
+      "EFA",
+      "EEM"
+    ],
+    "ticker_starts": {
+      "SPY": "2003-01-02",
+      "QQQ": "2003-01-02",
+      "TLT": "2003-01-02",
+      "GLD": "2004-11-18",
+      "IEF": "2003-01-02",
+      "EFA": "2003-01-02",
+      "EEM": "2003-04-14"
+    },
+    "results": {
+      "full_period": {
+        "h041a": {
+          "cagr": 0.1466,
+          "sharpe": 1.2227,
+          "max_drawdown": -0.158,
+          "calmar": 0.9276,
+          "ann_vol": 0.1199,
+          "win_rate": 0.5629,
+          "n_years": 22.3
+        },
+        "spy_bh": {
+          "cagr": 0.1066,
+          "sharpe": 0.5591,
+          "max_drawdown": -0.5519,
+          "calmar": 0.1931,
+          "ann_vol": 0.1906,
+          "win_rate": 0.5509,
+          "n_years": 22.3
+        }
+      },
+      "in_sample": {
+        "h041a": {
+          "cagr": 0.1482,
+          "sharpe": 1.2413,
+          "max_drawdown": -0.158,
+          "calmar": 0.9377,
+          "ann_vol": 0.1194,
+          "win_rate": 0.5657,
+          "n_years": 14.0
+        },
+        "spy_bh": {
+          "cagr": 0.0854,
+          "sharpe": 0.4575,
+          "max_drawdown": -0.5519,
+          "calmar": 0.1548,
+          "ann_vol": 0.1868,
+          "win_rate": 0.5508,
+          "n_years": 14.0
+        }
+      },
+      "out_of_sample": {
+        "h041a": {
+          "cagr": 0.1377,
+          "sharpe": 1.1268,
+          "max_drawdown": -0.1504,
+          "calmar": 0.9155,
+          "ann_vol": 0.1222,
+          "win_rate": 0.558,
+          "n_years": 7.3
+        },
+        "spy_bh": {
+          "cagr": 0.1756,
+          "sharpe": 0.877,
+          "max_drawdown": -0.3372,
+          "calmar": 0.5207,
+          "ann_vol": 0.2002,
+          "win_rate": 0.5546,
+          "n_years": 7.3
+        }
+      }
+    },
+    "oos_degradation_pct_sharpe": 9.2,
+    "h020_monthly_corr": 0.846,
+    "holding_frequency": {
+      "SPY": {
+        "count": 141,
+        "pct": 0.5261
+      },
+      "IEF": {
+        "count": 118,
+        "pct": 0.4403
+      },
+      "QQQ": {
+        "count": 76,
+        "pct": 0.2836
+      },
+      "GLD": {
+        "count": 68,
+        "pct": 0.2537
+      },
+      "TLT": {
+        "count": 63,
+        "pct": 0.2351
+      },
+      "EFA": {
+        "count": 52,
+        "pct": 0.194
+      },
+      "EEM": {
+        "count": 18,
+        "pct": 0.0672
+      }
+    },
+    "intl_selection": {
+      "months_with_any_intl": 68,
+      "pct_months_with_any_intl": 0.2537,
+      "intl_slot_fraction": 0.1306,
+      "total_months": 268
+    },
+    "intl_contribution": {
+      "avg_monthly_ret_when_selected": 0.01975,
+      "avg_port_ret_those_months": 0.0181,
+      "n_intl_holding_months": 70
+    }
+  },
+  "h041b": {
+    "universe": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "IEF",
+      "EFA",
+      "EEM",
+      "VWO"
+    ],
+    "ticker_starts": {
+      "SPY": "2003-01-02",
+      "QQQ": "2003-01-02",
+      "TLT": "2003-01-02",
+      "GLD": "2004-11-18",
+      "IEF": "2003-01-02",
+      "EFA": "2003-01-02",
+      "EEM": "2003-04-14",
+      "VWO": "2005-03-10"
+    },
+    "results": {
+      "full_period": {
+        "h041b": {
+          "cagr": 0.1515,
+          "sharpe": 1.1758,
+          "max_drawdown": -0.2323,
+          "calmar": 0.6521,
+          "ann_vol": 0.1288,
+          "win_rate": 0.5604,
+          "n_years": 22.3
+        },
+        "spy_bh": {
+          "cagr": 0.1066,
+          "sharpe": 0.5591,
+          "max_drawdown": -0.5519,
+          "calmar": 0.1931,
+          "ann_vol": 0.1906,
+          "win_rate": 0.5509,
+          "n_years": 22.3
+        }
+      },
+      "in_sample": {
+        "h041b": {
+          "cagr": 0.1536,
+          "sharpe": 1.2015,
+          "max_drawdown": -0.1585,
+          "calmar": 0.969,
+          "ann_vol": 0.1279,
+          "win_rate": 0.5627,
+          "n_years": 14.0
+        },
+        "spy_bh": {
+          "cagr": 0.0854,
+          "sharpe": 0.4575,
+          "max_drawdown": -0.5519,
+          "calmar": 0.1548,
+          "ann_vol": 0.1868,
+          "win_rate": 0.5508,
+          "n_years": 14.0
+        }
+      },
+      "out_of_sample": {
+        "h041b": {
+          "cagr": 0.1456,
+          "sharpe": 1.1064,
+          "max_drawdown": -0.2323,
+          "calmar": 0.6267,
+          "ann_vol": 0.1316,
+          "win_rate": 0.5597,
+          "n_years": 7.3
+        },
+        "spy_bh": {
+          "cagr": 0.1756,
+          "sharpe": 0.877,
+          "max_drawdown": -0.3372,
+          "calmar": 0.5207,
+          "ann_vol": 0.2002,
+          "win_rate": 0.5546,
+          "n_years": 7.3
+        }
+      }
+    },
+    "oos_degradation_pct_sharpe": 7.9,
+    "h020_monthly_corr": 0.7964,
+    "holding_frequency": {
+      "SPY": {
+        "count": 129,
+        "pct": 0.4813
+      },
+      "IEF": {
+        "count": 104,
+        "pct": 0.3881
+      },
+      "QQQ": {
+        "count": 70,
+        "pct": 0.2612
+      },
+      "GLD": {
+        "count": 69,
+        "pct": 0.2575
+      },
+      "TLT": {
+        "count": 61,
+        "pct": 0.2276
+      },
+      "EFA": {
+        "count": 54,
+        "pct": 0.2015
+      },
+      "VWO": {
+        "count": 33,
+        "pct": 0.1231
+      },
+      "EEM": {
+        "count": 16,
+        "pct": 0.0597
+      }
+    },
+    "intl_selection": {
+      "months_with_any_intl": 86,
+      "pct_months_with_any_intl": 0.3209,
+      "intl_slot_fraction": 0.1922,
+      "total_months": 268
+    },
+    "intl_contribution": {
+      "avg_monthly_ret_when_selected": 0.02081,
+      "avg_port_ret_those_months": 0.01897,
+      "n_intl_holding_months": 103
+    }
+  }
+}
