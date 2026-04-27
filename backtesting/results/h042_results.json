@@ -1,0 +1,324 @@
+{
+  "strategy": "H042 \u2014 Ultimate Three-Way Blend: H041a + H026 + H037b",
+  "description": "H031b upgraded: H020 (5-asset) replaced by H041a (7-asset +EFA/EEM). Tests whether expanding macro universe to international equities improves portfolio Sharpe.",
+  "components": {
+    "h041a": {
+      "universe": [
+        "SPY",
+        "QQQ",
+        "TLT",
+        "GLD",
+        "IEF",
+        "EFA",
+        "EEM"
+      ],
+      "signal": "rank(12m_mom) + rank(inv_6m_vol), hold top-2 at 50/50",
+      "rebalance": "monthly"
+    },
+    "h026": {
+      "universe": [
+        "XLK",
+        "XLE",
+        "XLF",
+        "XLV",
+        "XLI",
+        "XLB",
+        "XLU",
+        "XLRE",
+        "XLY",
+        "XLP",
+        "XLC"
+      ],
+      "signal": "rank(12m_mom) + rank(inv_6m_vol), hold top-3 at 33.3%",
+      "rebalance": "monthly"
+    },
+    "h037b": {
+      "signal": "IBS < 0.20 AND gap >= -0.5%  \u2192  buy SPY at open; sell when IBS > 0.80 or held >= 5 days",
+      "rebalance": "daily",
+      "gap_filter": -0.005
+    }
+  },
+  "common_window": {
+    "start": "2003-08-31",
+    "end": "2026-04-30",
+    "n_months": 273,
+    "n_years": 22.8
+  },
+  "monthly_correlations": {
+    "h041a_h026": 0.4881,
+    "h041a_h037b": 0.1554,
+    "h026_h037b": 0.387
+  },
+  "standalone": {
+    "h041a": {
+      "cagr": 0.1505,
+      "sharpe": 1.6648,
+      "max_drawdown": -0.1374,
+      "calmar": 1.0955,
+      "ann_vol": 0.0904,
+      "n_months": 273
+    },
+    "h026": {
+      "cagr": 0.1599,
+      "sharpe": 1.397,
+      "max_drawdown": -0.2553,
+      "calmar": 0.6261,
+      "ann_vol": 0.1144,
+      "n_months": 273
+    },
+    "h037b": {
+      "cagr": 0.1172,
+      "sharpe": 1.1245,
+      "max_drawdown": -0.2174,
+      "calmar": 0.5391,
+      "ann_vol": 0.1042,
+      "n_months": 273
+    }
+  },
+  "blend_grid": [
+    {
+      "w_h041a": 0.5,
+      "w_h026": 0.2,
+      "w_h037b": 0.3,
+      "cagr": 0.1447,
+      "sharpe": 1.9433,
+      "max_drawdown": -0.0987,
+      "calmar": 1.4662,
+      "ann_vol": 0.0745,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.6,
+      "w_h026": 0.1,
+      "w_h037b": 0.3,
+      "cagr": 0.1436,
+      "sharpe": 1.9431,
+      "max_drawdown": -0.0875,
+      "calmar": 1.6417,
+      "ann_vol": 0.0739,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.6,
+      "w_h026": 0.2,
+      "w_h037b": 0.2,
+      "cagr": 0.1478,
+      "sharpe": 1.9352,
+      "max_drawdown": -0.1,
+      "calmar": 1.4781,
+      "ann_vol": 0.0764,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.5,
+      "w_h026": 0.3,
+      "w_h037b": 0.2,
+      "cagr": 0.1489,
+      "sharpe": 1.9195,
+      "max_drawdown": -0.1005,
+      "calmar": 1.4815,
+      "ann_vol": 0.0776,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.5,
+      "w_h026": 0.1,
+      "w_h037b": 0.4,
+      "cagr": 0.1404,
+      "sharpe": 1.916,
+      "max_drawdown": -0.1042,
+      "calmar": 1.3474,
+      "ann_vol": 0.0733,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.7,
+      "w_h026": 0.1,
+      "w_h037b": 0.2,
+      "cagr": 0.1466,
+      "sharpe": 1.9127,
+      "max_drawdown": -0.0995,
+      "calmar": 1.4732,
+      "ann_vol": 0.0766,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.4,
+      "w_h026": 0.3,
+      "w_h037b": 0.3,
+      "cagr": 0.1458,
+      "sharpe": 1.9047,
+      "max_drawdown": -0.1154,
+      "calmar": 1.263,
+      "ann_vol": 0.0765,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.4,
+      "w_h026": 0.2,
+      "w_h037b": 0.4,
+      "cagr": 0.1415,
+      "sharpe": 1.8937,
+      "max_drawdown": -0.1193,
+      "calmar": 1.186,
+      "ann_vol": 0.0747,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.6,
+      "w_h026": 0.3,
+      "w_h037b": 0.1,
+      "cagr": 0.1519,
+      "sharpe": 1.8835,
+      "max_drawdown": -0.1124,
+      "calmar": 1.3506,
+      "ann_vol": 0.0806,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.7,
+      "w_h026": 0.2,
+      "w_h037b": 0.1,
+      "cagr": 0.1507,
+      "sharpe": 1.8775,
+      "max_drawdown": -0.1119,
+      "calmar": 1.3462,
+      "ann_vol": 0.0803,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.4,
+      "w_h026": 0.4,
+      "w_h037b": 0.2,
+      "cagr": 0.1499,
+      "sharpe": 1.8698,
+      "max_drawdown": -0.1117,
+      "calmar": 1.342,
+      "ann_vol": 0.0802,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.5,
+      "w_h026": 0.4,
+      "w_h037b": 0.1,
+      "cagr": 0.1529,
+      "sharpe": 1.8567,
+      "max_drawdown": -0.113,
+      "calmar": 1.3538,
+      "ann_vol": 0.0824,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.4,
+      "w_h026": 0.1,
+      "w_h037b": 0.5,
+      "cagr": 0.1371,
+      "sharpe": 1.8313,
+      "max_drawdown": -0.1259,
+      "calmar": 1.0892,
+      "ann_vol": 0.0749,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.7,
+      "w_h026": 0.3,
+      "w_h037b": 0.0,
+      "cagr": 0.1546,
+      "sharpe": 1.8093,
+      "max_drawdown": -0.1252,
+      "calmar": 1.2346,
+      "ann_vol": 0.0855,
+      "n_months": 273
+    },
+    {
+      "w_h041a": 0.6,
+      "w_h026": 0.4,
+      "w_h037b": 0.0,
+      "cagr": 0.1558,
+      "sharpe": 1.8032,
+      "max_drawdown": -0.1248,
+      "calmar": 1.2481,
+      "ann_vol": 0.0864,
+      "n_months": 273
+    }
+  ],
+  "optimal": {
+    "max_sharpe": {
+      "w_h041a": 0.56,
+      "w_h026": 0.16,
+      "w_h037b": 0.28,
+      "cagr": 0.1449,
+      "sharpe": 1.9492,
+      "max_drawdown": -0.0902,
+      "calmar": 1.607,
+      "ann_vol": 0.0743,
+      "n_months": 273
+    },
+    "min_maxdd": {
+      "w_h041a": 0.64,
+      "w_h026": 0.0,
+      "w_h037b": 0.36,
+      "cagr": 0.1405,
+      "sharpe": 1.9064,
+      "max_drawdown": -0.0804,
+      "calmar": 1.7484,
+      "ann_vol": 0.0737,
+      "n_months": 273
+    }
+  },
+  "fixed_weight_comparison": {
+    "weights": {
+      "w_h041a": 0.51,
+      "w_h026": 0.2,
+      "w_h037b": 0.29
+    },
+    "description": "H031b optimal weights (51/20/29) applied with H041a replacing H020",
+    "stats": {
+      "w_h041a": 0.51,
+      "w_h026": 0.2,
+      "w_h037b": 0.29,
+      "cagr": 0.1451,
+      "sharpe": 1.9451,
+      "max_drawdown": -0.0967,
+      "calmar": 1.5005,
+      "ann_vol": 0.0746,
+      "n_months": 273
+    }
+  },
+  "marginal_sharpe_at_optimal": {
+    "base_sharpe": 1.9492,
+    "weights": {
+      "h041a": 0.56,
+      "h026": 0.16,
+      "h037b": 0.28
+    },
+    "marginal_sharpe_per_unit": {
+      "h041a": -0.0274,
+      "h026": -0.0108,
+      "h037b": -0.0192
+    },
+    "note": "dSharpe/dw_i: increase in portfolio Sharpe per 1 unit increase in weight (epsilon=0.01)"
+  },
+  "h031b_reference": {
+    "weights": {
+      "w_h020": 0.51,
+      "w_h026": 0.2,
+      "w_h037b": 0.29
+    },
+    "cagr": 0.143,
+    "sharpe": 1.8833,
+    "max_drawdown": -0.092,
+    "calmar": 1.554,
+    "ann_vol": 0.0759,
+    "n_months": 273,
+    "note": "H031b continuous max-Sharpe result (H020+H026+H037b), from h031b_results.json"
+  },
+  "vs_h031b": {
+    "sharpe_delta_same_weights": 0.0618,
+    "sharpe_delta_reoptimised": 0.0659,
+    "maxdd_delta_same_weights": -0.0047,
+    "maxdd_delta_reoptimised": 0.0018,
+    "verdict": "H041a upgrade clearly improves the portfolio \u2014 EFA/EEM diversification adds Sharpe"
+  },
+  "run_date": "2026-04-27"
+}
