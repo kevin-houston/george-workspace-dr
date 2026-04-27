@@ -1,0 +1,119 @@
+{
+  "strategy": "H028 \u2014 H020 + H026 Optimal Blend",
+  "common_window": {
+    "start": "2003-08-31",
+    "end": "2026-04-30",
+    "n_months": 273,
+    "n_years": 22.8
+  },
+  "monthly_return_correlation": 0.4851,
+  "blend_grid": [
+    {
+      "cagr": 0.1463,
+      "sharpe": 1.5732,
+      "max_drawdown": -0.1922,
+      "ann_vol": 0.093,
+      "n_months": 273,
+      "w_h020": 1.0,
+      "w_h026": 0.0
+    },
+    {
+      "cagr": 0.1501,
+      "sharpe": 1.7086,
+      "max_drawdown": -0.1763,
+      "ann_vol": 0.0878,
+      "n_months": 273,
+      "w_h020": 0.8,
+      "w_h026": 0.2
+    },
+    {
+      "cagr": 0.1533,
+      "sharpe": 1.7481,
+      "max_drawdown": -0.1606,
+      "ann_vol": 0.0877,
+      "n_months": 273,
+      "w_h020": 0.6,
+      "w_h026": 0.4
+    },
+    {
+      "cagr": 0.1547,
+      "sharpe": 1.7276,
+      "max_drawdown": -0.1567,
+      "ann_vol": 0.0895,
+      "n_months": 273,
+      "w_h020": 0.5,
+      "w_h026": 0.5
+    },
+    {
+      "cagr": 0.156,
+      "sharpe": 1.6844,
+      "max_drawdown": -0.1557,
+      "ann_vol": 0.0926,
+      "n_months": 273,
+      "w_h020": 0.4,
+      "w_h026": 0.6
+    },
+    {
+      "cagr": 0.1582,
+      "sharpe": 1.5528,
+      "max_drawdown": -0.1807,
+      "ann_vol": 0.1019,
+      "n_months": 273,
+      "w_h020": 0.2,
+      "w_h026": 0.8
+    },
+    {
+      "cagr": 0.1599,
+      "sharpe": 1.397,
+      "max_drawdown": -0.2553,
+      "ann_vol": 0.1144,
+      "n_months": 273,
+      "w_h020": 0.0,
+      "w_h026": 1.0
+    }
+  ],
+  "optimal": {
+    "max_sharpe_h020_weight": 0.628,
+    "max_sharpe_h026_weight": 0.372,
+    "max_sharpe_value": 1.7492,
+    "min_var_h020_weight": 0.695,
+    "min_var_h026_weight": 0.305,
+    "min_var_ann_vol": 0.0871
+  },
+  "h028_stats": {
+    "cagr": 0.1529,
+    "sharpe": 1.7492,
+    "max_drawdown": -0.1628,
+    "ann_vol": 0.0874,
+    "n_months": 273
+  },
+  "h020_standalone": {
+    "cagr": 0.1463,
+    "sharpe": 1.5732,
+    "max_drawdown": -0.1922,
+    "ann_vol": 0.093,
+    "n_months": 273
+  },
+  "h026_standalone": {
+    "cagr": 0.1599,
+    "sharpe": 1.397,
+    "max_drawdown": -0.2553,
+    "ann_vol": 0.1144,
+    "n_months": 273
+  },
+  "h018_full": {
+    "cagr": 0.136,
+    "sharpe": 1.5443,
+    "max_drawdown": -0.1127,
+    "ann_vol": 0.088,
+    "n_months": 219
+  },
+  "h018_common": {
+    "cagr": 0.136,
+    "sharpe": 1.5443,
+    "max_drawdown": -0.1127,
+    "ann_vol": 0.088,
+    "n_months": 219
+  },
+  "run_date": "2026-04-25"
+}

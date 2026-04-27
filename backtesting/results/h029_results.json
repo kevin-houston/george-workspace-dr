@@ -1,0 +1,212 @@
+{
+  "strategy": "H029",
+  "description": "H020 + VIX/VIX3M Term Structure Hard Overlay",
+  "variants": {
+    "h029a": "Backwardation months \u2192 100% IEF (no SHY overlay)",
+    "h029b": "Backwardation months \u2192 halve equity weight, shift to IEF"
+  },
+  "period": {
+    "start": "2007-01-01",
+    "end": "2026-04-26"
+  },
+  "parameters": {
+    "assets": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "IEF"
+    ],
+    "top_n": 2,
+    "backwardation_threshold": 1.05,
+    "safe_haven_asset": "IEF",
+    "cash_etf": "SHY",
+    "initial_equity": 100000.0,
+    "engine_note": "Replicates h016_equity_curve: top-2 at 1/top_n weight each + SHY cash overlay at len(rest)/len(valid) weight. H029a replaces all with 100% IEF and removes SHY overlay. H029b halves equity weight, redirects to IEF, keeps SHY overlay."
+  },
+  "stats": {
+    "h020": {
+      "cagr": 0.1509,
+      "sharpe": 1.2483,
+      "max_drawdown": -0.2044,
+      "calmar": 0.7382,
+      "ann_vol": 0.1209,
+      "win_rate": 0.5606,
+      "n_years": 18.3,
+      "total_return": 12.1032
+    },
+    "h029a": {
+      "cagr": 0.1512,
+      "sharpe": 1.3071,
+      "max_drawdown": -0.2044,
+      "calmar": 0.7398,
+      "ann_vol": 0.1157,
+      "win_rate": 0.5611,
+      "n_years": 18.3,
+      "total_return": 12.169
+    },
+    "h029b": {
+      "cagr": 0.1528,
+      "sharpe": 1.2686,
+      "max_drawdown": -0.2044,
+      "calmar": 0.7477,
+      "ann_vol": 0.1205,
+      "win_rate": 0.5606,
+      "n_years": 18.3,
+      "total_return": 12.5133
+    },
+    "spy_bh": {
+      "cagr": 0.1077,
+      "sharpe": 0.5471,
+      "max_drawdown": -0.5519,
+      "calmar": 0.1951,
+      "ann_vol": 0.1968,
+      "win_rate": 0.551,
+      "n_years": 19.3,
+      "total_return": 6.2025
+    }
+  },
+  "overlay_summary": {
+    "vix_months_in_period": 231,
+    "backwardation_months": 10,
+    "pct_backwardation": 0.0433
+  },
+  "backwardation_analysis": {
+    "h029a": {
+      "count": 8,
+      "pct_of_months": 0.0364,
+      "h020_avg_return": 0.011446,
+      "h029_avg_return": 0.011881,
+      "h020_win_rate": 0.5,
+      "h029_win_rate": 0.5,
+      "avg_return_lift": 0.000435,
+      "normal_h020_avg_return": 0.012173
+    },
+    "h029b": {
+      "count": 3,
+      "pct_of_months": 0.0136,
+      "h020_avg_return": -0.004048,
+      "h029_avg_return": 0.006128,
+      "h020_win_rate": 0.3333,
+      "h029_win_rate": 0.3333,
+      "avg_return_lift": 0.010176,
+      "normal_h020_avg_return": 0.012173
+    }
+  },
+  "backwardation_months_detail": [
+    {
+      "signal_month": "2008-09-30",
+      "vix_ratio": 1.1926,
+      "h020_return": 0.04578,
+      "h029_return": -0.006811,
+      "h020_weights": {
+        "TLT": 0.5,
+        "GLD": 0.5
+      },
+      "h029_weights": {
+        "IEF": 1.0
+      }
+    },
+    {
+      "signal_month": "2008-10-31",
+      "vix_ratio": 1.118,
+      "h020_return": -0.018566,
+      "h029_return": -0.015569,
+      "h020_weights": {
+        "IEF": 0.5,
+        "TLT": 0.5
+      },
+      "h029_weights": {
+        "IEF": 1.0
+      }
+    },
+    {
+      "signal_month": "2009-10-31",
+      "vix_ratio": 1.0557,
+      "h020_return": -0.000761,
+      "h029_return": -0.008835,
+      "h020_weights": {
+        "IEF": 0.5,
+        "SPY": 0.5
+      },
+      "h029_weights": {
+        "IEF": 1.0
+      }
+    },
+    {
+      "signal_month": "2011-07-31",
+      "vix_ratio": 1.1021,
+      "h020_return": 0.020078,
+      "h029_return": 0.034281,
+      "h020_weights": {
+        "QQQ": 0.5,
+        "IEF": 0.5
+      },
+      "h029_weights": {
+        "IEF": 1.0
+      }
+    },
+    {
+      "signal_month": "2015-08-31",
+      "vix_ratio": 1.0716,
+      "h020_return": -0.010196,
+      "h029_return": -0.002251,
+      "h020_weights": {
+        "IEF": 0.5,
+        "TLT": 0.5
+      },
+      "h029_weights": {
+        "IEF": 1.0
+      }
+    },
+    {
+      "signal_month": "2018-12-31",
+      "vix_ratio": 1.0712,
+      "h020_return": 0.043617,
+      "h029_return": 0.0258,
+      "h020_weights": {
+        "IEF": 0.5,
+        "TLT": 0.5
+      },
+      "h029_weights": {
+        "IEF": 1.0
+      }
+    },
+    {
+      "signal_month": "2020-02-29",
+      "vix_ratio": 1.3437,
+      "h020_return": -0.031461,
+      "h029_return": 0.030495,
+      "h020_weights": {
+        "QQQ": 0.5,
+        "GLD": 0.5
+      },
+      "h029_weights": {
+        "IEF": 1.0
+      }
+    },
+    {
+      "signal_month": "2020-03-31",
+      "vix_ratio": 1.108,
+      "h020_return": 0.043078,
+      "h029_return": 0.037936,
+      "h020_weights": {
+        "TLT": 0.5,
+        "GLD": 0.5
+      },
+      "h029_weights": {
+        "IEF": 1.0
+      }
+    }
+  ],
+  "h020_asset_selections": {
+    "QQQ/SPY": 61,
+    "IEF/SPY": 47,
+    "IEF/TLT": 38,
+    "GLD/IEF": 27,
+    "IEF/QQQ": 14,
+    "GLD/SPY": 11,
+    "GLD/TLT": 8,
+    "GLD/QQQ": 6
+  }
+}
