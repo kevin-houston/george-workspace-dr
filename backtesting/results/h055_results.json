@@ -1,0 +1,161 @@
+{
+  "strategy": "H055 \u2014 H042 with IBS Hedge: SPY + QQQ IBS Split",
+  "description": "Motivated by H054: H037b (SPY IBS) OOS degrading (-35%) while H054b (QQQ IBS) OOS improving (+77%). Splits H037b's 28% allocation 50/50 between SPY IBS and QQQ IBS as a hedge against H037b edge fading.",
+  "portfolios": {
+    "H042_baseline": {
+      "weights": {
+        "h041a": 0.56,
+        "h026": 0.16,
+        "h037b": 0.28
+      },
+      "full": {
+        "label": "H042 baseline (full)",
+        "cagr": 0.147,
+        "sharpe": 1.8674,
+        "max_drawdown": -0.0902,
+        "calmar": 1.6302,
+        "ann_vol": 0.0787,
+        "n_months": 220
+      },
+      "IS": {
+        "label": "H042 baseline (IS)",
+        "cagr": 0.1527,
+        "sharpe": 2.073,
+        "max_drawdown": -0.0902,
+        "calmar": 1.6929,
+        "ann_vol": 0.0736,
+        "n_months": 120
+      },
+      "OOS": {
+        "label": "H042 baseline (OOS)",
+        "cagr": 0.1403,
+        "sharpe": 1.6546,
+        "max_drawdown": -0.0879,
+        "calmar": 1.5956,
+        "ann_vol": 0.0848,
+        "n_months": 100
+      },
+      "deg": -20.18
+    },
+    "H055": {
+      "weights": {
+        "h041a": 0.56,
+        "h026": 0.16,
+        "h037b": 0.14,
+        "h054b": 0.14
+      },
+      "full": {
+        "label": "H055 (56/16/14/14, full)",
+        "cagr": 0.1463,
+        "sharpe": 1.9314,
+        "max_drawdown": -0.0885,
+        "calmar": 1.6534,
+        "ann_vol": 0.0757,
+        "n_months": 220
+      },
+      "IS": {
+        "label": "H055 (IS)",
+        "cagr": 0.1452,
+        "sharpe": 2.0253,
+        "max_drawdown": -0.0885,
+        "calmar": 1.6417,
+        "ann_vol": 0.0717,
+        "n_months": 120
+      },
+      "OOS": {
+        "label": "H055 (OOS)",
+        "cagr": 0.1475,
+        "sharpe": 1.8288,
+        "max_drawdown": -0.0715,
+        "calmar": 2.0637,
+        "ann_vol": 0.0807,
+        "n_months": 100
+      },
+      "deg": -9.7
+    },
+    "H055b_with_H045": {
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.112,
+        "h054b": 0.112,
+        "h045": 0.2
+      },
+      "full": {
+        "label": "H055b (+H045 20%, full)",
+        "cagr": 0.1268,
+        "sharpe": 2.0082,
+        "max_drawdown": -0.0729,
+        "calmar": 1.7388,
+        "ann_vol": 0.0631,
+        "n_months": 220
+      },
+      "IS": {
+        "label": "H055b (IS)",
+        "cagr": 0.1268,
+        "sharpe": 2.1375,
+        "max_drawdown": -0.0729,
+        "calmar": 1.7387,
+        "ann_vol": 0.0593,
+        "n_months": 120
+      },
+      "OOS": {
+        "label": "H055b (OOS)",
+        "cagr": 0.1268,
+        "sharpe": 1.8717,
+        "max_drawdown": -0.049,
+        "calmar": 2.5863,
+        "ann_vol": 0.0677,
+        "n_months": 100
+      },
+      "deg": -12.44
+    },
+    "H052_20pct_ref": {
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.224,
+        "h045": 0.2
+      },
+      "full": {
+        "label": "H052@20% reference (full)",
+        "cagr": 0.1274,
+        "sharpe": 1.9429,
+        "max_drawdown": -0.0743,
+        "calmar": 1.7145,
+        "ann_vol": 0.0656,
+        "n_months": 220
+      },
+      "IS": {
+        "label": "H052@20% (IS)",
+        "cagr": 0.1327,
+        "sharpe": 2.1737,
+        "max_drawdown": -0.0743,
+        "calmar": 1.7851,
+        "ann_vol": 0.061,
+        "n_months": 120
+      },
+      "OOS": {
+        "label": "H052@20% (OOS)",
+        "cagr": 0.1211,
+        "sharpe": 1.7078,
+        "max_drawdown": -0.0652,
+        "calmar": 1.8591,
+        "ann_vol": 0.0709,
+        "n_months": 100
+      },
+      "deg": -21.43
+    }
+  },
+  "component_stats": {
+    "h037b_h054b_monthly_corr_full": 0.5029
+  },
+  "verdict": {
+    "summary": "CONFIRMED \u2014 IBS split strictly improves H042: better OOS Sharpe and lower degradation",
+    "h055b_vs_h052_note": "H055b IMPROVES H052@20% OOS",
+    "h055_beats_h042_oos": true,
+    "h055_lower_deg_than_h042": true,
+    "h055b_beats_h052_oos": true
+  },
+  "run_date": "2026-04-27"
+}

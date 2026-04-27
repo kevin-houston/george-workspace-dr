@@ -1,0 +1,137 @@
+{
+  "strategy": "H054 \u2014 QQQ IBS Mean-Reversion: Standalone + Correlation to H037b",
+  "description": "Tests QQQ IBS mean-reversion (same rules as H037b but on QQQ). Key question: is monthly correlation to H037b (SPY IBS) low enough for diversification?",
+  "parameters": {
+    "ibs_buy": 0.2,
+    "ibs_sell": 0.8,
+    "max_hold": 5,
+    "gap_filter_b": -0.005,
+    "gap_filter_c": -0.01
+  },
+  "standalone_stats": {
+    "spy_ibs_unfiltered": {
+      "label": "SPY IBS (no filter)",
+      "cagr": 0.1067,
+      "sharpe": 0.987,
+      "max_drawdown": -0.2199,
+      "calmar": 0.4855,
+      "ann_vol": 0.1081,
+      "n_months": 273
+    },
+    "h037b_spy_ibs_0.5": {
+      "label": "H037b SPY IBS (-0.5%)",
+      "cagr": 0.1172,
+      "sharpe": 1.1245,
+      "max_drawdown": -0.2174,
+      "calmar": 0.5391,
+      "ann_vol": 0.1042,
+      "n_months": 273
+    },
+    "h054a_qqq_unfiltered": {
+      "label": "H054a QQQ IBS (no filter)",
+      "cagr": 0.1138,
+      "sharpe": 0.9339,
+      "max_drawdown": -0.2653,
+      "calmar": 0.4289,
+      "ann_vol": 0.1219,
+      "n_months": 273
+    },
+    "h054b_qqq_0.5": {
+      "label": "H054b QQQ IBS (-0.5%)",
+      "cagr": 0.1173,
+      "sharpe": 1.0565,
+      "max_drawdown": -0.1587,
+      "calmar": 0.7393,
+      "ann_vol": 0.111,
+      "n_months": 273
+    },
+    "h054c_qqq_1.0": {
+      "label": "H054c QQQ IBS (-1.0%)",
+      "cagr": 0.1179,
+      "sharpe": 1.045,
+      "max_drawdown": -0.1536,
+      "calmar": 0.7678,
+      "ann_vol": 0.1129,
+      "n_months": 273
+    }
+  },
+  "trade_stats": {
+    "h037b": {
+      "n_trades": 725,
+      "win_rate": 0.6317,
+      "avg_pnl_pct": 0.3896,
+      "avg_hold_days": 3.56
+    },
+    "h054b": {
+      "n_trades": 700,
+      "win_rate": 0.6071,
+      "avg_pnl_pct": 0.3744,
+      "avg_hold_days": 3.5
+    },
+    "h054c": {
+      "n_trades": 751,
+      "win_rate": 0.6059,
+      "avg_pnl_pct": 0.4029,
+      "avg_hold_days": 3.48
+    }
+  },
+  "correlations": {
+    "h054a_vs_h037b_monthly": 0.3993,
+    "h054b_vs_h037b_monthly": 0.4905,
+    "h054c_vs_h037b_monthly": 0.4912,
+    "h054b_vs_h037b_oos": 0.5635,
+    "reference_xlk_vs_h037b": 0.65
+  },
+  "IS_OOS": {
+    "h037b": {
+      "IS": {
+        "label": "H037b IS",
+        "cagr": 0.1218,
+        "sharpe": 1.3498,
+        "max_drawdown": -0.0735,
+        "calmar": 1.6569,
+        "ann_vol": 0.0902,
+        "n_months": 173
+      },
+      "OOS": {
+        "label": "H037b OOS",
+        "cagr": 0.1094,
+        "sharpe": 0.8728,
+        "max_drawdown": -0.2174,
+        "calmar": 0.5033,
+        "ann_vol": 0.1254,
+        "n_months": 100
+      },
+      "degradation_pct": -35.34
+    },
+    "h054b": {
+      "IS": {
+        "label": "H054b IS",
+        "cagr": 0.0931,
+        "sharpe": 0.8312,
+        "max_drawdown": -0.1587,
+        "calmar": 0.5867,
+        "ann_vol": 0.112,
+        "n_months": 173
+      },
+      "OOS": {
+        "label": "H054b OOS",
+        "cagr": 0.1605,
+        "sharpe": 1.4719,
+        "max_drawdown": -0.1151,
+        "calmar": 1.3938,
+        "ann_vol": 0.109,
+        "n_months": 100
+      },
+      "degradation_pct": 77.08
+    }
+  },
+  "verdict": {
+    "summary": "CONFIRMED \u2014 QQQ IBS adds diversification to H037b (SPY IBS)",
+    "standalone_ok": true,
+    "correlation_low": true,
+    "blend_benefit": true,
+    "monthly_corr_h054b": 0.4905
+  },
+  "run_date": "2026-04-27"
+}

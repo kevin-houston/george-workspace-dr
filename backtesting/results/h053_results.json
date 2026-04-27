@@ -1,0 +1,95 @@
+{
+  "strategy": "H053 \u2014 SPY 200-Day MA Regime Filter on H041a",
+  "description": "Tests whether applying a SPY 200-day MA filter to H041a improves risk-adjusted returns. In risk-off months (SPY < 200MA), hold IEF instead of the momentum top-2.",
+  "parameters": {
+    "ma_window": 200,
+    "risk_off_hold": "IEF",
+    "assets": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "IEF",
+      "EFA",
+      "EEM"
+    ],
+    "top_n": 2
+  },
+  "regime_stats": {
+    "total_months_window": 273,
+    "risk_off_months_window": 50,
+    "risk_off_pct": 18.3
+  },
+  "full_period_stats": {
+    "h041a_unfiltered": {
+      "label": "H041a unfiltered",
+      "cagr": 0.1505,
+      "sharpe": 1.6648,
+      "max_drawdown": -0.1374,
+      "calmar": 1.0955,
+      "ann_vol": 0.0904,
+      "n_months": 273
+    },
+    "h053_filtered": {
+      "label": "H053 200MA filtered",
+      "cagr": 0.1296,
+      "sharpe": 1.5434,
+      "max_drawdown": -0.17,
+      "calmar": 0.7624,
+      "ann_vol": 0.084,
+      "n_months": 273
+    },
+    "sharpe_delta": -0.1214,
+    "maxdd_delta": -0.0326
+  },
+  "IS_OOS_stats": {
+    "IS": {
+      "h041a": {
+        "label": "H041a IS",
+        "cagr": 0.1545,
+        "sharpe": 1.7493,
+        "max_drawdown": -0.134,
+        "calmar": 1.1533,
+        "ann_vol": 0.0883,
+        "n_months": 173
+      },
+      "h053": {
+        "label": "H053 IS",
+        "cagr": 0.1392,
+        "sharpe": 1.7798,
+        "max_drawdown": -0.0926,
+        "calmar": 1.5034,
+        "ann_vol": 0.0782,
+        "n_months": 173
+      }
+    },
+    "OOS": {
+      "h041a": {
+        "label": "H041a OOS",
+        "cagr": 0.1436,
+        "sharpe": 1.5225,
+        "max_drawdown": -0.1374,
+        "calmar": 1.0453,
+        "ann_vol": 0.0943,
+        "n_months": 100
+      },
+      "h053": {
+        "label": "H053 OOS",
+        "cagr": 0.1134,
+        "sharpe": 1.2128,
+        "max_drawdown": -0.17,
+        "calmar": 0.6667,
+        "ann_vol": 0.0935,
+        "n_months": 100
+      }
+    }
+  },
+  "correlation_unfiltered_vs_filtered": 0.9132,
+  "verdict": {
+    "summary": "REJECTED \u2014 200MA filter does not improve H041a risk-adjusted returns",
+    "oos_note": "OOS degraded (H053=1.2128 vs H041a=1.5225)",
+    "sharpe_improves": false,
+    "maxdd_improves": false
+  },
+  "run_date": "2026-04-27"
+}
