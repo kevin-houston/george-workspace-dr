@@ -1,0 +1,1394 @@
+{
+  "strategy": "H037 \u2014 H009 IBS Mean-Reversion with Gap-Down Exclusion Filter",
+  "hypothesis": "Large gap-down opens on low-IBS days signal capitulation continuation, not mean-reversion. Filtering them out should improve win rate and reduce drawdown.",
+  "rules": {
+    "base": "H009: IBS[t-1] < 0.20 \u2192 buy at open; exit when IBS > 0.80 or held 5 days",
+    "H037": "H009 + skip entry if gap < -1.0%",
+    "H037b": "H009 + skip entry if gap < -0.5%",
+    "gap_def": "gap[t] = (Open[t] - Close[t-1]) / Close[t-1]"
+  },
+  "periods": {
+    "full": "2003-01-01 \u2192 2026-04-27",
+    "oos": "2017-01-01 \u2192 2026-04-27"
+  },
+  "results": {
+    "H009": {
+      "description": "Baseline \u2014 no gap filter",
+      "gap_filter_pct": null,
+      "full_period": {
+        "period": "Full 2003-01-01\u20132026-04-27",
+        "n_years": 23.3,
+        "cagr_pct": 11.008,
+        "sharpe": 0.8731,
+        "max_dd_pct": -23.666,
+        "n_trades": 672,
+        "trades_per_year": 28.9,
+        "win_rate_pct": 63.99,
+        "avg_trade_ret_pct": 0.3881,
+        "final_equity": 1136401.66
+      },
+      "oos_period": {
+        "period": "OOS  2017-01-01\u20132026-04-27",
+        "n_years": 9.3,
+        "cagr_pct": 8.647,
+        "sharpe": 0.7454,
+        "max_dd_pct": -23.045,
+        "n_trades": 263,
+        "trades_per_year": 28.3,
+        "win_rate_pct": 63.88,
+        "avg_trade_ret_pct": 0.313,
+        "final_equity": 216003.08
+      },
+      "filtered_trade_summary": {
+        "label": "H009 full-period filtered",
+        "n_filtered": 0
+      },
+      "filtered_actual_pnl": "N/A \u2014 no filter applied"
+    },
+    "H037": {
+      "description": "Exclude gap < -1.0%",
+      "gap_filter_pct": -1.0,
+      "full_period": {
+        "period": "Full 2003-01-01\u20132026-04-27",
+        "n_years": 23.3,
+        "cagr_pct": 11.049,
+        "sharpe": 0.9275,
+        "max_dd_pct": -23.045,
+        "n_trades": 651,
+        "trades_per_year": 28.0,
+        "win_rate_pct": 64.06,
+        "avg_trade_ret_pct": 0.3967,
+        "final_equity": 1146204.21
+      },
+      "oos_period": {
+        "period": "OOS  2017-01-01\u20132026-04-27",
+        "n_years": 9.3,
+        "cagr_pct": 8.149,
+        "sharpe": 0.7549,
+        "max_dd_pct": -23.045,
+        "n_trades": 258,
+        "trades_per_year": 27.8,
+        "win_rate_pct": 63.57,
+        "avg_trade_ret_pct": 0.3029,
+        "final_equity": 206977.8
+      },
+      "filtered_trade_summary": {
+        "label": "H037 full-period filtered",
+        "n_filtered": 47,
+        "avg_gap_pct": -1.7315,
+        "sample": [
+          {
+            "date": "2003-02-25",
+            "gap_pct": -1.0143,
+            "prev_ibs": 0.1489
+          },
+          {
+            "date": "2008-02-05",
+            "gap_pct": -1.3641,
+            "prev_ibs": 0.1084
+          },
+          {
+            "date": "2008-03-13",
+            "gap_pct": -1.3322,
+            "prev_ibs": 0.0766
+          },
+          {
+            "date": "2008-09-16",
+            "gap_pct": -2.4065,
+            "prev_ibs": 0.0347
+          },
+          {
+            "date": "2008-10-08",
+            "gap_pct": -2.5092,
+            "prev_ibs": 0.0495
+          }
+        ]
+      },
+      "filtered_actual_pnl": {
+        "n_filtered_trades": 47,
+        "avg_trade_ret_pct": 1.2605,
+        "win_rate_pct": 65.96,
+        "avg_gap_pct": -1.7315,
+        "all_filtered_trades": [
+          {
+            "date_entry": "2003-02-25",
+            "gap_pct": -1.0143,
+            "prev_ibs": 0.1489,
+            "trade_ret_pct": 1.3743,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2008-02-05",
+            "gap_pct": -1.3641,
+            "prev_ibs": 0.1084,
+            "trade_ret_pct": -1.6111,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2008-03-13",
+            "gap_pct": -1.3322,
+            "prev_ibs": 0.0766,
+            "trade_ret_pct": 3.1016,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2008-09-16",
+            "gap_pct": -2.4065,
+            "prev_ibs": 0.0347,
+            "trade_ret_pct": 4.1059,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2008-10-08",
+            "gap_pct": -2.5092,
+            "prev_ibs": 0.0495,
+            "trade_ret_pct": 3.9274,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2008-10-22",
+            "gap_pct": -2.7749,
+            "prev_ibs": 0.1871,
+            "trade_ret_pct": -1.6201,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2008-11-20",
+            "gap_pct": -1.681,
+            "prev_ibs": 0.0975,
+            "trade_ret_pct": 11.0321,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2009-02-17",
+            "gap_pct": -3.1416,
+            "prev_ibs": 0.0133,
+            "trade_ret_pct": -6.8737,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2009-02-27",
+            "gap_pct": -2.1291,
+            "prev_ibs": 0.0217,
+            "trade_ret_pct": -7.0396,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2009-03-02",
+            "gap_pct": -1.9072,
+            "prev_ibs": 0.0638,
+            "trade_ret_pct": -4.9641,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2009-05-21",
+            "gap_pct": -1.1601,
+            "prev_ibs": 0.0418,
+            "trade_ret_pct": 2.0569,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2009-07-02",
+            "gap_pct": -1.2997,
+            "prev_ibs": 0.1176,
+            "trade_ret_pct": -1.4594,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2010-05-21",
+            "gap_pct": -1.5158,
+            "prev_ibs": 0.0289,
+            "trade_ret_pct": 1.8034,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2010-05-25",
+            "gap_pct": -2.4139,
+            "prev_ibs": 0.0562,
+            "trade_ret_pct": 5.3753,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2010-08-12",
+            "gap_pct": -1.5096,
+            "prev_ibs": 0.1146,
+            "trade_ret_pct": 1.9879,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2010-08-24",
+            "gap_pct": -1.0922,
+            "prev_ibs": 0.0333,
+            "trade_ret_pct": -0.0094,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2011-05-23",
+            "gap_pct": -1.22,
+            "prev_ibs": 0.1894,
+            "trade_ret_pct": 0.7729,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2011-06-23",
+            "gap_pct": -1.1735,
+            "prev_ibs": 0.0656,
+            "trade_ret_pct": 1.9267,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2011-08-19",
+            "gap_pct": -1.3537,
+            "prev_ibs": 0.1772,
+            "trade_ret_pct": 3.0808,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2011-09-02",
+            "gap_pct": -2.0837,
+            "prev_ibs": 0.0611,
+            "trade_ret_pct": -1.2076,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2011-09-06",
+            "gap_pct": -2.936,
+            "prev_ibs": 0.1221,
+            "trade_ret_pct": 5.1578,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2011-09-09",
+            "gap_pct": -1.1425,
+            "prev_ibs": 0.1244,
+            "trade_ret_pct": -0.8583,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2011-09-12",
+            "gap_pct": -1.2509,
+            "prev_ibs": 0.1693,
+            "trade_ret_pct": 6.0802,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2012-04-23",
+            "gap_pct": -1.0221,
+            "prev_ibs": 0.0833,
+            "trade_ret_pct": 1.9409,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2012-07-23",
+            "gap_pct": -1.4655,
+            "prev_ibs": 0.1786,
+            "trade_ret_pct": 3.1308,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2015-08-21",
+            "gap_pct": -1.0982,
+            "prev_ibs": 0.0159,
+            "trade_ret_pct": -3.6038,
+            "win": 0,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2015-08-24",
+            "gap_pct": -5.2267,
+            "prev_ibs": 0.0483,
+            "trade_ret_pct": 3.7175,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2015-09-04",
+            "gap_pct": -1.3807,
+            "prev_ibs": 0.1909,
+            "trade_ret_pct": 2.3749,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2015-09-18",
+            "gap_pct": -1.5033,
+            "prev_ibs": 0.1247,
+            "trade_ret_pct": -1.4358,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2016-02-08",
+            "gap_pct": -1.1599,
+            "prev_ibs": 0.1678,
+            "trade_ret_pct": 0.4629,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2016-02-11",
+            "gap_pct": -1.5815,
+            "prev_ibs": 0.0466,
+            "trade_ret_pct": 2.3527,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2018-02-06",
+            "gap_pct": -1.5118,
+            "prev_ibs": 0.0494,
+            "trade_ret_pct": 0.6001,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2018-11-20",
+            "gap_pct": -1.3898,
+            "prev_ibs": 0.194,
+            "trade_ret_pct": 0.8064,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2018-12-06",
+            "gap_pct": -1.6022,
+            "prev_ibs": 0.0391,
+            "trade_ret_pct": -0.6957,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2020-04-21",
+            "gap_pct": -1.7259,
+            "prev_ibs": 0.0441,
+            "trade_ret_pct": 2.2549,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2020-06-11",
+            "gap_pct": -2.3636,
+            "prev_ibs": 0.187,
+            "trade_ret_pct": -1.4159,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2020-09-17",
+            "gap_pct": -1.5524,
+            "prev_ibs": 0.0661,
+            "trade_ret_pct": -1.5833,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2020-10-15",
+            "gap_pct": -1.2129,
+            "prev_ibs": 0.1649,
+            "trade_ret_pct": -0.2851,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2020-10-28",
+            "gap_pct": -1.8095,
+            "prev_ibs": 0.108,
+            "trade_ret_pct": 1.1834,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2021-05-11",
+            "gap_pct": -1.1581,
+            "prev_ibs": 0.0264,
+            "trade_ret_pct": 0.5858,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2021-09-20",
+            "gap_pct": -1.4771,
+            "prev_ibs": 0.0874,
+            "trade_ret_pct": 2.0764,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2022-01-24",
+            "gap_pct": -1.3585,
+            "prev_ibs": 0.003,
+            "trade_ret_pct": 2.2962,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2022-10-07",
+            "gap_pct": -1.1335,
+            "prev_ibs": 0.0861,
+            "trade_ret_pct": -0.8131,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2025-02-03",
+            "gap_pct": -1.5204,
+            "prev_ibs": 0.0864,
+            "trade_ret_pct": 1.5371,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2025-04-04",
+            "gap_pct": -2.4278,
+            "prev_ibs": 0.0,
+            "trade_ret_pct": 4.7645,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2025-04-07",
+            "gap_pct": -3.1844,
+            "prev_ibs": 0.0106,
+            "trade_ret_pct": 12.1487,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2025-04-16",
+            "gap_pct": -1.103,
+            "prev_ibs": 0.1246,
+            "trade_ret_pct": 0.7034,
+            "win": 1,
+            "days_held": 5
+          }
+        ]
+      }
+    },
+    "H037b": {
+      "description": "Exclude gap < -0.5%",
+      "gap_filter_pct": -0.5,
+      "full_period": {
+        "period": "Full 2003-01-01\u20132026-04-27",
+        "n_years": 23.3,
+        "cagr_pct": 12.022,
+        "sharpe": 1.0207,
+        "max_dd_pct": -23.045,
+        "n_trades": 623,
+        "trades_per_year": 26.8,
+        "win_rate_pct": 65.33,
+        "avg_trade_ret_pct": 0.4459,
+        "final_equity": 1404235.98
+      },
+      "oos_period": {
+        "period": "OOS  2017-01-01\u20132026-04-27",
+        "n_years": 9.3,
+        "cagr_pct": 10.295,
+        "sharpe": 0.9523,
+        "max_dd_pct": -23.045,
+        "n_trades": 245,
+        "trades_per_year": 26.4,
+        "win_rate_pct": 65.31,
+        "avg_trade_ret_pct": 0.3924,
+        "final_equity": 248404.11
+      },
+      "filtered_trade_summary": {
+        "label": "H037b full-period filtered",
+        "n_filtered": 104,
+        "avg_gap_pct": -1.1435,
+        "sample": [
+          {
+            "date": "2003-01-22",
+            "gap_pct": -0.5378,
+            "prev_ibs": 0.1523
+          },
+          {
+            "date": "2003-02-25",
+            "gap_pct": -1.0143,
+            "prev_ibs": 0.1489
+          },
+          {
+            "date": "2003-11-17",
+            "gap_pct": -0.5215,
+            "prev_ibs": 0.1024
+          },
+          {
+            "date": "2004-04-14",
+            "gap_pct": -0.5299,
+            "prev_ibs": 0.0833
+          },
+          {
+            "date": "2005-07-07",
+            "gap_pct": -0.996,
+            "prev_ibs": 0.0565
+          }
+        ]
+      },
+      "filtered_actual_pnl": {
+        "n_filtered_trades": 104,
+        "avg_trade_ret_pct": 0.4509,
+        "win_rate_pct": 57.69,
+        "avg_gap_pct": -1.1435,
+        "all_filtered_trades": [
+          {
+            "date_entry": "2003-01-22",
+            "gap_pct": -0.5378,
+            "prev_ibs": 0.1523,
+            "trade_ret_pct": -3.3119,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2003-02-25",
+            "gap_pct": -1.0143,
+            "prev_ibs": 0.1489,
+            "trade_ret_pct": 1.3743,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2003-11-17",
+            "gap_pct": -0.5215,
+            "prev_ibs": 0.1024,
+            "trade_ret_pct": -0.6672,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2004-04-14",
+            "gap_pct": -0.5299,
+            "prev_ibs": 0.0833,
+            "trade_ret_pct": -0.6128,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2005-07-07",
+            "gap_pct": -0.996,
+            "prev_ibs": 0.0565,
+            "trade_ret_pct": 2.5615,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2007-08-28",
+            "gap_pct": -0.5376,
+            "prev_ibs": 0.1375,
+            "trade_ret_pct": 0.26,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2007-10-22",
+            "gap_pct": -0.5412,
+            "prev_ibs": 0.0015,
+            "trade_ret_pct": 1.9481,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2008-01-16",
+            "gap_pct": -0.5862,
+            "prev_ibs": 0.0752,
+            "trade_ret_pct": -2.5481,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2008-02-05",
+            "gap_pct": -1.3641,
+            "prev_ibs": 0.1084,
+            "trade_ret_pct": -1.6111,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2008-03-07",
+            "gap_pct": -0.9843,
+            "prev_ibs": 0.191,
+            "trade_ret_pct": 2.1808,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2008-04-08",
+            "gap_pct": -0.5622,
+            "prev_ibs": 0.1202,
+            "trade_ret_pct": -2.3937,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2008-06-18",
+            "gap_pct": -0.649,
+            "prev_ibs": 0.1143,
+            "trade_ret_pct": -2.1114,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2008-09-16",
+            "gap_pct": -2.4065,
+            "prev_ibs": 0.0347,
+            "trade_ret_pct": 4.1059,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2008-10-08",
+            "gap_pct": -2.5092,
+            "prev_ibs": 0.0495,
+            "trade_ret_pct": 3.9274,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2008-10-22",
+            "gap_pct": -2.7749,
+            "prev_ibs": 0.1871,
+            "trade_ret_pct": -1.6201,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2008-11-20",
+            "gap_pct": -1.681,
+            "prev_ibs": 0.0975,
+            "trade_ret_pct": 11.0321,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2009-02-17",
+            "gap_pct": -3.1416,
+            "prev_ibs": 0.0133,
+            "trade_ret_pct": -6.8737,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2009-02-27",
+            "gap_pct": -2.1291,
+            "prev_ibs": 0.0217,
+            "trade_ret_pct": -7.0396,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2009-03-02",
+            "gap_pct": -1.9072,
+            "prev_ibs": 0.0638,
+            "trade_ret_pct": -4.9641,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2009-04-15",
+            "gap_pct": -0.6046,
+            "prev_ibs": 0.1607,
+            "trade_ret_pct": 1.4552,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2009-04-21",
+            "gap_pct": -0.7311,
+            "prev_ibs": 0.0243,
+            "trade_ret_pct": 3.0789,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2009-05-21",
+            "gap_pct": -1.1601,
+            "prev_ibs": 0.0418,
+            "trade_ret_pct": 2.0569,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2009-07-02",
+            "gap_pct": -1.2997,
+            "prev_ibs": 0.1176,
+            "trade_ret_pct": -1.4594,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2009-07-06",
+            "gap_pct": -0.9686,
+            "prev_ibs": 0.0192,
+            "trade_ret_pct": -1.1019,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2010-04-27",
+            "gap_pct": -0.5768,
+            "prev_ibs": 0.1348,
+            "trade_ret_pct": -0.2486,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2010-05-14",
+            "gap_pct": -0.75,
+            "prev_ibs": 0.0559,
+            "trade_ret_pct": -6.5844,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2010-05-19",
+            "gap_pct": -0.5605,
+            "prev_ibs": 0.116,
+            "trade_ret_pct": -2.3799,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2010-05-21",
+            "gap_pct": -1.5158,
+            "prev_ibs": 0.0289,
+            "trade_ret_pct": 1.8034,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2010-05-25",
+            "gap_pct": -2.4139,
+            "prev_ibs": 0.0562,
+            "trade_ret_pct": 5.3753,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2010-08-12",
+            "gap_pct": -1.5096,
+            "prev_ibs": 0.1146,
+            "trade_ret_pct": 1.9879,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2010-08-16",
+            "gap_pct": -0.6832,
+            "prev_ibs": 0.1667,
+            "trade_ret_pct": -0.0371,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2010-08-24",
+            "gap_pct": -1.0922,
+            "prev_ibs": 0.0333,
+            "trade_ret_pct": -0.0094,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2010-10-26",
+            "gap_pct": -0.5055,
+            "prev_ibs": 0.0783,
+            "trade_ret_pct": 0.2371,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2010-11-16",
+            "gap_pct": -0.6165,
+            "prev_ibs": 0.0467,
+            "trade_ret_pct": 0.8383,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2011-05-23",
+            "gap_pct": -1.22,
+            "prev_ibs": 0.1894,
+            "trade_ret_pct": 0.7729,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2011-06-23",
+            "gap_pct": -1.1735,
+            "prev_ibs": 0.0656,
+            "trade_ret_pct": 1.9267,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2011-08-19",
+            "gap_pct": -1.3537,
+            "prev_ibs": 0.1772,
+            "trade_ret_pct": 3.0808,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2011-08-26",
+            "gap_pct": -0.5074,
+            "prev_ibs": 0.1161,
+            "trade_ret_pct": 4.901,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2011-09-02",
+            "gap_pct": -2.0837,
+            "prev_ibs": 0.0611,
+            "trade_ret_pct": -1.2076,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2011-09-06",
+            "gap_pct": -2.936,
+            "prev_ibs": 0.1221,
+            "trade_ret_pct": 5.1578,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2011-09-09",
+            "gap_pct": -1.1425,
+            "prev_ibs": 0.1244,
+            "trade_ret_pct": -0.8583,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2011-09-12",
+            "gap_pct": -1.2509,
+            "prev_ibs": 0.1693,
+            "trade_ret_pct": 6.0802,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2012-04-23",
+            "gap_pct": -1.0221,
+            "prev_ibs": 0.0833,
+            "trade_ret_pct": 1.9409,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2012-05-04",
+            "gap_pct": -0.5243,
+            "prev_ibs": 0.1781,
+            "trade_ret_pct": -1.4222,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2012-07-23",
+            "gap_pct": -1.4655,
+            "prev_ibs": 0.1786,
+            "trade_ret_pct": 3.1308,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2013-06-20",
+            "gap_pct": -0.9728,
+            "prev_ibs": 0.0279,
+            "trade_ret_pct": -0.5391,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2013-08-15",
+            "gap_pct": -0.7882,
+            "prev_ibs": 0.0364,
+            "trade_ret_pct": -1.7024,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2013-08-27",
+            "gap_pct": -0.988,
+            "prev_ibs": 0.078,
+            "trade_ret_pct": 0.0183,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2014-04-11",
+            "gap_pct": -0.5569,
+            "prev_ibs": 0.0542,
+            "trade_ret_pct": 1.131,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2015-07-27",
+            "gap_pct": -0.5096,
+            "prev_ibs": 0.1444,
+            "trade_ret_pct": 1.1549,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2015-08-21",
+            "gap_pct": -1.0982,
+            "prev_ibs": 0.0159,
+            "trade_ret_pct": -3.6038,
+            "win": 0,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2015-08-24",
+            "gap_pct": -5.2267,
+            "prev_ibs": 0.0483,
+            "trade_ret_pct": 3.7175,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2015-09-04",
+            "gap_pct": -1.3807,
+            "prev_ibs": 0.1909,
+            "trade_ret_pct": 2.3749,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2015-09-18",
+            "gap_pct": -1.5033,
+            "prev_ibs": 0.1247,
+            "trade_ret_pct": -1.4358,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2015-11-12",
+            "gap_pct": -0.5969,
+            "prev_ibs": 0.0625,
+            "trade_ret_pct": -0.4262,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2016-02-08",
+            "gap_pct": -1.1599,
+            "prev_ibs": 0.1678,
+            "trade_ret_pct": 0.4629,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2016-02-11",
+            "gap_pct": -1.5815,
+            "prev_ibs": 0.0466,
+            "trade_ret_pct": 2.3527,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2016-02-24",
+            "gap_pct": -0.8788,
+            "prev_ibs": 0.0654,
+            "trade_ret_pct": 2.5757,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2016-03-24",
+            "gap_pct": -0.5954,
+            "prev_ibs": 0.1515,
+            "trade_ret_pct": 1.5445,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2016-04-01",
+            "gap_pct": -0.5693,
+            "prev_ibs": 0.1759,
+            "trade_ret_pct": 1.0129,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2016-06-27",
+            "gap_pct": -0.8119,
+            "prev_ibs": 0.064,
+            "trade_ret_pct": 0.7987,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2018-01-30",
+            "gap_pct": -0.7306,
+            "prev_ibs": 0.0933,
+            "trade_ret_pct": -6.6065,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2018-03-22",
+            "gap_pct": -0.9319,
+            "prev_ibs": 0.0779,
+            "trade_ret_pct": -1.0451,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2018-05-23",
+            "gap_pct": -0.5282,
+            "prev_ibs": 0.1841,
+            "trade_ret_pct": 0.6011,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2018-07-02",
+            "gap_pct": -0.6524,
+            "prev_ibs": 0.0518,
+            "trade_ret_pct": 1.3357,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2018-08-10",
+            "gap_pct": -0.5683,
+            "prev_ibs": 0.1429,
+            "trade_ret_pct": 0.1587,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2018-11-20",
+            "gap_pct": -1.3898,
+            "prev_ibs": 0.194,
+            "trade_ret_pct": 0.8064,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2018-11-23",
+            "gap_pct": -0.6943,
+            "prev_ibs": 0.0047,
+            "trade_ret_pct": 1.6415,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2018-12-06",
+            "gap_pct": -1.6022,
+            "prev_ibs": 0.0391,
+            "trade_ret_pct": -0.6957,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2018-12-24",
+            "gap_pct": -0.6897,
+            "prev_ibs": 0.074,
+            "trade_ret_pct": 2.9869,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2019-10-02",
+            "gap_pct": -0.5934,
+            "prev_ibs": 0.044,
+            "trade_ret_pct": -0.3705,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2019-10-08",
+            "gap_pct": -0.696,
+            "prev_ibs": 0.1245,
+            "trade_ret_pct": 1.6871,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2019-12-03",
+            "gap_pct": -0.9595,
+            "prev_ibs": 0.1347,
+            "trade_ret_pct": 1.0919,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2020-01-30",
+            "gap_pct": -0.6919,
+            "prev_ibs": 0.0987,
+            "trade_ret_pct": 2.6205,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2020-04-21",
+            "gap_pct": -1.7259,
+            "prev_ibs": 0.0441,
+            "trade_ret_pct": 2.2549,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2020-06-11",
+            "gap_pct": -2.3636,
+            "prev_ibs": 0.187,
+            "trade_ret_pct": -1.4159,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2020-06-24",
+            "gap_pct": -0.7082,
+            "prev_ibs": 0.1522,
+            "trade_ret_pct": -0.8036,
+            "win": 0,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2020-09-17",
+            "gap_pct": -1.5524,
+            "prev_ibs": 0.0661,
+            "trade_ret_pct": -1.5833,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2020-10-15",
+            "gap_pct": -1.2129,
+            "prev_ibs": 0.1649,
+            "trade_ret_pct": -0.2851,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2020-10-28",
+            "gap_pct": -1.8095,
+            "prev_ibs": 0.108,
+            "trade_ret_pct": 1.1834,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2021-01-27",
+            "gap_pct": -0.9302,
+            "prev_ibs": 0.1082,
+            "trade_ret_pct": -1.0494,
+            "win": 0,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2021-02-22",
+            "gap_pct": -0.7615,
+            "prev_ibs": 0.1696,
+            "trade_ret_pct": 0.1137,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2021-02-23",
+            "gap_pct": -0.6124,
+            "prev_ibs": 0.1007,
+            "trade_ret_pct": 1.8484,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2021-05-11",
+            "gap_pct": -1.1581,
+            "prev_ibs": 0.0264,
+            "trade_ret_pct": 0.5858,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2021-08-19",
+            "gap_pct": -0.6626,
+            "prev_ibs": 0.0455,
+            "trade_ret_pct": 1.6251,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2021-09-20",
+            "gap_pct": -1.4771,
+            "prev_ibs": 0.0874,
+            "trade_ret_pct": 2.0764,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2022-01-14",
+            "gap_pct": -0.719,
+            "prev_ibs": 0.1155,
+            "trade_ret_pct": -5.0326,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2022-04-06",
+            "gap_pct": -0.9179,
+            "prev_ibs": 0.1511,
+            "trade_ret_pct": -1.9244,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2022-05-19",
+            "gap_pct": -0.8268,
+            "prev_ibs": 0.0989,
+            "trade_ret_pct": 2.1358,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2022-08-29",
+            "gap_pct": -0.7673,
+            "prev_ibs": 0.0041,
+            "trade_ret_pct": -1.4371,
+            "win": 0,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2022-09-01",
+            "gap_pct": -0.5795,
+            "prev_ibs": 0.0226,
+            "trade_ret_pct": 1.2446,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2022-10-07",
+            "gap_pct": -1.1335,
+            "prev_ibs": 0.0861,
+            "trade_ret_pct": -0.8131,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2023-01-19",
+            "gap_pct": -0.5441,
+            "prev_ibs": 0.0238,
+            "trade_ret_pct": 1.6746,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2023-02-17",
+            "gap_pct": -0.5438,
+            "prev_ibs": 0.0293,
+            "trade_ret_pct": -2.3839,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2023-09-21",
+            "gap_pct": -0.6703,
+            "prev_ibs": 0.0349,
+            "trade_ret_pct": -0.7964,
+            "win": 0,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2024-07-24",
+            "gap_pct": -0.8885,
+            "prev_ibs": 0.1445,
+            "trade_ret_pct": -1.2498,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2024-11-15",
+            "gap_pct": -0.6118,
+            "prev_ibs": 0.1357,
+            "trade_ret_pct": 0.0984,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2025-02-03",
+            "gap_pct": -1.5204,
+            "prev_ibs": 0.0864,
+            "trade_ret_pct": 1.5371,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2025-04-04",
+            "gap_pct": -2.4278,
+            "prev_ibs": 0.0,
+            "trade_ret_pct": 4.7645,
+            "win": 1,
+            "days_held": 4
+          },
+          {
+            "date_entry": "2025-04-07",
+            "gap_pct": -3.1844,
+            "prev_ibs": 0.0106,
+            "trade_ret_pct": 12.1487,
+            "win": 1,
+            "days_held": 3
+          },
+          {
+            "date_entry": "2025-04-16",
+            "gap_pct": -1.103,
+            "prev_ibs": 0.1246,
+            "trade_ret_pct": 0.7034,
+            "win": 1,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2025-08-01",
+            "gap_pct": -0.9144,
+            "prev_ibs": 0.1443,
+            "trade_ret_pct": 0.7776,
+            "win": 1,
+            "days_held": 2
+          },
+          {
+            "date_entry": "2025-11-14",
+            "gap_pct": -0.991,
+            "prev_ibs": 0.147,
+            "trade_ret_pct": -1.9312,
+            "win": 0,
+            "days_held": 5
+          },
+          {
+            "date_entry": "2026-03-24",
+            "gap_pct": -0.6195,
+            "prev_ibs": 0.1659,
+            "trade_ret_pct": -2.9709,
+            "win": 0,
+            "days_held": 5
+          }
+        ]
+      }
+    }
+  },
+  "run_date": "2026-04-27"
+}

@@ -1,0 +1,586 @@
+{
+  "strategy": "H039 \u2014 Commodity ETF Expansion",
+  "analysis_period": "2008-01-01 \u2192 2026-04-25",
+  "fetch_start": "2006-01-01",
+  "h039a": {
+    "name": "Expanded H020 (8-asset)",
+    "universe": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "IEF",
+      "DJP",
+      "USO",
+      "DBA"
+    ],
+    "top_n": 2,
+    "stats": {
+      "cagr": 0.0603,
+      "sharpe": 0.528,
+      "max_drawdown": -0.2261,
+      "calmar": 0.2667,
+      "ann_vol": 0.1142,
+      "win_rate": 0.5753,
+      "n_years": 18.2,
+      "final_value": 310137.38
+    },
+    "n_months": 219,
+    "correlation_to_h020": 0.7786,
+    "selection_frequency": {
+      "SPY": 0.4475,
+      "QQQ": 0.2877,
+      "TLT": 0.2329,
+      "GLD": 0.2466,
+      "IEF": 0.5388,
+      "DJP": 0.0685,
+      "USO": 0.0091,
+      "DBA": 0.1689
+    },
+    "commodity_vs_original": {
+      "commodity_slot_pct": 0.1233,
+      "original_slot_pct": 0.8767,
+      "total_slots": 438,
+      "commodity_months": 54,
+      "original_months": 384
+    },
+    "selection_records_sample": [
+      {
+        "date": "2008-01-31",
+        "holdings": [
+          "GLD",
+          "IEF"
+        ],
+        "selected": [
+          "IEF",
+          "TLT"
+        ],
+        "scores": {
+          "SPY": 7.0,
+          "QQQ": 4.0,
+          "TLT": 10.0,
+          "GLD": 10.0,
+          "IEF": 12.0,
+          "DJP": 10.0,
+          "USO": 9.0,
+          "DBA": 10.0
+        }
+      },
+      {
+        "date": "2008-02-29",
+        "holdings": [
+          "IEF",
+          "TLT"
+        ],
+        "selected": [
+          "IEF",
+          "GLD"
+        ],
+        "scores": {
+          "SPY": 7.0,
+          "QQQ": 4.0,
+          "TLT": 10.0,
+          "GLD": 11.0,
+          "IEF": 12.0,
+          "DJP": 9.0,
+          "USO": 9.0,
+          "DBA": 10.0
+        }
+      },
+      {
+        "date": "2008-03-31",
+        "holdings": [
+          "IEF",
+          "GLD"
+        ],
+        "selected": [
+          "IEF",
+          "GLD"
+        ],
+        "scores": {
+          "SPY": 7.0,
+          "QQQ": 5.0,
+          "TLT": 10.0,
+          "GLD": 11.0,
+          "IEF": 12.0,
+          "DJP": 9.0,
+          "USO": 10.0,
+          "DBA": 8.0
+        }
+      },
+      {
+        "date": "2008-04-30",
+        "holdings": [
+          "IEF",
+          "GLD"
+        ],
+        "selected": [
+          "IEF",
+          "TLT"
+        ],
+        "scores": {
+          "SPY": 7.0,
+          "QQQ": 5.0,
+          "TLT": 10.0,
+          "GLD": 10.0,
+          "IEF": 12.0,
+          "DJP": 10.0,
+          "USO": 10.0,
+          "DBA": 8.0
+        }
+      },
+      {
+        "date": "2008-05-31",
+        "holdings": [
+          "IEF",
+          "TLT"
+        ],
+        "selected": [
+          "TLT",
+          "IEF"
+        ],
+        "scores": {
+          "SPY": 7.0,
+          "QQQ": 4.0,
+          "TLT": 11.0,
+          "GLD": 10.0,
+          "IEF": 11.0,
+          "DJP": 10.0,
+          "USO": 11.0,
+          "DBA": 8.0
+        }
+      },
+      {
+        "date": "2008-06-30",
+        "holdings": [
+          "TLT",
+          "IEF"
+        ],
+        "selected": [
+          "TLT",
+          "GLD"
+        ],
+        "scores": {
+          "SPY": 7.0,
+          "QQQ": 4.0,
+          "TLT": 11.0,
+          "GLD": 11.0,
+          "IEF": 11.0,
+          "DJP": 9.0,
+          "USO": 11.0,
+          "DBA": 8.0
+        }
+      },
+      {
+        "date": "2008-07-31",
+        "holdings": [
+          "TLT",
+          "GLD"
+        ],
+        "selected": [
+          "IEF",
+          "GLD"
+        ],
+        "scores": {
+          "SPY": 7.0,
+          "QQQ": 6.0,
+          "TLT": 10.0,
+          "GLD": 11.0,
+          "IEF": 12.0,
+          "DJP": 8.0,
+          "USO": 10.0,
+          "DBA": 8.0
+        }
+      },
+      {
+        "date": "2008-08-31",
+        "holdings": [
+          "IEF",
+          "GLD"
+        ],
+        "selected": [
+          "IEF",
+          "GLD"
+        ],
+        "scores": {
+          "SPY": 7.0,
+          "QQQ": 6.0,
+          "TLT": 10.0,
+          "GLD": 11.0,
+          "IEF": 12.0,
+          "DJP": 8.0,
+          "USO": 9.0,
+          "DBA": 9.0
+        }
+      },
+      {
+        "date": "2008-09-30",
+        "holdings": [
+          "IEF",
+          "GLD"
+        ],
+        "selected": [
+          "TLT",
+          "GLD"
+        ],
+        "scores": {
+          "SPY": 7.0,
+          "QQQ": 4.0,
+          "TLT": 13.0,
+          "GLD": 13.0,
+          "IEF": 13.0,
+          "DJP": 7.0,
+          "USO": 9.0,
+          "DBA": 6.0
+        }
+      },
+      {
+        "date": "2008-10-31",
+        "holdings": [
+          "TLT",
+          "GLD"
+        ],
+        "selected": [
+          "IEF",
+          "TLT"
+        ],
+        "scores": {
+          "SPY": 8.0,
+          "QQQ": 5.0,
+          "TLT": 14.0,
+          "GLD": 11.0,
+          "IEF": 16.0,
+          "DJP": 6.0,
+          "USO": 5.0,
+          "DBA": 7.0
+        }
+      },
+      {
+        "date": "2008-11-30",
+        "holdings": [
+          "IEF",
+          "TLT"
+        ],
+        "selected": [
+          "TLT",
+          "IEF"
+        ],
+        "scores": {
+          "SPY": 9.0,
+          "QQQ": 6.0,
+          "TLT": 15.0,
+          "GLD": 9.0,
+          "IEF": 15.0,
+          "DJP": 8.0,
+          "USO": 3.0,
+          "DBA": 7.0
+        }
+      },
+      {
+        "date": "2008-12-31",
+        "holdings": [
+          "TLT",
+          "IEF"
+        ],
+        "selected": [
+          "IEF",
+          "TLT"
+        ],
+        "scores": {
+          "SPY": 10.0,
+          "QQQ": 6.0,
+          "TLT": 13.0,
+          "GLD": 7.0,
+          "IEF": 15.0,
+          "DJP": 10.0,
+          "USO": 3.0,
+          "DBA": 8.0
+        }
+      }
+    ]
+  },
+  "h039b": {
+    "name": "Commodity-only rotation (3-asset)",
+    "universe": [
+      "DJP",
+      "GLD",
+      "USO"
+    ],
+    "top_n": 1,
+    "stats": {
+      "cagr": 0.0288,
+      "sharpe": 0.1564,
+      "max_drawdown": -0.5705,
+      "calmar": 0.0505,
+      "ann_vol": 0.1842,
+      "win_rate": 0.5388,
+      "n_years": 18.2,
+      "final_value": 185709.1
+    },
+    "n_months": 219,
+    "correlation_to_h020": 0.3784,
+    "selection_frequency": {
+      "DJP": 0.6073,
+      "GLD": 0.3653,
+      "USO": 0.0274
+    },
+    "selection_records_sample": [
+      {
+        "date": "2008-01-31",
+        "holdings": [
+          "GLD"
+        ],
+        "selected": [
+          "DJP"
+        ],
+        "scores": {
+          "DJP": 4.0,
+          "GLD": 4.0,
+          "USO": 4.0
+        }
+      },
+      {
+        "date": "2008-02-29",
+        "holdings": [
+          "DJP"
+        ],
+        "selected": [
+          "GLD"
+        ],
+        "scores": {
+          "DJP": 3.0,
+          "GLD": 5.0,
+          "USO": 4.0
+        }
+      },
+      {
+        "date": "2008-03-31",
+        "holdings": [
+          "GLD"
+        ],
+        "selected": [
+          "GLD"
+        ],
+        "scores": {
+          "DJP": 3.0,
+          "GLD": 5.0,
+          "USO": 4.0
+        }
+      },
+      {
+        "date": "2008-04-30",
+        "holdings": [
+          "GLD"
+        ],
+        "selected": [
+          "DJP"
+        ],
+        "scores": {
+          "DJP": 4.0,
+          "GLD": 4.0,
+          "USO": 4.0
+        }
+      },
+      {
+        "date": "2008-05-31",
+        "holdings": [
+          "DJP"
+        ],
+        "selected": [
+          "DJP"
+        ],
+        "scores": {
+          "DJP": 4.0,
+          "GLD": 4.0,
+          "USO": 4.0
+        }
+      },
+      {
+        "date": "2008-06-30",
+        "holdings": [
+          "DJP"
+        ],
+        "selected": [
+          "GLD"
+        ],
+        "scores": {
+          "DJP": 3.0,
+          "GLD": 5.0,
+          "USO": 4.0
+        }
+      },
+      {
+        "date": "2008-07-31",
+        "holdings": [
+          "GLD"
+        ],
+        "selected": [
+          "GLD"
+        ],
+        "scores": {
+          "DJP": 3.0,
+          "GLD": 5.0,
+          "USO": 4.0
+        }
+      },
+      {
+        "date": "2008-08-31",
+        "holdings": [
+          "GLD"
+        ],
+        "selected": [
+          "GLD"
+        ],
+        "scores": {
+          "DJP": 3.0,
+          "GLD": 5.0,
+          "USO": 4.0
+        }
+      },
+      {
+        "date": "2008-09-30",
+        "holdings": [
+          "GLD"
+        ],
+        "selected": [
+          "GLD"
+        ],
+        "scores": {
+          "DJP": 3.0,
+          "GLD": 5.0,
+          "USO": 4.0
+        }
+      },
+      {
+        "date": "2008-10-31",
+        "holdings": [
+          "GLD"
+        ],
+        "selected": [
+          "GLD"
+        ],
+        "scores": {
+          "DJP": 3.0,
+          "GLD": 6.0,
+          "USO": 3.0
+        }
+      },
+      {
+        "date": "2008-11-30",
+        "holdings": [
+          "GLD"
+        ],
+        "selected": [
+          "DJP"
+        ],
+        "scores": {
+          "DJP": 5.0,
+          "GLD": 5.0,
+          "USO": 2.0
+        }
+      },
+      {
+        "date": "2008-12-31",
+        "holdings": [
+          "DJP"
+        ],
+        "selected": [
+          "DJP"
+        ],
+        "scores": {
+          "DJP": 5.0,
+          "GLD": 4.0,
+          "USO": 3.0
+        }
+      }
+    ]
+  },
+  "h020_baseline": {
+    "name": "H020 5-asset baseline (same window)",
+    "universe": [
+      "SPY",
+      "QQQ",
+      "TLT",
+      "GLD",
+      "IEF"
+    ],
+    "top_n": 2,
+    "stats": {
+      "cagr": 0.0764,
+      "sharpe": 0.6986,
+      "max_drawdown": -0.2058,
+      "calmar": 0.3712,
+      "ann_vol": 0.1093,
+      "win_rate": 0.6027,
+      "n_years": 18.2,
+      "final_value": 407680.03
+    },
+    "n_months": 219
+  },
+  "benchmarks": {
+    "spy_bh": {
+      "cagr": 0.1171,
+      "sharpe": 0.7464,
+      "max_drawdown": -0.4632,
+      "calmar": 0.2527,
+      "ann_vol": 0.1568,
+      "win_rate": 0.6667,
+      "n_years": 18.2,
+      "final_value": 727790.01
+    },
+    "gld_bh": {
+      "cagr": 0.0864,
+      "sharpe": 0.5015,
+      "max_drawdown": -0.4291,
+      "calmar": 0.2013,
+      "ann_vol": 0.1723,
+      "win_rate": 0.5297,
+      "n_years": 18.2,
+      "final_value": 474015.31
+    },
+    "djp_bh": {
+      "cagr": -0.0165,
+      "sharpe": -0.0919,
+      "max_drawdown": -0.773,
+      "calmar": 0.0213,
+      "ann_vol": 0.1793,
+      "win_rate": 0.5114,
+      "n_years": 18.2,
+      "final_value": 82954.74
+    }
+  },
+  "data_availability": {
+    "SPY": {
+      "first_date": "2006-01-03",
+      "n_days": 5109
+    },
+    "QQQ": {
+      "first_date": "2006-01-03",
+      "n_days": 5109
+    },
+    "TLT": {
+      "first_date": "2006-01-03",
+      "n_days": 5109
+    },
+    "GLD": {
+      "first_date": "2006-01-03",
+      "n_days": 5109
+    },
+    "IEF": {
+      "first_date": "2006-01-03",
+      "n_days": 5109
+    },
+    "DJP": {
+      "first_date": "2006-10-30",
+      "n_days": 4901
+    },
+    "USO": {
+      "first_date": "2006-04-10",
+      "n_days": 5042
+    },
+    "DBA": {
+      "first_date": "2007-01-05",
+      "n_days": 4856
+    }
+  }
+}

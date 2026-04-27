@@ -1,0 +1,1373 @@
+{
+  "strategy": "H038 \u2014 Factor ETF Momentum Rotation",
+  "universe": [
+    "MTUM",
+    "QUAL",
+    "VLUE",
+    "SIZE",
+    "USMV",
+    "DGRO"
+  ],
+  "available_factors": [
+    "MTUM",
+    "QUAL",
+    "VLUE",
+    "SIZE",
+    "USMV",
+    "DGRO"
+  ],
+  "signal": "rank(12m_mom) + rank(inv_6m_vol), hold top-2, monthly rebalance",
+  "cash_proxy": "SHY",
+  "full_period": {
+    "start": "2013-01-01",
+    "end": "2026-04-27",
+    "stats": {
+      "cagr": 0.1525,
+      "sharpe": 1.1275,
+      "max_drawdown": -0.2185,
+      "calmar": 0.6982,
+      "ann_vol": 0.1353,
+      "n_months": 144,
+      "n_years": 12.0
+    }
+  },
+  "in_sample": {
+    "start": "2013-01-01",
+    "end": "2018-12-31",
+    "stats": {
+      "cagr": 0.1209,
+      "sharpe": 1.3573,
+      "max_drawdown": -0.0953,
+      "calmar": 1.2687,
+      "ann_vol": 0.089,
+      "n_months": 56,
+      "n_years": 4.7
+    }
+  },
+  "out_of_sample": {
+    "start": "2019-01-01",
+    "end": "2026-04-27",
+    "stats": {
+      "cagr": 0.1444,
+      "sharpe": 0.8612,
+      "max_drawdown": -0.1948,
+      "calmar": 0.7413,
+      "ann_vol": 0.1676,
+      "n_months": 75,
+      "n_years": 6.2
+    }
+  },
+  "factor_dominance": {
+    "n_months_evaluated": 145,
+    "hold_counts": {
+      "USMV": 68,
+      "QUAL": 62,
+      "MTUM": 60,
+      "DGRO": 50,
+      "SIZE": 28,
+      "VLUE": 22
+    },
+    "hold_pct": {
+      "USMV": 0.469,
+      "QUAL": 0.4276,
+      "MTUM": 0.4138,
+      "DGRO": 0.3448,
+      "SIZE": 0.1931,
+      "VLUE": 0.1517
+    }
+  },
+  "monthly_holdings": [
+    {
+      "month": "2014-04-30",
+      "held": [
+        "SIZE",
+        "VLUE"
+      ],
+      "cash_pct": 0.5
+    },
+    {
+      "month": "2014-05-31",
+      "held": [
+        "SIZE",
+        "MTUM"
+      ],
+      "cash_pct": 0.5
+    },
+    {
+      "month": "2014-06-30",
+      "held": [
+        "SIZE",
+        "MTUM"
+      ],
+      "cash_pct": 0.5
+    },
+    {
+      "month": "2014-07-31",
+      "held": [
+        "VLUE",
+        "QUAL"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2014-08-31",
+      "held": [
+        "VLUE",
+        "MTUM"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2014-09-30",
+      "held": [
+        "VLUE",
+        "MTUM"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2014-10-31",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2014-11-30",
+      "held": [
+        "MTUM",
+        "VLUE"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2014-12-31",
+      "held": [
+        "VLUE",
+        "USMV"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2015-01-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2015-02-28",
+      "held": [
+        "USMV",
+        "SIZE"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2015-03-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2015-04-30",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2015-05-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6
+    },
+    {
+      "month": "2015-06-30",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2015-07-31",
+      "held": [
+        "USMV",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2015-08-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2015-09-30",
+      "held": [
+        "USMV",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2015-10-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2015-11-30",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2015-12-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-01-31",
+      "held": [
+        "MTUM",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-02-29",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-03-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-04-30",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-05-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-06-30",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-07-31",
+      "held": [
+        "DGRO",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-08-31",
+      "held": [
+        "DGRO",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-09-30",
+      "held": [
+        "DGRO",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-10-31",
+      "held": [
+        "DGRO",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-11-30",
+      "held": [
+        "DGRO",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2016-12-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-01-31",
+      "held": [
+        "QUAL",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-02-28",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-03-31",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-04-30",
+      "held": [
+        "MTUM",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-05-31",
+      "held": [
+        "MTUM",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-06-30",
+      "held": [
+        "MTUM",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-07-31",
+      "held": [
+        "MTUM",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-08-31",
+      "held": [
+        "DGRO",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-09-30",
+      "held": [
+        "DGRO",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-10-31",
+      "held": [
+        "DGRO",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-11-30",
+      "held": [
+        "DGRO",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2017-12-31",
+      "held": [
+        "QUAL",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-01-31",
+      "held": [
+        "QUAL",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-02-28",
+      "held": [
+        "QUAL",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-03-31",
+      "held": [
+        "QUAL",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-04-30",
+      "held": [
+        "QUAL",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-05-31",
+      "held": [
+        "QUAL",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-06-30",
+      "held": [
+        "QUAL",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-07-31",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-08-31",
+      "held": [
+        "QUAL",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-09-30",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-10-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-11-30",
+      "held": [
+        "USMV",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2018-12-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-01-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-02-28",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-03-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-04-30",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-05-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-06-30",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-07-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-08-31",
+      "held": [
+        "USMV",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-09-30",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-10-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-11-30",
+      "held": [
+        "USMV",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2019-12-31",
+      "held": [
+        "QUAL",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-01-31",
+      "held": [
+        "MTUM",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-02-29",
+      "held": [
+        "MTUM",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-03-31",
+      "held": [
+        "MTUM",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-04-30",
+      "held": [
+        "MTUM",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-05-31",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-06-30",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-07-31",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-08-31",
+      "held": [
+        "QUAL",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-09-30",
+      "held": [
+        "MTUM",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-10-31",
+      "held": [
+        "DGRO",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-11-30",
+      "held": [
+        "QUAL",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2020-12-31",
+      "held": [
+        "QUAL",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-01-31",
+      "held": [
+        "SIZE",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-02-28",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-03-31",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-04-30",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-05-31",
+      "held": [
+        "VLUE",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-06-30",
+      "held": [
+        "SIZE",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-07-31",
+      "held": [
+        "QUAL",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-08-31",
+      "held": [
+        "SIZE",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-09-30",
+      "held": [
+        "VLUE",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-10-31",
+      "held": [
+        "VLUE",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-11-30",
+      "held": [
+        "VLUE",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2021-12-31",
+      "held": [
+        "VLUE",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-01-31",
+      "held": [
+        "VLUE",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-02-28",
+      "held": [
+        "DGRO",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-03-31",
+      "held": [
+        "DGRO",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-04-30",
+      "held": [
+        "DGRO",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-05-31",
+      "held": [
+        "DGRO",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-06-30",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-07-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-08-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-09-30",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-10-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-11-30",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2022-12-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-01-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-02-28",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-03-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-04-30",
+      "held": [
+        "MTUM",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-05-31",
+      "held": [
+        "DGRO",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-06-30",
+      "held": [
+        "QUAL",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-07-31",
+      "held": [
+        "QUAL",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-08-31",
+      "held": [
+        "QUAL",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-09-30",
+      "held": [
+        "QUAL",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-10-31",
+      "held": [
+        "USMV",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-11-30",
+      "held": [
+        "QUAL",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2023-12-31",
+      "held": [
+        "QUAL",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-01-31",
+      "held": [
+        "QUAL",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-02-29",
+      "held": [
+        "QUAL",
+        "USMV"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-03-31",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-04-30",
+      "held": [
+        "QUAL",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-05-31",
+      "held": [
+        "QUAL",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-06-30",
+      "held": [
+        "USMV",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-07-31",
+      "held": [
+        "USMV",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-08-31",
+      "held": [
+        "USMV",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-09-30",
+      "held": [
+        "DGRO",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-10-31",
+      "held": [
+        "SIZE",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-11-30",
+      "held": [
+        "QUAL",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2024-12-31",
+      "held": [
+        "QUAL",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-01-31",
+      "held": [
+        "QUAL",
+        "MTUM"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-02-28",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-03-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-04-30",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-05-31",
+      "held": [
+        "USMV",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-06-30",
+      "held": [
+        "USMV",
+        "SIZE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-07-31",
+      "held": [
+        "SIZE",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-08-31",
+      "held": [
+        "SIZE",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-09-30",
+      "held": [
+        "MTUM",
+        "QUAL"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-10-31",
+      "held": [
+        "QUAL",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-11-30",
+      "held": [
+        "QUAL",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2025-12-31",
+      "held": [
+        "QUAL",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2026-01-31",
+      "held": [
+        "QUAL",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2026-02-28",
+      "held": [
+        "QUAL",
+        "DGRO"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2026-03-31",
+      "held": [
+        "MTUM",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    },
+    {
+      "month": "2026-04-30",
+      "held": [
+        "DGRO",
+        "VLUE"
+      ],
+      "cash_pct": 0.6667
+    }
+  ],
+  "correlations": {
+    "h038_vs_h020": 0.6206,
+    "h038_vs_h026": 0.9156,
+    "h038_vs_h031": 0.8504
+  },
+  "comparisons_on_h038_window": {
+    "h038": {
+      "cagr": 0.1525,
+      "sharpe": 1.1275,
+      "max_drawdown": -0.2185,
+      "calmar": 0.6982,
+      "ann_vol": 0.1353,
+      "n_months": 144,
+      "n_years": 12.0
+    },
+    "h020": {
+      "cagr": 0.1549,
+      "sharpe": 1.5894,
+      "max_drawdown": -0.1922,
+      "calmar": 0.8059,
+      "ann_vol": 0.0974,
+      "n_months": 144,
+      "n_years": 12.0
+    },
+    "h026": {
+      "cagr": 0.169,
+      "sharpe": 1.412,
+      "max_drawdown": -0.1701,
+      "calmar": 0.9934,
+      "ann_vol": 0.1197,
+      "n_months": 144,
+      "n_years": 12.0
+    },
+    "h031": {
+      "cagr": 0.1479,
+      "sharpe": 1.7166,
+      "max_drawdown": -0.1152,
+      "calmar": 1.2836,
+      "ann_vol": 0.0862,
+      "n_months": 144,
+      "n_years": 12.0
+    },
+    "spy_bah": {
+      "cagr": 0.1366,
+      "sharpe": 0.9271,
+      "max_drawdown": -0.2393,
+      "calmar": 0.5708,
+      "ann_vol": 0.1473,
+      "n_months": 144,
+      "n_years": 12.0
+    }
+  },
+  "blend_h038_into_h031": [
+    {
+      "cagr": 0.1479,
+      "sharpe": 1.7166,
+      "max_drawdown": -0.1152,
+      "calmar": 1.2836,
+      "ann_vol": 0.0862,
+      "n_months": 144,
+      "n_years": 12.0,
+      "w_h031": 1.0,
+      "w_h038": 0.0
+    },
+    {
+      "cagr": 0.1483,
+      "sharpe": 1.6914,
+      "max_drawdown": -0.1192,
+      "calmar": 1.2437,
+      "ann_vol": 0.0877,
+      "n_months": 144,
+      "n_years": 12.0,
+      "w_h031": 0.95,
+      "w_h038": 0.05
+    },
+    {
+      "cagr": 0.1487,
+      "sharpe": 1.6643,
+      "max_drawdown": -0.1233,
+      "calmar": 1.2064,
+      "ann_vol": 0.0893,
+      "n_months": 144,
+      "n_years": 12.0,
+      "w_h031": 0.9,
+      "w_h038": 0.1
+    },
+    {
+      "cagr": 0.149,
+      "sharpe": 1.6356,
+      "max_drawdown": -0.1273,
+      "calmar": 1.1712,
+      "ann_vol": 0.0911,
+      "n_months": 144,
+      "n_years": 12.0,
+      "w_h031": 0.85,
+      "w_h038": 0.15
+    },
+    {
+      "cagr": 0.1494,
+      "sharpe": 1.6057,
+      "max_drawdown": -0.1313,
+      "calmar": 1.1381,
+      "ann_vol": 0.093,
+      "n_months": 144,
+      "n_years": 12.0,
+      "w_h031": 0.8,
+      "w_h038": 0.2
+    },
+    {
+      "cagr": 0.1497,
+      "sharpe": 1.5749,
+      "max_drawdown": -0.1353,
+      "calmar": 1.1069,
+      "ann_vol": 0.0951,
+      "n_months": 144,
+      "n_years": 12.0,
+      "w_h031": 0.75,
+      "w_h038": 0.25
+    },
+    {
+      "cagr": 0.15,
+      "sharpe": 1.5434,
+      "max_drawdown": -0.1392,
+      "calmar": 1.0774,
+      "ann_vol": 0.0972,
+      "n_months": 144,
+      "n_years": 12.0,
+      "w_h031": 0.7,
+      "w_h038": 0.3
+    }
+  ],
+  "run_date": "2026-04-27"
+}

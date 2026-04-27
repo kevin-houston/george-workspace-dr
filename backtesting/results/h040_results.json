@@ -1,0 +1,349 @@
+{
+  "strategy": "H040 \u2014 International Equity Expansion of H026",
+  "signal": "rank(12m_momentum) + rank(inv_6m_vol), hold top-3 equal weight",
+  "rebalance": "monthly",
+  "full_start": "2000-01-01",
+  "full_end": "2026-04-27",
+  "is_cutoff": "2015-12-31",
+  "oos_start": "2016-01-01",
+  "intl_etfs": [
+    "EFA",
+    "EEM",
+    "VGK",
+    "EWJ"
+  ],
+  "h026_reference": {
+    "full_period": {
+      "cagr": 0.1416,
+      "sharpe": 0.8721,
+      "max_drawdown": -0.317,
+      "ann_vol": 0.1623
+    },
+    "in_sample": {
+      "cagr": 0.1212,
+      "sharpe": 0.7419,
+      "max_drawdown": -0.2934
+    },
+    "out_of_sample": {
+      "cagr": 0.171,
+      "sharpe": 1.0335,
+      "max_drawdown": -0.317
+    },
+    "oos_degradation_pct_sharpe": -39.3,
+    "h020_monthly_corr": 0.4829
+  },
+  "h040": {
+    "universe": [
+      "XLK",
+      "XLE",
+      "XLF",
+      "XLV",
+      "XLI",
+      "XLB",
+      "XLU",
+      "XLRE",
+      "XLY",
+      "XLP",
+      "XLC",
+      "EFA",
+      "EEM",
+      "VGK",
+      "EWJ"
+    ],
+    "ticker_starts": {
+      "XLK": "2000-01-03",
+      "XLE": "2000-01-03",
+      "XLF": "2000-01-03",
+      "XLV": "2000-01-03",
+      "XLI": "2000-01-03",
+      "XLB": "2000-01-03",
+      "XLU": "2000-01-03",
+      "XLRE": "2015-10-08",
+      "XLY": "2000-01-03",
+      "XLP": "2000-01-03",
+      "XLC": "2018-06-19",
+      "EFA": "2001-08-27",
+      "EEM": "2003-04-14",
+      "VGK": "2005-03-10",
+      "EWJ": "2000-01-03"
+    },
+    "results": {
+      "full_period": {
+        "h040": {
+          "cagr": 0.146,
+          "sharpe": 0.8969,
+          "max_drawdown": -0.3313,
+          "calmar": 0.4407,
+          "ann_vol": 0.1628,
+          "win_rate": 0.5569,
+          "n_years": 25.3
+        },
+        "spy_bh": {
+          "cagr": 0.0874,
+          "sharpe": 0.4479,
+          "max_drawdown": -0.5519,
+          "calmar": 0.1583,
+          "ann_vol": 0.1951,
+          "win_rate": 0.5464,
+          "n_years": 25.3
+        }
+      },
+      "in_sample": {
+        "h040": {
+          "cagr": 0.1242,
+          "sharpe": 0.7508,
+          "max_drawdown": -0.3313,
+          "calmar": 0.3748,
+          "ann_vol": 0.1654,
+          "win_rate": 0.5496,
+          "n_years": 15.0
+        },
+        "spy_bh": {
+          "cagr": 0.0477,
+          "sharpe": 0.2349,
+          "max_drawdown": -0.5519,
+          "calmar": 0.0864,
+          "ann_vol": 0.2031,
+          "win_rate": 0.5434,
+          "n_years": 15.0
+        }
+      },
+      "out_of_sample": {
+        "h040": {
+          "cagr": 0.1787,
+          "sharpe": 1.0913,
+          "max_drawdown": -0.317,
+          "calmar": 0.5638,
+          "ann_vol": 0.1638,
+          "win_rate": 0.5649,
+          "n_years": 9.3
+        },
+        "spy_bh": {
+          "cagr": 0.1494,
+          "sharpe": 0.7968,
+          "max_drawdown": -0.3372,
+          "calmar": 0.443,
+          "ann_vol": 0.1874,
+          "win_rate": 0.5514,
+          "n_years": 9.3
+        }
+      }
+    },
+    "oos_degradation_pct_sharpe": -45.4,
+    "h020_monthly_corr": 0.4663,
+    "h026_monthly_corr": 0.9632,
+    "holding_frequency": {
+      "XLP": {
+        "count": 128,
+        "pct": 0.4211
+      },
+      "XLV": {
+        "count": 110,
+        "pct": 0.3618
+      },
+      "XLU": {
+        "count": 90,
+        "pct": 0.2961
+      },
+      "XLF": {
+        "count": 84,
+        "pct": 0.2763
+      },
+      "XLK": {
+        "count": 70,
+        "pct": 0.2303
+      },
+      "EFA": {
+        "count": 67,
+        "pct": 0.2204
+      },
+      "XLI": {
+        "count": 66,
+        "pct": 0.2171
+      },
+      "XLY": {
+        "count": 64,
+        "pct": 0.2105
+      },
+      "XLB": {
+        "count": 50,
+        "pct": 0.1645
+      },
+      "EWJ": {
+        "count": 49,
+        "pct": 0.1612
+      },
+      "VGK": {
+        "count": 32,
+        "pct": 0.1053
+      },
+      "XLC": {
+        "count": 32,
+        "pct": 0.1053
+      },
+      "XLE": {
+        "count": 28,
+        "pct": 0.0921
+      },
+      "EEM": {
+        "count": 24,
+        "pct": 0.0789
+      },
+      "XLRE": {
+        "count": 18,
+        "pct": 0.0592
+      }
+    },
+    "intl_selection": {
+      "months_with_any_intl": 132,
+      "pct_months_with_any_intl": 0.4342,
+      "intl_slot_pct": 0.1886,
+      "total_months": 304
+    }
+  },
+  "h040b": {
+    "universe": [
+      "XLK",
+      "XLE",
+      "XLF",
+      "XLV",
+      "XLI",
+      "XLB",
+      "XLU",
+      "XLY",
+      "XLP",
+      "EFA",
+      "EEM"
+    ],
+    "ticker_starts": {
+      "XLK": "2000-01-03",
+      "XLE": "2000-01-03",
+      "XLF": "2000-01-03",
+      "XLV": "2000-01-03",
+      "XLI": "2000-01-03",
+      "XLB": "2000-01-03",
+      "XLU": "2000-01-03",
+      "XLY": "2000-01-03",
+      "XLP": "2000-01-03",
+      "EFA": "2001-08-27",
+      "EEM": "2003-04-14"
+    },
+    "results": {
+      "full_period": {
+        "h040b": {
+          "cagr": 0.1364,
+          "sharpe": 0.841,
+          "max_drawdown": -0.32,
+          "calmar": 0.4262,
+          "ann_vol": 0.1622,
+          "win_rate": 0.5535,
+          "n_years": 25.3
+        },
+        "spy_bh": {
+          "cagr": 0.0874,
+          "sharpe": 0.4479,
+          "max_drawdown": -0.5519,
+          "calmar": 0.1583,
+          "ann_vol": 0.1951,
+          "win_rate": 0.5464,
+          "n_years": 25.3
+        }
+      },
+      "in_sample": {
+        "h040b": {
+          "cagr": 0.1272,
+          "sharpe": 0.7749,
+          "max_drawdown": -0.32,
+          "calmar": 0.3975,
+          "ann_vol": 0.1642,
+          "win_rate": 0.5493,
+          "n_years": 15.0
+        },
+        "spy_bh": {
+          "cagr": 0.0477,
+          "sharpe": 0.2349,
+          "max_drawdown": -0.5519,
+          "calmar": 0.0864,
+          "ann_vol": 0.2031,
+          "win_rate": 0.5434,
+          "n_years": 15.0
+        }
+      },
+      "out_of_sample": {
+        "h040b": {
+          "cagr": 0.1464,
+          "sharpe": 0.8931,
+          "max_drawdown": -0.3167,
+          "calmar": 0.4622,
+          "ann_vol": 0.1639,
+          "win_rate": 0.5559,
+          "n_years": 9.3
+        },
+        "spy_bh": {
+          "cagr": 0.1494,
+          "sharpe": 0.7968,
+          "max_drawdown": -0.3372,
+          "calmar": 0.443,
+          "ann_vol": 0.1874,
+          "win_rate": 0.5514,
+          "n_years": 9.3
+        }
+      }
+    },
+    "oos_degradation_pct_sharpe": -15.3,
+    "h020_monthly_corr": 0.4842,
+    "h026_monthly_corr": 0.9706,
+    "holding_frequency": {
+      "XLP": {
+        "count": 139,
+        "pct": 0.4572
+      },
+      "XLV": {
+        "count": 119,
+        "pct": 0.3914
+      },
+      "XLF": {
+        "count": 98,
+        "pct": 0.3224
+      },
+      "XLU": {
+        "count": 98,
+        "pct": 0.3224
+      },
+      "XLK": {
+        "count": 95,
+        "pct": 0.3125
+      },
+      "EFA": {
+        "count": 85,
+        "pct": 0.2796
+      },
+      "XLI": {
+        "count": 84,
+        "pct": 0.2763
+      },
+      "XLY": {
+        "count": 79,
+        "pct": 0.2599
+      },
+      "XLB": {
+        "count": 54,
+        "pct": 0.1776
+      },
+      "XLE": {
+        "count": 32,
+        "pct": 0.1053
+      },
+      "EEM": {
+        "count": 29,
+        "pct": 0.0954
+      }
+    },
+    "intl_selection": {
+      "months_with_any_intl": 104,
+      "pct_months_with_any_intl": 0.3421,
+      "intl_slot_pct": 0.125,
+      "total_months": 304
+    }
+  }
+}
