@@ -1,0 +1,329 @@
+{
+  "strategy": "H047 \u2014 Four-Way Blend: H041a + H026 + H037b + H045",
+  "description": "Tests whether adding H045 (7-ETF Treasury rotation) as a 4th component to H042 (H041a + H026 + H037b) improves portfolio Sharpe, CAGR, and MaxDD.",
+  "components": {
+    "h041a": {
+      "universe": [
+        "SPY",
+        "QQQ",
+        "TLT",
+        "GLD",
+        "IEF",
+        "EFA",
+        "EEM"
+      ],
+      "signal": "rank(12m_mom) + rank(inv_6m_vol), hold top-2 at 50/50",
+      "rebalance": "monthly"
+    },
+    "h026": {
+      "universe": [
+        "XLK",
+        "XLE",
+        "XLF",
+        "XLV",
+        "XLI",
+        "XLB",
+        "XLU",
+        "XLRE",
+        "XLY",
+        "XLP",
+        "XLC"
+      ],
+      "signal": "rank(12m_mom) + rank(inv_6m_vol), hold top-3 at 33.3%",
+      "rebalance": "monthly"
+    },
+    "h037b": {
+      "signal": "IBS < 0.20 AND gap >= -0.5% \u2192 buy SPY at open; sell when IBS > 0.80 or held >= 5 days",
+      "rebalance": "daily",
+      "gap_filter": -0.005
+    },
+    "h045": {
+      "universe": [
+        "SHY",
+        "IEI",
+        "IEF",
+        "TLT",
+        "TIP",
+        "HYG",
+        "LQD"
+      ],
+      "signal": "rank(12m_mom) + rank(inv_6m_vol), hold top-2 at 50/50",
+      "rebalance": "monthly"
+    }
+  },
+  "common_window": {
+    "start": "2008-01-31",
+    "end": "2026-04-30",
+    "n_months": 220,
+    "n_years": 18.3,
+    "note": "Limited by IEI (H045) availability; 12m momentum warmup \u2192 effective start 2008"
+  },
+  "monthly_correlations": {
+    "h041a_h026": 0.4761,
+    "h041a_h037b": 0.1429,
+    "h041a_h045": 0.4729,
+    "h026_h037b": 0.3938,
+    "h026_h045": 0.1248,
+    "h037b_h045": 0.0102
+  },
+  "standalone_on_common_window": {
+    "h041a": {
+      "cagr": 0.1478,
+      "sharpe": 1.5586,
+      "max_drawdown": -0.1374,
+      "calmar": 1.0757,
+      "ann_vol": 0.0948,
+      "n_months": 220
+    },
+    "h026": {
+      "cagr": 0.1575,
+      "sharpe": 1.2697,
+      "max_drawdown": -0.2438,
+      "calmar": 0.6458,
+      "ann_vol": 0.124,
+      "n_months": 220
+    },
+    "h037b": {
+      "cagr": 0.1299,
+      "sharpe": 1.1471,
+      "max_drawdown": -0.2174,
+      "calmar": 0.5972,
+      "ann_vol": 0.1132,
+      "n_months": 220
+    },
+    "h045": {
+      "cagr": 0.0498,
+      "sharpe": 1.5268,
+      "max_drawdown": -0.0628,
+      "calmar": 0.7928,
+      "ann_vol": 0.0326,
+      "n_months": 220
+    }
+  },
+  "h042_baseline": {
+    "weights": {
+      "w_h041a": 0.56,
+      "w_h026": 0.16,
+      "w_h037b": 0.28
+    },
+    "description": "H042 optimal (56/16/28) on the same 4-way common window (H045=0%)",
+    "stats": {
+      "w_h041a": 0.56,
+      "w_h026": 0.16,
+      "w_h037b": 0.28,
+      "cagr": 0.147,
+      "sharpe": 1.8674,
+      "max_drawdown": -0.0902,
+      "calmar": 1.6302,
+      "ann_vol": 0.0787,
+      "n_months": 220
+    }
+  },
+  "h045_proportion_grid": [
+    {
+      "w_h041a": 0.504,
+      "w_h026": 0.144,
+      "w_h037b": 0.252,
+      "w_h045": 0.1,
+      "cagr": 0.1372,
+      "sharpe": 1.9036,
+      "max_drawdown": -0.0823,
+      "calmar": 1.6678,
+      "ann_vol": 0.0721,
+      "n_months": 220,
+      "h042_alloc": 0.9
+    },
+    {
+      "w_h041a": 0.448,
+      "w_h026": 0.128,
+      "w_h037b": 0.224,
+      "w_h045": 0.2,
+      "cagr": 0.1274,
+      "sharpe": 1.9429,
+      "max_drawdown": -0.0743,
+      "calmar": 1.7145,
+      "ann_vol": 0.0656,
+      "n_months": 220,
+      "h042_alloc": 0.8
+    },
+    {
+      "w_h041a": 0.392,
+      "w_h026": 0.112,
+      "w_h037b": 0.196,
+      "w_h045": 0.3,
+      "cagr": 0.1176,
+      "sharpe": 1.9841,
+      "max_drawdown": -0.0663,
+      "calmar": 1.7736,
+      "ann_vol": 0.0593,
+      "n_months": 220,
+      "h042_alloc": 0.7
+    },
+    {
+      "w_h041a": 0.336,
+      "w_h026": 0.096,
+      "w_h037b": 0.168,
+      "w_h045": 0.4,
+      "cagr": 0.1079,
+      "sharpe": 2.0249,
+      "max_drawdown": -0.0604,
+      "calmar": 1.7873,
+      "ann_vol": 0.0533,
+      "n_months": 220,
+      "h042_alloc": 0.6
+    }
+  ],
+  "marginal_sharpe_grid": [
+    {
+      "base_sharpe": 1.9036,
+      "weights": {
+        "h041a": 0.504,
+        "h026": 0.144,
+        "h037b": 0.252,
+        "h045": 0.1
+      },
+      "marginal_sharpe_per_unit": {
+        "h041a": -0.1843,
+        "h026": -0.1739,
+        "h037b": 0.1135,
+        "h045": 0.3797
+      },
+      "note": "dSharpe/dw_i: increase in portfolio Sharpe per 1 unit increase in weight (epsilon=0.01)",
+      "h045_alloc": 0.1
+    },
+    {
+      "base_sharpe": 1.9429,
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.224,
+        "h045": 0.2
+      },
+      "marginal_sharpe_per_unit": {
+        "h041a": -0.3032,
+        "h026": -0.21,
+        "h037b": 0.1232,
+        "h045": 0.4062
+      },
+      "note": "dSharpe/dw_i: increase in portfolio Sharpe per 1 unit increase in weight (epsilon=0.01)",
+      "h045_alloc": 0.2
+    },
+    {
+      "base_sharpe": 1.9841,
+      "weights": {
+        "h041a": 0.392,
+        "h026": 0.112,
+        "h037b": 0.196,
+        "h045": 0.3
+      },
+      "marginal_sharpe_per_unit": {
+        "h041a": -0.4242,
+        "h026": -0.2338,
+        "h037b": 0.1556,
+        "h045": 0.416
+      },
+      "note": "dSharpe/dw_i: increase in portfolio Sharpe per 1 unit increase in weight (epsilon=0.01)",
+      "h045_alloc": 0.3
+    },
+    {
+      "base_sharpe": 2.0249,
+      "weights": {
+        "h041a": 0.336,
+        "h026": 0.096,
+        "h037b": 0.168,
+        "h045": 0.4
+      },
+      "marginal_sharpe_per_unit": {
+        "h041a": -0.5362,
+        "h026": -0.2236,
+        "h037b": 0.2323,
+        "h045": 0.3875
+      },
+      "note": "dSharpe/dw_i: increase in portfolio Sharpe per 1 unit increase in weight (epsilon=0.01)",
+      "h045_alloc": 0.4
+    }
+  ],
+  "optimal_4way": {
+    "max_sharpe": {
+      "w_h041a": 0.12,
+      "w_h026": 0.08,
+      "w_h037b": 0.14,
+      "w_h045": 0.66,
+      "cagr": 0.0823,
+      "sharpe": 2.1128,
+      "max_drawdown": -0.0506,
+      "calmar": 1.6258,
+      "ann_vol": 0.0389,
+      "n_months": 220
+    },
+    "min_maxdd": {
+      "w_h041a": 0.0,
+      "w_h026": 0.0,
+      "w_h037b": 0.24,
+      "w_h045": 0.76,
+      "cagr": 0.0698,
+      "sharpe": 1.8892,
+      "max_drawdown": -0.0275,
+      "calmar": 2.5348,
+      "ann_vol": 0.037,
+      "n_months": 220
+    }
+  },
+  "marginal_sharpe_at_optimal": {
+    "base_sharpe": 2.1128,
+    "weights": {
+      "h041a": 0.12,
+      "h026": 0.08,
+      "h037b": 0.14,
+      "h045": 0.66
+    },
+    "marginal_sharpe_per_unit": {
+      "h041a": 0.0184,
+      "h026": -0.139,
+      "h037b": -0.0472,
+      "h045": -0.0565
+    },
+    "note": "dSharpe/dw_i: increase in portfolio Sharpe per 1 unit increase in weight (epsilon=0.01)"
+  },
+  "sharpe_delta_vs_h042": {
+    "h045_10pct": 0.0362,
+    "h045_20pct": 0.0755,
+    "h045_30pct": 0.1167,
+    "h045_40pct": 0.1575
+  },
+  "best_blend": {
+    "from_grid": {
+      "w_h041a": 0.336,
+      "w_h026": 0.096,
+      "w_h037b": 0.168,
+      "w_h045": 0.4,
+      "cagr": 0.1079,
+      "sharpe": 2.0249,
+      "max_drawdown": -0.0604,
+      "calmar": 1.7873,
+      "ann_vol": 0.0533,
+      "n_months": 220,
+      "h042_alloc": 0.6
+    },
+    "from_unconstrained": {
+      "w_h041a": 0.12,
+      "w_h026": 0.08,
+      "w_h037b": 0.14,
+      "w_h045": 0.66,
+      "cagr": 0.0823,
+      "sharpe": 2.1128,
+      "max_drawdown": -0.0506,
+      "calmar": 1.6258,
+      "ann_vol": 0.0389,
+      "n_months": 220
+    }
+  },
+  "verdict": "H045 addition meaningfully improves H042 \u2014 Treasury rotation is a genuine 4th diversifier",
+  "h042_baseline_sharpe": 1.8674,
+  "best_grid_sharpe": 2.0249,
+  "best_grid_h045_alloc": 0.4,
+  "best_4way_sharpe": 2.1128,
+  "sharpe_improvement_grid": 0.1575,
+  "sharpe_improvement_4way": 0.2454,
+  "run_date": "2026-04-27"
+}

@@ -1,0 +1,220 @@
+{
+  "run_date": "2026-04-27",
+  "h048a": {
+    "strategy": "H048a \u2014 XLK IBS Mean-Reversion (H037b rules applied to XLK)",
+    "rules": {
+      "entry": "IBS[t-1] < 0.20 AND gap[t] >= -0.5% \u2192 buy XLK at open",
+      "exit": "IBS[t] > 0.80 OR held >= 5 days \u2192 sell at close",
+      "position_size": "100% of allocated capital"
+    },
+    "period": "2000-01-01 \u2192 2026-04-27",
+    "results": {
+      "h048a_xlk_ibs": {
+        "period": "H048a XLK IBS Full (2000-2026)",
+        "n_years": 26.3,
+        "cagr_pct": 10.927,
+        "sharpe": 0.7295,
+        "max_dd_pct": -33.379,
+        "n_trades": 713,
+        "trades_per_year": 27.2,
+        "win_rate_pct": 63.96,
+        "avg_trade_ret_pct": 0.4189,
+        "final_equity": 1521844.16
+      },
+      "h037b_spy_ibs": {
+        "period": "H037b SPY IBS Full (2003-2026)",
+        "n_years": 23.3,
+        "cagr_pct": 12.022,
+        "sharpe": 1.0207,
+        "max_dd_pct": -23.045,
+        "n_trades": 623,
+        "trades_per_year": 26.8,
+        "win_rate_pct": 65.33,
+        "avg_trade_ret_pct": 0.4459,
+        "final_equity": 1404235.98
+      },
+      "xlk_buy_and_hold": {
+        "label": "XLK Buy-and-Hold (2000-2026)",
+        "cagr_pct": 8.12,
+        "sharpe": 0.4312,
+        "max_dd_pct": -82.047,
+        "n_years": 26.3
+      },
+      "spy_buy_and_hold": {
+        "label": "SPY Buy-and-Hold (2000-2026)",
+        "cagr_pct": 8.144,
+        "sharpe": 0.5017,
+        "max_dd_pct": -55.189,
+        "n_years": 26.3
+      }
+    },
+    "correlation": {
+      "h048a_vs_h037b_daily": 0.6505,
+      "supplement_h037b": false,
+      "verdict": "HIGH correlation \u2014 XLK IBS is redundant with H037b; blending adds little diversification"
+    }
+  },
+  "h048b": {
+    "strategy": "H048b \u2014 Sell-in-May Seasonality Overlay on H042",
+    "baseline_period": "2003-01-01 \u2192 2026-04-27",
+    "h042_weights": {
+      "h041a": 0.5,
+      "h026": 0.2,
+      "h037b": 0.3
+    },
+    "variants": {
+      "v1_description": "50% equity exposure, 50% SHY during May-October",
+      "v2_description": "100% SHY during May-October (hard switch)",
+      "v3_description": "100% SHY May-Oct only in years with negative April SPY return"
+    },
+    "full_period_results": {
+      "h042_baseline": {
+        "label": "H042 baseline",
+        "period": "2004-01-05 \u2192 2026-04-24",
+        "n_years": 21.2,
+        "cagr_pct": 15.199,
+        "sharpe": 1.4961,
+        "max_dd_pct": -16.392,
+        "ann_vol_pct": 9.78,
+        "calmar": 0.9272
+      },
+      "v1": {
+        "label": "H048b V1: 50% SHY May-Oct",
+        "period": "2004-01-05 \u2192 2026-04-24",
+        "n_years": 21.2,
+        "cagr_pct": 12.325,
+        "sharpe": 1.5373,
+        "max_dd_pct": -16.392,
+        "ann_vol_pct": 7.758,
+        "calmar": 0.7518
+      },
+      "v2": {
+        "label": "H048b V2: 100% SHY May-Oct",
+        "period": "2004-01-05 \u2192 2026-04-24",
+        "n_years": 21.2,
+        "cagr_pct": 9.389,
+        "sharpe": 1.3186,
+        "max_dd_pct": -16.392,
+        "ann_vol_pct": 6.993,
+        "calmar": 0.5728
+      },
+      "v3": {
+        "label": "H048b V3: Conditional (neg April)",
+        "period": "2004-01-05 \u2192 2026-04-24",
+        "n_years": 21.2,
+        "cagr_pct": 13.496,
+        "sharpe": 1.4112,
+        "max_dd_pct": -16.392,
+        "ann_vol_pct": 9.278,
+        "calmar": 0.8233
+      }
+    },
+    "sub_period_results": {
+      "Pre-2015": {
+        "h042_base": {
+          "label": "H042 Pre-2015",
+          "period": "2004-01-05 \u2192 2014-12-31",
+          "n_years": 10.5,
+          "cagr_pct": 15.74,
+          "sharpe": 1.4678,
+          "max_dd_pct": -13.958,
+          "ann_vol_pct": 10.325,
+          "calmar": 1.1277
+        },
+        "v1": {
+          "label": "V1 Pre-2015",
+          "period": "2004-01-05 \u2192 2014-12-31",
+          "n_years": 10.5,
+          "cagr_pct": 13.313,
+          "sharpe": 1.6914,
+          "max_dd_pct": -11.353,
+          "ann_vol_pct": 7.56,
+          "calmar": 1.1727
+        },
+        "v2": {
+          "label": "V2 Pre-2015",
+          "period": "2004-01-05 \u2192 2014-12-31",
+          "n_years": 10.5,
+          "cagr_pct": 10.747,
+          "sharpe": 1.6082,
+          "max_dd_pct": -11.353,
+          "ann_vol_pct": 6.479,
+          "calmar": 0.9466
+        },
+        "v3": {
+          "label": "V3 Pre-2015",
+          "period": "2004-01-05 \u2192 2014-12-31",
+          "n_years": 10.5,
+          "cagr_pct": 14.021,
+          "sharpe": 1.3766,
+          "max_dd_pct": -13.958,
+          "ann_vol_pct": 9.89,
+          "calmar": 1.0045
+        }
+      },
+      "Post-2015": {
+        "h042_base": {
+          "label": "H042 Post-2015",
+          "period": "2015-01-05 \u2192 2026-04-24",
+          "n_years": 10.7,
+          "cagr_pct": 14.675,
+          "sharpe": 1.5317,
+          "max_dd_pct": -16.392,
+          "ann_vol_pct": 9.221,
+          "calmar": 0.8952
+        },
+        "v1": {
+          "label": "V1 Post-2015",
+          "period": "2015-01-05 \u2192 2026-04-24",
+          "n_years": 10.7,
+          "cagr_pct": 11.37,
+          "sharpe": 1.3952,
+          "max_dd_pct": -16.392,
+          "ann_vol_pct": 7.947,
+          "calmar": 0.6936
+        },
+        "v2": {
+          "label": "V2 Post-2015",
+          "period": "2015-01-05 \u2192 2026-04-24",
+          "n_years": 10.7,
+          "cagr_pct": 8.083,
+          "sharpe": 1.0796,
+          "max_dd_pct": -16.392,
+          "ann_vol_pct": 7.46,
+          "calmar": 0.4931
+        },
+        "v3": {
+          "label": "V3 Post-2015",
+          "period": "2015-01-05 \u2192 2026-04-24",
+          "n_years": 10.7,
+          "cagr_pct": 12.986,
+          "sharpe": 1.4563,
+          "max_dd_pct": -16.392,
+          "ann_vol_pct": 8.643,
+          "calmar": 0.7922
+        }
+      }
+    },
+    "spy_seasonality_analysis": {
+      "full_period": {
+        "may_oct_ann_ret_pct": 10.399,
+        "nov_apr_ann_ret_pct": 14.724,
+        "may_oct_sharpe": 0.5852,
+        "nov_apr_sharpe": 0.7572,
+        "spread_ann_pct": 4.325
+      },
+      "pre_2015": {
+        "may_oct_ann_ret_pct": 6.868,
+        "nov_apr_ann_ret_pct": 15.134,
+        "may_oct_sharpe": 0.3426,
+        "nov_apr_sharpe": 0.8045
+      },
+      "post_2015": {
+        "may_oct_ann_ret_pct": 14.254,
+        "nov_apr_ann_ret_pct": 14.301,
+        "may_oct_sharpe": 0.957,
+        "nov_apr_sharpe": 0.712
+      }
+    }
+  }
+}
