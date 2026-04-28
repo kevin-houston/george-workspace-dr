@@ -1,0 +1,14 @@
+{
+  "h078_baseline": {
+    "oos": 2.8094,
+    "alt_oos": 2.7844
+  },
+  "part_a": {
+    "BIL+IWM": {
+      "h41_oos": 2.0172,
+      "h41_ao": 2.1586,
+      "port_oos": 2.8103,
+      "port_ao": 2.7484,
+      "maxdd": -0.03,
+      "wf_worst": 2.234,
+      "both_up": 

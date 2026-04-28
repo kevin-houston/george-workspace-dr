@@ -1,0 +1,238 @@
+{
+  "hypothesis": "H066",
+  "primary_stats": {
+    "H060_baseline": {
+      "is": {
+        "cagr": 0.1032,
+        "sharpe": 2.1087,
+        "max_drawdown": -0.0456,
+        "n_months": 120,
+        "n_negative": 31,
+        "pct_negative": 25.8
+      },
+      "oos": {
+        "cagr": 0.1227,
+        "sharpe": 2.1924,
+        "max_drawdown": -0.0336,
+        "n_months": 100,
+        "n_negative": 27,
+        "pct_negative": 27.0
+      },
+      "deg": 3.97
+    },
+    "H065_F1 (XLK24+SMH8, 32%)": {
+      "is": {
+        "cagr": 0.1,
+        "sharpe": 1.9895,
+        "max_drawdown": -0.0615,
+        "n_months": 120,
+        "n_negative": 26,
+        "pct_negative": 21.7
+      },
+      "oos": {
+        "cagr": 0.1319,
+        "sharpe": 2.3865,
+        "max_drawdown": -0.0318,
+        "n_months": 100,
+        "n_negative": 28,
+        "pct_negative": 28.0
+      },
+      "deg": 19.95
+    },
+    "H065_F2 (XLK20+SMH8, 28%)": {
+      "is": {
+        "cagr": 0.1024,
+        "sharpe": 2.0517,
+        "max_drawdown": -0.0646,
+        "n_months": 120,
+        "n_negative": 28,
+        "pct_negative": 23.3
+      },
+      "oos": {
+        "cagr": 0.132,
+        "sharpe": 2.3739,
+        "max_drawdown": -0.0353,
+        "n_months": 100,
+        "n_negative": 27,
+        "pct_negative": 27.0
+      },
+      "deg": 15.7
+    }
+  },
+  "alt_stats": {
+    "H060_baseline": {
+      "alt_is": {
+        "cagr": 0.1044,
+        "sharpe": 2.0183,
+        "max_drawdown": -0.0456,
+        "n_months": 108,
+        "n_negative": 24,
+        "pct_negative": 22.2
+      },
+      "alt_oos": {
+        "cagr": 0.1129,
+        "sharpe": 2.3254,
+        "max_drawdown": -0.0336,
+        "n_months": 160,
+        "n_negative": 41,
+        "pct_negative": 25.6
+      },
+      "alt_deg": 15.22
+    },
+    "H065_F1 (XLK24+SMH8, 32%)": {
+      "alt_is": {
+        "cagr": 0.0958,
+        "sharpe": 1.8167,
+        "max_drawdown": -0.0615,
+        "n_months": 108,
+        "n_negative": 25,
+        "pct_negative": 23.1
+      },
+      "alt_oos": {
+        "cagr": 0.1211,
+        "sharpe": 2.4709,
+        "max_drawdown": -0.0318,
+        "n_months": 160,
+        "n_negative": 38,
+        "pct_negative": 23.8
+      },
+      "alt_deg": 36.01
+    },
+    "H065_F2 (XLK20+SMH8, 28%)": {
+      "alt_is": {
+        "cagr": 0.0991,
+        "sharpe": 1.8971,
+        "max_drawdown": -0.0646,
+        "n_months": 108,
+        "n_negative": 26,
+        "pct_negative": 24.1
+      },
+      "alt_oos": {
+        "cagr": 0.1223,
+        "sharpe": 2.4872,
+        "max_drawdown": -0.0353,
+        "n_months": 160,
+        "n_negative": 38,
+        "pct_negative": 23.8
+      },
+      "alt_deg": 31.11
+    }
+  },
+  "annual_returns": {
+    "2004": {
+      "H060_baseline": 10.66,
+      "H065_F1 (XLK24+SMH8, 32%)": 10.54,
+      "H065_F2 (XLK20+SMH8, 28%)": 10.94
+    },
+    "2005": {
+      "H060_baseline": 5.58,
+      "H065_F1 (XLK24+SMH8, 32%)": 5.92,
+      "H065_F2 (XLK20+SMH8, 28%)": 6.950000000000001
+    },
+    "2006": {
+      "H060_baseline": 11.09,
+      "H065_F1 (XLK24+SMH8, 32%)": 9.31,
+      "H065_F2 (XLK20+SMH8, 28%)": 9.790000000000001
+    },
+    "2007": {
+      "H060_baseline": 11.92,
+      "H065_F1 (XLK24+SMH8, 32%)": 12.18,
+      "H065_F2 (XLK20+SMH8, 28%)": 12.45
+    },
+    "2008": {
+      "H060_baseline": 11.91,
+      "H065_F1 (XLK24+SMH8, 32%)": 9.8,
+      "H065_F2 (XLK20+SMH8, 28%)": 10.489999999999998
+    },
+    "2009": {
+      "H060_baseline": 9.6,
+      "H065_F1 (XLK24+SMH8, 32%)": 7.53,
+      "H065_F2 (XLK20+SMH8, 28%)": 7.1499999999999995
+    },
+    "2010": {
+      "H060_baseline": 11.77,
+      "H065_F1 (XLK24+SMH8, 32%)": 10.74,
+      "H065_F2 (XLK20+SMH8, 28%)": 11.37
+    },
+    "2011": {
+      "H060_baseline": 11.76,
+      "H065_F1 (XLK24+SMH8, 32%)": 9.379999999999999,
+      "H065_F2 (XLK20+SMH8, 28%)": 8.81
+    },
+    "2012": {
+      "H060_baseline": 9.82,
+      "H065_F1 (XLK24+SMH8, 32%)": 10.93,
+      "H065_F2 (XLK20+SMH8, 28%)": 11.39
+    },
+    "2013": {
+      "H060_baseline": 14.24,
+      "H065_F1 (XLK24+SMH8, 32%)": 12.629999999999999,
+      "H065_F2 (XLK20+SMH8, 28%)": 13.420000000000002
+    },
+    "2014": {
+      "H060_baseline": 5.949999999999999,
+      "H065_F1 (XLK24+SMH8, 32%)": 10.79,
+      "H065_F2 (XLK20+SMH8, 28%)": 11.3
+    },
+    "2015": {
+      "H060_baseline": 7.33,
+      "H065_F1 (XLK24+SMH8, 32%)": 4.92,
+      "H065_F2 (XLK20+SMH8, 28%)": 4.65
+    },
+    "2016": {
+      "H060_baseline": 7.539999999999999,
+      "H065_F1 (XLK24+SMH8, 32%)": 10.7,
+      "H065_F2 (XLK20+SMH8, 28%)": 10.83
+    },
+    "2017": {
+      "H060_baseline": 13.600000000000001,
+      "H065_F1 (XLK24+SMH8, 32%)": 12.8,
+      "H065_F2 (XLK20+SMH8, 28%)": 13.26
+    },
+    "2018": {
+      "H060_baseline": 8.18,
+      "H065_F1 (XLK24+SMH8, 32%)": 11.28,
+      "H065_F2 (XLK20+SMH8, 28%)": 11.32
+    },
+    "2019": {
+      "H060_baseline": 21.13,
+      "H065_F1 (XLK24+SMH8, 32%)": 20.86,
+      "H065_F2 (XLK20+SMH8, 28%)": 21.19
+    },
+    "2020": {
+      "H060_baseline": 15.39,
+      "H065_F1 (XLK24+SMH8, 32%)": 18.73,
+      "H065_F2 (XLK20+SMH8, 28%)": 19.139999999999997
+    },
+    "2021": {
+      "H060_baseline": 9.3,
+      "H065_F1 (XLK24+SMH8, 32%)": 9.120000000000001,
+      "H065_F2 (XLK20+SMH8, 28%)": 9.1
+    },
+    "2022": {
+      "H060_baseline": 7.829999999999999,
+      "H065_F1 (XLK24+SMH8, 32%)": 7.61,
+      "H065_F2 (XLK20+SMH8, 28%)": 5.87
+    },
+    "2023": {
+      "H060_baseline": 17.45,
+      "H065_F1 (XLK24+SMH8, 32%)": 19.400000000000002,
+      "H065_F2 (XLK20+SMH8, 28%)": 19.0
+    },
+    "2024": {
+      "H060_baseline": 13.020000000000001,
+      "H065_F1 (XLK24+SMH8, 32%)": 11.92,
+      "H065_F2 (XLK20+SMH8, 28%)": 12.839999999999998
+    },
+    "2025": {
+      "H060_baseline": 8.57,
+      "H065_F1 (XLK24+SMH8, 32%)": 8.28,
+      "H065_F2 (XLK20+SMH8, 28%)": 8.790000000000001
+    }
+  },
+  "neg_years": {
+    "H060_baseline": [],
+    "H065_F1 (XLK24+SMH8, 32%)": [],
+    "H065_F2 (XLK20+SMH8, 28%)": []
+  }
+}

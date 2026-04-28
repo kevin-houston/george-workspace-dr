@@ -1,0 +1,37 @@
+{
+  "sweep": {
+    "1": {
+      "h026_is": 2.3461,
+      "h026_oos": 2.3518,
+      "h026_ao": 2.7073,
+      "port_oos": 3.6251,
+      "port_ao": 3.6628,
+      "maxdd": -0.0304,
+      "wf_worst": 2.8076,
+      "both_up": false
+    },
+    "2": {
+      "h026_is": 2.4687,
+      "h026_oos": 2.5378,
+      "h026_ao": 2.8026,
+      "port_oos": 3.5202,
+      "port_ao": 3.5219,
+      "maxdd": -0.0304,
+      "wf_worst": 2.5561,
+      "both_up": false
+    },
+    "3": {
+      "h026_is": 2.509,
+      "h026_oos": 2.3736,
+      "h026_ao": 2.6721,
+      "port_oos": 3.4265,
+      "port_ao": 3.4354,
+      "maxdd": -0.0275,
+      "wf_worst": 2.6378,
+      "both_up": false
+    }
+  },
+  "winner_n": 1,
+  "calendar": [],
+  "confirmed": false
+}

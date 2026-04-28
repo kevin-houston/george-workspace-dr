@@ -1,0 +1,265 @@
+{
+  "hypothesis": "H062",
+  "results": {
+    "QQQ": {
+      "full": {
+        "label": "",
+        "cagr": 0.1242,
+        "sharpe": 1.0866,
+        "max_drawdown": -0.1587,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.0949,
+        "sharpe": 0.8008,
+        "max_drawdown": -0.1587,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1605,
+        "sharpe": 1.4719,
+        "max_drawdown": -0.1151,
+        "n_months": 100
+      },
+      "deg": 83.8,
+      "n_trades": 620,
+      "direction": "\u2191 IMPROVING"
+    },
+    "SPY": {
+      "full": {
+        "label": "",
+        "cagr": 0.1299,
+        "sharpe": 1.1471,
+        "max_drawdown": -0.2174,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1472,
+        "sharpe": 1.4381,
+        "max_drawdown": -0.0735,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1094,
+        "sharpe": 0.8728,
+        "max_drawdown": -0.2174,
+        "n_months": 100
+      },
+      "deg": -39.31,
+      "n_trades": 623,
+      "direction": "\u2193 degrading"
+    },
+    "GLD": {
+      "full": {
+        "label": "",
+        "cagr": 0.0313,
+        "sharpe": 0.3063,
+        "max_drawdown": -0.2473,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": -0.005,
+        "sharpe": -0.0456,
+        "max_drawdown": -0.2473,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.0766,
+        "sharpe": 0.8387,
+        "max_drawdown": -0.098,
+        "n_months": 100
+      },
+      "deg": NaN,
+      "n_trades": 525,
+      "direction": "\u2248 stable"
+    },
+    "TLT": {
+      "full": {
+        "label": "",
+        "cagr": 0.0481,
+        "sharpe": 0.6191,
+        "max_drawdown": -0.1338,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.0586,
+        "sharpe": 0.7266,
+        "max_drawdown": -0.1338,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.0355,
+        "sharpe": 0.4797,
+        "max_drawdown": -0.1024,
+        "n_months": 100
+      },
+      "deg": -33.98,
+      "n_trades": 664,
+      "direction": "\u2193 degrading"
+    },
+    "SMH": {
+      "full": {
+        "label": "",
+        "cagr": 0.1432,
+        "sharpe": 0.9359,
+        "max_drawdown": -0.2398,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.0738,
+        "sharpe": 0.5228,
+        "max_drawdown": -0.2398,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.2323,
+        "sharpe": 1.4171,
+        "max_drawdown": -0.1332,
+        "n_months": 100
+      },
+      "deg": 171.06,
+      "n_trades": 644,
+      "direction": "\u2191 IMPROVING"
+    },
+    "IWM": {
+      "full": {
+        "label": "",
+        "cagr": 0.1412,
+        "sharpe": 1.0625,
+        "max_drawdown": -0.2543,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1649,
+        "sharpe": 1.235,
+        "max_drawdown": -0.1542,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1134,
+        "sharpe": 0.8562,
+        "max_drawdown": -0.2543,
+        "n_months": 100
+      },
+      "deg": -30.67,
+      "n_trades": 643,
+      "direction": "\u2193 degrading"
+    },
+    "XLE": {
+      "full": {
+        "label": "",
+        "cagr": 0.0231,
+        "sharpe": 0.1511,
+        "max_drawdown": -0.4681,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.0429,
+        "sharpe": 0.3174,
+        "max_drawdown": -0.2046,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": -0.0001,
+        "sharpe": -0.0005,
+        "max_drawdown": -0.4681,
+        "n_months": 100
+      },
+      "deg": -100.16,
+      "n_trades": 597,
+      "direction": "\u2193 degrading"
+    },
+    "XLK": {
+      "full": {
+        "label": "",
+        "cagr": 0.1336,
+        "sharpe": 1.2013,
+        "max_drawdown": -0.1258,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.0989,
+        "sharpe": 0.881,
+        "max_drawdown": -0.1258,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1768,
+        "sharpe": 1.6128,
+        "max_drawdown": -0.0856,
+        "n_months": 100
+      },
+      "deg": 83.06,
+      "n_trades": 629,
+      "direction": "\u2191 IMPROVING"
+    },
+    "EFA": {
+      "full": {
+        "label": "",
+        "cagr": 0.0581,
+        "sharpe": 0.6137,
+        "max_drawdown": -0.1481,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.0469,
+        "sharpe": 0.4904,
+        "max_drawdown": -0.1481,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.0718,
+        "sharpe": 0.764,
+        "max_drawdown": -0.079,
+        "n_months": 100
+      },
+      "deg": 55.79,
+      "n_trades": 594,
+      "direction": "\u2191 IMPROVING"
+    },
+    "GDX": {
+      "full": {
+        "label": "",
+        "cagr": 0.1046,
+        "sharpe": 0.4241,
+        "max_drawdown": -0.3678,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.0651,
+        "sharpe": 0.2389,
+        "max_drawdown": -0.3678,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.154,
+        "sharpe": 0.7247,
+        "max_drawdown": -0.2601,
+        "n_months": 100
+      },
+      "deg": 203.35,
+      "n_trades": 556,
+      "direction": "\u2191 IMPROVING"
+    }
+  }
+}

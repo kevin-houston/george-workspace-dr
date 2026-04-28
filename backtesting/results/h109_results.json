@@ -1,0 +1,213 @@
+{
+  "candidates": [
+    {
+      "label": "+VCSH",
+      "extras": [
+        "VCSH"
+      ],
+      "h045_is": 2.0928,
+      "h045_oos": 2.5416,
+      "h045_ao": 2.3154,
+      "port_oos": 4.0654,
+      "port_ao": 3.9876,
+      "maxdd": -0.036,
+      "wf": 3.0455,
+      "both_up": false
+    },
+    {
+      "label": "+BIV",
+      "extras": [
+        "BIV"
+      ],
+      "h045_is": 2.1056,
+      "h045_oos": 2.4886,
+      "h045_ao": 2.2368,
+      "port_oos": 4.0567,
+      "port_ao": 3.978,
+      "maxdd": -0.036,
+      "wf": 2.954,
+      "both_up": false
+    },
+    {
+      "label": "+PCY",
+      "extras": [
+        "PCY"
+      ],
+      "h045_is": 1.9886,
+      "h045_oos": 2.7024,
+      "h045_ao": 2.2983,
+      "port_oos": 4.0724,
+      "port_ao": 3.9905,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": true
+    },
+    {
+      "label": "+ANGL",
+      "extras": [
+        "ANGL"
+      ],
+      "h045_is": 2.1502,
+      "h045_oos": 2.3897,
+      "h045_ao": 2.2363,
+      "port_oos": 4.0232,
+      "port_ao": 3.9601,
+      "maxdd": -0.0365,
+      "wf": 2.9932,
+      "both_up": false
+    },
+    {
+      "label": "+VCLT",
+      "extras": [
+        "VCLT"
+      ],
+      "h045_is": 2.0881,
+      "h045_oos": 2.5882,
+      "h045_ao": 2.2825,
+      "port_oos": 4.0447,
+      "port_ao": 3.9801,
+      "maxdd": -0.036,
+      "wf": 3.0261,
+      "both_up": false
+    },
+    {
+      "label": "+SRLN",
+      "extras": [
+        "SRLN"
+      ],
+      "h045_is": 2.0727,
+      "h045_oos": 2.5301,
+      "h045_ao": 2.2891,
+      "port_oos": 4.0517,
+      "port_ao": 3.9721,
+      "maxdd": -0.036,
+      "wf": 2.9485,
+      "both_up": false
+    },
+    {
+      "label": "+VCSH+BIV",
+      "extras": [
+        "VCSH",
+        "BIV"
+      ],
+      "h045_is": 2.0965,
+      "h045_oos": 2.4567,
+      "h045_ao": 2.257,
+      "port_oos": 4.0444,
+      "port_ao": 3.9696,
+      "maxdd": -0.036,
+      "wf": 2.9941,
+      "both_up": false
+    },
+    {
+      "label": "+VCSH+PCY",
+      "extras": [
+        "VCSH",
+        "PCY"
+      ],
+      "h045_is": 1.993,
+      "h045_oos": 2.7028,
+      "h045_ao": 2.3345,
+      "port_oos": 4.0713,
+      "port_ao": 3.9925,
+      "maxdd": -0.036,
+      "wf": 3.0463,
+      "both_up": false
+    },
+    {
+      "label": "+VCSH+VCLT",
+      "extras": [
+        "VCSH",
+        "VCLT"
+      ],
+      "h045_is": 2.0861,
+      "h045_oos": 2.5513,
+      "h045_ao": 2.2591,
+      "port_oos": 4.0592,
+      "port_ao": 3.9928,
+      "maxdd": -0.036,
+      "wf": 3.0463,
+      "both_up": false
+    },
+    {
+      "label": "+BIV+PCY",
+      "extras": [
+        "BIV",
+        "PCY"
+      ],
+      "h045_is": 2.0694,
+      "h045_oos": 2.5533,
+      "h045_ao": 2.2114,
+      "port_oos": 4.0652,
+      "port_ao": 3.9832,
+      "maxdd": -0.036,
+      "wf": 2.9584,
+      "both_up": false
+    },
+    {
+      "label": "+BIV+VCLT",
+      "extras": [
+        "BIV",
+        "VCLT"
+      ],
+      "h045_is": 2.1237,
+      "h045_oos": 2.4053,
+      "h045_ao": 2.1956,
+      "port_oos": 4.0288,
+      "port_ao": 3.9617,
+      "maxdd": -0.036,
+      "wf": 2.9605,
+      "both_up": false
+    },
+    {
+      "label": "+PCY+ANGL",
+      "extras": [
+        "PCY",
+        "ANGL"
+      ],
+      "h045_is": 2.1277,
+      "h045_oos": 2.3522,
+      "h045_ao": 2.2337,
+      "port_oos": 4.0198,
+      "port_ao": 3.9567,
+      "maxdd": -0.0365,
+      "wf": 2.9932,
+      "both_up": false
+    },
+    {
+      "label": "+VCSH+BIV+PCY",
+      "extras": [
+        "VCSH",
+        "BIV",
+        "PCY"
+      ],
+      "h045_is": 2.0375,
+      "h045_oos": 2.5867,
+      "h045_ao": 2.2427,
+      "port_oos": 4.0543,
+      "port_ao": 3.9755,
+      "maxdd": -0.036,
+      "wf": 2.9894,
+      "both_up": false
+    },
+    {
+      "label": "+VCSH+BIV+VCLT",
+      "extras": [
+        "VCSH",
+        "BIV",
+        "VCLT"
+      ],
+      "h045_is": 2.1152,
+      "h045_oos": 2.4586,
+      "h045_ao": 2.2715,
+      "port_oos": 4.0439,
+      "port_ao": 3.9724,
+      "maxdd": -0.036,
+      "wf": 2.9894,
+      "both_up": false
+    }
+  ],
+  "confirmed": true,
+  "base_oos": 4.0717,
+  "base_ao": 3.9901
+}

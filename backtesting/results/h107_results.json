@@ -1,0 +1,155 @@
+{
+  "candidates": [
+    {
+      "label": "+GDX",
+      "extras": [
+        "GDX"
+      ],
+      "h026_is": 2.4776,
+      "h026_oos": 2.529,
+      "h026_ao": 2.8758,
+      "port_oos": 3.9225,
+      "port_ao": 3.9129,
+      "maxdd": -0.036,
+      "wf": 3.0447,
+      "both_up": false
+    },
+    {
+      "label": "+DBA",
+      "extras": [
+        "DBA"
+      ],
+      "h026_is": 2.7003,
+      "h026_oos": 2.6176,
+      "h026_ao": 2.8924,
+      "port_oos": 3.9769,
+      "port_ao": 3.8964,
+      "maxdd": -0.0315,
+      "wf": 3.0593,
+      "both_up": false
+    },
+    {
+      "label": "+SLV",
+      "extras": [
+        "SLV"
+      ],
+      "h026_is": 2.4327,
+      "h026_oos": 2.6067,
+      "h026_ao": 2.9246,
+      "port_oos": 3.955,
+      "port_ao": 3.9318,
+      "maxdd": -0.036,
+      "wf": 3.0204,
+      "both_up": true
+    },
+    {
+      "label": "+EZU",
+      "extras": [
+        "EZU"
+      ],
+      "h026_is": 2.3412,
+      "h026_oos": 2.5766,
+      "h026_ao": 2.8426,
+      "port_oos": 3.921,
+      "port_ao": 3.843,
+      "maxdd": -0.036,
+      "wf": 3.0447,
+      "both_up": false
+    },
+    {
+      "label": "+GDX+DBA",
+      "extras": [
+        "GDX",
+        "DBA"
+      ],
+      "h026_is": 2.7003,
+      "h026_oos": 2.5705,
+      "h026_ao": 2.8576,
+      "port_oos": 3.9611,
+      "port_ao": 3.8864,
+      "maxdd": -0.036,
+      "wf": 3.0593,
+      "both_up": false
+    },
+    {
+      "label": "+DBA+SLV",
+      "extras": [
+        "DBA",
+        "SLV"
+      ],
+      "h026_is": 2.7259,
+      "h026_oos": 2.8301,
+      "h026_ao": 3.0553,
+      "port_oos": 4.0594,
+      "port_ao": 3.9814,
+      "maxdd": -0.036,
+      "wf": 3.0204,
+      "both_up": true
+    },
+    {
+      "label": "+GDX+SLV",
+      "extras": [
+        "GDX",
+        "SLV"
+      ],
+      "h026_is": 2.4327,
+      "h026_oos": 2.6697,
+      "h026_ao": 2.9536,
+      "port_oos": 3.9056,
+      "port_ao": 3.8838,
+      "maxdd": -0.036,
+      "wf": 3.0204,
+      "both_up": false
+    },
+    {
+      "label": "+GDX+DBA+SLV",
+      "extras": [
+        "GDX",
+        "DBA",
+        "SLV"
+      ],
+      "h026_is": 2.7139,
+      "h026_oos": 2.8244,
+      "h026_ao": 3.051,
+      "port_oos": 4.0717,
+      "port_ao": 3.9901,
+      "maxdd": -0.036,
+      "wf": 3.0204,
+      "both_up": true
+    },
+    {
+      "label": "+DBA+EZU",
+      "extras": [
+        "DBA",
+        "EZU"
+      ],
+      "h026_is": 2.6847,
+      "h026_oos": 2.7169,
+      "h026_ao": 2.946,
+      "port_oos": 4.0025,
+      "port_ao": 3.8883,
+      "maxdd": -0.036,
+      "wf": 3.0593,
+      "both_up": false
+    },
+    {
+      "label": "+GDX+DBA+EZU",
+      "extras": [
+        "GDX",
+        "DBA",
+        "EZU"
+      ],
+      "h026_is": 2.6847,
+      "h026_oos": 2.6564,
+      "h026_ao": 2.905,
+      "port_oos": 4.0024,
+      "port_ao": 3.8912,
+      "maxdd": -0.036,
+      "wf": 3.0593,
+      "both_up": false
+    }
+  ],
+  "confirmed": true,
+  "base_oos": 3.9413,
+  "base_ao": 3.9248
+}

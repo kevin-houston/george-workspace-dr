@@ -1,0 +1,659 @@
+{
+  "hypothesis": "H069",
+  "baseline": {
+    "is": 2.0527,
+    "oos": 2.3788,
+    "wf_worst": 2.4007
+  },
+  "xlk_top10": [
+    {
+      "ticker": "XLK",
+      "buy": 0.15,
+      "sell": 0.9,
+      "hold": 7,
+      "gap": -0.01,
+      "is_sharpe": 0.9033,
+      "oos_sharpe": 2.2072,
+      "oos_maxdd": -0.0559,
+      "deg": 144.35
+    },
+    {
+      "ticker": "XLK",
+      "buy": 0.25,
+      "sell": 0.8,
+      "hold": 7,
+      "gap": -0.005,
+      "is_sharpe": 0.7908,
+      "oos_sharpe": 2.1951,
+      "oos_maxdd": -0.0631,
+      "deg": 177.58
+    },
+    {
+      "ticker": "XLK",
+      "buy": 0.25,
+      "sell": 0.8,
+      "hold": 6,
+      "gap": -0.005,
+      "is_sharpe": 0.8287,
+      "oos_sharpe": 2.1395,
+      "oos_maxdd": -0.0719,
+      "deg": 158.18
+    },
+    {
+      "ticker": "XLK",
+      "buy": 0.25,
+      "sell": 0.75,
+      "hold": 7,
+      "gap": -0.005,
+      "is_sharpe": 0.8059,
+      "oos_sharpe": 2.0603,
+      "oos_maxdd": -0.0631,
+      "deg": 155.65
+    },
+    {
+      "ticker": "XLK",
+      "buy": 0.25,
+      "sell": 0.75,
+      "hold": 6,
+      "gap": -0.005,
+      "is_sharpe": 0.8988,
+      "oos_sharpe": 2.0562,
+      "oos_maxdd": -0.0719,
+      "deg": 128.77
+    },
+    {
+      "ticker": "XLK",
+      "buy": 0.25,
+      "sell": 0.9,
+      "hold": 7,
+      "gap": -0.005,
+      "is_sharpe": 0.7312,
+      "oos_sharpe": 2.0542,
+      "oos_maxdd": -0.1125,
+      "deg": 180.94
+    },
+    {
+      "ticker": "XLK",
+      "buy": 0.25,
+      "sell": 0.9,
+      "hold": 6,
+      "gap": -0.005,
+      "is_sharpe": 0.8614,
+      "oos_sharpe": 2.0302,
+      "oos_maxdd": -0.0965,
+      "deg": 135.69
+    },
+    {
+      "ticker": "XLK",
+      "buy": 0.15,
+      "sell": 0.9,
+      "hold": 6,
+      "gap": -0.01,
+      "is_sharpe": 0.6276,
+      "oos_sharpe": 2.0166,
+      "oos_maxdd": -0.0996,
+      "deg": 221.32
+    },
+    {
+      "ticker": "XLK",
+      "buy": 0.15,
+      "sell": 0.8,
+      "hold": 7,
+      "gap": -0.01,
+      "is_sharpe": 0.9184,
+      "oos_sharpe": 2.01,
+      "oos_maxdd": -0.0723,
+      "deg": 118.86
+    },
+    {
+      "ticker": "XLK",
+      "buy": 0.25,
+      "sell": 0.7,
+      "hold": 6,
+      "gap": -0.005,
+      "is_sharpe": 0.7667,
+      "oos_sharpe": 2.0066,
+      "oos_maxdd": -0.0676,
+      "deg": 161.72
+    }
+  ],
+  "smh_top10": [
+    {
+      "ticker": "SMH",
+      "buy": 0.2,
+      "sell": 0.75,
+      "hold": 4,
+      "gap": -0.005,
+      "is_sharpe": 0.2793,
+      "oos_sharpe": 1.6486,
+      "oos_maxdd": -0.1103,
+      "deg": 490.26
+    },
+    {
+      "ticker": "SMH",
+      "buy": 0.3,
+      "sell": 0.8,
+      "hold": 7,
+      "gap": -0.005,
+      "is_sharpe": 1.0061,
+      "oos_sharpe": 1.6224,
+      "oos_maxdd": -0.1759,
+      "deg": 61.26
+    },
+    {
+      "ticker": "SMH",
+      "buy": 0.25,
+      "sell": 0.75,
+      "hold": 4,
+      "gap": -0.005,
+      "is_sharpe": 0.3595,
+      "oos_sharpe": 1.6036,
+      "oos_maxdd": -0.1933,
+      "deg": 346.06
+    },
+    {
+      "ticker": "SMH",
+      "buy": 0.3,
+      "sell": 0.8,
+      "hold": 6,
+      "gap": -0.005,
+      "is_sharpe": 0.9794,
+      "oos_sharpe": 1.6026,
+      "oos_maxdd": -0.1667,
+      "deg": 63.63
+    },
+    {
+      "ticker": "SMH",
+      "buy": 0.2,
+      "sell": 0.75,
+      "hold": 6,
+      "gap": -0.005,
+      "is_sharpe": 0.4226,
+      "oos_sharpe": 1.5864,
+      "oos_maxdd": -0.1182,
+      "deg": 275.39
+    },
+    {
+      "ticker": "SMH",
+      "buy": 0.25,
+      "sell": 0.8,
+      "hold": 6,
+      "gap": -0.005,
+      "is_sharpe": 0.9208,
+      "oos_sharpe": 1.5825,
+      "oos_maxdd": -0.1493,
+      "deg": 71.86
+    },
+    {
+      "ticker": "SMH",
+      "buy": 0.2,
+      "sell": 0.75,
+      "hold": 7,
+      "gap": -0.005,
+      "is_sharpe": 0.538,
+      "oos_sharpe": 1.5819,
+      "oos_maxdd": -0.1179,
+      "deg": 194.03
+    },
+    {
+      "ticker": "SMH",
+      "buy": 0.3,
+      "sell": 0.75,
+      "hold": 4,
+      "gap": -0.005,
+      "is_sharpe": 0.3795,
+      "oos_sharpe": 1.5711,
+      "oos_maxdd": -0.2042,
+      "deg": 313.99
+    },
+    {
+      "ticker": "SMH",
+      "buy": 0.2,
+      "sell": 0.8,
+      "hold": 7,
+      "gap": -0.005,
+      "is_sharpe": 0.794,
+      "oos_sharpe": 1.5628,
+      "oos_maxdd": -0.1179,
+      "deg": 96.83
+    },
+    {
+      "ticker": "SMH",
+      "buy": 0.2,
+      "sell": 0.8,
+      "hold": 6,
+      "gap": -0.005,
+      "is_sharpe": 0.7355,
+      "oos_sharpe": 1.5481,
+      "oos_maxdd": -0.1182,
+      "deg": 110.48
+    }
+  ],
+  "portfolio_combos": [
+    {
+      "xlk_params": {
+        "buy": 0.15,
+        "sell": 0.9,
+        "hold": 7,
+        "gap": -0.01
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.1694,
+      "oos_sharpe": 2.5132,
+      "wf_worst": 2.1441
+    },
+    {
+      "xlk_params": {
+        "buy": 0.15,
+        "sell": 0.9,
+        "hold": 7,
+        "gap": -0.01
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.3171,
+      "oos_sharpe": 2.4783,
+      "wf_worst": 2.505
+    },
+    {
+      "xlk_params": {
+        "buy": 0.15,
+        "sell": 0.9,
+        "hold": 7,
+        "gap": -0.01
+      },
+      "smh_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.1437,
+      "oos_sharpe": 2.4873,
+      "wf_worst": 2.1869
+    },
+    {
+      "xlk_params": {
+        "buy": 0.15,
+        "sell": 0.9,
+        "hold": 7,
+        "gap": -0.01
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.325,
+      "oos_sharpe": 2.483,
+      "wf_worst": 2.474
+    },
+    {
+      "xlk_params": {
+        "buy": 0.15,
+        "sell": 0.9,
+        "hold": 7,
+        "gap": -0.01
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.2126,
+      "oos_sharpe": 2.5495,
+      "wf_worst": 2.3743
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 1.9293,
+      "oos_sharpe": 2.5661,
+      "wf_worst": 1.4799
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.0349,
+      "oos_sharpe": 2.5329,
+      "wf_worst": 1.5485
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 1.9161,
+      "oos_sharpe": 2.5449,
+      "wf_worst": 1.4934
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.0413,
+      "oos_sharpe": 2.5271,
+      "wf_worst": 1.5796
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 1.9553,
+      "oos_sharpe": 2.5676,
+      "wf_worst": 1.5049
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 1.9652,
+      "oos_sharpe": 2.5495,
+      "wf_worst": 1.5082
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.0699,
+      "oos_sharpe": 2.5203,
+      "wf_worst": 1.5737
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 1.9511,
+      "oos_sharpe": 2.5242,
+      "wf_worst": 1.5211
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.0771,
+      "oos_sharpe": 2.5036,
+      "wf_worst": 1.6062
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 1.9862,
+      "oos_sharpe": 2.5423,
+      "wf_worst": 1.5306
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.0373,
+      "oos_sharpe": 2.4991,
+      "wf_worst": 1.4563
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.1425,
+      "oos_sharpe": 2.4715,
+      "wf_worst": 1.5364
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.0225,
+      "oos_sharpe": 2.477,
+      "wf_worst": 1.4696
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.1716,
+      "oos_sharpe": 2.4652,
+      "wf_worst": 1.5663
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.0892,
+      "oos_sharpe": 2.4947,
+      "wf_worst": 1.4919
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.1396,
+      "oos_sharpe": 2.5148,
+      "wf_worst": 1.4848
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 7,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.2425,
+      "oos_sharpe": 2.4882,
+      "wf_worst": 1.5621
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 4,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.1252,
+      "oos_sharpe": 2.4929,
+      "wf_worst": 1.4976
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.3,
+        "sell": 0.8,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.2725,
+      "oos_sharpe": 2.4731,
+      "wf_worst": 1.5933
+    },
+    {
+      "xlk_params": {
+        "buy": 0.25,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "smh_params": {
+        "buy": 0.2,
+        "sell": 0.75,
+        "hold": 6,
+        "gap": -0.005
+      },
+      "is_sharpe": 2.1936,
+      "oos_sharpe": 2.5022,
+      "wf_worst": 1.5181
+    }
+  ]
+}

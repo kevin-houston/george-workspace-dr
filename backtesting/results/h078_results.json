@@ -1,0 +1,267 @@
+{
+  "scorecard": {
+    "H076 baseline": {
+      "is": 2.2599,
+      "oos": 2.6951,
+      "alt_is": 2.079,
+      "alt_oos": 2.7057,
+      "oos_cagr": 0.1502,
+      "oos_dd": -0.0391,
+      "wf_worst": 2.3788,
+      "wf_ok": true,
+      "wf_folds": [
+        3.8974,
+        2.3788,
+        2.5636,
+        5.0411,
+        3.3495
+      ]
+    },
+    "H078 (BIL+)": {
+      "is": 2.4131,
+      "oos": 2.8094,
+      "alt_is": 2.2443,
+      "alt_oos": 2.7844,
+      "oos_cagr": 0.1461,
+      "oos_dd": -0.03,
+      "wf_worst": 2.2569,
+      "wf_ok": true,
+      "wf_folds": [
+        3.9055,
+        2.2569,
+        2.4958,
+        5.013,
+        3.29
+      ]
+    }
+  },
+  "calendar": [
+    {
+      "year": 2004,
+      "baseline": 0.0939,
+      "bil_plus": 0.0939
+    },
+    {
+      "year": 2005,
+      "baseline": 0.0635,
+      "bil_plus": 0.0635
+    },
+    {
+      "year": 2006,
+      "baseline": 0.1205,
+      "bil_plus": 0.1205
+    },
+    {
+      "year": 2007,
+      "baseline": 0.1293,
+      "bil_plus": 0.1293
+    },
+    {
+      "year": 2008,
+      "baseline": 0.0495,
+      "bil_plus": 0.049
+    },
+    {
+      "year": 2009,
+      "baseline": 0.1162,
+      "bil_plus": 0.1407
+    },
+    {
+      "year": 2010,
+      "baseline": 0.122,
+      "bil_plus": 0.1208
+    },
+    {
+      "year": 2011,
+      "baseline": 0.0777,
+      "bil_plus": 0.0777
+    },
+    {
+      "year": 2012,
+      "baseline": 0.1466,
+      "bil_plus": 0.1421
+    },
+    {
+      "year": 2013,
+      "baseline": 0.1289,
+      "bil_plus": 0.124
+    },
+    {
+      "year": 2014,
+      "baseline": 0.082,
+      "bil_plus": 0.077
+    },
+    {
+      "year": 2015,
+      "baseline": 0.0584,
+      "bil_plus": 0.0597
+    },
+    {
+      "year": 2016,
+      "baseline": 0.0981,
+      "bil_plus": 0.0913
+    },
+    {
+      "year": 2017,
+      "baseline": 0.1298,
+      "bil_plus": 0.1257
+    },
+    {
+      "year": 2018,
+      "baseline": 0.1116,
+      "bil_plus": 0.0958
+    },
+    {
+      "year": 2019,
+      "baseline": 0.2297,
+      "bil_plus": 0.2217
+    },
+    {
+      "year": 2020,
+      "baseline": 0.2677,
+      "bil_plus": 0.2677
+    },
+    {
+      "year": 2021,
+      "baseline": 0.1142,
+      "bil_plus": 0.096
+    },
+    {
+      "year": 2022,
+      "baseline": 0.0593,
+      "bil_plus": 0.0642
+    },
+    {
+      "year": 2023,
+      "baseline": 0.2047,
+      "bil_plus": 0.1897
+    },
+    {
+      "year": 2024,
+      "baseline": 0.1508,
+      "bil_plus": 0.155
+    },
+    {
+      "year": 2025,
+      "baseline": 0.1009,
+      "bil_plus": 0.1083
+    }
+  ],
+  "bil_selection_by_year": [
+    {
+      "year": 2004,
+      "bil_slots": 0,
+      "total_slots": 12
+    },
+    {
+      "year": 2005,
+      "bil_slots": 0,
+      "total_slots": 12
+    },
+    {
+      "year": 2006,
+      "bil_slots": 0,
+      "total_slots": 12
+    },
+    {
+      "year": 2007,
+      "bil_slots": 0,
+      "total_slots": 12
+    },
+    {
+      "year": 2008,
+      "bil_slots": 3,
+      "total_slots": 12
+    },
+    {
+      "year": 2009,
+      "bil_slots": 6,
+      "total_slots": 12
+    },
+    {
+      "year": 2010,
+      "bil_slots": 2,
+      "total_slots": 12
+    },
+    {
+      "year": 2011,
+      "bil_slots": 0,
+      "total_slots": 12
+    },
+    {
+      "year": 2012,
+      "bil_slots": 1,
+      "total_slots": 12
+    },
+    {
+      "year": 2013,
+      "bil_slots": 5,
+      "total_slots": 12
+    },
+    {
+      "year": 2014,
+      "bil_slots": 4,
+      "total_slots": 12
+    },
+    {
+      "year": 2015,
+      "bil_slots": 2,
+      "total_slots": 12
+    },
+    {
+      "year": 2016,
+      "bil_slots": 2,
+      "total_slots": 12
+    },
+    {
+      "year": 2017,
+      "bil_slots": 4,
+      "total_slots": 12
+    },
+    {
+      "year": 2018,
+      "bil_slots": 10,
+      "total_slots": 12
+    },
+    {
+      "year": 2019,
+      "bil_slots": 4,
+      "total_slots": 12
+    },
+    {
+      "year": 2020,
+      "bil_slots": 0,
+      "total_slots": 12
+    },
+    {
+      "year": 2021,
+      "bil_slots": 7,
+      "total_slots": 12
+    },
+    {
+      "year": 2022,
+      "bil_slots": 12,
+      "total_slots": 12
+    },
+    {
+      "year": 2023,
+      "bil_slots": 9,
+      "total_slots": 12
+    },
+    {
+      "year": 2024,
+      "bil_slots": 6,
+      "total_slots": 12
+    },
+    {
+      "year": 2025,
+      "bil_slots": 3,
+      "total_slots": 12
+    },
+    {
+      "year": 2026,
+      "bil_slots": 2,
+      "total_slots": 4
+    }
+  ]
+}

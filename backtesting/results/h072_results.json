@@ -1,0 +1,313 @@
+{
+  "hypothesis": "H072",
+  "h045_standalone": {
+    "Base-7 top-2": {
+      "is": {
+        "cagr": 0.0554,
+        "sharpe": 1.6074,
+        "max_drawdown": -0.025,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.0459,
+        "sharpe": 1.292,
+        "max_drawdown": -0.0669,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.0405,
+        "sharpe": 1.2309,
+        "max_drawdown": -0.0669,
+        "n_months": 160
+      }
+    },
+    "Base+BKLN top-2": {
+      "is": {
+        "cagr": 0.0616,
+        "sharpe": 1.9263,
+        "max_drawdown": -0.025,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.0488,
+        "sharpe": 1.5945,
+        "max_drawdown": -0.0498,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.0451,
+        "sharpe": 1.6116,
+        "max_drawdown": -0.0498,
+        "n_months": 160
+      }
+    },
+    "Base+EMB top-2": {
+      "is": {
+        "cagr": 0.0591,
+        "sharpe": 1.7121,
+        "max_drawdown": -0.025,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.0491,
+        "sharpe": 1.3307,
+        "max_drawdown": -0.0669,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.0437,
+        "sharpe": 1.2813,
+        "max_drawdown": -0.0669,
+        "n_months": 160
+      }
+    },
+    "Base+BKLN+EMB top-2": {
+      "is": {
+        "cagr": 0.0635,
+        "sharpe": 1.9604,
+        "max_drawdown": -0.025,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.0511,
+        "sharpe": 1.6312,
+        "max_drawdown": -0.0498,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.0465,
+        "sharpe": 1.6039,
+        "max_drawdown": -0.0498,
+        "n_months": 160
+      }
+    },
+    "Base-7 top-3": {
+      "is": {
+        "cagr": 0.0489,
+        "sharpe": 1.357,
+        "max_drawdown": -0.0337,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.0376,
+        "sharpe": 1.0062,
+        "max_drawdown": -0.0973,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.0351,
+        "sharpe": 1.044,
+        "max_drawdown": -0.0973,
+        "n_months": 160
+      }
+    },
+    "Base+BKLN top-3": {
+      "is": {
+        "cagr": 0.0502,
+        "sharpe": 1.4492,
+        "max_drawdown": -0.0337,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.0459,
+        "sharpe": 1.4362,
+        "max_drawdown": -0.0688,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.0408,
+        "sharpe": 1.4048,
+        "max_drawdown": -0.0688,
+        "n_months": 160
+      }
+    }
+  },
+  "portfolios": {
+    "H070 (base-7 top-2)": {
+      "is": {
+        "cagr": 0.0983,
+        "sharpe": 2.2126,
+        "max_drawdown": -0.057,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.1477,
+        "sharpe": 2.5495,
+        "max_drawdown": -0.0471,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.1293,
+        "sharpe": 2.5763,
+        "max_drawdown": -0.0471,
+        "n_months": 160
+      },
+      "wf": {
+        "avg": 3.3207,
+        "worst": 2.3743,
+        "folds": [
+          3.6023,
+          2.3743,
+          2.5282,
+          4.551,
+          3.5479
+        ]
+      }
+    },
+    "BKLN added (8 top-2)": {
+      "is": {
+        "cagr": 0.101,
+        "sharpe": 2.2825,
+        "max_drawdown": -0.057,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.1491,
+        "sharpe": 2.6532,
+        "max_drawdown": -0.0408,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.1314,
+        "sharpe": 2.6963,
+        "max_drawdown": -0.0408,
+        "n_months": 160
+      },
+      "wf": {
+        "avg": 3.544,
+        "worst": 2.3521,
+        "folds": [
+          4.0116,
+          2.3521,
+          2.5488,
+          5.3257,
+          3.4817
+        ]
+      }
+    },
+    "EMB added  (8 top-2)": {
+      "is": {
+        "cagr": 0.0999,
+        "sharpe": 2.2251,
+        "max_drawdown": -0.057,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.1492,
+        "sharpe": 2.5735,
+        "max_drawdown": -0.0471,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.1308,
+        "sharpe": 2.6034,
+        "max_drawdown": -0.0471,
+        "n_months": 160
+      },
+      "wf": {
+        "avg": 3.348,
+        "worst": 2.4381,
+        "folds": [
+          3.664,
+          2.4381,
+          2.5794,
+          4.5649,
+          3.4935
+        ]
+      }
+    },
+    "BKLN+EMB   (9 top-2)": {
+      "is": {
+        "cagr": 0.1018,
+        "sharpe": 2.2829,
+        "max_drawdown": -0.057,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.1501,
+        "sharpe": 2.6657,
+        "max_drawdown": -0.0408,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.1321,
+        "sharpe": 2.7054,
+        "max_drawdown": -0.0408,
+        "n_months": 160
+      },
+      "wf": {
+        "avg": 3.5253,
+        "worst": 2.3939,
+        "folds": [
+          3.9561,
+          2.3939,
+          2.6027,
+          5.2319,
+          3.4421
+        ]
+      }
+    },
+    "Base top-3": {
+      "is": {
+        "cagr": 0.0953,
+        "sharpe": 2.0613,
+        "max_drawdown": -0.0617,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.1438,
+        "sharpe": 2.4583,
+        "max_drawdown": -0.055,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.1267,
+        "sharpe": 2.4971,
+        "max_drawdown": -0.055,
+        "n_months": 160
+      },
+      "wf": {
+        "avg": 3.2606,
+        "worst": 2.3948,
+        "folds": [
+          3.4121,
+          2.4957,
+          2.3948,
+          4.2632,
+          3.737
+        ]
+      }
+    },
+    "BKLN top-3": {
+      "is": {
+        "cagr": 0.0959,
+        "sharpe": 2.0812,
+        "max_drawdown": -0.0617,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.1477,
+        "sharpe": 2.5682,
+        "max_drawdown": -0.046,
+        "n_months": 100
+      },
+      "alt_oos": {
+        "cagr": 0.1293,
+        "sharpe": 2.5914,
+        "max_drawdown": -0.046,
+        "n_months": 160
+      },
+      "wf": {
+        "avg": 3.3745,
+        "worst": 2.3151,
+        "folds": [
+          3.6265,
+          2.3151,
+          2.3743,
+          4.9675,
+          3.5891
+        ]
+      }
+    }
+  }
+}

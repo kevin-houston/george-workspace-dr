@@ -1,0 +1,160 @@
+{
+  "hypothesis": "H061",
+  "description": "H026 marginal value + alternate IS/OOS cross-validation",
+  "correlations": {
+    "h041a": {
+      "h041a": 1.0,
+      "h026": 0.4761,
+      "h054b": 0.0099,
+      "h045": 0.4729
+    },
+    "h026": {
+      "h041a": 0.4761,
+      "h026": 1.0,
+      "h054b": 0.3777,
+      "h045": 0.1248
+    },
+    "h054b": {
+      "h041a": 0.0099,
+      "h026": 0.3777,
+      "h054b": 1.0,
+      "h045": -0.0964
+    },
+    "h045": {
+      "h041a": 0.4729,
+      "h026": 0.1248,
+      "h054b": -0.0964,
+      "h045": 1.0
+    }
+  },
+  "primary_split": {
+    "H060 (4-way, H026 kept)": {
+      "full": {
+        "label": "H060 (4-way, H026 kept)",
+        "cagr": 0.1051,
+        "sharpe": 2.0713,
+        "max_drawdown": -0.0456,
+        "calmar": 2.3059,
+        "ann_vol": 0.0507,
+        "n_months": 220
+      },
+      "is": {
+        "label": "H060 (4-way, H026 kept) IS",
+        "cagr": 0.0987,
+        "sharpe": 2.0145,
+        "max_drawdown": -0.0456,
+        "calmar": 2.1659,
+        "ann_vol": 0.049,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "H060 (4-way, H026 kept) OOS",
+        "cagr": 0.1128,
+        "sharpe": 2.1315,
+        "max_drawdown": -0.0283,
+        "calmar": 3.9826,
+        "ann_vol": 0.0529,
+        "n_months": 100
+      },
+      "deg": 5.81
+    },
+    "3-component (H026 removed)": {
+      "full": {
+        "label": "3-component (H026 removed)",
+        "cagr": 0.1042,
+        "sharpe": 2.0817,
+        "max_drawdown": -0.0419,
+        "calmar": 2.4873,
+        "ann_vol": 0.05,
+        "n_months": 220
+      },
+      "is": {
+        "label": "3-component (H026 removed) IS",
+        "cagr": 0.0986,
+        "sharpe": 2.0341,
+        "max_drawdown": -0.0419,
+        "calmar": 2.3539,
+        "ann_vol": 0.0485,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "3-component (H026 removed) OOS",
+        "cagr": 0.1109,
+        "sharpe": 2.1307,
+        "max_drawdown": -0.0295,
+        "calmar": 3.7557,
+        "ann_vol": 0.0521,
+        "n_months": 100
+      },
+      "deg": 4.75
+    }
+  },
+  "alternate_split": {
+    "H060 (4-way, H026 kept)": {
+      "full": {
+        "label": "H060 (4-way, H026 kept)",
+        "cagr": 0.1051,
+        "sharpe": 2.1596,
+        "max_drawdown": -0.0456,
+        "calmar": 2.3058,
+        "ann_vol": 0.0487,
+        "n_months": 273
+      },
+      "is": {
+        "label": "H060 (4-way, H026 kept) IS alt",
+        "cagr": 0.1052,
+        "sharpe": 2.0191,
+        "max_drawdown": -0.0456,
+        "calmar": 2.3085,
+        "ann_vol": 0.0521,
+        "n_months": 113
+      },
+      "oos": {
+        "label": "H060 (4-way, H026 kept) OOS alt",
+        "cagr": 0.105,
+        "sharpe": 2.2709,
+        "max_drawdown": -0.0283,
+        "calmar": 3.7073,
+        "ann_vol": 0.0462,
+        "n_months": 160
+      },
+      "deg": 12.47
+    },
+    "3-component (H026 removed)": {
+      "full": {
+        "label": "3-component (H026 removed)",
+        "cagr": 0.1042,
+        "sharpe": 2.1538,
+        "max_drawdown": -0.0419,
+        "calmar": 2.4887,
+        "ann_vol": 0.0484,
+        "n_months": 273
+      },
+      "is": {
+        "label": "3-component (H026 removed) IS alt",
+        "cagr": 0.1061,
+        "sharpe": 2.0269,
+        "max_drawdown": -0.0419,
+        "calmar": 2.5321,
+        "ann_vol": 0.0523,
+        "n_months": 113
+      },
+      "oos": {
+        "label": "3-component (H026 removed) OOS alt",
+        "cagr": 0.103,
+        "sharpe": 2.2586,
+        "max_drawdown": -0.0295,
+        "calmar": 3.486,
+        "ann_vol": 0.0456,
+        "n_months": 160
+      },
+      "deg": 11.43
+    }
+  },
+  "h026_marginal_oos": 0.0008,
+  "alt_oos_sharpe_h060": 2.2709,
+  "verdict": {
+    "h026_keep": true,
+    "alt_robust": true
+  }
+}

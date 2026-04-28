@@ -1,0 +1,752 @@
+{
+  "hypothesis": "H059",
+  "description": "WF-consistent Pareto frontier for moderate H054b/H045 allocations",
+  "wf_worst_threshold": 1.75,
+  "candidates": [
+    {
+      "w54b": 0.224,
+      "w45": 0.2,
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h054b": 0.224,
+        "h045": 0.2
+      },
+      "is_sharpe": 1.9986,
+      "is_cagr": 0.1208,
+      "oos_sharpe": 1.9829,
+      "oos_maxdd": -0.0427,
+      "oos_cagr": 0.1323,
+      "deg": -0.79,
+      "wf_avg": 2.9239,
+      "wf_std": 0.8225,
+      "wf_worst": 2.1668,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.5336,
+          "oos_sharpe": 3.2686,
+          "oos_maxdd": -0.0153,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.7904,
+          "oos_sharpe": 2.1668,
+          "oos_maxdd": -0.0114,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.8256,
+          "oos_sharpe": 2.1983,
+          "oos_maxdd": -0.0189,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.8537,
+          "oos_sharpe": 4.1409,
+          "oos_maxdd": -0.0082,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 1.9986,
+          "oos_sharpe": 2.8448,
+          "oos_maxdd": -0.02,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": true
+    },
+    {
+      "w54b": 0.24,
+      "w45": 0.25,
+      "weights": {
+        "h041a": 0.3967,
+        "h026": 0.1133,
+        "h054b": 0.24,
+        "h045": 0.25
+      },
+      "is_sharpe": 2.0212,
+      "is_cagr": 0.1149,
+      "oos_sharpe": 2.0255,
+      "oos_maxdd": -0.0388,
+      "oos_cagr": 0.1272,
+      "deg": 0.21,
+      "wf_avg": 2.9196,
+      "wf_std": 0.814,
+      "wf_worst": 2.0927,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.5861,
+          "oos_sharpe": 3.3191,
+          "oos_maxdd": -0.0131,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.8307,
+          "oos_sharpe": 2.0927,
+          "oos_maxdd": -0.0113,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.8459,
+          "oos_sharpe": 2.2841,
+          "oos_maxdd": -0.018,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.8829,
+          "oos_sharpe": 4.0986,
+          "oos_maxdd": -0.0075,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 2.0212,
+          "oos_sharpe": 2.8037,
+          "oos_maxdd": -0.0195,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": true
+    },
+    {
+      "w54b": 0.24,
+      "w45": 0.3,
+      "weights": {
+        "h041a": 0.3578,
+        "h026": 0.1022,
+        "h054b": 0.24,
+        "h045": 0.3
+      },
+      "is_sharpe": 2.0479,
+      "is_cagr": 0.1099,
+      "oos_sharpe": 2.0519,
+      "oos_maxdd": -0.0368,
+      "oos_cagr": 0.1219,
+      "deg": 0.2,
+      "wf_avg": 2.921,
+      "wf_std": 0.7922,
+      "wf_worst": 2.0828,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.6373,
+          "oos_sharpe": 3.3361,
+          "oos_maxdd": -0.0116,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.8692,
+          "oos_sharpe": 2.0828,
+          "oos_maxdd": -0.0109,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.8746,
+          "oos_sharpe": 2.3404,
+          "oos_maxdd": -0.017,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.9161,
+          "oos_sharpe": 4.0533,
+          "oos_maxdd": -0.0072,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 2.0479,
+          "oos_sharpe": 2.7925,
+          "oos_maxdd": -0.0187,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": true
+    },
+    {
+      "w54b": 0.28,
+      "w45": 0.25,
+      "weights": {
+        "h041a": 0.3656,
+        "h026": 0.1044,
+        "h054b": 0.28,
+        "h045": 0.25
+      },
+      "is_sharpe": 1.9847,
+      "is_cagr": 0.1126,
+      "oos_sharpe": 2.0605,
+      "oos_maxdd": -0.0342,
+      "oos_cagr": 0.1277,
+      "deg": 3.82,
+      "wf_avg": 2.8734,
+      "wf_std": 0.859,
+      "wf_worst": 1.8811,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.5768,
+          "oos_sharpe": 3.3876,
+          "oos_maxdd": -0.0112,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.8168,
+          "oos_sharpe": 1.8811,
+          "oos_maxdd": -0.0129,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.8009,
+          "oos_sharpe": 2.3377,
+          "oos_maxdd": -0.0183,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.8501,
+          "oos_sharpe": 4.0518,
+          "oos_maxdd": -0.0069,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 1.9847,
+          "oos_sharpe": 2.7089,
+          "oos_maxdd": -0.0204,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": true
+    },
+    {
+      "w54b": 0.28,
+      "w45": 0.275,
+      "weights": {
+        "h041a": 0.3461,
+        "h026": 0.0989,
+        "h054b": 0.28,
+        "h045": 0.275
+      },
+      "is_sharpe": 1.9932,
+      "is_cagr": 0.1102,
+      "oos_sharpe": 2.0732,
+      "oos_maxdd": -0.0331,
+      "oos_cagr": 0.1251,
+      "deg": 4.01,
+      "wf_avg": 2.8698,
+      "wf_std": 0.8515,
+      "wf_worst": 1.8671,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.5986,
+          "oos_sharpe": 3.3946,
+          "oos_maxdd": -0.0105,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.8318,
+          "oos_sharpe": 1.8671,
+          "oos_maxdd": -0.0126,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.8104,
+          "oos_sharpe": 2.3626,
+          "oos_maxdd": -0.0178,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.8621,
+          "oos_sharpe": 4.0245,
+          "oos_maxdd": -0.0068,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 1.9932,
+          "oos_sharpe": 2.7,
+          "oos_maxdd": -0.02,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": true
+    },
+    {
+      "w54b": 0.28,
+      "w45": 0.3,
+      "weights": {
+        "h041a": 0.3267,
+        "h026": 0.0933,
+        "h054b": 0.28,
+        "h045": 0.3
+      },
+      "is_sharpe": 2.0006,
+      "is_cagr": 0.1077,
+      "oos_sharpe": 2.0859,
+      "oos_maxdd": -0.032,
+      "oos_cagr": 0.1224,
+      "deg": 4.26,
+      "wf_avg": 2.8642,
+      "wf_std": 0.8435,
+      "wf_worst": 1.8502,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.6203,
+          "oos_sharpe": 3.3995,
+          "oos_maxdd": -0.01,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.8463,
+          "oos_sharpe": 1.8502,
+          "oos_maxdd": -0.0123,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.819,
+          "oos_sharpe": 2.3879,
+          "oos_maxdd": -0.0173,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.8732,
+          "oos_sharpe": 3.993,
+          "oos_maxdd": -0.0068,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 2.0006,
+          "oos_sharpe": 2.6902,
+          "oos_maxdd": -0.0195,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": true
+    },
+    {
+      "w54b": 0.28,
+      "w45": 0.35,
+      "weights": {
+        "h041a": 0.2878,
+        "h026": 0.0822,
+        "h054b": 0.28,
+        "h045": 0.35
+      },
+      "is_sharpe": 2.0112,
+      "is_cagr": 0.1027,
+      "oos_sharpe": 2.1114,
+      "oos_maxdd": -0.03,
+      "oos_cagr": 0.1171,
+      "deg": 4.98,
+      "wf_avg": 2.8455,
+      "wf_std": 0.8266,
+      "wf_worst": 1.8055,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.6629,
+          "oos_sharpe": 3.4004,
+          "oos_maxdd": -0.009,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.8724,
+          "oos_sharpe": 1.8055,
+          "oos_maxdd": -0.0116,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.8323,
+          "oos_sharpe": 2.4389,
+          "oos_maxdd": -0.0163,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.8921,
+          "oos_sharpe": 3.916,
+          "oos_maxdd": -0.0066,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 2.0112,
+          "oos_sharpe": 2.6666,
+          "oos_maxdd": -0.0187,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": true
+    },
+    {
+      "w54b": 0.32,
+      "w45": 0.25,
+      "weights": {
+        "h041a": 0.3344,
+        "h026": 0.0956,
+        "h054b": 0.32,
+        "h045": 0.25
+      },
+      "is_sharpe": 1.9271,
+      "is_cagr": 0.1104,
+      "oos_sharpe": 2.082,
+      "oos_maxdd": -0.0364,
+      "oos_cagr": 0.1283,
+      "deg": 8.04,
+      "wf_avg": 2.8044,
+      "wf_std": 0.9193,
+      "wf_worst": 1.641,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.5514,
+          "oos_sharpe": 3.4391,
+          "oos_maxdd": -0.0117,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.7843,
+          "oos_sharpe": 1.641,
+          "oos_maxdd": -0.0144,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.7375,
+          "oos_sharpe": 2.3547,
+          "oos_maxdd": -0.0186,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.7974,
+          "oos_sharpe": 3.9805,
+          "oos_maxdd": -0.0074,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 1.9271,
+          "oos_sharpe": 2.6069,
+          "oos_maxdd": -0.0213,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": false
+    },
+    {
+      "w54b": 0.32,
+      "w45": 0.3,
+      "weights": {
+        "h041a": 0.2956,
+        "h026": 0.0844,
+        "h054b": 0.32,
+        "h045": 0.3
+      },
+      "is_sharpe": 1.9307,
+      "is_cagr": 0.1054,
+      "oos_sharpe": 2.1044,
+      "oos_maxdd": -0.033,
+      "oos_cagr": 0.1229,
+      "deg": 9.0,
+      "wf_avg": 2.7812,
+      "wf_std": 0.9108,
+      "wf_worst": 1.5848,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.5858,
+          "oos_sharpe": 3.4398,
+          "oos_maxdd": -0.0107,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.8032,
+          "oos_sharpe": 1.5848,
+          "oos_maxdd": -0.0138,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.7436,
+          "oos_sharpe": 2.3952,
+          "oos_maxdd": -0.0176,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.8087,
+          "oos_sharpe": 3.9053,
+          "oos_maxdd": -0.0073,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 1.9307,
+          "oos_sharpe": 2.5808,
+          "oos_maxdd": -0.0204,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": false
+    },
+    {
+      "w54b": 0.32,
+      "w45": 0.35,
+      "weights": {
+        "h041a": 0.2567,
+        "h026": 0.0733,
+        "h054b": 0.32,
+        "h045": 0.35
+      },
+      "is_sharpe": 1.9269,
+      "is_cagr": 0.1004,
+      "oos_sharpe": 2.1258,
+      "oos_maxdd": -0.0318,
+      "oos_cagr": 0.1176,
+      "deg": 10.32,
+      "wf_avg": 2.7451,
+      "wf_std": 0.9013,
+      "wf_worst": 1.5107,
+      "wf_rows": [
+        {
+          "fold": 1,
+          "is_sharpe": 1.6175,
+          "oos_sharpe": 3.4227,
+          "oos_maxdd": -0.0097,
+          "test_start": "2012-09-30",
+          "test_end": "2013-12-31"
+        },
+        {
+          "fold": 2,
+          "is_sharpe": 1.8167,
+          "oos_sharpe": 1.5107,
+          "oos_maxdd": -0.0132,
+          "test_start": "2014-01-31",
+          "test_end": "2015-04-30"
+        },
+        {
+          "fold": 3,
+          "is_sharpe": 1.7429,
+          "oos_sharpe": 2.4343,
+          "oos_maxdd": -0.0166,
+          "test_start": "2015-05-31",
+          "test_end": "2016-08-31"
+        },
+        {
+          "fold": 4,
+          "is_sharpe": 1.8139,
+          "oos_sharpe": 3.8089,
+          "oos_maxdd": -0.0072,
+          "test_start": "2016-09-30",
+          "test_end": "2017-12-31"
+        },
+        {
+          "fold": 5,
+          "is_sharpe": 1.9269,
+          "oos_sharpe": 2.5491,
+          "oos_maxdd": -0.0196,
+          "test_start": "2018-01-31",
+          "test_end": "2019-04-30"
+        }
+      ],
+      "passes_wf": false
+    }
+  ],
+  "best_passing": {
+    "w54b": 0.28,
+    "w45": 0.35,
+    "weights": {
+      "h041a": 0.2878,
+      "h026": 0.0822,
+      "h054b": 0.28,
+      "h045": 0.35
+    },
+    "is_sharpe": 2.0112,
+    "is_cagr": 0.1027,
+    "oos_sharpe": 2.1114,
+    "oos_maxdd": -0.03,
+    "oos_cagr": 0.1171,
+    "deg": 4.98,
+    "wf_avg": 2.8455,
+    "wf_std": 0.8266,
+    "wf_worst": 1.8055,
+    "wf_rows": [
+      {
+        "fold": 1,
+        "is_sharpe": 1.6629,
+        "oos_sharpe": 3.4004,
+        "oos_maxdd": -0.009,
+        "test_start": "2012-09-30",
+        "test_end": "2013-12-31"
+      },
+      {
+        "fold": 2,
+        "is_sharpe": 1.8724,
+        "oos_sharpe": 1.8055,
+        "oos_maxdd": -0.0116,
+        "test_start": "2014-01-31",
+        "test_end": "2015-04-30"
+      },
+      {
+        "fold": 3,
+        "is_sharpe": 1.8323,
+        "oos_sharpe": 2.4389,
+        "oos_maxdd": -0.0163,
+        "test_start": "2015-05-31",
+        "test_end": "2016-08-31"
+      },
+      {
+        "fold": 4,
+        "is_sharpe": 1.8921,
+        "oos_sharpe": 3.916,
+        "oos_maxdd": -0.0066,
+        "test_start": "2016-09-30",
+        "test_end": "2017-12-31"
+      },
+      {
+        "fold": 5,
+        "is_sharpe": 2.0112,
+        "oos_sharpe": 2.6666,
+        "oos_maxdd": -0.0187,
+        "test_start": "2018-01-31",
+        "test_end": "2019-04-30"
+      }
+    ],
+    "passes_wf": true
+  },
+  "h057_reference": {
+    "w54b": 0.224,
+    "w45": 0.2,
+    "weights": {
+      "h041a": 0.448,
+      "h026": 0.128,
+      "h054b": 0.224,
+      "h045": 0.2
+    },
+    "is_sharpe": 1.9986,
+    "is_cagr": 0.1208,
+    "oos_sharpe": 1.9829,
+    "oos_maxdd": -0.0427,
+    "oos_cagr": 0.1323,
+    "deg": -0.79,
+    "wf_avg": 2.9239,
+    "wf_std": 0.8225,
+    "wf_worst": 2.1668,
+    "wf_rows": [
+      {
+        "fold": 1,
+        "is_sharpe": 1.5336,
+        "oos_sharpe": 3.2686,
+        "oos_maxdd": -0.0153,
+        "test_start": "2012-09-30",
+        "test_end": "2013-12-31"
+      },
+      {
+        "fold": 2,
+        "is_sharpe": 1.7904,
+        "oos_sharpe": 2.1668,
+        "oos_maxdd": -0.0114,
+        "test_start": "2014-01-31",
+        "test_end": "2015-04-30"
+      },
+      {
+        "fold": 3,
+        "is_sharpe": 1.8256,
+        "oos_sharpe": 2.1983,
+        "oos_maxdd": -0.0189,
+        "test_start": "2015-05-31",
+        "test_end": "2016-08-31"
+      },
+      {
+        "fold": 4,
+        "is_sharpe": 1.8537,
+        "oos_sharpe": 4.1409,
+        "oos_maxdd": -0.0082,
+        "test_start": "2016-09-30",
+        "test_end": "2017-12-31"
+      },
+      {
+        "fold": 5,
+        "is_sharpe": 1.9986,
+        "oos_sharpe": 2.8448,
+        "oos_maxdd": -0.02,
+        "test_start": "2018-01-31",
+        "test_end": "2019-04-30"
+      }
+    ],
+    "passes_wf": true
+  },
+  "verdict": "CONFIRMED"
+}

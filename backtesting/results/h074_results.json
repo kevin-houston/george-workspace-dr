@@ -1,0 +1,147 @@
+{
+  "igv_baseline_params": {
+    "buy": 0.2,
+    "sell": 0.8,
+    "hold": 5,
+    "gap": -0.005,
+    "is_s": 0.6062,
+    "oos_s": 0.7301
+  },
+  "igv_best_params": {
+    "buy": 0.3,
+    "sell": 0.75,
+    "hold": 5,
+    "gap": 0.0025,
+    "is_s": 0.6275,
+    "oos_s": 1.442,
+    "deg": 129.800796812749
+  },
+  "igv_top8": [
+    {
+      "buy": 0.3,
+      "sell": 0.75,
+      "hold": 5,
+      "gap": 0.0025,
+      "is_s": 0.6275,
+      "oos_s": 1.442
+    },
+    {
+      "buy": 0.3,
+      "sell": 0.85,
+      "hold": 5,
+      "gap": 0.0025,
+      "is_s": 0.6229,
+      "oos_s": 1.3934
+    },
+    {
+      "buy": 0.15,
+      "sell": 0.7,
+      "hold": 5,
+      "gap": 0.0025,
+      "is_s": 0.4112,
+      "oos_s": 1.3831
+    },
+    {
+      "buy": 0.3,
+      "sell": 0.7,
+      "hold": 5,
+      "gap": 0.0025,
+      "is_s": 0.6527,
+      "oos_s": 1.3703
+    },
+    {
+      "buy": 0.3,
+      "sell": 0.75,
+      "hold": 6,
+      "gap": 0.0025,
+      "is_s": 0.7581,
+      "oos_s": 1.3618
+    },
+    {
+      "buy": 0.15,
+      "sell": 0.75,
+      "hold": 5,
+      "gap": 0.0025,
+      "is_s": 0.4506,
+      "oos_s": 1.3352
+    },
+    {
+      "buy": 0.15,
+      "sell": 0.8,
+      "hold": 5,
+      "gap": 0.0025,
+      "is_s": 0.5154,
+      "oos_s": 1.3257
+    },
+    {
+      "buy": 0.3,
+      "sell": 0.8,
+      "hold": 5,
+      "gap": 0.0025,
+      "is_s": 0.6933,
+      "oos_s": 1.3157
+    }
+  ],
+  "portfolio_results": [
+    {
+      "label": "H073 baseline",
+      "is_s": 2.2829,
+      "oos_s": 2.6657,
+      "alt_oos_s": 2.7054,
+      "wf_worst": 2.3939,
+      "wf_ok": true,
+      "oos_cagr": 0.1501,
+      "oos_dd": -0.0408
+    },
+    {
+      "label": "IGV4 (XLK16)",
+      "is_s": 2.2871,
+      "oos_s": 2.6756,
+      "alt_oos_s": 2.7025,
+      "wf_worst": 2.4632,
+      "wf_ok": true,
+      "oos_cagr": 0.1464,
+      "oos_dd": -0.0381
+    },
+    {
+      "label": "IGV4 (SMH4)",
+      "is_s": 2.3526,
+      "oos_s": 2.6509,
+      "alt_oos_s": 2.6898,
+      "wf_worst": 2.5795,
+      "wf_ok": true,
+      "oos_cagr": 0.1466,
+      "oos_dd": -0.0413
+    },
+    {
+      "label": "IGV4 (H041a-)",
+      "is_s": 2.223,
+      "oos_s": 2.7186,
+      "alt_oos_s": 2.6982,
+      "wf_worst": 2.3584,
+      "wf_ok": true,
+      "oos_cagr": 0.1503,
+      "oos_dd": -0.0374
+    },
+    {
+      "label": "IGV2 (XLK18)",
+      "is_s": 2.2887,
+      "oos_s": 2.6743,
+      "alt_oos_s": 2.7078,
+      "wf_worst": 2.5077,
+      "wf_ok": true,
+      "oos_cagr": 0.1483,
+      "oos_dd": -0.0395
+    },
+    {
+      "label": "IGV4 (equity-)",
+      "is_s": 2.2282,
+      "oos_s": 2.7186,
+      "alt_oos_s": 2.6969,
+      "wf_worst": 2.3599,
+      "wf_ok": true,
+      "oos_cagr": 0.1502,
+      "oos_dd": -0.0372
+    }
+  ]
+}

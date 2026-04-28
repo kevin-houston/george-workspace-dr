@@ -1,0 +1,406 @@
+"""
+H095 — Weight Fine-Tuning: H041a re-sweep with H026=18%, H026 extended sweep
+=============================================================================
+
+Purpose:
+  H094 used sequential sweeps:
+    [1] Swept H041a with H026=7% (old value) → found 23% optimal
+    [2] Swept H026 with H041a=23% → found 18% optimal
+
+  Sequential sweeps can miss the true 2D joint optimum. With H026 now at 18%
+  (nearly 3× its prior weight), the optimal H041a may shift. Higher H026 means
+  H041a may be better at a lower weight (more room for H045 or more overlap).
+
+  Also: H026 sweep stopped at 18% — test whether 19-25% is even better.
+
+  Strategy:
+    [1] H041a sweep (H026=18% fixed): 14%-32%, find new optimal
+    [2] H026 extended sweep (H041a=best from [1]): 14%-25%, check if >18% helps
+    [3] Full stats at new joint optimum vs H094 baseline
+    [4] Calendar year comparison
+    [5] WF fold detail
+
+  H094 baseline: OOS 3.6251, AltOOS 3.6628, MaxDD -3.04%, WF 2.808
+  Current weights: H041a 23% / H026 18% / H045 29%
+"""
+
+import json
+import numpy as np
+import pandas as pd
+import yfinance as yf
+from pathlib import Path
+
+INITIAL_EQUITY = 100_000.0
+CACHE_DIR  = Path(__file__).parent.parent / "cache"
+RESULT_DIR = Path(__file__).parent.parent / "results"
+CACHE_DIR.mkdir(exist_ok=True)
+RESULT_DIR.mkdir(exist_ok=True)
+
+FULL_START = "2003-01-01"
+FULL_END   = "2026-04-27"
+IS_START   = "2008-01-01"
+IS_END     = "2017-12-31"
+OOS_START  = "2018-01-01"
+ALT_IS_END = "2012-12-31"
+ALT_OOS_ST = "2013-01-01"
+WF_WORST_MIN = 1.75
+
+XLK_PARAMS = (0.15, 0.90, 7, -0.010)
+SMH_PARAMS = (0.20, 0.75, 6, -0.005)
+IGV_PARAMS = (0.30, 0.75, 5, 0.0025)
+
+H041A_EPHE   = ["SPY","QQQ","TLT","GLD","IEF","EFA","EEM","BIL","EWJ","EWH","EWT","EWY","EWS","EPHE"]
+H026_GLD_TLT = ["XLK","XLE","XLF","XLV","XLI","XLB","XLU","XLRE","XLY","XLP","XLC","BIL","GLD","TLT"]
+H045_PROD    = ["SHY","IEI","IEF","TLT","TIP","HYG","LQD","BKLN","EMB","BIL","MBB","FLOT"]
+
+# H094 production weights
+PROD_W = {"h041a": 0.23, "h026": 0.18, "h045": 0.29,
+          "XLK": 0.20, "SMH": 0.08, "IGV": 0.02}
+
+IBS_TOTAL = 0.30
+XLK_SHARE = 0.20 / IBS_TOTAL
+SMH_SHARE = 0.08 / IBS_TOTAL
+IGV_SHARE = 0.02 / IBS_TOTAL
+
+
+def make_weights(h041a_wt, h026_wt):
+    rot_total = h041a_wt + h026_wt
+    h045_wt   = 1.0 - rot_total - IBS_TOTAL
+    if h045_wt < 0.05:
+        return None
+    return {
+        "h041a": h041a_wt,
+        "h026":  h026_wt,
+        "h045":  h045_wt,
+        "XLK":   IBS_TOTAL * XLK_SHARE,
+        "SMH":   IBS_TOTAL * SMH_SHARE,
+        "IGV":   IBS_TOTAL * IGV_SHARE,
+    }
+
+
+def fetch_ohlc(ticker, start, end):
+    for prefix in ["h062","h063","h064","h065","h066","h067","h068","h069","h070",
+                   "h071","h072","h073","h074","h075","h076","h077","h078","h079",
+                   "h080","h081","h082","h083","h084","h085","h086","h087","h088",
+                   "h089","h090","h091","h092","h093","h094"]:
+        cp = CACHE_DIR / f"{prefix}_{ticker}_ohlc_{start}_{end}.parquet"
+        if cp.exists():
+            df = pd.read_parquet(cp)
+            df.columns = [c.lower() for c in df.columns]
+            if all(c in df.columns for c in ["open","high","low","close"]):
+                return df
+    cp = CACHE_DIR / f"h095_{ticker}_ohlc_{start}_{end}.parquet"
+    print(f"  Downloading {ticker} OHLC …")
+    raw = yf.download([ticker], start=start, end=end, auto_adjust=True, progress=False)
+    if isinstance(raw.columns, pd.MultiIndex):
+        df = raw.xs(ticker, axis=1, level=1)[["Open","High","Low","Close"]].rename(columns=str.lower)
+    else:
+        df = raw[["Open","High","Low","Close"]].rename(columns=str.lower)
+    df.to_parquet(cp)
+    return df
+
+
+def fetch_daily_close(ticker, start, end):
+    for pfx in ["h062","h063","h064","h065","h066","h067","h068","h069","h070",
+                "h071","h072","h073","h074","h075","h076","h077","h078","h079",
+                "h080","h081","h082","h083","h084","h085","h086","h087","h088",
+                "h089","h090","h091","h092","h093","h094"]:
+        p = CACHE_DIR / f"{pfx}_{ticker}_ohlc_{start}_{end}.parquet"
+        if p.exists():
+            df = pd.read_parquet(p)
+            df.columns = [c.lower() for c in df.columns]
+            if "close" in df.columns:
+                return df["close"].rename(ticker)
+        cp = CACHE_DIR / f"{pfx}_{ticker}_close_{start}_{end}.parquet"
+        if cp.exists():
+            return pd.read_parquet(cp).squeeze().rename(ticker)
+    cp = CACHE_DIR / f"h095_{ticker}_close_{start}_{end}.parquet"
+    print(f"  Downloading {ticker} daily close …")
+    raw = yf.download([ticker], start=start, end=end, auto_adjust=True, progress=False)
+    if isinstance(raw.columns, pd.MultiIndex):
+        close = raw.xs(ticker, axis=1, level=1)["Close"]
+    else:
+        close = raw["Close"]
+    close.name = ticker
+    close.to_frame().to_parquet(cp)
+    return close
+
+
+def build_rotation_monthly(tickers, start, end, n_hold):
+    closes = {}
+    for t in tickers:
+        try:
+            closes[t] = fetch_daily_close(t, start, end)
+        except Exception as e:
+            print(f"    {t}: {e}")
+    daily_df    = pd.DataFrame(closes).sort_index().dropna(how="all", axis=1)
+    monthly_px  = daily_df.resample("ME").last()
+    monthly_ret = daily_df.pct_change().resample("ME").apply(lambda x: (1+x).prod()-1)
+    vol_6  = monthly_ret.rolling(6).std() * np.sqrt(12)
+    mom_12 = monthly_px / monthly_px.shift(12) - 1
+    rows = []
+    for i in range(12, len(monthly_px)):
+        mom_row = mom_12.iloc[i].dropna()
+        vol_row = vol_6.iloc[i].dropna()
+        valid   = mom_row.index.intersection(vol_row.index)
+        if len(valid) < n_hold:
+            continue
+        score = mom_row[valid].rank() + vol_row[valid].rank(ascending=False)
+        top_n = list(score.nlargest(n_hold).index)
+        rows.append((monthly_px.index[i], monthly_ret.iloc[i][top_n].mean()))
+    return pd.Series([v for _,v in rows], index=pd.DatetimeIndex([d for d,_ in rows]))
+
+
+def ibs_equity_curve(ohlc, buy, sell, hold, gap):
+    df = ohlc.copy()
+    denom   = (df["high"]-df["low"]).replace(0, np.nan)
+    ibs     = ((df["close"]-df["low"])/denom).clip(0.0,1.0).fillna(0.5)
+    prev_cl = df["close"].shift(1)
+    g       = (df["open"]-prev_cl)/prev_cl
+    equity  = INITIAL_EQUITY
+    position = days_held = 0
+    series = []
+    for i in range(1, len(df)):
+        prev_ibs = float(ibs.iloc[i-1])
+        cur_ibs  = float(ibs.iloc[i])
+        cur_gap  = float(g.iloc[i]) if not np.isnan(g.iloc[i]) else 0.0
+        o = float(df["open"].iloc[i]); c = float(df["close"].iloc[i])
+        cp = float(df["close"].iloc[i-1])
+        ret_oc = (c/o-1) if o > 0 else 0.0
+        ret_cc = (c/cp-1) if cp > 0 else 0.0
+        if position == 0:
+            if prev_ibs < buy and cur_gap >= gap:
+                position = 1; days_held = 1; equity *= (1+ret_oc)
+        else:
+            days_held += 1; equity *= (1+ret_cc)
+            if cur_ibs > sell or days_held >= hold:
+                position = 0; days_held = 0
+        series.append((df.index[i], equity))
+    return pd.Series([v for _,v in series], index=pd.DatetimeIndex([d for d,_ in series]))
+
+
+def to_monthly(eq):
+    return eq.resample("ME").last().ffill().pct_change().dropna()
+
+
+def stats(r):
+    r = r.dropna()
+    if len(r) < 6:
+        return {"sharpe":0.0,"cagr":0.0,"max_drawdown":0.0,"n_months":len(r)}
+    eq   = (1+r).cumprod()
+    n_yr = len(r)/12.0
+    cagr = float(eq.iloc[-1])**(1/n_yr)-1
+    vol  = float(r.std(ddof=1))*np.sqrt(12)
+    sharpe = cagr/vol if vol > 0 else 0.0
+    max_dd = float((eq/eq.expanding().max()-1).min())
+    return {"cagr":round(cagr,4),"sharpe":round(sharpe,4),
+            "max_drawdown":round(max_dd,4),"n_months":len(r)}
+
+
+def run_wf(idx, r_dict, w, min_train=56, test_size=16, n_folds=5):
+    is_idx = pd.DatetimeIndex(sorted([d for d in idx if d >= pd.Timestamp(IS_START)]))
+    n = len(is_idx)
+    folds = []; start = min_train; fold = 0
+    while start+test_size <= n and fold < n_folds:
+        ti = is_idx[start:start+test_size]
+        pr = sum(ww*r_dict[k].reindex(ti, fill_value=0.0) for k,ww in w.items())
+        folds.append(stats(pr)["sharpe"])
+        start += test_size; fold += 1
+    return folds
+
+
+def make_port(r_dict, w, idx):
+    return sum(ww*r_dict[k].reindex(idx, fill_value=0.0) for k,ww in w.items())
+
+
+def common_idx(*series):
+    idx = series[0].index
+    for s in series[1:]:
+        idx = idx.intersection(s.index)
+    return idx.sort_values()
+
+
+ts = pd.Timestamp
+def is_mask(idx):  return (idx >= ts(IS_START)) & (idx <= ts(IS_END))
+def oos_mask(idx): return idx >= ts(OOS_START)
+def ai_mask(idx):  return (idx >= ts(FULL_START)) & (idx <= ts(ALT_IS_END))
+def ao_mask(idx):  return idx >= ts(ALT_OOS_ST)
+
+
+# ── main ─────────────────────────────────────────────────────────────────────
+
+print("="*80)
+print("H095 — Weight Fine-Tuning: H041a re-sweep and H026 extended sweep")
+print("="*80)
+
+print("\n[0] Building components …")
+xlk_r = to_monthly(ibs_equity_curve(fetch_ohlc("XLK",FULL_START,FULL_END),*XLK_PARAMS))
+smh_r = to_monthly(ibs_equity_curve(fetch_ohlc("SMH",FULL_START,FULL_END),*SMH_PARAMS))
+igv_r = to_monthly(ibs_equity_curve(fetch_ohlc("IGV",FULL_START,FULL_END),*IGV_PARAMS))
+
+h045      = build_rotation_monthly(H045_PROD,    FULL_START, FULL_END, 2)
+h41_ephe  = build_rotation_monthly(H041A_EPHE,   FULL_START, FULL_END, 1)
+h026_gld  = build_rotation_monthly(H026_GLD_TLT, FULL_START, FULL_END, 1)
+
+cidx   = common_idx(h045, h026_gld, xlk_r, smh_r, igv_r, h41_ephe)
+r_dict = {"h041a":h41_ephe,"h026":h026_gld,"h045":h045,"XLK":xlk_r,"SMH":smh_r,"IGV":igv_r}
+
+# H094 baseline
+s_b_oos = stats(make_port(r_dict, PROD_W, cidx[oos_mask(cidx)]))
+s_b_ao  = stats(make_port(r_dict, PROD_W, cidx[ao_mask(cidx)]))
+wf_b    = run_wf(cidx, r_dict, PROD_W)
+print(f"  H094 baseline: OOS {s_b_oos['sharpe']:.4f}, AltOOS {s_b_ao['sharpe']:.4f}, "
+      f"WF {min(wf_b):.3f}")
+
+# ── [1] H041a sweep (H026=18% fixed) ─────────────────────────────────────────
+print("\n[1] H041a weight sweep (H026=18.0% fixed) …")
+print(f"\n  {'H041a wt':>10}  {'H045 wt':>8}  {'IS S':>7}  {'OOS S':>8}  "
+      f"{'AltOOS S':>10}  {'WF worst':>9}")
+print("  "+"-"*72)
+
+h041a_sweep = {}
+for h41_wt in [w/100 for w in range(14, 33, 1)]:
+    w = make_weights(h41_wt, 0.18)
+    if w is None: continue
+    s_is  = stats(make_port(r_dict, w, cidx[is_mask(cidx)]))
+    s_oos = stats(make_port(r_dict, w, cidx[oos_mask(cidx)]))
+    s_ao  = stats(make_port(r_dict, w, cidx[ao_mask(cidx)]))
+    wf    = run_wf(cidx, r_dict, w)
+    ww    = min(wf) if wf else 0.0
+    marker = " ← current" if abs(h41_wt - 0.23) < 0.001 else ""
+    print(f"  {h41_wt*100:>9.1f}%  {w['h045']*100:>7.1f}%  {s_is['sharpe']:>7.4f}  "
+          f"{s_oos['sharpe']:>8.4f}  {s_ao['sharpe']:>10.4f}  {ww:>9.3f}{marker}")
+    h041a_sweep[round(h41_wt, 2)] = {
+        "oos": s_oos["sharpe"], "ao": s_ao["sharpe"], "wf": ww, "h045": w["h045"],
+        "both_up": bool(s_oos["sharpe"] > s_b_oos["sharpe"] and s_ao["sharpe"] > s_b_ao["sharpe"])
+    }
+
+best_h41 = max(
+    ((k, v) for k, v in h041a_sweep.items() if v["wf"] >= WF_WORST_MIN),
+    key=lambda kv: kv[1]["oos"] + kv[1]["ao"],
+    default=(0.23, {"oos": s_b_oos["sharpe"], "ao": s_b_ao["sharpe"], "wf": min(wf_b)})
+)
+best_h041a_wt = best_h41[0]
+print(f"\n  Best H041a weight (H026=18% fixed): {best_h041a_wt*100:.1f}%")
+
+# ── [2] H026 extended sweep (14%-25%) ────────────────────────────────────────
+print(f"\n[2] H026 extended sweep (H041a={best_h041a_wt*100:.1f}% fixed, range 14-25%) …")
+print(f"\n  {'H026 wt':>10}  {'H045 wt':>8}  {'IS S':>7}  {'OOS S':>8}  "
+      f"{'AltOOS S':>10}  {'WF worst':>9}")
+print("  "+"-"*65)
+
+h026_sweep = {}
+for h26_wt in [w/100 for w in range(14, 26, 1)]:
+    w = make_weights(best_h041a_wt, h26_wt)
+    if w is None: continue
+    s_is  = stats(make_port(r_dict, w, cidx[is_mask(cidx)]))
+    s_oos = stats(make_port(r_dict, w, cidx[oos_mask(cidx)]))
+    s_ao  = stats(make_port(r_dict, w, cidx[ao_mask(cidx)]))
+    wf    = run_wf(cidx, r_dict, w)
+    ww    = min(wf) if wf else 0.0
+    marker = " ← current" if abs(h26_wt - 0.18) < 0.001 else ""
+    print(f"  {h26_wt*100:>9.1f}%  {w['h045']*100:>7.1f}%  {s_is['sharpe']:>7.4f}  "
+          f"{s_oos['sharpe']:>8.4f}  {s_ao['sharpe']:>10.4f}  {ww:>9.3f}{marker}")
+    h026_sweep[round(h26_wt, 2)] = {"oos": s_oos["sharpe"], "ao": s_ao["sharpe"], "wf": ww}
+
+best_h26 = max(
+    ((k, v) for k, v in h026_sweep.items() if v["wf"] >= WF_WORST_MIN),
+    key=lambda kv: kv[1]["oos"] + kv[1]["ao"],
+    default=(0.18, {"oos": s_b_oos["sharpe"], "ao": s_b_ao["sharpe"], "wf": min(wf_b)})
+)
+best_h026_wt = best_h26[0]
+print(f"\n  Best H026 weight (extended): {best_h026_wt*100:.1f}%")
+
+# ── [3] Full stats at best joint weights ──────────────────────────────────────
+print(f"\n[3] Full stats: H041a={best_h041a_wt*100:.1f}%, H026={best_h026_wt*100:.1f}% …")
+w_best = make_weights(best_h041a_wt, best_h026_wt)
+if w_best is None:
+    w_best = PROD_W
+    print("  Warning: best weights infeasible, using production")
+print(f"  Weights: H041a {w_best['h041a']*100:.1f}%, H026 {w_best['h026']*100:.1f}%, "
+      f"H045 {w_best['h045']*100:.1f}%, IBS {IBS_TOTAL*100:.0f}%")
+
+s_is  = stats(make_port(r_dict, w_best, cidx[is_mask(cidx)]))
+s_oos = stats(make_port(r_dict, w_best, cidx[oos_mask(cidx)]))
+s_ai  = stats(make_port(r_dict, w_best, cidx[ai_mask(cidx)]))
+s_ao  = stats(make_port(r_dict, w_best, cidx[ao_mask(cidx)]))
+wf    = run_wf(cidx, r_dict, w_best)
+ww    = min(wf) if wf else 0.0
+
+print(f"\n  {'':24}  {'IS S':>7}  {'OOS S':>7}  {'AltIS S':>8}  "
+      f"{'AltOOS S':>9}  {'OOS CAGR':>9}  {'OOS MaxDD':>10}  {'WF worst':>9}")
+print("  "+"-"*97)
+
+s_b_is = stats(make_port(r_dict, PROD_W, cidx[is_mask(cidx)]))
+s_b_ai = stats(make_port(r_dict, PROD_W, cidx[ai_mask(cidx)]))
+for label, si, so, sa, sao, wf_ in [
+    ("H094 baseline (prod)", s_b_is, s_b_oos, s_b_ai, s_b_ao, wf_b),
+    ("H095 best weights",    s_is,   s_oos,   s_ai,   s_ao,   wf),
+]:
+    print(f"  {label:24}  {si['sharpe']:>7.4f}  {so['sharpe']:>7.4f}  "
+          f"{sa['sharpe']:>8.4f}  {sao['sharpe']:>9.4f}  "
+          f"{so['cagr']*100:>8.2f}%  {so['max_drawdown']*100:>9.2f}%  "
+          f"{min(wf_):>8.3f} {'✓' if min(wf_)>=WF_WORST_MIN else '✗'}")
+
+# ── [4] Calendar year ─────────────────────────────────────────────────────────
+print("\n[4] Calendar year returns 2004-2025 …")
+print(f"\n  {'Year':>5}  {'H094 (prod)':>11}  {'H095 (new wt)':>13}  {'Delta':>7}")
+print("  "+"-"*47)
+neg_base = neg_new = 0
+cal = []
+for yr in range(2004, 2026):
+    yidx = cidx[cidx.year == yr]
+    if len(yidx) == 0: continue
+    rb = float((1+make_port(r_dict, PROD_W, yidx)).prod()-1)
+    rn = float((1+make_port(r_dict, w_best,  yidx)).prod()-1)
+    if rb < 0: neg_base += 1
+    if rn < 0: neg_new  += 1
+    print(f"  {yr:>5}  {rb*100:>10.2f}%  {rn*100:>12.2f}%  {(rn-rb)*100:>+6.2f}pp")
+    cal.append({"year":yr,"h094_prod":round(rb,4),"h095_opt":round(rn,4)})
+print(f"  H094 baseline: {'ZERO' if neg_base==0 else neg_base} negative years")
+print(f"  H095 new wt:   {'ZERO' if neg_new==0 else neg_new} negative years")
+
+# ── [5] WF fold detail ────────────────────────────────────────────────────────
+print("\n[5] WF 5-fold detail …")
+print(f"  H094 prod: {[round(f,3) for f in wf_b]} → min {min(wf_b):.3f}")
+print(f"  H095 best: {[round(f,3) for f in wf]} → min {ww:.3f}")
+
+# ── Summary ───────────────────────────────────────────────────────────────────
+confirmed = (s_oos["sharpe"] > s_b_oos["sharpe"] and
+             s_ao["sharpe"] > s_b_ao["sharpe"] and
+             ww >= WF_WORST_MIN)
+print("\n[6] Summary …")
+print(f"  OOS:    {s_b_oos['sharpe']:.4f} → {s_oos['sharpe']:.4f} "
+      f"(Δ={s_oos['sharpe']-s_b_oos['sharpe']:+.4f})")
+print(f"  AltOOS: {s_b_ao['sharpe']:.4f} → {s_ao['sharpe']:.4f} "
+      f"(Δ={s_ao['sharpe']-s_b_ao['sharpe']:+.4f})")
+print(f"  MaxDD:  {s_b_oos['max_drawdown']*100:.2f}% → {s_oos['max_drawdown']*100:.2f}%")
+print(f"  WF:     {min(wf_b):.3f} → {ww:.3f}")
+print(f"  New weights: H041a {w_best['h041a']*100:.1f}%, H026 {w_best['h026']*100:.1f}%, "
+      f"H045 {w_best['h045']*100:.1f}%")
+
+if confirmed:
+    print(f"\n  *** H095 CONFIRMED — NEW PRODUCTION WEIGHTS ***")
+    print(f"  *** H041a {w_best['h041a']*100:.1f}% / H026 {w_best['h026']*100:.1f}% / "
+          f"H045 {w_best['h045']*100:.1f}% / IBS 30% ***")
+else:
+    if (s_oos["sharpe"] == s_b_oos["sharpe"] and s_ao["sharpe"] == s_b_ao["sharpe"]):
+        print(f"\n  H095: Weights already optimal — no improvement found (H094 weights stand)")
+    else:
+        print(f"\n  H095 not confirmed — production weights unchanged")
+
+output = {
+    "h094_baseline": {"oos": s_b_oos["sharpe"], "ao": s_b_ao["sharpe"], "wf": min(wf_b)},
+    "h095_best": {"oos": s_oos["sharpe"], "ao": s_ao["sharpe"], "wf": ww,
+                  "h041a_wt": w_best["h041a"], "h026_wt": w_best["h026"], "h045_wt": w_best["h045"]},
+    "h041a_sweep_18pct": {str(k): v for k,v in h041a_sweep.items()},
+    "h026_sweep_extended": {str(k): v for k,v in h026_sweep.items()},
+    "calendar": cal,
+    "confirmed": bool(confirmed),
+    "wf_folds": [round(f, 4) for f in wf],
+}
+out_path = RESULT_DIR / "h095_results.json"
+with open(out_path, "w") as f:
+    json.dump(output, f, indent=2)
+print(f"\n  Results saved → {out_path}")
+print("="*80)

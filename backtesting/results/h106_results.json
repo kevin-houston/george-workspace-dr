@@ -1,0 +1,40 @@
+{
+  "candidates": [
+    {
+      "label": "top-1 (base)",
+      "h026_is": 2.4776,
+      "h026_oos": 2.5898,
+      "h026_ao": 2.9194,
+      "port_oos": 3.9413,
+      "port_ao": 3.9248,
+      "maxdd": -0.0315,
+      "wf": 3.0447,
+      "both_up": true
+    },
+    {
+      "label": "top-2",
+      "h026_is": 2.4892,
+      "h026_oos": 2.9443,
+      "h026_ao": 3.01,
+      "port_oos": 3.802,
+      "port_ao": 3.7,
+      "maxdd": -0.0266,
+      "wf": 2.7322,
+      "both_up": false
+    },
+    {
+      "label": "top-3",
+      "h026_is": 2.8607,
+      "h026_oos": 2.9991,
+      "h026_ao": 3.1692,
+      "port_oos": 3.7941,
+      "port_ao": 3.7046,
+      "maxdd": -0.0308,
+      "wf": 2.8403,
+      "both_up": false
+    }
+  ],
+  "confirmed": false,
+  "base_oos": 3.9413,
+  "base_ao": 3.9248
+}

@@ -1,0 +1,344 @@
+{
+  "sweep": {
+    "+IEF": {
+      "extra": [
+        "IEF"
+      ],
+      "universe_size": 15,
+      "h026_is": 2.4345,
+      "h026_oos": 2.288,
+      "h026_ao": 2.6804,
+      "port_oos": 3.7464,
+      "port_ao": 3.7243,
+      "maxdd": -0.0304,
+      "cagr": 0.2047,
+      "wf_worst": 2.9288,
+      "wf_folds": [
+        4.654,
+        3.12,
+        2.994,
+        5.997,
+        2.929
+      ],
+      "both_up": false
+    },
+    "+TIP": {
+      "extra": [
+        "TIP"
+      ],
+      "universe_size": 15,
+      "h026_is": 2.4206,
+      "h026_oos": 2.3091,
+      "h026_ao": 2.6866,
+      "port_oos": 3.7328,
+      "port_ao": 3.711,
+      "maxdd": -0.0304,
+      "cagr": 0.2045,
+      "wf_worst": 2.9288,
+      "wf_folds": [
+        4.654,
+        3.12,
+        2.962,
+        5.997,
+        2.929
+      ],
+      "both_up": false
+    },
+    "+AGG": {
+      "extra": [
+        "AGG"
+      ],
+      "universe_size": 15,
+      "h026_is": 2.5252,
+      "h026_oos": 2.3726,
+      "h026_ao": 2.7321,
+      "port_oos": 3.7588,
+      "port_ao": 3.7282,
+      "maxdd": -0.0304,
+      "cagr": 0.2054,
+      "wf_worst": 2.9288,
+      "wf_folds": [
+        4.654,
+        3.12,
+        2.962,
+        5.997,
+        2.929
+      ],
+      "both_up": true
+    },
+    "+SLV": {
+      "extra": [
+        "SLV"
+      ],
+      "universe_size": 15,
+      "h026_is": 2.3052,
+      "h026_oos": 2.3554,
+      "h026_ao": 2.709,
+      "port_oos": 3.753,
+      "port_ao": 3.7215,
+      "maxdd": -0.0304,
+      "cagr": 0.208,
+      "wf_worst": 2.8074,
+      "wf_folds": [
+        4.654,
+        3.12,
+        2.968,
+        5.997,
+        2.807
+      ],
+      "both_up": false
+    },
+    "+MDY": {
+      "extra": [
+        "MDY"
+      ],
+      "universe_size": 15,
+      "h026_is": 2.3852,
+      "h026_oos": 2.2645,
+      "h026_ao": 2.6666,
+      "port_oos": 3.727,
+      "port_ao": 3.714,
+      "maxdd": -0.0304,
+      "cagr": 0.2063,
+      "wf_worst": 2.8646,
+      "wf_folds": [
+        4.652,
+        3.125,
+        3.069,
+        5.997,
+        2.865
+      ],
+      "both_up": false
+    },
+    "+IEF+TIP": {
+      "extra": [
+        "IEF",
+        "TIP"
+      ],
+      "universe_size": 16,
+      "h026_is": 2.5118,
+      "h026_oos": 2.4039,
+      "h026_ao": 2.7972,
+      "port_oos": 3.7943,
+      "port_ao": 3.7699,
+      "maxdd": -0.0304,
+      "cagr": 0.2052,
+      "wf_worst": 2.9288,
+      "wf_folds": [
+        4.654,
+        3.12,
+        3.003,
+        6.378,
+        2.929
+      ],
+      "both_up": true
+    },
+    "+IEF+SLV": {
+      "extra": [
+        "IEF",
+        "SLV"
+      ],
+      "universe_size": 16,
+      "h026_is": 2.3991,
+      "h026_oos": 2.2936,
+      "h026_ao": 2.6787,
+      "port_oos": 3.7428,
+      "port_ao": 3.7207,
+      "maxdd": -0.0304,
+      "cagr": 0.2056,
+      "wf_worst": 2.9288,
+      "wf_folds": [
+        4.654,
+        3.12,
+        2.978,
+        5.997,
+        2.929
+      ],
+      "both_up": false
+    },
+    "+TIP+SLV": {
+      "extra": [
+        "TIP",
+        "SLV"
+      ],
+      "universe_size": 16,
+      "h026_is": 2.4206,
+      "h026_oos": 2.3687,
+      "h026_ao": 2.7213,
+      "port_oos": 3.735,
+      "port_ao": 3.709,
+      "maxdd": -0.0304,
+      "cagr": 0.2067,
+      "wf_worst": 2.9288,
+      "wf_folds": [
+        4.654,
+        3.12,
+        2.947,
+        5.997,
+        2.929
+      ],
+      "both_up": false
+    },
+    "+IEF+TIP+SLV": {
+      "extra": [
+        "IEF",
+        "TIP",
+        "SLV"
+      ],
+      "universe_size": 17,
+      "h026_is": 2.468,
+      "h026_oos": 2.3503,
+      "h026_ao": 2.7585,
+      "port_oos": 3.7837,
+      "port_ao": 3.7655,
+      "maxdd": -0.0304,
+      "cagr": 0.2043,
+      "wf_worst": 2.9288,
+      "wf_folds": [
+        4.654,
+        3.12,
+        2.987,
+        6.378,
+        2.929
+      ],
+      "both_up": true
+    },
+    "+MDY+IEF": {
+      "extra": [
+        "MDY",
+        "IEF"
+      ],
+      "universe_size": 16,
+      "h026_is": 2.4428,
+      "h026_oos": 2.1873,
+      "h026_ao": 2.6397,
+      "port_oos": 3.7259,
+      "port_ao": 3.726,
+      "maxdd": -0.0304,
+      "cagr": 0.2027,
+      "wf_worst": 2.9875,
+      "wf_folds": [
+        4.652,
+        3.125,
+        3.112,
+        5.997,
+        2.988
+      ],
+      "both_up": false
+    }
+  },
+  "winner": "+IEF+TIP",
+  "confirmed": true,
+  "calendar": [
+    {
+      "year": 2004,
+      "baseline": 0.1468,
+      "h102": 0.1326
+    },
+    {
+      "year": 2005,
+      "baseline": 0.1058,
+      "h102": 0.0953
+    },
+    {
+      "year": 2006,
+      "baseline": 0.1727,
+      "h102": 0.1754
+    },
+    {
+      "year": 2007,
+      "baseline": 0.2153,
+      "h102": 0.2158
+    },
+    {
+      "year": 2008,
+      "baseline": 0.0902,
+      "h102": 0.0911
+    },
+    {
+      "year": 2009,
+      "baseline": 0.1828,
+      "h102": 0.1645
+    },
+    {
+      "year": 2010,
+      "baseline": 0.1694,
+      "h102": 0.1754
+    },
+    {
+      "year": 2011,
+      "baseline": 0.1449,
+      "h102": 0.1444
+    },
+    {
+      "year": 2012,
+      "baseline": 0.152,
+      "h102": 0.1418
+    },
+    {
+      "year": 2013,
+      "baseline": 0.226,
+      "h102": 0.226
+    },
+    {
+      "year": 2014,
+      "baseline": 0.1219,
+      "h102": 0.1219
+    },
+    {
+      "year": 2015,
+      "baseline": 0.0968,
+      "h102": 0.0983
+    },
+    {
+      "year": 2016,
+      "baseline": 0.1341,
+      "h102": 0.1361
+    },
+    {
+      "year": 2017,
+      "baseline": 0.1966,
+      "h102": 0.1966
+    },
+    {
+      "year": 2018,
+      "baseline": 0.0964,
+      "h102": 0.0981
+    },
+    {
+      "year": 2019,
+      "baseline": 0.2816,
+      "h102": 0.2773
+    },
+    {
+      "year": 2020,
+      "baseline": 0.3312,
+      "h102": 0.3382
+    },
+    {
+      "year": 2021,
+      "baseline": 0.248,
+      "h102": 0.2455
+    },
+    {
+      "year": 2022,
+      "baseline": 0.1198,
+      "h102": 0.1049
+    },
+    {
+      "year": 2023,
+      "baseline": 0.2275,
+      "h102": 0.2195
+    },
+    {
+      "year": 2024,
+      "baseline": 0.2242,
+      "h102": 0.2155
+    },
+    {
+      "year": 2025,
+      "baseline": 0.1589,
+      "h102": 0.1594
+    }
+  ]
+}

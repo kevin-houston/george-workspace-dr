@@ -1,0 +1,612 @@
+{
+  "strategy": "H056 \u2014 Walk-Forward Validation + IBS Weight Grid for H055/H055b",
+  "description": "Fine-grained grid over H037b/H054b IBS split (total IBS budget = 28%). Also walk-forward validates H055 (14/14 weights). Key question: is 50/50 optimal, or does H054b-only outperform?",
+  "ibs_grid_4way": [
+    {
+      "w_h037b": 0.0,
+      "w_h054b": 0.28,
+      "full": {
+        "label": "",
+        "cagr": 0.1452,
+        "sharpe": 1.9099,
+        "max_drawdown": -0.0868,
+        "calmar": 1.6732,
+        "ann_vol": 0.076,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1375,
+        "sharpe": 1.8738,
+        "max_drawdown": -0.0868,
+        "calmar": 1.5846,
+        "ann_vol": 0.0734,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1545,
+        "sharpe": 1.9463,
+        "max_drawdown": -0.0549,
+        "calmar": 2.8137,
+        "ann_vol": 0.0794,
+        "n_months": 100
+      },
+      "deg_pct": 3.87
+    },
+    {
+      "w_h037b": 0.04,
+      "w_h054b": 0.24,
+      "full": {
+        "label": "",
+        "cagr": 0.1456,
+        "sharpe": 1.9251,
+        "max_drawdown": -0.0873,
+        "calmar": 1.668,
+        "ann_vol": 0.0756,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1398,
+        "sharpe": 1.9264,
+        "max_drawdown": -0.0873,
+        "calmar": 1.6016,
+        "ann_vol": 0.0726,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1526,
+        "sharpe": 1.92,
+        "max_drawdown": -0.0597,
+        "calmar": 2.5568,
+        "ann_vol": 0.0795,
+        "n_months": 100
+      },
+      "deg_pct": -0.33
+    },
+    {
+      "w_h037b": 0.08,
+      "w_h054b": 0.2,
+      "full": {
+        "label": "",
+        "cagr": 0.1459,
+        "sharpe": 1.9331,
+        "max_drawdown": -0.0877,
+        "calmar": 1.6624,
+        "ann_vol": 0.0755,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.142,
+        "sharpe": 1.972,
+        "max_drawdown": -0.0877,
+        "calmar": 1.618,
+        "ann_vol": 0.072,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1505,
+        "sharpe": 1.8876,
+        "max_drawdown": -0.0644,
+        "calmar": 2.3378,
+        "ann_vol": 0.0798,
+        "n_months": 100
+      },
+      "deg_pct": -4.28
+    },
+    {
+      "w_h037b": 0.12,
+      "w_h054b": 0.16,
+      "full": {
+        "label": "",
+        "cagr": 0.1461,
+        "sharpe": 1.9338,
+        "max_drawdown": -0.0882,
+        "calmar": 1.6565,
+        "ann_vol": 0.0756,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1441,
+        "sharpe": 2.0097,
+        "max_drawdown": -0.0882,
+        "calmar": 1.634,
+        "ann_vol": 0.0717,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1485,
+        "sharpe": 1.8497,
+        "max_drawdown": -0.0691,
+        "calmar": 2.1488,
+        "ann_vol": 0.0803,
+        "n_months": 100
+      },
+      "deg_pct": -7.96
+    },
+    {
+      "w_h037b": 0.16,
+      "w_h054b": 0.12,
+      "full": {
+        "label": "",
+        "cagr": 0.1464,
+        "sharpe": 1.9272,
+        "max_drawdown": -0.0887,
+        "calmar": 1.6503,
+        "ann_vol": 0.076,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1463,
+        "sharpe": 2.0388,
+        "max_drawdown": -0.0887,
+        "calmar": 1.6494,
+        "ann_vol": 0.0718,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1465,
+        "sharpe": 1.8067,
+        "max_drawdown": -0.0738,
+        "calmar": 1.984,
+        "ann_vol": 0.0811,
+        "n_months": 100
+      },
+      "deg_pct": -11.38
+    },
+    {
+      "w_h037b": 0.2,
+      "w_h054b": 0.08,
+      "full": {
+        "label": "",
+        "cagr": 0.1466,
+        "sharpe": 1.9136,
+        "max_drawdown": -0.0892,
+        "calmar": 1.6439,
+        "ann_vol": 0.0766,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1484,
+        "sharpe": 2.059,
+        "max_drawdown": -0.0892,
+        "calmar": 1.6644,
+        "ann_vol": 0.0721,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1444,
+        "sharpe": 1.7594,
+        "max_drawdown": -0.0785,
+        "calmar": 1.8391,
+        "ann_vol": 0.0821,
+        "n_months": 100
+      },
+      "deg_pct": -14.55
+    },
+    {
+      "w_h037b": 0.24,
+      "w_h054b": 0.04,
+      "full": {
+        "label": "",
+        "cagr": 0.1468,
+        "sharpe": 1.8934,
+        "max_drawdown": -0.0897,
+        "calmar": 1.6372,
+        "ann_vol": 0.0775,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1506,
+        "sharpe": 2.0703,
+        "max_drawdown": -0.0897,
+        "calmar": 1.6789,
+        "ann_vol": 0.0727,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1424,
+        "sharpe": 1.7085,
+        "max_drawdown": -0.0832,
+        "calmar": 1.7105,
+        "ann_vol": 0.0833,
+        "n_months": 100
+      },
+      "deg_pct": -17.48
+    },
+    {
+      "w_h037b": 0.28,
+      "w_h054b": 0.0,
+      "full": {
+        "label": "",
+        "cagr": 0.147,
+        "sharpe": 1.8674,
+        "max_drawdown": -0.0902,
+        "calmar": 1.6302,
+        "ann_vol": 0.0787,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1527,
+        "sharpe": 2.073,
+        "max_drawdown": -0.0902,
+        "calmar": 1.6929,
+        "ann_vol": 0.0736,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1403,
+        "sharpe": 1.6546,
+        "max_drawdown": -0.0879,
+        "calmar": 1.5956,
+        "ann_vol": 0.0848,
+        "n_months": 100
+      },
+      "deg_pct": -20.18
+    }
+  ],
+  "ibs_grid_5way_with_h045": [
+    {
+      "w_h037b_raw": 0.0,
+      "w_h054b_raw": 0.28,
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.0,
+        "h054b": 0.224,
+        "h045": 0.2
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.126,
+        "sharpe": 1.9925,
+        "max_drawdown": -0.0716,
+        "calmar": 1.7606,
+        "ann_vol": 0.0632,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1208,
+        "sharpe": 1.9986,
+        "max_drawdown": -0.0716,
+        "calmar": 1.6875,
+        "ann_vol": 0.0604,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1323,
+        "sharpe": 1.9829,
+        "max_drawdown": -0.0427,
+        "calmar": 3.0962,
+        "ann_vol": 0.0667,
+        "n_months": 100
+      },
+      "deg_pct": -0.79
+    },
+    {
+      "w_h037b_raw": 0.04,
+      "w_h054b_raw": 0.24,
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.032,
+        "h054b": 0.192,
+        "h045": 0.2
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1262,
+        "sharpe": 2.0056,
+        "max_drawdown": -0.0719,
+        "calmar": 1.7546,
+        "ann_vol": 0.0629,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1225,
+        "sharpe": 2.0478,
+        "max_drawdown": -0.0719,
+        "calmar": 1.7027,
+        "ann_vol": 0.0598,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1307,
+        "sharpe": 1.9578,
+        "max_drawdown": -0.0437,
+        "calmar": 2.9887,
+        "ann_vol": 0.0668,
+        "n_months": 100
+      },
+      "deg_pct": -4.39
+    },
+    {
+      "w_h037b_raw": 0.08,
+      "w_h054b_raw": 0.2,
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.064,
+        "h054b": 0.16,
+        "h045": 0.2
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1265,
+        "sharpe": 2.0119,
+        "max_drawdown": -0.0723,
+        "calmar": 1.7485,
+        "ann_vol": 0.0629,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1242,
+        "sharpe": 2.0897,
+        "max_drawdown": -0.0723,
+        "calmar": 1.7174,
+        "ann_vol": 0.0594,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1292,
+        "sharpe": 1.9272,
+        "max_drawdown": -0.0448,
+        "calmar": 2.8859,
+        "ann_vol": 0.067,
+        "n_months": 100
+      },
+      "deg_pct": -7.78
+    },
+    {
+      "w_h037b_raw": 0.12,
+      "w_h054b_raw": 0.16,
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.096,
+        "h054b": 0.128,
+        "h045": 0.2
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1267,
+        "sharpe": 2.0111,
+        "max_drawdown": -0.0727,
+        "calmar": 1.7421,
+        "ann_vol": 0.063,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1259,
+        "sharpe": 2.1236,
+        "max_drawdown": -0.0727,
+        "calmar": 1.7317,
+        "ann_vol": 0.0593,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1276,
+        "sharpe": 1.8914,
+        "max_drawdown": -0.047,
+        "calmar": 2.7174,
+        "ann_vol": 0.0675,
+        "n_months": 100
+      },
+      "deg_pct": -10.93
+    },
+    {
+      "w_h037b_raw": 0.16,
+      "w_h054b_raw": 0.12,
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.128,
+        "h054b": 0.096,
+        "h045": 0.2
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1269,
+        "sharpe": 2.0035,
+        "max_drawdown": -0.0731,
+        "calmar": 1.7355,
+        "ann_vol": 0.0633,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1276,
+        "sharpe": 2.1491,
+        "max_drawdown": -0.0731,
+        "calmar": 1.7457,
+        "ann_vol": 0.0594,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.126,
+        "sharpe": 1.851,
+        "max_drawdown": -0.0513,
+        "calmar": 2.4541,
+        "ann_vol": 0.0681,
+        "n_months": 100
+      },
+      "deg_pct": -13.87
+    },
+    {
+      "w_h037b_raw": 0.2,
+      "w_h054b_raw": 0.08,
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.16,
+        "h054b": 0.064,
+        "h045": 0.2
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1271,
+        "sharpe": 1.9892,
+        "max_drawdown": -0.0735,
+        "calmar": 1.7287,
+        "ann_vol": 0.0639,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.1293,
+        "sharpe": 2.1658,
+        "max_drawdown": -0.0735,
+        "calmar": 1.7592,
+        "ann_vol": 0.0597,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1244,
+        "sharpe": 1.8065,
+        "max_drawdown": -0.056,
+        "calmar": 2.2228,
+        "ann_vol": 0.0689,
+        "n_months": 100
+      },
+      "deg_pct": -16.59
+    },
+    {
+      "w_h037b_raw": 0.24,
+      "w_h054b_raw": 0.04,
+      "weights": {
+        "h041a": 0.448,
+        "h026": 0.128,
+        "h037b": 0.192,
+        "h054b": 0.032,
+        "h045": 0.2
+      },
+      "full": {
+        "label": "",
+        "cagr": 0.1272,
+        "sharpe": 1.9688,
+        "max_drawdown": -0.0739,
+        "calmar": 1.7217,
+        "ann_vol": 0.0646,
+        "n_months": 220
+      },
+      "is": {
+        "label": "",
+        "cagr": 0.131,
+        "sharpe": 2.1739,
+        "max_drawdown": -0.0739,
+        "calmar": 1.7724,
+        "ann_vol": 0.0603,
+        "n_months": 120
+      },
+      "oos": {
+        "label": "",
+        "cagr": 0.1228,
+        "sharpe": 1.7585,
+        "max_drawdown": -0.0606,
+        "calmar": 2.027,
+        "ann_vol": 0.0698,
+        "n_months": 100
+      },
+      "deg_pct": -19.11
+    }
+  ],
+  "best_4way": {
+    "best_oos": {
+      "w_h037b": 0.0,
+      "w_h054b": 0.28,
+      "oos_sharpe": 1.9463
+    },
+    "lowest_deg": {
+      "w_h037b": 0.04,
+      "w_h054b": 0.24,
+      "deg_pct": -0.33
+    },
+    "h054b_only": {
+      "w_h037b": 0.0,
+      "w_h054b": 0.28,
+      "oos_sharpe": 1.9463
+    },
+    "h037b_only": {
+      "w_h037b": 0.28,
+      "w_h054b": 0.0,
+      "oos_sharpe": 1.6546
+    }
+  },
+  "best_5way": {
+    "w_h037b": 0.0,
+    "w_h054b": 0.224,
+    "oos_sharpe": 1.9829
+  },
+  "walk_forward": {
+    "portfolio": "H055 (56/16/14/14)",
+    "n_folds": 5,
+    "fold_details": [
+      {
+        "fold": 2,
+        "train": "2008-01-31\u21922011-08-31 (44m)",
+        "test": "2011-09-30\u21922015-04-30 (44m)",
+        "is_sharpe": 1.4548,
+        "oos_sharpe": 2.6107,
+        "oos_maxdd": -0.0187
+      },
+      {
+        "fold": 3,
+        "train": "2008-01-31\u21922015-04-30 (88m)",
+        "test": "2015-05-31\u21922018-12-31 (44m)",
+        "is_sharpe": 1.8788,
+        "oos_sharpe": 2.5846,
+        "oos_maxdd": -0.0325
+      },
+      {
+        "fold": 4,
+        "train": "2008-01-31\u21922018-12-31 (132m)",
+        "test": "2019-01-31\u21922022-08-31 (44m)",
+        "is_sharpe": 2.0146,
+        "oos_sharpe": 1.7262,
+        "oos_maxdd": -0.0715
+      },
+      {
+        "fold": 5,
+        "train": "2008-01-31\u21922022-08-31 (176m)",
+        "test": "2022-09-30\u21922026-04-30 (44m)",
+        "is_sharpe": 1.9307,
+        "oos_sharpe": 1.9178,
+        "oos_maxdd": -0.0466
+      }
+    ],
+    "avg_oos_sharpe": 2.2098,
+    "std_oos_sharpe": 0.3938,
+    "avg_is_sharpe": 1.8197,
+    "wf_deg_pct": 21.44,
+    "min_fold_oos": 1.7262
+  },
+  "verdict": {
+    "summary": "CONFIRMED \u2014 A different IBS split further improves H055",
+    "wf_note": "Walk-forward: avg OOS 2.2098 \u00b1 0.3938 \u2014 robust"
+  },
+  "run_date": "2026-04-27"
+}

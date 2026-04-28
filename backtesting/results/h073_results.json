@@ -1,0 +1,121 @@
+{
+  "hypothesis": "H073",
+  "portfolios": {
+    "Baseline (H070)": {
+      "is": {
+        "cagr": 0.0983,
+        "sharpe": 2.2126,
+        "max_drawdown": -0.057,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.1477,
+        "sharpe": 2.5495,
+        "max_drawdown": -0.0471,
+        "n_months": 100
+      },
+      "alt_is": {
+        "cagr": 0.1006,
+        "sharpe": 2.0616,
+        "max_drawdown": -0.057,
+        "n_months": 108
+      },
+      "alt_oos": {
+        "cagr": 0.1293,
+        "sharpe": 2.5763,
+        "max_drawdown": -0.0471,
+        "n_months": 160
+      },
+      "wf": {
+        "avg": 3.3207,
+        "worst": 2.3743,
+        "folds": [
+          3.6023,
+          2.3743,
+          2.5282,
+          4.551,
+          3.5479
+        ]
+      }
+    },
+    "H072_BKLN": {
+      "is": {
+        "cagr": 0.101,
+        "sharpe": 2.2825,
+        "max_drawdown": -0.057,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.1491,
+        "sharpe": 2.6532,
+        "max_drawdown": -0.0408,
+        "n_months": 100
+      },
+      "alt_is": {
+        "cagr": 0.1017,
+        "sharpe": 2.0831,
+        "max_drawdown": -0.057,
+        "n_months": 108
+      },
+      "alt_oos": {
+        "cagr": 0.1314,
+        "sharpe": 2.6963,
+        "max_drawdown": -0.0408,
+        "n_months": 160
+      },
+      "wf": {
+        "avg": 3.544,
+        "worst": 2.3521,
+        "folds": [
+          4.0116,
+          2.3521,
+          2.5488,
+          5.3257,
+          3.4817
+        ]
+      }
+    },
+    "H072_BKLN+EMB": {
+      "is": {
+        "cagr": 0.1018,
+        "sharpe": 2.2829,
+        "max_drawdown": -0.057,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.1501,
+        "sharpe": 2.6657,
+        "max_drawdown": -0.0408,
+        "n_months": 100
+      },
+      "alt_is": {
+        "cagr": 0.1027,
+        "sharpe": 2.0845,
+        "max_drawdown": -0.057,
+        "n_months": 108
+      },
+      "alt_oos": {
+        "cagr": 0.1321,
+        "sharpe": 2.7054,
+        "max_drawdown": -0.0408,
+        "n_months": 160
+      },
+      "wf": {
+        "avg": 3.5253,
+        "worst": 2.3939,
+        "folds": [
+          3.9561,
+          2.3939,
+          2.6027,
+          5.2319,
+          3.4421
+        ]
+      }
+    }
+  },
+  "neg_years": {
+    "Baseline (H070)": [],
+    "H072_BKLN": [],
+    "H072_BKLN+EMB": []
+  }
+}
