@@ -1,7 +1,7 @@
 ---
-updated: 2026-04-26
-sources_indexed: 1
-pages: 24
+updated: 2026-04-28
+sources_indexed: 2
+pages: 25
 ---
 
 # Wiki Index
@@ -38,6 +38,7 @@ When answering a query:
 - [Research Log 2026-04-26](trading/research-log/2026-04-26.md) — session 3: options income strategies, LEAN eval, H006 (BIL safe-haven), iron condor scaffold
 - [151 Trading Strategies (Kakushadze & Serur)](trading/strategies/151-trading-strategies.md) — comprehensive strategy catalog; 151+ strategies with formulas; Tier 1/2/3 implementation priority
 - [Options Income Strategies](trading/algorithms/options-income-strategies.md) — iron condor, CSP/wheel, covered calls, VRP harvesting; win rates, returns, LEAN implementation notes
+- [BSM as Flat Limit of Information Geometry (Dean 2026)](trading/algorithms/bsm-information-geometry.md) — SSRN 6630259; smile = manifold curvature; zero-free-parameter LEAPS prediction within 19%; SABR β=1 from Čencov's theorem; bifurcation at |ρ|=√(2/3)≈0.816
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — macro regime modeling, after-tax returns, real-world costs
 - [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001 REJECTED (ATR > H/L ORB); H002-H003 INCONCLUSIVE (regime/leverage); H005 CONFIRMED IS/REJECTED OOS (dual momentum); H006 CONFIRMED (BIL > TLT as refuge); H007 pending (iron condor LEAN)
 - [Kalshi](trading/prediction-markets/kalshi.md) — primary prediction market platform; CFTC-regulated, economic events, Python SDK

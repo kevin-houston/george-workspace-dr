@@ -32,3 +32,11 @@ H006 run: dual momentum with BIL (SGOV proxy) vs. TLT safe haven. Key finding: B
 ## [2026-04-25] ingest | 151 Trading Strategies (Kakushadze & Serur 2018)
 
 Source: ssrn-3247865-151-trading-strategies.pdf (1.6MB, 361 pages). Strategy catalog created at trading/strategies/151-trading-strategies.md. Covers 151+ strategies across all asset classes with formulas and R source code. Prioritized Tier 1 strategies for immediate implementation: Dual-Momentum Sector Rotation (§4.1.2), Sector Rotation + MA Filter (§4.1.1), Dual MA Crossover (§3.12), IBS Mean-Reversion (§4.4). Daily backtesting framework under construction (backtesting/daily/).
+
+## [2026-04-28] ingest | SSRN 6630259 — Dean 2026, BSM as flat limit of information geometry
+
+Source: sources/ssrn-6630259-bsm-flat-limit-info-geometry.pdf
+Pages created: trading/algorithms/bsm-information-geometry.md
+Index updated: wiki/index.md (sources: 1→2, pages: 24→25)
+
+Key: BSM = flat slice of Fisher manifold (valid ~7 days ATM). Smile = curvature of leverage-corrected manifold (R=-2 constant). Zero-free-parameter LEAPS skew prediction within 19% (σ₀, ν, ρ from time-series). Stable attractor at (ν/σ₀, ρ*)≈(9.2,-0.84) adjacent to bifurcation locus |ρ|=√(2/3). SABR β=1 derives from Čencov's theorem.
