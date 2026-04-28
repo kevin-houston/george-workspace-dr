@@ -1,0 +1,125 @@
+{
+  "h026_candidates": [
+    {
+      "label": "+IBB",
+      "extras": [
+        "IBB"
+      ],
+      "port_oos": 4.1251,
+      "port_ao": 4.0412,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": true
+    },
+    {
+      "label": "+XME",
+      "extras": [
+        "XME"
+      ],
+      "port_oos": 4.0923,
+      "port_ao": 4.0178,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": false
+    },
+    {
+      "label": "+USO",
+      "extras": [
+        "USO"
+      ],
+      "port_oos": 4.1264,
+      "port_ao": 4.0395,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": true
+    },
+    {
+      "label": "+IBB+XME",
+      "extras": [
+        "IBB",
+        "XME"
+      ],
+      "port_oos": 4.0455,
+      "port_ao": 3.9891,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": false
+    },
+    {
+      "label": "+IBB+USO",
+      "extras": [
+        "IBB",
+        "USO"
+      ],
+      "port_oos": 4.1577,
+      "port_ao": 4.0612,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": true
+    },
+    {
+      "label": "+XME+USO",
+      "extras": [
+        "XME",
+        "USO"
+      ],
+      "port_oos": 4.1247,
+      "port_ao": 4.0377,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": true
+    },
+    {
+      "label": "+IBB+XME+USO",
+      "extras": [
+        "IBB",
+        "XME",
+        "USO"
+      ],
+      "port_oos": 4.0775,
+      "port_ao": 4.0088,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": false
+    }
+  ],
+  "h41_candidates": [
+    {
+      "label": "+EWZ",
+      "extras": [
+        "EWZ"
+      ],
+      "port_oos": 3.9765,
+      "port_ao": 3.9394,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": false
+    },
+    {
+      "label": "+EWC",
+      "extras": [
+        "EWC"
+      ],
+      "port_oos": 4.0381,
+      "port_ao": 3.957,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": false
+    },
+    {
+      "label": "+EWZ+EWC",
+      "extras": [
+        "EWZ",
+        "EWC"
+      ],
+      "port_oos": 3.9237,
+      "port_ao": 3.8787,
+      "maxdd": -0.036,
+      "wf": 3.0243,
+      "both_up": false
+    }
+  ],
+  "confirmed": true,
+  "base_oos": 4.094,
+  "base_ao": 4.0196
+}

@@ -58,6 +58,8 @@ Active project to build algorithmic trading income stream for Kevin. Focus: equi
 
 Key constraints: backtests must model macro regimes (FRED data) and report after-tax returns.
 
+Latest hypotheses completed: H112 (2026-04-27). Production portfolio: **H041a 22% / H026 27% / H045 21% / XLK IBS 20% / SMH IBS 8% / IGV IBS 2%**. **H041a: SPY/QQQ/TLT/GLD/IEF/EFA/EEM/BIL/EWJ/EWH/EWT/EWY/EWS/EPHE/EWG/EWQ/EWU/EWD/EWN (19-asset, top-1)**. **H026: 11-sector+BIL+GLD+TLT+IEF+TIP+DBC+AGG+GDX+DBA+SLV+UNG+EWZ+IBB+USO (25-asset, top-1)**. **H045: SHY/IEI/IEF/TLT/TIP/HYG/LQD/BKLN/EMB/BIL/MBB/FLOT/PCY (13-asset, top-2)**. OOS Sharpe 4.158, AltOOS 4.061, MaxDD −3.60%, WF worst 3.024, CAGR est ~23.5%, ZERO negative years 2004-2025. H112: +IBB+USO confirmed (+0.064/+0.042). H111: +UNG+EWZ confirmed. H110/H108: NOT confirmed. Next: H113 weight re-opt or more H026 expansion. Backtesting: `backtesting/daily/run_hNNN.py`. Log: `wiki/trading/backtesting/hypothesis-log.md`.
+
 Kraken CLI v0.3.2 installed at `/home/node/.cargo/bin/kraken`. Paper account initialized ($10k USD). MCP server (`kraken mcp -s all`) submitted for admin approval — once live, I'll have 151 native trading tools. Complements Alpaca: Kraken for crypto/forex/derivatives, Alpaca for equities/options.
 
 API keys available as env vars: `$POLYGON_API_KEY`, `$FRED_API_KEY`, `$ALPHA_VANTAGE_API_KEY`, `$FMP_API_KEY`, `$NEWSAPI_KEY`, `$EDGAR_KEY`, `$OPENAI_API_KEY`, `$ALPACA_API_KEY`, `$ALPACA_SECRET` (note: secret is ALPACA_SECRET not ALPACA_SECRET_KEY). Python 3.11 installed. Venv at `/workspace/agent/venv/`. Alpaca paper account active: ~$102k portfolio, ~$204k buying power.
