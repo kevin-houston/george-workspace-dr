@@ -1,5 +1,5 @@
 ---
-updated: 2026-04-27
+updated: 2026-04-28
 status: active
 phase: 2→3 — backtesting complete, paper trading ready
 ---
@@ -22,8 +22,11 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Algorithms](algorithms/) — trading strategy catalog
   - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
+  - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
   - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)
+  - [Polygon.io](data-sources/polygon.md) ← expanded 2026-04-28 (API endpoints, WebSocket, pricing, vs Alpaca)
+  - [Free / Low-Cost Sources](data-sources/free-data.md) ← expanded 2026-04-28 (Tiingo, EDGAR, Finnhub, FRED, yfinance status)
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
 - [Backtesting](backtesting/) — setup, results, methodology
 - [Paper Trading](paper-trading/) — Alpaca results log
