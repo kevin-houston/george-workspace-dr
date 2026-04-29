@@ -28,6 +28,12 @@ H041a allocates to cash. Confirmed +1.6432 OOS cumul, +6.2530 AltOOS cumul,
 Sharpe 4.553→4.600, MaxDD -3.6%→-3.0%. Both H041a and H045 now use 3m
 TSMOM; H026 keeps 12m (sector rotation has longer-duration trends).
 
+H133 upgrade (vs H130): vol-targeting on H041a at 25% annualized target
+(same framework as H026/H122 vol-targeting). Scale H041a base weight (22%)
+by (0.25 / realized_6m_vol), clamp 0.5x–2x. Confirmed Sharpe 4.600→4.846,
+MaxDD -3.0%→-2.2%, AltOOS +2.1884. Only activates during extreme vol periods
+(2022 selloff, 2020 COVID, 2008 crisis). OOS cumul change negligible (+0.003).
+
 Run on the first trading day of each month at ~9:45 AM CT.
 Usage:
     python3 h112_monthly.py            # live run
@@ -73,11 +79,12 @@ SUB_STRATS = {
 LOG_FILE = Path(__file__).parent / "h112_monthly_trades.json"
 MIN_ORDER_USD = 5.0  # ignore rebalance deltas smaller than $5
 
-# H122: vol-targeting on H026 only
-ROTATION_WEIGHT = 0.22 + 0.27 + 0.21  # 0.70 — total rotation allocation
-VOL_TARGET_H026 = 0.15   # ~long-run annualized vol of H026 from backtests
-VOL_WINDOW_H026 = 6      # months of history to estimate realized vol
-VOL_CLAMP_H026  = (0.5, 2.0)
+# H122/H133: vol-targeting on H026 and H041a
+ROTATION_WEIGHT  = 0.22 + 0.27 + 0.21  # 0.70 — total rotation allocation
+VOL_TARGET_H026  = 0.15   # ~long-run annualized vol of H026 from backtests
+VOL_TARGET_H041A = 0.25   # H133: vol-target H041a at 25% (only scales in extreme vol)
+VOL_WINDOW_H026  = 6      # months of history to estimate realized vol (shared)
+VOL_CLAMP_H026   = (0.5, 2.0)
 
 
 # ── Signal computation ──────────────────────────────────────────────────────
@@ -234,16 +241,58 @@ def compute_h026_vol_scale(log: list) -> float:
     return float(np.clip(VOL_TARGET_H026 / realized_vol, VOL_CLAMP_H026[0], VOL_CLAMP_H026[1]))
 
 
+def compute_h041a_vol_scale(log: list) -> float:
+    """
+    Scale H041a base weight by (VOL_TARGET_H041A / realized_6m_vol).
+    Uses trade log to reconstruct H041a monthly returns.
+    Returns 1.0 (no scaling) when < 3 months of history.
+    """
+    if len(log) < 3:
+        return 1.0
+
+    entries = []
+    for entry in log:
+        sigs = entry.get("signals", {})
+        top_n = sigs.get("h041a", {}).get("top_n", [])
+        entries.append({"date": entry["date"], "sym": top_n[0] if top_n else None})
+
+    n = min(len(entries) - 1, VOL_WINDOW_H026)
+    recent = entries[-(n + 1):]
+
+    monthly_rets = []
+    for i in range(len(recent) - 1):
+        sym = recent[i]["sym"]
+        if sym is None:
+            monthly_rets.append(0.0)
+            continue
+        try:
+            r = get_period_return(sym, recent[i]["date"], recent[i + 1]["date"])
+            monthly_rets.append(r)
+        except Exception:
+            monthly_rets.append(0.0)
+
+    if len(monthly_rets) < 3:
+        return 1.0
+
+    realized_vol = float(pd.Series(monthly_rets).std(ddof=1)) * np.sqrt(12)
+    if realized_vol <= 0:
+        return 1.0
+    return float(np.clip(VOL_TARGET_H041A / realized_vol, VOL_CLAMP_H026[0], VOL_CLAMP_H026[1]))
+
+
 # ── Trade planning ──────────────────────────────────────────────────────────
 
-def build_target(equity: float, h026_scale: float = 1.0) -> dict[str, float]:
+def build_target(equity: float, h026_scale: float = 1.0,
+                 h041a_scale: float = 1.0) -> dict[str, float]:
     """
     Compute {symbol: target_usd} across all sub-strategies.
-    H026 weight is scaled by h026_scale then rotation is renormed to ROTATION_WEIGHT.
+    H026 and H041a weights are scaled by their vol-target factors,
+    then rotation is renormed to ROTATION_WEIGHT.
     """
     # Compute effective per-sub weights
     raw_weights = {name: cfg["weight"] for name, cfg in SUB_STRATS.items()}
-    raw_weights["h026"] *= h026_scale
+    raw_weights["h026"]  *= h026_scale
+    raw_weights["h041a"] *= h041a_scale
     rot_sum = sum(raw_weights.values())
     eff_weights = {k: v * ROTATION_WEIGHT / rot_sum for k, v in raw_weights.items()}
 
@@ -378,7 +427,7 @@ def main():
 
     log = load_trade_log()
 
-    print(f"\nH122/H128 Monthly Rebalancer — {date.today()}")
+    print(f"\nH133 Monthly Rebalancer — {date.today()}")
     print(f"Account equity: ${equity:,.2f}")
 
     if positions:
@@ -391,19 +440,25 @@ def main():
     if args.status:
         return
 
-    # H122: compute H026 vol-targeting scale from trade log history
-    h026_scale = compute_h026_vol_scale(log)
+    # H122/H133: compute vol-targeting scales from trade log history
+    h026_scale  = compute_h026_vol_scale(log)
+    h041a_scale = compute_h041a_vol_scale(log)
     if len(log) < 3:
-        print(f"\nH026 vol-scale: 1.000 (fixed — only {len(log)} month(s) of history, need ≥3)")
+        print(f"\nH026 vol-scale:  1.000 (fixed — only {len(log)} month(s) of history, need ≥3)")
+        print(f"H041a vol-scale: 1.000 (fixed — only {len(log)} month(s) of history, need ≥3)")
     else:
-        raw_w = 0.27 * h026_scale
-        rot_sum = 0.22 + raw_w + 0.21
-        eff_w = raw_w * ROTATION_WEIGHT / rot_sum
-        print(f"\nH026 vol-scale: {h026_scale:.3f}  (base 27% → effective {eff_w*100:.1f}%)")
+        raw_h026  = 0.27 * h026_scale
+        raw_h041a = 0.22 * h041a_scale
+        rot_sum   = raw_h041a + raw_h026 + 0.21
+        eff_h026  = raw_h026  * ROTATION_WEIGHT / rot_sum
+        eff_h041a = raw_h041a * ROTATION_WEIGHT / rot_sum
+        print(f"\nH026 vol-scale:  {h026_scale:.3f}  (base 27% → effective {eff_h026*100:.1f}%)")
+        print(f"H041a vol-scale: {h041a_scale:.3f}  (base 22% → effective {eff_h041a*100:.1f}%)")
 
     # Compute signals
     print("\nFetching signals (downloading ~15mo of price data)…")
-    target, signals, eff_weights = build_target(equity, h026_scale=h026_scale)
+    target, signals, eff_weights = build_target(equity, h026_scale=h026_scale,
+                                                 h041a_scale=h041a_scale)
 
     print("\nSub-strategy targets:")
     for name, (top_n, scores) in signals.items():
@@ -438,6 +493,7 @@ def main():
             "target":      target,
             "eff_weights": {k: round(v, 4) for k, v in eff_weights.items()},
             "h026_scale":  round(h026_scale, 4),
+            "h041a_scale": round(h041a_scale, 4),
             "signals":     {k: {"top_n": v[0]} for k, v in signals.items()},
             "trades":      executed,
         })
