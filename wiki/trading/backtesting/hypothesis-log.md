@@ -4847,3 +4847,135 @@ No pair met qualification threshold (Sharpe>0.5, Cumul>1.2). All correlations wi
 
 Script: `backtesting/daily/run_h114.py`
 Results: `backtesting/results/h114_results.json`
+
+---
+
+## H115 — Time-Series Momentum Filter (§3.3, TSMOM)
+
+**Status:** CONFIRMED — H026 TSMOM filter adds +0.84 OOS to production
+**Date:** 2026-04-28
+**Baseline:** H112 production (OOS 5.7265, AltOOS 12.8207)
+
+### Hypothesis
+
+§3.3 Moskowitz/Ooi/Pedersen (2012): TSMOM compares each asset to its own history — hold if 12m return > 0, go to cash otherwise. Test as: (A) standalone strategy on a multi-asset ETF universe, (B) TSMOM as a pre-filter on H112's H026 and H041a sub-strategies — only positive-momentum assets are eligible for the composite ranking.
+
+### Results
+
+**Exp A — Pure TSMOM (standalone, 17-asset universe):**
+
+| Period | Sharpe | CAGR | MaxDD | Cumul | NegYrs |
+|--------|--------|------|-------|-------|--------|
+| IS 2008-2017 | 1.387 | 14.1% | -13.1% | 3.7379 | 0 |
+| OOS 2018-2026 | 1.756 | 19.4% | -11.8% | 4.3149 | 1 |
+| Alt 2013-2026 | 1.823 | 18.3% | -11.8% | 9.2964 | 1 |
+
+Avg 65.2% of universe has positive momentum. Corr with production: +0.618.
+
+**Exp B — TSMOM filter on H026 (27% of portfolio):**
+
+| | IS Sharpe | IS CAGR | OOS Sharpe | OOS CAGR | OOS Cumul | NegYrs |
+|---|---|---|---|---|---|---|
+| Baseline (no filter) | 2.514 | 23.6% | 3.031 | 28.6% | 7.9597 | 0 |
+| **TSMOM filtered** | **2.443** | **25.6%** | **3.101** | **36.6%** | **13.1270** | **0** |
+
+The filter prevents selecting assets in structural downtrends. When nothing qualifies, sub-strategy goes to cash (0% return).
+
+**H026 TSMOM filter boosts OOS CAGR from 28.6% → 36.6%** and OOS cumulative from 7.96 → 13.13 with no additional negative years.
+
+**Production impact (replacing H026 component with TSMOM-filtered version):**
+
+| | OOS Cumul | AltOOS Cumul | OOS Δ | AltOOS Δ |
+|---|---|---|---|---|
+| H112 baseline | 5.7265 | 12.8207 | — | — |
+| **+H026 TSMOM filter** | **6.5635** | **14.9411** | **+0.8371** | **+2.1203** |
+
+**H041a filter:** Cumul improved (8.0794 → 8.3509) but Sharpe dropped (2.868 → 2.611) and MaxDD increased (-6.0% → -6.9%). Not selected as standalone improvement.
+
+### Key Insight
+
+TSMOM as an **additive blended allocation** (10%) is dilutive (corr=+0.618, Δcumul=-0.12). But as a **filter on the existing cross-sectional ranking**, it's powerfully additive — prevents entering assets in structural downtrends even when they rank highly vs. peers.
+
+Script: `backtesting/daily/run_h115.py`
+Results: `backtesting/results/h115_results.json`
+
+---
+
+## H116 — TSMOM Filter Combination Search + Production Upgrade
+
+**Status:** CONFIRMED — H026 TSMOM filter is optimal; new production baseline
+**Date:** 2026-04-28
+**Baseline:** H112 (OOS 5.7265, AltOOS 12.8207)
+
+### Hypothesis
+
+H115 confirmed H026 TSMOM filter adds +0.84 OOS. Exhaustively test all 8 combinations of TSMOM filter on H041a, H026, and H045 to find optimal production upgrade.
+
+### Results
+
+| Combination | IS Sharpe | OOS Sharpe | OOS CAGR | OOS Cumul | AltOOS | MaxDD | NegYrs |
+|---|---|---|---|---|---|---|---|
+| Baseline (H112) | 2.991 | 4.158 | 23.3% | 5.7265 | 12.8207 | -3.6% | 0 |
+| **H026 filter** | **2.967** | **3.845** | **25.3%** | **6.5635** | **14.9411** | **-3.6%** | **0** |
+| H041a filter | 2.829 | 3.984 | 23.4% | 5.7743 | 12.7223 | -3.6% | 0 |
+| H045 filter | 3.002 | 4.117 | 23.2% | 5.6877 | 12.7995 | -3.6% | 0 |
+| H026+H041a | 2.820 | 3.722 | 25.4% | 6.6177 | 14.8251 | -3.6% | 0 |
+| H026+H045 | 2.981 | 3.816 | 25.2% | 6.5192 | 14.9169 | -3.6% | 0 |
+| H041a+H045 | 2.841 | 3.947 | 23.3% | 5.7352 | 12.7012 | -3.6% | 0 |
+| All three | 2.834 | 3.695 | 25.4% | 6.5731 | 14.8012 | -3.6% | 0 |
+
+**Best: H026 filter only** (OOS Δ+0.8370, AltOOS Δ+2.1204). H026+H041a improves OOS marginally (+0.0542) but degrades AltOOS (-0.1160) — not confirmed. MaxDD and NegYrs unchanged across all.
+
+**Why H026 benefits most:** H026 contains commodity/cyclical assets (USO, GDX, DBC, EWZ, IBB) that can enter sustained multi-year downtrends. The TSMOM filter prevents selecting e.g. USO or energy ETFs during structural bear markets. H041a (global equity rotation) and H045 (fixed income) have more consistent trends — filter adds noise without benefit.
+
+### H116 Production Definition
+
+```python
+# H116 — replaces H112 as production baseline
+SUB_STRATS = {
+    "h041a": {"assets": H041A_ASSETS, "n_hold": 1, "weight": 0.22, "tsmom_filter": False},
+    "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 0.27, "tsmom_filter": True},   # ← NEW
+    "h045":  {"assets": H045_ASSETS,  "n_hold": 2, "weight": 0.21, "tsmom_filter": False},
+}
+# + XLK IBS 20%, SMH IBS 8%, IGV IBS 2% (unchanged)
+```
+
+**New baseline: OOS 6.5635, AltOOS 14.9411, MaxDD -3.6%, 0 negative years 2004-2025**
+
+Script: `backtesting/daily/run_h116.py`
+Results: `backtesting/results/h116_results.json`
+
+---
+
+## H117 — Seasonality Overlay: "Sell in May" (§4.5)
+
+**Status:** NOT CONFIRMED — seasonal filter degrades returns
+**Date:** 2026-04-28
+**Baseline:** H116 (OOS 6.5635, AltOOS 14.9411)
+
+### Hypothesis
+
+§4.5: "Halloween effect" / "Sell in May" — equity markets earn most returns Nov-Apr, May-Oct is flat/negative. Test as seasonal override on H116's equity sub-strategies (go to cash May-Oct).
+
+### Results
+
+**SPY standalone seasonality:**
+- Seasonal (Nov-Apr only): OOS Sharpe 0.481, Cumul 1.67, vs SPY buy-and-hold 0.862/3.04
+- Monthly SPY averages: July +2.33%, Oct +1.16% are among the BEST months; only September is negative (-0.30%)
+- Sell-in-May effect is NOT present in 2003-2026 data on modern ETF universe
+
+**H116 with seasonal filters:**
+
+| Combination | OOS Cumul | AltOOS | MaxDD | NegYrs |
+|---|---|---|---|---|
+| H116 baseline | 6.5635 | 14.9411 | -3.6% | 0 |
+| H041a seasonal | 5.3428 | 10.8796 | -2.7% | 0 |
+| H026 seasonal | 4.6494 | 9.0340 | -2.1% | 0 |
+| H041a+H026 seasonal | 3.7739 | 6.5510 | -1.5% | 0 |
+
+All seasonal combinations significantly degrade returns. The TSMOM filter already handles trend avoidance adaptively — a rigid calendar rule is redundant and harmful. The H026 TSMOM filter already avoids assets in downtrends regardless of month.
+
+**Diagnosis:** The "Sell in May" effect may have been regime-specific (1950-1990s). In 2003-2026 the cross-sectional momentum + TSMOM system already allocates to defensive assets (BIL, IEF, TLT) during bear markets, making the seasonal filter redundant.
+
+Script: `backtesting/daily/run_h117.py`
+Results: `backtesting/results/h117_results.json`

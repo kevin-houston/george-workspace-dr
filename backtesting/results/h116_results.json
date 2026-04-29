@@ -1,0 +1,87 @@
+{
+  "combinations": {
+    "Baseline (H112)": {
+      "oos_cumul": 5.7265,
+      "alt_cumul": 12.8207,
+      "oos_sharpe": 4.1577,
+      "oos_cagr": 0.233,
+      "max_drawdown": -0.036,
+      "neg_years": 0
+    },
+    "H026 filter": {
+      "oos_cumul": 6.5635,
+      "alt_cumul": 14.9411,
+      "oos_sharpe": 3.8449,
+      "oos_cagr": 0.2533,
+      "max_drawdown": -0.036,
+      "neg_years": 0
+    },
+    "H041a filter": {
+      "oos_cumul": 5.7743,
+      "alt_cumul": 12.7223,
+      "oos_sharpe": 3.9839,
+      "oos_cagr": 0.2342,
+      "max_drawdown": -0.036,
+      "neg_years": 0
+    },
+    "H045 filter": {
+      "oos_cumul": 5.6877,
+      "alt_cumul": 12.7995,
+      "oos_sharpe": 4.117,
+      "oos_cagr": 0.2319,
+      "max_drawdown": -0.0363,
+      "neg_years": 0
+    },
+    "H026+H041a filter": {
+      "oos_cumul": 6.6177,
+      "alt_cumul": 14.8251,
+      "oos_sharpe": 3.7218,
+      "oos_cagr": 0.2545,
+      "max_drawdown": -0.036,
+      "neg_years": 0
+    },
+    "H026+H045 filter": {
+      "oos_cumul": 6.5192,
+      "alt_cumul": 14.9169,
+      "oos_sharpe": 3.8161,
+      "oos_cagr": 0.2523,
+      "max_drawdown": -0.0363,
+      "neg_years": 0
+    },
+    "H041a+H045 filter": {
+      "oos_cumul": 5.7352,
+      "alt_cumul": 12.7012,
+      "oos_sharpe": 3.947,
+      "oos_cagr": 0.2332,
+      "max_drawdown": -0.0363,
+      "neg_years": 0
+    },
+    "All three filtered": {
+      "oos_cumul": 6.5731,
+      "alt_cumul": 14.8012,
+      "oos_sharpe": 3.6949,
+      "oos_cagr": 0.2535,
+      "max_drawdown": -0.0363,
+      "neg_years": 0
+    }
+  },
+  "baseline": {
+    "oos_cumul": 5.7265,
+    "alt_cumul": 12.8207,
+    "oos_sharpe": 4.1577,
+    "oos_cagr": 0.233,
+    "max_drawdown": -0.036,
+    "neg_years": 0
+  },
+  "best_label": "H026 filter",
+  "best": {
+    "oos_cumul": 6.5635,
+    "alt_cumul": 14.9411,
+    "oos_sharpe": 3.8449,
+    "oos_cagr": 0.2533,
+    "max_drawdown": -0.036,
+    "neg_years": 0
+  },
+  "verdict": "CONFIRMED",
+  "confirmed": true
+}

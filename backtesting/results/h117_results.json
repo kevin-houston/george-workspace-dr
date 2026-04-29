@@ -1,0 +1,56 @@
+{
+  "exp_a": {
+    "seasonal_oos": {
+      "cagr": 0.0633,
+      "sharpe": 0.4813,
+      "max_drawdown": -0.1945,
+      "n_months": 100,
+      "neg_years": 3,
+      "cumul": 1.6677
+    },
+    "bah_oos": {
+      "cagr": 0.1427,
+      "sharpe": 0.8624,
+      "max_drawdown": -0.2393,
+      "n_months": 100,
+      "neg_years": 2,
+      "cumul": 3.0396
+    }
+  },
+  "exp_b": {
+    "H116 base (reference)": {
+      "oos_cumul": 6.5635,
+      "alt_cumul": 14.9411,
+      "oos_sharpe": 3.8449,
+      "oos_cagr": 0.2533,
+      "max_drawdown": -0.036,
+      "neg_years": 0
+    },
+    "H041a seasonal": {
+      "oos_cumul": 5.3428,
+      "alt_cumul": 10.8796,
+      "oos_sharpe": 3.7086,
+      "oos_cagr": 0.2227,
+      "max_drawdown": -0.0274,
+      "neg_years": 0
+    },
+    "H026 seasonal": {
+      "oos_cumul": 4.6494,
+      "alt_cumul": 9.034,
+      "oos_sharpe": 3.5845,
+      "oos_cagr": 0.2025,
+      "max_drawdown": -0.0206,
+      "neg_years": 0
+    },
+    "H041a+H026 seasonal": {
+      "oos_cumul": 3.7739,
+      "alt_cumul": 6.551,
+      "oos_sharpe": 3.1513,
+      "oos_cagr": 0.1728,
+      "max_drawdown": -0.0145,
+      "neg_years": 0
+    }
+  },
+  "verdict": "NOT_CONFIRMED",
+  "confirmed": false
+}

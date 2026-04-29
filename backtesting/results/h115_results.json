@@ -1,0 +1,100 @@
+{
+  "exp_a": {
+    "is": {
+      "cagr": 0.1409,
+      "sharpe": 1.3871,
+      "max_drawdown": -0.1313,
+      "n_months": 120,
+      "neg_years": 0,
+      "cumul": 3.7379
+    },
+    "oos": {
+      "cagr": 0.1939,
+      "sharpe": 1.756,
+      "max_drawdown": -0.1185,
+      "n_months": 99,
+      "neg_years": 1,
+      "cumul": 4.3149
+    },
+    "alt": {
+      "cagr": 0.1833,
+      "sharpe": 1.8226,
+      "max_drawdown": -0.1185,
+      "n_months": 159,
+      "neg_years": 1,
+      "cumul": 9.2964
+    },
+    "avg_pct_positive": 0.6523
+  },
+  "exp_b1": {
+    "baseline_oos": {
+      "cagr": 0.2882,
+      "sharpe": 2.8675,
+      "max_drawdown": -0.06,
+      "n_months": 99,
+      "neg_years": 0,
+      "cumul": 8.0794
+    },
+    "filtered_oos": {
+      "cagr": 0.2934,
+      "sharpe": 2.6106,
+      "max_drawdown": -0.0691,
+      "n_months": 99,
+      "neg_years": 1,
+      "cumul": 8.3509
+    },
+    "filtered_alt": {
+      "cagr": 0.2786,
+      "sharpe": 2.6268,
+      "max_drawdown": -0.0811,
+      "n_months": 159,
+      "neg_years": 1,
+      "cumul": 25.9586
+    }
+  },
+  "exp_b2": {
+    "baseline_oos": {
+      "cagr": 0.2859,
+      "sharpe": 3.0313,
+      "max_drawdown": -0.0568,
+      "n_months": 99,
+      "neg_years": 0,
+      "cumul": 7.9597
+    },
+    "filtered_oos": {
+      "cagr": 0.3663,
+      "sharpe": 3.1012,
+      "max_drawdown": -0.0704,
+      "n_months": 99,
+      "neg_years": 0,
+      "cumul": 13.127
+    },
+    "filtered_alt": {
+      "cagr": 0.3443,
+      "sharpe": 3.1098,
+      "max_drawdown": -0.0708,
+      "n_months": 159,
+      "neg_years": 0,
+      "cumul": 50.4236
+    }
+  },
+  "exp_c": {
+    "prod_oos_cumul": 5.7265,
+    "prod_alt_cumul": 12.8207,
+    "tsmom_corr_with_prod": 0.6175,
+    "blend": {
+      "pure_tsmom": {
+        "oos_delta": -0.1213,
+        "alt_delta": -0.3067
+      },
+      "h026_tsmom_filter": {
+        "oos_cumul": 6.5635,
+        "alt_cumul": 14.9411,
+        "oos_delta": 0.8371,
+        "alt_delta": 2.1203
+      }
+    }
+  },
+  "verdict": "CONFIRMED",
+  "confirmed": true
+}
