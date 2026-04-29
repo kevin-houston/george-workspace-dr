@@ -22,6 +22,12 @@ allocates to cash. Confirmed +0.4691 OOS cumul, +1.7194 AltOOS cumul.
 Bond momentum reverses faster than equity; 3m filter exits early on rate
 shocks and re-enters quickly on recovery vs the 12m filter used on H026.
 
+H130 upgrade (vs H128): H041a now also uses a 3m TSMOM filter — only global
+equity ETFs with positive 3-month return are eligible. When nothing qualifies,
+H041a allocates to cash. Confirmed +1.6432 OOS cumul, +6.2530 AltOOS cumul,
+Sharpe 4.553→4.600, MaxDD -3.6%→-3.0%. Both H041a and H045 now use 3m
+TSMOM; H026 keeps 12m (sector rotation has longer-duration trends).
+
 Run on the first trading day of each month at ~9:45 AM CT.
 Usage:
     python3 h112_monthly.py            # live run
@@ -59,7 +65,7 @@ H045_ASSETS = [
 ]
 
 SUB_STRATS = {
-    "h041a": {"assets": H041A_ASSETS, "n_hold": 1, "weight": 0.22, "tsmom_filter": False, "tsmom_lb": 12},
+    "h041a": {"assets": H041A_ASSETS, "n_hold": 1, "weight": 0.22, "tsmom_filter": True,  "tsmom_lb": 3},   # H130: 3m filter
     "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 0.27, "tsmom_filter": True,  "tsmom_lb": 12},  # H116: 12m filter
     "h045":  {"assets": H045_ASSETS,  "n_hold": 2, "weight": 0.21, "tsmom_filter": True,  "tsmom_lb": 3},   # H128: 3m filter
 }
