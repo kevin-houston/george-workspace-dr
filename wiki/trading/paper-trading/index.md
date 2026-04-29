@@ -1,9 +1,25 @@
 ---
-updated: 2026-04-26
+updated: 2026-04-29
 status: active
 ---
 
-# Paper Trading Log
+# Paper Trading Index
+
+## Active Strategies
+
+### [H122 Alpaca ETF Rotation](h122-alpaca.md) — ACTIVE
+Momentum rotation + IBS on Alpaca paper account. Started 2026-04-28.
+H041a (19 global ETFs) + H026 (25 sector/commodity, TSMOM filter, vol-targeted) + H045 (13 fixed income).
+Rank ensemble signal (H120). H026 vol-targeting (H122). Rebalances first trading day of month.
+→ **Path to real money:** 4–8 weeks paper validation, then flip paper=False in config.
+
+### Iron Condor (Options) — INACTIVE
+BSM pricing via Massive.com. IC-2026-04-26-001 (SPY Jun 12, $645p/$670p/$775c/$800c, $533 credit).
+See legacy notes below.
+
+---
+
+## Legacy: Iron Condor Log
 
 Tracks paper trades entered for strategy validation before going live.
 Engine: BSM pricing via Massive.com (real SPY price) + our iron condor model.
