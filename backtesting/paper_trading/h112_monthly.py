@@ -50,8 +50,15 @@ OOS Δ+1.6107, AltOOS Δ+3.0181, Sharpe 4.889→4.971.
 H140 upgrade (vs H139): H041a TSMOM threshold raised from 0% to +0.5%. Only
 global equity ETFs with 3m return > +0.5% are eligible (barely-breakeven
 ETFs filtered out). Confirmed B (+0.5%): OOS Δ+0.4732, AltOOS Δ+3.0055,
-Sharpe 4.971→5.012, MaxDD unchanged at -2.5%. Both H026 and H041a now use
-tighter TSMOM thresholds. H045 remains at 0% (bonds need fast re-entry).
+Sharpe 4.971→5.012, MaxDD unchanged at -2.5%.
+
+H141 upgrade (vs H140): H045 TSMOM threshold raised from 0% to +1.0%. Only
+bond ETFs with 3m return > +1% are eligible (filters out flat/barely-positive
+bonds in rate transition periods). Confirmed D (+1.0%): OOS Δ+0.6211,
+AltOOS Δ+3.1296, MaxDD -2.5% (unchanged). All four non-zero variants confirmed.
+When rates are near-zero and rising (e.g., early 2022), BIL also earns <1%
+quarterly and H045 goes to cash — correctly avoiding the rate hike massacre.
+New baseline: OOS 27.6154, AltOOS 98.8229, Sharpe 4.981.
 
 Run on the first trading day of each month at ~9:45 AM CT.
 Usage:
@@ -92,7 +99,7 @@ H045_ASSETS = [
 SUB_STRATS = {
     "h041a": {"assets": H041A_ASSETS, "n_hold": 1, "weight": 0.22, "tsmom_filter": True,  "tsmom_lb": 3,  "tsmom_threshold": 0.005},  # H130: 3m filter; H140: threshold +0.5%
     "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 0.27, "tsmom_filter": True,  "tsmom_lb": 12, "tsmom_threshold": 0.05},  # H116: 12m filter; H139: threshold +5%
-    "h045":  {"assets": H045_ASSETS,  "n_hold": 2, "weight": 0.21, "tsmom_filter": True,  "tsmom_lb": 3},   # H128: 3m filter
+    "h045":  {"assets": H045_ASSETS,  "n_hold": 2, "weight": 0.21, "tsmom_filter": True,  "tsmom_lb": 3,  "tsmom_threshold": 0.01},   # H128: 3m filter; H141: threshold +1%
 }
 
 LOG_FILE = Path(__file__).parent / "h112_monthly_trades.json"
