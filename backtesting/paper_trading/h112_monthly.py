@@ -41,6 +41,13 @@ rank(12m)+rank(inv_vol) for H045, underestimating production performance.
 H134 backtest baseline corrected: OOS 24.9104, AltOOS 89.6697, Sharpe 4.889.
 No code change needed — production was already using the correct full ensemble.
 
+H139 upgrade (vs H134): H026 TSMOM threshold raised from 0% to +5%. Only
+sector ETFs with 12m return > +5% are eligible for selection (previously any
+positive 12m return qualified). Borderline-positive sectors (0-5% 12m return)
+are unreliable trend followers and were diluting signal quality. Confirmed:
+OOS Δ+1.6107, AltOOS Δ+3.0181, Sharpe 4.889→4.971. H041a and H045 TSMOM
+filters remain at threshold > 0% (equity and bond recoveries need fast entry).
+
 Run on the first trading day of each month at ~9:45 AM CT.
 Usage:
     python3 h112_monthly.py            # live run
@@ -79,7 +86,7 @@ H045_ASSETS = [
 
 SUB_STRATS = {
     "h041a": {"assets": H041A_ASSETS, "n_hold": 1, "weight": 0.22, "tsmom_filter": True,  "tsmom_lb": 3},   # H130: 3m filter
-    "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 0.27, "tsmom_filter": True,  "tsmom_lb": 12},  # H116: 12m filter
+    "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 0.27, "tsmom_filter": True,  "tsmom_lb": 12, "tsmom_threshold": 0.05},  # H116: 12m filter; H139: threshold +5%
     "h045":  {"assets": H045_ASSETS,  "n_hold": 2, "weight": 0.21, "tsmom_filter": True,  "tsmom_lb": 3},   # H128: 3m filter
 }
 
@@ -98,7 +105,8 @@ VOL_CLAMP_H026   = (0.5, 2.0)
 
 def compute_signal(assets: list[str], n_hold: int,
                    tsmom_filter: bool = False,
-                   tsmom_lb: int = 12) -> tuple[list[str], dict]:
+                   tsmom_lb: int = 12,
+                   tsmom_threshold: float = 0.0) -> tuple[list[str], dict]:
     """
     Rank ensemble (3m+6m+12m momentum ranks) + inv 6-month vol rank → top-N.
 
@@ -132,9 +140,8 @@ def compute_signal(assets: list[str], n_hold: int,
             mom_6.index).intersection(mom_3.index)
 
     if tsmom_filter:
-        # Filter by the specified lookback's return sign
         mom_filter = {12: mom_12, 6: mom_6, 3: mom_3}.get(tsmom_lb, mom_12)
-        valid = valid[mom_filter[valid] > 0]
+        valid = valid[mom_filter[valid] > tsmom_threshold]
         if len(valid) == 0:
             return [], {}  # nothing qualifies → cash
 
@@ -312,6 +319,7 @@ def build_target(equity: float, h026_scale: float = 1.0,
             cfg["assets"], cfg["n_hold"],
             tsmom_filter=cfg.get("tsmom_filter", False),
             tsmom_lb=cfg.get("tsmom_lb", 12),
+            tsmom_threshold=cfg.get("tsmom_threshold", 0.0),
         )
         signals[name] = (top_n, scores)
         for sym in top_n:
