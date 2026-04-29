@@ -1,0 +1,68 @@
+[
+  {
+    "date": "2026-04-28",
+    "equity": 102444.84,
+    "target": {
+      "EWH": 22537.8648,
+      "IBB": 27660.1068,
+      "HYG": 10756.7082,
+      "BIL": 10756.7082
+    },
+    "signals": {
+      "h041a": {
+        "top_n": [
+          "EWH"
+        ]
+      },
+      "h026": {
+        "top_n": [
+          "IBB"
+        ]
+      },
+      "h045": {
+        "top_n": [
+          "HYG",
+          "BIL"
+        ]
+      }
+    },
+    "trades": [
+      {
+        "symbol": "EWH",
+        "action": "BUY",
+        "qty": 967.913461,
+        "est_value": 22537.86,
+        "reason": "target $22,538, current $0",
+        "order_id": "6fb82e9d-d76e-40d9-b00c-9db85d90e50e",
+        "submitted_at": "2026-04-28T10:43:34.125433"
+      },
+      {
+        "symbol": "HYG",
+        "action": "BUY",
+        "qty": 133.856497,
+        "est_value": 10756.71,
+        "reason": "target $10,757, current $0",
+        "order_id": "abeaca20-22bf-4a37-bd3b-645d6e8dc216",
+        "submitted_at": "2026-04-28T10:43:34.236700"
+      },
+      {
+        "symbol": "IBB",
+        "action": "BUY",
+        "qty": 164.174427,
+        "est_value": 27660.11,
+        "reason": "target $27,660, current $0",
+        "order_id": "34294b6d-df8c-4c87-99f9-a9ef8caeb7a9",
+        "submitted_at": "2026-04-28T10:43:34.339821"
+      },
+      {
+        "symbol": "BIL",
+        "action": "BUY",
+        "qty": 117.386457,
+        "est_value": 10756.71,
+        "reason": "target $10,757, current $0",
+        "order_id": "5bdbe05c-e521-4a12-987a-719e8b7f6f08",
+        "submitted_at": "2026-04-28T10:43:34.446387"
+      }
+    ]
+  }
+]

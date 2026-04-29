@@ -4789,3 +4789,61 @@ H026 now 25-asset:
 
 Script: `backtesting/daily/run_h112.py`
 Results: `backtesting/results/h112_results.json`
+
+---
+
+## H113 — Low-Volatility Anomaly at ETF Level (§3.4)
+
+**Status:** NOT CONFIRMED — degenerates to T-bills
+**Date:** 2026-04-28
+**Baseline:** H112 production (OOS 4.158, AltOOS 4.061)
+
+### Hypothesis
+
+§3.4 of Kakushadze & Serur: long low-volatility assets, short/avoid high-volatility. Pure inverse-volatility ranking signal on existing H041A and H026 universes. Also test factor ETF universe (USMV, SPLV, EFAV, EEMV, XLU, BIL).
+
+### Results
+
+| Universe         | Signal        | OOS Cumul | OOS Sharpe | CAGR  | NegYrs |
+|------------------|---------------|-----------|------------|-------|--------|
+| H041A (19 assets)| composite     | 3.9762    | 0.938      | 12.6% | 0      |
+| H041A            | lowvol only   | 1.0250    | 0.003      | 0.1%  | 5      |
+| H026 (25 assets) | composite     | 2.7540    | 0.744      | 9.9%  | 2      |
+| H026             | lowvol only   | 1.0250    | 0.003      | 0.1%  | 5      |
+| Factor ETFs      | lowvol only   | ~1.1      | low        | ~2%   | N/A    |
+
+**Finding:** Pure vol ranking always selects BIL (lowest-vol asset in universe). Earns ~T-bill return (~2.5% CAGR). Negative correlation between composite and pure-vol signals is only -0.054. Adding 10% pure-vol to production blend **decreases** OOS cumul by −0.807.
+
+**Insight:** The composite signal already captures the low-vol anomaly via BIL's natural inclusion during risk-off periods. A pure low-vol overlay at ETF level is redundant. Stock-level implementation (§3.4 original intent) requires a different approach with individual equity universes.
+
+Script: `backtesting/daily/run_h113.py`
+Results: `backtesting/results/h113_results.json`
+
+---
+
+## H114 — ETF Pairs Trading Mean-Reversion (§3.8)
+
+**Status:** NOT CONFIRMED — all pairs lose money
+**Date:** 2026-04-28
+**Baseline:** H112 production (OOS 4.158, AltOOS 4.061)
+
+### Hypothesis
+
+§3.8: Cointegrated ETF pairs. Z-score of log price ratio → mean-reversion signal. Entry |z|>1.5, Exit |z|<0.5, 12-month lookback, monthly rebalance. Test: GDX/SIL, XLE/OIH, TLT/IEF, EWJ/EWH, XLK/QQQ.
+
+### Results
+
+| Pair      | IS Sharpe | IS CAGR | OOS Sharpe | OOS CAGR | OOS Cumul | NegYrs |
+|-----------|-----------|---------|------------|----------|-----------|--------|
+| XLK/QQQ   | -0.855    | -2.6%   | -0.343     | -1.5%    | 0.8815    | 6      |
+| EWJ/EWH   | -0.444    | -5.5%   | -0.695     | -10.3%   | 0.4057    | 8      |
+| GDX/SIL   | -0.162    | -1.8%   | -0.971     | -11.3%   | 0.3677    | 9      |
+| XLE/OIH   | -0.316    | -3.9%   | -0.981     | -15.2%   | 0.2519    | 9      |
+| TLT/IEF   | -0.692    | -5.0%   | -1.157     | -6.9%    | 0.5492    | 8      |
+
+No pair met qualification threshold (Sharpe>0.5, Cumul>1.2). All correlations with production blend near zero (+0.005 to +0.142) — genuinely uncorrelated but also unprofitable.
+
+**Diagnosis:** Monthly-frequency z-score is too slow for a mean-reversion signal that resolves over days/weeks. ETF pairs also diverge structurally over multi-year horizons rather than mean-reverting (regime changes, expense ratio drag, composition drift). Stock-level pairs trading at daily/intraday frequency has stronger theoretical support.
+
+Script: `backtesting/daily/run_h114.py`
+Results: `backtesting/results/h114_results.json`

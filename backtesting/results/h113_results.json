@@ -1,0 +1,14 @@
+{
+  "h113": {
+    "h041a_composite_oos": 8.1739,
+    "h041a_lowvol_oos": 1.2273,
+    "h041a_lowvol_sharpe_oos": 4.3917,
+    "h026_composite_oos": 8.0035,
+    "h026_lowvol_oos": 1.22,
+    "corr_composite_vs_lowvol_oos": -0.054,
+    "corr_composite_vs_lowvol_alt": -0.027,
+    "blend_plus_lowvol10_oos": 4.9199,
+    "blend_delta_oos": -0.8066,
+    "verdict": "NOT ADDITIVE \u2014 blend does not improve OOS vs production"
+  }
+}

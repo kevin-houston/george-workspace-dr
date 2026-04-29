@@ -1,0 +1,48 @@
+{
+  "h114": {
+    "pairs": {
+      "GDX/SIL": {
+        "eq_oos": 0.3677,
+        "eq_alt": 0.3247,
+        "adf_t": 0.0,
+        "neg_oos": 9,
+        "active_frac": 0.53,
+        "corr_vs_blend_oos": 0.005
+      },
+      "XLE/OIH": {
+        "eq_oos": 0.2519,
+        "eq_alt": 0.1817,
+        "adf_t": 0.0,
+        "neg_oos": 9,
+        "active_frac": 0.504,
+        "corr_vs_blend_oos": 0.019
+      },
+      "TLT/IEF": {
+        "eq_oos": 0.5492,
+        "eq_alt": 0.4146,
+        "adf_t": 0.0,
+        "neg_oos": 8,
+        "active_frac": 0.448,
+        "corr_vs_blend_oos": 0.084
+      },
+      "EWJ/EWH": {
+        "eq_oos": 0.4057,
+        "eq_alt": 0.3829,
+        "adf_t": 0.0,
+        "neg_oos": 8,
+        "active_frac": 0.489,
+        "corr_vs_blend_oos": 0.058
+      },
+      "XLK/QQQ": {
+        "eq_oos": 0.8815,
+        "eq_alt": 0.8063,
+        "adf_t": 0.0,
+        "neg_oos": 6,
+        "active_frac": 0.601,
+        "corr_vs_blend_oos": 0.142
+      }
+    },
+    "best_pair": null,
+    "verdict": "NOT CONFIRMED \u2014 no pair shows sufficient standalone OOS edge (Sharpe>0.5, Cumul>1.2)"
+  }
+}
