@@ -16,6 +16,12 @@ H026 base weight (27%) by (target_vol / realized_6m_vol), clamp 0.5x–2x,
 renorm rotation total to stay at 70%. Uses trade log history to compute H026
 realized vol. Falls back to fixed weights when < 3 months of history.
 
+H128 upgrade (vs H122): H045 now uses a 3m TSMOM filter — only bond ETFs
+with positive 3-month return are eligible. When nothing qualifies, H045
+allocates to cash. Confirmed +0.4691 OOS cumul, +1.7194 AltOOS cumul.
+Bond momentum reverses faster than equity; 3m filter exits early on rate
+shocks and re-enters quickly on recovery vs the 12m filter used on H026.
+
 Run on the first trading day of each month at ~9:45 AM CT.
 Usage:
     python3 h112_monthly.py            # live run
@@ -53,9 +59,9 @@ H045_ASSETS = [
 ]
 
 SUB_STRATS = {
-    "h041a": {"assets": H041A_ASSETS, "n_hold": 1, "weight": 0.22, "tsmom_filter": False},
-    "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 0.27, "tsmom_filter": True},  # H116 upgrade
-    "h045":  {"assets": H045_ASSETS,  "n_hold": 2, "weight": 0.21, "tsmom_filter": False},
+    "h041a": {"assets": H041A_ASSETS, "n_hold": 1, "weight": 0.22, "tsmom_filter": False, "tsmom_lb": 12},
+    "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 0.27, "tsmom_filter": True,  "tsmom_lb": 12},  # H116: 12m filter
+    "h045":  {"assets": H045_ASSETS,  "n_hold": 2, "weight": 0.21, "tsmom_filter": True,  "tsmom_lb": 3},   # H128: 3m filter
 }
 
 LOG_FILE = Path(__file__).parent / "h112_monthly_trades.json"
@@ -71,15 +77,17 @@ VOL_CLAMP_H026  = (0.5, 2.0)
 # ── Signal computation ──────────────────────────────────────────────────────
 
 def compute_signal(assets: list[str], n_hold: int,
-                   tsmom_filter: bool = False) -> tuple[list[str], dict]:
+                   tsmom_filter: bool = False,
+                   tsmom_lb: int = 12) -> tuple[list[str], dict]:
     """
     Rank ensemble (3m+6m+12m momentum ranks) + inv 6-month vol rank → top-N.
 
     H120 upgrade: each lookback is ranked independently then summed, avoiding
     scale dominance by the 12m signal. +28% OOS improvement over 12m-only.
 
-    tsmom_filter: if True (H116 upgrade), only assets with positive 12m return
-    are eligible. TSMOM filter still uses 12m sign — unchanged.
+    tsmom_filter: if True, only assets with positive N-month return are eligible.
+      tsmom_lb=12 → H026 filter (12m sign, H116 upgrade)
+      tsmom_lb=3  → H045 filter (3m sign, H128 upgrade)
     Returns ([], {}) when nothing qualifies → sub-strategy goes to cash.
     Returns (top_n_tickers, scores_dict).
     """
@@ -104,7 +112,9 @@ def compute_signal(assets: list[str], n_hold: int,
             mom_6.index).intersection(mom_3.index)
 
     if tsmom_filter:
-        valid = valid[mom_12[valid] > 0]  # TSMOM filter: 12m sign check (H116)
+        # Filter by the specified lookback's return sign
+        mom_filter = {12: mom_12, 6: mom_6, 3: mom_3}.get(tsmom_lb, mom_12)
+        valid = valid[mom_filter[valid] > 0]
         if len(valid) == 0:
             return [], {}  # nothing qualifies → cash
 
@@ -239,12 +249,14 @@ def build_target(equity: float, h026_scale: float = 1.0) -> dict[str, float]:
         top_n, scores = compute_signal(
             cfg["assets"], cfg["n_hold"],
             tsmom_filter=cfg.get("tsmom_filter", False),
+            tsmom_lb=cfg.get("tsmom_lb", 12),
         )
         signals[name] = (top_n, scores)
         for sym in top_n:
             target[sym] = target.get(sym, 0.0) + alloc_per_slot
         if not top_n:
-            print(f"  {name.upper()}: TSMOM filter — no qualifying assets, holding cash this month")
+            lb = cfg.get("tsmom_lb", 12)
+            print(f"  {name.upper()}: TSMOM {lb}m filter — no qualifying assets, holding cash this month")
 
     return target, signals, eff_weights
 
@@ -360,7 +372,7 @@ def main():
 
     log = load_trade_log()
 
-    print(f"\nH122 Monthly Rebalancer — {date.today()}")
+    print(f"\nH122/H128 Monthly Rebalancer — {date.today()}")
     print(f"Account equity: ${equity:,.2f}")
 
     if positions:
