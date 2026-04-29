@@ -34,6 +34,13 @@ by (0.25 / realized_6m_vol), clamp 0.5x–2x. Confirmed Sharpe 4.600→4.846,
 MaxDD -3.0%→-2.2%, AltOOS +2.1884. Only activates during extreme vol periods
 (2022 selloff, 2020 COVID, 2008 crisis). OOS cumul change negligible (+0.003).
 
+H134 note (vs H133): backtesting confirmed that the production H045 scoring
+formula (rank(3m)+rank(6m)+rank(12m)+rank(inv_vol) via compute_signal) is
+the optimal formula. Prior backtest runs (H128/H130/H133) used a simplified
+rank(12m)+rank(inv_vol) for H045, underestimating production performance.
+H134 backtest baseline corrected: OOS 24.9104, AltOOS 89.6697, Sharpe 4.889.
+No code change needed — production was already using the correct full ensemble.
+
 Run on the first trading day of each month at ~9:45 AM CT.
 Usage:
     python3 h112_monthly.py            # live run
