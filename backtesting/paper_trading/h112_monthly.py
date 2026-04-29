@@ -58,7 +58,12 @@ bonds in rate transition periods). Confirmed D (+1.0%): OOS Δ+0.6211,
 AltOOS Δ+3.1296, MaxDD -2.5% (unchanged). All four non-zero variants confirmed.
 When rates are near-zero and rising (e.g., early 2022), BIL also earns <1%
 quarterly and H045 goes to cash — correctly avoiding the rate hike massacre.
-New baseline: OOS 27.6154, AltOOS 98.8229, Sharpe 4.981.
+
+H142 upgrade (vs H141): H045 changed from top-2 to top-1. With the +1%
+threshold reducing the filtered pool to 5-8 bonds, the #1 ranked bond
+dominates the #2 significantly. Confirmed: OOS Δ+0.2605, AltOOS Δ+0.4659,
+MaxDD -2.5% → -2.2% (improved), Sharpe ~unchanged. Top-3 NOT confirmed.
+New baseline: OOS 27.8759, AltOOS 99.2888, Sharpe 4.979.
 
 Run on the first trading day of each month at ~9:45 AM CT.
 Usage:
@@ -99,7 +104,7 @@ H045_ASSETS = [
 SUB_STRATS = {
     "h041a": {"assets": H041A_ASSETS, "n_hold": 1, "weight": 0.22, "tsmom_filter": True,  "tsmom_lb": 3,  "tsmom_threshold": 0.005},  # H130: 3m filter; H140: threshold +0.5%
     "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 0.27, "tsmom_filter": True,  "tsmom_lb": 12, "tsmom_threshold": 0.05},  # H116: 12m filter; H139: threshold +5%
-    "h045":  {"assets": H045_ASSETS,  "n_hold": 2, "weight": 0.21, "tsmom_filter": True,  "tsmom_lb": 3,  "tsmom_threshold": 0.01},   # H128: 3m filter; H141: threshold +1%
+    "h045":  {"assets": H045_ASSETS,  "n_hold": 1, "weight": 0.21, "tsmom_filter": True,  "tsmom_lb": 3,  "tsmom_threshold": 0.01},   # H128: 3m; H141: +1% threshold; H142: top-1
 }
 
 LOG_FILE = Path(__file__).parent / "h112_monthly_trades.json"
