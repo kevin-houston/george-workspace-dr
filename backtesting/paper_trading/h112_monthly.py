@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-H120 Monthly Portfolio Rebalancer
+H122 Monthly Portfolio Rebalancer
 Manages H041a (22%), H026 (27%), H045 (21%) sub-strategies.
 
 H116 upgrade (vs H112): H026 uses TSMOM filter — only assets with positive
@@ -8,8 +8,13 @@ H116 upgrade (vs H112): H026 uses TSMOM filter — only assets with positive
 
 H120 upgrade (vs H116): ranking signal is now the rank ensemble of
 3m + 6m + 12m momentum (each ranked independently then summed). Confirmed
-+28% OOS improvement (+1.85 cumul) and MaxDD improvement -3.6% → -2.4%.
++28% OOS improvement and MaxDD improvement -3.6% → -2.4%.
 TSMOM filter still uses 12m return sign (unchanged).
+
+H122 upgrade (vs H120): vol-targeting on H026 only (H121 confirmed). Scale
+H026 base weight (27%) by (target_vol / realized_6m_vol), clamp 0.5x–2x,
+renorm rotation total to stay at 70%. Uses trade log history to compute H026
+realized vol. Falls back to fixed weights when < 3 months of history.
 
 Run on the first trading day of each month at ~9:45 AM CT.
 Usage:
@@ -55,6 +60,12 @@ SUB_STRATS = {
 
 LOG_FILE = Path(__file__).parent / "h112_monthly_trades.json"
 MIN_ORDER_USD = 5.0  # ignore rebalance deltas smaller than $5
+
+# H122: vol-targeting on H026 only
+ROTATION_WEIGHT = 0.22 + 0.27 + 0.21  # 0.70 — total rotation allocation
+VOL_TARGET_H026 = 0.15   # ~long-run annualized vol of H026 from backtests
+VOL_WINDOW_H026 = 6      # months of history to estimate realized vol
+VOL_CLAMP_H026  = (0.5, 2.0)
 
 
 # ── Signal computation ──────────────────────────────────────────────────────
@@ -153,18 +164,78 @@ def get_latest_price(symbol: str) -> float:
     return float(closes.dropna().iloc[-1])
 
 
+def get_period_return(symbol: str, date_from: str, date_to: str) -> float:
+    """Price return of symbol from date_from to date_to."""
+    raw = yf.download(symbol, start=date_from, end=date_to,
+                      auto_adjust=True, progress=False)
+    closes = raw["Close"] if isinstance(raw.columns, pd.MultiIndex) else raw
+    if isinstance(closes, pd.DataFrame):
+        closes = closes[symbol]
+    closes = closes.dropna()
+    if len(closes) < 2:
+        return 0.0
+    return float(closes.iloc[-1] / closes.iloc[0] - 1)
+
+
+# ── H022: H026 vol-targeting ─────────────────────────────────────────────────
+
+def compute_h026_vol_scale(log: list) -> float:
+    """
+    Scale H026 base weight by (VOL_TARGET_H026 / realized_6m_vol).
+    Uses trade log to reconstruct H026 monthly returns.
+    Returns 1.0 (no scaling) when < 3 months of history.
+    """
+    if len(log) < 3:
+        return 1.0
+
+    entries = []
+    for entry in log:
+        sigs = entry.get("signals", {})
+        top_n = sigs.get("h026", {}).get("top_n", [])
+        entries.append({"date": entry["date"], "sym": top_n[0] if top_n else None})
+
+    n = min(len(entries) - 1, VOL_WINDOW_H026)
+    recent = entries[-(n + 1):]
+
+    monthly_rets = []
+    for i in range(len(recent) - 1):
+        sym = recent[i]["sym"]
+        if sym is None:
+            monthly_rets.append(0.0)
+            continue
+        try:
+            r = get_period_return(sym, recent[i]["date"], recent[i + 1]["date"])
+            monthly_rets.append(r)
+        except Exception:
+            monthly_rets.append(0.0)
+
+    if len(monthly_rets) < 3:
+        return 1.0
+
+    realized_vol = float(pd.Series(monthly_rets).std(ddof=1)) * np.sqrt(12)
+    if realized_vol <= 0:
+        return 1.0
+    return float(np.clip(VOL_TARGET_H026 / realized_vol, VOL_CLAMP_H026[0], VOL_CLAMP_H026[1]))
+
+
 # ── Trade planning ──────────────────────────────────────────────────────────
 
-def build_target(equity: float) -> dict[str, float]:
+def build_target(equity: float, h026_scale: float = 1.0) -> dict[str, float]:
     """
     Compute {symbol: target_usd} across all sub-strategies.
-    Symbols held by multiple sub-strategies have their allocations summed.
+    H026 weight is scaled by h026_scale then rotation is renormed to ROTATION_WEIGHT.
     """
+    # Compute effective per-sub weights
+    raw_weights = {name: cfg["weight"] for name, cfg in SUB_STRATS.items()}
+    raw_weights["h026"] *= h026_scale
+    rot_sum = sum(raw_weights.values())
+    eff_weights = {k: v * ROTATION_WEIGHT / rot_sum for k, v in raw_weights.items()}
+
     target: dict[str, float] = {}
     signals: dict[str, tuple[list[str], dict]] = {}
 
     for name, cfg in SUB_STRATS.items():
-        alloc_per_slot = equity * cfg["weight"] / cfg["n_hold"]
+        alloc_per_slot = equity * eff_weights[name] / cfg["n_hold"]
         top_n, scores = compute_signal(
             cfg["assets"], cfg["n_hold"],
             tsmom_filter=cfg.get("tsmom_filter", False),
@@ -175,7 +246,7 @@ def build_target(equity: float) -> dict[str, float]:
         if not top_n:
             print(f"  {name.upper()}: TSMOM filter — no qualifying assets, holding cash this month")
 
-    return target, signals
+    return target, signals, eff_weights
 
 
 def build_trade_plan(
@@ -258,6 +329,12 @@ def is_first_trading_day() -> bool:
 
 # ── Logging ─────────────────────────────────────────────────────────────────
 
+def load_trade_log() -> list:
+    if not LOG_FILE.exists():
+        return []
+    return json.loads(LOG_FILE.read_text())
+
+
 def log_run(entry: dict):
     log = json.loads(LOG_FILE.read_text()) if LOG_FILE.exists() else []
     log.append(entry)
@@ -281,7 +358,9 @@ def main():
     positions = get_positions(client)
     equity    = get_equity(client)
 
-    print(f"\nH120 Monthly Rebalancer — {date.today()}")
+    log = load_trade_log()
+
+    print(f"\nH122 Monthly Rebalancer — {date.today()}")
     print(f"Account equity: ${equity:,.2f}")
 
     if positions:
@@ -294,15 +373,25 @@ def main():
     if args.status:
         return
 
+    # H122: compute H026 vol-targeting scale from trade log history
+    h026_scale = compute_h026_vol_scale(log)
+    if len(log) < 3:
+        print(f"\nH026 vol-scale: 1.000 (fixed — only {len(log)} month(s) of history, need ≥3)")
+    else:
+        raw_w = 0.27 * h026_scale
+        rot_sum = 0.22 + raw_w + 0.21
+        eff_w = raw_w * ROTATION_WEIGHT / rot_sum
+        print(f"\nH026 vol-scale: {h026_scale:.3f}  (base 27% → effective {eff_w*100:.1f}%)")
+
     # Compute signals
     print("\nFetching signals (downloading ~15mo of price data)…")
-    target, signals = build_target(equity)
+    target, signals, eff_weights = build_target(equity, h026_scale=h026_scale)
 
     print("\nSub-strategy targets:")
     for name, (top_n, scores) in signals.items():
-        cfg = SUB_STRATS[name]
-        alloc_per = equity * cfg["weight"] / cfg["n_hold"]
-        print(f"\n  {name.upper()} ({cfg['weight']*100:.0f}%):  top-{cfg['n_hold']} → {', '.join(top_n)}")
+        eff_w = eff_weights[name]
+        print(f"\n  {name.upper()} ({eff_w*100:.1f}%):  top-{SUB_STRATS[name]['n_hold']} → "
+              f"{', '.join(top_n) if top_n else 'CASH'}")
         for sym in sorted(scores, key=lambda s: -scores[s]["score"])[:5]:
             mark = "★" if sym in top_n else " "
             sc = scores[sym]
@@ -326,11 +415,13 @@ def main():
 
     if not args.dry_run and executed:
         log_run({
-            "date":      date.today().isoformat(),
-            "equity":    equity,
-            "target":    target,
-            "signals":   {k: {"top_n": v[0]} for k, v in signals.items()},
-            "trades":    executed,
+            "date":        date.today().isoformat(),
+            "equity":      equity,
+            "target":      target,
+            "eff_weights": {k: round(v, 4) for k, v in eff_weights.items()},
+            "h026_scale":  round(h026_scale, 4),
+            "signals":     {k: {"top_n": v[0]} for k, v in signals.items()},
+            "trades":      executed,
         })
         print(f"\n✓ Logged {len(executed)} trades to {LOG_FILE.name}")
     elif args.dry_run:

@@ -147,7 +147,7 @@ def main():
     positions = get_positions(client)
 
     print(f"\n{'='*60}")
-    print(f"  H120 Paper Portfolio Monitor — {date.today()}")
+    print(f"  H122 Paper Portfolio Monitor — {date.today()}")
     print(f"{'='*60}")
     print(f"  Equity:        ${acc['equity']:>12,.2f}")
     print(f"  Cash:          ${acc['cash']:>12,.2f}")
