@@ -1,7 +1,7 @@
 ---
-updated: 2026-04-28
+updated: 2026-04-29
 status: active
-phase: 2→3 — backtesting complete, paper trading ready
+phase: 2→3 — backtesting complete, paper trading active
 ---
 
 # Trading & Prediction Markets Project
@@ -23,11 +23,13 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
+  - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
   - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)
   - [Polygon.io](data-sources/polygon.md) ← expanded 2026-04-28 (API endpoints, WebSocket, pricing, vs Alpaca)
   - [Free / Low-Cost Sources](data-sources/free-data.md) ← expanded 2026-04-28 (Tiingo, EDGAR, Finnhub, FRED, yfinance status)
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
+  - [Kalshi](prediction-markets/kalshi.md) ← expanded 2026-04-29 (full auth/API/WebSocket, RSA signing, CPI nowcasting implementation, fee modeling, rate limits, Timeless perps)
 - [Backtesting](backtesting/) — setup, results, methodology
 - [Paper Trading](paper-trading/) — Alpaca results log
 - [Research Log](research-log/) — nightly research summaries
