@@ -1,5 +1,5 @@
 ---
-updated: 2026-04-30
+updated: 2026-05-01
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -26,6 +26,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
+  - [Kraken CLI](tools/kraken-cli.md) ← expanded 2026-05-01 (all 50 agent skills, MCP service groups, full command reference)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
   - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)
   - [Polygon.io](data-sources/polygon.md) ← expanded 2026-04-28 (API endpoints, WebSocket, pricing, vs Alpaca)

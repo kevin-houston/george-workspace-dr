@@ -1,0 +1,31 @@
+H152 — GDX/SIL ETF Pairs Trading Backtest
+============================================================
+
+Pair: GDX (X) / SIL (Y)
+Data: 2010-04-20 → 2026-04-29  (4032 trading days)
+
+COINTEGRATION
+  Full period: p=0.4904  NOT cointegrated
+  IS (2010-17): p=0.0311  cointegrated
+  OOS (2018+):  p=0.4650  NOT cointegrated
+
+HEDGE RATIO (full-sample OLS, reference): β=0.9226  α=7.3562
+HALF-LIFE: IS=41.3d  OOS=59.3d
+
+BACKTEST PERFORMANCE
+                                IS (2011-17)   OOS (2018+)   AltOOS (2013+)
+  Cumul return                        0.5892        0.4996        0.4354
+  CAGR                                -7.29%        -8.02%        -6.06%
+  Annualized vol                      20.23%        13.08%        16.40%
+  Sharpe                              -0.360        -0.613        -0.369
+  Max drawdown                       -50.80%       -58.94%       -72.74%
+  Negative years                           5             6             9
+
+SPY OOS: cumul=3.0295  CAGR=14.28%  Sharpe=0.741
+
+CORRELATION WITH H026
+  OOS:    -0.102
+  AltOOS: -0.011
+
+VERDICT: NOT CONFIRMED
+Checks passed: 0/4
