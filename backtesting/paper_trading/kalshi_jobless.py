@@ -63,10 +63,10 @@ MA4_BLEND      = 0.25        # blend 25% toward 4-week MA as anchor
 # ── Credentials ───────────────────────────────────────────────────────────────
 
 def load_credentials() -> tuple[str, str]:
-    key_id = os.environ.get("KALSHI_API_KEY_ID", "")
+    key_id = os.environ.get("KALSHI_API_KEY_ID") or os.environ.get("KALSHI_API_KEY", "")
     if not key_id:
         raise EnvironmentError(
-            "KALSHI_API_KEY_ID not set.\n"
+            "KALSHI_API_KEY_ID (or KALSHI_API_KEY) not set.\n"
             "  1. Go to kalshi.com → Account & Security → API Keys\n"
             "  2. Generate RSA key pair (2048-bit), save private key immediately\n"
             "  3. export KALSHI_API_KEY_ID=<your-key-id>\n"

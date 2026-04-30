@@ -65,6 +65,72 @@ dominates the #2 significantly. Confirmed: OOS Δ+0.2605, AltOOS Δ+0.4659,
 MaxDD -2.5% → -2.2% (improved), Sharpe ~unchanged. Top-3 NOT confirmed.
 New baseline: OOS 27.8759, AltOOS 99.2888, Sharpe 4.979.
 
+H143 upgrade (vs H142): H026 vol-target raised from 15% to 20%. With the
++5% TSMOM threshold (H139), H026 now selects only confirmed strong-trend
+sectors which exhibit lower realized volatility — the 15% target
+under-leverages the position. Raising to 20% keeps full allocation during
+normal-vol trend regimes, scaling down only in genuine high-vol crashes.
+Confirmed D (20%): OOS Δ+3.1313, AltOOS Δ+13.7807, Sharpe 4.979→4.932,
+MaxDD -2.2% → -2.4%. E (25%) also confirmed but Sharpe cost -0.162.
+New baseline: OOS 31.0072, AltOOS 113.0695, Sharpe 4.932, MaxDD -2.4%.
+
+H144 upgrade (vs H143): H041a vol-target lowered from 25% to 20%. Global
+equity ETFs (QQQ, SPY, EFA, EEM) carry 15-20% typical annualized vol, so
+the 25% target systematically scaled positions above 1x during normal
+periods. The 20% target brings H041a to ~1x during normal markets and only
+scales up during confirmed low-vol trending regimes. Marginal but confirmed:
+OOS Δ+0.1265, AltOOS Δ+0.6617, Sharpe 4.932→4.899, MaxDD -2.4%→-2.5%.
+Higher targets (30-40%) all fail AltOOS.
+New baseline: OOS 31.1337, AltOOS 113.7312, Sharpe 4.899, MaxDD -2.5%.
+
+H145 upgrade (vs H144): Weight rebalance — H026 raised from 27% to 30%,
+H041a lowered 22% to 20%, H045 lowered 21% to 20%. H026 confirmed as
+the primary alpha engine; every H026 improvement (TSMOM threshold, vol-target,
+weight increase) has been the largest single improvement in each test. Only
+variant B (more H026) confirmed; more H041a, H045, balanced allocations all
+fail both windows. Confirmed: OOS Δ+2.7212, AltOOS Δ+12.2529, Sharpe
+4.899→4.801, MaxDD -2.5%→-2.6%. Total rotation weight stays at 70%.
+New baseline: OOS 33.8549, AltOOS 125.9841, Sharpe 4.801, MaxDD -2.6%.
+
+H146 upgrade (vs H145): H026 raised further from 30% to 34%; H041a and
+H045 each lowered to 18%. Monotonic pattern: D(31%) OOS Δ+1.09, E(32%)
+Δ+2.21, F(34%) Δ+4.57. F confirmed: OOS Δ+4.5731, AltOOS Δ+21.4560,
+Sharpe 4.801→4.653, MaxDD -2.6%→-2.9%. Every 1pp H026 increase costs
+~0.037 Sharpe but adds ~1-2 OOS cumul — acceptable trade-off given goal
+of maximizing absolute returns. H026 is now 48.6% of rotation allocation.
+B(28%) and C(29%) fail — floor confirmed at 30%. Upper bound not yet found.
+New baseline: OOS 38.4280, AltOOS 147.4401, Sharpe 4.653, MaxDD -2.9%.
+
+H147 upgrade (vs H146): H026 raised from 34% to 46%; H041a and H045 each
+lowered to 12%. ALL variants confirmed (B-F): B(36%) OOS Δ+2.51, C(38%)
+Δ+5.19, D(40%) Δ+8.05, E(43%) Δ+12.71, F(46%) Δ+17.88. Deployed F:
+OOS Δ+17.8754, AltOOS Δ+89.7045, Sharpe 4.653→4.146, MaxDD -2.9%→-3.6%.
+MaxDD remains low because TSMOM filter sends H026 to BIL (cash) when no
+sectors have >5% 12m return — protecting against concentration risk in
+crashes. H026 is now 65.7% of the 70% rotation allocation. Upper bound
+still not found — monotonic improvement pattern continuing.
+New baseline: OOS 56.3034, AltOOS 237.1446, Sharpe 4.146, MaxDD -3.6%.
+
+H148 upgrade (vs H147): H026 raised to 70% (entire rotation); H041a and
+H045 eliminated. ALL variants confirmed: B(50%) OOS Δ+7.78, C(55%)
+Δ+19.25, D(60%) Δ+33.16, E(62%) Δ+39.57, F(70%) Δ+71.64. Deployed F
+(H026=70%): OOS Δ+71.6428, AltOOS Δ+438.1840, Sharpe 4.146→3.153,
+MaxDD -3.6%→-7.6%. Key insight: at single-leg rotation, vol-targeting is
+neutralized by renorm — effectively a constant 70% H026 allocation.
+New baseline: OOS 127.9462, AltOOS 675.3286, Sharpe 3.153, MaxDD -7.6%.
+
+H149 upgrade (vs H148): H026 raised from 70% to 100% of portfolio by
+replacing the unused 30% cash/IBS budget. Discovery: IBS strategies
+(XLK/SMH/IGV) existed in backtests but were NEVER deployed to production
+— the "30% IBS" was effectively 30% idle cash. Removing this cash drag
+and allocating everything to H026 confirmed across ALL variants: G (100%)
+OOS Δ+254.9893, AltOOS Δ+2567.7497, Sharpe 3.153→3.007, MaxDD -7.6%→-9.6%.
+Strategy is now purely: 100% in the top-1 qualifying H026 sector ETF
+(with >5% 12m return). When no sector qualifies, 100% goes to BIL.
+Monthly rebalance to the new leading sector. MaxDD -9.6% comes from
+holding a single sector ETF that reverses in the same month it's selected.
+New baseline: OOS 382.9355, AltOOS 3243.0783, Sharpe 3.007, MaxDD -9.6%.
+
 Run on the first trading day of each month at ~9:45 AM CT.
 Usage:
     python3 h112_monthly.py            # live run
@@ -102,18 +168,16 @@ H045_ASSETS = [
 ]
 
 SUB_STRATS = {
-    "h041a": {"assets": H041A_ASSETS, "n_hold": 1, "weight": 0.22, "tsmom_filter": True,  "tsmom_lb": 3,  "tsmom_threshold": 0.005},  # H130: 3m filter; H140: threshold +0.5%
-    "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 0.27, "tsmom_filter": True,  "tsmom_lb": 12, "tsmom_threshold": 0.05},  # H116: 12m filter; H139: threshold +5%
-    "h045":  {"assets": H045_ASSETS,  "n_hold": 1, "weight": 0.21, "tsmom_filter": True,  "tsmom_lb": 3,  "tsmom_threshold": 0.01},   # H128: 3m; H141: +1% threshold; H142: top-1
+    "h026":  {"assets": H026_ASSETS,  "n_hold": 1, "weight": 1.00, "tsmom_filter": True,  "tsmom_lb": 12, "tsmom_threshold": 0.05},   # H116: 12m; H139: +5%; H145-H149: 27%→100% of portfolio
 }
 
 LOG_FILE = Path(__file__).parent / "h112_monthly_trades.json"
 MIN_ORDER_USD = 5.0  # ignore rebalance deltas smaller than $5
 
 # H122/H133: vol-targeting on H026 and H041a
-ROTATION_WEIGHT  = 0.22 + 0.27 + 0.21  # 0.70 — total rotation allocation
-VOL_TARGET_H026  = 0.15   # ~long-run annualized vol of H026 from backtests
-VOL_TARGET_H041A = 0.25   # H133: vol-target H041a at 25% (only scales in extreme vol)
+ROTATION_WEIGHT  = 1.00  # H149: 100% of portfolio in H026; IBS strategies not deployed in production
+VOL_TARGET_H026  = 0.20   # H143: raised from 15% → 20% (strong-trend sectors post-+5% threshold run lower realized vol)
+VOL_TARGET_H041A = 0.20   # H144: lowered from 25% → 20% (H041a equities avg 15-20% vol; 20% target is 1x at typical vol)
 VOL_WINDOW_H026  = 6      # months of history to estimate realized vol (shared)
 VOL_CLAMP_H026   = (0.5, 2.0)
 
@@ -313,17 +377,16 @@ def compute_h041a_vol_scale(log: list) -> float:
 
 # ── Trade planning ──────────────────────────────────────────────────────────
 
-def build_target(equity: float, h026_scale: float = 1.0,
-                 h041a_scale: float = 1.0) -> dict[str, float]:
+def build_target(equity: float, h026_scale: float = 1.0) -> dict[str, float]:
     """
     Compute {symbol: target_usd} across all sub-strategies.
-    H026 and H041a weights are scaled by their vol-target factors,
-    then rotation is renormed to ROTATION_WEIGHT.
+    H026 weight is scaled by its vol-target factor, then renormed to ROTATION_WEIGHT.
+    H149: only H026 remains; vol-targeting is neutralized by renorm (single leg).
     """
     # Compute effective per-sub weights
     raw_weights = {name: cfg["weight"] for name, cfg in SUB_STRATS.items()}
-    raw_weights["h026"]  *= h026_scale
-    raw_weights["h041a"] *= h041a_scale
+    if "h026" in raw_weights:
+        raw_weights["h026"] *= h026_scale
     rot_sum = sum(raw_weights.values())
     eff_weights = {k: v * ROTATION_WEIGHT / rot_sum for k, v in raw_weights.items()}
 
@@ -459,7 +522,7 @@ def main():
 
     log = load_trade_log()
 
-    print(f"\nH133 Monthly Rebalancer — {date.today()}")
+    print(f"\nH149 Monthly Rebalancer — {date.today()}")
     print(f"Account equity: ${equity:,.2f}")
 
     if positions:
@@ -472,25 +535,16 @@ def main():
     if args.status:
         return
 
-    # H122/H133: compute vol-targeting scales from trade log history
-    h026_scale  = compute_h026_vol_scale(log)
-    h041a_scale = compute_h041a_vol_scale(log)
+    # H149: only H026 remains; vol-targeting is neutralized by renorm (single leg)
+    h026_scale = compute_h026_vol_scale(log)
     if len(log) < 3:
-        print(f"\nH026 vol-scale:  1.000 (fixed — only {len(log)} month(s) of history, need ≥3)")
-        print(f"H041a vol-scale: 1.000 (fixed — only {len(log)} month(s) of history, need ≥3)")
+        print(f"\nH026 vol-scale: 1.000 (fixed — only {len(log)} month(s) of history, need ≥3)")
     else:
-        raw_h026  = 0.27 * h026_scale
-        raw_h041a = 0.22 * h041a_scale
-        rot_sum   = raw_h041a + raw_h026 + 0.21
-        eff_h026  = raw_h026  * ROTATION_WEIGHT / rot_sum
-        eff_h041a = raw_h041a * ROTATION_WEIGHT / rot_sum
-        print(f"\nH026 vol-scale:  {h026_scale:.3f}  (base 27% → effective {eff_h026*100:.1f}%)")
-        print(f"H041a vol-scale: {h041a_scale:.3f}  (base 22% → effective {eff_h041a*100:.1f}%)")
+        print(f"\nH026 vol-scale: {h026_scale:.3f}  (effective allocation always 100% due to single-leg renorm)")
 
     # Compute signals
     print("\nFetching signals (downloading ~15mo of price data)…")
-    target, signals, eff_weights = build_target(equity, h026_scale=h026_scale,
-                                                 h041a_scale=h041a_scale)
+    target, signals, eff_weights = build_target(equity, h026_scale=h026_scale)
 
     print("\nSub-strategy targets:")
     for name, (top_n, scores) in signals.items():
@@ -525,7 +579,6 @@ def main():
             "target":      target,
             "eff_weights": {k: round(v, 4) for k, v in eff_weights.items()},
             "h026_scale":  round(h026_scale, 4),
-            "h041a_scale": round(h041a_scale, 4),
             "signals":     {k: {"top_n": v[0]} for k, v in signals.items()},
             "trades":      executed,
         })

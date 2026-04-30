@@ -68,10 +68,10 @@ ADP_BLEND      = 0.30     # weight on ADP nowcast when available
 # ── Credentials ───────────────────────────────────────────────────────────────
 
 def load_credentials() -> tuple[str, str]:
-    key_id = os.environ.get("KALSHI_API_KEY_ID", "")
+    key_id = os.environ.get("KALSHI_API_KEY_ID") or os.environ.get("KALSHI_API_KEY", "")
     if not key_id:
         raise EnvironmentError(
-            "KALSHI_API_KEY_ID not set.\n"
+            "KALSHI_API_KEY_ID (or KALSHI_API_KEY) not set.\n"
             "  1. Go to kalshi.com → Account & Security → API Keys\n"
             "  2. Generate RSA key pair (2048-bit), save private key immediately\n"
             "  3. export KALSHI_API_KEY_ID=<your-key-id>\n"
@@ -202,21 +202,28 @@ def get_event_markets(event_ticker: str) -> list[dict]:
 
 def parse_market_info(ticker: str) -> tuple[int | None, str]:
     """
-    Extract threshold and direction from KXUSNFP ticker.
-    Format: KXUSNFP-25MAY02-T200000 (threshold = 200000, direction from title)
-    or:     KXUSNFP-25MAY02-B200000 (T=above, B=below — example convention)
-    Falls back to parsing market title if needed.
-    Returns (threshold_raw, direction).
+    Extract threshold (raw payroll count) and direction from KXUSNFP ticker.
+    Actual Kalshi format uses thousands: KXUSNFP-26MAY08-T240 means 240K.
+    Negative thresholds split as [..., "T", "40"] since "-" is the delimiter.
+    Returns (threshold_raw_count, direction).
     """
     parts = ticker.split("-")
     if len(parts) < 3:
         return None, "above"
     last = parts[-1]
-    # Convention: numeric suffix only — direction inferred from market title
+    second_last = parts[-2]
     try:
-        threshold = int(last.lstrip("TB"))
-        direction = "below" if last.startswith("B") else "above"
-        return threshold, direction
+        # Negative threshold: e.g. KXUSNFP-26MAY08-T-40 → parts=[..., "T", "40"]
+        if second_last.endswith(("T", "B")) and last.isdigit():
+            sign = -1
+            prefix = second_last[-1]
+            threshold_k = -int(last)
+        else:
+            sign = 1
+            prefix = last[0] if last and last[0] in ("T", "B") else "T"
+            threshold_k = int(last.lstrip("TB"))
+        direction = "below" if prefix == "B" else "above"
+        return threshold_k * 1_000, direction
     except (ValueError, IndexError):
         return None, "above"
 

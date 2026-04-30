@@ -63,10 +63,10 @@ PCE_BLEND      = 0.30     # weight on PCE nowcast vs ARIMA (0 = ARIMA only)
 
 def load_credentials() -> tuple[str, str]:
     """Load Kalshi API key and private key PEM. Raises on missing."""
-    key_id = os.environ.get("KALSHI_API_KEY_ID", "")
+    key_id = os.environ.get("KALSHI_API_KEY_ID") or os.environ.get("KALSHI_API_KEY", "")
     if not key_id:
         raise EnvironmentError(
-            "KALSHI_API_KEY_ID not set.\n"
+            "KALSHI_API_KEY_ID (or KALSHI_API_KEY) not set.\n"
             "  1. Create a Kalshi account at https://kalshi.com\n"
             "  2. Go to Account & Security → API Keys\n"
             "  3. Generate a new RSA key pair (2048-bit)\n"
