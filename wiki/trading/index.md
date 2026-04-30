@@ -1,5 +1,5 @@
 ---
-updated: 2026-04-29
+updated: 2026-04-30
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -21,6 +21,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 
 - [Algorithms](algorithms/) — trading strategy catalog
   - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
+  - [Momentum Strategies](algorithms/momentum-strategies.md) ← new 2026-04-30 (H001–H151 findings, implementation guide)
+  - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← new 2026-04-30 (ETF pairs, cointegration, Kalman filter, H152+ plan)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
