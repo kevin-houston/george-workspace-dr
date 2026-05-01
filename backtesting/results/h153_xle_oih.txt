@@ -1,0 +1,13 @@
+H153 — XLE/OIH ETF Pairs Trading
+============================================================
+
+Full-sample β=-2.2549
+Half-life IS=58.3d OOS=35.3d
+
+PERFORMANCE
+  IS(2013-17): cumul=0.0000 CAGR=-100.00% Sharpe=-0.229 MaxDD=-100.00% NegYrs=4
+  OOS(2018+): cumul=0.0000 CAGR=-99.26% Sharpe=-0.254 MaxDD=-100.00% NegYrs=8
+  AltOOS: cumul=0.0000 Sharpe=-0.244
+  SPY OOS: cumul=3.0295 CAGR=14.28%
+
+VERDICT: NOT CONFIRMED (0/4)

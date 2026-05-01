@@ -1,0 +1,14 @@
+H154 — IEF/TLT Treasury Yield Curve Pairs Trading
+============================================================
+
+Data: 2007-01-03 → 2026-04-29
+Full-sample β=1.5116  α=-36.6950
+OOS cointegration: NO
+
+VARIANTS
+  A(z_lb=30d): OOS cumul=1.2260 CAGR=2.49% Sharpe=0.514 MaxDD=-7.18%
+  B(z_lb=60d): OOS cumul=1.1037 CAGR=1.20% Sharpe=0.252 MaxDD=-10.89%
+  C(z_lb=120d): OOS cumul=1.1384 CAGR=1.57% Sharpe=0.334 MaxDD=-7.12%
+  SPY OOS: cumul=3.0295 CAGR=14.28%
+
+VERDICT: NOT CONFIRMED  (best: A (z_lb=30d))
