@@ -1,0 +1,17 @@
+H156 — Cross-Sectional Stock Momentum (NASDAQ)
+============================================================
+
+Universe: 54 stocks (survivorship-biased), monthly rebalance
+Signal: 12-1 month momentum, equal-weight top-N
+Cost: 0.1% RT per rebalance
+QQQ OOS: cumul=4.4811  Sharpe=0.983
+SPY OOS: cumul=3.0295  Sharpe=0.861
+
+VARIANTS
+  n=10: OOS cumul=3.0388 CAGR=14.27% Sharpe=0.541 MaxDD=-37.03% NegYrs=2
+  n=15: OOS cumul=3.9188 CAGR=17.81% Sharpe=0.754 MaxDD=-28.86% NegYrs=3
+  n=20: OOS cumul=4.1834 CAGR=18.74% Sharpe=0.866 MaxDD=-29.69% NegYrs=1
+  n=30: OOS cumul=1.0000 CAGR=0.00% Sharpe=0.000 MaxDD=0.00% NegYrs=0
+
+VERDICT: PARTIAL  (best: n=20)
+CAVEAT: Survivorship bias — result is directional only

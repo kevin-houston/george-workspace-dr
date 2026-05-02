@@ -1,0 +1,17 @@
+H155 — IEF/TLT Kalman Filter Pairs Trading
+============================================================
+
+Data: 2007-01-03 → 2026-04-29
+H154 benchmark: OOS Sharpe=0.514  cumul=1.226  MaxDD=-7.18%
+SPY OOS: cumul=3.0295  Sharpe=0.741
+
+VARIANTS
+  A (Q=1e-4, z30): OOS cumul=0.9851 CAGR=-0.18% Sharpe=-0.051 MaxDD=-8.90% NegYrs=6
+  B (Q=1e-3, z30): OOS cumul=0.9705 CAGR=-0.36% Sharpe=-0.110 MaxDD=-9.92% NegYrs=7
+  C (Q=1e-5, z30): OOS cumul=1.0418 CAGR=0.49% Sharpe=0.118 MaxDD=-9.13% NegYrs=4
+  D (Q=1e-4, z30, +α): OOS cumul=0.9771 CAGR=-0.28% Sharpe=-0.096 MaxDD=-6.66% NegYrs=5
+  E (Q=1e-4, z60): OOS cumul=1.0041 CAGR=0.05% Sharpe=0.013 MaxDD=-8.54% NegYrs=5
+  F (Q=5e-4, z30): OOS cumul=1.0254 CAGR=0.30% Sharpe=0.092 MaxDD=-7.62% NegYrs=6
+
+VERDICT: NOT CONFIRMED  (best: C (Q=1e-5, z30))
+Best OOS Sharpe=0.118  cumul=1.0418
