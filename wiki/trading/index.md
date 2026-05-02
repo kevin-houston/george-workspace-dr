@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-01
+updated: 2026-05-02
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -33,6 +33,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Free / Low-Cost Sources](data-sources/free-data.md) ← expanded 2026-04-28 (Tiingo, EDGAR, Finnhub, FRED, yfinance status)
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
   - [Kalshi](prediction-markets/kalshi.md) ← expanded 2026-04-29 (full auth/API/WebSocket, RSA signing, CPI nowcasting implementation, fee modeling, rate limits, Timeless perps)
+  - [Algorithmic Strategies](prediction-markets/algorithmic-strategies.md) ← expanded 2026-05-02 (cross-market arb, nowcasting with full Python lifecycle, calibration, Timeless funding arb, IBKR ForecastTrader API)
+  - [Other Platforms](prediction-markets/other-platforms.md) ← expanded 2026-05-02 (IBKR ForecastTrader full API, Kalshi Timeless mechanics, emerging platforms)
 - [Backtesting](backtesting/) — setup, results, methodology
 - [Paper Trading](paper-trading/) — Alpaca results log
 - [Research Log](research-log/) — nightly research summaries
