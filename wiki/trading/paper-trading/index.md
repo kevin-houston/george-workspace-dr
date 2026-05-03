@@ -35,7 +35,7 @@ BSM pricing via Massive.com. Last open position: IC-2026-04-26-001 (SPY Jun 12, 
 | Month | Holdings | Signal |
 |-------|----------|--------|
 | 2026-04 (old H122) | EWH (H041a) + IBB (H026) + HYG/BIL (H045) | Launched 2026-04-28 under old triple-strategy |
-| 2026-05 (H149) | TBD — run h112_monthly.py May 1 at 9:45 AM CT | Pure H026 top-1 sector |
+| 2026-05 (H149) | Run May 1 — check h112_monthly.py output for current holding | Pure H026 top-1 sector |
 
 ---
 

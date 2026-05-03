@@ -8,6 +8,8 @@ status: active — H152+ backtesting planned
 
 Mean-reversion strategy exploiting temporary deviations from a long-run equilibrium between two or more co-moving ETFs. The alpha source is cointegration — two price series that individually follow random walks but share a stationary spread.
 
+**Related pages**: [Momentum Strategies](momentum-strategies.md) — opposite alpha source; low correlation to pairs | [Event-Driven Strategies](event-driven.md) — H160 factor-residualized pairs design | [Hypothesis Log](../backtesting/hypothesis-log.md) — H152–H155 NOT CONFIRMED; H160 QUEUED
+
 **Academic foundation**: Engle & Granger (1987) — Error Correction Models; Gatev, Goetzmann & Rouwenhorst (2006) — classic pairs trading study on US stocks (60-day formation, 6-month trading window).
 
 ---

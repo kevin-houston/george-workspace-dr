@@ -6,7 +6,9 @@ status: production — H026 deployed on Alpaca paper trading
 
 # Momentum Strategies
 
-Comprehensive guide to momentum-based algorithmic trading, with findings from the H-series backtesting program (H001–H151, 2026).
+Comprehensive guide to momentum-based algorithmic trading, with findings from the H-series backtesting program (H001–H165, 2026).
+
+**Related pages**: [Pairs Trading / Stat Arb](pairs-trading.md) — mean-reversion complement to momentum | [Event-Driven Strategies](event-driven.md) — PEAD, dividend drift, H159b/H161/H162 | [Position Sizing](position-sizing.md) — Kelly, vol-targeting | [Hypothesis Log](../backtesting/hypothesis-log.md) — full H-series results
 
 ---
 

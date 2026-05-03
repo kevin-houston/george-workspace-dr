@@ -8,6 +8,8 @@ access: Kevin has paper account; API key in OneCLI vault
 
 Broker + data provider. Free paper trading + commission-free real trading for US equities and crypto.
 
+**Related pages**: [Alpaca Automation Guide](alpaca-automation.md) — production trading patterns, order execution, Phase 3 foundation | [Paper Trading Index](../paper-trading/index.md) — active H149 position log
+
 - Docs: https://docs.alpaca.markets/
 - Python SDK: `pip install alpaca-py` (official, use this over legacy alpaca-trade-api)
 - Paper trading: https://paper-api.alpaca.markets
