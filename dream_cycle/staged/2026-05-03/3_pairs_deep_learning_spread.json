@@ -3,7 +3,9 @@
   "title": "Pairs-DL: Deep learning spread forecasting for H155/H160",
   "hypothesis_parent": "H160",
   "risk_level": "high",
-  "apply_status": "pending",
+  "apply_status": "flagged",
+  "flagged_at": "2026-05-03T04:00:00-05:00",
+  "flagged_reason": "HIGH RISK: prerequisite H160 not yet tested; H155 Kalman pairs already NOT CONFIRMED; deep learning on unvalidated signal. Requires Kevin review before queuing.",
 
   "summary": "Replace the threshold-based z-score entry in ETF pairs (H155, H160) with a GRU/LSTM spread forecast. Financial Analysis journal 2024 paper reports deep learning models for spread prediction outperform traditional z-score approaches in high-frequency context. VAR+GRU hybrid captures fat-tail dynamics that kill simple z-score strategies.",
 

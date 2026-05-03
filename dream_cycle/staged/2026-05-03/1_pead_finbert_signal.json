@@ -3,7 +3,9 @@
   "title": "PEAD-NLP: FinBERT earnings call signal layer for H159b",
   "hypothesis_parent": "H159b",
   "risk_level": "medium",
-  "apply_status": "pending",
+  "apply_status": "applied",
+  "applied_at": "2026-05-03T04:00:00-05:00",
+  "applied_action": "Added H163 QUEUED entry to hypothesis-log.md",
 
   "summary": "Augment the beta-neutral PEAD gap signal with a FinBERT sentiment score from earnings call transcripts. ACL 2025 paper reports FinBERT achieves 57.6–58.3% directional accuracy on post-announcement returns — additive to price-based gap signal. Combined EAR+SUE+NLP signal generated 12.5% annualized abnormal returns vs 4.4% for price gap alone in recent studies.",
 

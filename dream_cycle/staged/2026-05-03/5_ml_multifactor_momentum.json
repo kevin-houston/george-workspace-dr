@@ -3,7 +3,9 @@
   "title": "ML-momentum: bias-corrected multi-factor cross-sectional portfolio (Sharpe >2.0)",
   "hypothesis_parent": "H158",
   "risk_level": "high",
-  "apply_status": "pending",
+  "apply_status": "flagged",
+  "flagged_at": "2026-05-03T04:00:00-05:00",
+  "flagged_reason": "HIGH RISK: requires point-in-time bias-free data (not available); Chinese A-share paper may not transfer to US; 500-1000 factors on small universe = severe overfitting risk; 40h implementation. Requires Kevin review before queuing.",
 
   "summary": "arXiv 2507.07107 reports 20% annualized returns, Sharpe >2.0 on Chinese A-shares using elastic-net over 500-1000 factors (alpha101 extensions + microstructure). Key innovations applicable to H158 (sector-neutral stock momentum): (1) tensor-based factor computation, (2) GBM data augmentation to reduce overfitting, (3) cross-sectional neutralization. Framework is Chinese-market focused but techniques transfer.",
 

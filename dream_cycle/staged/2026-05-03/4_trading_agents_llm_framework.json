@@ -3,7 +3,9 @@
   "title": "TradingAgents: multi-agent LLM orchestration for strategy selection",
   "hypothesis_parent": null,
   "risk_level": "medium",
-  "apply_status": "pending",
+  "apply_status": "applied",
+  "applied_at": "2026-05-03T04:00:00-05:00",
+  "applied_action": "Added H165 QUEUED entry to hypothesis-log.md",
 
   "summary": "Explore TradingAgents (arXiv 2412.20138, GitHub: TauricResearch/TradingAgents) as an orchestration layer. The framework assigns LLM agents to roles (fundamentals analyst, news analyst, risk manager, portfolio manager). v0.2.4 supports Claude 4.x natively. Potential use: automate the hypothesis-selection step of the nightly dream cycle, or add a macro-regime awareness layer to H018.",
 
