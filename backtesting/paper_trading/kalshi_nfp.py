@@ -40,11 +40,8 @@ from fredapi import Fred
 from scipy.stats import norm
 from statsmodels.tsa.arima.model import ARIMA
 
-try:
-    from kalshi_py import KalshiAuthenticatedClient
-    KALSHI_SDK_AVAILABLE = True
-except ImportError:
-    KALSHI_SDK_AVAILABLE = False
+from kalshi_client import KalshiAuthenticatedClient
+KALSHI_SDK_AVAILABLE = True
 
 LOG_FILE = Path(__file__).parent / "kalshi_nfp_trades.json"
 

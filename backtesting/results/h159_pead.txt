@@ -1,0 +1,25 @@
+H159 — PEAD: Post-Earnings Announcement Drift
+============================================================
+
+Universe: 30 large-cap stocks (survivorship-biased)
+Signal: open/prev_close > 1+gap_thresh → enter open, hold 20d
+Cost: 0.1% RT  | IS: 2008-17 | OOS: 2018+ | AltOOS: 2013+
+
+RAW EVENT STATS
+  IS: n=345 mean_ret=2.617% win_rate=53.6% t=2.39
+  OOS: n=374 mean_ret=4.392% win_rate=63.9% t=5.64
+
+VARIANTS
+  A gap5% n10 h20: OOS cumul=1.7692 CAGR=7.11% Sharpe=0.194 MaxDD=-57.94% NegYrs=4 Corr(SPY)=0.592 IS_evts=102 OOS_evts=384 → NOT CONFIRMED
+  B gap3% n10 h20: OOS cumul=3.2837 CAGR=15.40% Sharpe=0.436 MaxDD=-43.21% NegYrs=3 Corr(SPY)=0.670 IS_evts=303 OOS_evts=1088 → PARTIAL
+  C gap5% n5  h20: OOS cumul=1.1899 CAGR=2.12% Sharpe=0.059 MaxDD=-55.52% NegYrs=3 Corr(SPY)=0.578 IS_evts=102 OOS_evts=384 → NOT CONFIRMED
+  D gap5% n10 h10: OOS cumul=0.8630 CAGR=-1.76% Sharpe=-0.051 MaxDD=-57.93% NegYrs=3 Corr(SPY)=0.498 IS_evts=102 OOS_evts=384 → NOT CONFIRMED
+  E gap5% n15 h20: OOS cumul=2.0960 CAGR=9.32% Sharpe=0.254 MaxDD=-57.91% NegYrs=4 Corr(SPY)=0.599 IS_evts=102 OOS_evts=384 → NOT CONFIRMED
+
+BEST VARIANT: B gap3% n10 h20
+  OOS: cumul=3.2837  Sharpe=0.436  MaxDD=-43.21%  CAGR=15.40%
+  AltOOS: cumul=12.2068  Sharpe=0.622
+  Corr(SPY OOS): 0.670
+
+VERDICT: PARTIAL
+NOTE: Survivorship-biased universe — confirm with bias-free data before production

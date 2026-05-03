@@ -33,11 +33,8 @@ from fredapi import Fred
 from scipy.stats import norm
 from statsmodels.tsa.arima.model import ARIMA
 
-try:
-    from kalshi_py import KalshiAuthenticatedClient
-    KALSHI_SDK_AVAILABLE = True
-except ImportError:
-    KALSHI_SDK_AVAILABLE = False
+from kalshi_client import KalshiAuthenticatedClient
+KALSHI_SDK_AVAILABLE = True
 
 LOG_FILE = Path(__file__).parent / "kalshi_cpi_trades.json"
 
@@ -268,7 +265,7 @@ def place_order(client, market: dict, side: str, n_contracts: int,
             side=side,
             count=n_contracts,
             yes_price=price_cents if side == "yes" else (100 - price_cents),
-            time_in_force="immediate_or_cancel",
+            time_in_force="ioc",
         )
         print(f"  ✓ order_id={order.get('order', {}).get('order_id', '?')}  "
               f"filled={order.get('order', {}).get('filled_count', 0)}")
