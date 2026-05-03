@@ -3,6 +3,8 @@
 
 # Sensitive / runtime
 container.json
+.env
+*.pem
 
 # Large binary sources (keep text, ignore large downloads)
 sources/*.pdf
