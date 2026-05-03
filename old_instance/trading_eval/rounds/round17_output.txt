@@ -1,0 +1,78 @@
+  FRED GOLDAMGBD228NLBM: HTTP Error 400: Bad Request
+=== ROUND 17 ===
+  Loading macro data...
+    ✓ FRED DCOILWTICO (1555 obs)
+    ✓ FRED DCOILBRENTEU (3812 obs)
+    ✓ FRED CPIAUCSL (73 obs)
+    ✓ FRED CPILFESL (73 obs)
+    ✓ FRED PCEPI (179 obs)
+    ✓ FRED T10YIE (1559 obs)
+    ✓ FRED T5YIFR (1559 obs)
+    ✓ FRED DFF (2277 obs)
+    ✓ FRED GS10 (74 obs)
+    ✓ FRED GS2 (74 obs)
+    ✓ FRED T10Y2Y (1559 obs)
+    ✓ FRED BAMLH0A0HYM2 (1631 obs)
+    ✓ FRED BAMLC0A0CM (3933 obs)
+    ✓ FRED KCFSI (180 obs)
+    ✓ FRED STLFSI4 (786 obs)
+    ✓ FRED VIXCLS (1595 obs)
+    ✓ yf fallback GC=F → GOLDAMGBD228NLBM (3789 obs)
+    ✓ FRED PIORECRUSDM (180 obs)
+    ✓ FRED DEXUSEU (3764 obs)
+    ✓ FRED DTWEXBGS (3749 obs)
+    ✓ FRED UNRATE (73 obs)
+    ✓ FRED ICSA (325 obs)
+    ✓ FRED GDPC1 (60 obs)
+    ✓ FRED INDPRO (180 obs)
+    ✓ FRED UMCSENT (74 obs)
+  Loaded 25 macro series
+Built 35 strategies
+
+======================================================================
+ROUND 17 — 35 strategies × 53 tickers × 1 positions
+Total backtests: 1,855
+======================================================================
+
+
+  B&H avg: 1823.9%
+
+  TOP 10 STRATEGIES (Round 17):
+  Strategy                             AvgRet%  Sharpe  BeatB&H%
+  ---------------------------------------------------------------
+  GoldFlight_120                         703.5%   0.559      3.8%
+
+  FAMILY RANKING:
+    macro                        703.5%
+
+  SECTOR RANKING:
+    auto                   4888.3%
+    tech                   1368.9%
+    industrial              467.0%
+    financial               393.2%
+    transport               303.4%
+    defense                 228.9%
+    healthcare              215.0%
+    staples                 197.0%
+    energy                  196.2%
+
+  Saved → /workspace/group/trading_eval/rounds/macro_round_17.json
+ROUND 17 MACRO INSIGHTS
+==================================================
+B&H avg benchmark: 1824.0%
+
+Top 5 strategies:
+  1. GoldFlight_120                      703.5% avg (Sharpe 0.559)
+
+Family performance:
+  macro                     703.5%
+
+Sector performance:
+  auto                 4888.3%
+  tech                 1368.9%
+  industrial           467.0%
+  financial            393.2%
+  transport            303.4%
+
+Macro strategies in top 20: 1
+  GoldFlight_120                      703.5%

@@ -1,0 +1,107 @@
+{
+  "strategy": "gap5pct_hold40d_long_vol",
+  "category": "pead",
+  "round": 30,
+  "tickers": [
+    "AAPL",
+    "ADBE",
+    "AMZN",
+    "BAC",
+    "CAT",
+    "CVX",
+    "GE",
+    "GOOGL",
+    "HON",
+    "JPM",
+    "LMT",
+    "MA",
+    "META",
+    "MMM",
+    "MRK",
+    "MSFT",
+    "NFLX",
+    "NVDA",
+    "QCOM",
+    "RTX",
+    "TSLA",
+    "TXN",
+    "UNH",
+    "V",
+    "WMT",
+    "XOM"
+  ],
+  "n_trades": 142,
+  "date_range": "2020-02-03 \u2013 2025-10-30",
+  "total_return": 440.5292,
+  "cagr": 0.6731,
+  "sharpe": 1.1259,
+  "sortino": 1.3696,
+  "calmar": 1.1657,
+  "skewness": 0.9407,
+  "kurtosis": 4.8365,
+  "max_drawdown": -0.5774,
+  "max_consec_losses": 4,
+  "win_rate": 0.6408,
+  "profit_factor": 2.6289,
+  "avg_return": 0.0592,
+  "avg_win": 0.149,
+  "avg_loss": -0.1011,
+  "kelly_fraction": 0.25,
+  "spy_correlation": 0.265,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 15,
+      "sharpe": 3.7937,
+      "sortino": 13.2398,
+      "win_rate": 0.8,
+      "avg_return": 0.1569,
+      "max_dd": -0.0554
+    },
+    "bear": {
+      "n_trades": 8,
+      "sharpe": -0.6858,
+      "sortino": -0.5672,
+      "win_rate": 0.5,
+      "avg_return": -0.0324,
+      "max_dd": -0.484
+    },
+    "high_vol": {
+      "n_trades": 59,
+      "sharpe": 0.8728,
+      "sortino": 1.1321,
+      "win_rate": 0.5932,
+      "avg_return": 0.054,
+      "max_dd": -0.6948
+    },
+    "bull": {
+      "n_trades": 42,
+      "sharpe": 0.7953,
+      "sortino": 0.9517,
+      "win_rate": 0.5952,
+      "avg_return": 0.0376,
+      "max_dd": -0.492
+    },
+    "low_vol_bull": {
+      "n_trades": 18,
+      "sharpe": 3.9941,
+      "sortino": 6.8361,
+      "win_rate": 0.8333,
+      "avg_return": 0.0856,
+      "max_dd": -0.067
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

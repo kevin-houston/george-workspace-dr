@@ -1,0 +1,14 @@
+{
+  "id": "memory-update-2026-04-14",
+  "date": "2026-04-14",
+  "source": "Dream Cycle Research Phase — nightly scan",
+  "source_url": null,
+  "title": "Memory update: new papers integrated April 14 2026",
+  "rationale": "Nightly dream cycle scan found three high-relevance papers. Two directly impact active research (R29 LLM pairs filter). One defines a future research round (R35). Recording for retrieval in future sessions.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "apply_status": "applied",
+  "content": "\n## Dream Cycle Research — 2026-04-14\n\n### New Papers Integrated\n\n**arXiv:2602.07048 — LLM Semantic Filtering for Lead-Lag Trading (Kim et al., Feb 2026)**\n- Architecture: Granger causality top-100 → LLM re-rank → trade top-20 pairs\n- LLM output: plausibility_score (0-100) + mechanism_strength + co_movement_sign (JSON)\n- Primary effect: LOSS REDUCTION not win rate (avg loss -46.5%, total PnL +205%)\n- LLM model: GPT-5-nano; robust across GPT-5-mini too\n- Best hold period: 1d (WR 66.7% hybrid)\n- DIRECT APPLICATION: R29 pairs trading LLM filter — switch from hard threshold to ranking, add sign prediction\n\n**arXiv:2510.11616 — Attention Factors for Statistical Arbitrage (Stanford, ACM ICAIF 2025)**\n- Joint optimization: attention factors + residual portfolio + LongConv signal → net-of-cost Sharpe\n- Net SR: 2.28 (attention) vs 1.57 (PCA) vs -6.45 (OU threshold)\n- Critical: OU-thresholding collapses after transaction costs (gross SR 0.18 → net SR -6.45)\n- Past returns chars dominate value/profitability for stat arb (-62% SR if removed)\n- Partial adoption: optimize OU thresholds against net-of-cost Sharpe on validation set\n- Full adoption: R35 research round (requires PyTorch + firm characteristic data)\n\n**arXiv:2603.20247 — AlphaLogics: Market Logic-Driven Multi-Agent Alpha Factor Generation (March 2026)**\n- 3-stage: extract market logic from existing factors → generate new factors → refine via backtesting\n- CSI 500 IR=1.53, S&P 500 IR=1.27; 92-100% logic consistency\n- Relevant for future factor mining rounds — start by extracting logic from 146-strategy harness\n\n**arXiv:2603.21330 — FinRL-X with 6-month live paper trading validation (March 2026)**\n- Alpaca paper trading Oct 2025-Mar 2026: +19.76% vs SPY -2.51%, Sharpe 1.96\n- Weight-centric unified interface across selection/allocation/timing/risk\n- Worth monitoring; rare credible live RL deployment result\n"
+}

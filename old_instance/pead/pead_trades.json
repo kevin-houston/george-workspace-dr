@@ -1,0 +1,145 @@
+{
+  "virtual_capital": 5000.0,
+  "position_size": 500.0,
+  "max_positions": 10,
+  "hold_days": 20,
+  "open_positions": [
+    {
+      "symbol": "UNH",
+      "threshold": "5pct",
+      "entry_date": "2026-04-07",
+      "entry_price": 308.845,
+      "shares": 1.6189,
+      "position_size_usd": 499.99,
+      "gap_pct": 0.0977,
+      "prev_close": 281.36,
+      "target_exit_date": "2026-05-05",
+      "status": "open"
+    },
+    {
+      "symbol": "MSFT",
+      "threshold": "3pct",
+      "entry_date": "2026-04-08",
+      "entry_price": 384.98,
+      "shares": 1.2988,
+      "position_size_usd": 500.01,
+      "gap_pct": 0.0341,
+      "prev_close": 372.29,
+      "target_exit_date": "2026-05-06",
+      "status": "open"
+    },
+    {
+      "symbol": "GOOGL",
+      "threshold": "3pct",
+      "entry_date": "2026-04-08",
+      "entry_price": 320.445,
+      "shares": 1.5603,
+      "position_size_usd": 499.99,
+      "gap_pct": 0.0491,
+      "prev_close": 305.46,
+      "target_exit_date": "2026-05-06",
+      "status": "open"
+    },
+    {
+      "symbol": "AMZN",
+      "threshold": "3pct",
+      "entry_date": "2026-04-08",
+      "entry_price": 223.94,
+      "shares": 2.2327,
+      "position_size_usd": 499.99,
+      "gap_pct": 0.0476,
+      "prev_close": 213.77,
+      "target_exit_date": "2026-05-06",
+      "status": "open"
+    },
+    {
+      "symbol": "META",
+      "threshold": "5pct",
+      "entry_date": "2026-04-08",
+      "entry_price": 605.7,
+      "shares": 0.8255,
+      "position_size_usd": 500.01,
+      "gap_pct": 0.0533,
+      "prev_close": 575.05,
+      "target_exit_date": "2026-05-06",
+      "status": "open"
+    },
+    {
+      "symbol": "NVDA",
+      "threshold": "3pct",
+      "entry_date": "2026-04-08",
+      "entry_price": 184.45,
+      "shares": 2.7108,
+      "position_size_usd": 500.01,
+      "gap_pct": 0.0357,
+      "prev_close": 178.1,
+      "target_exit_date": "2026-05-06",
+      "status": "open"
+    },
+    {
+      "symbol": "TSLA",
+      "threshold": "3pct",
+      "entry_date": "2026-04-08",
+      "entry_price": 363.795,
+      "shares": 1.3744,
+      "position_size_usd": 500.0,
+      "gap_pct": 0.0495,
+      "prev_close": 346.65,
+      "target_exit_date": "2026-05-06",
+      "status": "open"
+    },
+    {
+      "symbol": "JPM",
+      "threshold": "3pct",
+      "entry_date": "2026-04-08",
+      "entry_price": 307.97,
+      "shares": 1.6235,
+      "position_size_usd": 499.99,
+      "gap_pct": 0.0355,
+      "prev_close": 297.4,
+      "target_exit_date": "2026-05-06",
+      "status": "open"
+    },
+    {
+      "symbol": "HD",
+      "threshold": "3pct",
+      "entry_date": "2026-04-08",
+      "entry_price": 333.26,
+      "shares": 1.5003,
+      "position_size_usd": 499.99,
+      "gap_pct": 0.0455,
+      "prev_close": 318.77,
+      "target_exit_date": "2026-05-06",
+      "status": "open"
+    },
+    {
+      "symbol": "BAC",
+      "threshold": "3pct",
+      "entry_date": "2026-04-08",
+      "entry_price": 51.94,
+      "shares": 9.6265,
+      "position_size_usd": 500.0,
+      "gap_pct": 0.033,
+      "prev_close": 50.28,
+      "target_exit_date": "2026-05-06",
+      "status": "open"
+    }
+  ],
+  "closed_positions": [],
+  "stats": {
+    "3pct": {
+      "n_trades": 0,
+      "wins": 0,
+      "total_pnl": 0.0,
+      "total_return_pct": 0.0
+    },
+    "5pct": {
+      "n_trades": 0,
+      "wins": 0,
+      "total_pnl": 0.0,
+      "total_return_pct": 0.0
+    }
+  },
+  "last_scan": "2026-04-30",
+  "last_exit_check": null
+}

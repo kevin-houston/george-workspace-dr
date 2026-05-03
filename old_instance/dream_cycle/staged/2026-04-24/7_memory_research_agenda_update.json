@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-24-007",
+  "date": "2026-04-24",
+  "source": "Dream Cycle 2026-04-24 nightly scan",
+  "source_url": "",
+  "title": "Research agenda update: R28/R29 goal-blind prompts, R33 sparse weights, model selection",
+  "rationale": "Consolidate tonight's findings into the research agenda section of MEMORY.md for Kevin and future dream cycle sessions to reference.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n## Research Agenda Update (2026-04-24)\n\n- **Round 28 Phase 2** — LLM EarningsQualityAgent (QUEUED, pending auth fix)\n  - **MANDATORY AMENDMENT (2026-04-24)**: All scoring prompts must be GOAL-BLIND. Remove any reference to 'PEAD trade', 'stock return', 'trading decision'. Say 'assess the fundamental quality of this earnings announcement as a financial analyst', NOT 'to decide whether to initiate a PEAD trade'. Source: arXiv:2602.09504 (purpose-conditioned bias; goal disclosure inflates IS performance +0.483pp/month but collapses OOS).\n  - **MODEL SELECTION (2026-04-24)**: Prefer Qwen2.5-7B-Instruct (low bubble propensity) or Gemini-3-Flash (positive PolyBench CWR) as scoring worker agents. Avoid GPT-4o-mini.\n\n- **Round 29 LLM Filter** — QUEUED.\n  - **MANDATORY AMENDMENT (2026-04-24)**: LLM plausibility prompts must be GOAL-BLIND. Do NOT say 'evaluate whether to trade the spread'. Say 'evaluate the fundamental economic relationship between COMPANY_A and COMPANY_B'. Source: arXiv:2602.09504.\n  - Design unchanged from 2026-04-21 (6-category taxonomy + ticker anonymization + CMMD check).\n\n- **Round 31b** — QUEUED: Speaker-weighted FinBERT. No new amendments.\n\n- **Round 33** — QuantaAlpha + AlphaPROBE.\n  - **NEW AMENDMENT (2026-04-24)**: After diversity-filter selection, fit L1-sparse weights (Lasso/ElasticNet) on validation set across the mined factor pool. Do NOT equal-weight. Source: arXiv:2604.17166 (sparse SDF Sharpe dominates beyond ~2000 features; 31-33 active from 30K stable).\n  - **TERTIARY GENERATOR NOTE (2026-04-24)**: AlphaCFG (arXiv:2601.22119, GitHub HanYang544/AlphaCFG) is a 3rd generator option. IC 0.046 on S&P 500 (lower than QuantaAlpha ~0.125). Grammar-constrained MCTS, OHLCV only, no LLM cost. Use only if primary + secondary pools are thin (<20 diverse factors).\n\n- **Round 34** (concept) — Institutional ownership PEAD amplifier — unchanged.\n- **Round 35** (concept) — MRP diagnostic + Wasserstein HMM + EF clustering + RMT gap — unchanged.\n- **Round 36** (concept) — DeltaLag adaptive lead-lag pairs — unchanged.\n\n- **LIVE DEPLOYMENT URGENCY (2026-04-24)**: LLM-based alpha signals decay as AI adoption grows superlinearly (arXiv:2604.03272). R28 and R29 signals have higher durability now than in 12-24 months. Prefer specialized data pipelines (Eva-4B, SAE clusters) over generic prompts for durability.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

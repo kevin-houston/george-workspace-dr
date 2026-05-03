@@ -1,0 +1,88 @@
+{
+  "strategy": "forex_YieldCurve_FX",
+  "category": "forex",
+  "round": 2,
+  "tickers": [
+    "AUD_USD",
+    "EUR_USD",
+    "GBP_USD",
+    "NZD_USD",
+    "USD_CAD",
+    "USD_CHF",
+    "USD_JPY"
+  ],
+  "n_trades": 294,
+  "date_range": "2020-03-18 \u2013 2026-03-30",
+  "total_return": -2.1361694000620967e+24,
+  "cagr": 0.0,
+  "sharpe": 0.2443,
+  "sortino": 0.25,
+  "calmar": 0.0,
+  "skewness": -0.1415,
+  "kurtosis": 5.0556,
+  "max_drawdown": -117.0348,
+  "max_consec_losses": 6,
+  "win_rate": 0.5204,
+  "profit_factor": 1.272,
+  "avg_return": 0.1327,
+  "avg_win": 1.1926,
+  "avg_loss": -1.0174,
+  "kelly_fraction": 0.1113,
+  "spy_correlation": -0.3662,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 21,
+      "sharpe": -0.0607,
+      "sortino": -0.0701,
+      "win_rate": 0.4286,
+      "avg_return": -0.0476,
+      "max_dd": -13.8114
+    },
+    "bear": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 168,
+      "sharpe": 0.5255,
+      "sortino": 0.5716,
+      "win_rate": 0.5179,
+      "avg_return": 0.2724,
+      "max_dd": -4.1431
+    },
+    "bull": {
+      "n_trades": 63,
+      "sharpe": 0.1802,
+      "sortino": 0.1995,
+      "win_rate": 0.5079,
+      "avg_return": 0.0771,
+      "max_dd": -7.5429
+    },
+    "low_vol_bull": {
+      "n_trades": 28,
+      "sharpe": -0.7273,
+      "sortino": -0.5852,
+      "win_rate": 0.5357,
+      "avg_return": -0.5419,
+      "max_dd": -36.2189
+    },
+    "unknown": {
+      "n_trades": 14,
+      "sharpe": 2.7694,
+      "sortino": 5.9366,
+      "win_rate": 0.7143,
+      "avg_return": 0.3261,
+      "max_dd": -0.3763
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

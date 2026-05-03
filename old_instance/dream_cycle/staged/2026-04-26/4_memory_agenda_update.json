@@ -1,0 +1,14 @@
+{
+  "id": "memory-agenda-update-2026-04-26",
+  "date": "2026-04-26",
+  "source": "Dream Cycle reflection 2026-04-26",
+  "source_url": "",
+  "title": "Research agenda update — R33 Hubble design pattern + R35 LOB concept",
+  "rationale": "Append the research agenda update for tonight's findings to MEMORY.md, including the two R33 amendments from Hubble and the R35 latent regime concept from the LOB paper.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n## Research Agenda Update (2026-04-26)\n\n- **Round 29 LLM Filter** — QUEUED. No new amendments. Final design: factor residualize → SPONGEsym → SAE cluster → cointegration top-100 → 3-agent anonymized 6-category LLM top-20 → fixed ±2σ. Goal-blind prompts mandatory.\n\n- **Round 28 Phase 2** — LLM EarningsQualityAgent (QUEUED, pending auth fix). Last design state: SubjECTive-QA 6-dimension scoring + Eva-4B evasion classifier + goal-blind prompts + VIX > 25 kill switch.\n\n- **Round 31b** — QUEUED: Speaker-weighted FinBERT + press release FinBERT + SubjECTive-QA fusion. No new amendments.\n\n- **Round 33** — QuantaAlpha (primary) + AlphaPROBE (secondary) + AlphaSAGE (quaternary).\n  - **NEW AMENDMENT (2026-04-26)**: Bias generation toward RANGE and VOLATILITY formula families as primary positive RAG seed. De-emphasize TREND/MOMENTUM families — Hubble OOS 2025-2026 confirms trend factors decay fastest on US equities. Source: arXiv:2604.09601.\n  - **NEW AMENDMENT (2026-04-26)**: Implement dual-channel RAG: positive channel = high-IC range/vol factor examples; negative channel = Epistemic Autopsy failure records (arXiv:2604.11477). Both retrieved per generation call.\n  - **NEW AMENDMENT (2026-04-26)**: After diversity filter, apply family-aware selection: ensure range, volatility, reversal, volume families each have ≥1 representative in final pool. Prevents vol-family crowding. Source: arXiv:2604.09601.\n\n- **Round 34** (concept) — Institutional ownership PEAD amplifier — unchanged.\n\n- **Round 35** (concept) — MRP diagnostic + Wasserstein HMM + EF clustering + RMT gap.\n  - **NEW CONCEPT LAYER (2026-04-26)**: Latent build-up regime detection (arXiv:2604.20949) — detect BEFORE stress onset using depth erosion + HMM entropy. Direct implementation requires LOB level-2 data (not available via yfinance). Defer until data feed upgrade. Proxy experiment: track HMM state posterior entropy rise + High-Low/Close spread expansion as daily approximations.\n  - GitHub: https://github.com/prakulhiremath/LOB-Latent-Regimes (public code, worth bookmarking)\n\n- **Round 36** (concept) — DeltaLag adaptive lead-lag pairs — unchanged.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

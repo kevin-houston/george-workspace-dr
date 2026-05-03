@@ -1,0 +1,97 @@
+{
+  "date": "2026-03-31",
+  "sources_searched": ["arXiv (cs.MA, cs.AI, March 2026)", "HuggingFace Daily Papers", "GitHub Trending March 2026"],
+  "total_candidates": 10,
+  "findings": [
+    {
+      "rank": 1,
+      "title": "Experiential Reflective Learning for Self-Improving LLM Agents (ERL)",
+      "url": "https://arxiv.org/abs/2603.24639",
+      "source": "arXiv (March 25, 2026) — published at ICLR 2026 MemAgents Workshop",
+      "summary": "ERL builds a persistent pool of reusable heuristics extracted from past task trajectories; at test time relevant heuristics are retrieved and injected into context, improving GAIA2 success rate by +7.8% over ReAct baseline without fine-tuning.",
+      "relevance_score": 5,
+      "relevance_notes": "Directly maps to George's dream cycle. George already reflects on past nights and generates improvements — ERL formalizes this as a heuristic pool that is retrievable at task time. A 'heuristics.md' file could be seeded from past failures and successes for injection into future task prompts."
+    },
+    {
+      "rank": 2,
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework v0.2.0",
+      "url": "https://arxiv.org/abs/2412.20138",
+      "source": "arXiv / GitHub Trending March 2026",
+      "summary": "Seven-agent trading firm architecture (Fundamentals, Sentiment, News, Technical, Researcher, Trader, Risk Manager) that outperforms neural and rule-based baselines on cumulative return, Sharpe, and drawdown; v0.2.0 adds Claude 4.x support.",
+      "relevance_score": 5,
+      "relevance_notes": "George has completed 27 rounds of backtesting. TradingAgents is the natural next step: instead of backtesting pure rules, use a multi-agent LLM layer on top of the best strategies as a filter/confirmation layer. Could be Round 28."
+    },
+    {
+      "rank": 3,
+      "title": "Continual Meta-Learning for LLM Agents",
+      "url": "https://huggingface.co/papers/trending",
+      "source": "HuggingFace Trending (March 17, 2026 — UNC Chapel Hill)",
+      "summary": "Framework that jointly evolves LLM agent policies and reusable behavioral skills through opportunistic updates and skill-driven adaptation, enabling continual improvement without catastrophic forgetting.",
+      "relevance_score": 4,
+      "relevance_notes": "Relevant to George's self-improvement loop. Skill library concept (persistent, reusable behaviors) maps to George's skills/ folder and could inspire a structured skill-tracking system."
+    },
+    {
+      "rank": 4,
+      "title": "From AI Assistant to AI Scientist: POISE — Autonomous Discovery of LLM-RL Algorithms",
+      "url": "https://arxiv.org/abs/2603.23951",
+      "source": "arXiv (March 25, 2026)",
+      "summary": "POISE maintains a genealogically linked archive connecting proposals, implementations, evaluations, and reflections to drive closed-loop autonomous algorithm discovery, improving AIME25 pass@32 from 26.7% to 43.3%.",
+      "relevance_score": 3,
+      "relevance_notes": "Meta-level: George's dream cycle IS a POISE-style loop. Confirms the staged-change + reflect + evaluate architecture. Also relevant to the trading_eval harness — could apply POISE-style genealogy to track which strategy combinations led to better Sharpe."
+    },
+    {
+      "rank": 5,
+      "title": "From LLM Reasoning to Autonomous AI Agents: A Comprehensive Review (v2)",
+      "url": "https://arxiv.org/abs/2504.19678",
+      "source": "arXiv (updated March 6, 2026)",
+      "summary": "Surveys ACP, MCP, and A2A agent communication protocols, with analysis of failure modes in multi-agent systems and future directions including dynamic tool integration via RL.",
+      "relevance_score": 3,
+      "relevance_notes": "MCP protocol is already live in George's stack (NanoClaw MCP server). A2A and ACP are emerging — relevant for when George coordinates with external agents or services."
+    },
+    {
+      "rank": 6,
+      "title": "Graph-theoretic Agreement Framework for Multi-agent LLM Systems",
+      "url": "https://arxiv.org/abs/2603.00121",
+      "source": "arXiv (March 2026)",
+      "summary": "Formally models agreement dynamics in multi-agent LLM systems using graph theory, identifying conditions for consensus failure and mitigating error cascades.",
+      "relevance_score": 2,
+      "relevance_notes": "Tangentially relevant to George's swarm tasks. Less critical than memory and trading papers."
+    },
+    {
+      "rank": 7,
+      "title": "Generalist Agent with Memory-Based RL (UCL)",
+      "url": "https://huggingface.co/papers/trending",
+      "source": "HuggingFace Trending (March 19, 2026 — UCL)",
+      "summary": "A generalist LLM agent that autonomously designs and improves task-specific agents through memory-based RL with stateful prompts and skill libraries.",
+      "relevance_score": 4,
+      "relevance_notes": "Supports George's approach of maintaining stateful MEMORY.md with task-specific sub-agents. Skill library concept is relevant to the daily podcast, trading, and portfolio sub-agents."
+    },
+    {
+      "rank": 8,
+      "title": "ROMA: Recursive Open Meta-Agent Framework",
+      "url": "https://github.com/VoltAgent/awesome-ai-agent-papers",
+      "source": "VoltAgent curated list (2026)",
+      "summary": "Breaks long-horizon tasks into subtask trees executed in parallel across agents, solving context window limitations without complex handoffs.",
+      "relevance_score": 3,
+      "relevance_notes": "Relevant to George's team tasks — when launching swarms, a recursive task tree (ROMA-style) could prevent context overflow on long trading research runs."
+    },
+    {
+      "rank": 9,
+      "title": "DyTopo: Dynamic Topology Routing for Multi-Agent Reasoning",
+      "url": "https://github.com/VoltAgent/awesome-ai-agent-papers",
+      "source": "VoltAgent curated list (2026)",
+      "summary": "Dynamically rewires agent-to-agent connections at each reasoning round via semantic matching, studying emergent group behavior among 70K+ autonomous LLM agents.",
+      "relevance_score": 2,
+      "relevance_notes": "Research-level, not immediately applicable. Interesting for future swarm designs."
+    },
+    {
+      "rank": 10,
+      "title": "From Spark to Fire: Error Cascade Mitigation in Multi-Agent LLM Collaboration",
+      "url": "https://arxiv.org/list/cs.MA/current",
+      "source": "arXiv (March 2026)",
+      "summary": "Models how errors propagate across agent chains and proposes mitigation strategies including intermediate validation checkpoints.",
+      "relevance_score": 3,
+      "relevance_notes": "Relevant for George's swarm tasks. Adding validation checkpoints between sub-agent handoffs could prevent silent failures like the podcast parser issue from March 14."
+    }
+  ]
+}

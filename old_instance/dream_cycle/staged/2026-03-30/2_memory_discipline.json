@@ -1,0 +1,14 @@
+{
+  "id": "2026-03-30-002",
+  "date": "2026-03-30",
+  "source": "deep_research",
+  "source_url": "https://huggingface.co/blog/driaforall/mem-agent-blog",
+  "title": "Add memory discipline guidelines to CLAUDE.md",
+  "rationale": "mem-agent (HuggingFace, March 2026) formalizes three memory operations: retrieve, update, clarify. The key insight is that RL-trained memory agents learn WHEN NOT TO WRITE \u2014 avoiding memory pollution. George's current CLAUDE.md has no guidance on memory update discipline. Adding clear criteria for what deserves to be persisted to MEMORY.md will prevent the file from growing with low-value facts and maintain its utility as a quick-reference document.",
+  "risk_level": "medium",
+  "type": "claude_md_update",
+  "target_file": "/workspace/group/CLAUDE.md",
+  "content": "\n## Memory Discipline\n\nBefore updating MEMORY.md, apply these criteria:\n\n*Worth persisting (DO write):*\n\u2022 Facts that will still be relevant in 30 days\n\u2022 Research findings with specific numbers (Sharpe ratios, win rates, drawdowns)\n\u2022 Kevin preferences, blockers, and decisions\n\u2022 System states that affect future scheduled tasks\n\u2022 Product status and revenue-relevant milestones\n\n*Not worth persisting (DON'T write):*\n\u2022 Facts already implied by existing entries\n\u2022 One-time observations with no future relevance\n\u2022 Information Kevin can re-tell you easily\n\u2022 Debug details after an issue is resolved\n\n*Memory operations (inspired by mem-agent, 2026):*\n1. RETRIEVE \u2014 Before answering a question, scan relevant MEMORY.md sections\n2. UPDATE \u2014 After learning a durable fact, add it with a date stamp\n3. CLARIFY \u2014 When uncertain whether to store, ask yourself: \"Would I need this in 30 days?\"\n",
+  "action": "append",
+  "apply_status": "applied"
+}

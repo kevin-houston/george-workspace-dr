@@ -1,0 +1,84 @@
+=== MACRO AUTORESEARCH — ROUND 11 ===
+  Loading macro data...
+    ✓ yf fallback CL=F → DCOILWTICO (3790 obs)
+    ✓ yf fallback ^TNX → GS10 (3789 obs)
+    ✓ yf fallback ^VIX → VIXCLS (3790 obs)
+    ✓ yf fallback GC=F → GOLDAMGBD228NLBM (3789 obs)
+    ✓ yf fallback EURUSD=X → DEXUSEU (3922 obs)
+    ✓ yf fallback DX-Y.NYB → DTWEXBGS (3791 obs)
+  Loaded 6 macro series
+Built 61 strategies
+
+======================================================================
+ROUND 11 — 61 strategies × 53 tickers × 1 positions
+Total backtests: 3,233
+======================================================================
+
+
+  B&H avg: 1823.9%
+
+  TOP 10 STRATEGIES (Round 11):
+  Strategy                             AvgRet%  Sharpe  BeatB&H%
+  ---------------------------------------------------------------
+  VAM_126                                931.4%   0.517      3.8%
+  VAM_252                                880.1%   0.520      3.8%
+  PM_1_0                                 710.6%   0.470      5.7%
+  PM_6_1                                 686.6%   0.469      3.8%
+  GoldFlight_126                         663.1%   0.511      3.8%
+  PM_12_1                                659.7%   0.466      1.9%
+  OilMom_10_30                           377.6%   0.593      1.9%
+  MACD_5_11_4                            363.8%   0.467      5.7%
+  MACD_5_12_4                            357.5%   0.454      3.8%
+  MACD_6_12_5                            342.6%   0.462      3.8%
+
+  FAMILY RANKING:
+    momentum                     773.7%
+    trend                        338.9%
+    macro                        219.2%
+    trend_macro                   87.3%
+
+  SECTOR RANKING:
+    auto                    645.1%
+    tech                    448.5%
+    financial               154.8%
+    energy                  132.7%
+    healthcare              108.4%
+    defense                  91.1%
+    industrial               87.5%
+    staples                  86.6%
+    transport                50.3%
+
+  Saved → /workspace/group/trading_eval/rounds/macro_round_11.json
+ROUND 11 MACRO INSIGHTS
+==================================================
+B&H avg benchmark: 1824.0%
+
+Top 5 strategies:
+  1. VAM_126                             931.4% avg (Sharpe 0.517)
+  2. VAM_252                             880.1% avg (Sharpe 0.520)
+  3. PM_1_0                              710.6% avg (Sharpe 0.470)
+  4. PM_6_1                              686.6% avg (Sharpe 0.469)
+  5. GoldFlight_126                      663.1% avg (Sharpe 0.511)
+
+Family performance:
+  momentum                  773.7%
+  trend                     338.9%
+  macro                     219.2%
+  trend_macro               87.3%
+
+Sector performance:
+  auto                 645.1%
+  tech                 448.5%
+  financial            154.8%
+  energy               132.7%
+  healthcare           108.4%
+
+Macro strategies in top 20: 10
+  GoldFlight_126                      663.1%
+  OilMom_10_30                        377.6%
+  MACD_6_12_5_IN_low_stress           292.4%
+
+Regime-gated strategies in top 20: 5
+  MACD_6_12_5_IN_low_stress           292.4%
+  MACD_5_11_4_IN_low_stress           289.3%
+  MACD_5_12_4_IN_low_stress           287.0%

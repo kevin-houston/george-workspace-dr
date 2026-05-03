@@ -1,0 +1,320 @@
+{
+  "category": "international_equities",
+  "run_date": "2026-03-30T16:50:47.573847",
+  "data_range": "2015-01-01 to 2025-01-01",
+  "spy_benchmark": {
+    "sharpe": 0.784,
+    "cagr": 13.03,
+    "max_dd": -33.72,
+    "spy_corr": 1.0,
+    "n_days": 2515
+  },
+  "strategies": {
+    "cross_country_momentum": {
+      "sharpe": -0.305,
+      "cagr": -6.23,
+      "max_dd": -46.76,
+      "spy_corr": -0.029,
+      "n_days": 2225,
+      "description": "Long top-3 / Short bottom-3 12-1mo momentum, monthly rebalance",
+      "longs_example": [
+        "FXI",
+        "EWT",
+        "EWC"
+      ],
+      "shorts_example": [
+        "TUR",
+        "EWZ",
+        "EWW"
+      ]
+    },
+    "dm_em_rotation": {
+      "sharpe": 0.269,
+      "cagr": 3.3,
+      "max_dd": -39.02,
+      "spy_corr": 0.825,
+      "n_days": 2414,
+      "description": "DM/EM rotation: majority vote of 3-month momentum, UUP regime, SPY MA",
+      "vea_buyhold_sharpe": 0.399,
+      "vwo_buyhold_sharpe": 0.303,
+      "vea_buyhold_cagr": 5.54,
+      "vwo_buyhold_cagr": 4.11,
+      "pct_chose_vea": 70.4,
+      "pct_chose_vwo": 29.6
+    },
+    "global_momentum": {
+      "sharpe": 0.427,
+      "cagr": 5.87,
+      "max_dd": -38.29,
+      "spy_corr": 0.687,
+      "n_days": 2349,
+      "description": "Rotate SPY/EFA/TLT on 6-month momentum; TLT when both equity weak",
+      "pct_spy": 66.1,
+      "pct_efa": 14.3,
+      "pct_tlt": 19.6,
+      "efa_buyhold_sharpe": 0.383,
+      "efa_buyhold_cagr": 5.26
+    },
+    "country_pairs": {
+      "description": "Mean-reversion pairs: 60d z-score, \u00b11.5\u03c3 entry, \u00b10.5\u03c3 exit",
+      "pairs": {
+        "Germany/UK": {
+          "sharpe": 0.321,
+          "cagr": 2.35,
+          "max_dd": -34.16,
+          "spy_corr": 0.055,
+          "n_days": 2516,
+          "pair": "Germany/UK"
+        },
+        "Japan/HK": {
+          "sharpe": 0.002,
+          "cagr": -0.86,
+          "max_dd": -35.0,
+          "spy_corr": 0.001,
+          "n_days": 2516,
+          "pair": "Japan/HK"
+        },
+        "Canada/Australia": {
+          "sharpe": 0.937,
+          "cagr": 8.91,
+          "max_dd": -9.5,
+          "spy_corr": 0.092,
+          "n_days": 2516,
+          "pair": "Canada/Australia"
+        },
+        "EM Broad pair": {
+          "sharpe": 0.257,
+          "cagr": 0.51,
+          "max_dd": -5.23,
+          "spy_corr": 0.049,
+          "n_days": 2516,
+          "pair": "EM Broad pair"
+        },
+        "China/India": {
+          "sharpe": -0.182,
+          "cagr": -5.95,
+          "max_dd": -53.89,
+          "spy_corr": 0.118,
+          "n_days": 2516,
+          "pair": "China/India"
+        },
+        "equal_weight_combo": {
+          "sharpe": 0.27,
+          "cagr": 1.49,
+          "max_dd": -16.55,
+          "spy_corr": 0.128,
+          "n_days": 2516,
+          "pair": "equal_weight_combo"
+        }
+      },
+      "best_pair": "Canada/Australia",
+      "best_pair_sharpe": 0.937
+    },
+    "em_momentum_dollar_filter": {
+      "sharpe": 0.316,
+      "cagr": 3.33,
+      "max_dd": -22.82,
+      "spy_corr": 0.347,
+      "n_days": 2414,
+      "description": "Top-3 EM momentum, only invested when USD weakening",
+      "unfiltered_sharpe": 0.213,
+      "unfiltered_cagr": 2.27,
+      "filter_adds_value": true
+    },
+    "valuation_momentum": {
+      "sharpe": -0.126,
+      "cagr": -5.75,
+      "max_dd": -47.27,
+      "spy_corr": 0.677,
+      "n_days": 1509,
+      "description": "Cheapest 3 countries (lowest 3yr return) with positive 3m momentum, annual rebalance",
+      "last_picks": [
+        "FXI",
+        "EEM",
+        "EWH"
+      ]
+    }
+  },
+  "top_strategies": [
+    {
+      "strategy": "pairs_Canada/Australia",
+      "sharpe": 0.937,
+      "cagr": 8.91,
+      "max_dd": -9.5,
+      "spy_corr": 0.092
+    },
+    {
+      "strategy": "global_momentum",
+      "sharpe": 0.427,
+      "cagr": 5.87,
+      "max_dd": -38.29,
+      "spy_corr": 0.687
+    },
+    {
+      "strategy": "em_momentum_dollar_filter",
+      "sharpe": 0.316,
+      "cagr": 3.33,
+      "max_dd": -22.82,
+      "spy_corr": 0.347
+    },
+    {
+      "strategy": "dm_em_rotation",
+      "sharpe": 0.269,
+      "cagr": 3.3,
+      "max_dd": -39.02,
+      "spy_corr": 0.825
+    },
+    {
+      "strategy": "valuation_momentum",
+      "sharpe": -0.126,
+      "cagr": -5.75,
+      "max_dd": -47.27,
+      "spy_corr": 0.677
+    },
+    {
+      "strategy": "cross_country_momentum",
+      "sharpe": -0.305,
+      "cagr": -6.23,
+      "max_dd": -46.76,
+      "spy_corr": -0.029
+    }
+  ],
+  "individual_countries": {
+    "EWJ": {
+      "name": "Japan",
+      "sharpe": 0.418,
+      "cagr": 5.85,
+      "max_dd": -33.14,
+      "spy_corr": 0.745
+    },
+    "EWG": {
+      "name": "Germany",
+      "sharpe": 0.295,
+      "cagr": 4.06,
+      "max_dd": -46.8,
+      "spy_corr": 0.783
+    },
+    "EWU": {
+      "name": "UK",
+      "sharpe": 0.273,
+      "cagr": 3.44,
+      "max_dd": -43.33,
+      "spy_corr": 0.776
+    },
+    "EWC": {
+      "name": "Canada",
+      "sharpe": 0.385,
+      "cagr": 5.72,
+      "max_dd": -42.66,
+      "spy_corr": 0.805
+    },
+    "EWA": {
+      "name": "Australia",
+      "sharpe": 0.337,
+      "cagr": 5.23,
+      "max_dd": -45.54,
+      "spy_corr": 0.795
+    },
+    "EWQ": {
+      "name": "France",
+      "sharpe": 0.413,
+      "cagr": 6.64,
+      "max_dd": -39.23,
+      "spy_corr": 0.782
+    },
+    "EWI": {
+      "name": "Italy",
+      "sharpe": 0.375,
+      "cagr": 6.25,
+      "max_dd": -43.0,
+      "spy_corr": 0.72
+    },
+    "EWP": {
+      "name": "Spain",
+      "sharpe": 0.211,
+      "cagr": 2.2,
+      "max_dd": -46.36,
+      "spy_corr": 0.698
+    },
+    "EWD": {
+      "name": "Sweden",
+      "sharpe": 0.335,
+      "cagr": 5.2,
+      "max_dd": -42.33,
+      "spy_corr": 0.772
+    },
+    "EWH": {
+      "name": "Hong Kong",
+      "sharpe": 0.155,
+      "cagr": 1.1,
+      "max_dd": -42.71,
+      "spy_corr": 0.564
+    },
+    "EEM": {
+      "name": "EM Broad",
+      "sharpe": 0.248,
+      "cagr": 3.02,
+      "max_dd": -39.82,
+      "spy_corr": 0.755
+    },
+    "FXI": {
+      "name": "China",
+      "sharpe": 0.115,
+      "cagr": -0.71,
+      "max_dd": -60.81,
+      "spy_corr": 0.532
+    },
+    "EWZ": {
+      "name": "Brazil",
+      "sharpe": 0.192,
+      "cagr": 0.38,
+      "max_dd": -56.99,
+      "spy_corr": 0.562
+    },
+    "INDA": {
+      "name": "India",
+      "sharpe": 0.42,
+      "cagr": 7.01,
+      "max_dd": -45.07,
+      "spy_corr": 0.65
+    },
+    "EWY": {
+      "name": "Korea",
+      "sharpe": 0.171,
+      "cagr": 1.19,
+      "max_dd": -49.73,
+      "spy_corr": 0.699
+    },
+    "EWW": {
+      "name": "Mexico",
+      "sharpe": 0.14,
+      "cagr": 0.33,
+      "max_dd": -53.99,
+      "spy_corr": 0.627
+    },
+    "EWT": {
+      "name": "Taiwan",
+      "sharpe": 0.615,
+      "cagr": 11.08,
+      "max_dd": -38.88,
+      "spy_corr": 0.707
+    },
+    "TUR": {
+      "name": "Turkey",
+      "sharpe": 0.141,
+      "cagr": -1.2,
+      "max_dd": -65.02,
+      "spy_corr": 0.356
+    }
+  },
+  "best_strategy": "pairs_Canada/Australia",
+  "best_sharpe": 0.937,
+  "best_diversifier": {
+    "strategy": "cross_country_momentum",
+    "sharpe": -0.305,
+    "cagr": -6.23,
+    "max_dd": -46.76,
+    "spy_corr": -0.029
+  },
+  "key_finding": "Best intl strategy (pairs_Canada/Australia) achieves Sharpe 0.94 vs SPY Sharpe 0.78, demonstrating alpha over passive US exposure."
+}

@@ -1,0 +1,25 @@
+{
+  "id": "r29-llm-ranking-sign-2026-04-14",
+  "date": "2026-04-14",
+  "source": "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+  "source_url": "https://arxiv.org/abs/2602.07048",
+  "title": "R29 LLM filter: switch from hard-threshold verdict to ranking + add co-movement sign prediction",
+  "rationale": "arXiv:2602.07048 (Kim et al., Feb 2026) runs the exact R29 experiment on prediction market pairs. Key finding: the LLM's primary contribution is LOSS REDUCTION (avg loss -46.5%), not win rate improvement. Their architecture uses continuous plausibility scoring + ranking (top M out of K candidates) rather than a hard pass/fail threshold. They also prompt the LLM to predict the expected co-movement sign, which can catch cases where the statistical (Granger/cointegration) sign is wrong. The existing staged prompt (2026-04-12 r29_sae_fire_prompt_update.json) uses a binary verdict with threshold>=40 — switching to ranking + sign prediction aligns with the validated architecture and should reduce large losers. The paper reports 205% total PnL improvement over pure statistical filtering.",
+  "risk_level": "medium",
+  "type": "prompt_update",
+  "target_file": "/workspace/group/dream_cycle/staged/2026-04-14/1_r29_llm_ranking_and_sign_refinement.json",
+  "action": "patch",
+  "apply_status": "applied",
+  "implementation_notes": {
+    "changes_to_r29_llm_filter": [
+      "1. Remove hard binary verdict field. Replace with continuous plausibility_score (0-100) used for RANKING, not thresholding.",
+      "2. Add co_movement_sign field: LLM predicts whether pair should be positively or negatively correlated (+1/-1). Use this to VALIDATE or OVERRIDE the statistical cointegration sign.",
+      "3. Change pair selection logic: instead of 'keep all with score>=40', do 'rank all candidates by plausibility_score, keep top N' where N is configurable (suggest top 10-15 out of all candidate pairs).",
+      "4. Add mechanism_strength field: 'strong' / 'moderate' / 'weak' — can use as a secondary sort key.",
+      "5. If co_movement_sign disagrees with the statistical sign, either skip the pair or flip the trade direction."
+    ],
+    "suggested_prompt_structure": "Given this pair of stocks/assets:\n- Asset A (Leader): {leader_ticker} — {leader_description}\n- Asset B (Follower): {follower_ticker} — {follower_description}\n- Statistical relationship: cointegration spread z-score, historical correlation sign: {stat_sign}\n\nYour task:\n1. Assess whether a plausible ECONOMIC mechanism exists for Asset A to lead Asset B's price movements.\n2. Predict the expected DIRECTION of co-movement when Asset A moves: +1 (same direction) or -1 (opposite direction).\n3. Assign a PLAUSIBILITY SCORE from 0-100 reflecting how confident you are in the economic mechanism (not the statistical correlation).\n4. Assign MECHANISM STRENGTH: 'strong' (direct causal link, e.g., supplier-customer, same commodity), 'moderate' (indirect, e.g., sector peers, shared macro factor), 'weak' (speculative).\n\nFocus on business relationships: supply chains, competition, shared input costs, common demand drivers, regulatory exposure. Ignore pure price correlation. Return structured JSON only.\n\nOutput format:\n{\"plausibility_score\": <0-100>, \"mechanism_strength\": \"strong|moderate|weak\", \"co_movement_sign\": <+1 or -1>, \"mechanism_summary\": \"<1-2 sentence explanation>\"}",
+    "selection_logic": "After scoring all candidate pairs, rank by plausibility_score DESC. Keep top N (suggest N=10-15). For any pair where co_movement_sign != stat_sign: either skip (conservative) or flip trade direction (aggressive). Start with skip for safety.",
+    "key_paper_result": "Kim et al. 2026: Granger top-100 → LLM re-rank → trade top-20. Win rate: 51.4%→54.5%. Avg loss: -$649→-$347 (46.5% reduction). Total PnL: +205%. Best hold period: 1d (WR 66.7%). Effect robust across GPT-5-nano and GPT-5-mini."
+  }
+}

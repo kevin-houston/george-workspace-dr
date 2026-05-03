@@ -1,0 +1,272 @@
+{
+  "category": "ml_trading",
+  "run_date": "2026-03-30T18:39:00.127520",
+  "universe": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "META",
+    "NVDA",
+    "JPM",
+    "JNJ",
+    "UNH",
+    "V",
+    "MA",
+    "HD",
+    "PG",
+    "COST",
+    "XOM",
+    "CVX",
+    "BAC",
+    "WMT",
+    "MRK",
+    "PFE"
+  ],
+  "top_results": [
+    {
+      "model": "random_forest",
+      "symbol": "XOM",
+      "sharpe": 1.7436,
+      "win_rate": 0.611,
+      "avg_ret": 0.009176,
+      "n_trades": 599,
+      "bh_sharpe": 1.185
+    },
+    {
+      "model": "ensemble",
+      "symbol": "WMT",
+      "sharpe": 1.5023,
+      "win_rate": 0.6065,
+      "avg_ret": 0.00651,
+      "n_trades": 803,
+      "bh_sharpe": 0.9971
+    },
+    {
+      "model": "logistic",
+      "symbol": "WMT",
+      "sharpe": 1.4712,
+      "win_rate": 0.5976,
+      "avg_ret": 0.006794,
+      "n_trades": 743,
+      "bh_sharpe": 0.9971
+    },
+    {
+      "model": "logistic",
+      "symbol": "PG",
+      "sharpe": 1.4523,
+      "win_rate": 0.5799,
+      "avg_ret": 0.004929,
+      "n_trades": 738,
+      "bh_sharpe": 0.2464
+    },
+    {
+      "model": "gradient_boosting",
+      "symbol": "XOM",
+      "sharpe": 1.3918,
+      "win_rate": 0.5798,
+      "avg_ret": 0.007003,
+      "n_trades": 890,
+      "bh_sharpe": 1.185
+    },
+    {
+      "model": "ensemble",
+      "symbol": "MA",
+      "sharpe": 1.3168,
+      "win_rate": 0.5782,
+      "avg_ret": 0.006211,
+      "n_trades": 844,
+      "bh_sharpe": 0.5775
+    },
+    {
+      "model": "ensemble",
+      "symbol": "XOM",
+      "sharpe": 1.3163,
+      "win_rate": 0.5699,
+      "avg_ret": 0.006609,
+      "n_trades": 772,
+      "bh_sharpe": 1.185
+    },
+    {
+      "model": "logistic",
+      "symbol": "CVX",
+      "sharpe": 1.2633,
+      "win_rate": 0.5744,
+      "avg_ret": 0.006598,
+      "n_trades": 712,
+      "bh_sharpe": 0.8182
+    },
+    {
+      "model": "ensemble",
+      "symbol": "NVDA",
+      "sharpe": 1.2623,
+      "win_rate": 0.5711,
+      "avg_ret": 0.012737,
+      "n_trades": 802,
+      "bh_sharpe": 1.2693
+    },
+    {
+      "model": "random_forest",
+      "symbol": "WMT",
+      "sharpe": 1.2376,
+      "win_rate": 0.5895,
+      "avg_ret": 0.005336,
+      "n_trades": 687,
+      "bh_sharpe": 0.9971
+    },
+    {
+      "model": "xgboost",
+      "symbol": "MA",
+      "sharpe": 1.228,
+      "win_rate": 0.5801,
+      "avg_ret": 0.005821,
+      "n_trades": 893,
+      "bh_sharpe": 0.5775
+    },
+    {
+      "model": "xgboost",
+      "symbol": "XOM",
+      "sharpe": 1.2173,
+      "win_rate": 0.5741,
+      "avg_ret": 0.006149,
+      "n_trades": 864,
+      "bh_sharpe": 1.185
+    },
+    {
+      "model": "xgboost",
+      "symbol": "WMT",
+      "sharpe": 1.1727,
+      "win_rate": 0.5759,
+      "avg_ret": 0.005095,
+      "n_trades": 889,
+      "bh_sharpe": 0.9971
+    },
+    {
+      "model": "xgboost",
+      "symbol": "NVDA",
+      "sharpe": 1.1665,
+      "win_rate": 0.5614,
+      "avg_ret": 0.012061,
+      "n_trades": 871,
+      "bh_sharpe": 1.2693
+    },
+    {
+      "model": "random_forest",
+      "symbol": "MA",
+      "sharpe": 1.1643,
+      "win_rate": 0.5778,
+      "avg_ret": 0.00558,
+      "n_trades": 694,
+      "bh_sharpe": 0.5775
+    },
+    {
+      "model": "random_forest",
+      "symbol": "NVDA",
+      "sharpe": 1.1432,
+      "win_rate": 0.5678,
+      "avg_ret": 0.011447,
+      "n_trades": 671,
+      "bh_sharpe": 1.2693
+    },
+    {
+      "model": "gradient_boosting",
+      "symbol": "MA",
+      "sharpe": 1.0936,
+      "win_rate": 0.5565,
+      "avg_ret": 0.005156,
+      "n_trades": 920,
+      "bh_sharpe": 0.5775
+    },
+    {
+      "model": "xgboost",
+      "symbol": "JNJ",
+      "sharpe": 1.0703,
+      "win_rate": 0.5393,
+      "avg_ret": 0.003462,
+      "n_trades": 890,
+      "bh_sharpe": 0.6556
+    },
+    {
+      "model": "gradient_boosting",
+      "symbol": "WMT",
+      "sharpe": 1.045,
+      "win_rate": 0.5839,
+      "avg_ret": 0.004411,
+      "n_trades": 894,
+      "bh_sharpe": 0.9971
+    },
+    {
+      "model": "gradient_boosting",
+      "symbol": "NVDA",
+      "sharpe": 0.9885,
+      "win_rate": 0.5507,
+      "avg_ret": 0.010094,
+      "n_trades": 897,
+      "bh_sharpe": 1.2693
+    }
+  ],
+  "model_summary": {
+    "xgboost": {
+      "avg_sharpe": 0.4970781233833564,
+      "median_sharpe": 0.477028493405694,
+      "std_sharpe": 0.5001962989606418,
+      "beat_bh_pct": 0.35,
+      "n_stocks": 20
+    },
+    "random_forest": {
+      "avg_sharpe": 0.51848264438096,
+      "median_sharpe": 0.40714337190352845,
+      "std_sharpe": 0.5094637072197963,
+      "beat_bh_pct": 0.35,
+      "n_stocks": 20
+    },
+    "logistic": {
+      "avg_sharpe": 0.29688297773833927,
+      "median_sharpe": 0.303483564971186,
+      "std_sharpe": 0.6570171372566059,
+      "beat_bh_pct": 0.2,
+      "n_stocks": 20
+    },
+    "gradient_boosting": {
+      "avg_sharpe": 0.4484296855867623,
+      "median_sharpe": 0.4447862611841542,
+      "std_sharpe": 0.4501077440867695,
+      "beat_bh_pct": 0.3,
+      "n_stocks": 20
+    },
+    "ensemble": {
+      "avg_sharpe": 0.5269767608881564,
+      "median_sharpe": 0.44875064559520794,
+      "std_sharpe": 0.5115303391432587,
+      "beat_bh_pct": 0.25,
+      "n_stocks": 20
+    }
+  },
+  "top_features": [
+    "vol_20d",
+    "close_sma60",
+    "rsi_14",
+    "close_sma200",
+    "ret_20d",
+    "rsi_28",
+    "vol_10d",
+    "close_sma20",
+    "spy_20d_ret",
+    "ret_10d"
+  ],
+  "top_feature_importances": {
+    "vol_20d": 1.2539,
+    "close_sma60": 1.2026,
+    "rsi_14": 1.0166,
+    "close_sma200": 0.9525,
+    "ret_20d": 0.778,
+    "rsi_28": 0.7424,
+    "vol_10d": 0.6592,
+    "close_sma20": 0.504,
+    "spy_20d_ret": 0.4985,
+    "ret_10d": 0.2504
+  },
+  "best_strategy": "random_forest on XOM",
+  "best_sharpe": 1.7436,
+  "all_results_count": 100
+}

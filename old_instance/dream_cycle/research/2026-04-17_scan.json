@@ -1,0 +1,124 @@
+{
+  "date": "2026-04-17",
+  "scan_run_at": "2026-04-18T04:00:00-05:00",
+  "note": "Catch-up run — scheduled 11:15 PM CT run on 2026-04-17 was missed; running now at ~4 AM CT on April 18.",
+  "sources_scanned": ["arXiv q-fin.TR", "arXiv q-fin.PM", "arXiv q-fin.ST", "HuggingFace", "GitHub"],
+  "date_range": "2026-04-11 to 2026-04-17",
+  "papers": [
+    {
+      "id": "arxiv:2604.13260",
+      "title": "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns",
+      "authors": "Karmanpartap Singh Sidhu, Junyi Fan, Maryam Pishgar",
+      "submitted": "2026-04-14",
+      "url": "https://arxiv.org/abs/2604.13260",
+      "categories": ["q-fin.TR"],
+      "relevance": "HIGH",
+      "relevance_tags": ["PEAD", "earnings-call", "FinBERT", "transcript-NLP", "R31", "speaker-weighting"],
+      "one_line": "Speaker-weighted FinBERT sentiment on earnings call transcripts achieves OOS IC 0.142 and monthly long-short alpha 2.03% (FF5, t=6.49) on S&P 500, with analysts (49%) and CFO (30%) as dominant signals.",
+      "key_numbers": {
+        "oos_spearman_ic": 0.142,
+        "monthly_ff5_alpha_pct": 2.03,
+        "t_stat": 6.49,
+        "annualized_alpha_pct": 24.3,
+        "q5_minus_q1_daily_oos": "3.14%",
+        "universe": "S&P 500",
+        "period": "2015-2025 (16,428 calls)",
+        "sentences_analyzed": "6.5 million",
+        "speaker_weights": {"analyst": 0.488, "CFO": 0.295, "executive": 0.159, "other": 0.058}
+      },
+      "actionability": "Directly upgrades R31 text-PEAD: weight FinBERT sentence scores by speaker role before aggregation. Analyst sentiment (49%) is the strongest predictor, not CEO prepared remarks."
+    },
+    {
+      "id": "arxiv:2604.10996",
+      "title": "When Valid Signals Fail: Regime Boundaries Between LLM Features and RL Trading Policies",
+      "authors": "Zhengzhe Yang",
+      "submitted": "2026-04-13",
+      "url": "https://arxiv.org/abs/2604.10996",
+      "categories": ["q-fin.TR", "cs.LG"],
+      "relevance": "HIGH",
+      "relevance_tags": ["LLM-signal-filtering", "regime-detection", "R28", "R33", "RL"],
+      "one_line": "LLM-derived features achieve IC 0.177-0.233 in stable markets but cause -8.88% return differential vs price-only baseline during tariff-driven volatility shock (H1 2025). Regime-gating of LLM features is mandatory.",
+      "key_numbers": {
+        "llm_ic_stable": "0.177-0.233 (individual features)",
+        "optimized_prompt_ic": 0.104,
+        "sharpe_h1_2025_macro_shock_llm_only": -0.411,
+        "sharpe_h1_2025_baseline": 0.010,
+        "return_differential_during_shock": "-8.88%",
+        "rl_agent": "PPO (FinRL)",
+        "llm_used": "Qwen3 235B"
+      },
+      "actionability": "Add regime-gating kill switch: when VIX is elevated (>25), suppress LLM features and revert to pure statistical model. Validate R28/R29 LLM layers across H1 2025 tariff shock period explicitly."
+    },
+    {
+      "id": "arxiv:2604.10402",
+      "title": "Regime-Aware Specialist Routing for Volatility Forecasting",
+      "authors": "Unknown (April 2026)",
+      "submitted": "2026-04-12",
+      "url": "https://arxiv.org/abs/2604.10402",
+      "categories": ["q-fin.CP", "q-fin.PM"],
+      "relevance": "MEDIUM",
+      "relevance_tags": ["regime-detection", "volatility-forecasting", "R32", "R35"],
+      "one_line": "State-dependent specialist routing for ETF volatility forecasting reduces high-volatility forecast loss by 24% and underprediction loss by 22% vs rolling-best baseline, using online regime gating.",
+      "key_numbers": {
+        "high_vol_loss_reduction": "24%",
+        "underprediction_loss_reduction": "22%",
+        "data": "6 ETFs, daily, rolling walk-forward"
+      },
+      "actionability": "Architecture reference for R35 regime-aware routing: use calm/stressed specialist switching rather than one-size-fits-all regime model. Relevant to R32 VIX-Kelly put-writing sizing adjustment."
+    },
+    {
+      "id": "arxiv:2604.14206",
+      "title": "Portfolio Optimization Proxies under Label Scarcity and Regime Shifts via Bayesian and Deterministic Students under Semi-Supervised Sandwich Training",
+      "authors": "Adhiraj Chattopadhyay (IIT Roorkee)",
+      "submitted": "2026-04-04",
+      "url": "https://arxiv.org/abs/2604.14206",
+      "categories": ["q-fin.PM"],
+      "relevance": "LOW",
+      "relevance_tags": ["portfolio-optimization", "regime"],
+      "one_line": "Teacher-student (CVaR optimizer → neural models) on synthetically augmented data for label-scarce portfolio optimization. Not directly actionable for current rounds.",
+      "actionability": "Low priority — methodology could help if Kevin ever wants to optimize across fewer labeled strategy observations."
+    },
+    {
+      "id": "arxiv:2604.09821",
+      "title": "Global Persistence, Local Residual Structure: Forecasting Heterogeneous Investment Panels",
+      "authors": "Oleg Roshka",
+      "submitted": "2026-04-10",
+      "url": "https://arxiv.org/abs/2604.09821",
+      "categories": ["q-fin.EC"],
+      "relevance": "LOW",
+      "relevance_tags": ["factor-model", "panel-forecasting"],
+      "one_line": "Two-stage global AR(1) + block-specific local residuals improves panel R² from 0.630 to 0.677 on 93-actor investment panel. Theoretical but not directly actionable.",
+      "actionability": "Not actionable for current rounds. File for reference if future factor panel models are built."
+    },
+    {
+      "id": "arxiv:2604.13772",
+      "title": "Testing Alpha in High-Dimensional Conditional Time-Varying Factor Models with Dependent Observations",
+      "authors": "Unknown",
+      "submitted": "2026-04-14",
+      "url": "https://arxiv.org/abs/2604.13772",
+      "categories": ["q-fin.ST"],
+      "relevance": "LOW",
+      "relevance_tags": ["alpha-testing", "factor-model", "statistics"],
+      "one_line": "Develops B-spline sieve sum/max/Cauchy combination tests for alpha in high-dimensional time-varying factor models. Applied to S&P 500 weekly returns 2005-2024. Statistical methodology paper.",
+      "actionability": "Statistical tool for validating that backtest alpha is significant. Could be useful for R28/R29 final statistical validation. Low priority."
+    }
+  ],
+  "tools_and_repos": [
+    {
+      "name": "QuantMuse",
+      "url": "https://github.com/0xemmkty/QuantMuse",
+      "description": "Production-ready quantitative trading system with AI/ML analytics pipeline. Trending April 2026.",
+      "relevance": "LOW"
+    },
+    {
+      "name": "AKQuant (Rust+Python high-perf quant framework)",
+      "description": "Updated April 9, 2026. Not directly relevant to current Python harness.",
+      "relevance": "LOW"
+    }
+  ],
+  "top_findings_for_deep_research": [
+    "arxiv:2604.13260 — Speaker-weighted FinBERT earnings sentiment (DIRECTLY upgrades R31)",
+    "arxiv:2604.10996 — LLM feature regime failure (validates and extends LLM regime-gating lessons)",
+    "arxiv:2604.10402 — Regime-aware specialist routing (supports R35 architecture)"
+  ]
+}

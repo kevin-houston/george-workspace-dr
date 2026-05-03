@@ -1,0 +1,15 @@
+{
+  "id": "2026-03-31-erl-research-memory",
+  "date": "2026-03-31",
+  "source": "ERL: Experiential Reflective Learning for Self-Improving LLM Agents",
+  "source_url": "https://arxiv.org/abs/2603.24639",
+  "title": "Add ERL and TradingAgents AI research findings to MEMORY.md",
+  "rationale": "Two high-relevance papers found tonight: ERL proposes a heuristic pool for agent self-improvement (+7.8% on GAIA2), and TradingAgents v0.2.0 is now a concrete Round 28 candidate. Both should be persisted in MEMORY.md AI Research Findings section.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "content": "\n### ERL \u2014 Experiential Reflective Learning (arXiv:2603.24639, March 2026)\n- ICLR 2026 MemAgents Workshop paper\n- Builds a persistent heuristic pool from past task trajectories\n- Heuristics = distilled strategic principles extracted from single-attempt experience\n- At task time: retrieve relevant heuristics \u2192 inject into context \u2192 +7.8% success rate lift\n- Raw trajectories DON'T work (-1.9% vs baseline); distillation is the key step\n- George application: create /workspace/group/heuristics.md as a persistent lesson pool\n  \u2192 Seed with: sys.path fix, X.com WebSearch fallback, LLM-as-narrator not filter, etc.\n  \u2192 Add CLAUDE.md instruction to retrieve relevant heuristics at task start\n\n### TradingAgents v0.2.0 (arXiv:2412.20138, GitHub trending March 2026)\n- 7-agent trading firm: Fundamentals, Sentiment, News, Technical, Researcher, Trader, Risk\n- Feb 2026 v0.2.0: adds Claude 4.x, Gemini 3.x, Grok 4.x support; no GPUs required\n- Outperforms neural + rule-based baselines on Sharpe, cumulative return, max drawdown\n- GitHub: https://github.com/TauricResearch/TradingAgents\n- George Round 28: Build simplified TradingAgents overlay on PEAD\n  \u2192 FundamentalsAgent: revenue beat %, earnings surprise magnitude\n  \u2192 NewsAgent: organic beat vs one-time item check\n  \u2192 RiskAgent: skip if VIX > 30 or market in downtrend\n  \u2192 Hypothesis: fundamental/news filter HELPS PEAD (unlike indicator filter which hurt)\n",
+  "apply_status": "applied",
+  "derived_from": "arXiv:2603.24639, arXiv:2412.20138"
+}

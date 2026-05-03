@@ -1,0 +1,14 @@
+{
+  "id": "r29-llm-pairs-prompt-economic-plausibility-2026-04-12",
+  "date": "2026-04-12",
+  "source": "reflection",
+  "source_url": "https://arxiv.org/abs/2602.07048",
+  "title": "R29 LLM filter prompt: enforce economic plausibility question format with explicit output schema",
+  "rationale": "R29 is queued as 'LLM semantic filter on Pairs trading'. The prior heuristic (from arXiv:2602.07048) establishes the RIGHT question to ask: 'Is there a coherent reason why [Company A] and [Company B] would mean-revert toward each other over time? Score 0-100. Skip pairs < 40.' However, bare LLM prompts with no schema produce inconsistent outputs (the R26 lesson). This proposal stages a concrete prompt template with structured JSON output schema for the R29 economic plausibility filter, incorporating: (1) the anti-extrapolation instruction from arXiv:2604.02921, (2) explicit output format to parse reliably, (3) role context to prevent generic market commentary. This is a prompt_update that can be directly dropped into r29_pairs.py as the LLM call template.",
+  "risk_level": "medium",
+  "type": "prompt_update",
+  "target_file": "/workspace/group/trading_eval/r29_llm_prompt_template.txt",
+  "content": "You are a sector analyst evaluating whether two companies have a plausible long-term economic relationship that would cause their stock prices to co-move and mean-revert.\n\nCompany A: {company_a} ({ticker_a}) — {description_a}\nCompany B: {company_b} ({ticker_b}) — {description_b}\n\nStatistical cointegration evidence: p-value {coint_pvalue:.4f}, half-life {halflife:.1f} days, beta {beta:.3f}\n\nYour task: Assess ONLY whether there is a coherent ECONOMIC MECHANISM (shared cost structure, competitive substitution, common demand driver, regulatory co-movement, or supply chain linkage) that would cause these two companies to mean-revert toward each other.\n\nCRITICAL INSTRUCTIONS:\n- Do NOT consider recent stock price performance, momentum, or valuation ratios.\n- Do NOT consider general market conditions.\n- Focus exclusively on the business relationship between these two specific companies.\n- Do NOT accept statistical correlation alone as economic evidence.\n\nRespond ONLY with valid JSON in this exact format:\n{\n  \"plausibility_score\": <integer 0-100>,\n  \"mechanism\": \"<one sentence describing the economic mechanism, or 'none identified'>\",\n  \"mechanism_type\": \"<one of: cost_structure | competitive_substitution | common_demand | regulatory | supply_chain | none>\",\n  \"confidence\": \"<low|medium|high>\",\n  \"verdict\": \"<accept|reject>\"\n}\n\nAccept if plausibility_score >= 40. Reject otherwise.",
+  "action": "write",
+  "apply_status": "applied"
+}

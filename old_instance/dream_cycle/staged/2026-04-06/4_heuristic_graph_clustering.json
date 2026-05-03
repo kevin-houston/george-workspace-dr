@@ -1,0 +1,14 @@
+{
+  "id": "heuristic-graph-clustering-pairs",
+  "date": "2026-04-06",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2406.10695",
+  "title": "Heuristics Update: Graph Clustering as Pairs Pre-Filter",
+  "rationale": "The R29 design now has three sequential stages (factor residualization \u2192 graph clustering \u2192 LLM economic plausibility). This heuristic captures the graph clustering step so future pair-trading research automatically inherits it.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "action": "append",
+  "content": "\n### Graph clustering as pairs pre-filter (SPONGEsym)\n- LESSON: Before cointegration testing in pairs trading, cluster stocks using SPONGEsym on the signed correlation matrix of factor-residualized returns (60-day lookback). Only test cointegration WITHIN clusters. This eliminates spurious inter-cluster pairs that share factor exposure rather than genuine economic linkage.\n- LESSON: SPONGEsym splits stocks into positively-correlated and negatively-correlated clusters simultaneously. Pairs candidates come from within the positive cluster. Optimal cluster count = number of eigenvectors explaining 90% of correlation variance.\n- LESSON: Pipeline order matters: (1) factor residualize, (2) cluster, (3) cointegration test, (4) LLM economic plausibility screen. Each stage dramatically reduces the candidate space before the expensive next step.\n- WHEN: Designing R29 equity pairs trading or any future statistical arbitrage strategy.\n- SOURCE: arXiv:2406.10695 (June 2024) \u2014 Statistical arbitrage in multi-pair trading strategy based on graph clustering algorithms in US equities market. IR 1.30, Sortino 3.38 on S&P 500 2006-2022.\n",
+  "apply_status": "applied"
+}

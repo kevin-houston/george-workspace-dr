@@ -1,0 +1,71 @@
+{
+  "date": "2026-04-18",
+  "scan_run_at": "2026-04-18T09:00:00-05:00",
+  "note": "Regular dream cycle research scan. Previous scan (2026-04-17 catch-up) already covered arXiv:2604.13260 and arXiv:2604.10996 which were applied to MEMORY.md. Today's scan fills gaps: FactorMiner (arXiv:2602.14670) was not previously captured despite trending in q-fin.TR.",
+  "sources_scanned": ["arXiv q-fin.TR", "arXiv q-fin.PM", "arXiv q-fin.ST", "HuggingFace", "GitHub"],
+  "date_range": "2026-04-14 to 2026-04-18",
+  "new_papers_not_in_memory": [
+    {
+      "id": "arxiv:2602.14670",
+      "title": "FactorMiner: A Self-Evolving Agent with Skills and Experience Memory for Financial Alpha Discovery",
+      "authors": "Yanlong Wang et al., Tsinghua University / Peng Cheng Laboratory",
+      "submitted": "2026-02-20",
+      "url": "https://arxiv.org/abs/2602.14670",
+      "categories": ["q-fin.TR", "cs.AI"],
+      "relevance": "HIGH",
+      "relevance_tags": ["alpha-mining", "factor-generation", "R33", "experience-memory", "QuantaAlpha-comparison"],
+      "one_line": "Self-evolving agent using Ralph Loop (Retrieve-Generate-Evaluate-Distill) with explicit failure constraints in experience memory achieves CSI500 combined factor IC 14.95%/ICIR 1.29, outperforming AlphaAgent by +40% IC. No public code.",
+      "key_numbers": {
+        "csi500_individual_ic": "8.25%",
+        "csi500_individual_icir": "0.77",
+        "csi500_combined_ic": "14.95%",
+        "csi500_combined_icir": "1.29",
+        "alpaagent_baseline_ic": "5.90%",
+        "ic_improvement_vs_alphaagent": "+40%",
+        "avg_pairwise_factor_corr": "0.25-0.31",
+        "test_period": "2025 OOS",
+        "llm_used": "Gemini 3.0 Flash",
+        "code": "No public repo"
+      },
+      "actionability": "R33 design note: add failure constraint log alongside factor pool when running QuantaAlpha. 4-stage validation gating pattern reusable. QuantaAlpha remains R33 primary (has public code + US validation). FactorMiner's failure-constraint memory is a design principle to borrow."
+    },
+    {
+      "id": "arxiv:2604.13458",
+      "title": "Interpretable Systematic Risk around the Clock",
+      "authors": "Songrun He, Washington University in St. Louis",
+      "submitted": "2026-04-16",
+      "url": "https://arxiv.org/abs/2604.13458",
+      "categories": ["q-fin.PM"],
+      "relevance": "MEDIUM",
+      "relevance_tags": ["regime-detection", "jump-risk", "LLM-classification", "R35"],
+      "one_line": "LLM classifies market jump narrative types (macro/idiosyncratic/etc.) from news; constructs Fama-MacBeth factor-mimicking portfolio achieving high OOS Sharpe. Macro jumps have largest/most persistent premium.",
+      "key_numbers": {
+        "sharpe": "high OOS (no number given in abstract)",
+        "data": "US equity + S&P 500 E-mini futures, 1997-2020",
+        "coverage": "nearly 24-hour trading"
+      },
+      "actionability": "R35 enhancement: add jump narrative classification as causal layer explaining WHY the market is in a given regime. Low priority — requires high-frequency data access. File as R35 concept."
+    }
+  ],
+  "already_in_memory_confirmed": [
+    "arxiv:2604.13260 — Speaker-Weighted FinBERT (applied 2026-04-17)",
+    "arxiv:2604.10996 — LLM Feature Regime Failure VIX kill switch (applied 2026-04-17)",
+    "arxiv:2604.10402 — Regime-Aware Specialist Routing (in 2026-04-17 scan.json)"
+  ],
+  "papers_scanned_low_relevance": [
+    "arxiv:2604.13334 — Against Universal Trading Strategy (theoretical, not actionable)",
+    "arxiv:2604.11477 — OOM-RL: LLM alignment via financial market friction (not relevant to current strategies)",
+    "arxiv:2604.14206 — Portfolio Optimization Proxies under Label Scarcity (teacher-student, not actionable)",
+    "arxiv:2604.11577 — Risk-Constrained Kelly for Mutually Exclusive Outcomes (specialized Kelly theory)"
+  ],
+  "staged_today": [
+    "/workspace/group/dream_cycle/staged/2026-04-18/1_factorminer_r33_memory_update.json (applied)",
+    "/workspace/group/dream_cycle/staged/2026-04-18/2_heuristics_factorminer_failure_constraints.json (applied)",
+    "/workspace/group/dream_cycle/staged/2026-04-18/3_r31b_speaker_weighted_script.json (pending — medium risk, new script)",
+    "/workspace/group/dream_cycle/staged/2026-04-18/4_interpretable_jump_risk_r35.json (applied)"
+  ],
+  "top_findings": [
+    "arxiv:2602.14670 — FactorMiner failure constraint memory pattern (R33 design principle)",
+    "arxiv:2604.13458 — LLM jump narrative classification for R35 regime causality"
+  ]
+}

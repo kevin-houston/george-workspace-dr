@@ -1,0 +1,83 @@
+{
+  "strategy": "FI5-EM_vs_DM_Bonds",
+  "category": "volatility",
+  "round": 3,
+  "tickers": [
+    "EMB",
+    "LQD"
+  ],
+  "n_trades": 222,
+  "date_range": "2015-01-02 \u2013 2026-03-10",
+  "total_return": -0.9976,
+  "cagr": -0.2782,
+  "sharpe": 0.1148,
+  "sortino": 0.1233,
+  "calmar": -0.0459,
+  "skewness": 0.9089,
+  "kurtosis": 10.0508,
+  "max_drawdown": -6.0541,
+  "max_consec_losses": 7,
+  "win_rate": 0.5135,
+  "profit_factor": 1.1223,
+  "avg_return": 0.0579,
+  "avg_win": 1.0349,
+  "avg_loss": -0.9918,
+  "kelly_fraction": 0.0473,
+  "spy_correlation": 0.2605,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 4,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.5,
+      "avg_return": 0.035,
+      "max_dd": -0.915
+    },
+    "bear": {
+      "n_trades": 13,
+      "sharpe": -0.3498,
+      "sortino": -0.4044,
+      "win_rate": 0.3846,
+      "avg_return": -0.1749,
+      "max_dd": -2.6285
+    },
+    "high_vol": {
+      "n_trades": 54,
+      "sharpe": -0.3824,
+      "sortino": -0.4002,
+      "win_rate": 0.4444,
+      "avg_return": -0.289,
+      "max_dd": -7.8705
+    },
+    "bull": {
+      "n_trades": 30,
+      "sharpe": 0.3196,
+      "sortino": 0.3266,
+      "win_rate": 0.5333,
+      "avg_return": 0.0794,
+      "max_dd": -5.3826
+    },
+    "low_vol_bull": {
+      "n_trades": 119,
+      "sharpe": 0.6404,
+      "sortino": 0.8086,
+      "win_rate": 0.563,
+      "avg_return": 0.2566,
+      "max_dd": -6.0541
+    },
+    "unknown": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

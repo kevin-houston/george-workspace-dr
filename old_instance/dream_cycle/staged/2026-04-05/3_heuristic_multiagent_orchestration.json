@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-05-heuristic-multiagent-orchestration",
+  "date": "2026-04-05",
+  "source": "Multi-Agent LLM Benchmarking on SEC Filings (arXiv:2603.22651, March 2026)",
+  "source_url": "https://arxiv.org/abs/2603.22651",
+  "title": "Add multi-agent orchestration heuristic to heuristics.md",
+  "rationale": "The SEC filing benchmark is the largest systematic study of multi-agent architectures for financial document processing. Its findings about hierarchical patterns, failure modes, and cost tradeoffs are directly generalizable to R28 and any future LLM-augmented trading research.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### Multi-agent LLM orchestration for financial documents\n- LESSON: For SEC filing extraction tasks, Hierarchical Supervisor-Worker achieves 98.5% of maximum accuracy at 60.7% of the cost. For small-batch backtests (<25K docs/day), Reflexive Self-Correcting is acceptable and maximizes accuracy.\n- LESSON: Earnings quality signals (one-time items, accruals, organic vs. cost-cut beat) are NOT reliably extracted by general LLM prompts alone. Add domain-specific hard constraints as post-processing guards outside the LLM pipeline.\n- LESSON: The 3 dominant failure modes are (1) temporal confusion (FY vs quarterly data), (2) unit/scale mismatches (thousands vs millions), (3) cross-table reference failures. Build explicit guards for all three before trusting LLM-extracted financial numbers.\n- LESSON: Llama 3 70B achieves F1 0.869 vs Claude 3.5 Sonnet F1 0.929 on financial extraction \u2014 acceptable for summarization steps; use frontier models for quality judgment calls.\n- WHEN: Designing R28 EarningsQualityAgent, any future LLM pipeline that reads SEC filings or financial documents\n- SOURCE: arXiv:2603.22651 (March 2026) \u2014 Benchmarking Multi-Agent LLM Architectures for Financial Document Processing\n",
+  "action": "append",
+  "apply_status": "applied"
+}

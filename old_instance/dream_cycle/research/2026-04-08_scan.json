@@ -1,0 +1,84 @@
+{
+  "date": "2026-04-08",
+  "phase": "scan",
+  "sources_searched": [
+    "arXiv (pairs trading + LLM)",
+    "arXiv (PEAD + NLP + earnings transcript)",
+    "arXiv (multi-agent LLM trading)",
+    "arXiv (options volatility risk premium)",
+    "HuggingFace financial models",
+    "GitHub trending quant finance repos",
+    "CFA Institute blog (PEAD + AI)",
+    "ACL Anthology (FinNLP papers)"
+  ],
+  "papers_found": [
+    {
+      "id": "arXiv:2412.02605",
+      "title": "Interpretable Company Similarity with Sparse Autoencoders",
+      "venue": "ACL 2025 Industry Track",
+      "relevance": "HIGH — R29 direct application",
+      "key_finding": "SAE on Llama 3.1 8B layer 30 → pairs trading Sharpe 12.18 vs SIC 9.70 vs embeddings 7.58-10.57 on S&P 500 out-of-sample 2014-2020. GitHub + pre-computed HuggingFace features available.",
+      "url": "https://arxiv.org/abs/2412.02605"
+    },
+    {
+      "id": "arXiv:2511.15214",
+      "title": "Corporate Earnings Calls and Analyst Beliefs",
+      "venue": "arXiv Nov 2025",
+      "relevance": "HIGH — R28 EarningsQualityAgent amendment",
+      "key_finding": "Analysts over-react to optimism, under-react to risk language. Separate scoring: sentiment (30% weight), specificity (50%), risk density inverted (20%). Counterfactual LLM transcripts methodology.",
+      "url": "https://arxiv.org/abs/2511.15214"
+    },
+    {
+      "id": "arXiv:2512.00280",
+      "title": "Retail Investor Horizon and Earnings Announcements",
+      "venue": "arXiv Dec 2025",
+      "relevance": "MEDIUM — R34 concept, PEAD signal amplifier",
+      "key_finding": "Long-horizon retail investor composition → pronounced PEAD (0.43%/month zero-cost alpha). Proxy: 13-F institutional ownership percentile (no StockTwits needed).",
+      "url": "https://arxiv.org/abs/2512.00280"
+    },
+    {
+      "id": "arXiv:2508.11152",
+      "title": "AlphaAgents: LLM Multi-Agents for Equity Portfolio Construction",
+      "venue": "arXiv Aug 2025",
+      "relevance": "MEDIUM — R28 design inspiration",
+      "key_finding": "3 agents (Fundamental/Sentiment/Valuation) + AutoGen round-robin debate. Multi-agent outperforms single-agent. 4-month backtest only. No code.",
+      "url": "https://arxiv.org/abs/2508.11152"
+    },
+    {
+      "id": "arXiv:2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "venue": "arXiv Sept 2025",
+      "relevance": "LOW — PEAD relevance limited (market prices at open)",
+      "key_finding": "FinBERT embeddings on press releases as informative as numeric earnings surprise. But market fully prices this at open — limited PEAD edge.",
+      "url": "https://arxiv.org/abs/2509.24254"
+    },
+    {
+      "id": "arXiv:2503.01886",
+      "title": "Advanced Deep Learning Techniques for Analyzing Earnings Call Transcripts",
+      "venue": "arXiv Mar 2026",
+      "relevance": "LOW — survey paper, no new quantitative insights beyond FinBERT baseline",
+      "key_finding": "BERT vs FinBERT vs ULMFiT comparison for earnings transcript sentiment. FinBERT still best for finance domain. No new architecture.",
+      "url": "https://arxiv.org/abs/2503.01886"
+    },
+    {
+      "id": "HuggingFace: soleimanian/financial-roberta-large-sentiment",
+      "title": "Financial-RoBERTa-Large",
+      "venue": "HuggingFace",
+      "relevance": "LOW — R31 alternative to FinBERT worth benchmarking",
+      "key_finding": "RoBERTa-Large fine-tuned on 10-K/10-Q/8-K/earnings transcripts/ESG news. Larger than ProsusAI/finbert. May outperform on long documents.",
+      "url": "https://huggingface.co/soleimanian/financial-roberta-large-sentiment"
+    }
+  ],
+  "github_scan": {
+    "TradingAgents": "v0.2.0 still latest (no v0.3 found). 9.3K stars. Actively used for R28.",
+    "ai-hedge-fund": "49.6K stars — most popular AI finance repo. Not directly useful for our backtest framework.",
+    "company_similarity_sae": "FlexCode29/company_similarity_sae — VERY RELEVANT for R29. Pre-computed features on HuggingFace.",
+    "qlib": "Microsoft Qlib + RD-Agent for automated factor discovery. Interesting for R33+.",
+    "Alpha-R1": "FinStep-AI/Alpha-R1 — already in research agenda as R33 concept."
+  },
+  "top_3_for_deep_research": [
+    "arXiv:2412.02605 (SAE Company Similarity — highest impact on R29)",
+    "arXiv:2511.15214 (Analyst Belief Biases — direct R28 amendment)",
+    "arXiv:2512.00280 (Retail Investor Horizon — R34 concept)"
+  ]
+}

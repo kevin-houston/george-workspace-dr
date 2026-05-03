@@ -1,0 +1,257 @@
+============================================================
+  DAILY PORTFOLIO ANALYSIS
+  Sunday, March 9, 2026
+============================================================
+
+📊 PORTFOLIO SUMMARY
+------------------------------------------------------------
+Total Equity:        $4,500.00
+Number of Positions: 17
+Data Source:         CSV file
+Analysis Time:       6:30 AM EST
+
+============================================================
+  🔴 SELL RECOMMENDATIONS (10 positions)
+============================================================
+
+These positions are showing technical weakness and may benefit
+from trimming or closing to reduce risk:
+
+1. AMZN (Amazon) - WEAK SELL Signal
+   • Current Price: $213.21 → Limit Price: $214.28
+   • Position: 1.76 shares @ $227.75 avg cost
+   • Current P&L: -6.38% (-$25.60)
+   • Recommendation: SELL 1 share (~$214)
+   • Signal Strength: 30%
+   • Rationale: RSI overbought at 66.3, MACD weakening bullish,
+     below 50-day SMA by 5.4%. Sentiment bullish but technicals
+     showing weakness.
+
+2. GOOGL (Google) - WEAK SELL Signal
+   • Current Price: $298.52 → Limit Price: $300.01
+   • Position: 1.25 shares @ $303.12 avg cost
+   • Current P&L: -1.52% (-$5.75)
+   • Recommendation: SELL 1 share (~$300)
+   • Signal Strength: 30%
+   • Rationale: RSI at 42.3 (weak), MACD bearish, below 50-day
+     SMA by 6.6%. Near support at $295.
+
+3. GOOW (Goo ETF) - WEAK SELL Signal
+   • Current Price: $62.27 → Limit Price: $62.58
+   • Position: 1.07 shares @ $70.95 avg cost
+   • Current P&L: -12.23% (-$9.29)
+   • Recommendation: SELL 1 share (~$63)
+   • Signal Strength: 30%
+   • Rationale: RSI at 41.5, MACD bearish, below 50-day SMA by
+     8.9%. Cut losses near support.
+
+4. MU (Micron Technology) - WEAK SELL Signal
+   • Current Price: $370.30 → Limit Price: $372.15
+   • Position: 0.1 shares @ $424.50 avg cost
+   • Current P&L: -12.77% (-$5.42)
+   • Recommendation: SELL 1 share (~$372)
+   • Signal Strength: 34%
+   • Rationale: RSI at 37.8 (oversold territory), MACD bearish,
+     below 50-day SMA. Consider exiting small position.
+
+5. META (Meta Platforms) - WEAK SELL Signal
+   • Current Price: $644.86 → Limit Price: $648.08
+   • Position: 0.09 shares @ $654.91 avg cost
+   • Current P&L: -1.53% (-$0.91)
+   • Recommendation: SELL 1 share (~$648)
+   • Signal Strength: 34%
+   • Rationale: RSI at 52.4, MACD weakening bullish, below
+     50-day SMA by 1.8%. Small position - consider trimming.
+
+6. AMD (Advanced Micro Devices) - WEAK SELL Signal
+   • Current Price: $192.43 → Limit Price: $193.39
+   • Position: 0.33 shares @ $198.96 avg cost
+   • Current P&L: -3.28% (-$2.16)
+   • Recommendation: SELL 1 share (~$193)
+   • Signal Strength: 30%
+   • Rationale: RSI at 40.5, MACD bearish, below 50-day SMA
+     by 11.6%. Chip sector weakness.
+
+7. TSM (Taiwan Semiconductor) - WEAK SELL Signal
+   • Current Price: $338.89 → Limit Price: $340.58
+   • Position: 0.12 shares @ $369.36 avg cost
+   • Current P&L: -8.25% (-$3.66)
+   • Recommendation: SELL 1 share (~$341)
+   • Signal Strength: 34%
+   • Rationale: RSI at 35.0 (oversold), MACD bearish, near
+     50-day SMA. Chip sector under pressure.
+
+8. JPM (JPMorgan Chase) - WEAK SELL Signal
+   • Current Price: $289.48 → Limit Price: $290.93
+   • Position: 0.08 shares @ $309.39 avg cost
+   • Current P&L: -6.44% (-$1.59)
+   • Recommendation: SELL 1 share (~$291)
+   • Signal Strength: 30%
+   • Rationale: RSI at 37.9, MACD bearish, below 50-day SMA
+     by 7%. Financials showing weakness.
+
+9. IREN (Iris Energy) - WEAK SELL Signal
+   • Current Price: $36.70 → Limit Price: $36.88
+   • Position: 0.49 shares @ $40.26 avg cost
+   • Current P&L: -8.84% (-$1.74)
+   • Recommendation: SELL 1 share (~$37)
+   • Signal Strength: 30%
+   • Rationale: RSI at 41.5, MACD bearish, below 50-day SMA
+     by 20.8%. Crypto mining under pressure.
+
+10. XDTE (XDTE ETF) - WEAK SELL Signal
+   • Current Price: $38.44 → Limit Price: $38.63
+   • Position: 56.5 shares @ $41.55 avg cost
+   • Current P&L: -7.48% (-$175.72)
+   • Recommendation: SELL 28 shares (~$1,082)
+   • Signal Strength: 34%
+   • Rationale: RSI at 47.0, MACD bearish, below 50-day SMA.
+     Consider reducing position size by half.
+
+============================================================
+  ⚪ HOLD RECOMMENDATIONS (7 positions)
+============================================================
+
+These positions are showing mixed signals or are in consolidation:
+
+1. SVC - HOLD
+   • Current Price: $2.21
+   • Position: 23.0 shares @ $2.63 avg cost
+   • Current P&L: -15.97% (-$9.66)
+   • Signal Strength: 38%
+   • Note: RSI neutral at 50, MACD weakly bearish. Wait for
+     clearer direction.
+
+2. SPXS (Direxion Daily S&P 500 Bear 3X) - HOLD
+   • Current Price: $37.43
+   • Position: 7.34 shares @ $149.42 avg cost
+   • Current P&L: -74.95% (-$821.10)
+   • Signal Strength: 46%
+   • Note: RSI at 58.8, MACD bullish, HIGH VOLUME. This is
+     a leveraged inverse ETF - significant loss but showing
+     recent strength as market weakens.
+
+3. GLDW (SPDR Gold MiniShares) - HOLD ⭐
+   • Current Price: $61.78
+   • Position: 5.0 shares @ $51.03 avg cost
+   • Current P&L: +21.07% (+$53.75)
+   • Signal Strength: 38%
+   • Note: RSI at 54.7, above 50-day SMA by 6.5%. Your only
+     winning position - consider holding as hedge.
+
+4. LRCX (Lam Research) - HOLD
+   • Current Price: $199.33
+   • Position: 0.26 shares @ $246.99 avg cost
+   • Current P&L: -19.30% (-$12.39)
+   • Signal Strength: 36%
+   • Note: RSI OVERSOLD at 29.2! May bounce from here. Near
+     support at $198.45.
+
+5. MSFT (Microsoft) - HOLD ⭐
+   • Current Price: $408.96
+   • Position: 0.14 shares @ $391.36 avg cost
+   • Current P&L: +4.50% (+$2.46)
+   • Signal Strength: 38%
+   • Note: RSI at 56.4, MACD bullish, but below 50-day SMA.
+     One of your profitable positions.
+
+6. COST (Costco) - HOLD
+   • Current Price: $998.10
+   • Position: 0.02 shares @ $984.29 avg cost
+   • Current P&L: +1.40% (+$0.28)
+   • Signal Strength: 42%
+   • Note: RSI at 42.5, above 50-day SMA by 4.3%. Defensive
+     consumer staple showing resilience.
+
+7. CME (CME Group) - HOLD
+   • Current Price: $317.10
+   • Position: 0.06 shares @ $311.62 avg cost
+   • Current P&L: +1.76% (+$0.33)
+   • Signal Strength: 38%
+   • Note: RSI at 62.1, above 50-day SMA by 8.7%. Benefits
+     from market volatility.
+
+============================================================
+  📈 PERFORMANCE SUMMARY
+============================================================
+
+Winning Positions (4):
+• GLDW: +21.07% (+$53.75)
+• MSFT: +4.50% (+$2.46)
+• COST: +1.40% (+$0.28)
+• CME: +1.76% (+$0.33)
+
+Total Unrealized Gains: ~$56.82
+
+Losing Positions (13):
+• SPXS: -74.95% (-$821.10) [Inverse ETF - largest loss]
+• LRCX: -19.30% (-$12.39)
+• SVC: -15.97% (-$9.66)
+• MU: -12.77% (-$5.42)
+• GOOW: -12.23% (-$9.29)
+• IREN: -8.84% (-$1.74)
+• TSM: -8.25% (-$3.66)
+• XDTE: -7.48% (-$175.72)
+• JPM: -6.44% (-$1.59)
+• AMZN: -6.38% (-$25.60)
+• AMD: -3.28% (-$2.16)
+• META: -1.53% (-$0.91)
+• GOOGL: -1.52% (-$5.75)
+
+Total Unrealized Losses: ~$1,074.99
+
+Net Unrealized P&L: -$1,018.17 (-18.5% overall)
+
+============================================================
+  💡 KEY INSIGHTS & RECOMMENDATIONS
+============================================================
+
+1. PORTFOLIO RISK ASSESSMENT
+   • High concentration of losing positions (13 of 17)
+   • Major loss in SPXS (-75%) - inverse ETF position
+   • Tech sector broadly weak (AMZN, GOOGL, AMD, MU, TSM, LRCX)
+   • Only 1 strong performer: Gold ETF (GLDW)
+
+2. SUGGESTED ACTIONS
+   • Consider trimming losing tech positions showing weak
+     technicals (AMZN, GOOGL, AMD)
+   • Exit or reduce SPXS position - massive loss, inverse ETF
+     carries high risk
+   • Hold GLDW - your best performer and market hedge
+   • Watch LRCX - oversold (RSI 29) may present bounce opportunity
+   • Consider reducing XDTE by half to de-risk
+
+3. SECTOR ROTATION OPPORTUNITY
+   • Tech showing weakness across the board
+   • Gold/commodities showing strength (GLDW +21%)
+   • Defensive stocks holding up (COST, CME)
+   • May want to rotate some tech losses into defensive sectors
+
+4. TOTAL POTENTIAL SELL VALUE (if all recommendations executed)
+   • ~$2,953 in sell orders
+   • Would reduce position count and risk exposure
+   • Free up capital for stronger opportunities
+
+============================================================
+  ⚠️ IMPORTANT NOTES
+============================================================
+
+• All signals are WEAK (30-46% strength) - no strong convictions
+• Sentiment is broadly BULLISH but technicals are BEARISH
+• Market appears to be in a correction phase
+• Most positions are below their 50-day moving averages
+• Consider waiting for stronger signals before major moves
+• These are suggestions only - always do your own research
+• Consult with a financial advisor for personalized advice
+
+============================================================
+
+Generated by Robinhood Portfolio Advisor
+Analysis Date: March 9, 2026, 6:30 AM EST
+Data Source: CSV portfolio file
+
+This is an automated analysis. Past performance does not
+guarantee future results. Always conduct your own due diligence
+and consider consulting with a qualified financial advisor.
+
+============================================================

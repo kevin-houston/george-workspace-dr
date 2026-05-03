@@ -1,0 +1,14 @@
+{
+  "id": "heuristics-update-2026-04-28",
+  "date": "2026-04-28",
+  "source": "reflection",
+  "source_url": null,
+  "title": "Heuristics Update: Asymmetric Beta Pre-Filter + Model Size Gradient",
+  "rationale": "Two new generalizable lessons emerged from today's research: (1) Asymmetric beta similarity as a pairs pre-filter — pairs with asymmetric up/down beta profiles have regime-driven spurious spreads that fail mean-reversion. (2) LLM model size gradient in fundamental scoring — larger models extract materially stronger fundamental signals from the same information set. Both lessons generalize beyond specific rounds.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### Asymmetric beta pre-filter for pairs trading\n- LESSON: Pairs where one asset has significantly different upside vs downside beta profiles relative to the other generate spurious spread dynamics during market directional moves — these are NOT mean-reversion opportunities. Compute rolling upside_beta and downside_beta separately (OLS on SPY>0 and SPY<0 days). Require |upside_beta_A - upside_beta_B| < 0.4 AND |downside_beta_A - downside_beta_B| < 0.4 before entering a spread position.\n- WHEN: Any pairs trading or stat-arb strategy. Apply as Stage 0.5 between factor residualization and cointegration testing in R29 LLM filter.\n- SOURCE: arXiv:2604.22933 (Conlon, Cotter, Kynigakis, April 2026) — ML Forecasts of Asymmetric Betas.\n\n### LLM model size gradient in fundamental signal extraction\n- LESSON: Within the same knowledge cutoff, larger LLM models extract stronger fundamental signals from public textual information. Effect is ~30% stronger per model tier (GPT-4.1 vs GPT-4.1-mini vs GPT-4.1-nano; gamma=0.0122 vs 0.0093 vs 0.0065). Use frontier-tier models (Claude-Sonnet, not Claude-Haiku) for quality-judgment sub-agents where the call volume is low (<50/day). Reserve Haiku for high-volume cheap classification only.\n- LESSON: LLM fundamental quality signals are STRONGEST for high analyst-coverage stocks (interaction t=2.44). For PEAD on large-cap / S&P 500 stocks, LLM scoring is MORE reliable than for small-caps, because large-caps have richer dispersed information environments that LLMs aggregate well.\n- WHEN: Designing any LLM scoring pipeline (R28 Phase 2, R29 LLM filter, R31 text PEAD). Model selection for worker agents.\n- SOURCE: arXiv:2604.21433 (Lehner & Lopez-Lira, April 2026) — ChatGPT as Time Capsule.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

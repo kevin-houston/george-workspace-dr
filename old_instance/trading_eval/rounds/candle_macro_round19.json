@@ -1,0 +1,291 @@
+{
+  "timestamp": "2026-03-29T21:43:24.178240",
+  "round": 19,
+  "description": "Candlestick \u00d7 Macro Regime Filter",
+  "regime_stats": {
+    "favorable_pct": 36.82,
+    "unfavorable_pct": 56.55,
+    "calm_pct": 34.96
+  },
+  "avg_sharpe_lift": -0.059,
+  "n_improved": 1,
+  "results": [
+    {
+      "pattern": "SpinningTop",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.346,
+      "sharpe_fav": 0.225,
+      "sharpe_unfav": 0.258,
+      "sharpe_lift": -0.12,
+      "ret_unfilt": 34.41,
+      "ret_fav": 10.9,
+      "sig_kept_pct": 31.9
+    },
+    {
+      "pattern": "SpinningTop",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.421,
+      "sharpe_fav": 0.298,
+      "sharpe_unfav": 0.336,
+      "sharpe_lift": -0.123,
+      "ret_unfilt": 83.69,
+      "ret_fav": 28.18,
+      "sig_kept_pct": 31.9
+    },
+    {
+      "pattern": "BullishHarami",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.311,
+      "sharpe_fav": 0.256,
+      "sharpe_unfav": 0.191,
+      "sharpe_lift": -0.055,
+      "ret_unfilt": 23.93,
+      "ret_fav": 11.14,
+      "sig_kept_pct": 38.7
+    },
+    {
+      "pattern": "BullishHarami",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.423,
+      "sharpe_fav": 0.379,
+      "sharpe_unfav": 0.274,
+      "sharpe_lift": -0.044,
+      "ret_unfilt": 60.03,
+      "ret_fav": 27.26,
+      "sig_kept_pct": 38.7
+    },
+    {
+      "pattern": "PiercingLine",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.161,
+      "sharpe_fav": 0.037,
+      "sharpe_unfav": 0.127,
+      "sharpe_lift": -0.123,
+      "ret_unfilt": 9.34,
+      "ret_fav": 0.76,
+      "sig_kept_pct": 35.3
+    },
+    {
+      "pattern": "PiercingLine",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.191,
+      "sharpe_fav": 0.1,
+      "sharpe_unfav": 0.14,
+      "sharpe_lift": -0.091,
+      "ret_unfilt": 17.14,
+      "ret_fav": 3.29,
+      "sig_kept_pct": 34.7
+    },
+    {
+      "pattern": "LongLeggedDoji",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.211,
+      "sharpe_fav": 0.166,
+      "sharpe_unfav": 0.145,
+      "sharpe_lift": -0.045,
+      "ret_unfilt": 13.18,
+      "ret_fav": 5.13,
+      "sig_kept_pct": 37.1
+    },
+    {
+      "pattern": "LongLeggedDoji",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.185,
+      "sharpe_fav": 0.123,
+      "sharpe_unfav": 0.151,
+      "sharpe_lift": -0.062,
+      "ret_unfilt": 21.37,
+      "ret_fav": 6.71,
+      "sig_kept_pct": 37.1
+    },
+    {
+      "pattern": "MorningStar",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.115,
+      "sharpe_fav": 0.077,
+      "sharpe_unfav": 0.089,
+      "sharpe_lift": -0.038,
+      "ret_unfilt": 3.18,
+      "ret_fav": 1.32,
+      "sig_kept_pct": 38.9
+    },
+    {
+      "pattern": "MorningStar",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.236,
+      "sharpe_fav": 0.23,
+      "sharpe_unfav": 0.123,
+      "sharpe_lift": -0.006,
+      "ret_unfilt": 15.36,
+      "ret_fav": 8.71,
+      "sig_kept_pct": 38.9
+    },
+    {
+      "pattern": "InvertedHammer",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.208,
+      "sharpe_fav": 0.183,
+      "sharpe_unfav": 0.151,
+      "sharpe_lift": -0.025,
+      "ret_unfilt": 7.69,
+      "ret_fav": 5.83,
+      "sig_kept_pct": 56.1
+    },
+    {
+      "pattern": "InvertedHammer",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.253,
+      "sharpe_fav": 0.118,
+      "sharpe_unfav": 0.221,
+      "sharpe_lift": -0.135,
+      "ret_unfilt": 14.11,
+      "ret_fav": 4.97,
+      "sig_kept_pct": 31.1
+    },
+    {
+      "pattern": "TweezerBottom",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.1,
+      "sharpe_fav": 0.116,
+      "sharpe_unfav": 0.07,
+      "sharpe_lift": 0.016,
+      "ret_unfilt": 2.29,
+      "ret_fav": 2.14,
+      "sig_kept_pct": 36.5
+    },
+    {
+      "pattern": "TweezerBottom",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.246,
+      "sharpe_fav": 0.085,
+      "sharpe_unfav": 0.22,
+      "sharpe_lift": -0.161,
+      "ret_unfilt": 17.43,
+      "ret_fav": 4.26,
+      "sig_kept_pct": 35.8
+    },
+    {
+      "pattern": "BullishEngulfing",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.15,
+      "sharpe_fav": 0.098,
+      "sharpe_unfav": 0.104,
+      "sharpe_lift": -0.053,
+      "ret_unfilt": 4.66,
+      "ret_fav": 1.26,
+      "sig_kept_pct": 46.8
+    },
+    {
+      "pattern": "BullishEngulfing",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.192,
+      "sharpe_fav": 0.134,
+      "sharpe_unfav": 0.17,
+      "sharpe_lift": -0.058,
+      "ret_unfilt": 11.41,
+      "ret_fav": 3.09,
+      "sig_kept_pct": 37.1
+    },
+    {
+      "pattern": "BullMarubozu",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.026,
+      "sharpe_fav": 0.134,
+      "sharpe_unfav": -0.029,
+      "sharpe_lift": 0.107,
+      "ret_unfilt": 1.47,
+      "ret_fav": 2.75,
+      "sig_kept_pct": 41.4
+    },
+    {
+      "pattern": "BullMarubozu",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.115,
+      "sharpe_fav": 0.097,
+      "sharpe_unfav": 0.089,
+      "sharpe_lift": -0.017,
+      "ret_unfilt": 12.54,
+      "ret_fav": 4.46,
+      "sig_kept_pct": 37.5
+    },
+    {
+      "pattern": "Doji",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.163,
+      "sharpe_fav": 0.12,
+      "sharpe_unfav": 0.103,
+      "sharpe_lift": -0.043,
+      "ret_unfilt": 5.63,
+      "ret_fav": 2.83,
+      "sig_kept_pct": 35.1
+    },
+    {
+      "pattern": "Doji",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.187,
+      "sharpe_fav": 0.089,
+      "sharpe_unfav": 0.174,
+      "sharpe_lift": -0.097,
+      "ret_unfilt": 12.18,
+      "ret_fav": 2.58,
+      "sig_kept_pct": 33.3
+    }
+  ],
+  "top5_by_lift": [
+    {
+      "pattern": "BullMarubozu",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.026,
+      "sharpe_fav": 0.134,
+      "sharpe_unfav": -0.029,
+      "sharpe_lift": 0.107,
+      "ret_unfilt": 1.47,
+      "ret_fav": 2.75,
+      "sig_kept_pct": 41.4
+    },
+    {
+      "pattern": "TweezerBottom",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.1,
+      "sharpe_fav": 0.116,
+      "sharpe_unfav": 0.07,
+      "sharpe_lift": 0.016,
+      "ret_unfilt": 2.29,
+      "ret_fav": 2.14,
+      "sig_kept_pct": 36.5
+    },
+    {
+      "pattern": "MorningStar",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.236,
+      "sharpe_fav": 0.23,
+      "sharpe_unfav": 0.123,
+      "sharpe_lift": -0.006,
+      "ret_unfilt": 15.36,
+      "ret_fav": 8.71,
+      "sig_kept_pct": 38.9
+    },
+    {
+      "pattern": "BullMarubozu",
+      "hold_days": 10,
+      "sharpe_unfilt": 0.115,
+      "sharpe_fav": 0.097,
+      "sharpe_unfav": 0.089,
+      "sharpe_lift": -0.017,
+      "ret_unfilt": 12.54,
+      "ret_fav": 4.46,
+      "sig_kept_pct": 37.5
+    },
+    {
+      "pattern": "InvertedHammer",
+      "hold_days": 3,
+      "sharpe_unfilt": 0.208,
+      "sharpe_fav": 0.183,
+      "sharpe_unfav": 0.151,
+      "sharpe_lift": -0.025,
+      "ret_unfilt": 7.69,
+      "ret_fav": 5.83,
+      "sig_kept_pct": 56.1
+    }
+  ]
+}

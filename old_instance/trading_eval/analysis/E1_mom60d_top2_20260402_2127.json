@@ -1,0 +1,91 @@
+{
+  "strategy": "E1_mom60d_top2",
+  "category": "etf",
+  "round": 1,
+  "tickers": [
+    "XLB",
+    "XLE",
+    "XLF",
+    "XLI",
+    "XLK",
+    "XLP",
+    "XLRE",
+    "XLU",
+    "XLV",
+    "XLY"
+  ],
+  "n_trades": 285,
+  "date_range": "2015-04-07 \u2013 2026-03-24",
+  "total_return": 1.5981,
+  "cagr": 0.041,
+  "sharpe": 0.4341,
+  "sortino": 0.496,
+  "calmar": 0.1688,
+  "skewness": 1.072,
+  "kurtosis": 8.6715,
+  "max_drawdown": -0.243,
+  "max_consec_losses": 5,
+  "win_rate": 0.5614,
+  "profit_factor": 1.5077,
+  "avg_return": 0.0038,
+  "avg_win": 0.0201,
+  "avg_loss": -0.0171,
+  "kelly_fraction": 0.189,
+  "spy_correlation": 0.3523,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 7,
+      "sharpe": 0.3066,
+      "sortino": 0.2894,
+      "win_rate": 0.5714,
+      "avg_return": 0.0034,
+      "max_dd": -0.0687
+    },
+    "bear": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 64,
+      "sharpe": 0.4491,
+      "sortino": 0.5314,
+      "win_rate": 0.5781,
+      "avg_return": 0.0057,
+      "max_dd": -0.1089
+    },
+    "bull": {
+      "n_trades": 48,
+      "sharpe": 0.1766,
+      "sortino": 0.1661,
+      "win_rate": 0.5208,
+      "avg_return": 0.0017,
+      "max_dd": -0.1566
+    },
+    "low_vol_bull": {
+      "n_trades": 160,
+      "sharpe": 0.4995,
+      "sortino": 0.5766,
+      "win_rate": 0.5625,
+      "avg_return": 0.0027,
+      "max_dd": -0.1163
+    },
+    "unknown": {
+      "n_trades": 4,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.75,
+      "avg_return": 0.0443,
+      "max_dd": -0.005
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

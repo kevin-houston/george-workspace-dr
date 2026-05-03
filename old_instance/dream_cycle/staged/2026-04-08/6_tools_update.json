@@ -1,0 +1,14 @@
+{
+  "id": "tools-update-tradingagents-finbert-2026-04-08",
+  "date": "2026-04-08",
+  "source": "GitHub scan + HuggingFace scan (2026-04-08)",
+  "source_url": "https://github.com/TauricResearch/TradingAgents",
+  "title": "Tools Update: TradingAgents v0.2.3 + NLPScholars Earnings Call Model + Longformer",
+  "rationale": "TradingAgents has updated to v0.2.3 (Mar 29, 2026) with multi-language support, unified model catalog, and backtesting date fidelity fixes. R28 should use this version. Also found two better HuggingFace model options for R31 earnings call processing: NLPScholars/Roberta-Earning-Call-Transcript-Classification (multi-label, F1 82.8%, trained on 10 years of AAPL/GOOG/MSFT/NVDA/AMZN/INTC/CSCO transcripts) and Longformer for full-document processing (4,096 token context, avoids FinBERT truncation problem).",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n### Tools Update (2026-04-08 GitHub/HuggingFace Scan)\n\n#### TradingAgents v0.2.3 (latest as of 2026-04-08)\n- **v0.2.2** (Mar 2026): Claude 4.6 / GPT-5.4 / Gemini 3.1 support; five-tier rating scale; Anthropic effort control\n- **v0.2.3** (Mar 29, 2026): Multi-language support, unified model catalog, **backtesting date fidelity fixes** (important for R28!)\n- R28 should use v0.2.3 \u2014 backtesting date fidelity fix is directly relevant for PEAD backtest accuracy\n- GitHub: https://github.com/TauricResearch/TradingAgents\n\n#### Earnings Call NLP Models (Relevant to R31)\n\n**NLPScholars/Roberta-Earning-Call-Transcript-Classification**\n- Multi-label classification: positive / negative / litigious / constraining / uncertain\n- Trained on 10 years of earnings call transcripts from AAPL, GOOG, MSFT, NVDA, AMZN, INTC, CSCO\n- Best micro F1: 82.8% (multi-label)\n- Annotated using Loughran-McDonald lexicon + FinancialPhraseBank\n- **Limitation**: Sentence-level model (max 240 tokens) \u2014 requires transcript to be chunked by sentence\n- **Best use**: Detect litigious/constraining/uncertain language in Q&A section \u2192 additive PEAD signal\n- HuggingFace: `NLPScholars/Roberta-Earning-Call-Transcript-Classification`\n\n**SeanD103/Longformer_for_financial_sentiment_analysis**\n- Handles up to 4,096 tokens \u2014 avoids FinBERT truncation problem on full transcripts\n- Directly addresses the limitation of FinBERT (512 token limit) for full-document processing\n- **Best use for R31**: Process full Q&A section without chunking; better for extracting holistic sentiment\n- HuggingFace: `SeanD103/Longformer_for_financial_sentiment_analysis`\n\n**R31 Recommendation**: Use FinBERT (`ProsusAI/finbert`) for per-sentence scoring (text surprise metric = avg score vs. trailing 12Q avg), but add NLPScholars multi-label classifier for 'litigious + constraining + uncertain' flag \u2014 if any of these labels score high, reduce PEAD position size 30%.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

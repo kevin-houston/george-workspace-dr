@@ -1,0 +1,15 @@
+{
+  "id": "2026-03-31-dividend-research-memory",
+  "date": "2026-03-31",
+  "source": "George trading_eval R27 completion",
+  "source_url": "/workspace/group/trading_eval/DIVIDEND_REPORT.md",
+  "title": "Add R27 Dividend Strategy findings to MEMORY.md",
+  "rationale": "Round 27 produced the highest Sharpe in the entire 7,000+ backtest corpus (4.403). This is product-ready and should be in MEMORY.md so George can reference it in conversations and future research without re-reading the full report.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "content": "\n## Round 27 \u2014 Dividend Strategies (Completed 2026-03-31)\n\n### Key Findings\n- *Best strategy in entire corpus*: Div Raise >=10% hold-40d \u2192 Sharpe *4.403*, ~15% CAGR\n- Strong runner-up: Div Raise >=5% hold-40d \u2192 Sharpe *3.400*\n- Covered calls around ex-div: Sharpe *2.643* (sells calls pre-ex-div, captures IV crush)\n- Div Capture buy-3d sell+5d: Sharpe *1.578*\n- Ex-Div Drift hold-20d: Sharpe *1.511*\n- Dogs of the Dow top-10: Sharpe *1.203* (annual, p=0.003)\n\n### Critical Insight \u2014 LLM Signal Filtering (R26)\n- LLM IndicatorAgent HURTS PEAD: confirmed signals Sharpe 0.716 vs rejected signals Sharpe 0.904\n- PEAD is anti-IndicatorAgent by design \u2014 gaps look 'overbought' to technical scorers\n- LLM is useful as *narrative generator* (product feature), not as *signal filter* on event-driven strategies\n- LLM filtering on pure technical patterns = untested, potentially useful\n\n### Research Agenda \u2014 Next Rounds\n- Round 28: TradingAgents-style multi-agent overlay (Fundamentals + News + Sentiment) on PEAD signals\n  - Hypothesis: fundamental/news filter (not indicator filter) should HELP PEAD\n  - GitHub: https://github.com/TauricResearch/TradingAgents (v0.2.0, Claude support)\n- Round 29: Paper trading pilot of Div Raise >=10% strategy on live data\n- Intraday patterns (1H, 4H bars) \u2014 still unexplored\n- Alternative data: options flow, insider transactions, short interest\n",
+  "apply_status": "applied",
+  "derived_from": "trading_eval/DIVIDEND_REPORT.md + trading_eval/LLM_SIGNAL_REPORT.md"
+}

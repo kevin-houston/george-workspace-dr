@@ -1,0 +1,14 @@
+{
+  "id": "2026-03-30-004",
+  "date": "2026-03-30",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.09995",
+  "title": "Add QuantAgent research finding to MEMORY.md",
+  "rationale": "QuantAgent (arXiv:2509.09995) achieves 80% directional accuracy on 4-hour intervals using four specialized LLM agents operating on OHLC data in a zero-shot setting. This is directly relevant to George's trading research and product development. The architecture (specialized agents per signal domain) is a new approach that could complement or extend the existing Python backtest harness in Round 26. This finding should be persisted to memory.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n## AI Research Findings (Trading-Relevant)\n\n### QuantAgent \u2014 LLM Agents for Trading (arXiv:2509.09995, Sept 2025)\n- Architecture: 4 specialized agents \u2014 Indicator, Pattern, Trend, Risk\n- Zero-shot on OHLC data: 80% directional accuracy on 4H intervals\n- Outperforms rule-based + neural baselines on BTC, Nasdaq futures, 8 other instruments\n- Limitation: accuracy degrades on sub-15-min bars; delays unsuitable for true microsecond HFT\n- GitHub: https://github.com/Y-Research-SBU/QuantAgent\n- George application: Round 26 trading_eval \u2014 LLM signal interpretation layer on top of existing backtest setups\n- Product application: LLM-generated signal narrative as premium feature in Macro Regime Dashboard\n\n### mem-agent \u2014 RL-Trained Markdown Memory (HuggingFace, March 2026)\n- Validates George's MEMORY.md architecture (markdown files are the right choice)\n- Three memory operations: retrieve, update, clarify\n- Key insight: trained to know WHEN NOT TO WRITE (prevents memory pollution)\n- mem-agent-mcp: MCP server that gives any LLM RL-trained memory management\n",
+  "action": "append",
+  "apply_status": "applied"
+}

@@ -1,0 +1,156 @@
+{
+  "scan_date": "2026-05-03",
+  "session": "nightly-dream-cycle",
+  "phase": "build (4AM window)",
+
+  "search_queries": [
+    "PEAD post-earnings drift FinBERT LLM NLP earnings text signals (2024-2025)",
+    "pairs trading cointegration LLM neural network spread prediction (2024-2025)",
+    "cross-sectional factor momentum machine learning equity portfolio (2024-2025)",
+    "multi-agent LLM trading system portfolio management autonomous (2024-2025)",
+    "factor residualized pairs trading orthogonalization cointegration equity (2024-2025)",
+    "dividend announcement drift trading strategy event-driven equity (2024)",
+    "github trending 2025 quantitative finance algorithmic trading Python"
+  ],
+
+  "findings": [
+    {
+      "id": "F1",
+      "topic": "PEAD + FinBERT",
+      "paper": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "venue": "ACL 2025 FinNLP-2",
+      "url": "https://aclanthology.org/2025.finnlp-2.13.pdf",
+      "relevance": "HIGH",
+      "key_numbers": "FinBERT 57.6% (positive group), 58.3% (negative group) directional accuracy",
+      "action": "Staged proposal #1 — apply to H159b as NLP filter"
+    },
+    {
+      "id": "F2",
+      "topic": "PEAD + ML history",
+      "paper": "Beyond the last surprise: Reviving PEAD with machine learning and historical earnings",
+      "venue": "Finance Research Letters, 2025",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S1544612325020057",
+      "relevance": "HIGH",
+      "key_numbers": "Elastic-net on 8-quarter SUE history 'nearly doubles Sharpe' vs single-quarter SUE",
+      "action": "Staged proposal #2 — implement as H159b signal upgrade"
+    },
+    {
+      "id": "F3",
+      "topic": "PEAD.txt — text-based PEAD signal",
+      "paper": "PEAD.txt: Post-Earnings-Announcement Drift Using Text",
+      "venue": "Journal of Financial and Quantitative Analysis",
+      "url": "https://www.cambridge.org/core/journals/journal-of-financial-and-quantitative-analysis/article/peadtxt-postearningsannouncement-drift-using-text/5EB217BB68B5FB054FE38541BAAC4679",
+      "relevance": "HIGH",
+      "key_numbers": "3.9 basis points daily alpha from text-based spread portfolio",
+      "action": "Reference for event-driven wiki page; implementation similar to proposal #1"
+    },
+    {
+      "id": "F4",
+      "topic": "Pairs trading + deep learning",
+      "paper": "Price spread prediction in high-frequency pairs trading using deep learning architectures",
+      "venue": "International Review of Financial Analysis, 2024",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S1057521924007257",
+      "relevance": "MEDIUM",
+      "key_numbers": "Deep learning outperforms z-score baseline on ETF pairs",
+      "action": "Staged proposal #3 — queue after H160 confirmed"
+    },
+    {
+      "id": "F5",
+      "topic": "Pairs trading + VAR+GRU fat-tail",
+      "paper": "Combined Effects of Fat-Tail and Spread Forecasting on Pairs Trading",
+      "venue": "Journal of Forecasting, 2025",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/for.70074",
+      "relevance": "MEDIUM",
+      "key_numbers": "VAR+GRU hybrid captures fat-tail spread dynamics, outperforms z-score",
+      "action": "Paired with proposal #3"
+    },
+    {
+      "id": "F6",
+      "topic": "ETF cointegration pairs",
+      "paper": "Cointegration-based pairs trading: identifying and exploiting similar exchange-traded funds",
+      "venue": "Journal of Asset Management, 2025",
+      "url": "https://link.springer.com/article/10.1057/s41260-025-00416-0",
+      "relevance": "MEDIUM",
+      "key_numbers": "Analysis of 30 ETF pairs 2000-2024; z-score threshold optimization improves profits",
+      "action": "Informative for H160 design — ETF pairs universe selection"
+    },
+    {
+      "id": "F7",
+      "topic": "TradingAgents multi-agent LLM",
+      "paper": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "venue": "arXiv 2412.20138",
+      "url": "https://arxiv.org/abs/2412.20138",
+      "github": "https://github.com/TauricResearch/TradingAgents",
+      "relevance": "MEDIUM",
+      "key_numbers": "v0.2.4 supports Claude 4.x, GPT-5.x, Gemini 3.x, Grok 4.x",
+      "action": "Staged proposal #4 — investigate as macro-regime layer for H026"
+    },
+    {
+      "id": "F8",
+      "topic": "Multi-agent LLM for equity PM",
+      "paper": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "venue": "arXiv 2602.23330, 2026",
+      "url": "https://arxiv.org/abs/2602.23330",
+      "relevance": "LOW",
+      "key_numbers": "Fine-grained task decomposition improves risk-adjusted returns vs coarse-grained agents",
+      "action": "Monitor — too complex for current pipeline phase"
+    },
+    {
+      "id": "F9",
+      "topic": "ML multi-factor cross-sectional momentum",
+      "paper": "Machine Learning Enhanced Multi-Factor Quantitative Trading",
+      "venue": "arXiv 2507.07107, 2025",
+      "url": "https://arxiv.org/abs/2507.07107",
+      "relevance": "MEDIUM",
+      "key_numbers": "20% annualized, Sharpe >2.0 on A-shares (2021-2024)",
+      "action": "Staged proposal #5 — long-term queue, after H158 deferred resolved"
+    },
+    {
+      "id": "F10",
+      "topic": "Dividend announcement drift",
+      "paper": "Calendar anomalies and dividend announcements effects on stock market returns",
+      "venue": "Review of Quantitative Finance and Accounting, 2025",
+      "url": "https://link.springer.com/article/10.1007/s11156-024-01321-0",
+      "relevance": "MEDIUM",
+      "key_numbers": "+1.39% AAR on dividend increase announcement day (Warsaw 2024 study, 395 events)",
+      "action": "Supports H161 design — confirms drift exists post-announcement"
+    }
+  ],
+
+  "github_highlights": [
+    {
+      "repo": "TauricResearch/TradingAgents",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "stars": "active",
+      "description": "Multi-agent LLM trading framework, v0.2.4, Claude 4.x support"
+    },
+    {
+      "repo": "wilsonfreitas/awesome-quant",
+      "url": "https://github.com/wilsonfreitas/awesome-quant",
+      "stars": "curated list",
+      "description": "Comprehensive quant library catalog — reference for tooling gaps"
+    },
+    {
+      "repo": "merovinh/best-of-algorithmic-trading",
+      "url": "https://github.com/merovinh/best-of-algorithmic-trading",
+      "stars": "ranked weekly-updated",
+      "description": "Ranked algorithmic trading repos, updated weekly — good pulse check source"
+    }
+  ],
+
+  "staged_proposals": [
+    "dream_cycle/staged/2026-05-03/1_pead_finbert_signal.json",
+    "dream_cycle/staged/2026-05-03/2_pead_ml_sue_history.json",
+    "dream_cycle/staged/2026-05-03/3_pairs_deep_learning_spread.json",
+    "dream_cycle/staged/2026-05-03/4_trading_agents_llm_framework.json",
+    "dream_cycle/staged/2026-05-03/5_ml_multifactor_momentum.json"
+  ],
+
+  "priority_order_for_kevin_review": [
+    "#2 (PEAD ML elastic-net) — near-doubles Sharpe, directly applicable to H159b, moderate effort",
+    "#1 (PEAD FinBERT) — 57% accuracy filter, applicable to H159b, moderate effort",
+    "#4 (TradingAgents) — low effort to test as H026 macro regime layer",
+    "#3 (pairs deep learning) — high complexity, queue after H160",
+    "#5 (ML multi-factor) — long-term queue, needs bias-free data first"
+  ]
+}

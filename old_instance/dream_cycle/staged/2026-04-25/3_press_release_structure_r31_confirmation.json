@@ -1,0 +1,14 @@
+{
+  "id": "press-release-r31-confirmation-2026-04-25",
+  "date": "2026-04-25",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.24254",
+  "title": "Earnings press release structure as R31 data source — FinBERT confirmation",
+  "rationale": "arXiv:2509.24254 (Sep 2025) demonstrates that soft information from earnings press release structure is as informative as the earnings surprise (SUE) for same-day returns, with FinBERT achieving the highest predictive power among tested models. This independently validates the R31 direction of augmenting earnings call transcript NLP with additional unstructured text sources. Press releases are shorter, more structured, and available earlier than full transcripts — making them lower-latency signals. FinBERT (already in R28 speaker-weighted pipeline) can be applied directly. This does not replace R31's primary transcript focus but adds press releases as a complementary input requiring minimal additional infrastructure.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n### Earnings Press Release Structure — R31 Data Source Confirmation (2026-04-25)\n- **Paper**: arXiv:2509.24254 (Sep 2025)\n- **Finding**: Soft information from press release structure predicts same-day earnings returns with equal power to SUE (earnings surprise)\n- **Best model**: FinBERT (already in R28/R31 pipeline stack)\n- **R31 implication**: Add press release as low-latency input alongside earnings call transcript\n  - Press releases available at ~4:00 PM ET (before after-hours earnings call at ~5:00 PM)\n  - Can generate early signal before transcript NLP completes\n  - Same FinBERT model, no new infrastructure needed\n- **Integration point**: R31 multi-source signal fusion: press_release_finbert + transcript_speaker_weighted_finbert + SubjECTive-QA quality vector\n- **Caution**: Paper studies same-day returns; R28/R31 targets multi-day PEAD drift — directional alignment likely but not guaranteed\n",
+  "action": "append",
+  "apply_status": "applied"
+}

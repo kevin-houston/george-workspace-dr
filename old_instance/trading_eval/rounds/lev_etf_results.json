@@ -1,0 +1,182 @@
+{
+  "category": "leveraged_etf_decay",
+  "run_date": "2026-03-30",
+  "period": "2015-01-01 to 2025-01-01",
+  "top_strategies": [
+    {
+      "sharpe": 0.4224,
+      "cagr": 8.932,
+      "max_dd": -0.5253,
+      "strategy": "lev_momentum_UPRO_IEF"
+    },
+    {
+      "sharpe": 0.3377,
+      "cagr": 4.231,
+      "max_dd": -0.271,
+      "strategy": "base_momentum_SPY_IEF"
+    },
+    {
+      "sharpe": -0.0317,
+      "cagr": -0.944,
+      "max_dd": -0.3009,
+      "strategy": "rebalancing_band_TQQQ_SQQQ_band20"
+    },
+    {
+      "sharpe": -0.6452,
+      "cagr": -25.588,
+      "max_dd": -0.956,
+      "strategy": "short_UPRO_long_SPY"
+    },
+    {
+      "sharpe": -0.7758,
+      "cagr": -34.712,
+      "max_dd": -0.9875,
+      "strategy": "short_TQQQ_long_QQQ"
+    },
+    {
+      "sharpe": -1.0782,
+      "cagr": -1.231,
+      "max_dd": -0.1175,
+      "spy_corr": 0.0656,
+      "strategy": "short_both_TQQQ_SQQQ"
+    },
+    {
+      "sharpe": -1.4945,
+      "cagr": -1.982,
+      "max_dd": -0.1813,
+      "spy_corr": -0.144,
+      "strategy": "short_both_UPRO_SPXU"
+    },
+    {
+      "sharpe": -2.3392,
+      "cagr": -1.801,
+      "max_dd": -0.1671,
+      "spy_corr": 0.049,
+      "strategy": "vix_regime_short_TQQQ_SQQQ",
+      "pct_time_in_trade": 77.7
+    }
+  ],
+  "decay_analysis": {
+    "instruments": {
+      "3x_bull": {
+        "annual_decay_vs_leveraged_underlying": -5.513,
+        "mean_daily_decay_bp": -2.49,
+        "n_days": 2515,
+        "decay_by_vix_regime": {
+          "low_vix_lt20_mean_bp": -2.5,
+          "mid_vix_20_30_mean_bp": -1.8,
+          "high_vix_gt30_mean_bp": -5.3
+        }
+      },
+      "3x_bull_SPY": {
+        "annual_decay_vs_leveraged_underlying": -5.691,
+        "mean_daily_decay_bp": -2.27,
+        "n_days": 2515,
+        "decay_by_vix_regime": {
+          "low_vix_lt20_mean_bp": -2.3,
+          "mid_vix_20_30_mean_bp": -2.34,
+          "high_vix_gt30_mean_bp": -1.57
+        }
+      },
+      "3x_bear": {
+        "annual_decay_vs_leveraged_underlying": 5.375,
+        "mean_daily_decay_bp": 1.9,
+        "n_days": 2515,
+        "decay_by_vix_regime": {
+          "low_vix_lt20_mean_bp": 2.75,
+          "mid_vix_20_30_mean_bp": 0.57,
+          "high_vix_gt30_mean_bp": -2.81
+        }
+      },
+      "2x_bull": {
+        "annual_decay_vs_leveraged_underlying": -3.161,
+        "mean_daily_decay_bp": -1.28,
+        "n_days": 2515,
+        "decay_by_vix_regime": {
+          "low_vix_lt20_mean_bp": -1.3,
+          "mid_vix_20_30_mean_bp": -1.21,
+          "high_vix_gt30_mean_bp": -1.26
+        }
+      },
+      "2x_bull_SPY": {
+        "annual_decay_vs_leveraged_underlying": -3.236,
+        "mean_daily_decay_bp": -1.28,
+        "n_days": 2515,
+        "decay_by_vix_regime": {
+          "low_vix_lt20_mean_bp": -1.33,
+          "mid_vix_20_30_mean_bp": -1.27,
+          "high_vix_gt30_mean_bp": -0.62
+        }
+      }
+    },
+    "avg_annual_decay_3x_bull_pct": -4.4,
+    "avg_annual_decay_3x_bear_pct": 5.375,
+    "optimal_vix_range": [
+      30,
+      35
+    ],
+    "vix_bin_analysis": {
+      "vix_10_15": {
+        "n_days": 951,
+        "ann_return_pct": -2.52,
+        "ann_vol_pct": 0.74,
+        "sharpe": -3.391
+      },
+      "vix_15_20": {
+        "n_days": 742,
+        "ann_return_pct": -2.11,
+        "ann_vol_pct": 0.94,
+        "sharpe": -2.244
+      },
+      "vix_20_25": {
+        "n_days": 406,
+        "ann_return_pct": -0.69,
+        "ann_vol_pct": 1.17,
+        "sharpe": -0.589
+      },
+      "vix_25_30": {
+        "n_days": 213,
+        "ann_return_pct": 0.0,
+        "ann_vol_pct": 0.99,
+        "sharpe": 0.001
+      },
+      "vix_30_35": {
+        "n_days": 86,
+        "ann_return_pct": 2.71,
+        "ann_vol_pct": 1.56,
+        "sharpe": 1.738
+      },
+      "vix_35_40": {
+        "n_days": 22,
+        "ann_return_pct": -3.46,
+        "ann_vol_pct": 1.47,
+        "sharpe": -2.35
+      }
+    }
+  },
+  "crisis_analysis": {
+    "covid_crash_2020": {
+      "short_both_TQQQ_SQQQ": 3.24,
+      "short_both_UPRO_SPXU": 0.86,
+      "buy_hold_SPY": -33.57
+    },
+    "recovery_2020": {
+      "short_both_TQQQ_SQQQ": 1.26,
+      "short_both_UPRO_SPXU": 0.91,
+      "buy_hold_SPY": 57.37
+    },
+    "rate_hike_2022": {
+      "short_both_TQQQ_SQQQ": 0.37,
+      "short_both_UPRO_SPXU": -1.5,
+      "buy_hold_SPY": -18.18
+    },
+    "tech_bull_2023": {
+      "short_both_TQQQ_SQQQ": -4.24,
+      "short_both_UPRO_SPXU": -4.69,
+      "buy_hold_SPY": 26.18
+    }
+  },
+  "best_strategy": "lev_momentum_UPRO_IEF",
+  "best_sharpe": 0.4224,
+  "key_finding": "Best strategy 'lev_momentum_UPRO_IEF' achieved Sharpe=0.42. 3x bull ETFs decay -4.40%/yr vs 3x underlying; optimal shorting at VIX 30-35."
+}

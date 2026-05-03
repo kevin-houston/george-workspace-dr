@@ -1,0 +1,89 @@
+{
+  "strategy": "crypto_sma_crossover_10_50_long_only",
+  "category": "crypto",
+  "round": 3,
+  "tickers": [
+    "ADA-USD",
+    "AVAX-USD",
+    "BNB-USD",
+    "BTC-USD",
+    "DOT-USD",
+    "ETH-USD",
+    "LINK-USD",
+    "SOL-USD"
+  ],
+  "n_trades": 258,
+  "date_range": "2018-03-05 \u2013 2026-03-21",
+  "total_return": 7.641626263594879e+267,
+  "cagr": 2881927559666.1914,
+  "sharpe": 0.7626,
+  "sortino": 6.3557,
+  "calmar": 5.9194,
+  "skewness": 5.4917,
+  "kurtosis": 36.2765,
+  "max_drawdown": -486862290367.601,
+  "max_consec_losses": 10,
+  "win_rate": 0.3721,
+  "profit_factor": 4.7715,
+  "avg_return": 28.1357,
+  "avg_win": 95.6636,
+  "avg_loss": -11.8808,
+  "kelly_fraction": 0.25,
+  "spy_correlation": 0.0852,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 5,
+      "sharpe": 3.4643,
+      "sortino": 339391906190.7331,
+      "win_rate": 1.0,
+      "avg_return": 97.974,
+      "max_dd": 0.0
+    },
+    "bear": {
+      "n_trades": 10,
+      "sharpe": 2.4821,
+      "sortino": 47.5744,
+      "win_rate": 0.7,
+      "avg_return": 70.4456,
+      "max_dd": -188181.6351
+    },
+    "high_vol": {
+      "n_trades": 82,
+      "sharpe": 0.9522,
+      "sortino": 12.0661,
+      "win_rate": 0.3659,
+      "avg_return": 55.1205,
+      "max_dd": -869233918.3196
+    },
+    "bull": {
+      "n_trades": 69,
+      "sharpe": 0.8547,
+      "sortino": 3.2828,
+      "win_rate": 0.4928,
+      "avg_return": 16.5276,
+      "max_dd": -16692.786
+    },
+    "low_vol_bull": {
+      "n_trades": 76,
+      "sharpe": 0.3862,
+      "sortino": 1.6191,
+      "win_rate": 0.25,
+      "avg_return": 6.9542,
+      "max_dd": -2030.5149
+    },
+    "unknown": {
+      "n_trades": 16,
+      "sharpe": -3.46,
+      "sortino": -2.5013,
+      "win_rate": 0.0625,
+      "avg_return": -7.7574,
+      "max_dd": -20.1592
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

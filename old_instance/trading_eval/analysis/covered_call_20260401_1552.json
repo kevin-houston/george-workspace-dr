@@ -1,0 +1,92 @@
+{
+  "strategy": "covered_call",
+  "category": "options",
+  "round": 25,
+  "tickers": [
+    "CVX",
+    "IBM",
+    "JNJ",
+    "KO",
+    "MO",
+    "PFE",
+    "PG",
+    "T",
+    "VZ",
+    "XOM"
+  ],
+  "n_trades": 710,
+  "date_range": "2020-01-02 \u2013 2025-11-03",
+  "total_return": 84.7651,
+  "cagr": 0.0781,
+  "sharpe": 0.5311,
+  "sortino": 0.4371,
+  "calmar": 0.1838,
+  "skewness": -1.0627,
+  "kurtosis": 2.9586,
+  "max_drawdown": -0.4252,
+  "max_consec_losses": 4,
+  "win_rate": 0.638,
+  "profit_factor": 1.4735,
+  "avg_return": 0.0075,
+  "avg_win": 0.0368,
+  "avg_loss": -0.044,
+  "kelly_fraction": 0.205,
+  "spy_correlation": 0.6715,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 20,
+      "sharpe": 0.078,
+      "sortino": 0.0741,
+      "win_rate": 0.5,
+      "avg_return": 0.0031,
+      "max_dd": -0.3365
+    },
+    "bear": {
+      "n_trades": 30,
+      "sharpe": -0.4183,
+      "sortino": -0.2685,
+      "win_rate": 0.6667,
+      "avg_return": -0.0073,
+      "max_dd": -0.4008
+    },
+    "high_vol": {
+      "n_trades": 280,
+      "sharpe": 0.9967,
+      "sortino": 0.8545,
+      "win_rate": 0.6679,
+      "avg_return": 0.0127,
+      "max_dd": -0.2607
+    },
+    "bull": {
+      "n_trades": 270,
+      "sharpe": 0.0493,
+      "sortino": 0.041,
+      "win_rate": 0.5741,
+      "avg_return": 0.0006,
+      "max_dd": -0.4901
+    },
+    "low_vol_bull": {
+      "n_trades": 110,
+      "sharpe": 1.5927,
+      "sortino": 1.2354,
+      "win_rate": 0.7364,
+      "avg_return": 0.0162,
+      "max_dd": -0.1311
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": true,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "high SPY correlation (not market-neutral)"
+  ]
+}

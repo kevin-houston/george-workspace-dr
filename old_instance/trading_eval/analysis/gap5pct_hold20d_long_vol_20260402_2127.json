@@ -1,0 +1,107 @@
+{
+  "strategy": "gap5pct_hold20d_long_vol",
+  "category": "pead",
+  "round": 30,
+  "tickers": [
+    "AAPL",
+    "ADBE",
+    "AMZN",
+    "BAC",
+    "CAT",
+    "CVX",
+    "GE",
+    "GOOGL",
+    "HON",
+    "JPM",
+    "LMT",
+    "MA",
+    "META",
+    "MMM",
+    "MRK",
+    "MSFT",
+    "NFLX",
+    "NVDA",
+    "QCOM",
+    "RTX",
+    "TSLA",
+    "TXN",
+    "UNH",
+    "V",
+    "WMT",
+    "XOM"
+  ],
+  "n_trades": 156,
+  "date_range": "2020-02-03 \u2013 2025-11-21",
+  "total_return": 391.3071,
+  "cagr": 0.5831,
+  "sharpe": 1.3139,
+  "sortino": 1.5163,
+  "calmar": 1.1066,
+  "skewness": 0.3292,
+  "kurtosis": 1.6325,
+  "max_drawdown": -0.5269,
+  "max_consec_losses": 4,
+  "win_rate": 0.6731,
+  "profit_factor": 2.8449,
+  "avg_return": 0.0461,
+  "avg_win": 0.1056,
+  "avg_loss": -0.0764,
+  "kelly_fraction": 0.25,
+  "spy_correlation": 0.1962,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 16,
+      "sharpe": 2.752,
+      "sortino": 4.2774,
+      "win_rate": 0.75,
+      "avg_return": 0.1044,
+      "max_dd": -0.2233
+    },
+    "bear": {
+      "n_trades": 9,
+      "sharpe": -0.3455,
+      "sortino": -0.3107,
+      "win_rate": 0.4444,
+      "avg_return": -0.0128,
+      "max_dd": -0.3861
+    },
+    "high_vol": {
+      "n_trades": 66,
+      "sharpe": 1.3189,
+      "sortino": 1.6439,
+      "win_rate": 0.6667,
+      "avg_return": 0.0499,
+      "max_dd": -0.4993
+    },
+    "bull": {
+      "n_trades": 46,
+      "sharpe": 0.6058,
+      "sortino": 0.6091,
+      "win_rate": 0.587,
+      "avg_return": 0.0173,
+      "max_dd": -0.4874
+    },
+    "low_vol_bull": {
+      "n_trades": 19,
+      "sharpe": 3.1752,
+      "sortino": 2.9078,
+      "win_rate": 0.9474,
+      "avg_return": 0.0815,
+      "max_dd": -0.097
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

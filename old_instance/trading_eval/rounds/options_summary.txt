@@ -1,0 +1,75 @@
+ROUND 25 OPTIONS STRATEGIES SUMMARY
+====================================
+Date: 2026-03-31
+Universe: 10 Fortune 100 stocks (XOM,CVX,JNJ,PFE,KO,T,VZ,IBM,MO,PG) + 30 PEAD stocks
+Period: 2020-2025
+Method: Black-Scholes with 20d realized vol, r=4.5%
+
+STRATEGY RESULTS:
+-----------------
+1. COVERED CALLS (monthly, 3% OTM, 30d)
+   Avg Sharpe: 0.533 | Avg vs BH: -0.58%/yr | Premium: 18.6%/yr
+   Best: IBM (Sharpe 0.836, but -10.9% vs BH due to capped upside)
+   Good for: KO, MO, T, PG, VZ (slow/no-growth names)
+   Bad for: IBM, XOM, CVX (high growth or energy vol)
+
+2. CASH-SECURED PUTS (monthly, ATM, 30d)
+   Avg Sharpe: 0.210 | Avg vs Cash: -2.4%/yr | Premium: 28.7%/yr
+   Best: IBM (0.449), XOM (0.418)
+   Note: ATM puts collect more premium but face worse assignment losses
+   Result: Inferior to covered calls on Sharpe despite higher income
+
+3. EARNINGS STRADDLE (gap events as proxy, 30-stock PEAD universe)
+   5d_before: Sharpe 6.02, WR 62.2%, avg +1.83%/trade
+   2d_before: Sharpe 3.79, WR 62.9%, avg +0.89%/trade
+   1d_before: Sharpe 3.89, WR 68.4%, avg +0.55%/trade
+   Optimal: 5 days before event
+   CAVEAT: Sharpes inflated ~10x due to gap-event look-ahead bias;
+           realistic live Sharpe ~0.3-0.5 after IV crush adjustments
+
+4. PROTECTIVE PUT ON PEAD (5% OTM put, 20d, gap>5% events)
+   PEAD raw Sharpe: 4.463
+   PEAD + put Sharpe: 0.251 (SEVERELY DEGRADED)
+   Avg put cost: 3.57%/trade
+   Verdict: DESTROYS EDGE. Do not add protective puts to PEAD trades.
+   The ~3.6% put premium exceeds PEAD alpha in most cases.
+
+5. VIX SHORT VOL (VXX -5% signal, hold 5d, 0.5% simulated premium)
+   Sharpe: -4.975 | Win rate: 68.3% | Avg return: -3.34%/trade
+   Max DD: -99.6%
+   Verdict: UNPROFITABLE. 68% win rate overwhelmed by catastrophic losses
+   on VIX spike events. VXX structural decay pattern does not support
+   reliable short-vol extraction at 0.5% premium level.
+
+KEY METRICS COMPARISON:
+-----------------------
+Strategy                  | Best Sharpe | Avg Sharpe | Premium%
+Covered Calls             | 0.836       | 0.533      | 18.6%
+Cash-Secured Puts         | 0.449       | 0.210      | 28.7%
+Earnings Straddle*        | 6.02*       | 6.02*      | N/A (buyer)
+Protective Put / PEAD     | —           | 0.251      | -3.57% (cost)
+VIX Short Vol             | —           | -4.975     | 10.5%
+
+*Straddle figures inflated; realistic estimate ~0.4
+
+CONTEXT vs OTHER EVAL ROUNDS:
+------------------------------
+PEAD long (Round 24):    Sharpe 1.137 — still best pure strategy
+ML enhanced (Round ~22): Sharpe 1.5+
+Options writing:          Sharpe 0.53 — comparable to macro trend-following
+Leveraged ETFs (Round):  Best Sharpe ~1.0 with significant tail risk
+
+KEY FINDING:
+Covered calls provide modest risk-adjusted improvement for range-bound
+dividend stocks. The premium income story (18-29%/yr) is compelling but
+partially illusory after assignment losses. Never add protective puts to
+PEAD — the 3.6%/trade insurance premium wipes the entire edge. VXX
+short-vol fails catastrophically in a world with episodic VIX spikes.
+The options strategy that works best alongside PEAD would be covered
+calls on the same positions during the 20-day hold period, though this
+was not directly tested.
+
+FILES:
+  Harness: /workspace/group/trading_eval/options_harness.py
+  Results: /workspace/group/trading_eval/rounds/options_results.json
+  Report:  /workspace/group/trading_eval/OPTIONS_REPORT.md

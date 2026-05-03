@@ -1,0 +1,96 @@
+{
+  "strategy": "dogs_of_dow",
+  "category": "dividend",
+  "round": 27,
+  "tickers": [
+    "CAT",
+    "CSCO",
+    "CVX",
+    "DOW",
+    "GS",
+    "HD",
+    "IBM",
+    "INTC",
+    "JNJ",
+    "JPM",
+    "KO",
+    "MMM",
+    "MRK",
+    "PG",
+    "VZ"
+  ],
+  "n_trades": 165,
+  "date_range": "2015-01-02 \u2013 2025-01-02",
+  "total_return": 1339931532.0071,
+  "cagr": 3.6109,
+  "sharpe": 2.4304,
+  "sortino": 3.4744,
+  "calmar": 6.9098,
+  "skewness": 0.5403,
+  "kurtosis": 1.2657,
+  "max_drawdown": -0.5226,
+  "max_consec_losses": 3,
+  "win_rate": 0.7697,
+  "profit_factor": 6.8431,
+  "avg_return": 0.1574,
+  "avg_win": 0.2395,
+  "avg_loss": -0.117,
+  "kelly_fraction": 0.25,
+  "spy_correlation": 0.8709,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 45,
+      "sharpe": 2.0145,
+      "sortino": 2.9959,
+      "win_rate": 0.7333,
+      "avg_return": 0.1624,
+      "max_dd": -0.5226
+    },
+    "bull": {
+      "n_trades": 15,
+      "sharpe": 2.3372,
+      "sortino": 2.2117,
+      "win_rate": 0.8,
+      "avg_return": 0.1632,
+      "max_dd": -0.3069
+    },
+    "low_vol_bull": {
+      "n_trades": 105,
+      "sharpe": 2.7703,
+      "sortino": 4.558,
+      "win_rate": 0.781,
+      "avg_return": 0.1545,
+      "max_dd": -0.3015
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": true,
+  "risk_flags": [
+    "high SPY correlation (not market-neutral)"
+  ]
+}

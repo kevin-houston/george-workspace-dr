@@ -1,0 +1,33 @@
+{
+  "proposal_id": "2026-05-03-5",
+  "title": "ML-momentum: bias-corrected multi-factor cross-sectional portfolio (Sharpe >2.0)",
+  "hypothesis_parent": "H158",
+  "risk_level": "high",
+  "apply_status": "pending",
+
+  "summary": "arXiv 2507.07107 reports 20% annualized returns, Sharpe >2.0 on Chinese A-shares using elastic-net over 500-1000 factors (alpha101 extensions + microstructure). Key innovations applicable to H158 (sector-neutral stock momentum): (1) tensor-based factor computation, (2) GBM data augmentation to reduce overfitting, (3) cross-sectional neutralization. Framework is Chinese-market focused but techniques transfer.",
+
+  "source": {
+    "paper": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+    "venue": "arXiv 2507.07107, 2025",
+    "url": "https://arxiv.org/abs/2507.07107",
+    "key_finding": "20% annualized, Sharpe >2.0 (2021-2024 backtest on A-shares). LTR methods ~3x higher Sharpe than traditional cross-sectional momentum"
+  },
+
+  "implementation": {
+    "precondition": "H158 sector-neutral stock momentum needs bias-free universe first",
+    "factor_sources": ["WorldQuant alpha101 (open source)", "Custom microstructure: bid-ask spread, intraday vol, after-hours returns"],
+    "model": "LightGBM with rank-based cross-sectional neutralization + GBM data augmentation",
+    "estimated_effort_hours": 40,
+    "requires": "Point-in-time constituent data (Compustat/CRSP) — not currently available. Alternative: survivorship-biased NASDAQ universe with caveat."
+  },
+
+  "risks": [
+    "Chinese market dynamics differ significantly from US equities",
+    "500-1000 factors on small universe = severe overfitting risk without survivorship-bias-free data",
+    "High implementation complexity — should not be attempted before H158 simple version is confirmed",
+    "GBM data augmentation adds synthetic training samples that may not represent US market regimes"
+  ],
+
+  "recommendation": "Long-term queue. Unlock after: (1) H158 deferred status resolved with bias-free data source, (2) simpler ML approaches (elastic-net SUE from proposal #2) validated first."
+}

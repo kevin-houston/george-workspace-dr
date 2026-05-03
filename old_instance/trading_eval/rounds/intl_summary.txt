@@ -1,0 +1,40 @@
+International Equity Strategy Evaluation — Summary
+Run: 2026-03-30 | Data: 2015-01-01 to 2025-01-01 | Universe: 18 country ETFs
+
+BENCHMARK: SPY — Sharpe 0.784, CAGR 13.03%, Max DD -33.72%
+
+TOP STRATEGIES (by Sharpe):
+1. Canada/Australia Pairs (EWC/EWA): Sharpe 0.937, CAGR 8.91%, Max DD -9.5%, SPY corr 0.09
+2. Global Momentum (SPY/EFA/TLT):   Sharpe 0.427, CAGR 5.87%, Max DD -38.3%, SPY corr 0.69
+3. EM Momentum + Dollar Filter:      Sharpe 0.316, CAGR 3.33%, Max DD -22.8%, SPY corr 0.35
+4. DM/EM Rotation:                   Sharpe 0.269, CAGR 3.30%, Max DD -39.0%, SPY corr 0.83
+5. Valuation-Momentum:               Sharpe -0.126, CAGR -5.75%, Max DD -47.3%
+6. Cross-Country L/S Momentum:       Sharpe -0.305, CAGR -6.23%, Max DD -46.8%
+
+BEST SINGLE COUNTRIES (buy-hold):
+  Taiwan (EWT):  Sharpe 0.615, CAGR 11.08% — best in universe, semiconductor-driven
+  India (INDA):  Sharpe 0.420, CAGR 7.01%  — best EM story
+  Japan (EWJ):   Sharpe 0.418, CAGR 5.85%
+  France (EWQ):  Sharpe 0.413, CAGR 6.64%
+
+WORST COUNTRIES: Turkey (TUR) -65% max DD, China (FXI) -61% max DD, Brazil (EWZ) -57% max DD
+
+PAIRS RESULTS:
+  Canada/Australia: Sharpe 0.937, CAGR 8.91%, Max DD ONLY -9.5% — best overall
+  Germany/UK:       Sharpe 0.321, CAGR 2.35%
+  EM Broad (EEM/VWO): Sharpe 0.257, Max DD -5.2% (near-identical ETFs, tight spread)
+  China/India:      Sharpe -0.182 — NOT mean-reverting, structural divergence
+
+KEY FINDINGS:
+- SPY dominated on raw CAGR (13%) — a decade of US tech/dollar dominance
+- Canada/Australia pairs is the ONLY strategy beating SPY's Sharpe (0.94 vs 0.78)
+  with near-zero US market correlation (0.09) — ideal diversifier
+- Dollar filter improves EM strategy Sharpe by 48% (0.213 → 0.316)
+- Classic cross-country momentum FAILS in this period (Sharpe -0.305)
+- Value-based rotation (cheapest markets + momentum) also fails — China/Turkey value traps
+- True diversification (corr < 0.15) only achieved via pairs/market-neutral strategies
+
+BEST STRATEGY:    Canada/Australia Pairs (Sharpe 0.937)
+BEST DIVERSIFIER: Canada/Australia Pairs (SPY corr 0.092, low DD)
+BEST LONG-ONLY:   EM Momentum + Dollar Filter (SPY corr 0.347, Sharpe 0.316)
+BEST SINGLE ETF:  Taiwan EWT (Sharpe 0.615, CAGR 11.08%)

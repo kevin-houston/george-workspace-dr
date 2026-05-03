@@ -1,0 +1,83 @@
+{
+  "strategy": "intl_country_pairs_Japan_HK",
+  "category": "international",
+  "round": 1,
+  "tickers": [
+    "EWJ/EWH"
+  ],
+  "n_trades": 56,
+  "date_range": "2015-06-30 \u2013 2024-09-23",
+  "total_return": -0.0531,
+  "cagr": -0.0116,
+  "sharpe": 0.0036,
+  "sortino": 0.0024,
+  "calmar": -0.0439,
+  "skewness": -1.7456,
+  "kurtosis": 3.0338,
+  "max_drawdown": -0.265,
+  "max_consec_losses": 3,
+  "win_rate": 0.6786,
+  "profit_factor": 1.003,
+  "avg_return": 0.0,
+  "avg_win": 0.0231,
+  "avg_loss": -0.0487,
+  "kelly_fraction": 0.002,
+  "spy_correlation": -0.4369,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 14,
+      "sharpe": 0.3886,
+      "sortino": 0.273,
+      "win_rate": 0.6429,
+      "avg_return": 0.0045,
+      "max_dd": -0.1248
+    },
+    "bull": {
+      "n_trades": 7,
+      "sharpe": -1.2228,
+      "sortino": -0.8155,
+      "win_rate": 0.5714,
+      "avg_return": -0.0157,
+      "max_dd": -0.1786
+    },
+    "low_vol_bull": {
+      "n_trades": 33,
+      "sharpe": 0.0186,
+      "sortino": 0.0111,
+      "win_rate": 0.7273,
+      "avg_return": 0.0002,
+      "max_dd": -0.2716
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}

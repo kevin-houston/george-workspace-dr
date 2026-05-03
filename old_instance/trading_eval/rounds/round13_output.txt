@@ -1,0 +1,81 @@
+=== MACRO AUTORESEARCH — ROUND 13 ===
+  Loading macro data...
+    ✓ yf fallback CL=F → DCOILWTICO (3790 obs)
+    ✓ yf fallback ^TNX → GS10 (3789 obs)
+    ✓ yf fallback ^VIX → VIXCLS (3790 obs)
+    ✓ yf fallback GC=F → GOLDAMGBD228NLBM (3789 obs)
+    ✓ yf fallback EURUSD=X → DEXUSEU (3922 obs)
+    ✓ yf fallback DX-Y.NYB → DTWEXBGS (3791 obs)
+  Loaded 6 macro series
+  R12 top strategies: {'GoldFlight_42', 'GoldFlight_21', 'OilMom_10_30', 'OilMom_10_50', 'OilMom_30_90', 'VIXMom_126_18_30', 'MacroAvail', 'VIXMom_21_15_25', 'OilMom_20_60', 'VIXMom_63_20_35', 'OilMom_15_45', 'GoldFlight_63', 'VIXMom_42_18_30', 'GoldFlight_189', 'GoldFlight_126'}
+Built 25 strategies
+
+======================================================================
+ROUND 13 — 25 strategies × 53 tickers × 1 positions
+Total backtests: 1,325
+======================================================================
+
+  Progress: 500/1,325 (38%)
+  Progress: 1,000/1,325 (75%)
+
+  B&H avg: 1823.9%
+
+  TOP 10 STRATEGIES (Round 13):
+  Strategy                             AvgRet%  Sharpe  BeatB&H%
+  ---------------------------------------------------------------
+  GoldFlight_120                         703.5%   0.559      3.8%
+  GoldFlight_90                          440.3%   0.480      3.8%
+  GoldFlight_180                         307.8%   0.437      3.8%
+  VIXMom_63_20_30                        224.1%   0.356      1.9%
+  VIXMom_63_20_35                        224.1%   0.356      1.9%
+  VIXMom_63_18_28                        177.6%   0.341      1.9%
+  VIXMom_63_18_30                        177.6%   0.341      1.9%
+  GoldFlight_60                          127.8%   0.271      0.0%
+  GoldFlight_45                          114.6%   0.358      0.0%
+  GoldFlight_30                          110.4%   0.305      0.0%
+
+  FAMILY RANKING:
+    macro                        171.9%
+    trend_macro                   43.2%
+
+  SECTOR RANKING:
+    auto                    426.2%
+    tech                    346.6%
+    financial               116.3%
+    healthcare              100.1%
+    staples                  83.1%
+    defense                  71.8%
+    industrial               66.8%
+    energy                   60.7%
+    transport                58.1%
+
+  Saved → /workspace/group/trading_eval/rounds/macro_round_13.json
+ROUND 13 MACRO INSIGHTS
+==================================================
+B&H avg benchmark: 1824.0%
+
+Top 5 strategies:
+  1. GoldFlight_120                      703.5% avg (Sharpe 0.559)
+  2. GoldFlight_90                       440.3% avg (Sharpe 0.480)
+  3. GoldFlight_180                      307.8% avg (Sharpe 0.437)
+  4. VIXMom_63_20_30                     224.1% avg (Sharpe 0.356)
+  5. VIXMom_63_20_35                     224.1% avg (Sharpe 0.356)
+
+Family performance:
+  macro                     171.9%
+  trend_macro               43.2%
+
+Sector performance:
+  auto                 426.2%
+  tech                 346.6%
+  financial            116.3%
+  healthcare           100.1%
+  staples              83.1%
+
+Macro strategies in top 20: 20
+  GoldFlight_120                      703.5%
+  GoldFlight_90                       440.3%
+  GoldFlight_180                      307.8%
+
+Regime-gated strategies in top 20: 1
+  MACD_5_11_4_IN_oil_shock            43.2%

@@ -1,0 +1,15 @@
+{
+  "strategy": "PEAD R28 Quality Filter",
+  "backtest_sharpe": 9.028,
+  "virtual_capital": 5000.0,
+  "open_positions": {},
+  "trades": [],
+  "stats": {
+    "n_trades": 0,
+    "wins": 0,
+    "total_pnl": 0.0
+  },
+  "last_update": "2026-04-30",
+  "skipped_vix": 0,
+  "skipped_quality": 0
+}

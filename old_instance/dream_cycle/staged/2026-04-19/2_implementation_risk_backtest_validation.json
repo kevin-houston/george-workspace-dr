@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-19-implementation-risk-backtest-validation",
+  "date": "2026-04-19",
+  "source": "arXiv:2603.20319 (Implementation Risk in Portfolio Backtesting, March 2026)",
+  "source_url": "https://arxiv.org/abs/2603.20319",
+  "title": "Implementation Risk Heuristic \u2014 backtest results are engine-dependent, especially at non-zero transaction costs",
+  "rationale": "Our best strategy results (PEAD quality filter Sharpe 9.03, Div Raise Sharpe 4.40, R29 Pairs Sharpe 1.38) are all single-engine results from custom Python + yfinance. arXiv:2603.20319 shows backtest divergence across engines reaches 3.71% for high-turnover strategies at non-zero costs, even when implementing identical logic. Transaction cost handling is the primary source. Before live-trading any strategy, the Sharpe result should be trusted with a calibrated margin of error. This paper also introduces a 'Conclusion Stability Index' \u2014 whether investment decisions would change under different engines \u2014 which equaled 1 in their study (metric DIRECTION was consistent even when magnitude differed). This means our strategy ranking is likely robust even if absolute Sharpe numbers have ~3-4% uncertainty from implementation artifacts. Practical action: add a 5bp/trade implementation friction buffer to all cost-adjusted Sharpe calculations as conservative calibration.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### Implementation risk: backtest Sharpe numbers carry engine-dependent uncertainty\n- LESSON: Backtest results are NOT engine-agnostic. Transaction cost handling alone causes up to 3.71% divergence in strategy metrics across different backtest engines (arXiv:2603.20319). All George backtest results are single-engine (custom yfinance + Python). The DIRECTION of strategy ranking is stable (Conclusion Stability Index=1 across 5 engines), but absolute Sharpe magnitudes carry ~2-4% uncertainty from implementation artifacts.\n- LESSON: Add a conservative 5bp/trade friction buffer to any strategy being evaluated for live trading, even if the backtest already includes transaction costs. This covers implementation risk from order routing, partial fills, and price impact not modeled in yfinance-based backtests.\n- LESSON: Zero-cost backtests are perfectly engine-consistent. The divergence only appears with non-zero costs. This means strategies with very low turnover (PEAD 5-15 trades/quarter, Div Raise monthly) are less affected by implementation risk than high-turnover strategies (pairs trading with daily rebalancing).\n- WHEN: Evaluating any strategy backtest result for live trading eligibility. High priority for R29 pairs (daily rebalancing = highest implementation risk) and R32 SPX puts (options execution slippage).\n- SOURCE: arXiv:2603.20319 (Implementation Risk in Portfolio Backtesting, March 2026)\n",
+  "action": "append",
+  "apply_status": "applied"
+}

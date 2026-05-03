@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paper Trading Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #0f1117; color: #e2e8f0; padding: 24px; min-height: 100vh; }
+    h1   { font-size: 1.6rem; font-weight: 800; margin-bottom: 4px; }
+    .sub { color: #94a3b8; font-size: 0.875rem; margin-bottom: 28px; }
+    .overview { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+    .ov-card { background: #1e2433; border-radius: 12px; padding: 20px; flex: 1; min-width: 160px; }
+    .ov-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: .06em; color: #64748b; margin-bottom: 6px; }
+    .ov-value { font-size: 1.8rem; font-weight: 800; }
+    .ov-sub   { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
+    .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: .08em;
+                      color: #475569; margin: 20px 0 10px; }
+    .strat-card { background: #1e2433; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+    .strat-header { margin-bottom: 16px; }
+    .strat-name { font-size: 1.1rem; font-weight: 700; }
+    .strat-meta { font-size: 0.75rem; color: #64748b; margin-top: 2px; }
+    .strat-stats { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stat-item { flex: 1; min-width: 90px; background: #141824; border-radius: 8px; padding: 12px; }
+    .stat-label { font-size: 0.65rem; text-transform: uppercase; color: #64748b; margin-bottom: 4px; letter-spacing: .05em; }
+    .stat-value { font-size: 1.1rem; font-weight: 700; }
+    .stat-sub   { font-size: 0.75rem; color: #94a3b8; margin-top: 2px; }
+    .win  { color: #22c55e; } .loss { color: #ef4444; } .neutral { color: #94a3b8; }
+    footer { text-align: center; color: #475569; font-size: 0.75rem; margin-top: 32px; }
+  </style>
+</head>
+<body>
+  <h1>📈 Paper Trading Dashboard</h1>
+  <div class="sub">Updated April 30, 2026 &nbsp;·&nbsp; 11 strategies &nbsp;·&nbsp; $5,000 virtual each &nbsp;·&nbsp; $55,000 total</div>
+
+  <div class="overview">
+    <div class="ov-card">
+      <div class="ov-label">Total Portfolio</div>
+      <div class="ov-value">$55,197</div>
+      <div class="ov-sub">Started $55,000</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Total P&amp;L</div>
+      <div class="ov-value loss">$-44.68</div>
+      <div class="ov-sub win">+0.4% overall</div>
+    </div>
+  </div>
+
+  
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #4f46e5; padding-left:12px;">
+        <div class="strat-name">PEAD R28 Quality Filter</div>
+        <div class="strat-meta">Backtest Sharpe: 9.028</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,000.00</div>
+          <div class="stat-sub win">+0.0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value win">$+0.00</div>
+          <div class="stat-sub">0 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">—</div>
+          <div class="stat-sub">0/0 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='neutral'>—</span></div>
+          <div class="stat-sub">0 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #ec4899; padding-left:12px;">
+        <div class="strat-name">Dividend Raise ≥10%</div>
+        <div class="strat-meta">Backtest Sharpe: 4.403</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,000.00</div>
+          <div class="stat-sub win">+0.0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value win">$+0.00</div>
+          <div class="stat-sub">0 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">—</div>
+          <div class="stat-sub">0/0 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='neutral'>—</span></div>
+          <div class="stat-sub">1 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #db2777; padding-left:12px;">
+        <div class="strat-name">Dividend Raise ≥5%</div>
+        <div class="strat-meta">Backtest Sharpe: 3.4</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,000.00</div>
+          <div class="stat-sub win">+0.0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value win">$+0.00</div>
+          <div class="stat-sub">0 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">—</div>
+          <div class="stat-sub">0/0 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='neutral'>—</span></div>
+          <div class="stat-sub">2 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #f97316; padding-left:12px;">
+        <div class="strat-name">Covered Calls (Ex-Div)</div>
+        <div class="strat-meta">Backtest Sharpe: 2.643</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,000.00</div>
+          <div class="stat-sub win">+0.0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value win">$+0.00</div>
+          <div class="stat-sub">0 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">—</div>
+          <div class="stat-sub">0/0 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='neutral'>—</span></div>
+          <div class="stat-sub">0 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #6366f1; padding-left:12px;">
+        <div class="strat-name">PEAD Portfolio (baseline)</div>
+        <div class="strat-meta">Backtest Sharpe: 2.394</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,000.00</div>
+          <div class="stat-sub win">+0.0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value win">$+0.00</div>
+          <div class="stat-sub">0 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">—</div>
+          <div class="stat-sub">0/0 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='neutral'>—</span></div>
+          <div class="stat-sub">10 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #0ea5e9; padding-left:12px;">
+        <div class="strat-name">Pairs R29 (Residualized)</div>
+        <div class="strat-meta">Backtest Sharpe: 1.3802</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,000.00</div>
+          <div class="stat-sub win">+0.0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value win">$+0.00</div>
+          <div class="stat-sub">0 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">—</div>
+          <div class="stat-sub">0/0 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='neutral'>—</span></div>
+          <div class="stat-sub">1 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #f59e0b; padding-left:12px;">
+        <div class="strat-name">Crypto Momentum</div>
+        <div class="strat-meta">Backtest Sharpe: 1.682</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,133.81</div>
+          <div class="stat-sub win">+2.7%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value loss">$-108.04</div>
+          <div class="stat-sub">2 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">50%</div>
+          <div class="stat-sub">1/2 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='neutral'>—</span></div>
+          <div class="stat-sub">1 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #14b8a6; padding-left:12px;">
+        <div class="strat-name">Dividend Capture</div>
+        <div class="strat-meta">Backtest Sharpe: 1.578</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,000.00</div>
+          <div class="stat-sub win">+0.0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value win">$+0.00</div>
+          <div class="stat-sub">0 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">—</div>
+          <div class="stat-sub">0/0 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='neutral'>—</span></div>
+          <div class="stat-sub">0 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #10b981; padding-left:12px;">
+        <div class="strat-name">Corn Seasonal</div>
+        <div class="strat-meta">Backtest Sharpe: 1.175</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,000.00</div>
+          <div class="stat-sub win">+0.0%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value win">$+0.00</div>
+          <div class="stat-sub">0 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">—</div>
+          <div class="stat-sub">0/0 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='neutral'>—</span></div>
+          <div class="stat-sub">0 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #3b82f6; padding-left:12px;">
+        <div class="strat-name">Pairs Portfolio (R23)</div>
+        <div class="strat-meta">Backtest Sharpe: 0.964</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$5,091.34</div>
+          <div class="stat-sub win">+1.8%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value win">$+91.34</div>
+          <div class="stat-sub">6 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">100%</div>
+          <div class="stat-sub">6/6 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='win'>12.47</span></div>
+          <div class="stat-sub">7 open</div>
+        </div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header" style="border-left:4px solid #8b5cf6; padding-left:12px;">
+        <div class="strat-name">ML Ensemble</div>
+        <div class="strat-meta">Backtest Sharpe: 0.527</div>
+      </div>
+      <div class="strat-stats">
+        <div class="stat-item">
+          <div class="stat-label">Portfolio</div>
+          <div class="stat-value">$4,972.02</div>
+          <div class="stat-sub loss">-0.6%</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">P&amp;L</div>
+          <div class="stat-value loss">$-27.98</div>
+          <div class="stat-sub">12 trades</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Win Rate</div>
+          <div class="stat-value">33%</div>
+          <div class="stat-sub">4/12 wins</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Live Sharpe</div>
+          <div class="stat-value"><span class='loss'>-0.27</span></div>
+          <div class="stat-sub">4 open</div>
+        </div>
+      </div>
+    </div>
+
+  <footer>Paper Trading Dashboard · George · All figures virtual, not real money · Not financial advice</footer>
+</body>
+</html>

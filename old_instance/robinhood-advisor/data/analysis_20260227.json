@@ -1,0 +1,2017 @@
+{
+  "timestamp": "2026-02-27T13:14:40.674231",
+  "portfolio_summary": {
+    "total_equity": 4500,
+    "num_positions": 16,
+    "source": "CSV file"
+  },
+  "recommendations": [
+    {
+      "symbol": "SVC",
+      "timestamp": "2026-02-27T13:14:41.105419",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.45999999999999996,
+      "current_price": 2.305000066757202,
+      "limit_price": 2.31,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 23.0,
+        "avg_cost": 2.63,
+        "current_return_pct": -12.35741191037254
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "SVC",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "SVC",
+        "timestamp": "2026-02-27T13:14:41.105267",
+        "signal_strength": 0.6333333333333333,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 58.8235411971752,
+          "macd": {
+            "macd": 0.05801500762103062,
+            "signal": 0.05162554654900789,
+            "histogram": 0.006389461072022734,
+            "trend": "BULLISH"
+          },
+          "moving_averages": {
+            "sma_50": 2.0504774689674377,
+            "current_vs_sma_50": 12.412845380736371
+          },
+          "volume": {
+            "current_volume": 1756878,
+            "avg_volume": 1738928.9,
+            "volume_ratio": 1.0103219286308947,
+            "trend": "NORMAL_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 2.430000066757202,
+            "support": 1.9299999475479126,
+            "current_price": 2.305000066757202,
+            "distance_to_resistance": 5.42299333534757,
+            "distance_to_support": 19.430058518174143
+          }
+        }
+      }
+    },
+    {
+      "symbol": "AMZN",
+      "timestamp": "2026-02-27T13:14:41.192619",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.38,
+      "current_price": 208.8249969482422,
+      "limit_price": 208.82,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 1.76,
+        "avg_cost": 227.75,
+        "current_return_pct": -8.309551285074779
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "AMZN",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "AMZN",
+        "timestamp": "2026-02-27T13:14:41.192490",
+        "signal_strength": 0.5,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 47.96236901508159,
+          "macd": {
+            "macd": -6.426256213180068,
+            "signal": -7.182921233706603,
+            "histogram": 0.7566650205265351,
+            "trend": "BULLISH"
+          },
+          "moving_averages": {
+            "sma_50": 226.56749969482422,
+            "current_vs_sma_50": -7.831000814538869
+          },
+          "volume": {
+            "current_volume": 27576679,
+            "avg_volume": 63994418.95,
+            "volume_ratio": 0.43092318756024894,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 246.35000610351562,
+            "support": 196.0,
+            "current_price": 208.8249969482422,
+            "distance_to_resistance": 17.969596410229617,
+            "distance_to_support": 6.543365789919475
+          }
+        }
+      }
+    },
+    {
+      "symbol": "SPXS",
+      "timestamp": "2026-02-27T13:14:41.385045",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.42,
+      "current_price": 35.518699645996094,
+      "limit_price": 35.52,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 7.34,
+        "avg_cost": 149.42,
+        "current_return_pct": -76.22895218444914
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "SPXS",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "SPXS",
+        "timestamp": "2026-02-27T13:14:41.384920",
+        "signal_strength": 0.5666666666666667,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 57.08362873134328,
+          "macd": {
+            "macd": 0.09811122290892627,
+            "signal": 0.09143433287744146,
+            "histogram": 0.006676890031484806,
+            "trend": "BULLISH"
+          },
+          "moving_averages": {
+            "sma_50": 34.756218338012694,
+            "current_vs_sma_50": 2.1937982451602833
+          },
+          "volume": {
+            "current_volume": 11664962,
+            "avg_volume": 10849608.1,
+            "volume_ratio": 1.0751505393084198,
+            "trend": "NORMAL_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 36.7400016784668,
+            "support": 33.439998626708984,
+            "current_price": 35.518699645996094,
+            "distance_to_resistance": 3.4384761960405186,
+            "distance_to_support": 6.216211437361796
+          }
+        }
+      }
+    },
+    {
+      "symbol": "GLDW",
+      "timestamp": "2026-02-27T13:14:41.477890",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.45999999999999996,
+      "current_price": 63.54999923706055,
+      "limit_price": 63.55,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 5.0,
+        "avg_cost": 51.03,
+        "current_return_pct": 24.534586002470206
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "GLDW",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "GLDW",
+        "timestamp": "2026-02-27T13:14:41.477756",
+        "signal_strength": 0.6333333333333333,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 61.27601682228013,
+          "macd": {
+            "macd": 1.5465670532851377,
+            "signal": 1.4567330209924,
+            "histogram": 0.08983403229273756,
+            "trend": "BULLISH"
+          },
+          "moving_averages": {
+            "sma_50": 57.143087234497074,
+            "current_vs_sma_50": 11.212050858000634
+          },
+          "volume": {
+            "current_volume": 38812,
+            "avg_volume": 33070.6,
+            "volume_ratio": 1.173610397150339,
+            "trend": "NORMAL_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 63.59000015258789,
+            "support": 54.52508778889974,
+            "current_price": 63.54999923706055,
+            "distance_to_resistance": 0.06294400630617591,
+            "distance_to_support": 16.55185129293475
+          }
+        }
+      }
+    },
+    {
+      "symbol": "GOOGL",
+      "timestamp": "2026-02-27T13:14:41.573927",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.42,
+      "current_price": 308.760009765625,
+      "limit_price": 308.76,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 1.25,
+        "avg_cost": 303.12,
+        "current_return_pct": 1.8606524695252702
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "GOOGL",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "GOOGL",
+        "timestamp": "2026-02-27T13:14:41.573809",
+        "signal_strength": 0.5666666666666667,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 36.08372870819046,
+          "macd": {
+            "macd": -4.381581640213142,
+            "signal": -3.705385570528214,
+            "histogram": -0.6761960696849276,
+            "trend": "WEAKENING_BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 319.9235998535156,
+            "current_vs_sma_50": -3.48945501144714
+          },
+          "volume": {
+            "current_volume": 15240349,
+            "avg_volume": 40519502.45,
+            "volume_ratio": 0.37612379418543423,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 349.0,
+            "support": 296.25,
+            "current_price": 308.760009765625,
+            "distance_to_resistance": 13.03277269129528,
+            "distance_to_support": 4.222788106540087
+          }
+        }
+      }
+    },
+    {
+      "symbol": "GOOW",
+      "timestamp": "2026-02-27T13:14:41.660122",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.42,
+      "current_price": 65.4000015258789,
+      "limit_price": 65.4,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 1.07,
+        "avg_cost": 70.95,
+        "current_return_pct": -7.822407997351788
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "GOOW",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "GOOW",
+        "timestamp": "2026-02-27T13:14:41.660019",
+        "signal_strength": 0.5666666666666667,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 33.683494804314506,
+          "macd": {
+            "macd": -1.2565497823536305,
+            "signal": -1.0723307912042406,
+            "histogram": -0.1842189911493899,
+            "trend": "WEAKENING_BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 68.78336891174317,
+            "current_vs_sma_50": -4.918874197926392
+          },
+          "volume": {
+            "current_volume": 25730,
+            "avg_volume": 58961.5,
+            "volume_ratio": 0.43638645556846417,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 75.6384264925538,
+            "support": 62.530585563496956,
+            "current_price": 65.4000015258789,
+            "distance_to_resistance": 15.65508368164721,
+            "distance_to_support": 4.588819913525666
+          }
+        }
+      }
+    },
+    {
+      "symbol": "LRCX",
+      "timestamp": "2026-02-27T13:14:41.771934",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.38,
+      "current_price": 235.2949981689453,
+      "limit_price": 235.29,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 0.26,
+        "avg_cost": 246.99,
+        "current_return_pct": -4.735010255902949
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "LRCX",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "LRCX",
+        "timestamp": "2026-02-27T13:14:41.771824",
+        "signal_strength": 0.5,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 53.58188219796052,
+          "macd": {
+            "macd": 7.50084536151391,
+            "signal": 8.584030581576044,
+            "histogram": -1.0831852200621341,
+            "trend": "BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 213.89789978027343,
+            "current_vs_sma_50": 10.003416775317596
+          },
+          "volume": {
+            "current_volume": 3350485,
+            "avg_volume": 10622634.25,
+            "volume_ratio": 0.3154099935239698,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 256.67999267578125,
+            "support": 204.57000732421875,
+            "current_price": 235.2949981689453,
+            "distance_to_resistance": 9.088588653925056,
+            "distance_to_support": 15.019303780945359
+          }
+        }
+      }
+    },
+    {
+      "symbol": "MU",
+      "timestamp": "2026-02-27T13:14:41.887073",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.38,
+      "current_price": 407.6000061035156,
+      "limit_price": 407.6,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 0.1,
+        "avg_cost": 424.5,
+        "current_return_pct": -3.9811528613626357
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "MU",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "MU",
+        "timestamp": "2026-02-27T13:14:41.886965",
+        "signal_strength": 0.5,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 54.17826458928292,
+          "macd": {
+            "macd": 14.810150646033208,
+            "signal": 18.084146883887403,
+            "histogram": -3.2739962378541954,
+            "trend": "BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 361.3746655273437,
+            "current_vs_sma_50": 12.791527737207753
+          },
+          "volume": {
+            "current_volume": 18433977,
+            "avg_volume": 35617228.85,
+            "volume_ratio": 0.5175578672230139,
+            "trend": "NORMAL_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 455.5,
+            "support": 363.8999938964844,
+            "current_price": 407.6000061035156,
+            "distance_to_resistance": 11.75171569656932,
+            "distance_to_support": 12.008797180541375
+          }
+        }
+      }
+    },
+    {
+      "symbol": "META",
+      "timestamp": "2026-02-27T13:14:42.000025",
+      "action": "SELL",
+      "order_type": "SELL",
+      "signal_strength": 0.34,
+      "current_price": 640.3499755859375,
+      "limit_price": 643.55,
+      "shares": 1,
+      "order_value": 643.55,
+      "current_position": {
+        "shares": 0.09,
+        "avg_cost": 654.91,
+        "current_return_pct": -2.223209969929074
+      },
+      "rationale": "Sentiment: BULLISH, Technical: WEAK_SELL",
+      "sentiment": {
+        "symbol": "META",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "META",
+        "timestamp": "2026-02-27T13:14:41.999899",
+        "signal_strength": 0.43333333333333335,
+        "recommendation": "WEAK_SELL",
+        "indicators": {
+          "rsi": 41.54854102513101,
+          "macd": {
+            "macd": -4.233473515920423,
+            "signal": -2.4018327098925987,
+            "histogram": -1.8316408060278242,
+            "trend": "BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 656.5401977539062,
+            "current_vs_sma_50": -2.4659909969499516
+          },
+          "volume": {
+            "current_volume": 5469545,
+            "avg_volume": 13432732.25,
+            "volume_ratio": 0.4071803783627117,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 732.1699829101562,
+            "support": 628.1500244140625,
+            "current_price": 640.3499755859375,
+            "distance_to_resistance": 14.339035031617042,
+            "distance_to_support": 1.9422034064640936
+          }
+        }
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "timestamp": "2026-02-27T13:14:42.113292",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.38,
+      "current_price": 393.0199890136719,
+      "limit_price": 393.02,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 0.14,
+        "avg_cost": 391.36,
+        "current_return_pct": 0.4241590897567038
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "MSFT",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "MSFT",
+        "timestamp": "2026-02-27T13:14:42.113174",
+        "signal_strength": 0.5,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 44.998070339616,
+          "macd": {
+            "macd": -14.761417086968095,
+            "signal": -16.563258697855854,
+            "histogram": 1.8018416108877595,
+            "trend": "BULLISH"
+          },
+          "moving_averages": {
+            "sma_50": 444.4709136962891,
+            "current_vs_sma_50": -11.57576864923361
+          },
+          "volume": {
+            "current_volume": 13821703,
+            "avg_volume": 41057810.15,
+            "volume_ratio": 0.3366400436239535,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 438.5989157576861,
+            "support": 381.7099914550781,
+            "current_price": 393.0199890136719,
+            "distance_to_resistance": 11.597101424382949,
+            "distance_to_support": 2.9629817955458826
+          }
+        }
+      }
+    },
+    {
+      "symbol": "AMD",
+      "timestamp": "2026-02-27T13:14:42.219259",
+      "action": "SELL",
+      "order_type": "SELL",
+      "signal_strength": 0.30000000000000004,
+      "current_price": 198.00799560546875,
+      "limit_price": 199.0,
+      "shares": 1,
+      "order_value": 199.0,
+      "current_position": {
+        "shares": 0.33,
+        "avg_cost": 198.96,
+        "current_return_pct": -0.47849034707039273
+      },
+      "rationale": "Sentiment: BULLISH, Technical: WEAK_SELL",
+      "sentiment": {
+        "symbol": "AMD",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "AMD",
+        "timestamp": "2026-02-27T13:14:42.219126",
+        "signal_strength": 0.3666666666666667,
+        "recommendation": "WEAK_SELL",
+        "indicators": {
+          "rsi": 42.474600599238734,
+          "macd": {
+            "macd": -6.313137159946706,
+            "signal": -5.76070676081595,
+            "histogram": -0.5524303991307562,
+            "trend": "BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 218.62575958251952,
+            "current_vs_sma_50": -9.43061971124618
+          },
+          "volume": {
+            "current_volume": 18686442,
+            "avg_volume": 42419727.1,
+            "volume_ratio": 0.4405130178218426,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 252.64999389648438,
+            "support": 190.72000122070312,
+            "current_price": 198.00799560546875,
+            "distance_to_resistance": 27.59585446230661,
+            "distance_to_support": 3.821305756144522
+          }
+        }
+      }
+    },
+    {
+      "symbol": "TSM",
+      "timestamp": "2026-02-27T13:14:42.408319",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.38,
+      "current_price": 372.2749938964844,
+      "limit_price": 372.27,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 0.12,
+        "avg_cost": 369.36,
+        "current_return_pct": 0.7892012931785652
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "TSM",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "TSM",
+        "timestamp": "2026-02-27T13:14:42.408192",
+        "signal_strength": 0.5,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 64.15663983829204,
+          "macd": {
+            "macd": 12.950675325971929,
+            "signal": 12.596074455647535,
+            "histogram": 0.35460087032439347,
+            "trend": "WEAKENING_BULLISH"
+          },
+          "moving_averages": {
+            "sma_50": 333.8946990966797,
+            "current_vs_sma_50": 11.49473019596865
+          },
+          "volume": {
+            "current_volume": 6443792,
+            "avg_volume": 12482664.6,
+            "volume_ratio": 0.516219269401823,
+            "trend": "NORMAL_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 390.2099914550781,
+            "support": 319.07000732421875,
+            "current_price": 372.2749938964844,
+            "distance_to_resistance": 4.817674528948035,
+            "distance_to_support": 16.675019698169912
+          }
+        }
+      }
+    },
+    {
+      "symbol": "JPM",
+      "timestamp": "2026-02-27T13:14:42.559722",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.36,
+      "current_price": 296.25,
+      "limit_price": 296.25,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 0.08,
+        "avg_cost": 309.39,
+        "current_return_pct": -4.2470668088819945
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD, RSI oversold (29)",
+      "sentiment": {
+        "symbol": "JPM",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "JPM",
+        "timestamp": "2026-02-27T13:14:42.559583",
+        "signal_strength": 0.4666666666666666,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 28.8259472666916,
+          "macd": {
+            "macd": -3.016627662405938,
+            "signal": -2.094802239784897,
+            "histogram": -0.921825422621041,
+            "trend": "BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 312.95298095703123,
+            "current_vs_sma_50": -5.337217401141981
+          },
+          "volume": {
+            "current_volume": 6808970,
+            "avg_volume": 10160583.5,
+            "volume_ratio": 0.6701357259649507,
+            "trend": "NORMAL_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 326.3999938964844,
+            "support": 291.3800048828125,
+            "current_price": 296.25,
+            "distance_to_resistance": 10.17721312961497,
+            "distance_to_support": 1.6713552871090442
+          }
+        }
+      }
+    },
+    {
+      "symbol": "IREN",
+      "timestamp": "2026-02-27T13:14:42.652300",
+      "action": "SELL",
+      "order_type": "SELL",
+      "signal_strength": 0.30000000000000004,
+      "current_price": 39.970001220703125,
+      "limit_price": 40.17,
+      "shares": 1,
+      "order_value": 40.17,
+      "current_position": {
+        "shares": 0.49,
+        "avg_cost": 40.26,
+        "current_return_pct": -0.72031490138319
+      },
+      "rationale": "Sentiment: BULLISH, Technical: WEAK_SELL",
+      "sentiment": {
+        "symbol": "IREN",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "IREN",
+        "timestamp": "2026-02-27T13:14:42.652161",
+        "signal_strength": 0.3666666666666667,
+        "recommendation": "WEAK_SELL",
+        "indicators": {
+          "rsi": 46.988342200936124,
+          "macd": {
+            "macd": -1.807589359632928,
+            "signal": -1.720668347089023,
+            "histogram": -0.08692101254390505,
+            "trend": "BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 46.040100173950194,
+            "current_vs_sma_50": -13.184373905167067
+          },
+          "volume": {
+            "current_volume": 22762689,
+            "avg_volume": 39639794.45,
+            "volume_ratio": 0.5742383207539563,
+            "trend": "NORMAL_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 58.58000183105469,
+            "support": 36.52000045776367,
+            "current_price": 39.970001220703125,
+            "distance_to_resistance": 46.55992004501668,
+            "distance_to_support": 9.446880393469502
+          }
+        }
+      }
+    },
+    {
+      "symbol": "COST",
+      "timestamp": "2026-02-27T13:14:42.780317",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.45999999999999996,
+      "current_price": 1003.2100830078125,
+      "limit_price": 1003.21,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 0.02,
+        "avg_cost": 984.29,
+        "current_return_pct": 1.9222061595477458
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "COST",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "COST",
+        "timestamp": "2026-02-27T13:14:42.780191",
+        "signal_strength": 0.6333333333333333,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 50.67566724881589,
+          "macd": {
+            "macd": 12.97315379275426,
+            "signal": 15.617369162593114,
+            "histogram": -2.6442153698388537,
+            "trend": "WEAKENING_BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 941.6279711914062,
+            "current_vs_sma_50": 6.539962033889957
+          },
+          "volume": {
+            "current_volume": 1029296,
+            "avg_volume": 2072554.8,
+            "volume_ratio": 0.49663150040713033,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 1028.43994140625,
+            "support": 930.2999877929688,
+            "current_price": 1003.2100830078125,
+            "distance_to_resistance": 2.5149127611231448,
+            "distance_to_support": 7.837267136573289
+          }
+        }
+      }
+    },
+    {
+      "symbol": "CME",
+      "timestamp": "2026-02-27T13:14:42.976126",
+      "action": "HOLD",
+      "order_type": "HOLD",
+      "signal_strength": 0.45999999999999996,
+      "current_price": 318.2449951171875,
+      "limit_price": 318.24,
+      "shares": 0,
+      "order_value": 0,
+      "current_position": {
+        "shares": 0.06,
+        "avg_cost": 311.62,
+        "current_return_pct": 2.1259852118565847
+      },
+      "rationale": "Sentiment: BULLISH, Technical: HOLD",
+      "sentiment": {
+        "symbol": "CME",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "CME",
+        "timestamp": "2026-02-27T13:14:42.975995",
+        "signal_strength": 0.6333333333333333,
+        "recommendation": "HOLD",
+        "indicators": {
+          "rsi": 65.39758718609563,
+          "macd": {
+            "macd": 8.375804257773837,
+            "signal": 7.767324357241798,
+            "histogram": 0.6084799005320383,
+            "trend": "BULLISH"
+          },
+          "moving_averages": {
+            "sma_50": 286.60610107421877,
+            "current_vs_sma_50": 11.03915580456385
+          },
+          "volume": {
+            "current_volume": 1065249,
+            "avg_volume": 2458172.45,
+            "volume_ratio": 0.43334998730459284,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 322.57000732421875,
+            "support": 286.2900085449219,
+            "current_price": 318.2449951171875,
+            "distance_to_resistance": 1.3590197091516432,
+            "distance_to_support": 11.161754032101179
+          }
+        }
+      }
+    }
+  ],
+  "performance": {},
+  "actionable": [
+    {
+      "symbol": "AMD",
+      "timestamp": "2026-02-27T13:14:42.219259",
+      "action": "SELL",
+      "order_type": "SELL",
+      "signal_strength": 0.30000000000000004,
+      "current_price": 198.00799560546875,
+      "limit_price": 199.0,
+      "shares": 1,
+      "order_value": 199.0,
+      "current_position": {
+        "shares": 0.33,
+        "avg_cost": 198.96,
+        "current_return_pct": -0.47849034707039273
+      },
+      "rationale": "Sentiment: BULLISH, Technical: WEAK_SELL",
+      "sentiment": {
+        "symbol": "AMD",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "AMD",
+        "timestamp": "2026-02-27T13:14:42.219126",
+        "signal_strength": 0.3666666666666667,
+        "recommendation": "WEAK_SELL",
+        "indicators": {
+          "rsi": 42.474600599238734,
+          "macd": {
+            "macd": -6.313137159946706,
+            "signal": -5.76070676081595,
+            "histogram": -0.5524303991307562,
+            "trend": "BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 218.62575958251952,
+            "current_vs_sma_50": -9.43061971124618
+          },
+          "volume": {
+            "current_volume": 18686442,
+            "avg_volume": 42419727.1,
+            "volume_ratio": 0.4405130178218426,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 252.64999389648438,
+            "support": 190.72000122070312,
+            "current_price": 198.00799560546875,
+            "distance_to_resistance": 27.59585446230661,
+            "distance_to_support": 3.821305756144522
+          }
+        }
+      }
+    },
+    {
+      "symbol": "IREN",
+      "timestamp": "2026-02-27T13:14:42.652300",
+      "action": "SELL",
+      "order_type": "SELL",
+      "signal_strength": 0.30000000000000004,
+      "current_price": 39.970001220703125,
+      "limit_price": 40.17,
+      "shares": 1,
+      "order_value": 40.17,
+      "current_position": {
+        "shares": 0.49,
+        "avg_cost": 40.26,
+        "current_return_pct": -0.72031490138319
+      },
+      "rationale": "Sentiment: BULLISH, Technical: WEAK_SELL",
+      "sentiment": {
+        "symbol": "IREN",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "IREN",
+        "timestamp": "2026-02-27T13:14:42.652161",
+        "signal_strength": 0.3666666666666667,
+        "recommendation": "WEAK_SELL",
+        "indicators": {
+          "rsi": 46.988342200936124,
+          "macd": {
+            "macd": -1.807589359632928,
+            "signal": -1.720668347089023,
+            "histogram": -0.08692101254390505,
+            "trend": "BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 46.040100173950194,
+            "current_vs_sma_50": -13.184373905167067
+          },
+          "volume": {
+            "current_volume": 22762689,
+            "avg_volume": 39639794.45,
+            "volume_ratio": 0.5742383207539563,
+            "trend": "NORMAL_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 58.58000183105469,
+            "support": 36.52000045776367,
+            "current_price": 39.970001220703125,
+            "distance_to_resistance": 46.55992004501668,
+            "distance_to_support": 9.446880393469502
+          }
+        }
+      }
+    },
+    {
+      "symbol": "META",
+      "timestamp": "2026-02-27T13:14:42.000025",
+      "action": "SELL",
+      "order_type": "SELL",
+      "signal_strength": 0.34,
+      "current_price": 640.3499755859375,
+      "limit_price": 643.55,
+      "shares": 1,
+      "order_value": 643.55,
+      "current_position": {
+        "shares": 0.09,
+        "avg_cost": 654.91,
+        "current_return_pct": -2.223209969929074
+      },
+      "rationale": "Sentiment: BULLISH, Technical: WEAK_SELL",
+      "sentiment": {
+        "symbol": "META",
+        "sentiment_score": 1.0,
+        "confidence": 0.2,
+        "article_count": 2,
+        "rating": "BULLISH",
+        "reason": "Based on 2 recent articles"
+      },
+      "technical": {
+        "symbol": "META",
+        "timestamp": "2026-02-27T13:14:41.999899",
+        "signal_strength": 0.43333333333333335,
+        "recommendation": "WEAK_SELL",
+        "indicators": {
+          "rsi": 41.54854102513101,
+          "macd": {
+            "macd": -4.233473515920423,
+            "signal": -2.4018327098925987,
+            "histogram": -1.8316408060278242,
+            "trend": "BEARISH"
+          },
+          "moving_averages": {
+            "sma_50": 656.5401977539062,
+            "current_vs_sma_50": -2.4659909969499516
+          },
+          "volume": {
+            "current_volume": 5469545,
+            "avg_volume": 13432732.25,
+            "volume_ratio": 0.4071803783627117,
+            "trend": "LOW_VOLUME"
+          },
+          "support_resistance": {
+            "resistance": 732.1699829101562,
+            "support": 628.1500244140625,
+            "current_price": 640.3499755859375,
+            "distance_to_resistance": 14.339035031617042,
+            "distance_to_support": 1.9422034064640936
+          }
+        }
+      }
+    }
+  ],
+  "categorized": {
+    "strong_buy": [],
+    "buy": [],
+    "hold": [
+      {
+        "symbol": "SVC",
+        "timestamp": "2026-02-27T13:14:41.105419",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.45999999999999996,
+        "current_price": 2.305000066757202,
+        "limit_price": 2.31,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 23.0,
+          "avg_cost": 2.63,
+          "current_return_pct": -12.35741191037254
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "SVC",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "SVC",
+          "timestamp": "2026-02-27T13:14:41.105267",
+          "signal_strength": 0.6333333333333333,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 58.8235411971752,
+            "macd": {
+              "macd": 0.05801500762103062,
+              "signal": 0.05162554654900789,
+              "histogram": 0.006389461072022734,
+              "trend": "BULLISH"
+            },
+            "moving_averages": {
+              "sma_50": 2.0504774689674377,
+              "current_vs_sma_50": 12.412845380736371
+            },
+            "volume": {
+              "current_volume": 1756878,
+              "avg_volume": 1738928.9,
+              "volume_ratio": 1.0103219286308947,
+              "trend": "NORMAL_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 2.430000066757202,
+              "support": 1.9299999475479126,
+              "current_price": 2.305000066757202,
+              "distance_to_resistance": 5.42299333534757,
+              "distance_to_support": 19.430058518174143
+            }
+          }
+        }
+      },
+      {
+        "symbol": "AMZN",
+        "timestamp": "2026-02-27T13:14:41.192619",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.38,
+        "current_price": 208.8249969482422,
+        "limit_price": 208.82,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 1.76,
+          "avg_cost": 227.75,
+          "current_return_pct": -8.309551285074779
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "AMZN",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "AMZN",
+          "timestamp": "2026-02-27T13:14:41.192490",
+          "signal_strength": 0.5,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 47.96236901508159,
+            "macd": {
+              "macd": -6.426256213180068,
+              "signal": -7.182921233706603,
+              "histogram": 0.7566650205265351,
+              "trend": "BULLISH"
+            },
+            "moving_averages": {
+              "sma_50": 226.56749969482422,
+              "current_vs_sma_50": -7.831000814538869
+            },
+            "volume": {
+              "current_volume": 27576679,
+              "avg_volume": 63994418.95,
+              "volume_ratio": 0.43092318756024894,
+              "trend": "LOW_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 246.35000610351562,
+              "support": 196.0,
+              "current_price": 208.8249969482422,
+              "distance_to_resistance": 17.969596410229617,
+              "distance_to_support": 6.543365789919475
+            }
+          }
+        }
+      },
+      {
+        "symbol": "SPXS",
+        "timestamp": "2026-02-27T13:14:41.385045",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.42,
+        "current_price": 35.518699645996094,
+        "limit_price": 35.52,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 7.34,
+          "avg_cost": 149.42,
+          "current_return_pct": -76.22895218444914
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "SPXS",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "SPXS",
+          "timestamp": "2026-02-27T13:14:41.384920",
+          "signal_strength": 0.5666666666666667,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 57.08362873134328,
+            "macd": {
+              "macd": 0.09811122290892627,
+              "signal": 0.09143433287744146,
+              "histogram": 0.006676890031484806,
+              "trend": "BULLISH"
+            },
+            "moving_averages": {
+              "sma_50": 34.756218338012694,
+              "current_vs_sma_50": 2.1937982451602833
+            },
+            "volume": {
+              "current_volume": 11664962,
+              "avg_volume": 10849608.1,
+              "volume_ratio": 1.0751505393084198,
+              "trend": "NORMAL_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 36.7400016784668,
+              "support": 33.439998626708984,
+              "current_price": 35.518699645996094,
+              "distance_to_resistance": 3.4384761960405186,
+              "distance_to_support": 6.216211437361796
+            }
+          }
+        }
+      },
+      {
+        "symbol": "GLDW",
+        "timestamp": "2026-02-27T13:14:41.477890",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.45999999999999996,
+        "current_price": 63.54999923706055,
+        "limit_price": 63.55,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 5.0,
+          "avg_cost": 51.03,
+          "current_return_pct": 24.534586002470206
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "GLDW",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "GLDW",
+          "timestamp": "2026-02-27T13:14:41.477756",
+          "signal_strength": 0.6333333333333333,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 61.27601682228013,
+            "macd": {
+              "macd": 1.5465670532851377,
+              "signal": 1.4567330209924,
+              "histogram": 0.08983403229273756,
+              "trend": "BULLISH"
+            },
+            "moving_averages": {
+              "sma_50": 57.143087234497074,
+              "current_vs_sma_50": 11.212050858000634
+            },
+            "volume": {
+              "current_volume": 38812,
+              "avg_volume": 33070.6,
+              "volume_ratio": 1.173610397150339,
+              "trend": "NORMAL_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 63.59000015258789,
+              "support": 54.52508778889974,
+              "current_price": 63.54999923706055,
+              "distance_to_resistance": 0.06294400630617591,
+              "distance_to_support": 16.55185129293475
+            }
+          }
+        }
+      },
+      {
+        "symbol": "GOOGL",
+        "timestamp": "2026-02-27T13:14:41.573927",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.42,
+        "current_price": 308.760009765625,
+        "limit_price": 308.76,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 1.25,
+          "avg_cost": 303.12,
+          "current_return_pct": 1.8606524695252702
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "GOOGL",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "GOOGL",
+          "timestamp": "2026-02-27T13:14:41.573809",
+          "signal_strength": 0.5666666666666667,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 36.08372870819046,
+            "macd": {
+              "macd": -4.381581640213142,
+              "signal": -3.705385570528214,
+              "histogram": -0.6761960696849276,
+              "trend": "WEAKENING_BEARISH"
+            },
+            "moving_averages": {
+              "sma_50": 319.9235998535156,
+              "current_vs_sma_50": -3.48945501144714
+            },
+            "volume": {
+              "current_volume": 15240349,
+              "avg_volume": 40519502.45,
+              "volume_ratio": 0.37612379418543423,
+              "trend": "LOW_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 349.0,
+              "support": 296.25,
+              "current_price": 308.760009765625,
+              "distance_to_resistance": 13.03277269129528,
+              "distance_to_support": 4.222788106540087
+            }
+          }
+        }
+      },
+      {
+        "symbol": "GOOW",
+        "timestamp": "2026-02-27T13:14:41.660122",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.42,
+        "current_price": 65.4000015258789,
+        "limit_price": 65.4,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 1.07,
+          "avg_cost": 70.95,
+          "current_return_pct": -7.822407997351788
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "GOOW",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "GOOW",
+          "timestamp": "2026-02-27T13:14:41.660019",
+          "signal_strength": 0.5666666666666667,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 33.683494804314506,
+            "macd": {
+              "macd": -1.2565497823536305,
+              "signal": -1.0723307912042406,
+              "histogram": -0.1842189911493899,
+              "trend": "WEAKENING_BEARISH"
+            },
+            "moving_averages": {
+              "sma_50": 68.78336891174317,
+              "current_vs_sma_50": -4.918874197926392
+            },
+            "volume": {
+              "current_volume": 25730,
+              "avg_volume": 58961.5,
+              "volume_ratio": 0.43638645556846417,
+              "trend": "LOW_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 75.6384264925538,
+              "support": 62.530585563496956,
+              "current_price": 65.4000015258789,
+              "distance_to_resistance": 15.65508368164721,
+              "distance_to_support": 4.588819913525666
+            }
+          }
+        }
+      },
+      {
+        "symbol": "LRCX",
+        "timestamp": "2026-02-27T13:14:41.771934",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.38,
+        "current_price": 235.2949981689453,
+        "limit_price": 235.29,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 0.26,
+          "avg_cost": 246.99,
+          "current_return_pct": -4.735010255902949
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "LRCX",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "LRCX",
+          "timestamp": "2026-02-27T13:14:41.771824",
+          "signal_strength": 0.5,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 53.58188219796052,
+            "macd": {
+              "macd": 7.50084536151391,
+              "signal": 8.584030581576044,
+              "histogram": -1.0831852200621341,
+              "trend": "BEARISH"
+            },
+            "moving_averages": {
+              "sma_50": 213.89789978027343,
+              "current_vs_sma_50": 10.003416775317596
+            },
+            "volume": {
+              "current_volume": 3350485,
+              "avg_volume": 10622634.25,
+              "volume_ratio": 0.3154099935239698,
+              "trend": "LOW_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 256.67999267578125,
+              "support": 204.57000732421875,
+              "current_price": 235.2949981689453,
+              "distance_to_resistance": 9.088588653925056,
+              "distance_to_support": 15.019303780945359
+            }
+          }
+        }
+      },
+      {
+        "symbol": "MU",
+        "timestamp": "2026-02-27T13:14:41.887073",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.38,
+        "current_price": 407.6000061035156,
+        "limit_price": 407.6,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 0.1,
+          "avg_cost": 424.5,
+          "current_return_pct": -3.9811528613626357
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "MU",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "MU",
+          "timestamp": "2026-02-27T13:14:41.886965",
+          "signal_strength": 0.5,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 54.17826458928292,
+            "macd": {
+              "macd": 14.810150646033208,
+              "signal": 18.084146883887403,
+              "histogram": -3.2739962378541954,
+              "trend": "BEARISH"
+            },
+            "moving_averages": {
+              "sma_50": 361.3746655273437,
+              "current_vs_sma_50": 12.791527737207753
+            },
+            "volume": {
+              "current_volume": 18433977,
+              "avg_volume": 35617228.85,
+              "volume_ratio": 0.5175578672230139,
+              "trend": "NORMAL_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 455.5,
+              "support": 363.8999938964844,
+              "current_price": 407.6000061035156,
+              "distance_to_resistance": 11.75171569656932,
+              "distance_to_support": 12.008797180541375
+            }
+          }
+        }
+      },
+      {
+        "symbol": "MSFT",
+        "timestamp": "2026-02-27T13:14:42.113292",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.38,
+        "current_price": 393.0199890136719,
+        "limit_price": 393.02,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 0.14,
+          "avg_cost": 391.36,
+          "current_return_pct": 0.4241590897567038
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "MSFT",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "MSFT",
+          "timestamp": "2026-02-27T13:14:42.113174",
+          "signal_strength": 0.5,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 44.998070339616,
+            "macd": {
+              "macd": -14.761417086968095,
+              "signal": -16.563258697855854,
+              "histogram": 1.8018416108877595,
+              "trend": "BULLISH"
+            },
+            "moving_averages": {
+              "sma_50": 444.4709136962891,
+              "current_vs_sma_50": -11.57576864923361
+            },
+            "volume": {
+              "current_volume": 13821703,
+              "avg_volume": 41057810.15,
+              "volume_ratio": 0.3366400436239535,
+              "trend": "LOW_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 438.5989157576861,
+              "support": 381.7099914550781,
+              "current_price": 393.0199890136719,
+              "distance_to_resistance": 11.597101424382949,
+              "distance_to_support": 2.9629817955458826
+            }
+          }
+        }
+      },
+      {
+        "symbol": "TSM",
+        "timestamp": "2026-02-27T13:14:42.408319",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.38,
+        "current_price": 372.2749938964844,
+        "limit_price": 372.27,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 0.12,
+          "avg_cost": 369.36,
+          "current_return_pct": 0.7892012931785652
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "TSM",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "TSM",
+          "timestamp": "2026-02-27T13:14:42.408192",
+          "signal_strength": 0.5,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 64.15663983829204,
+            "macd": {
+              "macd": 12.950675325971929,
+              "signal": 12.596074455647535,
+              "histogram": 0.35460087032439347,
+              "trend": "WEAKENING_BULLISH"
+            },
+            "moving_averages": {
+              "sma_50": 333.8946990966797,
+              "current_vs_sma_50": 11.49473019596865
+            },
+            "volume": {
+              "current_volume": 6443792,
+              "avg_volume": 12482664.6,
+              "volume_ratio": 0.516219269401823,
+              "trend": "NORMAL_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 390.2099914550781,
+              "support": 319.07000732421875,
+              "current_price": 372.2749938964844,
+              "distance_to_resistance": 4.817674528948035,
+              "distance_to_support": 16.675019698169912
+            }
+          }
+        }
+      },
+      {
+        "symbol": "JPM",
+        "timestamp": "2026-02-27T13:14:42.559722",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.36,
+        "current_price": 296.25,
+        "limit_price": 296.25,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 0.08,
+          "avg_cost": 309.39,
+          "current_return_pct": -4.2470668088819945
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD, RSI oversold (29)",
+        "sentiment": {
+          "symbol": "JPM",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "JPM",
+          "timestamp": "2026-02-27T13:14:42.559583",
+          "signal_strength": 0.4666666666666666,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 28.8259472666916,
+            "macd": {
+              "macd": -3.016627662405938,
+              "signal": -2.094802239784897,
+              "histogram": -0.921825422621041,
+              "trend": "BEARISH"
+            },
+            "moving_averages": {
+              "sma_50": 312.95298095703123,
+              "current_vs_sma_50": -5.337217401141981
+            },
+            "volume": {
+              "current_volume": 6808970,
+              "avg_volume": 10160583.5,
+              "volume_ratio": 0.6701357259649507,
+              "trend": "NORMAL_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 326.3999938964844,
+              "support": 291.3800048828125,
+              "current_price": 296.25,
+              "distance_to_resistance": 10.17721312961497,
+              "distance_to_support": 1.6713552871090442
+            }
+          }
+        }
+      },
+      {
+        "symbol": "COST",
+        "timestamp": "2026-02-27T13:14:42.780317",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.45999999999999996,
+        "current_price": 1003.2100830078125,
+        "limit_price": 1003.21,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 0.02,
+          "avg_cost": 984.29,
+          "current_return_pct": 1.9222061595477458
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "COST",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "COST",
+          "timestamp": "2026-02-27T13:14:42.780191",
+          "signal_strength": 0.6333333333333333,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 50.67566724881589,
+            "macd": {
+              "macd": 12.97315379275426,
+              "signal": 15.617369162593114,
+              "histogram": -2.6442153698388537,
+              "trend": "WEAKENING_BEARISH"
+            },
+            "moving_averages": {
+              "sma_50": 941.6279711914062,
+              "current_vs_sma_50": 6.539962033889957
+            },
+            "volume": {
+              "current_volume": 1029296,
+              "avg_volume": 2072554.8,
+              "volume_ratio": 0.49663150040713033,
+              "trend": "LOW_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 1028.43994140625,
+              "support": 930.2999877929688,
+              "current_price": 1003.2100830078125,
+              "distance_to_resistance": 2.5149127611231448,
+              "distance_to_support": 7.837267136573289
+            }
+          }
+        }
+      },
+      {
+        "symbol": "CME",
+        "timestamp": "2026-02-27T13:14:42.976126",
+        "action": "HOLD",
+        "order_type": "HOLD",
+        "signal_strength": 0.45999999999999996,
+        "current_price": 318.2449951171875,
+        "limit_price": 318.24,
+        "shares": 0,
+        "order_value": 0,
+        "current_position": {
+          "shares": 0.06,
+          "avg_cost": 311.62,
+          "current_return_pct": 2.1259852118565847
+        },
+        "rationale": "Sentiment: BULLISH, Technical: HOLD",
+        "sentiment": {
+          "symbol": "CME",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "CME",
+          "timestamp": "2026-02-27T13:14:42.975995",
+          "signal_strength": 0.6333333333333333,
+          "recommendation": "HOLD",
+          "indicators": {
+            "rsi": 65.39758718609563,
+            "macd": {
+              "macd": 8.375804257773837,
+              "signal": 7.767324357241798,
+              "histogram": 0.6084799005320383,
+              "trend": "BULLISH"
+            },
+            "moving_averages": {
+              "sma_50": 286.60610107421877,
+              "current_vs_sma_50": 11.03915580456385
+            },
+            "volume": {
+              "current_volume": 1065249,
+              "avg_volume": 2458172.45,
+              "volume_ratio": 0.43334998730459284,
+              "trend": "LOW_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 322.57000732421875,
+              "support": 286.2900085449219,
+              "current_price": 318.2449951171875,
+              "distance_to_resistance": 1.3590197091516432,
+              "distance_to_support": 11.161754032101179
+            }
+          }
+        }
+      }
+    ],
+    "sell": [
+      {
+        "symbol": "META",
+        "timestamp": "2026-02-27T13:14:42.000025",
+        "action": "SELL",
+        "order_type": "SELL",
+        "signal_strength": 0.34,
+        "current_price": 640.3499755859375,
+        "limit_price": 643.55,
+        "shares": 1,
+        "order_value": 643.55,
+        "current_position": {
+          "shares": 0.09,
+          "avg_cost": 654.91,
+          "current_return_pct": -2.223209969929074
+        },
+        "rationale": "Sentiment: BULLISH, Technical: WEAK_SELL",
+        "sentiment": {
+          "symbol": "META",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "META",
+          "timestamp": "2026-02-27T13:14:41.999899",
+          "signal_strength": 0.43333333333333335,
+          "recommendation": "WEAK_SELL",
+          "indicators": {
+            "rsi": 41.54854102513101,
+            "macd": {
+              "macd": -4.233473515920423,
+              "signal": -2.4018327098925987,
+              "histogram": -1.8316408060278242,
+              "trend": "BEARISH"
+            },
+            "moving_averages": {
+              "sma_50": 656.5401977539062,
+              "current_vs_sma_50": -2.4659909969499516
+            },
+            "volume": {
+              "current_volume": 5469545,
+              "avg_volume": 13432732.25,
+              "volume_ratio": 0.4071803783627117,
+              "trend": "LOW_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 732.1699829101562,
+              "support": 628.1500244140625,
+              "current_price": 640.3499755859375,
+              "distance_to_resistance": 14.339035031617042,
+              "distance_to_support": 1.9422034064640936
+            }
+          }
+        }
+      },
+      {
+        "symbol": "AMD",
+        "timestamp": "2026-02-27T13:14:42.219259",
+        "action": "SELL",
+        "order_type": "SELL",
+        "signal_strength": 0.30000000000000004,
+        "current_price": 198.00799560546875,
+        "limit_price": 199.0,
+        "shares": 1,
+        "order_value": 199.0,
+        "current_position": {
+          "shares": 0.33,
+          "avg_cost": 198.96,
+          "current_return_pct": -0.47849034707039273
+        },
+        "rationale": "Sentiment: BULLISH, Technical: WEAK_SELL",
+        "sentiment": {
+          "symbol": "AMD",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "AMD",
+          "timestamp": "2026-02-27T13:14:42.219126",
+          "signal_strength": 0.3666666666666667,
+          "recommendation": "WEAK_SELL",
+          "indicators": {
+            "rsi": 42.474600599238734,
+            "macd": {
+              "macd": -6.313137159946706,
+              "signal": -5.76070676081595,
+              "histogram": -0.5524303991307562,
+              "trend": "BEARISH"
+            },
+            "moving_averages": {
+              "sma_50": 218.62575958251952,
+              "current_vs_sma_50": -9.43061971124618
+            },
+            "volume": {
+              "current_volume": 18686442,
+              "avg_volume": 42419727.1,
+              "volume_ratio": 0.4405130178218426,
+              "trend": "LOW_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 252.64999389648438,
+              "support": 190.72000122070312,
+              "current_price": 198.00799560546875,
+              "distance_to_resistance": 27.59585446230661,
+              "distance_to_support": 3.821305756144522
+            }
+          }
+        }
+      },
+      {
+        "symbol": "IREN",
+        "timestamp": "2026-02-27T13:14:42.652300",
+        "action": "SELL",
+        "order_type": "SELL",
+        "signal_strength": 0.30000000000000004,
+        "current_price": 39.970001220703125,
+        "limit_price": 40.17,
+        "shares": 1,
+        "order_value": 40.17,
+        "current_position": {
+          "shares": 0.49,
+          "avg_cost": 40.26,
+          "current_return_pct": -0.72031490138319
+        },
+        "rationale": "Sentiment: BULLISH, Technical: WEAK_SELL",
+        "sentiment": {
+          "symbol": "IREN",
+          "sentiment_score": 1.0,
+          "confidence": 0.2,
+          "article_count": 2,
+          "rating": "BULLISH",
+          "reason": "Based on 2 recent articles"
+        },
+        "technical": {
+          "symbol": "IREN",
+          "timestamp": "2026-02-27T13:14:42.652161",
+          "signal_strength": 0.3666666666666667,
+          "recommendation": "WEAK_SELL",
+          "indicators": {
+            "rsi": 46.988342200936124,
+            "macd": {
+              "macd": -1.807589359632928,
+              "signal": -1.720668347089023,
+              "histogram": -0.08692101254390505,
+              "trend": "BEARISH"
+            },
+            "moving_averages": {
+              "sma_50": 46.040100173950194,
+              "current_vs_sma_50": -13.184373905167067
+            },
+            "volume": {
+              "current_volume": 22762689,
+              "avg_volume": 39639794.45,
+              "volume_ratio": 0.5742383207539563,
+              "trend": "NORMAL_VOLUME"
+            },
+            "support_resistance": {
+              "resistance": 58.58000183105469,
+              "support": 36.52000045776367,
+              "current_price": 39.970001220703125,
+              "distance_to_resistance": 46.55992004501668,
+              "distance_to_support": 9.446880393469502
+            }
+          }
+        }
+      }
+    ],
+    "strong_sell": []
+  }
+}

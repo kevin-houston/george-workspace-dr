@@ -1,0 +1,14 @@
+{
+  "id": "alphasage-r33-quaternary-2026-04-25",
+  "date": "2026-04-25",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.25055",
+  "title": "Add AlphaSAGE as R33 quaternary alpha generator",
+  "rationale": "AlphaSAGE (arXiv:2509.25055) uses GFlowNet + RGCN structure-aware encoding to mine diverse alpha expressions. It outperforms AlphaGen, AlphaForge, and AlphaQCM on CSI300 and claims S&P 500 results (IC 0.052, ICIR 0.493, Sharpe 6.32, AR 19.47%, MaxDD -4.2%). Public code at github.com/BerkinChen/AlphaSAGE uses Qlib data (same as R33 QuantaAlpha stack). Dense reward structure solves mode collapse that degrades pure RL-based generators like AlphaGen-PPO. GFlowNet exploration produces more diverse, uncorrelated alphas — complementary to QuantaAlpha (evolutionary), AlphaPROBE (DAG), and AlphaCFG (grammar MCTS). No LLM dependency means no prompt-bias risk. Not previously in MEMORY.md; discovered 2026-04-25 dream cycle scan.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n### AlphaSAGE — R33 Quaternary Generator (2026-04-25)\n- **Paper**: arXiv:2509.25055 (Sep 2025)\n- **Code**: github.com/BerkinChen/AlphaSAGE (Python 3.11+, PDM, Qlib backend)\n- **Architecture**: GFlowNet + RGCN (Relational Graph Convolutional Network) structure-aware encoder\n- **Key innovation**: Dense reward structure avoids sparse reward failure; GFlowNet produces diverse alphas without mode collapse\n- **US results (S&P 500)**: IC 0.052, ICIR 0.493, Sharpe 6.32, AR 19.47%, MaxDD -4.2%\n- **China results (CSI300)**: Outperforms AlphaGen-PPO, AlphaForge, AlphaQCM (specific IC numbers in paper)\n- **R33 role**: Quaternary generator alongside QuantaAlpha (primary), AlphaPROBE (secondary), AlphaCFG (tertiary)\n- **Integration note**: Uses same Qlib data backend as QuantaAlpha — minimal setup overhead\n- **No LLM dependency**: Pure GNN+GFlowNet, no prompt-bias risk (unlike LLM-based generators)\n- **Priority**: Implement after QuantaAlpha (R33 primary); evaluate alpha diversity vs existing generator set\n",
+  "action": "append",
+  "apply_status": "applied"
+}

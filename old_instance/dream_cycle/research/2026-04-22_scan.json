@@ -1,0 +1,31 @@
+{
+  "date": "2026-04-22",
+  "phase": "SCAN + REFLECT + DEEP RESEARCH + EVALUATE",
+  "papers_scanned": [
+    "arXiv:2604.02921 (full paper review) — Debiasing LLMs by Fine-tuning",
+    "arXiv:2604.18821 — Evaluating Structured Strategy Backtests: Peer Benchmarks, Regime Timing, and Live Performance",
+    "arXiv:2604.18373 — Dissecting AI Trading: Behavioral Finance and Market Bubbles",
+    "arXiv:2604.18602 — Machine Spirits: Speculation and Adaptation of LLM Agents in Asset Markets",
+    "arXiv:2604.18500 — QRAFTI: An Agentic Framework for Empirical Research in Quantitative Finance",
+    "arXiv:2604.20050 — Information Aggregation with AI Agents",
+    "arXiv:2604.16773 — Topological Risk Parity (theoretical only, no empirical results)",
+    "arXiv:2604.17166 — The Virtue of Sparsity in Complexity (factor selection theory)",
+    "arXiv:2604.16997 — Hedging the Singularity (asset pricing, not actionable)",
+    "arXiv:2604.17593 — Post-Screening Portfolio Selection (Lasso MV optimization)"
+  ],
+  "papers_staged": 5,
+  "proposals": [
+    "1_anti_extrapolation_prompt_failure.json",
+    "2_backtest_regime_haircut_formula.json",
+    "3_llm_agent_disposition_effect_bubble_risk.json",
+    "4_qrafti_mcp_factor_research_r33.json",
+    "5_heuristics_update.json"
+  ],
+  "scan_notes": "Today's q-fin new submissions (Apr 22-23) were thin on directly actionable papers. Most relevant papers were from the Apr 20-21 window that appeared in the full recent listing. The most important finding is the full-paper confirmation that anti-extrapolation prompting is ineffective (updating an existing heuristic that was partly wrong). The backtest regime haircut formula is a highly actionable, quantified complement to our existing MRP and friction buffer heuristics.",
+  "next_scan_priority": [
+    "R29 LLM Filter implementation — ready to code based on finalized 6-stage design",
+    "R31b speaker-weighted FinBERT — ready to code, needs EDGAR transcript integration",
+    "R33 QuantaAlpha — US data pipeline is the main blocker",
+    "Any new SAE company similarity pre-computed features updates on HuggingFace (marco-molinari/company_reports_with_features)"
+  ]
+}

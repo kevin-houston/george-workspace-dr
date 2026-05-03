@@ -1,0 +1,398 @@
+{
+  "timestamp": "2026-03-30T13:20:00.366003",
+  "factor_results": [
+    {
+      "sharpe": 0.357,
+      "cagr": 3.58,
+      "max_dd": -19.01,
+      "win_rate": 48.92,
+      "n_trades": 256,
+      "factor": "Momentum_6_1",
+      "top_contributors": [
+        [
+          "NVDA",
+          5.055
+        ],
+        [
+          "GE",
+          1.6374
+        ],
+        [
+          "TSLA",
+          1.3086
+        ],
+        [
+          "META",
+          1.1512
+        ],
+        [
+          "MSFT",
+          1.02
+        ]
+      ]
+    },
+    {
+      "sharpe": 0.072,
+      "cagr": 0.11,
+      "max_dd": -31.1,
+      "win_rate": 47.4,
+      "n_trades": 246,
+      "factor": "Momentum_12_1",
+      "top_contributors": [
+        [
+          "NVDA",
+          3.3478
+        ],
+        [
+          "GE",
+          2.0815
+        ],
+        [
+          "AMZN",
+          1.1519
+        ],
+        [
+          "MSFT",
+          1.1218
+        ],
+        [
+          "META",
+          1.0922
+        ]
+      ]
+    },
+    {
+      "sharpe": 0.052,
+      "cagr": -0.14,
+      "max_dd": -35.75,
+      "win_rate": 46.55,
+      "n_trades": 246,
+      "factor": "Combo_Mom_52wkHigh",
+      "top_contributors": [
+        [
+          "NVDA",
+          3.5699
+        ],
+        [
+          "GE",
+          2.0147
+        ],
+        [
+          "WFC",
+          -1.2621
+        ],
+        [
+          "MSFT",
+          1.2466
+        ],
+        [
+          "META",
+          1.0448
+        ]
+      ]
+    },
+    {
+      "sharpe": 0.006,
+      "cagr": -0.72,
+      "max_dd": -35.2,
+      "win_rate": 48.14,
+      "n_trades": 256,
+      "factor": "Multi_Factor_EW",
+      "top_contributors": [
+        [
+          "NVDA",
+          2.1253
+        ],
+        [
+          "TSLA",
+          -1.8811
+        ],
+        [
+          "GE",
+          1.8578
+        ],
+        [
+          "MSFT",
+          1.4346
+        ],
+        [
+          "COP",
+          -1.128
+        ]
+      ]
+    },
+    {
+      "sharpe": -0.038,
+      "cagr": -1.25,
+      "max_dd": -36.73,
+      "win_rate": 46.51,
+      "n_trades": 246,
+      "factor": "Combo_Mom_LowVol",
+      "top_contributors": [
+        [
+          "GE",
+          2.11
+        ],
+        [
+          "HAL",
+          -1.5292
+        ],
+        [
+          "GM",
+          -1.2033
+        ],
+        [
+          "F",
+          -0.9712
+        ],
+        [
+          "WFC",
+          -0.9501
+        ]
+      ]
+    },
+    {
+      "sharpe": -0.102,
+      "cagr": -1.66,
+      "max_dd": -42.44,
+      "win_rate": 49.84,
+      "n_trades": 264,
+      "factor": "Trend_Strength",
+      "top_contributors": [
+        [
+          "NVDA",
+          2.8016
+        ],
+        [
+          "GE",
+          0.9999
+        ],
+        [
+          "MSFT",
+          0.8813
+        ],
+        [
+          "HAL",
+          -0.877
+        ],
+        [
+          "UPS",
+          -0.807
+        ]
+      ]
+    },
+    {
+      "sharpe": -0.281,
+      "cagr": -4.24,
+      "max_dd": -46.91,
+      "win_rate": 45.35,
+      "n_trades": 246,
+      "factor": "52wk_High_Ratio",
+      "top_contributors": [
+        [
+          "TSLA",
+          -2.3775
+        ],
+        [
+          "WFC",
+          -1.0012
+        ],
+        [
+          "MSFT",
+          0.9778
+        ],
+        [
+          "HAL",
+          -0.9235
+        ],
+        [
+          "MO",
+          0.6308
+        ]
+      ]
+    },
+    {
+      "sharpe": -0.669,
+      "cagr": -7.63,
+      "max_dd": -60.58,
+      "win_rate": 47.5,
+      "n_trades": 266,
+      "factor": "Short_Term_Reversal",
+      "top_contributors": [
+        [
+          "GE",
+          -1.652
+        ],
+        [
+          "TSLA",
+          -1.4887
+        ],
+        [
+          "HAL",
+          -1.3536
+        ],
+        [
+          "META",
+          -1.3044
+        ],
+        [
+          "AAPL",
+          -1.0643
+        ]
+      ]
+    },
+    {
+      "sharpe": -0.774,
+      "cagr": -10.2,
+      "max_dd": -72.24,
+      "win_rate": 46.41,
+      "n_trades": 264,
+      "factor": "Low_Volatility",
+      "top_contributors": [
+        [
+          "NVDA",
+          -6.1313
+        ],
+        [
+          "TSLA",
+          -4.7292
+        ],
+        [
+          "HAL",
+          -1.4965
+        ],
+        [
+          "META",
+          -1.1763
+        ],
+        [
+          "BRK-B",
+          1.0835
+        ]
+      ]
+    }
+  ],
+  "seasonal_results": [
+    {
+      "sharpe": 0.553,
+      "cagr": 2.78,
+      "max_dd": -10.87,
+      "win_rate": 8.04,
+      "n_trades": 158,
+      "t_stat": 2.039,
+      "p_value": 0.0422,
+      "is_significant": true,
+      "strategy": "Pre_Holiday"
+    },
+    {
+      "sharpe": 0.509,
+      "cagr": 6.71,
+      "max_dd": -33.72,
+      "win_rate": 31.72,
+      "n_trades": 22,
+      "t_stat": 1.712,
+      "p_value": 0.0871,
+      "is_significant": false,
+      "strategy": "Sell_in_May_Halloween"
+    },
+    {
+      "sharpe": 0.428,
+      "cagr": 2.35,
+      "max_dd": -11.04,
+      "win_rate": 6.3,
+      "n_trades": 89,
+      "t_stat": 1.527,
+      "p_value": 0.1277,
+      "is_significant": false,
+      "strategy": "End_of_Quarter"
+    },
+    {
+      "sharpe": 0.233,
+      "cagr": 0.62,
+      "max_dd": -6.88,
+      "win_rate": 1.84,
+      "n_trades": 23,
+      "t_stat": 0.829,
+      "p_value": 0.4094,
+      "is_significant": false,
+      "strategy": "Santa_Claus_Rally"
+    },
+    {
+      "sharpe": 0.186,
+      "cagr": 1.18,
+      "max_dd": -27.44,
+      "win_rate": 10.9,
+      "n_trades": 1054,
+      "t_stat": 1.403,
+      "p_value": 0.1612,
+      "is_significant": false,
+      "strategy": "Monday_Effect",
+      "monday_avg_return": 0.0719,
+      "non_monday_avg_return": 0.0485
+    },
+    {
+      "sharpe": 0.18,
+      "cagr": 0.72,
+      "max_dd": -13.04,
+      "win_rate": 5.1,
+      "n_trades": 23,
+      "t_stat": 0.631,
+      "p_value": 0.5284,
+      "is_significant": false,
+      "strategy": "January_Effect"
+    },
+    {
+      "sharpe": 0.046,
+      "cagr": 0.1,
+      "max_dd": -11.31,
+      "win_rate": 5.03,
+      "n_trades": 269,
+      "t_stat": 0.48,
+      "p_value": 0.6318,
+      "is_significant": false,
+      "strategy": "Turn_of_Month"
+    }
+  ],
+  "champion_factor": {
+    "sharpe": 0.357,
+    "cagr": 3.58,
+    "max_dd": -19.01,
+    "win_rate": 48.92,
+    "n_trades": 256,
+    "factor": "Momentum_6_1",
+    "top_contributors": [
+      [
+        "NVDA",
+        5.055
+      ],
+      [
+        "GE",
+        1.6374
+      ],
+      [
+        "TSLA",
+        1.3086
+      ],
+      [
+        "META",
+        1.1512
+      ],
+      [
+        "MSFT",
+        1.02
+      ]
+    ]
+  },
+  "champion_seasonal": {
+    "sharpe": 0.553,
+    "cagr": 2.78,
+    "max_dd": -10.87,
+    "win_rate": 8.04,
+    "n_trades": 158,
+    "t_stat": 2.039,
+    "p_value": 0.0422,
+    "is_significant": true,
+    "strategy": "Pre_Holiday"
+  },
+  "factor_vs_seasonal_winner": "seasonal"
+}

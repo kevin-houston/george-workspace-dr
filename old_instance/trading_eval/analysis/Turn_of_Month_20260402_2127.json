@@ -1,0 +1,82 @@
+{
+  "strategy": "Turn_of_Month",
+  "category": "seasonal",
+  "round": 1,
+  "tickers": [
+    "SPY"
+  ],
+  "n_trades": 135,
+  "date_range": "2015-01-30 \u2013 2026-03-31",
+  "total_return": 0.1186,
+  "cagr": 0.01,
+  "sharpe": 0.2336,
+  "sortino": 0.2058,
+  "calmar": 0.0986,
+  "skewness": -0.789,
+  "kurtosis": 2.9088,
+  "max_drawdown": -0.1016,
+  "max_consec_losses": 4,
+  "win_rate": 0.5852,
+  "profit_factor": 1.2036,
+  "avg_return": 0.0009,
+  "avg_win": 0.0094,
+  "avg_loss": -0.011,
+  "kelly_fraction": 0.099,
+  "spy_correlation": 0.2011,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.6667,
+      "avg_return": -0.0038,
+      "max_dd": -0.0309
+    },
+    "high_vol": {
+      "n_trades": 28,
+      "sharpe": 1.5923,
+      "sortino": 1.9201,
+      "win_rate": 0.6786,
+      "avg_return": 0.0059,
+      "max_dd": -0.0434
+    },
+    "bull": {
+      "n_trades": 28,
+      "sharpe": -0.6851,
+      "sortino": -0.6646,
+      "win_rate": 0.4286,
+      "avg_return": -0.0024,
+      "max_dd": -0.1121
+    },
+    "low_vol_bull": {
+      "n_trades": 71,
+      "sharpe": 0.4873,
+      "sortino": 0.4288,
+      "win_rate": 0.6197,
+      "avg_return": 0.0015,
+      "max_dd": -0.048
+    },
+    "unknown": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.6667,
+      "avg_return": 0.0089,
+      "max_dd": -0.0042
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)"
+  ]
+}

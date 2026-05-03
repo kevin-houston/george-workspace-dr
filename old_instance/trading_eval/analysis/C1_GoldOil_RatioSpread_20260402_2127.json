@@ -1,0 +1,84 @@
+{
+  "strategy": "C1_GoldOil_RatioSpread",
+  "category": "commodity",
+  "round": 1,
+  "tickers": [
+    "CL=F",
+    "GC=F"
+  ],
+  "n_trades": 165,
+  "date_range": "2015-04-07 \u2013 2026-03-04",
+  "total_return": -3.6853,
+  "cagr": 0.0,
+  "sharpe": -0.2028,
+  "sortino": -0.1235,
+  "calmar": 0.0,
+  "skewness": -10.9766,
+  "kurtosis": 135.4701,
+  "max_drawdown": -3.5331,
+  "max_consec_losses": 3,
+  "win_rate": 0.6485,
+  "profit_factor": 0.5325,
+  "avg_return": -0.0162,
+  "avg_win": 0.0285,
+  "avg_loss": -0.0988,
+  "kelly_fraction": 0.0,
+  "spy_correlation": -0.3485,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.3333,
+      "avg_return": -0.8723,
+      "max_dd": -5.2333
+    },
+    "bear": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.6667,
+      "avg_return": -0.0088,
+      "max_dd": -0.0742
+    },
+    "high_vol": {
+      "n_trades": 32,
+      "sharpe": 0.4272,
+      "sortino": 0.3121,
+      "win_rate": 0.6562,
+      "avg_return": 0.0042,
+      "max_dd": -0.1165
+    },
+    "bull": {
+      "n_trades": 35,
+      "sharpe": 1.1424,
+      "sortino": 1.1286,
+      "win_rate": 0.6571,
+      "avg_return": 0.0082,
+      "max_dd": -0.076
+    },
+    "low_vol_bull": {
+      "n_trades": 89,
+      "sharpe": -0.2267,
+      "sortino": -0.1367,
+      "win_rate": 0.6629,
+      "avg_return": -0.0048,
+      "max_dd": -0.6565
+    },
+    "unknown": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.3333,
+      "avg_return": -0.0111,
+      "max_dd": -0.1231
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}

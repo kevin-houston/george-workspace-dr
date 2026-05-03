@@ -1,0 +1,14 @@
+{
+  "id": "heuristics-alphasage-subjectiveqa-2026-04-25",
+  "date": "2026-04-25",
+  "source": "reflection",
+  "source_url": "",
+  "title": "Add heuristics: AlphaSAGE GFlowNet diversity, SubjECTive-QA validated taxonomy",
+  "rationale": "Two generalizable lessons from tonight's dream cycle scan: (1) GFlowNet-based alpha generators produce more diverse, uncorrelated alphas than pure RL approaches because they optimize for a distribution of good solutions rather than a single optimum — relevant whenever building alpha libraries. (2) When designing LLM scoring dimensions for earnings call analysis, prefer validated taxonomies with public benchmark datasets (like SubjECTive-QA) over ad-hoc prompt engineering — they transfer better and can be calibrated against ground truth annotations.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### GFlowNet diversity advantage for alpha mining\n- LESSON: GFlowNet-based alpha generators (AlphaSAGE) produce more diverse, uncorrelated factors than RL-based generators (AlphaGen-PPO) because they sample proportional to reward rather than argmax — avoid mode collapse\n- WHEN: Building alpha libraries for R33 or any factor mining task; use GFlowNet generators to fill uncorrelated niches that RL-based generators miss\n- SOURCE: arXiv:2509.25055 (AlphaSAGE), 2026-04-25 dream cycle\n\n### Prefer validated scoring taxonomies over ad-hoc LLM prompts\n- LESSON: For multi-dimension text scoring tasks (earnings call quality, analyst evasion), prefer taxonomies with public annotated datasets and benchmark F1 scores over designing dimensions from scratch — they transfer better, can be calibrated, and don't require justification to stakeholders\n- WHEN: Any new LLM scoring dimension for R28/R31/R29 — first check if a validated public dataset (SubjECTive-QA, FinQA, etc.) covers the construct before designing novel prompts\n- SOURCE: arXiv:2410.20651 (SubjECTive-QA NeurIPS 2024), 2026-04-25 dream cycle\n",
+  "action": "append",
+  "apply_status": "applied"
+}

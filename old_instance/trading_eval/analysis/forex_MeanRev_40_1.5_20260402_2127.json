@@ -1,0 +1,92 @@
+{
+  "strategy": "forex_MeanRev_40_1.5",
+  "category": "forex",
+  "round": 1,
+  "tickers": [
+    "AUD_USD",
+    "EUR_GBP",
+    "EUR_JPY",
+    "EUR_USD",
+    "GBP_JPY",
+    "GBP_USD",
+    "NZD_USD",
+    "USD_CAD",
+    "USD_CHF",
+    "USD_JPY"
+  ],
+  "n_trades": 1913,
+  "date_range": "2016-04-29 \u2013 2026-04-01",
+  "total_return": -1.0,
+  "cagr": -0.1601,
+  "sharpe": 0.2168,
+  "sortino": 0.1812,
+  "calmar": -0.0721,
+  "skewness": -1.5727,
+  "kurtosis": 11.9651,
+  "max_drawdown": -2.2226,
+  "max_consec_losses": 9,
+  "win_rate": 0.5876,
+  "profit_factor": 1.2081,
+  "avg_return": 0.065,
+  "avg_win": 0.6427,
+  "avg_loss": -0.7607,
+  "kelly_fraction": 0.0993,
+  "spy_correlation": 0.0829,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 17,
+      "sharpe": -1.5352,
+      "sortino": -1.133,
+      "win_rate": 0.4118,
+      "avg_return": -0.9258,
+      "max_dd": -1.823
+    },
+    "bear": {
+      "n_trades": 50,
+      "sharpe": 0.3944,
+      "sortino": 0.3377,
+      "win_rate": 0.62,
+      "avg_return": 0.1476,
+      "max_dd": -15.2772
+    },
+    "high_vol": {
+      "n_trades": 444,
+      "sharpe": 0.2982,
+      "sortino": 0.2549,
+      "win_rate": 0.5811,
+      "avg_return": 0.1018,
+      "max_dd": -161.079
+    },
+    "bull": {
+      "n_trades": 473,
+      "sharpe": 0.4987,
+      "sortino": 0.4666,
+      "win_rate": 0.5983,
+      "avg_return": 0.1133,
+      "max_dd": -1.2027
+    },
+    "low_vol_bull": {
+      "n_trades": 869,
+      "sharpe": 0.1002,
+      "sortino": 0.0812,
+      "win_rate": 0.5869,
+      "avg_return": 0.03,
+      "max_dd": -24.5077
+    },
+    "unknown": {
+      "n_trades": 60,
+      "sharpe": 0.5435,
+      "sortino": 0.534,
+      "win_rate": 0.5833,
+      "avg_return": 0.1325,
+      "max_dd": -4.5717
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}

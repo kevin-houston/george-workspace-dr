@@ -1,0 +1,82 @@
+{
+  "strategy": "intl_country_pairs_China_India",
+  "category": "international",
+  "round": 1,
+  "tickers": [
+    "FXI/INDA"
+  ],
+  "n_trades": 55,
+  "date_range": "2015-03-31 \u2013 2024-09-25",
+  "total_return": -0.383,
+  "cagr": -0.1,
+  "sharpe": -0.4309,
+  "sortino": -0.3036,
+  "calmar": -0.2543,
+  "skewness": -1.2949,
+  "kurtosis": 0.9933,
+  "max_drawdown": -0.3931,
+  "max_consec_losses": 5,
+  "win_rate": 0.6,
+  "profit_factor": 0.7203,
+  "avg_return": -0.007,
+  "avg_win": 0.0302,
+  "avg_loss": -0.0629,
+  "kelly_fraction": 0.0,
+  "spy_correlation": 0.3116,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 9,
+      "sharpe": -0.712,
+      "sortino": -0.5233,
+      "win_rate": 0.5556,
+      "avg_return": -0.0137,
+      "max_dd": -0.2239
+    },
+    "bull": {
+      "n_trades": 8,
+      "sharpe": -1.6241,
+      "sortino": -1.2203,
+      "win_rate": 0.375,
+      "avg_return": -0.0271,
+      "max_dd": -0.2088
+    },
+    "low_vol_bull": {
+      "n_trades": 35,
+      "sharpe": 0.071,
+      "sortino": 0.046,
+      "win_rate": 0.6857,
+      "avg_return": 0.0011,
+      "max_dd": -0.2339
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)"
+  ]
+}

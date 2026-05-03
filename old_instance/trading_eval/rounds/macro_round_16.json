@@ -1,0 +1,194 @@
+{
+  "round": 16,
+  "timestamp": "2026-03-29T18:44:31.739709",
+  "n_strategies": 43,
+  "n_tickers": 53,
+  "n_results": 371,
+  "bnh_avg": 1823.95,
+  "top20": [
+    {
+      "strategy": "GoldFlight_120",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 703.5116981132076,
+      "median_return": 246.66,
+      "avg_sharpe": 0.5594528301886792,
+      "avg_cagr": 9.942075471698113,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 42.203773584905655,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_140",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 614.627358490566,
+      "median_return": 203.53,
+      "avg_sharpe": 0.5078867924528302,
+      "avg_cagr": 8.780377358490567,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 43.579245283018864,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_150",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 555.3737735849057,
+      "median_return": 207.27,
+      "avg_sharpe": 0.5126603773584906,
+      "avg_cagr": 8.814905660377358,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 42.800000000000004,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_110",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 517.6290566037736,
+      "median_return": 223.15,
+      "avg_sharpe": 0.5404716981132075,
+      "avg_cagr": 9.403396226415094,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 41.098113207547165,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_130",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 476.8269811320755,
+      "median_return": 150.18,
+      "avg_sharpe": 0.4422641509433963,
+      "avg_cagr": 7.265283018867924,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 42.99811320754717,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_90",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 440.29188679245283,
+      "median_return": 175.92,
+      "avg_sharpe": 0.4800188679245283,
+      "avg_cagr": 8.048301886792453,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 39.75283018867925,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_100",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 423.8090566037736,
+      "median_return": 152.85,
+      "avg_sharpe": 0.45873584905660375,
+      "avg_cagr": 7.711320754716981,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 40.58679245283019,
+      "n_tickers": 53
+    }
+  ],
+  "family_ranking": {
+    "macro": 533.1528301886793
+  },
+  "sector_ranking": {
+    "auto": 2951.8138095238096,
+    "tech": 1271.9125000000001,
+    "industrial": 319.0159523809524,
+    "financial": 305.88690476190476,
+    "transport": 253.99095238095236,
+    "defense": 179.30457142857142,
+    "staples": 177.4676785714286,
+    "energy": 174.24755102040814,
+    "healthcare": 168.42448979591836
+  },
+  "all_strategies": [
+    {
+      "strategy": "GoldFlight_120",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 703.5116981132076,
+      "median_return": 246.66,
+      "avg_sharpe": 0.5594528301886792,
+      "avg_cagr": 9.942075471698113,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 42.203773584905655,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_140",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 614.627358490566,
+      "median_return": 203.53,
+      "avg_sharpe": 0.5078867924528302,
+      "avg_cagr": 8.780377358490567,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 43.579245283018864,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_150",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 555.3737735849057,
+      "median_return": 207.27,
+      "avg_sharpe": 0.5126603773584906,
+      "avg_cagr": 8.814905660377358,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 42.800000000000004,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_110",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 517.6290566037736,
+      "median_return": 223.15,
+      "avg_sharpe": 0.5404716981132075,
+      "avg_cagr": 9.403396226415094,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 41.098113207547165,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_130",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 476.8269811320755,
+      "median_return": 150.18,
+      "avg_sharpe": 0.4422641509433963,
+      "avg_cagr": 7.265283018867924,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 42.99811320754717,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_90",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 440.29188679245283,
+      "median_return": 175.92,
+      "avg_sharpe": 0.4800188679245283,
+      "avg_cagr": 8.048301886792453,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 39.75283018867925,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_100",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 423.8090566037736,
+      "median_return": 152.85,
+      "avg_sharpe": 0.45873584905660375,
+      "avg_cagr": 7.711320754716981,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 40.58679245283019,
+      "n_tickers": 53
+    }
+  ]
+}

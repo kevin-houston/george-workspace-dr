@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-05-memory-marketsenseai2",
+  "date": "2026-04-05",
+  "source": "MarketSenseAI 2.0 (arXiv:2502.00415, Feb 2026)",
+  "source_url": "https://arxiv.org/abs/2502.00415",
+  "title": "Add MarketSenseAI 2.0 findings to MEMORY.md",
+  "rationale": "MarketSenseAI 2.0 achieves Sharpe 2.13\u20132.87 on S&P 100/500 using a 5-agent RAG system with monthly rebalancing. Its Fundamentals Agent uses sequential LLM processing (8-K summary \u2192 earnings call summary \u2192 5-quarter consolidation) \u2014 the exact pipeline blueprint for R28's EarningsQualityAgent. HyDE retrieval on free EDGAR API makes it cost-feasible.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n## AI Research Findings (Dream Cycle 2026-04-05)\n\n### MarketSenseAI 2.0 \u2014 RAG + 5-Agent Stock Analysis (arXiv:2502.00415, Feb 2026)\n- **5 sequential agents**: News \u2192 Fundamentals \u2192 Dynamics \u2192 Macroeconomic \u2192 Signal (Chain-of-Thought)\n- **Performance**: Sharpe 2.13\u20132.87 on S&P 100/500; win rate ~77%; 125.9% vs benchmark 73.5% (2023-2024)\n- **Fundamentals Agent pipeline**: (1) summarize 8-K/10-Q \u2192 (2) summarize earnings call Q&A \u2192 (3) consolidate with 5 quarters of EPS data\n- **RAG method**: Hypothetical Dense Embeddings (HyDE); context precision \u2265 0.98; free EDGAR API for filings\n- **R28 application**: Use this 3-step Fundamentals Agent pipeline as the EarningsQualityAgent design\n  \u2192 Step 1: Pull 8-K from EDGAR API, summarize for this quarter's earnings beat/miss and one-time items\n  \u2192 Step 2: Score Q&A section of earnings call for management tone and quality of beat\n  \u2192 Step 3: Compare vs prior 5 quarters' EPS history to assess persistence\n- **Open-source path**: Llama 3 70B achieves F1 0.869 (vs Claude 3.5 Sonnet F1 0.929) at 80% cost reduction\n- Full knowledge base entry: /workspace/group/knowledge-base/raw/2026-04-05_marketsenseai2-rag-agent-stock-analysis.md\n\n### Multi-Agent LLM Benchmarking on SEC Filings (arXiv:2603.22651, March 2026)\n- 4 orchestration patterns \u00d7 5 LLMs on 10,000 filings (10-K, 10-Q, 8-K)\n- **Winner**: Hierarchical Supervisor-Worker \u2014 98.5% of reflexive accuracy at 60.7% cost ($0.26/doc)\n- For R28 backtesting (small volume): reflexive self-correcting is fine; degradation only at 25K+ docs/day\n- Earnings quality fields (one-time items, accruals) must be added as domain-specific hard constraints outside LLM\n- Key failure modes: temporal confusion (FY vs quarterly), unit/scale mismatches \u2014 build explicit guards\n- Full knowledge base entry: /workspace/group/knowledge-base/raw/2026-04-05_multiagent-llm-sec-benchmarking.md\n",
+  "action": "append",
+  "apply_status": "applied"
+}

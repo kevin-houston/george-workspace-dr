@@ -1,0 +1,89 @@
+{
+  "strategy": "intl_valuation_momentum",
+  "category": "international",
+  "round": 1,
+  "tickers": [
+    "EEM",
+    "EWH",
+    "EWP",
+    "EWU",
+    "EWW",
+    "EWZ",
+    "FXI",
+    "TUR"
+  ],
+  "n_trades": 18,
+  "date_range": "2018-01-31 \u2013 2023-01-31",
+  "total_return": -0.7405,
+  "cagr": -0.5931,
+  "sharpe": -1.4774,
+  "sortino": -1.2131,
+  "calmar": -0.801,
+  "skewness": -0.2724,
+  "kurtosis": -0.0702,
+  "max_drawdown": -0.7405,
+  "max_consec_losses": 4,
+  "win_rate": 0.3333,
+  "profit_factor": 0.3124,
+  "avg_return": -0.0608,
+  "avg_win": 0.0829,
+  "avg_loss": -0.1327,
+  "kelly_fraction": 0.0,
+  "spy_correlation": null,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 9,
+      "sharpe": -1.0619,
+      "sortino": -0.8659,
+      "win_rate": 0.4444,
+      "avg_return": -0.0498,
+      "max_dd": -0.5051
+    },
+    "bull": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "low_vol_bull": {
+      "n_trades": 9,
+      "sharpe": -2.1025,
+      "sortino": -1.6292,
+      "win_rate": 0.2222,
+      "avg_return": -0.0718,
+      "max_dd": -0.5286
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

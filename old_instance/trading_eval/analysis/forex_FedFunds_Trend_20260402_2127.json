@@ -1,0 +1,84 @@
+{
+  "strategy": "forex_FedFunds_Trend",
+  "category": "forex",
+  "round": 2,
+  "tickers": [
+    "EUR_GBP",
+    "EUR_JPY",
+    "GBP_JPY"
+  ],
+  "n_trades": 3,
+  "date_range": "2016-03-07 \u2013 2016-03-07",
+  "total_return": -17587.4469,
+  "cagr": 0.0,
+  "sharpe": 0.0,
+  "sortino": 0.0,
+  "calmar": 0.0,
+  "skewness": 0.0,
+  "kurtosis": 0.0,
+  "max_drawdown": -17587.4469,
+  "max_consec_losses": 1,
+  "win_rate": 0.6667,
+  "profit_factor": 5.8882,
+  "avg_return": 21.1553,
+  "avg_win": 38.2246,
+  "avg_loss": -12.9834,
+  "kelly_fraction": 0.25,
+  "spy_correlation": null,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bull": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "low_vol_bull": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.6667,
+      "avg_return": 21.1553,
+      "max_dd": -17587.4469
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

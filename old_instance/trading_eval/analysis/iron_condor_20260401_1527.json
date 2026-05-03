@@ -1,0 +1,111 @@
+{
+  "strategy": "iron_condor",
+  "category": "options",
+  "round": 28,
+  "tickers": [
+    "AAPL",
+    "AMZN",
+    "BAC",
+    "COST",
+    "CVX",
+    "GE",
+    "GOOGL",
+    "HD",
+    "IBM",
+    "JNJ",
+    "JPM",
+    "KO",
+    "MA",
+    "META",
+    "MO",
+    "MRK",
+    "MSFT",
+    "NFLX",
+    "NVDA",
+    "PFE",
+    "PG",
+    "QCOM",
+    "T",
+    "TSLA",
+    "TXN",
+    "UNH",
+    "V",
+    "VZ",
+    "WMT",
+    "XOM"
+  ],
+  "n_trades": 815,
+  "date_range": "2021-02-01 \u2013 2025-11-01",
+  "total_return": 6.5905,
+  "cagr": 0.0303,
+  "sharpe": 0.4593,
+  "sortino": 0.4025,
+  "calmar": 0.1449,
+  "skewness": -0.4929,
+  "kurtosis": -0.946,
+  "max_drawdown": -0.209,
+  "max_consec_losses": 7,
+  "win_rate": 0.6233,
+  "profit_factor": 1.3455,
+  "avg_return": 0.0027,
+  "avg_win": 0.0169,
+  "avg_loss": -0.0207,
+  "kelly_fraction": 0.1601,
+  "spy_correlation": -0.098,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 53,
+      "sharpe": -0.0299,
+      "sortino": -0.0273,
+      "win_rate": 0.5472,
+      "avg_return": -0.0002,
+      "max_dd": -0.114
+    },
+    "high_vol": {
+      "n_trades": 356,
+      "sharpe": 0.4791,
+      "sortino": 0.4461,
+      "win_rate": 0.5983,
+      "avg_return": 0.0029,
+      "max_dd": -0.1606
+    },
+    "bull": {
+      "n_trades": 296,
+      "sharpe": 0.6347,
+      "sortino": 0.5225,
+      "win_rate": 0.6689,
+      "avg_return": 0.0036,
+      "max_dd": -0.1384
+    },
+    "low_vol_bull": {
+      "n_trades": 110,
+      "sharpe": 0.1694,
+      "sortino": 0.1376,
+      "win_rate": 0.6182,
+      "avg_return": 0.001,
+      "max_dd": -0.2059
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

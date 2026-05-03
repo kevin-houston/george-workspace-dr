@@ -1,0 +1,82 @@
+{
+  "strategy": "Sell_in_May_Halloween",
+  "category": "seasonal",
+  "round": 1,
+  "tickers": [
+    "SPY"
+  ],
+  "n_trades": 12,
+  "date_range": "2015-01-02 \u2013 2025-10-01",
+  "total_return": 1.2706,
+  "cagr": 1.2706,
+  "sharpe": 3.1799,
+  "sortino": 14.8597,
+  "calmar": 49.7439,
+  "skewness": 0.6708,
+  "kurtosis": -0.6122,
+  "max_drawdown": -0.0255,
+  "max_consec_losses": 2,
+  "win_rate": 0.75,
+  "profit_factor": 18.9663,
+  "avg_return": 0.0736,
+  "avg_win": 0.1037,
+  "avg_loss": -0.0164,
+  "kelly_fraction": 0.25,
+  "spy_correlation": -0.2935,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bull": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.0,
+      "avg_return": -0.0164,
+      "max_dd": -0.0484
+    },
+    "low_vol_bull": {
+      "n_trades": 6,
+      "sharpe": 6.2962,
+      "sortino": 204563740.152,
+      "win_rate": 1.0,
+      "avg_return": 0.0591,
+      "max_dd": 0.0
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

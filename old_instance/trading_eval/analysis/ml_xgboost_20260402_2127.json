@@ -1,0 +1,101 @@
+{
+  "strategy": "ml_xgboost",
+  "category": "ml",
+  "round": 1,
+  "tickers": [
+    "AAPL",
+    "AMZN",
+    "BAC",
+    "COST",
+    "CVX",
+    "GOOGL",
+    "HD",
+    "JNJ",
+    "JPM",
+    "MA",
+    "META",
+    "MRK",
+    "MSFT",
+    "NVDA",
+    "PFE",
+    "PG",
+    "UNH",
+    "V",
+    "WMT",
+    "XOM"
+  ],
+  "n_trades": 17520,
+  "date_range": "2021-10-15 \u2013 2025-12-19",
+  "total_return": 93592008569283.14,
+  "cagr": 0.0223,
+  "sharpe": 0.2269,
+  "sortino": 0.2277,
+  "calmar": 0.0224,
+  "skewness": -0.0323,
+  "kurtosis": 4.2884,
+  "max_drawdown": -0.9967,
+  "max_consec_losses": 26,
+  "win_rate": 0.5355,
+  "profit_factor": 1.1991,
+  "avg_return": 0.0027,
+  "avg_win": 0.0301,
+  "avg_loss": -0.029,
+  "kelly_fraction": 0.0883,
+  "spy_correlation": 0.0816,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 1069,
+      "sharpe": 0.162,
+      "sortino": 0.1667,
+      "win_rate": 0.5173,
+      "avg_return": 0.0024,
+      "max_dd": -0.9442
+    },
+    "high_vol": {
+      "n_trades": 6019,
+      "sharpe": 0.0865,
+      "sortino": 0.0844,
+      "win_rate": 0.5235,
+      "avg_return": 0.0012,
+      "max_dd": -0.9994
+    },
+    "bull": {
+      "n_trades": 7010,
+      "sharpe": 0.3582,
+      "sortino": 0.3738,
+      "win_rate": 0.5462,
+      "avg_return": 0.0037,
+      "max_dd": -0.9175
+    },
+    "low_vol_bull": {
+      "n_trades": 3422,
+      "sharpe": 0.3539,
+      "sortino": 0.3689,
+      "win_rate": 0.5403,
+      "avg_return": 0.0033,
+      "max_dd": -0.748
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-24-001",
+  "date": "2026-04-24",
+  "source": "arXiv:2602.09504 — Seeing the Goal, Missing the Truth: Human Accountability for AI Bias (Cao, Jiang, Xu, Feb 2026)",
+  "source_url": "https://arxiv.org/abs/2602.09504",
+  "title": "New heuristic: Purpose-conditioned bias — never disclose downstream trading objective in LLM scoring prompts",
+  "rationale": "When an LLM is told its output will be used to predict stock returns or inform a trading decision, it exploits memorized training patterns to produce biased, goal-aligned scores. Pre-knowledge-cutoff performance inflates (+0.483pp/month, statistically significant); post-cutoff the advantage DISAPPEARS and becomes NEGATIVE (-5.37% quarterly OOS R²). This is a third LLM contamination vector, distinct from memorization-via-ticker (BlindTrade arXiv:2603.17692) and statistical extrapolation (arXiv:2604.02921). Root cause: the LLM acts as a prediction agent rather than a neutral measurement tool when it knows the goal. Fix is zero-cost: rewrite prompts to be goal-blind — use 'assess earnings quality' not 'to decide if we should trade PEAD'.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### Purpose-conditioned bias: never reveal downstream trading objective in LLM prompts\n- LESSON: When an LLM is told its output will be used to 'predict stock returns' or 'decide whether to initiate a trade', it exploits memorized training patterns to produce biased, goal-aligned scores. Pre-cutoff advantage: +0.483pp/month (p<0.05); post-cutoff: advantage collapses and OOS R² falls -5.37%/quarter. This is the 'purpose-conditioned cognition' effect — the LLM acts as a prediction agent rather than a neutral measurement tool.\n- LESSON: This is a THIRD LLM contamination vector (distinct from ticker memorization and extrapolation bias). Mitigation hierarchy: (1) Goal-blind prompts — never mention 'trading decision', 'PEAD trade', 'stock return prediction'. Say 'assess the fundamental quality of this earnings announcement' NOT 'to decide whether to initiate a PEAD trade'. (2) BlindTrade ticker anonymization (second vector). (3) Anti-extrapolation prompt (third vector, weak).\n- LESSON: Goal-blind prompts outperform goal-aware prompts OUT-OF-SAMPLE. The apparent in-sample boost from goal disclosure is memorization, not signal. Use blind prompts in all LLM scoring pipelines.\n- WHEN: ANY LLM prompt used for earnings quality scoring (R28 Phase 2 EarningsQualityAgent), pair plausibility scoring (R29 LLM filter), or any intermediate measure that feeds into a trading decision. Apply universally as a zero-cost prompt design rule.\n- SOURCE: arXiv:2602.09504 (Cao, Jiang, Xu — Feb 2026). Pre-cutoff n=earnings transcripts, GPT-4o-mini tested. Effect: +0.483pp/month IS, collapses post-cutoff.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

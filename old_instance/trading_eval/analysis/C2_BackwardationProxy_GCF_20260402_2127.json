@@ -1,0 +1,83 @@
+{
+  "strategy": "C2_BackwardationProxy_GCF",
+  "category": "commodity",
+  "round": 2,
+  "tickers": [
+    "GC=F"
+  ],
+  "n_trades": 30,
+  "date_range": "2016-02-05 \u2013 2023-11-27",
+  "total_return": 1.5466,
+  "cagr": 0.4534,
+  "sharpe": 0.8499,
+  "sortino": 9.7662,
+  "calmar": 3.5104,
+  "skewness": 4.2935,
+  "kurtosis": 19.5139,
+  "max_drawdown": -0.1292,
+  "max_consec_losses": 8,
+  "win_rate": 0.2667,
+  "profit_factor": 5.8219,
+  "avg_return": 0.0414,
+  "avg_win": 0.1874,
+  "avg_loss": -0.0117,
+  "kelly_fraction": 0.2209,
+  "spy_correlation": 0.6466,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 10,
+      "sharpe": -0.2141,
+      "sortino": -0.3353,
+      "win_rate": 0.2,
+      "avg_return": -0.001,
+      "max_dd": -0.0465
+    },
+    "bull": {
+      "n_trades": 4,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.0,
+      "avg_return": -0.0197,
+      "max_dd": -0.0767
+    },
+    "low_vol_bull": {
+      "n_trades": 14,
+      "sharpe": 1.3737,
+      "sortino": 22.3785,
+      "win_rate": 0.3571,
+      "avg_return": 0.0935,
+      "max_dd": -0.0593
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": true,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)",
+    "high SPY correlation (not market-neutral)"
+  ]
+}

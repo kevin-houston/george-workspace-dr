@@ -1,0 +1,99 @@
+{
+  "strategy": "intl_cross_country_momentum",
+  "category": "international",
+  "round": 1,
+  "tickers": [
+    "EEM",
+    "EWA",
+    "EWC",
+    "EWD",
+    "EWG",
+    "EWH",
+    "EWI",
+    "EWJ",
+    "EWP",
+    "EWQ",
+    "EWT",
+    "EWU",
+    "EWW",
+    "EWY",
+    "EWZ",
+    "FXI",
+    "INDA",
+    "TUR"
+  ],
+  "n_trades": 636,
+  "date_range": "2016-02-29 \u2013 2024-11-30",
+  "total_return": -0.9507,
+  "cagr": -0.0552,
+  "sharpe": -0.1144,
+  "sortino": -0.1126,
+  "calmar": -0.0573,
+  "skewness": -0.0608,
+  "kurtosis": 1.7531,
+  "max_drawdown": -0.964,
+  "max_consec_losses": 10,
+  "win_rate": 0.4858,
+  "profit_factor": 0.9148,
+  "avg_return": -0.0023,
+  "avg_win": 0.0505,
+  "avg_loss": -0.0522,
+  "kelly_fraction": 0.0,
+  "spy_correlation": -0.029,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 12,
+      "sharpe": 0.762,
+      "sortino": 0.86,
+      "win_rate": 0.5833,
+      "avg_return": 0.0142,
+      "max_dd": -0.1784
+    },
+    "bear": {
+      "n_trades": 18,
+      "sharpe": 1.6488,
+      "sortino": 2.4642,
+      "win_rate": 0.6667,
+      "avg_return": 0.0255,
+      "max_dd": -0.066
+    },
+    "high_vol": {
+      "n_trades": 150,
+      "sharpe": -0.0649,
+      "sortino": -0.0637,
+      "win_rate": 0.4933,
+      "avg_return": -0.0016,
+      "max_dd": -0.7609
+    },
+    "bull": {
+      "n_trades": 108,
+      "sharpe": -0.2456,
+      "sortino": -0.2297,
+      "win_rate": 0.4815,
+      "avg_return": -0.0048,
+      "max_dd": -0.6667
+    },
+    "low_vol_bull": {
+      "n_trades": 348,
+      "sharpe": -0.2112,
+      "sortino": -0.2088,
+      "win_rate": 0.4713,
+      "avg_return": -0.0038,
+      "max_dd": -0.9165
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

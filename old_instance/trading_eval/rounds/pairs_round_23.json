@@ -1,0 +1,27 @@
+{
+  "round": 23,
+  "timestamp": "2026-03-30T11:10:08.606214",
+  "n_results": 1,
+  "results": [
+    {
+      "raw_return": 94.14,
+      "cagr": 6.82,
+      "sharpe": 0.964,
+      "max_drawdown": -11.9,
+      "n_pairs": 10,
+      "pairs": [
+        "JNJ/UNH",
+        "LMT/NOC",
+        "DE/BA",
+        "UPS/BA",
+        "BAC/GS",
+        "BAC/WFC",
+        "JNJ/PFE",
+        "CVX/COP",
+        "COST/PG",
+        "PFE/UNH"
+      ],
+      "round": 23
+    }
+  ]
+}

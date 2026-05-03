@@ -1,0 +1,82 @@
+{
+  "strategy": "C2_NatGas_WinterSeasonal",
+  "category": "commodity",
+  "round": 2,
+  "tickers": [
+    "NG=F"
+  ],
+  "n_trades": 12,
+  "date_range": "2015-01-05 \u2013 2025-10-02",
+  "total_return": -0.8853,
+  "cagr": -0.8853,
+  "sharpe": -0.4001,
+  "sortino": -0.3623,
+  "calmar": -0.9418,
+  "skewness": -1.019,
+  "kurtosis": 1.8236,
+  "max_drawdown": -0.9401,
+  "max_consec_losses": 3,
+  "win_rate": 0.4167,
+  "profit_factor": 0.7345,
+  "avg_return": -0.0401,
+  "avg_win": 0.2663,
+  "avg_loss": -0.259,
+  "kelly_fraction": 0.0,
+  "spy_correlation": -0.37,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bull": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 1.0,
+      "avg_return": 0.3589,
+      "max_dd": 0.0
+    },
+    "low_vol_bull": {
+      "n_trades": 6,
+      "sharpe": -2.0135,
+      "sortino": -1.6936,
+      "win_rate": 0.1667,
+      "avg_return": -0.0786,
+      "max_dd": -0.4279
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)"
+  ]
+}

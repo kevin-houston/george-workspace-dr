@@ -1,0 +1,389 @@
+{
+  "metadata": {
+    "script": "r35b_ou_calibration.py",
+    "generated": "2026-04-15T21:50:24.280136",
+    "data_range": {
+      "train": "2015-2021",
+      "val": "2022-2023",
+      "test": "2024-2025"
+    },
+    "transaction_cost_bps": 10,
+    "lookback_days": 60,
+    "r29_baseline": {
+      "z_entry": 2.0,
+      "z_exit": 0.5,
+      "z_stop": 4.0
+    }
+  },
+  "pairs": {
+    "MSFT/TXN": {
+      "ou_params": {
+        "kappa": 16.3373,
+        "theta": 0.026354,
+        "sigma": 7.41542,
+        "half_life_days": 10.7
+      },
+      "optimal_thresholds": {
+        "z_entry": 1.706,
+        "z_exit": 0.479,
+        "z_stop": 3.757
+      },
+      "validation_sharpe": 3.1112,
+      "test_sharpe_calibrated": 2.7866,
+      "test_sharpe_fixed": 3.4405,
+      "test_sharpe_delta": -0.6539,
+      "test_details_calibrated": {
+        "sharpe": 2.7866,
+        "annual_ret": 12.1741,
+        "n_trades": 13,
+        "max_drawdown": -1.5377,
+        "win_rate": 0.0
+      },
+      "test_details_fixed": {
+        "sharpe": 3.4405,
+        "annual_ret": 12.423,
+        "n_trades": 12,
+        "max_drawdown": -1.5198,
+        "win_rate": 0.0
+      },
+      "data_points": {
+        "train": 1703,
+        "val": 501,
+        "test": 501
+      }
+    },
+    "TXN/META": {
+      "ou_params": {
+        "kappa": 20.6275,
+        "theta": 0.087931,
+        "sigma": 8.399151,
+        "half_life_days": 8.5
+      },
+      "optimal_thresholds": {
+        "z_entry": 1.321,
+        "z_exit": 1.248,
+        "z_stop": 4.974
+      },
+      "validation_sharpe": 3.8673,
+      "test_sharpe_calibrated": 1.7948,
+      "test_sharpe_fixed": 2.476,
+      "test_sharpe_delta": -0.6812,
+      "test_details_calibrated": {
+        "sharpe": 1.7948,
+        "annual_ret": 7.8454,
+        "n_trades": 23,
+        "max_drawdown": -3.2831,
+        "win_rate": 0.1739
+      },
+      "test_details_fixed": {
+        "sharpe": 2.476,
+        "annual_ret": 12.7211,
+        "n_trades": 15,
+        "max_drawdown": -2.0463,
+        "win_rate": 0.1333
+      },
+      "data_points": {
+        "train": 832,
+        "val": 501,
+        "test": 501
+      }
+    },
+    "AMZN/TSLA": {
+      "ou_params": {
+        "kappa": 9.5128,
+        "theta": -0.002195,
+        "sigma": 6.315574,
+        "half_life_days": 18.4
+      },
+      "optimal_thresholds": {
+        "z_entry": 1.707,
+        "z_exit": 0.922,
+        "z_stop": 3.873
+      },
+      "validation_sharpe": 3.1902,
+      "test_sharpe_calibrated": 2.5959,
+      "test_sharpe_fixed": 2.5372,
+      "test_sharpe_delta": 0.0587,
+      "test_details_calibrated": {
+        "sharpe": 2.5959,
+        "annual_ret": 12.2341,
+        "n_trades": 14,
+        "max_drawdown": -1.5843,
+        "win_rate": 0.0
+      },
+      "test_details_fixed": {
+        "sharpe": 2.5372,
+        "annual_ret": 12.7785,
+        "n_trades": 10,
+        "max_drawdown": -1.8305,
+        "win_rate": 0.0
+      },
+      "data_points": {
+        "train": 1703,
+        "val": 501,
+        "test": 501
+      }
+    },
+    "NVDA/META": {
+      "ou_params": {
+        "kappa": 14.221,
+        "theta": -0.077968,
+        "sigma": 6.959804,
+        "half_life_days": 12.3
+      },
+      "optimal_thresholds": {
+        "z_entry": 1.759,
+        "z_exit": 0.316,
+        "z_stop": 4.548
+      },
+      "validation_sharpe": 3.1677,
+      "test_sharpe_calibrated": 2.3674,
+      "test_sharpe_fixed": 2.379,
+      "test_sharpe_delta": -0.0116,
+      "test_details_calibrated": {
+        "sharpe": 2.3674,
+        "annual_ret": 10.1732,
+        "n_trades": 11,
+        "max_drawdown": -2.2588,
+        "win_rate": 0.0
+      },
+      "test_details_fixed": {
+        "sharpe": 2.379,
+        "annual_ret": 7.8683,
+        "n_trades": 8,
+        "max_drawdown": -2.2588,
+        "win_rate": 0.0
+      },
+      "data_points": {
+        "train": 832,
+        "val": 501,
+        "test": 501
+      }
+    },
+    "NVDA/TXN": {
+      "ou_params": {
+        "kappa": 13.0075,
+        "theta": -0.151201,
+        "sigma": 6.993283,
+        "half_life_days": 13.4
+      },
+      "optimal_thresholds": {
+        "z_entry": 2.457,
+        "z_exit": 1.368,
+        "z_stop": 4.784
+      },
+      "validation_sharpe": 2.5063,
+      "test_sharpe_calibrated": 2.043,
+      "test_sharpe_fixed": 2.4056,
+      "test_sharpe_delta": -0.3626,
+      "test_details_calibrated": {
+        "sharpe": 2.043,
+        "annual_ret": 4.6315,
+        "n_trades": 7,
+        "max_drawdown": -1.0477,
+        "win_rate": 0.0
+      },
+      "test_details_fixed": {
+        "sharpe": 2.4056,
+        "annual_ret": 9.7438,
+        "n_trades": 12,
+        "max_drawdown": -2.9902,
+        "win_rate": 0.0833
+      },
+      "data_points": {
+        "train": 1703,
+        "val": 501,
+        "test": 501
+      }
+    },
+    "GOOGL/META": {
+      "ou_params": {
+        "kappa": 19.6583,
+        "theta": 0.037357,
+        "sigma": 8.405508,
+        "half_life_days": 8.9
+      },
+      "optimal_thresholds": {
+        "z_entry": 1.453,
+        "z_exit": 1.135,
+        "z_stop": 4.612
+      },
+      "validation_sharpe": 4.1958,
+      "test_sharpe_calibrated": 2.0138,
+      "test_sharpe_fixed": 1.958,
+      "test_sharpe_delta": 0.0558,
+      "test_details_calibrated": {
+        "sharpe": 2.0138,
+        "annual_ret": 8.583,
+        "n_trades": 18,
+        "max_drawdown": -2.8642,
+        "win_rate": 0.0556
+      },
+      "test_details_fixed": {
+        "sharpe": 1.958,
+        "annual_ret": 7.5107,
+        "n_trades": 10,
+        "max_drawdown": -2.8642,
+        "win_rate": 0.1
+      },
+      "data_points": {
+        "train": 832,
+        "val": 501,
+        "test": 501
+      }
+    },
+    "XOM/CVX": {
+      "ou_params": {
+        "kappa": 12.2327,
+        "theta": -0.229305,
+        "sigma": 6.723812,
+        "half_life_days": 14.3
+      },
+      "optimal_thresholds": {
+        "z_entry": 1.602,
+        "z_exit": 0.045,
+        "z_stop": 4.358
+      },
+      "validation_sharpe": 2.8876,
+      "test_sharpe_calibrated": 1.4922,
+      "test_sharpe_fixed": 2.0742,
+      "test_sharpe_delta": -0.582,
+      "test_details_calibrated": {
+        "sharpe": 1.4922,
+        "annual_ret": 6.51,
+        "n_trades": 8,
+        "max_drawdown": -3.4377,
+        "win_rate": 0.125
+      },
+      "test_details_fixed": {
+        "sharpe": 2.0742,
+        "annual_ret": 7.3031,
+        "n_trades": 9,
+        "max_drawdown": -2.779,
+        "win_rate": 0.1111
+      },
+      "data_points": {
+        "train": 1703,
+        "val": 501,
+        "test": 501
+      }
+    },
+    "JPM/GS": {
+      "ou_params": {
+        "kappa": 11.2811,
+        "theta": 0.291704,
+        "sigma": 6.521502,
+        "half_life_days": 15.5
+      },
+      "optimal_thresholds": {
+        "z_entry": 1.623,
+        "z_exit": 1.028,
+        "z_stop": 3.828
+      },
+      "validation_sharpe": 4.4656,
+      "test_sharpe_calibrated": 1.9545,
+      "test_sharpe_fixed": 1.8104,
+      "test_sharpe_delta": 0.1441,
+      "test_details_calibrated": {
+        "sharpe": 1.9545,
+        "annual_ret": 7.0315,
+        "n_trades": 15,
+        "max_drawdown": -3.3347,
+        "win_rate": 0.1333
+      },
+      "test_details_fixed": {
+        "sharpe": 1.8104,
+        "annual_ret": 7.5544,
+        "n_trades": 11,
+        "max_drawdown": -3.9525,
+        "win_rate": 0.1818
+      },
+      "data_points": {
+        "train": 1703,
+        "val": 501,
+        "test": 501
+      }
+    },
+    "MSFT/GOOGL": {
+      "ou_params": {
+        "kappa": 16.8916,
+        "theta": 0.060539,
+        "sigma": 7.458768,
+        "half_life_days": 10.3
+      },
+      "optimal_thresholds": {
+        "z_entry": 1.72,
+        "z_exit": 0.201,
+        "z_stop": 2.791
+      },
+      "validation_sharpe": 4.2071,
+      "test_sharpe_calibrated": 1.2956,
+      "test_sharpe_fixed": 2.1792,
+      "test_sharpe_delta": -0.8836,
+      "test_details_calibrated": {
+        "sharpe": 1.2956,
+        "annual_ret": 5.9661,
+        "n_trades": 18,
+        "max_drawdown": -3.7584,
+        "win_rate": 0.5
+      },
+      "test_details_fixed": {
+        "sharpe": 2.1792,
+        "annual_ret": 9.4387,
+        "n_trades": 10,
+        "max_drawdown": -2.219,
+        "win_rate": 0.1
+      },
+      "data_points": {
+        "train": 832,
+        "val": 501,
+        "test": 501
+      }
+    },
+    "AMZN/GOOGL": {
+      "ou_params": {
+        "kappa": 11.7333,
+        "theta": -0.220856,
+        "sigma": 6.726147,
+        "half_life_days": 14.9
+      },
+      "optimal_thresholds": {
+        "z_entry": 2.978,
+        "z_exit": 0.035,
+        "z_stop": 3.924
+      },
+      "validation_sharpe": 3.3111,
+      "test_sharpe_calibrated": 1.3071,
+      "test_sharpe_fixed": 2.2675,
+      "test_sharpe_delta": -0.9604,
+      "test_details_calibrated": {
+        "sharpe": 1.3071,
+        "annual_ret": 2.5879,
+        "n_trades": 3,
+        "max_drawdown": -2.4168,
+        "win_rate": 0.3333
+      },
+      "test_details_fixed": {
+        "sharpe": 2.2675,
+        "annual_ret": 9.2491,
+        "n_trades": 11,
+        "max_drawdown": -2.4168,
+        "win_rate": 0.0909
+      },
+      "data_points": {
+        "train": 832,
+        "val": 501,
+        "test": 501
+      }
+    }
+  },
+  "aggregate": {
+    "n_pairs_evaluated": 10,
+    "n_pairs_improved": 3,
+    "avg_sharpe_delta": -0.3877,
+    "median_sharpe_delta": -0.4723,
+    "avg_test_sharpe_calibrated": 1.9651,
+    "avg_test_sharpe_fixed": 2.3528
+  },
+  "summary": "Calibrated thresholds improve test Sharpe in 3/10 pairs. Average delta: -0.388 (median: -0.472). Mean test Sharpe: 1.965 calibrated vs 2.353 fixed."
+}

@@ -1,0 +1,84 @@
+{
+  "strategy": "IM6-OilShock_Signal",
+  "category": "volatility",
+  "round": 2,
+  "tickers": [
+    "GLD",
+    "SPY"
+  ],
+  "n_trades": 192,
+  "date_range": "2015-02-03 \u2013 2026-03-25",
+  "total_return": 1.5816575806619205e+35,
+  "cagr": 157.4691,
+  "sharpe": 0.4114,
+  "sortino": 0.396,
+  "calmar": 0.1504,
+  "skewness": -0.5356,
+  "kurtosis": 8.9278,
+  "max_drawdown": -1046.6593,
+  "max_consec_losses": 7,
+  "win_rate": 0.5729,
+  "profit_factor": 1.5258,
+  "avg_return": 0.4929,
+  "avg_win": 2.4967,
+  "avg_loss": -2.1951,
+  "kelly_fraction": 0.1974,
+  "spy_correlation": 0.3038,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 4,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 1.0,
+      "avg_return": 2.9429,
+      "max_dd": 0.0
+    },
+    "bear": {
+      "n_trades": 6,
+      "sharpe": -0.1719,
+      "sortino": -0.2256,
+      "win_rate": 0.3333,
+      "avg_return": -0.4272,
+      "max_dd": -85.304
+    },
+    "high_vol": {
+      "n_trades": 63,
+      "sharpe": 1.343,
+      "sortino": 2.3503,
+      "win_rate": 0.6984,
+      "avg_return": 1.0767,
+      "max_dd": -6074.646
+    },
+    "bull": {
+      "n_trades": 22,
+      "sharpe": 1.013,
+      "sortino": 2.0566,
+      "win_rate": 0.5455,
+      "avg_return": 1.3095,
+      "max_dd": -13.0859
+    },
+    "low_vol_bull": {
+      "n_trades": 91,
+      "sharpe": 0.2262,
+      "sortino": 0.2076,
+      "win_rate": 0.5165,
+      "avg_return": 0.2461,
+      "max_dd": -15.3762
+    },
+    "unknown": {
+      "n_trades": 6,
+      "sharpe": -2.5947,
+      "sortino": -1.9124,
+      "win_rate": 0.1667,
+      "avg_return": -5.6005,
+      "max_dd": -45.0568
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}

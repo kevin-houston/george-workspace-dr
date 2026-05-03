@@ -1,0 +1,14 @@
+{
+  "id": "r28-llm-extrapolation-bias-2026-04-09",
+  "date": "2026-04-09",
+  "source": "arXiv:2604.02921 \u2014 Debiasing LLMs by Fine-tuning (Gao, Jiang, Yan, April 2026)",
+  "source_url": "https://arxiv.org/abs/2604.02921",
+  "title": "R28 Prompt Amendment \u2014 Suppress LLM Extrapolation Bias in EarningsQualityAgent",
+  "rationale": "Brand-new April 2026 paper (arXiv:2604.02921): LLMs have systematic extrapolation bias \u2014 they over-weight recent trends when making financial predictions. In cross-sectional stock return prediction, bare LLMs extrapolate recent price momentum into their quality judgments. This is a newly-identified mechanism that explains why R26 IndicatorAgent failed (LLM penalized 'overbought gaps' that ARE the PEAD signal) and reinforces why bare LLM calls without RAG produce poor PEAD filters. The fix: explicitly instruct the LLM in the EarningsQualityAgent prompt to IGNORE recent price performance. This is a zero-cost prompt patch to the R28 design.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "apply_status": "applied",
+  "content": "\n### LLM Extrapolation Bias \u2014 Suppress in EarningsQualityAgent Prompt (arXiv:2604.02921, April 2026)\n- **Paper**: 'Debiasing LLMs by Fine-tuning' \u2014 arXiv:2604.02921, April 2026, Gao, Jiang, Yan\n- **Finding**: LLMs systematically over-extrapolate recent trends in cross-sectional stock return prediction. When given financial data and asked to make predictions, LLMs load positively on recent price momentum in ways that rational forecasters do not. LoRA fine-tuning on rational benchmarks corrects this bias out-of-sample.\n- **Root cause of R26 failure (additional mechanism)**: Beyond 'no RAG context', the IndicatorAgent may have also been penalizing stocks with recent large gaps because the LLM extrapolated 'stock just had a big move, likely to mean-revert' \u2014 the opposite of the PEAD signal.\n- **R28 Prompt Amendment \u2014 Zero-cost fix**:\n  Add this line to ALL EarningsQualityAgent prompts:\n  'IMPORTANT: Do not consider this company\\'s recent stock price performance, momentum, or valuation ratios in your assessment. Focus exclusively on the content, quality, and consistency of the earnings announcement and management commentary.'\n- **Why this matters**: Without this instruction, the LLM may score a stock that gapped up +8% on earnings as 'high risk' (extrapolating mean reversion) when the PEAD signal specifically wants stocks that gapped up significantly. This is a zero-token-cost fix that removes a systematic bias source.\n- **Generalization**: Apply this instruction to ANY LLM being asked to assess fundamentals or signal quality in an event-driven strategy. The LLM should be a fundamental judge, not a technical forecaster.\n"
+}

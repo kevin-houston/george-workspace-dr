@@ -1,0 +1,82 @@
+{
+  "strategy": "Santa_Claus_Rally",
+  "category": "seasonal",
+  "round": 1,
+  "tickers": [
+    "SPY"
+  ],
+  "n_trades": 12,
+  "date_range": "2015-01-02 \u2013 2025-12-22",
+  "total_return": 0.0801,
+  "cagr": 0.0801,
+  "sharpe": 1.561,
+  "sortino": 1.6383,
+  "calmar": 3.9362,
+  "skewness": 0.255,
+  "kurtosis": 1.1269,
+  "max_drawdown": -0.0203,
+  "max_consec_losses": 1,
+  "win_rate": 0.6667,
+  "profit_factor": 3.299,
+  "avg_return": 0.0065,
+  "avg_win": 0.0141,
+  "avg_loss": -0.0114,
+  "kelly_fraction": 0.25,
+  "spy_correlation": 0.1902,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 1.0,
+      "avg_return": 0.0179,
+      "max_dd": 0.0
+    },
+    "bull": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "low_vol_bull": {
+      "n_trades": 7,
+      "sharpe": 0.2752,
+      "sortino": 0.2591,
+      "win_rate": 0.4286,
+      "avg_return": 0.001,
+      "max_dd": -0.0233
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

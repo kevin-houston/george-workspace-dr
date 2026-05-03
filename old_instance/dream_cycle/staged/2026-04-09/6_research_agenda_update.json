@@ -1,0 +1,14 @@
+{
+  "id": "research-agenda-update-2026-04-09",
+  "date": "2026-04-09",
+  "source": "Dream Cycle Scan 2026-04-09",
+  "source_url": "internal",
+  "title": "Research Agenda Update \u2014 R28 Amendments + R35 MRP Diagnostic Concept",
+  "rationale": "Consolidate tonight's R28 amendments into the agenda section and add the R35 MRP diagnostic concept.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "apply_status": "applied",
+  "content": "\n## Research Agenda Update (2026-04-09)\n\n- **Round 28** \u2014 TradingAgents multi-agent overlay on PEAD \u2014 QUEUED (next to run)\n  - EarningsQualityAgent: 4-score system \u2014 Specificity (50%), Sentiment (30%), Risk density (20%), + VETO if metric_consistency_score < 35\n  - All LLM prompts include anti-extrapolation instruction: 'Ignore recent price performance; assess fundamentals only'\n  - NewsAgent: FinBERT on top 3 headlines; exit sentinel if sentiment < -0.5\n  - RegimeGuard: VIX > 30 skip; SPY 200/50 SMA crossover = reduce size 50%\n  - NOR amplifier: manager evades >25% analyst Q&As \u2192 upsize by 25%\n\n- **Round 29** \u2014 LLM semantic filter on equity pairs trading \u2014 QUEUED\n  - Full pipeline: factor residualize \u2192 SPONGEsym \u2192 SAE cluster \u2192 cointegration \u2192 LLM plausibility \u2192 Kelly trade\n\n- **Round 31** \u2014 Text-based PEAD (FinBERT + 3-day confirmation, enter day 3) \u2014 QUEUED\n\n- **Round 32** \u2014 SPX put-writing with VIX-Kelly hybrid sizing \u2014 QUEUED\n\n- **Round 33** (concept) \u2014 Alpha-R1 RL dynamic factor gating on 146-strategy library\n\n- **Round 34** (concept) \u2014 Institutional ownership as PEAD amplifier (13-F EDGAR data)\n\n- **Round 35** (NEW concept) \u2014 MRP Diagnostic Pass on Backtest Library\n  - Apply Minimum Regime Performance analysis (arXiv:2604.08356) to rounds 1-30 results\n  - Use FRED-based macro regime labels from macro_harness.py to tag historical periods\n  - Identify which top strategies are bull-market-only vs. regime-resilient\n  - Output: regime durability rating for each top strategy \u2192 deployment priority list\n  - Tool: Alexander & Fabozzi GitHub code + existing macro_harness regime labels\n  - Optional extension: add skewness dispersion (arXiv:2604.07870) as RegimeGuard signal \u2014 free to compute from yfinance daily returns across S&P 500\n"
+}

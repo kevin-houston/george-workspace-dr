@@ -1,0 +1,14 @@
+{
+  "id": "heuristic-crisp-optimizer-r33-2026-04-27",
+  "date": "2026-04-27",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2604.23833",
+  "title": "Add CRISP optimizer heuristic for factor portfolio construction",
+  "rationale": "CRISP (arXiv:2604.23833) achieves 80-94% of oracle Sharpe across all covariance regimes and sample sizes, dominates Markowitz and Ledoit-Wolf, and has a simple IC-adaptive formula for the regularization parameter γ. This is directly actionable for R33 factor portfolio construction and for R28/R29 alpha signal deployment. The key lesson is: γ ≈ 0.5 when IC is uncertain; γ scales up toward Markowitz as IC increases. This generalizes the Lasso sparse weighting (already staged 2026-04-24) to a more principled optimizer that works for any alpha signal quality level.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### CRISP optimizer for alpha-signal portfolio construction (R33)\n- LESSON: When combining alpha factor signals into a portfolio, CRISP (P_γ·w = μ where P_γ = (1−γ)D + γΣ) achieves 80-94% of oracle Sharpe across all regimes. Standard Markowitz (γ=1) overfits with limited history; inverse-variance (γ=0) ignores alpha. CRISP interpolates optimally. Optimal γ* ≈ 1/(1 + c·κ(C)²·N/(T·IC²)). Safe default: γ=0.5. Higher IC → higher γ (more Markowitz). Ill-conditioned covariance or low IC → lower γ (more regularization toward inverse-variance).\n- LESSON: For factor portfolio with estimated IC ≈ 0.05-0.10 (typical for mined factors), γ=0.3-0.5 is appropriate. For IC > 0.12 (QuantaAlpha-level), γ=0.6-0.7. Plateau width 0.38 means γ choices within ±0.2 of optimal are nearly equivalent OOS.\n- WHEN: R33 factor portfolio construction, R28 Phase 2 quality score combination, any multi-signal combination with known alpha estimates.\n- SOURCE: arXiv:2604.23833 (Wuebben, April 2026)\n",
+  "action": "append",
+  "apply_status": "applied"
+}

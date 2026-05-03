@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-05-r28-fundamentals-agent-design",
+  "date": "2026-04-05",
+  "source": "MarketSenseAI 2.0 (arXiv:2502.00415) + Multi-Agent Benchmarking (arXiv:2603.22651)",
+  "source_url": "https://arxiv.org/abs/2502.00415",
+  "title": "Update R28 research agenda with concrete EarningsQualityAgent design",
+  "rationale": "R28 (TradingAgents multi-agent PEAD overlay) is the next queued round. Tonight's research surfaced a validated architectural blueprint: MarketSenseAI's Fundamentals Agent 3-step pipeline achieves Sharpe 2.87 using exactly the data sources we have (EDGAR API, earnings transcripts). This stages a concrete implementation plan for Kevin to review before running R28.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n## R28 Implementation Blueprint (Updated 2026-04-05)\n\nBased on MarketSenseAI 2.0 architecture + Multi-Agent Benchmarking findings:\n\n### EarningsQualityAgent Design\n```\nFor each PEAD signal (earnings beat detected):\n  1. Pull 8-K from EDGAR API (free) \u2014 summarize: beat magnitude, one-time items, guidance\n  2. Pull earnings call Q&A section \u2014 score: management tone, surprise framing, analyst reception\n  3. Compare vs prior 5 quarters EPS history \u2014 is this beat persistent or one-off?\n  4. Output: quality_score (0-100). Skip PEAD trade if quality_score < 50.\n```\n\n### NewsAgent Design  \n- Pull top 3 headlines from day of earnings via free news API (e.g., GNews, NewsAPI free tier)\n- FinBERT sentiment on headlines \u2192 negative sentiment < -0.5 = skip (exit sentinel pattern)\n- Distinguish: 'earnings beat' vs 'beat but lowered guidance' vs 'beat on cost cuts only'\n\n### RegimeGuard\n- VIX > 30 \u2192 skip all new PEAD entries (consistent with R25 lesson on VIX-Kelly)\n- SPY 50-day SMA < 200-day SMA \u2192 reduce position size 50%\n\n### Cost Estimate\n- EDGAR API: free\n- LLM calls: ~$0.05-0.15 per event with Claude Haiku / Llama 3 70B\n- ~30 PEAD events/quarter \u00d7 $0.15 = ~$4.50/quarter in API costs\n\n### Hypothesis\n- EarningsQualityAgent HELPS PEAD (unlike IndicatorAgent which hurt \u2014 R26 lesson)\n- Because: quality filter distinguishes 'organic beat' from 'one-time item' \u2014 directly targets why some PEAD signals fail\n- NewsAgent adds RAG grounding (fixes bare-LLM hallucination failure from R26)\n",
+  "action": "append",
+  "apply_status": "applied"
+}

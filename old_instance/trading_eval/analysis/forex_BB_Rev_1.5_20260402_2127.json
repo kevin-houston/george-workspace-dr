@@ -1,0 +1,92 @@
+{
+  "strategy": "forex_BB_Rev_1.5",
+  "category": "forex",
+  "round": 2,
+  "tickers": [
+    "AUD_USD",
+    "EUR_GBP",
+    "EUR_JPY",
+    "EUR_USD",
+    "GBP_JPY",
+    "GBP_USD",
+    "NZD_USD",
+    "USD_CAD",
+    "USD_CHF",
+    "USD_JPY"
+  ],
+  "n_trades": 2620,
+  "date_range": "2016-04-01 \u2013 2026-04-01",
+  "total_return": -1.0,
+  "cagr": -0.6338,
+  "sharpe": 0.0936,
+  "sortino": 0.0833,
+  "calmar": -0.5384,
+  "skewness": -1.1112,
+  "kurtosis": 11.3893,
+  "max_drawdown": -1.1772,
+  "max_consec_losses": 8,
+  "win_rate": 0.5492,
+  "profit_factor": 1.0849,
+  "avg_return": 0.0246,
+  "avg_win": 0.5714,
+  "avg_loss": -0.6433,
+  "kelly_fraction": 0.0417,
+  "spy_correlation": 0.1047,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 25,
+      "sharpe": -1.36,
+      "sortino": -0.9533,
+      "win_rate": 0.48,
+      "avg_return": -1.1031,
+      "max_dd": -16.8948
+    },
+    "bear": {
+      "n_trades": 59,
+      "sharpe": 0.7312,
+      "sortino": 0.5958,
+      "win_rate": 0.678,
+      "avg_return": 0.2512,
+      "max_dd": -99.4369
+    },
+    "high_vol": {
+      "n_trades": 608,
+      "sharpe": 0.2586,
+      "sortino": 0.2322,
+      "win_rate": 0.5872,
+      "avg_return": 0.0705,
+      "max_dd": -21.5614
+    },
+    "bull": {
+      "n_trades": 645,
+      "sharpe": 0.2907,
+      "sortino": 0.3083,
+      "win_rate": 0.5302,
+      "avg_return": 0.0546,
+      "max_dd": -1.4304
+    },
+    "low_vol_bull": {
+      "n_trades": 1217,
+      "sharpe": -0.0254,
+      "sortino": -0.023,
+      "win_rate": 0.5292,
+      "avg_return": -0.0066,
+      "max_dd": -1.1772
+    },
+    "unknown": {
+      "n_trades": 66,
+      "sharpe": 0.5225,
+      "sortino": 0.4119,
+      "win_rate": 0.6667,
+      "avg_return": 0.1074,
+      "max_dd": -26.1492
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}

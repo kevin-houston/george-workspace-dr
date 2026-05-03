@@ -1,0 +1,148 @@
+{
+  "round": 15,
+  "timestamp": "2026-03-29T18:21:13.572202",
+  "n_strategies": 5,
+  "n_tickers": 53,
+  "n_results": 265,
+  "bnh_avg": 1823.95,
+  "top20": [
+    {
+      "strategy": "VAM_252",
+      "family": "momentum",
+      "position": "long",
+      "avg_return": 880.0507547169811,
+      "median_return": 220.42,
+      "avg_sharpe": 0.5198679245283019,
+      "avg_cagr": 9.691132075471698,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 68.31509433962263,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "OilMom_10_50",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 476.69264150943394,
+      "median_return": 330.65,
+      "avg_sharpe": 0.6403207547169811,
+      "avg_cagr": 10.661698113207548,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 51.75471698113208,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4",
+      "family": "trend",
+      "position": "long",
+      "avg_return": 363.7932075471698,
+      "median_return": 170.22,
+      "avg_sharpe": 0.4669622641509434,
+      "avg_cagr": 8.064528301886792,
+      "beat_bnh_pct": 5.660377358490567,
+      "avg_active": 49.89245283018868,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_12_4",
+      "family": "trend",
+      "position": "long",
+      "avg_return": 357.4622641509434,
+      "median_return": 143.82,
+      "avg_sharpe": 0.4538867924528302,
+      "avg_cagr": 7.810943396226415,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 49.89433962264151,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "VIXMom_63_18_30",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 177.55037735849058,
+      "median_return": 69.66,
+      "avg_sharpe": 0.3409245283018868,
+      "avg_cagr": 4.238301886792453,
+      "beat_bnh_pct": 1.8867924528301887,
+      "avg_active": 42.56415094339623,
+      "n_tickers": 53
+    }
+  ],
+  "family_ranking": {
+    "momentum": 880.0507547169811,
+    "trend": 360.6277358490566,
+    "macro": 327.1215094339622
+  },
+  "sector_ranking": {
+    "tech": 1277.43075,
+    "auto": 1128.3613333333333,
+    "financial": 331.25533333333334,
+    "energy": 303.77000000000004,
+    "healthcare": 267.1654285714286,
+    "industrial": 229.32566666666668,
+    "defense": 223.98559999999998,
+    "staples": 190.56875,
+    "transport": 99.92666666666668
+  },
+  "all_strategies": [
+    {
+      "strategy": "VAM_252",
+      "family": "momentum",
+      "position": "long",
+      "avg_return": 880.0507547169811,
+      "median_return": 220.42,
+      "avg_sharpe": 0.5198679245283019,
+      "avg_cagr": 9.691132075471698,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 68.31509433962263,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "OilMom_10_50",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 476.69264150943394,
+      "median_return": 330.65,
+      "avg_sharpe": 0.6403207547169811,
+      "avg_cagr": 10.661698113207548,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 51.75471698113208,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4",
+      "family": "trend",
+      "position": "long",
+      "avg_return": 363.7932075471698,
+      "median_return": 170.22,
+      "avg_sharpe": 0.4669622641509434,
+      "avg_cagr": 8.064528301886792,
+      "beat_bnh_pct": 5.660377358490567,
+      "avg_active": 49.89245283018868,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_12_4",
+      "family": "trend",
+      "position": "long",
+      "avg_return": 357.4622641509434,
+      "median_return": 143.82,
+      "avg_sharpe": 0.4538867924528302,
+      "avg_cagr": 7.810943396226415,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 49.89433962264151,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "VIXMom_63_18_30",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 177.55037735849058,
+      "median_return": 69.66,
+      "avg_sharpe": 0.3409245283018868,
+      "avg_cagr": 4.238301886792453,
+      "beat_bnh_pct": 1.8867924528301887,
+      "avg_active": 42.56415094339623,
+      "n_tickers": 53
+    }
+  ]
+}

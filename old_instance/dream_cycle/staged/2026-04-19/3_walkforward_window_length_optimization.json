@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-19-walkforward-window-length-optimization",
+  "date": "2026-04-19",
+  "source": "arXiv:2602.10785 (Novel Approach to Trading Strategy Parameter Optimization, 2026)",
+  "source_url": "https://arxiv.org/abs/2602.10785",
+  "title": "Walk-Forward Window Length as Optimization Parameter \u2014 50% drawdown reduction",
+  "rationale": "All George backtests use fixed walk-forward windows (e.g., 252-day train / 63-day test, or calendar-quarter). arXiv:2602.10785 shows that treating the training and testing window lengths themselves as optimization parameters, and testing 81 combinations (1-28 day test windows), achieves ~50% drawdown reduction vs buy-and-hold with comparable returns. The intuition: strategies have natural operating frequencies. A PEAD strategy with 5-15 day holds has different optimal validation frequency than a Div Raise strategy with 40-day holds. Currently we use the same window structure for all strategies. For future rounds (R28, R31, R32), add a quick scan of train/test window combinations as a hyperparameter before fixing the walk-forward setup. This costs minimal compute (81 combinations on a small validation set) and can prevent deploying a strategy with parameter instability.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### Walk-forward window length is a hyperparameter \u2014 scan before fixing\n- LESSON: Fixed walk-forward window sizes (252/63, or calendar-quarter) are arbitrary. arXiv:2602.10785 shows that scanning 1-28 day test window lengths achieves ~50% drawdown reduction by finding windows where strategy performance is most stable OOS. The optimal window is strategy-dependent: PEAD (5-15d hold) suits shorter test windows; Div Raise (40d hold) suits longer ones. Treat (train_window, test_window) as a hyperparameter pair with a 2D grid search.\n- LESSON: A combined portfolio using multiple window-length variants achieves the strongest risk-adjusted performance. If running the same strategy with 3-5 different window configurations and averaging signals, you get diversification across temporal regimes without changing strategy logic.\n- LESSON: Do NOT optimize window lengths on the full history. Use a small validation set (first 20% of data) to find the best window combination, then lock it for the full walk-forward OOS test. Otherwise you get meta-overfitting.\n- WHEN: Setting up any new strategy walk-forward in rounds R28, R31, R32, and beyond. Quick scan: test train=[126, 252, 504] x test=[21, 42, 63, 126] = 12 combinations before committing to a single window.\n- SOURCE: arXiv:2602.10785 (Novel Approach to Trading Strategy Parameter Optimization, 2026)\n",
+  "action": "append",
+  "apply_status": "applied"
+}

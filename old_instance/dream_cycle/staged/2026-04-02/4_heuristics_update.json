@@ -1,0 +1,15 @@
+{
+  "id": "2026-04-02-heuristics-update",
+  "date": "2026-04-02",
+  "source": "arXiv:2505.07078 (FINSABER) + arXiv:2601.19504 (Generating Alpha) + arXiv:2602.07048 (LLM Semantic Filter)",
+  "source_url": "https://arxiv.org/abs/2602.07048",
+  "title": "Append 3 new heuristics to heuristics.md from tonight's research",
+  "rationale": "Three generalizable lessons emerged tonight that should be persisted as heuristics: (1) LLMs fail at market timing due to bull/bear regime blindness \u2014 validated externally by FINSABER paper; (2) FinBERT as exit sentinel (not entry) pattern from Generating Alpha; (3) LLM as economic plausibility judge (not technical scorer) for pairs trading \u2014 the key architectural distinction for R29.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "action": "append",
+  "content": "\n### LLM regime blindness (FINSABER validation)\n- LESSON: LLMs used for market timing are overly conservative in bull markets (miss gains) and overly aggressive in bear markets (incur losses) \u2014 the opposite of optimal. This is confirmed externally by FINSABER (arXiv:2505.07078, 20-year, 100+ symbol study). Root cause: poor regime detection.\n- LESSON: Before adding LLM timing to any strategy, first add explicit regime-aware rules (VIX threshold, trend filter, SMA regime) as a hard constraint. LLM judgment is NOT a substitute for regime detection.\n- WHEN: Any design that uses an LLM for entry/exit timing decisions\n- SOURCE: FINSABER arXiv:2505.07078, validates George R26 LLM filter finding\n\n### FinBERT as exit sentinel (not entry)\n- LESSON: FinBERT adds value as an EXIT risk control, not an entry filter. Threshold: sentiment score < -0.70 = exit regardless of technical signal. This prevents holding through news-driven crashes without suppressing entries on neutral-news days.\n- LESSON: Distinguish entry filtering (which kills too many signals) from exit risk control (which only fires on strong negative news). Keep exit sentinels on a high threshold so they fire rarely.\n- WHEN: Adding sentiment layers to dividend or covered-call income strategies\n- SOURCE: Generating Alpha arXiv:2601.19504 (Sharpe 1.68 with this pattern)\n\n### LLM as economic plausibility judge for pairs\n- LESSON: For pairs/stat-arb strategies, LLM should ask 'does a plausible economic mechanism exist between A and B?' \u2014 NOT 'is the chart overbought?'. Economic plausibility screening eliminated ~46% of average loss magnitude in arXiv:2602.07048. The dominant effect is loss reduction, not return enhancement.\n- LESSON: The right LLM pairs filter question: 'Is there a coherent reason why [Company A] and [Company B] would mean-revert toward each other over time?' Score 0-100. Skip pairs < 40.\n- WHEN: Designing R29 LLM filter on pairs trading\n- SOURCE: arXiv:2602.07048 (Feb 2026)\n",
+  "apply_status": "applied",
+  "derived_from": "arXiv:2505.07078, arXiv:2601.19504, arXiv:2602.07048"
+}

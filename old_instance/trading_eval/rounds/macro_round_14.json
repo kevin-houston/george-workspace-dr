@@ -1,0 +1,219 @@
+{
+  "round": 14,
+  "timestamp": "2026-03-29T18:21:02.365067",
+  "n_strategies": 9,
+  "n_tickers": 53,
+  "n_results": 424,
+  "bnh_avg": 1823.95,
+  "top20": [
+    {
+      "strategy": "OilMom_10_50",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 476.69264150943394,
+      "median_return": 330.65,
+      "avg_sharpe": 0.6403207547169811,
+      "avg_cagr": 10.661698113207548,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 51.75471698113208,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_low_stress",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 289.27,
+      "median_return": 125.34,
+      "avg_sharpe": 0.48539622641509433,
+      "avg_cagr": 7.102830188679245,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 43.554716981132074,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "VIXMom_63_18_30",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 177.55037735849058,
+      "median_return": 69.66,
+      "avg_sharpe": 0.3409245283018868,
+      "avg_cagr": 4.238301886792453,
+      "beat_bnh_pct": 1.8867924528301887,
+      "avg_active": 42.56415094339623,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_gold_bull",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 135.29584905660377,
+      "median_return": 108.26,
+      "avg_sharpe": 0.39832075471698114,
+      "avg_cagr": 5.018679245283019,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 21.522641509433964,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "OilShock_90_1.0",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 68.61905660377359,
+      "median_return": 61.12,
+      "avg_sharpe": 0.2920566037735849,
+      "avg_cagr": 2.990188679245283,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 28.28679245283019,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_oil_shock",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 43.179245283018865,
+      "median_return": 39.97,
+      "avg_sharpe": 0.32437735849056604,
+      "avg_cagr": 2.191698113207547,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 9.10377358490566,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_iran_proxy",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 8.01566037735849,
+      "median_return": 6.86,
+      "avg_sharpe": 0.14875471698113207,
+      "avg_cagr": 0.45999999999999996,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 0.8056603773584906,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_inflationary",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 0.0,
+      "median_return": 0.0,
+      "avg_sharpe": 0.0,
+      "avg_cagr": 0.0,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 0.0,
+      "n_tickers": 53
+    }
+  ],
+  "family_ranking": {
+    "macro": 240.9540251572327,
+    "trend_macro": 95.15215094339622
+  },
+  "sector_ranking": {
+    "auto": 403.4666666666667,
+    "tech": 284.21921875000004,
+    "financial": 172.04666666666665,
+    "healthcare": 118.56785714285715,
+    "energy": 102.98410714285716,
+    "defense": 98.7385,
+    "staples": 89.59953125,
+    "industrial": 85.57875,
+    "transport": 49.8725
+  },
+  "all_strategies": [
+    {
+      "strategy": "OilMom_10_50",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 476.69264150943394,
+      "median_return": 330.65,
+      "avg_sharpe": 0.6403207547169811,
+      "avg_cagr": 10.661698113207548,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 51.75471698113208,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_low_stress",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 289.27,
+      "median_return": 125.34,
+      "avg_sharpe": 0.48539622641509433,
+      "avg_cagr": 7.102830188679245,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 43.554716981132074,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "VIXMom_63_18_30",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 177.55037735849058,
+      "median_return": 69.66,
+      "avg_sharpe": 0.3409245283018868,
+      "avg_cagr": 4.238301886792453,
+      "beat_bnh_pct": 1.8867924528301887,
+      "avg_active": 42.56415094339623,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_gold_bull",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 135.29584905660377,
+      "median_return": 108.26,
+      "avg_sharpe": 0.39832075471698114,
+      "avg_cagr": 5.018679245283019,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 21.522641509433964,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "OilShock_90_1.0",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 68.61905660377359,
+      "median_return": 61.12,
+      "avg_sharpe": 0.2920566037735849,
+      "avg_cagr": 2.990188679245283,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 28.28679245283019,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_oil_shock",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 43.179245283018865,
+      "median_return": 39.97,
+      "avg_sharpe": 0.32437735849056604,
+      "avg_cagr": 2.191698113207547,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 9.10377358490566,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_iran_proxy",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 8.01566037735849,
+      "median_return": 6.86,
+      "avg_sharpe": 0.14875471698113207,
+      "avg_cagr": 0.45999999999999996,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 0.8056603773584906,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4_IN_inflationary",
+      "family": "trend_macro",
+      "position": "long",
+      "avg_return": 0.0,
+      "median_return": 0.0,
+      "avg_sharpe": 0.0,
+      "avg_cagr": 0.0,
+      "beat_bnh_pct": 0.0,
+      "avg_active": 0.0,
+      "n_tickers": 53
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "strategy": "ML Ensemble",
+  "virtual_capital": 5000.0,
+  "open_positions": {
+    "WMT": {
+      "entry_price": 127.58999633789062,
+      "shares": 7.837605052920816,
+      "entry_date": "2026-04-27",
+      "exit_date": "2026-05-04",
+      "entry_prob": 0.753
+    },
+    "JPM": {
+      "entry_price": 311.6300048828125,
+      "shares": 3.208933621061447,
+      "entry_date": "2026-04-27",
+      "exit_date": "2026-05-04",
+      "entry_prob": 0.659
+    },
+    "HD": {
+      "entry_price": 332.29998779296875,
+      "shares": 3.009329030198536,
+      "entry_date": "2026-04-27",
+      "exit_date": "2026-05-04",
+      "entry_prob": 0.78
+    },
+    "PG": {
+      "entry_price": 149.1699981689453,
+      "shares": 6.703760892102653,
+      "entry_date": "2026-04-28",
+      "exit_date": "2026-05-05",
+      "entry_prob": 0.692
+    }
+  },
+  "trades": [
+    {
+      "symbol": "XOM",
+      "entry_date": "2026-03-31",
+      "exit_date": "2026-04-07",
+      "entry_price": 169.66000366210938,
+      "exit_price": 163.91000366210938,
+      "return_pct": -0.0339,
+      "pnl_usd": -33.89,
+      "win": false,
+      "entry_prob": 0.628
+    },
+    {
+      "symbol": "PG",
+      "entry_date": "2026-03-31",
+      "exit_date": "2026-04-07",
+      "entry_price": 144.44000244140625,
+      "exit_price": 141.3000030517578,
+      "return_pct": -0.0217,
+      "pnl_usd": -21.74,
+      "win": false,
+      "entry_prob": 0.768
+    },
+    {
+      "symbol": "HD",
+      "entry_date": "2026-03-31",
+      "exit_date": "2026-04-07",
+      "entry_price": 328.8900146484375,
+      "exit_price": 318.7699890136719,
+      "return_pct": -0.0308,
+      "pnl_usd": -30.77,
+      "win": false,
+      "entry_prob": 0.716
+    },
+    {
+      "symbol": "WMT",
+      "entry_date": "2026-04-06",
+      "exit_date": "2026-04-13",
+      "entry_price": 126.79000091552734,
+      "exit_price": 124.56999969482422,
+      "return_pct": -0.0175,
+      "pnl_usd": -17.51,
+      "win": false,
+      "entry_prob": 0.735
+    },
+    {
+      "symbol": "JPM",
+      "entry_date": "2026-04-06",
+      "exit_date": "2026-04-13",
+      "entry_price": 295.45001220703125,
+      "exit_price": 313.67999267578125,
+      "return_pct": 0.0617,
+      "pnl_usd": 61.7,
+      "win": true,
+      "entry_prob": 0.793
+    },
+    {
+      "symbol": "PG",
+      "entry_date": "2026-04-07",
+      "exit_date": "2026-04-14",
+      "entry_price": 141.3000030517578,
+      "exit_price": 144.3800048828125,
+      "return_pct": 0.0218,
+      "pnl_usd": 21.8,
+      "win": true,
+      "entry_prob": 0.701
+    },
+    {
+      "symbol": "XOM",
+      "entry_date": "2026-04-13",
+      "exit_date": "2026-04-20",
+      "entry_price": 152.63999938964844,
+      "exit_price": 147.67999267578125,
+      "return_pct": -0.0325,
+      "pnl_usd": -32.49,
+      "win": false,
+      "entry_prob": 0.798
+    },
+    {
+      "symbol": "JPM",
+      "entry_date": "2026-04-13",
+      "exit_date": "2026-04-20",
+      "entry_price": 313.67999267578125,
+      "exit_price": 316.989990234375,
+      "return_pct": 0.0106,
+      "pnl_usd": 10.55,
+      "win": true,
+      "entry_prob": 0.768
+    },
+    {
+      "symbol": "PG",
+      "entry_date": "2026-04-14",
+      "exit_date": "2026-04-21",
+      "entry_price": 144.3800048828125,
+      "exit_price": 142.32000732421875,
+      "return_pct": -0.0143,
+      "pnl_usd": -14.27,
+      "win": false,
+      "entry_prob": 0.692
+    },
+    {
+      "symbol": "WMT",
+      "entry_date": "2026-04-20",
+      "exit_date": "2026-04-27",
+      "entry_price": 127.91999816894531,
+      "exit_price": 127.58999633789062,
+      "return_pct": -0.0026,
+      "pnl_usd": -2.58,
+      "win": false,
+      "entry_prob": 0.609
+    },
+    {
+      "symbol": "JPM",
+      "entry_date": "2026-04-20",
+      "exit_date": "2026-04-27",
+      "entry_price": 316.989990234375,
+      "exit_price": 311.6300048828125,
+      "return_pct": -0.0169,
+      "pnl_usd": -16.91,
+      "win": false,
+      "entry_prob": 0.664
+    },
+    {
+      "symbol": "PG",
+      "entry_date": "2026-04-21",
+      "exit_date": "2026-04-28",
+      "entry_price": 142.32000732421875,
+      "exit_price": 149.1699981689453,
+      "return_pct": 0.0481,
+      "pnl_usd": 48.13,
+      "win": true,
+      "entry_prob": 0.749
+    }
+  ],
+  "stats": {
+    "n_trades": 12,
+    "wins": 4,
+    "total_pnl": -27.978324848535202
+  },
+  "last_update": "2026-04-30",
+  "last_retrain": "2026-04-27",
+  "signals": {
+    "XOM": {
+      "prob": 0.426,
+      "signal": "neutral"
+    },
+    "WMT": {
+      "prob": 0.753,
+      "signal": "long"
+    },
+    "PG": {
+      "prob": 0.692,
+      "signal": "long"
+    },
+    "JPM": {
+      "prob": 0.659,
+      "signal": "long"
+    },
+    "HD": {
+      "prob": 0.78,
+      "signal": "long"
+    }
+  }
+}

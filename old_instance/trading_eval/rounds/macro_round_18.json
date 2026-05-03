@@ -1,0 +1,100 @@
+{
+  "round": 18,
+  "timestamp": "2026-03-29T18:44:57.367568",
+  "n_strategies": 12,
+  "n_tickers": 53,
+  "n_results": 159,
+  "bnh_avg": 1823.95,
+  "top20": [
+    {
+      "strategy": "VAM_252",
+      "family": "momentum",
+      "position": "long",
+      "avg_return": 880.0507547169811,
+      "median_return": 220.42,
+      "avg_sharpe": 0.5198679245283019,
+      "avg_cagr": 9.691132075471698,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 68.31509433962263,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_120",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 703.5116981132076,
+      "median_return": 246.66,
+      "avg_sharpe": 0.5594528301886792,
+      "avg_cagr": 9.942075471698113,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 42.203773584905655,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4",
+      "family": "trend",
+      "position": "long",
+      "avg_return": 363.7932075471698,
+      "median_return": 170.22,
+      "avg_sharpe": 0.4669622641509434,
+      "avg_cagr": 8.064528301886792,
+      "beat_bnh_pct": 5.660377358490567,
+      "avg_active": 49.89245283018868,
+      "n_tickers": 53
+    }
+  ],
+  "family_ranking": {
+    "momentum": 880.0507547169811,
+    "macro": 703.5116981132076,
+    "trend": 363.7932075471698
+  },
+  "sector_ranking": {
+    "auto": 2533.9222222222224,
+    "tech": 1905.2629166666668,
+    "industrial": 336.9122222222222,
+    "financial": 331.2233333333333,
+    "energy": 322.8619047619048,
+    "healthcare": 268.2857142857143,
+    "defense": 237.93866666666665,
+    "staples": 210.10208333333333,
+    "transport": 180.68555555555554
+  },
+  "all_strategies": [
+    {
+      "strategy": "VAM_252",
+      "family": "momentum",
+      "position": "long",
+      "avg_return": 880.0507547169811,
+      "median_return": 220.42,
+      "avg_sharpe": 0.5198679245283019,
+      "avg_cagr": 9.691132075471698,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 68.31509433962263,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "GoldFlight_120",
+      "family": "macro",
+      "position": "long",
+      "avg_return": 703.5116981132076,
+      "median_return": 246.66,
+      "avg_sharpe": 0.5594528301886792,
+      "avg_cagr": 9.942075471698113,
+      "beat_bnh_pct": 3.7735849056603774,
+      "avg_active": 42.203773584905655,
+      "n_tickers": 53
+    },
+    {
+      "strategy": "MACD_5_11_4",
+      "family": "trend",
+      "position": "long",
+      "avg_return": 363.7932075471698,
+      "median_return": 170.22,
+      "avg_sharpe": 0.4669622641509434,
+      "avg_cagr": 8.064528301886792,
+      "beat_bnh_pct": 5.660377358490567,
+      "avg_active": 49.89245283018868,
+      "n_tickers": 53
+    }
+  ]
+}

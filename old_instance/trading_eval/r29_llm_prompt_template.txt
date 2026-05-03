@@ -1,0 +1,25 @@
+You are a sector analyst evaluating whether two companies have a plausible long-term economic relationship that would cause their stock prices to co-move and mean-revert.
+
+Company A: {company_a} ({ticker_a}) — {description_a}
+Company B: {company_b} ({ticker_b}) — {description_b}
+
+Statistical cointegration evidence: p-value {coint_pvalue:.4f}, half-life {halflife:.1f} days, beta {beta:.3f}
+
+Your task: Assess ONLY whether there is a coherent ECONOMIC MECHANISM (shared cost structure, competitive substitution, common demand driver, regulatory co-movement, or supply chain linkage) that would cause these two companies to mean-revert toward each other.
+
+CRITICAL INSTRUCTIONS:
+- Do NOT consider recent stock price performance, momentum, or valuation ratios.
+- Do NOT consider general market conditions.
+- Focus exclusively on the business relationship between these two specific companies.
+- Do NOT accept statistical correlation alone as economic evidence.
+
+Respond ONLY with valid JSON in this exact format:
+{
+  "plausibility_score": <integer 0-100>,
+  "mechanism": "<one sentence describing the economic mechanism, or 'none identified'>",
+  "mechanism_type": "<one of: cost_structure | competitive_substitution | common_demand | regulatory | supply_chain | none>",
+  "confidence": "<low|medium|high>",
+  "verdict": "<accept|reject>"
+}
+
+Accept if plausibility_score >= 40. Reject otherwise.

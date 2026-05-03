@@ -1,0 +1,14 @@
+{
+  "id": "memory-update-research-agenda-2026-04-23",
+  "date": "2026-04-23",
+  "source": "reflection",
+  "source_url": null,
+  "title": "Research agenda update + CogAlpha R33 amendment",
+  "rationale": "Consolidates tonight's R33 amendments and confirms R29 LLM filter design is final (no new amendments from tonight's scan — the 6-category taxonomy from 2026-04-21 remains the definitive design).",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n## Research Agenda Update (2026-04-23)\n\n- **Round 29 LLM Filter** — QUEUED. Design FINAL as of 2026-04-21 (6-category LLM taxonomy + ticker anonymization + CMMD contamination check). No new amendments from 2026-04-23 scan.\n\n- **Round 31b** — QUEUED: Speaker-weighted FinBERT. No new amendments.\n\n- **Round 33** — QuantaAlpha primary + AlphaPROBE parallel.\n  - **NEW AMENDMENT (2026-04-23)**: Add cognitive reasoning pre-step from CogAlpha (arXiv:2511.18850). Before each mutation cycle, prompt LLM: 'Explain the economic mechanism this factor formula is expected to capture. What behavioral or structural market friction does it exploit?' Then proceed with mutation. Adds zero cost; reduces algebraically degenerate mutations.\n  - **NEW AMENDMENT (2026-04-23)**: Use randomized temperature {0.7–1.2} for generation agents; fixed 0.8 for quality-checking agents (CogAlpha temperature insight).\n  - **NEW AMENDMENT (2026-04-23)**: Implement Epistemic Autopsy on failed IC candidates — structured JSON failure diagnosis prepended to next generation prompt (OOM-RL arXiv:2604.11477, extends FactorMiner failure pool).\n  - **HYGIENE (2026-04-21, reaffirmed)**: Apply workflow falsification audit (arXiv:2604.15531) before claiming IC improvement.\n\n- **Round 35** — MRP diagnostic + Wasserstein HMM + EF clustering + RMT gap.\n  - **NEW AMENDMENT (2026-04-23)**: Add probabilistic stress routing to RegimeGuard (arXiv:2604.10402): stress_prob = logistic(VIX_z + yield_curve_z + credit_spread_z). Route strategies: stress_prob > 0.6 = use STRESS pool (pure statistical, no LLM); stress_prob < 0.4 = use CALM pool (LLM-augmented). 0.4–0.6 = weighted blend.\n\n- **Round 34** (concept) — Institutional ownership PEAD amplifier — unchanged.\n- **Round 36** (concept) — DeltaLag adaptive lead-lag pairs — unchanged.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "r35-ef-clustering-regime-2026-04-10",
+  "date": "2026-04-10",
+  "source": "arXiv:2604.03946 — Asset allocation using a Markov process of clustered efficient frontier coefficients (Alexander, Scherer et al.)",
+  "source_url": "https://arxiv.org/abs/2604.03946",
+  "title": "R35 Amendment: Markov Clustered Efficient Frontier as Portfolio-Level Regime Detector",
+  "rationale": "arXiv:2604.03946 introduces a novel regime detection method: decompose the rolling mean-variance efficient frontier into 3 polynomial coefficients, cluster coefficient vectors into K market states via hierarchical clustering, then model state transitions as a Markov chain. Outperforms static benchmark portfolios. Key advantage over Wasserstein HMM (arXiv:2603.04441): detects regimes from PORTFOLIO BEHAVIOR (how the Sharpe/correlation structure of assets changes) rather than from return distributions alone. More directly relevant for our use case: detecting when the multi-strategy portfolio (PEAD + Div Raise + Pairs + Put-write) is in a regime where combined alpha is expected to degrade. Has reproducible code at github.com/nolanalexander/efficient-frontier-coefficients. This gives R35 three complementary regime layers: (1) EF clustering (portfolio-level structural), (2) Wasserstein HMM (return distribution), (3) Skewness dispersion (leading indicator).",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "content": "\n### Markov Clustered Efficient Frontier — R35 Portfolio-Level Regime Detection\n- LESSON: The Markov Clustered Efficient Frontier method (arXiv:2604.03946) detects regimes by clustering the 3 polynomial coefficients of the rolling mean-variance efficient frontier. Unlike Wasserstein HMM (return distribution) or VIX/SMA (market indicators), this captures structural shifts in how assets correlate and their joint Sharpe profile — the most portfolio-relevant regime concept.\n- LESSON: For R35, recommend: EF clustering as the primary regime signal (portfolio-level, uses existing strategy returns), Wasserstein HMM as confirmation (return distribution), skewness dispersion as leading indicator. VIX/SMA stays as fast-fail in RegimeGuard for R28 (real-time rule).\n- LESSON: The EF method has reproducible Python code at https://github.com/nolanalexander/efficient-frontier-coefficients. Input: daily returns of strategy portfolio. Output: K regime states + Markov transition probabilities. Low implementation cost once R28-R32 are running and generating strategy return series.\n- WHEN: Designing R35 multi-strategy RegimeGuard; evaluating when to scale up or down exposure across the strategy portfolio.\n- SOURCE: arXiv:2604.03946 (April 2026) — Markov Process of Clustered Efficient Frontier Coefficients. Alexander et al.",
+  "apply_status": "applied"
+}

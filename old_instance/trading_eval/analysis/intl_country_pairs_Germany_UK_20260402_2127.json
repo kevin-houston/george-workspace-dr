@@ -1,0 +1,83 @@
+{
+  "strategy": "intl_country_pairs_Germany_UK",
+  "category": "international",
+  "round": 1,
+  "tickers": [
+    "EWG/EWU"
+  ],
+  "n_trades": 73,
+  "date_range": "2015-03-31 \u2013 2024-09-27",
+  "total_return": 0.2316,
+  "cagr": 0.0348,
+  "sharpe": 0.3403,
+  "sortino": 0.1837,
+  "calmar": 0.1041,
+  "skewness": -4.744,
+  "kurtosis": 24.767,
+  "max_drawdown": -0.3345,
+  "max_consec_losses": 3,
+  "win_rate": 0.7534,
+  "profit_factor": 1.4586,
+  "avg_return": 0.0036,
+  "avg_win": 0.0153,
+  "avg_loss": -0.0321,
+  "kelly_fraction": 0.2369,
+  "spy_correlation": -0.3174,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.6667,
+      "avg_return": -0.0557,
+      "max_dd": -0.2085
+    },
+    "bear": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 9,
+      "sharpe": -0.4971,
+      "sortino": -0.3439,
+      "win_rate": 0.5556,
+      "avg_return": -0.0096,
+      "max_dd": -0.1933
+    },
+    "bull": {
+      "n_trades": 7,
+      "sharpe": -0.727,
+      "sortino": -0.6115,
+      "win_rate": 0.4286,
+      "avg_return": -0.0037,
+      "max_dd": -0.0545
+    },
+    "low_vol_bull": {
+      "n_trades": 53,
+      "sharpe": 3.2384,
+      "sortino": 2.7729,
+      "win_rate": 0.8491,
+      "avg_return": 0.0105,
+      "max_dd": -0.0375
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}

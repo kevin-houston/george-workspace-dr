@@ -1,0 +1,14 @@
+{
+  "id": "heuristics-update-2026-04-10",
+  "date": "2026-04-10",
+  "source": "Dream Cycle scan 2026-04-10; arXiv:2604.02035, arXiv:2511.15364",
+  "source_url": "https://arxiv.org/abs/2604.02035",
+  "title": "Heuristics Update: OU calibration for pairs + transcript anonymization warning",
+  "rationale": "Two new generalizable lessons from tonight's scan that will apply to future rounds beyond R29 and R31.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "action": "append",
+  "content": "\n### OU parameter calibration for pairs trading thresholds\n- LESSON: Fixed ±2σ entry/exit is suboptimal for pairs trading. Calibrate entry threshold to OU half-life: fast pairs (half-life < 3 days) → ±1.5σ; medium (3-7 days) → ±2.0σ; slow (> 7 days) → ±2.5σ. Use σ_eq = σ/√(2θ) as the natural spread unit, not rolling σ.\n- WHEN: Designing any pairs trading or stat-arb strategy that uses z-score entry/exit rules. Apply during R29 implementation.\n- SOURCE: arXiv:2604.02035 (April 2026) — RL for Speculative Trading. Zhao, Tse, Zheng.\n\n### Never anonymize public financial text before NLP processing\n- LESSON: Anonymizing earnings call transcripts (removing company names, numbers, product names) destroys MORE signal than look-ahead bias. These tokens carry the highest information density for sentiment and specificity scoring. EDGAR transcripts are public — there is no reason to anonymize.\n- WHEN: Any NLP pipeline on EDGAR earnings transcripts (R31 text-based PEAD, R28 EarningsQualityAgent, any future earnings NLP task).\n- SOURCE: arXiv:2511.15364 (Nov 2025) — Anonymization and Information Loss. Wu, Yang, Ying.",
+  "apply_status": "applied"
+}

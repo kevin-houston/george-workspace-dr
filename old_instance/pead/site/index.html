@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PEAD Paper Tracker</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #0f1117; color: #e2e8f0; min-height: 100vh; padding: 24px; }
+    h1   { font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+    .sub { color: #94a3b8; font-size: 0.875rem; margin-bottom: 24px; }
+    .cards { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+    .card { background: #1e2433; border-radius: 12px; padding: 20px; min-width: 180px; flex: 1; }
+    .card-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: .05em;
+                   color: #64748b; margin-bottom: 6px; }
+    .card-value { font-size: 1.75rem; font-weight: 700; margin-bottom: 4px; }
+    .card-sub   { font-size: 0.8rem; color: #94a3b8; line-height: 1.6; }
+    .win  { color: #22c55e; } .loss { color: #ef4444; } .neutral { color: #94a3b8; }
+    section { background: #1e2433; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    h2   { font-size: 1rem; font-weight: 600; margin-bottom: 14px; color: #cbd5e1; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th   { text-align: left; padding: 8px 10px; color: #64748b; font-weight: 500;
+            border-bottom: 1px solid #2d3748; }
+    td   { padding: 10px; border-bottom: 1px solid #1a2030; }
+    tr:last-child td { border-bottom: none; }
+    .empty { color: #64748b; text-align: center; padding: 20px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 0.75rem; font-weight: 600; }
+    .badge-5 { background: #1d4ed8; color: #bfdbfe; }
+    .badge-3 { background: #6d28d9; color: #ddd6fe; }
+    .progress-bar { background: #2d3748; border-radius: 4px; height: 6px; width: 100px;
+                     display: inline-block; vertical-align: middle; margin-right: 6px; }
+    .progress-fill { background: #3b82f6; height: 100%; border-radius: 4px; }
+    .pnl-big { font-size: 2rem; font-weight: 800; }
+    footer { text-align: center; color: #475569; font-size: 0.75rem; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <h1>📊 PEAD Paper Tracker</h1>
+  <div class="sub">Updated March 30, 2026 &nbsp;·&nbsp; $5,000 virtual portfolio &nbsp;·&nbsp; 20-day hold &nbsp;·&nbsp; 30-stock universe</div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-label">Portfolio Value</div>
+      <div class="card-value pnl-big">$5,000.00</div>
+      <div class="card-sub">Started $5,000.00</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Realized P&amp;L</div>
+      <div class="card-value win">$+0.00</div>
+      <div class="card-sub">0 closed trades</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Win Rate</div>
+      <div class="card-value">—</div>
+      <div class="card-sub">Backtest target: 67.8%</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Sharpe Ratio</div>
+      <div class="card-value">—</div>
+      <div class="card-sub">Backtest target: 2.39</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Open Positions</div>
+      <div class="card-value">0/10</div>
+      <div class="card-sub">$0 deployed</div>
+    </div>
+    
+        <div class="card">
+          <div class="card-label">5% Gap Threshold</div>
+          <div class="card-value">0 trades</div>
+          <div class="card-sub">
+            Win rate: <b>—</b> &nbsp;|&nbsp;
+            Avg ret: <b class="loss">—</b><br>
+            Sharpe: <b>—</b> &nbsp;|&nbsp;
+            P&amp;L: <b class="win">$+0.00</b>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-label">3% Gap Threshold</div>
+          <div class="card-value">0 trades</div>
+          <div class="card-sub">
+            Win rate: <b>—</b> &nbsp;|&nbsp;
+            Avg ret: <b class="loss">—</b><br>
+            Sharpe: <b>—</b> &nbsp;|&nbsp;
+            P&amp;L: <b class="win">$+0.00</b>
+          </div>
+        </div>
+  </div>
+
+  <section>
+    <h2>Open Positions</h2>
+    <table>
+      <thead><tr><th>Symbol</th><th>Threshold</th><th>Entry</th><th>Gap</th><th>Entry Date</th><th>Progress</th><th>Exit Date</th></tr></thead>
+      <tbody><tr><td colspan='7' class='empty'>No open positions</td></tr></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Closed Trades (last 20)</h2>
+    <table>
+      <thead><tr><th>Symbol</th><th>Threshold</th><th>Entry</th><th>Exit</th><th>Return</th><th>P&amp;L</th><th>Opened</th><th>Closed</th></tr></thead>
+      <tbody><tr><td colspan='8' class='empty'>No closed trades yet</td></tr></tbody>
+    </table>
+  </section>
+
+  <footer>PEAD Paper Tracker · George · Backtest Sharpe 2.394 (gap≥5%, 20d hold) · Not financial advice</footer>
+</body>
+</html>

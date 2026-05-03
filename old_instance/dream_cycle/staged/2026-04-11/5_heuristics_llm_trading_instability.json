@@ -1,0 +1,14 @@
+{
+  "id": "heuristics-llm-trading-instability-alphaforgeb",
+  "date": "2026-04-11",
+  "source": "arXiv:2602.18481 — AlphaForgeBench: Benchmarking End-to-End Trading Strategy Design with LLMs. February 2026.",
+  "source_url": "https://arxiv.org/abs/2602.18481",
+  "title": "Heuristics: Never Use LLMs for Direct Trading Action Execution — Use as Factor Generators",
+  "rationale": "AlphaForgeBench (arXiv:2602.18481) documents a fundamental instability in LLM-based trading: 'severe behavioral instability in sequential decision-making under uncertainty', 'inconsistent action sequences even under deterministic decoding', and 'action flipping across adjacent time steps.' This is not a model capability problem — it's an architectural problem: stateless autoregressive LLMs have no persistent memory across market steps. This validates and strengthens existing heuristics (LLM as narrator/filter, not as executor). The paper's solution — redirect LLMs to generate executable alpha FACTORS rather than emit trade actions — is the correct architectural boundary. This lesson generalizes across TradingAgents, R28, R29 design: always keep LLM outputs in the signal/scoring domain, never in the action/execution domain.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### LLM Trading Action Instability — Use as Factor Generator, Not Executor\n- LESSON: Direct LLM trade execution produces 'severe behavioral instability in sequential decision-making': action flipping across adjacent time steps, inconsistent sequences under deterministic decoding, and extreme run-to-run variance. Root cause: stateless autoregressive architecture has no persistent market state memory. This is architectural, not a capability limitation — it will NOT be fixed by better models alone.\n- LESSON: The correct LLM architectural boundary in trading is: LLM outputs → alpha factor scores, quality ratings, plausibility scores, or strategy parameters. These are fed into a DETERMINISTIC execution engine (e.g., Python backtest harness). Never let LLM outputs directly map to buy/sell/hold actions.\n- LESSON: Benchmarks that test LLMs on direct trading action sequences (buy/sell/hold per bar) produce 'unreliable, non-reproducible, and uninformative evaluations' — results cannot be compared across papers. Ignore performance claims from such benchmarks.\n- WHEN: Evaluating any paper claiming LLM-based trading outperformance. Designing any LLM layer in trading systems. Reviewing R28, R29, R33 agent designs — confirm all LLM outputs are scores/factors, not actions.\n- SOURCE: arXiv:2602.18481 (Feb 2026) — AlphaForgeBench. Also consistent with R26 IndicatorAgent lesson and FINSABER findings.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

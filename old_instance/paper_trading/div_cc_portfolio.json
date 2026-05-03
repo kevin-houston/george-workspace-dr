@@ -1,0 +1,13 @@
+{
+  "strategy": "Covered Calls around Ex-Div (10d before, 2% OTM)",
+  "backtest_sharpe": 2.643,
+  "virtual_capital": 5000.0,
+  "open_positions": {},
+  "trades": [],
+  "stats": {
+    "n_trades": 0,
+    "wins": 0,
+    "total_pnl": 0.0
+  },
+  "last_update": "2026-04-30"
+}

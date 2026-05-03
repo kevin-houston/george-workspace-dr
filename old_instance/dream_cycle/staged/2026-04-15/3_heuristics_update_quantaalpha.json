@@ -1,0 +1,14 @@
+{
+  "id": "heuristics-quantaalpha-evolutionary-alpha-mining",
+  "date": "2026-04-15",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.07085",
+  "title": "Heuristics: Evolutionary trajectory optimization for LLM alpha mining",
+  "rationale": "QuantaAlpha introduces a novel insight over single-run AlphaAgent: treating each full mining run as a 'trajectory' and applying evolutionary operators (mutation of sub-optimal nodes, crossover of high-reward segments) across runs dramatically improves factor quality. IC 0.1501 vs AlphaAgent IC 0.0966 (+55%). This generalizes beyond factor mining to any multi-step LLM task where iterative trajectory refinement can be applied.",
+  "risk_level": "low",
+  "type": "claude_md_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### Evolutionary trajectory optimization for LLM alpha mining\n- LESSON: Treating each LLM mining run as a 'trajectory' and applying evolutionary operators (mutation = rewrite sub-optimal decision nodes; crossover = merge high-reward segments from two parent trajectories) produces factors with IC 0.1501 vs IC 0.0966 for single-run AlphaAgent (+55% improvement). The key is localizing WHY a trajectory underperforms, not just resampling randomly.\n- LESSON: Evolutionary alpha mining (QuantaAlpha) outperforms both AlphaAgent and RD-Agent on CSI300 by large margins. S&P 500 zero-shot transfer (factors mined on CSI300 deployed on US stocks without retraining) achieved 137% cumulative excess return 2022-2025. OHLCV+VWAP only — no fundamentals required.\n- LESSON: A factor diversity constraint (|correlation| < 0.70 between any two pool members, ranked by RankIC descending) combined with a pool size cap (50% of total mined factors per iteration) prevents redundancy without sacrificing predictive power. Apply this to any factor pool management task.\n- LESSON: Claude-4.5-Sonnet achieves functional results as the backbone LLM in QuantaAlpha (IC ~0.1252 vs GPT-5.2 IC 0.1501). When budget-constrained, use Claude for the CHAT_MODEL (debugging, feedback) and a reasoning model (o3-mini, DeepSeek-R1) for the REASONING_MODEL (hypothesis and factor generation) — the hypothesis generation step has highest leverage.\n- WHEN: Designing any LLM-driven factor generation system (R33 and beyond). The trajectory-level evolutionary approach is the current state-of-the-art for formula alpha mining.\n- SOURCE: arXiv:2602.07085 (Feb 2026, KDD 2025) — QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining. GitHub: QuantaAlpha/QuantaAlpha.",
+  "action": "append",
+  "apply_status": "applied"
+}

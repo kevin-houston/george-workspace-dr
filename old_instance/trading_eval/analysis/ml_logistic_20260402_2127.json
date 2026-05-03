@@ -1,0 +1,101 @@
+{
+  "strategy": "ml_logistic",
+  "category": "ml",
+  "round": 1,
+  "tickers": [
+    "AAPL",
+    "AMZN",
+    "BAC",
+    "COST",
+    "CVX",
+    "GOOGL",
+    "HD",
+    "JNJ",
+    "JPM",
+    "MA",
+    "META",
+    "MRK",
+    "MSFT",
+    "NVDA",
+    "PFE",
+    "PG",
+    "UNH",
+    "V",
+    "WMT",
+    "XOM"
+  ],
+  "n_trades": 15093,
+  "date_range": "2021-10-15 \u2013 2025-12-19",
+  "total_return": 12656.4012,
+  "cagr": 0.0075,
+  "sharpe": 0.1252,
+  "sortino": 0.1212,
+  "calmar": 0.0075,
+  "skewness": -0.3705,
+  "kurtosis": 4.5951,
+  "max_drawdown": -1.0,
+  "max_consec_losses": 28,
+  "win_rate": 0.5269,
+  "profit_factor": 1.1055,
+  "avg_return": 0.0015,
+  "avg_win": 0.0297,
+  "avg_loss": -0.03,
+  "kelly_fraction": 0.0497,
+  "spy_correlation": 0.0342,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 896,
+      "sharpe": 0.1519,
+      "sortino": 0.1513,
+      "win_rate": 0.5312,
+      "avg_return": 0.0022,
+      "max_dd": -0.9706
+    },
+    "high_vol": {
+      "n_trades": 5264,
+      "sharpe": 0.0536,
+      "sortino": 0.0495,
+      "win_rate": 0.5306,
+      "avg_return": 0.0007,
+      "max_dd": -1.0
+    },
+    "bull": {
+      "n_trades": 5954,
+      "sharpe": 0.1526,
+      "sortino": 0.1544,
+      "win_rate": 0.5193,
+      "avg_return": 0.0016,
+      "max_dd": -0.9886
+    },
+    "low_vol_bull": {
+      "n_trades": 2979,
+      "sharpe": 0.2432,
+      "sortino": 0.2492,
+      "win_rate": 0.5344,
+      "avg_return": 0.0024,
+      "max_dd": -0.944
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

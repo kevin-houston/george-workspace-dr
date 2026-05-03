@@ -1,0 +1,28 @@
+{
+  "strategy": "Pairs Portfolio R29 (Factor Residualized)",
+  "backtest_sharpe": 1.3802,
+  "methodology": "R29 v1: OLS residualization on SPY + sector ETF, fixed \u00b12\u03c3 z-score",
+  "virtual_capital": 5000.0,
+  "open_positions": {
+    "GOOGL/META": {
+      "sym_a": "GOOGL",
+      "sym_b": "META",
+      "direction": "short_spread",
+      "entry_z": 3.282,
+      "entry_date": "2026-04-30",
+      "entry_p_a": 384.79998779296875,
+      "entry_p_b": 611.9099731445312,
+      "shares_a": 1.2993763405964853,
+      "shares_b": 0.8171136636825195,
+      "etf_a": "XLC",
+      "etf_b": "XLC"
+    }
+  },
+  "trades": [],
+  "stats": {
+    "n_trades": 0,
+    "wins": 0,
+    "total_pnl": 0.0
+  },
+  "last_update": "2026-04-30"
+}

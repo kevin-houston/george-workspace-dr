@@ -1,0 +1,84 @@
+{
+  "strategy": "IM5-Dollar_Equity_Inverse",
+  "category": "volatility",
+  "round": 2,
+  "tickers": [
+    "SPY",
+    "TLT"
+  ],
+  "n_trades": 566,
+  "date_range": "2015-01-02 \u2013 2026-01-23",
+  "total_return": 1.8314460797330352e+21,
+  "cagr": 1.8236,
+  "sharpe": 0.3275,
+  "sortino": 0.3147,
+  "calmar": 0.0049,
+  "skewness": -0.597,
+  "kurtosis": 15.7135,
+  "max_drawdown": -369.1314,
+  "max_consec_losses": 9,
+  "win_rate": 0.5689,
+  "profit_factor": 1.4199,
+  "avg_return": 0.1644,
+  "avg_win": 0.9771,
+  "avg_loss": -0.9119,
+  "kelly_fraction": 0.1666,
+  "spy_correlation": 0.3884,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 18,
+      "sharpe": 0.4201,
+      "sortino": 0.4313,
+      "win_rate": 0.5,
+      "avg_return": 0.3628,
+      "max_dd": -369.1314
+    },
+    "bear": {
+      "n_trades": 14,
+      "sharpe": 0.3121,
+      "sortino": 0.2878,
+      "win_rate": 0.5714,
+      "avg_return": 0.2179,
+      "max_dd": -1.3951
+    },
+    "high_vol": {
+      "n_trades": 126,
+      "sharpe": -0.0974,
+      "sortino": -0.0923,
+      "win_rate": 0.4762,
+      "avg_return": -0.0585,
+      "max_dd": -1.1078
+    },
+    "bull": {
+      "n_trades": 96,
+      "sharpe": 0.1915,
+      "sortino": 0.1433,
+      "win_rate": 0.6042,
+      "avg_return": 0.0847,
+      "max_dd": -865.1901
+    },
+    "low_vol_bull": {
+      "n_trades": 308,
+      "sharpe": 0.6206,
+      "sortino": 0.7184,
+      "win_rate": 0.6006,
+      "avg_return": 0.2674,
+      "max_dd": -59.6144
+    },
+    "unknown": {
+      "n_trades": 4,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.5,
+      "avg_return": 0.0833,
+      "max_dd": -0.7443
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}

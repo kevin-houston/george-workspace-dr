@@ -1,0 +1,89 @@
+{
+  "strategy": "crypto_momentum_20d_long_short",
+  "category": "crypto",
+  "round": 3,
+  "tickers": [
+    "ADA-USD",
+    "AVAX-USD",
+    "BNB-USD",
+    "BTC-USD",
+    "DOT-USD",
+    "ETH-USD",
+    "LINK-USD",
+    "SOL-USD"
+  ],
+  "n_trades": 2096,
+  "date_range": "2018-01-03 \u2013 2026-03-31",
+  "total_return": -Infinity,
+  "cagr": 0.0,
+  "sharpe": 0.268,
+  "sortino": 0.9278,
+  "calmar": 0.0,
+  "skewness": 12.3599,
+  "kurtosis": 196.1882,
+  "max_drawdown": NaN,
+  "max_consec_losses": 13,
+  "win_rate": 0.4432,
+  "profit_factor": 1.6968,
+  "avg_return": 2.7747,
+  "avg_win": 15.2444,
+  "avg_loss": -7.1704,
+  "kelly_fraction": 0.1813,
+  "spy_correlation": -0.0312,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 12,
+      "sharpe": 2.9289,
+      "sortino": 53.5702,
+      "win_rate": 0.9167,
+      "avg_return": 35.1907,
+      "max_dd": -86336987683446.38
+    },
+    "bear": {
+      "n_trades": 66,
+      "sharpe": 0.892,
+      "sortino": 2.6167,
+      "win_rate": 0.5455,
+      "avg_return": 9.4713,
+      "max_dd": -977803.1604
+    },
+    "high_vol": {
+      "n_trades": 677,
+      "sharpe": 0.2797,
+      "sortino": 1.5134,
+      "win_rate": 0.4151,
+      "avg_return": 4.3811,
+      "max_dd": NaN
+    },
+    "bull": {
+      "n_trades": 672,
+      "sharpe": 0.1777,
+      "sortino": 0.3789,
+      "win_rate": 0.4464,
+      "avg_return": 1.2505,
+      "max_dd": NaN
+    },
+    "low_vol_bull": {
+      "n_trades": 577,
+      "sharpe": 0.348,
+      "sortino": 0.6002,
+      "win_rate": 0.4679,
+      "avg_return": 1.6956,
+      "max_dd": NaN
+    },
+    "unknown": {
+      "n_trades": 92,
+      "sharpe": -0.0632,
+      "sortino": -0.0971,
+      "win_rate": 0.337,
+      "avg_return": -0.1778,
+      "max_dd": -588.4512
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

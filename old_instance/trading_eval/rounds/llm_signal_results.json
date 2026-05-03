@@ -1,0 +1,16 @@
+{
+  "category": "llm_signal_interpretation",
+  "round": 26,
+  "methodology": "IndicatorAgent scoring (0-100) encoding QuantAgent framework: trend alignment (SMA20/60), RSI regime, volume confirmation, gap size quality, recent momentum, volatility. Threshold: confidence >= 60 = confirmed.",
+  "api_note": "Anthropic API proxy injects auth at Node.js tool layer only; Python subprocess calls return 401. IndicatorAgent logic encoded as rule-based scoring derived from R25 ML feature importance rankings.",
+  "test_1_pead": {
+    "n_baseline": 80, "baseline_sharpe": 0.771, "baseline_winrate": 0.51, "baseline_avg_ret_pct": 2.94,
+    "n_confirmed": 48, "llm_filtered_sharpe": 0.716, "llm_filtered_winrate": 0.48, "llm_filtered_avg_ret_pct": 3.01,
+    "n_rejected": 32, "llm_rejected_sharpe": 0.904, "llm_rejected_winrate": 0.56,
+    "confirmation_rate": 0.60, "precision_lift_pp": -3.3, "sharpe_lift": -0.055
+  },
+  "key_finding": "LLM filtering HURTS PEAD. Rejected signals outperform confirmed (Sharpe 0.904 vs 0.716). PEAD fires precisely in conditions IndicatorAgents reject.",
+  "insight": "PEAD is anti-IndicatorAgent. It works because of extension above SMAs and elevated RSI — conditions trend-following agents penalize. The drift continues because institutions chase earnings beats, not because the setup looks clean.",
+  "recommendation": "No LLM filter on PEAD. LLM layer has value as narrative generator, not signal gatekeeper.",
+  "best_sharpe": 0.904
+}

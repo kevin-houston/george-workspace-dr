@@ -1,0 +1,90 @@
+{
+  "strategy": "crypto_bollinger_reversion_1.5std_long_short",
+  "category": "crypto",
+  "round": 3,
+  "tickers": [
+    "ADA-USD",
+    "AVAX-USD",
+    "BNB-USD",
+    "BTC-USD",
+    "DOT-USD",
+    "ETH-USD",
+    "LINK-USD",
+    "SOL-USD"
+  ],
+  "n_trades": 1679,
+  "date_range": "2018-02-01 \u2013 2026-03-31",
+  "total_return": -Infinity,
+  "cagr": 0.0,
+  "sharpe": -0.3552,
+  "sortino": -0.2737,
+  "calmar": 0.0,
+  "skewness": -6.8886,
+  "kurtosis": 88.5744,
+  "max_drawdown": NaN,
+  "max_consec_losses": 11,
+  "win_rate": 0.4926,
+  "profit_factor": 0.652,
+  "avg_return": -1.2909,
+  "avg_win": 4.9113,
+  "avg_loss": -7.3197,
+  "kelly_fraction": 0.0,
+  "spy_correlation": -0.0788,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 20,
+      "sharpe": -1.3579,
+      "sortino": -1.0361,
+      "win_rate": 0.4,
+      "avg_return": -6.1211,
+      "max_dd": -4298.062
+    },
+    "bear": {
+      "n_trades": 57,
+      "sharpe": -0.6354,
+      "sortino": -0.6723,
+      "win_rate": 0.3333,
+      "avg_return": -1.3254,
+      "max_dd": -18913.2962
+    },
+    "high_vol": {
+      "n_trades": 511,
+      "sharpe": -0.3819,
+      "sortino": -0.2837,
+      "win_rate": 0.4932,
+      "avg_return": -1.8607,
+      "max_dd": -101649619.3539
+    },
+    "bull": {
+      "n_trades": 544,
+      "sharpe": -0.0774,
+      "sortino": -0.061,
+      "win_rate": 0.5312,
+      "avg_return": -0.2531,
+      "max_dd": -1662688.2486
+    },
+    "low_vol_bull": {
+      "n_trades": 486,
+      "sharpe": -0.6486,
+      "sortino": -0.5242,
+      "win_rate": 0.4691,
+      "avg_return": -1.6948,
+      "max_dd": -387350.6801
+    },
+    "unknown": {
+      "n_trades": 61,
+      "sharpe": -0.5951,
+      "sortino": -0.4537,
+      "win_rate": 0.5082,
+      "avg_return": -0.9387,
+      "max_dd": -826.2881
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}

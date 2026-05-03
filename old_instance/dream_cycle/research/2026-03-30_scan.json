@@ -1,0 +1,98 @@
+{
+  "date": "2026-03-30",
+  "sources_searched": ["arXiv (cs.MA, cs.AI)", "HuggingFace Daily Papers", "GitHub Trending"],
+  "total_candidates": 10,
+  "findings": [
+    {
+      "rank": 1,
+      "title": "QuantAgent: Price-Driven Multi-Agent LLMs for High-Frequency Trading",
+      "url": "https://arxiv.org/abs/2509.09995",
+      "source": "HuggingFace / arXiv",
+      "summary": "Four specialized LLM agents (Indicator, Pattern, Trend, Risk) collaborate to make high-frequency trading decisions directly from OHLC price data, achieving 80% directional accuracy in zero-shot evaluation.",
+      "relevance_score": 5,
+      "relevance_notes": "Directly maps to George's trading research harness. Architecture (specialized agents per signal type) mirrors how George could decompose candlestick + macro + factor signals."
+    },
+    {
+      "rank": 2,
+      "title": "mem-agent: Equipping LLM Agents with Memory Using RL",
+      "url": "https://huggingface.co/blog/driaforall/mem-agent-blog",
+      "source": "HuggingFace",
+      "summary": "A 4B LLM trained with GSPO to use markdown files as persistent memory via Python tools, inspired by Obsidian; includes MCP server for any LLM to use as a memory backend.",
+      "relevance_score": 5,
+      "relevance_notes": "George already uses MEMORY.md as primary state. This paper validates that architecture and adds RL-based memory management (retrieve, update, clarify). The mem-agent-mcp server could be integrated."
+    },
+    {
+      "rank": 3,
+      "title": "From AI Assistant to AI Scientist: POISE — Autonomous Discovery of LLM-RL Algorithms",
+      "url": "https://arxiv.org/abs/2603.23951",
+      "source": "arXiv (March 25, 2026)",
+      "summary": "POISE is a closed-loop LLM agent framework that autonomously discovers improved RL policy optimization algorithms, using evolutionary search with genealogically linked reflections, improving AIME25 pass@32 from 26.7% to 43.3%.",
+      "relevance_score": 3,
+      "relevance_notes": "Meta-level relevance: the dream cycle IS George's version of POISE — iterative self-improvement via reflection + structured evidence. Confirms the architecture is well-founded."
+    },
+    {
+      "rank": 4,
+      "title": "A-MEM: Agentic Memory for LLM Agents",
+      "url": "https://arxiv.org/abs/2502.12110",
+      "source": "arXiv / HuggingFace",
+      "summary": "Proposes a Zettelkasten-style interconnected memory network where notes dynamically link to each other, enabling better retrieval and reasoning than flat storage.",
+      "relevance_score": 4,
+      "relevance_notes": "George's MEMORY.md is flat. A-MEM suggests linking related facts (e.g. trading findings → product ideas → research agenda) for better recall and reasoning."
+    },
+    {
+      "rank": 5,
+      "title": "SimpleMem: Efficient Lifelong Memory for LLM Agents",
+      "url": "https://github.com/aiming-lab/SimpleMem",
+      "source": "GitHub / HuggingFace",
+      "summary": "Semantic lossless compression for agent memory achieves 64% performance boost over Claude-Mem on LoCoMo benchmark.",
+      "relevance_score": 3,
+      "relevance_notes": "Relevant when MEMORY.md grows beyond manageable size. Current state is still compact enough that compression isn't needed yet."
+    },
+    {
+      "rank": 6,
+      "title": "CORAL: Dynamic Information-Flow Orchestrator for Multi-Agent Systems",
+      "url": "https://github.com/VoltAgent/awesome-ai-agent-papers",
+      "source": "VoltAgent/awesome-ai-agent-papers",
+      "summary": "Replaces predefined multi-agent workflows with a dynamic natural-language A2A communication orchestrator, improving flexibility in long-horizon tasks.",
+      "relevance_score": 3,
+      "relevance_notes": "Relevant to George's swarm/team tasks. Less critical than memory and trading papers."
+    },
+    {
+      "rank": 7,
+      "title": "AndroTMem: Anchored Memory for Long-Horizon GUI Agents",
+      "url": "https://arxiv.org/list/cs.MA/current",
+      "source": "HuggingFace (Mar 22, 2026)",
+      "summary": "Persistent interaction-trajectory memory for GUI agents navigating long-horizon tasks without losing context.",
+      "relevance_score": 2,
+      "relevance_notes": "Tangentially relevant to agent-browser skill. Low priority for George's core use cases."
+    },
+    {
+      "rank": 8,
+      "title": "From Spark to Fire: Error Cascade Mitigation in Multi-Agent LLM Collaboration",
+      "url": "https://arxiv.org/list/cs.MA/current",
+      "source": "arXiv (March 2026)",
+      "summary": "Models and mitigates error propagation across agent chains in multi-agent LLM systems.",
+      "relevance_score": 3,
+      "relevance_notes": "Relevant to George's swarm tasks — errors in one sub-agent can cascade. Could inform how George validates teammate outputs."
+    },
+    {
+      "rank": 9,
+      "title": "OpenClaw: Breakout AI Agent Framework",
+      "url": "https://blog.win-source.net/q-a/why-openclaw-is-trending-on-github-in-2026-the-rise-of-ai-agent-frameworks/",
+      "source": "GitHub Trending",
+      "summary": "Fastest-growing open-source AI agent framework (210k+ stars), modular plugin-based LLM orchestration. Memory stored in markdown files — similar to NanoClaw/George architecture.",
+      "relevance_score": 2,
+      "relevance_notes": "Architecture validation rather than actionable insight. George is already implemented and running."
+    },
+    {
+      "rank": 10,
+      "title": "Memento-Skills: Let Agents Design Agents",
+      "url": "https://arxiv.org/list/cs.MA/current",
+      "source": "HuggingFace (Mar 22, 2026)",
+      "summary": "Agents autonomously design and store reusable skill modules, enabling continual capability growth.",
+      "relevance_score": 4,
+      "relevance_notes": "Dream cycle already mirrors this — George stages new scripts each night. Formalizing a skill library could be next evolution."
+    }
+  ],
+  "top_for_deep_research": [1, 2, 4]
+}

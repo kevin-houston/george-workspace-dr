@@ -1,0 +1,90 @@
+{
+  "strategy": "forex_CarryMom_20",
+  "category": "forex",
+  "round": 2,
+  "tickers": [
+    "AUD_USD",
+    "EUR_GBP",
+    "EUR_JPY",
+    "EUR_USD",
+    "GBP_JPY",
+    "GBP_USD",
+    "USD_CAD",
+    "USD_CHF",
+    "USD_JPY"
+  ],
+  "n_trades": 1190,
+  "date_range": "2016-04-04 \u2013 2026-03-30",
+  "total_return": -1.0,
+  "cagr": -0.9448,
+  "sharpe": -0.0847,
+  "sortino": -0.1145,
+  "calmar": -0.5814,
+  "skewness": 2.1287,
+  "kurtosis": 12.4864,
+  "max_drawdown": -1.625,
+  "max_consec_losses": 14,
+  "win_rate": 0.3916,
+  "profit_factor": 0.9219,
+  "avg_return": -0.037,
+  "avg_win": 1.1161,
+  "avg_loss": -0.7847,
+  "kelly_fraction": 0.0,
+  "spy_correlation": 0.2282,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 23,
+      "sharpe": -0.6665,
+      "sortino": -1.001,
+      "win_rate": 0.2174,
+      "avg_return": -0.4493,
+      "max_dd": -6.6511
+    },
+    "bear": {
+      "n_trades": 31,
+      "sharpe": -0.7991,
+      "sortino": -0.6647,
+      "win_rate": 0.4516,
+      "avg_return": -0.3324,
+      "max_dd": -8.8741
+    },
+    "high_vol": {
+      "n_trades": 279,
+      "sharpe": 0.0325,
+      "sortino": 0.0475,
+      "win_rate": 0.3943,
+      "avg_return": 0.0156,
+      "max_dd": -1.2466
+    },
+    "bull": {
+      "n_trades": 284,
+      "sharpe": 0.08,
+      "sortino": 0.1221,
+      "win_rate": 0.412,
+      "avg_return": 0.0343,
+      "max_dd": -3.894
+    },
+    "low_vol_bull": {
+      "n_trades": 546,
+      "sharpe": -0.1553,
+      "sortino": -0.1976,
+      "win_rate": 0.3828,
+      "avg_return": -0.0632,
+      "max_dd": -1.625
+    },
+    "unknown": {
+      "n_trades": 27,
+      "sharpe": -0.3106,
+      "sortino": -0.3299,
+      "win_rate": 0.4074,
+      "avg_return": -0.1103,
+      "max_dd": -1.5509
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

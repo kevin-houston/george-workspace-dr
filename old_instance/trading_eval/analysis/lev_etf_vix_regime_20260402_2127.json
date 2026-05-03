@@ -1,0 +1,83 @@
+{
+  "strategy": "lev_etf_vix_regime",
+  "category": "leveraged_etf",
+  "round": 1,
+  "tickers": [
+    "TQQQ/SQQQ"
+  ],
+  "n_trades": 20,
+  "date_range": "2015-01-05 \u2013 2024-12-23",
+  "total_return": -0.1676,
+  "cagr": -0.1042,
+  "sharpe": -2.0365,
+  "sortino": -1.7113,
+  "calmar": -0.6219,
+  "skewness": -2.8391,
+  "kurtosis": 9.2932,
+  "max_drawdown": -0.1676,
+  "max_consec_losses": 12,
+  "win_rate": 0.05,
+  "profit_factor": 0.0055,
+  "avg_return": -0.009,
+  "avg_win": 0.001,
+  "avg_loss": -0.0095,
+  "kelly_fraction": 0.0,
+  "spy_correlation": -0.2547,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 8,
+      "sharpe": -1.5536,
+      "sortino": -1.3261,
+      "win_rate": 0.125,
+      "avg_return": -0.0097,
+      "max_dd": -0.0768
+    },
+    "bull": {
+      "n_trades": 4,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.0,
+      "avg_return": -0.0051,
+      "max_dd": -0.0204
+    },
+    "low_vol_bull": {
+      "n_trades": 8,
+      "sharpe": -3.7348,
+      "sortino": -2.5398,
+      "win_rate": 0.0,
+      "avg_return": -0.0103,
+      "max_dd": -0.0798
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}

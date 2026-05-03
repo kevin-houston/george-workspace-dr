@@ -1,0 +1,200 @@
+{
+  "timestamp": "2026-03-08T20:17:14.018275",
+  "total_equity": 20.36,
+  "positions": [
+    {
+      "symbol": "XDTE",
+      "quantity": 57.431235,
+      "avg_buy_price": 42.4998,
+      "current_price": 38.3787,
+      "equity": 2204.14,
+      "percent_change": -9.7,
+      "total_cost": 2440.816001253,
+      "total_return": -236.67600125300032,
+      "total_return_pct": -9.69659331680479
+    },
+    {
+      "symbol": "AMZN",
+      "quantity": 1.992115,
+      "avg_buy_price": 225.8906,
+      "current_price": 212.53,
+      "equity": 423.38,
+      "percent_change": -5.91,
+      "total_cost": 450.00005261900003,
+      "total_return": -26.620052619000035,
+      "total_return_pct": -5.9155665569529035
+    },
+    {
+      "symbol": "GOOGL",
+      "quantity": 1.245153,
+      "avg_buy_price": 303.1194,
+      "current_price": 297.1301,
+      "equity": 369.97,
+      "percent_change": -1.98,
+      "total_cost": 377.43003026819997,
+      "total_return": -7.460030268199944,
+      "total_return_pct": -1.9765333094716608
+    },
+    {
+      "symbol": "GLDW",
+      "quantity": 5.037144,
+      "avg_buy_price": 52.6787,
+      "current_price": 61.89,
+      "equity": 311.75,
+      "percent_change": 17.49,
+      "total_cost": 265.35019763279996,
+      "total_return": 46.39980236720004,
+      "total_return_pct": 17.48625129400113
+    },
+    {
+      "symbol": "SPXS",
+      "quantity": 7.340205,
+      "avg_buy_price": 131.9584,
+      "current_price": 37.61,
+      "equity": 276.07,
+      "percent_change": -71.5,
+      "total_cost": 968.601707472,
+      "total_return": -692.5317074720001,
+      "total_return_pct": -71.49808864981993
+    },
+    {
+      "symbol": "GOOW",
+      "quantity": 1.082016,
+      "avg_buy_price": 72.3373,
+      "current_price": 62.2,
+      "equity": 67.3,
+      "percent_change": -14.01,
+      "total_cost": 78.2701159968,
+      "total_return": -10.970115996800004,
+      "total_return_pct": -14.015714499833509
+    },
+    {
+      "symbol": "AMD",
+      "quantity": 0.330215,
+      "avg_buy_price": 198.9613,
+      "current_price": 192.02,
+      "equity": 63.41,
+      "percent_change": -3.49,
+      "total_cost": 65.7000056795,
+      "total_return": -2.2900056794999983,
+      "total_return_pct": -3.485548678140428
+    },
+    {
+      "symbol": "META",
+      "quantity": 0.089692,
+      "avg_buy_price": 654.9079,
+      "current_price": 641.326,
+      "equity": 57.52,
+      "percent_change": -2.07,
+      "total_cost": 58.7399993668,
+      "total_return": -1.2199993667999962,
+      "total_return_pct": -2.0769482123786727
+    },
+    {
+      "symbol": "MSFT",
+      "quantity": 0.13982,
+      "avg_buy_price": 391.3603,
+      "current_price": 407.61,
+      "equity": 56.99,
+      "percent_change": 4.15,
+      "total_cost": 54.719997146,
+      "total_return": 2.270002854000005,
+      "total_return_pct": 4.148397244874383
+    },
+    {
+      "symbol": "LRCX",
+      "quantity": 0.262476,
+      "avg_buy_price": 246.994,
+      "current_price": 199.6929,
+      "equity": 52.41,
+      "percent_change": -19.15,
+      "total_cost": 64.829997144,
+      "total_return": -12.419997144000007,
+      "total_return_pct": -19.157793754660798
+    },
+    {
+      "symbol": "SVC",
+      "quantity": 23.0,
+      "avg_buy_price": 2.6365,
+      "current_price": 2.21,
+      "equity": 50.83,
+      "percent_change": -16.18,
+      "total_cost": 60.6395,
+      "total_return": -9.8095,
+      "total_return_pct": -16.17674947847525
+    },
+    {
+      "symbol": "TSM",
+      "quantity": 0.128221,
+      "avg_buy_price": 369.3623,
+      "current_price": 339.8,
+      "equity": 43.57,
+      "percent_change": -8.0,
+      "total_cost": 47.3600034683,
+      "total_return": -3.7900034683,
+      "total_return_pct": -8.002540521004828
+    },
+    {
+      "symbol": "MU",
+      "quantity": 0.101273,
+      "avg_buy_price": 424.5014,
+      "current_price": 369.17,
+      "equity": 37.39,
+      "percent_change": -13.03,
+      "total_cost": 42.9905302822,
+      "total_return": -5.600530282199998,
+      "total_return_pct": -13.027357991252478
+    },
+    {
+      "symbol": "JPM",
+      "quantity": 0.08798,
+      "avg_buy_price": 309.3954,
+      "current_price": 288.48,
+      "equity": 25.38,
+      "percent_change": -6.76,
+      "total_cost": 27.220607292,
+      "total_return": -1.8406072920000014,
+      "total_return_pct": -6.761815679773414
+    },
+    {
+      "symbol": "COST",
+      "quantity": 0.021203,
+      "avg_buy_price": 984.2947,
+      "current_price": 996.0,
+      "equity": 21.12,
+      "percent_change": 1.19,
+      "total_cost": 20.8700005241,
+      "total_return": 0.24999947590000104,
+      "total_return_pct": 1.197889169247072
+    },
+    {
+      "symbol": "CME",
+      "quantity": 0.064213,
+      "avg_buy_price": 311.6191,
+      "current_price": 317.1,
+      "equity": 20.36,
+      "percent_change": 1.76,
+      "total_cost": 20.0099972683,
+      "total_return": 0.3500027316999983,
+      "total_return_pct": 1.749139327742315
+    },
+    {
+      "symbol": "IREN",
+      "quantity": 0.497487,
+      "avg_buy_price": 40.265,
+      "current_price": 36.711,
+      "equity": 18.26,
+      "percent_change": -8.83,
+      "total_cost": 20.031314055,
+      "total_return": -1.7713140549999977,
+      "total_return_pct": -8.842725195843363
+    }
+  ],
+  "summary": {
+    "num_positions": 17,
+    "total_value": 4099.85,
+    "total_cost_basis": 5063.580057468001,
+    "total_returns": -963.7300574680004,
+    "total_return_pct": -19.03258261013662
+  }
+}

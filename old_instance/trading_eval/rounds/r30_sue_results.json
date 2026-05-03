@@ -1,0 +1,78 @@
+{
+  "round": "R30",
+  "date": "2026-04-03",
+  "hypothesis": "12-quarter SUE history improves PEAD Sharpe via elastic net vs single-quarter signal",
+  "paper": "Kaczmarek & Zaremba (Finance Research Letters, 2025)",
+  "universe": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "META",
+    "NVDA",
+    "JPM",
+    "JNJ",
+    "XOM",
+    "WMT",
+    "BAC",
+    "PG",
+    "UNH",
+    "HD",
+    "CVX",
+    "LLY",
+    "MRK",
+    "PFE",
+    "KO",
+    "PEP",
+    "TMO",
+    "COST"
+  ],
+  "missing_tickers": [
+    "ABBV",
+    "MCD",
+    "ACN",
+    "ABT",
+    "DHR",
+    "NEE",
+    "LIN",
+    "HON"
+  ],
+  "n_observations": 2210,
+  "n_clean_observations": 2210,
+  "date_range": {
+    "start": "1999-04-15",
+    "end": "2026-02-25"
+  },
+  "elastic_net": {
+    "label": "Elastic Net (12-Q SUE)",
+    "sharpe": 0.493,
+    "win_rate": 0.587,
+    "n_signals": 2041,
+    "cagr": 0.6437,
+    "max_drawdown": -0.8666,
+    "mean_return_per_trade": 0.00756,
+    "std_return_per_trade": 0.05443
+  },
+  "baseline": {
+    "label": "Baseline (1-Q SUE > 3%)",
+    "sharpe": 0.64,
+    "win_rate": 0.599,
+    "n_signals": 1228,
+    "cagr": 0.4715,
+    "max_drawdown": -0.9371,
+    "mean_return_per_trade": 0.01,
+    "std_return_per_trade": 0.05541
+  },
+  "diagnostics": {
+    "en_long_signals_pct": 0.985,
+    "en_near_universal_long_bias": true,
+    "baseline_per_trade_info_ratio": 0.1805,
+    "en_per_trade_info_ratio": 0.1389,
+    "baseline_trades_per_year": 45,
+    "en_trades_per_year": 76,
+    "frequency_adj_sharpe_baseline": 1.217,
+    "frequency_adj_sharpe_en": 1.208,
+    "likely_paper_uses_long_short": true,
+    "note": "EN learns positive market drift, not purely earnings signal. Long-short version needed to replicate paper findings."
+  }
+}

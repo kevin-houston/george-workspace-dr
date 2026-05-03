@@ -1,0 +1,82 @@
+{
+  "strategy": "intl_country_pairs_Canada_Australia",
+  "category": "international",
+  "round": 1,
+  "tickers": [
+    "EWC/EWA"
+  ],
+  "n_trades": 76,
+  "date_range": "2015-04-16 \u2013 2024-08-06",
+  "total_return": 1.5559,
+  "cagr": 0.1597,
+  "sharpe": 2.0506,
+  "sortino": 1.6851,
+  "calmar": 3.1537,
+  "skewness": -0.182,
+  "kurtosis": 3.7004,
+  "max_drawdown": -0.0506,
+  "max_consec_losses": 2,
+  "win_rate": 0.8158,
+  "profit_factor": 4.5596,
+  "avg_return": 0.0127,
+  "avg_win": 0.0199,
+  "avg_loss": -0.0193,
+  "kelly_fraction": 0.25,
+  "spy_correlation": -0.2251,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 4,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 1.0,
+      "avg_return": 0.0461,
+      "max_dd": 0.0
+    },
+    "bear": {
+      "n_trades": 3,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 1.0,
+      "avg_return": 0.017,
+      "max_dd": 0.0
+    },
+    "high_vol": {
+      "n_trades": 14,
+      "sharpe": 0.8213,
+      "sortino": 0.49,
+      "win_rate": 0.7857,
+      "avg_return": 0.0044,
+      "max_dd": -0.0506
+    },
+    "bull": {
+      "n_trades": 11,
+      "sharpe": 1.4703,
+      "sortino": 0.9239,
+      "win_rate": 0.8182,
+      "avg_return": 0.0073,
+      "max_dd": -0.0427
+    },
+    "low_vol_bull": {
+      "n_trades": 44,
+      "sharpe": 2.3171,
+      "sortino": 1.9339,
+      "win_rate": 0.7955,
+      "avg_return": 0.0133,
+      "max_dd": -0.0477
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

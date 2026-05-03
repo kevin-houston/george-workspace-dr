@@ -1,0 +1,14 @@
+{
+  "id": "sae-fire-r31-feature-extraction-2026-04-12",
+  "date": "2026-04-12",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2505.14420",
+  "title": "SAE-FiRE: Sparse Autoencoder feature selection for earnings surprise prediction (R31)",
+  "rationale": "SAE-FiRE achieves F1 0.757 on conference call transcripts using Gemma 2-9B (vs Hierarchical FinBERT baseline F1 0.721, +5% relative). The technique decomposes LLM activations via Sparse Autoencoder, then uses tree-based feature selection to pick the top-k most discriminative dimensions. This is directly applicable to R31 (text-based PEAD): instead of running FinBERT scoring naively on full transcripts, extract SAE features from Gemma 2-9B (or Llama 3.1-8B) activations and filter to top-1500/4500 features before classification. Financial news outperformed transcripts in their study (AUC 0.703 vs 0.668), suggesting a combined transcript+news feature vector would be strongest. Key implementation note: use tree-based (XGBoost) feature selection, NOT ANOVA F-tests — tree-based consistently outperformed in their experiments. The approach addresses the known challenge of 5000+ word transcripts with high redundancy that overwhelms standard FinBERT chunking.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### SAE-FiRE: Sparse Autoencoder feature selection for earnings transcripts\n- LESSON: For long earnings documents (5000+ words), decompose LLM activations through a Sparse Autoencoder then apply tree-based feature selection (top-1500/4500 features) before classification. SAE-FiRE achieves F1 0.757 on conference call transcripts (Gemma 2-9B), beating Hierarchical FinBERT (0.721) and Longformer (0.718) baselines. AUC 0.668 on transcripts; 0.703 on financial news — combine both for strongest signal.\n- LESSON: Use tree-based (XGBoost) feature selection, NOT ANOVA F-tests. ANOVA selects linearly discriminative dimensions; tree-based captures interaction effects that matter in financial text. Top-k=1500 for 16K SAE (2B model), top-k=4500 for 131K SAE (9B model).\n- LESSON: For earnings surprise direction classification, optimal model is Gemma 2-9B with SAE-FiRE. Adequate alternative: Llama 3.1-8B (F1 0.759 on transcripts, near-identical to Gemma 2-9B's 0.757). Both are free and runnable locally.\n- WHEN: Designing R31 text PEAD or any earnings classification pipeline using full transcripts or 10-Q MD&A sections.\n- SOURCE: SAE-FiRE, arXiv:2505.14420 (May 2025, revised Oct 2025). Datasets: 9,324 earnings transcripts 2012-2014, SEC 10-Q MD&A, FNSPID Nasdaq news.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

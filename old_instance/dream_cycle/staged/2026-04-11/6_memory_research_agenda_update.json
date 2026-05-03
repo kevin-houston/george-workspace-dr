@@ -1,0 +1,14 @@
+{
+  "id": "memory-r29-agenda-update-2026-04-11",
+  "date": "2026-04-11",
+  "source": "Dream Cycle Research Phase 2026-04-11 synthesis",
+  "source_url": "",
+  "title": "Research Agenda Update: R29 LLM Filter Design Correction + R28 3-Agent Architecture",
+  "rationale": "Synthesize today's research into the research agenda section of MEMORY.md. Key corrections: (1) R29 LLM filter should be a top-K re-ranking approach, not binary threshold. (2) R28 EarningsQualityAgent now has validated exact prompts from arXiv:2603.20965. (3) R33 concept now has a concrete architecture reference (FactorEngine). (4) AlphaForgeBench confirms LLM-as-factor-generator boundary.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n## Research Agenda Update (2026-04-11 Dream Cycle)\n\n- **Round 28** — TradingAgents multi-agent overlay on PEAD — QUEUED (next to run)\n  - **AMENDMENT (2026-04-11)**: EarningsQualityAgent should use 3-agent zero-shot architecture:\n    - Performance Agent (Qwen2.5-3B): realized earnings/revenue/margins focus\n    - Guidance Agent (Llama-3.2-3B): forward outlook/guidance revisions focus\n    - Risk Agent (Qwen2.5-72B): litigation/regulation/liquidity/disruption focus\n    - Meta-classifier: L2-regularized logistic regression on (label, confidence, agreement) features\n    - All prompts include anti-extrapolation instruction prefix\n    - Use cross-agent DISAGREEMENT as PEAD failure signal: Performance+/Guidance- = 'beat but lowered guidance'\n  - Source: arXiv:2603.20965 (validated on 18,420 disclosures; 0.561 → 0.612 balanced accuracy)\n\n- **Round 29** — LLM semantic filter on equity pairs trading — NEXT QUEUED (R28 runs first)\n  - **DESIGN CORRECTION (2026-04-11)**: Use TOP-K RE-RANKING, not binary threshold:\n    - Run LLM on top K=100 pairs by statistical rank → trade top M=20 by LLM score\n    - LLM output JSON: {\"mechanism_strength\": 0-100, \"expected_co_movement_sign\": +1 or -1}\n    - VETO if co_movement_sign conflicts with observed spread direction\n    - Replace old 'skip if score < 40' with 'rank all, trade top 20, veto on sign conflict'\n  - Full pipeline (unchanged): factor residualize → SPONGEsym cluster → SAE cluster → cointegration → LLM re-rank → Kelly trade\n\n- **Round 31** — Text-based PEAD (FinBERT + 3-day confirmation) — QUEUED\n\n- **Round 32** — SPX put-writing with VIX-Kelly hybrid sizing — QUEUED (independent)\n\n- **Round 33** (concept) — FactorEngine-style LLM-guided factor mining on US equities\n  - Seed with 146 harness strategies + SSRN abstracts as knowledge base\n  - Separate LLM (logic search) from Bayesian (parameter tuning) per FactorEngine design\n  - Reference: arXiv:2603.16365 (Sharpe 1.0093, +126% excess return on CSI300)\n",
+  "action": "append",
+  "apply_status": "applied"
+}

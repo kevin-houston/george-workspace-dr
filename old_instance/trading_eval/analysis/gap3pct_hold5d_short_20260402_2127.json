@@ -1,0 +1,111 @@
+{
+  "strategy": "gap3pct_hold5d_short",
+  "category": "pead",
+  "round": 30,
+  "tickers": [
+    "AAPL",
+    "ADBE",
+    "AMZN",
+    "BAC",
+    "CAT",
+    "COST",
+    "CVX",
+    "GE",
+    "GOOGL",
+    "HD",
+    "HON",
+    "JNJ",
+    "JPM",
+    "LMT",
+    "MA",
+    "META",
+    "MMM",
+    "MRK",
+    "MSFT",
+    "NFLX",
+    "NVDA",
+    "PG",
+    "QCOM",
+    "RTX",
+    "TSLA",
+    "TXN",
+    "UNH",
+    "V",
+    "WMT",
+    "XOM"
+  ],
+  "n_trades": 526,
+  "date_range": "2020-01-31 \u2013 2025-12-08",
+  "total_return": -0.9461,
+  "cagr": -0.0645,
+  "sharpe": -0.1527,
+  "sortino": -0.146,
+  "calmar": -0.0679,
+  "skewness": -0.305,
+  "kurtosis": 2.0126,
+  "max_drawdown": -0.9499,
+  "max_consec_losses": 7,
+  "win_rate": 0.4886,
+  "profit_factor": 0.8869,
+  "avg_return": -0.0031,
+  "avg_win": 0.0491,
+  "avg_loss": -0.0529,
+  "kelly_fraction": 0.0,
+  "spy_correlation": -0.2684,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 92,
+      "sharpe": 0.2891,
+      "sortino": 0.2875,
+      "win_rate": 0.5326,
+      "avg_return": 0.0087,
+      "max_dd": -0.488
+    },
+    "bear": {
+      "n_trades": 33,
+      "sharpe": -0.6809,
+      "sortino": -0.7046,
+      "win_rate": 0.3333,
+      "avg_return": -0.0104,
+      "max_dd": -0.4159
+    },
+    "high_vol": {
+      "n_trades": 219,
+      "sharpe": -0.5136,
+      "sortino": -0.4741,
+      "win_rate": 0.4475,
+      "avg_return": -0.0098,
+      "max_dd": -0.9326
+    },
+    "bull": {
+      "n_trades": 146,
+      "sharpe": 0.0927,
+      "sortino": 0.0812,
+      "win_rate": 0.5548,
+      "avg_return": 0.0014,
+      "max_dd": -0.4713
+    },
+    "low_vol_bull": {
+      "n_trades": 36,
+      "sharpe": -0.2954,
+      "sortino": -0.2656,
+      "win_rate": 0.5,
+      "avg_return": -0.0034,
+      "max_dd": -0.1864
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

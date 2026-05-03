@@ -1,0 +1,14 @@
+{
+  "id": "r31-anonymization-warning-2026-04-10",
+  "date": "2026-04-10",
+  "source": "arXiv:2511.15364 — Anonymization and Information Loss (Wu, Yang, Ying)",
+  "source_url": "https://arxiv.org/abs/2511.15364",
+  "title": "R31 Implementation Warning: Never Anonymize EDGAR Transcripts Before FinBERT Processing",
+  "rationale": "arXiv:2511.15364 shows that anonymizing earnings call transcripts (removing company names, numbers, product/geography mentions) destroys MORE signal than look-ahead bias. Company names and specific numerical data are the highest-density signal tokens — they tell FinBERT WHICH company is speaking and WHAT performance was achieved. Stripping them 'for privacy' in preprocessing is a critical implementation error. EDGAR transcripts are public (Safe Harbor quarterly disclosure), so there is no privacy reason to anonymize. This is a preventable implementation hazard: many tutorial pipelines strip named entities 'to avoid data leakage' but this is wrong for PEAD signal extraction. Must be noted in R31 design spec.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "content": "\n### R31 Implementation Warning: Transcript Anonymization Destroys FinBERT Signal\n- LESSON: Anonymizing earnings call transcripts before NLP processing causes MORE signal destruction than look-ahead bias. Company names, product/segment names, geography names, and numerical data ARE the signal-carrying tokens — stripping them removes the information FinBERT uses to assess management specificity and beat quality.\n- LESSON: EDGAR earnings call transcripts are public record (Safe Harbor quarterly disclosure). There is ZERO privacy reason to anonymize them. Use raw transcripts directly — do NOT strip company names, product names, dollar amounts, or analyst names from Q&A sections.\n- LESSON: Preprocessing tokens to replace with [COMPANY], [NUMBER], or [PRODUCT] placeholders is a common tutorial mistake that does NOT prevent data leakage (the transcript is public) but DOES destroy signal. Avoid any preprocessing beyond whitespace normalization and chunking for the 512-token limit.\n- WHEN: Implementing R31 text-based PEAD with FinBERT, or any NLP pipeline on public earnings call transcripts (8-K, 10-Q, EDGAR).\n- SOURCE: arXiv:2511.15364 (Nov 2025) — Anonymization and Information Loss. Wu, Yang, Ying.",
+  "apply_status": "applied"
+}

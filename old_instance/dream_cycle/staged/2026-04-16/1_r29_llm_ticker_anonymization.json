@@ -1,0 +1,14 @@
+{
+  "id": "r29-llm-ticker-anonymization-2026-04-16",
+  "date": "2026-04-16",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2603.17692",
+  "title": "R29 LLM Filter: Anonymize tickers before semantic scoring to block memorization bias",
+  "rationale": "BlindTrade (arXiv:2603.17692, Korea University / Mirae Asset, Sharpe 1.40 OOS 2025 YTD) demonstrates that LLMs exhibit memorization bias when ticker symbols are provided: they recall training-data associations rather than reasoning about economic relationships. For R29 pairs trading, if we prompt 'Is there a plausible economic relationship between MSFT and TXN?', the LLM likely replies based on memorized analyst reports and correlation history rather than genuine economic reasoning. Fix: replace both tickers with synthetic IDs ('COMPANY_A', 'COMPANY_B') in the LLM prompt and provide anonymized descriptors (sector, business model summary, ~2 sentences each) as the only company context. This forces genuine economic reasoning. BlindTrade shows that Risk-Regime IC rises to 0.0515 on 2025 holdout when anonymized — the LLM signal is MORE predictive when forced to reason from first principles, not recall. Zero implementation cost: only a prompt change.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n### R29 LLM Filter Amendment: Ticker Anonymization (arXiv:2603.17692, April 2026)\n- **Source**: BlindTrade — anonymized LLM trading achieves Sharpe 1.40 OOS 2025 YTD; Risk-Regime IC = 0.0515 when tickers anonymized\n- **Finding**: LLMs exhibit memorization bias when tickers are provided (recall training data, not genuine reasoning). Anonymization forces genuine economic assessment.\n- **R29 Amendment (MANDATORY)**: Replace both tickers in LLM plausibility prompt with synthetic IDs:\n  - INSTEAD OF: 'Is there a plausible economic mechanism between MSFT and TXN?'\n  - USE: 'COMPANY_A is a large-cap US technology company specializing in enterprise software and cloud computing. COMPANY_B is a large-cap US semiconductor company focused on analog/embedded processors for industrial and automotive applications. Is there a plausible economic mechanism explaining mean-reversion between these two companies? Output JSON: {\"mechanism_strength\": <0-100>, \"expected_co_movement_sign\": <+1 or -1>}'\n  - Business model summaries (1-2 sentences) should be pre-generated from SEC 10-K first-paragraph + sector ETF label\n- **Why**: BlindTrade shows anonymized LLM signal is MORE predictive (IC 0.0515) than named-ticker signal\n- **Cost**: Zero — prompt change only. Business model summaries: one-time extraction from EDGAR.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

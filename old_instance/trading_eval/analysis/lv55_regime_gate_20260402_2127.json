@@ -1,0 +1,105 @@
+{
+  "strategy": "lv55_regime_gate",
+  "category": "equity_technical",
+  "round": 7,
+  "tickers": [
+    "AAPL",
+    "AMZN",
+    "BAC",
+    "CVX",
+    "GOOGL",
+    "HD",
+    "IBM",
+    "JNJ",
+    "JPM",
+    "KO",
+    "MA",
+    "META",
+    "MO",
+    "MRK",
+    "MSFT",
+    "NVDA",
+    "PFE",
+    "PG",
+    "T",
+    "UNH",
+    "V",
+    "VZ",
+    "WMT",
+    "XOM"
+  ],
+  "n_trades": 2160,
+  "date_range": "2010-10-18 \u2013 2025-12-15",
+  "total_return": 437372.364,
+  "cagr": 0.0748,
+  "sharpe": 0.5368,
+  "sortino": 0.5734,
+  "calmar": 0.1498,
+  "skewness": 0.0927,
+  "kurtosis": 0.9573,
+  "max_drawdown": -0.4994,
+  "max_consec_losses": 8,
+  "win_rate": 0.563,
+  "profit_factor": 1.4914,
+  "avg_return": 0.0071,
+  "avg_win": 0.0381,
+  "avg_loss": -0.0329,
+  "kelly_fraction": 0.1855,
+  "spy_correlation": 0.2676,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 22,
+      "sharpe": 1.9833,
+      "sortino": 3.0658,
+      "win_rate": 0.6818,
+      "avg_return": 0.0262,
+      "max_dd": -0.0548
+    },
+    "high_vol": {
+      "n_trades": 133,
+      "sharpe": -0.0443,
+      "sortino": -0.0478,
+      "win_rate": 0.4586,
+      "avg_return": -0.0006,
+      "max_dd": -0.497
+    },
+    "bull": {
+      "n_trades": 339,
+      "sharpe": 0.1098,
+      "sortino": 0.1191,
+      "win_rate": 0.4808,
+      "avg_return": 0.0015,
+      "max_dd": -0.6265
+    },
+    "low_vol_bull": {
+      "n_trades": 1666,
+      "sharpe": 0.6606,
+      "sortino": 0.6991,
+      "win_rate": 0.5864,
+      "avg_return": 0.0086,
+      "max_dd": -0.4626
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

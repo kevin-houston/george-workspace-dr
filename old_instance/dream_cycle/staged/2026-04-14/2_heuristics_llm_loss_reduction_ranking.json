@@ -1,0 +1,14 @@
+{
+  "id": "heuristic-llm-loss-reduction-2026-04-14",
+  "date": "2026-04-14",
+  "source": "arXiv:2602.07048 (Kim et al. 2026) + R29 experiment synthesis",
+  "source_url": "https://arxiv.org/abs/2602.07048",
+  "title": "New heuristic: LLM filtering primary effect is LOSS REDUCTION via ranking, not win rate via threshold",
+  "rationale": "Kim et al. 2026 (validated on 18 rolling evaluation windows) shows the LLM's dominant contribution to pairs/lead-lag trading is cutting large losers, not improving winner magnitude. Using a hard threshold (pass/fail) misses this — ranking and keeping top-N captures it. Also: LLM can predict correct co-movement sign even when Granger is wrong. These are generalizable principles applicable to any LLM-filtered strategy in the harness.",
+  "risk_level": "low",
+  "type": "claude_md_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "action": "append",
+  "apply_status": "applied",
+  "content": "\n### LLM filter effect is loss reduction, not win rate — use ranking not threshold\n- LESSON: When using an LLM to filter pairs/signals, its primary effect is cutting large losers (~40-47% loss reduction), NOT improving win rate (+3pp). A hard pass/fail threshold (e.g., score>=40) captures less value than a RANKING approach (keep top-N by score). Use continuous scoring + rank, not binary veto.\n- LESSON: Prompt the LLM to also predict the expected CO-MOVEMENT SIGN (positive/negative). The LLM can correct sign errors from statistical methods (Granger/cointegration). If LLM sign disagrees with statistical sign, skip the pair (conservative) or flip trade direction (aggressive).\n- WHEN: Any pairs trading, lead-lag, or event-driven strategy where an LLM is used as a signal filter.\n- SOURCE: arXiv:2602.07048 (Kim et al. Feb 2026) — prediction market pairs trading, 18 rolling evaluations. Win rate: 51.4%→54.5%; Avg loss: -$649→-$347 (46.5% reduction); Total PnL: +205%.\n\n### LLM as market logic extractor for factor generation (AlphaLogics)\n- LESSON: Multi-agent LLM pipelines that (1) extract explicit market logic from existing factors, (2) generate new factors constrained by that logic, (3) refine logic via backtesting feedback — produce interpretable AND performant factors (CSI 500 IR=1.53, S&P 500 IR=1.27). More auditable than pure evolutionary search.\n- WHEN: Factor generation / alpha mining rounds. Start by extracting logic from existing 146-strategy harness before generating new ones.\n- SOURCE: arXiv:2603.20247 (AlphaLogics, Shenzhen U., March 2026)\n"
+}

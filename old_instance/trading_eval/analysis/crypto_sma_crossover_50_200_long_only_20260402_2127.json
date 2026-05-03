@@ -1,0 +1,89 @@
+{
+  "strategy": "crypto_sma_crossover_50_200_long_only",
+  "category": "crypto",
+  "round": 3,
+  "tickers": [
+    "ADA-USD",
+    "AVAX-USD",
+    "BNB-USD",
+    "BTC-USD",
+    "DOT-USD",
+    "ETH-USD",
+    "LINK-USD",
+    "SOL-USD"
+  ],
+  "n_trades": 62,
+  "date_range": "2018-07-21 \u2013 2025-10-06",
+  "total_return": 6.61238555081781e+97,
+  "cagr": 8.569836744474664e+18,
+  "sharpe": 0.957,
+  "sortino": 15.3722,
+  "calmar": 1086061810644766.2,
+  "skewness": 4.0602,
+  "kurtosis": 16.8678,
+  "max_drawdown": -7890.7449,
+  "max_consec_losses": 5,
+  "win_rate": 0.4194,
+  "profit_factor": 9.6854,
+  "avg_return": 145.0616,
+  "avg_win": 385.7433,
+  "avg_loss": -28.7641,
+  "kelly_fraction": 0.25,
+  "spy_correlation": 0.013,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 17,
+      "sharpe": 1.8212,
+      "sortino": 61.3154,
+      "win_rate": 0.4706,
+      "avg_return": 478.1091,
+      "max_dd": -4458714463.113
+    },
+    "bull": {
+      "n_trades": 30,
+      "sharpe": -0.244,
+      "sortino": -0.618,
+      "win_rate": 0.2,
+      "avg_return": -6.27,
+      "max_dd": -16716.7589
+    },
+    "low_vol_bull": {
+      "n_trades": 13,
+      "sharpe": 2.4039,
+      "sortino": 6.2501,
+      "win_rate": 0.7692,
+      "avg_return": 49.482,
+      "max_dd": -83682.042
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

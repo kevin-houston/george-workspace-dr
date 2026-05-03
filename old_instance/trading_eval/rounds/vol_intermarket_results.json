@@ -1,0 +1,198 @@
+{
+  "timestamp": "2026-03-30T18:20:18.209621Z",
+  "spy_benchmark": {
+    "label": "SPY_Benchmark",
+    "sharpe": 0.703,
+    "cagr": 12.44,
+    "max_dd": -33.72,
+    "win_rate": 54.62,
+    "n_trades": 0,
+    "spy_corr": 1.0
+  },
+  "vix_results": [
+    {
+      "label": "V1-VIX_MeanReversion",
+      "sharpe": 0.483,
+      "cagr": 6.07,
+      "max_dd": -28.32,
+      "win_rate": 7.5,
+      "n_trades": 14,
+      "spy_corr": 0.709
+    },
+    {
+      "label": "V1-VIX_SpikeRecover",
+      "sharpe": 0.273,
+      "cagr": 2.69,
+      "max_dd": -28.32,
+      "win_rate": 1.84,
+      "n_trades": 13,
+      "spy_corr": 0.555
+    },
+    {
+      "label": "V1-VIX_ContangoRoll",
+      "sharpe": 0.14,
+      "cagr": 5.6,
+      "max_dd": -63.02,
+      "win_rate": 45.29,
+      "n_trades": 48,
+      "spy_corr": 0.477
+    },
+    {
+      "label": "V1-VIX_Momentum",
+      "sharpe": -0.033,
+      "cagr": -0.43,
+      "max_dd": -32.36,
+      "win_rate": 11.79,
+      "n_trades": 533,
+      "spy_corr": -0.276
+    },
+    {
+      "label": "V1-VIX_LevelRegime",
+      "sharpe": -0.594,
+      "cagr": -30.39,
+      "max_dd": -99.27,
+      "win_rate": 48.0,
+      "n_trades": 278,
+      "spy_corr": -0.085
+    }
+  ],
+  "intermarket_results": [
+    {
+      "label": "IM2-RiskParity_Lite",
+      "sharpe": 0.865,
+      "cagr": 7.98,
+      "max_dd": -22.28,
+      "win_rate": 54.71,
+      "n_trades": 132,
+      "spy_corr": 0.469
+    },
+    {
+      "label": "IM4-DualMomentum",
+      "sharpe": 0.628,
+      "cagr": 9.23,
+      "max_dd": -33.29,
+      "win_rate": 50.3,
+      "n_trades": 54,
+      "spy_corr": 0.353
+    },
+    {
+      "label": "IM5-Dollar_Equity_Inverse",
+      "sharpe": 0.589,
+      "cagr": 7.31,
+      "max_dd": -31.39,
+      "win_rate": 54.8,
+      "n_trades": 283,
+      "spy_corr": 0.59
+    },
+    {
+      "label": "IM6-OilShock_Signal",
+      "sharpe": 0.56,
+      "cagr": 9.58,
+      "max_dd": -33.73,
+      "win_rate": 54.23,
+      "n_trades": 193,
+      "spy_corr": 0.934
+    },
+    {
+      "label": "IM3-Momentum_Rotation",
+      "sharpe": 0.461,
+      "cagr": 6.9,
+      "max_dd": -29.75,
+      "win_rate": 53.15,
+      "n_trades": 270,
+      "spy_corr": 0.167
+    },
+    {
+      "label": "IM1-Equity_Bond_Rotation",
+      "sharpe": 0.369,
+      "cagr": 6.14,
+      "max_dd": -35.72,
+      "win_rate": 54.41,
+      "n_trades": 11,
+      "spy_corr": 0.666
+    },
+    {
+      "label": "IM7-CreditSpread_Signal",
+      "sharpe": 0.236,
+      "cagr": 3.51,
+      "max_dd": -44.45,
+      "win_rate": 52.85,
+      "n_trades": 301,
+      "spy_corr": 0.269
+    }
+  ],
+  "fixed_income_results": [
+    {
+      "label": "FI4-Inflation_Protection",
+      "sharpe": 0.462,
+      "cagr": 2.76,
+      "max_dd": -19.57,
+      "win_rate": 52.35,
+      "n_trades": 127,
+      "spy_corr": -0.119
+    },
+    {
+      "label": "FI3-Credit_Rotation",
+      "sharpe": 0.228,
+      "cagr": 1.5,
+      "max_dd": -24.3,
+      "win_rate": 50.8,
+      "n_trades": 224,
+      "spy_corr": 0.003
+    },
+    {
+      "label": "FI6-BondLadder_Baseline",
+      "sharpe": 0.099,
+      "cagr": 0.73,
+      "max_dd": -27.25,
+      "win_rate": 51.66,
+      "n_trades": 132,
+      "spy_corr": -0.173
+    },
+    {
+      "label": "FI5-EM_vs_DM_Bonds",
+      "sharpe": 0.076,
+      "cagr": 0.67,
+      "max_dd": -33.39,
+      "win_rate": 52.46,
+      "n_trades": 222,
+      "spy_corr": 0.374
+    },
+    {
+      "label": "FI2-YieldCurve_Trade",
+      "sharpe": 0.004,
+      "cagr": 0.05,
+      "max_dd": -34.09,
+      "win_rate": 49.59,
+      "n_trades": 190,
+      "spy_corr": -0.246
+    },
+    {
+      "label": "FI1-Duration_Momentum",
+      "sharpe": 0.0,
+      "cagr": 0.0,
+      "max_dd": 0.0,
+      "win_rate": 0.0,
+      "n_trades": 0,
+      "spy_corr": 0
+    }
+  ],
+  "champion": {
+    "label": "IM2-RiskParity_Lite",
+    "sharpe": 0.865,
+    "cagr": 7.98,
+    "max_dd": -22.28,
+    "win_rate": 54.71,
+    "n_trades": 132,
+    "spy_corr": 0.469
+  },
+  "most_diversifying": {
+    "label": "FI2-YieldCurve_Trade",
+    "sharpe": 0.004,
+    "cagr": 0.05,
+    "max_dd": -34.09,
+    "win_rate": 49.59,
+    "n_trades": 190,
+    "spy_corr": -0.246
+  }
+}

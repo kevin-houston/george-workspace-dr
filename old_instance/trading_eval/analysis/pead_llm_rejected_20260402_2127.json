@@ -1,0 +1,102 @@
+{
+  "strategy": "pead_llm_rejected",
+  "category": "llm_signal",
+  "round": 26,
+  "tickers": [
+    "AAPL",
+    "ADBE",
+    "AMZN",
+    "BAC",
+    "CAT",
+    "CVX",
+    "GOOGL",
+    "HON",
+    "JPM",
+    "LMT",
+    "MA",
+    "META",
+    "MSFT",
+    "NFLX",
+    "NVDA",
+    "QCOM",
+    "RTX",
+    "TSLA",
+    "TXN",
+    "WMT",
+    "XOM"
+  ],
+  "n_trades": 39,
+  "date_range": "2020-03-02 \u2013 2024-09-19",
+  "total_return": -8.336314598341891e+33,
+  "cagr": 0.0,
+  "sharpe": 1.4322,
+  "sortino": 1.6612,
+  "calmar": 0.0,
+  "skewness": 0.2718,
+  "kurtosis": 0.5283,
+  "max_drawdown": -1479.7132,
+  "max_consec_losses": 3,
+  "win_rate": 0.6923,
+  "profit_factor": 2.8704,
+  "avg_return": 5.1678,
+  "avg_win": 11.4556,
+  "avg_loss": -8.9796,
+  "kelly_fraction": 0.25,
+  "spy_correlation": 0.1197,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 9,
+      "sharpe": 1.7233,
+      "sortino": 2.7499,
+      "win_rate": 0.6667,
+      "avg_return": 7.9816,
+      "max_dd": -7.269
+    },
+    "bear": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 21,
+      "sharpe": 0.9496,
+      "sortino": 0.9364,
+      "win_rate": 0.6667,
+      "avg_return": 3.359,
+      "max_dd": -262.767
+    },
+    "bull": {
+      "n_trades": 6,
+      "sharpe": 3.5262,
+      "sortino": 10.732,
+      "win_rate": 0.8333,
+      "avg_return": 6.3159,
+      "max_dd": -58.0231
+    },
+    "low_vol_bull": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

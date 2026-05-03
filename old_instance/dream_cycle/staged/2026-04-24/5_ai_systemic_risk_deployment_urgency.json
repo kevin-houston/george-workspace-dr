@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-24-005",
+  "date": "2026-04-24",
+  "source": "arXiv:2604.03272 — Artificial Intelligence and Systemic Risk (April 2026)",
+  "source_url": "https://arxiv.org/abs/2604.03272",
+  "title": "Strategic note: LLM alpha signals decay as AI adoption grows — deploy live earlier, not later",
+  "rationale": "arXiv:2604.03272 models systemic risk from correlated AI trading behavior using 99.5M SEC holdings records 2013-2024. Key finding: systemic risk coupling grows SUPERLINEARLY with AI adoption rate. As more trading systems use similar LLM-based signals (pair plausibility scoring, earnings quality assessment, PEAD filters), those signals' alpha decays because the trades become crowded simultaneously. The signals that work now (R28 PEAD quality filter Sharpe 9.03, R29 pairs Sharpe 1.38) will degrade over time as LLM-augmented trading becomes commoditized. Strategic implication: deploy live sooner while these signals still carry information advantage. Also: prefer signals that require proprietary data or specialized pipeline (Eva-4B evasion detection, OU-calibrated thresholds) over generic LLM prompts that competitors can replicate easily.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n### AI Adoption Systemic Risk: Deploy Live Signals Earlier (arXiv:2604.03272, April 2026)\n- **Paper**: 'Artificial Intelligence and Systemic Risk' — April 2026. Uses 99.5M SEC holdings records 2013-2024.\n- **Finding**: AI adoption in financial markets creates superlinearly growing systemic risk through: (1) Performative prediction (AI models influence the outcomes they predict), (2) Algorithmic herding (correlated signals → simultaneous crowded trades), (3) Cognitive dependency (markets lock into AI decision patterns). Tail-loss amplification projected at 18-54% above Basel III buffers.\n- **Implication for George deployment timing**: LLM-based signals (R28 quality filter, R29 pair plausibility) are currently proprietary advantages. As LLM trading tools proliferate, these signals will decay through crowding. Act sooner than later to capture the edge while it exists.\n- **Signal durability ranking**: Most durable (hardest to replicate): specialized models (Eva-4B evasion detection), proprietary data pipelines (SAE clusters, FinBERT speaker-weighted). Least durable: generic LLM prompts with publicly available data (ChatGPT on news headlines).\n- **R35 design implication**: Include 'algorithmic herding correlation monitor' in the regime stack — if George's signals are highly correlated with publicly available LLM trading indices (e.g., if such indices become available), reduce position size.\n- **SOURCE**: arXiv:2604.03272\n",
+  "action": "append",
+  "apply_status": "applied"
+}

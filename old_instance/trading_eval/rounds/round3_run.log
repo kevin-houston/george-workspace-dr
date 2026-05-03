@@ -1,0 +1,163 @@
+
+============================================================
+  Autoresearch Trading Eval — Round 3
+============================================================
+  Tickers   : 88
+  Strategies: 54 × 3 position types
+  Period    : 2011-03-02 → 2026-03-28 (15 years)
+  Metric    : Raw Return
+  Backtests : 14,256
+============================================================
+
+[01/88] AAPL   Apple ✓ 3791d (15.0yr) | B&H +2316%
+[02/88] MSFT   Microsoft ✓ 3791d (15.0yr) | B&H +1727%
+[03/88] GOOGL  Alphabet ✓ 3791d (15.0yr) | B&H +1784%
+[04/88] META   Meta Platforms ✓ 3483d (13.8yr) | B&H +1343%
+[05/88] AMZN   Amazon ✓ 3791d (15.0yr) | B&H +2350%
+[06/88] INTC   Intel ✓ 3791d (15.0yr) | B&H +206%
+[07/88] CSCO   Cisco ✓ 3791d (15.0yr) | B&H +584%
+[08/88] IBM    IBM ✓ 3791d (15.0yr) | B&H +170%
+[09/88] HPQ    HP Inc ✓ 3791d (15.0yr) | B&H +57%
+[10/88] HPE    Hewlett Packard Enterprise ✓ 2624d (10.4yr) | B&H +245%
+[11/88] ORCL   Oracle ✓ 3791d (15.0yr) | B&H +454%
+[12/88] UNH    UnitedHealth Group ✓ 3791d (15.0yr) | B&H +706%
+[13/88] CVS    CVS Health ✓ 3791d (15.0yr) | B&H +213%
+[14/88] MCK    McKesson ✓ 3791d (15.0yr) | B&H +1119%
+[15/88] COR    Cencora (AmerisourceBergen) ✓ 3791d (15.0yr) | B&H +1128%
+[16/88] CI     Cigna ✓ 3791d (15.0yr) | B&H +618%
+[17/88] ELV    Elevance Health ✓ 3791d (15.0yr) | B&H +462%
+[18/88] CAH    Cardinal Health ✓ 3791d (15.0yr) | B&H +639%
+[19/88] HUM    Humana ✓ 3791d (15.0yr) | B&H +216%
+[20/88] JNJ    Johnson & Johnson ✓ 3791d (15.0yr) | B&H +507%
+[21/88] PFE    Pfizer ✓ 3791d (15.0yr) | B&H +181%
+[22/88] MRK    Merck ✓ 3791d (15.0yr) | B&H +535%
+[23/88] ABT    Abbott Laboratories ✓ 3791d (15.0yr) | B&H +527%
+[24/88] BMY    Bristol-Myers Squibb ✓ 3791d (15.0yr) | B&H +286%
+[25/88] LLY    Eli Lilly ✓ 3791d (15.0yr) | B&H +3634%
+[26/88] TMO    Thermo Fisher ✓ 3791d (15.0yr) | B&H +828%
+[27/88] JPM    JPMorgan Chase ✓ 3791d (15.0yr) | B&H +859%
+[28/88] BAC    Bank of America ✓ 3791d (15.0yr) | B&H +348%
+[29/88] WFC    Wells Fargo ✓ 3791d (15.0yr) | B&H +277%
+[30/88] C      Citigroup ✓ 3791d (15.0yr) | B&H +233%
+[31/88] GS     Goldman Sachs ✓ 3791d (15.0yr) | B&H +571%
+[32/88] MS     Morgan Stanley ✓ 3791d (15.0yr) | B&H +698%
+[33/88] AXP    American Express ✓ 3791d (15.0yr) | B&H +755%
+[34/88] MET    MetLife ✓ 3791d (15.0yr) | B&H +171%
+[35/88] PRU    Prudential Financial ✓ 3791d (15.0yr) | B&H +168%
+[36/88] AIG    AIG ✓ 3791d (15.0yr) | B&H +169%
+[37/88] COF    Capital One ✓ 3791d (15.0yr) | B&H +380%
+[38/88] AFL    Aflac ✓ 3791d (15.0yr) | B&H +441%
+[39/88] ALL    Allstate ✓ 3791d (15.0yr) | B&H +824%
+[40/88] XOM    Exxon Mobil ✓ 3791d (15.0yr) | B&H +247%
+[41/88] CVX    Chevron ✓ 3791d (15.0yr) | B&H +270%
+[42/88] MPC    Marathon Petroleum ✓ 3710d (14.7yr) | B&H +1930%
+[43/88] VLO    Valero Energy ✓ 3791d (15.0yr) | B&H +1576%
+[44/88] PSX    Phillips 66 ✓ 3509d (13.9yr) | B&H +763%
+[45/88] COP    ConocoPhillips ✓ 3791d (15.0yr) | B&H +276%
+[46/88] HAL    Halliburton ✓ 3791d (15.0yr) | B&H +8%
+[47/88] WMT    Walmart ✓ 3791d (15.0yr) | B&H +862%
+[48/88] COST   Costco ✓ 3791d (15.0yr) | B&H +1748%
+[49/88] HD     Home Depot ✓ 3791d (15.0yr) | B&H +1178%
+[50/88] TGT    Target ✓ 3791d (15.0yr) | B&H +243%
+[51/88] KR     Kroger ✓ 3791d (15.0yr) | B&H +740%
+[52/88] LOW    Lowe's ✓ 3791d (15.0yr) | B&H +1118%
+[53/88] WBA    Walgreens HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: WBA"}}}
+$WBA: possibly delisted; no timezone found
+✗ no data
+[54/88] BBY    Best Buy ✓ 3791d (15.0yr) | B&H +224%
+[55/88] DG     Dollar General ✓ 3791d (15.0yr) | B&H +387%
+[56/88] SYY    Sysco ✓ 3791d (15.0yr) | B&H +356%
+[57/88] BA     Boeing ✓ 3791d (15.0yr) | B&H +245%
+[58/88] LMT    Lockheed Martin ✓ 3791d (15.0yr) | B&H +1152%
+[59/88] RTX    RTX (Raytheon) ✓ 3791d (15.0yr) | B&H +431%
+[60/88] NOC    Northrop Grumman ✓ 3791d (15.0yr) | B&H +1459%
+[61/88] GD     General Dynamics ✓ 3791d (15.0yr) | B&H +569%
+[62/88] GE     General Electric ✓ 3791d (15.0yr) | B&H +293%
+[63/88] CAT    Caterpillar ✓ 3791d (15.0yr) | B&H +921%
+[64/88] DE     Deere & Co ✓ 3791d (15.0yr) | B&H +770%
+[65/88] UPS    UPS ✓ 3791d (15.0yr) | B&H +126%
+[66/88] FDX    FedEx ✓ 3791d (15.0yr) | B&H +380%
+[67/88] UNP    Union Pacific ✓ 3791d (15.0yr) | B&H +616%
+[68/88] F      Ford Motor ✓ 3791d (15.0yr) | B&H +56%
+[69/88] GM     General Motors ✓ 3791d (15.0yr) | B&H +208%
+[70/88] TSLA   Tesla ✓ 3791d (15.0yr) | B&H +23215%
+[71/88] CMCSA  Comcast ✓ 3791d (15.0yr) | B&H +239%
+[72/88] T      AT&T ✓ 3791d (15.0yr) | B&H +294%
+[73/88] VZ     Verizon ✓ 3791d (15.0yr) | B&H +202%
+[74/88] DIS    Walt Disney ✓ 3791d (15.0yr) | B&H +156%
+[75/88] NFLX   Netflix ✓ 3791d (15.0yr) | B&H +3092%
+[76/88] PG     Procter & Gamble ✓ 3791d (15.0yr) | B&H +250%
+[77/88] PEP    PepsiCo ✓ 3791d (15.0yr) | B&H +277%
+[78/88] KO     Coca-Cola ✓ 3791d (15.0yr) | B&H +267%
+[79/88] MO     Altria ✓ 3791d (15.0yr) | B&H +544%
+[80/88] MDLZ   Mondelez ✓ 3791d (15.0yr) | B&H +286%
+[81/88] TSN    Tyson Foods ✓ 3791d (15.0yr) | B&H +359%
+[82/88] ADM    Archer Daniels Midland ✓ 3791d (15.0yr) | B&H +199%
+[83/88] MMM    3M ✓ 3791d (15.0yr) | B&H +199%
+[84/88] DOW    Dow Inc ✓ 1765d (7.0yr) | B&H +17%
+[85/88] NUE    Nucor ✓ 3791d (15.0yr) | B&H +429%
+[86/88] CRM    Salesforce ✓ 3791d (15.0yr) | B&H +487%
+[87/88] NKE    Nike ✓ 3791d (15.0yr) | B&H +190%
+[88/88] BRK-B  Berkshire Hathaway ✓ 3791d (15.0yr) | B&H +458%
+
+✓ Round 3 complete in 98s
+  Results : /workspace/group/trading_eval/rounds/round_003/results.json
+  Insights: /workspace/group/trading_eval/rounds/round_003/insights.md
+
+# Autoresearch Insights — Round 3
+Generated: 2026-03-28 04:50
+Tickers: 88  |  Strategies: 54  |  Metric: raw return
+
+## Top 20 Combinations by Raw Return
+
+Rank  Ticker  Strategy     Type           Return%   CAGR%  Sharpe    vs B&H
+----------------------------------------------------------------------
+1     TSLA    LV_55        short         26021.8%   44.8%    1.07  +2806.7%
+2     TSLA    PM_1_0       long          18268.4%   41.4%    1.06  -4946.8%
+3     TSLA    LV_45        short         13365.0%   38.5%    0.97  -9850.1%
+4     TSLA    MACD_19_39   long          12389.0%   37.8%    0.99 -10826.2%
+5     TSLA    LV_60        short         12235.8%   37.7%    0.95 -10979.4%
+6     TSLA    MA_10_30     long          11595.8%   37.2%    0.98 -11619.4%
+7     TSLA    LV_50        short         10277.7%   36.1%    0.93 -12937.5%
+8     TSLA    MACD_hist    long           8657.7%   34.6%    0.93 -14557.5%
+9     TSLA    VWAP_20      short          8647.9%   34.6%    0.96 -14567.3%
+10    TSLA    MA_5_20      long           8187.3%   34.1%    0.92 -15027.9%
+11    TSLA    LV_30        short          8088.4%   34.0%    0.90 -15126.8%
+12    TSLA    LV_40        short          8019.4%   34.0%    0.90 -15195.8%
+13    TSLA    VWAP_40      short          7259.8%   33.1%    0.95 -15955.4%
+14    TSLA    MA_50_100    long           7038.6%   32.8%    0.85 -16176.5%
+15    TSLA    MA_15_40     long           6607.1%   32.3%    0.89 -16608.0%
+16    TSLA    EMA_12_26    long           6214.6%   31.7%    0.88 -17000.5%
+17    TSLA    MACD_zero    long           6214.6%   31.7%    0.88 -17000.5%
+18    TSLA    PM_MA_combo  long           5411.0%   30.5%    0.95 -17804.1%
+19    TSLA    LV_35        short          5368.2%   30.5%    0.84 -17847.0%
+20    TSLA    MA_10_50     long           5177.9%   30.2%    0.84 -18037.2%
+
+## Bottom 10 Combinations by Raw Return
+
+Rank  Ticker  Strategy     Type           Return%
+--------------------------------------------------
+1     NFLX    VWAP_40      long_short      -99.4%
+2     HUM     MA_15_40     long_short      -99.4%
+3     TSLA    VWAP_40      long_short      -99.5%
+4     TSLA    LV_35        long_short      -99.6%
+5     TSLA    LV_40        long_short      -99.8%
+6     TSLA    LV_30        long_short      -99.8%
+7     TSLA    LV_50        long_short      -99.9%
+8     TSLA    LV_60        long_short      -99.9%
+9     TSLA    LV_45        long_short      -99.9%
+10    TSLA    LV_55        long_short     -100.0%
+
+## Strategy Family Ranking (avg raw return across all tickers)
+
+Family                   Avg%     Max%     Min%
+------------------------------------------------
+volatility             148.4% 26021.8%  -100.0%
+trend                  146.9% 12389.0%   -99.4%
+momentum               140.0% 18268.4%   -98.4%
+combo                  108.4%  5411.0%   -94.8%
+mean_reversion          58.6%  8647.9%   -99.5%
+ml                      40.1%   628.9%   -94.8%
+breakout                21.9%   798.8%   -86.9%
+
+## Strategy Ranking (best position t

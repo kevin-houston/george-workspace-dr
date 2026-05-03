@@ -1,0 +1,14 @@
+{
+  "id": "2026-03-30-001",
+  "date": "2026-03-30",
+  "source": "deep_research",
+  "source_url": "https://arxiv.org/abs/2509.09995",
+  "title": "Add Round 25 (Options Strategies) and Round 26 (LLM Signal) to trading research agenda",
+  "rationale": "The MASTER_REPORT covers 6,000+ backtests across all major categories except options strategies and LLM-augmented signal generation. QuantAgent (arXiv:2509.09995) demonstrates 80% directional accuracy using LLM agents on OHLC data. Options strategies (covered calls, earnings straddles, volatility plays) represent the largest unexplored category. Adding these to the research agenda ensures the next trading rounds are clearly defined.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n## Trading Research Agenda \u2014 Next Rounds\n\n- Round 25: Options Strategies\n  - Covered calls on Fortune 100 dividend stocks\n  - Earnings straddles (buy IV before, sell after)\n  - Protective puts as hedge layer on PEAD portfolio\n  - VIX-based options (short vol after spikes)\n  - Target: find options overlay that improves Sharpe of existing top strategies\n\n- Round 26: LLM Signal Interpretation (inspired by QuantAgent, arXiv:2509.09995)\n  - Use LLM agents to generate natural-language rationale for top backtest setups\n  - IndicatorAgent: summarize current OHLC + indicator state\n  - PatternAgent: identify chart formation in text form\n  - Compare LLM-confirmed vs. unconfirmed signals for accuracy lift\n  - Product tie-in: LLM signal narrative could be a premium feature in Dashboard products\n\n- Research gap noted: Intraday patterns (1H, 4H bars) completely unexplored\n- Research gap noted: Alternative data (options flow, insider transactions, short interest) unexplored\n",
+  "action": "append",
+  "apply_status": "applied"
+}

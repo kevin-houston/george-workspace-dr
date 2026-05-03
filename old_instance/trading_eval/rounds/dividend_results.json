@@ -1,0 +1,481 @@
+{
+  "capture_all": [
+    {
+      "strategy": "Div Capture buy-1d sell+1d",
+      "n_trades": 3492,
+      "sharpe": 0.5234126622663137,
+      "win_rate": 0.5383734249713631,
+      "avg_ret_pct": 0.1002801826191324,
+      "t_stat": 2.3702020406575066,
+      "p_value": 0.01783241145922639
+    },
+    {
+      "strategy": "Div Capture buy-1d sell+3d",
+      "n_trades": 3491,
+      "sharpe": 0.9526709036322812,
+      "win_rate": 0.5419650529934116,
+      "avg_ret_pct": 0.2282248176275859,
+      "t_stat": 3.846265030484198,
+      "p_value": 0.00012207400694191233
+    },
+    {
+      "strategy": "Div Capture buy-1d sell+5d",
+      "n_trades": 3489,
+      "sharpe": 1.2251035471865466,
+      "win_rate": 0.5560332473488105,
+      "avg_ret_pct": 0.3599037839895631,
+      "t_stat": 4.795808662704232,
+      "p_value": 1.6879777548170636e-06
+    },
+    {
+      "strategy": "Div Capture buy-1d sell+10d",
+      "n_trades": 3487,
+      "sharpe": 1.1464385400824402,
+      "win_rate": 0.5480355606538572,
+      "avg_ret_pct": 0.44171869236598454,
+      "t_stat": 4.443610198079225,
+      "p_value": 9.121328497673834e-06
+    },
+    {
+      "strategy": "Div Capture buy-2d sell+1d",
+      "n_trades": 3490,
+      "sharpe": 0.7395487409917785,
+      "win_rate": 0.545272206303725,
+      "avg_ret_pct": 0.15972584320465197,
+      "t_stat": 3.0981726493590718,
+      "p_value": 0.0019626736868803814
+    },
+    {
+      "strategy": "Div Capture buy-2d sell+3d",
+      "n_trades": 3489,
+      "sharpe": 1.0996319571598672,
+      "win_rate": 0.5474347950702207,
+      "avg_ret_pct": 0.2863075768698519,
+      "t_stat": 4.363189257860304,
+      "p_value": 1.318927425504824e-05
+    },
+    {
+      "strategy": "Div Capture buy-2d sell+5d",
+      "n_trades": 3487,
+      "sharpe": 1.3385328277848654,
+      "win_rate": 0.5549182678520218,
+      "avg_ret_pct": 0.4202792873906982,
+      "t_stat": 5.199344139457402,
+      "p_value": 2.1150086899663657e-07
+    },
+    {
+      "strategy": "Div Capture buy-2d sell+10d",
+      "n_trades": 3485,
+      "sharpe": 1.249921682848811,
+      "win_rate": 0.5532281205164993,
+      "avg_ret_pct": 0.5006291386364337,
+      "t_stat": 4.819429797634354,
+      "p_value": 1.5011603874311899e-06
+    },
+    {
+      "strategy": "Div Capture buy-3d sell+1d",
+      "n_trades": 3490,
+      "sharpe": 1.1099630996810859,
+      "win_rate": 0.5587392550143266,
+      "avg_ret_pct": 0.2643360925028675,
+      "t_stat": 4.429302960200458,
+      "p_value": 9.743959523054623e-06
+    },
+    {
+      "strategy": "Div Capture buy-3d sell+3d",
+      "n_trades": 3489,
+      "sharpe": 1.3913004226217784,
+      "win_rate": 0.5571797076526225,
+      "avg_ret_pct": 0.39135312178234194,
+      "t_stat": 5.423651260693856,
+      "p_value": 6.236630577883476e-08
+    },
+    {
+      "strategy": "Div Capture buy-3d sell+5d",
+      "n_trades": 3487,
+      "sharpe": 1.5776065162566808,
+      "win_rate": 0.5583596214511041,
+      "avg_ret_pct": 0.5273706365930658,
+      "t_stat": 6.0732669003633095,
+      "p_value": 1.3880484857082328e-09
+    },
+    {
+      "strategy": "Div Capture buy-3d sell+10d",
+      "n_trades": 3485,
+      "sharpe": 1.46145371733074,
+      "win_rate": 0.5629842180774749,
+      "avg_ret_pct": 0.6082066211817958,
+      "t_stat": 5.598424542135966,
+      "p_value": 2.3303677841488453e-08
+    }
+  ],
+  "capture_best": {
+    "strategy": "Div Capture buy-3d sell+5d",
+    "n_trades": 3487,
+    "sharpe": 1.5776065162566808,
+    "win_rate": 0.5583596214511041,
+    "avg_ret_pct": 0.5273706365930658,
+    "t_stat": 6.0732669003633095,
+    "p_value": 1.3880484857082328e-09
+  },
+  "drift_all": [
+    {
+      "strategy": "Ex-Div Drift hold-3d",
+      "n_trades": 3493,
+      "sharpe": 0.7534295859159231,
+      "win_rate": 0.5353564271399943,
+      "avg_ret_pct": 0.1670671928760033,
+      "t_stat": 3.140310684902725,
+      "p_value": 0.0017017895700151722
+    },
+    {
+      "strategy": "Ex-Div Drift hold-5d",
+      "n_trades": 3491,
+      "sharpe": 1.0738692288943488,
+      "win_rate": 0.5499856774563162,
+      "avg_ret_pct": 0.299724183947788,
+      "t_stat": 4.249534223119223,
+      "p_value": 2.198166618898609e-05
+    },
+    {
+      "strategy": "Ex-Div Drift hold-10d",
+      "n_trades": 3489,
+      "sharpe": 1.011734459674205,
+      "win_rate": 0.5431355689309257,
+      "avg_ret_pct": 0.37459044539248626,
+      "t_stat": 3.952460617938993,
+      "p_value": 7.888486300245941e-05
+    },
+    {
+      "strategy": "Ex-Div Drift hold-15d",
+      "n_trades": 3480,
+      "sharpe": 1.3118051616711441,
+      "win_rate": 0.5600574712643678,
+      "avg_ret_pct": 0.5792928634778881,
+      "t_stat": 5.029148007930028,
+      "p_value": 5.175686094968932e-07
+    },
+    {
+      "strategy": "Ex-Div Drift hold-20d",
+      "n_trades": 3469,
+      "sharpe": 1.5106299073490257,
+      "win_rate": 0.5592389737676564,
+      "avg_ret_pct": 0.761004833569501,
+      "t_stat": 5.738648642658126,
+      "p_value": 1.036274374217684e-08
+    }
+  ],
+  "drift_best": {
+    "strategy": "Ex-Div Drift hold-20d",
+    "n_trades": 3469,
+    "sharpe": 1.5106299073490257,
+    "win_rate": 0.5592389737676564,
+    "avg_ret_pct": 0.761004833569501,
+    "t_stat": 5.738648642658126,
+    "p_value": 1.036274374217684e-08
+  },
+  "dogs_5": {
+    "strategy": "Dogs of the Dow top-5",
+    "n_years": 11,
+    "annual_returns": [
+      0.0074,
+      0.3548,
+      0.1561,
+      0.0998,
+      0.2799,
+      0.0229,
+      0.2085,
+      0.0706,
+      0.3017,
+      0.2009,
+      0.1279
+    ],
+    "mean_annual_return": 0.16642028501212336,
+    "sharpe_annual": 1.1138385811195093,
+    "best_year": 0.3548283278233586,
+    "worst_year": 0.00742178862258649,
+    "t_stat": 3.5222668621078697,
+    "p_value": 0.005517524489592568
+  },
+  "dogs_10": {
+    "strategy": "Dogs of the Dow top-10",
+    "n_years": 11,
+    "annual_returns": [
+      0.0007,
+      0.272,
+      0.2329,
+      0.0681,
+      0.2553,
+      0.0526,
+      0.1875,
+      0.0459,
+      0.207,
+      0.1794,
+      0.1809
+    ],
+    "mean_annual_return": 0.15294243202308774,
+    "sharpe_annual": 1.2031147388032484,
+    "best_year": 0.27200283015290705,
+    "worst_year": 0.0007028242975423412,
+    "t_stat": 3.8045828611368266,
+    "p_value": 0.0034597461946966127
+  },
+  "aristocrats_mom": {
+    "strategy": "Aristocrats Momentum top-10 quarterly",
+    "n_days": 2557,
+    "sharpe": 0.5838026827861221,
+    "cagr": 0.13574131922908506,
+    "max_dd": -0.33863864070545924,
+    "win_rate": 0.5506452874462261
+  },
+  "high_yield": {
+    "strategy": "High Yield Screen top-25% quarterly",
+    "n_days": 2684,
+    "sharpe": 0.4478262669304951,
+    "cagr": 0.12289329553046069,
+    "max_dd": -0.44982506442255316,
+    "win_rate": 0.518628912071535
+  },
+  "raise_all": [
+    {
+      "strategy": "Div Raise >=3% hold-10d",
+      "n_trades": 682,
+      "sharpe": 1.4204872010840601,
+      "win_rate": 0.5498533724340176,
+      "avg_ret_pct": 0.4705568826159865,
+      "median_ret_pct": 0.6662390910470677,
+      "avg_raise_pct": 32.642049328836464,
+      "t_stat": 2.4272387437559564,
+      "p_value": 0.015472546667237424
+    },
+    {
+      "strategy": "Div Raise >=3% hold-20d",
+      "n_trades": 679,
+      "sharpe": 1.5994918550031767,
+      "win_rate": 0.5891016200294551,
+      "avg_ret_pct": 0.8068905276348552,
+      "median_ret_pct": 1.0775216292639234,
+      "avg_raise_pct": 32.69975425962861,
+      "t_stat": 2.6829701915189306,
+      "p_value": 0.0074750664084181845
+    },
+    {
+      "strategy": "Div Raise >=3% hold-40d",
+      "n_trades": 672,
+      "sharpe": 3.0247382071125126,
+      "win_rate": 0.6116071428571429,
+      "avg_ret_pct": 1.8809173088136646,
+      "median_ret_pct": 2.3579005961613895,
+      "avg_raise_pct": 32.92396141291435,
+      "t_stat": 4.983008231078427,
+      "p_value": 7.97505175170002e-07
+    },
+    {
+      "strategy": "Div Raise >=5% hold-10d",
+      "n_trades": 577,
+      "sharpe": 2.047201902931716,
+      "win_rate": 0.5771230502599654,
+      "avg_ret_pct": 0.6597058471951586,
+      "median_ret_pct": 1.029624785042215,
+      "avg_raise_pct": 37.80237607714221,
+      "t_stat": 3.1811878306486445,
+      "p_value": 0.0015456462524670305
+    },
+    {
+      "strategy": "Div Raise >=5% hold-20d",
+      "n_trades": 576,
+      "sharpe": 1.8966107430937138,
+      "win_rate": 0.6006944444444444,
+      "avg_ret_pct": 0.9392223337486884,
+      "median_ret_pct": 1.1750534302827447,
+      "avg_raise_pct": 37.78119964672059,
+      "t_stat": 2.9204412139601463,
+      "p_value": 0.0036324339901898962
+    },
+    {
+      "strategy": "Div Raise >=5% hold-40d",
+      "n_trades": 571,
+      "sharpe": 3.4000279661547372,
+      "win_rate": 0.6304728546409807,
+      "avg_ret_pct": 2.0902898283359854,
+      "median_ret_pct": 2.519341292324608,
+      "avg_raise_pct": 37.99006266600269,
+      "t_stat": 5.157577003061828,
+      "p_value": 3.4571398204508834e-07
+    },
+    {
+      "strategy": "Div Raise >=10% hold-10d",
+      "n_trades": 347,
+      "sharpe": 2.490787807286715,
+      "win_rate": 0.6023054755043228,
+      "avg_ret_pct": 0.8066114275242277,
+      "median_ret_pct": 1.2635547302758166,
+      "avg_raise_pct": 57.868629914527546,
+      "t_stat": 2.9846756962650125,
+      "p_value": 0.003040728560692098
+    },
+    {
+      "strategy": "Div Raise >=10% hold-20d",
+      "n_trades": 346,
+      "sharpe": 3.5445800214357015,
+      "win_rate": 0.6358381502890174,
+      "avg_ret_pct": 1.6487039148314306,
+      "median_ret_pct": 2.2254912886556433,
+      "avg_raise_pct": 57.89137161948283,
+      "t_stat": 4.19279446416141,
+      "p_value": 3.506185613795865e-05
+    },
+    {
+      "strategy": "Div Raise >=10% hold-40d",
+      "n_trades": 345,
+      "sharpe": 4.402771179986716,
+      "win_rate": 0.6492753623188405,
+      "avg_ret_pct": 2.6575353951011937,
+      "median_ret_pct": 2.745219159612275,
+      "avg_raise_pct": 57.96255433915284,
+      "t_stat": 5.178847575512958,
+      "p_value": 3.8085455864230883e-07
+    }
+  ],
+  "raise_best": {
+    "strategy": "Div Raise >=10% hold-40d",
+    "n_trades": 345,
+    "sharpe": 4.402771179986716,
+    "win_rate": 0.6492753623188405,
+    "avg_ret_pct": 2.6575353951011937,
+    "median_ret_pct": 2.745219159612275,
+    "avg_raise_pct": 57.96255433915284,
+    "t_stat": 5.178847575512958,
+    "p_value": 3.8085455864230883e-07
+  },
+  "cut_all": [
+    {
+      "strategy": "Div Cut Short >=10% hold-20d",
+      "n_trades": 46,
+      "sharpe": -2.936635254994639,
+      "win_rate": 0.43478260869565216,
+      "avg_ret_pct": -1.539544896014611,
+      "t_stat": -1.2267261244457432,
+      "p_value": 0.2263054696838973
+    },
+    {
+      "strategy": "Div Cut Short >=25% hold-20d",
+      "n_trades": 44,
+      "sharpe": -2.632977903000465,
+      "win_rate": 0.45454545454545453,
+      "avg_ret_pct": -1.4050258683483112,
+      "t_stat": -1.0739802573393018,
+      "p_value": 0.28882151287956126
+    },
+    {
+      "strategy": "Div Cut Short >=50% hold-20d",
+      "n_trades": 35,
+      "sharpe": -2.522098521537288,
+      "win_rate": 0.4857142857142857,
+      "avg_ret_pct": -1.4420664922677582,
+      "t_stat": -0.9150743496820758,
+      "p_value": 0.3665972053339534
+    }
+  ],
+  "cut_best": {
+    "strategy": "Div Cut Short >=50% hold-20d",
+    "n_trades": 35,
+    "sharpe": -2.522098521537288,
+    "win_rate": 0.4857142857142857,
+    "avg_ret_pct": -1.4420664922677582,
+    "t_stat": -0.9150743496820758,
+    "p_value": 0.3665972053339534
+  },
+  "initiation": {
+    "strategy": "Div Initiation hold-60d",
+    "n_trades": 7,
+    "sharpe": NaN,
+    "win_rate": 0.42857142857142855,
+    "avg_ret_pct": -3.3614940446247195,
+    "t_stat": -0.6663305491882964,
+    "p_value": 0.5299719008674416,
+    "events": [
+      {
+        "ret": -0.0006471707866770992,
+        "ticker": "HPE",
+        "date": "2015-12-07"
+      },
+      {
+        "ret": -0.16009915342143663,
+        "ticker": "DOW",
+        "date": "2019-05-30"
+      },
+      {
+        "ret": 0.0350559444310975,
+        "ticker": "DG",
+        "date": "2015-04-06"
+      },
+      {
+        "ret": -0.10153706039394855,
+        "ticker": "GOOGL",
+        "date": "2024-06-10"
+      },
+      {
+        "ret": -0.20621621055183015,
+        "ticker": "CRM",
+        "date": "2024-03-13"
+      },
+      {
+        "ret": 0.18702861878674498,
+        "ticker": "DIS",
+        "date": "2023-12-08"
+      },
+      {
+        "ret": 0.011110448812319563,
+        "ticker": "META",
+        "date": "2024-02-21"
+      }
+    ]
+  },
+  "cc_exdiv_all": [
+    {
+      "strategy": "CC around Ex-Div 3d before 2%OTM",
+      "n_trades": 3477,
+      "sharpe": 1.918956953344926,
+      "win_rate": 0.6189243600805292,
+      "avg_ret_pct": 0.29553005395537646,
+      "avg_premium_pct": 0.4745338156258683,
+      "avg_div_pct": 0.7912201020216484,
+      "t_stat": 7.585303910539946,
+      "p_value": 4.232246954371521e-14
+    },
+    {
+      "strategy": "CC around Ex-Div 5d before 2%OTM",
+      "n_trades": 3472,
+      "sharpe": 2.4526934933199143,
+      "win_rate": 0.6535138248847926,
+      "avg_ret_pct": 0.4622461465109062,
+      "avg_premium_pct": 0.7637117543176667,
+      "avg_div_pct": 0.7914062450092978,
+      "t_stat": 9.468480976008545,
+      "p_value": 5.080508888856004e-21
+    },
+    {
+      "strategy": "CC around Ex-Div 10d before 2%OTM",
+      "n_trades": 3457,
+      "sharpe": 2.6434932215687756,
+      "win_rate": 0.6780445472953428,
+      "avg_ret_pct": 0.6638963449235041,
+      "avg_premium_pct": 1.3264139104181856,
+      "avg_div_pct": 0.7936035582073252,
+      "t_stat": 10.060190468080489,
+      "p_value": 1.7382506994177887e-23
+    }
+  ],
+  "cc_exdiv_best": {
+    "strategy": "CC around Ex-Div 10d before 2%OTM",
+    "n_trades": 3457,
+    "sharpe": 2.6434932215687756,
+    "win_rate": 0.6780445472953428,
+    "avg_ret_pct": 0.6638963449235041,
+    "avg_premium_pct": 1.3264139104181856,
+    "avg_div_pct": 0.7936035582073252,
+    "t_stat": 10.060190468080489,
+    "p_value": 1.7382506994177887e-23
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "strategy": "crypto_sma_crossover_50_200_long_short",
+  "category": "crypto",
+  "round": 3,
+  "tickers": [
+    "ADA-USD",
+    "AVAX-USD",
+    "BNB-USD",
+    "BTC-USD",
+    "DOT-USD",
+    "ETH-USD",
+    "LINK-USD",
+    "SOL-USD"
+  ],
+  "n_trades": 132,
+  "date_range": "2018-01-03 \u2013 2025-12-31",
+  "total_return": 1.065665605639681e+207,
+  "cagr": 6.617482684069959e+18,
+  "sharpe": 0.4657,
+  "sortino": 1.5788,
+  "calmar": 508736493188.3294,
+  "skewness": 5.5015,
+  "kurtosis": 35.0101,
+  "max_drawdown": -13007682.3123,
+  "max_consec_losses": 4,
+  "win_rate": 0.3636,
+  "profit_factor": 2.5521,
+  "avg_return": 51.1843,
+  "avg_win": 231.4461,
+  "avg_loss": -51.8225,
+  "kelly_fraction": 0.2211,
+  "spy_correlation": -0.0154,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 5,
+      "sharpe": -8.4661,
+      "sortino": -3.2061,
+      "win_rate": 0.0,
+      "avg_return": -48.4351,
+      "max_dd": -74.4618
+    },
+    "bear": {
+      "n_trades": 2,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 37,
+      "sharpe": 0.9535,
+      "sortino": 3.1827,
+      "win_rate": 0.4595,
+      "avg_return": 189.2607,
+      "max_dd": -819639.7389
+    },
+    "bull": {
+      "n_trades": 54,
+      "sharpe": -0.5731,
+      "sortino": -0.7438,
+      "win_rate": 0.2593,
+      "avg_return": -13.861,
+      "max_dd": -702728.9796
+    },
+    "low_vol_bull": {
+      "n_trades": 34,
+      "sharpe": 0.5229,
+      "sortino": 0.8495,
+      "win_rate": 0.4412,
+      "avg_return": 9.8102,
+      "max_dd": -121454.6814
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

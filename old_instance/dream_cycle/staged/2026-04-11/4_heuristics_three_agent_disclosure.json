@@ -1,0 +1,14 @@
+{
+  "id": "heuristics-three-agent-disclosure-pattern",
+  "date": "2026-04-11",
+  "source": "arXiv:2603.20965 — Learning to Aggregate Zero-Shot LLM Agents for Corporate Disclosure Classification. March 2026.",
+  "source_url": "https://arxiv.org/abs/2603.20965",
+  "title": "Heuristics: 3-Specialized-Agent Pattern for Financial Document Classification",
+  "rationale": "arXiv:2603.20965 provides a validated, reusable pattern for LLM-based financial document classification that should be encoded as a generalizable heuristic: use three specialized zero-shot agents (Performance, Guidance, Risk) rather than one general-purpose prompt, then aggregate via a trained logistic meta-classifier. This 9% accuracy gain over the best single agent is not about model size — it's about specialization. The Guidance agent alone captures forward-looking signals that a combined prompt misses, because combining instructions in one prompt causes the LLM to weight recent results over guidance (known sycophancy issue). The meta-classifier explicitly learns to weight agent disagreement. This pattern generalizes beyond earnings disclosures to any multi-dimensional financial document (10-K risk factors, M&A announcements, Fed minutes).",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### 3-Specialized-Agent Pattern for Financial Disclosure Classification\n- LESSON: Use THREE specialized zero-shot agents (Performance focus / Guidance focus / Risk focus) rather than one combined prompt for earnings/financial document classification. Balanced accuracy gains +5 points absolute (9% relative) via a logistic meta-classifier that learns to weight cross-agent disagreement. Single combined prompts cause LLMs to weight recent results over forward guidance due to order and sycophancy effects.\n- LESSON: The meta-classifier's most valuable input is cross-agent DISAGREEMENT: when Performance=positive and Guidance=negative, this identifies 'beat but lowered guidance' — the hardest disclosure category and a reliable PEAD failure signal. Train the meta-classifier specifically to handle these mixed-signal cases.\n- LESSON: Small zero-shot models work well for financial classification: Qwen2.5-3B-Instruct and Llama-3.2-3B-Instruct are adequate for the Performance and Guidance agents. Use a larger model (Qwen2.5-72B or Claude Haiku) only for the Risk agent, where under-reaction bias is strongest and nuance matters most.\n- WHEN: Designing any LLM evaluation layer on earnings disclosures, 8-K filings, 10-Q summaries, or any financial document with multiple independent quality dimensions. Apply to R28 EarningsQualityAgent, R31 transcript scoring, and any future financial document NLP pipeline.\n- SOURCE: arXiv:2603.20965 (March 2026) — Kirtac. 18,420 US corporate disclosures, 2018-2024.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

@@ -1,0 +1,52 @@
+Leveraged ETF Strategy Evaluation Summary
+==========================================
+Run date: 2026-03-30
+Period:   2015-01-01 to 2025-01-01 (2,516 trading days)
+
+BEST STRATEGY: lev_momentum_UPRO_IEF
+Best Sharpe:   0.422
+Best CAGR:     8.9%
+Best Max DD:  -52.5%
+
+TOP 3 STRATEGIES:
+  * lev_momentum_UPRO_IEF:      Sharpe=0.422, CAGR=8.9%,  MaxDD=-52.5%
+  * base_momentum_SPY_IEF:      Sharpe=0.338, CAGR=4.2%,  MaxDD=-27.1%
+  * rebalancing_band_TQQQ_SQQQ: Sharpe=-0.03, CAGR=-0.9%, MaxDD=-30.1%
+
+DECAY ANALYSIS:
+  TQQQ annual decay vs 3x QQQ underlying:  -5.51%
+  UPRO annual decay vs 3x SPY underlying:  -5.69%
+  SQQQ excess return vs -3x QQQ:           +5.38%  (directional bull market offset)
+  QLD  annual decay vs 2x QQQ underlying:  -3.16%
+  SSO  annual decay vs 2x SPY underlying:  -3.24%
+  Avg 3x bull ETF annual decay:            -4.40%
+
+VIX REGIME ANALYSIS (short-both-sides performance):
+  VIX 10-15:  Ann Return=-2.52%, Sharpe=-3.39  (worst: trending bull)
+  VIX 15-20:  Ann Return=-2.11%, Sharpe=-2.24
+  VIX 20-25:  Ann Return=-0.69%, Sharpe=-0.59
+  VIX 25-30:  Ann Return= 0.00%, Sharpe= 0.00  (breakeven)
+  VIX 30-35:  Ann Return=+2.71%, Sharpe=+1.74  (only profitable regime, 3% of days)
+  VIX 35-40:  Ann Return=-3.46%, Sharpe=-2.35  (extreme tail, dangerous)
+  Optimal VIX range for shorting: 30-35
+
+CRISIS PERFORMANCE (short_both_TQQQ_SQQQ):
+  COVID Crash   (Feb-Mar 2020):  +3.24%  (SPY: -33.57%)
+  COVID Recovery (Mar-Aug 2020): +1.26%  (SPY: +57.37%)
+  Rate Hike 2022 (full year):    +0.37%  (SPY: -18.18%)
+  Tech Bull 2023 (full year):    -4.24%  (SPY: +26.18%)
+
+KEY FINDINGS:
+1. Leveraged ETF decay is real: 3x ETFs lose 5.5-5.7%/yr vs their 3x leveraged benchmark
+2. Shorting both sides (TQQQ+SQQQ) does NOT work in a bull market: Sharpe=-1.08
+3. The convexity arb (short TQQQ, long QQQ) is catastrophic in trends: CAGR=-34.7%, MaxDD=-98.8%
+4. VIX filtering to low-VIX regimes HURTS the short strategy (low VIX = trending bull)
+5. The only profitable short regime (VIX 30-35) occurs just 3% of trading days
+6. Best approach: use leveraged ETFs for MOMENTUM AMPLIFICATION, not decay harvesting
+7. Leveraged momentum (UPRO when SPY > 50d MA) beats unleveraged momentum on Sharpe (0.42 vs 0.34)
+
+PRACTICAL NOTES:
+  - Borrow cost assumption: 1%/yr flat (real stressed rates can reach 5-10%)
+  - Short-both-sides requires 150% margin per side (300% total margin vs notional)
+  - Leveraged momentum requires no shorting, viable in any standard brokerage account
+  - Max drawdown of -52.5% on leveraged momentum requires strong stomach and proper sizing

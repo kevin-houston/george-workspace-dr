@@ -1,0 +1,15 @@
+{
+  "id": "2026-03-31-round28-trading-agenda",
+  "date": "2026-03-31",
+  "source": "TradingAgents arXiv:2412.20138 + R26/R27 trading_eval findings",
+  "source_url": "https://github.com/TauricResearch/TradingAgents",
+  "title": "Add Round 28 TradingAgents design spec to MASTER_REPORT.md",
+  "rationale": "R25, R26, R27 are all complete. Round 28 is the logical next step: testing whether a TradingAgents-style multi-agent fundamental/news/sentiment overlay improves on raw PEAD Sharpe 2.394. The design spec should be documented while the R26 LLM-signal insight is fresh.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/trading_eval/MASTER_REPORT.md",
+  "action": "append",
+  "content": "\n---\n\n## Round 28 Design Spec \u2014 TradingAgents Overlay on PEAD\n\n**Status:** QUEUED\n**Inspired by:** TradingAgents (arXiv:2412.20138 v0.2.0, GitHub trending March 2026)\n**Hypothesis:** Fundamental/news/sentiment LLM agents improve PEAD Sharpe (unlike IndicatorAgent which hurt it, per R26)\n\n### Rationale\nR26 showed IndicatorAgent filtering hurts PEAD (-0.055 Sharpe). But IndicatorAgent uses technical metrics (RSI, SMA, volatility) \u2014 exactly what PEAD bypasses. The correct filter is fundamental quality:\n- Is the earnings gap driven by real revenue/EPS beat or one-time items?\n- Is news sentiment aligned (institutions buying the beat)?\n- Is current VIX/market regime conducive to risk-on continuation?\n\n### Proposed Architecture (Simplified TradingAgents for PEAD)\n1. **EarningsQualityAgent**: Evaluate revenue beat %, EPS surprise %, guidance direction. Score: organic beat (buy) vs. one-time item (skip).\n2. **NewsAgent**: Check if top 3 headlines for the stock on earnings day are positive/neutral. Simple sentiment score.\n3. **RegimeGuard**: Hard rule \u2014 skip if VIX > 30 at signal date. Already tested in macro harness.\n\n### Implementation Notes\n- Use existing PEAD event dataset (80 events, 15 large-caps, 2021-2025 from R26)\n- EarningsQualityAgent: pull FRED/Yahoo Finance earnings data \u2192 LLM rates quality 0-100\n- NewsAgent: WebSearch for '[ticker] earnings [date] beat miss' \u2192 LLM sentiment score\n- Compare: raw PEAD Sharpe 2.394 vs filtered PEAD Sharpe\n- Low infra cost: Claude via Anthropic API, ~80 LLM calls for the backtest sample\n\n### Success Criteria\n- Filtered PEAD Sharpe > 2.394 = hypothesis confirmed\n- Filtered PEAD Sharpe < 2.394 = fundamental filter also hurts (publish finding as 'PEAD is filter-resistant')\n",
+  "apply_status": "applied",
+  "derived_from": "arXiv:2412.20138, trading_eval/LLM_SIGNAL_REPORT.md"
+}

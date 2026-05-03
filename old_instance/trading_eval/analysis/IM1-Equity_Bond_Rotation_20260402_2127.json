@@ -1,0 +1,83 @@
+{
+  "strategy": "IM1-Equity_Bond_Rotation",
+  "category": "volatility",
+  "round": 2,
+  "tickers": [
+    "SPY",
+    "TLT"
+  ],
+  "n_trades": 12,
+  "date_range": "2015-01-05 \u2013 2025-06-30",
+  "total_return": 16602404704.3262,
+  "cagr": 16602404704.3262,
+  "sharpe": 1.3518,
+  "sortino": 2.5371,
+  "calmar": 67863069.912,
+  "skewness": 0.8968,
+  "kurtosis": -0.3386,
+  "max_drawdown": -244.6456,
+  "max_consec_losses": 2,
+  "win_rate": 0.5833,
+  "profit_factor": 3.1651,
+  "avg_return": 7.2098,
+  "avg_win": 18.0684,
+  "avg_loss": -7.9921,
+  "kelly_fraction": 0.25,
+  "spy_correlation": 0.1152,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 4,
+      "sharpe": 0.0,
+      "sortino": 0.0,
+      "win_rate": 0.75,
+      "avg_return": 15.4099,
+      "max_dd": -43.086
+    },
+    "bull": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "low_vol_bull": {
+      "n_trades": 6,
+      "sharpe": 0.88,
+      "sortino": 1.6461,
+      "win_rate": 0.5,
+      "avg_return": 3.7029,
+      "max_dd": -244.6456
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

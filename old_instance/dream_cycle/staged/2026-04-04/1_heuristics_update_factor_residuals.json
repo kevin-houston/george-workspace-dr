@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-04-heuristics-factor-residuals",
+  "date": "2026-04-04",
+  "source": "Attention Factors for Statistical Arbitrage — Epstein, Wang, Choi, Pelger. ACM ICAIF 2025.",
+  "source_url": "https://arxiv.org/abs/2510.11616",
+  "title": "Heuristic: Factor-purge return series before pairs/stat-arb selection",
+  "rationale": "Attention Factors (arXiv:2510.11616) achieves Sharpe 2.3 net of transaction costs (vs ~0.5 for naive cointegration pairs) by jointly optimizing conditional latent factors AND the trading policy. The critical insight is that classical pairs trading breaks down because both assets in a 'pair' are exposed to the same market and industry factors — when factors move, the pair separates temporarily for non-mispricing reasons, generating false signals and losses. Trading factor-purged residuals eliminates this problem. This is directly actionable for R29 (equity pairs trading design) before even applying the LLM economic plausibility filter.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "action": "append",
+  "content": "\n### Factor-purging residuals for pairs trading\n- LESSON: Before testing cointegration on candidate pairs, residualize each asset's return series against market and industry/sector factors: `residual_i = return_i - beta_mkt * mkt_return - beta_sector * sector_return`. Then test cointegration on residuals, NOT raw prices. Trading factor-purged residuals eliminates spurious spread divergences caused by factor moves (not mispricing), dramatically improving post-cost Sharpe.\n- LESSON: Classical pairs trading frequently generates false signals when market or sector rotations cause temporary spread widening in otherwise cointegrated pairs. Joint factor + signal optimization nets Sharpe 2.3 vs <0.5 for naive cointegration. Factor purging is the low-cost approximation of this benefit available without deep learning.\n- WHEN: Designing any pairs trading or statistical arbitrage strategy (R29 and beyond). Apply before cointegration testing and before LLM economic plausibility scoring.\n- SOURCE: Attention Factors for Statistical Arbitrage, arXiv:2510.11616 (Oct 2025, ACM ICAIF 2025). Epstein, Wang, Choi, Pelger.\n",
+  "apply_status": "applied"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "r31-finbert-price-signal-enhancement",
+  "date": "2026-04-06",
+  "source": "paper",
+  "source_url": "https://aclanthology.org/2025.finnlp-2.13/",
+  "title": "R31 Amendment: Add 3-Day Early Price Signal to FinBERT PEAD Scoring",
+  "rationale": "Hadlock, Roberts & Lee (FinNLP Workshop, ACL 2025) benchmarked FinBERT vs BART encoder-decoder for PEAD text classification. FinBERT wins: 57.6% accuracy (positive drift group), 58.3% (negative drift group). Key enhancement: incorporating a 3-day post-earnings price signal as an additional input to the text model significantly boosts performance. The intuition is that the first 3 days of market reaction partially reveals institutional interpretation of the earnings call \u2014 adding this signal lets the model distinguish 'market agreed with our text score' (stronger signal) vs 'market disagreed' (weaker/reversed signal). This is a clean, low-cost enhancement to R31's FinBERT approach.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "content": "\n### FinNLP 2025 PEAD Enhancement \u2014 FinBERT + Early Price Signal (ACL Anthology 2025.finnlp-2.13)\n- Paper: Hadlock, Roberts & Lee. 'Enhancing Post Earnings Announcement Drift Measurement with Large Language Models.' FinNLP Workshop, ACL 2025, Suzhou.\n- Benchmark: FinBERT vs BART encoder-decoder for PEAD direction classification\n- FinBERT wins: 57.6% accuracy (positive group), 58.3% (negative group) \u2014 financial domain pretraining captures PEAD narrative signals\n- Key enhancement: adding 3-day post-earnings price signal as auxiliary input improves model. Market's early reaction provides additional signal about institutional interpretation of earnings call.\n- R31 Amendment: After computing FinBERT text surprise score, incorporate 3-day cumulative return as a confirmation/contradiction signal\n  \u2192 If FinBERT score is positive AND 3-day return > 0: strong long signal (both agree)\n  \u2192 If FinBERT score is positive but 3-day return < 0: weak signal (market disagrees with text) \u2014 reduce position size 50% or skip\n  \u2192 This 'confirmation window' approach potentially separates text-confirmed drift from reversed calls\n",
+  "apply_status": "applied"
+}

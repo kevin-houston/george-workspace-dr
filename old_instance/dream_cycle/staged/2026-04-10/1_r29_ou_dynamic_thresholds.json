@@ -1,0 +1,15 @@
+{
+  "id": "r29-ou-dynamic-thresholds-2026-04-10",
+  "date": "2026-04-10",
+  "source": "arXiv:2604.02035 — Reinforcement Learning for Speculative Trading under Exploratory Framework (Zhao, Tse, Zheng)",
+  "source_url": "https://arxiv.org/abs/2604.02035",
+  "title": "R29 Amendment: OU Parameter-Calibrated Dynamic Entry/Exit Thresholds (replace fixed ±2σ)",
+  "rationale": "Current R29 design uses fixed ±2σ z-score entry and 0 exit for all pairs. arXiv:2604.02035 shows that optimal pairs trading entry/exit thresholds depend on the OU mean reversion speed θ and spread volatility σ. Fast-reverting pairs (high θ, half-life < 3 days) should use tighter thresholds (±1.5σ) for more trades; slow-reverting pairs (low θ, half-life > 7 days) need wider thresholds (±2.5σ) to avoid false signals. The natural threshold unit is σ_eq = σ/√(2θ) — the OU equilibrium standard deviation — not raw spread standard deviation. This is a zero-extra-data improvement: OU MLE runs on the same 60-day spread history already used for cointegration testing. Replaces an arbitrary constant with a pair-specific, economically grounded threshold.",
+  "risk_level": "medium",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "content": "\n### OU Parameter Calibration for Dynamic Pairs Entry/Exit Thresholds\n- LESSON: Fixed ±2σ z-score entry is suboptimal for pairs trading because OU mean reversion speed θ varies dramatically across pairs. High θ (half-life < 3 days) = use ±1.5σ entry (more frequent, shorter holds). Low θ (half-life > 7 days) = use ±2.5σ entry (fewer, higher-conviction trades). Medium θ (3-7 day half-life) = ±2.0σ.\n- LESSON: The natural pairs spread unit is σ_eq = σ/√(2θ) (the OU equilibrium standard deviation), not the raw rolling standard deviation. Compute entry threshold in terms of σ_eq, not σ_rolling. This ensures thresholds are calibrated to the actual mean-reversion dynamics.\n- LESSON: OU parameter estimation (theta, sigma, mu) via closed-form MLE on 60-day spread returns takes ~0.5ms per pair and runs on data already collected for cointegration testing. Implementation cost: ~20 lines of Python added to R29 pairs loop.\n- LESSON: Use half_life = ln(2)/theta as the intuitive calibration metric. Categorize: fast (< 3d) / medium (3-7d) / slow (> 7d) → entry thresholds 1.5 / 2.0 / 2.5 × σ_eq respectively.\n- WHEN: Designing or improving R29 equity pairs trading, or any future statistical arbitrage strategy using OU spread modeling.\n- SOURCE: arXiv:2604.02035 (April 2026) — RL for Speculative Trading under Exploratory Framework. Zhao, Tse, Zheng.",
+  "apply_status": "applied",
+  "notes": "Also update Research Agenda section — see proposal 2_r29_agenda_update.json. This is a memory_update not code — actual Python implementation happens when Kevin runs R29."
+}

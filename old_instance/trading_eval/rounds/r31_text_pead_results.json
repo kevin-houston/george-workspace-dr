@@ -1,0 +1,149 @@
+{
+  "category": "r31_text_pead",
+  "run_date": "2026-04-11T15:16:55.692394",
+  "universe_size": 24,
+  "date_range": "2020-01-01 to 2025-12-31",
+  "gap_threshold": 0.05,
+  "hold_period": 20,
+  "confirm_days": 3,
+  "text_method_headlines": "finbert",
+  "text_method_primary": "eps_surprise_tanh",
+  "total_gap_signals": 246,
+  "total_news_headlines": 58,
+  "tickers_with_eps_data": 17,
+  "tickers_with_news": 24,
+  "total_eps_data_points": 1878,
+  "baseline_sharpe": 1.0254,
+  "prior_best_sharpe": 2.394,
+  "variants": [
+    {
+      "variant": "1_baseline",
+      "description": "Standard gap PEAD, enter day 0, hold 20d (no text)",
+      "metrics": {
+        "n_trades": 163,
+        "sharpe": 1.0254,
+        "win_rate": 0.6626,
+        "avg_return": 0.04703,
+        "std_return": 0.1351,
+        "t_stat": 4.4444,
+        "p_value": 0.0
+      },
+      "n_trades": 163
+    },
+    {
+      "variant": "2_text_filter",
+      "description": "EPS/FinBERT filter, skip negatives, enter day 0",
+      "metrics": {
+        "n_trades": 159,
+        "sharpe": 1.1159,
+        "win_rate": 0.6667,
+        "avg_return": 0.05105,
+        "std_return": 0.13481,
+        "t_stat": 4.7754,
+        "p_value": 0.0
+      },
+      "n_trades": 159,
+      "signals_total": 164,
+      "signals_with_text": 50,
+      "pct_with_text": 30.5,
+      "text_sources": {
+        "neutral": 113,
+        "eps_surprise": 46
+      }
+    },
+    {
+      "variant": "3_text_3d_confirm",
+      "description": "EPS/FinBERT filter + 3-day confirmation, enter day 3",
+      "metrics": {
+        "n_trades": 142,
+        "sharpe": 1.3222,
+        "win_rate": 0.6901,
+        "avg_return": 0.03591,
+        "std_return": 0.07985,
+        "t_stat": 5.359,
+        "p_value": 0.0
+      },
+      "n_trades": 142,
+      "signals_total": 159,
+      "signals_with_text": 50,
+      "pct_with_text": 31.4,
+      "text_sources": {
+        "neutral": 108,
+        "eps_surprise": 34
+      },
+      "year_by_year": {
+        "2020": {
+          "n_trades": 51,
+          "sharpe": 2.312,
+          "win_rate": 0.7843,
+          "avg_return": 0.06342,
+          "std_return": 0.08053,
+          "t_stat": 5.6238,
+          "p_value": 0.0
+        },
+        "2021": {
+          "n_trades": 11,
+          "sharpe": 0.4551,
+          "win_rate": 0.5455,
+          "avg_return": 0.00688,
+          "std_return": 0.04428,
+          "t_stat": 0.5152,
+          "p_value": 0.6176
+        },
+        "2022": {
+          "n_trades": 21,
+          "sharpe": -1.908,
+          "win_rate": 0.2381,
+          "avg_return": -0.0315,
+          "std_return": 0.04858,
+          "t_stat": -2.9709,
+          "p_value": 0.0076
+        },
+        "2023": {
+          "n_trades": 15,
+          "sharpe": 1.4602,
+          "win_rate": 0.6667,
+          "avg_return": 0.0486,
+          "std_return": 0.098,
+          "t_stat": 1.9207,
+          "p_value": 0.0754
+        },
+        "2024": {
+          "n_trades": 22,
+          "sharpe": 2.6872,
+          "win_rate": 0.9091,
+          "avg_return": 0.05792,
+          "std_return": 0.06374,
+          "t_stat": 4.2623,
+          "p_value": 0.0003
+        },
+        "2025": {
+          "n_trades": 22,
+          "sharpe": 0.768,
+          "win_rate": 0.7727,
+          "avg_return": 0.02032,
+          "std_return": 0.07757,
+          "t_stat": 1.2287,
+          "p_value": 0.2328
+        }
+      }
+    },
+    {
+      "variant": "4_text_weighted",
+      "description": "Position size proportional to text_surprise score",
+      "metrics": {
+        "n_trades": 159,
+        "sharpe": 1.1388,
+        "win_rate": 0.6667,
+        "avg_return": 0.02925,
+        "std_return": 0.07568,
+        "t_stat": 4.8735,
+        "p_value": 0.0
+      },
+      "n_trades": 159,
+      "signals_total": 164,
+      "signals_with_text": 50,
+      "pct_with_text": 30.5
+    }
+  ]
+}

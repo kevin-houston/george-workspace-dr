@@ -1,0 +1,14 @@
+{
+  "id": "heuristics-eva4b-acoustic-camouflage",
+  "date": "2026-04-20",
+  "source": "EvasionBench arXiv:2601.09142 + Acoustic Camouflage arXiv:2604.14619",
+  "source_url": "https://arxiv.org/abs/2604.14619",
+  "title": "Heuristics: Eva-4B for evasion detection; DO NOT add acoustic features to earnings call NLP",
+  "rationale": "Two complementary findings from the April 2026 dream cycle scan: (1) Eva-4B is a superior purpose-built evasion classifier for earnings Q&A; (2) Acoustic features HURT earnings call NLP models due to 'acoustic camouflage' \u2014 executives trained to suppress vocal stress indicators. Both findings have practical implications for R28 and R31 design.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### Eva-4B as evasion classifier for earnings Q&A (upgrade from ad-hoc NOR detection)\n- LESSON: Eva-4B (HuggingFace: `FutureMa/Eva-4B-V2`, Apache 2.0, 4B params) achieves 84.9% Macro-F1 on earnings call evasion detection \u2014 outperforming Claude Opus 4.5, GPT-5.2, Gemini 3 Flash. Use it instead of ad-hoc 3-step LLM prompting for NOR rate computation in EarningsQualityAgent.\n- LESSON: Eva-4B outputs 3 classes: 'direct', 'intermediate', 'fully_evasive'. NOR_rate = fraction of (intermediate + fully_evasive) answers per call. Threshold >25% = position amplifier (consistent with arXiv:2505.18419 heuristic already in pool).\n- LESSON: 40pp rise in evasion incoherence \u2192 0.74% drop in 1-day returns; 63% likelihood of underperformance within 180 days for high-evasion companies (EvasionBench paper). Evasion is a bearish signal, NOT a PEAD amplifier \u2014 use as a VETO above NOR_rate > 0.50 combined with high evasion.\n- WHEN: R28 EarningsQualityAgent Q&A scoring. Any pipeline that detects managerial evasion, non-responses, or deflection in earnings calls.\n- SOURCE: arXiv:2601.09142 (EvasionBench, Jan 2026). GitHub: IIIIQIIII/EvasionBench. HF: FutureMa/Eva-4B-V2.\n\n### Acoustic camouflage: do NOT add prosodic/speech features to earnings call NLP\n- LESSON: Acoustic/prosodic features from earnings calls (pitch, speaking rate, vocal stress) DEGRADE NLP model performance due to 'acoustic camouflage': executives trained in media communication suppress natural stress indicators. Adding acoustic features to an NLP-only model drops recall from 66.25% to 47.08%.\n- LESSON: Do NOT attempt multimodal (text + audio) earnings call analysis. NLP-only is strictly better. The 'voice stress analysis' intuition is wrong for media-trained corporate speakers.\n- WHEN: Designing any earnings call ML pipeline (R28, R31, any future). Reject any proposal to add audio features.\n- SOURCE: arXiv:2604.14619 (Acoustic Camouflage Phenomenon, April 2026)\n",
+  "action": "append",
+  "apply_status": "applied"
+}

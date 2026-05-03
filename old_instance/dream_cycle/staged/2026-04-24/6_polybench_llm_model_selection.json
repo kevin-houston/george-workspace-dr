@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-24-006",
+  "date": "2026-04-24",
+  "source": "arXiv:2604.14199 — PolyBench: Benchmarking LLM Forecasting and Trading on Live Prediction Market Data (Cheng, Liu, Long, April 2026)",
+  "source_url": "https://arxiv.org/abs/2604.14199",
+  "title": "PolyBench: Only 2/7 LLMs profitable on live prediction markets — model selection update for scoring agents",
+  "rationale": "PolyBench evaluated 7 LLMs on 38,666 live binary prediction markets combining news, order book, and market signals. Only 2 achieved positive Confidence-Weighted Returns: MiMo-V2-Flash (+17.6% CWR) and Gemini-3-Flash (+6.2% CWR). The remaining 5 incurred losses. This provides independent evidence for model selection in our scoring pipelines. Key finding: surface-level language fluency does NOT correlate with genuine probabilistic financial reasoning. MiMo-V2-Flash's strong performance suggests it has better calibrated uncertainty than larger models. Gemini-3-Flash has positive returns and is cheap (consistent with using it as a scoring worker agent). Validates existing preference for Qwen2.5 over GPT-4o-mini (low bubble propensity from arXiv:2604.18373), but now also validates Gemini-3-Flash for use in scoring roles.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n### PolyBench: LLM Model Selection for Scoring Agents (arXiv:2604.14199, April 2026)\n- **Paper**: 'PolyBench: Benchmarking LLM Forecasting and Trading Capabilities on Live Prediction Market Data' — Cheng, Liu, Long. April 2026.\n- **Dataset**: 38,666 binary prediction markets from Polymarket. Multimodal: news, order book, market signals. Evaluated against actual outcomes.\n- **Results (Confidence-Weighted Return)**:\n  - MiMo-V2-Flash: +17.6% CWR ✓ (PROFITABLE)\n  - Gemini-3-Flash: +6.2% CWR ✓ (PROFITABLE)\n  - 5 other tested models: NEGATIVE returns ✗\n- **Key finding**: 'The gap between surface-level language fluency and genuine probabilistic reasoning under live market uncertainty.' Larger, more 'capable' models do not reliably outperform smaller calibrated models on financial outcomes.\n- **Model selection update for R28 Phase 2 / R29 scoring agents**:\n  - Gemini-3-Flash confirmed profitable on financial forecasting → consider as worker scoring agent (cheap, positive CWR)\n  - MiMo-V2-Flash: highest positive CWR — note for future model evaluation\n  - Consistent with existing preference for Qwen2.5 over GPT-4o-mini (arXiv:2604.18373 bubble propensity)\n  - Ranking for scoring agents: (1) Qwen2.5-7B-Instruct (low bubble propensity), (2) Gemini-3-Flash (positive CWR), (3) MiMo-V2-Flash (highest CWR, test if accessible)\n  - AVOID as scoring agents: GPT-4o-mini (high bubble propensity), general models not tested on financial reasoning\n- **SOURCE**: arXiv:2604.14199\n",
+  "action": "append",
+  "apply_status": "applied"
+}

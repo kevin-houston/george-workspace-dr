@@ -1,0 +1,14 @@
+{
+  "id": "representation-homogeneity-r35-r33-2026-04-27",
+  "date": "2026-04-27",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2604.22818",
+  "title": "Representation homogeneity risk: multi-LLM-family diversity rule for R33 + R35 indicator",
+  "rationale": "Qiu & Han (arXiv:2604.22818) show that representation homogeneity among AI agents — not strategy diversity — is the dominant driver of crash frequency and tail risk in AI-dominated markets. The critical threshold exists where synchronized deleveraging cascades emerge. This has two direct implications: (1) R33 factor mining should use LLM backbones from multiple families to prevent correlated factor representations; (2) R35 regime stack should monitor cross-LLM-agent forecast dispersion as a leading systemic risk indicator. Both are zero-cost design changes.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### LLM representation homogeneity risk in multi-agent trading design\n- LESSON: Representation homogeneity (agents sharing a foundation model backbone) dominates risk-aversion and learning-rate heterogeneity in driving crash frequency and tail risk (arXiv:2604.22818). Fragility doesn't require identical agents — only similar enough foundations. In normal markets, homogeneity SUPPRESSES perceived volatility (false security → excess leverage → synchronized collapse).\n- LESSON: In any multi-LLM scoring pipeline (R28 3-agent system, R29 LLM pairs filter, R33 factor mining), use LLM backbones from at least 2 different model families (e.g., Claude + Qwen, or Claude + Gemini) to minimize representation homogeneity. Same backbone = correlated representations = correlated failures.\n- LESSON: Cross-LLM-agent forecast dispersion is a systemic risk leading indicator. When different LLM families produce unusually convergent outlook scores across a broad universe, the market may be in a high-homogeneity fragile state — reduce position sizes proactively.\n- WHEN: R33 multi-generator factor mining (always use ≥2 LLM families); R28 Phase 2 3-agent scoring (use Qwen + Claude, not two Claude instances); R35 regime stack (add cross-model dispersion monitor as conceptual 6th layer).\n- SOURCE: arXiv:2604.22818 (Qiu & Han, April 2026)\n",
+  "action": "append",
+  "apply_status": "applied"
+}

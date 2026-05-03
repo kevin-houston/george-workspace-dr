@@ -1,0 +1,14 @@
+{
+  "id": "memory-update-2026-04-16",
+  "date": "2026-04-16",
+  "source": "dream_cycle_nightly_scan",
+  "source_url": "",
+  "title": "MEMORY.md update: 4 new papers — DeltaLag, TrustTrade, MemGuard-Alpha, BlindTrade (applied directly)",
+  "rationale": "Nightly Dream Cycle RESEARCH phase (2026-04-16). 4 deep-researched papers with actionable findings for R29 LLM filter: (1) Ticker anonymization improves LLM signal IC by preventing memorization (BlindTrade, Sharpe 1.40 OOS 2025); (2) Multi-agent selective consensus reduces noise injection (TrustTrade, Harvard); (3) CMMD contamination filter achieves Sharpe 4.11 vs 2.76 unfiltered (MemGuard-Alpha, 7x clean/tainted return gap); (4) DeltaLag dynamic lead-lag pairs achieve Sharpe 2.12-2.91 on US large-caps, staged as R36 concept. Memory update applied directly to MEMORY.md — this JSON serves as changelog.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "Applied directly — see MEMORY.md 'AI Research Findings (Dream Cycle 2026-04-16)' section.",
+  "action": "append",
+  "apply_status": "applied"
+}

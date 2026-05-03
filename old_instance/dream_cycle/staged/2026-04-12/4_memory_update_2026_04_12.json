@@ -1,0 +1,14 @@
+{
+  "id": "memory-update-2026-04-12",
+  "date": "2026-04-12",
+  "source": "dream_cycle_reflection",
+  "source_url": "",
+  "title": "MEMORY.md update: R31 SAE-FiRE finding + Drift Regimes factor concept (R33 candidate)",
+  "rationale": "Two durable findings from tonight's scan: (1) SAE-FiRE provides a concrete better-than-FinBERT approach for R31 text PEAD classification that should replace naive FinBERT chunking in the implementation plan. (2) The Drift Regimes factor (arXiv:2511.12490) represents a high-Sharpe standalone strategy suitable as a new research round (R33 or R34) after R32 options. These are 30-day-relevant facts that affect the research agenda.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n## Dream Cycle Research Scan — 2026-04-12\n\n### R31 Implementation Update: SAE-FiRE supersedes naive FinBERT chunking\n- SAE-FiRE (arXiv:2505.14420): Sparse Autoencoder feature extraction from Gemma 2-9B activations + XGBoost feature selection (top-4500 features) achieves F1 0.757 on earnings transcripts, beating Hierarchical FinBERT (F1 0.721). Use this approach in R31 instead of raw FinBERT scoring.\n- Financial news AUC (0.703) > transcripts AUC (0.668) in their study. Combine transcript + news features for R31.\n- Dataset: 9,324 earnings transcripts 2012-2014; validated on 10-Q MD&A and FNSPID news.\n\n### New Research Round Candidate: Drift Regimes Factor (arXiv:2511.12490)\n- Regime-conditioned value+reversal factor on S&P500: trade ONLY when UpFraction_i > 0.60 (>60% positive-return days in trailing 63d).\n- EDGE = (0.7*value_pctile + 0.3*(-10d_return z-score)) * I(UpFraction > 0.60)\n- OOS Sharpe 13.19 at 0.6bp costs; Sharpe 6.3 at 10bp. R2 to standard factors < 3%.\n- Candidate for R33 or R34 after options round completes.\n- Also useful as PEAD signal filter: require stock to be in drift regime 63 days pre-earnings.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

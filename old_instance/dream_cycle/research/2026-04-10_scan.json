@@ -1,0 +1,73 @@
+{
+  "date": "2026-04-10",
+  "focus": "R29 LLM semantic filter on Pairs trading; PEAD enhancements; factor research; options strategies",
+  "items": [
+    {
+      "title": "RL for Speculative Trading under Exploratory Framework",
+      "arxiv_id": "2604.02035",
+      "url": "https://arxiv.org/abs/2604.02035",
+      "relevance": "R29 pairs trading — optimal OU-process entry/exit thresholds via RL. Closed-form Gibbs distribution for optimal intensity. Key: threshold depends on θ (mean reversion speed) and σ (spread volatility). High θ = tighter entry; low θ = wider threshold.",
+      "actionability": "high",
+      "staged": true
+    },
+    {
+      "title": "Anonymization and Information Loss (earnings call transcripts)",
+      "arxiv_id": "2511.15364",
+      "url": "https://arxiv.org/abs/2511.15364",
+      "relevance": "R31 implementation hazard — anonymizing transcripts destroys more signal than look-ahead bias. Company names, numbers, product/geo mentions carry the signal. EDGAR transcripts are public — no need to anonymize.",
+      "actionability": "high",
+      "staged": true
+    },
+    {
+      "title": "Asset allocation using a Markov process of clustered efficient frontier coefficients",
+      "arxiv_id": "2604.03946",
+      "url": "https://arxiv.org/abs/2604.03946",
+      "relevance": "R35 regime detection — third option alongside Wasserstein HMM and VIX/SMA. Detects regimes from portfolio behavior (EF coefficient shifts). Reproducible code available.",
+      "actionability": "medium",
+      "staged": true
+    },
+    {
+      "title": "PolySwarm: Multi-Agent LLM Framework for Prediction Market Trading",
+      "arxiv_id": "2604.03888",
+      "url": "https://arxiv.org/abs/2604.03888",
+      "relevance": "Swarm of 50 LLM personas; KL/JS divergence to detect pair mispricings. Not directly applicable to equity pairs but methodology note.",
+      "actionability": "low",
+      "staged": false
+    },
+    {
+      "title": "The Co-Pricing Factor Zoo",
+      "arxiv_id": "2604.04430",
+      "url": "https://arxiv.org/abs/2604.04430",
+      "relevance": "Bayesian SDF factor averaging achieves OOS Sharpe 1.5-1.8. Factor aggregation > single factor models. Equity factors alone price bond risk premia. Background interest for R33 concept.",
+      "actionability": "low",
+      "staged": false
+    },
+    {
+      "title": "Advanced Deep Learning Techniques for Analyzing Earnings Call Transcripts",
+      "arxiv_id": "2503.01886",
+      "url": "https://arxiv.org/html/2503.01886v1",
+      "relevance": "FinBERT 52% accuracy; Longformer 45%. 'Sugar-coated rhetoric' is a fundamental limitation. Confirms R31 design: use FinBERT domain-specific, focus on Q&A sections.",
+      "actionability": "low",
+      "staged": false,
+      "note": "Confirms existing R31 decisions — no new actionable change"
+    },
+    {
+      "title": "FinCall-Surprise: Multi-Modal Benchmark for Earnings Surprise Prediction",
+      "arxiv_id": "2510.03965",
+      "url": "https://arxiv.org/abs/2510.03965",
+      "relevance": "26 LLMs tested on 2688 earnings calls. Class imbalance masks real accuracy. General LLMs struggle with financial nuance. Confirms: use domain-specific FinBERT not GPT/Claude for classification signal.",
+      "actionability": "medium",
+      "staged": false,
+      "note": "Confirms existing design; adds class imbalance warning — not new enough to stage"
+    },
+    {
+      "title": "Not All Factors Crowd Equally — Alpha Decay paper",
+      "arxiv_id": "2512.11913",
+      "url": "https://arxiv.org/abs/2512.11913",
+      "relevance": "Hyperbolic alpha decay model. Key: crowding predicts tail risk, not alpha. Crowded reversal = higher crash probability. WITHDRAWN for insufficient empirical validation.",
+      "actionability": "none",
+      "staged": false,
+      "note": "Paper withdrawn by author — do not rely on empirical results"
+    }
+  ]
+}

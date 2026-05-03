@@ -1,0 +1,71 @@
+=== MACRO AUTORESEARCH — ROUND 15 (FINAL) ===
+  Loading macro data...
+    ✓ yf fallback CL=F → DCOILWTICO (3790 obs)
+    ✓ yf fallback ^TNX → GS10 (3789 obs)
+    ✓ yf fallback ^VIX → VIXCLS (3790 obs)
+    ✓ yf fallback GC=F → GOLDAMGBD228NLBM (3789 obs)
+    ✓ yf fallback EURUSD=X → DEXUSEU (3922 obs)
+    ✓ yf fallback DX-Y.NYB → DTWEXBGS (3791 obs)
+  Loaded 6 macro series
+Built 5 strategies
+
+======================================================================
+ROUND 15 — 5 strategies × 53 tickers × 1 positions
+Total backtests: 265
+======================================================================
+
+
+  B&H avg: 1823.9%
+
+  TOP 10 STRATEGIES (Round 15):
+  Strategy                             AvgRet%  Sharpe  BeatB&H%
+  ---------------------------------------------------------------
+  VAM_252                                880.1%   0.520      3.8%
+  OilMom_10_50                           476.7%   0.640      3.8%
+  MACD_5_11_4                            363.8%   0.467      5.7%
+  MACD_5_12_4                            357.5%   0.454      3.8%
+  VIXMom_63_18_30                        177.6%   0.341      1.9%
+
+  FAMILY RANKING:
+    momentum                     880.1%
+    trend                        360.6%
+    macro                        327.1%
+
+  SECTOR RANKING:
+    tech                   1277.4%
+    auto                   1128.4%
+    financial               331.3%
+    energy                  303.8%
+    healthcare              267.2%
+    industrial              229.3%
+    defense                 224.0%
+    staples                 190.6%
+    transport                99.9%
+
+  Saved → /workspace/group/trading_eval/rounds/macro_round_15.json
+ROUND 15 MACRO INSIGHTS
+==================================================
+B&H avg benchmark: 1824.0%
+
+Top 5 strategies:
+  1. VAM_252                             880.1% avg (Sharpe 0.520)
+  2. OilMom_10_50                        476.7% avg (Sharpe 0.640)
+  3. MACD_5_11_4                         363.8% avg (Sharpe 0.467)
+  4. MACD_5_12_4                         357.5% avg (Sharpe 0.454)
+  5. VIXMom_63_18_30                     177.6% avg (Sharpe 0.341)
+
+Family performance:
+  momentum                  880.1%
+  trend                     360.6%
+  macro                     327.1%
+
+Sector performance:
+  tech                 1277.4%
+  auto                 1128.4%
+  financial            331.3%
+  energy               303.8%
+  healthcare           267.2%
+
+Macro strategies in top 20: 2
+  OilMom_10_50                        476.7%
+  VIXMom_63_18_30                     177.6%

@@ -1,0 +1,15 @@
+{
+  "id": "2026-03-31-claude-md-heuristics",
+  "date": "2026-03-31",
+  "source": "ERL: Experiential Reflective Learning for Self-Improving LLM Agents",
+  "source_url": "https://arxiv.org/abs/2603.24639",
+  "title": "Add heuristic retrieval instruction to CLAUDE.md",
+  "rationale": "ERL shows that injecting relevant heuristics at task start gives +7.8% performance lift. Adding a CLAUDE.md instruction to consult heuristics.md when starting complex tasks ensures the lesson pool is actually used, not just maintained.",
+  "risk_level": "medium",
+  "type": "claude_md_update",
+  "target_file": "/workspace/group/CLAUDE.md",
+  "action": "append",
+  "content": "\n## Heuristic Retrieval (ERL-Inspired)\n\nBefore starting any complex task, scan `/workspace/group/heuristics.md` for relevant lessons:\n- Coding/environment tasks \u2192 check Tools & Environment section\n- Trading research tasks \u2192 check Research & Backtesting section\n- Podcast/content tasks \u2192 check Podcast & Content Pipeline section\n- Memory operations \u2192 check Memory & Self-Improvement section\n\nAfter completing a task that produced a new generalizable lesson, append it to the relevant section of `heuristics.md`. Use the format:\n```\n### [Short title]\n- LESSON: [The generalizable principle]\n- WHEN: [When to apply this lesson]\n- SOURCE: [File or paper that produced this lesson]\n```\n\nDo NOT add task-specific debugging details \u2014 only lessons that will generalize to future tasks.\n",
+  "apply_status": "applied",
+  "derived_from": "arXiv:2603.24639 (ERL)"
+}

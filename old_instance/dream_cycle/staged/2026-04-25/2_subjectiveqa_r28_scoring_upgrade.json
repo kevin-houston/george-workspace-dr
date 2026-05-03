@@ -1,0 +1,14 @@
+{
+  "id": "subjectiveqa-r28-scoring-2026-04-25",
+  "date": "2026-04-25",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2410.20651",
+  "title": "Upgrade R28 EarningsQualityAgent to SubjECTive-QA 6-dimension scoring",
+  "rationale": "SubjECTive-QA (arXiv:2410.20651, NeurIPS 2024) provides a validated 6-dimension scoring framework for earnings call Q&A: Assertive, Cautious, Optimistic, Specific, Clear, Relevant. All dimensions scored 0/1/2 (negatively demonstrative / neutral / positively demonstrative). Dataset: 49,446 annotations on 2,747 QA pairs from 120 NYSE companies 2007-2021 (HF: gtfintechlab/SubjECTive-QA, CC BY 4.0). The 'Specific' dimension directly maps to the existing R28 heuristic (0.5 specificity weight). The full 6-dimension vector replaces the ad-hoc NOR prompt scoring used in current R28 design, providing a validated taxonomy with public benchmarks. Load via: load_dataset('gtfintechlab/SubjECTive-QA'). Annotators used RoBERTa-base and Llama-3-70b-Chat for automated scoring — either can be deployed in the EarningsQualityAgent pipeline.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "content": "\n### SubjECTive-QA — R28 EarningsQualityAgent Scoring Upgrade (2026-04-25)\n- **Paper**: arXiv:2410.20651 (NeurIPS 2024 dataset paper)\n- **HuggingFace**: gtfintechlab/SubjECTive-QA (CC BY 4.0, Parquet format)\n- **Load**: `from datasets import load_dataset; dataset = load_dataset('gtfintechlab/SubjECTive-QA')`\n- **Scale**: 49,446 annotations on 2,747 QA pairs, 120 NYSE companies, 2007-2021\n- **6 Dimensions** (all scored 0=negative / 1=neutral / 2=positive):\n  - Assertive: degree of confident, direct assertion\n  - Cautious: hedging language, qualifying statements\n  - Optimistic: forward-looking positive framing\n  - Specific: quantitative precision vs. vague generalities (maps to R28 specificity weight 0.5)\n  - Clear: clarity and transparency of communication\n  - Relevant: answer addresses the question asked\n- **Automated scoring**: RoBERTa-base or Llama-3-70b-Chat achieve reliable weighted F1\n- **R28 integration**: Replace ad-hoc NOR prompt with 6-dimension SubjECTive-QA scoring vector\n  - Specific score = primary signal (aligned with existing 0.5 weight heuristic)\n  - Cautious score = evasion proxy (complements Eva-4B evasion classifier)\n  - Composite: weighted sum across 6 dims, weights TBD from validation\n- **Goal-blind compliance**: SubjECTive-QA prompt does NOT reveal trading intent — safe under purpose-conditioned bias heuristic\n",
+  "action": "append",
+  "apply_status": "applied"
+}

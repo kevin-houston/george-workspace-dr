@@ -1,0 +1,14 @@
+{
+  "id": "2026-03-30-003",
+  "date": "2026-03-30",
+  "source": "reflection",
+  "source_url": null,
+  "title": "Create skills_index.md \u2014 catalog of George's available utility scripts",
+  "rationale": "Reflection identified that George stages new scripts nightly but has no index of available tools. This leads to forgetting what scripts exist. The Memento-Skills paper (HuggingFace, Mar 22, 2026) proposes agents maintain a skill library for continual capability growth. A simple skills_index.md would let George quickly recall and reuse tools without re-implementing them.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/skills_index.md",
+  "content": "# George Skills Index\n\nCatalog of utility scripts and tools available in the workspace.\nUpdated by dream cycle nightly.\n\n## Trading & Research\n\n- `trading_eval/harness.py` \u2014 146-strategy backtest engine (Fortune 100 equities)\n- `trading_eval/macro_harness.py` \u2014 25 FRED series macro regime classifier\n- `trading_eval/candle_harness.py` \u2014 25 candlestick patterns, R18 results\n- `trading_eval/candle_macro_harness.py` \u2014 Candle \u00d7 Macro combined harness (R19)\n\n## Portfolio & Finance\n\n- `fetch_robinhood_value.py` \u2014 Fetch live Robinhood portfolio value (run on host)\n- `update_prices.py` \u2014 Yahoo Finance price updater (run on host, 4:30 PM weekdays)\n- `paper_tracker.py` \u2014 Paper trading tracker (Fridays 5 PM)\n\n## Content Generation\n\n- `generate_and_email_podcast.py` \u2014 Daily AI podcast text + audio generator\n  - Uses edge-tts for voice, Python MP3 merge fallback (no ffmpeg needed)\n  - Auto-installs deps to /tmp/podcast_deps\n\n## Memory / State\n\n- `MEMORY.md` \u2014 Primary persistent state\n- `USER.md` \u2014 Kevin context and preferences\n- `SOUL.md` \u2014 George identity and voice\n- `failures.md` \u2014 Issue log (open + resolved)\n- `system_maintenance_log.md` \u2014 System health history\n\n## Dream Cycle\n\n- `dream_cycle/` \u2014 Nightly self-improvement loop\n  - `research/{DATE}_scan.json` \u2014 Broad paper scan\n  - `research/{DATE}_reflect.md` \u2014 Performance reflection\n  - `research/{DATE}_deep.md` \u2014 Deep research notes\n  - `staged/{DATE}/` \u2014 Proposed changes\n  - `changelogs/{DATE}_draft.md` \u2014 Nightly changelog\n",
+  "action": "write",
+  "apply_status": "applied"
+}

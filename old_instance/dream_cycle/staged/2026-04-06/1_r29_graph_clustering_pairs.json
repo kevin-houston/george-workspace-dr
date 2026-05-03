@@ -1,0 +1,14 @@
+{
+  "id": "r29-graph-clustering-pairs",
+  "date": "2026-04-06",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2406.10695",
+  "title": "R29 Amendment: Add SPONGEsym Graph Clustering as Pair Selection Stage (Stage 0.5)",
+  "rationale": "Statistical arbitrage on raw cointegration tests gives too many candidate pairs \u2014 especially with an S&P 500 universe. arXiv:2406.10695 (ICML-adjacent, June 2024) shows that using the correlation matrix of factor-residualized returns (60-day lookback) as a signed weighted graph, then applying SPONGEsym clustering (splits stocks into positively vs negatively correlated clusters), dramatically improves pair quality. Out-of-sample: Information Ratio 1.30, Sortino 3.38, 49% annualized return on S&P 500 (Jan 2000\u2013Dec 2022). This becomes Stage 0.5 in R29: between factor residualization (Stage 0, already staged) and LLM economic plausibility scoring (Stage 2).",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "content": "\n## AI Research Findings (Dream Cycle 2026-04-06)\n\n### Graph Clustering Pairs Trading \u2014 SPONGEsym on Residual Correlation (arXiv:2406.10695, June 2024)\n- Builds signed weighted graph from 60-day correlation matrix of factor-residualized returns\n- Clustering algorithm: SPONGEsym (Signed Positive Over Negative Generalized Eigenproblem) \u2014 decomposes into positive/negative blocks\n- Optimal cluster count: eigenvectors explaining 90% of correlation variance\n- 5 ML classifiers filter trade signals using graph features (vertex degree, cluster density) + traditional features\n- Kelly criterion for position sizing (long + short fractions sum to unity)\n- Performance (S&P 500, out-of-sample March 2006\u2013Dec 2022): IR 1.30, Sortino 3.38, 49.33% annualized return, 31.98% max drawdown\n- R29 Amendment: Add SPONGEsym clustering as Stage 0.5 between factor residualization (Stage 0) and LLM plausibility scoring (Stage 2)\n  \u2192 Stage 0: residualize returns on (SPY, sector ETF)\n  \u2192 Stage 0.5: build 60-day residual correlation graph \u2192 SPONGEsym clustering \u2192 only test cointegration within same cluster\n  \u2192 Stage 1: Engle-Granger cointegration test on within-cluster pairs\n  \u2192 Stage 2: LLM economic plausibility score (skip pairs < 40)\n  \u2192 Stage 3: Trade the spread with Kelly-weighted position sizing\n",
+  "apply_status": "applied"
+}

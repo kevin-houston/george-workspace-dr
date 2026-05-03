@@ -1,0 +1,39 @@
+{
+  "proposal_id": "2026-05-03-1",
+  "title": "PEAD-NLP: FinBERT earnings call signal layer for H159b",
+  "hypothesis_parent": "H159b",
+  "risk_level": "medium",
+  "apply_status": "pending",
+
+  "summary": "Augment the beta-neutral PEAD gap signal with a FinBERT sentiment score from earnings call transcripts. ACL 2025 paper reports FinBERT achieves 57.6–58.3% directional accuracy on post-announcement returns — additive to price-based gap signal. Combined EAR+SUE+NLP signal generated 12.5% annualized abnormal returns vs 4.4% for price gap alone in recent studies.",
+
+  "source": {
+    "paper": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+    "venue": "ACL 2025 FinNLP-2 workshop",
+    "url": "https://aclanthology.org/2025.finnlp-2.13.pdf",
+    "key_finding": "FinBERT: 57.6% (positive group), 58.3% (negative group) classification accuracy for PEAD direction"
+  },
+
+  "implementation": {
+    "data_needed": "Earnings call transcripts — SEC EDGAR 8-K Item 2.02 filings (free) or Motley Fool/Seeking Alpha for structured transcripts",
+    "model": "ProsusAI/finbert from HuggingFace (Apache 2.0, ~110MB)",
+    "pipeline": [
+      "1. Download 8-K transcript on earnings day",
+      "2. Segment by speaker (management vs analyst Q&A)",
+      "3. Run FinBERT sentence-level sentiment",
+      "4. Aggregate: finbert_score = mean(positive) - mean(negative) across management remarks",
+      "5. Filter: only enter PEAD position if finbert_score > +0.1 (aligned with price gap)"
+    ],
+    "libraries": ["transformers>=4.30", "torch", "sec-edgar-downloader"],
+    "estimated_effort_hours": 8,
+    "test_universe": "H159 events (374 OOS events) — apply filter, check if win rate improves above 63.9%"
+  },
+
+  "expected_improvement": "Reduce false positives in PEAD signals. Base win rate 63.9%; NLP filter should push 68–72% on retained signals. Cost: ~20% fewer trades (filtered out).",
+
+  "risks": [
+    "Transcript timing — 8-K sometimes filed days after earnings call, not same day",
+    "FinBERT fine-tuned on analyst reports not call transcripts — domain mismatch",
+    "Computational cost: 374 transcripts × ~30 min inference = 3h GPU time for backtest"
+  ]
+}

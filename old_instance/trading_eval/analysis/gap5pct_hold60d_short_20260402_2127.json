@@ -1,0 +1,111 @@
+{
+  "strategy": "gap5pct_hold60d_short",
+  "category": "pead",
+  "round": 30,
+  "tickers": [
+    "AAPL",
+    "ADBE",
+    "AMZN",
+    "BAC",
+    "CAT",
+    "COST",
+    "CVX",
+    "GE",
+    "GOOGL",
+    "HD",
+    "HON",
+    "JNJ",
+    "JPM",
+    "LMT",
+    "MA",
+    "META",
+    "MMM",
+    "MRK",
+    "MSFT",
+    "NFLX",
+    "NVDA",
+    "PG",
+    "QCOM",
+    "RTX",
+    "TSLA",
+    "TXN",
+    "UNH",
+    "V",
+    "WMT",
+    "XOM"
+  ],
+  "n_trades": 142,
+  "date_range": "2020-01-31 \u2013 2025-08-04",
+  "total_return": -0.9999,
+  "cagr": -0.5648,
+  "sharpe": -1.045,
+  "sortino": -0.9435,
+  "calmar": -0.5648,
+  "skewness": -0.0664,
+  "kurtosis": 0.0097,
+  "max_drawdown": -0.9999,
+  "max_consec_losses": 11,
+  "win_rate": 0.3521,
+  "profit_factor": 0.4656,
+  "avg_return": -0.0511,
+  "avg_win": 0.1264,
+  "avg_loss": -0.1476,
+  "kelly_fraction": 0.0,
+  "spy_correlation": -0.1336,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 23,
+      "sharpe": -3.4535,
+      "sortino": -2.3121,
+      "win_rate": 0.1739,
+      "avg_return": -0.1053,
+      "max_dd": -0.9399
+    },
+    "bear": {
+      "n_trades": 5,
+      "sharpe": -2.0956,
+      "sortino": -1.5102,
+      "win_rate": 0.4,
+      "avg_return": -0.0924,
+      "max_dd": -0.5027
+    },
+    "high_vol": {
+      "n_trades": 53,
+      "sharpe": -0.8787,
+      "sortino": -0.8067,
+      "win_rate": 0.3585,
+      "avg_return": -0.0519,
+      "max_dd": -0.9846
+    },
+    "bull": {
+      "n_trades": 47,
+      "sharpe": -0.5939,
+      "sortino": -0.554,
+      "win_rate": 0.4043,
+      "avg_return": -0.0253,
+      "max_dd": -0.8612
+    },
+    "low_vol_bull": {
+      "n_trades": 14,
+      "sharpe": -0.6793,
+      "sortino": -0.6162,
+      "win_rate": 0.4286,
+      "avg_return": -0.0307,
+      "max_dd": -0.6002
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": false,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "none identified"
+  ]
+}

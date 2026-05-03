@@ -1,0 +1,30 @@
+{
+  "strategy": "Dividend Raise Signal (>=5%, hold 40d)",
+  "backtest_sharpe": 3.4,
+  "virtual_capital": 5000.0,
+  "open_positions": {
+    "AXP": {
+      "entry_price": 326.0450134277344,
+      "shares": 1.533530584453553,
+      "entry_date": "2026-04-16",
+      "exit_date": "2026-06-11",
+      "div_raise_pct": 0.1585,
+      "ex_date": "2026-04-02"
+    },
+    "GD": {
+      "entry_price": 334.125,
+      "shares": 1.4964459408903854,
+      "entry_date": "2026-04-16",
+      "exit_date": "2026-06-11",
+      "div_raise_pct": 0.06,
+      "ex_date": "2026-04-10"
+    }
+  },
+  "trades": [],
+  "stats": {
+    "n_trades": 0,
+    "wins": 0,
+    "total_pnl": 0.0
+  },
+  "last_update": "2026-04-30"
+}

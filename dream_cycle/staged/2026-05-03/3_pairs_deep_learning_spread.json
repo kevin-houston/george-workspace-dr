@@ -1,0 +1,39 @@
+{
+  "proposal_id": "2026-05-03-3",
+  "title": "Pairs-DL: Deep learning spread forecasting for H155/H160",
+  "hypothesis_parent": "H160",
+  "risk_level": "high",
+  "apply_status": "pending",
+
+  "summary": "Replace the threshold-based z-score entry in ETF pairs (H155, H160) with a GRU/LSTM spread forecast. Financial Analysis journal 2024 paper reports deep learning models for spread prediction outperform traditional z-score approaches in high-frequency context. VAR+GRU hybrid captures fat-tail dynamics that kill simple z-score strategies.",
+
+  "source": {
+    "paper": "Price spread prediction in high-frequency pairs trading using deep learning architectures",
+    "venue": "International Review of Financial Analysis, 2024",
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S1057521924007257",
+    "paper2": "Combined Effects of Fat-Tail and Spread Forecasting on Pairs Trading: A Hybrid Model Based on Integrating VAR With GRU Models",
+    "venue2": "Journal of Forecasting, 2025",
+    "url2": "https://onlinelibrary.wiley.com/doi/10.1002/for.70074",
+    "key_finding": "VAR+GRU hybrid with fat-tail modeling outperforms z-score baseline across multiple ETF pairs"
+  },
+
+  "implementation": {
+    "architecture": "VAR (vector autoregression) for covariance structure + GRU for nonlinear spread dynamics",
+    "input_features": ["spread_t-1..t-20", "volume_ratio", "RSI_both_legs", "VIX", "spread_zscore"],
+    "target": "spread direction in next N bars (classification) or spread level (regression)",
+    "libraries": ["torch", "statsmodels (VAR)", "sklearn"],
+    "estimated_effort_hours": 20,
+    "prerequisite": "H160 factor-residualized pairs must be identified first (rolling OLS vs SPY + sector ETF)"
+  },
+
+  "expected_improvement": "Better entry timing — enter when model predicts reversion, not just when z > 2. Reduces false positives (pairs that gap but don't revert).",
+
+  "risks": [
+    "High complexity — easy to overfit on small ETF pair universe",
+    "Requires daily retraining or at minimum monthly update",
+    "H155 (Kalman pairs) already NOT CONFIRMED — deep learning on a broken signal may not help",
+    "Better to nail H160 factor residualization first, then layer on ML"
+  ],
+
+  "recommendation": "Queue after H160 is confirmed. Do not apply before H160 PARTIAL or better verdict."
+}

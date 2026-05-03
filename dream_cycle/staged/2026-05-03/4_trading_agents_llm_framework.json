@@ -1,0 +1,34 @@
+{
+  "proposal_id": "2026-05-03-4",
+  "title": "TradingAgents: multi-agent LLM orchestration for strategy selection",
+  "hypothesis_parent": null,
+  "risk_level": "medium",
+  "apply_status": "pending",
+
+  "summary": "Explore TradingAgents (arXiv 2412.20138, GitHub: TauricResearch/TradingAgents) as an orchestration layer. The framework assigns LLM agents to roles (fundamentals analyst, news analyst, risk manager, portfolio manager). v0.2.4 supports Claude 4.x natively. Potential use: automate the hypothesis-selection step of the nightly dream cycle, or add a macro-regime awareness layer to H018.",
+
+  "source": {
+    "paper": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+    "venue": "arXiv 2412.20138",
+    "url": "https://arxiv.org/abs/2412.20138",
+    "github": "https://github.com/TauricResearch/TradingAgents",
+    "version": "v0.2.4 (April 2026) — supports GPT-5.x, Gemini 3.x, Claude 4.x, Grok 4.x"
+  },
+
+  "implementation": {
+    "install": "pip install tradingagents",
+    "use_case_1": "Nightly: run TradingAgents macro-regime analyst → output bullish/bearish/neutral → gates H018 ETF rotation (H026) between full risk-on and BIL safe haven",
+    "use_case_2": "PEAD filter: run news-analyst agent on earnings release text before entering H159b position",
+    "estimated_effort_hours": 6,
+    "requires": "$OPENAI_API_KEY or Anthropic key (both present in vault)"
+  },
+
+  "expected_improvement": "Regime awareness for H026/H018 — may reduce MaxDD during macro stress periods (COVID 2020, rate hike 2022) by getting to BIL faster than momentum signal alone.",
+
+  "risks": [
+    "API costs per turn — nightly use is fine but intraday LLM calls add up",
+    "LLM is not statistically validated as a macro regime detector — adds noise risk",
+    "Framework is research-grade, not production-hardened",
+    "Benchmark first: does simple VIX threshold achieve same regime signal at 0 cost?"
+  ]
+}

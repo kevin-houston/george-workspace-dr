@@ -1,0 +1,14 @@
+{
+  "id": "alpha-r1-future-round-concept",
+  "date": "2026-04-06",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2512.23515",
+  "title": "Future Round: Alpha-R1 Dynamic Factor Gating on Strategy Library",
+  "rationale": "Alpha-R1 (arXiv:2512.23515, Dec 2025, FinStep AI) is an 8B RL-trained reasoning model that dynamically activates or deactivates alpha factors based on current market regime and news context. Tested on CSI 300: Sharpe 1.62, 27.59% AR; zero-shot on CSI 1000: Sharpe 4.03, 78.18% AR. Massively outperforms static XGBoost (\u221221.65% AR). The core insight is that factor relevance is regime-conditional \u2014 momentum works in trending markets, mean-reversion in ranging markets \u2014 and an LLM trained via RL can learn WHEN each factor category is relevant. Applied to our 146-strategy library, this could function as a meta-layer that activates top-ranked strategies per regime and deactivates others. Trained on Chinese equities but architecture is market-agnostic; GitHub code available. This is a Round 33+ concept once R28\u2013R32 are complete.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "content": "\n### Alpha-R1: RL-Trained Dynamic Factor Gating (arXiv:2512.23515, Dec 2025)\n- Architecture: 8B reasoning model trained via GRPO (Group Relative Policy Optimization \u2014 critic-free RL)\n- Inputs: (1) semantic factor descriptions (economic rationale for each factor), (2) weekly market state summaries (price + news), (3) 82 Alpha101 candidate factors\n- Mechanism: each day, model reasons over factor logic + market context \u2192 activates subset of factors \u2192 fixed linear scorer applies only those factors\n- RL reward: backtested excess return \u00d7 (1 \u2212 consistency_penalty) \u2014 penalizes incoherent factor selection\n- Performance (2025 holdout): CSI 300 Sharpe 1.62 / 27.59% AR / 6.76% max DD; CSI 1000 zero-shot Sharpe 4.03 / 78.18% AR\n- GitHub: https://github.com/FinStep-AI/Alpha-R1\n- George application \u2192 Round 33 (concept): apply Alpha-R1-style gating to our 146-strategy library\n  \u2192 Map each strategy to its factor category (momentum, mean-reversion, event-driven, macro)\n  \u2192 Build weekly market state summaries from FRED data (macro) + VIX + SPY trend\n  \u2192 RL-train gating model on past round results (treat each strategy as a 'factor')\n  \u2192 NOTE: Original trained on CSI 300 (China). US adaptation needs US alpha factor library + retraining.\n",
+  "apply_status": "applied"
+}

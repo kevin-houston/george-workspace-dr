@@ -1,0 +1,72 @@
+{
+  "date": "2026-04-09",
+  "phase": "SCAN",
+  "sources_searched": ["arXiv q-fin April 2026", "arXiv q-fin March 2026", "WebSearch LLM trading 2026", "WebSearch PEAD ML 2026", "WebSearch pairs trading LLM 2026"],
+  "papers_identified": [
+    {
+      "id": "2510.03195",
+      "title": "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?",
+      "venue": "arXiv Oct 2025 (institutional authors: MIT, BlackRock, J.P. Morgan, Fidelity, Blackstone, State Street, QRT)",
+      "relevance": "HIGH",
+      "topic": "LLM on earnings call transcripts — 'metric shifting' as alpha signal",
+      "result_preview": "5-factor alpha -0.52%/month (Q5-Q1), significant at 5%. LLM extracts which metrics management STOPS emphasizing quarter-over-quarter as a bearish signal."
+    },
+    {
+      "id": "2604.02921",
+      "title": "Debiasing LLMs by Fine-tuning",
+      "venue": "arXiv April 2026",
+      "relevance": "MEDIUM",
+      "topic": "LLM extrapolation bias in stock return prediction; LoRA fine-tuning corrects it",
+      "result_preview": "LLMs systematically over-extrapolate recent returns in cross-sectional stock prediction. LoRA on rational benchmarks corrects bias out-of-sample."
+    },
+    {
+      "id": "2604.08356",
+      "title": "Measuring Strategy-Decay Risk: Minimum Regime Performance and the Durability of Systematic Investing",
+      "venue": "arXiv April 9, 2026 (Alexander & Fabozzi — JPM 2025)",
+      "relevance": "HIGH",
+      "topic": "New diagnostic: Minimum Regime Performance (MRP) — lowest risk-adjusted return across historical regimes",
+      "result_preview": "High long-term Sharpe != high MRP. Strategies that look efficient may be fragile in worst regimes. Applicable to rounds 1-30 backtest library."
+    },
+    {
+      "id": "2603.04441",
+      "title": "Explainable Regime Aware Investing",
+      "venue": "arXiv March 2026",
+      "relevance": "MEDIUM",
+      "topic": "Wasserstein Hidden Markov Model for regime detection; causal, explainable, dynamically defensive",
+      "result_preview": "Sharpe 2.18 vs SPX 1.18; max drawdown -5.43% vs -14.62%. Outperformed during 2025 Liberation Day selloff. Could replace VIX/SMA RegimeGuard in R28."
+    },
+    {
+      "id": "2503.09647",
+      "title": "Leveraging LLMs for Top-Down Sector Allocation in Automated Trading",
+      "venue": "arXiv March 2026",
+      "relevance": "MEDIUM",
+      "topic": "LLM reads macro data to allocate across S&P sectors",
+      "result_preview": "Sharpe 2.51 vs -0.61 baseline. LLM macro-to-sector allocation works when given structured macro/sentiment data."
+    },
+    {
+      "id": "2604.04430",
+      "title": "The Co-Pricing Factor Zoo",
+      "venue": "arXiv April 2026",
+      "relevance": "LOW",
+      "topic": "18 quadrillion bond+equity pricing models; Bayesian factor averaging",
+      "result_preview": "Only handful of behavioral/nontradable factors are robust. BMA across many factors achieves OOS Sharpe 1.5-1.8. Not directly actionable for current stack."
+    },
+    {
+      "id": "2604.07870",
+      "title": "Skewness Dispersion and Stock Market Returns",
+      "venue": "arXiv April 2026",
+      "relevance": "MEDIUM",
+      "topic": "Cross-sectional firm skewness dispersion predicts aggregate market returns (negatively)",
+      "result_preview": "High dispersion in firm-level realized skewness predicts lower future market returns. Concentrates around monetary policy announcements. Potential regime signal."
+    },
+    {
+      "id": "2603.01820",
+      "title": "Deep Learning for Financial Time Series: A Large-Scale Benchmark of Risk-Adjusted Performance",
+      "venue": "arXiv March 2026",
+      "relevance": "LOW",
+      "topic": "DL benchmark on futures (2010-2025). VSN+LSTM wins.",
+      "result_preview": "Not applicable to equity event-driven (PEAD/dividend) strategies. Confirms hybrid CNN-recurrent beats pure transformer on futures."
+    }
+  ],
+  "top_3_for_deep_research": ["2510.03195", "2604.08356", "2603.04441"]
+}

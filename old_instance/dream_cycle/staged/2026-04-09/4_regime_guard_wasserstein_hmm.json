@@ -1,0 +1,14 @@
+{
+  "id": "regime-guard-wasserstein-hmm-2026-04-09",
+  "date": "2026-04-09",
+  "source": "arXiv:2603.04441 \u2014 Explainable Regime Aware Investing (Boukardagha, March 2026)",
+  "source_url": "https://arxiv.org/abs/2603.04441",
+  "title": "R28/R35 Concept \u2014 Wasserstein HMM as Superior RegimeGuard",
+  "rationale": "Current R28 RegimeGuard uses VIX > 30 and SPY SMA crossover \u2014 simple, free, but crude. Wasserstein HMM (arXiv:2603.04441) achieves Sharpe 2.18 vs SPX 1.18, max drawdown -5.43% vs -14.62% by using a causal Wasserstein distance-based Hidden Markov Model that dynamically identifies market regimes. The model correctly reduced equity exposure during the 2025 'Liberation Day' selloff. This is a medium-complexity upgrade to the RegimeGuard. Stage as a concept for R35 or as an optional enhancement to R28 if RegimeGuard is the binding constraint.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/MEMORY.md",
+  "action": "append",
+  "apply_status": "applied",
+  "content": "\n### Wasserstein HMM for Explainable Regime Detection (arXiv:2603.04441, March 2026)\n- **Paper**: 'Explainable Regime Aware Investing' \u2014 Boukardagha, arXiv:2603.04441, March 2026\n- **Method**: Strictly causal Wasserstein Hidden Markov Model \u2014 combines rolling Gaussian HMM inference with Wasserstein distance-based template matching for regime identification\n- **Performance vs. benchmarks**: Sharpe **2.18** vs. equal-weight 1.59 vs. S&P 500 1.18. Max drawdown **-5.43%** vs. SPX -14.62%\n- **Demonstrated robustness**: Correctly reduced equity exposure and shifted toward defensive assets during 2025 'Liberation Day' selloff without any manual override\n- **Explainability advantage**: Wasserstein distance provides regime transition explanations that are interpretable ('current market is X% similar to 2020 crash template'), unlike black-box regime classifiers\n- **R28 RegimeGuard upgrade concept**: Current R28 uses VIX > 30 and SPY SMA crossover (simple but crude). Wasserstein HMM would detect more nuanced regimes:\n  - Regime = 'calm growth' \u2192 full PEAD position sizing\n  - Regime = 'elevated uncertainty' \u2192 reduce position 30%\n  - Regime = 'stress/crash' \u2192 skip all new PEAD entries\n- **Implementation complexity**: Medium \u2014 requires hmmlearn library + Wasserstein distance computation on factor return series. Not a quick swap; plan as R35 or R28 enhancement pass\n- **Skewness Dispersion complement (arXiv:2604.07870)**: Cross-sectional firm skewness dispersion (free to compute from daily returns) is also a significant NEGATIVE predictor of future market returns (concentrated around monetary policy events). Add as a cheap regime signal: high skewness dispersion = cautious regime = reduce new positions. Can compute from yfinance S&P 500 daily returns.\n"
+}

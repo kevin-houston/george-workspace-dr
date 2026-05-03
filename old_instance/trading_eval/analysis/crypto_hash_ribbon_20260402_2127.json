@@ -1,0 +1,82 @@
+{
+  "strategy": "crypto_hash_ribbon",
+  "category": "crypto",
+  "round": 3,
+  "tickers": [
+    "BTC-USD"
+  ],
+  "n_trades": 26,
+  "date_range": "2018-03-17 \u2013 2026-01-17",
+  "total_return": -3.49006317002241e+32,
+  "cagr": 0.0,
+  "sharpe": 0.8803,
+  "sortino": 3.2638,
+  "calmar": 0.0,
+  "skewness": 2.8563,
+  "kurtosis": 8.5567,
+  "max_drawdown": -47633.9583,
+  "max_consec_losses": 4,
+  "win_rate": 0.4231,
+  "profit_factor": 2.8293,
+  "avg_return": 17.717,
+  "avg_win": 64.7692,
+  "avg_loss": -16.7879,
+  "kelly_fraction": 0.25,
+  "spy_correlation": -0.4137,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "high_vol": {
+      "n_trades": 7,
+      "sharpe": 1.505,
+      "sortino": 8.2772,
+      "win_rate": 0.5714,
+      "avg_return": 44.102,
+      "max_dd": -24997.2555
+    },
+    "bull": {
+      "n_trades": 5,
+      "sharpe": 0.5202,
+      "sortino": 0.7819,
+      "win_rate": 0.4,
+      "avg_return": 3.4166,
+      "max_dd": -18.7982
+    },
+    "low_vol_bull": {
+      "n_trades": 11,
+      "sharpe": 0.3963,
+      "sortino": 1.2295,
+      "win_rate": 0.2727,
+      "avg_return": 6.7726,
+      "max_dd": -172.5722
+    },
+    "unknown": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

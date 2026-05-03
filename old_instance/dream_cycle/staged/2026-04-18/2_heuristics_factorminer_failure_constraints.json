@@ -1,0 +1,14 @@
+{
+  "id": "2026-04-18-heuristics-factorminer-failure-constraints",
+  "date": "2026-04-18",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.14670",
+  "title": "Heuristic: Track failure constraints in iterative alpha mining — not just successes",
+  "rationale": "FactorMiner's most transferable innovation is explicitly storing failure constraints alongside success patterns in Experience Memory. The analogy to George's heuristics.md is direct: heuristics currently record only 'what worked and why' but should also record 'what failed and why' as exclusion patterns for future LLM-guided generation. This is an ERL-style lesson generalizable to R33 QuantaAlpha runs and any future iterative LLM mining task.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/group/heuristics.md",
+  "content": "\n### Track failure constraints alongside success patterns in iterative alpha mining\n- LESSON: FactorMiner (arXiv:2602.14670) achieves low redundancy (avg pairwise corr 0.25-0.31 across a large factor library) by explicitly storing both SUCCESS patterns (high-IC formula motifs to replicate) and FAILURE constraints (formula patterns that consistently fail validation: algebraically degenerate, trivially correlated with existing factors, or negative IC). The LLM retrieves both before generating the next candidate — not just what worked, but what to avoid.\n- LESSON: For any iterative LLM-driven search (factor mining, strategy generation, prompt optimization), maintain two memory pools: (1) a 'what-worked' pool (current George pattern via heuristics.md), and (2) a 'what-failed' exclusion pool. Provide the exclusion pool as context before generating new candidates to prevent re-exploring known dead ends.\n- LESSON: 4-stage validation gating is faster than full backtest on every candidate: fast IC on reduced subset → correlation vs existing pool → intra-batch dedup → full validation. Only ~15-20% of generated candidates pass all 4 stages; running full backtest on all would be 5x slower with no benefit.\n- WHEN: Designing R33 QuantaAlpha implementation. Any iterative LLM-driven generation loop where past failures carry useful information.\n- SOURCE: arXiv:2602.14670 (FactorMiner, Tsinghua U., Feb 2026). CSI500: +40% IC vs AlphaAgent baseline.\n",
+  "action": "append",
+  "apply_status": "applied"
+}

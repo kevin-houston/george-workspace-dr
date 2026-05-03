@@ -1,0 +1,39 @@
+{
+  "proposal_id": "2026-05-03-2",
+  "title": "PEAD-ML: Elastic-net over 8-quarter SUE history (near-doubles Sharpe)",
+  "hypothesis_parent": "H159b",
+  "risk_level": "medium",
+  "apply_status": "pending",
+
+  "summary": "Replace the single-quarter SUE signal with an elastic-net regression over 8 quarters of standardized earnings surprises. Finance Research Letters 2025 paper reports this 'nearly doubles Sharpe ratios' vs simple last-quarter SUE. The intuition: earnings trends and acceleration contain information beyond the last surprise alone.",
+
+  "source": {
+    "paper": "Beyond the last surprise: Reviving PEAD with machine learning and historical earnings",
+    "venue": "Finance Research Letters, 2025",
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S1544612325020057",
+    "key_finding": "Elastic-net on 8-quarter SUE history near-doubles Sharpe vs single-quarter SUE"
+  },
+
+  "implementation": {
+    "data_needed": "Historical EPS actuals and estimates — FMP API (free 250 req/day) at /v3/earnings-surprises/{symbol}",
+    "model": "sklearn ElasticNetCV with cross-validation on rolling IS window",
+    "signal_construction": [
+      "For each stock at each earnings date:",
+      "  features = [SUE_q-1, SUE_q-2, ..., SUE_q-8]  # prior 8 quarters",
+      "  target = 60-day abnormal return after announcement",
+      "  model = ElasticNetCV(cv=5, l1_ratio=[0.1, 0.5, 0.7, 0.9, 0.95, 1.0])",
+      "  predicted_drift = model.predict(features)",
+      "Filter: go long if predicted_drift > threshold (top decile)"
+    ],
+    "estimated_effort_hours": 12,
+    "requires": "FMP historical earnings data — already have $FMP_API_KEY in vault"
+  },
+
+  "expected_improvement": "Sharpe ~2× improvement on signal quality. Directional accuracy improves from ~63% to ~70%+. Works best when combined with H159b beta-hedge.",
+
+  "risks": [
+    "Requires 8 quarters of EPS history — limits universe (no new listings)",
+    "Overfitting risk — elastic-net helps but 8 features per stock is borderline for many training samples",
+    "FMP free tier: 250 req/day; a 500-stock universe = 2 days of API calls to build dataset"
+  ]
+}

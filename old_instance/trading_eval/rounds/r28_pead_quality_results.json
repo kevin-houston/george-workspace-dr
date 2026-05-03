@@ -1,0 +1,162 @@
+{
+  "round": "R28",
+  "strategy": "PEAD EarningsQualityAgent Overlay",
+  "phase": "Phase 1 \u2014 Statistical Proxy",
+  "note": "LLM API unavailable (401). Using gap/volume/persistence as quality proxies.",
+  "run_date": "2026-04-11T15:02:32.404039",
+  "config": {
+    "universe": [
+      "AAPL",
+      "MSFT",
+      "GOOGL",
+      "AMZN",
+      "META",
+      "NVDA",
+      "TSLA",
+      "JPM",
+      "JNJ",
+      "UNH",
+      "V",
+      "MA",
+      "HD",
+      "PG",
+      "KO",
+      "XOM",
+      "CVX",
+      "BAC",
+      "WMT",
+      "MRK",
+      "COST",
+      "NFLX",
+      "QCOM",
+      "TXN",
+      "GE",
+      "LMT",
+      "GS",
+      "ADBE",
+      "CRM",
+      "HON"
+    ],
+    "gap_threshold": 0.05,
+    "hold_period": 20,
+    "max_positions": 15,
+    "date_range": "2020-01-01 to 2025-12-31"
+  },
+  "results": {
+    "baseline": {
+      "n_signals_total": 176,
+      "n_signals_included": 176,
+      "n_trades": 167,
+      "pct_filtered": 0.0,
+      "sharpe": 4.775,
+      "ann_return": 0.2869,
+      "ann_vol": 0.0601,
+      "cagr": 0.254,
+      "max_dd": -0.4806,
+      "win_rate": 0.6527,
+      "t_stat": 10.3241,
+      "p_value": 0.0
+    },
+    "hard_filter": {
+      "n_signals_total": 233,
+      "n_signals_included": 107,
+      "n_trades": 107,
+      "pct_filtered": 54.1,
+      "sharpe": 8.8371,
+      "ann_return": 0.3935,
+      "ann_vol": 0.0445,
+      "cagr": 0.2649,
+      "max_dd": -0.1703,
+      "win_rate": 0.7196,
+      "t_stat": 16.5233,
+      "p_value": 0.0
+    },
+    "soft_filter": {
+      "n_signals_total": 219,
+      "n_signals_included": 135,
+      "n_trades": 135,
+      "pct_filtered": 38.4,
+      "sharpe": 5.6383,
+      "ann_return": 0.1599,
+      "ann_vol": 0.0284,
+      "cagr": 0.1261,
+      "max_dd": -0.2256,
+      "win_rate": 0.6593,
+      "t_stat": 11.8013,
+      "p_value": 0.0
+    },
+    "full": {
+      "n_signals_total": 233,
+      "n_signals_included": 107,
+      "n_trades": 107,
+      "pct_filtered": 54.1,
+      "sharpe": 9.0279,
+      "ann_return": 0.4084,
+      "ann_vol": 0.0452,
+      "cagr": 0.2762,
+      "max_dd": -0.1688,
+      "win_rate": 0.7196,
+      "t_stat": 16.8801,
+      "p_value": 0.0
+    },
+    "full_vix_kelly": {
+      "n_signals_total": 233,
+      "n_signals_included": 107,
+      "n_trades": 107,
+      "pct_filtered": 54.1,
+      "sharpe": 9.0213,
+      "ann_return": 0.3935,
+      "ann_vol": 0.0436,
+      "cagr": 0.2649,
+      "max_dd": -0.1566,
+      "win_rate": 0.7196,
+      "t_stat": 16.8678,
+      "p_value": 0.0
+    }
+  },
+  "signal_analysis": {
+    "total_gap_signals": 135,
+    "vetoed_vix30": 84,
+    "quality_ge_50_pct": 76.3,
+    "quality_ge_70_pct": 43.0,
+    "returns_by_quality_decile": {
+      "20-30": {
+        "n": 1,
+        "avg_return": -0.0483
+      },
+      "30-40": {
+        "n": 16,
+        "avg_return": 0.013
+      },
+      "40-50": {
+        "n": 15,
+        "avg_return": 0.0276
+      },
+      "50-60": {
+        "n": 36,
+        "avg_return": 0.0448
+      },
+      "60-70": {
+        "n": 9,
+        "avg_return": 0.1151
+      },
+      "70-80": {
+        "n": 28,
+        "avg_return": 0.049
+      },
+      "80-90": {
+        "n": 21,
+        "avg_return": 0.0462
+      },
+      "90-100": {
+        "n": 1,
+        "avg_return": 0.1437
+      }
+    }
+  },
+  "best_variant": "full",
+  "best_sharpe": 9.0279,
+  "prior_best_sharpe": 2.394,
+  "beats_prior_best": true,
+  "key_finding": "Best variant 'full' achieved Sharpe 9.0279 (ABOVE prior best 2.394). Quality filter removed 54.1% of signals."
+}

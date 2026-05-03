@@ -1,0 +1,84 @@
+{
+  "strategy": "lev_etf_momentum",
+  "category": "leveraged_etf",
+  "round": 1,
+  "tickers": [
+    "IEF",
+    "SPY",
+    "UPRO"
+  ],
+  "n_trades": 356,
+  "date_range": "2015-01-02 \u2013 2024-12-23",
+  "total_return": 4.6136,
+  "cagr": 0.0599,
+  "sharpe": 0.3628,
+  "sortino": 0.9372,
+  "calmar": 0.1132,
+  "skewness": 4.6879,
+  "kurtosis": 29.7088,
+  "max_drawdown": -0.529,
+  "max_consec_losses": 11,
+  "win_rate": 0.3624,
+  "profit_factor": 1.6662,
+  "avg_return": 0.0065,
+  "avg_win": 0.0447,
+  "avg_loss": -0.0153,
+  "kelly_fraction": 0.1449,
+  "spy_correlation": 0.4846,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 6,
+      "sharpe": 1.8102,
+      "sortino": 9.3189,
+      "win_rate": 0.6667,
+      "avg_return": 0.1076,
+      "max_dd": -0.0537
+    },
+    "bear": {
+      "n_trades": 10,
+      "sharpe": -2.5638,
+      "sortino": -1.8652,
+      "win_rate": 0.2,
+      "avg_return": -0.0122,
+      "max_dd": -0.1233
+    },
+    "high_vol": {
+      "n_trades": 86,
+      "sharpe": 0.1013,
+      "sortino": 0.1954,
+      "win_rate": 0.3256,
+      "avg_return": 0.0017,
+      "max_dd": -0.4708
+    },
+    "bull": {
+      "n_trades": 44,
+      "sharpe": 0.3197,
+      "sortino": 0.4519,
+      "win_rate": 0.4091,
+      "avg_return": 0.0035,
+      "max_dd": -0.2029
+    },
+    "low_vol_bull": {
+      "n_trades": 210,
+      "sharpe": 0.4297,
+      "sortino": 1.2514,
+      "win_rate": 0.3667,
+      "avg_return": 0.0071,
+      "max_dd": -0.3746
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

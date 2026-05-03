@@ -1,0 +1,73 @@
+=== MACRO AUTORESEARCH — ROUND 12 ===
+  Loading macro data...
+    ✓ yf fallback CL=F → DCOILWTICO (3790 obs)
+    ✓ yf fallback ^TNX → GS10 (3789 obs)
+    ✓ yf fallback ^VIX → VIXCLS (3790 obs)
+    ✓ yf fallback GC=F → GOLDAMGBD228NLBM (3789 obs)
+    ✓ yf fallback EURUSD=X → DEXUSEU (3922 obs)
+    ✓ yf fallback DX-Y.NYB → DTWEXBGS (3791 obs)
+  Loaded 6 macro series
+Built 17 strategies
+
+======================================================================
+ROUND 12 — 17 strategies × 53 tickers × 1 positions
+Total backtests: 901
+======================================================================
+
+
+  B&H avg: 1823.9%
+
+  TOP 10 STRATEGIES (Round 12):
+  Strategy                             AvgRet%  Sharpe  BeatB&H%
+  ---------------------------------------------------------------
+  GoldFlight_126                         663.1%   0.511      3.8%
+  OilMom_10_50                           476.7%   0.640      3.8%
+  OilMom_10_30                           377.6%   0.593      1.9%
+  OilMom_15_45                           340.3%   0.558      3.8%
+  OilMom_30_90                           242.7%   0.482      0.0%
+  GoldFlight_189                         238.9%   0.388      3.8%
+  GoldFlight_63                          229.1%   0.362      3.8%
+  VIXMom_63_20_35                        224.1%   0.356      1.9%
+  OilMom_20_60                           202.4%   0.448      0.0%
+  VIXMom_126_18_30                       171.1%   0.329      1.9%
+
+  FAMILY RANKING:
+    macro                        238.9%
+
+  SECTOR RANKING:
+    auto                    700.2%
+    tech                    542.9%
+    financial               205.6%
+    healthcare              199.0%
+    defense                 159.0%
+    staples                 140.9%
+    energy                  106.2%
+    transport               102.8%
+    industrial              102.5%
+
+  Saved → /workspace/group/trading_eval/rounds/macro_round_12.json
+ROUND 12 MACRO INSIGHTS
+==================================================
+B&H avg benchmark: 1824.0%
+
+Top 5 strategies:
+  1. GoldFlight_126                      663.1% avg (Sharpe 0.511)
+  2. OilMom_10_50                        476.7% avg (Sharpe 0.640)
+  3. OilMom_10_30                        377.6% avg (Sharpe 0.593)
+  4. OilMom_15_45                        340.3% avg (Sharpe 0.558)
+  5. OilMom_30_90                        242.7% avg (Sharpe 0.482)
+
+Family performance:
+  macro                     238.9%
+
+Sector performance:
+  auto                 700.2%
+  tech                 542.9%
+  financial            205.6%
+  healthcare           199.0%
+  defense              159.0%
+
+Macro strategies in top 20: 15
+  GoldFlight_126                      663.1%
+  OilMom_10_50                        476.7%
+  OilMom_10_30                        377.6%

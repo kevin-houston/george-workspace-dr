@@ -1,0 +1,91 @@
+{
+  "strategy": "E2_Oil_Energy_Signal",
+  "category": "etf",
+  "round": 2,
+  "tickers": [
+    "XLB",
+    "XLE",
+    "XLF",
+    "XLI",
+    "XLK",
+    "XLP",
+    "XLRE",
+    "XLU",
+    "XLV",
+    "XLY"
+  ],
+  "n_trades": 123,
+  "date_range": "2015-02-03 \u2013 2025-12-22",
+  "total_return": 2.5298,
+  "cagr": 0.1309,
+  "sharpe": 0.6827,
+  "sortino": 5.0349,
+  "calmar": 1.5916,
+  "skewness": 8.0504,
+  "kurtosis": 75.8268,
+  "max_drawdown": -0.0823,
+  "max_consec_losses": 11,
+  "win_rate": 0.4959,
+  "profit_factor": 6.7258,
+  "avg_return": 0.0117,
+  "avg_win": 0.0276,
+  "avg_loss": -0.0041,
+  "kelly_fraction": 0.25,
+  "spy_correlation": 0.182,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 1,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    },
+    "bear": {
+      "n_trades": 6,
+      "sharpe": -0.9824,
+      "sortino": -0.774,
+      "win_rate": 0.5,
+      "avg_return": -0.0006,
+      "max_dd": -0.0059
+    },
+    "high_vol": {
+      "n_trades": 28,
+      "sharpe": 0.6424,
+      "sortino": 1.758,
+      "win_rate": 0.5,
+      "avg_return": 0.0061,
+      "max_dd": -0.0501
+    },
+    "bull": {
+      "n_trades": 29,
+      "sharpe": 0.3357,
+      "sortino": 0.8016,
+      "win_rate": 0.4138,
+      "avg_return": 0.0008,
+      "max_dd": -0.0183
+    },
+    "low_vol_bull": {
+      "n_trades": 59,
+      "sharpe": 0.8928,
+      "sortino": 8.9689,
+      "win_rate": 0.5254,
+      "avg_return": 0.0209,
+      "max_dd": -0.0521
+    },
+    "unknown": {
+      "n_trades": 0,
+      "sharpe": null,
+      "sortino": null,
+      "win_rate": null,
+      "avg_return": null,
+      "note": "insufficient data"
+    }
+  },
+  "negative_skew_flag": false,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "fat tails (kurtosis > 3)"
+  ]
+}

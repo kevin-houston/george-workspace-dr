@@ -1,0 +1,86 @@
+{
+  "strategy": "forex_OilFX",
+  "category": "forex",
+  "round": 2,
+  "tickers": [
+    "EUR_JPY",
+    "GBP_JPY",
+    "USD_CAD",
+    "USD_JPY"
+  ],
+  "n_trades": 886,
+  "date_range": "2020-01-17 \u2013 2026-03-27",
+  "total_return": -1.0,
+  "cagr": -0.7686,
+  "sharpe": -0.2516,
+  "sortino": -0.2302,
+  "calmar": -0.6327,
+  "skewness": -0.8054,
+  "kurtosis": 7.879,
+  "max_drawdown": -1.2147,
+  "max_consec_losses": 8,
+  "win_rate": 0.4808,
+  "profit_factor": 0.8001,
+  "avg_return": -0.0845,
+  "avg_win": 0.7035,
+  "avg_loss": -0.8143,
+  "kelly_fraction": 0.0,
+  "spy_correlation": -0.163,
+  "regime_stats": {
+    "crisis": {
+      "n_trades": 8,
+      "sharpe": 0.0159,
+      "sortino": 0.0195,
+      "win_rate": 0.375,
+      "avg_return": 0.0065,
+      "max_dd": -1.7155
+    },
+    "bear": {
+      "n_trades": 46,
+      "sharpe": 0.1791,
+      "sortino": 0.2087,
+      "win_rate": 0.4348,
+      "avg_return": 0.0715,
+      "max_dd": -2.2307
+    },
+    "high_vol": {
+      "n_trades": 348,
+      "sharpe": -0.0814,
+      "sortino": -0.0794,
+      "win_rate": 0.5,
+      "avg_return": -0.0286,
+      "max_dd": -4.5524
+    },
+    "bull": {
+      "n_trades": 319,
+      "sharpe": -0.3043,
+      "sortino": -0.2794,
+      "win_rate": 0.4702,
+      "avg_return": -0.0904,
+      "max_dd": -1.3455
+    },
+    "low_vol_bull": {
+      "n_trades": 121,
+      "sharpe": -0.8251,
+      "sortino": -0.6088,
+      "win_rate": 0.4711,
+      "avg_return": -0.3155,
+      "max_dd": -1.2546
+    },
+    "unknown": {
+      "n_trades": 44,
+      "sharpe": -0.1424,
+      "sortino": -0.1372,
+      "win_rate": 0.5,
+      "avg_return": -0.0281,
+      "max_dd": -3.2733
+    }
+  },
+  "negative_skew_flag": true,
+  "high_kurtosis_flag": true,
+  "spy_correlated_flag": false,
+  "risk_flags": [
+    "negative skew (hidden tail risk)",
+    "fat tails (kurtosis > 3)"
+  ]
+}
