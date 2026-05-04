@@ -312,3 +312,15 @@ def simulate_beta_neutral_pead(events_df, price_data, spy_prices, hold=20, beta_
 - Quantpedia: [Post-Earnings Announcement Effect](https://quantpedia.com/strategies/post-earnings-announcement-effect)
 - CFA Institute (2025): "Can Generative AI Disrupt PEAD?"
 - ACL 2025: "Enhancing PEAD Measurement with Large Language Models" (FinBERT achieves 57.6–58.3%)
+
+---
+
+## H165 Design Caution — LLM Market Timing (KDD 2026 Finding)
+
+KDD 2026 paper (arXiv:2505.07078, Li et al.) ran FINSABER backtest across 20 years and 100+ symbols: LLM-based timing strategies **do NOT outperform passive benchmarks** in the long run. Failure modes: overly conservative in bull markets (underperforms passive), overly aggressive in bear markets (incurs heavy losses).
+
+**Implication for H165 (TradingAgents):** Do NOT use TradingAgents as a standalone market timer generating direct buy/sell signals. Use only as a **regime gate** — an additional confirmation layer that blocks entries during macro bear regimes (e.g., when LLM + macro data agrees recession is likely, exit H026 to BIL faster than 12m TSMOM alone).
+
+The paper recommends: 'focus on trend detection and regime-aware risk controls over mere scaling of framework complexity.' H026's TSMOM filter already provides trend detection; TradingAgents should augment it with macro regime awareness, not replace it.
+
+**Benchmark before committing API costs**: test a simple VIX threshold (VIX > 30 → BIL) first. If VIX alone achieves the same regime protection as TradingAgents, the LLM layer adds complexity without benefit.
