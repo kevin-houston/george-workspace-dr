@@ -1,0 +1,85 @@
+{
+  "date": "2026-05-04",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + post-earnings drift + NLP/FinBERT",
+    "cross-sectional momentum + factor ML",
+    "multi-agent LLM trading",
+    "GitHub trending quant finance tools"
+  ],
+  "papers": [
+    {
+      "id": "arxiv:2604.13260",
+      "title": "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns",
+      "authors": "Sidhu, Fan, Pishgar",
+      "date": "2026-04-14",
+      "venue": "arXiv preprint",
+      "url": "https://arxiv.org/abs/2604.13260",
+      "summary": "16,428 S&P 500 earnings calls (2015-2025), 6.5M sentences analyzed with FinBERT segmented by speaker role. Speaker-weighted sentiment (Analyst 49%, CFO 30%, Exec 16%, Other 5%) → OOS Spearman IC=0.142, monthly long-short alpha=2.03% (t=6.49) vs FF5. Subsumes LM dictionary entirely (LM t=0.86 vs FinBERT t=5.90). Soft information sluggishly incorporated.",
+      "relevance_score": 9,
+      "relevance_reason": "Directly upgrades H163 design: use speaker-weighted FinBERT instead of flat average. Provides exact weights and performance metrics.",
+      "staged": true,
+      "staged_file": "1_pead_speaker_weighted_finbert.json",
+      "hypothesis_parent": "H163/H168"
+    },
+    {
+      "id": "arxiv:2604.19476",
+      "title": "Cross-Stock Predictability via LLM-Augmented Semantic Networks",
+      "authors": "Huang, Fan, Hu, Ye",
+      "date": "2026-04-21",
+      "venue": "arXiv preprint",
+      "url": "https://arxiv.org/abs/2604.19476",
+      "summary": "Two-stage pairs trading: (1) sparse candidate graph from 10-K sentence-BERT embeddings, (2) LLM filters edges by economic relation quality. S&P 500 2011-2019: Sharpe 0.742→0.820, MaxDD -10.47%→-7.85%. Shows LLM can replace ad-hoc pair selection with principled semantic filtering.",
+      "relevance_score": 7,
+      "relevance_reason": "Directly improves H160 (factor-residualized pairs) by replacing manual pair curation with LLM-filtered semantic network. Blocked on H160 confirming first.",
+      "staged": true,
+      "staged_file": "2_llm_pair_selection_h160.json",
+      "hypothesis_parent": "H160/H169"
+    },
+    {
+      "id": "arxiv:2505.07078",
+      "title": "Can LLM-based Financial Investing Strategies Outperform the Market in Long Run?",
+      "authors": "Li, Kim, Cucuringu, Ma",
+      "date": "2025-05-11 (rev 2026-02-12)",
+      "venue": "KDD 2026 (Datasets & Benchmarks Track)",
+      "url": "https://arxiv.org/abs/2505.07078",
+      "summary": "FINSABER framework: 20 years, 100+ symbols. Conclusion: LLM timing strategies do NOT outperform passive benchmarks long-run. Overly conservative in bull markets, overly aggressive in bear markets. Recommendation: use for trend detection + regime-aware risk controls only.",
+      "relevance_score": 8,
+      "relevance_reason": "Critical caution for H165 (TradingAgents): don't use as standalone market timer. Design note to restrict to regime gate role. Low-risk wiki update.",
+      "staged": true,
+      "staged_file": "3_llm_timing_caution_h165.json",
+      "hypothesis_parent": "H165"
+    },
+    {
+      "id": "arxiv:2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "authors": "Wu, Akin, Martineau, Grégoire, Veneris",
+      "date": "2025-09-29",
+      "venue": "ACM AI in Finance 2025",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "summary": "138k+ earnings press releases (2005-2023). Soft info (text) as informative as EPS surprise. FinBERT best performer. BUT: stock prices fully incorporate press release info at market open — limits exploitability unless real-time pre-open access achieved.",
+      "relevance_score": 5,
+      "relevance_reason": "Validates FinBERT for press release analysis but caution: prices already reflect info at open. Confirms H163 is chasing a tight window. Not staging separately — already covered by H163 design.",
+      "staged": false,
+      "hypothesis_parent": "H163"
+    },
+    {
+      "id": "github:lucifermorningstar011/pytradingbot-lumibot",
+      "title": "Lumibot — backtesting + live trading framework",
+      "authors": "Lumibot team",
+      "date": "active 2026",
+      "venue": "GitHub",
+      "url": "https://github.com/Lumiwealth/lumibot",
+      "summary": "Algorithmic trading framework where same code runs for backtesting and live trading. Supports stocks, options, crypto, futures, forex. Multiple brokers. ~4k stars.",
+      "relevance_score": 4,
+      "relevance_reason": "Useful if we want a unified backtest+live framework. Currently we use yfinance+custom for backtest, Alpaca for live. Low priority given current stack works.",
+      "staged": false,
+      "hypothesis_parent": null
+    }
+  ],
+  "staged_count": 3,
+  "total_papers": 5,
+  "high_relevance": ["arxiv:2604.13260", "arxiv:2505.07078"],
+  "medium_relevance": ["arxiv:2604.19476"],
+  "low_relevance": ["arxiv:2509.24254", "github:lucifermorningstar011/pytradingbot-lumibot"]
+}

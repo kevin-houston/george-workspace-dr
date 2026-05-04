@@ -1,0 +1,14 @@
+{
+  "id": "2026-05-04-003",
+  "date": "2026-05-04",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2505.07078",
+  "title": "Design note: H165 TradingAgents — KDD 2026 caution on LLM market timing",
+  "rationale": "arXiv:2505.07078 (Li, Kim, Cucuringu, Ma — KDD 2026) ran FINSABER backtest across 20 years and 100+ symbols and found LLM-based timing strategies do NOT outperform passive benchmarks over long horizons. Key failure modes: 'overly conservative in bull markets (underperforms passive), overly aggressive in bear markets (incurs heavy losses).' This is a direct caution against using TradingAgents as a standalone market timer (H165's original design intent). The correct use case per the paper's recommendations: focus on 'trend detection and regime-aware risk controls' rather than direct buy/sell signals. H165 design should be revised to use TradingAgents as a REGIME GATE only (exit H026 to BIL during confirmed bear regimes as detected by LLM + macro data) — not as a direct trading signal generator. This is a wiki design note, not a new script.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/event-driven.md",
+  "content": "\n\n## H165 Design Caution — LLM Market Timing (KDD 2026 Finding)\n\nKDD 2026 paper (arXiv:2505.07078, Li et al.) ran FINSABER backtest across 20 years and 100+ symbols: LLM-based timing strategies **do NOT outperform passive benchmarks** in the long run. Failure modes: overly conservative in bull markets (underperforms passive), overly aggressive in bear markets (incurs heavy losses).\n\n**Implication for H165 (TradingAgents):** Do NOT use TradingAgents as a standalone market timer generating direct buy/sell signals. Use only as a **regime gate** — an additional confirmation layer that blocks entries during macro bear regimes (e.g., when LLM + macro data agrees recession is likely, exit H026 to BIL faster than 12m TSMOM alone).\n\nThe paper recommends: 'focus on trend detection and regime-aware risk controls over mere scaling of framework complexity.' H026's TSMOM filter already provides trend detection; TradingAgents should augment it with macro regime awareness, not replace it.\n\n**Benchmark before committing API costs**: test a simple VIX threshold (VIX > 30 → BIL) first. If VIX alone achieves the same regime protection as TradingAgents, the LLM layer adds complexity without benefit.",
+  "action": "append",
+  "apply_status": "pending"
+}

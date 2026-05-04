@@ -1,0 +1,14 @@
+{
+  "id": "2026-05-04-001",
+  "date": "2026-05-04",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2604.13260",
+  "title": "H168 — Speaker-weighted FinBERT for PEAD filter (upgrade to H163 design)",
+  "rationale": "arXiv:2604.13260 (Sidhu, Fan, Pishgar — April 2026) analyzed 16,428 S&P 500 earnings calls (2015-2025) and found that weighting FinBERT sentiment scores by speaker role generates OOS Spearman IC = 0.142 and monthly long-short alpha = 2.03% (t=6.49) unexplained by FF5. Speaker weights: Analyst 49%, CFO 30%, Executive 16%, Other 5%. Simple averaging underperforms section-weighting by meaningful margin. H163 currently designs a flat average across all sentences — this upgrade would parse speaker segments from the 8-K transcript and weight accordingly. Expected: further improvement in PEAD win rate filter beyond the baseline H163 design.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
+  "content": "h168_status: QUEUED (dream cycle 2026-05-04) — PEAD Speaker-Weighted FinBERT: upgrade H163 design by parsing earnings call transcripts into speaker segments (prepared remarks vs Q&A, CEO vs CFO vs analyst) and applying empirically-derived weights (Analyst 49%, CFO 30%, Executive 16%, Other 5%) to the FinBERT sentiment score. arXiv:2604.13260 (April 2026): 16,428 S&P 500 earnings calls 2015-2025, OOS Spearman IC = 0.142, monthly long-short alpha = 2.03% (t=6.49), subsumes LM dictionary entirely (LM t=0.86). Key insight: analyst Q&A tone has the highest predictive weight — analysts' pointed questions extract non-obvious signals the prepared remarks conceal. Implementation: segment 8-K transcript by speaker tag, run FinBERT per segment, compute weighted_score = 0.49*analyst_score + 0.30*cfo_score + 0.16*exec_score + 0.05*other_score. Data: edgartools Item 2.02 + transcript section parsing. Estimated 10h. Queue after H163 (which tests flat-average baseline first).",
+  "action": "append",
+  "apply_status": "pending"
+}

@@ -111,6 +111,12 @@ Fixed: index gaps (14 pages added to wiki/index.md), pages frontmatter corrected
 
 Needs review (source gaps): (1) No options execution mechanics page — fills, slippage, assignment risk; (2) No live trading checklist page; (3) No tax treatment page — wash sale rules, Section 1256, short-term vs long-term cap gains.
 
+## [2026-05-04] research | nightly — NLP tools wiki + dream cycle PEAD/pairs/LLM scan
+
+Phase 1: Created tools/nlp-alternative-data.md (~230 lines). Key finding: speaker-weighted FinBERT (Analyst 49%, CFO 30%, Exec 16%) generates OOS IC=0.142 and 2.03%/month alpha vs FF5 on 16k earnings calls — upgrades H163 design. edgartools (v5.30.2, MIT, 2.1k stars) confirmed as best 8-K Item 2.02 parser (no API key). LM dictionary fully subsumed by FinBERT (LM t=0.86, FinBERT t=5.90). KDD 2026 paper: LLM timing strategies fail long-run; H165 restricted to regime gate role only.
+
+Phase 2: 5 papers/repos catalogued. 3 proposals staged: H168 (speaker-weighted FinBERT PEAD, arXiv:2604.13260), H169 (LLM 10-K embedding pair selection for H160+, arXiv:2604.19476), H165 design note (LLM timing caution, KDD 2026). Scan saved to dream_cycle/research/2026-05-04_scan.json.
+
 ## [2026-05-03] backtest | H159b — Beta-Neutral PEAD NOT CONFIRMED
 
 H159b (Beta-Neutral PEAD): NOT CONFIRMED. Rolling 60-day OLS beta hedge successfully achieves market neutrality (Corr(SPY) = −0.05 to −0.11 vs H159's 0.59–0.67), but MaxDD remains −48–54% — far above the −20% target. Best variant D (n=15, hold=20d): OOS Sharpe=0.382, CAGR=11.51%, MaxDD=−48.68%, NegYrs=3. Root cause: drawdowns are idiosyncratic (individual stock collapses unrelated to SPY), not market-correlated. Beta hedging removes market risk but not name risk. Large IS/OOS gap (IS Sharpe 1.6–2.0 → OOS 0.38) confirms structural PEAD decay in 2018+ — HFT has partially arbitraged gap-up drift. Path forward: H163 (FinBERT NLP filter), H164 (elastic-net 8-quarter SUE history) to improve signal quality before revisiting beta-neutral construction.
