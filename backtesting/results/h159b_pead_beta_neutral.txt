@@ -1,0 +1,19 @@
+H159b — Beta-Neutral PEAD
+============================================================
+
+Signal: gap >5% at open → long stock + short beta*SPY, hold 20d
+Beta: rolling 60-day OLS (stock vs SPY), computed before entry
+Cost: 0.10% RT stock + 0.05% RT SPY short per event
+
+VARIANTS
+  A gap5% n10 h20: OOS cumul=1.7428 CAGR=8.35% Sharpe=0.274 MaxDD=-49.22% NegYrs=4 Corr(SPY)=-0.065 → PARTIAL
+  B gap5% n5  h20: OOS cumul=1.0859 CAGR=1.20% Sharpe=0.039 MaxDD=-50.63% NegYrs=5 Corr(SPY)=-0.111 → PARTIAL
+  C gap5% n10 h10: OOS cumul=0.9621 CAGR=-0.74% Sharpe=-0.021 MaxDD=-54.31% NegYrs=5 Corr(SPY)=-0.026 → PARTIAL
+  D gap5% n15 h20: OOS cumul=2.1262 CAGR=11.51% Sharpe=0.382 MaxDD=-48.68% NegYrs=3 Corr(SPY)=-0.054 → PARTIAL
+
+BEST: D gap5% n15 h20
+  OOS: cumul=2.1262  Sharpe=0.382  MaxDD=-48.68%  CAGR=11.51%
+  AltOOS: cumul=11.2000  Sharpe=0.845
+  Corr(SPY OOS): -0.054
+
+VERDICT: PARTIAL

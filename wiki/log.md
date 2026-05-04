@@ -110,3 +110,7 @@ Issues found: 22. Auto-fixed: 19. Needs review: 3.
 Fixed: index gaps (14 pages added to wiki/index.md), pages frontmatter corrected (25→38), updated date (2026-04-28→2026-05-03), hypothesis-log description updated (H001-H007→H001-H167), paper-trading/index.md stale May holdings row, 4 cross-references added (alpaca↔alpaca-automation, alpaca↔paper-trading, momentum-strategies↔pairs/event-driven/position-sizing/hypothesis-log, pairs-trading↔momentum/event-driven/hypothesis-log), log.md sessions 8-11 backfilled.
 
 Needs review (source gaps): (1) No options execution mechanics page — fills, slippage, assignment risk; (2) No live trading checklist page; (3) No tax treatment page — wash sale rules, Section 1256, short-term vs long-term cap gains.
+
+## [2026-05-03] backtest | H159b — Beta-Neutral PEAD NOT CONFIRMED
+
+H159b (Beta-Neutral PEAD): NOT CONFIRMED. Rolling 60-day OLS beta hedge successfully achieves market neutrality (Corr(SPY) = −0.05 to −0.11 vs H159's 0.59–0.67), but MaxDD remains −48–54% — far above the −20% target. Best variant D (n=15, hold=20d): OOS Sharpe=0.382, CAGR=11.51%, MaxDD=−48.68%, NegYrs=3. Root cause: drawdowns are idiosyncratic (individual stock collapses unrelated to SPY), not market-correlated. Beta hedging removes market risk but not name risk. Large IS/OOS gap (IS Sharpe 1.6–2.0 → OOS 0.38) confirms structural PEAD decay in 2018+ — HFT has partially arbitraged gap-up drift. Path forward: H163 (FinBERT NLP filter), H164 (elastic-net 8-quarter SUE history) to improve signal quality before revisiting beta-neutral construction.
