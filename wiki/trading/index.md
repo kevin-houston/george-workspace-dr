@@ -22,13 +22,13 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Algorithms](algorithms/) — trading strategy catalog
   - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
   - [Momentum Strategies](algorithms/momentum-strategies.md) ← new 2026-04-30 (H001–H151 findings, implementation guide)
-  - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← new 2026-04-30 (ETF pairs, cointegration, Kalman filter, H152+ plan)
-  - [Event-Driven Strategies](algorithms/event-driven.md) ← new 2026-05-03 (PEAD, dividend drift, beta-neutral construction, H159b/H161/H162 design)
+  - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-05-05 (family EXHAUSTED — H152-H160 all NOT CONFIRMED at daily frequency)
+  - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H159b NOT CONFIRMED, H161/H162 PARTIAL CONFIRMED, H163 running, H168 AV transcript download)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
   - [Kraken CLI](tools/kraken-cli.md) ← expanded 2026-05-01 (all 50 agent skills, MCP service groups, full command reference)
-  - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← new 2026-05-04 (FinBERT, edgartools, sec-edgar-downloader, H163 pipeline, LM dictionary)
+  - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← updated 2026-05-05 (analyst belief asymmetry arXiv:2511.15214, H171 GPT-4o-mini alternative, AlphaVantage transcripts)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
   - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)
   - [Polygon.io](data-sources/polygon.md) ← expanded 2026-04-28 (API endpoints, WebSocket, pricing, vs Alpaca)

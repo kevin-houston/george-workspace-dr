@@ -1,0 +1,16 @@
+{
+  "id": "2026-05-05-002",
+  "date": "2026-05-05",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2505.07871",
+  "title": "H171 — GPT-4o-mini earnings sentiment scoring as H168 alternative",
+  "rationale": "arXiv:2505.07871 (May 2025) demonstrates instruction-prompted LLM for financial earnings sentiment achieves 82% accuracy on financial text classification, outperforming standalone FinBERT in several conditions. Key insight: simple zero-shot prompts (without chain-of-thought) work better for financial sentiment (confirmed by arxiv:2506.04574). For H168 specifically: instead of loading ProsusAI/finbert locally (110MB model, slow CPU inference), we can call GPT-4o-mini ($0.15/1M input tokens) on the same AlphaVantage transcript segments. Cost estimate: 203 events × 80 segments avg × 200 tokens/segment = ~3.2M tokens ≈ $0.48 total. Response time: ~0.1s per segment × 80 × 203 = ~27 min (vs H168's estimated 3-4h FinBERT CPU inference). We already have $OPENAI_API_KEY. This would be a faster, cheaper alternative to test the H168 hypothesis. Design: same speaker-weight structure as H168, but score_text() calls OpenAI API with prompt: 'Score the financial sentiment of this earnings call excerpt. Reply with POSITIVE, NEGATIVE, or NEUTRAL only.' Parse response and map POSITIVE→+1, NEGATIVE→-1, NEUTRAL→0. Then apply same speaker weights. H171 is a low-effort branch of H168 — share the transcript cache, just swap the scoring function. No separate backtest infrastructure needed.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
+  "content": "h171_status: QUEUED (dream cycle 2026-05-05) — GPT-4o-mini Earnings Sentiment (H168 LLM branch): swap H168's local FinBERT model for GPT-4o-mini API calls. arXiv:2505.07871 (May 2025): instruction-prompted LLM achieves 82% financial sentiment accuracy, comparable to fine-tuned FinBERT. arXiv:2506.04574: simple prompts beat CoT for financial sentiment. Cost: GPT-4o-mini at $0.15/1M tokens × ~3.2M tokens for 203 events ≈ $0.48 total. Speed: ~27 min vs ~3h FinBERT CPU inference. Implementation: modify H168's score_text() to call OpenAI API with simple prompt 'Sentiment of this earnings excerpt: POSITIVE/NEGATIVE/NEUTRAL'. Apply same speaker weights (Analyst 49%, CFO 30%, Exec 16%, Other 5%). Share H168's transcript cache. Same event universe, same PEAD filter logic. PREREQUISITE: H168 baseline FinBERT must run first — H171 is a comparison variant, not replacement. Queue after H168 transcripts are cached (≥50% coverage). Estimated 3h implementation. Script: backtesting/daily/run_h171.py.",
+  "action": "append",
+  "apply_status": "applied",
+  "applied_at": "2026-05-05T00:30:00",
+  "applied_action": "Appended h171_status QUEUED entry to hypothesis-log.md frontmatter"
+}

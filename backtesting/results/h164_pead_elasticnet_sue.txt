@@ -1,0 +1,46 @@
+H164 — PEAD-ML: ElasticNet 8-Quarter SUE Filter
+Run: 2026-05-04 20:42
+Universe: 30 stocks  |  GAP≥3%  |  Hold=60d  |  Lags=8
+IS: 2020–2023 (yfinance constraint)  |  OOS: 2024+
+IS events with features: 91  |  OOS events with features: 81
+ElasticNet: l1_ratio=0.10  alpha=0.2265  IS_R2=0.0608
+
+Lag coefficients (1=most recent quarter):
+  L1:-0.0000  L2:+0.0075  L3:-0.0000  L4:-0.0140  L5:-0.0000  L6:-0.0000  L7:-0.0000  L8:-0.0024
+
+Threshold sweep:
+   Thresh       N   WinRate   MeanRet   Delta_WR
+    -0.05      79    60.8%     5.64%     -1.0%
+    -0.02      79    60.8%     5.64%     -1.0%
+     0.00      78    61.5%     5.78%     -0.2%
+     0.02      78    61.5%     5.78%     -0.2%
+     0.03      75    61.3%     6.17%     -0.4%
+     0.04      60    60.0%     4.75%     -1.7%
+
+Baseline OOS:  n=81  WinRate=61.7%  MeanRet=6.39%
+Best filter:   n=78  WinRate=61.5%  MeanRet=5.78%  thresh=0.00
+
+VERDICT: NOT CONFIRMED
+
+Per-event sample (filtered OOS, last 20):
+  Date         Ticker   Gap%   SUE_L1     Pred   Act60d   W
+  2025-07-24   GOOGL   3.6%     0.05    4.34%   27.74%   Y
+  2025-07-30   SBUX    5.2%    -0.22    4.53%  -12.03%   N
+  2025-07-31   ABBV    4.1%    -0.56    4.30%   16.66%   Y
+  2025-07-31   MSFT    8.2%     0.08    4.23%   -6.09%   N
+  2025-07-31   META   11.5%     0.22    4.15%   -5.25%   N
+  2025-08-05   PFE     3.1%     0.42    2.35%    0.95%   Y
+  2025-08-20   LOW     3.5%     0.02    4.29%  -11.13%   N
+  2025-09-05   AVGO   16.2%     0.02    4.31%   13.46%   Y
+  2025-10-14   WFC     4.6%     0.12    4.14%   16.46%   Y
+  2025-10-28   MSFT    3.5%     0.13    4.34%  -15.12%   N
+  2025-10-28   UNH     4.0%     0.04    4.23%   -5.79%   N
+  2025-10-30   GOOGL   6.2%     0.27    4.38%   14.81%   Y
+  2025-10-31   AMZN   12.2%     0.25    3.81%   -2.83%   N
+  2025-11-03   AMZN    4.6%     0.25    3.81%   -5.34%   N
+  2025-11-19   LOW     4.8%     0.04    4.23%   22.79%   Y
+  2025-11-20   NVDA    5.1%     0.03    4.23%   -4.06%   N
+  2025-11-20   WMT     3.3%     0.29    4.22%   22.07%   Y
+  2026-01-28   SBUX    6.9%    -0.05    4.82%   -2.07%   N
+  2026-01-29   META   10.3%     0.09    3.68%   -8.38%   N
+  2026-01-29   IBM     8.1%     0.05    4.06%  -26.60%   N

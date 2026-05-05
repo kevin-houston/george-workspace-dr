@@ -1,0 +1,47 @@
+
+======================================================================
+  H162 — Covered Calls Around Ex-Dividend Date
+======================================================================
+  Universe: 50 large-cap dividend payers
+  Signal:   sell 2% OTM call 10d before ex-date
+  Hold:     10 trading days  |  Max positions: 10
+  IS: 2008-01-01–2017-12-31  |  OOS: 2018-01-01–2026-04-30
+
+[1] Loading price data and dividends…
+    Prices loaded: 50 tickers
+[2] Building covered-call events…
+    Total events: 3509
+    IS events:  1961
+    OOS events: 1548
+    Skipped (no dividends): ['BRK-B']
+    Avg call premium: 1.188% of stock price
+    Avg historical vol used: 24.0%
+[3] Per-event statistics…
+    COVERED CALL returns:
+    STOCK-ONLY returns (same events):
+    CALL-LEG-ONLY P&L (premium vs payoff):
+[4] Portfolio simulation (max 10 concurrent, $10,000/trade)…
+
+    Accepted trades: 2969 of 3509 (85%)
+    IS  : cumul=2.9362  CAGR=11.38%  Sharpe=2.212  MaxDD=-9.06%
+    OOS : cumul=2.4220  CAGR=11.24%  Sharpe=2.015  MaxDD=-16.17%  NegYrs=1
+    Alt : cumul=3.8830  Sharpe=2.160
+    SPY : cumul=3.0295  Sharpe=0.741
+    Corr(SPY): 0.167
+
+    Stock-only (OOS): cumul=3.0850  Sharpe=1.767  MaxDD=-18.19%
+    Covered-call lift vs stock-only OOS: Δcumul=-0.6631  ΔSharpe=+0.248
+[5] Call premium vs realised move…
+    OOS avg premium collected:  1.249% of stock
+    OOS avg abs stock move:     3.898%
+    OOS call finished ITM rate: 38.4%  (call expired worthless: 61.6%)
+    OOS avg call ret:           -0.142%
+    OOS avg stock ret:          0.762%
+
+[8] Verdict:
+    OOS Sharpe>1.0: ✓  (2.015)
+    OOS MaxDD>-25%: ✓  (-16.17%)
+    OOS WinRate>55%: ✓  (68.3%)
+    Criteria met: 3/3
+
+    VERDICT: CONFIRMED

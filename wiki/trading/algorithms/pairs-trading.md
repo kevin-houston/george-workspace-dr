@@ -1,14 +1,14 @@
 ---
-updated: 2026-04-30
+updated: 2026-05-05
 type: strategy-guide
-status: active — H152+ backtesting planned
+status: FAMILY EXHAUSTED — H152–H160 all NOT CONFIRMED at daily frequency
 ---
 
 # ETF Pairs Trading (Statistical Arbitrage)
 
 Mean-reversion strategy exploiting temporary deviations from a long-run equilibrium between two or more co-moving ETFs. The alpha source is cointegration — two price series that individually follow random walks but share a stationary spread.
 
-**Related pages**: [Momentum Strategies](momentum-strategies.md) — opposite alpha source; low correlation to pairs | [Event-Driven Strategies](event-driven.md) — H160 factor-residualized pairs design | [Hypothesis Log](../backtesting/hypothesis-log.md) — H152–H155 NOT CONFIRMED; H160 QUEUED
+**Related pages**: [Momentum Strategies](momentum-strategies.md) — opposite alpha source; low correlation to pairs | [Event-Driven Strategies](event-driven.md) — H160 factor-residualized pairs design | [Hypothesis Log](../backtesting/hypothesis-log.md) — H152–H160 ALL NOT CONFIRMED; family exhausted at daily frequency
 
 **Academic foundation**: Engle & Granger (1987) — Error Correction Models; Gatev, Goetzmann & Rouwenhorst (2006) — classic pairs trading study on US stocks (60-day formation, 6-month trading window).
 
@@ -280,11 +280,22 @@ Target: monthly return correlation with H026 < 0.30. If a pairs strategy confirm
 
 ---
 
-## Implementation Plan (H152+)
+## Backtest Results Summary (H152–H160)
 
-1. **H152**: Test GDX/SIL cointegration + OLS spread backtest (2010-2026, IS/OOS split)
-2. **H153**: Test XLE/OIH pair
-3. **H154**: Add Kalman filter hedge ratio to best confirmed pair
-4. **H155**: If confirmed — test blend with H026 (target 10-20% allocation)
+All pairs trading hypotheses reached NOT CONFIRMED. The family is exhausted at daily frequency.
 
-See [Hypothesis Log](../backtesting/hypothesis-log.md) for results.
+| H# | Strategy | Verdict | OOS Sharpe | Key Finding |
+|----|----------|---------|-----------|-------------|
+| H152 | GDX/SIL OLS | NOT CONFIRMED | — | No cointegration |
+| H153 | XLE/OIH OLS | NOT CONFIRMED | — | No cointegration |
+| H154 | TLT/IEF static OLS | NOT CONFIRMED | 0.514 | Mean-reverting but not cointegrated; best of family |
+| H155 | TLT/IEF Kalman | NOT CONFIRMED | 0.118 | Kalman explains away the spread (half-life collapses to <2d) |
+| H160 | Factor-residualized stock pairs | NOT CONFIRMED | 0.127–0.226 | Residualization improves cointegration stat but not trading PnL; OOS cointegration breaks all pairs |
+
+**H166 (GRU/LSTM spread forecasting)**: FLAGGED — ML on broken signal unlikely to help; blocked pending H160 resolution. Deprioritized.
+
+**H169 (LLM pair selection)**: BLOCKED — H160 NOT CONFIRMED; LLM cannot fix structurally broken signal. Deprioritized.
+
+**Bottom line**: ETF pairs and stock pairs at daily frequency do not exhibit sufficient OOS cointegration in the 2018–2026 period for systematic trading. HFT arbitrage has compressed mean-reversion windows below the 5-day minimum required for cost-effective daily-close execution. Further investigation would require intraday data (sub-minute) or a fundamentally different universe (e.g., ADR/local share pairs).
+
+See [Hypothesis Log](../backtesting/hypothesis-log.md) for detailed results per hypothesis.

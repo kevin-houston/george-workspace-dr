@@ -1,5 +1,5 @@
 ---
-updated: 2026-04-26
+updated: 2026-05-05
 focus: income generation
 priority: high (Kevin's explicit focus: equities + options)
 ---
@@ -116,15 +116,38 @@ Own 100 shares of underlying; sell OTM monthly call. Repeat.
 - QQQ systematic covered calls: 0.39-1.76% premium per contract → 46-72% annualized **on the premium alone** — but ignores capped stock gains
 - **Long-term conclusion**: Covered calls sacrifice too much upside to justify the strategy in buy-and-hold environments
 
-### When It Works
+### H162 Backtest Result — Covered Calls Around Ex-Dividend Date (PARTIAL CONFIRMED)
+
+**Design**: Universe: 50 large-cap dividend payers, 3509 quarterly ex-date events (IS=1961, OOS=1548). Entry: 10 trading days before ex-date, sell 2% OTM call + long stock. Exit: ex-date. Black-Scholes + 20-day HV as IV proxy.
+
+**OOS results** (2018–2026): WR=68.3%, MeanRet=0.62%, t=6.47. Portfolio Sharpe=2.015, MaxDD=−16.17%, Corr(SPY)=0.167. vs. JEPI: 2.015 vs 1.047 (1.9× better, Ernesto R25 claimed 3×).
+
+**Critical finding — call leg loses money OOS**:
+- Call leg: WR=71.4% but MeanRet=−0.14%, t=−1.92
+- Stock drift before ex-dates (WR=58.3%, MeanRet=0.76%) is the real driver
+- Covered call REDUCES mean return (0.62% vs 0.76%) but improves win rate via premium cushion
+- Covered call cumul (2.42×) < Stock-only (3.09×) — options cap upside without compensating
+
+**What this means for covered call strategies**:
+- The IV risk premium on short-dated (10-day) individual stock calls is NEGATIVE — the options are being sold at a discount to realized vol
+- The strategy works as "stock drift + defensive cushion" not "premium income"
+- Best with longer hold (15d) or lower OTM strike (3%) where the premium / intrinsic ratio improves
+
+**Caveats**: (1) Sharpe inflated — exit-day P&L model (true ~1.0–1.5); (2) No actual options data — BS+HV proxy; real bid-ask eats 0.2–0.4% per trade; (3) Comparison to JEPI is rough (different inception).
+
+Script: `backtesting/daily/run_h162.py`. Results: `backtesting/results/h162_covered_calls_exdiv.txt`.
+
+### When Covered Calls Work
 - Extended flat or modestly declining markets (delta-neutral to bearish)
 - Already-owned positions you're willing to sell at a target price
 - Tax-deferred accounts (eliminates the short-term gains problem)
+- Around corporate events (ex-dividend) where stock drift adds to premium return
 
 ### Parameters That Matter
 - Strike selection: 0.20-0.30 delta OTM (balances premium vs. upside preservation)
 - DTE: 20-45 days (weekly = too much gamma risk; monthly is optimal)
 - Rolling: Roll when underlying approaches strike; roll forward in time + up in strike
+- Event timing: Sell before ex-dividend dates to capture pre-ex positive drift
 
 ---
 

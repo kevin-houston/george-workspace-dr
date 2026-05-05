@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-04
+updated: 2026-05-05
 type: tool-guide
-status: active — directly needed for H163 (FinBERT PEAD filter)
+status: active — H163 running; H168 using AlphaVantage transcripts
 ---
 
 # NLP & Alternative Data Libraries
@@ -316,10 +316,78 @@ BertForSequenceClassification.from_pretrained("ProsusAI/finbert")  # ~440MB
 
 ---
 
+## AlphaVantage Earnings Call Transcripts
+
+**API**: `EARNINGS_CALL_TRANSCRIPT` endpoint  
+**Key**: `$ALPHA_VANTAGE_API_KEY` (env var; free tier = 25 req/day)  
+**Format**: speaker-segmented JSON with `{speaker, title, content, sentiment}`  
+**Coverage**: Back to ~2015 for S&P 500 companies  
+**Rate limit**: ~25 requests/day on free tier; pause between calls
+
+```python
+import requests, os
+
+def get_transcript(ticker: str, fiscal_quarter: str) -> list | None:
+    """
+    fiscal_quarter: e.g. "2024Q1" = fiscal Q1 of 2024.
+    AlphaVantage uses FISCAL year notation, not calendar year.
+    For AAPL (Sep FY): 2024Q1 = Oct-Dec 2023, reported Jan 2024.
+    For most others (Dec FY): 2024Q1 = Jan-Mar 2024, reported Apr 2024.
+    """
+    r = requests.get("https://www.alphavantage.co/query", params={
+        "function": "EARNINGS_CALL_TRANSCRIPT",
+        "symbol": ticker,
+        "quarter": fiscal_quarter,
+        "apikey": os.environ["ALPHA_VANTAGE_API_KEY"]
+    }, timeout=30)
+    data = r.json()
+    if "transcript" in data:
+        return data["transcript"]
+    return None  # rate limit or no transcript
+
+# Each entry in the list:
+# {"speaker": "Tim Cook", "title": "CEO", "content": "...", "sentiment": "0.0"}
+# Typical titles: "Analyst", "CEO", "CFO", "Operator", "Director of Investor Relations"
+```
+
+**Fiscal quarter mapping** (most common):
+| Company type | Event month | AV quarter string |
+|-------------|-------------|------------------|
+| Calendar FY (most) | Jan-Mar | `YYYY-1Q4` (reporting prior Q4) |
+| Calendar FY (most) | Apr-Jun | `YYYYQ1` |
+| Calendar FY (most) | Jul-Sep | `YYYYQ2` |
+| Calendar FY (most) | Oct-Dec | `YYYYQ3` |
+| AAPL (Sep FY end) | Jan-Feb | `YYYYQ1` |
+| AAPL (Sep FY end) | Apr-May | `YYYYQ2` |
+| AAPL (Sep FY end) | Jul-Aug | `YYYYQ3` |
+| MSFT (Jun FY end) | Jan-Mar | `YYYYQ3` |
+| MSFT (Jun FY end) | Apr-Jun | `YYYYQ4` |
+| MSFT (Jun FY end) | Jul-Sep | `YYYY+1Q1` |
+
+**Use case**: H168 — speaker-weighted FinBERT. Weights from arXiv:2604.13260: Analyst 49%, CFO 30%, Executive 16%, Other 5%.
+
+### Analyst belief asymmetry (arXiv:2511.15214)
+
+Matera (Nov 2025): analysts **over-react** to positive sentiment/optimism and **under-react** to risk/uncertainty narratives in earnings calls. Exploitable implication: management hedging language contains delayed price information not captured by polarity alone.
+
+**H168 v2 design refinement:** Add uncertainty-weighting layer on top of speaker weights:
+1. Score each segment with FinBERT polarity (existing H168)
+2. Compute uncertainty vocabulary density using Loughran-McDonald uncertainty word list
+3. Downweight high-uncertainty CFO segments even if positive tone; upweight low-hedging analyst segments
+4. Final score = speaker_weight × (finbert_polarity − λ × uncertainty_density)
+
+Test λ in {0.0, 0.5, 1.0} as H168 v2 after baseline H168 results are known.
+
+**GPT-4o-mini alternative (H171):** arXiv:2505.07871 shows instruction-prompted LLM achieves 82% financial sentiment accuracy comparable to FinBERT. Cost: ~$0.48 total for full H168 event universe. Speed: ~27 min vs ~3h CPU FinBERT inference. Simple prompts beat Chain-of-Thought for financial classification (arXiv:2506.04574). H171 queued after H168 baseline.
+
+---
+
 ## Related Hypothesis Queue
 
-| ID | Description | Depends on this page |
-|----|-------------|---------------------|
-| H163 | FinBERT NLP filter for PEAD entry (H159b + sentiment gate) | ProsusAI/finbert + edgartools |
-| H164 | Elastic-net 8-quarter SUE history → 60-day drift prediction | FMP earnings API |
-| H165 | TradingAgents macro regime gate on H026 rotation | External (TradingAgents library) |
+| ID | Description | Depends on this page | Status |
+|----|-------------|---------------------|--------|
+| H163 | FinBERT NLP filter for PEAD entry (H159b + sentiment gate) | ProsusAI/finbert + edgartools | BLOCKED (EDGAR OOS coverage) |
+| H164 | Elastic-net 8-quarter SUE history → 60-day drift prediction | FMP earnings API | NOT CONFIRMED (data blocker) |
+| H165 | TradingAgents macro regime gate on H026 rotation | External (TradingAgents library) | PARTIAL CONFIRMED |
+| H168 | Speaker-weighted FinBERT on earnings call transcripts | AlphaVantage transcript API | IN-PROGRESS |
+| H171 | GPT-4o-mini API earnings sentiment (H168 LLM branch) | OpenAI API | QUEUED (after H168 transcripts cached) |

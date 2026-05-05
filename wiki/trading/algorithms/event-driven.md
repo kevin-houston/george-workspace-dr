@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-03
+updated: 2026-05-05
 type: strategy-guide
-status: active — H159 confirmed effect; H159b, H161, H162 queued
+status: active — H159b NOT CONFIRMED; H161/H162 PARTIAL CONFIRMED; H163 running
 ---
 
 # Event-Driven Trading Strategies
@@ -63,12 +63,19 @@ H159 OOS findings (2018–2026):
 
 Long-only PEAD holds ~30 simultaneous positions at all times, all long equity, all correlated with SPY. In a bear market all 30 positions crash together. The event alpha is real but drowned by beta.
 
-### Solution: Beta-Neutral PEAD (H159b)
+### Beta-Neutral PEAD: H159b — NOT CONFIRMED
 
 Pair each PEAD long with a proportional SPY short:
 ```
 position_spy_short = rolling_60d_beta(stock, SPY) × position_size
 ```
+
+**H159b OOS results** (best of 4 variants — gap>5%, n=15, hold=20d):
+- OOS Sharpe = 0.382, MaxDD = −48.68%, NegYrs = 3
+- Beta hedge achieved Corr(SPY) = −0.05 to −0.11 (was 0.59–0.67) ✓
+- MaxDD still −48–54% — far above −20% threshold ✗
+
+**Why it still fails**: beta hedging removes market correlation but cannot hedge idiosyncratic risk. Gap-up stocks collapse 50%+ for company-specific reasons unrelated to SPY. The IS/OOS gap (IS Sharpe 1.6 → OOS 0.38) confirms PEAD structural decay post-2018: HFT/algos arbitrage the drift faster than 30-stock equal-weight can exploit.
 
 **Rolling beta calculation** (statsmodels):
 ```python
@@ -82,13 +89,10 @@ def rolling_beta(stock_ret, spy_ret, window=60):
     return result.params['x']  # beta series
 ```
 
-**Market-neutral mechanics**:
-- Stock notional: $N
-- SPY short notional: beta × $N
-- Net market exposure: ≈ 0
-- Alpha source: idiosyncratic event drift
-
-**Expected improvement**: eliminates crash risk (2020, 2022) while preserving event alpha from t-stat 5.64 base effect.
+**Remaining PEAD improvement paths**:
+- H163 — FinBERT NLP filter (raise win rate above 64% via transcript sentiment; currently running)
+- H164 — ElasticNet 8-quarter SUE history: NOT CONFIRMED (data blocker: FMP v3 deprecated, only 4yr history via yfinance; model collapses to near-zero coefficients)
+- H168 — Speaker-weighted FinBERT (analyst Q&A weighted 49%, CFO 30%): QUEUED after H163
 
 ### Data Sources for PEAD
 
@@ -132,7 +136,7 @@ print(t.earnings_history)               # actual vs estimate history
 - Dividend decreases show persistent negative drift (−2.97% by day +16) — asymmetric
 - Signal is stronger for first-ever dividend / unexpected large raises
 
-**H161 hypothesis**: Enter at close of announcement day, hold 40 days. No short side needed (positive drift only from increases).
+**H161 result (PARTIAL CONFIRMED)**: Enter at close of announcement day, hold 40 days. OOS (2018–2026): n=499, WR=59.1%, MeanRet=1.97%, t=4.10 (p<0.0001). Portfolio OOS Sharpe=4.298, MaxDD=−18.06%, Corr(SPY)=0.001. Criteria: 3/3. Key caveat: Sharpe inflated by exit-day P&L model (true Sharpe ~1–2); IS (2007–2017) fails due to GFC. Signal fires frequently for dividend aristocrats (≈6.6 raises/stock/year).
 
 ### Signal Construction
 
@@ -166,6 +170,8 @@ Price typically drops by approximately the dividend amount on ex-date. Mean reve
 - Day before ex-date: small positive bias (dividend capture buyers)
 - Ex-date: mechanical drop, then recovery if yield-seekers re-enter
 - **H162 implementation**: sell covered call 10 days before ex-date (collected premium + dividend — risk = early assignment)
+
+**H162 result (PARTIAL CONFIRMED)**: Universe: 50 large-cap dividend payers, 3509 quarterly ex-date events. OOS: WR=68.3%, MeanRet=0.62%, t=6.47. Portfolio OOS Sharpe=2.015, MaxDD=−16.17%, Corr(SPY)=0.167. vs. JEPI ETF: 2.015 vs 1.047 Sharpe (1.9×). Key caveats: (1) call leg loses money OOS (MeanRet=−0.14%, t=−1.92) — no IV risk premium; (2) true driver is stock drift before ex-dates (stock-only OOS MeanRet=0.76%, covered call reduces to 0.62%); (3) BS+HV proxy only — real bid-ask on short-dated options eats 0.2–0.4%. Strategy is "stock drift with a premium cushion," not an options income play.
 
 ---
 
@@ -257,50 +263,17 @@ def beta_neutral_return(long_ret, spy_ret, beta_at_entry):
 
 ---
 
-## Queued Hypotheses
+## Hypothesis Status Summary
 
-| H# | Strategy | Status | Key Question |
-|----|----------|--------|--------------|
-| H159 | PEAD — gap entry, unhedged | PARTIAL — effect confirmed, portfolio fails | Beta dominates |
-| H159b | PEAD — beta-neutral (rolling 60d OLS) | QUEUED | Does hedging recover Sharpe to >1.0? |
-| H161 | Dividend raise ≥10% → enter close, hold 40d | QUEUED | Is drift large enough after costs? |
-| H162 | Covered calls 10d before ex-div | QUEUED | Does premium + dividend outperform pure hold? |
-
-### H159b Design Sketch
-
-```python
-# Entry: gap ≥ 5%, enter at open
-# Exit: 20 days later (close)
-# Hedge: short SPY at entry, cover at exit
-#   SPY_shares = (beta_60d * long_notional) / spy_price_at_entry
-
-def simulate_beta_neutral_pead(events_df, price_data, spy_prices, hold=20, beta_window=60):
-    results = []
-    for _, ev in events_df.iterrows():
-        t, entry_date = ev['ticker'], ev['event_date']
-        # Compute beta in the 60 days before entry
-        end_idx = price_data[t].index.get_loc(entry_date)
-        if end_idx < beta_window:
-            continue
-        asset_ret = price_data[t].pct_change().iloc[end_idx-beta_window:end_idx]
-        spy_ret   = spy_prices.pct_change().iloc[end_idx-beta_window:end_idx]
-        beta = np.cov(asset_ret, spy_ret)[0,1] / np.var(spy_ret)
-
-        # Forward returns
-        fwd_asset = price_data[t].iloc[end_idx:end_idx+hold+1]
-        fwd_spy   = spy_prices.iloc[end_idx:end_idx+hold+1]
-        if len(fwd_asset) < hold:
-            continue
-
-        # Day 0: entry at open (approximated here), subsequent: close-to-close
-        r_asset = (fwd_asset.iloc[-1] / fwd_asset.iloc[0]) - 1
-        r_spy   = (fwd_spy.iloc[-1] / fwd_spy.iloc[0]) - 1
-        r_hedged = r_asset - beta * r_spy
-        results.append({'ticker': t, 'date': entry_date,
-                        'r_raw': r_asset, 'r_spy': r_spy,
-                        'beta': beta, 'r_hedged': r_hedged})
-    return pd.DataFrame(results)
-```
+| H# | Strategy | Status | OOS Sharpe | Key Finding |
+|----|----------|--------|-----------|-------------|
+| H159 | PEAD — gap entry, unhedged | PARTIAL | 0.44 | Effect real (t=5.64) but beta kills portfolio |
+| H159b | PEAD — beta-neutral (rolling 60d OLS) | NOT CONFIRMED | 0.382 | Beta hedge works (Corr→0) but idiosyncratic risk still −49% DD |
+| H161 | Dividend raise ≥10% → enter close, hold 40d | PARTIAL CONFIRMED | 4.298* | Strong OOS signal (t=4.10); *Sharpe inflated by exit-day model |
+| H162 | Covered calls 10d before ex-div | PARTIAL CONFIRMED | 2.015* | Stock drift is true driver; call leg loses OOS; *exit-day Sharpe inflation |
+| H163 | PEAD + FinBERT filter | RUNNING | — | Currently in FinBERT inference |
+| H164 | PEAD + ElasticNet 8-quarter SUE | NOT CONFIRMED | — | FMP v3 deprecated; 4yr IS insufficient for model training |
+| H168 | PEAD + speaker-weighted FinBERT | QUEUED | — | After H163 completes |
 
 ---
 

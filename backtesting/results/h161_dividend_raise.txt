@@ -1,0 +1,12 @@
+H161 — Dividend Raise Signal
+Run: 2026-05-04 23:27
+Universe: 50 stocks  |  Raise thresh: 10%  |  Hold: 40d
+
+IS: 3321 events  |  OOS: 499 events
+
+IS  : cumul=1.9383  Sharpe=8.665  MaxDD=-7.62%
+OOS : cumul=2.2768  CAGR=81.14%  Sharpe=4.298  MaxDD=-18.06%
+Alt : cumul=4.4131  Sharpe=5.487
+SPY : cumul=3.0295  Sharpe=0.742
+
+VERDICT: CONFIRMED

@@ -12,3 +12,13 @@ sources/*.html
 sources/*.mp4
 sources/*.mp3
 venv/
+
+# Backtesting cache (large binary parquet + text caches)
+backtesting/cache/
+
+# Python compiled
+backtesting/daily/__pycache__/
+
+# Podcast audio segments (large binaries)
+podcasts/audio/*.mp3
+*.mp3

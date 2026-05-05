@@ -1,0 +1,76 @@
+
+=================================================================
+  H165a — VIX Threshold Benchmark for H026
+=================================================================
+  Testing: does VIX-based regime gate improve H026 sector rotation?
+  Prerequisite for H165 (TradingAgents macro LLM gate)
+
+[1] Loading H026 asset prices and VIX…
+    Assets loaded: 25/25
+    Grid: (244, 25)  (2006-01-31 → 2026-04-30)
+    VIX monthly: 244 months  (2006-01-31 → 2026-04-30)
+    VIX range: min=9.5  max=59.9  median=17.3
+
+[2] Running variants…
+    SPY OOS baseline: cumul=3.0295  Sharpe=0.861
+
+  Variant A: No VIX filter (baseline H026 replica)
+    IS(2008-17):  cumul=2.1109  Sharpe=0.355  MaxDD=-32.07%
+    OOS(2018+):  cumul=0.9194  Sharpe=-0.035  MaxDD=-66.40%  NegYrs=4
+    AltOOS:      cumul=1.8778  Sharpe=0.191
+    Cash months: TSMOM=11 (baseline)
+
+  Variant B: VIX < 20 required
+    IS(2008-17):  cumul=1.9221  Sharpe=0.445  MaxDD=-19.87%
+    OOS(2018+):  cumul=1.4844  Sharpe=0.243  MaxDD=-47.36%  NegYrs=5
+    AltOOS:      cumul=2.7737  Sharpe=0.406
+    Cash months: TSMOM=11  VIX-added=78  (VIX>20 adds 78 forced-BIL months)
+
+  Variant C: VIX < 25 required
+    IS(2008-17):  cumul=2.0897  Sharpe=0.420  MaxDD=-28.75%
+    OOS(2018+):  cumul=1.9295  Sharpe=0.394  MaxDD=-32.67%  NegYrs=3
+    AltOOS:      cumul=3.8776  Sharpe=0.525
+    Cash months: TSMOM=11  VIX-added=46  (VIX>25 adds 46 forced-BIL months)
+
+  Variant D: VIX < 30 required
+    IS(2008-17):  cumul=2.6357  Sharpe=0.537  MaxDD=-24.72%
+    OOS(2018+):  cumul=0.7925  Sharpe=-0.104  MaxDD=-71.04%  NegYrs=4
+    AltOOS:      cumul=1.6186  Sharpe=0.152
+    Cash months: TSMOM=11  VIX-added=22  (VIX>30 adds 22 forced-BIL months)
+
+  Variant E: VIX < 35 required
+    IS(2008-17):  cumul=2.2335  Sharpe=0.419  MaxDD=-33.03%
+    OOS(2018+):  cumul=0.8858  Sharpe=-0.052  MaxDD=-67.63%  NegYrs=4
+    AltOOS:      cumul=1.8091  Sharpe=0.181
+    Cash months: TSMOM=11  VIX-added=12  (VIX>35 adds 12 forced-BIL months)
+
+  Variant F: VIX < 40 required
+    IS(2008-17):  cumul=1.6691  Sharpe=0.252  MaxDD=-42.48%
+    OOS(2018+):  cumul=0.9954  Sharpe=-0.002  MaxDD=-63.62%  NegYrs=3
+    AltOOS:      cumul=2.0330  Sharpe=0.216
+    Cash months: TSMOM=11  VIX-added=8  (VIX>40 adds 8 forced-BIL months)
+
+[3] Delta vs baseline (Variant A)…
+   Variant   Thresh   ΔOOS_cumul   ΔAlt_cumul   ΔOOS_Sharpe  VIX_BIL_mo
+         A     none      +0.0000      +0.0000        +0.000           0
+         B      >20      +0.5650      +0.8959        +0.279          78
+         C      >25      +1.0100      +1.9999        +0.429          46
+         D      >30      -0.1269      -0.2592        -0.068          22
+         E      >35      -0.0336      -0.0687        -0.017          12
+         F      >40      +0.0760      +0.1552        +0.034           8
+
+[4] VIX regimes and TSMOM overlap…
+    OOS VIX (2018-2026):
+      Months VIX>20: 34 / 100
+      Months VIX>25: 20 / 100
+      Months VIX>30: 9 / 100
+      Months VIX>35: 3 / 100
+      Months VIX>40: 2 / 100
+
+[5] Verdict…
+    VIX threshold HELPS in 3/5 variants:
+      B: VIX>20  ΔOOS=+0.5650
+      C: VIX>25  ΔOOS=+1.0100
+      F: VIX>40  ΔOOS=+0.0760
+
+    CONCLUSION: VIX FILTER USEFUL — proceed to test TradingAgents (H165)

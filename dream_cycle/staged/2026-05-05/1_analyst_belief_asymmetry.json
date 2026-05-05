@@ -1,0 +1,16 @@
+{
+  "id": "2026-05-05-001",
+  "date": "2026-05-05",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2511.15214",
+  "title": "H168 design note: analyst belief asymmetry — weight uncertainty language separately",
+  "rationale": "arXiv:2511.15214 (Matera, Nov 2025) found that analysts over-react to positive sentiment/optimism but under-react to risk/uncertainty language in earnings calls. This asymmetry is exploitable: management hedging language (forward uncertainty) contains delayed price impact that is NOT captured by simple sentiment polarity. For H168's speaker-weighted FinBERT, this suggests adding a second weighting dimension: (1) existing speaker weights (Analyst 49%, CFO 30%, Exec 16%, Other 5%) × (2) language-type weight (positive-forward > neutral > negative-uncertainty). Practically: parse each speaker segment and separately score 'uncertainty vocabulary density' using Loughran-McDonald uncertainty word list, then blend with FinBERT polarity. High uncertainty from CFO → downweight even if positive; low hedging language from analysts → upweight. This could meaningfully improve H168 vs flat FinBERT baseline (H163). Low-risk wiki note only — design insight for H168 v2 after H168 baseline is tested.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/tools/nlp-alternative-data.md",
+  "content": "\n\n### Analyst belief asymmetry (arXiv:2511.15214)\n\nMatera (Nov 2025): analysts **over-react** to positive sentiment/optimism and **under-react** to risk/uncertainty narratives in earnings calls. Exploitable implication: management hedging language contains delayed price information not captured by polarity alone.\n\n**H168 design refinement (v2):** Add uncertainty-weighting layer on top of speaker weights:\n1. Score each segment with FinBERT polarity (existing H168)\n2. Compute uncertainty vocabulary density using Loughran-McDonald uncertainty word list\n3. Downweight high-uncertainty CFO segments even if positive tone; upweight low-hedging analyst segments\n4. Final score = speaker_weight × (finbert_polarity − λ × uncertainty_density)\n\nTest λ in {0.0, 0.5, 1.0} as H168 v2 after baseline H168 results are known.",
+  "action": "append",
+  "apply_status": "applied",
+  "applied_at": "2026-05-05T00:30:00",
+  "applied_action": "Appended analyst belief asymmetry section to nlp-alternative-data.md"
+}

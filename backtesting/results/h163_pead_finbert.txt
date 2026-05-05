@@ -1,0 +1,10 @@
+H163 — PEAD-NLP: FinBERT Sentiment Filter
+Run: 2026-05-04 20:52
+Universe: 30 stocks  |  GAP≥3%  |  Hold=20d
+IS: 2020–2023  |  OOS: 2024+  |  FinBERT thresh: 0.1
+IS earnings gaps: 112  |  OOS earnings gaps: 85
+OOS with FinBERT scores: 0
+
+Baseline OOS:  n=85  WR=57.6%  MeanRet=1.95%
+
+VERDICT: BLOCKED — insufficient EDGAR coverage
