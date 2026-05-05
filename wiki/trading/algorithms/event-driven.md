@@ -271,9 +271,10 @@ def beta_neutral_return(long_ret, spy_ret, beta_at_entry):
 | H159b | PEAD — beta-neutral (rolling 60d OLS) | NOT CONFIRMED | 0.382 | Beta hedge works (Corr→0) but idiosyncratic risk still −49% DD |
 | H161 | Dividend raise ≥10% → enter close, hold 40d | PARTIAL CONFIRMED | 4.298* | Strong OOS signal (t=4.10); *Sharpe inflated by exit-day model |
 | H162 | Covered calls 10d before ex-div | PARTIAL CONFIRMED | 2.015* | Stock drift is true driver; call leg loses OOS; *exit-day Sharpe inflation |
-| H163 | PEAD + FinBERT filter | RUNNING | — | Currently in FinBERT inference |
+| H163 | PEAD + FinBERT filter | BLOCKED | — | OOS EDGAR coverage=0; IS analysis in progress (run 3, ~140/203 scored) |
 | H164 | PEAD + ElasticNet 8-quarter SUE | NOT CONFIRMED | — | FMP v3 deprecated; 4yr IS insufficient for model training |
-| H168 | PEAD + speaker-weighted FinBERT | QUEUED | — | After H163 completes |
+| H168 | PEAD + speaker-weighted FinBERT (AV transcripts) | IN-PROGRESS | — | Transcript download ongoing (25/day AV limit); GAP=0.03, ~203 events |
+| H171 | PEAD + GPT-4o-mini earnings sentiment (H168 variant) | QUEUED | — | $0.48 total cost; shares H168 transcript cache; queue after H168 |
 
 ---
 
