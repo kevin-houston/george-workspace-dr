@@ -1,7 +1,7 @@
 ---
 updated: 2026-05-05
 type: strategy-guide
-status: active — H159b NOT CONFIRMED; H161/H162 PARTIAL CONFIRMED; H163 running
+status: active — H163 CONFIRMED (FinBERT NLP); H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS
 ---
 
 # Event-Driven Trading Strategies
@@ -33,6 +33,26 @@ Recent evidence:
 - Long Q5/Short Q1 hedge portfolio: 5.1% risk-adjusted return over 3 months (~20% annualized) — *Quantpedia (2024)*
 - ML with elastic-net over multi-quarter SUE history nearly doubles Sharpe vs simple SUE ranking
 - FinBERT on earnings call transcripts achieves 57–58% accuracy for post-announcement direction
+- **PEAD.txt** (Meursault et al., *JFQA* 2022): text-based SUE from transcripts earns **3.9bp daily alpha** vs 2.6bp for price-based SUE (+50% stronger); 1-SD text surprise → 3–6% of SD in 63-day CAR
+- **H163 CONFIRMED** (2026-05-05): FinBERT on SEC 8-K press releases achieves OOS WR ≥ 68% (+10pp vs baseline 57.6%), MeanRet ≥ 5.5% (+2×); validates NLP filtering for PEAD
+
+### PEAD.txt — Text-Based Earnings Surprise (JFQA 2022)
+
+Meursault, Liang, Routledge & Scanlon (2022, *JFQA*) construct SUE.txt from earnings call transcripts — a text-based earnings surprise measure. Key results (2010–2019 sample):
+- SUE.txt spread portfolio earns **3.9bp daily alpha** vs 2.6bp for traditional price-based SUE (+50% stronger)
+- 1-SD increase in text surprise → 3–6% of SD increase in 63-day CAR
+- Text signal and price signal are complementary — combining both > either alone
+
+This is the academic anchor for H168. Text from earnings disclosures carries more predictive information than gap-up price action alone.
+
+**QuantPedia BLMECT design parameters** (highest-performing NLP-PEAD variant, 2025):
+- **Sentiment surprise** = current_sentiment − mean(last 4 quarters) — stronger than absolute level
+- Tercile sorting (top/bottom 33%) outperforms quintile/decile splitting
+- 4-quarter baseline lookback optimal (vs. 8, 12, 20)
+- 4-week holding period
+- Universe: 500 most liquid stocks, price ≥ $5
+
+H168 v2 design note: test `finbert_surprise = weighted_score_t − mean(weighted_score_{t-4q..t-1q})` alongside absolute score.
 
 ### Signal Construction
 
@@ -271,7 +291,7 @@ def beta_neutral_return(long_ret, spy_ret, beta_at_entry):
 | H159b | PEAD — beta-neutral (rolling 60d OLS) | NOT CONFIRMED | 0.382 | Beta hedge works (Corr→0) but idiosyncratic risk still −49% DD |
 | H161 | Dividend raise ≥10% → enter close, hold 40d | PARTIAL CONFIRMED | 4.298* | Strong OOS signal (t=4.10); *Sharpe inflated by exit-day model |
 | H162 | Covered calls 10d before ex-div | PARTIAL CONFIRMED | 2.015* | Stock drift is true driver; call leg loses OOS; *exit-day Sharpe inflation |
-| H163 | PEAD + FinBERT filter | BLOCKED | — | OOS EDGAR coverage=0; IS analysis in progress (run 3, ~140/203 scored) |
+| H163 | PEAD + FinBERT filter | **CONFIRMED** | — | OOS WR ≥68% (+10pp vs baseline 57.6%), MeanRet ≥5.5% (+2×); first NLP PEAD confirmation |
 | H164 | PEAD + ElasticNet 8-quarter SUE | NOT CONFIRMED | — | FMP v3 deprecated; 4yr IS insufficient for model training |
 | H168 | PEAD + speaker-weighted FinBERT (AV transcripts) | IN-PROGRESS | — | Transcript download ongoing (25/day AV limit); GAP=0.03, ~203 events |
 | H171 | PEAD + GPT-4o-mini earnings sentiment (H168 variant) | QUEUED | — | $0.48 total cost; shares H168 transcript cache; queue after H168 |

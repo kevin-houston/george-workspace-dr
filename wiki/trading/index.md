@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-03
+updated: 2026-05-05
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -23,7 +23,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
   - [Momentum Strategies](algorithms/momentum-strategies.md) ← new 2026-04-30 (H001–H151 findings, implementation guide)
   - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-05-05 (family EXHAUSTED — H152-H160 all NOT CONFIRMED at daily frequency)
-  - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H159b NOT CONFIRMED, H161/H162 PARTIAL CONFIRMED, H163 running, H168 AV transcript download)
+  - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
@@ -38,6 +38,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Algorithmic Strategies](prediction-markets/algorithmic-strategies.md) ← expanded 2026-05-02 (cross-market arb, nowcasting with full Python lifecycle, calibration, Timeless funding arb, IBKR ForecastTrader API)
   - [Other Platforms](prediction-markets/other-platforms.md) ← expanded 2026-05-02 (IBKR ForecastTrader full API, Kalshi Timeless mechanics, emerging platforms)
 - [Backtesting](backtesting/) — setup, results, methodology
+  - [Design Principles](backtesting/design-principles.md) ← expanded 2026-05-05 (IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado)
 - [Paper Trading](paper-trading/) — Alpaca results log
 - [Research Log](research-log/) — nightly research summaries
 

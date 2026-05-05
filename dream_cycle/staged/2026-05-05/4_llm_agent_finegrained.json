@@ -1,0 +1,14 @@
+{
+  "id": "llm-finegrained-tasks-2026-05-05",
+  "date": "2026-05-05",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.23330",
+  "title": "H165: Fine-grained task decomposition for LLM agents outperforms coarse roles",
+  "rationale": "arXiv:2602.23330 (Feb 2026) shows that LLM multi-agent systems using fine-grained task decomposition (specific micro-tasks like 'identify support/resistance', 'extract YoY earnings growth rate', 'classify current regime as expansion/contraction') significantly outperform coarse-grained role assignments ('analyze the market', 'assess risk'). The key driver is alignment between analytical outputs and downstream decisions. For H165 TradingAgents implementation: design agents with 3-5 specific, measurable sub-tasks rather than broad analytical roles. Also: arXiv:2511.18578 (Nov 2025) shows TSFMs trained from scratch on financial data outperform zero-shot pre-trained models substantially — this suggests H163 v2 fine-tuning FinBERT on our 203 confirmed event texts could push OOS WR above 68% (H172 opportunity).",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/tools/nlp-alternative-data.md",
+  "content": "### LLM Multi-Agent Fine-Grained Task Decomposition (arXiv:2602.23330, Feb 2026)\n\nFor H165 TradingAgents step 2: use fine-grained task decomposition instead of coarse agent roles.\n\n- **Coarse (poor)**: \"Analyze the macro environment and recommend position\"\n- **Fine-grained (good)**: \"(1) Compute 12m/3m momentum for each sector. (2) Check VIX regime (above/below 25). (3) Check yield curve spread (2y10y). (4) Extract current quarter EPS growth vs. same quarter YoY. (5) Output: regime=expansion/neutral/contraction + confidence=high/medium/low\"\n\nFinding: alignment between intermediate agent outputs and the final investment decision is the primary driver of system performance — not the number of agents or model size.\n\n### TSFMs Require In-Domain Pre-Training (arXiv:2511.18578, Nov 2025)\n\nOff-the-shelf pre-trained Time Series Foundation Models (TSFMs) fail in zero-shot and fine-tuning settings for financial data. Models **trained from scratch on financial data** achieve substantial improvement.\n\n**H172 opportunity**: Fine-tune FinBERT on H163's 203 confirmed event 8-K texts (we now have ground-truth labels: H163 CONFIRMED = positive OOS alpha). Current H163 uses zero-shot FinBERT and achieves OOS WR ≥ 68%. Fine-tuned variant could push higher. Cost: ~4h training on CPU, free. Requires: label H163 cached 8-K texts by outcome (win/loss on 20-day hold).",
+  "action": "append",
+  "apply_status": "applied"
+}

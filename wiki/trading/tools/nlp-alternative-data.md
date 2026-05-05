@@ -1,7 +1,7 @@
 ---
 updated: 2026-05-05
 type: tool-guide
-status: active — H163 running; H168 using AlphaVantage transcripts
+status: active — H163 CONFIRMED; H168 IN-PROGRESS; H171 QUEUED
 ---
 
 # NLP & Alternative Data Libraries
@@ -386,8 +386,31 @@ Test λ in {0.0, 0.5, 1.0} as H168 v2 after baseline H168 results are known.
 
 | ID | Description | Depends on this page | Status |
 |----|-------------|---------------------|--------|
-| H163 | FinBERT NLP filter for PEAD entry (H159b + sentiment gate) | ProsusAI/finbert + edgartools | BLOCKED (EDGAR OOS coverage) |
+| H163 | FinBERT NLP filter for PEAD entry (H159b + sentiment gate) | ProsusAI/finbert + edgartools | **CONFIRMED** (OOS WR ≥68%, MeanRet ≥5.5%) |
 | H164 | Elastic-net 8-quarter SUE history → 60-day drift prediction | FMP earnings API | NOT CONFIRMED (data blocker) |
 | H165 | TradingAgents macro regime gate on H026 rotation | External (TradingAgents library) | PARTIAL CONFIRMED |
 | H168 | Speaker-weighted FinBERT on earnings call transcripts | AlphaVantage transcript API | IN-PROGRESS |
 | H171 | GPT-4o-mini API earnings sentiment (H168 LLM branch) | OpenAI API | QUEUED (after H168 transcripts cached) |
+| H172 | Fine-tuned FinBERT on H163 labeled 8-K texts | H163 8-K cache + outcome labels | PROPOSED (see below) |
+
+---
+
+## LLM Agent Design: Fine-Grained Tasks (arXiv:2602.23330, Feb 2026)
+
+For H165 TradingAgents step 2: use **fine-grained task decomposition** instead of coarse agent roles.
+
+- **Coarse (poor)**: "Analyze the macro environment and recommend position sizing"
+- **Fine-grained (good)**: "(1) Compute 12m momentum for each sector ETF. (2) Check VIX level vs 25 threshold. (3) Check 2y10y spread. (4) Extract current-quarter earnings growth YoY. (5) Output: regime=expansion/neutral/contraction + confidence."
+
+Finding: alignment between intermediate agent outputs and final investment decisions is the primary performance driver — more than number of agents or model size.
+
+## Time Series Foundation Models Need In-Domain Pre-Training (arXiv:2511.18578, Nov 2025)
+
+Off-the-shelf pre-trained TSFMs (time series foundation models like TimesFM, Chronos) **fail in zero-shot and fine-tuning settings for financial data**. Models trained from scratch on financial data achieve substantial improvements.
+
+**H172 opportunity**: Fine-tune FinBERT on H163's labeled 8-K event texts:
+1. H163 cache has ~200 8-K press release texts for IS events
+2. Each event has a ground-truth label: 20-day return > 0 = WIN, ≤ 0 = LOSS
+3. Fine-tune FinBERT on these labeled texts as a binary classifier
+4. Expected: better-calibrated positive probability for PEAD filtering than zero-shot polarity score
+5. Cost: ~4h CPU training, no GPU needed; H163 already confirmed zero-shot works at WR ≥68%

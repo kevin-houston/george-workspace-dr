@@ -1,14 +1,16 @@
 ---
-updated: 2026-04-24
+updated: 2026-05-05
 ---
 
 # Backtesting Design Principles
 
-These constraints must be baked into the backtesting framework from the start, not bolted on later.
+These constraints must be baked into the backtesting framework from the start, not bolted on later. Sections 1–3 are prerequisites; sections 4–7 are derived from running 163+ hypotheses through this system.
+
+**Related pages**: [Hypothesis Log](hypothesis-log.md) | [Event-Driven Strategies](../algorithms/event-driven.md) | [Momentum Strategies](../algorithms/momentum-strategies.md)
 
 ---
 
-## 1. Macroeconomic regime awareness
+## 1. Macroeconomic Regime Awareness
 
 Strategies that work in a bull market often fail in a bear market or stagflation. Backtests must be evaluated across regimes, not just in aggregate.
 
@@ -23,23 +25,24 @@ Strategies that work in a bull market often fail in a bear market or stagflation
 
 ### Data sources for macro context
 
-- **FRED (Federal Reserve)**: GDP, CPI, unemployment, Fed funds rate, yield curve — free via `fredapi` (`pip install fredapi`)
+- **FRED (Federal Reserve)**: GDP, CPI, unemployment, Fed funds rate, yield curve — free via `fredapi`
 - **EDGAR**: Earnings season context, sector financials
-- **VIX**: Market fear/volatility regime proxy (available free from CBOE/Alpaca/Polygon)
+- **VIX**: Market fear/volatility regime proxy
 - **Yield curve**: 2yr/10yr spread — key recession signal
 
-### Implementation approach
+### Implementation
 
 - Tag each backtest period with the prevailing regime
 - Report strategy performance broken out by regime (not just overall Sharpe)
 - Flag strategies that only work in one regime as fragile
-- Consider regime-conditional position sizing or strategy switching
+- Use a **dual OOS window**: primary OOS (most recent ~4 years) + alternative OOS (earlier period)
+  - Both windows must confirm independently — one lucky OOS period is insufficient
 
 ---
 
-## 2. Tax burden
+## 2. Tax Burden
 
-High gross returns can become mediocre after-tax returns, especially for high-turnover strategies. All performance metrics should be presented on an **after-tax basis**.
+High gross returns can become mediocre after-tax returns, especially for high-turnover strategies.
 
 ### Key rules (US, 2026)
 
@@ -50,48 +53,296 @@ High gross returns can become mediocre after-tax returns, especially for high-tu
 | Options (equity) | Short-term unless exercised into long-term position | Same as STCG |
 | Index options (1256 contracts) | 60% long-term / 40% short-term (60/40 rule) | Blended ~26.8% max |
 
-### Wash sale rule
-
-Selling a security at a loss and buying it back within 30 days (before or after) disallows the loss for tax purposes. High-frequency tax-loss harvesting strategies must track this.
-
 ### Practical impact
 
-- A momentum strategy with weekly rebalancing: all gains are STCG — subtract ~37% from gross returns
-- A buy-and-hold strategy: LTCG rates apply — 15-20% for most investors
-- **Rule of thumb**: high-turnover strategies need ~1.5–2x the gross return of low-turnover strategies to net the same after-tax income
+- A momentum strategy with monthly rebalancing: all gains are STCG — subtract ~37% from gross returns
+- **Rule of thumb**: high-turnover strategies need ~1.5–2× the gross return of low-turnover strategies to net the same after-tax income
 
-### Implementation approach
+### Wash sale rule
 
-- Track holding period for every position in the backtester
-- Apply appropriate tax rates to realized gains/losses
-- Model wash sale disallowance for loss-harvesting positions
-- Report: gross return, estimated tax drag, net after-tax return
-- When comparing strategies, rank by **after-tax Sharpe ratio**, not gross Sharpe
-
-### Kevin's tax situation
-
-- Need to understand marginal rate to apply correct STCG rate
-- Options strategy tax treatment depends on contract type (equity vs index)
-- TODO: confirm Kevin's approximate tax bracket so we apply the right rates
+Selling at a loss and buying back within 30 days disallows the loss. High-frequency tax-loss harvesting strategies must track this carefully.
 
 ---
 
-## 3. Other real-world costs to model
+## 3. Real-World Costs to Model
 
-- **Slippage**: assume 0.05–0.1% per trade for liquid large-caps; more for small-caps
-- **Commission**: Alpaca is commission-free, but note payment for order flow (PFOF) means fills may not be at best price
-- **Bid-ask spread**: especially important for options, where spreads can be 1–5% of premium
-- **Margin costs**: if using leverage, apply current margin interest (~5–8% annually)
+- **Slippage**: 0.05–0.1% per trade for liquid large-caps; more for small-caps
+- **Commission**: Alpaca is commission-free, but PFOF means fills may not be at best price
+- **Bid-ask spread**: 1–5% of premium for short-dated options
+- **Margin costs**: ~5–8% annually if using leverage
 - **Dividends**: include in total return calculations
 
 ---
 
-## 4. Performance metrics to report (after-tax)
+## 4. IS/OOS Validation Framework
 
-- After-tax net return (annualized)
-- After-tax Sharpe ratio
-- Max drawdown
-- Win rate and avg win/loss ratio
-- Performance by macro regime
-- Tax drag (gross minus net return)
-- Calmar ratio (return / max drawdown)
+The most important discipline in our backtesting system. A strategy that looks great in-sample but fails OOS is worthless.
+
+### Split methodology
+
+```
+|─── In-Sample (IS) ────────────────────|── OOS ──────|── AltOOS ──|
+   ~10 years for parameter estimation      ~4 years       ~4 years
+   DO NOT touch after parameter lock       Primary test   Secondary test
+```
+
+- **IS**: Parameter selection, model training, threshold calibration. Touch freely.
+- **OOS**: First out-of-sample test. Never adjust parameters after seeing OOS results.
+- **AltOOS**: Independent second period (often earlier data). Guards against lucky OOS.
+- Confirm criteria require BOTH OOS windows to pass independently.
+
+### IS/OOS Sharpe gap as overfitting signal
+
+From 163+ hypothesis tests, these thresholds identify overfitting:
+
+| IS/OOS gap | Interpretation |
+|-----------|----------------|
+| IS Sharpe ≈ OOS Sharpe | Clean generalisation |
+| IS Sharpe 2× OOS | Moderate overfitting — worth investigating |
+| IS Sharpe 4× OOS | Severe overfitting — reject or redesign |
+| IS Sharpe > 1.5 but OOS < 0.3 | Structural decay / regime change |
+
+**Real example from H159b (beta-neutral PEAD)**:
+IS Sharpe = 1.6, OOS Sharpe = 0.38 → ratio 4.2× → confirmed structural decay of PEAD post-2018 (HFT arbitrage eroded the drift).
+
+### T-statistic threshold for event studies
+
+For event-based strategies (PEAD, dividend raises, etc.), require:
+
+```
+t-stat = mean_return / (std_return / sqrt(n))  ≥  2.0  (p < 0.05)
+```
+
+- Our minimum: **t-stat ≥ 2.0** in OOS to consider the raw event effect real
+- H159 gap-up drift: OOS t-stat = 5.64 → effect confirmed even with poor portfolio metrics
+- H161 dividend raise: OOS t-stat = 4.10 → effect confirmed
+
+A strategy with a real event effect but poor portfolio Sharpe is still valuable — it tells you the signal is real and the problem is execution/portfolio construction, not signal quality.
+
+### Walk-forward validation
+
+For strategies with rolling parameter updates (adaptive strategies), use walk-forward analysis:
+
+```
+|─ IS ─|─ WF1 ─|─ WF2 ─|─ WF3 ─| ... |─ OOS ─|
+  Train   Test    Re-train  Test           Test
+          ↓ roll window
+```
+
+1. Train on window [t₀, t₀ + IS_length]
+2. Test on next [t₀ + IS_length, t₀ + IS_length + WF_step]
+3. Roll forward: new IS = [t₀ + WF_step, t₀ + IS_length + WF_step], repeat
+4. Concatenate all WF test periods into an out-of-sample equity curve
+
+This is the industry standard for momentum strategies because parameters (lookback windows, thresholds) can drift over time. Our static H026 ETF rotation uses simple IS/OOS split instead because the signal is highly robust and low-parameter.
+
+---
+
+## 5. Bias Detection and Prevention
+
+### Five bias types ranked by impact
+
+**1. Survivorship bias** (most dangerous)
+- Definition: using today's index members to represent the past
+- Impact: eliminates all stocks that went bankrupt, merged, or were delisted
+- Example: 5-stock momentum strategy Sharpe 0.09 → 0.66 when including delistings
+- **Prevention**: use point-in-time constituent lists (CRSP, Compustat) or explicitly note the bias in results
+- Our system: CONFIRMED caveats always note survivorship bias where applicable
+
+**2. Look-ahead bias**
+- Definition: using information that wasn't available at the trade entry time
+- Examples:
+  - Using earnings announced after close as "same-day" signal
+  - Using revised GDP figures (FRED data is revised retroactively)
+  - Forward-split-adjusted prices for older data without checking split dates
+- **Prevention**: always use `earnings_dates` with time-of-day; check FRED for real-time vs revised data; use `auto_adjust=True` only after validating corporate action dates
+
+**3. Data snooping / multiple testing bias**
+- Definition: running 100 parameter combinations and reporting the best
+- The López de Prado / Bailey **Deflated Sharpe Ratio (DSR)** corrects for this:
+
+```python
+import numpy as np
+from scipy.stats import norm
+
+def deflated_sharpe_ratio(sr_hat, n_trials, sr_std, obs_length, skew=0, kurt=3):
+    """
+    Corrects SR for multiple testing and non-normality.
+    sr_hat: observed Sharpe (annualized)
+    n_trials: number of parameter combinations tested
+    sr_std: expected std of SR across trials
+    obs_length: number of monthly observations
+    """
+    # Expected maximum SR from n_trials draws of N(0, sr_std)
+    e_max = sr_std * ((1 - np.euler_gamma) * norm.ppf(1 - 1/n_trials)
+                      + np.euler_gamma * norm.ppf(1 - 1/(n_trials * np.e)))
+    
+    # Adjusted SR accounting for non-normality
+    sr_adj = sr_hat * np.sqrt(obs_length) / np.sqrt(
+        1 - skew * sr_hat + (kurt - 1)/4 * sr_hat**2
+    )
+    dsr = norm.cdf((sr_adj - e_max) / np.sqrt(1 / obs_length))
+    return dsr  # probability SR is genuine (not from chance)
+```
+
+- Practical rule: if you tested more than 10 parameter combinations, divide your OOS Sharpe by ~1.3 as a rough deflator
+- Our H026 rotation: ~5 parameters tested → modest multiple-testing concern; OOS Sharpe 3.0 → deflated ~2.3 (still excellent)
+
+**4. Overfitting via parameter mining**
+- Danger signal: IS/OOS gap > 4×, or OOS Sharpe > 3.0 on first attempt (too good)
+- Red flags from AQR: moving average strategy dropped from Sharpe 1.2 (IS) to −0.2 (OOS)
+- **Prevention**: freeze parameters at IS-end; use fewer free parameters; require monotonic sensitivity (if strategy only works at one specific threshold, it's overfit)
+
+**5. Reporting bias**
+- Definition: only publishing winners; hiding failed hypotheses
+- **Prevention**: maintain a complete hypothesis log with ALL results, including NOT CONFIRMED — this is mandatory in our system
+- Hypothesis log at `backtesting/hypothesis-log.md` contains all 163+ results including failures
+
+---
+
+## 6. Confirmation Criteria System
+
+We use a tiered confirmation system based on lessons from H001–H163:
+
+### Tier 1: Raw event effect (event studies)
+Minimum to proceed — the underlying effect must be real:
+```
+OOS t-stat ≥ 2.0 (p < 0.05)
+OOS n ≥ 30 events
+```
+
+### Tier 2: Portfolio-level confirmation (full CONFIRMED)
+```
+OOS Sharpe ≥ 1.0
+OOS MaxDD ≥ −20%  (less severe than −20%)
+OOS WinRate ≥ 55%  (or positive mean return with high t-stat)
+Both OOS + AltOOS pass
+```
+
+### Tier 3: PARTIAL CONFIRMED
+```
+Genuine event effect confirmed (t-stat ≥ 2.0)
+Portfolio metrics don't meet all 3 criteria above
+Known root cause for the gap (beta, idiosyncratic risk, data limitations)
+Improvement path exists
+```
+
+### Historical outcomes from 163+ tests
+
+| Verdict | Count | Typical root cause |
+|---------|-------|-------------------|
+| CONFIRMED | ~30 | Robust signal, proper construction |
+| PARTIAL CONFIRMED | ~15 | Real signal, portfolio problem (beta, regime) |
+| NOT CONFIRMED | ~80 | Signal weak OOS or structural decay |
+| BLOCKED | ~10 | Data unavailable or methodology flaw |
+| IN-PROGRESS | ~5 | Currently running |
+
+**Key insight**: NOT CONFIRMED is valuable data — it tells you what *doesn't* work and why. The hypothesis log preserves all failure modes.
+
+---
+
+## 7. Performance Metrics (after-tax)
+
+Report in this order for every hypothesis:
+
+```
+Primary:
+  OOS Sharpe ratio
+  OOS MaxDrawdown
+  OOS Cumulative return (×)
+  OOS Win rate (event studies)
+  OOS Mean return per event
+
+Secondary:
+  AltOOS Sharpe (independent confirmation)
+  IS/OOS ratio (overfitting flag)
+  Corr(SPY) — market beta exposure
+  t-statistic on mean return
+  Number of events / observations
+
+Context:
+  IS Sharpe (for gap check)
+  Negative years count
+  CAGR
+```
+
+### Sharpe calibration reference
+
+| Sharpe | Quality |
+|--------|---------|
+| < 0.5 | Poor — don't deploy |
+| 0.5–1.0 | Marginal — track only |
+| 1.0–2.0 | Good — paper trade |
+| 2.0–4.0 | Excellent — move to live |
+| > 4.0 | Suspicious — check for bias; if clean, deploy at lower leverage |
+
+Our production portfolio (H026 sector rotation): OOS Sharpe 3.007 — verified across multiple OOS windows and 20+ years of data.
+
+### After-tax Calmar ratio
+
+```python
+def after_tax_calmar(gross_cagr, max_dd, tax_rate=0.37, turnover=1.0):
+    """
+    turnover: annual portfolio turnover (1.0 = 100%)
+    Returns after-tax Calmar (CAGR/MaxDD).
+    """
+    tax_drag = gross_cagr * turnover * tax_rate
+    after_tax_cagr = gross_cagr - tax_drag
+    return after_tax_cagr / abs(max_dd)
+```
+
+---
+
+## 8. NLP / ML Strategy Additional Checks
+
+For FinBERT, GPT-4o-mini, ElasticNet, and similar ML-based strategies:
+
+### IS sample size requirements
+
+| Model type | Minimum IS events |
+|-----------|------------------|
+| Simple threshold (SUE > X) | 50 |
+| Logistic regression | 200 |
+| ElasticNet multi-factor | 500 |
+| Fine-tuned transformer | 5,000+ |
+| Zero-shot FinBERT | 30 (model pre-trained) |
+
+FinBERT is zero-shot (no fine-tuning) — lower IS requirement. H163 had IS=112 events, sufficient.
+
+### Data snooping in NLP threshold selection
+
+After running a threshold sweep (e.g., finbert_score > 0.10, 0.15, 0.20…), the chosen threshold has been selected from multiple trials. Apply a ~1.3× Sharpe deflation or require the threshold effect to be monotonic (higher threshold → higher win rate, not just one lucky threshold level).
+
+### Model staleness risk
+
+Pre-trained models like FinBERT were trained on financial text from specific eras. Check:
+- Is the training corpus era-appropriate? (FinBERT: Reuters/Bloomberg 2007-2018)
+- Does OOS performance degrade monotonically over time (model aging)?
+- Is the signal still present in the most recent 12 months?
+
+---
+
+## 9. Practical Pipeline
+
+```
+1. Literature search: find academic anchor with replication code or clear method
+2. IS design: define signal, entry/exit rules, hold period
+3. IS calibration: test 3–5 parameter variants on IS only
+4. Lock parameters: freeze all choices; never look at OOS until this step
+5. OOS run: single pass; record all metrics
+6. Verdict: apply confirmation criteria
+7. AltOOS confirmation: independent second window
+8. Log: add full result to hypothesis-log.md (pass or fail)
+9. If CONFIRMED: paper trade → live
+10. If NOT CONFIRMED: document root cause; flag improvement paths
+```
+
+---
+
+## Further Reading
+
+- Bailey & López de Prado (2014) — "The Deflated Sharpe Ratio" — SSRN 2460551
+- Bailey et al. (2016) — "The Probability of Backtest Overfitting" — SSRN 2326253
+- López de Prado (2018) — *Advances in Financial Machine Learning* (AFML)
+- Combinatorial Purged Cross-Validation (CPCV): López de Prado 2020, for ML strategies with time-series data
+- QuantStart: [Successful Backtesting Part I](https://www.quantstart.com/articles/Successful-Backtesting-of-Algorithmic-Trading-Strategies-Part-I/)

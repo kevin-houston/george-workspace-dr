@@ -171,5 +171,41 @@
   "total_papers": 12,
   "high_relevance": ["arxiv:2511.15214", "arxiv:2505.07871", "arxiv:2503.01886", "arxiv:2510.14986"],
   "medium_relevance": ["arxiv:2602.19919", "arxiv:2601.19504", "arxiv:2506.04574", "arxiv:2504.18958", "github:rj694/earnings-sentiment", "github:QuantConnect/Lean.DataSource.ThetaData"],
-  "low_relevance": ["arxiv:2510.03236", "arxiv:2510.18159"]
+  "low_relevance": ["arxiv:2510.03236", "arxiv:2510.18159"],
+  "nightly_session_additions": {
+    "session": "nightly 2026-05-05 (2am task)",
+    "papers_added": [
+      {
+        "id": "JFQA-2022-PEAD.txt",
+        "title": "PEAD.txt: Post-Earnings-Announcement Drift Using Text",
+        "authors": "Meursault, Liang, Routledge, Scanlon",
+        "relevance": "HIGH",
+        "finding": "SUE.txt from transcripts earns 3.9bp daily alpha vs 2.6bp for price-based SUE (+50%). Academic anchor for H168.",
+        "staged_as": "3_h168_sentiment_surprise.json"
+      },
+      {
+        "id": "QuantPedia-BLMECT",
+        "title": "How to Improve PEAD with NLP Analysis",
+        "relevance": "HIGH",
+        "finding": "Sentiment surprise (vs 8-quarter baseline) Sharpe 0.76. Tercile sorting > quintiles. 4q lookback, 4w hold optimal.",
+        "staged_as": "3_h168_sentiment_surprise.json"
+      },
+      {
+        "id": "arXiv:2602.23330",
+        "title": "Toward Expert Investment Teams: Multi-Agent LLM Fine-Grained Tasks",
+        "relevance": "MEDIUM",
+        "finding": "Fine-grained task decomposition > coarse agent roles for LLM trading systems. H165 design implication.",
+        "staged_as": "4_llm_agent_finegrained.json"
+      },
+      {
+        "id": "arXiv:2511.18578",
+        "title": "Re(Visiting) TSFMs in Finance",
+        "relevance": "MEDIUM",
+        "finding": "Zero-shot TSFMs fail; in-domain training achieves substantial gains. H172 fine-tuned FinBERT opportunity.",
+        "staged_as": "4_llm_agent_finegrained.json"
+      }
+    ],
+    "new_staged_count": 2,
+    "cumulative_staged_today": 4
+  }
 }
