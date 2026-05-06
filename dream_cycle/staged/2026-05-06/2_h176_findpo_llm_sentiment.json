@@ -10,5 +10,8 @@
   "target_file": "/workspace/agent/backtesting/daily/run_h176.py",
   "content": "New hypothesis:\n\nH176 — PEAD-NLP: GPT-4o-mini relative sentiment (vs prior quarters)\n\nDesign:\n  PREREQUISITE: H168 must be >= 50% cached first\n\n  Instead of computing surprise = score_t - mean(prior_4q) using FinBERT scalars,\n  directly ask GPT-4o-mini to compare current quarter tone vs prior quarter:\n\n  Prompt:\n    'You are analyzing earnings call transcripts. Compare the sentiment of the\n    CURRENT QUARTER transcript vs the PRIOR QUARTER transcript for the same company.\n    Is the current quarter transcript MORE POSITIVE, SIMILAR, or MORE NEGATIVE\n    than prior quarter? Answer: MORE_POSITIVE / SIMILAR / MORE_NEGATIVE'\n\n  This leverages LLM's ability to understand relative context — the 'surprise'\n  signal as understood by an analyst reading both transcripts, not just scalar subtraction.\n\n  Filter: GPT predicts MORE_POSITIVE AND H163 finbert_score >= 0.10\n  Compare vs H173 (FinBERT surprise, NOT CONFIRMED) and H174 (dual filter, CONFIRMED)\n\n  Cost: 203 events x 2 transcripts x ~8k tokens/transcript ≈ 3.2M tokens ≈ $0.48\n  Estimated effort: 3h (shares transcript cache with H168)\n\nConfirm criteria: OOS WR >= 68%, MeanRet >= 5.5%, n >= 15",
   "action": "write",
-  "apply_status": "pending"
+  "apply_status": "applied",
+  "applied_at": "2026-05-06",
+  "applied_file": "/workspace/agent/backtesting/daily/run_h176.py",
+  "note": "Prerequisite check in script: exits early if H168 coverage <50%"
 }

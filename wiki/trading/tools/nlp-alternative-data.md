@@ -404,6 +404,40 @@ For H165 TradingAgents step 2: use **fine-grained task decomposition** instead o
 
 Finding: alignment between intermediate agent outputs and final investment decisions is the primary performance driver — more than number of agents or model size.
 
+## sec-parser (alphanome-ai)
+
+**GitHub:** https://github.com/alphanome-ai/sec-parser  
+**License:** MIT | **Stars:** ~800 | **Maintained:** active 2025–2026
+
+Parse SEC EDGAR filings (10-K, 10-Q, 8-K) into semantic tree structures. Enables section-level extraction without regex heuristics.
+
+```bash
+pip install sec-parser
+```
+
+```python
+from sec_parser import SemanticTree, TreeBuilder
+from edgar import Company  # edgartools to get raw HTML
+
+# Get 8-K HTML from edgartools
+filing = Company("AAPL").get_filings(form="8-K").latest()
+html = filing.html()
+
+# Parse into semantic tree
+builder = TreeBuilder()
+tree = builder.build(html)
+
+# Extract Item 2.02 (Results of Operations)
+item_202_nodes = [n for n in tree.nodes if '2.02' in str(getattr(n, 'title', ''))]
+item_202_text = ' '.join(n.text for n in item_202_nodes if hasattr(n, 'text'))
+```
+
+**Use case for H163/H175:** Score only Item 2.02 text rather than full 8-K. arXiv 2509.24254 shows press release *structure* matters — specific sections are more predictive than full text noise.
+
+**vs edgartools:** edgartools provides filing access and `.obj()` for structured 8-K; sec-parser provides section-level HTML parsing. Use both: edgartools to fetch, sec-parser to extract specific items.
+
+---
+
 ## Time Series Foundation Models Need In-Domain Pre-Training (arXiv:2511.18578, Nov 2025)
 
 Off-the-shelf pre-trained TSFMs (time series foundation models like TimesFM, Chronos) **fail in zero-shot and fine-tuning settings for financial data**. Models trained from scratch on financial data achieve substantial improvements.
