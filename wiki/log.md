@@ -117,6 +117,10 @@ Phase 1: Created tools/nlp-alternative-data.md (~230 lines). Key finding: speake
 
 Phase 2: 5 papers/repos catalogued. 3 proposals staged: H168 (speaker-weighted FinBERT PEAD, arXiv:2604.13260), H169 (LLM 10-K embedding pair selection for H160+, arXiv:2604.19476), H165 design note (LLM timing caution, KDD 2026). Scan saved to dream_cycle/research/2026-05-04_scan.json.
 
+## [2026-05-05] ingest | A Portfolio Approach to Impact Investment (J.P. Morgan, 2012)
+
+Pages created: 5. Pages updated: 2 (index, log). Key entities: Yasemin Saltuk, J.P. Morgan Social Finance, PGGM, F.B. Heron Foundation, GIIN, Rockefeller Foundation. Core concept: Three-Dimensional Portfolio Framework (Impact/Return/Risk triangle extending MPT). Saved PDF to sources/jpmorgan-portfolio-approach-impact-investment-2012.pdf.
+
 ## [2026-05-03] backtest | H159b — Beta-Neutral PEAD NOT CONFIRMED
 
 H159b (Beta-Neutral PEAD): NOT CONFIRMED. Rolling 60-day OLS beta hedge successfully achieves market neutrality (Corr(SPY) = −0.05 to −0.11 vs H159's 0.59–0.67), but MaxDD remains −48–54% — far above the −20% target. Best variant D (n=15, hold=20d): OOS Sharpe=0.382, CAGR=11.51%, MaxDD=−48.68%, NegYrs=3. Root cause: drawdowns are idiosyncratic (individual stock collapses unrelated to SPY), not market-correlated. Beta hedging removes market risk but not name risk. Large IS/OOS gap (IS Sharpe 1.6–2.0 → OOS 0.38) confirms structural PEAD decay in 2018+ — HFT has partially arbitraged gap-up drift. Path forward: H163 (FinBERT NLP filter), H164 (elastic-net 8-quarter SUE history) to improve signal quality before revisiting beta-neutral construction.
