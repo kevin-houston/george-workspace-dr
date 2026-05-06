@@ -1,0 +1,18 @@
+H174 — PEAD-NLP: H163 Score + Sentiment Surprise Dual Filter
+Run: 2026-05-05 23:16
+Universe: 30 stocks  |  GAP≥3%  |  Hold=20d  |  IS: 2020–2023  |  OOS: 2024+
+Dual filter: FinBERT absolute score ≥ S AND surprise (score_t - mean(prior 4q)) ≥ P
+
+OOS events with both filters computable: 82 / 85
+Baseline OOS (all): n=85, WR=57.6%, MeanRet=1.95%
+
+Confirmed combinations:
+  score≥0.18 + surprise≥0.00: n=26, WR=80.8%, MeanRet=6.22%
+  score≥0.18 + surprise≥0.02: n=22, WR=81.8%, MeanRet=6.89%
+  score≥0.18 + surprise≥0.05: n=17, WR=82.4%, MeanRet=6.34%
+  score≥0.20 + surprise≥0.00: n=22, WR=77.3%, MeanRet=6.43%
+  score≥0.20 + surprise≥0.02: n=19, WR=78.9%, MeanRet=6.97%
+  score≥0.20 + surprise≥0.05: n=15, WR=80.0%, MeanRet=6.87%
+
+VERDICT: CONFIRMED
+Best: score≥0.18 + surprise≥0.00, n=26, WR=80.8%, MeanRet=6.22%

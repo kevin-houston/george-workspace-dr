@@ -1,0 +1,20 @@
+H172 — PEAD-NLP: FinBERT Embedding Classifier
+Run: 2026-05-05 23:11
+Universe: 30 stocks  |  GAP≥3%  |  Hold=20d
+IS: 2020–2023  |  OOS: 2024+
+Method: Logistic regression on FinBERT CLS embeddings (768-dim, C=0.01)
+
+Training set: IS n=104, WR=57.7%
+IS accuracy: 84.6%  |  OOS accuracy: 57.6%
+
+Baseline OOS:  n=85  WR=57.6%  MeanRet=1.95%
+
+Threshold sweep:
+  thresh=0.50: n=51, WR=62.7%, MeanRet=2.14%
+  thresh=0.55: n=35, WR=77.1%, MeanRet=3.37%
+  thresh=0.60: n=31, WR=74.2%, MeanRet=2.78%
+  thresh=0.65: n=21, WR=76.2%, MeanRet=1.77%
+  thresh=0.70: n=18, WR=77.8%, MeanRet=2.03%
+  thresh=0.75: n=9, WR=77.8%, MeanRet=-0.87%
+
+VERDICT: NOT CONFIRMED

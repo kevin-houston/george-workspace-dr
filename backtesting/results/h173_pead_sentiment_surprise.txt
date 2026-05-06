@@ -1,0 +1,25 @@
+H173 — PEAD-NLP: FinBERT Sentiment Surprise
+Run: 2026-05-05 23:12
+Universe: 30 stocks  |  GAP≥3%  |  Hold=20d
+IS: 2020–2023  |  OOS: 2024+
+Surprise = finbert_score_t - mean(prior 4q scores), min_prior=2
+
+IS events with surprise: 56 / 112
+OOS events with surprise: 82 / 85
+
+Baseline OOS (all): n=85, WR=57.6%, MeanRet=1.95%
+Baseline OOS (scored subset): n=82, WR=57.3%, MeanRet=1.82%
+
+Threshold sweep:
+  thresh=-0.05: n=64, WR=59.4%, MeanRet=2.63%
+  thresh=0.00: n=47, WR=59.6%, MeanRet=2.77%
+  thresh=0.02: n=39, WR=59.0%, MeanRet=3.37%
+  thresh=0.05: n=24, WR=66.7%, MeanRet=4.08%
+  thresh=0.08: n=12, WR=58.3%, MeanRet=3.16%
+  thresh=0.10: n=7, WR=42.9%, MeanRet=3.20%
+  thresh=0.15: n=4, WR=75.0%, MeanRet=8.44%
+  thresh=0.20: n=1, WR=100.0%, MeanRet=39.79%
+
+Tercile top-33%: n=27, WR=63.0%, MeanRet=3.46%
+
+VERDICT: NOT CONFIRMED
