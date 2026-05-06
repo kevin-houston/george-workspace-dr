@@ -1,0 +1,14 @@
+{
+  "id": "h177-janus-event-rl",
+  "date": "2026-05-06",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.19919",
+  "title": "H177 — PEAD-RL: Hierarchical reward model for post-earnings CAR prediction",
+  "rationale": "arXiv 2602.19919 (Janus-Q, Feb 2026) reports 102% Sharpe improvement and +17.5% direction accuracy using hierarchical gated reward modeling on 62,400 annotated financial news articles (10 event types, including earnings). The key idea: instead of a binary WIN/LOSE label like H172's classifier, train a hierarchical model that predicts both direction AND magnitude of post-announcement return, using RL-style reward shaping. This could fix H172's core problem (binary classifier doesn't capture return distribution shape). Dataset: their annotated 62,400 articles are available. Implementation: use their CAR-labeled training set as fine-tuning data for our FinBERT model on our 30-stock universe's IS events (n=112). Risk: HIGH effort (~20h) and requires a larger training set than our 112 IS events. Flagged for Kevin review before scheduling.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h177.py",
+  "content": "New hypothesis (HIGH EFFORT — flag for Kevin review):\n\nH177 — PEAD-RL: Hierarchical reward model for post-earnings CAR prediction\n\nDesign:\n  Based on Janus-Q (arXiv:2602.19919). Instead of binary WIN/LOSE label,\n  use hierarchical reward model:\n  - Level 1: direction (UP/DOWN)\n  - Level 2: magnitude (quintile of 20d return)\n  - Reward: +1 for correct direction × magnitude weight\n\n  Training data: Our IS 112 events + Janus-Q's public 62,400 article dataset\n  (cross-domain transfer — news articles, but earn-specific subset)\n\n  Architecture:\n  FinBERT CLS embedding (768-dim)\n  → Hierarchical MLP: direction head (2-class) + magnitude head (5-class)\n  → Combined loss: BCE(direction) + CE(magnitude) + RL reward term\n\n  Compare vs H172 (binary classifier, NOT CONFIRMED: WR 77.1% but MeanRet 3.37%)\n  Goal: improve MeanRet from 3.37% to >= 5.5% by optimizing for return magnitude\n\nEstimated effort: 20h\nPrerequisite: Download Janus-Q dataset first\nFlagged for Kevin review before starting",
+  "action": "write",
+  "apply_status": "flagged"
+}

@@ -117,6 +117,12 @@ Phase 1: Created tools/nlp-alternative-data.md (~230 lines). Key finding: speake
 
 Phase 2: 5 papers/repos catalogued. 3 proposals staged: H168 (speaker-weighted FinBERT PEAD, arXiv:2604.13260), H169 (LLM 10-K embedding pair selection for H160+, arXiv:2604.19476), H165 design note (LLM timing caution, KDD 2026). Scan saved to dream_cycle/research/2026-05-04_scan.json.
 
+## [2026-05-06] research | PEAD live deployment guide + dream cycle arXiv scan
+
+Phase 1: Created paper-trading/pead-nlp-alpaca.md (~250 lines) — full Alpaca deployment architecture for H163/H174 confirmed PEAD-NLP strategy. Covers Alpaca WebSocket streaming (gap detection), EDGAR overnight polling (edgartools + EFTS), FinBERT scoring pipeline, OPG order submission, fractional stop-loss pattern, and 20-day MOC exit. Key finding: Alpaca fractional shares cannot use bracket orders — stop-loss must be submitted as separate GTC order. Index and log updated.
+
+Phase 2: 12 papers/repos scanned. 4 staged proposals: H175 (sec-parser Item 2.02 extraction + EPS surprise gate, arXiv:2509.24254), H176 (GPT-4o-mini relative sentiment, FinDPO revival of H173, arXiv:2507.18417), H177 FLAGGED (Janus-Q hierarchical reward model, ~20h, arXiv:2602.19919), wiki update for sec-parser tool. Consistent finding: 2025-2026 literature validates H163/H168 direction — structured earnings NLP outperforms flat sentiment; Sharpe 2.0 achievable with preference-optimized LLM sentiment.
+
 ## [2026-05-05] ingest | A Portfolio Approach to Impact Investment (J.P. Morgan, 2012)
 
 Pages created: 5. Pages updated: 2 (index, log). Key entities: Yasemin Saltuk, J.P. Morgan Social Finance, PGGM, F.B. Heron Foundation, GIIN, Rockefeller Foundation. Core concept: Three-Dimensional Portfolio Framework (Impact/Return/Risk triangle extending MPT). Saved PDF to sources/jpmorgan-portfolio-approach-impact-investment-2012.pdf.

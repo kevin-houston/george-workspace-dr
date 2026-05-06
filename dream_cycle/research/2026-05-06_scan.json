@@ -1,0 +1,169 @@
+{
+  "scan_date": "2026-05-06",
+  "session": "nightly dream cycle",
+  "papers_found": 12,
+  "staged": 4,
+  "findings": [
+    {
+      "title": "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns",
+      "arxiv_id": "2604.13260",
+      "url": "https://arxiv.org/abs/2604.13260",
+      "key_result": "Speaker-weighted FinBERT on 6.5M sentences from 16,428 earnings calls. Monthly long-short alpha 2.03% unexplained by FF5, Spearman IC=0.142 OOS. 2015-2025 S&P 500.",
+      "relevance": "HIGH",
+      "relevance_score": 0.95,
+      "hypothesis_connection": "H168 — directly validates speaker-weighted FinBERT approach",
+      "staged": false,
+      "staged_reason": "Already staged as H168 in prior sessions; confirms design is correct"
+    },
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "arxiv_id": "2509.24254",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "key_result": "138,000 press releases (2005-2023). FinBERT on 8-K press release structure equally informative as EPS surprise for announcement-day returns. Section extraction improves signal purity.",
+      "relevance": "HIGH",
+      "relevance_score": 0.90,
+      "hypothesis_connection": "H163/H174 — direct validation; suggests H175 combining section extraction + EPS surprise",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-05-06/1_h175_press_release_section_extraction.json"
+    },
+    {
+      "title": "SAE-FiRE: Enhancing Earnings Surprise Predictions Through Sparse Autoencoder Feature Selection",
+      "arxiv_id": "2505.14420",
+      "url": "https://arxiv.org/abs/2505.14420",
+      "key_result": "Sparse autoencoders for interpretable feature extraction from financial documents. Outperforms dense feature extraction for earnings surprise prediction.",
+      "relevance": "MEDIUM",
+      "relevance_score": 0.65,
+      "hypothesis_connection": "H172 — could improve CLS embedding classifier that failed due to high dimensionality/limited data",
+      "staged": false,
+      "staged_reason": "H172 failed primarily due to limited OOS n=35, not feature quality; SAE fix is premature until 8-K cache is larger"
+    },
+    {
+      "title": "Janus-Q: End-to-End Event-Driven Trading via Hierarchical-Gated Reward Modeling",
+      "arxiv_id": "2602.19919",
+      "url": "https://arxiv.org/abs/2602.19919",
+      "key_result": "62,400 annotated articles (10 event types). Hierarchical Gated Reward Model. Sharpe +102%, direction accuracy +17.5% vs baselines. CAR-labeled training data available.",
+      "relevance": "HIGH",
+      "relevance_score": 0.80,
+      "hypothesis_connection": "H177 (new) — hierarchical reward model could fix H172's return-distribution problem",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-05-06/3_h177_janus_event_rl.json",
+      "staged_as_flagged": true,
+      "flag_reason": "~20h effort; requires Janus-Q dataset download; flagged for Kevin review"
+    },
+    {
+      "title": "Generating Alpha: A Hybrid AI-Driven Trading System Integrating Technical Analysis, ML and Financial Sentiment",
+      "arxiv_id": "2601.19504",
+      "url": "https://arxiv.org/abs/2601.19504",
+      "key_result": "FinBERT + XGBoost + regime filter. 135.49% return over 24 months (Jan 2023 - Jan 2025).",
+      "relevance": "MEDIUM",
+      "relevance_score": 0.55,
+      "hypothesis_connection": "H165 — regime filtering on PEAD signals (VIX > threshold) may improve H163 beyond H174",
+      "staged": false,
+      "staged_reason": "H165 VIX benchmark (H165a) already partially confirmed; this paper doesn't add novel design insights"
+    },
+    {
+      "title": "Corporate Earnings Calls and Analyst Beliefs",
+      "arxiv_id": "2511.15214",
+      "url": "https://arxiv.org/abs/2511.15214",
+      "key_result": "LLM counterfactual transcripts varying topical emphasis. Narratives significantly improve prediction of realized earnings AND analyst expectations beyond quantitative content.",
+      "relevance": "HIGH",
+      "relevance_score": 0.85,
+      "hypothesis_connection": "H168 — supports topic distribution extraction from transcripts as additional signal layer",
+      "staged": false,
+      "staged_reason": "Already noted in NLP wiki; implementation complexity too high for H168 v1 scope"
+    },
+    {
+      "title": "Advanced Deep Learning Techniques for Analyzing Earnings Call Transcripts",
+      "arxiv_id": "2503.01886",
+      "url": "https://arxiv.org/abs/2503.01886",
+      "key_result": "Comparative benchmark: FinBERT > BERT > ULMFiT for financial sentiment extraction from earnings call transcripts. IC and direction accuracy metrics reported.",
+      "relevance": "MEDIUM",
+      "relevance_score": 0.55,
+      "hypothesis_connection": "H168 — confirms FinBERT as optimal model choice; no new alpha angle",
+      "staged": false,
+      "staged_reason": "Confirms existing design decision; no new hypothesis"
+    },
+    {
+      "title": "Sentiment-Aware Stock Price Prediction with Transformer and LLM-Generated Formulaic Alpha",
+      "arxiv_id": "2508.04975",
+      "url": "https://arxiv.org/abs/2508.04975",
+      "key_result": "LLM auto-generates formulaic alphas from sentiment + technical features. LLM-generated alphas significantly improve Transformer accuracy over sentiment-only baseline.",
+      "relevance": "MEDIUM",
+      "relevance_score": 0.60,
+      "hypothesis_connection": "H173 (NOT CONFIRMED) — LLM-generated adaptive alpha rules could revive sentiment surprise signal",
+      "staged": false,
+      "staged_reason": "Interesting approach but high implementation complexity; H176 (GPT-4o-mini relative sentiment) is simpler path to same goal"
+    },
+    {
+      "title": "FinDPO: Financial Sentiment Analysis for Algorithmic Trading through Preference Optimization of LLMs",
+      "arxiv_id": "2507.18417",
+      "url": "https://arxiv.org/abs/2507.18417",
+      "key_result": "DPO fine-tuning on LLMs for financial sentiment. 67% annual return, Sharpe 2.0, 5bps transaction costs. 11% accuracy improvement vs supervised FinBERT baselines.",
+      "relevance": "HIGH",
+      "relevance_score": 0.80,
+      "hypothesis_connection": "H176 (new) — proxy for DPO-style relative sentiment using GPT-4o-mini prompting; simpler implementation path",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-05-06/2_h176_findpo_llm_sentiment.json"
+    },
+    {
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "arxiv_id": "2412.20138",
+      "url": "https://arxiv.org/abs/2412.20138",
+      "github": "https://github.com/TauricResearch/TradingAgents",
+      "key_result": "Multi-agent framework with specialized roles (fundamental, sentiment, technical, risk manager). Improvements in cumulative returns, Sharpe, MaxDD vs baselines.",
+      "relevance": "MEDIUM",
+      "relevance_score": 0.55,
+      "hypothesis_connection": "H165 (TradingAgents macro-regime gate, PARTIAL CONFIRMED) — already in pipeline",
+      "staged": false,
+      "staged_reason": "Already staged as H165; this paper was already the source. H165 step 2 (full TradingAgents integration) already in QUEUED status."
+    },
+    {
+      "title": "sec-parser: Parse SEC EDGAR HTML documents",
+      "type": "github_repo",
+      "github": "https://github.com/alphanome-ai/sec-parser",
+      "key_result": "MIT license, actively maintained, ~800 stars. Extracts semantic tree from EDGAR HTML filings. Section-level access to 8-K items.",
+      "relevance": "HIGH",
+      "relevance_score": 0.85,
+      "hypothesis_connection": "H163/H175 — replaces regex-based 8-K parsing with structured section extraction",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-05-06/4_wiki_sec_parser_tool.json"
+    },
+    {
+      "title": "LLM-Enhanced-Trading (Ronitt272)",
+      "type": "github_repo",
+      "github": "https://github.com/Ronitt272/LLM-Enhanced-Trading",
+      "key_result": "Real-time FinGPT sentiment from news/Reddit. End-to-end pipeline for news monitoring + historical backtest.",
+      "relevance": "LOW",
+      "relevance_score": 0.35,
+      "hypothesis_connection": "Template for real-time 8-K monitoring; less relevant than sec-parser + edgartools",
+      "staged": false,
+      "staged_reason": "Low novelty; existing wiki already covers this pattern"
+    }
+  ],
+  "staged_summary": [
+    {
+      "id": "h175-press-release-section",
+      "file": "1_h175_press_release_section_extraction.json",
+      "risk": "medium",
+      "description": "New script: H175 PEAD-NLP with sec-parser Item 2.02 extraction + EPS surprise gate"
+    },
+    {
+      "id": "h176-findpo-llm-sentiment",
+      "file": "2_h176_findpo_llm_sentiment.json",
+      "risk": "medium",
+      "description": "New script: H176 GPT-4o-mini relative sentiment vs prior quarter (revival of H173)"
+    },
+    {
+      "id": "h177-janus-event-rl",
+      "file": "3_h177_janus_event_rl.json",
+      "risk": "medium",
+      "description": "New script: H177 hierarchical reward model for PEAD CAR prediction (FLAGGED for Kevin review — ~20h effort)"
+    },
+    {
+      "id": "wiki-sec-parser-tool",
+      "file": "4_wiki_sec_parser_tool.json",
+      "risk": "low",
+      "description": "Wiki update: add sec-parser to NLP & Alternative Data tools page"
+    }
+  ]
+}

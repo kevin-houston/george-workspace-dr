@@ -1,0 +1,14 @@
+{
+  "id": "h175-press-release-section",
+  "date": "2026-05-06",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.24254",
+  "title": "H175 — PEAD-NLP: 8-K Section Extraction via sec-parser + EPS Surprise Dual Gate",
+  "rationale": "arXiv 2509.24254 (Sep 2025, 138k press releases) shows FinBERT on earnings press release structure is 'equally informative as earnings surprise' for announcement-day returns. Our H163 uses full 8-K text; extracting only Item 2.02 (Results of Operations) with sec-parser may reduce noise and improve signal purity. Additionally, adding standardized EPS surprise (actual - consensus) / std as a second numeric gate (alongside FinBERT) could lift H174's 6.22% MeanRet. sec-parser (alphanome-ai/sec-parser, MIT) extracts 8-K sections into semantic tree — no API key required.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h175.py",
+  "content": "New hypothesis:\n\nH175 — PEAD-NLP: sec-parser Item 2.02 extraction + EPS surprise numeric gate\n\nDesign:\n  1. Use sec-parser to extract Item 2.02 text only from 8-K (vs full text in H163)\n  2. Score extracted section with FinBERT (same H163 model)\n  3. Also compute standardized EPS surprise: (actual_EPS - estimate_EPS) / std_EPS\n     via yfinance EPS data (earnings_history) or Polygon.io\n  4. Dual filter: finbert_score >= 0.18 AND eps_surprise_std >= 0.5\n  5. Compare OOS vs H163/H174 baselines\n\nInstall: pip install sec-parser\nCode pattern:\n  from sec_parser import SemanticTree, TreeBuilder\n  builder = TreeBuilder()\n  tree = builder.build(html_text)\n  item_202 = [n for n in tree.nodes if '2.02' in str(n.title)]\n\nConfirm criteria: OOS WR >= 68%, MeanRet >= 5.5%, n >= 15\nEstimated effort: 4h",
+  "action": "write",
+  "apply_status": "pending"
+}

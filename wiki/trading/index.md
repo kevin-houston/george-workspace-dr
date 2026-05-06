@@ -40,6 +40,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Backtesting](backtesting/) — setup, results, methodology
   - [Design Principles](backtesting/design-principles.md) ← expanded 2026-05-05 (IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado)
 - [Paper Trading](paper-trading/) — Alpaca results log
+  - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
+  - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
 - [Research Log](research-log/) — nightly research summaries
 
 ## Key decisions log

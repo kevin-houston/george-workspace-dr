@@ -1,0 +1,14 @@
+{
+  "id": "h176-findpo-llm-sentiment",
+  "date": "2026-05-06",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2507.18417",
+  "title": "H176 — PEAD-NLP: GPT-4o-mini DPO-style prompted sentiment (H173 revival attempt)",
+  "rationale": "H173 (sentiment surprise) NOT CONFIRMED — best OOS WR=66.7%, MeanRet=4.08% at thresh=0.05. arXiv 2507.18417 (FinDPO, Jul 2025) achieves Sharpe 2.0 with DPO-fine-tuned LLM sentiment at 67% annual return with 5bps transaction costs — significantly stronger than FinBERT zero-shot. However, full DPO fine-tuning requires a training dataset we don't have. Instead, test a simpler proxy: use GPT-4o-mini with a calibrated prompt that mimics DPO preference signals — asking the model to compare current earnings tone relative to prior quarters explicitly. This is the H171 GPT-4o-mini approach applied to the SURPRISE concept rather than absolute sentiment. Cost: $0.15/1M tokens × ~3.2M tokens for 203 events ≈ $0.48 total. Prerequisite: H168 transcripts must be >= 50% cached (currently blocked on AV quota).",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h176.py",
+  "content": "New hypothesis:\n\nH176 — PEAD-NLP: GPT-4o-mini relative sentiment (vs prior quarters)\n\nDesign:\n  PREREQUISITE: H168 must be >= 50% cached first\n\n  Instead of computing surprise = score_t - mean(prior_4q) using FinBERT scalars,\n  directly ask GPT-4o-mini to compare current quarter tone vs prior quarter:\n\n  Prompt:\n    'You are analyzing earnings call transcripts. Compare the sentiment of the\n    CURRENT QUARTER transcript vs the PRIOR QUARTER transcript for the same company.\n    Is the current quarter transcript MORE POSITIVE, SIMILAR, or MORE NEGATIVE\n    than prior quarter? Answer: MORE_POSITIVE / SIMILAR / MORE_NEGATIVE'\n\n  This leverages LLM's ability to understand relative context — the 'surprise'\n  signal as understood by an analyst reading both transcripts, not just scalar subtraction.\n\n  Filter: GPT predicts MORE_POSITIVE AND H163 finbert_score >= 0.10\n  Compare vs H173 (FinBERT surprise, NOT CONFIRMED) and H174 (dual filter, CONFIRMED)\n\n  Cost: 203 events x 2 transcripts x ~8k tokens/transcript ≈ 3.2M tokens ≈ $0.48\n  Estimated effort: 3h (shares transcript cache with H168)\n\nConfirm criteria: OOS WR >= 68%, MeanRet >= 5.5%, n >= 15",
+  "action": "write",
+  "apply_status": "pending"
+}
