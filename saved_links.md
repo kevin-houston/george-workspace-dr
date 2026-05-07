@@ -4,6 +4,20 @@ Kevin's saved articles, posts, and links for later reference.
 
 ---
 
+## 2026-05-07
+
+### SSRN 6630998 — "Short-Term Reversal Persists Globally—If Properly Measured"
+- **URL:** https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6630998
+- **Authors:** Jan Stosik, Adam Zaremba
+- **Date:** April 22, 2026
+- **Core finding:** Standard reversal = 0.05%/month globally (insignificant). Industry-adjusted reversal (`REV^IN = R_i − R̄_industry`) = 0.53%/month, Sharpe 0.74, six-factor alpha 0.60% (t=4.14). Significant in 22/64 countries. Regret signal (0.40%/month) subsumed by industry-adjusted.
+- **Data:** 64 countries, Jan 1990–Dec 2023, 5.79M monthly observations
+- **Wiki:** [algorithms/short-term-reversal.md](wiki/trading/algorithms/short-term-reversal.md)
+- **Hypothesis:** H181 (queued — industry-adjusted reversal, US stocks)
+- **Saved by Kevin:** 2026-05-07
+
+---
+
 ## 2026-05-06
 
 ### Anatoli Kopadze — X Article (paywalled)

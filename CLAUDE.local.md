@@ -62,6 +62,8 @@ Latest hypotheses completed: **H179 NOT CONFIRMED** (global equity rotation — 
 
 Kraken CLI v0.3.2 installed at `/home/node/.cargo/bin/kraken`. Paper account initialized ($10k USD). MCP server (`kraken mcp -s all`) submitted for admin approval — once live, I'll have 151 native trading tools. Complements Alpaca: Kraken for crypto/forex/derivatives, Alpaca for equities/options.
 
+Vibe-Trading MCP server now LIVE (approved 2026-05-07). 22 tools available via `mcp__vibe-trading__*`: backtest, analyze_options, factor_analysis, pattern_recognition, run_swarm, scan_shadow_signals, run_shadow_backtest, get_market_data, analyze_trade_journal, extract_shadow_strategy, render_shadow_report, list_skills, load_skill, list_swarm_presets, get_swarm_status, list_runs, get_run_result, read_document, read_file, read_url, web_search, write_file.
+
 API keys available as env vars: `$POLYGON_API_KEY`, `$FRED_API_KEY`, `$ALPHA_VANTAGE_API_KEY`, `$FMP_API_KEY`, `$NEWSAPI_KEY`, `$EDGAR_KEY`, `$OPENAI_API_KEY`, `$ALPACA_API_KEY`, `$ALPACA_SECRET` (note: secret is ALPACA_SECRET not ALPACA_SECRET_KEY). Python 3.11 installed. Venv at `/workspace/agent/venv/`. Alpaca paper account active: ~$102k portfolio, ~$204k buying power.
 
 ---
