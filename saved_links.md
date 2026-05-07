@@ -6,6 +6,16 @@ Kevin's saved articles, posts, and links for later reference.
 
 ## 2026-05-07
 
+### QuantEcon — "Quantitative Economics with Python" (Sargent & Stachurski)
+- **URL:** https://quantecon.org/py/index.html
+- **Authors:** Thomas J. Sargent (Nobel 2011), John Stachurski
+- **Type:** Open textbook — free online + PDF
+- **Covers:** Dynamic programming, Markov chains, asset pricing, linear algebra, time series, econometrics, optimal stopping, calibration — all in Python (NumPy/SciPy/Matplotlib/JAX)
+- **Relevance:** Reference for quantitative methods underlying the trading pipeline — particularly DP/optimal stopping (options), Markov chain modeling (regime switching), and econometric calibration
+- **Saved by Kevin:** 2026-05-07
+
+---
+
 ### SSRN 6630998 — "Short-Term Reversal Persists Globally—If Properly Measured"
 - **URL:** https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6630998
 - **Authors:** Jan Stosik, Adam Zaremba
