@@ -318,3 +318,26 @@ KDD 2026 paper (arXiv:2505.07078, Li et al.) ran FINSABER backtest across 20 yea
 The paper recommends: 'focus on trend detection and regime-aware risk controls over mere scaling of framework complexity.' H026's TSMOM filter already provides trend detection; TradingAgents should augment it with macro regime awareness, not replace it.
 
 **Benchmark before committing API costs**: test a simple VIX threshold (VIX > 30 → BIL) first. If VIX alone achieves the same regime protection as TradingAgents, the LLM layer adds complexity without benefit.
+
+---
+
+## Supporting Literature: Press Release Section Extraction
+
+**arXiv:2509.24254** — *Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns* (Spinos et al., Oct 2025)
+
+Key findings directly relevant to H175 (sec-parser press release section extraction):
+
+1. **Soft information is as predictive as hard surprises**: The textual content of earnings press releases explains abnormal returns comparably to earnings beat/miss magnitude. This validates the H175/H163 approach of using NLP on press releases directly.
+
+2. **FinBERT > LDA for structured extraction**: FinBERT embeddings outperform LDA topic modeling for extracting return-predictive signals from press releases. Confirms FinBERT as the right scorer (already our approach in H163/H174).
+
+3. **Section structure matters**: Predictive power varies by section. Guidance/outlook paragraphs and management commentary sections carry more signal than boilerplate financial tables. The paper's section classification maps well to the sec-parser extraction structure.
+
+4. **Section-level sentiment > full-document sentiment**: Scoring individual sections (outlook, summary, highlights) and weighting them outperforms whole-document scoring. This is the H175 hypothesis: apply FinBERT to *specific sections* extracted by sec-parser rather than the full 8-K text.
+
+**Implementation note for H175**: Target these sections in order of signal strength:
+- Forward-looking statements / guidance
+- Management summary / key highlights  
+- Q&A discussion summary (if included in press release)
+- Financial results narrative (above tables)
+- Exclude: raw financial tables, boilerplate legal disclaimers

@@ -241,3 +241,46 @@ def stats(r):
 - Novy-Marx (2012) "Is Momentum Really Momentum?" — momentum at 12-24m is different from 2-12m; relevant for understanding lookback
 - Blitz & van Vliet (2007) "The Volatility Effect" — foundation of low-vol anomaly (confirmed in H150)
 - Asness, Moskowitz & Pedersen (2013) "Value and Momentum Everywhere" — momentum works across 8 asset classes
+
+---
+
+## H165 Step 2 Research: Multi-Agent Regime Detection (2026 papers)
+
+Three 2026 papers inform the H165 full TradingAgents implementation:
+
+### arXiv:2604.10996 — Regime Boundaries: When LLM Signals Fail
+*April 2026. Tests LLM trading signals across volatile (H1 2025, tariff-driven) vs. calm (H2 2025) regimes.*
+
+**Key finding**: Macroeconomic state variables are more reliable drivers of policy robustness than LLM technical signals. LLM signals fail predictably at regime boundaries (high-volatility transitions). Strategy: macro variables (unemployment trend, yield curve slope, credit spreads) as primary regime gate, LLM signals as secondary.
+
+**H165 implication**: VIX<25 binary gate is the right intuition. Upgrade by adding: FRED unemployment trend (UNRATE MoM) + 10Y-2Y yield curve slope as co-gates alongside VIX. All three must be non-recession-signaling to allow full H026 exposure.
+
+### arXiv:2602.23330 — Fine-Grained Multi-Agent Task Decomposition
+*February 2026. Decomposes investment analysis into granular tasks vs. coarse-grained instructions.*
+
+**Key finding**: Fine-grained agents (one per decision type: sentiment, macro, technicals, risk) significantly outperform coarse-grained single-agent or broad-task agents in Sharpe and drawdown metrics.
+
+**H165 implication**: TradingAgents architecture with 4–5 specialized agents (macro regime, sector trend, event signal, risk manager, synthesis) is the right design. The key is strict task isolation — each agent answers one narrow question, not a broad 'what should we do?' prompt.
+
+### arXiv:2601.02957 — LLM-Augmented Changepoint Detection
+*January 2026. LLM + PELT/BOCPD changepoint detection with automated narrative explanation.*
+
+**Key finding**: LLMs can identify regime transitions from market text (FOMC statements, economic releases) and timestamp them accurately. Combining statistical changepoint detection with LLM narrative attribution produces explainable, adaptive regime gates.
+
+**H165 implication**: Replace the binary VIX threshold with a two-step process: (1) statistical changepoint detector flags potential regime transitions in real-time; (2) LLM agent reads the market narrative context and confirms/rejects the transition. This avoids both false positives (VIX spike with no regime change) and false negatives (regime change without VIX spike).
+
+### Suggested H165 Step 2 Architecture
+
+```
+Monthly rebalance trigger
+        ↓
+[Macro Regime Agent]  — FRED: UNRATE trend, 10Y-2Y, CrSpread
+        ↓
+[Changepoint Agent]   — BOCPD on VIX + macro → regime flag
+        ↓
+[H026 Signal Layer]   — sector rotation (existing production)
+        ↓
+[Risk Manager Agent]  — max exposure based on regime confidence
+        ↓
+ Final allocation
+```

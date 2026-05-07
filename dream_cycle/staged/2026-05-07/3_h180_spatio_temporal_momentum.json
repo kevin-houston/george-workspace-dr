@@ -10,5 +10,8 @@
   "target_file": "/workspace/agent/backtesting/daily/run_h180.py",
   "content": "# H180: Spatio-Temporal Momentum\n# Source: arXiv:2302.10175 (JTFDS 2023)\n# Hypothesis: A simple MLP that learns both cross-sectional ranks AND time-series\n# momentum features (rolling 1m, 3m, 6m, 12m returns) as inputs will outperform\n# the pure rank-based H026 sector rotation signal.\n#\n# Universe: H026's 25-asset sector ETF universe\n# Signal: MLP(cross_sectional_rank, ts_1m, ts_3m, ts_6m, ts_12m) → score\n# Training: IS 2008–2017, OOS 2018+\n# Architecture: 2-layer MLP, 32 hidden units, ReLU, dropout 0.2\n# Loss: cross-entropy on next-month winner label (top-1 = 1, else 0)\n# Confirm criteria: OOS Sharpe > 3.0 (must beat production H026 baseline)\n#\n# Implementation notes:\n# - Normalize features monthly (z-score across cross-section)\n# - Use sklearn MLPClassifier for simplicity (no PyTorch dependency)\n# - Key test: does adding time-series features improve over pure rank?\n# - Do NOT overfit: IS 2008-2017 has ~120 months, 25 assets = small dataset\n#   Use heavy regularization (alpha=0.01, max_iter=100, early_stopping)\n# - Compare variants: A (cross-sectional only), B (TS only), C (combined)\n# PREREQUISITE: None — can run standalone\n# ESTIMATE: 3h implementation\n",
   "action": "write",
-  "apply_status": "pending"
+  "apply_status": "applied",
+  "applied_at": "2026-05-07T04:00:00",
+  "applied_file": "/workspace/agent/backtesting/daily/run_h180.py",
+  "note": "New file — no backup needed. Contains spec/comments only, not runnable code yet."
 }

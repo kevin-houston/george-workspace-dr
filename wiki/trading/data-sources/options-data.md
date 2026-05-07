@@ -456,3 +456,39 @@ Violating these means the surface implies negative risk-neutral probability mass
 | `scipy` | `pip install scipy` | SVI surface fitting, custom optimization |
 | `httpx` | `pip install httpx` | ThetaData API calls (sync + async) |
 | `polygon-api-client` | `pip install polygon-api-client` | Polygon REST + WebSocket |
+
+---
+
+## philippdubach/options-data — Free Historical Options Chains
+
+**GitHub**: https://github.com/philippdubach/options-data  
+**Cost**: Free (Cloudflare R2 download)  
+**Coverage**: 104+ US equities and ETFs, 2008–Dec 2025, EOD snapshots  
+**Format**: Parquet files per symbol-year with strike, expiry, call/put, bid/ask, IV, OI, volume  
+
+Direct alternative to ThetaData/ORATS for backtesting. No intraday, no tick-level — EOD chain snapshots only. Adequate for:
+- 45-DTE iron condor entry (H007/H170): select strikes from EOD chain, assume fill at mid
+- Covered call strategy (H162): validate strike selection and premium at EOD
+- Any strategy that enters at end of day and doesn't need intraday tick-level fills
+
+### Download pattern
+
+```python
+import pandas as pd
+
+# Files named: {SYMBOL}_{YEAR}_options.parquet
+# Hosted at Cloudflare R2 — check repo README for current bucket URL
+base_url = "https://pub-XXXX.r2.dev"  # see repo for current URL
+df = pd.read_parquet(f"{base_url}/SPY_2023_options.parquet")
+# Columns: date, expiration, strike, type, bid, ask, iv, delta, gamma, theta, vega, oi, volume
+```
+
+### Limitations vs ThetaData
+- EOD only (no intraday) — can't backtest 0DTE intraday entry/exit precisely
+- No fill simulation (bid/ask spread needs to be modeled manually)
+- Greeks may be end-of-day computed, not real-time mid-day
+- Coverage ends Dec 2025 (will need ThetaData for 2026+ live data)
+
+### Use for H170
+
+Sufficient for **overnight/multi-day options strategies** and for **monthly 45-DTE iron condor** (H007). For H170 specifically (0DTE same-day expiry with intraday entry), EOD data is insufficient — still need ThetaData for accurate 0DTE fills. But use this to validate the iron condor setup and strike selection logic before paying for ThetaData.
