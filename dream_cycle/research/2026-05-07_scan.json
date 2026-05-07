@@ -1,0 +1,218 @@
+{
+  "scan_date": "2026-05-07",
+  "session": "nightly dream cycle phase 2",
+  "angles_covered": [
+    "pairs_trading_cointegration_llm",
+    "pead_earnings_nlp",
+    "cross_sectional_momentum_factor",
+    "multi_agent_llm_trading",
+    "github_trending_quant"
+  ],
+  "papers_found": [
+    {
+      "arxiv_id": "2604.13260",
+      "title": "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns",
+      "date": "2026-04-14",
+      "relevance": 9,
+      "summary": "Speaker-weighted FinBERT on 16,428 earnings call transcripts (2015–2025). Weights: Analyst 49%, CFO 30%, Exec 16%, Other 5%. 2.03% monthly long-short alpha. Spearman IC=0.142 OOS.",
+      "action": "known — already cited as H168 source (arXiv:2604.13260). Confirms speaker weights are correct.",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "date": "2025-10-07",
+      "relevance": 8,
+      "summary": "FinBERT on structured sections of earnings press releases. Soft information as predictive as earnings surprise. Section-level sentiment > whole-document. Guidance/outlook sections carry most signal.",
+      "action": "staged as proposal 2 — wiki update to event-driven.md with section targeting guidance for H175",
+      "staged": true
+    },
+    {
+      "arxiv_id": "2503.01886",
+      "title": "Advanced Deep Learning Techniques for Analyzing Earnings Call Transcripts",
+      "date": "2025-02-27",
+      "relevance": 7,
+      "summary": "FinBERT > BERT > ULMFiT for earnings transcript sentiment. Confirms FinBERT choice.",
+      "action": "no action — confirms existing approach",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2511.15214",
+      "title": "Corporate Earnings Calls and Analyst Beliefs",
+      "date": "2025-11-19",
+      "relevance": 6,
+      "summary": "LLM counterfactual transcripts show analysts over-react to optimism, under-react to uncertainty. Narratives predict realized earnings.",
+      "action": "no action — already in NLP wiki from prior scans",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2304.07619",
+      "title": "Can ChatGPT Forecast Stock Price Movements?",
+      "date": "2023-04-15 (revised Oct 2025)",
+      "relevance": 7,
+      "summary": "GPT-4 on news headlines: ~90% hit rate on initial reaction, predicts drift. Supports GPT-4o-mini as FinBERT alternative.",
+      "action": "no action — H171 already queued for GPT-4o-mini test",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2502.10008",
+      "title": "ChatGPT and Deepseek: Can They Predict the Stock Market?",
+      "date": "2025-02-14",
+      "relevance": 6,
+      "summary": "ChatGPT > DeepSeek for stock prediction from WSJ articles. Risk premium predictable; negative news asymmetry.",
+      "action": "no action — directional support for H171 already well-motivated",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2412.09394",
+      "title": "LLMs for Time Series: an Application for Single Stocks and Statistical Arbitrage",
+      "date": "2024-12-12 (revised Nov 2025)",
+      "relevance": 8,
+      "summary": "Chronos LLM generates alpha from financial time series in long/short portfolios. Challenges assumption LLMs can't predict financial returns.",
+      "action": "no action — pairs trading family is exhausted (H169 BLOCKED). LLM pair selection deprioritized indefinitely.",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2604.19476",
+      "title": "Cross-Stock Predictability via LLM-Augmented Semantic Networks",
+      "date": "2026-04-21",
+      "relevance": 9,
+      "summary": "Known paper. LLM filters spurious 10-K embedding pairs. Sharpe 0.742→0.820. Already in H169 card.",
+      "action": "no action — already known, H169 BLOCKED pending H160 fix",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2302.10175",
+      "title": "Spatio-Temporal Momentum: Jointly Learning Time-Series and Cross-Sectional Strategies",
+      "date": "2023-02-20 (published JFDS 2023)",
+      "relevance": 8,
+      "summary": "Unified NN combining time-series and cross-sectional momentum on 46 US stocks + 12 futures. SLP Sharpe +134%, MLP +251% vs long-only at 5-10 bps transaction costs.",
+      "action": "staged as proposal 3 — new H180 hypothesis placeholder script",
+      "staged": true
+    },
+    {
+      "arxiv_id": "2507.15876",
+      "title": "Re-evaluating Short- and Long-Term Trend Factors in CTA Replication: A Bayesian Graphical Approach",
+      "date": "2025-07-17",
+      "relevance": 7,
+      "summary": "Multi-horizon momentum blend (short+long) improves risk-adjusted performance. Bayesian decomposition of CTA returns.",
+      "action": "no action — relevant to H026 but our ensemble already uses 12m + TSMOM. Marginal improvement not worth new hypothesis.",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2507.07107",
+      "title": "ML Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Portfolio Optimization with Bias Correction",
+      "date": "2025-06-02",
+      "relevance": 7,
+      "summary": "500-1000 alpha101 factors + LightGBM on Chinese A-shares. 20% annualized, Sharpe >2.0. Known paper (H167 FLAGGED).",
+      "action": "no action — H167 already FLAGGED for Kevin review. Chinese market dynamics too different.",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2412.20138",
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "date": "2024-12-20 (updated Jun 2025)",
+      "relevance": 9,
+      "summary": "Specialized LLM agents (fundamental, sentiment, technical, Bull/Bear, risk managers) debate market conditions. Real backtests: Qwen3:30B 18.1% vs 19.1% buy-and-hold. GitHub: TauricResearch/TradingAgents.",
+      "action": "no action — already in H165 pipeline. VIX gate confirmed partial, full TradingAgents is step 2.",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2604.10996",
+      "title": "When Valid Signals Fail: Regime Boundaries Between LLM Features and RL Trading Policies",
+      "date": "2026-04-",
+      "relevance": 9,
+      "summary": "Macro state variables > LLM technical signals at regime boundaries. Tests across tariff-volatile H1 2025 vs calm H2 2025.",
+      "action": "staged as proposal 4 — wiki update to momentum-strategies.md with H165 step 2 architecture",
+      "staged": true
+    },
+    {
+      "arxiv_id": "2602.23330",
+      "title": "Toward Expert Investment Teams: Fine-Grained Multi-Agent LLM System",
+      "date": "2026-02-",
+      "relevance": 9,
+      "summary": "Fine-grained task decomposition significantly improves Sharpe and drawdown vs coarse-grained multi-agent systems.",
+      "action": "staged as proposal 4 (combined with above)",
+      "staged": true
+    },
+    {
+      "arxiv_id": "2601.02957",
+      "title": "LLM-Augmented Changepoint Detection: Ensemble Detection and Automated Explanation",
+      "date": "2026-01-",
+      "relevance": 8,
+      "summary": "Statistical BOCPD/PELT + LLM narrative attribution for adaptive regime detection. Replaces binary thresholds.",
+      "action": "staged as proposal 4 (combined with above)",
+      "staged": true
+    },
+    {
+      "arxiv_id": "2505.07078",
+      "title": "Can LLM-based Financial Investing Strategies Outperform the Market in Long Run?",
+      "date": "2025-05-",
+      "relevance": 8,
+      "summary": "LLM strategies overly conservative in bull, aggressive in bear markets — validates regime-aware risk controls.",
+      "action": "no action — directional validation of VIX gate already confirmed partial",
+      "staged": false
+    }
+  ],
+  "github_repos_found": [
+    {
+      "name": "philippdubach/options-data",
+      "url": "https://github.com/philippdubach/options-data",
+      "relevance": 9,
+      "summary": "Free historical EOD options chain data for 104+ US ETFs/equities, 2008–Dec 2025, Cloudflare R2.",
+      "action": "staged as proposal 1 — update options-data.md wiki page",
+      "staged": true
+    },
+    {
+      "name": "TauricResearch/TradingAgents",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "relevance": 9,
+      "summary": "Production-ready multi-agent LLM trading framework. 1.2k+ stars, ICML 2025.",
+      "action": "no action — already referenced in H165",
+      "staged": false
+    },
+    {
+      "name": "sam31415/timeseriescv",
+      "url": "https://github.com/sam31415/timeseriescv",
+      "relevance": 9,
+      "summary": "Lightweight CPCV implementation, sklearn-compatible, MIT license.",
+      "action": "incorporated into new wiki page walk-forward-cpcv.md (phase 1 tonight)",
+      "staged": false
+    },
+    {
+      "name": "skfolio/skfolio",
+      "url": "https://github.com/skfolio/skfolio",
+      "relevance": 8,
+      "summary": "Portfolio-focused CPCV. CombinatorialPurgedCV class. BSD-3.",
+      "action": "incorporated into new wiki page walk-forward-cpcv.md (phase 1 tonight)",
+      "staged": false
+    }
+  ],
+  "proposals_staged": [
+    {
+      "n": 1,
+      "file": "1_wiki_options_data_free_historical.json",
+      "risk": "low",
+      "type": "wiki_update"
+    },
+    {
+      "n": 2,
+      "file": "2_wiki_event_driven_press_release_structure.json",
+      "risk": "low",
+      "type": "wiki_update"
+    },
+    {
+      "n": 3,
+      "file": "3_h180_spatio_temporal_momentum.json",
+      "risk": "medium",
+      "type": "new_script"
+    },
+    {
+      "n": 4,
+      "file": "4_wiki_h165_regime_detection_upgrade.json",
+      "risk": "low",
+      "type": "wiki_update"
+    }
+  ],
+  "summary": "4 proposals staged: 3 low-risk wiki updates (free options data source, press release section extraction methodology for H175, H165 regime detection upgrade with 3 new 2026 papers) + 1 medium-risk new hypothesis H180 (spatio-temporal momentum NN). No new PEAD/NLP papers beyond known ones. Pairs trading family remains exhausted — no new LLM pair selection papers in 2026 beyond arXiv:2604.19476 already in H169 card. Key discovery: philippdubach free options data (2008-2025) removes cost barrier for H170 prototype testing."
+}

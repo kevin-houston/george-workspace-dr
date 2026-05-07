@@ -1,0 +1,14 @@
+{
+  "id": "2026-05-07-2-event-driven-press-release-structure",
+  "date": "2026-05-07",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.24254",
+  "title": "Update event-driven wiki: press release section extraction methodology (arXiv:2509.24254)",
+  "rationale": "arXiv:2509.24254 'Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns' (Oct 2025) directly supports H175 (press release section extraction with sec-parser). Key finding: soft information from earnings press releases is as informative as earnings surprises; FinBERT on structured sections (outlook, summary, narrative) outperforms LDA. This validates H175's extraction approach and suggests which sections carry the most predictive signal. Should be added to the event-driven wiki page to inform the H175 implementation.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/event-driven.md",
+  "content": "\n---\n\n## Supporting Literature: Press Release Section Extraction\n\n**arXiv:2509.24254** — *Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns* (Spinos et al., Oct 2025)\n\nKey findings directly relevant to H175 (sec-parser press release section extraction):\n\n1. **Soft information is as predictive as hard surprises**: The textual content of earnings press releases explains abnormal returns comparably to earnings beat/miss magnitude. This validates the H175/H163 approach of using NLP on press releases directly.\n\n2. **FinBERT > LDA for structured extraction**: FinBERT embeddings outperform LDA topic modeling for extracting return-predictive signals from press releases. Confirms FinBERT as the right scorer (already our approach in H163/H174).\n\n3. **Section structure matters**: Predictive power varies by section. Guidance/outlook paragraphs and management commentary sections carry more signal than boilerplate financial tables. The paper's section classification maps well to the sec-parser extraction structure.\n\n4. **Section-level sentiment > full-document sentiment**: Scoring individual sections (outlook, summary, highlights) and weighting them outperforms whole-document scoring. This is the H175 hypothesis: apply FinBERT to *specific sections* extracted by sec-parser rather than the full 8-K text.\n\n**Implementation note for H175**: Target these sections in order of signal strength:\n- Forward-looking statements / guidance\n- Management summary / key highlights  \n- Q&A discussion summary (if included in press release)\n- Financial results narrative (above tables)\n- Exclude: raw financial tables, boilerplate legal disclaimers\n",
+  "action": "append",
+  "apply_status": "pending"
+}
