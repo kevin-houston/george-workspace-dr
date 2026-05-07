@@ -1,0 +1,17 @@
+H179 — Global Equity Momentum Rotation
+Universe: ['SPY', 'EFA', 'EEM', 'EWJ', 'VGK', 'EWC', 'VWO', 'EWZ']  (SPY excluded from selection pool)
+Signal: 12-1 month momentum, monthly rebalance, TSMOM safety filter
+IS: 2008-01-01–2017-12-31  |  OOS: 2018-01-01+  |  AltOOS: 2013-01-01+
+
+SPY OOS: cumul=2.87×  Sharpe=0.858  MaxDD=-23.9%
+
+OOS Results:
+  A  top-1  no-filter                    cumul=1.11× Sharpe=0.162 MaxDD=-37.3% NegYrs=3
+  B  top-1  TSMOM>0%                     cumul=0.84× Sharpe=-0.019 MaxDD=-47.7% NegYrs=4
+  C  top-2  TSMOM>0%                     cumul=0.86× Sharpe=-0.025 MaxDD=-45.0% NegYrs=4
+  D  top-2  TSMOM>2%                     cumul=1.15× Sharpe=0.187 MaxDD=-30.0% NegYrs=2
+  E  top-3  equal TSMOM>0%               cumul=0.95× Sharpe=0.039 MaxDD=-44.1% NegYrs=3
+
+VERDICT: NOT CONFIRMED
+No variant meets OOS Sharpe>1.0 AND cumul>SPY AND NegYrs≤2.
+Best OOS Sharpe: 0.187

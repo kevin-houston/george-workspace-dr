@@ -1,0 +1,17 @@
+H178 — Commodity Momentum Rotation
+Universe: ['GLD', 'SLV', 'GDX', 'USO', 'UNG', 'XLE', 'DBA', 'DBC', 'CORN', 'WEAT', 'CPER']
+Signal: 12-1 month momentum (skip 1m reversal), monthly rebalance
+IS: 2008-01-01–2017-12-31  |  OOS: 2018-01-01+  |  AltOOS: 2013-01-01+
+
+SPY OOS: cumul=2.87×  Sharpe=0.858  MaxDD=-23.9%
+
+OOS Results:
+  A  top-1  no-filter                 cumul=0.63× Sharpe=0.040 MaxDD=-66.2% NegYrs=4
+  B  top-1  TSMOM>0%                  cumul=0.63× Sharpe=0.040 MaxDD=-66.2% NegYrs=4
+  C  top-2  TSMOM>0%                  cumul=2.64× Sharpe=0.550 MaxDD=-33.9% NegYrs=2
+  D  top-1  TSMOM>2%                  cumul=0.64× Sharpe=0.048 MaxDD=-65.4% NegYrs=4
+  E  top-3  equal TSMOM>0%            cumul=3.04× Sharpe=0.643 MaxDD=-34.7% NegYrs=1
+
+VERDICT: NOT CONFIRMED
+No variant meets OOS Sharpe>1.0 AND cumul>SPY AND NegYrs≤2.
+Check IS/OOS degradation and correlation with H026.
