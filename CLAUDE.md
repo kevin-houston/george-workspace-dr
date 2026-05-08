@@ -5,3 +5,4 @@
 @./.claude-fragments/module-interactive.md
 @./.claude-fragments/module-scheduling.md
 @./.claude-fragments/module-self-mod.md
+@./.claude-fragments/skill-onecli-gateway.md

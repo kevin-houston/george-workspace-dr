@@ -1,0 +1,56 @@
+[2026-05-07 23:10:02] =======================================================
+[2026-05-07 23:10:03] PEAD overnight pass starting
+[2026-05-07 23:10:03] Scanning earnings calendar…
+[2026-05-07 23:10:06] =======================================================
+[2026-05-07 23:10:06] PEAD overnight pass starting
+[2026-05-07 23:10:06] Scanning earnings calendar…
+[2026-05-07 23:10:32]   Tickers with recent earnings: ['PFE', 'AMD']
+[2026-05-07 23:10:32]   Fetching 8-K for PFE…
+[2026-05-07 23:10:32]   Tickers with recent earnings: ['PFE', 'AMD']
+[2026-05-07 23:10:32]   Fetching 8-K for PFE…
+[2026-05-07 23:10:52]   PFE: EDGAR fetch error — User-Agent identity is not set
+[2026-05-07 23:10:52]   PFE: EDGAR fetch error — User-Agent identity is not set
+[2026-05-07 23:10:52]     PFE: no 8-K Item 2.02 found
+[2026-05-07 23:10:52]     PFE: no 8-K Item 2.02 found
+[2026-05-07 23:10:52]   Fetching 8-K for AMD…
+[2026-05-07 23:10:52]   Fetching 8-K for AMD…
+[2026-05-07 23:10:52]   AMD: EDGAR fetch error — User-Agent identity is not set
+[2026-05-07 23:10:52]   AMD: EDGAR fetch error — User-Agent identity is not set
+[2026-05-07 23:10:52]     AMD: no 8-K Item 2.02 found
+[2026-05-07 23:10:52]     AMD: no 8-K Item 2.02 found
+[2026-05-07 23:10:52] No 8-K texts retrieved. Watchlist cleared.
+[2026-05-07 23:10:52] No 8-K texts retrieved. Watchlist cleared.
+[2026-05-07 23:11:12] =======================================================
+[2026-05-07 23:11:12] PEAD overnight pass starting
+[2026-05-07 23:11:12] Scanning earnings calendar…
+[2026-05-07 23:11:38]   Tickers with recent earnings: ['PFE', 'AMD']
+[2026-05-07 23:11:38]   Fetching 8-K for PFE…
+[2026-05-07 23:11:41]     PFE: no 8-K Item 2.02 found
+[2026-05-07 23:11:41]   Fetching 8-K for AMD…
+[2026-05-07 23:11:41]     AMD: no 8-K Item 2.02 found
+[2026-05-07 23:11:41] No 8-K texts retrieved. Watchlist cleared.
+[2026-05-07 23:12:17] =======================================================
+[2026-05-07 23:12:17] PEAD overnight pass starting
+[2026-05-07 23:12:17] Scanning earnings calendar…
+[2026-05-07 23:12:44]   Tickers with recent earnings: ['PFE', 'AMD']
+[2026-05-07 23:12:44]   Fetching 8-K for PFE…
+[2026-05-07 23:12:46]     PFE: no 8-K Item 2.02 found
+[2026-05-07 23:12:46]   Fetching 8-K for AMD…
+[2026-05-07 23:12:48]     AMD: no 8-K Item 2.02 found
+[2026-05-07 23:12:48] No 8-K texts retrieved. Watchlist cleared.
+[2026-05-07 23:13:07] =======================================================
+[2026-05-07 23:13:07] PEAD overnight pass starting
+[2026-05-07 23:13:07] Scanning earnings calendar…
+[2026-05-07 23:13:33]   Tickers with recent earnings: ['PFE', 'AMD']
+[2026-05-07 23:13:33]   Fetching 8-K for PFE…
+[2026-05-07 23:13:35]     PFE: 5963 chars
+[2026-05-07 23:13:35]   Fetching 8-K for AMD…
+[2026-05-07 23:13:36]     AMD: 5508 chars
+[2026-05-07 23:14:11]   Loading ProsusAI/finbert…
+[2026-05-07 23:14:40]   PFE: score=-0.020  surprise=-0.289
+[2026-05-07 23:14:41]   AMD: score=-0.011  surprise=-0.129
+[2026-05-07 23:14:41]   ✗ PFE filtered out (score=-0.020, surprise=-0.2889)
+[2026-05-07 23:14:41]   ✗ AMD filtered out (score=-0.011, surprise=-0.129)
+[2026-05-07 23:14:41] Candidates for tomorrow: none
+[2026-05-07 23:14:41] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-05-07 23:14:41] Overnight pass complete.
