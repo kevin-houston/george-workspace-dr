@@ -80,15 +80,18 @@ def fetch_8k_text(ticker: str) -> str | None:
     """Fetch the most recent 8-K Item 2.02 text from EDGAR for ticker."""
     try:
         import requests
+        import edgar
+        edgar.set_identity("george-nanoclaw george@nanoclaw.com")
         from edgar import Company
-        today = date.today().isoformat()
+        # Look back 5 calendar days to catch Mon earnings reported by Wed night
+        cutoff = (date.today() - timedelta(days=5)).isoformat()
         company = Company(ticker)
         filings = company.get_filings(form="8-K")
         latest = filings.latest()
-        if str(latest.filing_date) not in (today, (date.today() - timedelta(days=1)).isoformat()):
+        if str(latest.filing_date) < cutoff:
             return None
         eightk = latest.obj()
-        if not eightk.items or 2.02 not in eightk.items:
+        if not eightk.items or "Item 2.02" not in eightk.items:
             return None
         text = latest.markdown()
         if text and len(text) > 200:
