@@ -3,12 +3,12 @@
   "date": "2026-05-08",
   "source": "repo",
   "source_url": "https://huggingface.co/models?search=modernfinbert",
-  "title": "Wiki update: ModernFinBERT (July 2025) — improved FinBERT base model",
-  "rationale": "ModernFinBERT (released July 2025) is a financial sentiment model based on ModernBERT architecture, specialized for earnings calls and analyst reports. As the successor to ProsusAI/finbert, it likely improves sentiment accuracy without major API changes. H163/H174 currently use ProsusAI/finbert. If ModernFinBERT shows measurable accuracy gains in financial sentiment benchmarks, it could be dropped in as a direct upgrade to the deployed paper trading pipeline. Risk: needs validation before swapping in live system. Propose as H176 (ModernFinBERT upgrade to H163) — low-cost experiment (~2h to swap model and re-run scoring).",
+  "title": "Wiki update: ModernFinBERT (July 2025) \u2014 improved FinBERT base model",
+  "rationale": "ModernFinBERT (released July 2025) is a financial sentiment model based on ModernBERT architecture, specialized for earnings calls and analyst reports. As the successor to ProsusAI/finbert, it likely improves sentiment accuracy without major API changes. H163/H174 currently use ProsusAI/finbert. If ModernFinBERT shows measurable accuracy gains in financial sentiment benchmarks, it could be dropped in as a direct upgrade to the deployed paper trading pipeline. Risk: needs validation before swapping in live system. Propose as H176 (ModernFinBERT upgrade to H163) \u2014 low-cost experiment (~2h to swap model and re-run scoring).",
   "risk_level": "low",
   "type": "wiki_update",
   "target_file": "/workspace/agent/wiki/trading/tools/nlp-alternative-data.md",
   "content": "Add entry: '**ModernFinBERT** (July 2025): Financial sentiment model based on ModernBERT architecture. Positioned as successor to ProsusAI/finbert with improved accuracy on earnings calls and analyst reports. Usage identical to FinBERT via HuggingFace transformers. Candidate for H176 (drop-in upgrade to H163/H174 scoring pipeline). Validate on H163 test set before deploying to live paper trading. Check: https://huggingface.co/models?search=modernfinbert for release artifacts.'",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

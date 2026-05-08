@@ -35,6 +35,7 @@ Recent evidence:
 - FinBERT on earnings call transcripts achieves 57–58% accuracy for post-announcement direction
 - **PEAD.txt** (Meursault et al., *JFQA* 2022): text-based SUE from transcripts earns **3.9bp daily alpha** vs 2.6bp for price-based SUE (+50% stronger); 1-SD text surprise → 3–6% of SD in 63-day CAR
 - **H163 CONFIRMED** (2026-05-05): FinBERT on SEC 8-K press releases achieves OOS WR ≥ 68% (+10pp vs baseline 57.6%), MeanRet ≥ 5.5% (+2×); validates NLP filtering for PEAD
+- **Independent validation (ICAIF 2025)**: arXiv:2509.24254 (138,000+ earnings press releases, 2005-2023) confirms that soft information from earnings press releases explains announcement-day returns as well as earnings surprises. FinBERT contextual embeddings outperform LDA bag-of-words. Directly corroborates H163/H174 confirmed results — the 8-K FinBERT signal is well-grounded in the academic literature.
 
 ### PEAD.txt — Text-Based Earnings Surprise (JFQA 2022)
 

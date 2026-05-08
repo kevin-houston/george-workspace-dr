@@ -3,12 +3,12 @@
   "date": "2026-05-08",
   "source": "paper",
   "source_url": "https://arxiv.org/abs/2509.24254",
-  "title": "Wiki update: arXiv:2509.24254 — earnings press release structure validates H163 approach",
+  "title": "Wiki update: arXiv:2509.24254 \u2014 earnings press release structure validates H163 approach",
   "rationale": "ICAIF '25 paper (arXiv:2509.24254) analyzed 138,000+ earnings press releases (2005-2023) and found soft information from 8-K press releases is *as informative as earnings surprises* in explaining announcement-day returns. Contextual FinBERT embeddings outperform LDA. This independently validates H163's approach (FinBERT on EDGAR 8-K filings) and strengthens confidence in the confirmed result. Should be documented in event-driven.md as supporting evidence for the H163/H174 deployed strategy.",
   "risk_level": "low",
   "type": "wiki_update",
   "target_file": "/workspace/agent/wiki/trading/algorithms/event-driven.md",
-  "content": "Append to event-driven.md under the H163 section: '**Independent validation (ICAIF 2025)**: arXiv:2509.24254 (138,000+ earnings press releases, 2005-2023) confirms that soft information from earnings press releases explains announcement-day returns as well as earnings surprises. FinBERT contextual embeddings outperform LDA bag-of-words. Directly corroborates H163/H174 confirmed results — the 8-K FinBERT signal is well-grounded in the academic literature.'",
+  "content": "Append to event-driven.md under the H163 section: '**Independent validation (ICAIF 2025)**: arXiv:2509.24254 (138,000+ earnings press releases, 2005-2023) confirms that soft information from earnings press releases explains announcement-day returns as well as earnings surprises. FinBERT contextual embeddings outperform LDA bag-of-words. Directly corroborates H163/H174 confirmed results \u2014 the 8-K FinBERT signal is well-grounded in the academic literature.'",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

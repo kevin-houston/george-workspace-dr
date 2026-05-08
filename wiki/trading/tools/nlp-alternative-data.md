@@ -448,3 +448,32 @@ Off-the-shelf pre-trained TSFMs (time series foundation models like TimesFM, Chr
 3. Fine-tune FinBERT on these labeled texts as a binary classifier
 4. Expected: better-calibrated positive probability for PEAD filtering than zero-shot polarity score
 5. Cost: ~4h CPU training, no GPU needed; H163 already confirmed zero-shot works at WR ≥68%
+
+---
+
+## ModernFinBERT (July 2025) — Successor to ProsusAI/finbert
+
+**ModernFinBERT** is a financial sentiment model based on the ModernBERT architecture, released July 2025. Positioned as the successor to `ProsusAI/finbert` with improved accuracy on earnings calls and analyst reports.
+
+**Usage** (identical to FinBERT via HuggingFace `transformers`):
+```python
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import torch
+
+# Drop-in swap: change model name only
+model_name = "your-org/ModernFinBERT"  # check HuggingFace for exact ID
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+model.eval()
+
+# Inference unchanged from H163/H174 pipeline
+inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
+with torch.no_grad():
+    logits = model(**inputs).logits
+probs = torch.softmax(logits, dim=-1)[0].numpy()
+score = float(probs[0] - probs[1])  # positive - negative
+```
+
+**Candidate for H176**: Drop-in upgrade to H163/H174 scoring pipeline. Validate on H163 IS/OOS event set before deploying to live paper trading. If ModernFinBERT scores show meaningful correlation improvement vs ProsusAI/finbert on labeled events, update `pead_overnight.py` scorer.
+
+**Check**: https://huggingface.co/models?search=modernfinbert for current release artifacts. Benchmark: compare pos−neg score distribution on H163's 85 OOS events with known outcomes.

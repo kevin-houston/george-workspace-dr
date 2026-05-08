@@ -3,12 +3,12 @@
   "date": "2026-05-08",
   "source": "paper",
   "source_url": "https://arxiv.org/abs/2511.12490",
-  "title": "H182 — Drift-Regime Conditioned Short-Term Reversal (arXiv:2511.12490)",
+  "title": "H182 \u2014 Drift-Regime Conditioned Short-Term Reversal (arXiv:2511.12490)",
   "rationale": "Singha (Nov 2025) discovers that combining value + short-term reversal signals *conditioned on a drift regime* (stock-specific: >60% positive days in trailing 63-day window) achieves 13.2 OOS Sharpe over 2004-2024 (annualized return 158.6%, vol 12%, MaxDD -11.9%). Walk-forward validated with 1,000 randomization trials (p<0.001). This directly extends H181 (industry-adjusted reversal from SSRN:6630998 at 0.53%/month) by adding regime conditioning. If even partially replicable, the drift-regime gate could lift H181's Sharpe substantially. Implement H181 first (industry adjustment baseline), then add regime gate as H182 variant.",
   "risk_level": "medium",
   "type": "new_script",
   "target_file": "/workspace/agent/backtesting/daily/run_h182.py",
   "content": "New hypothesis stub. Prerequisites: (1) H181 must run first to establish industry-adjusted reversal baseline. (2) Implement drift regime: for each stock, compute fraction of days with positive return in trailing 63-day window; condition entry on regime==True (>60% positive days). Signal: long bottom quintile of industry-adjusted reversal ONLY when stock is in positive drift regime. Short: top quintile in negative drift regime (<40% positive days). Universe: top 100-300 S&P 500 stocks by market cap. Monthly rebalance. IS: 2013-2020, OOS: 2021-2026. Confirm criteria: OOS Sharpe > 1.0 (higher bar given claimed performance). Script mirrors H181 with additional regime_filter() function.",
   "action": "write",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
