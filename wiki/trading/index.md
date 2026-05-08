@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-07
+updated: 2026-05-08
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -34,6 +34,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)
   - [Polygon.io](data-sources/polygon.md) ← expanded 2026-04-28 (API endpoints, WebSocket, pricing, vs Alpaca)
   - [Free / Low-Cost Sources](data-sources/free-data.md) ← expanded 2026-04-28 (Tiingo, EDGAR, Finnhub, FRED, yfinance status)
+  - [Sector & Industry Classification](data-sources/sector-classification.md) ← new 2026-05-08 (GICS/SIC sources for H181; SEC EDGAR SIC, GitHub S&P 500 CSV, yfinance caveats, practical build_sector_cache() for 100-500 stocks)
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
   - [Kalshi](prediction-markets/kalshi.md) ← expanded 2026-04-29 (full auth/API/WebSocket, RSA signing, CPI nowcasting implementation, fee modeling, rate limits, Timeless perps)
   - [Algorithmic Strategies](prediction-markets/algorithmic-strategies.md) ← expanded 2026-05-02 (cross-market arb, nowcasting with full Python lifecycle, calibration, Timeless funding arb, IBKR ForecastTrader API)

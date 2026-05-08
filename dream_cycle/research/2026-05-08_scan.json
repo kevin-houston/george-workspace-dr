@@ -1,0 +1,242 @@
+{
+  "date": "2026-05-08",
+  "scan_duration_min": 25,
+  "total_papers": 28,
+  "high_relevance": 6,
+  "staged_proposals": 4,
+  "searches": [
+    {
+      "query": "PEAD + earnings text signals (FinBERT, 8-K, transcripts)",
+      "papers": [
+        {
+          "id": "arXiv:2509.24254",
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+          "date": "2025-11",
+          "core_finding": "138,000+ earnings press releases (2005-2023): soft information from 8-K press releases is as informative as earnings surprises for announcement-day returns. FinBERT embeddings outperform LDA.",
+          "relevance": "HIGH",
+          "hypothesis": "H163",
+          "staged": true
+        },
+        {
+          "id": "arXiv:2604.13260",
+          "title": "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns",
+          "date": "2026-04-14",
+          "core_finding": "Speaker-weighted FinBERT on 16,428 S&P 500 calls (2015-2025): Analyst 49%, CFO 30%, Executive 16%. Monthly alpha 2.03% (t=6.49), IC=0.142. Previously known — H168 was based on this paper.",
+          "relevance": "HIGH",
+          "hypothesis": "H168",
+          "staged": false,
+          "note": "Already incorporated as H168 basis; H168 NOT CONFIRMED due to OOS coverage bias, not paper methodology"
+        },
+        {
+          "id": "arXiv:2511.15214",
+          "title": "Corporate Earnings Calls and Analyst Beliefs",
+          "date": "2025-11-26",
+          "core_finding": "Narratives from earnings calls predict analyst expectations. Under-reaction to uncertainty/confidence; over-reaction to sentiment/global perspective.",
+          "relevance": "MEDIUM",
+          "hypothesis": "H163 (analyst narrative layer)",
+          "staged": false
+        },
+        {
+          "id": "arXiv:2510.23464",
+          "title": "Evaluating LLMs for Stance Detection on Financial Targets from SEC Filings and Earnings Calls",
+          "date": "2025-10",
+          "core_finding": "LLMs for stance detection (bullish/neutral/bearish) on specific metrics from 8-K and earnings calls.",
+          "relevance": "MEDIUM",
+          "hypothesis": "H163",
+          "staged": false
+        }
+      ]
+    },
+    {
+      "query": "Short-term reversal + industry adjustment + idiosyncratic reversal",
+      "papers": [
+        {
+          "id": "arXiv:2511.12490",
+          "title": "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability",
+          "date": "2025-11-16",
+          "core_finding": "Value + short-term reversal conditioned on stock-specific drift regime (>60% positive days in 63d window) achieves 13.2 OOS Sharpe, CAGR 158.6%, MaxDD -11.9%, 2004-2024. Walk-forward validated, p<0.001.",
+          "relevance": "HIGH",
+          "hypothesis": "H182 (extends H181)",
+          "staged": true
+        },
+        {
+          "id": "arXiv:2501.16772",
+          "title": "Trends and Reversion in Financial Markets on Time Scales from Minutes to Decades",
+          "date": "2025-01-28",
+          "core_finding": "Small trends persist up to ~2 years; trend-reversion interplay documented. Informs holding period for reversal strategy.",
+          "relevance": "MEDIUM",
+          "hypothesis": "H181",
+          "staged": false
+        }
+      ]
+    },
+    {
+      "query": "Cross-sectional momentum + factor momentum + sector momentum",
+      "papers": [
+        {
+          "id": "arXiv:2501.07135",
+          "title": "Follow the Leader: Enhancing Systematic Trend-Following Using Network Momentum",
+          "date": "2025-01",
+          "core_finding": "Combines time-series and cross-sectional momentum via lead-lag network. Network momentum captures inter-market spillover and outperforms univariate trends.",
+          "relevance": "HIGH",
+          "hypothesis": "H183 (new — network momentum)",
+          "staged": true
+        },
+        {
+          "id": "arXiv:2601.06499",
+          "title": "Cross-Market Alpha: Testing Short-Term Trading Factors in the U.S. Market via Double-Selection LASSO",
+          "date": "2026-01",
+          "core_finding": "17 Alpha191 factors with significant cross-sectional explanatory power in U.S. markets (LASSO-screened). Short-term predictability confirmed in 2026 U.S. data.",
+          "relevance": "HIGH",
+          "hypothesis": "H156 (stock momentum universe construction)",
+          "staged": false,
+          "note": "Useful reference for H156 factor selection when unbiased data available"
+        },
+        {
+          "id": "arXiv:2506.09330",
+          "title": "TrendFolios: Portfolio Construction Framework for Momentum and Trend-Following",
+          "date": "2025-06",
+          "core_finding": "Sector momentum + factor momentum applied to factor ETF rotations across equity styles. Validates combined approach.",
+          "relevance": "MEDIUM",
+          "hypothesis": "H157",
+          "staged": false
+        },
+        {
+          "id": "arXiv:2302.10175",
+          "title": "Spatio-Temporal Momentum: Jointly Learning Time-Series and Cross-Sectional Strategies",
+          "date": "2023-02",
+          "core_finding": "Unified framework for time-series + cross-sectional momentum. Foundation for H183 implementation.",
+          "relevance": "MEDIUM",
+          "hypothesis": "H156 + H157",
+          "staged": false
+        }
+      ]
+    },
+    {
+      "query": "Multi-agent LLM trading + TradingAgents",
+      "papers": [
+        {
+          "id": "arXiv:2412.20138",
+          "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+          "date": "2024-12 (updated 2025-06)",
+          "core_finding": "Bull/Bear researcher agents + risk management team + trader. Simulates collaborative trading. Foundation for H165.",
+          "relevance": "HIGH",
+          "hypothesis": "H165",
+          "staged": false,
+          "note": "H165 already QUEUED based on this paper"
+        },
+        {
+          "id": "arXiv:2510.15949",
+          "title": "ATLAS: Adaptive Trading with LLM AgentS (Dynamic Prompt Optimization + Multi-Agent)",
+          "date": "2025-10 (updated 2026-05)",
+          "core_finding": "OPRO-based adaptive prompt optimization for LLM trading agents. Handles delayed/obscured market feedback via stochastic OPRO.",
+          "relevance": "HIGH",
+          "hypothesis": "H165 (advanced variant)",
+          "staged": false
+        },
+        {
+          "id": "arXiv:2510.02209",
+          "title": "StockBench: Can LLM Agents Trade Stocks Profitably In Real-world Markets?",
+          "date": "2025-10 (updated 2026-03)",
+          "core_finding": "Benchmark confirming LLM agents can trade profitably in real-world multi-month environments.",
+          "relevance": "HIGH",
+          "hypothesis": "H165 (validation)",
+          "staged": false
+        },
+        {
+          "id": "arXiv:2602.23330",
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+          "date": "2026-02",
+          "core_finding": "Task decomposition into specialized agents for fine-grained trading decisions.",
+          "relevance": "MEDIUM",
+          "hypothesis": "H165",
+          "staged": false
+        },
+        {
+          "id": "arXiv:2510.14264",
+          "title": "AlphaQuanter: Tool-Augmented Agentic RL Framework for Stock Trading",
+          "date": "2025-10",
+          "core_finding": "Single-agent RL (Qwen2.5 backbone) outperforms multi-agent on end-to-end optimization. Interpretable tool-augmented decision workflow.",
+          "relevance": "MEDIUM",
+          "hypothesis": "H165 (comparison: single-agent RL vs multi-agent LLM)",
+          "staged": false
+        }
+      ]
+    },
+    {
+      "query": "GitHub trending quant finance repos + NLP tools",
+      "repos": [
+        {
+          "name": "JerBouma/FinanceDatabase",
+          "stars": "high",
+          "core_feature": "300,000+ symbols with sector/GICS classification. Free, integrates with FMP.",
+          "relevance": "HIGH",
+          "use_case": "H181 sector classification data source",
+          "staged": false,
+          "note": "Worth adding to sector-classification.md as Source 6"
+        },
+        {
+          "name": "JerBouma/FinanceToolkit",
+          "stars": "high",
+          "core_feature": "Fama-French factors, sector PE ratios, daily industry aggregates.",
+          "relevance": "HIGH",
+          "use_case": "H181 factor attribution, H157 sector momentum",
+          "staged": false
+        },
+        {
+          "name": "ModernFinBERT (HuggingFace, July 2025)",
+          "stars": "N/A",
+          "core_feature": "ModernBERT-based financial sentiment model. Successor to ProsusAI/finbert.",
+          "relevance": "HIGH",
+          "use_case": "H176 (upgrade H163/H174 base model)",
+          "staged": true
+        },
+        {
+          "name": "cloudQuant/backtrader",
+          "stars": 8200,
+          "core_feature": "Updated Dec 2025. Event-driven backtesting with live trading support.",
+          "relevance": "MEDIUM",
+          "use_case": "Alternative to custom backtesting for H156/H181",
+          "staged": false
+        }
+      ]
+    }
+  ],
+  "staged_proposals": [
+    {
+      "file": "1_h182_drift_regime_reversal.json",
+      "hypothesis": "H182",
+      "type": "new_script",
+      "risk": "medium",
+      "source": "arXiv:2511.12490"
+    },
+    {
+      "file": "2_wiki_press_release_structure.json",
+      "type": "wiki_update",
+      "risk": "low",
+      "target": "event-driven.md",
+      "source": "arXiv:2509.24254"
+    },
+    {
+      "file": "3_wiki_modern_finbert.json",
+      "type": "wiki_update",
+      "risk": "low",
+      "target": "nlp-alternative-data.md",
+      "source": "ModernFinBERT HuggingFace"
+    },
+    {
+      "file": "4_h183_network_momentum.json",
+      "hypothesis": "H183",
+      "type": "new_script",
+      "risk": "medium",
+      "source": "arXiv:2501.07135"
+    }
+  ],
+  "key_insights": [
+    "arXiv:2511.12490 (13-Sharpe drift-regime factor) is the most novel finding: drift-regime conditioning on short-term reversal may unlock much larger alpha than raw industry-adjusted reversal (H181). Queue H182 immediately after H181.",
+    "arXiv:2509.24254 independently validates H163/H174 — the deployed paper trading strategy has strong academic backing from 138k+ press releases analysis.",
+    "ModernFinBERT (July 2025) is a potential H176 — drop-in upgrade to the H163/H174 scoring model. Low cost, 2h to validate.",
+    "Network momentum (arXiv:2501.07135) proposes a daily-frequency signal that complements H026's monthly rotation — could fill the gap left by H157 NOT CONFIRMED.",
+    "H165 (TradingAgents) is validated by StockBench (March 2026 confirms real-market profitability). ATLAS prompt optimization is a meaningful enhancement to the original TradingAgents framework."
+  ]
+}

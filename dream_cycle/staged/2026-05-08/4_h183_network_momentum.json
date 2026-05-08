@@ -1,0 +1,14 @@
+{
+  "id": "h183-network-momentum-2026-05-08",
+  "date": "2026-05-08",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2501.07135",
+  "title": "H183 — Network Momentum (Lead-Lag Cross-Sectional Momentum, arXiv:2501.07135)",
+  "rationale": "Lim et al. (Jan 2025, arXiv:2501.07135) combine univariate time-series trend with cross-sectional momentum via lead-lag network connectivity between markets. Network momentum captures momentum *spillover* between related stocks/sectors — e.g., NVDA's move predicts AMD's move the next day. This directly addresses H157's failure (factor ETF rotation NOT CONFIRMED at monthly frequency) by working at the sector/stock level with daily lead-lag. The approach is orthogonal to H026 (monthly sector rotation) and complementary to H156 (stock momentum). If cross-asset lead-lag exists in our large-cap universe, this could provide a confirmed daily signal. Estimated 4-6h. Queue after H181/H182 since those are closer to confirmed family.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h183.py",
+  "content": "New hypothesis: H183 — Network Momentum. Implement lead-lag cross-sectional momentum on 30-100 large-cap US stocks. Signal: for each stock i, compute correlation of i's t-1 return with j's t return for all j≠i; identify 'leaders' (stocks whose past return predicts future returns of others). Portfolio: long stocks with high network-momentum score (many leading stocks showed positive returns yesterday). Universe: 30-50 large-cap stocks. Daily rebalance (or weekly to reduce turnover). IS: 2020-2023, OOS: 2024+. Confirm: OOS Sharpe > 0.5, stable leader network over time.",
+  "action": "write",
+  "apply_status": "pending"
+}
