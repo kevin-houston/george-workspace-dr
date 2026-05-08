@@ -515,6 +515,14 @@ def main():
 
         if (i + 1) % 10 == 0:
             print(f"  Scored {i+1}/{len(events_df)}… (scored={n_scored}, missing={n_missing})")
+            # Checkpoint: flush new scores to disk so progress survives interruption
+            if new_scores:
+                chk_df = pd.DataFrame(new_scores)
+                if SCORES_CACHE.exists():
+                    old_df = pd.read_parquet(SCORES_CACHE)
+                    chk_df = pd.concat([old_df, chk_df]).drop_duplicates(subset=["ticker","date"])
+                chk_df.to_parquet(SCORES_CACHE)
+                new_scores = []  # reset; already flushed
 
     print(f"  Final: scored={n_scored}, missing (no transcript)={n_missing}")
 
