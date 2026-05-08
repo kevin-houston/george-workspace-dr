@@ -1,0 +1,9 @@
+H168 — PEAD Speaker-Weighted FinBERT
+Run: 2026-05-08
+Universe: 30 stocks  |  Gap>=3%  |  Hold=20d
+Weights: Analyst=49%  CFO=30%  Executive=16%  Other=5%
+
+IS events: 126  |  OOS events: 98
+OOS transcript coverage: 26.5%
+
+VERDICT: NOT CONFIRMED

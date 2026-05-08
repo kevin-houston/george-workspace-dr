@@ -1,0 +1,15 @@
+H175 — PEAD-NLP: sec-parser Item 2.02 + EPS Surprise Dual Gate
+Run: 2026-05-08 00:15
+Universe: 30 stocks  |  GAP≥3%  |  Hold=20d
+IS: 2020–2023  |  OOS: 2024+
+Method: sec-parser Item 2.02 extraction + FinBERT score + EPS surprise gate
+
+OOS total: 85
+OOS with Item 2.02 score: 85
+OOS with EPS surprise: 0
+Baseline OOS: WR=57.6%, MeanRet=1.95%
+
+Confirmed combinations:
+  None
+
+VERDICT: NOT CONFIRMED

@@ -230,7 +230,7 @@ def get_eps_surprise(ticker, event_date):
             return float("nan")
 
     # Find row closest to event_date (within 5 days)
-    df["_delta"] = (df.index - event_date).days.abs()
+    df["_delta"] = (df.index - event_date).map(lambda x: abs(x.days))
     close_rows = df[df["_delta"] <= 5]
     if close_rows.empty:
         return float("nan")
