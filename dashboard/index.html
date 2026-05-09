@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trading Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2128;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --green: #3fb950;
+      --red: #f85149;
+      --yellow: #d29922;
+      --blue: #58a6ff;
+      --purple: #bc8cff;
+      --cyan: #39d353;
+      --orange: #f0883e;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 13px; line-height: 1.5; }
+
+    /* Header */
+    .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+    .header-title { font-size: 15px; font-weight: 600; letter-spacing: 0.3px; }
+    .header-meta { color: var(--muted); font-size: 12px; }
+    .header-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--green); margin-right: 6px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* Nav tabs */
+    .nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 20px; display: flex; gap: 0; }
+    .nav-tab { padding: 10px 14px; font-size: 12px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s; user-select: none; }
+    .nav-tab:hover { color: var(--text); }
+    .nav-tab.active { color: var(--text); border-bottom-color: var(--blue); }
+
+    /* Sections */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* Layout */
+    .main { padding: 16px 20px; max-width: 1400px; margin: 0 auto; }
+    .section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 10px; margin-top: 20px; }
+    .section-label:first-child { margin-top: 0; }
+
+    /* KPI Cards */
+    .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+    .kpi-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .kpi-value { font-size: 22px; font-weight: 700; line-height: 1.1; }
+    .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .kpi-value.green { color: var(--green); }
+    .kpi-value.red { color: var(--red); }
+    .kpi-value.blue { color: var(--blue); }
+    .kpi-value.yellow { color: var(--yellow); }
+    .kpi-value.purple { color: var(--purple); }
+    .kpi-value.orange { color: var(--orange); }
+
+    /* Grid layouts */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .three-col { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+    .three-even { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    /* Strategy cards */
+    .strat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+    .strat-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .strat-card-name { font-size: 13px; font-weight: 600; }
+    .strat-card-id { font-size: 11px; color: var(--muted); font-family: monospace; }
+    .strat-card-holdings { margin-top: 8px; }
+    .holding-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+    .holding-row:last-child { border-bottom: none; }
+    .holding-pct { color: var(--muted); font-family: monospace; font-size: 11px; }
+
+    /* Panel */
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .panel-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .panel-title { font-size: 13px; font-weight: 600; }
+    .panel-count { font-size: 11px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 1px 8px; color: var(--muted); }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); padding: 9px 14px; text-align: left; border-bottom: 1px solid var(--border); background: var(--surface2); white-space: nowrap; }
+    td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .ticker { font-weight: 600; font-family: 'SF Mono', 'Fira Code', monospace; }
+    .mono { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; }
+    .num { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; text-align: right; }
+    td.num { text-align: right; }
+    th.right { text-align: right; }
+
+    /* Badges */
+    .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 10px; letter-spacing: 0.3px; white-space: nowrap; }
+    .badge-open    { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+    .badge-confirmed { background: rgba(63,185,80,0.12); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
+    .badge-partial { background: rgba(88,166,255,0.12); color: var(--blue); border: 1px solid rgba(88,166,255,0.25); }
+    .badge-queued  { background: rgba(188,140,255,0.12); color: var(--purple); border: 1px solid rgba(188,140,255,0.25); }
+    .badge-not-confirmed { background: rgba(248,81,73,0.12); color: var(--red); border: 1px solid rgba(248,81,73,0.25); }
+    .badge-live    { background: rgba(57,211,83,0.15); color: var(--cyan); border: 1px solid rgba(57,211,83,0.3); }
+    .badge-flagged { background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.3); }
+    .badge-blocked { background: rgba(240,136,62,0.12); color: var(--orange); border: 1px solid rgba(240,136,62,0.25); }
+
+    /* Strategy type pills */
+    .strat-pill { font-size: 10px; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-family: monospace; }
+
+    /* Win rate bar */
+    .wr-bar { display: flex; align-items: center; gap: 8px; }
+    .wr-track { width: 50px; height: 4px; background: var(--border); border-radius: 2px; flex-shrink: 0; }
+    .wr-fill  { height: 100%; border-radius: 2px; background: var(--green); }
+    .wr-fill.orange { background: var(--orange); }
+    .wr-fill.red { background: var(--red); }
+    .wr-fill.blue { background: var(--blue); }
+
+    /* Positive/negative coloring */
+    .pos { color: var(--green); }
+    .neg { color: var(--red); }
+    .warn { color: var(--yellow); }
+    .dim { color: var(--muted); }
+
+    /* Pipeline feed */
+    .feed-item { padding: 10px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; }
+    .feed-item:last-child { border-bottom: none; }
+    .feed-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .feed-dot.medium { background: var(--yellow); }
+    .feed-dot.low { background: var(--green); }
+    .feed-dot.high { background: var(--red); }
+    .feed-text { font-size: 12px; line-height: 1.4; }
+    .feed-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* Info box */
+    .info-box { background: rgba(88,166,255,0.06); border: 1px solid rgba(88,166,255,0.2); border-radius: 6px; padding: 10px 14px; font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+    .info-box strong { color: var(--blue); }
+    .warn-box { background: rgba(210,153,34,0.06); border: 1px solid rgba(210,153,34,0.2); border-radius: 6px; padding: 10px 14px; font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+    .warn-box strong { color: var(--yellow); }
+
+    /* Thesis cell */
+    .thesis-text { font-size: 11px; color: var(--muted); max-width: 260px; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+      .two-col, .three-col, .three-even { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title"><span class="header-dot"></span>Trading Dashboard</div>
+  <div class="header-meta">George &nbsp;·&nbsp; 2026-05-08 &nbsp;·&nbsp; Paper trading</div>
+</div>
+
+<div class="nav">
+  <div class="nav-tab active" onclick="showTab('overview')">Overview</div>
+  <div class="nav-tab" onclick="showTab('positions')">Positions &amp; Trades</div>
+  <div class="nav-tab" onclick="showTab('research')">Research Pipeline</div>
+  <div class="nav-tab" onclick="showTab('dreamcycle')">Dream Cycle</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ OVERVIEW -->
+<div id="tab-overview" class="section active">
+<div class="main">
+
+  <div class="section-label">Summary</div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Open Positions</div>
+      <div class="kpi-value blue">7</div>
+      <div class="kpi-sub">4 options · 2 ETF rotation · 1 H016</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Closed Trades</div>
+      <div class="kpi-value dim">0</div>
+      <div class="kpi-sub">Paper started Apr 26</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">PEAD Signal Today</div>
+      <div class="kpi-value yellow">0</div>
+      <div class="kpi-sub">PFE −0.020 · AMD −0.011</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Confirmed Strategies</div>
+      <div class="kpi-value green">2</div>
+      <div class="kpi-sub">H163 + H174 live PEAD</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">H174 Best OOS WR</div>
+      <div class="kpi-value green">82.4%</div>
+      <div class="kpi-sub">n=17 · score≥0.18 surp≥0.05</div>
+    </div>
+  </div>
+
+  <div class="section-label">Live Paper Strategies</div>
+  <div class="three-even">
+
+    <div class="strat-card">
+      <div class="strat-card-header">
+        <div>
+          <div class="strat-card-name">H174 — PEAD NLP</div>
+          <div class="strat-card-id">pead_overnight · pead_open · pead_exits</div>
+        </div>
+        <span class="badge badge-live">LIVE</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">FinBERT 8-K · score ≥ 0.18 · surprise ≥ 0.02 · 20d hold</div>
+      <div class="holding-row"><span>Status</span><span style="color:var(--green)">Scoring nightly ✓</span></div>
+      <div class="holding-row"><span>Last run</span><span class="dim">May 7 11:14 PM CT</span></div>
+      <div class="holding-row"><span>Last signal</span><span class="warn">0 candidates (PFE, AMD below threshold)</span></div>
+      <div class="holding-row"><span>Open PEAD positions</span><span class="dim">0</span></div>
+      <div class="holding-row"><span>OOS win rate (backtest)</span><span class="pos">80.8% (n=26)</span></div>
+      <div class="holding-row"><span>OOS mean return</span><span class="pos">6.22% / trade</span></div>
+    </div>
+
+    <div class="strat-card">
+      <div class="strat-card-header">
+        <div>
+          <div class="strat-card-name">H112 — Monthly Rotation</div>
+          <div class="strat-card-id">h112_monthly.py · Alpaca paper</div>
+        </div>
+        <span class="badge badge-live">LIVE</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">H026 sector + H041a global equity + H045 bonds · vol-targeted · monthly rebalance</div>
+      <div class="holding-row"><span>Equity</span><span class="pos">$102,444.84</span></div>
+      <div class="holding-row"><span>Last rebalance</span><span class="dim">Apr 28, 2026</span></div>
+      <div class="holding-row"><span style="font-family:monospace">EWH</span><span class="dim">22% · H041a (Hong Kong)</span></div>
+      <div class="holding-row"><span style="font-family:monospace">IBB</span><span class="dim">27% · H026 (Biotech)</span></div>
+      <div class="holding-row"><span style="font-family:monospace">HYG</span><span class="dim">10.5% · H045 (High Yield)</span></div>
+      <div class="holding-row"><span style="font-family:monospace">BIL</span><span class="dim">10.5% · H045 (T-Bills)</span></div>
+    </div>
+
+    <div class="strat-card">
+      <div class="strat-card-header">
+        <div>
+          <div class="strat-card-name">H016 — Global Rotation</div>
+          <div class="strat-card-id">h016_signal.py · Alpaca paper</div>
+        </div>
+        <span class="badge badge-live">LIVE</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">SPY + TLT momentum basket · monthly signal · opened Apr 26</div>
+      <div class="holding-row"><span>Entry date</span><span class="dim">Apr 26, 2026</span></div>
+      <div class="holding-row"><span style="font-family:monospace">SPY</span><span class="dim">entry $713.94 · mom 30.2% · score 4.0</span></div>
+      <div class="holding-row"><span style="font-family:monospace">TLT</span><span class="dim">entry $86.71 · mom 1.3% · score 4.0</span></div>
+      <div class="holding-row"><span style="font-family:monospace">GLD</span><span class="dim">cash/watch · mom 42.6% · score 4.0</span></div>
+      <div class="holding-row"><span>Status</span><span class="pos">Open · no exit signal</span></div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ POSITIONS -->
+<div id="tab-positions" class="section">
+<div class="main">
+
+  <div class="info-box"><strong>Paper trading started Apr 26, 2026.</strong> All positions below are currently open — no closed trades yet. The options positions track thesis-driven directional plays; the rotation strategies are automated monthly rebalancers.</div>
+
+  <div class="section-label">Open Options Positions (4)</div>
+  <div class="panel">
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Ticker</th>
+          <th>Strategy</th>
+          <th>Entered</th>
+          <th>Expiry</th>
+          <th>Structure</th>
+          <th class="right">Net Cost</th>
+          <th class="right">Max Profit</th>
+          <th class="right">Max Loss</th>
+          <th>Key Dates</th>
+          <th>Status</th>
+          <th>Thesis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono dim">IC-2026-04-26</td>
+          <td><span class="ticker">SPY</span></td>
+          <td><span class="strat-pill">iron_condor</span></td>
+          <td class="mono">Apr 26</td>
+          <td class="mono">Jun 12 (35 DTE)</td>
+          <td class="mono" style="font-size:11px">
+            Long $645P · Short $670P<br>
+            Short $775C · Long $800C<br>
+            <span class="dim">10/25-wide wings</span>
+          </td>
+          <td class="num pos">+$533 cr</td>
+          <td class="num pos">$533</td>
+          <td class="num neg">−$1,967</td>
+          <td class="dim" style="font-size:11px">Entry VIX 20.0<br>SPY entry $713.94</td>
+          <td><span class="badge badge-open">OPEN</span></td>
+          <td><div class="thesis-text">Short premium in neutral-vol regime. Target: 50% credit ($2.66). Stop: 2× credit ($10.65).</div></td>
+        </tr>
+        <tr>
+          <td class="mono dim">WMT-CS-04-27</td>
+          <td><span class="ticker">WMT</span></td>
+          <td><span class="strat-pill">bull_call_spread</span></td>
+          <td class="mono">Apr 27</td>
+          <td class="mono">Jun 19 (42 DTE)</td>
+          <td class="mono" style="font-size:11px">
+            Long $130C · Short $140C<br>
+            <span class="dim">debit $3.27 · b/e $133.27</span>
+          </td>
+          <td class="num neg">−$327 db</td>
+          <td class="num pos">$673</td>
+          <td class="num neg">−$327</td>
+          <td class="dim" style="font-size:11px">Earnings: May 21<br>Expiry: Jun 19</td>
+          <td><span class="badge badge-open">OPEN</span></td>
+          <td><div class="thesis-text">Near-term support at $129. Earnings May 21 expected catalyst. R/R 2.1×. Entry spot $129.30.</div></td>
+        </tr>
+        <tr>
+          <td class="mono dim">DLTR-CS-04-27</td>
+          <td><span class="ticker">DLTR</span></td>
+          <td><span class="strat-pill">bull_call_spread</span></td>
+          <td class="mono">Apr 27</td>
+          <td class="mono">Jul 17 (70 DTE)</td>
+          <td class="mono" style="font-size:11px">
+            Long $100C · Short $115C<br>
+            <span class="dim">debit $4.99 · b/e $104.99</span>
+          </td>
+          <td class="num neg">−$499 db</td>
+          <td class="num pos">$1,001</td>
+          <td class="num neg">−$499</td>
+          <td class="dim" style="font-size:11px">Earnings est: Jun 2–3<br>Expiry: Jul 17</td>
+          <td><span class="badge badge-open">OPEN</span></td>
+          <td><div class="thesis-text">$100 support after deep selloff. High IV (41.1%) caps spread cost. Spread survives bad print; benefits from resolution. R/R 2.0×.</div></td>
+        </tr>
+        <tr>
+          <td class="mono dim">DLTR-RR-04-27</td>
+          <td><span class="ticker">DLTR</span></td>
+          <td><span class="strat-pill">risk_reversal</span></td>
+          <td class="mono">Apr 27</td>
+          <td class="mono">Jul 17 (call)</td>
+          <td class="mono" style="font-size:11px">
+            Short Jun $95P · Long Jul $110C<br>
+            <span class="dim">net cost $0.51 · Δ 0.685</span>
+          </td>
+          <td class="num warn">−$51 net</td>
+          <td class="num dim">Uncapped</td>
+          <td class="num neg warn" style="font-size:11px">−$9,500 if assigned</td>
+          <td class="dim" style="font-size:11px">Put expiry: Jun 19<br>Earnings est: Jun 2–3</td>
+          <td><span class="badge badge-open">OPEN</span></td>
+          <td><div class="thesis-text">Near-zero-cost directional. Short $95P funds $110C. Assignment risk if DLTR &lt; $95 at Jun expiry ($4.82 below entry). Captures recovery above $110.</div></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:20px">Open Rotation Positions</div>
+  <div class="two-col">
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">H112 Monthly Rotation — Apr 28 Rebalance</span>
+        <span class="panel-count">Equity $102,444</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Symbol</th><th>Strategy Leg</th><th>Signal</th><th class="right">Allocation</th><th class="right">Est Value</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ticker">EWH</span></td>
+            <td class="dim">H041a global equity</td>
+            <td class="dim">top-1 (rank ensemble)</td>
+            <td class="num">22%</td>
+            <td class="num">$22,538</td>
+            <td class="dim" style="font-size:11px">iShares MSCI Hong Kong</td>
+          </tr>
+          <tr>
+            <td><span class="ticker">IBB</span></td>
+            <td class="dim">H026 sector rotation</td>
+            <td class="dim">top-1 biotech</td>
+            <td class="num">27%</td>
+            <td class="num">$27,660</td>
+            <td class="dim" style="font-size:11px">iShares Biotech ETF</td>
+          </tr>
+          <tr>
+            <td><span class="ticker">HYG</span></td>
+            <td class="dim">H045 bond rotation</td>
+            <td class="dim">top-1 bonds</td>
+            <td class="num">10.5%</td>
+            <td class="num">$10,757</td>
+            <td class="dim" style="font-size:11px">iShares High Yield</td>
+          </tr>
+          <tr>
+            <td><span class="ticker">BIL</span></td>
+            <td class="dim">H045 bond rotation</td>
+            <td class="dim">top-2 (cash equiv)</td>
+            <td class="num">10.5%</td>
+            <td class="num">$10,757</td>
+            <td class="dim" style="font-size:11px">SPDR T-Bill ETF</td>
+          </tr>
+          <tr>
+            <td colspan="4" class="dim" style="font-size:11px;padding:8px 14px">Remaining ~30% in cash (uninvested rotation buffer)</td>
+            <td class="num dim">~$40,733</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">H016 Global Rotation — Apr 26</span>
+        <span class="panel-count">3 signals</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Symbol</th><th>Entry</th><th>12m Mom</th><th>Score</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ticker">SPY</span></td>
+            <td class="mono">$713.94</td>
+            <td class="pos mono">+30.2%</td>
+            <td class="mono">4.0</td>
+            <td><span class="badge badge-open">HELD</span></td>
+          </tr>
+          <tr>
+            <td><span class="ticker">TLT</span></td>
+            <td class="mono">$86.71</td>
+            <td class="pos mono">+1.3%</td>
+            <td class="mono">4.0</td>
+            <td><span class="badge badge-open">HELD</span></td>
+          </tr>
+          <tr>
+            <td><span class="ticker">GLD</span></td>
+            <td class="mono">$433.25</td>
+            <td class="pos mono">+42.6%</td>
+            <td class="mono">4.0</td>
+            <td><span class="badge" style="background:rgba(210,153,34,0.12);color:var(--yellow);border:1px solid rgba(210,153,34,0.3)">WATCH</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section-label">Closed Trades</div>
+  <div class="warn-box"><strong>No closed trades yet.</strong> Paper portfolio opened Apr 26–27, 2026. The SPY iron condor has 35 DTE remaining; the DLTR/WMT spreads expire Jun–Jul. Results will populate here as positions are exited.</div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ RESEARCH -->
+<div id="tab-research" class="section">
+<div class="main">
+
+  <div class="section-label">Confirmed &amp; Partial Strategies — Backtesting Results</div>
+  <div class="panel">
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Strategy</th>
+          <th>Status</th>
+          <th class="right">OOS Sharpe</th>
+          <th class="right">OOS CAGR</th>
+          <th class="right">OOS WR</th>
+          <th class="right">MaxDD</th>
+          <th class="right">OOS Cumul</th>
+          <th>Period</th>
+          <th>Notes / Caveats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">H149</td>
+          <td>Sector Rotation (H026, 100%)</td>
+          <td><span class="badge badge-confirmed">CONFIRMED</span></td>
+          <td class="num pos">3.007</td>
+          <td class="num pos">—</td>
+          <td class="num dim">—</td>
+          <td class="num pos">−9.6%</td>
+          <td class="num pos">382×</td>
+          <td class="dim mono">2018+</td>
+          <td class="dim" style="font-size:11px">Production portfolio. Full vol-targeting + TSMOM filter. Monthly rebalance.</td>
+        </tr>
+        <tr>
+          <td class="mono">H174</td>
+          <td>PEAD — FinBERT Dual Filter</td>
+          <td><span class="badge badge-confirmed">CONFIRMED</span></td>
+          <td class="num dim">—</td>
+          <td class="num dim">—</td>
+          <td class="num pos">80.8%</td>
+          <td class="num dim">—</td>
+          <td class="num dim">—</td>
+          <td class="dim mono">2024+</td>
+          <td class="dim" style="font-size:11px">score ≥ 0.18 + surprise ≥ 0.00 · n=26 · MeanRet 6.22%. LIVE.</td>
+        </tr>
+        <tr>
+          <td class="mono">H163</td>
+          <td>PEAD — FinBERT 8-K Sentiment</td>
+          <td><span class="badge badge-confirmed">CONFIRMED</span></td>
+          <td class="num dim">—</td>
+          <td class="num dim">—</td>
+          <td class="num pos">80.8%</td>
+          <td class="num dim">—</td>
+          <td class="num dim">—</td>
+          <td class="dim mono">2024+</td>
+          <td class="dim" style="font-size:11px">EDGAR 8-K full text FinBERT. ICAIF 2025 independently validated. LIVE.</td>
+        </tr>
+        <tr>
+          <td class="mono">H162</td>
+          <td>Covered Calls — Ex-Dividend</td>
+          <td><span class="badge badge-partial">PARTIAL</span></td>
+          <td class="num pos">2.015</td>
+          <td class="num pos">11.24%</td>
+          <td class="num pos">68.3%</td>
+          <td class="num warn">−16.17%</td>
+          <td class="num pos">2.42×</td>
+          <td class="dim mono">2018–2026</td>
+          <td class="dim" style="font-size:11px">BS pricing proxy. Call leg loses money; true edge is stock drift pre-ex-date. Needs real options data.</td>
+        </tr>
+        <tr>
+          <td class="mono">H161</td>
+          <td>Dividend Raise Signal</td>
+          <td><span class="badge badge-partial">PARTIAL</span></td>
+          <td class="num pos">4.298</td>
+          <td class="num pos">81.14%</td>
+          <td class="num pos">59.1%</td>
+          <td class="num warn">−18.06%</td>
+          <td class="num pos">2.28×</td>
+          <td class="dim mono">2018–2026</td>
+          <td class="dim" style="font-size:11px">OOS event effect real (t=4.10). Sharpe inflated (exit-day P&L). Needs daily MTM + regime filter.</td>
+        </tr>
+        <tr>
+          <td class="mono">H165a</td>
+          <td>VIX Regime Gate (benchmark)</td>
+          <td><span class="badge badge-partial">PARTIAL</span></td>
+          <td class="num pos">0.394</td>
+          <td class="num dim">—</td>
+          <td class="num dim">—</td>
+          <td class="num warn">−32.67%</td>
+          <td class="num pos">1.93×</td>
+          <td class="dim mono">2018+</td>
+          <td class="dim" style="font-size:11px">VIX &lt; 25 adds +1.01× OOS vs unlevered baseline. Unlevered only; full H165 test (with vol-targeting) still QUEUED.</td>
+        </tr>
+        <tr>
+          <td class="mono">H156</td>
+          <td>Cross-Sectional Stock Momentum</td>
+          <td><span class="badge badge-partial">PARTIAL</span></td>
+          <td class="num pos">0.866</td>
+          <td class="num pos">18.74%</td>
+          <td class="num dim">—</td>
+          <td class="num neg">−29.69%</td>
+          <td class="num pos">4.18×</td>
+          <td class="dim mono">2018–2026</td>
+          <td class="dim" style="font-size:11px">Survivorship-biased universe. High SPY corr (0.77). Does not beat QQQ. MaxDD unacceptable.</td>
+        </tr>
+        <tr>
+          <td class="mono">H170</td>
+          <td>0DTE SPX Iron Condor</td>
+          <td><span class="badge" style="background:rgba(88,166,255,0.12);color:var(--blue);border:1px solid rgba(88,166,255,0.25)">SIM ONLY</span></td>
+          <td class="num dim">—</td>
+          <td class="num dim">—</td>
+          <td class="num pos">94.3%</td>
+          <td class="num pos">−$16.52</td>
+          <td class="num dim">—</td>
+          <td class="dim mono">Feb–May 2026</td>
+          <td class="dim" style="font-size:11px">BS simulation only (Variant B near-close). Credits tiny ($0.18/unit). Needs ThetaData for real backtest.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:20px">Not Confirmed — Key Failures</div>
+  <div class="panel">
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Strategy</th>
+          <th>OOS Result</th>
+          <th>Root Cause</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">H179</td>
+          <td>Global Equity Rotation (7 intl ETFs)</td>
+          <td class="neg">Sharpe 0.187 · cumul 1.15× vs SPY 2.87×</td>
+          <td class="dim" style="font-size:11px">US equity dominance post-2009. All intl ETFs corr(SPY) 0.59–0.70 — diversification vanishes in drawdown.</td>
+        </tr>
+        <tr>
+          <td class="mono">H178</td>
+          <td>Commodity Momentum Rotation</td>
+          <td class="neg">Sharpe 0.643 (top-3 only) · MaxDD −34.7%</td>
+          <td class="dim" style="font-size:11px">Commodities correlated in drawdowns. Strong mean-reversion at 12m. H026 already captures commodity exposure better.</td>
+        </tr>
+        <tr>
+          <td class="mono">H175</td>
+          <td>PEAD — Item 2.02 + EPS Surprise</td>
+          <td class="neg">WR 68.4% vs H163's 80.8%</td>
+          <td class="dim" style="font-size:11px">Full 8-K more discriminative than Item 2.02 only. yfinance EPS surprise has 0% OOS coverage.</td>
+        </tr>
+        <tr>
+          <td class="mono">H168</td>
+          <td>Speaker-Weighted FinBERT (Transcripts)</td>
+          <td class="neg">OOS WR 34.6% (26/98 events = 26.5% coverage)</td>
+          <td class="dim" style="font-size:11px">HuggingFace transcript dataset has availability bias in 2024+. Non-representative OOS sample.</td>
+        </tr>
+        <tr>
+          <td class="mono">H164</td>
+          <td>PEAD — ElasticNet SUE Filter</td>
+          <td class="neg">IS R²=0.06 · no threshold improves baseline</td>
+          <td class="dim" style="font-size:11px">Limited IS sample (4yr yfinance). FMP v3 deprecated. 8-quarter SUE has no predictive power here.</td>
+        </tr>
+        <tr>
+          <td class="mono">H157</td>
+          <td>Factor/Style ETF Momentum</td>
+          <td class="neg">OOS Sharpe 0.79 · cumul 2.59× vs SPY 3.03×</td>
+          <td class="dim" style="font-size:11px">Style ETFs highly correlated with SPY (0.6–0.74). No cross-sectional dispersion vs sector rotation.</td>
+        </tr>
+        <tr>
+          <td class="mono">H160</td>
+          <td>Factor-Residualized Equity Pairs</td>
+          <td class="neg">0/5 pairs confirmed · AMZN/TSLA wipeout</td>
+          <td class="dim" style="font-size:11px">OOS cointegration breaks for all pairs. Factor residualization improves stats but not trading performance.</td>
+        </tr>
+        <tr>
+          <td class="mono">H152–155</td>
+          <td>ETF Pairs (GDX/SIL, XLE/OIH, TLT/IEF, Kalman)</td>
+          <td class="neg">All fail OOS · best Sharpe 0.514</td>
+          <td class="dim" style="font-size:11px">Cointegration breaks OOS in all pairs. ETF pairs family exhausted.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:20px">Queue — Next Hypotheses</div>
+  <div class="panel">
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Name</th><th>Status</th><th>Source</th><th>Est Time</th><th>Prereq</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">H181</td>
+          <td>Industry-Adjusted Reversal</td>
+          <td><span class="badge badge-queued">NEXT UP</span></td>
+          <td class="dim mono">SSRN:6630998</td>
+          <td class="dim">3–4h</td>
+          <td class="dim">—</td>
+          <td class="dim" style="font-size:11px">REV^IN = R_i − R̄_industry · 0.53%/mo globally · sector data ready</td>
+        </tr>
+        <tr>
+          <td class="mono">H182</td>
+          <td>Drift-Regime Conditioned Reversal</td>
+          <td><span class="badge badge-queued">QUEUED</span></td>
+          <td class="dim mono">arXiv:2511.12490</td>
+          <td class="dim">4–6h</td>
+          <td class="dim">H181</td>
+          <td class="dim" style="font-size:11px">13.2 Sharpe paper claim treated skeptically. Confirm bar: OOS Sharpe > 1.0.</td>
+        </tr>
+        <tr>
+          <td class="mono">H176</td>
+          <td>ModernFinBERT Upgrade</td>
+          <td><span class="badge badge-queued">QUEUED</span></td>
+          <td class="dim mono">HuggingFace</td>
+          <td class="dim">~2h</td>
+          <td class="dim">—</td>
+          <td class="dim" style="font-size:11px">Drop-in upgrade to H163/H174 pipeline. Validate on H163 test set before live deploy.</td>
+        </tr>
+        <tr>
+          <td class="mono">H183</td>
+          <td>Network Momentum (Lead-Lag)</td>
+          <td><span class="badge badge-queued">QUEUED</span></td>
+          <td class="dim mono">arXiv:2501.07135</td>
+          <td class="dim">4–6h</td>
+          <td class="dim">H181/H182</td>
+          <td class="dim" style="font-size:11px">4 variants. Large-cap lead-lag likely arbitraged at daily freq — skeptical.</td>
+        </tr>
+        <tr>
+          <td class="mono">H165</td>
+          <td>TradingAgents Macro-Regime Gate</td>
+          <td><span class="badge badge-queued">QUEUED</span></td>
+          <td class="dim mono">internal</td>
+          <td class="dim">~6h</td>
+          <td class="dim">—</td>
+          <td class="dim" style="font-size:11px">H165a VIX benchmark confirms directional value. Full test: integrate with vol-targeted production portfolio.</td>
+        </tr>
+        <tr>
+          <td class="mono">H167</td>
+          <td>ML-Momentum (LightGBM alpha101)</td>
+          <td><span class="badge badge-flagged">FLAGGED</span></td>
+          <td class="dim mono">arXiv:2507.07107</td>
+          <td class="dim">~40h</td>
+          <td class="dim">Compustat</td>
+          <td class="dim" style="font-size:11px">Needs point-in-time Compustat/CRSP data. Kevin review before queuing.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ DREAM CYCLE -->
+<div id="tab-dreamcycle" class="section">
+<div class="main">
+
+  <div class="section-label">2026-05-08 — Applied Changes</div>
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Build Phase Results</span>
+      <span class="panel-count">4 applied · 0 skipped · 0 flagged</span>
+    </div>
+    <div class="feed-item">
+      <div class="feed-dot medium"></div>
+      <div>
+        <div class="feed-text"><strong>H182 stub created</strong> — Drift-Regime Conditioned Reversal &nbsp;<span class="mono dim">backtesting/daily/run_h182.py</span></div>
+        <div class="feed-meta">arXiv:2511.12490 (Singha, Nov 2025) · medium risk · Prereq: H181 · confirm criteria: OOS Sharpe > 1.0 (skeptical of 13.2 paper claim)</div>
+      </div>
+    </div>
+    <div class="feed-item">
+      <div class="feed-dot low"></div>
+      <div>
+        <div class="feed-text"><strong>Wiki: ICAIF 2025 validates H163/H174</strong> &nbsp;<span class="mono dim">wiki/trading/algorithms/event-driven.md</span></div>
+        <div class="feed-meta">arXiv:2509.24254 · 138,000+ earnings press releases (2005–2023) · FinBERT outperforms LDA · independently corroborates confirmed results</div>
+      </div>
+    </div>
+    <div class="feed-item">
+      <div class="feed-dot low"></div>
+      <div>
+        <div class="feed-text"><strong>Wiki: ModernFinBERT (July 2025)</strong> &nbsp;<span class="mono dim">wiki/trading/tools/nlp-alternative-data.md</span></div>
+        <div class="feed-meta">ModernBERT-based successor to ProsusAI/finbert · H176 candidate · validate on H163 test set before deploying to live pipeline</div>
+      </div>
+    </div>
+    <div class="feed-item">
+      <div class="feed-dot medium"></div>
+      <div>
+        <div class="feed-text"><strong>H183 stub created</strong> — Network Momentum (Lead-Lag) &nbsp;<span class="mono dim">backtesting/daily/run_h183.py</span></div>
+        <div class="feed-meta">arXiv:2501.07135 · 4 variants (full/within-sector/cross-sector/top-N leaders) · addresses gap from H157 NOT CONFIRMED · skepticism note on large-cap daily freq</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:20px">Research Scan — 2026-05-08</div>
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Papers Scanned</span>
+      <span class="panel-count">28 scanned · 6 high-relevance · 4 staged</span>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Paper</th><th>Relevance</th><th>Action</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="dim mono" style="font-size:11px">arXiv:2511.12490</td>
+          <td><div class="wr-bar"><div class="wr-track"><div class="wr-fill" style="width:90%"></div></div><span class="dim">High</span></div></td>
+          <td><span class="badge badge-queued">H182 stub</span></td>
+          <td class="dim" style="font-size:11px">Drift-regime conditioned reversal. 13.2 Sharpe (skeptical).</td>
+        </tr>
+        <tr>
+          <td class="dim mono" style="font-size:11px">arXiv:2509.24254</td>
+          <td><div class="wr-bar"><div class="wr-track"><div class="wr-fill" style="width:95%"></div></div><span class="dim">High</span></div></td>
+          <td><span class="badge badge-confirmed">Wiki update</span></td>
+          <td class="dim" style="font-size:11px">ICAIF 2025 validates H163/H174 FinBERT approach.</td>
+        </tr>
+        <tr>
+          <td class="dim mono" style="font-size:11px">arXiv:2501.07135</td>
+          <td><div class="wr-bar"><div class="wr-track"><div class="wr-fill" style="width:80%"></div></div><span class="dim">High</span></div></td>
+          <td><span class="badge badge-queued">H183 stub</span></td>
+          <td class="dim" style="font-size:11px">Network momentum lead-lag. Addresses H157 gap.</td>
+        </tr>
+        <tr>
+          <td class="dim" style="font-size:11px">HuggingFace ModernFinBERT</td>
+          <td><div class="wr-bar"><div class="wr-track"><div class="wr-fill blue" style="width:70%"></div></div><span class="dim">Medium</span></div></td>
+          <td><span class="badge badge-partial">Wiki update</span></td>
+          <td class="dim" style="font-size:11px">H176 candidate — drop-in upgrade to H163/H174.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+</script>
+
+</body>
+</html>

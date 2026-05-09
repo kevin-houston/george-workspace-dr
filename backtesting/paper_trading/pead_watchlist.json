@@ -1,14 +1,6 @@
 {
-  "date": "2026-05-07",
+  "date": "2026-05-08",
   "candidates": [],
-  "scores": {
-    "PFE": {
-      "score": -0.0202,
-      "surprise": -0.2889
-    },
-    "AMD": {
-      "score": -0.0113,
-      "surprise": -0.129
-    }
-  }
+  "scores": {},
+  "reason": "no earnings"
 }
