@@ -2,6 +2,12 @@
   "publishes": {
     "snowy-cosmos-33yr": {
       "siteUrl": "https://snowy-cosmos-33yr.here.now/"
+    },
+    "clear-poplar-38ma": {
+      "siteUrl": "https://clear-poplar-38ma.here.now/",
+      "claimToken": "9a8a2c0ca0e4e00d89e09d5f5fb0934779957b2bfe76b7a82ff91691d76aec76",
+      "claimUrl": "https://here.now/claim?slug=clear-poplar-38ma&token=9a8a2c0ca0e4e00d89e09d5f5fb0934779957b2bfe76b7a82ff91691d76aec76",
+      "expiresAt": "2026-05-10T07:34:45.271Z"
     }
   }
 }
