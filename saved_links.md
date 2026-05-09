@@ -6,6 +6,16 @@ Kevin's saved articles, posts, and links for later reference.
 
 ## 2026-05-09
 
+### @RoundtableSpace tweet — Modular Claude Code AI dev team structure
+- **Tweet:** https://x.com/roundtablespace/status/2052935335156342958
+- **Author:** 0xMarioNawfal (@RoundtableSpace) — 59.8K views, 81 likes, 84 bookmarks
+- **Content:** "DEVELOPERS ARE STRUCTURING CLAUDE CODE LIKE A FULL AI DEV TEAM USING MODULAR AGENT SYSTEMS. The setup separates memory, workflows, guardrails, delegated agents, and plugins into organized layers that automate complex software tasks."
+- **Quoting:** @dr_cintas (Alvaro Cintas, May 7): "How to set up Claude Code so it runs like a full dev team: 5 folders. 1. CLAUDE.md → Memory (repo constitution, naming rules, global + local). 2. skills/ → Knowledge."
+- **Relevance:** Directly describes what George is — a modular Claude Code agent with CLAUDE.md, `.local-fragments/`, wiki, and skill layers. The Perplexity gotchas flywheel work today is an extension of this exact pattern.
+- **Saved by Kevin:** 2026-05-09
+
+---
+
 ### zero-native — Zig framework for native desktop/mobile apps with web UI
 - **Tweet:** https://x.com/ctatedev/status/2052907884728467699
 - **Repo:** https://github.com/vercel-labs/zero-native
