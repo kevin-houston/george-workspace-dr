@@ -1,0 +1,20 @@
+H181 — Industry-Adjusted Short-Term Reversal
+Run: 2026-05-08 23:04
+Universe: 30/30 tickers  |  Sectors: 8 GICS
+Signal: REV^IN_i = R_i(t) - R_bar_industry(t)  |  Monthly rebalance
+Portfolio: Long bottom-quintile (n=6 most negative adj-reversal)
+IS: 2013–2020  |  OOS: 2021–2026
+Source: SSRN:6630998 (Stosik & Zaremba)
+
+IS  months: 96  |  Cumul=8.2944×  CAGR=30.27%  Sharpe=1.381  MaxDD=-24.32%  NegYrs=0
+OOS months: 64  |  Cumul=3.2327×  CAGR=24.61%  Sharpe=1.138  MaxDD=-18.42%  NegYrs=1
+
+SPY IS:  Cumul=3.0697×  Sharpe=1.105
+SPY OOS: Cumul=2.0444×  Sharpe=0.954
+
+Corr(Portfolio, SPY) OOS: 0.776
+
+Confirm criteria: OOS Sharpe > 0.5 -> 1.138 (PASS)
+Confirm criteria: OOS Cumul > 1.3x -> 3.233x (PASS)
+
+VERDICT: CONFIRMED
