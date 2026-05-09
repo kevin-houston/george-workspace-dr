@@ -6,6 +6,16 @@ Kevin's saved articles, posts, and links for later reference.
 
 ## 2026-05-09
 
+### zero-native — Zig framework for native desktop/mobile apps with web UI
+- **Tweet:** https://x.com/ctatedev/status/2052907884728467699
+- **Repo:** https://github.com/vercel-labs/zero-native
+- **Author:** Chris Tate (@ctatedev) — Developer at Vercel
+- **What it does:** Desktop/mobile app shell that wraps a web frontend (Next.js, React, Svelte, Vue) in a native binary. Built in Zig — tiny binaries, fast startup. Choose between system WebView (tiny) or bundled Chromium/CEF (consistent rendering). JS bridge via `window.zero.invoke()`. Security-by-default: native commands require explicit opt-in permissions. Targets macOS, Linux, Windows, iOS, Android.
+- **Relevance:** Potential path to packaging the trading dashboard as a native desktop app without Electron bloat.
+- **Saved by Kevin:** 2026-05-09
+
+---
+
 ### agent-browser — Vercel Labs browser automation CLI for AI agents
 - **Tweet:** https://x.com/ctatedev/status/2052907884728467699
 - **Repo:** https://github.com/vercel-labs/agent-browser
