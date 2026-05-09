@@ -1,0 +1,160 @@
+# Task Registry
+
+Living reference for all recurring tasks. Each section: trigger → success criteria → gotchas.
+
+**Maintenance protocol:** When a task fails and you fix it, append the failure + fix to the relevant gotchas block before the session ends. This file compounds — every failure makes future runs more reliable. Commit changes to this file with the fix commit.
+
+---
+
+## Lithuanian Daily Phrase
+
+**Trigger:** Scheduled daily (morning).
+**Run:** `python3 /workspace/agent/lithuanian_daily.py`
+**Success:** Audio file non-empty → `send_file(path, text=message_field, to="telegram-mg-17769")`.
+
+**Gotchas:**
+- `edge-tts` is wiped between container restarts. Always prepend install: `python3.11 -m pip install edge-tts --break-system-packages -q 2>/dev/null || true`
+- Script outputs JSON — use the `message` field as the `text=` arg to `send_file`, not a hand-written caption.
+
+---
+
+## Daily AI Podcast — Script Generation
+
+**Trigger:** 6 AM CT daily.
+**Output:** `/workspace/agent/podcasts/ai_podcast_YYYY-MM-DD.md`
+**Success:** File exists, word count 1,800–2,400, 4 segments, hosts Alex/Jordan.
+
+**Gotchas:**
+- Do NOT message Kevin on completion. The 6:10 AM audio task picks up the script automatically.
+- Verify all claims with 2 independent sources. Single-source claims get "reports suggest / according to X."
+- Filename date must match today (`date +%Y-%m-%d`). A mismatch causes the audio task to fail silently.
+- Newsworthiness check: articles more than 3 days old do not count as "breaking." Drop or clearly date them.
+
+---
+
+## Daily AI Podcast — Audio Generation & Email
+
+**Trigger:** 6:10 AM CT daily.
+**Run:** `PATH="/home/node/.local/bin:/usr/bin:$PATH" /usr/bin/python3.11 /workspace/agent/generate_and_email_podcast.py`
+**Success:** Output contains `✅ Email sent to kevinclaw26@gmail.com`. Do NOT message Kevin on success.
+
+**Gotchas:**
+- `ffmpeg` is NOT installed and never will be. Python MP3 concat fallback is built into the script. The `⚠️ ffmpeg not available` warning is expected — not a failure.
+- Must install `edge-tts` first: `python3.11 -m pip install edge-tts --break-system-packages -q`.
+- Use `/usr/bin/python3.11` explicitly — bare `python3` may resolve to a different version without `edge-tts`.
+- Email auth flows through OneCLI proxy. If 401/403, run `/onecli-gateway` — do not ask Kevin for credentials.
+- Script finds today's markdown by date pattern. If the 6 AM script task ran late and the file was just written, give it a moment then retry.
+
+---
+
+## PEAD Overnight Pass
+
+**Trigger:** ~11 PM CT nightly.
+**Run:** `python3 /workspace/agent/backtesting/paper_trading/pead_overnight.py`
+**Output:** `backtesting/paper_trading/pead_watchlist.json`
+**Success:** Log ends with "Overnight pass complete." Watchlist written (empty is valid — no earnings tonight).
+
+**Gotchas:**
+- EDGAR requires `User-Agent` header with identity (real email). Fixed in commit `0a1d0f5`. If "User-Agent identity is not set" appears, the env var `EDGAR_USER_AGENT` is missing — check `.env` or set it inline.
+- FinBERT model (`ProsusAI/finbert`) is ~400MB. First run on a fresh container downloads it — allow up to 5 min. Subsequent runs use cache.
+- "No earnings tonight. Watchlist cleared." is normal — not an error. The strategy requires earnings + a qualifying 8-K.
+- Entry thresholds are `score ≥ 0.18 AND surprise ≥ 0.02` (from H174 confirmation). Do NOT lower these to generate more candidates.
+
+---
+
+## PEAD Open Pass
+
+**Trigger:** 9:32 AM CT on weekdays (market open + 2min).
+**Run:** `python3 /workspace/agent/backtesting/paper_trading/pead_open.py`
+**Success:** Orders submitted for watchlist candidates, or log confirms watchlist was empty.
+
+**Gotchas:**
+- Check `pead_watchlist.json` first. If empty (`[]`), the open pass is a no-op — that's correct behavior.
+- Alpaca credentials flow through OneCLI proxy. Auth failures → `/onecli-gateway`.
+- Paper account base URL is `https://paper-api.alpaca.markets` — do NOT use live endpoint.
+
+---
+
+## PEAD Exits Pass
+
+**Trigger:** 2:46 PM CT on weekdays.
+**Run:** `python3 /workspace/agent/backtesting/paper_trading/pead_exits.py`
+**Success:** Log confirms positions checked; any 20-day-old positions closed.
+
+**Gotchas:**
+- "No positions to close" is valid. The strategy is intentionally patient — 20 trading days is ~4 calendar weeks.
+- Hold period is 20 *trading* days from entry, not calendar days. Script calculates correctly — don't override.
+
+---
+
+## Here.now Dashboard Publishing
+
+**Trigger:** Manual, or daily refresh (anonymous sites expire 24h).
+**Skill:** `heredotnow/skill@here-now`
+
+**Gotchas:**
+- `jq` is NOT installed system-wide. `/tmp` is wiped on restart. Before every publish:
+  ```bash
+  curl -fsSL https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64 -o /tmp/jq && chmod +x /tmp/jq
+  ```
+- `file` command is NOT installed. Create stub at `/tmp/file` (one-liner):
+  ```bash
+  printf '#!/usr/bin/env node\nconst e=require("path").extname(process.argv[process.argv.length-1]).toLowerCase();const m={".html":"text/html",".css":"text/css",".js":"application/javascript",".json":"application/json",".png":"image/png",".jpg":"image/jpeg",".mp3":"audio/mpeg"};console.log(m[e]||"application/octet-stream");' > /tmp/file && chmod +x /tmp/file
+  ```
+- Run all publish commands with `PATH="/tmp:$PATH"` prefix.
+- Pass directory path WITHOUT trailing slash: `publish.sh /workspace/agent/dashboard` ✓ — `dashboard/` ✗
+- Skill install: `npx skills add heredotnow/skill@here-now -y -g` (not bare `here-now` — that name doesn't resolve).
+- To update an anonymous site you need the original `claimToken`. Once cleared from `.herenow/state.json`, that slug cannot be updated — publish as a new site.
+- Without `HERENOW_API_KEY`, every publish gets a new slug and expires in 24h. Kevin claims by visiting the `claimUrl` in a browser, or add key to OneCLI vault for permanent auto-update.
+
+---
+
+## Nightly Git Backup
+
+**Trigger:** Scheduled ~7 AM CT daily.
+**Success:** `git push origin main` confirms remote updated.
+
+**Gotchas:**
+- `GITHUB_TOKEN` is injected by OneCLI proxy — no explicit credentials needed.
+- If push fails "remote rejected," another session may have pushed — `git pull --rebase` first.
+- Avoid `git add -A` if there are large temp files in workspace root. Prefer explicit paths or a curated `.gitignore`.
+
+---
+
+## Dream Cycle Scan (Nightly Research)
+
+**Trigger:** Spawned ~11 PM CT as background `Agent` tool call.
+**Output:** `dream_cycle/staged/YYYY-MM-DD/*.json` + scan summary JSON.
+**Success:** Both a "wiki expansion" commit and a "dream cycle scan" commit appear in `git log`.
+
+**Gotchas:**
+- Never spawn a duplicate. Check the system-reminder for a running agent ID before launching. Duplicate scans waste tokens and create conflicting staged files.
+- Staged files should have `apply_status: "pending"`. If the build phase already ran before the scan completed, the proposals will need manual application.
+- The wiki expansion target is the *thinnest* section (fewest pages, least cross-linking) — check `wiki/index.md` page counts, not just topic coverage.
+
+---
+
+## Dream Cycle Build Phase
+
+**Trigger:** 4 AM CT daily (scheduled task from nanoclaw).
+**Input:** `dream_cycle/staged/YYYY-MM-DD/*.json`
+**Output:** Stub files, hypothesis-log entries, changelog at `dream_cycle/changelogs/YYYY-MM-DD.md`.
+**Success:** All pending proposals marked "applied" or "flagged." Changelog committed. Kevin messaged ONLY if high-risk items flagged.
+
+**Gotchas:**
+- If proposals were already applied before this task runs (e.g., applied inline when scan completed), still write the changelog — it may not exist yet.
+- medium-risk = new script: copy target to `.bak` first. For NEW files (no existing target), skip the backup.
+- Changelog commit: `"dream cycle: changelog YYYY-MM-DD"`. Proposal commit: `"dream cycle: apply YYYY-MM-DD staged proposals (H###, H###)"`.
+- Do NOT message Kevin for routine low/medium runs. Only flag high-risk items.
+
+---
+
+## Wiki Index Maintenance
+
+**Trigger:** On every wiki edit.
+**File:** `wiki/index.md`
+
+**Gotchas:**
+- The index uses NO leading spaces before `- [` list items in most sections. Always `grep -n` the surrounding lines before `Edit` to confirm exact indentation — the Edit tool will fail on whitespace mismatch.
+- Bump the `updated:` frontmatter date on every edit.
+- New pages need: `added:` date, `category:`, `url:` (if applicable) in frontmatter.
