@@ -1,0 +1,14 @@
+{
+  "id": "polyswarm-kalshi-nowcasting-2026-05-09",
+  "date": "2026-05-09",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2604.03888",
+  "title": "Multi-LLM consensus for Kalshi nowcasting: PolySwarm-inspired aggregation",
+  "rationale": "arXiv:2604.03888 (Barot & Borkhatariya, April 2026) demonstrates that a swarm of 50 diverse LLM personas evaluated with Bayesian aggregation consistently outperforms single-model probability estimates on Polymarket binary markets — measured by Brier score vs. human superforecasters. Our current Kalshi nowcasting strategy (algorithmic-strategies.md) uses a single LLM call for probability estimation. The PolySwarm insight: diverse LLM personas + confidence-weighted Bayesian combination reduces hallucination and miscalibration. A lightweight version (5-10 persona swarm instead of 50, using GPT-4o-mini at ~$0.002/call × 10 = $0.02/event) could materially improve probability calibration on CPI/Fed/unemployment nowcasts. The quarter-Kelly sizing from the same paper also provides a principled position sizing formula for Kalshi bets.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/prediction_markets/h185_polyswarm_kalshi.py",
+  "content": "# H185: PolySwarm-style multi-LLM consensus for Kalshi nowcasting\n# Source: arXiv:2604.03888 — Barot & Borkhatariya, April 2026\n#\n# Hypothesis: A 10-persona LLM swarm with Bayesian probability aggregation\n# outperforms single-model Kalshi nowcasting (existing strategy) on\n# calibration metrics (Brier score, log-loss).\n#\n# Design:\n# 1. Define 10 LLM personas with different analytical lenses:\n#    [hawk_economist, dove_economist, technical_analyst, historical_patterns,\n#     market_consensus, contrarian, bayesian_updater, macro_trader,\n#     academic_forecaster, data_scientist]\n# 2. For each Kalshi event (CPI, Fed, unemployment), call each persona\n#    → probability estimate P_i in [0,1]\n# 3. Bayesian aggregation:\n#    - Convert each P_i to log-odds: L_i = log(P_i / (1 - P_i))\n#    - Weight by self-reported confidence c_i (0-1 scale)\n#    - Combined: L_combined = sum(c_i * L_i) / sum(c_i)\n#    - Back to probability: P_combined = sigmoid(L_combined)\n# 4. Position sizing: quarter-Kelly = 0.25 * (P_combined - P_market) / (1 - P_market)\n#    Only trade if |P_combined - P_market| > 0.04 (4pp edge threshold)\n# 5. Calibration evaluation: track Brier scores over 3 months of paper trading\n#\n# Cost estimate: 10 GPT-4o-mini calls × $0.002 = $0.02/event\n# Frequency: ~6 major events/month → ~$0.12/month in API costs\n#\n# Benchmark: Current single-model nowcasting calibration\n# Success criterion: >10% Brier score improvement in OOS evaluation\n#\n# TODO: implement and paper trade\nprint('H185 placeholder — implementation pending')\n",
+  "action": "write",
+  "apply_status": "pending"
+}

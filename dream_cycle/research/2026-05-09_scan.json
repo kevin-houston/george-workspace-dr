@@ -1,0 +1,78 @@
+{
+  "date": "2026-05-09",
+  "papers_scanned": 22,
+  "high_relevance": 4,
+  "staged": 2,
+  "searches": [
+    "arXiv 2025 2026 pairs trading cointegration LLM pair selection",
+    "arXiv 2025 2026 PEAD post-earnings drift NLP FinBERT transcript",
+    "arXiv 2025 2026 cross-sectional momentum factor momentum industry",
+    "arXiv 2025 2026 multi-agent LLM trading portfolio",
+    "GitHub 2025 2026 quantitative finance backtesting new framework"
+  ],
+  "findings": [
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "authors": "Yuntao Wu, Ege Mert Akin, Charles Martineau, Vincent Grégoire, Andreas Veneris",
+      "venue": "ACM ICAIF 2025",
+      "relevance": 9,
+      "staged": true,
+      "reason": "FinBERT on 138k earnings press releases (2005-2023): press release soft info as predictive as earnings surprise for announcement returns. Direct extension of H163/H174 PEAD pipeline — adds press release body text as second NLP channel."
+    },
+    {
+      "title": "PolySwarm: A Multi-Agent Large Language Model Framework for Prediction Market Trading and Latency Arbitrage",
+      "url": "https://arxiv.org/abs/2604.03888",
+      "authors": "Rajat M. Barot, Arjun S. Borkhatariya",
+      "venue": "arXiv April 2026",
+      "relevance": 8,
+      "staged": true,
+      "reason": "50-LLM swarm with Bayesian aggregation outperforms single-model and human superforecasters on Polymarket binary markets. Quarter-Kelly position sizing is principled. Directly applicable to Kalshi nowcasting probability estimation."
+    },
+    {
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "url": "https://arxiv.org/abs/2412.20138",
+      "authors": "Yijia Xiao, Edward Sun, Di Luo, Wei Wang",
+      "venue": "NeurIPS Multi-Agent AI Workshop (Oral), June 2025 update",
+      "relevance": 7,
+      "staged": false,
+      "reason": "Multi-agent framework with specialized analyst roles improves Sharpe and reduces drawdown vs single-agent baseline. Conceptually useful but too general to stage a concrete hypothesis now — would need a specific signal to test."
+    },
+    {
+      "title": "FinRL-X: An AI-Native Modular Infrastructure for Quantitative Trading",
+      "url": "https://arxiv.org/abs/2603.21330",
+      "authors": "Hongyang Yang et al.",
+      "venue": "DMO-FinTech Workshop, PAKDD 2026",
+      "relevance": 6,
+      "staged": false,
+      "reason": "Unified data→strategy→backtest→live framework succeeding FinRL. Architecturally interesting but our existing stack (yfinance + Vectorbt + Alpaca) already covers the same pipeline. No concrete signal advantage identified."
+    },
+    {
+      "title": "Cointegration-based pairs trading with ETFs: stability and profitability (2000-2024)",
+      "url": "https://ideas.repec.org/a/pal/assmgt/v26y2025i5d10.1057_s41260-025-00416-0.html",
+      "authors": "Chen & Alexiou",
+      "venue": "Journal of Asset Management 2025",
+      "relevance": 5,
+      "staged": false,
+      "reason": "Confirms cointegration pairs trading profitability depends heavily on cointegration stability and parameter choice, not specific pairs. Consistent with our H152-H160 NOT CONFIRMED results. No new actionable signal — confirms existing conclusion."
+    },
+    {
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "url": "https://arxiv.org/abs/2602.23330",
+      "authors": "Kunihiro Miyazaki et al. (Oxford, Tokyo)",
+      "venue": "arXiv Feb 2026",
+      "relevance": 6,
+      "staged": false,
+      "reason": "Fine-grained task decomposition in multi-agent LLM investment system improves risk-adjusted returns. Tested on Japanese equities. Interesting architecture but US equity application unclear without further investigation."
+    },
+    {
+      "title": "Cross-sectional factor momentum: evidence from multiple formation periods",
+      "url": "https://www.tandfonline.com/doi/full/10.1080/13504851.2025.2472032",
+      "authors": "Applied Economics Letters 2025",
+      "relevance": 4,
+      "staged": false,
+      "reason": "Confirms factor momentum with recent/intermediate formation periods. Our H001-H151 momentum research already covers this territory thoroughly. No new edge identified."
+    }
+  ],
+  "key_insights": "Two high-value findings: (1) Press release NLP (arXiv:2509.24254) provides a second NLP channel for the PEAD pipeline that is additive to call transcript scoring — this is the most directly actionable finding given our live H163/H174 paper trading deployment. (2) PolySwarm's multi-LLM Bayesian aggregation (arXiv:2604.03888) directly addresses probability calibration quality in prediction market nowcasting — a known weakness in our current single-call approach. Both are staged as H184 and H185 respectively. The pairs trading and ETF cointegration literature continues to confirm our H152-H160 conclusions: the edge is thin and parameter-dependent. Multi-agent LLM trading frameworks are advancing rapidly but remain at the 'proof of concept' stage for production deployment."
+}

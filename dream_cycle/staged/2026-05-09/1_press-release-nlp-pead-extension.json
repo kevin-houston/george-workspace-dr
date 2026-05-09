@@ -1,0 +1,14 @@
+{
+  "id": "press-release-nlp-pead-2026-05-09",
+  "date": "2026-05-09",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.24254",
+  "title": "Extend H163/H174 PEAD pipeline: add earnings press release NLP signal",
+  "rationale": "arXiv:2509.24254 (Wu et al., ACM ICAIF 2025) shows that textual content of 8-K earnings press releases — scored with FinBERT — is as predictive of announcement-day returns as the numeric earnings surprise itself. The H163/H174 pipeline already uses FinBERT on earnings call transcripts (8-K Item 9.01). This proposal adds a second FinBERT pass on the press release body text (the narrative / outlook section of the same 8-K) and combines both scores as a two-signal composite. Expected benefit: higher recall on PEAD events where the call transcript is sparse but the press release has strong forward-looking language. Implementation is low-risk since the press release is already fetched as part of the existing 8-K pipeline.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/h184_pead_press_release_nlp.py",
+  "content": "# H184: PEAD press release NLP extension\n# Source: arXiv:2509.24254 — Wu et al. 2025\n# Hypothesis: FinBERT score on press release body text (8-K narrative)\n# adds incremental predictive power over transcript-only scoring (H163).\n#\n# Design:\n# 1. For each 8-K event, extract the press release narrative section\n#    (Item 2.02 or the 'Exhibit 99.1' attachment — the actual press release)\n# 2. Score with FinBERT → pr_score in [-1, +1]\n# 3. Score existing transcript (Item 9.01 / earnings call) → call_score\n# 4. Composite = 0.5 * pr_score + 0.5 * call_score\n#    (equal weighting as baseline; test 0.4/0.6 and 0.6/0.4 variants)\n# 5. Enter long if composite > 0.1, short if composite < -0.1\n#    Exit at close of day 5 post-announcement (same as H163)\n# 6. IS: 2015-2021, OOS: 2022-2026\n#\n# Benchmark: H163 performance (OOS Sharpe ~2.0, max DD ~-14%)\n# Success criterion: composite strategy improves Sharpe by >0.2 or\n#   reduces max DD by >2pp vs. transcript-only baseline.\n#\n# TODO: implement and backtest\nprint('H184 placeholder — implementation pending')\n",
+  "action": "write",
+  "apply_status": "pending"
+}
