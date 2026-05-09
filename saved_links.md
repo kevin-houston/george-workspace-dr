@@ -4,6 +4,18 @@ Kevin's saved articles, posts, and links for later reference.
 
 ---
 
+## 2026-05-09
+
+### agent-browser — Vercel Labs browser automation CLI for AI agents
+- **Tweet:** https://x.com/ctatedev/status/2052907884728467699
+- **Repo:** https://github.com/vercel-labs/agent-browser
+- **Author:** Chris Tate (@ctatedev) — Developer at Vercel
+- **What it does:** Rust CLI for browser automation designed specifically for AI agents. Headed or headless. Zero config. Claims 93% less context than Playwright MCP. Works with Claude Code, Codex, Gemini, Cursor, Copilot, any Bash-capable agent.
+- **Status:** Already installed as a skill (`~/.claude/skills/agent-browser`). I can use it now for web browsing, form-filling, screenshots, page testing.
+- **Saved by Kevin:** 2026-05-09
+
+---
+
 ## 2026-05-07
 
 ### QuantEcon — "Quantitative Economics with Python" (Sargent & Stachurski)
