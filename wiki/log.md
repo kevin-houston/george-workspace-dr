@@ -130,3 +130,18 @@ Pages created: 5. Pages updated: 2 (index, log). Key entities: Yasemin Saltuk, J
 ## [2026-05-03] backtest | H159b — Beta-Neutral PEAD NOT CONFIRMED
 
 H159b (Beta-Neutral PEAD): NOT CONFIRMED. Rolling 60-day OLS beta hedge successfully achieves market neutrality (Corr(SPY) = −0.05 to −0.11 vs H159's 0.59–0.67), but MaxDD remains −48–54% — far above the −20% target. Best variant D (n=15, hold=20d): OOS Sharpe=0.382, CAGR=11.51%, MaxDD=−48.68%, NegYrs=3. Root cause: drawdowns are idiosyncratic (individual stock collapses unrelated to SPY), not market-correlated. Beta hedging removes market risk but not name risk. Large IS/OOS gap (IS Sharpe 1.6–2.0 → OOS 0.38) confirms structural PEAD decay in 2018+ — HFT has partially arbitraged gap-up drift. Path forward: H163 (FinBERT NLP filter), H164 (elastic-net 8-quarter SUE history) to improve signal quality before revisiting beta-neutral construction.
+
+## [2026-05-10] lint | Health check
+
+Issues found: 20. Auto-fixed: 17. Needs review: 3.
+
+**Auto-fixed (17):**
+- Index gaps: 14 pages on disk not in wiki/index.md — all added (7 research logs 2026-05-04 to 2026-05-10; pead-nlp-alpaca, walk-forward-cpcv, short-term-reversal, sector-classification, nlp-alternative-data, transaction-costs, ml-for-trading)
+- Stale descriptions fixed (3): hypothesis-log (was "H163–H165 QUEUED" → now reflects H163/H174/H181 CONFIRMED, H184 NOT CONFIRMED, H185-H187 queued); event-driven (updated to H163 CONFIRMED); pairs-trading (was "H160 queued" → now "family EXHAUSTED")
+- Index frontmatter: updated to 2026-05-10, pages 43→59
+- Missing cross-references added (2): short-term-reversal linked from momentum-strategies.md; transaction-costs + walk-forward-cpcv linked from design-principles.md
+
+**Needs review (3):**
+1. wiki/index.md `sources_indexed: 3` — sources/ directory has only 1 file (jpmorgan-portfolio-approach); count appears wrong, but may reference in-memory ingests not saved to sources/
+2. wiki/trading/paper-trading/index.md — may be stale; hasn't been checked for H181 deployment status (Kevin decision pending)
+3. wiki/trading/algorithms/event-driven.md Related Pages section — should add links to nlp-alternative-data.md and ml-for-trading.md (new tools pages not yet cross-referenced from event-driven)

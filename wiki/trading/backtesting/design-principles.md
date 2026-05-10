@@ -346,3 +346,5 @@ Pre-trained models like FinBERT were trained on financial text from specific era
 - López de Prado (2018) — *Advances in Financial Machine Learning* (AFML)
 - Combinatorial Purged Cross-Validation (CPCV): López de Prado 2020, for ML strategies with time-series data
 - QuantStart: [Successful Backtesting Part I](https://www.quantstart.com/articles/Successful-Backtesting-of-Algorithmic-Trading-Strategies-Part-I/)
+
+**Related pages**: [Walk-Forward & CPCV](walk-forward-cpcv.md) | [Transaction Cost Modeling](transaction-costs.md) | [Hypothesis Log](hypothesis-log.md)

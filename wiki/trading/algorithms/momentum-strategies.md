@@ -284,3 +284,7 @@ Monthly rebalance trigger
         ↓
  Final allocation
 ```
+
+---
+
+**Related pages**: [Short-Term Reversal](short-term-reversal.md) — H181 industry-adjusted reversal (SSRN:6630998), complements momentum with 1-month mean-reversion | [Pairs Trading / Stat Arb](pairs-trading.md) | [Position Sizing](position-sizing.md) | [Machine Learning for Trading](../tools/ml-for-trading.md)
