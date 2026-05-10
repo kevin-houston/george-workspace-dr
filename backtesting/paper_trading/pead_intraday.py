@@ -111,16 +111,41 @@ def compute_surprise(ticker: str, current_score: float) -> float:
     return current_score - prior["finbert_score"].mean()
 
 
+def _polygon_prev_close(ticker: str) -> float | None:
+    """Backup: fetch prior close from Polygon API (via OneCLI proxy)."""
+    try:
+        import requests
+        r = requests.get(
+            f"https://api.polygon.io/v2/aggs/ticker/{ticker}/prev",
+            timeout=10,
+        )
+        results = r.json().get("results", [])
+        if results:
+            return float(results[0]["c"])
+    except Exception:
+        pass
+    return None
+
+
 def get_intraday_return(ticker: str) -> float | None:
     """Return today's price change vs prior close (0.03 = +3%)."""
     try:
         tk = yf.Ticker(ticker)
         current = float(tk.fast_info.last_price)
-        df = yf.download(ticker, period="5d", interval="1d",
-                         progress=False, auto_adjust=True)
-        if len(df) < 2:
+        # Try yfinance for prior close; fall back to Polygon
+        prior_close = None
+        try:
+            df = yf.download(ticker, period="5d", interval="1d",
+                             progress=False, auto_adjust=True)
+            if len(df) >= 2:
+                prior_close = float(df["Close"].iloc[-2])
+        except Exception:
+            pass
+        if prior_close is None:
+            log(f"  {ticker}: yfinance prior_close failed, trying Polygon backup")
+            prior_close = _polygon_prev_close(ticker)
+        if prior_close is None:
             return None
-        prior_close = float(df["Close"].iloc[-2])
         return (current - prior_close) / prior_close
     except Exception:
         return None

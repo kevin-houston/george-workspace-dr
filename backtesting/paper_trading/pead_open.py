@@ -55,14 +55,31 @@ def save_positions(positions: list):
     POSITIONS_PATH.write_text(json.dumps(positions, indent=2))
 
 
+def _polygon_prev_close(ticker: str) -> float | None:
+    """Backup: fetch prior close from Polygon API (via OneCLI proxy)."""
+    try:
+        import requests
+        r = requests.get(
+            f"https://api.polygon.io/v2/aggs/ticker/{ticker}/prev",
+            timeout=10,
+        )
+        results = r.json().get("results", [])
+        if results:
+            return float(results[0]["c"])
+    except Exception:
+        pass
+    return None
+
+
 def get_prior_close(ticker: str) -> float | None:
     try:
         df = yf.download(ticker, period="5d", interval="1d", progress=False, auto_adjust=True)
-        if len(df) < 2:
-            return None
-        return float(df["Close"].iloc[-2])
+        if len(df) >= 2:
+            return float(df["Close"].iloc[-2])
     except Exception:
-        return None
+        pass
+    log(f"  {ticker}: yfinance prior_close failed, trying Polygon backup")
+    return _polygon_prev_close(ticker)
 
 
 def get_current_price(ticker: str) -> float | None:
