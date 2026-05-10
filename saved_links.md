@@ -6,6 +6,18 @@ Kevin's saved articles, posts, and links for later reference.
 
 ## 2026-05-09
 
+### OpenHuman — Open-source agentic desktop assistant (Kevin calls it "open brain")
+- **Repo:** https://github.com/tinyhumansai/openhuman
+- **Site:** https://tinyhumans.ai/openhuman
+- **Install:** `curl -fsSL https://raw.githubusercontent.com/tinyhumansai/openhuman/main/scripts/install.sh | bash`
+- **Stack:** Rust (69%) + TypeScript (27%), GPL-3.0, early beta — 549 stars, 44 tags, 1,636 commits
+- **Key features:** Memory Tree (≤3k-token Markdown chunks, scored + hierarchical, SQLite-backed, Obsidian vault mirror), 20-min auto-fetch loop (Gmail/Calendar/GitHub/Slack/Notion/118+ OAuth), TokenJuice (80% token compression), model routing (reasoning/fast/vision), native voice (ElevenLabs TTS, STT, Google Meet integration), desktop mascot
+- **Architecture of note:** Karpathy-style Obsidian wiki auto-built from connected services. Every ingested item → canonicalized chunk → scored → folded into hierarchical summary trees → SQLite + .md files
+- **Intent:** Kevin plans to set this up in the near future as a more sophisticated memory/ingestion layer
+- **Saved by Kevin:** 2026-05-09
+
+---
+
 ### @RoundtableSpace tweet — Modular Claude Code AI dev team structure
 - **Tweet:** https://x.com/roundtablespace/status/2052935335156342958
 - **Author:** 0xMarioNawfal (@RoundtableSpace) — 59.8K views, 81 likes, 84 bookmarks
