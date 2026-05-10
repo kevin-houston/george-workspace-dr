@@ -62,6 +62,23 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 
 ---
 
+## PEAD Intraday Scanner
+
+**Trigger:** Every 30 min, 6 AM–5:30 PM CT, weekdays (pre-task gated).
+**Pre-task:** `node --input-type=module < backtesting/paper_trading/pead_intraday_check.mjs`
+**Run:** `PEAD_INTRADAY_TICKERS='[...]' python3 backtesting/paper_trading/pead_intraday.py`
+**Success:** Orders submitted, or log confirms filtered out. Only message Kevin if orders placed.
+
+**Gotchas:**
+- Pre-task polls EDGAR ATOM feed; resets cursor daily at midnight. Cursor: `pead_intraday_cursor.json`.
+- No gap check (intraday entries). Instead requires stock up > 0% on the day.
+- Entry thresholds same as overnight: score ≥ 0.18 AND surprise ≥ 0.02.
+- Positions written to the shared `pead_positions.json` so `pead_exits.py` handles them automatically.
+- FinBERT loads fresh each wakeup (~90s first time, cached after). Not a failure.
+- On non-earnings days the ATOM feed has no universe tickers → `wakeAgent: false` → no credits used.
+
+---
+
 ## PEAD Open Pass
 
 **Trigger:** 9:32 AM CT on weekdays (market open + 2min).
