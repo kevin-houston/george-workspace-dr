@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-09
+updated: 2026-05-10
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -32,6 +32,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
   - [Kraken CLI](tools/kraken-cli.md) ← expanded 2026-05-01 (all 50 agent skills, MCP service groups, full command reference)
   - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← updated 2026-05-05 (analyst belief asymmetry arXiv:2511.15214, H171 GPT-4o-mini alternative, AlphaVantage transcripts)
+  - [Machine Learning for Trading](tools/ml-for-trading.md) ← new 2026-05-10 (LightGBM/XGBoost cross-sectional prediction, ModernFinBERT upgrade path H176, Alphalens-Reloaded IC/ICIR, TA-Lib, skfolio CPCV, mlfinlab license warning)
   - [LEAN / QuantConnect](tools/lean-quantconnect.md) ← 2026-04-26 (Docker setup, iron condor algo written, options backtesting engine; H007 pending data)
   - [OpenAlgo](tools/openalgo.md) ← 2026-04-25 (India-only for now; watch for Alpaca/Kraken support in 2026)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
