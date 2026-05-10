@@ -1,0 +1,21 @@
+{
+  "hypothesis_id": "H163_MAINTENANCE",
+  "title": "Signal Decay Monitoring for PEAD Pipeline (H163/H174)",
+  "source": "MDPI 18/8/412 — News Sentiment and Stock Market Dynamics",
+  "status": "ACTION_ITEM",
+  "proposed_date": "2026-05-10",
+  "type": "risk_management",
+  "summary": "Sentiment alpha decays rapidly in recent years. MDPI paper documents monitoring framework: rolling Sharpe tracking per stock cohort, 30-day retraining triggers, audit logs. Should be added to H163/H174 production pipeline.",
+  "action": {
+    "what": "Add signal decay monitoring to PEAD paper trading pipeline",
+    "how": [
+      "Track 30-day rolling Sharpe per stock in the 30-stock universe",
+      "Alert when any stock's rolling Sharpe drops below 0.5 (individual) or portfolio below 0.8",
+      "Schedule quarterly FinBERT model revalidation on fresh 8-K corpus",
+      "Log H176 (ModernFinBERT) transition as next upgrade when decay detected"
+    ],
+    "effort": "LOW — half-day to add monitoring to existing paper trading script"
+  },
+  "priority": "MEDIUM",
+  "related_hypotheses": ["H163", "H174", "H176"]
+}

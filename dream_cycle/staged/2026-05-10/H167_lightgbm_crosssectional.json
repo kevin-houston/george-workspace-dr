@@ -1,0 +1,45 @@
+{
+  "hypothesis_id": "H167",
+  "title": "LightGBM Sector-Neutral Cross-Sectional Momentum",
+  "source": "arXiv:2507.07107 — ML Enhanced Multi-Factor Quantitative Trading",
+  "status": "QUEUED",
+  "proposed_date": "2026-05-10",
+  "angle": "Cross-sectional momentum + ML factor models",
+  "summary": "LightGBM with Bayesian HPO applied to cross-sectional factor selection; paper demonstrates outperformance vs CSI300. Provides production hyperparameter template (1000-3000 estimators, lr 0.05-0.1, GOSS+EFB).",
+  "design": {
+    "universe": "S&P 500 large-cap (100-200 stocks), sector-neutralized",
+    "features": [
+      "Lagged returns: 1d, 5d, 21d, 63d, 252d",
+      "Momentum ranks: cross-sectional rank of each lag within sector",
+      "Technical: RSI-14, MACD signal, ATR-14 (via TA-Lib)",
+      "Fundamental: P/E, P/B, earnings revision (if available via FMP API)",
+      "Sector dummies"
+    ],
+    "target": "21-day forward return rank (pct) within cross-section",
+    "model": "LightGBM with GOSS+EFB; Bayesian HPO via optuna",
+    "params_template": {
+      "num_leaves": 63,
+      "learning_rate": 0.05,
+      "feature_fraction": 0.8,
+      "bagging_fraction": 0.8,
+      "min_data_in_leaf": 20,
+      "lambda_l2": 0.1,
+      "max_depth": 6
+    },
+    "cv": "skfolio CombinatorialPurgedCV (n_splits=5, purged_size=0.05)",
+    "signal": "Cross-sectional rank of model predictions each month",
+    "portfolio": "Long top quintile (>0.8), short bottom quintile (<0.2); sector-neutral within quintiles",
+    "rebalance": "Monthly",
+    "is_period": "2016-2022",
+    "oos_period": "2023-2026"
+  },
+  "success_criterion": "OOS Sharpe >= 0.8, IC > 0.04, ICIR > 0.4 (Alphalens-Reloaded validation first)",
+  "dependencies": ["FMP API key (present)", "Polygon API for sector classification"],
+  "priority": "HIGH",
+  "effort": "HIGH — 3-5 days for feature pipeline + cross-sectional backtest infrastructure",
+  "implementation_resources": [
+    "arXiv:2507.07107 — HPO template",
+    "ml-for-trading.md wiki — LightGBM section, Alphalens-Reloaded section",
+    "sector-classification.md wiki — sector data sources"
+  ]
+}

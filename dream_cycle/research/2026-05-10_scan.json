@@ -1,0 +1,150 @@
+{
+  "scan_date": "2026-05-10",
+  "angles_searched": [
+    "PEAD + NLP signal improvements",
+    "Cross-sectional momentum + ML factor models",
+    "Multi-agent LLM for trading / nowcasting",
+    "Pairs trading / statistical arbitrage revival",
+    "Options flow + earnings"
+  ],
+  "leads": [
+    {
+      "angle": "PEAD + NLP signal improvements",
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "source_url": "https://aclanthology.org/2025.finnlp-2.13.pdf",
+      "summary": "Compares encoder-only (FinBERT) vs encoder-decoder (BART) architectures for PEAD prediction using 8-K earnings filings; shows FinBERT captures narrative signals effectively with domain pretraining.",
+      "relevance": "HIGH",
+      "implementation_note": "H163/H174 extension: Replace ProsusAI/FinBERT with BART encoder-decoder for improved drift magnitude detection; test 3-day early signal gate for entry timing."
+    },
+    {
+      "angle": "PEAD + NLP signal improvements",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "source_url": "https://arxiv.org/html/2509.24254",
+      "summary": "Analyzes structural patterns in press release language to predict post-earnings returns; linguistic features beyond sentiment capture incremental PEAD signal.",
+      "relevance": "HIGH",
+      "implementation_note": "H163/H174 extension: Add press release structure extraction module to detect surprise framing and conviction signals beyond raw FinBERT score."
+    },
+    {
+      "angle": "PEAD + NLP signal improvements",
+      "title": "Generating Alpha: Hybrid AI Trading System with FinBERT + Regime Classification",
+      "source_url": "https://arxiv.org/html/2601.19504v1",
+      "summary": "FinBERT sentiment filtering combined with HMM-based regime classification for regime-aware entry; tested Jan 2023–Jan 2025.",
+      "relevance": "MEDIUM",
+      "implementation_note": "H163/H174 variant: Add HMM regime gate on VIX + earnings volume to only take PEAD trades in favorable regimes."
+    },
+    {
+      "angle": "Cross-sectional momentum + ML factor models",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Portfolio Optimization with Bias Correction",
+      "source_url": "https://arxiv.org/abs/2507.07107",
+      "summary": "XGBoost (1000-3000 estimators) and LightGBM with Bayesian hyperparameter optimization for cross-sectional factor selection; outperforms CSI300 benchmark.",
+      "relevance": "HIGH",
+      "implementation_note": "H167 implementation template: Use GOSS+EFB LightGBM on rolling 252-day windows; start with Bayesian HPO config from this paper."
+    },
+    {
+      "angle": "Cross-sectional momentum + ML factor models",
+      "title": "Spatio-Temporal Momentum: Jointly Learning Time-Series and Cross-Sectional Strategies",
+      "source_url": "https://arxiv.org/abs/2302.10175",
+      "summary": "Unified framework learning both time-series and cross-sectional momentum simultaneously; captures momentum spillovers across assets within sectors/size cohorts.",
+      "relevance": "MEDIUM",
+      "implementation_note": "H167 enhancement: Add spatio-temporal component for momentum lead-lag across sectors."
+    },
+    {
+      "angle": "Cross-sectional momentum + ML factor models",
+      "title": "Follow the Leader: Network Momentum for Trend-Following",
+      "source_url": "https://arxiv.org/html/2501.07135v1",
+      "summary": "Network momentum exploiting lead-lag in trend-following; combines univariate trend indicators with cross-sectional spillover via graph detection.",
+      "relevance": "MEDIUM",
+      "implementation_note": "H167 extension: Build sector correlation network; weight momentum signals by network centrality."
+    },
+    {
+      "angle": "Multi-agent LLM for trading / nowcasting",
+      "title": "PolySwarm: A Multi-Agent LLM Framework for Prediction Market Trading and Latency Arbitrage",
+      "source_url": "https://arxiv.org/abs/2604.03888",
+      "summary": "50-persona LLM swarm with confidence-weighted Bayesian aggregation for binary prediction markets; KL/JS divergence for cross-market inefficiency detection; quarter-Kelly sizing; demonstrates latency arbitrage on Polymarket/Kalshi.",
+      "relevance": "HIGH",
+      "implementation_note": "H185 implementation: Deploy PolySwarm framework for earnings binary predictions on Kalshi; confidence-weighted ensemble for pre-earnings nowcasting with 6-hour prediction window."
+    },
+    {
+      "angle": "Multi-agent LLM for trading / nowcasting",
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "source_url": "https://github.com/TauricResearch/TradingAgents",
+      "summary": "LangGraph-based multi-agent framework with specialized analyst agents + trader + risk team; dynamic agent discussions; v0.2.0 supports GPT-5, Gemini 3, Claude 4, Grok 4 (Feb 2026).",
+      "relevance": "HIGH",
+      "implementation_note": "H185 extension: Integrate TradingAgents with earnings event focus; track historical accuracy per agent type for dynamic weighting."
+    },
+    {
+      "angle": "Multi-agent LLM for trading / nowcasting",
+      "title": "LLM Forecasting Review: Ensemble Methods and Multi-Modal Fusion (IEEE AI 2026)",
+      "source_url": "https://arxiv.org/html/2605.05211",
+      "summary": "Reviews LLM forecasting approaches; highlights ensemble decorrelation, sentiment-to-regime-probability mapping, and multi-modal fusion of market data with LLM signals.",
+      "relevance": "MEDIUM",
+      "implementation_note": "H185 variant: Map FinBERT sentiment to regime probabilities using LLM few-shot; fuse with market data for improved Kalshi nowcasting."
+    },
+    {
+      "angle": "Pairs trading / statistical arbitrage revival",
+      "title": "Attention Factors for Statistical Arbitrage",
+      "source_url": "https://arxiv.org/abs/2510.11616",
+      "summary": "Attention-based factor learning for stat arb achieves Sharpe 2.3 with transaction costs; 84% improvement over prior deep learning stat arb methods; daily frequency.",
+      "relevance": "HIGH",
+      "implementation_note": "New hypothesis candidate (H187?): Implement attention-based factor extraction on daily OHLCV for the 30-stock PEAD universe; z-score threshold entry; half-Kelly sizing with 5bps cost model."
+    },
+    {
+      "angle": "Pairs trading / statistical arbitrage revival",
+      "title": "Statistical Arbitrage via LSTM Factor Replication (Polish Equities)",
+      "source_url": "https://arxiv.org/abs/2512.02037",
+      "summary": "Replaces cointegration with PCA/ETF/LSTM factor models for pairs selection; achieves positive returns with lower transaction costs than traditional pairs.",
+      "relevance": "MEDIUM",
+      "implementation_note": "Daily pairs: LSTM factor replication on liquid large-cap pairs; test on Russell 3000 universe."
+    },
+    {
+      "angle": "Pairs trading / statistical arbitrage revival",
+      "title": "Statistical Arbitrage in Options Markets by Graph Learning and Synthetic Long Positions",
+      "source_url": "https://arxiv.org/abs/2508.14762",
+      "summary": "Graph learning for options-equity basis stat arb; synthetic bond method to isolate pure arbitrages.",
+      "relevance": "MEDIUM",
+      "implementation_note": "Combine with H186 (options flow); graph learning for option-equity basis arb pre-earnings."
+    },
+    {
+      "angle": "Options flow + earnings",
+      "title": "Generative AI for Stock Selection (SpiderRock Options Flow)",
+      "source_url": "https://arxiv.org/abs/2602.00196",
+      "summary": "Uses SpiderRock options dataset (Put/Call ratios, IV surfaces, risk-neutral metrics) with generative AI to predict earnings surprises; Feb 2026.",
+      "relevance": "HIGH",
+      "implementation_note": "H186 implementation: Integrate SpiderRock options flow API; use generative model mapping Put/Call + Greeks to earnings surprise prediction; 30-60 min pre-earnings forecast window."
+    },
+    {
+      "angle": "Options flow + earnings",
+      "title": "Corporate Earnings Calls and Analyst Beliefs (arXiv:2511.15214)",
+      "source_url": "https://arxiv.org/abs/2511.15214",
+      "summary": "Earnings call textual information markedly improves prediction of analyst expectations and forecast dispersion.",
+      "relevance": "MEDIUM",
+      "implementation_note": "H186 enhancement: Weight options flow signals by analyst surprise prediction from transcript FinBERT."
+    },
+    {
+      "angle": "Options flow + earnings",
+      "title": "Stock Prediction via Node Transformer with Options Flow (Put/Call, Gamma Exposure)",
+      "source_url": "https://arxiv.org/abs/2603.05917",
+      "summary": "Node transformer reduces prediction error 10% overall, 25% during earnings using inter-stock relationships and options flow indicators.",
+      "relevance": "MEDIUM",
+      "implementation_note": "H186 variant: Node transformer modeling sector-level put/call flow patterns for earnings surprise direction."
+    },
+    {
+      "angle": "Sentiment signal decay / earnings drift",
+      "title": "News Sentiment and Stock Market Dynamics: A Machine Learning Investigation",
+      "source_url": "https://www.mdpi.com/1911-8074/18/8/412",
+      "summary": "Sentiment alpha decays rapidly in recent years; implements monitoring for signal decay, retraining cycles, and audit logs for model governance.",
+      "relevance": "HIGH",
+      "implementation_note": "H163/H174 risk management: Add signal decay monitoring and 30-day retraining cycle; track rolling Sharpe per stock cohort."
+    },
+    {
+      "angle": "Sentiment signal decay / earnings drift",
+      "title": "Wisdom of the Silicon Crowd: LLM Ensemble Prediction Rivals Human Crowd Accuracy",
+      "source_url": "https://www.science.org/doi/10.1126/sciadv.adp1528",
+      "summary": "12-LLM ensemble matches human crowd forecasting; ensemble decorrelation and fine-tuning improves robustness vs single-model reliance.",
+      "relevance": "MEDIUM",
+      "implementation_note": "H174 robustness: Replace single FinBERT with 5-7 LLM ensemble for PEAD scoring to reduce model-specific alpha decay."
+    }
+  ],
+  "high_relevance_count": 7,
+  "medium_relevance_count": 9
+}

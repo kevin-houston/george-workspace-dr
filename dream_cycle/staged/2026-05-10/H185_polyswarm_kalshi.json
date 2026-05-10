@@ -1,0 +1,28 @@
+{
+  "hypothesis_id": "H185",
+  "title": "PolySwarm-Style Multi-LLM Kalshi Nowcasting (updated design)",
+  "source": "arXiv:2604.03888 — PolySwarm; github.com/TauricResearch/TradingAgents",
+  "status": "QUEUED",
+  "proposed_date": "2026-05-10",
+  "angle": "Multi-agent LLM for trading / nowcasting",
+  "summary": "50-persona LLM swarm with confidence-weighted Bayesian aggregation for binary prediction markets. PolySwarm paper demonstrates latency arbitrage on Polymarket/Kalshi specifically. TradingAgents provides open-source multi-agent infrastructure (LangGraph, supports Claude 4).",
+  "design": {
+    "platform": "Kalshi — earnings binary events (beat/miss EPS)",
+    "agents": "10-20 LLM personas (reduced from 50 for cost): fundamental analyst, momentum analyst, earnings historian, sector specialist, macro analyst, options flow analyst, etc.",
+    "aggregation": "Confidence-weighted Bayesian voting; use KL divergence to detect cross-market inefficiencies",
+    "inputs": "FinBERT press release score (H163), earnings call FinBERT (H168), consensus EPS, sector momentum, options Put/Call",
+    "entry": "Take position when ensemble confidence > 0.65 and Kalshi market price > 0.15 edge",
+    "sizing": "Quarter-Kelly based on PolySwarm paper; max 2% portfolio per contract",
+    "infrastructure": "TradingAgents v0.2.0 as base; replace stock-trading focus with prediction market focus"
+  },
+  "success_criterion": "ROI > 15% annualized on paper Kalshi account over 3-month OOS window",
+  "dependencies": ["OpenAI API key (present)", "Kalshi API key (present)"],
+  "related_hypotheses": ["H163", "H168"],
+  "priority": "HIGH",
+  "effort": "HIGH — 1-2 weeks to implement agent swarm + Kalshi integration + paper trading",
+  "implementation_resources": [
+    "PolySwarm paper: https://arxiv.org/abs/2604.03888",
+    "TradingAgents: https://github.com/TauricResearch/TradingAgents",
+    "Kalshi API docs: wiki/trading/prediction-markets/kalshi.md"
+  ]
+}

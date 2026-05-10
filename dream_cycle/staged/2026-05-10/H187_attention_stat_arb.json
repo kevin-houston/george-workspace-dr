@@ -1,0 +1,26 @@
+{
+  "hypothesis_id": "H187",
+  "title": "Attention-Based Factor Stat Arb on Large-Cap Universe",
+  "source": "arXiv:2510.11616 — Attention Factors for Statistical Arbitrage",
+  "status": "PROPOSED",
+  "proposed_date": "2026-05-10",
+  "angle": "Pairs trading / statistical arbitrage revival",
+  "summary": "Attention-based factor learning for cross-sectional stat arb achieves Sharpe 2.3 with realistic transaction costs (84% improvement over prior deep learning stat arb methods at daily frequency). Replaces cointegration-based pairs with learned attention factors across the full universe.",
+  "design": {
+    "universe": "30-stock large-cap S&P 500 (H163 universe, expandable)",
+    "features": "Daily OHLCV + technical indicators (RSI, MACD, ATR via TA-Lib)",
+    "model": "Attention-based factor extractor (self-attention on stock cross-section)",
+    "signal": "Z-score on attention factor exposures; threshold |z| > 1.5 for entry",
+    "entry": "Market open day after signal",
+    "exit": "Mean reversion (|z| < 0.5) or max 10-day hold",
+    "sizing": "Half-Kelly with 5bps execution cost model",
+    "is_period": "2020-2023",
+    "oos_period": "2024-2026"
+  },
+  "success_criterion": "OOS Sharpe >= 1.5, MaxDD <= -20%, IC > 0.05 on factor exposures",
+  "dependencies": [],
+  "related_hypotheses": ["H152-H160 (pairs family EXHAUSTED — standard cointegration)"],
+  "priority": "HIGH",
+  "effort": "MEDIUM — 2-3 days to implement attention factor model + backtest",
+  "notes": "Pairs family (H152-H160) was exhausted at daily frequency using standard cointegration. Attention factors are a fundamentally different approach — cross-sectional learning rather than pairwise cointegration. Worth testing."
+}
