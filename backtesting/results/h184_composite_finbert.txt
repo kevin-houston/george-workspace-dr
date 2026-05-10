@@ -1,0 +1,19 @@
+H184 — Composite PR + Call FinBERT Signal
+Run: 2026-05-09 23:06
+Universe: 30 stocks  |  GAP≥3%  |  Hold=20d
+IS: 2020-2023  |  OOS: 2024-2026
+PR scores available:   195
+Call scores available: 51
+
+Baseline OOS:  n=85  WR=57.6%  MeanRet=1.95%  Sharpe=0.60  MaxDD=-77.9%
+
+OOS Strategy Comparison (threshold=0.10):
+  H163 PR-only                    n=  65  WR=58.5%  MeanRet=1.61%  Sharpe=0.50  MaxDD=-65.2%
+  H168 Call-only                  n=  17  WR=23.5%  MeanRet=-6.16%  Sharpe=-2.54  MaxDD=-65.7%
+  H184 composite (α=0.3)          n=  67  WR=58.2%  MeanRet=1.47%  Sharpe=0.46  MaxDD=-67.9%
+  H184 composite (α=0.5)          n=  66  WR=59.1%  MeanRet=1.71%  Sharpe=0.53  MaxDD=-62.5%
+  H184 composite (α=0.7)          n=  66  WR=59.1%  MeanRet=1.71%  Sharpe=0.53  MaxDD=-62.5%
+
+Sharpe lift (best composite vs H163): +0.03
+
+VERDICT: NOT CONFIRMED
