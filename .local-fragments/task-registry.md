@@ -146,6 +146,22 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 - medium-risk = new script: copy target to `.bak` first. For NEW files (no existing target), skip the backup.
 - Changelog commit: `"dream cycle: changelog YYYY-MM-DD"`. Proposal commit: `"dream cycle: apply YYYY-MM-DD staged proposals (H###, H###)"`.
 - Do NOT message Kevin for routine low/medium runs. Only flag high-risk items.
+- **After committing**, run the session summary script and text Kevin the URL (see Nightly Session Summary below).
+
+---
+
+## Nightly Session Summary
+
+**Trigger:** End of Dream Cycle Build Phase (4 AM CT).
+**Run:** `python3 /workspace/agent/generate_session_summary.py YYYY-MM-DD`
+**Output:** `summaries/session-summary-YYYY-MM-DD.html` published to here.now.
+**Success:** Script prints a here.now URL. Text Kevin: "Session summary: <URL>"
+
+**Gotchas:**
+- Script auto-installs `/tmp/jq`, `/tmp/file` stub, and `heredotnow/skill@here-now` if missing.
+- Pass the explicit date (`date +%Y-%m-%d`) — do not rely on the default (script may run at 4 AM on the next calendar day if the build phase spans midnight).
+- Script publishes the `summaries/` directory. Only one HTML file per date goes there — do NOT put other files in `summaries/`.
+- here.now anonymous sites expire in 24h. Kevin can claim via the URL in `.herenow/state.json` for permanent hosting.
 
 ---
 
