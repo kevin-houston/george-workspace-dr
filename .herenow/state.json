@@ -8,6 +8,18 @@
       "claimToken": "9a8a2c0ca0e4e00d89e09d5f5fb0934779957b2bfe76b7a82ff91691d76aec76",
       "claimUrl": "https://here.now/claim?slug=clear-poplar-38ma&token=9a8a2c0ca0e4e00d89e09d5f5fb0934779957b2bfe76b7a82ff91691d76aec76",
       "expiresAt": "2026-05-10T07:34:45.271Z"
+    },
+    "present-lotus-6d98": {
+      "siteUrl": "https://present-lotus-6d98.here.now/",
+      "claimToken": "26873e6f9f2945140a6ad553cd822ffe9ef3c65193ea6bb325174502baedaef2",
+      "claimUrl": "https://here.now/claim?slug=present-lotus-6d98&token=26873e6f9f2945140a6ad553cd822ffe9ef3c65193ea6bb325174502baedaef2",
+      "expiresAt": "2026-05-10T17:50:14.228Z"
+    },
+    "quiet-beacon-v3xg": {
+      "siteUrl": "https://quiet-beacon-v3xg.here.now/",
+      "claimToken": "9e41548f07ec331fbf9a5b4430750a5649633dac1153aa5de9446431af8b167d",
+      "claimUrl": "https://here.now/claim?slug=quiet-beacon-v3xg&token=9e41548f07ec331fbf9a5b4430750a5649633dac1153aa5de9446431af8b167d",
+      "expiresAt": "2026-05-11T01:08:30.503Z"
     }
   }
 }

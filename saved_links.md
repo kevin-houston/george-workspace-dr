@@ -18,6 +18,27 @@ Kevin's saved articles, posts, and links for later reference.
 
 ---
 
+### EvoScientist — Self-evolving AI scientist framework
+- **Repo:** https://github.com/EvoScientist/EvoScientist
+- **Stars:** 2.8k stars, 181 forks, Apache 2.0, Python
+- **Tagline:** "Harness Vibe Research with Self-evolving AI Scientists"
+- **What it is:** Autonomous research agent system with 6 coordinated sub-agents (plan, research, code, debug, analyze, write). "Human-on-the-loop" paradigm — AI acts as a research buddy that co-evolves with the researcher. Persistent memory across sessions. Full lifecycle: intake → plan → execute → evaluate → write → verify.
+- **Key features:** Multi-model (Anthropic/OpenAI/Google/MiniMax/NVIDIA), multi-channel (CLI + Telegram/Slack/WeChat), dynamic system prompt rewriting, MCP server support, installable GitHub skills, per-turn tool selection
+- **Benchmarks:** #1 on DeepResearch Bench I & II, #1 on AstaBench Code & Execution and Data Analysis, ICAIS 2025 Best Paper — legitimate signals, not just hype
+- **Relevance:** Most directly relevant to the nightly hypothesis research loop — could automate parts of the plan/research/code/analyze pipeline. The Telegram integration mirrors how Kevin and I work. Memory + self-evolution connects to the OpenHuman direction.
+- **Saved by Kevin:** 2026-05-09
+
+---
+
+### AI Obsidian Plugins — Curated GitHub repo (danielrosehill)
+- **Tweet:** https://x.com/aiedge_/status/2053233603937714474 (via @aiedge_, 2026-05-09)
+- **Repo:** https://github.com/danielrosehill/Obisidian-For-LLM-Obsessed
+- **Summary:** Curated collection of the best Obsidian plugins that use AI — for building an AI second brain / memory layer in Obsidian
+- **Context:** Relevant to OpenHuman ("open brain") setup — OpenHuman mirrors memory into an Obsidian vault; these plugins extend that vault with AI capabilities
+- **Saved by Kevin:** 2026-05-09
+
+---
+
 ### @RoundtableSpace tweet — Modular Claude Code AI dev team structure
 - **Tweet:** https://x.com/roundtablespace/status/2052935335156342958
 - **Author:** 0xMarioNawfal (@RoundtableSpace) — 59.8K views, 81 likes, 84 bookmarks
