@@ -477,3 +477,23 @@ score = float(probs[0] - probs[1])  # positive - negative
 **Candidate for H176**: Drop-in upgrade to H163/H174 scoring pipeline. Validate on H163 IS/OOS event set before deploying to live paper trading. If ModernFinBERT scores show meaningful correlation improvement vs ProsusAI/finbert on labeled events, update `pead_overnight.py` scorer.
 
 **Check**: https://huggingface.co/models?search=modernfinbert for current release artifacts. Benchmark: compare pos−neg score distribution on H163's 85 OOS events with known outcomes.
+
+---
+
+## LLM vs FinBERT for Financial Sentiment (2026 Benchmark)
+
+**Source**: arXiv:2505.16090 (May 2026). "Can AI Read Between the Lines? Benchmarking LLMs on Financial Nuance."
+
+**Key finding**: FinBERT remains most effective for finance-specific sentiment classification. General-purpose LLMs (GPT-4o, Claude 3.5) underperform FinBERT on domain-specific tasks despite superior general reasoning.
+
+**Decision tree for H-series NLP tasks:**
+
+| Task | Recommended Model | Reason |
+|------|------------------|--------|
+| 8-K press release sentiment (H163/H174) | FinBERT (ProsusAI) | Domain-specific, fast, proven |
+| Earnings transcript sentiment scoring | FinBERT or ModernFinBERT | Financial domain pretraining essential |
+| Nuanced qualitative reasoning ("read between lines") | GPT-4o-mini | General LLMs win on nuance |
+| High-volume batch processing (<1ms latency) | FinBERT | 10× faster than GPT-4o-mini |
+| Low-volume, high-stakes signals | GPT-4o-mini | Justify API cost with edge |
+
+**Implication for H171 (GPT-4o-mini alternative)**: H171 should target nuanced qualitative signals (management tone shifts, guidance hedging language) rather than raw sentiment — that's where GPT-4o-mini has an actual advantage over FinBERT.

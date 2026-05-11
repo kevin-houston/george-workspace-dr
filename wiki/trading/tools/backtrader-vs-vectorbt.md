@@ -298,3 +298,14 @@ Vectorbt is research-only. For execution, use Alpaca SDK directly (see `data-sou
 | Cross-validation / walk-forward | Vectorbt or custom rolling-window engine |
 
 For current H116 work, the custom engine is sufficient and already optimized. Vectorbt becomes valuable when scanning parameter spaces (e.g., testing 100 momentum lookback windows) or building ML signal pipelines.
+
+---
+
+## Spectre (GPU-Accelerated)
+
+**GitHub**: search 'spectre factor backtesting GPU' on GitHub  
+**Use case**: Large cross-sectional factor studies (500+ stocks, multi-year rolling windows)  
+
+GPU acceleration via PyTorch/CUDA makes rolling-window factor computation 10–50× faster than pandas for large universes. Relevant when expanding beyond the current 30-stock universe for H167 (LightGBM cross-sectional) or low-vol decile studies (H191–H193) across full S&P 500.
+
+**When to evaluate**: When current yfinance + pandas pipeline takes >10 minutes per backtest run — that's the crossover point where GPU setup overhead pays off.

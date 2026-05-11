@@ -662,3 +662,45 @@ This avoids the speed requirement of arbitrage while giving a durable, data-driv
 | ib_insync | erdewit/ib_insync | Unofficial IBKR async Python wrapper (widely used) |
 
 **Recommendation**: Build custom on top of Kalshi REST API (official SDK). Open-source bots are educational but lack production reliability.
+
+---
+
+## Multi-Agent Swarm Aggregation (PolySwarm Architecture)
+
+**Source**: arXiv:2604.03888 (April 2026). "PolySwarm: A Multi-Agent Large Language Model Framework for Prediction Market Trading and Latency Arbitrage."
+
+### Architecture
+
+1. **Swarm**: N diverse LLM personas (paper uses 50) evaluate each binary market concurrently. Diversity is structural — different priors, information access patterns, analytical styles.
+2. **Aggregation**: Confidence-weighted Bayesian combination:
+   - Each agent outputs P(yes) + confidence score
+   - Swarm consensus = weighted median of agent P(yes) estimates
+   - Final probability = Bayesian blend of swarm consensus + market-implied probability
+   - Weight on market: inversely proportional to swarm divergence (high disagreement → trust market more)
+3. **Position sizing**: Quarter-Kelly based on |P_swarm − P_market| edge
+4. **Inefficiency detection**: KL and Jensen-Shannon divergence between swarm distribution and market distribution — high divergence flags potential mispricing
+
+### H185 Implementation Plan
+
+Pre-requisite: Kalshi historical resolved markets data (download via Kalshi REST API `/markets?status=settled`). Current blocker: need to pull and cache ~6 months of resolved market data to backtest swarm accuracy.
+
+```python
+# Minimal PolySwarm for Kalshi
+PERSONAS = [
+    {"role": "macro economist", "bias": "data-driven, skeptical of consensus"},
+    {"role": "political analyst", "bias": "tracks polling and historical base rates"},
+    {"role": "statistician", "bias": "focuses on base rates and reference class"},
+    # ... N total
+]
+
+def swarm_estimate(market_title: str, resolution_date: str, current_price: float) -> float:
+    estimates = [ask_persona(p, market_title, resolution_date) for p in PERSONAS]
+    weights = [e['confidence'] for e in estimates]
+    p_swarm = np.average([e['p_yes'] for e in estimates], weights=weights)
+    # Bayesian blend: weight on market increases with swarm agreement
+    agreement = 1 - np.std([e['p_yes'] for e in estimates])
+    p_final = agreement * p_swarm + (1 - agreement) * current_price
+    return p_final
+```
+
+**Evaluation metrics**: Brier score, log-loss, calibration curve vs human superforecasters.

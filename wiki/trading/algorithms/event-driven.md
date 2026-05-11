@@ -342,3 +342,23 @@ Key findings directly relevant to H175 (sec-parser press release section extract
 - Q&A discussion summary (if included in press release)
 - Financial results narrative (above tables)
 - Exclude: raw financial tables, boilerplate legal disclaimers
+
+---
+
+## Text-Based Earnings Surprise (PEAD.txt)
+
+**Source**: Bochkay, Hales & Chava (2023). "PEAD.txt: Post-Earnings-Announcement Drift Using Text." *Journal of Financial and Quantitative Analysis*.
+
+Classic PEAD uses standardized unexpected earnings (SUE = reported EPS − consensus / std). **PEAD.txt** constructs an analogous surprise measure from the *text* of earnings calls:
+
+- **SUE.txt**: sentiment change in earnings call transcript vs prior quarter transcript, scored via FinBERT
+- Generates *larger* PEAD than numeric SUE — especially for firms with low analyst coverage (less efficient pricing of soft information)
+- Combining numeric SUE + SUE.txt further improves signal
+
+**Application to H163/H174**: Current pipeline uses FinBERT on 8-K press releases with gap filter. Upgrade path (H195):
+1. Download earnings call transcripts (AlphaVantage or Seeking Alpha)
+2. Compute SUE.txt = (current quarter FinBERT score) − (prior quarter FinBERT score)
+3. Add SUE.txt as second filter alongside existing 8-K gap filter
+4. Expected improvement: higher OOS win rate for low-analyst-coverage stocks
+
+See also: arXiv:2509.24254 — press release *structure* (section-level FinBERT on intro, highlights, guidance sections) as informative as earnings surprise.
