@@ -1,0 +1,126 @@
+{
+  "date": "2026-05-11",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + post-earnings drift + text signals",
+    "cross-sectional momentum + factor momentum + ML",
+    "multi-agent LLM trading systems",
+    "GitHub trending quantitative finance repos"
+  ],
+  "papers_found": [
+    {
+      "id": "pead-txt-jfqa-2023",
+      "title": "PEAD.txt: Post-Earnings-Announcement Drift Using Text",
+      "source": "JFQA 2023",
+      "url": "https://www.cambridge.org/core/journals/journal-of-financial-and-quantitative-analysis/article/peadtxt-postearningsannouncement-drift-using-text/5EB217BB68B5FB054FE38541BAAC4679",
+      "angle": 2,
+      "relevance_score": 9,
+      "relevance_notes": "Direct upgrade to H163/H174 — text-based SUE measure from call transcripts generates larger PEAD than numeric SUE. H195 candidate.",
+      "staged": true,
+      "staged_file": "1_pead_txt_sue_upgrade.json"
+    },
+    {
+      "id": "arxiv-2509-24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Stock Returns",
+      "source": "arXiv:2509.24254 (Oct 2025)",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "angle": 2,
+      "relevance_score": 8,
+      "relevance_notes": "Section-level FinBERT on press release structure (intro/highlights/guidance) as informative as earnings surprise numbers. Extension of H174 8-K pipeline.",
+      "staged": true,
+      "staged_file": "1_pead_txt_sue_upgrade.json"
+    },
+    {
+      "id": "arxiv-2503-01886",
+      "title": "Advanced Deep Learning Techniques for Analyzing Earnings Call Transcripts",
+      "source": "arXiv:2503.01886 (Feb 2025)",
+      "url": "https://arxiv.org/abs/2503.01886",
+      "angle": 2,
+      "relevance_score": 5,
+      "relevance_notes": "FinBERT vs ULMFiT on earnings transcripts — FinBERT wins. Confirms existing choice but no new methodology.",
+      "staged": false
+    },
+    {
+      "id": "arxiv-2505-16090",
+      "title": "Can AI Read Between the Lines? Benchmarking LLMs on Financial Nuance",
+      "source": "arXiv:2505.16090 (May 2026)",
+      "url": "https://arxiv.org/abs/2505.16090",
+      "angle": 2,
+      "relevance_score": 7,
+      "relevance_notes": "FinBERT best for domain-specific sentiment; GPT-4o-mini better for nuanced qualitative reasoning. Informs H171 design. Wiki update staged.",
+      "staged": true,
+      "staged_file": "4_llm_financial_nuance_benchmark.json"
+    },
+    {
+      "id": "polyswarm-arxiv-2604-03888",
+      "title": "PolySwarm: A Multi-Agent Large Language Model Framework for Prediction Market Trading and Latency Arbitrage",
+      "source": "arXiv:2604.03888 (Apr 2026)",
+      "url": "https://arxiv.org/abs/2604.03888",
+      "angle": 4,
+      "relevance_score": 9,
+      "relevance_notes": "Direct methodology for H185 (Kalshi multi-agent). 50-persona swarm + confidence-weighted Bayesian aggregation + quarter-Kelly. Targets Polymarket but architecture applies to Kalshi.",
+      "staged": true,
+      "staged_file": "2_polyswarm_kalshi_h185.json"
+    },
+    {
+      "id": "tradingagents-arxiv-2412-20138",
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "source": "arXiv:2412.20138 (Dec 2024, updated Jun 2025)",
+      "url": "https://arxiv.org/abs/2412.20138",
+      "angle": 4,
+      "relevance_score": 6,
+      "relevance_notes": "Good architecture reference (analyst + risk + trader agents). GitHub: TauricResearch/TradingAgents. Less directly actionable than PolySwarm for current pipeline.",
+      "staged": false
+    },
+    {
+      "id": "arxiv-2507-07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Portfolio Optimization with Bias Correction",
+      "source": "arXiv:2507.07107 (2025)",
+      "url": "https://arxiv.org/abs/2507.07107",
+      "angle": 3,
+      "relevance_score": 5,
+      "relevance_notes": "Alpha101 factors + rolling windows 5-252 days + sector-cohort effects. Relevant to H167 but no new technique beyond existing ml-for-trading.md coverage.",
+      "staged": false
+    },
+    {
+      "id": "etf-cointegration-2025",
+      "title": "Cointegration-based pairs trading: identifying and exploiting similar ETFs",
+      "source": "Journal of Asset Management, 2025",
+      "url": "https://ideas.repec.org/a/pal/assmgt/v26y2025i5d10.1057_s41260-025-00416-0.html",
+      "angle": 1,
+      "relevance_score": 4,
+      "relevance_notes": "Confirms cointegration instability OOS for ETF pairs. Consistent with H152-H160 exhaustion finding. No new signal to revive pairs family.",
+      "staged": false
+    },
+    {
+      "id": "github-spectre-gpu",
+      "title": "Spectre: GPU-Accelerated Factor Analysis Library and Backtester",
+      "source": "GitHub trending",
+      "url": "https://github.com/topics/backtesting-frameworks",
+      "angle": 5,
+      "relevance_score": 6,
+      "relevance_notes": "GPU-accelerated rolling factor computation — relevant when universe expands beyond 30 stocks for H167/H191-H193. Wiki addition staged.",
+      "staged": true,
+      "staged_file": "3_spectre_gpu_backtester.json"
+    },
+    {
+      "id": "github-finrl-x",
+      "title": "FinRL-X: AI-Native Modular Infrastructure for Quantitative Trading",
+      "source": "GitHub / arXiv:2603.21330",
+      "url": "https://github.com/AI4Finance-Foundation/FinRL-Trading",
+      "angle": 5,
+      "relevance_score": 4,
+      "relevance_notes": "Next-gen RL trading framework. Not actionable yet — RL approaches require significantly more data than current 30-stock universe supports reliably.",
+      "staged": false
+    }
+  ],
+  "staged_count": 4,
+  "high_relevance_count": 3,
+  "summary": "Strong session. Two angles produced actionable proposals: PEAD/NLP upgrades (SUE.txt + press release structure) give H195 a concrete methodology; PolySwarm gives H185 a production-ready architecture blueprint. Low-vol wiki page created as Phase 1 deliverable. Pairs family exhaustion confirmed by 2025 ETF cointegration study.",
+  "next_session_priorities": [
+    "H190: H188 + H181 blend on 30-stock universe — run backtest",
+    "H191: Low-vol decile (252d daily vol) on 30-stock universe",
+    "H192: BAB-style beta rank on 30-stock universe",
+    "H195 candidate: PEAD.txt — add transcript-based SUE filter to H163/H174 pipeline"
+  ]
+}

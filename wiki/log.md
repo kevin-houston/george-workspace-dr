@@ -160,6 +160,16 @@ Three tasks completed per Kevin's review of lint report:
 
 3. **Cross-reference pass on event-driven.md**: Added `[NLP & Alternative Data](../tools/nlp-alternative-data.md)` and `[Machine Learning for Trading](../tools/ml-for-trading.md)` to Related Pages line (line 11). Both tools pages are directly relevant to H163/H168/H174 PEAD-NLP strategies documented in event-driven.md.
 
+## [2026-05-11] wiki | Low-Volatility Anomaly page + dream cycle scan
+
+Phase 1: Created `wiki/trading/algorithms/low-volatility.md` (new strategy family page). Covers Blitz & Vliet low-vol decile (Sharpe 0.72, 3yr weekly vol signal), Frazzini-Pedersen BAB (Sharpe 0.78 US 1926–2012, market-neutral beta factor), minimum variance (skfolio), and sector-neutral variant (most crowding-resistant post-SPLV/USMV). Python implementations for all three signal types. H191–H193 queued. Added to wiki/index.md (pages 59→60) and trading/index.md.
+
+Phase 2: Dream cycle scan across 5 angles. 10 papers/repos found, 4 staged:
+1. PEAD.txt (JFQA) + arXiv:2509.24254 — text-based SUE from transcripts/press release structure → H195 pathway
+2. PolySwarm (arXiv:2604.03888) — 50-persona Bayesian swarm for Kalshi/Polymarket → H185 methodology
+3. Spectre GPU backtester — for future large-universe expansion
+4. arXiv:2505.16090 — FinBERT vs GPT-4o-mini decision tree for NLP tasks
+
 ## [2026-05-10] research | Nightly session — H188, H189
 
 2 hypotheses tested and evaluated.
