@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>George — Trading Command Center</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d2e;
+    --surface2: #242840;
+    --border: #2d3154;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --green: #22c55e;
+    --yellow: #facc15;
+    --red: #ef4444;
+    --blue: #60a5fa;
+    --purple: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header h1 {
+    font-size: 1.2em;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+  .header h1 span { color: var(--blue); }
+  .header .meta { color: var(--muted); font-size: 0.8em; text-align: right; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 16px;
+    padding: 20px 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .card.wide { grid-column: span 2; }
+  .card-header {
+    background: var(--surface2);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-header h2 { font-size: 0.85em; font-weight: 700; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+  .card-header .indicator { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite; }
+  .indicator.yellow { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); }
+  .indicator.gray { background: var(--muted); box-shadow: none; animation: none; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+  .card-body { padding: 14px 16px; }
+  .strategy-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .strategy-row:last-child { border-bottom: none; }
+  .strategy-name { color: var(--text); font-weight: 700; font-size: 0.9em; }
+  .strategy-meta { color: var(--muted); font-size: 0.78em; margin-top: 2px; }
+  .strategy-stat { text-align: right; }
+  .stat-val { color: var(--green); font-weight: 700; font-size: 0.95em; }
+  .stat-label { color: var(--muted); font-size: 0.75em; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th { color: var(--muted); font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.06em; padding: 6px 8px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 7px 8px; border-bottom: 1px solid #1e2235; font-size: 0.83em; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1e2235; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .action-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8em;
+    transition: all 0.15s;
+  }
+  .action-btn:hover { background: #2d3154; border-color: var(--blue); color: var(--blue); }
+  .action-btn:active { transform: scale(0.97); }
+  .toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: #1e2d1e; border: 1px solid var(--green); color: var(--green);
+    padding: 10px 18px; border-radius: 8px;
+    font-size: 0.85em; font-weight: 700;
+    opacity: 0; transition: opacity 0.2s;
+    pointer-events: none; z-index: 9999;
+  }
+  .toast.show { opacity: 1; }
+  ul { list-style: none; padding: 0; }
+  ul li { padding: 4px 0; border-bottom: 1px solid #1e2235; color: var(--muted); font-size: 0.83em; }
+  ul li:last-child { border-bottom: none; }
+  .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+  .metric { background: var(--surface2); border-radius: 6px; padding: 10px; text-align: center; border: 1px solid var(--border); }
+  .metric-val { font-size: 1.1em; font-weight: 700; color: var(--green); }
+  .metric-lbl { font-size: 0.7em; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+  .pead-status { display: flex; gap: 16px; padding: 10px 0; }
+  .pead-item { flex: 1; background: var(--surface2); border-radius: 6px; padding: 8px 12px; border: 1px solid var(--border); }
+  .divider { height: 1px; background: var(--border); margin: 12px 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>⚡ <span>George</span> — Trading Command Center</h1>
+    <div class="meta" style="margin-top:4px;font-size:0.75em;color:#475569">LLM Wiki + HTML Artifact</div>
+  </div>
+  <div class="meta">
+    <div style="color:#22c55e;font-weight:700">● LIVE (Paper)</div>
+    <div>Updated: 2026-05-11 16:01 UTC</div>
+    <div>Phase 2→3 — Paper Trading Active</div>
+  </div>
+</div>
+
+<div class="grid">
+
+  <!-- PAPER TRADING STRATEGIES -->
+  <div class="card">
+    <div class="card-header">
+      <h2>📈 Active Strategies</h2>
+      <div class="indicator"></div>
+    </div>
+    <div class="card-body">
+      <div class="strategy-row">
+        <div>
+          <div class="strategy-name">H026 ETF Sector Rotation</div>
+          <div class="strategy-meta">H149 · 25 ETFs · TSMOM top-1 · Monthly rebalance</div>
+          <div class="strategy-meta">Started: 2026-04-28</div>
+        </div>
+        <div class="strategy-stat">
+          <div class="stat-val">3.007</div><div class="stat-label">OOS Sharpe</div>
+          <div style="margin-top:4px"><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">ACTIVE</span></div>
+        </div>
+      </div>
+      <div class="strategy-row">
+        <div>
+          <div class="strategy-name">H181 Industry-Adjusted Reversal</div>
+          <div class="strategy-meta">30 stocks · 8 GICS sectors · Long bottom-6</div>
+          <div class="strategy-meta">Started: 2026-05-10 · Corr(H026)=0.293</div>
+        </div>
+        <div class="strategy-stat">
+          <div class="stat-val">1.138</div><div class="stat-label">OOS Sharpe</div>
+          <div style="margin-top:4px"><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">ACTIVE</span></div>
+        </div>
+      </div>
+      <div class="strategy-row">
+        <div>
+          <div class="strategy-name">PEAD-NLP H174</div>
+          <div class="strategy-meta">FinBERT 8-K scorer · Gap ≥3% · 5% per position</div>
+          <div class="strategy-meta">Open positions: 0 · Last check: 2026-05-11</div>
+        </div>
+        <div class="strategy-stat">
+          <div class="stat-val">80.8%</div><div class="stat-label">OOS Win Rate</div>
+          <div style="margin-top:4px"><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">ACTIVE</span></div>
+        </div>
+      </div>
+      <div class="strategy-row">
+        <div>
+          <div class="strategy-name">Iron Condor (SPY)</div>
+          <div class="strategy-meta">IC-2026-04-26-001 · $645p/$670p/$775c/$800c</div>
+          <div class="strategy-meta">Expiry: Jun 12 · Credit: $533 · Max loss: $1,967</div>
+        </div>
+        <div class="strategy-stat">
+          <div class="stat-val">$533</div><div class="stat-label">Credit recv.</div>
+          <div style="margin-top:4px"><span class="badge" style="background:#1e1e2e;color:#94a3b8;border:1px solid #94a3b840">INACTIVE</span></div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="action-btn" onclick="copyMsg('George check current Alpaca paper trading positions for all strategies')" title="Copy to clipboard, then paste to George">📊 Check Alpaca positions</button>
+        <button class="action-btn" onclick="copyMsg('George what is the H026 ETF rotation signal for today\'s rebalance?')" title="Copy to clipboard, then paste to George">🔄 H026 signal today</button>
+        <button class="action-btn" onclick="copyMsg('George run the PEAD overnight scan and show me tomorrow\'s watchlist')" title="Copy to clipboard, then paste to George">🔍 PEAD watchlist</button>
+        <button class="action-btn" onclick="copyMsg('George run the H181 industry reversal rebalance and show me the target portfolio')" title="Copy to clipboard, then paste to George">⚖️ H181 rebalance</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PEAD DETAIL -->
+  <div class="card">
+    <div class="card-header">
+      <h2>📰 PEAD-NLP Pipeline</h2>
+      <div class="indicator gray"></div>
+    </div>
+    <div class="card-body">
+      <div class="pead-status">
+        <div class="pead-item">
+          <div class="metric-val" style="font-size:1.4em">0</div>
+          <div class="metric-lbl">Open Positions</div>
+        </div>
+        <div class="pead-item">
+          <div class="metric-val" style="font-size:1.4em;color:#facc15">0</div>
+          <div class="metric-lbl">Candidates Today</div>
+        </div>
+        <div class="pead-item">
+          <div class="metric-val" style="font-size:0.85em;color:#60a5fa">2026-05-11</div>
+          <div class="metric-lbl">Last Check</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div style="color:#64748b;font-size:0.82em;margin-bottom:8px">Today's candidates: <span style="color:#e2e8f0">none (no earnings)</span></div>
+      <div class="divider"></div>
+      <div style="color:#64748b;font-size:0.78em;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Pipeline stages</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px">
+        <div style="background:#1e2235;border-radius:5px;padding:7px 10px;font-size:0.78em">
+          <div style="color:#a78bfa;font-weight:700">1. Overnight</div>
+          <div style="color:#64748b">EDGAR 8-K → FinBERT → watchlist</div>
+        </div>
+        <div style="background:#1e2235;border-radius:5px;padding:7px 10px;font-size:0.78em">
+          <div style="color:#a78bfa;font-weight:700">2. Open</div>
+          <div style="color:#64748b">Gap ≥3% → market buy OPG order</div>
+        </div>
+        <div style="background:#1e2235;border-radius:5px;padding:7px 10px;font-size:0.78em">
+          <div style="color:#a78bfa;font-weight:700">3. Intraday</div>
+          <div style="color:#64748b">Stop loss check · trailing stop</div>
+        </div>
+        <div style="background:#1e2235;border-radius:5px;padding:7px 10px;font-size:0.78em">
+          <div style="color:#a78bfa;font-weight:700">4. Exit</div>
+          <div style="color:#64748b">T+20 days or stop triggered</div>
+        </div>
+      </div>
+      <div style="color:#64748b;font-size:0.78em;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">H195 queued — PEAD.txt upgrade</div>
+      <div style="color:#64748b;font-size:0.8em">SUE.txt: transcript FinBERT delta → larger PEAD signal for low-coverage stocks</div>
+    </div>
+  </div>
+
+  <!-- HYPOTHESIS PIPELINE — wide -->
+  <div class="card wide">
+    <div class="card-header">
+      <h2>🧪 Hypothesis Pipeline</h2>
+      <span style="color:#64748b;font-size:0.8em">Last 15 entries from hypothesis-log.md</span>
+    </div>
+    <div class="card-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <div style="color:#64748b;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Recent results</div>
+          <table>
+            <thead><tr><th>H#</th><th>Status</th><th>Description</th></tr></thead>
+            <tbody>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H020</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">5-asset OOS Sharpe 1</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H024</td>
+          <td><span class="badge" style="background:#1a1a1a;color:#6b7280;border:1px solid #6b728040">UNKNOWN</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">INCONCLUSIVE as standalone — Sharpe 1.15 > SPY (0.62), CAGR 3.6% < SPY (10.8%), </td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H026</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">Sharpe 0</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H028</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">Max-Sharpe blend 63% H020 / 37% H026</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H029</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">VIX/VIX3M overlay improves H020</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H022</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">Tax-efficient H020</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H030</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">Taxable-optimal blend</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H031</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">Three-way blend H020/H026/H009 56/19/25</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H032</td>
+          <td><span class="badge" style="background:#1a1a1a;color:#6b7280;border:1px solid #6b728040">UNKNOWN</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">REJECTED — ML overlay detracted. RF accuracy 0.615 (worse than 70.6% base rate),</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H035</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">BTC never selected in 124 evaluated months (0% selection rate)</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H036</td>
+          <td><span class="badge" style="background:#1a1a1a;color:#6b7280;border:1px solid #6b728040">UNKNOWN</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">REJECTED (weak edge, high MaxDD). Gap < -0.5%: full-period CAGR -0.4%, Sharpe -0</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H033</td>
+          <td><span class="badge" style="background:#1a1a1a;color:#6b7280;border:1px solid #6b728040">UNKNOWN</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">REJECTED — Both approaches hurt H031. Approach A (direct VIX proxy): CAGR -5.41%</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H040</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">H040 (15 ETFs): CAGR 14</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H041</td>
+          <td><span class="badge" style="background:#052e16;color:#22c55e;border:1px solid #22c55e40">CONFIRMED</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">H041a (7-asset H020+EFA/EEM): CAGR 14</td>
+        </tr>
+        <tr>
+          <td style="color:#e2e8f0;font-weight:700">H038</td>
+          <td><span class="badge" style="background:#1a1a1a;color:#6b7280;border:1px solid #6b728040">UNKNOWN</span></td>
+          <td style="color:#94a3b8;font-size:0.82em">REJECTED as diversifier — Factor ETF rotation (MTUM/QUAL/VLUE/SIZE/USMV/DGRO top</td>
+        </tr></tbody>
+          </table>
+        </div>
+        <div>
+          <div style="color:#64748b;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Queue — next tests</div>
+          <table>
+            <thead><tr><th>H#</th><th>Strategy</th><th>Signal</th></tr></thead>
+            <tbody>
+              <tr><td style="color:#e2e8f0;font-weight:700">H190</td><td style="color:#facc15">QUEUED</td><td style="color:#94a3b8;font-size:.82em">H188+H181 blend (30-stock universe)</td></tr>
+              <tr><td style="color:#e2e8f0;font-weight:700">H191</td><td style="color:#facc15">QUEUED</td><td style="color:#94a3b8;font-size:.82em">Low-Vol Decile (252d daily vol)</td></tr>
+              <tr><td style="color:#e2e8f0;font-weight:700">H192</td><td style="color:#facc15">QUEUED</td><td style="color:#94a3b8;font-size:.82em">BAB-style Beta Rank</td></tr>
+              <tr><td style="color:#e2e8f0;font-weight:700">H193</td><td style="color:#facc15">QUEUED</td><td style="color:#94a3b8;font-size:.82em">Sector-Neutral Low-Vol</td></tr>
+              <tr><td style="color:#e2e8f0;font-weight:700">H195</td><td style="color:#facc15">QUEUED</td><td style="color:#94a3b8;font-size:.82em">PEAD.txt transcript SUE upgrade</td></tr>
+            </tbody>
+          </table>
+          <div style="color:#64748b;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;margin:14px 0 8px">H185/H186 blockers</div>
+          <div style="color:#64748b;font-size:0.8em">H185 (Kalshi PolySwarm): needs 6mo resolved market history<br>H186 (UOA): blocked — Polygon options ~$200/mo required</div>
+        </div>
+      </div>
+      <div class="actions" style="margin-top:16px">
+        <button class="action-btn" onclick="copyMsg('George run H190: backtest the H188 + H181 blend on the 30-stock universe')" title="Copy to clipboard, then paste to George">▶️ Run H190</button>
+        <button class="action-btn" onclick="copyMsg('George run H191: low-vol decile backtest (252d daily vol) on the 30-stock universe')" title="Copy to clipboard, then paste to George">▶️ Run H191</button>
+        <button class="action-btn" onclick="copyMsg('George run H192: BAB-style beta rank backtest on the 30-stock universe')" title="Copy to clipboard, then paste to George">▶️ Run H192</button>
+        <button class="action-btn" onclick="copyMsg('George give me a full status report on the hypothesis pipeline and paper trading')" title="Copy to clipboard, then paste to George">📋 Full status</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ETF ROTATION TRADE LOG -->
+  <div class="card">
+    <div class="card-header">
+      <h2>🔄 ETF Rotation Log</h2>
+      <span style="color:#64748b;font-size:0.8em">H149 · H026 signal</span>
+    </div>
+    <div class="card-body">
+      <div class="metric-grid">
+        <div class="metric">
+          <div class="metric-val">382×</div>
+          <div class="metric-lbl">Cumul. Return</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val">3.007</div>
+          <div class="metric-lbl">OOS Sharpe</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val" style="color:#ef4444">-9.6%</div>
+          <div class="metric-lbl">Max DD</div>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Date</th><th>Holdings</th><th>Equity</th></tr></thead>
+        <tbody>
+        <tr>
+          <td style="color:#e2e8f0">2026-04-28</td>
+          <td style="color:#60a5fa">EWH, IBB, HYG, BIL</td>
+          <td style="color:#22c55e">$102,445</td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- DREAM CYCLE -->
+  <div class="card">
+    <div class="card-header">
+      <h2>🌙 Dream Cycle</h2>
+      <div class="indicator yellow"></div>
+    </div>
+    <div class="card-body">
+      <div style="display:flex;gap:12px;margin-bottom:12px">
+        <div class="metric" style="flex:1">
+          <div class="metric-val" style="color:#22c55e">4</div>
+          <div class="metric-lbl">Applied</div>
+        </div>
+        <div class="metric" style="flex:1">
+          <div class="metric-val" style="color:#ef4444">0</div>
+          <div class="metric-lbl">Flagged</div>
+        </div>
+        <div class="metric" style="flex:2">
+          <div class="metric-val" style="font-size:0.85em;color:#60a5fa">2026-05-11</div>
+          <div class="metric-lbl">Last Run</div>
+        </div>
+      </div>
+      <div style="color:#64748b;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Last applied</div>
+      <ul><li>PEAD.txt text-based SUE upgrade</li><li>PolySwarm methodology for H185</li><li>Spectre GPU backtester</li><li>LLM vs FinBERT decision tree</li></ul>
+      
+      <div class="actions">
+        <button class="action-btn" onclick="copyMsg('George run the dream cycle research scan for today')" title="Copy to clipboard, then paste to George">🔬 Run dream scan</button>
+        <button class="action-btn" onclick="copyMsg('George apply all pending staged dream cycle proposals')" title="Copy to clipboard, then paste to George">✅ Apply staged</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERFORMANCE SUMMARY -->
+  <div class="card">
+    <div class="card-header">
+      <h2>📊 Strategy Performance</h2>
+      <span style="color:#64748b;font-size:0.8em">OOS metrics</span>
+    </div>
+    <div class="card-body">
+      <table>
+        <thead><tr><th>Strategy</th><th>Sharpe</th><th>CAGR</th><th>MaxDD</th><th>Corr</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="color:#e2e8f0;font-weight:700">H026 ETF Rot.</td>
+            <td style="color:#22c55e">3.007</td>
+            <td style="color:#22c55e">—</td>
+            <td style="color:#ef4444">-9.6%</td>
+            <td style="color:#64748b">baseline</td>
+          </tr>
+          <tr>
+            <td style="color:#e2e8f0;font-weight:700">H181 Ind. Rev.</td>
+            <td style="color:#22c55e">1.138</td>
+            <td style="color:#22c55e">24.6%</td>
+            <td style="color:#ef4444">-18.4%</td>
+            <td style="color:#64748b">0.293</td>
+          </tr>
+          <tr>
+            <td style="color:#e2e8f0;font-weight:700">H188 52wk High</td>
+            <td style="color:#22c55e">0.774</td>
+            <td style="color:#22c55e">11.4%</td>
+            <td style="color:#ef4444">-13.6%</td>
+            <td style="color:#64748b">0.389†</td>
+          </tr>
+          <tr>
+            <td style="color:#e2e8f0;font-weight:700">H174 PEAD-NLP</td>
+            <td style="color:#22c55e">—</td>
+            <td style="color:#22c55e">—</td>
+            <td style="color:#64748b">—</td>
+            <td style="color:#64748b">—</td>
+          </tr>
+          <tr>
+            <td style="color:#e2e8f0;font-weight:700">H189 60/40 Blend</td>
+            <td style="color:#22c55e">2.402</td>
+            <td style="color:#64748b">—</td>
+            <td style="color:#ef4444">-9.8%</td>
+            <td style="color:#64748b">—</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="color:#475569;font-size:0.75em;margin-top:10px">† Corr(H188,H181). All OOS 2021-2026 except H026 (2018-2026).</div>
+      <div class="actions">
+        <button class="action-btn" onclick="copyMsg('George generate a full portfolio performance report comparing all active strategies')" title="Copy to clipboard, then paste to George">📈 Portfolio report</button>
+        <button class="action-btn" onclick="copyMsg('George show me the current OOS correlation matrix across all confirmed strategies')" title="Copy to clipboard, then paste to George">🔢 Correlation matrix</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH LOG -->
+  <div class="card">
+    <div class="card-header">
+      <h2>📚 Research Log</h2>
+      <span style="color:#64748b;font-size:0.8em">Latest: 2026-05-11</span>
+    </div>
+    <div class="card-body">
+      <div style="color:#64748b;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Today's sessions</div>
+      <ul><li style="color:#94a3b8">Phase 1: Wiki Expansion — Low-Volatility Anomaly</li><li style="color:#94a3b8">Phase 2: Dream Cycle Scan</li></ul>
+      <div class="divider"></div>
+      <div style="color:#64748b;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Wiki stats</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div class="metric"><div class="metric-val">60</div><div class="metric-lbl">Pages</div></div>
+        <div class="metric"><div class="metric-val">189</div><div class="metric-lbl">H-series</div></div>
+        <div class="metric"><div class="metric-val" style="color:#22c55e">3</div><div class="metric-lbl">Live strats</div></div>
+      </div>
+      <div class="actions">
+        <button class="action-btn" onclick="copyMsg('George run the nightly research session: read hypothesis log, pick next 2 hypotheses, test them')" title="Copy to clipboard, then paste to George">🌙 Nightly research</button>
+        <button class="action-btn" onclick="copyMsg('George query the wiki about low-volatility anomaly and what hypotheses are queued')" title="Copy to clipboard, then paste to George">🔎 Wiki query</button>
+        <button class="action-btn" onclick="copyMsg('George run a wiki lint health check and fix any issues found')" title="Copy to clipboard, then paste to George">🩺 Wiki lint</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK ACTIONS -->
+  <div class="card">
+    <div class="card-header">
+      <h2>⚡ Quick Actions</h2>
+      <span style="color:#64748b;font-size:0.8em">Copy → paste to George in Telegram</span>
+    </div>
+    <div class="card-body">
+      <div style="color:#64748b;font-size:0.78em;margin-bottom:12px">Click any button to copy the command to your clipboard, then paste it to George in Telegram.</div>
+      <div style="color:#64748b;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">📊 Trading</div>
+      <div class="actions" style="margin-top:0">
+        <button class="action-btn" onclick="copyMsg('George give me a complete status report: paper trading positions, open P&L, next rebalance dates, and any alerts')" title="Copy to clipboard, then paste to George">📋 Full status report</button>
+        <button class="action-btn" onclick="copyMsg('George check current Alpaca paper account equity and buying power')" title="Copy to clipboard, then paste to George">💰 Alpaca equity</button>
+        <button class="action-btn" onclick="copyMsg('George please deploy H190 to Alpaca paper trading after backtesting confirms it')" title="Copy to clipboard, then paste to George">🚀 Deploy H190</button>
+      </div>
+      <div class="divider"></div>
+      <div style="color:#64748b;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🔬 Research</div>
+      <div class="actions" style="margin-top:0">
+        <button class="action-btn" onclick="copyMsg('George pull and cache 6 months of resolved Kalshi market history to unblock H185')" title="Copy to clipboard, then paste to George">📥 H185 Kalshi data</button>
+        <button class="action-btn" onclick="copyMsg('George regenerate the HTML trading dashboard artifact with latest data')" title="Copy to clipboard, then paste to George">🔄 Regenerate dashboard</button>
+        <button class="action-btn" onclick="copyMsg('George run a git backup and push to GitHub')" title="Copy to clipboard, then paste to George">💾 DR backup</button>
+      </div>
+      <div class="divider"></div>
+      <div style="color:#64748b;font-size:0.78em;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🌙 Nightly automation</div>
+      <div class="actions" style="margin-top:0">
+        <button class="action-btn" onclick="copyMsg('George update the nightly research schedule to prioritize low-volatility hypotheses H191-H193')" title="Copy to clipboard, then paste to George">⏰ Reschedule research</button>
+        <button class="action-btn" onclick="copyMsg('George pause the dream cycle build phase until further notice')" title="Copy to clipboard, then paste to George">⏸️ Pause dream cycle</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast" class="toast">✓ Copied to clipboard</div>
+
+<script>
+function copyMsg(msg) {
+  navigator.clipboard.writeText(msg).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  }).catch(() => {
+    // Fallback: prompt
+    prompt('Copy this message to paste to George:', msg);
+  });
+}
+</script>
+</body>
+</html>
