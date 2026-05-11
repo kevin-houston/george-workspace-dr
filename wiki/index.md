@@ -1,6 +1,6 @@
 ---
 updated: 2026-05-10
-sources_indexed: 3
+sources_indexed: 1
 pages: 59
 ---
 
@@ -62,6 +62,7 @@ When answering a query:
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
 - [H149 Alpaca ETF Rotation](trading/paper-trading/h122-alpaca.md) — production strategy log; H026 100% rotation; started 2026-04-28
 - [PEAD-NLP Alpaca Deployment](trading/paper-trading/pead-nlp-alpaca.md) — H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders; started 2026-05-06
+- [H181 Industry-Adjusted Reversal Deployment](trading/paper-trading/h181-alpaca.md) — H181 live pipeline: 30-stock equal-weight monthly reversal; started 2026-05-10
 
 **Prediction Markets**
 - [Kalshi](trading/prediction-markets/kalshi.md) — primary prediction market platform; CFTC-regulated, economic events, RSA-PSS auth, CPI/NFP strategies live

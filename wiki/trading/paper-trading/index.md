@@ -1,11 +1,21 @@
 ---
-updated: 2026-04-30
+updated: 2026-05-10
 status: active
 ---
 
 # Paper Trading Index
 
 ## Active Strategies
+
+### [H181 Industry-Adjusted Short-Term Reversal](h181-alpaca.md) — ACTIVE
+**Production: 30-stock equal-weight reversal portfolio.** First trading day of month rebalance via Alpaca paper.
+- Universe: 30 large-cap S&P 500 stocks (8 GICS sectors)
+- Signal: REV^IN = prior-month return minus equal-weight GICS-sector average; long bottom-6
+- Position sizing: equal-weight, 1/6 equity per stock (~16.7% each)
+- OOS (2021–2026): Sharpe 1.138, CAGR 24.6%, MaxDD −18.4%, 1 negative year
+- Script: `backtesting/paper_trading/h181_monthly.py`
+- Started: 2026-05-10; Corr(H026) = 0.293 — genuine diversification
+- **Path to real money:** 2 months paper validation (gate: results within 1.5σ of OOS mean)
 
 ### [H149 Alpaca ETF Rotation](h122-alpaca.md) — ACTIVE
 **Production: 100% H026 sector rotation.** First trading day of month rebalance via Alpaca paper.

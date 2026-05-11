@@ -145,3 +145,29 @@ Issues found: 20. Auto-fixed: 17. Needs review: 3.
 1. wiki/index.md `sources_indexed: 3` — sources/ directory has only 1 file (jpmorgan-portfolio-approach); count appears wrong, but may reference in-memory ingests not saved to sources/
 2. wiki/trading/paper-trading/index.md — may be stale; hasn't been checked for H181 deployment status (Kevin decision pending)
 3. wiki/trading/algorithms/event-driven.md Related Pages section — should add links to nlp-alternative-data.md and ml-for-trading.md (new tools pages not yet cross-referenced from event-driven)
+
+## [2026-05-10] deploy | H181 paper trading + wiki audit fixes
+
+Three tasks completed per Kevin's review of lint report:
+
+1. **sources_indexed audited and corrected**: wiki/index.md `sources_indexed: 3 → 1`. Confirmed via glob: sources/ directory contains exactly 1 file (jpmorgan-portfolio-approach-impact-investment-2012.md). Count of 3 was a legacy artifact from in-memory ingest tracking.
+
+2. **H181 deployed to Alpaca paper trading**: 
+   - Created `backtesting/paper_trading/h181_monthly.py` — monthly industry-adjusted reversal rebalancer. Signal: REV^IN = prior-month return minus equal-weight GICS-sector avg; long bottom-6 equal-weight. Alpaca paper account, --dry-run/--status/--force CLI flags.
+   - Created `wiki/trading/paper-trading/h181-alpaca.md` — deployment guide (signal logic, universe table, workflow, risks, path to real money)
+   - Updated `wiki/trading/paper-trading/index.md` — H181 added as active strategy; date updated 2026-04-30→2026-05-10
+   - Updated `wiki/index.md` — h181-alpaca.md added to Paper Trading section
+
+3. **Cross-reference pass on event-driven.md**: Added `[NLP & Alternative Data](../tools/nlp-alternative-data.md)` and `[Machine Learning for Trading](../tools/ml-for-trading.md)` to Related Pages line (line 11). Both tools pages are directly relevant to H163/H168/H174 PEAD-NLP strategies documented in event-driven.md.
+
+## [2026-05-10] research | Nightly session — H188, H189
+
+2 hypotheses tested and evaluated.
+
+**H188 — 52-Week High Proximity Momentum (George & Hwang 2004): CONFIRMED**
+Signal: prox_i = last_close / max(prior 252 trading days). Long top-6 monthly. IS 2012–2020 Sharpe 1.104; OOS 2021–2026 Sharpe 0.774, CAGR 11.4%, MaxDD −13.6%, 0 negative years. Corr(H188, H181) OOS = 0.389 (both long-only, share market factor).
+
+**H189 — H026 + H181 Monthly Blend (Portfolio Construction): CONFIRMED (blend adds value)**
+Corr(H026, H181) OOS = 0.099 (near-zero). All tested blends (90/10 through 50/50) produce higher OOS Sharpe than pure H026 (2.222 → 2.402 at 60/40). Trade-off: cumulative return drops dramatically (62× → 21× at 60/40). Practical recommendation: separate capital buckets, not blended account. H190 (H188+H181 blend on same 30-stock universe) queued as next natural test.
+
+Files: backtesting/daily/run_h188.py, backtesting/daily/run_h189.py. Hypothesis log updated with H188+H189 cards.

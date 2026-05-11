@@ -1,0 +1,19 @@
+H189 — H026 + H181 Monthly Blend Portfolio Construction
+Run: 2026-05-10 23:08
+
+Strategy descriptions:
+  H026: H149 ETF sector rotation, 25 ETFs, TSMOM filter >5%, top-1 monthly
+  H181: Industry-adjusted reversal, 30 stocks, long bottom-6, monthly
+
+Common period: 2013-02-28 → 2026-04-30
+Corr(H026, H181) OOS: 0.099
+
+100% H026 + 0% H181             IS_Sharpe=2.361  OOS_Sharpe=2.222  IS_MaxDD=-12.6%  OOS_MaxDD=-9.6%  OOS_Cumul=62.36x  OOS_CAGR=117.0%
+90% H026 + 10% H181             IS_Sharpe=2.435  OOS_Sharpe=2.274  IS_MaxDD=-10.9%  OOS_MaxDD=-9.6%  OOS_Cumul=48.08x  OOS_CAGR=106.7%
+80% H026 + 20% H181             IS_Sharpe=2.492  OOS_Sharpe=2.326  IS_MaxDD=-9.2%  OOS_MaxDD=-9.7%  OOS_Cumul=36.81x  OOS_CAGR=96.6%
+70% H026 + 30% H181             IS_Sharpe=2.516  OOS_Sharpe=2.372  IS_MaxDD=-9.2%  OOS_MaxDD=-9.8%  OOS_Cumul=27.98x  OOS_CAGR=86.8%
+60% H026 + 40% H181             IS_Sharpe=2.492  OOS_Sharpe=2.402  IS_MaxDD=-9.1%  OOS_MaxDD=-9.8%  OOS_Cumul=21.10x  OOS_CAGR=77.1%
+50% H026 + 50% H181             IS_Sharpe=2.407  OOS_Sharpe=2.396  IS_MaxDD=-9.1%  OOS_MaxDD=-9.9%  OOS_Cumul=15.79x  OOS_CAGR=67.8%
+0% H026 + 100% H181             IS_Sharpe=1.369  OOS_Sharpe=1.138  IS_MaxDD=-24.3%  OOS_MaxDD=-18.4%  OOS_Cumul=3.23x  OOS_CAGR=24.6%
+
+VERDICT: CONFIRMED (blend adds value)
