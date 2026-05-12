@@ -1,0 +1,15 @@
+H191 — Low-Volatility Anomaly: 30-Stock Large-Cap Universe
+Run: 2026-05-11 23:06
+Universe: 30/30 large-cap S&P 500 stocks
+IS: 2013–2020  |  OOS: 2021–2026  |  AltOOS: 2013–2026
+
+  Variant                 IS Sh   IS DD  OOS Sh  OOS DD   OOS×   AltSh
+  -----------------------------------------------------------------
+  1yr Daily Vol           0.941   -11.4%   1.035   -12.7%  2.063×   0.983
+  3yr Weekly Vol (B&V)    0.936   -14.7%   1.083   -16.8%  2.126×   1.009
+  Hybrid 50/50 Mom        1.128   -13.1%   1.110   -16.7%  2.185×   1.124
+  Sector-Neutral          1.202   -15.4%   1.050   -17.3%  2.097×   1.144
+  SPY                         —       —   0.954   -23.9%  2.044×   1.042
+
+Best variant: Hybrid 50/50 Mom (OOS Sharpe=1.110, cumul=2.185×)
+VERDICT: CONFIRMED

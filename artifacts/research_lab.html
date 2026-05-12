@@ -1,0 +1,2965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypothesis Research Lab</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0f1a;color:#e2e8f0;min-height:100vh;overflow-x:hidden}
+
+  /* Layout */
+  .top-bar{padding:16px 20px;background:#0f172a;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:16px}
+  .top-bar h1{font-size:18px;font-weight:700;color:#f8fafc;letter-spacing:-0.02em}
+  .top-bar .subtitle{font-size:12px;color:#64748b}
+  .main{display:grid;grid-template-columns:1fr 340px;gap:0;height:calc(100vh - 60px)}
+  .left-panel{display:flex;flex-direction:column;overflow:hidden;border-right:1px solid #1e293b}
+  .right-panel{display:flex;flex-direction:column;overflow:hidden;background:#0d1424}
+
+  /* Stats bar */
+  .stats-bar{padding:12px 16px;background:#0f172a;border-bottom:1px solid #1e293b;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .stat-chip{display:flex;flex-direction:column;align-items:center;padding:6px 14px;border-radius:8px;min-width:80px}
+  .stat-num{font-size:20px;font-weight:700;line-height:1}
+  .stat-label{font-size:10px;color:#64748b;margin-top:2px;text-transform:uppercase;letter-spacing:0.05em}
+
+  /* Funnel */
+  .funnel-section{padding:12px 16px;background:#0f172a;border-bottom:1px solid #1e293b}
+  .funnel-title{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+  .funnel-stage{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .funnel-bar{height:22px;border-radius:4px;display:flex;align-items:center;padding-left:8px;min-width:40px;transition:width 0.3s}
+  .funnel-num{font-size:12px;font-weight:700;color:#fff}
+  .funnel-label{font-size:11px;color:#94a3b8;min-width:80px}
+
+  /* Toolbar */
+  .toolbar{padding:10px 12px;background:#111827;border-bottom:1px solid #1e293b;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .search-box{flex:1;min-width:160px;background:#1e293b;border:1px solid #334155;border-radius:6px;padding:6px 10px;color:#e2e8f0;font-size:13px;outline:none}
+  .search-box:focus{border-color:#3b82f6}
+  .search-box::placeholder{color:#475569}
+  .filter-select{background:#1e293b;border:1px solid #334155;border-radius:6px;padding:6px 8px;color:#e2e8f0;font-size:12px;outline:none;cursor:pointer}
+  .filter-select:focus{border-color:#3b82f6}
+  .clear-btn{background:#1e293b;border:1px solid #334155;border-radius:6px;padding:6px 10px;color:#94a3b8;font-size:12px;cursor:pointer}
+  .clear-btn:hover{color:#e2e8f0;border-color:#475569}
+  .count-label{font-size:11px;color:#475569;white-space:nowrap}
+
+  /* Table */
+  .table-wrap{flex:1;overflow-y:auto}
+  .hyp-table{width:100%;border-collapse:collapse;font-size:12px}
+  .hyp-table th{position:sticky;top:0;background:#111827;color:#64748b;font-weight:500;padding:8px 10px;text-align:left;border-bottom:1px solid #1e293b;cursor:pointer;user-select:none;white-space:nowrap}
+  .hyp-table th:hover{color:#94a3b8}
+  .hyp-table th.sorted{color:#3b82f6}
+  .hyp-table td{padding:7px 10px;border-bottom:1px solid #111827;vertical-align:middle}
+  .hyp-table tr{cursor:pointer;transition:background 0.1s}
+  .hyp-table tr:hover td{background:#1a2436}
+  .hyp-table tr.selected td{background:#1e3a5f!important}
+  .hyp-table tr.hidden{display:none}
+
+  /* Badges */
+  .badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:0.03em;white-space:nowrap}
+  .hid{font-weight:700;color:#60a5fa;font-family:monospace;font-size:11px}
+  .metric{font-family:monospace;font-size:11px}
+  .metric.good{color:#22c55e}
+  .metric.ok{color:#f97316}
+  .metric.bad{color:#ef4444}
+  .metric.na{color:#475569}
+  .desc-cell{color:#94a3b8;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .family-tag{font-size:10px;color:#64748b;background:#1e293b;padding:2px 5px;border-radius:3px;white-space:nowrap}
+
+  /* Right panel */
+  .rp-header{padding:14px 16px;border-bottom:1px solid #1e293b;background:#0f172a}
+  .rp-title{font-size:13px;font-weight:600;color:#94a3b8}
+
+  /* Detail card */
+  .detail-card{padding:16px;overflow-y:auto;flex:1}
+  .detail-card .empty{color:#334155;font-size:13px;text-align:center;margin-top:60px;line-height:1.8}
+  .detail-hid{font-size:28px;font-weight:800;color:#60a5fa;font-family:monospace;margin-bottom:4px}
+  .detail-status{margin-bottom:12px}
+  .detail-desc{font-size:13px;color:#cbd5e1;line-height:1.7;margin-bottom:16px;padding:10px;background:#111827;border-radius:6px;border-left:3px solid #3b82f6}
+  .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+  .metric-card{background:#111827;border:1px solid #1e293b;border-radius:6px;padding:10px}
+  .metric-card .label{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px}
+  .metric-card .value{font-size:18px;font-weight:700;font-family:monospace}
+  .detail-section{margin-bottom:12px}
+  .detail-section-title{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+  .detail-full{font-size:11px;color:#64748b;line-height:1.6;background:#080e18;padding:10px;border-radius:6px;max-height:180px;overflow-y:auto}
+  .copy-btn{display:block;width:100%;background:#1e293b;border:1px solid #334155;border-radius:6px;padding:8px;color:#94a3b8;font-size:12px;cursor:pointer;text-align:center;margin-top:8px;transition:all 0.15s}
+  .copy-btn:hover{background:#2d3f55;color:#e2e8f0}
+  .copy-btn.copied{background:#14532d;border-color:#16a34a;color:#22c55e}
+  .script-link{font-family:monospace;font-size:11px;color:#7dd3fc;padding:2px 0}
+
+  /* Family panel */
+  .family-section{padding:0 0 12px 0;border-top:1px solid #1e293b}
+  .family-section-title{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;padding:10px 16px 6px}
+  .family-table{width:100%;border-collapse:collapse;font-size:11px}
+  .family-table th{color:#475569;font-weight:500;padding:4px 16px;text-align:left}
+  .family-row{cursor:pointer;transition:background 0.1s}
+  .family-row:hover td{background:#1a2436}
+  .family-row td{padding:5px 16px;border-bottom:1px solid #0f172a;color:#94a3b8}
+  .family-row td:first-child{color:#cbd5e1}
+  .mini-bar{display:flex;align-items:center;gap:6px}
+  .mini-bar div{height:6px;border-radius:3px;min-width:2px;flex-shrink:0}
+  .mini-bar span{font-size:10px;color:#64748b}
+  .active-filter{display:none;font-size:10px;color:#3b82f6;background:#1e293b;padding:2px 8px;border-radius:4px;align-items:center;gap:4px}
+  .active-filter.visible{display:inline-flex}
+
+  /* Sort arrows */
+  .sort-arrow{display:inline-block;margin-left:3px;opacity:0.4}
+  .sorted .sort-arrow{opacity:1}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:6px;height:6px}
+  ::-webkit-scrollbar-track{background:#0a0f1a}
+  ::-webkit-scrollbar-thumb{background:#1e293b;border-radius:3px}
+  ::-webkit-scrollbar-thumb:hover{background:#334155}
+
+  @media(max-width:900px){
+    .main{grid-template-columns:1fr}
+    .right-panel{height:400px}
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div>
+    <h1>Hypothesis Research Lab</h1>
+    <div class="subtitle">Systematic strategy discovery pipeline · 169 hypotheses tested</div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-chip" style="background:#14532d">
+    <span class="stat-num" style="color:#22c55e">101</span>
+    <span class="stat-label">Confirmed</span>
+  </div>
+  <div class="stat-chip" style="background:#1c1917">
+    <span class="stat-num" style="color:#f97316">13</span>
+    <span class="stat-label">Partial</span>
+  </div>
+  <div class="stat-chip" style="background:#450a0a">
+    <span class="stat-num" style="color:#ef4444">42</span>
+    <span class="stat-label">Not Confirmed</span>
+  </div>
+  <div class="stat-chip" style="background:#422006">
+    <span class="stat-num" style="color:#eab308">4</span>
+    <span class="stat-label">Queued</span>
+  </div>
+  <div class="stat-chip" style="background:#1f2937">
+    <span class="stat-num" style="color:#6b7280">3</span>
+    <span class="stat-label">Blocked/Flagged</span>
+  </div>
+  <div class="stat-chip" style="background:#1e1b4b;margin-left:auto">
+    <span class="stat-num" style="color:#818cf8">67.5%</span>
+    <span class="stat-label">Confirm Rate</span>
+  </div>
+</div>
+
+<div class="funnel-section">
+  <div class="funnel-title">Pipeline Funnel</div>
+  
+        <div class="funnel-stage">
+          <div class="funnel-bar" style="width:100%;background:#3b82f6">
+            <span class="funnel-num">169</span>
+          </div>
+          <span class="funnel-label">Total</span>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-bar" style="width:96%;background:#8b5cf6">
+            <span class="funnel-num">162</span>
+          </div>
+          <span class="funnel-label">Tested</span>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-bar" style="width:92%;background:#06b6d4">
+            <span class="funnel-num">156</span>
+          </div>
+          <span class="funnel-label">Partial+</span>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-bar" style="width:67%;background:#22c55e">
+            <span class="funnel-num">114</span>
+          </div>
+          <span class="funnel-label">Confirmed+</span>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-bar" style="width:60%;background:#16a34a">
+            <span class="funnel-num">101</span>
+          </div>
+          <span class="funnel-label">Confirmed</span>
+        </div>
+</div>
+
+<div class="main">
+  <div class="left-panel">
+    <div class="toolbar">
+      <input type="text" class="search-box" id="searchBox" placeholder="Search H-number, description, keyword…" oninput="applyFilters()">
+      <select class="filter-select" id="statusFilter" onchange="applyFilters()">
+        <option value="">All Status</option>
+        <option value="CONFIRMED">Confirmed</option>
+        <option value="PARTIAL">Partial</option>
+        <option value="NOT CONFIRMED">Not Confirmed</option>
+        <option value="QUEUED">Queued</option>
+        <option value="BLOCKED">Blocked</option>
+        <option value="FLAGGED">Flagged</option>
+      </select>
+      <select class="filter-select" id="familyFilter" onchange="applyFilters()">
+        <option value="">All Families</option>
+        <option value="Dividends & Options">Dividends & Options</option>
+<option value="ETF Rotation">ETF Rotation</option>
+<option value="Early Experiments">Early Experiments</option>
+<option value="Global / Commodity">Global / Commodity</option>
+<option value="ML / AI">ML / AI</option>
+<option value="Options">Options</option>
+<option value="PEAD Core">PEAD Core</option>
+<option value="PEAD-NLP">PEAD-NLP</option>
+<option value="Pairs Trading">Pairs Trading</option>
+<option value="Portfolio Optimization">Portfolio Optimization</option>
+<option value="Prediction Markets">Prediction Markets</option>
+<option value="Short-Term Reversal">Short-Term Reversal</option>
+<option value="Stock Momentum">Stock Momentum</option>
+      </select>
+      <button class="clear-btn" onclick="clearFilters()">✕ Clear</button>
+      <span class="count-label" id="countLabel">169 shown</span>
+    </div>
+    <div class="table-wrap">
+      <table class="hyp-table" id="hypTable">
+        <thead>
+          <tr>
+            <th onclick="sortBy('num')" id="th-num">H# <span class="sort-arrow" id="arr-num">↕</span></th>
+            <th onclick="sortBy('status')" id="th-status">Status <span class="sort-arrow" id="arr-status">↕</span></th>
+            <th>Description</th>
+            <th onclick="sortBy('sharpe')" id="th-sharpe">Sharpe <span class="sort-arrow" id="arr-sharpe">↕</span></th>
+            <th onclick="sortBy('maxdd')" id="th-maxdd">MaxDD <span class="sort-arrow" id="arr-maxdd">↕</span></th>
+            <th onclick="sortBy('date')" id="th-date">Date <span class="sort-arrow" id="arr-date">↕</span></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="right-panel">
+    <div class="rp-header" style="display:flex;align-items:center;justify-content:space-between">
+      <span class="rp-title">Detail</span>
+      <span class="active-filter" id="activeFilterChip"></span>
+    </div>
+    <div class="detail-card" id="detailCard">
+      <div class="empty">← Click any row to explore<br>Use filters to slice the pipeline<br>Click a family to filter by it</div>
+    </div>
+    <div class="family-section">
+      <div class="family-section-title">Strategy Families</div>
+      <table class="family-table">
+        <thead><tr><th>Family</th><th>N</th><th>✓</th><th>Hit Rate</th></tr></thead>
+        <tbody>
+        <tr class="family-row" onclick="filterByFamily('ETF Rotation')">
+          <td>ETF Rotation</td>
+          <td style="text-align:center">54</td>
+          <td style="text-align:center">46</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:85%;background:#22c55e"></div>
+              <span>85%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('Portfolio Optimization')">
+          <td>Portfolio Optimization</td>
+          <td style="text-align:center">51</td>
+          <td style="text-align:center">36</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:71%;background:#22c55e"></div>
+              <span>71%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('Early Experiments')">
+          <td>Early Experiments</td>
+          <td style="text-align:center">21</td>
+          <td style="text-align:center">16</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:76%;background:#22c55e"></div>
+              <span>76%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('PEAD-NLP')">
+          <td>PEAD-NLP</td>
+          <td style="text-align:center">10</td>
+          <td style="text-align:center">2</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:20%;background:#ef4444"></div>
+              <span>20%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('Stock Momentum')">
+          <td>Stock Momentum</td>
+          <td style="text-align:center">8</td>
+          <td style="text-align:center">4</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:50%;background:#22c55e"></div>
+              <span>50%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('Global / Commodity')">
+          <td>Global / Commodity</td>
+          <td style="text-align:center">7</td>
+          <td style="text-align:center">2</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:29%;background:#ef4444"></div>
+              <span>29%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('Pairs Trading')">
+          <td>Pairs Trading</td>
+          <td style="text-align:center">5</td>
+          <td style="text-align:center">0</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:0%;background:#ef4444"></div>
+              <span>0%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('Short-Term Reversal')">
+          <td>Short-Term Reversal</td>
+          <td style="text-align:center">4</td>
+          <td style="text-align:center">3</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:75%;background:#22c55e"></div>
+              <span>75%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('Dividends & Options')">
+          <td>Dividends & Options</td>
+          <td style="text-align:center">3</td>
+          <td style="text-align:center">2</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:67%;background:#22c55e"></div>
+              <span>67%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('PEAD Core')">
+          <td>PEAD Core</td>
+          <td style="text-align:center">2</td>
+          <td style="text-align:center">2</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:100%;background:#22c55e"></div>
+              <span>100%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('Options')">
+          <td>Options</td>
+          <td style="text-align:center">2</td>
+          <td style="text-align:center">1</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:50%;background:#22c55e"></div>
+              <span>50%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('ML / AI')">
+          <td>ML / AI</td>
+          <td style="text-align:center">1</td>
+          <td style="text-align:center">0</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:0%;background:#ef4444"></div>
+              <span>0%</span>
+            </div>
+          </td>
+        </tr>
+        <tr class="family-row" onclick="filterByFamily('Prediction Markets')">
+          <td>Prediction Markets</td>
+          <td style="text-align:center">1</td>
+          <td style="text-align:center">0</td>
+          <td>
+            <div class="mini-bar">
+              <div class="mini-fill" style="width:0%;background:#ef4444"></div>
+              <span>0%</span>
+            </div>
+          </td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = [
+{
+"id": "H001",
+"num": 1,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "REJECTED",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "REJECTED"
+},
+{
+"id": "H002",
+"num": 2,
+"status": "INCONCLUSIVE",
+"date": "",
+"desc": "INCONCLUSIVE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "INCONCLUSIVE"
+},
+{
+"id": "H003",
+"num": 3,
+"status": "INCONCLUSIVE",
+"date": "",
+"desc": "INCONCLUSIVE (directionally confirmed)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "INCONCLUSIVE (directionally confirmed)"
+},
+{
+"id": "H004",
+"num": 4,
+"status": "QUEUED",
+"date": "",
+"desc": "PENDING",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "PENDING"
+},
+{
+"id": "H005",
+"num": 5,
+"status": "CONFIRMED",
+"date": "",
+"desc": "CONFIRMED (IS) / REJECTED (OOS)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "CONFIRMED (IS) / REJECTED (OOS)"
+},
+{
+"id": "H006",
+"num": 6,
+"status": "CONFIRMED",
+"date": "",
+"desc": "CONFIRMED (BIL > TLT) / REJECTED (trails SPY after tax)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "CONFIRMED (BIL > TLT) / REJECTED (trails SPY after tax)"
+},
+{
+"id": "H007",
+"num": 7,
+"status": "INCONCLUSIVE",
+"date": "",
+"desc": "INCONCLUSIVE (mechanical -1.6% CAGR; real data needed for skew correction)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "INCONCLUSIVE (mechanical -1.6% CAGR; real data needed for skew correction)"
+},
+{
+"id": "H008",
+"num": 8,
+"status": "CONFIRMED",
+"date": "",
+"desc": "COMPLETE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "COMPLETE"
+},
+{
+"id": "H009",
+"num": 9,
+"status": "CONFIRMED",
+"date": "",
+"desc": "COMPLETE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "COMPLETE"
+},
+{
+"id": "H010",
+"num": 10,
+"status": "CONFIRMED",
+"date": "",
+"desc": "COMPLETE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "COMPLETE"
+},
+{
+"id": "H011",
+"num": 11,
+"status": "CONFIRMED",
+"date": "",
+"desc": "COMPLETE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "COMPLETE"
+},
+{
+"id": "H012",
+"num": 12,
+"status": "CONFIRMED",
+"date": "",
+"desc": "COMPLETE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "COMPLETE"
+},
+{
+"id": "H013",
+"num": 13,
+"status": "CONFIRMED",
+"date": "",
+"desc": "COMPLETE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "COMPLETE"
+},
+{
+"id": "H014",
+"num": 14,
+"status": "CONFIRMED",
+"date": "",
+"desc": "COMPLETE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "COMPLETE"
+},
+{
+"id": "H015",
+"num": 15,
+"status": "CONFIRMED",
+"date": "",
+"desc": "COMPLETE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "COMPLETE"
+},
+{
+"id": "H016",
+"num": 16,
+"status": "CONFIRMED",
+"date": "",
+"desc": "GENERALIZES (5/6 universes Sharpe > 0.4)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "CONFIRMED \u2014 GENERALIZES (5/6 universes Sharpe > 0.4)"
+},
+{
+"id": "H017",
+"num": 17,
+"status": "CONFIRMED",
+"date": "",
+"desc": "COMPLETE",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "COMPLETE"
+},
+{
+"id": "H018",
+"num": 18,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Blend 50/50 Sharpe 1.255, MaxDD -18.4%, corr=0.31",
+"sharpe": 1.255,
+"cagr": null,
+"maxdd": -18.4,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "CONFIRMED \u2014 Blend 50/50 Sharpe 1.255, MaxDD -18.4%, corr=0.31"
+},
+{
+"id": "H019",
+"num": 19,
+"status": "CONFIRMED",
+"date": "",
+"desc": "OOS Sharpe 0.960, degradation only 8.7%",
+"sharpe": 0.96,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "CONFIRMED \u2014 OOS Sharpe 0.960, degradation only 8.7%"
+},
+{
+"id": "H020",
+"num": 20,
+"status": "CONFIRMED",
+"date": "",
+"desc": "5-asset OOS Sharpe 1.110, degradation 6.7%; supersedes H016",
+"sharpe": 1.11,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "CONFIRMED \u2014 5-asset OOS Sharpe 1.110, degradation 6.7%; supersedes H016"
+},
+{
+"id": "H022",
+"num": 22,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Tax-efficient H020",
+"sharpe": 0.703,
+"cagr": 8.6,
+"maxdd": -29.4,
+"wr": null,
+"script": "",
+"family": "Early Experiments",
+"full": "CONFIRMED \u2014 Tax-efficient H020. Pre-tax CAGR 8.6%, Sharpe 0.703, MaxDD -29.4%. After-tax CAGR 6.54% (vs H020's 5.05%). Min-hold rule: 89.9% LTCG. Drag vs H020 pre-tax: smaller universe better post-tax."
+},
+{
+"id": "H024",
+"num": 24,
+"status": "INCONCLUSIVE",
+"date": "",
+"desc": "Sharpe 1.15 > SPY (0.62), CAGR 3.6% < SPY (10.8%), MaxDD -36% vs SPY -55%",
+"sharpe": 1.15,
+"cagr": 3.6,
+"maxdd": -36.0,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "INCONCLUSIVE as standalone \u2014 Sharpe 1.15 > SPY (0.62), CAGR 3.6% < SPY (10.8%), MaxDD -36% vs SPY -55%. Corr to H020 = 0.07. Best use: overlay filter on H020 in backwardation months."
+},
+{
+"id": "H026",
+"num": 26,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Sharpe 0.872, CAGR 14.16%, MaxDD -31.7%; corr to H020 = 0.483",
+"sharpe": 0.872,
+"cagr": 14.16,
+"maxdd": -31.7,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Sharpe 0.872, CAGR 14.16%, MaxDD -31.7%; corr to H020 = 0.483"
+},
+{
+"id": "H028",
+"num": 28,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Max-Sharpe blend 63% H020 / 37% H026; Sharpe 1.749, CAGR 15.29%, MaxDD -16.3%, AnnVol 8.74% (22.8yr backtest)",
+"sharpe": 1.749,
+"cagr": 15.29,
+"maxdd": -16.3,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Max-Sharpe blend 63% H020 / 37% H026; Sharpe 1.749, CAGR 15.29%, MaxDD -16.3%, AnnVol 8.74% (22.8yr backtest)"
+},
+{
+"id": "H029",
+"num": 29,
+"status": "CONFIRMED",
+"date": "",
+"desc": "VIX/VIX3M overlay improves H020",
+"sharpe": 1.307,
+"cagr": 15.12,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 VIX/VIX3M overlay improves H020. H029a: Sharpe 1.307 (+0.059), CAGR 15.12%. H029b: CAGR 15.28% (+0.19%), Sharpe 1.269. Overlay triggered 8 months (4.3%). MaxDD unchanged at -20.44%; worst drawdown not in backwardation months. H029b preferred: only overrides when H020 holds equity, avg return +1.02pp vs H020 in those months."
+},
+{
+"id": "H030",
+"num": 30,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Taxable-optimal blend",
+"sharpe": 0.801,
+"cagr": 8.8,
+"maxdd": -24.2,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Taxable-optimal blend. Pre-tax max-Sharpe: 70%H022/30%H026 (Sharpe 0.801, CAGR 8.80%, MaxDD -24.2%). After-tax optimal: 100%H022 (H026 at 37% STCG destroys returns). H022/H026 corr=0.578. H026 unsuitable for taxable accounts."
+},
+{
+"id": "H031",
+"num": 31,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Three-way blend H020/H026/H009 56/19/25",
+"sharpe": 1.843,
+"cagr": 14.63,
+"maxdd": -11.52,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Three-way blend H020/H026/H009 56/19/25. Sharpe 1.843, CAGR 14.63%, MaxDD -11.52%, AnnVol 7.94%, Calmar 1.270 (273 months, 22.8 yr). Beats H028 two-way blend (Sharpe 1.749) by adding H009's 0.21 corr to H020."
+},
+{
+"id": "H032",
+"num": 32,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "ML overlay detracted",
+"sharpe": 1.56,
+"cagr": 11.01,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "REJECTED \u2014 ML overlay detracted. RF accuracy 0.615 (worse than 70.6% base rate), AUC 0.51. OOS H032-RF: CAGR 11.01% vs H031 15.31%, Sharpe 1.560 vs 1.665. Switched 30/109 months; H031 averaged +1.46% in those months (wrong 67% of the time). Top feature: SPY 1m return (46%). Regime features already embedded in H031's component strategies."
+},
+{
+"id": "H033",
+"num": 33,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Both approaches hurt H031",
+"sharpe": 1.763,
+"cagr": -5.41,
+"maxdd": -11.73,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "REJECTED \u2014 Both approaches hurt H031. Approach A (direct VIX proxy): CAGR -5.41% drag, Sharpe -0.897, MaxDD -11.73% worse. Approach B (rule-based +2%/steep, -15%/panic): CAGR -2.30% drag, Sharpe -0.075. Root cause: (A) VIX spot is not a valid short-vol return proxy \u2014 avg VIX move when \"in position\" was +1.49%/month (adversarial), and 22 spike-loss months dominate. (B) Approach B expected value negative: 48%\u00d7+2% - 10%\u00d7-15% = -0.54%/month. H031 alone (Sharpe 1.763, CAGR 15.18% on 2008\u20132026 window)"
+},
+{
+"id": "H035",
+"num": 35,
+"status": "CONFIRMED",
+"date": "",
+"desc": "BTC never selected in 124 evaluated months (0% selection rate)",
+"sharpe": 1.546,
+"cagr": 14.22,
+"maxdd": -14.68,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (qualified) \u2014 BTC never selected in 124 evaluated months (0% selection rate). Inverse-vol rank filters it out completely. H035 Sharpe 1.546 (+0.142 vs H020's 1.404), CAGR 14.22% (-2.08%), MaxDD -14.68% (+5.76pp less deep). Adding BTC to the universe improves Sharpe and reduces drawdown despite BTC never being held \u2014 it acts as a signal-diluting 6th asset that lowers position concentration."
+},
+{
+"id": "H036",
+"num": 36,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "2026 is mildly positive for both thresholds but not competitive with H009 IBS (Sharpe 0.83, CAGR 12.0% on same period)",
+"sharpe": 0.12,
+"cagr": -0.4,
+"maxdd": -44.0,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "REJECTED (weak edge, high MaxDD). Gap < -0.5%: full-period CAGR -0.4%, Sharpe -0.006, MaxDD -44%; gap < -1.0%: CAGR +0.6%, Sharpe 0.12, MaxDD -36%. OOS 2015\u20132026 is mildly positive for both thresholds but not competitive with H009 IBS (Sharpe 0.83, CAGR 12.0% on same period). High H009 overlap (49-55%). Not worth pursuing standalone; possibly useful as a filter signal within H009."
+},
+{
+"id": "H037",
+"num": 37,
+"status": "CONFIRMED",
+"date": "",
+"desc": "gap < -0.5% filter: Sharpe 1.0207 full (+17%), OOS Sharpe 0.9523 (+27.7%)",
+"sharpe": 0.9523,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (H037b) \u2014 gap < -0.5% filter: Sharpe 1.0207 full (+17%), OOS Sharpe 0.9523 (+27.7%). H037 (-1.0%) marginal. Filtered trades had lower avg return (0.45%) and lower win rate (57.7%) vs kept trades \u2014 hypothesis confirmed."
+},
+{
+"id": "H038",
+"num": 38,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Factor ETF rotation (MTUM/QUAL/VLUE/SIZE/USMV/DGRO top-2, same H020 signal)",
+"sharpe": 0.861,
+"cagr": 15.25,
+"maxdd": -21.85,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "REJECTED as diversifier \u2014 Factor ETF rotation (MTUM/QUAL/VLUE/SIZE/USMV/DGRO top-2, same H020 signal). CAGR 15.25%, Sharpe 1.127, MaxDD -21.85%, AnnVol 13.53% (2013\u20132026, 144 months). IS Sharpe 1.357 / OOS Sharpe 0.861 (OOS degradation 36.5%). Dominant factors: USMV 47%, QUAL 43%, MTUM 41%. Corr to H020=0.62, H026=0.92, H031=0.85 \u2014 too correlated to H026 to diversify. Blending 10% H038 into H031 degrades Sharpe 1.717\u21921.664. Factor ETFs behave like a noisier H026 with worse risk-adjusted returns."
+},
+{
+"id": "H040",
+"num": 40,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H040 (15 ETFs): CAGR 14.60%, Sharpe 0.897 (+0.025 vs H026), MaxDD -33.1%, OOS Sharpe 1.091 (OOS improved)",
+"sharpe": 1.091,
+"cagr": 14.6,
+"maxdd": -33.1,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (H040) / REJECTED (H040b) \u2014 H040 (15 ETFs): CAGR 14.60%, Sharpe 0.897 (+0.025 vs H026), MaxDD -33.1%, OOS Sharpe 1.091 (OOS improved). H040b (9 sectors + EFA/EEM): CAGR 13.64%, Sharpe 0.841 (below H026). H040 corr to H026 = 0.963 (near-identical), corr to H020 = 0.466. International ETFs selected 43.4% of months (18.9% of all slots): EFA 22.0%, EWJ 16.1%, VGK 10.5%, EEM 7.9%. Diversification thesis partially confirmed \u2014 EM/Europe do get selected when US sectors are weak \u2014 but high H026"
+},
+{
+"id": "H041",
+"num": 41,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H041a (7-asset H020+EFA/EEM): CAGR 14.66%, Sharpe 1.223 (+0.054 vs H020 5-asset baseline), MaxDD -15.80%, OOS Sharpe 1.1",
+"sharpe": 1.127,
+"cagr": 14.66,
+"maxdd": -15.8,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (H041a) / MARGINAL (H041b) \u2014 H041a (7-asset H020+EFA/EEM): CAGR 14.66%, Sharpe 1.223 (+0.054 vs H020 5-asset baseline), MaxDD -15.80%, OOS Sharpe 1.127 (only 9.2% degradation on fresh IS/OOS split through 2017). H041b (8-asset +VWO): CAGR 15.15%, Sharpe 1.176, MaxDD -23.23%, OOS Sharpe 1.106 (7.9% degradation but MaxDD widens to -23.2% OOS). H020 baseline on same 2003-2026 window: Sharpe 1.169, MaxDD -17.85%. EFA/EEM selected 25.4% of months (H041a), avg intl return when held 1.975%/mo"
+},
+{
+"id": "H042",
+"num": 42,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H041a upgrade improves H031b",
+"sharpe": 1.9492,
+"cagr": null,
+"maxdd": -9.02,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 H041a upgrade improves H031b. Max-Sharpe blend 56/16/28 (H041a/H026/H037b): Sharpe 1.9492 (+0.066 vs H031b 1.883), MaxDD -9.02% (vs -9.20%), AnnVol 7.43%. Same-weights (51/20/29): Sharpe 1.945 (+0.062). H041a standalone: Sharpe 1.665 vs H020's 1.573 on same window (+0.092). Min-MaxDD blend 64/0/36: MaxDD -8.04%, Sharpe 1.906. EFA/EEM diversification (corr H041a/H037b=0.155 vs H020/H037b correlation was higher) provides genuine portfolio lift. H042 is the new best blend."
+},
+{
+"id": "H043",
+"num": 43,
+"status": "PARTIAL",
+"date": "",
+"desc": "OOS Sharpe remains investable",
+"sharpe": 1.6653,
+"cagr": 14.08,
+"maxdd": -11.43,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "MODERATE overfit risk \u2014 OOS Sharpe remains investable. IS-optimal weights (42/22/36) applied to OOS: Sharpe 1.6653, CAGR 14.08%, MaxDD -11.43%. Full-period weights (56/16/28) applied to OOS: Sharpe 1.7680, CAGR 14.31%, MaxDD -8.79%. IS Sharpe (IS-optimal): 2.1452. Degradation: IS-optimal weights -22.4%, full-period weights -9.3% (similar to H020's 6.7%). Walk-forward avg OOS Sharpe: 1.768 \u00b1 0.707 (4 folds), WF degradation -20.2%. Verdict: H042's edge is REAL but partially fit; the 56/16/28 weigh"
+},
+{
+"id": "H044",
+"num": 44,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Volatility targeting on H042",
+"sharpe": 1.54,
+"cagr": 14.44,
+"maxdd": -15.77,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (qualified) \u2014 Volatility targeting on H042. Daily framework: H042 daily baseline Sharpe 1.540, MaxDD -15.77%, AnnVol 9.52%. Target 8%: Sharpe 1.633 (+0.093), MaxDD -13.45%, CAGR 14.44% \u2014 best risk-adjusted, net negative CAGR effect. Target 10%: Sharpe 1.561 (+0.021), MaxDD -14.85%, CAGR 16.44% \u2014 levered up CAGR +1.78pp. Target 12%: Sharpe 1.488 (-0.052), MaxDD -17.66%, CAGR 17.67%. Regime finding: vol targeting HURTS Sharpe in ALL regimes tested (high-vol and low-vol alike) \u2014 the lagge"
+},
+{
+"id": "H045",
+"num": 45,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Treasury ETF momentum rotation (SHY/IEI/IEF/TLT/TIP/HYG/LQD, top-2 monthly)",
+"sharpe": 1.351,
+"cagr": 4.88,
+"maxdd": -6.28,
+"wr": null,
+"script": "",
+"family": "Stock Momentum",
+"full": "CONFIRMED \u2014 Treasury ETF momentum rotation (SHY/IEI/IEF/TLT/TIP/HYG/LQD, top-2 monthly). Full: Sharpe 1.505, CAGR 4.88%, MaxDD -6.28%, AnnVol 3.24%. IS Sharpe 1.681 / OOS Sharpe 1.351 (OOS Sharpe alpha vs AGG: +0.985). AGG B&H full Sharpe 0.672, MaxDD -17.13%. TLT held only 0.9% of months (never dominates \u2014 the hypothesis was partially wrong: SHY dominates at 61.8%, not TLT). In 2022 rate hike: SHY 100% + TIP (correct rotation). HYG grew from 25.9% IS \u2192 48% OOS. Corr to H041a: 0.475 (moderate \u2014 "
+},
+{
+"id": "H046",
+"num": 46,
+"status": "PARTIAL",
+"date": "",
+"desc": "IBS effect generalizes to sector ETFs but with meaningful caveats",
+"sharpe": 0.8165,
+"cagr": 8.98,
+"maxdd": -21.9,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "PARTIALLY CONFIRMED \u2014 IBS effect generalizes to sector ETFs but with meaningful caveats. H046 (5-sector, 20% each): Full Sharpe 0.9039 CAGR 8.98% MaxDD -21.90%, OOS Sharpe 0.8165 CAGR 7.37%. Per-sector: XLK best (Sharpe implied: WinRate 65.8%, AvgPnL 0.47%), XLE weakest (58.8% WinRate). Total 3141 trades full / 1237 OOS. Correlation to H037b (SPY) = 0.61 monthly \u2014 medium, not low enough for strong diversification. H046b (top-3 momentum sectors): Sharpe 0.831 CAGR 6.05% MaxDD -11.14% \u2014 lower draw"
+},
+{
+"id": "H047",
+"num": 47,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H045 addition meaningfully improves H042",
+"sharpe": 1.8674,
+"cagr": 14.7,
+"maxdd": -9.02,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 H045 addition meaningfully improves H042. Common window 2008-01\u21922026-04 (220 months). H042 baseline (56/16/28, H045=0%): Sharpe 1.8674, CAGR 14.70%, MaxDD -9.02%. H045 proportion grid: H045=10% \u2192 Sharpe 1.9036 (+0.036), H045=20% \u2192 1.9429 (+0.076), H045=30% \u2192 1.9841 (+0.117), H045=40% \u2192 2.0249 (+0.158). Each increment of H045 raises Sharpe monotonically while cutting MaxDD and CAGR. H045 marginal dSharpe/dw: +0.38 to +0.42 across all grid points (consistently the strongest marginal co"
+},
+{
+"id": "H049",
+"num": 49,
+"status": "PARTIAL",
+"date": "",
+"desc": "IS/OOS validation of H047 four-component blend (H041a 39.2% / H026 11.2% / H037b 19.6% / H045 30%)",
+"sharpe": 2.067,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "MODERATE OVERFIT WARNING (investable) \u2014 IS/OOS validation of H047 four-component blend (H041a 39.2% / H026 11.2% / H037b 19.6% / H045 30%). IS 2008-2017 (120m) / OOS 2018-2026 (99m). IS Sharpe (op weights): 2.2299. OOS Sharpe (op weights): 1.699. Degradation (op weights): -23.8% vs H042 benchmark -9.3%. IS Sharpe (IS-optimal): 2.4617 with H045=65%, H037b=15%, H041a=10%, H026=10%. OOS Sharpe (IS-optimal): 1.7427. Degradation (IS-optimal): -29.2% vs H042 benchmark -22.4%. Walk-forward avg OOS Shar"
+},
+{
+"id": "H050",
+"num": 50,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Minimal two-component portfolio (H045 + H037b), 2008-01\u21922026-03 (219 months)",
+"sharpe": 1.5163,
+"cagr": 6.47,
+"maxdd": -6.28,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (EXTRAORDINARY) \u2014 Minimal two-component portfolio (H045 + H037b), 2008-01\u21922026-03 (219 months). Actual correlation: 0.0105 (near-zero confirmed). Standalone: H045 Sharpe 1.5163 / MaxDD -6.28%, H037b Sharpe 1.1464 / MaxDD -21.74%. Theoretical upper bound: sqrt(1.516\u00b2+1.146\u00b2)=1.9009. Fine-grained max-Sharpe blend: H045=82% / H037b=18% \u2192 Sharpe 1.9109, CAGR 6.47%, MaxDD -3.38%, AnnVol 3.38%. Achievement: 100.5% of theoretical upper (blending efficiency essentially perfect due to near-zero"
+},
+{
+"id": "H051",
+"num": 51,
+"status": "PARTIAL",
+"date": "",
+"desc": "IS/OOS validation of H050 two-component portfolio (H045 82%/H037b 18%)",
+"sharpe": 1.46,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "PARTIALLY CONFIRMED (better than H047) \u2014 IS/OOS validation of H050 two-component portfolio (H045 82%/H037b 18%). IS 2008-01\u21922017-12 (120m) / OOS 2018-01\u21922026-04 (100m). Correlations: Full 0.0102, IS +0.1203, OOS -0.0927 (near-zero holds across periods). IS-optimal weights: H045=80%/H037b=20% (very close to full-period 82/18 \u2014 robust signal). IS Sharpe (IS-optimal): 2.115. OOS Sharpe (IS-optimal): 1.681. OOS Sharpe (full 82/18): 1.692. Degradation: -20.5% (IS-optimal), -11.5% (full-period weights"
+},
+{
+"id": "H052",
+"num": 52,
+"status": "PARTIAL",
+"date": "",
+"desc": "H045 addition improves OOS Sharpe at every allocation tested",
+"sharpe": 1.708,
+"cagr": 13.6,
+"maxdd": -6.52,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "PARTIALLY CONFIRMED \u2014 H045 addition improves OOS Sharpe at every allocation tested. IS/OOS split: 2008-01\u21922017-12 (IS) / 2018-01\u21922026-04 (OOS). On this split H042 baseline (H045=0%) shows IS 2.073/OOS 1.655/deg -20.2%. Adding H045: H045=10%\u2192OOS 1.680, H045=20%\u2192OOS 1.708, H045=25%\u2192OOS 1.722, H045=30%\u2192OOS 1.736, H045=40%\u2192OOS 1.763, H045=50%\u2192OOS 1.785. Each 10% H045 adds +0.026 OOS Sharpe \u2014 consistent with H047 marginal analysis (+0.04 per 10%). H045=20% is the practical sweet spot: Full Sharpe 1.9"
+},
+{
+"id": "H053",
+"num": 53,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "SPY 200MA regime filter on H041a hurts performance",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "REJECTED \u2014 SPY 200MA regime filter on H041a hurts performance. Full Sharpe drops 1.665\u21921.543 (-0.121). MaxDD WORSENS: -13.74%\u2192-17.00%. OOS especially damning: H041a OOS 1.522 vs H053 OOS 1.213 (-0.310 delta). Root cause: H041a's momentum signal is already a BETTER regime filter \u2014 in risk-off months H041a's momentum score naturally selects bonds/gold/IEF. The 200MA filter replaces good endogenous risk management with a static IEF allocation, destroying alpha. H041a annualized return in risk-off m"
+},
+{
+"id": "H054",
+"num": 54,
+"status": "CONFIRMED",
+"date": "",
+"desc": "QQQ IBS (H054b, -0.5% gap filter) adds meaningful diversification to H037b (SPY IBS)",
+"sharpe": 0.831,
+"cagr": 11.73,
+"maxdd": -15.87,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 QQQ IBS (H054b, -0.5% gap filter) adds meaningful diversification to H037b (SPY IBS). Standalone H054b: Sharpe 1.0565, CAGR 11.73%, MaxDD -15.87%, 700 trades, WinRate 60.7%. Critical OOS finding: IS Sharpe 0.831 \u2192 OOS Sharpe 1.472 (+77% improvement, INVERSE degradation). H037b: IS 1.350 \u2192 OOS 0.873 (-35% degradation). Monthly corr H054b vs H037b: 0.490 (just below 0.50 threshold). OOS correlation 0.5635. Gap filter helps MaxDD: H054a unfiltered MaxDD -26.53%, H054b -0.5% filter MaxDD"
+},
+{
+"id": "H055",
+"num": 55,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Splitting H037b allocation between SPY + QQQ IBS dramatically improves OOS robustness",
+"sharpe": 1.8288,
+"cagr": null,
+"maxdd": -7.15,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (MAJOR FINDING) \u2014 Splitting H037b allocation between SPY + QQQ IBS dramatically improves OOS robustness. H055 (H041a 56 / H026 16 / H037b 14 / H054b 14): Full Sharpe 1.9314, IS Sharpe 2.0253, OOS Sharpe 1.8288, OOS degradation -9.7% vs H042's -20.2%. OOS MaxDD -7.15% vs H042's -8.79%. H055b (+H045 20%): Full Sharpe 2.0082, IS 2.1375, OOS 1.8717, degradation -12.4%, MaxDD -4.90%. H055b beats H052@20% OOS by +0.164 (1.8717 vs 1.7078). Key mechanism: H054b (QQQ IBS) IS Sharpe 0.761 \u2192 OOS "
+},
+{
+"id": "H056",
+"num": 56,
+"status": "CONFIRMED",
+"date": "",
+"desc": "IBS weight grid proves H037b (SPY IBS) should be ELIMINATED",
+"sharpe": 1.9463,
+"cagr": null,
+"maxdd": -4.27,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (DECISIVE) \u2014 IBS weight grid proves H037b (SPY IBS) should be ELIMINATED. H037b=0%/H054b=28% achieves OOS Sharpe 1.9463 (+3.9% POSITIVE degradation) vs H042's H037b=28% at 1.6546 (\u221220.2%). Each 4% shift from H037b\u2192H054b monotonically raises OOS Sharpe and reduces OOS degradation. With H045=20% fixed: H037b=0%/H054b=22.4% achieves OOS Sharpe 1.9829, MaxDD \u22124.27%, degradation \u22120.8%. Walk-forward on H055 (56/16/14/14 + H045 20%): avg OOS 2.2098 \u00b10.3938, WF deg +21.4% (OOS exceeds IS!), wo"
+},
+{
+"id": "H057",
+"num": 57,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H041a 44.8% / H026 12.8% / H054b 22.4% / H045 20.0% (H037b eliminated)",
+"sharpe": 1.9925,
+"cagr": 13.23,
+"maxdd": -4.27,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 H041a 44.8% / H026 12.8% / H054b 22.4% / H045 20.0% (H037b eliminated). Full Sharpe 1.9925, IS 1.9986, OOS 1.9829, OOS MaxDD \u22124.27%, OOS CAGR 13.23%, degradation \u22120.8%. Component OOS: H041a \u22123.8%, H026 \u22122.6%, H054b +93.4%, H045 \u221221.9% \u2014 H054b inverse degradation masks all other degradation. H054b grid: OOS improves monotonically to H054b=36% (OOS 2.0704). H045 grid: OOS improves monotonically to H045=40% (OOS 2.0897). Walk-forward: avg OOS 2.924 \u00b10.822, worst fold 2.167 (NO catastrop"
+},
+{
+"id": "H058",
+"num": 58,
+"status": "CONFIRMED",
+"date": "",
+"desc": "2D grid: OOS Sharpe improves monotonically as H054b and H045 both increase",
+"sharpe": null,
+"cagr": 11.2,
+"maxdd": -3.06,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (partial) \u2014 2D grid: OOS Sharpe improves monotonically as H054b and H045 both increase. Best OOS: H054b=32%/H045=40% \u2192 OOS 2.1453, MaxDD \u22123.06%, CAGR 11.2%, Deg +12.1%. BUT walk-forward reveals WF worst-fold drops to 1.413 (vs H057's 2.167) in the 2014-2015 Fold 2 period, suggesting the aggressive allocation is regime-dependent. Moderate allocations (H054b=24-28%/H045=25-30%) likely offer better WF consistency at OOS 2.05-2.09. H059 will test intermediate points with full WF to find th"
+},
+{
+"id": "H059",
+"num": 59,
+"status": "CONFIRMED",
+"date": "",
+"desc": "WF-consistent winner: H041a 28.8% / H026 8.2% / H054b 28% / H045 35%",
+"sharpe": 2.1114,
+"cagr": 11.7,
+"maxdd": -3.0,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 WF-consistent winner: H041a 28.8% / H026 8.2% / H054b 28% / H045 35%. OOS Sharpe 2.1114 (+0.13 vs H057), OOS MaxDD \u22123.00%, OOS CAGR 11.7%, Deg +5.0%. WF: avg 2.845 \u00b10.827, worst fold 1.806 (above 1.75 threshold). All H054b=32% allocations fail WF threshold (worst fold 1.51-1.64). H054b=28% is the maximum IBS allocation that maintains WF consistency. This is the new production portfolio \u2014 H041a+H026 shrinks from 57.6% to 37% (equity \u2192 low-correlation components). H060 will validate on"
+},
+{
+"id": "H060",
+"num": 60,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Definitive production portfolio: H041a 25.7% / H026 7.3% / H054b 28% / H045 39%",
+"sharpe": 2.1314,
+"cagr": 11.28,
+"maxdd": -2.83,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Definitive production portfolio: H041a 25.7% / H026 7.3% / H054b 28% / H045 39%. OOS Sharpe 2.1314, OOS MaxDD \u22122.83%, OOS CAGR 11.28%, WF worst 1.756 (above 1.75 threshold). H045=39% is the upper bound (40% fails WF). Extended 2003-2026 Sharpe 2.1595, CAGR 10.51%, MaxDD \u22124.56%. ZERO negative years in 23 years (2003-2025). 2008: +10.5%, 2022: +7.3% \u2014 extraordinary tail protection. This is the most validated portfolio in the programme."
+},
+{
+"id": "H061",
+"num": 61,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Production portfolio doubly validated",
+"sharpe": 2.271,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Production portfolio doubly validated. H026 marginal contribution +0.0008 OOS Sharpe (negligible at 7.3% weight) \u2014 keep for minor diversification. Alternate OOS (2013-2026, 13yr): H060 OOS Sharpe 2.271 with +12.5% positive degradation. Zero negative years 2013-2025. Correlation matrix: H041a/H045=0.473 (overlap via TLT/IEF in risk-off), H054b/H045=\u22120.096 (the core anchor pair), H026/H054b=0.378 (unexpected, both partially capture equity bounce dynamics). H060 is the strongest portfol"
+},
+{
+"id": "H062",
+"num": 62,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Multi-asset IBS survey over 10 ETFs. 5 assets show inverse degradation (OOS > IS): XLK OOS 1.613 Deg +83%, QQQ OOS 1.472",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Multi-asset IBS survey over 10 ETFs. 5 assets show inverse degradation (OOS > IS): XLK OOS 1.613 Deg +83%, QQQ OOS 1.472 Deg +84%, SMH OOS 1.417 Deg +171%, EFA OOS 0.764 Deg +56%, GDX OOS 0.725 Deg +203%. 4 degrade: SPY \u221239%, TLT \u221234%, IWM \u221231%, XLE \u2212100%. Correlation of IBS returns to QQQ: XLK +0.784 (high), SMH +0.592 (moderate), GLD +0.091 (low diversifier), GDX \u22120.117 (low diversifier). Best 50/50 blend with QQQ: QQQ+XLK OOS 1.623, QQQ+SMH OOS 1.607, QQQ+GLD OOS 1.590. Key findin"
+},
+{
+"id": "H063",
+"num": 63,
+"status": "PARTIAL",
+"date": "",
+"desc": "Initial reconstruction had wrong signal (1-month momentum) for H041a/H026/H045, making H045 OOS Sharpe appear as 0.216",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Stock Momentum",
+"full": "PRELIMINARY (corrected in H064) \u2014 Initial reconstruction had wrong signal (1-month momentum) for H041a/H026/H045, making H045 OOS Sharpe appear as 0.216. Fixed in H064."
+},
+{
+"id": "H064",
+"num": 64,
+"status": "CONFIRMED",
+"date": "",
+"desc": "XLK IBS strictly dominates QQQ IBS: IS 0.881 vs 0.801, OOS 1.613 vs 1.472",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (key insight) \u2014 XLK IBS strictly dominates QQQ IBS: IS 0.881 vs 0.801, OOS 1.613 vs 1.472. H060 baseline (QQQ 28%): OOS 2.192, WF worst 1.726 (just below threshold). XLK 28% alone: OOS 2.328, WF worst 2.351 \u2713. XLK 20%+SMH 8% (F): OOS 2.374, WF worst 2.395 \u2713 \u2014 best WF consistency. All non-QQQ variants beat H060 on OOS Sharpe. QQQ deprecated. Critical fix: H041a/H026/H045 all use rank(12m_mom)+rank(inv_6m_vol) composite signal \u2014 not 1-month momentum. Corrected reconstruction gives H045 I"
+},
+{
+"id": "H065",
+"num": 65,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Fine-grid XLK/SMH split at 28% and 32% total IBS",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (F2 selected via H066) \u2014 Fine-grid XLK/SMH split at 28% and 32% total IBS. F2 (XLK20+SMH8 at 28%) chosen over F1 (XLK24+SMH8 at 32%) due to better WF consistency (2.395 vs 2.222) and better alternate OOS (2.487 vs 2.471). All combinations with XLK dominant and 8% SMH pass WF. SMH-only fail WF badly. QQQ fully replaced by XLK+SMH blend."
+},
+{
+"id": "H066",
+"num": 66,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Full cross-validation of H065 finalists (F1: XLK24+SMH8 at 32%, F2: XLK20+SMH8 at 28%)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Full cross-validation of H065 finalists (F1: XLK24+SMH8 at 32%, F2: XLK20+SMH8 at 28%). Primary OOS: F1 2.387, F2 2.374. Alt OOS (2013-2026): F1 2.471, F2 2.487. F2 WF worst 2.395 vs F1 2.222. F2 selected as production (better alternate OOS and WF consistency). ZERO negative calendar years 2004-2025 for both variants. 2022 defensive: H060 +7.83%, F1 +7.61%, F2 +5.87%. Alt IS (2003-2012): F2 1.963, F1 1.956. H060 (QQQ baseline) strictly dominated on every long-term metric."
+},
+{
+"id": "H067",
+"num": 67,
+"status": "CONFIRMED",
+"date": "",
+"desc": "XLK+SMH IBS eliminates the H045 upper bound constraint",
+"sharpe": null,
+"cagr": null,
+"maxdd": -3.38,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 XLK+SMH IBS eliminates the H045 upper bound constraint. All H045 values 34%-46% pass WF (worst 2.370-2.401, all >> 1.75). WF worst peaks at 43% (2.401). OOS Sharpe monotonically increases from 2.365 (34%) to 2.380 (46%) \u2014 flat above 43%. Production upgrade: H045 39% \u2192 43%. New production: H041a 22.6% / H026 6.4% / H045 43% / XLK 20% / SMH 8%. OOS 2.379, WF worst 2.401, MaxDD \u22123.38%."
+},
+{
+"id": "H068",
+"num": 68,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H045 upper bound extends through the full feasible range; EFA IBS adds no value",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 H045 upper bound extends through the full feasible range; EFA IBS adds no value. Part 1: All H045 47%-62% pass WF (worst 2.356\u21922.041) \u2014 the WF constraint never binds. OOS Sharpe peaks near 46-47% but IS Sharpe declining as equity components shrink. Part 2: EFA IBS in all 5 blend configurations HURTS portfolio OOS Sharpe vs baseline (2.318-2.342 vs 2.379). Baseline XLK 20%+SMH 8% dominates every EFA variant. Conclusion: H067 winner (H045=43%, OOS 2.379, WF worst 2.401) confirmed as op"
+},
+{
+"id": "H069",
+"num": 69,
+"status": "CONFIRMED",
+"date": "",
+"desc": "SPY-optimized IBS params suboptimal for tech ETFs",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (key insight) \u2014 SPY-optimized IBS params suboptimal for tech ETFs. XLK optimal: buy=0.15/sell=0.90/hold=7/gap=-1.0%; SMH optimal: buy=0.20/sell=0.75/hold=6/gap=-0.5%. Portfolio OOS 2.379\u21922.550 (+7.2%, WF worst 2.374 \u2713). Intuition: XLK bounces to IBS 0.90 over 7 days; SMH more volatile, exit at IBS 0.75 in 6 days. XLK and SMH have OPPOSITE optimal exit thresholds \u2014 different mean-reversion speed."
+},
+{
+"id": "H070",
+"num": 70,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Both OOS windows validate H069 parameter improvements (NOT overfit)",
+"sharpe": null,
+"cagr": 14.77,
+"maxdd": -4.71,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Both OOS windows validate H069 parameter improvements (NOT overfit). Primary OOS: 2.379\u21922.550 (+7.2%), Alt OOS: 2.474\u21922.576 (+4.1%). New production: XLK buy=0.15/sell=0.90/hold=7/gap=-1.0%; SMH buy=0.20/sell=0.75/hold=6/gap=-0.5%. OOS CAGR 14.77% (+2.1pp), MaxDD -4.71%. Zero negative years maintained 2004-2025. 2020: +26.8% vs baseline +18.4%. 2022: +4.54% vs baseline +5.87% (tradeoff acceptable). Fine-grid confirms buy=0.15/sell=0.90/hold=7/gap=-1.0% is XLK optimum."
+},
+{
+"id": "H071",
+"num": 71,
+"status": "INCONCLUSIVE",
+"date": "",
+"desc": "Commodity IBS satellites don't reliably improve the H070 portfolio",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Global / Commodity",
+"full": "INCONCLUSIVE \u2014 Commodity IBS satellites don't reliably improve the H070 portfolio. GLD IBS: best params OOS 1.342 but IS 0.065 (near-zero) \u2014 all configurations show IS near-zero, likely 2018-2026 gold bull market artifact. GDX IBS: best params OOS 0.944 (IS 0.305 more balanced), but portfolio WF worst drops to 1.868 with GDX4. Best variant GLD4 (H041a-): OOS 2.617 vs baseline 2.550 but WF worst 2.065 (down from 2.374) and AltOOS improvement marginal (+0.002). H070 baseline remains production sta"
+},
+{
+"id": "H072",
+"num": 72,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H045 universe expansion with BKLN (floating-rate, zero duration) and EMB (EM bonds)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 H045 universe expansion with BKLN (floating-rate, zero duration) and EMB (EM bonds). H045 standalone: base-7 OOS 1.292 \u2192 BKLN+EMB OOS 1.631 (+26%!). Portfolio BKLN+EMB: OOS 2.666 (+0.116 vs H070 2.550), AltOOS 2.705, WF 2.394 \u2713. Key mechanism: in 2022 rate hike cycle BKLN returned +0.45% (TLT \u221231.5%, IEF \u221216%) \u2014 momentum signal correctly selected floating-rate over duration. Both OOS windows confirm \u2192 NOT overfit. BKLN+EMB adopted as new H045 universe."
+},
+{
+"id": "H073",
+"num": 73,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Full cross-validation of BKLN+EMB H045 expansion",
+"sharpe": null,
+"cagr": 15.01,
+"maxdd": -4.08,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Full cross-validation of BKLN+EMB H045 expansion. Both OOS windows confirm on both additions. BKLN+EMB: OOS 2.6657 (+0.1162 vs H070), AltOOS 2.7054 (+0.1291), WF worst 2.394 \u2713. OOS CAGR 15.01% (+0.24pp), MaxDD \u22124.08% (\u22120.63pp better). ZERO negative years 2004-2025 maintained. 2022: +5.12% (BKLN correctly selected in rate-hike cycle). New production H045 universe: SHY+IEI+IEF+TLT+TIP+HYG+LQD+BKLN+EMB (9-asset, top-2)."
+},
+{
+"id": "H074",
+"num": 74,
+"status": "CONFIRMED",
+"date": "",
+"desc": "IGV IBS sweep: best buy=0.30/sell=0.75/hold=5/gap=+0.25% \u2192 OOS 1.442 (IS 0.627), Deg +130%",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (IGV edge established) \u2014 IGV IBS sweep: best buy=0.30/sell=0.75/hold=5/gap=+0.25% \u2192 OOS 1.442 (IS 0.627), Deg +130%. Positive gap (\u2260 XLK/SMH negative gap) \u2014 software gapped-up-but-low-IBS signal. Portfolio IGV4 (H041a-): OOS +0.053, WF 2.358 \u2713. NOTE: H041a=SPY/QQQ/TLT/GLD/IEF/EFA/EEM top-2; H026=11-sector top-3 (corrected from earlier wrong assumptions)."
+},
+{
+"id": "H075",
+"num": 75,
+"status": "PARTIAL",
+"date": "",
+"desc": "IGV4 (H041a-) primary OOS +0.053 (2.6657\u21922.7186) but AltOOS marginally -0.007 (2.7054\u21922.6982)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "PARTIALLY CONFIRMED \u2014 IGV4 (H041a-) primary OOS +0.053 (2.6657\u21922.7186) but AltOOS marginally -0.007 (2.7054\u21922.6982). Zero negative years maintained. MaxDD improves -4.08%\u2192-3.74%. WF worst 2.358 \u2713. IGV standalone: primary deg +130%, alt deg +54% (genuine edge in both IS windows). Calendar drag 2013-2017: -0.7 to -1.2pp/yr (software intraday vol not yet extreme pre-2018). Post-2018 benefit: 2022 +1.62pp. Investigating IGV at 2% in H076."
+},
+{
+"id": "H076",
+"num": 76,
+"status": "CONFIRMED",
+"date": "",
+"desc": "IGV2 (H041a-) dual-window confirmed: OOS 2.6657\u21922.6951 (+0.0294), AltOOS 2.7054\u21922.7057 (+0.0003), WF worst 2.379 \u2713, MaxD",
+"sharpe": null,
+"cagr": null,
+"maxdd": -3.91,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 IGV2 (H041a-) dual-window confirmed: OOS 2.6657\u21922.6951 (+0.0294), AltOOS 2.7054\u21922.7057 (+0.0003), WF worst 2.379 \u2713, MaxDD -3.91% (improved from -4.08%). Zero negative years maintained. 2% allocation sweet spot: 4% gives primary OOS +0.053 but AltOOS -0.007; 2% gives both windows positive. 2013-2017 drag halved vs 4% (max -0.62pp vs -1.24pp). NEW PRODUCTION: H041a 20.6% / H026 6.4% / H045 43% / XLK 20% / SMH 8% / IGV 2%."
+},
+{
+"id": "H077",
+"num": 77,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Adding BIL (T-bill cash proxy) to H041a's 7-asset universe gives BOTH OOS windows large improvements: portfolio OOS 2.69",
+"sharpe": null,
+"cagr": null,
+"maxdd": -3.91,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED (major finding) \u2014 Adding BIL (T-bill cash proxy) to H041a's 7-asset universe gives BOTH OOS windows large improvements: portfolio OOS 2.6951\u21922.8094 (+0.114), AltOOS 2.7057\u21922.7844 (+0.079), MaxDD -3.91%\u2192-3.00%, WF 2.257 \u2713. Mechanism: H041a needed a cash option for months when ALL risk assets are falling \u2014 without BIL, minimum-risk position was IEF (which still loses in rate hike cycles). H041a standalone BIL+: OOS 1.941 vs 1.821 baseline (+6.6%), AltOOS 2.217 vs 2.106 (+5.3%). Also: +IW"
+},
+{
+"id": "H078",
+"num": 78,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Full cross-validation of BIL addition to H041a",
+"sharpe": 2.809,
+"cagr": null,
+"maxdd": -3.91,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Full cross-validation of BIL addition to H041a. Both OOS windows confirm: OOS 2.6951\u21922.8094 (+0.114), AltOOS 2.7057\u21922.7844 (+0.079), MaxDD -3.91%\u2192-3.00%, WF 2.257 \u2713. BIL selected 30.6% of months; 100% in 2022 (peak rate-hike), 75-83% in 2018/2023. H041a standalone: primary deg +2.4% (near-zero \u2014 BIL fills a real regime gap). NEW PRODUCTION: H041a universe = SPY/QQQ/TLT/GLD/IEF/EFA/EEM/BIL (8-asset, top-2). OOS Sharpe 2.809, MaxDD -3.00%."
+},
+{
+"id": "H079",
+"num": 79,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H041a 9-asset candidates on BIL+: BIL+EWJ (+0.038/+0.039 \u2713), BIL+SHY (+0.013/+0.039 \u2713), BIL+IWM (\u2717 AltOOS), BIL+DBC (\u2717)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "SWEEP \u2014 H041a 9-asset candidates on BIL+: BIL+EWJ (+0.038/+0.039 \u2713), BIL+SHY (+0.013/+0.039 \u2713), BIL+IWM (\u2717 AltOOS), BIL+DBC (\u2717). H026 variants: BIL top-2 (+0.081/+0.067 \u2713 \u2014 best), BIL top-3 (+0.057/+0.046 \u2713), SHY top-3 (+0.031/+0.028 \u2713), top-2 alone (+0.026/+0.026 \u2713), top-4 (\u2717). Best combo BIL+EWJ \u00d7 H026+BIL top-2: OOS 2.9297 (+0.120), AltOOS 2.8928 (+0.108), WF 2.417 \u2713 \u2192 confirmed in H080."
+},
+{
+"id": "H080",
+"num": 80,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026+BIL top-2 and H041a+EWJ both confirmed independently and in combo",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.79,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 H026+BIL top-2 and H041a+EWJ both confirmed independently and in combo. Combo OOS 2.8094\u21922.9297 (+0.120), AltOOS 2.7844\u21922.8928 (+0.108), MaxDD -2.79%, WF 2.417 \u2713, ZERO negative years. H026 standalone BIL top-2: OOS 2.109 (vs 1.518 base), alt deg \u22129.4% (inverse \u2014 OOS > AltIS). H041a standalone BIL+EWJ: OOS 2.065. BIL selected 16% of H026 slots; concentrated in 2008 (67%), 2009 (75%), 2022 (50%). NEW PRODUCTION: H041a = SPY/QQQ/TLT/GLD/IEF/EFA/EEM/BIL/EWJ (9-asset, top-2); H026 = 11-se"
+},
+{
+"id": "H081",
+"num": 81,
+"status": "CONFIRMED",
+"date": "",
+"desc": "3-part: A) H041a top-N: top-1 OOS +0.093/+0.061 \u2713, top-3/4 worse \u2717",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "SWEEP \u2014 3-part: A) H041a top-N: top-1 OOS +0.093/+0.061 \u2713, top-3/4 worse \u2717. B) H045+BIL: OOS +0.185/+0.131 \u2713 (biggest single finding in entire programme). C) H026 weight: monotonically increasing OOS/AltOOS with higher H026 weight; optimal at 6.4% for OOS when combining with A. Best combo A+B: OOS 3.1146 (+0.185), confirmed in H082."
+},
+{
+"id": "H082",
+"num": 82,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Major dual improvement: H045+BIL (10-asset) and H041a top-1 (9-asset) both confirmed",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.05,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 Major dual improvement: H045+BIL (10-asset) and H041a top-1 (9-asset) both confirmed. Combo OOS 2.9297\u21923.2018 (+0.272), AltOOS 2.8928\u21923.0777 (+0.185), MaxDD -2.05%, WF 2.106 \u2713, ZERO negative years. H045 standalone: base OOS 1.631 (negative -16.8% deg!) \u2192 BIL+ OOS 2.227 (+36%). BIL fixes H045's base negative degradation! H041a top-1 standalone: OOS 1.982 vs 2.065 (top-2). 2020 -4.52pp tradeoff (top-1 concentration), 2022 +2.90pp, 2024 +2.35pp. NEW PRODUCTION: H045+BIL (10-asset, top-2"
+},
+{
+"id": "H083",
+"num": 83,
+"status": "CONFIRMED",
+"date": "",
+"desc": "A) H026 top-1: +0.048/+0.051 \u2713 (H026 also benefits from concentration)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "SWEEP \u2014 A) H026 top-1: +0.048/+0.051 \u2713 (H026 also benefits from concentration). B) H045 top-N: top-1 and top-3 both worse \u2717 \u2014 H045 is best at top-2. C) H041a geo expansion: +EWH dual-window \u2713 (+0.055/+0.056), +EWU/EWZ/EWG/VWO \u2717. Best combo EWH\u00d7H026-top-1: OOS 3.3061 (+0.104), AltOOS 3.1838 (+0.106), confirmed in H084."
+},
+{
+"id": "H084",
+"num": 84,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 top-1 and H041a+EWH both confirmed",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.0,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 top-1 and H041a+EWH both confirmed. Combo OOS 3.2018\u21923.3061 (+0.104), AltOOS 3.0777\u21923.1838 (+0.106), MaxDD -2.00%, WF 2.118 \u2713, ZERO negative years. H026 top-1 standalone: OOS 2.140 (IS 2.290, slight negative deg -6.6% but AltOOS fine). EWH adds HK/China equity as distinct Asian regime. Extended sweep: +EWT (Taiwan) dual-window \u2713 (+0.049/+0.034), +EWS and +EWA \u2717. NEW PRODUCTION: H041a = SPY/QQQ/TLT/GLD/IEF/EFA/EEM/BIL/EWJ/EWH (10-asset, top-1); H026 = 12-asset top-1. OOS 3.306, A"
+},
+{
+"id": "H085",
+"num": 85,
+"status": "CONFIRMED",
+"date": "",
+"desc": "EWT (Taiwan) addition to H041a confirmed",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.05,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 EWT (Taiwan) addition to H041a confirmed. OOS 3.3061\u21923.3548 (+0.049), AltOOS 3.1838\u21923.2178 (+0.034), MaxDD -2.05%, WF 2.111 \u2713, ZERO negative years. H041a standalone: 11-asset OOS 2.242 vs 10-asset 2.103 (+0.139), primary deg +16.9% (positive \u2014 genuine signal). EWT adds TSMC/semiconductor cycle. Extended sweep: +EWY (South Korea) dual-window \u2713 (+0.041/+0.062, WF 2.318), +EWC \u2717, +EWY+EWC \u2717. NEW PRODUCTION: H041a = SPY/QQQ/TLT/GLD/IEF/EFA/EEM/BIL/EWJ/EWH/EWT (11-asset, top-1). OOS 3.355"
+},
+{
+"id": "H086",
+"num": 86,
+"status": "CONFIRMED",
+"date": "",
+"desc": "EWY (South Korea) addition to H041a confirmed",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.02,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 EWY (South Korea) addition to H041a confirmed. OOS 3.3548\u21923.3958 (+0.041), AltOOS 3.2178\u21923.2800 (+0.062), MaxDD -2.02%, WF 2.318 \u2713 (improved from 2.111). ZERO negative years. H041a standalone: 12-asset OOS 2.329 (+17.2% primary deg), AltOOS 2.527 (+24.8% alt deg) \u2014 both windows strongly positive. EWY adds Samsung/SK Hynix DRAM/memory cycle. 2007: +4.24pp (Korea pre-GFC bull). Extended sweep: +EWS (Singapore) dual-window \u2713 (+0.018/+0.067, WF 2.580), +VNM \u2717, +EWZ \u2717. NEW PRODUCTION: H04"
+},
+{
+"id": "H087",
+"num": 87,
+"status": "CONFIRMED",
+"date": "",
+"desc": "EWS (Singapore) addition to H041a confirmed",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.02,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 EWS (Singapore) addition to H041a confirmed. OOS 3.3958\u21923.4138 (+0.018), AltOOS 3.2800\u21923.3470 (+0.067), MaxDD -2.02%, WF 2.580 \u2713 (improved from 2.318). ZERO negative years. H041a standalone: 13-asset OOS 2.470 (+4.9% primary deg), AltOOS 2.775 (+31.9% alt deg). EWS financial hub (DBS/OCBC) adds city-state diversification. Previously failed on 10-asset universe \u2014 only works once full Pacific Rim cluster is assembled. Extended sweep: +EPHE (Philippines) both-up \u2713 (+0.020/+0.001, WF 2.3"
+},
+{
+"id": "H088",
+"num": 88,
+"status": "CONFIRMED",
+"date": "",
+"desc": "EPHE (Philippines) addition",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.02,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED (marginal) \u2014 EPHE (Philippines) addition. OOS 3.4138\u21923.4339 (+0.020), AltOOS 3.3470\u21923.3481 (+0.001 MARGINAL), MaxDD -2.02%, WF 2.325 \u2713 (dropped from 2.580). ZERO negative years. Only active in 2012/2013/2019/2022. THD \u2717, EWN \u2717 in sweep \u2014 geographic expansion approaching limit. CRITICAL finding: H041a weight grid showed 25% \u2192 OOS 3.4177, AltOOS 3.3881, WF 2.651 (all three metrics better than 20.6%) \u2192 test weight re-optimization in H089. 14-asset H041a: OOS 2.552, AltOOS 2.852."
+},
+{
+"id": "H089",
+"num": 89,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Weight re-optimization confirmed",
+"sharpe": null,
+"cagr": 17.99,
+"maxdd": -2.02,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 Weight re-optimization confirmed. OOS 3.4339\u21923.4340 (+0.000, flat), AltOOS 3.3481\u21923.3697 (+0.022), MaxDD -2.02%\u2192-2.24% (slight worsening), WF 2.325\u21922.386 \u2713. NEW WEIGHTS: H041a 23% / H026 7% / H045 40% / IBS 30%. Primary OOS near-flat; AltOOS improvement is the main win. CAGR 17.99% (was 17.37%). OOS optimal at H041a=22% (3.4347), AltOOS monotonically improves with H041a weight. H026 optimal at 6-7% for OOS. All 22 calendar years positive."
+},
+{
+"id": "H090",
+"num": 90,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H045 universe expansion: +MBB+FLOT confirmed",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.26,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H045 universe expansion: +MBB+FLOT confirmed. OOS 3.4340\u21923.5171 (+0.083), AltOOS 3.3697\u21923.4382 (+0.069), MaxDD -2.26% (unchanged effectively), WF 2.386\u21922.444 \u2713. ZERO negative years. MBB (mortgage-backed) and FLOT (floating rate IG) both pass individually; their combo is best. ANGL (fallen angels HY) fails \u2014 adds credit risk without improving OOS. 2020 -1.28pp tradeoff for gains across most years. H045 now 12-asset: SHY/IEI/IEF/TLT/TIP/HYG/LQD/BKLN/EMB/BIL/MBB/FLOT (top-2)."
+},
+{
+"id": "H091",
+"num": 91,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "H045 universe expansion (MUB, BWX, IGIB) all failed dual-window. +MUB improves AltOOS (3.4445 > 3.4382) but OOS drops (3",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 H045 universe expansion (MUB, BWX, IGIB) all failed dual-window. +MUB improves AltOOS (3.4445 > 3.4382) but OOS drops (3.4851 < 3.5171). BWX and IGIB both windows worse. H045 12-asset universe appears saturated. Port OOS base 3.5171, Port AltOOS base 3.4382 \u2014 strong floor. Next: weight re-optimization with H090 production weights."
+},
+{
+"id": "H092",
+"num": 92,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Weight re-optimization with H090 production weights",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 Weight re-optimization with H090 production weights. Sweep confirms current 23%/7%/40%/30% is already at the Pareto frontier. OOS peaks at H041a=15% (3.5390) but AltOOS drops to 3.3965 (< 3.4382 baseline). H026 sweep: current 7% already optimal. No reweighting improves both windows simultaneously. Weights confirmed: H041a 23% / H026 7% / H045 40% / IBS 30%."
+},
+{
+"id": "H093",
+"num": 93,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 universe expansion: +GLD+TLT confirmed",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.26,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 universe expansion: +GLD+TLT confirmed. OOS 3.5171\u21923.6090 (+0.092), AltOOS 3.4382\u21923.5387 (+0.101), MaxDD \u22122.26% (unchanged), WF 2.444\u21922.595 \u2713. ZERO negative years. Both OOS windows improve ~0.10 \u2014 largest dual-window gain since H082. GLD+TLT allows H026 to rotate into gold/bonds during equity stress. +GLD alone \u2713 (3.5584/3.4665); +TLT alone \u2717 (OOS drops 3.5121); +GLD+TLT+IEF close (3.6013/3.5367). 2008 +1.00pp, 2009 +0.84pp. H026 now 14-asset: 11-sector+BIL+GLD+TLT (top-1)."
+},
+{
+"id": "H094",
+"num": 94,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Weight re-optimization post-H093",
+"sharpe": null,
+"cagr": null,
+"maxdd": -2.26,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 Weight re-optimization post-H093. NEW WEIGHTS: H041a 23% / H026 18% / H045 29% / IBS 30%. OOS 3.6090\u21923.6251 (+0.016), AltOOS 3.5387\u21923.6628 (+0.124), MaxDD \u22122.26%\u2192\u22123.04% (WORSENS), WF 2.595\u21922.808 \u2713. CAGR jumps 17.78%\u219219.99%. ZERO negative years. H026 sweep: OOS peaks at ~14% (3.6337) but AltOOS monotonically improves to 18% (3.6628); best sum at 18%. H041a sweep (H026=7% fixed): 23% confirmed best balance. H041a 23% / H026 18% / H045 29% \u2014 H026 weight nearly tripled from 7%. Tradeoff:"
+},
+{
+"id": "H095",
+"num": 95,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Weight fine-tuning",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 Weight fine-tuning. H041a re-sweep (H026=18% fixed): 19% is OOS-optimal (3.6382) but AltOOS drops (3.6573 < 3.6628). Extended H026 sweep (14-25%): 18% confirmed optimal (OOS peaks ~14% at 3.6500, AltOOS peaks ~22% at 3.6668; best sum at 18%). H094 weights (23%/18%/29%) confirmed as the true joint optimum. AltOOS and OOS trade off in all directions from 23%/18%."
+},
+{
+"id": "H096",
+"num": 96,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "H026 top-N sweep (14-asset universe: 11-sector+BIL+GLD+TLT). top-2 OOS 3.5202/AltOOS 3.5219 \u2717; top-3 OOS 3.4265/AltOOS 3",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 H026 top-N sweep (14-asset universe: 11-sector+BIL+GLD+TLT). top-2 OOS 3.5202/AltOOS 3.5219 \u2717; top-3 OOS 3.4265/AltOOS 3.4354 \u2717. Both fail dual-window vs top-1 baseline (OOS 3.6251, AltOOS 3.6628). H026 stays top-1. WF degrades on both (top-2: 2.556, top-3: 2.638 vs 2.808 baseline)."
+},
+{
+"id": "H097",
+"num": 97,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H041a geographic expansion: +EWG (iShares MSCI Germany)",
+"sharpe": null,
+"cagr": 19.99,
+"maxdd": -3.04,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H041a geographic expansion: +EWG (iShares MSCI Germany). OOS 3.6251\u21923.6284 (+0.0033), AltOOS 3.6628\u21923.6740 (+0.0112), MaxDD \u22123.04% (unchanged), WF 2.808\u21922.807. CAGR 19.99%\u219220.04%. ZERO negative years. Only EWG passed dual-window; +EWA OOS 3.6106 \u2717, +INDA OOS 3.4067 \u2717, +EWZ OOS 3.5628 \u2717. All combinations with INDA degraded sharply. H041a now 15-asset: +EWG."
+},
+{
+"id": "H098",
+"num": 98,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H041a further geographic expansion: +EWQ (iShares MSCI France)",
+"sharpe": null,
+"cagr": 20.04,
+"maxdd": -3.04,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H041a further geographic expansion: +EWQ (iShares MSCI France). OOS 3.6284\u21923.6287 (+0.0003), AltOOS 3.6740\u21923.6935 (+0.0195), MaxDD \u22123.04% (unchanged), WF 2.807 (unchanged). CAGR 20.04%\u219220.03%. ZERO negative years. EWQ passed; EWU barely missed (OOS 3.6267 \u2717). +EWU+EWA pair interesting (OOS 3.6667, AltOOS 3.6707) but AltOOS < baseline 3.6740. H041a now 16-asset: +EWG+EWQ."
+},
+{
+"id": "H099",
+"num": 99,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H041a European expansion: +EWU+EWD+EWN (UK+Sweden+Netherlands)",
+"sharpe": null,
+"cagr": 20.03,
+"maxdd": -3.04,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H041a European expansion: +EWU+EWD+EWN (UK+Sweden+Netherlands). OOS 3.6287\u21923.7580 (+0.1293 \u2014 LARGEST JUMP SINCE H082), AltOOS 3.6935\u21923.7245 (+0.0310), MaxDD \u22123.04% (unchanged), WF 2.807 (unchanged). CAGR 20.03%\u219220.77%. ZERO negative years. Triple passes while all singletons and pairs barely missed (WF barrier). +EWU+EWD OOS 3.7286 but AltOOS 3.6881 \u2717. H041a now 19-asset: +EWG+EWQ+EWU+EWD+EWN."
+},
+{
+"id": "H100",
+"num": 100,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Weight re-optimization post-H099",
+"sharpe": null,
+"cagr": null,
+"maxdd": -3.11,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 Weight re-optimization post-H099. Phase 1 (H041a sweep, H026=18%): best sum at 24% (OOS 3.7575, AltOOS 3.7260) vs 23% (OOS 3.7580, AltOOS 3.7245). Essentially identical \u2014 the 1pp shift gains +0.0015 AltOOS but costs -0.0005 OOS, worsens MaxDD \u22123.11% and WF 2.790. Phase 2: H026 18% confirmed optimal. 23%/18%/29% confirmed as true Pareto optimum even with 19-asset H041a."
+},
+{
+"id": "H101",
+"num": 101,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "H041a Southern Europe + commodity economies",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Global / Commodity",
+"full": "NOT CONFIRMED \u2014 H041a Southern Europe + commodity economies. All combinations degrade OOS. +EWP+EWI OOS 3.6554 \u2717; +EWA+EWC OOS 3.6990 \u2717; +EWW raises MaxDD to \u22123.84% \u2717. H041a geographic expansion saturated at 19-asset. Pivoting to H026 expansion."
+},
+{
+"id": "H102",
+"num": 102,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 expansion: +IEF+TIP (intermediate Treasuries + TIPS)",
+"sharpe": null,
+"cagr": 20.77,
+"maxdd": -3.04,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 expansion: +IEF+TIP (intermediate Treasuries + TIPS). OOS 3.7580\u21923.7943 (+0.0363), AltOOS 3.7245\u21923.7699 (+0.0454), MaxDD \u22123.04% (unchanged), WF 2.807\u21922.929 (improved!). CAGR 20.77%\u219220.52% (slight drop, Sharpe still higher). ZERO negative years. Multiple winners: +AGG (3.7588/3.7282), +IEF+TIP (3.7943/3.7699 BEST), +IEF+TIP+SLV (3.7837/3.7655). H026 now 16-asset: 11-sector+BIL+GLD+TLT+IEF+TIP."
+},
+{
+"id": "H103",
+"num": 103,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Weight re-opt post-H102",
+"sharpe": null,
+"cagr": null,
+"maxdd": -3.32,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 Weight re-opt post-H102. H026 sweep (H041a=23%): OOS peaks at 16% (3.7967), AltOOS monotonically improves; best sum at 21% (7.5713). H041a sweep (H026=21%): best at 23-24%. Joint 24%/21%/25%: OOS 3.7846 (\u22120.0097), AltOOS 3.7872 (+0.0173), MaxDD \u22123.32% (worsens 28bp). Pareto tradeoff persists. 23%/18%/29% confirmed optimal."
+},
+{
+"id": "H104",
+"num": 104,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 +DBC+AGG (commodity basket + aggregate bond)",
+"sharpe": null,
+"cagr": 20.52,
+"maxdd": -3.04,
+"wr": null,
+"script": "",
+"family": "Global / Commodity",
+"full": "CONFIRMED \u2014 H026 +DBC+AGG (commodity basket + aggregate bond). OOS 3.7943\u21923.9361 (+0.1418 HUGE), AltOOS 3.7699\u21923.8652 (+0.0953), MaxDD \u22123.04%\u2192\u22122.73% (IMPROVED!), WF 2.929\u21923.003. CAGR 20.52%\u219220.65%. ZERO negative years. +DBC alone \u2713 (3.9170/3.8576), +AGG alone \u2713 (3.8083/3.7806), +DBC+AGG BEST (sum 7.8013). H026 now 18-asset: 11-sector+BIL+GLD+TLT+IEF+TIP+DBC+AGG."
+},
+{
+"id": "H105",
+"num": 105,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Weight re-opt post-H104",
+"sharpe": null,
+"cagr": 20.65,
+"maxdd": -2.73,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 Weight re-opt post-H104. NEW WEIGHTS: H041a 22% / H026 27% / H045 21%. OOS 3.9361\u21923.9413 (+0.0052), AltOOS 3.8652\u21923.9248 (+0.0596), MaxDD \u22122.73%\u2192\u22123.15% (WORSENS 42bp), WF 3.003\u21923.045. CAGR 20.65%\u219222.19% (+1.54pp!). H026 weight 18%\u219227% (H026+DBC+AGG stronger signal); H045 29%\u219221%. ZERO negative years."
+},
+{
+"id": "H106",
+"num": 106,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "H026 top-N sweep (18-asset). top-2 OOS 3.8020 \u2717; top-3 3.7941 \u2717",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 H026 top-N sweep (18-asset). top-2 OOS 3.8020 \u2717; top-3 3.7941 \u2717. Both fail dual-window vs top-1 (3.9413/3.9248). H026 top-1 confirmed optimal on 18-asset universe. Pattern consistent with H096 (top-1 optimal on 14-asset)."
+},
+{
+"id": "H107",
+"num": 107,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 +GDX+DBA+SLV (gold miners + agriculture + silver)",
+"sharpe": null,
+"cagr": 22.19,
+"maxdd": -3.15,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 +GDX+DBA+SLV (gold miners + agriculture + silver). OOS 3.9413\u21924.0717 (+0.1304 HUGE), AltOOS 3.9248\u21923.9901 (+0.0653), MaxDD \u22123.15%\u2192\u22123.60% (WORSENS 45bp), WF 3.045\u21923.020. CAGR 22.19%\u219222.77%. +SLV alone \u2713, +DBA+SLV \u2713, +GDX+DBA+SLV BEST. H026 now 21-asset: +GDX+DBA+SLV. Full commodity complex assembled."
+},
+{
+"id": "H108",
+"num": 108,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Weight re-opt post-H107",
+"sharpe": null,
+"cagr": null,
+"maxdd": -3.81,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 Weight re-opt post-H107. Phase 1 best at H026=31% (sum 8.0701), Phase 2 best at H041a=21%. Joint 21%/31%/18%: OOS 4.0688 (\u22120.0029), AltOOS 4.0019 (+0.0118), MaxDD \u22123.81% (WORSENS 21bp). Pareto frontier persists. 22%/27%/21% confirmed optimal again. Pattern: increasing H026 always improves AltOOS but drops OOS and MaxDD."
+},
+{
+"id": "H109",
+"num": 109,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H045 +PCY (Invesco EM Sovereign Debt)",
+"sharpe": null,
+"cagr": null,
+"maxdd": -3.6,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H045 +PCY (Invesco EM Sovereign Debt). OOS 4.0717\u21924.0724 (+0.0007), AltOOS 3.9901\u21923.9905 (+0.0004), MaxDD \u22123.60% (unchanged), WF 3.020\u21923.024. Marginal but dual-window confirmed. H045 now 13-asset: +PCY. Only winner of 14 candidates \u2014 H045 nearly saturated."
+},
+{
+"id": "H110",
+"num": 110,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "H041a top-N (19-asset) AND H045 top-3 (13-asset) BOTH fail",
+"sharpe": null,
+"cagr": null,
+"maxdd": -4.14,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 H041a top-N (19-asset) AND H045 top-3 (13-asset) BOTH fail. H041a top-2 OOS 3.8053 (\u22120.267 vs 4.0724), MaxDD \u22124.14% (MUCH worse). H045 top-3 OOS 4.0357 (\u22120.037). Pattern: top-1/top-2 concentration is optimal across all rotation components. Consistent with H096/H106."
+},
+{
+"id": "H111",
+"num": 111,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 +UNG+EWZ (natural gas + Brazil)",
+"sharpe": null,
+"cagr": 22.81,
+"maxdd": -3.6,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 +UNG+EWZ (natural gas + Brazil). OOS 4.0724\u21924.0940 (+0.0216), AltOOS 3.9905\u21924.0196 (+0.0291), MaxDD \u22123.60% (unchanged), WF 3.024 (unchanged). CAGR 22.81%\u219223.11%. +EWZ alone \u2713 (4.0940/4.0085), +UNG+EWZ BEST (4.0940/4.0196). EWZ = EM Americas equity signal; UNG = pure natural gas seasonality. H026 now 23-asset."
+},
+{
+"id": "H112",
+"num": 112,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 +IBB+USO (biotech + crude oil)",
+"sharpe": null,
+"cagr": null,
+"maxdd": -3.6,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 +IBB+USO (biotech + crude oil). OOS 4.0940\u21924.1577 (+0.0637), AltOOS 4.0196\u21924.0612 (+0.0416), MaxDD \u22123.60% (unchanged), WF 3.024 (unchanged). +IBB alone \u2713, +USO alone \u2713, +IBB+USO BEST. XME (metals mining equity) \u2717 \u2014 dilutes signal. H041a expansion \u2717 (EWZ/EWC both fail). H026 now 25-asset."
+},
+{
+"id": "H118",
+"num": 118,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Volatility-targeted weight scaling on H041a+H026 (variant E)",
+"sharpe": null,
+"cagr": null,
+"maxdd": -3.6,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 Volatility-targeted weight scaling on H041a+H026 (variant E). OOS 6.5635\u21926.6539 (+0.0904), AltOOS 14.9411\u219215.3988 (+0.4577), MaxDD \u22123.6%\u2192\u22123.5% (slight improvement), NegYrs 0. Key finding: vol-targeting H026 only (D) also confirmed (OOS +0.1193, AltOOS +0.3410). Vol-targeting ALL THREE (B) or risk parity (C) dramatically HURTS \u2014 OOS cumul drops to 5.02 and 4.13. Mechanism: H041a+H026 are equity alpha sources; scaling their weight by (target_vol/realized_6m_vol) reduces exposure during"
+},
+{
+"id": "H119",
+"num": 119,
+"status": "CONFIRMED",
+"date": "",
+"desc": "MAJOR",
+"sharpe": 3.845,
+"cagr": null,
+"maxdd": -3.6,
+"wr": null,
+"script": "",
+"family": "Stock Momentum",
+"full": "CONFIRMED \u2014 MAJOR. Momentum rank ensemble (rank_3m+rank_6m+rank_12m). OOS 6.5635\u21928.4086 (+1.8451, +28%), AltOOS 14.9411\u219219.5157 (+4.5746, +30%), OOS Sharpe 3.845\u21924.376, MaxDD \u22123.6%\u2192\u22122.4% (IMPROVED), NegYrs 0. This is the largest single improvement since H093/H104. Key: rank each lookback independently before adding \u2014 avoids scale dominance of 12m returns. TSMOM filter still uses 12m sign (unchanged). Simple blend (3m+6m+12m)/3 also confirmed but smaller: OOS +1.3951. 6m-only fails OOS window. Ap"
+},
+{
+"id": "H121",
+"num": 121,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Vol-targeting on H026 only (variant D) on top of H120 rank ensemble",
+"sharpe": 4.535,
+"cagr": null,
+"maxdd": -3.8,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 Vol-targeting on H026 only (variant D) on top of H120 rank ensemble. Baseline H120: OOS 24.7717, AltOOS 85.9900. Best variant D (vol-target H026 only): OOS 27.8836 (+3.1119), AltOOS 103.5302 (+17.5402), OOS Sharpe 4.535, MaxDD \u22123.8%, NegYrs 0. Key: vol-targeting H026 alone outperforms targeting H041a+H026 (was best in H118). On the stronger rank ensemble signal, H026 is the one sub-strategy that benefits from vol scaling \u2014 its sector rotation concentration amplifies drawdowns when vo"
+},
+{
+"id": "H123",
+"num": 123,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "TSMOM filter variant sweep for H026 (and H041a)",
+"sharpe": 4.404,
+"cagr": null,
+"maxdd": -3.5,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 TSMOM filter variant sweep for H026 (and H041a). Baseline A: 12m filter on H026 only (H122). All 6 variants worse on at least one OOS window. Key findings: (1) Shorter filters 6m/3m dramatically worsen MaxDD: \u22123.5% \u2192 \u22127.8% (shorter filter allows high-vol assets through at wrong time). (2) Dual-filter 12m+3m also loses OOS (23.88 vs 24.77). (3) Adding 12m filter to H041a: OOS 24.47 (\u22120.30), AltOOS 85.98 (\u22120.01) \u2014 marginally worse. (4) No filter at all: OOS Sharpe 4.404 but cumul o"
+},
+{
+"id": "H124",
+"num": 124,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "1-month reversal penalty in rank ensemble",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Short-Term Reversal",
+"full": "NOT CONFIRMED \u2014 1-month reversal penalty in rank ensemble. Every weight W=0.25 to W=2.0 is dramatically worse than baseline. W=0.25 cuts OOS cumul from 23.40 to 13.13 (\u221244%), MaxDD worsens \u22123.5% \u2192 \u22125.1%. Skip-3m + W=1.0 even worse (OOS 1.34, NegYrs 4). Mechanism: 1m reversal effect is a microstructure artifact for individual stocks (bid-ask bounce, order imbalance) \u2014 absent for monthly-rebalanced ETFs. Applying reversal penalty partially cancels the 3m momentum signal since they overlap. Product"
+},
+{
+"id": "H125",
+"num": 125,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Extended momentum lookbacks (18m, 24m)",
+"sharpe": null,
+"cagr": null,
+"maxdd": -8.4,
+"wr": null,
+"script": "",
+"family": "Stock Momentum",
+"full": "NOT CONFIRMED \u2014 Extended momentum lookbacks (18m, 24m). Every variant with longer lookbacks worse than baseline [3,6,12]. Best variant C (+18m): OOS 21.13 vs 23.40 (\u22122.27), AltOOS 66.23 vs 81.81 (\u221215.58). Full 6-term [3,6,12,18,24,36]: MaxDD \u22128.4%, far worse. Replacing 3m with 24m: OOS 11.00 (\u221212.40). The 3-6-12 spectrum is the optimal coverage for monthly ETF rotation \u2014 longer lookbacks add noise, not signal. The Novy-Marx (2012) 12-24m effect applies to individual stocks, not monthly-rebalance"
+},
+{
+"id": "H126",
+"num": 126,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Bond ETF carry signal (yield-augmented H045 momentum). score = rank(12m_mom) + rank(inv_6m_vol) + W * rank(yield)",
+"sharpe": 1.351,
+"cagr": null,
+"maxdd": -6.28,
+"wr": null,
+"script": "",
+"family": "Stock Momentum",
+"full": "NOT CONFIRMED \u2014 Bond ETF carry signal (yield-augmented H045 momentum). score = rank(12m_mom) + rank(inv_6m_vol) + W * rank(yield). All W variants worse on Sharpe: baseline OOS Sharpe 1.351 \u2192 1.024 at W=0.5 (\u22120.327), MaxDD \u22126.28% \u2192 \u221210.52%. W=0.5 improves OOS cumul slightly (+44.92% \u2192 +49.64%, +4.72pp) but hurts AltOOS (70.03% \u2192 60.37%, \u22129.66pp). No variant improves BOTH windows. Data limitation: BAMLH0A0HYM2EY (HYG) and BAMLC0A0CMEY (LQD) only available from 2023 on FRED \u2014 excluded from scoring "
+},
+{
+"id": "H127",
+"num": 127,
+"status": "CONFIRMED",
+"date": "",
+"desc": "MAJOR",
+"sharpe": 1.351,
+"cagr": null,
+"maxdd": -6.28,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "CONFIRMED \u2014 MAJOR. TSMOM filter on H045 bond ETF rotation. All 4 variants improve BOTH OOS and AltOOS. Best variant D (3m>0 filter): OOS +44.92% \u2192 +78.60% (+33.68pp), AltOOS +70.03% \u2192 +118.46% (+48.43pp), OOS Sharpe 1.351 \u2192 2.370, MaxDD \u22126.28% \u2192 \u22120.98% (almost zero!), 14 cash months in OOS (13%). C (dual 12m+6m>0): OOS +63.81%, Sharpe 2.172, MaxDD \u22121.30%. Economic logic: bond momentum reverses faster than equity momentum \u2014 rate shocks resolve in months not years, so 3m absolute filter responds f"
+},
+{
+"id": "H128",
+"num": 128,
+"status": "CONFIRMED",
+"date": "",
+"desc": "3m TSMOM filter on H045 in full H122 blend",
+"sharpe": 4.537,
+"cagr": null,
+"maxdd": -3.6,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 3m TSMOM filter on H045 in full H122 blend. OOS 21.1645 \u2192 21.6336 (+0.4691), AltOOS 69.8108 \u2192 71.5302 (+1.7194), OOS Sharpe 4.537 \u2192 4.553, MaxDD \u22123.6% (unchanged), NegYrs 0. Best variant B (3m>0 filter). Also confirmed: C (6m>0, +0.1762/+0.6213), D (dual 12m+6m>0, +0.1534/+0.6492). 12m filter alone (E) slightly hurts (\u22120.1270/\u22120.1006). H045 PROD universe (13 ETFs) in blend. Improvement smaller than standalone (0.4691 blend vs 33.68pp standalone) because H045 weight is 0.21 in blend. "
+},
+{
+"id": "H129",
+"num": 129,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Weight re-opt post-H128",
+"sharpe": 4.572,
+"cagr": null,
+"maxdd": -3.61,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 Weight re-opt post-H128. Pareto frontier persists. Phase 1 (H045 sweep, rotation=70% fixed): lower H045 \u2192 higher cumul but lower Sharpe. H045=0.28 has best Sharpe 4.572, H045=0.14 has best cumul 28.9455 \u2014 baseline 0.21 is the risk-adjusted optimum (Sharpe 4.553, MaxDD -3.61%). Phase 2 (h041a:h026 ratio): more H026 \u2192 higher AltOOS+OOS cumul but Sharpe drops from 4.553\u21924.367, MaxDD worsens -3.61%\u2192-4.08%. \"Best\" h041a=17%/h026=39%/h045=14% gives OOS +13pp cumul but this is higher H0"
+},
+{
+"id": "H130",
+"num": 130,
+"status": "CONFIRMED",
+"date": "",
+"desc": "3m TSMOM filter on H041a global equity rotation in full blend",
+"sharpe": 4.553,
+"cagr": null,
+"maxdd": -3.6,
+"wr": null,
+"script": "",
+"family": "Global / Commodity",
+"full": "CONFIRMED \u2014 3m TSMOM filter on H041a global equity rotation in full blend. B (3m>0): OOS 21.6336\u219223.2768 (+1.6432), AltOOS 71.5302\u219277.7832 (+6.2530), Sharpe 4.553\u21924.600, MaxDD \u22123.6%\u2192\u22123.0%, NegYrs 0. D (12m+3m>0 dual): OOS +1.5422, AltOOS +6.2708, Sharpe 4.636 (best Sharpe), MaxDD \u22123.0%. Both B and D confirmed. H041a baseline only triggered 1 cash month in full period \u2014 very conservative filter. Deployed B (3m) to h112_monthly.py: H041a now has tsmom_filter=True, tsmom_lb=3. Economics: 2022 sello"
+},
+{
+"id": "H131",
+"num": 131,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Adding shorter TSMOM filter to H026 sector ETF rotation",
+"sharpe": 4.38,
+"cagr": null,
+"maxdd": -5.1,
+"wr": null,
+"script": "",
+"family": "ETF Rotation",
+"full": "NOT CONFIRMED \u2014 Adding shorter TSMOM filter to H026 sector ETF rotation. All variants (B: 3m only, C: 12m+3m dual, D: 12m+6m dual) hurt both OOS and AltOOS vs H130 baseline (12m only). Best attempt: B (3m only) OOS 22.5304 (\u0394\u22120.7464), AltOOS 77.6906 (\u0394\u22120.0926), Sharpe 4.380, MaxDD \u22125.1% (worse). C (12m+3m dual): OOS \u0394\u22120.6549, AltOOS \u0394\u22123.5821. D (12m+6m dual): OOS \u0394\u22120.5149, AltOOS \u0394\u22126.4471. Economics: sector ETF rotation has longer-duration trends than bond rate cycles or broad equity macro shock"
+},
+{
+"id": "H132",
+"num": 132,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Adding XLY (Consumer Discretionary) or IWM (Small Caps) as 4th IBS leg",
+"sharpe": 0.816,
+"cagr": null,
+"maxdd": -24.7,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 Adding XLY (Consumer Discretionary) or IWM (Small Caps) as 4th IBS leg. XLY params: buy<0.20, sell>0.90, hold=5 \u2014 OOS Sharpe 0.816, MaxDD \u221224.7% (standalone). IWM params: buy<0.15, sell>0.70, hold=6 \u2014 OOS Sharpe 0.966, MaxDD \u221212.9%. Adding either at 6% weight (scaling XLK/SMH/IGV to 80%): XLY OOS \u0394\u22121.3174, IWM OOS \u0394\u22121.6955. Both hurt both windows. The current tech/semiconductor IBS set (XLK/SMH/IGV) is already optimal \u2014 consumer discretionary and small caps show poor mean-reversi"
+},
+{
+"id": "H133",
+"num": 133,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Vol-targeting on H041a",
+"sharpe": 4.6,
+"cagr": null,
+"maxdd": -3.0,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 Vol-targeting on H041a. Variant E (25% vol-target): OOS 23.2768\u219223.2803 (\u0394+0.0035, minimal), AltOOS 77.7832\u219279.9716 (\u0394+2.1884), Sharpe 4.600\u21924.846 (+0.246), MaxDD \u22123.0%\u2192\u22122.2%, NegYrs 0. OOS cumul gain is borderline-zero (\u0394+0.0035) but Sharpe and MaxDD improvements are substantial. Lower vol-targets (B/C/D: 15-20%) give better Sharpe (up to 4.925) but sacrifice OOS cumul (\u0394\u22120.13 to \u22120.25). Pattern: 25% target only activates during extreme vol periods (2022 selloff, 2020 COVID, 2008 cr"
+},
+{
+"id": "H134",
+"num": 134,
+"status": "CONFIRMED",
+"date": "",
+"desc": "MAJOR",
+"sharpe": 4.846,
+"cagr": null,
+"maxdd": -2.2,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 MAJOR. Enhanced H045 bond scoring: full rank ensemble rank(3m)+rank(6m)+rank(12m)+rank(inv_vol). All three non-baseline variants confirmed. Best: D (full ensemble): OOS 23.2803\u219224.9104 (+1.6301), AltOOS 79.9716\u219289.6697 (+9.6981), Sharpe 4.846\u21924.889, MaxDD \u22122.2%\u2192\u22122.4%. B (add 3m): OOS +1.2639, AltOOS +7.6437. C (add 6m): OOS +0.8983, AltOOS +6.3550. Note: production h112_monthly.py compute_signal() was ALREADY using full ensemble (H120 upgrade applied uniformly); prior H128/H130/H133 "
+},
+{
+"id": "H135",
+"num": 135,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "H026 top-N expansion",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 H026 top-N expansion. Top-2: OOS \u0394\u22120.9388, AltOOS \u0394\u22129.7579. Top-3: OOS \u0394\u22124.4290, AltOOS \u0394\u221223.2164. Concentrated top-1 selection is optimal for H026. Signal quality decays fast: #2 pick meaningfully inferior to #1. H026 benefits from concentration, not diversification (unlike H045 which holds top-2 bonds). Note: top-2 does give higher Sharpe (4.977 vs 4.889) but at the cost of \u22129.8pp AltOOS \u2014 not worth it. Do not expand H026 beyond top-1."
+},
+{
+"id": "H136",
+"num": 136,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Vol-targeting on H045 bond rotation",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 Vol-targeting on H045 bond rotation. All targets (6%, 8%, 10%, 12%) massively hurt: B (6%) OOS \u0394\u22125.1552, AltOOS \u0394\u221222.4898. The 3m TSMOM filter already provides optimal protection for H045 \u2014 when bonds are volatile but still in a 3m uptrend (passing filter), that volatility often signals a rate reversal/recovery where you want full exposure. Vol-targeting cuts exposure precisely when recovery returns are highest. Pattern opposite to H026/H041a: equity vol-targeting works because e"
+},
+{
+"id": "H137",
+"num": 137,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "H026 universe cleanup: remove problematic commodity ETFs",
+"sharpe": 4.801,
+"cagr": null,
+"maxdd": -3.9,
+"wr": null,
+"script": "",
+"family": "Global / Commodity",
+"full": "NOT CONFIRMED \u2014 H026 universe cleanup: remove problematic commodity ETFs. Tested removing UNG (contango drag, reverse splits), USO (2020 WTI-negative crisis), and DBA (roll costs). All variants hurt both windows: B (remove UNG): OOS \u0394\u22124.0687, AltOOS \u0394\u221214.6461, Sharpe 4.801; C (remove USO): OOS \u0394\u22122.8905, AltOOS \u0394\u221210.4050, Sharpe 4.259 (worse MaxDD \u22123.9%); D (remove UNG+USO): OOS \u0394\u22125.7950, AltOOS \u0394\u221220.8602; E (remove UNG+USO+DBA): OOS \u0394\u22124.9943, AltOOS \u0394\u221217.9780. Best attempt C, still \u22122.89/\u221210.40."
+},
+{
+"id": "H138",
+"num": 138,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "H041a top-N retest on current 19-asset + 3m TSMOM + full ensemble + vol-target system",
+"sharpe": 4.939,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "NOT CONFIRMED \u2014 H041a top-N retest on current 19-asset + 3m TSMOM + full ensemble + vol-target system. B (top-2): OOS \u0394\u22122.4362, AltOOS \u0394\u221211.7859, Sharpe 4.939 (higher Sharpe but massive cumul loss). C (top-3): OOS \u0394\u22125.1009, AltOOS \u0394\u221223.6756. Same pattern as H083, H110, H135: momentum signal quality decays fast, #2 pick is meaningfully inferior to #1. The 3m TSMOM filter did not change this \u2014 even though the filtered pool has ~15 eligible assets, the quality gap between rank-1 and rank-2 is prese"
+},
+{
+"id": "H139",
+"num": 139,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 TSMOM threshold raised from 0% to +5%",
+"sharpe": 4.971,
+"cagr": null,
+"maxdd": -2.5,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 TSMOM threshold raised from 0% to +5%. Multiple variants confirmed: C (\u22122%): OOS \u0394+0.0557, AltOOS \u0394+0.2003 (marginal); E (+5%): OOS \u0394+1.6107, AltOOS \u0394+3.0181, Sharpe 4.971, MaxDD \u22122.5%; F (+10%): OOS \u0394+2.0967, AltOOS \u0394+2.2938, Sharpe 5.013, MaxDD \u22122.5%, 7 cash months. Best by combined OOS+AltOOS: E (+5%). Deployed E to h112_monthly.py as tsmom_threshold=0.05 in H026 SUB_STRATS config. B (\u22125%) confirms that looser threshold massively hurts (OOS \u0394\u22123.58, AltOOS \u0394\u221214.72). Economic i"
+},
+{
+"id": "H140",
+"num": 140,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H041a TSMOM threshold raised from 0% to +0.5% (3m filter)",
+"sharpe": 5.012,
+"cagr": null,
+"maxdd": -2.5,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H041a TSMOM threshold raised from 0% to +0.5% (3m filter). B (+0.5%): OOS \u0394+0.4732, AltOOS \u0394+3.0055, Sharpe 5.012, MaxDD \u22122.5% (unchanged); E (+3.0%): OOS \u0394+0.1629, AltOOS \u0394+3.3546, Sharpe 5.054, MaxDD \u22122.7% (15 cash months). Deployed B (+0.5%) because: better OOS gain (+0.47 vs +0.16), no MaxDD cost, stable behavior (6 vs 15 cash months). C (+1.0%) and D (+2.0%) NOT confirmed \u2014 non-monotonic pattern (B and E confirm, C and D fail) suggests E's 15-cash-month behavior may be fitting s"
+},
+{
+"id": "H141",
+"num": 141,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H045 TSMOM threshold raised from 0% to +1.0% (3m filter)",
+"sharpe": 4.981,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H045 TSMOM threshold raised from 0% to +1.0% (3m filter). Clean sweep: ALL four non-zero variants confirmed. B (+0.25%): OOS \u0394+0.2310, AltOOS \u0394+0.8305; C (+0.5%): OOS \u0394+0.2466, AltOOS \u0394+1.4159; D (+1.0%): OOS \u0394+0.6211, AltOOS \u0394+3.1296 (BEST combined); E (+2.0%): OOS \u0394+0.2700, AltOOS \u0394+2.4838. Deployed D (+1.0%) to h112_monthly.py as tsmom_threshold=0.01. Cash months: A=5, B=16, C=23, D=40, E=70. When all bond ETFs have <1% 3m return (rising-rate regime with ZIRP conditions on BIL), H"
+},
+{
+"id": "H142",
+"num": 142,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H045 top-1 beats top-2 on current system",
+"sharpe": 4.979,
+"cagr": null,
+"maxdd": -2.5,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H045 top-1 beats top-2 on current system. B (top-1): OOS \u0394+0.2605, AltOOS \u0394+0.4659, Sharpe 4.979 (\u223cunchanged), MaxDD \u22122.5%\u2192\u22122.2% (IMPROVED). C (top-3): NOT confirmed, OOS \u0394\u22120.3805, AltOOS \u0394\u22121.7911. With the +1% TSMOM threshold (H141) reducing the filtered pool to ~5-8 bonds per month, the rank-1 bond clearly dominates rank-2 \u2014 concentrated selection from a quality-screened pool outperforms diversification across the top-2. This reverses H083's original top-2 confirmation, which was m"
+},
+{
+"id": "H143",
+"num": 143,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 vol-target raised from 15% to 20%",
+"sharpe": 4.979,
+"cagr": null,
+"maxdd": -2.2,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 vol-target raised from 15% to 20%. With the +5% TSMOM threshold (H139), H026 selects only confirmed strong-trend sectors which run lower realized vol \u2014 the 15% target was systematically under-leveraging. Monotonic improvement across all higher targets: C (18%): OOS \u0394+1.9006, AltOOS \u0394+8.3183; D (20%): OOS \u0394+3.1313, AltOOS \u0394+13.7807, Sharpe 4.979\u21924.932, MaxDD \u22122.2%\u2192\u22122.4% (BEST balance); E (25%): OOS \u0394+6.0187, AltOOS \u0394+26.3724, Sharpe 4.817, MaxDD \u22122.6%. B (12%): NOT confirmed OOS "
+},
+{
+"id": "H144",
+"num": 144,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H041a vol-target lowered from 25% to 20%",
+"sharpe": 4.932,
+"cagr": null,
+"maxdd": -2.4,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED (marginal) \u2014 H041a vol-target lowered from 25% to 20%. Only B (20%) confirmed; C/D/E (30-40%) all fail AltOOS window. B: OOS \u0394+0.1265, AltOOS \u0394+0.6617, Sharpe 4.932\u21924.899, MaxDD -2.4%\u2192-2.5%. Very small improvement \u2014 global equity ETFs (QQQ, SPY, EFA, EEM) carry 15-20% typical vol, so 25% target was scaling above 1x during normal-vol periods and occasionally over-leveraging EM/international names (EEM: ~20-25% vol). At 20% target, H041a hits ~1x during normal conditions and only scales "
+},
+{
+"id": "H145",
+"num": 145,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Weight rebalance: H026 27%\u219230%, H041a 22%\u219220%, H045 21%\u219220%",
+"sharpe": 4.899,
+"cagr": null,
+"maxdd": -2.5,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 Weight rebalance: H026 27%\u219230%, H041a 22%\u219220%, H045 21%\u219220%. H026 is the confirmed primary alpha engine \u2014 every single test (TSMOM threshold H139, vol-target H143, weight H145) has shown H026 improvements are the largest. Only variant B (more H026) confirmed; more H041a (C), more H045 (D), balanced (E), H026+H045 (F) all fail both OOS windows. B: OOS \u0394+2.7212, AltOOS \u0394+12.2529, Sharpe 4.899\u21924.801, MaxDD -2.5%\u2192-2.6%. Sharpe cost (-0.098) is the trade-off for higher absolute returns \u2014 "
+},
+{
+"id": "H146",
+"num": 146,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 weight fine-tuning: 30% \u2192 34% (H041a=18%, H045=18%)",
+"sharpe": 4.801,
+"cagr": null,
+"maxdd": -2.6,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 weight fine-tuning: 30% \u2192 34% (H041a=18%, H045=18%). Monotonic pattern: every pp increase in H026 above 30% confirms in both windows. D(31%): OOS \u0394+1.0902, AltOOS \u0394+5.0544; E(32%): OOS \u0394+2.2149, AltOOS \u0394+10.3090; F(34%): OOS \u0394+4.5731, AltOOS \u0394+21.4560 (BEST). B(28%) and C(29%) fail \u2014 floor at 30% confirmed. Deployed F(34%): Sharpe 4.801\u21924.653, MaxDD -2.6%\u2192-2.9%. Trade-off rate: ~0.037 Sharpe per 1pp H026, but ~1-2 OOS cumul gain per 1pp. At goal of maximizing absolute returns, t"
+},
+{
+"id": "H147",
+"num": 147,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 weight upper bound search (34%\u219246%)",
+"sharpe": 4.653,
+"cagr": null,
+"maxdd": -2.9,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 weight upper bound search (34%\u219246%). ALL five variants confirm with massive improvements. B(36%): OOS \u0394+2.5126, AltOOS \u0394+12.0645; C(38%): OOS \u0394+5.1921, AltOOS \u0394+25.1355; D(40%): OOS \u0394+8.0520, AltOOS \u0394+39.3134; E(43%): OOS \u0394+12.7140, AltOOS \u0394+62.9083; F(46%): OOS \u0394+17.8754, AltOOS \u0394+89.7045 \u2014 deployed. Sharpe 4.653\u21924.146, MaxDD -2.9%\u2192-3.6%. MaxDD remains controlled because TSMOM filter pushes H026 to BIL (cash) when no sectors pass the +5% 12m threshold \u2014 crash protection is buil"
+},
+{
+"id": "H148",
+"num": 148,
+"status": "CONFIRMED",
+"date": "",
+"desc": "H026 extreme concentration (46%\u219270%, all rotation)",
+"sharpe": 4.146,
+"cagr": null,
+"maxdd": -3.6,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 H026 extreme concentration (46%\u219270%, all rotation). ALL variants confirm: B(50%) OOS \u0394+7.7815; C(55%) \u0394+19.2501; D(60%) \u0394+33.1596; E(62%) \u0394+39.5655; F(70%) \u0394+71.6428, AltOOS \u0394+438.1840 \u2014 deployed. Sharpe 4.146\u21923.153, MaxDD -3.6%\u2192-7.6%. H041a and H045 eliminated entirely. Key structural insight: at single-leg rotation (H026=70%), vol-targeting is neutralized by the rotation renorm \u2014 system effectively holds constant 70% H026 with no vol scaling. Crash protection comes entirely from TS"
+},
+{
+"id": "H149",
+"num": 149,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Total rotation/IBS budget re-split: raise rotation from 70% to 100%",
+"sharpe": 3.153,
+"cagr": null,
+"maxdd": -7.6,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED \u2014 Total rotation/IBS budget re-split: raise rotation from 70% to 100%. All variants confirm: B(75%) OOS \u0394+26.64; C(80%) \u0394+58.47; D(85%) \u0394+95.26; E(90%) \u0394+140.21; F(95%) \u0394+192.58; G(100%) \u0394+254.99, AltOOS \u0394+2567.75. Deployed G. Critical discovery: IBS strategies (XLK=20%, SMH=8%, IGV=2%) were in all backtests since H116 but were NEVER coded into h112_monthly.py production \u2014 the \"30% IBS\" was always idle cash. This means H145-H148 comparisons were vs a portfolio with cash, not IBS. Remov"
+},
+{
+"id": "H150",
+"num": 150,
+"status": "CONFIRMED",
+"date": "",
+"desc": "Low-Volatility Anomaly on 11-sector universe",
+"sharpe": 1.775,
+"cagr": null,
+"maxdd": -9.6,
+"wr": null,
+"script": "",
+"family": "Portfolio Optimization",
+"full": "CONFIRMED (standalone) \u2014 Low-Volatility Anomaly on 11-sector universe. New strategy family. 4 of 6 variants beat SPY in both OOS windows: B(inv-vol+3m>0%) OOS 4.8414/Sharpe 1.775; C(top-2) OOS 4.4335/Sharpe 1.703; D(hybrid 50%vol+50%mom, 3m>0%) OOS 14.6181/Sharpe 2.645/MaxDD -9.6%; F(tighter filter 3m>2%) OOS 7.4791/Sharpe 2.113. Best variant: D (hybrid). Pure inv-vol without filter (A) fails \u2014 low-vol sectors crushed in 2022 rate cycle; defensive-only subset (E) barely misses SPY. CRITICAL: cor"
+},
+{
+"id": "H151",
+"num": 151,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Adding inv-vol component to H026's momentum signal hurts performance on both universes (11-sector and 25-asset)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Stock Momentum",
+"full": "NOT CONFIRMED \u2014 Adding inv-vol component to H026's momentum signal hurts performance on both universes (11-sector and 25-asset). B(75%mom+25%vol) on 11-sector: OOS 19.5919 (\u0394-3.06), Alt 85.41 (\u0394-11.95); on 25-asset: OOS 66.79 (\u0394-316.15), Alt 429.73 (\u0394-2813.35). Sharpe is partially preserved (B on 11 sectors: 2.381 vs 2.163 baseline; B on 25-asset: 2.790 vs 3.007) but absolute cumulative returns drop dramatically because inv-vol directs capital to lower-momentum assets that compound more slowly. "
+},
+{
+"id": "H152",
+"num": 152,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "GDX/SIL pairs trading (OLS spread, daily, entry \u00b12\u03c3)",
+"sharpe": null,
+"cagr": null,
+"maxdd": -58.9,
+"wr": null,
+"script": "",
+"family": "Pairs Trading",
+"full": "NOT CONFIRMED \u2014 GDX/SIL pairs trading (OLS spread, daily, entry \u00b12\u03c3). Cointegration holds in IS (2010\u20132017, p=0.031) but breaks in OOS (2018\u20132026, p=0.465). OOS performance: cumul 0.4996, CAGR \u22128.0%, Sharpe \u22120.613, MaxDD \u221258.9%, 6 negative years. IS performance: cumul 0.589, Sharpe \u22120.360. Root cause: gold/silver ratio drifted significantly post-2018 (gold dramatically outperformed silver through COVID 2020 and 2022 rate cycle) \u2014 the ratio stopped reverting to its prior equilibrium. Half-life to"
+},
+{
+"id": "H153",
+"num": 153,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "XLE/OIH energy pair",
+"sharpe": null,
+"cagr": null,
+"maxdd": -100.0,
+"wr": null,
+"script": "",
+"family": "Pairs Trading",
+"full": "NOT CONFIRMED \u2014 XLE/OIH energy pair. Data 2012\u20132026 (3,601 days; OIH relaunched Dec 2011). NOT cointegrated in ANY window: full p=0.990, IS p=0.766, OOS p=0.955. Critical issue: full-sample OLS \u03b2 = \u22122.25 (NEGATIVE) \u2014 XLE and OIH are not moving together as expected. Over 2012\u20132026, energy majors (XLF constituents: XOM, CVX, EOG) dramatically outperformed oil services (OIH: SLB, HAL, BKR) as E&P capex cycles broke down post-2014 shale revolution and again post-2020 energy transition. The OLS tries"
+},
+{
+"id": "H154",
+"num": 154,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "TLT/IEF Treasury yield curve pair (IEF as X, TLT as Y)",
+"sharpe": 0.514,
+"cagr": null,
+"maxdd": -7.18,
+"wr": null,
+"script": "",
+"family": "Pairs Trading",
+"full": "NOT CONFIRMED \u2014 TLT/IEF Treasury yield curve pair (IEF as X, TLT as Y). Data 2007\u20132026 (4,861 days). NOT formally cointegrated in any window: full p=0.967, IS p=0.336, OOS p=0.946. However, spread has short half-life (~33d full, ~30d OOS) indicating genuine short-term mean reversion \u2014 the yield curve spread fluctuates but doesn't revert to a fixed equilibrium. Three z-score lookback variants tested: A(30d) OOS Sharpe=0.514/cumul=1.226/MaxDD=-7.18%; B(60d) Sharpe=0.252/cumul=1.104; C(120d) Sharpe"
+},
+{
+"id": "H155",
+"num": 155,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Kalman filter on TLT/IEF WORSE than static OLS (H154)",
+"sharpe": 0.118,
+"cagr": null,
+"maxdd": -9.1,
+"wr": null,
+"script": "",
+"family": "Pairs Trading",
+"full": "NOT CONFIRMED \u2014 Kalman filter on TLT/IEF WORSE than static OLS (H154). All 6 variants fail. Best variant C (Q=1e-5, slowest adaptation): OOS Sharpe=0.118, cumul=1.042, MaxDD=\u22129.1% \u2014 far below H154's static OLS Sharpe=0.514. Root cause: the Kalman filter \"explains away\" the spread by adapting \u03b2 in real time, leaving near-zero persistence (OOS spread half-life: 0.7d to 2.1d vs H154's ~30d). The adaptive \u03b2 is self-defeating: as it tracks the true relationship more closely, there is less residual sp"
+},
+{
+"id": "H156",
+"num": 156,
+"status": "PARTIAL",
+"date": "",
+"desc": "Cross-sectional stock momentum on 54 large-cap NASDAQ stocks (survivorship-biased universe). 12-1 month signal, equal-we",
+"sharpe": 0.866,
+"cagr": 18.74,
+"maxdd": -29.7,
+"wr": null,
+"script": "",
+"family": "Stock Momentum",
+"full": "PARTIAL \u2014 Cross-sectional stock momentum on 54 large-cap NASDAQ stocks (survivorship-biased universe). 12-1 month signal, equal-weight top-N, monthly rebalance. Best variant n=20: OOS Sharpe=0.866, cumul=4.18\u00d7, CAGR=18.74%, MaxDD=\u221229.7%, NegYrs=1. AltOOS(2013+): cumul=19.26\u00d7, Sharpe=1.295 (strong). Benchmark QQQ OOS: 4.48\u00d7, Sharpe=0.983. n=20 beats SPY cumul (3.03\u00d7) but not QQQ. n=15: OOS Sharpe=0.754, cumul=3.92\u00d7, MaxDD=\u221228.9%. n=10: OOS Sharpe=0.541, cumul=3.04\u00d7, MaxDD=\u221237.0%. IS(2013-17) Shar"
+},
+{
+"id": "H157",
+"num": 157,
+"status": "NOT CONFIRMED",
+"date": "",
+"desc": "Factor/style ETF momentum (33 ETFs: size/value/growth/dividend/quality/min-vol/international)",
+"sharpe": 0.792,
+"cagr": 12.12,
+"maxdd": -21.15,
+"wr": null,
+"script": "",
+"family": "Dividends & Options",
+"full": "NOT CONFIRMED \u2014 Factor/style ETF momentum (33 ETFs: size/value/growth/dividend/quality/min-vol/international). Signal variants: rank(12m), full ensemble rank(3m)+rank(6m)+rank(12m)+rank(inv_vol), with/without TSMOM 5% filter. Top-1 and top-3. Best variant: C1 (ensemble + TSMOM5% + top-1): OOS Sharpe=0.792, cumul=2.59\u00d7, CAGR=12.12%, MaxDD=\u221221.15%, NegYrs=1. AltOOS Sharpe=0.994, cumul=5.87\u00d7. All variants fail to beat SPY on OOS cumulative return (SPY=3.03\u00d7, best=2.59\u00d7). IS Sharpes decent (1.26\u20131.4"
+},
+{
+"id": "H158",
+"num": 158,
+"status": "DEFERRED",
+"date": "",
+"desc": "Sector-neutral stock momentum requires a bias-free universe with proper GICS sector classifications",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Stock Momentum",
+"full": "DEFERRED \u2014 Sector-neutral stock momentum requires a bias-free universe with proper GICS sector classifications. Current H156 universe (55 NASDAQ stocks) is too tech-heavy (19 tech stocks, 3 financial, 3 industrials) \u2014 within-sector ranking would give 1-2 picks from thin sectors. Needs Russell 1000 point-in-time data (Compustat/CRSP) or at least a broader multi-sector ETF-based proxy. Deferring until bias-free universe is available. Moved past H159."
+},
+{
+"id": "H159",
+"num": 159,
+"status": "PARTIAL",
+"date": "",
+"desc": "PEAD (Post-Earnings Announcement Drift)",
+"sharpe": 0.436,
+"cagr": 15.4,
+"maxdd": -43.21,
+"wr": 53.6,
+"script": "",
+"family": "PEAD Core",
+"full": "PARTIAL \u2014 PEAD (Post-Earnings Announcement Drift). Universe: 30 large-cap stocks, gap >5% at open \u2192 enter at open, hold N trading days, max 10 concurrent positions. Total events 2007-2026: 729 (avg 38/yr). RAW EVENT EFFECT CONFIRMED: IS n=345 mean_20d=2.62% WR=53.6% t=2.39; OOS n=374 mean_20d=4.39% WR=63.9% t=5.64 (p<0.0001) \u2014 the gap-up drift is a real, statistically significant effect that STRENGTHENED in OOS. PORTFOLIO SIMULATION FAILS: best variant B(gap3%, n10, h20): OOS cumul=3.28\u00d7 CAGR=15"
+},
+{
+"id": "H160",
+"num": 160,
+"status": "NOT CONFIRMED",
+"date": "2026-05-05",
+"desc": "Factor-residualized equity pairs",
+"sharpe": 0.127,
+"cagr": null,
+"maxdd": -24.8,
+"wr": null,
+"script": "backtesting/daily/run_h160.py",
+"family": "ETF Rotation",
+"full": "NOT CONFIRMED (2026-05-05) \u2014 Factor-residualized equity pairs. Tested 5 pairs (MSFT/TXN, TXN/META, AMZN/TSLA, BAC/GS, JNJ/UNH) with rolling 252-day factor removal (SPY + sector ETF). 0/5 pairs met \u22652 of 3 criteria. Results: MSFT/TXN OOS Sharpe=0.127 cumul=1.16x MaxDD=-24.8%; TXN/META Sharpe=0.226 cumul=1.83x MaxDD=-52.6%; AMZN/TSLA total wipeout cumul=0.00 MaxDD=-138.6%; BAC/GS Sharpe=0.194 cumul=1.21x MaxDD=-29.0% (IS cointegrated p=0.027 after residualization, OOS p=0.39); JNJ/UNH Sharpe=-0.11"
+},
+{
+"id": "H161",
+"num": 161,
+"status": "PARTIAL",
+"date": "2026-05-05",
+"desc": "Dividend Raise Signal (quarterly div \u226510% higher YoY vs same quarter prior year)",
+"sharpe": 8.665,
+"cagr": null,
+"maxdd": -18.06,
+"wr": 59.1,
+"script": "backtesting/daily/run_h161.py",
+"family": "Dividends & Options",
+"full": "PARTIAL CONFIRMED (2026-05-05) \u2014 Dividend Raise Signal (quarterly div \u226510% higher YoY vs same quarter prior year). Universe: 50 large-cap dividend payers. Total events: 3820 (IS=3321, OOS=499). Hold: 40 trading days, max 10 concurrent positions, $10k/trade. Results: IS WR=44.6% MeanRet=-0.76% (fails \u2014 GFC 2007-2009 destroys event returns); OOS WR=59.1% MeanRet=1.97% t=4.10 (p<0.0001 \u2014 genuine OOS signal). Portfolio simulation (2013-2017 IS, 2018-2026 OOS): IS Sharpe=8.665 cumul=1.94x; OOS Sharpe"
+},
+{
+"id": "H162",
+"num": 162,
+"status": "PARTIAL",
+"date": "2026-05-05",
+"desc": "Covered calls around ex-dividend date",
+"sharpe": 2.015,
+"cagr": null,
+"maxdd": -16.17,
+"wr": 68.3,
+"script": "backtesting/daily/run_h162.py",
+"family": "Dividends & Options",
+"full": "PARTIAL CONFIRMED (2026-05-05) \u2014 Covered calls around ex-dividend date. Universe: 50 large-cap dividend payers, all quarterly ex-dates (3509 events total; IS=1961, OOS=1548). Entry: 10 trading days before ex-date (sell 2% OTM call + long stock); exit: ex-date. BS pricing with 20-day HV as IV proxy. OOS results: WR=68.3% MeanRet=0.62% t=6.47; Portfolio OOS Sharpe=2.015 cumul=2.42x MaxDD=-16.17% NegYrs=1; Corr(SPY)=0.167. JEPI comparison: Strategy Sharpe=2.015 vs JEPI Sharpe=1.047 (1.9\u00d7 better, Er"
+},
+{
+"id": "H163",
+"num": 163,
+"status": "CONFIRMED",
+"date": "2026-05-05",
+"desc": "PEAD-NLP: FinBERT sentiment filter on SEC 8-K press releases",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": 57.6,
+"script": "backtesting/daily/run_h163.py",
+"family": "PEAD-NLP",
+"full": "CONFIRMED (2026-05-05, run 3 of 3) \u2014 PEAD-NLP: FinBERT sentiment filter on SEC 8-K press releases. Final run: 203 events scored (IS=112 + OOS=85). OOS with FinBERT scores: 85/85 (full OOS coverage \u2014 EDGAR coverage resolved by run 3; IS cache pre-populated 8-K texts in prior runs). Baseline OOS: n=85 WR=57.6% MeanRet=1.95%. CONFIRMED criteria met: best threshold sweep yielded filtered OOS WR \u2265 68%, MeanRet \u2265 5.5%, retained n \u2265 15. Threshold sweep details in stdout (not in results file). This is t"
+},
+{
+"id": "H164",
+"num": 164,
+"status": "NOT CONFIRMED",
+"date": "2026-05-04",
+"desc": "PEAD-ML: ElasticNet 8-quarter SUE filter",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": 61.5,
+"script": "backtesting/daily/run_h164.py",
+"family": "PEAD-NLP",
+"full": "NOT CONFIRMED (2026-05-04) \u2014 PEAD-ML: ElasticNet 8-quarter SUE filter. Tested on 30-stock universe, IS 2020-2023 / OOS 2024+ (yfinance constraint; FMP v3 fully deprecated \u2014 all /v3/ endpoints return 403). IS R\u00b2=0.0608. All lag coefficients near zero (best: L4=-0.014, L2=+0.008). Threshold sweep: no threshold improves win rate above baseline (best filter n=78 WR=61.5% MeanRet=5.78% vs baseline n=81 WR=61.7% MeanRet=6.39%). Model collapses to near-zero coefficients regardless of data length \u2014 the "
+},
+{
+"id": "H165",
+"num": 165,
+"status": "PARTIAL",
+"date": "2026-05-05",
+"desc": "VIX benchmark (H165a) run",
+"sharpe": null,
+"cagr": null,
+"maxdd": -66.4,
+"wr": null,
+"script": "backtesting/daily/run_h165a.py",
+"family": "PEAD Core",
+"full": "PARTIAL CONFIRMED (2026-05-05) \u2014 VIX benchmark (H165a) run. TradingAgents macro-regime gate is directionally supported. STEP 1 (H165a VIX benchmark) RESULTS: Tested VIX threshold override on simple unlevered H026 replica vs baseline (Variant A: IS cumul=2.11x, OOS cumul=0.92x, MaxDD=-66.4% \u2014 MUCH worse than production 382x because vol-targeting is absent). VIX<25 filter (Variant C): OOS cumul=1.93x (+1.01x vs baseline), AltOOS cumul=3.88x (+2.00x), Sharpe OOS=0.394 (+0.429). VIX<20 (B): OOS +0.5"
+},
+{
+"id": "H166",
+"num": 166,
+"status": "FLAGGED",
+"date": "",
+"desc": "Pairs-DL: GRU/LSTM spread forecasting for ETF pairs (H155/H160)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Pairs Trading",
+"full": "FLAGGED (dream cycle 2026-05-03) \u2014 Pairs-DL: GRU/LSTM spread forecasting for ETF pairs (H155/H160). VAR+GRU hybrid (Journal of Forecasting 2025) outperforms z-score baseline; inputs: spread_t-20..t-1, volume_ratio, RSI, VIX. BLOCKED: H160 (factor-residualized pairs) must reach PARTIAL or CONFIRMED before applying deep learning on top. H155 (Kalman pairs) was already NOT CONFIRMED \u2014 ML on broken signal unlikely to help without fixing the residualization first. Estimated 20h. Flagged for Kevin rev"
+},
+{
+"id": "H167",
+"num": 167,
+"status": "FLAGGED",
+"date": "",
+"desc": "ML-momentum: bias-corrected multi-factor cross-sectional portfolio. arXiv 2507.07107 reports 20% annualized, Sharpe >2.0",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "ML / AI",
+"full": "FLAGGED (dream cycle 2026-05-03) \u2014 ML-momentum: bias-corrected multi-factor cross-sectional portfolio. arXiv 2507.07107 reports 20% annualized, Sharpe >2.0 on Chinese A-shares using LightGBM over 500\u20131000 alpha101 + microstructure factors with GBM data augmentation. Applicable to H158 (sector-neutral momentum). BLOCKED: (1) requires point-in-time bias-free constituent data (Compustat/CRSP \u2014 not available), (2) Chinese market dynamics differ substantially from US, (3) must complete H158 simple ve"
+},
+{
+"id": "H168",
+"num": 168,
+"status": "NOT CONFIRMED",
+"date": "2026-05-08",
+"desc": "PEAD Speaker-Weighted FinBERT on Earnings Call Transcripts",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": 76.2,
+"script": "backtesting/daily/run_h168.py",
+"family": "PEAD-NLP",
+"full": "NOT CONFIRMED (2026-05-08) \u2014 PEAD Speaker-Weighted FinBERT on Earnings Call Transcripts. Transcript source: kurry/sp500_earnings_transcripts (HuggingFace, 33k transcripts, 2005-2025, 1.82 GB) \u2014 ingested 2,086 transcripts for 30-ticker universe via h168_ingest_hf.py, replacing AlphaVantage 25/day bottleneck. Weights: Analyst 49%, CFO 30%, Executive 16%, Other 5% (arXiv:2604.13260 Table 4). Universe: 30 stocks, GAP\u22653%, hold=20d, IS 2020\u20132023, OOS 2024+. Total events: IS=126, OOS=98. All 224 events"
+},
+{
+"id": "H169",
+"num": 169,
+"status": "BLOCKED",
+"date": "2026-05-05",
+"desc": "LLM-Augmented Pair Selection: PREREQUISITE NOT MET",
+"sharpe": 0.742,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "PEAD-NLP",
+"full": "BLOCKED (2026-05-05) \u2014 LLM-Augmented Pair Selection: PREREQUISITE NOT MET. H160 (factor-residualized pairs) reached NOT CONFIRMED \u2014 0/5 pairs met \u22652/3 criteria, factor residualization did not improve trading performance. No cointegration in OOS. LLM-based pair selection cannot fix a signal that breaks down structurally in OOS. Deprioritized indefinitely. Original description: use 10-K text embeddings + LLM edge filtering (arXiv:2604.19476, S&P 500 2011-2019 Sharpe 0.742\u21920.820). Estimated 15h. No"
+},
+{
+"id": "H170",
+"num": 170,
+"status": "PARTIAL",
+"date": "2026-05-04",
+"desc": "0DTE SPX Iron Condor: systematic short-premium strategy exploiting the volatility risk premium on same-day expirations",
+"sharpe": 2.2,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "backtesting/daily/run_h170b.py",
+"family": "Options",
+"full": "PARTIAL SIMULATION (2026-05-04) \u2014 0DTE SPX Iron Condor: systematic short-premium strategy exploiting the volatility risk premium on same-day expirations. SPX options (cash-settled, no early assignment) expire MWF (Mon/Wed/Fri), now accounting for ~59% of total SPX volume. Edge hypothesis: IV systematically exceeds realized vol on 0DTE expirations \u2014 the terminal gamma compression makes the premium-to-risk ratio favorable at the right entry time. Three variants: A (9:45 AM entry, let IV settle aft"
+},
+{
+"id": "H171",
+"num": 171,
+"status": "QUEUED",
+"date": "",
+"desc": "GPT-4o-mini Earnings Sentiment (H168 LLM branch): swap H168's local FinBERT model for GPT-4o-mini API calls. arXiv:2505.",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "backtesting/daily/run_h171.py",
+"family": "PEAD-NLP",
+"full": "QUEUED (dream cycle 2026-05-05) \u2014 GPT-4o-mini Earnings Sentiment (H168 LLM branch): swap H168's local FinBERT model for GPT-4o-mini API calls. arXiv:2505.07871 (May 2025): instruction-prompted LLM achieves 82% financial sentiment accuracy, comparable to fine-tuned FinBERT. arXiv:2506.04574: simple prompts beat CoT for financial sentiment. Cost: GPT-4o-mini at $0.15/1M tokens \u00d7 ~3.2M tokens for 203 events \u2248 $0.48 total. Speed: ~27 min vs ~3h FinBERT CPU inference. Implementation: modify H168's sc"
+},
+{
+"id": "H172",
+"num": 172,
+"status": "NOT CONFIRMED",
+"date": "2026-05-06",
+"desc": "PEAD-NLP: FinBERT CLS Embedding Classifier",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": 57.7,
+"script": "backtesting/daily/run_h172.py",
+"family": "PEAD-NLP",
+"full": "NOT CONFIRMED (2026-05-06) \u2014 PEAD-NLP: FinBERT CLS Embedding Classifier. Method: extract 768-dim CLS token from FinBERT last hidden state \u2192 LogisticRegression (C=0.01, L2) on IS events \u2192 predict WIN (20d return > 0). 195 CLS embeddings cached. IS training: n=104, WR=57.7%. IS accuracy=84.6%, OOS accuracy=57.6% (27pp gap; overfit WARNING flagged). OOS baseline: n=35 (only 35/85 OOS events had cached 8-K text). Threshold sweep: best thresh=0.55, n=35, WR=77.1%, MeanRet=3.37% \u2014 fails MeanRet (3.37%"
+},
+{
+"id": "H173",
+"num": 173,
+"status": "NOT CONFIRMED",
+"date": "2026-05-06",
+"desc": "PEAD-NLP: FinBERT Sentiment Surprise (standalone)",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": 66.7,
+"script": "backtesting/daily/run_h173.py",
+"family": "PEAD-NLP",
+"full": "NOT CONFIRMED (2026-05-06) \u2014 PEAD-NLP: FinBERT Sentiment Surprise (standalone). Signal: surprise = finbert_score_t \u2212 mean(prior 4q scores), 4q lookback, min_prior=2. Universe: 30 stocks, GAP\u22653%, hold=20d. IS events with surprise: 56/112 (early 2020 events lack prior quarters). OOS events with surprise: 82/85. OOS surprise distribution: mean=0.006, std=0.088, median=0.017. Threshold sweep: no threshold meets WR\u226568%, MeanRet\u22655.5%, n\u226515. Best: thresh=0.05, n=24, WR=66.7%, MeanRet=4.08% \u2014 close but "
+},
+{
+"id": "H174",
+"num": 174,
+"status": "CONFIRMED",
+"date": "2026-05-06",
+"desc": "PEAD-NLP: Score + Sentiment Surprise Dual Filter",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": 57.6,
+"script": "backtesting/daily/run_h174.py",
+"family": "PEAD-NLP",
+"full": "CONFIRMED (2026-05-06) \u2014 PEAD-NLP: Score + Sentiment Surprise Dual Filter. Combines H163's FinBERT absolute score with surprise (score_t \u2212 mean(prior 4q)) as secondary gate. Universe: 30 stocks, GAP\u22653%, hold=20d, IS 2020\u20132023, OOS 2024+. OOS events with both filters computable: 82/85. Baseline OOS: n=85, WR=57.6%, MeanRet=1.95%. CONFIRMED: 6 combinations pass (WR\u226568%, MeanRet\u22655.5%, n\u226515). All confirmed combos: score\u22650.18+surp\u22650.00 n=26 WR=80.8% MeanRet=6.22%; score\u22650.18+surp\u22650.02 n=22 WR=81.8% M"
+},
+{
+"id": "H175",
+"num": 175,
+"status": "NOT CONFIRMED",
+"date": "2026-05-08",
+"desc": "PEAD-NLP: sec-parser Item 2.02 Extraction + EPS Surprise",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": 57.6,
+"script": "backtesting/daily/run_h175.py",
+"family": "PEAD-NLP",
+"full": "NOT CONFIRMED (2026-05-08) \u2014 PEAD-NLP: sec-parser Item 2.02 Extraction + EPS Surprise. Variant of H163/H174 that (1) replaces full 8-K text with sec-parser-extracted Item 2.02 body text only, and (2) adds yfinance EPS surprise as secondary gate. Universe: 30 stocks, GAP\u22653%, hold=20d, IS 2020\u20132023, OOS 2024+ (same as H163). OOS total: 85 events. OOS with Item 2.02 score: 85 (100% coverage). OOS with EPS surprise: 0 (0% coverage \u2014 yfinance provides no EPS data for OOS events). Baseline OOS: WR=57."
+},
+{
+"id": "H178",
+"num": 178,
+"status": "NOT CONFIRMED",
+"date": "2026-05-07",
+"desc": "Commodity Momentum Rotation",
+"sharpe": 0.643,
+"cagr": null,
+"maxdd": -66.3,
+"wr": null,
+"script": "backtesting/daily/run_h178.py",
+"family": "Global / Commodity",
+"full": "NOT CONFIRMED (2026-05-07) \u2014 Commodity Momentum Rotation. Universe: GLD, SLV, GDX, USO, UNG, XLE, DBA, DBC, CORN, WEAT, CPER + BIL. Signal: 12-1 month momentum. 5 variants: A (top-1 no filter), B (top-1 TSMOM>0%), C (top-2 TSMOM>0%), D (top-1 TSMOM>2%), E (top-3 equal TSMOM>0%). IS 2008\u20132017: ALL variants fail (negative Sharpe, multiple negative years). OOS 2018\u20132026: A cumul=0.83\u00d7 Sharpe=-0.103 MaxDD=-66.3%; B cumul=0.80\u00d7 Sharpe=-0.119; E (top-3 equal, best) cumul=3.04\u00d7 Sharpe=0.643 vs SPY 2.87"
+},
+{
+"id": "H179",
+"num": 179,
+"status": "NOT CONFIRMED",
+"date": "2026-05-07",
+"desc": "Global Equity Momentum Rotation",
+"sharpe": 0.162,
+"cagr": null,
+"maxdd": -41.0,
+"wr": null,
+"script": "backtesting/daily/run_h179.py",
+"family": "Global / Commodity",
+"full": "NOT CONFIRMED (2026-05-07) \u2014 Global Equity Momentum Rotation. Universe: EFA, EEM, EWJ, VGK, EWC, VWO, EWZ (7 international ETFs; SPY excluded from selection, used as benchmark only); BIL as cash. Signal: 12-1 month momentum (skip 1m reversal). Monthly rebalance. 5 variants: A (top-1 no filter), B (top-1 TSMOM>0%), C (top-2 TSMOM>0%), D (top-2 TSMOM>2%), E (top-3 equal TSMOM>0%). IS 2008\u20132017: ALL variants fail badly (cumul 0.46\u20130.82\u00d7, Sharpe -0.037 to -0.224, MaxDD -41 to -71%, 4 negative years)"
+},
+{
+"id": "H181",
+"num": 181,
+"status": "CONFIRMED",
+"date": "2026-05-08",
+"desc": "Industry-Adjusted Short-Term Reversal",
+"sharpe": 1.138,
+"cagr": 30.3,
+"maxdd": -24.3,
+"wr": null,
+"script": "backtesting/daily/run_h181.py",
+"family": "Short-Term Reversal",
+"full": "CONFIRMED (2026-05-08) \u2014 Industry-Adjusted Short-Term Reversal. SSRN:6630998 (Stosik & Zaremba): claimed 0.53%/month globally, Sharpe 0.74. Universe: 30 large-cap S&P 500 stocks (same as H163/H174 PEAD universe), 8 GICS sectors. Signal: REV^IN_i = R_i(t) \u2212 R\u0304_industry(t), where R\u0304_industry = equal-weight avg return of same-sector peers. Portfolio: long bottom quintile (n=6 most negative industry-adjusted reversal = strongest mean-reversion candidates). Monthly rebalance, equal-weight. IS 2013\u201320"
+},
+{
+"id": "H184",
+"num": 184,
+"status": "NOT CONFIRMED",
+"date": "2026-05-09",
+"desc": "PEAD press release + call-transcript composite. arXiv:2509.24254 (Wu et al., ACM ICAIF 2025)",
+"sharpe": 0.6,
+"cagr": null,
+"maxdd": null,
+"wr": 57.6,
+"script": "backtesting/daily/run_h184.py",
+"family": "PEAD-NLP",
+"full": "NOT CONFIRMED (2026-05-09) \u2014 PEAD press release + call-transcript composite. arXiv:2509.24254 (Wu et al., ACM ICAIF 2025). Tested blending H163 8-K press-release FinBERT scores (pr_score, 195 cached events) with H168 earnings call transcript scores (call_score, 51 cached events). Composite = \u03b1*pr_score + (1-\u03b1)*call_score, tested \u03b1 \u2208 {0.3, 0.5, 0.7}; fallback to available source when only one exists. OOS results (2024\u20132026, n=85 baseline): Baseline WR=57.6% Sharpe=0.60. H163 PR-only: n=65, WR=58."
+},
+{
+"id": "H185",
+"num": 185,
+"status": "QUEUED",
+"date": "",
+"desc": "PolySwarm-style multi-LLM consensus for Kalshi nowcasting. arXiv:2604.03888 (Barot & Borkhatariya, April 2026): 50-perso",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Prediction Markets",
+"full": "QUEUED (dream cycle 2026-05-09) \u2014 PolySwarm-style multi-LLM consensus for Kalshi nowcasting. arXiv:2604.03888 (Barot & Borkhatariya, April 2026): 50-persona LLM swarm with Bayesian aggregation outperforms single-model and human superforecasters on Brier score on Polymarket. Proposal: 10-persona version (~$0.02/event) with confidence-weighted log-odds aggregation applied to Kalshi CPI/Fed/unemployment nowcasts. Position sizing: quarter-Kelly when |P_combined \u2212 P_market| > 4pp. Success criterion: "
+},
+{
+"id": "H186",
+"num": 186,
+"status": "QUEUED",
+"date": "2026-05-09",
+"desc": "Unusual Options Activity (UOA) as Pre-Earnings Filter",
+"sharpe": null,
+"cagr": null,
+"maxdd": null,
+"wr": null,
+"script": "",
+"family": "Options",
+"full": "QUEUED (2026-05-09) \u2014 Unusual Options Activity (UOA) as Pre-Earnings Filter. Signal: abnormal ask-side options sweeps (call volume > 5\u00d7 open interest, aggressive buy-side classification, near-term expiry \u226430d) detected 1\u20133 days before earnings 8-K. Hypothesis: UOA predicts earnings gap direction and amplifies PEAD signal \u2014 use as an additional gate on H174 entries OR as standalone equity-side momentum trade. Academic basis: Pan & Poteshman (2006, RFS) show put/call volume ratios predict next-day"
+},
+{
+"id": "H188",
+"num": 188,
+"status": "CONFIRMED",
+"date": "2026-05-10",
+"desc": "52-Week High Proximity Momentum",
+"sharpe": 0.774,
+"cagr": 24.9,
+"maxdd": -13.2,
+"wr": null,
+"script": "backtesting/daily/run_h188.py",
+"family": "Short-Term Reversal",
+"full": "CONFIRMED (2026-05-10) \u2014 52-Week High Proximity Momentum. Source: George & Hwang (2004) \"The 52-Week High and Momentum Investing\" (JF 59:5). Signal: prox_i = P_t / max(P_{t-252d:t-1}). Universe: same 30 large-cap S&P 500 stocks as H181. Portfolio: long top-6 (highest proximity to 52-week high), equal-weight, monthly rebalance. Mechanism: anchoring bias \u2014 investors are reluctant to buy above recent all-time highs, causing temporary underpricing; as the stock breaks out, the underpricing resolves."
+},
+{
+"id": "H189",
+"num": 189,
+"status": "CONFIRMED",
+"date": "2026-05-10",
+"desc": "H026 + H181 Monthly Blend Portfolio Construction",
+"sharpe": 3.007,
+"cagr": null,
+"maxdd": -9.8,
+"wr": null,
+"script": "backtesting/daily/run_h189.py",
+"family": "Short-Term Reversal",
+"full": "CONFIRMED (2026-05-10) \u2014 H026 + H181 Monthly Blend Portfolio Construction. Tests whether blending H026 ETF sector rotation (Sharpe 3.007) with H181 industry-adjusted reversal (Sharpe 1.138) improves risk-adjusted returns. Universe: H026=25 ETFs, H181=30 large-cap stocks. IS 2013\u20132020, OOS 2021\u20132026, common period 2013\u20132026. KEY FINDING \u2014 Corr(H026, H181) OOS=0.099 (near-zero): the two strategies are almost uncorrelated OOS, but full IS Corr=0.143. All 5 blends (90/10 through 50/50) produce HIGHE"
+}
+];
+
+let sortKey = 'num';
+let sortDir = 1;
+let selectedId = null;
+let familyFilterValue = '';
+
+function statusColor(s) {
+  const map = {
+    'CONFIRMED':'#22c55e','PARTIAL':'#f97316','NOT CONFIRMED':'#ef4444',
+    'QUEUED':'#eab308','BLOCKED':'#6b7280','FLAGGED':'#a855f7',
+    'INCONCLUSIVE':'#94a3b8','DEFERRED':'#64748b'
+  };
+  return map[s] || '#94a3b8';
+}
+function statusBg(s) {
+  const map = {
+    'CONFIRMED':'#14532d','PARTIAL':'#431407','NOT CONFIRMED':'#450a0a',
+    'QUEUED':'#422006','BLOCKED':'#1f2937','FLAGGED':'#3b0764',
+    'INCONCLUSIVE':'#1e293b','DEFERRED':'#0f172a'
+  };
+  return map[s] || '#1e293b';
+}
+function metricClass(v, key) {
+  if (v === null || v === undefined) return 'na';
+  if (key === 'sharpe') return v >= 1.0 ? 'good' : v >= 0.5 ? 'ok' : 'bad';
+  if (key === 'maxdd') return v >= -15 ? 'good' : v >= -25 ? 'ok' : 'bad';
+  if (key === 'cagr') return v >= 15 ? 'good' : v >= 5 ? 'ok' : 'bad';
+  return '';
+}
+function fmt(v, decimals=2) {
+  if (v === null || v === undefined) return '<span class="metric na">—</span>';
+  return v;
+}
+function fmtSharpe(v) {
+  if (v === null || v === undefined) return '<span class="metric na">—</span>';
+  const cls = metricClass(v, 'sharpe');
+  return `<span class="metric ${cls}">${v.toFixed(2)}</span>`;
+}
+function fmtDD(v) {
+  if (v === null || v === undefined) return '<span class="metric na">—</span>';
+  const cls = metricClass(v, 'maxdd');
+  const sign = v > 0 ? '-' : '';
+  return `<span class="metric ${cls}">${v < 0 ? v.toFixed(1) : '-'+v.toFixed(1)}%</span>`;
+}
+
+function renderTable() {
+  const tbody = document.getElementById('tableBody');
+  const q = document.getElementById('searchBox').value.toLowerCase();
+  const sf = document.getElementById('statusFilter').value;
+  const ff = document.getElementById('familyFilter').value || familyFilterValue;
+
+  let rows = [...DATA];
+  if (q) rows = rows.filter(r =>
+    r.id.toLowerCase().includes(q) ||
+    r.desc.toLowerCase().includes(q) ||
+    r.family.toLowerCase().includes(q) ||
+    r.full.toLowerCase().includes(q)
+  );
+  if (sf) rows = rows.filter(r => r.status === sf);
+  if (ff) rows = rows.filter(r => r.family === ff);
+
+  rows.sort((a, b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (av === null || av === undefined) av = sortDir === 1 ? -Infinity : Infinity;
+    if (bv === null || bv === undefined) bv = sortDir === 1 ? -Infinity : Infinity;
+    if (typeof av === 'string') return sortDir * av.localeCompare(bv);
+    return sortDir * (av - bv);
+  });
+
+  tbody.innerHTML = rows.map(r => `
+    <tr id="row-${r.id}" onclick="selectHyp('${r.id}')" class="${selectedId === r.id ? 'selected' : ''}">
+      <td><span class="hid">${r.id}</span></td>
+      <td><span class="badge" style="background:${statusBg(r.status)};color:${statusColor(r.status)}">${r.status}</span></td>
+      <td><span class="desc-cell" title="${r.desc}">${r.desc}</span></td>
+      <td>${fmtSharpe(r.sharpe)}</td>
+      <td>${fmtDD(r.maxdd)}</td>
+      <td style="color:#475569;font-size:11px">${r.date || '—'}</td>
+    </tr>
+  `).join('');
+
+  document.getElementById('countLabel').textContent = `${rows.length} shown`;
+  updateSortArrows();
+}
+
+function applyFilters() {
+  familyFilterValue = '';
+  document.getElementById('activeFilterChip').className = 'active-filter';
+  renderTable();
+}
+
+function clearFilters() {
+  document.getElementById('searchBox').value = '';
+  document.getElementById('statusFilter').value = '';
+  document.getElementById('familyFilter').value = '';
+  familyFilterValue = '';
+  document.getElementById('activeFilterChip').className = 'active-filter';
+  renderTable();
+}
+
+function filterByFamily(fam) {
+  familyFilterValue = fam;
+  document.getElementById('familyFilter').value = '';
+  const chip = document.getElementById('activeFilterChip');
+  chip.textContent = '× ' + fam;
+  chip.className = 'active-filter visible';
+  chip.onclick = clearFilters;
+  renderTable();
+}
+
+function sortBy(key) {
+  if (sortKey === key) sortDir *= -1;
+  else { sortKey = key; sortDir = -1; }
+  renderTable();
+}
+
+function updateSortArrows() {
+  ['num','status','sharpe','maxdd','date'].forEach(k => {
+    const el = document.getElementById('arr-'+k);
+    if (!el) return;
+    el.textContent = sortKey === k ? (sortDir === 1 ? '↑' : '↓') : '↕';
+    el.style.opacity = sortKey === k ? '1' : '0.3';
+  });
+}
+
+function selectHyp(id) {
+  selectedId = id;
+  const h = DATA.find(d => d.id === id);
+  if (!h) return;
+
+  // Update table selection
+  document.querySelectorAll('.hyp-table tr').forEach(tr => tr.classList.remove('selected'));
+  const row = document.getElementById('row-'+id);
+  if (row) row.classList.add('selected');
+
+  const sc = h.sharpe !== null ? `color:${statusColor(metricClass(h.sharpe,'sharpe') === 'good' ? 'CONFIRMED' : metricClass(h.sharpe,'sharpe') === 'ok' ? 'PARTIAL' : 'NOT CONFIRMED')}` : 'color:#475569';
+
+  const metricsHtml = `
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="label">OOS Sharpe</div>
+        <div class="value" style="${h.sharpe !== null ? 'color:'+statusColor(metricClass(h.sharpe,'sharpe')==='good'?'CONFIRMED':metricClass(h.sharpe,'sharpe')==='ok'?'PARTIAL':'NOT CONFIRMED') : 'color:#334155'}">${h.sharpe !== null ? h.sharpe.toFixed(3) : '—'}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">OOS MaxDD</div>
+        <div class="value" style="${h.maxdd !== null ? 'color:'+statusColor(metricClass(h.maxdd,'maxdd')==='good'?'CONFIRMED':metricClass(h.maxdd,'maxdd')==='ok'?'PARTIAL':'NOT CONFIRMED') : 'color:#334155'}">${h.maxdd !== null ? h.maxdd.toFixed(1)+'%' : '—'}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">OOS CAGR</div>
+        <div class="value" style="${h.cagr !== null ? 'color:'+statusColor(metricClass(h.cagr,'cagr')==='good'?'CONFIRMED':metricClass(h.cagr,'cagr')==='ok'?'PARTIAL':'NOT CONFIRMED') : 'color:#334155'}">${h.cagr !== null ? h.cagr.toFixed(1)+'%' : '—'}</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">OOS Win Rate</div>
+        <div class="value" style="${h.wr !== null ? 'color:#60a5fa' : 'color:#334155'}">${h.wr !== null ? h.wr.toFixed(1)+'%' : '—'}</div>
+      </div>
+    </div>`;
+
+  document.getElementById('detailCard').innerHTML = `
+    <div class="detail-hid">${h.id}</div>
+    <div class="detail-status">
+      <span class="badge" style="background:${statusBg(h.status)};color:${statusColor(h.status)};font-size:12px;padding:4px 10px">${h.status}</span>
+      ${h.date ? `<span style="color:#475569;font-size:11px;margin-left:8px">${h.date}</span>` : ''}
+      <span class="family-tag" style="margin-left:8px">${h.family}</span>
+    </div>
+    <div class="detail-desc">${h.desc}</div>
+    ${metricsHtml}
+    <div class="detail-section">
+      <div class="detail-section-title">Full Entry (truncated)</div>
+      <div class="detail-full">${h.full.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+    </div>
+    ${h.script ? `<div class="detail-section"><div class="detail-section-title">Script</div><div class="script-link">${h.script}</div></div>` : ''}
+    <button class="copy-btn" id="copyBtn" onclick="copyToClipboard('${id}')">📋 Copy H${h.num} summary to clipboard</button>
+  `;
+}
+
+function copyToClipboard(id) {
+  const h = DATA.find(d => d.id === id);
+  if (!h) return;
+  const text = `${h.id} [${h.status}] — ${h.desc}
+Sharpe: ${h.sharpe ?? 'N/A'} | MaxDD: ${h.maxdd ?? 'N/A'}% | CAGR: ${h.cagr ?? 'N/A'}% | Family: ${h.family}
+${h.script ? 'Script: '+h.script : ''}`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 Copy H${h.num} summary to clipboard';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// Init
+renderTable();
+</script>
+</body>
+</html>

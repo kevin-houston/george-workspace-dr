@@ -1,0 +1,24 @@
+H190 — H188 (52wk Momentum) + H181 (Industry Reversal) Blend
+Run: 2026-05-11 23:03
+Universe: 30/30 large-cap S&P 500 stocks (same for both strategies)
+H188: long top-6 by 52wk high proximity (OOS Sharpe 0.774)
+H181: long bottom-6 by industry-adjusted reversal (OOS Sharpe 1.138)
+IS: 2013–2020  |  OOS: 2021–2026
+Corr(H188, H181) IS=0.690  OOS=0.389
+Avg portfolio overlap (last 12m): 0.4 stocks
+
+  Label          IS Sharpe  IS MaxDD OOS Sharpe OOS MaxDD OOS Cumul
+  ----------------------------------------------------------------
+  H188 pure          1.550     -13.2%      0.774     -13.6%     1.776×
+  80/20              1.601     -15.4%      0.991     -13.7%     2.039×
+  60/40              1.591     -17.6%      1.138     -13.9%     2.319×
+  50/50              1.567     -18.7%      1.175     -14.0%     2.465×
+  40/60              1.535     -19.9%      1.191     -14.7%     2.614×
+  20/80              1.455     -22.1%      1.179     -16.5%     2.919×
+  H181 pure          1.368     -24.3%      1.138     -18.4%     3.233×
+
+SPY OOS: Sharpe=0.954  Cumul=2.044×
+
+VERDICT: CONFIRMED — blend 40/60 improves both Sharpe and MaxDD vs H181 alone
+
+NOTE: H188 and H181 select OPPOSITE tickers (top vs bottom of momentum), but Corr=0.389 is positive (both long-only, share market beta).
