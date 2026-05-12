@@ -362,3 +362,26 @@ Classic PEAD uses standardized unexpected earnings (SUE = reported EPS − conse
 4. Expected improvement: higher OOS win rate for low-analyst-coverage stocks
 
 See also: arXiv:2509.24254 — press release *structure* (section-level FinBERT on intro, highlights, guidance sections) as informative as earnings surprise.
+
+---
+
+## Multi-Agent LLM Architecture: Fine-Grained Task Decomposition
+
+**Source**: arXiv:2602.23330 (Feb 2026). "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks."
+
+Key finding: **specialist agents > generalist agents** for investment decisions. Decomposing analysis into fine-grained subtasks (sentiment analysis, numerical fundamentals, macro context, risk assessment) significantly outperforms monolithic LLM or coarse analyst/trader split. Critical driver is *alignment* between agent outputs and the decision-maker's preference structure — not raw model capability.
+
+**Architecture pattern**:
+```
+DataIngestion → SpecialistTeam → DecisionSynthesis → Execution
+     ↓               ↓ ↓ ↓            ↓
+  earnings      sentiment   momentum   risk
+  transcripts   agent       agent      agent
+  10-K/10-Q              ↘  ↓  ↗
+                       Portfolio Manager
+                       (trades on consensus)
+```
+
+**Contrast with PolySwarm (2_polyswarm_kalshi_h185.json)**: PolySwarm uses 50 heterogeneous personas voting on a single question. This paper uses ~5 specialist agents each focused on a distinct data modality. For structured financial signals, the specialist approach may be more reliable; for prediction market questions, the persona diversity approach may be better.
+
+**Application to H171**: Current H171 design uses a single FinBERT+GPT-4o pipeline on 8-Ks. Upgrade path: add separate fundamental-analysis agent (numeric EPS/revenue surprise), separate macro-context agent (sector rotation, rates), separate risk agent (VIX, beta), and synthesize with a Portfolio Manager agent. Expected benefit: better signal quality on edge cases (guidance beats beat but tone negative).
