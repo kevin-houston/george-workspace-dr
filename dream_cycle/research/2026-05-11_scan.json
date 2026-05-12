@@ -112,15 +112,27 @@
       "relevance_score": 4,
       "relevance_notes": "Next-gen RL trading framework. Not actionable yet — RL approaches require significantly more data than current 30-stock universe supports reliably.",
       "staged": false
+    },
+    {
+      "id": "arxiv-2602-23330",
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "source": "arXiv:2602.23330 (Feb 2026)",
+      "url": "https://arxiv.org/abs/2602.23330",
+      "angle": 4,
+      "relevance_score": 8,
+      "relevance_notes": "Fine-grained specialist decomposition (sentiment / fundamentals / macro / risk agents) beats coarse-grained design. Alignment between agent outputs and decision-maker preference is key driver — not model size. Applies to H171 upgrade path and H185 Kalshi architecture. Staged as 5_expert_investment_teams_llm.json.",
+      "staged": true,
+      "staged_file": "5_expert_investment_teams_llm.json"
     }
   ],
-  "staged_count": 4,
-  "high_relevance_count": 3,
-  "summary": "Strong session. Two angles produced actionable proposals: PEAD/NLP upgrades (SUE.txt + press release structure) give H195 a concrete methodology; PolySwarm gives H185 a production-ready architecture blueprint. Low-vol wiki page created as Phase 1 deliverable. Pairs family exhaustion confirmed by 2025 ETF cointegration study.",
+  "staged_count": 5,
+  "high_relevance_count": 4,
+  "session_continuation_notes": "Session resumed 2026-05-12 (was interrupted mid-Phase-1). Phase 1 completed: short-term-reversal.md expanded from 132 to ~230 lines with Jegadeesh/Lehmann/Nagel literature, return decay profile (2.5d half-life), 52w-high/turnover regime interaction, Quantpedia benchmark (Sharpe 1.09, CAGR 16.25%), extended Python code. Phase 2 produced new paper (arxiv-2602-23330) not in original scan. H190 and H191 both CONFIRMED (results in hypothesis-log.md).",
+  "summary": "Strong session. Two angles produced actionable proposals: PEAD/NLP upgrades (SUE.txt + press release structure) give H195 a concrete methodology; PolySwarm gives H185 a production-ready architecture blueprint. Fine-grained multi-agent LLM decomposition (arXiv:2602.23330) added as 5th proposal for H171 upgrade path. Short-term-reversal.md substantially expanded as Phase 1 wiki deliverable. Pairs family exhaustion confirmed by 2025 ETF cointegration study.",
   "next_session_priorities": [
-    "H190: H188 + H181 blend on 30-stock universe — run backtest",
-    "H191: Low-vol decile (252d daily vol) on 30-stock universe",
-    "H192: BAB-style beta rank on 30-stock universe",
-    "H195 candidate: PEAD.txt — add transcript-based SUE filter to H163/H174 pipeline"
+    "H192: BAB-style beta rank on 30-stock universe (next in queue after H190/H191 confirmed)",
+    "H195 candidate: PEAD.txt — add transcript-based SUE filter to H163/H174 pipeline",
+    "H190 paper trading: update h181_monthly.py to apply 40/60 H188+H181 blend weighting",
+    "H171 upgrade: consider specialist agent decomposition per arXiv:2602.23330"
   ]
 }

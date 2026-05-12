@@ -181,3 +181,8 @@ Signal: prox_i = last_close / max(prior 252 trading days). Long top-6 monthly. I
 Corr(H026, H181) OOS = 0.099 (near-zero). All tested blends (90/10 through 50/50) produce higher OOS Sharpe than pure H026 (2.222 → 2.402 at 60/40). Trade-off: cumulative return drops dramatically (62× → 21× at 60/40). Practical recommendation: separate capital buckets, not blended account. H190 (H188+H181 blend on same 30-stock universe) queued as next natural test.
 
 Files: backtesting/daily/run_h188.py, backtesting/daily/run_h189.py. Hypothesis log updated with H188+H189 cards.
+
+## [2026-05-12] expand | short-term-reversal.md
+Pages updated: 1. Pages created: 0. Key sources: Jegadeesh (1990), Lehmann (1990), Nagel (2012), Stosik & Zaremba (2026), Quantpedia benchmark.
+
+Expanded `wiki/trading/algorithms/short-term-reversal.md` from 132 → 230 lines. Added: full literature foundation (seminal papers table, two-theory taxonomy), Nagel (2012) VIX-conditional Sharpe finding, return decay profile (half-life 2.5 days, month-1 to month-2 drop), 52-week-high / turnover interaction regime table, transaction cost tiering by market cap (large-cap: +30–50 bps/week net), Quantpedia benchmark (Sharpe 1.09, CAGR 16.25%, MaxDD −52.94%), extended Python code section (VIX-adjusted sizing, regime classifier), crisis behavior / execution timing notes, and full key references list with links.
