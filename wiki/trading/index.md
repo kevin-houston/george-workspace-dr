@@ -37,6 +37,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [LEAN / QuantConnect](tools/lean-quantconnect.md) ← 2026-04-26 (Docker setup, iron condor algo written, options backtesting engine; H007 pending data)
   - [OpenAlgo](tools/openalgo.md) ← 2026-04-25 (India-only for now; watch for Alpaca/Kraken support in 2026)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
+  - [Alpaca Markets — Complete Reference](data-sources/alpaca.md) ← new 2026-05-12 (full SDK reference: order types, TIF, WebSocket streams, PDT/IDTBP update, Phase 3→4 checklist)
   - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)
   - [Polygon.io](data-sources/polygon.md) ← expanded 2026-04-28 (API endpoints, WebSocket, pricing, vs Alpaca)
   - [Free / Low-Cost Sources](data-sources/free-data.md) ← expanded 2026-04-28 (Tiingo, EDGAR, Finnhub, FRED, yfinance status)
