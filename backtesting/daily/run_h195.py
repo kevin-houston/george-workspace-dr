@@ -439,9 +439,12 @@ def main():
     else:
         spy_raw = yf.download("SPY", start=DATA_START, end=DATA_END,
                               auto_adjust=True, progress=False)
-        spy_close = spy_raw["Close"].resample("ME").last()
+        raw_close = spy_raw["Close"]
+        if isinstance(raw_close, pd.DataFrame):
+            raw_close = raw_close.iloc[:, 0]
+        spy_close = raw_close.resample("ME").last()
         spy_close.name = "close"
-        pd.DataFrame({"close": spy_close}).to_parquet(spy_cache)
+        spy_close.to_frame().to_parquet(spy_cache)
 
     spy_oos_rets = spy_close.pct_change().dropna()
     spy_oos      = spy_oos_rets[(spy_oos_rets.index >= OOS_START) &
@@ -478,7 +481,7 @@ def main():
         "is_metrics":  h195_is,
         "oos_metrics": h195_oos,
         "spy_metrics": spy_m,
-        "confirmed":   h195_oos.get("sharpe", 0) > 0.8,
+        "confirmed":   bool(h195_oos.get("sharpe", 0) > 0.8),
     }
     out.write_text(json.dumps(result, indent=2))
     print(f"\n  Results saved → {out}")

@@ -1,0 +1,43 @@
+{
+  "hypothesis": "H195",
+  "model": "STORM dual VQ-VAE",
+  "run_date": "2026-05-13T06:15:12.124307",
+  "is_period": "2015-01-01 \u2192 2021-12-31",
+  "oos_period": "2022-01-01 \u2192 2024-12-31",
+  "architecture": {
+    "ts_window": 20,
+    "hidden_dim": 32,
+    "latent_dim": 16,
+    "n_embed": 64,
+    "epochs": 150,
+    "corr_thresh": 0.3
+  },
+  "is_metrics": {
+    "label": "H195-IS",
+    "n_months": 82,
+    "cumul": 11.8926,
+    "cagr_pct": 43.67,
+    "sharpe": 1.645,
+    "max_dd_pct": -18.08,
+    "mean_monthly": 3.294
+  },
+  "oos_metrics": {
+    "label": "H195-OOS",
+    "n_months": 34,
+    "cumul": 1.8303,
+    "cagr_pct": 23.78,
+    "sharpe": 0.963,
+    "max_dd_pct": -24.48,
+    "mean_monthly": 2.052
+  },
+  "spy_metrics": {
+    "label": "SPY-OOS",
+    "n_months": 36,
+    "cumul": 1.2894,
+    "cagr_pct": 8.84,
+    "sharpe": 0.573,
+    "max_dd_pct": -20.25,
+    "mean_monthly": 0.832
+  },
+  "confirmed": true
+}
