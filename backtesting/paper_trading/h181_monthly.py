@@ -54,7 +54,8 @@ UNIVERSE_SECTORS = {
 
 UNIVERSE  = list(UNIVERSE_SECTORS.keys())
 N_HOLD    = 6       # bottom quintile (~6/30 = 20%)
-LOG_FILE  = Path(__file__).parent / "h181_monthly_trades.json"
+LOG_FILE      = Path(__file__).parent / "h181_monthly_trades.json"
+POSITION_FILE = Path(__file__).parent / "h181_positions.json"
 MIN_ORDER_USD = 5.0
 
 
@@ -240,6 +241,26 @@ def log_run(entry: dict):
     LOG_FILE.write_text(json.dumps(log, indent=2, default=str))
 
 
+def save_positions(month: str, run_date: str, long_tickers: list[str],
+                   target: dict, entry_prices: dict, equity: float):
+    """Write h181_positions.json — same structure as h016_positions.json."""
+    history = json.loads(POSITION_FILE.read_text()) if POSITION_FILE.exists() else []
+    # Mark prior entry closed
+    for h in history:
+        if h.get("status") == "open":
+            h["status"] = "closed"
+    history.append({
+        "month":         month,
+        "date":          run_date,
+        "holdings":      long_tickers,
+        "target":        target,
+        "entry_prices":  entry_prices,
+        "equity":        equity,
+        "status":        "open",
+    })
+    POSITION_FILE.write_text(json.dumps(history, indent=2, default=str))
+
+
 # ── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
@@ -297,15 +318,25 @@ def main():
     executed = execute_trades(client, trades, dry_run=args.dry_run)
 
     if not args.dry_run and executed:
+        today_str = date.today().isoformat()
+        month_str = date.today().strftime("%Y-%m")
+        # Fetch entry prices for positions file
+        entry_prices = {}
+        for sym in long_tickers:
+            try:
+                entry_prices[sym] = get_latest_price(sym)
+            except Exception:
+                pass
         log_run({
-            "date":         date.today().isoformat(),
+            "date":         today_str,
             "equity":       equity,
             "long_tickers": long_tickers,
             "target":       target,
             "adj_reversal": {k: round(float(v), 5) for k, v in adj_rev.items()},
             "trades":       executed,
         })
-        print(f"\n✓ Logged {len(executed)} trades to {LOG_FILE.name}")
+        save_positions(month_str, today_str, long_tickers, target, entry_prices, equity)
+        print(f"\n✓ Logged {len(executed)} trades to {LOG_FILE.name} and {POSITION_FILE.name}")
     elif args.dry_run:
         print(f"\n[DRY RUN] {len(trades)} orders would be submitted.")
 

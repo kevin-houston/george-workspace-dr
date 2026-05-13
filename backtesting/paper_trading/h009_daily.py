@@ -35,7 +35,8 @@ BUY_THRESH  = 0.20   # IBS < 0.2 yesterday → buy today
 SELL_THRESH = 0.80   # IBS > 0.8 today → sell today
 MAX_HOLD    = 5      # max days held regardless of IBS
 
-LOG_FILE = Path(__file__).parent / "h009_trades.json"
+LOG_FILE      = Path(__file__).parent / "h009_trades.json"
+POSITION_FILE = Path(__file__).parent / "h009_position.json"
 
 
 # ─────────────────────────────────────────────
@@ -97,6 +98,27 @@ def load_log() -> list:
 
 def save_log(log: list):
     LOG_FILE.write_text(json.dumps(log, indent=2, default=str))
+
+
+def save_position(action: str, qty: float, price: float, equity: float):
+    if action == "BUY":
+        pos = {
+            "status":       "open",
+            "entry_date":   date.today().isoformat(),
+            "entry_price":  price,
+            "qty":          qty,
+            "notional":     round(qty * price, 2),
+            "start_equity": equity,
+        }
+    else:
+        pos = {"status": "flat"}
+    POSITION_FILE.write_text(json.dumps(pos, indent=2))
+
+
+def load_position() -> dict:
+    if POSITION_FILE.exists():
+        return json.loads(POSITION_FILE.read_text())
+    return {"status": "flat"}
 
 
 def get_days_held(log: list) -> int:
@@ -220,7 +242,8 @@ def main():
         "equity":        equity,
     })
     save_log(log)
-    print(f"✓ Logged to {LOG_FILE.name}")
+    save_position(action, qty, spy_close, equity)
+    print(f"✓ Logged to {LOG_FILE.name} and {POSITION_FILE.name}")
 
 
 if __name__ == "__main__":
