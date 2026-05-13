@@ -376,3 +376,29 @@ Output: pooled representation → linear score
 6. Compare Sharpe vs H188 (baseline 1.07) and H191-C hybrid (1.110)
 
 **Bias correction detail**: The paper adds a hold-out validation loss term that penalizes factor loadings that are inconsistent across sub-periods — reduces the tendency to overfit to whichever factor happened to work in the training window.
+
+---
+
+## STORM: Dual VQ-VAE Spatio-Temporal Factor Model
+
+**Source**: arXiv:2412.09468 (2024). "STORM: A Spatio-Temporal Factor Model Based on Dual Vector Quantized Variational Autoencoders for Financial Trading." *WSDM '26* (Nineteenth ACM International Conference on Web Search and Data Mining, Feb 2026, Boise ID).
+
+**Key idea**: Standard cross-sectional factor models assume factors are independent and globally stable. In reality, factors interact across time *and* across stocks. STORM captures both:
+
+- **Time-series encoder** (LSTM): learns how each stock's factor exposures evolve through time
+- **Cross-sectional encoder** (GNN / graph attention): learns how stock relationships (sector, correlation) affect factor loadings
+- **Dual VQ-VAE**: each encoder outputs a discrete codebook vector, forcing factor representations to be distinct and reusable
+  - Codebook commitment loss ensures representations don't collapse
+  - Diversity loss ensures the two encoders don't converge to the same latent
+
+**Why orthogonality matters**: In H188, LightGBM features include both momentum-12m and volatility. These are correlated but not orthogonal — the model wastes capacity on their overlap. VQ-VAE codebooks enforce orthogonality structurally.
+
+**H195 plan**:
+- Scope: same 30-stock universe as H188/H191/H192
+- Implement STORM: LSTM time encoder (20-day lookback) + simple correlation GNN (no sector labels needed)
+- Dual VQ-VAE with 64-vector codebook each
+- Output: combined latent → linear rank score per stock
+- WFO: IS 2015-2021, OOS 2022-2024
+- Baseline: H188 (Sharpe 1.07), target H195 > 1.2
+
+**Complexity note**: Requires PyTorch (~2 days to implement cleanly). Approved for immediate build (Kevin, 2026-05-13).
