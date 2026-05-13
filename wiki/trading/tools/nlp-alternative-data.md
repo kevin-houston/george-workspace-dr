@@ -497,3 +497,41 @@ score = float(probs[0] - probs[1])  # positive - negative
 | Low-volume, high-stakes signals | GPT-4o-mini | Justify API cost with edge |
 
 **Implication for H171 (GPT-4o-mini alternative)**: H171 should target nuanced qualitative signals (management tone shifts, guidance hedging language) rather than raw sentiment — that's where GPT-4o-mini has an actual advantage over FinBERT.
+
+---
+
+## Dynamic Factor Reweighting via Earnings Sentiment (QuantMuse pattern)
+
+**Source**: [QuantMuse](https://github.com/0xemmkty/QuantMuse) — MIT-licensed quant trading system, first major release April 2026.
+
+**Pattern**: At each monthly rebalance, compute an aggregate earnings sentiment score for the portfolio universe (FinBERT or GPT over recent 8-Ks and transcripts). Use this score to shift factor weights:
+
+```python
+def sentiment_adjusted_weights(base_weights: dict, sentiment_score: float) -> dict:
+    """
+    sentiment_score: [-1, 1] from FinBERT or GPT over recent earnings releases
+    base_weights: {'momentum': 0.3, 'value': 0.2, 'quality': 0.3, 'vol': 0.2}
+    """
+    # Positive sentiment: lean momentum and quality
+    # Negative sentiment: lean value and low-vol (defensive)
+    momentum_tilt = 0.1 * sentiment_score
+    quality_tilt = 0.05 * sentiment_score
+    value_tilt = -0.08 * sentiment_score
+    vol_tilt = -0.07 * sentiment_score
+    
+    adjusted = {
+        'momentum': base_weights['momentum'] + momentum_tilt,
+        'quality': base_weights['quality'] + quality_tilt,
+        'value': base_weights['value'] + value_tilt,
+        'vol': base_weights['vol'] + vol_tilt,
+    }
+    # Normalize to sum to 1.0
+    total = sum(adjusted.values())
+    return {k: v / total for k, v in adjusted.items()}
+```
+
+**QuantMuse claims**: ~70% of post-earnings drift is captured by tilting toward momentum + quality factors when aggregate sentiment is positive.
+
+**Applicability to our pipeline**: Could upgrade H188 monthly rebalance to use FinBERT aggregate sentiment (from PEAD watchlist passes) to tilt factor weights. Low-risk experiment — worst case reverts to equal weights.
+
+**Caveat**: 70% claim is unverified and likely reflects paper trading / simulation results, not live OOS performance. Treat as an implementation pattern to test, not a validated result.

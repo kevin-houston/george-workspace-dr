@@ -342,3 +342,37 @@ Backtest Validation
 **Feature normalization**: gradient boosting doesn't need normalization, but **cross-sectional rank normalization** (rank each feature within the cross-section on each date) removes survivorship bias and distributional shifts over time. Standard practice: `df.groupby("date")["feature"].rank(pct=True)`.
 
 **mlfinlab is not free**: despite existing on PyPI, mlfinlab requires a commercial license from Hudson & Thames. The `pip install mlfinlab` will install but usage requires license agreement. Use skfolio for CPCV instead.
+
+---
+
+## Factor-Axis Tokenization: Self-Attention over Factor Space
+
+**Source**: arXiv:2507.07107 (2025). "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction."
+
+**Core innovation**: Instead of feeding all factors as independent features into LightGBM/MLP, treat each factor as a *token* in a transformer sequence. Self-attention learns which factor combinations are predictive — effectively discovering interaction effects like:
+- Momentum conditioned on low volatility → stronger signal
+- Value conditioned on sector → avoids value traps in cyclicals
+- Quality conditioned on earnings surprise → confirms fundamental shift
+
+**Architecture sketch**:
+```
+Input: [F1, F2, ..., Fn]  # n factors for each stock
+Tokenize: each factor → embedding vector (value + positional)
+Transformer encoder: multi-head attention over factor tokens
+Output: pooled representation → linear score
+```
+
+**Why this beats H188 (LightGBM)**:
+- LightGBM learns interaction trees but only low-order (depth-limited)
+- Transformer learns ALL pairwise factor interactions simultaneously
+- Bias correction layer (novel addition) reduces overfitting on small cross-sections
+
+**H194 implementation plan**:
+1. Take H188's factor stack (momentum-12m, reversal-1m, vol, quality, value)
+2. Build factor tokenization layer (linear projection per factor → 32-dim embedding)
+3. 2-layer transformer encoder (4 heads, 32-dim)
+4. Pooling → scalar score per stock
+5. WFO same as H188 (IS 2014-2020, OOS 2021-2024)
+6. Compare Sharpe vs H188 (baseline 1.07) and H191-C hybrid (1.110)
+
+**Bias correction detail**: The paper adds a hold-out validation loss term that penalizes factor loadings that are inconsistent across sub-periods — reduces the tendency to overfit to whichever factor happened to work in the training window.

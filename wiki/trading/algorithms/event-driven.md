@@ -385,3 +385,25 @@ DataIngestion → SpecialistTeam → DecisionSynthesis → Execution
 **Contrast with PolySwarm (2_polyswarm_kalshi_h185.json)**: PolySwarm uses 50 heterogeneous personas voting on a single question. This paper uses ~5 specialist agents each focused on a distinct data modality. For structured financial signals, the specialist approach may be more reliable; for prediction market questions, the persona diversity approach may be better.
 
 **Application to H171**: Current H171 design uses a single FinBERT+GPT-4o pipeline on 8-Ks. Upgrade path: add separate fundamental-analysis agent (numeric EPS/revenue surprise), separate macro-context agent (sector rotation, rates), separate risk agent (VIX, beta), and synthesize with a Portfolio Manager agent. Expected benefit: better signal quality on edge cases (guidance beats beat but tone negative).
+
+---
+
+## LLM Pitfall Checklist for PEAD Pipeline (H163/H174)
+
+**Source**: arXiv:2605.05211 (Zhang & Zhang, 2026). "A Review of Large Language Models for Stock Price Forecasting from a Hedge-Fund Perspective." IEEE CAI 2026.
+
+Six failure modes to audit before deploying any LLM-based signal live:
+
+| # | Pitfall | H163/H174 Status | Action |
+|---|---------|-----------------|--------|
+| 1 | Sentiment fragility to prompt phrasing | **Unknown** — FinBERT is fixed-weight, not prompted, so less fragile than GPT-based | Test FinBERT score stability across small 8-K paraphrase variants |
+| 2 | Horizon mismatch (trained on daily, deployed at open) | **Managed** — OPG orders capture same-day gap | Confirm FinBERT was trained on press-release-length texts, not summaries |
+| 3 | Data leakage from pre-training corpus | **Risk** — FinBERT trained on pre-2023 financial news; 8-Ks from 2022-2024 may appear in training data | Use post-2024 OOS results as primary performance metric |
+| 4 | Illiquidity premia mis-attribution | **Partial risk** — small-cap PEAD stocks are illiquid; paper results may not survive execution | Add $2B+ market cap filter; verify live paper fills vs backtest |
+| 5 | Evaluation without transaction costs | **Managed** — H174 backtest includes 5 bps per side slippage | Re-run with 15 bps to stress-test |
+| 6 | R² ceiling — returns are ~1% predictable; LLM adds ~0.1% | **Acceptable** — PEAD exploits event-driven gap, not return level prediction | |
+
+**Priority actions**:
+1. Apply $2B+ market cap filter to watchlist screener
+2. Compute FinBERT score variance on 10 paraphrases of a typical 8-K press release opening paragraph
+3. Re-run H174 backtest from 2024-01-01 onward (post-training data leakage cutoff)
