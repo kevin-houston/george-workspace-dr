@@ -1,0 +1,21 @@
+H192 — Betting Against Beta: 30-Stock Large-Cap Universe
+============================================================
+
+H192-A [IS 2013-2020]: Sharpe=1.331  Cumul=3.823×  CAGR=18.2%  MaxDD=-9.3%  NegYrs=0
+H192-A [OOS 2021-2026]: Sharpe=0.962  Cumul=2.067×  CAGR=14.6%  MaxDD=-17.2%  NegYrs=0
+H192-A [ALT 2013-2026]: Sharpe=1.170  Cumul=7.905×  CAGR=16.8%  MaxDD=-17.2%  NegYrs=0
+
+H192-B [IS 2013-2020]: Sharpe=1.331  Cumul=3.823×  CAGR=18.2%  MaxDD=-9.3%  NegYrs=0
+H192-B [OOS 2021-2026]: Sharpe=0.962  Cumul=2.067×  CAGR=14.6%  MaxDD=-17.2%  NegYrs=0
+H192-B [ALT 2013-2026]: Sharpe=1.170  Cumul=7.905×  CAGR=16.8%  MaxDD=-17.2%  NegYrs=0
+
+H192-C [IS 2013-2020]: Sharpe=1.100  Cumul=2.882×  CAGR=14.3%  MaxDD=-9.7%  NegYrs=0
+H192-C [OOS 2021-2026]: Sharpe=1.098  Cumul=2.164×  CAGR=15.6%  MaxDD=-11.7%  NegYrs=0
+H192-C [ALT 2013-2026]: Sharpe=1.101  Cumul=6.237×  CAGR=14.8%  MaxDD=-11.7%  NegYrs=0
+
+H192-D [IS 2013-2020]: Sharpe=1.203  Cumul=3.718×  CAGR=17.8%  MaxDD=-24.1%  NegYrs=1
+H192-D [OOS 2021-2026]: Sharpe=1.367  Cumul=2.518×  CAGR=18.9%  MaxDD=-17.1%  NegYrs=1
+H192-D [ALT 2013-2026]: Sharpe=1.268  Cumul=9.361×  CAGR=18.3%  MaxDD=-24.1%  NegYrs=2
+
+SPY OOS 2021-2026: Sharpe=0.954  Cumul=2.044×
+Confirmed variants: ['A', 'B', 'C', 'D']
