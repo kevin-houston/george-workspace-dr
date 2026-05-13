@@ -1,0 +1,18 @@
+{
+  "id": "factor-axis-tokenization-h194-2026-05-12",
+  "date": "2026-05-12",
+  "source": "paper",
+  "source_url": "https://arxiv.org/html/2507.07107",
+  "arxiv_id": "2507.07107",
+  "title": "H194: Factor-axis tokenization — self-attention over factor space for H188 cross-sectional model",
+  "rationale": "arXiv:2507.07107 (Jul 2025) introduces a key design innovation for multi-factor models: treating each factor as a 'token' and using a transformer self-attention mechanism to learn pairwise factor interactions. The key insight is that momentum conditioned on volatility regime is a different signal than raw momentum alone — the model learns these interactions end-to-end without hand-crafted interaction terms. This is a direct upgrade path for H188 (Sharpe 1.07), which currently uses independent LightGBM features without learned factor interactions. H194 would implement this tokenization approach as an alternative scoring layer on top of H188's existing factor universe.",
+  "relevance_score": 8,
+  "risk_level": "medium",
+  "type": "hypothesis",
+  "hypothesis_number": "H194",
+  "hypothesis_family": "cross-sectional-ml",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/ml-for-trading.md",
+  "content": "## Factor-Axis Tokenization: Self-Attention over Factor Space\n\n**Source**: arXiv:2507.07107 (2025). \"Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction.\"\n\n**Core innovation**: Instead of feeding all factors as independent features into LightGBM/MLP, treat each factor as a *token* in a transformer sequence. Self-attention learns which factor combinations are predictive — effectively discovering interaction effects like:\n- Momentum conditioned on low volatility → stronger signal\n- Value conditioned on sector → avoids value traps in cyclicals\n- Quality conditioned on earnings surprise → confirms fundamental shift\n\n**Architecture sketch**:\n```\nInput: [F1, F2, ..., Fn]  # n factors for each stock\nTokenize: each factor → embedding vector (value + positional)\nTransformer encoder: multi-head attention over factor tokens\nOutput: pooled representation → linear score\n```\n\n**Why this beats H188 (LightGBM)**:\n- LightGBM learns interaction trees but only low-order (depth-limited)\n- Transformer learns ALL pairwise factor interactions simultaneously\n- Bias correction layer (novel addition) reduces overfitting on small cross-sections\n\n**H194 implementation plan**:\n1. Take H188's factor stack (momentum-12m, reversal-1m, vol, quality, value)\n2. Build factor tokenization layer (linear projection per factor → 32-dim embedding)\n3. 2-layer transformer encoder (4 heads, 32-dim)\n4. Pooling → scalar score per stock\n5. WFO same as H188 (IS 2014-2020, OOS 2021-2024)\n6. Compare Sharpe vs H188 (baseline 1.07) and H191-C hybrid (1.110)\n\n**Bias correction detail**: The paper adds a hold-out validation loss term that penalizes factor loadings that are inconsistent across sub-periods — reduces the tendency to overfit to whichever factor happened to work in the training window.",
+  "action": "append",
+  "apply_status": "staged"
+}

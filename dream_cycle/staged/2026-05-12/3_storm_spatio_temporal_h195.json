@@ -1,0 +1,18 @@
+{
+  "id": "storm-spatio-temporal-h195-2026-05-12",
+  "date": "2026-05-12",
+  "source": "paper",
+  "source_url": "https://arxiv.org/html/2412.09468v4",
+  "arxiv_id": "2412.09468",
+  "title": "H195: STORM dual VQ-VAE spatio-temporal factor model — upgrade path from H188",
+  "rationale": "arXiv:2412.09468 published at WSDM '26 (February 2026, top data-mining venue) introduces STORM: a latent factor model that enforces both time-series diversity (each period's factors are distinct) and cross-sectional diversity (factor vectors are orthogonal across stocks) using a dual VQ-VAE with codebook commitment loss. This is the conceptual architecture that the H188/H191/H192 family has been converging toward: separate time-series momentum from cross-sectional quality/value ranking. The dual VQ-VAE is a principled way to ensure the two signal types don't collapse to the same representation. Complexity is high (LSTM + GNN + dual VQ), so this is a 'when H188 plateaus' upgrade, not immediate.",
+  "relevance_score": 7,
+  "risk_level": "high",
+  "type": "hypothesis",
+  "hypothesis_number": "H195",
+  "hypothesis_family": "cross-sectional-ml",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/ml-for-trading.md",
+  "content": "## STORM: Dual VQ-VAE Spatio-Temporal Factor Model\n\n**Source**: arXiv:2412.09468 (2024). \"STORM: A Spatio-Temporal Factor Model Based on Dual Vector Quantized Variational Autoencoders for Financial Trading.\" *WSDM '26* (Nineteenth ACM International Conference on Web Search and Data Mining, Feb 2026, Boise ID).\n\n**Key idea**: Standard cross-sectional factor models assume factors are independent and globally stable. In reality, factors interact across time *and* across stocks. STORM captures both:\n\n- **Time-series encoder** (LSTM): learns how each stock's factor exposures evolve through time\n- **Cross-sectional encoder** (GNN / graph attention): learns how stock relationships (sector, correlation) affect factor loadings\n- **Dual VQ-VAE**: each encoder outputs a discrete codebook vector, forcing factor representations to be distinct and reusable\n  - Codebook commitment loss ensures representations don't collapse\n  - Diversity loss ensures the two encoders don't converge to the same latent\n\n**Why orthogonality matters**: In H188, LightGBM features include both momentum-12m and volatility. These are correlated but not orthogonal — the model wastes capacity on their overlap. VQ-VAE codebooks enforce orthogonality structurally.\n\n**H195 plan**:\n- Scope: same 30-stock universe as H188/H191/H192\n- Implement STORM: LSTM time encoder (20-day lookback) + simple correlation GNN (no sector labels needed)\n- Dual VQ-VAE with 64-vector codebook each\n- Output: combined latent → linear rank score per stock\n- WFO: IS 2015-2021, OOS 2022-2024\n- Baseline: H188 (Sharpe 1.07), target H195 > 1.2\n\n**Complexity note**: Requires PyTorch, ~2 days to implement cleanly. Hold until H194 (factor tokenization, simpler) is tested first. If H194 clears Sharpe 1.2, evaluate whether H195 adds further improvement.",
+  "action": "append",
+  "apply_status": "staged"
+}

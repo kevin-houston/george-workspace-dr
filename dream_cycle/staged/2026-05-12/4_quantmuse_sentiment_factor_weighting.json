@@ -1,0 +1,15 @@
+{
+  "id": "quantmuse-sentiment-factor-weighting-2026-05-12",
+  "date": "2026-05-12",
+  "source": "github",
+  "source_url": "https://github.com/0xemmkty/QuantMuse",
+  "title": "Implementation pattern: GPT sentiment dynamically adjusts cross-sectional factor weights",
+  "rationale": "QuantMuse (0xemmkty/QuantMuse, MIT license, ~April 2026) is a production-ready quant trading system that demonstrates a pattern not yet in our pipeline: using GPT sentiment scores to *dynamically reweight* factor exposures before each rebalance. Their README claims 70% post-earnings drift capture by having the momentum/value/quality factor weights shift based on the aggregate earnings sentiment score. This is distinct from H163/H174 (which trades directly on earnings gaps) — here the sentiment signal modulates H188's monthly rebalance weights. The implementation is in Python + C++ and is MIT-licensed, so patterns can be lifted directly.",
+  "relevance_score": 6,
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/tools/nlp-alternative-data.md",
+  "content": "## Dynamic Factor Reweighting via Earnings Sentiment (QuantMuse pattern)\n\n**Source**: [QuantMuse](https://github.com/0xemmkty/QuantMuse) — MIT-licensed quant trading system, first major release April 2026.\n\n**Pattern**: At each monthly rebalance, compute an aggregate earnings sentiment score for the portfolio universe (FinBERT or GPT over recent 8-Ks and transcripts). Use this score to shift factor weights:\n\n```python\ndef sentiment_adjusted_weights(base_weights: dict, sentiment_score: float) -> dict:\n    \"\"\"\n    sentiment_score: [-1, 1] from FinBERT or GPT over recent earnings releases\n    base_weights: {'momentum': 0.3, 'value': 0.2, 'quality': 0.3, 'vol': 0.2}\n    \"\"\"\n    # Positive sentiment: lean momentum and quality\n    # Negative sentiment: lean value and low-vol (defensive)\n    momentum_tilt = 0.1 * sentiment_score\n    quality_tilt = 0.05 * sentiment_score\n    value_tilt = -0.08 * sentiment_score\n    vol_tilt = -0.07 * sentiment_score\n    \n    adjusted = {\n        'momentum': base_weights['momentum'] + momentum_tilt,\n        'quality': base_weights['quality'] + quality_tilt,\n        'value': base_weights['value'] + value_tilt,\n        'vol': base_weights['vol'] + vol_tilt,\n    }\n    # Normalize to sum to 1.0\n    total = sum(adjusted.values())\n    return {k: v / total for k, v in adjusted.items()}\n```\n\n**QuantMuse claims**: ~70% of post-earnings drift is captured by tilting toward momentum + quality factors when aggregate sentiment is positive.\n\n**Applicability to our pipeline**: Could upgrade H188 monthly rebalance to use FinBERT aggregate sentiment (from PEAD watchlist passes) to tilt factor weights. Low-risk experiment — worst case reverts to equal weights.\n\n**Caveat**: 70% claim is unverified and likely reflects paper trading / simulation results, not live OOS performance. Treat as an implementation pattern to test, not a validated result.",
+  "action": "append",
+  "apply_status": "staged"
+}

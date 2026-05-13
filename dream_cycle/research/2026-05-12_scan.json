@@ -1,0 +1,103 @@
+{
+  "date": "2026-05-12",
+  "session": "nightly-wiki-dream-cycle",
+  "phase": "Phase 2 — arXiv/GitHub scan",
+  "angles_searched": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + text signals + NLP 2026",
+    "cross-sectional momentum + factor momentum + ML 2026",
+    "multi-agent LLM trading 2026",
+    "GitHub trending quant repos 2025-2026"
+  ],
+  "papers_reviewed": [
+    {
+      "arxiv_id": "2605.05211",
+      "title": "A Review of Large Language Models for Stock Price Forecasting from a Hedge-Fund Perspective",
+      "authors": "Zhang, Zhang",
+      "venue": "IEEE CAI 2026 (May 8-10, Spain)",
+      "date": "2026-05",
+      "relevance_score": 7,
+      "staged": true,
+      "staged_file": "2_llm_pitfall_audit_h174.json",
+      "summary": "Practitioner-focused pitfall review: sentiment fragility, data leakage, illiquidity premia, horizon mismatch. Directly applicable to H174 pre-live audit."
+    },
+    {
+      "arxiv_id": "2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+      "venue": "arXiv preprint",
+      "date": "2025-07",
+      "relevance_score": 8,
+      "staged": true,
+      "staged_file": "1_factor_axis_tokenization_h194.json",
+      "summary": "Factor-axis tokenization: each factor is a token, transformer learns pairwise factor interactions (momentum × vol, value × sector). Bias correction reduces overfitting. Direct H188 upgrade → H194."
+    },
+    {
+      "arxiv_id": "2412.09468",
+      "title": "STORM: A Spatio-Temporal Factor Model Based on Dual Vector Quantized Variational Autoencoders for Financial Trading",
+      "venue": "WSDM 2026 (February 2026)",
+      "date": "2024-12",
+      "relevance_score": 7,
+      "staged": true,
+      "staged_file": "3_storm_spatio_temporal_h195.json",
+      "summary": "Dual VQ-VAE enforces orthogonality between time-series and cross-sectional factors. Published at top venue (WSDM '26). More complex than H194 — queue as H195 contingent on H194 first."
+    },
+    {
+      "arxiv_id": "2504.10789",
+      "title": "Can Large Language Models Trade? Testing Financial Theories with LLM Agents in Market Simulations",
+      "authors": "Lopez-Lira",
+      "venue": "arXiv preprint",
+      "date": "2025-04",
+      "relevance_score": 5,
+      "staged": false,
+      "summary": "LLM agents in simulated market with real order book. Finds consistent strategy adherence (value/momentum/market-making) and realistic price dynamics. More theoretical — no direct implementation hook for current pipeline."
+    },
+    {
+      "arxiv_id": "2302.10175",
+      "title": "Spatio-Temporal Momentum: Jointly Learning Time-Series and Cross-Sectional Strategies",
+      "venue": "arXiv preprint",
+      "date": "2023-02",
+      "relevance_score": 6,
+      "staged": false,
+      "summary": "Single FC layer learns both TS and CS momentum jointly. Older paper — subsumed by STORM architecture. Already covered in short-term-reversal.md cross-reference."
+    }
+  ],
+  "repos_reviewed": [
+    {
+      "repo": "0xemmkty/QuantMuse",
+      "url": "https://github.com/0xemmkty/QuantMuse",
+      "license": "MIT",
+      "date": "2026-04",
+      "relevance_score": 6,
+      "staged": true,
+      "staged_file": "4_quantmuse_sentiment_factor_weighting.json",
+      "summary": "Production-ready quant system: FinBERT/GPT sentiment dynamically adjusts factor weights before monthly rebalance. Claims 70% post-earnings drift capture. Pattern is novel for our pipeline."
+    },
+    {
+      "repo": "marcuswang6/stock-top-papers",
+      "url": "https://github.com/marcuswang6/stock-top-papers",
+      "relevance_score": 5,
+      "staged": false,
+      "summary": "Curated paper list for stock prediction across KDD/WWW/AAAI/ACL. Useful reference tracker — no direct implementation."
+    },
+    {
+      "repo": "leoncuhk/awesome-quant-ai",
+      "url": "https://github.com/leoncuhk/awesome-quant-ai",
+      "relevance_score": 4,
+      "staged": false,
+      "summary": "Curated list of quant AI resources. Already aware of most listed items."
+    }
+  ],
+  "null_results": {
+    "pairs_cointegration_llm": "No strong 2025-2026 paper combining LLM with statistical cointegration-based pairs trading. The LLM+pairs angle remains an open research gap — LLMs can scaffold basic pairs infrastructure but don't yet outperform Engle-Granger systematically. Market-Bench (arXiv:2512.12264) tested LLMs on pairs (Coke/Pepsi) and found they struggle with price/inventory reasoning.",
+    "pead_new_signals_2026": "PEAD.txt methodology was already staged 2026-05-11 (proposal 1). No substantially new PEAD+text paper found beyond what was staged yesterday. The ACL 2025 FinNLP paper on 'Enhancing PEAD Measurement with Large...' is closely related but appears to recapitulate PEAD.txt findings."
+  },
+  "staged_count": 4,
+  "high_relevance_count": 2,
+  "next_session_priorities": [
+    "Apply proposal 1 (H194 factor tokenization) — add section to ml-for-trading.md",
+    "Apply proposal 2 (LLM pitfall audit) — add robustness checklist to event-driven.md",
+    "H193 backtest: sector-neutral BAB (H192-D) + H181 reversal blend on 30-stock universe",
+    "Update low-volatility.md hypothesis queue: mark H190/H191/H192 as CONFIRMED"
+  ],
+  "session_continuation_notes": "Phase 1 wiki expansion completed: alpaca.md expanded 64→250 lines, index.md updated, research-log/2026-05-12.md written, git commit fb753b1. Phase 2 scan completed with 4 proposals staged."
+}
