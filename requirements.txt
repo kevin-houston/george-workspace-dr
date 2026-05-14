@@ -1,0 +1,6 @@
+alpaca-py>=0.40.0
+numpy>=1.26
+pandas>=2.0
+yfinance>=0.2
+pyarrow>=14.0
+torch>=2.0
