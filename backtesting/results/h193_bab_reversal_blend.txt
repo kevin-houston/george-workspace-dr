@@ -1,0 +1,8 @@
+H193 — H192-D Sector-Neutral BAB + H181 Industry Reversal Blend
+H192-D pure: OOS Sharpe=1.359 Cumul=2.539× CAGR=19.1% MaxDD=-16.4% NegYrs=1
+80/20 (BAB/REV): OOS Sharpe=1.327 Cumul=2.516× CAGR=18.9% MaxDD=-12.7% NegYrs=1
+60/40 (BAB/REV): OOS Sharpe=1.136 Cumul=2.490× CAGR=18.6% MaxDD=-13.7% NegYrs=0
+50/50 (BAB/REV): OOS Sharpe=1.135 Cumul=2.426× CAGR=18.1% MaxDD=-17.9% NegYrs=1
+40/60 (BAB/REV): OOS Sharpe=1.214 Cumul=2.671× CAGR=20.2% MaxDD=-16.6% NegYrs=1
+20/80 (BAB/REV): OOS Sharpe=0.953 Cumul=2.481× CAGR=18.6% MaxDD=-16.0% NegYrs=1
+H181 pure: OOS Sharpe=1.138 Cumul=3.233× CAGR=24.6% MaxDD=-18.4% NegYrs=1

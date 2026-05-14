@@ -1,0 +1,7 @@
+H196 — STORM 100-stock S&P 500 Scale Test
+N=90 stocks, N_LONG=18, EPOCHS=60
+IS 2015-2021:  Sharpe=1.504 Cumul=6.139x CAGR=29.6% MaxDD=-16.7%
+OOS 2022-2024: Sharpe=0.528 Cumul=1.334x CAGR=10.1% MaxDD=-32.3%
+SPY OOS:       Sharpe=0.573 Cumul=1.289x
+IS/OOS Sharpe degradation: 64.9%
+VERDICT: NOT CONFIRMED — scale does not unlock STORM advantage
