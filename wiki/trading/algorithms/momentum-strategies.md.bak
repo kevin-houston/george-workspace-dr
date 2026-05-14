@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-13
+updated: 2026-04-30
 type: strategy-guide
 status: production — H026 deployed on Alpaca paper trading
 ---
@@ -288,51 +288,3 @@ Monthly rebalance trigger
 ---
 
 **Related pages**: [Short-Term Reversal](short-term-reversal.md) — H181 industry-adjusted reversal (SSRN:6630998), complements momentum with 1-month mean-reversion | [Pairs Trading / Stat Arb](pairs-trading.md) | [Position Sizing](position-sizing.md) | [Machine Learning for Trading](../tools/ml-for-trading.md)
-
-
----
-
-## H197 Hypothesis: Behavioral Momentum — Volume-Price Herding Factor
-
-**Source**: arXiv:2508.14656 (Aug 2025). "Behavioral Momentum: Volume-Price Divergence and Institutional Herding Factors in US Equities."
-
-### Behavioral Momentum Concept
-
-Beyond price-based momentum, behavioral finance identifies volume-price divergence as a leading indicator of institutional accumulation/distribution:
-
-- **Accumulation signal**: price declining while volume rising → institutional buying into weakness → bullish
-- **Distribution signal**: price rising while volume declining → institutional selling into strength → bearish
-- **Herding factor**: divergence between 20-day volume-weighted drift and 20-day price drift
-
-```python
-def compute_volume_price_divergence(daily_prices, daily_volumes, window=20):
-    """Volume-price divergence: positive = accumulation, negative = distribution."""
-    price_ret = daily_prices.pct_change(window)
-    vol_ratio = daily_volumes.rolling(window).mean() / daily_volumes.rolling(window * 3).mean()
-    # High vol_ratio + negative return = accumulation; low vol_ratio + positive return = distribution
-    divergence = -price_ret.sign() * (vol_ratio - 1)  # positive when vol rises on price drop
-    return divergence.rolling(5).mean()  # smooth over 1 week
-```
-
-### Paper Benchmark Results (US Large-Cap, 2015–2024)
-
-| Factor | OOS Sharpe | Corr to H181 | Corr to H192-D | CAGR |
-|--------|-----------|-------------|---------------|------|
-| Volume-price herding | 0.91 | 0.31 | 0.19 | 16.2% |
-| Price reversal (1m) | 0.88 | — | 0.23 | 14.8% |
-| Herding + reversal blend | **1.24** | — | — | 21.3% |
-| BAB (sector-neutral) | 1.31 | 0.23 | — | 18.9% |
-
-### H197 Proposal for 30-Stock Universe
-
-Test volume-price herding as a third signal alongside H181 (industry reversal) and H192-D (sector-neutral BAB):
-
-1. Compute 20-day volume-price divergence for all 30 stocks
-2. Rank cross-sectionally (higher divergence = more accumulation = better)
-3. Blend with H181 reversal rank: w_herd × herding_rank + w_rev × reversal_rank
-4. Long top-6, monthly rebalance — same IS/OOS split as H181
-5. Compare to H181 pure (Sharpe 1.138) and H190 blend (Sharpe 1.191)
-
-**Key risk**: volume data quality on 30-stock universe — yfinance provides volume for large-caps but intraday gaps may affect divergence computation. Validate data coverage before running.
-
-**Hypothesis queue status**: QUEUED — pending H190 live implementation first.

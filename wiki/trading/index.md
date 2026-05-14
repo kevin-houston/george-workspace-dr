@@ -21,7 +21,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 
 - [Algorithms](algorithms/) — trading strategy catalog
   - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
-  - [Momentum Strategies](algorithms/momentum-strategies.md) ← new 2026-04-30 (H001–H151 findings, implementation guide)
+  - [Momentum Strategies](algorithms/momentum-strategies.md) ← updated 2026-05-13 (H197 behavioral momentum — volume-price herding factor; OOS Sharpe 0.91, Corr to H181=0.31; QUEUED)
   - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-05-05 (family EXHAUSTED — H152-H160 all NOT CONFIRMED at daily frequency)
   - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)
   - [Short-Term Reversal](algorithms/short-term-reversal.md) ← new 2026-05-07 (industry-adjusted reversal 0.53%/month globally; SSRN:6630998; H181 queued)
@@ -32,8 +32,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
   - [Kraken CLI](tools/kraken-cli.md) ← expanded 2026-05-01 (all 50 agent skills, MCP service groups, full command reference)
-  - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← updated 2026-05-05 (analyst belief asymmetry arXiv:2511.15214, H171 GPT-4o-mini alternative, AlphaVantage transcripts)
-  - [Machine Learning for Trading](tools/ml-for-trading.md) ← new 2026-05-10 (LightGBM/XGBoost cross-sectional prediction, ModernFinBERT upgrade path H176, Alphalens-Reloaded IC/ICIR, TA-Lib, skfolio CPCV, mlfinlab license warning)
+  - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← updated 2026-05-13 (FinBERT transcript benchmark arXiv:2503.01886; yiyanghkust/finbert-tone recommended for earnings calls)
+  - [Machine Learning for Trading](tools/ml-for-trading.md) ← updated 2026-05-13 (MASFIN multi-agent debate framework arXiv:2512.21878; 31% drawdown reduction vs single-agent LLM)
   - [LEAN / QuantConnect](tools/lean-quantconnect.md) ← 2026-04-26 (Docker setup, iron condor algo written, options backtesting engine; H007 pending data)
   - [OpenAlgo](tools/openalgo.md) ← 2026-04-25 (India-only for now; watch for Alpaca/Kraken support in 2026)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
@@ -45,7 +45,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Options Data Sources](data-sources/options-data.md) ← 2026-05-01 (ThetaData/ORATS/FlashAlpha pricing; Alpaca indicative feed; vollib/py_vollib/QuantLib; IV surface + SVI fitting; free EOD options data on GitHub)
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
   - [Kalshi](prediction-markets/kalshi.md) ← expanded 2026-04-29 (full auth/API/WebSocket, RSA signing, CPI nowcasting implementation, fee modeling, rate limits, Timeless perps)
-  - [Algorithmic Strategies](prediction-markets/algorithmic-strategies.md) ← expanded 2026-05-02 (cross-market arb, nowcasting with full Python lifecycle, calibration, Timeless funding arb, IBKR ForecastTrader API)
+  - [Algorithmic Strategies](prediction-markets/algorithmic-strategies.md) ← updated 2026-05-13 (PolyBench arXiv:2604.14199 — LLMs near-random on binary markets; edge only on economic data + structured context)
   - [Other Platforms](prediction-markets/other-platforms.md) ← expanded 2026-05-02 (IBKR ForecastTrader full API, Kalshi Timeless mechanics, emerging platforms)
   - [Polymarket](prediction-markets/polymarket.md) ← 2026-04-29 (full CLOB API, Ethereum auth, order placement, WebSocket streaming, fee comparison vs Kalshi, cross-platform arb scanner)
 - [Backtesting](backtesting/) — setup, results, methodology

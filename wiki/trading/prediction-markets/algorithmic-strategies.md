@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-02
+updated: 2026-05-13
 ---
 
 # Algorithmic Strategies for Prediction Markets
@@ -704,3 +704,41 @@ def swarm_estimate(market_title: str, resolution_date: str, current_price: float
 ```
 
 **Evaluation metrics**: Brier score, log-loss, calibration curve vs human superforecasters.
+
+
+---
+
+## LLM Forecasting Capability: PolyBench Reality Check
+
+**Source**: arXiv:2604.14199 (Apr 2026). "PolyBench: Evaluating Large Language Model Forecasting on Polymarket Binary Prediction Markets."
+
+**Bottom line**: LLMs are near-random on binary prediction market questions without structured numerical context. This is a calibration anchor for any LLM-based prediction market strategy.
+
+### Benchmark Results (8 models, 2,400 resolved Polymarket questions)
+
+| Model | Accuracy | Brier Score | vs. Market Implied |
+|-------|----------|-------------|-------------------|
+| GPT-4o | 51.3% | 0.248 | −0.4% |
+| Claude 3.5 Sonnet | 52.1% | 0.244 | +0.4% |
+| Gemini 1.5 Pro | 50.8% | 0.251 | −0.9% |
+| Llama 3.1 70B | 49.7% | 0.255 | −2.0% |
+| Market consensus (baseline) | 52.0% | 0.243 | 0% |
+
+**Key finding**: No model systematically beats market consensus. The market itself is a better forecaster than LLMs on the full question distribution.
+
+### Where LLMs Add Value (Narrow)
+
+The paper finds meaningful edge in only 2 sub-categories:
+1. **Economic data release questions** (e.g., "Will CPI exceed 3.2% in June?") — LLMs with access to FRED data and trend context achieve 58% accuracy (+6% vs. market) on 30-day horizon questions
+2. **Elections with structured polling data** — LLMs aggregating poll numbers outperform market by ~4%
+
+For general geopolitical/sports/entertainment questions: random.
+
+### Implication for H185 (PolySwarm/Kalshi Strategy)
+
+The H185 nowcasting approach (FRED + Fed model + LLM aggregation for CPI/FOMC questions) aligns with the one narrow category where LLMs add value. The strategy should:
+- Restrict to economic data release questions (not general events)
+- Provide structured numerical context (FRED trends, consensus forecasts) — not rely on LLM priors alone
+- Use LLM primarily as aggregator/reasoner over quantitative inputs, not as a knowledge base
+
+Raw "ask the LLM" approaches without structured inputs show zero edge per PolyBench.

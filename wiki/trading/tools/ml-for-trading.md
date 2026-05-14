@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-10
+updated: 2026-05-13
 type: tool-guide
 status: active — H167 FLAGGED; H176 QUEUED; H171 QUEUED
 ---
@@ -402,3 +402,52 @@ Output: pooled representation → linear score
 - Baseline: H188 (Sharpe 1.07), target H195 > 1.2
 
 **Complexity note**: Requires PyTorch (~2 days to implement cleanly). Approved for immediate build (Kevin, 2026-05-13).
+
+
+---
+
+## MASFIN: Multi-Agent Debate Framework for Financial Decision-Making
+
+**Source**: arXiv:2512.21878 (Dec 2024). "MASFIN: A Multi-Agent System for Financial Investment."
+
+### Architecture
+
+MASFIN coordinates 4 specialized agents in a structured debate before each trading decision:
+
+```
+Input: stock + catalyst (earnings, news, etc.)
+
+→ Bull Analyst Agent: generates positive thesis + supporting evidence
+→ Bear Analyst Agent: generates counter-thesis + risk factors  
+→ Risk Manager Agent: stress-tests both theses against historical analogs
+→ Portfolio Allocator Agent: sizes position given thesis strength + risk budget
+```
+
+Each agent has access to:
+- Relevant news/8-K text (via RAG over recent filings)
+- Historical price context (52-week range, recent volatility)
+- Sector comparables (how similar stocks reacted to similar catalysts)
+
+### Benchmark Results vs. Single-Agent Baseline
+
+| Metric | Single LLM | MASFIN (debate) | Improvement |
+|--------|-----------|-----------------|-------------|
+| OOS Sharpe | 0.71 | 0.94 | +32% |
+| Max Drawdown | -28.3% | -19.5% | −31% |
+| Win rate | 52% | 58% | +6pp |
+| Avg position hold | 4.2 days | 3.8 days | shorter |
+
+The drawdown improvement is the headline finding — the bear analyst consistently catches "fake" earnings beats where positive surprise is priced in or driven by one-time items.
+
+### Application Pattern for H174 (PEAD Pipeline)
+
+The MASFIN debate pattern could be added as a pre-filter layer before the H174 PEAD score triggers an OPG order:
+
+1. **Existing pipeline**: 8-K detected → FinBERT scores sentiment → if score > threshold → place OPG order
+2. **MASFIN upgrade**: 8-K detected → FinBERT scores → if score > threshold → **run bull/bear debate** → reduce position size if bear wins → place order
+
+This is a `high` risk change to existing live pipeline — do not apply without Kevin review. File as future upgrade path.
+
+### Implementation Note
+
+MASFIN agents communicate via structured JSON (thesis: str, evidence: List[str], confidence: 0.0-1.0). A lightweight implementation using GPT-4o-mini (cost-effective for short financial texts) with 2 agents (bull + skeptic) rather than 4 would capture ~80% of the drawdown benefit at lower API cost.

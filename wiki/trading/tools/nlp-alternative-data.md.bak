@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-13
+updated: 2026-05-05
 type: tool-guide
 status: active — H163 CONFIRMED; H168 IN-PROGRESS; H171 QUEUED
 ---
@@ -535,30 +535,3 @@ def sentiment_adjusted_weights(base_weights: dict, sentiment_score: float) -> di
 **Applicability to our pipeline**: Could upgrade H188 monthly rebalance to use FinBERT aggregate sentiment (from PEAD watchlist passes) to tilt factor weights. Low-risk experiment — worst case reverts to equal weights.
 
 **Caveat**: 70% claim is unverified and likely reflects paper trading / simulation results, not live OOS performance. Treat as an implementation pattern to test, not a validated result.
-
-
----
-
-## FinBERT on Earnings Call Transcripts — Benchmark Findings
-
-**Source**: arXiv:2503.01886 (Mar 2025). "Deep Learning Benchmarks for Earnings Call Transcript Analysis."
-
-**Key finding**: Domain-adapted FinBERT trained specifically on earnings call language outperforms general FinBERT (news-trained) by 8–12% accuracy on transcript sentiment tasks. General-purpose BERT falls a further 15% below FinBERT. The distinction matters because earnings transcript language has distinct patterns:
-- Management hedging language ("headwinds", "uncertainty", "remain cautious")
-- Analyst Q&A adversarial probing vs. prepared statement tone
-- Sequential structure: prepared remarks → Q&A → closing statements
-
-**Recommended model hierarchy for H163/H174**:
-1. `yiyanghkust/finbert-tone` — best for sentiment direction (positive/negative/neutral) on short spans
-2. `ProsusAI/finbert` — general financial text, good baseline
-3. Transcript-specific fine-tune (see paper Table 3) — best for earnings call Q&A sections
-4. General BERT — **avoid** for this task
-
-**Implementation note for H163**: The current pipeline calls `prosus-ai/finbert` on the full 8-K text. Accuracy uplift of ~10% is available by:
-1. Splitting the 8-K into MD&A section vs. financial tables
-2. Running tone-adapted FinBERT only on the MD&A narrative
-3. Ignoring quantitative table sections (adds noise, not signal)
-
-**Signal quality impact**: The paper estimates that using appropriate transcript-tuned model vs. naive FinBERT adds ~0.15 information coefficient (IC) per quarter across earnings events. On H163's current universe (30 large-caps), this translates to roughly 0.2–0.3 Sharpe improvement if the signal quality gain propagates through.
-
-**Practical upgrade path**: Before H174 goes live, test `yiyanghkust/finbert-tone` as a drop-in replacement for the current FinBERT call in `backtesting/paper_trading/pead_overnight.py`. Compare classification output on a sample of historical 8-Ks.
