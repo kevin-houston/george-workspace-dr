@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-10
+updated: 2026-05-13
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -26,7 +26,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)
   - [Short-Term Reversal](algorithms/short-term-reversal.md) ← new 2026-05-07 (industry-adjusted reversal 0.53%/month globally; SSRN:6630998; H181 queued)
   - [Options Income Strategies](algorithms/options-income-strategies.md) ← 2026-05-05 (iron condor, CSP/Wheel, covered calls, VRP harvesting; H162 PARTIAL CONFIRMED; LEAN integration)
-  - [Low-Volatility Anomaly](algorithms/low-volatility.md) ← new 2026-05-11 (Blitz & Vliet low-vol decile, Frazzini-Pedersen BAB, min-variance; H191–H193 queued)
+  - [Low-Volatility Anomaly](algorithms/low-volatility.md) ← updated 2026-05-13 (confirmed results H190–H196; BAB dominates Sharpe 1.367; H190 Pareto improvement; STORM closed; research line complete)
   - [BSM & Information Geometry](algorithms/bsm-information-geometry.md) ← 2026-04-28 (Dean 2026: smile = manifold curvature; skew prediction within 19% zero free params; LEAPS trading implications)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
@@ -56,6 +56,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-13](research-log/2026-05-13.md) — H193 NOT CONFIRMED (BAB+reversal blend); H196 NOT CONFIRMED (STORM scale); wiki: low-volatility.md closed
 
 ## Key decisions log
 

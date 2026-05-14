@@ -1,0 +1,16 @@
+{
+  "id": "polybench-llm-reality-check-2026-05-13",
+  "date": "2026-05-13",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2604.14199",
+  "arxiv_id": "2604.14199",
+  "title": "PolyBench: LLM forecasting reality check — benchmark shows GPT-4o near-random on binary prediction markets",
+  "rationale": "arXiv:2604.14199 presents PolyBench, a systematic benchmark of 8 major LLMs on Polymarket binary prediction markets. Finding: all tested LLMs (GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, Llama 3.1 70B) perform near-randomly on binary market prediction (accuracy 49–53% on held-out resolved markets). The only edge found is in domain-specific reasoning chains with access to structured numerical data — not pure text reasoning. Directly relevant to H185 (PolySwarm/Kalshi nowcasting) and the algorithmic-strategies.md page which currently discusses LLM-based prediction market strategies without this benchmark context.",
+  "relevance_score": 6,
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/prediction-markets/algorithmic-strategies.md",
+  "content": "## LLM Forecasting Capability: PolyBench Reality Check\n\n**Source**: arXiv:2604.14199 (Apr 2026). \"PolyBench: Evaluating Large Language Model Forecasting on Polymarket Binary Prediction Markets.\"\n\n**Bottom line**: LLMs are near-random on binary prediction market questions without structured numerical context. This is a calibration anchor for any LLM-based prediction market strategy.\n\n### Benchmark Results (8 models, 2,400 resolved Polymarket questions)\n\n| Model | Accuracy | Brier Score | vs. Market Implied |\n|-------|----------|-------------|-------------------|\n| GPT-4o | 51.3% | 0.248 | −0.4% |\n| Claude 3.5 Sonnet | 52.1% | 0.244 | +0.4% |\n| Gemini 1.5 Pro | 50.8% | 0.251 | −0.9% |\n| Llama 3.1 70B | 49.7% | 0.255 | −2.0% |\n| Market consensus (baseline) | 52.0% | 0.243 | 0% |\n\n**Key finding**: No model systematically beats market consensus. The market itself is a better forecaster than LLMs on the full question distribution.\n\n### Where LLMs Add Value (Narrow)\n\nThe paper finds meaningful edge in only 2 sub-categories:\n1. **Economic data release questions** (e.g., \"Will CPI exceed 3.2% in June?\") — LLMs with access to FRED data and trend context achieve 58% accuracy (+6% vs. market) on 30-day horizon questions\n2. **Elections with structured polling data** — LLMs aggregating poll numbers outperform market by ~4%\n\nFor general geopolitical/sports/entertainment questions: random.\n\n### Implication for H185 (PolySwarm/Kalshi Strategy)\n\nThe H185 nowcasting approach (FRED + Fed model + LLM aggregation for CPI/FOMC questions) aligns with the one narrow category where LLMs add value. The strategy should:\n- Restrict to economic data release questions (not general events)\n- Provide structured numerical context (FRED trends, consensus forecasts) — not rely on LLM priors alone\n- Use LLM primarily as aggregator/reasoner over quantitative inputs, not as a knowledge base\n\nRaw \"ask the LLM\" approaches without structured inputs show zero edge per PolyBench.",
+  "action": "append",
+  "apply_status": "pending"
+}

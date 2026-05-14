@@ -1,0 +1,149 @@
+{
+  "date": "2026-05-13",
+  "session": "nightly-wiki-dream-cycle",
+  "phase": "Phase 2 — arXiv/GitHub scan",
+  "angles_searched": [
+    "earnings transcript NLP + FinBERT + BERT comparison 2025-2026",
+    "behavioral momentum + volume-price + herding factor 2025-2026",
+    "LLM prediction markets + forecasting benchmark + Polymarket 2026",
+    "multi-agent LLM financial trading + debate framework 2025-2026",
+    "GitHub trending quant repos + open-source backtesting 2026"
+  ],
+  "papers_reviewed": [
+    {
+      "arxiv_id": "2503.01886",
+      "title": "Deep Learning Benchmarks for Earnings Call Transcript Analysis",
+      "venue": "arXiv preprint",
+      "date": "2025-03",
+      "relevance_score": 7,
+      "staged": true,
+      "staged_file": "1_finbert_earnings_transcripts_benchmark.json",
+      "summary": "Systematic FinBERT vs BERT benchmark on earnings call transcripts. Transcript-tuned FinBERT outperforms generic FinBERT by 8-12% accuracy. Directly applicable to H163/H174 pipeline upgrade path — recommends yiyanghkust/finbert-tone for earnings sentiment tasks."
+    },
+    {
+      "arxiv_id": "2508.14656",
+      "title": "Behavioral Momentum: Volume-Price Divergence and Institutional Herding Factors in US Equities",
+      "venue": "arXiv preprint",
+      "date": "2025-08",
+      "relevance_score": 8,
+      "staged": true,
+      "staged_file": "2_behavioral_momentum_factors_h197.json",
+      "summary": "Volume-price herding factor (accumulation/distribution via vol-price divergence) achieves OOS Sharpe 0.91, near-zero corr to price momentum (0.08), moderate corr to reversal (0.31). Herding + reversal blend reaches Sharpe 1.24. Opens H197 hypothesis family for 30-stock universe."
+    },
+    {
+      "arxiv_id": "2604.14199",
+      "title": "PolyBench: Evaluating Large Language Model Forecasting on Polymarket Binary Prediction Markets",
+      "venue": "arXiv preprint",
+      "date": "2026-04",
+      "relevance_score": 6,
+      "staged": true,
+      "staged_file": "3_polybench_llm_reality_check.json",
+      "summary": "All major LLMs perform near-randomly on binary prediction market questions (49-53% accuracy). Only exception: economic data release questions with structured numerical context (+6% edge). Calibration anchor for H185 strategy scope — restrict to CPI/FOMC questions with FRED data."
+    },
+    {
+      "arxiv_id": "2512.21878",
+      "title": "MASFIN: A Multi-Agent System for Financial Investment",
+      "venue": "arXiv preprint",
+      "date": "2024-12",
+      "relevance_score": 7,
+      "staged": true,
+      "staged_file": "4_masfin_multiagent_financial.json",
+      "summary": "4-agent bull/bear/risk/allocator debate framework. Reduces max drawdown by 31% vs single-agent LLM on same tasks. Debate pattern applicable as H174 PEAD pre-filter layer — bear analyst catches fake earnings beats. High-risk change to live pipeline; flagged for Kevin review."
+    },
+    {
+      "arxiv_id": "2503.18452",
+      "title": "Volume-Synchronized Probability of Informed Trading (VPIN) as Intraday Liquidity Signal",
+      "venue": "arXiv preprint",
+      "date": "2025-03",
+      "relevance_score": 4,
+      "staged": false,
+      "summary": "VPIN metric for intraday toxicity detection. Relevant to HFT/market-making, not to monthly rebalance strategies in current pipeline. Not staged — no immediate implementation hook."
+    },
+    {
+      "arxiv_id": "2601.07231",
+      "title": "FinAgent: An Autonomous LLM Agent for Systematic Financial Research",
+      "venue": "AAAI 2026",
+      "date": "2026-01",
+      "relevance_score": 5,
+      "staged": false,
+      "summary": "LLM agent that autonomously generates and tests trading hypotheses. Architecture similar to current George pipeline but less structured — no rigorous IS/OOS methodology. Not staged — our pipeline is already more rigorous than the proposed system."
+    },
+    {
+      "arxiv_id": "2507.14430",
+      "title": "Calibration of LLM Confidence in Prediction Markets",
+      "venue": "arXiv preprint",
+      "date": "2025-07",
+      "relevance_score": 4,
+      "staged": false,
+      "summary": "LLM calibration study: models systematically overconfident on 30-day horizon, well-calibrated on 7-day horizon. Relevant to H185 but PolyBench (2604.14199) already covers this with broader scope — not staged separately."
+    },
+    {
+      "arxiv_id": "2502.08889",
+      "title": "Cross-Sectional Factor Zoo: Which Anomalies Survive Transaction Costs?",
+      "venue": "Journal of Financial Economics (forthcoming 2026)",
+      "date": "2025-02",
+      "relevance_score": 6,
+      "staged": false,
+      "summary": "Meta-study of 200+ cross-sectional anomalies post-transaction costs. BAB and momentum survive; low-vol decile marginal after costs; reversal expensive at high frequency but cost-effective at monthly rebalance. Consistent with H192-D and H181 findings — no contradictions. Not staged — no new actionable content beyond what low-volatility.md already documents."
+    }
+  ],
+  "repos_reviewed": [
+    {
+      "repo": "stefan-jansen/machine-learning-for-trading",
+      "url": "https://github.com/stefan-jansen/machine-learning-for-trading",
+      "license": "MIT",
+      "date": "2025-12",
+      "relevance_score": 5,
+      "staged": false,
+      "summary": "Reference implementations for the ML4T textbook. Updated with new chapters on factor models. Already referenced in ml-for-trading.md. No new actionable content."
+    },
+    {
+      "repo": "AI4Finance-Foundation/FinRL",
+      "url": "https://github.com/AI4Finance-Foundation/FinRL",
+      "license": "MIT",
+      "date": "2026-04",
+      "relevance_score": 4,
+      "staged": false,
+      "summary": "RL-based trading framework. v4.0 adds multi-market support. Pipeline is factor-model focused, not RL — not directly applicable at current stage."
+    },
+    {
+      "repo": "polakowo/vectorbt",
+      "url": "https://github.com/polakowo/vectorbt",
+      "license": "Fair Code",
+      "date": "2026-03",
+      "relevance_score": 4,
+      "staged": false,
+      "summary": "Vectorbt 2.0 beta released. Performance improvements. Already in tools catalog. No wiki update needed at this time."
+    },
+    {
+      "repo": "quantopian/alphalens-reloaded",
+      "url": "https://github.com/stefan-jansen/alphalens-reloaded",
+      "license": "Apache 2.0",
+      "date": "2026-02",
+      "relevance_score": 5,
+      "staged": false,
+      "summary": "Alphalens-Reloaded 0.4 adds ICIR bootstrap confidence intervals. Already referenced in ml-for-trading.md. Minor update not worth wiki entry."
+    }
+  ],
+  "null_results": {
+    "behavioral_momentum_open_source": "No public repo found implementing behavioral momentum (volume-price herding) at the same quality level as the paper. H197 would require original implementation.",
+    "polybench_dataset": "PolyBench dataset not yet released publicly as of 2026-05-13 (paper states 'dataset will be released upon acceptance'). Cannot reproduce results directly — must accept paper's benchmark numbers.",
+    "masfin_code": "MASFIN code repository mentioned in paper (github.com/MASFIN-project/MASFIN) but returns 404 as of scan date — likely not yet public. Architecture description in paper sufficient for implementation."
+  },
+  "staged_count": 4,
+  "high_relevance_count": 2,
+  "phase1_wiki_expansion": {
+    "completed": true,
+    "page_expanded": "wiki/trading/algorithms/low-volatility.md",
+    "changes": "Replaced stale QUEUED hypothesis table with confirmed OOS results for H190-H196; added Key Findings section (5 bullets); added Portfolio Deployment Decision section; updated hypothesis queue to show research line closed 2026-05-13",
+    "research_log_created": "wiki/trading/research-log/2026-05-13.md"
+  },
+  "next_session_priorities": [
+    "Apply proposal 1 (FinBERT transcripts) — append section to nlp-alternative-data.md",
+    "Apply proposal 2 (H197 behavioral momentum) — append hypothesis entry to momentum-strategies.md",
+    "Apply proposal 3 (PolyBench) — append LLM reality check to algorithmic-strategies.md",
+    "H190 live implementation — update h181_monthly.py to 40/60 H188+H181 blended signal (flagged for Kevin approval)",
+    "H197 backtest — implement volume-price herding factor on 30-stock universe"
+  ],
+  "session_continuation_notes": "Phase 1: low-volatility.md expanded with confirmed H190-H196 results. Research log 2026-05-13 written. Phase 2: 4 proposals staged covering FinBERT upgrade, H197 behavioral momentum, LLM prediction market calibration, MASFIN debate framework."
+}

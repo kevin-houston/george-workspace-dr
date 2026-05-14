@@ -1,6 +1,6 @@
 ---
-updated: 2026-05-11
-status: active — H190+ queued
+updated: 2026-05-13
+status: research closed — H190–H193 completed; STORM family (H195–H196) closed
 ---
 
 # Low-Volatility Anomaly
@@ -186,17 +186,52 @@ Low-vol + momentum historically have near-zero or negative correlation — natur
 
 ---
 
+## Confirmed US Large-Cap Results (30-Stock Universe, 2021–2026 OOS)
+
+All hypotheses below used the same 30 large-cap S&P 500 stocks across 8 GICS sectors, equal-weight long-6, monthly rebalance. IS: 2013–2020; OOS: 2021–2026.
+
+| H# | Strategy | OOS Sharpe | OOS CAGR | OOS MaxDD | IS/OOS Decay | Status |
+|----|----------|-----------|----------|-----------|--------------|--------|
+| SPY | Benchmark | 0.954 | 14.3% | -23.9% | — | — |
+| H181 | Industry-adjusted reversal (sector-neutral) | 1.138 | 24.6% | -18.4% | — | CONFIRMED — deployed |
+| H188 | 52-week high proximity momentum | 0.774 | 11.4% | -13.6% | — | CONFIRMED |
+| H190 | H188 (40%) + H181 (60%) blend | **1.191** | — | **-14.7%** | — | CONFIRMED — improves both Sharpe and MaxDD vs H181 alone |
+| H191-C | Low-vol hybrid (50% vol + 50% momentum) | 1.110 | — | -16.7% | ~9% | CONFIRMED |
+| H192-D | Sector-neutral BAB (rank beta within GICS) | **1.367** | 19.1% | -17.1% | ~18% | CONFIRMED — best Sharpe in family |
+| H193 | H192-D (40%) + H181 (60%) blend | 1.214 | 20.2% | -16.6% | — | NOT CONFIRMED as improvement over H192-D |
+| H195 | STORM dual VQ-VAE (30 stocks) | 0.963 | 23.8% | -24.5% | **41%** | CONFIRMED — underperforms H192-D |
+| H196 | STORM dual VQ-VAE (90 stocks) | 0.528 | 10.1% | -32.3% | **65%** | NOT CONFIRMED — scale hurts, not helps |
+
+### Key Findings
+
+**1. BAB dominates on this universe.** H192-D sector-neutral BAB (Sharpe 1.367) is the best risk-adjusted strategy across all 25+ strategies tested on this 30-stock universe. It outperforms low-vol (H191-C 1.110), reversal (H181 1.138), momentum (H188 0.774), and deep learning (H195 0.963).
+
+**2. BAB ≈ Low-Vol on concentrated universes.** H192-A raw beta and H191-A raw 1yr vol select nearly identical stocks on 30 large-caps (Corr=0.799). Both identify the same defensive names (JNJ, WMT, COST, IBM). The sector-neutral variant breaks this equivalence by ranking within sectors.
+
+**3. H181 dominates on absolute returns.** Despite lower Sharpe than H192-D (1.138 vs 1.367), H181 has higher CAGR (24.6% vs 19.1%) because its mean-reversion bets on temporarily beaten-down stocks generate larger individual returns. Choice between H181 and H192-D depends on whether you optimize for Sharpe or absolute compounding.
+
+**4. H190 is the practical implementation recommendation.** The 40% H188 / 60% H181 blend achieves BOTH higher Sharpe than H181 pure (1.191 vs 1.138) AND lower MaxDD (-14.7% vs -18.4%). This is the Pareto improvement — strictly better on two objectives simultaneously.
+
+**5. STORM (deep learning) does not beat factor models at this scale.** Despite IS Sharpe of 1.645, OOS decays to 0.963. Expanding to 90 stocks worsened IS/OOS decay to 65% and OOS Sharpe dropped to 0.528 (below SPY). The VQ-VAE architecture overfits when the IS training sample (84 months) is insufficient relative to graph complexity.
+
+### Portfolio Deployment Decision
+
+Current paper trading: **H181 deployed** (`backtesting/paper_trading/h181_monthly.py`).
+
+Recommended upgrade: apply **H190 blend logic** — at monthly rebalance, score each stock by a 40/60 weighted combination of H188 (52wk high proximity) and H181 (industry-adjusted reversal) signals, then long top-6 by blended score. This requires a modest update to h181_monthly.py.
+
+Second satellite candidate: **H192-D** — best Sharpe (1.367) but only marginally different stock picks than H191-A (Corr=0.723). Not deployed alongside H181 due to overlap.
+
+H193 finding: H192-D and H181 pick almost entirely different stocks (only 14% overlap), but both are long-only so they share market beta and don't provide meaningful portfolio-level diversification when blended.
+
 ## Hypothesis Queue
 
-| H# | Description | Signal | Status |
-|----|-------------|--------|--------|
-| H190 | H188 + H181 Blend | 52wk-high prox + industry-adjusted reversal on 30-stock universe | QUEUED |
-| H191 | Low-Vol Decile (252d daily vol) | Long bottom-6 of 30-stock universe by annual vol | QUEUED |
-| H192 | BAB-style Beta Rank | Long bottom-6 by Frazzini-Pedersen beta | QUEUED |
-| H193 | Sector-Neutral Low-Vol | Rank within GICS sector, long bottom-6 | QUEUED |
-| H194 | Low-Vol + H026 Blend | Portfolio diversification test | QUEUED |
+All hypothesis families on the 30-stock large-cap universe are now **complete**. Research line closed 2026-05-13.
 
-All use the existing 30-stock GICS-mapped universe (`UNIVERSE_SECTORS` in `h181_monthly.py`) and the monthly rebalance pattern from H181/H188.
+Future directions:
+- **H190 live implementation**: update h181_monthly.py to apply 40/60 H188+H181 blended signal
+- **Larger universe BAB**: test H192-D logic on S&P 500 (500 stocks, sector-neutral BAB) — different from H196 since H196 was STORM DL architecture, not simple BAB factor
+- **H191-A as second satellite**: Corr(H191-A, H181) OOS=0.342 — genuine diversification. Could deploy as 3rd strategy in paper trading alongside H181 and H112.
 
 ---
 
