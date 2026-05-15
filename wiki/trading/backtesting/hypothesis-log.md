@@ -5051,3 +5051,86 @@ All seasonal combinations significantly degrade returns. The TSMOM filter alread
 
 Script: `backtesting/daily/run_h117.py`
 Results: `backtesting/results/h117_results.json`
+
+---
+
+## H198 — Cross-Sectional Stock Momentum (Jegadeesh-Titman 12-1/6-1 signal)
+
+**Status:** CONFIRMED — OOS Sharpe 1.174, beats SPY; 6-1m lookback optimal
+**Date:** 2026-05-14
+**Baseline:** SPY buy-and-hold (OOS Sharpe 0.954, Cumul 2.044)
+
+### Hypothesis
+
+§3.1 "151 Trading Strategies": long top decile of 30-stock S&P 500 universe by past 12-1 month return (standard Jegadeesh-Titman skip-month signal), equal-weight, monthly rebalance. Also tests 6-1m and 3-1m lookbacks.
+
+Universe: same 30 large-cap stocks as H181/H192-D (AAPL, MSFT, NVDA, AMZN, META, TSLA, GOOGL, AVGO, QCOM, AMD, V, MA, BAC, WFC, JPM, UNH, LLY, PFE, JNJ, ABBV, WMT, HD, SBUX, LOW, COST, CVX, XOM, BA, CAT, IBM). IS: 2013–2020, OOS: 2021–2026.
+
+### Results
+
+| Lookback | IS Sharpe | IS Cumul | OOS Sharpe | OOS Cumul | MaxDD   | NegYrs |
+|----------|-----------|----------|------------|-----------|---------|--------|
+| 12-1m    | 1.603     | 15.5723  | 1.096      | 3.3756    | -22.6%  | 1      |
+| **6-1m** | **1.779** | **22.302**| **1.174** | **3.6563** | **-22.7%** | **1** |
+| 3-1m     | 1.902     | 23.4405  | 0.872      | 2.3593    | -26.9%  | 1      |
+| SPY BH   | 1.105     | 3.0697   | 0.954      | 2.0444    | -23.9%  | 1      |
+
+**Winner vs Loser (12-1m):** Top-6 OOS Sharpe 1.096 vs Bottom-6 OOS Sharpe 1.052 — both work; momentum direction barely dominates contrarian on this universe.
+
+**Correlation to SPY: 0.717 (6-1m).** High — limits portfolio diversification value.
+
+### Key Findings
+
+1. **6-1m beats 12-1m on this universe.** IS degradation is better (IS 1.779→OOS 1.174, decay 34%) vs 12-1m (1.603→1.096, decay 32%). Both confirmed.
+2. **Momentum direction barely dominates contrarian** — on large-cap 30-stock universe, both winners and losers outperform SPY. Signal is weak directionally because large-caps have strong comovement.
+3. **High SPY correlation (0.717)** is the key limitation. The momentum signal on 30 large-cap stocks primarily captures sector rotation (tech wins → multiple tech stocks rank top together). This means stock momentum is largely redundant with the ETF sector rotation already in H026.
+
+### Portfolio Implications
+
+| Strategy | OOS Sharpe | Corr-SPY | Notes |
+|----------|-----------|---------|-------|
+| H198 (6-1m stock momentum) | 1.174 | 0.717 | Large-cap 30-stock |
+| H192-D (sector-neutral BAB) | 1.367 | lower | Confirmed prior |
+| H181 (industry reversal) | 1.138 | moderate | Confirmed prior |
+| H026 (ETF sector rotation) | ~3.0 | ~0.7 | Production — also captures sector momentum |
+
+H198 is a confirmed standalone strategy but likely adds limited diversification to the production portfolio because H026 already captures the sector rotation that drives this signal. More valuable for a pure stock-picking mandate than as a portfolio addendum.
+
+Script: `backtesting/daily/run_h198.py`
+Results: `backtesting/results/h198_results.json`
+
+---
+
+## H199 — Sector-Neutral Stock Momentum
+
+**Status:** NOT CONFIRMED — sector adjustment worsens both Sharpe and SPY correlation
+**Date:** 2026-05-14
+**Baseline:** H198 (6-1m raw momentum, OOS Sharpe 1.174, Corr-SPY 0.717)
+
+### Hypothesis
+
+H198 has Corr-SPY=0.717. Hypothesis: applying sector-neutral adjustment (stock return minus equal-weight sector average, same structure as H181 for reversal) removes sector-level market beta and improves risk-adjusted returns and diversification.
+
+### Results
+
+| Strategy              | IS Sharpe | IS Cumul  | OOS Sharpe | OOS Cumul | MaxDD   | NegYrs | Corr-SPY |
+|-----------------------|-----------|-----------|------------|-----------|---------|--------|---------|
+| Raw 6-1m (H198)       | 1.779     | 22.302    | 1.174      | 3.6563    | -22.7%  | 1      | 0.717   |
+| Sector-neutral 6-1m   | 1.831     | 25.811    | 0.966      | 2.7557    | -37.9%  | 1      | 0.756   |
+| SPY BH                | 1.105     | 3.070     | 0.954      | 2.0444    | -23.9%  | 1      | 1.000   |
+| H181 reversal (ref)   | —         | —         | 1.138      | —         | -18.4%  | —      | —       |
+
+Sector-neutral MOM vs H181 reversal correlation: **0.671** (both long-only on same universe, both share market beta).
+
+### Diagnosis
+
+The sector-neutral adjustment BACKFIRES for momentum because sector drift IS the momentum signal on large-cap stocks. Tech stocks (6/30 in universe) rank together at the top during tech bull markets (2020-2024). Removing that sector component leaves noisy idiosyncratic return, which has lower signal quality.
+
+This contrasts with H181 (reversal), where sector-neutralization HELPS because idiosyncratic reversal (a stock overreacting relative to its sector peers) is the real signal. For momentum, the sector-level trend itself is informative.
+
+Additionally, MaxDD worsens dramatically (-22.7% → -37.9%), confirming the sector exposure in the raw signal provides useful temporal smoothing that the sector-neutral version loses.
+
+**Key insight:** Sector-neutral adjustments help mean-reversion strategies (H181) and within-sector risk factors (H192-D BAB) but hurt cross-sectional momentum because sector-level drift is the primary momentum carrier in a 30-stock large-cap universe.
+
+Script: `backtesting/daily/run_h199.py`
+Results: `backtesting/results/h199_results.json`

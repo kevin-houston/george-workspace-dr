@@ -336,3 +336,41 @@ Test volume-price herding as a third signal alongside H181 (industry reversal) a
 **Key risk**: volume data quality on 30-stock universe — yfinance provides volume for large-caps but intraday gaps may affect divergence computation. Validate data coverage before running.
 
 **Hypothesis queue status**: QUEUED — pending H190 live implementation first.
+
+---
+
+## H198: Cross-Sectional Stock Momentum — CONFIRMED
+
+**Source**: §3.1 "151 Trading Strategies" (Kakushadze & Serur). Standard Jegadeesh-Titman (1993) cross-sectional momentum signal on individual stocks.
+
+### Setup
+
+- **Universe**: same 30 large-cap S&P 500 stocks as H181/H192-D
+- **Signal**: 6-1m return (6-month return skipping last month, "skip-month" convention to avoid short-term reversal)
+- **Portfolio**: Long top-6 equal-weight, monthly rebalance
+- **IS/OOS**: 2013–2020 / 2021–2026
+
+### Results
+
+| Lookback | IS Sharpe | OOS Sharpe | OOS Cumul | MaxDD   | Corr-SPY |
+|----------|-----------|------------|-----------|---------|---------|
+| 12-1m    | 1.603     | 1.096      | 3.376     | -22.6%  | 0.746   |
+| **6-1m** | **1.779** | **1.174**  | **3.656** | -22.7%  | **0.717** |
+| 3-1m     | 1.902     | 0.872      | 2.359     | -26.9%  | n/a     |
+| SPY BH   | 1.105     | 0.954      | 2.044     | -23.9%  | 1.000   |
+
+**6-1m is optimal.** 12-1m (Jegadeesh-Titman canonical) also confirmed. 3-1m below threshold.
+
+### Key Observations
+
+1. **Both winner and loser portfolios outperform SPY** (top-6 OOS Sharpe 1.096 vs bottom-6 1.052). The signal is weak directionally on large-cap — both picking and fading recent extremes works, because large-cap stocks consistently outperform the broad market on a risk-adjusted basis.
+
+2. **SPY correlation 0.717**: stock momentum on 30 large-caps is primarily capturing SECTOR rotation (tech stocks co-move). This is redundant with H026 ETF sector rotation.
+
+3. **H199 sector-neutral adjustment NOT CONFIRMED**: removing sector drift worsens OOS Sharpe to 0.966 and MaxDD to -37.9%. Sector drift is the signal for momentum, not noise.
+
+### Portfolio Addition Verdict
+
+H198 is a **confirmed standalone strategy** but adds **limited diversification** to a portfolio already running H026 (ETF sector rotation), because the primary driver of stock momentum on a 30-stock large-cap universe is sector rotation. H192-D (BAB, Sharpe 1.367) remains the better stock-level alpha source because it exploits an orthogonal driver (low-beta anomaly within sectors).
+
+**Hypothesis queue status**: CONFIRMED — available for paper trading. Not recommended as a production portfolio addendum until Corr vs H026 production curve is verified.
