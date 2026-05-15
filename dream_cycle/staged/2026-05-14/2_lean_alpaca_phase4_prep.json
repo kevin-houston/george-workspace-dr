@@ -1,0 +1,14 @@
+{
+  "id": "2026-05-14-002",
+  "date": "2026-05-14",
+  "source": "internal — lean-quantconnect.md expansion + Alpaca SDK docs",
+  "source_url": "",
+  "title": "LEAN/Alpaca Live Trading Integration — Phase 4 Preparation",
+  "rationale": "The lean-quantconnect.md wiki page was thin (172 lines, last updated 2026-04-26) and missing live trading documentation critical for Phase 4. Added Alpaca broker configuration, CLI commands, algorithm adaptation pattern, and walk-forward optimization via LEAN optimizer. This staged proposal tracks the actionable next step: port H018 blend to a LEAN algorithm file so it is ready for live deployment when Docker is approved and Kevin confirms QuantConnect account status.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "wiki/trading/tools/lean-quantconnect.md",
+  "content": "Wiki expansion completed. Actionable follow-up: create backtesting/lean/H018Blend/main.py implementing the H020 (5-asset ETF rotation) + H009 (50/50) portfolio in LEAN format. This is a prerequisite for Phase 4 live trading via LEAN/Alpaca bridge. Algorithm logic is already validated via our custom backtesting engine — the LEAN port is purely a translation task.",
+  "action": "track",
+  "apply_status": "pending"
+}

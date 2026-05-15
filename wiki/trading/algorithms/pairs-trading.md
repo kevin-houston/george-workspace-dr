@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-05
+updated: 2026-05-15
 type: strategy-guide
-status: FAMILY EXHAUSTED — H152–H160 all NOT CONFIRMED at daily frequency
+status: ETF PAIRS EXHAUSTED (H152–H160 daily); H200 QUEUED (graphical matching, stock-level)
 ---
 
 # ETF Pairs Trading (Statistical Arbitrage)
@@ -296,6 +296,45 @@ All pairs trading hypotheses reached NOT CONFIRMED. The family is exhausted at d
 
 **H169 (LLM pair selection)**: BLOCKED — H160 NOT CONFIRMED; LLM cannot fix structurally broken signal. Deprioritized.
 
-**Bottom line**: ETF pairs and stock pairs at daily frequency do not exhibit sufficient OOS cointegration in the 2018–2026 period for systematic trading. HFT arbitrage has compressed mean-reversion windows below the 5-day minimum required for cost-effective daily-close execution. Further investigation would require intraday data (sub-minute) or a fundamentally different universe (e.g., ADR/local share pairs).
+**Bottom line (ETF pairs)**: ETF pairs and stock pairs at daily frequency do not exhibit sufficient OOS cointegration in the 2018–2026 period for systematic trading. HFT arbitrage has compressed mean-reversion windows below the 5-day minimum required for cost-effective daily-close execution.
+
+**However**: the graphical matching approach (H200) addresses the selection problem, not the cointegration problem. If the underlying cointegration has genuinely degraded, H200 will also fail. If the prior family's failure was partly due to poor pair selection (concentrating in overfit clusters), H200 may succeed.
 
 See [Hypothesis Log](../backtesting/hypothesis-log.md) for detailed results per hypothesis.
+
+---
+
+## H200: Graphical Matching Pairs Trading (Stock-Level)
+
+**Source**: arXiv:2403.07998 (Qureshi & Zaman, 2024). **Status**: QUEUED (next after stock momentum family).
+
+**Key idea**: Build a correlation graph over stocks. Apply maximum weighted matching — each stock can appear in at most one pair simultaneously. This prevents the concentration problem where highly-correlated clusters (e.g., all tech stocks) produce many overlapping pairs with correlated exposures.
+
+### Method
+
+1. Build correlation graph: nodes = stocks, edge weights = pairwise 12-month rolling return correlation
+2. **Maximum weighted matching**: select pairs to maximize total correlation weight with the constraint that no stock appears in multiple pairs
+3. For each matched pair: Engle-Granger cointegration test (p < 0.05). Reject non-cointegrated pairs.
+4. Spread: z-score of log price ratio, 100-period rolling window
+5. Entry: |z| > 1.5σ. Exit: |z| < 0.5σ. Stop-loss: |z| > 3.0σ
+6. Monthly pair reassignment (re-run matching + cointegration)
+
+### Academic results (S&P 500, 2017–2023)
+
+| Strategy | Sharpe | Notes |
+|----------|--------|-------|
+| Graphical matching pairs | **1.23** | No asset in > 1 pair simultaneously |
+| Random pair selection | 0.48 | Baseline without matching |
+| Market (SPY BH) | 0.59 | |
+
+### Distinction from H152–H160
+
+H152–H160 tested ETF pairs with manually selected pairs and no constraint on overlap. H200 differs:
+1. **Universe**: individual large-cap stocks (not ETFs); 30-stock pilot → 200+ if confirmed
+2. **Selection**: maximum weighted matching on correlation graph — automated, no human curation
+3. **Scale**: N=15 active pairs from 30-stock universe
+4. **Confirm criteria**: OOS Sharpe > 0.5, Cumul > 1.3×, Corr-SPY < 0.4
+
+### Universe
+
+Same 30-stock S&P 500 universe as H181/H198 for initial validation. If confirmed, expand to the S&P 500 top-200 by market cap for sufficient pair candidates.

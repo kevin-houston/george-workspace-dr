@@ -1,0 +1,73 @@
+{
+  "date": "2026-05-14",
+  "session": "nightly_dream_cycle",
+  "angles_searched": [
+    "pairs_trading_graphical_methods",
+    "pead_press_release_structure",
+    "prediction_market_multi_agent",
+    "trading_agents_llm_frameworks",
+    "momentum_extensions_behavioral"
+  ],
+  "papers_evaluated": [
+    {
+      "id": "arXiv:2403.07998",
+      "title": "Graphical Maximum Weighted Matching for Pairs Trading",
+      "authors": "Qureshi & Zaman (2024)",
+      "relevance": "HIGH",
+      "wiki_status": "NOT YET IN WIKI",
+      "staged": true,
+      "proposal_file": "staged/2026-05-14/1_graphical_pairs_h200.json",
+      "key_finding": "Maximum weighted matching on correlation graph prevents asset concentration in pairs. Sharpe 1.23 vs 0.48 baseline on S&P 500 2017-2023. Entry ±1.5σ, exit ±0.5σ, 100-period lookback.",
+      "action": "New H200 hypothesis — graphical matching stock-level pairs"
+    },
+    {
+      "id": "arXiv:2509.24254",
+      "title": "Press Release Structure and Earnings Announcement Returns",
+      "authors": "Wu et al. (2025)",
+      "relevance": "HIGH",
+      "wiki_status": "ALREADY IN WIKI (event-driven.md, line 38, added 2026-05-13)",
+      "staged": false,
+      "key_finding": "Press release STRUCTURE (soft info) as informative as earnings surprise (hard info). FinBERT contextual embeddings outperform LDA. Corroborates H163/H174. Key caveat: prices FULLY REFLECT at market open.",
+      "action": "Already incorporated"
+    },
+    {
+      "id": "arXiv:2604.03888",
+      "title": "PolySwarm: Multi-Agent LLM Framework for Prediction Market Trading",
+      "relevance": "MEDIUM",
+      "wiki_status": "ALREADY IN WIKI (prediction-markets/algorithmic-strategies.md, H185 section, added 2026-05-13)",
+      "staged": false,
+      "key_finding": "50 LLM personas + confidence-weighted Bayesian combination + quarter-Kelly sizing outperforms single-model baselines on Polymarket.",
+      "action": "Already incorporated"
+    },
+    {
+      "id": "arXiv:2412.20138",
+      "title": "TradingAgents: Multi-Agent LLM Financial Trading Framework",
+      "authors": "TauricResearch (2024)",
+      "relevance": "MEDIUM",
+      "wiki_status": "ALREADY IN WIKI (event-driven.md H165 section, momentum-strategies.md, nlp-alternative-data.md, hypothesis-log.md)",
+      "staged": false,
+      "key_finding": "Specialized analyst agents + risk team + debate mechanism. GitHub: TauricResearch/TradingAgents.",
+      "action": "Already incorporated extensively"
+    },
+    {
+      "id": "arXiv:2602.23330",
+      "title": "Expert Investment Teams with Multi-Agent Debate",
+      "relevance": "LOW",
+      "wiki_status": "NOT IN WIKI",
+      "staged": false,
+      "key_finding": "Multi-agent debate with bull/bear analyst roles. Overlaps with TradingAgents (already in wiki). Marginal addition.",
+      "action": "Skip — subsumed by TradingAgents coverage"
+    }
+  ],
+  "proposals_staged": 2,
+  "phase1_wiki_expansion": {
+    "target": "wiki/trading/tools/lean-quantconnect.md",
+    "reason": "Thinnest tool page (172 lines, last updated 2026-04-26). Missing live trading documentation critical for Phase 4 roadmap.",
+    "sections_added": [
+      "Alpaca Live Trading Bridge — brokerage config, CLI commands, algorithm adaptation pattern, Phase 3→4 gate checklist",
+      "Walk-Forward Optimization in LEAN — manual WFO pattern, LEAN Optimizer config, OOS hold-out warning"
+    ],
+    "lines_added": 90
+  },
+  "session_notes": "Primary new research finding: arXiv:2403.07998 graphical matching pairs — opens stock-level pairs trading after ETF pairs family was exhausted. Other papers already incorporated from prior sessions. Dream cycle now needs to apply staged proposals (apply_status: pending)."
+}

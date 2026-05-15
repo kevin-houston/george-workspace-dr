@@ -22,7 +22,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Algorithms](algorithms/) — trading strategy catalog
   - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
   - [Momentum Strategies](algorithms/momentum-strategies.md) ← updated 2026-05-14 (H198 CONFIRMED: 6-1m stock momentum OOS Sharpe 1.174; H199 NOT CONFIRMED; H197 behavioral momentum QUEUED)
-  - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-05-05 (family EXHAUSTED — H152-H160 all NOT CONFIRMED at daily frequency)
+  - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-05-15 (ETF pairs EXHAUSTED H152-H160; H200 QUEUED — graphical matching stock-level pairs, arXiv:2403.07998, Sharpe 1.23 on S&P 500 2017–2023)
   - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)
   - [Short-Term Reversal](algorithms/short-term-reversal.md) ← new 2026-05-07 (industry-adjusted reversal 0.53%/month globally; SSRN:6630998; H181 queued)
   - [Options Income Strategies](algorithms/options-income-strategies.md) ← 2026-05-05 (iron condor, CSP/Wheel, covered calls, VRP harvesting; H162 PARTIAL CONFIRMED; LEAN integration)
@@ -34,7 +34,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Kraken CLI](tools/kraken-cli.md) ← expanded 2026-05-01 (all 50 agent skills, MCP service groups, full command reference)
   - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← updated 2026-05-13 (FinBERT transcript benchmark arXiv:2503.01886; yiyanghkust/finbert-tone recommended for earnings calls)
   - [Machine Learning for Trading](tools/ml-for-trading.md) ← updated 2026-05-13 (MASFIN multi-agent debate framework arXiv:2512.21878; 31% drawdown reduction vs single-agent LLM)
-  - [LEAN / QuantConnect](tools/lean-quantconnect.md) ← 2026-04-26 (Docker setup, iron condor algo written, options backtesting engine; H007 pending data)
+  - [LEAN / QuantConnect](tools/lean-quantconnect.md) ← updated 2026-05-15 (Alpaca live trading bridge added — brokerage config, CLI, Phase 3→4 gate; walk-forward optimization section; H007 pending Docker approval)
   - [OpenAlgo](tools/openalgo.md) ← 2026-04-25 (India-only for now; watch for Alpaca/Kraken support in 2026)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
   - [Alpaca Markets — Complete Reference](data-sources/alpaca.md) ← new 2026-05-12 (full SDK reference: order types, TIF, WebSocket streams, PDT/IDTBP update, Phase 3→4 checklist)

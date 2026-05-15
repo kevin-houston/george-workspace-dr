@@ -1,6 +1,6 @@
 ---
-updated: 2026-04-26
-status: evaluated — Docker pending approval
+updated: 2026-05-15
+status: evaluated — Docker pending approval; Alpaca live trading integration documented
 ---
 
 # LEAN / QuantConnect
@@ -164,9 +164,130 @@ See [Options Income Strategies](../algorithms/options-income-strategies.md) for 
 
 ---
 
+## Alpaca Live Trading Bridge
+
+LEAN has first-class Alpaca support via the `QuantConnect.Brokerages.Alpaca` package, activated by setting `brokerage: AlpacaBrokerage` in the LEAN config.
+
+### Configuration (`lean.json`)
+
+```json
+{
+  "environment": "live-alpaca-paper",
+  "algorithm-language": "Python",
+  "algorithm-location": "MyStrategy/main.py",
+  "algorithm-class-name": "MyStrategy",
+  "brokerage": "AlpacaBrokerage",
+  "alpaca-access-token": "${ALPACA_API_KEY}",
+  "alpaca-secret-key": "${ALPACA_SECRET}",
+  "live-mode-brokerage": "AlpacaBrokerage",
+  "data-queue-handler": "AlpacaBrokerage",
+  "alpaca-use-staging": true
+}
+```
+
+`alpaca-use-staging: true` routes to the paper trading URL (`paper-api.alpaca.markets`). Set to `false` for live.
+
+### CLI command
+
+```bash
+# Paper trading
+lean live "MyStrategy" --brokerage "Alpaca" \
+  --data-feed "Alpaca" --paper
+
+# Live trading (Phase 4)
+lean live "MyStrategy" --brokerage "Alpaca" \
+  --data-feed "Alpaca"
+```
+
+### Algorithm adaptation for live use
+
+No code changes required — LEAN's unified API abstracts execution. Key caveats:
+- `Resolution.MINUTE` works in both backtest and live (Alpaca streams minute bars)
+- Options strategies require **Alpaca Unlimited** data plan (~$30/month) for options chain data
+- PDT rule applies on paper accounts under $25k — use `SetBrokerageModel(BrokerageName.Alpaca)` so LEAN enforces it
+
+```python
+class LiveReadyAlgorithm(QCAlgorithm):
+    def initialize(self):
+        self.set_brokerage_model(BrokerageName.ALPACA, AccountType.MARGIN)
+        self.spy = self.add_equity("SPY", Resolution.MINUTE).symbol
+    
+    def on_data(self, data):
+        if not data.contains_key(self.spy):
+            return
+        # Identical logic in backtest and live
+```
+
+### Phase 3→4 gate
+
+| Condition | Status |
+|-----------|--------|
+| Docker approved | ⏳ pending |
+| Paper trading strategy (H018 blend) validated OOS | ✅ active |
+| Algorithm ported to LEAN format | ❌ not yet |
+| Alpaca API keys configured in env | ✅ `$ALPACA_API_KEY` + `$ALPACA_SECRET` |
+| Alpaca Unlimited data (for options) | ❌ need upgrade |
+
+---
+
+## Walk-Forward Optimization in LEAN
+
+LEAN's `lean optimize` command supports parameter sweeps over IS data. For rigorous WFO, use the manual parameterized pattern.
+
+### Manual WFO via parameterized backtests
+
+```python
+# run_wfo.py — orchestrate LEAN backtests across WFO windows
+import subprocess, json
+from pathlib import Path
+
+WINDOWS = [
+    ("2013-01-01", "2017-12-31", "2018-01-01", "2019-12-31"),
+    ("2013-01-01", "2019-12-31", "2020-01-01", "2021-12-31"),
+    ("2013-01-01", "2021-12-31", "2022-01-01", "2023-12-31"),
+]
+
+for is_start, is_end, oos_start, oos_end in WINDOWS:
+    config_path = Path("/tmp/wfo_config.json")
+    config_path.write_text(json.dumps({
+        "parameters": {
+            "IS_START": is_start, "IS_END": is_end,
+            "OOS_START": oos_start, "OOS_END": oos_end,
+        }
+    }))
+    subprocess.run(["lean", "backtest", "IronCondor",
+                    "--config", str(config_path)], check=True)
+```
+
+Algorithm reads `self.GetParameter("IS_END")` to switch from fitting to OOS evaluation mode within a single run.
+
+### LEAN Optimizer (grid search over IS)
+
+```json
+{
+  "optimization-strategy": "GridSearchOptimizationStrategy",
+  "optimization-criterion": {
+    "target": "TotalPerformance.PortfolioStatistics.SharpeRatio",
+    "extremum": "max"
+  },
+  "parameters": [
+    {"name": "delta-short",   "min": 0.10, "max": 0.20, "step": 0.05},
+    {"name": "dte-target",    "min": 30,   "max": 60,   "step": 15},
+    {"name": "profit-target", "min": 0.40, "max": 0.60, "step": 0.10}
+  ]
+}
+```
+
+Run: `lean optimize "IronCondor" --optimizer-config optimizer.json`
+
+**Warning**: LEAN optimizer has no built-in OOS hold-out — it optimizes over the entire date range in the algorithm. Always reserve a separate OOS period and evaluate manually. Optimizing on Sharpe alone over-fits; prefer Calmar or Sortino with a minimum trade count filter (≥30 trades in OOS before accepting any result).
+
+---
+
 ## Next Steps
 
 1. Get Kevin's answer on QuantConnect account (for cloud path — no Docker needed)
 2. Admin approve Docker (for local path)
 3. Run `lean backtest "IronCondor"` — algorithm ready
 4. Compare LEAN results to manual calculations to validate engine accuracy
+5. Port H018 blend (H020 + H009, 50/50) to LEAN format for Phase 3→4 live trading readiness
