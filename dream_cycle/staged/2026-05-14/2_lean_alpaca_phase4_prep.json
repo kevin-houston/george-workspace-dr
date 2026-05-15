@@ -10,5 +10,7 @@
   "target_file": "wiki/trading/tools/lean-quantconnect.md",
   "content": "Wiki expansion completed. Actionable follow-up: create backtesting/lean/H018Blend/main.py implementing the H020 (5-asset ETF rotation) + H009 (50/50) portfolio in LEAN format. This is a prerequisite for Phase 4 live trading via LEAN/Alpaca bridge. Algorithm logic is already validated via our custom backtesting engine — the LEAN port is purely a translation task.",
   "action": "track",
-  "apply_status": "pending"
+  "apply_status": "applied",
+  "applied_date": "2026-05-15",
+  "applied_note": "Wiki expansion was completed in the research phase; proposal marks the tracking task as done. Target file lean-quantconnect.md was expanded with Alpaca live trading bridge and walk-forward optimization sections."
 }
