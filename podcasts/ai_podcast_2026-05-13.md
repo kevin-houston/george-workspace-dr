@@ -1,152 +1,145 @@
 # Daily AI Insights — May 13, 2026
-
-**Episode Title:** Altman Takes the Stand
-
-**Runtime:** ~13 minutes
-**Hosts:** Alex (male), Jordan (female)
+## Episode Title: The $950 Billion Question
+**Runtime**: ~13 minutes | **Hosts**: Alex & Jordan
 
 ---
 
 ## INTRO
 
-**Alex:** Good morning. I'm Alex.
+**Alex:** Welcome to Daily AI Insights. I'm Alex.
 
-**Jordan:** And I'm Jordan. This is Daily AI Insights.
+**Jordan:** And I'm Jordan. It is May 13th, 2026, and the AI industry did not take the week off.
 
-**Alex:** A lot happening today. OpenAI's Sam Altman was on the witness stand yesterday, being cross-examined by Elon Musk's attorneys. We'll go through what he said and what it means for a company that's become the most consequential in tech.
+**Alex:** Not even close. Today: Anthropic is in talks to raise money at a valuation that would put it above OpenAI — near a trillion dollars. And that's not a typo.
 
-**Jordan:** We're also looking at a GitHub repository that has done something almost no software project has ever done — overtaken React in total stars in under three months.
+**Jordan:** We also have the latest act in an escalating AI security arms race — OpenAI just launched something called Daybreak, going head-to-head with Anthropic's Mythos model on the same turf: finding software vulnerabilities before attackers do.
 
-**Alex:** State-level AI law is landing. Not proposals. Not frameworks. Connecticut's SB5 is heading to the governor's desk and has real teeth starting this fall.
+**Alex:** On the hardware side, AMD posted Q1 numbers that are quietly changing the story about who wins the AI chip race.
 
-**Jordan:** And we'll close with what happened at SAP's annual conference this week, because the enterprise agentic AI story moved from pilot to product in a single keynote.
+**Jordan:** And finally: a small startup called Subquadratic may have just shipped the first commercial language model that isn't built like every other language model. We'll explain what that means and why it matters.
 
 **Alex:** Let's get into it.
 
 ---
 
-## SEGMENT 1 — Altman on the Stand
+## SEGMENT 1: Anthropic Nears $950 Billion Valuation
 
-**Jordan:** So the OpenAI-versus-Musk trial has been running for three weeks now, and yesterday was the moment a lot of people had been waiting for — Sam Altman in the witness chair.
+**Jordan:** So, Anthropic. The New York Times broke this last night, and Bloomberg and the Financial Times have since confirmed it: Anthropic is in active talks to raise somewhere between thirty and fifty billion dollars in a new funding round that would value the company at up to nine hundred and fifty billion dollars.
 
-**Alex:** And the central question that Musk's legal team is pressing on is whether OpenAI's conversion from a nonprofit to a public benefit corporation is effectively stealing assets that were donated in good faith to a charity.
+**Alex:** Nine hundred and fifty billion. For context: three months ago, Anthropic was valued at three hundred and eighty billion dollars. Before that round, it was around sixty billion. This is a company that has roughly tripled in value in ninety days.
 
-**Jordan:** Musk's lawyer Steven Molo went after Altman on a text message that Altman sent Musk in February 2023, where he wrote that OpenAI "would not have happened without you." Molo asked if Altman stood by that. Altman said — and this is a direct quote — "I have changed my view on Elon significantly."
+**Jordan:** And it would actually put Anthropic's valuation above OpenAI, which raised money in March at an eight hundred and fifty-two billion dollar valuation.
 
-**Alex:** Which is fairly remarkable to say under oath in a courtroom. What else came out?
+**Alex:** So we now have two AI companies whose valuations exceed most of the world's publicly traded corporations, competing with each other in weeks-long fundraising rounds. The broader venture context is staggering — AI companies pulled in two hundred and ninety-seven billion dollars in just the first quarter of 2026, according to data cited in the Times piece.
 
-**Jordan:** The big factual claim that emerged from earlier testimony — not Altman's, but through other witnesses — is that Musk allegedly demanded 90 percent of OpenAI at one point during the early days. Altman addressed this indirectly but didn't refute the underlying dynamic.
+**Jordan:** Let's talk about what's actually driving this, because it's not just hype. Dario Amodei recently said Anthropic hit a thirty billion dollar annual revenue run rate. And then, in one of the more unusual investor signals in recent memory, said he hoped the company wouldn't actually grow eighty times this year because that would be — and I'm quoting — "crazy and too hard to handle."
 
-**Alex:** Under cross-examination, Musk's lawyer asked him directly: "Are you completely trustworthy?" Altman said yes, that he believes he is — quote — "an honest and trustworthy businessperson." The contrast with Musk's own testimony earlier in the trial is pretty stark. Multiple outlets noted that Musk was combative and raised his voice during questioning. Altman was, by most accounts, measured and careful.
+**Alex:** For a company that was doing a few hundred million in revenue two years ago, that trajectory is almost incomprehensible. Claude Code — the agentic coding product — has been a major driver. Once engineers adopt it as infrastructure, it's very sticky.
 
-**Jordan:** Closing arguments are scheduled for Thursday, and the judge could have a verdict from the advisory jury as early as next week.
+**Jordan:** There's also genuine political intrigue baked into this story. Anthropic released a model called Mythos last month — powerful enough at finding software vulnerabilities that the company declined to release it publicly, giving access to only a handful of organizations. That move complicated their relationship with the Department of Defense, which called Anthropic a security risk. Anthropic then sued the government.
 
-**Alex:** The stakes here go beyond the two people in the room. If Musk wins — even partially — it could force OpenAI to revisit its conversion terms, potentially delay or complicate its plan to become a fully for-profit company. That has downstream consequences for how the company raises capital and competes with Google and Anthropic.
+**Alex:** And now — because the model is apparently that powerful — there are reportedly "productive" White House conversations happening, with U.S. officials trying to mend the rift.
 
-**Jordan:** And for builders specifically: OpenAI's product roadmap and pricing structure are deeply tied to its capital structure. If the corporate conversion is disrupted or delayed, expect some turbulence in how API access and enterprise agreements are structured.
+**Jordan:** The round hasn't closed, and the Times was careful to note talks could still fall apart. But Google has already committed up to forty billion in Anthropic, and Amazon up to twenty-five billion.
 
-**Alex:** Closing arguments Thursday. We'll have an update Friday.
-
----
-
-## SEGMENT 2 — The GitHub Phenomenon: OpenClaw
-
-**Jordan:** Okay, let's talk about a software project that has genuinely broken records. OpenClaw — github.com/openclaw/openclaw — now has over 310,000 stars on GitHub.
-
-**Alex:** For context: React, the JavaScript framework built by Facebook and used on hundreds of millions of websites, took roughly eight years to accumulate that kind of star count. OpenClaw did it in about 60 days after going viral in January.
-
-**Jordan:** According to multiple tracking sources, OpenClaw overtook React to become the most-starred active software project in GitHub history in under two months.
-
-**Alex:** So what actually is it?
-
-**Jordan:** OpenClaw is a personal AI assistant that runs entirely on your own devices — no cloud required — and acts as a local gateway connecting AI models to over 50 integrations. We're talking WhatsApp, Telegram, Slack, Discord, Signal, iMessage, Microsoft Teams, WeChat. It speaks and listens on macOS, iOS, and Android. It renders a live canvas you can interact with.
-
-**Alex:** So it's not another chatbot wrapper. It's an agent you own, that lives on your device, and talks to you through whatever app you already use.
-
-**Jordan:** The project was built by Austrian developer Peter Steinberger, who published it in November 2025 under the name Clawdbot. It hit critical mass in January when it started spreading through developer communities, and NVIDIA has since put out a post on what the project means for autonomous agent deployment.
-
-**Alex:** The timing is interesting, because OpenClaw went viral right around when concerns about AI data privacy were peaking. There's a version of this story where the appetite for a local, self-hosted AI agent is partly a reaction to the centralized model of OpenAI and Anthropic.
-
-**Jordan:** It's MIT-licensed. Anyone can fork it, build on top of it, deploy it internally. And 58,000 forks suggests that's exactly what people are doing.
-
-**Alex:** For developers: this project is worth understanding structurally. The architecture of a local AI gateway with deep integration into messaging platforms is going to show up in a lot of enterprise deployments where data can't leave the building. If you're building AI tooling and your customers have sovereignty requirements, the OpenClaw pattern is worth studying.
-
-**Jordan:** Three hundred and ten thousand stars is also, candidly, a community signal. When that many developers are paying attention to something, the ecosystem around it grows fast. Plugins, adapters, integrations — the infrastructure for building on top of OpenClaw is being laid right now.
-
-**Alex:** And it's free.
+**Alex:** The real story here isn't just the number. It's that Anthropic — which was founded by people who left OpenAI over safety concerns — has become simultaneously the most safety-focused lab and arguably the most commercially aggressive one. Those two things are usually in tension. Right now they're somehow executing on both.
 
 ---
 
-## SEGMENT 3 — State AI Law Gets Real: Connecticut SB5
+## SEGMENT 2: The AI Security Arms Race — Daybreak vs. Mythos
 
-**Alex:** Let's talk about regulation, because something changed this week that isn't getting enough attention.
+**Jordan:** Which leads directly into our second story, because OpenAI is not watching Mythos happen from the sidelines.
 
-**Jordan:** Connecticut's SB5 passed the state legislature on May 1st, and Governor Lamont has confirmed he plans to sign it. This is not a proposal. It is not a framework. It is not a set of principles. It is law, with compliance dates beginning October 1st of this year.
+**Alex:** On May 10th, OpenAI launched Daybreak. It's a cybersecurity initiative that bundles their frontier models — GPT-5.5, and a permissive variant called GPT-5.5-Cyber — with Codex Security, their agentic coding harness, and a network of security partners.
 
-**Alex:** That is five months away.
+**Jordan:** The pitch is straightforward: your development team uses Daybreak to find vulnerabilities in your own codebase before an attacker does. It can build threat models for a repository, identify and test vulnerabilities in an isolated environment, and propose patches. Multiple outlets confirmed this — The Hacker News, Forbes — and they're right to frame it as a direct counter to Anthropic's Mythos.
 
-**Jordan:** Five months. And the provisions are substantive. On employment: companies that use automated tools in hiring, promotion, or personnel decisions have to disclose that they're using AI, employees get the right to know, and — this is the important part — using an AI tool is explicitly not a legal defense if that tool discriminates.
+**Alex:** The partner list is significant. Akamai, Cisco, Cloudflare, CrowdStrike, Fortinet, Oracle, Palo Alto Networks, Zscaler. These aren't pilot customers. These are the companies that run the internet's defensive infrastructure.
 
-**Alex:** So "the algorithm did it" is not an argument you can make in a Connecticut court.
+**Jordan:** Access isn't fully public yet — organizations have to request a scan or contact OpenAI's sales team. Same controlled rollout as Mythos. Which tells you something about how seriously both companies view the dual-use risk here.
 
-**Jordan:** Not anymore. There are also whistleblower-style protections for people inside AI companies who report safety concerns. And the chatbot provisions are notable: starting January 2027, any AI companion — defined broadly as any model that communicates in natural language and simulates human conversation — has to disclose that it's not human.
+**Alex:** OpenAI is handling that by tiering access: there's a standard version with normal safeguards, a Trusted Access for Cyber version for verified defensive work, and GPT-5.5-Cyber, the permissive model for red teaming and pen testing in controlled environments.
 
-**Alex:** The contrast with Colorado is instructive. Colorado passed an AI bill a year ago that was fairly prescriptive — required detailed risk management programs, impact assessments, proactive anti-discrimination auditing. And now Colorado is in the process of rolling much of that back, with SB26-189, which replaces the requirements-heavy approach with a leaner documentation-and-notice framework.
+**Jordan:** And here's a consequence worth sitting with: these tools are simultaneously making the security problem worse in the short term. HackerOne — the major bug bounty platform — paused its internet bug bounty program in March. The reason: AI-assisted research has accelerated vulnerability discovery so fast that open-source maintainers can't keep up with the flood of incoming reports.
 
-**Jordan:** So you have two adjacent states doing opposite things. Connecticut is adding substantive requirements. Colorado is peeling them back.
+**Alex:** Some of those reports are hallucinated too. AI-generated vulnerabilities that sound completely plausible but don't actually exist. It's called triage fatigue, and it's a real operational problem right now.
 
-**Alex:** Which tells you there is no consensus at the state level on what AI compliance actually looks like. But here's the thing: if you operate in Connecticut — or if your company's employment decisions affect Connecticut residents — the law applies to you regardless of where you're headquartered.
-
-**Jordan:** The federal picture remains murky. The White House is still working on what an executive order on high-risk AI would look like, but it hasn't landed. Meanwhile, Connecticut, Texas, and several other states are moving forward with binding requirements.
-
-**Alex:** The practical implication for any company deploying AI in HR workflows: you need a Connecticut compliance audit on your roadmap for Q3.
-
-**Jordan:** SB5 is also the first comprehensive state law to address AI companions directly — which is relevant for any company building conversational AI. The disclosure requirements are broad. If your product communicates in natural language and could be perceived as human, Connecticut wants a label on it.
+**Jordan:** So the picture is: AI both amplifies the threat and is being proposed as the solution. And the two most capable AI labs in the world are now in a direct race to be the dominant defensive layer. For anyone building security tooling — or trying to secure your own infrastructure — both Daybreak and Mythos are worth tracking closely.
 
 ---
 
-## SEGMENT 4 — Enterprise Agentic AI: SAP Sapphire
+## SEGMENT 3: AMD's Breakout Quarter — Data Center Up 57%
 
-**Alex:** The last segment is about what happened at SAP's annual Sapphire conference this week, because the enterprise AI deployment story crossed a threshold.
+**Alex:** Let's talk chips. AMD posted Q1 2026 earnings about a week ago, and these numbers deserve more attention than they've gotten.
 
-**Jordan:** SAP unveiled what they're calling the Autonomous Enterprise at Sapphire 2026. The centerpiece is a unified Business AI Platform — merging three previously separate SAP AI products into one environment where companies can build, deploy, and govern agents.
+**Jordan:** Total revenue: ten point three billion dollars, up thirty-eight percent year-over-year. Beat analyst estimates by four percent. But the number to focus on is the data center segment: five point eight billion dollars, up fifty-seven percent.
 
-**Alex:** And the headline number is 50-plus domain-specific AI agents — called Joule Assistants — deployed across finance, supply chain, procurement, HR, and customer experience. These are not demos. These are production agents running in SAP's installed base.
+**Alex:** That is not a rounding error. Fifty-seven percent growth. And it beat Wall Street expectations — analysts had projected five point six billion. AMD also raised its Q2 guidance to eleven point two billion dollars. Shares jumped sixteen percent after the report.
 
-**Jordan:** For context: SAP's ERP software runs the back-office operations of roughly 77 percent of the world's transaction revenue. When SAP deploys 50 AI agents into those workflows, it's not a pilot with a handful of customers. It's a product that could touch billions of dollars in operational decisions almost immediately.
+**Jordan:** Lisa Su has been executing a long-term chip strategy here. The Instinct GPU line for AI training and inference has gone from largely an afterthought to a genuine alternative to Nvidia's H-series. The EPYC CPU line has taken meaningful data center market share from Intel.
 
-**Alex:** The NVIDIA integration is notable. SAP and NVIDIA announced something called NemoClaw — a reference blueprint for developing and deploying autonomous agents inside Joule Studio, SAP's agent development environment. The idea is to give enterprise developers a structured path from prototype to trusted production agent, with NVIDIA's inference infrastructure underneath.
+**Alex:** For context on why this matters: the narrative around AI infrastructure has basically been "Nvidia or nothing" for the past two years. AMD demonstrating it can actually ship at scale and win significant data center contracts changes that narrative for the entire industry.
 
-**Jordan:** SAP also announced a 100 million dollar AI fund for startups building on top of their platform. Which is a common move — tie the ecosystem to your infrastructure — but signals that they expect significant third-party agent development on their stack.
+**Jordan:** There's a complementary data point here. A company called Zyphra released an open-weight model last week — ZAYA1-8B — trained end-to-end on AMD Instinct hardware. Not ported from a Nvidia-trained checkpoint. Trained from scratch on AMD.
 
-**Alex:** SAP isn't alone this week. Salesforce's Agentforce opened so agents can execute workflows directly. Cloudflare let agents deploy applications autonomously. Microsoft activated agentic infrastructure capabilities. All in the same week.
+**Alex:** That's a proof of concept that matters. If competitive open-weight models can be built without a Nvidia dependency, AI infrastructure gets a lot less concentrated at the supply chain level.
 
-**Jordan:** This is the enterprise agentic moment that has been building for 18 months. The question in 2024 was "will enterprises actually deploy AI agents?" The question in 2025 was "how do you govern them?" The question in 2026, apparently, is "which agent platform do you want to be locked into?"
+**Jordan:** The semiconductor industry is on track to cross one trillion dollars in annual revenue this year for the first time, according to IDC. AI infrastructure is essentially the entire growth driver. AMD's quarter is one piece of evidence that the hardware race is becoming genuinely competitive.
 
-**Alex:** For builders: the vendor lock-in risk in agentic AI platforms is real and getting more real. SAP's agents live in SAP's platform. Salesforce's agents live in Salesforce. The companies that build portable, platform-agnostic agent infrastructure — things like OpenClaw, which we covered in the last segment — may have an advantage as enterprises figure out their agent strategy.
+**Alex:** And competition at the infrastructure layer has downstream benefits for everyone building on top of it — more supply, better pricing, more options.
 
-**Jordan:** The governance layer is still the open problem. SAP has a deployment framework but monitoring, auditing, and explaining what agents actually did remains unsolved at scale.
+---
+
+## SEGMENT 4: The Architecture Frontier — A Non-Transformer LLM Ships
+
+**Jordan:** Our final story is the most technical, but if you build with these models professionally it's probably the one with the most interesting long-term implications.
+
+**Alex:** So throughout May, the very top of AI model leaderboards has been quiet. GPT-5.5 broke sixty on Artificial Analysis's Intelligence Index in late April — that's the highest score the index has seen. Claude Opus 4.7 landed just before that. After a chaotic April where five different labs put models above 50 in a single month, May has been a breather at the frontier.
+
+**Jordan:** What showed up instead was a company called Subquadratic — and a model called SubQ — which launched May 5th with twenty-nine million dollars in seed funding and one very specific claim: their model is not a transformer.
+
+**Alex:** Standard transformer attention — the architecture running GPT, Claude, Gemini, and essentially every major LLM — is computationally O-N-squared in context length. Double the context window, quadruple the compute cost. That's why long-context models are expensive, and why most "million-token context" claims come with quiet asterisks about quality degrading at scale.
+
+**Jordan:** SubQ uses sparse, subquadratic attention end-to-end. The first release ships with a native twelve million token context window and claims roughly one-fifth the cost of frontier models on long-context tasks, and up to fifty-two times faster attention at scale.
+
+**Alex:** To be fully transparent: those are vendor numbers. No independent third-party benchmark has verified the 52x claim yet. And subquadratic attention as a research area isn't new — Mamba, RWKV, Hyena, BASED have all shown promise and then plateaued against frontier transformers on standard tasks.
+
+**Jordan:** So the honest question is whether SubQ is the one that doesn't plateau. What's genuinely new here is the packaging: it's the first time someone has put subquadratic attention behind a commercial API and built a real product on top. SubQ Code is a repo-wide coding agent designed to use the full context window.
+
+**Alex:** And that's the actual use case. If you want to load an entire large codebase into context, analyze hundreds of documents simultaneously, or run multi-document research at scale — transformer inference costs become a real constraint. If SubQ's cost numbers hold in practice, the economics change.
+
+**Jordan:** Separately, OpenAI on May 5th made GPT-5.5 Instant the new default for ChatGPT — not the frontier GPT-5.5, but the lighter, faster sibling. The framing they chose is worth noting: fewer hallucinations in regulated domains like law, medicine, and finance. Not "smarter."
+
+**Alex:** That's a tell about where the competition is actually heading. Not higher benchmark scores — reliable behavior in professional, high-stakes settings. When the ChatGPT default changes, the median experience for hundreds of millions of users changes overnight.
+
+**Jordan:** So: no new frontier model in the first half of May. But a potential architectural disruption, a default model swap affecting hundreds of millions of people, and the first proof that competitive models can train on non-Nvidia hardware. Not bad for a quiet month.
 
 ---
 
 ## OUTRO
 
-**Jordan:** That's Daily AI Insights for May 13, 2026. Quick recap: Sam Altman testified in the OpenAI-versus-Musk trial — closing arguments Thursday, verdict possible next week. OpenClaw has surpassed 310,000 GitHub stars, overtaking React to become the most-starred active project in GitHub history. Connecticut's SB5 is heading to the governor's desk and brings real AI compliance requirements starting October 1st. And SAP launched 50-plus enterprise AI agents at Sapphire, with NVIDIA's NemoClaw blueprint underneath.
+**Alex:** That's Daily AI Insights for May 13th, 2026. Four stories: Anthropic approaching a trillion-dollar valuation, OpenAI and Anthropic racing to own the AI security layer, AMD proving the chip race has a second competitor, and a non-transformer LLM shipping commercially for the first time.
 
-**Alex:** Four stories that, between them, cover law, code, courtrooms, and corporate software. A full map of where AI is landing.
+**Jordan:** The security story and the architecture story are both early-stage and moving fast. If either is directly relevant to what you're building, they're worth watching more than a typical week's news cycle.
 
-**Jordan:** Thanks for listening. We'll be back tomorrow.
+**Alex:** We'll be back tomorrow. Thanks for listening.
 
-**Alex:** Stay curious.
+**Jordan:** See you then.
 
 ---
 
 ## SOURCES
 
-1. **OpenAI / Altman testimony** — CNBC (May 12, 2026): https://www.cnbc.com/2026/05/12/openai-trial-updates-sam-altman-set-to-testify-in-musk-suit.html | NPR: https://www.npr.org/2026/05/12/nx-s1-5811730/openai-sam-altman-testimony-elon-musk-trial | Fortune: https://fortune.com/2026/05/12/sam-altman-testimony-open-ai-elon-musk-trial/ | Al Jazeera (90% claim): https://www.aljazeera.com/news/2026/5/12/sam-altman-says-elon-musk-wanted-90-percent-of-openai-in-high-stakes-trial | CNN: https://www.cnn.com/2026/05/12/tech/sam-altman-openai-vs-elon-musk-testimony
+1. **Anthropic $950B valuation talks** — *New York Times*, May 12, 2026: https://www.nytimes.com/2026/05/12/technology/anthropic-funding-950-billion-valuation.html (corroborated by Bloomberg and Financial Times)
 
-2. **OpenClaw GitHub** — GitHub: https://github.com/openclaw/openclaw | DigitalOcean overview: https://www.digitalocean.com/resources/articles/what-is-openclaw | NVIDIA Blog: https://blogs.nvidia.com/blog/what-openclaw-agents-mean-for-every-organization/ | Star count tracking: https://www.askglitch.com/blog/top-5-trending-ai-github-repos-may-2026
+2. **OpenAI Daybreak cybersecurity initiative** — *The Hacker News*, May 12, 2026: https://thehackernews.com/2026/05/openai-launches-daybreak-for-ai-powered.html (corroborated by Forbes: https://www.forbes.com/sites/timkeary/2026/05/12/openai-daybreak-goes-head-to-head-with-anthropic-to-redefine-security/ and MarkTechPost)
 
-3. **Connecticut SB5** — CT Mirror (passage): https://ctmirror.org/2026/05/01/artificial-intelligence-house-regulation-passage-ct/ | DLA Piper (full analysis): https://www.dlapiper.com/en-us/insights/publications/2026/05/unpacking-connecticuts-new-ai-law | Kelley Drye (CO comparison): https://www.kelleydrye.com/viewpoints/blogs/ad-law-access/ai-regulatory-roundup-recent-developments-in-colorado-connecticut-and-california
+3. **AMD Q1 2026 data center +57%** — *TheStreet*, May 10, 2026: https://www.thestreet.com/investing/stocks/amd-and-intel-lead-2026-gains-as-ai-guard-changes (corroborated by Intellectia.ai, Investing.com, TradingKey)
 
-4. **SAP Sapphire + NVIDIA NemoClaw** — Reworked.co (SAP Autonomous Enterprise): https://www.reworked.co/digital-workplace/sap-unveils-autonomous-enterprise-100m-ai-fund/ | HPCwire (NVIDIA SAP): https://www.hpcwire.com/aiwire/2026/05/12/nvidia-and-sap-bring-trust-to-specialized-agents/
+4. **SubQ non-transformer LLM + GPT-5.5 Instant default** — *WhatLLM.org*, May 13, 2026: https://whatllm.org/blog/new-ai-models-may-2026 (corroborated by llm-stats.com)
+
+5. **Claude Opus 4.7 launch** — *Anthropic*, April 2026: https://www.anthropic.com/news/claude-opus-4-7
+
+6. **HackerOne bug bounty pause** — cited in The Hacker News Daybreak article (source 2)
+
+7. **IDC semiconductor forecast** — *IDC*: https://www.idc.com/resource-center/blog/semiconductor-market-to-surge-past-the-trillion-dollar-threshold-ai-infrastructure-drives-market-growth/
