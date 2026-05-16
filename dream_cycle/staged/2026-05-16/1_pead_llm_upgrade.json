@@ -4,11 +4,11 @@
   "source": "paper",
   "source_url": "https://aclanthology.org/2025.finnlp-2.13",
   "title": "PEAD: FinBERT still best for text signal; LLM-augmented variant adds 3-day early signal",
-  "rationale": "2025 paper comparing BART vs FinBERT for PEAD measurement found FinBERT achieves highest classification accuracy (57.6%/58.3% positive/negative). Also found that incorporating 3-day early market signal alongside text significantly improves PEAD direction accuracy. Our H163/H174 pipeline uses FinBERT scoring — this validates the choice and suggests adding early-session price signal as a confirming filter before taking OPG positions.",
+  "rationale": "2025 paper comparing BART vs FinBERT for PEAD measurement found FinBERT achieves highest classification accuracy (57.6%/58.3% positive/negative). Also found that incorporating 3-day early market signal alongside text significantly improves PEAD direction accuracy. Our H163/H174 pipeline uses FinBERT scoring \u2014 this validates the choice and suggests adding early-session price signal as a confirming filter before taking OPG positions.",
   "risk_level": "low",
   "type": "wiki_update",
   "target_file": "/workspace/agent/wiki/trading/tools/nlp-alternative-data.md",
-  "content": "\n## PEAD + LLM (2025 update)\n\n**Source**: Enhancing Post Earnings Announcement Drift Measurement with Large Language Models (FinNLP 2025)\n\n- FinBERT still outperforms LLMs (BART, GPT) on PEAD direction classification: 57.6% accuracy vs lower for generative models\n- Encoder-only FinBERT captures financial domain nuance more reliably than decoder models for this task\n- **Key finding**: Adding 3-day early market signal alongside FinBERT text score significantly improves PEAD prediction\n- Practical implication for H163/H174: add a confirming filter — only enter OPG order if early pre-market move aligns with FinBERT sentiment direction\n",
+  "content": "\n## PEAD + LLM (2025 update)\n\n**Source**: Enhancing Post Earnings Announcement Drift Measurement with Large Language Models (FinNLP 2025)\n\n- FinBERT still outperforms LLMs (BART, GPT) on PEAD direction classification: 57.6% accuracy vs lower for generative models\n- Encoder-only FinBERT captures financial domain nuance more reliably than decoder models for this task\n- **Key finding**: Adding 3-day early market signal alongside FinBERT text score significantly improves PEAD prediction\n- Practical implication for H163/H174: add a confirming filter \u2014 only enter OPG order if early pre-market move aligns with FinBERT sentiment direction\n",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

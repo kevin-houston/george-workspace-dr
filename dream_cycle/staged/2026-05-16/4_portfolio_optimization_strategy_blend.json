@@ -3,12 +3,12 @@
   "date": "2026-05-16",
   "source": "reflection",
   "source_url": "",
-  "title": "H203: Risk-parity blend of H026+BAB+MOM+TOM — test as production portfolio",
+  "title": "H203: Risk-parity blend of H026+BAB+MOM+TOM \u2014 test as production portfolio",
   "rationale": "We now have 4 confirmed strategies with different beta profiles: H026 ETF rotation (beta ~0.5, Sharpe ~1.2), H191 BAB (beta ~0, Sharpe 1.367), H198 momentum (beta ~0.6, Sharpe 1.174), H201 TOM (beta ~0.75, Sharpe 0.740). The natural next step is to blend them using risk parity (Riskfolio-Lib HRP/NCO) and test whether the combination beats any individual strategy on OOS Sharpe and MaxDD. This is H203. Use monthly rebalance, Ledoit-Wolf covariance, 24-month lookback for weights.",
   "risk_level": "medium",
   "type": "new_script",
   "target_file": "/workspace/agent/backtesting/daily/run_h203.py",
-  "content": "# H203 — Risk-Parity Multi-Strategy Blend\n# Blend H026 + H191 (BAB) + H198 (6-1m momentum) + H201 (TOM) using HRP\n# Monthly rebalance, Ledoit-Wolf covariance, 24-month lookback\n# IS: 2018-2022, OOS: 2023-2026\n# Confirm: OOS Sharpe > best single strategy (1.367), MaxDD < -15%\n# Libraries: riskfolio-lib for HRP weights, monthly returns from existing result files\n",
+  "content": "# H203 \u2014 Risk-Parity Multi-Strategy Blend\n# Blend H026 + H191 (BAB) + H198 (6-1m momentum) + H201 (TOM) using HRP\n# Monthly rebalance, Ledoit-Wolf covariance, 24-month lookback\n# IS: 2018-2022, OOS: 2023-2026\n# Confirm: OOS Sharpe > best single strategy (1.367), MaxDD < -15%\n# Libraries: riskfolio-lib for HRP weights, monthly returns from existing result files\n",
   "action": "write",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

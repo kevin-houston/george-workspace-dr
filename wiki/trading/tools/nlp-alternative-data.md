@@ -562,3 +562,12 @@ def sentiment_adjusted_weights(base_weights: dict, sentiment_score: float) -> di
 **Signal quality impact**: The paper estimates that using appropriate transcript-tuned model vs. naive FinBERT adds ~0.15 information coefficient (IC) per quarter across earnings events. On H163's current universe (30 large-caps), this translates to roughly 0.2–0.3 Sharpe improvement if the signal quality gain propagates through.
 
 **Practical upgrade path**: Before H174 goes live, test `yiyanghkust/finbert-tone` as a drop-in replacement for the current FinBERT call in `backtesting/paper_trading/pead_overnight.py`. Compare classification output on a sample of historical 8-Ks.
+
+## PEAD + LLM (2025 update)
+
+**Source**: Enhancing Post Earnings Announcement Drift Measurement with Large Language Models (FinNLP 2025)
+
+- FinBERT still outperforms LLMs (BART, GPT) on PEAD direction classification: 57.6% accuracy vs lower for generative models
+- Encoder-only FinBERT captures financial domain nuance more reliably than decoder models for this task
+- **Key finding**: Adding 3-day early market signal alongside FinBERT text score significantly improves PEAD prediction
+- Practical implication for H163/H174: add a confirming filter — only enter OPG order if early pre-market move aligns with FinBERT sentiment direction

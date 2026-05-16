@@ -3,12 +3,12 @@
   "date": "2026-05-16",
   "source": "paper",
   "source_url": "https://arxiv.org/abs/2507.07107",
-  "title": "H202-variant: bias correction mask adds 0.44 Sharpe-point to ML momentum — test on our universe",
-  "rationale": "arXiv:2507.07107 (2025) found that bias elimination is the first-order performance driver for ML-enhanced cross-sectional momentum — contributing a 0.44 Sharpe-point improvement exceeding any model architecture choice. The paper uses a 'mask' to prevent look-ahead bias in training. Our H198 momentum uses simple signal lookback (6-1m) which should be clean, but we haven't tested ML-enhanced signal selection. A new hypothesis could test whether an XGBoost/LightGBM signal selector (trained on IS data with bias mask) outperforms the simple 6-1m return rank on our 30-stock OOS universe.",
+  "title": "H202-variant: bias correction mask adds 0.44 Sharpe-point to ML momentum \u2014 test on our universe",
+  "rationale": "arXiv:2507.07107 (2025) found that bias elimination is the first-order performance driver for ML-enhanced cross-sectional momentum \u2014 contributing a 0.44 Sharpe-point improvement exceeding any model architecture choice. The paper uses a 'mask' to prevent look-ahead bias in training. Our H198 momentum uses simple signal lookback (6-1m) which should be clean, but we haven't tested ML-enhanced signal selection. A new hypothesis could test whether an XGBoost/LightGBM signal selector (trained on IS data with bias mask) outperforms the simple 6-1m return rank on our 30-stock OOS universe.",
   "risk_level": "medium",
   "type": "new_script",
   "target_file": "/workspace/agent/backtesting/daily/run_h202.py",
-  "content": "# H202 — ML-Enhanced Cross-Sectional Momentum with Bias Correction\n# Based on arXiv:2507.07107: bias elimination mask adds 0.44 Sharpe-point\n# Test: XGBoost signal selector vs simple 6-1m return rank (H198 baseline)\n# Universe: same 30-stock S&P 500 universe as H198\n# Features: 9 Alpha101-derived factors including momentum, volume-intraday corr, open-volume divergence\n# IS: 2013-2020, OOS: 2021-2026\n# Confirm: OOS Sharpe > H198 baseline (1.174), Cumul > 1.3x\n# NOTE: requires proper bias mask — train only on IS data, strict temporal cutoff\n",
+  "content": "# H202 \u2014 ML-Enhanced Cross-Sectional Momentum with Bias Correction\n# Based on arXiv:2507.07107: bias elimination mask adds 0.44 Sharpe-point\n# Test: XGBoost signal selector vs simple 6-1m return rank (H198 baseline)\n# Universe: same 30-stock S&P 500 universe as H198\n# Features: 9 Alpha101-derived factors including momentum, volume-intraday corr, open-volume divergence\n# IS: 2013-2020, OOS: 2021-2026\n# Confirm: OOS Sharpe > H198 baseline (1.174), Cumul > 1.3x\n# NOTE: requires proper bias mask \u2014 train only on IS data, strict temporal cutoff\n",
   "action": "write",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

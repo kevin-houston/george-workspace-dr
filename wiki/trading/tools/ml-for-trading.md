@@ -451,3 +451,15 @@ This is a `high` risk change to existing live pipeline — do not apply without 
 ### Implementation Note
 
 MASFIN agents communicate via structured JSON (thesis: str, evidence: List[str], confidence: 0.0-1.0). A lightweight implementation using GPT-4o-mini (cost-effective for short financial texts) with 2 agents (bull + skeptic) rather than 4 would capture ~80% of the drawdown benefit at lower API cost.
+
+## Multi-agent LLM with fine-grained task decomposition (arXiv:2602.23330, Feb 2026)
+
+**Authors**: Miyazaki, Kawahara, Roberts, Zohren
+
+Key finding: decomposing trading analysis into fine-grained specialist agents (separate agents for fundamental analysis, sentiment, technical analysis, risk management) significantly outperforms coarse-grained multi-agent designs. Critical driver is alignment between agent output format and downstream decision-maker's input expectations.
+
+- Tested on Japanese equities with prices, financials, news, macro data
+- Portfolio construction exploits low correlation with index + cross-agent variance
+- Implication for our pipeline: adding a fine-grained LLM overlay *above* confirmed quant signals (H026, BAB, MOM) rather than replacing them could yield compounding alpha. H202+ territory.
+
+Companion paper arXiv:2412.20138 (TradingAgents) shows ≥23.21% cumulative return, 24.90% annual return, +6.1% vs best baseline on three stocks using Bull/Bear researcher agents + risk management team.
