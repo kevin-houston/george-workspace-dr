@@ -231,3 +231,15 @@ cpi = fred.get_series("CPIAUCSL")
 | News / sentiment | **Finnhub** or NewsAPI | Both have free tiers |
 
 **Migration plan from yfinance**: When yfinance next breaks (likely), switch backtesting data downloads to Tiingo (`tiingo` Python client). Same interface pattern, better reliability, 30yr history covers all H-series IS windows.
+
+---
+
+## Twelve Data
+
+**Repo**: github.com/twelvedata/twelvedata-python (MIT)  
+**Free tier**: 800 calls/day, 8/min — US equities, forex, crypto  
+**Paid**: Grow $79/mo, Pro $149–229/mo (adds WebSocket + real-time EU), Ultra $329+/mo
+
+Covers OHLC time series, 100+ server-side technical indicators, earnings calendars, fundamentals (income/balance/CF statements), insider transactions, institutional holders, IPO calendars. WebSocket only on Pro+.
+
+**vs current stack**: Overlaps with Polygon (prices) and FMP (fundamentals). Marginal at free tier. Most useful potential: cleaner `get_earnings_calendar()` / `get_earnings()` for PEAD event detection as an alternative to yfinance scraping. Noted for future evaluation — no account yet.

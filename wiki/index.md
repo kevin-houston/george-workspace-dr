@@ -108,6 +108,13 @@ When answering a query:
 
 ---
 
+### General Tech
+
+- [zenbu.js](tools/zenbu.md) — JS framework for AI-agent-customizable desktop apps; local source, git-tracked, hot-reload; alpha
+- [Dograh](tools/dograh.md) — self-hostable voice agent platform (open-source Vapi/Retell alternative); drag-and-drop workflows, bring-your-own LLM/TTS/STT, Docker deploy
+
+---
+
 ### Disaster Recovery
 
 - [DR Overview](dr/overview.md) — restore procedure, what survives, what to tell a fresh George
