@@ -1,0 +1,35 @@
+{
+  "hypothesis": "H200",
+  "description": "Graphical Matching Pairs Trading (stock-level)",
+  "source": "arXiv:2403.07998",
+  "is": {
+    "label": "IS  2013-2020",
+    "n": 2015,
+    "sharpe": -0.982,
+    "cagr": -0.072,
+    "cumul": 0.5487,
+    "maxdd": -0.458,
+    "neg_yrs": 8
+  },
+  "oos": {
+    "label": "OOS 2021-2026",
+    "n": 1336,
+    "sharpe": -1.143,
+    "cagr": -0.103,
+    "cumul": 0.5668,
+    "maxdd": -0.473,
+    "neg_yrs": 6
+  },
+  "spy_oos": {
+    "label": "SPY OOS",
+    "n": 1336,
+    "sharpe": 0.881,
+    "cagr": 0.149,
+    "cumul": 2.0444,
+    "maxdd": -0.245,
+    "neg_yrs": 1
+  },
+  "corr_spy_oos": -0.1283,
+  "confirmed": false,
+  "sample_pairs_coint_rate": 0.0
+}

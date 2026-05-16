@@ -1,0 +1,39 @@
+{
+  "hypothesis": "H201",
+  "description": "Turn-of-Month Effect (SPY TOM timing)",
+  "source": "Ariel (1987), 151 Strategies \u00a73.6",
+  "best_window": {
+    "before": 2,
+    "after": 2
+  },
+  "is": {
+    "label": "IS  2003-2017",
+    "n": 2667,
+    "sharpe": 0.147,
+    "cagr": 0.012,
+    "cumul": 1.0968,
+    "maxdd": -0.169,
+    "neg_yrs": 5
+  },
+  "oos": {
+    "label": "OOS (best window)",
+    "n": 2092,
+    "sharpe": 0.74,
+    "cagr": 0.056,
+    "cumul": 1.5594,
+    "maxdd": -0.102,
+    "neg_yrs": 2
+  },
+  "spy_oos": {
+    "label": "SPY OOS",
+    "n": 2092,
+    "sharpe": 0.789,
+    "cagr": 0.152,
+    "cumul": 3.0295,
+    "maxdd": -0.337,
+    "neg_yrs": 2
+  },
+  "corr_spy_oos": 0.3107,
+  "corr_h026_oos": null,
+  "confirmed": true
+}
