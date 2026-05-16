@@ -1,0 +1,114 @@
+{
+  "date": "2026-05-16",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + post-earnings drift + NLP signals",
+    "cross-sectional momentum + factor momentum + ML",
+    "multi-agent LLM trading systems",
+    "GitHub trending quant finance repos"
+  ],
+  "papers_found": [
+    {
+      "arxiv_id": "2602.23330",
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "authors": "Miyazaki, Kawahara, Roberts, Zohren",
+      "date": "2026-02",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": 8,
+      "relevance_notes": "Fine-grained task decomposition significantly improves risk-adjusted returns vs coarse-grained. Alignment between agent output and downstream decision is key driver. Directly suggests ML overlay experiment on our confirmed strategies.",
+      "staged": true,
+      "staged_file": "2_tradingagents_ml_update.json"
+    },
+    {
+      "arxiv_id": "2412.20138",
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "authors": "TauricResearch",
+      "date": "2024-12",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": 7,
+      "relevance_notes": "Bull/Bear researcher agents + risk management team. ≥23.21% cumulative return, +6.1% vs best baseline. Architecture inspiration for multi-agent enhancement of our pipeline.",
+      "staged": false,
+      "staged_notes": "Covered in 2_tradingagents_ml_update.json as companion reference"
+    },
+    {
+      "arxiv_id": null,
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "authors": "FinNLP 2025",
+      "date": "2025",
+      "url": "https://aclanthology.org/2025.finnlp-2.13",
+      "angle": "PEAD + NLP",
+      "relevance_score": 9,
+      "relevance_notes": "FinBERT best for PEAD direction (57.6% accuracy). Adding 3-day early market signal improves prediction. Directly validates H163/H174 FinBERT choice and suggests confirming filter improvement.",
+      "staged": true,
+      "staged_file": "1_pead_llm_upgrade.json"
+    },
+    {
+      "arxiv_id": "2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "authors": "Wu et al.",
+      "date": "2025-09",
+      "angle": "PEAD + NLP",
+      "relevance_score": 6,
+      "relevance_notes": "FinBERT effective for soft information from press releases. LDA adds interpretability. Confirms FinBERT direction, lower priority than main PEAD paper.",
+      "staged": false,
+      "staged_notes": "Lower priority; main finding already captured in staged proposal 1"
+    },
+    {
+      "arxiv_id": "2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+      "date": "2025",
+      "angle": "cross-sectional momentum",
+      "relevance_score": 8,
+      "relevance_notes": "Bias elimination mask adds 0.44 Sharpe-point — first-order driver exceeding model architecture. XGBoost/LightGBM dominate. 9 Alpha101 factors including momentum. Directly actionable on H198 follow-up.",
+      "staged": true,
+      "staged_file": "3_momentum_ml_bias_correction.json"
+    },
+    {
+      "arxiv_id": "2403.07998",
+      "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+      "authors": "Qureshi & Zaman",
+      "date": "2024-03",
+      "angle": "pairs trading + cointegration",
+      "relevance_score": 4,
+      "relevance_notes": "Already tested as H200 — NOT CONFIRMED on our universe. 0/15 pairs cointegrated. Paper's gross Sharpe 1.23 did not replicate on US large-cap stocks.",
+      "staged": false,
+      "staged_notes": "Already tested H200, failed"
+    },
+    {
+      "arxiv_id": null,
+      "title": "Cointegration-based pairs trading: identifying and exploiting similar ETFs",
+      "date": "2025",
+      "url": "https://ideas.repec.org/a/pal/assmgt/v26y2025i5d10.1057_s41260-025-00416-0.html",
+      "angle": "pairs trading + ETFs",
+      "relevance_score": 3,
+      "relevance_notes": "ETF pairs with cointegration — our entire H152-H160 series tested this and found the same failure mode. Pairs family exhausted. Low value.",
+      "staged": false,
+      "staged_notes": "Consistent with our failed H152-H160 ETF pairs"
+    },
+    {
+      "arxiv_id": null,
+      "title": "skfolio: Portfolio Optimization in Python (arXiv:2507.04176)",
+      "date": "2025",
+      "angle": "GitHub tools",
+      "relevance_score": 7,
+      "relevance_notes": "skfolio v0.20.1 — sklearn-compatible portfolio optimization with built-in walk-forward CV. Directly applicable to H203 strategy blend. Covered in new wiki page.",
+      "staged": true,
+      "staged_file": "4_portfolio_optimization_strategy_blend.json"
+    },
+    {
+      "arxiv_id": "2604.03888",
+      "title": "PolySwarm: A Multi-Agent LLM Framework for Prediction Market Trading",
+      "date": "2026-04",
+      "angle": "multi-agent LLM prediction markets",
+      "relevance_score": 6,
+      "relevance_notes": "50-agent swarm for binary prediction markets using Bayesian aggregation + quarter-Kelly sizing. Directly relevant to Kalshi/Polymarket work. Not staged today — prediction markets lower priority than equity strategies currently.",
+      "staged": false,
+      "staged_notes": "Relevant to prediction-markets/algorithmic-strategies.md; deferred to next prediction market wiki session"
+    }
+  ],
+  "papers_staged": 4,
+  "papers_skipped": 5,
+  "wiki_expanded": "tools/portfolio-optimization.md — PyPortfolioOpt v1.6.0, Riskfolio-Lib v7.2.1, skfolio v0.20.1 with working code examples and strategy-blend patterns",
+  "research_log_written": "research-log/2026-05-15.md",
+  "notes": "Pairs family fully exhausted (ETF + stock-level both failed cointegration). Best near-term opportunities: (1) PEAD early-signal confirming filter, (2) ML momentum with bias mask, (3) multi-strategy risk-parity blend. PolySwarm (arXiv:2604.03888) is the best find for prediction markets — queue for Kalshi session."
+}

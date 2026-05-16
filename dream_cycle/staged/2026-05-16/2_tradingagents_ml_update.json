@@ -1,0 +1,14 @@
+{
+  "id": "2026-05-16-tradingagents-ml-update",
+  "date": "2026-05-16",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.23330",
+  "title": "Multi-agent LLM: fine-grained task decomposition significantly improves risk-adjusted returns",
+  "rationale": "arXiv:2602.23330 (Feb 2026) found that decomposing investment analysis into fine-grained agent tasks outperforms coarse-grained designs. Key insight: alignment between analytical output and downstream decision preferences is the critical driver. Directly relevant to ml-for-trading.md and a potential H-series hypothesis using multi-agent LLM overlay on top of our existing confirmed strategies (H026 + BAB + MOM) for signal enhancement rather than standalone trading.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/tools/ml-for-trading.md",
+  "content": "\n## Multi-agent LLM with fine-grained task decomposition (arXiv:2602.23330, Feb 2026)\n\n**Authors**: Miyazaki, Kawahara, Roberts, Zohren\n\nKey finding: decomposing trading analysis into fine-grained specialist agents (separate agents for fundamental analysis, sentiment, technical analysis, risk management) significantly outperforms coarse-grained multi-agent designs. Critical driver is alignment between agent output format and downstream decision-maker's input expectations.\n\n- Tested on Japanese equities with prices, financials, news, macro data\n- Portfolio construction exploits low correlation with index + cross-agent variance\n- Implication for our pipeline: adding a fine-grained LLM overlay *above* confirmed quant signals (H026, BAB, MOM) rather than replacing them could yield compounding alpha. H202+ territory.\n\nCompanion paper arXiv:2412.20138 (TradingAgents) shows ≥23.21% cumulative return, 24.90% annual return, +6.1% vs best baseline on three stocks using Bull/Bear researcher agents + risk management team.\n",
+  "action": "append",
+  "apply_status": "pending"
+}
