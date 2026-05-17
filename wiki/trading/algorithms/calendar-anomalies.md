@@ -231,6 +231,19 @@ def fomc_mask(daily_index: pd.DatetimeIndex, fomc_dates, window: int = 1) -> pd.
 
 ---
 
+## Academic Debate on TOM Persistence
+
+**Contrarian finding (Finance Research Letters, 2025)**: "The Disappearing Turn-of-Month Effect" documents that the TOM premium disappears entirely after 2001 in US markets, arguing the Ogden (1990) liquidity mechanism no longer holds.
+
+**Our position**: H201 confirms TOM OOS 2018–2026 (Sharpe 0.740) with a strict IS/OOS split. The divergence may reflect:
+- Window sensitivity: we use last 2 + first 2 days; the FRL paper may use a different definition
+- Universe: large-cap ETF (SPY) vs. broad equity universe
+- Mechanism shift: institutional ETF flows and index rebalancing have grown since Ogden's era, possibly replacing the original payroll-deposit mechanism with a new one
+
+**Practical implication**: TOM appears real in SPY 2018–2026 but the premium is window-sensitive and narrower than historical estimates. Use the confirmed 4-day window (H201) rather than expanding it.
+
+---
+
 ## Composite Calendar Strategy
 
 ### Concept

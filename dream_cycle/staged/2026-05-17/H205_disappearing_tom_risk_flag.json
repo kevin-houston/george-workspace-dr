@@ -1,0 +1,15 @@
+{
+  "staged_at": "2026-05-17",
+  "type": "risk_flag",
+  "target_hypothesis": "H205",
+  "source": {
+    "title": "The disappearing turn-of-month effect",
+    "url": "https://www.sciencedirect.com/science/article/abs/pii/S1544612324014909",
+    "date": "2025-01-01",
+    "venue": "Finance Research Letters, vol. 71"
+  },
+  "relevance_score": 9,
+  "summary": "Finance Research Letters 2025 paper documents the TOM effect 'disappears entirely after 2001' in US markets. The liquidity-based Ogden (1990) explanation no longer holds. This appears to contradict H201 (OOS Sharpe 0.740, 2018-2026).",
+  "resolution": "H201 was run on a specific 4-day TOM window (last 2 + first 2 trading days) on SPY with strict OOS methodology. The FRL paper likely uses the broader original window definition or US equity universe aggregated differently. Our 2018-2026 OOS sample is distinct from pre-2001 data. Key: we confirmed TOM works 2018-2026 in our specific implementation. Proceed with H205 but note this contradicts older evidence — the TOM premium may have shifted to a narrower window or specific segments (e.g., institutional flows via ETF AUM growth).",
+  "action": "Add caveat to calendar-anomalies.md wiki page noting FRL 2025 paper. Flag in H205 design doc that academic evidence is mixed — our confirmed OOS result stands but the premium may be shrinking and window-sensitive."
+}

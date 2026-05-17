@@ -1,0 +1,125 @@
+{
+  "scan_date": "2026-05-17",
+  "session": "nightly dream cycle phase 2",
+  "angles_searched": [
+    "pairs trading + cointegration + LLM (arXiv)",
+    "PEAD + NLP + earnings momentum (arXiv)",
+    "cross-sectional momentum + ML + factor models (arXiv)",
+    "multi-agent LLM trading framework (arXiv/GitHub)",
+    "BAB + calendar timing + low volatility (arXiv)",
+    "GitHub trending quant finance repos 2025-2026"
+  ],
+  "papers_found": [
+    {
+      "id": "arxiv:2605.05580",
+      "title": "AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading",
+      "date": "2026-05-08",
+      "venue": "arXiv cs.AI",
+      "relevance": 8,
+      "staged": true,
+      "staged_file": "H209_alphacrafter_multiagent.json",
+      "notes": "Just-published. Multi-agent LLM for autonomous cross-sectional quant. Seeds H209 candidate."
+    },
+    {
+      "id": "frl:10.1016/j.frl.2024.106480",
+      "title": "The disappearing turn-of-month effect",
+      "date": "2025-01-01",
+      "venue": "Finance Research Letters, vol. 71",
+      "relevance": 9,
+      "staged": true,
+      "staged_file": "H205_disappearing_tom_risk_flag.json",
+      "notes": "Claims TOM disappears entirely post-2001 in US. Contradicts our H201 OOS result. Important risk flag for H205."
+    },
+    {
+      "id": "quantbuffet:tom-futures-2025",
+      "title": "Turn of the Month Effect in Futures Momentum Strategy",
+      "date": "2025-01-01",
+      "venue": "QuantBuffet",
+      "relevance": 9,
+      "staged": true,
+      "staged_file": "H205_tom_futures_momentum_support.json",
+      "notes": "TOM overlay on 52-futures momentum strategy. 50%+ of momentum returns in 3-day TOM window. Direct H205 precedent."
+    },
+    {
+      "id": "arxiv:2603.21330",
+      "title": "FinRL-X: An AI-Native Modular Infrastructure for Quantitative Trading",
+      "date": "2026-03-22",
+      "venue": "arXiv q-fin.TR",
+      "relevance": 7,
+      "staged": true,
+      "staged_file": "H204_finrlx_infrastructure.json",
+      "notes": "FinRL successor, March 2026. Better foundation for H204 than building from scratch."
+    },
+    {
+      "id": "arxiv:2409.00416",
+      "title": "Betting Against (Bad) Beta",
+      "date": "2024-08-31",
+      "venue": "Quantitative Finance, 2025",
+      "relevance": 8,
+      "staged": true,
+      "staged_file": "H205_bab_bad_beta_refinement.json",
+      "notes": "Decomposes BAB into good/bad beta. Seeds H205-B variant filtering to good-beta stocks only."
+    },
+    {
+      "id": "arxiv:2508.11152",
+      "title": "AlphaAgents: Large Language Model based Multi-Agents for Equity Portfolio Constructions",
+      "date": "2025-08-15",
+      "venue": "arXiv",
+      "relevance": 7,
+      "staged": false,
+      "notes": "LLM multi-agent for equity portfolio. Related to AlphaCrafter but less actionable; MASFIN already in wiki. Review if H209 proceeds."
+    },
+    {
+      "id": "arxiv:2512.16251",
+      "title": "Interpretable Deep Learning for Stock Returns: Consensus-Bottleneck Asset Pricing Model",
+      "date": "2025-12-20",
+      "venue": "arXiv (updated ~2026-04-27)",
+      "relevance": 6,
+      "staged": false,
+      "notes": "Deep learning for cross-sectional return prediction with interpretable latent factors. Relevant to H202-XL but not actionable until H202-XL is queued."
+    },
+    {
+      "id": "arxiv:2508.14656",
+      "title": "Deep Learning for Short-Term Equity Trend Forecasting: Behavior-Driven Multi-Factor Approach",
+      "date": "2025-08-20",
+      "venue": "arXiv",
+      "relevance": 6,
+      "staged": false,
+      "notes": "MLP-based long-short portfolio outperforms simple rank. Relevant to H202-XL feature engineering."
+    },
+    {
+      "id": "arxiv:2412.20138",
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "date": "2025-06-03",
+      "venue": "arXiv (GitHub v0.2.4 released 2026-04)",
+      "relevance": 5,
+      "staged": false,
+      "notes": "Reference multi-agent LLM framework. v0.2.4 adds LangGraph checkpoint resume, structured outputs. Already tracked in wiki."
+    },
+    {
+      "id": "arxiv:2508.02366",
+      "title": "Language Model Guided Reinforcement Learning in Quantitative Trading",
+      "date": "2025-08-04",
+      "venue": "arXiv (FLLM 2025)",
+      "relevance": 6,
+      "staged": false,
+      "notes": "LLM provides strategic guidance to RL agent. Hybrid LLM+RL approach could inform H204 design after baseline PPO confirmed."
+    }
+  ],
+  "github_repos_noted": [
+    {
+      "repo": "AI4Finance-Foundation/FinRL-Trading",
+      "stars": "N/A",
+      "notes": "FinRL-X implementation. Recommended for H204. Production-grade RL trading infra."
+    },
+    {
+      "repo": "TauricResearch/TradingAgents",
+      "stars": "high",
+      "notes": "v0.2.4 released April 2026. LangGraph + structured outputs. Reference multi-agent trading."
+    }
+  ],
+  "staged_proposals": 5,
+  "new_hypothesis_candidates": ["H209 (AlphaCrafter multi-agent LLM)"],
+  "hypothesis_refinements": ["H205 (futures momentum TOM support)", "H205-B (bad-beta filter)", "H204 (FinRL-X infrastructure)"],
+  "risk_flags": ["H205 (disappearing TOM effect — FRL 2025 contradicts older TOM evidence; H201 OOS 2018-2026 stands but note academic debate)"]
+}

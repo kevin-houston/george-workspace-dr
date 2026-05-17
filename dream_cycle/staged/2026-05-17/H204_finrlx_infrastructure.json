@@ -1,0 +1,16 @@
+{
+  "staged_at": "2026-05-17",
+  "type": "hypothesis_support",
+  "target_hypothesis": "H204",
+  "source": {
+    "title": "FinRL-X: An AI-Native Modular Infrastructure for Quantitative Trading",
+    "url": "https://arxiv.org/abs/2603.21330",
+    "arxiv_id": "2603.21330",
+    "github": "https://github.com/AI4Finance-Foundation/FinRL-Trading",
+    "date": "2026-03-22",
+    "venue": "arXiv q-fin.TR"
+  },
+  "relevance_score": 7,
+  "summary": "FinRL-X (March 2026) is the successor to FinRL — fully modernized for LLM + agentic AI era. Supports ML-based stock selection, professional backtesting, and live brokerage execution. More modular than original FinRL; explicitly designed to be 'deployment-aware'. Could be a better foundation for H204 than the original FinRL/stable-baselines3 path.",
+  "actionable": "Before implementing H204 from scratch with stable-baselines3, check FinRL-X first. It may provide a pre-built gym environment for US equity PPO that's better calibrated than writing our own. The AI4Finance-Foundation/FinRL-Trading GitHub repo has the implementation. Compare to our planned H204 approach: PPO on SPY daily returns, IS 2003-2020, OOS 2021-2026."
+}

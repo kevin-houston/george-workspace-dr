@@ -1,0 +1,22 @@
+{
+  "staged_at": "2026-05-17",
+  "type": "new_hypothesis_candidate",
+  "target_hypothesis": "H209",
+  "source": {
+    "title": "AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading",
+    "url": "https://arxiv.org/abs/2605.05580",
+    "arxiv_id": "2605.05580",
+    "date": "2026-05-08",
+    "venue": "arXiv cs.AI"
+  },
+  "relevance_score": 8,
+  "summary": "Just-published (May 2026) multi-agent LLM framework for autonomous cross-sectional quantitative trading. Formalizes the environment, defines agent policies, and presents an optimization objective for end-to-end alpha mining and portfolio construction. Potentially automates alpha factor discovery similar to what we do manually (H198, H202).",
+  "hypothesis_candidate": {
+    "id": "H209",
+    "title": "AlphaCrafter multi-agent LLM for cross-sectional stock selection",
+    "description": "Replicate or adapt AlphaCrafter framework on our 30-stock (or 200-stock for H202-XL) universe. Use the multi-agent orchestration for automated factor discovery and portfolio construction. Compare OOS Sharpe to H198 (6-1m momentum, 1.174) and H202-C (XGBoost, 1.278).",
+    "confirm_threshold": "OOS Sharpe > 1.4 (above H202-C baseline)",
+    "prerequisites": ["H202-XL complete", "stable-baselines3 or similar agent framework installed"],
+    "priority": "low — interesting but complex; do H205/H202-XL first"
+  }
+}

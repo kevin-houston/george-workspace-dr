@@ -1,0 +1,21 @@
+{
+  "staged_at": "2026-05-17",
+  "type": "hypothesis_refinement",
+  "target_hypothesis": "H205",
+  "source": {
+    "title": "Betting Against (Bad) Beta",
+    "url": "https://arxiv.org/abs/2409.00416",
+    "arxiv_id": "2409.00416",
+    "published_journal": "Quantitative Finance, 2025",
+    "date": "2024-08-31"
+  },
+  "relevance_score": 8,
+  "summary": "Decomposes BAB into 'good beta' (compensation for systematic risk) and 'bad beta' (compensation for idiosyncratic risk). The full BAB factor profits come primarily from betting against 'bad beta' stocks. Sorting on the bad-beta component yields higher and more stable alphas than raw beta sort.",
+  "actionable": "H205 currently uses H192-D BAB positions (raw beta-sorted low/high portfolios). Consider: in H205-B variant, filter H192-D low-beta longs to exclude 'bad beta' stocks (high idiosyncratic vol relative to market vol). This could improve H205's OOS Sharpe by holding only the most durable low-beta names. Implement as H205-B after baseline H205 is confirmed.",
+  "new_hypothesis_candidate": {
+    "id": "H205-B",
+    "title": "TOM overlay on Bad-Beta-filtered BAB",
+    "description": "H205 variant using only 'good beta' low-vol stocks (exclude high-IVOL names from the long BAB leg). Hypothesis: removing bad-beta noise improves TOM-BAB Sharpe.",
+    "priority": "deferred — run H205 baseline first"
+  }
+}

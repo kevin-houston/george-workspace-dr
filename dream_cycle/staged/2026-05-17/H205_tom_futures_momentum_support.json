@@ -1,0 +1,15 @@
+{
+  "staged_at": "2026-05-17",
+  "type": "hypothesis_support",
+  "target_hypothesis": "H205",
+  "source": {
+    "title": "Turn of the Month Effect in Futures Momentum Strategy",
+    "url": "https://quantbuffet.com/en/2025/01/01/turn-of-the-month-effect-in-futures-momentum-strategy/",
+    "date": "2025-01-01",
+    "venue": "QuantBuffet"
+  },
+  "relevance_score": 9,
+  "summary": "Strategy using 52 liquid futures with 100-day SMA momentum signal, positions held only during the 3-day TOM window. Over half of total momentum returns occur in the TOM window, delivering higher risk-adjusted performance. Direct precedent for H205 design (TOM overlay on BAB stock positions).",
+  "actionable": "Use as design validation for H205. The futures result suggests TOM concentration of alpha is not just a data artifact — momentum/low-vol alpha concentrates around month-turn across asset classes. Consider extending H205 to test 3-day vs 4-day TOM window (we currently use last 2 + first 2).",
+  "new_hypothesis_candidate": null
+}
