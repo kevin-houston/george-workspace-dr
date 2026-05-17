@@ -10,6 +10,8 @@ Calendar anomalies are persistent return patterns tied to the calendar — day o
 
 **Our confirmed result**: H201 — Turn-of-Month effect CONFIRMED on SPY 2018–2026, OOS Sharpe 0.740, MaxDD -9.3%. The TOM window (last 2 + first 2 trading days) captures ~19% of trading days but delivers most of SPY's returns with far lower drawdown.
 
+**Related pages**: [Low-Volatility Anomaly](low-volatility.md) (H205 = TOM overlay on BAB) | [Momentum Strategies](momentum-strategies.md) (H198/H203 momentum tested with TOM) | [Backtesting Design Principles](../backtesting/design-principles.md) | [Hypothesis Log](../backtesting/hypothesis-log.md) | [Portfolio Optimization](../tools/portfolio-optimization.md) (blending calendar strategies)
+
 ---
 
 ## Turn-of-Month (TOM) Effect ← CONFIRMED (H201)

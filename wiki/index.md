@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-11
+updated: 2026-05-17
 sources_indexed: 1
-pages: 60
+pages: 75
 ---
 
 # Wiki Index
@@ -25,15 +25,17 @@ When answering a query:
 
 - [Project Index](trading/index.md) — phases, decisions, API access status
 **Algorithms / Strategies**
-- [Momentum Strategies](trading/algorithms/momentum-strategies.md) — H-series findings H001–H165; ETF rotation production strategy (H026, 382×, Sharpe 3.007); TSMOM, cross-sectional, dual momentum
+- [Momentum Strategies](trading/algorithms/momentum-strategies.md) — H001–H202 coverage; H026/H149 ETF rotation production (382×, Sharpe 3.007); H198 CONFIRMED 6-1m cross-sectional (OOS Sharpe 1.174); H199 NOT CONFIRMED; H202 XGBoost ML (+0.104 Sharpe, NOT CONFIRMED on 30-stock universe)
 - [Pairs Trading / Stat Arb](trading/algorithms/pairs-trading.md) — ETF pairs (H152–H160) ALL NOT CONFIRMED; family EXHAUSTED at daily frequency; cointegration breaks OOS for all tested pairs
 - [Event-Driven Strategies](trading/algorithms/event-driven.md) — PEAD: H163 CONFIRMED (FinBERT NLP on 8-K press releases, 80.8% OOS win rate), H174 CONFIRMED (dual filter deployed), H161/H162 PARTIAL; H170 0DTE iron condor partial sim
 - [Short-Term Reversal](trading/algorithms/short-term-reversal.md) — industry-adjusted reversal REV^IN; 0.53%/month globally; SSRN:6630998; H181 CONFIRMED (OOS Sharpe 1.138)
-- [Low-Volatility Anomaly](trading/algorithms/low-volatility.md) — Blitz & Vliet low-vol decile, Frazzini-Pedersen BAB (Sharpe 0.78 1926–2012), min-variance; H191–H193 queued; sector-neutral variant most crowding-resistant
+- [Low-Volatility Anomaly](trading/algorithms/low-volatility.md) — H190–H196 completed; BAB H192-D sector-neutral CONFIRMED (OOS Sharpe 1.367); Low-Vol H191-C hybrid CONFIRMED (Sharpe 1.110); STORM H195 CONFIRMED (0.963); scale test H196 NOT CONFIRMED; research closed 2026-05-13; H205 TOM-BAB overlay queued
 - [Options Income Strategies](trading/algorithms/options-income-strategies.md) — iron condor, CSP/wheel, covered calls, VRP harvesting; win rates, returns, LEAN implementation notes
 - [Position Sizing & Portfolio Construction](trading/algorithms/position-sizing.md) — Kelly criterion, vol-targeting, correlation-aware sizing
 - [BSM as Flat Limit of Information Geometry (Dean 2026)](trading/algorithms/bsm-information-geometry.md) — SSRN 6630259; smile = manifold curvature; zero-free-parameter LEAPS prediction within 19%; SABR β=1 from Čencov's theorem; bifurcation at |ρ|=√(2/3)≈0.816
 - [151 Trading Strategies (Kakushadze & Serur)](trading/strategies/151-trading-strategies.md) — comprehensive strategy catalog; 151+ strategies with formulas; Tier 1/2/3 implementation priority
+- [Calendar Anomalies](trading/algorithms/calendar-anomalies.md) — TOM H201 CONFIRMED (OOS Sharpe 0.740); Halloween/FOMC/January/Weekend effects; H205–H208 queued; composite calendar strategy; academic debate on TOM persistence ← new 2026-05-17
+- [Deep RL for Trading](trading/algorithms/deep-rl-trading.md) — FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued (PPO vs H198 momentum baseline) ← new 2026-05-16
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -44,6 +46,7 @@ When answering a query:
 - [Machine Learning for Trading](trading/tools/ml-for-trading.md) — LightGBM/XGBoost cross-sectional prediction, ModernFinBERT (H176 upgrade), Alphalens-Reloaded IC/ICIR, TA-Lib, skfolio CPCV, mlfinlab license warning
 - [OpenAlgo](trading/tools/openalgo.md) — open-source algo trading platform; India-only now, US broker support on 2026 roadmap
 - [LiveKit](trading/tools/livekit.md) — open-source real-time voice/video/data framework for AI agents; WebRTC media server + agent SDK + cloud hosting; relevant for voice trading interface and agent-to-agent comms
+- [Portfolio Optimization Libraries](trading/tools/portfolio-optimization.md) — PyPortfolioOpt v1.6.0, Riskfolio-Lib v7.2.1, skfolio v0.20.1; HRP, risk parity, NCO, walk-forward CV; strategy blending code for H026+BAB+MOM+TOM ← new 2026-05-16
 
 **Data Sources**
 - [Polygon.io](trading/data-sources/polygon.md) — market data (free: EOD only; paid: options, ticks, Greeks)
@@ -57,7 +60,7 @@ When answering a query:
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado
 - [Walk-Forward & CPCV](trading/backtesting/walk-forward-cpcv.md) — walk-forward variants, CPCV algorithm, purging/embargoing, DSR formulas; Python libs: timeseriescv/skfolio
 - [Transaction Cost Modeling](trading/backtesting/transaction-costs.md) — spread/impact/borrow cost models, square-root market impact, vectorbt/backtrader defaults, per-strategy calibration table
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H187; H026/H149 ETF rotation production (Sharpe 3.007); H163/H174 PEAD-NLP CONFIRMED (OOS WR 80.8%); H181 CONFIRMED; H184 NOT CONFIRMED; H185/H186/H187 QUEUED
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H209 (frontier: H205–H209); H026 ETF rotation (Sharpe 3.007); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367); H198 6-1m momentum (Sharpe 1.174); H201 TOM (Sharpe 0.740); H203 NOT CONFIRMED; H205 QUEUED (TOM-BAB overlay); H209 candidate (AlphaCrafter)
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
@@ -90,6 +93,11 @@ When answering a query:
 - [Research Log 2026-05-09](trading/research-log/2026-05-09.md) — H184 NOT CONFIRMED composite FinBERT; transaction cost modeling wiki; dream cycle scan
 - [Research Log 2026-05-10](trading/research-log/2026-05-10.md) — ML-for-trading wiki; dream cycle build phase; H184 NOT CONFIRMED summary
 - [Research Log 2026-05-11](trading/research-log/2026-05-11.md) — low-volatility anomaly wiki (Blitz & Vliet, BAB, min-var); dream cycle: PEAD.txt/PolySwarm/Spectre staged
+- [Research Log 2026-05-12](trading/research-log/2026-05-12.md) — H192 CONFIRMED (BAB: sector-neutral H192-D Sharpe 1.367); Alpaca.md full rewrite; H193 queued
+- [Research Log 2026-05-13](trading/research-log/2026-05-13.md) — H193 NOT CONFIRMED (BAB+reversal blend); H196 NOT CONFIRMED (STORM scale); low-volatility.md research closed
+- [Research Log 2026-05-14](trading/research-log/2026-05-14.md) — H198 CONFIRMED (6-1m stock momentum, OOS Sharpe 1.174); H199 NOT CONFIRMED (sector-neutral hurts momentum)
+- [Research Log 2026-05-15](trading/research-log/2026-05-15.md) — H200 NOT CONFIRMED (graphical pairs, 0/15 cointegrated); H201 CONFIRMED (TOM, OOS Sharpe 0.740); pairs family EXHAUSTED; H202 queued
+- [Research Log 2026-05-17](trading/research-log/2026-05-17.md) — H202 NOT CONFIRMED (XGBoost +0.104 Sharpe, below threshold); H203 NOT CONFIRMED (HRP over-weights TOM 74%); H205 queued; calendar-anomalies wiki new
 
 ### Impact Investing
 

@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-10
+updated: 2026-05-17
 status: active
 ---
 
@@ -26,6 +26,15 @@ status: active
 - Script: `backtesting/paper_trading/h112_monthly.py`
 - Started: 2026-04-28 (H122 triple-strategy); H149 single-strategy active from 2026-05-01
 - **Path to real money:** 4–8 weeks paper validation, then flip `paper=False` in Alpaca config
+
+### [PEAD-NLP Event-Driven](pead-nlp-alpaca.md) — ACTIVE
+**Production: H163/H174 FinBERT earnings gap strategy.** Event-driven; fires on earnings releases that meet both filters.
+- Signal: Buy stocks gapping ≥ 3% at earnings open with FinBERT score ≥ 0.18 AND sentiment surprise ≥ 0.02
+- Hold period: 20 trading days from entry open; exit at close on day 20
+- OOS: n=22 events, WR 81.8%, MeanRet 6.89% (dual-filter variant)
+- Script: `backtesting/paper_trading/pead_pipeline/`
+- Started: 2026-05-06
+- **Path to real money:** 10 live trades minimum; within 1.5σ of OOS WR (81.8%)
 
 ### Iron Condor (Options) — INACTIVE
 BSM pricing via Massive.com. Last open position: IC-2026-04-26-001 (SPY Jun 12, $645p/$670p/$775c/$800c, $533 credit). Monitoring only.

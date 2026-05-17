@@ -186,3 +186,25 @@ Files: backtesting/daily/run_h188.py, backtesting/daily/run_h189.py. Hypothesis 
 Pages updated: 1. Pages created: 0. Key sources: Jegadeesh (1990), Lehmann (1990), Nagel (2012), Stosik & Zaremba (2026), Quantpedia benchmark.
 
 Expanded `wiki/trading/algorithms/short-term-reversal.md` from 132 → 230 lines. Added: full literature foundation (seminal papers table, two-theory taxonomy), Nagel (2012) VIX-conditional Sharpe finding, return decay profile (half-life 2.5 days, month-1 to month-2 drop), 52-week-high / turnover interaction regime table, transaction cost tiering by market cap (large-cap: +30–50 bps/week net), Quantpedia benchmark (Sharpe 1.09, CAGR 16.25%, MaxDD −52.94%), extended Python code section (VIX-adjusted sizing, regime classifier), crisis behavior / execution timing notes, and full key references list with links.
+
+## [2026-05-17] lint | Health check
+Issues found: 15. Auto-fixed: 13. Needs review: 2.
+
+**Auto-fixed:**
+- wiki/index.md: Added calendar-anomalies.md, deep-rl-trading.md to Algorithms section
+- wiki/index.md: Added portfolio-optimization.md to Tools section
+- wiki/index.md: Added research log entries 2026-05-12 through 05-17
+- wiki/index.md: Updated Hypothesis Log summary (H001-H187 stale → H001-H209 current)
+- wiki/index.md: Updated Low-Volatility summary (H191-H193 queued → all completed, research closed)
+- wiki/index.md: Updated Momentum Strategies summary (H001-H165 → H001-H202)
+- wiki/index.md: Updated frontmatter (date 05-11 → 05-17, pages 60 → 75)
+- trading/index.md: Added 2026-05-12 research log (orphan page resolved)
+- calendar-anomalies.md: Added Related pages cross-references
+- deep-rl-trading.md: Added Related pages cross-references to ml-for-trading.md
+- position-sizing.md: Added Related pages link to portfolio-optimization.md
+- paper-trading/index.md: Added PEAD-NLP as active strategy (missing since 2026-05-06 launch)
+- paper-trading/index.md: Updated frontmatter date
+
+**Needs review (flagged for Kevin):**
+- No 2026-05-16 research log exists — was this day skipped or was it a gap?
+- Source gaps: no wiki coverage of macro/regime analysis, after-tax return modeling (noted in decisions log as Kevin requirement)

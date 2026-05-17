@@ -9,6 +9,8 @@ RL frames trading as a Markov Decision Process: the agent observes market state,
 
 **H204 queued**: test PPO ensemble vs H198 6-1m momentum baseline on our 30-stock universe.
 
+**Related pages**: [Machine Learning for Trading](../tools/ml-for-trading.md) (supervised ML complement; XGBoost H202) | [Momentum Strategies](momentum-strategies.md) (H198 baseline this competes against) | [Hypothesis Log](../backtesting/hypothesis-log.md) | [Backtesting Design Principles](../backtesting/design-principles.md) (OOS safeguards critical for RL)
+
 ---
 
 ## Why RL for trading (and the hard problems)

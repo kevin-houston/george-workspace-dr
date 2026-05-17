@@ -7,6 +7,8 @@ type: guide
 
 How to size positions and blend strategies. Directly applicable to our H018 blend (H020 + H009).
 
+**Related pages**: [Portfolio Optimization Libraries](../tools/portfolio-optimization.md) (PyPortfolioOpt/Riskfolio/skfolio implementation tools) | [Backtesting Design Principles](../backtesting/design-principles.md) | [Walk-Forward & CPCV](../backtesting/walk-forward-cpcv.md)
+
 ---
 
 ## Kelly Criterion

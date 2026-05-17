@@ -63,6 +63,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [2026-05-15](research-log/2026-05-15.md) — H200 NOT CONFIRMED (graphical pairs, 0/15 cointegrated); H201 CONFIRMED (TOM, OOS Sharpe 0.740); pairs family EXHAUSTED; H202 queued
   - [2026-05-14](research-log/2026-05-14.md) — H198 CONFIRMED (6-1m stock momentum, OOS Sharpe 1.174); H199 NOT CONFIRMED (sector-neutral hurts momentum)
   - [2026-05-13](research-log/2026-05-13.md) — H193 NOT CONFIRMED (BAB+reversal blend); H196 NOT CONFIRMED (STORM scale); wiki: low-volatility.md closed
+  - [2026-05-12](research-log/2026-05-12.md) — H192 CONFIRMED (BAB: sector-neutral H192-D OOS Sharpe 1.367); Alpaca.md full rewrite; H193 queued
 
 ## Key decisions log
 
