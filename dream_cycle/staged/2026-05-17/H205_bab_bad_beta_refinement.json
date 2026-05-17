@@ -16,6 +16,9 @@
     "id": "H205-B",
     "title": "TOM overlay on Bad-Beta-filtered BAB",
     "description": "H205 variant using only 'good beta' low-vol stocks (exclude high-IVOL names from the long BAB leg). Hypothesis: removing bad-beta noise improves TOM-BAB Sharpe.",
-    "priority": "deferred — run H205 baseline first"
-  }
+    "priority": "deferred \u2014 run H205 baseline first"
+  },
+  "apply_status": "applied",
+  "applied_at": "2026-05-17",
+  "applied_note": "Added to hypothesis-log.md frontmatter (h209_status, h205b_status, h205_ext, h204_infrastructure) during dream cycle BUILD phase"
 }

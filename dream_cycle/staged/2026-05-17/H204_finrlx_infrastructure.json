@@ -11,6 +11,9 @@
     "venue": "arXiv q-fin.TR"
   },
   "relevance_score": 7,
-  "summary": "FinRL-X (March 2026) is the successor to FinRL — fully modernized for LLM + agentic AI era. Supports ML-based stock selection, professional backtesting, and live brokerage execution. More modular than original FinRL; explicitly designed to be 'deployment-aware'. Could be a better foundation for H204 than the original FinRL/stable-baselines3 path.",
-  "actionable": "Before implementing H204 from scratch with stable-baselines3, check FinRL-X first. It may provide a pre-built gym environment for US equity PPO that's better calibrated than writing our own. The AI4Finance-Foundation/FinRL-Trading GitHub repo has the implementation. Compare to our planned H204 approach: PPO on SPY daily returns, IS 2003-2020, OOS 2021-2026."
+  "summary": "FinRL-X (March 2026) is the successor to FinRL \u2014 fully modernized for LLM + agentic AI era. Supports ML-based stock selection, professional backtesting, and live brokerage execution. More modular than original FinRL; explicitly designed to be 'deployment-aware'. Could be a better foundation for H204 than the original FinRL/stable-baselines3 path.",
+  "actionable": "Before implementing H204 from scratch with stable-baselines3, check FinRL-X first. It may provide a pre-built gym environment for US equity PPO that's better calibrated than writing our own. The AI4Finance-Foundation/FinRL-Trading GitHub repo has the implementation. Compare to our planned H204 approach: PPO on SPY daily returns, IS 2003-2020, OOS 2021-2026.",
+  "apply_status": "applied",
+  "applied_at": "2026-05-17",
+  "applied_note": "Added to hypothesis-log.md frontmatter (h209_status, h205b_status, h205_ext, h204_infrastructure) during dream cycle BUILD phase"
 }

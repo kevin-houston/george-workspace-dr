@@ -16,7 +16,13 @@
     "title": "AlphaCrafter multi-agent LLM for cross-sectional stock selection",
     "description": "Replicate or adapt AlphaCrafter framework on our 30-stock (or 200-stock for H202-XL) universe. Use the multi-agent orchestration for automated factor discovery and portfolio construction. Compare OOS Sharpe to H198 (6-1m momentum, 1.174) and H202-C (XGBoost, 1.278).",
     "confirm_threshold": "OOS Sharpe > 1.4 (above H202-C baseline)",
-    "prerequisites": ["H202-XL complete", "stable-baselines3 or similar agent framework installed"],
-    "priority": "low — interesting but complex; do H205/H202-XL first"
-  }
+    "prerequisites": [
+      "H202-XL complete",
+      "stable-baselines3 or similar agent framework installed"
+    ],
+    "priority": "low \u2014 interesting but complex; do H205/H202-XL first"
+  },
+  "apply_status": "applied",
+  "applied_at": "2026-05-17",
+  "applied_note": "Added to hypothesis-log.md frontmatter (h209_status, h205b_status, h205_ext, h204_infrastructure) during dream cycle BUILD phase"
 }

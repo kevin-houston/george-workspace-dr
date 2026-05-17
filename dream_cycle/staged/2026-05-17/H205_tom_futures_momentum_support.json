@@ -10,6 +10,9 @@
   },
   "relevance_score": 9,
   "summary": "Strategy using 52 liquid futures with 100-day SMA momentum signal, positions held only during the 3-day TOM window. Over half of total momentum returns occur in the TOM window, delivering higher risk-adjusted performance. Direct precedent for H205 design (TOM overlay on BAB stock positions).",
-  "actionable": "Use as design validation for H205. The futures result suggests TOM concentration of alpha is not just a data artifact — momentum/low-vol alpha concentrates around month-turn across asset classes. Consider extending H205 to test 3-day vs 4-day TOM window (we currently use last 2 + first 2).",
-  "new_hypothesis_candidate": null
+  "actionable": "Use as design validation for H205. The futures result suggests TOM concentration of alpha is not just a data artifact \u2014 momentum/low-vol alpha concentrates around month-turn across asset classes. Consider extending H205 to test 3-day vs 4-day TOM window (we currently use last 2 + first 2).",
+  "new_hypothesis_candidate": null,
+  "apply_status": "applied",
+  "applied_at": "2026-05-17",
+  "applied_note": "Added to hypothesis-log.md frontmatter (h209_status, h205b_status, h205_ext, h204_infrastructure) during dream cycle BUILD phase"
 }
