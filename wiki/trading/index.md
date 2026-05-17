@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-17
+updated: 2026-05-17 (calendar-anomalies.md added)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -29,6 +29,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Low-Volatility Anomaly](algorithms/low-volatility.md) ← updated 2026-05-13 (confirmed results H190–H196; BAB dominates Sharpe 1.367; H190 Pareto improvement; STORM closed; research line complete)
   - [BSM & Information Geometry](algorithms/bsm-information-geometry.md) ← 2026-04-28 (Dean 2026: smile = manifold curvature; skew prediction within 19% zero free params; LEAPS trading implications)
   - [Deep RL for Trading](algorithms/deep-rl-trading.md) ← new 2026-05-16 (FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued — PPO vs H198 momentum baseline)
+  - [Calendar Anomalies](algorithms/calendar-anomalies.md) ← new 2026-05-17 (H201 CONFIRMED TOM Sharpe 0.740; Halloween/FOMC/Jan/Weekend/EOQ; H205-H208 candidates; composite calendar strategy)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
