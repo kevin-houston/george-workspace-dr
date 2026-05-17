@@ -1,0 +1,74 @@
+{
+  "hypothesis": "H202",
+  "description": "ML-Enhanced Momentum with Bias Correction vs H198 baseline",
+  "h198_baseline_oos_sharpe": 1.174,
+  "confirm_threshold": 1.474,
+  "variants": {
+    "A": {
+      "label": "Simple 6-1m rank",
+      "is": {
+        "n": 96,
+        "sharpe": 1.779,
+        "cagr": 0.4208,
+        "cumul": 22.302,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.174,
+        "cagr": 0.2712,
+        "cumul": 3.6563,
+        "maxdd": -0.227,
+        "neg_yrs": 1
+      }
+    },
+    "B": {
+      "label": "Bias-masked 6-1m rank",
+      "is": {
+        "n": 96,
+        "sharpe": 1.682,
+        "cagr": 0.3589,
+        "cumul": 14.2869,
+        "maxdd": -0.223,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.177,
+        "cagr": 0.273,
+        "cumul": 3.6847,
+        "maxdd": -0.214,
+        "neg_yrs": 1
+      }
+    },
+    "C": {
+      "label": "XGBoost multi-factor",
+      "is": {
+        "n": 96,
+        "sharpe": 1.604,
+        "cagr": 0.3817,
+        "cumul": 16.3459,
+        "maxdd": -0.21,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.278,
+        "cagr": 0.3363,
+        "cumul": 4.9401,
+        "maxdd": -0.2,
+        "neg_yrs": 1
+      }
+    }
+  },
+  "spy_oos": {
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.1464,
+    "cumul": 2.0444,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "bias_mask_avg_exclusions": 1.63
+}

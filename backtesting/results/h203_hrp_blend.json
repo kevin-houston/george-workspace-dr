@@ -1,0 +1,131 @@
+{
+  "hypothesis": "H203",
+  "description": "HRP blend: S1=6-1m MOM, S2=Hybrid LowVol, S3=TOM",
+  "strategies": {
+    "S1": {
+      "label": "6-1m Momentum",
+      "is": {
+        "n": 72,
+        "sharpe": 1.75,
+        "cagr": 0.4302,
+        "cumul": 10.7043,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 52,
+        "sharpe": 1.08,
+        "cagr": 0.2614,
+        "cumul": 2.7219,
+        "maxdd": -0.155,
+        "neg_yrs": 1
+      }
+    },
+    "S2": {
+      "label": "Hybrid Low-Vol",
+      "is": {
+        "n": 72,
+        "sharpe": 1.483,
+        "cagr": 0.2145,
+        "cumul": 3.3721,
+        "maxdd": -0.124,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 52,
+        "sharpe": 0.57,
+        "cagr": 0.0875,
+        "cumul": 1.3889,
+        "maxdd": -0.139,
+        "neg_yrs": 2
+      }
+    },
+    "S3": {
+      "label": "TOM (SPY timing)",
+      "is": {
+        "n": 72,
+        "sharpe": 0.573,
+        "cagr": 0.0322,
+        "cumul": 1.2014,
+        "maxdd": -0.073,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 52,
+        "sharpe": 0.733,
+        "cagr": 0.0594,
+        "cumul": 1.275,
+        "maxdd": -0.11,
+        "neg_yrs": 1
+      }
+    }
+  },
+  "hrp_blend": {
+    "is": {
+      "n": 72,
+      "sharpe": 1.743,
+      "cagr": 0.1322,
+      "cumul": 2.1649,
+      "maxdd": -0.059,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 52,
+      "sharpe": 1.066,
+      "cagr": 0.0906,
+      "cumul": 1.4567,
+      "maxdd": -0.071,
+      "neg_yrs": 0
+    },
+    "oos_avg_weights": {
+      "w_S1": 0.087,
+      "w_S2": 0.174,
+      "w_S3": 0.74
+    }
+  },
+  "equal_weight": {
+    "is": {
+      "n": 72,
+      "sharpe": 1.765,
+      "cagr": 0.2256,
+      "cumul": 3.6502,
+      "maxdd": -0.094,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 52,
+      "sharpe": 1.051,
+      "cagr": 0.1361,
+      "cumul": 1.7359,
+      "maxdd": -0.095,
+      "neg_yrs": 0
+    }
+  },
+  "spy_oos": {
+    "n": 52,
+    "sharpe": 0.743,
+    "cagr": 0.12,
+    "cumul": 1.5882,
+    "maxdd": -0.202,
+    "neg_yrs": 1
+  },
+  "confirm_threshold": 1.2,
+  "confirmed": false,
+  "oos_corr": {
+    "S1": {
+      "S1": 1.0,
+      "S2": 0.635,
+      "S3": 0.19
+    },
+    "S2": {
+      "S1": 0.635,
+      "S2": 1.0,
+      "S3": 0.312
+    },
+    "S3": {
+      "S1": 0.19,
+      "S2": 0.312,
+      "S3": 1.0
+    }
+  }
+}
