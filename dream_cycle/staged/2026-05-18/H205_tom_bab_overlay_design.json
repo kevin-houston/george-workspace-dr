@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-18",
+  "type": "hypothesis_update",
+  "source": "arXiv:2507.07107 + QuantBuffet TOM futures study (2025) + internal synthesis",
+  "title": "H205 TOM Calendar Overlay on BAB — Backtest Design Finalized",
+  "relevance_score": 9,
+  "summary": "arXiv:2507.07107 (Du 2025) demonstrates that cross-sectional ML factor strategies on 500-1000 stocks benefit substantially from bias correction and cross-sectional neutralization, validating the design choice in H205 of using sector-neutral BAB (H192-D) as the base. Critically, the QuantBuffet TOM-futures study (2026-05-17 scan) showed 50%+ of momentum returns concentrated in a 3-day TOM window — the strongest precedent for H205's hypothesis that BAB alpha similarly concentrates in TOM windows. Combined with H201 confirming TOM on SPY OOS Sharpe 0.740, the H205 design is well-supported: hold H192-D positions during TOM window (last 2 + first 2 trading days), hold BIL otherwise. Confirm gate: OOS Sharpe > 1.5 (vs H192-D baseline 1.367). The QuantBuffet result provides a theoretical bridge: if institutional cash flows at month-end drive both TOM returns AND temporarily boost low-beta stocks (reduced leverage constraints, easier positioning), then the overlay mechanism is economically grounded.",
+  "actionable": "Create backtesting/daily/run_h205.py implementing the TOM overlay on H192-D. Script should: (1) load H192-D signal logic (sector-neutral BAB, 30-stock universe, monthly rebalance), (2) apply TOM mask (last 2 + first 2 trading days), (3) hold H192-D portfolio on TOM days, BIL on non-TOM days, (4) report OOS Sharpe vs H192-D baseline. IS: 2013-2020, OOS: 2021-2026. Success gate: OOS Sharpe > 1.5.",
+  "apply_status": "applied",
+  "applied_at": "2026-05-18T09:00:00Z",
+  "applied_note": "H205 design and h205_status frontmatter already present in wiki from scan phase. Added Du 2025 cross-sectional neutralization validation note and QuantBuffet economic mechanism note to H205 section in wiki/trading/algorithms/low-volatility.md."
+}

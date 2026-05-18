@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-18",
+  "type": "hypothesis_update",
+  "source": "MDPI/IJFS Schroeder 2025 (doi:10.3390/ijfs13040208) + Bouman & Jacobsen 2002",
+  "title": "H206 Halloween Effect — Regulatory Disclosure Mechanism Strengthens Hypothesis",
+  "relevance_score": 8,
+  "summary": "A November 2025 paper (Schroeder, TU Dortmund, IJFS) identifies SEC regulatory disclosure seasonality as a novel mechanism for the Halloween effect. From 2004-2023: SEC filings 17% higher in winter (Nov-Apr) vs summer (May-Oct); February highest, September lowest. Winter also has 22% more insider trading, 473% more annual reports, 96% more shareholder meetings. This provides a concrete information-flow mechanism for the Halloween premium that complements the existing vacation/attention explanations — more value-relevant information arrives in winter, higher market efficiency and price discovery, potentially lower risk. For H206 design (hold SPY in Nov-Apr, hold BIL in May-Oct), this is positive: the anomaly has a structural information-based driver that is unlikely to be easily arbitraged (it reflects real corporate calendar rhythms tied to fiscal year ends and regulatory cycles). Confirms H206 as a viable candidate with fundamentally sound underpinning. Note: recent data (2010-2024) shows reduced edge (~2.8%/yr annualized), so H206 success depends on whether TOM composite boosts the signal.",
+  "actionable": "Update calendar-anomalies.md Halloween section to cite Schroeder 2025 as new mechanism. Queue H206 backtest after H205: IS 2003-2017, OOS 2018-2026. Test both standalone Halloween and Halloween+TOM composite. Success gate for H206-A (Halloween standalone): OOS Sharpe > 0.6. For H206-B (Halloween+TOM): OOS Sharpe > 0.8.",
+  "apply_status": "applied",
+  "applied_at": "2026-05-18T09:00:00Z",
+  "applied_note": "Schroeder 2025 mechanism and H206 design already present in calendar-anomalies.md from scan phase. Added h206_status frontmatter entry to hypothesis-log.md with full backtest design, IS/OOS windows, and confirm gates."
+}

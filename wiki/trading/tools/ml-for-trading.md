@@ -463,3 +463,23 @@ Key finding: decomposing trading analysis into fine-grained specialist agents (s
 - Implication for our pipeline: adding a fine-grained LLM overlay *above* confirmed quant signals (H026, BAB, MOM) rather than replacing them could yield compounding alpha. H202+ territory.
 
 Companion paper arXiv:2412.20138 (TradingAgents) shows ≥23.21% cumulative return, 24.90% annual return, +6.1% vs best baseline on three stocks using Bull/Bear researcher agents + risk management team.
+
+---
+
+## H202-XL: Gradient Boosting on Large Universe (200–500 stocks) — 2025–2026 Support
+
+Three 2025–2026 papers collectively support expanding H202 XGBoost momentum from 30 to 200+ stocks.
+
+**arXiv:2507.07107 (Du 2025)** — ML multi-factor cross-sectional on 500–1000 Chinese A-shares using gradient boosting + bias correction + cross-sectional neutralization: annualized return 20%, Sharpe >2.0. Key techniques: tensor-accelerated factor computation and geometric Brownian motion data augmentation to compensate for limited in-sample periods. Relevant to H202-XL: sector-neutral cross-sectional ranking is essential on large universes.
+
+**arXiv:2511.12129 (Yang et al., Nov 2025)** — practical ML stock recommendation on S&P 500 top-20% selection using gradient boosted regression (among 5 methods), outperforming buy-and-hold on Sharpe and cumulative returns. Confirms gradient boosting is competitive vs linear methods on large universes (500 stocks).
+
+**arXiv:2602.00196 (Rasekhschaffe, Jan 2026)** — Generative AI with gradient-boosted tabular models delivers Sharpe 1.14–1.63 on US equities. Critical finding: **cross-sectional standardization is essential** — equity prediction is fundamentally about relative stock positioning, not absolute values. Implementation: use `df.groupby("date")["feature"].rank(pct=True)` per-feature, per-date.
+
+**H202-XL design implications** (staged 2026-05-18):
+- Expand from 30-stock to 200-stock S&P 500 midcap-filtered universe (yfinance)
+- Add cross-sectional rank normalization per Rasekhschaffe 2026
+- Run sector-neutral version (rank within GICS, per Du 2025 neutralization)
+- Test with and without bias-correction term
+- H202 30-stock showed XGBoost +0.104 Sharpe OOS vs simple rank; larger universe should yield substantially more signal
+- Queue H202-XL after H205 results are confirmed

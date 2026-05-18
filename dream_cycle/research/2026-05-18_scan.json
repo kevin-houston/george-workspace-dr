@@ -1,0 +1,98 @@
+{
+  "date": "2026-05-18",
+  "focus": "H205 TOM overlay on BAB; H202-XL ML momentum large universe; H206 Halloween candidate",
+  "papers_found": [
+    {
+      "id": "arxiv:2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+      "author": "Yimin Du",
+      "date": "2025-06-02",
+      "venue": "arXiv q-fin.PM",
+      "relevance": 8,
+      "staged": true,
+      "staged_file": "H202_XL_ml_momentum_large_universe.json",
+      "notes": "Chinese A-shares, 500-1000 stocks, gradient boosting + bias correction + cross-sectional neutralization. Annualized 20%, Sharpe >2.0. Key technique: tensor-accelerated factor computation and GBM data augmentation. Validates design choices for H202-XL on large US universe."
+    },
+    {
+      "id": "arxiv:2511.12129",
+      "title": "A Practical Machine Learning Approach for Dynamic Stock Recommendation",
+      "author": "Yang, Liu, Wu",
+      "date": "2025-11-01",
+      "venue": "arXiv q-fin (IEEE Conference version)",
+      "relevance": 7,
+      "staged": true,
+      "staged_file": "H202_XL_ml_momentum_large_universe.json",
+      "notes": "S&P 500 top-20% selection using gradient boosted regression among 5 ML methods. Outperforms buy-and-hold on Sharpe. Confirms gradient boosting competitive on large US universe."
+    },
+    {
+      "id": "arxiv:2602.00196",
+      "title": "Generative AI for Stock Selection",
+      "author": "Keywan Christian Rasekhschaffe",
+      "date": "2026-01-01",
+      "venue": "arXiv q-fin",
+      "relevance": 7,
+      "staged": true,
+      "staged_file": "H202_XL_ml_momentum_large_universe.json",
+      "notes": "GenAI + gradient-boosted tabular model on US equities. Sharpe 1.14-1.63 in ensemble configs. Critical finding: cross-sectional rank standardization is essential — equity prediction is about relative stock positioning, not absolute values. Key design input for H202-XL feature engineering."
+    },
+    {
+      "id": "mdpi:ijfs-13-04-208",
+      "title": "A New Puzzle Piece for the 'Sell in May, and Go Away' Anomaly: Regulatory Disclosures",
+      "author": "Jan L. Schroeder (TU Dortmund)",
+      "date": "2025-11-01",
+      "venue": "International Journal of Financial Studies, Vol. 13, Issue 4 (MDPI)",
+      "relevance": 8,
+      "staged": true,
+      "staged_file": "H206_halloween_tom_composite_design.json",
+      "notes": "SEC filings 17% higher in winter (Nov-Apr) vs summer (May-Oct), 2004-2023. February highest, September lowest. 22% more insider trading, 473% more annual reports in winter. Structural information-flow mechanism for Halloween effect. Strengthens H206 hypothesis significantly."
+    },
+    {
+      "id": "sciencedirect:bab-asia-2025",
+      "title": "Time-varying performance of betting against beta (BAB) and other risk-based anomalies: Evidence from Asia",
+      "author": "ScienceDirect (Multiple authors)",
+      "date": "2025-05-01",
+      "venue": "ScienceDirect (journal TBD — Borsa Istanbul Review or similar)",
+      "relevance": 7,
+      "staged": true,
+      "staged_file": "H205_bab_asia_timevarying_risk_flag.json",
+      "notes": "BAB works only during market downturns in 5 Asian markets (1999-2021). Disposition effect drives regime-conditional performance. Risk flag for H205: add SPY-200MA regime-split diagnostic to backtest."
+    }
+  ],
+  "papers_reviewed_not_staged": [
+    {
+      "id": "arxiv:2404.18017",
+      "title": "Application of Deep Learning for Factor Timing in Asset Management",
+      "relevance": 5,
+      "notes": "Deep learning for factor timing on Fama-French factors 1963-2022. Not directly actionable — H205 is a rule-based calendar overlay, not a learned timing model. Queue if H205 fails and we want to try learned BAB timing."
+    },
+    {
+      "id": "tandfonline:optimal-factor-timing-2025",
+      "title": "Optimal Factor Timing in a High-Dimensional Setting",
+      "relevance": 5,
+      "notes": "Northern Trust / U Chicago paper on factor timing, March 2025. Relevant to longer-term factor rotation but not directly to TOM overlay design."
+    }
+  ],
+  "staged_count": 4,
+  "staged_files": [
+    "H205_tom_bab_overlay_design.json",
+    "H206_halloween_tom_composite_design.json",
+    "H202_XL_ml_momentum_large_universe.json",
+    "H205_bab_asia_timevarying_risk_flag.json"
+  ],
+  "wiki_updates": [
+    {
+      "file": "wiki/trading/algorithms/calendar-anomalies.md",
+      "change": "Added Schroeder 2025 SEC disclosure mechanism to Halloween section with success gates for H206-A/B; added paper to key papers table; updated frontmatter status."
+    },
+    {
+      "file": "wiki/trading/algorithms/low-volatility.md",
+      "change": "Added H205 design summary and regime-conditional BAB risk flag (Asia 2025 study) under Hypothesis Queue. Updated frontmatter."
+    }
+  ],
+  "risk_flags": [
+    "H205: BAB performance is regime-conditional in Asian markets (works in downturns only, ScienceDirect May 2025). US evidence is not confirmed but motivates regime-split diagnostic in run_h205.py.",
+    "H205: FRL 2025 disappearing TOM effect (from 2026-05-17 scan) still unresolved — H201 OOS 2018-2026 stands, but monitor for mechanism shift.",
+    "H202-XL: Du 2025 results are on Chinese A-shares with look-ahead bias concerns common in Chinese market backtests; direct transfer to US universe requires independent validation."
+  ],
+  "notes": "Primary focus H205 is well-supported by the QuantBuffet futures precedent (2026-05-17 scan) and the ML literature validating cross-sectional factor strategies on large universes. Backtest run_h205.py is scheduled for tonight (2026-05-18, 11 PM CT). H206 candidate strengthened by Schroeder 2025 structural mechanism. H202-XL has three convergent papers supporting large-universe gradient boosting. No search found direct TOM+BAB interaction papers — the H205 design remains an untested synthesis, which is the point of running the backtest."
+}

@@ -1,6 +1,6 @@
 ---
-updated: 2026-05-13
-status: research closed — H190–H193 completed; STORM family (H195–H196) closed
+updated: 2026-05-18
+status: research closed — H190–H193 completed; STORM family (H195–H196) closed; H205 queued (TOM overlay on BAB)
 ---
 
 # Low-Volatility Anomaly
@@ -232,6 +232,14 @@ Future directions:
 - **H190 live implementation**: update h181_monthly.py to apply 40/60 H188+H181 blended signal
 - **Larger universe BAB**: test H192-D logic on S&P 500 (500 stocks, sector-neutral BAB) — different from H196 since H196 was STORM DL architecture, not simple BAB factor
 - **H191-A as second satellite**: Corr(H191-A, H181) OOS=0.342 — genuine diversification. Could deploy as 3rd strategy in paper trading alongside H181 and H112.
+
+### H205: TOM Calendar Overlay on BAB (QUEUED — backtest scheduled tonight 2026-05-18)
+
+Design: hold H192-D sector-neutral BAB positions only during TOM window (last 2 + first 2 trading days of month), hold BIL otherwise. Hypothesis: BAB alpha concentrates in TOM windows due to institutional cash flow demand pressure that temporarily elevates all stocks, with low-beta stocks benefiting disproportionately due to reduced leverage constraints. Confirm gate: OOS Sharpe > 1.5 (vs H192-D baseline 1.367).
+
+**Design validation (Du 2025, arXiv:2507.07107)**: Cross-sectional ML factor strategies on 500–1000 stocks benefit substantially from bias correction and cross-sectional sector-neutral ranking — directly validating the H205 design choice of using H192-D (sector-neutral BAB) as the base strategy. The TOM overlay adds calendar gating on top of an already well-designed signal. Additionally, QuantBuffet 2025 TOM-futures study showed 50%+ of momentum returns concentrate in the 3-day TOM window — the strongest precedent for H205's hypothesis that BAB alpha similarly concentrates in TOM windows. Economic mechanism: institutional cash flows at month-end temporarily boost all stocks; low-beta stocks benefit disproportionately from reduced leverage constraints during these windows.
+
+**Regime-conditional BAB risk flag** (ScienceDirect, May 2025 — evidence from Asia 1999-2021): BAB and related risk-based strategies work only during market downturns in Asian markets; "betting for risk" outperforms during upturns. While this is Asian evidence only (and H192-D is confirmed on US SPY-universe stocks), it motivates adding a regime-split diagnostic to the H205 backtest: check OOS Sharpe split by SPY above vs below 200-day MA. If H205 only works in bear regimes, reclassify as a risk-off overlay. This is a secondary precaution, not a disqualifier.
 
 ---
 

@@ -208,3 +208,7 @@ Issues found: 15. Auto-fixed: 13. Needs review: 2.
 **Needs review (flagged for Kevin):**
 - No 2026-05-16 research log exists — was this day skipped or was it a gap?
 - Source gaps: no wiki coverage of macro/regime analysis, after-tax return modeling (noted in decisions log as Kevin requirement)
+
+## [2026-05-18] wiki expansion | H205/H202-XL scan
+
+Pages updated: calendar-anomalies.md (Schroeder 2025 Halloween mechanism, H206 success gates), low-volatility.md (H205 design + regime-conditional BAB risk flag). Page created: research-log/2026-05-18.md. Staged proposals: 4 (H205 design, H206 strengthened, H202-XL large-universe support, H205 regime-conditional risk flag). Scan: arxiv:2507.07107 (gradient boosting 500-stock universe), arxiv:2511.12129 (S&P 500 ML stock selection), arxiv:2602.00196 (cross-sectional rank standardization essential for equity ML), Schroeder IJFS 2025 (SEC disclosure seasonality → Halloween mechanism), ScienceDirect 2025 (regime-conditional BAB in Asia). H205 backtest run_h205.py scheduled tonight.

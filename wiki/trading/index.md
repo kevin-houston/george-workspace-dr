@@ -26,10 +26,10 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)
   - [Short-Term Reversal](algorithms/short-term-reversal.md) ← new 2026-05-07 (industry-adjusted reversal 0.53%/month globally; SSRN:6630998; H181 queued)
   - [Options Income Strategies](algorithms/options-income-strategies.md) ← 2026-05-05 (iron condor, CSP/Wheel, covered calls, VRP harvesting; H162 PARTIAL CONFIRMED; LEAN integration)
-  - [Low-Volatility Anomaly](algorithms/low-volatility.md) ← updated 2026-05-13 (confirmed results H190–H196; BAB dominates Sharpe 1.367; H190 Pareto improvement; STORM closed; research line complete)
+  - [Low-Volatility Anomaly](algorithms/low-volatility.md) ← updated 2026-05-18 (H205 design + regime-conditional BAB risk flag added; ScienceDirect May 2025 Asia study noted)
   - [BSM & Information Geometry](algorithms/bsm-information-geometry.md) ← 2026-04-28 (Dean 2026: smile = manifold curvature; skew prediction within 19% zero free params; LEAPS trading implications)
   - [Deep RL for Trading](algorithms/deep-rl-trading.md) ← new 2026-05-16 (FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued — PPO vs H198 momentum baseline)
-  - [Calendar Anomalies](algorithms/calendar-anomalies.md) ← new 2026-05-17 (H201 CONFIRMED TOM Sharpe 0.740; Halloween/FOMC/Jan/Weekend/EOQ; H205-H208 candidates; composite calendar strategy)
+  - [Calendar Anomalies](algorithms/calendar-anomalies.md) ← updated 2026-05-18 (Schroeder 2025 SEC disclosure mechanism for Halloween effect; H206 success gates set; H205 design note updated)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
@@ -59,6 +59,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-18](research-log/2026-05-18.md) — wiki expansion + arXiv scan: H205 design finalized (4 staged proposals); Schroeder 2025 confirms structural Halloween mechanism for H206; 3 convergent papers support H202-XL large-universe gradient boosting; run_h205.py backtest queued for tonight
   - [2026-05-17](research-log/2026-05-17.md) — H202 NOT CONFIRMED (bias mask trivial on 30 stocks; XGBoost +0.104 Sharpe but below threshold); H203 NOT CONFIRMED (HRP over-indexes on TOM 74%; MaxDD -7.1% but Sharpe 1.066); H205 queued (TOM overlay on BAB)
   - [2026-05-15](research-log/2026-05-15.md) — H200 NOT CONFIRMED (graphical pairs, 0/15 cointegrated); H201 CONFIRMED (TOM, OOS Sharpe 0.740); pairs family EXHAUSTED; H202 queued
   - [2026-05-14](research-log/2026-05-14.md) — H198 CONFIRMED (6-1m stock momentum, OOS Sharpe 1.174); H199 NOT CONFIRMED (sector-neutral hurts momentum)

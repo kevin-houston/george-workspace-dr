@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-17
+updated: 2026-05-18
 type: strategy family
-status: active — H201 CONFIRMED; H205 queued; Halloween untested
+status: active — H201 CONFIRMED; H205 queued; H206 queued; Halloween mechanism confirmed (Schroeder 2025)
 ---
 
 # Calendar Anomalies
@@ -120,6 +120,8 @@ combined = tom_mask & halloween   # hold SPY only during TOM windows in winter m
 ### H206 queued (candidate): Halloween on SPY with TOM composite
 
 Test combining Halloween + TOM on SPY. IS: 2003–2017, OOS: 2018–2026. Hypothesis: compound calendar filter (hold only on TOM days AND in November–April) improves OOS Sharpe above H201's 0.740 with similar or lower MaxDD.
+
+**New mechanism evidence (Schroeder 2025)**: A November 2025 study in the *International Journal of Financial Studies* (IJFS, doi:10.3390/ijfs13040208) identifies SEC regulatory disclosure seasonality as a novel, structural mechanism for the Halloween effect. From 2004–2023: total SEC filings 17% higher in winter (Nov–Apr) vs summer (May–Oct); February is the peak month, September the lowest. Winter also shows 22% more insider trading activity, 473% more annual report filings, 96% more shareholder meetings, and 12% more activist investor activity. Interpretation: more value-relevant information arrives in winter due to fiscal year-end cycles and regulatory calendars, supporting higher price discovery efficiency and reduced information asymmetry risk in the winter period. This is a durable structural driver (tied to fiscal/regulatory calendars, not easily arbitraged). Success gates for H206: OOS Sharpe > 0.6 (H206-A standalone), OOS Sharpe > 0.8 (H206-B with TOM composite).
 
 ---
 
@@ -280,6 +282,7 @@ Underperforms buy-and-hold in strong bull years but with much lower drawdown.
 | Lucca & Moench (2015, JF) | 80% of annual equity premium earned pre-FOMC | 2015 |
 | Vidal & Vidal-García (SSRN 4106003, 2025) | TOM in UK 1990–2023: effect persists | 2025 |
 | "Time-Based Trading Patterns" (SSRN, Jan 2025) | Full review: TOM, FOMC, holidays, weekends | 2025 |
+| Schroeder (IJFS, Nov 2025) | SEC disclosures 17% higher in winter; February peak, September trough; 22% more insider trading in winter — structural information-flow mechanism for Halloween effect | 2025 |
 
 ---
 

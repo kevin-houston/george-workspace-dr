@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-18",
+  "type": "research_note",
+  "source": "ScienceDirect (May 2025): 'Time-varying performance of betting against beta (BAB) and other risk-based anomalies: Evidence from Asia'",
+  "title": "H205 Risk Flag: BAB Performance Is Regime-Conditional — Works in Downturns, Reverses in Upturns",
+  "relevance_score": 7,
+  "summary": "A May 2025 study (ScienceDirect) examining BAB and related risk-based strategies across 5 Asian markets (1999-2021) finds that 'betting against risk' strategies (BAB, IVOL, MAX, tail risk) work only during market downturns, while 'betting for risk' (holding high-beta) works better during upturns. This regime-dependence — not a problem in long-run BAB studies — is directly relevant to H205. If BAB alpha concentrates in downturns and TOM windows both cluster at month-end, there may be an interaction: TOM windows during bear market regimes could generate abnormally high BAB returns, while TOM windows in bull regimes might reduce the H205 edge. Mechanism: investor disposition effect (risk-seeking in downturns, risk-averse in upturns). US evidence is not confirmed in this study (Asia only), but the regime-conditional pattern suggests H205 should be analyzed with a market-regime subsample split (bull vs bear, defined by SPY being above/below 200-day MA) to assess robustness. This is a secondary risk flag, not a disqualifier — the H201 TOM confirmation is in US large-cap (SPY), not in Asian markets.",
+  "actionable": "Add a regime-split diagnostic to run_h205.py: split OOS period into SPY>200MA (bull) and SPY<200MA (bear) subsamples. Report H205 Sharpe in each regime separately. Flag if regime-split shows H205 only works in bear markets (downgrade to risk-off overlay, not unconditional strategy). Update low-volatility.md with regime-conditional BAB finding as a note under H205 queued section.",
+  "apply_status": "applied",
+  "applied_at": "2026-05-18T09:00:00Z",
+  "applied_note": "Content already in wiki from scan phase: regime-conditional BAB risk flag already present in wiki/trading/algorithms/low-volatility.md H205 section."
+}

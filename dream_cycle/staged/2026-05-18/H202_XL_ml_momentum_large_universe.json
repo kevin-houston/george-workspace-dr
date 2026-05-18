@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-18",
+  "type": "research_note",
+  "source": "arXiv:2507.07107 (Du, Jun 2025) + arXiv:2511.12129 (Yang et al., Nov 2025) + arXiv:2602.00196 (Rasekhschaffe, Jan 2026)",
+  "title": "H202-XL: Three Recent Papers Support XGBoost Momentum on Large Universe",
+  "relevance_score": 8,
+  "summary": "Three 2025-2026 papers collectively support expanding H202 XGBoost momentum from 30 to 200+ stocks. (1) arXiv:2507.07107 (Du 2025): ML multi-factor cross-sectional on 500-1000 stocks, annualized return 20% with Sharpe >2.0 on Chinese A-shares using gradient boosting + bias correction + cross-sectional neutralization. Key technique: tensor-accelerated factor computation and geometric Brownian motion data augmentation to compensate for limited IS samples. (2) arXiv:2511.12129 (Yang et al., Nov 2025): practical ML stock recommendation on S&P 500 top-20% selection using gradient boosted regression (among 5 methods), outperforming buy-and-hold on Sharpe and cumulative returns. Confirms gradient boosting is competitive vs linear methods on large universes. (3) arXiv:2602.00196 (Rasekhschaffe, Jan 2026): Generative AI with gradient-boosted tabular models delivers Sharpe 1.14-1.63 on US equities. Critical finding: cross-sectional standardization is essential — equity prediction is fundamentally about relative stock positioning, not absolute values. For H202-XL design: use cross-sectional rank normalization of all features, expand from 30-stock to 200-stock universe (e.g., S&P 500 midcap filter), and consider the data augmentation technique from Du 2025 to expand IS period effective sample size. The H202 30-stock result showed bias mask issue trivial but +0.104 Sharpe uplift — on a larger universe with more variation, gradient boosting should generate significantly more signal.",
+  "actionable": "Expand H202 from 30-stock to 200-stock S&P 500 universe. Key changes: (1) add cross-sectional rank normalization per Rasekhschaffe 2026, (2) run sector-neutral version (rank within GICS, per Du 2025 neutralization), (3) test with and without bias-correction term. Update ml-for-trading.md wiki to note 2025-2026 gradient boosting results on large universes. H202-XL should queue after H205 results are in.",
+  "apply_status": "applied",
+  "applied_at": "2026-05-18T09:00:00Z",
+  "applied_note": "Added H202-XL three-paper research note section to wiki/trading/tools/ml-for-trading.md. Also added h202_xl_support frontmatter entry to hypothesis-log.md summarizing the three papers and H202-XL design implications."
+}
