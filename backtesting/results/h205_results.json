@@ -1,0 +1,24 @@
+{
+  "hypothesis": "H205",
+  "description": "TOM Calendar Overlay on H192-D BAB",
+  "verdict": "NOT CONFIRMED",
+  "is": {
+    "period": "2013-2020",
+    "sharpe": 0.492,
+    "cagr_pct": 2.6,
+    "max_dd_pct": -8.89,
+    "neg_years": 4,
+    "cumul": 1.2278
+  },
+  "oos": {
+    "period": "2021-2026",
+    "sharpe": 1.177,
+    "cagr_pct": 7.8,
+    "max_dd_pct": -5.4,
+    "neg_years": 1,
+    "cumul": 1.4926
+  },
+  "baseline_h192d_oos_sharpe": 1.367,
+  "confirm_threshold_sharpe": 1.5,
+  "tom_pct_invested": 0.191
+}
