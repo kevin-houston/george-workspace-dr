@@ -1,0 +1,96 @@
+{
+  "date": "2026-05-19",
+  "session": "nightly dream cycle scan",
+  "angles_searched": [
+    "arxiv pairs trading cointegration LLM pair selection",
+    "arxiv PEAD post-earnings drift NLP FinBERT text signals 2025 2026",
+    "arxiv cross-sectional momentum factor momentum ML portfolio 2025 2026",
+    "arxiv multi-agent LLM trading system portfolio construction 2025 2026",
+    "arxiv market regime detection HMM trading strategy conditional momentum 2025",
+    "github trending quantitative finance python 2026"
+  ],
+  "papers_reviewed": [
+    {
+      "arxiv_id": "2402.05272",
+      "title": "Downside Risk Reduction Using Regime-Switching Signals: A Statistical Jump Model Approach",
+      "authors": "Yizhan Shu, Chenyu Yu, John M. Mulvey",
+      "year": 2024,
+      "relevance_score": 9,
+      "relevance_notes": "Statistical Jump Model outperforms HMM for regime detection by adding jump penalty enforcing regime persistence. Tested US/German/Japanese equities 1990-2023. Directly applicable to H165 (macro-regime gate) and H205-B (bear-regime BAB). Higher confidence regime labels = fewer false BIL exits on monthly-rebalance strategies.",
+      "staged": true,
+      "staged_file": "staged/2026-05-19/1_statistical_jump_model_regime_detection.json"
+    },
+    {
+      "arxiv_id": "2602.23330",
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "authors": "Kunihiro Miyazaki, Takanobu Kawahara, Stephen Roberts, Stefan Zohren",
+      "year": 2026,
+      "relevance_score": 5,
+      "relevance_notes": "Fine-grained task decomposition in multi-agent LLM improves risk-adjusted returns vs coarse-grained designs. Tested on Japanese equities — not directly applicable to US large-cap universe. No open-source code. Interesting for H209 AlphaCrafter comparison but not immediately actionable.",
+      "staged": false,
+      "staged_reason": "Japanese market only; no implementation available; H209 already queued for AlphaCrafter"
+    },
+    {
+      "reference": "aclanthology.org/2025.finnlp-2.13",
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "authors": "Samuel Hadlock, Jesse Roberts, Joohun Lee",
+      "year": 2025,
+      "venue": "FinNLP Workshop 2025 (ACL), Suzhou, November 2025",
+      "relevance_score": 8,
+      "relevance_notes": "LLM-enhanced PEAD measurement on earnings press releases (8-K, same source as H163). Could augment or replace FinBERT scoring in H163/H174 pipeline. Full PDF not accessible; abstract confirms focus on PEAD measurement enhancement. Candidate H176. Staged as wiki_update to event-driven.md.",
+      "staged": true,
+      "staged_file": "staged/2026-05-19/2_pead_llm_finnlp_2025.json"
+    },
+    {
+      "arxiv_id": "2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading (bias correction)",
+      "authors": "Yimin Du",
+      "year": 2025,
+      "relevance_score": 6,
+      "relevance_notes": "Already known and staged (2026-05-18). H202-XL design based on this paper. No new information.",
+      "staged": false,
+      "staged_reason": "Duplicate — already captured in 2026-05-18 staged proposals"
+    },
+    {
+      "arxiv_id": "2403.07998",
+      "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+      "authors": "Qureshi, Zaman",
+      "year": 2024,
+      "relevance_score": 3,
+      "relevance_notes": "Already known (H200 basis). No new LLM pair selection papers found. H169 remains BLOCKED.",
+      "staged": false,
+      "staged_reason": "Already captured in hypothesis log; pairs family exhausted at daily frequency"
+    },
+    {
+      "arxiv_id": "2412.12555",
+      "title": "Parameters Optimization of Pair Trading Algorithm",
+      "year": 2024,
+      "relevance_score": 2,
+      "relevance_notes": "Focuses on parameter optimization only. Does not address the core problem (cointegration breakdown OOS in US large-cap equities). Not actionable.",
+      "staged": false,
+      "staged_reason": "Does not address signal quality / cointegration failure — root cause of H169 BLOCKED"
+    }
+  ],
+  "github_scan": {
+    "notable_repos": [
+      {
+        "repo": "Sakeeb91/market-regime-detection",
+        "description": "HMM-based financial market regime detection for adaptive trading strategies",
+        "relevance": "H165/H205-B — reference implementation; medium quality",
+        "stars": "unknown — relatively new"
+      },
+      {
+        "repo": "microsoft/qlib",
+        "description": "AI-oriented quant platform, ML model zoo, RD-Agent",
+        "relevance": "Already covered in wiki/tools/qlib.md",
+        "stars": "15k+"
+      }
+    ],
+    "no_new_breakout_tools": true,
+    "notes": "No new trending quant tools not already covered in wiki. Qlib and skfolio remain the dominant open-source ML/portfolio optimization frameworks."
+  },
+  "staged_proposals_count": 2,
+  "wiki_pages_created": 1,
+  "wiki_pages_updated": 2,
+  "summary": "Primary finding: Statistical Jump Model (arXiv:2402.05272) is the strongest regime detection method available and directly applies to H165 and H205-B. Secondary: FinNLP 2025 PEAD+LLM paper may improve H163/H174 pipeline as candidate H176. No new actionable pairs trading papers. Multi-agent LLM papers test on non-US markets with no open-source implementations."
+}

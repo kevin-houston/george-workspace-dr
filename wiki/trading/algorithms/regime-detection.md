@@ -1,0 +1,271 @@
+---
+created: 2026-05-19
+updated: 2026-05-19
+status: active
+relevance: H165 (VIX gate QUEUED), H205-B (bear-regime BAB), all momentum/BAB strategies
+---
+
+# Market Regime Detection
+
+Regime detection identifies which "state" the market is in — bull, bear, or neutral — so that strategies can adapt their exposure. Nearly every confirmed strategy shows regime-dependent performance:
+
+| Strategy | Bull Sharpe | Bear Sharpe | Action |
+|----------|------------|-------------|--------|
+| H026 ETF rotation | Strong | Weak (TSMOM exits) | TSMOM built in |
+| H192-D BAB | Ann. 6.7% (H205 TOM analysis) | Ann. 13.8% | H205-B: reduce in bull, hold in bear |
+| H198 momentum | High | Negative 2022 | Regime gate could cap MaxDD |
+| H181 reversal | ~18% CAGR | Degrades | Unprotected |
+
+H165a confirmed: VIX < 25 filter adds +0.429 OOS Sharpe on unlevered H026 (46 additional forced-BIL months avoided). H165 full (TradingAgents macro-regime gate) is still QUEUED.
+
+---
+
+## Method 1: Simple Threshold Rules
+
+The baseline — fast, interpretable, no look-ahead if applied to daily data.
+
+### 200-Day SMA
+```python
+import pandas as pd
+
+def bull_regime_200sma(spy_prices: pd.Series) -> pd.Series:
+    """True = bull market (SPY above 200-day MA)."""
+    sma200 = spy_prices.rolling(200).mean()
+    return spy_prices > sma200
+```
+- **Advantage**: robust, 100 years of academic validation, no training data
+- **Disadvantage**: slow — reacts weeks after bear-market onset; many false signals in choppy markets
+- **OOS note**: H205 regime split uses this; bear regime (SPY ≤ 200MA) covered 274 of 1,336 TOM days (20%) in 2021–2026
+
+### VIX Threshold
+```python
+import yfinance as yf
+
+def vix_regime(threshold: float = 25.0) -> pd.Series:
+    vix = yf.download("^VIX", start="2013-01-01", auto_adjust=True)["Close"]
+    return vix < threshold   # True = low-stress regime
+```
+- VIX < 25 is the confirmed threshold from H165a (tested 12, 15, 20, 25 — 25 optimal)
+- **Why 25**: captures genuine stress regimes (2008, 2020, 2022) without over-filtering choppy but benign markets
+- 46 additional forced-BIL months vs pure TSMOM gate alone; +0.429 Sharpe OOS on unlevered H026
+
+### Combining SMA + VIX
+```python
+def composite_regime(spy: pd.Series, vix: pd.Series, vix_thresh=25.0) -> pd.Series:
+    """Invested only when SPY > 200MA AND VIX < threshold."""
+    sma_bull = spy > spy.rolling(200).mean()
+    vix_calm = vix < vix_thresh
+    return sma_bull & vix_calm
+```
+
+---
+
+## Method 2: Markov Switching Models (statsmodels)
+
+Hamilton (1989) regime model — assumes market switches between k regimes with fixed transition probabilities. Fitted by maximum likelihood via Hamilton filter + EM algorithm.
+
+```python
+from statsmodels.tsa.regime_switching.markov_regression import MarkovRegression
+import numpy as np
+
+def fit_markov_switching(returns: np.ndarray, k_regimes: int = 2):
+    """
+    Fit 2-regime Markov Switching model to return series.
+    Returns filtered regime probabilities (T × k_regimes).
+    """
+    mod = MarkovRegression(
+        returns,
+        k_regimes=k_regimes,
+        trend='c',          # constant mean per regime
+        switching_variance=True  # different volatility per regime
+    )
+    res = mod.fit(search_reps=20, search_iter=10, disp=False)
+    return res
+
+# Use:
+# res.smoothed_marginal_probabilities[:, 0]  → prob(regime 0) per day
+# res.filtered_marginal_probabilities         → online version (no look-ahead)
+# res.summary()                               → transition matrix, regime stats
+```
+
+**Interpretation**: Regime 0 = low-volatility (bull), Regime 1 = high-volatility (bear). Inspect `res.params` to confirm — the regime with lower variance is the calm state.
+
+**Critical**: use `filtered_marginal_probabilities` (not smoothed) in live/OOS trading to avoid look-ahead bias. Smoothed probabilities use future data.
+
+**Limitations**:
+- Assumes fixed transition probabilities — markets shift regime character over time
+- Requires retraining periodically (recommend: annual rolling window or expanding IS window)
+- EM algorithm sensitive to initialization: use `search_reps=20`
+
+---
+
+## Method 3: Hidden Markov Models (hmmlearn)
+
+Unsupervised — learns regimes from multi-feature input without specifying transition structure explicitly. More flexible than statsmodels for multi-feature regimes.
+
+```python
+from hmmlearn.hmm import GaussianHMM
+import numpy as np
+
+def fit_hmm_regime(features: np.ndarray, n_states: int = 3):
+    """
+    Fit Gaussian HMM to feature matrix.
+    features: (T × n_features) — e.g. [returns, vol, vix, ma_spread, yield]
+    Returns: regime labels (T,) array
+    """
+    model = GaussianHMM(
+        n_components=n_states,
+        covariance_type="full",
+        n_iter=200,
+        random_state=42
+    )
+    model.fit(features)
+    return model, model.predict(features)
+
+# Recommended features (PyQuantLab 2025):
+# - returns (daily log-return)
+# - rolling volatility (21-day)
+# - VIX level
+# - trend spread (50MA − 200MA, normalized)
+# - 10-year yield level
+```
+
+**n_states = 2 vs 3**: 2-state is simpler and more robust OOS. 3-state (bull/bear/neutral) is more interpretable but the "neutral" state often overfits to transitional periods.
+
+**OOS deployment**:
+```python
+# At each new bar, predict regime from last N days of features (no look-ahead):
+def predict_regime_online(model, features_window):
+    return model.predict(features_window)[-1]  # last state = current
+```
+
+**Benchmark result** (QuantStart 2014 study, SPY SMA crossover + HMM filter):
+- No regime filter: MaxDD −56%, Sharpe 0.37
+- HMM regime filter: MaxDD −24%, Sharpe 0.48
+- Drawdown reduction is the primary benefit; Sharpe improvement is modest
+
+---
+
+## Method 4: Statistical Jump Model (recommended — superior to HMM)
+
+**Reference**: Shu, Yu & Mulvey (2024), "Downside Risk Reduction Using Regime-Switching Signals: A Statistical Jump Model Approach", arXiv:2402.05272
+
+The Statistical Jump Model (JM) improves over HMM by adding a **jump penalty** at each state transition — this enforces regime persistence (markets stay in a regime for weeks, not hours). Consistently outperforms HMM on US, German, and Japanese equities 1990–2023 across volatility, drawdown, and Sharpe metrics.
+
+**Key insight**: Standard HMM assigns equal cost to frequent regime switches and stable periods. JM adds λ × (# transitions) to the cost function, producing smoother, more actionable regime sequences. Fewer false signals than HMM.
+
+```python
+# No dedicated Python library yet — implementation via optimization
+# The paper provides pseudocode; a practical approximation uses hmmlearn
+# with post-processing to enforce persistence:
+
+def smooth_regime_labels(labels: np.ndarray, min_duration: int = 5) -> np.ndarray:
+    """
+    Post-process HMM labels to enforce minimum regime duration.
+    Eliminates single-day regime flips (often noise).
+    min_duration: minimum consecutive days a regime must hold.
+    """
+    smoothed = labels.copy()
+    n = len(smoothed)
+    i = 0
+    while i < n:
+        j = i
+        while j < n and smoothed[j] == smoothed[i]:
+            j += 1
+        if j - i < min_duration:
+            # Too short — merge with surrounding regime
+            prev_regime = smoothed[i - 1] if i > 0 else smoothed[j] if j < n else smoothed[i]
+            smoothed[i:j] = prev_regime
+        i = j
+    return smoothed
+```
+
+Until a pip-installable JM library exists, use `hmmlearn + smooth_regime_labels` as an approximation.
+
+---
+
+## Comparison Table
+
+| Method | Complexity | Speed | Look-ahead risk | OOS quality | Best for |
+|--------|-----------|-------|-----------------|-------------|---------|
+| 200-day SMA | Trivial | O(n) | None | Good — simple, robust | Bull/bear gate on daily |
+| VIX threshold | Trivial | O(n) | None | Good (H165a confirmed) | Stress regime filter |
+| VIX + SMA combined | Simple | O(n) | None | Best of simple methods | H026 / H192-D gate |
+| Markov Switching (statsmodels) | Medium | O(n·iter) | Use filtered probs | Moderate | Regime-conditional parameters |
+| HMM (hmmlearn) | Medium | O(n·iter) | Use online predict | Moderate | Multi-feature regimes |
+| Statistical JM (arXiv:2402.05272) | High | O(n·iter) | None | Best | Production regime gate |
+
+---
+
+## Application to Our Strategies
+
+### H165 (TradingAgents macro-regime gate) — QUEUED
+- H165a confirmed: VIX < 25 gate adds +0.429 Sharpe on unlevered H026
+- Full H165 proposal: use 200MA + VIX + yield curve (2/10 spread) as composite regime score
+- Implementation path: start with composite threshold rule; add statsmodels Markov if threshold insufficient
+
+### H205-B (regime-conditional BAB) — QUEUED
+```python
+def h205b_regime_conditional(date, spy_prices, vix, bab_return, tom_mask):
+    """
+    In bull regime: hold full H192-D (no TOM filter).
+    In bear regime: apply TOM filter (H205 design).
+    """
+    is_bull = spy_prices[date] > spy_prices[:date].rolling(200).mean()[date]
+    is_vix_calm = vix[date] < 25.0
+    
+    if is_bull and is_vix_calm:
+        return bab_return[date]           # Full H192-D exposure
+    elif tom_mask[date]:
+        return bab_return[date]           # TOM window only in bear
+    else:
+        return 0.0                         # BIL in bear non-TOM days
+```
+**Hypothesis**: bear regime ann_ret 13.8% on 19% of days → per-invested-day return is ~3.6× better in bear regime. Conditional application captures this without sacrificing bull CAGR.
+
+### General momentum strategies (H198, H181)
+```python
+def momentum_with_regime_gate(returns, spy_prices, vix, threshold=25.0):
+    """Apply momentum signal only in bull+calm regimes."""
+    bull = spy_prices > spy_prices.rolling(200).mean()
+    calm = vix < threshold
+    regime = (bull & calm).astype(float)
+    return returns * regime  # zero return (hold BIL) in bear/stress regime
+```
+
+---
+
+## Production Recommendations
+
+1. **Start simple**: VIX < 25 + SPY > 200MA composite rule. Already backtested (H165a). Add complexity only if simple rule fails.
+
+2. **Avoid look-ahead**: For live trading, use only information available at decision time:
+   - 200MA: close of previous trading day
+   - VIX: close of previous trading day  
+   - HMM: use `filtered_marginal_probabilities` (not smoothed)
+
+3. **Regime persistence threshold**: A single-day regime break is noise. Apply `smooth_regime_labels(min_duration=5)` to filter flips shorter than one week.
+
+4. **Retraining**: Annual full retrain of any ML regime model. Use expanding window (include all history), not rolling window alone.
+
+5. **Test regime labels before deploying**: Print the regime sequence — regimes should correspond to recognizable market periods (2020 COVID = bear, 2021 = bull, H2 2022 = bear). If labels don't match intuition, the model is fitting noise.
+
+---
+
+## Install
+
+```bash
+pip install hmmlearn statsmodels
+```
+
+Both are available in standard Python quant environments. No venv rebuild needed — these are lightweight.
+
+---
+
+## References
+
+- Hamilton, J.D. (1989). "A New Approach to the Economic Analysis of Nonstationary Time Series." *Econometrica* 57(2): 357-384.
+- Shu, Yu & Mulvey (2024). "Downside Risk Reduction Using Regime-Switching Signals: A Statistical Jump Model Approach." arXiv:2402.05272.
+- QuantStart: [Market Regime Detection using HMM in QSTrader](https://www.quantstart.com/articles/market-regime-detection-using-hidden-markov-models-in-qstrader/)
+- statsmodels docs: [Markov Switching Dynamic Regression](https://www.statsmodels.org/stable/examples/notebooks/generated/markov_regression.html)
+- hmmlearn: https://hmmlearn.readthedocs.io/

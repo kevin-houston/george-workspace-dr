@@ -1,0 +1,14 @@
+{
+  "id": "sjm-regime-detection-h165-h205b",
+  "date": "2026-05-19",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2402.05272",
+  "title": "Statistical Jump Model for Regime Detection — H165 and H205-B Design Note",
+  "rationale": "Shu, Yu & Mulvey (2024) arXiv:2402.05272 demonstrates that the Statistical Jump Model (JM) consistently outperforms HMM for regime detection across US, German, and Japanese equities (1990–2023) by adding a jump penalty that enforces regime persistence. This directly applies to H165 (macro-regime gate, QUEUED) and H205-B (bear-regime-conditional BAB, QUEUED). When H165 is built, SJM should be preferred over plain HMM: it produces fewer false regime-transition signals (critical for monthly-rebalance strategies where a false bear signal forces BIL unnecessarily). The wiki page regime-detection.md already includes this paper. This proposal adds an explicit design note to CLAUDE.local.md so H165/H205-B implementations default to SJM or smooth_regime_labels approximation rather than raw HMM output.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/agent/CLAUDE.local.md",
+  "content": "\n## Regime Detection Design Note (2026-05-19)\n\nWhen implementing H165 (VIX macro-regime gate) or H205-B (bear-regime-conditional BAB), use the Statistical Jump Model approach (arXiv:2402.05272, Shu et al. 2024) rather than plain HMM:\n\n1. Simple baseline first: VIX < 25 + SPY > 200MA composite (H165a confirmed +0.429 Sharpe)\n2. If ML regime model needed: use hmmlearn GaussianHMM + smooth_regime_labels(min_duration=5) as SJM approximation\n3. CRITICAL: always use filtered (not smoothed) marginal probabilities in statsmodels to avoid look-ahead\n4. Wiki reference: wiki/trading/algorithms/regime-detection.md\n\nSJM outperforms HMM on: volatility, MaxDD, Sharpe — consistently across US/Germany/Japan 1990-2023.",
+  "action": "append",
+  "apply_status": "pending"
+}

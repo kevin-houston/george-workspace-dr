@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-17 (calendar-anomalies.md added)
+updated: 2026-05-19 (regime-detection.md added)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -30,6 +30,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [BSM & Information Geometry](algorithms/bsm-information-geometry.md) ← 2026-04-28 (Dean 2026: smile = manifold curvature; skew prediction within 19% zero free params; LEAPS trading implications)
   - [Deep RL for Trading](algorithms/deep-rl-trading.md) ← new 2026-05-16 (FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued — PPO vs H198 momentum baseline)
   - [Calendar Anomalies](algorithms/calendar-anomalies.md) ← updated 2026-05-18 (Schroeder 2025 SEC disclosure mechanism for Halloween effect; H206 success gates set; H205 design note updated)
+  - [Regime Detection](algorithms/regime-detection.md) ← new 2026-05-19 (VIX threshold H165a confirmed, 200-day SMA, Markov Switching statsmodels, HMM hmmlearn, Statistical Jump Model arXiv:2402.05272; H165/H205-B application code)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
