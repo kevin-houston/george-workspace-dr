@@ -407,3 +407,13 @@ Six failure modes to audit before deploying any LLM-based signal live:
 1. Apply $2B+ market cap filter to watchlist screener
 2. Compute FinBERT score variance on 10 paraphrases of a typical 8-K press release opening paragraph
 3. Re-run H174 backtest from 2024-01-01 onward (post-training data leakage cutoff)
+
+## FinNLP 2025 — LLM-Enhanced PEAD (Hadlock, Roberts & Lee)
+
+Hadlock, Roberts & Lee (2025). 'Enhancing Post Earnings Announcement Drift Measurement with Large Language Models.' *FinNLP Workshop 2025*, ACL Anthology 2025.finnlp-2.13. Suzhou, China, November 2025.
+
+Directly relevant to H163/H174 confirmed pipeline. Proposes LLM-based enhancement of PEAD measurement (the drift signal itself) beyond FinBERT sentiment scoring. Unlike H168 (transcript availability bias) and H171 (GPT on transcripts), this paper targets 8-K press releases — same source as H163, which has 100% EDGAR coverage.
+
+**Implication for research queue**: Candidate H176 — replace H163 FinBERT sentiment score with LLM-enhanced measurement from Hadlock 2025 method on same 8-K corpus. Compare OOS WR and MeanRet vs H174 confirmed baseline (score≥0.18, WR=80.8%, MeanRet=6.22%). Low implementation risk since EDGAR coverage is already solved.
+
+**Priority**: MEDIUM — H174 confirmed baseline is already strong (WR 80.8%); LLM enhancement would need to show measurable lift. Queue after H206/H202-XL.

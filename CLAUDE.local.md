@@ -73,3 +73,14 @@ API keys available as env vars: `$POLYGON_API_KEY`, `$FRED_API_KEY`, `$ALPHA_VAN
 ## Disaster Recovery Backup
 
 Workspace is backed up to `https://github.com/kevin-houston/george-workspace-dr` (public repo). Nightly push scheduled at 2am Chicago time. `GITHUB_TOKEN` env var injected by OneCLI; git credential helper reads it. Wiki DR section at `wiki/dr/` documents restore procedures and session diary.
+
+## Regime Detection Design Note (2026-05-19)
+
+When implementing H165 (VIX macro-regime gate) or H205-B (bear-regime-conditional BAB), use the Statistical Jump Model approach (arXiv:2402.05272, Shu et al. 2024) rather than plain HMM:
+
+1. Simple baseline first: VIX < 25 + SPY > 200MA composite (H165a confirmed +0.429 Sharpe)
+2. If ML regime model needed: use hmmlearn GaussianHMM + smooth_regime_labels(min_duration=5) as SJM approximation
+3. CRITICAL: always use filtered (not smoothed) marginal probabilities in statsmodels to avoid look-ahead
+4. Wiki reference: wiki/trading/algorithms/regime-detection.md
+
+SJM outperforms HMM on: volatility, MaxDD, Sharpe — consistently across US/Germany/Japan 1990-2023.

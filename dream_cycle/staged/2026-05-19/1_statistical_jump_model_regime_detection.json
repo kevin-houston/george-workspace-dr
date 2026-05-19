@@ -10,5 +10,5 @@
   "target_file": "/workspace/agent/CLAUDE.local.md",
   "content": "\n## Regime Detection Design Note (2026-05-19)\n\nWhen implementing H165 (VIX macro-regime gate) or H205-B (bear-regime-conditional BAB), use the Statistical Jump Model approach (arXiv:2402.05272, Shu et al. 2024) rather than plain HMM:\n\n1. Simple baseline first: VIX < 25 + SPY > 200MA composite (H165a confirmed +0.429 Sharpe)\n2. If ML regime model needed: use hmmlearn GaussianHMM + smooth_regime_labels(min_duration=5) as SJM approximation\n3. CRITICAL: always use filtered (not smoothed) marginal probabilities in statsmodels to avoid look-ahead\n4. Wiki reference: wiki/trading/algorithms/regime-detection.md\n\nSJM outperforms HMM on: volatility, MaxDD, Sharpe — consistently across US/Germany/Japan 1990-2023.",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
