@@ -19,5 +19,7 @@
 
   "confidence": 0.55,
   "novelty": "MEDIUM — ensemble + cointegration is a known pairing but recent paper with claimed strong results",
-  "effort": "10 min wiki update"
+  "effort": "10 min wiki update",
+  "apply_status": "applied",
+  "apply_note": "Applied during nightly research session. pairs-trading.md updated: H200 status → NOT CONFIRMED (2026-05-15), H169 BLOCKED note expanded with ACM 2026 hybrid paper caveat (signal-quality improvement on cointegrated pairs; doesn't fix absent cointegration in US large-cap daily data)."
 }

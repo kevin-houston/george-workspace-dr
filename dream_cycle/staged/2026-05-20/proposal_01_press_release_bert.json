@@ -19,5 +19,7 @@
 
   "confidence": 0.78,
   "novelty": "MEDIUM — confirms and extends H163 approach with structural angle we don't currently use",
-  "effort": "15 min wiki update"
+  "effort": "15 min wiki update",
+  "apply_status": "applied",
+  "apply_note": "Content already present in wiki/trading/algorithms/event-driven.md from prior session (lines 38, 331-337, 364). arXiv:2509.24254 documented with section-level FinBERT note for H176. No duplicate write needed."
 }
