@@ -60,7 +60,7 @@ When answering a query:
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado
 - [Walk-Forward & CPCV](trading/backtesting/walk-forward-cpcv.md) — walk-forward variants, CPCV algorithm, purging/embargoing, DSR formulas; Python libs: timeseriescv/skfolio
 - [Transaction Cost Modeling](trading/backtesting/transaction-costs.md) — spread/impact/borrow cost models, square-root market impact, vectorbt/backtrader defaults, per-strategy calibration table
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H209 (frontier: H205–H209); H026 ETF rotation (Sharpe 3.007); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367); H198 6-1m momentum (Sharpe 1.174); H201 TOM (Sharpe 0.740); H203 NOT CONFIRMED; H205 QUEUED (TOM-BAB overlay); H209 candidate (AlphaCrafter)
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H210 (frontier: H202-XL/H209/H210); H026 ETF rotation (Sharpe 3.007); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367); H198 6-1m momentum (Sharpe 1.174); H201 TOM (Sharpe 0.740); H210 QUEUED (LLM web nowcasting, 200-stock)
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules

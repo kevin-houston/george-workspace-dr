@@ -1,5 +1,6 @@
 ---
-updated: 2026-05-19
+updated: 2026-05-20
+h210_status: QUEUED (2026-05-20) — LLM Autonomous Web Search Nowcasting (Cross-Sectional Stock Scoring). Source: Peking University live study (Apr 2025–Jan 2026, 156,000 observations on Russell 1000); GitHub: mapledust0/AI-Stock-Nowcasting. Method: LLM autonomously searches web for each stock daily → outputs score (-5 to +5) for day/week/month horizon + confidence (1–10) + divergence score (-5 to +5 cross-source disagreement). Top-20 portfolio: ~50% return vs 26% benchmark. Fama-French 5-factor daily alpha: 18.4 bps; annualized Sharpe: 2.43. Transaction costs <10% of gross alpha. ASYMMETRY FINDING: LLM reliably identifies winners (coherent positive signal, high confidence) but NOT losers — negative information environments contaminated by "buy the dip" noise and corporate spin. Short book based on low scores = trading noise → LONG-ONLY constraint required. DIVERGENCE SCORE: high cross-source disagreement = lower signal weight. H210 DESIGN: score our 200-stock universe (H202-XL universe) daily via Claude + web search; long-only top-N by score, gated on confidence ≥6 and divergence ≤2; weekly rebalance to control API cost; compare OOS Sharpe to H198 (1.174) and H202-XL baseline. Confirm: OOS Sharpe > 1.5. API cost estimate: ~$0.80/day (200 stocks × 400 tokens × $0.01/1K for Haiku). Prerequisites: H202-XL universe list finalized; web search access. Priority: MEDIUM — after H202-XL. Staged 2026-05-20 from @DamiDefi article.
 h206_status: NOT CONFIRMED (2026-05-19) — Halloween Effect (Sell in May) on SPY with TOM Composite. Source: Bouman & Jacobsen (2002); Schroeder (IJFS, Nov 2025). Design: H206-A (hold SPY Nov–Apr, BIL May–Oct); H206-B (hold SPY only during TOM windows in Nov–Apr). IS: 2003–2017, OOS: 2018–2026. OOS RESULTS — H206-A: Sharpe=0.535 CAGR=8.5% MaxDD=-33.7% Cumul=1.819× NegYrs=3; H206-B: Sharpe=0.435 CAGR=2.8% MaxDD=-12.2% Cumul=1.243× NegYrs=3. SPY B&H OOS: Sharpe=0.789, CAGR=15.2%. Gates: H206-A Sharpe>0.6 — FAILED (0.535); H206-B Sharpe>0.8 — FAILED (0.435). ROOT CAUSE: (1) 2020: H206-A was fully invested during March–April COVID crash, giving only +4.4% vs SPY +18.3% (missed recovery). (2) 2021–2024: Missed strong summer rallies (H206-A captured only ~50% of calendar). (3) SURPRISE DIAGNOSTIC — Summer TOM only (H206-C, May–Oct TOM window): OOS Sharpe=0.699 > H206-A (0.535). TOM works better in summer without Halloween filter. (4) Monthly decomp shows Nov (+0.22%/day) and Jan (+0.10%) are the only strong winter months; Feb-Mar are negative. The November-driven effect is not large enough to overcome summer misses in modern data. CONCLUSION: Halloween Effect has deteriorated substantially in OOS 2018–2026 period. The TOM filter (H201, Sharpe=0.481) is already the correct approach — Halloween mask adds risk concentration without return compensation. Interesting finding: H206-C shows the TOM effect is not Halloween-concentrated; it is actually stronger in summer. H206-B variant (TOM×Halloween) reduces investment days to ~10% but CAGR only 2.8% — not competitive. NOT CONFIRMED: both variants below threshold and below SPY B&H Sharpe. Results: backtesting/results/h206_results.json. Script: backtesting/daily/run_h206.py.
 h202_xl_support: NOTES (2026-05-18) — Three 2025–2026 Papers Support H202-XL Expansion. (1) arXiv:2507.07107 (Du 2025): ML multi-factor on 500–1000 stocks, gradient boosting + cross-sectional neutralization + GBM data augmentation, Sharpe >2.0. Cross-sectional sector-neutral ranking essential. (2) arXiv:2511.12129 (Yang et al., Nov 2025): gradient boosted regression competitive on S&P 500 500-stock universe, outperforms buy-and-hold on Sharpe. (3) arXiv:2602.00196 (Rasekhschaffe, Jan 2026): Sharpe 1.14–1.63 on US equities; cross-sectional rank standardization is essential — equity prediction is about relative positioning. H202-XL design: expand to 200-stock universe, add cross-sectional rank normalization, run sector-neutral XGBoost, test bias correction. Queue after H205. Details: wiki/trading/tools/ml-for-trading.md.
 h209_status: QUEUED (2026-05-17) — AlphaCrafter Multi-Agent LLM for Cross-Sectional Quant. Source: arXiv:2605.05580 (published 2026-05-08). Just-published multi-agent LLM framework for autonomous cross-sectional quantitative trading — formalizes environment, agent policies, and optimization objective for end-to-end alpha mining and portfolio construction. Hypothesis: Replicate or adapt AlphaCrafter framework on our 30-stock (or H202-XL 200-stock) universe; compare OOS Sharpe to H198 (1.174) and H202-C XGBoost (1.278). Confirm: OOS Sharpe > 1.4. Prerequisites: H202-XL complete; OpenAI API key available. Priority: LOW — interesting but complex; run H205/H202-XL first. Staged from dream cycle 2026-05-17.
@@ -5146,3 +5147,101 @@ Additionally, MaxDD worsens dramatically (-22.7% → -37.9%), confirming the sec
 
 Script: `backtesting/daily/run_h199.py`
 Results: `backtesting/results/h199_results.json`
+
+---
+
+## H210 — LLM Autonomous Web Search Nowcasting
+
+**Status:** QUEUED — priority: MEDIUM; run after H202-XL
+**Date:** 2026-05-20
+**Source:** Peking University live study (Apr 2025–Jan 2026); GitHub: `mapledust0/AI-Stock-Nowcasting`; surfaced via @DamiDefi (X, 2026-05-20)
+
+### Hypothesis
+
+LLMs can score individual stocks daily by autonomously searching the web for news, analyst commentary, and macro context — producing a cross-sectional ranking with real-time information advantage over factor models that use only price/accounting data. A long-only portfolio of top-scored stocks should earn meaningful alpha.
+
+**Academic basis**: Peking University live paper (9-month forward-looking study, not backtest): scored every Russell 1000 stock daily, no look-ahead bias. Top-20 portfolio returned ~50% vs 26% benchmark over the study period. Fama-French 5-factor daily alpha: **18.4 bps**. Annualized Sharpe: **2.43**. Transaction costs < 10% of gross alpha on Russell 1000 (tight spreads).
+
+### Design
+
+**Prompt architecture** (per stock, per day):
+```
+Ticker: {TICKER} | Window: {DATE ± 3 days}
+Autonomous web search: recent news, earnings, analyst commentary, macro context
+Output (Python-readable):
+  score: -5 to +5    # directional signal
+  confidence: 1-10   # signal clarity
+  divergence: -5 to +5  # cross-source agreement (negative = all agree, positive = conflicting)
+  horizon: day / week / month
+```
+
+**Signal construction:**
+- Run daily on 200-stock H202-XL universe (Russell 200 equivalent)
+- Effective score = score × (confidence / 10) × (1 - divergence_penalty)
+- Divergence penalty: 0 if |divergence| ≤ 2, else (|divergence| - 2) / 10
+- Long-only: hold top-20 by effective score (equal-weight)
+- Gate: confidence ≥ 6 required to enter position
+- Rebalance: weekly (Friday close) to control API cost
+
+**IS:** 2022–2024 (simulate with offline web snapshots if available, or use paper's published signal)  
+**OOS:** 2025–2026 (fresh forward-looking, matches paper's live period)
+
+**Success criterion:** OOS Sharpe > 1.5 (conservative — paper achieved 2.43 on larger Russell 1000 universe with daily rebalance)
+
+### Key Design Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| Long-only | Asymmetry finding: LLM identifies winners clearly, losers unreliably — short book adds noise, not alpha |
+| Weekly rebalance | Daily rebalance ~$0.80/day ($24/month) API cost; weekly reduces to ~$5/month with similar signal quality at weekly horizon |
+| Top-20 from 200 | Matches paper's top-20 from Russell 1000 concentration; ensures meaningful cross-sectional selection |
+| Divergence gate | High cross-source disagreement = competing narratives → lower signal quality; gate reduces noise entries |
+| 200-stock universe | H202-XL universe allows comparison; large enough for LLM signal differentiation (paper used 1,000) |
+
+### Asymmetry Finding (Critical)
+
+The Peking University paper documents that the LLM signal is **asymmetric**:
+- **Positive news environments**: coherent positive signal, high confidence, low divergence — strong predictive power
+- **Negative news environments**: contaminated by "buy the dip" commentary, corporate IR spin, analyst expectation games — score is noisy; stocks with low scores do NOT systematically underperform
+
+**Implication**: Do NOT build a long-short portfolio. Long-only top-scored stocks only. This matches H198 (cross-sectional momentum) which also found winner selection dominates.
+
+### API Cost Model
+
+| Frequency | Cost/stock/day | 200 stocks/day | Monthly |
+|-----------|----------------|----------------|---------|
+| Daily | ~$0.004 (Haiku, 400 tok) | ~$0.80/day | ~$24 |
+| Weekly | ~$0.004 | ~$0.80/week | ~$3.50 |
+| Monthly (initial test) | — | ~$0.80/month | ~$0.80 |
+
+**Recommended start:** monthly frequency for IS validation; upgrade to weekly if signal is confirmed.
+
+### Comparison to Related Hypotheses
+
+| Strategy | OOS Sharpe | Universe | Notes |
+|----------|-----------|----------|-------|
+| H210 target | 1.5 | 200-stock | LLM web scoring |
+| H198 (6-1m momentum) | 1.174 | 30-stock | Price-only |
+| H202-C (XGBoost) | 1.278 | 30-stock | Multi-factor ML |
+| H202-XL (target) | ~1.5 | 200-stock | XGBoost scaled |
+| H209 (AlphaCrafter) | QUEUED | 30/200-stock | Multi-agent LLM quant |
+| Paper benchmark | 2.43 | Russell 1000 | Live, not backtest |
+
+H210 is **orthogonal** to H202-XL (H202-XL uses price/volume/factor features; H210 uses real-time web information). If both confirm, blending them is a natural H211 candidate.
+
+### Prerequisites
+
+1. H202-XL universe list finalized (200 tickers)
+2. Web search access for Claude (already available via MCP)
+3. Alpaca price data for OOS performance measurement
+4. Optional: Peking University paper's exact prompt template (available from `mapledust0/AI-Stock-Nowcasting` GitHub)
+
+### Risks
+
+1. **Data leakage in paper**: 9-month live study reduces (but doesn't eliminate) concern; the paper uses autonomous search, not curated datasets
+2. **API cost at scale**: Daily rebalance on full Russell 1000 = ~$24/day; our 200-stock weekly is manageable at ~$3.50/month
+3. **News decay**: Signal is most predictive at 1-week horizon; daily rebalance may chase noise
+4. **Model updates**: Claude model changes could shift signal distribution between IS and OOS periods
+5. **Event concentration**: LLM may over-weight earnings/news events vs steady-state alpha; test whether signal persists outside event windows
+
+Script: `backtesting/daily/run_h210.py` (stub)
