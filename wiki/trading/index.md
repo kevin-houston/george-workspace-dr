@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-19 (regime-detection.md added)
+updated: 2026-05-20 (factor-models.md added)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -31,6 +31,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Deep RL for Trading](algorithms/deep-rl-trading.md) ← new 2026-05-16 (FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued — PPO vs H198 momentum baseline)
   - [Calendar Anomalies](algorithms/calendar-anomalies.md) ← updated 2026-05-18 (Schroeder 2025 SEC disclosure mechanism for Halloween effect; H206 success gates set; H205 design note updated)
   - [Regime Detection](algorithms/regime-detection.md) ← new 2026-05-19 (VIX threshold H165a confirmed, 200-day SMA, Markov Switching statsmodels, HMM hmmlearn, Statistical Jump Model arXiv:2402.05272; H165/H205-B application code)
+  - [Factor Models & Cross-Sectional Alpha](algorithms/factor-models.md) ← new 2026-05-20 (Fama-French 3/5/6-factor; Kenneth French data library via pandas-datareader; AQR datasets; cross-sectional feature engineering; alphalens-reloaded tearsheets; Fama-MacBeth regression; H202-XL XGBoost feature matrix)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
@@ -60,6 +61,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-20](research-log/2026-05-20.md) — wiki expansion: Factor Models/Fama-French page (new, H202-XL prep); dream cycle scan: 5 angles across arXiv + GitHub
+  - [2026-05-19](research-log/2026-05-19.md) — wiki expansion: regime-detection.md; H206 NOT CONFIRMED (Halloween Effect); H204 NOT CONFIRMED (Deep RL PPO); surprise: summer TOM (Sharpe 0.699) > Halloween TOM (Sharpe 0.435)
   - [2026-05-18](research-log/2026-05-18.md) — wiki expansion + arXiv scan: H205 design finalized (4 staged proposals); Schroeder 2025 confirms structural Halloween mechanism for H206; 3 convergent papers support H202-XL large-universe gradient boosting; run_h205.py backtest queued for tonight
   - [2026-05-17](research-log/2026-05-17.md) — H202 NOT CONFIRMED (bias mask trivial on 30 stocks; XGBoost +0.104 Sharpe but below threshold); H203 NOT CONFIRMED (HRP over-indexes on TOM 74%; MaxDD -7.1% but Sharpe 1.066); H205 queued (TOM overlay on BAB)
   - [2026-05-15](research-log/2026-05-15.md) — H200 NOT CONFIRMED (graphical pairs, 0/15 cointegrated); H201 CONFIRMED (TOM, OOS Sharpe 0.740); pairs family EXHAUSTED; H202 queued
