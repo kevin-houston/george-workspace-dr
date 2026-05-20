@@ -1,0 +1,65 @@
+{
+  "hypothesis": "H206",
+  "description": "Halloween Effect (Sell in May) + TOM Composite on SPY",
+  "is_period": "2003-01-01 to 2017-12-31",
+  "oos_period": "2018-01-01 to 2026-04-30",
+  "spy_bh": {
+    "is_sharpe": 0.4635955759587718,
+    "is_cumul": 2.173975043405251,
+    "is_maxdd": -0.5518945230013398,
+    "oos_sharpe": 0.7894982881899821,
+    "oos_cumul": 3.0295336293435233,
+    "oos_maxdd": -0.3371727790547801,
+    "oos_cagr": 15.217394931741394,
+    "oos_neg_yrs": 2,
+    "days_invested_pct": 100.0
+  },
+  "h201_ref": {
+    "is_sharpe": 0.1471683122863435,
+    "is_cumul": 1.0968037940075643,
+    "is_maxdd": -0.16892675613899868,
+    "oos_sharpe": 0.4805686031828085,
+    "oos_cumul": 1.3426346457256733,
+    "oos_maxdd": -0.09304956251203494,
+    "oos_cagr": 3.8752893647220503,
+    "oos_neg_yrs": 3,
+    "days_invested_pct": 19.096638655462183
+  },
+  "h206a": {
+    "is_sharpe": 0.5373015285786188,
+    "is_cumul": 1.9576648154188645,
+    "is_maxdd": -0.3550471036991885,
+    "oos_sharpe": 0.5346375253385165,
+    "oos_cumul": 1.819326320821054,
+    "oos_maxdd": -0.33717277905477977,
+    "oos_cagr": 8.465726704089347,
+    "oos_neg_yrs": 3,
+    "days_invested_pct": 49.26470588235294
+  },
+  "h206b": {
+    "is_sharpe": 0.29405651805243255,
+    "is_cumul": 1.1880052066975122,
+    "is_maxdd": -0.11831459596202512,
+    "oos_sharpe": 0.4347532099969247,
+    "oos_cumul": 1.2432128089975052,
+    "oos_maxdd": -0.12188083324517948,
+    "oos_cagr": 2.835961999759519,
+    "oos_neg_yrs": 3,
+    "days_invested_pct": 9.57983193277311
+  },
+  "h206c_summer_tom": {
+    "is_sharpe": -0.0647950302068595,
+    "is_cumul": 0.9475723439982873,
+    "is_maxdd": -0.19438804919818076,
+    "oos_sharpe": 0.6990106066429795,
+    "oos_cumul": 1.3047584278755018,
+    "oos_maxdd": -0.093116433335251,
+    "oos_cagr": 3.3173188704611083,
+    "oos_neg_yrs": 3,
+    "days_invested_pct": 9.516806722689076
+  },
+  "confirmed_h206a": false,
+  "confirmed_h206b": false,
+  "confirm_gate_a": "OOS Sharpe > 0.6",
+  "confirm_gate_b": "OOS Sharpe > 0.8"
+}

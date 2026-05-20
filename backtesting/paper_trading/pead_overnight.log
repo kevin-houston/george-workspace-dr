@@ -89,3 +89,15 @@
 [2026-05-18 23:01:13] Scanning earnings calendar…
 [2026-05-18 23:01:55]   Tickers with recent earnings: none
 [2026-05-18 23:01:55] No earnings tonight. Watchlist cleared.
+[2026-05-19 23:01:49] =======================================================
+[2026-05-19 23:01:49] PEAD overnight pass starting
+[2026-05-19 23:01:49] Scanning earnings calendar…
+[2026-05-19 23:02:15]   Tickers with recent earnings: ['HD']
+[2026-05-19 23:02:15]   Fetching 8-K for HD…
+[2026-05-19 23:02:23]     HD: 4308 chars
+[2026-05-19 23:03:12]   Loading ProsusAI/finbert…
+[2026-05-19 23:04:03]   HD: score=-0.045  surprise=-0.044
+[2026-05-19 23:04:03]   ✗ HD filtered out (score=-0.045, surprise=-0.0438)
+[2026-05-19 23:04:03] Candidates for tomorrow: none
+[2026-05-19 23:04:03] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-05-19 23:04:03] Overnight pass complete.
