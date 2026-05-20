@@ -1,0 +1,23 @@
+{
+  "proposal_id": "2026-05-20-01",
+  "title": "Press Release Structure + BERT for Earnings Announcement Returns",
+  "source": "arXiv:2509.24254",
+  "authors": "Wang et al. (2025)",
+  "url": "https://arxiv.org/abs/2509.24254",
+  "risk": "low",
+  "type": "wiki_update",
+  "relevance": "HIGH",
+  "related_hypotheses": ["H163", "H174", "H176"],
+
+  "summary": "138,000+ earnings press releases (2005–2023) used to predict stock returns on earnings announcement days. Compares bag-of-words vs BERT-based embeddings. Key finding: structural features of press releases (section organization, forward-looking language position, guidance placement) add predictive power beyond pure sentiment. BERT outperforms BoW but gains diminish when document structure is ignored.",
+
+  "why_relevant": "H163 confirmed FinBERT sentiment on 8-K filings. H174 runs a live PEAD scoring pipeline. H176 (queued) is explicitly 'LLM-enhanced PEAD'. This paper shows that WHERE information appears in the press release (structure) matters, not just sentiment polarity. Our current pipeline scores the full 8-K as a single document — adding section-level FinBERT scoring is a concrete extension.",
+
+  "proposed_action": "Update wiki/trading/algorithms/event-driven.md: add note under H163/H174 implementation that press release section structure (guidance vs results vs forward-looking sections) is a documented alpha source (arXiv:2509.24254). Add to H176 queue notes as design input: score 8-K sections separately rather than full doc.",
+
+  "implementation_note": "No code change required now. Wiki update: 1 paragraph in event-driven.md under H176 queue entry. Include benchmark reference: section-structured BERT outperforms whole-doc BERT on announcement-day returns.",
+
+  "confidence": 0.78,
+  "novelty": "MEDIUM — confirms and extends H163 approach with structural angle we don't currently use",
+  "effort": "15 min wiki update"
+}

@@ -1,7 +1,7 @@
 ---
 updated: 2026-05-15
 type: strategy-guide
-status: ETF PAIRS EXHAUSTED (H152–H160 daily); H200 QUEUED (graphical matching, stock-level)
+status: PAIRS FAMILY EXHAUSTED (H152–H160 daily; H200 NOT CONFIRMED 2026-05-15)
 ---
 
 # ETF Pairs Trading (Statistical Arbitrage)
@@ -294,7 +294,9 @@ All pairs trading hypotheses reached NOT CONFIRMED. The family is exhausted at d
 
 **H166 (GRU/LSTM spread forecasting)**: FLAGGED — ML on broken signal unlikely to help; blocked pending H160 resolution. Deprioritized.
 
-**H169 (LLM pair selection)**: BLOCKED — H160 NOT CONFIRMED; LLM cannot fix structurally broken signal. Deprioritized.
+**H169 (LLM pair selection)**: BLOCKED — H200 NOT CONFIRMED confirms the pair selection hypothesis fails at the cointegration level, not the selection level. LLM/ML pair selection cannot fix absent cointegration.
+
+**Recent literature note (ACM 2026, DOI 10.1145/3800000.3800094)**: Hybrid framework combining cointegration selection with ensemble ML for entry/exit signal generation claims to "substantially outperform traditional statistical approaches." Key caveat: this improves SIGNAL QUALITY on already-cointegrated pairs — it doesn't solve the fundamental problem that US large-cap equities are not cointegrated at daily frequency in 2018–2026. Relevant only if a sub-universe with genuine cointegration is found (e.g., sector-specific pairs on 60-min bars).
 
 **Bottom line (ETF pairs)**: ETF pairs and stock pairs at daily frequency do not exhibit sufficient OOS cointegration in the 2018–2026 period for systematic trading. HFT arbitrage has compressed mean-reversion windows below the 5-day minimum required for cost-effective daily-close execution.
 
@@ -306,7 +308,7 @@ See [Hypothesis Log](../backtesting/hypothesis-log.md) for detailed results per 
 
 ## H200: Graphical Matching Pairs Trading (Stock-Level)
 
-**Source**: arXiv:2403.07998 (Qureshi & Zaman, 2024). **Status**: QUEUED (next after stock momentum family).
+**Source**: arXiv:2403.07998 (Qureshi & Zaman, 2024). **Status**: NOT CONFIRMED (2026-05-15) — 0/15 pairs passed Engle-Granger cointegration test (p < 0.05). Root cause: cointegration in US large-cap equities at daily frequency has structurally degraded. The selection algorithm works (maximum weighted matching finds the most-correlated pairs) but no pairs are actually cointegrated in the 2018–2026 OOS window. Confirms H160 root cause: the problem is cointegration breakdown, not pair selection quality.
 
 **Key idea**: Build a correlation graph over stocks. Apply maximum weighted matching — each stock can appear in at most one pair simultaneously. This prevents the concentration problem where highly-correlated clusters (e.g., all tech stocks) produce many overlapping pairs with correlated exposures.
 

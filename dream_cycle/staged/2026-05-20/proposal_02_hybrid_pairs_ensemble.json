@@ -1,0 +1,23 @@
+{
+  "proposal_id": "2026-05-20-02",
+  "title": "Hybrid Pairs Trading: Cointegration + Ensemble Learning",
+  "source": "ACM DL (2025/2026)",
+  "doi": "10.1145/3800000.3800094",
+  "url": "https://dl.acm.org/doi/abs/10.1145/3800000.3800094",
+  "risk": "low",
+  "type": "wiki_update",
+  "relevance": "HIGH",
+  "related_hypotheses": ["H169", "H200"],
+
+  "summary": "Integrates cointegration-based pair selection with ensemble ML (likely gradient boosting / stacking) for entry/exit signal generation. Claims to 'substantially outperform traditional statistical approaches to pairs trading' via better signal precision on both entry and exit. ACM conference paper, published approximately May 2026.",
+
+  "why_relevant": "H200 (graphical matching pairs) was NOT CONFIRMED — 0/15 pairs cointegrated in US large-cap. H169 (LLM pair selection) is BLOCKED — no open-source implementation found in recent literature. This paper directly addresses the H169/H200 gap: it's not LLM-based but rather ensemble ML for signal quality improvement. Key question: does it address pair SELECTION quality (finding cointegrated pairs) or SIGNAL quality (improving entry/exit once pairs are found)? From snippet, it appears to focus on entry/exit signals — the pair selection problem (H200's root cause failure) may still not be solved.",
+
+  "proposed_action": "1. Update wiki/trading/algorithms/pairs-trading.md: note this paper under 'Recent developments' as a signal-quality enhancement. 2. Add note that the pair SELECTION problem for US large-cap is still the binding constraint (H200 result); ensemble ML on entry/exit doesn't help if no cointegrated pairs found.",
+
+  "caveat": "Limited info from snippet alone. The DOI pattern 10.1145/3800000.x suggests ACM SIGKDD or similar. Need full paper to confirm whether this addresses selection or signal quality. Stage as low-risk wiki note rather than new hypothesis.",
+
+  "confidence": 0.55,
+  "novelty": "MEDIUM — ensemble + cointegration is a known pairing but recent paper with claimed strong results",
+  "effort": "10 min wiki update"
+}

@@ -1,0 +1,95 @@
+{
+  "scan_date": "2026-05-20",
+  "session": "nightly dream cycle",
+  "angles": [
+    "cross-sectional momentum + XGBoost / gradient boosting (H202-XL prep)",
+    "PEAD + LLM enhancements (H176 candidate)",
+    "factor zoo + ML feature selection",
+    "pairs trading + cointegration + LLM (H200 follow-up)",
+    "multi-factor portfolio construction / HRP blending"
+  ],
+  "papers_reviewed": [
+    {
+      "ref": "arXiv:2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "authors": "Wang et al. (2025)",
+      "relevance": "HIGH",
+      "staged": true,
+      "note": "138k press releases 2005-2023; section structure + BERT > whole-doc BERT; extends H163/H174/H176"
+    },
+    {
+      "ref": "ACM 10.1145/3800000.3800094",
+      "title": "A Hybrid Framework for Pairs Trading: Integrating Cointegration with Ensemble Learning",
+      "authors": "Unknown (2025/2026)",
+      "relevance": "HIGH",
+      "staged": true,
+      "note": "Cointegration + ensemble ML entry/exit signals; addresses H200/H169 signal-quality angle; limited info from snippet only"
+    },
+    {
+      "ref": "arXiv:2506.09330",
+      "title": "TrendFolios: A Portfolio Construction Framework",
+      "authors": "Unknown (Jun 2025)",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "note": "Multi-asset momentum + trend-following framework; doesn't add new signal; overlaps with existing wiki coverage"
+    },
+    {
+      "ref": "arXiv:2508.11856",
+      "title": "Optimal Portfolio Construction — RL-BHRP (Reinforcement Learning Embedded Bayesian HRP)",
+      "authors": "Unknown (Aug 2025)",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "note": "Two-level RL + Bayesian HRP; relevant to portfolio-optimization.md but RL approach failed (H204); not actionable now"
+    },
+    {
+      "ref": "arXiv:2412.11575",
+      "title": "Cost-aware Portfolios in a Large Universe of Assets",
+      "authors": "Unknown (Dec 2024, updated Aug 2025)",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "note": "Mean-variance + transaction costs in high-dim setting; relevant for H202-XL cost modeling; no new signal alpha"
+    },
+    {
+      "ref": "ScienceDirect Oct 2025",
+      "title": "A Hierarchical Deep Learning Framework for Pair Trading",
+      "authors": "Unknown",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "note": "Supervised learning + DRL for pair selection + trading; paywall; US market scope unclear"
+    },
+    {
+      "ref": "PM Research Feb 2024",
+      "title": "Portfolio Construction with Hierarchical Momentum",
+      "authors": "Unknown",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "note": "Hierarchical clustering + momentum; K-means on 200-stock universe + top-quintile momentum selection; design input for H202-XL architecture"
+    },
+    {
+      "ref": "arXiv:2507.07107",
+      "title": "ML Multi-Factor Cross-Sectional Portfolio (Du 2025)",
+      "authors": "Du (2025)",
+      "relevance": "KNOWN",
+      "staged": false,
+      "note": "Already staged 2026-05-18. Bias correction + EWMA rolling IC weighting for multi-factor XGBoost."
+    },
+    {
+      "ref": "FinNLP 2025 Hadlock et al.",
+      "title": "Enhancing PEAD with LLMs",
+      "authors": "Hadlock et al. (2025)",
+      "relevance": "KNOWN",
+      "staged": false,
+      "note": "Already staged 2026-05-19 as Proposal 2."
+    }
+  ],
+  "staged_proposals": 2,
+  "key_gaps": [
+    "H169 BLOCKED: LLM pair selection for US large-cap equities — still unresolved in 2025-2026 literature. Cointegration failure in large-cap is structural, not algorithmic.",
+    "H202-XL architecture input: hierarchical clustering before momentum selection (PM Research 2024) could reduce overcrowding in top-quintile picks across correlated sectors",
+    "H176 extension: 8-K section-level FinBERT scoring (arXiv:2509.24254) is concrete implementation improvement over whole-doc scoring"
+  ],
+  "next_session_priorities": [
+    "H202-XL: Run run_h202xl.py (to be written) — 200-stock universe XGBoost with features from factor-models.md",
+    "Apply Proposals 1+2 (wiki updates) before H202-XL run"
+  ]
+}
