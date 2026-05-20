@@ -241,3 +241,11 @@ Below ~15 days, jumps dominate. Regime shift: short-dated skew is T-dependent an
 ## Prior source context
 
 The author's working paper [19] ("Phase Space Methods for Volatility Regime Classification: A Practitioner's Framework for VIX-Based Options Trading") is a direct practitioner extension. Worth tracking down — apply the geometric regime classification to VIX-based options strategies. Not yet on SSRN but referenced as "Working Paper 2026."
+
+---
+
+## Mathematical foundations
+
+The stochastic calculus foundations underlying BSM (Itô's lemma, Girsanov theorem, risk-neutral measure, path integral formulation) are covered comprehensively in:
+
+**Phynance** — Kakushadze (arXiv:1405.1948, 2014). PhD-level lecture notes from Stony Brook theoretical physics, recasting standard financial stochastic calculus in path-integral language. Covers BSM derivation, all Greeks, short-rate models (Vasicek/CIR/HJM/BGM), and worked pre-interview quant problems. See [sources/phynance-kakushadze-2014.md](../../sources/phynance-kakushadze-2014.md).

@@ -212,3 +212,6 @@ Issues found: 15. Auto-fixed: 13. Needs review: 2.
 ## [2026-05-18] wiki expansion | H205/H202-XL scan
 
 Pages updated: calendar-anomalies.md (Schroeder 2025 Halloween mechanism, H206 success gates), low-volatility.md (H205 design + regime-conditional BAB risk flag). Page created: research-log/2026-05-18.md. Staged proposals: 4 (H205 design, H206 strengthened, H202-XL large-universe support, H205 regime-conditional risk flag). Scan: arxiv:2507.07107 (gradient boosting 500-stock universe), arxiv:2511.12129 (S&P 500 ML stock selection), arxiv:2602.00196 (cross-sectional rank standardization essential for equity ML), Schroeder IJFS 2025 (SEC disclosure seasonality → Halloween mechanism), ScienceDirect 2025 (regime-conditional BAB in Asia). H205 backtest run_h205.py scheduled tonight.
+
+## [2026-05-20] ingest | Phynance — Kakushadze (arXiv:1405.1948)
+Pages created: 1 (sources/phynance-kakushadze-2014.md). Pages updated: 3 (bsm-information-geometry.md cross-reference added; wiki/index.md source entry; wiki/log.md). Key entities: Zura Kakushadze, Quantigic Solutions LLC. Covers: Itô calculus, Girsanov theorem, path integrals, BSM derivation, Greeks, Vasicek/CIR/HJM/BGM interest rate models, quant interview problems. Connected to H162 options income, Dean 2026 information geometry work.

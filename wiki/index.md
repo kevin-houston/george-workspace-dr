@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-17
-sources_indexed: 1
-pages: 75
+updated: 2026-05-20
+sources_indexed: 2
+pages: 76
 ---
 
 # Wiki Index
@@ -103,6 +103,9 @@ When answering a query:
 
 **Sources**
 - [A Portfolio Approach to Impact Investment (J.P. Morgan, 2012)](sources/jpmorgan-portfolio-approach-impact-investment-2012.md) — 3D Impact/Return/Risk portfolio framework; practical guide for institutional investors; Saltuk & El Idrissi
+
+**Trading Sources**
+- [Phynance — Kakushadze (arXiv:1405.1948, 2014)](sources/phynance-kakushadze-2014.md) — PhD lecture notes: stochastic calculus, Itô/Girsanov/path-integral formulation, BSM full derivation, Greeks, interest rate models (Vasicek/CIR/HJM/BGM), quant interview problems
 
 **Concepts**
 - [Impact Investing](concepts/impact-investing.md) — definition, key characteristics, risks, market context; distinguishes from SRI and philanthropy
