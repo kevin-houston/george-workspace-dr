@@ -20,6 +20,12 @@
       "claimToken": "9e41548f07ec331fbf9a5b4430750a5649633dac1153aa5de9446431af8b167d",
       "claimUrl": "https://here.now/claim?slug=quiet-beacon-v3xg&token=9e41548f07ec331fbf9a5b4430750a5649633dac1153aa5de9446431af8b167d",
       "expiresAt": "2026-05-11T01:08:30.503Z"
+    },
+    "vowful-pagoda-75ct": {
+      "siteUrl": "https://vowful-pagoda-75ct.here.now/",
+      "claimToken": "672d5510ed85893590fe4eeeb1e1ddc769ba2c177b0db0a39e3b15671da5adb0",
+      "claimUrl": "https://here.now/claim?slug=vowful-pagoda-75ct&token=672d5510ed85893590fe4eeeb1e1ddc769ba2c177b0db0a39e3b15671da5adb0",
+      "expiresAt": "2026-05-21T01:44:56.626Z"
     }
   }
 }

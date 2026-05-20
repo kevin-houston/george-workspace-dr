@@ -1,0 +1,2 @@
+allowBuilds:
+  node-jq: set this to true or false
