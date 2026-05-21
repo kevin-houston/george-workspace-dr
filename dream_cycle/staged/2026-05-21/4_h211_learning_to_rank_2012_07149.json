@@ -10,5 +10,5 @@
   "target_file": "/workspace/agent/backtesting/daily/run_h211.py",
   "content": "# H211 scaffold — quality-filtered cross-sectional momentum\n# Method: rolling IC filter on 6-1m momentum signal\n# Reference: arXiv:2012.07149 (Learning to Rank)\n# Universe: H202-XL 142-stock universe with IC quality filter\n#\n# Key hyperparameters to sweep:\n# - IC_WINDOW: 36 (3yr) or 60 (5yr)\n# - IC_THRESHOLD: 0.03 or 0.05\n# - TOP_N: 15 (10% of filtered universe)\n#\n# Expected: OOS Sharpe > H198 baseline (1.174) with lower MaxDD than H202-XL\n#\n# Implementation steps:\n# 1. For each stock, compute rolling IC_WINDOW-month IC of 6-1m signal vs fwd 1m return\n# 2. At each rebalance, restrict universe to stocks where IC > IC_THRESHOLD\n# 3. Run 6-1m rank (or XGBoost) on filtered universe, select TOP_N\n# 4. Compare OOS Sharpe vs H198 (threshold: 1.5) and H202-XL (threshold: 1.1)\n#\n# TODO: implement full backtest body\npass",
   "action": "write",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

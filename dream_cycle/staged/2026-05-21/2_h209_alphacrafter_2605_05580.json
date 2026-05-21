@@ -10,5 +10,5 @@
   "target_file": "/workspace/agent/wiki/trading/algorithms/deep-rl-trading.md",
   "content": "## AlphaCrafter Reference Architecture (for H209)\n\n**Paper**: Yuan et al. (2026), arXiv:2605.05580 (May 7, 2026), Nanjing University\n\n**Architecture**:\n1. **Miner Agent** — continuously expands factor pool via LLM-guided search; treats factor discovery as ongoing process not one-time\n2. **Screener Agent** — assesses market conditions; constructs regime-conditioned factor ensembles (which factors to use NOW)\n3. **Trader Agent** — translates factor ensembles into positions under explicit risk constraints (max drawdown, sector limits)\n\n**Key design insight**: factor efficacy varies by regime. A Screener that adapts ensemble weights to regime is more robust than a fixed multi-factor model.\n\n**Adaptation plan for H209 (our implementation)**:\n- Miner: use our confirmed factors (H192-D BAB, H198 MOM, H181 REV, H201 TOM) as fixed pool (skip open-ended LLM factor mining initially)\n- Screener: regime-conditioned blending — VIX + SMA200 gate to switch between factor weights\n- Trader: map to existing Alpaca execution pipeline\n- Compare against static blend as baseline",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

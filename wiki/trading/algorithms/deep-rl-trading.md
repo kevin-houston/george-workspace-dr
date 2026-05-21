@@ -247,3 +247,22 @@ pip install stable-baselines3 gymnasium finrl
 # For FinRL data pipeline:
 pip install pyfolio-reloaded alpaca-py yfinance
 ```
+
+---
+
+## AlphaCrafter Reference Architecture (for H209)
+
+**Paper**: Yuan et al. (2026), arXiv:2605.05580 (May 7, 2026), Nanjing University
+
+**Architecture**:
+1. **Miner Agent** — continuously expands factor pool via LLM-guided search; treats factor discovery as ongoing process not one-time
+2. **Screener Agent** — assesses market conditions; constructs regime-conditioned factor ensembles (which factors to use NOW)
+3. **Trader Agent** — translates factor ensembles into positions under explicit risk constraints (max drawdown, sector limits)
+
+**Key design insight**: factor efficacy varies by regime. A Screener that adapts ensemble weights to regime is more robust than a fixed multi-factor model.
+
+**Adaptation plan for H209 (our implementation)**:
+- Miner: use our confirmed factors (H192-D BAB, H198 MOM, H181 REV, H201 TOM) as fixed pool (skip open-ended LLM factor mining initially)
+- Screener: regime-conditioned blending — VIX + SMA200 gate to switch between factor weights
+- Trader: map to existing Alpaca execution pipeline
+- Compare against static blend as baseline

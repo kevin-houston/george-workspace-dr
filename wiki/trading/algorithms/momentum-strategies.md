@@ -374,3 +374,29 @@ Test volume-price herding as a third signal alongside H181 (industry reversal) a
 H198 is a **confirmed standalone strategy** but adds **limited diversification** to a portfolio already running H026 (ETF sector rotation), because the primary driver of stock momentum on a 30-stock large-cap universe is sector rotation. H192-D (BAB, Sharpe 1.367) remains the better stock-level alpha source because it exploits an orthogonal driver (low-beta anomaly within sectors).
 
 **Hypothesis queue status**: CONFIRMED — available for paper trading. Not recommended as a production portfolio addendum until Corr vs H026 production curve is verified.
+
+---
+
+## H210 — Agentic LLM Web Nowcasting (QUEUED)
+
+**Reference**: Chen & Pu (2026), 'Autonomous Market Intelligence: Agentic AI Nowcasting Predicts Stock Returns', arXiv:2601.11958
+
+**Protocol**:
+- LLM autonomously searches web for each stock in universe (no curated news feed)
+- Ranks stocks daily by 'attractiveness'
+- Long top-N at open; exit at close or T+1 open
+- OOS start date: April 2025 (when LLM real-time web search became reliable)
+
+**Published results** (Russell 1000, top-20):
+- Daily alpha: 18.4 bps (FF5+MOM adjusted)
+- Annualized Sharpe: 2.43
+- Alpha is concentrated in top tier only; bottom quintile indistinguishable from market
+
+**Our implementation plan (H210)**:
+- Universe: H198 30-stock mega-cap universe (manageable for daily LLM calls)
+- Top-5 long positions (≈ top 17% of universe, matching paper's top-2% of Russell 1000 via smaller universe)
+- Model: claude-opus-4-7 or GPT-4o with web search enabled
+- Baseline: H198 6-1m rank Sharpe 1.174
+- Confirm gate: OOS Sharpe > 1.5
+
+**Priority**: HIGH — published Sharpe 2.43 is the highest of any tested methodology
