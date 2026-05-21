@@ -1,0 +1,4 @@
+H174-BMO Analysis | Run: 2026-05-20 08:41
+OOS dual-filter all: n=26, WR=80.8%, MeanRet=5.7%
+BMO: n=3, WR=100.0%
+AMC: n=23, WR=78.3%

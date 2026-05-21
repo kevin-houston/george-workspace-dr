@@ -1,10 +1,14 @@
 {
-  "date": "2026-05-19",
+  "date": "2026-05-20",
   "candidates": [],
   "scores": {
     "HD": {
       "score": -0.0447,
       "surprise": -0.0438
+    },
+    "LOW": {
+      "score": -0.0244,
+      "surprise": -0.1733
     }
   }
 }
