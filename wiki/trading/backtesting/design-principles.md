@@ -348,3 +348,60 @@ Pre-trained models like FinBERT were trained on financial text from specific era
 - QuantStart: [Successful Backtesting Part I](https://www.quantstart.com/articles/Successful-Backtesting-of-Algorithmic-Trading-Strategies-Part-I/)
 
 **Related pages**: [Walk-Forward & CPCV](walk-forward-cpcv.md) | [Transaction Cost Modeling](transaction-costs.md) | [Hypothesis Log](hypothesis-log.md)
+
+
+---
+
+## Monte Carlo Permutation Test (MCPT) — Reference
+
+**Source**: Phosphen (@phosphenq) long-form thread, May 2026 — https://x.com/phosphenq/status/2057129225593741768
+**Original book**: Timothy Masters, *Permutation and Randomization Tests for Trading System Development* (2020)
+**Open-source impl**: `mcpt` by neurotrader888 on GitHub
+
+MCPT answers: "Could a worthless strategy have looked this good on random noise?"
+
+Every backtest sits somewhere on the spectrum between pure alpha and pure data-mining bias. MCPT tells you where.
+
+### How it works
+
+Decompose each OHLC bar into 5 relative components (gap, intra-bar high/low/close). Shuffle the intra-bar trio (h/l/c) together and gaps separately. Reassemble from original first bar. Result: same first open, same last close, same return distribution, same vol/skew/kurtosis — but all patterns destroyed.
+
+```python
+# pip install mcpt  (neurotrader888 open-source)
+# or use get_permutation() from the SSRN article code
+
+def run_insample_mcpt(df, optimize_fn, n_permutations=1000):
+    real_lb, real_pf = optimize_fn(df)
+    perm_better_count = 1
+    for i in range(1, n_permutations):
+        perm = get_permutation(df, seed=i)
+        _, perm_pf = optimize_fn(perm)
+        if perm_pf >= real_pf:
+            perm_better_count += 1
+    return perm_better_count / n_permutations  # p-value
+```
+
+### Thresholds
+
+- **p < 1%**: strong pass — fewer than 10 of 1,000 random shuffles beat the strategy
+- **p < 5%**: acceptable for short data history (< 1yr walk-forward window)
+- **p ≥ 5%**: fail — optimization is eating noise
+
+### Two tests in sequence
+
+1. **In-sample MCPT**: does the optimized IS performance beat permuted-data IS performance? Catches overfitting early, before spending OOS data.
+2. **Walk-forward MCPT**: re-run full WF on 200+ permuted series (only the post-training-window data permuted; training data stays real). Catches lucky sample-path alignment.
+
+### Failure modes MCPT can't catch
+
+- **Volatility-clustering strategies**: MCPT destroys vol clustering (GARCH-style regimes look "easier" on permuted data → optimistic bias against the strategy). Fix: block bootstrap (5–10 bar blocks).
+- **Lead-lag multi-market strategies**: default shuffle preserves contemporaneous correlation but destroys lead-lag → MCPT incorrectly rejects real edge. Fix: phase-randomization in frequency domain.
+- **Target-fiddling**: iterating strategy parameters until MCPT passes = data-mining the test. Fix: lock strategy spec before running MCPT. If it fails, discard — don't tweak.
+
+### Our backtest integration status
+
+- Currently NOT applied to confirmed strategies (H026, H181, H192-D, H198, H201).
+- IS/OOS split + Sharpe threshold + Deflated Sharpe Ratio is our current framework.
+- MCPT would be a stronger secondary validation, especially for strategies with many optimized parameters.
+- IAF (Investing Algorithm Framework) has Monte Carlo permutation testing built in — potential integration point.
+- **Queued action**: apply MCPT to all confirmed strategies as a retrospective audit.
