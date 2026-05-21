@@ -47,6 +47,8 @@ When answering a query:
 - [OpenAlgo](trading/tools/openalgo.md) — open-source algo trading platform; India-only now, US broker support on 2026 roadmap
 - [LiveKit](trading/tools/livekit.md) — open-source real-time voice/video/data framework for AI agents; WebRTC media server + agent SDK + cloud hosting; relevant for voice trading interface and agent-to-agent comms
 - [Portfolio Optimization Libraries](trading/tools/portfolio-optimization.md) — PyPortfolioOpt v1.6.0, Riskfolio-Lib v7.2.1, skfolio v0.20.1; HRP, risk parity, NCO, walk-forward CV; strategy blending code for H026+BAB+MOM+TOM ← new 2026-05-16
+- [Investing Algorithm Framework (IAF)](trading/tools/investing-algorithm-framework.md) — define→backtest→deploy; dual vector+event-driven modes; tiered SQLite storage for 10k+ runs; HTML dashboard; Monte Carlo testing; CCXT live (crypto); Alpaca needs custom executor ← new 2026-05-20
+- [NextTrade](trading/tools/nexttrade.md) — TypeScript GUI-based strategy builder; genetic algo optimization; abandoned (→NexusTrade SaaS); Tradier broker only; NOT relevant to our stack ← new 2026-05-20
 
 **Data Sources**
 - [Polygon.io](trading/data-sources/polygon.md) — market data (free: EOD only; paid: options, ticks, Greeks)
@@ -60,7 +62,7 @@ When answering a query:
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado
 - [Walk-Forward & CPCV](trading/backtesting/walk-forward-cpcv.md) — walk-forward variants, CPCV algorithm, purging/embargoing, DSR formulas; Python libs: timeseriescv/skfolio
 - [Transaction Cost Modeling](trading/backtesting/transaction-costs.md) — spread/impact/borrow cost models, square-root market impact, vectorbt/backtrader defaults, per-strategy calibration table
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H210 (frontier: H202-XL/H209/H210); H026 ETF rotation (Sharpe 3.007); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367); H198 6-1m momentum (Sharpe 1.174); H201 TOM (Sharpe 0.740); H210 QUEUED (LLM web nowcasting, 200-stock)
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H210 (frontier: H209/H210/H211); H026 ETF rotation (Sharpe 3.007); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367); H198 6-1m momentum (Sharpe 1.174); H201 TOM (Sharpe 0.740); calendar family closed (H205/H206/H207/H208 NOT CONFIRMED); H202-XL NOT CONFIRMED (OOS 1.106)
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules

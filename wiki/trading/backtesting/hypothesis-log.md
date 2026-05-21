@@ -5150,6 +5150,169 @@ Results: `backtesting/results/h199_results.json`
 
 ---
 
+## H205 — TOM Calendar Overlay on H192-D BAB
+
+**Status:** NOT CONFIRMED — TOM restriction degrades BAB; OOS Sharpe 1.177 < baseline H192-D 1.367
+**Date:** 2026-05-20
+
+### Hypothesis
+
+TOM window (last 2 + first 2 trading days) captures the BAB premium concentration. Restricting H192-D positions to TOM days and holding BIL otherwise should reduce drawdown while preserving most of the BAB return, lifting Sharpe above H192-D's 1.367 OOS.
+
+Universe: 30 large-cap stocks (same as H181/H192). IS: 2013–2020, OOS: 2021–2026.
+Confirm: OOS Sharpe > 1.5 (beat H192-D meaningfully); MaxDD < H192-D's -15.4%.
+
+### Results
+
+| Strategy | IS Sharpe | IS CAGR | OOS Sharpe | OOS CAGR | MaxDD | NegYrs |
+|----------|-----------|---------|------------|---------|-------|--------|
+| H205 (TOM-BAB) | 0.492 | 2.6% | 1.177 | 7.8% | -5.4% | 1 |
+| H192-D baseline | — | — | **1.367** | — | -15.4% | — |
+
+**TOM % of days invested:** 19.1% (vs 100% for H192-D)
+
+### Diagnosis
+
+The TOM overlay DOES reduce drawdown meaningfully (-5.4% vs -15.4%), but it also kills most of the return (OOS CAGR 7.8% vs ~14% for H192-D), resulting in a net WORSE Sharpe. BAB alpha is not concentrated in TOM windows on this 30-stock large-cap universe — it is earned more uniformly across the month.
+
+IS Sharpe is only 0.492, which is unusually low vs the OOS 1.177, suggesting the TOM+BAB interaction is noisy and the OOS result may be optimistic. The hypothesis did not confirm, and the IS/OOS divergence is a warning sign.
+
+**Contrast with H201:** TOM works on SPY (OOS Sharpe 0.740) because it extracts the end-of-month equity premium efficiently. BAB is a different source of return (low-beta premium) that doesn't cluster at month-turn. Combining two calendar/factor effects orthogonally fails when the effects are derived from different mechanisms.
+
+Script: `backtesting/daily/run_h205.py`
+Results: `backtesting/results/h205_results.json`
+
+---
+
+## H206 — Halloween Effect on SPY + TOM Composite
+
+**Status:** NOT CONFIRMED — all variants below thresholds; SPY buy-and-hold dominates
+**Date:** 2026-05-20
+
+### Hypothesis
+
+Hold SPY in winter months (Nov–Apr) per Bouman & Jacobsen (2002). Structural mechanism identified by Schroeder (IJFS 2025): SEC disclosures 17% higher in winter, Feb is the peak month, plus 22% more insider trading and 473% more annual reports — durable regulatory-calendar driver.
+
+Variant H206-B adds TOM filter within winter: hold SPY only during TOM windows in Nov–Apr, BIL otherwise (TOM + Halloween compound).
+
+IS: 2003–2017, OOS: 2018–2026. Confirm: H206-A OOS Sharpe > 0.6; H206-B OOS Sharpe > 0.8.
+
+### Results
+
+| Strategy | IS Sharpe | OOS Sharpe | OOS CAGR | MaxDD | Days Invested |
+|----------|-----------|------------|---------|-------|---------------|
+| SPY buy-and-hold | 0.464 | 0.789 | 15.2% | -33.7% | 100% |
+| H206-A (Nov–Apr SPY) | 0.537 | 0.535 | 8.5% | -33.7% | 49.3% |
+| H206-B (TOM within Nov–Apr) | 0.294 | 0.435 | 2.8% | -12.2% | 9.6% |
+| H201 ref (TOM always) | 0.147 | 0.481 | 3.9% | -9.3% | 19.1% |
+
+Neither variant confirmed. H206-A OOS Sharpe 0.535 < 0.6; H206-B 0.435 < 0.8. SPY buy-and-hold (OOS Sharpe 0.789) beats both.
+
+### Diagnosis
+
+The Halloween effect existed in 1970–2000 data (Bouman & Jacobsen). In the OOS period (2018–2026), the pattern has decayed: the 2020 COVID crash (March) and 2022 rate shock (both winter months) erode the winter edge. The summer (May–Oct) includes the 2019 and 2023/24 bull market rallies which the strategy misses entirely.
+
+Schroeder's structural mechanism (SEC disclosure seasonality) is real but not exploitable through simple long/short seasonality — the information flow advantage is priced in via analyst coverage, not left as a tradeable alpha.
+
+**H207 (TOM+Halloween composite) subsumed by H206-B.** H206-B IS the TOM+Halloween composite and failed (OOS 0.435 < 0.8). No need to run a separate H207 script.
+
+Script: `backtesting/daily/run_h206.py`
+Results: `backtesting/results/h206_results.json`
+
+---
+
+## H207 — TOM + Halloween Composite
+
+**Status:** SUBSUMED BY H206-B — not run separately
+**Date:** 2026-05-20
+
+H206-B (TOM within Nov–Apr only) is the TOM+Halloween compound strategy. It returned OOS Sharpe 0.435, below the 0.8 confirmation threshold. No separate H207 script required.
+
+---
+
+## H208 — FOMC Pre-Meeting Premium
+
+**Status:** NOT CONFIRMED — post-publication decay; OOS Sharpe 0.492 (narrow) / 0.235 (wide)
+**Date:** 2026-05-20
+
+### Hypothesis
+
+Lucca & Moench (2015, JF): ~80% of the annual US equity premium has historically been earned in the 24h before FOMC rate decisions. Buy SPY at close of D-1, sell at close of D0 (~8 events/year = 6.4% of trading days). Also tests D-2 through D+1 wide window (12.8% of days).
+
+IS: 2003–2017, OOS: 2018–2026. Confirm: OOS Sharpe > 0.6.
+
+### Results
+
+| Strategy | IS Sharpe | OOS Sharpe | OOS Cumul | MaxDD | Days |
+|----------|-----------|------------|---------|-------|------|
+| SPY buy-and-hold | 0.464 | 0.805 | 3.124 | -33.7% | 100% |
+| H208-A narrow (D-1→D0) | 0.570 | **0.492** | 1.275 | -11.5% | 6.4% |
+| H208-B wide (D-2→D+1) | 0.129 | **0.235** | 1.149 | -17.8% | 12.8% |
+
+Neither confirmed. Both below 0.6 OOS Sharpe. SPY buy-and-hold (0.805 OOS) dominates.
+
+### Diagnosis
+
+Post-publication decay. The narrow window showed a reasonable IS signal (0.570), but OOS decay from 0.570 → 0.492 confirms the effect has been partly arbitraged since Lucca & Moench's 2015 publication. Quantpedia's own updated estimate (~0.3% pre-FOMC return, reduced from 0.5%) is consistent with this.
+
+The wide window (D-2 through D+1) is much worse — this likely over-samples noise around FOMC dates and averages the premium with surrounding non-premium days. IS Sharpe 0.129 is already diagnostic of noise.
+
+**Calendar anomaly family closed.** H201 (pure TOM, OOS 0.740) is the only confirmed member. H205 (TOM-BAB), H206 (Halloween), H207 (subsumed), H208 (FOMC) all NOT CONFIRMED. No further calendar strategies queued.
+
+Script: `backtesting/daily/run_h208.py`
+Results: `backtesting/results/h208_results.json`
+
+---
+
+## H202-XL — XGBoost Cross-Sectional Momentum (142-Stock Universe)
+
+**Status:** NOT CONFIRMED — OOS Sharpe 1.106 (XGBoost), 1.050 (6-1m rank); threshold 1.5
+**Date:** 2026-05-20
+
+### Hypothesis
+
+Scale H202-C (XGBoost + bias mask) from 30 to ~150 stocks. Research question: does a larger cross-sectional universe improve ML signal by providing more training examples and better factor differentiation?
+
+### Results
+
+| Strategy | IS Sharpe | IS Cumul | OOS Sharpe | OOS Cumul | MaxDD |
+|----------|-----------|---------|------------|---------|-------|
+| SPY buy-and-hold | 1.105 | 3.070 | 0.954 | 2.044 | -23.9% |
+| A: 6-1m rank top-15 | 1.624 | 7.993 | 1.050 | 2.819 | -14.5% |
+| B: XGBoost top-15 | 1.035 | 4.365 | **1.106** | 2.825 | -20.0% |
+| H198 reference (30-stock) | — | — | 1.174 | — | -22.7% |
+| H202-C reference (30-stock XGB) | — | — | 1.278 | — | — |
+
+Universe loaded: 142 stocks (all 142/142 downloaded successfully).
+
+### Key Findings
+
+1. **Scaling hurts, not helps.** 6-1m momentum on 142 stocks (OOS 1.050) is worse than on 30 stocks (OOS 1.174). Adding mid-large-cap stocks dilutes the portfolio with weaker-momentum names, pulling average signal quality down.
+
+2. **XGBoost provides marginal improvement** at scale (1.106 vs 1.050 for rank), consistent with H202-C — but the gap is smaller at 142 stocks, suggesting XGBoost's main contribution is identifying the high-quality subset, which is the job of universe selection in the first place.
+
+3. **Diversification benefit is real.** MaxDD drops from -22.7% (H198/30-stock) to -14.5% (A/142-stock). More holdings reduce idiosyncratic drawdown. This is the only significant improvement from scaling.
+
+4. **IS over-fit warning.** XGBoost IS Sharpe (1.035) is actually BELOW the simple rank IS Sharpe (1.624), suggesting the XGBoost model is not capturing the in-sample pattern as cleanly as on 30 stocks. The walk-forward training on 142 stocks produces a noisier model.
+
+### Diagnosis
+
+The fundamental issue: **momentum quality is not uniform across large-cap stocks.** The original 30-stock universe selected mega-cap names (AAPL, MSFT, NVDA, AMZN, META, GOOGL) with stronger momentum properties. Adding ~112 more large-caps introduces stocks where momentum is weaker (utilities, consumer staples, financials) or noisy (energy, materials). A more productive path is:
+- Universe quality filter: use only stocks with strong historical momentum properties (IC > 0.03 on 6-1m signal in prior 5yr)
+- Or restrict to top 50 by market cap, which approximates the quality filter
+- Or sector-specific universes (pure IT/CS momentum separate from defensive sectors)
+
+### Portfolio Implications
+
+H202-XL does beat SPY (1.106 vs 0.954 OOS) and has low drawdown (-20%). It could contribute to a blend as a diversifier. But at OOS Sharpe 1.106 it does not clear the confirmation bar and is dominated by H198 (1.174) on 30 stocks.
+
+**Next frontier for ML momentum: H211 (quality-filtered universe)** — restrict to top 50-70 stocks by market cap or use IC-based universe selection to find which stocks benefit most from the momentum signal.
+
+Script: `backtesting/daily/run_h202xl.py`
+Results: `backtesting/results/h202xl_results.json`
+
+---
+
 ## H210 — LLM Autonomous Web Search Nowcasting
 
 **Status:** QUEUED — priority: MEDIUM; run after H202-XL

@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-18
+updated: 2026-05-20
 type: strategy family
-status: active — H201 CONFIRMED; H205 queued; H206 queued; Halloween mechanism confirmed (Schroeder 2025)
+status: RESEARCH CLOSED — H201 CONFIRMED (TOM, OOS 0.740); all other variants exhausted (H205/H206/H207/H208 NOT CONFIRMED)
 ---
 
 # Calendar Anomalies

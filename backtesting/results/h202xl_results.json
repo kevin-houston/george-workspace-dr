@@ -1,0 +1,60 @@
+{
+  "hypothesis": "H202-XL",
+  "description": "XGBoost cross-sectional momentum on 150-stock universe",
+  "universe_size": 142,
+  "top_n": 15,
+  "confirm_threshold": 1.5,
+  "verdict_A": "NOT CONFIRMED",
+  "verdict_B": "NOT CONFIRMED",
+  "verdict": "NOT CONFIRMED",
+  "ref_h198_oos_sharpe": 1.174,
+  "ref_h202c_oos_sharpe": 1.278,
+  "spy_is": {
+    "n": 96,
+    "sharpe": 1.105,
+    "cumul": 3.0697,
+    "cagr_pct": 15.02,
+    "maxdd": -0.194,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "n": 64,
+    "sharpe": 0.954,
+    "cumul": 2.0444,
+    "cagr_pct": 14.64,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "A_is": {
+    "n": 96,
+    "sharpe": 1.624,
+    "cumul": 7.9931,
+    "cagr_pct": 27.67,
+    "maxdd": -0.176,
+    "neg_yrs": 0
+  },
+  "A_oos": {
+    "n": 64,
+    "sharpe": 1.05,
+    "cumul": 2.8192,
+    "cagr_pct": 21.66,
+    "maxdd": -0.145,
+    "neg_yrs": 0
+  },
+  "B_is": {
+    "n": 96,
+    "sharpe": 1.035,
+    "cumul": 4.3645,
+    "cagr_pct": 20.62,
+    "maxdd": -0.361,
+    "neg_yrs": 1
+  },
+  "B_oos": {
+    "n": 64,
+    "sharpe": 1.106,
+    "cumul": 2.8251,
+    "cagr_pct": 21.48,
+    "maxdd": -0.2,
+    "neg_yrs": 1
+  }
+}
