@@ -1,0 +1,14 @@
+{
+  "id": "h210-arxiv-2601.11958",
+  "date": "2026-05-21",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2601.11958",
+  "title": "H210: Agentic LLM nowcasting — exact blueprint from Chen & Pu (Jan 2026)",
+  "rationale": "arXiv:2601.11958 'Autonomous Market Intelligence: Agentic AI Nowcasting Predicts Stock Returns' (Jan 2026, Zefeng Chen & Darcy Pu) is a direct proof-of-concept for H210. Key results: 100% agentic LLM (no curated news feed) evaluates Russell 1000 stocks daily via autonomous web search; top-20 ranked stocks yield 18.4 bps/day alpha (FF5+MOM adjusted), Sharpe 2.43 annualized; data starts April 2025 (when AI web interfaces enabled real-time search). This validates H210 is feasible and profitable at scale. Implementation: (1) prompt Claude or GPT-4o to rank each stock in our 30-stock universe daily from public web, (2) long top-5 at open, exit at close or next open, (3) compare against H198 baseline. The paper's 2.43 Sharpe suggests this could become our highest-Sharpe confirmed strategy if it replicates.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/momentum-strategies.md",
+  "content": "## H210 — Agentic LLM Web Nowcasting (QUEUED)\n\n**Reference**: Chen & Pu (2026), 'Autonomous Market Intelligence: Agentic AI Nowcasting Predicts Stock Returns', arXiv:2601.11958\n\n**Protocol**:\n- LLM autonomously searches web for each stock in universe (no curated news feed)\n- Ranks stocks daily by 'attractiveness'\n- Long top-N at open; exit at close or T+1 open\n- OOS start date: April 2025 (when LLM real-time web search became reliable)\n\n**Published results** (Russell 1000, top-20):\n- Daily alpha: 18.4 bps (FF5+MOM adjusted)\n- Annualized Sharpe: 2.43\n- Alpha is concentrated in top tier only; bottom quintile indistinguishable from market\n\n**Our implementation plan (H210)**:\n- Universe: H198 30-stock mega-cap universe (manageable for daily LLM calls)\n- Top-5 long positions (≈ top 17% of universe, matching paper's top-2% of Russell 1000 via smaller universe)\n- Model: claude-opus-4-7 or GPT-4o with web search enabled\n- Baseline: H198 6-1m rank Sharpe 1.174\n- Confirm gate: OOS Sharpe > 1.5\n\n**Priority**: HIGH — published Sharpe 2.43 is the highest of any tested methodology",
+  "action": "append",
+  "apply_status": "pending"
+}

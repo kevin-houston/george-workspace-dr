@@ -1,0 +1,106 @@
+{
+  "date": "2026-05-21",
+  "scan_angles": [
+    "PEAD + earnings NLP + LLM",
+    "Cross-sectional momentum + quality filter + IC",
+    "LLM web nowcasting + macro signals",
+    "Multi-agent LLM trading",
+    "GitHub trending quant repos"
+  ],
+  "high_relevance_finds": [
+    {
+      "angle": "LLM web nowcasting",
+      "paper": "Autonomous Market Intelligence: Agentic AI Nowcasting Predicts Stock Returns",
+      "arxiv": "2601.11958",
+      "date": "2026-01",
+      "authors": "Zefeng Chen, Darcy Pu",
+      "signal": "100% agentic LLM evaluates Russell 1000 stocks daily via autonomous web search. Top-20 ranked stocks: 18.4 bps/day alpha (FF5+MOM), Sharpe 2.43 annualized. Data starts April 2025. Highly concentrated at top tier.",
+      "relevance": "DIRECT blueprint for H210. Confirms feasibility and provides exact methodology. If we replicate top 17% of our 30-stock universe (top-5), Sharpe 2.43 is possible.",
+      "staged_proposal": "1_h210_arxiv_2601_11958_nowcasting.json",
+      "priority": "HIGH — raises H210 from speculative to evidence-backed"
+    },
+    {
+      "angle": "Multi-agent LLM trading",
+      "paper": "AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading",
+      "arxiv": "2605.05580",
+      "date": "2026-05-07",
+      "authors": "Yishuo Yuan et al. (Nanjing University)",
+      "signal": "Three-agent pipeline: Miner (factor pool expansion), Screener (regime-conditioned ensemble selection), Trader (risk-constrained execution). Daily rotation. Factor mining is adaptive/ongoing, not one-time.",
+      "relevance": "Direct implementation of H209. Architecture is more specific than our original spec. Key improvement: regime-conditioned factor blending (Screener agent) fits perfectly with our confirmed strategies.",
+      "staged_proposal": "2_h209_alphacrafter_2605_05580.json",
+      "priority": "HIGH — AlphaCrafter is H209 done; study before implementing"
+    },
+    {
+      "angle": "PEAD + earnings NLP",
+      "paper": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "arxiv": "2509.24254",
+      "date": "2025-09",
+      "signal": "Structural features of 8-K press releases (guidance section presence, non-GAAP table emphasis, forward-looking word ratio) predict announcement-day returns beyond FinBERT sentiment score alone. Dataset: 138k press releases 2005-2023.",
+      "relevance": "Additive enhancement to H174 (FinBERT 8-K pipeline). Low-risk 3rd filter gate on top of existing dual-threshold system.",
+      "staged_proposal": "3_h174_press_release_structure_2509_24254.json",
+      "priority": "MEDIUM — improvement to production strategy"
+    },
+    {
+      "angle": "PEAD + earnings NLP",
+      "paper": "SAE-FiRE: Enhancing Earnings Surprise Predictions Through Sparse Autoencoder Feature Selection",
+      "arxiv": "2505.14420",
+      "date": "2025-05",
+      "signal": "Sparse Autoencoder for Financial Representation Enhancement — denoises earnings call features by selecting only predictive components. Addresses signal/noise separation problem in earnings call analysis.",
+      "relevance": "Longer-term upgrade for H174 — would require significant implementation. Not staged yet; monitor for a follow-up paper with code release.",
+      "staged_proposal": null,
+      "priority": "LOW — interesting but complex"
+    },
+    {
+      "angle": "Cross-sectional momentum + quality filter",
+      "paper": "Building Cross-Sectional Systematic Strategies By Learning to Rank",
+      "arxiv": "2012.07149",
+      "date": "2020-12",
+      "signal": "LambdaRank/LightGBM Ranker on cross-sectional factors yields ~3x Sharpe vs traditional ranking. Direct to H211 quality-filtered universe design.",
+      "relevance": "H211 implementation method: use LGBMRanker with per-stock rolling IC as a quality weight. Better than hard IC cutoff.",
+      "staged_proposal": "4_h211_learning_to_rank_2012_07149.json",
+      "priority": "MEDIUM — H211 implementation guidance"
+    }
+  ],
+  "medium_relevance_finds": [
+    {
+      "paper": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "source": "ACL Anthology 2025 FinNLP workshop",
+      "signal": "FinBERT achieves 57.6%/58.3% classification accuracy on PEAD measurement — validates H174's use of FinBERT domain-specific model over general LLMs.",
+      "note": "Confirms H174 architecture choice"
+    },
+    {
+      "paper": "ATLAS: Adaptive Trading with LLM AgentS (arXiv:2510.15949)",
+      "date": "2025-10",
+      "signal": "Unified multi-agent framework handling late/obscured reward signals in trading — addresses the 'noise-obscured reward' problem for RL-based agents.",
+      "note": "Relevant if we pursue H204 (PPO RL); not for H209/H210"
+    },
+    {
+      "paper": "TrustTrade: Human-Inspired Selective Consensus (arXiv:2603.22567)",
+      "date": "2026-03",
+      "signal": "Calibrates LLM trading behavior through controlled backtesting in high-noise market environments (2024 Q1, 2026 Q1). Selective consensus reduces decision uncertainty.",
+      "note": "Could apply to H210 ensemble design: use multiple LLM rankings + consensus"
+    }
+  ],
+  "low_relevance_finds": [
+    {
+      "paper": "Language Model Guided Reinforcement Learning in Quantitative Trading (arXiv:2508.02366)",
+      "note": "RL + LLM combo — relevant only if H204 (deep RL) is prioritized"
+    }
+  ],
+  "github_finds": [
+    {
+      "repo": "Alesarabandi/Quantitative-Momentum-Strategy-Backtesting",
+      "url": "https://github.com/Alesarabandi/Quantitative-Momentum-Strategy-Backtesting",
+      "note": "S&P 500 + STOXX 600 cross-sectional momentum with skewness enhancement; TSM+CSM combo. Validation that our H198 approach is well-established."
+    },
+    {
+      "repo": "0xemmkty/QuantMuse",
+      "url": "https://github.com/0xemmkty/QuantMuse",
+      "note": "Multi-factor model with AI/LLM integration and backtesting. Stars unclear but architecture similar to H209 target."
+    }
+  ],
+  "summary": "Strong session. Two HIGH-priority finds: arXiv:2601.11958 provides the exact implementation blueprint for H210 (Sharpe 2.43 published result validates the approach), and arXiv:2605.05580 (AlphaCrafter) is essentially H209 already published — we should read it before implementing. The PEAD structural features paper (2509.24254) is a clean incremental improvement to H174 with low implementation risk. H211 gets the learning-to-rank framework from 2012.07149 as an implementation method. 4 proposals staged total.",
+  "proposals_staged": 4,
+  "proposals_high_priority": 2,
+  "proposals_medium_priority": 2
+}

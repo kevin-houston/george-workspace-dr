@@ -1,0 +1,14 @@
+{
+  "id": "h211-learning-to-rank-2012.07149",
+  "date": "2026-05-21",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2012.07149",
+  "title": "H211: Learning-to-Rank for quality-filtered universe (LambdaRank/LightGBM)",
+  "rationale": "arXiv:2012.07149 'Building Cross-Sectional Systematic Strategies By Learning to Rank' demonstrates that replacing raw signal ranking with modern ML learning-to-rank (LambdaRank, LightGBM Ranker) on cross-sectional strategies yields ~3× Sharpe improvement vs. traditional ranking. This is directly applicable to H211 (quality-filtered universe momentum). H202-XL showed that naive scaling to 142 stocks hurts because signal-quality varies by sector (IT/CS IC ~0.07; utilities IC ≈ 0). Learning-to-rank with an IC quality feature would achieve the same effect as a hard IC filter while remaining differentiable and adaptive. Implementation: add per-stock rolling 3yr IC as a feature in the H202-XL XGBoost model; alternatively, switch to LightGBM Ranker (`lgb.LGBMRanker`) with IC-weighted training labels.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h211.py",
+  "content": "# H211 scaffold — quality-filtered cross-sectional momentum\n# Method: rolling IC filter on 6-1m momentum signal\n# Reference: arXiv:2012.07149 (Learning to Rank)\n# Universe: H202-XL 142-stock universe with IC quality filter\n#\n# Key hyperparameters to sweep:\n# - IC_WINDOW: 36 (3yr) or 60 (5yr)\n# - IC_THRESHOLD: 0.03 or 0.05\n# - TOP_N: 15 (10% of filtered universe)\n#\n# Expected: OOS Sharpe > H198 baseline (1.174) with lower MaxDD than H202-XL\n#\n# Implementation steps:\n# 1. For each stock, compute rolling IC_WINDOW-month IC of 6-1m signal vs fwd 1m return\n# 2. At each rebalance, restrict universe to stocks where IC > IC_THRESHOLD\n# 3. Run 6-1m rank (or XGBoost) on filtered universe, select TOP_N\n# 4. Compare OOS Sharpe vs H198 (threshold: 1.5) and H202-XL (threshold: 1.1)\n#\n# TODO: implement full backtest body\npass",
+  "action": "write",
+  "apply_status": "pending"
+}

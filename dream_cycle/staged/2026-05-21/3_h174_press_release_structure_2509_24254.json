@@ -1,0 +1,14 @@
+{
+  "id": "h174-press-release-structure-2509.24254",
+  "date": "2026-05-21",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.24254",
+  "title": "H174 enhancement: structured press release parsing for 8-K prediction",
+  "rationale": "arXiv:2509.24254 'Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns' (Sep 2025) analyzes 138,000 press releases 2005-2023 and finds that textual structure (section ordering, emphasis patterns, table vs. narrative) predicts earnings announcement returns beyond pure sentiment. This is a direct enhancement to H174 (FinBERT NLP on 8-K press releases). Current H174 uses FinBERT sentiment score + EPS surprise as dual filter. Enhancement: add structural features (has_guidance_section, uses_non-GAAP_tables, paragraph_count, forward_looking_ratio) as additional inputs. Low implementation risk — purely additive to existing pipeline.",
+  "risk_level": "medium",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/event-driven.md",
+  "content": "### Press Release Structure Features (H174 enhancement candidate)\n\n**Reference**: arXiv:2509.24254 (Sep 2025), 138k press releases 2005-2023\n\nStructural features of 8-K press releases that predict announcement-day returns beyond pure FinBERT sentiment:\n\n```python\ndef extract_press_release_features(text: str) -> dict:\n    \"\"\"Extract structural features predictive of announcement return.\"\"\"\n    lines = text.split('\\n')\n    return {\n        'has_guidance_section': any('guidance' in l.lower() or 'outlook' in l.lower() for l in lines),\n        'has_non_gaap_tables': 'non-gaap' in text.lower() or 'adjusted' in text.lower(),\n        'forward_looking_ratio': sum(1 for l in lines if any(w in l.lower() for w in ['expect', 'forecast', 'anticipate', 'project'])) / max(len(lines), 1),\n        'paragraph_count': text.count('\\n\\n'),\n        'numeric_density': sum(c.isdigit() for c in text) / max(len(text), 1),\n    }\n```\n\n**Integration with H174**: add these features as a 3rd filter gate (after FinBERT score and EPS surprise). Papers find: presence of forward guidance and non-GAAP table emphasis predicts stronger positive drift; absence of guidance → neutral or negative drift regardless of headline EPS surprise.",
+  "action": "append",
+  "apply_status": "pending"
+}

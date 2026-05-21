@@ -1,0 +1,14 @@
+{
+  "id": "h209-alphacrafter-2605.05580",
+  "date": "2026-05-21",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2605.05580",
+  "title": "H209: AlphaCrafter architecture — read before implementing multi-agent system",
+  "rationale": "arXiv:2605.05580 'AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading' (May 7, 2026, Yishuo Yuan et al., Nanjing University) directly implements H209. Three specialized agents: (1) Miner — LLM-guided continuous factor pool expansion, (2) Screener — regime-conditioned factor ensemble construction, (3) Trader — risk-constrained execution. Daily-frequency rotation. Key innovation: treats factor mining as ongoing adaptive process, not one-time search. This is stronger than H209's original spec (which was more general). Implementation strategy: adapt AlphaCrafter's three-agent architecture to our confirmed factor pool (BAB, momentum, reversal, TOM) rather than open-ended LLM factor mining. Use our validated factors as the Miner's starting pool; let the Screener learn which factors to weight in current regime.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/deep-rl-trading.md",
+  "content": "## AlphaCrafter Reference Architecture (for H209)\n\n**Paper**: Yuan et al. (2026), arXiv:2605.05580 (May 7, 2026), Nanjing University\n\n**Architecture**:\n1. **Miner Agent** — continuously expands factor pool via LLM-guided search; treats factor discovery as ongoing process not one-time\n2. **Screener Agent** — assesses market conditions; constructs regime-conditioned factor ensembles (which factors to use NOW)\n3. **Trader Agent** — translates factor ensembles into positions under explicit risk constraints (max drawdown, sector limits)\n\n**Key design insight**: factor efficacy varies by regime. A Screener that adapts ensemble weights to regime is more robust than a fixed multi-factor model.\n\n**Adaptation plan for H209 (our implementation)**:\n- Miner: use our confirmed factors (H192-D BAB, H198 MOM, H181 REV, H201 TOM) as fixed pool (skip open-ended LLM factor mining initially)\n- Screener: regime-conditioned blending — VIX + SMA200 gate to switch between factor weights\n- Trader: map to existing Alpaca execution pipeline\n- Compare against static blend as baseline",
+  "action": "append",
+  "apply_status": "pending"
+}
