@@ -117,3 +117,40 @@
 [2026-05-20 23:05:58] Candidates for tomorrow: none
 [2026-05-20 23:05:58] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-05-20 23:05:58] Overnight pass complete.
+[2026-05-21 23:01:57] =======================================================
+[2026-05-21 23:01:57] PEAD overnight pass starting
+[2026-05-21 23:01:57] Scanning earnings calendar…
+[2026-05-21 23:02:24]   Tickers with recent earnings: ['NVDA', 'WMT', 'HD', 'LOW']
+[2026-05-21 23:02:24]   Fetching 8-K for NVDA…
+[2026-05-21 23:02:34]     NVDA: 4753 chars
+[2026-05-21 23:02:34]   Fetching 8-K for WMT…
+[2026-05-21 23:02:36]     WMT: 6060 chars
+[2026-05-21 23:02:36]   Fetching 8-K for HD…
+[2026-05-21 23:02:38]     HD: 4308 chars
+[2026-05-21 23:02:38]   Fetching 8-K for LOW…
+[2026-05-21 23:02:39]     LOW: 4731 chars
+[2026-05-21 23:03:19]   Loading ProsusAI/finbert…
+[2026-05-21 23:07:33] =======================================================
+[2026-05-21 23:07:33] PEAD overnight pass starting
+[2026-05-21 23:07:33] Scanning earnings calendar…
+[2026-05-21 23:07:59]   Tickers with recent earnings: ['NVDA', 'WMT', 'HD', 'LOW']
+[2026-05-21 23:07:59]   Fetching 8-K for NVDA…
+[2026-05-21 23:08:06]     NVDA: 4753 chars
+[2026-05-21 23:08:06]   Fetching 8-K for WMT…
+[2026-05-21 23:08:08]     WMT: 6060 chars
+[2026-05-21 23:08:08]   Fetching 8-K for HD…
+[2026-05-21 23:08:10]     HD: 4308 chars
+[2026-05-21 23:08:10]   Fetching 8-K for LOW…
+[2026-05-21 23:08:11]     LOW: 4731 chars
+[2026-05-21 23:09:57]   Loading ProsusAI/finbert…
+[2026-05-21 23:10:03]   NVDA: score=-0.003  surprise=-0.339
+[2026-05-21 23:10:04]   WMT: score=-0.014  surprise=-0.172
+[2026-05-21 23:10:05]   HD: score=-0.045  surprise=-0.044
+[2026-05-21 23:10:06]   LOW: score=-0.024  surprise=-0.173
+[2026-05-21 23:10:06]   ✗ NVDA filtered out (score=-0.003, surprise=-0.3387)
+[2026-05-21 23:10:06]   ✗ WMT filtered out (score=-0.013, surprise=-0.1718)
+[2026-05-21 23:10:06]   ✗ HD filtered out (score=-0.045, surprise=-0.0438)
+[2026-05-21 23:10:06]   ✗ LOW filtered out (score=-0.024, surprise=-0.1733)
+[2026-05-21 23:10:06] Candidates for tomorrow: none
+[2026-05-21 23:10:06] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-05-21 23:10:06] Overnight pass complete.

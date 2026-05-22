@@ -122,13 +122,23 @@ class PodcastAudioGenerator:
         return text
 
     async def generate_segment_audio(self, index, speaker, text):
-        """Generate audio for a single segment"""
+        """Generate audio for a single segment with retry on transient 503 errors"""
+        import asyncio as _asyncio
         voice = ALEX_VOICE if speaker.lower() == 'alex' else JORDAN_VOICE
         output_file = self.output_dir / f"segment_{index:04d}.mp3"
         clean_text = self.clean_text_for_tts(text)
-        communicate = edge_tts.Communicate(clean_text, voice, rate="+0%", volume="+0%")
-        await communicate.save(str(output_file))
-        return output_file
+        for attempt in range(4):
+            try:
+                communicate = edge_tts.Communicate(clean_text, voice, rate="+0%", volume="+0%")
+                await communicate.save(str(output_file))
+                return output_file
+            except Exception as e:
+                if attempt < 3:
+                    wait = 3 * (attempt + 1)
+                    print(f"    ⚠️  Attempt {attempt+1} failed ({e}), retrying in {wait}s...")
+                    await _asyncio.sleep(wait)
+                else:
+                    raise
 
     async def generate_all_segments(self):
         """Generate audio for all segments"""
