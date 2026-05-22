@@ -266,3 +266,38 @@ pip install pyfolio-reloaded alpaca-py yfinance
 - Screener: regime-conditioned blending — VIX + SMA200 gate to switch between factor weights
 - Trader: map to existing Alpaca execution pipeline
 - Compare against static blend as baseline
+
+---
+
+### Fine-Grained Agent Input Design (H209 AlphaCrafter Screener)
+
+**Reference**: arXiv:2602.23330 (Feb 2026) — 'Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks'
+
+**Key finding**: LLM trading agents achieve Sharpe +0.08 to +0.26 improvement when given **pre-calculated, structured inputs** vs. raw data. The improvement comes from removing the compute-from-raw overhead and letting the agent focus on judgment.
+
+**Applied to H209 AlphaCrafter Screener agent prompt design**:
+
+```python
+# GOOD: structured inputs per stock
+screener_context = f"""
+Stock: {ticker}
+Date: {date}
+
+== Pre-calculated signals ==
+6-1m momentum rank: {mom_rank}/30 (1=top, 30=bottom)
+Vol-scaled signal: {vol_scaled_signal:.3f} (vs universe mean {universe_mean:.3f})
+Trailing 6m realized vol: {realized_vol:.2%}
+Sector IC (trailing 3yr): {sector_ic:.3f}
+Recent 8-K FinBERT score: {finbert_score:.3f}
+Market regime (VIX): {vix_regime} (LOW/NORMAL/HIGH)
+
+== Question ==
+Given these pre-calculated signals, should this stock be included in
+the top-6 momentum portfolio this month? Answer: YES/NO and 1-sentence rationale.
+"""
+
+# BAD: raw data dump
+screener_context = f"Here is the OHLCV data for {ticker}: {raw_ohlcv_data}..."
+```
+
+**Design rule**: Always pre-compute factor values numerically before sending to LLM agent. The LLM's job is synthesis and judgment, not arithmetic. This also controls API costs (shorter inputs = lower token count).

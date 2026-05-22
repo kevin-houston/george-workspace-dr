@@ -440,3 +440,35 @@ def extract_press_release_features(text: str) -> dict:
 ```
 
 **Integration with H174**: add these features as a 3rd filter gate (after FinBERT score and EPS surprise). Papers find: presence of forward guidance and non-GAAP table emphasis predicts stronger positive drift; absence of guidance → neutral or negative drift regardless of headline EPS surprise.
+
+---
+
+### Earnings Call Transcript Analysis — H174 Enhancement Candidate (PEAD.txt)
+
+**Reference**: FinNLP 2025 Workshop (ACL), Hadlock, Roberts & Lee  
+**Finding**: Text-based PEAD from earnings call transcripts (PEAD.txt) maintains meaningful alpha even as numeric PEAD (EPS surprise) has attenuated. FinBERT classification accuracy: 57.6–58.3% on directional PEAD signal from transcripts.
+
+**Incremental information sources in earnings calls (not in 8-K press releases)**:
+- CEO/CFO tone and hedging language ('we expect', 'we are cautious about' vs. 'we are confident in')
+- Guidance precision — vague guidance → negative drift; specific quantitative guidance → positive drift
+- Analyst Q&A section — pushback from analysts is a strong negative signal
+- Management responsiveness — deflecting vs. directly answering questions correlates with subsequent drift
+
+**Implementation path**:
+```python
+# Current H174 pipeline (8-K only)
+score_8k = finbert_score(fetch_8k_item202(ticker))
+
+# Proposed H174+ pipeline (8-K + transcript)
+from sec_edgar_downloader import Downloader
+# Fetch 8-K first
+score_8k = finbert_score(fetch_8k_item202(ticker))
+# Then fetch earnings call transcript (Item 9.01 attachments or Seeking Alpha)
+transcript = fetch_earnings_transcript(ticker, date)  # via scraped source
+score_transcript = finbert_score(transcript[:2048])   # score first 2048 tokens
+# Composite: weight 8-K 60%, transcript 40%
+composite_score = 0.60 * score_8k + 0.40 * score_transcript
+```
+
+**Free transcript sources**: Motley Fool (scraped), Seeking Alpha (requires subscription), SEC EDGAR 8-K Item 9.01 exhibits (some transcripts filed there), Earnings Whispers, stockanalysis.com  
+**Caution**: Transcript availability lag — transcripts often posted 2–4 hours after earnings call, which may be after market open. 8-K is usually immediate. The benefit is incremental (57.6% vs. baseline FinBERT 57–58% on 8-K), not transformative.

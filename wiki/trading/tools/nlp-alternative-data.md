@@ -571,3 +571,25 @@ def sentiment_adjusted_weights(base_weights: dict, sentiment_score: float) -> di
 - Encoder-only FinBERT captures financial domain nuance more reliably than decoder models for this task
 - **Key finding**: Adding 3-day early market signal alongside FinBERT text score significantly improves PEAD prediction
 - Practical implication for H163/H174: add a confirming filter — only enter OPG order if early pre-market move aligns with FinBERT sentiment direction
+
+---
+
+### FinBERT2 — Next-Generation Financial NLP (H174 Upgrade Candidate)
+
+**Reference**: arXiv:2506.06335 (May 2025), presented KDD 2025  
+**Model**: `prosus-ai/finbert2` or equivalent HuggingFace release
+
+**Performance vs. FinBERT1 (ProsusAI/finbert)**:
+- +0.4%–3.3% accuracy improvement across 5 financial classification benchmarks
+- +9.7%–12.3% vs. GPT-4/Claude on discriminative tasks (classification, topic modeling)
+- Trained on 32B tokens financial corpus (vs. FinBERT1's smaller corpus)
+- Better on structured retrieval and feature tasks, not just sentiment
+
+**H174 integration notes**:
+- Direct drop-in for current `ProsusAI/finbert` in `pead_overnight.py`
+- Change: `model_name = 'prosus-ai/finbert2'` (verify HuggingFace availability)
+- Same positive/negative/neutral output format
+- Expected improvement: 1-3 bps additional signal quality on 8-K press release scoring
+- A/B test: run both models on same 8-K corpus; compare score distributions vs. actual PEAD returns
+
+**Caution**: 0.4–3.3% accuracy gain is small in absolute terms. Only pursue if FinBERT2 is available on HuggingFace and inference latency is comparable. The dual-threshold gate (FinBERT score + EPS surprise) may mask single-model improvements — the EPS surprise filter does more heavy lifting than the NLP score alone.
