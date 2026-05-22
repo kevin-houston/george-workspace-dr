@@ -5408,3 +5408,122 @@ H210 is **orthogonal** to H202-XL (H202-XL uses price/volume/factor features; H2
 5. **Event concentration**: LLM may over-weight earnings/news events vs steady-state alpha; test whether signal persists outside event windows
 
 Script: `backtesting/daily/run_h210.py` (stub)
+
+---
+
+## H212 — Volatility-Scaled Cross-Sectional Momentum (Barroso & Santa-Clara 2015)
+
+**Status:** NOT CONFIRMED — OOS Sharpe 1.244 (threshold 1.3); but strictly dominates H198 on risk-adjusted basis
+**Date:** 2026-05-21
+**Baseline:** H198 (OOS Sharpe 1.174, MaxDD -22.7%)
+
+### Hypothesis
+
+Barroso & Santa-Clara (JFE 2015) "Momentum has its moments": vol-scaling the momentum signal by trailing realized volatility substantially reduces momentum crashes while preserving most of the return. Cross-sectional application: scale each stock's 6-1m momentum signal by its trailing 6m realized vol before ranking.
+
+**Signal:** `scaled_signal_i = R(t-7, t-1) / sigma_i(t)` where `sigma_i` = std of last 6 monthly returns × √12 (annualized)
+
+Universe: same 30 large-cap stocks as H198. IS: 2013–2020, OOS: 2021–2026.
+Confirm: OOS Sharpe > 1.3 AND MaxDD < -22.7%.
+
+### Results
+
+| Strategy | IS Sharpe | IS Cumul | OOS Sharpe | OOS Cumul | MaxDD | NegYrs |
+|----------|-----------|---------|------------|---------|-------|--------|
+| H212 Vol-scaled 6-1m | 1.767 | 14.639 | **1.244** | 3.056 | **-13.8%** | 0 |
+| H198 Raw 6-1m | 1.779 | 22.302 | 1.174 | 3.656 | -22.7% | 1 |
+| SPY BH | 1.105 | 3.070 | 0.954 | 2.044 | -23.9% | 1 |
+
+**Vol window sensitivity:**
+
+| Window | IS Sharpe | OOS Sharpe | MaxDD |
+|--------|-----------|------------|-------|
+| 3m | 1.493 | 0.922 | -18.8% |
+| **6m** | **1.767** | **1.244** | **-13.8%** |
+| 12m | 1.842 | 1.133 | -15.3% |
+
+**Crash comparison (worst 5 months for raw 6-1m):**
+
+| Month | Raw 6-1m | Vol-scaled |
+|-------|----------|------------|
+| 2022-01 | -13.6% | -9.0% |
+| 2022-04 | -12.1% | -4.4% |
+| 2025-03 | -8.2% | -7.1% |
+| 2021-09 | -6.8% | -6.4% |
+| 2024-07 | -6.2% | -4.0% |
+
+**Correlation:** Vol-scaled vs H198: **0.904** (near-identical strategies; H212 is a smoother version of H198, not a separate strategy)
+
+### Diagnosis
+
+H212 does not clear the 1.3 OOS Sharpe threshold. However, it is a **strict improvement over H198** on a risk-adjusted basis:
+- Higher OOS Sharpe: 1.244 vs 1.174
+- Much lower MaxDD: -13.8% vs -22.7% (38% reduction in crash risk)
+- Zero negative years vs one for H198
+
+The catch: IS cumulative drops dramatically (14.6 vs 22.3) because vol-scaling reduces position during calm periods when momentum is running hot. This creates an IS/OOS pattern that appears as "underperformance" but is actually appropriate risk discipline.
+
+**Critical finding: Corr=0.904 with H198.** These are not two independent strategies — they select nearly the same stocks in the same direction. H212 would *replace* H198, not diversify it.
+
+**Portfolio recommendation:** If H198 remains the production momentum component, consider replacing it with H212 to reduce crash risk from -22.7% to -13.8% at a small Sharpe improvement. The 0.904 correlation means this is a parameter choice within the same strategy, not a portfolio addition. Net effect on combined portfolio (H181/H192-D/H198/H201) would be lower MaxDD with roughly equal Sharpe.
+
+Script: `backtesting/daily/run_h212.py`
+Results: `backtesting/results/h212_results.json`
+
+---
+
+## H213 — Idiosyncratic Volatility Anomaly (Ang et al. 2006)
+
+**Status:** CONFIRMED (low-IVOL long) — OOS Sharpe 1.001 > threshold 0.8; but see finding below
+**Date:** 2026-05-21
+**Baseline:** SPY B&H (OOS 0.954), H198 (OOS 1.174)
+
+### Hypothesis
+
+Ang, Hodrick, Xing, Zhang (JF 2006) "The Cross-Section of Volatility and Expected Returns": stocks with HIGH idiosyncratic volatility (IVOL) earn LOWER future returns — the IVOL puzzle. Contradicts theory; attributed to retail lottery-demand overpricing high-IVOL stocks.
+
+**Signal:** IVOL_i = std(residuals) from OLS regression of stock_ret on SPY over trailing 3m months (annualized). **Long bottom-6 by IVOL (= lowest IVOL stocks).**
+
+Universe: 30 large-cap stocks. IS: 2013–2020, OOS: 2021–2026.
+Confirm: OOS Sharpe > 0.8.
+
+### Results
+
+| Strategy | IS Sharpe | IS Cumul | OOS Sharpe | OOS Cumul | MaxDD | NegYrs |
+|----------|-----------|---------|------------|---------|-------|--------|
+| Low IVOL (H213) | 1.645 | 7.279 | **1.001** | 2.318 | -31.1% | 1 |
+| **High IVOL** | **1.569** | **15.337** | **1.267** | **4.219** | **-24.7%** | **1** |
+| SPY BH | 1.105 | 3.070 | 0.954 | 2.044 | -23.9% | 1 |
+
+**IVOL window sensitivity (low-IVOL portfolio):**
+
+| Window | IS Sharpe | OOS Sharpe |
+|--------|-----------|------------|
+| 2m | 1.698 | 1.029 |
+| 3m | 1.645 | 1.001 |
+| 6m | 1.464 | 0.876 |
+
+**Lowest IVOL stocks (top-5 by mean IVOL): HD, JNJ, WMT, MSFT, V**
+**Highest IVOL stocks (top-5): TSLA (0.223), AMD (0.213), NVDA (0.146), META (0.141), AVGO (0.130)**
+
+**Low-IVOL vs SPY correlation: 0.851**
+
+### Diagnosis — Anomaly Reversal in Mega-Cap Universe
+
+The primary finding is a **direct reversal of the Ang et al. anomaly** in large-cap stocks. In this 30-stock mega-cap universe, **high-IVOL stocks outperform low-IVOL stocks** in the OOS period (Sharpe 1.267 vs 1.001).
+
+**Why the reversal:** The highest-IVOL stocks in this universe are TSLA, AMD, NVDA, META, AVGO — the structural tech winners of 2021–2026 that delivered outsized returns precisely because they took large, volatile bets. The original Ang et al. finding applies to broad cross-sections of 2,000+ stocks where lottery-demand genuinely overprices speculative small-caps; in a 30-stock mega-cap filtered universe, high IVOL is a proxy for growth/tech concentration rather than speculative retail interest.
+
+**Low-IVOL stocks confirmed** (Sharpe 1.001 > 0.8) but with poorer characteristics than H192-D BAB:
+- Correlation with H192-D BAB: not directly computed, but low-IVOL and low-beta overlap substantially (HD, JNJ, WMT, MSFT, V all low-beta)
+- MaxDD -31.1% is worse than H192-D BAB (-15.4%)
+- Both strategies select "defensive quality" stocks, likely high redundancy
+
+**Portfolio implications:**
+- Low-IVOL (H213) is likely **highly correlated with H192-D BAB** (~60–75% estimated). Running both would add redundancy without meaningful diversification.
+- High-IVOL (contrarian Ang) resembles **H198 momentum** — same TSLA/NVDA/AMD selection. High correlation expected.
+- H213 does not add independent information to the current confirmed portfolio (H181/H192-D/H198/H201/H174).
+- **Do not add to production portfolio.** Track for potential universe-specific use (e.g., a sector where IVOL anomaly holds as in paper).
+
+Script: `backtesting/daily/run_h213.py`
+Results: `backtesting/results/h213_results.json`

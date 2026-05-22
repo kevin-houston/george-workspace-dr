@@ -1,0 +1,120 @@
+{
+  "hypothesis": "H212",
+  "vol_scaled_is": {
+    "label": "vol-scaled",
+    "n": 96,
+    "sharpe": 1.767,
+    "cagr": 0.36,
+    "cumul": 14.6387,
+    "maxdd": -0.191,
+    "neg_yrs": 0
+  },
+  "vol_scaled_oos": {
+    "label": "vol-scaled",
+    "n": 64,
+    "sharpe": 1.244,
+    "cagr": 0.227,
+    "cumul": 3.0561,
+    "maxdd": -0.138,
+    "neg_yrs": 0
+  },
+  "raw_is": {
+    "label": "raw",
+    "n": 96,
+    "sharpe": 1.779,
+    "cagr": 0.421,
+    "cumul": 22.302,
+    "maxdd": -0.202,
+    "neg_yrs": 0
+  },
+  "raw_oos": {
+    "label": "raw",
+    "n": 64,
+    "sharpe": 1.174,
+    "cagr": 0.271,
+    "cumul": 3.6563,
+    "maxdd": -0.227,
+    "neg_yrs": 1
+  },
+  "vol_window_sensitivity": {
+    "3": {
+      "is": {
+        "label": "vw=3",
+        "n": 96,
+        "sharpe": 1.493,
+        "cagr": 0.303,
+        "cumul": 9.3968,
+        "maxdd": -0.177,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "vw=3",
+        "n": 64,
+        "sharpe": 0.922,
+        "cagr": 0.184,
+        "cumul": 2.4016,
+        "maxdd": -0.188,
+        "neg_yrs": 2
+      }
+    },
+    "6": {
+      "is": {
+        "label": "vw=6",
+        "n": 96,
+        "sharpe": 1.767,
+        "cagr": 0.36,
+        "cumul": 14.6387,
+        "maxdd": -0.191,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "vw=6",
+        "n": 64,
+        "sharpe": 1.244,
+        "cagr": 0.227,
+        "cumul": 3.0561,
+        "maxdd": -0.138,
+        "neg_yrs": 0
+      }
+    },
+    "12": {
+      "is": {
+        "label": "vw=12",
+        "n": 96,
+        "sharpe": 1.842,
+        "cagr": 0.387,
+        "cumul": 17.9361,
+        "maxdd": -0.168,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "vw=12",
+        "n": 64,
+        "sharpe": 1.133,
+        "cagr": 0.214,
+        "cumul": 2.8279,
+        "maxdd": -0.153,
+        "neg_yrs": 0
+      }
+    }
+  },
+  "spy_is": {
+    "label": "SPY",
+    "n": 96,
+    "sharpe": 1.105,
+    "cagr": 0.15,
+    "cumul": 3.0697,
+    "maxdd": -0.194,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "label": "SPY",
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "cumul": 2.0444,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "confirmed": false
+}
