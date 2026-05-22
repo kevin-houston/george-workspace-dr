@@ -1,6 +1,6 @@
 ---
-updated: 2026-05-05
-focus: income generation
+updated: 2026-05-21
+focus: income generation + directional defined-risk
 priority: high (Kevin's explicit focus: equities + options)
 ---
 
@@ -236,11 +236,188 @@ LEAN requires Docker for local backtesting. Cloud alternative via QuantConnect (
 
 ---
 
+---
+
+## Strategy 5: Vertical Debit Spreads (Bull Call / Bear Put)
+
+The **directional counterpart** to income strategies. Use when you have a directional thesis but want defined risk cheaper than buying a naked option. This is what the active paper trades (WMT, DLTR) use.
+
+### Structure
+
+**Bull Call Spread**: Buy lower-strike call + sell higher-strike call. Net debit = cost.  
+**Bear Put Spread**: Buy higher-strike put + sell lower-strike put. Net debit = cost.
+
+```
+Max profit  = spread_width - debit_paid          (reached when price > short strike at expiry)
+Max loss    = debit_paid                          (price below long strike at expiry)
+Breakeven   = long_strike + debit_paid
+ROI at max  = max_profit / debit_paid × 100%
+```
+
+### Entry Criteria
+
+| Parameter | Guideline | Reasoning |
+|-----------|-----------|-----------|
+| **DTE** | 25–45 days | 25-40 DTE gives 57% higher returns than <15 DTE; 45 DTE standard |
+| **IV Rank** | < 30% | BUYING premium — want cheap options, low IV; opposite of sellers |
+| **Long strike delta** | 0.45–0.55 | ATM or slightly OTM; maximize directional exposure |
+| **Short strike delta** | 0.15–0.25 | Caps cost and max loss; OTM defines profit zone |
+| **Spread width** | Ticker-dependent | $5 for $50–150 stocks; $10 for $150–500; $15–25 for $500+ |
+| **Bid-ask spread** | < 3% of option price | Liquid markets only |
+
+### IV Considerations (Critical Difference from Sellers)
+
+- **Debit spreads are long vega** — you benefit from IV expansion, hurt by IV crush
+- **Never buy debit spreads into earnings** if you plan to hold through the announcement: IV crush post-announcement can turn a directional win into a loss
+- **Enter in low-IV regimes**: IV Rank < 30 means options are cheap relative to trailing history — better risk/reward on the debit
+- If entering near an earnings catalyst, plan to exit BEFORE the announcement to capture IV expansion without the crush
+
+### Management Rules
+
+| Scenario | Action |
+|----------|--------|
+| Profit hits 50–70% of max gain | Close — 73% probability of reaching max profit if 50% target hit; risk/reward degrades |
+| Profit at 80% of max gain with 2+ weeks left | Close — residual upside not worth gamma risk |
+| Loss reaches 50% of debit paid | Close — cut losers early, protect capital |
+| 10–12 DTE remaining (no profit) | Close — theta decay accelerates, spread value collapses |
+| Underlying makes strong adverse move | Close at 50% loss stop; don't wait for expiry |
+
+### Entry Around Earnings
+
+Earnings-driven debit spreads require special handling:
+
+```python
+# Entry rule for earnings catalyst play
+entry_days_before_earnings = 7–14   # enter after IV has started rising
+exit_rule = "close 1 day BEFORE announcement"  # capture IV expansion, avoid crush
+
+# IV-expansion trade (pre-earnings only)
+# After announcement → IV crush kills long vega; close regardless of direction
+```
+
+**Key insight from WMT-CS-2026-04-27**: WMT spread entered at $3.27 on April 27, earnings May 21. WMT dropped ~7% post-earnings due to missed guidance. Spread collapsed from $3.27 → ~$0.23. Loss: -$304/contract (-93%). Illustrates that:
+1. Directional thesis was wrong (bullish vs reality of miss)
+2. 29 DTE remaining — no recovery path when 7% below long strike
+3. Correct action: close for $0.23 salvage rather than expire worthless
+
+### Python: Debit Spread Monitor
+
+```python
+def monitor_debit_spread(long_call_price, short_call_price, entry_debit, dte_remaining):
+    """Returns action recommendation for an open debit spread."""
+    current_value = long_call_price - short_call_price
+    pnl_pct = (current_value - entry_debit) / entry_debit
+
+    if pnl_pct >= 0.50:
+        return "CLOSE — 50%+ profit target hit"
+    if pnl_pct <= -0.50:
+        return "CLOSE — 50% loss stop hit"
+    if dte_remaining <= 10:
+        return "CLOSE — theta decay accelerating, 10 DTE"
+    return f"HOLD — P&L {pnl_pct:+.1%}, {dte_remaining}d remaining"
+```
+
+---
+
+## Iron Condor: Adjustment & Rolling Mechanics
+
+When a condor is tested (one short strike breached), there are three main adjustment paths. Trigger: short strike delta reaches 0.30–0.35 (was sold at 0.16).
+
+### Adjustment 1: Roll the Untested Side (Preferred)
+
+Buy back the untested (profitable) spread. Re-sell closer to current price to collect additional credit.
+
+```python
+# Roll untested side
+untested_credit_available = original_untested_spread_value * (1 - pct_decay)
+if untested_credit_available >= 0.25:          # worth rolling if >$25 credit
+    buy_to_close(untested_spread)
+    sell_to_open(new_spread, at_current_delta=0.16)
+    net_additional_credit = new_spread.credit - untested_spread.close_cost
+```
+
+- **Best for**: Slow, gradual moves. Widens the profit zone on the unaffected side.
+- **Risk**: If market reverses, now threatened from the re-sold side too.
+
+### Adjustment 2: Roll the Tested Side Out in Time
+
+Close the tested side and re-open same strikes in the next expiry cycle (typically 30 days further) for additional credit.
+
+```
+Roll only if: collected_credit_new_expiry > loss_on_close_current_expiry
+Net effect: extend the trade's time horizon, buy price time to return to range
+```
+
+- **Best for**: When you believe the move is temporary and price will revert.
+- **Credit requirement**: Roll must be for a net credit or zero cost.
+
+### Adjustment 3: Convert to Broken-Wing Butterfly (BWB)
+
+Move the long strike of the tested side closer to the short strike (widening one wing, narrowing the other). Creates asymmetric risk profile that favors one direction.
+
+```
+Original condor: short 470P / long 460P | short 530C / long 540C
+BWB (call side tested): widen call wing → short 530C / long 545C (was 540)
+Effect: collect additional credit; reduced max loss on call side, increased on put side
+```
+
+### Do Nothing (with Time Stop)
+
+If the tested strike was barely breached and DTE < 21, the 21-DTE exit rule takes over. Exit the whole trade per the original management rule.
+
+### Decision Matrix
+
+| Situation | Action |
+|-----------|--------|
+| Early test (>30 DTE), gradual move | Roll untested side for credit |
+| Mid-trade test (15–30 DTE), strong trend | Roll tested side out in time |
+| Near expiry (<15 DTE), near loss limit | Close entire position |
+| Loss approaching 2× credit | Close — never fight it further |
+| Strong reversal back to range | Close tested side only, keep profitable side |
+
+---
+
+## Earnings Volatility Plays
+
+### Long Straddle/Strangle Before Earnings (IV Expansion Trade)
+
+Different from the debit spread above — this is a **pure volatility bet** not directional.
+
+```
+Entry: 21–28 days before earnings announcement
+Exit: 1–3 days BEFORE announcement (capture IV expansion, avoid crush)
+IV entry filter: IV Percentile < 30th percentile of trailing 1-year range
+```
+
+- **Straddle**: Buy ATM call + ATM put. Higher cost, narrower breakeven. Best when you expect a large move but don't know direction.
+- **Strangle**: Buy OTM call + OTM put. Cheaper, wider breakeven. Lower probability but better risk/reward if move is large.
+
+**IV Crush Warning**: IV drops 30–50%+ immediately after announcement regardless of stock movement. A stock that moves 5% post-earnings can still be a loser on a long straddle if IV crush is 40%.
+
+```python
+# IV crush estimate
+implied_move = (straddle_price / stock_price) * 100    # market's expected move
+if actual_move_pct < implied_move * 0.7:
+    # IV crush likely to outweigh directional gain — exit before announcement
+    pass
+```
+
+### When NOT to Trade Earnings Options
+
+- When IV Rank > 70% at entry — overpaying for vol
+- When historical IV crush > 50% for this ticker (tech stocks, NVDA, META, TSLA regularly crush 40–60%)
+- Within 3 days of announcement — theta decay too aggressive on long options
+
+---
+
 ## Recommended Implementation Order
 
 1. **Iron condor on SPY/QQQ** — most documented edge, defined risk, good LEAN support
-2. **Put spread selling (16-delta, 45-DTE)** — simpler than condor, high win rate
-3. **Covered calls on existing ETF positions** — low complexity, income from holdings
-4. **VRP harvesting with VIX hedge** — highest potential but requires more infrastructure
+2. **Bull call spread on directional stock thesis** — defined-risk directional plays around earnings; size max loss < 2% equity
+3. **Put spread selling (16-delta, 45-DTE)** — simpler than condor, high win rate
+4. **Covered calls on existing ETF positions** — low complexity, income from holdings
+5. **VRP harvesting with VIX hedge** — highest potential but requires more infrastructure
 
 All require options data beyond Polygon free tier. Start with QuantConnect's built-in data for LEAN backtesting, then purchase ThetaData for production-grade research.
+
+**Active paper trades reference:** IC-2026-04-26-001 (SPY condor, 47 DTE at entry), WMT-CS-2026-04-27 (bull call $130/$140, deep OTM post-earnings — close), DLTR-CS-2026-04-27 (bull call $100/$115, earnings ~Jun 2–3), DLTR-RR-2026-04-27 (risk reversal, put leg approaching $95 assignment threshold).

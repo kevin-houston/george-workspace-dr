@@ -1,0 +1,14 @@
+{
+  "id": "h214-conditional-vol-scaling",
+  "date": "2026-05-22",
+  "source": "paper",
+  "source_url": "https://onlinelibrary.wiley.com/doi/full/10.1002/for.3232",
+  "title": "H214: Conditional volatility-scaled momentum with regime gating and 52-week-high filter",
+  "rationale": "H212 (vol-scaled momentum, OOS Sharpe 1.244) improved on H198 (1.174) by scaling positions by trailing realized vol. Literature survey confirms the next incremental improvement is conditional gating: reduce/pause exposure when realized vol spikes above a historical percentile threshold (e.g., top 20th percentile of trailing 1-year vol). This prevents the strategy from doubling-down when vol is rising (a common momentum crash precursor). Additionally, Daniel & Moskowitz (2016, RFS) showed that near-52-week-high stocks have the highest crash risk in momentum portfolios — filtering out stocks trading within 5% of their 52-week high reduces crash severity. Expected improvement over H212: +0.1-0.2 OOS Sharpe with further MaxDD reduction from -13.8% to below -10%.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h214.py",
+  "content": "# H214 scaffold — Conditional Vol-Scaled Momentum with Regime Gating\n# Method: vol-scaled 6-1m momentum (H212) + regime gate + 52-week-high filter\n# References:\n#   - Daniel & Moskowitz (RFS 2016): crash risk concentrated in high-vol regimes\n#     and near-52-week-high stocks\n#   - Bongaerts et al. (2020): conditional vol-scaling (reduce in high-vol regimes)\n#\n# Two experiments:\n# A. Regime gate: pause momentum exposure when market realized_vol > 80th pct of\n#    trailing 1-year vol. Hold BIL during gate-off periods.\n# B. 52-week-high filter: exclude stocks within 5% of their 52-week high from\n#    the momentum ranking (these are the crash-prone overextended winners)\n#\n# Key hyperparameters:\n# - VOL_GATE_PERCENTILE: 80 or 90 (market-level: use SPY 1m realized vol)\n# - HI52W_BUFFER: 0.95 (exclude stocks with price > 95% of 52w high)\n# - VOL_WINDOW_SIGNAL: 6 (months trailing vol for signal scaling, same as H212)\n#\n# Expected: OOS Sharpe > 1.3 (beat H212's 1.244) with MaxDD < -13.8%\n# Baseline: H212 (vol-scaled, OOS Sharpe 1.244, MaxDD -13.8%)\n#           H198 (raw 6-1m, OOS Sharpe 1.174, MaxDD -22.7%)\n#\n# TODO: implement full backtest body — use run_h212.py as starting point\n# Add: SPY vol regime computation; per-stock 52w high price filter\npass",
+  "action": "write",
+  "apply_status": "pending"
+}

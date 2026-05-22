@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-20 (factor-models.md added)
+updated: 2026-05-21 (options-income-strategies.md expanded)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -25,7 +25,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-05-15 (ETF pairs EXHAUSTED H152-H160; H200 QUEUED — graphical matching stock-level pairs, arXiv:2403.07998, Sharpe 1.23 on S&P 500 2017–2023)
   - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)
   - [Short-Term Reversal](algorithms/short-term-reversal.md) ← new 2026-05-07 (industry-adjusted reversal 0.53%/month globally; SSRN:6630998; H181 queued)
-  - [Options Income Strategies](algorithms/options-income-strategies.md) ← 2026-05-05 (iron condor, CSP/Wheel, covered calls, VRP harvesting; H162 PARTIAL CONFIRMED; LEAN integration)
+  - [Options Income Strategies](algorithms/options-income-strategies.md) ← updated 2026-05-21 (+ debit spreads: bull call/bear put setup, IV/DTE criteria, management rules, earnings play guidance; iron condor adjustment/rolling mechanics: untested-side roll, tested-side roll, BWB conversion; earnings straddle IV-expansion trade; paper trade annotations WMT/DLTR/SPY)
   - [Low-Volatility Anomaly](algorithms/low-volatility.md) ← updated 2026-05-18 (H205 design + regime-conditional BAB risk flag added; ScienceDirect May 2025 Asia study noted)
   - [BSM & Information Geometry](algorithms/bsm-information-geometry.md) ← 2026-04-28 (Dean 2026: smile = manifold curvature; skew prediction within 19% zero free params; LEAPS trading implications)
   - [Deep RL for Trading](algorithms/deep-rl-trading.md) ← new 2026-05-16 (FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued — PPO vs H198 momentum baseline)

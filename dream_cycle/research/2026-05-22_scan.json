@@ -1,0 +1,99 @@
+{
+  "date": "2026-05-22",
+  "session": "nightly dream cycle",
+  "angles_scanned": 5,
+  "papers_found": 8,
+  "repos_found": 5,
+  "staged_count": 4,
+  "findings": [
+    {
+      "angle": "PEAD + NLP",
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "source": "FinNLP 2025 Workshop (ACL)",
+      "url": "https://aclanthology.org/2025.finnlp-2.13/",
+      "key_metric": "FinBERT accuracy 57.6-58.3% on earnings call transcripts; PEAD.txt maintains alpha vs. attenuated numeric PEAD",
+      "relevance": "HIGH",
+      "staged": true,
+      "proposal_file": "2_h174_earnings_transcript_pead_txt.json"
+    },
+    {
+      "angle": "PEAD + NLP",
+      "title": "FinBERT2: A Specialized Bidirectional Encoder for Finance",
+      "source": "arXiv",
+      "arxiv_id": "2506.06335",
+      "url": "https://arxiv.org/abs/2506.06335",
+      "key_metric": "+0.4-3.3% accuracy vs. FinBERT1; +9.7-12.3% vs. GPT-4/Claude on classification",
+      "relevance": "MEDIUM",
+      "staged": true,
+      "proposal_file": "1_finbert2_h174_upgrade_2506_06335.json"
+    },
+    {
+      "angle": "Cross-sectional momentum",
+      "title": "Conditional vol-scaling + 52-week-high filter (literature synthesis)",
+      "source": "Daniel & Moskowitz RFS 2016 + Bongaerts et al. 2020 (updated survey)",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/for.3232",
+      "key_metric": "Conditional gating reduces crash risk further; 52w-high filter removes crash-prone overextended winners",
+      "relevance": "MEDIUM",
+      "staged": true,
+      "proposal_file": "3_h214_conditional_vol_scaling_scaffold.json"
+    },
+    {
+      "angle": "Multi-agent LLM trading",
+      "title": "AlphaCrafter: Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading",
+      "source": "arXiv",
+      "arxiv_id": "2605.05580",
+      "url": "https://arxiv.org/abs/2605.05580",
+      "key_metric": "Sharpe 0.72 (S&P 500), live-trading robust (competitors degrade 2-3x in live)",
+      "relevance": "HIGH",
+      "staged": false,
+      "note": "Already staged 2026-05-21 as H209 reference"
+    },
+    {
+      "angle": "Multi-agent LLM trading",
+      "title": "Toward Expert Investment Teams: Fine-Grained Multi-Agent LLM System",
+      "source": "arXiv",
+      "arxiv_id": "2602.23330",
+      "url": "https://arxiv.org/abs/2602.23330",
+      "key_metric": "Sharpe +0.08 to +0.26 from structured vs. raw agent inputs",
+      "relevance": "MEDIUM",
+      "staged": true,
+      "proposal_file": "4_trading_agents_fine_grained_2602_23330.json"
+    },
+    {
+      "angle": "Multi-agent LLM trading",
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "source": "arXiv",
+      "arxiv_id": "2412.20138",
+      "url": "https://arxiv.org/abs/2412.20138",
+      "key_metric": "Sharpe 5.60 on 3-month cherry-picked backtest (suspect); 59.9k GitHub stars",
+      "relevance": "LOW",
+      "staged": false,
+      "note": "Sharpe 5.60 not credible for OOS deployment. Monitor for updates."
+    },
+    {
+      "angle": "Pairs trading + cointegration",
+      "title": "Cointegration-based pairs trading on similar ETFs (Springer 2025)",
+      "source": "Springer Journal of Asset Management Vol. 26 Issue 5",
+      "url": "https://link.springer.com/article/10.1057/s41260-025-00416-0",
+      "key_metric": "Sharpe 0.28 on 30 ETF pairs 2000-2024; cointegration windows short-lived (<6 months)",
+      "relevance": "LOW",
+      "staged": false,
+      "note": "Confirms H114/H200 finding: ETF-level pairs have weak edge. No LLM-guided pair selection published yet."
+    },
+    {
+      "angle": "GitHub repos",
+      "title": "VectorBT — vectorized backtesting 100x faster than event-driven",
+      "source": "GitHub",
+      "url": "https://github.com/polakowo/vectorbt",
+      "key_metric": "100x speedup vs. pandas loops; 7.9k stars",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "note": "Current framework (custom engine) sufficient for monthly-frequency strategies. VectorBT migration worthwhile if daily/intraday strategies are added."
+    }
+  ],
+  "not_staged_reasons": {
+    "TradingAgents": "Sharpe 5.60 cherry-picked; lower academic rigor than AlphaCrafter",
+    "ETF pairs Springer": "Sharpe 0.28 confirms existing conclusion; ETF pairs family exhausted",
+    "VectorBT": "Migration overhead not justified for current monthly-frequency strategies"
+  }
+}

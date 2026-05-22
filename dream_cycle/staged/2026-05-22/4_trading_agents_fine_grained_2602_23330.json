@@ -1,0 +1,14 @@
+{
+  "id": "trading-agents-fine-grained-2602.23330",
+  "date": "2026-05-22",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.23330",
+  "title": "H209 design note: structured agent inputs for AlphaCrafter Screener",
+  "rationale": "arXiv:2602.23330 'Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks' (Feb 2026) demonstrates that providing LLM trading agents with pre-structured, pre-calculated inputs (specific metrics, formatted indicators) rather than raw data improves Sharpe by +0.08 to +0.26. The key insight: agents perform better when given structured inputs (e.g., '6-1m momentum rank: 3/30, trailing vol: 0.18, sector: IT, IC_score: 0.08') rather than raw OHLCV data with instructions to compute factors. This directly applies to our H209 AlphaCrafter implementation, particularly the Screener agent which needs to blend regime signals with factor scores.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/deep-rl-trading.md",
+  "content": "### Fine-Grained Agent Input Design (H209 AlphaCrafter Screener)\n\n**Reference**: arXiv:2602.23330 (Feb 2026) — 'Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks'\n\n**Key finding**: LLM trading agents achieve Sharpe +0.08 to +0.26 improvement when given **pre-calculated, structured inputs** vs. raw data. The improvement comes from removing the compute-from-raw overhead and letting the agent focus on judgment.\n\n**Applied to H209 AlphaCrafter Screener agent prompt design**:\n\n```python\n# GOOD: structured inputs per stock\nscreener_context = f\"\"\"\nStock: {ticker}\nDate: {date}\n\n== Pre-calculated signals ==\n6-1m momentum rank: {mom_rank}/30 (1=top, 30=bottom)\nVol-scaled signal: {vol_scaled_signal:.3f} (vs universe mean {universe_mean:.3f})\nTrailing 6m realized vol: {realized_vol:.2%}\nSector IC (trailing 3yr): {sector_ic:.3f}\nRecent 8-K FinBERT score: {finbert_score:.3f}\nMarket regime (VIX): {vix_regime} (LOW/NORMAL/HIGH)\n\n== Question ==\nGiven these pre-calculated signals, should this stock be included in\nthe top-6 momentum portfolio this month? Answer: YES/NO and 1-sentence rationale.\n\"\"\"\n\n# BAD: raw data dump\nscreener_context = f\"Here is the OHLCV data for {ticker}: {raw_ohlcv_data}...\"\n```\n\n**Design rule**: Always pre-compute factor values numerically before sending to LLM agent. The LLM's job is synthesis and judgment, not arithmetic. This also controls API costs (shorter inputs = lower token count).",
+  "action": "append",
+  "apply_status": "pending"
+}

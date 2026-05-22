@@ -1,0 +1,14 @@
+{
+  "id": "finbert2-h174-upgrade-2506.06335",
+  "date": "2026-05-22",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2506.06335",
+  "title": "H174 enhancement: FinBERT2 as drop-in upgrade candidate for PEAD scoring",
+  "rationale": "arXiv:2506.06335 'FinBERT2: A Specialized Bidirectional Encoder for Bridging the Gap in Finance-Specific Deployment of Large Language Models' (KDD 2025) documents a next-generation financial NLP model trained on 32B tokens. FinBERT2 outperforms the original ProsusAI/FinBERT by 0.4–3.3% across 5 financial classification tasks and outperforms leading LLMs (GPT-4, Claude) by 9.7–12.3% on discriminative tasks. H174 currently uses ProsusAI/finbert for 8-K scoring. Swapping to FinBERT2 is a low-overhead upgrade: same input format (text), same output (positive/negative/neutral), same pipeline. Expected alpha gain: 1-3 bps additional signal quality, translating to marginal win rate improvement on the dual-threshold gate.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/tools/nlp-alternative-data.md",
+  "content": "### FinBERT2 — Next-Generation Financial NLP (H174 Upgrade Candidate)\n\n**Reference**: arXiv:2506.06335 (May 2025), presented KDD 2025  \n**Model**: `prosus-ai/finbert2` or equivalent HuggingFace release\n\n**Performance vs. FinBERT1 (ProsusAI/finbert)**:\n- +0.4%–3.3% accuracy improvement across 5 financial classification benchmarks\n- +9.7%–12.3% vs. GPT-4/Claude on discriminative tasks (classification, topic modeling)\n- Trained on 32B tokens financial corpus (vs. FinBERT1's smaller corpus)\n- Better on structured retrieval and feature tasks, not just sentiment\n\n**H174 integration notes**:\n- Direct drop-in for current `ProsusAI/finbert` in `pead_overnight.py`\n- Change: `model_name = 'prosus-ai/finbert2'` (verify HuggingFace availability)\n- Same positive/negative/neutral output format\n- Expected improvement: 1-3 bps additional signal quality on 8-K press release scoring\n- A/B test: run both models on same 8-K corpus; compare score distributions vs. actual PEAD returns\n\n**Caution**: 0.4–3.3% accuracy gain is small in absolute terms. Only pursue if FinBERT2 is available on HuggingFace and inference latency is comparable. The dual-threshold gate (FinBERT score + EPS surprise) may mask single-model improvements — the EPS surprise filter does more heavy lifting than the NLP score alone.",
+  "action": "append",
+  "apply_status": "pending"
+}
