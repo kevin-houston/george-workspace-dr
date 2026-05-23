@@ -1,0 +1,59 @@
+{
+  "hypothesis": "H216",
+  "top6_is": {
+    "label": "composite",
+    "n": 96,
+    "sharpe": 1.693,
+    "cagr": 0.268,
+    "cumul": 7.606,
+    "maxdd": -0.107,
+    "neg_yrs": 0
+  },
+  "top6_oos": {
+    "label": "composite",
+    "n": 64,
+    "sharpe": 0.823,
+    "cagr": 0.15,
+    "cumul": 2.0317,
+    "maxdd": -0.2,
+    "neg_yrs": 1
+  },
+  "bot6_is": {
+    "label": "bot-6",
+    "n": 96,
+    "sharpe": 1.076,
+    "cagr": 0.214,
+    "cumul": 4.6563,
+    "maxdd": -0.241,
+    "neg_yrs": 1
+  },
+  "bot6_oos": {
+    "label": "bot-6",
+    "n": 64,
+    "sharpe": 1.094,
+    "cagr": 0.233,
+    "cumul": 3.0431,
+    "maxdd": -0.28,
+    "neg_yrs": 1
+  },
+  "spy_is": {
+    "label": "SPY",
+    "n": 96,
+    "sharpe": 1.105,
+    "cagr": 0.15,
+    "cumul": 3.0697,
+    "maxdd": -0.194,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "label": "SPY",
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "cumul": 2.0444,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "corr_spy": 0.79,
+  "confirmed": true
+}
