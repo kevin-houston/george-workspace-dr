@@ -400,3 +400,38 @@ H198 is a **confirmed standalone strategy** but adds **limited diversification**
 - Confirm gate: OOS Sharpe > 1.5
 
 **Priority**: HIGH — published Sharpe 2.43 is the highest of any tested methodology
+
+
+### Factor Momentum — Multiple Formation Periods (Applied Economics Letters 2025)
+
+**Source**: Applied Economics Letters, Vol. 0 (2025) — "Cross-sectional factor momentum: evidence from multiple formation periods"
+
+**Key finding**: Recent-past (1–3m) and intermediate-past (4–12m) formation horizons both produce significant, robust cross-sectional momentum returns post-publication. The standard 12-1m Carhart momentum is NOT the only valid horizon — multiple windows capture different aspects of the momentum phenomenon.
+
+**Why this matters for H198/H215**:
+
+Our confirmed strategies use:
+- H198: 6-1m momentum (skip last 1 month, 6-month formation) — OOS Sharpe 1.174
+- H215: alpha101 monthly mean (1-month lag) — OOS Sharpe 1.321
+- H215+H198 blend: OOS Sharpe 1.397
+
+The paper suggests: **the formation period is a variable, not a constant**. Market regimes may favor different windows:
+- High-volatility periods: shorter windows (1–3m) capture momentum better
+- Trending/low-vol periods: longer windows (6–12m) dominate
+
+**Hypotheses queued**:
+
+**H217** (staged 2026-05-22 from H215 sensitivity): median alpha101 aggregation vs. mean. Sensitivity analysis in H215 run showed OOS Sharpe 1.559 for median vs. 1.321 for mean. Formally test as standalone hypothesis.
+
+**H218 (NEW candidate)**: Test 3-1m, 6-1m, 9-3m, 12-1m formation windows on our 30-stock universe — momentum family sensitivity scan. Blend top-2 windows (lowest correlation, highest individual Sharpe). Hypothesis: 2-window blend (different lookbacks) outperforms single-window H198 by reducing window-selection bias.
+
+**Implementation sketch** (adapts run_h213.py template):
+```python
+windows = [(3, 1), (6, 1), (9, 3), (12, 1)]  # (formation_months, skip_months)
+for form, skip in windows:
+    mom = close_monthly.pct_change(form).shift(skip)  # skip most recent 'skip' months
+    # ... standard cross-sectional rank + long top-6 ...
+    oos_sharpe[f'{form}-{skip}m'] = eval_period(rets, ...)
+```
+
+**Post-publication validation note**: The paper explicitly tested for data mining: these effects hold in global markets in the post-publication period. Lower concern about IS/OOS degradation vs. other factor families.

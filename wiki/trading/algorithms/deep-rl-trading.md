@@ -301,3 +301,41 @@ screener_context = f"Here is the OHLCV data for {ticker}: {raw_ohlcv_data}..."
 ```
 
 **Design rule**: Always pre-compute factor values numerically before sending to LLM agent. The LLM's job is synthesis and judgment, not arithmetic. This also controls API costs (shorter inputs = lower token count).
+
+
+### BlindTrade — Anonymization-First LLM Portfolio (arXiv:2603.17692)
+
+**Source**: Jeon & Lee, arXiv:2603.17692 (March 18, 2026) — "Can Blindfolded LLMs Still Trade? An Anonymization-First Framework for Portfolio Optimization"
+
+**Key result**: Sharpe **1.40 ± 0.22** on 2025 YTD out-of-sample data — directly competitive with our confirmed H192-D BAB (1.367) and H198 momentum (1.174).
+
+**Core innovation — anonymization to prevent memorization bias**:
+
+LLMs trained on financial data have seen ticker symbols, company names, and historical price patterns. A naive LLM portfolio strategy risks: the model "remembering" that AAPL was at $150 in 2023 and hallucinating a buy signal from training data rather than genuine reasoning. BlindTrade removes this contamination by:
+
+1. Replace all ticker symbols with anonymous codes (COMPANY_A, COMPANY_B, etc.)
+2. Remove company names, descriptions, sector labels
+3. Feed only anonymized numerical signals + relative rankings
+4. Validate using **negative controls** — randomly shuffled anonymized signals should produce ~0 alpha; real signals should produce positive alpha
+
+**Architecture**:
+```
+4 LLM Agents (GPT-4/Claude) → score each company (0-10)
+         ↓
+GNN (Graph Neural Network) → model inter-company relationships
+         ↓
+PPO-DSR (Proximal Policy Optimization + Differential Sharpe Ratio reward)
+         ↓
+Portfolio weights
+```
+
+**Why relevant to H209 (AlphaCrafter)**:
+The anonymization methodology is a prerequisite for any LLM-based trading system to be trustworthy. Before implementing AlphaCrafter on our 30-stock universe, the BlindTrade validation protocol should be applied:
+- Test: does anonymized-ticker LLM signal produce alpha?
+- Control: does random-shuffled signal produce ~0 alpha?
+- If both pass: signal is genuine; not memorization
+
+**Companion paper — TrustTrade (arXiv:2603.22567)**:
+"TrustTrade: Human-Inspired Selective Consensus Reduces Decision Uncertainty in LLM Trading Agents". Addresses LLM hallucination by weighting agent signals by cross-agent semantic agreement. Inconsistent/outlier signals downweighted. Complementary to BlindTrade (anonymization prevents memorization; TrustTrade prevents hallucination).
+
+**H209 design update**: Before implementing AlphaCrafter multi-agent framework, apply (1) BlindTrade anonymization to our universe, (2) TrustTrade selective consensus aggregation. Both papers available 2026 — state-of-art for LLM trading validation.
