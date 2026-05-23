@@ -1,0 +1,161 @@
+{
+  "scan_date": "2026-05-23",
+  "angles": [
+    {
+      "angle": 1,
+      "topic": "pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Deep learning-based pairs trading: real-time forecasting of co-integrated crypto pairs",
+          "url": "https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2026.1749337/full",
+          "relevance": 7,
+          "actionability": "MEDIUM",
+          "staged": false,
+          "note": "Crypto focus; Johansen + deep learning for spread dynamics. Not directly applicable to our equity pairs (EXHAUSTED family). Filed for awareness."
+        },
+        {
+          "title": "Novel Graphical Matching Approach to Pairs Trading",
+          "url": "https://arxiv.org/abs/2403.07998",
+          "relevance": 8,
+          "actionability": "HIGH",
+          "staged": false,
+          "note": "Already in our wiki (H200 was based on this). Cointegration still fails in large-cap equities. Pairs family remains EXHAUSTED."
+        }
+      ]
+    },
+    {
+      "angle": 2,
+      "topic": "PEAD + earnings + NLP text signals",
+      "findings": [
+        {
+          "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models (SUE.txt)",
+          "url": "https://aclanthology.org/2025.finnlp-2.13.pdf",
+          "relevance": 9,
+          "actionability": "HIGH",
+          "staged": true,
+          "staged_file": "1_sue_txt_pead_h174_upgrade.json",
+          "note": "SUE.txt (text-derived surprise) outperforms numeric SUE. Direct H174 upgrade candidate."
+        },
+        {
+          "title": "Hybrid FinBERT-LSTM for Earnings Call Transcripts",
+          "url": "https://link.springer.com/chapter/10.1007/978-981-96-6438-2_24",
+          "relevance": 8,
+          "actionability": "HIGH",
+          "staged": false,
+          "note": "FinBERT + LSTM on transcripts. Supports H174 upgrade direction but requires transcript data (no free API ready). Track for when transcript data available."
+        },
+        {
+          "title": "Dynamic FinBERT Sentiment as 6th Factor in FF5",
+          "url": "https://arxiv.org/html/2505.01432v1",
+          "relevance": 7,
+          "actionability": "MEDIUM",
+          "staged": false,
+          "note": "Sentiment as factor augmentation. Interesting for H202-XL feature engineering but not immediately actionable."
+        }
+      ]
+    },
+    {
+      "angle": 3,
+      "topic": "cross-sectional momentum + factor models",
+      "findings": [
+        {
+          "title": "Cross-sectional factor momentum: evidence from multiple formation periods",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/13504851.2025.2472032",
+          "relevance": 8,
+          "actionability": "HIGH",
+          "staged": true,
+          "staged_file": "3_factor_momentum_formation_periods.json",
+          "note": "Post-publication validation of multi-window momentum. Queued H218 (3-1m/6-1m/9-3m/12-1m sensitivity scan)."
+        },
+        {
+          "title": "Scaling Conditional Autoencoders via Uncertainty-Aware Factor Selection",
+          "url": "https://arxiv.org/pdf/2511.17462",
+          "relevance": 8,
+          "actionability": "MEDIUM",
+          "staged": false,
+          "note": "Attention-based factor interaction learning. Relevant to H202-XL feature engineering but requires significant ML infrastructure. Deferred to H202-XL session."
+        }
+      ]
+    },
+    {
+      "angle": 4,
+      "topic": "multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "BlindTrade: Anonymization-First LLM Portfolio (arXiv:2603.17692)",
+          "url": "https://arxiv.org/abs/2603.17692",
+          "relevance": 9,
+          "actionability": "HIGH",
+          "staged": true,
+          "staged_file": "2_blindtrade_llm_portfolio_wiki.json",
+          "note": "Sharpe 1.40 on 2025 data. Anonymization methodology is prerequisite for H209/H210 validity testing."
+        },
+        {
+          "title": "TrustTrade: Selective Consensus for LLM Agents (arXiv:2603.22567)",
+          "url": "https://arxiv.org/abs/2603.22567",
+          "relevance": 8,
+          "actionability": "HIGH",
+          "staged": false,
+          "note": "Folded into BlindTrade wiki update (staged as companion methodology). Both address LLM trading reliability."
+        },
+        {
+          "title": "LLM-Transformer Hybrid Nowcasting (arXiv:2601.02878)",
+          "url": "https://arxiv.org/abs/2601.02878",
+          "relevance": 7,
+          "actionability": "MEDIUM",
+          "staged": false,
+          "note": "Text + price series fusion. Relevant to H210 LLM nowcasting but requires H202-XL first."
+        },
+        {
+          "title": "TradingAgents v0.2.4 — LangGraph Multi-Agent Framework",
+          "url": "https://github.com/TauricResearch/TradingAgents",
+          "relevance": 7,
+          "actionability": "MEDIUM",
+          "staged": false,
+          "note": "Open-source reference for H209. Lower Sharpe (23-27% cumul) than confirmed strategies but useful architecture reference."
+        }
+      ]
+    },
+    {
+      "angle": 5,
+      "topic": "GitHub trending quant finance repos",
+      "findings": [
+        {
+          "title": "FinRL-X: AI-Native Modular Trading Infrastructure",
+          "url": "https://github.com/AI4Finance-Foundation/FinRL-Trading",
+          "relevance": 8,
+          "actionability": "HIGH",
+          "staged": false,
+          "note": "Modern alternative to yfinance+Vectorbt. 7 asset classes, native ML. Worth evaluating when scaling to H202-XL 200-stock universe. Not staging now — current stack is working."
+        },
+        {
+          "title": "TradingAgents (see Angle 4)",
+          "url": "https://github.com/TauricResearch/TradingAgents",
+          "relevance": 7,
+          "actionability": "MEDIUM",
+          "staged": false,
+          "note": "Already captured above."
+        },
+        {
+          "title": "cloudQuant/backtrader — 45% faster",
+          "url": "https://github.com/cloudQuant/backtrader",
+          "relevance": 6,
+          "actionability": "MEDIUM",
+          "staged": false,
+          "note": "Speed improvement but not transformative vs our vectorized Pandas approach."
+        }
+      ]
+    }
+  ],
+  "proposals_staged": [
+    "1_sue_txt_pead_h174_upgrade.json",
+    "2_blindtrade_llm_portfolio_wiki.json",
+    "3_factor_momentum_formation_periods.json",
+    "4_h217_median_alpha101_scaffold.json"
+  ],
+  "wiki_expansion": {
+    "page_created": "wiki/trading/data-sources/earnings-events.md",
+    "rationale": "PEAD is our strongest live strategy; no dedicated earnings calendar data source page existed. Covers FMP, Finnhub, yfinance, API Ninjas, EDGAR/EdgarTools, EPS surprise formulas, recommended hybrid stack for pead_overnight.py upgrade."
+  },
+  "summary": "Strongest signals this session: (1) SUE.txt paper from ACL FinnLP 2025 — direct PEAD signal upgrade; (2) BlindTrade arXiv:2603.17692 — Sharpe 1.40 LLM portfolio with anonymization validation methodology, directly relevant to H209; (3) Factor momentum multi-window paper — post-publication validated, queued H218; (4) Internal: H217 median alpha101 from tonight's H215 sensitivity showing OOS 1.559."
+}

@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-21 (options-income-strategies.md expanded)
+updated: 2026-05-23 (earnings-events.md new; hypothesis-log H215/H216 added)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -50,6 +50,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Free / Low-Cost Sources](data-sources/free-data.md) ← expanded 2026-04-28 (Tiingo, EDGAR, Finnhub, FRED, yfinance status)
   - [Sector & Industry Classification](data-sources/sector-classification.md) ← new 2026-05-08 (GICS/SIC sources for H181; SEC EDGAR SIC, GitHub S&P 500 CSV, yfinance caveats, practical build_sector_cache() for 100-500 stocks)
   - [Options Data Sources](data-sources/options-data.md) ← 2026-05-01 (ThetaData/ORATS/FlashAlpha pricing; Alpaca indicative feed; vollib/py_vollib/QuantLib; IV surface + SVI fitting; free EOD options data on GitHub)
+  - [Earnings Calendar & Corporate Events](data-sources/earnings-events.md) ← new 2026-05-23 (FMP/Finnhub/yfinance/API Ninjas free tier APIs; SEC EDGAR XBRL EPS extraction; EdgarTools; EPS surprise formulas; PEAD hybrid stack upgrade path for pead_overnight.py; earnings transcript sources for H174)
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
   - [Kalshi](prediction-markets/kalshi.md) ← expanded 2026-04-29 (full auth/API/WebSocket, RSA signing, CPI nowcasting implementation, fee modeling, rate limits, Timeless perps)
   - [Algorithmic Strategies](prediction-markets/algorithmic-strategies.md) ← updated 2026-05-13 (PolyBench arXiv:2604.14199 — LLMs near-random on binary markets; edge only on economic data + structured context)
@@ -63,6 +64,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-23](research-log/2026-05-23.md) — H215 CONFIRMED (alpha101 OOS Sharpe 1.321); H216 CONFIRMED-weak (vol-price divergence OOS 0.823, below SPY); blend H215+H198 OOS Sharpe 1.397; wiki: earnings-events.md new; dream cycle: SUE.txt + BlindTrade + factor momentum multi-window staged
   - [2026-05-20](research-log/2026-05-20.md) — wiki expansion: Factor Models/Fama-French page (new, H202-XL prep); dream cycle scan: 5 angles across arXiv + GitHub
   - [2026-05-19](research-log/2026-05-19.md) — wiki expansion: regime-detection.md; H206 NOT CONFIRMED (Halloween Effect); H204 NOT CONFIRMED (Deep RL PPO); surprise: summer TOM (Sharpe 0.699) > Halloween TOM (Sharpe 0.435)
   - [2026-05-18](research-log/2026-05-18.md) — wiki expansion + arXiv scan: H205 design finalized (4 staged proposals); Schroeder 2025 confirms structural Halloween mechanism for H206; 3 convergent papers support H202-XL large-universe gradient boosting; run_h205.py backtest queued for tonight
