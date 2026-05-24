@@ -1,0 +1,142 @@
+{
+  "hypothesis": "H218",
+  "corr_h217_h198_full": 0.67,
+  "corr_h217_h198_oos": 0.656,
+  "blend_results": {
+    "H198 only (momentum)": {
+      "is": {
+        "label": "H198 only (momentum)",
+        "n": 96,
+        "sharpe": 1.779,
+        "cagr": 0.421,
+        "cumul": 22.302,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "H198 only (momentum)",
+        "n": 64,
+        "sharpe": 1.174,
+        "cagr": 0.271,
+        "cumul": 3.6563,
+        "maxdd": -0.227,
+        "neg_yrs": 1
+      },
+      "w_a101": 0.0
+    },
+    "Blend 25/75 (A101/Mom)": {
+      "is": {
+        "label": "Blend 25/75 (A101/Mom)",
+        "n": 96,
+        "sharpe": 1.837,
+        "cagr": 0.381,
+        "cumul": 17.1674,
+        "maxdd": -0.182,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "Blend 25/75 (A101/Mom)",
+        "n": 64,
+        "sharpe": 1.326,
+        "cagr": 0.271,
+        "cumul": 3.766,
+        "maxdd": -0.209,
+        "neg_yrs": 1
+      },
+      "w_a101": 0.25
+    },
+    "Blend 50/50 (A101/Mom)": {
+      "is": {
+        "label": "Blend 50/50 (A101/Mom)",
+        "n": 96,
+        "sharpe": 1.857,
+        "cagr": 0.341,
+        "cumul": 13.0348,
+        "maxdd": -0.161,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "Blend 50/50 (A101/Mom)",
+        "n": 64,
+        "sharpe": 1.469,
+        "cagr": 0.272,
+        "cumul": 3.8423,
+        "maxdd": -0.207,
+        "neg_yrs": 1
+      },
+      "w_a101": 0.5
+    },
+    "Blend 75/25 (A101/Mom)": {
+      "is": {
+        "label": "Blend 75/25 (A101/Mom)",
+        "n": 96,
+        "sharpe": 1.795,
+        "cagr": 0.302,
+        "cumul": 9.7595,
+        "maxdd": -0.141,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "Blend 75/25 (A101/Mom)",
+        "n": 64,
+        "sharpe": 1.559,
+        "cagr": 0.272,
+        "cumul": 3.8825,
+        "maxdd": -0.225,
+        "neg_yrs": 1
+      },
+      "w_a101": 0.75
+    },
+    "H217 only (alpha101)": {
+      "is": {
+        "label": "H217 only (alpha101)",
+        "n": 96,
+        "sharpe": 1.613,
+        "cagr": 0.262,
+        "cumul": 7.2034,
+        "maxdd": -0.144,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "label": "H217 only (alpha101)",
+        "n": 64,
+        "sharpe": 1.559,
+        "cagr": 0.272,
+        "cumul": 3.8853,
+        "maxdd": -0.252,
+        "neg_yrs": 1
+      },
+      "w_a101": 1.0
+    }
+  },
+  "best_blend": "Blend 75/25 (A101/Mom)",
+  "best_oos": {
+    "label": "Blend 75/25 (A101/Mom)",
+    "n": 64,
+    "sharpe": 1.559,
+    "cagr": 0.272,
+    "cumul": 3.8825,
+    "maxdd": -0.225,
+    "neg_yrs": 1
+  },
+  "spy_is": {
+    "label": "SPY",
+    "n": 96,
+    "sharpe": 1.105,
+    "cagr": 0.15,
+    "cumul": 3.0697,
+    "maxdd": -0.194,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "label": "SPY",
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "cumul": 2.0444,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "confirmed": false,
+  "confirm_threshold": 1.6
+}

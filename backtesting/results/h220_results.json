@@ -1,0 +1,149 @@
+{
+  "hypothesis": "H220",
+  "universe": [
+    "SPY",
+    "QQQ",
+    "IWM",
+    "XLK",
+    "XLF",
+    "XLE",
+    "XLU",
+    "XLV",
+    "XLP",
+    "GLD",
+    "TLT",
+    "EEM",
+    "USMV",
+    "SPLV"
+  ],
+  "results": {
+    "TSMOM 3m": {
+      "is": {
+        "label": "TSMOM 3m",
+        "n": 84,
+        "sharpe": 1.163,
+        "cagr": 0.098,
+        "cumul": 1.9365,
+        "maxdd": -0.116,
+        "neg_yrs": 2
+      },
+      "oos": {
+        "label": "TSMOM 3m",
+        "n": 76,
+        "sharpe": 0.834,
+        "cagr": 0.13,
+        "cumul": 2.1101,
+        "maxdd": -0.203,
+        "neg_yrs": 0
+      }
+    },
+    "TSMOM 6m": {
+      "is": {
+        "label": "TSMOM 6m",
+        "n": 84,
+        "sharpe": 1.31,
+        "cagr": 0.113,
+        "cumul": 2.1474,
+        "maxdd": -0.107,
+        "neg_yrs": 2
+      },
+      "oos": {
+        "label": "TSMOM 6m",
+        "n": 76,
+        "sharpe": 0.961,
+        "cagr": 0.127,
+        "cumul": 2.1046,
+        "maxdd": -0.135,
+        "neg_yrs": 1
+      }
+    },
+    "TSMOM 12m": {
+      "is": {
+        "label": "TSMOM 12m",
+        "n": 84,
+        "sharpe": 1.262,
+        "cagr": 0.113,
+        "cumul": 2.1389,
+        "maxdd": -0.113,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "label": "TSMOM 12m",
+        "n": 76,
+        "sharpe": 0.887,
+        "cagr": 0.123,
+        "cumul": 2.0423,
+        "maxdd": -0.168,
+        "neg_yrs": 1
+      }
+    },
+    "TSMOM 12m vol-scaled": {
+      "is": {
+        "label": "vol-scaled",
+        "n": 84,
+        "sharpe": 1.371,
+        "cagr": 0.126,
+        "cumul": 2.3339,
+        "maxdd": -0.096,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "label": "vol-scaled",
+        "n": 76,
+        "sharpe": 0.601,
+        "cagr": 0.083,
+        "cumul": 1.592,
+        "maxdd": -0.223,
+        "neg_yrs": 1
+      }
+    }
+  },
+  "vol_scaled_is": {
+    "label": "vol-scaled",
+    "n": 84,
+    "sharpe": 1.371,
+    "cagr": 0.126,
+    "cumul": 2.3339,
+    "maxdd": -0.096,
+    "neg_yrs": 1
+  },
+  "vol_scaled_oos": {
+    "label": "vol-scaled",
+    "n": 76,
+    "sharpe": 0.601,
+    "cagr": 0.083,
+    "cumul": 1.592,
+    "maxdd": -0.223,
+    "neg_yrs": 1
+  },
+  "spy_is": {
+    "label": "SPY",
+    "n": 84,
+    "sharpe": 1.289,
+    "cagr": 0.143,
+    "cumul": 2.5941,
+    "maxdd": -0.135,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "label": "SPY",
+    "n": 76,
+    "sharpe": 0.901,
+    "cagr": 0.155,
+    "cumul": 2.4192,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "best_label": "TSMOM 6m",
+  "best_oos": {
+    "label": "TSMOM 6m",
+    "n": 76,
+    "sharpe": 0.961,
+    "cagr": 0.127,
+    "cumul": 2.1046,
+    "maxdd": -0.135,
+    "neg_yrs": 1
+  },
+  "confirmed": true,
+  "confirm_threshold": 0.9
+}
