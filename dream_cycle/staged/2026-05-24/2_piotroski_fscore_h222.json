@@ -1,0 +1,14 @@
+{
+  "id": "piotroski-fscore-h222",
+  "date": "2026-05-24",
+  "source": "reflection",
+  "source_url": "https://www.aqr.com/Insights/Datasets/Quality-Minus-Junk-Factors-Monthly",
+  "title": "H222 scaffold — Piotroski F-Score Quality Factor (FMP API)",
+  "rationale": "The quality factor is the only major academic alpha family completely untested in our pipeline. Piotroski F-Score (2000) uses 9 binary fundamental criteria to score company quality. Score 7-9 = high quality, score 0-2 = junk. The FMP API ($FMP_API_KEY present) provides all required annual statement data within the 250 calls/day free tier for our 30-stock universe. Key question: does F-Score add independent alpha beyond H192-D BAB (~0.4-0.6 expected correlation, fundamentals vs price-based beta)? If so, a quality-BAB blend could replace H192-D in the production portfolio. The Novy-Marx (2013) gross profitability signal (GP/Assets) is even simpler and may be more robust — test both in H222.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h222.py",
+  "content": "\"\"\"\nH222 — Quality Factor: Piotroski F-Score + Gross Profitability\n==============================================================\nTwo quality signals from annual fundamentals via FMP API:\n\nA. Piotroski F-Score (9-point binary checklist):\n   - Profitability: ROA>0, CF>0, ΔROA>0, CF>accruals\n   - Leverage/liquidity: ΔLeverage<0, ΔCurrentRatio>0, no dilution\n   - Operating efficiency: ΔGross margin>0, ΔAsset turnover>0\n   Long top-6 by F-Score, annual rebalance\n\nB. Gross Profitability (Novy-Marx 2013):\n   Signal = (Revenue - COGS) / Total Assets\n   Long top-6 by GP/Assets, annual rebalance\n   This single metric has near-equal power to full QMJ factor.\n\nData source: FMP API ($FMP_API_KEY)\nUniverse: same 30 large-cap stocks as H181/H192/H198\nIS: 2010-2020 (needs annual data; start earlier for more IS obs)\nOOS: 2021-2026\nAnnual rebalance: apply prior-year financials with 90-day reporting lag\n  → fiscal year 2020 data available ~April 2021 → rebalance April\nConfirm: OOS Sharpe > 0.7\n\nAlso measure correlation with H192-D BAB: if <0.5 → add to portfolio\n\"\"\"\n\n# TODO: implement\n# 1. Fetch annual income/balance/cashflow from FMP for all 30 stocks\n# 2. Compute F-Score and GP/Assets for each year\n# 3. Apply annual rebalance with 90-day lag (April rebalance for prior-year data)\n# 4. Compute monthly returns for top-6 portfolio\n# 5. Measure OOS Sharpe and correlation with H192-D\npass\n",
+  "action": "write",
+  "apply_status": "pending"
+}

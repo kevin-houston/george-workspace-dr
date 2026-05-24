@@ -1,0 +1,97 @@
+{
+  "date": "2026-05-24",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + post-earnings drift + NLP",
+    "cross-sectional momentum + quality factor",
+    "multi-agent LLM trading systems",
+    "deep learning for trend following"
+  ],
+  "papers_found": [
+    {
+      "arxiv_id": "2511.12490",
+      "title": "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability",
+      "authors": "Mainak Singha",
+      "angle": "cross-sectional momentum + quality",
+      "key_finding": "Activate value+reversal signal only for stocks with >60% positive days in 63-day window. OOS Sharpe 13+, 158.6% ARR, MaxDD -11.9%, S&P 500 2004-2024",
+      "relevance_score": 9,
+      "relevance_note": "Directly extends H181 (reversal) with regime gate. Mechanism concrete and testable. 13+ Sharpe is suspicious but mechanism is principled.",
+      "staged": true,
+      "proposal_file": "1_drift_regime_reversal_h221.json"
+    },
+    {
+      "arxiv_id": "2602.07085",
+      "title": "QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining",
+      "authors": "Jun Han et al. (17 authors)",
+      "angle": "multi-agent LLM trading",
+      "key_finding": "IC=0.0472, 40.28% cumulative excess on CSI 500 over 4 years, 19.1% on S&P 500. Evolutionary LLM discovers novel alpha factors.",
+      "relevance_score": 7,
+      "relevance_note": "Relevant to H209/H210 (LLM-driven alpha). S&P 500 transfer is promising. Backtested only, Chinese market primary. IC of 0.0472 is strong.",
+      "staged": true,
+      "proposal_file": "3_quantaAlpha_wiki_update.json"
+    },
+    {
+      "arxiv_id": "2603.01820",
+      "title": "Deep Learning for Financial Time Series: A Large-Scale Benchmark of Risk-Adjusted Performance",
+      "authors": "Saly-Kaufmann, Wood, Peter-Calliess, Zohren",
+      "angle": "deep learning trend following",
+      "key_finding": "VSN+LSTM achieves highest Sharpe; xLSTM has largest TC breakeven buffer. DL beats linear/binary trend signals across commodities/equities/bonds/FX 2010-2025.",
+      "relevance_score": 8,
+      "relevance_note": "Direct upgrade path for H220 (ETF TSMOM OOS 0.961). Replace binary 6m signal with LSTM trend score → estimated Sharpe improvement to 1.1-1.2.",
+      "staged": true,
+      "proposal_file": "4_deep_learning_tsmom_wiki.json"
+    },
+    {
+      "arxiv_id": "2510.18569",
+      "title": "QuantEvolve: Automating Quantitative Strategy Discovery through Multi-Agent Evolutionary Framework",
+      "authors": "Junhyeog Yun, Hyoun Jun Lee, Insu Jeon",
+      "angle": "multi-agent LLM trading",
+      "key_finding": "Quality-diversity optimization for diverse strategy set. Oral at ACM ICAIF 2025. No specific Sharpe numbers available from abstract.",
+      "relevance_score": 6,
+      "relevance_note": "Quality-diversity framing matches portfolio construction goal (diverse, low-corr strategies). Bundled into ml-for-trading.md update with QuantaAlpha.",
+      "staged": true,
+      "proposal_file": "3_quantaAlpha_wiki_update.json"
+    },
+    {
+      "arxiv_id": "2602.00948",
+      "title": "FinEvo: From Isolated Backtests to Ecological Market Games for Multi-Agent Financial Strategy Evolution",
+      "authors": "Mingxi Zou et al.",
+      "angle": "multi-agent LLM trading",
+      "key_finding": "Ecological game framework where strategies compete and evolve. No specific performance numbers.",
+      "relevance_score": 5,
+      "relevance_note": "Interesting framework but no quantitative results. Low immediacy for our pipeline.",
+      "staged": false,
+      "reason_not_staged": "No quantitative results; theoretical framework only"
+    },
+    {
+      "source": "FinNLP ACL 2025",
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "angle": "PEAD + NLP",
+      "key_finding": "LLMs outperform FinBERT for PEAD prediction. 2025 paper confirms PEAD persists.",
+      "relevance_score": 8,
+      "relevance_note": "Direct H174 upgrade candidate. Confirms our PEAD pipeline direction. LLMs > FinBERT for 8-K scoring. Full PDF not parseable — needs curl download.",
+      "staged": false,
+      "reason_not_staged": "PDF binary not parseable; need to download and read properly. Queue for next session."
+    },
+    {
+      "source": "Quality Factor research",
+      "title": "Piotroski F-Score + Novy-Marx Gross Profitability — H222 design",
+      "angle": "quality factor",
+      "key_finding": "Complete wiki gap identified: no quality factor documentation despite FMP API available and H221/H222 being natural next family.",
+      "relevance_score": 9,
+      "relevance_note": "Internal research — not a paper but a gap analysis. Quality factor wiki page created. H222 scaffold staged.",
+      "staged": true,
+      "proposal_file": "2_piotroski_fscore_h222.json"
+    }
+  ],
+  "staged_proposals": 4,
+  "high_relevance_count": 3,
+  "wiki_pages_created": 1,
+  "wiki_pages_updated": 2,
+  "next_session_priorities": [
+    "Run H221 (drift regime reversal) — H181 upgrade, potentially strong",
+    "Run H222 (Piotroski F-Score + GP/Assets) — new fundamental family",
+    "Download and parse FinNLP 2025 LLM-PEAD paper properly (curl -sL)",
+    "Apply wiki updates from proposals 3 and 4"
+  ]
+}

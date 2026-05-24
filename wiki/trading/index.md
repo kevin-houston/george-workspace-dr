@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-23 (earnings-events.md new; hypothesis-log H215/H216 added)
+updated: 2026-05-24 (quality-factor.md new; hypothesis-log H217–H220 added)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -33,6 +33,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Regime Detection](algorithms/regime-detection.md) ← new 2026-05-19 (VIX threshold H165a confirmed, 200-day SMA, Markov Switching statsmodels, HMM hmmlearn, Statistical Jump Model arXiv:2402.05272; H165/H205-B application code)
   - [Factor Models & Cross-Sectional Alpha](algorithms/factor-models.md) ← new 2026-05-20
   - [WorldQuant 101 Alphas — Overlap Analysis](algorithms/alpha101-overlap.md) ← new 2026-05-22 (H215 alpha101 + H216 vol-price divergence staged; VWAP signals blocked on free tier) (Fama-French 3/5/6-factor; Kenneth French data library via pandas-datareader; AQR datasets; cross-sectional feature engineering; alphalens-reloaded tearsheets; Fama-MacBeth regression; H202-XL XGBoost feature matrix)
+  - [Quality Factor (QMJ)](algorithms/quality-factor.md) ← new 2026-05-24 (Piotroski F-Score 9-criteria; Novy-Marx GP/Assets; AQR QMJ datasets; FMP API implementation; H221/H222 designs; BAB correlation ~0.4–0.6 = independent alpha)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)

@@ -1,0 +1,14 @@
+{
+  "id": "drift-regime-reversal-h221",
+  "date": "2026-05-24",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2511.12490",
+  "title": "H221 scaffold — Drift Regime + Short-Term Reversal signal",
+  "rationale": "arXiv:2511.12490 'Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability' (Mainak Singha, 2025). Mechanism: identify stocks with >60% positive days in trailing 63-day window (=in a drift regime), then apply SHORT-TERM REVERSAL signal exclusively to those stocks. Out-of-sample Sharpe 13+ on S&P 500 2004-2024 (suspicious but mechanism is concrete and testable). The regime gate makes intuitive sense: reversal works best on momentum-regime stocks because mean-reversion is stronger when a stock has been consistently trending. Connects to our confirmed H181 (reversal, OOS 1.138) — the regime gate could be the missing enhancement that pushes H181 to much higher Sharpe.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h221.py",
+  "content": "\"\"\"\nH221 — Drift Regime + Short-Term Reversal (arXiv:2511.12490)\n==============================================================\nSingha (2025): activate value/reversal signals ONLY during individual stock\n'drift regimes' = stocks with >60% positive days in trailing 63 trading days.\n\nOur implementation: apply H181 (1-month short-term reversal) signal exclusively\nto stocks that are in a drift regime. Out-of-regime stocks get zero allocation.\n\nHypothesis: reversal is strongest when a stock has been in a sustained uptrend\n(mean-reversion risk is elevated, crowded long positions build up).\n\nUniverse: same 30 large-cap stocks as H181\nIS: 2013-2020, OOS: 2021-2026\nDrift regime threshold: >60% positive days in trailing 63 trading days\nSignal: monthly close return (1-month reversal, same as H181)\nPortfolio: long bottom-3 by last month return among drift-regime stocks\nConfirm: OOS Sharpe > 1.4 (must beat H181's 1.138 meaningfully)\n\"\"\"\n\n# TODO: implement — use H181 price cache + H215 daily OHLCV for drift regime\n# Step 1: compute drift_regime_i(t) = fraction of positive daily returns in\n#         trailing 63 trading days for stock i at month end t\n# Step 2: filter to stocks where drift_regime_i(t) > 0.60\n# Step 3: among filtered stocks, long bottom-N by last month return\n# Step 4: evaluate IS/OOS with standard framework\npass\n",
+  "action": "write",
+  "apply_status": "pending"
+}
