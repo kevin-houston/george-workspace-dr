@@ -421,9 +421,11 @@ The paper suggests: **the formation period is a variable, not a constant**. Mark
 
 **Hypotheses queued**:
 
-**H217** (staged 2026-05-22 from H215 sensitivity): median alpha101 aggregation vs. mean. Sensitivity analysis in H215 run showed OOS Sharpe 1.559 for median vs. 1.321 for mean. Formally test as standalone hypothesis.
+**H217** — CONFIRMED (2026-05-24): median alpha101 aggregation. OOS Sharpe 1.559 — best confirmed result in the alpha101 family. Median outperforms mean (H215 OOS 1.321) by reducing impact of outlier trading days.
 
-**H218 (NEW candidate)**: Test 3-1m, 6-1m, 9-3m, 12-1m formation windows on our 30-stock universe — momentum family sensitivity scan. Blend top-2 windows (lowest correlation, highest individual Sharpe). Hypothesis: 2-window blend (different lookbacks) outperforms single-window H198 by reducing window-selection bias.
+**H218** — NOT CONFIRMED (2026-05-24): alpha101 + momentum blend (H217 × H198). Corr(H217, H198) OOS = 0.656; blend Sharpe 1.559 = no improvement over H217 standalone. Strategies select overlapping names (TSLA/NVDA dominate both alpha101 and 6m momentum in this bull market period).
+
+**Multi-window momentum scan (originally sketched as H218, now reassigned ≥H223)**: Test 3-1m, 6-1m, 9-3m, 12-1m formation windows — momentum family sensitivity scan. Blend top-2 windows (lowest correlation, highest individual Sharpe). Note: H218 number was used for the alpha101+momentum blend above; this idea should use H223 or later.
 
 **Implementation sketch** (adapts run_h213.py template):
 ```python

@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-20
+updated: 2026-05-24
 sources_indexed: 2
-pages: 76
+pages: 87
 ---
 
 # Wiki Index
@@ -25,7 +25,7 @@ When answering a query:
 
 - [Project Index](trading/index.md) — phases, decisions, API access status
 **Algorithms / Strategies**
-- [Momentum Strategies](trading/algorithms/momentum-strategies.md) — H001–H202 coverage; H026/H149 ETF rotation production (382×, Sharpe 3.007); H198 CONFIRMED 6-1m cross-sectional (OOS Sharpe 1.174); H199 NOT CONFIRMED; H202 XGBoost ML (+0.104 Sharpe, NOT CONFIRMED on 30-stock universe)
+- [Momentum Strategies](trading/algorithms/momentum-strategies.md) — H026/H149 ETF rotation production (382×, Sharpe 3.007); H198 CONFIRMED 6-1m (OOS Sharpe 1.174); H215 CONFIRMED alpha101 (OOS 1.321); H217 CONFIRMED median alpha101 (OOS 1.559); H220 CONFIRMED ETF TSMOM (OOS 0.961); H202/H218/H219 NOT CONFIRMED
 - [Pairs Trading / Stat Arb](trading/algorithms/pairs-trading.md) — ETF pairs (H152–H160) ALL NOT CONFIRMED; family EXHAUSTED at daily frequency; cointegration breaks OOS for all tested pairs
 - [Event-Driven Strategies](trading/algorithms/event-driven.md) — PEAD: H163 CONFIRMED (FinBERT NLP on 8-K press releases, 80.8% OOS win rate), H174 CONFIRMED (dual filter deployed), H161/H162 PARTIAL; H170 0DTE iron condor partial sim
 - [Short-Term Reversal](trading/algorithms/short-term-reversal.md) — industry-adjusted reversal REV^IN; 0.53%/month globally; SSRN:6630998; H181 CONFIRMED (OOS Sharpe 1.138)
@@ -35,7 +35,11 @@ When answering a query:
 - [BSM as Flat Limit of Information Geometry (Dean 2026)](trading/algorithms/bsm-information-geometry.md) — SSRN 6630259; smile = manifold curvature; zero-free-parameter LEAPS prediction within 19%; SABR β=1 from Čencov's theorem; bifurcation at |ρ|=√(2/3)≈0.816
 - [151 Trading Strategies (Kakushadze & Serur)](trading/strategies/151-trading-strategies.md) — comprehensive strategy catalog; 151+ strategies with formulas; Tier 1/2/3 implementation priority
 - [Calendar Anomalies](trading/algorithms/calendar-anomalies.md) — TOM H201 CONFIRMED (OOS Sharpe 0.740); Halloween/FOMC/January/Weekend effects; H205–H208 queued; composite calendar strategy; academic debate on TOM persistence ← new 2026-05-17
-- [Deep RL for Trading](trading/algorithms/deep-rl-trading.md) — FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued (PPO vs H198 momentum baseline) ← new 2026-05-16
+- [Deep RL for Trading](trading/algorithms/deep-rl-trading.md) — FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 NOT CONFIRMED; DL-TSMOM benchmark VSN+LSTM (H223 design note) ← new 2026-05-16
+- [Regime Detection](trading/algorithms/regime-detection.md) — VIX threshold, Markov Switching, HMM, Statistical Jump Model (arXiv:2402.05272); H165/H205-B application code; regime-conditional BAB ← new 2026-05-19
+- [Factor Models & Cross-Sectional Alpha](trading/algorithms/factor-models.md) — Fama-French 3/5/6-factor (Kenneth French Library); alphalens-reloaded tearsheets; Fama-MacBeth regression; cross-sectional feature engineering for H202-XL ← new 2026-05-20
+- [WorldQuant 101 Alphas — Overlap Analysis](trading/algorithms/alpha101-overlap.md) — 40 OHLCV-only signals buildable free; H215/H216 CONFIRMED; ~60 signals blocked (VWAP/intraday required) ← new 2026-05-22
+- [Quality Factor (QMJ, Piotroski, GP/Assets)](trading/algorithms/quality-factor.md) — AQR QMJ; Piotroski F-Score 9-criteria; Novy-Marx GP/Assets; FMP API implementation; H221/H222 designs; corr(quality, BAB) ~0.4–0.6 = independent alpha ← new 2026-05-24
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -49,6 +53,7 @@ When answering a query:
 - [Portfolio Optimization Libraries](trading/tools/portfolio-optimization.md) — PyPortfolioOpt v1.6.0, Riskfolio-Lib v7.2.1, skfolio v0.20.1; HRP, risk parity, NCO, walk-forward CV; strategy blending code for H026+BAB+MOM+TOM ← new 2026-05-16
 - [Investing Algorithm Framework (IAF)](trading/tools/investing-algorithm-framework.md) — define→backtest→deploy; dual vector+event-driven modes; tiered SQLite storage for 10k+ runs; HTML dashboard; Monte Carlo testing; CCXT live (crypto); Alpaca needs custom executor ← new 2026-05-20
 - [NextTrade](trading/tools/nexttrade.md) — TypeScript GUI-based strategy builder; genetic algo optimization; abandoned (→NexusTrade SaaS); Tradier broker only; NOT relevant to our stack ← new 2026-05-20
+- [Quant Firm Open Source Repos](trading/tools/quant-firm-repos.md) — 22 repos from Two Sigma, Man Group, Jane Street, D.E. Shaw, HRT, Optiver, WorldQuant; ArcticDB, dtale, QuantMuse (2.5k stars); open/closed split maps onto competitive moat theory ← new 2026-05-22
 
 **Data Sources**
 - [Polygon.io](trading/data-sources/polygon.md) — market data (free: EOD only; paid: options, ticks, Greeks)
@@ -57,12 +62,13 @@ When answering a query:
 - [Free Data Sources](trading/data-sources/free-data.md) — EDGAR (EdgarTools), Alpha Vantage, Finnhub, FRED, Tiingo; yfinance status
 - [Options Data Sources](trading/data-sources/options-data.md) — ThetaData (cheapest), ORATS (best IV surface), Polygon/Alpaca (real-time only; no history)
 - [Sector & Industry Classification](trading/data-sources/sector-classification.md) — GICS/SIC sources; SEC EDGAR SIC, GitHub S&P 500 CSV, yfinance caveats; build_sector_cache() for 100-500 stocks; H181
+- [Earnings Calendar & Events](trading/data-sources/earnings-events.md) — FMP/Finnhub/yfinance earnings APIs; SEC EDGAR XBRL EPS extraction; EdgarTools; EPS surprise formulas; PEAD stack upgrade path for pead_overnight.py ← new 2026-05-23
 
 **Backtesting**
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado
 - [Walk-Forward & CPCV](trading/backtesting/walk-forward-cpcv.md) — walk-forward variants, CPCV algorithm, purging/embargoing, DSR formulas; Python libs: timeseriescv/skfolio
 - [Transaction Cost Modeling](trading/backtesting/transaction-costs.md) — spread/impact/borrow cost models, square-root market impact, vectorbt/backtrader defaults, per-strategy calibration table
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H210 (frontier: H209/H210/H211); H026 ETF rotation (Sharpe 3.007); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367); H198 6-1m momentum (Sharpe 1.174); H201 TOM (Sharpe 0.740); calendar family closed (H205/H206/H207/H208 NOT CONFIRMED); H202-XL NOT CONFIRMED (OOS 1.106)
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H222 (frontier: H221 drift-regime-reversal, H222 Piotroski quality); H217 CONFIRMED (median alpha101 OOS 1.559); H220 CONFIRMED (ETF TSMOM 0.961); H215 CONFIRMED (alpha101 OOS 1.321); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367); H198 momentum (Sharpe 1.174); H201 TOM (Sharpe 0.740); calendar family closed H205–H208 NOT CONFIRMED
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
@@ -99,6 +105,12 @@ When answering a query:
 - [Research Log 2026-05-13](trading/research-log/2026-05-13.md) — H193 NOT CONFIRMED (BAB+reversal blend); H196 NOT CONFIRMED (STORM scale); low-volatility.md research closed
 - [Research Log 2026-05-14](trading/research-log/2026-05-14.md) — H198 CONFIRMED (6-1m stock momentum, OOS Sharpe 1.174); H199 NOT CONFIRMED (sector-neutral hurts momentum)
 - [Research Log 2026-05-15](trading/research-log/2026-05-15.md) — H200 NOT CONFIRMED (graphical pairs, 0/15 cointegrated); H201 CONFIRMED (TOM, OOS Sharpe 0.740); pairs family EXHAUSTED; H202 queued
+- [Research Log 2026-05-24](trading/research-log/2026-05-24.md) — H217 CONFIRMED (median alpha101 OOS 1.559); H218/H219 NOT CONFIRMED; H220 CONFIRMED (ETF TSMOM 0.961); quality-factor.md wiki new; H221/H222 staged
+- [Research Log 2026-05-23](trading/research-log/2026-05-23.md) — H215 CONFIRMED (alpha101 OOS 1.321); H216 CONFIRMED-weak (vol-price divergence, below SPY); blend H215+H198 OOS 1.397; earnings-events.md wiki new
+- [Research Log 2026-05-21](trading/research-log/2026-05-21.md) — H205/H206/H207/H208 NOT CONFIRMED (full calendar family closed); H202-XL NOT CONFIRMED (OOS 1.106)
+- [Research Log 2026-05-20](trading/research-log/2026-05-20.md) — factor-models.md wiki new (Fama-French H202-XL prep); dream cycle scan: 5 arXiv/GitHub angles
+- [Research Log 2026-05-19](trading/research-log/2026-05-19.md) — regime-detection.md wiki new; H206 NOT CONFIRMED (Halloween Effect); H204 NOT CONFIRMED (Deep RL PPO)
+- [Research Log 2026-05-18](trading/research-log/2026-05-18.md) — H205 design finalized; arXiv scan: 3 papers support H202-XL large-universe gradient boosting
 - [Research Log 2026-05-17](trading/research-log/2026-05-17.md) — H202 NOT CONFIRMED (XGBoost +0.104 Sharpe, below threshold); H203 NOT CONFIRMED (HRP over-weights TOM 74%); H205 queued; calendar-anomalies wiki new
 
 ### Impact Investing

@@ -32,7 +32,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Calendar Anomalies](algorithms/calendar-anomalies.md) ← updated 2026-05-18 (Schroeder 2025 SEC disclosure mechanism for Halloween effect; H206 success gates set; H205 design note updated)
   - [Regime Detection](algorithms/regime-detection.md) ← new 2026-05-19 (VIX threshold H165a confirmed, 200-day SMA, Markov Switching statsmodels, HMM hmmlearn, Statistical Jump Model arXiv:2402.05272; H165/H205-B application code)
   - [Factor Models & Cross-Sectional Alpha](algorithms/factor-models.md) ← new 2026-05-20
-  - [WorldQuant 101 Alphas — Overlap Analysis](algorithms/alpha101-overlap.md) ← new 2026-05-22 (H215 alpha101 + H216 vol-price divergence staged; VWAP signals blocked on free tier) (Fama-French 3/5/6-factor; Kenneth French data library via pandas-datareader; AQR datasets; cross-sectional feature engineering; alphalens-reloaded tearsheets; Fama-MacBeth regression; H202-XL XGBoost feature matrix)
+  - [WorldQuant 101 Alphas — Overlap Analysis](algorithms/alpha101-overlap.md) ← new 2026-05-22 (H215 CONFIRMED alpha101 OOS 1.321; H216 CONFIRMED-weak vol-price divergence OOS 0.823; VWAP signals blocked on free tier; 40 OHLCV-only signals buildable)
   - [Quality Factor (QMJ)](algorithms/quality-factor.md) ← new 2026-05-24 (Piotroski F-Score 9-criteria; Novy-Marx GP/Assets; AQR QMJ datasets; FMP API implementation; H221/H222 designs; BAB correlation ~0.4–0.6 = independent alpha)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
@@ -65,7 +65,9 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-24](research-log/2026-05-24.md) — H217 CONFIRMED (median alpha101 OOS 1.559); H218/H219 NOT CONFIRMED; H220 CONFIRMED (ETF TSMOM OOS 0.961); wiki: quality-factor.md new; dream cycle: H221/H222/H223 staged
   - [2026-05-23](research-log/2026-05-23.md) — H215 CONFIRMED (alpha101 OOS Sharpe 1.321); H216 CONFIRMED-weak (vol-price divergence OOS 0.823, below SPY); blend H215+H198 OOS Sharpe 1.397; wiki: earnings-events.md new; dream cycle: SUE.txt + BlindTrade + factor momentum multi-window staged
+  - [2026-05-21](research-log/2026-05-21.md) — H205/H206/H207/H208 NOT CONFIRMED (full calendar family closed); H202-XL NOT CONFIRMED (OOS 1.106)
   - [2026-05-20](research-log/2026-05-20.md) — wiki expansion: Factor Models/Fama-French page (new, H202-XL prep); dream cycle scan: 5 angles across arXiv + GitHub
   - [2026-05-19](research-log/2026-05-19.md) — wiki expansion: regime-detection.md; H206 NOT CONFIRMED (Halloween Effect); H204 NOT CONFIRMED (Deep RL PPO); surprise: summer TOM (Sharpe 0.699) > Halloween TOM (Sharpe 0.435)
   - [2026-05-18](research-log/2026-05-18.md) — wiki expansion + arXiv scan: H205 design finalized (4 staged proposals); Schroeder 2025 confirms structural Halloween mechanism for H206; 3 convergent papers support H202-XL large-universe gradient boosting; run_h205.py backtest queued for tonight

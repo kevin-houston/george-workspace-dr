@@ -215,3 +215,17 @@ Pages updated: calendar-anomalies.md (Schroeder 2025 Halloween mechanism, H206 s
 
 ## [2026-05-20] ingest | Phynance — Kakushadze (arXiv:1405.1948)
 Pages created: 1 (sources/phynance-kakushadze-2014.md). Pages updated: 3 (bsm-information-geometry.md cross-reference added; wiki/index.md source entry; wiki/log.md). Key entities: Zura Kakushadze, Quantigic Solutions LLC. Covers: Itô calculus, Girsanov theorem, path integrals, BSM derivation, Greeks, Vasicek/CIR/HJM/BGM interest rate models, quant interview problems. Connected to H162 options income, Dean 2026 information geometry work.
+
+## [2026-05-24] lint | Health check
+Issues found: 21. Auto-fixed: 19. Needs review: 0 (one contradiction resolved inline).
+
+**Fixed:**
+- wiki/index.md: Added 6 missing algorithm/tool/data pages (alpha101-overlap, factor-models, quality-factor, regime-detection, earnings-events, quant-firm-repos)
+- wiki/index.md: Added 6 missing research logs (2026-05-18 through 2026-05-24)
+- wiki/index.md: Updated hypothesis-log entry (frontier H209→H221/H222; added H215/H217/H220 confirmed)
+- wiki/index.md: Updated momentum-strategies entry (added H215/H217/H220)
+- wiki/index.md: Updated frontmatter (date 2026-05-20→2026-05-24, pages 76→87)
+- trading/index.md: Fixed alpha101-overlap description (staged→CONFIRMED)
+- trading/index.md: Added research logs 2026-05-21 and 2026-05-24
+- factor-models.md: Added cross-reference to quality-factor.md
+- momentum-strategies.md: Resolved H218 naming collision (multi-window momentum idea was never tested; H218 was used for alpha101+momentum blend; multi-window reassigned to ≥H223)

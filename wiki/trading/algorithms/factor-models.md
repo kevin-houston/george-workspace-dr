@@ -421,6 +421,7 @@ for train_end in pd.date_range(start='2008', end='2022', freq='AS'):
 ## Related Pages
 
 - [Momentum Strategies](momentum-strategies.md) — H198 confirmed, H202-XL queued
+- [Quality Factor (QMJ, Piotroski, GP/Assets)](quality-factor.md) — fundamental quality complement to BAB; H221/H222 designs; FMP API implementation
 - [Low-Volatility Anomaly](low-volatility.md) — H192 BAB, H205 regime-conditional
 - [Regime Detection](regime-detection.md) — factor conditioning on market regime
 - [ML for Trading](../tools/ml-for-trading.md) — XGBoost, MASFIN, gradient boosting
