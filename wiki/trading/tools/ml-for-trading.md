@@ -483,3 +483,34 @@ Three 2025–2026 papers collectively support expanding H202 XGBoost momentum fr
 - Test with and without bias-correction term
 - H202 30-stock showed XGBoost +0.104 Sharpe OOS vs simple rank; larger universe should yield substantially more signal
 - Queue H202-XL after H205 results are confirmed
+
+---
+
+## QuantaAlpha — Evolutionary LLM Alpha Mining (arXiv:2602.07085, 2026)
+
+**Source**: arxiv.org/abs/2602.07085
+
+LLM-driven closed-loop alpha factor discovery using evolutionary optimization. Each mining iteration is a trajectory; underperforming steps are localized and revised through "trajectory-level mutation and crossover" while maintaining semantic consistency between hypothesis, factor expression, and executable code.
+
+**Results (CSI 300 universe, backtested)**:
+- Information Coefficient (IC): **0.0472**
+- Annual Return Rate: **4.68%**  
+- Maximum Drawdown: **11.8%**
+- Transfer to CSI 500: **40.28% cumulative excess** over 4 years
+- Transfer to S&P 500: **19.1% cumulative excess** over 4 years
+
+**Relevance**: Factors mined on one market transfer to others — suggests the discovered alphas are structural, not overfitted. CSI 300/500 results are Chinese market; S&P 500 transfer is the key proof of generality. The IC of 0.0472 is very strong (typical good factors: 0.02–0.04).
+
+**Connection to our pipeline**: QuantaAlpha automates what we do manually in the dream cycle — scan for hypotheses, generate code, evaluate, iterate. The evolutionary approach applied to our 30-stock universe with our confirmed signal types (alpha101, reversal, momentum) could discover novel factor combinations. H209 (AlphaCrafter) is the closest analog in our queue.
+
+---
+
+## QuantEvolve — Multi-Agent Evolutionary Strategy Discovery (arXiv:2510.18569, 2025)
+
+**Source**: arxiv.org/abs/2510.18569 (oral, ACM ICAIF 2025)
+
+Combines quality-diversity optimization with hypothesis-driven multi-agent strategy generation. Maintains a feature map aligned with investor preferences (strategy type, risk profile, turnover, return characteristics) to ensure diverse coverage of the strategy space.
+
+**Key innovation**: "Quality-diversity" means the framework doesn't just find the best strategy — it finds a *diverse set of good strategies* that cover different return profiles, correlations, and risk characteristics. Directly useful for portfolio construction (we want H181+H192+H198+H217 to be uncorrelated — quality-diversity optimization formalizes this).
+
+**Relevance**: The quality-diversity framing matches our portfolio construction goal exactly. When adding H221/H222 to the portfolio, we care about both performance AND low correlation with existing strategies. QuantEvolve's approach would explicitly optimize for this.

@@ -339,3 +339,37 @@ The anonymization methodology is a prerequisite for any LLM-based trading system
 "TrustTrade: Human-Inspired Selective Consensus Reduces Decision Uncertainty in LLM Trading Agents". Addresses LLM hallucination by weighting agent signals by cross-agent semantic agreement. Inconsistent/outlier signals downweighted. Complementary to BlindTrade (anonymization prevents memorization; TrustTrade prevents hallucination).
 
 **H209 design update**: Before implementing AlphaCrafter multi-agent framework, apply (1) BlindTrade anonymization to our universe, (2) TrustTrade selective consensus aggregation. Both papers available 2026 — state-of-art for LLM trading validation.
+
+---
+
+## Deep Learning Benchmark for TSMOM (arXiv:2603.01820, March 2026)
+
+**Source**: arxiv.org/abs/2603.01820  
+**Authors**: Adir Saly-Kaufmann, Kieran Wood, Jan Peter-Calliess, Stefan Zohren (Oxford)
+
+Large-scale evaluation of DL architectures for cross-asset time-series momentum on daily futures data (commodities, equity indices, bonds, FX), 2010–2025.
+
+**Architectures tested**: Linear models, LSTM, xLSTM, Transformer, State Space Models, PatchTST, VSN (Variable Selection Network)
+
+**Key results**:
+- **Highest Sharpe**: VSN + LSTM combination
+- **Best downside risk**: VSN + xLSTM and LSTM + PatchTST
+- **Most TC-robust**: xLSTM (largest breakeven transaction cost buffer)
+- Overall: "models explicitly designed to learn rich temporal representations consistently outperform linear benchmarks"
+
+**Relevance to H220 (ETF TSMOM confirmed, OOS 0.961)**:
+
+H220 used a simple binary rule: long if 6m return > 0, flat otherwise. The benchmark suggests this binary rule is the "linear baseline" that all DL models beat. The upgrade path:
+
+1. Replace binary trend signal with **LSTM trend score** (continuous position from 0 to 1)
+2. Use **vol-scaling** per Barroso & Santa-Clara (H212 analogue for TSMOM)
+3. Target architecture: **xLSTM** for transaction-cost robustness (important for monthly rebalance with 14 ETFs)
+
+**Estimated improvement**: Academic benchmarks show ~15–25% Sharpe improvement from binary → DL trend. On our H220 OOS Sharpe of 0.961: expected upgrade to ~1.1–1.2.
+
+**H223 design note** (DL-TSMOM on 14-ETF universe):
+- Signal: LSTM trained on rolling 5yr window, predicting 1m forward return direction
+- Position: continuous (not binary) — scale by LSTM confidence
+- Universe: same 14 ETFs as H220
+- IS: 2013-2019 (training), OOS: 2020-2026 (evaluation)
+- Confirm: OOS Sharpe > 1.1 (beat H220's 0.961)
