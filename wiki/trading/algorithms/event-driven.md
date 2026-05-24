@@ -472,3 +472,42 @@ composite_score = 0.60 * score_8k + 0.40 * score_transcript
 
 **Free transcript sources**: Motley Fool (scraped), Seeking Alpha (requires subscription), SEC EDGAR 8-K Item 9.01 exhibits (some transcripts filed there), Earnings Whispers, stockanalysis.com  
 **Caution**: Transcript availability lag — transcripts often posted 2–4 hours after earnings call, which may be after market open. 8-K is usually immediate. The benefit is incremental (57.6% vs. baseline FinBERT 57–58% on 8-K), not transformative.
+
+
+### SUE.txt — LLM-Derived Earnings Surprise Signal (H174 Enhancement Candidate)
+
+**Source**: ACL FinnLP Workshop 2025 — "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models"
+
+Classical PEAD uses **numeric SUE** (Standardized Unexpected Earnings = (actual EPS − consensus EPS) / std dev of prior forecast errors). This paper shows **text-based SUE (SUE.txt)** — derived from LLM extraction of earnings disclosures — produces a stronger PEAD signal than numeric SUE alone.
+
+**Mechanism**: LLM reads earnings press release or transcript, identifies specific language about:
+- Forward guidance vs. prior quarter language
+- Management surprise/confidence markers
+- Revenue quality commentary (recurring vs. one-time items)
+- Analyst Q&A sentiment
+
+Generates a contextual surprise score that captures *what management says* about the numbers, not just the numbers themselves. Outperforms numeric SUE in PEAD magnitude.
+
+**H174 application** — our current pipeline computes:
+```python
+# Current (pead_overnight.py)
+sentiment_score = finbert(earnings_text)  # press release sentiment
+surprise = score - prior_4q_mean         # vs. prior quarter baseline
+```
+
+**Proposed upgrade** — add SUE.txt as a second signal:
+```python
+# Proposed: composite PEAD signal
+eps_surprise_pct = (actual_eps - consensus_eps) / abs(consensus_eps)  # from FMP API
+finbert_surprise  = finbert(press_release_text) - prior_finbert_mean  # current method
+sue_txt           = llm_extract_surprise(full_release_text)           # new: LLM contextual
+
+# Composite: weight by out-of-sample correlation
+composite = 0.4 * eps_surprise_pct + 0.4 * finbert_surprise + 0.2 * sue_txt
+```
+
+**Prerequisites**: FMP API for numeric EPS surprise (already have $FMP_API_KEY); LLM call (already have $OPENAI_API_KEY via proxy). Low implementation cost — add ~20 lines to pead_overnight.py.
+
+**Expected lift**: Paper reports SUE.txt > numeric SUE in PEAD magnitude. Combined signal likely improves signal-to-noise vs. either alone. Hypothesis: composite win-rate improves from current 81.8% toward 85%+.
+
+**Priority**: MEDIUM — queue after current live trading proves stable; test on holdout set first.
