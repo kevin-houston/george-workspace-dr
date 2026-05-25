@@ -1,0 +1,105 @@
+{
+  "date": "2026-05-25",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + post-earnings drift + text signals",
+    "cross-sectional momentum + factor momentum multi-window",
+    "multi-agent LLM trading systems",
+    "GitHub trending quantitative finance repos"
+  ],
+  "papers_found": [
+    {
+      "title": "Cross-sectional factor momentum: evidence from multiple formation periods",
+      "source": "Applied Economics Letters, 2025",
+      "url": "https://www.tandfonline.com/doi/abs/10.1080/13504851.2025.2472032",
+      "relevance": "HIGH",
+      "relevance_reason": "Directly extends H198 (confirmed 6-1m momentum). Multiple windows (1-1, 2-6, 7-12, 13-60m) blend outperforms single window. Actionable as H223.",
+      "staged": true,
+      "staged_file": "1_h223_factor_momentum_multiwindow.json"
+    },
+    {
+      "title": "AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading",
+      "source": "arXiv:2605.05580, May 2026 (NeurIPS 2026 submission)",
+      "url": "https://arxiv.org/abs/2605.05580",
+      "relevance": "HIGH",
+      "relevance_reason": "Three-agent system (Miner/Screener/Trader) for regime-conditioned factor ensemble. Directly applicable to blending our confirmed factors (BAB+MOM+QMJ+alpha101). Introduces H224 candidate.",
+      "staged": true,
+      "staged_file": "2_alphacrafter_wiki_update.json"
+    },
+    {
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "source": "ACL FinNLP 2025 (2025.finnlp-2.13)",
+      "url": "https://aclanthology.org/2025.finnlp-2.13",
+      "relevance": "HIGH",
+      "relevance_reason": "FinBERT 57.6-58.3% accuracy on PEAD direction; larger LLMs outperform. Directly upgrades H174 (confirmed). H225 candidate: GPT-4o-mini scoring of 8-K press releases.",
+      "staged": true,
+      "staged_file": "3_pead_llm_enhancement_wiki.json"
+    },
+    {
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "source": "arXiv:2602.23330, Feb 2026",
+      "url": "https://arxiv.org/abs/2602.23330",
+      "relevance": "MEDIUM",
+      "relevance_reason": "Fine-grained task decomposition improves multi-agent LLM trading. Evaluates on Japanese stocks. Less directly actionable than AlphaCrafter — similar theme but different data and architecture.",
+      "staged": false,
+      "staged_reason": "AlphaCrafter (2605.05580) is more directly applicable and was already staged. This paper is a supporting reference."
+    },
+    {
+      "title": "When Agents Trade: Live Multi-Market Trading Benchmark for LLM Agents",
+      "source": "arXiv:2510.11695, Oct 2025",
+      "url": "https://arxiv.org/abs/2510.11695",
+      "relevance": "MEDIUM",
+      "relevance_reason": "LLM agents outperform buy-and-hold in live environments. Agent architecture matters more than LLM backbone. Confirms multi-agent direction. No specific actionable signal for our pipeline.",
+      "staged": false,
+      "staged_reason": "No specific new signal; general confirmation of multi-agent direction already noted."
+    },
+    {
+      "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+      "source": "arXiv:2403.07998",
+      "url": "https://arxiv.org/abs/2403.07998",
+      "relevance": "LOW",
+      "relevance_reason": "Already noted in hypothesis log as H200 (NOT CONFIRMED). Pairs family is EXHAUSTED on our 30-stock universe. No new developments found.",
+      "staged": false,
+      "staged_reason": "Pairs family closed."
+    },
+    {
+      "title": "Spatio-Temporal Momentum: Jointly Learning Time-Series and Cross-Sectional Strategies",
+      "source": "arXiv:2302.10175",
+      "url": "https://arxiv.org/abs/2302.10175",
+      "relevance": "LOW",
+      "relevance_reason": "Interesting unification of TS and CS momentum but requires deep learning infrastructure. H180 (spatio-temporal NN) was already deprioritized due to implementation complexity.",
+      "staged": false,
+      "staged_reason": "Already deprioritized as H180."
+    },
+    {
+      "title": "Parameters Optimization of Pair Trading Algorithm",
+      "source": "arXiv:2412.12555",
+      "url": "https://arxiv.org/abs/2412.12555",
+      "relevance": "LOW",
+      "relevance_reason": "Pairs trading parameter optimization. Pairs family exhausted.",
+      "staged": false,
+      "staged_reason": "Pairs family closed."
+    }
+  ],
+  "github_findings": [
+    {
+      "repo": "TauricResearch/TradingAgents",
+      "description": "Multi-agent LLM financial trading framework, v0.2.5 (May 2026), GPT-5.5 support",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "staged_reason": "More of a general framework. AlphaCrafter paper covers the same space more precisely."
+    },
+    {
+      "repo": "AI4Finance-Foundation/FinRL-Trading",
+      "description": "FinRL-X: AI-native quantitative trading infrastructure (2026 refresh of FinRL)",
+      "url": "https://github.com/AI4Finance-Foundation/FinRL-Trading",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "staged_reason": "Already aware of FinRL framework. New version noted but no specific new signal."
+    }
+  ],
+  "staged_proposals": 4,
+  "high_relevance_count": 3,
+  "next_hypothesis_queue": ["H223 (multi-window momentum)", "H224 (factor ensemble blend)", "H225 (GPT-4o PEAD upgrade)"]
+}

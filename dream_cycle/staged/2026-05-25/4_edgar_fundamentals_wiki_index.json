@@ -1,0 +1,14 @@
+{
+  "id": "edgar-fundamentals-wiki-index-2026-05-25",
+  "date": "2026-05-25",
+  "source": "reflection",
+  "source_url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+  "title": "Wiki index update: add edgar-fundamentals.md to data-sources",
+  "rationale": "New page edgar-fundamentals.md was written tonight. Index entries in wiki/trading/index.md need to be updated to include it. Also update quality-factor.md to link to the new page.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/index.md",
+  "content": "UPDATE ENTRY: Add '  - [SEC EDGAR XBRL Fundamentals](data-sources/edgar-fundamentals.md) ← new 2026-05-25 (CompanyFacts API, 15yr history, us-gaap tag reference, Piotroski builder — unblocks H222 full IS/OOS test)' under Data Sources section, after earnings-events.md entry.",
+  "action": "patch",
+  "apply_status": "pending"
+}

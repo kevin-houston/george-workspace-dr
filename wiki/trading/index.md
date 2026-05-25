@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-24 (quality-factor.md new; hypothesis-log H217–H220 added)
+updated: 2026-05-25 (edgar-fundamentals.md new; H221/H222 log entries; dream cycle H223/H224/H225 staged)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -52,6 +52,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Sector & Industry Classification](data-sources/sector-classification.md) ← new 2026-05-08 (GICS/SIC sources for H181; SEC EDGAR SIC, GitHub S&P 500 CSV, yfinance caveats, practical build_sector_cache() for 100-500 stocks)
   - [Options Data Sources](data-sources/options-data.md) ← 2026-05-01 (ThetaData/ORATS/FlashAlpha pricing; Alpaca indicative feed; vollib/py_vollib/QuantLib; IV surface + SVI fitting; free EOD options data on GitHub)
   - [Earnings Calendar & Corporate Events](data-sources/earnings-events.md) ← new 2026-05-23 (FMP/Finnhub/yfinance/API Ninjas free tier APIs; SEC EDGAR XBRL EPS extraction; EdgarTools; EPS surprise formulas; PEAD hybrid stack upgrade path for pead_overnight.py; earnings transcript sources for H174)
+  - [SEC EDGAR XBRL Fundamentals](data-sources/edgar-fundamentals.md) ← new 2026-05-25 (CompanyFacts API 2009–present, 15yr history free; us-gaap tag reference for Piotroski/quality; Python builder for H222 full IS/OOS; rate limits; comparison vs FMP/yfinance)
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
   - [Kalshi](prediction-markets/kalshi.md) ← expanded 2026-04-29 (full auth/API/WebSocket, RSA signing, CPI nowcasting implementation, fee modeling, rate limits, Timeless perps)
   - [Algorithmic Strategies](prediction-markets/algorithmic-strategies.md) ← updated 2026-05-13 (PolyBench arXiv:2604.14199 — LLMs near-random on binary markets; edge only on economic data + structured context)
@@ -65,6 +66,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-25](research-log/2026-05-25.md) — wiki expansion: edgar-fundamentals.md new (EDGAR XBRL API, 15yr history, H222 unblock path); dream cycle: H223 multi-window momentum, H224 AlphaCrafter factor ensemble, H225 GPT-4o PEAD upgrade staged
   - [2026-05-24](research-log/2026-05-24.md) — H217 CONFIRMED (median alpha101 OOS 1.559); H218/H219 NOT CONFIRMED; H220 CONFIRMED (ETF TSMOM OOS 0.961); H221 NOT CONFIRMED (drift regime too restrictive for 30-stock universe, avg 3.6/30 eligible); H222 CONFIRMED-WEAK (quality factor F-Score 2.329/GP-Assets 2.308 OOS but bullish test period only); wiki: quality-factor.md new; dream cycle: H221/H222/H223 staged
   - [2026-05-23](research-log/2026-05-23.md) — H215 CONFIRMED (alpha101 OOS Sharpe 1.321); H216 CONFIRMED-weak (vol-price divergence OOS 0.823, below SPY); blend H215+H198 OOS Sharpe 1.397; wiki: earnings-events.md new; dream cycle: SUE.txt + BlindTrade + factor momentum multi-window staged
   - [2026-05-21](research-log/2026-05-21.md) — H205/H206/H207/H208 NOT CONFIRMED (full calendar family closed); H202-XL NOT CONFIRMED (OOS 1.106)
