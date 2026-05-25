@@ -511,3 +511,22 @@ composite = 0.4 * eps_surprise_pct + 0.4 * finbert_surprise + 0.2 * sue_txt
 **Expected lift**: Paper reports SUE.txt > numeric SUE in PEAD magnitude. Combined signal likely improves signal-to-noise vs. either alone. Hypothesis: composite win-rate improves from current 81.8% toward 85%+.
 
 **Priority**: MEDIUM — queue after current live trading proves stable; test on holdout set first.
+
+
+## H225 Candidate — LLM-Upgraded PEAD Signal (ACL FinNLP 2025)
+
+**Source:** "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models" (ACL FinNLP 2025 workshop)
+
+**Key finding:** Press release text (soft information) is as informative as EPS surprise (hard information) for predicting post-announcement drift. FinBERT achieves 57.6-58.3% directional accuracy across 138,000 press releases (2005-2023). GPT-4 class models outperform FinBERT on nuanced soft information extraction.
+
+**H225 Design:**
+- Replace H174's FinBERT scoring (`ProsusAI/finbert`) with OpenAI GPT-4o-mini scoring of earnings press releases
+- Signal: LLM scores the full 8-K Item 2.02 text for earnings quality on [-1, +1] scale
+- Keep H174's dual filter: LLM_score ≥ 0.18 AND EPS_surprise ≥ 0.02
+- Baseline: H174 OOS WR=81.8%, MeanRet=6.89%, n=22
+- Cost: ~$0.002 per press release (GPT-4o-mini input pricing) — ~$0.20/year for 100 earnings events
+- Confirm: OOS WR > 83% or MeanRet > 7.5% (meaningful improvement over H174)
+
+**Implementation note:** pead_overnight.py already downloads and scores 8-K text. Replace the `score_document()` FinBERT call with `openai.chat.completions.create()` call with a structured prompt asking for directional earnings quality score. `$OPENAI_API_KEY` is available in env.
+
+**Reference:** ACL Anthology 2025.finnlp-2.13

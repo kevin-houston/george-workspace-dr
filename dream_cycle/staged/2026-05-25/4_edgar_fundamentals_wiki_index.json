@@ -8,7 +8,7 @@
   "risk_level": "low",
   "type": "wiki_update",
   "target_file": "/workspace/agent/wiki/trading/index.md",
-  "content": "UPDATE ENTRY: Add '  - [SEC EDGAR XBRL Fundamentals](data-sources/edgar-fundamentals.md) ← new 2026-05-25 (CompanyFacts API, 15yr history, us-gaap tag reference, Piotroski builder — unblocks H222 full IS/OOS test)' under Data Sources section, after earnings-events.md entry.",
+  "content": "UPDATE ENTRY: Add '  - [SEC EDGAR XBRL Fundamentals](data-sources/edgar-fundamentals.md) \u2190 new 2026-05-25 (CompanyFacts API, 15yr history, us-gaap tag reference, Piotroski builder \u2014 unblocks H222 full IS/OOS test)' under Data Sources section, after earnings-events.md entry.",
   "action": "patch",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

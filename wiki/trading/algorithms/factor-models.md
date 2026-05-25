@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-20
+updated: 2026-05-25
 status: active
 sources:
   - Kenneth French Data Library (https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
@@ -426,3 +426,35 @@ for train_end in pd.date_range(start='2008', end='2022', freq='AS'):
 - [Regime Detection](regime-detection.md) — factor conditioning on market regime
 - [ML for Trading](../tools/ml-for-trading.md) — XGBoost, MASFIN, gradient boosting
 - [Portfolio Optimization](../tools/portfolio-optimization.md) — HRP, risk parity, NCO
+
+
+## AlphaCrafter — Multi-Agent Factor Ensemble (arXiv:2605.05580)
+
+**Yuan et al., 2026 (NeurIPS 2026 submission)**  
+A full-stack multi-agent framework for cross-sectional quantitative trading. Three specialized agents form a closed-loop pipeline:
+
+1. **Miner** — expands the factor pool via LLM-guided search (generates new factor candidates)
+2. **Screener** — assesses market regimes and builds a regime-conditioned factor ensemble (weights existing factors by current macro state)
+3. **Trader** — converts the factor ensemble into a quantitative strategy with explicit risk constraints
+
+### Key Results
+- Consistently outperforms SOTA baselines on CSI 300 and S&P 500 in risk-adjusted returns
+- Lowest cross-trial variance among tested systems — more robust across different market periods
+- Regime-conditioned factor weighting (Screener) is the key differentiator vs static factor blends
+
+### Relevance to Current Pipeline
+Our confirmed factors (H192-D BAB, H198 momentum, H217 alpha101, H222 quality) could be combined using the AlphaCrafter Screener design:
+- In bull markets (VIX<20, SPY>200MA): weight momentum + quality higher
+- In bear markets: weight BAB + quality higher, reduce momentum
+- The Miner agent approach maps to our alpha101 scan (H215/H217) extended to LLM-generated factor discovery
+
+### H224 Candidate
+Design: regime-conditional factor blend using confirmed signals (H192-D, H198, H222B GP/Assets, H215). Weight each signal by its trailing 6-month IC in the current regime (VIX/SMA-defined). Confirm: OOS Sharpe > 1.5 (must beat best individual signal H217's 1.559).
+
+### Code Pattern
+No open-source code released (submitted to NeurIPS 2026). Implement using:
+- Regime detection: see `wiki/trading/algorithms/regime-detection.md` (VIX+SMA or HMM)
+- Factor signals: H192-D BAB, H198 6-1m momentum, H222B GP/Assets, H215 alpha101
+- IC weighting: trailing 6-month rank correlation between signal and next-month return
+
+**Reference:** arXiv:2605.05580
