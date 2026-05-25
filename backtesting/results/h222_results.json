@@ -1,0 +1,47 @@
+{
+  "hypothesis": "H222",
+  "data_source": "yfinance (FY2021-2025 only; FMP legacy blocked)",
+  "data_blocked": false,
+  "data_blocked_reason": null,
+  "sub_hypotheses": {
+    "H222A_fscore": {
+      "is": {
+        "sharpe": 2.072,
+        "maxdd": -0.0944,
+        "neg_yrs": 0,
+        "cumul": 0.546,
+        "n_months": 11
+      },
+      "oos": {
+        "sharpe": 2.329,
+        "maxdd": -0.0775,
+        "neg_yrs": 0,
+        "cumul": 1.377,
+        "n_months": 23
+      },
+      "confirmed": true
+    },
+    "H222B_gpa": {
+      "is": {
+        "sharpe": 3.481,
+        "maxdd": -0.0424,
+        "neg_yrs": 0,
+        "cumul": 0.62,
+        "n_months": 11
+      },
+      "oos": {
+        "sharpe": 2.308,
+        "maxdd": -0.0336,
+        "neg_yrs": 0,
+        "cumul": 0.762,
+        "n_months": 23
+      },
+      "confirmed": true
+    }
+  },
+  "spy_oos_sharpe": 1.348,
+  "corr_fscore_bab": null,
+  "confirm_threshold": 0.7,
+  "overall_confirmed": true,
+  "unblock_path": "SEC EDGAR XBRL: financials/income-statement/AAPL.json for FY2010-2020; or Polygon fundamentals (paid tier)"
+}

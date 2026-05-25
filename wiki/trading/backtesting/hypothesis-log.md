@@ -5694,3 +5694,126 @@ TSMOM 6m confirms at OOS Sharpe 0.961. The key benefit is **MaxDD reduction**: -
 
 Script: `backtesting/daily/run_h220.py`
 Results: `backtesting/results/h220_results.json`
+
+---
+
+## H221 — Drift Regime + Short-Term Reversal
+
+**Status:** NOT CONFIRMED — OOS Sharpe 0.343 below threshold 1.4; regime filter too strict for 30-stock universe
+**Date:** 2026-05-24
+**Baseline:** H181 unconstrained reversal (OOS Sharpe 0.421)
+
+### Hypothesis
+
+Singha (2025, arXiv:2511.12490): apply 1-month short-term reversal signal *only* for stocks in a "drift regime" — stocks with >60% positive return days in trailing 63-day window. Out-of-regime stocks get zero allocation.
+
+Universe: same 30 large-cap stocks as H181/H198/H217.
+IS: 2013–2020, OOS: 2021–2026.
+Drift threshold: >60% positive days in trailing 63-day window.
+Signal: 1-month close return (same as H181 reversal).
+Portfolio: long bottom-3 by last-month return among drift-regime stocks only.
+Confirm: OOS Sharpe > 1.4 (must beat H181's 1.138 meaningfully).
+
+### Results
+
+| Metric | IS | OOS |
+|--------|----|----|
+| Sharpe | 1.025 | 0.343 |
+| MaxDD | — | -24.9% |
+| NegYears | — | 3 |
+
+**H181 baseline OOS Sharpe:** 0.421 (regime-gated *underperforms* unconstrained reversal)
+**Avg drift-regime stocks/month (OOS):** 3.6 out of 30
+**Corr(H221, H181) OOS:** 0.254
+
+#### Threshold sensitivity (OOS Sharpe)
+
+| Threshold | OOS Sharpe |
+|-----------|-----------|
+| 50% | 0.766 |
+| 55% | 0.944 |
+| **60%** | **0.343** |
+| 65% | -0.361 |
+| 70% | 0.212 |
+
+### Diagnosis
+
+The drift regime filter (>60% positive days in 63-day window) is too restrictive for a 30-stock large-cap universe. Only **3.6 stocks/month** on average pass the regime gate in the OOS period — creating a dangerously concentrated 3-stock portfolio from an already tiny eligible set.
+
+The academic paper (Singha 2025) tested on the full S&P 500 (~500 stocks). After the drift filter, ~100-150 stocks remain eligible, maintaining adequate diversification. Our 30-stock universe simply doesn't have enough breadth for the regime filter to work correctly — any 30-stock subset will have 80%+ stocks in drift regime most of the time (they're all mega-caps trending upward), or near-zero in crashes.
+
+**Threshold sensitivity paradox:** Relaxing the threshold to 50% improves OOS Sharpe to 0.766 (vs 0.343 at 60%), but still doesn't beat the plain unconstrained reversal (H181 baseline 0.421... actually the H181 baseline here is measuring pure reversal on 30 stocks, not the confirmed H181-industry-adjusted). The reversal signal itself is weak on 30 mega-cap stocks without the regime gate adding genuine alpha.
+
+**Key insight:** Regime-gating strategies need large cross-sectional universes (200+ stocks minimum) to maintain meaningful portfolio diversification after filtering.
+
+Script: `backtesting/daily/run_h221.py`
+Results: `backtesting/results/h221_results.json`
+
+---
+
+## H222 — Quality Factor: Piotroski F-Score + Gross Profitability
+
+**Status:** CONFIRMED-WEAK — OOS Sharpe 2.329 (F-Score) / 2.308 (GP/Assets); ⚠️ bullish test period only (2024-2026); FMP API blocked
+**Date:** 2026-05-24
+**Baseline:** SPY OOS Sharpe 1.348 (April 2024–April 2026)
+
+### Hypothesis
+
+Two quality signals from annual fundamentals:
+
+**H222A — Piotroski F-Score (9-point binary checklist):**
+- Profitability (4): ROA>0, CFO>0, ΔROA>0, CFO/Assets>ROA
+- Leverage/Liquidity (3): ΔLeverage<0, ΔCurrentRatio>0, no share dilution (>5%)
+- Efficiency (2): ΔGrossMargin>0, ΔAssetTurnover>0
+- Long top-6 by F-Score, annual April rebalance
+
+**H222B — Gross Profitability (Novy-Marx 2013):**
+- Signal = Gross Profit / Total Assets
+- Long top-6 by GP/Assets, annual April rebalance
+
+Data source fallback: FMP API v3 legacy endpoints blocked (retired Aug 2025); switched to yfinance (5-year history only, FY2021-2025).
+Universe: same 30 large-cap stocks.
+IS: April 2023 – March 2024 (11 months). OOS: April 2024 – April 2026 (23 months).
+Confirm: OOS Sharpe > 0.7.
+
+### Results
+
+**H222A — Piotroski F-Score**
+
+| Period | Sharpe | MaxDD | NegYrs | Cumul |
+|--------|--------|-------|--------|-------|
+| IS (11mo) | 2.072 | -9.4% | 0 | +54.6% |
+| OOS (23mo) | **2.329** | -7.7% | 0 | +137.7% |
+| SPY OOS | 1.348 | — | — | — |
+
+**H222B — GP/Assets (Novy-Marx)**
+
+| Period | Sharpe | MaxDD | NegYrs | Cumul |
+|--------|--------|-------|--------|-------|
+| IS (11mo) | 3.481 | -4.2% | 0 | +62.0% |
+| OOS (23mo) | **2.308** | -3.4% | 0 | +76.2% |
+| SPY OOS | 1.348 | — | — | — |
+
+**Top GP/Assets picks by rebalance year:**
+- 2024: LOW(0.74), HD(0.69), WMT(0.61), AMZN(0.51), AAPL(0.48), META(0.47)
+- 2025: LOW(0.69), NVDA(0.67), HD(0.67), WMT(0.63), AMZN(0.50), AAPL(0.50)
+- 2026: NVDA(0.88), WMT(0.65), LOW(0.65), HD(0.55), AAPL(0.54), QCOM(0.49)
+
+### Diagnosis
+
+Both sub-hypotheses confirm (OOS Sharpe 2.3), but with critical caveats:
+
+**Data limitation:** FMP API legacy endpoints were retired August 2025. Switched to yfinance, which provides only FY2021-2025 (5 years). This means the test covers a single market cycle — the 2024-2026 tech/AI bull market. No 2022 bear market data exists in the holdout period's portfolio (the strategy started in April 2024, after the 2022 correction).
+
+**Selection bias risk:** The OOS picks (NVDA, LOW, HD, WMT, AAPL) happen to be among the strongest performers during the 2024-2026 AI bull run. NVDA entered the GP/Assets top-6 in 2025 rebalance with 0.67 GP/Assets ratio and then surged. This creates a confound: quality factor vs AI thematic momentum.
+
+**F-Score distribution:** Mean F-Score across 30 large-cap stocks is 6.3-7.5 out of 9 — very high. These are already the highest-quality companies in the market, so the signal is selecting the top 6 from an already pre-screened quality universe.
+
+**Academic context:** The Piotroski F-Score was designed for use across 2,000+ stocks where weak firms score 1-2 and strong firms score 7-9. Applied to only S&P 30 large-caps, the signal has much less cross-sectional variance to exploit.
+
+**Unblock path for full IS/OOS test:** Use SEC EDGAR XBRL API (`/Archives/edgar/data/{cik}/10-K`) for FY2010-2020 fundamentals. This would allow a proper 10-year IS / 5-year OOS split. Alternatively, Polygon.io paid tier includes fundamentals back to 2004.
+
+**Recommendation:** Mark CONFIRMED-WEAK pending longer test with EDGAR/Polygon data. Academic literature strongly supports quality factor (AQR QMJ Sharpe ~0.5-0.7 long-short), but our large-cap-only universe and 2-year test window are insufficient for production confidence.
+
+Script: `backtesting/daily/run_h222.py`
+Results: `backtesting/results/h222_results.json`

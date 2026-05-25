@@ -1,0 +1,43 @@
+{
+  "hypothesis": "H221",
+  "description": "Drift Regime + Short-Term Reversal",
+  "drift_threshold": 0.6,
+  "drift_window": 63,
+  "top_n": 3,
+  "is": {
+    "sharpe": 1.025
+  },
+  "oos": {
+    "sharpe": 0.343,
+    "maxdd": -0.2491,
+    "neg_yrs": 3
+  },
+  "spy_oos_sharpe": 15.848,
+  "h181_oos_sharpe": 0.421,
+  "corr_h221_h181_oos": 0.254,
+  "avg_regime_stocks_oos": 3.6,
+  "threshold_sensitivity": [
+    {
+      "threshold": 0.5,
+      "oos_sharpe": 0.766
+    },
+    {
+      "threshold": 0.55,
+      "oos_sharpe": 0.944
+    },
+    {
+      "threshold": 0.6,
+      "oos_sharpe": 0.343
+    },
+    {
+      "threshold": 0.65,
+      "oos_sharpe": -0.361
+    },
+    {
+      "threshold": 0.7,
+      "oos_sharpe": 0.212
+    }
+  ],
+  "confirmed": false,
+  "confirm_threshold": 1.4
+}
