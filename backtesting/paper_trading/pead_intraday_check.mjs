@@ -44,6 +44,9 @@ const UNIVERSE_MAP = {
   QCOM:  ['qualcomm'],
   INTC:  ['intel corporation', 'intel corp'],
   IBM:   ['international business machines'],
+  MRVL:  ['marvell technology', 'marvell semiconductor'],
+  CRM:   ['salesforce', 'salesforce.com'],
+  DELL:  ['dell technologies', 'dell inc'],
 };
 
 function matchTicker(companyName) {

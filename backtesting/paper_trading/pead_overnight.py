@@ -38,6 +38,7 @@ UNIVERSE = [
     "JPM","BAC","WFC","JNJ","PFE","MRK","XOM","CVX",
     "WMT","COST","HD","LOW","SBUX","V","MA",
     "UNH","ABBV","LLY","AVGO","AMD","QCOM","INTC","IBM",
+    "MRVL","CRM","DELL",
 ]
 
 SCORE_THRESH   = 0.18
