@@ -1,0 +1,183 @@
+{
+  "hypothesis": "H223",
+  "strategy": "Multi-Window Momentum Blend",
+  "universe_n": 30,
+  "top_n": 5,
+  "tc_bps": 5,
+  "is_period": "2013-01-01\u20132020-12-31",
+  "oos_period": "2021-01-01\u20132026-05-01",
+  "confirm_threshold": 1.4,
+  "overall_confirmed": false,
+  "best_variant": "C",
+  "best_oos_sharpe": 1.3864,
+  "h198_baseline": {
+    "full": {
+      "label": "H198-baseline",
+      "sharpe": 1.3748,
+      "ann_ret": 0.3541,
+      "ann_vol": 0.2576,
+      "cumul": 128.9433,
+      "maxdd": -0.2272,
+      "neg_years": 1,
+      "n_months": 183
+    },
+    "is": {
+      "label": "H198-IS",
+      "sharpe": 1.5883,
+      "ann_ret": 0.4188,
+      "ann_vol": 0.2637,
+      "cumul": 20.8783,
+      "maxdd": -0.2272,
+      "neg_years": 0,
+      "n_months": 96
+    },
+    "oos": {
+      "label": "H198-OOS",
+      "sharpe": 1.0819,
+      "ann_ret": 0.3035,
+      "ann_vol": 0.2806,
+      "cumul": 4.0998,
+      "maxdd": -0.2218,
+      "neg_years": 1,
+      "n_months": 64
+    }
+  },
+  "variants": {
+    "variant_A": {
+      "description": "rank(R_1m)+rank(R_6m)+rank(R_12m) \u2014 all windows",
+      "is": {
+        "label": "H223-A-IS",
+        "sharpe": 0.855,
+        "ann_ret": 0.2081,
+        "ann_vol": 0.2434,
+        "cumul": 4.1337,
+        "maxdd": -0.3811,
+        "neg_years": 1,
+        "n_months": 96
+      },
+      "oos": {
+        "label": "H223-A-OOS",
+        "sharpe": 1.3646,
+        "ann_ret": 0.2616,
+        "ann_vol": 0.1917,
+        "cumul": 3.6281,
+        "maxdd": -0.1315,
+        "neg_years": 0,
+        "n_months": 64
+      },
+      "full": {
+        "label": "H223-A-full",
+        "sharpe": 0.9398,
+        "ann_ret": 0.2144,
+        "ann_vol": 0.2281,
+        "cumul": 17.3739,
+        "maxdd": -0.3811,
+        "neg_years": 2,
+        "n_months": 183
+      },
+      "confirmed": false
+    },
+    "variant_B": {
+      "description": "rank(R_6m_skip)+rank(R_12m_skip) \u2014 skip-1 blend",
+      "is": {
+        "label": "H223-B-IS",
+        "sharpe": 1.7802,
+        "ann_ret": 0.4445,
+        "ann_vol": 0.2497,
+        "cumul": 26.2015,
+        "maxdd": -0.2203,
+        "neg_years": 0,
+        "n_months": 96
+      },
+      "oos": {
+        "label": "H223-B-OOS",
+        "sharpe": 1.1011,
+        "ann_ret": 0.2842,
+        "ann_vol": 0.2581,
+        "cumul": 3.7939,
+        "maxdd": -0.2031,
+        "neg_years": 1,
+        "n_months": 64
+      },
+      "full": {
+        "label": "H223-B-full",
+        "sharpe": 1.4872,
+        "ann_ret": 0.3605,
+        "ann_vol": 0.2424,
+        "cumul": 148.9822,
+        "maxdd": -0.2203,
+        "neg_years": 1,
+        "n_months": 183
+      },
+      "confirmed": false
+    },
+    "variant_C": {
+      "description": "rank(R_1_1)+rank(R_2_6)+rank(R_7_12) \u2014 non-overlapping",
+      "is": {
+        "label": "H223-C-IS",
+        "sharpe": 1.5091,
+        "ann_ret": 0.3132,
+        "ann_vol": 0.2075,
+        "cumul": 10.0904,
+        "maxdd": -0.1659,
+        "neg_years": 0,
+        "n_months": 96
+      },
+      "oos": {
+        "label": "H223-C-OOS",
+        "sharpe": 1.3864,
+        "ann_ret": 0.289,
+        "ann_vol": 0.2085,
+        "cumul": 4.1242,
+        "maxdd": -0.1242,
+        "neg_years": 0,
+        "n_months": 64
+      },
+      "full": {
+        "label": "H223-C-full",
+        "sharpe": 1.3963,
+        "ann_ret": 0.2831,
+        "ann_vol": 0.2028,
+        "cumul": 53.105,
+        "maxdd": -0.1769,
+        "neg_years": 0,
+        "n_months": 183
+      },
+      "confirmed": false
+    },
+    "variant_D": {
+      "description": "rank(R_1_1)+rank(R_2_6)+rank(R_7_12)+rank(R_13_60) \u2014 full paper",
+      "is": {
+        "label": "H223-D-IS",
+        "sharpe": 1.6622,
+        "ann_ret": 0.3948,
+        "ann_vol": 0.2375,
+        "cumul": 8.5207,
+        "maxdd": -0.2277,
+        "neg_years": 0,
+        "n_months": 71
+      },
+      "oos": {
+        "label": "H223-D-OOS",
+        "sharpe": 0.8517,
+        "ann_ret": 0.1862,
+        "ann_vol": 0.2187,
+        "cumul": 2.3669,
+        "maxdd": -0.366,
+        "neg_years": 1,
+        "n_months": 64
+      },
+      "full": {
+        "label": "H223-D-full",
+        "sharpe": 1.2871,
+        "ann_ret": 0.2959,
+        "ann_vol": 0.2299,
+        "cumul": 20.1675,
+        "maxdd": -0.366,
+        "neg_years": 1,
+        "n_months": 135
+      },
+      "confirmed": false
+    }
+  }
+}

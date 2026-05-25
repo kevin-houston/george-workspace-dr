@@ -229,3 +229,10 @@ Issues found: 21. Auto-fixed: 19. Needs review: 0 (one contradiction resolved in
 - trading/index.md: Added research logs 2026-05-21 and 2026-05-24
 - factor-models.md: Added cross-reference to quality-factor.md
 - momentum-strategies.md: Resolved H218 naming collision (multi-window momentum idea was never tested; H218 was used for alpha101+momentum blend; multi-window reassigned to ≥H223)
+
+## 2026-05-25 — Ingest: Stanford MS&E 448 HFT paper
+**Type:** source ingest (manual, Kevin provided URL)
+**Source:** "High Frequency Trading Strategies" — Stanford MS&E 448, 2021 (Sasson, Ho, Samson). 14pp.
+**File:** sources/stanford_msande448_2021_gr1.pdf
+**New pages:** algorithms/market-microstructure.md
+**Summary:** Two HFT strategies — Microprice (Stoikov 2017, fair price from imbalance + spread) and Avellaneda-Stoikov optimal market making (inventory-adjusted bid/ask). AS reduces inventory std 3–4x vs symmetric quoting. Not actionable without L2 order book data; flagged as future execution layer for intraday entries (potential H230+ range).

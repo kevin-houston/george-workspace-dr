@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-25 (edgar-fundamentals.md new; H221/H222 log entries; dream cycle H223/H224/H225 staged)
+updated: 2026-05-25 (edgar-fundamentals.md new; H221/H222 log entries; dream cycle H223/H224/H225 staged; market-microstructure.md new)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -34,6 +34,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Factor Models & Cross-Sectional Alpha](algorithms/factor-models.md) ← new 2026-05-20
   - [WorldQuant 101 Alphas — Overlap Analysis](algorithms/alpha101-overlap.md) ← new 2026-05-22 (H215 CONFIRMED alpha101 OOS 1.321; H216 CONFIRMED-weak vol-price divergence OOS 0.823; VWAP signals blocked on free tier; 40 OHLCV-only signals buildable)
   - [Quality Factor (QMJ)](algorithms/quality-factor.md) ← new 2026-05-24 (Piotroski F-Score 9-criteria; Novy-Marx GP/Assets; AQR QMJ datasets; FMP API implementation; H221/H222 designs; BAB correlation ~0.4–0.6 = independent alpha)
+  - [Market Microstructure & HFT](algorithms/market-microstructure.md) ← new 2026-05-25 (Microprice/Stoikov 2017; Avellaneda-Stoikov market making; not actionable without L2 order book data; future execution layer for intraday entries)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
