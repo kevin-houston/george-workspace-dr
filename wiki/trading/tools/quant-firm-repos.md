@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-22
+updated: 2026-05-24
 type: reference
 source: https://x.com/zostaff/status/2056351832088207385
 ---
@@ -80,3 +80,21 @@ Three patterns:
 - If edge = alpha you discover → close everything
 
 Two Sigma and Renaissance have both been right for 25+ years simultaneously.
+
+---
+
+## Community: Production-Ready Open Source Trading Platforms
+
+### 0xemmkty/QuantMuse
+https://github.com/0xemmkty/QuantMuse — 2.5k stars, 537 forks  
+Production-ready trading platform blending traditional quant with AI/ML. Notable for:
+- **Multi-factor models**: momentum, value, quality, volatility (directly relevant to H181/H192/H198/H217 family)
+- **8+ built-in strategies** with extensible framework
+- **AI integration**: OpenAI GPT for market analysis + sentiment
+- **Real-time data**: WebSocket feeds from Binance, Yahoo Finance, Alpha Vantage
+- **Risk management**: Position sizing, VaR/CVaR, portfolio monitoring
+- **Frontend**: Streamlit + FastAPI dashboards with Plotly visualizations
+- **C++ backend** (3.9% of codebase) for low-latency order execution
+- **Educational/research** disclaimer — not production-licensed
+
+Closest overlap with our pipeline: factor analysis module (multi-factor scoring similar to H222 quality factor), and the strategy framework architecture could be a reference for combining our confirmed signals (H181+H192+H217+H220) into a unified system.

@@ -26,6 +26,18 @@
       "claimToken": "672d5510ed85893590fe4eeeb1e1ddc769ba2c177b0db0a39e3b15671da5adb0",
       "claimUrl": "https://here.now/claim?slug=vowful-pagoda-75ct&token=672d5510ed85893590fe4eeeb1e1ddc769ba2c177b0db0a39e3b15671da5adb0",
       "expiresAt": "2026-05-21T01:44:56.626Z"
+    },
+    "earthy-ribbon-jzq3": {
+      "siteUrl": "https://earthy-ribbon-jzq3.here.now/",
+      "claimToken": "2bcbb94ffdd8b705051c038deccbc306ca61989fe1902215765810b9cc54cfb4",
+      "claimUrl": "https://here.now/claim?slug=earthy-ribbon-jzq3&token=2bcbb94ffdd8b705051c038deccbc306ca61989fe1902215765810b9cc54cfb4",
+      "expiresAt": "2026-05-25T09:02:07.608Z"
+    },
+    "poppy-quail-hq7x": {
+      "siteUrl": "https://poppy-quail-hq7x.here.now/",
+      "claimToken": "077b8924a89b3f4f9d9cf19c0d8b324ab6adca374320871cd3d094d0f35806fd",
+      "claimUrl": "https://here.now/claim?slug=poppy-quail-hq7x&token=077b8924a89b3f4f9d9cf19c0d8b324ab6adca374320871cd3d094d0f35806fd",
+      "expiresAt": "2026-05-26T04:14:46.335Z"
     }
   }
 }
