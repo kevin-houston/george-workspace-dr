@@ -1,0 +1,14 @@
+{
+  "id": "2026-05-26-pead-press-release-structure",
+  "date": "2026-05-26",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.24254",
+  "title": "Update event-driven.md with arXiv:2509.24254 PEAD press release structure findings",
+  "rationale": "Wu et al. (ACM ICAIF 2025) analyze 138k press releases 2005-2023. Key findings: (1) FinBERT yields highest predictive power of all NLP methods tested — directly confirms H163/H174. (2) Soft information (text) as informative as hard information (EPS surprise) — validates our dual-filter approach. (3) Combining FinBERT with LDA topic features enhances explanatory strength — actionable H227 design path. (4) Online learning framework supports real-time prediction. Adds external academic validation to confirmed PEAD-NLP pipeline and surfaces a concrete H227 upgrade direction.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/event-driven.md",
+  "content": "\n## Academic validation: arXiv:2509.24254 (ACM ICAIF 2025)\n\n**Wu et al. (2025), \"Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns\"**  \n138,000+ press releases 2005–2023. Key findings directly relevant to H163/H174:\n\n- FinBERT yields the **highest predictive power** among all NLP methods tested (bag-of-words, LDA, BERT-base, FinBERT) — confirms our model choice\n- Soft information (press release text) is **as informative as earnings surprise** in explaining announcement-day returns (R²~4%)\n- **Combining FinBERT with LDA topic features** enhances explanatory strength and interpretability — H227 design path\n- Market efficiency caveat: announcement-day returns fully incorporated at market open. This applies to day-0 only — not the 20-day PEAD drift our strategy targets\n- Self-serving bias in managerial narratives confirmed — negative-surprise companies use more positive language (FinBERT discriminates this)\n- Real-time feasibility confirmed via rolling window approach with no look-ahead bias\n\n**H227 design signal:** Use LDA topic decomposition (8-12 topics from earnings press releases) as an additional feature alongside FinBERT score. Topic presence/absence may add discriminative power beyond pure sentiment.\n",
+  "action": "append",
+  "apply_status": "pending"
+}

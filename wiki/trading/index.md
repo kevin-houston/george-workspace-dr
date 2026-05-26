@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-25 (edgar-fundamentals.md new; H221/H222 log entries; dream cycle H223/H224/H225 staged; market-microstructure.md new)
+updated: 2026-05-26 (multiple-testing.md new; dream cycle H226-H228 staged)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -63,10 +63,12 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Design Principles](backtesting/design-principles.md) ← expanded 2026-05-05 (IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado)
   - [Walk-Forward & CPCV](backtesting/walk-forward-cpcv.md) ← new 2026-05-07 (WFO variants, CPCV algorithm, purging/embargoing, DSR formulas, Python libs: timeseriescv/skfolio/mlfinlab, when to use what)
   - [Transaction Cost Modeling](backtesting/transaction-costs.md) ← new 2026-05-09 (spread/impact/borrow models, square-root MI, vectorbt/backtrader defaults, per-strategy calibration table)
+  - [Multiple Testing & Statistical Significance](backtesting/multiple-testing.md) ← new 2026-05-26 (DSR, PBO, block bootstrap, White Reality Check; BH FDR correction; Harvey-Liu-Zhu t-ratio thresholds; pipeline application table)
 - [Paper Trading](paper-trading/) — Alpaca results log
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-26](research-log/2026-05-26.md) — wiki expansion: multiple-testing.md new (DSR, PBO, block bootstrap, Harvey-Liu-Zhu); dream cycle scan: 5 arXiv/GitHub angles, staged proposals
   - [2026-05-25](research-log/2026-05-25.md) — wiki expansion: edgar-fundamentals.md new (EDGAR XBRL API, 15yr history, H222 unblock path); dream cycle: H223 multi-window momentum, H224 AlphaCrafter factor ensemble, H225 GPT-4o PEAD upgrade staged
   - [2026-05-24](research-log/2026-05-24.md) — H217 CONFIRMED (median alpha101 OOS 1.559); H218/H219 NOT CONFIRMED; H220 CONFIRMED (ETF TSMOM OOS 0.961); H221 NOT CONFIRMED (drift regime too restrictive for 30-stock universe, avg 3.6/30 eligible); H222 CONFIRMED-WEAK (quality factor F-Score 2.329/GP-Assets 2.308 OOS but bullish test period only); wiki: quality-factor.md new; dream cycle: H221/H222/H223 staged
   - [2026-05-23](research-log/2026-05-23.md) — H215 CONFIRMED (alpha101 OOS Sharpe 1.321); H216 CONFIRMED-weak (vol-price divergence OOS 0.823, below SPY); blend H215+H198 OOS Sharpe 1.397; wiki: earnings-events.md new; dream cycle: SUE.txt + BlindTrade + factor momentum multi-window staged

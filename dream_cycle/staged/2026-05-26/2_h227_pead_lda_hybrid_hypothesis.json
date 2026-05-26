@@ -1,0 +1,14 @@
+{
+  "id": "2026-05-26-h227-pead-lda-hybrid",
+  "date": "2026-05-26",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.24254",
+  "title": "H227 design: PEAD-LDA hybrid — add LDA topic features alongside FinBERT score",
+  "rationale": "Wu et al. (2025) show combining FinBERT sentiment with LDA topic decomposition enhances explanatory R² on announcement-day returns. Our H174 uses FinBERT score + EPS surprise as dual filter. H227 tests adding LDA topic presence as a third filter: high-quality positive FinBERT + surprise + topic profile consistent with beat (e.g., strong revenue/margin topics). This is an incremental upgrade to a confirmed strategy, low-risk hypothesis design.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
+  "content": "h227_status: QUEUED (2026-05-26) — PEAD-LDA Hybrid: Add LDA topic decomposition (8-topic model from 8-K Item 2.02 corpus) alongside H174 FinBERT score. Hypothesis: stocks with high FinBERT score + positive surprise + dominant 'revenue growth / beat' topic > H174 WR=81.8%. Source: arXiv:2509.24254 Wu et al. ACM ICAIF 2025. Implementation: fit LDA on cached h163_8k_*.txt corpus; assign topic to each filing; add as filter. Run h227 only after H222-full (EDGAR XBRL) completes.",
+  "action": "append",
+  "apply_status": "pending"
+}

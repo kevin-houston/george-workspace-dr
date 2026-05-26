@@ -1,0 +1,97 @@
+{
+  "date": "2026-05-26",
+  "session": "nightly dream cycle scan",
+  "angles_searched": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + post-earnings drift + NLP text signals",
+    "cross-sectional momentum + factor momentum",
+    "multi-agent LLM trading systems",
+    "GitHub trending quantitative finance repos"
+  ],
+  "papers_found": [
+    {
+      "id": "arXiv:2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "authors": "Wu, Akin, Martineau, Grégoire, Veneris",
+      "date": "2025-09-29",
+      "venue": "ACM ICAIF 2025 (peer-reviewed)",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "relevance_score": 0.95,
+      "relevance_reason": "Directly validates H163/H174: FinBERT = best NLP method on 138k press releases 2005-2023. Soft info as informative as EPS surprise. Model combination (FinBERT + LDA) improves R². Actionable H227 design path.",
+      "staged": true,
+      "staged_file": "1_pead_press_release_structure_wiki.json",
+      "note": "Market efficiency finding (day-0 announcement return fully absorbed at open) does NOT contradict our 20-day PEAD drift strategy"
+    },
+    {
+      "id": "arXiv:2602.23330",
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "authors": "Miyazaki, Kawahara",
+      "date": "2026-02-26",
+      "venue": "arXiv preprint",
+      "url": "https://arxiv.org/abs/2602.23330",
+      "relevance_score": 0.55,
+      "relevance_reason": "Multi-agent LLM trading architecture. Fine-grained task decomposition >> coarse instructions. Tested on Japanese stocks. Good design principles for future multi-agent work.",
+      "staged": true,
+      "staged_file": "3_multi_agent_trading_wiki.json"
+    },
+    {
+      "id": "TradingAgents",
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "authors": "TauricResearch (UCLA/MIT)",
+      "date": "2025",
+      "venue": "GitHub",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "relevance_score": 0.50,
+      "relevance_reason": "7-agent trading framework. +6-25% vs baselines. 3-month backtest only — too short. Interesting architecture but not confirmable without longer OOS.",
+      "staged": true,
+      "staged_file": "3_multi_agent_trading_wiki.json",
+      "note": "Bundled with arXiv:2602.23330 wiki update"
+    },
+    {
+      "id": "arXiv:2507.15876",
+      "title": "Re-evaluating Short- and Long-Term Trend Factors in CTA Replication",
+      "authors": "unknown",
+      "date": "2025-07",
+      "venue": "arXiv preprint",
+      "url": "https://arxiv.org/abs/2507.15876",
+      "relevance_score": 0.45,
+      "relevance_reason": "Multi-horizon trend blending for CTA. Relevant to H223 (staged). Provides theoretical backing for multi-window momentum. H223 already staged; no separate staging needed.",
+      "staged": false,
+      "note": "H223 multi-window momentum already staged 2026-05-25. This supports that hypothesis but doesn't add new actionable direction."
+    },
+    {
+      "id": "arXiv:2412.12555",
+      "title": "Parameters Optimization of Pair Trading Algorithm",
+      "date": "2024-12",
+      "url": "https://arxiv.org/abs/2412.12555",
+      "relevance_score": 0.10,
+      "relevance_reason": "Pairs trading parameter optimization. Pairs family EXHAUSTED (H152-H160, H200 NOT CONFIRMED). Not actionable.",
+      "staged": false
+    },
+    {
+      "id": "frontiers-dl-pairs-2026",
+      "title": "Deep learning-based pairs trading: real-time forecasting of co-integrated cryptocurrency pairs",
+      "date": "2026-01",
+      "url": "https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2026.1749337",
+      "relevance_score": 0.05,
+      "relevance_reason": "Cryptocurrency pairs, deep learning. Pairs family exhausted. Not actionable.",
+      "staged": false
+    },
+    {
+      "id": "researchgate-pead-llm",
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "url": "https://www.researchgate.net/publication/397342231",
+      "relevance_score": 0.60,
+      "relevance_reason": "Directly about PEAD + LLM. Could not access full paper. May overlap with arXiv:2509.24254. Flag for manual read if H227 moves forward.",
+      "staged": false,
+      "note": "Add to H227 reading list"
+    }
+  ],
+  "staged_proposals": [
+    "1_pead_press_release_structure_wiki.json",
+    "2_h227_pead_lda_hybrid_hypothesis.json",
+    "3_multi_agent_trading_wiki.json"
+  ],
+  "top_finding": "arXiv:2509.24254 — peer-reviewed external validation of H163/H174 FinBERT approach on 10x our dataset (138k press releases); model combination upgrade path for H227",
+  "wiki_expansion": "backtesting/multiple-testing.md — DSR, PBO, block bootstrap, White Reality Check, Harvey-Liu-Zhu thresholds"
+}
