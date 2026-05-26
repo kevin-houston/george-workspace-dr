@@ -38,6 +38,12 @@
       "claimToken": "077b8924a89b3f4f9d9cf19c0d8b324ab6adca374320871cd3d094d0f35806fd",
       "claimUrl": "https://here.now/claim?slug=poppy-quail-hq7x&token=077b8924a89b3f4f9d9cf19c0d8b324ab6adca374320871cd3d094d0f35806fd",
       "expiresAt": "2026-05-26T04:14:46.335Z"
+    },
+    "wistful-ember-vsvw": {
+      "siteUrl": "https://wistful-ember-vsvw.here.now/",
+      "claimToken": "6e2f72540fd98824f77c8c5a57c20be42e2a9c2d23ac80918137fc104cb0572d",
+      "claimUrl": "https://here.now/claim?slug=wistful-ember-vsvw&token=6e2f72540fd98824f77c8c5a57c20be42e2a9c2d23ac80918137fc104cb0572d",
+      "expiresAt": "2026-05-26T09:03:42.927Z"
     }
   }
 }

@@ -1,18 +1,6 @@
 {
-  "date": "2026-05-22",
+  "date": "2026-05-25",
   "candidates": [],
-  "scores": {
-    "NVDA": {
-      "score": -0.0026,
-      "surprise": -0.3387
-    },
-    "WMT": {
-      "score": -0.0135,
-      "surprise": -0.1718
-    },
-    "LOW": {
-      "score": -0.0244,
-      "surprise": -0.1733
-    }
-  }
+  "scores": {},
+  "reason": "no earnings"
 }
