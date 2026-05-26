@@ -10,5 +10,5 @@
   "target_file": "/workspace/agent/wiki/trading/tools/ml-for-trading.md",
   "content": "\n## 2026 multi-agent LLM frameworks\n\n### TradingAgents (UCLA/MIT, 2025)\n- GitHub: https://github.com/TauricResearch/TradingAgents\n- 7 specialized agent roles: fundamental analyst, sentiment expert, technical analyst, trader, risk manager (+ research debate layer)\n- Outperformed 5 rule-based baselines by 6–25% cumulative return on 3-month backtest (Jan–Mar 2024, US tech stocks)\n- Caveat: 3-month backtest is too short to be conclusive — treat as proof-of-concept framework\n\n### Fine-Grained Task Decomposition (Miyazaki & Kawahara, Feb 2026)\n- arXiv:2602.23330 — tested on Japanese stocks with price, financials, news, macro data\n- Key finding: fine-grained task decomposition (explicit sub-tasks per agent) >> coarse-grained instructions\n- **Critical insight:** alignment between intermediate agent analytical outputs and downstream portfolio manager preferences drives performance — not just the final signal\n- Portfolio optimization exploiting low cross-agent correlation achieves further gains\n- Design principle for any multi-agent overlay: decompose to concrete measurable tasks, not abstract mandates\n",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

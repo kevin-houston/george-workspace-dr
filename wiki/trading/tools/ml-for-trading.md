@@ -514,3 +514,18 @@ Combines quality-diversity optimization with hypothesis-driven multi-agent strat
 **Key innovation**: "Quality-diversity" means the framework doesn't just find the best strategy — it finds a *diverse set of good strategies* that cover different return profiles, correlations, and risk characteristics. Directly useful for portfolio construction (we want H181+H192+H198+H217 to be uncorrelated — quality-diversity optimization formalizes this).
 
 **Relevance**: The quality-diversity framing matches our portfolio construction goal exactly. When adding H221/H222 to the portfolio, we care about both performance AND low correlation with existing strategies. QuantEvolve's approach would explicitly optimize for this.
+
+## 2026 multi-agent LLM frameworks
+
+### TradingAgents (UCLA/MIT, 2025)
+- GitHub: https://github.com/TauricResearch/TradingAgents
+- 7 specialized agent roles: fundamental analyst, sentiment expert, technical analyst, trader, risk manager (+ research debate layer)
+- Outperformed 5 rule-based baselines by 6–25% cumulative return on 3-month backtest (Jan–Mar 2024, US tech stocks)
+- Caveat: 3-month backtest is too short to be conclusive — treat as proof-of-concept framework
+
+### Fine-Grained Task Decomposition (Miyazaki & Kawahara, Feb 2026)
+- arXiv:2602.23330 — tested on Japanese stocks with price, financials, news, macro data
+- Key finding: fine-grained task decomposition (explicit sub-tasks per agent) >> coarse-grained instructions
+- **Critical insight:** alignment between intermediate agent analytical outputs and downstream portfolio manager preferences drives performance — not just the final signal
+- Portfolio optimization exploiting low cross-agent correlation achieves further gains
+- Design principle for any multi-agent overlay: decompose to concrete measurable tasks, not abstract mandates

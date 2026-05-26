@@ -530,3 +530,17 @@ composite = 0.4 * eps_surprise_pct + 0.4 * finbert_surprise + 0.2 * sue_txt
 **Implementation note:** pead_overnight.py already downloads and scores 8-K text. Replace the `score_document()` FinBERT call with `openai.chat.completions.create()` call with a structured prompt asking for directional earnings quality score. `$OPENAI_API_KEY` is available in env.
 
 **Reference:** ACL Anthology 2025.finnlp-2.13
+
+## Academic validation: arXiv:2509.24254 (ACM ICAIF 2025)
+
+**Wu et al. (2025), "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns"**  
+138,000+ press releases 2005–2023. Key findings directly relevant to H163/H174:
+
+- FinBERT yields the **highest predictive power** among all NLP methods tested (bag-of-words, LDA, BERT-base, FinBERT) — confirms our model choice
+- Soft information (press release text) is **as informative as earnings surprise** in explaining announcement-day returns (R²~4%)
+- **Combining FinBERT with LDA topic features** enhances explanatory strength and interpretability — H227 design path
+- Market efficiency caveat: announcement-day returns fully incorporated at market open. This applies to day-0 only — not the 20-day PEAD drift our strategy targets
+- Self-serving bias in managerial narratives confirmed — negative-surprise companies use more positive language (FinBERT discriminates this)
+- Real-time feasibility confirmed via rolling window approach with no look-ahead bias
+
+**H227 design signal:** Use LDA topic decomposition (8-12 topics from earnings press releases) as an additional feature alongside FinBERT score. Topic presence/absence may add discriminative power beyond pure sentiment.

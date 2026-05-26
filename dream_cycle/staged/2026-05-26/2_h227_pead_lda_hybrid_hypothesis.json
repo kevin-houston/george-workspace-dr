@@ -10,5 +10,5 @@
   "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
   "content": "h227_status: QUEUED (2026-05-26) — PEAD-LDA Hybrid: Add LDA topic decomposition (8-topic model from 8-K Item 2.02 corpus) alongside H174 FinBERT score. Hypothesis: stocks with high FinBERT score + positive surprise + dominant 'revenue growth / beat' topic > H174 WR=81.8%. Source: arXiv:2509.24254 Wu et al. ACM ICAIF 2025. Implementation: fit LDA on cached h163_8k_*.txt corpus; assign topic to each filing; add as filter. Run h227 only after H222-full (EDGAR XBRL) completes.",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
