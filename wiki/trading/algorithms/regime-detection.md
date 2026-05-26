@@ -1,6 +1,6 @@
 ---
 created: 2026-05-19
-updated: 2026-05-19
+updated: 2026-05-26
 status: active
 relevance: H165 (VIX gate QUEUED), H205-B (bear-regime BAB), all momentum/BAB strategies
 ---
@@ -262,10 +262,36 @@ Both are available in standard Python quant environments. No venv rebuild needed
 
 ---
 
+## Implementation Reference: QuhiQuhihi/regime_model
+
+**GitHub**: https://github.com/QuhiQuhihi/regime_model — 61 stars, 18 forks
+
+Python implementation of two regime detection approaches, originally inspired by Two Sigma's public article on ML regime modeling (Alex Botte & Doris Bao).
+
+### 1. Gaussian Mixture Model + Hidden Markov Model (multi-asset)
+- Uses GMM/HMM on **multiple asset classes simultaneously**: equities, bonds, real estate, commodities
+- Source: Two Sigma article — "A Machine Learning Approach to Regime Modeling"
+- Multi-asset approach produces more robust regime signals than single-asset HMM — asset classes disagree during transitions, which the model captures
+
+### 2. Greedy Gaussian Segmentation (single asset)
+- GGS on US equities only — Stanford paper (Hallac, Nystrup, Boyd, https://web.stanford.edu/~boyd/papers/pdf/ggs.pdf)
+- Segments a time series into contiguous blocks with distinct Gaussian distributions — finds structural break points without assuming a fixed number of states
+- Useful diagnostic tool: run on SPY returns to visually validate that regime labels correspond to recognizable market periods
+
+### Relevance to our pipeline
+- The multi-asset GMM/HMM approach directly matches our CLAUDE.local.md design note: use `hmmlearn GaussianHMM` on multi-feature inputs; this repo provides working reference code
+- H165 full (macro-regime gate) and H205-B (bear-regime BAB) both need a regime signal — this repo is the closest runnable starting point
+- **Key addition**: the multi-asset version using bonds + commodities as co-inputs is more robust than our current VIX + 200MA composite, and could serve as the ML upgrade path once H165a is in production
+
+---
+
 ## References
 
 - Hamilton, J.D. (1989). "A New Approach to the Economic Analysis of Nonstationary Time Series." *Econometrica* 57(2): 357-384.
 - Shu, Yu & Mulvey (2024). "Downside Risk Reduction Using Regime-Switching Signals: A Statistical Jump Model Approach." arXiv:2402.05272.
+- Botte & Bao, Two Sigma: "A Machine Learning Approach to Regime Modeling" — https://www.twosigma.com/articles/a-machine-learning-approach-to-regime-modeling/
+- Hallac, Nystrup & Boyd (Stanford): "Greedy Gaussian Segmentation" — https://web.stanford.edu/~boyd/papers/pdf/ggs.pdf
+- QuhiQuhihi/regime_model: https://github.com/QuhiQuhihi/regime_model
 - QuantStart: [Market Regime Detection using HMM in QSTrader](https://www.quantstart.com/articles/market-regime-detection-using-hidden-markov-models-in-qstrader/)
 - statsmodels docs: [Markov Switching Dynamic Regression](https://www.statsmodels.org/stable/examples/notebooks/generated/markov_regression.html)
 - hmmlearn: https://hmmlearn.readthedocs.io/

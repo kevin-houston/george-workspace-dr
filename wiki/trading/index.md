@@ -30,7 +30,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [BSM & Information Geometry](algorithms/bsm-information-geometry.md) ← 2026-04-28 (Dean 2026: smile = manifold curvature; skew prediction within 19% zero free params; LEAPS trading implications)
   - [Deep RL for Trading](algorithms/deep-rl-trading.md) ← new 2026-05-16 (FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued — PPO vs H198 momentum baseline)
   - [Calendar Anomalies](algorithms/calendar-anomalies.md) ← updated 2026-05-18 (Schroeder 2025 SEC disclosure mechanism for Halloween effect; H206 success gates set; H205 design note updated)
-  - [Regime Detection](algorithms/regime-detection.md) ← new 2026-05-19 (VIX threshold H165a confirmed, 200-day SMA, Markov Switching statsmodels, HMM hmmlearn, Statistical Jump Model arXiv:2402.05272; H165/H205-B application code)
+  - [Regime Detection](algorithms/regime-detection.md) ← updated 2026-05-26 (QuhiQuhihi/regime_model added — Two Sigma GMM+HMM multi-asset + GGS single-asset; runnable reference for H165 full / H205-B)
   - [Factor Models & Cross-Sectional Alpha](algorithms/factor-models.md) ← new 2026-05-20
   - [WorldQuant 101 Alphas — Overlap Analysis](algorithms/alpha101-overlap.md) ← new 2026-05-22 (H215 CONFIRMED alpha101 OOS 1.321; H216 CONFIRMED-weak vol-price divergence OOS 0.823; VWAP signals blocked on free tier; 40 OHLCV-only signals buildable)
   - [Quality Factor (QMJ)](algorithms/quality-factor.md) ← new 2026-05-24 (Piotroski F-Score 9-criteria; Novy-Marx GP/Assets; AQR QMJ datasets; FMP API implementation; H221/H222 designs; BAB correlation ~0.4–0.6 = independent alpha)
