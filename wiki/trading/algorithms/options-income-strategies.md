@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-21
+updated: 2026-05-26
 focus: income generation + directional defined-risk
 priority: high (Kevin's explicit focus: equities + options)
 ---
@@ -421,3 +421,17 @@ if actual_move_pct < implied_move * 0.7:
 All require options data beyond Polygon free tier. Start with QuantConnect's built-in data for LEAN backtesting, then purchase ThetaData for production-grade research.
 
 **Active paper trades reference:** IC-2026-04-26-001 (SPY condor, 47 DTE at entry), WMT-CS-2026-04-27 (bull call $130/$140, deep OTM post-earnings — close), DLTR-CS-2026-04-27 (bull call $100/$115, earnings ~Jun 2–3), DLTR-RR-2026-04-27 (risk reversal, put leg approaching $95 assignment threshold).
+
+---
+
+## Reference: CME Group "25 Proven Strategies for Options on Futures" (2022)
+
+**Source:** `sources/cme-group-25-proven-strategies-options-futures.pdf`
+
+Quick-reference booklet covering all major option structures. Organized by two categories:
+
+**Directional** (strategies 1–12): Long/Short Futures, Long/Short Synthetic Futures, Long/Short Risk Reversal, Long/Short Call, Long/Short Put, Bull Spread, Bear Spread
+
+**Precision** (strategies 13–25): Long/Short Butterfly, Long/Short Iron Butterfly, Long/Short Straddle, Long/Short Strangle, Ratio Call/Put Spread, Call/Put Ratio Backspread, Box/Conversion
+
+Each entry covers: when to use, profit/loss characteristics, decay characteristics, synthetics, and a pattern evolution diagram (4-month / 1-month / expiration P&L lines). Key to diagrams: purple = 4 months to expiry, gold = 1 month, green = at expiration.
