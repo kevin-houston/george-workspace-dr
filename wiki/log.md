@@ -236,3 +236,12 @@ Issues found: 21. Auto-fixed: 19. Needs review: 0 (one contradiction resolved in
 **File:** sources/stanford_msande448_2021_gr1.pdf
 **New pages:** algorithms/market-microstructure.md
 **Summary:** Two HFT strategies — Microprice (Stoikov 2017, fair price from imbalance + spread) and Avellaneda-Stoikov optimal market making (inventory-adjusted bid/ask). AS reduces inventory std 3–4x vs symmetric quoting. Not actionable without L2 order book data; flagged as future execution layer for intraday entries (potential H230+ range).
+
+## [2026-05-25] ingest | AI Decoupling (vintagedata.org)
+
+**Type:** concept ingest (Kevin provided URL)
+**Source:** "The AI Decoupling" — vintagedata.org blog, 2026
+**URL:** https://vintagedata.org/blog/posts/the-ai-decoupling
+**New pages:** concepts/ai-decoupling.md
+**Index section:** AI Industry (new section)
+**Summary:** Argues that 2025–2026 saw a structural split between AI and traditional SaaS/cloud — different valuations, growth, talent. Three drivers: sparse MoE economics, synthetic data pipelines (~150T tokens), token pricing incompatibility with enterprise CFO models. Chinese alternative: build your own rather than buy services. Models now constitute an expanding economic layer, not just products.

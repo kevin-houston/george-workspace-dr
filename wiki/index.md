@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-24
+updated: 2026-05-25
 sources_indexed: 2
 pages: 87
 ---
@@ -137,6 +137,10 @@ When answering a query:
 
 - [zenbu.js](tools/zenbu.md) — JS framework for AI-agent-customizable desktop apps; local source, git-tracked, hot-reload; alpha
 - [Dograh](tools/dograh.md) — self-hostable voice agent platform (open-source Vapi/Retell alternative); drag-and-drop workflows, bring-your-own LLM/TTS/STT, Docker deploy
+
+### AI Industry
+
+- [The AI Decoupling](concepts/ai-decoupling.md) — vintagedata.org 2026; SaaS/AI ecosystem split; MoE economics, synthetic data moats, token pricing vs. enterprise CFO models; Chinese self-build alternative ← 2026-05-25
 
 ---
 
