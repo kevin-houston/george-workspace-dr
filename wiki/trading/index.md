@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-26 (multiple-testing.md new; dream cycle H226-H228 staged)
+updated: 2026-05-26 (multiple-testing.md new; dream cycle H226-H228 staged; Council of High Intelligence noted)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -41,7 +41,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Kraken CLI](tools/kraken-cli.md) ← expanded 2026-05-01 (all 50 agent skills, MCP service groups, full command reference)
   - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← updated 2026-05-22 (FinBERT2 arXiv:2506.06335 H174 upgrade candidate appended)
   - [Quant Firm Open Source Repos](tools/quant-firm-repos.md) ← new 2026-05-22 (22 repos from Two Sigma, Man Group, Jane Street, D.E. Shaw, HRT, Optiver, WorldQuant; ArcticDB + dtale + WorldQuant 101 alphas flagged as high-priority)
-  - [Machine Learning for Trading](tools/ml-for-trading.md) ← updated 2026-05-13 (MASFIN multi-agent debate framework arXiv:2512.21878; 31% drawdown reduction vs single-agent LLM)
+  - [Machine Learning for Trading](tools/ml-for-trading.md) ← updated 2026-05-26 (Council of High Intelligence 18-persona deliberation framework; TradingAgents + arXiv:2602.23330 multi-agent LLM trading)
   - [LEAN / QuantConnect](tools/lean-quantconnect.md) ← updated 2026-05-15 (Alpaca live trading bridge added — brokerage config, CLI, Phase 3→4 gate; walk-forward optimization section; H007 pending Docker approval)
   - [OpenAlgo](tools/openalgo.md) ← 2026-04-25 (India-only for now; watch for Alpaca/Kraken support in 2026)
   - [Portfolio Optimization](tools/portfolio-optimization.md) ← new 2026-05-16 (PyPortfolioOpt v1.6.0, Riskfolio-Lib v7.2.1, skfolio v0.20.1; HRP, risk parity, NCO, walk-forward CV; strategy blending code for H026+BAB+MOM+TOM)

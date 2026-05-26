@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-13
+updated: 2026-05-26
 type: tool-guide
 status: active — H167 FLAGGED; H176 QUEUED; H171 QUEUED
 ---
@@ -529,3 +529,42 @@ Combines quality-diversity optimization with hypothesis-driven multi-agent strat
 - **Critical insight:** alignment between intermediate agent analytical outputs and downstream portfolio manager preferences drives performance — not just the final signal
 - Portfolio optimization exploiting low cross-agent correlation achieves further gains
 - Design principle for any multi-agent overlay: decompose to concrete measurable tasks, not abstract mandates
+
+---
+
+## Council of High Intelligence (0xNyk, 2025)
+
+**GitHub**: https://github.com/0xNyk/council-of-high-intelligence — 787 stars, 81 forks | **License**: CC0
+
+Shell-based multi-agent deliberation framework using 18 AI personas with structured debate mechanics. Designed for decisions that benefit from adversarial stress-testing and diverse analytical lenses.
+
+### Personas
+18 archetypes across philosophy, science, and finance: Aristotle, Socrates, Confucius, Feynman, Turing, Shannon, Kahneman, Taleb, Karpathy, Sutskever, Nakamoto, Hamilton, and others. Each persona has a fixed reasoning style (e.g. Kahneman = dual-system bias lens, Taleb = tail-risk / fragility focus).
+
+### Modes
+| Mode | Rounds | Members | Use case |
+|------|--------|---------|----------|
+| Full | 3 rounds | All 18 | High-stakes decisions requiring max coverage |
+| Quick | 2 rounds | All 18 | Standard analysis |
+| Duo | 2 rounds | 2 chosen | Rapid dialectic on a specific tension |
+
+### Anti-groupthink mechanics
+- **Dissent quotas**: minimum number of personas must disagree with the emerging consensus each round
+- **Novelty gates**: contributions that merely rephrase prior points are filtered out
+- **Anti-recursion**: prevents circular reasoning loops
+- **Verdict leads with uncertainties**: final output explicitly names what the council doesn't know
+
+### Multi-provider routing
+Auto-routes across Claude, OpenAI, Gemini, Ollama, NVIDIA NIM based on availability and task type. Allows mixing local (Ollama) and API-based models per session.
+
+### 20 pre-built domain triads
+Curated 3-persona subsets optimized for specific domains: `architecture`, `ai-safety`, `financial-analysis`, `risk-assessment`, `strategy`, etc. Triads select complementary reasoning styles rather than random sampling.
+
+### Claude Code integration
+Native `/council` slash command installs to Claude Code: `./install.sh` from repo root. Invoked as `/council [question]` directly in a Claude Code session — no context-switching needed.
+
+### Relevance to trading workflow
+- **Hypothesis stress-testing**: run a council session before committing a new hypothesis to the queue — Taleb will probe tail risks, Kahneman will surface cognitive biases in the backtest design, Shannon will check information-theoretic assumptions
+- **Portfolio allocation decisions**: before live deployment, Full mode across a position sizing / strategy blend question
+- **H-queue prioritization**: Duo mode (Aristotle + Feynman) for "should we run H222-full before H227?" type trade-off calls
+- **Practical note**: 3-round Full mode with 18 personas is expensive — reserve for decisions where the stakes justify it; use Duo or Quick for routine judgment calls
