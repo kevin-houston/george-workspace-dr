@@ -1,0 +1,23 @@
+{
+  "hypothesis": "H225",
+  "date_run": "2026-05-25T23:17:09.404637",
+  "model": "gpt-4o-mini",
+  "baseline": "H174",
+  "h174_oos": {
+    "score_thresh": 0.18,
+    "surp_thresh": 0.02,
+    "n": 22,
+    "wr": 0.8181818181818182,
+    "mr": 0.06893128467638064
+  },
+  "h225_oos_dual_0.18_0.02": {
+    "score_thresh": 0.18,
+    "surp_thresh": 0.02,
+    "n": 43,
+    "wr": 0.5813953488372093,
+    "mr": 0.025030687390270465
+  },
+  "best_threshold": null,
+  "n_gpt_scores": 195,
+  "n_8k_texts": 195
+}

@@ -1,0 +1,13 @@
+{
+  "hypothesis": "H226",
+  "date_run": "2026-05-25T23:24:24.578039",
+  "model": "gpt-4o-mini-quantitative-prompt",
+  "baseline": "H174",
+  "confirmed": false,
+  "best_threshold": null,
+  "score_distribution": {
+    "mean": 0.2846153846153846,
+    "std": 0.6996090445570377,
+    "median": 0.5
+  }
+}
