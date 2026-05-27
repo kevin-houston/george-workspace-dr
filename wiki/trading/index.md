@@ -41,6 +41,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Kraken CLI](tools/kraken-cli.md) ← expanded 2026-05-01 (all 50 agent skills, MCP service groups, full command reference)
   - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← updated 2026-05-22 (FinBERT2 arXiv:2506.06335 H174 upgrade candidate appended)
   - [Quant Firm Open Source Repos](tools/quant-firm-repos.md) ← new 2026-05-22 (22 repos from Two Sigma, Man Group, Jane Street, D.E. Shaw, HRT, Optiver, WorldQuant; ArcticDB + dtale + WorldQuant 101 alphas flagged as high-priority)
+  - [xang1234/stock-screener](tools/stock-screener.md) ← new 2026-05-27 (self-hosted multi-market screener: 10 markets, Minervini/CANSLIM/Setup Engine methodologies, 197 IBD industry groups, market breadth, AI chatbot, MCP integration; Docker + FastAPI + React)
   - [Machine Learning for Trading](tools/ml-for-trading.md) ← updated 2026-05-26 (Council of High Intelligence 18-persona deliberation framework; TradingAgents + arXiv:2602.23330 multi-agent LLM trading)
   - [LEAN / QuantConnect](tools/lean-quantconnect.md) ← updated 2026-05-15 (Alpaca live trading bridge added — brokerage config, CLI, Phase 3→4 gate; walk-forward optimization section; H007 pending Docker approval)
   - [OpenAlgo](tools/openalgo.md) ← 2026-04-25 (India-only for now; watch for Alpaca/Kraken support in 2026)

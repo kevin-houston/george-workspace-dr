@@ -245,3 +245,6 @@ Issues found: 21. Auto-fixed: 19. Needs review: 0 (one contradiction resolved in
 **New pages:** concepts/ai-decoupling.md
 **Index section:** AI Industry (new section)
 **Summary:** Argues that 2025–2026 saw a structural split between AI and traditional SaaS/cloud — different valuations, growth, talent. Three drivers: sparse MoE economics, synthetic data pipelines (~150T tokens), token pricing incompatibility with enterprise CFO models. Chinese alternative: build your own rather than buy services. Models now constitute an expanding economic layer, not just products.
+
+## [2026-05-27] ingest | xang1234/stock-screener
+Pages created: 1 (wiki/tools/stock-screener.md). Pages updated: 1 (wiki/trading/index.md). Key entities: xang1234/stock-screener GitHub repo, Minervini Template screener, CANSLIM screener, IBD 197 industry groups, StockBee-style market breadth, MCP integration. Cross-references: H181 (IBD vs GICS granularity), H165 (breadth as regime signal), H217/H228 (Minervini pre-filter angle). Source: https://github.com/xang1234/stock-screener
