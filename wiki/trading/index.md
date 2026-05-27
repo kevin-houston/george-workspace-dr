@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-26 (multiple-testing.md new; H217-H228 logged; H228 CONFIRMED 1.572; dream cycle complete)
+updated: 2026-05-27 (nowcasting-playbook.md new; xang1234/stock-screener noted; dream cycle scan 2026-05-27)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -58,6 +58,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
   - [Kalshi](prediction-markets/kalshi.md) ← expanded 2026-04-29 (full auth/API/WebSocket, RSA signing, CPI nowcasting implementation, fee modeling, rate limits, Timeless perps)
   - [Algorithmic Strategies](prediction-markets/algorithmic-strategies.md) ← updated 2026-05-13 (PolyBench arXiv:2604.14199 — LLMs near-random on binary markets; edge only on economic data + structured context)
+  - [Economic Nowcasting Playbook](prediction-markets/nowcasting-playbook.md) ← new 2026-05-27 (per-release operational playbook: CPI/NFP/FOMC/PCE/GDP; Cleveland Fed + Atlanta GDPNow + NY Fed nowcast sources; shelter lag model; ADP→NFP pipeline; Brier score tracking; H185 implementation path)
   - [Other Platforms](prediction-markets/other-platforms.md) ← expanded 2026-05-02 (IBKR ForecastTrader full API, Kalshi Timeless mechanics, emerging platforms)
   - [Polymarket](prediction-markets/polymarket.md) ← 2026-04-29 (full CLOB API, Ethereum auth, order placement, WebSocket streaming, fee comparison vs Kalshi, cross-platform arb scanner)
 - [Backtesting](backtesting/) — setup, results, methodology
@@ -69,6 +70,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-27](research-log/2026-05-27.md) — wiki expansion: nowcasting-playbook.md new (CPI/NFP/FOMC/PCE/GDP per-release workflow, Cleveland Fed + GDPNow sources, Brier tracking, H185 path); xang1234/stock-screener noted; dream cycle scan complete
   - [2026-05-26](research-log/2026-05-26.md) — wiki expansion: multiple-testing.md new; QuhiQuhihi/regime_model noted in regime-detection.md; H217–H226 logged (backlog); H228 DESIGNED+RUN+CONFIRMED (blend alpha101+reversal OOS 1.572); dream cycle complete
   - [2026-05-25](research-log/2026-05-25.md) — wiki expansion: edgar-fundamentals.md new (EDGAR XBRL API, 15yr history, H222 unblock path); dream cycle: H223 multi-window momentum, H224 AlphaCrafter factor ensemble, H225 GPT-4o PEAD upgrade staged
   - [2026-05-24](research-log/2026-05-24.md) — H217 CONFIRMED (median alpha101 OOS 1.559); H218/H219 NOT CONFIRMED; H220 CONFIRMED (ETF TSMOM OOS 0.961); H221 NOT CONFIRMED (drift regime too restrictive for 30-stock universe, avg 3.6/30 eligible); H222 CONFIRMED-WEAK (quality factor F-Score 2.329/GP-Assets 2.308 OOS but bullish test period only); wiki: quality-factor.md new; dream cycle: H221/H222/H223 staged
