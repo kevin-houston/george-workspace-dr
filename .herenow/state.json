@@ -44,6 +44,12 @@
       "claimToken": "6e2f72540fd98824f77c8c5a57c20be42e2a9c2d23ac80918137fc104cb0572d",
       "claimUrl": "https://here.now/claim?slug=wistful-ember-vsvw&token=6e2f72540fd98824f77c8c5a57c20be42e2a9c2d23ac80918137fc104cb0572d",
       "expiresAt": "2026-05-26T09:03:42.927Z"
+    },
+    "waking-onyx-ecjb": {
+      "siteUrl": "https://waking-onyx-ecjb.here.now/",
+      "claimToken": "a53658243e7f432a24a1f67848012d0fc010ac6b5656eafcb2c7c67de43ef929",
+      "claimUrl": "https://here.now/claim?slug=waking-onyx-ecjb&token=a53658243e7f432a24a1f67848012d0fc010ac6b5656eafcb2c7c67de43ef929",
+      "expiresAt": "2026-05-27T09:03:21.745Z"
     }
   }
 }
