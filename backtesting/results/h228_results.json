@@ -1,0 +1,129 @@
+{
+  "hypothesis": "H228",
+  "description": "Blend H217 (median alpha101) + H181 (industry reversal)",
+  "corr_h217_h181_full": 0.668,
+  "corr_h217_h181_oos": 0.599,
+  "blend_results": [
+    {
+      "ratio_h217": 1.0,
+      "ratio_h181": 0.0,
+      "is": {
+        "n": 96,
+        "sharpe": 1.613,
+        "cagr": 0.262,
+        "cumul": 7.2034,
+        "maxdd": -0.144,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.559,
+        "cagr": 0.272,
+        "cumul": 3.8853,
+        "maxdd": -0.252,
+        "neg_yrs": 1
+      }
+    },
+    {
+      "ratio_h217": 0.75,
+      "ratio_h181": 0.25,
+      "is": {
+        "n": 96,
+        "sharpe": 1.643,
+        "cagr": 0.269,
+        "cumul": 7.5716,
+        "maxdd": -0.168,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.572,
+        "cagr": 0.265,
+        "cumul": 3.7665,
+        "maxdd": -0.232,
+        "neg_yrs": 1
+      }
+    },
+    {
+      "ratio_h217": 0.5,
+      "ratio_h181": 0.5,
+      "is": {
+        "n": 96,
+        "sharpe": 1.596,
+        "cagr": 0.275,
+        "cumul": 7.8816,
+        "maxdd": -0.192,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.481,
+        "cagr": 0.258,
+        "cumul": 3.6155,
+        "maxdd": -0.211,
+        "neg_yrs": 1
+      }
+    },
+    {
+      "ratio_h217": 0.25,
+      "ratio_h181": 0.75,
+      "is": {
+        "n": 96,
+        "sharpe": 1.499,
+        "cagr": 0.282,
+        "cumul": 8.1249,
+        "maxdd": -0.215,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.319,
+        "cagr": 0.251,
+        "cumul": 3.4361,
+        "maxdd": -0.191,
+        "neg_yrs": 1
+      }
+    },
+    {
+      "ratio_h217": 0.0,
+      "ratio_h181": 1.0,
+      "is": {
+        "n": 96,
+        "sharpe": 1.381,
+        "cagr": 0.289,
+        "cumul": 8.2944,
+        "maxdd": -0.243,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.138,
+        "cagr": 0.244,
+        "cumul": 3.2327,
+        "maxdd": -0.184,
+        "neg_yrs": 1
+      }
+    }
+  ],
+  "best_ratio_h217": 0.75,
+  "best_ratio_h181": 0.25,
+  "best_oos_sharpe": 1.572,
+  "confirm_threshold": 1.5,
+  "confirmed": true,
+  "spy_is": {
+    "n": 96,
+    "sharpe": 1.105,
+    "cagr": 0.15,
+    "cumul": 3.0697,
+    "maxdd": -0.194,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "cumul": 2.0444,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  }
+}
