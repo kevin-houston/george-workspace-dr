@@ -1,0 +1,115 @@
+{
+  "date": "2026-05-27",
+  "scan_angles": [
+    "pairs trading + LLM / cointegration ML",
+    "PEAD + earnings NLP",
+    "cross-sectional factor momentum + alpha decay",
+    "multi-agent LLM trading",
+    "GitHub trending quant finance repos"
+  ],
+  "findings": [
+    {
+      "title": "Cointegration-based pairs trading: ETFs (2025)",
+      "url": "https://link.springer.com/article/10.1057/s41260-025-00416-0",
+      "source": "Springer",
+      "summary": "Tests pairs trading on ETFs 2000-2024. Systematic framework for ETF pair identification and cointegration stability cycles.",
+      "relevance": "MEDIUM",
+      "angle": "pairs trading",
+      "staged": false,
+      "reason_not_staged": "ETF pairs already exhausted in H152-H160. Stock-level pairs exhausted (H200 NOT CONFIRMED). New approach needed (LLM-based pair selection), not incremental ETF variation."
+    },
+    {
+      "title": "Which Voices Move Markets? Speaker Identity and Post-Earnings Returns",
+      "arxiv_id": "2604.13260",
+      "url": "https://arxiv.org/abs/2604.13260",
+      "source": "arXiv April 2026",
+      "summary": "FinBERT on 6.5M sentences from 16.4K S&P 500 earnings calls (2015-2025), weighted by speaker role (CEO vs analyst). Monthly L/S alpha 2.03%, OOS Spearman IC 0.142.",
+      "relevance": "HIGH",
+      "angle": "PEAD + earnings NLP",
+      "staged": true,
+      "staged_as": "H229",
+      "staged_file": "dream_cycle/staged/2026-05-27/1_h229_speaker_role_finbert_transcripts.json"
+    },
+    {
+      "title": "Advanced Deep Learning for Earnings Call Transcripts",
+      "arxiv_id": "2503.01886",
+      "url": "https://arxiv.org/abs/2503.01886",
+      "source": "arXiv Feb 2025",
+      "summary": "Comparative BERT/FinBERT/ULMFiT analysis on earnings sentiment. Validates FinBERT foundation; no novel signal reported.",
+      "relevance": "MEDIUM",
+      "angle": "PEAD + earnings NLP",
+      "staged": false,
+      "reason_not_staged": "Methodological validation only; no incremental signal over existing H174 FinBERT approach."
+    },
+    {
+      "title": "Not All Factors Crowd Equally: Alpha Decay Modeling",
+      "arxiv_id": "2512.11913",
+      "url": "https://arxiv.org/abs/2512.11913",
+      "source": "arXiv Dec 2025",
+      "summary": "Hyperbolic decay function for factor alpha across Fama-French factors (1963-2024). Momentum exhibits sharp decay; testable decay patterns by factor type.",
+      "relevance": "HIGH",
+      "angle": "cross-sectional factor momentum",
+      "staged": true,
+      "staged_as": "H230",
+      "staged_file": "dream_cycle/staged/2026-05-27/2_h230_alpha_decay_rebalancing.json"
+    },
+    {
+      "title": "Drift Regimes Unlock Cross-Sectional Predictability (13-Sharpe OOS factor)",
+      "arxiv_id": "2511.12490",
+      "url": "https://arxiv.org/abs/2511.12490",
+      "source": "arXiv Nov 2025",
+      "summary": "Value+reversal combo gated on statistical drift regime detection achieves OOS Sharpe 13+ in paper's universe. Drift regime: t-stat of rolling OLS slope > 2.0 AND volume confirming.",
+      "relevance": "HIGH",
+      "angle": "cross-sectional factor momentum + regime detection",
+      "staged": true,
+      "staged_as": "wiki_update",
+      "staged_file": "dream_cycle/staged/2026-05-27/3_wiki_regime_drift_factor.json",
+      "caution": "13+ Sharpe implausibly high; treat as design inspiration, not benchmark"
+    },
+    {
+      "title": "TradingAgents: Multi-Agent LLM Financial Trading Framework",
+      "arxiv_id": "2412.20138",
+      "url": "https://arxiv.org/abs/2412.20138",
+      "source": "arXiv March 2025 (updated)",
+      "summary": "Role-based agent framework with fundamental, sentiment, technical analyst agents + risk team for stock selection.",
+      "relevance": "MEDIUM",
+      "angle": "multi-agent LLM trading",
+      "staged": false,
+      "reason_not_staged": "Already noted in ml-for-trading.md (2026-05-26). No new actionable finding."
+    },
+    {
+      "title": "Signal or Noise in Multi-Agent LLM Stock Recommendations",
+      "arxiv_id": "2604.17327",
+      "url": "https://arxiv.org/abs/2604.17327",
+      "source": "arXiv April 2026",
+      "summary": "Multi-agent LLM recommendations (S&P 500, Sep 2024-Mar 2026): sector drift noted, high noise-to-signal ratio. Cautions against pure LLM reliance.",
+      "relevance": "LOW",
+      "angle": "multi-agent LLM trading",
+      "staged": false,
+      "reason_not_staged": "Confirms our existing stance: quantitative-first approach justified. No new strategy signal."
+    },
+    {
+      "title": "QuantaAlpha: LLM-Driven Alpha Mining Framework",
+      "url": "https://github.com/QuantaAlpha/QuantaAlpha",
+      "source": "GitHub April 2025",
+      "summary": "Evolutionary LLM framework auto-mines factors via trajectory mutation/crossover. Outperforms baselines on CSI 300 across regimes; Python 3.10 compatible.",
+      "relevance": "HIGH",
+      "angle": "GitHub quant finance",
+      "staged": false,
+      "reason_not_staged": "CSI 300 universe (Chinese stocks) — limited direct applicability to our US large-cap universe without retraining. Note for H222-full: could inform LLM-based factor mining approach. To revisit when H222-full (EDGAR XBRL quality factor) is active."
+    },
+    {
+      "title": "earnings-sentiment: FinBERT + Loughran-McDonald pipeline",
+      "url": "https://github.com/rj694/earnings-sentiment",
+      "source": "GitHub 2025",
+      "summary": "FinBERT + Loughran-McDonald on earnings transcripts; modest 1-day signal (rho≈0.3); easy yfinance integration.",
+      "relevance": "MEDIUM",
+      "angle": "GitHub quant finance",
+      "staged": false,
+      "reason_not_staged": "rho=0.3 is weak; Loughran-McDonald bag-of-words is less powerful than our existing FinBERT approach. H229 (speaker-role) is a stronger upgrade path."
+    }
+  ],
+  "staged_count": 3,
+  "high_relevance_count": 4,
+  "summary": "3 proposals staged: H229 (speaker-role FinBERT on earnings calls with larger dataset, prerequisite: transcript coverage audit), H230 (alpha decay rebalancing optimization for H217), and a wiki update for regime-drift factor finding (design input for H165-full). Key theme: earnings NLP still has headroom (H229), and alpha signal decay modeling could unlock rebalancing gains (H230)."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "h229-speaker-role-finbert-2026-05-27",
+  "date": "2026-05-27",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2604.13260",
+  "title": "H229: Speaker-Role Weighted FinBERT on Earnings Calls (Large Dataset)",
+  "rationale": "arXiv:2604.13260 (April 2026) analyzes 6.5M sentences from 16.4K S&P 500 earnings calls (2015–2025) using FinBERT with speaker-role segmentation. Finds monthly long-short alpha of 2.03% and OOS Spearman IC of 0.142. H168 (our prior speaker-role attempt) was NOT CONFIRMED due to OOS transcript coverage of only 26.5% — root cause was dataset size, not signal quality. This paper uses a far larger dataset (16.4K calls vs. H168's 2,086). H229 would retest the speaker-role FinBERT signal with improved data sourcing: (1) use the MotleyFool/SeekingAlpha transcript sources referenced in the paper, or (2) target EDGAR 8-K exhibit 99.1 items which often embed transcript text. If OOS coverage can be raised above 60% on the 30-stock universe, the signal should be testable. H229 design: long stocks with above-median FinBERT CEO-sentiment score AND positive score for Q&A analyst probes (negative analyst probes = bullish overreaction signal per the paper). Confirm threshold: OOS WR > 65% AND MeanRet > 3%.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h229.py",
+  "content": "\"\"\"\nH229 — Speaker-Role Weighted FinBERT on Earnings Call Transcripts\n==================================================================\narXiv:2604.13260 (April 2026): 6.5M sentences from 16.4K S&P 500 earnings\ncalls (2015-2025), FinBERT with speaker-role segmentation.\nMonthly L/S alpha: 2.03%, OOS Spearman IC: 0.142.\n\nH168 failed due to low transcript OOS coverage (26.5%). H229 addresses this\nby using broader data sourcing (EDGAR 8-K exhibit 99.1 + scraped transcripts).\n\nSignal construction:\n  1. CEO/CFO prepared remarks sentiment (bull = positive bias)\n  2. Analyst Q&A probe sentiment (negative probes = management under pressure)\n  3. Signal = CEO_score - 0.5 × analyst_negative_score\n  Long top-6 by composite score, monthly rebalance.\n\nUniverse: 30 large-cap (same as H163/H174)\nIS: 2013-2020, OOS: 2021-2026\nConfirm: OOS WR > 65% AND MeanRet > 3% (must beat H174: WR=81.8%, MR=6.9%)\n\nPREREQUISITE: transcript sourcing must achieve >60% OOS coverage\n  Option A: HuggingFace 'lamini/earnings-calls-qa-finance' (check for newer version)\n  Option B: SEC EDGAR 8-K exhibit 99.1 text extraction (EdgarTools)\n  Option C: Motley Fool/Seeking Alpha scraping (ToS check required)\n\"\"\"\n\n# SCAFFOLD — implement after verifying transcript coverage\n# Step 1: Audit transcript coverage for 30-stock universe, 2021-2026\n# Step 2: If coverage < 60%, halt and note as BLOCKED\n# Step 3: Extract CEO vs analyst speaker segments\n# Step 4: Apply ProsusAI/finbert to each segment type\n# Step 5: Build composite score, backtest monthly\n",
+  "action": "write",
+  "apply_status": "pending",
+  "hypothesis_number": "H229",
+  "confirm_threshold_wr": 0.65,
+  "confirm_threshold_mr": 0.03,
+  "baseline_hypothesis": "H174",
+  "baseline_oos_wr": 0.818,
+  "prerequisite": "transcript_coverage_audit"
+}

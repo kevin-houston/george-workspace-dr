@@ -1,0 +1,14 @@
+{
+  "id": "wiki-regime-drift-factor-2026-05-27",
+  "date": "2026-05-27",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2511.12490",
+  "title": "Wiki update: arXiv:2511.12490 — Regime Drift + Value/Reversal combo → OOS Sharpe 13+",
+  "rationale": "arXiv:2511.12490 (Nov 2025) finds that combining a drift regime detector with value and short-term reversal during drift periods achieves OOS Sharpe 13+. This is extraordinary (likely reflects a narrow set of conditions or specific universe), but the regime-gating insight is highly relevant to H165-full design. The paper's drift detection method may be more actionable than VIX+200MA for the regime gate. Adding this finding to the regime-detection wiki page and noting it as a design input for H165-full.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/regime-detection.md",
+  "content": "\n---\n\n## Regime Drift + Factor Combination (arXiv:2511.12490)\n\n**Reference**: \"Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability\", arXiv:2511.12490 (Nov 2025)\n\n**Finding**: Value + short-term reversal signals, when gated on a 'drift regime' detector, achieve OOS Sharpe 13+ in the study's universe. The extraordinary Sharpe likely reflects a specific regime definition and universe, but the key structural insight is validated: the same factor signal applied conditionally during detected drift periods dramatically outperforms unconditional application.\n\n**Drift regime definition** (from paper): A stock is in a 'drift regime' when its 30-day price trend is statistically significant (t-stat of rolling OLS slope > 2.0) AND volume is confirming (positive correlation between price and volume over the window). This is more precise than our H221 'drift regime' which used a simple >5% prior-month return threshold.\n\n**Relevance to our pipeline**:\n- H221 (NOT CONFIRMED at OOS 0.343) used a too-simple drift detector; the statistical significance approach here is more rigorous\n- H165-full design: the paper's drift detector could replace or complement the VIX < 25 + SPY > 200MA composite\n- H181 (industry reversal, OOS 1.138): applying H181 only during detected drift periods (per this paper's method) is worth testing as H181-regime variant\n\n**Caution**: OOS Sharpe 13+ is implausibly high for a general strategy; this may reflect a cherry-picked regime definition, small sample, or universe selection. Treat as design inspiration, not a benchmark target.\n",
+  "action": "append",
+  "apply_status": "pending"
+}
