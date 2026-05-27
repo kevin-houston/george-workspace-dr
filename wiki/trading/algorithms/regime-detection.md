@@ -1,6 +1,6 @@
 ---
 created: 2026-05-19
-updated: 2026-05-26
+updated: 2026-05-27
 status: active
 relevance: H165 (VIX gate QUEUED), H205-B (bear-regime BAB), all momentum/BAB strategies
 ---
@@ -295,3 +295,20 @@ Python implementation of two regime detection approaches, originally inspired by
 - QuantStart: [Market Regime Detection using HMM in QSTrader](https://www.quantstart.com/articles/market-regime-detection-using-hidden-markov-models-in-qstrader/)
 - statsmodels docs: [Markov Switching Dynamic Regression](https://www.statsmodels.org/stable/examples/notebooks/generated/markov_regression.html)
 - hmmlearn: https://hmmlearn.readthedocs.io/
+
+---
+
+## Regime Drift + Factor Combination (arXiv:2511.12490)
+
+**Reference**: "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability", arXiv:2511.12490 (Nov 2025)
+
+**Finding**: Value + short-term reversal signals, when gated on a 'drift regime' detector, achieve OOS Sharpe 13+ in the study's universe. The extraordinary Sharpe likely reflects a specific regime definition and universe, but the key structural insight is validated: the same factor signal applied conditionally during detected drift periods dramatically outperforms unconditional application.
+
+**Drift regime definition** (from paper): A stock is in a 'drift regime' when its 30-day price trend is statistically significant (t-stat of rolling OLS slope > 2.0) AND volume is confirming (positive correlation between price and volume over the window). This is more precise than our H221 'drift regime' which used a simple >5% prior-month return threshold.
+
+**Relevance to our pipeline**:
+- H221 (NOT CONFIRMED at OOS 0.343) used a too-simple drift detector; the statistical significance approach here is more rigorous
+- H165-full design: the paper's drift detector could replace or complement the VIX < 25 + SPY > 200MA composite
+- H181 (industry reversal, OOS 1.138): applying H181 only during detected drift periods (per this paper's method) is worth testing as H181-regime variant
+
+**Caution**: OOS Sharpe 13+ is implausibly high for a general strategy; this may reflect a cherry-picked regime definition, small sample, or universe selection. Treat as design inspiration, not a benchmark target.

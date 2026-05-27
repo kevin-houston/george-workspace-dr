@@ -10,7 +10,7 @@
   "target_file": "/workspace/agent/backtesting/daily/run_h230.py",
   "content": "\"\"\"\nH230 — Alpha Decay Optimization for H217 Rebalancing Frequency\n==============================================================\narXiv:2512.11913 (Dec 2025): Hyperbolic alpha decay modeling across\nFama-French factors. Momentum decays fastest (~40% in 3 months).\nalpha101 is an intraday microstructure signal — may decay faster than\nmonthly momentum, potentially favoring bi-monthly rebalancing.\n\nTest rebalancing frequencies: monthly, bi-monthly (every 2 weeks),\nweekly — applying H217 signal (median alpha101 top-6) at each frequency.\nInclude transaction cost model: 0.1% round-trip per rebalance event.\n\nUniverse: 30 large-cap (same as H217)\nIS: 2013-2020, OOS: 2021-2026\nConfirm: OOS Sharpe after transaction costs > H217 monthly (1.559)\nNote: Requires daily close data (already cached as h215_*_daily_*.parquet)\n\"\"\"\n\n# SCAFFOLD — implement using run_h217.py pattern\n# Key change: instead of monthly rebalance, test bi-monthly (every 2 weeks)\n# Rebalance dates: 1st and 3rd Friday of each month\n# Each rebalance: recompute median alpha101 signal over trailing 22 days\n# Apply transaction cost: 0.1% on full portfolio turnover per rebalance\n# Compare OOS Sharpe after costs vs H217 monthly baseline (1.559)\n",
   "action": "write",
-  "apply_status": "pending",
+  "apply_status": "applied",
   "hypothesis_number": "H230",
   "confirm_threshold": 1.559,
   "baseline_hypothesis": "H217",
