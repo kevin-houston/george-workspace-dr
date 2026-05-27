@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-25
+updated: 2026-05-27
 sources_indexed: 2
 pages: 87
 ---
@@ -137,6 +137,7 @@ When answering a query:
 
 - [zenbu.js](tools/zenbu.md) — JS framework for AI-agent-customizable desktop apps; local source, git-tracked, hot-reload; alpha
 - [Dograh](tools/dograh.md) — self-hostable voice agent platform (open-source Vapi/Retell alternative); drag-and-drop workflows, bring-your-own LLM/TTS/STT, Docker deploy
+- [mermaid-skill](tools/mermaid-skill.md) — Claude Code `/mermaid` skill; 23 diagram types, bundled syntax refs, weekly auto-sync from mermaid-js upstream ← 2026-05-27
 
 ### AI Industry
 
