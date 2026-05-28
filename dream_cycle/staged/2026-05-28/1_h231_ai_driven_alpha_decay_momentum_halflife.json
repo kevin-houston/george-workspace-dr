@@ -10,5 +10,5 @@
   "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
   "content": "h231_status: DESIGNED — AI-driven alpha decay signal weighting. arXiv:2605.23905 (May 2026): momentum half-lives compressed 84→12 months post-AI adoption; value 72→20 months. H230 NOT CONFIRMED (monthly rebalancing was already optimal). H231 tests signal-age discount: weight = exp(-age_months / halflife) applied to alpha101 lookback windows, halflife=12 months. Design: run_h231.py using H217 baseline (alpha101 OOS 1.559); test halflife in {6, 12, 18, 24} months; IS 2010-2019, OOS 2020-2026. Success gate: OOS Sharpe > 1.7 (>H217 baseline). Source: arXiv:2605.23905.",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

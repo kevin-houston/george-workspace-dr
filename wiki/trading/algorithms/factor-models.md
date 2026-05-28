@@ -458,3 +458,21 @@ No open-source code released (submitted to NeurIPS 2026). Implement using:
 - IC weighting: trailing 6-month rank correlation between signal and next-month return
 
 **Reference:** arXiv:2605.05580
+
+## Factor Crowding Risk (arXiv:2512.11913, Dec 2025)
+
+Paper: 'Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay'
+
+Key findings:
+- Mechanical factors (momentum, short-term reversal) show measurable crowding post-2015 correlated with factor ETF AUM growth
+- Crowding causes model-predicted alpha (0.30) to exceed realized alpha (0.15) — 2x over-prediction
+- Judgment-based factors (value, quality) do NOT exhibit the same crowding pattern
+- Crowding can be used as a trading signal itself: avoid momentum when ETF AUM in momentum products spikes
+
+Implications for our pipeline:
+- H217 (alpha101 momentum, OOS 1.559) and H228 (blend, OOS 1.572) are momentum-heavy — subject to crowding decay
+- Prefer H228 blend over pure H217: the reversal and quality components are less crowded
+- H221/H222 (quality/F-Score factors) may be more durable at lower raw Sharpe — diversification value is higher than Sharpe alone suggests
+- Monitor MTUM (iShares MSCI Momentum Factor ETF) AUM as a crowding proxy; declining AUM periods have historically seen momentum mean-revert sharply
+
+Source: arXiv:2512.11913
