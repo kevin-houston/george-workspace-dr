@@ -50,6 +50,18 @@
       "claimToken": "a53658243e7f432a24a1f67848012d0fc010ac6b5656eafcb2c7c67de43ef929",
       "claimUrl": "https://here.now/claim?slug=waking-onyx-ecjb&token=a53658243e7f432a24a1f67848012d0fc010ac6b5656eafcb2c7c67de43ef929",
       "expiresAt": "2026-05-27T09:03:21.745Z"
+    },
+    "dewy-bridge-ryev": {
+      "siteUrl": "https://dewy-bridge-ryev.here.now/",
+      "claimToken": "ae61eb17b5cf86242f980ef9f8eebcfc92fb9424ae41631e87e66620216782b1",
+      "claimUrl": "https://here.now/claim?slug=dewy-bridge-ryev&token=ae61eb17b5cf86242f980ef9f8eebcfc92fb9424ae41631e87e66620216782b1",
+      "expiresAt": "2026-05-28T09:05:15.125Z"
+    },
+    "sunny-temple-x33t": {
+      "siteUrl": "https://sunny-temple-x33t.here.now/",
+      "claimToken": "78d2070665292f6632565b35b1c37fe29df1bf92523c971ca8795fef154b2ab1",
+      "claimUrl": "https://here.now/claim?slug=sunny-temple-x33t&token=78d2070665292f6632565b35b1c37fe29df1bf92523c971ca8795fef154b2ab1",
+      "expiresAt": "2026-05-29T04:04:57.247Z"
     }
   }
 }
