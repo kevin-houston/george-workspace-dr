@@ -139,6 +139,7 @@ When answering a query:
 - [zenbu.js](tools/zenbu.md) — JS framework for AI-agent-customizable desktop apps; local source, git-tracked, hot-reload; alpha
 - [Dograh](tools/dograh.md) — self-hostable voice agent platform (open-source Vapi/Retell alternative); drag-and-drop workflows, bring-your-own LLM/TTS/STT, Docker deploy
 - [mermaid-skill](tools/mermaid-skill.md) — Claude Code `/mermaid` skill; 23 diagram types, bundled syntax refs, weekly auto-sync from mermaid-js upstream ← 2026-05-27
+- [ai-avatar-system](tools/ai-avatar-system.md) — real-time AI avatar platform; photo upload + 5s voice clone → lip-sync video; Claude/GPT-4/Llama, Whisper, MuseTalk, XTTS v2; MIT ← 2026-05-28
 
 ### AI Industry
 
