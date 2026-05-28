@@ -1,0 +1,133 @@
+{
+  "hypothesis": "H230",
+  "description": "Alpha decay rebalancing frequency optimization for H217",
+  "universe_size": 30,
+  "signal": "median alpha101 trailing 22-day",
+  "top_n": 6,
+  "tc_per_rebalance": 0.001,
+  "h217_baseline": 1.559,
+  "confirm_threshold": 1.559,
+  "frequencies": {
+    "monthly": {
+      "freq": "monthly",
+      "n_rebalances": 158,
+      "avg_hold_days": 30.4,
+      "periods_per_year": 12.0,
+      "annual_tc_drag": 0.012,
+      "is_net": {
+        "label": "monthly IS",
+        "n": 95,
+        "sharpe": 1.503,
+        "cagr": 0.265,
+        "maxdd": -0.16,
+        "neg_yrs": 1
+      },
+      "oos_net": {
+        "label": "monthly OOS",
+        "n": 63,
+        "sharpe": 1.358,
+        "cagr": 0.253,
+        "maxdd": -0.248,
+        "neg_yrs": 1
+      },
+      "is_gross": {
+        "label": "monthly IS gross",
+        "n": 95,
+        "sharpe": 1.575,
+        "cagr": 0.28,
+        "maxdd": -0.151,
+        "neg_yrs": 1
+      },
+      "oos_gross": {
+        "label": "monthly OOS gross",
+        "n": 63,
+        "sharpe": 1.425,
+        "cagr": 0.268,
+        "maxdd": -0.243,
+        "neg_yrs": 1
+      }
+    },
+    "bimonthly": {
+      "freq": "bimonthly",
+      "n_rebalances": 319,
+      "avg_hold_days": 15.2,
+      "periods_per_year": 24.0,
+      "annual_tc_drag": 0.024,
+      "is_net": {
+        "label": "bimonthly IS",
+        "n": 191,
+        "sharpe": 1.187,
+        "cagr": 0.221,
+        "maxdd": -0.309,
+        "neg_yrs": 1
+      },
+      "oos_net": {
+        "label": "bimonthly OOS",
+        "n": 128,
+        "sharpe": 1.057,
+        "cagr": 0.189,
+        "maxdd": -0.143,
+        "neg_yrs": 0
+      },
+      "is_gross": {
+        "label": "bimonthly IS gross",
+        "n": 191,
+        "sharpe": 1.318,
+        "cagr": 0.25,
+        "maxdd": -0.308,
+        "neg_yrs": 1
+      },
+      "oos_gross": {
+        "label": "bimonthly OOS gross",
+        "n": 128,
+        "sharpe": 1.191,
+        "cagr": 0.217,
+        "maxdd": -0.138,
+        "neg_yrs": 0
+      }
+    },
+    "weekly": {
+      "freq": "weekly",
+      "n_rebalances": 694,
+      "avg_hold_days": 7.0,
+      "periods_per_year": 52.2,
+      "annual_tc_drag": 0.0522,
+      "is_net": {
+        "label": "weekly IS",
+        "n": 417,
+        "sharpe": 1.029,
+        "cagr": 0.179,
+        "maxdd": -0.274,
+        "neg_yrs": 1
+      },
+      "oos_net": {
+        "label": "weekly OOS",
+        "n": 277,
+        "sharpe": 0.753,
+        "cagr": 0.13,
+        "maxdd": -0.247,
+        "neg_yrs": 2
+      },
+      "is_gross": {
+        "label": "weekly IS gross",
+        "n": 417,
+        "sharpe": 1.326,
+        "cagr": 0.242,
+        "maxdd": -0.27,
+        "neg_yrs": 1
+      },
+      "oos_gross": {
+        "label": "weekly OOS gross",
+        "n": 277,
+        "sharpe": 1.035,
+        "cagr": 0.19,
+        "maxdd": -0.218,
+        "neg_yrs": 2
+      }
+    }
+  },
+  "best_freq": "monthly",
+  "best_oos_sharpe": 1.358,
+  "confirmed": false,
+  "verdict": "NOT CONFIRMED: best freq=monthly, OOS Sharpe=1.358 vs H217=1.559"
+}
