@@ -1,0 +1,160 @@
+{
+  "date": "2026-05-28",
+  "searches": [
+    {
+      "query": "arxiv 2025 2026 pairs trading cointegration machine learning",
+      "relevance": "low",
+      "findings": [
+        {
+          "title": "Pairs trading with time-series deep learning models",
+          "url": "https://www.sciencedirect.com/science/article/pii/S2405918826000024",
+          "relevance": "low",
+          "reason": "Pairs family exhausted (H152-H160, H200). DL cointegration pairs not a new direction."
+        },
+        {
+          "title": "Cointegration-based pairs trading: identifying and exploiting similar ETFs",
+          "url": "https://ideas.repec.org/a/pal/assmgt/v26y2025i5d10.1057_s41260-025-00416-0.html",
+          "relevance": "low",
+          "reason": "ETF pairs cointegration stability study — pairs family exhausted."
+        }
+      ],
+      "staged": false
+    },
+    {
+      "query": "arxiv 2025 2026 post-earnings drift NLP FinBERT transcripts",
+      "relevance": "medium",
+      "findings": [
+        {
+          "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+          "url": "https://aclanthology.org/2025.finnlp-2.13.pdf",
+          "relevance": "medium",
+          "reason": "FinBERT achieves 57.6%/58.3% accuracy in PEAD detection — validates H163/H174 approach. Not a new strategy, confirms existing pipeline."
+        },
+        {
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+          "url": "https://arxiv.org/abs/2509.24254",
+          "relevance": "medium",
+          "reason": "Structured press release NLP on 138k releases (2005-2023) using FinBERT. Different input signal from our 8-K approach. Potential supplemental upgrade. Not staged — H163/H174 already confirmed with 8-K text; press release extraction would be a marginal add-on."
+        },
+        {
+          "title": "Same Company, Same Signal: The Role of Identity in Earnings Call Transcripts",
+          "url": "https://arxiv.org/abs/2412.18029",
+          "relevance": "low",
+          "reason": "Identity effects in transcript NLP. Informative but H229 already staged for transcript speaker-role work."
+        },
+        {
+          "title": "FinBERT2: A Specialized Bidirectional Encoder for Finance",
+          "url": "https://arxiv.org/abs/2506.06335",
+          "relevance": "medium",
+          "reason": "Already in wiki/tools/nlp-alternative-data.md as H174 upgrade candidate. Known."
+        }
+      ],
+      "staged": false
+    },
+    {
+      "query": "arxiv 2025 2026 cross-sectional momentum factor decay alpha signal half-life",
+      "relevance": "high",
+      "findings": [
+        {
+          "title": "AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets",
+          "url": "https://arxiv.org/abs/2605.23905",
+          "relevance": "high",
+          "reason": "NEW paper (May 2026). Momentum factor half-life compressed 84→12 months post-AI adoption. Directly relevant to H217/H230. Staged as H231 design."
+        },
+        {
+          "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay",
+          "url": "https://arxiv.org/abs/2512.11913",
+          "relevance": "high",
+          "reason": "Dec 2025. Momentum/reversal show crowding post-2015; quality/value do not. Directly relevant to H217 (alpha101) and H228 (blend) durability. Staged as wiki note for factor-models.md."
+        },
+        {
+          "title": "AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading",
+          "url": "https://arxiv.org/abs/2605.05580",
+          "relevance": "medium",
+          "reason": "Already staged as H224 (2026-05-25 dream cycle)."
+        }
+      ],
+      "staged": true,
+      "staged_files": [
+        "dream_cycle/staged/2026-05-28/1_h231_ai_driven_alpha_decay_momentum_halflife.json"
+      ]
+    },
+    {
+      "query": "arxiv 2025 2026 multi-agent LLM stock trading portfolio",
+      "relevance": "low",
+      "findings": [
+        {
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System",
+          "url": "https://arxiv.org/abs/2602.23330",
+          "relevance": "low",
+          "reason": "Already in wiki/tools/ml-for-trading.md (2026-05-26)."
+        },
+        {
+          "title": "Can LLM-based Financial Investing Strategies Outperform the Market in Long Run?",
+          "url": "https://arxiv.org/abs/2505.07078",
+          "relevance": "low",
+          "reason": "Benchmark paper. We don't use LLM-based signal generation in production."
+        },
+        {
+          "title": "From Knowing to Doing: A Memory-Controlled Benchmark for LLM Trading Agents",
+          "url": "https://arxiv.org/abs/2605.28359",
+          "relevance": "low",
+          "reason": "KEY NEGATIVE RESULT (May 2026): LLM trading agent returns largely explained by passive market/style exposure, not stock-selection alpha. Validates skepticism about LLM-as-signal approaches."
+        },
+        {
+          "title": "Can Blindfolded LLMs Still Trade? An Anonymization-First Framework",
+          "url": "https://arxiv.org/abs/2603.17692",
+          "relevance": "low",
+          "reason": "Anonymization-first portfolio optimization. Interesting methodological angle but not actionable for our pipeline."
+        }
+      ],
+      "staged": false
+    },
+    {
+      "query": "github trending quantitative finance trading 2026",
+      "relevance": "low",
+      "findings": [
+        {
+          "title": "TradingAgents (TauricResearch)",
+          "url": "https://github.com/TauricResearch/TradingAgents",
+          "relevance": "low",
+          "reason": "Already in wiki/tools/ml-for-trading.md."
+        },
+        {
+          "title": "income-desk — systematic options trading for small accounts",
+          "url": "https://github.com/topics/quantitative-finance",
+          "relevance": "low-medium",
+          "reason": "Systematic options intelligence for small accounts. Potentially relevant to Phase 4 options trading. Not enough detail from search to stage a proposal."
+        },
+        {
+          "title": "TradeSight — AI trading platform with Alpaca integration",
+          "url": "https://github.com/topics/quantitative-trading",
+          "relevance": "low",
+          "reason": "We have our own Alpaca pipeline. Informational only."
+        }
+      ],
+      "staged": false
+    }
+  ],
+  "staged_proposals": [
+    {
+      "file": "dream_cycle/staged/2026-05-28/1_h231_ai_driven_alpha_decay_momentum_halflife.json",
+      "type": "wiki_update",
+      "risk": "medium",
+      "summary": "H231 design: signal-age exponential weighting for alpha101, motivated by arXiv:2605.23905 (momentum half-life 84→12 months post-AI)"
+    },
+    {
+      "file": "dream_cycle/staged/2026-05-28/2_wiki_factor_crowding_momentum_risk.json",
+      "type": "wiki_update",
+      "risk": "low",
+      "summary": "Wiki note: factor crowding risk for momentum signals post-2015 (arXiv:2512.11913); prefer H228 blend + quality factors over pure momentum H217"
+    }
+  ],
+  "skipped": [
+    "Pairs family exhausted — no pairs proposals",
+    "H229 already staged — transcript speaker-role NLP not re-staged",
+    "FinBERT2 already in wiki — not re-staged",
+    "AlphaCrafter already staged as H224 — not re-staged",
+    "LLM multi-agent trading — consistently showing no persistent alpha (arXiv:2605.28359); not actionable"
+  ]
+}

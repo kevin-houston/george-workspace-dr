@@ -1,0 +1,14 @@
+{
+  "id": "h231-ai-driven-alpha-decay",
+  "date": "2026-05-28",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2605.23905",
+  "title": "H231 design: AI-driven alpha decay — momentum half-life-aware signal weighting",
+  "rationale": "arXiv:2605.23905 (May 2026) reports that momentum factor half-lives have compressed from 84 months (pre-AI era) to 12 months due to algorithmic homogenization. Value factors compressed 72→20 months. H230 (alpha decay rebalancing) was NOT CONFIRMED with monthly rebalancing as optimal. This paper provides a theoretical mechanism: if the signal's effective half-life is ~12 months, then a momentum signal 10+ months old may carry near-zero residual alpha. H231 proposes testing alpha101 (H217, confirmed OOS Sharpe 1.559) with a signal-age weighting function: weight = exp(-age_months / halflife), halflife=12 months. Hypothesis: weighting recent signal calculations more heavily than older lookback windows improves OOS Sharpe. This is distinct from H230 (which tested rebalancing frequency) — H231 modifies the SIGNAL itself rather than the portfolio turnover.",
+  "risk_level": "medium",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
+  "content": "h231_status: DESIGNED — AI-driven alpha decay signal weighting. arXiv:2605.23905 (May 2026): momentum half-lives compressed 84→12 months post-AI adoption; value 72→20 months. H230 NOT CONFIRMED (monthly rebalancing was already optimal). H231 tests signal-age discount: weight = exp(-age_months / halflife) applied to alpha101 lookback windows, halflife=12 months. Design: run_h231.py using H217 baseline (alpha101 OOS 1.559); test halflife in {6, 12, 18, 24} months; IS 2010-2019, OOS 2020-2026. Success gate: OOS Sharpe > 1.7 (>H217 baseline). Source: arXiv:2605.23905.",
+  "action": "append",
+  "apply_status": "pending"
+}
