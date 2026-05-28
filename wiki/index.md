@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-27
+updated: 2026-05-28
 sources_indexed: 2
 pages: 87
 ---
@@ -44,6 +44,7 @@ When answering a query:
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
 - [Backtrader vs Vectorbt](trading/tools/backtrader-vs-vectorbt.md) — framework comparison; H116 ETF rotation implementations for both; Vectorbt v1.0 (2026-04-22)
+- [OpenAlice](tools/openalice.md) — full-lifecycle AI trading agent; UTA (CCXT+Alpaca+IBKR), Trading-as-Git, Workspace+MCP, Telegram; TypeScript, 4.4k stars ← 2026-05-28
 - [LEAN / QuantConnect](trading/tools/lean-quantconnect.md) — open-source backtesting + live trading engine; best for options; requires Docker (pending install)
 - [Kraken CLI](trading/tools/kraken-cli.md) — official Kraken AI-native CLI; 151 MCP tools, paper trading built-in, crypto/forex/xStocks
 - [NLP & Alternative Data](trading/tools/nlp-alternative-data.md) — FinBERT, financial NLP models, EDGAR 8-K pipeline, AlphaVantage transcripts; H163/H168/H171 tooling
