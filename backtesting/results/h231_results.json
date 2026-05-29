@@ -1,0 +1,165 @@
+{
+  "hypothesis": "H231",
+  "description": "Alpha101 exponential decay half-life weighting",
+  "source": "arXiv:2605.23905",
+  "halflife_configs_tested": [
+    "hl_6mo",
+    "hl_12mo",
+    "hl_18mo",
+    "hl_24mo",
+    "uniform"
+  ],
+  "best_config": "hl_24mo",
+  "best_halflife_days": 504,
+  "best_is": {
+    "label": "hl_24mo",
+    "n": 96,
+    "sharpe": 1.31,
+    "cagr": 0.22,
+    "cumul": 5.1423,
+    "maxdd": -0.141,
+    "neg_yrs": 0
+  },
+  "best_oos": {
+    "label": "hl_24mo",
+    "n": 64,
+    "sharpe": 1.301,
+    "cagr": 0.238,
+    "cumul": 3.227,
+    "maxdd": -0.211,
+    "neg_yrs": 1
+  },
+  "h217_baseline_oos_sharpe": 1.559,
+  "all_configs": {
+    "hl_6mo": {
+      "halflife_days": 126,
+      "halflife_label": "6mo",
+      "is": {
+        "label": "hl_6mo",
+        "n": 96,
+        "sharpe": 1.378,
+        "cagr": 0.227,
+        "cumul": 5.4477,
+        "maxdd": -0.141,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "hl_6mo",
+        "n": 64,
+        "sharpe": 1.275,
+        "cagr": 0.235,
+        "cumul": 3.1699,
+        "maxdd": -0.225,
+        "neg_yrs": 1
+      }
+    },
+    "hl_12mo": {
+      "halflife_days": 252,
+      "halflife_label": "12mo",
+      "is": {
+        "label": "hl_12mo",
+        "n": 96,
+        "sharpe": 1.325,
+        "cagr": 0.222,
+        "cumul": 5.2388,
+        "maxdd": -0.141,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "hl_12mo",
+        "n": 64,
+        "sharpe": 1.266,
+        "cagr": 0.234,
+        "cumul": 3.1504,
+        "maxdd": -0.225,
+        "neg_yrs": 1
+      }
+    },
+    "hl_18mo": {
+      "halflife_days": 378,
+      "halflife_label": "18mo",
+      "is": {
+        "label": "hl_18mo",
+        "n": 96,
+        "sharpe": 1.316,
+        "cagr": 0.221,
+        "cumul": 5.1752,
+        "maxdd": -0.141,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "hl_18mo",
+        "n": 64,
+        "sharpe": 1.284,
+        "cagr": 0.236,
+        "cumul": 3.1853,
+        "maxdd": -0.212,
+        "neg_yrs": 1
+      }
+    },
+    "hl_24mo": {
+      "halflife_days": 504,
+      "halflife_label": "24mo",
+      "is": {
+        "label": "hl_24mo",
+        "n": 96,
+        "sharpe": 1.31,
+        "cagr": 0.22,
+        "cumul": 5.1423,
+        "maxdd": -0.141,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "hl_24mo",
+        "n": 64,
+        "sharpe": 1.301,
+        "cagr": 0.238,
+        "cumul": 3.227,
+        "maxdd": -0.211,
+        "neg_yrs": 1
+      }
+    },
+    "uniform": {
+      "halflife_days": null,
+      "halflife_label": "uniform",
+      "is": {
+        "label": "uniform",
+        "n": 96,
+        "sharpe": 1.378,
+        "cagr": 0.235,
+        "cumul": 5.7699,
+        "maxdd": -0.144,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "uniform",
+        "n": 64,
+        "sharpe": 1.228,
+        "cagr": 0.238,
+        "cumul": 3.2003,
+        "maxdd": -0.23,
+        "neg_yrs": 1
+      }
+    }
+  },
+  "spy_is": {
+    "label": "SPY",
+    "n": 96,
+    "sharpe": 1.105,
+    "cagr": 0.15,
+    "cumul": 3.0697,
+    "maxdd": -0.194,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "label": "SPY",
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "cumul": 2.0444,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "confirmed": false,
+  "confirm_threshold": 1.7
+}
