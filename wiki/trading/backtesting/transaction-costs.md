@@ -424,3 +424,40 @@ COST_DEFAULTS = {
 - BSIC Backtesting Series Ep. 5: https://bsic.it/backtesting-series-episode-5-transaction-cost-modelling/
 - Hudson & Thames Backtest Tutorial: https://github.com/hudson-and-thames/backtest_tutorial/blob/main/Intro_Transaction_Costs.ipynb
 - QuantJourney (2025): "Slippage: A Comprehensive Analysis and Non-Linear Modeling with ML" — RF model achieving R²=0.898
+
+---
+
+## Time Stops (Stats Edge, 2026-05-29)
+
+A **time stop** exits a position after a fixed number of bars if neither the profit target nor the loss stop has triggered. Stats Edge uses 1 week as the time stop for their weekly-bar strategies.
+
+### Why time stops matter
+
+Without a time stop, a trade that "goes nowhere" continues to tie up capital indefinitely. In a cross-sectional strategy trading 10+ positions simultaneously, capital efficiency degrades when positions remain open in flat/sideways names.
+
+**Effect on metrics:**
+- Reduces average hold time → more trades per year → more accurate estimate of edge
+- Can improve Sharpe by eliminating long stretches of zero return (neutral trades drag down mean, inflate variance)
+- Especially important for event-driven strategies (PEAD) where the catalyst window is defined
+
+### Application to our strategies
+
+| Strategy | Current exit | Recommended time stop |
+|---|---|---|
+| H174 PEAD | 20 trading days | Already has time stop ✅ |
+| H181 Reversal | Monthly rebalance | Implicit ~20 days ✅ |
+| H217 Alpha101 | Monthly rebalance | Implicit ~20 days ✅ |
+| H228 Blend | Monthly rebalance | Implicit ~20 days ✅ |
+| H192-D BAB | Monthly rebalance | Implicit ~20 days ✅ |
+| H234 Inside-bar | 1 week (explicit) | 1-week time stop ✅ |
+
+For weekly-bar swing strategies (H234 family), the time stop IS the exit rule — 1-week hold regardless of outcome.
+
+### Execution discipline (from Stats Edge)
+
+Three rules that apply regardless of time stop:
+1. **Don't skip setups** — a skipped winner during a drawdown is where real returns get destroyed
+2. **Don't move stops mid-trade** — discretion inside a systematic framework combines the worst of both
+3. **Don't size up to catch up** — bigger positions during drawdowns is how systematic traders blow up
+
+Source: Stats Edge Trading "The 25-Year Backtest" (Michael Nauss CMT/CAIA/CDMS, 2026)

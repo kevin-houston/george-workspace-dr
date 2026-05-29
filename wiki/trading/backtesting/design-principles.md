@@ -405,3 +405,64 @@ def run_insample_mcpt(df, optimize_fn, n_permutations=1000):
 - MCPT would be a stronger secondary validation, especially for strategies with many optimized parameters.
 - IAF (Investing Algorithm Framework) has Monte Carlo permutation testing built in — potential integration point.
 - **Queued action**: apply MCPT to all confirmed strategies as a retrospective audit.
+
+---
+
+## Monte Carlo Equity Curve Simulation (Stats Edge, 2026-05-29)
+
+Source: Stats Edge Trading "The 25-Year Backtest" — visualizing the distribution of equity paths under random trade sequencing.
+
+### What it is
+
+Rather than (or in addition to) permuting the data, resample the **trade return sequence** itself. Given a set of N historical trade returns:
+1. Draw N returns with replacement from the empirical trade distribution
+2. Compute the cumulative equity curve
+3. Repeat 100–1,000 times
+4. Plot the distribution of equity paths; highlight worst 5%
+
+This shows the range of plausible outcomes from the same edge, under different luck in trade ordering.
+
+### Why it's valuable (different from MCPT)
+
+- MCPT asks: "Is this edge real or noise?" Monte Carlo equity simulation asks: "If the edge is real, what's the worst realistic outcome?"
+- It answers: what drawdown should a live trader expect in the worst 5% of luck? This is the number to use for position sizing.
+- Stats Edge shows that even with a confirmed edge and positive 26-year equity curve, individual simulated paths can hit −20% drawdowns. Without seeing this, a live trader stops out of a real edge during a bad-luck streak.
+
+### Implementation sketch
+
+```python
+def monte_carlo_equity(trade_returns, n_sims=500, n_trades=None):
+    """Simulate equity paths by resampling trade return sequence."""
+    returns = np.array(trade_returns)
+    n = n_trades or len(returns)
+    equity_paths = []
+    for _ in range(n_sims):
+        sample = np.random.choice(returns, size=n, replace=True)
+        equity = np.cumprod(1 + sample)
+        equity_paths.append(equity)
+    equity_matrix = np.array(equity_paths)
+    
+    percentiles = {
+        "p5":    np.percentile(equity_matrix[:, -1], 5),
+        "p25":   np.percentile(equity_matrix[:, -1], 25),
+        "p50":   np.percentile(equity_matrix[:, -1], 50),
+        "p75":   np.percentile(equity_matrix[:, -1], 75),
+        "p95":   np.percentile(equity_matrix[:, -1], 95),
+        "max_dd_p5": min(
+            (np.min(p / np.maximum.accumulate(p)) - 1) for p in equity_matrix[:int(n_sims * 0.05)]
+        ),
+    }
+    return equity_matrix, percentiles
+```
+
+### When to apply
+
+After a strategy passes OOS confirmation, before going live:
+1. Extract the trade-by-trade return series from the OOS period
+2. Run 500 Monte Carlo simulations
+3. Report the p5 ending equity and p5 max drawdown
+4. Set position size so that p5 max drawdown ≤ acceptable loss (e.g., 10% of allocated capital)
+
+### Queued action
+
+Apply to all confirmed production strategies (H026, H041a, H045, H174, H181, H192-D, H217, H228) to establish realistic drawdown bounds for live position sizing.
