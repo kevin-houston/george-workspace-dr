@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-28
+updated: 2026-05-29
 sources_indexed: 2
-pages: 87
+pages: 90
 ---
 
 # Wiki Index
@@ -144,6 +144,9 @@ When answering a query:
 ### AI Industry
 
 - [The AI Decoupling](concepts/ai-decoupling.md) — vintagedata.org 2026; SaaS/AI ecosystem split; MoE economics, synthetic data moats, token pricing vs. enterprise CFO models; Chinese self-build alternative ← 2026-05-25
+- [AI Model Landscape 2026](ai-industry/model-landscape-2026.md) — frontier model snapshot: GPT-5.5/Claude Opus 4.7/Gemini 3.1/Grok 4/DeepSeek V3.2; benchmark table; 10x cost collapse; open-weight gap closed ← 2026-05-29
+- [AI Agent Frameworks Ecosystem 2026](ai-industry/agent-frameworks-2026.md) — LangGraph (stateful/production), CrewAI (role-based multi-agent), AutoGen (maintenance mode), Agno, PydanticAI; architecture patterns; relevance to George's stack ← 2026-05-29
+- [AI Infrastructure / Compute Layer 2026](ai-industry/ai-infrastructure-2026.md) — GPU cloud providers (Lambda/CoreWeave/RunPod/Vast.ai); H100/B200 pricing; vLLM/SGLang/TGI inference servers; cost structure for production LLM apps ← 2026-05-29
 
 ---
 

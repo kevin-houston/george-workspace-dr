@@ -248,3 +248,13 @@ Issues found: 21. Auto-fixed: 19. Needs review: 0 (one contradiction resolved in
 
 ## [2026-05-27] ingest | xang1234/stock-screener
 Pages created: 1 (wiki/tools/stock-screener.md). Pages updated: 1 (wiki/trading/index.md). Key entities: xang1234/stock-screener GitHub repo, Minervini Template screener, CANSLIM screener, IBD 197 industry groups, StockBee-style market breadth, MCP integration. Cross-references: H181 (IBD vs GICS granularity), H165 (breadth as regime signal), H217/H228 (Minervini pre-filter angle). Source: https://github.com/xang1234/stock-screener
+
+## [2026-05-29] dream-cycle | AI Industry wiki expansion
+
+**Type:** wiki expansion (dream cycle nightly session)
+**New pages:** 3
+- wiki/ai-industry/model-landscape-2026.md — frontier model snapshot May 2026: GPT-5.5/Claude Opus 4.7/Gemini 3.1/Grok 4/DeepSeek V3.2; benchmark table; 10x cost collapse; open-weight gap closed
+- wiki/ai-industry/agent-frameworks-2026.md — LangGraph/CrewAI/AutoGen(maintenance)/Agno/PydanticAI; architecture patterns; AutoGen maintenance mode warning
+- wiki/ai-industry/ai-infrastructure-2026.md — GPU cloud providers (Lambda/CoreWeave/RunPod); H100/B200 pricing; vLLM/SGLang/TGI inference servers; production LLM cost structure
+**Index section:** AI Industry (expanded from 1 page to 4 pages)
+**Sources:** techiehub.blog, awesomeagents.ai, gpu.fm (all April 2026)
