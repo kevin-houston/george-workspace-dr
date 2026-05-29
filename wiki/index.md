@@ -1,7 +1,7 @@
 ---
 updated: 2026-05-29
-sources_indexed: 2
-pages: 90
+sources_indexed: 3
+pages: 92
 ---
 
 # Wiki Index
@@ -82,6 +82,7 @@ When answering a query:
 - [Polymarket](trading/prediction-markets/polymarket.md) — secondary; highest global volume, blockchain-based, US re-entry Dec 2025
 - [Other Prediction Market Platforms](trading/prediction-markets/other-platforms.md) — PredictIt, Manifold, IBKR ForecastTrader (full API), Kalshi Timeless mechanics
 - [Prediction Market Algorithmic Strategies](trading/prediction-markets/algorithmic-strategies.md) — Kelly criterion, event modeling, arbitrage, NLP; cross-market arb, Timeless funding arb
+- [AI Model Benchmarks on Prediction Markets](trading/prediction-markets/ai-model-benchmarks.md) — Prediction Arena (arXiv:2604.07355); 6 models, $10k real capital, 57-day Kalshi/Polymarket eval; all lost money on Kalshi; Polymarket dramatically better (−1.1% vs −22.6%); research quantity ≠ performance ← 2026-05-29
 
 **Research Logs**
 - [Research Log 2026-04-24](trading/research-log/2026-04-24.md) — session 1: tools and data sources
@@ -121,6 +122,7 @@ When answering a query:
 
 **Trading Sources**
 - [Phynance — Kakushadze (arXiv:1405.1948, 2014)](sources/phynance-kakushadze-2014.md) — PhD lecture notes: stochastic calculus, Itô/Girsanov/path-integral formulation, BSM full derivation, Greeks, interest rate models (Vasicek/CIR/HJM/BGM), quant interview problems
+- [Prediction Arena (arXiv:2604.07355, 2026)](sources/prediction-arena-2026.md) — 57-day live eval of 6 AI models trading Kalshi/Polymarket with real capital; all lost on Kalshi; Polymarket avg −1.1% vs −22.6% on Kalshi; claude-opus-4-6 worst Polymarket performer in Cohort 2
 
 **Concepts**
 - [Impact Investing](concepts/impact-investing.md) — definition, key characteristics, risks, market context; distinguishes from SRI and philanthropy

@@ -258,3 +258,6 @@ Pages created: 1 (wiki/tools/stock-screener.md). Pages updated: 1 (wiki/trading/
 - wiki/ai-industry/ai-infrastructure-2026.md — GPU cloud providers (Lambda/CoreWeave/RunPod); H100/B200 pricing; vLLM/SGLang/TGI inference servers; production LLM cost structure
 **Index section:** AI Industry (expanded from 1 page to 4 pages)
 **Sources:** techiehub.blog, awesomeagents.ai, gpu.fm (all April 2026)
+
+## [2026-05-29] ingest | Prediction Arena (arXiv:2604.07355)
+Pages created: 2 (sources/prediction-arena-2026.md, trading/prediction-markets/ai-model-benchmarks.md). Pages updated: 1 (wiki/index.md). Key entities: Arcada Labs, Kalshi, Polymarket, glm-4.7, grok-4-20-checkpoint, gpt-5.2, claude-opus-4-5, claude-opus-4-6, gpt-5.4, gemini-3.1-pro-preview. Key finding: all 6 frontier models lost money on Kalshi over 57 days (−16% to −30.8%); Polymarket avg −1.1% vs −22.6% Kalshi; research quantity uncorrelated with performance; initial prediction accuracy is #1 driver. Cohort 2: claude-opus-4-6 worst Polymarket performer (−10.06%) in 3-day trial.
