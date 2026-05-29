@@ -47,6 +47,19 @@ def compute_metrics(
 
     after_tax_return = annualized_return * (1 - tax_rate)
 
+    # Extreme-value tail diagnostics (ZHAW AI-for-trading, Jevtic et al. 2022)
+    # Measures asymmetry of return tails — strategies with tail_ratio > 1 have
+    # larger upside extremes than downside extremes (favourable skew).
+    ev = {}
+    for label, frac in [("5pct", 0.05), ("1pct", 0.01)]:
+        n = max(1, int(len(daily_returns) * frac))
+        up_tail = daily_returns.nlargest(n)
+        dn_tail = daily_returns.nsmallest(n)
+        ev[f"up_tail_{label}_mean"] = round(float(up_tail.mean()), 4)
+        ev[f"dn_tail_{label}_mean"] = round(float(dn_tail.mean()), 4)
+        ratio = abs(up_tail.mean()) / (abs(dn_tail.mean()) + 1e-9)
+        ev[f"tail_ratio_{label}"] = round(float(ratio), 3)
+
     return {
         "annualized_return": round(annualized_return, 4),
         "after_tax_return": round(after_tax_return, 4),
@@ -59,6 +72,7 @@ def compute_metrics(
         "total_trades": total_trades,
         "avg_hold_days": round(avg_hold_days, 1),
         "final_equity": round(equity_curve.iloc[-1], 2),
+        **ev,
     }
 
 
@@ -79,3 +93,6 @@ def print_metrics(label: str, m: dict):
     print(f"  Total trades:     {m['total_trades']}")
     print(f"  Avg hold days:    {m['avg_hold_days']:.1f}")
     print(f"  Final equity:     ${m['final_equity']:,.0f}")
+    if "tail_ratio_5pct" in m:
+        print(f"  Up tail 5%:       {m['up_tail_5pct_mean']:.2%}  |  Dn tail 5%: {m['dn_tail_5pct_mean']:.2%}  |  Ratio: {m['tail_ratio_5pct']:.2f}x")
+        print(f"  Up tail 1%:       {m['up_tail_1pct_mean']:.2%}  |  Dn tail 1%: {m['dn_tail_1pct_mean']:.2%}  |  Ratio: {m['tail_ratio_1pct']:.2f}x")

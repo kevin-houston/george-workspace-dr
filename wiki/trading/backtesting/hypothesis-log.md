@@ -5885,7 +5885,13 @@ h231_status: DESIGNED — AI-driven alpha decay signal weighting. arXiv:2605.239
 **Hypothesis:** Replacing standard MSE loss with Adjusted-MSE (wrong-sign predictions penalized 11x more heavily) in our cross-sectional LightGBM/XGBoost alpha101 model (H217 base) improves directional accuracy and OOS Sharpe.
 
 **Signal construction:**
-- Base: H217's 40 OHLCV-buildable alpha101 signals on S&P 500 universe
+- Base: H217's alpha101 signals (close-within-range) on S&P 500 universe, aggregated monthly by median
+- Supplementary TA features (added 2026-05-29, sourced from ZHAW AI-for-trading paper — Jevtic, Délèze, Osterrieder 2022; MACD had 44% feature importance in their RF model on Brent crude):
+  - **MACD** (12/26/9 EMA): MACD line, signal line, histogram — 3 features
+  - **RSI** (14-period): single feature, normalized to [0, 1]
+  - **K-percent Stochastic** (14-period %K, 3-period %D): 2 features
+  - **ROC** (10-period rate of change): single feature
+  All TA features computed on monthly closing prices, same 1-month lag as alpha101 to avoid lookahead
 - Model: LightGBM with custom objective implementing Adjusted-MSE:
   ```python
   def adjusted_mse(y_pred, dtrain):
@@ -5898,13 +5904,53 @@ h231_status: DESIGNED — AI-driven alpha decay signal weighting. arXiv:2605.239
       hess = weight
       return grad, hess
   ```
-- Same IS/OOS split as H217 (e.g., 2018-2022 IS, 2023-2025 OOS)
+- Same IS/OOS split as H217 (2013-2020 IS, 2021-2026 OOS)
 - Confirm: H233 OOS Sharpe > H217's 1.559
+- Secondary output: feature importance ranking — expect MACD to rank near top per ZHAW paper
 
-**Dependencies:** H217 codebase (`backtesting/daily/run_h217.py`), LightGBM custom objective API
+**Dependencies:** H217 codebase (`backtesting/daily/run_h217.py`), LightGBM custom objective API, `pandas-ta` or manual TA computation
 **Risk:** Medium — new script, no changes to confirmed strategies
 **Reference GitHub:** https://github.com/initial-d/ml-quant-trading (MIT license)
 
 h234_status: CONFIRMED (2026-05-29) — Weekly Inside-Bar Breakout (Coiled Spring Momentum). Source: Stats Edge Trading "The 25-Year Backtest" (Michael Nauss CMT/CAIA/CDMS). Signal: week W-1 is a "green bar" (weekly return ≥ 2.5%, volume ≥ 1.5× 20-wk avg, close in top 40% of range); week W is an "inside bar" (high < W-1 high, low > W-1 low, close in upper 50% of W-1 range); entry at W+1 open, exit at W+1 close (1-week hold). Universe: ~107 large-cap US stocks + ETFs via yfinance weekly OHLCV (3 tickers delisted: PARA, DISH, SQ). TC: 0.10% round-trip. IS 2013–2020, OOS 2021–2026. IS results: Sharpe=0.860, CAGR=29.9%, MaxDD=-60.4%, n=202 trades, WinRate=53.2%. OOS results: Sharpe=1.770, CAGR=156.9%, MaxDD=-47.2%, n=120 trades, WinRate=63.9%. Confirm threshold: OOS Sharpe ≥ 1.40 — MET (1.770). CONFIRMED. KEY FINDINGS: (1) OOS Sharpe (1.770) dramatically exceeds IS Sharpe (0.860) — rare forward improvement suggesting the coiled-spring pattern has strengthened post-2021, possibly due to increased algorithmic participation creating more pronounced consolidation/breakout dynamics. (2) Strong IS/OOS win-rate improvement: 53.2% → 63.9% (+10.7pp), indicating the signal quality improved OOS rather than degraded. (3) MaxDD is severe in both periods (-60.4% IS, -47.2% OOS) — this is a concentrated directional strategy with no diversification across assets; the high CAGR compensates but position sizing must be aggressive-growth-style. (4) Parameter sweep shows stability around the 2.5%–3.0% green bar threshold (OOS Sharpe 1.77–1.772, n=115–120); looser thresholds (1.5%–2.0%) produce slightly fewer trades and lower Sharpe. Optimal: GREEN_THRESH=3.0% (Sharpe=1.772, n=115) offers best risk-adjusted performance. (5) CAGR of 156.9% OOS is implausibly high as a compounded aggregate-position figure — reflects that the equal-weight weekly trade averages are not sizing per-unit capital; actual portfolio CAGR would depend on MAX_POSITIONS=10 sizing. PORTFOLIO NOTE: H234 is a weekly-timeframe directional satellite, distinct from monthly rebalancing strategies. Its MaxDD profile (-47%) is unsuitable for the production portfolio as-is. Viable as a standalone aggressive-growth allocation with small position sizes. No changes to production portfolio recommended without further risk testing. Script: backtesting/daily/run_h234.py. Results: backtesting/results/h234_results.json.
 
 **Secondary finding from paper:** Implement 'mask-first' tradability filter in our alpha101 pipeline to exclude stocks in halt/suspension at signal construction time. Low-overhead defensive improvement.
+
+## H235 — RF Classifier as IBS Signal Confirmation Filter (XLK / SMH / IGV)
+
+**Status:** DESIGN
+**Date queued:** 2026-05-29
+**Source:** Jevtic, Délèze & Osterrieder (2022) ZHAW bachelor thesis — "AI for Trading Strategies: A Practical Application on Brent Crude Oil". RF was top model (Sharpe 1.15, PF 5.77); MACD 44% feature importance; RF achieved 61% accuracy on top/bottom 5% return tails vs 50–53% for LSTM/SVM.
+
+**Hypothesis:** H112's IBS mean-reversion signals on XLK, SMH, and IGV generate false positives when the ETF is in a sustained downtrend. Adding an RF classifier trained on TA features (MACD, RSI, Stochastic, ROC) as a confirmation gate — only entering the IBS trade when RF predicts "up" — will improve win rate and Sharpe while reducing max drawdown.
+
+**Signal construction:**
+1. **IBS trigger** (existing H112): daily IBS < threshold AND prior-day gap ≤ threshold, per ETF. Entry at open next day, exit at close (same day or next).
+2. **RF confirmation gate** (new): at signal time, compute daily TA features on the triggering ETF:
+   - MACD (12/26/9): MACD line, signal line, histogram
+   - RSI (14-period)
+   - Stochastic %K/%D (14/3)
+   - ROC (10-period)
+3. RF classifier trained IS on: feature vector above → label = 1 if IBS trade day return > 0, else 0
+4. Entry only when both IBS trigger fires AND RF predicts label = 1 (probability ≥ 0.55 threshold)
+
+**Backtest design:**
+- Universe: XLK (20% weight), SMH (8%), IGV (2%) — same as H112 production
+- IS: 2013–2020 (train RF on IBS trade outcomes)
+- OOS: 2021–2026 (apply frozen RF to live IBS signals)
+- Confirm: OOS Sharpe > H112 baseline (H112 OOS Sharpe to be measured fresh; IBS baseline historically ~1.0–1.2)
+- Secondary: OOS win rate > H112 win rate (expected direction: fewer trades, higher quality)
+
+**Expected behavior:**
+- Fewer signals (RF rejects some IBS triggers): lower n_trades, higher precision
+- Per ZHAW paper: RF best at extreme-tail accuracy; IBS is a mean-reversion bet into a dip — exactly the scenario where direction accuracy matters most
+- Feature importance diagnostic: expect MACD histogram (trend direction) and RSI (oversold confirmation) to rank highest
+
+**Implementation notes:**
+- Script: `backtesting/daily/run_h235.py`
+- Reuse H112's IBS signal generation; wrap with scikit-learn `RandomForestClassifier(n_estimators=200, max_depth=5, random_state=42)`
+- Use `pandas-ta` for TA feature computation (or manual numpy implementation)
+- Walk-forward validation recommended: retrain RF every 12 months on expanding IS window to avoid stale model
+
+**Dependencies:** `backtesting/daily/run_h112.py` (IBS signal logic), scikit-learn, pandas-ta
+**Risk:** Medium — new script. Does not modify H112 production logic.
