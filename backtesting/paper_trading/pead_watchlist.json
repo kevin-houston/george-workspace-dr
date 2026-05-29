@@ -1,6 +1,14 @@
 {
-  "date": "2026-05-27",
+  "date": "2026-05-28",
   "candidates": [],
-  "scores": {},
-  "reason": "no earnings"
+  "scores": {
+    "MRVL": {
+      "score": -0.0315,
+      "surprise": null
+    },
+    "CRM": {
+      "score": -0.0654,
+      "surprise": null
+    }
+  }
 }

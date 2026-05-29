@@ -62,6 +62,18 @@
       "claimToken": "78d2070665292f6632565b35b1c37fe29df1bf92523c971ca8795fef154b2ab1",
       "claimUrl": "https://here.now/claim?slug=sunny-temple-x33t&token=78d2070665292f6632565b35b1c37fe29df1bf92523c971ca8795fef154b2ab1",
       "expiresAt": "2026-05-29T04:04:57.247Z"
+    },
+    "arctic-jetty-3bvx": {
+      "siteUrl": "https://arctic-jetty-3bvx.here.now/",
+      "claimToken": "4f71942b2b06f89ee22ecd544c1b3aee1b0d7bec04278de2bb07a27719e8ed4c",
+      "claimUrl": "https://here.now/claim?slug=arctic-jetty-3bvx&token=4f71942b2b06f89ee22ecd544c1b3aee1b0d7bec04278de2bb07a27719e8ed4c",
+      "expiresAt": "2026-05-29T09:02:47.458Z"
+    },
+    "plush-gable-qq9h": {
+      "siteUrl": "https://plush-gable-qq9h.here.now/",
+      "claimToken": "9b93ea6c023b506d3a573f4a73cbd83be04b91d024fbe00dc45ba5ee49656473",
+      "claimUrl": "https://here.now/claim?slug=plush-gable-qq9h&token=9b93ea6c023b506d3a573f4a73cbd83be04b91d024fbe00dc45ba5ee49656473",
+      "expiresAt": "2026-05-30T04:06:39.680Z"
     }
   }
 }

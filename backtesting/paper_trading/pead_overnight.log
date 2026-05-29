@@ -200,3 +200,19 @@
 [2026-05-27 23:01:24] Scanning earnings calendar…
 [2026-05-27 23:01:56]   Tickers with recent earnings: none
 [2026-05-27 23:01:56] No earnings tonight. Watchlist cleared.
+[2026-05-28 23:01:50] =======================================================
+[2026-05-28 23:01:50] PEAD overnight pass starting
+[2026-05-28 23:01:50] Scanning earnings calendar…
+[2026-05-28 23:02:22]   Tickers with recent earnings: ['MRVL', 'CRM']
+[2026-05-28 23:02:22]   Fetching 8-K for MRVL…
+[2026-05-28 23:02:29]     MRVL: 5053 chars
+[2026-05-28 23:02:29]   Fetching 8-K for CRM…
+[2026-05-28 23:02:31]     CRM: 4848 chars
+[2026-05-28 23:03:22]   Loading ProsusAI/finbert…
+[2026-05-28 23:03:45]   MRVL: score=-0.032  surprise=nan
+[2026-05-28 23:03:47]   CRM: score=-0.065  surprise=nan
+[2026-05-28 23:03:47]   ✗ MRVL filtered out (score=-0.032, surprise=None)
+[2026-05-28 23:03:47]   ✗ CRM filtered out (score=-0.065, surprise=None)
+[2026-05-28 23:03:47] Candidates for tomorrow: none
+[2026-05-28 23:03:47] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-05-28 23:03:47] Overnight pass complete.
