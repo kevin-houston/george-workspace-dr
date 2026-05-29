@@ -1,0 +1,73 @@
+{
+  "date": "2026-05-29",
+  "wiki_expansion": "3 pages created in AI Industry section: model-landscape-2026.md (frontier model comparison), agent-frameworks-2026.md (LangGraph/CrewAI/AutoGen ecosystem), ai-infrastructure-2026.md (GPU cloud providers and inference stack)",
+  "proposals_staged": 3,
+  "high_risk_items": 0,
+  "papers_reviewed": 9,
+  "summary": "Most interesting find: arXiv:2510.03195 'From Text to Alpha' — LLM-based 'moving targets' framework on consecutive 8-K disclosures achieves 2x risk-adjusted alpha over NER baseline, directly extensible to our H163/H174 EDGAR pipeline as H232 narrative-drift gate",
+  "papers_scanned": [
+    {
+      "id": "arXiv:2605.28853",
+      "title": "Financially Guided Deep Portfolio Optimization",
+      "relevance": "MEDIUM",
+      "staged": true,
+      "notes": "AttentionLSTM + differentiable Omega-CVaR-RiskParity; beats S&P 500 by 12.38pp in 2022-2023 bear market; wiki note addition to portfolio-optimization.md"
+    },
+    {
+      "id": "arXiv:2507.07107",
+      "title": "ML Enhanced Multi-Factor Quantitative Trading (Bias Correction)",
+      "relevance": "MEDIUM",
+      "staged": true,
+      "notes": "Adjusted-MSE sign-penalty loss (11x weight on wrong-direction predictions); mask-first design; directly applicable to H217/H228 alpha101 pipeline as H233"
+    },
+    {
+      "id": "arXiv:2510.03195",
+      "title": "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?",
+      "relevance": "HIGH",
+      "staged": true,
+      "notes": "Moving targets framework on consecutive 8-K embeddings; 2x alpha over NER baseline; extends H163/H174 EDGAR pipeline; proposed as H232"
+    },
+    {
+      "id": "arXiv:2605.29413",
+      "title": "From Classical Optimization to Bayesian Integration: A Comprehensive Analysis of Systematic Portfolio Management",
+      "relevance": "LOW",
+      "staged": false,
+      "notes": "10-stock universe; primarily pedagogical comparison of mean-variance/Black-Litterman; no novel signal"
+    },
+    {
+      "id": "arXiv:2601.07792",
+      "title": "Non-Convex Portfolio Optimization via Energy-Based Models (THRML)",
+      "relevance": "LOW",
+      "staged": false,
+      "notes": "Interesting GPU-based Boltzmann sampling for cardinality-constrained index tracking; 128% return vs 79% index on 100-stock S&P universe 2023-2025; but index-tracking framing misaligned with our alpha-seeking approach"
+    },
+    {
+      "id": "arXiv:2605.17111",
+      "title": "Symmetry-Aware Convex Shrinkage for High-Dimensional Covariance Estimation",
+      "relevance": "LOW",
+      "staged": false,
+      "notes": "Generalizes Ledoit-Wolf with symmetry-group-selected shrinkage targets; S&P 500 application; relevant to position sizing but primarily statistical methodology paper; no novel trading signal"
+    },
+    {
+      "id": "arXiv:2601.19504",
+      "title": "Generating Alpha: Hybrid AI-Driven Trading System with Regime-Adaptive Equity Strategies",
+      "relevance": "LOW",
+      "staged": false,
+      "notes": "Composite TA+ML+sentiment system; 135% return over 24 months in simulation; but no novel cross-sectional signal, regime detection approach already covered in wiki/trading/algorithms/regime-detection.md"
+    },
+    {
+      "id": "arXiv:2404.18470",
+      "title": "ECC Analyzer: Extract Trading Signal from Earnings Conference Calls using LLM",
+      "relevance": "LOW",
+      "staged": false,
+      "notes": "From 2024; LLM-based ECC analysis for volatility prediction; H168 (transcript coverage) NOT CONFIRMED so transcript-based signals deprioritized; H229 needs coverage gate first"
+    },
+    {
+      "id": "arXiv:2308.12212",
+      "title": "L2GMOM: Learning to Learn Financial Networks for Optimising Momentum Strategies",
+      "relevance": "LOW",
+      "staged": false,
+      "notes": "Network momentum via graph learning; interesting but requires L2 order book / pairwise economic ties data not in our current stack"
+    }
+  ]
+}
