@@ -5852,3 +5852,57 @@ OOS RESULTS: WR=55.3%, MeanRet=2.71%, n=38. Still NOT CONFIRMED. Score distribut
 h227_status: QUEUED (2026-05-26) — PEAD-LDA Hybrid: Add LDA topic decomposition (8-topic model from 8-K Item 2.02 corpus) alongside H174 FinBERT score. Hypothesis: stocks with high FinBERT score + positive surprise + dominant 'revenue growth / beat' topic > H174 WR=81.8%. Source: arXiv:2509.24254 Wu et al. ACM ICAIF 2025. Implementation: fit LDA on cached h163_8k_*.txt corpus; assign topic to each filing; add as filter. Run h227 only after H222-full (EDGAR XBRL) completes.
 
 h231_status: DESIGNED — AI-driven alpha decay signal weighting. arXiv:2605.23905 (May 2026): momentum half-lives compressed 84→12 months post-AI adoption; value 72→20 months. H230 NOT CONFIRMED (monthly rebalancing was already optimal). H231 tests signal-age discount: weight = exp(-age_months / halflife) applied to alpha101 lookback windows, halflife=12 months. Design: run_h231.py using H217 baseline (alpha101 OOS 1.559); test halflife in {6, 12, 18, 24} months; IS 2010-2019, OOS 2020-2026. Success gate: OOS Sharpe > 1.7 (>H217 baseline). Source: arXiv:2605.23905.
+
+## H232 — EDGAR Narrative Drift Gate (Moving Targets on 8-K Sequences)
+
+**Status:** DESIGN
+**Date queued:** 2026-05-29
+**Source:** arXiv:2510.03195 v5 (Choi, Kim et al., Mar 2026) — "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?"
+
+**Hypothesis:** A firm that significantly shifts its emphasized financial metrics between consecutive 8-K filings (high 'moving target' score) has stronger post-earnings drift than one whose disclosure language is static. Adding narrative drift as a third filter to H174's dual-filter (FinBERT>=0.18 AND surprise>=0.02) will improve OOS win rate and mean return.
+
+**Signal construction:**
+1. For each earnings event, retrieve the current 8-K AND the immediately preceding 8-K (same Item 2.02/press release) via EdgarTools
+2. Use an LLM (or sentence-transformer embeddings on FinBERT-extracted spans) to identify metric-focused textual spans in each filing
+3. Compute cosine distance between span embeddings across the two filings → 'metric shift score'
+4. Entry condition: H174 dual-filter passes AND metric_shift_score > threshold (calibrate on IS)
+
+**Implementation notes:**
+- EdgarTools already in PEAD pipeline; adding a prior-8-K retrieval is a one-line change
+- Sentence-transformers (e.g., `all-MiniLM-L6-v2`) are fast and free; or use OpenAI embeddings via OPENAI_API_KEY
+- Paper shows 2x risk-adjusted alpha vs NER baseline; our FinBERT baseline (H163/H174) is already strong, so incremental gain may be smaller but still meaningful
+- IS window: 2019-2022; OOS: 2023-2025 (align with H174 framework)
+
+**Dependencies:** H163/H174 pipeline (pead_overnight.py), EdgarTools, sentence-transformers
+**Risk:** Medium — new file (hypothesis scaffold), no changes to production pipeline
+
+## H233 — Alpha101 Cross-Sectional with Adjusted-MSE Sign-Penalty Loss
+
+**Status:** DESIGN
+**Date queued:** 2026-05-29
+**Source:** arXiv:2507.07107 v2 (Du, May 2026) — "ML Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction"
+
+**Hypothesis:** Replacing standard MSE loss with Adjusted-MSE (wrong-sign predictions penalized 11x more heavily) in our cross-sectional LightGBM/XGBoost alpha101 model (H217 base) improves directional accuracy and OOS Sharpe.
+
+**Signal construction:**
+- Base: H217's 40 OHLCV-buildable alpha101 signals on S&P 500 universe
+- Model: LightGBM with custom objective implementing Adjusted-MSE:
+  ```python
+  def adjusted_mse(y_pred, dtrain):
+      y_true = dtrain.get_label()
+      residual = y_pred - y_true
+      # Penalize wrong-sign predictions 11x
+      sign_wrong = (np.sign(y_pred) != np.sign(y_true)).astype(float)
+      weight = 1.0 + 10.0 * sign_wrong  # baseline 1, wrong-sign 11
+      grad = weight * residual
+      hess = weight
+      return grad, hess
+  ```
+- Same IS/OOS split as H217 (e.g., 2018-2022 IS, 2023-2025 OOS)
+- Confirm: H233 OOS Sharpe > H217's 1.559
+
+**Dependencies:** H217 codebase (`backtesting/daily/run_h217.py`), LightGBM custom objective API
+**Risk:** Medium — new script, no changes to confirmed strategies
+**Reference GitHub:** https://github.com/initial-d/ml-quant-trading (MIT license)
+
+**Secondary finding from paper:** Implement 'mask-first' tradability filter in our alpha101 pipeline to exclude stocks in halt/suspension at signal construction time. Low-overhead defensive improvement.

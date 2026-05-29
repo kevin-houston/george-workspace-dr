@@ -265,3 +265,40 @@ pip install pyportfolioopt riskfolio-lib skfolio cvxpy
 ```
 
 Note: Riskfolio-Lib v7+ uses Clarabel as default solver (replaces ECOS which was removed from CVXPY). No license needed.
+
+## Differentiable Financial Objectives (arXiv:2605.28853, May 2026)
+
+Paper: "Financially Guided Deep Portfolio Optimization" — Fernandes & Desell, submitted 16 May 2026.
+
+**Key idea:** Replace predict-then-optimize with end-to-end differentiable surrogate losses that directly optimize Sharpe, Omega, CVaR, and Risk Parity during model training. Neural network learns portfolio weights directly via backpropagation.
+
+**Best model:** AttentionLSTM + composite Omega-CVaR-RiskParity loss  
+OOS 2022-2023 (50 S&P 500 stocks, 2007-2023 IS):  
+- Sharpe: 0.29 (vs S&P 500: -0.02)  
+- Total return: +7.86% (vs S&P 500: -4.52%)  
+- Outperforms HRP, NCO, MVP, equal-weight in bear market period
+
+**Differentiable loss formulas (for reference):**
+
+Sharpe surrogate:  
+```python
+# Differentiable Sharpe (negative, for minimization)
+def neg_sharpe_loss(weights, returns_matrix):
+    port_returns = returns_matrix @ weights  # [T,]
+    return -(port_returns.mean() / (port_returns.std() + 1e-8))
+```
+
+CVaR surrogate (alpha=0.05):  
+```python
+def cvar_loss(weights, returns_matrix, alpha=0.05):
+    port_returns = returns_matrix @ weights
+    var = torch.quantile(port_returns, alpha)
+    return -torch.mean(port_returns[port_returns <= var])
+```
+
+**Application to our stack:**
+- Current H228 blend (H217+H181 at 50/50) uses fixed weights. Could substitute a walk-forward Omega-CVaR optimizer using Riskfolio-Lib's custom objective support.
+- The expanding-window walk-forward is the same framework used in our backtesting (15 IS folds, 8 OOS folds from 2007-2023).
+- **Prerequisite:** PyTorch installed (already in venv); sentence-transformers as proxy.
+
+**Related:** [Position Sizing & Portfolio Construction](../algorithms/position-sizing.md), H228 (current best blend)
