@@ -1,0 +1,174 @@
+{
+  "date": "2026-05-29",
+  "session": "nightly-trading-research (Phase 2 — second scan of the day; first scan at 00_scan_summary.json staged 3 proposals)",
+  "searches": [
+    {
+      "query": "arXiv 2025 2026 pairs trading cointegration LLM large language model pair selection",
+      "relevance": "low",
+      "findings": [
+        {
+          "title": "Pairs trading with time-series deep learning models",
+          "url": "https://www.sciencedirect.com/science/article/pii/S2405918826000024",
+          "relevance": "low",
+          "reason": "Pairs family exhausted (H152-H160, H200). Access blocked 403."
+        },
+        {
+          "title": "Deep learning-based pairs trading: real-time forecasting of co-integrated cryptocurrency pairs (Frontiers 2026)",
+          "url": "https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2026.1749337/full",
+          "relevance": "low",
+          "reason": "Crypto pairs, not US equities. Pairs family exhausted."
+        },
+        {
+          "title": "Cointegration-based pairs trading: identifying and exploiting similar ETFs (JASSMGT 2025)",
+          "url": "https://ideas.repec.org/a/pal/assmgt/v26y2025i5d10.1057_s41260-025-00416-0.html",
+          "relevance": "low",
+          "reason": "ETF pairs cointegration stability study — pairs family exhausted at both ETF and stock level."
+        }
+      ],
+      "staged": false
+    },
+    {
+      "query": "arXiv 2025 2026 PEAD post-earnings drift NLP FinBERT earnings transcript improved signal",
+      "relevance": "medium",
+      "findings": [
+        {
+          "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models (ACL FinNLP 2025)",
+          "url": "https://aclanthology.org/2025.finnlp-2.13.pdf",
+          "relevance": "medium",
+          "reason": "FinBERT achieves highest classification accuracy (57.6%/58.3%) for PEAD-relevant narratives. PDF could not be parsed."
+        },
+        {
+          "title": "Advanced Deep Learning Techniques for Analyzing Earnings Call Transcripts (arXiv:2503.01886)",
+          "url": "https://arxiv.org/abs/2503.01886",
+          "relevance": "low",
+          "reason": "BERT/FinBERT/ULMFiT comparison on transcripts. No quantitative trading results. Transcript approach deprioritized (H168 NOT CONFIRMED)."
+        },
+        {
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns (arXiv:2509.24254)",
+          "url": "https://arxiv.org/abs/2509.24254",
+          "relevance": "medium",
+          "reason": "138k+ press releases 2005-2023. Press release content as informative as EPS surprise. FinBERT best. Self-serving bias patterns in managerial language noted. This is effectively the H232 predecessor — already proposed in prior scan."
+        },
+        {
+          "title": "FinCall-Surprise: Large Scale Multi-modal Benchmark (arXiv:2510.03965)",
+          "url": "https://arxiv.org/abs/2510.03965",
+          "relevance": "low",
+          "reason": "2,688 calls 2019-2021, open-source. But multimodal audio/visual adds only marginal gains; H168 transcript approach NOT CONFIRMED, deprioritized."
+        },
+        {
+          "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning (arXiv:2605.25894)",
+          "url": "https://arxiv.org/abs/2605.25894",
+          "relevance": "low",
+          "reason": "Text+numerics multimodal. Transformer better macro F1 than LSTM. But no Sharpe/win-rate metrics, no comparison to FinBERT-only H174 baseline."
+        }
+      ],
+      "staged": false,
+      "note": "H232 (narrative drift gate) already staged from prior scan; H174/H163 approach remains strongest. Transcript signal remains deprioritized pending H229 (coverage gate)."
+    },
+    {
+      "query": "arXiv 2025 2026 cross-sectional momentum factor momentum machine learning alpha",
+      "relevance": "medium",
+      "findings": [
+        {
+          "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay (arXiv:2512.11913)",
+          "url": "https://arxiv.org/abs/2512.11913",
+          "relevance": "medium",
+          "reason": "WITHDRAWN for revision. Hyperbolic decay model: momentum R²=0.65; crowding-based selection Sharpe 0.22 vs 0.39 factor momentum benchmark. Key insight: crowding = crash indicator, not alpha source. Relevant context for H217/H231 (momentum half-life compression) but paper withdrawn — do not cite in production research."
+        },
+        {
+          "title": "Causal and Predictive Modeling Using Hybrid ML Ensembles (arXiv:2510.22348)",
+          "url": "https://arxiv.org/pdf/2510.22348",
+          "relevance": "low",
+          "reason": "Short-horizon Sharpe 2.51. Generic hybrid ensemble. No cross-sectional stock selection signal."
+        },
+        {
+          "title": "AI-Driven Alpha Decay: Algorithmic Homogenization (arXiv:2605.23905)",
+          "url": "https://arxiv.org/abs/2605.23905",
+          "relevance": "medium",
+          "reason": "Pre-AI half-lives 5-7yr → current 18mo at 70% AI adoption. Source of H231 context. H231 NOT CONFIRMED. Relevant as macro context — momentum signals decay 3-4x faster in AI era."
+        }
+      ],
+      "staged": false,
+      "note": "H231 (momentum half-life compression) already NOT CONFIRMED. Crowding context noted."
+    },
+    {
+      "query": "arXiv 2025 2026 multi-agent LLM trading system portfolio management autonomous",
+      "relevance": "medium",
+      "findings": [
+        {
+          "title": "Toward Expert Investment Teams: Multi-Agent LLM with Fine-Grained Tasks (arXiv:2602.23330)",
+          "url": "https://arxiv.org/abs/2602.23330",
+          "relevance": "low",
+          "reason": "Japanese equities only. Fine-grained task decomposition improves risk-adjusted returns. Not directly transferable to US equity cross-sectional without replication."
+        },
+        {
+          "title": "LLM-Powered Multi-Agent for Crypto Portfolio (arXiv:2501.00826)",
+          "url": "https://arxiv.org/abs/2501.00826",
+          "relevance": "low",
+          "reason": "Crypto focused. H209 (AlphaCrafter) already queued for multi-agent trading."
+        },
+        {
+          "title": "AlphaAgents: LLM-based Multi-Agents for Equity Portfolio (arXiv:2508.11152)",
+          "url": "https://arxiv.org/pdf/2508.11152",
+          "relevance": "low",
+          "reason": "Complementing human equity research via multi-agent debate. Interesting but less actionable than QuantaAlpha (open-source code available)."
+        }
+      ],
+      "staged": false
+    },
+    {
+      "query": "LLM alpha mining QuantaAlpha AlphaLogics FactorMAD cross-sectional factor discovery 2026",
+      "relevance": "high",
+      "findings": [
+        {
+          "title": "QuantaAlpha: Evolutionary LLM-Driven Alpha Mining (arXiv:2602.07085)",
+          "url": "https://arxiv.org/abs/2602.07085",
+          "relevance": "high",
+          "reason": "Open-source, MIT, 981 stars. IC=0.1501, Calmar=3.48 on CSI 300. S&P 500 transfer: ~19.1% cumulative excess return over 4yr. Immediately runnable with OPENAI_API_KEY. Proposes H236 (QuantaAlpha-driven factor mining on our 30/107-stock universe). GitHub: QuantaAlpha/QuantaAlpha.",
+          "staged": true
+        },
+        {
+          "title": "AlphaLogics: Market Logic-Driven Multi-Agent Alpha Generation (arXiv:2603.20247)",
+          "url": "https://arxiv.org/abs/2603.20247",
+          "relevance": "medium",
+          "reason": "Shows improvement on CSI 500 and S&P 500 vs baselines. Three-component system: market logic mining → factor generation → logic evolution. No open-source code confirmed. Less actionable than QuantaAlpha.",
+          "staged": false
+        },
+        {
+          "title": "FactorMAD: Multi-Agent Debate for Alpha Factor Mining (ACM ICAIF 2025)",
+          "url": "https://dl.acm.org/doi/10.1145/3768292.3770377",
+          "relevance": "low",
+          "reason": "Multi-agent debate for interpretable factors. No specific results found. QuantaAlpha (evolutionary approach) is more actionable."
+        }
+      ],
+      "staged": true,
+      "staged_proposal": "4_quantaalpha_llm_factor_mining.json"
+    },
+    {
+      "query": "arXiv technical analysis candlestick patterns machine learning 2025 chart patterns backtest",
+      "relevance": "medium",
+      "findings": [
+        {
+          "title": "Investigating Market Strength Prediction with CNNs on Candlestick Chart Images (arXiv:2501.12239)",
+          "url": "https://arxiv.org/abs/2501.12239",
+          "relevance": "medium",
+          "reason": "Visual candlestick CNN accuracy ~0.70; candlestick patterns alone don't improve over raw image. Used in Phase 1 wiki expansion (technical-analysis-patterns.md)."
+        },
+        {
+          "title": "Assessing the Impact of Technical Indicators on ML Models (arXiv:2412.15448)",
+          "url": "https://arxiv.org/abs/2412.15448",
+          "relevance": "medium",
+          "reason": "Price features dominate >60% importance; RSI+BB only 14-15%; RF on min-data severely overfits (R² 0.75 IS → negative OOS). Used in Phase 1 wiki expansion."
+        }
+      ],
+      "staged": false,
+      "note": "Used in Phase 1 wiki expansion — technical-analysis-patterns.md created"
+    }
+  ],
+  "proposals_staged_this_session": 1,
+  "total_proposals_staged_2026-05-29": 4,
+  "highest_relevance_finding": "QuantaAlpha (arXiv:2602.07085) — open-source evolutionary LLM alpha mining, immediately runnable with OPENAI_API_KEY, S&P 500 transfer results confirmed, 981 GitHub stars, MIT license. Proposed H236.",
+  "phase1_wiki_expansion": "technical-analysis-patterns.md new (H234 coiled-spring OOS 1.770, NR7/NR4 reference, TA-Lib vs pandas-ta-classic library guide, H233/H235 feature pipeline)",
+  "papers_reviewed": 18,
+  "notes": "Pairs family remains exhausted. Transcript signals remain deprioritized pending H229. Most actionable new finding is QuantaAlpha for autonomous factor discovery."
+}
