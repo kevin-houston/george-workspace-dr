@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-28 (ibs-mean-reversion.md new; dream cycle scan 2026-05-28)
+updated: 2026-05-29 (technical-analysis-patterns.md new; dream cycle scan 2026-05-29)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -36,6 +36,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Quality Factor (QMJ)](algorithms/quality-factor.md) ← new 2026-05-24 (Piotroski F-Score 9-criteria; Novy-Marx GP/Assets; AQR QMJ datasets; FMP API implementation; H221/H222 designs; BAB correlation ~0.4–0.6 = independent alpha)
   - [Market Microstructure & HFT](algorithms/market-microstructure.md) ← new 2026-05-25 (Microprice/Stoikov 2017; Avellaneda-Stoikov market making; not actionable without L2 order book data; future execution layer for intraday entries)
   - [IBS Mean-Reversion](algorithms/ibs-mean-reversion.md) ← new 2026-05-28 (Internal Bar Score strategy; PRODUCTION — XLK 20%/SMH 8%/IGV 2%; formula, per-ETF params, H062–H149 hypothesis log, arxiv:2306.12434)
+  - [Technical Analysis & Chart Patterns](algorithms/technical-analysis-patterns.md) ← new 2026-05-29 (H234 CONFIRMED inside-bar coiled-spring OOS 1.770 — strongest confirmed hypothesis; NR7/NR4 reference; TA-Lib vs pandas-ta-classic library guide; H233/H235 MACD+RSI+Stochastic+ROC feature pipeline; ZHAW arXiv:2208.07168 MACD 44% importance)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
@@ -70,7 +71,9 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Paper Trading](paper-trading/) — Alpaca results log
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
+  - [H181 Industry Reversal Alpaca](paper-trading/h181-alpaca.md) ← active (H181 live deployment log)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-29](research-log/2026-05-29.md) — wiki expansion: technical-analysis-patterns.md new (H234 coiled-spring OOS 1.770 strongest confirmed; TA-Lib vs pandas-ta-classic library guide; NR7/NR4 reference; MACD/RSI/Stochastic/ROC feature pipeline for H233/H235; ZHAW arXiv:2208.07168); dream cycle scan complete
   - [2026-05-28](research-log/2026-05-28.md) — wiki expansion: ibs-mean-reversion.md new (IBS formula, per-ETF production params XLK/SMH/IGV, H062–H149 log, arxiv:2306.12434); dream cycle scan complete
   - [2026-05-27](research-log/2026-05-27.md) — wiki expansion: nowcasting-playbook.md new (CPI/NFP/FOMC/PCE/GDP per-release workflow, Cleveland Fed + GDPNow sources, Brier tracking, H185 path); xang1234/stock-screener noted; dream cycle scan complete
   - [2026-05-26](research-log/2026-05-26.md) — wiki expansion: multiple-testing.md new; QuhiQuhihi/regime_model noted in regime-detection.md; H217–H226 logged (backlog); H228 DESIGNED+RUN+CONFIRMED (blend alpha101+reversal OOS 1.572); dream cycle complete
