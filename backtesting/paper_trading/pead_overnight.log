@@ -216,3 +216,27 @@
 [2026-05-28 23:03:47] Candidates for tomorrow: none
 [2026-05-28 23:03:47] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-05-28 23:03:47] Overnight pass complete.
+[2026-05-29 23:01:18] =======================================================
+[2026-05-29 23:01:18] PEAD overnight pass starting
+[2026-05-29 23:01:18] Scanning earnings calendar…
+[2026-05-29 23:01:46]   Tickers with recent earnings: ['COST', 'MRVL', 'CRM', 'DELL']
+[2026-05-29 23:01:46]   Fetching 8-K for COST…
+[2026-05-29 23:01:56]     COST: 3740 chars
+[2026-05-29 23:01:56]   Fetching 8-K for MRVL…
+[2026-05-29 23:01:58]     MRVL: 5053 chars
+[2026-05-29 23:01:58]   Fetching 8-K for CRM…
+[2026-05-29 23:02:00]     CRM: 4848 chars
+[2026-05-29 23:02:00]   Fetching 8-K for DELL…
+[2026-05-29 23:02:01]     DELL: 5438 chars
+[2026-05-29 23:02:49]   Loading ProsusAI/finbert…
+[2026-05-29 23:03:36]   COST: score=-0.014  surprise=nan
+[2026-05-29 23:03:37]   MRVL: score=-0.032  surprise=nan
+[2026-05-29 23:03:38]   CRM: score=-0.065  surprise=nan
+[2026-05-29 23:03:39]   DELL: score=-0.039  surprise=nan
+[2026-05-29 23:03:39]   ✗ COST filtered out (score=-0.014, surprise=None)
+[2026-05-29 23:03:39]   ✗ MRVL filtered out (score=-0.032, surprise=None)
+[2026-05-29 23:03:39]   ✗ CRM filtered out (score=-0.065, surprise=None)
+[2026-05-29 23:03:39]   ✗ DELL filtered out (score=-0.040, surprise=None)
+[2026-05-29 23:03:39] Candidates for tomorrow: none
+[2026-05-29 23:03:39] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-05-29 23:03:39] Overnight pass complete.

@@ -74,6 +74,12 @@
       "claimToken": "9b93ea6c023b506d3a573f4a73cbd83be04b91d024fbe00dc45ba5ee49656473",
       "claimUrl": "https://here.now/claim?slug=plush-gable-qq9h&token=9b93ea6c023b506d3a573f4a73cbd83be04b91d024fbe00dc45ba5ee49656473",
       "expiresAt": "2026-05-30T04:06:39.680Z"
+    },
+    "marine-harbor-q93e": {
+      "siteUrl": "https://marine-harbor-q93e.here.now/",
+      "claimToken": "1f2b95373423a5518833961ec160ba879f559b13f37e51f3e6b4e177c2d34388",
+      "claimUrl": "https://here.now/claim?slug=marine-harbor-q93e&token=1f2b95373423a5518833961ec160ba879f559b13f37e51f3e6b4e177c2d34388",
+      "expiresAt": "2026-05-30T09:03:32.311Z"
     }
   }
 }

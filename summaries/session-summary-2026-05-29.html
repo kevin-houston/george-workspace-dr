@@ -77,7 +77,7 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
     <div>
       <div class="header-title">Session Summary &mdash; 2026-05-29</div>
     </div>
-    <div class="header-sub">Generated 2026-05-28 23:06 CT</div>
+    <div class="header-sub">Generated 2026-05-29 04:03 CT</div>
   </div>
   <div class="main">
     
@@ -87,7 +87,7 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
       <div class="kpi"><div class="kpi-label">Flagged</div>
         <div class="kpi-value muted">0</div></div>
       <div class="kpi"><div class="kpi-label">Commits</div>
-        <div class="kpi-value blue">0</div></div>
+        <div class="kpi-value blue">4</div></div>
       <div class="kpi"><div class="kpi-label">Podcast</div>
         <div class="kpi-value muted">—</div></div>
     </div>
@@ -97,15 +97,51 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
         <span class="card-title">Dream Cycle</span>
         <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
       </div>
-      <div class="card-body"><p class="empty">No dream cycle data for this date.</p></div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title"></span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--yellow)">pending</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures? (arXiv:2510.03195, v5 Mar 2026)</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Directly extends our H163/H174 EDGAR 8-K pipeline. H163/H174 score a single 8-K with FinBERT to generate a static sentiment score. This paper proposes measuring 'moving targets' — how much a firm shifts its emphasized metrics between consecutive disclosures — using LLM extraction + embedding similar…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/backtesting/hypothesis-log.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">ML Enhanced Multi-Factor Quantitative Trading: Bias Correction and Adjusted-MSE Loss (arXiv:2507.07107 v2, May 2026)</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Two findings directly applicable to our H217/H228 alpha101 cross-sectional pipeline. First: 'Adjusted-MSE' loss, which penalizes wrong-sign return predictions 11x more heavily than magnitude errors. Our current H217 (median alpha101) and H228 (H217+H181 blend) use standard cross-sectional ranking wi…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/backtesting/hypothesis-log.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Financially Guided Deep Portfolio Optimization — AttentionLSTM + Differentiable Financial Objectives (arXiv:2605.28853, May 2026)</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Relevant to our portfolio construction and blending work (wiki/trading/algorithms/position-sizing.md, wiki/trading/tools/portfolio-optimization.md). The paper proposes end-to-end differentiable surrogate losses for Sharpe, Omega ratio, CVaR, and Risk Parity — allowing neural networks to directly lea…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/tools/portfolio-optimization.md</div>
+            </div></div>
     </div>
     
     <div class="card">
       <div class="card-header">
         <span class="card-title">Commits</span>
-        <span class="card-badge">0 today</span>
+        <span class="card-badge">4 today</span>
       </div>
-      <div class="card-body"><p class="empty">No commits today.</p></div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">f485530</span><span class="commit-msg">dream cycle: apply 2026-05-29 staged proposals (H232, H233)</span></div><div class="commit"><span class="commit-hash">f70bbd5</span><span class="commit-msg">dream cycle: 2026-05-29 scan — narrative drift gate H232, sign-penalty loss H233</span></div><div class="commit"><span class="commit-hash">0dbcd22</span><span class="commit-msg">wiki: AI industry expansion — agent frameworks, model landscape</span></div><div class="commit"><span class="commit-hash">5868f79</span><span class="commit-msg">nightly backup 2026-05-29</span></div></div>
     </div>
     
     
