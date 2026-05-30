@@ -568,3 +568,51 @@ Native `/council` slash command installs to Claude Code: `./install.sh` from rep
 - **Portfolio allocation decisions**: before live deployment, Full mode across a position sizing / strategy blend question
 - **H-queue prioritization**: Duo mode (Aristotle + Feynman) for "should we run H222-full before H227?" type trade-off calls
 - **Practical note**: 3-round Full mode with 18 personas is expensive — reserve for decisions where the stakes justify it; use Duo or Quick for routine judgment calls
+
+## QuantaAlpha — Evolutionary LLM Alpha Factor Mining (arXiv:2602.07085, Feb 2026)
+
+**GitHub:** https://github.com/QuantaAlpha/QuantaAlpha (981 stars, MIT, actively maintained)  
+**Paper:** arXiv:2602.07085 — "QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining"  
+**Authors:** Prof. Liwen Zhang et al., Shanghai University of Finance and Economics  
+
+### What it does
+Automates alpha factor discovery by combining LLM code generation with evolutionary strategies:
+1. LLM proposes new factor expressions from a research direction prompt
+2. Each run is a "trajectory" — the system identifies low-reward steps and applies mutation/crossover
+3. Semantic consistency is enforced between hypothesis, factor code, and backtest result
+4. Complexity constraints prevent crowded/redundant factors
+
+### Results
+| Metric | CSI 300 (with GPT-5.2) | S&P 500 (transfer) |
+|--------|------------------------|---------------------|
+| IC | 0.1501 | — |
+| ARR | 27.75% | ~19.1% cumulative excess return over 4yr |
+| MDD | 7.98% | — |
+| Calmar | 3.48 | — |
+
+### Installation (our environment)
+```bash
+git clone https://github.com/QuantaAlpha/QuantaAlpha.git
+conda create -n quantaalpha python=3.10 && conda activate quantaalpha
+SETUPTOOLS_SCM_PRETEND_VERSION=0.1.0 pip install -e .
+pip install -r requirements.txt
+
+# Download Qlib data (~500MB)
+huggingface-cli download QuantaAlpha/qlib_csi300 --repo-type dataset
+
+# Run with our API key
+export OPENAI_API_KEY=$OPENAI_API_KEY
+./run.sh "Cross-sectional OHLCV price efficiency signals for US large-cap equities"
+```
+
+### H236 design
+Proposed hypothesis: Run QuantaAlpha on our 30-stock (or 107-stock H234 universe) for 3 evolutionary iterations. Evaluate IC and OOS Sharpe vs H217 baseline (1.559). Use `CHAT_MODEL=gpt-4o` (cost-efficient).
+- **Confirm threshold:** OOS Sharpe > 1.6 (beat H217) OR IC > 0.08 on US large-cap
+- **Script:** `backtesting/daily/run_h236.py`
+- **Prerequisites:** Qlib data download, conda environment setup
+- **Cost estimate:** ~$2-5 in OpenAI API credits per mining run (3 iterations)
+
+### Comparison to H209 (AlphaCrafter)
+AlphaCrafter (arXiv:2605.05580, queued H209) is a similar LLM alpha mining framework but focused on end-to-end portfolio construction. QuantaAlpha is narrower (factor expression only) and has cleaner open-source implementation. Run QuantaAlpha first since it requires less infrastructure.
+
+**Related:** [Factor Models & Cross-Sectional Alpha](../algorithms/factor-models.md), [WorldQuant 101 Alphas](../algorithms/alpha101-overlap.md), H217 (current best cross-sectional), H209 (AlphaCrafter, queued)
