@@ -1,0 +1,127 @@
+{
+  "hypothesis": "H235",
+  "confirmed": "False",
+  "rf_gated_is": {
+    "label": "IBS Pure IS",
+    "n": 215,
+    "sharpe": 1.435,
+    "cagr": 0.1541,
+    "maxdd": -0.2181,
+    "neg_yrs": 2
+  },
+  "rf_gated_oos": {
+    "label": "IBS RF-gated OOS",
+    "n": 63,
+    "sharpe": 1.958,
+    "cagr": 0.218,
+    "maxdd": -0.1067,
+    "neg_yrs": 0
+  },
+  "pure_ibs_oos": {
+    "label": "IBS Pure OOS",
+    "n": 63,
+    "sharpe": 2.129,
+    "cagr": 0.226,
+    "maxdd": -0.0513,
+    "neg_yrs": 0
+  },
+  "full_period_ibs_is": {
+    "label": "IBS Full IS",
+    "n": 96,
+    "sharpe": 2.084,
+    "cagr": 0.1939,
+    "maxdd": -0.0895,
+    "neg_yrs": 0
+  },
+  "full_period_ibs_oos": {
+    "label": "IBS Full OOS",
+    "n": 64,
+    "sharpe": 2.056,
+    "cagr": 0.2185,
+    "maxdd": -0.0513,
+    "neg_yrs": 0
+  },
+  "baseline_sharpe": 2.129,
+  "feature_importance": [
+    [
+      "stoch_k",
+      0.1718040494875243
+    ],
+    [
+      "rsi",
+      0.15159800095221126
+    ],
+    [
+      "stoch_d",
+      0.14781678150585897
+    ],
+    [
+      "roc",
+      0.14768226181514696
+    ],
+    [
+      "signal_line",
+      0.13156964659210765
+    ],
+    [
+      "macd_line",
+      0.12706944431639358
+    ],
+    [
+      "macd_hist",
+      0.12245981533075728
+    ]
+  ],
+  "rf_accuracy_is": 0.7132,
+  "rf_prob_threshold": 0.55,
+  "per_etf": {
+    "XLK": {
+      "oos_pure_trades": {
+        "n_trades": 117,
+        "win_rate": 0.6923,
+        "mean_ret": 0.0091,
+        "median_ret": 0.0113
+      },
+      "oos_rf_trades": {
+        "n_trades": 115,
+        "win_rate": 0.687,
+        "mean_ret": 0.0095,
+        "median_ret": 0.0118
+      },
+      "rf_accepted": 112,
+      "rf_rejected": 6
+    },
+    "SMH": {
+      "oos_pure_trades": {
+        "n_trades": 134,
+        "win_rate": 0.6642,
+        "mean_ret": 0.0091,
+        "median_ret": 0.0121
+      },
+      "oos_rf_trades": {
+        "n_trades": 121,
+        "win_rate": 0.6612,
+        "mean_ret": 0.0086,
+        "median_ret": 0.0142
+      },
+      "rf_accepted": 118,
+      "rf_rejected": 21
+    },
+    "IGV": {
+      "oos_pure_trades": {
+        "n_trades": 131,
+        "win_rate": 0.6718,
+        "mean_ret": 0.0073,
+        "median_ret": 0.0099
+      },
+      "oos_rf_trades": {
+        "n_trades": 125,
+        "win_rate": 0.664,
+        "mean_ret": 0.0071,
+        "median_ret": 0.0095
+      },
+      "rf_accepted": 122,
+      "rf_rejected": 7
+    }
+  }
+}
