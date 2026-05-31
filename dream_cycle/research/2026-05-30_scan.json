@@ -1,0 +1,125 @@
+{
+  "date": "2026-05-30",
+  "scan_angles": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "papers_found": [
+    {
+      "id": "arxiv:2511.12490",
+      "title": "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability",
+      "authors": "Mainak Singha",
+      "date": "2025-11-16",
+      "relevance_score": 9,
+      "angle": "cross-sectional momentum",
+      "staged": true,
+      "stage_file": "1_h237_drift_regime_reversal.json",
+      "notes": "Drift regime = >60% positive days in trailing 63-day window. S&P 500, 2004-2024, 20-year walk-forward, OOS Sharpe >13. Combines value + short-term reversal conditional on drift regime. Directly actionable as H237 variant of H221 with better drift definition. H221 used declining volume which gave only 3.6/30 eligible stocks; this definition should give ~8-15 eligible stocks per month."
+    },
+    {
+      "id": "arxiv:2602.00080",
+      "title": "The GT-Score: A Robust Objective Function for Reducing Overfitting in Data-Driven Trading Strategies",
+      "authors": "Alexander Sheppert",
+      "date": "2026-01-22",
+      "relevance_score": 8,
+      "angle": "backtesting methodology",
+      "staged": true,
+      "stage_file": "2_gt_score_backtesting_wiki.json",
+      "notes": "Composite objective combining performance + significance + consistency + downside risk. 98% improvement in generalization ratio vs Sharpe optimization. 50 S&P 500 stocks 2010-2024, 9 sequential time splits, 15 random seeds, p<0.01. Applicable to our parameter search in H202-XL, blend ratio selection."
+    },
+    {
+      "id": "arxiv:2502.16789",
+      "title": "AlphaAgent: LLM-Driven Alpha Mining with Regularized Exploration to Counteract Alpha Decay",
+      "authors": "Ziyi Tang et al.",
+      "date": "2025-06-09",
+      "relevance_score": 7,
+      "angle": "multi-agent LLM trading",
+      "staged": true,
+      "stage_file": "3_alphabot_lllm_mining_wiki.json",
+      "notes": "Anti-crowding via AST similarity. CSI 500 + S&P 500. GitHub: github.com/RndmVariableQ/AlphaAgent. Key addition: reproducibility audit from arXiv:2605.19337 (15/19 studies R0, no transaction costs) bundled as critical caveat."
+    },
+    {
+      "id": "arxiv:2512.11913",
+      "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay",
+      "authors": "unknown",
+      "date": "2025-12",
+      "relevance_score": 7,
+      "angle": "cross-sectional momentum",
+      "staged": true,
+      "stage_file": "4_factor_crowding_wiki.json",
+      "notes": "Crowded reversal = 1.7-1.8x crash risk. Crowded momentum = 0.38x crash risk (safer). Hyperbolic decay R^2=0.65. Post-2015 acceleration from ETF growth. Factor momentum Sharpe 0.39. Direct risk flag for H181 (reversal) as crowding signal."
+    },
+    {
+      "id": "arxiv:2605.19337",
+      "title": "Agentic Trading: When LLM Agents Meet Financial Markets",
+      "authors": "Yihan Xia et al.",
+      "date": "2026-05-19",
+      "relevance_score": 6,
+      "angle": "multi-agent LLM trading",
+      "staged": false,
+      "notes": "Systematic review of 77 studies. Reproducibility crisis: 15/19 R0, only 2/19 valid time-consistent splits. Bundled into proposal 3 as caveat. Not a standalone proposal."
+    },
+    {
+      "id": "arxiv:2605.25894",
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "authors": "Noseda, Soldati, Paina",
+      "date": "2026-05-25",
+      "relevance_score": 5,
+      "angle": "PEAD text signals",
+      "staged": false,
+      "notes": "FinBERT + fundamentals + price features, Transformer model. Confirms FinBERT benefit for earnings day prediction. No new data source or specific Sharpe numbers. Does not advance beyond H174's confirmed approach."
+    },
+    {
+      "id": "arxiv:2512.19484",
+      "title": "Structured Event Representation and Stock Return Predictability",
+      "authors": "Gang Li, Dandan Qiao, Mingxuan Zheng",
+      "date": "2025-12-22",
+      "relevance_score": 5,
+      "angle": "PEAD text signals",
+      "staged": false,
+      "notes": "LLM-extracted event features from news for cross-sectional prediction. Cross-sectional, not event-driven PEAD. No earnings-specific focus. No Sharpe numbers in abstract."
+    },
+    {
+      "id": "arxiv:2602.07085",
+      "title": "QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining",
+      "authors": "Jun Han et al.",
+      "date": "2026-02-06",
+      "relevance_score": 6,
+      "angle": "multi-agent LLM trading",
+      "staged": false,
+      "notes": "IC=0.1501, ARR 27.75% on CSI 300. S&P 500 ~19.1% cumulative excess over 4 years. ~995 GitHub stars. Primarily Chinese equities. Similar to H209 AlphaCrafter, bundled into AlphaAgent wiki update as comparison."
+    },
+    {
+      "id": "arxiv:2605.23905",
+      "title": "AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets",
+      "authors": "unknown",
+      "date": "2026-05",
+      "relevance_score": 5,
+      "angle": "cross-sectional momentum",
+      "staged": false,
+      "notes": "Signal half-life 84->12 months post-AI adoption. H231 already tested this and found it doesn't apply to alpha101 intraday signals. Bundled into factor crowding wiki update as context."
+    },
+    {
+      "id": "pairs-trading-llm-scan",
+      "title": "No new LLM+pairs papers found (angle 1)",
+      "authors": "",
+      "date": "2026-05-30",
+      "relevance_score": 0,
+      "angle": "pairs trading LLM",
+      "staged": false,
+      "notes": "Searched arXiv for pairs+LLM+cointegration 2025-2026. No matching papers. Most recent is arXiv:2412.12555 (pairs parameter optimization, Dec 2024, no LLM). Pairs family exhausted at daily frequency — no proposals."
+    }
+  ],
+  "proposals_staged": 4,
+  "staged_files": [
+    "1_h237_drift_regime_reversal.json",
+    "2_gt_score_backtesting_wiki.json",
+    "3_alphabot_lllm_mining_wiki.json",
+    "4_factor_crowding_wiki.json"
+  ],
+  "wiki_expanded": "paper-trading/live-graduation-criteria.md",
+  "wiki_section": "Paper Trading (thinnest: 3 pages, all deployment logs, no methodology)"
+}
