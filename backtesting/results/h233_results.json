@@ -1,0 +1,103 @@
+{
+  "hypothesis": "H233",
+  "confirm_threshold": 1.559,
+  "confirmed": false,
+  "adj_mse_is": {
+    "label": "H233 Adjusted-MSE",
+    "n": 96,
+    "sharpe": 5.514,
+    "cagr": 1.168,
+    "cumul": 6438.706,
+    "maxdd": -0.023,
+    "neg_yrs": 0
+  },
+  "adj_mse_oos": {
+    "label": "H233 Adjusted-MSE",
+    "n": 64,
+    "sharpe": 1.367,
+    "cagr": 0.23,
+    "cumul": 3.1349,
+    "maxdd": -0.118,
+    "neg_yrs": 0
+  },
+  "std_mse_is": {
+    "label": "H233 Standard-MSE",
+    "n": 96,
+    "sharpe": 4.977,
+    "cagr": 1.141,
+    "cumul": 5172.4396,
+    "maxdd": -0.026,
+    "neg_yrs": 0
+  },
+  "std_mse_oos": {
+    "label": "H233 Standard-MSE",
+    "n": 64,
+    "sharpe": 1.052,
+    "cagr": 0.195,
+    "cumul": 2.5651,
+    "maxdd": -0.172,
+    "neg_yrs": 2
+  },
+  "h217_is": {
+    "label": "H217 alpha101 baseline",
+    "n": 96,
+    "sharpe": 1.613,
+    "cagr": 0.262,
+    "cumul": 7.2034,
+    "maxdd": -0.144,
+    "neg_yrs": 1
+  },
+  "h217_oos": {
+    "label": "H217 alpha101 baseline",
+    "n": 64,
+    "sharpe": 1.559,
+    "cagr": 0.272,
+    "cumul": 3.8853,
+    "maxdd": -0.252,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "label": "SPY B&H",
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "cumul": 2.0444,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "corr_adj_vs_h217": 0.595,
+  "feature_importance": [
+    [
+      "roc",
+      52.953935105353594
+    ],
+    [
+      "rsi",
+      41.02375143393874
+    ],
+    [
+      "macd_hist",
+      40.43809824809432
+    ],
+    [
+      "stoch_k",
+      39.39918525889516
+    ],
+    [
+      "macd_line",
+      39.00000595068559
+    ],
+    [
+      "stoch_d",
+      32.57872893102467
+    ],
+    [
+      "alpha101",
+      29.97511671623215
+    ],
+    [
+      "signal_line",
+      26.564625994302332
+    ]
+  ]
+}
