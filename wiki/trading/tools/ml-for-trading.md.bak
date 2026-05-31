@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-10
+updated: 2026-05-26
 type: tool-guide
 status: active — H167 FLAGGED; H176 QUEUED; H171 QUEUED
 ---
@@ -402,3 +402,169 @@ Output: pooled representation → linear score
 - Baseline: H188 (Sharpe 1.07), target H195 > 1.2
 
 **Complexity note**: Requires PyTorch (~2 days to implement cleanly). Approved for immediate build (Kevin, 2026-05-13).
+
+
+---
+
+## MASFIN: Multi-Agent Debate Framework for Financial Decision-Making
+
+**Source**: arXiv:2512.21878 (Dec 2024). "MASFIN: A Multi-Agent System for Financial Investment."
+
+### Architecture
+
+MASFIN coordinates 4 specialized agents in a structured debate before each trading decision:
+
+```
+Input: stock + catalyst (earnings, news, etc.)
+
+→ Bull Analyst Agent: generates positive thesis + supporting evidence
+→ Bear Analyst Agent: generates counter-thesis + risk factors  
+→ Risk Manager Agent: stress-tests both theses against historical analogs
+→ Portfolio Allocator Agent: sizes position given thesis strength + risk budget
+```
+
+Each agent has access to:
+- Relevant news/8-K text (via RAG over recent filings)
+- Historical price context (52-week range, recent volatility)
+- Sector comparables (how similar stocks reacted to similar catalysts)
+
+### Benchmark Results vs. Single-Agent Baseline
+
+| Metric | Single LLM | MASFIN (debate) | Improvement |
+|--------|-----------|-----------------|-------------|
+| OOS Sharpe | 0.71 | 0.94 | +32% |
+| Max Drawdown | -28.3% | -19.5% | −31% |
+| Win rate | 52% | 58% | +6pp |
+| Avg position hold | 4.2 days | 3.8 days | shorter |
+
+The drawdown improvement is the headline finding — the bear analyst consistently catches "fake" earnings beats where positive surprise is priced in or driven by one-time items.
+
+### Application Pattern for H174 (PEAD Pipeline)
+
+The MASFIN debate pattern could be added as a pre-filter layer before the H174 PEAD score triggers an OPG order:
+
+1. **Existing pipeline**: 8-K detected → FinBERT scores sentiment → if score > threshold → place OPG order
+2. **MASFIN upgrade**: 8-K detected → FinBERT scores → if score > threshold → **run bull/bear debate** → reduce position size if bear wins → place order
+
+This is a `high` risk change to existing live pipeline — do not apply without Kevin review. File as future upgrade path.
+
+### Implementation Note
+
+MASFIN agents communicate via structured JSON (thesis: str, evidence: List[str], confidence: 0.0-1.0). A lightweight implementation using GPT-4o-mini (cost-effective for short financial texts) with 2 agents (bull + skeptic) rather than 4 would capture ~80% of the drawdown benefit at lower API cost.
+
+## Multi-agent LLM with fine-grained task decomposition (arXiv:2602.23330, Feb 2026)
+
+**Authors**: Miyazaki, Kawahara, Roberts, Zohren
+
+Key finding: decomposing trading analysis into fine-grained specialist agents (separate agents for fundamental analysis, sentiment, technical analysis, risk management) significantly outperforms coarse-grained multi-agent designs. Critical driver is alignment between agent output format and downstream decision-maker's input expectations.
+
+- Tested on Japanese equities with prices, financials, news, macro data
+- Portfolio construction exploits low correlation with index + cross-agent variance
+- Implication for our pipeline: adding a fine-grained LLM overlay *above* confirmed quant signals (H026, BAB, MOM) rather than replacing them could yield compounding alpha. H202+ territory.
+
+Companion paper arXiv:2412.20138 (TradingAgents) shows ≥23.21% cumulative return, 24.90% annual return, +6.1% vs best baseline on three stocks using Bull/Bear researcher agents + risk management team.
+
+---
+
+## H202-XL: Gradient Boosting on Large Universe (200–500 stocks) — 2025–2026 Support
+
+Three 2025–2026 papers collectively support expanding H202 XGBoost momentum from 30 to 200+ stocks.
+
+**arXiv:2507.07107 (Du 2025)** — ML multi-factor cross-sectional on 500–1000 Chinese A-shares using gradient boosting + bias correction + cross-sectional neutralization: annualized return 20%, Sharpe >2.0. Key techniques: tensor-accelerated factor computation and geometric Brownian motion data augmentation to compensate for limited in-sample periods. Relevant to H202-XL: sector-neutral cross-sectional ranking is essential on large universes.
+
+**arXiv:2511.12129 (Yang et al., Nov 2025)** — practical ML stock recommendation on S&P 500 top-20% selection using gradient boosted regression (among 5 methods), outperforming buy-and-hold on Sharpe and cumulative returns. Confirms gradient boosting is competitive vs linear methods on large universes (500 stocks).
+
+**arXiv:2602.00196 (Rasekhschaffe, Jan 2026)** — Generative AI with gradient-boosted tabular models delivers Sharpe 1.14–1.63 on US equities. Critical finding: **cross-sectional standardization is essential** — equity prediction is fundamentally about relative stock positioning, not absolute values. Implementation: use `df.groupby("date")["feature"].rank(pct=True)` per-feature, per-date.
+
+**H202-XL design implications** (staged 2026-05-18):
+- Expand from 30-stock to 200-stock S&P 500 midcap-filtered universe (yfinance)
+- Add cross-sectional rank normalization per Rasekhschaffe 2026
+- Run sector-neutral version (rank within GICS, per Du 2025 neutralization)
+- Test with and without bias-correction term
+- H202 30-stock showed XGBoost +0.104 Sharpe OOS vs simple rank; larger universe should yield substantially more signal
+- Queue H202-XL after H205 results are confirmed
+
+---
+
+## QuantaAlpha — Evolutionary LLM Alpha Mining (arXiv:2602.07085, 2026)
+
+**Source**: arxiv.org/abs/2602.07085
+
+LLM-driven closed-loop alpha factor discovery using evolutionary optimization. Each mining iteration is a trajectory; underperforming steps are localized and revised through "trajectory-level mutation and crossover" while maintaining semantic consistency between hypothesis, factor expression, and executable code.
+
+**Results (CSI 300 universe, backtested)**:
+- Information Coefficient (IC): **0.0472**
+- Annual Return Rate: **4.68%**  
+- Maximum Drawdown: **11.8%**
+- Transfer to CSI 500: **40.28% cumulative excess** over 4 years
+- Transfer to S&P 500: **19.1% cumulative excess** over 4 years
+
+**Relevance**: Factors mined on one market transfer to others — suggests the discovered alphas are structural, not overfitted. CSI 300/500 results are Chinese market; S&P 500 transfer is the key proof of generality. The IC of 0.0472 is very strong (typical good factors: 0.02–0.04).
+
+**Connection to our pipeline**: QuantaAlpha automates what we do manually in the dream cycle — scan for hypotheses, generate code, evaluate, iterate. The evolutionary approach applied to our 30-stock universe with our confirmed signal types (alpha101, reversal, momentum) could discover novel factor combinations. H209 (AlphaCrafter) is the closest analog in our queue.
+
+---
+
+## QuantEvolve — Multi-Agent Evolutionary Strategy Discovery (arXiv:2510.18569, 2025)
+
+**Source**: arxiv.org/abs/2510.18569 (oral, ACM ICAIF 2025)
+
+Combines quality-diversity optimization with hypothesis-driven multi-agent strategy generation. Maintains a feature map aligned with investor preferences (strategy type, risk profile, turnover, return characteristics) to ensure diverse coverage of the strategy space.
+
+**Key innovation**: "Quality-diversity" means the framework doesn't just find the best strategy — it finds a *diverse set of good strategies* that cover different return profiles, correlations, and risk characteristics. Directly useful for portfolio construction (we want H181+H192+H198+H217 to be uncorrelated — quality-diversity optimization formalizes this).
+
+**Relevance**: The quality-diversity framing matches our portfolio construction goal exactly. When adding H221/H222 to the portfolio, we care about both performance AND low correlation with existing strategies. QuantEvolve's approach would explicitly optimize for this.
+
+## 2026 multi-agent LLM frameworks
+
+### TradingAgents (UCLA/MIT, 2025)
+- GitHub: https://github.com/TauricResearch/TradingAgents
+- 7 specialized agent roles: fundamental analyst, sentiment expert, technical analyst, trader, risk manager (+ research debate layer)
+- Outperformed 5 rule-based baselines by 6–25% cumulative return on 3-month backtest (Jan–Mar 2024, US tech stocks)
+- Caveat: 3-month backtest is too short to be conclusive — treat as proof-of-concept framework
+
+### Fine-Grained Task Decomposition (Miyazaki & Kawahara, Feb 2026)
+- arXiv:2602.23330 — tested on Japanese stocks with price, financials, news, macro data
+- Key finding: fine-grained task decomposition (explicit sub-tasks per agent) >> coarse-grained instructions
+- **Critical insight:** alignment between intermediate agent analytical outputs and downstream portfolio manager preferences drives performance — not just the final signal
+- Portfolio optimization exploiting low cross-agent correlation achieves further gains
+- Design principle for any multi-agent overlay: decompose to concrete measurable tasks, not abstract mandates
+
+---
+
+## Council of High Intelligence (0xNyk, 2025)
+
+**GitHub**: https://github.com/0xNyk/council-of-high-intelligence — 787 stars, 81 forks | **License**: CC0
+
+Shell-based multi-agent deliberation framework using 18 AI personas with structured debate mechanics. Designed for decisions that benefit from adversarial stress-testing and diverse analytical lenses.
+
+### Personas
+18 archetypes across philosophy, science, and finance: Aristotle, Socrates, Confucius, Feynman, Turing, Shannon, Kahneman, Taleb, Karpathy, Sutskever, Nakamoto, Hamilton, and others. Each persona has a fixed reasoning style (e.g. Kahneman = dual-system bias lens, Taleb = tail-risk / fragility focus).
+
+### Modes
+| Mode | Rounds | Members | Use case |
+|------|--------|---------|----------|
+| Full | 3 rounds | All 18 | High-stakes decisions requiring max coverage |
+| Quick | 2 rounds | All 18 | Standard analysis |
+| Duo | 2 rounds | 2 chosen | Rapid dialectic on a specific tension |
+
+### Anti-groupthink mechanics
+- **Dissent quotas**: minimum number of personas must disagree with the emerging consensus each round
+- **Novelty gates**: contributions that merely rephrase prior points are filtered out
+- **Anti-recursion**: prevents circular reasoning loops
+- **Verdict leads with uncertainties**: final output explicitly names what the council doesn't know
+
+### Multi-provider routing
+Auto-routes across Claude, OpenAI, Gemini, Ollama, NVIDIA NIM based on availability and task type. Allows mixing local (Ollama) and API-based models per session.
+
+### 20 pre-built domain triads
+Curated 3-persona subsets optimized for specific domains: `architecture`, `ai-safety`, `financial-analysis`, `risk-assessment`, `strategy`, etc. Triads select complementary reasoning styles rather than random sampling.
+
+### Claude Code integration
+Native `/council` slash command installs to Claude Code: `./install.sh` from repo root. Invoked as `/council [question]` directly in a Claude Code session — no context-switching needed.
+
+### Relevance to trading workflow
+- **Hypothesis stress-testing**: run a council session before committing a new hypothesis to the queue — Taleb will probe tail risks, Kahneman will surface cognitive biases in the backtest design, Shannon will check information-theoretic assumptions
+- **Portfolio allocation decisions**: before live deployment, Full mode across a position sizing / strategy blend question
+- **H-queue prioritization**: Duo mode (Aristotle + Feynman) for "should we run H222-full before H227?" type trade-off calls
+- **Practical note**: 3-round Full mode with 18 personas is expensive — reserve for decisions where the stakes justify it; use Duo or Quick for routine judgment calls

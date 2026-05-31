@@ -1,5 +1,5 @@
 # Daily AI Insights — May 29, 2026
-## "A Trillion-Dollar Wake-Up Call"
+## "Robots Never Sleep"
 
 **Runtime:** ~13 minutes
 **Hosts:** Alex (male), Jordan (female)
@@ -10,170 +10,134 @@
 
 **Alex:** Good morning and welcome to Daily AI Insights. I'm Alex.
 
-**Jordan:** And I'm Jordan. It is Thursday, May 29, 2026, and this is one of those mornings where you open the news and just stop.
+**Jordan:** And I'm Jordan. It is Thursday, May 29, 2026, and today's show is fundamentally about whether AI has crossed a threshold — from impressive demos to things that are actually replacing human labor, human judgment, and human governance.
 
-**Alex:** Yeah. Anthropic — five years old, never publicly traded — just raised sixty-five billion dollars in a single round. That puts the company's valuation at nine hundred and sixty-five billion dollars. Just shy of a trillion.
+**Alex:** We have four stories that each touch that question from a different angle. Humanoid robots that just ran nonstop for over two hundred hours in a real warehouse. Anthropic's surprise flagship model drop — Opus 4.8 — with a new feature that could fundamentally change how large codebases get built. The benchmark arms race between OpenAI and Anthropic, and what those numbers do and don't tell us. And the EU's AI Act, now on a collision course with an August deadline, while Washington takes a very different path.
 
-**Jordan:** And in the same breath, they shipped a new flagship model. Claude Opus 4.8. Released yesterday, the same day the funding closed. That's not an accident.
-
-**Alex:** So today we have four stories pulling at each other in interesting ways. The Anthropic mega-round. What Opus 4.8 actually does that matters to builders. A stunning policy reversal in Washington that almost nobody saw coming. And the EU quietly rewriting its own AI rulebook. Let's get into it.
+**Jordan:** Let's start with the robots, because honestly, this one deserves a moment.
 
 ---
 
-## SEGMENT 1: Anthropic Dethrones OpenAI
+## SEGMENT 1 — Figure AI's 200-Hour Run
 
-**Alex:** So let's start with the numbers because they are genuinely extraordinary. Anthropic's Series H — that's their eighth major funding round — closed yesterday at sixty-five billion dollars. Lead investors are Altimeter Capital, Dragoneer, Greenoaks, and Sequoia. And the round includes fifteen billion in previously committed hyperscaler money, including five billion from Amazon.
+**Alex:** So Figure AI — the humanoid robotics startup — just wrapped a 200-hour continuous livestreamed operation at their Sunnyvale headquarters. Three of their Figure 03 robots, which the internet promptly named Bob, Jim, and Rose, sorted and processed nearly 250,000 packages without a single mechanical failure or system crash.
 
-**Jordan:** That Amazon piece matters because it's not just a check — Amazon Web Services has been Anthropic's core cloud partner for over a year. So some of this round is formalizing a relationship that was already structural.
+**Jordan:** Let's put that in perspective. Two hundred hours is more than eight days of continuous operation. And the throughput was roughly 1,250 packages per hour, which works out to about three seconds per package. That is human-parity speed.
 
-**Alex:** Right, it's not purely new money. But the valuation is genuinely new. Nine hundred and sixty-five billion post-money. That surpasses OpenAI, which was last valued at eight hundred and fifty-two billion in March after a one hundred and twenty-two billion fundraise.
+**Alex:** The technology behind it is what I keep coming back to. The robots run on something called Helix-02, which Figure describes as a unified neural network handling vision, touch sensing, balance, and whole-body coordination — all in a single model. Traditional industrial automation does each of those with separate subsystems. This is one model doing all of it.
 
-**Jordan:** And what's fueling that? Revenue. Anthropic said its revenue run rate crossed forty-seven billion dollars earlier this month. Up from thirty billion earlier this year. Up from ten billion in all of 2025.
+**Jordan:** And Figure had a clever solution to the battery problem. Each robot has roughly a four-hour battery life, so they built autonomous fleet rotation into the system. When one robot's charge ran low, another automatically walked over to replace it while the depleted robot walked to a wireless charging dock. The charging hardware is built into the feet.
 
-**Alex:** That is not normal growth. That is a company whose product is hitting a genuine inflection point in enterprise adoption. Claude is being embedded into workflows at scale — legal, finance, software development, scientific research.
+**Alex:** No human intervention. The whole thing ran itself.
 
-**Jordan:** And the IPO signal is loud. TechCrunch is calling this Anthropic's "final private fundraise before a highly anticipated IPO." At a nine hundred and sixty-five billion dollar private valuation, the public market question is whether there's room left to run.
+**Jordan:** Now, I want to be fair here — the demo was at Figure's own facility, not a third-party logistics center. And observers noted occasional handling errors: dropped packages, wrong orientations. But no catastrophic failures across eight-plus days. That is genuinely new.
 
-**Alex:** Multiple analysts have argued yes — pointing to the revenue trajectory and the bet that frontier AI compounds. Forbes ran a piece this week headlined, quote, "Anthropic Valued at One Trillion Could Actually Be a Bargain," which — I mean, we'll see.
+**Alex:** And it's arriving in a competitive field. Tesla's Optimus, Agility Robotics, Apptronik — they're all racing toward this same capability. What Figure just demonstrated is hardware durability at a scale that matters for real commercial deployment. You can't sell a warehouse robot that needs to come offline every shift.
 
-**Jordan:** What I find analytically interesting is the speed. Anthropic was at three hundred and eighty billion in February. It's now at nine hundred and sixty-five billion in May. That's a more than two-and-a-half-times jump in under four months.
+**Jordan:** The original challenge, by the way, came from an industrial automation veteran named Dr. Scott Walter, who issued Figure an eight-hour endurance test. They ran it for two hundred. That's a hell of a counterpunch.
 
-**Alex:** Which tells you this isn't driven purely by financial modeling. There's a strategic competition premium baked in — investors don't want to miss this if it becomes the platform that runs enterprise AI.
-
-**Jordan:** And simultaneously, the company ships Opus 4.8. Which brings us to segment two.
+**Alex:** The question now is whether Figure can replicate this in a customer facility, with real-world floor conditions, and at the density a logistics operation would actually need. But as a proof of sustained autonomous labor? This is the clearest demonstration yet.
 
 ---
 
-## SEGMENT 2: Claude Opus 4.8 — What Actually Changed
+## SEGMENT 2 — Anthropic Opus 4.8 and Dynamic Workflows
 
-**Jordan:** So, Opus 4.8 launched yesterday alongside the funding announcement. Same price as Opus 4.7 — five dollars per million input tokens, twenty-five per million output. So this is a straight upgrade in capability for existing users.
+**Alex:** Okay, from robots to models. Anthropic dropped Claude Opus 4.8 yesterday — May 28th — just 41 days after releasing Opus 4.7. That pace is fast, even by current standards, and multiple sources confirm it was driven in part by lukewarm reception to 4.7 and competitive pressure from OpenAI's Codex platform.
 
-**Alex:** And the benchmark jumps are real. On SWE-bench Verified — the industry's standard coding agent benchmark — Opus 4.8 scores 88.6 percent. Opus 4.7 was at roughly 85 percent. That's a meaningful delta on a benchmark that's already saturating.
+**Jordan:** The headline feature is something called Dynamic Workflows, currently in research preview. And this is genuinely worth unpacking, because it's not just "Claude is smarter now."
 
-**Jordan:** There's also Terminal-Bench 2.1, which is a newer benchmark for long-horizon command-line tasks. Opus 4.8 scores 74.6 percent there. And on GDPval-AA, a conversational quality rating, it sits at 1890 Elo.
+**Alex:** Right. Dynamic Workflows lets Claude Code — Anthropic's developer tool — plan a complex task and then spin up hundreds of parallel subagents to execute it simultaneously, checking and verifying outputs before reporting back. The stated use case is codebase-scale migrations across hundreds of thousands of lines of code, from kickoff to merge, using the existing test suite as the bar.
 
-**Alex:** But the features that developers are going to actually feel in their workflows are the two new additions: Effort Control and Dynamic Workflows. Let's take them in order.
+**Jordan:** That is a fundamentally different mode of operation. You're not asking Claude to write a function or debug a block. You're handing it an entire migration project and watching it manage a fleet of specialized agents to complete it.
 
-**Jordan:** Effort Control gives users a slider, basically, over how hard Claude tries. The default is "high effort," which uses comparable tokens to Opus 4.7. But there's a new "Fast mode" that runs at two-and-a-half times the speed at roughly one-third the cost. And then at the other end, there's "Max effort" for tasks where you really want the model to push.
+**Alex:** And the reliability improvements matter here. Anthropic specifically called out that Opus 4.8 is more likely to flag uncertainties about its work and less likely to make unsupported claims. Bridgewater Associates — the hedge fund — actually gave a testimonial saying the model proactively flags issues with inputs and outputs that competitors leave for users to find themselves.
 
-**Alex:** That's a meaningful product decision. Most models give you one dial — temperature, maybe — and you hope for the best. Anthropic is saying: tell us what level of cognitive work you need, and we'll calibrate accordingly.
+**Jordan:** The pricing is unchanged from Opus 4.7, which is notable given the capability jump. There's also a fast mode that now runs at two-and-a-half times the speed for three times cheaper than it was on the previous model.
 
-**Jordan:** The analogy I keep thinking of is like choosing between a quick reply and a carefully drafted response. Your email client doesn't make that choice for you.
+**Alex:** One thing Anthropic teased that they didn't fully ship: their next model, internally called Mythos, is expected in the coming weeks once safety work is finalized. That's the model that's been in preparation for several months and is reportedly a step-change above Opus 4.8.
 
-**Alex:** Now Dynamic Workflows — this is the one that's more builder-facing. In Claude Code, Anthropic's coding agent environment, Opus 4.8 can now spin up parallel sub-agents and orchestrate them within a single task. So instead of one agent sequentially reading files, writing tests, and debugging, you can have multiple agents working different parts of the problem simultaneously.
+**Jordan:** So 4.8 is partly a competitive response and partly a bridge to something bigger. What's interesting to me from a developer perspective is that Dynamic Workflows is essentially multi-agent orchestration built into the platform itself. Developers have been building that kind of coordination layer themselves — now Anthropic is just giving it to you.
 
-**Jordan:** Which is what the highest-value coding tasks actually look like. Large refactors, end-to-end feature builds — these aren't linear. The human developer mental model isn't linear either.
+**Alex:** Which raises a question: if the AI platform is handling orchestration, what does that mean for the tools developers have been building on top of models? There's a recurring pattern here — capabilities that were hard and custom six months ago become defaults.
 
-**Alex:** There's also a new mid-task system message capability on the Messages API — developers can inject instructions into a running conversation. That's significant for building responsive agentic pipelines where the task requirements change.
-
-**Jordan:** And Anthropic specifically called out honesty improvements, which is a subtle but important signal. The model is apparently more resistant to being steered toward incorrect confident answers. In agentic contexts, that matters a lot — a model that knows when it doesn't know avoids cascading errors.
-
-**Alex:** Okay. From the products to the politics.
+**Jordan:** That's the treadmill. And it's moving faster than ever.
 
 ---
 
-## SEGMENT 3: Washington's Stunning AI Policy Reversal
+## SEGMENT 3 — The Benchmark Wars: What the Numbers Mean
 
-**Alex:** This is the story I almost can't believe we're reporting. In December 2025, the Trump administration had the most deliberately hands-off AI policy of any major government in the world. Six months later, they're drafting what multiple outlets are describing as an FDA-style pre-release review system for advanced AI models.
+**Alex:** Let's talk about the benchmark picture, because there have been some significant numbers moving around this week and it's worth being precise about what they do and don't show.
 
-**Jordan:** Let's be precise about what's been reported and what hasn't. The New York Times first reported on May 4th that the White House is discussing an executive order that would create an AI working group and a formal government review process for new AI models before public release. Importantly: not a blocking veto, but a mandatory review with government first-look access.
+**Jordan:** So the flashpoint is the DeepSWE leaderboard — a coding benchmark that tests models on real software engineering tasks. GPT-5.5, which OpenAI released in April and made ChatGPT's default on May 5th, scored 70 percent. That's a 14-point lead over GPT-5.4 at 56 percent, and Claude Opus 4.7 at 54 percent.
 
-**Alex:** Kevin Hassett, the Director of the National Economic Council, went on Fox Business on May 6th and explicitly invoked drug regulation language when describing the proposal. That framing — FDA for AI models — is Washington trial-balloon vocabulary.
+**Alex:** Now, GPT-5.5 is a genuinely capable model. On Terminal-Bench 2.0, which tests agentic computer operation, it scores 82.7 percent to Claude's 69.4 percent. On long-context recall — the MRCR benchmark at 512K to 1 million tokens — GPT-5.5 is at 74 percent, while Claude is at 32.2 percent. Those are big gaps.
 
-**Jordan:** The trigger appears to be Anthropic's Mythos model. Mythos Preview testing surfaced nearly 3,900 high or critical severity vulnerabilities in open source code alone. The capability overhang spooked people in the national security and policy world.
+**Jordan:** But the picture isn't one-directional. On SWE-Bench Pro, the real-world software engineering benchmark, Claude Opus 4.7 actually leads at 64.3 percent versus GPT-5.5's 58.6 percent. And on Humanity's Last Exam — which tests deep reasoning without tool assistance — Claude leads at 46.9 percent to GPT-5.5's 41.4 percent.
 
-**Alex:** And that's where the reversal logic makes sense. The laissez-faire position was sustainable when the models weren't doing anything that fundamentally changed the risk calculus. Mythos changed that calculus.
+**Alex:** So the honest summary is: GPT-5.5 is better at agentic computer operation and long-context tasks. Claude is better at reasoning-intensive coding and certain research tasks. They're good at different things.
 
-**Jordan:** Now — and this is important — by May 7th, Politico was reporting that senior White House officials were walking back industry concerns, saying the administration wasn't committed to mandatory review. So there's still significant internal disagreement.
+**Jordan:** There's also a reliability issue worth flagging. The research team behind DeepSWE found a 32 percent error rate in prior verifications on SWE-Bench Pro — meaning a significant portion of claimed benchmark scores in this category were not properly validated. The leaderboard numbers should be held loosely.
 
-**Alex:** The tech industry reaction has been predictably cautious. Multiple lobbying groups warned that mandatory pre-release vetting could slow product cycles and put US developers at a disadvantage against Chinese rivals who operate without those constraints.
+**Alex:** And then there's the pricing reality check. GPT-5.5 runs five dollars per million input tokens and thirty dollars per million output tokens. That's double the cost of GPT-5.4. So the performance gains come at a real cost for teams running production workloads.
 
-**Jordan:** That's the real tension. If you require a three-month government review and China doesn't, you hand competitive advantage to a geopolitical adversary. But if you don't review and a model enables catastrophic misuse, you have a different kind of crisis.
+**Jordan:** What I think matters most for builders is not which model tops a leaderboard this week — it's that both of these are now capable of complex multi-step agentic workflows, and the evaluation methodology is still catching up to what the models can actually do.
 
-**Alex:** What this signals, regardless of how the executive order shakes out, is that the frontier capability conversation has crossed a threshold where even a free-market administration feels it can't stay silent. That's a structural shift.
+**Alex:** There's an interesting meta-point here: the benchmarks that mattered two years ago — MMLU, HumanEval — are basically saturated. The field is scrambling to define what "better" even means at this capability level.
 
-**Jordan:** And it's happening simultaneously with Europe doing something almost opposite — actually loosening timelines.
+**Jordan:** And meanwhile both labs are on six-week release cycles. Whatever number we're looking at today is probably outdated by July.
 
 ---
 
-## SEGMENT 4: The EU AI Act Blinks
+## SEGMENT 4 — The Regulatory Fork in the Road
 
-**Jordan:** On May 7th — the same day White House officials were quietly distancing themselves from the pre-release vetting proposal — EU institutions finalized a major amendment to the AI Act. And the headline is: they extended the deadlines.
+**Alex:** The final story is the one that's going to shape everything else for the next decade, and it's less visible than a robot running for two hundred hours or a new benchmark score. The EU and the US are now on genuinely divergent paths when it comes to AI regulation.
 
-**Alex:** The AI Act was billed as the world's most comprehensive AI regulation when it passed in June 2024. It had hard deadlines baked in. May 7th's omnibus amendment pushed the most consequential of those deadlines significantly further out.
+**Jordan:** Let's start with the EU, because they have a concrete deadline. The AI Act — which passed in 2024 — becomes fully applicable on August 2nd of this year. That's about two months away. It's the world's first comprehensive AI regulatory framework: risk-tiered, with prohibited practices, high-risk categories requiring conformity assessments, and transparency rules for general-purpose models.
 
-**Jordan:** Specifically: obligations for high-risk AI systems covered under Annex III — that's things like biometric identification, critical infrastructure, employment screening — now apply from December 2nd, 2027, instead of 2025. And Annex I, covering AI embedded in other regulated products, shifts to August 2028.
+**Alex:** And something significant happened this week. The EU reached a political agreement on May 7th — just three weeks ago — on what's being called the AI Omnibus, a package that reinforces the AI Office's powers and centralizes oversight of general-purpose AI models. The timing matters: they're strengthening the enforcement architecture right as the law kicks in.
 
-**Alex:** There's also a watermarking deadline for AI-generated content that moved to December 2026. The EU added one new prohibition: non-consensual intimate content generation. But the overall direction of the amendment is relief for businesses that were running up against compliance deadlines.
+**Jordan:** US companies doing business in Europe need to be paying attention. The compliance deadline applies to products in the EU market, regardless of where the company is headquartered.
 
-**Jordan:** Multiple law firms that cover EU tech policy described the change as "timeline relief and targeted simplification." Wilson Sonsini called it "significant implications for AI companies operating in the EU."
+**Alex:** Now contrast that with the US. On March 20th, the White House released a National Policy Framework for AI — but it's a set of legislative recommendations, not binding law. The US approach has been state-by-state, sector-by-sector, and deliberately innovation-permissive. There's no federal AI law, and there's no current political path to one.
 
-**Alex:** What's interesting about the timing is that the EU moved this direction right as Washington is considering tightening. You'd expect it to be the other way around based on reputation — Brussels as the regulator, DC as the permissive one.
+**Jordan:** Bird & Bird published an analysis this week specifically on the divergence. The framing that struck me: the global AI regulatory landscape is not converging. It is splitting.
 
-**Jordan:** The explanation is probably practical rather than ideological. Companies were genuinely struggling to operationalize the high-risk AI rules by the original deadlines. The technical infrastructure for compliance — documentation, conformity assessments, human oversight requirements — wasn't ready at scale.
+**Alex:** Which creates a practical problem for any company building AI products. If you want to sell in Europe, you're under the AI Act. If you're in the US market, you're under a patchwork of state laws and sector-specific guidance. If you're in China, AI experts now need government approval for international travel — which is a form of talent control that's structurally different from either Western approach.
 
-**Alex:** There's also a competitiveness argument. Europe has been watching US and Chinese AI companies accelerate, and some member states pushed hard for breathing room.
+**Jordan:** That China development came out earlier this week and got less coverage than it deserved. Private-sector AI researchers, not just state employees, now require government sign-off to travel internationally. That's a significant tightening of the information border around Chinese AI development.
 
-**Jordan:** Now, the one place where the EU did tighten is the new prohibition on non-consensual intimate image generation. That went in, not out. Which tells you something about where political will actually exists — not on the complex enterprise risk governance questions, but on the clear-cut harms that voters understand.
+**Alex:** So you have three major regulatory postures emerging simultaneously: the EU's comprehensive rights-based framework, the US's fragmented market-led approach, and China's state-control model. Every company building in this space is navigating all three at once.
 
-**Alex:** It's easier to legislate against something concrete and outrageous than against abstract risk categories.
+**Jordan:** And the August deadline for the EU AI Act means this isn't theoretical. It's now. Companies that haven't done their AI Act compliance work are running out of runway.
 
-**Jordan:** Exactly. And the broader governance moment here is that both Washington and Brussels are essentially admitting that the frameworks they had — or were planning — need revision in light of how fast the technology moved.
-
-**Alex:** Which is itself a data point about the pace of this field.
+**Alex:** The policy analysts I trust most on this say the real challenge isn't the rules themselves — it's that the enforcement capacity at the EU AI Office is still being built. But the legal obligations exist regardless of whether enforcement is robust on day one.
 
 ---
 
 ## OUTRO
 
-**Jordan:** Let's bring it back to the thirty-thousand-foot view. Because today's stories are actually connected in a way that matters.
+**Jordan:** So that's four ways the threshold question is showing up this week. Robots sustaining eight days of autonomous labor. AI coordinating fleets of subagents to migrate codebases. Models that are hard to rank against each other because they're each world-class at different things. And regulation that is now actively sorting the world into different regimes.
 
-**Alex:** Anthropic raises sixty-five billion, nears a trillion-dollar valuation, ships Opus 4.8 with parallel agents and effort control. The same company's Mythos Preview model scanning thousands of software vulnerabilities is what triggered a policy debate in Washington. And Brussels is loosening timelines partly because the technology moved faster than governments could write rules.
+**Alex:** If you're a developer, the most actionable thing from today's show is probably the Dynamic Workflows announcement from Anthropic — that changes what's possible in automated engineering pipelines right now. If you're in enterprise leadership, the EU AI Act deadline in August is not a future problem.
 
-**Jordan:** The common thread is velocity. The rate of change in AI capabilities is now fast enough that it's outrunning the governance frameworks that were designed to contain it — and even the financial assumptions that were supposed to price it.
+**Jordan:** And if you work in a warehouse, maybe think about how to get good at the parts of the job that Bob, Jim, and Rose are still dropping packages on.
 
-**Alex:** For developers: the Opus 4.8 Effort Control and Dynamic Workflows are worth examining this week. The 2.5x fast mode at one-third cost is a real cost structure change for high-volume production workloads. And parallel sub-agents in Claude Code is a preview of how coding pipelines are going to look in eighteen months.
+**Alex:** Thanks for listening to Daily AI Insights. We'll be back tomorrow.
 
-**Jordan:** For people watching the policy space: the FDA-style AI vetting proposal is not law, it's not an executive order, it's not even confirmed as administration policy. But the fact that it's being floated at all tells you the frontier capability conversation has entered a new phase.
-
-**Alex:** And for anyone tracking the competitive landscape: Anthropic surpassing OpenAI in private valuation is a storyline that would have seemed implausible two years ago. It's now a fact. That competition is going to intensify.
-
-**Jordan:** That's Daily AI Insights for Thursday, May 29th. Thanks for listening. We'll be back tomorrow morning.
-
-**Alex:** See you then.
+**Jordan:** Stay curious.
 
 ---
 
 ## SOURCES
 
-1. **Anthropic $65B Series H / $965B valuation**
-   - https://www.cnbc.com/2026/05/28/anthropic-open-ai-startup-value.html
-   - https://www.axios.com/2026/05/28/anthropic-ai-fundraising-openai
-   - https://techcrunch.com/2026/05/28/anthropic-raises-65-billion-nears-1t-valuation-ahead-of-ipo/
-   - https://www.bloomberg.com/news/articles/2026-05-28/anthropic-raises-at-965-billion-valuation-eclipsing-openai
-   - https://techstartups.com/2026/05/28/anthropic-becomes-the-worlds-most-valuable-ai-startup-nears-1-trillion-valuation-and-surpasses-openai/
-   - https://www.euronews.com/business/2026/05/29/worlds-most-valuable-ai-start-up-anthropic-nears-1tn-valuation-overtaking-openai
-
-2. **Claude Opus 4.8**
-   - https://www.anthropic.com/news/claude-opus-4-8
-   - https://llm-stats.com/blog/research/claude-opus-4-8-launch
-   - https://computingforgeeks.com/claude-opus-4-8-released-features-benchmarks/
-   - https://www.testingcatalog.com/anthropic-launches-claude-opus-4-8-and-new-effort-selector/
-   - https://www.digitalapplied.com/blog/claude-opus-4-8-release-dynamic-workflows-2026
-   - https://9to5mac.com/2026/05/28/anthropic-upgrades-claude-with-new-opus-4-8-model-heres-whats-new/
-
-3. **US FDA-style AI pre-release vetting proposal**
-   - https://www.nytimes.com/2026/05/04/technology/trump-ai-models.html
-   - https://nerdleveltech.com/trump-fda-style-ai-executive-order-mythos-reversal
-   - https://techbytes.app/posts/white-house-ai-model-vetting-executive-order/
-   - https://www.politico.com/news/2026/05/07/white-house-ai-oversight-00910837
-   - https://aiclaudius.com/article/white-house-mandatory-ai-pre-release-reviews-may-2026
-   - https://medium.com/@macplanet2012/it-took-one-ai-model-one-week-to-reverse-the-most-hands-off-tech-policy-in-the-world-5cbf92fdd503
-
-4. **EU AI Act omnibus amendment**
-   - https://verifywise.ai/blog/eu-ai-act-omnibus-what-changed
-   - https://quantamixsolutions.com/insights/eu-ai-act-omnibus-amendment-2026-may-07/
-   - https://www.wsgr.com/en/insights/eu-ai-act-undergoes-significant-changes.html
-   - https://www.lw.com/en/insights/ai-act-update-eu-resolves-to-change-rules-and-extend-deadlines
-   - https://www.insideprivacy.com/artificial-intelligence/eu-ai-act-update-timeline-relief-targeted-simplification-and-new-prohibitions/
-   - https://ai.plainenglish.io/the-eu-ai-act-just-blinked-and-what-that-tells-us-about-the-future-of-ai-governance-7296071d45f2
+- Figure AI 200-hour robot run: https://interestingengineering.com/ai-robotics/figure-03-humanoid-robot-200-hour-shift
+- Figure AI (MSN/original): https://www.msn.com/en-us/news/technology/watch-figure-s-humanoid-robots-work-for-200-hours-process-250k-packages-without-failure/ar-AA241ef9
+- Anthropic Opus 4.8 release: https://techcrunch.com/2026/05/28/anthropic-releases-opus-4-8-with-new-dynamic-workflow-tool/
+- Anthropic official announcement: https://www.anthropic.com/news/claude-opus-4-8
+- VentureBeat on Opus 4.8: https://venturebeat.com/technology/anthropics-claude-opus-4-8-is-here-with-3x-cheaper-fast-mode-and-near-mythos-level-alignment
+- GPT-5.5 benchmarks: https://www.buildfastwithai.com/blogs/gpt-5-5-review-benchmarks-2026
+- GPT-5.5 (BenchLM): https://benchlm.ai/models/gpt-5-5
+- EU AI Act compliance: https://www.hklaw.com/en/insights/publications/2026/04/us-companies-face-eu-ai-acts-possible-august-2026-compliance-deadline
+- US-EU regulatory divergence: https://www.twobirds.com/en/insights/2026/comparing-us-and-eu-ai-legislation-divergent-regulatory-approaches-and-practical-governance-implicat
+- AI regulation global outlook: https://theaiforest.com/ai-regulation-news-2026-us-eu-global-updates/
+- May 29 AI news recap: https://www.neuralbuddies.com/p/ai-news-recap-may-29-2026

@@ -80,6 +80,12 @@
       "claimToken": "1f2b95373423a5518833961ec160ba879f559b13f37e51f3e6b4e177c2d34388",
       "claimUrl": "https://here.now/claim?slug=marine-harbor-q93e&token=1f2b95373423a5518833961ec160ba879f559b13f37e51f3e6b4e177c2d34388",
       "expiresAt": "2026-05-30T09:03:32.311Z"
+    },
+    "summit-fennel-9r8c": {
+      "siteUrl": "https://summit-fennel-9r8c.here.now/",
+      "claimToken": "b3385b752897c18233160a7c5ca69b42f91e14853924f7413e750381ba0ce106",
+      "claimUrl": "https://here.now/claim?slug=summit-fennel-9r8c&token=b3385b752897c18233160a7c5ca69b42f91e14853924f7413e750381ba0ce106",
+      "expiresAt": "2026-05-31T09:03:05.836Z"
     }
   }
 }
