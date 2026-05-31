@@ -616,3 +616,40 @@ Proposed hypothesis: Run QuantaAlpha on our 30-stock (or 107-stock H234 universe
 AlphaCrafter (arXiv:2605.05580, queued H209) is a similar LLM alpha mining framework but focused on end-to-end portfolio construction. QuantaAlpha is narrower (factor expression only) and has cleaner open-source implementation. Run QuantaAlpha first since it requires less infrastructure.
 
 **Related:** [Factor Models & Cross-Sectional Alpha](../algorithms/factor-models.md), [WorldQuant 101 Alphas](../algorithms/alpha101-overlap.md), H217 (current best cross-sectional), H209 (AlphaCrafter, queued)
+
+
+---
+
+## AlphaAgent: LLM Alpha Mining with Anti-Crowding Regularization (2025)
+
+**Source:** arXiv:2502.16789 — Tang et al. (Jun 2025). "AlphaAgent: LLM-Driven Alpha Mining with Regularized Exploration to Counteract Alpha Decay."
+**GitHub:** https://github.com/RndmVariableQ/AlphaAgent
+
+AlphaAgent extends LLM-driven factor discovery with explicit mechanisms to prevent discovering crowded or overfitted alphas:
+
+| Regularization | How it works |
+|---------------|-------------|
+| Originality enforcement | AST (abstract syntax tree) similarity check against existing alpha library — new factors must differ structurally |
+| Hypothesis-factor alignment | LLM evaluates semantic consistency between investment hypothesis and generated factor code |
+| Complexity control | AST structural constraints cap factor expression depth/branching |
+
+**Results:** Tested on CSI 500 and S&P 500 over 4 years. Claims "consistently delivering significant alpha" vs baseline. Provides better resistance to alpha decay than unconstrained LLM mining.
+
+**vs QuantaAlpha (arXiv:2602.07085):** QuantaAlpha uses evolutionary trajectory mutation/crossover; AlphaAgent uses regularized exploration. AlphaAgent's AST similarity check is more rigorous at preventing duplicate signals. QuantaAlpha has stronger benchmark results (IC=0.1501 on CSI 300 with GPT-5.2).
+
+**Practical note for our pipeline:** Both frameworks primarily target Chinese A-shares (CSI 300/500) with larger universes (500+ stocks). For H202-XL (200-stock US expansion), AlphaAgent's originality enforcement could prevent us from re-discovering signals already captured by alpha101/H217.
+
+---
+
+## Reproducibility Warning: LLM Trading Papers (2026 Audit)
+
+**Source:** arXiv:2605.19337 — Xia et al. (May 2026). "Agentic Trading: When LLM Agents Meet Financial Markets." Systematic review of 77 studies.
+
+**Critical findings:**
+- Only **2/19** studies meeting minimum criteria report extractable time-consistent split protocols
+- Only **1/19** explicitly models transaction costs
+- Only **1/19** documents survivorship handling
+- **15/19** classified as R0 reproducibility (results cannot be independently verified)
+- **No study reaches R3** (fully reproducible with code + data + methodology)
+
+**Implication for our research:** All cited LLM trading benchmarks (TradingAgents, AlphaCrafter, QuantaAlpha, AlphaAgent) should be treated with significant skepticism unless we can independently verify the OOS split and transaction cost modeling. Our own hypothesis testing protocol (IS/OOS split, 0.1% transaction cost, walk-forward) exceeds the reproducibility standard of most published LLM trading papers.

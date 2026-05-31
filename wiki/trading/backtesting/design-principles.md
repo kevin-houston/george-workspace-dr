@@ -466,3 +466,53 @@ After a strategy passes OOS confirmation, before going live:
 ### Queued action
 
 Apply to all confirmed production strategies (H026, H041a, H045, H174, H181, H192-D, H217, H228) to establish realistic drawdown bounds for live position sizing.
+
+
+---
+
+## GT-Score: Composite Objective for Reducing Overfitting (2026)
+
+**Source:** arXiv:2602.00080 — Sheppert (Jan 2026). "The GT-Score: A Robust Objective Function for Reducing Overfitting in Data-Driven Trading Strategies."
+
+The GT-Score addresses Sharpe ratio's vulnerability to in-sample overfitting by combining four dimensions:
+
+| Dimension | What it measures |
+|-----------|------------------|
+| Performance | Return-adjusted returns |
+| Statistical significance | p-value on returns vs null |
+| Consistency | Uniformity of returns across sub-periods |
+| Downside risk | Drawdown and negative return frequency |
+
+**Key result:** 98% relative improvement in IS→OOS generalization ratio vs Sharpe-only optimization. Tested on 50 S&P 500 stocks 2010-2024 with 9 sequential time splits and 15 random seeds (p < 0.01).
+
+**Practical application for our pipeline:**
+- When running parameter sweeps (e.g., selecting TSMOM threshold, blend ratios, vol-target), use GT-Score as the optimization objective instead of IS Sharpe
+- GT-Score should be computed on the IS period; OOS Sharpe is still the validation metric
+- Particularly valuable for H202-XL (200-stock XGBoost) where hyperparameter search risk is high
+
+**Implementable approximation:**
+```python
+def gt_score(monthly_returns, alpha=0.05):
+    """Approximate GT-Score composite objective.
+    Returns positive float; higher = better generalization."""
+    from scipy import stats
+    import numpy as np
+    r = np.array(monthly_returns)
+    if len(r) < 12:
+        return -np.inf
+    # Performance dimension
+    ann_sharpe = r.mean() / r.std(ddof=1) * np.sqrt(12)
+    # Statistical significance
+    t_stat, p_val = stats.ttest_1samp(r, 0, alternative='greater')
+    sig = (1 - p_val) if not np.isnan(p_val) else 0
+    # Consistency (fraction of positive months)
+    consistency = (r > 0).mean()
+    # Downside risk (inverse of MaxDD severity)
+    cumr = np.cumprod(1 + r)
+    max_dd = (cumr / np.maximum.accumulate(cumr) - 1).min()
+    downside = 1 + max_dd  # 0 = total loss, 1 = no drawdown
+    # Composite (equal weights; tune as needed)
+    return np.mean([ann_sharpe / 3, sig, consistency, downside])
+```
+
+**Limitation:** No public code released with the paper. The above is a practical approximation based on the paper's described dimensions.

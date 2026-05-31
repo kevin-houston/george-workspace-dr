@@ -437,3 +437,41 @@ for form, skip in windows:
 ```
 
 **Post-publication validation note**: The paper explicitly tested for data mining: these effects hold in global markets in the post-publication period. Lower concern about IS/OOS degradation vs. other factor families.
+
+
+---
+
+## Factor Crowding & Alpha Decay (2025-2026 Research)
+
+### Alpha Decay Dynamics
+
+**Source:** arXiv:2512.11913 — Dec 2025. "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay."
+
+A game-theoretic model of factor crowding applied to US equities 2001-2024:
+
+| Finding | Detail |
+|---------|--------|
+| Momentum decay form | Hyperbolic (R²=0.65), not linear/exponential |
+| Post-2015 acceleration | ETF growth → mechanical factor flows → crowding |
+| Factor momentum Sharpe | 0.39 standalone (long winning factors, short losing) |
+| Crowded momentum | 0.38× crash probability (SAFER than uncrowded) |
+| Crowded reversal | 1.7–1.8× crash probability (MORE DANGEROUS) |
+
+**Key insight:** Crowding predicts tail risk, not expected returns. A crowded momentum factor will still earn positive alpha on average but is safer (other participants exit simultaneously when the factor reverses). A crowded reversal is dangerous — when reversal positions become crowded, forced exits amplify losses.
+
+**Implication for H181 (industry reversal):** If the industry-adjusted reversal signal becomes widely adopted, crash risk rises 1.7-1.8×. Monitor H181 paper trading MaxDD as a real-time crowding indicator.
+
+**Implication for H217 (alpha101):** Alpha101 signals are relatively niche (intraday price-efficiency, less crowded than classical momentum) — crowding risk lower than for standard 12-month momentum.
+
+### Signal Half-Life Compression
+
+**Source:** arXiv:2605.23905 — May 2026. "AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets."
+
+Derives an alpha half-life formula based on AI adoption levels:
+- **Pre-AI (low adoption):** signal half-life 5-7 years
+- **Current level (~0.7 AI adoption):** signal half-life ~18 months
+- **Compression mechanism:** signal crowding + performative signal erosion + Red Queen competition
+
+**Tested implication (H231, 2026-05-29):** Applied exponential decay weighting to alpha101 signals with half-lives 6-24 months. NOT CONFIRMED — the half-life compression applies to longer-horizon momentum signals (months to years), not to intraday alpha101 which already aggregates on a single-day frequency. H217's calendar-month median aggregation remains optimal.
+
+**Portfolio implication:** Strategies confirmed in 2018-2022 data (H026, H181, H217) may see half-life compression in their alpha premium by 2027-2028 as AI adoption approaches saturation. Plan to re-validate OOS Sharpe annually.
