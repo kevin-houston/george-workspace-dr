@@ -5,6 +5,12 @@ status: active
 
 # Paper Trading Index
 
+## Live Graduation Criteria
+
+See [Live Graduation Criteria](live-graduation-criteria.md) for the full framework: SPRT statistical test, minimum trade counts, regime coverage gates, and performance attribution. Current status: no strategy has cleared all gates; H026 ETF rotation is earliest at Q3 2026.
+
+---
+
 ## Active Strategies
 
 ### [H181 Industry-Adjusted Short-Term Reversal](h181-alpaca.md) — ACTIVE

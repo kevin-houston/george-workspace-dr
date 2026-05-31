@@ -261,3 +261,29 @@ Pages created: 1 (wiki/tools/stock-screener.md). Pages updated: 1 (wiki/trading/
 
 ## [2026-05-29] ingest | Prediction Arena (arXiv:2604.07355)
 Pages created: 2 (sources/prediction-arena-2026.md, trading/prediction-markets/ai-model-benchmarks.md). Pages updated: 1 (wiki/index.md). Key entities: Arcada Labs, Kalshi, Polymarket, glm-4.7, grok-4-20-checkpoint, gpt-5.2, claude-opus-4-5, claude-opus-4-6, gpt-5.4, gemini-3.1-pro-preview. Key finding: all 6 frontier models lost money on Kalshi over 57 days (−16% to −30.8%); Polymarket avg −1.1% vs −22.6% Kalshi; research quantity uncorrelated with performance; initial prediction accuracy is #1 driver. Cohort 2: claude-opus-4-6 worst Polymarket performer (−10.06%) in 3-day trial.
+
+## [2026-05-30] lint | Health check
+Issues found: 16. Auto-fixed: 15. Needs review: 1.
+
+**Index gaps fixed (14 pages added to index.md):**
+- trading/algorithms/ibs-mean-reversion.md
+- trading/algorithms/market-microstructure.md
+- trading/algorithms/technical-analysis-patterns.md
+- trading/backtesting/multiple-testing.md
+- trading/data-sources/edgar-fundamentals.md
+- trading/paper-trading/live-graduation-criteria.md
+- trading/prediction-markets/nowcasting-playbook.md
+- tools/stock-screener.md
+- Research logs 2026-05-25 through 2026-05-30
+
+**Stale content fixed:**
+- Hypothesis log index entry updated: H001-H222 → H001-H235 with current frontier
+- Page count updated: 92 → 108
+- design-principles.md summary updated to mention GT-Score
+
+**Cross-references added:**
+- paper-trading/index.md → live-graduation-criteria.md
+- kalshi.md → nowcasting-playbook.md
+
+**Needs review (1):**
+- H112 IBS OOS Sharpe discrepancy: ibs-mean-reversion.md implies ~1.0–1.2 (historical estimate) but H235 backtest measured 2.129 for 2021–2026 OOS period. The historical estimate was from earlier sessions; the fresh measurement is more accurate. Consider updating ibs-mean-reversion.md to document the 2.129 OOS Sharpe.

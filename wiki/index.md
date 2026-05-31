@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-29
+updated: 2026-05-30
 sources_indexed: 3
-pages: 92
+pages: 108
 ---
 
 # Wiki Index
@@ -40,6 +40,9 @@ When answering a query:
 - [Factor Models & Cross-Sectional Alpha](trading/algorithms/factor-models.md) — Fama-French 3/5/6-factor (Kenneth French Library); alphalens-reloaded tearsheets; Fama-MacBeth regression; cross-sectional feature engineering for H202-XL ← new 2026-05-20
 - [WorldQuant 101 Alphas — Overlap Analysis](trading/algorithms/alpha101-overlap.md) — 40 OHLCV-only signals buildable free; H215/H216 CONFIRMED; ~60 signals blocked (VWAP/intraday required) ← new 2026-05-22
 - [Quality Factor (QMJ, Piotroski, GP/Assets)](trading/algorithms/quality-factor.md) — AQR QMJ; Piotroski F-Score 9-criteria; Novy-Marx GP/Assets; FMP API implementation; H221/H222 designs; corr(quality, BAB) ~0.4–0.6 = independent alpha ← new 2026-05-24
+- [IBS Mean-Reversion](trading/algorithms/ibs-mean-reversion.md) — Internal Bar Strength daily mean-reversion on tech ETFs (XLK/SMH/IGV); H062–H112 confirmed; OOS Sharpe 2.129 (2021–2026); 30% production portfolio weight ← new 2026-05-28
+- [Market Microstructure & HFT](trading/algorithms/market-microstructure.md) — Stanford MS&E 448; order book dynamics, market impact, adverse selection, HFT strategies; Avellaneda-Stoikov MM model; context for execution cost modeling ← new 2026-05-25
+- [Technical Analysis Patterns](trading/algorithms/technical-analysis-patterns.md) — H234 inside-bar coiled-spring (OOS Sharpe 1.770, WR 63.9%); NR7/NR4 narrow range; TA feature library (MACD/RSI/Stochastic/ROC) for H233/H235; pandas-ta vs TA-Lib guide ← new 2026-05-29
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -64,24 +67,28 @@ When answering a query:
 - [Options Data Sources](trading/data-sources/options-data.md) — ThetaData (cheapest), ORATS (best IV surface), Polygon/Alpaca (real-time only; no history)
 - [Sector & Industry Classification](trading/data-sources/sector-classification.md) — GICS/SIC sources; SEC EDGAR SIC, GitHub S&P 500 CSV, yfinance caveats; build_sector_cache() for 100-500 stocks; H181
 - [Earnings Calendar & Events](trading/data-sources/earnings-events.md) — FMP/Finnhub/yfinance earnings APIs; SEC EDGAR XBRL EPS extraction; EdgarTools; EPS surprise formulas; PEAD stack upgrade path for pead_overnight.py ← new 2026-05-23
+- [SEC EDGAR Fundamentals](trading/data-sources/edgar-fundamentals.md) — XBRL financial statement extraction; bulk downloads vs API; financial ratios (P/E, P/B, ROE) for quality/value factors; H221/H222 data pipeline ← new 2026-05-25
 
 **Backtesting**
-- [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado
+- [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado; GT-Score composite objective (98% generalization improvement vs Sharpe-only)
 - [Walk-Forward & CPCV](trading/backtesting/walk-forward-cpcv.md) — walk-forward variants, CPCV algorithm, purging/embargoing, DSR formulas; Python libs: timeseriescv/skfolio
 - [Transaction Cost Modeling](trading/backtesting/transaction-costs.md) — spread/impact/borrow cost models, square-root market impact, vectorbt/backtrader defaults, per-strategy calibration table
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H222 (frontier: H221 drift-regime-reversal, H222 Piotroski quality); H217 CONFIRMED (median alpha101 OOS 1.559); H220 CONFIRMED (ETF TSMOM 0.961); H215 CONFIRMED (alpha101 OOS 1.321); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367); H198 momentum (Sharpe 1.174); H201 TOM (Sharpe 0.740); calendar family closed H205–H208 NOT CONFIRMED
+- [Multiple Testing & Statistical Significance](trading/backtesting/multiple-testing.md) — Bonferroni/BH corrections; deflated Sharpe ratio; p-hacking taxonomy; minimum backtest length formula ← new 2026-05-26
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H235 (frontier: H232 EDGAR narrative drift, H233 NOT CONFIRMED adjusted-MSE, H235 NOT CONFIRMED RF-IBS gate, H236 QuantaAlpha queued, H237 drift-regime reversal scaffold); H217 CONFIRMED (median alpha101 OOS 1.559); H234 CONFIRMED (inside-bar OOS 1.770); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367)
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
 - [H149 Alpaca ETF Rotation](trading/paper-trading/h122-alpaca.md) — production strategy log; H026 100% rotation; started 2026-04-28
 - [PEAD-NLP Alpaca Deployment](trading/paper-trading/pead-nlp-alpaca.md) — H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders; started 2026-05-06
 - [H181 Industry-Adjusted Reversal Deployment](trading/paper-trading/h181-alpaca.md) — H181 live pipeline: 30-stock equal-weight monthly reversal; started 2026-05-10
+- [Live Graduation Criteria](trading/paper-trading/live-graduation-criteria.md) — SPRT statistical test for strategy validation; minimum trade counts; regime coverage gates; performance attribution; Alpaca migration steps; graduation status by strategy ← new 2026-05-30
 
 **Prediction Markets**
 - [Kalshi](trading/prediction-markets/kalshi.md) — primary prediction market platform; CFTC-regulated, economic events, RSA-PSS auth, CPI/NFP strategies live
 - [Polymarket](trading/prediction-markets/polymarket.md) — secondary; highest global volume, blockchain-based, US re-entry Dec 2025
 - [Other Prediction Market Platforms](trading/prediction-markets/other-platforms.md) — PredictIt, Manifold, IBKR ForecastTrader (full API), Kalshi Timeless mechanics
 - [Prediction Market Algorithmic Strategies](trading/prediction-markets/algorithmic-strategies.md) — Kelly criterion, event modeling, arbitrage, NLP; cross-market arb, Timeless funding arb
+- [Nowcasting Playbook](trading/prediction-markets/nowcasting-playbook.md) — CPI/NFP/FOMC prediction market strategies; CME FedWatch implied probability extraction; signal timing; H185 design ← new 2026-05-27
 - [AI Model Benchmarks on Prediction Markets](trading/prediction-markets/ai-model-benchmarks.md) — Prediction Arena (arXiv:2604.07355); 6 models, $10k real capital, 57-day Kalshi/Polymarket eval; all lost money on Kalshi; Polymarket dramatically better (−1.1% vs −22.6%); research quantity ≠ performance ← 2026-05-29
 
 **Research Logs**
@@ -108,6 +115,12 @@ When answering a query:
 - [Research Log 2026-05-14](trading/research-log/2026-05-14.md) — H198 CONFIRMED (6-1m stock momentum, OOS Sharpe 1.174); H199 NOT CONFIRMED (sector-neutral hurts momentum)
 - [Research Log 2026-05-15](trading/research-log/2026-05-15.md) — H200 NOT CONFIRMED (graphical pairs, 0/15 cointegrated); H201 CONFIRMED (TOM, OOS Sharpe 0.740); pairs family EXHAUSTED; H202 queued
 - [Research Log 2026-05-24](trading/research-log/2026-05-24.md) — H217 CONFIRMED (median alpha101 OOS 1.559); H218/H219 NOT CONFIRMED; H220 CONFIRMED (ETF TSMOM 0.961); quality-factor.md wiki new; H221/H222 staged
+- [Research Log 2026-05-25](trading/research-log/2026-05-25.md) — wiki: SEC EDGAR fundamentals (edgar-fundamentals.md); dream cycle scan: arXiv angles
+- [Research Log 2026-05-26](trading/research-log/2026-05-26.md) — wiki: multiple testing & statistical significance; dream cycle scan
+- [Research Log 2026-05-27](trading/research-log/2026-05-27.md) — wiki: nowcasting playbook (prediction markets); dream cycle scan
+- [Research Log 2026-05-28](trading/research-log/2026-05-28.md) — wiki: IBS mean-reversion & market microstructure; dream cycle scan; H231/H232 proposals
+- [Research Log 2026-05-29](trading/research-log/2026-05-29.md) — wiki: technical analysis patterns (TA library, H234); dream cycle scan; H233/H235/H236 proposals
+- [Research Log 2026-05-30](trading/research-log/2026-05-30-live-graduation.md) — wiki: live graduation criteria (paper trading); dream cycle scan; H237/GT-Score/AlphaAgent staged
 - [Research Log 2026-05-23](trading/research-log/2026-05-23.md) — H215 CONFIRMED (alpha101 OOS 1.321); H216 CONFIRMED-weak (vol-price divergence, below SPY); blend H215+H198 OOS 1.397; earnings-events.md wiki new
 - [Research Log 2026-05-21](trading/research-log/2026-05-21.md) — H205/H206/H207/H208 NOT CONFIRMED (full calendar family closed); H202-XL NOT CONFIRMED (OOS 1.106)
 - [Research Log 2026-05-20](trading/research-log/2026-05-20.md) — factor-models.md wiki new (Fama-French H202-XL prep); dream cycle scan: 5 arXiv/GitHub angles
@@ -138,6 +151,7 @@ When answering a query:
 
 ### General Tech
 
+- [Stock Screener Methodology](tools/stock-screener.md) — Minervini SEPA/CANSLIM criteria; IBD industry groups (relevant to H181); market breadth indicators; MCP integration candidate ← new 2026-05-27
 - [zenbu.js](tools/zenbu.md) — JS framework for AI-agent-customizable desktop apps; local source, git-tracked, hot-reload; alpha
 - [Dograh](tools/dograh.md) — self-hostable voice agent platform (open-source Vapi/Retell alternative); drag-and-drop workflows, bring-your-own LLM/TTS/STT, Docker deploy
 - [mermaid-skill](tools/mermaid-skill.md) — Claude Code `/mermaid` skill; 23 diagram types, bundled syntax refs, weekly auto-sync from mermaid-js upstream ← 2026-05-27

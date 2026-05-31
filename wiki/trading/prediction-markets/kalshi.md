@@ -381,3 +381,7 @@ if edge >= THRESHOLD_EDGE:
 ## Sandbox
 
 Kalshi provides a demo environment for testing. Use `https://demo-api.kalshi.co/trade-api/v2` with demo credentials before going live. Paper trading works identically — orders execute against real market data but no real money.
+
+---
+
+**See also:** [Nowcasting Playbook](nowcasting-playbook.md) — detailed CPI/NFP/FOMC strategy implementations with CME FedWatch integration and signal timing.
