@@ -653,3 +653,58 @@ AlphaAgent extends LLM-driven factor discovery with explicit mechanisms to preve
 - **No study reaches R3** (fully reproducible with code + data + methodology)
 
 **Implication for our research:** All cited LLM trading benchmarks (TradingAgents, AlphaCrafter, QuantaAlpha, AlphaAgent) should be treated with significant skepticism unless we can independently verify the OOS split and transaction cost modeling. Our own hypothesis testing protocol (IS/OOS split, 0.1% transaction cost, walk-forward) exceeds the reproducibility standard of most published LLM trading papers.
+
+
+---
+
+## Live Market Reality Check: LLM Agent Trading (2025-2026)
+
+### StockBench: LLM Agents vs Real Markets
+
+**Source:** arXiv:2510.02209 — "StockBench: Can LLM Agents Trade Stocks Profitably In Real-world Markets?"
+**Data:** Real market period, March–July 2025. Evaluated on cumulative return, max drawdown, Sortino ratio.
+
+**Key finding:** Despite strong performance on financial QA benchmarks, **most LLM agents fail to outperform a simple buy-and-hold baseline** in terms of both cumulative return and risk-adjusted return.
+
+This is the most credible LLM trading negative result because:
+- Real money/paper trading (not historical backtest)
+- Recent out-of-sample data (2025)
+- Multiple LLM models tested
+- Standard benchmark comparison (buy-and-hold)
+
+**Implication:** Financial QA performance does not translate to trading performance. The ability to answer finance questions != the ability to generate alpha.
+
+---
+
+### KTD-Fin: Memorization Bias and Attribution
+
+**Source:** arXiv:2605.28359 (May 2026) — "From Knowing to Doing: A Memory-Controlled Benchmark for LLM Trading Agents on Stock Markets."
+**Data:** CSI300, 2024-2026 (Chinese equity market).
+
+**Core finding:** When ticker symbols and company names are anonymized (masked), LLM agents shift toward factor-based reasoning. Performance attribution analysis reveals that **positive LLM agent returns are largely explained by passive market and style factor exposure** (beta), not genuine stock-selection alpha.
+
+**Memorization problem:** Long backtests overlap with LLM knowledge cutoffs, allowing memorized historical price outcomes to contaminate predictions. Masking substantially changes reasoning patterns — confirming the memorization hypothesis.
+
+**10-dimensional metric framework** introduced:
+- Returns & risk: total return, Sharpe, max drawdown, information ratio
+- Behavior: annualized turnover, HHI concentration, cash ratio, abstention rate
+- Reliability & calibration: leakage score, attribution R² to market/style factors
+
+**Implication for our H238/H239 pipeline:**
+- H238 (BlindTrade) directly addresses the memorization issue via anonymization
+- H239 (LLM time capsule) intentionally uses frozen model knowledge — the 'memorization' IS the signal (encoding fundamental information)
+- For any LLM-based strategy, report the attribution R² to SPY/sector factors to confirm alpha vs beta
+
+---
+
+### Practical Checklist for Evaluating LLM Trading Claims
+
+| Check | Why it matters |
+|-------|-----------------|
+| Real market test (not backtest only) | Backtests overfit; StockBench shows real-market degradation |
+| Ticker anonymization test | If removing tickers changes picks significantly → memorization contamination |
+| Attribution analysis | Positive return ≠ alpha; decompose into market + style + stock-selection |
+| Transaction cost modeling | Only 1/19 LLM papers models TC (per 2026 audit) |
+| Leakage check (knowledge cutoff) | LLM cutoff year must precede the OOS evaluation period |
+
+**Our hypothesis testing standard:** IS/OOS split, 0.10% transaction cost, explicit Sharpe > threshold gate, and (for LLM-based strategies) anonymization variant as negative control.
