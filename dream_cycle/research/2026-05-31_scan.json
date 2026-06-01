@@ -1,0 +1,108 @@
+{
+  "date": "2026-05-31",
+  "scan_angles": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "papers_found": [
+    {
+      "id": "arxiv:2604.21433",
+      "title": "ChatGPT as a Time Capsule: The Limits of Price Discovery",
+      "date": "2026-04-28",
+      "relevance_score": 8,
+      "angle": "PEAD + text signals",
+      "staged": true,
+      "stage_file": "2_h239_llm_timecapsule_factor.json",
+      "notes": "Frozen GPT snapshots (12 snapshots, ~7,000 equities, 2021-2025) predict 12-month revenue growth and analyst revisions (t-stat=6.02 pooled panel). Predictability stronger for high-analyst-coverage firms. Sector-neutral score. Distinct from H225/H226 (event-driven PEAD tone) — this is a slow-moving monthly fundamental factor. Actionable as H239 using our 30-stock large-cap universe."
+    },
+    {
+      "id": "arxiv:2603.17692",
+      "title": "Can Blindfolded LLMs Still Trade? An Anonymization-First Framework for Portfolio Optimization",
+      "date": "2026-03-22",
+      "relevance_score": 9,
+      "angle": "multi-agent LLM trading",
+      "staged": true,
+      "stage_file": "1_h238_blindtrade_llm_portfolio.json",
+      "notes": "BlindTrade: anonymize tickers before LLM portfolio scoring to eliminate memorization bias. 4-agent ensemble. Sharpe 1.40±0.22 on 2025 YTD (20 seeds). Excels in volatile conditions. Directly addresses root cause of H225/H226 failure and is actionable as H238."
+    },
+    {
+      "id": "arxiv:2510.02209",
+      "title": "StockBench: Can LLM Agents Trade Stocks Profitably In Real-world Markets?",
+      "date": "2025-10-03",
+      "relevance_score": 8,
+      "angle": "multi-agent LLM trading",
+      "staged": true,
+      "stage_file": "3_llm_trading_reality_check_wiki.json",
+      "notes": "Real-market test March-July 2025. Most LLM agents fail to beat buy-and-hold. Critical negative result: financial QA performance does not predict trading performance. Complements reproducibility warning already in ml-for-trading.md."
+    },
+    {
+      "id": "arxiv:2605.28359",
+      "title": "From Knowing to Doing: A Memory-Controlled Benchmark for LLM Trading Agents",
+      "date": "2026-05-28",
+      "relevance_score": 8,
+      "angle": "multi-agent LLM trading",
+      "staged": true,
+      "stage_file": "3_llm_trading_reality_check_wiki.json",
+      "notes": "KTD-Fin: LLM agent positive returns are largely market/style beta, not alpha. Anonymization test shows memorization contamination. 10-dimensional metric framework. Key for H238/H239 validation protocol."
+    },
+    {
+      "id": "arxiv:2602.23330",
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "date": "2026-02-28",
+      "relevance_score": 7,
+      "angle": "PEAD + multi-agent LLM",
+      "staged": true,
+      "stage_file": "4_h240_pead_finegrained_decomposition.json",
+      "notes": "Fine-grained task decomposition significantly improves LLM trading risk-adjusted returns. Applied to PEAD: adding guidance quality classification as a third filter alongside FinBERT score and EPS surprise. Academic support from Nguyen et al. 2022 (guidance raise is strongest PEAD continuation predictor). Actionable as H240."
+    },
+    {
+      "id": "arxiv:2605.23905",
+      "title": "AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets",
+      "date": "2026-05-29",
+      "relevance_score": 9,
+      "angle": "signal half-life / backtesting methodology",
+      "staged": false,
+      "stage_file": null,
+      "notes": "Used for Phase 1 wiki expansion (signal-halflife.md). Alpha half-life formula h(phi) = ln2/(theta + delta(phi)); current AI adoption implies 18-month half-life vs 5-7 years pre-AI. Not staged separately — content already incorporated into wiki page."
+    },
+    {
+      "id": "arxiv:2510.15949",
+      "title": "ATLAS: Adaptive Trading with LLM AgentS Through Dynamic Prompt Optimization and Multi-Agent Coordination",
+      "date": "2025-10-21",
+      "relevance_score": 6,
+      "angle": "multi-agent LLM trading",
+      "staged": false,
+      "stage_file": null,
+      "notes": "Adaptive-OPRO beats fixed prompts for LLM trading agents. Relevant to future PEAD pipeline improvements. Not staged — insufficient detail from abstract to produce actionable hypothesis without accessing full paper results."
+    },
+    {
+      "id": "sciencedirect:S2405918826000024",
+      "title": "Pairs trading with time-series deep learning models",
+      "date": "2026-02-01",
+      "relevance_score": 6,
+      "angle": "pairs trading + cointegration",
+      "staged": false,
+      "stage_file": null,
+      "notes": "Time-series DL for cointegrated pairs. Behind ScienceDirect paywall (403). Insufficient detail to stage. Pairs family already exhausted (H152-H160 ETF, H200 NOT CONFIRMED stock-level). Low priority."
+    }
+  ],
+  "staged_proposals": [
+    "1_h238_blindtrade_llm_portfolio.json",
+    "2_h239_llm_timecapsule_factor.json",
+    "3_llm_trading_reality_check_wiki.json",
+    "4_h240_pead_finegrained_decomposition.json"
+  ],
+  "wiki_expansion_done": {
+    "file": "wiki/trading/backtesting/signal-halflife.md",
+    "section": "backtesting",
+    "reason": "Thinnest research section (5 pages → 6); no signal methodology page existed; directly relevant to H231 (designed), H217, H198"
+  },
+  "next_hypothesis_numbers": {
+    "H238": "BlindTrade anonymization-first LLM portfolio",
+    "H239": "LLM frozen-snapshot monthly factor",
+    "H240": "PEAD guidance quality third filter"
+  }
+}
