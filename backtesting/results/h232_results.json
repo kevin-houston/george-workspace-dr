@@ -1,0 +1,228 @@
+{
+  "H163_baseline_OOS": {
+    "n": 49,
+    "wr": 0.6939,
+    "mean_ret": 0.0396
+  },
+  "drift_distribution": {
+    "n": 163,
+    "mean": 0.0624,
+    "std": 0.1088,
+    "p25": 0.0159,
+    "p50": 0.0281,
+    "p75": 0.0512
+  },
+  "IS_sweep": [
+    {
+      "pctile": 0.25,
+      "threshold": 0.0159,
+      "high_drift": {
+        "n": 15,
+        "wr": 0.5333,
+        "mean_ret": -0.0204
+      },
+      "low_drift": {
+        "n": 2,
+        "wr": 0.5,
+        "mean_ret": 0.0024
+      }
+    },
+    {
+      "pctile": 0.33,
+      "threshold": 0.0202,
+      "high_drift": {
+        "n": 13,
+        "wr": 0.4615,
+        "mean_ret": -0.0267
+      },
+      "low_drift": {
+        "n": 4,
+        "wr": 0.75,
+        "mean_ret": 0.0117
+      }
+    },
+    {
+      "pctile": 0.4,
+      "threshold": 0.0231,
+      "high_drift": {
+        "n": 12,
+        "wr": 0.5,
+        "mean_ret": -0.0283
+      },
+      "low_drift": {
+        "n": 5,
+        "wr": 0.6,
+        "mean_ret": 0.0079
+      }
+    },
+    {
+      "pctile": 0.5,
+      "threshold": 0.0281,
+      "high_drift": {
+        "n": 10,
+        "wr": 0.5,
+        "mean_ret": -0.0375
+      },
+      "low_drift": {
+        "n": 7,
+        "wr": 0.5714,
+        "mean_ret": 0.0107
+      }
+    },
+    {
+      "pctile": 0.6,
+      "threshold": 0.032,
+      "high_drift": {
+        "n": 6,
+        "wr": 0.5,
+        "mean_ret": -0.0281
+      },
+      "low_drift": {
+        "n": 11,
+        "wr": 0.5455,
+        "mean_ret": -0.012
+      }
+    },
+    {
+      "pctile": 0.67,
+      "threshold": 0.0365,
+      "high_drift": {
+        "n": 4,
+        "wr": 0.5,
+        "mean_ret": -0.0323
+      },
+      "low_drift": {
+        "n": 13,
+        "wr": 0.5385,
+        "mean_ret": -0.0132
+      }
+    },
+    {
+      "pctile": 0.75,
+      "threshold": 0.0512,
+      "high_drift": {
+        "n": 4,
+        "wr": 0.5,
+        "mean_ret": -0.0323
+      },
+      "low_drift": {
+        "n": 13,
+        "wr": 0.5385,
+        "mean_ret": -0.0132
+      }
+    }
+  ],
+  "IS_best_threshold": 0.0159,
+  "OOS_sweep": [
+    {
+      "pctile": 0.25,
+      "threshold": 0.0159,
+      "high_drift": {
+        "n": 45,
+        "wr": 0.6889,
+        "mean_ret": 0.0358
+      },
+      "low_drift": {
+        "n": 4,
+        "wr": 0.75,
+        "mean_ret": 0.0817
+      }
+    },
+    {
+      "pctile": 0.33,
+      "threshold": 0.0202,
+      "high_drift": {
+        "n": 42,
+        "wr": 0.6905,
+        "mean_ret": 0.04
+      },
+      "low_drift": {
+        "n": 7,
+        "wr": 0.7143,
+        "mean_ret": 0.0372
+      }
+    },
+    {
+      "pctile": 0.4,
+      "threshold": 0.0231,
+      "high_drift": {
+        "n": 39,
+        "wr": 0.6923,
+        "mean_ret": 0.0469
+      },
+      "low_drift": {
+        "n": 10,
+        "wr": 0.7,
+        "mean_ret": 0.0112
+      }
+    },
+    {
+      "pctile": 0.5,
+      "threshold": 0.0281,
+      "high_drift": {
+        "n": 35,
+        "wr": 0.6571,
+        "mean_ret": 0.0382
+      },
+      "low_drift": {
+        "n": 14,
+        "wr": 0.7857,
+        "mean_ret": 0.0431
+      }
+    },
+    {
+      "pctile": 0.6,
+      "threshold": 0.032,
+      "high_drift": {
+        "n": 28,
+        "wr": 0.6786,
+        "mean_ret": 0.0516
+      },
+      "low_drift": {
+        "n": 21,
+        "wr": 0.7143,
+        "mean_ret": 0.0235
+      }
+    },
+    {
+      "pctile": 0.67,
+      "threshold": 0.0365,
+      "high_drift": {
+        "n": 22,
+        "wr": 0.7273,
+        "mean_ret": 0.0556
+      },
+      "low_drift": {
+        "n": 27,
+        "wr": 0.6667,
+        "mean_ret": 0.0266
+      }
+    },
+    {
+      "pctile": 0.75,
+      "threshold": 0.0512,
+      "high_drift": {
+        "n": 16,
+        "wr": 0.6875,
+        "mean_ret": 0.0189
+      },
+      "low_drift": {
+        "n": 33,
+        "wr": 0.697,
+        "mean_ret": 0.0496
+      }
+    }
+  ],
+  "OOS_best_high": {
+    "n": 45,
+    "wr": 0.6889,
+    "mean_ret": 0.0358
+  },
+  "OOS_best_low": {
+    "n": 4,
+    "wr": 0.75,
+    "mean_ret": 0.0817
+  },
+  "confirmed": true,
+  "run_date": "2026-05-31 23:20"
+}

@@ -5857,7 +5857,7 @@ h231_status: DESIGNED — AI-driven alpha decay signal weighting. arXiv:2605.239
 
 ## H232 — EDGAR Narrative Drift Gate (Moving Targets on 8-K Sequences)
 
-**Status:** DESIGN
+**Status:** NOT CONFIRMED (2026-05-31)
 **Date queued:** 2026-05-29
 **Source:** arXiv:2510.03195 v5 (Choi, Kim et al., Mar 2026) — "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?"
 
@@ -5877,6 +5877,16 @@ h231_status: DESIGNED — AI-driven alpha decay signal weighting. arXiv:2605.239
 
 **Dependencies:** H163/H174 pipeline (pead_overnight.py), EdgarTools, sentence-transformers
 **Risk:** Medium — new file (hypothesis scaffold), no changes to production pipeline
+
+h232_status: NOT CONFIRMED (2026-05-31) — EDGAR Narrative Drift Gate. Practical simplification: evaluated cosine distance between consecutive 8-K embeddings (all-MiniLM-L6-v2) as additive filter on FinBERT>=0.18 selection. Model: sentence-transformer cosine distance between current and prior quarter press release. IS 2020-2022, OOS 2023-2025.
+
+RESULTS:
+- Drift scores computed: 163/197 events (30 tickers, 2020-2026)
+- Drift distribution: mean=0.062, std=0.109, p50=0.028, p75=0.051 (cosine distance range)
+- H163 baseline OOS (finbert>=0.18): n=49, WR=69.4%, MeanRet=3.96%
+- Best OOS drift variant: drift>0.037 (p67), n=22, WR=72.7%, MeanRet=5.56% (+3.3pp WR, +1.60pp Ret)
+
+NOT CONFIRMED due to IS calibration failure: IS sweep shows NO threshold where high-drift outperforms — IS high-drift WRs uniformly 46-53% with NEGATIVE mean returns across all thresholds (n=4-15). Low-drift IS performs better at every tested threshold. The OOS "improvement" contradicts IS signal direction, indicating the OOS result is noise/data dredging rather than a genuine learned signal. ADDITIONAL CAVEATS: (1) OOS n=22 is small (±9pp CI at 95%); (2) vs. original H163 baseline (WR=80.8% OOS 2024+) this is substantially worse — the weaker OOS window (2023-2025 vs 2024+) is the primary difference; (3) Drift-only filter (no FinBERT gate) shows WR 59-65%, well below FinBERT alone — drift is not a standalone signal. ROOT CAUSE: Cosine distance between consecutive press releases is primarily driven by sentence length and boilerplate variation, not by genuine metric emphasis shifts. The arXiv paper likely uses LLM extraction of specific metric mentions rather than full-document embeddings — their signal is more targeted. Script: backtesting/daily/run_h232.py. Results: backtesting/results/h232_results.json.
 
 ## H233 — Alpha101 Cross-Sectional with Adjusted-MSE Sign-Penalty Loss
 
