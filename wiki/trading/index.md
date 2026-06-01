@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-30 (live-graduation-criteria.md new; dream cycle scan 2026-05-30)
+updated: 2026-05-31 (signal-halflife.md new; dream cycle scan 2026-05-31)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -68,12 +68,14 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Walk-Forward & CPCV](backtesting/walk-forward-cpcv.md) ← new 2026-05-07 (WFO variants, CPCV algorithm, purging/embargoing, DSR formulas, Python libs: timeseriescv/skfolio/mlfinlab, when to use what)
   - [Transaction Cost Modeling](backtesting/transaction-costs.md) ← new 2026-05-09 (spread/impact/borrow models, square-root MI, vectorbt/backtrader defaults, per-strategy calibration table)
   - [Multiple Testing & Statistical Significance](backtesting/multiple-testing.md) ← new 2026-05-26 (DSR, PBO, block bootstrap, White Reality Check; BH FDR correction; Harvey-Liu-Zhu t-ratio thresholds; pipeline application table)
+  - [Signal Half-Life & Alpha Decay Measurement](backtesting/signal-halflife.md) ← new 2026-05-31 (AR(1)/regression half-life formula, rolling IC decay diagnostics, hyperbolic vs exponential fits, AI-driven compression from 58→18 months, IS window guidance, per-strategy decay table)
 - [Paper Trading](paper-trading/) — Alpaca results log
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
   - [H181 Industry Reversal Alpaca](paper-trading/h181-alpaca.md) ← active (H181 live deployment log)
   - [Live Graduation Criteria & Performance Attribution](paper-trading/live-graduation-criteria.md) ← new 2026-05-30 (SPRT test for strategy validation, minimum trade counts, regime coverage gates, paper→live execution attribution, Alpaca migration steps)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-05-31](research-log/2026-05-31.md) — wiki expansion: signal-halflife.md new (AR(1) half-life formula, rolling IC diagnostics, hyperbolic decay, AI compression 58→18 months, IS window table); dream cycle: H238 BlindTrade LLM portfolio, H239 LLM time-capsule factor, LLM reality-check wiki update, PEAD fine-grained decomposition staged
   - [2026-05-30](research-log/2026-05-30-live-graduation.md) — wiki expansion: live-graduation-criteria.md new; dream cycle scan: drift-regime reversal H237, GT-Score backtesting objective, AlphaAgent LLM mining staged
   - [2026-05-29](research-log/2026-05-29.md) — wiki expansion: technical-analysis-patterns.md new (H234 coiled-spring OOS 1.770 strongest confirmed; TA-Lib vs pandas-ta-classic library guide; NR7/NR4 reference; MACD/RSI/Stochastic/ROC feature pipeline for H233/H235; ZHAW arXiv:2208.07168); dream cycle scan complete
   - [2026-05-28](research-log/2026-05-28.md) — wiki expansion: ibs-mean-reversion.md new (IBS formula, per-ETF production params XLK/SMH/IGV, H062–H149 log, arxiv:2306.12434); dream cycle scan complete
