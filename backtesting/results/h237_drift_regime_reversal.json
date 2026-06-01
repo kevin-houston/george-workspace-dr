@@ -1,0 +1,53 @@
+{
+  "A_IS": {
+    "sharpe": 1.352,
+    "cagr": 0.296,
+    "cumul": 7.942,
+    "maxdd": -0.259,
+    "neg_years": 0,
+    "n_months": 96
+  },
+  "A_OOS": {
+    "sharpe": 1.245,
+    "cagr": 0.282,
+    "cumul": 3.76,
+    "maxdd": -0.177,
+    "neg_years": 0,
+    "n_months": 64
+  },
+  "B_IS": {
+    "sharpe": 1.375,
+    "cagr": 0.3,
+    "cumul": 8.145,
+    "maxdd": -0.259,
+    "neg_years": 0,
+    "n_months": 96
+  },
+  "B_OOS": {
+    "sharpe": 1.124,
+    "cagr": 0.251,
+    "cumul": 3.297,
+    "maxdd": -0.206,
+    "neg_years": 0,
+    "n_months": 64
+  },
+  "B_avg_eligible": 27.1,
+  "C_IS": {
+    "sharpe": 1.373,
+    "cagr": 0.29,
+    "cumul": 7.68,
+    "maxdd": -0.243,
+    "neg_years": 0,
+    "n_months": 96
+  },
+  "C_OOS": {
+    "sharpe": 1.302,
+    "cagr": 0.29,
+    "cumul": 3.881,
+    "maxdd": -0.168,
+    "neg_years": 0,
+    "n_months": 64
+  },
+  "C_avg_eligible": 2.9,
+  "SPY_OOS_sharpe": 1.032
+}

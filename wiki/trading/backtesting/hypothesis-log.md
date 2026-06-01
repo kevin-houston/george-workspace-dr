@@ -5956,3 +5956,14 @@ h234_status: CONFIRMED (2026-05-29) — Weekly Inside-Bar Breakout (Coiled Sprin
 
 **Dependencies:** `backtesting/daily/run_h112.py` (IBS signal logic), scikit-learn, pandas-ta
 **Risk:** Medium — new script. Does not modify H112 production logic.
+
+h237_status: NOT CONFIRMED (2026-05-31) — Drift-Regime-Conditional Industry-Adjusted Reversal. Source: arXiv:2511.12490 (Singha, Nov 2025). Universe: 30 large-cap S&P 500. IS 2013-2020, OOS 2021-2026. Confirm gate: OOS Sharpe > H181 baseline (1.138). Three variants: A=H181 no filter, B=exclude drift-regime stocks, C=only drift-regime stocks.
+
+OOS RESULTS:
+- Variant A (no drift filter): Sharpe=1.245, CAGR=28.2%, MaxDD=-17.7%, 0 neg years
+- Variant B (exclude drift stocks, the hypothesis): Sharpe=1.124, CAGR=25.1%, MaxDD=-20.6%, 0 neg years — BELOW 1.138 threshold
+- Variant C (only drift stocks, control): Sharpe=1.302, CAGR=29.0%, MaxDD=-16.8%, 0 neg years
+- SPY OOS Sharpe: 1.032
+- Avg eligible pool B: 27.1/30 stocks (only ~3 excluded per month — drift filter too weak)
+
+NOT CONFIRMED: The primary hypothesis (B, exclude drift stocks) OOS Sharpe=1.124 is below the H181 baseline of 1.138. Variant A (H181 re-run) confirms that baseline at 1.245. Counter-intuitively, Variant C (only holding drift-regime stocks) outperforms at 1.302 — momentum continuation in trending stocks beats reversal from trending stocks. ROOT CAUSE: With only ~3 stocks filtered out per month (drift regime is rare at 60% threshold), Variant B barely differs from Variant A. Singha's 13-Sharpe result may require a broader universe (500+ stocks) where regime sorting has more discriminative power. PORTFOLIO NOTE: No change to production portfolio. Script: backtesting/daily/run_h237.py. Results: backtesting/results/h237_drift_regime_reversal.json.
