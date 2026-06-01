@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Session Summary — 2026-05-30</title>
+  
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--orange:#f0883e;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.6;padding:0;}
+
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:baseline;justify-content:space-between;}
+.header-title{font-size:16px;font-weight:700;letter-spacing:.3px;}
+.header-sub{color:var(--muted);font-size:12px;}
+
+.main{padding:20px 24px;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1.1;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.muted{color:var(--muted);}
+
+/* Section card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.card-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.card-badge{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:2px 8px;color:var(--muted);}
+.card-body{padding:14px 16px;}
+
+/* Proposals */
+.proposal{padding:10px 0;border-bottom:1px solid var(--border);}
+.proposal:last-child{border-bottom:none;}
+.proposal-header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.proposal-title{font-size:13px;font-weight:600;}
+.risk-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+.risk-medium{background:rgba(210,153,34,.18);color:var(--yellow);border:1px solid rgba(210,153,34,.3);}
+.risk-high{background:rgba(248,81,73,.18);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.risk-low{background:rgba(63,185,80,.18);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.proposal-rationale{font-size:12px;color:var(--muted);margin-top:3px;}
+.proposal-target{font-size:11px;color:var(--blue);font-family:monospace;margin-top:3px;}
+
+/* Commit list */
+.commit{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;display:flex;gap:10px;}
+.commit:last-child{border-bottom:none;}
+.commit-hash{font-family:monospace;color:var(--blue);flex-shrink:0;}
+.commit-msg{color:var(--text);}
+
+/* Podcast */
+.podcast-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;}
+.podcast-dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:10px;}
+.link-btn{display:inline-block;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--blue);background:var(--surface);}
+.link-btn:hover{border-color:var(--blue);}
+
+/* Raw changelog */
+pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;overflow-x:auto;white-space:pre-wrap;color:var(--muted);margin-top:10px;}
+
+.empty{color:var(--muted);font-size:12px;padding:4px 0;}
+</style>
+
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-title">Session Summary &mdash; 2026-05-30</div>
+    </div>
+    <div class="header-sub">Generated 2026-05-31 04:01 CT</div>
+  </div>
+  <div class="main">
+    
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Proposals Applied</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Flagged</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Commits</div>
+        <div class="kpi-value blue">6</div></div>
+      <div class="kpi"><div class="kpi-label">Podcast</div>
+        <div class="kpi-value muted">—</div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Dream Cycle</span>
+        <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
+      </div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H237: Drift-Regime-Conditional Industry Reversal on 30-Stock Universe</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2511.12490 (Singha, Nov 2025) documents a 13-Sharpe OOS factor combining value + short-term reversal signals, activated only during stock-specific drift regimes defined as &gt;60% positive days in trailing 63-day window. H221 tested a similar drift-regime idea but used a different definition (sto…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h237.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki update: GT-Score objective function added to backtesting/design-principles.md</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2602.00080 (Sheppert, Jan 2026) introduces the GT-Score — a composite objective function integrating performance, statistical significance, consistency, and downside risk — as an alternative to Sharpe ratio for strategy optimization. Key result: 98% improvement in generalization ratio vs Sharp…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/backtesting/design-principles.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki update: AlphaAgent (arXiv:2502.16789) + reproducibility caveat added to tools/ml-for-trading.md</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2502.16789 (Tang et al., June 2025) introduces AlphaAgent — an LLM-driven alpha mining framework with three anti-crowding regularization mechanisms: (1) AST-based originality enforcement against existing alphas, (2) hypothesis-factor semantic alignment, (3) complexity control. Tests on CSI 500…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/tools/ml-for-trading.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki update: factor crowding + alpha decay added to algorithms/momentum-strategies.md</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2512.11913 (Dec 2025) 'Not All Factors Crowd Equally' provides actionable findings for our momentum strategies: (1) momentum exhibits clear hyperbolic alpha decay (R²=0.65 fit) with accelerated crowding post-2015 correlating with ETF growth; (2) crowding predicts TAIL RISK (crash probability),…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/momentum-strategies.md</div>
+            </div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Commits</span>
+        <span class="card-badge">6 today</span>
+      </div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">2e49406</span><span class="commit-msg">H235: NOT CONFIRMED — RF gate on IBS signals (OOS Sharpe 1.958 vs pure IBS 2.129)</span></div><div class="commit"><span class="commit-hash">89ad5ab</span><span class="commit-msg">H233: NOT CONFIRMED — Alpha101 + Adjusted-MSE LightGBM (OOS Sharpe 1.367 &lt; H217 baseline 1.559)</span></div><div class="commit"><span class="commit-hash">fcab743</span><span class="commit-msg">dream cycle: apply 2026-05-29 staged proposals (H232, H233, H236-wiki)</span></div><div class="commit"><span class="commit-hash">f16d146</span><span class="commit-msg">dream cycle: 2026-05-29 scan — 1 new proposal staged (4 total)</span></div><div class="commit"><span class="commit-hash">33a682f</span><span class="commit-msg">wiki: expand Algorithms — Technical Analysis &amp; Chart Patterns (H234/NR7/TA libraries)</span></div><div class="commit"><span class="commit-hash">441b681</span><span class="commit-msg">nightly backup 2026-05-30</span></div></div>
+    </div>
+    
+    
+  </div>
+</body>
+</html>

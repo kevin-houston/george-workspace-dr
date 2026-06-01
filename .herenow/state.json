@@ -86,6 +86,12 @@
       "claimToken": "b3385b752897c18233160a7c5ca69b42f91e14853924f7413e750381ba0ce106",
       "claimUrl": "https://here.now/claim?slug=summit-fennel-9r8c&token=b3385b752897c18233160a7c5ca69b42f91e14853924f7413e750381ba0ce106",
       "expiresAt": "2026-05-31T09:03:05.836Z"
+    },
+    "minty-pulsar-a8hs": {
+      "siteUrl": "https://minty-pulsar-a8hs.here.now/",
+      "claimToken": "7c8d906f8853aebbb368d5853f6e8f63c338a449db7c40b4e9fe1d971898dbe5",
+      "claimUrl": "https://here.now/claim?slug=minty-pulsar-a8hs&token=7c8d906f8853aebbb368d5853f6e8f63c338a449db7c40b4e9fe1d971898dbe5",
+      "expiresAt": "2026-06-01T09:01:41.983Z"
     }
   }
 }
