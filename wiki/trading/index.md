@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-31 (signal-halflife.md new; dream cycle scan 2026-05-31)
+updated: 2026-06-02 (long-short-equity.md new; H241/H242 logged; dream cycle scan 2026-06-02)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -37,6 +37,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Market Microstructure & HFT](algorithms/market-microstructure.md) ← new 2026-05-25 (Microprice/Stoikov 2017; Avellaneda-Stoikov market making; not actionable without L2 order book data; future execution layer for intraday entries)
   - [IBS Mean-Reversion](algorithms/ibs-mean-reversion.md) ← new 2026-05-28 (Internal Bar Score strategy; PRODUCTION — XLK 20%/SMH 8%/IGV 2%; formula, per-ETF params, H062–H149 hypothesis log, arxiv:2306.12434)
   - [Technical Analysis & Chart Patterns](algorithms/technical-analysis-patterns.md) ← new 2026-05-29 (H234 CONFIRMED inside-bar coiled-spring OOS 1.770 — strongest confirmed hypothesis; NR7/NR4 reference; TA-Lib vs pandas-ta-classic library guide; H233/H235 MACD+RSI+Stochastic+ROC feature pipeline; ZHAW arXiv:2208.07168 MACD 44% importance)
+  - [Long/Short Equity](algorithms/long-short-equity.md) ← new 2026-06-02 (dollar-neutral L/S construction; 130/30; borrow costs ~0.75%/yr large-cap; H243 design: top/bottom quintile EW on 200-stock universe; momentum crash risk + Daniel/Moskowitz 2016; sector-neutral L/S variant; backtesting mistake table)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)

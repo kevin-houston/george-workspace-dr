@@ -1,0 +1,101 @@
+{
+  "date": "2026-06-02",
+  "session": "nightly dream cycle scan",
+  "angles_searched": 5,
+  "findings": [
+    {
+      "arxiv": "2605.25894",
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "url": "https://arxiv.org/abs/2605.25894",
+      "summary": "FinBERT sentiment + firm fundamentals + technical indicators fused in multi-modal DL model for PEAD directional prediction on announcement days.",
+      "relevance": 4,
+      "staged": true,
+      "staged_as": "1_h244_pead_multimodal_nlp.json",
+      "hypothesis": "H244"
+    },
+    {
+      "arxiv": "2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "summary": "Press release text as informative as EPS surprise for predicting announcement-day returns; 138K+ releases 2005-2023. Structural NLP features (tone, guidance language) add predictive power.",
+      "relevance": 4,
+      "staged": true,
+      "staged_as": "2_h244_pead_multimodal_nlp.json (folded in)",
+      "hypothesis": "H244"
+    },
+    {
+      "arxiv": "2504.07923",
+      "title": "Trading Graph Neural Network",
+      "url": "https://arxiv.org/abs/2504.07923",
+      "summary": "TGNN for modeling asset/dealer/relationship features for price impact; novel pairs selection beyond cointegration.",
+      "relevance": 4,
+      "staged": false,
+      "reason_not_staged": "Pairs trading family exhausted in our pipeline (H152-H160, H200 all NOT CONFIRMED). GNN pairs would be a new attempt but prior consistent failures suggest the signal is weak for large-cap US equities at monthly frequency."
+    },
+    {
+      "arxiv": "2512.11913",
+      "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay",
+      "url": "https://arxiv.org/abs/2512.11913",
+      "summary": "Hyperbolic decay model for factor alpha; momentum crowding measurable via ETF AUM growth.",
+      "relevance": 4,
+      "staged": false,
+      "reason_not_staged": "Already in wiki (factor-models.md, section 'Factor Crowding Risk'). No new staging needed."
+    },
+    {
+      "arxiv": "2012.07149",
+      "title": "Building Cross-Sectional Systematic Strategies By Learning to Rank",
+      "url": "https://arxiv.org/abs/2012.07149",
+      "summary": "Learning-to-rank ML for cross-sectional factor construction; reduces crowding effects.",
+      "relevance": 3,
+      "staged": false,
+      "reason_not_staged": "H241 showed XGBoost rank-target (effectively a ranking approach) gave only +0.054 Sharpe lift over simple ranking. Learning-to-rank unlikely to break through this ceiling without more informative features."
+    },
+    {
+      "arxiv": "2501.07135",
+      "title": "Follow the Leader: Enhancing Systematic Trend-Following Using Network Momentum",
+      "url": "https://arxiv.org/abs/2501.07135",
+      "summary": "Network momentum (leader/follower relationships between assets) combined with trend following.",
+      "relevance": 2,
+      "staged": false,
+      "reason_not_staged": "Targets time-series trend following (ETF rotation) rather than cross-sectional stock picking. Marginal relevance for current research direction."
+    },
+    {
+      "repo": "TauricResearch/TradingAgents",
+      "title": "TradingAgents v0.2.4 — Multi-agent LLM trading framework",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "summary": "LangGraph-based 5-layer multi-agent framework; latest release adds checkpointing, structured outputs, 10 LLM provider support.",
+      "relevance": 3,
+      "staged": false,
+      "reason_not_staged": "Already noted in wiki (ml-for-trading.md). Update not needed — the framework is exploratory, not directly actionable for near-term hypothesis testing."
+    },
+    {
+      "arxiv": "2602.23330",
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "url": "https://arxiv.org/abs/2602.23330",
+      "summary": "Multi-agent LLM system with task specialization (macro, technical, risk management) for portfolio construction.",
+      "relevance": 2,
+      "staged": false,
+      "reason_not_staged": "Already in wiki. Not directly actionable for specific hypothesis."
+    },
+    {
+      "repo": "systamental/factorlab",
+      "title": "FactorLab — Alpha and Risk Factor Discovery Library",
+      "url": "https://github.com/systamental/factorlab",
+      "summary": "Python library for factor discovery and IC analysis; useful for cross-sectional factor validation.",
+      "relevance": 3,
+      "staged": false,
+      "reason_not_staged": "Useful tooling but we already use alphalens-reloaded for factor analysis. Not worth adding another dependency at this stage."
+    }
+  ],
+  "staged_count": 3,
+  "staged_files": [
+    "dream_cycle/staged/2026-06-02/1_h243_long_short_momentum.json",
+    "dream_cycle/staged/2026-06-02/2_h244_pead_multimodal_nlp.json",
+    "dream_cycle/staged/2026-06-02/3_wiki_long_short_equity_index.json"
+  ],
+  "wiki_expansion": {
+    "new_page": "wiki/trading/algorithms/long-short-equity.md",
+    "topic": "Dollar-neutral long/short equity portfolio construction",
+    "motivation": "H241/H242 established genuine stock-selection alpha in 200-stock universe; L/S construction needed to unlock it"
+  }
+}

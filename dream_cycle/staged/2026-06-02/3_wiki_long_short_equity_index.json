@@ -1,0 +1,14 @@
+{
+  "id": "wiki-long-short-equity-index-2026-06-02",
+  "date": "2026-06-02",
+  "source": "H241/H242 findings (long-only momentum hits Sharpe ceiling; L/S unlock needed)",
+  "source_url": "",
+  "title": "Wiki index update: long-short-equity.md added (enables H243 design)",
+  "rationale": "wiki/trading/algorithms/long-short-equity.md was written during the 2026-06-02 nightly session. The wiki index (wiki/trading/index.md) needs to be updated to include the new page in the Algorithms section. Without this update the page is orphaned and won't be found in future sessions.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/index.md",
+  "content": "  - [Long/Short Equity](algorithms/long-short-equity.md) <- new 2026-06-02 (dollar-neutral L/S construction; 130/30; borrow costs; H243 design: top/bottom quintile EW on 200-stock universe; momentum crash risk; sector-neutral L/S variant; backtesting common mistakes)",
+  "action": "patch",
+  "apply_status": "pending"
+}
