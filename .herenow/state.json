@@ -92,6 +92,12 @@
       "claimToken": "7c8d906f8853aebbb368d5853f6e8f63c338a449db7c40b4e9fe1d971898dbe5",
       "claimUrl": "https://here.now/claim?slug=minty-pulsar-a8hs&token=7c8d906f8853aebbb368d5853f6e8f63c338a449db7c40b4e9fe1d971898dbe5",
       "expiresAt": "2026-06-01T09:01:41.983Z"
+    },
+    "lucid-comet-aftm": {
+      "siteUrl": "https://lucid-comet-aftm.here.now/",
+      "claimToken": "415b4147191fd114ca9494a743ef067873e2fbad80ce9613dc521ee71e14f0d1",
+      "claimUrl": "https://here.now/claim?slug=lucid-comet-aftm&token=415b4147191fd114ca9494a743ef067873e2fbad80ce9613dc521ee71e14f0d1",
+      "expiresAt": "2026-06-02T09:04:37.985Z"
     }
   }
 }

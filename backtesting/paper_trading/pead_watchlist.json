@@ -1,22 +1,6 @@
 {
-  "date": "2026-05-29",
+  "date": "2026-06-01",
   "candidates": [],
-  "scores": {
-    "COST": {
-      "score": -0.0137,
-      "surprise": null
-    },
-    "MRVL": {
-      "score": -0.0315,
-      "surprise": null
-    },
-    "CRM": {
-      "score": -0.0654,
-      "surprise": null
-    },
-    "DELL": {
-      "score": -0.0395,
-      "surprise": null
-    }
-  }
+  "scores": {},
+  "reason": "no earnings"
 }
