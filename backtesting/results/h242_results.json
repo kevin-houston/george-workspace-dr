@@ -1,0 +1,38 @@
+{
+  "SN-EW": {
+    "is_sharpe": 1.449,
+    "oos_sharpe": 1.162,
+    "oos_cumul": 2.331,
+    "oos_maxdd": -19.7,
+    "oos_neg_yrs": 1,
+    "corr_spy_oos": -0.199,
+    "oos_2022": -0.0
+  },
+  "SN-VS": {
+    "is_sharpe": 1.409,
+    "oos_sharpe": 1.01,
+    "oos_cumul": 2.009,
+    "oos_maxdd": -20.8,
+    "oos_neg_yrs": 1,
+    "corr_spy_oos": -0.205,
+    "oos_2022": -1.2
+  },
+  "SN-1": {
+    "is_sharpe": 1.403,
+    "oos_sharpe": 1.042,
+    "oos_cumul": 2.224,
+    "oos_maxdd": -24.6,
+    "oos_neg_yrs": 1,
+    "corr_spy_oos": -0.15,
+    "oos_2022": -5.8
+  },
+  "SN-3": {
+    "is_sharpe": 1.42,
+    "oos_sharpe": 1.132,
+    "oos_cumul": 2.281,
+    "oos_maxdd": -23.1,
+    "oos_neg_yrs": 1,
+    "corr_spy_oos": -0.217,
+    "oos_2022": -4.4
+  }
+}

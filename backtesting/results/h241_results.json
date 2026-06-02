@@ -1,0 +1,31 @@
+{
+  "variant_A": {
+    "is_sharpe": 1.519,
+    "oos_sharpe": 1.222,
+    "oos_cumul": 3.159,
+    "oos_maxdd": -14.1,
+    "oos_neg_yrs": 0,
+    "corr_spy_oos": -0.276
+  },
+  "variant_B": {
+    "is_sharpe": 1.487,
+    "oos_sharpe": 1.266,
+    "oos_cumul": 3.079,
+    "oos_maxdd": -14.1,
+    "oos_neg_yrs": 0,
+    "corr_spy_oos": -0.261
+  },
+  "variant_C": {
+    "is_sharpe": 3.823,
+    "oos_sharpe": 1.276,
+    "oos_cumul": 3.857,
+    "oos_maxdd": -19.9,
+    "oos_neg_yrs": 0,
+    "corr_spy_oos": -0.218
+  },
+  "spy_benchmark": {
+    "oos_sharpe": 1.01,
+    "oos_cumul": 2.173,
+    "oos_maxdd": -23.9
+  }
+}

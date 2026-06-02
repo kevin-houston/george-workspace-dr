@@ -5977,3 +5977,37 @@ OOS RESULTS:
 - Avg eligible pool B: 27.1/30 stocks (only ~3 excluded per month — drift filter too weak)
 
 NOT CONFIRMED: The primary hypothesis (B, exclude drift stocks) OOS Sharpe=1.124 is below the H181 baseline of 1.138. Variant A (H181 re-run) confirms that baseline at 1.245. Counter-intuitively, Variant C (only holding drift-regime stocks) outperforms at 1.302 — momentum continuation in trending stocks beats reversal from trending stocks. ROOT CAUSE: With only ~3 stocks filtered out per month (drift regime is rare at 60% threshold), Variant B barely differs from Variant A. Singha's 13-Sharpe result may require a broader universe (500+ stocks) where regime sorting has more discriminative power. PORTFOLIO NOTE: No change to production portfolio. Script: backtesting/daily/run_h237.py. Results: backtesting/results/h237_drift_regime_reversal.json.
+
+h241_status: NOT CONFIRMED (2026-06-02) — XGBoost Cross-Sectional Momentum (200-Stock Universe). Source: "151 Trading Strategies" §3.1 (H202-XL variant: expanded universe from 30 → ~195 large-cap S&P 500 stocks). IS 2013-2020, OOS 2021-2026. Confirm gate: OOS Sharpe ≥ 1.5.
+
+THREE VARIANTS TESTED:
+- Variant A (equal-weight, 6-1m momentum, top-20): IS Sharpe=1.519, OOS Sharpe=1.222, MaxDD=-14.1%, 0 neg years, Corr(SPY)=-0.276
+- Variant B (12-1m momentum, top-20 equal-weight): IS Sharpe=1.487, OOS Sharpe=1.266, MaxDD=-14.1%, 0 neg years, Corr(SPY)=-0.261
+- Variant C (XGBoost rank-target, top-20): IS Sharpe=3.823 (overfit), OOS Sharpe=1.276, MaxDD=-19.9%, 0 neg years, Corr(SPY)=-0.218
+- SPY benchmark OOS Sharpe=1.010
+
+NOT CONFIRMED: No variant reaches OOS Sharpe ≥ 1.5 threshold. Best is XGBoost at 1.276. KEY FINDINGS:
+(1) UNUSUAL NEGATIVE SPY CORRELATION: All three variants are long-only yet have OOS Corr(SPY) of -0.218 to -0.276 — extremely rare for a long-only strategy. Root cause investigated in H242.
+(2) ZERO NEGATIVE OOS YEARS across all variants: 2021-2026 has no down year, including 2022 when S&P 500 fell ~18%. Variant A posted +11.7% in 2022 — driven by energy sector tilt (XOM, CVX, COP all top-ranked by 6-1m momentum in 2022 as energy surged ~65%).
+(3) XGBOOST GIVES MINIMAL LIFT: XGBoost (8 features, rank-target cross-sectional percentile) OOS Sharpe=1.276 vs simple equal-weight 1.222 (+0.054). IS Sharpe=3.823 shows severe overfitting. The 195-stock universe (34k training samples, IS=~18k) is large enough for XGBoost but the cross-sectional signal structure limits ML advantage over simple ranking.
+(4) FEATURE IMPORTANCES roughly equal (~0.11-0.13 per feature) — no dominant feature. Mom_6_1 and mom_12_1 slightly higher than vol-based features. Suggests the model is finding the same momentum signal as the rank approach but adding noise via overfitting.
+(5) UNIVERSE SIZE VALIDATION: H241's 195-stock universe (IS=17,939 samples) vs H202's 30-stock universe (IS=2,879 samples) — 6.2× more data did not proportionally improve ML performance. Suggests that for monthly rebalancing momentum, cross-sectional ranking is near-optimal and ML adds marginal value.
+Script: backtesting/daily/run_h241.py. Cache: backtesting/cache/h241_monthly_prices.parquet. Results: backtesting/results/h241_results.json.
+
+h242_status: NOT CONFIRMED (2026-06-02) — Sector-Neutral 200-Stock Momentum (H241 diagnostic). Purpose: Diagnose H241-A's negative SPY correlation (-0.276) — sector concentration (energy 2022) vs genuine stock selection alpha. Method: Rank stocks within each GICS sector by 6-1m momentum; select top-N per sector (11 sectors → ~22-stock portfolio). IS 2013-2020, OOS 2021-2026. Confirm gate: OOS Sharpe > H241-A baseline (1.222).
+
+FOUR VARIANTS TESTED:
+- SN-EW (top-2 per sector, equal-weight): OOS Sharpe=1.162, MaxDD=-19.7%, 1 neg year, Corr(SPY)=-0.199, 2022=-0.0%
+- SN-VS (top-2 per sector, vol-scaled): OOS Sharpe=1.010, MaxDD=-20.8%, 1 neg year, Corr(SPY)=-0.205, 2022=-1.2%
+- SN-1 (top-1 per sector, equal-weight): OOS Sharpe=1.042, MaxDD=-24.6%, 1 neg year, Corr(SPY)=-0.150, 2022=-5.8%
+- SN-3 (top-3 per sector, equal-weight): OOS Sharpe=1.132, MaxDD=-23.1%, 1 neg year, Corr(SPY)=-0.217, 2022=-4.4%
+- SPY benchmark OOS Sharpe=1.010
+
+NOT CONFIRMED: Best OOS Sharpe 1.162 (SN-EW) is below H241-A baseline of 1.222. Sector-neutral constraint hurts performance. DIAGNOSIS: MIXED — partial sector effect + genuine stock selection.
+
+SECTOR CONCENTRATION DIAGNOSIS:
+(1) ENERGY TILT WAS REAL: H241-A returned +11.7% in 2022 (energy tilt); all SN variants returned -0.0% to -5.8% in 2022. Removing the energy concentration eliminated the 2022 outperformance entirely. This confirms that ~11.7pp of H241-A's 2022 return was due to free-float sector tilt, not stock selection.
+(2) NEGATIVE CORRELATION PERSISTS: Despite sector neutralization, Corr(SPY) remains -0.150 to -0.217 across all SN variants. This confirms genuine cross-sectional stock selection alpha — the negative beta is not entirely explained by sector bets.
+(3) CONSTRAINT IS TOO RESTRICTIVE: Limiting to top-2 per sector (22 stocks) is more concentrated than H241-A's top-20 from 195 (wider selection). The sectoral straightjacket prevents the strategy from expressing its best momentum bets. IS Sharpe drops from 1.519 (H241-A) to 1.449 (SN-EW) and OOS drops similarly.
+(4) NEGATIVE YEARS: SN-EW has 1 negative year (2022 essentially -0.0% — borderline; H241-A had 0 negative years with +11.7% that year). The sector-neutral constraint cost ~12pp in 2022.
+NEXT DIRECTION: The stock selection alpha appears real but the 200-stock universe long-only structure cannot reach the 1.5 Sharpe threshold. Consider extending to long/short (top quintile long, bottom quintile short) or adding a factor model (BAB, quality) as overlay. Script: backtesting/daily/run_h242.py. Results: backtesting/results/h242_results.json.
