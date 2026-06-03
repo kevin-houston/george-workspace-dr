@@ -98,6 +98,12 @@
       "claimToken": "415b4147191fd114ca9494a743ef067873e2fbad80ce9613dc521ee71e14f0d1",
       "claimUrl": "https://here.now/claim?slug=lucid-comet-aftm&token=415b4147191fd114ca9494a743ef067873e2fbad80ce9613dc521ee71e14f0d1",
       "expiresAt": "2026-06-02T09:04:37.985Z"
+    },
+    "indigo-mustard-9rc3": {
+      "siteUrl": "https://indigo-mustard-9rc3.here.now/",
+      "claimToken": "594b11b9cdcd6d6214ae5fa9dd1b9c93c8f1458a5106a68a280eda2a6e011775",
+      "claimUrl": "https://here.now/claim?slug=indigo-mustard-9rc3&token=594b11b9cdcd6d6214ae5fa9dd1b9c93c8f1458a5106a68a280eda2a6e011775",
+      "expiresAt": "2026-06-03T09:01:56.671Z"
     }
   }
 }
