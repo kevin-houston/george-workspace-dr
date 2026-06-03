@@ -1,0 +1,34 @@
+{
+  "H243-A": {
+    "is_sharpe": 0.321,
+    "oos_sharpe": 0.109,
+    "oos_cumul": 1.027,
+    "oos_maxdd": -24.2,
+    "oos_neg_yrs": 3,
+    "corr_spy_oos": -0.036
+  },
+  "H243-B": {
+    "is_sharpe": 0.151,
+    "oos_sharpe": 0.107,
+    "oos_cumul": 1.026,
+    "oos_maxdd": -23.6,
+    "oos_neg_yrs": 3,
+    "corr_spy_oos": -0.034
+  },
+  "H243-C": {
+    "is_sharpe": 0.466,
+    "oos_sharpe": 0.142,
+    "oos_cumul": 1.046,
+    "oos_maxdd": -30.4,
+    "oos_neg_yrs": 3,
+    "corr_spy_oos": -0.13
+  },
+  "H243-D": {
+    "is_sharpe": 0.323,
+    "oos_sharpe": -0.252,
+    "oos_cumul": 0.806,
+    "oos_maxdd": -36.7,
+    "oos_neg_yrs": 4,
+    "corr_spy_oos": 0.016
+  }
+}

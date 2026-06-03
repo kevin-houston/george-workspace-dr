@@ -6011,3 +6011,66 @@ SECTOR CONCENTRATION DIAGNOSIS:
 (3) CONSTRAINT IS TOO RESTRICTIVE: Limiting to top-2 per sector (22 stocks) is more concentrated than H241-A's top-20 from 195 (wider selection). The sectoral straightjacket prevents the strategy from expressing its best momentum bets. IS Sharpe drops from 1.519 (H241-A) to 1.449 (SN-EW) and OOS drops similarly.
 (4) NEGATIVE YEARS: SN-EW has 1 negative year (2022 essentially -0.0% — borderline; H241-A had 0 negative years with +11.7% that year). The sector-neutral constraint cost ~12pp in 2022.
 NEXT DIRECTION: The stock selection alpha appears real but the 200-stock universe long-only structure cannot reach the 1.5 Sharpe threshold. Consider extending to long/short (top quintile long, bottom quintile short) or adding a factor model (BAB, quality) as overlay. Script: backtesting/daily/run_h242.py. Results: backtesting/results/h242_results.json.
+
+h243_status: NOT CONFIRMED (2026-06-03) — Long/Short Cross-Sectional Momentum (dollar-neutral). Source: Long/Short equity literature + H241/H242 findings (long-only OOS Sharpe=1.222, negative SPY correlation confirmed genuine alpha). Universe: same 200-stock universe from H241 cache. IS 2013-2020, OOS 2021-2026. Confirm gate: OOS Sharpe ≥ 1.5. Four variants: A=EW quintile L/S, B=vol-scaled quintile, C=EW decile L/S, D=sector-neutral L/S.
+
+OOS RESULTS:
+- H243-A (quintile EW): IS Sharpe=0.321, OOS Sharpe=0.109, MaxDD=-24.2%, 3 neg years. Long-leg OOS Sharpe=1.273, Short-leg OOS Sharpe=0.942 (positive — SHORT LEG HURTS)
+- H243-B (quintile vol-scaled): IS Sharpe=0.151, OOS Sharpe=0.107, MaxDD=-23.6%, 3 neg years
+- H243-C (decile EW): IS Sharpe=0.466, OOS Sharpe=0.142, MaxDD=-30.4%, 3 neg years. Long-leg OOS Sharpe=1.245, Short-leg OOS Sharpe=0.919 (positive — SHORT LEG HURTS)
+- H243-D (sector-neutral L/S): IS Sharpe=0.323, OOS Sharpe=-0.252, MaxDD=-36.7%, 4 neg years
+- SPY OOS Sharpe=1.010
+
+NOT CONFIRMED: Best OOS Sharpe=0.142 (H243-C), far below 1.5 threshold. The L/S structure dramatically UNDERPERFORMS the long-only baseline (1.222). Root cause: the short leg is working against us in 2021-2026.
+
+KEY FINDING — SHORT LEG PROBLEM: Short-leg OOS Sharpe is POSITIVE (+0.942 for H243-A) which means the bottom-quintile "loser" stocks are actually generating positive returns on average in 2021-2026. When these shorted stocks go up, the L/S portfolio loses. This is a momentum reversal / recovery effect: in the 2021-2026 OOS period, low-momentum stocks (value, beaten-down names) frequently recovered, especially in 2021 (+19% market recovery) and 2024 (+25% market rally). The short leg of a pure cross-sectional momentum L/S is specifically exposed to this reversal risk (Daniel & Moskowitz 2016 "Momentum Crashes").
+
+LONG LEG CONFIRMS ALPHA: Long-leg OOS Sharpe=1.273 (H243-A) confirms that the top-quintile momentum signal is real and consistent. The alpha is entirely in the long leg. Adding a short leg in 2021-2026 was net destructive.
+
+CONCLUSION: For this universe (large-cap S&P 500, monthly rebalance), L/S momentum is not the right vehicle in 2021-2026. The long-only H241-A remains the best expression of this alpha. NEXT DIRECTION: Low-Volatility Anomaly (§3.4, 151 Strategies) — separate factor family uncorrelated with momentum. Script: backtesting/daily/run_h243.py. Results: backtesting/results/h243_results.json.
+
+h245_status: NOT CONFIRMED (2026-06-03) — Low-Volatility Anomaly (200-stock universe). Source: "151 Trading Strategies" §3.4; Baker/Bradley/Wurgler (2011); Blitz & van Vliet (2007). Signal: 12-month realized monthly return vol (annualized); long bottom quintile by vol, equal-weight. Same 200-stock universe (H241 cache). IS 2013-2020, OOS 2021-2026. Confirm gate: OOS Sharpe ≥ 1.5. Four variants: A=bottom quintile EW, B=bottom decile EW, C=bottom quintile inv-vol weighted, D=vol-momentum blend (0.5 each).
+
+OOS RESULTS:
+- H245-A (quintile EW): IS Sharpe=1.177, OOS Sharpe=0.574, MaxDD=-16.4%, 2 neg years. Annual: 2021:+21.7% | 2022:-4.9% | 2023:+0.4% | 2024:+17.4% | 2025:+6.9% | 2026:-1.9%
+- H245-B (decile EW): IS Sharpe=1.032, OOS Sharpe=0.332, MaxDD=-16.4%, 3 neg years
+- H245-C (inv-vol weighted): IS Sharpe=1.159, OOS Sharpe=0.552, MaxDD=-15.9%, 2 neg years
+- H245-D (vol-momentum blend): IS Sharpe=1.174, OOS Sharpe=0.626, MaxDD=-22.3%, 2 neg years. Annual: 2021:+14.0% | 2022:-5.7% | 2023:+11.8% | 2024:+18.6% | 2025:+6.6% | 2026:-2.3%
+- SPY OOS Sharpe=1.010
+- Corr(best H245-D, H241-A momentum) OOS=0.636 (moderately correlated — both large-cap)
+
+NOT CONFIRMED: Best OOS Sharpe=0.626 (H245-D blend), well below 1.5 threshold. Underperforms SPY in OOS period (0.626 vs 1.010).
+
+ROOT CAUSE ANALYSIS:
+(1) RATE-HIKE CYCLE DESTROYS LOW-VOL: Low-vol stocks in this universe are bond-proxy sectors (utilities, consumer staples, REITs). The 2022 rate hike cycle (Fed funds 0.25% → 5.25%) crushed these sectors systematically. H245-A returned -4.9% in 2022 — no better than SPY's -18% for the relevant subcomponents, and far worse than H241-A's +11.7% (energy tilt).
+(2) MEGA-CAP GROWTH EXCLUSION: In 2021-2024, the largest return generators (NVDA +800%, META +200%, AMZN +80%) are high-volatility, excluded from the low-vol portfolio. Low-vol long-only systematically misses the best-performing stocks in momentum/growth regimes.
+(3) ACADEMIC ANOMALY MAY BE ARBITRAGED: The low-vol premium is well-known and captured by USMV (~$15B AUM) and SPLV ETFs. Smart-beta ETF flows into low-vol may have compressed the excess returns in the 2021-2026 period.
+(4) IS vs OOS GAP: IS Sharpe ~1.17 but OOS Sharpe ~0.57 — 0.6 Sharpe degradation. This is a large OOS decay, suggesting the IS period (2013-2020) was unusually favorable for low-vol (low rates, stable growth). The anomaly appears regime-dependent.
+(5) BEST BLEND (H245-D): Adding momentum (0.5 weight) lifts the blend to 0.626, confirming momentum is additive here. But even the blend can't overcome the structural 2021-2026 headwinds.
+PORTFOLIO NOTE: Corr=0.636 with H241-A momentum — too correlated to be a useful diversifier even if it met the Sharpe threshold. Would not add to production portfolio in any case. Script: backtesting/daily/run_h245.py. Results: backtesting/results/h245_results.json.
+
+h246_status: NOT CONFIRMED (2026-06-03) — ETF Pairs Trading (cointegration-based mean reversion). Source: "151 Trading Strategies" §3.8; Gatev, Goetzmann & Rouwenhorst (2006). 6 sector/sub-sector ETF pairs: GDX/SIL, XLE/OIH, XLK/QQQ, XLF/KRE, XLB/XME, XLU/UTG. Signal: Engle-Granger Z-score of spread (Z>2.0 entry, Z<0.5 exit, Z>4.0 stop). IS 2008-2017, OOS 2018-2026. Three variants: A=all pairs fixed hedge, B=top-3 by ADF, C=dynamic 60-day rolling hedge.
+
+OOS RESULTS (per pair, Variant A fixed hedge):
+- GDX/SIL: OOS Sharpe=-1.161, Cumul=0.579x (LOSS). IS ADF p=0.037 ✓ cointegrated IS — but breaks down OOS.
+- XLE/OIH: OOS Sharpe=+0.480, Cumul=1.313x. IS ADF p=0.819 (NOT cointegrated IS) — but best pair OOS.
+- XLK/QQQ: OOS Sharpe=-1.045, Cumul=0.814x. IS ADF p=0.839.
+- XLF/KRE: OOS Sharpe=-1.194, Cumul=0.531x (WORST). IS ADF p=0.004 ✓ strongest cointegration IS.
+- XLB/XME: OOS Sharpe=+0.335, Cumul=1.197x. IS ADF p=0.773.
+- XLU/UTG: OOS Sharpe=-0.686, Cumul=0.683x. IS ADF p=0.041 ✓ cointegrated IS.
+- COMBINED H246-A: OOS Sharpe=-0.990, Cumul=0.814x, MaxDD=-19.0% (net money-loser)
+- COMBINED H246-B (top-3 by ADF): OOS Sharpe=-1.710, Cumul=0.600x (even worse — ADF correlation with OOS performance is NEGATIVE)
+- COMBINED H246-C (dynamic hedge): OOS Sharpe=-0.182, Cumul=0.960x (improvement vs fixed but still negative)
+
+NOT CONFIRMED: Best single-pair OOS Sharpe=0.480 (XLE/OIH), far below 1.5 threshold. Combined strategy is a net money-loser.
+
+ROOT CAUSE ANALYSIS:
+(1) IS COINTEGRATION DOES NOT PREDICT OOS PERFORMANCE — INVERSE RELATIONSHIP: The three pairs that passed the ADF cointegration test IS (GDX/SIL, XLF/KRE, XLU/UTG) are the three worst OOS performers. The two best OOS pairs (XLE/OIH, XLB/XME) FAILED the IS cointegration test. This is a regime-change story, not noise.
+(2) STRUCTURAL BREAKS DESTROY COINTEGRATION OOS: 
+   - XLF/KRE (best IS cointegration, worst OOS): Regional bank crisis 2023 (SVB, Signature, First Republic failures) caused KRE to diverge permanently — the spread widened massively and never reverted. Every "entry" at Z>2.0 became a continuation, not a reversion.
+   - GDX/SIL: Gold vs silver miners have diverged on gold's relative strength since 2020 — the hedge ratio is structurally different OOS. Gold decoupled as a macro hedge asset while silver remained an industrial metal.
+   - XLU/UTG: Rate hike cycle 2022-2023 affected the two instruments differently (ETF vs CEF pricing, leverage, distribution policy), breaking the spread.
+(3) THE GATEV ET AL. (2006) APPROACH REQUIRES MASSIVE UNIVERSE: Their paper tested all pairs from the S&P 500 — 1,225 candidate pairs — and selected the top 20 by minimum distance. Our 6 hand-selected "intuitive" pairs are not the optimal pairs; optimal pairs shift every period.
+(4) DYNAMIC HEDGE (H246-C) SLIGHTLY BETTER: Rolling OLS reduces structural-break losses (Sharpe improves from -0.990 to -0.182) because it adapts the hedge ratio. But the core mean-reversion assumption still fails in trending-divergence regimes.
+(5) TRANSACTION COSTS: Daily position rebalancing in a pairs trade pays TC on entry and exit (~0.20% round-trip). On a strategy that barely generates 1-2% annual gross in the best cases, TC alone consumes most of the edge.
+CONCLUSION: ETF pairs trading is a poor fit for the 2018-2026 OOS period. Structural breaks are the rule, not the exception. Would require: much larger universe (1000+ pairs), weekly/monthly rebalancing to reduce TC, and structural-break detection to pause during regime shifts. Not recommended for production. Script: backtesting/daily/run_h246.py. Results: backtesting/results/h246_results.json.
