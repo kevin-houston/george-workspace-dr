@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-02 (long-short-equity.md new; H241/H242 logged; dream cycle scan 2026-06-02)
+updated: 2026-06-03 (survivorship-bias.md new; H243/H245/H246 logged; dream cycle scan 2026-06-03)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -70,6 +70,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Transaction Cost Modeling](backtesting/transaction-costs.md) ← new 2026-05-09 (spread/impact/borrow models, square-root MI, vectorbt/backtrader defaults, per-strategy calibration table)
   - [Multiple Testing & Statistical Significance](backtesting/multiple-testing.md) ← new 2026-05-26 (DSR, PBO, block bootstrap, White Reality Check; BH FDR correction; Harvey-Liu-Zhu t-ratio thresholds; pipeline application table)
   - [Signal Half-Life & Alpha Decay Measurement](backtesting/signal-halflife.md) ← new 2026-05-31 (AR(1)/regression half-life formula, rolling IC decay diagnostics, hyperbolic vs exponential fits, AI-driven compression from 58→18 months, IS window guidance, per-strategy decay table)
+  - [Survivorship Bias & Universe Construction](backtesting/survivorship-bias.md) ← new 2026-06-03 (bias types + magnitude: Ranse 2025 +4.94pp returns/+0.097 Sharpe; Shumway 1997 delistings = 40% of momentum profits; fja05680/sp500 free repo ★854; Norgate Platinum for production; PIT universe builder; H241–H246 bias impact assessment; common mistakes table)
 - [Paper Trading](paper-trading/) — Alpaca results log
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
