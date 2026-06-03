@@ -1,0 +1,95 @@
+{
+  "date": "2026-06-03",
+  "scan_summary": "5-angle arXiv/GitHub scan. 10 papers/repos found. 3 staged (2 medium-risk new scripts, 1 low-risk wiki update). Key new findings: speaker-weighted FinBERT (2604.13260) as H247 candidate; BABB factor (2409.00416) as H248 candidate; factor timing regime framework (2410.14841) for wiki and H249 design.",
+  "papers": [
+    {
+      "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+      "id": "arXiv:2403.07998",
+      "url": "https://arxiv.org/abs/2403.07998",
+      "relevance": 2,
+      "note": "Already known as H200 in pipeline (pairs-trading.md). Sharpe 1.23 on S&P 500 2017-2023. Not staged — already planned.",
+      "staged": false
+    },
+    {
+      "title": "Reinforcement Learning Pair Trading: A Dynamic Scaling Approach",
+      "id": "arXiv:2407.16103",
+      "url": "https://arxiv.org/abs/2407.16103",
+      "relevance": 2,
+      "note": "Crypto-focused RL pairs. Not immediately actionable for equity pipeline.",
+      "staged": false
+    },
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "id": "arXiv:2509.24254",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "relevance": 3,
+      "note": "Already incorporated in H244 design (staged 2026-06-02). Not re-staged.",
+      "staged": false
+    },
+    {
+      "title": "Which Voices Move Markets? Speaker Identity and Cross-Section of Post-Earnings Returns",
+      "id": "arXiv:2604.13260",
+      "url": "https://arxiv.org/abs/2604.13260",
+      "relevance": 3,
+      "note": "NEW — speaker-weighted FinBERT (CFO 30%/Analyst 49%/Executive 16%/Other 5%). Monthly L/S alpha 2.03%, t=6.49, FF5-unexplained. Direct H174 upgrade path. Staged as H247.",
+      "staged": true,
+      "staged_file": "1_h247_speaker_weighted_finbert.json"
+    },
+    {
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-Modal Deep Learning",
+      "id": "arXiv:2605.25894",
+      "url": "https://arxiv.org/abs/2605.25894",
+      "relevance": 2,
+      "note": "Already incorporated in H244 design. Multimodal fusion reference. Not re-staged.",
+      "staged": false
+    },
+    {
+      "title": "Spatio-Temporal Momentum: Jointly Learning Time-Series and Cross-Sectional Strategies",
+      "id": "arXiv:2302.10175",
+      "url": "https://arxiv.org/abs/2302.10175",
+      "relevance": 2,
+      "note": "Unifies TS and CS momentum but doesn't solve short-leg reversal problem. Background only.",
+      "staged": false
+    },
+    {
+      "title": "Winners vs. Losers: Momentum-based Strategies with Intertemporal Choice for ESG Portfolios",
+      "id": "arXiv:2505.24250",
+      "url": "https://arxiv.org/abs/2505.24250",
+      "relevance": 2,
+      "note": "Tail-risk (Rachev ratio) for short-leg weighting. ESG-focused; secondary priority for H243 v2.",
+      "staged": false
+    },
+    {
+      "title": "Betting Against (Bad) Beta",
+      "id": "arXiv:2409.00416",
+      "url": "https://arxiv.org/abs/2409.00416",
+      "relevance": 3,
+      "note": "NEW — BABB double-sort on total beta + bad beta. +800bps Sharpe vs BAB. H192-D BAB confirmed at 1.367. BABB is systematic upgrade + potential uncorrelated H228 complement. Staged as H248.",
+      "staged": true,
+      "staged_file": "2_h248_babb_factor.json"
+    },
+    {
+      "title": "Dynamic Factor Allocation Leveraging Regime-Switching Signals",
+      "id": "arXiv:2410.14841",
+      "url": "https://arxiv.org/abs/2410.14841",
+      "relevance": 3,
+      "note": "NEW — SJM+BL factor timing, 8x IR improvement over equal-weight. Directly explains H245 failure (rate-hike killed low-vol). Wiki update staged for factor-models.md. H249 design candidate.",
+      "staged": true,
+      "staged_file": "3_wiki_factor_timing_regime.json"
+    },
+    {
+      "title": "FinBERT2 / ProsusAI/finBERT ecosystem",
+      "id": "arXiv:2506.06335",
+      "url": "https://arxiv.org/abs/2506.06335",
+      "relevance": 2,
+      "note": "Already noted in nlp-alternative-data.md (2026-05-22). H174 upgrade path if classification accuracy < 55%. Not re-staged.",
+      "staged": false
+    }
+  ],
+  "staged_count": 3,
+  "staged_files": [
+    "1_h247_speaker_weighted_finbert.json",
+    "2_h248_babb_factor.json",
+    "3_wiki_factor_timing_regime.json"
+  ]
+}
