@@ -476,3 +476,40 @@ Implications for our pipeline:
 - Monitor MTUM (iShares MSCI Momentum Factor ETF) AUM as a crowding proxy; declining AUM periods have historically seen momentum mean-revert sharply
 
 Source: arXiv:2512.11913
+
+## Factor Timing & Regime-Switching Allocation
+
+Factors have time-varying premiums — momentum thrives in trending regimes, low-vol excels in rate-stable regimes, value recovers during mean-reversion windows. Static equal-weight factor blends leave this timing alpha on the table.
+
+### Key Reference
+**arXiv:2410.14841** (Shu & Mulvey, October 2024) — *Dynamic Factor Allocation Leveraging Regime-Switching Signals*
+- 6 style factors: value, size, momentum, quality, low-vol, growth
+- Regime detection: Sparse Jump Model (SJM) + Black-Litterman optimization
+- Result: Information ratio improves **from 0.05 to 0.4** vs. equal-weight factor blend (8x improvement)
+- Tested on US equities 2000–2023
+
+See also: `algorithms/regime-detection.md` for SJM implementation notes (Statistical Jump Model, arXiv:2402.05272, Shu et al. 2024).
+
+### Why Factor Timing Matters for Our Pipeline
+
+H245 (Low-Volatility Anomaly) failed OOS (Sharpe 0.626) because the 2022–2023 rate-hike cycle systematically destroyed bond-proxy low-vol stocks. A regime-aware allocation would have:
+- Reduced low-vol exposure when VIX < 25 + 10Y yield rising sharply
+- Increased momentum allocation in trending markets (where H228 thrives)
+
+### Simple Regime-Factor Rules (Empirical)
+
+| Regime | Signal | Favored Factors | Reduce Exposure |
+|--------|--------|-----------------|-----------------|
+| Rising rates | 10Y yield rising > 50bps/quarter | Momentum, Quality | Low-Vol, Value |
+| High VIX (>25) | VIX > 25 for 5+ days | Low-Vol, Quality | Momentum |
+| Bear market | SPY < 200-day MA | Quality, Defensive | Momentum |
+| Bull trend | SPY > 200-day MA + VIX < 20 | Momentum, Growth | Low-Vol, Value |
+
+### Production Portfolio Implications
+
+Current blend (H041a 22% / H026 27% / H045 21% / IBS 30%) is static. A regime overlay could:
+- In rate-hike regimes: increase IBS ETF weight (XLK/SMH/IGV — tech-growth, not bond-proxy)
+- In bear markets: shift toward H045 (bonds top-2, safety focus)
+- In bull trends: increase H041a/H026 (momentum ETF rotation)
+
+Design candidate: **H249** — regime-conditional weight adjustment on production portfolio. Gate: Sharpe improvement vs static blend > 0.2 in OOS.
