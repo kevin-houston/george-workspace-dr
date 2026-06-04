@@ -1,0 +1,79 @@
+{
+  "hypothesis": "H248",
+  "description": "Betting Against Bad Beta (BABB)",
+  "source": "arXiv:2409.00416 (Herculano, August 2024)",
+  "universe": "187 stocks from H241",
+  "confirmed": false,
+  "confirm_gate": "OOS Sharpe >= 1.5",
+  "babb_long_is": {
+    "label": "BABB Long IS",
+    "n_months": 95,
+    "cagr": 0.1409,
+    "sharpe": 1.3169,
+    "max_dd": -0.1643,
+    "ann_vol": 0.107,
+    "neg_yrs": 1
+  },
+  "babb_long_oos": {
+    "label": "BABB Long OOS",
+    "n_months": 65,
+    "cagr": 0.0797,
+    "sharpe": 0.6413,
+    "max_dd": -0.1052,
+    "ann_vol": 0.1243,
+    "neg_yrs": 0
+  },
+  "babb_ls_is": {
+    "label": "BABB L/S IS",
+    "n_months": 95,
+    "cagr": -0.1058,
+    "sharpe": -0.5769,
+    "max_dd": -0.6092,
+    "ann_vol": 0.1835,
+    "neg_yrs": 6
+  },
+  "babb_ls_oos": {
+    "label": "BABB L/S OOS",
+    "n_months": 65,
+    "cagr": -0.2277,
+    "sharpe": -1.0664,
+    "max_dd": -0.744,
+    "ann_vol": 0.2136,
+    "neg_yrs": 5
+  },
+  "bab_baseline_is": {
+    "label": "BAB baseline IS",
+    "n_months": 95,
+    "cagr": 0.1417,
+    "sharpe": 1.3141,
+    "max_dd": -0.172,
+    "ann_vol": 0.1078,
+    "neg_yrs": 1
+  },
+  "bab_baseline_oos": {
+    "label": "BAB baseline OOS",
+    "n_months": 65,
+    "cagr": 0.0808,
+    "sharpe": 0.6514,
+    "max_dd": -0.1045,
+    "ann_vol": 0.1241,
+    "neg_yrs": 0
+  },
+  "spy_oos": {
+    "label": "SPY OOS",
+    "n_months": 65,
+    "cagr": 0.1541,
+    "sharpe": 0.9982,
+    "max_dd": -0.2393,
+    "ann_vol": 0.1544,
+    "neg_yrs": 1
+  },
+  "corr_babb_spy_oos": 0.5143,
+  "beta_stats": {
+    "total_beta_mean": 0.949,
+    "total_beta_std": 0.416,
+    "bad_beta_mean": 0.95,
+    "bad_beta_std": 0.456
+  },
+  "data_source": "yfinance daily (195-stock H241 universe)"
+}

@@ -1,0 +1,116 @@
+{
+  "hypothesis": "H249",
+  "description": "Regime-Conditional Portfolio Weights",
+  "confirmed": true,
+  "confirm_gate": "OOS Sharpe improvement > 0.20 vs static",
+  "sharpe_improvement": 0.282,
+  "static_is": {
+    "label": "Static IS",
+    "n_months": 120,
+    "cagr": 0.0848,
+    "sharpe": 0.6393,
+    "max_dd": -0.3619,
+    "ann_vol": 0.1326,
+    "neg_yrs": 2
+  },
+  "static_oos": {
+    "label": "Static OOS",
+    "n_months": 101,
+    "cagr": 0.1103,
+    "sharpe": 0.8458,
+    "max_dd": -0.2154,
+    "ann_vol": 0.1304,
+    "neg_yrs": 2
+  },
+  "regime_is": {
+    "label": "Regime IS",
+    "n_months": 120,
+    "cagr": 0.1173,
+    "sharpe": 0.9828,
+    "max_dd": -0.2251,
+    "ann_vol": 0.1193,
+    "neg_yrs": 2
+  },
+  "regime_oos": {
+    "label": "Regime OOS",
+    "n_months": 101,
+    "cagr": 0.1439,
+    "sharpe": 1.1278,
+    "max_dd": -0.1683,
+    "ann_vol": 0.1276,
+    "neg_yrs": 2
+  },
+  "regime_weights": {
+    "bull_calm": {
+      "H041a": 0.3,
+      "H026": 0.35,
+      "H045": 0.12,
+      "IBS": 0.23
+    },
+    "bull_volatile": {
+      "H041a": 0.25,
+      "H026": 0.3,
+      "H045": 0.18,
+      "IBS": 0.27
+    },
+    "bear_calm": {
+      "H041a": 0.18,
+      "H026": 0.22,
+      "H045": 0.32,
+      "IBS": 0.28
+    },
+    "bear_volatile": {
+      "H041a": 0.12,
+      "H026": 0.15,
+      "H045": 0.4,
+      "IBS": 0.33
+    }
+  },
+  "component_oos": {
+    "H041a": {
+      "label": "H041a OOS",
+      "n_months": 101,
+      "cagr": 0.0475,
+      "sharpe": 0.2597,
+      "max_dd": -0.2881,
+      "ann_vol": 0.183,
+      "neg_yrs": 4
+    },
+    "H026": {
+      "label": "H026 OOS",
+      "n_months": 101,
+      "cagr": 0.0246,
+      "sharpe": 0.0866,
+      "max_dd": -0.5241,
+      "ann_vol": 0.2837,
+      "neg_yrs": 3
+    },
+    "H045": {
+      "label": "H045 OOS",
+      "n_months": 101,
+      "cagr": 0.0163,
+      "sharpe": 0.1684,
+      "max_dd": -0.2866,
+      "ann_vol": 0.0968,
+      "neg_yrs": 3
+    },
+    "IBS": {
+      "label": "IBS OOS",
+      "n_months": 101,
+      "cagr": 0.2738,
+      "sharpe": 1.5072,
+      "max_dd": -0.0995,
+      "ann_vol": 0.1816,
+      "neg_yrs": 1
+    }
+  },
+  "oos_regime_counts": {
+    "bear+calm": 5,
+    "bear+volatile": 15,
+    "bull+calm": 61,
+    "bull+volatile": 20
+  },
+  "oos_rate_hike_months": 15,
+  "corr_regime_static_oos": 0.9706,
+  "data_source": "yfinance + FRED"
+}
