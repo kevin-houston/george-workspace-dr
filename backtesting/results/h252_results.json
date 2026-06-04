@@ -1,0 +1,26 @@
+{
+  "hypothesis": "H252",
+  "status": "NOT CONFIRMED",
+  "full_auc": 0.53,
+  "is_auc": 0.4929,
+  "oos_auc": 0.5504,
+  "corr_vix": 0.0953,
+  "cohens_d_full": 0.2759,
+  "false_alarm_rate_oos": 0.7464,
+  "false_alarms_per_year_oos": 12.28,
+  "n_elevated_oos": 138,
+  "n_false_alarms_oos": 103,
+  "confirm_gate_auc": 0.65,
+  "confirm_gate_corr": 0.3,
+  "assets": [
+    "SPY",
+    "TLT",
+    "GLD"
+  ],
+  "window_days": 90,
+  "bpr_z_norm_window": 252,
+  "is_period": "2000-2017",
+  "oos_period": "2018-2026",
+  "n_crises_labeled": 14,
+  "notes": "OOS AUC 0.550 below gate 0.65. VIX correlation 0.095 within independence threshold. Cohen's d 0.276. Geometric signal statistically independent of VIX but insufficient discriminative power on labeled crises."
+}
