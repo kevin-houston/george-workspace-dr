@@ -287,3 +287,26 @@ Issues found: 16. Auto-fixed: 15. Needs review: 1.
 
 **Needs review (1):**
 - H112 IBS OOS Sharpe discrepancy: ibs-mean-reversion.md implies ~1.0–1.2 (historical estimate) but H235 backtest measured 2.129 for 2021–2026 OOS period. The historical estimate was from earlier sessions; the fresh measurement is more accurate. Consider updating ibs-mean-reversion.md to document the 2.129 OOS Sharpe.
+
+## [2026-06-04] create | Regime Detection Signals practical data guide
+
+Page created: `trading/backtesting/regime-detection-signals.md`
+
+Fills the gap in the backtesting section (previously 5 pages; now 6). Companion
+to `algorithms/regime-detection.md` (methods focus) — this new page focuses on
+data sourcing, look-ahead avoidance, and production code patterns.
+
+**Key content:**
+- SPY 200-day MA signal (yfinance; `.shift(1)` discipline)
+- VIX threshold (FRED VIXCLS vs yfinance ^VIX; confirmed threshold VIX=25 from H165a)
+- FRED yield curve signals (T10Y2Y, T10Y3M, DGS10): inversion, rate direction, rate hike modifier
+- Composite 4-state regime (H249 design: bull/bear × calm/volatile)
+- Continuous smooth-score approach (Xiong 2026, arXiv:2605.20636)
+- Calendar alignment, FRED release lag, persistence filtering
+- Complete H249 production code snippet
+
+**Motivation:** H249 (regime-conditional production portfolio weights) is under test;
+this page documents the exact signal construction to prevent look-ahead errors and
+provides the data pipeline reference for all future regime-conditional strategies.
+
+Index updated: pages 108 → 109

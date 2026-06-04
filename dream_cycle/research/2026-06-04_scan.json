@@ -1,0 +1,84 @@
+{
+  "scan_date": "2026-06-04",
+  "focus": "Regime detection / macro-conditional strategies (primary); factor timing; production portfolio upgrades",
+  "papers_reviewed": [
+    {
+      "arxiv_id": "2605.20636",
+      "title": "Continuous Timing Signals for Growth-Defensive Style Allocation: Factor Attribution, Risk Matching, and Out-of-Sample Evidence",
+      "authors": "Zheli Xiong",
+      "date": "May 2026",
+      "relevance": "HIGH — direct design template for H249/H250. Continuous smooth-score (rate relief + SPY drawdown + VIX stress + crowding penalty → tanh) applied to growth/defensive ETF basket. Sharpe 1.01, CAGR 19.24%, MaxDD -31.63% (2017-2026, 10bp costs). Replaces discrete regime bins with smooth weight transitions. Selected as H250 proposal.",
+      "selected": true,
+      "proposal": "H250"
+    },
+    {
+      "arxiv_id": "2605.27848",
+      "title": "Regime-Based Portfolio Allocation Using Hidden Markov Models and Reinforcement Learning",
+      "authors": "Verma, Putri & Lesupi",
+      "date": "May 2026",
+      "relevance": "HIGH — 3-state HMM (low-vol/transitional/high-vol) on SPY/TLT/GLD daily data (2004-2025). RL-enhanced HMM outperforms rule-based rotation; SPY dominates in stable regimes, TLT/GLD provide protection in stressed periods. Uses hmmlearn (already in our pipeline). Selected as H251 proposal.",
+      "selected": true,
+      "proposal": "H251"
+    },
+    {
+      "arxiv_id": "2605.17117",
+      "title": "Geometric Observables for Financial Regime Detection",
+      "authors": "Will Hammond",
+      "date": "May 2026",
+      "relevance": "MEDIUM-HIGH — Berry Phase Rate from spectral embedding of equity-index returns. 67% fewer false alarms than supervised RF; largely uncorrelated with classical signals (|rho| ≈ 0.22). Code available at GitHub. Novel early-warning layer distinct from VIX+SMA. Selected as H252 proposal (HIGH risk due to implementation complexity).",
+      "selected": true,
+      "proposal": "H252"
+    },
+    {
+      "arxiv_id": "2506.12587",
+      "title": "Dynamic allocation: extremes, tail dependence, and regime Shifts",
+      "authors": "Luo, Wang & Jussa",
+      "date": "June 2025",
+      "relevance": "MEDIUM — GARCH-DCC-Copula regime model for global factor performance prediction. 68 pages. Relevant but too complex to implement as a standalone hypothesis. Better as reference for factor timing context. Not selected for proposal.",
+      "selected": false,
+      "reason_rejected": "Implementation complexity (GARCH-DCC-Copula) too high; 68-page paper without code; arXiv:2410.14841 (Shu & Mulvey 2024, SJM factor timing) already covers this angle better."
+    },
+    {
+      "arxiv_id": "2605.04014",
+      "title": "FactorEngine: Knowledge-Infused Factor Mining",
+      "authors": "Lin et al.",
+      "date": "March 2026",
+      "relevance": "LOW — LLM-based alpha factor mining for Chinese market. Not directly applicable to our US equity pipeline. No confirmed factors.",
+      "selected": false,
+      "reason_rejected": "China market focus; LLM factor mining approach similar to already-staged QuantaAlpha (H236)."
+    }
+  ],
+  "wiki_expansion": {
+    "page": "wiki/trading/backtesting/regime-detection-signals.md",
+    "section_filled": "backtesting",
+    "rationale": "Backtesting section was thinnest at 5 pages; regime signals are immediately needed for H249/H250 implementation; companion to existing algorithms/regime-detection.md (methods) and backtesting/design-principles.md (framework). Covers SPY 200MA, VIX (FRED VIXCLS), yield curve (T10Y2Y, DGS10), continuous score construction, look-ahead discipline, and complete production code."
+  },
+  "proposals_summary": [
+    {
+      "id": "H250",
+      "title": "Continuous Macro-Regime Score (upgrade to H249)",
+      "risk": "medium",
+      "feasibility": "high",
+      "expected_oos_improvement": "+0.1 to +0.3 Sharpe vs H249 static; reduced MaxDD via smoother transitions",
+      "implementation_days": 2
+    },
+    {
+      "id": "H251",
+      "title": "3-State HMM for SPY/TLT/GLD Tactical Allocation",
+      "risk": "medium",
+      "feasibility": "high",
+      "expected_oos_sharpe": ">0.8 (paper shows RL-enhanced HMM best; rule-based also beats SPY benchmark)",
+      "implementation_days": 3
+    },
+    {
+      "id": "H252",
+      "title": "Berry Phase Rate Early-Warning Regime Detector",
+      "risk": "high",
+      "feasibility": "medium",
+      "expected_oos_improvement": "AUC > 0.65 on regime transitions; potential to complement H249 as leading indicator",
+      "implementation_days": 5
+    }
+  ],
+  "strategic_context": "Tonight's H249 design (regime-conditional production weights) establishes the first macro-regime overlay on the full production portfolio. H250 (continuous score) is the direct upgrade — smoother transitions should reduce unnecessary rebalancing. H251 is a complementary standalone tactical allocation that could eventually be blended into the production mix. H252 is the speculative long-shot: a leading indicator could give us 1-2 week advance warning of regime changes, enabling proactive rather than reactive weight adjustments.",
+  "next_frontier": "H250 → H251 → H252 (in priority order). If H250 confirms: apply continuous regime score to live paper trading alongside H249. If H251 confirms: evaluate as 10-15% satellite allocation within production portfolio (currently all momentum-based rotation)."
+}

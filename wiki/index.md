@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-30
+updated: 2026-06-04
 sources_indexed: 3
-pages: 108
+pages: 109
 ---
 
 # Wiki Index
@@ -74,6 +74,7 @@ When answering a query:
 - [Walk-Forward & CPCV](trading/backtesting/walk-forward-cpcv.md) — walk-forward variants, CPCV algorithm, purging/embargoing, DSR formulas; Python libs: timeseriescv/skfolio
 - [Transaction Cost Modeling](trading/backtesting/transaction-costs.md) — spread/impact/borrow cost models, square-root market impact, vectorbt/backtrader defaults, per-strategy calibration table
 - [Multiple Testing & Statistical Significance](trading/backtesting/multiple-testing.md) — Bonferroni/BH corrections; deflated Sharpe ratio; p-hacking taxonomy; minimum backtest length formula ← new 2026-05-26
+- [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H235 (frontier: H232 EDGAR narrative drift, H233 NOT CONFIRMED adjusted-MSE, H235 NOT CONFIRMED RF-IBS gate, H236 QuantaAlpha queued, H237 drift-regime reversal scaffold); H217 CONFIRMED (median alpha101 OOS 1.559); H234 CONFIRMED (inside-bar OOS 1.770); H181 reversal (Sharpe 1.138); H192-D BAB (Sharpe 1.367)
 
 **Paper Trading**
