@@ -6103,7 +6103,7 @@ Script: `backtesting/daily/run_h250.py`. Results: `backtesting/results/h250_resu
 
 ---
 
-## H251 — 3-State HMM Tactical Allocation (SPY/TLT/GLD) | CONFIRMED (caveat) | 2026-06-05
+## H251 — 3-State HMM Tactical Allocation (SPY/TLT/GLD) | CONFIRMED (degenerate) | 2026-06-05
 
 **Source:** arXiv:2605.27848 (Verma, Putri & Lesupi, May 2026)
 **Test design:** IS 2004-2017, OOS 2018-2025. hmmlearn GaussianHMM, 3 states, 9 features.
