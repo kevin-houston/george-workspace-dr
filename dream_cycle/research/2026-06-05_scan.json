@@ -1,0 +1,92 @@
+{
+  "date": "2026-06-05",
+  "scan_angles": [
+    "PEAD + post-earnings drift + NLP text signals",
+    "cross-sectional momentum + factor decay + regime",
+    "multi-agent LLM trading systems",
+    "HMM regime detection improvements",
+    "alpha decay modeling"
+  ],
+  "papers_found": [
+    {
+      "id": "arXiv:2511.12490",
+      "title": "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability",
+      "authors": "unknown (November 2025)",
+      "date": "2025-11-16",
+      "url": "https://arxiv.org/abs/2511.12490",
+      "summary": "Regime-conditional signal activation: activate value + short-term reversal only during stock-specific drift regimes (>60% positive days in trailing 63-day window). Claims OOS Sharpe > 13 after costs. Validated vs random regime filters, execution slippage, 2008 liquidity crisis.",
+      "relevance_score": 9,
+      "staged": true,
+      "staged_as": "H253",
+      "actionability": "Direct extension of H181 (industry reversal) and H241 (cross-sectional momentum) — add regime gate condition"
+    },
+    {
+      "id": "arXiv:2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "authors": "Wu, Akin, Martineau, Grégoire, Veneris (Sep 2025)",
+      "date": "2025-09-29",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "github": "https://github.com/chirindaopensource/extracting_structure_press_releases_predicting_earnings_announcement_returns",
+      "summary": "BERT-LDA joint embedding + HDBSCAN clustering on 138,000 earnings press releases (2005-2023). Topic structure predicts announcement-day returns better than standalone BERT. Combines contextual semantics (BERT) with thematic narrative (LDA).",
+      "relevance_score": 8,
+      "staged": true,
+      "staged_as": "H254",
+      "actionability": "Upgrade PEAD scoring from FinBERT-only to BERT-LDA topic-enhanced composite score"
+    },
+    {
+      "id": "arXiv:2512.11913",
+      "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay",
+      "authors": "unknown (December 2025)",
+      "date": "2025-12-27",
+      "url": "https://arxiv.org/abs/2512.11913",
+      "summary": "Derives hyperbolic decay α(t) = K/(1+λt) from game-theoretic equilibrium. Momentum crowding benign; reversal crowding dangerous. Momentum R²=0.65 for hyperbolic fit vs 0.51 linear, 0.61 exponential. Factor-specific decay rates support different IS window sizing.",
+      "relevance_score": 7,
+      "staged": false,
+      "reason_not_staged": "Informative for IS window calibration but not a new testable hypothesis — incorporated into signal-halflife.md mental model"
+    },
+    {
+      "id": "arXiv:2606.00143",
+      "title": "Regime-Adaptive Continual Learning for Portfolio Management",
+      "authors": "Chaofan Pan et al. (May 2026)",
+      "date": "2026-05-31",
+      "url": "https://arxiv.org/abs/2606.00143",
+      "summary": "Continual RL framework for portfolio management that adapts to regime changes without catastrophic forgetting. Addresses GFC-calibrated model staleness — directly relevant to H251 degenerate-regime problem (HMM never transitioning 2018-2025).",
+      "relevance_score": 7,
+      "staged": false,
+      "reason_not_staged": "Relevant to H251b but implementation complexity is high; needs H251b basic rolling-retrain test first before RL-continual approach"
+    },
+    {
+      "id": "arXiv:2503.11499",
+      "title": "Tactical Asset Allocation with Macroeconomic Regime Detection",
+      "authors": "unknown (March 2025)",
+      "date": "2025-03-14",
+      "url": "https://arxiv.org/abs/2503.11499",
+      "summary": "Novel regime classifier forecasts distribution of future regimes and integrates with Black-Litterman for tactical allocation. Outperforms equal-weight, buy-and-hold, random regime baselines.",
+      "relevance_score": 6,
+      "staged": false,
+      "reason_not_staged": "Partially covered by H249/H250/H251 work. H249 discrete bins already confirmed. Black-Litterman integration too complex vs direct weight mapping."
+    },
+    {
+      "id": "arXiv:2508.11152",
+      "title": "AlphaAgents: Large Language Model based Multi-Agents for Equity Portfolio Constructions",
+      "authors": "Zhao, Lyu et al. (August 2025)",
+      "date": "2025-08-15",
+      "url": "https://arxiv.org/abs/2508.11152",
+      "summary": "Role-based multi-agent LLM framework for equity portfolio: fundamental, sentiment, and valuation agents collaborate for stock selection. Systematic equity portfolio construction.",
+      "relevance_score": 5,
+      "staged": false,
+      "reason_not_staged": "TradingAgents (arXiv:2412.20138) already in wiki (ml-for-trading.md). AlphaAgents is similar; marginal novelty vs what's already documented."
+    }
+  ],
+  "staged_count": 2,
+  "proposals": [
+    "dream_cycle/staged/2026-06-05/1_h253_drift_regime_crosssectional_factor.json",
+    "dream_cycle/staged/2026-06-05/2_h254_pead_press_release_topic_structure.json"
+  ],
+  "wiki_expansion": {
+    "new_page": "wiki/trading/paper-trading/tax-and-after-tax-returns.md",
+    "section_expanded": "Paper Trading",
+    "pages_before": 4,
+    "pages_after": 5
+  }
+}
