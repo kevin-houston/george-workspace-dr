@@ -110,6 +110,12 @@
       "claimToken": "bbf8b4d97187f01565c4b5f8354b0186a9d8b1bc8c7739dda17b7dd74a6391c7",
       "claimUrl": "https://here.now/claim?slug=floral-mirage-ndxm&token=bbf8b4d97187f01565c4b5f8354b0186a9d8b1bc8c7739dda17b7dd74a6391c7",
       "expiresAt": "2026-06-04T09:06:50.578Z"
+    },
+    "steady-laurel-97vy": {
+      "siteUrl": "https://steady-laurel-97vy.here.now/",
+      "claimToken": "166e0a4d6bfc5565dabf5fd63c5cdcf063868b2498f615399cdf9de748b70f60",
+      "claimUrl": "https://here.now/claim?slug=steady-laurel-97vy&token=166e0a4d6bfc5565dabf5fd63c5cdcf063868b2498f615399cdf9de748b70f60",
+      "expiresAt": "2026-06-05T09:02:56.221Z"
     }
   }
 }
