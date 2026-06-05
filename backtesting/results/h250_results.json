@@ -1,0 +1,63 @@
+{
+  "hypothesis": "H250",
+  "description": "Continuous Macro-Regime Score (tanh-mapped)",
+  "source": "arXiv:2605.20636 (Xiong, May 2026)",
+  "confirmed": false,
+  "confirm_gate": "OOS Sharpe >= H249_static+0.10 OR MaxDD improvement >= 2%",
+  "h249_static_oos_sharpe": 0.8458,
+  "h249_static_oos_maxdd": -0.2154,
+  "sharpe_vs_h249_static": 0.063,
+  "maxdd_improvement": -0.014,
+  "gate1_sharpe_pass": false,
+  "gate2_maxdd_pass": false,
+  "static_is": {
+    "label": "Static IS",
+    "n_months": 120,
+    "cagr": 0.0848,
+    "sharpe": 0.6393,
+    "max_dd": -0.3619,
+    "ann_vol": 0.1326,
+    "neg_yrs": 2
+  },
+  "static_oos": {
+    "label": "Static OOS",
+    "n_months": 101,
+    "cagr": 0.1103,
+    "sharpe": 0.8458,
+    "max_dd": -0.2154,
+    "ann_vol": 0.1304,
+    "neg_yrs": 2
+  },
+  "h250_is": {
+    "label": "H250 IS",
+    "n_months": 120,
+    "cagr": 0.0918,
+    "sharpe": 0.7388,
+    "max_dd": -0.2876,
+    "ann_vol": 0.1243,
+    "neg_yrs": 2
+  },
+  "h250_oos": {
+    "label": "H250 OOS",
+    "n_months": 101,
+    "cagr": 0.1128,
+    "sharpe": 0.9088,
+    "max_dd": -0.2014,
+    "ann_vol": 0.1241,
+    "neg_yrs": 2
+  },
+  "score_oos_stats": {
+    "mean": -0.0337,
+    "std": 0.4283,
+    "min": -0.9534,
+    "max": 0.7486
+  },
+  "avg_oos_weights": {
+    "H041a": 0.2173,
+    "H026": 0.2673,
+    "H045": 0.2022,
+    "IBS": 0.3132
+  },
+  "corr_vs_static_oos": 0.992,
+  "data_source": "yfinance + FRED (H249 cache)"
+}

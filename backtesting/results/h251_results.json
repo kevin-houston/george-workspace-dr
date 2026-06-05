@@ -1,0 +1,71 @@
+{
+  "hypothesis": "H251",
+  "description": "3-State HMM Tactical Allocation (SPY/TLT/GLD)",
+  "source": "arXiv:2605.27848 (Verma, Putri & Lesupi, May 2026)",
+  "confirmed": true,
+  "confirm_gate": "OOS Sharpe > 0.8",
+  "h251_is": {
+    "label": "H251 IS",
+    "n_months": 158,
+    "cagr": 0.0857,
+    "sharpe": 0.7896,
+    "max_dd": -0.4047,
+    "ann_vol": 0.1085,
+    "neg_yrs": 1
+  },
+  "h251_oos": {
+    "label": "H251 OOS",
+    "n_months": 96,
+    "cagr": 0.1301,
+    "sharpe": 0.9411,
+    "max_dd": -0.2304,
+    "ann_vol": 0.1382,
+    "neg_yrs": 2
+  },
+  "spy_bnh_oos": {
+    "label": "SPY OOS",
+    "n_months": 96,
+    "cagr": 0.1421,
+    "sharpe": 0.8637,
+    "max_dd": -0.2393,
+    "ann_vol": 0.1645,
+    "neg_yrs": 2
+  },
+  "oos_state_counts": {
+    "low_vol": 96
+  },
+  "state_labels": {
+    "2": "low_vol",
+    "1": "transition",
+    "0": "high_vol"
+  },
+  "state_vol_means": {
+    "0": 0.6731,
+    "1": 0.2,
+    "2": 0.1021
+  },
+  "allocation_rules": {
+    "low_vol": {
+      "SPY": 0.8,
+      "TLT": 0.1,
+      "GLD": 0.1
+    },
+    "transition": {
+      "SPY": 0.5,
+      "TLT": 0.3,
+      "GLD": 0.2
+    },
+    "high_vol": {
+      "SPY": 0.2,
+      "TLT": 0.5,
+      "GLD": 0.3
+    }
+  },
+  "corr_vs_h026": 0.7146,
+  "data_source": "yfinance",
+  "hmm_params": {
+    "n_components": 3,
+    "covariance_type": "full",
+    "n_iter": 300
+  }
+}
