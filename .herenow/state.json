@@ -116,6 +116,12 @@
       "claimToken": "166e0a4d6bfc5565dabf5fd63c5cdcf063868b2498f615399cdf9de748b70f60",
       "claimUrl": "https://here.now/claim?slug=steady-laurel-97vy&token=166e0a4d6bfc5565dabf5fd63c5cdcf063868b2498f615399cdf9de748b70f60",
       "expiresAt": "2026-06-05T09:02:56.221Z"
+    },
+    "silken-thistle-sjv2": {
+      "siteUrl": "https://silken-thistle-sjv2.here.now/",
+      "claimToken": "a29063a0cee7692436899ffc6e18d177c8b059deec933b62bddbe42f19699419",
+      "claimUrl": "https://here.now/claim?slug=silken-thistle-sjv2&token=a29063a0cee7692436899ffc6e18d177c8b059deec933b62bddbe42f19699419",
+      "expiresAt": "2026-06-06T09:02:10.801Z"
     }
   }
 }

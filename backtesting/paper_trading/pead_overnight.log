@@ -267,3 +267,15 @@
 [2026-06-04 23:03:23] Candidates for tomorrow: none
 [2026-06-04 23:03:23] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-06-04 23:03:23] Overnight pass complete.
+[2026-06-05 23:01:23] =======================================================
+[2026-06-05 23:01:23] PEAD overnight pass starting
+[2026-06-05 23:01:23] Scanning earnings calendar…
+[2026-06-05 23:02:08]   Tickers with recent earnings: ['AVGO']
+[2026-06-05 23:02:08]   Fetching 8-K for AVGO…
+[2026-06-05 23:02:14]     AVGO: 5594 chars
+[2026-06-05 23:03:00]   Loading ProsusAI/finbert…
+[2026-06-05 23:04:22]   AVGO: score=-0.050  surprise=-0.149
+[2026-06-05 23:04:22]   ✗ AVGO filtered out (score=-0.050, surprise=-0.1493)
+[2026-06-05 23:04:22] Candidates for tomorrow: none
+[2026-06-05 23:04:22] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-06-05 23:04:22] Overnight pass complete.

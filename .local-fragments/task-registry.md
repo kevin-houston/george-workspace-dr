@@ -29,6 +29,7 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 - Verify all claims with 2 independent sources. Single-source claims get "reports suggest / according to X."
 - Filename date must match today (`date +%Y-%m-%d`). A mismatch causes the audio task to fail silently.
 - Newsworthiness check: articles more than 3 days old do not count as "breaking." Drop or clearly date them.
+- **Always get the day of the week from the shell** (`date +%A`) — never rely on the LLM to calculate it. Kevin noticed June 5 was written as "Thursday" when it was Friday. Run `date +"%A, %B %d, %Y"` at script-writing time and hardcode the result.
 
 ---
 
