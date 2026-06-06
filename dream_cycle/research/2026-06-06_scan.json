@@ -1,0 +1,54 @@
+{
+  "date": "2026-06-06",
+  "scan_type": "nightly_dream_cycle",
+  "wiki_expansion": {
+    "page": "wiki/trading/algorithms/factor-momentum-style-rotation.md",
+    "type": "new",
+    "rationale": "Thinnest coverage gap after running H255/H256; synthesizes academic evidence + empirical failures + extensions; 18 sections, ~320 lines",
+    "also_indexed": "wiki/trading/backtesting/regime-detection-signals.md (created 2026-06-04, was unlisted)"
+  },
+  "angles_searched": [
+    {
+      "angle": "PEAD + post-earnings drift",
+      "papers_found": [
+        {"id": "arXiv:2510.03195", "title": "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?", "relevance": "HIGH", "action": "H258 proposed"},
+        {"id": "ScienceDirect 2025", "title": "Beyond the last surprise: Reviving PEAD with ML and historical earnings", "relevance": "HIGH", "action": "H260 proposed"}
+      ]
+    },
+    {
+      "angle": "Cross-sectional and factor momentum",
+      "papers_found": [
+        {"id": "arXiv:2601.05428", "title": "Dynamic Inclusion and Bounded Multi-Factor Tilts", "relevance": "MEDIUM", "action": "noted for H257 design"},
+        {"id": "SSRN:2607730", "title": "Two Centuries of Multi-Asset Momentum", "relevance": "HIGH", "action": "H257 proposed"}
+      ]
+    },
+    {
+      "angle": "Multi-agent LLM trading",
+      "papers_found": [
+        {"id": "arXiv:2605.19337", "title": "Agentic Trading: FactorMAD multi-agent debate", "relevance": "MEDIUM", "action": "H259 proposed (process enhancement)"},
+        {"id": "arXiv:2412.20138", "title": "TradingAgents multi-agent LLM framework", "relevance": "LOW", "action": "noted, already covered in wiki"}
+      ]
+    },
+    {
+      "angle": "Pairs trading + LLM cointegration",
+      "papers_found": [
+        {"id": "arXiv:2512.12264", "title": "Market-Bench: LLMs on quantitative trading", "relevance": "LOW", "action": "no new hypothesis — H246 pairs family exhausted"}
+      ]
+    },
+    {
+      "angle": "GitHub trending quant repos",
+      "repos_found": [
+        {"repo": "paperswithbacktest/awesome-systematic-trading", "relevance": "LOW", "action": "bookmark for hypothesis sourcing"},
+        {"repo": "leoncuhk/awesome-quant-ai", "relevance": "LOW", "action": "bookmark for LLM trading papers"}
+      ]
+    }
+  ],
+  "proposals": [
+    {"id": "H257", "title": "Multi-Asset Composite Dual Momentum", "risk": "medium", "file": "dream_cycle/staged/2026-06-06/h257_multi_asset_composite_momentum.json"},
+    {"id": "H258", "title": "Text-to-Alpha LLM Metric-Shift Detection", "risk": "medium", "file": "dream_cycle/staged/2026-06-06/h258_text_to_alpha_llm_disclosure.json"},
+    {"id": "H259", "title": "FactorMAD Multi-Agent Debate Process", "risk": "low", "file": "dream_cycle/staged/2026-06-06/h259_agentic_factor_mad_debate.json"},
+    {"id": "H260", "title": "PEAD Revival 12-Quarter ML Features", "risk": "medium", "file": "dream_cycle/staged/2026-06-06/h260_pead_ml_historical_earnings.json"}
+  ],
+  "high_risk_items": [],
+  "message_kevin": false
+}

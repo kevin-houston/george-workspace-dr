@@ -1,0 +1,33 @@
+{
+  "hypothesis_number": "H258",
+  "title": "Text-to-Alpha: LLM Metric-Shifting Detection in SEC Filings",
+  "source": "arXiv:2510.03195 — 'From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?'",
+  "date_staged": "2026-06-06",
+  "apply_status": "pending",
+  "risk_level": "medium",
+  "rationale": "This paper identifies 'moving targets' in corporate disclosures — instances where companies shift emphasis away from previously highlighted metrics (e.g., revenue → user growth → engagement). These semantic shifts correlate strongly with abnormal stock returns. The LLM-as-extractor approach delivers 2× risk-adjusted alpha vs. a named-entity-recognition baseline. This is complementary to H163/H174 (FinBERT on 8-K filings) which scores sentiment polarity; this approach scores *metric emphasis change* — a structurally different signal that may be uncorrelated. Implementation would upgrade pead_overnight.py to include a shift-detection pass over 10-K/10-Q filings for watchlist candidates.",
+  "design": {
+    "signal": "Semantic shift score: cosine distance between LLM-extracted metric mentions in current vs prior filing",
+    "universe": "PEAD watchlist candidates (already scored by H174 FinBERT gate)",
+    "implementation": "OpenAI GPT-4o-mini API (key available: $OPENAI_API_KEY) to extract top-5 emphasized metrics from 10-Q; compare to prior 10-Q metric set",
+    "stack": "EDGAR CompanyFacts for 10-Q filings; text extraction via edgartools; LLM extraction; embedding similarity (sentence-transformers)",
+    "signal_window": "Current vs 2-quarter-prior 10-Q (to avoid seasonal effects)",
+    "alpha_direction": "Metric shift away from prior focus → negative momentum expected; new metric introduction → investigate direction"
+  },
+  "confirm_gates": {
+    "oos_win_rate": "> 55%",
+    "oos_mean_return": "> 2.0%",
+    "min_events": 20,
+    "oos_period": "2022-01-01 to 2025-12-31",
+    "independence": "Corr(H258, H174_signal) < 0.5 — must add independent information"
+  },
+  "files_to_create": [
+    "backtesting/daily/run_h258.py"
+  ],
+  "hypothesis_log_entry": {
+    "status": "QUEUED",
+    "note": "Metric-shift detection in SEC 10-Q filings using LLM embedding comparison. Complementary to H174 sentiment polarity approach. Paper (arXiv:2510.03195) reports 2× alpha vs NER baseline. Implementation requires OpenAI API + EDGAR 10-Q access (both available). Priority: medium — PEAD pipeline upgrade candidate.",
+    "paper": "arXiv:2510.03195",
+    "prerequisite": "H174 CONFIRMED (score>=0.18 + surprise>=0.02 gate already in production)"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "hypothesis_number": "H260",
+  "title": "PEAD Revival with ML and Historical Earnings Sequences (12-Quarter Features)",
+  "source": "ScienceDirect 2025 — 'Beyond the last surprise: Reviving PEAD with machine learning and historical earnings'",
+  "date_staged": "2026-06-06",
+  "apply_status": "pending",
+  "risk_level": "medium",
+  "rationale": "Research published 2025 (ScienceDirect, Journal of Financial Economics or similar) shows that ML models using 12 quarters of historical earnings data nearly double the Sharpe ratio of simple 1-quarter EPS surprise models. The key insight: PEAD decays rapidly when trained only on the most recent surprise, but remains strong when the model learns the full time-series of earnings revisions, surprises, and analyst forecast patterns. This is a direct upgrade path for our H174 production PEAD model (currently using 1-quarter EPS surprise + FinBERT score). Adding 12-quarter earnings history as features to a gradient boost model could substantially improve the signal without requiring additional API subscriptions (yfinance provides quarterly EPS history).",
+  "design": {
+    "signal": "LightGBM model with 12-quarter features: EPS surprise history, analyst revision patterns, beat/miss streaks, seasonality",
+    "universe": "S&P 500 companies with >= 12 quarters of EPS history (via yfinance quarterly earnings)",
+    "baseline": "H174 current: FinBERT score >= 0.18 + EPS surprise >= 2% (OOS WR=81.8%)",
+    "target": "Augment H174 entry decision with ML probability score using 12-quarter feature vector",
+    "data_source": "yfinance quarterly earnings (earnings_history, earnings_dates)",
+    "ml_model": "LightGBM (pip install lightgbm — likely already available)",
+    "is_period": "2014-2020 (training)",
+    "oos_period": "2021-2025 (OOS)"
+  },
+  "confirm_gates": {
+    "oos_win_rate": "> 65% (vs H174 baseline 81.8% — must not regress while expanding universe)",
+    "oos_mean_return": "> 5.0%",
+    "min_events": 30,
+    "oos_period": "2021-01-01 to 2025-12-31",
+    "vs_h174": "Must improve either win rate by 5pp OR expand qualifying event count by 50% without losing win rate"
+  },
+  "files_to_create": [
+    "backtesting/daily/run_h260.py"
+  ],
+  "hypothesis_log_entry": {
+    "status": "QUEUED",
+    "note": "PEAD upgrade: add 12-quarter EPS history features via yfinance to LightGBM model. 2025 research shows 12q window nearly doubles Sharpe vs 1q surprise. Builds on H174 CONFIRMED baseline (FinBERT + surprise gate). Implementation risk: yfinance quarterly history completeness — may drop to 500 events with partial data. Test coverage before committing.",
+    "paper": "ScienceDirect 2025 — 'Beyond the last surprise: Reviving PEAD with machine learning and historical earnings'"
+  }
+}

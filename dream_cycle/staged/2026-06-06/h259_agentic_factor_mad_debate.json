@@ -1,0 +1,31 @@
+{
+  "hypothesis_number": "H259",
+  "title": "FactorMAD: Multi-Agent Debate for Factor Signal Refinement",
+  "source": "arXiv:2605.19337 — 'Agentic Trading: When LLM Agents Meet Financial Markets' (FactorMAD module)",
+  "date_staged": "2026-06-06",
+  "apply_status": "pending",
+  "risk_level": "low",
+  "rationale": "FactorMAD uses multi-agent debate where multiple LLM agents critique and refine proposed quantitative factors before backtesting. The approach automates strategy discovery: (1) propose factor, (2) agents debate logic/look-ahead/robustness, (3) refined factor code generated, (4) backtest run. Reported 53.17% cumulative returns on SSE50 universe. For our pipeline, this could accelerate the dream cycle scan Phase 2 — rather than George manually proposing hypotheses, FactorMAD could run in a sandbox and generate + validate proposals more rapidly. Low-risk implementation: use as research accelerator tool, not production signal.",
+  "design": {
+    "approach": "Spawn a collaborator agent with FactorMAD-style instructions: propose 5 factor ideas, have a critic agent evaluate each for look-ahead bias and overfitting risk, accept only factors passing both agents",
+    "agents": [
+      {"role": "Proposer", "task": "Generate factor from academic paper or novel combination"},
+      {"role": "Critic", "task": "Identify look-ahead bias, data mining, and overfitting risks"},
+      {"role": "Arbiter", "task": "Accept/reject based on debate; produce final implementation spec"}
+    ],
+    "output": "Validated factor spec JSON suitable for hypothesis-log staging",
+    "integration": "Run as nightly dream cycle Phase 2 enhancement — 3 FactorMAD proposals per night alongside George's manual scan"
+  },
+  "confirm_gates": {
+    "process_gate": "Multi-agent debate catches at least 1 methodology error per 5 proposals (track in research log)",
+    "outcome_gate": "FactorMAD-originated hypotheses confirm at >= 25% rate (vs current ~20% overall confirmation rate)",
+    "timeline": "30 days of operation before evaluation"
+  },
+  "files_to_create": [],
+  "notes": "No backtest file needed — this is a research process enhancement, not a trading hypothesis. Implement by adding FactorMAD-style instructions to the nightly dream cycle scan prompt.",
+  "hypothesis_log_entry": {
+    "status": "DESIGN",
+    "note": "Process improvement proposal: use multi-agent debate to validate factor proposals before backtesting. Paper reports 53.17% cumulative returns (SSE50, unknown OOS discipline). Primary value is as a look-ahead bias detection layer in the dream cycle, not as a standalone trading signal.",
+    "paper": "arXiv:2605.19337"
+  }
+}

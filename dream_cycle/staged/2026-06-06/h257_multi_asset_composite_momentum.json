@@ -1,0 +1,35 @@
+{
+  "hypothesis_number": "H257",
+  "title": "Multi-Asset Composite Dual Momentum (20+ Asset Universe)",
+  "source": "Geczy & Samonov 2015 (SSRN:2607730); Antonacci Composite Dual Momentum extension; H256 failure analysis",
+  "date_staged": "2026-06-06",
+  "apply_status": "pending",
+  "risk_level": "medium",
+  "rationale": "H256 (Antonacci GEM) failed OOS 2015-2025 because the binary equity/bonds gate fails when bonds and stocks crash together (2022: TLT -26%, SPY -18%). The fix is a broader multi-asset universe with 4 separate modules, each with its own relative+absolute momentum gate. Multiple escape routes mean the strategy can find positive absolute momentum in at least one module even during equity+bond simultaneous crashes. Geczy & Samonov document 2-century multi-asset momentum with consistent Sharpe across stocks, bonds, currencies, and commodities.",
+  "design": {
+    "modules": [
+      {"name": "Equity", "assets": ["SPY", "EFA", "IWM", "QQQ"], "defensive": "BIL"},
+      {"name": "Credit", "assets": ["HYG", "LQD", "TLT"], "defensive": "SHY"},
+      {"name": "Real Assets", "assets": ["GLD", "DBC", "VNQ"], "defensive": "BIL"},
+      {"name": "International", "assets": ["EEM", "VEA", "FXI"], "defensive": "BIL"}
+    ],
+    "signal": "6-month absolute + relative momentum within each module",
+    "allocation": "Equal weight to each module (25% each); within module, best asset by relative momentum; if absolute negative go defensive",
+    "rebalance": "Monthly",
+    "TC": "10bp round-trip"
+  },
+  "confirm_gates": {
+    "oos_sharpe": "> 1.0",
+    "oos_period": "2020-01-01 to 2025-12-31",
+    "corr_spy_oos": "< 0.70",
+    "vs_h256": "must beat best H256 variant by Sharpe > 0.15"
+  },
+  "files_to_create": [
+    "backtesting/daily/run_h257.py"
+  ],
+  "hypothesis_log_entry": {
+    "status": "QUEUED",
+    "note": "Extension of H256 (NOT CONFIRMED). Key innovation: 4-module structure with equity + credit + real assets + international allows defensive exit in one module while others remain invested. Reduces single-point-of-failure in 2022 style joint bond+equity crash.",
+    "paper": "SSRN:2607730"
+  }
+}

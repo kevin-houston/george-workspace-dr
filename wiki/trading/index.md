@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-05 (tax-and-after-tax-returns.md new; H250/H251 logged; dream cycle scan 2026-06-05)
+updated: 2026-06-06 (factor-momentum-style-rotation.md new; regime-detection-signals.md indexed; H255/H256 logged)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -38,6 +38,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [IBS Mean-Reversion](algorithms/ibs-mean-reversion.md) ← new 2026-05-28 (Internal Bar Score strategy; PRODUCTION — XLK 20%/SMH 8%/IGV 2%; formula, per-ETF params, H062–H149 hypothesis log, arxiv:2306.12434)
   - [Technical Analysis & Chart Patterns](algorithms/technical-analysis-patterns.md) ← new 2026-05-29 (H234 CONFIRMED inside-bar coiled-spring OOS 1.770 — strongest confirmed hypothesis; NR7/NR4 reference; TA-Lib vs pandas-ta-classic library guide; H233/H235 MACD+RSI+Stochastic+ROC feature pipeline; ZHAW arXiv:2208.07168 MACD 44% importance)
   - [Long/Short Equity](algorithms/long-short-equity.md) ← new 2026-06-02 (dollar-neutral L/S construction; 130/30; borrow costs ~0.75%/yr large-cap; H243 design: top/bottom quintile EW on 200-stock universe; momentum crash risk + Daniel/Moskowitz 2016; sector-neutral L/S variant; backtesting mistake table)
+  - [Factor Momentum & Style Rotation](algorithms/factor-momentum-style-rotation.md) ← new 2026-06-06 (Gupta & Kelly 2019 IS Sharpe 0.84 long-short; H255 NOT CONFIRMED long-only ETF Corr=0.89 all US equity; H256 NOT CONFIRMED GEM/PACS/GEM+Sector all < SPY OOS 2015-2025; look-ahead bias trap: unlagged 12m signal inflated OOS Sharpe 3×; multi-asset extensions with bonds+commodities queued)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
@@ -71,6 +72,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Multiple Testing & Statistical Significance](backtesting/multiple-testing.md) ← new 2026-05-26 (DSR, PBO, block bootstrap, White Reality Check; BH FDR correction; Harvey-Liu-Zhu t-ratio thresholds; pipeline application table)
   - [Signal Half-Life & Alpha Decay Measurement](backtesting/signal-halflife.md) ← new 2026-05-31 (AR(1)/regression half-life formula, rolling IC decay diagnostics, hyperbolic vs exponential fits, AI-driven compression from 58→18 months, IS window guidance, per-strategy decay table)
   - [Survivorship Bias & Universe Construction](backtesting/survivorship-bias.md) ← new 2026-06-03 (bias types + magnitude: Ranse 2025 +4.94pp returns/+0.097 Sharpe; Shumway 1997 delistings = 40% of momentum profits; fja05680/sp500 free repo ★854; Norgate Platinum for production; PIT universe builder; H241–H246 bias impact assessment; common mistakes table)
+  - [Regime Detection Signals — Practical Data Guide](backtesting/regime-detection-signals.md) ← new 2026-06-04 (SPY 200MA + VIX FRED + T10Y2Y fetch code; four-state composite H249-style; continuous score Xiong 2026; FRED release-lag rules; filtered vs smoothed HMM probabilities; H165a/H249/H205 confirmed results table)
 - [Paper Trading](paper-trading/) — Alpaca results log
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)
@@ -78,6 +80,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Live Graduation Criteria & Performance Attribution](paper-trading/live-graduation-criteria.md) ← new 2026-05-30 (SPRT test for strategy validation, minimum trade counts, regime coverage gates, paper→live execution attribution, Alpaca migration steps)
   - [Tax & After-Tax Return Modeling](paper-trading/tax-and-after-tax-returns.md) ← new 2026-06-05 (STCG/LTCG rates for IL, wash sale rule for algo trading, HIFO lot selection, after-tax Sharpe formula, expected ~40% tax drag on STCG monthly-rebalanced strategies, IRS Form 8949 reporting)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-06-06](research-log/2026-06-06.md) — wiki expansion: factor-momentum-style-rotation.md new (Gupta & Kelly 2019 Sharpe 0.84; H255/H256 failure analysis; look-ahead bias 3× inflation; multi-asset extensions); indexed regime-detection-signals.md; dream cycle: H257 multi-asset composite momentum, H258 text-to-alpha LLM disclosure, H259 FactorMAD debate, H260 PEAD 12q ML
   - [2026-05-31](research-log/2026-05-31.md) — wiki expansion: signal-halflife.md new (AR(1) half-life formula, rolling IC diagnostics, hyperbolic decay, AI compression 58→18 months, IS window table); dream cycle: H238 BlindTrade LLM portfolio, H239 LLM time-capsule factor, LLM reality-check wiki update, PEAD fine-grained decomposition staged
   - [2026-05-30](research-log/2026-05-30-live-graduation.md) — wiki expansion: live-graduation-criteria.md new; dream cycle scan: drift-regime reversal H237, GT-Score backtesting objective, AlphaAgent LLM mining staged
   - [2026-05-29](research-log/2026-05-29.md) — wiki expansion: technical-analysis-patterns.md new (H234 coiled-spring OOS 1.770 strongest confirmed; TA-Lib vs pandas-ta-classic library guide; NR7/NR4 reference; MACD/RSI/Stochastic/ROC feature pipeline for H233/H235; ZHAW arXiv:2208.07168); dream cycle scan complete
