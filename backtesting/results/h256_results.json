@@ -1,0 +1,77 @@
+{
+  "hypothesis": "H256",
+  "title": "Dual Momentum (Antonacci GEM + PACS + GEM+Sector)",
+  "status": "NOT CONFIRMED",
+  "is_results": [
+    {
+      "label": "GEM-IS",
+      "sharpe": 0.5466,
+      "cagr": 0.0423,
+      "max_dd": -0.1723,
+      "neg_yrs": 0,
+      "months": 155
+    },
+    {
+      "label": "PACS-IS",
+      "sharpe": 0.6034,
+      "cagr": 0.0856,
+      "max_dd": -0.4034,
+      "neg_yrs": 3,
+      "months": 155
+    },
+    {
+      "label": "GEM+Sector-IS",
+      "sharpe": 0.4932,
+      "cagr": 0.0522,
+      "max_dd": -0.223,
+      "neg_yrs": 3,
+      "months": 155
+    }
+  ],
+  "oos_results": [
+    {
+      "label": "GEM-OOS",
+      "sharpe": 0.6964,
+      "cagr": 0.0747,
+      "max_dd": -0.1956,
+      "neg_yrs": 4,
+      "months": 131,
+      "corr_spy": 0.7944
+    },
+    {
+      "label": "PACS-OOS",
+      "sharpe": 0.5218,
+      "cagr": 0.066,
+      "max_dd": -0.2797,
+      "neg_yrs": 3,
+      "months": 131,
+      "corr_spy": 0.7661
+    },
+    {
+      "label": "GEM+Sector-OOS",
+      "sharpe": 0.6459,
+      "cagr": 0.082,
+      "max_dd": -0.2407,
+      "neg_yrs": 2,
+      "months": 131,
+      "corr_spy": 0.6465
+    }
+  ],
+  "spy_oos": {
+    "label": "SPY-BH",
+    "sharpe": 1.0149,
+    "cagr": 0.1361,
+    "max_dd": -0.2393,
+    "neg_yrs": 2,
+    "months": 131
+  },
+  "gates": {
+    "sharpe_gate": 0.9,
+    "sharpe_pass": false,
+    "dd_gate": -0.1393,
+    "dd_pass": false,
+    "corr_gate": 0.7,
+    "corr_pass": false
+  },
+  "best_variant": "GEM-OOS"
+}

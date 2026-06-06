@@ -1,0 +1,79 @@
+{
+  "hypothesis": "H255",
+  "title": "Factor ETF Momentum Rotation",
+  "status": "NOT CONFIRMED",
+  "best_variant": "B-Top2",
+  "is_results": [
+    {
+      "label": "A-Top1",
+      "sharpe": 0.9356,
+      "cagr": 0.0991,
+      "max_dd": -0.1467,
+      "neg_yrs": 2,
+      "months": 71
+    },
+    {
+      "label": "B-Top2",
+      "sharpe": 1.0189,
+      "cagr": 0.1026,
+      "max_dd": -0.1525,
+      "neg_yrs": 1,
+      "months": 71
+    },
+    {
+      "label": "C-Top3",
+      "sharpe": 1.0179,
+      "cagr": 0.1001,
+      "max_dd": -0.1582,
+      "neg_yrs": 1,
+      "months": 71
+    }
+  ],
+  "oos_results": [
+    {
+      "label": "A-Top1",
+      "sharpe": 0.7876,
+      "cagr": 0.1132,
+      "max_dd": -0.2271,
+      "neg_yrs": 1,
+      "months": 71
+    },
+    {
+      "label": "B-Top2",
+      "sharpe": 0.8834,
+      "cagr": 0.13,
+      "max_dd": -0.2341,
+      "neg_yrs": 1,
+      "months": 71
+    },
+    {
+      "label": "C-Top3",
+      "sharpe": 0.8677,
+      "cagr": 0.1246,
+      "max_dd": -0.2214,
+      "neg_yrs": 1,
+      "months": 71
+    }
+  ],
+  "spy_oos_sharpe": 0.9895,
+  "corr_best_spy_oos": 0.8935,
+  "gates": {
+    "sharpe_gate": 1.0,
+    "corr_gate": 0.7,
+    "sharpe_pass": false,
+    "corr_pass": false
+  },
+  "top_holdings_oos": {
+    "IVE": 11,
+    "IWF": 36,
+    "IVW": 33,
+    "BIL": 8,
+    "IWM": 11,
+    "SIZE": 2,
+    "VLUE": 10,
+    "QUAL": 8,
+    "IWD": 3,
+    "USMV": 7,
+    "MTUM": 15
+  }
+}
