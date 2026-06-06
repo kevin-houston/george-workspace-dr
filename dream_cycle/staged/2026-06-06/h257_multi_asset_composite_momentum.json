@@ -3,7 +3,8 @@
   "title": "Multi-Asset Composite Dual Momentum (20+ Asset Universe)",
   "source": "Geczy & Samonov 2015 (SSRN:2607730); Antonacci Composite Dual Momentum extension; H256 failure analysis",
   "date_staged": "2026-06-06",
-  "apply_status": "pending",
+  "apply_status": "applied",
+  "applied_date": "2026-06-06",
   "risk_level": "medium",
   "rationale": "H256 (Antonacci GEM) failed OOS 2015-2025 because the binary equity/bonds gate fails when bonds and stocks crash together (2022: TLT -26%, SPY -18%). The fix is a broader multi-asset universe with 4 separate modules, each with its own relative+absolute momentum gate. Multiple escape routes mean the strategy can find positive absolute momentum in at least one module even during equity+bond simultaneous crashes. Geczy & Samonov document 2-century multi-asset momentum with consistent Sharpe across stocks, bonds, currencies, and commodities.",
   "design": {
@@ -24,7 +25,7 @@
     "corr_spy_oos": "< 0.70",
     "vs_h256": "must beat best H256 variant by Sharpe > 0.15"
   },
-  "files_to_create": [
+  "files_created": [
     "backtesting/daily/run_h257.py"
   ],
   "hypothesis_log_entry": {

@@ -1,5 +1,9 @@
 ---
-updated: 2026-06-05
+updated: 2026-06-06
+h260_status: QUEUED (2026-06-06) — PEAD Revival with 12-Quarter ML Features. Source: ScienceDirect 2025 "Beyond the last surprise: Reviving PEAD with ML and historical earnings". Hypothesis: LightGBM on 12-quarter EPS surprise/beat-streak/analyst-revision sequence nearly doubles Sharpe vs 1-quarter H174 model. IS 2014–2020, OOS 2021–2025. Gates: OOS WR>65%, mean_ret>5%, n>=30. Scaffold: backtesting/daily/run_h260.py.
+h259_status: DESIGN (2026-06-06) — FactorMAD Multi-Agent Debate for Factor Signal Refinement. Source: arXiv:2605.19337 "Agentic Trading: When LLM Agents Meet Financial Markets". Process improvement: multi-agent proposer+critic+arbiter debate to validate factor signals before backtesting. Goal: catch look-ahead bias and overfitting risks early. No backtest script — implements as dream cycle scan enhancement. Target: >25% confirmation rate on FactorMAD-originated hypotheses vs current ~20% baseline.
+h258_status: QUEUED (2026-06-06) — Text-to-Alpha: LLM Metric-Shift Detection in SEC 10-Q Filings. Source: arXiv:2510.03195 "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?". Mechanism: cosine/Jaccard distance between GPT-4o-mini-extracted top-5 KPI sets in current vs 1-quarter-prior 10-Q; high shift (>0.6) predicts negative drift. Overlay on H174 PEAD events (not standalone). Gates: OOS WR>55%, mean_ret>2%, n>=20, Corr(shift,H174)<0.50. Scaffold: backtesting/daily/run_h258.py. Prerequisite: H174 CONFIRMED.
+h257_status: QUEUED (2026-06-06) — Multi-Asset Composite Dual Momentum (20-Asset 4-Module Structure). Source: Geczy & Samonov 2015 SSRN:2607730; H256 failure analysis. Four equal-weight modules — Equity (SPY/EFA/IWM/QQQ), Credit (HYG/LQD/TLT/SHY/AGG), Real Assets (GLD/DBC/VNQ/PDBC/IAU), International (EEM/VEA/FXI/EWJ/EWZ) — each with independent 6m relative+absolute momentum gate. Fixes H256's single-point-of-failure in inflationary bear markets. IS 2010–2017, OOS 2018–2025. Gates: OOS Sharpe>1.0, Corr(H257,SPY)<0.70. Script: backtesting/daily/run_h257.py.
 h256_status: NOT CONFIRMED (2026-06-05) — Dual Momentum (Antonacci GEM + PACS + GEM+Sector). Source: Antonacci "Dual Momentum Investing" (2014); GEM model (SPY/EFA/BIL) and PACS model. Three variants tested: A=Classic GEM 3-asset (SPY/EFA/BIL, absolute 12m gate → relative SPY vs EFA); B=Extended PACS (equity pool SPY/QQQ/IWM/EFA/EEM + defensive pool TLT/GLD/BIL, absolute gate → rotate best equity vs best defensive); C=GEM+Sector (Antonacci absolute gate + top-2 sector ETF cross-sectional rotation; defensive = TLT). Signal correctly lagged 1 month (prior month-end 12m return). IS: 2002–2014, OOS: 2015–2025. RESULTS — GEM-OOS: Sharpe=0.696 MaxDD=-19.6% NegYrs=4; PACS-OOS: Sharpe=0.522 MaxDD=-28.0% NegYrs=3; GEM+Sector-OOS: Sharpe=0.646 MaxDD=-24.1% NegYrs=2; SPY B&H OOS: Sharpe=1.015 MaxDD=-23.9%. CORR: Corr(GEM,SPY)=0.794, Corr(PACS,SPY)=0.766, Corr(GEM+Sector,SPY)=0.646. NOT CONFIRMED: best OOS Sharpe 0.696 < gate 0.90. CRITICAL METHODOLOGY NOTE — LOOK-AHEAD BIAS TRAP: unlagged run (r12 at same month-end as return) produced GEM+Sector OOS Sharpe=1.956 — a dramatic artificial inflation. After proper 1-month signal lag the same variant drops to 0.646. The 12m momentum signal computed at month-end t MUST be lagged to t-1 when matched against returns during month t. This is a recurring risk whenever r12 = monthly/monthly.shift(12)-1 is used without shift(1). ROOT CAUSE (structural failure): (1) 2022 bond/equity joint crash — TLT fell -26% in 2022 while SPY fell -18%; GEM's defensive shift to TLT during a high-inflation rate-hike cycle finds no refuge when duration assets also crash, the assumption that bonds protect in bear markets breaks down in inflationary regimes; (2) Post-2015 bull market (2016-2025 except 2022) rarely produces sustained 12m negative SPY momentum — the absolute gate barely fires, making GEM approximate simple SPY buy-and-hold; (3) 2020 V-shape recovery — SPY 12m signal turned negative too late (March 2020) after the crash was over; by the time the defensive signal fired and was lagged 1m, the market had already recovered; (4) The 12m lookback is too slow for modern market dynamics (algorithmic markets respond within days, not months). CONCLUSION: Dual Momentum (GEM/PACS/GEM+Sector) underperforms SPY B&H in 2015-2025. The absolute momentum gate — Antonacci's key innovation — does not help in a period dominated by joint bond/equity crashes and rapid V-shape recoveries. H026 sector rotation (cross-sectional only, no absolute gate) outperforms by remaining always-invested in the best-performing sector. Production portfolio unchanged. Script: backtesting/daily/run_h256.py. Results: backtesting/results/h256_results.json.
 h255_status: NOT CONFIRMED (2026-06-05) — Factor ETF Momentum Rotation. Source: Gupta & Kelly (2019) "Factor Momentum Everywhere"; Jegadeesh & Titman (1993). Hypothesis: rotating among 12 factor/style ETFs (MTUM, QUAL, VLUE, USMV, SIZE, IVW, IVE, IWM, IWD, IWF, SPY, BIL) by 6-1 month momentum outperforms static factor blends. Signal correctly lagged 1 month (6m return ending 1 month prior, standard skip-1m reversal). IS: 2014–2019, OOS: 2020–2025. Three variants: A=Top-1 EW, B=Top-2 EW, C=Top-3 EW. RESULTS — Best OOS variant: B-Top2 (Sharpe=0.883, CAGR=13.0%, MaxDD=-23.4%, NegYrs=1). SPY B&H OOS: Sharpe=0.990. Corr(B-Top2, SPY) OOS=0.894. NOT CONFIRMED: OOS Sharpe 0.883 < gate 1.0; Corr 0.894 > gate 0.70. Annual OOS: 2021:+23.5%, 2022:-22.2%, 2023:+21.3%, 2024:+22.3%, 2025:+14.3%. Top holdings OOS: IWF (36mo), IVW (33mo), MTUM (15mo) — growth ETFs dominated 94% of months. ROOT CAUSE: (1) Factor ETF universe is 100% US large-cap equity — all 12 assets have high co-movement with SPY; there is no defensive alternative (the ETFs representing "value" or "quality" still fall with the market in bear periods since they hold the same underlying stocks); (2) 2022 was a synchronized equity drawdown — even USMV (min-vol) fell -12%; BIL appeared only 8 months of 72 OOS (the signal doesn't rotate to cash in time); (3) Momentum in factor ETFs reduces to: "hold whichever growth sub-index has performed best recently" — in 2020-2025 that is consistently IWF/IVW (large-cap growth), making this a very high-Corr(SPY) strategy with no defensive capability; (4) The factor momentum phenomenon (Gupta & Kelly 2019) is confirmed academically on long/short factor portfolios, but long-only factor ETF rotation loses the "short losers" half of the effect. CONCLUSION: Factor ETF momentum rotation is not additive to the production portfolio — it is essentially a high-cost SPY substitute. Portfolio diversification requires non-equity assets (bonds, gold, commodities) or uncorrelated strategies (IBS, reversal). Script: backtesting/daily/run_h255.py. Results: backtesting/results/h255_results.json.
 h251_status: CONFIRMED (2026-06-04) — 3-State HMM Tactical Allocation (SPY/TLT/GLD). Source: arXiv:2605.27848 (Verma, Putri & Lesupi, May 2026). Design: 3-state GaussianHMM (hmmlearn, n_components=3, covariance_type=full, n_iter=300) fit on IS daily features [log_return, rolling_21d_vol, rolling_21d_return] for each of SPY/TLT/GLD (9 features total). States labeled post-hoc by SPY_vol21 mean: State 2→low_vol (mean vol 0.1021), State 1→transition (0.2000), State 0→high_vol (0.6731). IS distribution: low_vol 59.2%, transition 38.6%, high_vol 2.3%. Allocation rules: low_vol→SPY 80%/TLT 10%/GLD 10%; transition→SPY 50%/TLT 30%/GLD 20%; high_vol→SPY 20%/TLT 50%/GLD 30%. Monthly rebalance at prior month-end state. 10bp transaction cost per rebalance. IS: 2004–2017, OOS: 2018–2025 (96 months). RESULTS — H251 IS: Sharpe=0.790 MaxDD=-40.5%; H251 OOS: Sharpe=0.941 MaxDD=-23.0% CAGR=13.0%; SPY B&H OOS: Sharpe=0.864 MaxDD=-23.9%. Corr(H251, H026) OOS=0.714. OOS state distribution: low_vol 100% (96/96 months), transition 0%, high_vol 0%. CONFIRMED: OOS Sharpe 0.941 > gate 0.80. CRITICAL FINDING — OOS state collapse: the HMM spent 100% of OOS time in the low_vol state, meaning the portfolio was locked at SPY 80%/TLT 10%/GLD 10% for all 96 OOS months. This is effectively a static 80/10/10 allocation in OOS, not an adaptive strategy. The OOS Sharpe of 0.941 therefore reflects this static blend's performance in the 2018–2025 bull market, not HMM regime detection. The IS high_vol state (2.3% of IS days) represents only ~74 crisis-day signatures in IS; in OOS the HMM never transitions to high_vol or transition states using predict() on the IS-trained model. ROOT CAUSE: (1) GaussianHMM trained on IS daily features learns IS-regime boundaries; in OOS, the low_vol regime signature (low rolling 21d vol) dominates because 2018–2025 bull market SPY realized vol is generally below IS-crisis levels — the model's high_vol threshold is calibrated to GFC/2011 vol levels that never recurred at the same magnitude in OOS; (2) predict() assigns each month-end observation to the IS-trained state using filtered Viterbi — once the high_vol mean/covariance is set from IS crisis periods, OOS observations near that boundary fall into low_vol; (3) Corr(H251,H026)=0.714 is high, confirming limited diversification value — H251 OOS is approximately SPY-heavy, which correlates with H026's growth-oriented sector momentum. CONCLUSION: H251 technically confirms (OOS Sharpe 0.941 > 0.8) but via state collapse to a static equity-heavy allocation, not via adaptive regime detection. The HMM regime detection component provides zero value in OOS — all 96 months classified as low-vol. The hypothesis CONFIRMS as a technical pass but FAILS as an adaptive regime model. NOT RECOMMENDED for production blend. If adding a SPY/TLT/GLD tactical component, prefer H249's SPY 200MA × VIX rule-based regime engine which actively switches states in OOS. Script: backtesting/daily/run_h251.py. Results: backtesting/results/h251_results.json.
@@ -6165,3 +6169,93 @@ Script: `backtesting/daily/run_h255.py`. Results: `backtesting/results/h255_resu
 NOT CONFIRMED: best OOS Sharpe 0.696 < gate 0.90. All 3 variants underperform SPY B&H in 2015-2025. Root cause: (1) 2022 joint bond+equity crash — TLT −26% in 2022, eliminating the defensive refuge; (2) Post-2015 bull market rarely produces sustained negative 12m SPY momentum, so the absolute gate barely fires; (3) 2020 V-shape recovery neutralizes the absolute gate after signal lag; (4) 12m lookback too slow for modern market dynamics.
 
 Script: `backtesting/daily/run_h256.py`. Results: `backtesting/results/h256_results.json`.
+
+---
+
+## H257 — Multi-Asset Composite Dual Momentum | QUEUED | 2026-06-06
+
+**Source:** Geczy & Samonov (2015) SSRN:2607730 "Two Centuries of Multi-Asset Momentum"; Antonacci Composite Dual Momentum extension; H256 failure analysis.
+**Motivation:** H256 (GEM/PACS/GEM+Sector) NOT CONFIRMED OOS 2015-2025 due to 2022 joint bond+equity crash (TLT −26%, SPY −18%). The binary equity/bonds gate has a single failure mode: when both crash together, there is no refuge. A 4-module structure (equity, credit, real assets, international) with independent absolute momentum gates per module provides multiple defensive escape routes simultaneously.
+
+**Design:**
+- Module 1 Equity:       SPY, EFA, IWM, QQQ → defensive: BIL
+- Module 2 Credit:       HYG, LQD, TLT, SHY, AGG → defensive: SHY
+- Module 3 Real Assets:  GLD, DBC, VNQ, PDBC, IAU → defensive: BIL
+- Module 4 International: EEM, VEA, FXI, EWJ, EWZ → defensive: BIL
+- Within each module: best asset by 6m relative momentum; if best absolute mom < 0 → defensive
+- Portfolio: equal-weight 25% to each module, monthly rebalance, 10bp TC
+- Signal: 6m momentum, lagged 1m (same look-ahead protection as H256 fix)
+- IS: 2010-2017, OOS: 2018-2025
+
+**Confirm gates:** OOS Sharpe > 1.0; Corr(H257, SPY) OOS < 0.70; Sharpe improvement vs H256 GEM (0.696) > 0.30
+
+Script: `backtesting/daily/run_h257.py`. Results: `backtesting/results/h257_results.json` (after run).
+
+---
+
+## H258 — Text-to-Alpha: LLM Metric-Shift Detection in SEC 10-Q Filings | QUEUED | 2026-06-06
+
+**Source:** arXiv:2510.03195 "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?" (2025). Reports 2× risk-adjusted alpha vs NER baseline on metric-shifting detection.
+**Motivation:** H174 (FinBERT sentiment polarity, CONFIRMED OOS WR=81.8%) scores *how positive* 8-K text is. This hypothesis captures a structurally different signal: *which metrics management chose to emphasize is changing*. Metric shifts (e.g., pivoting from revenue → user growth → engagement rate) predict negative abnormal returns as they signal deteriorating core metrics. Requires H174 as prerequisite (provides the base event set).
+
+**Design:**
+- Universe: H174 PEAD watchlist candidates (score>=0.18 + surprise>=0.02 already confirmed)
+- Fetch 10-Q text for current and 1-quarter-prior filing via EDGAR
+- GPT-4o-mini extracts top-5 emphasized financial metrics per filing
+- Shift score = 1 - Jaccard(current_metrics, prior_metrics); range [0,1]
+- High shift (>0.6) = management pivoting; expected negative drift
+- Low shift (<0.2) = metric consistency; confirms H174 direction
+- IS: 2019-2021, OOS: 2022-2025; independent variable: shift_score
+- Independence gate: Corr(shift_score, H174_finbert_score) < 0.50
+
+**Confirm gates:** OOS Win Rate > 55%; OOS Mean Return > 2.0%; Min OOS events: 20; Independence Corr < 0.50
+
+**Data requirements:** OpenAI API key ($OPENAI_API_KEY ✓), EDGAR 10-Q text ($EDGAR_USER_AGENT ✓), H174 event log (build from pead_overnight.py history).
+
+Script: `backtesting/daily/run_h258.py`. Results: `backtesting/results/h258_results.json` (scaffold — full run requires H174 event CSV).
+
+---
+
+## H259 — FactorMAD Multi-Agent Debate for Factor Signal Refinement | DESIGN | 2026-06-06
+
+**Source:** arXiv:2605.19337 "Agentic Trading: When LLM Agents Meet Financial Markets" (FactorMAD module). Reports 53.17% cumulative returns on SSE50. arXiv:2412.20138 TradingAgents framework (Bull/Bear researchers + trader synthesis).
+**Nature:** Process improvement — not a trading hypothesis. No backtest script.
+
+**Design:** Add a multi-agent debate phase to the nightly dream cycle scan Phase 2:
+1. Proposer agent: generates factor idea from academic paper
+2. Critic agent: challenges on look-ahead bias, data mining, overfitting risk
+3. Arbiter agent: accepts/rejects; produces refined implementation spec
+4. Only accepted factors proceed to hypothesis-log staging
+
+**Success criteria:** Track across 30 days of operation:
+- Multi-agent debate catches ≥1 methodology error per 5 proposals
+- FactorMAD-originated hypotheses confirm at ≥25% rate (vs ~20% current baseline)
+
+**Implementation:** Update nightly dream cycle scan prompt to include proposer/critic/arbiter loop for 3 of the 5 scan angles. No file creation needed.
+
+No script file. No backtest results. Implementation in dream cycle scan prompt (task registry).
+
+---
+
+## H260 — PEAD Revival with 12-Quarter ML Features | QUEUED | 2026-06-06
+
+**Source:** ScienceDirect 2025 — "Beyond the last surprise: Reviving PEAD with machine learning and historical earnings." Research documents near-doubling of Sharpe ratio using 12-quarter EPS feature window vs 1-quarter surprise-only models.
+**Motivation:** H174 (CONFIRMED OOS WR=81.8%, MeanRet=6.89%, n=22) uses only: FinBERT score + current-quarter EPS surprise. The 2025 paper shows that sequential earnings patterns (consistent beaters, mean-reverting surprises, analyst revision trends) contain predictive information beyond the single-period surprise. yfinance provides quarterly earnings history (earnings_history property) for free, covering 12+ quarters for most large-cap stocks.
+
+**Design:**
+- Feature set: eps_surprise_q[1..12], beat_streak, miss_streak, revision_direction_q[1..4], finbert_score (H174)
+- Target: 20-day forward return sign (binary classification via LightGBM)
+- Time-series 5-fold CV in IS; strict IS/OOS date split (no leakage)
+- IS: 2014-2020, OOS: 2021-2025
+- Data: yfinance earnings_history + existing H174 event log
+- Model: LightGBM binary classifier (pip install lightgbm)
+
+**Confirm gates:**
+- OOS Win Rate > 65% (vs H174 baseline 81.8% — must not regress while expanding n)
+- OOS Mean Return > 5.0% (vs H174 baseline 6.89%)
+- Min OOS events: 30 (vs H174 n=22 — must also expand coverage)
+- vs H174: win_rate +5pp OR n_events +50% without WR regression
+
+**Data prerequisite:** Build `backtesting/results/h174_events.csv` from historical pead_overnight.py logs before full run.
+
+Script: `backtesting/daily/run_h260.py`. Results: `backtesting/results/h260_results.json` (scaffold — full run requires h174_events.csv).

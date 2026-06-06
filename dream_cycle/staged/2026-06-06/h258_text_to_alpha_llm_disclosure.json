@@ -1,9 +1,10 @@
 {
   "hypothesis_number": "H258",
-  "title": "Text-to-Alpha: LLM Metric-Shifting Detection in SEC Filings",
+  "title": "Text-to-Alpha: LLM Metric-Shift Detection in SEC Filings",
   "source": "arXiv:2510.03195 — 'From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?'",
   "date_staged": "2026-06-06",
-  "apply_status": "pending",
+  "apply_status": "applied",
+  "applied_date": "2026-06-06",
   "risk_level": "medium",
   "rationale": "This paper identifies 'moving targets' in corporate disclosures — instances where companies shift emphasis away from previously highlighted metrics (e.g., revenue → user growth → engagement). These semantic shifts correlate strongly with abnormal stock returns. The LLM-as-extractor approach delivers 2× risk-adjusted alpha vs. a named-entity-recognition baseline. This is complementary to H163/H174 (FinBERT on 8-K filings) which scores sentiment polarity; this approach scores *metric emphasis change* — a structurally different signal that may be uncorrelated. Implementation would upgrade pead_overnight.py to include a shift-detection pass over 10-K/10-Q filings for watchlist candidates.",
   "design": {
@@ -21,7 +22,7 @@
     "oos_period": "2022-01-01 to 2025-12-31",
     "independence": "Corr(H258, H174_signal) < 0.5 — must add independent information"
   },
-  "files_to_create": [
+  "files_created": [
     "backtesting/daily/run_h258.py"
   ],
   "hypothesis_log_entry": {
