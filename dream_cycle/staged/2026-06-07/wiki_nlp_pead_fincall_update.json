@@ -1,0 +1,14 @@
+{
+  "id": "wiki-nlp-pead-fincall-2026-06-07",
+  "date": "2026-06-07",
+  "source": "arXiv:2510.03965 (Oct 2025) — 'FinCall-Surprise: A Large Scale Multi-modal Benchmark for Earning Surprise Prediction'",
+  "source_url": "https://arxiv.org/abs/2510.03965",
+  "title": "Wiki update: nlp-alternative-data.md — add FinCall-Surprise benchmark findings",
+  "rationale": "FinCall-Surprise (arXiv:2510.03965) is the first large-scale open-source multi-modal dataset for earnings surprise prediction: 2,688 conference calls 2019-2021, with transcripts + audio + slides. Key finding: current models cannot effectively extract alpha from audio/visual — text-only is still best. This validates our H174/H258 text-focused approach and documents that multi-modal approaches are not yet production-ready for our pipeline.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/tools/nlp-alternative-data.md",
+  "action": "append",
+  "content": "\n\n## FinCall-Surprise (arXiv:2510.03965, Oct 2025)\n\n**Dataset:** 2,688 corporate conference calls 2019-2021. Three modalities: transcript text, audio recordings, presentation slides.\n**Benchmark:** 26 language models (unimodal + multi-modal) tested on earnings surprise prediction.\n\n**Key findings:**\n- Audio and visual data provide small performance improvements, but current models cannot effectively extract value from these signals\n- Specialized financial models unexpectedly struggle with instruction-following (important caveat for GPT-4o/Claude-based PEAD pipelines)\n- High accuracy metrics often mask class imbalance — evaluate with balanced metrics\n- **Text-only remains the best practical approach** for earnings-driven signals\n\n**Implication for H174/H258:** Our FinBERT text-only approach (H174 OOS WR=81.8%) remains state-of-the-art accessible. Multi-modal (audio from earnings calls) is not yet reliable enough to warrant the complexity. H258 (LLM metric-shift on 10-Q text) is the right extension — text-based, not audio.\n",
+  "apply_status": "pending"
+}

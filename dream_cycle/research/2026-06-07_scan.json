@@ -1,0 +1,92 @@
+{
+  "scan_date": "2026-06-07",
+  "papers_found": [
+    {
+      "id": "arXiv:2605.23905",
+      "title": "AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets",
+      "date": "May 2026",
+      "relevance": "HIGH",
+      "angle": "cross-sectional momentum / factor momentum",
+      "key_finding": "Momentum half-life compressed from 84 months to 12 months at ~70% AI adoption. Validated on 99.5M SEC 13F holdings 2013-2024. 42% portfolio convergence increase. Four formal theorems on signal extinction cascades.",
+      "actionable": "Update signal-halflife.md wiki with 2026 decay estimates. Monitor H198/H217/H228 IC decay going forward.",
+      "staged": "wiki_signal_halflife_ai_decay_update.json"
+    },
+    {
+      "id": "arXiv:2507.15876",
+      "title": "Re-evaluating Short- and Long-Term Trend Factors in CTA Replication: A Bayesian Graphical Approach",
+      "date": "July 2025",
+      "relevance": "HIGH",
+      "angle": "commodity trend following / CTA",
+      "key_finding": "CTAs blend short-term and long-term trend signals that contribute independently. Bayesian graphical decomposition quantifies each factor's contribution to CTA returns. Suggests multi-horizon blending improves risk-adjusted performance.",
+      "actionable": "H262: extend H261b (confirmed commodity Top-2) by blending 3m/6m/12m signals. Primary goal: fix IS Sharpe=0.256 weakness without degrading OOS Sharpe=0.922.",
+      "staged": "h262_commodity_bayesian_short_long_cta.json"
+    },
+    {
+      "id": "arXiv:2510.03965",
+      "title": "FinCall-Surprise: A Large Scale Multi-modal Benchmark for Earning Surprise Prediction",
+      "date": "October 2025",
+      "relevance": "MEDIUM",
+      "angle": "PEAD / NLP / earnings text signals",
+      "key_finding": "2,688 conference calls 2019-2021 with transcripts + audio + slides. Current models cannot extract alpha from audio/visual. Text-only remains best approach. Specialized financial models struggle with instruction-following.",
+      "actionable": "Validates H174/H258 text-only approach. Documents that multi-modal PEAD is not ready. Add to nlp-alternative-data.md wiki.",
+      "staged": "wiki_nlp_pead_fincall_update.json"
+    },
+    {
+      "id": "arXiv:2512.11913",
+      "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay",
+      "date": "December 2025",
+      "relevance": "MEDIUM",
+      "angle": "cross-sectional momentum / alpha decay",
+      "key_finding": "Mechanical factors (momentum, reversal) fit crowding/decay model best. Model over-predicts remaining momentum alpha: 0.30 predicted vs 0.15 actual in OOS. Judgment-based factors (value, quality) do NOT fit the crowding model.",
+      "actionable": "Supports careful lookback period calibration. No new hypothesis warranted — already incorporated in signal-halflife.md update.",
+      "staged": null
+    },
+    {
+      "id": "arXiv:2604.02279",
+      "title": "The Self Driving Portfolio: Agentic Architecture for Institutional Asset Management",
+      "date": "April 2026",
+      "relevance": "LOW",
+      "angle": "multi-agent LLM trading",
+      "key_finding": "50-agent system for institutional portfolio management. 20+ competing portfolio construction methods. Debate/vote architecture. No performance numbers reported — purely architectural.",
+      "actionable": "No performance numbers means not directly actionable. Consistent with H259 FactorMAD design already in pipeline.",
+      "staged": null
+    },
+    {
+      "id": "arXiv:2501.07135",
+      "title": "Follow the Leader: Enhancing Systematic Trend-Following Using Network Momentum",
+      "date": "January 2025",
+      "relevance": "MEDIUM",
+      "angle": "commodity trend following",
+      "key_finding": "Commodity futures trend-following enhanced by network momentum (cross-sectional lead-lag relationships). Statistically significant improvements in Sharpe and skewness. Applied to commodity futures only.",
+      "actionable": "Requires commodity futures data (not ETF). Cannot implement without futures tick data. Future research direction if futures data access improves.",
+      "staged": null
+    },
+    {
+      "id": "arXiv:2403.07998",
+      "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+      "date": "2024",
+      "relevance": "LOW",
+      "angle": "pairs trading",
+      "key_finding": "Already known — this is the H200 reference paper. No new finding.",
+      "actionable": "Already in pipeline as H200 NOT CONFIRMED.",
+      "staged": null
+    }
+  ],
+  "github_findings": [
+    {
+      "repo": "quarkfin/qf-lib",
+      "relevance": "MEDIUM",
+      "description": "Modular Python event-driven backtester supporting Crypto, Stocks, Futures. Updated April 2026. Integrates with multiple data vendors and brokers. Could supplement or replace our yfinance+custom backtesting stack.",
+      "url": "https://github.com/quarkfin/qf-lib",
+      "actionable": "Low priority — our existing yfinance+pandas infrastructure works well. Monitor for when we add futures trading support.",
+      "staged": null
+    }
+  ],
+  "staged_count": 3,
+  "staged_files": [
+    "h262_commodity_bayesian_short_long_cta.json",
+    "wiki_signal_halflife_ai_decay_update.json",
+    "wiki_nlp_pead_fincall_update.json"
+  ],
+  "summary": "Tonight's key finding: momentum signal half-lives are dramatically compressed by AI adoption (12 months now vs 84 months historically). This directly impacts our confirmed momentum strategies but commodity trend following (H261b) may be relatively insulated due to lower AI crowding in commodity markets. H262 staged to extend H261b with multi-horizon signal blend (fix IS weakness). Two wiki updates staged for signal decay documentation and PEAD multi-modal assessment."
+}

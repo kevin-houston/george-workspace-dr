@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-06 (factor-momentum-style-rotation.md new; regime-detection-signals.md indexed; H255/H256 logged)
+updated: 2026-06-07 (commodity-trend-following.md new; signal-halflife.md AI-decay update staged; research-log/2026-06-07.md)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -39,6 +39,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Technical Analysis & Chart Patterns](algorithms/technical-analysis-patterns.md) ← new 2026-05-29 (H234 CONFIRMED inside-bar coiled-spring OOS 1.770 — strongest confirmed hypothesis; NR7/NR4 reference; TA-Lib vs pandas-ta-classic library guide; H233/H235 MACD+RSI+Stochastic+ROC feature pipeline; ZHAW arXiv:2208.07168 MACD 44% importance)
   - [Long/Short Equity](algorithms/long-short-equity.md) ← new 2026-06-02 (dollar-neutral L/S construction; 130/30; borrow costs ~0.75%/yr large-cap; H243 design: top/bottom quintile EW on 200-stock universe; momentum crash risk + Daniel/Moskowitz 2016; sector-neutral L/S variant; backtesting mistake table)
   - [Factor Momentum & Style Rotation](algorithms/factor-momentum-style-rotation.md) ← new 2026-06-06 (Gupta & Kelly 2019 IS Sharpe 0.84 long-short; H255 NOT CONFIRMED long-only ETF Corr=0.89 all US equity; H256 NOT CONFIRMED GEM/PACS/GEM+Sector all < SPY OOS 2015-2025; look-ahead bias trap: unlagged 12m signal inflated OOS Sharpe 3×; multi-asset extensions with bonds+commodities queued)
+  - [Commodity Trend Following](algorithms/commodity-trend-following.md) ← new 2026-06-07 (H261 NOT CONFIRMED UNG MaxDD -78%; H261b CONFIRMED Top-2 OOS Sharpe 0.922 Corr(SPY)=0.218; 2022 +26.7% vs SPY -18.2%; K-1 tax flags; roll yield mechanics; IS/OOS disconnect documented; H262 multi-horizon signal queued)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
@@ -80,6 +81,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Live Graduation Criteria & Performance Attribution](paper-trading/live-graduation-criteria.md) ← new 2026-05-30 (SPRT test for strategy validation, minimum trade counts, regime coverage gates, paper→live execution attribution, Alpaca migration steps)
   - [Tax & After-Tax Return Modeling](paper-trading/tax-and-after-tax-returns.md) ← new 2026-06-05 (STCG/LTCG rates for IL, wash sale rule for algo trading, HIFO lot selection, after-tax Sharpe formula, expected ~40% tax drag on STCG monthly-rebalanced strategies, IRS Form 8949 reporting)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-06-07](research-log/2026-06-07.md) — wiki expansion: commodity-trend-following.md new (H261b Corr(SPY)=0.218 lowest of any confirmed H; K-1 tax flags; dream cycle: H262 Bayesian short+long CTA; AI alpha decay half-life 12m update; FinCall-Surprise multi-modal PEAD assessment)
   - [2026-06-06](research-log/2026-06-06.md) — wiki expansion: factor-momentum-style-rotation.md new (Gupta & Kelly 2019 Sharpe 0.84; H255/H256 failure analysis; look-ahead bias 3× inflation; multi-asset extensions); indexed regime-detection-signals.md; dream cycle: H257 multi-asset composite momentum, H258 text-to-alpha LLM disclosure, H259 FactorMAD debate, H260 PEAD 12q ML
   - [2026-05-31](research-log/2026-05-31.md) — wiki expansion: signal-halflife.md new (AR(1) half-life formula, rolling IC diagnostics, hyperbolic decay, AI compression 58→18 months, IS window table); dream cycle: H238 BlindTrade LLM portfolio, H239 LLM time-capsule factor, LLM reality-check wiki update, PEAD fine-grained decomposition staged
   - [2026-05-30](research-log/2026-05-30-live-graduation.md) — wiki expansion: live-graduation-criteria.md new; dream cycle scan: drift-regime reversal H237, GT-Score backtesting objective, AlphaAgent LLM mining staged

@@ -1,0 +1,14 @@
+{
+  "id": "wiki-signal-halflife-ai-decay-2026-06-07",
+  "date": "2026-06-07",
+  "source": "arXiv:2605.23905 (May 2026) — 'AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets'",
+  "source_url": "https://arxiv.org/abs/2605.23905",
+  "title": "Wiki update: signal-halflife.md — add AI-driven alpha decay findings",
+  "rationale": "arXiv:2605.23905 (May 2026) provides the most current empirical estimates of momentum signal half-life decay due to AI adoption. It reports half-lives of ~18 months at current ~70% AI adoption (vs 5-7 years pre-AI), calibrated to 99.5M SEC 13F holdings 2013-2024. Momentum specifically declined from 84 months to 12 months half-life. This directly updates the signal-halflife.md wiki page which currently references an older compression estimate.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/backtesting/signal-halflife.md",
+  "action": "append",
+  "content": "\n\n## AI-Driven Decay (2026 Update)\n\n**Source:** arXiv:2605.23905 (May 2026) — 'AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets'\n\nThe most current empirical estimate of momentum signal decay due to widespread AI adoption:\n\n| Factor | Pre-AI Half-Life | Current Half-Life (~70% AI adoption) |\n|--------|-----------------|---------------------------------------|\n| Momentum | 84 months | **12 months** |\n| Value | 72 months | 20 months |\n| Generic | 5–7 years | **18 months** |\n\n**Method:** Calibrated to 99.5 million SEC Form 13F holdings (2013–2024). Documents 42% increase in portfolio convergence among institutions over the sample period. Four formal theorems derived: signal extinction cascades, equilibrium conditions, crowding amplification.\n\n**Key finding for our pipeline:** If momentum half-life is now ~12 months, IS periods > 12 months back may overweight now-decayed alpha. Consider:\n1. Rolling IC diagnostics on confirmed momentum signals (H198, H217, H228) to detect real-time decay\n2. Shorter IS windows (3-5 years) when retraining any momentum model post-2022\n3. The H261b commodity trend (OOS Sharpe 0.922) may be relatively insulated — commodity markets have lower AI-driven crowding than equity momentum (smaller manager AUM targeting commodity ETFs)\n\n**Related:** arXiv:2512.11913 (Dec 2025) 'Not All Factors Crowd Equally' — mechanical factors (momentum, reversal) fit crowding model best; over-predicts remaining momentum alpha (0.30 predicted vs 0.15 actual)\n",
+  "apply_status": "pending"
+}

@@ -1,0 +1,37 @@
+{
+  "hypothesis_number": "H262",
+  "title": "Commodity Trend CTA — Bayesian Short+Long Signal Decomposition",
+  "source": "arXiv:2507.15876 (2025) — 'Re-evaluating Short- and Long-Term Trend Factors in CTA Replication: A Bayesian Graphical Approach'",
+  "date_staged": "2026-06-07",
+  "apply_status": "pending",
+  "risk_level": "medium",
+  "rationale": "H261b CONFIRMED (OOS Sharpe 0.922, Corr(SPY)=0.218) but has a significant IS/OOS disconnect (IS Sharpe 0.256, commodity bear 2010-2017). The referenced paper shows CTAs blend short-term (~3m) and long-term (~12m) trend signals independently. Adding a 12m signal alongside H261b's 6m signal may improve IS performance by reducing whipsawing in gradual commodity bear markets — the 12m signal would shift to BIL earlier when a multi-year commodity bear sets in, while the 6m signal captures shorter-cycle opportunities. The Bayesian blend (vs 50/50) can be approximated by equal-weighting IS-optimized signal windows. This extends H261b without changing the universe.",
+  "design": {
+    "universe": "GLD, SLV, DBC, USO, DBA (same as H261b)",
+    "defensive": "BIL",
+    "signals": {
+      "short_signal": "3-month momentum (monthly.shift(1)/monthly.shift(4)-1).shift(1)",
+      "medium_signal": "6-month momentum (H261b baseline) (monthly.shift(1)/monthly.shift(7)-1).shift(1)",
+      "long_signal": "12-month momentum (monthly.shift(1)/monthly.shift(13)-1).shift(1)"
+    },
+    "blend": "Equal-weight rank scores from all 3 signals → composite rank → Top-2 positive absolute momentum gate (any 2 of 3 signals positive)",
+    "alternative": "IS-optimize signal weights on 3m/6m/12m; freeze weights; apply OOS",
+    "is_period": "2010-2017",
+    "oos_period": "2018-2025",
+    "tc": "10bp per rebalance"
+  },
+  "confirm_gates": {
+    "oos_sharpe": "> 0.922 (must beat H261b baseline)",
+    "is_sharpe": "> 0.50 (key: fix IS weakness — H261b IS was 0.256)",
+    "corr_spy_oos": "< 0.50 (must maintain diversification property)",
+    "neg_years_oos": "<= 2"
+  },
+  "files_to_create": [
+    "backtesting/daily/run_h262.py"
+  ],
+  "hypothesis_log_entry": {
+    "status": "QUEUED",
+    "note": "Bayesian short+long CTA decomposition extending H261b. Blend 3m/6m/12m momentum signals for commodity Top-2 strategy. Aim: fix IS Sharpe=0.256 weakness while maintaining OOS Sharpe > 0.922 and Corr(SPY) < 0.50. Source: arXiv:2507.15876 CTA factor decomposition.",
+    "paper": "arXiv:2507.15876"
+  }
+}
