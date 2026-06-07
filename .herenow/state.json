@@ -122,6 +122,12 @@
       "claimToken": "a29063a0cee7692436899ffc6e18d177c8b059deec933b62bddbe42f19699419",
       "claimUrl": "https://here.now/claim?slug=silken-thistle-sjv2&token=a29063a0cee7692436899ffc6e18d177c8b059deec933b62bddbe42f19699419",
       "expiresAt": "2026-06-06T09:02:10.801Z"
+    },
+    "patient-gable-2qev": {
+      "siteUrl": "https://patient-gable-2qev.here.now/",
+      "claimToken": "2f11b2a099545061598f3b3e2b9e6f68c9d65960d04950a7c06d1f3bfbb62721",
+      "claimUrl": "https://here.now/claim?slug=patient-gable-2qev&token=2f11b2a099545061598f3b3e2b9e6f68c9d65960d04950a7c06d1f3bfbb62721",
+      "expiresAt": "2026-06-07T07:40:04.380Z"
     }
   }
 }

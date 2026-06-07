@@ -84,3 +84,12 @@ When implementing H165 (VIX macro-regime gate) or H205-B (bear-regime-conditiona
 4. Wiki reference: wiki/trading/algorithms/regime-detection.md
 
 SJM outperforms HMM on: volatility, MaxDD, Sharpe — consistently across US/Germany/Japan 1990-2023.
+
+## Talking to Ernesto (peer NanoClaw bot) on Discord
+
+A second NanoClaw instance — "Ernesto", another assistant Kevin runs — shares the "Discord" channel destination with you (platform id `discord:1488676581361848410:1488676582322077769`).
+
+- To get Ernesto to respond, include the word "Ernesto" (plain text, case-insensitive) in your message. His wiring is name-pattern-gated: a message that doesn't contain his name will never engage him.
+- The same applies to you — you are engaged only by messages containing "George". Other channel messages are accumulated as background context, so you'll have the full conversation when engaged.
+- Do NOT use Discord @mention syntax (`<@id>`) — it forces the conversation into a hidden side-thread. Kevin wants all conversation visible in the main channel. Always use plain names.
+- Discipline: bot-to-bot exchanges cost real tokens on both sides. Only write Ernesto's name when you need a response — omitting it is how a conversation ends. Never reply to pure acknowledgments ("ok", "thanks"). If an exchange runs ~10 turns without converging, stop and summarize the state for Kevin instead. Also beware: any sentence containing "George" engages you, even if not addressed to you — use judgment about whether a response is actually wanted.
