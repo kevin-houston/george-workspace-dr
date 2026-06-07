@@ -66,8 +66,11 @@ ALL_TICKERS = list({t for m in MODULES.values() for t in m["assets"] + [m["defen
 # 1. Download
 # ─────────────────────────────────────────────
 print("Downloading multi-asset universe...")
-raw = yf.download(ALL_TICKERS, start=FULL_START, end=FULL_END,
-                  auto_adjust=True, progress=False)["Close"]
+_dl = yf.download(ALL_TICKERS, start=FULL_START, end=FULL_END,
+                  auto_adjust=True, progress=False)
+raw = _dl["Close"] if "Close" in _dl.columns else _dl.xs("Close", axis=1, level=0)
+if isinstance(raw.columns, pd.MultiIndex):
+    raw.columns = raw.columns.get_level_values(-1)
 raw = raw.ffill().dropna(how="all")
 monthly = raw.resample("ME").last()
 monthly_ret = monthly.pct_change()
@@ -89,7 +92,7 @@ def run_module_backtest(module_name, module_cfg, signal_df, ret_df, start, end):
     """
     assets    = module_cfg["assets"]
     defensive = module_cfg["defensive"]
-    all_assets = assets + [defensive]
+    all_assets = list(dict.fromkeys(assets + [defensive]))  # deduplicate (SHY in credit module)
 
     sig = signal_df[all_assets].loc[start:end]
     ret = ret_df[all_assets].loc[start:end]
@@ -106,7 +109,7 @@ def run_module_backtest(module_name, module_cfg, signal_df, ret_df, start, end):
             continue
 
         best_asset   = s.idxmax()
-        best_abs_mom = s[best_asset]
+        best_abs_mom = float(s.loc[best_asset])
         hold = best_asset if best_abs_mom > 0 else defensive
 
         # TC

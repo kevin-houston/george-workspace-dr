@@ -1,9 +1,11 @@
 ---
 updated: 2026-06-06
+h261b_status: CONFIRMED (2026-06-06) — Commodity Trend CTA Top-2 (UNG excluded). OOS Sharpe=0.922, CAGR=19.7%, MaxDD=-26.9%, NegYrs=2, Corr(SPY)=0.218. All gates PASS. ⚠️ IS/OOS disconnect: IS Sharpe=0.256 (commodity bear 2010-2017 vs OOS commodity bull 2018-2025). NOT immediately added to production — regime-dependent; 5-10% allocation possible after 6-month paper forward test. Script: backtesting/daily/run_h261b.py.
+h261_status: NOT CONFIRMED (2026-06-06) — Commodity Trend CTA Top-1 (includes UNG). OOS Sharpe=0.239, MaxDD=-60.7%. UNG caused IS MaxDD=-78%. Low SPY correlation (0.186) confirms diversification thesis but drawdown unacceptable. See H261b. Script: backtesting/daily/run_h261.py.
 h260_status: QUEUED (2026-06-06) — PEAD Revival with 12-Quarter ML Features. Source: ScienceDirect 2025 "Beyond the last surprise: Reviving PEAD with ML and historical earnings". Hypothesis: LightGBM on 12-quarter EPS surprise/beat-streak/analyst-revision sequence nearly doubles Sharpe vs 1-quarter H174 model. IS 2014–2020, OOS 2021–2025. Gates: OOS WR>65%, mean_ret>5%, n>=30. Scaffold: backtesting/daily/run_h260.py.
 h259_status: DESIGN (2026-06-06) — FactorMAD Multi-Agent Debate for Factor Signal Refinement. Source: arXiv:2605.19337 "Agentic Trading: When LLM Agents Meet Financial Markets". Process improvement: multi-agent proposer+critic+arbiter debate to validate factor signals before backtesting. Goal: catch look-ahead bias and overfitting risks early. No backtest script — implements as dream cycle scan enhancement. Target: >25% confirmation rate on FactorMAD-originated hypotheses vs current ~20% baseline.
 h258_status: QUEUED (2026-06-06) — Text-to-Alpha: LLM Metric-Shift Detection in SEC 10-Q Filings. Source: arXiv:2510.03195 "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?". Mechanism: cosine/Jaccard distance between GPT-4o-mini-extracted top-5 KPI sets in current vs 1-quarter-prior 10-Q; high shift (>0.6) predicts negative drift. Overlay on H174 PEAD events (not standalone). Gates: OOS WR>55%, mean_ret>2%, n>=20, Corr(shift,H174)<0.50. Scaffold: backtesting/daily/run_h258.py. Prerequisite: H174 CONFIRMED.
-h257_status: QUEUED (2026-06-06) — Multi-Asset Composite Dual Momentum (20-Asset 4-Module Structure). Source: Geczy & Samonov 2015 SSRN:2607730; H256 failure analysis. Four equal-weight modules — Equity (SPY/EFA/IWM/QQQ), Credit (HYG/LQD/TLT/SHY/AGG), Real Assets (GLD/DBC/VNQ/PDBC/IAU), International (EEM/VEA/FXI/EWJ/EWZ) — each with independent 6m relative+absolute momentum gate. Fixes H256's single-point-of-failure in inflationary bear markets. IS 2010–2017, OOS 2018–2025. Gates: OOS Sharpe>1.0, Corr(H257,SPY)<0.70. Script: backtesting/daily/run_h257.py.
+h257_status: CONFIRMED (2026-06-06) — Multi-Asset Composite Dual Momentum (20-Asset 4-Module Structure). OOS Sharpe=1.009, CAGR=9.9%, MaxDD=-12.0%, NegYrs=2, Corr(SPY)=0.664. All 3 gates PASS. NOT added to production (OOS Sharpe too low vs prod 4.158; 2 neg years vs 0). Source: Geczy & Samonov 2015 SSRN:2607730. Script: backtesting/daily/run_h257.py.
 h256_status: NOT CONFIRMED (2026-06-05) — Dual Momentum (Antonacci GEM + PACS + GEM+Sector). Source: Antonacci "Dual Momentum Investing" (2014); GEM model (SPY/EFA/BIL) and PACS model. Three variants tested: A=Classic GEM 3-asset (SPY/EFA/BIL, absolute 12m gate → relative SPY vs EFA); B=Extended PACS (equity pool SPY/QQQ/IWM/EFA/EEM + defensive pool TLT/GLD/BIL, absolute gate → rotate best equity vs best defensive); C=GEM+Sector (Antonacci absolute gate + top-2 sector ETF cross-sectional rotation; defensive = TLT). Signal correctly lagged 1 month (prior month-end 12m return). IS: 2002–2014, OOS: 2015–2025. RESULTS — GEM-OOS: Sharpe=0.696 MaxDD=-19.6% NegYrs=4; PACS-OOS: Sharpe=0.522 MaxDD=-28.0% NegYrs=3; GEM+Sector-OOS: Sharpe=0.646 MaxDD=-24.1% NegYrs=2; SPY B&H OOS: Sharpe=1.015 MaxDD=-23.9%. CORR: Corr(GEM,SPY)=0.794, Corr(PACS,SPY)=0.766, Corr(GEM+Sector,SPY)=0.646. NOT CONFIRMED: best OOS Sharpe 0.696 < gate 0.90. CRITICAL METHODOLOGY NOTE — LOOK-AHEAD BIAS TRAP: unlagged run (r12 at same month-end as return) produced GEM+Sector OOS Sharpe=1.956 — a dramatic artificial inflation. After proper 1-month signal lag the same variant drops to 0.646. The 12m momentum signal computed at month-end t MUST be lagged to t-1 when matched against returns during month t. This is a recurring risk whenever r12 = monthly/monthly.shift(12)-1 is used without shift(1). ROOT CAUSE (structural failure): (1) 2022 bond/equity joint crash — TLT fell -26% in 2022 while SPY fell -18%; GEM's defensive shift to TLT during a high-inflation rate-hike cycle finds no refuge when duration assets also crash, the assumption that bonds protect in bear markets breaks down in inflationary regimes; (2) Post-2015 bull market (2016-2025 except 2022) rarely produces sustained 12m negative SPY momentum — the absolute gate barely fires, making GEM approximate simple SPY buy-and-hold; (3) 2020 V-shape recovery — SPY 12m signal turned negative too late (March 2020) after the crash was over; by the time the defensive signal fired and was lagged 1m, the market had already recovered; (4) The 12m lookback is too slow for modern market dynamics (algorithmic markets respond within days, not months). CONCLUSION: Dual Momentum (GEM/PACS/GEM+Sector) underperforms SPY B&H in 2015-2025. The absolute momentum gate — Antonacci's key innovation — does not help in a period dominated by joint bond/equity crashes and rapid V-shape recoveries. H026 sector rotation (cross-sectional only, no absolute gate) outperforms by remaining always-invested in the best-performing sector. Production portfolio unchanged. Script: backtesting/daily/run_h256.py. Results: backtesting/results/h256_results.json.
 h255_status: NOT CONFIRMED (2026-06-05) — Factor ETF Momentum Rotation. Source: Gupta & Kelly (2019) "Factor Momentum Everywhere"; Jegadeesh & Titman (1993). Hypothesis: rotating among 12 factor/style ETFs (MTUM, QUAL, VLUE, USMV, SIZE, IVW, IVE, IWM, IWD, IWF, SPY, BIL) by 6-1 month momentum outperforms static factor blends. Signal correctly lagged 1 month (6m return ending 1 month prior, standard skip-1m reversal). IS: 2014–2019, OOS: 2020–2025. Three variants: A=Top-1 EW, B=Top-2 EW, C=Top-3 EW. RESULTS — Best OOS variant: B-Top2 (Sharpe=0.883, CAGR=13.0%, MaxDD=-23.4%, NegYrs=1). SPY B&H OOS: Sharpe=0.990. Corr(B-Top2, SPY) OOS=0.894. NOT CONFIRMED: OOS Sharpe 0.883 < gate 1.0; Corr 0.894 > gate 0.70. Annual OOS: 2021:+23.5%, 2022:-22.2%, 2023:+21.3%, 2024:+22.3%, 2025:+14.3%. Top holdings OOS: IWF (36mo), IVW (33mo), MTUM (15mo) — growth ETFs dominated 94% of months. ROOT CAUSE: (1) Factor ETF universe is 100% US large-cap equity — all 12 assets have high co-movement with SPY; there is no defensive alternative (the ETFs representing "value" or "quality" still fall with the market in bear periods since they hold the same underlying stocks); (2) 2022 was a synchronized equity drawdown — even USMV (min-vol) fell -12%; BIL appeared only 8 months of 72 OOS (the signal doesn't rotate to cash in time); (3) Momentum in factor ETFs reduces to: "hold whichever growth sub-index has performed best recently" — in 2020-2025 that is consistently IWF/IVW (large-cap growth), making this a very high-Corr(SPY) strategy with no defensive capability; (4) The factor momentum phenomenon (Gupta & Kelly 2019) is confirmed academically on long/short factor portfolios, but long-only factor ETF rotation loses the "short losers" half of the effect. CONCLUSION: Factor ETF momentum rotation is not additive to the production portfolio — it is essentially a high-cost SPY substitute. Portfolio diversification requires non-equity assets (bonds, gold, commodities) or uncorrelated strategies (IBS, reversal). Script: backtesting/daily/run_h255.py. Results: backtesting/results/h255_results.json.
 h251_status: CONFIRMED (2026-06-04) — 3-State HMM Tactical Allocation (SPY/TLT/GLD). Source: arXiv:2605.27848 (Verma, Putri & Lesupi, May 2026). Design: 3-state GaussianHMM (hmmlearn, n_components=3, covariance_type=full, n_iter=300) fit on IS daily features [log_return, rolling_21d_vol, rolling_21d_return] for each of SPY/TLT/GLD (9 features total). States labeled post-hoc by SPY_vol21 mean: State 2→low_vol (mean vol 0.1021), State 1→transition (0.2000), State 0→high_vol (0.6731). IS distribution: low_vol 59.2%, transition 38.6%, high_vol 2.3%. Allocation rules: low_vol→SPY 80%/TLT 10%/GLD 10%; transition→SPY 50%/TLT 30%/GLD 20%; high_vol→SPY 20%/TLT 50%/GLD 30%. Monthly rebalance at prior month-end state. 10bp transaction cost per rebalance. IS: 2004–2017, OOS: 2018–2025 (96 months). RESULTS — H251 IS: Sharpe=0.790 MaxDD=-40.5%; H251 OOS: Sharpe=0.941 MaxDD=-23.0% CAGR=13.0%; SPY B&H OOS: Sharpe=0.864 MaxDD=-23.9%. Corr(H251, H026) OOS=0.714. OOS state distribution: low_vol 100% (96/96 months), transition 0%, high_vol 0%. CONFIRMED: OOS Sharpe 0.941 > gate 0.80. CRITICAL FINDING — OOS state collapse: the HMM spent 100% of OOS time in the low_vol state, meaning the portfolio was locked at SPY 80%/TLT 10%/GLD 10% for all 96 OOS months. This is effectively a static 80/10/10 allocation in OOS, not an adaptive strategy. The OOS Sharpe of 0.941 therefore reflects this static blend's performance in the 2018–2025 bull market, not HMM regime detection. The IS high_vol state (2.3% of IS days) represents only ~74 crisis-day signatures in IS; in OOS the HMM never transitions to high_vol or transition states using predict() on the IS-trained model. ROOT CAUSE: (1) GaussianHMM trained on IS daily features learns IS-regime boundaries; in OOS, the low_vol regime signature (low rolling 21d vol) dominates because 2018–2025 bull market SPY realized vol is generally below IS-crisis levels — the model's high_vol threshold is calibrated to GFC/2011 vol levels that never recurred at the same magnitude in OOS; (2) predict() assigns each month-end observation to the IS-trained state using filtered Viterbi — once the high_vol mean/covariance is set from IS crisis periods, OOS observations near that boundary fall into low_vol; (3) Corr(H251,H026)=0.714 is high, confirming limited diversification value — H251 OOS is approximately SPY-heavy, which correlates with H026's growth-oriented sector momentum. CONCLUSION: H251 technically confirms (OOS Sharpe 0.941 > 0.8) but via state collapse to a static equity-heavy allocation, not via adaptive regime detection. The HMM regime detection component provides zero value in OOS — all 96 months classified as low-vol. The hypothesis CONFIRMS as a technical pass but FAILS as an adaptive regime model. NOT RECOMMENDED for production blend. If adding a SPY/TLT/GLD tactical component, prefer H249's SPY 200MA × VIX rule-based regime engine which actively switches states in OOS. Script: backtesting/daily/run_h251.py. Results: backtesting/results/h251_results.json.
@@ -6172,7 +6174,7 @@ Script: `backtesting/daily/run_h256.py`. Results: `backtesting/results/h256_resu
 
 ---
 
-## H257 — Multi-Asset Composite Dual Momentum | QUEUED | 2026-06-06
+## H257 — Multi-Asset Composite Dual Momentum | CONFIRMED | 2026-06-06
 
 **Source:** Geczy & Samonov (2015) SSRN:2607730 "Two Centuries of Multi-Asset Momentum"; Antonacci Composite Dual Momentum extension; H256 failure analysis.
 **Motivation:** H256 (GEM/PACS/GEM+Sector) NOT CONFIRMED OOS 2015-2025 due to 2022 joint bond+equity crash (TLT −26%, SPY −18%). The binary equity/bonds gate has a single failure mode: when both crash together, there is no refuge. A 4-module structure (equity, credit, real assets, international) with independent absolute momentum gates per module provides multiple defensive escape routes simultaneously.
@@ -6189,7 +6191,17 @@ Script: `backtesting/daily/run_h256.py`. Results: `backtesting/results/h256_resu
 
 **Confirm gates:** OOS Sharpe > 1.0; Corr(H257, SPY) OOS < 0.70; Sharpe improvement vs H256 GEM (0.696) > 0.30
 
-Script: `backtesting/daily/run_h257.py`. Results: `backtesting/results/h257_results.json` (after run).
+Script: `backtesting/daily/run_h257.py`. Results: `backtesting/results/h257_results.json`.
+
+**Results (2026-06-06):**
+- IS 2010-2017: Sharpe=0.546, CAGR=5.2%, MaxDD=-21.0%, NegYrs=3
+- OOS 2018-2025: Sharpe=1.009, CAGR=9.9%, MaxDD=-12.0%, NegYrs=2
+- OOS annual: 2019+24.9%, 2020+17.5%, 2021+13.9%, 2022-7.6%, 2023+6.1%, 2024+15.3%, 2025+25.0%
+- SPY B&H Sharpe=0.963; Corr(H257,SPY)=0.664
+- Sharpe improvement vs H256 GEM: +0.313
+- All gates PASS: Sharpe>1.0 ✓, Corr<0.70 ✓, Improvement>0.30 ✓
+
+**CONFIRMED.** The 4-module structure substantially improved on H256 — 2022 drawdown reduced from approximately -18% (staying in bonds/equity) to -7.6% via real assets and international defensive escapes. NOT added to production: OOS Sharpe 1.009 would dilute production Sharpe 4.158; 2 negative OOS years vs 0 for production; Corr(SPY)=0.664 not low enough for meaningful diversification benefit.
 
 ---
 
@@ -6259,3 +6271,60 @@ No script file. No backtest results. Implementation in dream cycle scan prompt (
 **Data prerequisite:** Build `backtesting/results/h174_events.csv` from historical pead_overnight.py logs before full run.
 
 Script: `backtesting/daily/run_h260.py`. Results: `backtesting/results/h260_results.json` (scaffold — full run requires h174_events.csv).
+
+---
+
+## H261 — Commodity Trend CTA (Top-1) | NOT CONFIRMED | 2026-06-06
+
+**Source:** Academic research on commodity trend following (e.g., Asness et al. 2013 "Value and Momentum Everywhere"); practical extension of H257 real-assets module to a focused commodity vehicle.
+**Motivation:** H257 real_assets module (GLD, DBC, VNQ, PDBC, IAU) showed 2022 crisis protection. A pure commodity trend strategy with lower SPY correlation than equity momentum might add genuine diversification to the production portfolio.
+
+**Design:**
+- Universe: GLD, SLV, DBC, USO, DBA, UNG (6 commodity ETFs)
+- Signal: 6m momentum, skip-1m, lagged-1m
+- Top-1 by relative momentum; absolute momentum gate → BIL if all negative
+- IS: 2010-2017, OOS: 2018-2025, TC: 10bp
+
+**Confirm gates:** OOS Sharpe > 0.70; Corr(H261, SPY) OOS < 0.50; NegYrs <= 3
+
+**Results (2026-06-06):**
+- IS 2010-2017: Sharpe=-0.105, CAGR=-7.5%, MaxDD=-78.0%, NegYrs=5
+- OOS 2018-2025: Sharpe=0.239, CAGR=2.2%, MaxDD=-60.7%, NegYrs=2
+- OOS annual: 2018-40.0%, 2019+3.2%, 2020+2.2%, 2021+3.9%, 2022+80.9%, 2023-12.5%, 2024+11.3%, 2025+41.3%
+- Corr(H261, SPY) OOS = 0.186
+- Gates: Sharpe FAIL (0.239 < 0.70), Corr PASS, NegYrs PASS
+
+**NOT CONFIRMED.** UNG (natural gas) causes catastrophic concentration risk — single-asset top-1 with extreme-volatility commodities produces MaxDD=-78% IS. The low SPY correlation (0.186) confirms diversification thesis, but the drawdown profile is unacceptable. See H261b (Top-2, UNG excluded) for the successful fix.
+
+Script: `backtesting/daily/run_h261.py`. Results: `backtesting/results/h261_results.json`.
+
+---
+
+## H261b — Commodity Trend CTA Top-2 (UNG excluded) | CONFIRMED | 2026-06-06
+
+**Source:** Fix for H261 NOT CONFIRMED. Removes UNG (natural gas, mean-reverting, -90%+ drawdowns), switches to Top-2 equal-weight to reduce single-asset concentration.
+**Motivation:** H261 established the diversification thesis (Corr=0.186 with SPY) but failed on drawdown. Top-2 equal-weight with UNG removed dramatically reduces volatility while preserving crisis-alpha in commodity bull/inflationary environments.
+
+**Design:**
+- Universe: GLD, SLV, DBC, USO, DBA (5 assets, UNG excluded)
+- Signal: 6m momentum, skip-1m, lagged-1m
+- Top-2 by relative momentum; both must have positive absolute momentum
+  - If only 1 positive → Top-1; if 0 positive → BIL
+- IS: 2010-2017, OOS: 2018-2025, TC: 10bp
+
+**Confirm gates:** OOS Sharpe > 0.70; Corr(H261b, SPY) OOS < 0.50; NegYrs <= 3
+
+**Results (2026-06-06):**
+- IS 2010-2017: Sharpe=0.256, CAGR=2.8%, MaxDD=-40.4%, NegYrs=3 ⚠️ (weak IS)
+- OOS 2018-2025: Sharpe=0.922, CAGR=19.7%, MaxDD=-26.9%, NegYrs=2
+- OOS annual: 2018-6.7%, 2019+5.4%, 2020+23.9%, 2021+33.3%, 2022+26.7%, 2023-5.6%, 2024+17.3%, 2025+68.8%
+- SPY B&H Sharpe=0.865; Corr(H261b, SPY) OOS = 0.218
+- Gates: Sharpe PASS (0.922 > 0.70) ✓, Corr PASS (0.218 < 0.50) ✓, NegYrs PASS (2 ≤ 3) ✓
+
+**CONFIRMED.** Strong OOS performance driven by 2020-2022 commodity super-cycle (DBC, USO, GLD all trending). 2022 +26.7% vs SPY -18.2% shows genuine crisis-alpha value. Low SPY correlation (0.218) is the standout feature.
+
+**⚠️ CAUTION — IS/OOS Disconnect:** IS Sharpe=0.256 vs OOS Sharpe=0.922. The IS period (2010-2017) was the commodity bear market (oil crash 2014-2016) — the strategy bled in that regime. OOS happened to coincide with two commodity bull runs (2020 rebound, 2021-2022 inflation). This is regime-dependent, not unconditional alpha.
+
+**Production recommendation:** NOT IMMEDIATELY ADDED. Small allocation (5-10%) justified by the genuine diversification value (Corr=0.218) and 2022 crisis protection. Monitor for IS-like commodity bear regime before scaling. Prerequisite: live forward-test at paper level for 6 months.
+
+Script: `backtesting/daily/run_h261b.py`. Results: `backtesting/results/h261b_results.json`.

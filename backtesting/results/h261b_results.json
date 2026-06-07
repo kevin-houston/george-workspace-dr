@@ -1,0 +1,39 @@
+{
+  "hypothesis": "H261b",
+  "title": "Commodity Trend CTA Top-2 (UNG excluded)",
+  "status": "CONFIRMED",
+  "is_result": {
+    "sharpe": 0.2559,
+    "cagr": 0.0281,
+    "max_dd": -0.4044,
+    "neg_yrs": 3,
+    "months": 96
+  },
+  "oos_result": {
+    "sharpe": 0.9222,
+    "cagr": 0.1973,
+    "max_dd": -0.2691,
+    "neg_yrs": 2,
+    "months": 96
+  },
+  "oos_annual": {
+    "2018": -6.7,
+    "2019": 5.4,
+    "2020": 23.9,
+    "2021": 33.3,
+    "2022": 26.7,
+    "2023": -5.6,
+    "2024": 17.3,
+    "2025": 68.8
+  },
+  "spy_oos_sharpe": 0.8654,
+  "corr_h261b_spy_oos": 0.2179,
+  "gates": {
+    "sharpe_gate": 0.7,
+    "corr_gate": 0.5,
+    "neg_gate": 3,
+    "sharpe_pass": true,
+    "corr_pass": true,
+    "neg_pass": true
+  }
+}

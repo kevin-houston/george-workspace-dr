@@ -1,0 +1,28 @@
+{
+  "hypothesis": "H257",
+  "title": "Multi-Asset Composite Dual Momentum",
+  "status": "CONFIRMED",
+  "is_result": {
+    "sharpe": 0.5456,
+    "cagr": 0.0517,
+    "max_dd": -0.2099,
+    "neg_yrs": 3,
+    "months": 95
+  },
+  "oos_result": {
+    "sharpe": 1.0087,
+    "cagr": 0.099,
+    "max_dd": -0.1198,
+    "neg_yrs": 2,
+    "months": 95
+  },
+  "spy_oos_sharpe": 0.9635,
+  "corr_h257_spy_oos": 0.6644,
+  "gem_sharpe_improvement": 0.3127,
+  "gates": {
+    "sharpe_gate": 1.0,
+    "corr_gate": 0.7,
+    "sharpe_pass": true,
+    "corr_pass": true
+  }
+}
