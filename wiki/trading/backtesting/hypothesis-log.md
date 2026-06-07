@@ -1,5 +1,6 @@
 ---
 updated: 2026-06-06
+h262_status: QUEUED (2026-06-07) — Commodity Trend CTA Bayesian Short+Long Signal Blend. Extends H261b with 3m/6m/12m composite rank; gate: >=2 of 3 signals positive. Aim: IS Sharpe>0.50 (fix H261b IS=0.256) while maintaining OOS Sharpe>0.922 and Corr(SPY)<0.50. Source: arXiv:2507.15876. Script: backtesting/daily/run_h262.py.
 h261b_status: CONFIRMED (2026-06-06) — Commodity Trend CTA Top-2 (UNG excluded). OOS Sharpe=0.922, CAGR=19.7%, MaxDD=-26.9%, NegYrs=2, Corr(SPY)=0.218. All gates PASS. ⚠️ IS/OOS disconnect: IS Sharpe=0.256 (commodity bear 2010-2017 vs OOS commodity bull 2018-2025). NOT immediately added to production — regime-dependent; 5-10% allocation possible after 6-month paper forward test. Script: backtesting/daily/run_h261b.py.
 h261_status: NOT CONFIRMED (2026-06-06) — Commodity Trend CTA Top-1 (includes UNG). OOS Sharpe=0.239, MaxDD=-60.7%. UNG caused IS MaxDD=-78%. Low SPY correlation (0.186) confirms diversification thesis but drawdown unacceptable. See H261b. Script: backtesting/daily/run_h261.py.
 h260_status: QUEUED (2026-06-06) — PEAD Revival with 12-Quarter ML Features. Source: ScienceDirect 2025 "Beyond the last surprise: Reviving PEAD with ML and historical earnings". Hypothesis: LightGBM on 12-quarter EPS surprise/beat-streak/analyst-revision sequence nearly doubles Sharpe vs 1-quarter H174 model. IS 2014–2020, OOS 2021–2025. Gates: OOS WR>65%, mean_ret>5%, n>=30. Scaffold: backtesting/daily/run_h260.py.
@@ -6328,3 +6329,21 @@ Script: `backtesting/daily/run_h261.py`. Results: `backtesting/results/h261_resu
 **Production recommendation:** NOT IMMEDIATELY ADDED. Small allocation (5-10%) justified by the genuine diversification value (Corr=0.218) and 2022 crisis protection. Monitor for IS-like commodity bear regime before scaling. Prerequisite: live forward-test at paper level for 6 months.
 
 Script: `backtesting/daily/run_h261b.py`. Results: `backtesting/results/h261b_results.json`.
+
+---
+
+## H262 — Commodity Trend CTA: Bayesian Short+Long Signal Decomposition | QUEUED | 2026-06-07
+
+**Source:** arXiv:2507.15876 (2025) — 'Re-evaluating Short- and Long-Term Trend Factors in CTA Replication: A Bayesian Graphical Approach'
+**Motivation:** H261b CONFIRMED (OOS Sharpe=0.922, Corr(SPY)=0.218) but IS Sharpe=0.256 due to 2010-2017 commodity bear (oil crash 2014-2016). The referenced paper shows CTAs independently blend short-term and long-term trend signals. A 12m signal would signal exit earlier in multi-year commodity bears, while 3m captures short-cycle rebounds. Together, the blend may smooth the IS performance without sacrificing OOS crisis-alpha.
+
+**Design:**
+- Universe: GLD, SLV, DBC, USO, DBA (same as H261b; no UNG)
+- Signals: 3m, 6m, 12m momentum — all skip-1m, lagged-1m (no look-ahead)
+- Composite: equal-weight rank from all 3 signals
+- Gate: Top-2 assets where ≥2 of 3 individual signals are positive; otherwise BIL
+- IS: 2010-2017, OOS: 2018-2025, TC: 10bp
+
+**Confirm gates (must beat H261b):** OOS Sharpe > 0.922; IS Sharpe > 0.50; Corr(H262,SPY) < 0.50; NegYrs OOS ≤ 2
+
+Script: `backtesting/daily/run_h262.py`. Results: `backtesting/results/h262_results.json` (after run).

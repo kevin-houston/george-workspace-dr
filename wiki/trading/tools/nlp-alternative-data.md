@@ -593,3 +593,17 @@ def sentiment_adjusted_weights(base_weights: dict, sentiment_score: float) -> di
 - A/B test: run both models on same 8-K corpus; compare score distributions vs. actual PEAD returns
 
 **Caution**: 0.4–3.3% accuracy gain is small in absolute terms. Only pursue if FinBERT2 is available on HuggingFace and inference latency is comparable. The dual-threshold gate (FinBERT score + EPS surprise) may mask single-model improvements — the EPS surprise filter does more heavy lifting than the NLP score alone.
+
+
+## FinCall-Surprise (arXiv:2510.03965, Oct 2025)
+
+**Dataset:** 2,688 corporate conference calls 2019-2021. Three modalities: transcript text, audio recordings, presentation slides.
+**Benchmark:** 26 language models (unimodal + multi-modal) tested on earnings surprise prediction.
+
+**Key findings:**
+- Audio and visual data provide small performance improvements, but current models cannot effectively extract value from these signals
+- Specialized financial models unexpectedly struggle with instruction-following (important caveat for GPT-4o/Claude-based PEAD pipelines)
+- High accuracy metrics often mask class imbalance — evaluate with balanced metrics
+- **Text-only remains the best practical approach** for earnings-driven signals
+
+**Implication for H174/H258:** Our FinBERT text-only approach (H174 OOS WR=81.8%) remains state-of-the-art accessible. Multi-modal (audio from earnings calls) is not yet reliable enough to warrant the complexity. H258 (LLM metric-shift on 10-Q text) is the right extension — text-based, not audio.

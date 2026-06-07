@@ -367,3 +367,25 @@ Once you know a factor's half-life, use it to set retraining schedules:
 - [Design Principles](design-principles.md) — IS/OOS split design
 - [Momentum Strategies — Factor Crowding](../algorithms/momentum-strategies.md) — crowding and crash risk
 - H231 in [hypothesis log](hypothesis-log.md) — tested decay-weighted alpha101 (NOT CONFIRMED)
+
+
+## AI-Driven Decay (2026 Update)
+
+**Source:** arXiv:2605.23905 (May 2026) — 'AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets'
+
+The most current empirical estimate of momentum signal decay due to widespread AI adoption:
+
+| Factor | Pre-AI Half-Life | Current Half-Life (~70% AI adoption) |
+|--------|-----------------|---------------------------------------|
+| Momentum | 84 months | **12 months** |
+| Value | 72 months | 20 months |
+| Generic | 5–7 years | **18 months** |
+
+**Method:** Calibrated to 99.5 million SEC Form 13F holdings (2013–2024). Documents 42% increase in portfolio convergence among institutions over the sample period. Four formal theorems derived: signal extinction cascades, equilibrium conditions, crowding amplification.
+
+**Key finding for our pipeline:** If momentum half-life is now ~12 months, IS periods > 12 months back may overweight now-decayed alpha. Consider:
+1. Rolling IC diagnostics on confirmed momentum signals (H198, H217, H228) to detect real-time decay
+2. Shorter IS windows (3-5 years) when retraining any momentum model post-2022
+3. The H261b commodity trend (OOS Sharpe 0.922) may be relatively insulated — commodity markets have lower AI-driven crowding than equity momentum (smaller manager AUM targeting commodity ETFs)
+
+**Related:** arXiv:2512.11913 (Dec 2025) 'Not All Factors Crowd Equally' — mechanical factors (momentum, reversal) fit crowding model best; over-predicts remaining momentum alpha (0.30 predicted vs 0.15 actual)

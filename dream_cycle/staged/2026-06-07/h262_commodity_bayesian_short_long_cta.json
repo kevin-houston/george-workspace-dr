@@ -3,7 +3,9 @@
   "title": "Commodity Trend CTA — Bayesian Short+Long Signal Decomposition",
   "source": "arXiv:2507.15876 (2025) — 'Re-evaluating Short- and Long-Term Trend Factors in CTA Replication: A Bayesian Graphical Approach'",
   "date_staged": "2026-06-07",
-  "apply_status": "pending",
+  "apply_status": "applied",
+  "applied_date": "2026-06-07",
+  "files_created": ["backtesting/daily/run_h262.py"],
   "risk_level": "medium",
   "rationale": "H261b CONFIRMED (OOS Sharpe 0.922, Corr(SPY)=0.218) but has a significant IS/OOS disconnect (IS Sharpe 0.256, commodity bear 2010-2017). The referenced paper shows CTAs blend short-term (~3m) and long-term (~12m) trend signals independently. Adding a 12m signal alongside H261b's 6m signal may improve IS performance by reducing whipsawing in gradual commodity bear markets — the 12m signal would shift to BIL earlier when a multi-year commodity bear sets in, while the 6m signal captures shorter-cycle opportunities. The Bayesian blend (vs 50/50) can be approximated by equal-weighting IS-optimized signal windows. This extends H261b without changing the universe.",
   "design": {
