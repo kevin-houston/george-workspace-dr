@@ -310,3 +310,27 @@ this page documents the exact signal construction to prevent look-ahead errors a
 provides the data pipeline reference for all future regime-conditional strategies.
 
 Index updated: pages 108 → 109
+
+## [2026-06-07] lint | Health check
+Issues found: 18. Auto-fixed: 17. Needs review: 1.
+
+**Index gaps fixed (13 pages added to index):**
+- trading/algorithms/commodity-trend-following.md
+- trading/algorithms/factor-momentum-style-rotation.md
+- trading/algorithms/long-short-equity.md
+- trading/backtesting/signal-halflife.md
+- trading/backtesting/survivorship-bias.md
+- trading/paper-trading/tax-and-after-tax-returns.md
+- trading/tools/quantdinger-notes.md
+- Research logs: 2026-05-31, 2026-06-02, 2026-06-03, 2026-06-05, 2026-06-06, 2026-06-07
+
+**Frontmatter fixed:** pages 109→122, updated 2026-06-04→2026-06-07
+
+**Hypothesis log entry updated:** frontier H232-H237→H258/H260/H262; added H257/H261b CONFIRMED
+
+**Cross-references fixed (4 links added):**
+- design-principles.md → signal-halflife.md, survivorship-bias.md (both locations)
+- momentum-strategies.md → commodity-trend-following.md, factor-momentum-style-rotation.md, long-short-equity.md
+
+**Needs review (1):**
+- tax-and-after-tax-returns.md not yet cross-referenced from paper-trading/index.md — check if paper-trading index has a related-pages footer to update

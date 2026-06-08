@@ -287,7 +287,7 @@ Monthly rebalance trigger
 
 ---
 
-**Related pages**: [Short-Term Reversal](short-term-reversal.md) — H181 industry-adjusted reversal (SSRN:6630998), complements momentum with 1-month mean-reversion | [Pairs Trading / Stat Arb](pairs-trading.md) | [Position Sizing](position-sizing.md) | [Machine Learning for Trading](../tools/ml-for-trading.md)
+**Related pages**: [Short-Term Reversal](short-term-reversal.md) — H181 industry-adjusted reversal (SSRN:6630998), complements momentum with 1-month mean-reversion | [Pairs Trading / Stat Arb](pairs-trading.md) | [Position Sizing](position-sizing.md) | [Machine Learning for Trading](../tools/ml-for-trading.md) | [Commodity Trend Following](commodity-trend-following.md) — H261b CTA (OOS 0.922, Corr SPY=0.218) | [Factor Momentum & Style Rotation](factor-momentum-style-rotation.md) — H255/H256 NOT CONFIRMED; H257 CONFIRMED | [Long-Short Equity](long-short-equity.md) — H241/H242/H243 dollar-neutral L/S
 
 
 ---

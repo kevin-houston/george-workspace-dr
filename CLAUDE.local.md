@@ -93,3 +93,6 @@ A second NanoClaw instance — "Ernesto", another assistant Kevin runs — share
 - The same applies to you — you are engaged only by messages containing "George". Other channel messages are accumulated as background context, so you'll have the full conversation when engaged.
 - Do NOT use Discord @mention syntax (`<@id>`) — it forces the conversation into a hidden side-thread. Kevin wants all conversation visible in the main channel. Always use plain names.
 - Discipline: bot-to-bot exchanges cost real tokens on both sides. Only write Ernesto's name when you need a response — omitting it is how a conversation ends. Never reply to pure acknowledgments ("ok", "thanks"). If an exchange runs ~10 turns without converging, stop and summarize the state for Kevin instead. Also beware: any sentence containing "George" engages you, even if not addressed to you — use judgment about whether a response is actually wanted.
+
+## QuantDinger (github.com/brokermr810/quantdinger)
+Self-hosted AI trading platform. Key items noted 2026-06-07. See wiki/trading/tools/quantdinger-notes.md for full assessment. Short version: `quantdinger-mcp` PyPI package is the most relevant piece — direct MCP integration for Claude Code agents with market read + execution tools. Full stack Docker deployment is overkill given existing setup.

@@ -6,7 +6,7 @@ updated: 2026-05-05
 
 These constraints must be baked into the backtesting framework from the start, not bolted on later. Sections 1–3 are prerequisites; sections 4–7 are derived from running 163+ hypotheses through this system.
 
-**Related pages**: [Hypothesis Log](hypothesis-log.md) | [Event-Driven Strategies](../algorithms/event-driven.md) | [Momentum Strategies](../algorithms/momentum-strategies.md)
+**Related pages**: [Hypothesis Log](hypothesis-log.md) | [Event-Driven Strategies](../algorithms/event-driven.md) | [Momentum Strategies](../algorithms/momentum-strategies.md) | [Signal Half-Life & Alpha Decay](signal-halflife.md) | [Survivorship Bias & Universe Construction](survivorship-bias.md)
 
 ---
 
@@ -347,7 +347,7 @@ Pre-trained models like FinBERT were trained on financial text from specific era
 - Combinatorial Purged Cross-Validation (CPCV): López de Prado 2020, for ML strategies with time-series data
 - QuantStart: [Successful Backtesting Part I](https://www.quantstart.com/articles/Successful-Backtesting-of-Algorithmic-Trading-Strategies-Part-I/)
 
-**Related pages**: [Walk-Forward & CPCV](walk-forward-cpcv.md) | [Transaction Cost Modeling](transaction-costs.md) | [Hypothesis Log](hypothesis-log.md)
+**Related pages**: [Walk-Forward & CPCV](walk-forward-cpcv.md) | [Transaction Cost Modeling](transaction-costs.md) | [Hypothesis Log](hypothesis-log.md) | [Signal Half-Life & Alpha Decay](signal-halflife.md) | [Survivorship Bias & Universe Construction](survivorship-bias.md)
 
 
 ---

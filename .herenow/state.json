@@ -128,6 +128,12 @@
       "claimToken": "2f11b2a099545061598f3b3e2b9e6f68c9d65960d04950a7c06d1f3bfbb62721",
       "claimUrl": "https://here.now/claim?slug=patient-gable-2qev&token=2f11b2a099545061598f3b3e2b9e6f68c9d65960d04950a7c06d1f3bfbb62721",
       "expiresAt": "2026-06-07T07:40:04.380Z"
+    },
+    "mystic-grove-rw8y": {
+      "siteUrl": "https://mystic-grove-rw8y.here.now/",
+      "claimToken": "c0cebe0b4ab1c61167e3bbf171033809f58cdd6c06694cb83f45bc9e849c012a",
+      "claimUrl": "https://here.now/claim?slug=mystic-grove-rw8y&token=c0cebe0b4ab1c61167e3bbf171033809f58cdd6c06694cb83f45bc9e849c012a",
+      "expiresAt": "2026-06-08T09:05:42.754Z"
     }
   }
 }
