@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-07 (commodity-trend-following.md new; signal-halflife.md AI-decay update staged; research-log/2026-06-07.md)
+updated: 2026-06-08 (crypto-data-sources.md new; H265 drift-regime factor staged; H264b trailing-stop staged; research-log/2026-06-08.md)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -56,6 +56,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)
   - [Polygon.io](data-sources/polygon.md) ← expanded 2026-04-28 (API endpoints, WebSocket, pricing, vs Alpaca)
   - [Free / Low-Cost Sources](data-sources/free-data.md) ← expanded 2026-04-28 (Tiingo, EDGAR, Finnhub, FRED, yfinance status)
+  - [Crypto Data Sources](data-sources/crypto-data-sources.md) ← new 2026-06-08 (yfinance crypto reliability + SOL gap; CoinGecko pycoingecko; ccxt unified 107-exchange API; Binance public REST; Kraken asset codes; migration path for H264b)
   - [Sector & Industry Classification](data-sources/sector-classification.md) ← new 2026-05-08 (GICS/SIC sources for H181; SEC EDGAR SIC, GitHub S&P 500 CSV, yfinance caveats, practical build_sector_cache() for 100-500 stocks)
   - [Options Data Sources](data-sources/options-data.md) ← 2026-05-01 (ThetaData/ORATS/FlashAlpha pricing; Alpaca indicative feed; vollib/py_vollib/QuantLib; IV surface + SVI fitting; free EOD options data on GitHub)
   - [Earnings Calendar & Corporate Events](data-sources/earnings-events.md) ← new 2026-05-23 (FMP/Finnhub/yfinance/API Ninjas free tier APIs; SEC EDGAR XBRL EPS extraction; EdgarTools; EPS surprise formulas; PEAD hybrid stack upgrade path for pead_overnight.py; earnings transcript sources for H174)
@@ -81,6 +82,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Live Graduation Criteria & Performance Attribution](paper-trading/live-graduation-criteria.md) ← new 2026-05-30 (SPRT test for strategy validation, minimum trade counts, regime coverage gates, paper→live execution attribution, Alpaca migration steps)
   - [Tax & After-Tax Return Modeling](paper-trading/tax-and-after-tax-returns.md) ← new 2026-06-05 (STCG/LTCG rates for IL, wash sale rule for algo trading, HIFO lot selection, after-tax Sharpe formula, expected ~40% tax drag on STCG monthly-rebalanced strategies, IRS Form 8949 reporting)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-06-08](research-log/2026-06-08.md) — wiki expansion: crypto-data-sources.md new (yfinance fragility, ccxt/CoinGecko migration path); dream cycle: H264b trailing-stop crypto, H265 drift-regime factor (arXiv:2511.12490 OOS Sharpe >13 — skeptical replication candidate), QuantStats wiki staged
   - [2026-06-07](research-log/2026-06-07.md) — wiki expansion: commodity-trend-following.md new (H261b Corr(SPY)=0.218 lowest of any confirmed H; K-1 tax flags; dream cycle: H262 Bayesian short+long CTA; AI alpha decay half-life 12m update; FinCall-Surprise multi-modal PEAD assessment)
   - [2026-06-06](research-log/2026-06-06.md) — wiki expansion: factor-momentum-style-rotation.md new (Gupta & Kelly 2019 Sharpe 0.84; H255/H256 failure analysis; look-ahead bias 3× inflation; multi-asset extensions); indexed regime-detection-signals.md; dream cycle: H257 multi-asset composite momentum, H258 text-to-alpha LLM disclosure, H259 FactorMAD debate, H260 PEAD 12q ML
   - [2026-05-31](research-log/2026-05-31.md) — wiki expansion: signal-halflife.md new (AR(1) half-life formula, rolling IC diagnostics, hyperbolic decay, AI compression 58→18 months, IS window table); dream cycle: H238 BlindTrade LLM portfolio, H239 LLM time-capsule factor, LLM reality-check wiki update, PEAD fine-grained decomposition staged

@@ -1,0 +1,14 @@
+{
+  "id": "wiki-drift-regime-factor-h265",
+  "date": "2026-06-08",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2511.12490",
+  "title": "Wiki update + H265 hypothesis: Drift-Regime Conditional Value+Reversal Factor",
+  "rationale": "arXiv:2511.12490 documents a regime-conditional S&P 500 factor: value+short-term reversal signals activated only during 'drift regimes' (individual stocks with >60% positive days in trailing 63-day window). 20-year walk-forward validation on S&P 500, OOS Sharpe >13 (158.6% annualized at small capacity, 33.6% at $1B). This deserves a wiki note in factor-models.md AND a hypothesis entry. Caveat: extraordinarily high Sharpe warrants skepticism — possible overfit or small-cap bias. But the regime-activation mechanism is directly actionable on our 200-stock universe (H181/H198 family).",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/factor-models.md",
+  "content": "## Drift-Regime Conditional Reversal (arXiv:2511.12490, 2025)\\n\\nKey finding: value + short-term reversal signals generate extraordinary alpha when conditioned on 'drift regimes' — individual stocks where >60% of trading days in the trailing 63-day window were positive. Outside drift regimes, the factor is dormant.\\n\\n**Reported performance (S&P 500, 2004-2024, walk-forward):**\\n- OOS Sharpe: >13 (!) at $100-500M capacity\\n- At $1B: 33.6% annualized Sharpe ~7\\n- Volatility: 12.0%, MaxDD: -11.9%\\n- p < 0.001 (1,000 randomization trials); Sharpe >7 under 30% parameter perturbations\\n\\n**Skepticism flags:**\\n- 13 Sharpe is extraordinary — likely reflects small-cap/liquidity premium at $100-500M capacity\\n- Paper likely uses L/S; long-only version would be lower\\n- Universe survivorship: S&P 500 constituents only (survivorship-biased upward)\\n\\n**H265 design:** Test drift-regime gate on our 200-stock universe (H198 base). Signal: 6-1m momentum; only hold if the stock had >60% positive days in trailing 63 trading days (3m window). Expected: fewer positions, higher Sharpe, reduced crash risk. TC: 0.10%/side, monthly rebalance.\\n",
+  "action": "append",
+  "apply_status": "pending"
+}

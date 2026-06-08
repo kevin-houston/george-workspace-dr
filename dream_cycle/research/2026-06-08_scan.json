@@ -1,0 +1,87 @@
+{
+  "date": "2026-06-08",
+  "angles_searched": [
+    "arXiv 2025-2026: pairs trading + cointegration + LLM",
+    "arXiv 2025-2026: PEAD + post-earnings drift + text signals",
+    "arXiv 2025-2026: crypto momentum exit timing + drawdown",
+    "arXiv 2025-2026: cross-sectional momentum crash avoidance + factor momentum",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "papers_found": [
+    {
+      "title": "AdaptiveTrend: Systematic Trend-Following with Adaptive Portfolio Construction",
+      "arxiv_id": "2602.11708",
+      "url": "https://arxiv.org/abs/2602.11708",
+      "summary": "Crypto trend-following framework with dynamic trailing stop calibrated to intra-day volatility. Sharpe 2.41, MaxDD -12.7%, Calmar 3.18 over 2022-2024 on 150+ crypto pairs. Monthly adaptive portfolio construction with asymmetric 70/30 long-short.",
+      "relevance_score": 4,
+      "relevance_reason": "Directly maps to H264b — trailing stop mechanism to fix H264 2022 bear drawdown problem",
+      "staged": true,
+      "staged_file": "1_h264b_crypto_trailing_stop.json"
+    },
+    {
+      "title": "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability",
+      "arxiv_id": "2511.12490",
+      "url": "https://arxiv.org/abs/2511.12490",
+      "summary": "Regime-conditional value+reversal factor on S&P 500 2004-2024. Drift regime = stock has >60% positive days in trailing 63-day window. OOS Sharpe >13 at $100-500M capacity, 33.6% annualized at $1B, 12% vol, -11.9% MaxDD. Walk-forward validated with p < 0.001.",
+      "relevance_score": 5,
+      "relevance_reason": "Highly novel regime-activation mechanism directly applicable to our cross-sectional momentum pipeline as H265. Skepticism: Sharpe 13 is extraordinary and likely capacity-limited.",
+      "staged": true,
+      "staged_file": "2_wiki_drift_regime_factor.json"
+    },
+    {
+      "title": "Dynamic Multi-Pair Trading Strategy in Cryptocurrency Markets with Deep Reinforcement Learning",
+      "arxiv_id": "2606.04574",
+      "url": "https://arxiv.org/abs/2606.04574",
+      "summary": "PPO+LSTM agent for crypto pairs trading with 'Filter-then-Rank' pair selection and 'Fixed Risk, Adaptive Mean' execution. Binance USD-M Futures 1-hour data. Outperforms heuristic baseline, but only significant at 10% level (not 5%).",
+      "relevance_score": 2,
+      "relevance_reason": "Crypto pairs trading is interesting but statistical evidence is weak (10% not 5%), no specific Sharpe numbers, and intraday data doesn't match our monthly framework.",
+      "staged": false
+    },
+    {
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "arxiv_id": "2605.25894",
+      "url": "https://arxiv.org/abs/2605.25894",
+      "summary": "Combines FinBERT sentiment scores + 15 fundamental metrics + 3 price indicators. LSTM and Transformer models compared. Transformer achieves higher macro F1. Ablation confirms sentiment adds incremental value.",
+      "relevance_score": 3,
+      "relevance_reason": "Potential PEAD H260 enhancement path — multi-modal fusion confirms FinBERT+fundamentals is the right direction, but no specific OOS numbers to assess feasibility.",
+      "staged": false
+    },
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "arxiv_id": "2509.24254",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "summary": "Structural extraction from earnings press releases (not just sentiment) for predicting post-announcement returns. Documents PEAD persistence and textual structure predictability.",
+      "relevance_score": 3,
+      "relevance_reason": "Background support for structural NLP on earnings documents beyond pure sentiment. Relevant to H258/H260 but not immediately actionable without the full paper metrics.",
+      "staged": false
+    },
+    {
+      "title": "Taming the Black Swan: AEGIS Momentum-Gated Hierarchical Optimisation",
+      "arxiv_id": "2604.09060",
+      "url": "https://arxiv.org/abs/2604.09060",
+      "summary": "AEGIS framework: volatility-adjusted momentum filter + minimax correlation diversification + SLSQP Sortino optimization. Matched NASDAQ-100 returns with reduced downside volatility, 2006-2025. Profitability in 90% of tested years.",
+      "relevance_score": 3,
+      "relevance_reason": "Momentum crash avoidance framework is wiki-worthy for algorithms/momentum-strategies.md, but no OOS Sharpe number provided. Not immediately hypothesis-actionable.",
+      "staged": false
+    }
+  ],
+  "github_findings": [
+    {
+      "repo": "PlaceNL2026/best-of-algorithmic-trading",
+      "url": "https://github.com/PlaceNL2026/best-of-algorithmic-trading",
+      "summary": "Recently created curated ranked list of algo trading libraries with MCP integration notes. Active 2026 project.",
+      "relevance_score": 2
+    },
+    {
+      "repo": "ranaroussi/quantstats",
+      "url": "https://github.com/ranaroussi/quantstats",
+      "summary": "Kevin shared today. Portfolio analytics + HTML tearsheet generator. pip install quantstats. Direct integration with pandas returns Series.",
+      "relevance_score": 4,
+      "staged": true,
+      "staged_file": "3_wiki_quantstats_tools.json"
+    }
+  ],
+  "proposals_staged": 3,
+  "high_relevance_count": 2,
+  "summary": "Strong night: arXiv:2602.11708 provides the trailing-stop mechanism for H264b; arXiv:2511.12490 is a high-quality drift-regime factor hypothesis (H265 candidate) with extraordinary claimed Sharpe warranting skeptical replication. PEAD multi-modal papers confirm direction but lack actionable numbers. Crypto DRL pairs weak evidence."
+}
