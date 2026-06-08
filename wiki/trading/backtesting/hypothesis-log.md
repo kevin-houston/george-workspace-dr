@@ -1,6 +1,8 @@
 ---
-updated: 2026-06-06
-h262_status: QUEUED (2026-06-07) — Commodity Trend CTA Bayesian Short+Long Signal Blend. Extends H261b with 3m/6m/12m composite rank; gate: >=2 of 3 signals positive. Aim: IS Sharpe>0.50 (fix H261b IS=0.256) while maintaining OOS Sharpe>0.922 and Corr(SPY)<0.50. Source: arXiv:2507.15876. Script: backtesting/daily/run_h262.py.
+updated: 2026-06-07
+h264_status: NOT CONFIRMED (2026-06-07) — Crypto Trend Momentum Top-2 (BTC/ETH/SOL/BNB/ADA). OOS Sharpe=0.662 (gate 0.75 FAIL). OOS CAGR=11.7%, MaxDD=-46.0%, NegYrs=2, Corr(SPY)=0.369. IS Sharpe=1.005 (inflated by 2020-2021 bull). 2022=-37.1% (crypto bear). Recovery: 2023=+124.9%, 2024=+30.2%. Script: backtesting/daily/run_h264.py.
+h263_status: NOT CONFIRMED (2026-06-07) — Commodity CTA signal-horizon variants. A=Pure 12m: OOS Sharpe=0.715 (FAIL). B=6m+12m dual-confirm: OOS Sharpe=0.780 (FAIL). Both worse than H261b (0.922). Diagnosis: 12m filter slows entry into commodity bulls and amplifies 2023 losses. H261b's 6m signal is already optimal — signal-horizon family CLOSED. Script: backtesting/daily/run_h263.py.
+h262_status: NOT CONFIRMED (2026-06-07) — Commodity CTA Bayesian blend 3m/6m/12m. OOS Sharpe=0.814 (gate >0.922 FAIL). IS Sharpe=0.129 (gate >0.50 FAIL). Both worse than H261b baseline. Root cause: ≥2-of-3 positive gate too restrictive in OOS commodity bulls; 3m signal introduces noise. Script: backtesting/daily/run_h262.py.
 h261b_status: CONFIRMED (2026-06-06) — Commodity Trend CTA Top-2 (UNG excluded). OOS Sharpe=0.922, CAGR=19.7%, MaxDD=-26.9%, NegYrs=2, Corr(SPY)=0.218. All gates PASS. ⚠️ IS/OOS disconnect: IS Sharpe=0.256 (commodity bear 2010-2017 vs OOS commodity bull 2018-2025). NOT immediately added to production — regime-dependent; 5-10% allocation possible after 6-month paper forward test. Script: backtesting/daily/run_h261b.py.
 h261_status: NOT CONFIRMED (2026-06-06) — Commodity Trend CTA Top-1 (includes UNG). OOS Sharpe=0.239, MaxDD=-60.7%. UNG caused IS MaxDD=-78%. Low SPY correlation (0.186) confirms diversification thesis but drawdown unacceptable. See H261b. Script: backtesting/daily/run_h261.py.
 h260_status: QUEUED (2026-06-06) — PEAD Revival with 12-Quarter ML Features. Source: ScienceDirect 2025 "Beyond the last surprise: Reviving PEAD with ML and historical earnings". Hypothesis: LightGBM on 12-quarter EPS surprise/beat-streak/analyst-revision sequence nearly doubles Sharpe vs 1-quarter H174 model. IS 2014–2020, OOS 2021–2025. Gates: OOS WR>65%, mean_ret>5%, n>=30. Scaffold: backtesting/daily/run_h260.py.
@@ -6347,3 +6349,95 @@ Script: `backtesting/daily/run_h261b.py`. Results: `backtesting/results/h261b_re
 **Confirm gates (must beat H261b):** OOS Sharpe > 0.922; IS Sharpe > 0.50; Corr(H262,SPY) < 0.50; NegYrs OOS ≤ 2
 
 Script: `backtesting/daily/run_h262.py`. Results: `backtesting/results/h262_results.json` (after run).
+
+---
+
+## H262 — Commodity Trend CTA: Bayesian Short+Long Signal Decomposition | NOT CONFIRMED | 2026-06-07
+
+**Source:** arXiv:2507.15876 (2025) — 'Re-evaluating Short- and Long-Term Trend Factors in CTA Replication: A Bayesian Graphical Approach'
+**Motivation:** H261b IS Sharpe=0.256 (commodity bear 2010-2017). Paper shows CTAs independently blend short-term (~3m) and long-term (~12m) trend signals. Hypothesis: blending all three lookbacks via composite rank would fix IS weakness while maintaining OOS crisis-alpha.
+
+**Design:** GLD/SLV/DBC/USO/DBA. Signals: 3m, 6m, 12m (all skip-1m, lagged-1m). Equal-weight rank scores → composite rank. Gate: Top-2 assets with ≥2 of 3 signals positive; else BIL.
+
+**Results (2026-06-07):**
+- IS 2010-2017: Sharpe=0.129, CAGR=0.3%, MaxDD=-48.3%, NegYrs=4
+- OOS 2018-2025: Sharpe=0.814, CAGR=17.3%, MaxDD=-32.5%, NegYrs=2
+- OOS annual: 2018:-6.5%, 2019:+4.4%, 2020:+21.2%, 2021:+30.9%, 2022:+26.7%, 2023:-5.4%, 2024:+3.3%, 2025:+72.6%
+- Corr(H262, SPY) OOS = 0.234
+- vs H261b baseline: IS 0.129 < 0.256 (worse), OOS 0.814 < 0.922 (worse)
+
+**Gates: OOS Sharpe FAIL (0.814 < 0.922) | IS Sharpe FAIL (0.129 < 0.50) | Corr PASS | NegYrs PASS**
+
+**NOT CONFIRMED.** The 3m/6m/12m composite blend HURT both IS and OOS vs H261b. Root causes: (1) The ≥2-of-3 positive gate is too restrictive — it filters out profitable commodity bull entries where the 3m signal hasn't yet confirmed; (2) The 3m signal is noisy in commodity markets — natural gas price reversals within 3 months create false negatives; (3) The IS/OOS disconnect is structural (2010-2017 commodity bear) and cannot be fixed by adding shorter-horizon signals to a longer-horizon signal that already signals exit in bears.
+
+Script: `backtesting/daily/run_h262.py`. Results: `backtesting/results/h262_results.json`.
+
+---
+
+## H263 — Commodity Trend CTA: 12m Signal Variants | NOT CONFIRMED | 2026-06-07
+
+**Source:** Diagnostic follow-up to H262 NOT CONFIRMED. If 3m hurt, does 12m alone help?
+**Motivation:** H262 failure analysis → the 3m signal added noise. The 12m signal is theoretically correct: it stays negative longer during multi-year commodity bears (2014-2016 oil crash), reducing false entries. Testing pure 12m and 6m+12m dual-confirm without the 3m.
+
+**Design:**
+- Universe: GLD, SLV, DBC, USO, DBA (same as H261b)
+- **Variant A**: Pure 12m — rank by 12m; absolute momentum gate = 12m > 0; Top-2
+- **Variant B**: Dual-confirm — rank by 6m; Top-2 eligible only if 12m > 0 also (softer than H262 composite)
+
+**Results (2026-06-07):**
+
+*Variant A — Pure 12m:*
+- IS 2010-2017: Sharpe=0.106, CAGR=-0.2%, MaxDD=-50.0%, NegYrs=5
+- OOS 2018-2025: Sharpe=0.715, CAGR=14.4%, MaxDD=-32.7%, NegYrs=2
+- OOS annual: 2018:-17.2%, 2019:+7.5%, 2020:+26.4%, 2021:+15.1%, 2022:+24.5%, 2023:-7.8%, 2024:+5.2%, 2025:+73.0%
+- Corr(A, SPY) OOS = 0.258
+
+*Variant B — 6m+12m dual-confirm:*
+- IS 2010-2017: Sharpe=0.208, CAGR=1.8%, MaxDD=-42.1%, NegYrs=4
+- OOS 2018-2025: Sharpe=0.780, CAGR=16.6%, MaxDD=-28.3%, NegYrs=2
+- OOS annual: 2018:-6.7%, 2019:+7.6%, 2020:+29.3%, 2021:+23.4%, 2022:+26.7%, 2023:-16.2%, 2024:+11.7%, 2025:+66.7%
+- Corr(B, SPY) OOS = 0.233
+
+**Gates (A: OOS>0.90, IS>0.40 — both FAIL) | (B: OOS>0.922, IS>0.40 — both FAIL)**
+
+**NOT CONFIRMED.** All 12m-signal variants are worse than H261b's pure 6m signal (OOS 0.922). The 12m filter doesn't fix IS (still below 0.40) and degrades OOS. Critical failure: Variant B's 2023 = -16.2% vs H261b -5.6% — the 12m filter prevented timely exit from losing positions.
+
+**CONCLUSION: The commodity CTA signal-horizon family is CLOSED.** H261b's 6m momentum is already optimal for this universe. IS/OOS disconnect is structural to the 2010-2017 commodity bear and cannot be resolved by signal engineering.
+
+Script: `backtesting/daily/run_h263.py`. Results: `backtesting/results/h263_results.json`.
+
+---
+
+## H264 — Crypto Trend Momentum Top-2 | NOT CONFIRMED | 2026-06-07
+
+**Source:** Momentum anomaly well-documented in crypto: Grobys & Sapkota (2019); Liu, Tsyvinski & Wu (2022 JF); Cong, Harvey, Kahraman & Saad (2023 RFS).
+**Motivation:** Completely unexplored family. Crypto assets are highly trend-following. A 6m momentum signal on a liquid crypto universe may generate positive risk-adjusted returns with low correlation to the equity production portfolio.
+
+**Design:**
+- Universe: BTC-USD, ETH-USD, SOL-USD, BNB-USD, ADA-USD (via yfinance)
+- Signal: 6m momentum, skip-1m, lagged-1m (same as H261b/H026)
+- Top-2 by relative momentum; both must have positive absolute momentum → BIL otherwise
+- TC: 20bp (higher than equities for crypto spread/slippage)
+- IS: 2018-2021, OOS: 2022-2025
+
+**Results (2026-06-07):**
+- IS 2018-2021: Sharpe=1.005, CAGR=79.4%, MaxDD=-71.5%, NegYrs=2
+  - IS annual: 2018:-96.9%, 2019:-19.0%, 2020:+172.5%, 2021:+378.8% (⚠️ dominated by 2020-2021 bull)
+- OOS 2022-2025: Sharpe=0.662, CAGR=11.7%, MaxDD=-46.0%, NegYrs=2
+  - OOS annual: 2022:-37.1%, 2023:+124.9%, 2024:+30.2%, 2025:-9.0%
+- Corr(H264, SPY) OOS = 0.369
+- SPY B&H OOS Sharpe = 0.855
+
+**Gates: OOS Sharpe 0.662 < 0.75 (FAIL) | Corr 0.369 < 0.60 (PASS) | NegYrs 2 ≤ 2 (PASS) | MaxDD -46% > -60% (PASS)**
+
+**NOT CONFIRMED.** OOS Sharpe 0.662 misses the 0.75 gate. The 2022 crypto bear (-37.1%) is the dominant failure — BTC fell -65% that year while the 6m momentum signal lagged the exit. Recovery in 2023 (+124.9%) and 2024 (+30.2%) were strong.
+
+**Observations worth noting:**
+- Corr(SPY)=0.369 is better than feared (2022 joint equity+crypto bear inflates vs individual years)
+- IS Sharpe=1.005 is severely inflated by 2020 (+172.5%) and 2021 (+378.8%) crypto bull cycles
+- CAGR=11.7% and only 2 negative OOS years shows genuine trend momentum in crypto
+- 2023-2025 recovery suggests the strategy captures crypto cycles, just can't escape the bear fast enough
+
+**Watch-and-wait:** Crypto momentum as a small portfolio allocation (3-5%) is not ruled out, but the 6m signal is too slow to exit a crypto bear. If revisited, consider H264b with: (a) 3m signal for crypto only, or (b) trailing stop (monthly return < -20% triggers defensive shift).
+
+Script: `backtesting/daily/run_h264.py`. Results: `backtesting/results/h264_results.json`.

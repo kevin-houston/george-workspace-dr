@@ -1,0 +1,50 @@
+{
+  "hypothesis": "H264",
+  "title": "Crypto Trend Momentum Top-2",
+  "status": "NOT CONFIRMED",
+  "universe": [
+    "BTC-USD",
+    "ETH-USD",
+    "SOL-USD",
+    "BNB-USD",
+    "ADA-USD"
+  ],
+  "is_result": {
+    "sharpe": 1.0046,
+    "cagr": 0.7941,
+    "max_dd": -0.7153,
+    "neg_yrs": 2,
+    "months": 48
+  },
+  "is_annual": {
+    "2018": -96.9,
+    "2019": -19.0,
+    "2020": 172.5,
+    "2021": 378.8
+  },
+  "oos_result": {
+    "sharpe": 0.6616,
+    "cagr": 0.1173,
+    "max_dd": -0.46,
+    "neg_yrs": 2,
+    "months": 48
+  },
+  "oos_annual": {
+    "2022": -37.1,
+    "2023": 124.9,
+    "2024": 30.2,
+    "2025": -9.0
+  },
+  "spy_oos_sharpe": 0.8551,
+  "corr_h264_spy_oos": 0.369,
+  "gates": {
+    "oos_sharpe_gate": 0.75,
+    "corr_gate": 0.6,
+    "neg_gate": 2,
+    "maxdd_gate": -0.6,
+    "sharpe_pass": false,
+    "corr_pass": true,
+    "neg_pass": true,
+    "dd_pass": true
+  }
+}

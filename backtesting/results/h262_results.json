@@ -1,0 +1,46 @@
+{
+  "hypothesis": "H262",
+  "title": "Commodity Trend CTA \u2014 Bayesian Short+Long Signal Decomposition",
+  "status": "NOT CONFIRMED",
+  "is_result": {
+    "sharpe": 0.1289,
+    "cagr": 0.0027,
+    "max_dd": -0.4828,
+    "neg_yrs": 4,
+    "months": 96
+  },
+  "oos_result": {
+    "sharpe": 0.8138,
+    "cagr": 0.173,
+    "max_dd": -0.3254,
+    "neg_yrs": 2,
+    "months": 96
+  },
+  "oos_annual": {
+    "2018": -6.5,
+    "2019": 4.4,
+    "2020": 21.2,
+    "2021": 30.9,
+    "2022": 26.7,
+    "2023": -5.4,
+    "2024": 3.3,
+    "2025": 72.6
+  },
+  "spy_oos_sharpe": 0.8654,
+  "corr_h262_spy_oos": 0.2338,
+  "h261b_baseline": {
+    "is_sharpe": 0.256,
+    "oos_sharpe": 0.922,
+    "corr_spy": 0.218
+  },
+  "gates": {
+    "oos_sharpe_gate": 0.922,
+    "is_sharpe_gate": 0.5,
+    "corr_gate": 0.5,
+    "neg_gate": 2,
+    "oos_sharpe_pass": false,
+    "is_sharpe_pass": false,
+    "corr_pass": true,
+    "neg_pass": true
+  }
+}

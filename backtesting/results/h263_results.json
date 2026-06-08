@@ -1,0 +1,68 @@
+{
+  "hypothesis": "H263",
+  "title": "Commodity Trend CTA: 12m Signal & Dual-Confirm Variants",
+  "h261b_baseline": {
+    "is_sharpe": 0.256,
+    "oos_sharpe": 0.922,
+    "corr_spy": 0.218
+  },
+  "h263_a": {
+    "description": "Pure 12m momentum",
+    "status": "NOT CONFIRMED",
+    "is_result": {
+      "sharpe": 0.1064,
+      "cagr": -0.002,
+      "max_dd": -0.5005,
+      "neg_yrs": 5,
+      "months": 96
+    },
+    "oos_result": {
+      "sharpe": 0.7151,
+      "cagr": 0.1442,
+      "max_dd": -0.3273,
+      "neg_yrs": 2,
+      "months": 96
+    },
+    "oos_annual": {
+      "2018": -17.2,
+      "2019": 7.5,
+      "2020": 26.4,
+      "2021": 15.1,
+      "2022": 24.5,
+      "2023": -7.8,
+      "2024": 5.2,
+      "2025": 73.0
+    },
+    "corr_spy_oos": 0.2579
+  },
+  "h263_b": {
+    "description": "6m rank + 12m dual-confirm",
+    "status": "NOT CONFIRMED",
+    "is_result": {
+      "sharpe": 0.2084,
+      "cagr": 0.0181,
+      "max_dd": -0.4213,
+      "neg_yrs": 4,
+      "months": 96
+    },
+    "oos_result": {
+      "sharpe": 0.7804,
+      "cagr": 0.1656,
+      "max_dd": -0.2829,
+      "neg_yrs": 2,
+      "months": 96
+    },
+    "oos_annual": {
+      "2018": -6.7,
+      "2019": 7.6,
+      "2020": 29.3,
+      "2021": 23.4,
+      "2022": 26.7,
+      "2023": -16.2,
+      "2024": 11.7,
+      "2025": 66.7
+    },
+    "corr_spy_oos": 0.2329
+  },
+  "spy_oos_sharpe": 0.8654
+}
