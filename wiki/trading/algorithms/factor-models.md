@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-25
+updated: 2026-06-08
 status: active
 sources:
   - Kenneth French Data Library (https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
@@ -513,3 +513,20 @@ Current blend (H041a 22% / H026 27% / H045 21% / IBS 30%) is static. A regime ov
 - In bull trends: increase H041a/H026 (momentum ETF rotation)
 
 Design candidate: **H249** — regime-conditional weight adjustment on production portfolio. Gate: Sharpe improvement vs static blend > 0.2 in OOS.
+
+## Drift-Regime Conditional Reversal (arXiv:2511.12490, 2025)
+
+Key finding: value + short-term reversal signals generate extraordinary alpha when conditioned on "drift regimes" — individual stocks where >60% of trading days in the trailing 63-day window were positive. Outside drift regimes, the factor is dormant.
+
+**Reported performance (S&P 500, 2004-2024, walk-forward):**
+- OOS Sharpe: >13 (!) at $100-500M capacity
+- At $1B: 33.6% annualized, Sharpe ~7
+- Volatility: 12.0%, MaxDD: -11.9%
+- p < 0.001 (1,000 randomization trials); Sharpe >7 under 30% parameter perturbations
+
+**Skepticism flags:**
+- Sharpe 13 is extraordinary — likely reflects small-cap/liquidity premium at $100-500M capacity
+- Paper likely uses L/S; long-only version would be lower
+- Universe survivorship: S&P 500 constituents only (survivorship-biased upward)
+
+**H265 design:** Test drift-regime gate on our 200-stock universe (H198 base). Signal: 6-1m momentum; only hold if the stock had >60% positive days in trailing 63 trading days (3m window). Expected: fewer positions, higher Sharpe, reduced crash risk. TC: 0.10%/side, monthly rebalance.

@@ -3,12 +3,11 @@
   "date": "2026-06-08",
   "source": "repo",
   "source_url": "https://github.com/ranaroussi/quantstats",
-  "title": "Wiki update: QuantStats tearsheet generator in tools/",
-  "rationale": "Kevin shared quantstats (ranaroussi/quantstats) today. It's a direct productivity improvement for the backtest pipeline: one call generates polished HTML tearsheets with 50+ metrics and SPY benchmark comparison. Adding a wiki entry standardizes its use across all run_hNNN.py scripts. The tools/ section currently has no coverage of analytics/reporting libraries.",
+  "title": "Wiki update: QuantStats + Kan indexed in wiki/index.md tools section",
+  "rationale": "Kevin shared quantstats (ranaroussi/quantstats) and kan (kanbn/kan) today. Adding both to the wiki/index.md tools section so they are discoverable. QuantStats is directly actionable for run_hNNN.py tearsheets.",
   "risk_level": "low",
   "type": "wiki_update",
-  "target_file": "/workspace/agent/wiki/tools/quantstats-notes.md",
-  "content": "Already written at /workspace/agent/wiki/tools/quantstats-notes.md — this proposal tracks the wiki/index.md update needed to index it under the Trading wiki tools section.",
+  "target_file": "/workspace/agent/wiki/index.md",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
