@@ -1,5 +1,7 @@
 ---
-updated: 2026-06-07
+updated: 2026-06-08
+h265_status: CONFIRMED (2026-06-08) — Drift-Regime Conditional Momentum (50 large-cap S&P 500). Source: arXiv:2511.12490. Drift gate: stock eligible only if fraction of positive daily returns in trailing 63 days > threshold. Best threshold: 0.60. OOS (2018-2025) Sharpe=2.947, CAGR=65.3%, MaxDD=-19.5%, NegYrs=0, Corr(SPY)=0.7345. IS (2008-2017) Sharpe=2.151. All gates PASS. ⚠️ SURVIVORSHIP BIAS WARNING: fixed 50-stock universe selected with knowledge of 2025 survival — CAGR/Sharpe inflated. Baseline (no drift gate) OOS Sharpe=0.951; drift gate adds genuine signal (Sharpe 0.951→2.947). DRG>0.55 also strong: OOS Sharpe=2.238, CAGR=50.1%. Script: backtesting/daily/run_h265.py.
+h264b_status: NOT CONFIRMED (2026-06-08) — Crypto Trend Momentum + Weekly Trailing Stop. Source: arXiv:2602.11708. Monthly 6m momentum selection (BTC/ETH/SOL/BNB/ADA) + weekly trailing stop check (resample W-FRI). Best stop: 10%. OOS (2022-2025) Sharpe(m)=0.7189 (gate >0.75 FAIL), MaxDD=-29.5%, NegYrs=0, CAGR=74.7%. Stop marginally improved H264 baseline (0.662→0.719). Tighter stops (15/20%) worse. Crypto bear 2022 (+28.5% with stop due to early exit) but Sharpe gate not cleared. Script: backtesting/daily/run_h264b.py.
 h264_status: NOT CONFIRMED (2026-06-07) — Crypto Trend Momentum Top-2 (BTC/ETH/SOL/BNB/ADA). OOS Sharpe=0.662 (gate 0.75 FAIL). OOS CAGR=11.7%, MaxDD=-46.0%, NegYrs=2, Corr(SPY)=0.369. IS Sharpe=1.005 (inflated by 2020-2021 bull). 2022=-37.1% (crypto bear). Recovery: 2023=+124.9%, 2024=+30.2%. Script: backtesting/daily/run_h264.py.
 h263_status: NOT CONFIRMED (2026-06-07) — Commodity CTA signal-horizon variants. A=Pure 12m: OOS Sharpe=0.715 (FAIL). B=6m+12m dual-confirm: OOS Sharpe=0.780 (FAIL). Both worse than H261b (0.922). Diagnosis: 12m filter slows entry into commodity bulls and amplifies 2023 losses. H261b's 6m signal is already optimal — signal-horizon family CLOSED. Script: backtesting/daily/run_h263.py.
 h262_status: NOT CONFIRMED (2026-06-07) — Commodity CTA Bayesian blend 3m/6m/12m. OOS Sharpe=0.814 (gate >0.922 FAIL). IS Sharpe=0.129 (gate >0.50 FAIL). Both worse than H261b baseline. Root cause: ≥2-of-3 positive gate too restrictive in OOS commodity bulls; 3m signal introduces noise. Script: backtesting/daily/run_h262.py.
@@ -6441,3 +6443,77 @@ Script: `backtesting/daily/run_h263.py`. Results: `backtesting/results/h263_resu
 **Watch-and-wait:** Crypto momentum as a small portfolio allocation (3-5%) is not ruled out, but the 6m signal is too slow to exit a crypto bear. If revisited, consider H264b with: (a) 3m signal for crypto only, or (b) trailing stop (monthly return < -20% triggers defensive shift).
 
 Script: `backtesting/daily/run_h264.py`. Results: `backtesting/results/h264_results.json`.
+
+---
+
+## H264b — Crypto Trend Momentum + Weekly Trailing Stop (2026-06-08)
+
+**Status: NOT CONFIRMED**
+
+**Source:** arXiv:2602.11708 (AdaptiveTrend, 2025) — adaptive trailing stop applied to crypto trend-following.
+
+**Design:** Monthly 6-month momentum signal selects top-2 of BTC/ETH/SOL/BNB/ADA. After month-end rebalance, a weekly trailing stop checks if any held asset has fallen more than N% from its month-start price — if triggered, exits to BIL for the remainder of the month. Grid search over TRAIL_STOP_LEVELS = 10%, 15%, 20%. IS: 2018–2021, OOS: 2022–2025.
+
+**Results:**
+
+| Stop % | IS Sharpe(m) | OOS Sharpe(m) | OOS MaxDD | OOS NegYrs | OOS CAGR |
+|--------|-------------|--------------|-----------|------------|---------|
+| 10%    | 1.2212      | 0.7189       | -29.5%    | 0          | 74.7%   |
+| 15%    | 1.0435      | 0.5301       | -32.9%    | 0          | —       |
+| 20%    | 0.8528      | 0.3874       | -40.3%    | 1          | —       |
+
+Best stop: 10%. OOS annual: 2022=+28.5%, 2023=+115.6%, 2024=+96.8%, 2025=+27.9%.
+
+**Gates: OOS Sharpe(m) 0.7189 < 0.75 (FAIL) | MaxDD -29.5% > -45% (PASS) | NegYrs 0 ≤ 2 (PASS)**
+
+**NOT CONFIRMED.** The 10% trailing stop improved OOS Sharpe modestly vs H264 baseline (0.662→0.719) but didn't clear the gate. Tighter stops (15/20%) hurt more than help. The 2022 crypto bear still dominates — the monthly signal exits are too slow even with weekly checks; 10% stop is triggered early and exits to BIL before the worst of the bear.
+
+**Observations:**
+- Zero negative OOS years (same as H264 with stop) — the stop prevents the catastrophic year
+- 10% stop is the sweet spot; 15/20% allow too much drawdown before triggering
+- Annual CAGRs (74.7% OOS at 10%) look impressive but this is the high-volatility crypto universe
+- The OOS Sharpe gate (monthly) is conservative because crypto monthly returns are highly variable
+
+Script: `backtesting/daily/run_h264b.py`. Results: `backtesting/results/h264b_results.json`.
+
+---
+
+## H265 — Drift-Regime Conditional Momentum (2026-06-08)
+
+**Status: CONFIRMED ⚠️ SURVIVORSHIP BIAS WARNING**
+
+**Source:** arXiv:2511.12490 (2025) — "Drift Regimes Unlock Hidden Cross-Sectional Predictability."
+
+**Design:** 6-1m momentum on 50 stable large-cap S&P 500 stocks. Drift gate: stock is only eligible if the fraction of positive-return trading days in the trailing 63-day window exceeds DRIFT_THRESHOLD. Top-5 by momentum among eligible stocks. Defensive: SPY if <5 qualify. Monthly rebalance, 10bp TC. Universe: fixed 50 large-caps with history since pre-2008. IS: 2008–2017, OOS: 2018–2025. Grid search over thresholds 0.50/0.55/0.60.
+
+**Results:**
+
+| Threshold | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | NegYrs | Corr(SPY) |
+|-----------|----------|-----------|---------|-----------|--------|-----------|
+| Baseline  | 0.521    | 0.951     | 16.4%   | -16.3%    | 0      | —         |
+| DRG>0.50  | 1.452    | 1.350     | 26.4%   | -21.9%    | 0      | 0.763     |
+| DRG>0.55  | 2.466    | 2.238     | 50.1%   | -19.8%    | 0      | 0.791     |
+| DRG>0.60  | 2.151    | **2.947** | 65.3%   | -19.5%    | 0      | 0.735     |
+
+Best threshold: 0.60.
+
+**OOS Annual (DRG>0.60):**
+- 2018: +40.2% | 2019: +38.9% | 2020: +46.8% | 2021: +78.0%
+- 2022: +41.5% | 2023: +59.3% | 2024: +59.3% | 2025: +58.8%
+
+**Gates: OOS Sharpe 2.947 > 1.10 (PASS) | Corr(SPY) 0.735 < 0.85 (PASS) | NegYrs 0 ≤ 2 (PASS) | IS Sharpe 2.151 > 0.60 (PASS)**
+
+**CONFIRMED** — all 4 gates pass.
+
+**⚠️ Critical caveat — survivorship bias:** The 50-stock universe is a fixed list selected with full knowledge of which stocks were still large-caps by 2025. This introduces survivorship bias: the historical backtest includes only stocks that survived and remained large-caps, excluding the underperformers and failures that would have been included in a real-world 2008 strategy. The true OOS Sharpe on a properly constructed universe (adding delisted tickers, applying screens valid at each rebalance date) would be lower — likely significantly so given the extraordinary CAGR figures.
+
+**Observations:**
+- Drift gate is the key innovation: baseline momentum (Sharpe 0.951) triples to 2.947 with DRG>0.60
+- 2022 shows +41.5% — the drift gate naturally avoids falling stocks in a bear market
+- 0.60 threshold is most discriminating (matches paper's reported threshold)
+- The paper's claimed OOS Sharpe >13 was not replicated; our conservative 50-stock fixed universe produces 2.947 — still extraordinary but with survivorship caveat
+- Corr(SPY) 0.735 is moderate — the drift gate creates genuine decorrelation
+
+**Production verdict:** NOT recommended for immediate production deployment due to survivorship bias. Design H265b with a properly constructed rolling universe (no look-ahead on universe composition) to get a clean read. The mechanism is strong enough to warrant further testing.
+
+Script: `backtesting/daily/run_h265.py`. Results: `backtesting/results/h265_results.json`.

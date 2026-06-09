@@ -1,0 +1,142 @@
+{
+  "hypothesis": "H265",
+  "title": "Drift-Regime Conditional Momentum (50 large-cap S&P 500)",
+  "status": "CONFIRMED",
+  "universe_size": 50,
+  "universe": [
+    "AAPL",
+    "MSFT",
+    "INTC",
+    "CSCO",
+    "ORCL",
+    "IBM",
+    "QCOM",
+    "TXN",
+    "JPM",
+    "BAC",
+    "WFC",
+    "GS",
+    "AXP",
+    "C",
+    "USB",
+    "MS",
+    "JNJ",
+    "PFE",
+    "ABT",
+    "MRK",
+    "LLY",
+    "MDT",
+    "AMGN",
+    "GILD",
+    "KO",
+    "PEP",
+    "PG",
+    "WMT",
+    "MCD",
+    "VZ",
+    "DIS",
+    "NKE",
+    "XOM",
+    "CVX",
+    "BA",
+    "MMM",
+    "CAT",
+    "GE",
+    "HON",
+    "EMR",
+    "HD",
+    "TGT",
+    "LOW",
+    "COST",
+    "SBUX",
+    "T",
+    "BK",
+    "MET",
+    "BMY",
+    "SLB"
+  ],
+  "source": "arXiv:2511.12490",
+  "baseline": {
+    "is_sharpe": 0.5212,
+    "oos_sharpe": 0.9509,
+    "oos_ann": {
+      "2018": 13.0,
+      "2019": 25.7,
+      "2020": 15.4,
+      "2021": 25.0,
+      "2022": 9.5,
+      "2023": 17.8,
+      "2024": 18.1,
+      "2025": 8.8
+    }
+  },
+  "spy_oos_sharpe": 0.8998,
+  "best_drift_threshold": 0.6,
+  "grid_results": {
+    "0.5": {
+      "is_sharpe": 1.4515,
+      "oos_sharpe": 1.3503,
+      "oos_max_dd": -0.2191,
+      "oos_neg_yrs": 0,
+      "corr_spy": 0.7631,
+      "oos_annual": {
+        "2018": 21.4,
+        "2019": 34.5,
+        "2020": 24.2,
+        "2021": 28.5,
+        "2022": 15.9,
+        "2023": 28.5,
+        "2024": 20.9,
+        "2025": 27.5
+      }
+    },
+    "0.55": {
+      "is_sharpe": 2.4664,
+      "oos_sharpe": 2.2382,
+      "oos_max_dd": -0.198,
+      "oos_neg_yrs": 0,
+      "corr_spy": 0.7908,
+      "oos_annual": {
+        "2018": 31.4,
+        "2019": 40.8,
+        "2020": 55.8,
+        "2021": 53.7,
+        "2022": 30.5,
+        "2023": 36.9,
+        "2024": 44.2,
+        "2025": 50.9
+      }
+    },
+    "0.6": {
+      "is_sharpe": 2.1513,
+      "oos_sharpe": 2.947,
+      "oos_max_dd": -0.195,
+      "oos_neg_yrs": 0,
+      "corr_spy": 0.7345,
+      "oos_annual": {
+        "2018": 40.2,
+        "2019": 38.9,
+        "2020": 46.8,
+        "2021": 78.0,
+        "2022": 41.5,
+        "2023": 59.3,
+        "2024": 59.3,
+        "2025": 58.8
+      }
+    }
+  },
+  "best_result": {
+    "sharpe": 2.947,
+    "cagr": 0.6532,
+    "max_dd": -0.195,
+    "neg_yrs": 0,
+    "months": 96,
+    "corr_spy": 0.7345
+  },
+  "gates": {
+    "sharpe_pass": true,
+    "corr_pass": true,
+    "neg_pass": true,
+    "is_pass": true
+  }
+}

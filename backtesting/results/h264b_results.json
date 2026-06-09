@@ -1,0 +1,67 @@
+{
+  "hypothesis": "H264b",
+  "title": "Crypto Trend Momentum + Weekly Trailing Stop",
+  "status": "NOT CONFIRMED",
+  "best_trail_stop_pct": 0.1,
+  "universe": [
+    "BTC-USD",
+    "ETH-USD",
+    "SOL-USD",
+    "BNB-USD",
+    "ADA-USD"
+  ],
+  "h264_baseline_oos_sharpe": 0.662,
+  "spy_oos_sharpe": 0.8551,
+  "grid_results": {
+    "0.1": {
+      "is_sharpe_m": 1.2212,
+      "oos_sharpe_m": 0.7189,
+      "oos_max_dd": -0.2952,
+      "oos_neg_yrs": 0,
+      "oos_annual": {
+        "2022": 28.5,
+        "2023": 115.6,
+        "2024": 96.8,
+        "2025": 27.9
+      }
+    },
+    "0.15": {
+      "is_sharpe_m": 1.0435,
+      "oos_sharpe_m": 0.5301,
+      "oos_max_dd": -0.3292,
+      "oos_neg_yrs": 0,
+      "oos_annual": {
+        "2022": 21.6,
+        "2023": 101.1,
+        "2024": 71.7,
+        "2025": 14.7
+      }
+    },
+    "0.2": {
+      "is_sharpe_m": 0.8528,
+      "oos_sharpe_m": 0.3874,
+      "oos_max_dd": -0.4028,
+      "oos_neg_yrs": 1,
+      "oos_annual": {
+        "2022": -18.2,
+        "2023": 101.1,
+        "2024": 60.4,
+        "2025": 12.9
+      }
+    }
+  },
+  "best_result": {
+    "trail_stop_pct": 0.1,
+    "sharpe": 1.4964,
+    "sharpe_m": 0.7189,
+    "cagr": 0.7471,
+    "max_dd": -0.2952,
+    "neg_yrs": 0,
+    "weeks": 208
+  },
+  "gates": {
+    "sharpe_pass": false,
+    "dd_pass": true,
+    "neg_pass": true
+  }
+}
