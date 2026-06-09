@@ -198,7 +198,7 @@ def get_recent_orders(n: int = 20) -> list[dict]:
                 "symbol":            o.symbol,
                 "side":              o.side.value,
                 "qty":               float(o.qty or 0),
-                "notional":          float(o.notional or 0),
+                "notional":          float(o.notional) if o.notional else float((o.qty or 0) * (o.filled_avg_price or 0)),
                 "status":            o.status.value,
                 "filled_at":         str(o.filled_at)[:16] if o.filled_at else "",
                 "filled_avg_price":  float(o.filled_avg_price or 0),

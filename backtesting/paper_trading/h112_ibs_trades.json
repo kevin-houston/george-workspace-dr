@@ -1,0 +1,28 @@
+[
+  {
+    "date": "2026-06-08",
+    "symbol": "XLK",
+    "action": "BUY",
+    "qty": 111.9555,
+    "price": 185.22,
+    "prev_ibs": 0.0531,
+    "gap": 0.027288,
+    "reason": "IBS entry: prev_ibs 0.053 < 0.15, gap +2.729% \u2265 -1.000%",
+    "order_id": "5e219469-5c77-4060-9a75-240fb3978093",
+    "submitted_at": "2026-06-08T09:45:11.100946",
+    "equity": 103682.01
+  },
+  {
+    "date": "2026-06-08",
+    "symbol": "SMH",
+    "action": "BUY",
+    "qty": 13.8889,
+    "price": 597.21,
+    "prev_ibs": 0.0,
+    "gap": 0.048307,
+    "reason": "IBS entry: prev_ibs 0.000 < 0.2, gap +4.831% \u2265 -0.500%",
+    "order_id": "fc1b6032-3a97-4018-8cc5-c42ff9060a2a",
+    "submitted_at": "2026-06-08T09:45:11.643669",
+    "equity": 103682.01
+  }
+]

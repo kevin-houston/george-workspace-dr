@@ -1,10 +1,6 @@
 {
-  "date": "2026-06-05",
+  "date": "2026-06-08",
   "candidates": [],
-  "scores": {
-    "AVGO": {
-      "score": -0.0495,
-      "surprise": -0.1493
-    }
-  }
+  "scores": {},
+  "reason": "no earnings"
 }

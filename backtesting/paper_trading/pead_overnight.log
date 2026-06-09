@@ -279,3 +279,8 @@
 [2026-06-05 23:04:22] Candidates for tomorrow: none
 [2026-06-05 23:04:22] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-06-05 23:04:22] Overnight pass complete.
+[2026-06-08 23:01:27] =======================================================
+[2026-06-08 23:01:27] PEAD overnight pass starting
+[2026-06-08 23:01:27] Scanning earnings calendar…
+[2026-06-08 23:01:52]   Tickers with recent earnings: none
+[2026-06-08 23:01:52] No earnings tonight. Watchlist cleared.

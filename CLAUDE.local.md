@@ -96,3 +96,12 @@ A second NanoClaw instance — "Ernesto", another assistant Kevin runs — share
 
 ## QuantDinger (github.com/brokermr810/quantdinger)
 Self-hosted AI trading platform. Key items noted 2026-06-07. See wiki/trading/tools/quantdinger-notes.md for full assessment. Short version: `quantdinger-mcp` PyPI package is the most relevant piece — direct MCP integration for Claude Code agents with market read + execution tools. Full stack Docker deployment is overkill given existing setup.
+
+## QuantStats (github.com/ranaroussi/quantstats)
+Python portfolio analytics + HTML tearsheet generator. Noted 2026-06-08. See wiki/tools/quantstats-notes.md. pip install quantstats. Takes a pandas returns Series → 50+ metrics + plots + full HTML tearsheet with SPY benchmark. High value: could add `qs.reports.html()` to every run_hNNN.py for polished output. No reformatting needed from existing yfinance/pandas workflow.
+
+## claude-code-video-toolkit (github.com/digitalsamba/claude-code-video-toolkit)
+AI-native video production workspace for Claude Code. Noted 2026-06-08. See wiki/tools/claude-code-video-toolkit.md. MIT, ~1.4k stars. Ships with .claude/skills + 12 slash commands. ElevenLabs/Qwen3 TTS, FLUX image gen, LTX2 video gen, Remotion compositor, Modal/RunPod GPU. Relevant if Kevin wants video output from research/podcast work. No immediate need.
+
+## Kan (github.com/kanbn/kan)
+Self-hosted open-source kanban / project management (Trello alternative). Noted 2026-06-08. See wiki/tools/kan-notes.md. AGPLv3, ~5k stars, active. Tech: Next.js + tRPC + Postgres. Has webhooks + admin API. Not a trading tool — potential use as visual task/research dashboard. Low priority unless Kevin wants a dedicated project board UI.
