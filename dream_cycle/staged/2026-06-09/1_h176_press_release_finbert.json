@@ -1,0 +1,14 @@
+{
+  "id": "h176-press-release-finbert",
+  "date": "2026-06-09",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2509.24254",
+  "title": "H176: PEAD via Press Release FinBERT Embeddings",
+  "rationale": "arXiv:2509.24254 (Wu et al., Sept 2025) applies FinBERT embeddings to 138k press releases (2005-2023) and finds press release sentiment is 'as informative as earnings surprise' for predicting short-window announcement returns. Critically, they use full-open pricing at market open — the same entry mechanics as H174. H174 currently scores 8-K SEC filings; press releases are issued slightly earlier (before market open on earnings day), potentially giving a 15-30 minute execution edge. H176 would test: same scoring pipeline as H174 but applied to press releases fetched via GlobeNewswire/BusinessWire RSS, compared against H174's 8-K score. If press releases score at least as well as 8-Ks, they can replace or augment H174. Relevance: 8/10. Direct upgrade path for the confirmed H174 strategy.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h176.py",
+  "action": "write",
+  "content": "# H176: PEAD via Press Release FinBERT\n# Source: arXiv:2509.24254 (Wu et al., 2025)\n# Hypothesis: press release FinBERT sentiment >= 8-K sentiment for PEAD signal\n# Entry: same as H174 — full-open on earnings day\n# TODO: implement press release fetching from GlobeNewswire/BusinessWire RSS\n# TODO: compare OOS win-rate vs H174 baseline (WR=81.8%, n=22)\n# Scaffold only — full implementation pending",
+  "apply_status": "pending"
+}

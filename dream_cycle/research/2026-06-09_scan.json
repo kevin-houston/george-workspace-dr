@@ -1,0 +1,111 @@
+{
+  "date": "2026-06-09",
+  "angles_searched": [
+    "pairs trading + LLM",
+    "PEAD + NLP earnings prediction",
+    "drift regime + momentum/factor",
+    "multi-agent LLM trading",
+    "GitHub trending quant/trading"
+  ],
+  "papers_found": [
+    {
+      "arxiv_id": "2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "authors": "Wu et al.",
+      "date": "Sept 2025",
+      "angle": "PEAD + NLP",
+      "summary": "FinBERT embeddings on 138k press releases (2005-2023). Press release sentiment as informative as earnings surprise for short-window returns. Uses full-open pricing at market open.",
+      "relevance_score": 8,
+      "relevance_note": "Direct H174 upgrade — earlier signal (press release vs 8-K), same entry mechanics. H176 candidate.",
+      "staged": true,
+      "staged_file": "1_h176_press_release_finbert.json"
+    },
+    {
+      "arxiv_id": "2505.14420",
+      "title": "SAE-FiRE: Sparse Autoencoder Features for Earnings Surprise Prediction",
+      "date": "May 2025",
+      "angle": "PEAD + NLP",
+      "summary": "Sparse autoencoders extract latent features from earnings transcripts/filings; 'significantly outperforms baseline' for earnings surprise prediction. No Sharpe reported.",
+      "relevance_score": 6,
+      "relevance_note": "Could inform H260 (PEAD Revival ML features). Architecture is novel but no trading Sharpe to evaluate.",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2511.12490",
+      "title": "Drift-Regime Conditional Factor (Value + Short-Term Reversal)",
+      "date": "Nov 2025",
+      "angle": "drift regime + factor",
+      "summary": "Drift gate: fraction positive days in trailing 63d > 0.60. Inside drift regime, value + short-term reversal signals activated. 20-year S&P 500 walk-forward Sharpe >13 (survivorship caveat). IMPORTANT: H265 tested momentum (different signal); H265b should test paper's actual value+reversal signals.",
+      "relevance_score": 9,
+      "relevance_note": "H265 confirmed momentum version — H265b queued for paper's actual value+reversal signals with proper rolling universe.",
+      "staged": true,
+      "staged_file": "2_h265b_drift_value_reversal.json"
+    },
+    {
+      "arxiv_id": "2605.25894",
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "date": "May 2026",
+      "angle": "PEAD + NLP",
+      "summary": "15 fundamentals + 3 TA + FinBERT → Transformer. Direction prediction on earnings day. Transformer > LSTM in ablation. No aggregate Sharpe.",
+      "relevance_score": 7,
+      "relevance_note": "Natural H174 evolution — multi-modal fusion. Suggests H177 (add numeric fundamentals to H174 scoring). No direct Sharpe to compare.",
+      "staged": true,
+      "staged_file": "3_wiki_multimodal_earnings.json"
+    },
+    {
+      "arxiv_id": "2606.04574",
+      "title": "Dynamic Multi-Pair Trading Strategy in Cryptocurrency Markets with Deep Reinforcement Learning",
+      "date": "June 3, 2026",
+      "angle": "pairs trading + LLM/DRL",
+      "summary": "DRL (PPO+LSTM) on Binance USD-M futures, 1-hour data. Multi-pair simultaneously. Significance only at 10% (not 5%) level.",
+      "relevance_score": 4,
+      "relevance_note": "Crypto pairs DRL — not directly actionable. H246 pairs NOT CONFIRMED; weak statistical evidence here too.",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2510.17393",
+      "title": "3S-Trader: Multi-LLM Scoring/Strategy/Selection on DJIA",
+      "date": "Oct 2025",
+      "angle": "multi-agent LLM",
+      "summary": "Three specialized LLM agents (scoring, strategy, selection) on DJIA. Accumulated return 131.83%, Sharpe 0.31, Calmar 11.84 (2024). Low Sharpe despite high return — volatile.",
+      "relevance_score": 5,
+      "relevance_note": "Multi-agent architecture interesting but Sharpe 0.31 is well below production gate. Monitor space for improvements.",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2502.13165",
+      "title": "HedgeAgents: Hedging-focused Multi-Agent LLM Framework",
+      "date": "Feb 2025",
+      "angle": "multi-agent LLM",
+      "summary": "Multi-agent LLM for portfolio hedging decisions. General framework, no specific OOS Sharpe provided.",
+      "relevance_score": 4,
+      "relevance_note": "Interesting for VRP/hedge overlay (H266 family) but too abstract for immediate use.",
+      "staged": false
+    }
+  ],
+  "github_findings": [
+    {
+      "repo": "Lumibot",
+      "relevance": 5,
+      "note": "Backtest + live trading same codebase. Could replace custom paper trading pipeline if needed."
+    },
+    {
+      "repo": "StrateQueue",
+      "relevance": 5,
+      "note": "Broker-agnostic strategy deployment. Not needed with current Alpaca/Kraken setup."
+    },
+    {
+      "repo": "leoncuhk/awesome-quant-ai",
+      "relevance": 5,
+      "note": "Curated quant+AI paper list. Good for future scan angles."
+    },
+    {
+      "repo": "paperswithbacktest/awesome-systematic-trading",
+      "relevance": 5,
+      "note": "Systematic trading papers with backtest results. Good reference catalog."
+    }
+  ],
+  "proposals_staged": 3,
+  "top_finding": "arXiv:2509.24254 — press release FinBERT as informative as earnings surprise; direct H174 upgrade path (H176)",
+  "hypothesis_queue_additions": ["H176 (press release FinBERT PEAD)", "H265b (drift-regime value+reversal, rolling universe)", "H177 (multi-modal earnings, H174 + fundamentals)"]
+}

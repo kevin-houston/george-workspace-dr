@@ -1,0 +1,14 @@
+{
+  "id": "wiki-multimodal-earnings-prediction",
+  "date": "2026-06-09",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2605.25894",
+  "title": "Wiki note: multi-modal earnings day prediction (arXiv:2605.25894)",
+  "rationale": "arXiv:2605.25894 (May 2026, Sharpe not reported) combines 15 fundamental features + 3 TA indicators + FinBERT sentiment in a Transformer architecture to predict stock direction on earnings announcement days. Transformer outperforms LSTM in the ablation study. Relevance 7/10: the multi-modal fusion approach (fundamentals + TA + NLP) is a natural evolution of H174 and could inform H176 design. No Sharpe reported — not backtest-ready, but worth recording in the event-driven wiki page as a 'next-generation architecture' reference for when H174/H176 warrant an upgrade.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/event-driven.md",
+  "action": "append",
+  "content": "\n---\n\n## Multi-Modal Earnings Day Prediction (arXiv:2605.25894, May 2026)\n\n**Fusion approach:** 15 fundamental features (EPS, revenue, margins, etc.) + 3 TA indicators + FinBERT sentiment → Transformer architecture → binary direction prediction on earnings announcement day.\n\n**Key finding:** Transformer outperforms LSTM in ablation; multi-modal fusion beats single-modality baselines. No aggregate Sharpe reported — classification accuracy only.\n\n**Relevance to production:** Frames the H174/H176 upgrade path. Current H174 uses only FinBERT sentiment on 8-K text. Adding fundamental features (earnings surprise magnitude, revenue beat) as explicit numeric inputs could improve signal precision.\n\n**Actionability:** H177 candidate — extend H174 scoring with numeric fundamental features. Requires FMP or EDGAR structured data for each earnings event.",
+  "apply_status": "pending"
+}
