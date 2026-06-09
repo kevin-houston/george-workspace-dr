@@ -708,3 +708,53 @@ This is the most credible LLM trading negative result because:
 | Leakage check (knowledge cutoff) | LLM cutoff year must precede the OOS evaluation period |
 
 **Our hypothesis testing standard:** IS/OOS split, 0.10% transaction cost, explicit Sharpe > threshold gate, and (for LLM-based strategies) anonymization variant as negative control.
+
+---
+
+## Kevin's Curated LLM Trading References (2026-06-09)
+
+### FinAgent — Multimodal LLM Agent for Trading (arXiv:2402.18485)
+
+**Reference:** arXiv:2402.18485 (Feb 2024)
+**Kevin's note:** "How to build a proper AI trading agent using structured pipelines, not just prompting."
+
+**Core idea:** FinAgent is a multimodal foundation agent framework that combines market data, news, social media, and financial reports via a unified memory module and tool-calling pipeline. Rather than prompting a single LLM for a trade recommendation, FinAgent structures the problem as a pipeline: data retrieval → tool dispatch → memory update → decision. Includes a "diversified reflection" mechanism to avoid over-relying on recent context.
+
+**Architecture highlights:**
+- Unified **market intelligence module**: fetches and summarizes multimodal inputs (price, text, images of charts) before LLM sees them
+- **Tool dispatcher**: separates retrieval from reasoning — LLM does not make raw API calls
+- **Memory buffer**: maintains recent market context, agent reflections, prior trade outcomes
+- Tested on 6 financial tasks (stock trading, crypto, ETF, forex) across bull/bear/sideways markets
+
+**Implication for production pipeline:** The key design lesson is **structured data routing before the LLM sees anything**. In our H258/H260 pipeline designs, always pre-process: run FinBERT scoring, compute EPS surprise, fetch sector context — then pass structured summary to LLM, not raw 8-K text. Reduces hallucination and improves reliability.
+
+---
+
+### Can LLMs Generate Novel Research Ideas? (arXiv:2409.04109)
+
+**Reference:** arXiv:2409.04109 (Si et al., Sept 2024)
+**Kevin's note:** "LLMs are great for ideation but weak at execution, use them as your starting point."
+
+**Core finding:** Claude-3.5-Sonnet generated research ideas rated as "more novel" than PhD students by expert reviewers, but with "lower feasibility" scores. LLM-generated ideas tend to be creative but underspecified. When researchers were given LLM-generated ideas to execute, projects succeeded less often than researcher-originated ones.
+
+**Implication for the research pipeline:**
+- Dream cycle scans (our nightly arXiv scanning) are well-suited to LLMs — ideation and signal detection
+- Full hypothesis design and implementation still requires human judgment (Kevin) to evaluate feasibility
+- This paper validates the current workflow: George generates staged proposals → Kevin reviews before committing capital
+- **Antipattern to avoid:** Auto-applying medium/high-risk proposals without human sign-off. The ideation → execution gap is real.
+
+---
+
+### Alpha-GPT — Human-AI Loop for Factor Discovery (arXiv:2308.00016)
+
+**Reference:** arXiv:2308.00016 (Aug 2023)
+**Kevin's note:** "The closest paper to a real quant workflow — human-AI loop for discovering trading factors."
+
+**Core idea:** Alpha-GPT frames quantitative factor mining as an interactive human-AI loop. An LLM proposes new alpha factors (mathematical expressions combining price/volume/fundamental data), a backtesting engine evaluates them automatically, and results feed back to the LLM for iteration. The human steers the search by providing domain constraints, not by writing each factor from scratch.
+
+**Key results reported:**
+- Generated factors with IC > 0.05 on Chinese A-share market
+- Human feedback loop materially improved factor quality vs fully automated search
+- Factor expressions combine standard primitives: rolling means, rank transforms, cross-sectional Z-scores
+
+**Implication for our stack:** This is essentially what our dream cycle does — automated proposal generation + human review. The difference is our LLM generates *hypothesis designs* (what to test) rather than mathematical factor expressions directly. Alpha-GPT's architecture is a model for a future H260+ extension: LLM proposes factor expressions → `run_hNNN.py` evaluates → LLM iterates. The backtesting infrastructure we've built (venv, Alpaca data, Sharpe gate) is already fit for this loop.

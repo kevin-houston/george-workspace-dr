@@ -607,3 +607,55 @@ def sentiment_adjusted_weights(base_weights: dict, sentiment_score: float) -> di
 - **Text-only remains the best practical approach** for earnings-driven signals
 
 **Implication for H174/H258:** Our FinBERT text-only approach (H174 OOS WR=81.8%) remains state-of-the-art accessible. Multi-modal (audio from earnings calls) is not yet reliable enough to warrant the complexity. H258 (LLM metric-shift on 10-Q text) is the right extension — text-based, not audio.
+
+---
+
+## Kevin's Curated NLP References (2026-06-09)
+
+### BloombergGPT — Domain-Specific LLM for Finance (arXiv:2303.17564)
+
+**Reference:** arXiv:2303.17564 (Wu et al., Bloomberg, Mar 2023)
+**Kevin's note:** "Why general models like Claude underperform on finance tasks vs domain-specific ones."
+
+**Architecture:** 50B parameter LLM trained on a 363B token corpus — half Bloomberg's proprietary financial data (FinPile: news, filings, press releases, earnings calls), half general text. Mixed training was found to be critical: pure financial corpus overfits, pure general corpus lacks domain knowledge.
+
+**Benchmark results (vs GPT-3.5 and general LLMs):**
+- Financial NLP tasks (sentiment, NER, headline classification, QA): BloombergGPT wins decisively
+- General NLP benchmarks: comparable to GPT-3.5 on most tasks
+- Task: financial sentiment on FPB dataset — BloombergGPT 51.1% F1 vs FinBERT 23.8% F1 (general sentiment framing differs from financial polarity)
+
+**Why general models underperform on finance:**
+1. **Vocabulary gap:** Finance has dense jargon ("amortization," "convexity," "covenant-lite") that general corpora underrepresent
+2. **Polarity reversal:** "Impressive losses" is negative; general models can misread financial irony
+3. **Entity disambiguation:** Company names, ticker symbols, and financial instruments require domain-grounded understanding
+4. **Numerical reasoning:** Balance sheet arithmetic requires precision general LLMs struggle with
+
+**Implication for our stack:** This is why H174 uses FinBERT (encoder-only, fine-tuned on financial text) rather than a general Claude API call for 8-K scoring. The domain gap is real and measurable. For tasks beyond binary sentiment — structured extraction, nuanced risk language — the gap may be even larger. H258 (LLM metric-shift) should use a finance-tuned model, not base Claude/GPT.
+
+---
+
+### LLMs as Financial Data Annotators (arXiv:2403.18152)
+
+**Reference:** arXiv:2403.18152 (Mar 2024)
+**Kevin's note:** "Where LLMs actually belong in your quant stack: labeling and signal extraction."
+
+**Core finding:** LLMs (GPT-4, Claude, etc.) are effective as **zero-shot annotators** for financial data — classifying sentiment, extracting structured facts from filings, labeling events — but perform inconsistently as direct trading signal generators.
+
+**Where LLMs work well as annotators:**
+- Binary/ternary sentiment labels on news headlines and earnings excerpts (accuracy 80-90% vs human gold labels)
+- Named entity extraction from 10-K/10-Q risk factor sections (company names, event types, financial metrics)
+- Event classification (M&A, restructuring, guidance change, regulatory action) from press releases
+- Consistency: LLMs outperform crowdworkers on annotation agreement when given structured rubrics
+
+**Where LLMs fail as direct signal generators:**
+- Calibrated probability estimates for price direction (overconfident)
+- Aggregating multi-document context coherently under long context windows
+- Numerical reasoning on financial ratios directly from text
+
+**The right architecture:**
+```
+Raw text → LLM annotator (structured labels) → traditional quant model (ML/rules) → signal
+```
+Not: `Raw text → LLM → trade signal`
+
+**Implication for our stack:** This validates exactly how H174 works: FinBERT is the annotator (labels 8-K sentiment), and the signal is the composite score + EPS surprise gate, not raw LLM output. For H260 (12-quarter ML features), LLM annotation of earnings call tone/topic shifts is the right sub-role — not direct price prediction.
