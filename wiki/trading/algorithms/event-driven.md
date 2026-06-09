@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-05
+updated: 2026-06-09
 type: strategy-guide
 status: active — H163 CONFIRMED (FinBERT NLP); H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS
 ---
@@ -544,3 +544,15 @@ composite = 0.4 * eps_surprise_pct + 0.4 * finbert_surprise + 0.2 * sue_txt
 - Real-time feasibility confirmed via rolling window approach with no look-ahead bias
 
 **H227 design signal:** Use LDA topic decomposition (8-12 topics from earnings press releases) as an additional feature alongside FinBERT score. Topic presence/absence may add discriminative power beyond pure sentiment.
+
+---
+
+## Multi-Modal Earnings Day Prediction (arXiv:2605.25894, May 2026)
+
+**Fusion approach:** 15 fundamental features (EPS, revenue, margins, etc.) + 3 TA indicators + FinBERT sentiment → Transformer architecture → binary direction prediction on earnings announcement day.
+
+**Key finding:** Transformer outperforms LSTM in ablation; multi-modal fusion beats single-modality baselines. No aggregate Sharpe reported — classification accuracy only.
+
+**Relevance to production:** Frames the H174/H177 upgrade path. Current H174 uses only FinBERT sentiment on 8-K text. Adding fundamental features (earnings surprise magnitude, revenue beat) as explicit numeric inputs could improve signal precision.
+
+**Actionability:** Future PEAD extension (H180+ range, next available after H177) — extend H174 scoring with numeric fundamental features. Requires FMP or EDGAR structured data for each earnings event.

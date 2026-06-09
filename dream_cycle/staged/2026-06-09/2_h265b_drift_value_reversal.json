@@ -4,11 +4,10 @@
   "source": "paper",
   "source_url": "https://arxiv.org/abs/2511.12490",
   "title": "H265b: Drift-Regime Value + Short-Term Reversal (paper's actual signals)",
-  "rationale": "H265 CONFIRMED using momentum inside drift regime (OOS Sharpe 2.947), but the arXiv:2511.12490 paper's actual signals are VALUE + SHORT-TERM REVERSAL, not momentum — H265 inadvertently tested a different signal. H265b should replicate the paper's intended design: stock eligible if fraction positive days in trailing 63 days > 0.60, then rank eligible stocks by value (B/P) and short-term reversal (negative 1-month return = contrarian). Important: H265's extraordinary Sharpe is almost certainly inflated by survivorship bias (fixed 2025-known universe). H265b must use a properly constructed rolling universe (e.g. S&P 500 constituents history or point-in-time Russell 1000 list). If H265b survives survivorship-bias correction AND tests the paper's intended signals, it becomes a much stronger production candidate.",
+  "rationale": "H265 CONFIRMED using momentum inside drift regime (OOS Sharpe 2.947), but the arXiv:2511.12490 paper's actual signals are VALUE + SHORT-TERM REVERSAL, not momentum — H265 inadvertently tested a different signal. H265b should replicate the paper's intended design: stock eligible if fraction positive days in trailing 63 days > 0.60, then rank eligible stocks by value (B/P) and short-term reversal (negative 1-month return). Important: H265's extraordinary Sharpe is almost certainly inflated by survivorship bias (fixed 2025-known universe). H265b must use a properly constructed rolling universe (e.g. S&P 500 constituents history or point-in-time Russell 1000 list). If H265b survives survivorship-bias correction AND tests the paper's intended signals, it becomes a much stronger production candidate.",
   "risk_level": "medium",
   "type": "new_script",
   "target_file": "/workspace/agent/backtesting/daily/run_h265b.py",
   "action": "write",
-  "content": "# H265b: Drift-Regime Conditional Value + Short-Term Reversal\n# Source: arXiv:2511.12490 — paper's ACTUAL signals (not momentum as in H265)\n# Drift gate: fraction positive daily returns in trailing 63 days > 0.60\n# Signals: VALUE (book-to-price) + SHORT-TERM REVERSAL (negative 1-month return)\n# CRITICAL: must use rolling S&P 500 constituents, NOT fixed 2025-known universe\n# OOS target: Sharpe > 1.0 (lowered from H265 due to survivorship correction)\n# Scaffold only — requires point-in-time constituent data",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
