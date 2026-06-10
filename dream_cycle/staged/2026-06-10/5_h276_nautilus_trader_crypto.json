@@ -1,0 +1,14 @@
+{
+  "id": "h276-nautilus-trader-crypto-execution",
+  "date": "2026-06-10",
+  "source": "repo",
+  "source_url": "https://github.com/nautechsystems/nautilus_trader",
+  "title": "H276 design: NautilusTrader as crypto execution backbone for H261b commodity rotation (23.4k stars, Rust core, Kraken native)",
+  "rationale": "H261b (commodity top-2 rotation, OOS Sharpe 0.922, Corr(SPY)=0.218) is confirmed and uses UNG/DBO/GLD/SLV/DBA/PDBC ETFs. NautilusTrader natively integrates Kraken (our existing account) with Rust-core nanosecond execution, identical strategy code in backtest and live, and deterministic event-driven architecture. Current constraint: H261b uses commodity ETFs on Alpaca — which works, but NautilusTrader's Kraken integration would allow direct commodity futures/crypto exposure (BTC as digital gold, ETH as DeFi commodity) as a complement. The H276 design is: adapt H261b's top-2 momentum signal to a NautilusTrader strategy class, run paper mode on Kraken, compare performance to Alpaca ETF version. Not a new alpha hypothesis — an execution infrastructure proof-of-concept. Risk: medium (new script). Pre-requisite: pip install nautilus_trader.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h276_nautilus_poc.py",
+  "content": "# H276: NautilusTrader execution POC for H261b commodity rotation\n# Purpose: prove NautilusTrader can run our momentum strategies with Kraken integration\n# NOT a new alpha hypothesis — execution infrastructure validation\n#\n# Architecture:\n# - BacktestEngine with simulated Kraken venue\n# - Strategy: top-2 asset momentum (12-1m lookback) from H261b asset universe\n# - Assets: BTC/USD, ETH/USD (crypto commodity proxies), GLD (via Alpaca bridge)\n# - Data: Yahoo Finance via yfinance (monthly bars) for backtest\n# - Paper mode: Kraken paper API\n#\n# Pre-requisite: pip install nautilus_trader\n# Reference: wiki/trading/tools/multi-agent-llm-trading.md#nautilustrade\n# H261b baseline: OOS Sharpe 0.922, Corr(SPY)=0.218, top-2 commodity rotation\n#\n# Success gate: Backtest runs without error; OOS Sharpe within +/-0.2 of H261b baseline\n# (different assets, so exact match not expected)\n#\n# See also: backtesting/paper_trading/ for Alpaca version\n",
+  "action": "write",
+  "apply_status": "pending"
+}

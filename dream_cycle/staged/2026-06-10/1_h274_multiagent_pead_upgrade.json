@@ -1,0 +1,14 @@
+{
+  "id": "h274-multiagent-pead-upgrade",
+  "date": "2026-06-10",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.23330",
+  "title": "H274: Multi-Agent LLM PEAD Upgrade — 3-agent debate to beat H174 WR baseline",
+  "rationale": "H163/H174 use a single FinBERT score for PEAD entry. arXiv:2602.23330 (Expert Investment Teams, Oxford/Kyoto, Feb 2026) shows fine-grained multi-agent task decomposition substantially improves risk-adjusted returns over coarse single-agent signals. TradingAgents (arXiv:2412.20138, 84.9k stars) demonstrates Bull/Bear debate reduces false positives. Proposed 3-agent design: (1) FinBERT sentiment ≥0.18 gate, (2) structured analyst extracting revenue guidance / forward tone divergence, (3) contrarian agent flagging embedded negatives. All three must confirm → expected higher precision. H174 baseline: WR=81.8%, n=22, MeanRet=6.89%. Gate: WR >81.8% with n≥15 OOS. IS 2019-2021, OOS 2022-2024 same dataset.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h274.py",
+  "content": "# H274: Multi-Agent PEAD Upgrade\n# Architecture: 3 LLM agents debate each 8-K before entry\n# Agent 1: FinBERT sentiment (existing H163/H174 gate >= 0.18)\n# Agent 2: Structured analyst — extract revenue guidance tone, mgmt language, forward guidance\n# Agent 3: Contrarian — identify embedded negatives in positive-scoring 8-Ks\n# Entry only if all 3 agents confirm positive\n# Baseline: H174 WR=81.8%, MeanRet=6.89%, n=22\n# Gate: WR > 81.8% with n >= 15 OOS events\n# IS period: 2019-2021\n# OOS period: 2022-2024\n# Cost model: ~$0.05-0.20 per decision (3 agents x gpt-4o-mini)\n# See wiki: tools/multi-agent-llm-trading.md for framework comparison\n#\n# Implementation notes:\n# - Load same 8-K dataset used for H163/H174\n# - Run FinBERT first (cheap filter) — only advance to agents if score >= 0.18 AND surprise >= 0.02\n# - Use OpenAI API (OPENAI_API_KEY) for agents 2 and 3\n# - Structured output: {confirmed: bool, confidence: 0-1, rationale: str}\n# - Log all agent decisions for post-analysis\n# - Apply same IS/OOS split and transaction cost model as H174\n",
+  "action": "write",
+  "apply_status": "pending"
+}

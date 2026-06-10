@@ -1,0 +1,222 @@
+{
+  "date": "2026-06-10",
+  "scan_angles": [
+    {
+      "angle": "arXiv: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+          "arxiv": "2403.07998",
+          "year": 2024,
+          "summary": "Graphical matching for cointegrated pairs; maximum weighted matching ensures no shared assets. Already noted in wiki (H200 queued).",
+          "relevance": 4,
+          "reason": "Already in wiki. H200 NOT CONFIRMED 0/15 cointegrated OOS. Pairs family EXHAUSTED."
+        },
+        {
+          "title": "Reinforcement Learning Pair Trading: A Dynamic Scaling Approach",
+          "arxiv": "2407.16103",
+          "year": 2024,
+          "summary": "RL-based pair trading with dynamic position scaling. Pearson correlation + Engle-Granger cointegration for pair selection.",
+          "relevance": 4,
+          "reason": "RL pairs overlap with H200 territory. Pairs family exhausted (H152-H160, H200). Not staging."
+        },
+        {
+          "title": "Application of Black-Litterman Bayesian in Statistical Arbitrage",
+          "arxiv": "2406.06706",
+          "year": 2024,
+          "summary": "Black-Litterman views applied to stat arb portfolio.",
+          "relevance": 3,
+          "reason": "Pairs family exhausted. BL already in portfolio-optimization.md."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: PEAD + post-earnings drift + text signals",
+      "findings": [
+        {
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+          "arxiv": "2509.24254",
+          "year": 2025,
+          "summary": "138k press releases 2005-2023. FinBERT SHAP 52% vs EPS surprise 48%. L/S yields negative alpha (market efficient at open). Self-serving bias pattern exploitable. Combined hard+soft signals: 52% precision for top-10 vs 25-36% single signal.",
+          "relevance": 9,
+          "reason": "DIRECTLY upgrades H163/H174 documentation. Attribution bias = new feature for H274. Confirms overnight gap entry rationale. STAGED as proposal 4."
+        },
+        {
+          "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+          "arxiv": "2605.25894",
+          "year": 2026,
+          "summary": "3-modality model: fundamentals + technicals + FinBERT news sentiment. LSTM = precision, Transformer = recall. Sentiment ablation shows consistent lift.",
+          "relevance": 7,
+          "reason": "Supports multi-modal signal approach. LSTM precision conservative strategy aligns with H163/H174 high-WR low-trade approach. Design input for H274. Not staging separately — covered by H274."
+        },
+        {
+          "title": "ChatGPT in Systematic Investing: Enhancing Risk-Adjusted Returns with LLMs",
+          "arxiv": "2510.26228",
+          "year": 2025,
+          "summary": "LLM-enhanced systematic investing; PEAD and disclosure frictions create predictability opportunities.",
+          "relevance": 5,
+          "reason": "General LLM investing overview. Nothing novel beyond existing wiki content."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: cross-sectional momentum + factor momentum",
+      "findings": [
+        {
+          "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+          "arxiv": "2507.07107",
+          "year": 2026,
+          "summary": "Mask-first design prevents upstream contamination from non-tradable prices. +0.44 Sharpe improvement from this fix alone. Adjusted-MSE loss (sign penalty 11x). Sharpe 2.05 synthetic / 1.63 real A-share. Deflated Sharpe 0.978.",
+          "relevance": 8,
+          "reason": "The mask-first principle applies to US equities (halted stocks, penny stocks). Our H198/H217/H228 momentum pipelines may be inflating IC. The adjusted-MSE loss is useful for any ML signal training. STAGED as proposal 2 (wiki update to momentum-strategies.md)."
+        },
+        {
+          "title": "Dynamic Inclusion and Bounded Multi-Factor Tilts for Robust Portfolio Construction",
+          "arxiv": "2601.05428",
+          "year": 2026,
+          "summary": "Multi-factor tilts (momentum, value, quality) with bounded exposure. Cross-sectional standardization at each rebalance.",
+          "relevance": 5,
+          "reason": "Portfolio construction improvements. Our current blend approach (H026+H041a+H045+IBS) already achieves multi-factor. Not a new hypothesis."
+        },
+        {
+          "title": "Measuring Strategy-Decay Risk: Minimum Regime Performance and the Durability of Systematic Investing",
+          "arxiv": "2604.08356",
+          "year": 2026,
+          "summary": "MRP = lowest risk-adjusted return across regimes. High Sharpe ≠ high MRP. Strategies with high aggregate Sharpe can fail badly in specific regimes.",
+          "relevance": 8,
+          "reason": "MRP is a missing metric in our confirmation criteria. Directly applicable to production portfolio durability assessment. STAGED as proposal 3."
+        },
+        {
+          "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay",
+          "arxiv": "2512.11913",
+          "year": 2024,
+          "summary": "50% of anomaly alpha disappears post-publication. Mechanical factors (momentum) crowd faster than judgment factors (value). Models predict crowding.",
+          "relevance": 6,
+          "reason": "Relevant to signal-halflife.md wiki. The momentum-crowds-faster finding is a warning for H198/H217. Already partially covered in signal-halflife.md but MRP-specific crowding model not in wiki."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+          "arxiv": "2602.23330",
+          "year": 2026,
+          "summary": "Fine-grained task decomposition > coarse role mimicry. Oxford/Kyoto. Japanese equities. Leakage-controlled backtesting. Alignment between analytical outputs and downstream decision preferences is critical.",
+          "relevance": 9,
+          "reason": "Best design template for H274 multi-agent PEAD upgrade. Rare: leakage-controlled backtesting standard. STAGED as core input for proposal 1 (H274). Added to new wiki page."
+        },
+        {
+          "title": "HedgeAgents: A Balanced-aware Multi-agent Financial Trading System",
+          "arxiv": "2502.13165",
+          "year": 2025,
+          "summary": "Fund manager + 3 domain experts (crypto/equity/forex). Annualized 71.6%, Sharpe 2.41, MaxDD 14.21% over 2021-2023. 3 conference coordination types.",
+          "relevance": 7,
+          "reason": "Architecture worth studying despite caveated performance (2021-2023 crypto bubble). Budget allocation + experience sharing conferences are interesting coordination patterns. Added to wiki page."
+        },
+        {
+          "title": "Toward Reliable Evaluation of LLM-Based Financial Multi-Agent Systems",
+          "arxiv": "2603.27539",
+          "year": 2026,
+          "summary": "5 evaluation failures that reverse return sign. Coordination Primacy Hypothesis. CBS metric. Four-dimensional taxonomy (architecture, coordination, memory, tools).",
+          "relevance": 9,
+          "reason": "Critical reliability framework. CBS metric is directly useful for our pipeline. STAGED as part of H274 context and added to wiki page. Must apply to any future multi-agent papers."
+        },
+        {
+          "title": "When Agents Trade: Live Multi-Market Trading Benchmark for LLM Agents",
+          "arxiv": "2510.11695",
+          "year": 2025,
+          "summary": "Agent Market Arena: first lifelong real-time benchmark. Framework architecture > LLM backbone for behavioral variation. GPT-4o, GPT-4.1, Claude-3.5-Haiku, Claude-Sonnet-4, Gemini-2.0-Flash tested.",
+          "relevance": 8,
+          "reason": "Validates that framework design matters more than model choice. Directly informs H274 design decision (any LLM provider will work). Added to wiki page."
+        },
+        {
+          "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+          "arxiv": "2412.20138",
+          "year": 2024,
+          "summary": "7-agent framework (analysts + traders + risk). 84.9k GitHub stars. Apache-2.0. yfinance data. Available pip package. Cumulative return, Sharpe, MaxDD improvements over baselines.",
+          "relevance": 9,
+          "reason": "Most-starred quant AI repo. Direct input for H274 implementation. Already has pip install. Added to wiki page."
+        }
+      ]
+    },
+    {
+      "angle": "GitHub: trending quantitative finance repos",
+      "findings": [
+        {
+          "title": "NautilusTrader",
+          "url": "https://github.com/nautechsystems/nautilus_trader",
+          "stars": 23400,
+          "year_updated": 2026,
+          "summary": "Rust core + Python strategies. Nanosecond backtest. 20+ live venues (Kraken native, IBKR, Binance, Polymarket). Identical strategy code research→production. 23.4k stars.",
+          "relevance": 8,
+          "reason": "Production-grade execution engine for when we move beyond Alpaca. Kraken native integration is directly relevant (Kevin has Kraken account). H276 execution POC designed. Added to wiki page."
+        },
+        {
+          "title": "OpenBB",
+          "url": "https://github.com/OpenBB-finance/OpenBB",
+          "stars": 35000,
+          "year_updated": 2026,
+          "summary": "Open data platform. Connect once, consume everywhere. Consolidates proprietary + licensed + public data for quants and AI agents.",
+          "relevance": 5,
+          "reason": "Data infrastructure. Already have polygon/FRED/Alpaca/FMP keys working directly. OpenBB adds complexity without clear benefit for our current pipeline."
+        },
+        {
+          "title": "TradingAgents",
+          "url": "https://github.com/TauricResearch/TradingAgents",
+          "stars": 84900,
+          "year_updated": 2026,
+          "summary": "84.9k stars, Apache-2.0. Most-starred quant AI repo. Multi-agent LLM trading framework.",
+          "relevance": 9,
+          "reason": "Already noted above in arXiv angle. High-priority install for H274."
+        }
+      ]
+    }
+  ],
+  "staged_proposals": [
+    {
+      "file": "1_h274_multiagent_pead_upgrade.json",
+      "id": "h274-multiagent-pead-upgrade",
+      "sources": ["arXiv:2602.23330", "arXiv:2412.20138", "arXiv:2603.27539"],
+      "relevance": 9,
+      "type": "new_script"
+    },
+    {
+      "file": "2_h275_ml_bias_correction_momentum.json",
+      "id": "h275-ml-bias-correction-momentum",
+      "sources": ["arXiv:2507.07107"],
+      "relevance": 8,
+      "type": "wiki_update"
+    },
+    {
+      "file": "3_wiki_strategy_decay_mrp.json",
+      "id": "wiki-strategy-decay-mrp-metric",
+      "sources": ["arXiv:2604.08356"],
+      "relevance": 8,
+      "type": "wiki_update"
+    },
+    {
+      "file": "4_wiki_pead_press_release_structure.json",
+      "id": "wiki-pead-press-release-structure",
+      "sources": ["arXiv:2509.24254"],
+      "relevance": 9,
+      "type": "wiki_update"
+    },
+    {
+      "file": "5_h276_nautilus_trader_crypto.json",
+      "id": "h276-nautilus-trader-crypto-execution",
+      "sources": ["github:nautechsystems/nautilus_trader"],
+      "relevance": 7,
+      "type": "new_script"
+    }
+  ],
+  "not_staged": [
+    {"arxiv": "2403.07998", "reason": "Pairs family exhausted (H152-H160, H200)"},
+    {"arxiv": "2407.16103", "reason": "RL pairs overlap with exhausted pairs family"},
+    {"arxiv": "2406.06706", "reason": "BL pairs — family exhausted"},
+    {"arxiv": "2510.26228", "reason": "General LLM investing — nothing novel beyond existing wiki"},
+    {"arxiv": "2601.05428", "reason": "Multi-factor tilts — production portfolio already diversified"},
+    {"arxiv": "2512.11913", "reason": "Alpha decay — partially covered in signal-halflife.md; not actionable change"}
+  ]
+}
