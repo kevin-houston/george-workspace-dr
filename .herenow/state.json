@@ -134,6 +134,12 @@
       "claimToken": "c0cebe0b4ab1c61167e3bbf171033809f58cdd6c06694cb83f45bc9e849c012a",
       "claimUrl": "https://here.now/claim?slug=mystic-grove-rw8y&token=c0cebe0b4ab1c61167e3bbf171033809f58cdd6c06694cb83f45bc9e849c012a",
       "expiresAt": "2026-06-08T09:05:42.754Z"
+    },
+    "pure-grace-qnpb": {
+      "siteUrl": "https://pure-grace-qnpb.here.now/",
+      "claimToken": "c95ed1d3a79fa290c5d89ff4a56f7069708f010296262dbd888cb0a149242356",
+      "claimUrl": "https://here.now/claim?slug=pure-grace-qnpb&token=c95ed1d3a79fa290c5d89ff4a56f7069708f010296262dbd888cb0a149242356",
+      "expiresAt": "2026-06-10T09:04:11.763Z"
     }
   }
 }
