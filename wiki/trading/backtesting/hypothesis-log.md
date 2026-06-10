@@ -1,5 +1,8 @@
 ---
-updated: 2026-06-08
+updated: 2026-06-09
+h269_status: QUEUED (2026-06-09) — LLM High-Volume Ideation Sprint (Process Methodology). Source: arXiv:2409.04109 (Si et al. 2024) + Kevin direction. LLM ideas rated MORE NOVEL than PhD students (but lower feasibility). Proposed workflow: dedicated sprint session generating 15-20 raw factor/strategy ideas with no feasibility filter → Kevin selects 2-3 to develop. Complements dream cycle (which applies careful proposal format). Not a trading hypothesis — a research process enhancement. Scaffold: backtesting/daily/run_h269_ideation_sprint.py. NOTE: "run" here means Claude runs a structured ideation session and outputs candidate ideas to a file for Kevin review.
+h268_status: QUEUED (2026-06-09) — Alpha-GPT Factor Expression Auto-Search Loop. Source: arXiv:2308.00016 (Alpha-GPT, 2023) + Kevin direction. LLM proposes concrete mathematical factor expressions from a defined primitive set (OHLCV, momentum, volume ratio, rolling stats), auto-backtests each on existing universe, iterates on results. Universe: H181's 30-stock large-cap universe. Gate: OOS Sharpe > 1.0. Designed as an extension of the dream cycle where LLM generates testable math expressions, not just hypothesis designs. Scaffold: backtesting/daily/run_h268.py.
+h267_status: QUEUED (2026-06-09) — PEAD-Specific FinBERT Fine-Tuning. Source: arXiv:2403.18152 (LLM annotators, 2024) + Kevin direction. Use Claude API to label ~500 historical 8-K earnings releases with PEAD-specific binary labels (did this filing precede a ≥3% gap-up that held for 20 trading days?), then fine-tune ProsusAI/finbert on those task-specific labels. H174 currently uses generic financial-sentiment FinBERT; task-specific fine-tuning expected to lift OOS WR above 81.8%. Cost: ~$1-2 Claude API for labeling + HuggingFace Trainer fine-tune. Gates: labeled fine-tuned model OOS WR > 85%, n >= 20. Scaffold: backtesting/daily/run_h267.py.
 h265_status: CONFIRMED (2026-06-08) — Drift-Regime Conditional Momentum (50 large-cap S&P 500). Source: arXiv:2511.12490. Drift gate: stock eligible only if fraction of positive daily returns in trailing 63 days > threshold. Best threshold: 0.60. OOS (2018-2025) Sharpe=2.947, CAGR=65.3%, MaxDD=-19.5%, NegYrs=0, Corr(SPY)=0.7345. IS (2008-2017) Sharpe=2.151. All gates PASS. ⚠️ SURVIVORSHIP BIAS WARNING: fixed 50-stock universe selected with knowledge of 2025 survival — CAGR/Sharpe inflated. Baseline (no drift gate) OOS Sharpe=0.951; drift gate adds genuine signal (Sharpe 0.951→2.947). DRG>0.55 also strong: OOS Sharpe=2.238, CAGR=50.1%. Script: backtesting/daily/run_h265.py.
 h264b_status: NOT CONFIRMED (2026-06-08) — Crypto Trend Momentum + Weekly Trailing Stop. Source: arXiv:2602.11708. Monthly 6m momentum selection (BTC/ETH/SOL/BNB/ADA) + weekly trailing stop check (resample W-FRI). Best stop: 10%. OOS (2022-2025) Sharpe(m)=0.7189 (gate >0.75 FAIL), MaxDD=-29.5%, NegYrs=0, CAGR=74.7%. Stop marginally improved H264 baseline (0.662→0.719). Tighter stops (15/20%) worse. Crypto bear 2022 (+28.5% with stop due to early exit) but Sharpe gate not cleared. Script: backtesting/daily/run_h264b.py.
 h264_status: NOT CONFIRMED (2026-06-07) — Crypto Trend Momentum Top-2 (BTC/ETH/SOL/BNB/ADA). OOS Sharpe=0.662 (gate 0.75 FAIL). OOS CAGR=11.7%, MaxDD=-46.0%, NegYrs=2, Corr(SPY)=0.369. IS Sharpe=1.005 (inflated by 2020-2021 bull). 2022=-37.1% (crypto bear). Recovery: 2023=+124.9%, 2024=+30.2%. Script: backtesting/daily/run_h264.py.
@@ -6517,3 +6520,112 @@ Best threshold: 0.60.
 **Production verdict:** NOT recommended for immediate production deployment due to survivorship bias. Design H265b with a properly constructed rolling universe (no look-ahead on universe composition) to get a clean read. The mechanism is strong enough to warrant further testing.
 
 Script: `backtesting/daily/run_h265.py`. Results: `backtesting/results/h265_results.json`.
+
+---
+
+## H267 — PEAD-Specific FinBERT Fine-Tuning (2026-06-09)
+
+**Status: QUEUED**
+
+**Source:** arXiv:2403.18152 (LLM Financial Data Annotators, 2024) + Kevin direction 2026-06-09.
+
+**Motivation:** H174 uses `ProsusAI/finbert` trained on generic financial sentiment (positive/negative/neutral on financial news/filings in general). The model has never seen the specific PEAD task: "does this 8-K earnings language predict a ≥3% gap-up that sustains for 20 trading days?" Task-specific fine-tuning on labeled historical data should substantially improve signal quality. The annotators paper (2403.18152) establishes that LLMs achieve 80–90% agreement with human expert labels at near-zero cost — making LLM-labeled training data viable.
+
+**Design:**
+
+**Step 1 — Build labeled dataset:**
+- Pull all 8-K press releases from EDGAR for the 30-stock PEAD universe, 2018–2023 (IS period)
+- For each 8-K, compute the actual PEAD outcome: did the stock gap up ≥3% on earnings day AND sustain a positive return over the next 20 trading days? (Binary label: 1 = PEAD winner, 0 = not)
+- Use Claude API (claude-sonnet-4-6) with a structured rubric to score each 8-K text: "On a scale of 0–3, how strongly does this earnings filing language suggest a material beat: genuine surprise in revenue/EPS language, forward guidance upgrade, management confidence tone?"
+- Target: ~500 labeled examples (IS period, balanced ~50/50 via stratified sampling)
+
+**Step 2 — Fine-tune:**
+- Use HuggingFace `Trainer` to fine-tune `ProsusAI/finbert` on the PEAD-labeled dataset
+- Input: 8-K text truncated to 512 tokens (same as current production pipeline)
+- Output: binary classification (PEAD winner / not) OR 3-class (strong/weak/neutral) for threshold sweeping
+- Training: 5 epochs, lr=2e-5, batch=8, weight_decay=0.01. Validate on 2021–2022 holdout.
+
+**Step 3 — OOS evaluation:**
+- Run fine-tuned model on 2023–2025 OOS events (same universe as H174)
+- Compare: H174 baseline WR=81.8%, n=22 at score≥0.18 threshold
+- Gate: fine-tuned model OOS WR > 85%, n ≥ 20
+
+**Cost estimate:**
+- Claude API labeling: 500 events × ~2k tokens ≈ 1M tokens ≈ $1.50 at Sonnet pricing
+- Fine-tuning: ~30 min on free Google Colab GPU (T4), or local CPU overnight
+- Total: < $2 and < 1 day of compute
+
+**Risks:**
+- Label quality: Claude's PEAD-specific labels may not agree with actual outcomes (verify by checking label vs outcome concordance on IS data before fine-tuning)
+- Small dataset: 500 examples is marginal for fine-tuning a 110M param model; may need regularization
+- Domain shift: IS labeling period (2018–2023) may not generalize to OOS period if macro regime shifts
+
+**Prerequisites:** None. Can run on existing EDGAR cache from H174/H175 runs.
+
+Script: `backtesting/daily/run_h267.py`.
+
+---
+
+## H268 — Alpha-GPT Factor Expression Auto-Search Loop (2026-06-09)
+
+**Status: QUEUED**
+
+**Source:** arXiv:2308.00016 (Alpha-GPT, 2023) + Kevin direction 2026-06-09.
+
+**Motivation:** Alpha-GPT demonstrated that an LLM generating concrete mathematical factor *expressions* — not just high-level hypothesis designs — can discover novel trading signals when wired to an auto-backtest loop. The human-in-the-loop steers the search via domain constraints, not by coding each factor. Our backtesting infrastructure is already fit for this loop; we just need to wire in LLM expression generation.
+
+**Design:**
+
+**Expression language:** Factors are built from a defined primitive set applied to OHLCV + derived fields:
+```
+Primitives: close, open, high, low, volume, returns_1d, returns_5d, returns_21d, vwap
+Operators: rank, delay, delta, zscore, rolling_mean, rolling_std, correlation, abs, log, sign
+```
+Example expressions:
+- `rank(returns_5d) - rank(rolling_mean(volume, 20) / volume)`
+- `zscore(close / rolling_mean(close, 63)) * sign(returns_21d - returns_1d)`
+
+**Loop:**
+1. Claude receives: primitive set, prior factor results (Sharpe, IC), domain constraints ("focus on reversal after momentum signal")
+2. Generates 5 candidate factor expressions as Python-evaluable strings
+3. `run_h268.py` evaluates each: IS Sharpe (2013–2020), OOS Sharpe (2021–2025) on H181's 30-stock universe
+4. Results fed back to Claude with instruction to iterate toward higher Sharpe and lower correlation to H181/H026
+5. Repeat for 3–5 rounds; save top factors by OOS Sharpe
+
+**Success gate:** OOS Sharpe > 1.0 AND Corr(new factor, H026) < 0.5 (must be genuinely additive).
+
+**Universe:** H181's 30-stock large-cap S&P 500 universe (reuses existing data infrastructure).
+
+**Prerequisites:** OpenAI or Claude API key for LLM expression generation. `$OPENAI_API_KEY` and `$ANTHROPIC_API_KEY` both available in env.
+
+Script: `backtesting/daily/run_h268.py`.
+
+---
+
+## H269 — LLM High-Volume Ideation Sprint (2026-06-09)
+
+**Status: QUEUED**
+
+**Source:** arXiv:2409.04109 (Si et al. 2024, "Can LLMs Generate Novel Research Ideas?") + Kevin direction 2026-06-09.
+
+**Motivation:** Si et al. found LLM-generated research ideas were rated *more novel* than PhD student ideas by expert reviewers — but with lower feasibility. This argues for a dedicated high-throughput ideation mode where novelty is the goal, with human feasibility filtering happening after. The dream cycle produces 3–5 careful staged proposals per night; a sprint session could produce 15–20 raw ideas in 5 minutes for Kevin to pick from.
+
+**Design:** This is a process methodology, not a single tradeable hypothesis.
+
+**Sprint format:**
+1. George runs a focused session generating 15–20 raw factor/strategy ideas, no feasibility filter
+2. Ideas are organized by category: signal type, data source, universe, mechanism
+3. Output saved to `dream_cycle/ideation/YYYY-MM-DD_sprint.md`
+4. Kevin reviews and flags 2–3 to develop into proper hypothesis designs
+5. Flagged ideas become standard QUEUED hypotheses (H270+) via the normal dream cycle pipeline
+
+**Constraints for generation:**
+- Must be expressible as a backtestable signal (not "use sentiment to trade options")
+- Must name a data source we can access (EDGAR, yfinance, Alpaca, FRED, Polygon)
+- Explicit novelty filter: reject ideas that overlap with H159–H266 (we track what's been tried)
+
+**Success criterion:** Kevin finds ≥2 ideas worth developing per sprint session.
+
+**When to run:** On demand via Kevin request, or quarterly as a research refresh cycle.
+
+Script: `backtesting/daily/run_h269_ideation_sprint.py` (invokes Claude API structured ideation prompt, saves output to `dream_cycle/ideation/`).
