@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-05
+updated: 2026-06-10
 ---
 
 # Backtesting Design Principles
@@ -516,3 +516,46 @@ def gt_score(monthly_returns, alpha=0.05):
 ```
 
 **Limitation:** No public code released with the paper. The above is a practical approximation based on the paper's described dimensions.
+
+## Minimum Regime Performance (MRP) — Strategy Durability Metric
+
+**Source**: arXiv:2604.08356 (Alexander & Fabozzi, 2026). Published in Journal of Portfolio Management.
+
+MRP = the **lowest realized risk-adjusted return across distinct historical regimes** (bull market, bear market, rising rates, low-vol, high-vol, crisis).
+
+**Key insight**: "Strategies with higher long-term Sharpe ratios do not always exhibit higher MRPs." A high aggregate Sharpe can mask catastrophic failure in one regime — which is exactly how real capital gets lost.
+
+### Practical application to our pipeline
+
+For any confirmed hypothesis (Sharpe gate met), additionally report:
+1. **MRP across 4 regimes**: bull (SPY > 200MA, VIX < 20), bear (SPY < 200MA, VIX > 20), rate-rising (T10Y2Y inverted), rate-falling
+2. **Worst-regime Sharpe**: minimum Sharpe across these 4 states
+3. **Regime coverage**: did the OOS window include all 4 regimes? 2022 = bear+rate-rising; 2020 = crisis; 2019 = bull+low-vol
+
+```python
+def compute_mrp(returns: pd.Series, regime_labels: pd.Series) -> dict:
+    """
+    Compute MRP: min Sharpe across regimes.
+    regime_labels: pd.Series aligned to returns with categorical regime names.
+    Returns dict of {regime: sharpe, 'MRP': min_sharpe}.
+    """
+    import numpy as np
+    regime_sharpes = {}
+    for regime in regime_labels.unique():
+        mask = regime_labels == regime
+        r = returns[mask]
+        if len(r) < 12:  # skip regimes with < 12 months of data
+            continue
+        sharpe = r.mean() / r.std() * np.sqrt(12)
+        regime_sharpes[regime] = round(sharpe, 3)
+    regime_sharpes['MRP'] = min(regime_sharpes.values()) if regime_sharpes else None
+    return regime_sharpes
+```
+
+**Minimum standard**: MRP > 0 (strategy never loses money on a risk-adjusted basis in any regime). MRP > 0.4 = robust.
+
+**Applied to confirmed hypotheses** — regimes based on H249 4-state (SPY 200MA × VIX):
+- H026 (sector rotation): MRP pending — 2022 bear regime is the critical test
+- H041a (19-asset top-1): MRP pending — check 2022 bear regime
+- H273 (vol-targeting overlay): confirmed — reduces MRP variance by dampening bear-regime exposure
+- H270 (low-vol dual ranking): confirmed — check rate-rising regime (2022-2023 known weakness per H245)

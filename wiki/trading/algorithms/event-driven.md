@@ -556,3 +556,54 @@ composite = 0.4 * eps_surprise_pct + 0.4 * finbert_surprise + 0.2 * sue_txt
 **Relevance to production:** Frames the H174/H177 upgrade path. Current H174 uses only FinBERT sentiment on 8-K text. Adding fundamental features (earnings surprise magnitude, revenue beat) as explicit numeric inputs could improve signal precision.
 
 **Actionability:** Future PEAD extension (H180+ range, next available after H177) — extend H174 scoring with numeric fundamental features. Requires FMP or EDGAR structured data for each earnings event.
+
+## Press Release Structure for PEAD (arXiv:2509.24254, Sep 2025)
+
+**Source**: Wu, Akin, Martineau, Grégoire, Veneris (University of Toronto + HEC Montreal). 138,000 press releases 2005–2023.
+
+### Key findings
+
+1. **Soft information = hard information**: Press release text explains announcement-day returns just as well as EPS surprise. FinBERT SHAP importance: 52% vs 48% for earnings surprise. Neither signal dominates the other.
+
+2. **Market efficiency at open**: L/S portfolios built on press release signals yield **negative alpha (-0.0004 to -0.0055)** after costs. Stock prices fully incorporate press release content by market open. This confirms why H163/H174 use the **overnight gap** as the entry vehicle — pre-open, not after-open.
+
+3. **Self-serving bias** (exploitable pattern): Managers discuss internal factors positively during positive surprises but attribute negative results to external/sector factors. Detection:
+   - Positive surprise + internal attribution → stronger signal (genuine good news)
+   - Positive surprise + external attribution → weaker signal (luck framing)
+   - Negative surprise + external attribution → potential reversal candidate
+
+4. **Combined signal precision**: Hard + soft signals predict top-10 performers with 52% precision vs 25-36% using either alone. Apply: when EPS surprise ≥ 0.02 AND FinBERT ≥ 0.18 (H174 criteria), the combined precision should be near 52%.
+
+### Attribution tone detection (Python)
+
+```python
+INTERNAL_PHRASES = [
+    'our execution', 'our team', 'our strategy', 'we achieved',
+    'our focus', 'our investments', 'our operational improvements'
+]
+EXTERNAL_PHRASES = [
+    'market conditions', 'macroeconomic', 'supply chain',
+    'industry headwinds', 'sector-wide', 'broader environment'
+]
+
+def attribution_score(text: str) -> float:
+    """
+    Positive = internal attribution (good sign for positive surprises)
+    Negative = external attribution (weaker signal)
+    Range: -1.0 to +1.0
+    """
+    text_lower = text.lower()
+    internal = sum(1 for p in INTERNAL_PHRASES if p in text_lower)
+    external = sum(1 for p in EXTERNAL_PHRASES if p in text_lower)
+    total = internal + external
+    if total == 0:
+        return 0.0
+    return (internal - external) / total
+```
+
+**H274 integration**: Add attribution_score as third filter. Entry requires:
+- FinBERT ≥ 0.18 (H163/H174 gate)
+- EPS surprise ≥ 0.02 (H174 gate)
+- attribution_score > 0 (internal attribution in positive release)
+
+**Expected effect**: Reduces trade count; improves WR. Gate: WR > 81.8% baseline.

@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-13
+updated: 2026-06-10
 type: strategy-guide
 status: production — H026 deployed on Alpaca paper trading
 ---
@@ -475,3 +475,55 @@ Derives an alpha half-life formula based on AI adoption levels:
 **Tested implication (H231, 2026-05-29):** Applied exponential decay weighting to alpha101 signals with half-lives 6-24 months. NOT CONFIRMED — the half-life compression applies to longer-horizon momentum signals (months to years), not to intraday alpha101 which already aggregates on a single-day frequency. H217's calendar-month median aggregation remains optimal.
 
 **Portfolio implication:** Strategies confirmed in 2018-2022 data (H026, H181, H217) may see half-life compression in their alpha premium by 2027-2028 as AI adoption approaches saturation. Plan to re-validate OOS Sharpe annually.
+
+## Mask-First Bias Correction (arXiv:2507.07107, May 2026)
+
+A subtle pipeline flaw: non-tradable bars (circuit breaker halts, liquidity gaps, trading halts on news) propagate through moving averages and cross-sectional ranks, inflating apparent IC by ~18% while reducing realized Sharpe by 0.44 points. The fix is a Boolean tradability mask threaded through all operators before any signal calculation.
+
+**US market equivalents** (less severe than Chinese +/-10% limits but real):
+- Stocks under trading halt (news pending, regulatory action)
+- Penny stocks with consecutive zero-volume days
+- ETFs during circuit breaker pause
+- Delisted stocks still in data feed (survivorship leak)
+
+**Implementation pattern:**
+```python
+import pandas as pd
+import numpy as np
+
+def is_tradable(close: pd.DataFrame, volume: pd.DataFrame,
+                min_price: float = 1.0, min_vol: int = 10000) -> pd.DataFrame:
+    """
+    Boolean mask: True if the bar is tradable.
+    Apply BEFORE any signal calculation.
+    """
+    price_ok = close > min_price
+    vol_ok = volume > min_vol
+    halted = close.pct_change().abs() > 0.199  # near circuit breaker
+    return price_ok & vol_ok & ~halted
+
+def masked_momentum(close: pd.DataFrame, volume: pd.DataFrame,
+                    lookback: int = 252, skip: int = 21) -> pd.DataFrame:
+    """
+    Momentum signal with upstream contamination prevention.
+    Non-tradable bars get NaN momentum, not the contaminated value.
+    """
+    mask = is_tradable(close, volume)
+    # Apply mask BEFORE calculating momentum — not after
+    masked_close = close.where(mask)
+    mom = masked_close.shift(skip) / masked_close.shift(lookback) - 1
+    # Also mask the signal itself
+    return mom.where(mask)
+```
+
+**Adjusted-MSE loss for ML signal training** (penalizes wrong sign 11x more than magnitude error):
+```python
+def adjusted_mse_loss(y_pred, y_true, sign_penalty=11.0):
+    """For regression models predicting forward returns."""
+    residual = y_pred - y_true
+    wrong_sign = (y_pred * y_true < 0).float()  # 1 if signs differ
+    weight = 1.0 + (sign_penalty - 1.0) * wrong_sign
+    return (weight * residual ** 2).mean()
+```
+
+**Source**: arXiv:2507.07107, 'Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction' (May 2026). Reported Sharpe 2.05 synthetic / 1.63 real A-share data. Deflated Sharpe 0.978.
