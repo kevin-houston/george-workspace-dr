@@ -66,6 +66,19 @@ For production promotion:
 
 ---
 
+## 8. Bear Case / Steelman
+
+Before paper trading, write a short adversarial section:
+
+- [ ] **What's the most likely failure mode?** (e.g., signal decays, data source disappears, regime shifts)
+- [ ] **What does this strategy look like if it's just noise?** (i.e., what would the equity curve look like if the IS period was a lucky draw?)
+- [ ] **What other confirmed strategies does this correlate with?** Strategies that are "the same bet in different clothing" don't add diversification
+- [ ] **Data source dependency:** if the primary data source (EDGAR, Polygon, Massive API, etc.) goes away, is there a fallback?
+
+This does not have to be long — 3–5 bullet points is enough. The goal is to force one honest counterargument before committing paper capital.
+
+---
+
 ## Checklist Sign-Off
 
 Before advancing a strategy, record:
@@ -75,6 +88,7 @@ Strategy: H### / R##
 Date evaluated: YYYY-MM-DD
 Evaluated by: George / Ernesto
 Items passed: all / list exceptions
+Bear case summary: [3-5 bullets]
 Notes:
 ```
 
@@ -85,3 +99,4 @@ Notes:
 | Date | Change | Author |
 |------|--------|--------|
 | 2026-06-09 | Initial draft — 7-point checklist agreed by George and Ernesto | George |
+| 2026-06-09 | Added point 8: required bear case / steelman section (Ernesto suggestion) | George |
