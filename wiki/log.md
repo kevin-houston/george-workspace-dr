@@ -334,3 +334,5 @@ Issues found: 18. Auto-fixed: 17. Needs review: 1.
 
 **Needs review (1):**
 - tax-and-after-tax-returns.md not yet cross-referenced from paper-trading/index.md — check if paper-trading index has a related-pages footer to update
+## [2026-06-10] ingest | QuantMind (github.com/LLMQuant/quant-mind)
+Pages created: 1 (wiki/trading/tools/quant-mind.md). Pages updated: 1 (index.md). Key entities: LLMQuant, paper_flow API, batch_run, FilesystemMemory (planned). NeurIPS 2025 Workshop. Integration candidate for dream cycle Phase 2 arXiv scan.
