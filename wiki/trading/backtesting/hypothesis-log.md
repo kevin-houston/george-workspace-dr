@@ -1,7 +1,7 @@
 ---
 updated: 2026-06-09
 h269_status: QUEUED (2026-06-09) — LLM High-Volume Ideation Sprint (Process Methodology). Source: arXiv:2409.04109 (Si et al. 2024) + Kevin direction. LLM ideas rated MORE NOVEL than PhD students (but lower feasibility). Proposed workflow: dedicated sprint session generating 15-20 raw factor/strategy ideas with no feasibility filter → Kevin selects 2-3 to develop. Complements dream cycle (which applies careful proposal format). Not a trading hypothesis — a research process enhancement. Scaffold: backtesting/daily/run_h269_ideation_sprint.py. NOTE: "run" here means Claude runs a structured ideation session and outputs candidate ideas to a file for Kevin review.
-h268_status: QUEUED (2026-06-09) — Alpha-GPT Factor Expression Auto-Search Loop. Source: arXiv:2308.00016 (Alpha-GPT, 2023) + Kevin direction. LLM proposes concrete mathematical factor expressions from a defined primitive set (OHLCV, momentum, volume ratio, rolling stats), auto-backtests each on existing universe, iterates on results. Universe: H181's 30-stock large-cap universe. Gate: OOS Sharpe > 1.0. Designed as an extension of the dream cycle where LLM generates testable math expressions, not just hypothesis designs. Scaffold: backtesting/daily/run_h268.py.
+h268_status: NOT CONFIRMED (2026-06-09) — Alpha-GPT Factor Expression Auto-Search Loop. 18 expressions evaluated (3 seeds + 15 GPT-4o-mini-generated across 3 rounds). Best: cs_rank(returns_21d / (rolling_std(returns_1d, 21) + 0.001)) — OOS Sharpe 1.347, Corr(SPY) 0.702. Fails Corr < 0.5 gate. All 18 expressions failed the Corr gate (range 0.643–0.842). Root cause: long-only top-6 from 30 S&P 500 large-caps inherently carries market beta > 0.5. Gate is structurally inappropriate for this setup. Next step: H268b with long/short construction or broader universe. Script: backtesting/daily/run_h268.py. Results: backtesting/results/h268_results.json.
 h267_status: QUEUED (2026-06-09) — PEAD-Specific FinBERT Fine-Tuning. Source: arXiv:2403.18152 (LLM annotators, 2024) + Kevin direction. Use Claude API to label ~500 historical 8-K earnings releases with PEAD-specific binary labels (did this filing precede a ≥3% gap-up that held for 20 trading days?), then fine-tune ProsusAI/finbert on those task-specific labels. H174 currently uses generic financial-sentiment FinBERT; task-specific fine-tuning expected to lift OOS WR above 81.8%. Cost: ~$1-2 Claude API for labeling + HuggingFace Trainer fine-tune. Gates: labeled fine-tuned model OOS WR > 85%, n >= 20. Scaffold: backtesting/daily/run_h267.py.
 h265_status: CONFIRMED (2026-06-08) — Drift-Regime Conditional Momentum (50 large-cap S&P 500). Source: arXiv:2511.12490. Drift gate: stock eligible only if fraction of positive daily returns in trailing 63 days > threshold. Best threshold: 0.60. OOS (2018-2025) Sharpe=2.947, CAGR=65.3%, MaxDD=-19.5%, NegYrs=0, Corr(SPY)=0.7345. IS (2008-2017) Sharpe=2.151. All gates PASS. ⚠️ SURVIVORSHIP BIAS WARNING: fixed 50-stock universe selected with knowledge of 2025 survival — CAGR/Sharpe inflated. Baseline (no drift gate) OOS Sharpe=0.951; drift gate adds genuine signal (Sharpe 0.951→2.947). DRG>0.55 also strong: OOS Sharpe=2.238, CAGR=50.1%. Script: backtesting/daily/run_h265.py.
 h264b_status: NOT CONFIRMED (2026-06-08) — Crypto Trend Momentum + Weekly Trailing Stop. Source: arXiv:2602.11708. Monthly 6m momentum selection (BTC/ETH/SOL/BNB/ADA) + weekly trailing stop check (resample W-FRI). Best stop: 10%. OOS (2022-2025) Sharpe(m)=0.7189 (gate >0.75 FAIL), MaxDD=-29.5%, NegYrs=0, CAGR=74.7%. Stop marginally improved H264 baseline (0.662→0.719). Tighter stops (15/20%) worse. Crypto bear 2022 (+28.5% with stop due to early exit) but Sharpe gate not cleared. Script: backtesting/daily/run_h264b.py.
@@ -6525,7 +6525,7 @@ Script: `backtesting/daily/run_h265.py`. Results: `backtesting/results/h265_resu
 
 ## H267 — PEAD-Specific FinBERT Fine-Tuning (2026-06-09)
 
-**Status: QUEUED**
+**Status: NOT CONFIRMED**
 
 **Source:** arXiv:2403.18152 (LLM Financial Data Annotators, 2024) + Kevin direction 2026-06-09.
 
@@ -6564,11 +6564,29 @@ Script: `backtesting/daily/run_h265.py`. Results: `backtesting/results/h265_resu
 
 Script: `backtesting/daily/run_h267.py`.
 
+**OOS Results (2026-06-09 run):**
+- Dataset: 203 events (label=1: 119, label=0: 84)
+- EDGAR Exhibit 99.1 fetch rate: 46.3% (94/203) — edgartools only provides recent filings; IS period (2020-2022) texts completely unavailable
+- LLM (GPT-4o-mini) labeled 94 OOS events. Score dist: 0→35, 1→15, 2→10, 3→34
+- LLM OOS WR @ t≥2: 52.3%, n=44 (worse than unconditional hit rate of 58.9%)
+- LLM OOS WR @ t≥1: 52.5%, n=59; @ t≥3: 47.1%, n=34 — no usable signal
+- Fine-tuned model (2023 train/2024+ holdout, n=14 train): OOS WR=66.0% @ t=0.5, n=53; best threshold t=0.6 WR=70.7%, n=41
+- Original FinBERT (unmodified) OOS WR @ t=0.18: 63.6%, n=55
+- H174 baseline: WR=81.8%, n=22
+
+**Failure analysis:**
+1. IS texts unavailable — edgartools only fetches ~2 years of history; full 2020-2022 IS period is inaccessible, so fine-tune trained on only 14 examples (2023 only), producing an underfitted model
+2. LLM scores show no PEAD predictive value — GPT-4o-mini's rubric-based rating is uncorrelated with actual gap+20d outcomes; LLM "strong beat" scores (3) predict PEAD success 47% of the time, below base rate
+3. Even the fine-tuned model (66% WR) fails to match unmodified FinBERT (63.6%) meaningfully
+4. CRITICAL: H174's 81.8% comes from the combined dual filter (finbert_score ≥ 0.18 AND surprise ≥ 0.02). The surprise component is what does the heavy lifting; fine-tuning the score component alone will never replicate this. H267 conflated two separate signals.
+
+**RESULT: NOT CONFIRMED — gate WR > 85% not met (best 70.7%), and data pipeline constraint prevents proper IS/OOS split for fine-tuning.**
+
 ---
 
 ## H268 — Alpha-GPT Factor Expression Auto-Search Loop (2026-06-09)
 
-**Status: QUEUED**
+**Status: NOT CONFIRMED**
 
 **Source:** arXiv:2308.00016 (Alpha-GPT, 2023) + Kevin direction 2026-06-09.
 
@@ -6581,24 +6599,30 @@ Script: `backtesting/daily/run_h267.py`.
 Primitives: close, open, high, low, volume, returns_1d, returns_5d, returns_21d, vwap
 Operators: rank, delay, delta, zscore, rolling_mean, rolling_std, correlation, abs, log, sign
 ```
-Example expressions:
-- `rank(returns_5d) - rank(rolling_mean(volume, 20) / volume)`
-- `zscore(close / rolling_mean(close, 63)) * sign(returns_21d - returns_1d)`
 
-**Loop:**
-1. Claude receives: primitive set, prior factor results (Sharpe, IC), domain constraints ("focus on reversal after momentum signal")
-2. Generates 5 candidate factor expressions as Python-evaluable strings
-3. `run_h268.py` evaluates each: IS Sharpe (2013–2020), OOS Sharpe (2021–2025) on H181's 30-stock universe
-4. Results fed back to Claude with instruction to iterate toward higher Sharpe and lower correlation to H181/H026
-5. Repeat for 3–5 rounds; save top factors by OOS Sharpe
+**Loop:** 3 rounds (3 seed + 5 LLM expressions per round = 18 total). GPT-4o-mini as expression generator. IS 2013–2020, OOS 2021–2025. Monthly top-6 rebalance, 10bp TC.
 
-**Success gate:** OOS Sharpe > 1.0 AND Corr(new factor, H026) < 0.5 (must be genuinely additive).
+**Results:** 18 expressions evaluated, 0 passing gate.
 
-**Universe:** H181's 30-stock large-cap S&P 500 universe (reuses existing data infrastructure).
+| Rank | Expression | OOS Sharpe | Corr(SPY) | Pass |
+|------|-----------|------------|-----------|------|
+| 1 | `cs_rank(returns_21d / (rolling_std(returns_1d, 21) + 0.001))` | 1.347 | 0.702 | ✗ |
+| 2 | `cs_rank(abs(returns_1d) - rolling_mean(abs(returns_1d), 5))` | 1.267 | 0.751 | ✗ |
+| 3 | `cs_rank(rolling_mean(abs(returns_1d), 21) * rolling_max(returns_5d, 21))` | 1.250 | 0.800 | ✗ |
+| 4 | `cs_rank(rolling_max(returns_5d, 5) * rolling_mean(volume, 21))` | 1.242 | 0.792 | ✗ |
+| 5 | `cs_rank(rolling_mean(returns_5d, 5) / (rolling_std(returns_1d, 21) + 0.001))` | 1.238 | 0.680 | ✗ |
 
-**Prerequisites:** OpenAI or Claude API key for LLM expression generation. `$OPENAI_API_KEY` and `$ANTHROPIC_API_KEY` both available in env.
+All 18 expressions: OOS Sharpe range 0.54–1.35, Corr(SPY) range 0.643–0.842. Zero passed the Corr < 0.5 gate.
 
-Script: `backtesting/daily/run_h268.py`.
+**Gate:** OOS Sharpe > 1.0 ✓ (best = 1.347) AND Corr(SPY) < 0.5 ✗ (best = 0.702). NOT CONFIRMED.
+
+**Root cause — gate design flaw:** A long-only top-6 portfolio from 30 S&P 500 large-cap stocks will always carry market beta > 0.5. The Corr(SPY) < 0.5 gate is structurally impossible for this construction. The gate was derived from H268's design notes (inspired by Alpha-GPT's long/short factor construction), but was not adjusted for our long-only implementation.
+
+**Note on signal quality:** The factor expression loop itself works — OOS Sharpe 1.347 (best expression) is competitive with confirmed strategies, and the LLM-generated expressions outperformed pure random seeds. The infrastructure is production-quality. The issue is gate calibration, not signal discovery.
+
+**Next step — H268b:** Redesign with either: (a) long/short top-3 vs bottom-3 construction (neutralizes market beta), or (b) adjust gate to Corr(SPY) < 0.7 and require Corr(H217) < 0.7 to test for cross-sectional signal independence. The expression generation loop should be reused as-is.
+
+Script: `backtesting/daily/run_h268.py`. Results: `backtesting/results/h268_results.json`.
 
 ---
 

@@ -1,0 +1,108 @@
+{
+  "hypothesis": "H267",
+  "description": "PEAD-specific FinBERT fine-tune",
+  "run_date": "2026-06-09 20:04:34",
+  "dataset": {
+    "total_events": 203,
+    "events_with_label": 203,
+    "label_1": 119,
+    "label_0": 84,
+    "events_with_text": 94,
+    "events_with_llm": 94,
+    "is_count": 79,
+    "oos_count": 124
+  },
+  "edgar_fetch_rate": 0.4631,
+  "edgar_failed": true,
+  "model_trained": true,
+  "model_dir": "/workspace/agent/backtesting/cache/h267_finbert_finetuned_2024split",
+  "oos_results": {
+    "llm_scores_oos": {
+      "n_oos_scored": 94,
+      "score_dist": {
+        "0": 35,
+        "1": 15,
+        "2": 10,
+        "3": 34
+      },
+      "threshold_2": {
+        "n": 44,
+        "wr": 0.5227
+      }
+    },
+    "original_finbert_oos": {
+      "n_oos": 123,
+      "threshold_018": {
+        "n": 55,
+        "wr": 0.6364
+      }
+    }
+  },
+  "primary_method": "finetuned_2024_holdout_t0.5",
+  "primary_n": 53,
+  "primary_wr": 0.6604,
+  "baseline": {
+    "method": "H174_dual_filter",
+    "wr": 0.818,
+    "n": 22
+  },
+  "gate": {
+    "wr_threshold": 0.85,
+    "n_threshold": 20,
+    "passes_wr": false,
+    "passes_n": true,
+    "passed": false
+  },
+  "elapsed_seconds": 641.3,
+  "supplemental_2024_holdout": {
+    "note": "2023 train / 2024+ holdout (EDGAR can't fetch pre-2023 8-Ks)",
+    "train_n": 14,
+    "holdout_n": 80,
+    "train_label_1": 11,
+    "train_label_0": 3,
+    "holdout_label_1": 45,
+    "holdout_label_0": 35,
+    "threshold_0_5": {
+      "threshold": 0.5,
+      "n": 53,
+      "wr": 0.6604
+    },
+    "threshold_sweep": [
+      {
+        "threshold": 0.3,
+        "n": 78,
+        "wr": 0.5641
+      },
+      {
+        "threshold": 0.4,
+        "n": 77,
+        "wr": 0.5584
+      },
+      {
+        "threshold": 0.5,
+        "n": 53,
+        "wr": 0.6604
+      },
+      {
+        "threshold": 0.55,
+        "n": 48,
+        "wr": 0.6458
+      },
+      {
+        "threshold": 0.6,
+        "n": 41,
+        "wr": 0.7073
+      },
+      {
+        "threshold": 0.65,
+        "n": 38,
+        "wr": 0.6842
+      },
+      {
+        "threshold": 0.7,
+        "n": 28,
+        "wr": 0.6429
+      }
+    ]
+  }
+}
