@@ -1,0 +1,125 @@
+{
+  "confirmed": true,
+  "gate_sharpe": 1.0,
+  "universe_size": 25,
+  "universe": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "META",
+    "NVDA",
+    "TSLA",
+    "AVGO",
+    "CSCO",
+    "ADBE",
+    "INTC",
+    "QCOM",
+    "TXN",
+    "AMAT",
+    "MU",
+    "NFLX",
+    "COST",
+    "SBUX",
+    "MDLZ",
+    "GILD",
+    "BIIB",
+    "REGN",
+    "VRTX",
+    "ILMN",
+    "LRCX"
+  ],
+  "signal": "12-1 month momentum (Jegadeesh-Titman)",
+  "survivorship_bias_warning": "Fixed 25-stock universe selected with foreknowledge of 2025 survival",
+  "qqq_bh": {
+    "is": {
+      "cagr": 0.1286,
+      "sharpe": 0.7157,
+      "max_drawdown": -0.448,
+      "n_months": 120,
+      "neg_years": 1
+    },
+    "oos": {
+      "cagr": 0.202,
+      "sharpe": 0.9952,
+      "max_drawdown": -0.3258,
+      "n_months": 102,
+      "neg_years": 2
+    }
+  },
+  "variant_a": {
+    "is": {
+      "cagr": 0.3925,
+      "sharpe": 1.5325,
+      "max_drawdown": -0.3444,
+      "n_months": 120,
+      "neg_years": 1
+    },
+    "oos": {
+      "cagr": 0.3665,
+      "sharpe": 1.1648,
+      "max_drawdown": -0.3751,
+      "n_months": 102,
+      "neg_years": 1
+    },
+    "altoos": {
+      "cagr": 0.4496,
+      "sharpe": 1.5341,
+      "max_drawdown": -0.3751,
+      "n_months": 162,
+      "neg_years": 1
+    },
+    "label": "12-1 Top-5"
+  },
+  "variant_b": {
+    "is": {
+      "cagr": 0.2811,
+      "sharpe": 1.322,
+      "max_drawdown": -0.3666,
+      "n_months": 120,
+      "neg_years": 1
+    },
+    "oos": {
+      "cagr": 0.3078,
+      "sharpe": 1.2308,
+      "max_drawdown": -0.2538,
+      "n_months": 102,
+      "neg_years": 1
+    },
+    "altoos": {
+      "cagr": 0.3638,
+      "sharpe": 1.5899,
+      "max_drawdown": -0.2538,
+      "n_months": 162,
+      "neg_years": 1
+    },
+    "label": "12-1 Top-10"
+  },
+  "variant_c": {
+    "is": {
+      "cagr": 0.8864,
+      "sharpe": 3.414,
+      "max_drawdown": -0.2385,
+      "n_months": 120,
+      "neg_years": 0
+    },
+    "oos": {
+      "cagr": 0.8484,
+      "sharpe": 2.5093,
+      "max_drawdown": -0.19,
+      "n_months": 102,
+      "neg_years": 0
+    },
+    "altoos": {
+      "cagr": 0.9048,
+      "sharpe": 2.9203,
+      "max_drawdown": -0.19,
+      "n_months": 162,
+      "neg_years": 0
+    },
+    "label": "12-0 Top-5"
+  },
+  "best_variant": "C: 12-0 Top-5",
+  "best_oos_sharpe": 2.5093,
+  "best_corr_spy": 0.7312363613390915
+}

@@ -1,0 +1,129 @@
+{
+  "confirmed": true,
+  "gate_sharpe": 0.9,
+  "variant_a": {
+    "is": {
+      "sharpe": 1.0728,
+      "cagr": 0.096,
+      "max_drawdown": -0.111,
+      "n_months": 120,
+      "neg_years": 0
+    },
+    "oos": {
+      "sharpe": 0.8801,
+      "cagr": 0.105,
+      "max_drawdown": -0.177,
+      "n_months": 90,
+      "neg_years": 1
+    },
+    "altoos": {
+      "sharpe": 1.1497,
+      "cagr": 0.096,
+      "max_drawdown": -0.111,
+      "n_months": 160,
+      "neg_years": 1
+    }
+  },
+  "variant_b": {
+    "is": {
+      "sharpe": 1.1624,
+      "cagr": 0.073,
+      "max_drawdown": -0.053,
+      "n_months": 120,
+      "neg_years": 0
+    },
+    "oos": {
+      "sharpe": 0.5791,
+      "cagr": 0.071,
+      "max_drawdown": -0.191,
+      "n_months": 90,
+      "neg_years": 2
+    },
+    "altoos": {
+      "sharpe": 0.921,
+      "cagr": 0.073,
+      "max_drawdown": -0.053,
+      "n_months": 160,
+      "neg_years": 2
+    }
+  },
+  "variant_c": {
+    "is": {
+      "sharpe": 1.3551,
+      "cagr": 0.134,
+      "max_drawdown": -0.086,
+      "n_months": 120,
+      "neg_years": 0
+    },
+    "oos": {
+      "sharpe": 1.2895,
+      "cagr": 0.145,
+      "max_drawdown": -0.087,
+      "n_months": 90,
+      "neg_years": 0
+    },
+    "altoos": {
+      "sharpe": 1.575,
+      "cagr": 0.134,
+      "max_drawdown": -0.086,
+      "n_months": 160,
+      "neg_years": 0
+    }
+  },
+  "xlu_bh": {
+    "is": {
+      "sharpe": 0.4345,
+      "cagr": 0.062,
+      "max_drawdown": -0.368,
+      "n_months": 120,
+      "neg_years": 3
+    },
+    "oos": {
+      "sharpe": 0.61,
+      "cagr": 0.096,
+      "max_drawdown": -0.189,
+      "n_months": 90,
+      "neg_years": 1
+    }
+  },
+  "usmv_bh": {
+    "is": {
+      "sharpe": 1.8337,
+      "cagr": 0.145,
+      "max_drawdown": -0.053,
+      "n_months": 72,
+      "neg_years": 0
+    },
+    "oos": {
+      "sharpe": 0.6988,
+      "cagr": 0.091,
+      "max_drawdown": -0.191,
+      "n_months": 90,
+      "neg_years": 1
+    }
+  },
+  "spy_oos": {
+    "sharpe": 0.8713,
+    "cagr": 0.144,
+    "max_drawdown": -0.338,
+    "n_months": 90,
+    "neg_years": 1
+  },
+  "best_variant": "Variant C",
+  "best_oos_sharpe": 1.2895,
+  "corr_production": 0.5124,
+  "corr_spy": 0.6215,
+  "universe": [
+    "USMV",
+    "SPLV",
+    "XLU",
+    "SPHD",
+    "XLK",
+    "XLF",
+    "XLE",
+    "XLV",
+    "BIL"
+  ],
+  "signal": "mom_rank + inv_vol_rank (12m lookback), hold top-1",
+  "note": "USMV/SPLV only live from 2011 \u2014 limited IS data; Variant C rotates across mixed universe"
+}

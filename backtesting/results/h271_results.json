@@ -1,0 +1,111 @@
+{
+  "confirmed": false,
+  "gate_sharpe": 0.9,
+  "gate_corr_spy": 0.4,
+  "z_entry": 2.0,
+  "z_exit": 0.5,
+  "lookback_days": 63,
+  "pairs": [
+    {
+      "pair": "XLK/SOXX",
+      "coint_pval": 0.3744,
+      "is": {
+        "cagr": -0.0074,
+        "sharpe": -0.2058,
+        "max_drawdown": -0.141,
+        "n_periods": 2518,
+        "neg_years": 7
+      },
+      "oos": {
+        "cagr": 0.0063,
+        "sharpe": 0.1309,
+        "max_drawdown": -0.1093,
+        "n_periods": 2118,
+        "neg_years": 4
+      },
+      "corr_spy_oos": -0.0234,
+      "active_days_oos": 710
+    },
+    {
+      "pair": "XLF/KRE",
+      "coint_pval": 0.035,
+      "is": {
+        "cagr": 0.0013,
+        "sharpe": 0.0228,
+        "max_drawdown": -0.1368,
+        "n_periods": 2518,
+        "neg_years": 5
+      },
+      "oos": {
+        "cagr": -0.0038,
+        "sharpe": -0.0802,
+        "max_drawdown": -0.1586,
+        "n_periods": 2118,
+        "neg_years": 4
+      },
+      "corr_spy_oos": -0.0024,
+      "active_days_oos": 745
+    },
+    {
+      "pair": "GDX/SIL",
+      "coint_pval": 0.1945,
+      "is": {
+        "cagr": -0.0013,
+        "sharpe": -0.026,
+        "max_drawdown": -0.1389,
+        "n_periods": 1814,
+        "neg_years": 4
+      },
+      "oos": {
+        "cagr": -0.0067,
+        "sharpe": -0.1476,
+        "max_drawdown": -0.1754,
+        "n_periods": 2118,
+        "neg_years": 3
+      },
+      "corr_spy_oos": -0.0318,
+      "active_days_oos": 719
+    },
+    {
+      "pair": "GLD/SLV",
+      "coint_pval": 0.4584,
+      "is": {
+        "cagr": -0.0204,
+        "sharpe": -0.3084,
+        "max_drawdown": -0.2561,
+        "n_periods": 2518,
+        "neg_years": 5
+      },
+      "oos": {
+        "cagr": -0.0143,
+        "sharpe": -0.1955,
+        "max_drawdown": -0.1948,
+        "n_periods": 2118,
+        "neg_years": 4
+      },
+      "corr_spy_oos": 0.0647,
+      "active_days_oos": 740
+    },
+    {
+      "pair": "XLE/OIH",
+      "coint_pval": 0.9584,
+      "is": {
+        "cagr": -0.0019,
+        "sharpe": -0.0443,
+        "max_drawdown": -0.1525,
+        "n_periods": 2518,
+        "neg_years": 5
+      },
+      "oos": {
+        "cagr": -0.0338,
+        "sharpe": -0.5032,
+        "max_drawdown": -0.3116,
+        "n_periods": 2118,
+        "neg_years": 5
+      },
+      "corr_spy_oos": 0.0663,
+      "active_days_oos": 775
+    }
+  ],
+  "confirmed_pairs": []
+}
