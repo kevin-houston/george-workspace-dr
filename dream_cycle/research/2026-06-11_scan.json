@@ -1,0 +1,181 @@
+{
+  "date": "2026-06-11",
+  "scan_angles": [
+    {
+      "angle": "arXiv: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Dynamic Multi-Pair Trading Strategy in Cryptocurrency Markets with Deep Reinforcement Learning",
+          "arxiv": "2606.04574",
+          "year": 2026,
+          "summary": "LSTM-PPO execution overlay for crypto pairs. 'Filter-then-Rank' pair selection + Fixed Risk Adaptive Mean execution model. OOS outperforms heuristic baseline (p<0.10 bootstrap). Hierarchical architecture separates pair selection from execution policy.",
+          "relevance": 4,
+          "reason": "Pairs family exhausted on equity side (H200 NOT CONFIRMED). Crypto pairs angle partially covered by H264b (already staged). The LSTM-PPO execution overlay idea is interesting but requires crypto infrastructure. Not staging — overlaps with H264b."
+        },
+        {
+          "title": "Copula-Based Trading of Cointegrated Cryptocurrency Pairs",
+          "arxiv": "2305.06961",
+          "year": 2023,
+          "summary": "Non-linear cointegration via copulas. Cryptocurrency market focus.",
+          "relevance": 3,
+          "reason": "Older paper (2023). Pairs family exhausted on equity side. Not staging."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: PEAD + post-earnings drift + text signals + NLP",
+      "findings": [
+        {
+          "title": "ChatGPT in Systematic Investing — Enhancing Risk-Adjusted Returns with LLMs",
+          "arxiv": "2510.26228",
+          "year": 2025,
+          "summary": "LLM conditions cross-sectional momentum entries on news confirmation. S&P 500 constituents. Higher Sharpe/Sortino IS and truly OOS. Robust to costs (up to 30bps/leg). Strongest for concentrated portfolios. October 2025.",
+          "relevance": 9,
+          "reason": "Directly upgrades H228 (alpha101+reversal, OOS 1.572) and H198 (momentum, OOS 1.174). LLM as news-confirmation filter before entering momentum positions. STAGED as H279."
+        },
+        {
+          "title": "Signal or Noise in Multi-Agent LLM-based Stock Recommendations?",
+          "arxiv": "2604.17327",
+          "year": 2026,
+          "summary": "MarketSenseAI live validation. 4 specialist agents + synthesis. Strong-buy portfolio +2.18%/month vs +1.15% benchmark (19 months, p=0.003). ICIR=+0.489 (p=0.024). Agent contributions rotate by regime.",
+          "relevance": 9,
+          "reason": "Strongest live OOS validation of multi-agent LLM equity signal seen to date. No look-ahead bias (live generation). STAGED as H280."
+        },
+        {
+          "title": "Autonomous Market Intelligence: Agentic AI Nowcasting Predicts Stock Returns",
+          "arxiv": "2601.11958",
+          "year": 2026,
+          "summary": "Fully agentic LLM (web search, no curated text) evaluating Russell 1000 daily from April 2025. Top-20 ranked: 18.4bps/day alpha, Sharpe 2.43. Predictability asymmetric — only top tier works; bottom tier = noise.",
+          "relevance": 7,
+          "reason": "Interesting but very short live track record (~14 months). Daily rebalancing on Russell 1000 has high transaction costs. The top-20 concentration partially overlaps with H280 approach. Not staging separately — overlap with H279/H280 covered."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: cross-sectional momentum + factor momentum",
+      "findings": [
+        {
+          "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay",
+          "arxiv": "2512.11913",
+          "year": 2025,
+          "summary": "Derives hyperbolic decay K/(1+λt) from game-theoretic model. Validated on 8 FF factors 1963-2024. Momentum: R²=0.65 hyperbolic >> linear/exponential. Crowding post-2015 accelerated. KEY FINDING: crowding predicts crash RISK not mean return — crowded reversal 1.7-1.8x crash prob, crowded momentum 0.38x (safer!).",
+          "relevance": 8,
+          "reason": "Updates signal-halflife.md with: (1) game-theory foundation for hyperbolic form, (2) crash-risk finding (crowding ≠ lower returns, = higher tail risk for reversal), (3) Python fitting code. STAGED as wiki update."
+        },
+        {
+          "title": "Continuous Timing Signals for Growth-Defensive Style Allocation",
+          "arxiv": "2605.20636",
+          "year": 2026,
+          "summary": "Smooth macro timing score (rate relief + SPY drawdown + VIX stress + growth-crowding penalty) for growth vs defensive ETF tilt. CAGR 19.24%, Sharpe 1.01, MaxDD -31.63% (2017-2026). Improves over 50/50 but doesn't beat pure growth in CAGR.",
+          "relevance": 6,
+          "reason": "Smooth macro timing score concept is related to H249/H165 regime work (already confirmed). The specific G/D allocation framework is less relevant — we already have H026 momentum-based rotation. Adds to regime-detection.md as supporting evidence for continuous score approach. Not staging new hypothesis."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "Macro Economists in the Machine: Multi-Agent LLM Framework for Commodity-Related ETF Portfolio Construction",
+          "arxiv": "2606.08283",
+          "year": 2026,
+          "summary": "Hawkish/Dovish/Debate agents all receive identical FRED macro z-scores. All 3 LLM agents beat Rule Agent in Sharpe (Hawkish ΔSharpe=+0.044, Debate ΔSharpe=+0.040, p<0.10). Debate = bias correction not new alpha. Net advantage up to 30bps one-way costs.",
+          "relevance": 9,
+          "reason": "Directly applicable to H026 production ETF rotation — adding FRED macro z-score LLM interpretation as tilt modifier. STAGED as H281."
+        },
+        {
+          "title": "Beyond Agent Architecture: Execution Assumptions and Reproducibility in LLM-Based Trading Systems",
+          "arxiv": "2606.08285",
+          "year": 2026,
+          "summary": "30-study reproducibility audit of LLM trading research. Most papers weak on PIT controls, split transparency, cost modeling, execution semantics. '10-equity worked example' shows explicit friction/timing choices materially compress results.",
+          "relevance": 8,
+          "reason": "Validates our shared eval checklist approach. Adds 'execution semantics' as specific evaluation dimension. Already cited in new execution-quality.md wiki page. Wiki update to shared-eval-checklist.md warranted but minor — execution semantics already partially covered. Not staging separately."
+        },
+        {
+          "title": "TT-DAC-PS: Twin-Target Deterministic Actor-Critic with Policy Smoothing for Optimal Trade Execution",
+          "arxiv": "2606.07059",
+          "year": 2026,
+          "summary": "RL approach to optimal execution of large stock sell programs. TD3-style twin critic + EWMA target smoothing. Addresses Almgren-Chriss framework limitations.",
+          "relevance": 4,
+          "reason": "Optimal execution is not our current bottleneck at $100k AUM. Relevant when scaling to $1M+. Note for future reference."
+        }
+      ]
+    },
+    {
+      "angle": "GitHub: trending quantitative finance repos",
+      "findings": [
+        {
+          "title": "virattt/ai-hedge-fund",
+          "url": "https://github.com/virattt/ai-hedge-fund",
+          "stars": 59967,
+          "updated": "2026-06-11",
+          "summary": "Multi-agent LLM hedge fund simulation. Educational. 11 specialist agents (Warren Buffett, Bill Ackman, etc.) debate each stock. No production backtesting rigor — single entry/exit, no cost modeling.",
+          "relevance": 5,
+          "reason": "High star count but limited production value. Educational reference for multi-agent design patterns. Already noted in CLAUDE.local.md. Not staging."
+        },
+        {
+          "title": "AI4Finance-Foundation/FinRL",
+          "url": "https://github.com/AI4Finance-Foundation/FinRL",
+          "stars": 15391,
+          "updated": "2026-06-11",
+          "summary": "Deep RL for trading. Already noted in wiki (deep-rl-trading.md).",
+          "relevance": 4,
+          "reason": "Already in wiki. H204 NOT CONFIRMED for RL approach. No new developments."
+        },
+        {
+          "title": "ranaroussi/quantstats",
+          "url": "https://github.com/ranaroussi/quantstats",
+          "stars": 7267,
+          "updated": "2026-06-11",
+          "summary": "Portfolio analytics + HTML tearsheet generator. Already noted in CLAUDE.local.md. pip install quantstats.",
+          "relevance": 7,
+          "reason": "Already noted as tool in CLAUDE.local.md (wiki/tools/quantstats-notes.md). High value for tearsheet generation. No new staging needed."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: post-selection Sharpe estimation + backtesting methodology",
+      "findings": [
+        {
+          "title": "Post Selection Estimation of Sharpe Ratios",
+          "arxiv": "2606.01650",
+          "year": 2026,
+          "summary": "Estimates true Sharpe of strategy selected for highest IS Sharpe among many. James-Stein shrinkage best performer across simulations (bias, RMSE, rank correlation). Relevant when we select H-hypotheses based on OOS Sharpe.",
+          "relevance": 7,
+          "reason": "Adds to multiple-testing.md: when we select the best hypothesis from a set, IS Sharpe is biased upward; James-Stein shrinkage provides better OOS estimate. Low-risk wiki update. Cited in execution-quality.md. Could be added to multiple-testing.md in a future session — not urgent."
+        }
+      ]
+    }
+  ],
+  "staged_proposals": [
+    {
+      "file": "1_h279_llm_momentum_filter.json",
+      "id": "h279-llm-momentum-news-filter",
+      "type": "new_script",
+      "risk": "medium",
+      "source": "arXiv:2510.26228"
+    },
+    {
+      "file": "2_h280_marketsenseai_replication.json",
+      "id": "h280-marketsenseai-4agent-equity",
+      "type": "new_script",
+      "risk": "medium",
+      "source": "arXiv:2604.17327"
+    },
+    {
+      "file": "3_h281_macro_llm_etf_rotation.json",
+      "id": "h281-macro-llm-etf-rotation",
+      "type": "new_script",
+      "risk": "medium",
+      "source": "arXiv:2606.08283"
+    },
+    {
+      "file": "4_wiki_hyperbolic_alpha_decay.json",
+      "id": "wiki-hyperbolic-alpha-decay-crowding",
+      "type": "wiki_update",
+      "risk": "low",
+      "source": "arXiv:2512.11913"
+    }
+  ],
+  "summary": "4 high-relevance proposals staged. Theme: LLM augmentation of existing alpha signals (H279 momentum filter, H280 multi-agent equity, H281 macro-LLM ETF tilt) + methodology improvement (hyperbolic alpha decay model with crash-risk finding). Phase 1 wiki expansion added execution-quality.md to paper-trading section (previously thinnest at 5 pages, no IS/slippage analysis). Key data points: MarketSenseAI live OOS +2.18%/month vs +1.15% benchmark at p=0.003; FRED macro z-score LLM tilt ΔSharpe +0.044 (p<0.10); hyperbolic decay R²=0.65 for momentum (beats linear/exponential)."
+}
