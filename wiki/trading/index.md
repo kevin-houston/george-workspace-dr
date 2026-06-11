@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-10 (multi-agent-llm-trading.md new — TradingAgents 84.9k stars, HedgeAgents architecture, Expert Investment Teams, reliability taxonomy, NautilusTrader, H274 PEAD upgrade proposal)
+updated: 2026-06-11 (execution-quality.md new — IS/VWAP benchmarks, Alpaca paper fill mechanics, per-strategy slippage budgets, paper→live degradation estimates; dream cycle: H279 LLM momentum filter, H280 MarketSenseAI replication, H281 macro-LLM ETF rotation, hyperbolic alpha decay wiki)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -85,7 +85,9 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [H181 Industry Reversal Alpaca](paper-trading/h181-alpaca.md) ← active (H181 live deployment log)
   - [Live Graduation Criteria & Performance Attribution](paper-trading/live-graduation-criteria.md) ← new 2026-05-30 (SPRT test for strategy validation, minimum trade counts, regime coverage gates, paper→live execution attribution, Alpaca migration steps)
   - [Tax & After-Tax Return Modeling](paper-trading/tax-and-after-tax-returns.md) ← new 2026-06-05 (STCG/LTCG rates for IL, wash sale rule for algo trading, HIFO lot selection, after-tax Sharpe formula, expected ~40% tax drag on STCG monthly-rebalanced strategies, IRS Form 8949 reporting)
+  - [Execution Quality & Slippage Analysis](paper-trading/execution-quality.md) ← new 2026-06-11 (IS/VWAP benchmarks, Alpaca paper fill mechanics, per-strategy slippage budgets H026/H181/PEAD, paper→live degradation estimates, graduation gate thresholds)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-06-11](research-log/2026-06-11.md) — wiki expansion: execution-quality.md new (IS benchmarks, paper fill mechanics, slippage budgets, graduation gates); dream cycle: H279 LLM momentum filter arXiv:2510.26228, H280 MarketSenseAI arXiv:2604.17327, H281 macro-LLM ETF arXiv:2606.08283, hyperbolic alpha decay wiki arXiv:2512.11913
   - [2026-06-08](research-log/2026-06-08.md) — wiki expansion: crypto-data-sources.md new (yfinance fragility, ccxt/CoinGecko migration path); dream cycle: H264b trailing-stop crypto, H265 drift-regime factor (arXiv:2511.12490 OOS Sharpe >13 — skeptical replication candidate), QuantStats wiki staged
   - [2026-06-07](research-log/2026-06-07.md) — wiki expansion: commodity-trend-following.md new (H261b Corr(SPY)=0.218 lowest of any confirmed H; K-1 tax flags; dream cycle: H262 Bayesian short+long CTA; AI alpha decay half-life 12m update; FinCall-Surprise multi-modal PEAD assessment)
   - [2026-06-06](research-log/2026-06-06.md) — wiki expansion: factor-momentum-style-rotation.md new (Gupta & Kelly 2019 Sharpe 0.84; H255/H256 failure analysis; look-ahead bias 3× inflation; multi-asset extensions); indexed regime-detection-signals.md; dream cycle: H257 multi-asset composite momentum, H258 text-to-alpha LLM disclosure, H259 FactorMAD debate, H260 PEAD 12q ML

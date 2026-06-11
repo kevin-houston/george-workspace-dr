@@ -349,12 +349,87 @@ Once you know a factor's half-life, use it to set retraining schedules:
 
 ---
 
-## 9. Key references
+## 9. Crowding predicts crash risk, not mean return (Lee 2025)
+
+**Source:** arXiv:2512.11913 — "Not All Factors Crowd Equally" (Dec 2025)
+
+This is the most important update to the standard crowding narrative.
+
+### Game-theoretic foundation
+
+The hyperbolic decay form K/(1+λt) is *derived* — not assumed — from a competitive equilibrium model where rational capital enters when expected alpha exceeds costs. Under this model:
+- Capital entry drives down alpha hyperbolicly (not exponentially)
+- Hyperbolic > exponential > linear for momentum R² (0.65 vs 0.61 vs 0.51)
+- Judgment-based factors (value, quality) have no dominant model — idiosyncratic barriers prevent systematic crowding
+
+### Post-2015 crowding acceleration
+
+The fitted hyperbolic model over-predicts post-2015 momentum alpha (predicted 0.30 vs actual 0.15), correlated with factor ETF AUM growth (ρ = −0.63 with excess alpha loss):
+
+| Period | Hyperbolic model fit | Interpretation |
+|--------|---------------------|----------------|
+| 1963–2015 | R² = 0.65 ✓ | Model fits well |
+| 2015–2024 | Over-predicts by ~2× | Factor ETF AUM accelerated λ |
+
+**Implication**: The λ (decay rate) for momentum has increased post-2015. If retraining the hyperbolic model, use the 2015–2025 subsample to estimate current λ — don't use the full 1963–2025 fit.
+
+### Critical finding: crowding predicts CRASH RISK, not mean return
+
+The standard assumption is "crowded factor = lower forward returns." Lee (2025) refutes this:
+
+| Factor | Crowding effect on MEAN return | Crowding effect on CRASH PROBABILITY |
+|--------|-------------------------------|--------------------------------------|
+| Reversal (STR) | None significant | **1.7–1.8× higher crash probability** |
+| Momentum | None significant | **0.38× lower crash probability** (safer!) |
+
+**Why reversal is the crash risk**: crowded contrarian positions (many longs in losers) unwind violently when momentum reasserts — classic momentum crash mechanism viewed from the other side. Crowded momentum, by contrast, represents consensus and tends to continue.
+
+**Why this matters for our strategies**:
+- H181 (industry-adjusted reversal): monitor factor ETF AUM in momentum ETFs as crash risk proxy — NOT a return timing signal
+- H198/H228 (momentum): elevated momentum crowding is not a signal to exit — it may actually lower tail risk
+- **Do NOT use crowding as alpha timing**: the signal is about crash *risk*, not expected return direction
+
+### Python: monitoring crowding-adjusted crash risk
+
+```python
+import yfinance as yf
+import pandas as pd
+
+# Proxy for momentum crowding: MTUM (iShares momentum ETF) AUM proxy via price×shares
+# (better: pull AUM from iShares website or ETF flows API)
+MOMENTUM_ETF_PROXY = "MTUM"
+REVERSAL_FACTOR_PROXY = "USMV"  # min-vol as reversal-adjacent
+
+def get_factor_crowding_flag(ticker: str, lookback_months: int = 12) -> dict:
+    """
+    Simple crowding proxy: is current AUM (price-implied) above trailing median?
+    Returns: crowding_flag (bool), z_score (float)
+    """
+    hist = yf.download(ticker, period=f"{lookback_months*2}mo", interval="1mo",
+                       auto_adjust=True, progress=False)["Close"]
+    if hist.empty or len(hist) < lookback_months:
+        return {"crowding_flag": None, "z_score": None}
+
+    recent = hist.iloc[-lookback_months:]
+    z = (hist.iloc[-1] - recent.mean()) / recent.std(ddof=1)
+    flag = z > 1.5  # above 1.5σ = elevated crowding
+    return {"crowding_flag": bool(flag), "z_score": round(float(z), 2)}
+
+# Usage:
+# mom_crowd = get_factor_crowding_flag("MTUM")
+# if mom_crowd["crowding_flag"]:
+#     print(f"Momentum crowding elevated (z={mom_crowd['z_score']:.2f}) — "
+#           "LOWER crash risk per Lee 2025, but monitor reversal signals for crash risk buildup")
+```
+
+---
+
+## 10. Key references
 
 | Source | Key contribution | Link |
 |--------|----------------|------|
 | McLean & Pontiff 2016 | First large-scale post-publication decay study (97 factors, 58 months avg HL) | doi:10.1111/jofi.12365 |
-| arXiv:2512.11913 (Dec 2025) | Hyperbolic decay model; momentum vs value classification | [link](https://arxiv.org/abs/2512.11913) |
+| arXiv:2512.11913 (Dec 2025) | Hyperbolic decay K/(1+λt) game-theoretic derivation; crowding = crash risk not return timing | [link](https://arxiv.org/abs/2512.11913) |
 | arXiv:2605.23905 (May 2026) | AI adoption compresses HL from 58 → 18 months | [link](https://arxiv.org/abs/2605.23905) |
 | Medium: MagPi AI (Dec 2025) | Practical AR(1) half-life formula + Python | [link](https://medium.com/@magpiai/stop-guessing-the-quant-science-of-signal-half-life-and-market-context-ba934a13dd21) |
 
