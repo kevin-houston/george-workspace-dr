@@ -336,3 +336,6 @@ Issues found: 18. Auto-fixed: 17. Needs review: 1.
 - tax-and-after-tax-returns.md not yet cross-referenced from paper-trading/index.md — check if paper-trading index has a related-pages footer to update
 ## [2026-06-10] ingest | QuantMind (github.com/LLMQuant/quant-mind)
 Pages created: 1 (wiki/trading/tools/quant-mind.md). Pages updated: 1 (index.md). Key entities: LLMQuant, paper_flow API, batch_run, FilesystemMemory (planned). NeurIPS 2025 Workshop. Integration candidate for dream cycle Phase 2 arXiv scan.
+
+## [2026-06-10] ingest | fireworks-tech-graph (github.com/yizhiyanhua-ai/fireworks-tech-graph)
+Pages created: 1 (wiki/tools/fireworks-tech-graph.md). Pages updated: 1 (index.md). Key entities: Brad Zhang (bradzhang.dev), Claude Code skill, SVG/PNG diagram generation. 8 styles including Claude Official and Dark Luxury. 14 diagram types. AI/Agent domain patterns built-in (RAG, Multi-Agent, Tool Call, Mem0). MIT license. Not a trading tool — documentation/visualization use case.

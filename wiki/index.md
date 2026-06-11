@@ -1,7 +1,7 @@
 ---
-updated: 2026-06-07
+updated: 2026-06-10
 sources_indexed: 3
-pages: 122
+pages: 123
 ---
 
 # Wiki Index
@@ -64,6 +64,7 @@ When answering a query:
 - [QuantDinger](trading/tools/quantdinger-notes.md) — self-hosted AI trading platform (Docker); `quantdinger-mcp` PyPI for Claude Code integration; supports Alpaca/IBKR/Kraken/CCXT; full stack overkill given existing setup; MCP package worth testing ← new 2026-06-07
 - [QuantStats](tools/quantstats-notes.md) — Python portfolio analytics + HTML tearsheet generator; `pip install quantstats`; takes pandas returns Series → 50+ metrics + SPY benchmark + monthly heatmaps; add `qs.reports.html()` to run_hNNN.py ← new 2026-06-08
 - [Kan](tools/kan-notes.md) — self-hosted open-source kanban board (Trello alternative); AGPLv3, ~5k stars; Next.js + tRPC + Postgres; webhooks + admin API; potential task/research dashboard UI ← new 2026-06-08
+- [fireworks-tech-graph](tools/fireworks-tech-graph.md) — Claude Code skill for SVG/PNG architecture diagrams from natural language; 8 styles, 14 types, AI/Agent domain built-ins (RAG/Multi-Agent/Tool Call patterns, 40+ product icons); MIT ← new 2026-06-10
 
 **Data Sources**
 - [Polygon.io](trading/data-sources/polygon.md) — market data (free: EOD only; paid: options, ticks, Greeks)
