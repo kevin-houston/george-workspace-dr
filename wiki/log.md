@@ -339,3 +339,6 @@ Pages created: 1 (wiki/trading/tools/quant-mind.md). Pages updated: 1 (index.md)
 
 ## [2026-06-10] ingest | fireworks-tech-graph (github.com/yizhiyanhua-ai/fireworks-tech-graph)
 Pages created: 1 (wiki/tools/fireworks-tech-graph.md). Pages updated: 1 (index.md). Key entities: Brad Zhang (bradzhang.dev), Claude Code skill, SVG/PNG diagram generation. 8 styles including Claude Official and Dark Luxury. 14 diagram types. AI/Agent domain patterns built-in (RAG, Multi-Agent, Tool Call, Mem0). MIT license. Not a trading tool — documentation/visualization use case.
+
+## [2026-06-11] ingest | AI-Trader (github.com/HKUDS/AI-Trader)
+Pages created: 1 (wiki/trading/tools/ai-trader.md). Pages updated: 1 (trading/index.md). Key entities: HKUDS, ai4trade.ai, SKILL.md agent integration. Companion to Vibe-Trading (same lab). Social/agent trading platform: signal publishing, copy-trading, collective intelligence, Polymarket paper trading. MIT self-hostable. Assessment: low-medium priority; interesting for signal publishing and discovery, not for blindly copying signals.
