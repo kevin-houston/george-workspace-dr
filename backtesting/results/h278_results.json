@@ -1,0 +1,53 @@
+{
+  "hypothesis": "H278",
+  "description": "Low-Vol Anomaly: Volatility-Parity ETF Portfolio",
+  "confirmed": false,
+  "h270_baseline_oos_sharpe": 1.29,
+  "variant_a": {
+    "name": "Inverse-vol, risky ETFs only",
+    "is_sharpe": 0.5802,
+    "oos_sharpe": 0.7742,
+    "oos_cagr": 0.11,
+    "oos_max_drawdown": -0.2182,
+    "oos_neg_years": 2,
+    "corr_production": 0.5812
+  },
+  "variant_b": {
+    "name": "Inverse-vol + BIL (capped 30%)",
+    "is_sharpe": 0.6051,
+    "oos_sharpe": 0.8669,
+    "oos_cagr": 0.0861,
+    "oos_max_drawdown": -0.1545,
+    "oos_neg_years": 1,
+    "corr_production": 0.5793
+  },
+  "variant_c": {
+    "name": "Inverse-vol + 6m momentum filter",
+    "is_sharpe": 0.4228,
+    "oos_sharpe": 0.8757,
+    "oos_cagr": 0.1227,
+    "oos_max_drawdown": -0.1554,
+    "oos_neg_years": 1,
+    "corr_production": 0.6113
+  },
+  "variant_c_bil": {
+    "name": "Inverse-vol + momentum filter + BIL",
+    "is_sharpe": 0.8211,
+    "oos_sharpe": 0.7476,
+    "oos_cagr": 0.0572,
+    "oos_max_drawdown": -0.1229,
+    "oos_neg_years": 2,
+    "corr_production": 0.595
+  },
+  "variant_d": {
+    "name": "Vol-targeted inverse-vol (10% target)",
+    "is_sharpe": 0.7244,
+    "oos_sharpe": 0.5509,
+    "oos_cagr": 0.0793,
+    "oos_max_drawdown": -0.253,
+    "oos_neg_years": 3,
+    "corr_production": 0.5258
+  },
+  "spy_oos_sharpe": 0.8713,
+  "best_variant": null
+}

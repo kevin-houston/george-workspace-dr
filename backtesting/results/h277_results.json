@@ -1,0 +1,70 @@
+{
+  "hypothesis": "H277",
+  "description": "NASDAQ Stock Momentum 12-1 Skip-Month Signal",
+  "confirmed": true,
+  "survivorship_bias_warning": true,
+  "variant_a": {
+    "universe_size": 30,
+    "signal": "12-1 skip-month",
+    "n_hold": 5,
+    "is_sharpe": 1.2126,
+    "oos_sharpe": 1.2223,
+    "oos_cagr": 0.4226,
+    "oos_max_drawdown": -0.4576,
+    "oos_neg_years": 2,
+    "corr_production": 0.4332
+  },
+  "variant_a_12_0_comparison": {
+    "signal": "12-0 no-skip (H272 style)",
+    "is_sharpe": 2.8735,
+    "oos_sharpe": 2.6397,
+    "corr_production": 0.3911,
+    "skip_month_delta": -1.4174
+  },
+  "variant_b": {
+    "universe_size": 41,
+    "signal": "12-1 skip-month",
+    "n_hold": 5,
+    "is_sharpe": 1.4513,
+    "oos_sharpe": 1.078,
+    "oos_max_drawdown": -0.3642,
+    "oos_neg_years": 2,
+    "corr_production": 0.3812
+  },
+  "n_hold_sweep": [
+    {
+      "n_hold": 2,
+      "is_sharpe": 1.2398,
+      "oos_sharpe": 0.8489,
+      "max_drawdown": -0.5728,
+      "neg_years": 2,
+      "corr_prod": 0.41264846771706937
+    },
+    {
+      "n_hold": 3,
+      "is_sharpe": 1.32,
+      "oos_sharpe": 0.9951,
+      "max_drawdown": -0.4921,
+      "neg_years": 2,
+      "corr_prod": 0.40823854415990274
+    },
+    {
+      "n_hold": 5,
+      "is_sharpe": 1.2126,
+      "oos_sharpe": 1.2223,
+      "max_drawdown": -0.4576,
+      "neg_years": 2,
+      "corr_prod": 0.4332030870196348
+    },
+    {
+      "n_hold": 10,
+      "is_sharpe": 0.9422,
+      "oos_sharpe": 1.0862,
+      "max_drawdown": -0.3702,
+      "neg_years": 1,
+      "corr_prod": 0.42615818263853006
+    }
+  ],
+  "spy_oos_sharpe": 0.8713,
+  "production_oos_sharpe": 4.0098
+}
