@@ -345,3 +345,6 @@ Pages created: 1 (wiki/trading/tools/ai-trader.md). Pages updated: 1 (trading/in
 
 ## [2026-06-11] ingest | ContestTrade (github.com/FinStep-AI/ContestTrade)
 Pages created: 1 (wiki/trading/tools/contesttrade.md). Pages updated: 1 (trading/index.md). Key entities: FinStep-AI, arXiv:2508.00554 (Zhao et al. 2025), internal contest mechanism (dual-stage: data team + research team with scoring/selection layers). Event-driven stock selection. US market support in V2.0. Architecturally novel: contest selection vs. consensus/debate; relevant to H274/H280 multi-agent designs.
+
+## [2026-06-11] ingest | QuantMuse (github.com/0xemmkty/QuantMuse)
+Pages created: 1 (wiki/trading/tools/quantmuse.md). Pages updated: 1 (trading/index.md). Key entities: FactorCalculator, FactorScreener, BacktestEngine, LLMIntegration, C++ core engine. Multi-factor (momentum/value/quality/volatility) + LLM + ML. MIT. Assessment: moderate overlap with existing stack; FactorCalculator API is the most useful piece; not a replacement for our run_hNNN.py pipeline.
