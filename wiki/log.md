@@ -342,3 +342,6 @@ Pages created: 1 (wiki/tools/fireworks-tech-graph.md). Pages updated: 1 (index.m
 
 ## [2026-06-11] ingest | AI-Trader (github.com/HKUDS/AI-Trader)
 Pages created: 1 (wiki/trading/tools/ai-trader.md). Pages updated: 1 (trading/index.md). Key entities: HKUDS, ai4trade.ai, SKILL.md agent integration. Companion to Vibe-Trading (same lab). Social/agent trading platform: signal publishing, copy-trading, collective intelligence, Polymarket paper trading. MIT self-hostable. Assessment: low-medium priority; interesting for signal publishing and discovery, not for blindly copying signals.
+
+## [2026-06-11] ingest | ContestTrade (github.com/FinStep-AI/ContestTrade)
+Pages created: 1 (wiki/trading/tools/contesttrade.md). Pages updated: 1 (trading/index.md). Key entities: FinStep-AI, arXiv:2508.00554 (Zhao et al. 2025), internal contest mechanism (dual-stage: data team + research team with scoring/selection layers). Event-driven stock selection. US market support in V2.0. Architecturally novel: contest selection vs. consensus/debate; relevant to H274/H280 multi-agent designs.
