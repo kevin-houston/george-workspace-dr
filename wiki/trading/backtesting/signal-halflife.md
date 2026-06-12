@@ -464,3 +464,100 @@ The most current empirical estimate of momentum signal decay due to widespread A
 3. The H261b commodity trend (OOS Sharpe 0.922) may be relatively insulated — commodity markets have lower AI-driven crowding than equity momentum (smaller manager AUM targeting commodity ETFs)
 
 **Related:** arXiv:2512.11913 (Dec 2025) 'Not All Factors Crowd Equally' — mechanical factors (momentum, reversal) fit crowding model best; over-predicts remaining momentum alpha (0.30 predicted vs 0.15 actual)
+
+---
+
+## Hyperbolic Decay: Game-Theoretic Foundation (Lee 2025)
+
+**Source**: arXiv:2512.11913 (Lee, Dec 2025). "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay."
+
+**Key advance**: derives hyperbolic decay K/(1+λt) from a game-theoretic equilibrium model where competitive capital entry drives alpha decay. Unlike exponential decay (which implies constant hazard rate), hyperbolic decay allows for rapid initial compression followed by slower long-term decline — consistent with empirical factor returns.
+
+### Functional form fit (8 Fama-French factors, 1963-2024)
+
+| Factor type | Best decay model | Momentum R² comparison |
+|-------------|-----------------|------------------------|
+| Momentum | **Hyperbolic 0.65** | Hyperbolic >> Linear 0.51 >> Exponential 0.61 |
+| Short-term reversal | Hyperbolic (similar) | Mechanical factor: fits model |
+| Value (HML) | Poor fit (all models) | Judgment-based: doesn't fit |
+| Quality (RMW, CMA) | Poor fit | Judgment-based: doesn't fit |
+
+**Interpretation**: Mechanical factors (momentum, reversal) are directly arbitraged by capital flowing in — hyperbolic model applies. Judgment-based factors (value, quality) rely on analyst discretion and have idiosyncratic entry barriers; no model fits well.
+
+### Crowding post-2015 acceleration
+
+Out-of-sample (post-2015), the hyperbolic model over-predicts remaining alpha (0.30 vs 0.15 empirical), correlating with factor ETF AUM growth (ρ=-0.63 with excess alpha loss). This means:
+- The λ (decay rate parameter) has increased post-2015
+- Factor ETF proliferation has accelerated alpha harvesting
+- **Implication for our strategies**: H198 6-1m momentum and H228 alpha101 blend face faster-decaying edges than historical backtests suggest. Refit λ on 2015-2025 subsample.
+
+### Crowding predicts crash risk, NOT mean return
+
+Critical finding that updates the standard view that crowded factors have lower forward returns:
+
+| Factor | Crowding effect on mean | Crowding effect on CRASH RISK |
+|--------|------------------------|-------------------------------|
+| Reversal (STR) | None significant | **1.7-1.8× higher crash probability** (bottom decile) |
+| Momentum | None significant | **0.38× lower crash probability** |
+
+**Why this matters**: crowded momentum is actually SAFER from crash perspective (crowding = consensus = momentum continuation). Crowded reversal is the crash risk — crowded contrarian positions unwind violently when momentum reasserts.
+
+**Practical implication**: tracking factor ETF AUM as a proxy for crowding gives crash risk signal, not return timing signal. Use as risk management input, not alpha timing.
+
+### Python: fitting hyperbolic decay to our factor returns
+
+```python
+import numpy as np
+from scipy.optimize import curve_fit
+
+def hyperbolic_decay(t, K, lam):
+    """K / (1 + lambda * t): hyperbolic decay model."""
+    return K / (1 + lam * t)
+
+def fit_decay_model(ic_series: np.ndarray) -> dict:
+    """
+    Fit hyperbolic, linear, and exponential decay models to
+    an Information Coefficient (IC) time series.
+
+    ic_series: rolling IC over holding periods [1, 2, 3, ...] months
+    Returns: best model, fitted params, R² for each model
+    """
+    t = np.arange(1, len(ic_series) + 1, dtype=float)
+    results = {}
+
+    # Hyperbolic: K / (1 + λt)
+    try:
+        popt, _ = curve_fit(hyperbolic_decay, t, ic_series, p0=[ic_series[0], 0.1], maxfev=5000)
+        pred = hyperbolic_decay(t, *popt)
+        ss_res = np.sum((ic_series - pred)**2)
+        ss_tot = np.sum((ic_series - ic_series.mean())**2)
+        r2 = 1 - ss_res/ss_tot if ss_tot > 0 else 0
+        results['hyperbolic'] = {'params': {'K': popt[0], 'lambda': popt[1]}, 'r2': r2}
+    except Exception:
+        results['hyperbolic'] = {'r2': -999}
+
+    # Exponential: A * exp(-λt)
+    try:
+        popt_exp, _ = curve_fit(lambda t, A, lam: A * np.exp(-lam * t),
+                                 t, ic_series, p0=[ic_series[0], 0.1], maxfev=5000)
+        pred_exp = popt_exp[0] * np.exp(-popt_exp[1] * t)
+        ss_res_exp = np.sum((ic_series - pred_exp)**2)
+        r2_exp = 1 - ss_res_exp/ss_tot if ss_tot > 0 else 0
+        results['exponential'] = {'params': {'A': popt_exp[0], 'lambda': popt_exp[1]}, 'r2': r2_exp}
+    except Exception:
+        results['exponential'] = {'r2': -999}
+
+    # Linear: a - b*t
+    p = np.polyfit(t, ic_series, 1)
+    pred_lin = np.polyval(p, t)
+    ss_res_lin = np.sum((ic_series - pred_lin)**2)
+    r2_lin = 1 - ss_res_lin/ss_tot if ss_tot > 0 else 0
+    results['linear'] = {'params': {'slope': p[0], 'intercept': p[1]}, 'r2': r2_lin}
+
+    best = max(results, key=lambda k: results[k]['r2'])
+    return {'best_model': best, 'models': results}
+
+# Example: fit momentum IC decay from H198/H228 rolling IC diagnostics
+# momentum_ic_by_lag = [IC_1m, IC_2m, IC_3m, IC_6m, IC_12m]
+# result = fit_decay_model(np.array(momentum_ic_by_lag))
+```
