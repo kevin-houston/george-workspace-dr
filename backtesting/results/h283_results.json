@@ -1,0 +1,70 @@
+{
+  "hypothesis": "H283",
+  "description": "Bond ETF Carry + Momentum Rotation (H045 Enhancement)",
+  "confirmed": false,
+  "h045_oos_baseline": 1.351,
+  "gate": "OOS Sharpe > H045 baseline (1.351)",
+  "benchmarks": {
+    "agg_oos_sharpe": 0.2984,
+    "h045_recomputed_oos_sharpe": 1.4262
+  },
+  "variants": {
+    "alpha=1.00 (pure momentum)": {
+      "alpha": 1.0,
+      "is_sharpe": 0.7829,
+      "oos_sharpe": 0.7434,
+      "oos_cagr": 0.0448,
+      "oos_max_drawdown": -0.0591,
+      "oos_neg_years": 3,
+      "corr_production": 0.3705,
+      "corr_h045": 0.7337,
+      "passes": false
+    },
+    "alpha=0.75 (blend 75/25)": {
+      "alpha": 0.75,
+      "is_sharpe": 0.9223,
+      "oos_sharpe": 0.679,
+      "oos_cagr": 0.0423,
+      "oos_max_drawdown": -0.0835,
+      "oos_neg_years": 3,
+      "corr_production": 0.4538,
+      "corr_h045": 0.6944,
+      "passes": false
+    },
+    "alpha=0.50 (blend 50/50)": {
+      "alpha": 0.5,
+      "is_sharpe": 0.7587,
+      "oos_sharpe": 0.6023,
+      "oos_cagr": 0.0389,
+      "oos_max_drawdown": -0.1246,
+      "oos_neg_years": 4,
+      "corr_production": 0.5149,
+      "corr_h045": 0.5814,
+      "passes": false
+    },
+    "alpha=0.25 (blend 25/75)": {
+      "alpha": 0.25,
+      "is_sharpe": 0.4855,
+      "oos_sharpe": 0.4637,
+      "oos_cagr": 0.0385,
+      "oos_max_drawdown": -0.1709,
+      "oos_neg_years": 3,
+      "corr_production": 0.4577,
+      "corr_h045": 0.3217,
+      "passes": false
+    },
+    "alpha=0.00 (pure carry)": {
+      "alpha": 0.0,
+      "is_sharpe": 0.6313,
+      "oos_sharpe": 0.3929,
+      "oos_cagr": 0.0348,
+      "oos_max_drawdown": -0.2587,
+      "oos_neg_years": 3,
+      "corr_production": 0.3906,
+      "corr_h045": 0.3369,
+      "passes": false
+    }
+  },
+  "best_variant": null,
+  "best_oos_sharpe": null
+}
