@@ -175,7 +175,112 @@
       "type": "wiki_update",
       "risk": "low",
       "source": "arXiv:2512.11913"
+    },
+    {
+      "file": "5_wiki_ai_alpha_decay.json",
+      "id": "wiki-ai-driven-alpha-decay-halflife",
+      "type": "wiki_update",
+      "risk": "low",
+      "source": "arXiv:2605.23905",
+      "session": "dream-cycle-session-2"
     }
   ],
-  "summary": "4 high-relevance proposals staged. Theme: LLM augmentation of existing alpha signals (H279 momentum filter, H280 multi-agent equity, H281 macro-LLM ETF tilt) + methodology improvement (hyperbolic alpha decay model with crash-risk finding). Phase 1 wiki expansion added execution-quality.md to paper-trading section (previously thinnest at 5 pages, no IS/slippage analysis). Key data points: MarketSenseAI live OOS +2.18%/month vs +1.15% benchmark at p=0.003; FRED macro z-score LLM tilt ΔSharpe +0.044 (p<0.10); hyperbolic decay R²=0.65 for momentum (beats linear/exponential)."
+  "session2_additional_searches": [
+    {
+      "angle": "arXiv: pairs trading + cointegration + LLM (deeper search)",
+      "findings": [
+        {
+          "title": "No new LLM + pairs trading papers found (2025-2026)",
+          "relevance": 0,
+          "reason": "The LLM + pairs trading combination does not appear to have active 2025-2026 research. Most recent work (H200 NOT CONFIRMED on graphical matching) remains the frontier. Equity pairs family exhausted. Crypto pairs covered by H264b."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: PEAD + multimodal + deep learning (session 2)",
+      "findings": [
+        {
+          "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+          "arxiv": "2605.25894",
+          "year": 2026,
+          "summary": "Combines 15 fundamental metrics + 3 price technicals + FinBERT sentiment. Transformer > LSTM. Ablation confirms FinBERT adds value. No trading metrics provided (Sharpe/WR not reported).",
+          "relevance": 5,
+          "reason": "Validates multi-modal signal fusion for earnings. But no trading performance metrics, only classification (direction accuracy not reported). Too thin for hypothesis staging without performance data. Supports adding price technicals to existing H163/H174 pipeline as future H284 — but need a paper with actual trading results first."
+        },
+        {
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+          "arxiv": "2509.24254",
+          "year": 2025,
+          "summary": "FinBERT highest predictive power across 138K press releases 2005-2023. Press release soft info = EPS surprise in informativeness. Key caveat: 'stock prices fully reflect press release content at market open' — implies PEAD must be traded pre-open.",
+          "relevance": 6,
+          "reason": "Validates our H163/H174 approach (FinBERT on 8-K). The 'prices reflect at open' finding CONFIRMS why our pipeline uses OPG (opening gap) entries — we need to be in before market open to capture the drift. Not staging new hypothesis; confirms existing architecture."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: factor momentum (session 2)",
+      "findings": [
+        {
+          "title": "Cross-sectional factor momentum: evidence from multiple formation periods",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/13504851.2025.2472032",
+          "year": 2025,
+          "summary": "Recent and intermediate-past formation periods produce significant factor momentum. Published Applied Economics Letters 2025.",
+          "relevance": 4,
+          "reason": "Confirms existing factor momentum findings but doesn't add new actionable angle beyond what H255/H256 tested. Not staging."
+        }
+      ]
+    },
+    {
+      "angle": "arXiv: multi-agent LLM trading systems (session 2)",
+      "findings": [
+        {
+          "title": "QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining",
+          "arxiv": "2602.07085",
+          "year": 2026,
+          "summary": "GPT-5.2 + evolutionary algorithm for factor discovery. IC=0.0472, ARR=4.68% on S&P 500 over 4 years. CSI 300 primary (40.28% CSI 500 cumulative 4yr). Mutation/crossover of factor trajectories. OOS validation rigor not fully documented.",
+          "relevance": 5,
+          "reason": "Interesting evolutionary approach but ARR 4.68% on S&P 500 is below our existing confirmed strategies (H217 alpha101 OOS Sharpe 1.559). Look-ahead bias documentation insufficient for staging. Note for future reference if OOS validation improved."
+        },
+        {
+          "title": "AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets",
+          "arxiv": "2605.23905",
+          "year": 2026,
+          "summary": "Derives h(φ) = ln2/[θ+δ(φ)]. At φ≈0.7 (current AI adoption), implies 18-month half-life vs 5-7 years pre-AI. 42% portfolio convergence increase 2013-2024 from 99.5M 13F holdings. Monoculture equilibrium: net alpha=0 when all funds use identical signals.",
+          "relevance": 8,
+          "reason": "Theoretical model explaining WHY signal half-life is 18 months (not just empirical observation). Extends arXiv:2512.11913 (proposal #4) with formal derivation. Directly relevant to our H279-H281 pipeline — confirmed LLM-augmented strategies have ~18-month expected shelf life. STAGED as wiki update #5."
+        },
+        {
+          "title": "FinPos: A Position-Aware Trading Agent System for Real Financial Markets",
+          "arxiv": "2510.27251",
+          "year": 2025,
+          "summary": "Dual-agent architecture (directional reasoning + risk-aware position adjustment). Multi-timescale rewards. 'Surpasses state-of-the-art trading agents in position-aware trading task.' Addresses LLM agent gap: treating each trade as isolated vs continuous position management.",
+          "relevance": 6,
+          "reason": "Novel position-awareness concept relevant to H274 multi-agent PEAD upgrade (already staged). The dual-agent architecture could inform how our PEAD agent manages existing positions vs new entries. Note for H274 design document — not staging separately."
+        }
+      ]
+    },
+    {
+      "angle": "GitHub: trending quantitative finance repos (session 2)",
+      "findings": [
+        {
+          "title": "hftbacktest",
+          "url": "https://github.com/high-frequency-trading/hftbacktest",
+          "stars": 3900,
+          "summary": "HFT backtesting in Rust. Order book replay, latency simulation.",
+          "relevance": 2,
+          "reason": "Not relevant for monthly-rebalanced strategies. Note for future if we expand to intraday."
+        },
+        {
+          "title": "gs-quant (Goldman Sachs)",
+          "url": "https://github.com/goldmansachs/gs-quant",
+          "stars": 10000,
+          "summary": "GS Python quant toolkit: derivatives pricing, risk analytics, time series.",
+          "relevance": 4,
+          "reason": "High-quality institutional toolkit. Most relevant for options pricing and derivatives. Could supplement existing vollib/QuantLib usage. Note in tools wiki."
+        }
+      ]
+    }
+  ],
+  "staged_count": 5,
+  "summary": "5 high-relevance proposals staged across two sessions. Session 1 theme: LLM augmentation of existing alpha signals (H279 momentum filter, H280 multi-agent equity, H281 macro-LLM ETF tilt) + hyperbolic alpha decay (arXiv:2512.11913). Session 2 additions: AI-driven alpha decay theory (arXiv:2605.23905 — h(φ) formula, monoculture equilibrium, 18-month half-life explanation); superforecasting wiki page (Ten Commandments, domain bias table, LLM calibration layer, H185 gates). Phase 1 wiki expansion (both sessions): execution-quality.md + superforecasting-methods.md + ai-model-benchmarks.md indexed. Key new data: portfolio convergence +42% 2013-2024 from 99.5M 13F holdings; LLM strategies face ~18-month shelf life before monoculture equilibrium; political market prices on Kalshi systematically 5-8pp too close to 50% (arXiv:2602.19520)."
 }
