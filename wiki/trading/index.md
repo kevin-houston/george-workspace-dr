@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-11 (execution-quality.md new — IS/VWAP benchmarks, Alpaca paper fill mechanics, per-strategy slippage budgets, paper→live degradation estimates; dream cycle: H279 LLM momentum filter, H280 MarketSenseAI replication, H281 macro-LLM ETF rotation, hyperbolic alpha decay wiki)
+updated: 2026-06-11 (superforecasting-methods.md new — Ten Commandments, domain bias table, calibration layer, LLM benchmarks, H185 integration; ai-model-benchmarks.md indexed; research-log/2026-06-11.md updated)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -74,6 +74,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Economic Nowcasting Playbook](prediction-markets/nowcasting-playbook.md) ← new 2026-05-27 (per-release operational playbook: CPI/NFP/FOMC/PCE/GDP; Cleveland Fed + Atlanta GDPNow + NY Fed nowcast sources; shelter lag model; ADP→NFP pipeline; Brier score tracking; H185 implementation path)
   - [Other Platforms](prediction-markets/other-platforms.md) ← expanded 2026-05-02 (IBKR ForecastTrader full API, Kalshi Timeless mechanics, emerging platforms)
   - [Polymarket](prediction-markets/polymarket.md) ← 2026-04-29 (full CLOB API, Ethereum auth, order placement, WebSocket streaming, fee comparison vs Kalshi, cross-platform arb scanner)
+  - [AI Model Benchmarks](prediction-markets/ai-model-benchmarks.md) ← new 2026-05-29 (Prediction Arena arXiv:2604.07355 — 6 models with real capital; all lost money on Kalshi weather-dominated set; Polymarket better venue for AI agents; grok-4-20 only profitable prior run +10.9%)
+  - [Superforecasting Methods](prediction-markets/superforecasting-methods.md) ← new 2026-06-11 (Ten Commandments, reference class forecasting, Bayesian updating, calibration layer for LLMs, domain bias table arXiv:2602.19520, LLM benchmark landscape arXiv:2512.16030/2507.04562/2506.01578, H185 gates)
 - [Backtesting](backtesting/) — setup, results, methodology
   - [Design Principles](backtesting/design-principles.md) ← expanded 2026-05-05 (IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado)
   - [Walk-Forward & CPCV](backtesting/walk-forward-cpcv.md) ← new 2026-05-07 (WFO variants, CPCV algorithm, purging/embargoing, DSR formulas, Python libs: timeseriescv/skfolio/mlfinlab, when to use what)
