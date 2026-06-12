@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-11 (superforecasting-methods.md new — Ten Commandments, domain bias table, calibration layer, LLM benchmarks, H185 integration; ai-model-benchmarks.md indexed; research-log/2026-06-11.md updated)
+updated: 2026-06-12 (sources/multibagger-yartseva-2025.md new — FCF yield #1 driver, inverted momentum entry, asset_growth>EBITDA_growth exclusion signal, H285 proposed)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -91,6 +91,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Live Graduation Criteria & Performance Attribution](paper-trading/live-graduation-criteria.md) ← new 2026-05-30 (SPRT test for strategy validation, minimum trade counts, regime coverage gates, paper→live execution attribution, Alpaca migration steps)
   - [Tax & After-Tax Return Modeling](paper-trading/tax-and-after-tax-returns.md) ← new 2026-06-05 (STCG/LTCG rates for IL, wash sale rule for algo trading, HIFO lot selection, after-tax Sharpe formula, expected ~40% tax drag on STCG monthly-rebalanced strategies, IRS Form 8949 reporting)
   - [Execution Quality & Slippage Analysis](paper-trading/execution-quality.md) ← new 2026-06-11 (IS/VWAP benchmarks, Alpaca paper fill mechanics, per-strategy slippage budgets H026/H181/PEAD, paper→live degradation estimates, graduation gate thresholds)
+- [Sources](sources/) — ingested papers and working papers
+  - [The Alchemy of Multibagger Stocks](sources/multibagger-yartseva-2025.md) ← new 2026-06-12 (Yartseva 2025; FCF/P = #1 factor; EPS growth NOT sig; small-cap +37.7% vs large +9.7%; asset_growth>EBITDA_growth −22.8pp; near-12m-low entry signal; rate-hike −8-12pp; H285 proposed)
 - [Research Log](research-log/) — nightly research summaries
   - [2026-06-11](research-log/2026-06-11.md) — wiki expansion: execution-quality.md new (IS benchmarks, paper fill mechanics, slippage budgets, graduation gates); dream cycle: H279 LLM momentum filter arXiv:2510.26228, H280 MarketSenseAI arXiv:2604.17327, H281 macro-LLM ETF arXiv:2606.08283, hyperbolic alpha decay wiki arXiv:2512.11913
   - [2026-06-08](research-log/2026-06-08.md) — wiki expansion: crypto-data-sources.md new (yfinance fragility, ccxt/CoinGecko migration path); dream cycle: H264b trailing-stop crypto, H265 drift-regime factor (arXiv:2511.12490 OOS Sharpe >13 — skeptical replication candidate), QuantStats wiki staged
