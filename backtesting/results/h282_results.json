@@ -1,0 +1,91 @@
+{
+  "hypothesis": "H282",
+  "description": "Dividend Growth ETF Rotation",
+  "confirmed": false,
+  "gates": {
+    "oos_sharpe_threshold": 1.0,
+    "require_beats_equal_weight": true
+  },
+  "benchmarks": {
+    "spy_oos_sharpe": 0.8636,
+    "dvy_bh_oos_sharpe": 0.5578,
+    "equal_weight_core_oos_sharpe": 0.6594,
+    "equal_weight_ext_oos_sharpe": 0.6636
+  },
+  "core_variants": {
+    "A1: Top-1 growth": {
+      "is_sharpe": 0.5564,
+      "oos_sharpe": 0.7817,
+      "oos_cagr": 0.1224,
+      "oos_max_drawdown": -0.1713,
+      "oos_neg_years": 1,
+      "corr_production": 0.4898,
+      "corr_spy": 0.7961,
+      "passes": false
+    },
+    "A2: Top-2 growth": {
+      "is_sharpe": 0.648,
+      "oos_sharpe": 0.4128,
+      "oos_cagr": 0.0612,
+      "oos_max_drawdown": -0.2271,
+      "oos_neg_years": 1,
+      "corr_production": 0.4346,
+      "corr_spy": 0.8298,
+      "passes": false
+    },
+    "A3: Hybrid Top-1": {
+      "is_sharpe": 0.5558,
+      "oos_sharpe": 0.7408,
+      "oos_cagr": 0.1195,
+      "oos_max_drawdown": -0.1713,
+      "oos_neg_years": 0,
+      "corr_production": 0.4828,
+      "corr_spy": 0.795,
+      "passes": false
+    },
+    "A4: Hybrid Top-2": {
+      "is_sharpe": 0.6147,
+      "oos_sharpe": 0.5243,
+      "oos_cagr": 0.0776,
+      "oos_max_drawdown": -0.2023,
+      "oos_neg_years": 1,
+      "corr_production": 0.4586,
+      "corr_spy": 0.8171,
+      "passes": false
+    }
+  },
+  "extended_variants": {
+    "B1: Top-1 growth": {
+      "is_sharpe": 1.4585,
+      "oos_sharpe": 0.7817,
+      "oos_cagr": 0.1224,
+      "oos_max_drawdown": -0.1713,
+      "oos_neg_years": 1,
+      "corr_production": 0.4898,
+      "corr_spy": 0.7961,
+      "passes": false
+    },
+    "B2: Top-2 growth": {
+      "is_sharpe": 1.434,
+      "oos_sharpe": 0.4128,
+      "oos_cagr": 0.0612,
+      "oos_max_drawdown": -0.2271,
+      "oos_neg_years": 1,
+      "corr_production": 0.4346,
+      "corr_spy": 0.8298,
+      "passes": false
+    },
+    "B3: Hybrid Top-1": {
+      "is_sharpe": 1.4882,
+      "oos_sharpe": 0.7408,
+      "oos_cagr": 0.1195,
+      "oos_max_drawdown": -0.1713,
+      "oos_neg_years": 0,
+      "corr_production": 0.4828,
+      "corr_spy": 0.795,
+      "passes": false
+    }
+  },
+  "best_variant": "A1: Top-1 growth",
+  "best_oos_sharpe": 0.7817
+}
