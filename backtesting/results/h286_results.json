@@ -1,0 +1,71 @@
+{
+  "hypothesis": "H286",
+  "description": "Macro Regime-Gated FCF/P (COWZ + SPY 200MA + VIX Gate)",
+  "cowz_baseline_oos": {
+    "cagr": 0.1508,
+    "sharpe": 0.8927,
+    "max_drawdown": -0.1762,
+    "n_months": 65,
+    "neg_years": 0
+  },
+  "spy_oos": {
+    "cagr": 0.1541,
+    "sharpe": 0.9982,
+    "max_drawdown": -0.2393,
+    "n_months": 65,
+    "neg_years": 1
+  },
+  "variant_A": {
+    "is_stats": {
+      "cagr": 0.0017,
+      "sharpe": 0.0129,
+      "max_drawdown": -0.2966,
+      "n_months": 48,
+      "neg_years": 3
+    },
+    "oos_stats": {
+      "cagr": 0.0711,
+      "sharpe": 0.6369,
+      "max_drawdown": -0.1757,
+      "n_months": 65,
+      "neg_years": 1
+    }
+  },
+  "variant_B": {
+    "is_stats": {
+      "cagr": 0.0825,
+      "sharpe": 0.6241,
+      "max_drawdown": -0.1532,
+      "n_months": 42,
+      "neg_years": 1
+    },
+    "oos_stats": {
+      "cagr": 0.1203,
+      "sharpe": 1.0313,
+      "max_drawdown": -0.1616,
+      "n_months": 65,
+      "neg_years": 2
+    },
+    "corr_spy_oos": 0.5958
+  },
+  "variant_C": {
+    "is_stats": {
+      "cagr": 0.0419,
+      "sharpe": 0.283,
+      "max_drawdown": -0.1752,
+      "n_months": 48,
+      "neg_years": 2
+    },
+    "oos_stats": {
+      "cagr": 0.1054,
+      "sharpe": 0.6824,
+      "max_drawdown": -0.2315,
+      "n_months": 65,
+      "neg_years": 1
+    },
+    "corr_spy_oos": 0.8357
+  },
+  "best_variant": "B",
+  "best_oos_sharpe": 1.0313,
+  "verdict": "CONFIRMED"
+}

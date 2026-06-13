@@ -1,0 +1,11 @@
+{
+  "hypothesis": "H284",
+  "description": "FCF/P Stock Screener (Free Cash Flow Yield)",
+  "etf_proxy_mode": true,
+  "cowz_oos_sharpe": 0.7368,
+  "cowz_oos_cagr": 0.1454,
+  "cowz_oos_maxdd": -0.2385,
+  "spy_oos_sharpe": 0.9205,
+  "verdict": "NOT CONFIRMED",
+  "note": "yfinance quarterly CF limited to ~5yr; FMP key-metrics 403; COWZ ETF used as proxy"
+}

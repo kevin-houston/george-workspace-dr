@@ -1,0 +1,38 @@
+{
+  "hypothesis": "H285",
+  "description": "Earnings Quality Factor: Accruals Anomaly via Quality ETF Rotation",
+  "variant_A_rotation": {
+    "is_stats": {
+      "cagr": 0.1174,
+      "sharpe": 1.0326,
+      "max_drawdown": -0.1349,
+      "n_months": 72,
+      "neg_years": 1
+    },
+    "oos_stats": {
+      "cagr": 0.152,
+      "sharpe": 0.9319,
+      "max_drawdown": -0.1942,
+      "n_months": 77,
+      "neg_years": 1
+    },
+    "walkforward_ratio": 0.9025,
+    "corr_spy_oos": 0.9687
+  },
+  "qual_bh_oos_sharpe": 0.7942,
+  "spy_is": {
+    "cagr": 0.1188,
+    "sharpe": 1.0449,
+    "max_drawdown": -0.1353,
+    "n_months": 72,
+    "neg_years": 1
+  },
+  "spy_oos": {
+    "cagr": 0.1586,
+    "sharpe": 0.9205,
+    "max_drawdown": -0.2393,
+    "n_months": 77,
+    "neg_years": 1
+  },
+  "verdict": "CONFIRMED"
+}
