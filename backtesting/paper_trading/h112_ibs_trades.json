@@ -24,5 +24,31 @@
     "order_id": "fc1b6032-3a97-4018-8cc5-c42ff9060a2a",
     "submitted_at": "2026-06-08T09:45:11.643669",
     "equity": 103682.01
+  },
+  {
+    "date": "2026-06-12",
+    "symbol": "XLK",
+    "action": "SELL",
+    "qty": 111.9555,
+    "price": 183.24,
+    "prev_ibs": 0.9372,
+    "gap": 0.000164,
+    "reason": "IBS exit: prev_ibs 0.937 > 0.9",
+    "order_id": "e27d5cd4-7948-42ff-918b-e9b7e452ac01",
+    "submitted_at": "2026-06-12T09:45:12.761428",
+    "equity": 101640.49
+  },
+  {
+    "date": "2026-06-12",
+    "symbol": "SMH",
+    "action": "SELL",
+    "qty": 13.8889,
+    "price": 607.57,
+    "prev_ibs": 0.9277,
+    "gap": -0.003085,
+    "reason": "IBS exit: prev_ibs 0.928 > 0.75",
+    "order_id": "9a9cd11c-d135-4bc4-8f22-a0bac311bfcc",
+    "submitted_at": "2026-06-12T09:45:13.330978",
+    "equity": 101640.49
   }
 ]

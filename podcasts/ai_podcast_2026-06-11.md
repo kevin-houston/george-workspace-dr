@@ -1,171 +1,152 @@
 # Daily AI Insights — June 11, 2026
-## Episode Title: Trillion-Dollar Reckoning
+## Episode Title: Microsoft Goes It Alone
 
-**Runtime:** ~13 minutes  
-**Hosts:** Alex (male), Jordan (female)  
+**Runtime:** ~12–14 minutes
+**Hosts:** Alex (male), Jordan (female)
 **Date:** Thursday, June 11, 2026
 
 ---
 
 ## INTRO
 
-**Alex:** Good morning and welcome to Daily AI Insights. I'm Alex.
+**Alex:** Welcome to Daily AI Insights. I'm Alex.
 
-**Jordan:** And I'm Jordan. It is Thursday, June 11th, and the AI industry is having one of those weeks where the numbers are so large they start to lose meaning.
+**Jordan:** And I'm Jordan. It is Thursday, June 11, 2026, and this week has been genuinely consequential for the AI industry — Microsoft just cut its own model family loose from OpenAI, two competing AI labs are racing each other to Wall Street, Congress has written the first serious federal AI bill, and a Chinese lab has permanently repriced the frontier API market.
 
-**Alex:** We have four stories today, and every single one of them involves a figure with a B or a T attached to it.
+**Alex:** We'll get into all of it. Let's start with the story that has the most long-term structural significance: Microsoft just launched seven in-house AI models, and they explicitly built them without OpenAI.
 
-**Jordan:** Trillion-dollar valuations, hundred-billion-dollar infrastructure bets, and a startup that grew from thirty-seven million to nearly half a billion in annualized revenue in twelve months.
-
-**Alex:** Plus Congress — bipartisan Congress, which is a phrase you don't hear often — actually put a federal AI governance bill on paper.
-
-**Jordan:** We'll get into all of it. Let's start with the one that rewrote the AI power rankings.
+**Jordan:** The era of that partnership being load-bearing infrastructure for Microsoft is over. We have the receipts.
 
 ---
 
-## SEGMENT 1: Anthropic Nears a Trillion Dollars
+## SEGMENT 1 — Microsoft Builds Its Own Stack: The MAI Family
 
-**Alex:** So Anthropic. The company raised sixty-five billion dollars in a Series H round that closed on May 28th, valuing the company at nine hundred and sixty-five billion dollars post-money.
+**Alex:** So to set the scene — Microsoft Build 2026 happened last week, and Microsoft AI used it to announce what they're calling the MAI model family. Seven models, all trained in-house, all without OpenAI's involvement.
 
-**Jordan:** That's not a typo. Nine hundred and sixty-five billion. And what makes this especially notable is that it puts Anthropic above OpenAI in private market valuation for the first time.
+**Jordan:** And that last part matters because it wasn't always possible. Back in April, the Microsoft-OpenAI partnership restrictions were lifted, which gave Microsoft full rights to train its own models independently. This MAI launch is the first full exercise of those rights.
 
-**Alex:** OpenAI was sitting at roughly eight hundred and fifty-two billion. Anthropic just lapped them.
+**Alex:** Right. The headline model is MAI-Thinking-1, the reasoning flagship. It's a 35 billion active parameter mixture-of-experts model with a 256K context window. Microsoft is claiming it reaches 97 percent on AIME 2025 and 94.5 percent on AIME 2026.
 
-**Jordan:** The round was co-led by Altimeter, Dragoneer, Greenoaks, and Sequoia, with a long list of institutional names — Fidelity, T. Rowe Price, Blackstone, Temasek, GIC. There's also fifteen billion dollars in previously committed infrastructure investment baked in, including five billion from Amazon.
+**Jordan:** For listeners who aren't deep in the benchmarks — AIME is the American Invitational Mathematics Examination, and it's become one of the harder reasoning benchmarks that frontier labs use to differentiate models. Those numbers put MAI-Thinking-1 in serious company.
 
-**Alex:** And then you have strategic chip partners — Micron, Samsung, SK Hynix — who are participating in the round. So it's not just capital, it's supply chain access.
+**Alex:** Microsoft is also claiming it's preferred over Claude Sonnet 4.6 in blind human evaluations. The training data is fully traceable — no distillation from other labs, enterprise-grade provenance. That's actually a meaningful differentiation for corporate customers who care about supply chain.
 
-**Jordan:** That's a key point. Anthropic's CFO Krishna Rao said the funding would help them "serve the historic demand we're experiencing, stay at the research frontier, and bring Claude to more of the places where work happens." That last phrase is interesting — they're specifically calling out enterprise deployment.
+**Jordan:** The second model that matters immediately for builders is MAI-Code-1-Flash. Five billion active parameters, live in GitHub Copilot right now, in the model picker in VS Code. Microsoft says it uses 60 percent fewer tokens than comparable coding models and outperforms Claude Haiku 4.5 on coding benchmarks at a lower price.
 
-**Alex:** And the revenue trajectory backs it up. Run-rate revenue crossed forty-seven billion dollars as of mid-May. That's a company growing fast enough to justify a near-trillion-dollar valuation — at least by current AI market logic.
+**Alex:** That "fewer tokens" claim is more interesting than any benchmark number. Token efficiency is where developer costs live. If your everyday autocomplete and inline help is using a model that's 60 percent cheaper to run, that compounds fast at scale.
 
-**Jordan:** They've also been signing massive compute deals. Five gigawatts of capacity with Amazon, another five with Google and Broadcom on TPUs, and GPU access through SpaceX. These aren't just vendor agreements — these are the infrastructure rails the next generation of Claude models will run on.
+**Jordan:** The rest of the family includes MAI-Image-2.5 for image generation — ranking above Gemini on the Arena leaderboard — MAI-Transcribe-1.5 for speech-to-text across 43 languages at five times the speed of current rivals, and MAI-Voice-2 for speech generation across 15-plus languages.
 
-**Alex:** They also confidentially filed an S-1 with the SEC in early June. So an IPO is very much on the horizon.
+**Alex:** What I want to pull back and highlight is the strategic inflection here. Microsoft has been the largest investor and distribution partner for OpenAI. GPT-4, GPT-4o, o1 — all of that has been the engine under the hood of Copilot and Azure AI. They are now building their own engine.
 
-**Jordan:** For context: if Anthropic goes public at anything near this valuation, it would be one of the largest tech IPOs in history. The question for investors is whether the revenue growth rate can justify a number that's still, technically, below a trillion.
+**Jordan:** And not just prototypes. MAI-Code-1-Flash is shipping to GitHub Copilot users today. MAI-Thinking-1 is going to Azure AI Foundry. These are not research previews. Microsoft's blog post used the phrase "hill-climbing machine" to describe their development philosophy — fast iteration, competitive positioning, not a one-time announcement.
 
-**Alex:** And the broader question: does this mean the AI funding market has completely detached from traditional valuation metrics, or is forty-seven billion in run-rate revenue genuinely worth nearly a trillion?
-
-**Jordan:** That's the debate that will run through the IPO roadshow. But right now, the market has voted — and it voted big.
+**Alex:** If you're a developer building on Azure or using GitHub Copilot, this week's news means your AI stack just got more diverse. You're no longer dependent on a single upstream model provider. That's a meaningful change in the risk profile of what you're building on.
 
 ---
 
-## SEGMENT 2: Devin's $492 Million Moment
+## SEGMENT 2 — The AI IPO Race: Anthropic vs. OpenAI
 
-**Alex:** Our second story is Cognition, the company behind Devin — the autonomous AI software engineer.
+**Alex:** Okay, segment two. The AI industry is about to have its IPO moment — or really, its IPO race. Anthropic filed a confidential S-1 with the SEC on June 1st. OpenAI followed with its own confidential filing on June 8th. Two of the most valuable private companies in the world, filing within a week of each other.
 
-**Jordan:** Cognition raised over one billion dollars in late May at a twenty-five billion dollar pre-money valuation. For context, eight months earlier, in September 2025, they raised four hundred million at a ten-point-two billion post-money valuation.
+**Jordan:** The numbers are striking. Anthropic's filing came after a $65 billion Series H round that put its valuation at $965 billion. OpenAI is at $852 billion. So Anthropic actually edges out OpenAI on paper valuation right now — which would have seemed impossible eighteen months ago.
 
-**Alex:** So the valuation more than doubled in under a year. And the revenue numbers explain why. Devin's annualized revenue run-rate is now four hundred and ninety-two million dollars.
+**Alex:** Revenue tells the same story. Anthropic is reporting a $47 billion annual run-rate, up from $10 billion last year. OpenAI disclosed $20-plus billion in 2025 annual recurring revenue. Both are growing at a pace that's genuinely hard to comprehend.
 
-**Jordan:** That's up from thirty-seven million in annualized revenue in May of 2025. Twelve months, thirteen-fold growth.
+**Jordan:** There's a catch with OpenAI's picture, though. Their internal projections show $14 billion in losses for 2026. That's the reality of running frontier compute infrastructure at this scale. Anthropic, by contrast, says it's approaching its first profitable quarter, which is a very different investor story.
 
-**Alex:** The round was led by Lux Capital, General Catalyst, and 8VC. And the customer list is worth reading out loud: Mercedes-Benz, NASA, Goldman Sachs, Santander. These are not early adopter startups. These are institutions that do not ship software casually.
+**Alex:** Both filings are confidential, which is standard — it lets them go back and forth with the SEC before the S-1 goes public. Reports point to Anthropic targeting a listing as soon as October, with OpenAI likely to follow.
 
-**Jordan:** And Cognition claims that eighty-nine percent of the code committed by their own engineers is now written by Devin. They're essentially eating their own cooking at scale.
+**Jordan:** What's interesting about this race is what it reveals about positioning. Anthropic going first signals confidence that its story — safety-focused, enterprise-grade, profitable trajectory — is the right narrative for public markets right now.
 
-**Alex:** This story matters for developers and builders because it's a leading indicator of where enterprise software development is going. Devin isn't a code autocomplete tool — it takes a task, navigates a codebase, writes tests, runs them, debugs failures, and iterates. It's autonomous in a way that earlier coding assistants weren't.
+**Alex:** OpenAI's story is more complicated. High valuation, large losses, a Microsoft relationship that just became more competitive given the MAI announcement we just covered. But OpenAI still has the consumer brand recognition that Anthropic doesn't.
 
-**Jordan:** And the competitive pressure is real. Anthropic has Claude Code, OpenAI has Codex, Google has Jules. Cognition acquired the remaining assets of Windsurf earlier this year. So they're trying to consolidate market share while defending against the model giants.
+**Jordan:** For developers and builders: this is the moment where the AI infrastructure layer becomes publicly traded and legible to the broader market. The API pricing wars, the benchmark competition, the enterprise deals — all of it is about to start showing up in quarterly earnings calls. Which could either drive more transparency, or drive more benchmark-gaming.
 
-**Alex:** The investor thesis here is that Devin has enough of a head start and enough enterprise lock-in that it can hold its position even as the underlying models commoditize.
-
-**Jordan:** Whether that holds is an open question. But at four-hundred-ninety-two million in annualized revenue growing at fifty percent month over month — that's not a story you can dismiss as hype.
-
-**Alex:** Enterprise AI adoption has a reputation for being slow. Devin is evidence that when the product actually works, that reputation doesn't hold.
+**Alex:** Both, probably.
 
 ---
 
-## SEGMENT 3: Congress Writes an AI Bill
+## SEGMENT 3 — Congress Writes a Federal AI Bill
 
-**Alex:** Okay, let's talk about Washington. Because something genuinely interesting happened on June 4th.
+**Jordan:** Segment three, let's talk regulation. On June 4th — one week ago — Representatives Jay Obernolte, a Republican from California, and Lori Trahan, a Democrat from Massachusetts, released a discussion draft of the Great American Artificial Intelligence Act.
 
-**Jordan:** Representatives Jay Obernolte, a Republican from California, and Lori Trahan, a Democrat from Massachusetts, released a discussion draft of the Great American Artificial Intelligence Act — the GAAIA. This is a bipartisan bill to create the first comprehensive federal framework for governing AI in the United States.
+**Alex:** Which is quite a name.
 
-**Alex:** And the fact that it's bipartisan and substantive — two hundred and sixty-nine pages — means it's worth paying attention to even as a draft.
+**Jordan:** It is. But the substance is real. This is the first bipartisan draft of comprehensive federal AI legislation in the US. It has four titles: frontier AI governance, workforce, cybersecurity, and research and international cooperation.
 
-**Jordan:** The bill has four main titles. Frontier AI governance, workforce impacts, cybersecurity, and research and international cooperation. On the governance side, it would require large frontier AI developers to disclose information about their models, get third-party audits through what the bill calls Independent Verification Organizations, and prohibit retaliation against whistleblowers.
+**Alex:** Walk me through the governance piece, because that's where the teeth are.
 
-**Alex:** It would also formally codify the Center for AI Standards and Innovation within the Department of Commerce, and authorize a hundred million dollars per year to develop voluntary security guidelines.
+**Jordan:** On the frontier side, the bill would require large model developers to disclose information about their models, submit to third-party audits through what they're calling Independent Verification Organizations, and protect whistleblowers who report safety violations. That's a meaningful accountability structure that doesn't currently exist at the federal level.
 
-**Jordan:** And there's a critical safety incident reporting requirement — major frontier model developers would have to report incidents to the federal government.
+**Alex:** The state preemption clause is where it gets controversial. The bill would preempt state laws that specifically regulate the development of AI models, with a three-year sunset. So states couldn't pile on with their own conflicting development rules while the federal framework gets established.
 
-**Alex:** The controversial part is state preemption. The draft would effectively freeze state-level regulation of how AI models are built for three years. States could still regulate how deployed AI systems are used — in hiring, lending, healthcare — but they'd lose authority over model development itself.
+**Jordan:** This is a direct response to the patchwork situation that's been building. Colorado's comprehensive AI law takes effect June 30th — nineteen days from now. California has the AI Transparency Act. Texas has the Responsible AI Governance Act. You have thirty-plus states doing their own thing, and companies are struggling to build products that comply with all of them simultaneously.
 
-**Jordan:** Supporters argue this prevents a fifty-state patchwork that would make U.S. AI development uncompetitive versus China. Critics, including Public Citizen and the House Democratic Commission on AI, say it strips protections from consumers and workers.
+**Alex:** The key nuance the bill draws is between development and deployment. State laws around how AI is used — employment discrimination, housing, healthcare — those are explicitly not preempted. The three-year freeze is specifically on rules about building the models themselves.
 
-**Alex:** Colorado's comprehensive AI law is set to take effect June 30th. California's AI Transparency Act is already in effect. So this preemption fight is happening right now, not in theory.
+**Jordan:** Which is a reasonable line to draw, but it will absolutely be fought over. The AI industry has been pushing hard for federal preemption. Civil liberties groups and state attorneys general have been pushing back equally hard.
 
-**Jordan:** For the developer community, the state preemption question is probably the most practically important piece. A federal floor that supersedes fifty different compliance regimes would simplify things enormously — but the devil is in what that floor actually requires.
+**Alex:** The IVO structure — Independent Verification Organizations for third-party audits — is interesting as a governance model. It's similar to how financial auditors work. Not government inspectors reviewing every model; accredited third parties that certify compliance. That's a workable framework if the standards are set correctly.
 
-**Alex:** The sponsors are collecting public feedback at GAAIA at mail dot house dot gov. This is still a discussion draft — no formal introduction date yet. But it's the most substantive federal AI governance proposal since the Biden executive orders.
+**Jordan:** Big if. But the bipartisan authorship matters here. You don't usually see a tech-district Republican and a Massachusetts Democrat releasing joint AI legislation unless there's real political will behind it.
 
-**Jordan:** And it has the political texture of something that could actually move. Bipartisan House sponsors, a Commerce Department framework, and a clear preemption hook that industry has been asking for.
-
-**Alex:** Washington tends to be slow on this stuff. But the EU AI Act is about to become fully applicable in August. That external pressure has a way of focusing minds.
+**Alex:** The White House released a four-page blueprint in March directing Congress to do exactly this kind of unified federal framework. So the executive branch, at least, is aligned with where this draft is headed. If you're building AI products that will ship in the US in 2027, this draft is worth reading — the audit requirement alone has real engineering and compliance implications.
 
 ---
 
-## SEGMENT 4: The Infrastructure Arms Race Has No Ceiling
+## SEGMENT 4 — DeepSeek's Permanent Price War and the Huawei Hardware Story
 
-**Alex:** Our final story brings together everything else — because none of the numbers we talked about today are possible without a staggering amount of physical infrastructure.
+**Alex:** Final segment, and this one is really about the economics of AI inference — specifically what happens when a well-funded Chinese lab decides to make a price cut permanent and signals it can sustain it because of domestic chip supply.
 
-**Jordan:** Meta updated its 2026 capital expenditure guidance to a range of one hundred and twenty-five to one hundred and forty-five billion dollars. That's up from their initial guidance of one-fifteen to one-thirty-five, raised during Q1 earnings in late April.
+**Jordan:** DeepSeek made its 75 percent price cut on V4 Pro permanent on May 23rd. The new pricing is $0.0035 per million input tokens and $0.83 per million output tokens. The previous pricing was roughly $0.0145 input and $3.48 output.
 
-**Alex:** To put that in perspective: Meta spent seventy-two billion on capex in 2025. They're roughly doubling it in a single year.
+**Alex:** For context: that $0.83 output token price puts DeepSeek V4 Pro below every major competitor. GPT-4-class output tokens at comparable quality are running multiple dollars per million. And DeepSeek V4 Pro is not a small model — it runs a one million token context window.
 
-**Jordan:** The five largest hyperscalers combined — Amazon, Microsoft, Google, Meta, and Oracle — are projected to spend over six hundred billion dollars on AI infrastructure in 2026. That's a thirty-six percent increase from 2025.
+**Jordan:** The hardware story behind this is what makes it significant beyond just another price cut. When V4 launched, DeepSeek said the Pro version cost significantly more to run because of constraints in high-end compute. They were waiting on Huawei's Ascend 950 supernodes to ship at scale.
 
-**Alex:** And one of the most interesting details we found this week is the bottleneck that's actually biting right now: high-bandwidth memory. SK Hynix, Micron, and Samsung collectively control production of the memory that goes into AI accelerators. All three have pre-allocated their entire 2026 capacity.
+**Alex:** Those are coming. Huawei planned to ship around 750,000 units of the Ascend 950PR this year, with full-scale production in the second half of 2026. DeepSeek made the price cut permanent ahead of that timeline, signaling confidence that their compute costs are going to fall further as Huawei's domestic chip production scales.
 
-**Jordan:** So even if you have the capital to build, you may not have access to the components. The chip shortage of 2021 was about consumer electronics. The shortage of 2026 is about AI memory, and it's hitting data centers directly.
+**Jordan:** This is the Nvidia dependency reduction story playing out in real time. DeepSeek running at scale on Huawei Ascend chips rather than H100s is both a geopolitical story and an infrastructure story. It demonstrates that the export control regime meant to slow Chinese AI development has, at minimum, accelerated domestic Chinese semiconductor production.
 
-**Alex:** There's also a power story here. Modern AI GPU clusters are drawing fifty to over a hundred kilowatts per rack — compared to five to fifteen kilowatts for a traditional server rack. That's a ten-to-twenty-times jump in power density.
+**Alex:** The builder-level implication is direct: if you're running workloads where cost is the primary constraint — high-volume document processing, classification, retrieval-augmented generation — DeepSeek V4 Pro at these prices is worth evaluating seriously. The quality metrics are competitive with frontier models.
 
-**Jordan:** And there's a geopolitical overlay. A March 2026 disruption at Qatar's Ras Laffan LNG hub — caused by regional conflict — removed roughly twenty percent of global LNG supply. That's sending electricity costs up for chip fabrication in Taiwan and South Korea.
+**Jordan:** The trust question is real for enterprise customers. Data residency, supply chain provenance, regulatory exposure — those concerns are legitimate. But the weights are open. You can pull DeepSeek V4 Pro and run it yourself, in your own infrastructure. At that point you're not touching their API at all.
 
-**Alex:** So you've got this cascade: geopolitical disruption hits LNG supply, which raises electricity costs, which strains fab operations, which tightens memory supply, which hits data center builds, which slows the AI infrastructure expansion everyone is spending hundreds of billions to achieve.
+**Alex:** And that's the broader point. The open-weights availability means the pricing pressure is structural, not tactical. Every other provider has to respond to a world where a capable frontier model is available to self-host for free and to run via API at commodity prices.
 
-**Jordan:** On the silicon side, NVIDIA still holds about eighty percent of the AI chip market. Google released TPU 8t this year, claiming nearly three times the compute performance of the previous generation. But the training workloads for frontier models are so large that even tripling throughput doesn't eliminate the queue.
+**Jordan:** We're heading toward a world where inference cost for most applications drops to near zero. The question stops being "can I afford to run this model" and becomes "which model do I trust, which fits my latency requirements, and which can I actually audit."
 
-**Alex:** The McKinsey projection for total data center investment through 2030 is seven trillion dollars globally. Five-point-two trillion of that is specifically for AI workloads.
-
-**Jordan:** These numbers are so large that they're almost disconnected from intuition. But here's the grounding fact: every time you or anyone else runs a frontier model — whether it's Claude, GPT-5, or Gemini — there's a physical GPU cluster somewhere drawing power equivalent to a small factory. And demand is growing faster than the infrastructure can be built.
-
-**Alex:** Which is why the memory bottleneck, the power constraints, and the geopolitical supply chain risks aren't side stories. They're the limiting factor for everything else we've talked about today.
-
-**Jordan:** Anthropic can raise sixty-five billion and sign five-gigawatt compute deals, but that compute still has to be physically built, cooled, powered, and supplied with memory chips that are already sold out for the year.
-
-**Alex:** The software is moving faster than the hardware. That gap is the defining tension in AI right now.
+**Alex:** That's a better set of questions than the ones developers were asking two years ago.
 
 ---
 
 ## OUTRO
 
-**Jordan:** Alright, that's the show for Thursday, June 11th. Four stories — a near-trillion-dollar Anthropic raise, Cognition's twelve-fold revenue growth, the first bipartisan federal AI governance draft, and an infrastructure arms race running into real physical limits.
+**Alex:** That's our show for Thursday, June 11, 2026. Four stories: Microsoft launching its own model family at Build, Anthropic and OpenAI racing each other to the public markets, Congress writing the first serious federal AI bill, and DeepSeek permanently lowering the floor on frontier API pricing.
 
-**Alex:** The thread connecting all of it is that the AI industry is in a moment of simultaneous abundance — of capital, of models, of ambition — and genuine scarcity — of memory chips, power, and regulatory clarity.
+**Jordan:** The through-line across all four: the AI infrastructure layer is becoming legible. It's going public, getting regulated, getting competed over by multiple national players. That's a materially different landscape than 2024, when a handful of labs controlled everything.
 
-**Jordan:** That tension doesn't resolve quickly. But it's what makes this a genuinely interesting time to be watching the space.
+**Alex:** More players, more complexity, more opportunity — and more to track. We'll be back tomorrow.
 
-**Alex:** Thanks for listening to Daily AI Insights. We'll be back tomorrow. If you're building something in AI, stay practical — the hype is real but so are the constraints.
+**Jordan:** Thanks for listening to Daily AI Insights. I'm Jordan.
 
-**Jordan:** See you Friday.
+**Alex:** And I'm Alex. See you next time.
 
 ---
 
 ## SOURCES
 
-1. Anthropic Series H Announcement — https://www.anthropic.com/news/series-h
-2. Anthropic $65B / $965B valuation — TechCrunch: https://techcrunch.com/2026/05/28/anthropic-raises-65-billion-nears-1t-valuation-ahead-of-ipo/
-3. Anthropic overtakes OpenAI in valuation — CNBC: https://www.cnbc.com/2026/05/28/anthropic-open-ai-startup-value.html
-4. Cognition $1B raise at $25B valuation — TechCrunch: https://techcrunch.com/2026/05/27/ai-coding-startup-cognition-raises-1b-at-25b-pre-money-valuation/
-5. Devin $492M ARR — Enterprise DNA: https://enterprisedna.co/resources/news/cognition-devin-1-billion-25-billion-valuation-2026/
-6. Great American AI Act discussion draft — FedScoop: https://fedscoop.com/bipartisan-great-american-ai-act-draft-proposes-new-federal-ai-governance-framework/
-7. GAAIA breakdown — DLA Piper: https://www.dlapiper.com/en-us/insights/publications/2026/06/unpacking-the-great-american-ai-act
-8. State preemption controversy — Roll Call: https://rollcall.com/2026/06/04/bipartisan-ai-draft-proposes-three-year-preemption-of-state-laws/
-9. Meta 2026 capex guidance — Data Center Dynamics: https://www.datacenterdynamics.com/en/news/meta-estimates-2026-capex-to-be-between-115-135bn/
-10. Meta raises capex to $145B — Fortune: https://fortune.com/2026/04/29/meta-zuckerberg-145-billion-ai-spending-roi/
-11. AI data center investment — Intellectia: https://intellectia.ai/blog/ai-data-center-investment-2026
-12. HBM supply constraints — Data Center Knowledge: https://www.datacenterknowledge.com/data-center-hardware/data-center-hardware-highlights-june-2026
+1. Microsoft AI — Building a hill-climbing machine: Launching seven new MAI models: https://microsoft.ai/news/building-a-hillclimbing-machine-launching-seven-new-mai-models/
+2. Microsoft AI — Introducing MAI-Thinking-1: https://microsoft.ai/news/introducing-mai-thinking-1/
+3. Microsoft AI — Introducing MAI-Code-1-Flash: https://microsoft.ai/news/introducingmai-code-1-flash/
+4. Neowin — Microsoft unveils MAI-Thinking-1 reasoning and MAI-Code-1 coding models: https://www.neowin.net/news/microsoft-unveils-mai-thinking-1-reasoning-and-mai-code-1-coding-models/
+5. BuildFastWithAI — AI News June 11, 2026: 12 Biggest Stories Today: https://www.buildfastwithai.com/blogs/ai-news-today-june-11-2026
+6. Fortune — Anthropic confidentially files for IPO after raising $65 billion at a $965 billion valuation: https://fortune.com/2026/06/01/anthropic-confidentially-files-ipo-965-billion-valuation/
+7. CNBC — Anthropic confidentially files IPO prospectus with SEC: https://www.cnbc.com/2026/06/01/anthropic-ipo-s1-prospectus.html
+8. Obernolte House — Great American AI Act discussion draft: https://obernolte.house.gov/media/press-releases/obernolte-trahan-release-discussion-draft-great-american-ai-act
+9. Roll Call — Bipartisan AI draft proposes three-year preemption of state laws: https://rollcall.com/2026/06/04/bipartisan-ai-draft-proposes-three-year-preemption-of-state-laws/
+10. DLA Piper — Unpacking the Great American AI Act: https://www.dlapiper.com/en-us/insights/publications/2026/06/unpacking-the-great-american-ai-act
+11. Relveh — DeepSeek Makes 75% V4-Pro Price Cut Permanent as Huawei Chip Demand Surges: https://relvehq.com/blog/noise/deepseek-v4-pro-permanent-price-cut-huawei-ascend-950
+12. Technology.org — DeepSeek Cuts V4-Pro AI Price 75% Permanently: https://www.technology.org/2026/05/25/deepseek-v4-pro-permanent-75-percent-price-cut/
+13. FedScoop — Bipartisan Great American AI Act draft: https://fedscoop.com/bipartisan-great-american-ai-act-draft-proposes-new-federal-ai-governance-framework/
