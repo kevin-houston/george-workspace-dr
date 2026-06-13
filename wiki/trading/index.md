@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-12 (sources/multibagger-yartseva-2025.md new — FCF yield #1 driver, inverted momentum entry, asset_growth>EBITDA_growth exclusion signal, H285 proposed)
+updated: 2026-06-12 (alternative-data.md new — NewsAPI/Finnhub/ApeWisdom/pytrends/Wikipedia/Congressional trade APIs, signal taxonomy, H279/PEAD integration patterns)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -68,6 +68,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Options Data Sources](data-sources/options-data.md) ← 2026-05-01 (ThetaData/ORATS/FlashAlpha pricing; Alpaca indicative feed; vollib/py_vollib/QuantLib; IV surface + SVI fitting; free EOD options data on GitHub)
   - [Earnings Calendar & Corporate Events](data-sources/earnings-events.md) ← new 2026-05-23 (FMP/Finnhub/yfinance/API Ninjas free tier APIs; SEC EDGAR XBRL EPS extraction; EdgarTools; EPS surprise formulas; PEAD hybrid stack upgrade path for pead_overnight.py; earnings transcript sources for H174)
   - [SEC EDGAR XBRL Fundamentals](data-sources/edgar-fundamentals.md) ← new 2026-05-25 (CompanyFacts API 2009–present, 15yr history free; us-gaap tag reference for Piotroski/quality; Python builder for H222 full IS/OOS; rate limits; comparison vs FMP/yfinance)
+  - [Alternative Data Sources](data-sources/alternative-data.md) ← new 2026-06-12 (Tier 0 keys in env: NewsAPI+Finnhub+AV; Tier 1 free: ApeWisdom Reddit, congressional S3, pytrends, Wikipedia; Tier 2 paid: Quiver $30/mo; signal taxonomy; H279/PEAD integration patterns; data quality caveats)
 - [Prediction Markets](prediction-markets/) — Kalshi, Polymarket, etc.
   - [Kalshi](prediction-markets/kalshi.md) ← expanded 2026-04-29 (full auth/API/WebSocket, RSA signing, CPI nowcasting implementation, fee modeling, rate limits, Timeless perps)
   - [Algorithmic Strategies](prediction-markets/algorithmic-strategies.md) ← updated 2026-05-13 (PolyBench arXiv:2604.14199 — LLMs near-random on binary markets; edge only on economic data + structured context)
