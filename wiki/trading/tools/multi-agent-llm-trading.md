@@ -296,3 +296,34 @@ At our scale (~50 paper trades/year), even the most expensive setup costs <$100/
 - [Machine Learning for Trading](ml-for-trading.md) — FinAgent, Alpha-GPT pipelines
 - [Event-Driven Strategies](../algorithms/event-driven.md) — H163/H174 PEAD production strategy
 - [Shared Evaluation Checklist](../shared-eval-checklist.md) — apply to all multi-agent papers
+
+
+
+## Reproducibility Crisis in LLM Trading Research (arXiv:2605.19337, May 2026)
+
+**Source**: "Agentic Trading: When LLM Agents Meet Financial Markets" — systematic audit of 77 studies, 19 meeting minimum evaluation standards.
+
+**Key finding**: The field has a critical reproducibility crisis:
+- Only **2 of 19** primary studies reported extractable time-consistent split protocols
+- Only **1** documented explicit transaction costs  
+- Only **1** addressed survivorship/universe handling
+- **0** achieved R3-level reproducibility (fully reproducible artifacts)
+
+**Three bottlenecks preventing real-world deployment**:
+1. **Incomparable evaluation protocols** — studies use different methodologies, making cross-study comparison impossible
+2. **Execution semantics gaps** — only 11/19 studies report execution timing or semantics
+3. **Reproducibility crisis** — no comparable protocols, execution semantics, or reproducible artifacts
+
+**Implication for Kevin's pipeline**: This validates the 7-point shared-eval-checklist.md. The existing requirement for look-ahead guard, timestamp integrity, cost model, and survivorship bias check is *better than 95% of published LLM trading research*.
+
+## StockBench: LLMs Fail to Beat Buy-and-Hold (arXiv:2510.02209, Oct 2025)
+
+**Source**: "StockBench: Can LLM Agents Trade Stocks Profitably In Real-world Markets?"
+
+**Key finding**: Most state-of-the-art LLMs **fail to outperform simple buy-and-hold** in real-world sequential stock trading, even models with strong financial QA performance.
+
+- Strong static financial knowledge ≠ effective sequential decision-making
+- Thinking models (o1, Gemini 2.0) make fewer arithmetic errors than instruct models — matters for position sizing
+- Gap between theoretical financial knowledge and practical trading execution is substantial
+
+**Design implication for H274**: Multi-agent PEAD upgrade should use LLMs in the analyst role (signal extraction) not the portfolio management role (entry/exit decisions). The FinBERT score + EPS surprise gate remain the action triggers — not an LLM deciding to trade.
