@@ -348,3 +348,6 @@ Pages created: 1 (wiki/trading/tools/contesttrade.md). Pages updated: 1 (trading
 
 ## [2026-06-11] ingest | QuantMuse (github.com/0xemmkty/QuantMuse)
 Pages created: 1 (wiki/trading/tools/quantmuse.md). Pages updated: 1 (trading/index.md). Key entities: FactorCalculator, FactorScreener, BacktestEngine, LLMIntegration, C++ core engine. Multi-factor (momentum/value/quality/volatility) + LLM + ML. MIT. Assessment: moderate overlap with existing stack; FactorCalculator API is the most useful piece; not a replacement for our run_hNNN.py pipeline.
+
+## [2026-06-13] ingest | Algorithmic Aspects of Strategic Trading (arXiv:2502.07606)
+Pages created: 1 (trading/sources/kearns-shi-2025-strategic-trading.md). Pages updated: 1 (index.md). Key entities: Michael Kearns, Mirah Shi, Neil Chriss (precursor model), FTPL (Follow the Perturbed Leader), CCE (Coarse Correlated Equilibria). Core result: multi-player execution game decomposes into potential game (temporary impact) + constant-sum game (permanent impact), parameterized by κ. κ=0→spread orders; κ=2→front-run. FTPL achieves no-regret CCE in O(nθ²T²) per round. Companion to arXiv:2605.23905 (AI alpha decay). Not actionable at current scale; relevant for institutional execution.

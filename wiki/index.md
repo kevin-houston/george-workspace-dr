@@ -1,7 +1,7 @@
 ---
-updated: 2026-06-10
-sources_indexed: 3
-pages: 123
+updated: 2026-06-13
+sources_indexed: 4
+pages: 124
 ---
 
 # Wiki Index
@@ -42,6 +42,7 @@ When answering a query:
 - [Quality Factor (QMJ, Piotroski, GP/Assets)](trading/algorithms/quality-factor.md) — AQR QMJ; Piotroski F-Score 9-criteria; Novy-Marx GP/Assets; FMP API implementation; H221/H222 designs; corr(quality, BAB) ~0.4–0.6 = independent alpha ← new 2026-05-24
 - [IBS Mean-Reversion](trading/algorithms/ibs-mean-reversion.md) — Internal Bar Strength daily mean-reversion on tech ETFs (XLK/SMH/IGV); H062–H112 confirmed; OOS Sharpe 2.129 (2021–2026); 30% production portfolio weight ← new 2026-05-28
 - [Market Microstructure & HFT](trading/algorithms/market-microstructure.md) — Stanford MS&E 448; order book dynamics, market impact, adverse selection, HFT strategies; Avellaneda-Stoikov MM model; context for execution cost modeling ← new 2026-05-25
+- [Strategic Trading Game — Kearns & Shi (2025)](trading/sources/kearns-shi-2025-strategic-trading.md) — arXiv:2502.07606; N-player execution game; temporary vs permanent market impact; FTPL for CCE; κ=0→potential game (spread orders), κ=2→zero-sum (front-run); relevant for institutional-scale execution ← new 2026-06-13
 - [Technical Analysis Patterns](trading/algorithms/technical-analysis-patterns.md) — H234 inside-bar coiled-spring (OOS Sharpe 1.770, WR 63.9%); NR7/NR4 narrow range; TA feature library (MACD/RSI/Stochastic/ROC) for H233/H235; pandas-ta vs TA-Lib guide ← new 2026-05-29
 - [Commodity Trend Following](trading/algorithms/commodity-trend-following.md) — H261/H261b/H262 CTA on GLD/SLV/DBC/USO/DBA; UNG excluded (K-1, contango, mean-reverting); H261b CONFIRMED (OOS Sharpe 0.922, Corr(SPY)=0.218, 2022 +26.7%); H262 QUEUED (Bayesian 3m/6m/12m blend) ← new 2026-06-07
 - [Factor Momentum & Style Rotation](trading/algorithms/factor-momentum-style-rotation.md) — H255 NOT CONFIRMED (factor ETF, Corr(SPY)=0.894, no escape); H256 NOT CONFIRMED (GEM/PACS/GEM+Sector, all underperform SPY OOS); multi-asset fix → H257 ← new 2026-06-06
