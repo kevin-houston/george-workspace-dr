@@ -1,0 +1,14 @@
+{
+  "id": "h287-janus-q-event-news-pead",
+  "date": "2026-06-12",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.19919",
+  "title": "H287: Janus-Q Event-Annotated News Dataset for PEAD Enhancement",
+  "rationale": "Janus-Q (arXiv:2602.19919) builds a 62,400-article financial news corpus with event type labels, sentiment, and event-driven cumulative abnormal returns (CAR). Their 2-stage supervised+RL framework achieves +102% Sharpe improvement and +17.5% direction accuracy vs LLM baselines. Key insight applicable to H174/PEAD: annotating 8-K/earnings news by event type (earnings beat, guidance raise, guidance cut, restructuring, M&A) and measuring historical CAR per event type enables a more precise entry filter than generic FinBERT score. Current H174 uses FinBERT polarity (positive/negative) but does not distinguish event types. A 'guidance raise' event historically has 2x the post-announcement drift of a 'earnings beat with no guidance change'. Design: (1) Classify H174 8-K text into 10 event types using GPT-4o-mini zero-shot; (2) Compute historical CAR per event type from H174 IS events (2018-2022); (3) In OOS, only enter when event type has mean IS CAR > 5%; (4) Compare OOS WR vs H174 baseline (81.8%). IS 2018-2022, OOS 2023-2025. Gate: OOS WR > 81.8%, n >= 15.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h287.py",
+  "content": "# H287: Janus-Q-style event type annotation for PEAD entry filter\n# Source: arXiv:2602.19919 (Janus-Q)\n# Design: classify H174 8-K text into event types using GPT-4o-mini\n# Entry only when event type has mean IS CAR > 5%\n# IS: 2018-2022, OOS: 2023-2025\n# Gate: OOS WR > 81.8% (H174 baseline), n >= 15\n#\n# Event types (from Janus-Q taxonomy):\n# 1. EarningsBeat        - EPS beat + positive surprise\n# 2. EarningsMiss        - EPS miss\n# 3. GuidanceRaise       - Forward guidance raised\n# 4. GuidanceCut         - Forward guidance lowered\n# 5. GuidanceInline      - No change to guidance\n# 6. MarginExpansion     - Operating margin improvement noted\n# 7. RevenueAcceleration - Revenue growth rate accelerating\n# 8. Restructuring       - Cost cuts, layoffs, restructuring charges\n# 9. MA                  - M&A announcement\n# 10. Other              - None of the above\n#\n# TODO: implement classification using OpenAI API ($OPENAI_API_KEY)\n# TODO: compute IS CAR per event type from cached H174 events\n# TODO: OOS gate: enter only for event types with mean IS CAR > 5%\nprint('H287 scaffold - to be implemented')\n",
+  "action": "write",
+  "apply_status": "pending"
+}

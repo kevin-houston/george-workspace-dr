@@ -1,0 +1,14 @@
+{
+  "id": "hypothesis-log-h287-h288-h289",
+  "date": "2026-06-12",
+  "source": "reflection",
+  "source_url": null,
+  "title": "Hypothesis log entries: H287, H288, H289 QUEUED",
+  "rationale": "Add QUEUED status entries for H287, H288, H289 to the hypothesis log so they are tracked in the pipeline.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
+  "content": "h289_status: QUEUED (2026-06-12) — News Entropy Macro Signal (Regime Gating Layer). Source: arXiv:2309.05560 'New News is Bad News'. Entropy of news text distribution predicts negative market returns; unexplained by existing factors. Design: month-over-month KL divergence of NewsAPI topic word-vectors as entropy proxy. High KL (>0.30) → BIL override on H249 regime framework. Gate: OOS Sharpe improvement >0.05 vs H249 baseline (1.031). Prerequisite: NewsAPI historical data or GDELT proxy. Scaffold: backtesting/daily/run_h289.py.\nh288_status: QUEUED (2026-06-12) — LLM-Constrained Factor Discovery via DSL Audit Trail. Source: arXiv:2604.26747. OOS Sharpe 1.55, 44.55% annualized on crypto OOS 2024-2026 (5bp costs). Adapt to US equity 30-stock universe. LLM proposes factor expressions in restricted DSL; fixed IS/OOS protocol enforced. Ridge-combine surviving factors. Gate: composite OOS Sharpe >1.3 (vs H217 1.559). Scaffold: backtesting/daily/run_h288.py.\nh287_status: QUEUED (2026-06-12) — Janus-Q Event-Type Annotation for PEAD Entry Filter. Source: arXiv:2602.19919. 62,400-article news corpus with 10 event types + CAR labels; +102% Sharpe improvement vs baselines. Design: classify H174 8-K text into 10 event types (EarningsBeat/Miss/GuidanceRaise/Cut/etc) via GPT-4o-mini; compute IS CAR per event type; OOS entry only when event type has mean IS CAR >5%. Gate: OOS WR >81.8% (H174 baseline), n >=15. IS 2018-2022, OOS 2023-2025. Scaffold: backtesting/daily/run_h287.py.\n",
+  "action": "prepend",
+  "apply_status": "pending"
+}

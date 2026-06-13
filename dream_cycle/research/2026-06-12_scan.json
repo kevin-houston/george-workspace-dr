@@ -1,0 +1,214 @@
+{
+  "date": "2026-06-12",
+  "scan_summary": {
+    "total_papers_reviewed": 18,
+    "total_repos_reviewed": 3,
+    "high_relevance": 5,
+    "medium_relevance": 7,
+    "low_relevance": 6,
+    "staged_proposals": 5
+  },
+  "search_angles": [
+    {
+      "angle": "Pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "id": "arxiv_2407_16103",
+          "title": "Reinforcement Learning Pair Trading: A Dynamic Scaling approach",
+          "url": "https://arxiv.org/abs/2407.16103",
+          "relevance": "medium",
+          "notes": "RL-based dynamic position scaling for pairs. H246/H271 already exhausted ETF pairs. Stock-level pairs (H200) is the next candidate. RL scaling could layer on top of H200 if it ever confirms."
+        },
+        {
+          "id": "arxiv_2604_26747",
+          "title": "From Hypotheses to Factors: Constrained LLM Agents in Cryptocurrency Markets",
+          "url": "https://arxiv.org/abs/2604.26747",
+          "relevance": "high",
+          "notes": "OOS Sharpe 1.55, 44.55% annualized (2024-2026). Constrained DSL approach prevents overfitting. Adapts to equity factor search. STAGED as H288."
+        }
+      ]
+    },
+    {
+      "angle": "PEAD + post-earnings drift + text signals",
+      "findings": [
+        {
+          "id": "arxiv_2602_19919",
+          "title": "Janus-Q: End-to-End Event-Driven Trading via Hierarchical-Gated Reward Modeling",
+          "url": "https://arxiv.org/abs/2602.19919",
+          "relevance": "high",
+          "notes": "62,400 annotated news articles with event types + CAR labels. +102% Sharpe improvement, +17.5% direction accuracy. Event-type annotation is new signal layer for H174 PEAD pipeline. STAGED as H287."
+        },
+        {
+          "id": "arxiv_2605_25894",
+          "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+          "url": "https://arxiv.org/abs/2605.25894",
+          "relevance": "medium",
+          "notes": "Combines FinBERT sentiment + 15 fundamentals + 3 technicals. Transformer outperforms LSTM on F1. Confirms multi-modal approach but no concrete Sharpe numbers. Lower priority — H287 covers event-type improvement more concretely."
+        },
+        {
+          "id": "arxiv_2509_24254",
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+          "url": "https://arxiv.org/abs/2509.24254",
+          "relevance": "medium",
+          "notes": "138k+ press releases 2005-2023. FinBERT yields highest predictive power. Press release structure matters — specific sections more predictive. Already partially covered in nlp-alternative-data.md. No new staging needed."
+        }
+      ]
+    },
+    {
+      "angle": "Cross-sectional momentum + factor momentum",
+      "findings": [
+        {
+          "id": "tandf_2025_factor_momentum_multiple_periods",
+          "title": "Cross-sectional factor momentum: evidence from multiple formation periods",
+          "url": "https://www.tandfonline.com/doi/abs/10.1080/13504851.2025.2472032",
+          "relevance": "medium",
+          "notes": "2025 study confirms multi-period formation for factor momentum is significant. Recent + intermediate horizons both matter. Consistent with H255 design but H255 was NOT CONFIRMED (Corr=0.89 SPY). The multi-period extension would need long-short construction to isolate factor alpha."
+        },
+        {
+          "id": "arxiv_2507_07107",
+          "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: Bias Correction",
+          "url": "https://arxiv.org/abs/2507.07107",
+          "relevance": "low",
+          "notes": "A-share focused. Bias correction mask first pattern. H275 already staged for this."
+        },
+        {
+          "id": "arxiv_2601_19504",
+          "title": "Generating Alpha: Hybrid AI Trading System with Regime-Adaptive Equity Strategies",
+          "url": "https://arxiv.org/abs/2601.19504",
+          "relevance": "medium",
+          "notes": "135.49% return over 24 months. Combines EMA/MACD + RSI/BB + FinBERT + XGBoost + regime filter. No Sharpe reported; 24-month test is too short. Methodology confirms H286 Var B direction (regime-adaptive equity). No staging — covered by existing confirmed H series."
+        }
+      ]
+    },
+    {
+      "angle": "Multi-agent LLM trading systems",
+      "findings": [
+        {
+          "id": "arxiv_2605_19337",
+          "title": "Agentic Trading: When LLM Agents Meet Financial Markets (evidence map)",
+          "url": "https://arxiv.org/abs/2605.19337",
+          "relevance": "high",
+          "notes": "Systematic audit of 77 studies. Critical reproducibility crisis: 0/19 achieve R3 reproducibility. Only 2 have time-consistent split protocols. Validates Kevin's 7-point checklist. STAGED as wiki update to multi-agent-llm-trading.md."
+        },
+        {
+          "id": "arxiv_2510_02209",
+          "title": "StockBench: Can LLM Agents Trade Stocks Profitably In Real-world Markets?",
+          "url": "https://arxiv.org/abs/2510.02209",
+          "relevance": "high",
+          "notes": "Most SoTA LLMs fail to beat buy-and-hold in real sequential trading. Strong financial QA != effective trading. Thinking models better for arithmetic. Bundled with arXiv:2605.19337 wiki update (staged in proposal 4)."
+        },
+        {
+          "id": "arxiv_2602_23330",
+          "title": "Toward Expert Investment Teams: Multi-Agent LLM with Fine-Grained Tasks",
+          "url": "https://arxiv.org/abs/2602.23330",
+          "relevance": "medium",
+          "notes": "Already in wiki (multi-agent-llm-trading.md). No new staging."
+        },
+        {
+          "id": "arxiv_2508_02366",
+          "title": "Language Model Guided Reinforcement Learning in Quantitative Trading",
+          "url": "https://arxiv.org/abs/2508.02366",
+          "relevance": "medium",
+          "notes": "LLM generates high-level strategies to guide RL agents. Increased cumulative returns 7.9% → 19.22%. H276 (NautilusTrader POC) is the relevant execution layer. Could combine with H288 LLM factor search if H288 confirms."
+        }
+      ]
+    },
+    {
+      "angle": "News entropy / novelty signals",
+      "findings": [
+        {
+          "id": "arxiv_2309_05560",
+          "title": "New News is Bad News (news entropy predicts negative returns)",
+          "url": "https://arxiv.org/abs/2309.05560",
+          "relevance": "high",
+          "notes": "News novelty entropy (RNN over large corpus) predicts negative returns. Better OOS predictor than standard measures. Cross-sectional negative risk premium unexplained by existing factors. STAGED as H289."
+        }
+      ]
+    },
+    {
+      "angle": "GitHub trending quantitative finance repos",
+      "findings": [
+        {
+          "id": "github_gs_quant",
+          "title": "gs-quant (Goldman Sachs) — 10k stars",
+          "url": "https://github.com/goldmansachs/gs-quant",
+          "relevance": "low",
+          "notes": "Goldman institutional-grade Python toolkit. Primarily for derivatives pricing and risk analytics. Too heavyweight for current project scope. Note for future reference if options/derivatives work expands."
+        },
+        {
+          "id": "github_hftbacktest",
+          "title": "hftbacktest — 3.9k stars",
+          "url": "https://github.com/nkaz001/hftbacktest",
+          "relevance": "low",
+          "notes": "Rust-based HFT backtesting. Not relevant until market microstructure work begins. Note for H-series beyond H300 if intraday execution ever becomes a priority."
+        },
+        {
+          "id": "github_finrl_trading",
+          "title": "FinRL-Trading (AI4Finance-Foundation)",
+          "url": "https://github.com/AI4Finance-Foundation/FinRL-Trading",
+          "relevance": "medium",
+          "notes": "FinRL-X next-gen modular RL trading infrastructure. Relevant to H204 (Deep RL PPO). H204 was NOT CONFIRMED but FinRL-X is more modular than original FinRL. Note for future H-series RL experiments."
+        }
+      ]
+    }
+  ],
+  "staged_proposals": [
+    {
+      "file": "1_h287_janus_q_event_news_pead.json",
+      "hypothesis_id": "H287",
+      "risk_level": "medium",
+      "priority": "high",
+      "summary": "Event-type annotation layer for H174 PEAD entries. +102% Sharpe in source paper."
+    },
+    {
+      "file": "2_h288_llm_constrained_factor_discovery.json",
+      "hypothesis_id": "H288",
+      "risk_level": "medium",
+      "priority": "high",
+      "summary": "Constrained LLM factor DSL search for US equities. OOS Sharpe 1.55 on crypto baseline."
+    },
+    {
+      "file": "3_h289_news_entropy_signal.json",
+      "hypothesis_id": "H289",
+      "risk_level": "medium",
+      "priority": "medium",
+      "summary": "News entropy as macro regime signal. Proxy via NewsAPI KL divergence. Layer on H249."
+    },
+    {
+      "file": "4_wiki_update_multi_agent_agentic_trading.json",
+      "hypothesis_id": null,
+      "risk_level": "low",
+      "priority": "high",
+      "summary": "Append reproducibility crisis findings (arXiv:2605.19337 + 2510.02209) to multi-agent wiki page."
+    },
+    {
+      "file": "5_hypothesis_log_update_h287_h288_h289.json",
+      "hypothesis_id": null,
+      "risk_level": "low",
+      "priority": "high",
+      "summary": "Add H287/H288/H289 QUEUED entries to hypothesis log."
+    }
+  ],
+  "skipped_findings": [
+    {
+      "title": "Sentiment-Aware Stock Price Prediction with LLM-Generated Formulaic Alpha (arXiv:2508.04975)",
+      "reason": "No concrete Sharpe numbers in abstract. LLM-generated alphas family covered by H288 (more rigorous DSL approach)."
+    },
+    {
+      "title": "Generating Alpha: Hybrid AI Trading System (arXiv:2601.19504)",
+      "reason": "135% return over 24 months without Sharpe — too short, no comparison to B&H Sharpe. Direction already covered by H286 (regime-adaptive equity)."
+    },
+    {
+      "title": "Can LLM-based Financial Investing Strategies Outperform the Market in Long Run? (arXiv:2505.07078)",
+      "reason": "Covers LLM agent investing broadly — findings consistent with StockBench failure story. No new signal. Covered in wiki update."
+    },
+    {
+      "title": "Market-Bench: Evaluating LLMs on Quantitative Trading (arXiv:2512.12264)",
+      "reason": "Benchmark evaluating LLM on market dynamics concepts. Useful for model selection but no tradeable alpha signal."
+    },
+    {
+      "title": "ECC Analyzer earnings call audio (arXiv:2404.18470)",
+      "reason": "Multi-modal audio+text for earnings calls. FinCall-Surprise already in nlp-alternative-data.md shows audio adds limited value. Text-only remains best practical approach."
+    }
+  ]
+}
