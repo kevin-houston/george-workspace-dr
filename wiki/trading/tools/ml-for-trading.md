@@ -758,3 +758,48 @@ This is the most credible LLM trading negative result because:
 - Factor expressions combine standard primitives: rolling means, rank transforms, cross-sectional Z-scores
 
 **Implication for our stack:** This is essentially what our dream cycle does — automated proposal generation + human review. The difference is our LLM generates *hypothesis designs* (what to test) rather than mathematical factor expressions directly. Alpha-GPT's architecture is a model for a future H260+ extension: LLM proposes factor expressions → `run_hNNN.py` evaluates → LLM iterates. The backtesting infrastructure we've built (venv, Alpaca data, Sharpe gate) is already fit for this loop.
+
+---
+
+## Time-Series Foundation Models (Zero-Shot Forecasting)
+
+A new generation of pretrained models (2024–2026) treats time-series forecasting
+like an LLM treats text — pretrain on diverse data, then use zero-shot on new series.
+
+### Key Models
+
+| Model | Org | Params | Open Source | Zero-Shot |
+|-------|-----|--------|-------------|----------|
+| **Chronos** | Amazon | Various | ✓ [amazon-science/chronos-forecasting](https://github.com/amazon-science/chronos-forecasting) | ✓ |
+| **TimesFM** | Google | 200M | ✓ [google-research/timesfm](https://github.com/google-research/timesfm) | ✓ |
+| **Lag-Llama** | Morgan Stanley/Mila | — | ✓ [kashif/lag-llama](https://github.com/kashif/lag-llama) | ✓ probabilistic |
+| **Moirai** | Salesforce | Various | ✓ | ✓ |
+
+### Relevance to Trading Pipeline
+
+**Volatility forecasting (H273 overlay):** Replace rolling 3-month realized vol
+estimator with Chronos/TimesFM zero-shot prediction. No IS refit required.
+
+**Regime detection (H251 HMM):** Lag-Llama probabilistic forecast on SPY/VIX series
+could produce richer regime probability estimates than Gaussian HMM.
+
+**Practical consideration:** Zero-shot means no IS/OOS bias from training on the
+test period — but the pretraining data may include financial markets (look-ahead
+risk at the pretraining level, not the strategy level).
+
+```python
+# Chronos: drop-in vol forecasting
+from chronos import ChronosPipeline
+import torch
+
+pipeline = ChronosPipeline.from_pretrained(
+    'amazon/chronos-t5-small',
+    device_map='cpu',
+    torch_dtype=torch.bfloat16
+)
+# Forecast next 1 month volatility
+forecast = pipeline.predict(context=vol_series_tensor, prediction_length=1)
+```
+
+**Status:** Research-stage for trading. No confirmed backtested trading Sharpe
+improvements found in literature as of 2026-06-13. Candidate for H295+ exploration.
