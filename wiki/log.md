@@ -351,3 +351,24 @@ Pages created: 1 (wiki/trading/tools/quantmuse.md). Pages updated: 1 (trading/in
 
 ## [2026-06-13] ingest | Algorithmic Aspects of Strategic Trading (arXiv:2502.07606)
 Pages created: 1 (trading/sources/kearns-shi-2025-strategic-trading.md). Pages updated: 1 (index.md). Key entities: Michael Kearns, Mirah Shi, Neil Chriss (precursor model), FTPL (Follow the Perturbed Leader), CCE (Coarse Correlated Equilibria). Core result: multi-player execution game decomposes into potential game (temporary impact) + constant-sum game (permanent impact), parameterized by κ. κ=0→spread orders; κ=2→front-run. FTPL achieves no-regret CCE in O(nθ²T²) per round. Companion to arXiv:2605.23905 (AI alpha decay). Not actionable at current scale; relevant for institutional execution.
+
+## [2026-06-14] lint | Health check
+Pages consulted: wiki/index.md + 20 individual wiki pages. 19 index gaps found and fixed. Pages count updated 124→143. New page created: no (all gaps were existing files not yet indexed).
+
+**Index gaps fixed (19):**
+- trading/algorithms/volatility-risk-premium.md
+- trading/shared-eval-checklist.md
+- tools/claude-code-video-toolkit.md
+- trading/tools/multi-agent-llm-trading.md
+- trading/tools/quant-mind.md
+- trading/tools/ai-trader.md
+- trading/tools/contesttrade.md
+- trading/tools/quantmuse.md
+- trading/data-sources/alternative-data.md
+- trading/data-sources/crypto-data-sources.md
+- trading/paper-trading/execution-quality.md
+- trading/prediction-markets/superforecasting-methods.md
+- trading/sources/multibagger-yartseva-2025.md
+- trading/research-log/2026-06-08.md through 2026-06-13.md (6 logs)
+
+**No contradictions found.** No orphan pages found (all pages linked from index or trading/index.md). Stale content: hypothesis-log.md frontier note shows H290–H292 but H293/H294 now staged — update on next build cycle run. VRP parenthetical in trading/index.md is cosmetic (description text appended vs separate line) — not a structural issue.

@@ -1,7 +1,7 @@
 ---
 updated: 2026-06-14
 sources_indexed: 4
-pages: 124
+pages: 143
 ---
 
 # Wiki Index
@@ -43,12 +43,15 @@ When answering a query:
 - [IBS Mean-Reversion](trading/algorithms/ibs-mean-reversion.md) — Internal Bar Strength daily mean-reversion on tech ETFs (XLK/SMH/IGV); H062–H112 confirmed; OOS Sharpe 2.129 (2021–2026); 30% production portfolio weight ← new 2026-05-28
 - [Market Microstructure & HFT](trading/algorithms/market-microstructure.md) — Stanford MS&E 448; order book dynamics, market impact, adverse selection, HFT strategies; Avellaneda-Stoikov MM model; context for execution cost modeling ← new 2026-05-25
 - [Strategic Trading Game — Kearns & Shi (2025)](trading/sources/kearns-shi-2025-strategic-trading.md) — arXiv:2502.07606; N-player execution game; temporary vs permanent market impact; FTPL for CCE; κ=0→potential game (spread orders), κ=2→zero-sum (front-run); relevant for institutional-scale execution ← new 2026-06-13
+- [The Alchemy of Multibagger Stocks — Yartseva (2025)](trading/sources/multibagger-yartseva-2025.md) — CAFÉ WP No. 33; FCF yield dominant for 10x returns; near-52w-low entry signal ← new 2026-06-12
 - [Technical Analysis Patterns](trading/algorithms/technical-analysis-patterns.md) — H234 inside-bar coiled-spring (OOS Sharpe 1.770, WR 63.9%); NR7/NR4 narrow range; TA feature library (MACD/RSI/Stochastic/ROC) for H233/H235; pandas-ta vs TA-Lib guide ← new 2026-05-29
 - [Behavioral Finance Signals](trading/algorithms/behavioral-finance-signals.md) — 52-week high anchoring (H291 NOT CONFIRMED); return seasonality Jul/Nov standout months (H292 CONFIRMED OOS 0.970); disposition effect CGO; lottery stock MAX factor ← new 2026-06-14
 - [Value Factors](trading/algorithms/value-factors.md) — FCF yield signal (FMP API); COWZ ETF mechanics; H284 CONFIRMED-weak; H286 CONFIRMED Corr(SPY)=0.596; value vs momentum tension; data sources table ← new 2026-06-13
 - [Commodity Trend Following](trading/algorithms/commodity-trend-following.md) — H261/H261b/H262 CTA on GLD/SLV/DBC/USO/DBA; UNG excluded (K-1, contango, mean-reverting); H261b CONFIRMED (OOS Sharpe 0.922, Corr(SPY)=0.218, 2022 +26.7%); H262 QUEUED (Bayesian 3m/6m/12m blend) ← new 2026-06-07
 - [Factor Momentum & Style Rotation](trading/algorithms/factor-momentum-style-rotation.md) — H255 NOT CONFIRMED (factor ETF, Corr(SPY)=0.894, no escape); H256 NOT CONFIRMED (GEM/PACS/GEM+Sector, all underperform SPY OOS); multi-asset fix → H257 ← new 2026-06-06
 - [Long-Short Equity](trading/algorithms/long-short-equity.md) — dollar-neutral L/S construction; H241/H242 NOT CONFIRMED (XGBoost 200-stock, OOS < 1.5 gate); H243 design (top/bottom quintile); short-leg survivorship bias caveats ← new 2026-05-31
+- [Volatility Risk Premium](trading/algorithms/volatility-risk-premium.md) — IV > RV ~85% of time; VRP 2–4 vol points; short-vol Sharpe ~1.0; CSP/iron condor/delta-hedged straddle; SVXY vs XIV; Volmageddon/COVID lessons; H266 queued ← new 2026-06-09
+- [Shared Strategy Evaluation Checklist](trading/shared-eval-checklist.md) — 7-point pre-production gate (George + Ernesto): look-ahead guard, NLP timestamp, cost model, soft OOS, regime coverage, survivorship bias, after-tax flag ← new 2026-06-09
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -68,6 +71,12 @@ When answering a query:
 - [QuantStats](tools/quantstats-notes.md) — Python portfolio analytics + HTML tearsheet generator; `pip install quantstats`; takes pandas returns Series → 50+ metrics + SPY benchmark + monthly heatmaps; add `qs.reports.html()` to run_hNNN.py ← new 2026-06-08
 - [Kan](tools/kan-notes.md) — self-hosted open-source kanban board (Trello alternative); AGPLv3, ~5k stars; Next.js + tRPC + Postgres; webhooks + admin API; potential task/research dashboard UI ← new 2026-06-08
 - [fireworks-tech-graph](tools/fireworks-tech-graph.md) — Claude Code skill for SVG/PNG architecture diagrams from natural language; 8 styles, 14 types, AI/Agent domain built-ins (RAG/Multi-Agent/Tool Call patterns, 40+ product icons); MIT ← new 2026-06-10
+- [claude-code-video-toolkit](tools/claude-code-video-toolkit.md) — AI-native video production; NARRATE→SCORE→GENERATE→COMPOSE→RENDER; ElevenLabs TTS, FLUX, LTX2 video; MIT ← new 2026-06-08
+- [Multi-Agent LLM Trading Systems](trading/tools/multi-agent-llm-trading.md) — TradingAgents (84.9k★); HedgeAgents (Sharpe 2.41 caveated); Reliability Taxonomy (CBS metric); NautilusTrader (23.4k★, Rust); H274 staged ← new 2026-06-10
+- [QuantMind](trading/tools/quant-mind.md) — LLMQuant paper ingestion; NeurIPS 2025; semantic quant KB; ~$0.09/night ← new 2026-06-10
+- [AI-Trader](trading/tools/ai-trader.md) — HKUDS agent-native social trading; ai4trade.ai; MIT ← new 2026-06-11
+- [ContestTrade](trading/tools/contesttrade.md) — FinStep-AI contest mechanism (arXiv:2508.00554); US V2.0; Apache 2.0 ← new 2026-06-11
+- [QuantMuse](trading/tools/quantmuse.md) — FactorCalculator/FactorScreener/BacktestEngine; C++ execution; MIT ← new 2026-06-11
 
 **Data Sources**
 - [Polygon.io](trading/data-sources/polygon.md) — market data (free: EOD only; paid: options, ticks, Greeks)
@@ -78,6 +87,8 @@ When answering a query:
 - [Sector & Industry Classification](trading/data-sources/sector-classification.md) — GICS/SIC sources; SEC EDGAR SIC, GitHub S&P 500 CSV, yfinance caveats; build_sector_cache() for 100-500 stocks; H181
 - [Earnings Calendar & Events](trading/data-sources/earnings-events.md) — FMP/Finnhub/yfinance earnings APIs; SEC EDGAR XBRL EPS extraction; EdgarTools; EPS surprise formulas; PEAD stack upgrade path for pead_overnight.py ← new 2026-05-23
 - [SEC EDGAR Fundamentals](trading/data-sources/edgar-fundamentals.md) — XBRL financial statement extraction; bulk downloads vs API; financial ratios (P/E, P/B, ROE) for quality/value factors; H221/H222 data pipeline ← new 2026-05-25
+- [Alternative Data Sources](trading/data-sources/alternative-data.md) — NewsAPI/Finnhub/ApeWisdom/Congressional/pytrends/Wikipedia; Quiver Quantitative ($30/mo); H279/H280/H281/PEAD signal taxonomy ← new 2026-06-12
+- [Crypto Data Sources](trading/data-sources/crypto-data-sources.md) — yfinance→CoinGecko→ccxt migration path; Binance public REST; Kraken asset codes ← new 2026-06-08
 
 **Backtesting**
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado; GT-Score composite objective (98% generalization improvement vs Sharpe-only)
@@ -96,6 +107,7 @@ When answering a query:
 - [H181 Industry-Adjusted Reversal Deployment](trading/paper-trading/h181-alpaca.md) — H181 live pipeline: 30-stock equal-weight monthly reversal; started 2026-05-10
 - [Live Graduation Criteria](trading/paper-trading/live-graduation-criteria.md) — SPRT statistical test for strategy validation; minimum trade counts; regime coverage gates; performance attribution; Alpaca migration steps; graduation status by strategy ← new 2026-05-30
 - [Tax & After-Tax Return Modeling](trading/paper-trading/tax-and-after-tax-returns.md) — short/long-term cap gains, wash-sale rules, tax-loss harvesting, after-tax Sharpe adjustment; strategy-specific tax efficiency rankings ← new 2026-06-05
+- [Execution Quality & Slippage Analysis](trading/paper-trading/execution-quality.md) — fill analysis for paper→live graduation; slippage measurement; OPG vs MARKET comparison ← new 2026-06-11
 
 **Prediction Markets**
 - [Kalshi](trading/prediction-markets/kalshi.md) — primary prediction market platform; CFTC-regulated, economic events, RSA-PSS auth, CPI/NFP strategies live
@@ -104,6 +116,7 @@ When answering a query:
 - [Prediction Market Algorithmic Strategies](trading/prediction-markets/algorithmic-strategies.md) — Kelly criterion, event modeling, arbitrage, NLP; cross-market arb, Timeless funding arb
 - [Nowcasting Playbook](trading/prediction-markets/nowcasting-playbook.md) — CPI/NFP/FOMC prediction market strategies; CME FedWatch implied probability extraction; signal timing; H185 design ← new 2026-05-27
 - [AI Model Benchmarks on Prediction Markets](trading/prediction-markets/ai-model-benchmarks.md) — Prediction Arena (arXiv:2604.07355); 6 models, $10k real capital, 57-day Kalshi/Polymarket eval; all lost money on Kalshi; Polymarket dramatically better (−1.1% vs −22.6%); research quantity ≠ performance ← 2026-05-29
+- [Superforecasting Methods](trading/prediction-markets/superforecasting-methods.md) — Tetlock GJP; reference class forecasting; Bayesian updating; Brier/ECE calibration; LLM benchmarks (KalshiBench ECE 0.120 best); isotonic recalibration ← new 2026-06-11
 
 **Research Logs**
 - [Research Log 2026-04-24](trading/research-log/2026-04-24.md) — session 1: tools and data sources
@@ -140,6 +153,12 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-06-13](trading/research-log/2026-06-13.md) — wiki: value-factors.md new; dream cycle: H293 press-release PEAD, H294 behavioral MLP, TS foundation models staged
+- [Research Log 2026-06-12](trading/research-log/2026-06-12.md) — wiki: alternative-data.md new; multibagger-yartseva-2025.md ingested; dream cycle scan
+- [Research Log 2026-06-11](trading/research-log/2026-06-11.md) — wiki: superforecasting-methods.md + execution-quality.md + ai-trader.md + contesttrade.md + quantmuse.md new; dream cycle scan
+- [Research Log 2026-06-10](trading/research-log/2026-06-10.md) — wiki: multi-agent-llm-trading.md + quant-mind.md new; dream cycle scan
+- [Research Log 2026-06-09](trading/research-log/2026-06-09.md) — wiki: volatility-risk-premium.md + shared-eval-checklist.md new; H266 VRP + H274 multi-agent PEAD staged
+- [Research Log 2026-06-08](trading/research-log/2026-06-08.md) — wiki: crypto-data-sources.md + claude-code-video-toolkit.md + QuantStats + Kan new; dream cycle scan
 - [Research Log 2026-06-07](trading/research-log/2026-06-07.md) — wiki: commodity-trend-following.md new; H257 CONFIRMED (multi-asset dual momentum); H261 NOT CONFIRMED (UNG MaxDD -78%); H261b CONFIRMED (OOS 0.922, Corr(SPY)=0.218); dream cycle: H262/signal-halflife/FinCall-Surprise applied
 - [Research Log 2026-05-23](trading/research-log/2026-05-23.md) — H215 CONFIRMED (alpha101 OOS 1.321); H216 CONFIRMED-weak (vol-price divergence, below SPY); blend H215+H198 OOS 1.397; earnings-events.md wiki new
 - [Research Log 2026-05-21](trading/research-log/2026-05-21.md) — H205/H206/H207/H208 NOT CONFIRMED (full calendar family closed); H202-XL NOT CONFIRMED (OOS 1.106)
