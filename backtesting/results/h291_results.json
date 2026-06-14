@@ -1,0 +1,42 @@
+{
+  "hypothesis": "H291",
+  "description": "52-Week High Proximity Momentum (George & Hwang 2004)",
+  "signal": "P_t / max(P over prior 252 trading days) \u2192 long top-10",
+  "rebalance": "monthly",
+  "n_long": 10,
+  "is_period": "2008-2017",
+  "oos_period": "2018-2025",
+  "is_stats": {
+    "cagr": 0.1277,
+    "sharpe": 1.0309,
+    "max_drawdown": -0.2774,
+    "n_months": 119,
+    "neg_years": 2
+  },
+  "oos_stats": {
+    "cagr": 0.1161,
+    "sharpe": 0.7635,
+    "max_drawdown": -0.1437,
+    "n_months": 101,
+    "neg_years": 1
+  },
+  "spy_is": {
+    "cagr": 0.0845,
+    "sharpe": 0.561,
+    "max_drawdown": -0.4632,
+    "n_months": 120,
+    "neg_years": 1
+  },
+  "spy_oos": {
+    "cagr": 0.1491,
+    "sharpe": 0.8997,
+    "max_drawdown": -0.2393,
+    "n_months": 101,
+    "neg_years": 2
+  },
+  "walkforward_ratio": 0.7406,
+  "corr_spy_oos": 0.731,
+  "corr_prod_oos": 0.694,
+  "verdict": "NOT CONFIRMED",
+  "survivorship_bias": true
+}

@@ -1,11 +1,43 @@
 {
   "hypothesis": "H284",
-  "description": "FCF/P Stock Screener (Free Cash Flow Yield)",
-  "etf_proxy_mode": true,
-  "cowz_oos_sharpe": 0.7368,
-  "cowz_oos_cagr": 0.1454,
-  "cowz_oos_maxdd": -0.2385,
-  "spy_oos_sharpe": 0.9205,
-  "verdict": "NOT CONFIRMED",
-  "note": "yfinance quarterly CF limited to ~5yr; FMP key-metrics 403; COWZ ETF used as proxy"
+  "description": "FCF/P Stock Screener (Free Cash Flow Yield via FMP)",
+  "data_source": "FMP stable/key-metrics \u2192 freeCashFlowYield",
+  "rebalance": "annual (end of Q1)",
+  "signal_lag": "FY ending <= Dec 31 of prior year (3-month reporting lag)",
+  "is_period": "2022-04 to 2024-03",
+  "oos_period": "2024-04 to present",
+  "is_stats": {
+    "cagr": 0.1158,
+    "sharpe": 0.6789,
+    "max_drawdown": -0.1384,
+    "n_months": 24,
+    "neg_years": 1
+  },
+  "oos_stats": {
+    "cagr": 0.1521,
+    "sharpe": 1.297,
+    "max_drawdown": -0.1026,
+    "n_months": 24,
+    "neg_years": 0
+  },
+  "spy_is": {
+    "cagr": 0.0931,
+    "sharpe": 0.4762,
+    "max_drawdown": -0.1295,
+    "n_months": 24,
+    "neg_years": 1
+  },
+  "spy_oos": {
+    "cagr": 0.1989,
+    "sharpe": 1.5522,
+    "max_drawdown": -0.0758,
+    "n_months": 26,
+    "neg_years": 0
+  },
+  "walkforward_ratio": 1.9104,
+  "corr_spy_oos": 0.6453,
+  "verdict": "CONFIRMED",
+  "survivorship_bias": true,
+  "n_tickers_with_data": 21,
+  "cowz_oos_sharpe": 0.7368
 }

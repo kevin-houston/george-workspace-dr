@@ -1,0 +1,41 @@
+{
+  "hypothesis": "H292",
+  "description": "Return Seasonality \u2014 same calendar month, 1-year lag (Heston & Sadka 2008)",
+  "signal": "return in same calendar month 1 year prior \u2192 long top-10",
+  "rebalance": "monthly",
+  "n_long": 10,
+  "is_period": "2008-2017",
+  "oos_period": "2018-2025",
+  "is_stats": {
+    "cagr": 0.116,
+    "sharpe": 0.6877,
+    "max_drawdown": -0.383,
+    "n_months": 119,
+    "neg_years": 1
+  },
+  "oos_stats": {
+    "cagr": 0.1819,
+    "sharpe": 0.9704,
+    "max_drawdown": -0.1905,
+    "n_months": 101,
+    "neg_years": 2
+  },
+  "spy_is": {
+    "cagr": 0.0845,
+    "sharpe": 0.561,
+    "max_drawdown": -0.4632,
+    "n_months": 120,
+    "neg_years": 1
+  },
+  "spy_oos": {
+    "cagr": 0.1491,
+    "sharpe": 0.8997,
+    "max_drawdown": -0.2393,
+    "n_months": 101,
+    "neg_years": 2
+  },
+  "walkforward_ratio": 1.4111,
+  "corr_spy_oos": 0.8376,
+  "verdict": "CONFIRMED",
+  "survivorship_bias": true
+}

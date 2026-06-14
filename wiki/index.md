@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-13
+updated: 2026-06-14
 sources_indexed: 4
 pages: 124
 ---
@@ -44,6 +44,7 @@ When answering a query:
 - [Market Microstructure & HFT](trading/algorithms/market-microstructure.md) — Stanford MS&E 448; order book dynamics, market impact, adverse selection, HFT strategies; Avellaneda-Stoikov MM model; context for execution cost modeling ← new 2026-05-25
 - [Strategic Trading Game — Kearns & Shi (2025)](trading/sources/kearns-shi-2025-strategic-trading.md) — arXiv:2502.07606; N-player execution game; temporary vs permanent market impact; FTPL for CCE; κ=0→potential game (spread orders), κ=2→zero-sum (front-run); relevant for institutional-scale execution ← new 2026-06-13
 - [Technical Analysis Patterns](trading/algorithms/technical-analysis-patterns.md) — H234 inside-bar coiled-spring (OOS Sharpe 1.770, WR 63.9%); NR7/NR4 narrow range; TA feature library (MACD/RSI/Stochastic/ROC) for H233/H235; pandas-ta vs TA-Lib guide ← new 2026-05-29
+- [Behavioral Finance Signals](trading/algorithms/behavioral-finance-signals.md) — 52-week high anchoring (H291 NOT CONFIRMED); return seasonality Jul/Nov standout months (H292 CONFIRMED OOS 0.970); disposition effect CGO; lottery stock MAX factor ← new 2026-06-14
 - [Commodity Trend Following](trading/algorithms/commodity-trend-following.md) — H261/H261b/H262 CTA on GLD/SLV/DBC/USO/DBA; UNG excluded (K-1, contango, mean-reverting); H261b CONFIRMED (OOS Sharpe 0.922, Corr(SPY)=0.218, 2022 +26.7%); H262 QUEUED (Bayesian 3m/6m/12m blend) ← new 2026-06-07
 - [Factor Momentum & Style Rotation](trading/algorithms/factor-momentum-style-rotation.md) — H255 NOT CONFIRMED (factor ETF, Corr(SPY)=0.894, no escape); H256 NOT CONFIRMED (GEM/PACS/GEM+Sector, all underperform SPY OOS); multi-asset fix → H257 ← new 2026-06-06
 - [Long-Short Equity](trading/algorithms/long-short-equity.md) — dollar-neutral L/S construction; H241/H242 NOT CONFIRMED (XGBoost 200-stock, OOS < 1.5 gate); H243 design (top/bottom quintile); short-leg survivorship bias caveats ← new 2026-05-31
@@ -85,7 +86,7 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H262 (frontier: H258 LLM metric-shift 10-Q text, H260 PEAD 12-quarter ML, H262 QUEUED Bayesian CTA); H257 CONFIRMED (multi-asset composite dual momentum); H261b CONFIRMED (commodity CTA OOS 0.922, Corr(SPY)=0.218); production portfolio H041a/H026/H045/IBS
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H292 (frontier: H290 EDGAR lexical density, H287-H289 QUEUED); H292 CONFIRMED (return seasonality Jul/Nov OOS 0.970); H291 NOT CONFIRMED (52-wk high proximity, OOS 0.764); H286 CONFIRMED (COWZ/SPY cross-momentum); production portfolio H041a/H026/H045/IBS
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
