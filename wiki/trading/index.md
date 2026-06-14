@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-12 (alternative-data.md new — NewsAPI/Finnhub/ApeWisdom/pytrends/Wikipedia/Congressional trade APIs, signal taxonomy, H279/PEAD integration patterns)
+updated: 2026-06-13 (alternative-data.md new — NewsAPI/Finnhub/ApeWisdom/pytrends/Wikipedia/Congressional trade APIs, signal taxonomy, H279/PEAD integration patterns)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -40,7 +40,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Long/Short Equity](algorithms/long-short-equity.md) ← new 2026-06-02 (dollar-neutral L/S construction; 130/30; borrow costs ~0.75%/yr large-cap; H243 design: top/bottom quintile EW on 200-stock universe; momentum crash risk + Daniel/Moskowitz 2016; sector-neutral L/S variant; backtesting mistake table)
   - [Factor Momentum & Style Rotation](algorithms/factor-momentum-style-rotation.md) ← new 2026-06-06 (Gupta & Kelly 2019 IS Sharpe 0.84 long-short; H255 NOT CONFIRMED long-only ETF Corr=0.89 all US equity; H256 NOT CONFIRMED GEM/PACS/GEM+Sector all < SPY OOS 2015-2025; look-ahead bias trap: unlagged 12m signal inflated OOS Sharpe 3×; multi-asset extensions with bonds+commodities queued)
   - [Commodity Trend Following](algorithms/commodity-trend-following.md) ← new 2026-06-07 (H261 NOT CONFIRMED UNG MaxDD -78%; H261b CONFIRMED Top-2 OOS Sharpe 0.922 Corr(SPY)=0.218; 2022 +26.7% vs SPY -18.2%; K-1 tax flags; roll yield mechanics; IS/OOS disconnect documented; H262 multi-horizon signal queued)
-  - [Volatility Risk Premium (VRP)](algorithms/volatility-risk-premium.md) ← new 2026-06-09 (IV > RV 85% of time; VRP ~2-4 vol points; short-vol Sharpe ~1.0; CSP/iron condor/delta-hedged straddle mechanics; VIX contango harvesting SVXY; Volmageddon/COVID risk lessons; H266 iron condor queued; VRP + IBS synergy noted)
+  - [Volatility Risk Premium (VRP)](algorithms/volatility-risk-premium.md) ← new 2026-06-09
+  - [Value Factors (FCF Yield, COWZ, H284/H286)](algorithms/value-factors.md) ← new 2026-06-13 (FCF yield beats B/M; COWZ/SPY cross-momentum H286 CONFIRMED Corr(SPY)=0.596; FMP API; value vs momentum tension) (IV > RV 85% of time; VRP ~2-4 vol points; short-vol Sharpe ~1.0; CSP/iron condor/delta-hedged straddle mechanics; VIX contango harvesting SVXY; Volmageddon/COVID risk lessons; H266 iron condor queued; VRP + IBS synergy noted)
 - [**Shared Evaluation Checklist**](shared-eval-checklist.md) ← new 2026-06-09 (7-point standard agreed by George + Ernesto: look-ahead guard, NLP timestamp, cost model, soft OOS gate, regime coverage, survivorship bias, after-tax flag)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
@@ -95,6 +96,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Sources](sources/) — ingested papers and working papers
   - [The Alchemy of Multibagger Stocks](sources/multibagger-yartseva-2025.md) ← new 2026-06-12 (Yartseva 2025; FCF/P = #1 factor; EPS growth NOT sig; small-cap +37.7% vs large +9.7%; asset_growth>EBITDA_growth −22.8pp; near-12m-low entry signal; rate-hike −8-12pp; H285 proposed)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-06-13](research-log/2026-06-13.md) — wiki expansion: value-factors.md new (FCF yield, COWZ, H284/H285/H286 synthesis, value vs momentum tension); dream cycle: H293 press release structure PEAD (arXiv:2509.24254), H294 behavioral multi-factor MLP (arXiv:2508.14656), time-series foundation models wiki (Chronos/TimesFM/Lag-Llama)
   - [2026-06-11](research-log/2026-06-11.md) — wiki expansion: execution-quality.md new (IS benchmarks, paper fill mechanics, slippage budgets, graduation gates); dream cycle: H279 LLM momentum filter arXiv:2510.26228, H280 MarketSenseAI arXiv:2604.17327, H281 macro-LLM ETF arXiv:2606.08283, hyperbolic alpha decay wiki arXiv:2512.11913
   - [2026-06-08](research-log/2026-06-08.md) — wiki expansion: crypto-data-sources.md new (yfinance fragility, ccxt/CoinGecko migration path); dream cycle: H264b trailing-stop crypto, H265 drift-regime factor (arXiv:2511.12490 OOS Sharpe >13 — skeptical replication candidate), QuantStats wiki staged
   - [2026-06-07](research-log/2026-06-07.md) — wiki expansion: commodity-trend-following.md new (H261b Corr(SPY)=0.218 lowest of any confirmed H; K-1 tax flags; dream cycle: H262 Bayesian short+long CTA; AI alpha decay half-life 12m update; FinCall-Surprise multi-modal PEAD assessment)

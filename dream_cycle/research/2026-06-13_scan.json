@@ -1,0 +1,107 @@
+{
+  "scan_date": "2026-06-13",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + NLP + FinBERT earnings",
+    "cross-sectional momentum + factor",
+    "multi-agent LLM trading",
+    "GitHub trending quant repos"
+  ],
+  "papers_found": [
+    {
+      "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+      "arxiv_id": "2605.01954",
+      "year": 2026,
+      "angle": 1,
+      "key_finding": "LLM-parameterized high-level (pair selection) + low-level (execution) RL hierarchy; adapts via textual feedback without gradient training. Claims improvement over baselines but no specific Sharpe disclosed in abstract.",
+      "relevance_score": 0.5,
+      "actionability": "low",
+      "hypothesis_connection": "Pairs family exhausted (H152-H160). Interesting architecture for reference only.",
+      "staged": false,
+      "skip_reason": "Pairs trading family closed as NOT CONFIRMED. No specific performance numbers to evaluate."
+    },
+    {
+      "title": "Dynamic Multi-Pair Trading Strategy in Cryptocurrency Markets with Deep Reinforcement Learning",
+      "arxiv_id": "2606.04574",
+      "year": 2026,
+      "angle": 1,
+      "key_finding": "PPO-LSTM with 'Filter-then-Rank' pair selection + 'Fixed Risk, Adaptive Mean' execution on Binance 1h crypto pairs. OOS significantly outperforms heuristic baseline (significant at 10% not 5%).",
+      "relevance_score": 0.45,
+      "actionability": "low",
+      "hypothesis_connection": "Crypto pairs on H264/H264b universe. Statistical significance marginal (10% not 5%).",
+      "staged": false,
+      "skip_reason": "Crypto pairs only; statistical significance too marginal; pairs family closed."
+    },
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "arxiv_id": "2509.24254",
+      "year": 2025,
+      "angle": 2,
+      "key_finding": "138K+ earnings press releases 2005-2023. FinBERT has highest predictive power. Structural decomposition (section-level scoring) 'as informative as EPS surprise'. Prices fully reflect content at market open — OPG execution matches H174 setup. Accepted ACM ICAIF 2025.",
+      "relevance_score": 0.88,
+      "actionability": "high",
+      "hypothesis_connection": "H293 — directly upgrades H174 (OOS WR 81.8%). Section-weighted FinBERT score: 0.3*highlights + 0.2*results + 0.5*guidance.",
+      "staged": true,
+      "staged_file": "1_press-release-structure-pead.json"
+    },
+    {
+      "title": "SAE-FiRE: Enhancing Earnings Surprise Predictions Through Sparse Autoencoder Feature Selection",
+      "arxiv_id": "2505.14420",
+      "year": 2025,
+      "angle": 2,
+      "key_finding": "Sparse Autoencoders + ANOVA F-tests for feature selection on financial documents reduces overfitting. No specific backtest Sharpe numbers in abstract.",
+      "relevance_score": 0.55,
+      "actionability": "medium",
+      "hypothesis_connection": "Could improve FinBERT feature selection for H174/H293. Complex implementation.",
+      "staged": false,
+      "skip_reason": "No quantitative results disclosed. Too complex to implement without benchmarks. Mark for future review after H293 is built."
+    },
+    {
+      "title": "Deep Learning for Short-Term Equity Trend Forecasting: A Behavior-Driven Multi-Factor Approach",
+      "arxiv_id": "2508.14656",
+      "year": 2025,
+      "angle": 3,
+      "key_finding": "Dual-task MLP (joint regression + direction classification) with 40 behavioral factors (momentum herding, vol-price divergence, bottom reversals, TA). Superior IC/IR vs linear factor models. 5-day horizon.",
+      "relevance_score": 0.72,
+      "actionability": "medium",
+      "hypothesis_connection": "H294 — extends H217 (alpha101 OOS Sharpe 1.559) with behavioral factors + dual-task loss. Gate: OOS Sharpe > 1.559.",
+      "staged": true,
+      "staged_file": "3_behavior-driven-multifactor-h294.json"
+    },
+    {
+      "title": "Time-Series Foundation Models (Chronos / TimesFM / Lag-Llama)",
+      "arxiv_id": "github-repos",
+      "year": 2024,
+      "angle": 5,
+      "key_finding": "Zero-shot pretrained forecasting models from Amazon (Chronos), Google (TimesFM 200M), Morgan Stanley/Mila (Lag-Llama). No trading-specific Sharpe improvement documented yet.",
+      "relevance_score": 0.60,
+      "actionability": "medium",
+      "hypothesis_connection": "Could replace GARCH vol estimator in H273 or HMM in H251. Wiki update only until backtested results emerge.",
+      "staged": true,
+      "staged_file": "2_timeseries-foundation-models-wiki.json"
+    }
+  ],
+  "staged_proposals": [
+    {
+      "file": "1_press-release-structure-pead.json",
+      "id": "H293-press-release-structure-pead",
+      "risk_level": "medium",
+      "rationale": "High-relevance PEAD upgrade — section-weighted FinBERT score on earnings press releases"
+    },
+    {
+      "file": "2_timeseries-foundation-models-wiki.json",
+      "id": "wiki-timeseries-foundation-models",
+      "risk_level": "low",
+      "rationale": "Wiki addition covering zero-shot time-series forecasting models (Chronos/TimesFM/Lag-Llama)"
+    },
+    {
+      "file": "3_behavior-driven-multifactor-h294.json",
+      "id": "H294-behavior-driven-multifactor",
+      "risk_level": "medium",
+      "rationale": "Behavioral multi-factor MLP extending H217 alpha101 with 40 factors + dual-task training"
+    }
+  ],
+  "total_papers_reviewed": 6,
+  "staged_count": 3,
+  "not_staged_count": 3
+}
