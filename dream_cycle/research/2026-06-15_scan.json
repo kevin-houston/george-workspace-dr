@@ -1,0 +1,92 @@
+{
+  "date": "2026-06-15",
+  "session": "nightly-autonomous",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + post-earnings drift + text signals",
+    "cross-sectional momentum + factor momentum + ML",
+    "multi-agent LLM trading systems",
+    "GitHub trending quantitative finance repos"
+  ],
+  "papers_found": [
+    {
+      "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+      "url": "https://arxiv.org/abs/2605.01954",
+      "authors": "Giannouris et al.",
+      "year": 2025,
+      "angle": "pairs trading + LLM",
+      "relevance_score": 7,
+      "relevance_notes": "LLM-based semantic pair selection (high-level) + RL execution (low-level). No hard OOS numbers. Novel framing relevant to H200/pairs family. Staged as H297 proposal.",
+      "staged": true,
+      "staged_file": "4_moira-llm-pairs-trading.json"
+    },
+    {
+      "title": "Dynamic Multi-Pair Trading Strategy in Cryptocurrency Markets with Deep Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2606.04574",
+      "authors": "Lebiedz & Slepaczuk",
+      "year": 2026,
+      "angle": "pairs trading + RL",
+      "relevance_score": 5,
+      "relevance_notes": "PPO+LSTM crypto pairs trading. Filter-then-rank methodology and deterministic shielding are useful concepts. Crypto-only; limited direct applicability to equity rotation pipeline.",
+      "staged": false
+    },
+    {
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large [LLMs]",
+      "url": "https://aclanthology.org/2025.finnlp-2.13",
+      "authors": "Unknown (PDF corrupted)",
+      "year": 2025,
+      "angle": "PEAD + NLP",
+      "relevance_score": 6,
+      "relevance_notes": "PDF unreadable. Title suggests LLM-enhanced PEAD measurement. Could not extract OOS results. FinBERT achieves 57-58% accuracy on earnings direction. No actionable numbers obtained.",
+      "staged": false
+    },
+    {
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+      "url": "https://arxiv.org/abs/2507.07107",
+      "authors": "Du, Yimin",
+      "year": 2025,
+      "angle": "cross-sectional momentum + ML",
+      "relevance_score": 7,
+      "relevance_notes": "213-factor engine, A-shares OOS Sharpe 1.63 (2022-2024). Key finding: tradability mask removes 18% IC inflation and +0.44 Sharpe from non-tradable prices. US analog relevant for stock-level strategies. Staged as wiki update for survivorship-bias.md.",
+      "staged": true,
+      "staged_file": "5_mask-first-factor-bias-wiki.json"
+    },
+    {
+      "title": "Agentic Trading: When LLM Agents Meet Financial Markets",
+      "url": "https://arxiv.org/abs/2605.19337",
+      "authors": "Xia et al.",
+      "year": 2026,
+      "angle": "multi-agent LLM",
+      "relevance_score": 9,
+      "relevance_notes": "CRITICAL: survey of 19 LLM trading studies finds only 2 had valid IS/OOS protocols, 1 reported transaction costs, 0 achieved R3 reproducibility. Validates George's backtesting discipline. Staged as wiki update for design-principles.md.",
+      "staged": true,
+      "staged_file": "1_llm-trading-reproducibility-wiki.json"
+    },
+    {
+      "title": "prediction-market-analysis (GitHub dataset repo)",
+      "url": "https://github.com",
+      "authors": "Community",
+      "year": 2025,
+      "angle": "GitHub trending",
+      "relevance_score": 8,
+      "relevance_notes": "36GB historical Polymarket+Kalshi data with cleaned order books and resolution data. High value for backtesting H185 (CPI nowcasting) and cross-platform arb. Staged as wiki update for other-platforms.md.",
+      "staged": true,
+      "staged_file": "2_prediction-market-data-repo.json"
+    },
+    {
+      "title": "pmxt — Unified Prediction Market API",
+      "url": "https://github.com",
+      "authors": "Community",
+      "year": 2025,
+      "angle": "GitHub trending",
+      "relevance_score": 7,
+      "relevance_notes": "CCXT-style unified API for Polymarket, Kalshi, etc. Enables cross-platform arb scanning. 1.2k stars. Staged as wiki update for other-platforms.md.",
+      "staged": true,
+      "staged_file": "3_pmxt-prediction-market-api.json"
+    }
+  ],
+  "proposals_staged": 5,
+  "not_staged": 2,
+  "high_relevance_count": 3,
+  "summary": "Best find: Agentic Trading survey (2605.19337) — validates our backtesting rigor vs industry LLM papers. Practical finds: prediction-market-analysis dataset (36GB PM history) and pmxt unified PM API directly actionable for prediction markets work. Moira pairs trading (2605.01954) staged as H297 seed — LLM semantic pair selection is a novel approach after H200/ETF pairs were exhausted. Mask-first bias correction (2507.07107) extends survivorship-bias wiki with a new US-applicable concept."
+}

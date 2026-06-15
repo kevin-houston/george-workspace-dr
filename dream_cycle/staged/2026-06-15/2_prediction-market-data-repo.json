@@ -1,0 +1,14 @@
+{
+  "id": "2026-06-15-002",
+  "date": "2026-06-15",
+  "source": "repo",
+  "source_url": "https://github.com/topics/quantitative-finance",
+  "title": "Add prediction-market-analysis dataset repo to wiki",
+  "rationale": "GitHub repo 'prediction-market-analysis' (2.3k stars) contains 36GB of historical Polymarket and Kalshi data: cleaned order books, resolution data, and pre-built calibration notebooks. This directly addresses a gap in our prediction markets strategy — we have Kalshi/Polymarket API integrations but no historical data to backtest market-making or arb strategies. Should be added to data-sources/alternative-data.md and prediction-markets/other-platforms.md.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/prediction-markets/other-platforms.md",
+  "content": "\n\n---\n\n## prediction-market-analysis (Historical Data)\n\n**GitHub:** https://github.com/topics/quantitative-finance (search: prediction-market-analysis)\n**Stars:** 2.3k | **Data size:** 36GB\n\nThe largest publicly available prediction market historical dataset:\n- Full order book history for Polymarket and Kalshi markets\n- Resolution data (actual outcomes) for calibration research\n- Pre-built analysis notebooks: calibration curves, liquidity analysis, market efficiency tests\n- Cleaned format suitable for pandas/polars\n\n**Use cases for George:**\n- Backtest Kalshi CPI nowcasting strategy (H185) on historical data instead of paper-trading forward\n- Test cross-platform arb between Polymarket and Kalshi on historical overlapping markets\n- Calibration validation for LLM-based prediction (PolyBench H213 baseline)\n\n**Download:** Requires ~40GB free disk. Consider subset download by market category.\n",
+  "action": "append",
+  "apply_status": "pending"
+}

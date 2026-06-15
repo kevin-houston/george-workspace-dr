@@ -1,0 +1,14 @@
+{
+  "id": "2026-06-15-004",
+  "date": "2026-06-15",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2605.01954",
+  "title": "Stage H297: Moira-inspired LLM pair selection for equity pairs trading",
+  "rationale": "Moira (arXiv:2605.01954, Giannouris et al. 2025) uses DeepSeek-V3 as a hierarchical RL agent for pair trading: high-level LLM selects pairs semantically, low-level LLM executes. Tests Jan–Jun 2025 on real market data. Our H200 (graphical pairs, 0/15 cointegrated OOS) and H159/H160 (ETF pairs exhausted) show cointegration-based pair selection fails. LLM semantic pair selection is a fundamentally different approach — it finds pairs that SHOULD co-move (e.g. NVDA+AMD) rather than pairs that historically did. Relevant as H297: LLM semantic pair selection + z-score execution on 100-stock universe.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h297.py",
+  "content": "# H297 — LLM Semantic Pair Selection for Equity Pairs Trading\n# Source: Moira (arXiv:2605.01954, Giannouris et al. 2025)\n#\n# Signal: Use GPT-4o-mini to identify semantically related stock pairs\n# (competitors, suppliers, sector peers) rather than statistical cointegration.\n# Execute pairs as standard z-score mean-reversion trades.\n#\n# Design:\n#   1. Semantic pair selection: ask GPT-4o-mini for natural language competitor/peer pairs\n#      from a 50-stock universe — output a set of (A, B) pairs\n#   2. Filter: require pairs to have corr > 0.6 over IS period (sanity check)\n#   3. Execute: standard z-score entry/exit (±2σ entry, 0σ exit) on daily closes\n#   4. Universe: S&P 500 sector ETFs + major sector constituents (50 stocks)\n#   5. IS: 2018-2021, OOS: 2022-2026\n#   6. Gate: OOS Sharpe > 0.8, MaxDD < 20%\n#\n# TODO: implement GPT-4o-mini semantic pair generation call\n# Cost estimate: ~$0.05 per universe query (one-time per IS period)\n",
+  "action": "write",
+  "apply_status": "pending"
+}
