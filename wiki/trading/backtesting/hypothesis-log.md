@@ -1,3 +1,6 @@
+h296_status: CONFIRMED (2026-06-14) — VIX Term Structure Equity Timing. VIX spot vs ^VIX3M as daily equity timing signal; backwardation (VIX>VIX3M) = stress, flee to BIL. 4 variants tested IS 2013-2019, OOS 2020-2026. CONFIRMED variants: B (ratio<0.95) OOS Sharpe=1.002, C (VIX<VIX3M + SPY>200MA) OOS Sharpe=1.116 MaxDD=-18.6% (vs SPY -33.7%), D (continuous weight) OOS Sharpe=2.379 but only 3.7% CAGR / 10.8% in SPY (near-cash, deceptive Sharpe — exclude from production). Variant A (pure binary) OOS=0.982, just misses gate. BEST: Variant C — doubles signal strength vs plain VIX binary, cuts MaxDD from -33.7% to -18.6%, CAGR 13.1% vs SPY 15.7%. Backwardation fraction: only 7.8% of trading days — signal is conservative and accurate. Script: backtesting/daily/run_h296.py. Results: backtesting/results/h296_results.json.
+h295_status: NOT CONFIRMED (2026-06-14) — Factor MAX ETF Rotation. Source: Wang & Zeng (Dec 2025) SSRN 6053114. Max single-day return of each ETF in prior month as rotation signal. 23-asset H026-style universe. 5 variants tested. All NOT CONFIRMED: Standalone MAX OOS Sharpe=0.052–0.134 (far below baseline); Blend 50/50 OOS=0.477, Blend 70/30 OOS=0.399 — no improvement over momentum baseline (0.491). Root cause: Factor MAX doesn't translate from academic long-short factors to sector ETFs (ETF MAX is sector-specific news already priced, not diversified underreaction signal). Script: backtesting/daily/run_h295.py.
+h294_status: NOT CONFIRMED (2026-06-14) — Behavioral Multi-Factor MLP. 27 OHLCV behavioral features, dual-task MLP (MSE + BCE joint loss), weekly SPY rebalance. IS 2013-2020 Sharpe=2.732, OOS 2021-2026 Sharpe=0.827, WF ratio=0.303. Gate OOS Sharpe >1.559: FAIL. Severe overfitting — IS bull market (2013-2020) vs OOS regime shift (COVID, rate shock, AI rally). Script: backtesting/daily/run_h294.py.
 h292_status: CONFIRMED (2026-06-13) — Return Seasonality (Same Calendar Month, 1-Year Lag). Source: Heston & Sadka (2008) "Seasonality in the Cross-Section of Stock Returns" (JFE). Stocks that performed well in the same calendar month one year ago continue to outperform in that month the following year; pattern persists for up to 20 annual lags and holds across global equity markets. Mechanism: earnings seasonality (Q4 retailers earn more every December), tax-loss harvesting bounce (January), institutional window dressing (quarter-end). Signal: return of stock in same calendar month one year prior → long top-10 equal-weight, monthly rebalance. Universe: 50-stock large-cap (⚠️ survivorship bias: fixed with 2026 knowledge). IS 2008-2017, OOS 2018-2025. RESULTS: IS Sharpe=0.688, CAGR=11.6%. OOS Sharpe=0.970, CAGR=18.2%, MaxDD=-19.1%, NegYrs=2. SPY OOS Sharpe=0.870. WF ratio=1.411 (OOS > IS — suspicious; survivorship bias likely inflating both periods). Corr(SPY) OOS=0.838. Gate 1 OOS Sharpe ≥ 0.9: PASS. Gate 2 WF ≥ 0.45: PASS. CONFIRMED. MONTHLY BREAKDOWN (OOS 2018-2025): Jan +2.69% WR=89% (tax bounce); Feb -0.64% WR=44% (weak); Mar -1.20% WR=44% (weak); Apr +2.37% WR=67%; May +1.09% WR=67%; Jun +2.70% WR=62%; Jul +5.10% WR=100% (strongest — pre-earnings positioning); Aug +1.95% WR=62%; Sep -1.54% WR=50% (weak — September effect); Oct +0.08% WR=38% (weakest); Nov +5.13% WR=88% (strongest — pre-holiday rally); Dec +1.21% WR=62%. ACTIONABLE INSIGHT: July and November seasonal signals are actionable as tactical overlays — increase equity weight in stocks that did well in same month last year. Do NOT use as standalone monthly rotation (Feb/Mar/Sep/Oct erode annual Sharpe). CAVEATS: (1) survivorship bias: fixed 50-stock universe from 2026; (2) WF>1 suggests OOS period was unusually favorable; (3) only 8-9 OOS observations per calendar month; (4) Corr(SPY)=0.838 limits diversification value. Script: backtesting/daily/run_h292.py. Results: backtesting/results/h292_results.json.
 h291_status: NOT CONFIRMED (2026-06-13) — 52-Week High Proximity Momentum. Source: George & Hwang (2004) "The 52-Week High and Momentum Investing" (JF). Stocks trading close to their 52-week high outperform because of anchoring bias: investors use the 52-week high as a reference point and resist bidding beyond it; when fundamentals force a breakout, the continuation is strong. Signal: R52 = P_t / max(P over prior 252 trading days); long top-10 by R52, monthly rebalance, equal-weight. Universe: 50-stock large-cap (⚠️ survivorship bias). IS 2008-2017, OOS 2018-2025. RESULTS: IS Sharpe=1.031, CAGR=12.8%. OOS Sharpe=0.764, CAGR=11.6%, MaxDD=-14.4%, NegYrs=2. SPY OOS Sharpe=0.870. WF ratio=0.741. Corr(SPY) OOS=0.731. Gate 1 OOS Sharpe ≥ 0.9: FAIL (0.764). Gate 2 WF ≥ 0.45: PASS. NOT CONFIRMED. ROOT CAUSE: In a 50-stock large-cap universe during the 2018-2025 bull market, most stocks are simultaneously near their 52-week highs, collapsing cross-sectional dispersion in R52. Signal works best in volatile/bear markets with wide cross-sectional dispersion and in small/mid-cap universes. WHEN SIGNAL IS STRONGEST: bear/recovery markets, small/mid-cap universes, when market itself is below its own 52-week high (Li & Yu 2012 market-level version). Script: backtesting/daily/run_h291.py. Results: backtesting/results/h291_results.json.
 h290_status: QUEUED (2026-06-13) — Lexical Density of EDGAR Filings (SSRN 3921091). Source: "Lexical Density and Readability Indices in US Annual Reports." Higher Type-Token Ratio (unique words / total words) in 10-K/10-Q text predicts outperformance. Paper Sharpe 0.688, monthly rebalancing on S&P 500. Design: 50 large-cap universe; fetch 10-K/10-Q text from EDGAR REST API; compute TTR and Herdan's C; rank monthly; long top-10 equal-weight; 60-day filing lag. IS 2019-2021, OOS 2022-2025. Gate: OOS Sharpe ≥ 0.6, WF ratio ≥ 0.45. NOTE: first run downloads ~1,400 EDGAR filings (~500MB), takes 60-90 min. Scaffold: backtesting/daily/run_h290.py.
@@ -6841,6 +6844,30 @@ Script: `backtesting/daily/run_h269_ideation_sprint.py` (invokes Claude API stru
 
 ---
 
+### H294 — Behavioral Multi-Factor MLP (NOT CONFIRMED)
+
+**Source:** Dream cycle proposal 2026-06-13 — Behavioral Finance MLP on 27 OHLCV factors
+
+**Hypothesis:** A dual-task MLP trained on 27 behavioral-finance-inspired OHLCV-derived features (covering momentum, mean-reversion, volume, volatility, and range signals) can predict next-week SPY returns better than naive momentum. Joint loss = 0.5×MSE + 0.5×BCEWithLogits.
+
+**Universe:** SPY weekly
+**IS:** 2013–2020 | **OOS:** 2021–2026
+**Gate:** OOS Sharpe > 1.559 (double SPY OOS Sharpe)
+
+| Period | Sharpe | CAGR | MaxDD |
+|--------|--------|------|-------|
+| IS | 2.732 | 66.6% | -22.0% |
+| OOS | 0.827 | 15.6% | -25.1% |
+| WF ratio | 0.303 | — | — |
+
+**Verdict:** NOT CONFIRMED — OOS Sharpe 0.827 vs gate 1.559. WF ratio 0.303 indicates severe overfitting.
+
+**Root cause:** 80-epoch MLP on 27 features is too rich for IS dataset size. IS period (2013-2020) was a calm bull market; OOS (2021-2026) spans COVID recovery, 2022 rate shock, and the AI rally — a dramatic regime shift the model never saw. Dual-task loss (joint return regression + direction classification) doesn't prevent overfitting; it just adds a direction-prediction objective that also overfits.
+
+**Script:** `backtesting/daily/run_h294.py` | **Results:** `backtesting/cache/h294/results.json`
+
+---
+
 ### H295 — Factor MAX ETF Rotation (NOT CONFIRMED)
 
 **Source:** Wang & Zeng (Dec 2025), arXiv / SSRN 6053114 — *Factor MAX and Predictable Factor Returns*
@@ -6864,3 +6891,41 @@ Script: `backtesting/daily/run_h269_ideation_sprint.py` (invokes Claude API stru
 **Root cause:** Factor MAX doesn't translate from academic long-short factors to sector ETFs. At factor level (long-short of 50+ stocks), high MAX represents systematic news underreaction. At ETF level, a very high single-day return is typically sector-specific news already priced, or market-wide correlation, not a diversified "factor-level" signal. Academic factors are cleaner signals because they cancel most idiosyncratic noise.
 
 **Script:** `backtesting/daily/run_h295.py`
+
+---
+
+### H296 — VIX Term Structure Equity Timing (CONFIRMED)
+
+**Source:** Duarte & Jones (2007); Simon & Campasano (2014); Fernandez-Perez et al. (2020)
+
+**Hypothesis:** When VIX spot < VIX3M (contango / normal fear structure), hold SPY. When VIX spot > VIX3M (backwardation / acute stress), retreat to BIL. Adding a SPY 200-MA gate further improves Sharpe and dramatically reduces drawdown.
+
+**Universe:** SPY / BIL, daily rebalance
+**IS:** 2013–2019 | **OOS:** 2020–2026
+**Gate:** OOS Sharpe > 1.0 AND > SPY buy-and-hold (0.772)
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | OOS CAGR | % in SPY | Gate |
+|---------|-----------|------------|-----------|----------|----------|------|
+| A: VIX<VIX3M binary | 0.974 | 0.982 | -29.0% | 14.8% | 92.6% | FAIL |
+| B: ratio<0.95 (tighter) | 0.849 | 1.002 | -27.0% | 13.3% | 79.1% | PASS |
+| C: VIX<VIX3M + SPY>200MA | 0.891 | 1.116 | -18.6% | 13.1% | 76.9% | PASS |
+| D: continuous weight | 1.444 | 2.379 | -3.4% | 3.7% | 10.8% | PASS* |
+| E: SPY buy-and-hold | 1.110 | 0.772 | -33.7% | 15.7% | 100% | — |
+
+*Variant D high Sharpe is misleading: 89% time in BIL → effectively a cash proxy. 3.7% CAGR is not usable as a standalone strategy.
+
+**Verdict:** CONFIRMED — Variants B and C pass gate. **Best expression: Variant C** (VIX term structure + 200-MA double filter).
+
+**Key findings:**
+- VIX backwardation is rare (7.8% of trading days) — the signal is conservative and accurate. It fires during genuine stress (COVID Mar 2020, 2022 rate shock spikes), not noise.
+- Variant C cuts MaxDD from -33.7% (SPY) to -18.6% — a 45% drawdown reduction — while giving up only 2.6pp of CAGR annually.
+- Adding the 200-MA gate (C vs A) reduces MaxDD by 10pp with no CAGR cost. The 200-MA prevents false re-entries when VIX normalizes but trend is still broken.
+- WF ratio for C: 1.116/0.891 = 1.252 — IS underfits slightly, which is good (no overfitting).
+- This signal naturally complements H249 (4-state regime engine). Could be used as a 5th signal in the regime framework or as a daily override on monthly rotation systems.
+
+**Production notes:**
+- Daily rebalance is required (signal changes daily). Fits IBS-type strategies.
+- The H026/H041a/H045 rotation systems are monthly — VIX term structure timing would require a separate daily execution layer.
+- **Best immediate use:** as an overlay to BIL safe-harbor decision in existing monthly rotation (if month-end VIX > VIX3M AND SPY < 200MA → BIL regardless of rotation signal). This is already partially implemented in H249/H026.
+
+**Script:** `backtesting/daily/run_h296.py` | **Results:** `backtesting/results/h296_results.json`

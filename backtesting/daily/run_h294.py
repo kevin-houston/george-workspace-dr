@@ -307,7 +307,7 @@ def run_backtest(prices: pd.DataFrame, signals: pd.DataFrame,
     sharpe = r.mean() / (r.std() + 1e-9) * np.sqrt(WEEKS_PER_YEAR)
     cagr   = (1 + r).prod() ** (WEEKS_PER_YEAR / len(r)) - 1
     cum    = (1 + r).cumprod()
-    max_dd = (cum / cum.cummax() - 1).min()
+    max_dd = (cum / np.maximum.accumulate(cum) - 1).min()
 
     print(f"\n{label}: Sharpe={sharpe:.3f}  CAGR={cagr:.1%}  MaxDD={max_dd:.1%}  n_weeks={len(r)}")
     return {"sharpe": sharpe, "cagr": cagr, "max_dd": max_dd, "n_weeks": len(r)}

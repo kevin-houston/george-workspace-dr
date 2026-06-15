@@ -1,0 +1,99 @@
+{
+  "hypothesis": "H296",
+  "title": "VIX Term Structure Equity Timing",
+  "is_period": "2013-01-01 \u2013 2019-12-31",
+  "oos_period": "2020-01-01 \u2013 2026-05-31",
+  "gate": "OOS Sharpe > 1.0 AND > SPY",
+  "variants": {
+    "A: VIX<VIX3M binary": {
+      "is": {
+        "cagr": 0.1059,
+        "sharpe": 0.9739,
+        "max_dd": -0.1406,
+        "ann_vol": 0.1088,
+        "n_years": 7.0,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "cagr": 0.1485,
+        "sharpe": 0.9816,
+        "max_dd": -0.2897,
+        "ann_vol": 0.1513,
+        "n_years": 6.4,
+        "neg_yrs": 1
+      }
+    },
+    "B: ratio<0.95 (tighter)": {
+      "is": {
+        "cagr": 0.0795,
+        "sharpe": 0.8485,
+        "max_dd": -0.1182,
+        "ann_vol": 0.0937,
+        "n_years": 7.0,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "cagr": 0.1331,
+        "sharpe": 1.0025,
+        "max_dd": -0.2698,
+        "ann_vol": 0.1328,
+        "n_years": 6.4,
+        "neg_yrs": 1
+      }
+    },
+    "C: VIX<VIX3M + SPY>200MA": {
+      "is": {
+        "cagr": 0.0876,
+        "sharpe": 0.8912,
+        "max_dd": -0.1372,
+        "ann_vol": 0.0983,
+        "n_years": 7.0,
+        "neg_yrs": 2
+      },
+      "oos": {
+        "cagr": 0.131,
+        "sharpe": 1.1159,
+        "max_dd": -0.1858,
+        "ann_vol": 0.1174,
+        "n_years": 6.4,
+        "neg_yrs": 1
+      }
+    },
+    "D: continuous weight (1-ratio)": {
+      "is": {
+        "cagr": 0.0168,
+        "sharpe": 1.4436,
+        "max_dd": -0.0194,
+        "ann_vol": 0.0117,
+        "n_years": 7.0,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "cagr": 0.0371,
+        "sharpe": 2.3786,
+        "max_dd": -0.0339,
+        "ann_vol": 0.0156,
+        "n_years": 6.4,
+        "neg_yrs": 1
+      }
+    },
+    "E: SPY buy-and-hold": {
+      "is": {
+        "cagr": 0.1419,
+        "sharpe": 1.1101,
+        "max_dd": -0.1935,
+        "ann_vol": 0.1278,
+        "n_years": 7.0,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "cagr": 0.1573,
+        "sharpe": 0.7724,
+        "max_dd": -0.3372,
+        "ann_vol": 0.2036,
+        "n_years": 6.4,
+        "neg_yrs": 1
+      }
+    }
+  }
+}
