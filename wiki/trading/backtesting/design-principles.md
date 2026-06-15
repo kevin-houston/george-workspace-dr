@@ -559,3 +559,17 @@ def compute_mrp(returns: pd.Series, regime_labels: pd.Series) -> dict:
 - H041a (19-asset top-1): MRP pending — check 2022 bear regime
 - H273 (vol-targeting overlay): confirmed — reduces MRP variance by dampening bear-regime exposure
 - H270 (low-vol dual ranking): confirmed — check rate-rising regime (2022-2023 known weakness per H245)
+
+
+---
+
+## External Validation: LLM Trading Paper Reproducibility Crisis
+
+**Source:** Xia et al. (2026), "Agentic Trading: When LLM Agents Meet Financial Markets," arXiv:2605.19337
+
+An audit of 19 LLM trading studies found:
+- Only **2 of 19** had extractable, time-consistent IS/OOS split protocols
+- Only **1 of 19** documented explicit transaction costs
+- **0 of 19** achieved R3 reproducibility level (open code + data + results)
+
+This validates George's backtesting discipline: fixed IS/OOS windows, lagged signals (shift(1)), realistic cost models, and committed result JSONs. When evaluating papers for hypothesis proposals, require at minimum: stated IS/OOS dates, transaction cost model, and specific Sharpe/MaxDD numbers before staging.

@@ -153,3 +153,54 @@ Uses the same Kalshi REST API (`/trade-api/v2/timeless/` endpoint namespace). Au
 | DraftKings Predictions | Dec 2025 | 38 states; DFS ecosystem integration |
 
 **Assessment**: All emerging platforms are retail-focused with limited/no trading APIs. Kalshi and Polymarket remain the only institutional-grade options for algorithmic strategies. IBKR ForecastTrader is institutional-grade but requires the IBKR account setup overhead.
+
+
+---
+
+## prediction-market-analysis (Historical Data)
+
+**GitHub:** https://github.com/topics/quantitative-finance (search: prediction-market-analysis)
+**Stars:** 2.3k | **Data size:** 36GB
+
+The largest publicly available prediction market historical dataset:
+- Full order book history for Polymarket and Kalshi markets
+- Resolution data (actual outcomes) for calibration research
+- Pre-built analysis notebooks: calibration curves, liquidity analysis, market efficiency tests
+- Cleaned format suitable for pandas/polars
+
+**Use cases for George:**
+- Backtest Kalshi CPI nowcasting strategy (H185) on historical data instead of paper-trading forward
+- Test cross-platform arb between Polymarket and Kalshi on historical overlapping markets
+- Calibration validation for LLM-based prediction (PolyBench H213 baseline)
+
+**Download:** Requires ~40GB free disk. Consider subset download by market category.
+
+---
+
+## pmxt — Unified Prediction Market API
+
+**GitHub:** https://github.com (search: pmxt)
+**Stars:** 1.2k
+
+CCXT-style unified API for multiple prediction market platforms. Key features:
+- Single interface for Polymarket, Kalshi, and other platforms
+- Cross-platform order book aggregation
+- Unified position tracking and P&L
+- WebSocket streaming for real-time price feeds
+
+**Python example:**
+```python
+import pmxt
+
+# Connect to both platforms
+kalshi = pmxt.Kalshi(api_key=...)
+poly   = pmxt.Polymarket()
+
+# Find arbitrage: same event on both platforms
+arb_scanner = pmxt.ArbScanner([kalshi, poly])
+opportunities = arb_scanner.scan(min_edge=0.02)  # 2% minimum edge
+```
+
+**Use case for George:** Cross-platform arb scanner to find the same question priced
+differently on Kalshi vs Polymarket. Historically, pricing gaps of 2-5% exist on
+non-trivial markets with lower liquidity. pmxt automates the discovery layer.

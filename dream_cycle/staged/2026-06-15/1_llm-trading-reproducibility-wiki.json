@@ -4,11 +4,11 @@
   "source": "paper",
   "source_url": "https://arxiv.org/abs/2605.19337",
   "title": "Add LLM trading reproducibility crisis finding to design-principles.md",
-  "rationale": "Agentic Trading survey (arXiv:2605.19337, Xia et al. Jun 2026) audited 19 LLM trading studies: only 2 had valid IS/OOS protocols, 1 reported transaction costs, none achieved reproducibility R3 level. This is directly relevant to our backtesting discipline — it validates our insistence on lagged signals, real costs, and fixed IS/OOS windows. Should be cited in design-principles.md as external validation of our approach, and in multi-agent-llm-trading.md as a caution about LLM trading paper credibility.",
+  "rationale": "Agentic Trading survey (arXiv:2605.19337, Xia et al. Jun 2026) audited 19 LLM trading studies: only 2 had valid IS/OOS protocols, 1 reported transaction costs, none achieved reproducibility R3 level. This is directly relevant to our backtesting discipline \u2014 it validates our insistence on lagged signals, real costs, and fixed IS/OOS windows. Should be cited in design-principles.md as external validation of our approach, and in multi-agent-llm-trading.md as a caution about LLM trading paper credibility.",
   "risk_level": "low",
   "type": "wiki_update",
   "target_file": "/workspace/agent/wiki/trading/backtesting/design-principles.md",
   "content": "\n\n---\n\n## External Validation: LLM Trading Paper Reproducibility Crisis\n\n**Source:** Xia et al. (2026), \"Agentic Trading: When LLM Agents Meet Financial Markets,\" arXiv:2605.19337\n\nAn audit of 19 LLM trading studies found:\n- Only **2 of 19** had extractable, time-consistent IS/OOS split protocols\n- Only **1 of 19** documented explicit transaction costs\n- **0 of 19** achieved R3 reproducibility level (open code + data + results)\n\nThis validates George's backtesting discipline: fixed IS/OOS windows, lagged signals (shift(1)), realistic cost models, and committed result JSONs. When evaluating papers for hypothesis proposals, require at minimum: stated IS/OOS dates, transaction cost model, and specific Sharpe/MaxDD numbers before staging.\n",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

@@ -211,3 +211,41 @@ For H245 (Low-Vol Anomaly), survivorship bias cuts the other way: the true low-v
 - `backtesting/transaction-costs.md` — cost calibration per strategy type
 - `algorithms/long-short-equity.md` — borrow cost and short-leg considerations (H243)
 - `data-sources/free-data.md` — yfinance, Polygon free tier limitations
+
+
+---
+
+## Tradability / Price Limit Contamination Bias
+
+**Source:** Du, Y. (2025). "Machine Learning Enhanced Multi-Factor Quantitative Trading."
+arXiv:2507.07107. Key finding: 18% IC inflation, +0.44 Sharpe from non-tradable price inclusion.
+
+### Mechanism
+
+In A-shares markets, stocks hitting price limits cannot be traded at the limit price. If
+your factor calculation uses the limit price for signal construction and return computation,
+you create a circular bias: the "trade" used for backtesting never occurred.
+
+**US market analog:** During single-stock circuit breakers (>5% intraday move on small-caps),
+the halt price is not necessarily executable. Similarly, after-hours earnings prints may
+show a "closing price" that doesn't reflect next-day open execution.
+
+### The Mask-First Pattern
+
+```python
+# Standard (biased) approach
+returns = prices.pct_change()  # includes halted sessions
+factors = compute_factors(prices)
+
+# Mask-first approach
+tradable = ~prices.isnull() & (volume > 0)  # exclude zero-volume (halted) days
+returns = prices.pct_change().where(tradable)
+factors = compute_factors(prices.where(tradable))
+```
+
+### Impact Estimate for US Strategies
+
+- Large-cap ETF rotation (H026/H041a): **negligible** — ETFs never halt
+- Stock-level momentum (H198, H217): **small** — large-cap rarely halts, ~0.1 Sharpe inflation
+- Small-cap strategies: **material** — small-cap halts are common; estimate ~0.15-0.20 Sharpe inflation
+- PEAD (H163/H174): **moderate** — post-earnings halts on surprise beats/misses affect execution
