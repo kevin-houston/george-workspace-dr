@@ -6,6 +6,12 @@
       "sourceType": "github",
       "skillPath": "skills/alphaear-predictor/SKILL.md",
       "computedHash": "bcc07288e928e8aa9295616db4c5b2b5627bb09733b7f2e29b005fdee15e8a09"
+    },
+    "here-now": {
+      "source": "heredotnow/skill",
+      "sourceType": "github",
+      "skillPath": "here-now/SKILL.md",
+      "computedHash": "184d75eb99c4fc15d59efbb155d6edf82d7df0ca09617ed3a5dabf0ad1499ad2"
     }
   }
 }

@@ -140,6 +140,18 @@
       "claimToken": "c95ed1d3a79fa290c5d89ff4a56f7069708f010296262dbd888cb0a149242356",
       "claimUrl": "https://here.now/claim?slug=pure-grace-qnpb&token=c95ed1d3a79fa290c5d89ff4a56f7069708f010296262dbd888cb0a149242356",
       "expiresAt": "2026-06-10T09:04:11.763Z"
+    },
+    "marine-mosaic-tf78": {
+      "siteUrl": "https://marine-mosaic-tf78.here.now/",
+      "claimToken": "b37463ea272dc36fbc7d8f9283ba3524a51ac955b4c694423799f9e06cbfd0a3",
+      "claimUrl": "https://here.now/claim?slug=marine-mosaic-tf78&token=b37463ea272dc36fbc7d8f9283ba3524a51ac955b4c694423799f9e06cbfd0a3",
+      "expiresAt": "2026-06-15T09:09:50.482Z"
+    },
+    "olive-gable-gzwj": {
+      "siteUrl": "https://olive-gable-gzwj.here.now/",
+      "claimToken": "9587071b5ded53567018c873943d812770fef40c0c872061dc116984cb4d0b1e",
+      "claimUrl": "https://here.now/claim?slug=olive-gable-gzwj&token=9587071b5ded53567018c873943d812770fef40c0c872061dc116984cb4d0b1e",
+      "expiresAt": "2026-06-16T04:18:06.831Z"
     }
   }
 }
