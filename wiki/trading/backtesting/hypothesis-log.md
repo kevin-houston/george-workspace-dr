@@ -6838,3 +6838,29 @@ Script: `backtesting/daily/run_h269_ideation_sprint.py` (invokes Claude API stru
 **Recommendation:** CONFIRMED but requires production validation with realistic leverage costs (margin interest ~5.5% currently). At 1.3x average leverage, annual cost ~1.5% drag. Net Sharpe improvement after leverage cost: ~0.10 net — borderline. Worth forward-testing in paper account with margin simulation.
 
 **Script:** `backtesting/daily/run_h273.py` | **Results:** `backtesting/results/h273_results.json`
+
+---
+
+### H295 — Factor MAX ETF Rotation (NOT CONFIRMED)
+
+**Source:** Wang & Zeng (Dec 2025), arXiv / SSRN 6053114 — *Factor MAX and Predictable Factor Returns*
+
+**Signal:** Max single-day return of each ETF in the prior month predicts next-month return. Paper finds +0.32%/month spread (t=5.89) on 172 academic long-short factors.
+
+**Universe:** 23-asset (H026-full minus USO/UNG)
+**IS:** 2008–2017 | **OOS:** 2018–2026
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD |
+|---------|-----------|------------|-----------|
+| A: Standalone MAX, no filter | -0.088 | 0.052 | -72.8% |
+| B: Standalone MAX, TSMOM>0% | 0.302 | 0.134 | -67.3% |
+| C: Blend 50/50 (mom+MAX) | 0.204 | 0.477 | -45.9% |
+| D: Blend 70/30 (mom+MAX) | 0.201 | 0.399 | -44.0% |
+| E: Momentum baseline | 0.008 | 0.491 | -28.5% |
+| SPY buy-and-hold | 0.420 | 0.772 | -33.7% |
+
+**Verdict:** NOT CONFIRMED — all variants fail gates. Blend C/D approach the baseline but introduce worse drawdown with no Sharpe gain.
+
+**Root cause:** Factor MAX doesn't translate from academic long-short factors to sector ETFs. At factor level (long-short of 50+ stocks), high MAX represents systematic news underreaction. At ETF level, a very high single-day return is typically sector-specific news already priced, or market-wide correlation, not a diversified "factor-level" signal. Academic factors are cleaner signals because they cancel most idiosyncratic noise.
+
+**Script:** `backtesting/daily/run_h295.py`

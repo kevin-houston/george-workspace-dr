@@ -1,0 +1,144 @@
+{
+  "hypothesis": "H295",
+  "title": "Factor MAX ETF Rotation",
+  "source": "Wang & Zeng (Dec 2025), SSRN 6053114",
+  "universe": [
+    "XLK",
+    "XLE",
+    "XLF",
+    "XLV",
+    "XLI",
+    "XLB",
+    "XLU",
+    "XLRE",
+    "XLY",
+    "XLP",
+    "XLC",
+    "GLD",
+    "SLV",
+    "DBC",
+    "DBA",
+    "GDX",
+    "TLT",
+    "IEF",
+    "TIP",
+    "AGG",
+    "EWZ",
+    "IBB",
+    "BIL"
+  ],
+  "is_period": "2008-01-01 \u2013 2017-12-31",
+  "oos_period": "2018-01-01 \u2013 2026-05-31",
+  "standalone_gate": 1.5,
+  "blend_gate": "OOS Sharpe > momentum baseline (0.491)",
+  "variants": {
+    "A: MAX standalone (no filter)": {
+      "is": {
+        "cagr": -0.0407,
+        "sharpe": -0.0879,
+        "max_dd": -0.6843,
+        "ann_vol": 0.4628,
+        "n_years": 9.9,
+        "neg_yrs": 7
+      },
+      "oos": {
+        "cagr": 0.0202,
+        "sharpe": 0.0517,
+        "max_dd": -0.7283,
+        "ann_vol": 0.3902,
+        "n_years": 8.3,
+        "neg_yrs": 5
+      }
+    },
+    "B: MAX standalone (TSMOM>0% filter)": {
+      "is": {
+        "cagr": 0.0951,
+        "sharpe": 0.3024,
+        "max_dd": -0.3715,
+        "ann_vol": 0.3144,
+        "n_years": 9.9,
+        "neg_yrs": 4
+      },
+      "oos": {
+        "cagr": 0.0521,
+        "sharpe": 0.1335,
+        "max_dd": -0.6731,
+        "ann_vol": 0.3899,
+        "n_years": 8.3,
+        "neg_yrs": 4
+      }
+    },
+    "C: Blend 50/50 (TSMOM>0% filter)": {
+      "is": {
+        "cagr": 0.0636,
+        "sharpe": 0.2038,
+        "max_dd": -0.5137,
+        "ann_vol": 0.3122,
+        "n_years": 9.9,
+        "neg_yrs": 4
+      },
+      "oos": {
+        "cagr": 0.1737,
+        "sharpe": 0.477,
+        "max_dd": -0.4592,
+        "ann_vol": 0.3642,
+        "n_years": 8.3,
+        "neg_yrs": 4
+      }
+    },
+    "D: Blend 70/30 (TSMOM>0% filter)": {
+      "is": {
+        "cagr": 0.063,
+        "sharpe": 0.2005,
+        "max_dd": -0.6125,
+        "ann_vol": 0.3142,
+        "n_years": 9.9,
+        "neg_yrs": 5
+      },
+      "oos": {
+        "cagr": 0.1319,
+        "sharpe": 0.3988,
+        "max_dd": -0.4404,
+        "ann_vol": 0.3307,
+        "n_years": 8.3,
+        "neg_yrs": 4
+      }
+    },
+    "E: Momentum baseline (TSMOM>0%)": {
+      "is": {
+        "cagr": 0.0024,
+        "sharpe": 0.0078,
+        "max_dd": -0.6239,
+        "ann_vol": 0.3006,
+        "n_years": 9.9,
+        "neg_yrs": 5
+      },
+      "oos": {
+        "cagr": 0.1549,
+        "sharpe": 0.4911,
+        "max_dd": -0.2848,
+        "ann_vol": 0.3154,
+        "n_years": 8.3,
+        "neg_yrs": 4
+      }
+    }
+  },
+  "spy": {
+    "is": {
+      "cagr": 0.0855,
+      "sharpe": 0.4203,
+      "max_dd": -0.5187,
+      "ann_vol": 0.2034,
+      "n_years": 10.0,
+      "neg_yrs": 1
+    },
+    "oos": {
+      "cagr": 0.1484,
+      "sharpe": 0.7724,
+      "max_dd": -0.3372,
+      "ann_vol": 0.1921,
+      "n_years": 8.4,
+      "neg_yrs": 2
+    }
+  }
+}
