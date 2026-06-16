@@ -1,10 +1,10 @@
 {
   "id": "2026-06-16-001",
   "date": "2026-06-16",
-  "source": "ACL 2025 — LLM-Enhanced PEAD via Abstractive Earnings Summaries",
-  "source_url": "https://aclanthology.org/2025.findings-acl.xxx",
+  "source": "FinNLP 2025 @ EMNLP — Hadlock, Roberts, Lee (Tennessee Tech)",
+  "source_url": "https://aclanthology.org/2025.finnlp-2.13/",
   "title": "H304: LLM-Augmented PEAD — GPT-4o-mini Abstractive Summary + Sentence-BERT Embeddings",
-  "rationale": "ACL 2025 paper demonstrates that replacing FinBERT direct scoring with (1) GPT-4o-mini abstractive summarization of earnings transcripts + (2) sentence-BERT contextual embeddings of summaries yields consistent OOS improvement in PEAD signal quality. FinBERT baseline achieves 57.6-58.3% classification accuracy; LLM-augmented version improves meaningfully. Our H163/H174 pipeline already uses FinBERT on 8-K filings — this is a direct upgrade path. Two variants to test: (A) abstractive summary only (GPT-4o-mini) → FinBERT score, (B) sentence-BERT embedding similarity score as replacement for FinBERT CLS. IS: 2018-2021, OOS: 2022-2026. Gate: OOS win-rate > 81.8% (H174 baseline) OR mean return > 6.89%.",
+  "rationale": "FinNLP 2025 (EMNLP) paper tests BART, FinBERT, and LLaMA 3.2-3B on 10-Q MD&A sections for PEAD signal. FinBERT achieves highest classification accuracy (57.6-58.3%); BART produces the best BHAR (3.29% 60-day in positive-earnings group). NOTE: the GPT-4o-mini + sentence-BERT design in this proposal is a design EXTENSION of the paper's direction (abstractive summarization → scoring), not a direct replication — the paper does not test GPT-4o-mini or SBERT. Our H163/H174 pipeline already uses FinBERT on 8-K filings. The extension hypothesis: if BART-style abstractive compression improves signal quality over raw 8-K text, then GPT-4o-mini (stronger abstraction) + sentence-BERT embeddings should do similarly or better, at lower inference cost. Two variants to test: (A) GPT-4o-mini abstractive summary → FinBERT score, (B) GPT-4o-mini abstractive summary → sentence-BERT cosine similarity. Gate: OOS win-rate > 81.8% (H174 baseline) OR mean return > 6.89%.",
   "risk_level": "medium",
   "type": "new_hypothesis",
   "target_file": "backtesting/daily/run_h304.py",
@@ -13,21 +13,29 @@
     "description": "LLM-Augmented PEAD — GPT-4o-mini + sentence-BERT vs H174 FinBERT baseline",
     "variants": [
       "A: GPT-4o-mini abstractive summary → FinBERT score on summary (not raw 8-K)",
-      "B: GPT-4o-mini abstractive summary → sentence-BERT embedding similarity score",
+      "B: GPT-4o-mini abstractive summary → sentence-BERT embedding similarity score (all-MiniLM-L6-v2)",
       "C: Ensemble A+B with H174 dual filter (score≥0.18 + surprise≥0.02)"
     ],
     "gate": "OOS win-rate > 81.8% (H174 baseline) OR mean return > 6.89% (at n≥15 events)",
     "is_period": "2018-01-01 to 2021-12-31",
     "oos_period": "2022-01-01 to 2026-06-15",
-    "key_libraries": ["openai", "sentence-transformers", "transformers (ProsusAI/finbert)"],
-    "cost_estimate": "~$0.02/event at GPT-4o-mini pricing; 200 events ≈ $4 total for backtest",
+    "key_libraries": [
+      "openai (GPT-4o-mini via Batch API)",
+      "sentence-transformers (all-MiniLM-L6-v2 or all-mpnet-base-v2 if accuracy-first)",
+      "transformers (ProsusAI/finbert)"
+    ],
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "sbert_fallback": "sentence-transformers/all-mpnet-base-v2 (2.5x slower, higher quality)",
+    "cost_estimate": "~$0.04 per full backtest run (200 events); use Batch API for 50% discount (~$0.02). ~$0.0002/event standard pricing.",
+    "cost_note": "GPT-4o-mini: $0.15/1M input, $0.60/1M output. ~700 tokens/call input, ~130 tokens output. Batch API recommended — no real-time requirement for backtests, eliminates rate-limit risk.",
     "dependencies": ["H163 CONFIRMED", "H174 CONFIRMED", "EDGAR 8-K pipeline (backtesting/paper_trading/pead_overnight.py)"],
+    "paper_note": "Paper tests BART/FinBERT/LLaMA-3.2-3B on 10-Q MD&A (not 8-K, not GPT-4o-mini, not SBERT). H304 is a design extension, not a replication. Cite as: Hadlock et al. (2025), FinNLP @ EMNLP.",
     "hypothesis_log_entry": {
       "id": "H304",
-      "title": "LLM-Augmented PEAD (GPT-4o-mini + sentence-BERT)",
+      "title": "LLM-Augmented PEAD (GPT-4o-mini abstractive summary + sentence-BERT)",
       "status": "PROPOSED",
       "proposed": "2026-06-16",
-      "source": "ACL 2025 earnings NLP paper",
+      "source": "FinNLP 2025 @ EMNLP (Hadlock et al.) — design extension of BART/FinBERT/LLaMA findings",
       "gate": "OOS WR > 81.8% OR MeanRet > 6.89%"
     }
   },
