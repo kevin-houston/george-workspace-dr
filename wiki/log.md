@@ -372,3 +372,14 @@ Pages consulted: wiki/index.md + 20 individual wiki pages. 19 index gaps found a
 - trading/research-log/2026-06-08.md through 2026-06-13.md (6 logs)
 
 **No contradictions found.** No orphan pages found (all pages linked from index or trading/index.md). Stale content: hypothesis-log.md frontier note shows H290–H292 but H293/H294 now staged — update on next build cycle run. VRP parenthetical in trading/index.md is cosmetic (description text appended vs separate line) — not a structural issue.
+
+## [2026-06-16] lint | Health check
+
+Pages consulted: index.md, log.md, trading/algorithms/market-timing-overlays.md, trading/research-log/2026-06-15.md.
+
+Issues found: 3. Auto-fixed: 3. Needs review: 0.
+
+1. **Orphan: market-timing-overlays.md** — created 2026-06-15 but not added to index. Fixed: added to Algorithms section with H296/H301/H300/H299 summary.
+2. **Orphan: research-log/2026-06-15.md** — nightly session log not indexed. Fixed: added to Research Logs.
+3. **Stale: Hypothesis Log entry** — still showed "H001–H292". Fixed: updated to H001–H301 with current frontier.
+4. Index frontmatter bumped: updated 2026-06-14→2026-06-16, pages 143→145.

@@ -1,7 +1,7 @@
 ---
-updated: 2026-06-14
+updated: 2026-06-16
 sources_indexed: 4
-pages: 143
+pages: 147
 ---
 
 # Wiki Index
@@ -46,6 +46,8 @@ When answering a query:
 - [The Alchemy of Multibagger Stocks — Yartseva (2025)](trading/sources/multibagger-yartseva-2025.md) — CAFÉ WP No. 33; FCF yield dominant for 10x returns; near-52w-low entry signal ← new 2026-06-12
 - [Technical Analysis Patterns](trading/algorithms/technical-analysis-patterns.md) — H234 inside-bar coiled-spring (OOS Sharpe 1.770, WR 63.9%); NR7/NR4 narrow range; TA feature library (MACD/RSI/Stochastic/ROC) for H233/H235; pandas-ta vs TA-Lib guide ← new 2026-05-29
 - [Behavioral Finance Signals](trading/algorithms/behavioral-finance-signals.md) — 52-week high anchoring (H291 NOT CONFIRMED); return seasonality Jul/Nov standout months (H292 CONFIRMED OOS 0.970); disposition effect CGO; lottery stock MAX factor ← new 2026-06-14
+- [Market Timing Overlays](trading/algorithms/market-timing-overlays.md) — VIX term structure (H296 CONFIRMED OOS 1.116); SPY 200d MA (H301 Variant D best, +27.4% Sharpe vs H026); yield curve (H300 NOT CONFIRMED); breadth (H299 NOT CONFIRMED); overlay vs standalone trade-off ← new 2026-06-15
+- [Cryptocurrency Trading Strategies](trading/algorithms/crypto-trading-strategies.md) — cross-sectional momentum Sharpe 1.51 (28d lookback, top-30 universe); BTC 50d MA Sharpe 1.9 vs B&H 1.3; funding carry declining (6.45→negative 2025); Monday effect +0.51%; halving cycle positioning; ccxt/pycoingecko implementation; H302/H303 queued ← new 2026-06-16
 - [Value Factors](trading/algorithms/value-factors.md) — FCF yield signal (FMP API); COWZ ETF mechanics; H284 CONFIRMED-weak; H286 CONFIRMED Corr(SPY)=0.596; value vs momentum tension; data sources table ← new 2026-06-13
 - [Commodity Trend Following](trading/algorithms/commodity-trend-following.md) — H261/H261b/H262 CTA on GLD/SLV/DBC/USO/DBA; UNG excluded (K-1, contango, mean-reverting); H261b CONFIRMED (OOS Sharpe 0.922, Corr(SPY)=0.218, 2022 +26.7%); H262 QUEUED (Bayesian 3m/6m/12m blend) ← new 2026-06-07
 - [Factor Momentum & Style Rotation](trading/algorithms/factor-momentum-style-rotation.md) — H255 NOT CONFIRMED (factor ETF, Corr(SPY)=0.894, no escape); H256 NOT CONFIRMED (GEM/PACS/GEM+Sector, all underperform SPY OOS); multi-asset fix → H257 ← new 2026-06-06
@@ -98,7 +100,7 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H292 (frontier: H290 EDGAR lexical density, H287-H289 QUEUED); H292 CONFIRMED (return seasonality Jul/Nov OOS 0.970); H291 NOT CONFIRMED (52-wk high proximity, OOS 0.764); H286 CONFIRMED (COWZ/SPY cross-momentum); production portfolio H041a/H026/H045/IBS
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H301 (frontier: H302+ TBD); H301 CONFIRMED (H026+200MA overlay, OOS 1.529 +27.4%); H300 NOT CONFIRMED (yield curve timing); H299 NOT CONFIRMED (sector breadth); H298 NOT CONFIRMED (weekly ETF reversal); production portfolio H041a/H026/H045/IBS
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
@@ -153,6 +155,8 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-06-16](trading/research-log/2026-06-16.md) — nightly: wiki: crypto-trading-strategies.md new (BTC MA Sharpe 1.9, cross-sectional Sharpe 1.51, funding carry declining); H302/H303 queued; dream cycle Phase 2 scan
+- [Research Log 2026-06-15](trading/research-log/2026-06-15.md) — nightly: wiki: market-timing-overlays.md new; H298 NOT CONFIRMED (weekly ETF reversal); H299 NOT CONFIRMED (sector breadth); H300 NOT CONFIRMED (yield curve); H301 CONFIRMED (H026+200MA overlay, OOS 1.529)
 - [Research Log 2026-06-13](trading/research-log/2026-06-13.md) — wiki: value-factors.md new; dream cycle: H293 press-release PEAD, H294 behavioral MLP, TS foundation models staged
 - [Research Log 2026-06-12](trading/research-log/2026-06-12.md) — wiki: alternative-data.md new; multibagger-yartseva-2025.md ingested; dream cycle scan
 - [Research Log 2026-06-11](trading/research-log/2026-06-11.md) — wiki: superforecasting-methods.md + execution-quality.md + ai-trader.md + contesttrade.md + quantmuse.md new; dream cycle scan

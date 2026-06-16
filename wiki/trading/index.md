@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-15 (market-timing-overlays.md new; behavioral-finance-signals.md indexed; alternative-data.md new — NewsAPI/Finnhub/ApeWisdom/pytrends/Wikipedia/Congressional trade APIs, signal taxonomy, H279/PEAD integration patterns)
+updated: 2026-06-16 (crypto-trading-strategies.md new; market-timing-overlays.md indexed; H302 BTC-50d-MA + H303 cross-sectional crypto momentum queued)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -44,6 +44,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Value Factors (FCF Yield, COWZ, H284/H286)](algorithms/value-factors.md) ← new 2026-06-13 (FCF yield beats B/M; COWZ/SPY cross-momentum H286 CONFIRMED Corr(SPY)=0.596; FMP API; value vs momentum tension) (IV > RV 85% of time; VRP ~2-4 vol points; short-vol Sharpe ~1.0; CSP/iron condor/delta-hedged straddle mechanics; VIX contango harvesting SVXY; Volmageddon/COVID risk lessons; H266 iron condor queued; VRP + IBS synergy noted)
   - [Behavioral Finance Signals](algorithms/behavioral-finance-signals.md) ← new 2026-06-14 (52-week high anchoring George & Hwang 2004; H291 NOT CONFIRMED large-cap 2018-2025; works in small-cap/bear regimes; Return Seasonality H292 CONFIRMED OOS 0.970; Factor MAX H295 NOT CONFIRMED ETF level)
   - [Market Timing Overlays](algorithms/market-timing-overlays.md) ← new 2026-06-15 (VIX term structure H296 CONFIRMED OOS 1.116 MaxDD -18.6%; SPY 200MA; VIX level thresholds; composite signal; rate cycle overlay; production integration guide for daily vs monthly rotation systems)
+  - [Cryptocurrency Trading Strategies](algorithms/crypto-trading-strategies.md) ← new 2026-06-16 (cross-sectional momentum top-30 universe Sharpe 1.51 28d lookback; BTC 50d MA Sharpe 1.9 vs B&H 1.3; funding rate carry 6.45 full-sample but declining; Monday effect +0.51%; halving cycle positioning; ccxt/pycoingecko implementation; H302/H303 queued; max 5% portfolio allocation)
 - [**Shared Evaluation Checklist**](shared-eval-checklist.md) ← new 2026-06-09 (7-point standard agreed by George + Ernesto: look-ahead guard, NLP timestamp, cost model, soft OOS gate, regime coverage, survivorship bias, after-tax flag)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
@@ -98,6 +99,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Sources](sources/) — ingested papers and working papers
   - [The Alchemy of Multibagger Stocks](sources/multibagger-yartseva-2025.md) ← new 2026-06-12 (Yartseva 2025; FCF/P = #1 factor; EPS growth NOT sig; small-cap +37.7% vs large +9.7%; asset_growth>EBITDA_growth −22.8pp; near-12m-low entry signal; rate-hike −8-12pp; H285 proposed)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-06-16](research-log/2026-06-16.md) — wiki expansion: crypto-trading-strategies.md new (cross-sectional momentum Sharpe 1.51, BTC MA Sharpe 1.9, funding rate carry Sharpe 6.45→negative 2025, Monday effect, halving cycle, ccxt/pycoingecko implementation; H302/H303 queued); dream cycle: arXiv/GitHub scan Phase 2
   - [2026-06-13](research-log/2026-06-13.md) — wiki expansion: value-factors.md new (FCF yield, COWZ, H284/H285/H286 synthesis, value vs momentum tension); dream cycle: H293 press release structure PEAD (arXiv:2509.24254), H294 behavioral multi-factor MLP (arXiv:2508.14656), time-series foundation models wiki (Chronos/TimesFM/Lag-Llama)
   - [2026-06-11](research-log/2026-06-11.md) — wiki expansion: execution-quality.md new (IS benchmarks, paper fill mechanics, slippage budgets, graduation gates); dream cycle: H279 LLM momentum filter arXiv:2510.26228, H280 MarketSenseAI arXiv:2604.17327, H281 macro-LLM ETF arXiv:2606.08283, hyperbolic alpha decay wiki arXiv:2512.11913
   - [2026-06-08](research-log/2026-06-08.md) — wiki expansion: crypto-data-sources.md new (yfinance fragility, ccxt/CoinGecko migration path); dream cycle: H264b trailing-stop crypto, H265 drift-regime factor (arXiv:2511.12490 OOS Sharpe >13 — skeptical replication candidate), QuantStats wiki staged
