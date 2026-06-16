@@ -40,5 +40,6 @@
     }
   },
   "action": "create",
-  "apply_status": "pending"
+  "apply_status": "applied",
+  "applied_at": "2026-06-16T04:00:00"
 }

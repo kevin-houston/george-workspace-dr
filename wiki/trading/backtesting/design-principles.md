@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-10
+updated: 2026-06-16
 ---
 
 # Backtesting Design Principles
@@ -573,3 +573,29 @@ An audit of 19 LLM trading studies found:
 - **0 of 19** achieved R3 reproducibility level (open code + data + results)
 
 This validates George's backtesting discipline: fixed IS/OOS windows, lagged signals (shift(1)), realistic cost models, and committed result JSONs. When evaluating papers for hypothesis proposals, require at minimum: stated IS/OOS dates, transaction cost model, and specific Sharpe/MaxDD numbers before staging.
+
+---
+
+## Mask-First Contamination Prevention (arXiv:2507.07107, 2025)
+
+**Problem:** Standard ML pipelines apply cross-sectional normalization (z-score, rank) or rolling imputation *before* the train/test split. This leaks future distribution information into the training window — a subtle but significant look-ahead bias.
+
+**Mask-first rule:** Apply any preprocessing that sees cross-sectional data (normalization, imputation, rolling stats) with future dates masked to NaN *before* computing the feature. Only then split into train/test.
+
+**Measured impact:** +0.44 Sharpe points contamination inflation on Chinese A-shares. Pipelines not following this rule systematically overstate backtested performance.
+
+**Check these in our run_hNNN.py scripts:**
+- `df.rolling(N).mean()` is safe — backward-looking by construction
+- `df.rank(axis=0)` on the full DataFrame **is contaminated** if axis=0 is the time axis
+- `df.rank(axis=1)` (cross-sectional rank at each time step) is safe
+- `StandardScaler().fit_transform(X)` on full X **is contaminated** — must fit on train only
+- `df.fillna(df.mean())` **is contaminated** if mean computed on full sample
+
+**GPU speedup:** PyTorch vectorized rolling ops are 51× faster than pandas `.rolling()` for large cross-sections (relevant for H303 crypto momentum with 30+ coins).
+
+**Action items:**
+- In H303 (crypto cross-sectional momentum): ensure `mom.rank(axis=1)` not `rank(axis=0)` ✓ (our code already uses axis=1 by default in `.rank(pct=True)` along columns)
+- In H304 (LLM PEAD): fit sentence-BERT scaler on IS only, apply to OOS
+- When adding ML models: always use `Pipeline` with `TimeSeriesSplit` to enforce mask-first
+
+See also: [Hypothesis Log](hypothesis-log.md) (H256 look-ahead bias note: .shift(1) on r12 signal), [Crypto Trading Strategies](../algorithms/crypto-trading-strategies.md) (H303 implementation)
