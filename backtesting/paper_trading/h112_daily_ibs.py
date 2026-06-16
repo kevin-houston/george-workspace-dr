@@ -20,6 +20,15 @@ import os
 from datetime import date, datetime
 from pathlib import Path
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+import requests.adapters as _ra
+_orig_send = _ra.HTTPAdapter.send
+def _no_verify_send(self, request, **kwargs):
+    kwargs['verify'] = False
+    return _orig_send(self, request, **kwargs)
+_ra.HTTPAdapter.send = _no_verify_send
+
 import pandas as pd
 import yfinance as yf
 

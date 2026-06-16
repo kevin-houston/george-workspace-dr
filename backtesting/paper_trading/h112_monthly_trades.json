@@ -64,5 +64,70 @@
         "submitted_at": "2026-04-28T10:43:34.446387"
       }
     ]
+  },
+  {
+    "date": "2026-06-15",
+    "equity": 102644.57,
+    "target": {
+      "XLK": 102644.57
+    },
+    "eff_weights": {
+      "h026": 1.0
+    },
+    "h026_scale": 1.0,
+    "signals": {
+      "h026": {
+        "top_n": [
+          "XLK"
+        ]
+      }
+    },
+    "trades": [
+      {
+        "symbol": "IBB",
+        "action": "SELL",
+        "qty": 164.174427,
+        "est_value": 28269.39,
+        "reason": "target $0, current $28,269",
+        "order_id": "83f0a889-cedb-45b2-8f1c-38185a7c5d5e",
+        "submitted_at": "2026-06-15T09:56:48.326664"
+      },
+      {
+        "symbol": "EWH",
+        "action": "SELL",
+        "qty": 967.692943,
+        "est_value": 21236.02,
+        "reason": "target $0, current $21,236",
+        "order_id": "eed35018-12ab-42d5-bdc2-0b26784b2a1b",
+        "submitted_at": "2026-06-15T09:56:48.386722"
+      },
+      {
+        "symbol": "HYG",
+        "action": "SELL",
+        "qty": 133.848139,
+        "est_value": 10723.91,
+        "reason": "target $0, current $10,724",
+        "order_id": "c4ba4325-7410-472f-adeb-8fd671d30410",
+        "submitted_at": "2026-06-15T09:56:48.446525"
+      },
+      {
+        "symbol": "BIL",
+        "action": "SELL",
+        "qty": 117.386457,
+        "est_value": 10742.62,
+        "reason": "target $0, current $10,743",
+        "order_id": "ecc50605-edfb-48f8-98c8-7b69f82ebe6c",
+        "submitted_at": "2026-06-15T09:56:48.491353"
+      },
+      {
+        "symbol": "XLK",
+        "action": "BUY",
+        "qty": 537.828487,
+        "est_value": 102644.57,
+        "reason": "target $102,645, current $0",
+        "order_id": "ff89d005-ea00-4cfd-a711-44d444b669e7",
+        "submitted_at": "2026-06-15T09:56:48.581925"
+      }
+    ]
   }
 ]

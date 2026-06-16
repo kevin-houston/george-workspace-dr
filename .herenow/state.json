@@ -152,6 +152,12 @@
       "claimToken": "9587071b5ded53567018c873943d812770fef40c0c872061dc116984cb4d0b1e",
       "claimUrl": "https://here.now/claim?slug=olive-gable-gzwj&token=9587071b5ded53567018c873943d812770fef40c0c872061dc116984cb4d0b1e",
       "expiresAt": "2026-06-16T04:18:06.831Z"
+    },
+    "steady-maple-ybae": {
+      "siteUrl": "https://steady-maple-ybae.here.now/",
+      "claimToken": "f35c93ffd33cab43430dbf0ae847201b27f28f575e4f83817c2ddec3ca003fd4",
+      "claimUrl": "https://here.now/claim?slug=steady-maple-ybae&token=f35c93ffd33cab43430dbf0ae847201b27f28f575e4f83817c2ddec3ca003fd4",
+      "expiresAt": "2026-06-16T09:03:22.804Z"
     }
   }
 }

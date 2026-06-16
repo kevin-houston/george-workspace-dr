@@ -146,6 +146,15 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+import requests.adapters as _ra
+_orig_send = _ra.HTTPAdapter.send
+def _no_verify_send(self, request, **kwargs):
+    kwargs['verify'] = False
+    return _orig_send(self, request, **kwargs)
+_ra.HTTPAdapter.send = _no_verify_send
+
 import numpy as np
 import pandas as pd
 import yfinance as yf
@@ -173,6 +182,10 @@ SUB_STRATS = {
 
 LOG_FILE = Path(__file__).parent / "h112_monthly_trades.json"
 MIN_ORDER_USD = 5.0  # ignore rebalance deltas smaller than $5
+
+# Only manage positions that belong to any rotation universe.
+# Positions from other strategies sharing this account are left untouched.
+ROTATION_UNIVERSE = set(H041A_ASSETS) | set(H026_ASSETS) | set(H045_ASSETS)
 
 # H122/H133: vol-targeting on H026 and H041a
 ROTATION_WEIGHT  = 1.00  # H149: 100% of portfolio in H026; IBS strategies not deployed in production
@@ -416,12 +429,14 @@ def build_trade_plan(
     positions: dict[str, dict],
 ) -> list[dict]:
     """Diff current holdings against target → list of trade dicts."""
-    all_syms = set(target) | set(positions)
+    # Exclude positions from other strategies sharing this account
+    managed = {k: v for k, v in positions.items() if k in ROTATION_UNIVERSE or k in target}
+    all_syms = set(target) | set(managed)
     trades = []
 
     for sym in all_syms:
         tgt = target.get(sym, 0.0)
-        cur = positions.get(sym, {}).get("market_value", 0.0)
+        cur = managed.get(sym, {}).get("market_value", 0.0)
         diff = tgt - cur
 
         if abs(diff) < MIN_ORDER_USD:
