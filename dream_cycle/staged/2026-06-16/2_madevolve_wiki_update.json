@@ -1,0 +1,17 @@
+{
+  "id": "2026-06-16-002",
+  "date": "2026-06-16",
+  "source": "arXiv:2605.23007 — MadEvolve: Evolutionary Trading Strategy Optimization with LLMs",
+  "source_url": "https://arxiv.org/abs/2605.23007",
+  "title": "Wiki update: Add MadEvolve to multi-agent-llm-trading.md",
+  "rationale": "MadEvolve uses an island model genetic algorithm where LLM agents mutate, crossover, and select trading strategies. Evaluated on BTC futures. Unlike debater/committee architectures, it uses evolutionary pressure rather than consensus — a distinct paradigm worth documenting. The island model with periodic migration prevents premature convergence. Relevance: (1) adds evolutionary LLM to our multi-agent taxonomy, (2) complements H280 MarketSenseAI (staged earlier), (3) crypto-native evaluation makes it compatible with our H302/H303 pipeline.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "wiki/trading/algorithms/multi-agent-llm-trading.md",
+  "content": {
+    "section_to_add": "## MadEvolve — Evolutionary Optimization (arXiv:2605.23007, 2025)\n\n**Paradigm:** Island-model genetic algorithm with LLM agents as mutation/crossover operators.\n\n**How it works:**\n1. Initialize population of trading strategy parameter sets (lookbacks, thresholds, position sizing)\n2. Split into isolated \"islands\"; each island runs LLM-guided evolution independently\n3. Periodic migration: share best strategies across islands to prevent local optima\n4. Fitness function: Sharpe ratio on IS window; OOS validation before acceptance\n\n**Results (BTC futures, 2020–2024):**\n- Outperforms baseline momentum and buy-and-hold on Sharpe and MaxDD\n- Island migration critical: single-population LLM evolution converges prematurely\n- GPT-4-class models significantly outperform GPT-3.5 as mutation operators\n\n**Key distinction from MarketSenseAI / debater architectures:**\n- No consensus or voting — pure evolutionary pressure selects strategies\n- LLM role: generate strategy variants (code mutations), not market analysis\n- Can evolve *any* parameterized strategy, not just sentiment-driven ones\n\n**Relevance to production pipeline:**\n- Could auto-optimize H302 (BTC MA lookback) or H303 (crypto momentum lookback/hold period)\n- Crypto-native: BTC futures evaluation aligns with Kraken paper account\n- No immediate production path — file as future research direction\n\n**Code:** Not open-sourced in paper; island model implementable with LangChain + DEAP library\n",
+    "cross_reference": "See also: market-timing-overlays.md (H296 VIX overlay), crypto-trading-strategies.md (H302/H303)"
+  },
+  "action": "append_section",
+  "apply_status": "pending"
+}

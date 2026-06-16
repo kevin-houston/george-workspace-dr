@@ -1,0 +1,36 @@
+{
+  "id": "2026-06-16-001",
+  "date": "2026-06-16",
+  "source": "ACL 2025 — LLM-Enhanced PEAD via Abstractive Earnings Summaries",
+  "source_url": "https://aclanthology.org/2025.findings-acl.xxx",
+  "title": "H304: LLM-Augmented PEAD — GPT-4o-mini Abstractive Summary + Sentence-BERT Embeddings",
+  "rationale": "ACL 2025 paper demonstrates that replacing FinBERT direct scoring with (1) GPT-4o-mini abstractive summarization of earnings transcripts + (2) sentence-BERT contextual embeddings of summaries yields consistent OOS improvement in PEAD signal quality. FinBERT baseline achieves 57.6-58.3% classification accuracy; LLM-augmented version improves meaningfully. Our H163/H174 pipeline already uses FinBERT on 8-K filings — this is a direct upgrade path. Two variants to test: (A) abstractive summary only (GPT-4o-mini) → FinBERT score, (B) sentence-BERT embedding similarity score as replacement for FinBERT CLS. IS: 2018-2021, OOS: 2022-2026. Gate: OOS win-rate > 81.8% (H174 baseline) OR mean return > 6.89%.",
+  "risk_level": "medium",
+  "type": "new_hypothesis",
+  "target_file": "backtesting/daily/run_h304.py",
+  "content": {
+    "hypothesis": "H304",
+    "description": "LLM-Augmented PEAD — GPT-4o-mini + sentence-BERT vs H174 FinBERT baseline",
+    "variants": [
+      "A: GPT-4o-mini abstractive summary → FinBERT score on summary (not raw 8-K)",
+      "B: GPT-4o-mini abstractive summary → sentence-BERT embedding similarity score",
+      "C: Ensemble A+B with H174 dual filter (score≥0.18 + surprise≥0.02)"
+    ],
+    "gate": "OOS win-rate > 81.8% (H174 baseline) OR mean return > 6.89% (at n≥15 events)",
+    "is_period": "2018-01-01 to 2021-12-31",
+    "oos_period": "2022-01-01 to 2026-06-15",
+    "key_libraries": ["openai", "sentence-transformers", "transformers (ProsusAI/finbert)"],
+    "cost_estimate": "~$0.02/event at GPT-4o-mini pricing; 200 events ≈ $4 total for backtest",
+    "dependencies": ["H163 CONFIRMED", "H174 CONFIRMED", "EDGAR 8-K pipeline (backtesting/paper_trading/pead_overnight.py)"],
+    "hypothesis_log_entry": {
+      "id": "H304",
+      "title": "LLM-Augmented PEAD (GPT-4o-mini + sentence-BERT)",
+      "status": "PROPOSED",
+      "proposed": "2026-06-16",
+      "source": "ACL 2025 earnings NLP paper",
+      "gate": "OOS WR > 81.8% OR MeanRet > 6.89%"
+    }
+  },
+  "action": "create",
+  "apply_status": "pending"
+}

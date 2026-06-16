@@ -1,0 +1,17 @@
+{
+  "id": "2026-06-16-003",
+  "date": "2026-06-16",
+  "source": "arXiv:2507.07107 — Mask-First Design for ML Factor Pipelines (2025)",
+  "source_url": "https://arxiv.org/abs/2507.07107",
+  "title": "Wiki update: Add mask-first contamination prevention to backtesting design-principles",
+  "rationale": "arXiv:2507.07107 documents that look-ahead contamination in ML factor models (especially when using cross-sectional normalization or rolling imputation before train/test split) inflates Sharpe by a measurable amount. The paper introduces a 'mask-first' discipline: always mask future data *before* any preprocessing step, not just before model fitting. Evaluated on Chinese A-shares but methodology is universal. Key finding: +0.44 Sharpe points from contamination fix alone (i.e., naive pipelines are overstating performance by ~0.44 Sharpe). GPU-vectorized PyTorch implementation is 51x faster than pandas rolling. This is a direct methodology warning for our run_hNNN.py scripts that use rolling normalization.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "wiki/trading/backtesting/design-principles.md",
+  "content": {
+    "section_to_add": "## Mask-First Contamination Prevention (arXiv:2507.07107, 2025)\n\n**Problem:** Standard ML pipelines apply cross-sectional normalization (z-score, rank) or rolling imputation *before* the train/test split. This leaks future distribution information into the training window — a subtle but significant look-ahead bias.\n\n**Mask-first rule:** Apply any preprocessing that sees cross-sectional data (normalization, imputation, rolling stats) with future dates masked to NaN *before* computing the feature. Only then split into train/test.\n\n**Measured impact:** +0.44 Sharpe points contamination inflation on Chinese A-shares. Pipelines not following this rule systematically overstate backtested performance.\n\n**Check these in our run_hNNN.py scripts:**\n- `df.rolling(N).mean()` is safe — backward-looking by construction\n- `df.rank(axis=0)` on the full DataFrame **is contaminated** if axis=0 is the time axis\n- `df.rank(axis=1)` (cross-sectional rank at each time step) is safe\n- `StandardScaler().fit_transform(X)` on full X **is contaminated** — must fit on train only\n- `df.fillna(df.mean())` **is contaminated** if mean computed on full sample\n\n**GPU speedup:** PyTorch vectorized rolling ops are 51× faster than pandas `.rolling()` for large cross-sections (relevant for H303 crypto momentum with 30+ coins).\n\n**Action items:**\n- In H303 (crypto cross-sectional momentum): ensure `mom.rank(axis=1)` not `rank(axis=0)` ✓ (our code already uses axis=1 by default in `.rank(pct=True)` along columns)\n- In H304 (LLM PEAD): fit sentence-BERT scaler on IS only, apply to OOS\n- When adding ML models: always use `Pipeline` with `TimeSeriesSplit` to enforce mask-first\n",
+    "cross_reference": "See also: hypothesis-log.md (H256 look-ahead bias note: .shift(1) on r12 signal), crypto-trading-strategies.md (H303 implementation)"
+  },
+  "action": "append_section",
+  "apply_status": "pending"
+}

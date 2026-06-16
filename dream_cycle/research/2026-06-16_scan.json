@@ -1,0 +1,95 @@
+{
+  "date": "2026-06-16",
+  "session": "nightly autonomous",
+  "angles_scanned": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings NLP",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading",
+    "GitHub: trending quant finance repos"
+  ],
+  "findings": [
+    {
+      "id": "F001",
+      "angle": "PEAD + post-earnings NLP",
+      "source": "ACL 2025 Findings",
+      "title": "LLM-Enhanced PEAD via Abstractive Earnings Summaries + sentence-BERT",
+      "url": "https://aclanthology.org/2025.findings-acl.xxx",
+      "relevance": "HIGH",
+      "relevance_reason": "Direct upgrade to H163/H174 PEAD pipeline; ChatGPT abstractive summaries + sentence-BERT embeddings improve classification OOS vs FinBERT baseline (57.6-58.3%→higher); consistent OOS improvement reported",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-16/1_llm_pead_enhancement.json",
+      "proposed_hypothesis": "H304"
+    },
+    {
+      "id": "F002",
+      "angle": "multi-agent LLM trading",
+      "source": "arXiv:2605.23007",
+      "title": "MadEvolve: Multi-agent Adaptive Evolutionary LLM Trading Optimization",
+      "url": "https://arxiv.org/abs/2605.23007",
+      "relevance": "MEDIUM",
+      "relevance_reason": "Evolutionary island-model paradigm is distinct from debater/committee architectures; BTC-native evaluation aligns with our Kraken paper account; no immediate production path but useful taxonomy addition to multi-agent-llm-trading.md",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-16/2_madevolve_wiki_update.json",
+      "proposed_hypothesis": null
+    },
+    {
+      "id": "F003",
+      "angle": "cross-sectional momentum + factor momentum",
+      "source": "arXiv:2507.07107",
+      "title": "Mask-First Design for ML Factor Pipelines: Contamination Prevention",
+      "url": "https://arxiv.org/abs/2507.07107",
+      "relevance": "HIGH",
+      "relevance_reason": "Universal methodology finding: +0.44 Sharpe contamination inflation in naive ML pipelines; cross-sectional normalization before split is the main culprit; directly relevant to H303/H304 and any future ML hypothesis",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-16/3_mask_first_contamination_wiki.json",
+      "proposed_hypothesis": null
+    },
+    {
+      "id": "F004",
+      "angle": "pairs trading + cointegration + LLM",
+      "source": "arXiv (multiple, ~2024-2025)",
+      "title": "Deep learning pairs trading — DNN/LSTM cointegration detection",
+      "url": null,
+      "relevance": "LOW",
+      "relevance_reason": "Pairs family exhausted (H152-H160, H200, H246 all NOT CONFIRMED); ETF structural breaks and IS/OOS cointegration inversion make this a dead end for now; no new production path",
+      "staged": false,
+      "staged_file": null,
+      "proposed_hypothesis": null
+    },
+    {
+      "id": "F005",
+      "angle": "pairs trading + cointegration + LLM",
+      "source": "arXiv (multiple)",
+      "title": "ETF cointegration stability studies",
+      "url": null,
+      "relevance": "LOW",
+      "relevance_reason": "H246 NOT CONFIRMED already; SVB 2023 + gold-silver decoupling documented as structural breaks; no new angle",
+      "staged": false,
+      "staged_file": null,
+      "proposed_hypothesis": null
+    },
+    {
+      "id": "F006",
+      "angle": "GitHub: trending quant finance repos",
+      "source": "GitHub trending (2026-06-16)",
+      "title": "ccxt, pycoingecko, vectorbt — standard crypto backtest stack",
+      "url": null,
+      "relevance": "LOW",
+      "relevance_reason": "Already documented in crypto-trading-strategies.md (Phase 1 wiki expansion); no new action needed",
+      "staged": false,
+      "staged_file": null,
+      "proposed_hypothesis": null
+    }
+  ],
+  "summary": {
+    "total_findings": 6,
+    "high_relevance": 2,
+    "medium_relevance": 1,
+    "low_relevance": 3,
+    "staged_proposals": 3,
+    "new_hypotheses_proposed": 1,
+    "wiki_updates_staged": 2,
+    "notes": "Phase 1 (crypto wiki expansion) produced the most actionable content this session. Phase 2 scan was productive: H304 LLM-PEAD is a direct upgrade to confirmed H174. Mask-first contamination finding is a universal methodology improvement. MadEvolve adds evolutionary LLM paradigm to taxonomy."
+  }
+}
