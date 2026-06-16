@@ -1,0 +1,77 @@
+{
+  "hypothesis": "H301",
+  "description": "H026 ETF Rotation + VIX Term Structure Safety Overlay",
+  "signal": "H026 top-1 momentum; BIL override when VIX>VIX3M [OR SPY<200MA]",
+  "is_period": "2013-01-01 to 2019-12-31",
+  "oos_period": "2020-01-01 to 2026-06-15",
+  "variants": {
+    "A: H026 standalone": {
+      "overlay": "none",
+      "is_stats": {
+        "cagr": 0.2273,
+        "sharpe": 1.8583,
+        "max_drawdown": -0.1118,
+        "neg_years": 0
+      },
+      "oos_stats": {
+        "cagr": 0.205,
+        "sharpe": 1.2003,
+        "max_drawdown": -0.1253,
+        "neg_years": 0
+      },
+      "passes": false
+    },
+    "B: H026 + VIX gate": {
+      "overlay": "vix",
+      "is_stats": {
+        "cagr": 0.2344,
+        "sharpe": 2.0146,
+        "max_drawdown": -0.1118,
+        "neg_years": 0
+      },
+      "oos_stats": {
+        "cagr": 0.2023,
+        "sharpe": 1.2664,
+        "max_drawdown": -0.1241,
+        "neg_years": 0
+      },
+      "passes": true
+    },
+    "C: H026 + VIX+200MA": {
+      "overlay": "vix+ma",
+      "is_stats": {
+        "cagr": 0.2205,
+        "sharpe": 1.9895,
+        "max_drawdown": -0.1118,
+        "neg_years": 0
+      },
+      "oos_stats": {
+        "cagr": 0.2075,
+        "sharpe": 1.5253,
+        "max_drawdown": -0.1241,
+        "neg_years": 0
+      },
+      "passes": true
+    },
+    "D: H026 + 200MA only": {
+      "overlay": "ma",
+      "is_stats": {
+        "cagr": 0.2198,
+        "sharpe": 1.9478,
+        "max_drawdown": -0.1118,
+        "neg_years": 0
+      },
+      "oos_stats": {
+        "cagr": 0.2095,
+        "sharpe": 1.529,
+        "max_drawdown": -0.1241,
+        "neg_years": 0
+      },
+      "passes": true
+    }
+  },
+  "verdict": "CONFIRMED",
+  "h026_base_oos_sharpe": 1.2003,
+  "best_variant": "D: H026 + 200MA only",
+  "best_oos_sharpe": 1.529
+}

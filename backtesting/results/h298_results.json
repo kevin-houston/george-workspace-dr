@@ -1,0 +1,142 @@
+{
+  "hypothesis": "H298",
+  "description": "Short-Term (1-Week) Reversal on H026 ETF Universe (Lehmann 1990)",
+  "signal": "Long n ETFs with worst 5-day return last week; weekly rebalance",
+  "universe": [
+    "SPY",
+    "QQQ",
+    "IWM",
+    "EFA",
+    "EEM",
+    "XLK",
+    "XLF",
+    "XLE",
+    "XLV",
+    "XLI",
+    "XLP",
+    "XLY",
+    "XLU",
+    "GLD",
+    "SLV",
+    "USO",
+    "UNG",
+    "TLT",
+    "IEF",
+    "HYG",
+    "LQD",
+    "BIL",
+    "VNQ"
+  ],
+  "is_period": "2008-01-01 to 2017-12-31",
+  "oos_period": "2018-01-01 to 2026-06-15",
+  "spy_is": {
+    "cagr": 0.0894,
+    "sharpe": 0.5574,
+    "max_drawdown": -0.5077,
+    "n_weeks": 520,
+    "neg_years": 1
+  },
+  "spy_oos": {
+    "cagr": 0.1428,
+    "sharpe": 0.8152,
+    "max_drawdown": -0.3223,
+    "n_weeks": 440,
+    "neg_years": 2
+  },
+  "variants": {
+    "A: Top-1 reversal": {
+      "n_long": 1,
+      "tsmom_gate": false,
+      "is_stats": {
+        "cagr": -0.0463,
+        "sharpe": 0.063,
+        "max_drawdown": -0.7307,
+        "n_weeks": 520,
+        "neg_years": 7
+      },
+      "oos_stats": {
+        "cagr": -0.1052,
+        "sharpe": -0.0463,
+        "max_drawdown": -0.8166,
+        "n_weeks": 440,
+        "neg_years": 6
+      },
+      "passes": false
+    },
+    "B: Top-3 reversal": {
+      "n_long": 3,
+      "tsmom_gate": false,
+      "is_stats": {
+        "cagr": 0.0268,
+        "sharpe": 0.2302,
+        "max_drawdown": -0.4984,
+        "n_weeks": 520,
+        "neg_years": 6
+      },
+      "oos_stats": {
+        "cagr": 0.0976,
+        "sharpe": 0.5044,
+        "max_drawdown": -0.4824,
+        "n_weeks": 440,
+        "neg_years": 3
+      },
+      "passes": false
+    },
+    "C: Top-5 reversal": {
+      "n_long": 5,
+      "tsmom_gate": false,
+      "is_stats": {
+        "cagr": 0.0826,
+        "sharpe": 0.4823,
+        "max_drawdown": -0.4452,
+        "n_weeks": 520,
+        "neg_years": 4
+      },
+      "oos_stats": {
+        "cagr": 0.1124,
+        "sharpe": 0.6177,
+        "max_drawdown": -0.4153,
+        "n_weeks": 440,
+        "neg_years": 2
+      },
+      "passes": false
+    },
+    "D: Top-3 + TSMOM gate": {
+      "n_long": 3,
+      "tsmom_gate": true,
+      "is_stats": {
+        "cagr": 0.0978,
+        "sharpe": 0.6732,
+        "max_drawdown": -0.4343,
+        "n_weeks": 520,
+        "neg_years": 2
+      },
+      "oos_stats": {
+        "cagr": 0.0032,
+        "sharpe": 0.1067,
+        "max_drawdown": -0.4619,
+        "n_weeks": 440,
+        "neg_years": 4
+      },
+      "passes": false
+    }
+  },
+  "verdict": "NOT CONFIRMED",
+  "survivorship_bias": false,
+  "equal_weight_is": {
+    "cagr": 0.0608,
+    "sharpe": 0.5453,
+    "max_drawdown": -0.3924,
+    "n_weeks": 520,
+    "neg_years": 2
+  },
+  "equal_weight_oos": {
+    "cagr": 0.12,
+    "sharpe": 0.8295,
+    "max_drawdown": -0.2616,
+    "n_weeks": 440,
+    "neg_years": 2
+  },
+  "best_variant": "C: Top-5 reversal",
+  "best_oos_sharpe": 0.6177
+}

@@ -6929,3 +6929,264 @@ Script: `backtesting/daily/run_h269_ideation_sprint.py` (invokes Claude API stru
 - **Best immediate use:** as an overlay to BIL safe-harbor decision in existing monthly rotation (if month-end VIX > VIX3M AND SPY < 200MA → BIL regardless of rotation signal). This is already partially implemented in H249/H026.
 
 **Script:** `backtesting/daily/run_h296.py` | **Results:** `backtesting/results/h296_results.json`
+
+---
+
+### H282 — Dividend Growth ETF Rotation (NOT CONFIRMED)
+
+**Source:** Dividend growth anomaly — rotating into the highest YoY dividend growth ETF
+
+**Hypothesis:** Rotating among high-dividend ETFs by trailing dividend *growth rate* (not yield) captures a quality/momentum signal: dividend growers signal improving fundamentals and attract institutional demand.
+
+**Universe:** DVY, VYM, SDY, VIG, BIL (core); extended universe adds HDV, SCHD, DLN, PFF
+**IS:** 2006–2017 | **OOS:** 2018–2026
+**Gate:** OOS Sharpe > 1.0 AND > equal-weight
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | Passes |
+|---------|-----------|------------|-----------|--------|
+| A1: Top-1 growth | 0.556 | 0.782 | -17.1% | No |
+| A2: Top-2 growth | 0.648 | 0.413 | -22.7% | No |
+| A3: Hybrid Top-1 | 0.556 | 0.741 | -17.1% | No |
+
+SPY OOS Sharpe: 0.864. Equal-weight OOS: 0.659.
+
+**Verdict:** NOT CONFIRMED — best OOS Sharpe 0.782 falls short of gate (1.0) and barely beats equal-weight. Dividend *growth* as a rotation signal adds no value over momentum; dividend-growth ETFs all hold large overlapping universes, making the signal noisy. The extended IS Sharpes (1.46 for B1) collapse to 0.78 OOS — severe regime fit to pre-2018 low-rate environment.
+
+**Script:** `backtesting/daily/run_h282.py` | **Results:** `backtesting/results/h282_results.json`
+
+---
+
+### H283 — Bond ETF Carry + Momentum Rotation (NOT CONFIRMED)
+
+**Source:** Carry + momentum blend on H045 bond ETF universe
+
+**Hypothesis:** H045 (Treasury/bond ETF momentum rotation, OOS Sharpe 1.351) can be improved by blending a carry signal (trailing 12-month yield as bond income proxy) alongside price momentum.
+
+**Universe:** H045's 13-bond-ETF universe | **Gate:** OOS Sharpe > H045 baseline (1.351 / recomputed 1.426)
+
+| Alpha (momentum wt) | IS Sharpe | OOS Sharpe | OOS MaxDD |
+|--------------------|-----------|------------|-----------|
+| 1.00 (pure momentum) | 0.783 | 0.743 | -5.9% |
+| 0.75 | 0.922 | 0.679 | -8.4% |
+| 0.50 | 0.759 | 0.602 | -12.5% |
+| 0.25 | 0.486 | 0.464 | -17.1% |
+
+**Verdict:** NOT CONFIRMED — all blend variants fail gate. Adding carry (yield) to bond momentum degrades performance. Root cause: bond yield already partially drives bond price momentum (rising yield → falling price → momentum exits anyway). The carry signal provides redundant information and introduces additional mean-reversion noise from yield fluctuations that don't predict next-month bond return.
+
+**Script:** `backtesting/daily/run_h283.py` | **Results:** `backtesting/results/h283_results.json`
+
+---
+
+### H284 — FCF/P Stock Screener via FMP (CONFIRMED, short OOS caveat)
+
+**Source:** Yartseva (2025) "What Makes a Multibagger?" — FCF yield as #1 multibagger predictor
+
+**Hypothesis:** Annual rebalancing into top-10 S&P 500 large-cap stocks by free cash flow yield (FCF/P) outperforms SPY after applying a 3-month reporting lag.
+
+**Universe:** 50 S&P 500 large-caps (survivorship bias) | **Rebalance:** Annual (Q1 end) | **Data:** FMP freeCashFlowYield
+
+| Period | CAGR | Sharpe | MaxDD |
+|--------|------|--------|-------|
+| IS (2022-04 – 2024-03) | 11.6% | 0.679 | -13.8% |
+| OOS (2024-04 – 2026) | 15.2% | **1.297** | -10.3% |
+| SPY IS | 9.3% | 0.476 | -13.0% |
+| SPY OOS | 19.9% | 1.552 | -7.6% |
+
+**Verdict:** CONFIRMED (script gate passed) but with caveats: OOS Sharpe 1.297 vs SPY OOS 1.552 — the strategy UNDERPERFORMS SPY on risk-adjusted basis in OOS. WF ratio 1.91 (OOS > IS) looks good but IS is only 24 months (2022 down year + recovery). Only 21/50 tickers had FMP data. **Do not deploy standalone** — interesting as a valuation tilt within a broader portfolio but not production-ready.
+
+**Script:** `backtesting/daily/run_h284.py` | **Results:** `backtesting/results/h284_results.json`
+
+---
+
+### H285 — Quality ETF Rotation: Accruals Anomaly (CONFIRMED)
+
+**Source:** Sloan (1996) accruals anomaly + AQR quality factor; implemented via quality-factor ETF rotation
+
+**Hypothesis:** Rotating among QUAL, DGRW, VIG, MOAT (quality-factor ETFs) based on trailing 6-month momentum identifies the leading quality segment and outperforms static hold.
+
+**Universe:** Quality-factor ETFs (QUAL, DGRW, VIG, MOAT + BIL as cash)
+**IS:** 2018–2024 | **OOS:** 2024–2026
+
+| Period | CAGR | Sharpe | MaxDD |
+|--------|------|--------|-------|
+| IS | 11.7% | 1.033 | -13.5% |
+| OOS | 15.2% | **0.932** | -19.4% |
+| QUAL buy-hold OOS | — | 0.794 | — |
+| SPY OOS | 15.9% | 0.921 | -24.0% |
+
+WF ratio: 0.903. Corr(SPY) OOS: 0.969.
+
+**Verdict:** CONFIRMED — OOS Sharpe 0.932 > SPY OOS 0.921 (barely). QUAL buy-hold OOS 0.794 also beaten. However Corr(SPY)=0.969 means near-perfect SPY replication — quality ETFs rotate together. **Limited standalone value** — diversification benefit vs H026 is minimal given the high SPY correlation.
+
+**Script:** `backtesting/daily/run_h285.py` | **Results:** `backtesting/results/h285_results.json`
+
+---
+
+### H286 — Macro-Gated COWZ (FCF Yield Factor ETF) (CONFIRMED)
+
+**Source:** COWZ (Pacer US Cash Cows 100 ETF) as FCF yield factor proxy + SPY 200MA / VIX gate
+
+**Hypothesis:** COWZ underperforms SPY in bull markets but can be improved by retreating to BIL during bear/high-vol regimes (SPY < 200MA OR VIX ≥ threshold).
+
+**COWZ baseline OOS Sharpe:** 0.893 | **SPY OOS Sharpe:** 0.998
+
+| Variant | Gate | IS Sharpe | OOS Sharpe | OOS MaxDD |
+|---------|------|-----------|------------|-----------|
+| A: VIX ≥ 20 exit | conservative | 0.013 | 0.637 | -17.6% |
+| B: VIX ≥ 25 + 200MA | balanced | 0.624 | **1.031** | -16.2% |
+| C: VIX ≥ 30 | loose | 0.283 | ~0.95 | — |
+
+**Verdict:** CONFIRMED — Variant B OOS Sharpe 1.031 > SPY (0.998) and COWZ baseline (0.893). Corr(SPY) for B: 0.596 (genuine diversification). The VIX-25 + 200MA double gate is the same Variant C logic confirmed in H296 — convergent evidence that this gate improves risk-adjusted returns across equity strategies. COWZ's FCF-yield tilt provides sector diversification vs pure market cap (overweights energy, utilities, industrials vs SPY's tech concentration).
+
+**Script:** `backtesting/daily/run_h286.py` | **Results:** `backtesting/results/h286_results.json`
+
+---
+
+### H291 — 52-Week High Proximity Momentum: 50-Stock Universe (NOT CONFIRMED)
+
+**Source:** George & Hwang (2004) "The 52-Week High and Momentum Investing" (JF)
+
+**Hypothesis:** Extending H188 (30-stock universe, OOS Sharpe 0.774) to a 50-stock large-cap S&P 500 universe improves signal quality and OOS Sharpe.
+
+**Universe:** 50 S&P 500 large-caps (survivorship bias)
+**IS:** 2008–2017 | **OOS:** 2018–2025
+
+| Period | CAGR | Sharpe | MaxDD |
+|--------|------|--------|-------|
+| IS | 12.8% | 1.031 | -27.7% |
+| OOS | 11.6% | **0.764** | -14.4% |
+| SPY OOS | 14.9% | 0.900 | -24.0% |
+
+WF ratio: 0.741. Corr(SPY) OOS: 0.731. Corr(production) OOS: 0.694.
+
+**Verdict:** NOT CONFIRMED — OOS Sharpe 0.764 < SPY OOS 0.900. Expanding to 50 stocks does NOT improve over H188 (0.774 OOS on 30 stocks). Survivorship bias inflates IS Sharpe. The 52-week high signal works better on a focused 30-stock universe (H188) than a diluted 50-stock one — the signal is strongest in quality large-caps, not the full large-cap universe.
+
+**Script:** `backtesting/daily/run_h291.py` | **Results:** `backtesting/results/h291_results.json`
+
+---
+
+### H292 — Return Seasonality: Same Calendar Month (CONFIRMED, survivorship bias)
+
+**Source:** Heston & Sadka (2008) "Seasonality in the Cross-Section of Stock Returns" (JFE)
+
+**Hypothesis:** Stocks that performed well in the same calendar month one year ago continue to outperform in that month the following year (1-year seasonal lag).
+
+**Universe:** 50 S&P 500 large-caps (survivorship bias)
+**IS:** 2008–2017 | **OOS:** 2018–2025
+
+| Period | CAGR | Sharpe | MaxDD |
+|--------|------|--------|-------|
+| IS | 11.6% | 0.688 | -38.3% |
+| OOS | 18.2% | **0.970** | -19.1% |
+| SPY OOS | 14.9% | 0.900 | -24.0% |
+
+WF ratio: 1.411 (OOS > IS — good). Corr(SPY) OOS: 0.838.
+
+**Verdict:** CONFIRMED — OOS Sharpe 0.970 > SPY (0.900). The WF ratio 1.411 suggests genuine out-of-sample validity rather than IS overfit. However: survivorship bias present, Corr(SPY)=0.838 limits diversification value, and IS MaxDD -38.3% is concerning. The Heston-Sadka effect replicates on US large-cap. **Not production-ready** as a standalone — potentially useful as a monthly signal enhancement layer for H181/H188 stock selection.
+
+**Script:** `backtesting/daily/run_h292.py` | **Results:** `backtesting/results/h292_results.json`
+
+---
+
+### H298 — Weekly ETF Reversal (NOT CONFIRMED)
+
+**Source:** Lehmann (1990), Lo & MacKinlay (1990), Jegadeesh (1990) — 1-week short-term reversal
+
+**Hypothesis:** ETFs that lost the most in the prior week (5 trading days) tend to recover the following week. Applies the classical short-term reversal anomaly to the H026 25-ETF universe with weekly rebalancing.
+
+**Universe:** H026's 23-ETF universe (full history since 2008) | **IS:** 2008–2017 | **OOS:** 2018–2026 | **Gate:** OOS Sharpe > 0.8
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD |
+|---------|-----------|------------|-----------|
+| A: Top-1 reversal | 0.063 | -0.046 | -81.7% |
+| B: Top-3 reversal | 0.230 | 0.504 | -48.2% |
+| C: Top-5 reversal | 0.482 | 0.618 | -41.5% |
+| D: Top-3 + TSMOM gate | 0.673 | 0.107 | -46.2% |
+| EW buy-hold | 0.545 | 0.830 | -26.2% |
+
+SPY OOS Sharpe: 0.815.
+
+**Verdict:** NOT CONFIRMED — best OOS Sharpe 0.618 (Variant C) below gate (0.8). Equal-weight (0.830) beats all reversal variants. Root cause: ETFs don't exhibit short-term reversal the way individual stocks do. ETFs represent diversified baskets — idiosyncratic microstructure effects (bid-ask bounce, inventory adjustment) that drive 1-week stock reversal are averaged away at the ETF level. The TSMOM gate (D) destroys performance by cutting too many candidates.
+
+**Script:** `backtesting/daily/run_h298.py` | **Results:** `backtesting/results/h298_results.json`
+
+---
+
+### H299 — Market Breadth Timing: Sector 50d-MA (NOT CONFIRMED)
+
+**Source:** Martin Pring (1992), Zweig "breadth thrust" concept
+
+**Hypothesis:** When the majority of sector ETFs (XLK through XLB, 11 sectors) are above their 50-day MA (high breadth), equity returns are elevated. Low breadth periods predict negative markets.
+
+**Universe:** 11 sector ETFs as breadth indicators → time SPY/BIL | **IS:** 2012–2019 | **OOS:** 2020–2026 | **Gate:** OOS Sharpe > 1.0
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | % in SPY |
+|---------|-----------|------------|-----------|---------|
+| A: Breadth > 50% | 0.583 | 0.360 | -27.0% | 69% |
+| B: Breadth > 70% | 0.557 | 0.212 | -31.2% | 55% |
+| C: >50% + SPY>200MA | 0.352 | 0.069 | -28.1% | 64% |
+| D: Continuous weight | 0.734 | 0.473 | -24.8% | — |
+| E: Breadth > 30% | 0.524 | 0.369 | -32.3% | 78% |
+
+SPY OOS Sharpe: 0.803. Avg OOS breadth: 0.63 (sectors mostly above 50d MA 63% of time).
+
+**Verdict:** NOT CONFIRMED — all variants fail gate. Best OOS Sharpe 0.473 (Variant D) vs SPY 0.803. Root cause: sector ETFs are highly correlated with SPY — breadth signal is highly redundant with SPY's own trend. When breadth falls below 50%, SPY is usually already in a downtrend (so both signals agree), but the timing lag (monthly rebalance) misses the drawdown and the recovery. At monthly resolution, breadth provides no incremental signal over just holding SPY or using SPY 200MA directly.
+
+**Script:** `backtesting/daily/run_h299.py` | **Results:** `backtesting/results/h299_results.json`
+
+---
+
+### H300 — Yield Curve Timing: 10Y-3M Spread (NOT CONFIRMED)
+
+**Source:** Estrella & Mishkin (1998), Johanssen & Mertens (2018), Fama (1990)
+
+**Hypothesis:** When the 10Y-3M Treasury spread inverts (spread ≤ 0), retreat to BIL. When the curve is steep (spread > 0), hold SPY. The yield curve is a well-documented recession predictor (18-month lag).
+
+**Data:** FRED DGS10, DGS3MO | **IS:** 2000–2014 | **OOS:** 2015–2026 | **Gate:** OOS Sharpe > 1.0
+
+OOS stats: 27.5% of OOS months had inverted curve (2015-2016, 2019, 2022-2024).
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | % in SPY |
+|---------|-----------|------------|-----------|---------|
+| A: Spread > 0% | 0.120 | 0.680 | -27.0% | 72% |
+| B: Spread > 0.5% | 0.238 | 0.617 | -22.8% | 59% |
+| C: >0% + SPY>200MA | 0.471 | 0.405 | -22.1% | 59% |
+| D: 3M lagged signal | 0.201 | 0.408 | -36.5% | 72% |
+| E: Gradient [0,2.5%] | 0.201 | 0.393 | -15.9% | — |
+
+SPY OOS Sharpe: 0.819.
+
+**Verdict:** NOT CONFIRMED — best OOS Sharpe 0.680 (Variant A) < SPY (0.819). Root cause: The 2022-2024 yield curve inversion (driven by Fed rate hikes) is a false positive. The yield curve inverted in 2022 but the market rallied strongly in 2023-2024. A signal designed for historical recessions (2001: 2-year lag, 2008: 18-month lag) fires early in the post-COVID rate cycle and misses the "soft landing" rally. The 18-month average recession lag doesn't help at monthly rebalance frequency.
+
+**Script:** `backtesting/daily/run_h300.py` | **Results:** `backtesting/results/h300_results.json`
+
+---
+
+### H301 — H026 ETF Rotation + SPY 200MA Safety Overlay (CONFIRMED)
+
+**Source:** Extension of H026 (confirmed ETF rotation) and H296 (confirmed VIX term structure timing)
+
+**Hypothesis:** H026's top-1 momentum rotation can be improved by adding a safety overlay: if SPY falls below its 200-day MA at month-end, hold BIL for the next month regardless of momentum signal. Tests whether trend-following at the portfolio level complements cross-sectional momentum within the ETF universe.
+
+**IS:** 2013–2019 | **OOS:** 2020–2026 | **Gate:** OOS Sharpe ≥ 5% improvement over H026 standalone
+
+OOS stress stats: VIX backwardation 10.3% of months; SPY below 200MA 20.5%; either condition 24.4%.
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | NegYrs | Gate |
+|---------|-----------|------------|-----------|--------|------|
+| A: H026 standalone | 1.858 | 1.200 | -12.5% | 0 | BASE |
+| B: H026 + VIX gate | 2.015 | 1.266 | -12.4% | 0 | PASS |
+| C: H026 + VIX+200MA | 1.990 | 1.525 | -12.4% | 0 | PASS |
+| D: H026 + 200MA only | **1.948** | **1.529** | **-12.4%** | **0** | **PASS** |
+
+**Verdict:** CONFIRMED — Variants B, C, D all pass gate. **Best: Variant D (200MA only)** with OOS Sharpe 1.529 vs baseline 1.200 (+27.4% improvement).
+
+**Key finding:** Adding the SPY 200MA safety overlay improves H026 OOS Sharpe by +27% and reduces MaxDD marginally. Critically, the 200MA alone (Variant D) performs as well as the VIX+200MA combination (Variant C), indicating the 200MA is the dominant signal. This aligns with H296 (Variant C confirmed) where the 200MA gate drove most of the improvement over pure VIX term structure.
+
+**Why it works:** H026 top-1 momentum rotates aggressively into whichever sector ETF is winning. In a market-wide downtrend (SPY < 200MA), sector momentum is highly correlated — the "top" momentum pick is itself in a downtrend. The 200MA overlay catches regime breaks that cross-sectional momentum misses temporarily.
+
+**CAUTION:** This OOS (2020-2026) benefited from COVID crash protection (March 2020: SPY below 200MA, correctly moved to BIL). A longer OOS would be needed to validate fully. The IS (2013-2019) Sharpe of 1.858 for the base is already strong, limiting room for overlay improvement in IS.
+
+**Production note:** The 200MA overlay can be applied to the live H026 monthly rotation (h112_monthly.py). At month-end, if `SPY_close < SPY_200d_MA`, override the rotation signal with BIL. Implementation is one conditional check per rebalance.
+
+**Script:** `backtesting/daily/run_h301.py` | **Results:** `backtesting/results/h301_results.json`

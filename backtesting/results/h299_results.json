@@ -1,0 +1,126 @@
+{
+  "hypothesis": "H299",
+  "description": "Market Breadth Timing: Fraction of Sector ETFs above 50d MA",
+  "signal": "Monthly breadth = (#sectors above 50d MA) / 11; hold SPY vs BIL",
+  "is_period": "2012-01-01 to 2019-12-31",
+  "oos_period": "2020-01-01 to 2026-06-15",
+  "spy_is": {
+    "cagr": 0.1455,
+    "sharpe": 1.1278,
+    "max_drawdown": -0.1935,
+    "n_months": 95,
+    "neg_years": 1
+  },
+  "spy_oos": {
+    "cagr": 0.1527,
+    "sharpe": 0.8026,
+    "max_drawdown": -0.3372,
+    "n_months": 77,
+    "neg_years": 1
+  },
+  "variants": {
+    "A: Breadth > 50%": {
+      "mode": "threshold",
+      "threshold": 0.5,
+      "is_stats": {
+        "cagr": 0.0537,
+        "sharpe": 0.5825,
+        "max_drawdown": -0.1839,
+        "n_months": 95,
+        "neg_years": 1
+      },
+      "oos_stats": {
+        "cagr": 0.0374,
+        "sharpe": 0.3596,
+        "max_drawdown": -0.27,
+        "n_months": 77,
+        "neg_years": 2
+      },
+      "pct_time_in_spy_oos": "69%",
+      "passes": false
+    },
+    "B: Breadth > 70%": {
+      "mode": "threshold",
+      "threshold": 0.7,
+      "is_stats": {
+        "cagr": 0.0428,
+        "sharpe": 0.5572,
+        "max_drawdown": -0.152,
+        "n_months": 95,
+        "neg_years": 2
+      },
+      "oos_stats": {
+        "cagr": 0.0169,
+        "sharpe": 0.2116,
+        "max_drawdown": -0.3119,
+        "n_months": 77,
+        "neg_years": 3
+      },
+      "pct_time_in_spy_oos": "55%",
+      "passes": false
+    },
+    "C: >50% + SPY>200MA": {
+      "mode": "double",
+      "threshold": 0.5,
+      "is_stats": {
+        "cagr": 0.0257,
+        "sharpe": 0.352,
+        "max_drawdown": -0.1555,
+        "n_months": 95,
+        "neg_years": 1
+      },
+      "oos_stats": {
+        "cagr": 0.002,
+        "sharpe": 0.0691,
+        "max_drawdown": -0.2811,
+        "n_months": 77,
+        "neg_years": 2
+      },
+      "pct_time_in_spy_oos": "64%",
+      "passes": false
+    },
+    "D: Continuous weight": {
+      "mode": "continuous",
+      "threshold": null,
+      "is_stats": {
+        "cagr": 0.0536,
+        "sharpe": 0.7337,
+        "max_drawdown": -0.1196,
+        "n_months": 95,
+        "neg_years": 2
+      },
+      "oos_stats": {
+        "cagr": 0.0456,
+        "sharpe": 0.4733,
+        "max_drawdown": -0.2484,
+        "n_months": 77,
+        "neg_years": 1
+      },
+      "pct_time_in_spy_oos": "\u2014",
+      "passes": false
+    },
+    "E: Breadth > 30%": {
+      "mode": "threshold",
+      "threshold": 0.3,
+      "is_stats": {
+        "cagr": 0.0521,
+        "sharpe": 0.5236,
+        "max_drawdown": -0.2215,
+        "n_months": 95,
+        "neg_years": 2
+      },
+      "oos_stats": {
+        "cagr": 0.0436,
+        "sharpe": 0.3691,
+        "max_drawdown": -0.3232,
+        "n_months": 77,
+        "neg_years": 2
+      },
+      "pct_time_in_spy_oos": "78%",
+      "passes": false
+    }
+  },
+  "verdict": "NOT CONFIRMED",
+  "best_variant": "D: Continuous weight",
+  "best_oos_sharpe": 0.4733
+}

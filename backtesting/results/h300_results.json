@@ -1,0 +1,136 @@
+{
+  "hypothesis": "H300",
+  "description": "Yield Curve Slope (10Y-3M) as Monthly Equity Timing Signal",
+  "signal": "DGS10 - DGS3MO; positive \u2192 SPY, inverted \u2192 BIL",
+  "is_period": "2000-01-01 to 2014-12-31",
+  "oos_period": "2015-01-01 to 2026-06-15",
+  "spy_is": {
+    "cagr": 0.0424,
+    "sharpe": 0.3052,
+    "max_drawdown": -0.5519,
+    "n_months": 179,
+    "neg_years": 4
+  },
+  "spy_oos": {
+    "cagr": 0.1373,
+    "sharpe": 0.8192,
+    "max_drawdown": -0.3372,
+    "n_months": 137,
+    "neg_years": 2
+  },
+  "spread_stats": {
+    "pct_inverted_oos": 0.2753623188405797,
+    "avg_spread_is": 1.9343888888888892,
+    "avg_spread_oos": 0.5792028985507247
+  },
+  "variants": {
+    "A: Spread > 0%": {
+      "mode": "binary",
+      "threshold": 0.0,
+      "lag_months": 0,
+      "is_stats": {
+        "cagr": 0.0047,
+        "sharpe": 0.1204,
+        "max_drawdown": -0.6622,
+        "n_months": 179,
+        "neg_years": 6
+      },
+      "oos_stats": {
+        "cagr": 0.0831,
+        "sharpe": 0.6798,
+        "max_drawdown": -0.2703,
+        "n_months": 137,
+        "neg_years": 3
+      },
+      "pct_time_in_spy_oos": "72%",
+      "passes": false
+    },
+    "B: Spread > 0.5%": {
+      "mode": "binary",
+      "threshold": 0.5,
+      "lag_months": 0,
+      "is_stats": {
+        "cagr": 0.0273,
+        "sharpe": 0.2378,
+        "max_drawdown": -0.5823,
+        "n_months": 179,
+        "neg_years": 3
+      },
+      "oos_stats": {
+        "cagr": 0.0691,
+        "sharpe": 0.6165,
+        "max_drawdown": -0.2281,
+        "n_months": 137,
+        "neg_years": 3
+      },
+      "pct_time_in_spy_oos": "59%",
+      "passes": false
+    },
+    "C: >0% + SPY>200MA": {
+      "mode": "combined",
+      "threshold": 0.0,
+      "lag_months": 0,
+      "is_stats": {
+        "cagr": 0.0477,
+        "sharpe": 0.4714,
+        "max_drawdown": -0.1721,
+        "n_months": 179,
+        "neg_years": 6
+      },
+      "oos_stats": {
+        "cagr": 0.0372,
+        "sharpe": 0.4054,
+        "max_drawdown": -0.2212,
+        "n_months": 137,
+        "neg_years": 4
+      },
+      "pct_time_in_spy_oos": "59%",
+      "passes": false
+    },
+    "D: 3M lagged spread > 0": {
+      "mode": "binary",
+      "threshold": 0.0,
+      "lag_months": 3,
+      "is_stats": {
+        "cagr": 0.0204,
+        "sharpe": 0.2014,
+        "max_drawdown": -0.5737,
+        "n_months": 179,
+        "neg_years": 4
+      },
+      "oos_stats": {
+        "cagr": 0.0534,
+        "sharpe": 0.408,
+        "max_drawdown": -0.3647,
+        "n_months": 137,
+        "neg_years": 3
+      },
+      "pct_time_in_spy_oos": "72%",
+      "passes": false
+    },
+    "E: Gradient [0,2.5%]": {
+      "mode": "gradient",
+      "threshold": null,
+      "lag_months": 0,
+      "is_stats": {
+        "cagr": 0.0198,
+        "sharpe": 0.2008,
+        "max_drawdown": -0.5267,
+        "n_months": 179,
+        "neg_years": 7
+      },
+      "oos_stats": {
+        "cagr": 0.0244,
+        "sharpe": 0.3932,
+        "max_drawdown": -0.159,
+        "n_months": 137,
+        "neg_years": 3
+      },
+      "pct_time_in_spy_oos": "\u2014",
+      "passes": false
+    }
+  },
+  "verdict": "NOT CONFIRMED",
+  "best_variant": "A: Spread > 0%",
+  "best_oos_sharpe": 0.6798
+}
