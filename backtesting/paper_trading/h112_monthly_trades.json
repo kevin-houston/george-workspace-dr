@@ -129,5 +129,34 @@
         "submitted_at": "2026-06-15T09:56:48.581925"
       }
     ]
+  },
+  {
+    "date": "2026-06-16",
+    "equity": 101508.49,
+    "target": {
+      "XLK": 101508.49
+    },
+    "eff_weights": {
+      "h026": 1.0
+    },
+    "h026_scale": 1.0,
+    "signals": {
+      "h026": {
+        "top_n": [
+          "XLK"
+        ]
+      }
+    },
+    "trades": [
+      {
+        "symbol": "XLK",
+        "action": "SELL",
+        "qty": 1.88076,
+        "est_value": 356.23,
+        "reason": "target $101,508, current $101,865",
+        "order_id": "8d9650ab-7fce-45ca-a917-a7e234d3a55c",
+        "submitted_at": "2026-06-16T09:46:38.091781"
+      }
+    ]
   }
 ]
