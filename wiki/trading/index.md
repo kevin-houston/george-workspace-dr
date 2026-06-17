@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-16 (crypto-trading-strategies.md new; market-timing-overlays.md indexed; H302 BTC-50d-MA + H303 cross-sectional crypto momentum queued)
+updated: 2026-06-17 (risk-controls-and-monitoring.md new; H302 NOT CONFIRMED, H303 NOT CONFIRMED)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -96,6 +96,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Live Graduation Criteria & Performance Attribution](paper-trading/live-graduation-criteria.md) ← new 2026-05-30 (SPRT test for strategy validation, minimum trade counts, regime coverage gates, paper→live execution attribution, Alpaca migration steps)
   - [Tax & After-Tax Return Modeling](paper-trading/tax-and-after-tax-returns.md) ← new 2026-06-05 (STCG/LTCG rates for IL, wash sale rule for algo trading, HIFO lot selection, after-tax Sharpe formula, expected ~40% tax drag on STCG monthly-rebalanced strategies, IRS Form 8949 reporting)
   - [Execution Quality & Slippage Analysis](paper-trading/execution-quality.md) ← new 2026-06-11 (IS/VWAP benchmarks, Alpaca paper fill mechanics, per-strategy slippage budgets H026/H181/PEAD, paper→live degradation estimates, graduation gate thresholds)
+  - [Risk Controls & Live Trading Monitoring](paper-trading/risk-controls-and-monitoring.md) ← new 2026-06-17 (3-tier circuit breakers; kill switch via Alpaca close_all_positions; ATR position sizing; portfolio heat monitoring; correlation guard for PEAD entries; alert checklist; per-strategy risk table)
 - [Sources](sources/) — ingested papers and working papers
   - [The Alchemy of Multibagger Stocks](sources/multibagger-yartseva-2025.md) ← new 2026-06-12 (Yartseva 2025; FCF/P = #1 factor; EPS growth NOT sig; small-cap +37.7% vs large +9.7%; asset_growth>EBITDA_growth −22.8pp; near-12m-low entry signal; rate-hike −8-12pp; H285 proposed)
 - [Research Log](research-log/) — nightly research summaries

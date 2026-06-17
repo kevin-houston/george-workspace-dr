@@ -1,0 +1,28 @@
+{
+  "id": "2026-06-17-001",
+  "date": "2026-06-17",
+  "source": "arXiv:2605.25894 — Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning (Noseda, Soldati, Paina, May 2026)",
+  "source_url": "https://arxiv.org/abs/2605.25894",
+  "title": "H305 stub — multi-modal earnings direction: FinBERT + fundamentals + Transformer",
+  "rationale": "H174 (CONFIRMED, OOS WR=81.8%) uses FinBERT score + EPS surprise. arXiv:2605.25894 (May 2026) shows adding 15 fundamental metrics (EPS, revenue, margins, growth rates) and 3 technical indicators alongside FinBERT sentiment into a Transformer classifier improves directional accuracy on earnings announcement days. This directly extends H174 by adding a richer feature vector. Design extension — not a replication (H174 uses EDGAR 8-K full-document; paper uses press releases and financial news; different data path). Key design question: does adding fundamental features at scoring time improve WR and MeanRet over H174 baseline (WR=81.8%, MeanRet=6.89%)? Gate: OOS WR > 84% OR MeanRet > 8.5% (materially better than H174). Cost: fundamentals from FMP ($FMP_API_KEY available); no additional API needed. Transformer vs LSTM comparison design included. Mask-first note: train/test split on IS data must precede all feature scaling.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "backtesting/daily/run_h305.py",
+  "content": {
+    "scaffold": "H305 stub — LLM + Fundamentals Multi-Modal Earnings Direction Classifier",
+    "hypothesis": "Upgrade H174 by adding 15 fundamental features (EPS surprise, revenue surprise, gross margin, revenue YoY growth, EPS YoY growth, P/E, P/S, FCF/P, debt/equity, current ratio, asset growth, net income growth, operating income margin, R&D as % revenue, buyback yield) alongside FinBERT 8-K score. Train LSTM/Transformer binary classifier (up >3% in 20 trading days vs not) on IS 2015-2021; test OOS 2022-2026. Gate: OOS WR > 84% OR MeanRet > 8.5%.",
+    "todo_steps": [
+      "1. Load H174 event database (EDGAR 8-K scored events with finbert_score + eps_surprise)",
+      "2. For each event ticker+date, pull 15 fundamental features from FMP API (quarterly)",
+      "3. Build feature matrix: [finbert_score, eps_surprise, 15 fundamentals, 3 technicals (RSI-14, ATR-20, 20d return)]",
+      "4. IS: 2015-2021 → fit MinMaxScaler on IS only (mask-first); OOS: 2022-2026",
+      "5. Train LSTM and Transformer binary classifiers on IS; evaluate OOS WR + MeanRet",
+      "6. Compare: H174 baseline (WR=81.8%, MeanRet=6.89%) vs H305 multi-modal",
+      "7. Gate: OOS WR > 84% OR MeanRet > 8.5%"
+    ],
+    "cost_note": "FMP fundamentals: ~$0 (already in quota, quarterly data); OpenAI Batch API not needed (no new LLM calls — reuse H174 finbert_scores). sklearn or PyTorch for classifier. ~0 incremental API cost.",
+    "mask_first_note": "CRITICAL: fit MinMaxScaler on IS feature matrix ONLY; transform OOS using IS scaler. Never fit_transform on full sample."
+  },
+  "action": "write",
+  "apply_status": "pending"
+}

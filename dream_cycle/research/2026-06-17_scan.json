@@ -1,0 +1,95 @@
+{
+  "date": "2026-06-17",
+  "session": "nightly research — wiki expansion + dream cycle scan",
+  "wiki_expansion": {
+    "page": "wiki/trading/paper-trading/risk-controls-and-monitoring.md",
+    "rationale": "Thinnest section in paper-trading/ — no dedicated risk controls page despite H026/H174/H181 approaching Phase 4. Created 3-tier circuit breaker system, kill switch, ATR sizing, portfolio heat monitor, correlation guard.",
+    "status": "completed"
+  },
+  "hypotheses_tested": [
+    {
+      "id": "H302",
+      "description": "BTC 50d MA Trend Following",
+      "verdict": "NOT CONFIRMED",
+      "best_oos_sharpe": 0.586,
+      "gate": 1.0,
+      "notes": "IS Sharpe 1.7-2.1 degraded badly OOS 2021-2026. 2022 crash + FTX. All 4 variants fail."
+    },
+    {
+      "id": "H303",
+      "description": "Crypto Cross-Sectional Momentum (20-coin universe)",
+      "verdict": "NOT CONFIRMED",
+      "best_oos_sharpe": 0.137,
+      "gate": 1.2,
+      "notes": "2022 altcoin massacre reversed momentum factor. All 5 variants near-zero/negative OOS. Survivorship bias caveat."
+    }
+  ],
+  "findings": [
+    {
+      "arxiv_id": "2605.25894",
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "authors": "Noseda, Soldati, Paina",
+      "date": "May 2026",
+      "relevance": "HIGH",
+      "relevance_score": 9,
+      "connection": "H174 extension — add 15 fundamental features + 3 technicals to FinBERT score; Transformer classifier for earnings-day direction. Gate: OOS WR > 84% or MeanRet > 8.5% vs H174 baseline.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-17/1_h305_multimodal_earnings.json"
+    },
+    {
+      "arxiv_id": "2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading (mask-first design)",
+      "authors": "Yimin Du",
+      "date": "2025",
+      "relevance": "ALREADY APPLIED",
+      "relevance_score": 9,
+      "connection": "Mask-first contamination wiki already applied 2026-06-16",
+      "staged": false,
+      "note": "Applied in 2026-06-16 dream cycle"
+    },
+    {
+      "source": "ScienceDirect 2025",
+      "title": "Hierarchical deep learning framework for pair trading with attention and graph networks",
+      "date": "2025",
+      "relevance": "LOW",
+      "relevance_score": 4,
+      "connection": "Pairs family EXHAUSTED (H200 graphical matching already tested). GNN pair selection not actionable without major infrastructure investment.",
+      "staged": false
+    },
+    {
+      "arxiv_id": "2601.04602",
+      "title": "Forecasting Equity Correlations with Hybrid Transformer GNN",
+      "date": "Jan 2026",
+      "relevance": "LOW",
+      "relevance_score": 3,
+      "connection": "Relevant to H249 regime detection and portfolio construction but no direct hypothesis connection. Too infrastructure-heavy.",
+      "staged": false
+    },
+    {
+      "source": "GitHub: AI4Finance-Foundation/FinRL-Trading",
+      "title": "FinRL-Trading (FinRL-X) — full-stack ML trading platform with Alpaca live support",
+      "date": "2025-2026",
+      "relevance": "MEDIUM",
+      "relevance_score": 6,
+      "connection": "Phase 4 infrastructure candidate for H217/H228 alpha101 strategies. Wiki addition filed.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-17/2_finrl_trading_wiki.json"
+    },
+    {
+      "source": "GitHub: Lumibot-Community/lumibot",
+      "title": "Lumibot — backtesting + live trading for stocks/crypto",
+      "date": "actively maintained",
+      "relevance": "MEDIUM",
+      "relevance_score": 5,
+      "connection": "H276 crypto POC alternative to NautilusTrader. Bundled into FinRL wiki update.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-17/2_finrl_trading_wiki.json"
+    }
+  ],
+  "staged_count": 2,
+  "high_relevance_count": 1,
+  "medium_relevance_count": 2,
+  "low_relevance_count": 2,
+  "already_applied_count": 1,
+  "status": "complete"
+}

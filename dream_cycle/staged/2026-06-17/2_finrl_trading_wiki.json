@@ -1,0 +1,17 @@
+{
+  "id": "2026-06-17-002",
+  "date": "2026-06-17",
+  "source": "GitHub: AI4Finance-Foundation/FinRL-Trading (FinRL-X); Lumibot (GitHub: Lumibot-Community/lumibot); merovinh/best-of-algorithmic-trading curated list 2026",
+  "source_url": "https://github.com/AI4Finance-Foundation/FinRL-Trading",
+  "title": "Wiki: Add FinRL-Trading (FinRL-X) and Lumibot to tools wiki",
+  "rationale": "Two live-trading frameworks surfaced in the 2026-06-17 scan that are relevant to Phase 3→4 transition: (1) FinRL-Trading (FinRL-X) by AI4Finance-Foundation — full-stack ML trading platform with Alpaca live support, supports the same strategies we use (momentum, factor models) with production-ready backtesting → live pipeline; could be Phase 4 infrastructure for H217/H228 alpha101 strategies instead of building from scratch. (2) Lumibot — simpler backtesting + live execution supporting stocks and crypto, easier setup than NautilusTrader for H276 crypto POC. Both are lower priority than current work but worth filing for reference when Phase 4 infrastructure decisions are made.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "wiki/trading/tools/multi-agent-llm-trading.md",
+  "content": {
+    "section_to_add": "\n## Live Trading Infrastructure: FinRL-Trading & Lumibot (2026)\n\n### FinRL-Trading (FinRL-X) — AI4Finance-Foundation\n**GitHub:** https://github.com/AI4Finance-Foundation/FinRL-Trading\n\nFull-stack ML trading platform engineered for modularity and production-readiness. Covers the complete pipeline: ML stock selection → professional backtesting → live brokerage execution.\n\n**Key features:**\n- Supports Alpaca live trading (paper and real)\n- Built-in factor models including momentum strategies compatible with our H217/H228 design\n- FinRL-Meta: production-ready market environments\n- NeurIPS 2020/2021 paper foundation; actively maintained by AI4Finance group\n\n**Relevance:** Could serve as Phase 4 live trading infrastructure for H217 (alpha101, OOS Sharpe 1.559) and H228 (alpha101+reversal blend, OOS Sharpe 1.572) instead of building bespoke Alpaca automation. Evaluate when Phase 3 paper trading concludes.\n\n**Risk:** ML pipeline complexity → harder to debug fills and attribution vs. direct Alpaca API calls.\n\n### Lumibot\n**GitHub:** https://github.com/Lumibot-Community/lumibot\n\nSimpler backtesting + live trading for stocks and crypto. Lower learning curve than NautilusTrader.\n\n**Key features:**\n- Unified API for backtesting and live execution\n- Supports stocks, crypto, options\n- Pre-built risk management hooks\n\n**Relevance:** H276 crypto POC alternative to NautilusTrader. Much simpler setup for initial crypto live trading. Evaluate alongside ccxt (already in crypto-data-sources.md) for H276.\n",
+    "cross_reference": "See also: tools/lean-quantconnect.md (Alpaca live bridge); paper-trading/risk-controls-and-monitoring.md (kill switch implementation); tools/ai-trader.md (social trading layer)"
+  },
+  "action": "append_section",
+  "apply_status": "pending"
+}
