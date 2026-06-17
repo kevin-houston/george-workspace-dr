@@ -7190,3 +7190,62 @@ OOS stress stats: VIX backwardation 10.3% of months; SPY below 200MA 20.5%; eith
 **Production note:** The 200MA overlay can be applied to the live H026 monthly rotation (h112_monthly.py). At month-end, if `SPY_close < SPY_200d_MA`, override the rotation signal with BIL. Implementation is one conditional check per rebalance.
 
 **Script:** `backtesting/daily/run_h301.py` | **Results:** `backtesting/results/h301_results.json`
+
+---
+
+### H302 — BTC Moving Average Trend Following (NOT CONFIRMED)
+
+**Source:** Grayscale Research (2023): BTC 50d MA strategy → Sharpe 1.9 vs B&H Sharpe 1.3 (2012–2023). Extended to 4 MA variants.
+
+**Hypothesis:** Long BTC when daily close > N-day moving average; else cash (0% return). Tests whether MA trend-following on BTC preserves Sharpe above 1.0 in out-of-sample period.
+
+**IS:** 2014-01-01 to 2020-12-31 | **OOS:** 2021-01-01 to 2026-06-15 | **Gate:** OOS Sharpe > 1.0
+
+Annualization: sqrt(365) for crypto (365-day market). BTC B&H OOS Sharpe 0.275, CAGR 15.9%, MaxDD -76.6%.
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | Gate |
+|---------|-----------|------------|----------|-----------|------|
+| A: 50d SMA | 2.107 | 0.586 | 20.9% | -56.2% | fail |
+| B: 100d SMA | 1.708 | 0.406 | 14.2% | -37.6% | fail |
+| C: 200d SMA | 1.758 | 0.413 | 14.1% | -36.4% | fail |
+| D: 20d/50d EMA cross | 1.934 | 0.531 | 21.8% | -48.7% | fail |
+
+**Verdict:** NOT CONFIRMED — No variant clears OOS Sharpe 1.0. All strategies significantly outperformed in IS (Sharpe 1.7–2.1) but degraded badly OOS.
+
+**Why it degraded:** The 2021-2026 OOS period includes the 2022 BTC crash (-65% drawdown), the FTX collapse (Nov 2022), and the 2023-2024 sideways-to-volatile regime. MA strategies that thrived in 2014-2020 trending bull markets whipsawed badly in the more volatile, mean-reverting OOS environment. The 50d SMA still reduces MaxDD from -76.6% to -56.2% — meaningful risk reduction, but Sharpe still well below gate.
+
+**Correlation note:** Best variant (50d SMA, OOS Sharpe 0.586) beats B&H (0.275) on risk-adjusted basis, but crypto's 2021-2026 volatility overwhelmed the trend signal's ability to generate Sharpe > 1.0.
+
+**Do not pursue:** Pure MA overlay on BTC is not sufficient for production. Would need macro regime filter (e.g., H174-style NLP scoring or on-chain signals) to improve OOS.
+
+**Script:** `backtesting/daily/run_h302.py` | **Results:** `backtesting/results/h302_results.json`
+
+---
+
+### H303 — Crypto Cross-Sectional Momentum (NOT CONFIRMED)
+
+**Source:** Liu et al. (2022) "Common Risk Factors in Cryptocurrency" (JF); cross-sectional momentum in crypto. Fixed universe of 20 coins with sufficient yfinance history.
+
+**Hypothesis:** Monthly cross-sectional momentum — rank coins by 1-month return, hold top-N equal-weight for next month. Tests whether short-term return momentum in crypto generates superior risk-adjusted returns vs BTC B&H.
+
+**IS:** 2018-01-01 to 2021-12-31 | **OOS:** 2022-01-01 to 2026-06-15 | **Gate:** OOS Sharpe > 1.2
+
+**Universe (20 coins):** ADA, BAT, BCH, BNB, BTC, DASH, DOGE, EOS, ETC, ETH, LINK, LTC, NEO, TRX, VET, XLM, XMR, XRP, XTZ, ZEC. BTC B&H OOS Sharpe 0.302, CAGR 16.2%, MaxDD -63.7%.
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | Gate |
+|---------|-----------|------------|----------|-----------|------|
+| A: Top-3 equal | 0.452 | -0.012 | -1.2% | -79.5% | fail |
+| B: Top-5 equal | 0.646 | 0.077 | 5.8% | -70.7% | fail |
+| C: Top-3 inv-vol | 0.489 | -0.074 | -5.4% | -75.8% | fail |
+| D: Top-5 inv-vol | 0.746 | 0.137 | 7.9% | -64.0% | fail |
+| E: Top-1 winner | 0.301 | -0.020 | -4.8% | -87.9% | fail |
+
+**Verdict:** NOT CONFIRMED — All 5 variants fail OOS Sharpe gate. OOS performance is dramatically worse than IS, and most variants underperform BTC B&H on Sharpe.
+
+**Why it failed:** The 2022 altcoin massacre is the dominant explanation. Coins that were "momentum winners" in late 2021 (LUNA, NEAR, AVAX-class assets) suffered the largest losses in 2022 as speculative capital exited. Cross-sectional momentum in crypto is a reversal factor during systemic bear markets — the opposite of the equity market pattern. The 2022-2023 FTX/LUNA/3AC contagion propagated through exactly the high-momentum altcoins this strategy would have held.
+
+**SURVIVORSHIP BIAS NOTE:** Fixed 2026 universe excludes coins that failed/were delisted (e.g., LUNA/LUNC not in universe). Actual real-world OOS would be even worse.
+
+**Do not pursue standalone.** Potential variant: momentum + downside regime filter (BTC < 200MA → cash) — but this approach is better tested as an overlay.
+
+**Script:** `backtesting/daily/run_h303.py` | **Results:** `backtesting/results/h303_results.json`

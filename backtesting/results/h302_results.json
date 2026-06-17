@@ -1,0 +1,93 @@
+{
+  "hypothesis": "H302",
+  "description": "BTC Moving Average Trend Following",
+  "is_period": "2014-01-01 to 2020-12-31",
+  "oos_period": "2021-01-01 to 2026-06-15",
+  "gate": "OOS Sharpe > 1.0",
+  "bnh_is_sharpe": 1.2726,
+  "bnh_oos_sharpe": 0.2753,
+  "bnh_oos_maxdd": -0.7663,
+  "variants": {
+    "A: 50d SMA": {
+      "ma_type": "sma",
+      "n": 50,
+      "n2": null,
+      "is_stats": {
+        "cagr": 1.1286,
+        "sharpe": 2.1073,
+        "max_drawdown": -0.5742,
+        "neg_years": 2,
+        "n_days": 2298
+      },
+      "oos_stats": {
+        "cagr": 0.2089,
+        "sharpe": 0.5855,
+        "max_drawdown": -0.5616,
+        "neg_years": 2,
+        "n_days": 1991
+      },
+      "passes": false
+    },
+    "B: 100d SMA": {
+      "ma_type": "sma",
+      "n": 100,
+      "n2": null,
+      "is_stats": {
+        "cagr": 0.9634,
+        "sharpe": 1.708,
+        "max_drawdown": -0.6082,
+        "neg_years": 1,
+        "n_days": 2298
+      },
+      "oos_stats": {
+        "cagr": 0.1422,
+        "sharpe": 0.4063,
+        "max_drawdown": -0.3757,
+        "neg_years": 3,
+        "n_days": 1991
+      },
+      "passes": false
+    },
+    "C: 200d SMA": {
+      "ma_type": "sma",
+      "n": 200,
+      "n2": null,
+      "is_stats": {
+        "cagr": 1.026,
+        "sharpe": 1.7585,
+        "max_drawdown": -0.6991,
+        "neg_years": 1,
+        "n_days": 2298
+      },
+      "oos_stats": {
+        "cagr": 0.1414,
+        "sharpe": 0.4135,
+        "max_drawdown": -0.3644,
+        "neg_years": 2,
+        "n_days": 1991
+      },
+      "passes": false
+    },
+    "D: 20d/50d EMA cross": {
+      "ma_type": "ema_cross",
+      "n": 20,
+      "n2": 50,
+      "is_stats": {
+        "cagr": 1.0909,
+        "sharpe": 1.9337,
+        "max_drawdown": -0.6703,
+        "neg_years": 1,
+        "n_days": 2298
+      },
+      "oos_stats": {
+        "cagr": 0.2175,
+        "sharpe": 0.5312,
+        "max_drawdown": -0.4868,
+        "neg_years": 2,
+        "n_days": 1991
+      },
+      "passes": false
+    }
+  },
+  "verdict": "NOT CONFIRMED"
+}
