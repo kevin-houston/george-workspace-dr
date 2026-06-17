@@ -327,3 +327,34 @@ At our scale (~50 paper trades/year), even the most expensive setup costs <$100/
 - Gap between theoretical financial knowledge and practical trading execution is substantial
 
 **Design implication for H274**: Multi-agent PEAD upgrade should use LLMs in the analyst role (signal extraction) not the portfolio management role (entry/exit decisions). The FinBERT score + EPS surprise gate remain the action triggers — not an LLM deciding to trade.
+
+## Live Trading Infrastructure: FinRL-Trading & Lumibot (2026)
+
+### FinRL-Trading (FinRL-X) — AI4Finance-Foundation
+**GitHub:** https://github.com/AI4Finance-Foundation/FinRL-Trading
+
+Full-stack ML trading platform engineered for modularity and production-readiness. Covers the complete pipeline: ML stock selection → professional backtesting → live brokerage execution.
+
+**Key features:**
+- Supports Alpaca live trading (paper and real)
+- Built-in factor models including momentum strategies compatible with our H217/H228 design
+- FinRL-Meta: production-ready market environments
+- NeurIPS 2020/2021 paper foundation; actively maintained by AI4Finance group
+
+**Relevance:** Could serve as Phase 4 live trading infrastructure for H217 (alpha101, OOS Sharpe 1.559) and H228 (alpha101+reversal blend, OOS Sharpe 1.572) instead of building bespoke Alpaca automation. Evaluate when Phase 3 paper trading concludes.
+
+**Risk:** ML pipeline complexity → harder to debug fills and attribution vs. direct Alpaca API calls.
+
+### Lumibot
+**GitHub:** https://github.com/Lumibot-Community/lumibot
+
+Simpler backtesting + live trading for stocks and crypto. Lower learning curve than NautilusTrader.
+
+**Key features:**
+- Unified API for backtesting and live execution
+- Supports stocks, crypto, options
+- Pre-built risk management hooks
+
+**Relevance:** H276 crypto POC alternative to NautilusTrader. Much simpler setup for initial crypto live trading. Evaluate alongside ccxt (already in crypto-data-sources.md) for H276.
+
+See also: tools/lean-quantconnect.md (Alpaca live bridge); paper-trading/risk-controls-and-monitoring.md (kill switch implementation); tools/ai-trader.md (social trading layer)

@@ -24,5 +24,6 @@
     "mask_first_note": "CRITICAL: fit MinMaxScaler on IS feature matrix ONLY; transform OOS using IS scaler. Never fit_transform on full sample."
   },
   "action": "write",
-  "apply_status": "pending"
+  "apply_status": "applied",
+  "applied_at": "2026-06-17T04:00:00"
 }
