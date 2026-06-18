@@ -27,5 +27,6 @@
     "prior_art_connections": "H181 industry-adj reversal (CONFIRMED), H217/H228 alpha101+reversal blend (CONFIRMED), H284 FCF/P (CONFIRMED weak), H249 regime-conditional weights (CONFIRMED)"
   },
   "action": "write",
-  "apply_status": "pending"
+  "apply_status": "applied",
+  "applied_at": "2026-06-18T04:00:00"
 }

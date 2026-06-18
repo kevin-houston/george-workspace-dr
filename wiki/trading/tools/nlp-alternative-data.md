@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-13
+updated: 2026-06-17
 type: tool-guide
 status: active — H163 CONFIRMED; H168 IN-PROGRESS; H171 QUEUED
 ---
@@ -659,3 +659,29 @@ Raw text → LLM annotator (structured labels) → traditional quant model (ML/r
 Not: `Raw text → LLM → trade signal`
 
 **Implication for our stack:** This validates exactly how H174 works: FinBERT is the annotator (labels 8-K sentiment), and the signal is the composite score + EPS surprise gate, not raw LLM output. For H260 (12-quarter ML features), LLM annotation of earnings call tone/topic shifts is the right sub-role — not direct price prediction.
+
+---
+
+## LLM Stock Forecasting Reviews (2025–2026)
+
+### arXiv:2605.05211 — LLMs for Stock Price Forecasting: Hedge-Fund Perspective (Apr 2026)
+**Accepted:** IEEE Conference on Artificial Intelligence, Spain, May 2026
+
+**Key findings:**
+- LLM sentiment pipelines produce **regime-dependent** text-to-return mappings — what works in bull markets fails in bear markets (and vice versa)
+- **Source selection bias**: papers cherry-pick news sources; out-of-sample coverage degrades when source mix changes
+- Survivorship and publication effects inflate IS statistics systematically
+- **Bottom line**: LLM as *signal contributor* (FinBERT score → threshold rule) is more robust than LLM as *portfolio manager*
+
+**Implication for H163/H174**: Our FinBERT-on-8-K approach (fixed threshold, score ≥ 0.18) is the safer architecture. BUT the regime-dependence finding suggests adding a regime gate (e.g., only fire PEAD entries when SPY > 200MA) could improve OOS consistency — addressed by H305/H308.
+
+### arXiv:2510.03195 — From Text to Alpha: LLMs Track Evolving Corporate Disclosures (Mar 2026)
+
+**Key findings:**
+- SEC 8-K and 10-K language evolves meaningfully over 5–10 year horizons (boilerplate shifts, new risk factor language, ESG language)
+- LLMs fine-tuned on 2010–2015 language show signal decay by 2022
+- **Rolling recalibration** (1–2 year fine-tune window) restores alpha in simulations
+
+**Implication for H174**: FinBERT (ProsusAI/finbert) was trained on FinancialPhraseBank + Reuters financial news (pre-2020 corpus). As 8-K language evolves post-2020, model calibration may drift. Practical mitigation: monitor H174 win rate quarterly; if 4Q rolling WR drops below 70%, flag for model refresh.
+
+**Monitoring hook** (add to pead_overnight.py — future enhancement): log rolling 90-day win rate to a JSON metrics file; alert George if WR < 0.70 over trailing 10 trades.
