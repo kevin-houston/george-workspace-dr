@@ -1,0 +1,66 @@
+{
+  "hypothesis": "H307",
+  "title": "Targeted ETF Pairs: Johansen Cointegration",
+  "candidate_pairs": [
+    "GDX/SIL",
+    "XLE/OIH",
+    "XLK/QQQ",
+    "LQD/HYG",
+    "EWJ/EFA",
+    "GLD/IAU",
+    "XLF/KBE",
+    "XLV/IBB"
+  ],
+  "qualified_pairs_count": 3,
+  "is_period": "2008-01-01 to 2017-12-31",
+  "oos_period": "2018-01-01 to 2026-06-13",
+  "gate": "OOS Sharpe > 0.8",
+  "confirmed": false,
+  "best_oos_sharpe": 0,
+  "pair_results": {
+    "GDX/SIL": {
+      "plain": {
+        "sharpe": -1.412,
+        "cagr": -0.0994,
+        "maxdd": -0.6025
+      },
+      "vix_gated": {
+        "sharpe": -1.541,
+        "cagr": -0.0783,
+        "maxdd": -0.5158
+      },
+      "trace": 15.68
+    },
+    "LQD/HYG": {
+      "plain": {
+        "sharpe": -1.309,
+        "cagr": -0.0385,
+        "maxdd": -0.2856
+      },
+      "vix_gated": {
+        "sharpe": -1.719,
+        "cagr": -0.0335,
+        "maxdd": -0.2536
+      },
+      "trace": 27.51
+    },
+    "XLF/KBE": {
+      "plain": {
+        "sharpe": -1.385,
+        "cagr": -0.0954,
+        "maxdd": -0.5801
+      },
+      "vix_gated": {
+        "sharpe": -1.366,
+        "cagr": -0.0748,
+        "maxdd": -0.4912
+      },
+      "trace": 23.69
+    }
+  },
+  "composite": {
+    "sharpe": -1.648,
+    "cagr": -0.0639,
+    "maxdd": -0.4292
+  }
+}

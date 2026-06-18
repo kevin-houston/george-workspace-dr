@@ -1,0 +1,72 @@
+{
+  "hypothesis": "H306",
+  "title": "Low-Volatility Factor ETF Rotation",
+  "universe": [
+    "USMV",
+    "SPLV",
+    "QUAL",
+    "MTUM",
+    "VLUE",
+    "HDV",
+    "VYM"
+  ],
+  "is_period": "2014-01-01 to 2019-12-31",
+  "oos_period": "2020-01-01 to 2026-06-13",
+  "gate": "OOS Sharpe > 1.0",
+  "confirmed": false,
+  "variants": {
+    "A: Top-1": {
+      "is": {
+        "sharpe": 1.169,
+        "cagr": 0.1114,
+        "maxdd": -0.1156
+      },
+      "oos": {
+        "sharpe": 0.699,
+        "cagr": 0.1155,
+        "maxdd": -0.2031
+      }
+    },
+    "B: Top-2 EW": {
+      "is": {
+        "sharpe": 1.244,
+        "cagr": 0.1138,
+        "maxdd": -0.0972
+      },
+      "oos": {
+        "sharpe": 0.78,
+        "cagr": 0.1212,
+        "maxdd": -0.2042
+      }
+    },
+    "C: Top-1+200MA": {
+      "is": {
+        "sharpe": 1.169,
+        "cagr": 0.1114,
+        "maxdd": -0.1156
+      },
+      "oos": {
+        "sharpe": 0.699,
+        "cagr": 0.1155,
+        "maxdd": -0.2031
+      }
+    },
+    "D: Top-1+VIX gate": {
+      "is": {
+        "sharpe": 1.169,
+        "cagr": 0.1114,
+        "maxdd": -0.1156
+      },
+      "oos": {
+        "sharpe": 0.895,
+        "cagr": 0.1094,
+        "maxdd": -0.0976
+      }
+    }
+  },
+  "spy_oos": {
+    "sharpe": 0.915,
+    "cagr": 0.1587,
+    "maxdd": -0.2393
+  }
+}

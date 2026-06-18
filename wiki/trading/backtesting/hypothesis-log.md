@@ -7249,3 +7249,59 @@ Annualization: sqrt(365) for crypto (365-day market). BTC B&H OOS Sharpe 0.275, 
 **Do not pursue standalone.** Potential variant: momentum + downside regime filter (BTC < 200MA → cash) — but this approach is better tested as an overlay.
 
 **Script:** `backtesting/daily/run_h303.py` | **Results:** `backtesting/results/h303_results.json`
+
+---
+
+### H306 — Low-Volatility Factor ETF Rotation (NOT CONFIRMED)
+
+**Source:** Frazzini & Pedersen (2014) "Betting Against Beta"; Asness, Frazzini & Pedersen (2019) "Quality Minus Junk"
+
+**Hypothesis:** Rotating among factor ETFs (USMV/SPLV/QUAL/MTUM/VLUE/HDV/VYM) using 12-1 month momentum generates alpha over SPY. The low-volatility factor (USMV/SPLV) was expected to dominate bear-regime holdings and provide downside protection absent in sector-ETF rotation.
+
+**Universe:** USMV, SPLV, QUAL, MTUM, VLUE, HDV, VYM (7 factor ETFs) | **IS:** 2014–2019 | **OOS:** 2020–2026 | **Gate:** OOS Sharpe > 1.0
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | Gate |
+|---------|-----------|------------|----------|-----------|------|
+| A: Top-1 | 1.169 | 0.699 | 11.6% | -20.3% | fail |
+| B: Top-2 EW | 1.244 | 0.780 | 12.1% | -20.4% | fail |
+| C: Top-1 + SPY 200MA | 1.169 | 0.699 | 11.6% | -20.3% | fail |
+| D: Top-1 + VIX gate | 1.169 | 0.895 | 10.9% | -9.8% | fail |
+| SPY buy-hold | — | 0.915 | 15.9% | -23.9% | — |
+
+**Verdict:** NOT CONFIRMED — all variants fail gate. Best OOS Sharpe 0.895 (Variant D, VIX-gated) falls short of 1.0. None beats SPY (0.915) on Sharpe.
+
+**Why it failed:** Factor ETFs are all US large-cap equity variants — Corr(factor ETF basket, SPY) ≈ 0.96+. In the OOS (2020-2026), the tech mega-cap bull (2023-2024) disproportionately lifted SPY and MTUM/QQQ-proxies, while USMV/SPLV/HDV (defensive-tilt factors) underperformed. The rotation fails to escape SPY's gravitational pull: there is no defensive asset class in this universe, only different equity tilts. This replicates H285's finding (QUAL/MTUM/VLUE/low-vol, Corr SPY = 0.969). **Pattern confirmed: factor ETF rotation adds no alpha over H026 sector rotation because all factor ETFs share the same underlying US equity exposure.**
+
+**Script:** `backtesting/daily/run_h306.py` | **Results:** `backtesting/results/h306_results.json`
+
+---
+
+### H307 — Targeted ETF Pairs Trading: Johansen Cointegration (NOT CONFIRMED)
+
+**Source:** Johansen (1991); Gatev, Goetzmann & Rouwenhorst (2006) "Pairs Trading: Performance of a Relative-Value Arbitrage Rule"
+
+**Hypothesis:** Pre-selecting economically motivated ETF pairs (GDX/SIL, XLE/OIH, XLK/QQQ, LQD/HYG, EWJ/EFA, GLD/IAU, XLF/KBE, XLV/IBB) via Johansen cointegration test on IS data (2008-2017) and trading the OOS spread mean-reversion would generate alpha. This targeted approach addresses H271's failure (broad 23-ETF universe, spurious cointegration).
+
+**IS cointegration results:** 3 of 8 pairs qualified (GDX/SIL trace=15.68, LQD/HYG trace=27.51, XLF/KBE trace=23.69). XLE/OIH, XLK/QQQ, EWJ/EFA, GLD/IAU, XLV/IBB — not cointegrated in IS.
+
+**OOS backtests (2018-2026):**
+
+| Pair | OOS Sharpe | OOS CAGR | OOS MaxDD |
+|------|------------|----------|-----------|
+| GDX/SIL | -1.412 | -9.9% | -60.2% |
+| LQD/HYG | -1.309 | -3.9% | -28.6% |
+| XLF/KBE | -1.385 | -9.5% | -58.0% |
+| Composite | -1.648 | -6.4% | -42.9% |
+
+**Gate:** OOS Sharpe > 0.8.
+
+**Verdict:** NOT CONFIRMED — all OOS Sharpe values are deeply negative. IS cointegration is **anti-predictive** of OOS performance — all three qualified pairs are substantial losers OOS.
+
+**Why it failed:** Each "cointegrated" pair suffered a specific structural break:
+- **GDX/SIL:** Gold miners vs silver miners — silver demand structure shifted post-2018 (industrial/EV demand vs pure store-of-value), decoupling the commodity drivers. The spread trended out instead of reverting.
+- **LQD/HYG:** IG vs HY credit — the COVID-2020 shock and Fed backstop created an unprecedented support event that permanently compressed the credit spread. The 2022 rate shock then widened spreads asymmetrically (HY more than IG). Spread trending, not reverting.
+- **XLF/KBE:** Financials vs banks — SVB collapse (March 2023) caused a permanent structural break in bank vs financials spread, decoupling regional bank exposure from the broader financial sector.
+
+**Pattern confirmed:** ETF pairs trading via cointegration fails because: (a) the IS period (2008-2017) is a single macro cycle — IS cointegration is a look-back artifact; (b) ETF spreads are driven by sector fundamentals and structural changes, not statistical arbitrage; (c) IS cointegration inversely predicts OOS — pairs with the most stable IS relationship suffered the largest OOS structural breaks (because they were priced for stability). **Do not pursue ETF pairs trading further — H271 and H307 form a consistent pattern of failure.**
+
+**Script:** `backtesting/daily/run_h307.py` | **Results:** `backtesting/results/h307_results.json`
