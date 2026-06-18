@@ -183,6 +183,21 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 
 ---
 
+## Paper Trading Reset (reset_paper_accounts.py)
+
+**Trigger:** Manual, when restarting paper trading from scratch.
+**Run:** `python3 backtesting/paper_trading/reset_paper_accounts.py` (use `--dry-run` first)
+**Success:** All 6 strategy virtual accounts at $5,000. Alpaca positions closed. Legacy logs archived.
+
+**Gotchas:**
+- OneCLI proxy credential sessions can time out mid-run when closing many positions sequentially. The first few closes succeed, then `credential_not_found` errors appear for the rest.
+- If proxy times out: the **virtual accounts** (strategy_accounts.json) are the critical part and reset atomically at the end. Alpaca position cleanup is secondary — retry next trading day.
+- Market must be open to close Alpaca positions. If run after hours, `close_position()` will fail anyway. Plan reset for trading hours.
+- Residual Alpaca positions from old strategies don't affect new per-strategy $5k virtual tracking. New strategies size from `se.current_equity()`, not Alpaca account total.
+- After a partial close: re-run without `--dry-run` — it's safe to re-run; it only closes still-open positions.
+
+---
+
 ## Wiki Index Maintenance
 
 **Trigger:** On every wiki edit.
