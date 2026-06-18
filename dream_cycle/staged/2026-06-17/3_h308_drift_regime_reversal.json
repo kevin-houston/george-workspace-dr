@@ -1,0 +1,31 @@
+{
+  "id": "2026-06-17-003",
+  "date": "2026-06-17",
+  "source": "arXiv:2511.12490 — Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability (November 2025)",
+  "source_url": "https://arxiv.org/abs/2511.12490",
+  "title": "H308 stub — Drift-Regime Gated Value+Reversal stock selection",
+  "rationale": "arXiv:2511.12490 (Nov 2025) documents a cross-sectional equity factor with OOS Sharpe > 13 (L/S, daily rebalance). The mechanism is disarmingly simple: combine value + short-term reversal signals ONLY during stock-specific 'drift regimes' defined as periods when a stock has >60% positive days in a trailing 63-calendar-day window. In non-drift periods, hold cash. This regime gate is purely price-based (no ML, no external data), deterministic, and easy to backtest. \n\nRelevance to our pipeline: \n- H181 (industry-adjusted short-term reversal) CONFIRMED OOS. H181 applies reversal unconditionally. Adding the drift regime gate is a direct upgrade path.\n- H284 (FCF/P value, CONFIRMED weak) uses FMP fundamentals. Value blended with drift-gated reversal could improve.\n- H228 (alpha101+H181 blend, CONFIRMED OOS 1.572) is our strongest stock-picking signal. Drift gating as a post-filter layer could further improve Sharpe.\n\nFor long-only adaptation:\n- Paper's 13-Sharpe is long/short + daily rebalance. Long-only monthly rebalance will compress dramatically.\n- Conservative OOS gate: 1.3 (our best stock-picking is H217 at 1.559, H228 at 1.572).\n- Expected range: 0.9–1.5 for long-only; if it hits 1.3+ it earns a portfolio slot.\n\nDesign:\n- Universe: S&P 500 proxy (200–500 stocks from Polygon free tier, same methodology as H181)\n- Drift regime: per stock, trailing 45 trading days, % positive-close-days > 0.60\n- Value signal: trailing 12-month FCF/P from FMP (quarterly update, forward-filled)\n- Reversal signal: trailing 5-day return (buy negative = reversal)\n- Combined score: when drift=1, score = rank(FCF/P) + rank(-5d_ret); when drift=0, score = NaN (excluded)\n- Portfolio: top 20 drift-active stocks by combined score, equal-weight, monthly rebalance\n- Variants A/B/C: pure drift+reversal / drift+value only / drift+reversal+H181-industry-adj\n- IS: 2010–2019, OOS: 2020–2026\n- Gate: OOS Sharpe > 1.3",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "backtesting/daily/run_h308.py",
+  "content": {
+    "scaffold": "H308 — Drift-Regime Gated Value+Reversal",
+    "hypothesis": "Combining FCF/P value signal + short-term reversal signal activated ONLY during stock-specific drift regimes (>60% positive days in trailing 45-trading-day window). Long-only, top-20 stocks, monthly rebalance. Gate: OOS Sharpe > 1.3.",
+    "todo_steps": [
+      "1. Download daily OHLCV for S&P 500 proxy universe (200 stocks, Polygon free tier or yfinance SPY constituents CSV)",
+      "2. Compute per-stock drift regime flag: rolling 45-trading-day window, pct_positive_days > 0.60",
+      "3. Compute value score: quarterly FCF/P from FMP API, forward-filled to daily",
+      "4. Compute reversal score: trailing 5-day return (negative = buy signal)",
+      "5. Combined score: rank(FCF/P) + rank(-5d_ret); set NaN when drift=0",
+      "6. Portfolio: monthly rebalance, buy top 20 drift-active stocks by combined score, equal-weight",
+      "7. Variant A: drift + value + reversal; B: drift + reversal only; C: drift + H181-industry-adj reversal",
+      "8. IS: 2010-2019. OOS: 2020-2026. TC: 10bps one-way. Gate: OOS Sharpe > 1.3",
+      "9. Compare vs H181 (0.83 — unconfirmed), H228 (1.572 — confirmed), SPY baseline"
+    ],
+    "key_risk": "Paper's 13-Sharpe is L/S + daily rebalance. Long-only + monthly rebalance compresses Sharpe substantially. Drift regime gate may create adverse selection (only buy drifting stocks, missing recovery plays). Also: drift regime on monthly lookback may reduce universe to very few stocks — check for 'no candidates' months.",
+    "data_sources": "yfinance (OHLCV), FMP ($FMP_API_KEY in env) for FCF/P quarterly",
+    "prior_art_connections": "H181 industry-adj reversal (CONFIRMED), H217/H228 alpha101+reversal blend (CONFIRMED), H284 FCF/P (CONFIRMED weak), H249 regime-conditional weights (CONFIRMED)"
+  },
+  "action": "write",
+  "apply_status": "pending"
+}

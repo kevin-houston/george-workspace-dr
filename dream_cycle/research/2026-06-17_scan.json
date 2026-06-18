@@ -1,11 +1,18 @@
 {
   "date": "2026-06-17",
-  "session": "nightly research — wiki expansion + dream cycle scan",
-  "wiki_expansion": {
-    "page": "wiki/trading/paper-trading/risk-controls-and-monitoring.md",
-    "rationale": "Thinnest section in paper-trading/ — no dedicated risk controls page despite H026/H174/H181 approaching Phase 4. Created 3-tier circuit breaker system, kill switch, ATR sizing, portfolio heat monitor, correlation guard.",
-    "status": "completed"
-  },
+  "session": "nightly research — wiki expansion + dream cycle scan (two-part, resumed after compaction)",
+  "wiki_expansion": [
+    {
+      "page": "wiki/trading/paper-trading/risk-controls-and-monitoring.md",
+      "rationale": "Thinnest section in paper-trading/ — no dedicated risk controls page despite H026/H174/H181 approaching Phase 4. Created 3-tier circuit breaker system, kill switch, ATR sizing, portfolio heat monitor, correlation guard.",
+      "status": "completed"
+    },
+    {
+      "page": "wiki/trading/algorithms/multi-agent-llm-trading.md",
+      "rationale": "40-line stub (MadEvolve only) expanded to comprehensive page covering LLM-as-signal vs LLM-as-decision taxonomy, TradingAgents bull/bear debate, HedgeAgents C-suite hierarchy, Expert Investment Teams dynamic routing, coordination patterns comparison table, reliability risks, cost model, H274 PEAD integration design.",
+      "status": "completed"
+    }
+  ],
   "hypotheses_tested": [
     {
       "id": "H302",
@@ -22,6 +29,22 @@
       "best_oos_sharpe": 0.137,
       "gate": 1.2,
       "notes": "2022 altcoin massacre reversed momentum factor. All 5 variants near-zero/negative OOS. Survivorship bias caveat."
+    },
+    {
+      "id": "H306",
+      "description": "Low-Volatility Factor ETF Rotation (USMV/SPLV/QUAL/MTUM/VLUE/HDV/VYM)",
+      "verdict": "NOT CONFIRMED",
+      "best_oos_sharpe": 0.895,
+      "gate": 1.0,
+      "notes": "All factor ETFs Corr(SPY) > 0.96; no defensive escape in 2022. VIX-gated variant best at 0.895."
+    },
+    {
+      "id": "H307",
+      "description": "Targeted ETF Pairs Johansen Cointegration (8 pairs)",
+      "verdict": "NOT CONFIRMED",
+      "best_oos_sharpe": -1.31,
+      "gate": 0.8,
+      "notes": "3/8 pairs qualified IS. All 3 OOS Sharpe deeply negative. IS cointegration anti-predicts OOS. ETF pairs trading family CLOSED (H271 + H307 consistent failure)."
     }
   ],
   "findings": [
@@ -37,6 +60,39 @@
       "staged_file": "dream_cycle/staged/2026-06-17/1_h305_multimodal_earnings.json"
     },
     {
+      "arxiv_id": "2511.12490",
+      "title": "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability",
+      "authors": "Unknown (arXiv Nov 2025)",
+      "date": "November 2025",
+      "relevance": "HIGH",
+      "relevance_score": 9,
+      "connection": "Drift regime gate (>60% positive days in 63-day window) applied to value + short-term reversal signals achieves Sharpe > 13 L/S OOS. Direct upgrade to H181 (industry-adjusted reversal, CONFIRMED) and H228 (alpha101+reversal, CONFIRMED OOS 1.572). H308 design staged.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-17/3_h308_drift_regime_reversal.json"
+    },
+    {
+      "arxiv_id": "2605.05211",
+      "title": "A Review of LLMs for Stock Price Forecasting from a Hedge-Fund Perspective",
+      "authors": "IEEE AI 2026",
+      "date": "April 2026",
+      "relevance": "MEDIUM",
+      "relevance_score": 6,
+      "connection": "Confirms regime-dependence and source bias as root cause of LLM forecasting fragility. Validates H163/H174 fixed-threshold approach. Wiki addition staged for nlp-alternative-data.md.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-17/4_llm_stock_alpha_wiki.json"
+    },
+    {
+      "arxiv_id": "2510.03195",
+      "title": "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?",
+      "authors": "arXiv 2026",
+      "date": "March 2026",
+      "relevance": "MEDIUM",
+      "relevance_score": 6,
+      "connection": "8-K language drift: models need 1-2 year rolling recalibration. H174 risk: FinBERT trained pre-2020 may degrade. Suggests quarterly monitoring of 90-day rolling WR. Bundled into wiki update with arXiv:2605.05211.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-17/4_llm_stock_alpha_wiki.json"
+    },
+    {
       "arxiv_id": "2507.07107",
       "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading (mask-first design)",
       "authors": "Yimin Du",
@@ -46,24 +102,6 @@
       "connection": "Mask-first contamination wiki already applied 2026-06-16",
       "staged": false,
       "note": "Applied in 2026-06-16 dream cycle"
-    },
-    {
-      "source": "ScienceDirect 2025",
-      "title": "Hierarchical deep learning framework for pair trading with attention and graph networks",
-      "date": "2025",
-      "relevance": "LOW",
-      "relevance_score": 4,
-      "connection": "Pairs family EXHAUSTED (H200 graphical matching already tested). GNN pair selection not actionable without major infrastructure investment.",
-      "staged": false
-    },
-    {
-      "arxiv_id": "2601.04602",
-      "title": "Forecasting Equity Correlations with Hybrid Transformer GNN",
-      "date": "Jan 2026",
-      "relevance": "LOW",
-      "relevance_score": 3,
-      "connection": "Relevant to H249 regime detection and portfolio construction but no direct hypothesis connection. Too infrastructure-heavy.",
-      "staged": false
     },
     {
       "source": "GitHub: AI4Finance-Foundation/FinRL-Trading",
@@ -76,20 +114,19 @@
       "staged_file": "dream_cycle/staged/2026-06-17/2_finrl_trading_wiki.json"
     },
     {
-      "source": "GitHub: Lumibot-Community/lumibot",
-      "title": "Lumibot — backtesting + live trading for stocks/crypto",
-      "date": "actively maintained",
-      "relevance": "MEDIUM",
-      "relevance_score": 5,
-      "connection": "H276 crypto POC alternative to NautilusTrader. Bundled into FinRL wiki update.",
-      "staged": true,
-      "staged_file": "dream_cycle/staged/2026-06-17/2_finrl_trading_wiki.json"
+      "source": "ScienceDirect 2025",
+      "title": "Hierarchical deep learning framework for pair trading with attention and graph networks",
+      "date": "2025",
+      "relevance": "LOW",
+      "relevance_score": 4,
+      "connection": "Pairs family EXHAUSTED (H200 graphical matching already queued). GNN pair selection not actionable without major infrastructure investment.",
+      "staged": false
     }
   ],
-  "staged_count": 2,
-  "high_relevance_count": 1,
-  "medium_relevance_count": 2,
-  "low_relevance_count": 2,
+  "staged_count": 4,
+  "high_relevance_count": 2,
+  "medium_relevance_count": 3,
+  "low_relevance_count": 1,
   "already_applied_count": 1,
   "status": "complete"
 }
