@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-17 (algorithms/multi-agent-llm-trading.md expanded; H306 NOT CONFIRMED, H307 NOT CONFIRMED)
+updated: 2026-06-18 (awesome-finance-mcp.md new; nlp-alternative-data.md updated LLM forecasting reviews)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -51,7 +51,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
   - [Backtrader vs Vectorbt](tools/backtrader-vs-vectorbt.md) ← expanded 2026-04-29 (H116 rotation in Vectorbt, `Portfolio.from_orders` multi-asset pattern)
   - [Kraken CLI](tools/kraken-cli.md) ← expanded 2026-05-01 (all 50 agent skills, MCP service groups, full command reference)
-  - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← updated 2026-06-09 (BloombergGPT arXiv:2303.17564 — domain gap vs general models; LLM annotators arXiv:2403.18152 — right role in quant stack)
+  - [NLP & Alternative Data](tools/nlp-alternative-data.md) ← updated 2026-06-17 (BloombergGPT; LLM annotators; LLM forecasting regime-dependence arXiv:2605.05211 — validates H163/H174 fixed-threshold; 8-K language drift arXiv:2510.03195 — quarterly WR monitoring needed)
   - [Quant Firm Open Source Repos](tools/quant-firm-repos.md) ← new 2026-05-22 (22 repos from Two Sigma, Man Group, Jane Street, D.E. Shaw, HRT, Optiver, WorldQuant; ArcticDB + dtale + WorldQuant 101 alphas flagged as high-priority)
   - [xang1234/stock-screener](tools/stock-screener.md) ← new 2026-05-27 (self-hosted multi-market screener: 10 markets, Minervini/CANSLIM/Setup Engine methodologies, 197 IBD industry groups, market breadth, AI chatbot, MCP integration; Docker + FastAPI + React)
   - [Machine Learning for Trading](tools/ml-for-trading.md) ← updated 2026-06-09 (FinAgent arXiv:2402.18485 structured pipeline agent; Alpha-GPT arXiv:2308.00016 human-AI factor mining loop; LLM ideation vs execution gap arXiv:2409.04109)
@@ -63,6 +63,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [LEAN / QuantConnect](tools/lean-quantconnect.md) ← updated 2026-05-15 (Alpaca live trading bridge added — brokerage config, CLI, Phase 3→4 gate; walk-forward optimization section; H007 pending Docker approval)
   - [OpenAlgo](tools/openalgo.md) ← 2026-04-25 (India-only for now; watch for Alpaca/Kraken support in 2026)
   - [Portfolio Optimization](tools/portfolio-optimization.md) ← new 2026-05-16 (PyPortfolioOpt v1.6.0, Riskfolio-Lib v7.2.1, skfolio v0.20.1; HRP, risk parity, NCO, walk-forward CV; strategy blending code for H026+BAB+MOM+TOM)
+  - [Awesome Finance MCP](tools/awesome-finance-mcp.md) ← new 2026-06-18 (curated finance MCP servers; HIGH: install Alpaca MCP + FMP MCP; already live: Massive MCP; medium: CCXT/QuantConnect/TradingView/Alpha Vantage MCPs)
 - [Data Sources](data-sources/) — market data, fundamentals, alt data
   - [Alpaca Markets — Complete Reference](data-sources/alpaca.md) ← new 2026-05-12 (full SDK reference: order types, TIF, WebSocket streams, PDT/IDTBP update, Phase 3→4 checklist)
   - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)

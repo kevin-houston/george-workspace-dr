@@ -383,3 +383,11 @@ Issues found: 3. Auto-fixed: 3. Needs review: 0.
 2. **Orphan: research-log/2026-06-15.md** — nightly session log not indexed. Fixed: added to Research Logs.
 3. **Stale: Hypothesis Log entry** — still showed "H001–H292". Fixed: updated to H001–H301 with current frontier.
 4. Index frontmatter bumped: updated 2026-06-14→2026-06-16, pages 143→145.
+
+## [2026-06-18] ingest | awesome-finance-mcp (BlockRunAI/awesome-finance-mcp)
+
+Pages created: 1 (trading/tools/awesome-finance-mcp.md). Pages updated: 2 (trading/index.md, trading/tools/nlp-alternative-data.md via dream cycle build).
+
+Source: https://github.com/BlockRunAI/awesome-finance-mcp. Noted by Kevin 2026-06-18.
+
+Key findings: HIGH priority — install Alpaca MCP (`alpacahq/alpaca-mcp-server`) for native order management alongside existing REST code; install FMP MCP (`imbenrabi/Financial-Modeling-Prep-MCP-Server`) for H308 FCF/P data. Massive MCP already live. CCXT/QuantConnect/TradingView/AV MCPs medium priority. DeFi/personal finance/Korea MCPs not relevant.
