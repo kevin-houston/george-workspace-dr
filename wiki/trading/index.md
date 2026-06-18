@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-17 (risk-controls-and-monitoring.md new; H302 NOT CONFIRMED, H303 NOT CONFIRMED)
+updated: 2026-06-17 (algorithms/multi-agent-llm-trading.md expanded; H306 NOT CONFIRMED, H307 NOT CONFIRMED)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -45,6 +45,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Behavioral Finance Signals](algorithms/behavioral-finance-signals.md) ← new 2026-06-14 (52-week high anchoring George & Hwang 2004; H291 NOT CONFIRMED large-cap 2018-2025; works in small-cap/bear regimes; Return Seasonality H292 CONFIRMED OOS 0.970; Factor MAX H295 NOT CONFIRMED ETF level)
   - [Market Timing Overlays](algorithms/market-timing-overlays.md) ← new 2026-06-15 (VIX term structure H296 CONFIRMED OOS 1.116 MaxDD -18.6%; SPY 200MA; VIX level thresholds; composite signal; rate cycle overlay; production integration guide for daily vs monthly rotation systems)
   - [Cryptocurrency Trading Strategies](algorithms/crypto-trading-strategies.md) ← new 2026-06-16 (cross-sectional momentum top-30 universe Sharpe 1.51 28d lookback; BTC 50d MA Sharpe 1.9 vs B&H 1.3; funding rate carry 6.45 full-sample but declining; Monday effect +0.51%; halving cycle positioning; ccxt/pycoingecko implementation; H302/H303 queued; max 5% portfolio allocation)
+  - [Multi-Agent LLM Trading](algorithms/multi-agent-llm-trading.md) ← expanded 2026-06-17 (taxonomy LLM-as-signal vs LLM-as-decision; TradingAgents arXiv:2412.20138 bull/bear debate; HedgeAgents hierarchical authority; Expert Investment Teams dynamic routing; MadEvolve evolutionary; coordination patterns compared; reliability + hallucination risks; H274 PEAD integration design; cost model ~$0.04/stock/day)
 - [**Shared Evaluation Checklist**](shared-eval-checklist.md) ← new 2026-06-09 (7-point standard agreed by George + Ernesto: look-ahead guard, NLP timestamp, cost model, soft OOS gate, regime coverage, survivorship bias, after-tax flag)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
