@@ -8,12 +8,16 @@ submits MOC sell orders for positions whose 20-day hold has expired today.
 
 import json
 import os
+import sys
 import warnings
 from datetime import date
 from pathlib import Path
 
 import pandas as pd
 import yfinance as yf
+
+sys.path.insert(0, str(Path(__file__).parent))
+import strategy_equity as se
 
 warnings.filterwarnings("ignore")
 
@@ -170,10 +174,14 @@ def run():
 
         exit_order_id = submit_moc_exit(ticker, qty)
         record_pnl(pos, current_price, exit_order_id)
+        se.close_sell("H174", ticker, current_price, order_id=exit_order_id or "")
 
     save_positions(remaining)
     exited = len(positions) - len(remaining)
     log(f"Exits submitted: {exited}. Remaining open: {len(remaining)}")
+    remaining_tickers = {p["ticker"] for p in remaining}
+    cur_prices = {t: (get_current_price(t) or 0) for t in remaining_tickers}
+    se.snapshot_equity("H174", {k: v for k, v in cur_prices.items() if v})
     log("Exits pass complete.")
 
 

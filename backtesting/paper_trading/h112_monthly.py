@@ -146,6 +146,11 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent))
+import strategy_equity as se
+
+STRATEGY_ID = "H026"
+
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import requests.adapters as _ra
@@ -531,14 +536,14 @@ def main():
         print(f"Not the first trading day of the month ({date.today()}). Skipping. Use --force to override.")
         sys.exit(0)
 
-    client    = get_client()
-    positions = get_positions(client)
-    equity    = get_equity(client)
+    client       = get_client()
+    positions    = get_positions(client)
+    strat_equity = se.current_equity(STRATEGY_ID)
 
     log = load_trade_log()
 
     print(f"\nH149 Monthly Rebalancer — {date.today()}")
-    print(f"Account equity: ${equity:,.2f}")
+    print(f"H026 strategy equity: ${strat_equity:,.2f}")
 
     if positions:
         print("\nCurrent positions:")
@@ -559,7 +564,7 @@ def main():
 
     # Compute signals
     print("\nFetching signals (downloading ~15mo of price data)…")
-    target, signals, eff_weights = build_target(equity, h026_scale=h026_scale)
+    target, signals, eff_weights = build_target(strat_equity, h026_scale=h026_scale)
 
     print("\nSub-strategy targets:")
     for name, (top_n, scores) in signals.items():
@@ -588,16 +593,26 @@ def main():
     executed = execute_trades(client, trades, dry_run=args.dry_run)
 
     if not args.dry_run and executed:
+        for t in executed:
+            price_est = round(t["est_value"] / t["qty"], 4) if t["qty"] > 0 else 0
+            if t["action"] == "BUY":
+                se.open_buy(STRATEGY_ID, t["symbol"], t["qty"], price_est, order_id=t.get("order_id", ""))
+            else:
+                se.close_sell(STRATEGY_ID, t["symbol"], price_est, order_id=t.get("order_id", ""))
+        open_pos = se.get_open_positions(STRATEGY_ID)
+        cur_prices = {s: get_latest_price(s) for s in open_pos}
+        eq = se.snapshot_equity(STRATEGY_ID, cur_prices)
+        print(f"\nH026 equity snapshot: ${eq:,.2f}")
         log_run({
             "date":        date.today().isoformat(),
-            "equity":      equity,
+            "equity":      strat_equity,
             "target":      target,
             "eff_weights": {k: round(v, 4) for k, v in eff_weights.items()},
             "h026_scale":  round(h026_scale, 4),
             "signals":     {k: {"top_n": v[0]} for k, v in signals.items()},
             "trades":      executed,
         })
-        print(f"\n✓ Logged {len(executed)} trades to {LOG_FILE.name}")
+        print(f"✓ Logged {len(executed)} trades to {LOG_FILE.name}")
     elif args.dry_run:
         print(f"\n[DRY RUN] {len(trades)} orders would be submitted.")
 

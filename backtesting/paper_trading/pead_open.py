@@ -19,6 +19,9 @@ import yfinance as yf
 
 warnings.filterwarnings("ignore")
 
+sys.path.insert(0, str(Path(__file__).parent))
+import strategy_equity as se
+
 WORKSPACE      = Path(__file__).resolve().parent.parent.parent
 PAPER_DIR      = WORKSPACE / "backtesting" / "paper_trading"
 WATCHLIST_PATH = PAPER_DIR / "pead_watchlist.json"
@@ -169,8 +172,8 @@ def run():
     # Check existing positions to avoid doubling up
     existing = {p["ticker"] for p in load_positions()}
 
-    equity = get_equity()
-    log(f"Account equity: ${equity:,.0f}")
+    strat_equity = se.current_equity("H174")
+    log(f"H174 strategy equity: ${strat_equity:,.0f}")
 
     new_positions = []
     for ticker in candidates:
@@ -198,10 +201,13 @@ def run():
             continue
 
         # Submit order
-        notional = equity * POSITION_SIZE_PCT
+        notional = strat_equity * POSITION_SIZE_PCT
         result = submit_order(ticker, notional, current_price)
         if result is None:
             continue
+
+        qty_est = round(notional / current_price, 4) if current_price else 0
+        se.open_buy("H174", ticker, qty_est, current_price, order_id=result["order_id"])
 
         exit_date = get_exit_date(today)
         position = {
@@ -228,6 +234,9 @@ def run():
     else:
         log("No new positions entered today.")
 
+    open_pos = se.get_open_positions("H174")
+    cur_prices = {t: (get_current_price(t) or 0) for t in open_pos}
+    se.snapshot_equity("H174", {k: v for k, v in cur_prices.items() if v})
     log("Open pass complete.")
 
 

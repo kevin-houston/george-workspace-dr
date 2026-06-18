@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
 H112 Daily IBS Mean-Reversion Executor
-XLK (20%), SMH (8%), IGV (2%) of account equity.
+XLK/SMH/IGV — sized from IBS strategy $5k virtual account.
+Weights within IBS strategy (matching original 20/8/2 ratios):
+  XLK 66.7%, SMH 26.7%, IGV 6.7% of IBS strategy equity.
 
 Entry: yesterday IBS < buy_thresh AND today gap >= gap_min
 Exit:  yesterday IBS > sell_thresh OR days_held >= max_hold
@@ -17,8 +19,14 @@ Usage:
 import argparse
 import json
 import os
+import sys
 from datetime import date, datetime
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+import strategy_equity as se
+
+STRATEGY_ID = "IBS"
 
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -37,13 +45,14 @@ from alpaca.trading.requests import MarketOrderRequest
 from alpaca.trading.enums import OrderSide, TimeInForce
 
 # ── IBS parameters (confirmed H112) ────────────────────────────────────────
+# Weights within the IBS strategy bucket (proportional to original 20/8/2).
+_IBS_TOTAL_WEIGHT = 20 + 8 + 2
 IBS_CONFIGS = {
-    "XLK": {"weight": 0.20, "buy": 0.15, "sell": 0.90, "max_hold": 7,  "gap_min": -0.010},
-    "SMH": {"weight": 0.08, "buy": 0.20, "sell": 0.75, "max_hold": 6,  "gap_min": -0.005},
-    "IGV": {"weight": 0.02, "buy": 0.30, "sell": 0.75, "max_hold": 5,  "gap_min":  0.0025},
+    "XLK": {"weight": 20 / _IBS_TOTAL_WEIGHT, "buy": 0.15, "sell": 0.90, "max_hold": 7,  "gap_min": -0.010},
+    "SMH": {"weight":  8 / _IBS_TOTAL_WEIGHT, "buy": 0.20, "sell": 0.75, "max_hold": 6,  "gap_min": -0.005},
+    "IGV": {"weight":  2 / _IBS_TOTAL_WEIGHT, "buy": 0.30, "sell": 0.75, "max_hold": 5,  "gap_min":  0.0025},
 }
 
-LOG_FILE = Path(__file__).parent / "h112_ibs_trades.json"
 MIN_ORDER_USD = 1.0
 
 
@@ -101,15 +110,11 @@ def save_log(log: list):
     LOG_FILE.write_text(json.dumps(log, indent=2, default=str))
 
 
-def days_held_for(symbol: str, log: list) -> int:
-    for entry in reversed(log):
-        if entry.get("symbol") != symbol:
-            continue
-        if entry.get("action") == "BUY":
-            return (date.today() - date.fromisoformat(entry["date"])).days
-        if entry.get("action") == "SELL":
-            return 0
-    return 0
+def days_held_for(symbol: str) -> int:
+    pos = se.get_open_positions(STRATEGY_ID).get(symbol)
+    if not pos:
+        return 0
+    return (date.today() - date.fromisoformat(pos["entry_date"])).days
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
@@ -121,18 +126,19 @@ def main():
     args = parser.parse_args()
 
     client = get_client()
-    equity = get_equity(client)
-    log    = load_log()
     today  = date.today()
 
-    print(f"\nH112 Daily IBS — {today}")
-    print(f"Account equity: ${equity:,.2f}")
+    # Strategy equity from virtual account (not Alpaca account total)
+    strat_equity = se.current_equity(STRATEGY_ID)
 
-    new_entries = []
+    print(f"\nH112 Daily IBS — {today}")
+    print(f"IBS strategy equity: ${strat_equity:,.2f}  (cash: ${se.get_cash(STRATEGY_ID):,.2f})")
+
+    orders_placed = 0
 
     for symbol, cfg in IBS_CONFIGS.items():
         position = get_position(client, symbol)
-        held     = days_held_for(symbol, log)
+        held     = days_held_for(symbol)
 
         # Fetch OHLC (need yesterday complete + today's open)
         try:
@@ -153,7 +159,7 @@ def main():
         prev_close  = float(df["close"].iloc[-2])
         gap         = (today_open - prev_close) / prev_close if prev_close > 0 else 0.0
 
-        alloc_usd = equity * cfg["weight"]
+        alloc_usd = strat_equity * cfg["weight"]
 
         print(f"\n  {symbol}  IBS_prev={prev_ibs:.3f}  gap={gap:+.3%}  "
               f"alloc=${alloc_usd:,.0f}", end="")
@@ -214,29 +220,25 @@ def main():
                 side=OrderSide.BUY if action == "BUY" else OrderSide.SELL,
                 time_in_force=TimeInForce.DAY,
             ))
-            print(f"    ✓ order_id={order.id}")
-            new_entries.append({
-                "date":        today.isoformat(),
-                "symbol":      symbol,
-                "action":      action,
-                "qty":         qty,
-                "price":       round(price, 4),
-                "prev_ibs":    round(prev_ibs, 4),
-                "gap":         round(gap, 6),
-                "reason":      reason,
-                "order_id":    str(order.id),
-                "submitted_at": datetime.now().isoformat(),
-                "equity":      equity,
-            })
+            oid = str(order.id)
+            print(f"    ✓ order_id={oid}")
+            if action == "BUY":
+                se.open_buy(STRATEGY_ID, symbol, qty, price, order_id=oid, note=reason)
+            else:
+                trade = se.close_sell(STRATEGY_ID, symbol, price, order_id=oid, reason=reason)
+                if trade:
+                    print(f"    P&L: ${trade['pnl']:+.2f} ({trade['return']*100:+.2f}%)")
+            orders_placed += 1
         except Exception as e:
             print(f"    ✗ order failed: {e}")
 
-    if new_entries:
-        log.extend(new_entries)
-        save_log(log)
-        print(f"\n✓ Logged {len(new_entries)} trades to {LOG_FILE.name}")
-    elif not args.dry_run and not args.status:
-        print(f"\nNo IBS signals today.")
+    if not args.dry_run and not args.status:
+        # Snapshot equity with current prices
+        current_prices = {s: float(fetch_ohlc(s, days=2)["close"].iloc[-1]) for s in IBS_CONFIGS}
+        eq = se.snapshot_equity(STRATEGY_ID, current_prices)
+        print(f"\nIBS equity snapshot: ${eq:,.2f}")
+        if orders_placed == 0:
+            print("No IBS signals today.")
 
 
 if __name__ == "__main__":
