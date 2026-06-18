@@ -50,5 +50,18 @@
     "order_id": "9a9cd11c-d135-4bc4-8f22-a0bac311bfcc",
     "submitted_at": "2026-06-12T09:45:13.330978",
     "equity": 101640.49
+  },
+  {
+    "date": "2026-06-17",
+    "symbol": "SMH",
+    "action": "BUY",
+    "qty": 12.6693,
+    "price": 633.36,
+    "prev_ibs": 0.0,
+    "gap": 0.028182,
+    "reason": "IBS entry: prev_ibs 0.000 < 0.2, gap +2.818% \u2265 -0.500%",
+    "order_id": "48c31202-d355-4be7-90ee-4d93db1d98f9",
+    "submitted_at": "2026-06-17T09:45:24.656899",
+    "equity": 100302.93
   }
 ]
