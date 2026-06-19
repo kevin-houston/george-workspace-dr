@@ -1,0 +1,189 @@
+{
+  "hypothesis": "H311",
+  "title": "Static Multi-Asset Diversification: Equal-Weight 4-Asset Portfolio",
+  "assets_4": [
+    "SPY",
+    "TLT",
+    "GLD",
+    "DBC"
+  ],
+  "assets_5": [
+    "SPY",
+    "TLT",
+    "GLD",
+    "DBC",
+    "IEF"
+  ],
+  "is_period": "2010-01-01 to 2019-12-31",
+  "oos_period": "2020-01-01 to 2026-06-13",
+  "gate": "OOS Sharpe >= 1.0 AND WF ratio 0.5\u20134.0",
+  "confirmed": true,
+  "best_variant": "F: EW-4 + VIX<20 gate",
+  "best_oos_sharpe": 1.532,
+  "best_wf_ratio": 2.375,
+  "spy_oos": {
+    "sharpe": 0.945,
+    "cagr": 0.1628,
+    "maxdd": -0.2393,
+    "neg_yrs": 1,
+    "n_months": 77
+  },
+  "variants": {
+    "A: EW-4 25/25/25/25": {
+      "is": {
+        "sharpe": 0.718,
+        "cagr": 0.0566,
+        "maxdd": -0.166,
+        "neg_yrs": 3,
+        "n_months": 120
+      },
+      "oos": {
+        "sharpe": 1.127,
+        "cagr": 0.1116,
+        "maxdd": -0.1591,
+        "neg_yrs": 1,
+        "n_months": 77
+      },
+      "wf_ratio": 1.57
+    },
+    "B: EW-4 + VIX<25 gate": {
+      "is": {
+        "sharpe": 0.736,
+        "cagr": 0.0543,
+        "maxdd": -0.166,
+        "neg_yrs": 3,
+        "n_months": 120
+      },
+      "oos": {
+        "sharpe": 1.481,
+        "cagr": 0.1181,
+        "maxdd": -0.0601,
+        "neg_yrs": 1,
+        "n_months": 77
+      },
+      "wf_ratio": 2.012
+    },
+    "C: EW-5 +IEF 20/20/20/20/20": {
+      "is": {
+        "sharpe": 0.821,
+        "cagr": 0.0543,
+        "maxdd": -0.1277,
+        "neg_yrs": 3,
+        "n_months": 120
+      },
+      "oos": {
+        "sharpe": 1.028,
+        "cagr": 0.0899,
+        "maxdd": -0.1472,
+        "neg_yrs": 1,
+        "n_months": 77
+      },
+      "wf_ratio": 1.252
+    },
+    "D: EW-5 + VIX<25 gate": {
+      "is": {
+        "sharpe": 0.791,
+        "cagr": 0.0494,
+        "maxdd": -0.1277,
+        "neg_yrs": 3,
+        "n_months": 120
+      },
+      "oos": {
+        "sharpe": 1.348,
+        "cagr": 0.0979,
+        "maxdd": -0.06,
+        "neg_yrs": 1,
+        "n_months": 77
+      },
+      "wf_ratio": 1.704
+    },
+    "E: Tilt 35/30/20/15 SPY-heavy": {
+      "is": {
+        "sharpe": 1.076,
+        "cagr": 0.0746,
+        "maxdd": -0.0872,
+        "neg_yrs": 3,
+        "n_months": 120
+      },
+      "oos": {
+        "sharpe": 0.988,
+        "cagr": 0.1038,
+        "maxdd": -0.1766,
+        "neg_yrs": 1,
+        "n_months": 77
+      },
+      "wf_ratio": 0.918
+    },
+    "F: EW-4 + VIX<20 gate": {
+      "is": {
+        "sharpe": 0.645,
+        "cagr": 0.043,
+        "maxdd": -0.154,
+        "neg_yrs": 3,
+        "n_months": 120
+      },
+      "oos": {
+        "sharpe": 1.532,
+        "cagr": 0.0967,
+        "maxdd": -0.0601,
+        "neg_yrs": 1,
+        "n_months": 77
+      },
+      "wf_ratio": 2.375
+    }
+  },
+  "correlations": {
+    "oos": {
+      "SPY": {
+        "SPY": 1.0,
+        "TLT": 0.316,
+        "GLD": 0.169,
+        "DBC": 0.316
+      },
+      "TLT": {
+        "SPY": 0.316,
+        "TLT": 1.0,
+        "GLD": 0.358,
+        "DBC": -0.277
+      },
+      "GLD": {
+        "SPY": 0.169,
+        "TLT": 0.358,
+        "GLD": 1.0,
+        "DBC": -0.017
+      },
+      "DBC": {
+        "SPY": 0.316,
+        "TLT": -0.277,
+        "GLD": -0.017,
+        "DBC": 1.0
+      }
+    },
+    "is": {
+      "SPY": {
+        "SPY": 1.0,
+        "TLT": -0.494,
+        "GLD": 0.008,
+        "DBC": 0.561
+      },
+      "TLT": {
+        "SPY": -0.494,
+        "TLT": 1.0,
+        "GLD": 0.234,
+        "DBC": -0.461
+      },
+      "GLD": {
+        "SPY": 0.008,
+        "TLT": 0.234,
+        "GLD": 1.0,
+        "DBC": 0.347
+      },
+      "DBC": {
+        "SPY": 0.561,
+        "TLT": -0.461,
+        "GLD": 0.347,
+        "DBC": 1.0
+      }
+    }
+  }
+}

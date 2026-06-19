@@ -7363,3 +7363,74 @@ The variance risk premium (VRP) and implied correlation premium are both empiric
 - Short-index Sharpe > 2.0 over 2010-2026 — strong, but requires tail-risk management
 
 **Script:** `backtesting/daily/run_h309.py` | **Results:** `backtesting/results/h309_results.json`
+
+---
+
+### H310 — Merger Arbitrage via ETF Instruments (MNA / MRGR) (NOT CONFIRMED)
+
+**Source:** Baker & Savasoglu (2002) "Limited Arbitrage in Mergers and Acquisitions" (JFE); Mitchell & Pulvino (2001) "Characteristics of Risk and Return in Risk Arbitrage" (JF)
+
+**Hypothesis:** Cash M&A deals generate a predictable spread between the acquirer's offer price and the target's post-announcement market price. Two ETF vehicles proxy this: MNA (IQ Merger Arbitrage ETF, since Nov 2009) and MRGR (ProShares Merger ETF, since Dec 2012, tracks S&P Merger Arbitrage Index). Regime hypothesis: VIX-gating (avoid exposure when VIX >= 20-25) should reduce drawdowns by avoiding capital withdrawal periods.
+
+**IS:** 2013–2019 | **OOS:** 2020–2026 | **Gate:** OOS Sharpe > 1.0 AND WF ratio 0.5–4.0
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | WF ratio | Gate |
+|---------|-----------|------------|----------|-----------|----------|------|
+| A: MRGR always-on | 0.070 | 1.086 | 4.2% | -7.2% | 15.51 | fail |
+| B: MRGR VIX<25 | 0.070 | 1.334 | 4.2% | -6.2% | 19.06 | fail |
+| C: MRGR VIX<20 | 0.127 | 1.678 | 4.5% | -1.1% | 13.21 | fail |
+| D: MRGR SPY>200MA | 0.070 | 1.086 | 4.2% | -7.2% | 15.51 | fail |
+| E: MNA always-on | 1.209 | 0.385 | 2.1% | -9.5% | 0.32 | fail |
+| F: MNA VIX<25 | 1.209 | 0.565 | 1.7% | -6.4% | 0.47 | fail |
+| SPY buy-hold | — | 0.945 | 16.3% | -23.9% | — | — |
+
+**OOS correlations:** Corr(MRGR, SPY) = 0.301; Corr(MNA, SPY) = 0.406; Corr(MRGR, MNA) = 0.618.
+
+**Verdict:** NOT CONFIRMED — all variants fail the combined gate. MRGR variants have OOS Sharpe > 1.0 but WF ratios of 13–19x far exceed the 4.0 ceiling, indicating a regime shift rather than a stable, confirmable signal.
+
+**Root cause — IS/OOS regime shift:** The 2013–2019 IS period was an antitrust enforcement wave: DOJ blocked Aetna/Humana, Anthem/Cigna, Office Depot/Staples, Comcast/TWC. Blocked deals cause MRGR to lose money as spreads widen without closing. MRGR cumulative return was only 1.013× over 7 years (IS). The 2020–2026 OOS period saw post-COVID consolidation, tech M&A boom, and favorable spread environments. MRGR OOS Sharpe = 1.086 reflects the structural change in deal environment, not a stable arbitrage signal.
+
+**MNA divergence:** MNA shows the opposite pattern — strong IS (Sharpe 1.209) weak OOS (0.385). The two ETFs use different construction methodologies; their divergence illustrates how sensitive merger arb returns are to the regulatory cycle.
+
+**Do not pursue standalone:** Merger arbitrage exposure is regime-dependent and the regime (antitrust posture) is unpredictable. Low OOS correlation with SPY (0.30–0.41) is attractive, but the IS/OOS instability disqualifies it as a standalone production strategy. Would require a political/regulatory regime classifier to be usable — a separate, complex hypothesis.
+
+**Script:** `backtesting/daily/run_h310.py` | **Results:** `backtesting/results/h310_results.json`
+
+---
+
+### H311 — Static Multi-Asset Diversification: Equal-Weight 4-Asset Portfolio (CONFIRMED)
+
+**Source:** Markowitz (1952) "Portfolio Selection" (JF); Ilmanen & Kizer (2012) "The Death of Diversification Has Been Greatly Exaggerated" (JPM); Asness, Frazzini & Pedersen (2012) "Leverage Aversion and Risk Parity" (FAJ)
+
+**Hypothesis:** A simple equal-weight 4-asset portfolio (SPY/TLT/GLD/DBC) with monthly calendar rebalancing achieves OOS Sharpe > 1.0 due to structural low pairwise correlations between US equities (SPY), long bonds (TLT), gold (GLD), and commodities (DBC). Enhancement: VIX stress gate (go to BIL when VIX ≥ 20-25) avoids the simultaneous crash regime where all pairwise correlations spike.
+
+**IS:** 2010–2019 | **OOS:** 2020–2026 | **Gate:** OOS Sharpe > 1.0 AND WF ratio 0.5–4.0
+
+**OOS correlations (key):** Corr(SPY, TLT) = 0.316; Corr(SPY, GLD) = 0.169; Corr(TLT, DBC) = -0.277; Corr(GLD, DBC) = -0.017. All four assets are structurally low-correlated in the 2020–2026 OOS period.
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | WF ratio | Gate |
+|---------|-----------|------------|----------|-----------|----------|------|
+| A: EW-4 25/25/25/25 | 0.718 | 1.127 | 11.2% | -15.9% | 1.57 | PASS |
+| B: EW-4 + VIX<25 | 0.736 | 1.481 | 11.8% | -6.0% | 2.01 | PASS |
+| C: EW-5 +IEF 20×5 | 0.821 | 1.028 | 9.0% | -14.7% | 1.25 | PASS |
+| D: EW-5 + VIX<25 | 0.791 | 1.348 | 9.8% | -6.0% | 1.70 | PASS |
+| E: Tilt 35/30/20/15 SPY-heavy | 1.076 | 0.988 | 10.4% | -17.7% | 0.92 | fail |
+| F: EW-4 + VIX<20 (best) | 0.645 | 1.532 | 9.7% | -6.0% | 2.38 | PASS |
+| SPY buy-hold | — | 0.945 | 16.3% | -23.9% | — | — |
+
+**Verdict: CONFIRMED** — 5 of 6 variants pass both OOS Sharpe ≥ 1.0 and WF ratio 0.5–4.0. Best variant F (EW-4 + VIX<20) achieves OOS Sharpe 1.532, MaxDD -6.0%, WF 2.38.
+
+**Why it works:**
+- 2022 diversification payoff: DBC +26.4% partially offsets SPY -18.2% and TLT -26.0%; EW-4 net -8.7% vs SPY -18.2%
+- 2011, 2015: TLT and GLD provided shelter while SPY was flat/down
+- VIX gate value: March 2020 (VIX spiked to 65) → BIL → avoids simultaneous crash across all four assets (-25% to -30% in a single month)
+- IS period (2010-2019) IS Sharpe 0.62-0.82 is lower because US equity bull market dominated; EW-4 lagged SPY in those years (2013: -6.1% vs +32.3%; 2019: +19.3% vs +31.2%) but still produced positive real returns with diversification
+
+**Caveats:**
+1. OOS period (2020-2026) was unusually favorable to multi-asset diversification (COVID reflation, 2022 commodity supercycle, GLD all-time high 2024). IS period was unfavorable (US equity bull). The WF ratio of 1.57-2.38 is reasonable but somewhat inflated by this regime asymmetry.
+2. The strategy meaningfully underperforms SPY in pure equity bull markets (2021: EW-4 +14.4% vs SPY +28.7%; 2023: +8.9% vs +26.2%; 2024: +10.9% vs +24.9%). This is the diversification cost.
+3. CAGR 9-12% vs SPY 16.3% — substantially lower absolute returns. Value is in risk reduction (MaxDD -6% to -16% vs SPY -23.9%).
+
+**Portfolio note:** NOT intended to replace production portfolio (OOS CAGR 9-12% vs production ~23%). Rather, confirms that a simple diversified baseline already beats the OOS Sharpe gate — production's advantage is CAGR (momentum/timing adds return at the cost of lower diversification). If capital preservation is paramount, EW-4 + VIX gate is deployable. Do not blend into production — the correlation with H026/H041a-style strategies is partially overlapping (H026 holds SPY-correlated assets).
+
+**Script:** `backtesting/daily/run_h311.py` | **Results:** `backtesting/results/h311_results.json`

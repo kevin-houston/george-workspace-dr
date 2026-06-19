@@ -1,0 +1,161 @@
+{
+  "hypothesis": "H310",
+  "title": "Merger Arbitrage via ETF Instruments (MNA / MRGR)",
+  "universe": [
+    "MRGR",
+    "MNA"
+  ],
+  "is_period": "2013-01-01 to 2019-12-31",
+  "oos_period": "2020-01-01 to 2026-06-13",
+  "gate": "OOS Sharpe >= 1.0 AND WF ratio <= 4.0",
+  "confirmed": false,
+  "best_oos_sharpe": 1.678,
+  "best_wf_ratio": 19.057,
+  "spy_oos": {
+    "sharpe": 0.945,
+    "cagr": 0.1628,
+    "maxdd": -0.2393,
+    "neg_yrs": 1,
+    "n_months": 77
+  },
+  "variants": {
+    "A: MRGR always-on": {
+      "is": {
+        "sharpe": 0.07,
+        "cagr": 0.0025,
+        "maxdd": -0.063,
+        "neg_yrs": 3,
+        "n_months": 84
+      },
+      "oos": {
+        "sharpe": 1.086,
+        "cagr": 0.0425,
+        "maxdd": -0.0719,
+        "neg_yrs": 1,
+        "n_months": 77
+      },
+      "wf_ratio": 15.514
+    },
+    "B: MRGR VIX<25": {
+      "is": {
+        "sharpe": 0.07,
+        "cagr": 0.0025,
+        "maxdd": -0.063,
+        "neg_yrs": 3,
+        "n_months": 84
+      },
+      "oos": {
+        "sharpe": 1.334,
+        "cagr": 0.0424,
+        "maxdd": -0.0615,
+        "neg_yrs": 1,
+        "n_months": 77
+      },
+      "wf_ratio": 19.057
+    },
+    "C: MRGR VIX<20": {
+      "is": {
+        "sharpe": 0.127,
+        "cagr": 0.0042,
+        "maxdd": -0.0603,
+        "neg_yrs": 3,
+        "n_months": 84
+      },
+      "oos": {
+        "sharpe": 1.678,
+        "cagr": 0.045,
+        "maxdd": -0.0111,
+        "neg_yrs": 0,
+        "n_months": 77
+      },
+      "wf_ratio": 13.213
+    },
+    "D: MRGR SPY>200MA": {
+      "is": {
+        "sharpe": 0.07,
+        "cagr": 0.0025,
+        "maxdd": -0.063,
+        "neg_yrs": 3,
+        "n_months": 84
+      },
+      "oos": {
+        "sharpe": 1.086,
+        "cagr": 0.0425,
+        "maxdd": -0.0719,
+        "neg_yrs": 1,
+        "n_months": 77
+      },
+      "wf_ratio": 15.514
+    },
+    "E: MNA always-on": {
+      "is": {
+        "sharpe": 1.209,
+        "cagr": 0.0433,
+        "maxdd": -0.0519,
+        "neg_yrs": 0,
+        "n_months": 84
+      },
+      "oos": {
+        "sharpe": 0.385,
+        "cagr": 0.0206,
+        "maxdd": -0.0952,
+        "neg_yrs": 2,
+        "n_months": 77
+      },
+      "wf_ratio": 0.318
+    },
+    "F: MNA VIX<25": {
+      "is": {
+        "sharpe": 1.209,
+        "cagr": 0.0433,
+        "maxdd": -0.0519,
+        "neg_yrs": 0,
+        "n_months": 84
+      },
+      "oos": {
+        "sharpe": 0.565,
+        "cagr": 0.0173,
+        "maxdd": -0.0639,
+        "neg_yrs": 2,
+        "n_months": 77
+      },
+      "wf_ratio": 0.467
+    }
+  },
+  "correlations": {
+    "oos": {
+      "MRGR": {
+        "MRGR": 1.0,
+        "MNA": 0.618,
+        "SPY": 0.301
+      },
+      "MNA": {
+        "MRGR": 0.618,
+        "MNA": 1.0,
+        "SPY": 0.406
+      },
+      "SPY": {
+        "MRGR": 0.301,
+        "MNA": 0.406,
+        "SPY": 1.0
+      }
+    },
+    "is": {
+      "MRGR": {
+        "MRGR": 1.0,
+        "MNA": 0.22,
+        "SPY": 0.07
+      },
+      "MNA": {
+        "MRGR": 0.22,
+        "MNA": 1.0,
+        "SPY": 0.259
+      },
+      "SPY": {
+        "MRGR": 0.07,
+        "MNA": 0.259,
+        "SPY": 1.0
+      }
+    }
+  }
+}
