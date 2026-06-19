@@ -685,3 +685,20 @@ Not: `Raw text → LLM → trade signal`
 **Implication for H174**: FinBERT (ProsusAI/finbert) was trained on FinancialPhraseBank + Reuters financial news (pre-2020 corpus). As 8-K language evolves post-2020, model calibration may drift. Practical mitigation: monitor H174 win rate quarterly; if 4Q rolling WR drops below 70%, flag for model refresh.
 
 **Monitoring hook** (add to pead_overnight.py — future enhancement): log rolling 90-day win rate to a JSON metrics file; alert George if WR < 0.70 over trailing 10 trades.
+
+## FinBERT2 — Potential H163/H174 Upgrade (arXiv:2506.06335, KDD 2026)
+
+**Source:** arXiv:2506.06335, Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2 (2026)
+
+**What it is:** A new specialized bidirectional encoder pretrained on 32B financial-domain tokens — the largest known Chinese financial pretraining corpus for models of this parameter size. Architecture follows BERT-base but with domain-specific vocabulary.
+
+**Performance vs FinBERT (ProsusAI/finbert):**
+- Discriminative tasks (Fin-Labelers): +0.4–3.3% over BERT variants including FinBERT; +9.7–12.3% over GPT-4-class LLMs on 5 financial classification benchmarks
+- Retrieval tasks (Fin-Retrievers): +6.8% over BGE-base-zh, +4.2% over OpenAI text-embedding-3-large
+- Topic modeling: Fin-TopicModel outperforms standard LDA on Chinese financial titles
+
+**Important caveat:** Pretrained on *Chinese* financial corpus. English-domain financial text performance not documented in abstract. Need to test on EDGAR 8-K corpus before swapping into pead_overnight.py pipeline.
+
+**H312 hypothesis seed:** Run H163/H174 PEAD backtest replacing ProsusAI/finbert with FinBERT2 (if English model weights available). Gate: OOS win rate ≥ 83% (current H174 = 81.8%). If Chinese-only: treat as negative result and document.
+
+**Model weights:** Check Hugging Face for `FinBERT2` or `finbert2` — not confirmed available as of 2026-06-19. Monitor KDD 2026 proceedings for code release.

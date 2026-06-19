@@ -599,3 +599,31 @@ This validates George's backtesting discipline: fixed IS/OOS windows, lagged sig
 - When adding ML models: always use `Pipeline` with `TimeSeriesSplit` to enforce mask-first
 
 See also: [Hypothesis Log](hypothesis-log.md) (H256 look-ahead bias note: .shift(1) on r12 signal), [Crypto Trading Strategies](../algorithms/crypto-trading-strategies.md) (H303 implementation)
+
+## Tradability Mask: Single Largest Bias Driver (arXiv:2507.07107)
+
+**Source:** arXiv:2507.07107 (ML Enhanced Multi-Factor Quantitative Trading, 2025)
+
+**Finding:** In a 213-factor PyTorch-vectorized cross-sectional system, a Boolean *tradability mask* — constructed at data load time and threaded through every computational operator — was the single largest performance contributor, adding +0.44 Sharpe-points in ablation. Without it, the system learned to predict returns it could never actually trade (price-limit violations in Chinese A-shares), inflating apparent IC by ~18%.
+
+**US market analog:**
+- Halted stocks, low-float stocks with thin liquidity, or stocks with gaps > 10% on signal date should be masked at the factor-computation step, not filtered post-hoc
+- ETF creation/redemption mechanics can cause similar distortions in ETF rotation backtests
+- For PEAD (H174): stocks with trading halts around earnings announcements should be masked before scoring
+
+**Implementation pattern:**
+```python
+# Mask non-tradable rows BEFORE factor computation
+is_tradable = (
+    df['volume'] > 100_000     # minimum liquidity
+    & df['close'] > 1.0        # minimum price (penny stock filter)
+    & ~df['halt_flag']         # not halted
+    & df['close'].notna()      # no data gaps
+)
+df_clean = df[is_tradable].copy()  # Apply FIRST, then compute factors
+# NEVER: compute factors on full df, then filter afterwards
+```
+
+**Performance (China A-share 2022-2024):** IS Sharpe 2.05, OOS Sharpe 1.63, Deflated Sharpe 0.978. US market transfer not yet tested.
+
+**Lesson for H217/H228 (alpha101):** The alpha101 formula library computes signals on full price history. Adding a tradability mask before computing each alpha could improve IC and reduce overfitting on illiquid/halted events.

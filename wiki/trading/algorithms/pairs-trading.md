@@ -340,3 +340,24 @@ H152–H160 tested ETF pairs with manually selected pairs and no constraint on o
 ### Universe
 
 Same 30-stock S&P 500 universe as H181/H198 for initial validation. If confirmed, expand to the S&P 500 top-200 by market cap for sufficient pair candidates.
+
+## LLM-Based Pair Selection — New Research Direction (arXiv:2605.01954)
+
+**Paper:** Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading (2025)
+**URL:** https://arxiv.org/abs/2605.01954
+
+**Key distinction from H307 (CLOSED family):**
+- H307 and its predecessors (H152–H160) used statistical cointegration (Johansen, ADF) to select pairs. IS cointegration proved anti-predictive of OOS performance — structural breaks invalidated the statistical relationship.
+- Moira selects pairs using **LLM semantic reasoning** (DeepSeek-V3.2) rather than price-level statistical tests. A pair is formed when the LLM assesses that two companies have fundamental economic relatedness (same supply chain, competing products, shared regulatory regime) — making the relationship structural rather than spurious.
+- The RL component manages the entry/exit timing: high-level policy selects the active pair, low-level policy executes the mean-reversion trade.
+
+**Architecture:**
+- High-level LLM policy: selects which pair to trade from candidate list
+- Low-level LLM policy: manages position sizing and exit timing
+- Both policies updated via textual feedback (trajectory-level and episode-level) rather than gradient backprop
+- Claims "consistent improvements over traditional and LLM-based baselines" on 2024-2025 real data
+
+**Relevance for H307 closure:**
+The H307 ETF pairs family is closed — cointegration on ETFs is definitively anti-predictive. BUT Moira represents a structurally different approach worth monitoring. If US-market results are published with Sharpe > 1.0, consider designing H313 (LLM semantic pairs on S&P 500 stock pairs, not ETFs).
+
+**Limitation:** Abstract only; no specific Sharpe ratios or ticker-level results provided as of 2026-06-19. Monitor for v2 or follow-up with metrics.
