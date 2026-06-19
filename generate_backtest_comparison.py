@@ -88,7 +88,7 @@ def ibs_stats():
     """Closed IBS round-trips and open positions."""
     path = PT_DIR / "h112_ibs_trades.json"
     if not path.exists():
-        return {"closed": [], "open_count": 0}
+        return {"closed": [], "open_count": 0, "win_rate": None, "avg_ret": None}
     trades = json.loads(path.read_text())
     open_pos = {}
     closed = []
