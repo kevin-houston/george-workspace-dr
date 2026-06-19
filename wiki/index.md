@@ -100,7 +100,7 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H301 (frontier: H302+ TBD); H301 CONFIRMED (H026+200MA overlay, OOS 1.529 +27.4%); H300 NOT CONFIRMED (yield curve timing); H299 NOT CONFIRMED (sector breadth); H298 NOT CONFIRMED (weekly ETF reversal); production portfolio H041a/H026/H045/IBS
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H309 (frontier: H309 PARTIAL); H301 CONFIRMED (H026+200MA overlay, OOS 1.529 +27.4%); H309 PARTIAL (dispersion trading: VRP+implied corr premium confirmed, Sharpe>2.0 OOS; tail risk; Phase 2 needs Polygon component IV); H307 NOT CONFIRMED (ETF pairs Johansen); production portfolio H041a/H026/H045/IBS
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules

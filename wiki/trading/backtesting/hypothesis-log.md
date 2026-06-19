@@ -7305,3 +7305,61 @@ Annualization: sqrt(365) for crypto (365-day market). BTC B&H OOS Sharpe 0.275, 
 **Pattern confirmed:** ETF pairs trading via cointegration fails because: (a) the IS period (2008-2017) is a single macro cycle — IS cointegration is a look-back artifact; (b) ETF spreads are driven by sector fundamentals and structural changes, not statistical arbitrage; (c) IS cointegration inversely predicts OOS — pairs with the most stable IS relationship suffered the largest OOS structural breaks (because they were priced for stability). **Do not pursue ETF pairs trading further — H271 and H307 form a consistent pattern of failure.**
 
 **Script:** `backtesting/daily/run_h307.py` | **Results:** `backtesting/results/h307_results.json`
+
+---
+
+### H309 — SPX Dispersion Trading: Short Index Vol, Long Component Vol (PENDING)
+
+**Source:** Bloch (2016) "A Practical Guide to Quantitative Volatility Trading" SSRN 2715517 §7.6; Marshall (2008) "Dispersion Trading: Empirical Evidence from US Options Markets"; Deng (2008); Driessen, Maenhout & Vilkov (2005) "Option-Implied Correlations and the Price of Correlation Risk"
+
+**Hypothesis:** Index options embed a persistent *implied correlation premium* — SPX implied vol (VIX) systematically exceeds the Markowitz-weighted average of component implied vols, implying the market overprices joint crashes. A dispersion trade that shorts SPX variance and buys component variance harvests this premium. The implied correlation indicator Mρ = VIX² / (Σwᵢσᵢ)² provides entry timing: trade when Mρ is elevated (implied correlation expensive), collect the spread as realized correlation reverts below implied.
+
+**Universe:** Top 30 SPX components by market-cap weight (hardcoded approximation); ^VIX as index IV proxy; realized 21-day vol as component IV proxy (simplified — real implementation uses Polygon options IV).
+
+**IS:** 2010–2019 | **OOS:** 2020–2026 | **Gate:** OOS Sharpe > 0.8
+
+**Variants:**
+- A: Always-on dispersion (monthly, no signal gate)
+- B: Mρ-gated (only trade when Mρ > 0.80)
+- C: VIX-gated (only trade when VIX > 20 — high-vol regime where correlation premium is largest)
+- D: Combined gate (Mρ > 0.80 AND VIX > 15)
+
+**P&L model:** Variance-swap-style payoff per monthly period: `(VIX/√12)² − RV²_SPX` for short index leg; `Σwᵢ[RV²ᵢ − (HV21ᵢ/√12)²]` for long component legs. Net = index variance premium minus component variance premium. Realized correlation drag = residual when correlation exceeds implied.
+
+**Key prior findings:**
+- Deng (2008): Strategy was highly profitable through 2000, then largely arbitraged away by 2008.
+- Marshall (2008): Correlation risk premium persists but is smaller post-2000; best timing is when implied index vol > realized vol AND implied correlation near historical high.
+- Driessen et al.: Correlation risk premium is distinct from equity risk premium — provides diversification.
+
+**Results (2026-06-18):**
+
+Sub-hypothesis 1 — Short SPX Variance Premium (VIX > realized SPX vol):
+
+| Variant | IS Sharpe | OOS Sharpe | OOS Win Rate | Note |
+|---------|-----------|------------|--------------|------|
+| A: Always-on | 2.383 | 2.255 | 81.8% | CAGR = -100% (COVID wipeout if full notional) |
+| B: Mρ>0.80 gate | 1.859 | 1.843 | 83.3% | 12 OOS months only |
+| C: VIX>20 gate | 1.941 | 1.570 | 81.2% | Reduces wipeout exposure |
+
+Sub-hypothesis 3 — Implied Correlation Premium (Mρ − realized correlation):
+
+| Variant | IS Sharpe | OOS Sharpe | OOS Win Rate | OOS n |
+|---------|-----------|------------|--------------|-------|
+| D: Always-on | 2.008 | 2.610 | 83.1% | 77 |
+| E: Mρ>0.80 gate | 8.670 | 7.529 | 100% | 12 (too small) |
+
+Diagnostics: VIX avg = 18.3%, SPX realized avg = 14.4% → VRP = 3.8pp avg. Mρ > realized correlation 76.3% of months unconditionally (index implied corr structurally exceeds realized corr). Mρ > 0.80 triggers 12.4% of months.
+
+**Verdict: PARTIAL — Phase 1 signals confirmed, Phase 2 needs Polygon options IV**
+
+The variance risk premium (VRP) and implied correlation premium are both empirically confirmed. However:
+1. Short-vol tail risk is real — March 2020 wipes full notional (-100% CAGR) if sized at full capital. Requires strict position sizing (≤5-10% of portfolio) or options-style long hedge.
+2. The 100% win rate on Mρ>0.80 (Variant E) rests on only 12 OOS months — insufficient to confirm gate reliability.
+3. The full dispersion trade (short index IV, long component IV) cannot be backtested without historical single-stock implied vol. Phase 2: wire Polygon options API to compute component IV properly and rerun as H309b.
+
+**What was testable and confirmed:**
+- Mρ > realized_corr in 76% of months → structural edge for short implied correlation
+- VRP (Mρ = 0.487 avg, realized_corr = 0.305 avg) → consistent index vol overpricing
+- Short-index Sharpe > 2.0 over 2010-2026 — strong, but requires tail-risk management
+
+**Script:** `backtesting/daily/run_h309.py` | **Results:** `backtesting/results/h309_results.json`
