@@ -199,6 +199,22 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 
 ---
 
+## H112 Monthly Rebalancer (h112_monthly.py)
+
+**Trigger:** First trading day of each month (or `--force` to override).
+**Run:** `NO_PROXY=paper-api.alpaca.markets,api.alpaca.markets no_proxy=paper-api.alpaca.markets,api.alpaca.markets source /workspace/agent/venv/bin/activate && python3 backtesting/paper_trading/h112_monthly.py`
+**Success:** "✓ Logged N trades" printed. BUY order submitted to Alpaca.
+
+**Gotchas:**
+- **Alpaca proxy**: `credential_not_found` error for `paper-api.alpaca.markets` means OneCLI proxy is intercepting Alpaca traffic and stripping credentials. Fix: `NO_PROXY=paper-api.alpaca.markets,api.alpaca.markets` to bypass proxy — the Alpaca SDK sends its own API key headers directly.
+- **urllib3 may be missing** in the venv: `pip install urllib3 -q` first if `ModuleNotFoundError: No module named 'urllib3'`.
+- **Position isolation bug (fixed 2026-06-19)**: earlier version used `get_positions(client)` (ALL Alpaca positions) as current holdings. This caused SELL orders for IBS/H041a positions sharing the same paper account. Fixed: now uses `se.get_open_positions(STRATEGY_ID)` — only H026-tracked positions.
+- **Stale SELL orders**: if a buggy run submitted SELL orders, cancel ALL pending orders via `c.cancel_orders()` before resubmitting. Check with `c.get_orders()` first.
+- Market holidays: DAY orders submit fine but queue for next market open. Strategy engine records them immediately.
+- Dry-run first on any doubt: add `--dry-run` flag.
+
+---
+
 ## Wiki Index Maintenance
 
 **Trigger:** On every wiki edit.
