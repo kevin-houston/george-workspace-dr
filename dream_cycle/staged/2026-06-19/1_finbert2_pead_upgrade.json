@@ -1,0 +1,14 @@
+{
+  "id": "finbert2-pead-upgrade-2026-06-19",
+  "date": "2026-06-19",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2506.06335",
+  "title": "FinBERT2: potential drop-in upgrade for H163/H174 PEAD pipeline",
+  "rationale": "FinBERT2 (KDD 2026, arXiv:2506.06335) is a financial-domain BERT pretrained on 32B tokens — significantly larger corpus than ProsusAI/finbert (which uses ~4B tokens). Achieves 0.4–3.3% better classification accuracy vs FinBERT and 9.7–12.3% better than GPT-4-level LLMs on financial classification tasks. The H163/H174 PEAD pipeline currently uses ProsusAI/finbert for 8-K sentiment scoring. FinBERT2 is a direct drop-in candidate to improve the win rate (currently 81.8%) and potentially tighten the score threshold. Note: FinBERT2 is Chinese-market pretrained (Chinese financial corpus 32B tokens) — must verify English financial text performance before swapping in production. Stage as wiki update + hypothesis seed for H312 (FinBERT2 PEAD).",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/tools/nlp-alternative-data.md",
+  "content": "## FinBERT2 — Potential H163/H174 Upgrade (arXiv:2506.06335, KDD 2026)\n\n**Source:** arXiv:2506.06335, Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.2 (2026)\n\n**What it is:** A new specialized bidirectional encoder pretrained on 32B financial-domain tokens — the largest known Chinese financial pretraining corpus for models of this parameter size. Architecture follows BERT-base but with domain-specific vocabulary.\n\n**Performance vs FinBERT (ProsusAI/finbert):**\n- Discriminative tasks (Fin-Labelers): +0.4–3.3% over BERT variants including FinBERT; +9.7–12.3% over GPT-4-class LLMs on 5 financial classification benchmarks\n- Retrieval tasks (Fin-Retrievers): +6.8% over BGE-base-zh, +4.2% over OpenAI text-embedding-3-large\n- Topic modeling: Fin-TopicModel outperforms standard LDA on Chinese financial titles\n\n**Important caveat:** Pretrained on *Chinese* financial corpus. English-domain financial text performance not documented in abstract. Need to test on EDGAR 8-K corpus before swapping into pead_overnight.py pipeline.\n\n**H312 hypothesis seed:** Run H163/H174 PEAD backtest replacing ProsusAI/finbert with FinBERT2 (if English model weights available). Gate: OOS win rate ≥ 83% (current H174 = 81.8%). If Chinese-only: treat as negative result and document.\n\n**Model weights:** Check Hugging Face for `FinBERT2` or `finbert2` — not confirmed available as of 2026-06-19. Monitor KDD 2026 proceedings for code release.",
+  "action": "append",
+  "apply_status": "pending"
+}

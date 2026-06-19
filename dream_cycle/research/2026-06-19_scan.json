@@ -1,0 +1,135 @@
+{
+  "scan_date": "2026-06-19",
+  "scan_angles": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "papers_found": [
+    {
+      "id": "arxiv:2605.01954",
+      "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+      "url": "https://arxiv.org/abs/2605.01954",
+      "angle": "pairs trading + LLM",
+      "year": 2025,
+      "relevance_score": 0.75,
+      "relevance_note": "LLM semantic pair selection — different failure mode than H307 cointegration. High-level + low-level RL policies both LLM-parameterized. No specific US Sharpe metrics in abstract. Staged as wiki update on pairs-trading.md.",
+      "staged": true,
+      "staged_file": "4_llm_pairs_trading_moira_wiki.json"
+    },
+    {
+      "id": "arxiv:2506.06335",
+      "title": "FinBERT2: A Specialized Bidirectional Encoder for Finance-Specific LLM Deployment",
+      "url": "https://arxiv.org/abs/2506.06335",
+      "angle": "PEAD + NLP improvement",
+      "year": 2025,
+      "conference": "KDD 2026",
+      "relevance_score": 0.85,
+      "relevance_note": "Direct upgrade candidate for ProsusAI/finbert in H163/H174 PEAD pipeline. +0.4–3.3% vs FinBERT on classification, +9.7–12.3% vs GPT-4 class. Caveat: Chinese corpus — English performance unverified. Staged as wiki update + H312 hypothesis note.",
+      "staged": true,
+      "staged_file": "1_finbert2_pead_upgrade.json"
+    },
+    {
+      "id": "arxiv:2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Portfolio Optimization with Bias Correction",
+      "url": "https://arxiv.org/abs/2507.07107",
+      "angle": "cross-sectional momentum + factor momentum",
+      "year": 2025,
+      "relevance_score": 0.80,
+      "relevance_note": "213-factor ML system; tradability mask = single largest performance driver (+0.44 Sharpe). Sharpe 2.05 IS / 1.63 OOS China A-share. Bias correction lesson directly applicable to H217/H228 alpha101 pipeline. Staged as wiki update on design-principles.md.",
+      "staged": true,
+      "staged_file": "2_ml_multifactor_bias_correction.json"
+    },
+    {
+      "id": "arxiv:2602.00196",
+      "title": "Generative AI for Stock Selection",
+      "url": "https://arxiv.org/abs/2602.00196",
+      "angle": "cross-sectional momentum + LLM",
+      "year": 2026,
+      "relevance_score": 0.80,
+      "relevance_note": "RAG + LLM auto-discovers stock features from analyst reports + options + price-volume. 14-91% Sharpe improvement vs baselines. Weakly correlated with traditional factors → stackable with H198/H217/H228. Staged as H312 hypothesis seed in CLAUDE.local.md.",
+      "staged": true,
+      "staged_file": "3_genai_stock_selection_h312_seed.json"
+    },
+    {
+      "id": "arxiv:2603.27539",
+      "title": "Toward Reliable Evaluation of LLM-Based Financial Multi-Agent Systems: Taxonomy, Coordination Primacy, and Cost Awareness",
+      "url": "https://arxiv.org/abs/2603.27539",
+      "angle": "multi-agent LLM trading",
+      "year": 2026,
+      "relevance_score": 0.45,
+      "relevance_note": "Already covered in wiki/trading/tools/multi-agent-llm-trading.md. No new actionable content.",
+      "staged": false
+    },
+    {
+      "id": "arxiv:2603.16365",
+      "title": "FactorEngine: A Program-level Knowledge-Infused Factor Mining Framework",
+      "url": "https://arxiv.org/abs/2603.16365",
+      "angle": "cross-sectional alpha mining + LLM",
+      "year": 2026,
+      "relevance_score": 0.55,
+      "relevance_note": "Interesting LLM factor mining via code generation. No specific Sharpe numbers visible in abstract; no GitHub. Similar to Alpha-GPT (already in wiki). Skip until code/results available.",
+      "staged": false
+    },
+    {
+      "id": "arxiv:2602.07085",
+      "title": "QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining",
+      "url": "https://arxiv.org/abs/2602.07085",
+      "angle": "cross-sectional momentum + LLM alpha",
+      "year": 2026,
+      "relevance_score": 0.60,
+      "relevance_note": "Evolutionary LLM alpha mining; IC 0.0472, S&P 500 19.1% excess return over 4 years via transfer from CSI 300. China-first approach. No GitHub. IC 0.047 is moderate. No Sharpe. Skip until US-native results published.",
+      "staged": false
+    },
+    {
+      "id": "arxiv:2603.25320",
+      "title": "Semi-Static Variance-Optimal Hedging of Covariance Risk in Multi-Asset Derivatives",
+      "url": "https://arxiv.org/abs/2603.25320",
+      "angle": "dispersion trading / variance swaps",
+      "year": 2025,
+      "relevance_score": 0.70,
+      "relevance_note": "Geometric dispersion trades; semi-static replication using Fourier transforms for covariance swaps. Theoretical framework. Already incorporated into spx-dispersion-variance.md wiki page (Phase 1 wiki expansion). Not separately staged.",
+      "staged": false
+    },
+    {
+      "id": "arxiv:2509.10461",
+      "title": "Momentum-integrated Multi-task Stock Recommendation with Converge-based Optimization",
+      "url": "https://arxiv.org/abs/2509.10461",
+      "angle": "cross-sectional momentum",
+      "year": 2025,
+      "relevance_score": 0.50,
+      "relevance_note": "Multi-task learning with momentum integration. No specific Sharpe metrics visible. Competing with H228 (alpha101+reversal, OOS 1.572). Would need strong results to justify new hypothesis. Skip.",
+      "staged": false
+    },
+    {
+      "id": "github:je-suis-tm/quant-trading",
+      "title": "Python quantitative trading strategies (quant-trading repo)",
+      "url": "https://github.com/je-suis-tm/quant-trading",
+      "angle": "GitHub trending quant finance",
+      "year": 2024,
+      "relevance_score": 0.30,
+      "relevance_note": "Classic strategies (VIX, pairs, MACD, etc.) — all strategies in this repo are already implemented or tested in Kevin's pipeline. No novel angles.",
+      "staged": false
+    },
+    {
+      "id": "github:kurupjayesh/Dispersion-Trading-using-Options",
+      "title": "Dispersion Trading using Options — Python implementation",
+      "url": "https://github.com/kurupjayesh/Dispersion-Trading-using-Options",
+      "angle": "GitHub: dispersion trading implementation",
+      "year": 2023,
+      "relevance_score": 0.70,
+      "relevance_note": "Closest available reference implementation for H309 Phase 2. Uses straddle/strangle on top-N SPX components with delta hedging via futures. z1/z2/z3 correlation percentile thresholds. Incorporated into spx-dispersion-variance.md wiki page. Not separately staged.",
+      "staged": false
+    }
+  ],
+  "staged_count": 4,
+  "staged_files": [
+    "1_finbert2_pead_upgrade.json",
+    "2_ml_multifactor_bias_correction.json",
+    "3_genai_stock_selection_h312_seed.json",
+    "4_llm_pairs_trading_moira_wiki.json"
+  ],
+  "summary": "Strong night for PEAD upgrades and cross-sectional alpha. FinBERT2 (KDD 2026) is the most actionable finding — direct replacement candidate for H163/H174 pipeline. ML tradability mask insight from arXiv:2507.07107 is an important bias-correction principle applicable to the entire alpha101 stack. Generative AI stock selection (arXiv:2602.00196) is stackable with existing confirmed strategies. Moira LLM pairs is monitored as a possible post-H307 revival approach. No dispersion trading arXiv papers with working code found — H309 Phase 2 remains blocked on Polygon options data subscription."
+}

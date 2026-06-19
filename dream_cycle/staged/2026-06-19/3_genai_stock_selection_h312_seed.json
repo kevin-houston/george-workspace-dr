@@ -1,0 +1,14 @@
+{
+  "id": "genai-stock-selection-h312-seed-2026-06-19",
+  "date": "2026-06-19",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.00196",
+  "title": "H312 hypothesis seed: Generative AI feature discovery for stock selection",
+  "rationale": "arXiv:2602.00196 (2026) shows that LLMs with retrieval-augmented generation can automatically discover stock-selection features from analyst reports, options data, and price-volume information — achieving Sharpe improvements of 14–91% over baselines depending on dataset and retrieval quality. Critically, the AI-generated signals are weakly correlated with traditional factors, meaning they can be combined with the existing H198/H217/H228 alpha stack without cancellation. This is a new hypothesis direction (H312) that complements rather than replaces confirmed work. Prerequisites: Polygon options data feed (for options features), EDGAR key (for analyst reports). Not blockable by current data constraints since price-volume alone gives 14% improvement.",
+  "risk_level": "low",
+  "type": "memory_update",
+  "target_file": "/workspace/agent/CLAUDE.local.md",
+  "content": "**H312 PROPOSED** (Generative AI stock selection; arXiv:2602.00196; LLM + RAG feature mining from analyst reports + options data + price-volume → 14-91% Sharpe improvement vs baselines; weakly correlated with H198/H217/H228 alpha signals → stackable; requires EDGAR + Polygon options for full implementation; minimal version uses price-volume only; design gate: OOS Sharpe ≥ 1.20 on 100-stock universe).",
+  "action": "append",
+  "apply_status": "pending"
+}

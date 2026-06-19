@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-18 (awesome-finance-mcp.md new; nlp-alternative-data.md updated LLM forecasting reviews)
+updated: 2026-06-19 (spx-dispersion-variance.md new; research-log/2026-06-19.md added)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -41,6 +41,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Factor Momentum & Style Rotation](algorithms/factor-momentum-style-rotation.md) ← new 2026-06-06 (Gupta & Kelly 2019 IS Sharpe 0.84 long-short; H255 NOT CONFIRMED long-only ETF Corr=0.89 all US equity; H256 NOT CONFIRMED GEM/PACS/GEM+Sector all < SPY OOS 2015-2025; look-ahead bias trap: unlagged 12m signal inflated OOS Sharpe 3×; multi-asset extensions with bonds+commodities queued)
   - [Commodity Trend Following](algorithms/commodity-trend-following.md) ← new 2026-06-07 (H261 NOT CONFIRMED UNG MaxDD -78%; H261b CONFIRMED Top-2 OOS Sharpe 0.922 Corr(SPY)=0.218; 2022 +26.7% vs SPY -18.2%; K-1 tax flags; roll yield mechanics; IS/OOS disconnect documented; H262 multi-horizon signal queued)
   - [Volatility Risk Premium (VRP)](algorithms/volatility-risk-premium.md) ← new 2026-06-09
+  - [SPX Dispersion Trading & Variance Risk Premium](algorithms/spx-dispersion-variance.md) ← new 2026-06-19 (H309 Phase 2 design; implied correlation premium 6-18pp historically; DSPX/COR3M signals; vega-neutral construction; Polygon IV integration path; dirty dispersion z1/z2/z3 thresholds; correlation convexity risk; factor-dispersion variant via sector ETFs)
   - [Value Factors (FCF Yield, COWZ, H284/H286)](algorithms/value-factors.md) ← new 2026-06-13 (FCF yield beats B/M; COWZ/SPY cross-momentum H286 CONFIRMED Corr(SPY)=0.596; FMP API; value vs momentum tension) (IV > RV 85% of time; VRP ~2-4 vol points; short-vol Sharpe ~1.0; CSP/iron condor/delta-hedged straddle mechanics; VIX contango harvesting SVXY; Volmageddon/COVID risk lessons; H266 iron condor queued; VRP + IBS synergy noted)
   - [Behavioral Finance Signals](algorithms/behavioral-finance-signals.md) ← new 2026-06-14 (52-week high anchoring George & Hwang 2004; H291 NOT CONFIRMED large-cap 2018-2025; works in small-cap/bear regimes; Return Seasonality H292 CONFIRMED OOS 0.970; Factor MAX H295 NOT CONFIRMED ETF level)
   - [Market Timing Overlays](algorithms/market-timing-overlays.md) ← new 2026-06-15 (VIX term structure H296 CONFIRMED OOS 1.116 MaxDD -18.6%; SPY 200MA; VIX level thresholds; composite signal; rate cycle overlay; production integration guide for daily vs monthly rotation systems)
