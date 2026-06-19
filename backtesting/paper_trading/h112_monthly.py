@@ -580,10 +580,21 @@ def main():
 
     print("\nCombined target allocations:")
     for sym, usd in sorted(target.items(), key=lambda x: -x[1]):
-        print(f"  {sym:<6} ${usd:>10,.0f}  ({usd/equity*100:.1f}%)")
+        print(f"  {sym:<6} ${usd:>10,.0f}  ({usd/strat_equity*100:.1f}%)")
 
-    # Build trade plan
-    trades = build_trade_plan(target, positions)
+    # Build trade plan using strategy-owned positions only (not all Alpaca positions,
+    # which include IBS and other strategies sharing the same account).
+    se_positions = se.get_open_positions(STRATEGY_ID)  # {symbol: {qty, avg_cost, ...}}
+    strat_positions = {}
+    for sym, pos_data in se_positions.items():
+        price = get_latest_price(sym)
+        qty = pos_data.get("qty", 0.0)
+        strat_positions[sym] = {
+            "qty":          qty,
+            "market_value": qty * price,
+            "avg_cost":     pos_data.get("avg_cost", price),
+        }
+    trades = build_trade_plan(target, strat_positions)
 
     if not trades:
         print("\nNo rebalance needed — portfolio matches target.")
