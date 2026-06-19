@@ -63,5 +63,18 @@
     "order_id": "48c31202-d355-4be7-90ee-4d93db1d98f9",
     "submitted_at": "2026-06-17T09:45:24.656899",
     "equity": 100302.93
+  },
+  {
+    "date": "2026-06-18",
+    "symbol": "IGV",
+    "action": "BUY",
+    "qty": 22.3417,
+    "price": 89.56,
+    "prev_ibs": 0.0422,
+    "gap": 0.004486,
+    "reason": "IBS entry: prev_ibs 0.042 < 0.3, gap +0.449% \u2265 0.250%",
+    "order_id": "a9d89bcd-857b-41ba-aef6-8fc8786f9324",
+    "submitted_at": "2026-06-18T09:45:26.236997",
+    "equity": 100046.35
   }
 ]
