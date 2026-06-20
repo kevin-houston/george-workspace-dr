@@ -358,3 +358,20 @@ Simpler backtesting + live trading for stocks and crypto. Lower learning curve t
 **Relevance:** H276 crypto POC alternative to NautilusTrader. Much simpler setup for initial crypto live trading. Evaluate alongside ccxt (already in crypto-data-sources.md) for H276.
 
 See also: tools/lean-quantconnect.md (Alpaca live bridge); paper-trading/risk-controls-and-monitoring.md (kill switch implementation); tools/ai-trader.md (social trading layer)
+
+## The Self Driving Portfolio (Ang et al., April 2026)
+
+**Source:** arXiv:2604.02279 — Andrew Ang (BlackRock), Nazym Azimbayev, Andrey Kim
+
+**Architecture:** ~50 specialized agents handle capital market assumptions and portfolio construction, each implementing a different methodology. A **researcher agent** proposes new construction methods not yet represented. A **meta-agent** tracks past forecast accuracy against realized returns and weights agent outputs accordingly — learning which models to trust in which regimes.
+
+**Governance:** Agents are constrained by an Investment Policy Statement (IPS) — a formal document encoding risk limits, benchmark tracking error constraints, ESG restrictions. This is institutional-grade guardrailing.
+
+**Key difference from TradingAgents/HedgeAgents:** Rather than bull vs. bear debate (adversarial), this is a **diversity-maximizing ensemble** — each agent uses a different methodology, and the meta-agent learns the model-averaging weights dynamically.
+
+**Relevance to production portfolio:**
+- H026, H045, H041a are three different rotation methodologies running independently with fixed static allocations (27/21/22%)
+- A meta-agent could learn which strategy to overweight based on regime: e.g., if VIX > 25, weight H045 (bonds) higher; if momentum IC is high, weight H041a higher
+- H318 proposal: implement a simple meta-learner (logistic regression or rolling IC-weighting) that dynamically adjusts H026/H041a/H045 portfolio weights monthly based on regime signals
+
+**Caution:** No performance metrics reported in abstract. Institutional system is complex and likely over-engineered for retail-scale pipeline.

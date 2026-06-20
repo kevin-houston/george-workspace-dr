@@ -201,3 +201,19 @@ state, decision = ta.propagate("NVDA", "2024-01-15")
 - **H163/H174** (CONFIRMED): FinBERT on EDGAR 8-K — the confirmed anchor for NLP signal generation
 
 See also: [Market Timing Overlays](market-timing-overlays.md) (H296 VIX overlay), [Crypto Trading Strategies](crypto-trading-strategies.md) (H302/H303), [PEAD Strategy](../strategies/pead.md)
+
+## Reproducibility Crisis in LLM Trading Research (Xia et al., May 2026)
+
+**Source:** arXiv:2605.19337 — "Agentic Trading: When LLM Agents Meet Financial Markets"
+
+A systematic review of 77 LLM-based trading agent studies identified severe evaluation deficits:
+- **2/19** empirical studies report extractable, time-consistent evaluation protocols
+- **1/19** includes realistic transaction costs
+- **0/19** achieves R3 reproducibility (full re-runnable implementation with data)
+
+**Implication for H274/H279/H280:** Reported Sharpe ratios from multi-agent LLM papers (e.g., HedgeAgents 2.41, Expert Investment Teams) should be treated with extreme skepticism until independently replicated. The architectural innovations are real, but performance claims are likely inflated by:
+1. Lookahead bias in LLM financial knowledge (training data includes the test period)
+2. Missing transaction costs
+3. Cherry-picked evaluation windows
+
+**Action for dream cycle:** Before implementing any LLM-as-signal hypothesis (H279/H280), require: (1) strict OOS data cutoff, (2) transaction cost model included, (3) comparison to momentum baseline H312-B (OOS Sharpe 1.202) as the hurdle, not SPY.
