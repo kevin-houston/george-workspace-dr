@@ -7434,3 +7434,119 @@ The variance risk premium (VRP) and implied correlation premium are both empiric
 **Portfolio note:** NOT intended to replace production portfolio (OOS CAGR 9-12% vs production ~23%). Rather, confirms that a simple diversified baseline already beats the OOS Sharpe gate — production's advantage is CAGR (momentum/timing adds return at the cost of lower diversification). If capital preservation is paramount, EW-4 + VIX gate is deployable. Do not blend into production — the correlation with H026/H041a-style strategies is partially overlapping (H026 holds SPY-correlated assets).
 
 **Script:** `backtesting/daily/run_h311.py` | **Results:** `backtesting/results/h311_results.json`
+
+---
+
+### H312 — GenAI Stock Selection: Price-Volume Factor Baseline (PARTIAL — survivorship bias caveat)
+
+**Source:** Kim et al. (2025) arXiv:2602.00196 "Can Large Language Models Beat Wall Street? Generative AI for Stock Selection"
+
+**Hypothesis:**
+The paper reports 14–91% Sharpe improvement adding LLM+RAG features (analyst reports, options surface, price-volume) over pure-quantitative baselines. This test establishes the **price-volume baseline floor** on an 86-stock S&P 500 universe: multi-factor z-score composite vs. 12-1 momentum standalone, monthly rebalance, long top-20 equal-weight.
+
+**Universe:** 86 largest S&P 500 stocks (fixed 2026 constituents → survivorship bias). All sectors represented.
+
+**Factors tested (Variant A — composite):** 12-1 momentum (skip-month), 3-month momentum, low-volatility (inverse 21d annualized vol), 52-week high proximity, risk-adjusted 3m momentum (Sharpe proxy). Equal-weight z-score composite → rank → top 20.
+
+**IS:** 2010–2019 | **OOS:** 2020–2026 | **Gate:** OOS Sharpe > 1.20
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | WF ratio | Corr(SPY) OOS | Gate |
+|---------|-----------|------------|----------|-----------|----------|---------------|------|
+| A: Multi-factor composite | 1.457 | 0.984 | 16.6% | -23.6% | 0.675 | 0.806 | FAIL |
+| B: 12-1 Momentum only | 1.204 | 1.202 | 23.8% | -14.0% | 0.998 | 0.865 | PASS |
+| SPY buy-hold | — | 0.815 | 13.9% | -24.6% | — | — | — |
+
+**OOS year-by-year (Variant B — momentum only):**
+
+| Year | H312-B | SPY | Excess |
+|------|--------|-----|--------|
+| 2020 | +25.7% | +15.0% | +10.8% |
+| 2021 | +10.2% | +15.5% | -5.3% |
+| 2022 | -6.0% | -10.0% | +4.0% |
+| 2023 | +10.6% | +17.1% | -6.5% |
+| 2024 | +31.2% | +28.8% | +2.4% |
+| 2025 | +23.4% | +20.0% | +3.4% |
+| 2026 | +14.9% | +6.5% | +8.4% |
+
+**Most recent holdings (May 2026):** MU, AMD, INTC, AMZN, MS, AAPL, AVGO, UNH, TXN, CSCO, GS, C, AMAT, GOOGL, KLAC, ADI, PLD, CAT, TGT, SBUX
+
+**Verdict: PARTIAL CONFIRMED (survivorship bias caveat)**
+
+**Variant B (12-1 momentum only) passes:** OOS Sharpe 1.202 > 1.20 gate, WF ratio 0.998 (IS and OOS Sharpe essentially identical — extremely stable). OOS CAGR 23.8% exceeds IS CAGR 17.0%.
+
+**Variant A (composite) FAILS:** Adding 4 extra factors (low-vol, 52-wk-high, risk-adj-3m, 3m mom) to 12-1 momentum *hurts* OOS performance (0.984 vs 1.202). Factor complexity degrades signal quality — consistent with factor crowding literature. The 12-1 skip-month momentum is the cleanest single signal on this universe.
+
+**Key observations:**
+1. **Simplicity wins:** Pure 12-1 momentum outperforms a 5-factor composite, suggesting additional factors introduce noise on a large-cap universe where most cross-sectional variation is already explained by recent price trend.
+2. **2022 resilience:** H312-B -6.0% vs SPY -10.0% → momentum rotation provided some protection in the rate-shock year. The large-cap nature of the universe (no small/micro-cap crashes) contributes.
+3. **Corr(SPY) = 0.865:** High correlation with SPY limits portfolio diversification value. Not additive to the production portfolio (H026 already captures momentum in ETFs; adding a stock-level momentum layer mostly adds concentrated equity risk).
+4. **Survivorship bias:** Fixed 2026 universe excludes all large-cap failures (GE collapse, WeWork, SVB). Likely inflates OOS Sharpe by 0.1–0.3. Real implementable Sharpe is likely ~0.9–1.1 for Variant B.
+
+**Caveats:**
+- Survivorship bias is unquantified but material: META IPO 2012 — would not have been available for 2012 IS rebalance; TSLA extreme 2020 run (held due to prior momentum) inflates OOS
+- Corr(SPY) 0.865 = Variant B adds ~13.5% tracking error over SPY but at much higher correlation than production target (0.70 cap)
+- 77 OOS observations — adequate but Sharpe SE ≈ 0.16, so 1.202 ± 0.16 = true Sharpe likely in [1.04, 1.36] range
+
+**Phase 2:** Wire in LLM+RAG features (EDGAR analyst reports + Polygon options IV). Expected Sharpe improvement +14–91% vs this baseline → Phase 2 target OOS Sharpe ≥ 1.40. Requires historical constituent data to eliminate survivorship bias.
+
+**Script:** `backtesting/daily/run_h312.py` | **Results:** `backtesting/results/h312_results.json`
+
+---
+
+### H313 — Sector-Neutral Stock Momentum (NOT CONFIRMED)
+
+**Source:** Stosik & Zaremba (2025) SSRN 6630998 "Industry-Adjusted Momentum"; Moskowitz & Grinblatt (1999) "Do Industries Explain Momentum?" (JF); Grundy & Martin (2001) (RFS)
+
+**Hypothesis:**
+Standard stock momentum is contaminated by sector/industry co-movement. The sector-neutral signal `R_i − R̄_sector` removes this component and should produce: (1) lower SPY correlation, (2) more stable IS/OOS properties. Stosik & Zaremba report 0.53%/month globally with Sharpe ~0.74 on long-only sector-neutral portfolios.
+
+**Universe:** 86 S&P 500 stocks with explicit GICS sector labels (Tech/Comm/ConDisc/ConStap/Health/Fin/Ind/Energy/Matl/Util/REIT). Same fixed 2026 universe as H312 → survivorship bias applies.
+
+**IS:** 2010–2019 | **OOS:** 2020–2026 | **Gate:** OOS Sharpe > 1.10 AND Corr(SPY) < 0.80
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | WF ratio | Corr(SPY) OOS | Gate |
+|---------|-----------|------------|----------|-----------|----------|---------------|------|
+| A: Raw 12-1 baseline | 1.204 | 1.202 | 23.8% | -14.0% | 0.998 | 0.865 | FAIL (Corr) |
+| B: Sector-neutral 12-1 | 1.202 | 1.063 | 19.9% | -21.8% | 0.884 | 0.906 | FAIL |
+| C: Sector-neutral 3m | 1.421 | 1.078 | 20.2% | -27.3% | 0.759 | 0.905 | FAIL |
+| D: Composite 70%B+30%C | 1.182 | 1.150 | 21.8% | -22.8% | 0.973 | 0.904 | FAIL |
+| E: Sect-neutral + low-vol | 1.248 | 0.717 | 10.7% | -19.5% | 0.575 | 0.844 | FAIL |
+| SPY buy-hold | — | ~0.82 | 13.9% | -24.6% | — | — | — |
+
+**OOS year-by-year (Variant B — Sector-Neutral 12-1):**
+
+| Year | H313-B | SPY | Excess |
+|------|--------|-----|--------|
+| 2020 | +18.8% | +15.0% | +3.9% |
+| 2021 | +7.0% | +15.5% | -8.5% |
+| 2022 | -7.6% | -10.0% | +2.4% |
+| 2023 | +19.8% | +17.1% | +2.7% |
+| 2024 | +40.9% | +28.8% | +12.1% |
+| 2025 | +24.3% | +20.0% | +4.3% |
+| 2026 | +30.1% | +6.5% | +23.6% |
+
+**Verdict: NOT CONFIRMED**
+
+All 5 variants fail the dual gate. Critically: **sector-neutralization increases SPY correlation** rather than decreasing it (0.865 → 0.906 for B vs A). The raw 12-1 signal (Variant A, same as H312-B) achieves the highest OOS Sharpe (1.202) but still fails the Corr < 0.80 threshold.
+
+**Root cause analysis:**
+
+The core problem is universe composition. Stosik & Zaremba (2025) use a **global multi-country equity universe** (thousands of stocks across US, Europe, Asia, EM). In that setting, sector-neutral adjustment removes both (1) intra-sector co-movement AND (2) country-specific economic shocks — providing genuine diversification. On a **fixed 86-stock S&P 500 large-cap universe**:
+
+1. All stocks share the same market regime — US large-cap equity. "Sector noise" is dwarfed by common market factor.
+2. Sector averages within 7–15 stocks per sector are noisy and highly cross-correlated with SPY anyway.
+3. Subtracting a noisy, highly-correlated sector average from the return doesn't reduce residual SPY correlation — it only reduces signal strength.
+4. The low-vol filter (Variant E) does reduce Corr to 0.844 (still > 0.80) while cratering OOS Sharpe to 0.717 — filtering stocks concentrates the portfolio in the most SPY-correlated names (defensive low-vol = high SPY beta in a bull market universe).
+
+**Key observations:**
+- WF degradation from A→B: 0.998 → 0.884. Sector-neutral adjustment introduces estimation noise (sector averages from 7–15 stocks are imprecise) without meaningful signal improvement.
+- Variant D (composite 70/30) shows the smallest WF degradation (0.973) but still fails Corr gate at 0.904.
+- Year 2024 (+40.9% for B) and 2026 (+30.1% for B) are outlier years driven by concentrated NVDA/AMD/tech momentum, not sector-neutral refinement.
+- IS and OOS Sharpe for Variant B are nearly identical (1.202 vs 1.063) — signal exists, but the diversification hypothesis fails on this universe.
+
+**Implications for future research:**
+- Sector-neutral momentum is a valid global signal but requires a universe with genuine cross-country/cross-regime diversification (≥500 stocks, multiple countries, or sector ETFs themselves as the universe).
+- On large-cap US-only: pure 12-1 momentum (H312-B) remains the cleanest expression. Corr(SPY) ≈ 0.865 is a structural floor for any long-only US equity momentum strategy on this universe.
+- To reduce SPY correlation below 0.80 within a stock momentum framework, would need: long-short implementation (impractical for paper account), or a much smaller-cap universe where idiosyncratic variance dominates.
+
+**Script:** `backtesting/daily/run_h313.py` | **Results:** `backtesting/results/h313_results.json`
