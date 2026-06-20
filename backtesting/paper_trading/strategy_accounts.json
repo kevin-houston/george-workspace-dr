@@ -11,10 +11,24 @@
       "backtest_oos_period": "2020-2026",
       "script": "h112_monthly.py",
       "start_equity": 5000.0,
-      "cash": 5000.0,
-      "open_positions": {},
+      "cash": 0.0001,
+      "open_positions": {
+        "XLK": {
+          "qty": 26.117843,
+          "entry_price": 191.44,
+          "entry_date": "2026-06-19",
+          "cost_basis": 4999.9999,
+          "order_id": "e7cef5ae-c899-4756-832f-fe35d5b1a085",
+          "note": ""
+        }
+      },
       "closed_trades": [],
-      "equity_history": [],
+      "equity_history": [
+        {
+          "date": "2026-06-19",
+          "equity": 5000.0
+        }
+      ],
       "status": "active"
     },
     "H041a": {
@@ -56,7 +70,12 @@
       "cash": 5000.0,
       "open_positions": {},
       "closed_trades": [],
-      "equity_history": [],
+      "equity_history": [
+        {
+          "date": "2026-06-19",
+          "equity": 5000.0
+        }
+      ],
       "status": "active"
     },
     "H174": {
@@ -91,5 +110,5 @@
       "status": "stub"
     }
   },
-  "updated": "2026-06-18T18:45:56.237274"
+  "updated": "2026-06-19T09:51:29.829357"
 }
