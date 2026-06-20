@@ -1,0 +1,141 @@
+{
+  "scan_date": "2026-06-20",
+  "scan_angles": [
+    "PEAD + post-earnings drift + text signals",
+    "Pairs trading + cointegration + LLM",
+    "Cross-sectional momentum + sector-neutral",
+    "Multi-agent LLM trading",
+    "GitHub trending quant finance"
+  ],
+  "papers": [
+    {
+      "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+      "arxiv_id": "2605.01954",
+      "url": "https://arxiv.org/abs/2605.01954",
+      "date": "2026-05-03",
+      "authors": "Giannouris, Jiang, Qian, Wang, Peng, Huang, Xiong, Ananiadou",
+      "summary": "Two-level hierarchy: LLM selects pairs via semantic reasoning (long horizon), RL executes spread trades (short horizon). Prompt-based policy updates instead of gradient fine-tuning. No specific Sharpe reported but 'consistent improvements over cointegration baselines'.",
+      "angle": "pairs trading + LLM",
+      "relevance_score": 8,
+      "hypothesis_connection": ["H200 (closed, graphical pairs)", "H316 (proposed)"],
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-20/1_moira_llm_pairs_h316.json"
+    },
+    {
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "arxiv_id": "2605.25894",
+      "url": "https://arxiv.org/abs/2605.25894",
+      "date": "2026-05-25",
+      "authors": "Noseda, Soldati, Paina",
+      "summary": "Multi-modal framework combining 15 fundamental metrics, 3 technical indicators, and FinBERT sentiment. Transformer architecture achieves best macro-F1 for earnings-day direction prediction. Ablation confirms consistent benefit from news sentiment.",
+      "angle": "PEAD + text signals",
+      "relevance_score": 8,
+      "hypothesis_connection": ["H163 (confirmed)", "H174 (confirmed, production)", "H317 (proposed)"],
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-20/2_multimodal_pead_h317.json"
+    },
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "arxiv_id": "2509.24254",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "date": "2025-09-29",
+      "authors": "unknown",
+      "summary": "138k+ earnings press releases (2005-2023). FinBERT embeddings + topic analysis. Soft information (text) as informative as EPS surprise. Online learning for real-time prediction. Previously staged as H293 on 2026-06-13.",
+      "angle": "PEAD + text signals",
+      "relevance_score": 9,
+      "hypothesis_connection": ["H293 (already staged 2026-06-13)", "H174 (production)"],
+      "staged": false,
+      "note": "Already staged as H293 on 2026-06-13 — do not duplicate"
+    },
+    {
+      "title": "The Self Driving Portfolio: Agentic Architecture for Institutional Asset Management",
+      "arxiv_id": "2604.02279",
+      "url": "https://arxiv.org/abs/2604.02279",
+      "date": "2026-04-02",
+      "authors": "Andrew Ang, Nazym Azimbayev, Andrey Kim",
+      "summary": "50+ specialized agents compete across 20+ portfolio construction methods. Meta-agent learns from past forecast accuracy. Governance via IPS document. Diversity-maximizing ensemble (vs. adversarial debate in TradingAgents). No performance metrics reported.",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": 7,
+      "hypothesis_connection": ["H026/H045/H041a production", "H318 (proposed: meta-agent weight adjuster)"],
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-20/3_self_driving_portfolio_wiki.json"
+    },
+    {
+      "title": "Agentic Trading: When LLM Agents Meet Financial Markets",
+      "arxiv_id": "2605.19337",
+      "url": "https://arxiv.org/abs/2605.19337",
+      "date": "2026-05-19",
+      "authors": "Xia, You, Wang, Liu, Qi, Wu, Zhang",
+      "summary": "Systematic review of 77 LLM trading agent studies. Key finding: only 2/19 report extractable protocols, 1/19 includes transaction costs, 0/19 achieves full reproducibility. Architecture expanding but evaluation protocols are the bottleneck.",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": 8,
+      "hypothesis_connection": ["H274", "H279", "H280", "H281"],
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-20/4_agentic_trading_review_wiki.json"
+    },
+    {
+      "title": "QuantEvolve: Automating Quantitative Strategy Discovery through Multi-Agent Evolutionary Framework",
+      "arxiv_id": "2510.18569",
+      "url": "https://arxiv.org/abs/2510.18569",
+      "date": "2025-10-21",
+      "authors": "unknown",
+      "summary": "Quality-diversity optimization + hypothesis-driven multi-agent system for systematic strategy space exploration. Claims outperform conventional baselines. No specific metrics disclosed.",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": 5,
+      "hypothesis_connection": ["dream cycle scan methodology"],
+      "staged": false,
+      "note": "Interesting for dream cycle itself but no specific H-number connection without performance metrics"
+    },
+    {
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Portfolio Optimization with Bias Correction",
+      "arxiv_id": "2507.07107",
+      "url": "https://arxiv.org/abs/2507.07107",
+      "date": "2025-06-02",
+      "authors": "unknown",
+      "summary": "Systematic risk factor identification + bias correction to remove unintended systematic exposures in cross-sectional portfolios. Directly addresses the H313 finding (sector-neutral didn't reduce market exposure because bias correction was implicit not explicit).",
+      "angle": "cross-sectional momentum + sector-neutral",
+      "relevance_score": 6,
+      "hypothesis_connection": ["H313 (not confirmed)", "H228 (confirmed)"],
+      "staged": false,
+      "note": "Good reference for factor-models.md wiki update in next cycle"
+    },
+    {
+      "title": "LLMs for Time Series: An Application for Single Stocks and Statistical Arbitrage",
+      "arxiv_id": "2412.09394",
+      "url": "https://arxiv.org/abs/2412.09394",
+      "date": "2024-12",
+      "authors": "unknown",
+      "summary": "LLMs applied to time series forecasting for single stocks and stat arb. Foundational work.",
+      "angle": "pairs trading + LLM",
+      "relevance_score": 4,
+      "hypothesis_connection": ["H316 (proposed)"],
+      "staged": false,
+      "note": "Superseded by Moira (2605.01954) which is more specific to pairs trading"
+    }
+  ],
+  "github_findings": [
+    {
+      "repo": "Alesarabandi/Quantitative-Momentum-Strategy-Backtesting",
+      "url": "https://github.com/Alesarabandi/Quantitative-Momentum-Strategy-Backtesting",
+      "summary": "Skewness-Enhanced and Dual Momentum (TSM+CSM) across S&P 500 and STOXX 600. Dual momentum showed superior performance in European market.",
+      "relevance_score": 5,
+      "note": "H313 is the S&P 500 variant — already tested. European universe could be interesting for H319."
+    },
+    {
+      "repo": "wilsonfreitas/awesome-quant",
+      "url": "https://github.com/wilsonfreitas/awesome-quant",
+      "summary": "Curated list of quant finance libraries, packages, and resources. Long-standing reference.",
+      "relevance_score": 3,
+      "note": "Already known resource, no new action needed"
+    }
+  ],
+  "staged_count": 4,
+  "total_findings": 8,
+  "high_relevance": ["2605.01954 (Moira)", "2605.25894 (Multi-modal PEAD)", "2605.19337 (Agentic Trading reproducibility audit)"],
+  "next_cycle_priorities": [
+    "H316 implementation (Moira LLM pair selection)",
+    "H317 implementation (multi-modal PEAD)",
+    "arXiv:2507.07107 wiki update in factor-models.md",
+    "H318 design: meta-agent ETF rotation weight adjuster"
+  ]
+}

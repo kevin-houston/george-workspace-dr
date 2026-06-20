@@ -1,0 +1,14 @@
+{
+  "id": "2026-06-20-moira-llm-pairs-h316",
+  "date": "2026-06-20",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2605.01954",
+  "title": "H316 design: LLM-based pair selection for stock pairs trading (Moira framework)",
+  "rationale": "The ETF pairs family (H152-H160, H200, H246, H271) failed because cointegration relationships are unstable across structural breaks. Moira (arXiv:2605.01954, May 2026) proposes a two-level hierarchy: LLMs select pairs via semantic/fundamental reasoning (long horizon), while RL executes trades (short horizon). Pair selection based on business similarity rather than statistical correlation produces more stable pairs. Directly actionable on the closed H200 graphical-pairs approach — LLM selector replaces the Johansen cointegration test.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h316.py",
+  "content": "# H316 — LLM-Selected Stock Pairs Trading\n# Source: Moira arXiv:2605.01954 (Giannouris et al., May 2026)\n# Hypothesis: Replace cointegration-based pair selection with LLM semantic reasoning.\n# LLM selects pairs based on business similarity (sector, supply chain, products)\n# rather than historical return correlation. RL or spread z-score executes entries.\n#\n# Design:\n# - Universe: 86-stock S&P 500 (same as H312/H313)\n# - Pair selection: GPT-4o rates each pair (0-10) on business similarity using\n#   company descriptions from yfinance.Ticker.info['longBusinessSummary']\n# - Filter: keep pairs with similarity score >= 7.0 (semantic cointegration proxy)\n# - Execution: classical spread z-score entry/exit (z>2 short spread, z<-2 long)\n# - Lookback for spread: 60 trading days\n# - Hold: until z-score reverts to 0.5 or max 20 days\n# - IS: 2018-2021 | OOS: 2022-2026\n# - Gate: OOS Sharpe > 1.00 AND Corr(SPY) < 0.60\n#\n# Cost note: GPT-4o pair rating: ~86*(86-1)/2 = 3,655 pairs, ~$0.10/batch with caching\n# Rate once per quarter (semantic similarity is stable); store in pairs_cache.json\n#\n# TODO: implement pair_ranker.py to call OpenAI API for pair scoring\n# TODO: implement spread_trader.py for z-score entry/exit\n# See wiki/trading/algorithms/pairs-trading.md for context on prior pair failures\npass\n",
+  "action": "write",
+  "apply_status": "pending"
+}

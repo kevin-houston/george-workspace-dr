@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-19 (spx-dispersion-variance.md new; research-log/2026-06-19.md added)
+updated: 2026-06-20 (fixed-income-bond-rotation.md new; research-log/2026-06-20.md added)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -42,6 +42,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Commodity Trend Following](algorithms/commodity-trend-following.md) ← new 2026-06-07 (H261 NOT CONFIRMED UNG MaxDD -78%; H261b CONFIRMED Top-2 OOS Sharpe 0.922 Corr(SPY)=0.218; 2022 +26.7% vs SPY -18.2%; K-1 tax flags; roll yield mechanics; IS/OOS disconnect documented; H262 multi-horizon signal queued)
   - [Volatility Risk Premium (VRP)](algorithms/volatility-risk-premium.md) ← new 2026-06-09
   - [SPX Dispersion Trading & Variance Risk Premium](algorithms/spx-dispersion-variance.md) ← new 2026-06-19 (H309 Phase 2 design; implied correlation premium 6-18pp historically; DSPX/COR3M signals; vega-neutral construction; Polygon IV integration path; dirty dispersion z1/z2/z3 thresholds; correlation convexity risk; factor-dispersion variant via sector ETFs)
+  - [Fixed Income / Bond ETF Rotation](algorithms/fixed-income-bond-rotation.md) ← new 2026-06-20 (H045 PRODUCTION 21% portfolio; 13-ETF universe SHY/HYG/IEI/TIP/IEF/TLT/BIL + 6 more; 3m+6m+12m rank ensemble; OOS Sharpe 1.351 MaxDD -6.3%; carry FAILS — ETF dividends ≠ forward carry; 2022 rate shock survived via TSMOM filter; H314/H315 queued)
   - [Value Factors (FCF Yield, COWZ, H284/H286)](algorithms/value-factors.md) ← new 2026-06-13 (FCF yield beats B/M; COWZ/SPY cross-momentum H286 CONFIRMED Corr(SPY)=0.596; FMP API; value vs momentum tension) (IV > RV 85% of time; VRP ~2-4 vol points; short-vol Sharpe ~1.0; CSP/iron condor/delta-hedged straddle mechanics; VIX contango harvesting SVXY; Volmageddon/COVID risk lessons; H266 iron condor queued; VRP + IBS synergy noted)
   - [Behavioral Finance Signals](algorithms/behavioral-finance-signals.md) ← new 2026-06-14 (52-week high anchoring George & Hwang 2004; H291 NOT CONFIRMED large-cap 2018-2025; works in small-cap/bear regimes; Return Seasonality H292 CONFIRMED OOS 0.970; Factor MAX H295 NOT CONFIRMED ETF level)
   - [Market Timing Overlays](algorithms/market-timing-overlays.md) ← new 2026-06-15 (VIX term structure H296 CONFIRMED OOS 1.116 MaxDD -18.6%; SPY 200MA; VIX level thresholds; composite signal; rate cycle overlay; production integration guide for daily vs monthly rotation systems)
@@ -103,6 +104,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Sources](sources/) — ingested papers and working papers
   - [The Alchemy of Multibagger Stocks](sources/multibagger-yartseva-2025.md) ← new 2026-06-12 (Yartseva 2025; FCF/P = #1 factor; EPS growth NOT sig; small-cap +37.7% vs large +9.7%; asset_growth>EBITDA_growth −22.8pp; near-12m-low entry signal; rate-hike −8-12pp; H285 proposed)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-06-20](research-log/2026-06-20.md) — wiki expansion: fixed-income-bond-rotation.md new (H045 PRODUCTION framework; 3m+6m+12m rank ensemble; carry FAILS — ETF dividends ≠ forward carry; SHY dominates OOS 72% of months; H314/H315 queued); dream cycle: H316 LLM pair selection (Moira arXiv:2605.01954), H317 multi-modal PEAD (arXiv:2605.25894), Self-Driving Portfolio + reproducibility audit wiki updates
   - [2026-06-16](research-log/2026-06-16.md) — wiki expansion: crypto-trading-strategies.md new (cross-sectional momentum Sharpe 1.51, BTC MA Sharpe 1.9, funding rate carry Sharpe 6.45→negative 2025, Monday effect, halving cycle, ccxt/pycoingecko implementation; H302/H303 queued); dream cycle: arXiv/GitHub scan Phase 2
   - [2026-06-13](research-log/2026-06-13.md) — wiki expansion: value-factors.md new (FCF yield, COWZ, H284/H285/H286 synthesis, value vs momentum tension); dream cycle: H293 press release structure PEAD (arXiv:2509.24254), H294 behavioral multi-factor MLP (arXiv:2508.14656), time-series foundation models wiki (Chronos/TimesFM/Lag-Llama)
   - [2026-06-11](research-log/2026-06-11.md) — wiki expansion: execution-quality.md new (IS benchmarks, paper fill mechanics, slippage budgets, graduation gates); dream cycle: H279 LLM momentum filter arXiv:2510.26228, H280 MarketSenseAI arXiv:2604.17327, H281 macro-LLM ETF arXiv:2606.08283, hyperbolic alpha decay wiki arXiv:2512.11913

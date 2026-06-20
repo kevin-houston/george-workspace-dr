@@ -1,0 +1,14 @@
+{
+  "id": "2026-06-20-multimodal-pead-h317",
+  "date": "2026-06-20",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2605.25894",
+  "title": "H317 design: Multi-modal earnings prediction (FinBERT + fundamentals + price momentum)",
+  "rationale": "Noseda et al. (arXiv:2605.25894, May 2026) show that combining FinBERT sentiment from financial news with fundamental metrics (15 ratios) and technical indicators (3 signals) outperforms any single modality for predicting earnings announcement day direction — Transformer achieves best macro-F1. Currently H174/H163 uses FinBERT on 8-K text only with a simple positive-score threshold. Adding pre-announcement price momentum and basic fundamentals (revenue surprise, EPS trajectory) as complementary signals could push win rate above the current 81.8%. The multi-modal architecture is straightforward to bolt onto pead_overnight.py — add yfinance.Ticker.quarterly_financials for fundamentals and trailing 21d return as price momentum.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h317.py",
+  "content": "# H317 — Multi-Modal PEAD: FinBERT + Fundamentals + Price Momentum\n# Source: Noseda, Soldati, Paina arXiv:2605.25894 (May 2026)\n# Hypothesis: Adding fundamental metrics and pre-announcement price momentum\n# to the existing FinBERT 8-K signal improves PEAD entry win rate above 81.8%.\n#\n# Current pipeline (H174): FinBERT score >= 0.18 AND EPS surprise >= 0.02\n# Proposed extension:\n#   score_composite = 0.5*finbert_score + 0.3*fundamentals_score + 0.2*price_momentum_score\n#   where:\n#     fundamentals_score = norm(revenue_growth_yoy) + norm(eps_trajectory_3q) \n#     price_momentum_score = -1 if stock up >10% pre-announcement (mean reversion risk)\n#                            +1 if stock flat/down (low expectations, room to beat)\n#\n# IS: 2021-2023 (H174 OOS period becomes IS for H317)\n# OOS: 2024-2026\n# Gate: Win rate > 70% AND mean return > 4% per trade on 20+ OOS events\n#\n# Data sources:\n#   - FinBERT score: existing pead_overnight.py pipeline\n#   - Fundamentals: yfinance.Ticker.quarterly_financials (free)\n#   - Price momentum: yfinance.download() trailing 21d return pre-announcement\n#\n# Integration path: if confirmed, update pead_overnight.py to use composite score\n# See backtesting/paper_trading/pead_overnight.py for base implementation\npass\n",
+  "action": "write",
+  "apply_status": "pending"
+}
