@@ -391,3 +391,31 @@ Pages created: 1 (trading/tools/awesome-finance-mcp.md). Pages updated: 2 (tradi
 Source: https://github.com/BlockRunAI/awesome-finance-mcp. Noted by Kevin 2026-06-18.
 
 Key findings: HIGH priority — install Alpaca MCP (`alpacahq/alpaca-mcp-server`) for native order management alongside existing REST code; install FMP MCP (`imbenrabi/Financial-Modeling-Prep-MCP-Server`) for H308 FCF/P data. Massive MCP already live. CCXT/QuantConnect/TradingView/AV MCPs medium priority. DeFi/personal finance/Korea MCPs not relevant.
+
+## [2026-06-21] lint | Health check
+
+Pages consulted: 15+ (index.md, trading/index.md, all 8 gap files, hypothesis-log.md, model-landscape-2026.md).
+
+**Issues found:** 13. **Auto-fixed:** 11. **Needs review:** 2.
+
+### Auto-fixed
+
+1. **Index gap**: `trading/algorithms/multi-agent-llm-trading.md` added to main wiki/index.md (Algorithms section, expanded 2026-06-17)
+2. **Index gap**: `trading/algorithms/spx-dispersion-variance.md` added to main wiki/index.md (new 2026-06-19)
+3. **Index gap**: `trading/algorithms/fixed-income-bond-rotation.md` added to main wiki/index.md (new 2026-06-20)
+4. **Index gap**: `trading/paper-trading/risk-controls-and-monitoring.md` added to main wiki/index.md (Paper Trading section, new 2026-06-17)
+5. **Index gap**: `trading/tools/awesome-finance-mcp.md` added to main wiki/index.md (Tools section, new 2026-06-18)
+6. **Index gap**: `trading/research-log/2026-06-17.md` added to main wiki/index.md Research Logs section
+7. **Index gap**: `trading/research-log/2026-06-19.md` added to main wiki/index.md Research Logs section
+8. **Index gap**: `trading/research-log/2026-06-20.md` added to main wiki/index.md Research Logs section
+9. **Index gap**: `trading/research-log/2026-06-17.md` added to trading/index.md Research Log section
+10. **Index gap**: `trading/research-log/2026-06-19.md` added to trading/index.md Research Log section
+11. **Stale content**: Hypothesis Log entry in main wiki/index.md updated: frontier H309 → H320; recent results summarized
+
+### Needs Kevin's review
+
+12. **Duplicate/overlap**: Two `multi-agent-llm-trading.md` files — `trading/algorithms/` (algorithm design view, updated 2026-06-17) and `trading/tools/` (platform listing, added 2026-06-10) — both cover TradingAgents arXiv:2412.20138 with some overlap. Should add cross-references between them, or merge into one page with an algorithms-vs-tools split.
+
+13. **Stale content**: `wiki/ai-industry/model-landscape-2026.md` last updated 2026-05-29. Since then: (a) DeepSeek V4 released April 24 on Huawei Ascend 910C (1.6T param, $3.48/M output tokens); (b) Claude Fable 5 + Mythos 5 export-banned June 12; (c) xAI absorbed into SpaceX → SpaceXAI (Feb 2026). Page needs a major refresh.
+
+New page count: 156 (was 147).

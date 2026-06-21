@@ -1,7 +1,7 @@
 ---
-updated: 2026-06-16
+updated: 2026-06-21
 sources_indexed: 4
-pages: 147
+pages: 156
 ---
 
 # Wiki Index
@@ -48,6 +48,9 @@ When answering a query:
 - [Behavioral Finance Signals](trading/algorithms/behavioral-finance-signals.md) — 52-week high anchoring (H291 NOT CONFIRMED); return seasonality Jul/Nov standout months (H292 CONFIRMED OOS 0.970); disposition effect CGO; lottery stock MAX factor ← new 2026-06-14
 - [Market Timing Overlays](trading/algorithms/market-timing-overlays.md) — VIX term structure (H296 CONFIRMED OOS 1.116); SPY 200d MA (H301 Variant D best, +27.4% Sharpe vs H026); yield curve (H300 NOT CONFIRMED); breadth (H299 NOT CONFIRMED); overlay vs standalone trade-off ← new 2026-06-15
 - [Cryptocurrency Trading Strategies](trading/algorithms/crypto-trading-strategies.md) — cross-sectional momentum Sharpe 1.51 (28d lookback, top-30 universe); BTC 50d MA Sharpe 1.9 vs B&H 1.3; funding carry declining (6.45→negative 2025); Monday effect +0.51%; halving cycle positioning; ccxt/pycoingecko implementation; H302/H303 queued ← new 2026-06-16
+- [Multi-Agent LLM Trading](trading/algorithms/multi-agent-llm-trading.md) — taxonomy: LLM-as-signal vs LLM-as-decision; TradingAgents arXiv:2412.20138 bull/bear debate; HedgeAgents hierarchical authority; Expert Investment Teams dynamic routing; MadEvolve evolutionary; coordination patterns; reliability + hallucination risks; H274 PEAD integration design; cost ~$0.04/stock/day ← expanded 2026-06-17
+- [SPX Dispersion Trading & Variance Risk Premium](trading/algorithms/spx-dispersion-variance.md) — H309 PARTIAL; implied correlation premium 6-18pp historically; DSPX/COR3M signals; vega-neutral construction; Polygon IV integration path; dirty dispersion z1/z2/z3 thresholds ← new 2026-06-19
+- [Fixed Income / Bond ETF Rotation](trading/algorithms/fixed-income-bond-rotation.md) — H045 PRODUCTION 21% portfolio; 13-ETF universe; 3m+6m+12m rank ensemble; OOS Sharpe 1.351, MaxDD -6.3%; carry FAILS (ETF dividends ≠ forward carry); SHY dominates OOS 72% of months; H314/H315 NOT CONFIRMED ← new 2026-06-20
 - [Value Factors](trading/algorithms/value-factors.md) — FCF yield signal (FMP API); COWZ ETF mechanics; H284 CONFIRMED-weak; H286 CONFIRMED Corr(SPY)=0.596; value vs momentum tension; data sources table ← new 2026-06-13
 - [Commodity Trend Following](trading/algorithms/commodity-trend-following.md) — H261/H261b/H262 CTA on GLD/SLV/DBC/USO/DBA; UNG excluded (K-1, contango, mean-reverting); H261b CONFIRMED (OOS Sharpe 0.922, Corr(SPY)=0.218, 2022 +26.7%); H262 QUEUED (Bayesian 3m/6m/12m blend) ← new 2026-06-07
 - [Factor Momentum & Style Rotation](trading/algorithms/factor-momentum-style-rotation.md) — H255 NOT CONFIRMED (factor ETF, Corr(SPY)=0.894, no escape); H256 NOT CONFIRMED (GEM/PACS/GEM+Sector, all underperform SPY OOS); multi-asset fix → H257 ← new 2026-06-06
@@ -75,6 +78,7 @@ When answering a query:
 - [fireworks-tech-graph](tools/fireworks-tech-graph.md) — Claude Code skill for SVG/PNG architecture diagrams from natural language; 8 styles, 14 types, AI/Agent domain built-ins (RAG/Multi-Agent/Tool Call patterns, 40+ product icons); MIT ← new 2026-06-10
 - [claude-code-video-toolkit](tools/claude-code-video-toolkit.md) — AI-native video production; NARRATE→SCORE→GENERATE→COMPOSE→RENDER; ElevenLabs TTS, FLUX, LTX2 video; MIT ← new 2026-06-08
 - [Multi-Agent LLM Trading Systems](trading/tools/multi-agent-llm-trading.md) — TradingAgents (84.9k★); HedgeAgents (Sharpe 2.41 caveated); Reliability Taxonomy (CBS metric); NautilusTrader (23.4k★, Rust); H274 staged ← new 2026-06-10
+- [Awesome Finance MCP](trading/tools/awesome-finance-mcp.md) — curated finance MCP servers; HIGH: Alpaca MCP + FMP MCP; already live: Massive MCP; medium: CCXT/QuantConnect/TradingView/Alpha Vantage MCPs ← new 2026-06-18
 - [QuantMind](trading/tools/quant-mind.md) — LLMQuant paper ingestion; NeurIPS 2025; semantic quant KB; ~$0.09/night ← new 2026-06-10
 - [AI-Trader](trading/tools/ai-trader.md) — HKUDS agent-native social trading; ai4trade.ai; MIT ← new 2026-06-11
 - [ContestTrade](trading/tools/contesttrade.md) — FinStep-AI contest mechanism (arXiv:2508.00554); US V2.0; Apache 2.0 ← new 2026-06-11
@@ -100,7 +104,7 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H309 (frontier: H309 PARTIAL); H301 CONFIRMED (H026+200MA overlay, OOS 1.529 +27.4%); H309 PARTIAL (dispersion trading: VRP+implied corr premium confirmed, Sharpe>2.0 OOS; tail risk; Phase 2 needs Polygon component IV); H307 NOT CONFIRMED (ETF pairs Johansen); production portfolio H041a/H026/H045/IBS
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H320 (frontier: H320 stub); H311 CONFIRMED (multi-asset diversification EW-4 OOS 1.532); H312 PARTIAL (LLM price-volume baseline); H316–H320 stub (LLM pairs, multi-modal PEAD, semantic network, crash filter); H314/H315 NOT CONFIRMED; production portfolio H041a/H026/H045/IBS
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
@@ -110,6 +114,7 @@ When answering a query:
 - [Live Graduation Criteria](trading/paper-trading/live-graduation-criteria.md) — SPRT statistical test for strategy validation; minimum trade counts; regime coverage gates; performance attribution; Alpaca migration steps; graduation status by strategy ← new 2026-05-30
 - [Tax & After-Tax Return Modeling](trading/paper-trading/tax-and-after-tax-returns.md) — short/long-term cap gains, wash-sale rules, tax-loss harvesting, after-tax Sharpe adjustment; strategy-specific tax efficiency rankings ← new 2026-06-05
 - [Execution Quality & Slippage Analysis](trading/paper-trading/execution-quality.md) — fill analysis for paper→live graduation; slippage measurement; OPG vs MARKET comparison ← new 2026-06-11
+- [Risk Controls & Live Trading Monitoring](trading/paper-trading/risk-controls-and-monitoring.md) — 3-tier circuit breakers; kill switch via Alpaca close_all_positions; ATR position sizing; portfolio heat monitoring; correlation guard for PEAD entries; per-strategy risk table ← new 2026-06-17
 
 **Prediction Markets**
 - [Kalshi](trading/prediction-markets/kalshi.md) — primary prediction market platform; CFTC-regulated, economic events, RSA-PSS auth, CPI/NFP strategies live
@@ -155,6 +160,9 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-06-20](trading/research-log/2026-06-20.md) — wiki: fixed-income-bond-rotation.md new (H045 PRODUCTION framework; carry FAILS; SHY dominates 72% OOS); dream cycle: H316 LLM pair selection, H317 multi-modal PEAD, H319 semantic network, H320 crash filter; H314/H315 NOT CONFIRMED
+- [Research Log 2026-06-19](trading/research-log/2026-06-19.md) — wiki: spx-dispersion-variance.md new (H309 PARTIAL; implied corr premium 6-18pp; DSPX/COR3M signals; vega-neutral construction; Polygon IV path)
+- [Research Log 2026-06-17](trading/research-log/2026-06-17.md) — wiki: risk-controls-and-monitoring.md new (3-tier circuit breakers; ATR sizing; correlation guard; kill switch); multi-agent-llm-trading.md (algorithms) expanded
 - [Research Log 2026-06-16](trading/research-log/2026-06-16.md) — nightly: wiki: crypto-trading-strategies.md new (BTC MA Sharpe 1.9, cross-sectional Sharpe 1.51, funding carry declining); H302/H303 queued; dream cycle Phase 2 scan
 - [Research Log 2026-06-15](trading/research-log/2026-06-15.md) — nightly: wiki: market-timing-overlays.md new; H298 NOT CONFIRMED (weekly ETF reversal); H299 NOT CONFIRMED (sector breadth); H300 NOT CONFIRMED (yield curve); H301 CONFIRMED (H026+200MA overlay, OOS 1.529)
 - [Research Log 2026-06-13](trading/research-log/2026-06-13.md) — wiki: value-factors.md new; dream cycle: H293 press-release PEAD, H294 behavioral MLP, TS foundation models staged
