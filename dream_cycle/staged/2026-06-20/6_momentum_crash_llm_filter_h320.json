@@ -1,0 +1,45 @@
+{
+  "proposal_id": "6_momentum_crash_llm_filter_h320",
+  "session_date": "2026-06-20",
+  "apply_status": "pending",
+  "risk_level": "low",
+  "type": "new_hypothesis",
+  "hypothesis_number": "H320",
+  "title": "LightGBM Momentum Crash Filter on 30-Stock Universe",
+  "source": {
+    "paper": "Momentum Crashes Are Optional (If You Let ML Filter Them)",
+    "url": "https://www.edgetools.org/blog/momentum-crashes-optional-ml-filtering",
+    "academic_basis": "Daniel & Moskowitz (2016) momentum crash risk; LightGBM feature importance for regime detection",
+    "date": "2026"
+  },
+  "hypothesis": "A LightGBM model trained on macro + technical features can identify high-crash-risk momentum periods and gate the H198 6-1m momentum signal. EdgeTools blog claims MaxDD reduction from 30% to 13% on a 2-class crash/no-crash classifier. On our 30-stock universe (H198 OOS Sharpe 1.174), a crash filter should preserve upside while reducing the 2022 drawdown.",
+  "features": [
+    "SPY 200d MA relative position (SPY/MA200 - 1)",
+    "VIX level and 20d change",
+    "12-1 momentum portfolio volatility (rolling 20d std)",
+    "Momentum portfolio trailing 6m return (winner minus loser decile spread)",
+    "FRED T10Y3M yield curve slope",
+    "Market cap dispersion (cross-sectional vol of log market cap)"
+  ],
+  "variants": {
+    "A": "H198 baseline (no filter)",
+    "B": "H198 + VIX<25 gate (simple regime)",
+    "C": "H198 + LightGBM crash probability < 0.35 gate",
+    "D": "H198 + LightGBM crash probability continuous scaling (multiply position by 1-P_crash)"
+  },
+  "design": {
+    "is_period": "2013-01-01 to 2020-12-31",
+    "oos_period": "2021-01-01 to 2026-06-20",
+    "gate": "OOS Sharpe > 1.174 (H198 baseline) AND MaxDD improvement > 5pp"
+  },
+  "implementation_notes": [
+    "pip install lightgbm",
+    "Target variable: 1 if H198 monthly return < -5% (momentum crash), 0 otherwise",
+    "Requires out-of-sample prediction only (no train/test contamination) — use 2yr rolling train window",
+    "Expected n_crashes in IS: ~8-12 months with < -5% return"
+  ],
+  "files_to_create": [
+    "backtesting/daily/run_h320.py"
+  ],
+  "related": ["H198", "H279", "H165a"]
+}

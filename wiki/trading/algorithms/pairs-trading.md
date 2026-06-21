@@ -1,7 +1,7 @@
 ---
-updated: 2026-05-15
+updated: 2026-06-21
 type: strategy-guide
-status: PAIRS FAMILY EXHAUSTED (H152–H160 daily; H200 NOT CONFIRMED 2026-05-15)
+status: PAIRS FAMILY EXHAUSTED at statistical cointegration level (H152–H160 daily; H200 NOT CONFIRMED 2026-05-15); LLM SEMANTIC PAIRS new direction active (H316 queued; arXiv:2605.01954 + 2604.19476)
 ---
 
 # ETF Pairs Trading (Statistical Arbitrage)
@@ -341,23 +341,219 @@ H152–H160 tested ETF pairs with manually selected pairs and no constraint on o
 
 Same 30-stock S&P 500 universe as H181/H198 for initial validation. If confirmed, expand to the S&P 500 top-200 by market cap for sufficient pair candidates.
 
-## LLM-Based Pair Selection — New Research Direction (arXiv:2605.01954)
+## LLM-Based Pair Selection — Active Research Direction (2025–2026)
 
-**Paper:** Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading (2025)
-**URL:** https://arxiv.org/abs/2605.01954
+Statistical cointegration is dead at daily frequency for US large-caps (H152–H200, 2018–2026). The new direction is **semantic pairs** — selecting pairs based on fundamental economic relatedness assessed by LLMs rather than statistical price tests. Structural business relationships persist through market regimes even when price cointegration breaks.
 
-**Key distinction from H307 (CLOSED family):**
-- H307 and its predecessors (H152–H160) used statistical cointegration (Johansen, ADF) to select pairs. IS cointegration proved anti-predictive of OOS performance — structural breaks invalidated the statistical relationship.
-- Moira selects pairs using **LLM semantic reasoning** (DeepSeek-V3.2) rather than price-level statistical tests. A pair is formed when the LLM assesses that two companies have fundamental economic relatedness (same supply chain, competing products, shared regulatory regime) — making the relationship structural rather than spurious.
-- The RL component manages the entry/exit timing: high-level policy selects the active pair, low-level policy executes the mean-reversion trade.
+Three complementary 2026 papers define this landscape:
 
-**Architecture:**
-- High-level LLM policy: selects which pair to trade from candidate list
-- Low-level LLM policy: manages position sizing and exit timing
-- Both policies updated via textual feedback (trajectory-level and episode-level) rather than gradient backprop
-- Claims "consistent improvements over traditional and LLM-based baselines" on 2024-2025 real data
+---
 
-**Relevance for H307 closure:**
-The H307 ETF pairs family is closed — cointegration on ETFs is definitively anti-predictive. BUT Moira represents a structurally different approach worth monitoring. If US-market results are published with Sharpe > 1.0, consider designing H313 (LLM semantic pairs on S&P 500 stock pairs, not ETFs).
+### Paper 1: Moira — Hierarchical RL with LLM Policies (arXiv:2605.01954)
 
-**Limitation:** Abstract only; no specific Sharpe ratios or ticker-level results provided as of 2026-06-19. Monitor for v2 or follow-up with metrics.
+**Full title**: "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading"  
+**Submitted**: May 3, 2026  
+**URL**: https://arxiv.org/abs/2605.01954
+
+**Core innovation**: Replaces statistical pair selection AND statistical signal generation with LLM-driven policies at both levels.
+
+**Two-level architecture:**
+- **High-level policy (LLM)**: selects which pair to trade from the candidate universe. Parameterized by LLM — evaluates semantic relatedness of companies (same supply chain, competing products, shared regulatory risk) to form a pair
+- **Low-level policy (LLM)**: manages position sizing and exit timing. Receives spread z-score and company context, outputs position
+
+Both policies updated via **textual feedback** (trajectory-level and episode-level rewards converted to natural language guidance) — not gradient backprop. This allows the policies to reason over why a trade worked or failed.
+
+**Results (from paper HTML)**:
+- Performance improves sharply from K=4+ trajectory update steps — annualized return and Sharpe increase substantially while max drawdown decreases
+- "Semantic selection only" variant (no RL) already achieves positive returns and improved risk-adjusted performance vs traditional baselines
+- Full Moira (semantic selection + RL exit) substantially outperforms the selection-only variant
+
+**Key caveat**: Paper presents results on a single market period (2024-2025 real data). No out-of-sample walkforward across 2018-2023 bear/rate-hike regimes. Monitor for v2 with extended backtest.
+
+**H316 design relevance**: H316 uses Moira's semantic pair selection idea but replaces the RL execution layer with our standard z-score threshold entry/exit (which is already validated). This isolates the novel contribution — LLM semantic pair identification.
+
+---
+
+### Paper 2: Cross-Stock Predictability via LLM-Augmented Semantic Networks (arXiv:2604.19476)
+
+**Full title**: "Cross-Stock Predictability via LLM-Augmented Semantic Networks"  
+**Authors**: Yikuan Huang, Zheqi Fan, Kaiqi Hu, Yifan Ye  
+**Submitted**: April 21, 2026  
+**URL**: https://arxiv.org/abs/2604.19476
+
+**Core innovation**: Two-stage framework for building economically meaningful stock networks:
+1. **Stage 1 — Sparse candidate graph**: build initial edges from 10-K filing embeddings (similar business descriptions → candidate link)
+2. **Stage 2 — LLM edge classification**: LLM assesses each candidate edge — does it reflect a genuine economic relationship (customer/supplier, competitive, regulatory) or spurious text similarity?
+
+This filters out the "same industry, different business model" false positives that plague embedding-only approaches (e.g., McDonald's and a restaurant supply chain ETF both use "food" vocabulary but have different economic dynamics).
+
+**Academic foundation**: Builds on Cohen & Frazzini (2008) customer-supplier momentum and Menzly & Ozbas (2010) industry linkage predictability. The LLM stage classifies edge *type* (asymmetric lead-lag vs symmetric common factor) which determines the trading direction:
+- **Asymmetric link** (supplier leads customer): trade the lead-lag spread
+- **Symmetric link** (common factor): trade the mean-reversion spread
+
+**Relevance to H316/H319**: Provides a richer pair taxonomy than Moira's binary "related/not-related." Asymmetric links → lead-lag (momentum-like); symmetric links → mean-reversion (pairs-like). Could drive two sub-strategies from the same LLM edge classification step.
+
+---
+
+### Paper 3: LLM as Risk Manager — Semantic Filtering for Lead-Lag (arXiv:2602.07048)
+
+**Full title**: "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets"  
+**Submitted**: February 27, 2026  
+**URL**: https://arxiv.org/abs/2602.07048
+
+**Core innovation**: Hybrid two-stage causal screener:
+1. **Statistical stage**: Granger causality identifies candidate leader-follower pairs from time-series
+2. **LLM semantic stage**: LLM re-ranks candidates by assessing whether the proposed direction has a plausible economic transmission mechanism based on event descriptions
+
+**Key insight**: Granger causality frequently produces spurious leads (noise-driven or coincidental). The LLM semantic filter eliminates statistically significant but economically nonsensical leads — acts as a "plausibility gate."
+
+**Result**: Outperforms statistical-only baseline on Kalshi Economics markets (no Sharpe reported, but consistent PnL improvement).
+
+**Applicability to equities**: The same two-stage pipeline — statistical screen → LLM plausibility filter — applies to stock pairs. Use rolling 12-month return Granger causality (or lead-lag correlation) to generate candidates, then LLM rates whether the transmission story makes economic sense (e.g., "AAPL leads SWKS because Apple designs chips that Skyworks manufactures" is plausible; "WMT leads GOOGL" is not).
+
+---
+
+### Python Implementation: LLM Pair Scoring
+
+```python
+from openai import OpenAI
+import pandas as pd
+import json
+
+client = OpenAI()  # uses $OPENAI_API_KEY
+
+PAIR_SCORING_PROMPT = """
+You are assessing whether two companies form a viable pair for statistical arbitrage.
+A viable pair has a STRUCTURAL economic link that persists through market cycles:
+- Same supply chain (one is a major customer/supplier of the other)
+- Direct competitive overlap (>50% of revenue from same product/market)  
+- Same regulatory regime (both revenue-dominated by a single regulator or commodity)
+- Shared key input (both depend on the same critical input: e.g. both aluminum-intensive)
+
+Rate the pair on two dimensions:
+1. LINK_STRENGTH (0-10): strength of fundamental economic link
+2. LINK_TYPE: "CUSTOMER_SUPPLIER" | "COMPETITOR" | "COMMON_INPUT" | "REGULATORY" | "WEAK" | "NONE"
+
+Company A: {ticker_a} — {desc_a}
+Company B: {ticker_b} — {desc_b}
+
+Respond with JSON only: {{"link_strength": X, "link_type": "...", "rationale": "one sentence"}}
+"""
+
+def score_pair(ticker_a: str, desc_a: str, ticker_b: str, desc_b: str) -> dict:
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",  # ~$0.15/1M input tokens — cheapest capable model
+        messages=[{
+            "role": "user",
+            "content": PAIR_SCORING_PROMPT.format(
+                ticker_a=ticker_a, desc_a=desc_a,
+                ticker_b=ticker_b, desc_b=desc_b
+            )
+        }],
+        response_format={"type": "json_object"},
+        temperature=0,
+    )
+    return json.loads(response.choices[0].message.content)
+
+
+def score_universe_pairs(universe: list[tuple[str, str]], min_strength: int = 6) -> pd.DataFrame:
+    """
+    Score all N*(N-1)/2 pairs in universe.
+    universe: list of (ticker, description) tuples
+    Returns DataFrame with eligible pairs (link_strength >= min_strength).
+    """
+    results = []
+    for i, (ta, da) in enumerate(universe):
+        for j, (tb, db) in enumerate(universe):
+            if j <= i:
+                continue
+            score = score_pair(ta, da, tb, db)
+            results.append({
+                "ticker_a": ta, "ticker_b": tb,
+                "link_strength": score["link_strength"],
+                "link_type": score["link_type"],
+                "rationale": score["rationale"],
+            })
+    df = pd.DataFrame(results)
+    return df[df["link_strength"] >= min_strength].sort_values("link_strength", ascending=False)
+```
+
+### Embedding-based Pre-filter (Two-Stage Pipeline)
+
+For large universes (S&P 500 = 124,750 pairs), scoring all pairs with a chat model is prohibitively slow. Use embedding similarity as a fast first-pass filter:
+
+```python
+import numpy as np
+
+def get_embeddings(texts: list[str], model: str = "text-embedding-3-small") -> np.ndarray:
+    response = client.embeddings.create(input=texts, model=model)
+    return np.array([e.embedding for e in response.data])
+
+def build_candidate_pairs(
+    universe: list[tuple[str, str]],
+    top_k: int = 10,  # top-k similar companies per stock
+    min_cos_sim: float = 0.75,
+) -> list[tuple[str, str]]:
+    """
+    Stage 1: embedding cosine similarity → candidate pairs
+    Stage 2 (caller): score candidates with LLM
+    """
+    tickers = [t for t, _ in universe]
+    descs = [d for _, d in universe]
+    
+    embeddings = get_embeddings(descs)  # (N, 1536) for text-embedding-3-small
+    # Normalize to unit vectors
+    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    embeddings_norm = embeddings / norms
+    # Cosine similarity matrix
+    sim_matrix = embeddings_norm @ embeddings_norm.T
+    
+    candidates = []
+    for i in range(len(tickers)):
+        sims = sim_matrix[i].copy()
+        sims[i] = -1  # exclude self
+        top_j = np.argsort(sims)[::-1][:top_k]
+        for j in top_j:
+            if sims[j] >= min_cos_sim and j > i:  # avoid duplicates
+                candidates.append((tickers[i], tickers[j]))
+    return candidates
+```
+
+### Cost Model
+
+| Universe | Pairs | Stage 1 (embeddings) | Stage 2 (LLM scoring) | Total |
+|----------|-------|---------------------|----------------------|-------|
+| 30 stocks | 435 | $0.000006 | $0.07 (gpt-4o-mini) | ~$0.07 |
+| 100 stocks | 4,950 | $0.00007 | ~$0.74 | ~$0.74 |
+| S&P 500 | 124,750 | $0.0018 | ~$19 → pre-filter to ~500 | ~$0.08 |
+
+**Key**: text-embedding-3-small costs $0.02/1M tokens. A 100-word company description = ~150 tokens. 500 companies = ~$0.0015 total for embeddings. The LLM scoring step (gpt-4o-mini at ~$0.15/1M input tokens) dominates — pre-filter to top-10 similarity candidates per stock to reduce from 124,750 → ~2,500 candidate pairs before LLM scoring.
+
+Monthly rescoring for a 100-stock universe: **<$1/month** at gpt-4o-mini rates.
+
+### H316 Design (Moira-inspired, our universe)
+
+**Hypothesis**: LLM semantic pair selection (GPT-4o-rated link_strength ≥ 6) on S&P 500 stocks produces OOS Sharpe > 1.0 using z-score entry/exit execution.
+
+| Design choice | Value | Reason |
+|---------------|-------|--------|
+| Universe | Top 200 S&P 500 by market cap | Sufficient pair candidates, liquid enough for monthly rebalance |
+| Selection | Two-stage: embedding pre-filter → GPT-4o-mini scoring | Reduces cost 50× vs scoring all pairs |
+| Min link_strength | 6/10 | Below this, rationale becomes "they're both large-caps" |
+| Pair limit | Top 15 pairs by link_strength | Controls concentration |
+| Execution | Rolling 60d z-score, entry ±2σ, exit 0.5σ | Validated from H152 parameter search |
+| Hedge ratio | Rolling 120d OLS | Kalman showed too-fast beta decay in our tests |
+| Pair refresh | Monthly (after scoring) | Balances cost vs stale pairs |
+| IS | 2015–2020 | Avoids early-period LLM data issues |
+| OOS | 2021–2026 | Includes COVID recovery, AI boom, rate hike |
+| Gate | OOS Sharpe > 1.0 AND Corr-SPY < 0.35 | Must be both profitable and diversifying |
+
+**Critical validation step** (from BlindTrade arXiv:2603.17692):
+Before running the full backtest, verify the LLM signal is genuine:
+- Test: does anonymized-ticker LLM scoring produce alpha?
+- Control: does random-shuffled link_strength produce ~0 alpha?
+- If both pass: signal is genuine, not memorization of historical ticker performance
+
+**Key structural advantage over H152–H160**: H152 selected pairs by IS correlation/cointegration. IS cointegration was ANTI-predictive of OOS (correlation reversal at structural breaks). Semantic relatedness is durable — AAPL's relationship to AVGO (Apple's chip supplier) doesn't break when yield curves invert. The LLM is selecting on business fundamentals, not price history.
+
+**Status**: QUEUED (H316). Implementation requires ~200 company descriptions (from 10-K Item 1) + OpenAI API calls. First run estimated at $5–10 for the full description pipeline.

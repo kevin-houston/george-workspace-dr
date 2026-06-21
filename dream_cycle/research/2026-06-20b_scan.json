@@ -1,0 +1,111 @@
+{
+  "scan_date": "2026-06-20",
+  "scan_session": "7:30 AM nightly research session (second scan of day)",
+  "scan_angles": [
+    "Pairs trading + LLM semantic networks",
+    "PEAD + earnings NLP upgrades",
+    "Cross-sectional momentum + factor momentum",
+    "Multi-agent LLM trading (June 2026)",
+    "GitHub trending quant finance"
+  ],
+  "phase1_wiki_expansion": {
+    "target": "algorithms/pairs-trading.md",
+    "rationale": "LLM semantic pairs family re-opened with H316 staging; page needed full methodology section for implementation reference",
+    "new_sections": [
+      "Moira (arXiv:2605.01954) — hierarchical RL with LLM policies; annualized return+Sharpe improve from K=4+ updates",
+      "Cross-Stock Predictability via LLM-Augmented Semantic Networks (arXiv:2604.19476) — 2-stage 10-K embedding→LLM edge classification; asymmetric vs symmetric link taxonomy",
+      "LLM as Risk Manager: Semantic Filtering for Lead-Lag (arXiv:2602.07048) — Granger→LLM plausibility filter",
+      "Python implementation: 2-stage pipeline (embedding pre-filter + GPT-4o-mini scoring); cost model",
+      "H316 full design: top-200 S&P 500, link_strength≥6 gate, BlindTrade validation protocol"
+    ],
+    "cost_model": {
+      "text_embedding_3_small": "$0.02/1M tokens",
+      "gpt4o_mini": "~$0.15/1M input tokens",
+      "30_stock_universe": "$0.07/run for all 435 pairs",
+      "100_stock_universe": "$0.74/run for all 4950 pairs",
+      "monthly_rescoring_100_stocks": "<$1"
+    }
+  },
+  "papers": [
+    {
+      "title": "Cross-Stock Predictability via LLM-Augmented Semantic Networks",
+      "arxiv_id": "2604.19476",
+      "url": "https://arxiv.org/abs/2604.19476",
+      "date": "2026-04-21",
+      "authors": "Yikuan Huang, Zheqi Fan, Kaiqi Hu, Yifan Ye",
+      "summary": "Two-stage: sparse candidate graph from 10-K embeddings, then LLM classifies edges by economic type (customer/supplier, competitor, common input). Key distinction: symmetric links → mean-reversion alpha; asymmetric links → lead-lag alpha. Builds on Cohen & Frazzini (2008) customer-supplier momentum.",
+      "angle": "pairs trading + LLM semantic networks",
+      "relevance_score": 9,
+      "hypothesis_connection": ["H316 (queued)", "H319 (newly proposed)"],
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-20/5_cross_stock_semantic_network_h319.json"
+    },
+    {
+      "title": "LLM as a Risk Manager: Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+      "arxiv_id": "2602.07048",
+      "url": "https://arxiv.org/abs/2602.07048",
+      "date": "2026-02-27",
+      "summary": "Hybrid two-stage causal screener: Granger causality identifies candidate leader-follower pairs, LLM re-ranks by plausibility of economic transmission mechanism. Outperforms stat-only baseline on Kalshi Economics markets. Methodology directly applicable to equity lead-lag pairs.",
+      "angle": "pairs trading + LLM semantic networks",
+      "relevance_score": 7,
+      "hypothesis_connection": ["H316 (execution enhancement)", "H319 (asymmetric link trading)"],
+      "staged": false,
+      "note": "Methodology incorporated into pairs-trading.md wiki page; no separate H-number needed (H319 already covers this approach)"
+    },
+    {
+      "title": "Momentum Crashes Are Optional (If You Let ML Filter Them)",
+      "url": "https://www.edgetools.org/blog/momentum-crashes-optional-ml-filtering",
+      "date": "2026",
+      "summary": "LightGBM classifier trained on macro + technical features gates momentum strategy. Reported MaxDD reduction from 30% to 13% on US equity momentum. Feature importance: VIX, momentum portfolio trailing vol, 12-1 spread, 200d MA relative position.",
+      "angle": "cross-sectional momentum + factor",
+      "relevance_score": 7,
+      "hypothesis_connection": ["H198 (confirmed, 6-1m momentum OOS Sharpe 1.174)", "H320 (newly proposed)"],
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-20/6_momentum_crash_llm_filter_h320.json"
+    },
+    {
+      "title": "Macro Economists in the Machine: Multi-Agent LLM for Commodity Portfolio",
+      "arxiv_id": "2606.08283",
+      "url": "https://arxiv.org/abs/2606.08283",
+      "date": "2026-06-06",
+      "summary": "Tests LLMs for commodity portfolio construction with fixed information set and rules. Assesses whether LLM judgment adds value vs. rule-based baseline. June 2026 paper — very fresh.",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": 6,
+      "hypothesis_connection": ["H281 (already queued)", "H045 ETF rotation"],
+      "staged": false,
+      "note": "Already queued as H281. Confirms commodity LLM angle is active research area."
+    },
+    {
+      "title": "PortBench: Correlation-Aware Full-Pipeline Benchmark for LLM-Driven Portfolio Management",
+      "arxiv_id": "2605.27887",
+      "url": "https://arxiv.org/abs/2605.27887",
+      "date": "2026",
+      "summary": "Benchmarks 10 LLM models on portfolio management. Only DeepSeek models benefit from adding full covariance matrix; 7/10 models perform better WITHOUT it. Max-Sharpe objective generally outperforms naive approaches. Key finding: covariance matrix is noise for most LLMs at portfolio construction.",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": 5,
+      "hypothesis_connection": ["H280 (MarketSenseAI queued)", "H209 (AlphaCrafter design)"],
+      "staged": false,
+      "note": "Design implication: when building H280/H209, don't pass full covariance matrix to LLM — use simple risk constraints instead"
+    }
+  ],
+  "github_findings": [
+    {
+      "repo": "PlaceNL2026/best-of-algorithmic-trading",
+      "url": "https://github.com/PlaceNL2026/best-of-algorithmic-trading",
+      "summary": "109 curated algorithmic trading projects, ~310K combined GitHub stars, auto-ranked by activity+quality. Updated Mar 2026. Good discovery resource for new tools.",
+      "relevance_score": 5,
+      "note": "Add to tools/awesome-finance-mcp.md or create best-of-algo-trading.md reference page in a future cycle"
+    }
+  ],
+  "staged_count": 2,
+  "total_findings": 5,
+  "high_relevance": ["2604.19476 (LLM-Augmented Semantic Networks — H319)", "EdgeTools LightGBM crash filter (H320)"],
+  "design_implication": "PortBench finding: skip full covariance matrix for LLMs in H280/H209 portfolio construction — use simple max-pos constraints instead",
+  "next_cycle_priorities": [
+    "Implement H316 (Moira LLM pair selection — need 10-K descriptions for S&P 500 top-100 via EdgarTools)",
+    "Implement H317 (multi-modal PEAD upgrade — FMP/EDGAR fundamental features)",
+    "Implement H319 (LLM semantic network lead-lag)",
+    "Implement H320 (LightGBM momentum crash filter on H198)",
+    "Add PortBench covariance insight to H209/H280 design notes"
+  ]
+}

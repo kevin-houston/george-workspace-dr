@@ -1,0 +1,33 @@
+{
+  "proposal_id": "5_cross_stock_semantic_network_h319",
+  "session_date": "2026-06-20",
+  "apply_status": "pending",
+  "risk_level": "medium",
+  "type": "new_hypothesis",
+  "hypothesis_number": "H319",
+  "title": "LLM-Augmented Cross-Stock Semantic Network for Lead-Lag Trading",
+  "source": {
+    "paper": "Cross-Stock Predictability via LLM-Augmented Semantic Networks",
+    "arxiv": "2604.19476",
+    "authors": "Yikuan Huang, Zheqi Fan, Kaiqi Hu, Yifan Ye",
+    "date": "2026-04-21"
+  },
+  "hypothesis": "A two-stage framework — sparse candidate graph from 10-K embeddings + LLM edge classification by economic link type (CUSTOMER_SUPPLIER / COMPETITOR / COMMON_INPUT) — generates durable stock linkages that predict cross-stock return lead-lag (1-week horizon) better than correlation-based peer networks. Asymmetric links (supplier → customer) capture lead-lag alpha; symmetric links (competitors) generate mean-reversion alpha. Test on top-100 S&P 500 stocks.",
+  "distinction_from_h316": "H316 (Moira) uses LLM for pair selection then trades mean-reversion. H319 distinguishes link TYPE and routes to different strategies: asymmetric→lead-lag momentum, symmetric→pairs mean-reversion. Also uses 10-K filing embeddings (structured), not free-text company descriptions.",
+  "design": {
+    "universe": "Top 100 S&P 500 by market cap",
+    "data": "SEC EDGAR 10-K Item 1 (business description), fetched via EdgarTools",
+    "stage1": "OpenAI text-embedding-3-small embeddings → cosine sim → top-10 candidates per stock",
+    "stage2": "GPT-4o-mini classifies each candidate edge: CUSTOMER_SUPPLIER / COMPETITOR / COMMON_INPUT / NONE + link_direction for asymmetric",
+    "signal_asymmetric": "When supplier stock returns positive in week t, trade customer stock long in week t+1",
+    "signal_symmetric": "Rolling 20d z-score on spread; entry ±1.5σ, exit 0.3σ",
+    "is_period": "2015-01-01 to 2020-12-31",
+    "oos_period": "2021-01-01 to 2026-06-20",
+    "gate": "OOS Sharpe > 1.0 AND Corr-SPY < 0.40 AND WF 0.5-4.0"
+  },
+  "estimated_cost": "$5-15 for 10-K download + LLM scoring of ~500 candidate pairs on 100-stock universe; monthly rescoring <$1",
+  "files_to_create": [
+    "backtesting/daily/run_h319.py"
+  ],
+  "related": ["H316", "H200", "arXiv:2602.07048"]
+}

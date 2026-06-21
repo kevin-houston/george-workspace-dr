@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-20 (fixed-income-bond-rotation.md new; research-log/2026-06-20.md added)
+updated: 2026-06-21 (pairs-trading.md expanded: LLM semantic pairs section; H316 design; Moira+2604.19476+2602.07048; 2-stage pipeline + cost model)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -22,7 +22,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Algorithms](algorithms/) — trading strategy catalog
   - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
   - [Momentum Strategies](algorithms/momentum-strategies.md) ← updated 2026-05-14 (H198 CONFIRMED: 6-1m stock momentum OOS Sharpe 1.174; H217 CONFIRMED: median alpha101 OOS 1.559 — strongest confirmed stock signal; H228 CONFIRMED: H217+H181 blend OOS 1.572)
-  - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-05-15 (ETF pairs EXHAUSTED H152-H160; H200 QUEUED — graphical matching stock-level pairs, arXiv:2403.07998, Sharpe 1.23 on S&P 500 2017–2023)
+  - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-06-21 (ETF+statistical pairs EXHAUSTED H152-H200; LLM SEMANTIC PAIRS new direction — H316 queued; Moira arXiv:2605.01954 HRL+LLM; LLM-Augmented Semantic Networks arXiv:2604.19476; 2-stage embedding+GPT-4o pipeline; $0.07/run for 30-stock universe; link_strength≥6 filter)
   - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)
   - [Short-Term Reversal](algorithms/short-term-reversal.md) ← new 2026-05-07 (industry-adjusted reversal 0.53%/month globally; SSRN:6630998; H181 queued)
   - [Options Income Strategies](algorithms/options-income-strategies.md) ← updated 2026-05-21 (+ debit spreads: bull call/bear put setup, IV/DTE criteria, management rules, earnings play guidance; iron condor adjustment/rolling mechanics: untested-side roll, tested-side roll, BWB conversion; earnings straddle IV-expansion trade; paper trade annotations WMT/DLTR/SPY)
