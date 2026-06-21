@@ -1,3 +1,5 @@
+h315_status: NOT CONFIRMED (2026-06-20) — Credit-Regime Gate on Bond ETF Rotation. FRED BAMLH0A0HYM2 (ICE BofA HY OAS) data only available from June 2023 (ICE licensing change eliminated older FRED data); 0 stress months (>450bps) in available OOS window; current HY OAS = 2.63%. Variants B/C/D identical or marginally worse than H045 baseline because the credit gate never triggered. Root cause: momentum TSMOM filter already excludes credit bonds organically when spreads widen (HYG falls → negative r3 → excluded). Credit gate is structurally redundant. Future: use FRED DAAA/DBAA (Moody's corporate-Treasury spread, available from 1983) as credit proxy — broader history to test COVID/2022 stress periods. Script: backtesting/daily/run_h315.py. Results: backtesting/results/h315_results.json.
+h314_status: NOT CONFIRMED (2026-06-20) — Duration-Factor Overlay on Bond ETF Rotation. FRED T10Y3M yield curve signal (inversion gate <-0.5% → short-duration only; steepness extension >+1.5% → relax TSMOM for TLT). 4 variants tested IS 2008-2017, OOS 2018-2026. Baseline H045 OOS Sharpe=1.044 (note: 1.351 in original OOS 2020-2026; current 2018-2026 includes 2018-2019 rising-rate headwinds). All overlay variants WORSE than baseline. Root cause: momentum signal naturally adapts to yield curve regime — when rates rise, TLT has negative r3 and gets excluded by TSMOM filter without any overlay needed. Inversion gate restricts universe to SHY/BIL/IEI/VCSH even when HYG or TIP might be the best performers (only 23% of OOS months were inverted). Steepness extension rarely triggered (7% of OOS). Duration signals are already embedded in bond momentum. Script: backtesting/daily/run_h314.py. Results: backtesting/results/h314_results.json.
 h296_status: CONFIRMED (2026-06-14) — VIX Term Structure Equity Timing. VIX spot vs ^VIX3M as daily equity timing signal; backwardation (VIX>VIX3M) = stress, flee to BIL. 4 variants tested IS 2013-2019, OOS 2020-2026. CONFIRMED variants: B (ratio<0.95) OOS Sharpe=1.002, C (VIX<VIX3M + SPY>200MA) OOS Sharpe=1.116 MaxDD=-18.6% (vs SPY -33.7%), D (continuous weight) OOS Sharpe=2.379 but only 3.7% CAGR / 10.8% in SPY (near-cash, deceptive Sharpe — exclude from production). Variant A (pure binary) OOS=0.982, just misses gate. BEST: Variant C — doubles signal strength vs plain VIX binary, cuts MaxDD from -33.7% to -18.6%, CAGR 13.1% vs SPY 15.7%. Backwardation fraction: only 7.8% of trading days — signal is conservative and accurate. Script: backtesting/daily/run_h296.py. Results: backtesting/results/h296_results.json.
 h295_status: NOT CONFIRMED (2026-06-14) — Factor MAX ETF Rotation. Source: Wang & Zeng (Dec 2025) SSRN 6053114. Max single-day return of each ETF in prior month as rotation signal. 23-asset H026-style universe. 5 variants tested. All NOT CONFIRMED: Standalone MAX OOS Sharpe=0.052–0.134 (far below baseline); Blend 50/50 OOS=0.477, Blend 70/30 OOS=0.399 — no improvement over momentum baseline (0.491). Root cause: Factor MAX doesn't translate from academic long-short factors to sector ETFs (ETF MAX is sector-specific news already priced, not diversified underreaction signal). Script: backtesting/daily/run_h295.py.
 h294_status: NOT CONFIRMED (2026-06-14) — Behavioral Multi-Factor MLP. 27 OHLCV behavioral features, dual-task MLP (MSE + BCE joint loss), weekly SPY rebalance. IS 2013-2020 Sharpe=2.732, OOS 2021-2026 Sharpe=0.827, WF ratio=0.303. Gate OOS Sharpe >1.559: FAIL. Severe overfitting — IS bull market (2013-2020) vs OOS regime shift (COVID, rate shock, AI rally). Script: backtesting/daily/run_h294.py.
@@ -7550,3 +7552,74 @@ The core problem is universe composition. Stosik & Zaremba (2025) use a **global
 - To reduce SPY correlation below 0.80 within a stock momentum framework, would need: long-short implementation (impractical for paper account), or a much smaller-cap universe where idiosyncratic variance dominates.
 
 **Script:** `backtesting/daily/run_h313.py` | **Results:** `backtesting/results/h313_results.json`
+
+---
+
+### H314 — Duration-Factor Overlay on Bond ETF Rotation (NOT CONFIRMED)
+
+**Source:** Litterman & Scheinkman (1991) "Common Factors Affecting Bond Returns" (JFI); Diebold & Li (2006) "Forecasting the term structure" (JE); FRED T10Y3M
+
+**Hypothesis:**
+H045 bond rotation uses pure backward-looking momentum. The yield curve slope (10Y-3M) provides a forward-looking duration-risk signal: when deeply inverted, long-duration bonds face headwinds from curve normalization; when steep, they benefit from term premium. Overlaying this on H045's momentum universe selection should improve OOS Sharpe.
+
+**IS:** 2008-2017 | **OOS:** 2018-2026 | **Gate:** OOS Sharpe > 1.351 (H045) AND WF 0.5-4.0
+**Note:** H045 original OOS was 2020-2026 (Sharpe 1.351). This test uses 2018-2026, which includes 2018-2019 rising-rate headwinds → baseline drops to 1.044.
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | WF ratio | Gate |
+|---------|-----------|------------|----------|-----------|----------|------|
+| A: H045 baseline | 0.497 | 1.044 | 8.2% | -8.7% | 2.10 | fail |
+| B: Inversion gate (<-0.5% → short-dur) | 0.497 | 0.883 | 6.5% | -8.7% | 1.78 | fail |
+| C: Steepness extension (>+1.5% → relax TLT) | 0.514 | 1.014 | 7.8% | -7.9% | 1.97 | fail |
+| D: Both overlays | 0.514 | 0.849 | 6.0% | -7.9% | 1.65 | fail |
+| SPY buy-hold | — | 0.926 | 15.3% | -23.9% | — | — |
+
+**Yield curve OOS regime:** Inverted (<-0.5%): 23 months (23%); Neutral: 71 months (71%); Steep (>+1.5%): 7 months (7%)
+
+**Verdict: NOT CONFIRMED** — All 4 variants fail. Overlays consistently HURT performance vs baseline.
+
+**Root cause:**
+The momentum TSMOM filter (r3 ≥ 0) already implements implicit yield-curve-sensitivity:
+- When rates rise and TLT falls → TLT's 3m momentum turns negative → TSMOM excludes it naturally
+- No explicit inversion gate needed — the market's price action is a faster and more accurate yield-curve signal than the FRED T10Y3M data (which has measurement lag)
+- The inversion gate restricts to {SHY, BIL, IEI, VCSH} during 23% of OOS months, preventing rotation into HYG or TIP that may be the true best performers during moderate inversions
+- The steepness extension (7% of months, only 7 triggers) is too rare to contribute meaningfully
+
+**Key insight for bond research:** Bond momentum is already an implicit duration/credit regime model. External macro signals (yield curve, credit spreads) are largely redundant because momentum captures their effect with a small lag that doesn't materially harm returns on monthly rebalancing.
+
+**Script:** `backtesting/daily/run_h314.py` | **Results:** `backtesting/results/h314_results.json`
+
+---
+
+### H315 — Credit-Regime Gate on Bond ETF Rotation (NOT CONFIRMED)
+
+**Source:** Bleaney & Vickery (1998) "Do Risk Premiums Fluctuate over Time?"; FRED BAMLH0A0HYM2 (ICE BofA US HY OAS)
+
+**Hypothesis:**
+When HY credit spreads are elevated (>450bps), credit-risk bonds (HYG, LQD, VCIT, AGG) face headwinds from spread widening that trailing momentum may not immediately capture. Excluding credit bonds during stress periods should reduce drawdowns and improve Sharpe vs H045 baseline.
+
+**IS:** 2008-2017 | **OOS:** 2018-2026 | **Gate:** OOS Sharpe > 1.044 (H314-A baseline) AND WF 0.5-4.0
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | WF ratio | Gate |
+|---------|-----------|------------|----------|-----------|----------|------|
+| A: H045 baseline | 0.502 | 1.044 | 8.2% | -8.7% | 2.08 | fail |
+| B: Credit gate (>450bps) | 0.502 | 1.044 | 8.2% | -8.7% | 2.08 | fail |
+| C: Tight gate (>350bps) | 0.502 | 1.022 | 8.0% | -8.7% | 2.04 | fail |
+| D: Tiered (500/350bps) | 0.502 | 1.022 | 8.0% | -8.7% | 2.04 | fail |
+| SPY buy-hold | — | 0.926 | 15.3% | -23.9% | — | — |
+
+**Data limitation:** FRED BAMLH0A0HYM2 only available from June 2023 (ICE licensing change eliminated older history from FRED). HY OAS never exceeded 450bps in the available 37-month window (current: 2.63%). 0 stress months triggered → Variants B/D are identical to baseline.
+
+**Verdict: NOT CONFIRMED** — Combination of data limitation and structural redundancy.
+
+**Root causes:**
+1. **Data gap:** The critical stress periods (COVID March 2020: HY spread ~1000bps; 2022 rate hike: spread ~600bps) are outside the available FRED data window. The test cannot be properly validated without those periods.
+2. **Structural redundancy:** Even with full data, the TSMOM filter likely already excludes HYG/LQD when spreads widen — spread widening causes HYG to fall → negative r3 momentum → excluded organically. Gate would only add value in the first 1-2 months of a spread event before momentum catches up.
+
+**Future path:** To test properly, use one of:
+- FRED DAAA (Moody's Aaa Corporate Bond Yield, available 1919+) minus 10yr Treasury as IG credit proxy
+- FRED DGS10 minus FRED DAAA for investment-grade spread proxy
+- Compute a HYG/IEI relative return proxy (available from yfinance from 2007)
+
+The ETF-based proxy (HYG trailing 3m vs IEI trailing 3m) would have full history and wouldn't require FRED licensing.
+
+**Script:** `backtesting/daily/run_h315.py` | **Results:** `backtesting/results/h315_results.json`

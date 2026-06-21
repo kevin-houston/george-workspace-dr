@@ -41,7 +41,7 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 
 **Gotchas:**
 - `ffmpeg` is NOT installed and never will be. Python MP3 concat fallback is built into the script. The `⚠️ ffmpeg not available` warning is expected — not a failure.
-- Must install `edge-tts` first: `python3.11 -m pip install edge-tts --break-system-packages -q`.
+- **edge-tts install requires CA bundle when OneCLI proxy is active.** Bare `pip install edge-tts` fails with SSL cert error. Fix: `SSL_CERT_FILE=/tmp/onecli-combined-ca.pem REQUESTS_CA_BUNDLE=/tmp/onecli-combined-ca.pem /usr/bin/python3.11 -m pip install edge-tts --break-system-packages -q`. Same env vars needed when running the script itself.
 - Use `/usr/bin/python3.11` explicitly — bare `python3` may resolve to a different version without `edge-tts`.
 - Email auth flows through OneCLI proxy. If 401/403, run `/onecli-gateway` — do not ask Kevin for credentials.
 - Script finds today's markdown by date pattern. If the 6 AM script task ran late and the file was just written, give it a moment then retry.

@@ -1,0 +1,112 @@
+{
+  "hypothesis": "H315",
+  "title": "Credit-Regime Gate on Bond ETF Rotation",
+  "universe": [
+    "SHY",
+    "IEI",
+    "IEF",
+    "TLT",
+    "BIL",
+    "HYG",
+    "LQD",
+    "VCIT",
+    "VCSH",
+    "VMBS",
+    "TIP",
+    "GLD",
+    "AGG"
+  ],
+  "credit_bonds": [
+    "HYG",
+    "LQD",
+    "VCIT",
+    "AGG"
+  ],
+  "is_period": "2008-01-01 to 2017-12-31",
+  "oos_period": "2018-01-01 to 2026-06-20",
+  "gate": "OOS Sharpe > 1.044 AND WF in [0.5,4.0]",
+  "confirmed": false,
+  "best_oos_sharpe": 1.044,
+  "best_variant": "A: H045 baseline",
+  "spy_oos": {
+    "sharpe": 0.926,
+    "cagr": 0.1534,
+    "maxdd": -0.2393,
+    "neg_yrs": 2,
+    "n": 101
+  },
+  "variants": {
+    "A: H045 baseline": {
+      "is": {
+        "sharpe": 0.502,
+        "cagr": 0.0431,
+        "maxdd": -0.1343,
+        "neg_yrs": 4,
+        "n": 120
+      },
+      "oos": {
+        "sharpe": 1.044,
+        "cagr": 0.082,
+        "maxdd": -0.087,
+        "neg_yrs": 3,
+        "n": 101
+      },
+      "wf_ratio": 2.08,
+      "gate": "fail"
+    },
+    "B: Credit gate >450bps": {
+      "is": {
+        "sharpe": 0.502,
+        "cagr": 0.0431,
+        "maxdd": -0.1343,
+        "neg_yrs": 4,
+        "n": 120
+      },
+      "oos": {
+        "sharpe": 1.044,
+        "cagr": 0.082,
+        "maxdd": -0.087,
+        "neg_yrs": 3,
+        "n": 101
+      },
+      "wf_ratio": 2.08,
+      "gate": "fail"
+    },
+    "C: Tight gate >350bps": {
+      "is": {
+        "sharpe": 0.502,
+        "cagr": 0.0431,
+        "maxdd": -0.1343,
+        "neg_yrs": 4,
+        "n": 120
+      },
+      "oos": {
+        "sharpe": 1.022,
+        "cagr": 0.08,
+        "maxdd": -0.087,
+        "neg_yrs": 3,
+        "n": 101
+      },
+      "wf_ratio": 2.036,
+      "gate": "fail"
+    },
+    "D: Tiered (500/350bps)": {
+      "is": {
+        "sharpe": 0.502,
+        "cagr": 0.0431,
+        "maxdd": -0.1343,
+        "neg_yrs": 4,
+        "n": 120
+      },
+      "oos": {
+        "sharpe": 1.022,
+        "cagr": 0.08,
+        "maxdd": -0.087,
+        "neg_yrs": 3,
+        "n": 101
+      },
+      "wf_ratio": 2.036,
+      "gate": "fail"
+    }
+  }
+}
