@@ -419,3 +419,19 @@ Pages consulted: 15+ (index.md, trading/index.md, all 8 gap files, hypothesis-lo
 13. **Stale content**: `wiki/ai-industry/model-landscape-2026.md` last updated 2026-05-29. Since then: (a) DeepSeek V4 released April 24 on Huawei Ascend 910C (1.6T param, $3.48/M output tokens); (b) Claude Fable 5 + Mythos 5 export-banned June 12; (c) xAI absorbed into SpaceX → SpaceXAI (Feb 2026). Page needs a major refresh.
 
 New page count: 156 (was 147).
+
+## [2026-06-21] merge | Multi-Agent LLM Trading pages consolidated
+
+Merged `trading/tools/multi-agent-llm-trading.md` (added 2026-06-10) into `trading/algorithms/multi-agent-llm-trading.md` (expanded 2026-06-17). The tools/ version had unique content: Agent Market Arena section, CBS reliability code, NautilusTrader comparison table, design principles (when to use / not use), cost model, key papers summary table, StockBench, FinRL-Trading & Lumibot, Self-Driving Portfolio. The algorithms/ version had unique content: taxonomy table, MadEvolve section, coordination patterns table, H274 implementation detail. All content preserved in the merged algorithms/ file. tools/ file deleted.
+
+Updated references: trading/index.md (removed tools/ entry, updated algorithms/ description); main wiki/index.md (removed tools/ entry, updated algorithms/ description). Page count unchanged from lint pass.
+
+## [2026-06-21] update | AI Model Landscape 2026 refreshed
+
+Updated `wiki/ai-industry/model-landscape-2026.md` (was last edited 2026-05-29). Changes:
+- DeepSeek section: V3.2 → V4 (released April 24, 2026); 1.6T params MoE; open-source; trained on Huawei Ascend 910C; V4-Pro $3.48/M, V4-Flash $0.28/M; CFR "best available open-source option"; IP theft allegations
+- Anthropic section: added Fable 5 + Mythos 5 export ban (June 12, Day 9 unresolved); single-provider risk note; Claude Code 63% developer adoption
+- xAI section: renamed to SpaceXAI; xAI absorbed Feb 2026; Cursor $60B acquisition filed June 16, Q3 2026 target
+- Added new "Geopolitical & Regulatory Context" section: export controls on deployed models (unprecedented), Ascend 910C milestone, feedback loop analysis, multi-provider hygiene recommendation
+- Updated pricing table and model table to reflect V4
+- Updated wiki/index.md entry description

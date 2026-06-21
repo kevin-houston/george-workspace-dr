@@ -1,12 +1,15 @@
 ---
-updated: 2026-06-17
+added: 2026-06-10
+updated: 2026-06-21
+category: algorithms
+status: active research area — important reliability caveats
 ---
 
 # Multi-Agent LLM Trading
 
-Research and synthesis on multi-agent Large Language Model architectures applied to trading strategy development and execution.
+Research and synthesis on multi-agent LLM architectures for trading: frameworks, coordination patterns, reliability caveats, production design lessons, and hypothesis integration.
 
-**Related pages**: [Crypto Trading Strategies](crypto-trading-strategies.md) | [Market Timing Overlays](market-timing-overlays.md) | [Backtesting Design Principles](../backtesting/design-principles.md) | [PEAD Strategy](../strategies/pead.md)
+**Related pages**: [NLP & Alternative Data](../tools/nlp-alternative-data.md) | [Machine Learning for Trading](../tools/ml-for-trading.md) | [Event-Driven Strategies](event-driven.md) | [Shared Evaluation Checklist](../shared-eval-checklist.md)
 
 ---
 
@@ -19,19 +22,38 @@ Two fundamentally different roles for LLMs:
 | **Signal generator** | Converts unstructured text (8-K, earnings call) to numeric signal; downstream quantitative system makes decisions | Hallucination is bounded; signal validated by backtest |
 | **Decision maker** | LLM directly decides position size, entry/exit, portfolio construction | Hallucination has direct P&L impact; hard to backtest reliably |
 
-**Production preference**: signal generator role. H163/H174 (FinBERT on 8-K) is a confirmed example — LLM produces a sentiment score, a fixed threshold rule makes the trade. H274 (multi-agent PEAD debate) extends this: agents debate, but a score still gates entry.
+**Production preference**: signal generator role. H163/H174 (FinBERT on 8-K) is the confirmed example — LLM produces a sentiment score, a fixed threshold rule makes the trade. H274 (multi-agent PEAD debate) extends this: agents debate, but a score still gates entry.
 
 ---
 
-## TradingAgents — Multi-Agent Framework (arXiv:2412.20138, 2024)
+## Overview & State of the Field (2026)
 
-**Stars:** ~84,900 (GitHub: TauricResearch/TradingAgents)
+Multi-agent LLM trading systems decompose investment analysis across specialized agents that debate and synthesize findings before a portfolio decision is made. The pattern mirrors institutional trading firms: fundamental analysts, sentiment analysts, technical analysts, risk managers, and traders with distinct mandates.
 
-**Architecture:**
-- Specialized analyst agents: fundamentals, sentiment, technicals, macro
-- Bull/bear debater agents that argue opposite sides of each trade
-- Risk manager agent with position-sizing and stop-loss authority
-- Portfolio manager agent synthesizes debate + risk output into final order
+**Key architectural insight (arXiv:2510.11695, Agent Market Arena):** "Agent frameworks display markedly distinct behavioral patterns, spanning from aggressive risk-taking to conservative decision-making, whereas model backbones contribute less to outcome variation." The framework design matters more than which LLM (GPT-4 vs Sonnet) powers it.
+
+**Critical reliability issue (arXiv:2603.27539):** A March 2026 taxonomy paper identifies five evaluation failures that "can reverse the sign of reported returns":
+1. Look-ahead bias — future information leaked into signals
+2. Survivorship bias — only winning systems analyzed
+3. Backtesting overfitting — excessive historical tuning
+4. Transaction cost neglect — fees erode reported alpha
+5. Regime-shift blindness — strategy works in one market regime only
+
+Apply the [shared evaluation checklist](../shared-eval-checklist.md) to ALL multi-agent papers before treating results as credible.
+
+---
+
+## Major Frameworks
+
+### TradingAgents (arXiv:2412.20138)
+
+**GitHub**: https://github.com/TauricResearch/TradingAgents | **Stars**: ~84,900 | **License**: Apache-2.0
+
+**Agent roles:**
+- Fundamental, Sentiment, Technical Analysts (parallel, specialized)
+- Bull & Bear Researchers — debate contradictory positions
+- Risk Management Team — portfolio exposure monitoring
+- Portfolio Manager — synthesizes debate + risk into final order
 
 **Signal flow:**
 ```
@@ -44,83 +66,83 @@ Market data → Analyst agents (parallel)
              Portfolio Manager → Order
 ```
 
-**Results (paper, S&P 500 stocks 2024):**
-- +15–30% cumulative returns vs buy-and-hold over 6-month evaluation
-- Debate pattern reduces single-model overconfidence substantially
-- GPT-4o > GPT-4 > GPT-3.5-turbo; model quality gates outcome
+**Results (paper, S&P 500 2024):** +15–30% cumulative vs buy-and-hold over 6 months. Debate reduces single-model overconfidence. GPT-4o > GPT-4 > GPT-3.5-turbo.
 
-**Limitations (paper-reported):**
-- Evaluation window only 6 months — insufficient for full market cycle
-- Transaction costs modeled at 0; live slippage would compress returns
-- Prompt sensitivity: small wording changes alter decisions
-- No OOS Sharpe > 1.0 benchmark; not production-ready as standalone
+**Limitations:** 6-month eval window insufficient; 0% transaction costs; prompt sensitivity (small wording changes alter decisions ~30% of the time); no OOS Sharpe > 1.0 benchmark.
 
-**Relevance to this project:**
-- Architecture directly informs H274 (multi-agent PEAD debate)
-- Debater pattern: use for screening 8-K candidates before FinBERT scoring
-- Code: MIT license, pip installable (`pip install tradingagents`)
+**Data sources:** Yahoo Finance (US, HK, Tokyo, London, India, Canada, A-shares, crypto), StockTwits, Reddit, MACD/RSI. Supported LLM providers: OpenAI, Anthropic, Google, xAI, DeepSeek, Qwen, GLM, MiniMax, OpenRouter.
 
----
+```python
+from tradingagents.graph.trading_graph import TradingAgentsGraph
 
-## HedgeAgents — Hedge Fund Simulation (arXiv:2502.13165, 2025)
+ta = TradingAgentsGraph(debug=False, llm_provider="openai",
+                        deep_think_llm="gpt-4o", quick_think_llm="gpt-4o-mini",
+                        max_debate_rounds=2, online_tools=False)
+_, decision = ta.propagate("NVDA", "2026-06-21")
+# {"action": "BUY|SELL|HOLD", "confidence": 0.73, "rationale": "..."}
+```
 
-**Architecture:** Simulates a hedge fund with C-suite + analyst hierarchy:
-- CEO agent sets mandate and risk budget
-- Sector analysts (technology, financials, healthcare, energy) generate per-sector alpha signals
-- Risk officer enforces portfolio constraints
-- Compliance agent checks regulatory limits (position concentration, restricted lists)
-
-**Key finding:** Hierarchical authority structure outperforms flat peer-agent voting:
-- CEO veto power prevents "groupthink" consensus that ignores tail risk
-- Compliance agent catches 23% of trades that would breach simulated risk limits
-
-**Coordination protocol:** Structured JSON memos passed between agents; strict turn order prevents circular dependencies.
-
-**Why it matters here:** Risk management delegation (H249 regime-conditional weights) maps well to this architecture. A "risk officer" agent could dynamically adjust H249 regime weights based on real-time VIX + breadth signals rather than static monthly rebalance.
+**Relevance:** Architecture directly informs H274. Debater pattern: use for screening 8-K candidates before FinBERT scoring.
 
 ---
 
-## Expert Investment Teams (arXiv:2602.23330, 2025)
+### HedgeAgents (arXiv:2502.13165)
 
-**Paradigm:** Assemble specialist agents dynamically based on the *type* of instrument or market condition — a "team composition" layer sits above individual agents.
+**Paper**: "HedgeAgents: A Balanced-aware Multi-agent Financial Trading System" (Feb 2026)
 
-**Innovation:**
-- Routing module selects which agents to activate for each decision
-- E.g., earnings-day → FinBERT + macro agent; normal day → technical + momentum only
-- Reduces token cost ~40% vs always-on full panel
+**Architecture**: Fund manager (Otto) + 3 specialist experts + 23 financial tools + 3 memory categories.
 
-**Results:** +8.7% annualized alpha vs S&P 500 (2022–2024 backtest, 50-stock universe)
+| Agent | Domain | Key tools |
+|-------|--------|-----------|
+| Dave | Bitcoin/crypto | 60 technical indicators |
+| Bob | Dow Jones/equities | Fundamental + price action |
+| Emily | Forex | Currency analysis, macro factors |
+| Otto | Fund manager | Budget allocation, portfolio coordination |
 
-**Relevance:** Dynamic routing = natural complement to H174/H163 PEAD. On earnings events, activate NLP agents; on non-earnings days, fall back to momentum signals. Staged as H274 extension.
+**Coordination:** Budget Allocation Conference (every 30 days), Experience Sharing Conference, Extreme Market Conference (triggered on >5%/day moves).
+
+**Reported performance (2021–2023):** Sharpe 2.41 / MaxDD 14.21% vs FinGPT baseline Sharpe 1.93.
+
+**Critical caveat:** Test period includes 2021 crypto bubble. $15 total LLM cost over 3 years is implausibly low. Single test window — fails regime coverage check. **Do not trust numeric claims; use for architecture reference only.**
 
 ---
 
-## MadEvolve — Evolutionary Optimization (arXiv:2605.23007, 2025)
+### Expert Investment Teams (arXiv:2602.23330)
+
+**Paper**: "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks" (Feb 26, 2026) — Miyazaki, Kawahara, Roberts, Zohren (Oxford + Kyoto)
+
+**Key innovation**: Fine-grained task decomposition vs. abstract "be an analyst" instructions — exact sub-tasks (extract revenue trend, compare vs consensus, flag narrative/numbers divergence) rather than role mimicry.
+
+**Main finding:** Fine-grained decomposition "substantially enhanced risk-adjusted returns" vs. coarse-grained roles. **Leakage-controlled backtesting** (timestamp-locked information access) — a rare rigor standard. +8.7% annualized alpha vs S&P 500 (2022–2024 backtest, 50-stock).
+
+**Relevance:** Dynamic routing complement to H174/H163 PEAD — on earnings events, activate NLP agents; on non-earnings days, fall back to momentum signals. Template for H274 upgrade.
+
+---
+
+### Agent Market Arena (arXiv:2510.11695)
+
+**Paper**: "When Agents Trade: Live Multi-Market Trading Benchmark for LLM Agents" (Oct 2025)
+
+First lifelong real-time benchmark across multiple markets. Four architectures (InvestorAgent, TradeAgent, HedgeFundAgent, DeepFundAgent) × five LLMs (GPT-4o, GPT-4.1, Claude-3.5-Haiku, Claude-Sonnet-4, Gemini-2.0-Flash).
+
+**Key finding:** Framework architecture (conservative vs. aggressive) drives more behavioral variation than which LLM backend is used. DeepFundAgent (memory-based reasoning) shows distinct regime behavior. Validates that system design > model selection.
+
+---
+
+### MadEvolve — Evolutionary Optimization (arXiv:2605.23007, 2025)
 
 **Paradigm:** Island-model genetic algorithm with LLM agents as mutation/crossover operators.
 
-**How it works:**
-1. Initialize population of trading strategy parameter sets (lookbacks, thresholds, position sizing)
-2. Split into isolated "islands"; each island runs LLM-guided evolution independently
+1. Initialize population of strategy parameter sets
+2. Split into isolated "islands"; each runs LLM-guided evolution independently
 3. Periodic migration: share best strategies across islands to prevent local optima
-4. Fitness function: Sharpe ratio on IS window; OOS validation before acceptance
+4. Fitness function: Sharpe on IS window; OOS validation before acceptance
 
-**Results (BTC futures, 2020–2024):**
-- Outperforms baseline momentum and buy-and-hold on Sharpe and MaxDD
-- Island migration critical: single-population LLM evolution converges prematurely
-- GPT-4-class models significantly outperform GPT-3.5 as mutation operators
+**Results (BTC futures 2020–2024):** Outperforms baseline momentum on Sharpe and MaxDD. Island migration critical — single-population evolution converges prematurely. GPT-4-class significantly outperforms GPT-3.5 as mutation operator.
 
-**Key distinction from debater architectures:**
-- No consensus or voting — pure evolutionary pressure selects strategies
-- LLM role: generate strategy variants (code mutations), not market analysis
-- Can evolve *any* parameterized strategy, not just sentiment-driven ones
+**Key distinction:** No consensus/voting — pure evolutionary pressure. LLM role is generating strategy variants (code mutations), not market analysis. Can evolve any parameterized strategy.
 
-**Relevance to production pipeline:**
-- Could auto-optimize H302 (BTC MA lookback) or H303 (crypto momentum lookback/hold period)
-- Crypto-native: BTC futures evaluation aligns with Kraken paper account
-- No immediate production path — file as future research direction
-
-**Code:** Not open-sourced in paper; island model implementable with LangChain + DEAP library
+**Relevance:** Could auto-optimize H302/H303 crypto lookbacks. No immediate production path — future research direction.
 
 ---
 
@@ -132,88 +154,174 @@ Market data → Analyst agents (parallel)
 | **Hierarchical authority** | HedgeAgents | Clear accountability; risk control | CEO agent can be wrong too |
 | **Dynamic routing** | Expert Investment Teams | Token-efficient; context-aware | Routing layer adds latency |
 | **Evolutionary** | MadEvolve | No bias; explores novel params | Slow convergence; large eval budget |
+| **Diversity ensemble** | Self-Driving Portfolio | Each agent uses different methodology | Meta-agent weighting adds complexity |
 | **Fixed scorer** | H163/H174 FinBERT | Backtestable; bounded hallucination | No context adaptation |
 
 ---
 
-## Reliability Considerations
+## Reliability Taxonomy (arXiv:2603.27539)
 
-**Hallucination in trading context:**
-- Factual errors (wrong ticker, wrong price) → direct loss if LLM is decision-maker
-- Reasoning errors (inverted logic) → systematic bias if LLM drives signal
-- Mitigation: treat LLM output as *one input to a quant model*, not final decision
+**Paper**: "Toward Reliable Evaluation of LLM-Based Financial Multi-Agent Systems" (Mar 2026)
 
-**Prompt sensitivity:**
-- Multiple papers report >10% decision variance from rephrasing the same context
-- TradingAgents tested: "Is NVDA a buy?" vs "Should we enter NVDA?" → different answer 30% of the time
-- Mitigation: structured JSON output schemas + temperature=0 + chain-of-thought
+### Four-Dimensional Taxonomy
 
-**Cost model (GPT-4o, 2025 pricing):**
-- TradingAgents full panel: ~8,000 tokens/decision × $5/M = ~$0.04/stock/day
-- 50-stock daily scan: ~$2/day, ~$500/year — manageable
-- MadEvolve island evolution: ~$50–200/optimization run — use sparingly
+| Dimension | Key questions |
+|-----------|---------------|
+| Architecture | Role decomposition, hierarchy, task granularity |
+| Coordination | Protocol type, information flow, conflict resolution |
+| Memory | Short-term context, long-term episodic, experience replay |
+| Tool integration | Data sources, execution APIs, risk controls |
+
+### Coordination Primacy Hypothesis (CPH)
+
+"Inter-agent coordination protocol design drives trading performance more than model scaling alone." Supported by Agent Market Arena findings — framework design > LLM backbone.
+
+### Coordination Breakeven Spread (CBS)
+
+```python
+def coordination_breakeven_spread(alpha_vs_single_agent, coordination_cost_per_trade,
+                                  avg_trade_size, n_trades_per_year):
+    total_extra_cost = coordination_cost_per_trade * n_trades_per_year
+    total_portfolio_value = avg_trade_size * 20
+    cost_drag = total_extra_cost / total_portfolio_value
+    net_alpha = alpha_vs_single_agent - cost_drag
+    return net_alpha, cost_drag
+
+# Example: ~$100k portfolio, 50 trades/year, $0.50 extra LLM cost per decision
+net_alpha, cost_drag = coordination_breakeven_spread(0.05, 0.50, 5000, 50)
+# Cost drag ~0.005% — negligible at paper trading scale
+# Becomes material at 10k+ trades/year
+```
+
+---
+
+## NautilusTrader — Production Execution Engine
+
+**GitHub**: https://github.com/nautechsystems/nautilus_trader | **Stars**: 23.4k | **License**: LGPL-3.0 | **Language**: Python (API) + Rust (core)
+
+Not an LLM framework — the most relevant **production execution engine** for running strategies at scale with nanosecond-resolution backtesting.
+
+| Feature | NautilusTrader | Vectorbt | Backtrader |
+|---------|---------------|----------|------------|
+| Core | Rust | Python/Numba | Python |
+| Backtest resolution | Nanosecond (tick) | Bar | Bar |
+| Live trading | 20+ venues | ✗ | Limited |
+| Research→prod | Same code | ✗ | ✗ |
+| Crypto | 10+ native | ✗ | ✗ |
+
+**Supported venues:** Binance, Coinbase, Kraken, Bybit, OKX, Deribit, Hyperliquid, dYdX, IBKR, Betfair, Polymarket.
+
+**Relevance:** If/when moving beyond Alpaca to IBKR or crypto execution. For Alpaca paper trading today, vectorbt + custom scripts remains simpler.
+
+---
+
+## Design Principles
+
+### When LLM multi-agent adds value
+
+1. **Qualitative signal synthesis** — earnings call tone, news context, macro narrative → structured signal, then quantitative pipeline (H163/H174 pattern)
+2. **Hypothesis generation** — debate surfaces competing hypotheses before committing to a backtest (dream cycle application)
+3. **Anomaly explanation** — when strategy underperforms, multi-agent reasoning over macro + micro context is faster than manual review
+
+### When NOT to use
+
+1. **Pure quantitative signals** — momentum, reversal, factor models don't benefit from LLM debate
+2. **High-frequency decisions** — LLM latency (1–30s/call) incompatible with intraday execution; PEAD intraday scanner stays script-based
+3. **Confirmed rule-based strategies** — don't add LLM complexity to H026/H041a/IBS that work well as pure rule-based systems
+
+### Cost model (June 2026 pricing)
+
+| Task | Calls | Model | Cost |
+|------|-------|-------|------|
+| Single-agent (GPT-4o-mini) | 1 | gpt-4o-mini | ~$0.002 |
+| TradingAgents full debate (6 agents) | ~20 | gpt-4o-mini mix | ~$0.05–0.20 |
+| HedgeAgents full conference | ~50 | GPT-4o | ~$0.50–2.00 |
+| Expert Investment Teams (deep) | ~30 | gpt-4o | ~$0.30–1.50 |
+
+At ~50 paper trades/year, even the most expensive setup costs <$100/year. Not a constraint until 1000+ decisions/year.
+
+---
+
+## Key Papers Summary
+
+| Paper | arXiv | Year | Key Finding | Relevance |
+|-------|-------|------|-------------|-----------|
+| TradingAgents | 2412.20138 | 2024 | Specialized debate > single agent; 84.9k★ | High — try for H163/H174 upgrade |
+| HedgeAgents | 2502.13165 | 2025 | Sharpe 2.41 reported; regime caveat | Medium — architecture only; numbers not trusted |
+| Expert Investment Teams | 2602.23330 | 2026 | Fine-grained tasks > role mimicry; leakage-controlled | High — design template for PEAD upgrade |
+| Agent Market Arena | 2510.11695 | 2025 | Framework > LLM backbone | High — benchmark validates architecture primacy |
+| Reliability Taxonomy | 2603.27539 | 2026 | 5 eval failures; CBS metric | Critical — apply before trusting any paper |
+| MadEvolve | 2605.23007 | 2025 | Evolutionary island model for strategy params | Low-medium — crypto only, future direction |
+| Reproducibility Audit | 2605.19337 | 2026 | 0/19 fully reproducible; 1/19 has transaction costs | Critical — validates our eval checklist |
+| StockBench | 2510.02209 | 2025 | Most LLMs fail to beat buy-and-hold | High — validates signal-generator role |
+| Self-Driving Portfolio | 2604.02279 | 2026 | 50-agent diversity ensemble; meta-agent weighting | Medium — informs H318 proposal |
 
 ---
 
 ## Integration with H274 (Multi-Agent PEAD)
 
-H274 (staged, not yet production) proposed upgrading the PEAD pipeline to a 3-agent debate:
+H274 (staged, not yet production) upgrades the PEAD pipeline to a 3-agent debate:
 
 1. **FinBERT agent** (existing H163/H174): scores 8-K sentiment → score ≥ 0.18
-2. **Surprise agent**: validates EPS surprise ≥ 0.02 (existing gate)
-3. **Debate agent**: bull/bear argue the specific filing — final veto if bear case is strong
+2. **Analyst agent**: structured extraction of revenue guidance, management tone, forward guidance
+3. **Contrarian agent**: identifies negative signals in otherwise positive releases
 
 Architecture note: agents 1+2 are deterministic (existing code); agent 3 adds the LLM debate layer. Estimated cost: ~$0.02/candidate. Given H174 passes ~22 OOS events/year, cost ≈ $0.44/year — negligible.
 
-Implementation path:
-- Install TradingAgents (`pip install tradingagents`) in `/workspace/agent/venv/`
+**Implementation path:**
+- Install TradingAgents in `/workspace/agent/venv/`
 - Wire debate agent as post-filter on H174 candidates
 - Backtest by replaying H174's 22 OOS events through debate; measure WR improvement
-- Gate: WR improvement ≥ 2pp to justify latency + cost
+- Gate: WR improvement ≥ 2pp (H174 baseline 81.8%)
+
+**Inspired by:** Expert Investment Teams (arXiv:2602.23330) fine-grained decomposition pattern + StockBench finding that LLMs should be signal-generators not decision-makers.
 
 ---
 
-## Quick-Start: TradingAgents
+## Reproducibility Crisis (arXiv:2605.19337, May 2026)
 
-```python
-from tradingagents.graph.trading_graph import TradingAgentsGraph
-from tradingagents.default_config import DEFAULT_CONFIG
+Systematic audit of 77 LLM-based trading agent studies:
+- **2/19** reported extractable, time-consistent evaluation protocols
+- **1/19** included realistic transaction costs
+- **1/19** addressed survivorship/universe handling
+- **0/19** achieved R3 reproducibility (full re-runnable artifacts)
 
-config = DEFAULT_CONFIG.copy()
-config["llm_provider"] = "openai"
-config["deep_think_llm"] = "gpt-4o"
-config["quick_think_llm"] = "gpt-4o-mini"
-config["max_debate_rounds"] = 2
-config["online_tools"] = False  # use our own data pipeline
+**Implication for H274/H279/H280:** Reported Sharpe ratios (e.g., HedgeAgents 2.41) should be treated with extreme skepticism. Likely inflated by: (1) LLM knowledge lookahead (training data includes test period), (2) missing transaction costs, (3) cherry-picked windows.
 
-ta = TradingAgentsGraph(debug=False, config=config)
-state, decision = ta.propagate("NVDA", "2024-01-15")
-# decision: {"action": "buy", "confidence": 0.73, "rationale": "..."}
-```
+**Action:** Before implementing any LLM-as-signal hypothesis, require: (1) strict OOS data cutoff, (2) transaction cost model, (3) comparison to H312-B (OOS Sharpe 1.202) as hurdle — not SPY.
 
 ---
 
-## Related Research Directions
+## StockBench: LLMs Fail to Beat Buy-and-Hold (arXiv:2510.02209)
 
-- **arXiv:2606.08283** (staged H281): Macro-LLM ETF tilt — LLM reads FOMC minutes to adjust factor exposure
-- **arXiv:2604.17327** (staged H280): MarketSenseAI — 4-agent architecture with news/sentiment/technical/fundamental analysts
-- **arXiv:2510.26228** (staged H279): LLM momentum filter — NLP signal layered on 12-1 momentum
-- **H163/H174** (CONFIRMED): FinBERT on EDGAR 8-K — the confirmed anchor for NLP signal generation
+Most state-of-the-art LLMs **fail to outperform simple buy-and-hold** in real-world sequential trading, even models with strong financial QA performance.
 
-See also: [Market Timing Overlays](market-timing-overlays.md) (H296 VIX overlay), [Crypto Trading Strategies](crypto-trading-strategies.md) (H302/H303), [PEAD Strategy](../strategies/pead.md)
+- Strong static financial knowledge ≠ effective sequential decision-making
+- Thinking models (o1, Gemini 2.0) make fewer arithmetic errors → better for position sizing
+- Gap between financial knowledge and practical execution is substantial
 
-## Reproducibility Crisis in LLM Trading Research (Xia et al., May 2026)
+**Design implication for H274:** Use LLMs in analyst role (signal extraction), not portfolio management (entry/exit decisions). FinBERT score + EPS surprise gate remain action triggers — not an LLM deciding to trade.
 
-**Source:** arXiv:2605.19337 — "Agentic Trading: When LLM Agents Meet Financial Markets"
+---
 
-A systematic review of 77 LLM-based trading agent studies identified severe evaluation deficits:
-- **2/19** empirical studies report extractable, time-consistent evaluation protocols
-- **1/19** includes realistic transaction costs
-- **0/19** achieves R3 reproducibility (full re-runnable implementation with data)
+## FinRL-Trading & Lumibot
 
-**Implication for H274/H279/H280:** Reported Sharpe ratios from multi-agent LLM papers (e.g., HedgeAgents 2.41, Expert Investment Teams) should be treated with extreme skepticism until independently replicated. The architectural innovations are real, but performance claims are likely inflated by:
-1. Lookahead bias in LLM financial knowledge (training data includes the test period)
-2. Missing transaction costs
-3. Cherry-picked evaluation windows
+### FinRL-Trading (AI4Finance-Foundation)
+**GitHub:** https://github.com/AI4Finance-Foundation/FinRL-Trading
 
-**Action for dream cycle:** Before implementing any LLM-as-signal hypothesis (H279/H280), require: (1) strict OOS data cutoff, (2) transaction cost model included, (3) comparison to momentum baseline H312-B (OOS Sharpe 1.202) as the hurdle, not SPY.
+Full-stack ML platform: ML stock selection → backtesting → live brokerage. Supports Alpaca live trading; built-in factor models compatible with H217/H228. **Relevance:** Potential Phase 4 infrastructure for H217 (alpha101, OOS 1.559) and H228 (alpha101+reversal, OOS 1.572) instead of bespoke Alpaca automation. **Risk:** ML pipeline complexity → harder fill attribution vs direct Alpaca API calls.
+
+### Lumibot (Lumibot-Community)
+Simpler backtesting + live trading for stocks and crypto. Lower learning curve than NautilusTrader. Pre-built risk management hooks. **Relevance:** H276 crypto POC alternative to NautilusTrader.
+
+---
+
+## The Self-Driving Portfolio (arXiv:2604.02279, April 2026)
+
+**Source:** Andrew Ang (BlackRock), Nazym Azimbayev, Andrey Kim
+
+**Architecture:** ~50 specialized agents, each implementing a different portfolio construction methodology. A **meta-agent** tracks past forecast accuracy against realized returns and weights outputs accordingly — learning which models to trust in which regimes. Constrained by an Investment Policy Statement (IPS) encoding risk limits and benchmark tracking error.
+
+**Key difference from TradingAgents/HedgeAgents:** Diversity-maximizing ensemble (each agent = different methodology) rather than bull vs. bear debate. Meta-agent learns model-averaging weights dynamically.
+
+**Relevance to production portfolio:** H026, H045, H041a are three different rotation methodologies with static allocations (27/21/22%). H318 proposal: simple meta-learner (logistic regression or rolling IC-weighting) that dynamically adjusts these weights monthly based on regime signals — e.g., if VIX > 25, weight H045 (bonds) higher; if momentum IC is high, weight H041a higher.
