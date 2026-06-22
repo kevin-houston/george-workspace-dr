@@ -435,3 +435,11 @@ Updated `wiki/ai-industry/model-landscape-2026.md` (was last edited 2026-05-29).
 - Added new "Geopolitical & Regulatory Context" section: export controls on deployed models (unprecedented), Ascend 910C milestone, feedback loop analysis, multi-provider hygiene recommendation
 - Updated pricing table and model table to reflect V4
 - Updated wiki/index.md entry description
+
+## [2026-06-21] ingest | awesome-quant-ai (leoncuhk)
+
+Source: https://github.com/leoncuhk/awesome-quant-ai (377 stars, Apache-2.0)
+Pages created: 1 (trading/tools/awesome-quant-ai.md). Pages updated: 2 (index.md, trading/index.md).
+Key entities: TradingAgents, FinRobot, FinRL, Vibe-Trading, Chronos, TimesFM, Moirai, DeepMarket, FinDiff, Flashbots.
+Cross-references: H279/H280/H281 (staged LLM hypotheses), multi-agent-llm-trading.md, quant-firm-repos.md.
+Notable: TS foundation models (Chronos, TimesFM, Moirai) flagged as unexplored signal layer; diffusion synthetic data relevant for regime simulation.

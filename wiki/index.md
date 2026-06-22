@@ -1,7 +1,7 @@
 ---
 updated: 2026-06-21
 sources_indexed: 4
-pages: 156
+pages: 157
 ---
 
 # Wiki Index
@@ -72,6 +72,7 @@ When answering a query:
 - [Investing Algorithm Framework (IAF)](trading/tools/investing-algorithm-framework.md) — define→backtest→deploy; dual vector+event-driven modes; tiered SQLite storage for 10k+ runs; HTML dashboard; Monte Carlo testing; CCXT live (crypto); Alpaca needs custom executor ← new 2026-05-20
 - [NextTrade](trading/tools/nexttrade.md) — TypeScript GUI-based strategy builder; genetic algo optimization; abandoned (→NexusTrade SaaS); Tradier broker only; NOT relevant to our stack ← new 2026-05-20
 - [Quant Firm Open Source Repos](trading/tools/quant-firm-repos.md) — 22 repos from Two Sigma, Man Group, Jane Street, D.E. Shaw, HRT, Optiver, WorldQuant; ArcticDB, dtale, QuantMuse (2.5k stars); open/closed split maps onto competitive moat theory ← new 2026-05-22
+- [awesome-quant-ai](trading/tools/awesome-quant-ai.md) — curated AI/ML quant resources; LLM agents (TradingAgents, FinRL, Vibe-Trading), TS foundation models (Chronos, TimesFM, Moirai), diffusion synthetic data, DeFi; strategy taxonomy + paradigms table; cross-refs H279–H281 staged ← new 2026-06-21
 - [QuantDinger](trading/tools/quantdinger-notes.md) — self-hosted AI trading platform (Docker); `quantdinger-mcp` PyPI for Claude Code integration; supports Alpaca/IBKR/Kraken/CCXT; full stack overkill given existing setup; MCP package worth testing ← new 2026-06-07
 - [QuantStats](tools/quantstats-notes.md) — Python portfolio analytics + HTML tearsheet generator; `pip install quantstats`; takes pandas returns Series → 50+ metrics + SPY benchmark + monthly heatmaps; add `qs.reports.html()` to run_hNNN.py ← new 2026-06-08
 - [Kan](tools/kan-notes.md) — self-hosted open-source kanban board (Trello alternative); AGPLv3, ~5k stars; Next.js + tRPC + Postgres; webhooks + admin API; potential task/research dashboard UI ← new 2026-06-08
