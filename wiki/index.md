@@ -1,7 +1,7 @@
 ---
 updated: 2026-06-21
 sources_indexed: 4
-pages: 157
+pages: 158
 ---
 
 # Wiki Index
@@ -49,6 +49,7 @@ When answering a query:
 - [Market Timing Overlays](trading/algorithms/market-timing-overlays.md) — VIX term structure (H296 CONFIRMED OOS 1.116); SPY 200d MA (H301 Variant D best, +27.4% Sharpe vs H026); yield curve (H300 NOT CONFIRMED); breadth (H299 NOT CONFIRMED); overlay vs standalone trade-off ← new 2026-06-15
 - [Cryptocurrency Trading Strategies](trading/algorithms/crypto-trading-strategies.md) — cross-sectional momentum Sharpe 1.51 (28d lookback, top-30 universe); BTC 50d MA Sharpe 1.9 vs B&H 1.3; funding carry declining (6.45→negative 2025); Monday effect +0.51%; halving cycle positioning; ccxt/pycoingecko implementation; H302/H303 queued ← new 2026-06-16
 - [Multi-Agent LLM Trading](trading/algorithms/multi-agent-llm-trading.md) — taxonomy LLM-as-signal vs decision-maker; TradingAgents 84.9k★ bull/bear debate; HedgeAgents; Expert Investment Teams fine-grained decomp; Agent Market Arena; MadEvolve evolutionary; NautilusTrader 23.4k★; CBS cost metric; reproducibility crisis (0/19 papers fully reproducible); H274 PEAD integration; H318 meta-learner proposal ← merged 2026-06-21
+- [Time-Series Foundation Models](trading/algorithms/ts-foundation-models.md) — Chronos-2 #1 GIFT-Eval (Bolt 250× faster); TimesFM 2.5 200M params 16k context + quantile head; Moirai any-variate ICML oral trained on LOTSA 27B obs; FinTSB 15-25% over ARIMA; TS-RAG +6.51% retrieval-augmented; financial verdict: feature engineering not standalone signal; H318/H320+ integration patterns ← new 2026-06-21
 - [SPX Dispersion Trading & Variance Risk Premium](trading/algorithms/spx-dispersion-variance.md) — H309 PARTIAL; implied correlation premium 6-18pp historically; DSPX/COR3M signals; vega-neutral construction; Polygon IV integration path; dirty dispersion z1/z2/z3 thresholds ← new 2026-06-19
 - [Fixed Income / Bond ETF Rotation](trading/algorithms/fixed-income-bond-rotation.md) — H045 PRODUCTION 21% portfolio; 13-ETF universe; 3m+6m+12m rank ensemble; OOS Sharpe 1.351, MaxDD -6.3%; carry FAILS (ETF dividends ≠ forward carry); SHY dominates OOS 72% of months; H314/H315 NOT CONFIRMED ← new 2026-06-20
 - [Value Factors](trading/algorithms/value-factors.md) — FCF yield signal (FMP API); COWZ ETF mechanics; H284 CONFIRMED-weak; H286 CONFIRMED Corr(SPY)=0.596; value vs momentum tension; data sources table ← new 2026-06-13
