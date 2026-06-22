@@ -457,3 +457,10 @@ Source: https://github.com/chrisworsey55/atlas-gic (via https://x.com/tom_doerr/
 Key entities: ATLAS, General Intelligence Capital, Chris Worsey, MiroFish, Karpathy autoresearch.
 Key connections: JANUS = H318 analog; PRISM = H323 analog; PRISM crisis/recovery failure validates HMM pre-training over reactive loop.
 Cross-references: multi-agent-llm-trading.md, regime-detection.md, hypothesis-log.md (H318/H323).
+
+## [2026-06-22] ingest | awesome-codex-subagents (VoltAgent)
+Pages created: 1 (tools/awesome-codex-subagents.md). Pages updated: 2 (index.md, log.md).
+Source: https://github.com/VoltAgent/awesome-codex-subagents (via https://x.com/tom_doerr/status/2069056644793688477)
+Key entities: VoltAgent, awesome-codex-subagents, quant-analyst subagent, fintech-engineer subagent.
+Key insight: quant-analyst.toml checklist mirrors our shared-eval-checklist.md; useful template for hypothesis review agents.
+Cross-references: tools/hermes-gpt.md, trading/shared-eval-checklist.md, trading/algorithms/multi-agent-llm-trading.md.
