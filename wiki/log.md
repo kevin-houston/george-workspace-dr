@@ -443,3 +443,10 @@ Pages created: 1 (trading/tools/awesome-quant-ai.md). Pages updated: 2 (index.md
 Key entities: TradingAgents, FinRobot, FinRL, Vibe-Trading, Chronos, TimesFM, Moirai, DeepMarket, FinDiff, Flashbots.
 Cross-references: H279/H280/H281 (staged LLM hypotheses), multi-agent-llm-trading.md, quant-firm-repos.md.
 Notable: TS foundation models (Chronos, TimesFM, Moirai) flagged as unexplored signal layer; diffusion synthetic data relevant for regime simulation.
+
+## [2026-06-22] ingest | hermes-gpt (X Article by @tonysimons_)
+Pages created: 1 (tools/hermes-gpt.md). Pages updated: 2 (index.md, log.md).
+Source: https://x.com/tonysimons_/status/2067773819322831061
+Key entities: hermes-gpt (github.com/asimons81/hermes-gpt), Hermes Agent (@tonysimons_ local agent stack).
+Key insight: local MCP sidecar eliminates context-stuffing tax; ChatGPT fetches on-demand → Codex quota untouched.
+Cross-references: tools/openalice.md, trading/algorithms/multi-agent-llm-trading.md.
