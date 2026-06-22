@@ -450,3 +450,10 @@ Source: https://x.com/tonysimons_/status/2067773819322831061
 Key entities: hermes-gpt (github.com/asimons81/hermes-gpt), Hermes Agent (@tonysimons_ local agent stack).
 Key insight: local MCP sidecar eliminates context-stuffing tax; ChatGPT fetches on-demand → Codex quota untouched.
 Cross-references: tools/openalice.md, trading/algorithms/multi-agent-llm-trading.md.
+
+## [2026-06-22] ingest | ATLAS — Self-Improving AI Trading Agents (GitHub)
+Pages created: 1 (trading/tools/atlas-gic.md). Pages updated: 2 (index.md, log.md).
+Source: https://github.com/chrisworsey55/atlas-gic (via https://x.com/tom_doerr/status/2068824434425610668)
+Key entities: ATLAS, General Intelligence Capital, Chris Worsey, MiroFish, Karpathy autoresearch.
+Key connections: JANUS = H318 analog; PRISM = H323 analog; PRISM crisis/recovery failure validates HMM pre-training over reactive loop.
+Cross-references: multi-agent-llm-trading.md, regime-detection.md, hypothesis-log.md (H318/H323).
