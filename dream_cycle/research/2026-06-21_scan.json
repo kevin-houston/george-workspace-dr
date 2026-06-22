@@ -1,0 +1,43 @@
+{
+  "date": "2026-06-21",
+  "session": "7:30 AM wiki expansion + dream cycle scan",
+  "angles_searched": 5,
+  "papers_assessed": 32,
+  "repos_assessed": 8,
+  "staged_proposals": 4,
+  "staged_files": [
+    "dream_cycle/staged/2026-06-21/1_llm_semantic_risk_filter_h321.json",
+    "dream_cycle/staged/2026-06-21/2_multimodal_earnings_transformer_h322.json",
+    "dream_cycle/staged/2026-06-21/3_hmm_rl_regime_rotation_h323.json",
+    "dream_cycle/staged/2026-06-21/4_reproducibility_audit_wiki.json"
+  ],
+  "new_hypotheses": ["H321", "H322", "H323"],
+  "wiki_updates": ["shared-eval-checklist.md (reproducibility audit framework)"],
+  "skipped": [
+    {"source": "arXiv:2510.26228", "reason": "Already H279 in pipeline"},
+    {"source": "arXiv:2604.17327", "reason": "Already H280 in pipeline"},
+    {"source": "arXiv:2606.08283", "reason": "Already H281 in pipeline"},
+    {"source": "arXiv:2604.02279", "reason": "Already H318 in pipeline (same source paper)"},
+    {"source": "arXiv:2603.17692", "reason": "LLM anonymization validation — medium risk methodology paper; defer to next cycle"},
+    {"source": "arXiv:2507.07296", "reason": "TS foundation model fine-tuning — incremental vs. what is now in wiki/ts-foundation-models.md"},
+    {"source": "arXiv:2510.03965", "reason": "FinCall-Surprise dataset — already referenced in H281"},
+    {"source": "arXiv:2606.12210", "reason": "Zero-shot NLP fails finance — negative result, noted but not actionable"},
+    {"source": "github.com/HKUDS/Vibe-Trading", "reason": "Platform tool, already installed as MCP"}
+  ],
+  "phase1_wiki_page": "wiki/trading/algorithms/ts-foundation-models.md",
+  "phase1_research_log": "wiki/trading/research-log/2026-06-21.md",
+  "key_findings": {
+    "ts_foundation_models": "Chronos-2 #1 GIFT-Eval; TimesFM 2.5 16k context; Moirai any-variate; FinTSB: 15-25% over ARIMA, best as feature engineering not standalone signal",
+    "h321_rationale": "LLM semantic risk filter adds economic plausibility validation to momentum — 46.5% downside reduction on prediction markets (arXiv:2602.07048); different use from H319 pairs application",
+    "h322_rationale": "Transformer joint encoding beats sequential filters (H317 NOT CONFIRMED); arXiv:2605.25894 May 2026; addresses same problem with learned feature interactions",
+    "h323_rationale": "HMM+RL statistical regime rotation (arXiv:2605.27848) as low-cost alternative to H318 LLM meta-agent; horse-race design; BIC confirms 3-state spec on 2004-2025",
+    "reproducibility": "arXiv:2606.08285: 7 dimensions where LLM trading studies vary; execution timing + friction modeling material to Sharpe claims; should gate all H316+ evaluations"
+  },
+  "next_priorities": [
+    "Implement H316 or H321 first (both need OpenAI API; H321 has lower complexity)",
+    "H322 can reuse H163 FinBERT cache — faster to implement than H317 was",
+    "H323 can reuse hmmlearn + stable-baselines3 from H251/H204 scaffolds",
+    "Apply reproducibility checklist (4_reproducibility_audit_wiki.json) to shared-eval-checklist.md",
+    "H318 vs H323 horse-race once both are implemented"
+  ]
+}

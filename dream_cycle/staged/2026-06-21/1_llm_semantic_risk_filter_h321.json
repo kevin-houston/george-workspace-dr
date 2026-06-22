@@ -1,0 +1,14 @@
+{
+  "id": "h321-llm-semantic-risk-filter",
+  "date": "2026-06-21",
+  "source": "arXiv:2602.07048",
+  "source_url": "https://arxiv.org/abs/2602.07048",
+  "title": "H321 design — LLM Semantic Risk Filter on H279 Momentum Strategy",
+  "rationale": "arXiv:2602.07048 (LLM Lead-Lag Semantic Filter) was incorporated into pairs-trading.md as methodology context for H319. But it has a second application: using LLMs as economic plausibility validators to filter OUT high-crash-probability momentum bets where the price signal has no semantic economic transmission. 46.5% downside reduction claimed on prediction market data. As a risk filter on H279 (LLM momentum), this could complement H320 (LightGBM crash filter) with semantic validation. Where H320 uses macro features, H321 uses company-pair economic relationships to validate whether the momentum signal has a plausible fundamental driver.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h321.py",
+  "content": "# H321 — LLM Semantic Risk Filter on Cross-Sectional Momentum\n# Source: arXiv:2602.07048 (LLM Lead-Lag Semantic Filtering)\n# Hypothesis: LLM economic plausibility validation reduces downside risk in\n# cross-sectional momentum (H198/H279) by filtering trades where momentum\n# signal lacks identifiable fundamental transmission mechanism.\n#\n# Design:\n# - Universe: H198 30-stock universe\n# - Signal: H198 6-1m momentum (existing; use results cache)\n# - LLM filter: for each month's top-5 momentum winners, query GPT-4o-mini:\n#   'Is there a plausible economic reason for [stock A] to have momentum this month\n#    given current macro environment? Rate plausibility 0-10.'\n# - Entry gate: hold only stocks with LLM plausibility >= 6/10\n# - Hypothesis: filtering economically implausible momentum reduces crash risk\n#   (comparable to 46.5% downside reduction reported on prediction markets)\n#\n# IS: 2015-2022 | OOS: 2023-2026\n# Gate: OOS Sharpe > H198 1.174 AND MaxDD improvement > 5pp\n# Cost: ~$0.50/month for 30 stocks (GPT-4o-mini at $0.15/1M tokens)\n#\n# See wiki/trading/algorithms/pairs-trading.md for semantic filtering methodology\npass\n",
+  "action": "write",
+  "apply_status": "pending"
+}
