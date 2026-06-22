@@ -100,3 +100,22 @@ Notes:
 |------|--------|--------|
 | 2026-06-09 | Initial draft — 7-point checklist agreed by George and Ernesto | George |
 | 2026-06-09 | Added point 8: required bear case / steelman section (Ernesto suggestion) | George |
+| 2026-06-21 | Added LLM trading 7-dimension reproducibility audit section (arXiv:2606.08285) | George |
+
+---
+
+## LLM Trading System — 7-Dimension Reproducibility Audit (arXiv:2606.08285)
+
+For any LLM-based hypothesis (H279, H280, H316-H325+), verify all 7 dimensions:
+
+| Dimension | Gate | Notes |
+|-----------|------|-------|
+| Point-in-time data | All data must be available at signal date | No forward-looking fundamentals, earnings revisions |
+| Temporal split | Strict future cutoff | No val set leakage; IS/OOS boundary must predate any hyperparameter tuning |
+| Execution timing | T+1 open or T+1 close (document which) | LLM signal on close d; execution on open d+1 minimum |
+| Transaction costs | Explicit $/share or bps assumption | Default: 5bps round-trip for liquid large-cap; document deviations |
+| Universe specification | Survivorship-free or documented bias | H198/H217 universe note: known survivorship bias caveat |
+| Prompt/parameter transparency | All prompts logged to results JSON | Temperature, model, system prompt version, date |
+| Reproducible artifacts | Results JSON + prompt log committed | Required for H316+ LLM hypotheses |
+
+**Source:** arXiv:2606.08285, June 2026. Analyzed 30 LLM trading papers; all 7 dimensions vary widely; friction + execution timing choices material to claimed Sharpe.
