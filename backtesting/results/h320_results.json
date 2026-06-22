@@ -1,0 +1,81 @@
+{
+  "hypothesis": "H320",
+  "title": "LightGBM Momentum Crash Filter on H198 6-1m Momentum",
+  "gate": "OOS Sharpe > 1.174 AND MaxDD improvement > 5pp",
+  "variants": {
+    "A": {
+      "label": "A: H198 baseline",
+      "is": {
+        "n": 96,
+        "sharpe": 1.779,
+        "cagr": 0.474,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 65,
+        "sharpe": 1.207,
+        "cagr": 0.287,
+        "maxdd": -0.227,
+        "neg_yrs": 1
+      }
+    },
+    "B": {
+      "label": "B: VIX<25 gate",
+      "is": {
+        "n": 96,
+        "sharpe": 1.756,
+        "cagr": 0.43,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 65,
+        "sharpe": 1.163,
+        "cagr": 0.26,
+        "maxdd": -0.269,
+        "neg_yrs": 1
+      }
+    },
+    "C": {
+      "label": "C: LightGBM P<0.35 gate",
+      "is": {
+        "n": 96,
+        "sharpe": 1.802,
+        "cagr": 0.467,
+        "maxdd": -0.268,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 65,
+        "sharpe": 1.274,
+        "cagr": 0.283,
+        "maxdd": -0.144,
+        "neg_yrs": 0
+      }
+    },
+    "D": {
+      "label": "D: LightGBM continuous scale",
+      "is": {
+        "n": 96,
+        "sharpe": 1.897,
+        "cagr": 0.485,
+        "maxdd": -0.223,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 65,
+        "sharpe": 1.283,
+        "cagr": 0.281,
+        "maxdd": -0.15,
+        "neg_yrs": 0
+      }
+    }
+  },
+  "crash_prob_stats": {
+    "mean": 0.088,
+    "max": 0.987,
+    "oos_months_gated_c": 6,
+    "actual_crash_months_oos": 8
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "hypothesis": "H317",
+  "title": "Multi-Modal PEAD: FinBERT + EPS Analyst Surprise + Pre-Announcement Momentum",
+  "gate": "OOS WR > 70% AND MeanRet > 4% AND n >= 20",
+  "is_period": "2021-2023",
+  "oos_period": "2024-2026",
+  "is_results": {
+    "A": {
+      "label": "A: H174 baseline (score+tone)",
+      "n": 19,
+      "wr": 0.6316,
+      "mean_ret": 0.0344,
+      "median_ret": 0.0536
+    },
+    "B": {
+      "label": "B: H174 + EPS beat (>0%)",
+      "n": 19,
+      "wr": 0.6316,
+      "mean_ret": 0.0344,
+      "median_ret": 0.0536
+    },
+    "C": {
+      "label": "C: H174 + EPS strong beat (>3%)",
+      "n": 16,
+      "wr": 0.625,
+      "mean_ret": 0.0313,
+      "median_ret": 0.0369
+    },
+    "D": {
+      "label": "D: H174 + pre-mom <+10%",
+      "n": 16,
+      "wr": 0.6875,
+      "mean_ret": 0.0429,
+      "median_ret": 0.0547
+    },
+    "E": {
+      "label": "E: H174 + EPS beat + pre-mom<10%",
+      "n": 16,
+      "wr": 0.6875,
+      "mean_ret": 0.0429,
+      "median_ret": 0.0547
+    },
+    "F": {
+      "label": "F: H174 + strong beat + pre-mom<10%",
+      "n": 14,
+      "wr": 0.6429,
+      "mean_ret": 0.0342,
+      "median_ret": 0.0369
+    }
+  },
+  "oos_results": {
+    "A": {
+      "label": "A: H174 baseline (score+tone)",
+      "n": 22,
+      "wr": 0.8182,
+      "mean_ret": 0.061,
+      "median_ret": 0.0428
+    },
+    "B": {
+      "label": "B: H174 + EPS beat (>0%)",
+      "n": 17,
+      "wr": 0.8235,
+      "mean_ret": 0.0633,
+      "median_ret": 0.0434
+    },
+    "C": {
+      "label": "C: H174 + EPS strong beat (>3%)",
+      "n": 13,
+      "wr": 0.8462,
+      "mean_ret": 0.0753,
+      "median_ret": 0.0492
+    },
+    "D": {
+      "label": "D: H174 + pre-mom <+10%",
+      "n": 18,
+      "wr": 0.7778,
+      "mean_ret": 0.0522,
+      "median_ret": 0.0397
+    },
+    "E": {
+      "label": "E: H174 + EPS beat + pre-mom<10%",
+      "n": 13,
+      "wr": 0.7692,
+      "mean_ret": 0.0518,
+      "median_ret": 0.0372
+    },
+    "F": {
+      "label": "F: H174 + strong beat + pre-mom<10%",
+      "n": 9,
+      "wr": 0.7778,
+      "mean_ret": 0.064,
+      "median_ret": 0.0434
+    }
+  }
+}
