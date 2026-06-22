@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-24
+updated: 2026-06-21
 type: reference
 source: https://x.com/zostaff/status/2056351832088207385
 ---
@@ -80,6 +80,18 @@ Three patterns:
 - If edge = alpha you discover → close everything
 
 Two Sigma and Renaissance have both been right for 25+ years simultaneously.
+
+---
+
+## Strategy Example Libraries
+
+### StockSharp/AlgoTrading
+https://github.com/StockSharp/AlgoTrading — 65 stars, updated 2026-06-21  
+Official strategy repository for the StockSharp open-source trading platform. Contains 1,000+ named strategy examples in C# and Python, runnable either as standalone programs via the StockSharp API or loaded directly into their Designer (no-code UI). Covers a wide spectrum: classic technicals (MA crossover, Donchian, Ichimoku, Keltner), indicators (ADX, RSI, CCI, MACD, Parabolic SAR, Williams %R), and ML-infused variants (logistic regression, ML SuperTrend). Also includes crypto strategies and multi-timeframe patterns.
+
+**Relevance to project**: Lower direct value since we work in Python with yfinance/Alpaca rather than the StockSharp ecosystem. Useful as a reference library for signal logic — can inspect C# implementations of indicator combinations as pseudocode when designing new signals. The naming taxonomy (1,000+ named signals) is a useful scan for signal ideas not yet in our hypothesis queue.
+
+**StockSharp platform context**: .NET-based; supports 100+ brokerages; free community edition. Not our execution path, but the strategy logic is transferable.
 
 ---
 

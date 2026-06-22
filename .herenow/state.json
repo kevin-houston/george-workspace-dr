@@ -164,6 +164,12 @@
       "claimToken": "bd60fb33cbe16edf8d2697fac666f6d56f4a8f6bb9a76a273ab9e8bce4f779c8",
       "claimUrl": "https://here.now/claim?slug=blissful-poplar-yvb8&token=bd60fb33cbe16edf8d2697fac666f6d56f4a8f6bb9a76a273ab9e8bce4f779c8",
       "expiresAt": "2026-06-21T09:04:49.034Z"
+    },
+    "supple-mullet-nfqg": {
+      "siteUrl": "https://supple-mullet-nfqg.here.now/",
+      "claimToken": "0a8a617bc38db302d9ada6db416bf66e3712b8ac2a8f04a6c84e25d1a9ef8a5c",
+      "claimUrl": "https://here.now/claim?slug=supple-mullet-nfqg&token=0a8a617bc38db302d9ada6db416bf66e3712b8ac2a8f04a6c84e25d1a9ef8a5c",
+      "expiresAt": "2026-06-22T09:06:53.239Z"
     }
   }
 }
