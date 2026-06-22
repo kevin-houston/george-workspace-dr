@@ -1,7 +1,7 @@
 ---
 updated: 2026-06-21
 sources_indexed: 4
-pages: 158
+pages: 159
 ---
 
 # Wiki Index
@@ -77,6 +77,7 @@ When answering a query:
 - [QuantDinger](trading/tools/quantdinger-notes.md) — self-hosted AI trading platform (Docker); `quantdinger-mcp` PyPI for Claude Code integration; supports Alpaca/IBKR/Kraken/CCXT; full stack overkill given existing setup; MCP package worth testing ← new 2026-06-07
 - [QuantStats](tools/quantstats-notes.md) — Python portfolio analytics + HTML tearsheet generator; `pip install quantstats`; takes pandas returns Series → 50+ metrics + SPY benchmark + monthly heatmaps; add `qs.reports.html()` to run_hNNN.py ← new 2026-06-08
 - [Kan](tools/kan-notes.md) — self-hosted open-source kanban board (Trello alternative); AGPLv3, ~5k stars; Next.js + tRPC + Postgres; webhooks + admin API; potential task/research dashboard UI ← new 2026-06-08
+- [birdclaw](tools/birdclaw.md) — local-first Twitter/X workspace; SQLite archive of tweets/DMs/likes/bookmarks; AI-ranked inbox (OpenAI); full-text search FTS5; CLI + local web app; MIT; brew install; active dev/schema churn ← new 2026-06-22
 - [Alexandrie](tools/alexandrie-notes.md) — self-hosted knowledge base; extended Markdown (CodeMirror 6, KaTeX, containers), Kanban, SSO/OIDC, PWA+offline, 5-level per-doc permissions, full-text search; Go+Nuxt+MySQL; one-command Docker deploy; MIT; not a replacement for agent wiki (needs file access) but potential browser-readable companion layer ← new 2026-06-21
 - [fireworks-tech-graph](tools/fireworks-tech-graph.md) — Claude Code skill for SVG/PNG architecture diagrams from natural language; 8 styles, 14 types, AI/Agent domain built-ins (RAG/Multi-Agent/Tool Call patterns, 40+ product icons); MIT ← new 2026-06-10
 - [claude-code-video-toolkit](tools/claude-code-video-toolkit.md) — AI-native video production; NARRATE→SCORE→GENERATE→COMPOSE→RENDER; ElevenLabs TTS, FLUX, LTX2 video; MIT ← new 2026-06-08
