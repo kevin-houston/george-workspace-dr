@@ -7854,3 +7854,63 @@ A meta-learner dynamically adjusting H026/H041a/H045 weights monthly—based on 
 **Note (post-H318):** H318's NOT CONFIRMED finding suggests regime-switching meta-learning over H026/H041a/H045 adds minimal value because the strategies already capture regime changes natively. H323 may face the same ceiling. Consider narrowing scope to H026-only regime tilt (already tested in H301).
 
 **Status:** Script scaffold only at `backtesting/daily/run_h323.py`. Requires stable-baselines3 (RL). Not yet run.
+
+---
+
+### H324 — Speaker-Weighted FinBERT PEAD [STUB — not yet run]
+
+**Source:** arXiv:2604.13260 (Liu et al., 2026) — "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns"
+
+**Hypothesis:** Weight FinBERT sentiment by speaker role in earnings call transcripts: Analyst Q&A 49%, CFO prepared remarks 30%, Executive statements 16%, Other 5%. Sharpens signal vs H174's uniform full-document scoring without adding new data sources or reducing sample size.
+
+**Design:** Same 30-stock H163/H174 universe. Parse 8-K transcript text into speaker sections via regex. Apply FinBERT (ProsusAI/finbert) per section. Compute `weighted_score = 0.49*analyst + 0.30*cfo + 0.16*exec + 0.05*other`. Entry threshold: weighted_score ≥ 0.18 (same as H174). IS: 2021-2023 | OOS: 2024-2026. Gate: WR > 70% AND n ≥ 20 AND mean_ret > 4%.
+
+**Status:** Staged at `dream_cycle/staged/2026-06-23/1_speaker_weighted_pead_h324.json`. Script scaffold only at `backtesting/daily/run_h324.py`. Not yet run.
+
+---
+
+### H325 — AEGIS Sortino-Optimized Cross-Sectional Momentum [STUB — not yet run]
+
+**Source:** arXiv:2604.09060 (2026) — "Taming the Black Swan: A Momentum-Gated Hierarchical Optimisation Framework for Asymmetric Alpha Generation"
+
+**Hypothesis:** Three-stage improvement over H198: (1) volatility-adjust momentum scores (score_i = momentum_i / realized_vol_i), (2) minimax-correlation filter (greedy selection of k stocks with max pairwise corr ≤ 0.60), (3) SLSQP Sortino ratio optimization for final weights. Addresses both momentum crash risk and SPY correlation problem.
+
+**Design:** H198 30-stock S&P 500 universe. IS: 2013-2020 | OOS: 2021-2026. Gate: OOS Sharpe > H198 1.174 AND MaxDD improvement > 5pp AND Corr(SPY) < 0.70. Libraries: scipy.optimize.minimize (SLSQP), numpy, pandas.
+
+**Status:** Staged at `dream_cycle/staged/2026-06-23/2_aegis_sortino_momentum_h325.json`. Script scaffold only at `backtesting/daily/run_h325.py`. Not yet run.
+
+---
+
+### H326 — Continuous Tanh-Gated H026/H041a/H045 Strategy Blend [STUB — not yet run]
+
+**Source:** arXiv:2605.20636 (2026) — "Continuous Timing Signals for Growth-Defensive Style Allocation"
+
+**Hypothesis:** Replace H318's discrete regime switches with differentiable tanh/softplus scoring. Four continuous signals: rate_relief = tanh(-delta_TNX_3m/1.0), equity_stress = tanh(-SPY_drawdown/0.10), vix_relief = tanh((20-VIX)/5.0), growth_crowding = tanh(-(SPY_12m-0.15)/0.10). Composite score smoothly interpolates between bear_w/base_w/bull_w without threshold discontinuities. OOS Sharpe 1.01, CAGR 19.24% on comparable multi-style portfolio in source paper.
+
+**Design:** H026/H041a/H045 universes (same as H318). IS: 2010-2017 | OOS: 2018-2026. Gate: Sharpe > H318 static B 2.501 AND MaxDD < -4.3%. Pure FRED + yfinance + pandas/numpy.
+
+**Status:** Staged at `dream_cycle/staged/2026-06-23/3_tanh_gated_blend_h326.json`. Script scaffold only at `backtesting/daily/run_h326.py`. Not yet run.
+
+---
+
+### H327 — kNN Macro-Analog ETF Rotation Ranker [STUB — not yet run]
+
+**Source:** arXiv:2606.22719 (2026-06-21) — "Leakage-Aware Benchmarking of LLM Forecasting: Real-Time Nowcasts as Decision-Time Input for Macro Factor Ranking"
+
+**Hypothesis:** kNN on lag-shifted FRED macro features (VIX level/change, SPY 12m return, SPY vs 200MA, T10Y3M yield curve, CPI change, HYG/IEI credit spread proxy, SPY 20d realized vol) identifies the k=10 most similar historical months and averages their H026/H041a/H045 returns to predict which strategy will outperform next month. Non-parametric alternative to H318's logistic regression; more robust to regime shifts. Paper shows median IC +0.154 comparable to full LLM retrieval pipeline.
+
+**Design:** IS: 2010-2017 | OOS: 2018-2026 (rolling: each month extends kNN library). Overweight top-predicted strategy by +15%, reduce others by -7.5% each (min weight 0.10). Gate: Sharpe > 2.501 AND MaxDD < -4.3%. Libraries: sklearn.neighbors or manual cosine sim, FRED API, yfinance.
+
+**Status:** Staged at `dream_cycle/staged/2026-06-23/4_knn_macro_analog_h327.json`. Script scaffold only at `backtesting/daily/run_h327.py`. Not yet run.
+
+---
+
+### H328 — Student-t Emission HMM (H251 regime fix) [STUB — not yet run]
+
+**Source:** arXiv:2606.23492 (2026) — "Continuous HMM with Heavy-Tail Emissions for Equity Regime Detection"
+
+**Hypothesis:** Replace Gaussian emissions in H251's 3-state HMM with Student-t distributions to fix state degeneracy. H251 was CONFIRMED but degenerate — it predicted low_vol 100% of OOS months (behaved as static 80/10/10 SPY/TLT/GLD). Gaussian thin tails absorb crash volatility into one state; Student-t heavy tails reproduce slow autocorrelation decay and avoid collapse. If degeneracy cured, H251 becomes a viable regime detector.
+
+**Design:** Option A (quick): transform returns r_t* = sign(r_t)*|r_t|^(1/4) as Student-t approximation, use GaussianHMM on transformed data. Option B (exact): custom Student-t EM with scipy.stats.t.fit per state. SPY/TLT/GLD monthly returns. IS: 2004-2017 | OOS: 2018-2026. Gate: Sharpe > H251 0.941 AND no single state > 80% of OOS months. Also report Corr(H026) — want < 0.70.
+
+**Status:** Staged at `dream_cycle/staged/2026-06-23/5_heavy_tail_hmm_h328.json`. Script scaffold only at `backtesting/daily/run_h328.py`. Not yet run.
