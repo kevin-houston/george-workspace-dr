@@ -464,3 +464,9 @@ Source: https://github.com/VoltAgent/awesome-codex-subagents (via https://x.com/
 Key entities: VoltAgent, awesome-codex-subagents, quant-analyst subagent, fintech-engineer subagent.
 Key insight: quant-analyst.toml checklist mirrors our shared-eval-checklist.md; useful template for hypothesis review agents.
 Cross-references: tools/hermes-gpt.md, trading/shared-eval-checklist.md, trading/algorithms/multi-agent-llm-trading.md.
+
+## [2026-06-22] ingest | youtube-fetcher-to-markdown (JimmySadek)
+Pages created: 1 (tools/youtube-fetcher-to-markdown.md). Pages updated: 2 (index.md, log.md).
+Source: https://github.com/JimmySadek/youtube-fetcher-to-markdown (via https://x.com/tom_doerr/status/2069072851928224193)
+Key entities: youtube-fetcher-to-markdown, JimmySadek, youtube-transcript-api, yt-dlp.
+Key insight: structured alternative to raw yt-dlp subtitle dumps; YAML frontmatter + chapters + deduplication; useful for wiki ingestion of YouTube content.

@@ -1,7 +1,7 @@
 ---
 updated: 2026-06-22
 sources_indexed: 4
-pages: 162
+pages: 163
 ---
 
 # Wiki Index
@@ -81,6 +81,7 @@ When answering a query:
 - [birdclaw](tools/birdclaw.md) — local-first Twitter/X workspace; SQLite archive of tweets/DMs/likes/bookmarks; AI-ranked inbox (OpenAI); full-text search FTS5; CLI + local web app; MIT; brew install; active dev/schema churn ← new 2026-06-22
 - [hermes-gpt](tools/hermes-gpt.md) — local MCP sidecar bridging ChatGPT to Hermes Agent's local tool stack (memory, skills, files); no context stuffing → Codex quota preserved; v0.1.0 read-only by default; write/terminal opt-in ← new 2026-06-22
 - [awesome-codex-subagents](tools/awesome-codex-subagents.md) — 166+ specialized Codex subagents in .toml format; 13 categories; 5.2k stars MIT; quant-analyst agent has strong backtest review checklist (lookahead bias, OOS robustness, execution assumptions); Codex-specific but pattern transferable ← new 2026-06-22
+- [youtube-fetcher-to-markdown](tools/youtube-fetcher-to-markdown.md) — Claude Code skill; YouTube URL → structured Markdown with YAML frontmatter, chapters, transcript, metadata; no API keys; `npx skills add JimmySadek/youtube-fetcher-to-markdown`; yt-dlp recommended ← new 2026-06-22
 - [Alexandrie](tools/alexandrie-notes.md) — self-hosted knowledge base; extended Markdown (CodeMirror 6, KaTeX, containers), Kanban, SSO/OIDC, PWA+offline, 5-level per-doc permissions, full-text search; Go+Nuxt+MySQL; one-command Docker deploy; MIT; not a replacement for agent wiki (needs file access) but potential browser-readable companion layer ← new 2026-06-21
 - [fireworks-tech-graph](tools/fireworks-tech-graph.md) — Claude Code skill for SVG/PNG architecture diagrams from natural language; 8 styles, 14 types, AI/Agent domain built-ins (RAG/Multi-Agent/Tool Call patterns, 40+ product icons); MIT ← new 2026-06-10
 - [claude-code-video-toolkit](tools/claude-code-video-toolkit.md) — AI-native video production; NARRATE→SCORE→GENERATE→COMPOSE→RENDER; ElevenLabs TTS, FLUX, LTX2 video; MIT ← new 2026-06-08
