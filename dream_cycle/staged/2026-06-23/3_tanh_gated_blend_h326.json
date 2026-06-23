@@ -1,0 +1,14 @@
+{
+  "id": "h326-tanh-gated-blend",
+  "date": "2026-06-23",
+  "source": "arXiv:2605.20636 (2026) — 'Continuous Timing Signals for Growth-Defensive Style Allocation'",
+  "source_url": "https://arxiv.org/abs/2605.20636",
+  "title": "H326 design — Continuous Tanh-Gated H026/H041a/H045 Strategy Blend",
+  "rationale": "H318 NOT CONFIRMED: all discrete meta-learner variants failed because momentum strategies already perform internal regime detection. arXiv:2605.20636 offers a qualitatively different approach: instead of discrete regime labels (bear/bull/neutral), use DIFFERENTIABLE continuous scores via tanh/softplus that blend smoothly between strategy weights. OOS 2017-2026 on a similar multi-style portfolio: CAGR 19.24%, Sharpe 1.01. The paper showed this outperforms both fixed-weight and discrete regime approaches. Key insight: continuous scores avoid the sharp threshold discontinuities that caused H318's logistic regression to produce noise at regime boundaries. Implementable with FRED data + pandas/numpy only — no sklearn, no LLM.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h326.py",
+  "content": "# H326 — Continuous Tanh-Gated H026/H041a/H045 Strategy Blend\n# Source: arXiv:2605.20636 (2026)\n# Hypothesis: Differentiable continuous scoring via tanh/softplus smoothing\n# improves on H318's discrete regime switches without adding LLM complexity.\n#\n# Four continuous signals (FRED + SPY price data):\n# 1. rate_relief = tanh(-delta_TNX_3m / 1.0)\n#    +1 if rates falling fast (bond-friendly), -1 if rising\n# 2. equity_stress = tanh(-SPY_drawdown_pct / 0.10)\n#    -1 if SPY down >10% from peak (bear mode), +1 if near highs\n# 3. vix_relief = tanh((20 - VIX) / 5.0)\n#    +1 if VIX < 20 (calm), -1 if VIX > 30 (stressed)\n# 4. growth_crowding = tanh(-(SPY_12m_return - 0.15) / 0.10)\n#    penalize when equity has been very strong (crowding risk)\n#\n# Composite score = mean([rate_relief, equity_stress, vix_relief, growth_crowding])\n# ranges from -1 (full bear) to +1 (full bull)\n#\n# Allocation:\n# bull_w  = [H026=0.50, H041a=0.35, H045=0.15]  # equity-heavy\n# base_w  = [H026=0.40, H041a=0.30, H045=0.30]  # balanced (H318 static B)\n# bear_w  = [H026=0.20, H041a=0.15, H045=0.65]  # bond-heavy\n# final_w = bear_w * (-score)/2 + base_w * (1 - |score|) + bull_w * score/2\n#   (smoothly interpolates; softplus avoids discontinuity at edges)\n#\n# IS: 2010-2017 | OOS: 2018-2026 (same as H318)\n# Gate: OOS Sharpe > H318 static blend B (2.501) AND MaxDD < -4.3%\n# Data: FRED T10Y (TNX proxy from yfinance ^TNX), SPY, ^VIX\n# No LLM, no sklearn, pure FRED + yfinance + pandas/numpy\n#\n# Note: H318 found the regime-switch variant D (VIX+200MA) achieved\n# Sharpe 2.582 with MaxDD -4.4% — just missed the 1pp MaxDD gate.\n# H326 targets that same improvement but via smooth continuous signals.\npass\n",
+  "action": "write",
+  "apply_status": "pending"
+}

@@ -1,0 +1,125 @@
+{
+  "scan_date": "2026-06-23",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + post-earnings drift + NLP signals",
+    "cross-sectional momentum + crash prediction",
+    "portfolio blending + strategy combination + IC weighting",
+    "GitHub trending quant finance repos"
+  ],
+  "findings": [
+    {
+      "title": "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2604.13260",
+      "relevance_score": 9,
+      "action": "new_hypothesis",
+      "summary": "Speaker-weighted FinBERT on 16,428 earnings call transcripts (2015-2025). Analyst 49%, CFO 30%, Exec 16%, Other 5% weights. OOS Spearman IC 0.142, 2.03% monthly alpha (t=6.49), significant after SUE control. Implementable with cached ProsusAI/finbert + regex speaker parsing of EDGAR transcripts.",
+      "hypothesis_number": "H324",
+      "staged": true
+    },
+    {
+      "title": "Taming the Black Swan: AEGIS momentum-gated hierarchical optimization",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2604.09060",
+      "relevance_score": 8,
+      "action": "new_hypothesis",
+      "summary": "Volatility-adjusted momentum + minimax-correlation filter + SLSQP Sortino optimization. 20yr walk-forward NASDAQ-100 comparable returns with lower downside vol. Pure scipy/pandas.",
+      "hypothesis_number": "H325",
+      "staged": true
+    },
+    {
+      "title": "Continuous Timing Signals for Growth-Defensive Style Allocation",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2605.20636",
+      "relevance_score": 7,
+      "action": "new_hypothesis",
+      "summary": "Replaces discrete regime switches with differentiable tanh/softplus scoring (rate relief + SPY drawdown + VIX stress + crowding penalty). OOS Sharpe 1.01, CAGR 19.24%. Directly addresses H318 failure with continuous approach.",
+      "hypothesis_number": "H326",
+      "staged": true
+    },
+    {
+      "title": "Leakage-Aware Benchmarking: kNN macro-analog achieves LLM-comparable IC",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2606.22719",
+      "relevance_score": 7,
+      "action": "new_hypothesis",
+      "summary": "kNN on lag-shifted FRED features achieves median IC +0.154 comparable to full LLM retrieval pipeline. Published 2026-06-21. Pure sklearn + FRED API. Non-LLM solution to H318 failure.",
+      "hypothesis_number": "H327",
+      "staged": true
+    },
+    {
+      "title": "Continuous HMM with Heavy-Tail Emissions for Equity Regime Detection",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2606.23492",
+      "relevance_score": 6,
+      "action": "new_hypothesis",
+      "summary": "Student-t/NIG emission distributions fix Gaussian HMM slow autocorrelation decay and degeneracy. Addresses H251 failure (model predicted low_vol 100% of OOS). hmmlearn-compatible.",
+      "hypothesis_number": "H328",
+      "staged": true
+    },
+    {
+      "title": "The Mathematics of Heuristic Portfolio Optimization (HPO)",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2606.12612",
+      "relevance_score": 6,
+      "action": "wiki_expand",
+      "summary": "Unifies EW/inv-vol/risk-parity/HRP/RA-HRP as information-restricted Markowitz projections. Relevant to production blend allocation theory.",
+      "staged": false
+    },
+    {
+      "title": "ml4t/diagnostic: Signal diagnostics and backtest evaluation library",
+      "source": "github",
+      "url": "https://github.com/ml4t/diagnostic",
+      "relevance_score": 6,
+      "action": "wiki_expand",
+      "summary": "2026 Python library for IC decay, turnover analysis, factor exposure decomposition. Missing validation toolkit.",
+      "staged": false
+    },
+    {
+      "title": "Retail Investor Horizon and Earnings Announcements",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2512.00280",
+      "relevance_score": 5,
+      "action": "wiki_expand",
+      "summary": "Long-horizon retail = underreaction + PEAD; short-horizon = overreaction + reversal. Confirms H174 mechanism.",
+      "staged": false
+    },
+    {
+      "title": "Trends, Volatility, Correlations in Financial Markets",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2606.20145",
+      "relevance_score": 5,
+      "action": "wiki_expand",
+      "summary": "Correlations increase during strong downtrends — crash precursor relevant to H325 AEGIS design.",
+      "staged": false
+    },
+    {
+      "title": "qf-lib: Modular event-driven Python backtesting framework (943★)",
+      "source": "github",
+      "url": "https://github.com/quarkfin/qf-lib",
+      "relevance_score": 5,
+      "action": "wiki_expand",
+      "summary": "Modular multi-broker event-driven backtester, maintained 2026. Architecture upgrade candidate from run_hNNN.py.",
+      "staged": false
+    },
+    {
+      "title": "Parameters Optimization of Pair Trading Algorithm",
+      "source": "arxiv",
+      "url": "https://arxiv.org/abs/2412.12555",
+      "relevance_score": 3,
+      "action": "skip",
+      "summary": "Standard pairs trading. ETF pairs family CLOSED (H246/H271 structural breaks).",
+      "staged": false
+    }
+  ],
+  "scan_notes": {
+    "angle_1_pairs": "No compelling 2025-2026 work. Pairs family stays CLOSED.",
+    "angle_2_pead": "Strong hit H324 — speaker-weighted FinBERT directly extends H174 without new APIs.",
+    "angle_3_momentum_crash": "H325 AEGIS (Sortino SLSQP) + H328 heavy-tail HMM both actionable.",
+    "angle_4_blending": "H326 tanh-gated + H327 kNN macro-analog are practical H318 follow-ons.",
+    "angle_5_github": "No major new tools. ml4t/diagnostic notable for validation pipeline."
+  },
+  "hypotheses_staged": ["H324", "H325", "H326", "H327", "H328"],
+  "next_implementable": "H324 (speaker-weighted PEAD, relevance 9, no external APIs)"
+}
