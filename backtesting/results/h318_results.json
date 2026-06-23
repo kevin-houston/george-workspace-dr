@@ -1,0 +1,148 @@
+{
+  "hypothesis": "H318",
+  "description": "Meta-Agent ETF Rotation Selector \u2014 IC-weighted dynamic blend",
+  "is_period": {
+    "start": "2010-01-01",
+    "end": "2017-12-31"
+  },
+  "oos_period": {
+    "start": "2018-01-01",
+    "end": "2026-06-20"
+  },
+  "individual_strategies": {
+    "H026": {
+      "label": "H026",
+      "cagr": 0.2625,
+      "sharpe": 2.52,
+      "max_dd": -0.0576,
+      "ann_vol": 0.1042,
+      "neg_years": 0,
+      "n_months": 102
+    },
+    "H041a": {
+      "label": "H041a",
+      "cagr": 0.1823,
+      "sharpe": 1.8687,
+      "max_dd": -0.1375,
+      "ann_vol": 0.0975,
+      "neg_years": 1,
+      "n_months": 102
+    },
+    "H045": {
+      "label": "H045",
+      "cagr": 0.0451,
+      "sharpe": 1.2846,
+      "max_dd": -0.0669,
+      "ann_vol": 0.0351,
+      "neg_years": 1,
+      "n_months": 102
+    }
+  },
+  "variants": {
+    "A_equal_33": {
+      "IS": {
+        "label": "A_equal_33_IS",
+        "cagr": 0.1393,
+        "sharpe": 2.3979,
+        "max_dd": -0.0401,
+        "ann_vol": 0.0581,
+        "neg_years": 0,
+        "n_months": 96
+      },
+      "OOS": {
+        "label": "A_equal_33_OOS",
+        "cagr": 0.1626,
+        "sharpe": 2.4417,
+        "max_dd": -0.0461,
+        "ann_vol": 0.0666,
+        "neg_years": 0,
+        "n_months": 101
+      },
+      "wf_ratio": 1.018
+    },
+    "B_opt_40_30_30": {
+      "IS": {
+        "label": "B_opt_40_30_30_IS",
+        "cagr": 0.1463,
+        "sharpe": 2.4014,
+        "max_dd": -0.0415,
+        "ann_vol": 0.0609,
+        "neg_years": 0,
+        "n_months": 96
+      },
+      "OOS": {
+        "label": "B_opt_40_30_30_OOS",
+        "cagr": 0.1728,
+        "sharpe": 2.5009,
+        "max_dd": -0.0433,
+        "ann_vol": 0.0691,
+        "neg_years": 0,
+        "n_months": 101
+      },
+      "wf_ratio": 1.041
+    },
+    "C_ic_weighted": {
+      "IS": {
+        "label": "C_ic_weighted_IS",
+        "cagr": 0.1551,
+        "sharpe": 2.8995,
+        "max_dd": -0.0343,
+        "ann_vol": 0.0535,
+        "neg_years": 0,
+        "n_months": 72
+      },
+      "OOS": {
+        "label": "C_ic_weighted_OOS",
+        "cagr": 0.1796,
+        "sharpe": 2.1813,
+        "max_dd": -0.0541,
+        "ann_vol": 0.0823,
+        "neg_years": 0,
+        "n_months": 77
+      },
+      "wf_ratio": 0.752
+    },
+    "D_regime_switch": {
+      "IS": {
+        "label": "D_regime_switch_IS",
+        "cagr": 0.17,
+        "sharpe": 2.8297,
+        "max_dd": -0.0447,
+        "ann_vol": 0.0601,
+        "neg_years": 0,
+        "n_months": 96
+      },
+      "OOS": {
+        "label": "D_regime_switch_OOS",
+        "cagr": 0.1847,
+        "sharpe": 2.5818,
+        "max_dd": -0.0439,
+        "ann_vol": 0.0715,
+        "neg_years": 0,
+        "n_months": 101
+      },
+      "wf_ratio": 0.912
+    },
+    "E_logistic": {
+      "IS": {
+        "label": "E_logistic_IS",
+        "cagr": 0.1644,
+        "sharpe": 2.5449,
+        "max_dd": -0.0505,
+        "ann_vol": 0.0646,
+        "neg_years": 1,
+        "n_months": 185
+      },
+      "OOS": {
+        "label": "E_logistic_OOS",
+        "cagr": 0.1669,
+        "sharpe": 2.5853,
+        "max_dd": -0.0505,
+        "ann_vol": 0.0646,
+        "neg_years": 1,
+        "n_months": 173
+      },
+      "wf_ratio": 1.016
+    }
+  }
+}

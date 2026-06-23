@@ -7753,3 +7753,104 @@ Variants C and D pass the dream-cycle gate (OOS Sharpe > 1.174 AND MaxDD improve
 - Does NOT replace or augment H026/H041a/H045 production blend
 
 **Script:** `backtesting/daily/run_h320.py` | **Results:** `backtesting/results/h320_results.json`
+
+---
+
+### H318 — Meta-Agent ETF Rotation Selector (NOT CONFIRMED)
+
+**Source:** Ang, Azimbayev & Kim arXiv:2604.02279 "The Self-Driving Portfolio"; ATLAS autoresearch loop analogy (atlas-gic)
+
+**Hypothesis:**
+A meta-learner dynamically adjusting H026/H041a/H045 weights monthly—based on VIX, SPY 200MA, yield curve slope, and rolling IC—should outperform the static 40/30/30 allocation. Architecture: each strategy acts as a competing "agent"; meta-learner learns which to overweight from regime features and rolling performance.
+
+**IS:** 2010-2017 | **OOS:** 2018-2026 | **Gate:** OOS Sharpe > static 40/30/30 (2.501) AND MaxDD improvement ≥ 1pp
+
+**Individual strategy OOS (2018-2026):**
+
+| Strategy | OOS Sharpe | OOS CAGR | OOS MaxDD | NegYrs |
+|----------|------------|----------|-----------|--------|
+| H026 standalone | 2.520 | 26.2% | -5.8% | 0 |
+| H041a standalone | 1.869 | 18.2% | -13.8% | 1 |
+| H045 standalone | 1.285 | 4.5% | -6.7% | 1 |
+
+**Meta-learner variants:**
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | WF | NegYrs | Gate |
+|---------|-----------|------------|-----------|-----|--------|------|
+| A: Equal-weight 33/33/33 | 2.398 | 2.442 | -4.6% | 1.02 | 0 | baseline |
+| B: Static 40/30/30 | 2.401 | 2.501 | -4.3% | 1.04 | 0 | baseline |
+| C: IC-weighted (24m window) | 2.900 | 2.181 | -5.4% | 0.75 | 0 | FAIL |
+| D: Regime switch (VIX+200MA) | 2.830 | 2.582 | -4.4% | 0.91 | 0 | FAIL |
+| E: Logistic regression | 2.545 | 2.585 | -5.1% | 1.02 | 1 | FAIL |
+| SPY buy-hold | — | 1.010 | -23.9% | — | 1 | — |
+
+**Year-by-year OOS:**
+
+| Year | A (EW) | D (regime) | E (logit) |
+|------|--------|-----------|-----------|
+| 2018 | +14.6% | +17.0% | +16.4% |
+| 2019 | +22.2% | +23.7% | +23.5% |
+| 2020 | +22.7% | +21.0% | +24.0% |
+| 2021 | +14.7% | +18.5% | +16.7% |
+| 2022 | +0.2% | +0.2% | -0.0% |
+| 2023 | +18.7% | +21.2% | +20.5% |
+| 2024 | +24.4% | +28.9% | +26.9% |
+| 2025 | +13.7% | +16.1% | +14.8% |
+| 2026 | +7.2% | +10.5% | +8.2% |
+
+**OOS correlations with SPY:** A=0.600, D=0.571, E=0.596
+
+**Verdict: NOT CONFIRMED** — No variant passes the dual gate (Sharpe improvement AND MaxDD ≥ 1pp improvement over static B).
+
+**Root causes:**
+1. **H026 dominance:** H026 standalone OOS Sharpe (2.520) actually exceeds every meta-learner variant. The "blend" primarily reduces MaxDD (from H026's -5.8% to -4.3%) by diversifying with lower-performing H041a/H045 — but at a Sharpe cost. The meta-learner cannot improve on what H026 already delivers.
+2. **IC-weighted warmup problem (Variant C):** The 24-month rolling IC window produces NaN for the first 2 OOS years (2018-2019), missing a strong bull market period. This structural gap reduces its apparent OOS Sharpe (2.181).
+3. **Regime switch partial success (Variant D):** Best Sharpe (2.582) via 2018-2019 bull overweight and 2022 defensive tilt, but the improvement comes from a slightly worse MaxDD (-4.4% vs -4.3% baseline). Net: +0.08 Sharpe, -0.1pp MaxDD. Not a meaningful meta-learner contribution.
+4. **Logistic regression noise (Variant E):** The 5-feature regime classifier adds 1 negative year (2022: -0.0%) vs 0 for static blend. The model occasionally overweights H041a (worse MaxDD -13.8%) in months it shouldn't.
+
+**Key production insight:** The static 40/30/30 (H026/H041a/H045) allocation is already near-optimal for this strategy set. Regime-adaptive meta-learning adds complexity without durable benefit because:
+- H026 captures bull-market regime changes natively via its own momentum signal
+- H045 provides bear-market defense through bond momentum — no external regime gating needed
+- The three strategies are already momentum-aware; a meta-learner on top is second-guessing their built-in regime detection
+
+**Path forward:** If meta-learning over strategies is revisited, use rolling walk-forward with ≥48 months IS to reduce warmup gap (avoids C's 2018-2019 NaN problem). Alternatively, test ATLAS-style Darwinian weight updates at very small ±5% increments (vs the ±10-20% shifts tested here).
+
+**Script:** `backtesting/daily/run_h318.py` | **Results:** `backtesting/results/h318_results.json`
+
+---
+
+### H321 — LLM Semantic Risk Filter on Cross-Sectional Momentum [STUB — not yet run]
+
+**Source:** arXiv:2602.07048 (LLM Lead-Lag Semantic Filter, 2026)
+
+**Hypothesis:** LLM economic plausibility validation (GPT-4o-mini) filters out cross-sectional momentum bets lacking a fundamental transmission mechanism. Where H320 uses macro features, H321 uses company-pair economic relationships to validate whether the momentum signal has a plausible driver. Claimed 46.5% downside reduction on prediction market data.
+
+**Design:** H198 30-stock universe. GPT-4o-mini rates each monthly top-5 momentum winner (0-10); hold only those scoring ≥ 6. IS: 2015-2022 | OOS: 2023-2026. Gate: OOS Sharpe > H198 1.174 AND MaxDD improvement > 5pp.
+
+**Status:** Script scaffold only at `backtesting/daily/run_h321.py`. Requires OpenAI API (~$0.50/month). Not yet run.
+
+---
+
+### H322 — FinBERT+Fundamentals Transformer for Earnings Direction [STUB — not yet run]
+
+**Source:** arXiv:2605.25894 (Multi-Modal Earnings Announcement Direction, May 2026)
+
+**Hypothesis:** Transformer jointly encoding FinBERT sentiment + 15 fundamental metrics + 3 technical indicators (vs H317's sequential filter approach) learns feature interactions that sequential gates miss. Distinction: H317 uses threshold gates (FinBERT THEN EPS), H322 uses Transformer to learn joint signal.
+
+**Design:** Same 30-stock H163/H174 universe. FinBERT features from cached scores. Fundamentals from yfinance. 2-layer 4-head Transformer trained on IS events. IS: 2020-2023 | OOS: 2024-2026. Gate: WR > 70% AND n ≥ 20 AND mean_ret > 4%.
+
+**Status:** Script scaffold only at `backtesting/daily/run_h322.py`. Not yet run.
+
+---
+
+### H323 — HMM + Reinforcement Learning Regime-Aware ETF Rotation [STUB — not yet run]
+
+**Source:** arXiv:2605.27848 (HMM+RL Portfolio Optimization, May 2026)
+
+**Hypothesis:** 3-state HMM (low-vol/transition/high-vol) + RL policy (PPO) learns optimal allocation per regime state for H026/H041a/H045. Statistical alternative to H318 LLM meta-agent — same problem, pure statistical solution. Horse race: if H323 matches H318 Sharpe at zero LLM cost, prefer H323.
+
+**Design:** Features: SPY daily return, VIX, T10Y3M, realized vol 20d. HMM: 3 states via hmmlearn GaussianHMM + min_duration=5 smoothing (SJM approximation). RL: PPO via stable-baselines3. IS: 2004-2018 | OOS: 2019-2026. Gate: OOS Sharpe > 4.158 (production blend).
+
+**Note (post-H318):** H318's NOT CONFIRMED finding suggests regime-switching meta-learning over H026/H041a/H045 adds minimal value because the strategies already capture regime changes natively. H323 may face the same ceiling. Consider narrowing scope to H026-only regime tilt (already tested in H301).
+
+**Status:** Script scaffold only at `backtesting/daily/run_h323.py`. Requires stable-baselines3 (RL). Not yet run.

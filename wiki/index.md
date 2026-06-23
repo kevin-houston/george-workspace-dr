@@ -112,7 +112,7 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H320 (frontier: H320 stub); H311 CONFIRMED (multi-asset diversification EW-4 OOS 1.532); H312 PARTIAL (LLM price-volume baseline); H316–H320 stub (LLM pairs, multi-modal PEAD, semantic network, crash filter); H314/H315 NOT CONFIRMED; production portfolio H041a/H026/H045/IBS
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H323 (frontier: H323 stub); H318 NOT CONFIRMED (meta-agent ETF selector; static 40/30/30 beats all dynamic variants; H026 dominates — Sharpe 2.52 standalone); H321/H322/H323 stubs; production portfolio H041a/H026/H045/IBS
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules

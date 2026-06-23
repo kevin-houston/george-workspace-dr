@@ -477,3 +477,6 @@ Source: https://clips.agent-native.com/
 Key entities: Agent-Native Clips, Agent-Native framework (BuilderIO), Builder.io.
 Key insight: "one action → agent + UI + HTTP + MCP + A2A + CLI" pattern; Clips is an AI transcription/summarization/search app on top of the OSS framework.
 Cross-references: tools/hermes-gpt.md, tools/openalice.md.
+
+## [2026-06-22] research | H318 meta-agent ETF rotation backtest
+Pages updated: hypothesis-log.md (H318 NOT CONFIRMED + H321/H322/H323 stubs logged), index.md. H318: 5 meta-learner variants tested (equal-weight, optimized static, IC-weighted, regime-switch, logistic regression). All fail dual gate vs static 40/30/30 baseline. Key finding: H026 standalone Sharpe 2.520 > any blend; static 40/30/30 already near-optimal.
