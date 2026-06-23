@@ -470,3 +470,10 @@ Pages created: 1 (tools/youtube-fetcher-to-markdown.md). Pages updated: 2 (index
 Source: https://github.com/JimmySadek/youtube-fetcher-to-markdown (via https://x.com/tom_doerr/status/2069072851928224193)
 Key entities: youtube-fetcher-to-markdown, JimmySadek, youtube-transcript-api, yt-dlp.
 Key insight: structured alternative to raw yt-dlp subtitle dumps; YAML frontmatter + chapters + deduplication; useful for wiki ingestion of YouTube content.
+
+## [2026-06-22] ingest | Agent-Native Clips
+Pages created: 1 (tools/agent-native-clips.md). Pages updated: 2 (index.md, log.md).
+Source: https://clips.agent-native.com/
+Key entities: Agent-Native Clips, Agent-Native framework (BuilderIO), Builder.io.
+Key insight: "one action → agent + UI + HTTP + MCP + A2A + CLI" pattern; Clips is an AI transcription/summarization/search app on top of the OSS framework.
+Cross-references: tools/hermes-gpt.md, tools/openalice.md.
