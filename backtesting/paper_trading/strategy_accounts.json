@@ -11,8 +11,17 @@
       "backtest_oos_period": "2020-2026",
       "script": "h112_monthly.py",
       "start_equity": 5000.0,
-      "cash": 5020.001,
-      "open_positions": {},
+      "cash": -0.0001,
+      "open_positions": {
+        "XLK": {
+          "qty": 27.245596,
+          "entry_price": 184.25,
+          "entry_date": "2026-06-23",
+          "cost_basis": 5020.0011,
+          "order_id": "487eecf6-eb42-485f-ba10-afebcfdbfc94",
+          "note": ""
+        }
+      },
       "closed_trades": [
         {
           "symbol": "XLK",
@@ -34,6 +43,10 @@
         },
         {
           "date": "2026-06-22",
+          "equity": 5020.0
+        },
+        {
+          "date": "2026-06-23",
           "equity": 5020.0
         }
       ],
@@ -86,6 +99,10 @@
         {
           "date": "2026-06-22",
           "equity": 5000.0
+        },
+        {
+          "date": "2026-06-23",
+          "equity": 5000.0
         }
       ],
       "status": "active"
@@ -104,7 +121,12 @@
       "cash": 5000.0,
       "open_positions": {},
       "closed_trades": [],
-      "equity_history": [],
+      "equity_history": [
+        {
+          "date": "2026-06-23",
+          "equity": 5000.0
+        }
+      ],
       "status": "active"
     },
     "H234": {
@@ -122,5 +144,5 @@
       "status": "stub"
     }
   },
-  "updated": "2026-06-22T09:46:53.210505"
+  "updated": "2026-06-23T14:46:40.780880"
 }

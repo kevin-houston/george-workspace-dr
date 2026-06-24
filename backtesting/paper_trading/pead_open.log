@@ -91,3 +91,16 @@
 [2026-06-22 08:32:11] =======================================================
 [2026-06-22 08:32:11] PEAD open pass starting
 [2026-06-22 08:32:11] No watchlist for today or stale. Nothing to do.
+[2026-06-23 08:32:24] =======================================================
+[2026-06-23 08:32:24] PEAD open pass starting
+[2026-06-23 08:32:24] No watchlist for today or stale. Nothing to do.
+[2026-06-23 08:47:41] =======================================================
+[2026-06-23 08:47:41] PEAD open pass starting
+[2026-06-23 08:47:41] Candidates from overnight: ['FDX', 'MU']
+[2026-06-23 08:47:41] H174 strategy equity: $5,000
+[2026-06-23 08:47:44]   FDX: prior_close=328.78 current=324.12 gap=-1.4%
+[2026-06-23 08:47:44]   FDX: gap -1.4% < 3% threshold — skip
+[2026-06-23 08:47:45]   MU: prior_close=1211.38 current=1072.67 gap=-11.5%
+[2026-06-23 08:47:45]   MU: gap -11.5% < 3% threshold — skip
+[2026-06-23 08:47:45] No new positions entered today.
+[2026-06-23 08:47:45] Open pass complete.

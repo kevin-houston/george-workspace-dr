@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Session Summary — 2026-06-23</title>
+  
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--orange:#f0883e;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.6;padding:0;}
+
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:baseline;justify-content:space-between;}
+.header-title{font-size:16px;font-weight:700;letter-spacing:.3px;}
+.header-sub{color:var(--muted);font-size:12px;}
+
+.main{padding:20px 24px;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1.1;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.muted{color:var(--muted);}
+
+/* Section card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.card-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.card-badge{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:2px 8px;color:var(--muted);}
+.card-body{padding:14px 16px;}
+
+/* Proposals */
+.proposal{padding:10px 0;border-bottom:1px solid var(--border);}
+.proposal:last-child{border-bottom:none;}
+.proposal-header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.proposal-title{font-size:13px;font-weight:600;}
+.risk-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+.risk-medium{background:rgba(210,153,34,.18);color:var(--yellow);border:1px solid rgba(210,153,34,.3);}
+.risk-high{background:rgba(248,81,73,.18);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.risk-low{background:rgba(63,185,80,.18);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.proposal-rationale{font-size:12px;color:var(--muted);margin-top:3px;}
+.proposal-target{font-size:11px;color:var(--blue);font-family:monospace;margin-top:3px;}
+
+/* Commit list */
+.commit{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;display:flex;gap:10px;}
+.commit:last-child{border-bottom:none;}
+.commit-hash{font-family:monospace;color:var(--blue);flex-shrink:0;}
+.commit-msg{color:var(--text);}
+
+/* Podcast */
+.podcast-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;}
+.podcast-dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:10px;}
+.link-btn{display:inline-block;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--blue);background:var(--surface);}
+.link-btn:hover{border-color:var(--blue);}
+
+/* Raw changelog */
+pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;overflow-x:auto;white-space:pre-wrap;color:var(--muted);margin-top:10px;}
+
+.empty{color:var(--muted);font-size:12px;padding:4px 0;}
+</style>
+
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-title">Session Summary &mdash; 2026-06-23</div>
+    </div>
+    <div class="header-sub">Generated 2026-06-23 04:03 CT</div>
+  </div>
+  <div class="main">
+    
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Proposals Applied</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Flagged</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Commits</div>
+        <div class="kpi-value blue">5</div></div>
+      <div class="kpi"><div class="kpi-label">Podcast</div>
+        <div class="kpi-value muted">—</div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Dream Cycle</span>
+        <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
+      </div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H324 design — Speaker-Weighted FinBERT PEAD (extension of H174)</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">H174 CONFIRMED: FinBERT score &gt;= 0.18 + earnings surprise &gt;= 0.02 yields OOS WR=81.8%, MeanRet=6.89%, n=22. H317 NOT CONFIRMED: adding EPS filters reduced sample below n=20 gate. arXiv:2604.13260 offers a different upgrade path — not more filters, but better signal extraction by weighting transcript…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h324.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H325 design — AEGIS Sortino-Optimized Cross-Sectional Momentum</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">H320 (LightGBM crash filter on H198) PARTIAL CONFIRMED: Sharpe 1.274 OOS, MaxDD improved 8.3pp. But WF ratio 0.707 and Corr(SPY)=0.724 too high for production blend. arXiv:2604.09060 offers a more transparent alternative: (1) volatility-adjust momentum scores, (2) apply greedy minimax-correlation fi…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h325.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H326 design — Continuous Tanh-Gated H026/H041a/H045 Strategy Blend</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">H318 NOT CONFIRMED: all discrete meta-learner variants failed because momentum strategies already perform internal regime detection. arXiv:2605.20636 offers a qualitatively different approach: instead of discrete regime labels (bear/bull/neutral), use DIFFERENTIABLE continuous scores via tanh/softpl…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h326.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H327 design — kNN Macro-Analog ETF Rotation Ranker (H318 replacement, no LLM)</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Published 2026-06-21 (2 days ago). Key finding: a kNN macro-analog model achieves median IC +0.154 comparable to a full retrieval-augmented LLM pipeline for equity factor ranking, when using lag-shifted FRED + Cleveland Fed CPI nowcasts as features. The LLM advantage concentrates in extreme rankings…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h327.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H328 design — Student-t Emission HMM (H251 regime fix)</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">H251 CONFIRMED but degenerate: 3-state Gaussian HMM predicted low_vol 100% of OOS time (Sharpe 0.941 = static 80/10/10). Root cause: Gaussian emissions have thin tails — crash clusters violate i.i.d. normality, causing the model to absorb all volatility into one state. arXiv:2606.23492 shows that St…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h328.py</div>
+            </div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Commits</span>
+        <span class="card-badge">5 today</span>
+      </div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">b048d96</span><span class="commit-msg">dream cycle: apply 2026-06-23 staged proposals (H324, H325, H326, H327, H328)</span></div><div class="commit"><span class="commit-hash">083727e</span><span class="commit-msg">wiki: add H324–H328 stub entries to hypothesis log</span></div><div class="commit"><span class="commit-hash">1e3cd3b</span><span class="commit-msg">dream cycle: 2026-06-23 scan — stage H324–H328 proposals</span></div><div class="commit"><span class="commit-hash">dad0a7d</span><span class="commit-msg">wiki: strategy blending &amp; correlation methodology (H318 synthesis)</span></div><div class="commit"><span class="commit-hash">01404d2</span><span class="commit-msg">nightly backup 2026-06-23</span></div></div>
+    </div>
+    
+    
+  </div>
+</body>
+</html>

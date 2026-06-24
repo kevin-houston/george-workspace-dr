@@ -176,6 +176,12 @@
       "claimToken": "a0ec0003fe15a6fa4504f9dd3eb8542d86b6842e55f74b23bfdb78eef01ee4e9",
       "claimUrl": "https://here.now/claim?slug=hidden-memoir-5wc6&token=a0ec0003fe15a6fa4504f9dd3eb8542d86b6842e55f74b23bfdb78eef01ee4e9",
       "expiresAt": "2026-06-23T09:04:32.014Z"
+    },
+    "ivory-ledger-nc48": {
+      "siteUrl": "https://ivory-ledger-nc48.here.now/",
+      "claimToken": "41f9f25679caa72712d6c443e7de935f56d40757dda2b3d932a9ecb1efdb219c",
+      "claimUrl": "https://here.now/claim?slug=ivory-ledger-nc48&token=41f9f25679caa72712d6c443e7de935f56d40757dda2b3d932a9ecb1efdb219c",
+      "expiresAt": "2026-06-24T09:04:09.708Z"
     }
   }
 }
