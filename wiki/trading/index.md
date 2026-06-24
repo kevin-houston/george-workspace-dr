@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-21 (pairs-trading.md expanded: LLM semantic pairs section; H316 design; Moira+2604.19476+2602.07048; 2-stage pipeline + cost model)
+updated: 2026-06-24 (options-backtesting-methodology.md new; qf-lib + RustQuant added to tools)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -61,6 +61,8 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [QuantMind](tools/quant-mind.md) ← new 2026-06-10 (LLMQuant arXiv paper ingestion framework; NeurIPS 2025; paper_flow API; dream cycle integration candidate; ~$0.09/night for 30 papers; memory layer in development)
   - [Multi-Agent LLM Trading](algorithms/multi-agent-llm-trading.md) ← merged 2026-06-21 (TradingAgents 84.9k★; HedgeAgents; Expert Investment Teams; Agent Market Arena; MadEvolve evolutionary; NautilusTrader 23.4k★ Rust; reliability taxonomy CBS metric; reproducibility crisis 0/19 fully reproducible; H274 PEAD upgrade; H318 meta-learner; Self-Driving Portfolio Ang/BlackRock) [formerly also at tools/multi-agent-llm-trading.md — merged]
   - [Time-Series Foundation Models](algorithms/ts-foundation-models.md) ← new 2026-06-21 (Chronos-2 #1 GIFT-Eval; TimesFM 2.5 16k context + quantile head; Moirai any-variate ICML oral; FinTSB benchmark 15-25% over ARIMA; TS-RAG +6.51% via retrieval; financial verdict: feature engineering use case, not standalone signal; H318/H320+ integration patterns)
+  - [qf-lib](tools/qf-lib.md) ← new 2026-06-24 (quarkfin/qf-lib 943★; event-driven Python backtester; broker + data vendor integrations; Crypto/Stocks/Futures; actively maintained 2026; alternative to backtrader with better data integration layer)
+  - [RustQuant](tools/rust-quant.md) ← new 2026-06-24 (avhz/RustQuant 1773★; Rust quantitative finance library; options pricing, stochastic processes, ML; QuantLib-comparable but Rust-native; useful for fast options Greeks computation in hybrid Python/Rust workflows)
   - [AI-Trader](tools/ai-trader.md) ← new 2026-06-11 (HKUDS agent-native social trading platform; signal publishing, copy-trading, collective intelligence; companion to Vibe-Trading; Polymarket paper trading live; MIT self-hostable; register George via one-message SKILL.md integration)
   - [ContestTrade](tools/contesttrade.md) ← new 2026-06-11 (FinStep-AI multi-agent trading via internal contest mechanism; arXiv:2508.00554; dual-stage: Data Team → factor contest → Research Team → proposal contest → allocation; event-driven stock selection; US market support in V2.0; Apache 2.0)
   - [QuantMuse](tools/quantmuse.md) ← new 2026-06-11 (comprehensive quant trading framework; FactorCalculator/FactorScreener API; BacktestEngine; LLM/ML integration; C++ execution backend; 8+ built-in strategies; Yahoo Finance free by default; MIT)
@@ -96,6 +98,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Survivorship Bias & Universe Construction](backtesting/survivorship-bias.md) ← new 2026-06-03 (bias types + magnitude: Ranse 2025 +4.94pp returns/+0.097 Sharpe; Shumway 1997 delistings = 40% of momentum profits; fja05680/sp500 free repo ★854; Norgate Platinum for production; PIT universe builder; H241–H246 bias impact assessment; common mistakes table)
   - [Regime Detection Signals — Practical Data Guide](backtesting/regime-detection-signals.md) ← new 2026-06-04 (SPY 200MA + VIX FRED + T10Y2Y fetch code; four-state composite H249-style; continuous score Xiong 2026; FRED release-lag rules; filtered vs smoothed HMM probabilities; H165a/H249/H205 confirmed results table)
   - [Strategy Blending & Correlation Management](backtesting/strategy-blending-correlation.md) ← new 2026-06-23 (H026/H041a/H045 correlation matrix OOS; IC-weighted blending code; meta-learning failure analysis from H318; production blend rationale 40/30/30 static near-optimal; corr gate for new strategy admission; IBS daily sleeve is source of Sharpe 2.5→4.16 jump; next addition candidates: H309 dispersion + H174 PEAD)
+  - [Options Backtesting Methodology](backtesting/options-backtesting-methodology.md) ← new 2026-06-24 (4 data tiers: synthetic BSM/VIX, LEAN free, ThetaData $80/mo, ORATS $99/mo; py_vollib 413★ for Greeks; Greek P&L decomposition Δ+Γ+Θ+V; VRP free synthetic signal; iron condor + dispersion methodology; 8-item common mistakes table; H266/H309/H329 integration paths)
 - [Paper Trading](paper-trading/) — Alpaca results log
   - [H149 Alpaca ETF Rotation](paper-trading/h122-alpaca.md) ← active (100% H026, $102k paper)
   - [PEAD-NLP Alpaca Deployment](paper-trading/pead-nlp-alpaca.md) ← new 2026-05-06 (H163/H174 live pipeline: gap detection, 8-K scoring, OPG orders)

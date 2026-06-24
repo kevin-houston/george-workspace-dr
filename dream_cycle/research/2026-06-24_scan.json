@@ -1,0 +1,88 @@
+{
+  "date": "2026-06-24",
+  "angles_searched": [
+    "arXiv q-fin.TR: LLM + pairs trading + cointegration",
+    "arXiv q-fin.TR: PEAD + post-earnings + NLP text",
+    "arXiv q-fin.TR: cross-sectional momentum + factor momentum",
+    "arXiv q-fin.PM: multi-agent LLM + portfolio",
+    "GitHub: trending quant finance repos (updated 2025-2026)"
+  ],
+  "papers_found": [
+    {
+      "id": "arXiv:2606.17032",
+      "title": "Sharpe Ratio and Return-VaR Ratio Maximization for Option Portfolios with Skew-Elliptical t Underlying Returns",
+      "date": "2026-06-15",
+      "url": "https://arxiv.org/abs/2606.17032",
+      "relevance_score": 9,
+      "relevance_reason": "Direct actionability for H309 (dispersion), H266 (iron condor) — provides analytical optimal weights for options portfolios under fat-tail skew-t returns. Staged as H329.",
+      "staged": true,
+      "proposal": "1_options_skewt_portfolio_h329.json"
+    },
+    {
+      "id": "arXiv:2606.24019",
+      "title": "Empirical Confirmation of the Square-Root Law of Market Impact in a U.S. Large-Cap Equity",
+      "date": "2026-06-22",
+      "url": "https://arxiv.org/abs/2606.24019",
+      "relevance_score": 6,
+      "relevance_reason": "Empirical validation of SRL constant c=0.69 on AAPL using 500M Nasdaq ITCH events. Updates transaction-costs.md with empirical calibration for US large-cap.",
+      "staged": true,
+      "proposal": "2_transaction_cost_srl_update.json"
+    },
+    {
+      "id": "arXiv:2606.20903",
+      "title": "Reinforcement Learning for Risk-Sensitive Investment Management: a Free Energy-Entropy Duality Approach",
+      "date": "2026-06-18",
+      "url": "https://arxiv.org/abs/2606.20903",
+      "relevance_score": 7,
+      "relevance_reason": "Free energy-entropy RL (LQG) for benchmark-relative allocation — theoretically superior to H204 PPO. Staged as H330 stub (deprioritized behind H325/H328).",
+      "staged": true,
+      "proposal": "3_rl_risk_sensitive_h330.json"
+    },
+    {
+      "id": "arXiv:2606.23367",
+      "title": "Asymmetry PRISM: A CPU/GPU Portfolio Optimization Engine for Deadline-Bounded Institutional Rebalancing",
+      "date": "2026-06-22",
+      "url": "https://arxiv.org/abs/2606.23367",
+      "relevance_score": 3,
+      "relevance_reason": "Institutional-scale rebalancing optimizer with GPU. Not actionable at our scale (single-account paper trading); relevant only if managing hundreds of accounts.",
+      "staged": false
+    }
+  ],
+  "github_repos_found": [
+    {
+      "repo": "quarkfin/qf-lib",
+      "stars": 943,
+      "url": "https://github.com/quarkfin/qf-lib",
+      "relevance_score": 8,
+      "relevance_reason": "Active Python event-driven backtester with broker integrations. Better maintained than backtrader. Relevant for H266/H309 options backtesting.",
+      "action": "added to wiki tools/qf-lib.md"
+    },
+    {
+      "repo": "avhz/RustQuant",
+      "stars": 1773,
+      "url": "https://github.com/avhz/RustQuant",
+      "relevance_score": 7,
+      "relevance_reason": "Rust quant library with options pricing, GARCH, Kalman filter. Useful for fast Greeks computation in Python/Rust hybrid workflows.",
+      "action": "added to wiki tools/rust-quant.md"
+    },
+    {
+      "repo": "akfamily/akquant",
+      "stars": 1584,
+      "url": "https://github.com/akfamily/akquant",
+      "relevance_score": 4,
+      "relevance_reason": "Rust+Python quant framework; primarily Chinese market focus. Less directly relevant to our US equity/ETF pipeline.",
+      "action": "noted, not staged"
+    }
+  ],
+  "wiki_expansion": {
+    "new_pages": [
+      "wiki/trading/backtesting/options-backtesting-methodology.md",
+      "wiki/trading/tools/qf-lib.md",
+      "wiki/trading/tools/rust-quant.md"
+    ],
+    "focus": "options backtesting methodology — identified as thinnest gap given H309/H266/H329 queued",
+    "data_tiers_documented": ["Tier 0 synthetic BSM+VIX", "Tier 1 LEAN free", "Tier 2 ThetaData $80/mo", "Tier 3 ORATS $99/mo"]
+  },
+  "proposals_staged": 3,
+  "notes": "arXiv API returned sparse on-topic results today — q-fin category searches returned same microstructure papers regardless of query terms. Most useful finds came via manual ID lookup of recently-submitted q-fin.PM papers."
+}

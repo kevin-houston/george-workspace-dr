@@ -1,0 +1,14 @@
+{
+  "id": "h330-rl-risk-sensitive-allocation",
+  "date": "2026-06-24",
+  "source": "arXiv:2606.20903 (2026-06-18) — 'Reinforcement Learning for Risk-Sensitive Investment Management: a Free Energy-Entropy Duality Approach'",
+  "source_url": "https://arxiv.org/abs/2606.20903",
+  "title": "H330 stub — Free Energy-Entropy RL for Risk-Sensitive ETF Allocation",
+  "rationale": "H204 (Deep RL PPO for equity rotation) NOT CONFIRMED — PPO failed to beat H198 momentum baseline due to sample efficiency. arXiv:2606.20903 proposes a fundamentally different RL approach: continuous-time risk-sensitive allocation via free energy-entropy duality, reformulated as a linear-quadratic-Gaussian stochastic differential game. Key advantages over PPO: (1) theoretically grounded risk-sensitivity (not just reward maximization), (2) handles benchmark-relative allocation (our use case: beat static 40/30/30 H318 blend), (3) avoids high variance of PPO gradient estimates. Relevant to H026/H041a/H045 rotation: the LQG formulation is amenable to a 3-asset continuous allocation problem. Note: requires continuous-time implementation — would adapt to monthly allocation via discrete approximation.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h330.py",
+  "content": "# H330 — Free Energy-Entropy RL for Risk-Sensitive ETF Allocation\n# Source: arXiv:2606.20903 (2026-06-18)\n# Hypothesis: Replace H318 static blend with RL agent trained via free\n# energy-entropy duality (LQG formulation). Key innovation vs H204 (PPO):\n# risk-sensitive objective — not just maximize return, but maximize\n# risk-adjusted return under a free energy criterion (= expected reward\n# minus KL divergence from reference policy). Equivalent to soft actor-critic\n# but with theoretical guarantees for the LQG case.\n#\n# Universe: H026/H041a/H045 (same as H318 meta-learner)\n# State: macro features (same 8 as H327: VIX, SPY mom, yield slope, etc.)\n# Action: continuous allocation weights in [0, 1]^3 with simplex constraint\n# Objective: maximize Sharpe (risk-sensitive) with KL penalty for deviation\n#   from base policy (uniform 1/3 allocation)\n# IS: 2010-2017 | OOS: 2018-2026\n#\n# Implementation approach:\n# - Use stable-baselines3 SAC (Soft Actor-Critic = free energy-entropy in discrete approx)\n# - Monthly rebalancing episodes; state = macro feature vector\n# - Reward = monthly return of blended portfolio minus risk penalty\n# - Compare vs H318 static blend (Sharpe 2.501) and H327 kNN (Sharpe 2.475)\n#\n# Gate: OOS Sharpe > H318 baseline 2.501 AND MaxDD > -4.3%\n# Deprioritized vs H325/H328 (simpler, implementable without RL infra)\n# Revisit after H325 AEGIS Sortino is evaluated\n#\n# Libraries: stable-baselines3, gymnasium, numpy, pandas, yfinance, fredapi\npass\n",
+  "action": "write",
+  "apply_status": "pending"
+}

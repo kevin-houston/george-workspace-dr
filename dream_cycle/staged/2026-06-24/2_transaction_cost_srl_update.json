@@ -1,0 +1,14 @@
+{
+  "id": "wiki-transaction-cost-srl-empirical",
+  "date": "2026-06-24",
+  "source": "arXiv:2606.24019 (2026-06-22) — 'Empirical Confirmation of the Square-Root Law of Market Impact in a U.S. Large-Cap Equity'",
+  "source_url": "https://arxiv.org/abs/2606.24019",
+  "title": "Wiki update: empirical SRL constant c=0.69 to transaction-costs.md",
+  "rationale": "arXiv:2606.24019 empirically validates the square-root law of market impact I/σ_D = c·(Q/V_D)^0.5 on AAPL using 178 trading days of Nasdaq ITCH data (500M events). Key result: bias-corrected constant c_est ≈ 0.69, consistent with c ∈ [0.5, 1.0] literature range. Our transaction-costs.md already has the SRL formula but the constant was listed as generic [0.5, 1.0]. Update with empirical validation from large-cap US equity: c=0.69 for AAPL. This improves slippage modeling for H181 (reversal on 200-stock universe) and H243 (L/S equity).",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/backtesting/transaction-costs.md",
+  "content": "Add to the square-root market impact section: 'Empirical calibration (2026): arXiv:2606.24019 tested SRL on AAPL using 178 trading days of full Nasdaq ITCH L3 data (Dec 2024-Aug 2025, ~500M events). Bias-corrected estimate: c_est = 0.69 (raw c_raw = 0.69). Confirms c ∈ [0.5, 1.0] is appropriate for US large-cap equities. For portfolio sizing: use c=0.70 as default for large-cap US equity momentum (H181, H198, H228); scale to c=0.85 for mid-cap where liquidity is lower.'",
+  "action": "patch",
+  "apply_status": "pending"
+}
