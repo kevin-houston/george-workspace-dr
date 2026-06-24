@@ -159,6 +159,8 @@ impact_large = market_impact_bps(large_order, adv, vol)
 print(f"Large fund impact: {impact_large:.1f} bps")  # → ~14 bps
 ```
 
+**Empirical calibration (2026):** arXiv:2606.24019 tested the SRL on AAPL using 178 trading days of full Nasdaq ITCH L3 data (Dec 2024–Aug 2025, ~500M events). Bias-corrected estimate: c_est = 0.69 (raw c_raw = 0.69). Confirms c ∈ [0.5, 1.0] is appropriate for US large-cap equities. **Recommended defaults:** c = 0.70 for large-cap US equity momentum (H181, H198, H228); c = 0.85 for mid-cap where liquidity is lower.
+
 **When market impact matters for this project:**
 - At paper trading scale ($100k portfolio): almost never — position sizes are <0.01% ADV for liquid stocks
 - At $1M+ AUM: begins to matter for small-cap positions

@@ -7946,3 +7946,27 @@ Gate: Sharpe > 2.501 → 2.4753 ✗ FAIL | MaxDD ≤ -4.3% → -4.44% ✗ FAIL
 **Design:** Option A (quick): transform returns r_t* = sign(r_t)*|r_t|^(1/4) as Student-t approximation, use GaussianHMM on transformed data. Option B (exact): custom Student-t EM with scipy.stats.t.fit per state. SPY/TLT/GLD monthly returns. IS: 2004-2017 | OOS: 2018-2026. Gate: Sharpe > H251 0.941 AND no single state > 80% of OOS months. Also report Corr(H026) — want < 0.70.
 
 **Status:** Staged at `dream_cycle/staged/2026-06-23/5_heavy_tail_hmm_h328.json`. Script scaffold only at `backtesting/daily/run_h328.py`. Not yet run.
+
+---
+
+### H329 — Optimal Options Portfolio Under Skew-t Returns [STUB — not yet run]
+
+**Source:** arXiv:2606.17032 (2026-06-15) — "Sharpe Ratio and Return-VaR Ratio Maximization for Option Portfolios with Skew-Elliptical t Underlying Returns"
+
+**Hypothesis:** BSM/Gaussian-optimal iron condor delta selection and sizing are suboptimal when underlying returns follow a skew-elliptical t-distribution (heavy tails + negative skew). The paper provides closed-form analytical weights for Sharpe ratio and Return-VaR ratio maximization under skew-t. OTM short options are most exposed to tail risk, so Gaussian-optimal deltas systematically under-price the tail.
+
+**Design:** (1) Fit skew-t to SPX IS returns (2010-2017) via scipy.stats.t; estimate df and skewness. (2) Compute analytical optimal strike/delta for short puts under skew-t vs BSM. (3) Backtest iron condor with standard 16Δ vs skew-t-optimal Δ. OOS: 2018-2026. Gate: OOS Sharpe > equal-notional condor baseline AND MaxDD improvement. Data: Tier 0 synthetic (BSM+VIX proxy); upgrade to LEAN for validation.
+
+**Status:** Staged at `dream_cycle/staged/2026-06-24/1_options_skewt_portfolio_h329.json`. Script scaffold only at `backtesting/daily/run_h329.py`. Not yet run.
+
+---
+
+### H330 — Free Energy-Entropy RL for Risk-Sensitive ETF Allocation [STUB — not yet run]
+
+**Source:** arXiv:2606.20903 (2026-06-18) — "Reinforcement Learning for Risk-Sensitive Investment Management: a Free Energy-Entropy Duality Approach"
+
+**Hypothesis:** H204 (Deep RL PPO) NOT CONFIRMED — sample efficiency failure. Free energy-entropy duality reformulates continuous-time risk-sensitive allocation as a linear-quadratic-Gaussian stochastic differential game, providing theoretical guarantees unavailable to PPO. SAC (Soft Actor-Critic) is the practical discrete-time equivalent. Benchmark-relative objective directly targets beating the static H318 40/30/30 blend.
+
+**Design:** Universe: H026/H041a/H045. State: 8 macro features (same as H327). Action: continuous allocation weights on simplex. Reward: monthly portfolio return minus KL penalty from uniform base policy. IS: 2010-2017 | OOS: 2018-2026. Library: stable-baselines3 SAC. Gate: OOS Sharpe > 2.501 AND MaxDD > -4.3%. **Deprioritized** behind H325/H328 (simpler, no RL infra required).
+
+**Status:** Staged at `dream_cycle/staged/2026-06-24/3_rl_risk_sensitive_h330.json`. Script scaffold only at `backtesting/daily/run_h330.py`. Not yet run.
