@@ -1,0 +1,56 @@
+{
+  "hypothesis": "H326",
+  "title": "Continuous Tanh-Gated H026/H041a/H045 Blend",
+  "source": "arXiv:2605.20636",
+  "is": {
+    "label": "IS tanh-gated",
+    "cagr": 0.1496,
+    "sharpe": 2.4457,
+    "max_dd": -0.0428,
+    "ann_vol": 0.0612,
+    "neg_years": 0,
+    "n_months": 96,
+    "wf_ratio": 0.0
+  },
+  "oos": {
+    "label": "OOS tanh-gated",
+    "cagr": 0.1718,
+    "sharpe": 2.4845,
+    "max_dd": -0.043,
+    "ann_vol": 0.0691,
+    "neg_years": 0,
+    "n_months": 101,
+    "wf_ratio": 1.016
+  },
+  "oos_static_b": {
+    "label": "OOS static B",
+    "cagr": 0.1728,
+    "sharpe": 2.5009,
+    "max_dd": -0.0433,
+    "ann_vol": 0.0691,
+    "neg_years": 0,
+    "n_months": 101,
+    "wf_ratio": 0.0
+  },
+  "oos_yoy": {
+    "2018": 0.1595,
+    "2019": 0.2374,
+    "2020": 0.2435,
+    "2021": 0.134,
+    "2022": 0.0115,
+    "2023": 0.2065,
+    "2024": 0.2531,
+    "2025": 0.1459,
+    "2026": 0.0712
+  },
+  "score_distribution": {
+    "bull_pct": 0.208,
+    "bear_pct": 0.069,
+    "neutral_pct": 0.723
+  },
+  "gate": {
+    "sharpe_pass": false,
+    "mdd_pass": true,
+    "confirmed": false
+  }
+}

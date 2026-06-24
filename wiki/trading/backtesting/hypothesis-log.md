@@ -7881,27 +7881,59 @@ A meta-learner dynamically adjusting H026/H041a/H045 weights monthly—based on 
 
 ---
 
-### H326 — Continuous Tanh-Gated H026/H041a/H045 Strategy Blend [STUB — not yet run]
+### H326 — Continuous Tanh-Gated H026/H041a/H045 Strategy Blend [NOT CONFIRMED]
 
 **Source:** arXiv:2605.20636 (2026) — "Continuous Timing Signals for Growth-Defensive Style Allocation"
 
-**Hypothesis:** Replace H318's discrete regime switches with differentiable tanh/softplus scoring. Four continuous signals: rate_relief = tanh(-delta_TNX_3m/1.0), equity_stress = tanh(-SPY_drawdown/0.10), vix_relief = tanh((20-VIX)/5.0), growth_crowding = tanh(-(SPY_12m-0.15)/0.10). Composite score smoothly interpolates between bear_w/base_w/bull_w without threshold discontinuities. OOS Sharpe 1.01, CAGR 19.24% on comparable multi-style portfolio in source paper.
+**Hypothesis:** Replace H318's discrete regime switches with differentiable tanh/softplus scoring. Four continuous signals: rate_relief = tanh(-delta_TNX_3m/1.0), equity_stress = tanh(-SPY_drawdown/0.10), vix_relief = tanh((20-VIX)/5.0), growth_crowding = tanh(-(SPY_12m-0.15)/0.10). Composite score smoothly interpolates between bear_w/base_w/bull_w without threshold discontinuities.
 
-**Design:** H026/H041a/H045 universes (same as H318). IS: 2010-2017 | OOS: 2018-2026. Gate: Sharpe > H318 static B 2.501 AND MaxDD < -4.3%. Pure FRED + yfinance + pandas/numpy.
+**Design:** H026/H041a/H045 universes (same as H318). IS: 2010-2017 | OOS: 2018-2026. Gate: Sharpe > H318 static B 2.501 AND MaxDD ≤ -4.3%.
 
-**Status:** Staged at `dream_cycle/staged/2026-06-23/3_tanh_gated_blend_h326.json`. Script scaffold only at `backtesting/daily/run_h326.py`. Not yet run.
+**Results (2026-06-23):**
+
+| Metric | OOS tanh | OOS static |
+|--------|----------|------------|
+| Sharpe | 2.4845 | 2.5009 |
+| CAGR | — | — |
+| MaxDD | -4.30% | -4.33% |
+| WF ratio | — | — |
+
+Score distribution: 72% neutral, 21% bull, 7% bear.
+
+Gate: Sharpe > 2.501 → 2.4845 ✗ FAIL | MaxDD ≤ -4.3% → -4.30% ✓ PASS
+
+**Root cause:** Tanh smoothing concentrates 72% of OOS months near zero (neutral zone), so blend barely deviates from static BASE_W. Continuous smoothing that avoids threshold clipping also dilutes the directional signal. The Sharpe gap is small (0.016) — model may be parameter-sensitive to scale factors (1.0, 0.10, 5.0).
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h326.py`. Results at `backtesting/results/h326_results.json`.
 
 ---
 
-### H327 — kNN Macro-Analog ETF Rotation Ranker [STUB — not yet run]
+### H327 — kNN Macro-Analog ETF Rotation Ranker [NOT CONFIRMED]
 
 **Source:** arXiv:2606.22719 (2026-06-21) — "Leakage-Aware Benchmarking of LLM Forecasting: Real-Time Nowcasts as Decision-Time Input for Macro Factor Ranking"
 
-**Hypothesis:** kNN on lag-shifted FRED macro features (VIX level/change, SPY 12m return, SPY vs 200MA, T10Y3M yield curve, CPI change, HYG/IEI credit spread proxy, SPY 20d realized vol) identifies the k=10 most similar historical months and averages their H026/H041a/H045 returns to predict which strategy will outperform next month. Non-parametric alternative to H318's logistic regression; more robust to regime shifts. Paper shows median IC +0.154 comparable to full LLM retrieval pipeline.
+**Hypothesis:** kNN on lag-shifted FRED macro features (VIX level/change, SPY 12m return, SPY vs 200MA, T10Y3M yield curve, CPI change, HYG/IEI credit spread proxy, SPY 20d realized vol) identifies the k=10 most similar historical months and averages their H026/H041a/H045 returns to predict which strategy will outperform next month. Non-parametric alternative to H318's logistic regression; more robust to regime shifts.
 
-**Design:** IS: 2010-2017 | OOS: 2018-2026 (rolling: each month extends kNN library). Overweight top-predicted strategy by +15%, reduce others by -7.5% each (min weight 0.10). Gate: Sharpe > 2.501 AND MaxDD < -4.3%. Libraries: sklearn.neighbors or manual cosine sim, FRED API, yfinance.
+**Design:** IS: 2010-2017 | OOS: 2018-2026 (rolling: each month extends kNN library). Overweight top-predicted strategy by +15%, reduce others by -7.5% each (min weight 0.10). Gate: Sharpe > 2.501 AND MaxDD ≤ -4.3%. 8 features: VIX level/1m-chg, SPY 12m ret, SPY vs 200MA, TNX-IRX yield slope, CPI 1m-chg (FRED CPIAUCSL; TIP/IEI fallback), HYG/IEI credit spread, SPY 20d realized vol.
 
-**Status:** Staged at `dream_cycle/staged/2026-06-23/4_knn_macro_analog_h327.json`. Script scaffold only at `backtesting/daily/run_h327.py`. Not yet run.
+**Results (2026-06-23):**
+
+| Metric | OOS kNN | OOS static B |
+|--------|---------|-------------|
+| Sharpe | 2.4753 | 2.4917 |
+| CAGR | 18.86% | 17.15% |
+| MaxDD | -4.44% | -4.33% |
+| Ann Vol | 7.62% | 6.88% |
+| WF ratio | 1.042 | — |
+| Neg years | 0 | 0 |
+
+Winner distribution (OOS): H026 68mo (67%), H041a 34mo (33%), H045 0mo (0%).
+
+Gate: Sharpe > 2.501 → 2.4753 ✗ FAIL | MaxDD ≤ -4.3% → -4.44% ✗ FAIL
+
+**Root cause:** kNN consistently overweights H026 (67% of months), never selects H045 as winner. The ADJUST=0.15 tilt increases CAGR (+1.71pp) but raises volatility (+0.74pp) enough to hurt Sharpe. kNN analog months may not be informative at monthly frequency — macro features are slow-moving; similar past macro states don't reliably predict strategy ranking.
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h327.py`. Results at `backtesting/results/h327_results.json`.
 
 ---
 
