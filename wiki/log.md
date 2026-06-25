@@ -486,3 +486,6 @@ Pages created: 2. Pages updated: 2 (index.md, trading/index.md).
 New: trading/tools/rohonchain-polymarket.md — Polymarket CLOB arb math (Bregman+Frank-Wolfe+Kelly); tools/sairahul1-ai-agent-loops.md — AI agent loop architecture patterns.
 Key entities: Roan @RohOnChain (Polymarket quant), Rahul @sairahul1 (AI agent engineer).
 Verdict: rohonchain low relevance to equity pipeline; sairahul1 moderate relevance to multi-agent infra.
+
+## [2026-06-25] wiki expansion + dream cycle | Merger Arbitrage & Special Situations
+Pages created: 2 (merger-arbitrage-special-situations.md, research-log/2026-06-25.md). Pages updated: 1 (trading/index.md). Key content: H310 root cause documented; deal mechanics/ML features/regulatory eras; H331/H332/H333 staged. Dream cycle: 18 papers reviewed, 4 staged proposals.

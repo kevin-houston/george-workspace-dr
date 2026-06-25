@@ -1,0 +1,14 @@
+{
+  "id": "regime-agent-communication-wiki",
+  "date": "2026-06-25",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2511.13614",
+  "title": "Wiki update: multi-agent-llm-trading.md — Market-Dependent Communication (arXiv:2511.13614)",
+  "rationale": "Market-Dependent Communication in Multi-Agent Alpha Generation (arXiv:2511.13614, Nov 2025) is directly applicable to H316 (LLM semantic pairs) and H319 (LLM semantic networks). Key finding from 450 experiments across 21 months: competitive conversation excels in volatile tech stocks, collaborative in stable general stocks, finance stocks resist communication structure. Optimal communication design is market-regime-aware. This needs to be in the wiki before H316/H319 are run so the agent communication structure is configured correctly from the start.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md",
+  "content": "Append to the multi-agent-llm-trading.md page under a new section '## Regime-Aware Communication Design (arXiv:2511.13614)':\n\n### Regime-Aware Communication Design\n\n**Source:** arXiv:2511.13614 — \"Market-Dependent Communication in Multi-Agent Alpha Generation\" (Jerick Shi, Burton Hollifield, Nov 2025)\n\n**Experiment:** 5-agent LLM trading systems tested across 450 experiments, 21 months. 5 communication structures: competitive debate, collaborative consensus, hierarchical, round-robin, broadcast.\n\n**Key findings:**\n- Competitive conversation outperforms in volatile tech stocks (high information uncertainty)\n- Collaborative conversation outperforms in stable general stocks (shared signals dominate)\n- Finance stocks resist all communication structures — fundamentals dominate\n- All structures converge to similar agent *alignments* regardless of communication type\n\n**Implication for H316/H319:**\nDon't use a single communication structure for all pair types. Route by regime:\n- Tech pairs (AAPL/MSFT/NVDA): Use competitive debate agents\n- Utility/consumer pairs: Use collaborative consensus agents\n- Financial pairs (BAC/JPM/WFC): Use fundamental-only agents, skip LLM communication\n\n**Implementation:**\n```python\ndef get_communication_structure(ticker_a, ticker_b, sector_map):\n    sector = sector_map.get(ticker_a, 'Unknown')\n    if sector in ['Technology', 'Communication Services']:\n        return 'competitive'\n    elif sector in ['Financials']:\n        return 'fundamental_only'\n    else:\n        return 'collaborative'\n```",
+  "action": "append",
+  "apply_status": "pending"
+}

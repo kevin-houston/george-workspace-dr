@@ -1,0 +1,14 @@
+{
+  "id": "h331-multimodal-pead",
+  "date": "2026-06-25",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2510.03965",
+  "title": "H331 — Multi-Modal PEAD: FinCall-Surprise Text+Audio+Slides",
+  "rationale": "H174 (FinBERT PEAD, WR 81.8%) uses text-only 8-K signals. FinCall-Surprise (arXiv:2510.03965) benchmarks 26 unimodal/multi-modal LLMs on 2,688 conference calls (2019-2021) with synchronized text, audio, and slides. Audio and visual modalities provide incremental signal beyond text alone. Adding audio sentiment (tone/pace/stress from CEO voice) could improve H174's precision from WR 81.8% toward 85%+. Hypothesis: audio tone + surprise score + FinBERT text score ensemble outperforms text-only H174 gate (score>=0.18 AND surprise>=0.02).",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h331.py",
+  "content": "Script scaffold for H331 multi-modal PEAD.\n\nPhase 1 (text+surprise — same as H174 baseline): Use existing H174 pipeline as baseline.\nPhase 2 (audio add-on): Use FinCall-Surprise open dataset (2019-2021) to train audio sentiment model; features: MFCC, speech rate, pitch variance.\nPhase 3 (ensemble): Logistic regression ensemble of (FinBERT_score, EPS_surprise, audio_sentiment_score).\n\nGate: OOS WR > 81.8% (H174) AND n >= 20 events.\n\nData requirements:\n- Earnings call audio: Motley Fool Transcripts API or Seeking Alpha (paid); free alternative: YouTube financial channels.\n- FinCall-Surprise dataset: open-source, 2019-2021.\n- EPS surprise: yfinance / FMP (existing in H174 pipeline).\n\nNote: Phase 1 must replicate H174 WR exactly as sanity check before adding audio.\nNote: Audio data availability is the binding constraint — if unavailable, Phase 2 deferred.",
+  "action": "write",
+  "apply_status": "pending"
+}

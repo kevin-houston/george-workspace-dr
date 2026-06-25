@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-24 (options-backtesting-methodology.md new; qf-lib + RustQuant added to tools)
+updated: 2026-06-25 (merger-arbitrage-special-situations.md new; H331/H332/H333 staged)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -40,6 +40,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Long/Short Equity](algorithms/long-short-equity.md) ← new 2026-06-02 (dollar-neutral L/S construction; 130/30; borrow costs ~0.75%/yr large-cap; H243 design: top/bottom quintile EW on 200-stock universe; momentum crash risk + Daniel/Moskowitz 2016; sector-neutral L/S variant; backtesting mistake table)
   - [Factor Momentum & Style Rotation](algorithms/factor-momentum-style-rotation.md) ← new 2026-06-06 (Gupta & Kelly 2019 IS Sharpe 0.84 long-short; H255 NOT CONFIRMED long-only ETF Corr=0.89 all US equity; H256 NOT CONFIRMED GEM/PACS/GEM+Sector all < SPY OOS 2015-2025; look-ahead bias trap: unlagged 12m signal inflated OOS Sharpe 3×; multi-asset extensions with bonds+commodities queued)
   - [Commodity Trend Following](algorithms/commodity-trend-following.md) ← new 2026-06-07 (H261 NOT CONFIRMED UNG MaxDD -78%; H261b CONFIRMED Top-2 OOS Sharpe 0.922 Corr(SPY)=0.218; 2022 +26.7% vs SPY -18.2%; K-1 tax flags; roll yield mechanics; IS/OOS disconnect documented; H262 multi-horizon signal queued)
+  - [Merger Arbitrage & Special Situations](algorithms/merger-arbitrage-special-situations.md) ← new 2026-06-25 (H310 root cause: antitrust regime shift; deal-break mechanics; ML feature engineering; ETF vs individual deal; H331/H333 queued)
   - [Volatility Risk Premium (VRP)](algorithms/volatility-risk-premium.md) ← new 2026-06-09
   - [SPX Dispersion Trading & Variance Risk Premium](algorithms/spx-dispersion-variance.md) ← new 2026-06-19 (H309 Phase 2 design; implied correlation premium 6-18pp historically; DSPX/COR3M signals; vega-neutral construction; Polygon IV integration path; dirty dispersion z1/z2/z3 thresholds; correlation convexity risk; factor-dispersion variant via sector ETFs)
   - [Fixed Income / Bond ETF Rotation](algorithms/fixed-income-bond-rotation.md) ← new 2026-06-20 (H045 PRODUCTION 21% portfolio; 13-ETF universe SHY/HYG/IEI/TIP/IEF/TLT/BIL + 6 more; 3m+6m+12m rank ensemble; OOS Sharpe 1.351 MaxDD -6.3%; carry FAILS — ETF dividends ≠ forward carry; 2022 rate shock survived via TSMOM filter; H314/H315 queued)
@@ -112,6 +113,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Sources](sources/) — ingested papers and working papers
   - [The Alchemy of Multibagger Stocks](sources/multibagger-yartseva-2025.md) ← new 2026-06-12 (Yartseva 2025; FCF/P = #1 factor; EPS growth NOT sig; small-cap +37.7% vs large +9.7%; asset_growth>EBITDA_growth −22.8pp; near-12m-low entry signal; rate-hike −8-12pp; H285 proposed)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-06-25](research-log/2026-06-25.md) — wiki expansion: merger-arbitrage-special-situations.md new (H310 root cause documented; deal mechanics, ML features, regulatory regimes; H331/H332/H333 staged); dream cycle: 18 papers reviewed, 4 staged (multi-modal PEAD H331, QuantaAlpha evolutionary H332, regime-aware agent comms wiki, merger arb NLP H333)
   - [2026-06-23](research-log/2026-06-23.md) — wiki expansion: strategy-blending-correlation.md new (H026/H041a/H045 OOS correlation matrix; IC-weighted blending; meta-learning failure analysis H318; production blend 40/30/30 static near-optimal; IBS orthogonality = source of 2.50→4.16 Sharpe jump; next additions: H309 dispersion, H174 PEAD); H318 NOT CONFIRMED logged; dream cycle scan: arXiv/GitHub 5-angle scan
   - [2026-06-20](research-log/2026-06-20.md) — wiki expansion: fixed-income-bond-rotation.md new (H045 PRODUCTION framework; 3m+6m+12m rank ensemble; carry FAILS — ETF dividends ≠ forward carry; SHY dominates OOS 72% of months; H314/H315 queued); dream cycle: H316 LLM pair selection (Moira arXiv:2605.01954), H317 multi-modal PEAD (arXiv:2605.25894), H319 semantic network, H320 crash filter; Self-Driving Portfolio + reproducibility audit wiki updates
   - [2026-06-19](research-log/2026-06-19.md) — wiki expansion: spx-dispersion-variance.md new (H309 PARTIAL; implied correlation premium 6-18pp; DSPX/COR3M signals; vega-neutral construction; Polygon IV integration path; correlation convexity risk)

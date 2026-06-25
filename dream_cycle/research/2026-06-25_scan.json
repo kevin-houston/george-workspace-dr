@@ -1,0 +1,181 @@
+{
+  "date": "2026-06-25",
+  "scan_angles": 5,
+  "papers_reviewed": 18,
+  "staged_count": 4,
+  "papers": [
+    {
+      "title": "QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining",
+      "arxiv_id": "2602.07085",
+      "year": 2026,
+      "summary": "Treats alpha mining as trajectory-level optimization with LLM mutation/crossover; IC 0.1501, ARR 27.75%, MDD 7.98% on CSI 300; transfers to S&P 500 (137% cumulative excess 4yr).",
+      "relevance": "HIGH",
+      "related_hypothesis": "H316/H319, H332 (staged)",
+      "staged": true
+    },
+    {
+      "title": "AlphaAgent: LLM-Driven Alpha Mining with Regularized Exploration",
+      "arxiv_id": "2502.16789",
+      "year": 2025,
+      "summary": "Autonomous LLM alpha mining with complexity/novelty/hypothesis-alignment regularization to counteract alpha decay.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H316/H319",
+      "staged": false
+    },
+    {
+      "title": "FinCall-Surprise: A Large Scale Multi-modal Benchmark for Earning Surprise Prediction",
+      "arxiv_id": "2510.03965",
+      "year": 2025,
+      "summary": "2,688 conference calls (2019-2021) with text+audio+slides; benchmarks 26 LLMs on earnings surprise prediction; multi-modal adds signal beyond text-only.",
+      "relevance": "HIGH",
+      "related_hypothesis": "H174 PEAD upgrade, H331 (staged)",
+      "staged": true
+    },
+    {
+      "title": "Generating Alpha: A Hybrid AI-Driven Trading System Integrating Technical Analysis, ML and Financial Sentiment",
+      "arxiv_id": "2601.19504",
+      "year": 2026,
+      "summary": "Regime-adaptive FinBERT + LSTM hybrid; handles sentiment during high-volatility shifts.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H174",
+      "staged": false
+    },
+    {
+      "title": "Prior-Biased Inference in Asset Prices: The Conditional Post-Earnings Announcement Drift",
+      "ssrn_id": "June 2025",
+      "year": 2025,
+      "summary": "PEAD concentrated where surprise contradicts analyst recommendations; Sell-rated + positive surprise earns 9.4% abnormal return p.a.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H174 enhancement: integrate analyst consensus vs. EPS surprise direction",
+      "staged": false
+    },
+    {
+      "title": "Leakage-Aware Benchmarking of LLM Forecasting: Real-Time Nowcasts as Decision-Time Input for Macro Factor Ranking",
+      "arxiv_id": "2606.22719",
+      "year": 2026,
+      "summary": "RAG-7B LLM factor ranking on FRED macro variables; median monthly Spearman rank IC +0.154 across 3 non-overlapping 12m windows. Leakage-controlled.",
+      "relevance": "HIGH",
+      "related_hypothesis": "H198 improvement (H327 used kNN; this is LLM version)",
+      "staged": false,
+      "note": "H327 already run with kNN version (NOT CONFIRMED, OOS Sharpe 2.4753). LLM version may differ but similar mechanism — deprioritized until H327 root cause better understood."
+    },
+    {
+      "title": "Market-Dependent Communication in Multi-Agent Alpha Generation",
+      "arxiv_id": "2511.13614",
+      "year": 2025,
+      "summary": "450 experiments, 5 communication structures, 21 months; competitive beats collaborative for volatile tech, collaborative for stable stocks; finance resists all structures.",
+      "relevance": "HIGH",
+      "related_hypothesis": "H316/H319 (multi-agent communication design)",
+      "staged": true
+    },
+    {
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "arxiv_id": "2412.20138",
+      "year": 2024,
+      "summary": "Full trading firm simulation with Bull/Bear researchers, risk manager, traders; superior Sharpe and MaxDD vs baselines. GitHub trending.",
+      "relevance": "HIGH",
+      "related_hypothesis": "H316/H319 infrastructure",
+      "staged": false,
+      "note": "Already in wiki (multi-agent-llm-trading.md). No new staging needed."
+    },
+    {
+      "title": "P1GPT: A Multi-Agent LLM Workflow Module for Multi-Modal Financial Information Analysis",
+      "arxiv_id": "2510.23032",
+      "year": 2025,
+      "summary": "4-layer system: input parsing, planning, domain-specific agents (fundamental/technical/news/sector), integration reasoning.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H316/H319",
+      "staged": false
+    },
+    {
+      "title": "3S-Trader: A Multi-LLM Framework for Adaptive Stock Scoring, Strategy, and Selection",
+      "arxiv_id": "2510.17393",
+      "year": 2025,
+      "summary": "Training-free: Data Analysis agents → Scoring Agent → Selector Agent for portfolio construction.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H198 + H174 signal combination",
+      "staged": false
+    },
+    {
+      "title": "PortBench: A Correlation-Aware, Full-Pipeline Benchmark for LLM-Driven Portfolio Management",
+      "arxiv_id": "2605.27887",
+      "year": 2026,
+      "summary": "Benchmark across 6 asset classes, 10 years; 6,269 QA items; reveals LLMs fail to reason about cross-asset correlation.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H045 stress testing",
+      "staged": false
+    },
+    {
+      "title": "LiveTradeBench: Seeking Real-World Alpha with Large Language Models",
+      "arxiv_id": "2511.03628",
+      "year": 2025,
+      "summary": "50-day live evaluations of 21 LLMs; high Arena scores do NOT predict trading performance.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "General validation: LLM capability != trading performance",
+      "staged": false
+    },
+    {
+      "title": "LLM-based Personalized Portfolio Recommender",
+      "arxiv_id": "2512.12922",
+      "year": 2025,
+      "summary": "LLM + RL + BERT combination; 73.8% annualized return improvement vs MVO, Sharpe 1.45.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "Portfolio optimization overlay",
+      "staged": false
+    },
+    {
+      "title": "A Deep Learning Method for Predicting Mergers and Acquisitions: Temporal Dynamic Industry Networks",
+      "arxiv_id": "2404.07298",
+      "year": 2024,
+      "summary": "LSTM Autoencoder + temporal industry network graphs for pre-announcement M&A prediction.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H333 (staged) merger arb",
+      "staged": false,
+      "note": "Incorporated into H333 design as Phase 2 enhancement."
+    },
+    {
+      "title": "Predicting Status of Pre and Post M&A Deals Using Machine Learning",
+      "arxiv_id": "2110.09315",
+      "year": 2025,
+      "summary": "kNN imputation + PCA/MCA + LSTM Autoencoders for deal outcome prediction; misclassification cost asymmetric.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H333 merger arb",
+      "staged": false
+    },
+    {
+      "title": "Improving Merger Arbitrage Returns with Machine Learning",
+      "ssrn_id": "4765067",
+      "year": 2024,
+      "summary": "ML proxies for expected return decomposition; better predictive power than realized returns for spread valuation.",
+      "relevance": "HIGH",
+      "related_hypothesis": "H333 (staged) merger arb — primary academic foundation",
+      "staged": false,
+      "note": "Foundation for H333 design, cited in wiki page."
+    },
+    {
+      "title": "Spatio-Temporal Momentum: Jointly Learning Time-Series and Cross-Sectional Strategies",
+      "arxiv_id": "2302.10175",
+      "year": 2023,
+      "summary": "Unified neural architecture for simultaneous TS + CS momentum; FC layer learns joint signals.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H180 (spatio-temporal momentum NN) — already noted",
+      "staged": false
+    },
+    {
+      "title": "QuantaAlpha GitHub + Self-Driving Portfolio GitHub",
+      "source": "GitHub",
+      "year": 2026,
+      "summary": "QuantaAlpha/QuantaAlpha evolutionary LLM alpha mining; aeriosai/self-driving-portfolio institutional asset management with ~50 agents.",
+      "relevance": "MEDIUM",
+      "related_hypothesis": "H316/H319, H318 meta-learner",
+      "staged": false
+    }
+  ],
+  "staged_proposals": [
+    "dream_cycle/staged/2026-06-25/1_multimodal_pead_h331.json",
+    "dream_cycle/staged/2026-06-25/2_quantalpha_evolutionary_h332.json",
+    "dream_cycle/staged/2026-06-25/3_regime_agent_communication_wiki.json",
+    "dream_cycle/staged/2026-06-25/4_merger_arb_h333.json"
+  ],
+  "wiki_expanded": "wiki/trading/algorithms/merger-arbitrage-special-situations.md (NEW)"
+}

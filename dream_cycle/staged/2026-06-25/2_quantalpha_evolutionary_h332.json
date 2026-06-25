@@ -1,0 +1,14 @@
+{
+  "id": "h332-quantalpha-evolutionary",
+  "date": "2026-06-25",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.07085",
+  "title": "H332 — QuantaAlpha: LLM Evolutionary Alpha Mining on H198 Universe",
+  "rationale": "QuantaAlpha (arXiv:2602.07085) treats alpha mining as trajectory-level optimization: LLM proposes factor expressions, evaluates on historical data, then mutates/crosses successful ones like genetic programming. Enforces semantic consistency between hypothesis, factor code, and expression. Results: IC 0.1501, ARR 27.75%, MaxDD 7.98% on CSI 300; transfers to S&P 500 with 137% cumulative excess over 4 years. Applying this to the H198 30-stock universe could discover non-obvious factor combinations that pure momentum misses — specifically combinations of momentum, reversal, quality, and volatility signals that the evolutionary search would find but manual hypothesis generation would not.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h332.py",
+  "content": "Script scaffold for H332 QuantaAlpha-inspired evolutionary alpha mining.\n\nApproach: Simplified version without LLM in the loop (cost constraint).\n1. Define a population of 20 candidate alpha expressions from known working signals (6-1m momentum, alpha101 subset, reversal, quality F-Score).\n2. Evaluate each on IS 2013-2020: IC, Sharpe, MaxDD.\n3. Select top-50% by Sharpe, recombine (weighted blend of 2 parent alphas), mutate (adjust lookback windows ±1m, swap scoring function).\n4. Repeat for 5 generations.\n5. Select best-evolved alpha, run OOS 2021-2026 ONCE.\n\nGate: OOS Sharpe > H198 1.174 AND IC > 0.05 AND no look-ahead bias.\n\nNote: This is a simplified evolutionary search, not the full LLM-in-the-loop QuantaAlpha. The full version (with OpenAI API) is a future upgrade (H332b). H332 proves the evolutionary search mechanism works on this universe.\n\nKey constraint: MUST use H198's same 30-stock universe and 6-1m base signal as seed. Evolution starts from known-good baseline, not random.",
+  "action": "write",
+  "apply_status": "pending"
+}

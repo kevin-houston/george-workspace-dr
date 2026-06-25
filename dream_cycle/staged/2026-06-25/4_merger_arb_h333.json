@@ -1,0 +1,14 @@
+{
+  "id": "h333-merger-arb-nlp",
+  "date": "2026-06-25",
+  "source": "paper",
+  "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4765067",
+  "title": "H333 — FinBERT on M&A Announcement 8-K for Deal-Break Risk Scoring",
+  "rationale": "H310 (merger arb via MNA/MRGR ETFs) NOT CONFIRMED due to antitrust regime shift artifact. The ETF approach cannot distinguish high-risk (likely-to-break) deals from low-risk ones. Applying the H163/H174 FinBERT NLP approach to M&A announcement 8-K filings (Item 1.01 Business Combinations) could classify deal-break risk at announcement: negative language around regulatory uncertainty, financing conditions, material adverse change clauses → lower score → skip deal. SSRN:4765067 (Halskov) shows ML proxies for expected return decomposition outperform raw spreads. H333 applies our existing FinBERT pipeline to a new document type.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h333.py",
+  "content": "Script scaffold for H333 FinBERT M&A deal-break risk scorer.\n\nPipeline (analogous to H174 PEAD):\n1. Fetch 8-K Item 1.01 filings from EDGAR for announced deals ($500M+ US targets) 2013-2026.\n2. Run ProsusAI/finbert on filing text (same model as H163/H174).\n3. Compute deal_score = mean positive sentiment of 8-K paragraphs.\n4. Gate: only enter spread trade when deal_score >= threshold.\n5. Hold until deal closes/breaks, apply TC = 10bps.\n\nBacktest structure:\n- IS: 2013-2020 (threshold calibration)\n- OOS: 2021-2026 (single run)\n- Gate: OOS Sharpe > 0.65 (ETF approach benchmark) AND WF ratio > 0.80\n\nData: EDGAR 8-K full-text search API ($EDGAR_KEY active). Use full-text search for 'business combination' 'merger agreement' 'acquisition'.\nPrice data: yfinance (target ticker from 8-K). Deal consideration from proxy statement DEF14A.\n\nNote: Small universe expected (~20-40 qualifying OOS events). WR (% of deals that complete when score >= threshold) is the primary metric.",
+  "action": "write",
+  "apply_status": "pending"
+}
