@@ -1,0 +1,24 @@
+{
+  "hypothesis": "H325",
+  "description": "AEGIS Sortino-Optimized Cross-Sectional Momentum",
+  "is_stats": {
+    "sharpe": 1.6748,
+    "cagr": 0.3923,
+    "maxdd": -0.0962,
+    "neg_years": 0
+  },
+  "oos_stats": {
+    "sharpe": 1.0051,
+    "cagr": 0.1961,
+    "maxdd": -0.2501,
+    "neg_years": 1
+  },
+  "corr_spy_oos": 0.5946,
+  "wf_ratio": 0.6001,
+  "gates": {
+    "sharpe": false,
+    "maxdd": false,
+    "corr": true
+  },
+  "verdict": "NOT CONFIRMED"
+}

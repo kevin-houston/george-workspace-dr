@@ -480,3 +480,9 @@ Cross-references: tools/hermes-gpt.md, tools/openalice.md.
 
 ## [2026-06-22] research | H318 meta-agent ETF rotation backtest
 Pages updated: hypothesis-log.md (H318 NOT CONFIRMED + H321/H322/H323 stubs logged), index.md. H318: 5 meta-learner variants tested (equal-weight, optimized static, IC-weighted, regime-switch, logistic regression). All fail dual gate vs static 40/30/30 baseline. Key finding: H026 standalone Sharpe 2.520 > any blend; static 40/30/30 already near-optimal.
+
+## [2026-06-24] ingest | @RohOnChain + @sairahul1 Twitter/X links
+Pages created: 2. Pages updated: 2 (index.md, trading/index.md).
+New: trading/tools/rohonchain-polymarket.md — Polymarket CLOB arb math (Bregman+Frank-Wolfe+Kelly); tools/sairahul1-ai-agent-loops.md — AI agent loop architecture patterns.
+Key entities: Roan @RohOnChain (Polymarket quant), Rahul @sairahul1 (AI agent engineer).
+Verdict: rohonchain low relevance to equity pipeline; sairahul1 moderate relevance to multi-agent infra.

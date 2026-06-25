@@ -89,6 +89,8 @@ When answering a query:
 - [Awesome Finance MCP](trading/tools/awesome-finance-mcp.md) — curated finance MCP servers; HIGH: Alpaca MCP + FMP MCP; already live: Massive MCP; medium: CCXT/QuantConnect/TradingView/Alpha Vantage MCPs ← new 2026-06-18
 - [QuantMind](trading/tools/quant-mind.md) — LLMQuant paper ingestion; NeurIPS 2025; semantic quant KB; ~$0.09/night ← new 2026-06-10
 - [AI-Trader](trading/tools/ai-trader.md) — HKUDS agent-native social trading; ai4trade.ai; MIT ← new 2026-06-11
+- [rohonchain — Polymarket Arbitrage Math](trading/tools/rohonchain-polymarket.md) — Roan @RohOnChain; Polymarket CLOB arb; Bregman+Frank-Wolfe+Kelly; $40M bot profits; low relevance to equity pipeline ← new 2026-06-24
+- [sairahul1 — AI Agent Loop Architecture](tools/sairahul1-ai-agent-loops.md) — Rahul @sairahul1; build systems that prompt themselves; memory + sub-agent split + stop conditions; applicable to dream cycle + multi-agent trading (H274/H280) ← new 2026-06-24
 - [ContestTrade](trading/tools/contesttrade.md) — FinStep-AI contest mechanism (arXiv:2508.00554); US V2.0; Apache 2.0 ← new 2026-06-11
 - [QuantMuse](trading/tools/quantmuse.md) — FactorCalculator/FactorScreener/BacktestEngine; C++ execution; MIT ← new 2026-06-11
 

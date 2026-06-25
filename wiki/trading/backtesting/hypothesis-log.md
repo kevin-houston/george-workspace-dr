@@ -7869,7 +7869,7 @@ A meta-learner dynamically adjusting H026/H041a/H045 weights monthly—based on 
 
 ---
 
-### H325 — AEGIS Sortino-Optimized Cross-Sectional Momentum [STUB — not yet run]
+### H325 — AEGIS Sortino-Optimized Cross-Sectional Momentum [NOT CONFIRMED]
 
 **Source:** arXiv:2604.09060 (2026) — "Taming the Black Swan: A Momentum-Gated Hierarchical Optimisation Framework for Asymmetric Alpha Generation"
 
@@ -7877,7 +7877,22 @@ A meta-learner dynamically adjusting H026/H041a/H045 weights monthly—based on 
 
 **Design:** H198 30-stock S&P 500 universe. IS: 2013-2020 | OOS: 2021-2026. Gate: OOS Sharpe > H198 1.174 AND MaxDD improvement > 5pp AND Corr(SPY) < 0.70. Libraries: scipy.optimize.minimize (SLSQP), numpy, pandas.
 
-**Status:** Staged at `dream_cycle/staged/2026-06-23/2_aegis_sortino_momentum_h325.json`. Script scaffold only at `backtesting/daily/run_h325.py`. Not yet run.
+**Results (2026-06-24):**
+
+| Metric | IS (2013–2020) | OOS (2021–2026) | H198 baseline |
+|--------|----------------|-----------------|---------------|
+| Sharpe | 1.675 | 1.005 | 1.174 |
+| CAGR | 39.2% | 19.6% | — |
+| MaxDD | -9.6% | -25.0% | -22.7% |
+| Neg yrs | — | 1 | — |
+| Corr(SPY) | — | 0.595 | — |
+| WF ratio | — | 0.600 | — |
+
+Gate: Sharpe > 1.174 → 1.005 ✗ FAIL | MaxDD improvement > 5pp → -25.0% vs -22.7% (worse) ✗ FAIL | Corr(SPY) < 0.70 → 0.595 ✓ PASS
+
+**Root cause:** SLSQP optimization on 12-month IS windows heavily overfits (IS Sharpe 1.675 → OOS 1.005; WF 0.600 below standard 0.75 threshold). 2022 caused correlated drawdown across the entire 30-stock universe — the minimax-correlation filter (max pairwise ≤ 0.60) relaxes the constraint during crisis periods when all large-caps move together, defeating the diversification objective. H198 raw 6-1m momentum (OOS 1.274 on best variant H320) remains the best single-universe expression.
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h325.py`. Results at `backtesting/results/h325_results.json`.
 
 ---
 
@@ -7937,7 +7952,7 @@ Gate: Sharpe > 2.501 → 2.4753 ✗ FAIL | MaxDD ≤ -4.3% → -4.44% ✗ FAIL
 
 ---
 
-### H328 — Student-t Emission HMM (H251 regime fix) [STUB — not yet run]
+### H328 — Student-t Emission HMM (H251 regime fix) [NOT CONFIRMED]
 
 **Source:** arXiv:2606.23492 (2026) — "Continuous HMM with Heavy-Tail Emissions for Equity Regime Detection"
 
@@ -7945,7 +7960,23 @@ Gate: Sharpe > 2.501 → 2.4753 ✗ FAIL | MaxDD ≤ -4.3% → -4.44% ✗ FAIL
 
 **Design:** Option A (quick): transform returns r_t* = sign(r_t)*|r_t|^(1/4) as Student-t approximation, use GaussianHMM on transformed data. Option B (exact): custom Student-t EM with scipy.stats.t.fit per state. SPY/TLT/GLD monthly returns. IS: 2004-2017 | OOS: 2018-2026. Gate: Sharpe > H251 0.941 AND no single state > 80% of OOS months. Also report Corr(H026) — want < 0.70.
 
-**Status:** Staged at `dream_cycle/staged/2026-06-23/5_heavy_tail_hmm_h328.json`. Script scaffold only at `backtesting/daily/run_h328.py`. Not yet run.
+**Results (2026-06-24):**
+
+| Metric | OOS (2018–2026) | H251 baseline |
+|--------|-----------------|---------------|
+| Sharpe | 0.875 | 0.941 |
+| CAGR | 10.5% | — |
+| MaxDD | -23.4% | — |
+| Neg yrs | 2 | — |
+| Corr(SPY) | 0.878 | ~0.71 |
+
+Regime distribution (OOS): State 0 bull/low-vol 73% · State 1 neutral 9% · State 2 bear/high-vol 18%
+
+Gate: Sharpe > 0.941 → 0.875 ✗ FAIL | No single state > 80% → 73% ✓ PASS (degeneracy CURED)
+
+**Root cause:** Option A power transform (ν=4) successfully cures H251's 100%-low-vol degeneracy — the HMM now distributes states 73/9/18%, meaningful separation. However, Sharpe falls below H251's gate. The transform compresses extreme returns (crises look less extreme post-transform), so the model doesn't assign bear states aggressively enough in OOS period. Corr(SPY) increased from ~0.71 to 0.878 — the allocation is spending more time in bull (80% SPY) than H251's static equivalent. Option B (exact Student-t EM via scipy.stats.t.fit per state) remains a possible fix with more complexity.
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h328.py`. Results at `backtesting/results/h328_results.json`. Degeneracy gate passes — H251 family not dead; Option B worth a future attempt.
 
 ---
 

@@ -1,0 +1,23 @@
+{
+  "hypothesis": "H328",
+  "description": "Student-t Emission HMM (H251 heavy-tail fix, Option A)",
+  "oos_stats": {
+    "sharpe": 0.8751,
+    "cagr": 0.105,
+    "maxdd": -0.2341,
+    "neg_years": 2
+  },
+  "regime_distribution": {
+    "0": 73,
+    "1": 9,
+    "2": 18
+  },
+  "max_state_pct": 0.73,
+  "degenerate": false,
+  "corr_spy_oos": 0.8776,
+  "gates": {
+    "sharpe": false,
+    "no_degeneracy": true
+  },
+  "verdict": "NOT CONFIRMED"
+}
