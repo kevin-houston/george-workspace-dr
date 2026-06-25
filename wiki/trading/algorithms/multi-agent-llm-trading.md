@@ -325,3 +325,35 @@ Simpler backtesting + live trading for stocks and crypto. Lower learning curve t
 **Key difference from TradingAgents/HedgeAgents:** Diversity-maximizing ensemble (each agent = different methodology) rather than bull vs. bear debate. Meta-agent learns model-averaging weights dynamically.
 
 **Relevance to production portfolio:** H026, H045, H041a are three different rotation methodologies with static allocations (27/21/22%). H318 proposal: simple meta-learner (logistic regression or rolling IC-weighting) that dynamically adjusts these weights monthly based on regime signals — e.g., if VIX > 25, weight H045 (bonds) higher; if momentum IC is high, weight H041a higher.
+
+---
+
+## Regime-Aware Communication Design (arXiv:2511.13614)
+
+**Source:** arXiv:2511.13614 — "Market-Dependent Communication in Multi-Agent Alpha Generation" (Jerick Shi, Burton Hollifield, Nov 2025)
+
+**Experiment:** 5-agent LLM trading systems tested across 450 experiments, 21 months. 5 communication structures: competitive debate, collaborative consensus, hierarchical, round-robin, broadcast.
+
+**Key findings:**
+- Competitive conversation outperforms in volatile tech stocks (high information uncertainty)
+- Collaborative conversation outperforms in stable general stocks (shared signals dominate)
+- Finance stocks resist all communication structures — fundamentals dominate
+- All structures converge to similar agent *alignments* regardless of communication type
+
+**Implication for H316/H319:**
+Don't use a single communication structure for all pair types. Route by regime:
+- Tech pairs (AAPL/MSFT/NVDA): Use competitive debate agents
+- Utility/consumer pairs: Use collaborative consensus agents
+- Financial pairs (BAC/JPM/WFC): Use fundamental-only agents, skip LLM communication
+
+**Implementation:**
+```python
+def get_communication_structure(ticker_a, ticker_b, sector_map):
+    sector = sector_map.get(ticker_a, 'Unknown')
+    if sector in ['Technology', 'Communication Services']:
+        return 'competitive'
+    elif sector in ['Financials']:
+        return 'fundamental_only'
+    else:
+        return 'collaborative'
+```

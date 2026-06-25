@@ -8001,3 +8001,39 @@ Gate: Sharpe > 0.941 → 0.875 ✗ FAIL | No single state > 80% → 73% ✓ PASS
 **Design:** Universe: H026/H041a/H045. State: 8 macro features (same as H327). Action: continuous allocation weights on simplex. Reward: monthly portfolio return minus KL penalty from uniform base policy. IS: 2010-2017 | OOS: 2018-2026. Library: stable-baselines3 SAC. Gate: OOS Sharpe > 2.501 AND MaxDD > -4.3%. **Deprioritized** behind H325/H328 (simpler, no RL infra required).
 
 **Status:** Staged at `dream_cycle/staged/2026-06-24/3_rl_risk_sensitive_h330.json`. Script scaffold only at `backtesting/daily/run_h330.py`. Not yet run.
+
+---
+
+### H331 — Multi-Modal PEAD: FinCall-Surprise Text+Audio+Slides [STUB — not yet run]
+
+**Source:** arXiv:2510.03965 — "FinCall-Surprise: Benchmarking Multi-Modal LLMs on Earnings Conference Calls" (2025)
+
+**Hypothesis:** H174 (FinBERT PEAD, WR 81.8%) uses text-only 8-K signals. Audio and visual modalities from earnings conference calls provide incremental signal beyond text alone. Adding audio sentiment (tone/pace/stress from CEO voice) could push H174's WR from 81.8% toward 85%+. Hypothesis: audio tone + EPS surprise + FinBERT text score ensemble outperforms text-only H174 gate (score≥0.18 AND surprise≥0.02).
+
+**Design:** Phase 1: replicate H174 baseline exactly (sanity check). Phase 2: add audio features (MFCC, speech rate, pitch variance) from FinCall-Surprise open dataset (2019-2021). Phase 3: logistic regression ensemble of (FinBERT_score, EPS_surprise, audio_sentiment_score). Gate: OOS WR > 81.8% AND n ≥ 20 events. Audio data availability is the binding constraint — Phase 2 deferred if unavailable.
+
+**Status:** Staged at `dream_cycle/staged/2026-06-25/1_multimodal_pead_h331.json`. Script scaffold only at `backtesting/daily/run_h331.py`. Not yet run.
+
+---
+
+### H332 — QuantaAlpha: Evolutionary Alpha Mining on H198 Universe [STUB — not yet run]
+
+**Source:** arXiv:2602.07085 — "QuantaAlpha: Trajectory-Level Optimization for Evolutionary Alpha Mining with Large Language Models" (2026)
+
+**Hypothesis:** QuantaAlpha's evolutionary search over alpha expressions (genetic programming-style mutation/crossover) discovers non-obvious factor combinations that manual hypothesis generation would not. Applied to the H198 30-stock S&P 500 universe, starting from the known-good 6-1m momentum baseline, 5 generations of IS evolution may find a factor expression that beats H198's OOS Sharpe 1.174.
+
+**Design:** Simplified version (no LLM in loop — cost constraint). Population of 20 candidate alpha expressions seeded from known signals (6-1m momentum, 12-1m, 1m reversal, quality F-Score, vol-adjusted momentum, beta-adjusted momentum). Evaluate IS 2013-2020 Sharpe; top-50% breed by weighted blending + lookback window mutation; 5 generations. Select best-evolved alpha, run OOS 2021-2026 once. Gate: OOS Sharpe > H198 1.174 AND IC > 0.05. Full LLM-in-loop version deferred as H332b.
+
+**Status:** Staged at `dream_cycle/staged/2026-06-25/2_quantalpha_evolutionary_h332.json`. Script scaffold only at `backtesting/daily/run_h332.py`. Not yet run.
+
+---
+
+### H333 — FinBERT on M&A Announcement 8-K for Deal-Break Risk Scoring [STUB — not yet run]
+
+**Source:** SSRN:4765067 (Halskov) — "Machine Learning Proxies for Merger Arbitrage Expected Return Decomposition" (2025)
+
+**Hypothesis:** H310 (merger arb via ETFs) NOT CONFIRMED due to antitrust regime artifact — ETF approach cannot distinguish high-risk (likely-to-break) deals from low-risk ones. Applying the H163/H174 FinBERT pipeline to M&A announcement 8-K filings (Item 1.01) classifies deal-break risk at announcement. Negative language around regulatory uncertainty, financing conditions, and MAC clauses → lower score → skip deal. SSRN:4765067 shows ML proxies for expected return decomposition outperform raw spreads.
+
+**Design:** EDGAR full-text search for 8-K Item 1.01 ($500M+ US targets, 2013-2026). Run ProsusAI/finbert on filing text. deal_score = mean positive sentiment. Enter spread trade only when deal_score ≥ threshold (calibrated IS 2013-2020). Hold until deal closes/breaks; TC = 10bps. IS: 2013-2020 | OOS: 2021-2026. Gate: OOS Sharpe > 0.65 (H310 benchmark) AND WF ratio > 0.80. Expected ~20-40 qualifying OOS events.
+
+**Status:** Staged at `dream_cycle/staged/2026-06-25/4_merger_arb_h333.json`. Script scaffold only at `backtesting/daily/run_h333.py`. Not yet run.
