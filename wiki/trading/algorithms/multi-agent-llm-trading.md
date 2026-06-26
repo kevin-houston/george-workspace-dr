@@ -357,3 +357,41 @@ def get_communication_structure(ticker_a, ticker_b, sector_map):
     else:
         return 'collaborative'
 ```
+
+
+---
+
+## Reliability taxonomy & evaluation failures (arXiv:2603.27539, 2026)
+
+**Source**: Nguyen & Pham, DMO-FinTech Workshop @ PAKDD 2026, Hong Kong.
+
+**Coordination Primacy Hypothesis (CPH)**: Agent *coordination protocol design* matters more than model scale for trading quality. A well-coordinated smaller-model swarm can outperform a poorly-coordinated GPT-4 system.
+
+**5 pervasive evaluation failures** the paper documents across 12 published systems:
+1. Look-ahead bias — LLMs with training data that post-dates backtest period
+2. Survivorship bias — only testing on surviving tickers
+3. Backtesting overfitting — hyperparams tuned on the same OOS window
+4. Transaction cost neglect — reporting gross not net returns
+5. Regime-shift blindness — single-regime OOS window
+
+**CBS (Coordination Breakeven Spread)**: minimum alpha the multi-agent system must generate, above a single-agent baseline, to justify the coordination overhead (extra API calls, latency, cost). If CBS > achievable alpha, revert to single agent.
+
+**H274 implication**: Our PEAD 3-agent debate design should be evaluated against CBS before going live. If the 3-agent debate costs $X more per trade than a single FinBERT pass, the win-rate uplift must exceed that threshold.
+
+---
+
+## Profit Mirage: information leakage in LLM backtests (arXiv:2510.07920, 2025)
+
+**Source**: Li et al., October 2025.
+
+**Core finding**: LLM-based trading agent backtests show 'dazzling returns' that evaporate once the model's knowledge cutoff ends. The agent is effectively look-ahead biased via training data, not model architecture.
+
+**4 leakage dimensions** examined:
+1. Direct event memorization (LLM recalls specific price moves from training)
+2. Sentiment bias from post-event reporting (training corpus skewed toward post-hoc explanations)
+3. Company trajectory embedding (LLM knows which companies succeeded/failed)
+4. Macro narrative leakage (LLM knows outcomes of 2022 rate hikes, etc.)
+
+**Defense — FactFin**: Counterfactual perturbations at inference time force the model to reason causally rather than recall. Specifically: inject counterfactual event descriptions ('What if CPI had come in at 2.5% instead of 3.1%?') and test whether the model's conviction changes appropriately. Consistent-conviction models are memorizing; variable-conviction models are reasoning.
+
+**Key implication for H163/H174 (PEAD)**: Our OOS window is 2023-2026 for a model trained through 2024. There is potential leakage for 2023 events that fall within training data. Safest evaluation: use only 2025-2026 events as the 'clean' OOS window and re-run H174 confirmation on that subset.
