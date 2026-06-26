@@ -182,6 +182,12 @@
       "claimToken": "41f9f25679caa72712d6c443e7de935f56d40757dda2b3d932a9ecb1efdb219c",
       "claimUrl": "https://here.now/claim?slug=ivory-ledger-nc48&token=41f9f25679caa72712d6c443e7de935f56d40757dda2b3d932a9ecb1efdb219c",
       "expiresAt": "2026-06-24T09:04:09.708Z"
+    },
+    "oaken-vision-ybp3": {
+      "siteUrl": "https://oaken-vision-ybp3.here.now/",
+      "claimToken": "4d82fe90509ffdd284e59fb611e1916b75e711978aa6b3533853de4b66380465",
+      "claimUrl": "https://here.now/claim?slug=oaken-vision-ybp3&token=4d82fe90509ffdd284e59fb611e1916b75e711978aa6b3533853de4b66380465",
+      "expiresAt": "2026-06-26T09:06:26.623Z"
     }
   }
 }
