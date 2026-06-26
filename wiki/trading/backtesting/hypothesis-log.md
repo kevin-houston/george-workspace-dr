@@ -8037,3 +8037,78 @@ Gate: Sharpe > 0.941 → 0.875 ✗ FAIL | No single state > 80% → 73% ✓ PASS
 **Design:** EDGAR full-text search for 8-K Item 1.01 ($500M+ US targets, 2013-2026). Run ProsusAI/finbert on filing text. deal_score = mean positive sentiment. Enter spread trade only when deal_score ≥ threshold (calibrated IS 2013-2020). Hold until deal closes/breaks; TC = 10bps. IS: 2013-2020 | OOS: 2021-2026. Gate: OOS Sharpe > 0.65 (H310 benchmark) AND WF ratio > 0.80. Expected ~20-40 qualifying OOS events.
 
 **Status:** Staged at `dream_cycle/staged/2026-06-25/4_merger_arb_h333.json`. Script scaffold only at `backtesting/daily/run_h333.py`. Not yet run.
+
+---
+
+### H332 — QuantaAlpha: Evolutionary Alpha Mining on H198 Universe [NOT CONFIRMED]
+
+**Source:** arXiv:2602.07085 — "QuantaAlpha: Trajectory-Level Optimization for Evolutionary Alpha Mining with Large Language Models" (2026)
+
+**Results (2026-06-25):**
+
+Best evolved gene (5 generations, IS Sharpe 1.638): 9-1m momentum (skip-month) blended 68/32 with 3-1m momentum.
+
+| Metric | IS (2013–2020) | OOS (2021–2026) | Baseline (6-1m) |
+|--------|----------------|-----------------|-----------------|
+| Sharpe | 1.638 | 0.987 | 1.055 |
+| CAGR | — | 37.6% | — |
+| MaxDD | — | -37.8% | — |
+| Neg yrs | — | 0 | — |
+| IC (OOS) | — | -0.022 | — |
+| WF ratio | — | 0.602 | — |
+| Corr(SPY) | — | 0.452 | — |
+
+Gate: Sharpe > 1.174 → 0.987 ✗ | IC > 0.05 → -0.022 ✗
+
+**Root cause:** Without the LLM reasoning layer, genetic programming reduces to parameter search over momentum lookback windows. The search found 9-1m to be slightly better than 6-1m on IS, but neither outperforms the H198 OOS benchmark. Negative IC (-0.022) confirms the evolved signal lacks cross-sectional predictive power OOS. The QuantaAlpha paper's IS/OOS improvement depends on LLM economic plausibility reasoning guiding mutations — without it, the evolutionary search overfits IS. Deferred as H332b (requires OpenAI API budget for LLM-guided mutations).
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h332.py`. Results at `backtesting/results/h332_results.json`.
+
+---
+
+### H334 — Return Seasonality × Momentum Composite on H198 Universe [NOT CONFIRMED]
+
+**Source:** Heston & Sadka (2008); H292 (seasonality, OOS 0.970, WF 1.411 — "useful as signal layer"); H198 (6-1m momentum, OOS 1.174).
+
+**Hypothesis:** Stocks simultaneously entering their historically strong calendar month AND showing 6-1m momentum outperform. IS-calibrated seasonal scores (fixed at IS_END=2020, no look-ahead) rank-blended with 6-1m momentum rank → top-1.
+
+**Results (2026-06-25):**
+
+| Variant | w_mom | w_sea | IS Sharpe | OOS Sharpe | MaxDD | Neg yrs | Corr(baseline) |
+|---------|-------|-------|-----------|------------|-------|---------|----------------|
+| A (mom-dominant) | 0.7 | 0.3 | 2.024 | 0.671 | -39.2% | 3 | 0.765 |
+| B (equal-weight) | 0.5 | 0.5 | 2.134 | 0.554 | -50.8% | 3 | 0.605 |
+| C (sea-dominant) | 0.3 | 0.7 | 2.286 | 0.707 | -50.8% | 2 | 0.576 |
+| Baseline (mom only) | — | — | — | 1.055 | — | — | 1.000 |
+
+Gate: Sharpe > 1.174 → best 0.707 ✗ (all fail)
+
+**Root cause:** Adding seasonality to a concentrated top-1 portfolio compounds noise from both signals. Very high IS Sharpe (2.0–2.3) with catastrophic OOS collapse (MaxDD -39% to -51%) is classic IS overfitting on a 30-stock universe. The IS seasonal scores learned calendar patterns for 2013-2020 that did not generalize to 2021-2026. H292's "useful as signal layer" note referred to diversified multi-stock portfolios — with top-1 concentration, the second signal adds only noise.
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h334.py`. Results at `backtesting/results/h334_results.json`. Seasonality family on H198 appears exhausted.
+
+---
+
+### H335 — Bond ETF Momentum Window Optimization (H045 Universe) [NOT CONFIRMED]
+
+**Source:** H045 (confirmed, OOS Sharpe 1.351, signal: rank(12m_mom) + rank(inv_6m_vol), top-2).
+
+**Hypothesis:** Testing whether alternative momentum windows (3m, 6m, 9m) or signal variants can beat H045's 1.351 benchmark on the 7-ETF bond universe (SHY, IEI, IEF, TLT, TIP, HYG, LQD).
+
+**Results (2026-06-25):**
+
+| Variant | Signal | IS Sharpe | OOS Sharpe | MaxDD | Neg yrs | WF |
+|---------|--------|-----------|------------|-------|---------|-----|
+| A | 3m_mom + inv_6m_vol | 1.141 | 0.181 | -14.1% | 3 | 0.159 |
+| B | 6m_mom + inv_6m_vol | 0.862 | 0.414 | -12.8% | 3 | 0.481 |
+| C | 9m_mom + inv_6m_vol | 0.799 | 0.261 | -15.6% | 4 | 0.327 |
+| D | 12m_mom + inv_6m_vol (H045 repro) | 0.541 | 0.289 | -16.6% | 4 | 0.534 |
+| E | 12m_mom only (no vol adj) | 0.470 | 0.414 | -19.8% | 3 | 0.882 |
+| F | (3m×0.4 + 12m×0.6) + inv_6m_vol | 0.513 | 0.131 | -15.4% | 4 | 0.256 |
+| AGG B&H | — | — | 0.379 | — | — | — |
+
+Gate: Sharpe > 1.351 → best 0.414 ✗ (all fail)
+
+**Root cause:** The 2022 Federal Reserve rate-hike cycle (fastest in 40 years) devastated all bond ETFs simultaneously. No momentum window could anticipate the shift — by the time momentum turned negative, losses were severe. **Implementation note:** H045 reproduction (Variant D, OOS Sharpe 0.289) underperforms the logged benchmark of 1.351. This suggests the original H045 implementation includes a mechanism not captured here — possibly a carry component, a vol-targeting layer, or a different universe start date that excluded HYG/LQD. The H045 implementation should be reviewed before building further strategies on this foundation.
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h335.py`. Results at `backtesting/results/h335_results.json`. H045 reproduction discrepancy flagged for review.

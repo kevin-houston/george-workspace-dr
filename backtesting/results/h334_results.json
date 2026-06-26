@@ -1,0 +1,45 @@
+{
+  "hypothesis": "H334",
+  "baseline_oos_sharpe": 1.055,
+  "variants": {
+    "variant_A": {
+      "w_mom": 0.7,
+      "w_sea": 0.3,
+      "is_sharpe": 2.024,
+      "oos_sharpe": 0.671,
+      "oos_cagr": 0.223,
+      "oos_maxdd": -0.392,
+      "neg_years": 3,
+      "corr_baseline": 0.765,
+      "corr_spy": 0.415,
+      "pass_gate": false
+    },
+    "variant_B": {
+      "w_mom": 0.5,
+      "w_sea": 0.5,
+      "is_sharpe": 2.134,
+      "oos_sharpe": 0.554,
+      "oos_cagr": 0.159,
+      "oos_maxdd": -0.508,
+      "neg_years": 3,
+      "corr_baseline": 0.605,
+      "corr_spy": 0.394,
+      "pass_gate": false
+    },
+    "variant_C": {
+      "w_mom": 0.3,
+      "w_sea": 0.7,
+      "is_sharpe": 2.286,
+      "oos_sharpe": 0.707,
+      "oos_cagr": 0.238,
+      "oos_maxdd": -0.508,
+      "neg_years": 2,
+      "corr_baseline": 0.576,
+      "corr_spy": 0.446,
+      "pass_gate": false
+    }
+  },
+  "best_variant": "C",
+  "best_oos_sharpe": 0.707,
+  "verdict": "NOT CONFIRMED"
+}

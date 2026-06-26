@@ -1,0 +1,64 @@
+{
+  "hypothesis": "H335",
+  "h045_baseline_sharpe": 1.351,
+  "agg_bh_sharpe": 0.379,
+  "variants": {
+    "variant_A": {
+      "is_sharpe": 1.141,
+      "oos_sharpe": 0.181,
+      "oos_cagr": 0.006,
+      "oos_maxdd": -0.141,
+      "neg_years": 3,
+      "wf_ratio": 0.159,
+      "pass_gate": false
+    },
+    "variant_B": {
+      "is_sharpe": 0.862,
+      "oos_sharpe": 0.414,
+      "oos_cagr": 0.014,
+      "oos_maxdd": -0.128,
+      "neg_years": 3,
+      "wf_ratio": 0.481,
+      "pass_gate": false
+    },
+    "variant_C": {
+      "is_sharpe": 0.799,
+      "oos_sharpe": 0.261,
+      "oos_cagr": 0.009,
+      "oos_maxdd": -0.156,
+      "neg_years": 4,
+      "wf_ratio": 0.327,
+      "pass_gate": false
+    },
+    "variant_D": {
+      "is_sharpe": 0.541,
+      "oos_sharpe": 0.289,
+      "oos_cagr": 0.011,
+      "oos_maxdd": -0.166,
+      "neg_years": 4,
+      "wf_ratio": 0.534,
+      "pass_gate": false
+    },
+    "variant_E": {
+      "is_sharpe": 0.47,
+      "oos_sharpe": 0.414,
+      "oos_cagr": 0.024,
+      "oos_maxdd": -0.198,
+      "neg_years": 3,
+      "wf_ratio": 0.882,
+      "pass_gate": false
+    },
+    "variant_F": {
+      "is_sharpe": 0.513,
+      "oos_sharpe": 0.131,
+      "oos_cagr": 0.004,
+      "oos_maxdd": -0.154,
+      "neg_years": 4,
+      "wf_ratio": 0.256,
+      "pass_gate": false
+    }
+  },
+  "best_variant": null,
+  "best_oos_sharpe": 1.351,
+  "verdict": "NOT CONFIRMED"
+}

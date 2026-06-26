@@ -1,0 +1,19 @@
+{
+  "hypothesis": "H332",
+  "best_gene": "{'n_long': 9, 'n_skip': 1, 'vol_adj': False, 'blend': {'n_long': 3, 'n_skip': 1, 'vol_adj': False}, 'blend_weight': 0.31994492148506504}",
+  "is_stats": {
+    "sharpe": 1.638,
+    "cagr": 0.376
+  },
+  "oos_stats": {
+    "sharpe": 0.987,
+    "cagr": 0.376,
+    "maxdd": -0.378,
+    "neg_years": 0
+  },
+  "oos_ic": -0.022,
+  "wf_ratio": 0.602,
+  "corr_spy_oos": 0.452,
+  "baseline_oos_sharpe": 1.055,
+  "verdict": "NOT CONFIRMED"
+}
