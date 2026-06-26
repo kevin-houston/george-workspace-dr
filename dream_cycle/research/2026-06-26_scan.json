@@ -1,0 +1,96 @@
+{
+  "date": "2026-06-26",
+  "scan_angles": [
+    "arXiv: pairs trading + LLM + cointegration",
+    "arXiv: PEAD + post-earnings drift + NLP/FinBERT",
+    "arXiv: cross-sectional momentum + factor momentum + ML",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "papers_reviewed": [
+    {
+      "id": "arxiv:2602.07048",
+      "title": "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+      "authors": "Kim et al.",
+      "date": "2026-02-04",
+      "angle": "pairs_trading_llm",
+      "relevance_score": 8,
+      "relevance_notes": "Directly applicable to Kalshi H185 infrastructure. Granger causality + LLM veto raises win rate 51.4→54.5%, cuts avg losing trade 649→347. Staged as H334.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-26/1_llm_leadlag_kalshi_h334.json"
+    },
+    {
+      "id": "arxiv:2603.27539",
+      "title": "Toward Reliable Evaluation of LLM-Based Financial Multi-Agent Systems: Taxonomy, Coordination Primacy, and Cost Awareness",
+      "authors": "Nguyen & Pham",
+      "date": "2026-03-29",
+      "angle": "multi_agent_llm",
+      "relevance_score": 6,
+      "relevance_notes": "Coordination Primacy Hypothesis, CBS metric, 5 evaluation failures. Extends multi-agent-llm-trading.md. Staged as wiki update.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-26/2_multiagent_reliability_wiki.json"
+    },
+    {
+      "id": "arxiv:2510.07920",
+      "title": "Profit Mirage: Revisiting Information Leakage in LLM-based Financial Agents",
+      "authors": "Li et al.",
+      "date": "2025-10-09",
+      "angle": "multi_agent_llm",
+      "relevance_score": 6,
+      "relevance_notes": "4 information leakage dimensions, FactFin counterfactual defense. Bundled into wiki update (proposal 2). Key implication: H163/H174 2023 events may have training-data leakage.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-06-26/2_multiagent_reliability_wiki.json"
+    },
+    {
+      "id": "arxiv:2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+      "authors": "Du",
+      "date": "2026-05-09",
+      "angle": "cross_sectional_momentum",
+      "relevance_score": 3,
+      "relevance_notes": "213-factor PyTorch engine with bias correction, Sharpe 1.63 OOS — but on Chinese A-shares. Mask-first design principle is transferable. Not staged (China-specific).",
+      "staged": false
+    },
+    {
+      "id": "arxiv:2510.27251",
+      "title": "FinPos: A Position-Aware Trading Agent System for Real Financial Markets",
+      "authors": "Liu & Dang",
+      "date": "2026-01-07",
+      "angle": "multi_agent_llm",
+      "relevance_score": 4,
+      "relevance_notes": "Dual decision agents, multi-timescale rewards for position management. Interesting architecture but no US equity benchmark numbers extractable. Not staged.",
+      "staged": false
+    },
+    {
+      "id": "acl:2025.finnlp-2.13",
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with LLMs",
+      "authors": "Unknown (FinNLP 2025 workshop)",
+      "date": "2025-09-29",
+      "angle": "pead_nlp",
+      "relevance_score": 5,
+      "relevance_notes": "FinBERT achieves 57.6%/58.3% classification accuracy on PEAD detection (positive/negative groups). Press release content as informative as EPS surprise. Could not read full PDF. Worth revisiting when accessible.",
+      "staged": false
+    },
+    {
+      "id": "github:ryanfrigo/kalshi-ai-trading-bot",
+      "title": "Kalshi AI Trading Bot toolkit",
+      "date": "2026",
+      "angle": "github_trending",
+      "relevance_score": 9,
+      "relevance_notes": "Best reference implementation for Kalshi automated pipeline. RSA auth, SQLite, event-driven loop, Kelly sizing, Streamlit dashboard. Incorporated directly into wiki Phase 1.",
+      "staged": false
+    },
+    {
+      "id": "github:OctagonAI/kalshi-deep-trading-bot",
+      "title": "OctagonAI Kalshi Deep Trading Bot CLI",
+      "date": "2026",
+      "angle": "github_trending",
+      "relevance_score": 7,
+      "relevance_notes": "5-gate risk engine, deep fundamental research per market, CLI interface. Good production reference for risk controls section of pipeline.",
+      "staged": false
+    }
+  ],
+  "staged_count": 2,
+  "high_relevance_count": 3,
+  "summary": "Tonight's scan focused on prediction market pipeline automation (for the wiki Phase 1) and multi-agent reliability. Key finding: arXiv:2602.07048 provides a directly actionable extension to the H185 Kalshi infrastructure (H334). The Profit Mirage paper raises a flag on H163/H174 OOS validity for 2023 events. Cross-sectional momentum angle yielded only China-specific results. PEAD paper was a PDF that couldn't be parsed."
+}

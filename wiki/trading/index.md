@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-25 (merger-arbitrage-special-situations.md new; H331/H332/H333 staged)
+updated: 2026-06-26 (automated-pipeline.md new; H334 staged)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -92,6 +92,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Polymarket](prediction-markets/polymarket.md) ← 2026-04-29 (full CLOB API, Ethereum auth, order placement, WebSocket streaming, fee comparison vs Kalshi, cross-platform arb scanner)
   - [AI Model Benchmarks](prediction-markets/ai-model-benchmarks.md) ← new 2026-05-29 (Prediction Arena arXiv:2604.07355 — 6 models with real capital; all lost money on Kalshi weather-dominated set; Polymarket better venue for AI agents; grok-4-20 only profitable prior run +10.9%)
   - [Superforecasting Methods](prediction-markets/superforecasting-methods.md) ← new 2026-06-11 (Ten Commandments, reference class forecasting, Bayesian updating, calibration layer for LLMs, domain bias table arXiv:2602.19520, LLM benchmark landscape arXiv:2512.16030/2507.04562/2506.01578, H185 gates)
+  - [Automated Trading Pipeline](prediction-markets/automated-pipeline.md) ← new 2026-06-26 (event-driven loop; ryanfrigo/OctagonAI reference repos; APScheduler vs NanoClaw schedule_task; SQLite schema; position sizing + drawdown halt; CPI nowcast→order pipeline; graduation gates; 5 known failure modes; integration checklist)
 - [Backtesting](backtesting/) — setup, results, methodology
   - [Design Principles](backtesting/design-principles.md) ← expanded 2026-05-05 (IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado)
   - [Walk-Forward & CPCV](backtesting/walk-forward-cpcv.md) ← new 2026-05-07 (WFO variants, CPCV algorithm, purging/embargoing, DSR formulas, Python libs: timeseriescv/skfolio/mlfinlab, when to use what)
@@ -113,6 +114,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Sources](sources/) — ingested papers and working papers
   - [The Alchemy of Multibagger Stocks](sources/multibagger-yartseva-2025.md) ← new 2026-06-12 (Yartseva 2025; FCF/P = #1 factor; EPS growth NOT sig; small-cap +37.7% vs large +9.7%; asset_growth>EBITDA_growth −22.8pp; near-12m-low entry signal; rate-hike −8-12pp; H285 proposed)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-06-26](research-log/2026-06-26.md) — wiki expansion: automated-pipeline.md new (Kalshi live trading infrastructure; APScheduler; SQLite schema; position sizing; CPI nowcast→order pipeline; 5 failure modes; graduation gates); dream cycle: 8 papers reviewed, 2 staged (H334 LLM lead-lag Kalshi arXiv:2602.07048; multi-agent reliability wiki update arXiv:2603.27539 + Profit Mirage arXiv:2510.07920)
   - [2026-06-25](research-log/2026-06-25.md) — wiki expansion: merger-arbitrage-special-situations.md new (H310 root cause documented; deal mechanics, ML features, regulatory regimes; H331/H332/H333 staged); dream cycle: 18 papers reviewed, 4 staged (multi-modal PEAD H331, QuantaAlpha evolutionary H332, regime-aware agent comms wiki, merger arb NLP H333)
   - [2026-06-23](research-log/2026-06-23.md) — wiki expansion: strategy-blending-correlation.md new (H026/H041a/H045 OOS correlation matrix; IC-weighted blending; meta-learning failure analysis H318; production blend 40/30/30 static near-optimal; IBS orthogonality = source of 2.50→4.16 Sharpe jump; next additions: H309 dispersion, H174 PEAD); H318 NOT CONFIRMED logged; dream cycle scan: arXiv/GitHub 5-angle scan
   - [2026-06-20](research-log/2026-06-20.md) — wiki expansion: fixed-income-bond-rotation.md new (H045 PRODUCTION framework; 3m+6m+12m rank ensemble; carry FAILS — ETF dividends ≠ forward carry; SHY dominates OOS 72% of months; H314/H315 queued); dream cycle: H316 LLM pair selection (Moira arXiv:2605.01954), H317 multi-modal PEAD (arXiv:2605.25894), H319 semantic network, H320 crash filter; Self-Driving Portfolio + reproducibility audit wiki updates
