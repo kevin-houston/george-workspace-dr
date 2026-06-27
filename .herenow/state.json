@@ -188,6 +188,12 @@
       "claimToken": "4d82fe90509ffdd284e59fb611e1916b75e711978aa6b3533853de4b66380465",
       "claimUrl": "https://here.now/claim?slug=oaken-vision-ybp3&token=4d82fe90509ffdd284e59fb611e1916b75e711978aa6b3533853de4b66380465",
       "expiresAt": "2026-06-26T09:06:26.623Z"
+    },
+    "saffron-gorge-ey22": {
+      "siteUrl": "https://saffron-gorge-ey22.here.now/",
+      "claimToken": "7c9a3faa394a417e41385c76b21263ffb3ba9f1ddb90ec9cdda25e132b3ed288",
+      "claimUrl": "https://here.now/claim?slug=saffron-gorge-ey22&token=7c9a3faa394a417e41385c76b21263ffb3ba9f1ddb90ec9cdda25e132b3ed288",
+      "expiresAt": "2026-06-27T09:04:33.798Z"
     }
   }
 }
