@@ -1,0 +1,89 @@
+{
+  "hypothesis": "H339",
+  "description": "Price-Based Momentum Filter Gates (proxy for LLM sentiment gate)",
+  "source": "arXiv:2510.26228 LLM momentum filter; price signals as sentiment proxy",
+  "baseline_oos_sharpe": 1.055,
+  "h198_gate": 1.174,
+  "variants": {
+    "variant_A (baseline)": {
+      "is_sharpe": 1.582,
+      "oos_sharpe": 1.055,
+      "oos_cagr": 0.5,
+      "oos_maxdd": -0.379,
+      "neg_years": 0,
+      "wf_ratio": 0.667,
+      "corr_baseline": 1.0,
+      "corr_spy": 0.423,
+      "pass_gate": false
+    },
+    "variant_B (1m>0 gate)": {
+      "is_sharpe": 1.147,
+      "oos_sharpe": 0.615,
+      "oos_cagr": 0.178,
+      "oos_maxdd": -0.379,
+      "neg_years": 1,
+      "wf_ratio": 0.536,
+      "corr_baseline": 0.733,
+      "corr_spy": 0.365,
+      "pass_gate": false
+    },
+    "variant_C (3m>0 gate)": {
+      "is_sharpe": 1.521,
+      "oos_sharpe": 0.925,
+      "oos_cagr": 0.405,
+      "oos_maxdd": -0.379,
+      "neg_years": 0,
+      "wf_ratio": 0.608,
+      "corr_baseline": 0.974,
+      "corr_spy": 0.414,
+      "pass_gate": false
+    },
+    "variant_D (accel gate)": {
+      "is_sharpe": 0.968,
+      "oos_sharpe": 0.419,
+      "oos_cagr": 0.106,
+      "oos_maxdd": -0.419,
+      "neg_years": 2,
+      "wf_ratio": 0.432,
+      "corr_baseline": 0.853,
+      "corr_spy": 0.331,
+      "pass_gate": false
+    },
+    "variant_E (1m+accel)": {
+      "is_sharpe": 0.818,
+      "oos_sharpe": 0.343,
+      "oos_cagr": 0.066,
+      "oos_maxdd": -0.379,
+      "neg_years": 2,
+      "wf_ratio": 0.42,
+      "corr_baseline": 0.673,
+      "corr_spy": 0.325,
+      "pass_gate": false
+    },
+    "variant_F (abs mom>0)": {
+      "is_sharpe": 1.582,
+      "oos_sharpe": 1.055,
+      "oos_cagr": 0.5,
+      "oos_maxdd": -0.379,
+      "neg_years": 0,
+      "wf_ratio": 0.667,
+      "corr_baseline": 1.0,
+      "corr_spy": 0.423,
+      "pass_gate": false
+    },
+    "variant_G (3m+accel)": {
+      "is_sharpe": 0.968,
+      "oos_sharpe": 0.419,
+      "oos_cagr": 0.106,
+      "oos_maxdd": -0.419,
+      "neg_years": 2,
+      "wf_ratio": 0.432,
+      "corr_baseline": 0.853,
+      "corr_spy": 0.331,
+      "pass_gate": false
+    }
+  },
+  "best_variant": null,
+  "best_oos_sharpe": 1.174,
+  "verdict": "NOT CONFIRMED"
+}

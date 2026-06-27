@@ -1,0 +1,71 @@
+{
+  "hypothesis": "H337",
+  "description": "Quality-Momentum Dual Ranking (GP/A and ROE from yfinance) on H198 Universe",
+  "baseline_oos_sharpe": 1.055,
+  "h198_gate": 1.174,
+  "quality_coverage": {
+    "gp_a": 0.067,
+    "roe": 0.061,
+    "gp_m": 0.067
+  },
+  "variants": {
+    "variant_A (mom only)": {
+      "is_sharpe": 1.582,
+      "oos_sharpe": 1.055,
+      "oos_cagr": 0.5,
+      "oos_maxdd": -0.379,
+      "neg_years": 0,
+      "wf_ratio": 0.667,
+      "corr_baseline": 1.0,
+      "corr_spy": 0.423,
+      "pass_gate": false
+    },
+    "variant_B (0.5mom+0.5gp_a)": {
+      "is_sharpe": 1.582,
+      "oos_sharpe": 0.802,
+      "oos_cagr": 0.294,
+      "oos_maxdd": -0.392,
+      "neg_years": 2,
+      "wf_ratio": 0.507,
+      "corr_baseline": 0.845,
+      "corr_spy": 0.409,
+      "pass_gate": false
+    },
+    "variant_C (0.7mom+0.3gp_a)": {
+      "is_sharpe": 1.582,
+      "oos_sharpe": 0.832,
+      "oos_cagr": 0.311,
+      "oos_maxdd": -0.379,
+      "neg_years": 2,
+      "wf_ratio": 0.526,
+      "corr_baseline": 0.855,
+      "corr_spy": 0.418,
+      "pass_gate": false
+    },
+    "variant_D (0.5mom+0.5roe)": {
+      "is_sharpe": 1.582,
+      "oos_sharpe": 0.792,
+      "oos_cagr": 0.289,
+      "oos_maxdd": -0.405,
+      "neg_years": 2,
+      "wf_ratio": 0.5,
+      "corr_baseline": 0.84,
+      "corr_spy": 0.42,
+      "pass_gate": false
+    },
+    "variant_E (mom + gp/a filter)": {
+      "is_sharpe": 1.582,
+      "oos_sharpe": 0.812,
+      "oos_cagr": 0.296,
+      "oos_maxdd": -0.388,
+      "neg_years": 2,
+      "wf_ratio": 0.513,
+      "corr_baseline": 0.842,
+      "corr_spy": 0.435,
+      "pass_gate": false
+    }
+  },
+  "best_variant": null,
+  "best_oos_sharpe": 1.174,
+  "verdict": "NOT CONFIRMED"
+}

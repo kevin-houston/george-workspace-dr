@@ -1,0 +1,66 @@
+{
+  "hypothesis": "H336",
+  "description": "52-Week High Proximity Momentum on H198 Universe",
+  "baseline_oos_sharpe": 1.055,
+  "h198_gate": 1.174,
+  "variants": {
+    "variant_A": {
+      "is_sharpe": 0.972,
+      "oos_sharpe": 0.342,
+      "oos_cagr": 0.058,
+      "oos_maxdd": -0.451,
+      "neg_years": 3,
+      "wf_ratio": 0.352,
+      "corr_baseline": 0.294,
+      "corr_spy": 0.32,
+      "pass_gate": false
+    },
+    "variant_B": {
+      "is_sharpe": 1.392,
+      "oos_sharpe": 0.407,
+      "oos_cagr": 0.082,
+      "oos_maxdd": -0.341,
+      "neg_years": 3,
+      "wf_ratio": 0.292,
+      "corr_baseline": 0.633,
+      "corr_spy": 0.369,
+      "pass_gate": false
+    },
+    "variant_C": {
+      "is_sharpe": 1.536,
+      "oos_sharpe": 0.811,
+      "oos_cagr": 0.25,
+      "oos_maxdd": -0.361,
+      "neg_years": 1,
+      "wf_ratio": 0.528,
+      "corr_baseline": 0.696,
+      "corr_spy": 0.401,
+      "pass_gate": false
+    },
+    "variant_D": {
+      "is_sharpe": 1.396,
+      "oos_sharpe": 0.977,
+      "oos_cagr": 0.412,
+      "oos_maxdd": -0.334,
+      "neg_years": 2,
+      "wf_ratio": 0.7,
+      "corr_baseline": 0.888,
+      "corr_spy": 0.31,
+      "pass_gate": false
+    },
+    "variant_E": {
+      "is_sharpe": 1.189,
+      "oos_sharpe": 0.366,
+      "oos_cagr": 0.069,
+      "oos_maxdd": -0.334,
+      "neg_years": 2,
+      "wf_ratio": 0.308,
+      "corr_baseline": 0.584,
+      "corr_spy": 0.339,
+      "pass_gate": false
+    }
+  },
+  "best_variant": null,
+  "best_oos_sharpe": 1.174,
+  "verdict": "NOT CONFIRMED"
+}
