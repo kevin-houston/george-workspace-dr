@@ -1,0 +1,14 @@
+{
+  "id": "moira-h316-wiki-update-2026-06-27",
+  "date": "2026-06-27",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2605.01954",
+  "title": "Wiki update: Moira LLM pairs trading benchmark fills H316 quantitative gap",
+  "rationale": "arXiv:2605.01954 ('Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading', May 2026) provides the first concrete quantitative benchmark for LLM-based pair selection that H316 is designed to replicate/extend. Results: Sharpe 3.791 vs cointegration baseline 1.218 on 10-stock US mega-cap universe (AAPL, AMZN, MSFT, NVDA, TSLA, GOOGL, META, ADBE, CRM, BMRN). Two-stage architecture: high-level LLM policy selects which pair to trade, low-level LLM policy decides position sizing/timing. Both optimized via prompt updates (no gradient fine-tuning), using DeepSeek-V3.2. Ablation: removing LLM pair selection alone → Sharpe drops to -0.125 (negative), removing LLM execution → Sharpe 0.388. Both components necessary. H316 stub (existing) references arXiv:2605.01954 but lacks these quantitative details. This update adds concrete numbers, architecture design, and realistic expectations for our implementation.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/hypothesis-log.md",
+  "content": "\n\n### H316 Update — Moira benchmark results now available\n**Status**: STUB (needs OpenAI/DeepSeek API)\n**Updated**: 2026-06-27\n\nMoira paper (arXiv:2605.01954) published full results:\n\n| Method | Ann. Return | Sharpe | Sortino | Max DD |\n|--------|-------------|--------|---------|--------|\n| Moira (full) | 59.1% | 3.791 | 9.637 | 1.70% |\n| Cointegration baseline | 21.4% | 1.218 | 1.270 | 5.11% |\n| RL baseline (TRIALS) | -4.7% | -0.125 | -0.550 | 6.28% |\n\n**Architecture**: Two-stage hierarchical RL. High-level LLM selects pair from universe; low-level LLM manages entry/exit timing. Both use frozen DeepSeek-V3.2 with prompt-only optimization (no gradient fine-tuning). Universe: 10 liquid US mega-caps with strong news availability.\n\n**Ablation key insight**: LLM pair SELECTION is the critical innovation (removing it → Sharpe collapses to -0.125). LLM execution is secondary. For our H316 implementation: prioritize getting semantic pair selection right first.\n\n**H307 context (ETF pairs, NOT CONFIRMED)**: Moira uses equities not ETFs, and avoids statistical cointegration entirely in favor of LLM economic reasoning. This is the right direction for pairs trading — cointegration on ETFs is anti-predictive per H307.\n\n**Implementation note**: DeepSeek-V3.2 API is cost-effective alternative to GPT-4o. Moira's approach is compatible with our existing EDGAR/FMP data stack for fundamental context injection.\n",
+  "action": "append",
+  "apply_status": "pending"
+}

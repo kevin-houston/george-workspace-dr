@@ -1,0 +1,151 @@
+{
+  "date": "2026-06-27",
+  "papers_reviewed": [
+    {
+      "title": "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns",
+      "arxiv_id": "2604.13260",
+      "url": "https://arxiv.org/abs/2604.13260",
+      "authors": "Bochkay & Hales (2026)",
+      "relevance_score": 9,
+      "relevance_notes": "Directly upgrades H174 PEAD signal. Speaker-weighted FinBERT on 16,428 S&P 500 transcripts (2015-2025). 46% IC improvement, 2.03%/month long-short alpha, t=6.49. Analyst turns 49%, CFO 30%. Signal half-life 6-7 days. Clean OOS 2023-2024. Addresses root cause of H168 failure (coverage bias, not concept). New hypothesis H340 proposed.",
+      "staged": true,
+      "staged_file": "1_speaker_weighted_finbert_h340.json"
+    },
+    {
+      "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+      "arxiv_id": "2605.01954",
+      "url": "https://arxiv.org/abs/2605.01954",
+      "authors": "Multiple (2026, May)",
+      "relevance_score": 8,
+      "relevance_notes": "H316 reference paper — now has full quantitative results. Sharpe 3.791 vs cointegration 1.218. Two-stage LLM pair selection + execution on 10 US mega-caps. DeepSeek-V3.2. Pair selection is the key innovation (ablation: removing it → Sharpe -0.125). Confirms cointegration-free LLM approach is superior to H307 ETF pairs approach.",
+      "staged": true,
+      "staged_file": "2_moira_h316_wiki_update.json"
+    },
+    {
+      "title": "AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading",
+      "arxiv_id": "2605.05580",
+      "url": "https://arxiv.org/abs/2605.05580",
+      "authors": "NJU (2026, May)",
+      "relevance_score": 7,
+      "relevance_notes": "H318 architectural blueprint. 3-agent closed-loop: Miner (factor discovery) + Screener (regime-conditional ensemble) + Trader (risk-constrained execution). Tests on CSI 300 and S&P 500. Screener component maps directly to H318 meta-agent ETF rotation selector. Outperforms SOTA, lowest cross-trial variance.",
+      "staged": true,
+      "staged_file": "3_alphaCrafter_h318_wiki_update.json"
+    },
+    {
+      "title": "Toward Reliable Evaluation of LLM-Based Financial Multi-Agent Systems: Taxonomy, Coordination Primacy, and Cost Awareness",
+      "arxiv_id": "2603.27539",
+      "url": "https://arxiv.org/abs/2603.27539",
+      "authors": "Nguyen & Pham (March 2026)",
+      "relevance_score": 8,
+      "relevance_notes": "Already staged 2026-06-26. CBS metric (coordination breakeven spread), CPH (coordination primacy hypothesis), 5 evaluation failure modes. H274 implication documented. Skip re-staging.",
+      "staged": false,
+      "staged_note": "Already staged and applied in 2026-06-26 session"
+    },
+    {
+      "title": "Coordination as an Architectural Layer for LLM-Based Multi-Agent Systems",
+      "arxiv_id": "2605.03310",
+      "url": "https://arxiv.org/abs/2605.03310",
+      "authors": "Unknown (2026, May)",
+      "relevance_score": 6,
+      "relevance_notes": "Empirical study of 5 coordination architectures on 100 Polymarket markets using Claude Opus 4.6. Production failure rates 41-87% from coordination defects. Murphy decomposition scoring. Bootstrap intervals favor consensus alignment. Relevant to H274 PEAD debate design. Not staged — closely related to 2603.27539 already applied.",
+      "staged": false,
+      "staged_note": "Overlaps with yesterday's staged content; coordination failure rates (41-87%) are the new data point but insufficient alone to warrant a third wiki update"
+    },
+    {
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "arxiv_id": "2605.25894",
+      "url": "https://arxiv.org/abs/2605.25894",
+      "authors": "Noseda et al. (May 2026)",
+      "relevance_score": 5,
+      "relevance_notes": "Multi-modal: 15 fundamentals + 3 price indicators + FinBERT news sentiment. LSTM vs Transformer on earnings announcement days. Transformer higher F1, LSTM higher precision. No Sharpe ratio reported. Less actionable than 2604.13260 which directly addresses PEAD drift.",
+      "staged": false
+    },
+    {
+      "title": "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+      "arxiv_id": "2602.07048",
+      "url": "https://arxiv.org/abs/2602.07048",
+      "authors": "Kim et al. (Feb 2026)",
+      "relevance_score": 7,
+      "relevance_notes": "Already staged 2026-06-26 as H334 (Kalshi lead-lag filter). Win rate 51.4%→54.5%, loss size $649→$347. Skip re-staging.",
+      "staged": false,
+      "staged_note": "Already staged and applied as H334 on 2026-06-26"
+    },
+    {
+      "title": "Cross-Stock Predictability via LLM-Augmented Semantic Networks",
+      "arxiv_id": "2604.19476",
+      "url": "https://arxiv.org/abs/2604.19476",
+      "authors": "Unknown (April 2026)",
+      "relevance_score": 6,
+      "relevance_notes": "H319 reference paper (already in CLAUDE.local). 10-K embeddings + LLM edge classification, Sharpe 0.742→0.820, MaxDD -10.47%→-7.85% on S&P 500 2011-2019. Known, not new.",
+      "staged": false,
+      "staged_note": "Already documented as H319 in CLAUDE.local.md"
+    },
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "arxiv_id": "2509.24254",
+      "url": "https://arxiv.org/abs/2509.24254",
+      "authors": "Unknown (Sept 2025)",
+      "relevance_score": 4,
+      "relevance_notes": "138,000 press releases 2005-2023. Key finding: stock prices fully reflect press release content at market OPEN — limited PEAD edge. FinBERT best classifier (57.6-58.3% accuracy). Discouraging for press-release-based PEAD; earnings call approach (H340) preferable.",
+      "staged": false
+    },
+    {
+      "title": "Which Portfolios? The Construction Dependence of Factor Model Performance",
+      "arxiv_id": "2606.19550",
+      "url": "https://arxiv.org/abs/2606.19550",
+      "authors": "Unknown (June 2026)",
+      "relevance_score": 3,
+      "relevance_notes": "Factor model evaluation methodology — FF3/FF5/FF6/q5 comparison. Broad CRSP universe. Buy-and-hold favors FF5/FF6, daily rebalancing favors FF3. Not directly actionable on any open hypothesis.",
+      "staged": false
+    },
+    {
+      "title": "Taming the Black Swan: Momentum-Gated Hierarchical Optimisation Framework",
+      "arxiv_id": "2604.09060",
+      "url": "https://arxiv.org/abs/2604.09060",
+      "authors": "Unknown (April 2026)",
+      "relevance_score": 4,
+      "relevance_notes": "AEGIS system: volatility-adjusted momentum filter + minimax correlation + SLSQP optimizing Sortino. S&P 500/NASDAQ-100. No specific Sharpe numbers in abstract. No quality factor. Relevant to momentum crash protection but no new mechanism beyond H320 LightGBM crash filter.",
+      "staged": false
+    }
+  ],
+  "repos_reviewed": [
+    {
+      "name": "TradingAgents",
+      "url": "https://github.com/virattt/TradingAgents",
+      "relevance_score": 6,
+      "relevance_notes": "Multi-role AI hedge fund with fundamentals/sentiment/news/technical analysts + researcher debate + risk manager. Supports GPT-5.x, Gemini 3.x, Claude 4.x. Trending rapidly. Overlaps with H274 PEAD debate and H280 MarketSenseAI concepts. No novel signal — UI/orchestration layer.",
+      "staged": false
+    },
+    {
+      "name": "Vibe-Trading (HKUDS)",
+      "url": "https://github.com/HKUDS/Vibe-Trading",
+      "relevance_score": 5,
+      "relevance_notes": "Already integrated as MCP server. Known.",
+      "staged": false,
+      "staged_note": "Already live as mcp__vibe-trading"
+    },
+    {
+      "name": "QuantMuse",
+      "url": "https://github.com/0xemmkty/QuantMuse",
+      "relevance_score": 4,
+      "relevance_notes": "Multi-factor system: momentum, value, quality, size, vol factors + mean-variance + risk parity. CSI A-share focused. No unique edge over existing setup.",
+      "staged": false
+    },
+    {
+      "name": "awesome-quant-ai (leoncuhk)",
+      "url": "https://github.com/leoncuhk/awesome-quant-ai",
+      "relevance_score": 3,
+      "relevance_notes": "Curated list. No novel capability.",
+      "staged": false
+    },
+    {
+      "name": "Awesome-LLM-Quantitative-Trading-Papers",
+      "url": "https://github.com/Tom-roujiang/Awesome-LLM-Quantitative-Trading-Papers",
+      "relevance_score": 5,
+      "relevance_notes": "Active paper tracker — useful for future scans. No novel capability but found AlphaCrafter reference through it.",
+      "staged": false
+    }
+  ],
+  "staged_count": 3,
+  "summary": "Tonight's scan found three high-relevance papers. The strongest find is arXiv:2604.13260, which provides a speaker-weighted FinBERT methodology with 46% IC improvement and 2.03%/month alpha on S&P 500 earnings calls — directly actionable as H340, a targeted upgrade to the confirmed H174 PEAD strategy. The Moira paper (2605.01954) fills a long-standing quantitative gap in H316 with concrete results (Sharpe 3.791 vs cointegration 1.218), confirming LLM pair selection — not execution — is the key innovation. AlphaCrafter (2605.05580) gives H318 a published three-agent blueprint with regime-conditional factor ensembles. No new GitHub repos require immediate integration. The quality-momentum (H337b) and cross-sectional factor (H313/H320 family) directions had no new high-signal papers this cycle."
+}

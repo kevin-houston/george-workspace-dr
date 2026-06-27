@@ -1,0 +1,18 @@
+{
+  "id": "speaker-weighted-finbert-h340-2026-06-27",
+  "date": "2026-06-27",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2604.13260",
+  "title": "H340 stub: speaker-weighted FinBERT on earnings calls upgrades H174 PEAD signal",
+  "rationale": "arXiv:2604.13260 ('Which Voices Move Markets?', 2026) analyzes 16,428 S&P 500 earnings call transcripts (2015-2025) and finds that FinBERT sentiment weighted by speaker role outperforms uniform averaging by 46% (IC 0.081→0.119). Analyst turns dominate (49% weight), CFO next (30%). Monthly long-short alpha 2.03% (t=6.49), significant after Fama-French 5-factor and SUE controls. Signal half-life ~6-7 trading days. H168 (speaker-weighted FinBERT) was NOT CONFIRMED due to HuggingFace transcript coverage bias (only 26.5% OOS coverage). This paper uses a different data approach and achieves clean out-of-sample validation 2023-2024. Proposed H340: apply analyst-turn-weighted FinBERT scoring to H174's PEAD pipeline — retain H174 thresholds (score≥0.18, EPS surprise≥0.02) but reweight sentiment by speaker role rather than whole-document average. Upgrade path: modify pead_overnight.py to parse earnings call transcript speaker turns from EDGAR 8-K Item 2.02, weight analyst Q&A sentences at 49% and CFO prepared remarks at 30%.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/hypothesis-log.md",
+  "content": "\n\n### H340 — Speaker-Weighted FinBERT PEAD Upgrade\n**Status**: PROPOSED\n**Source**: arXiv:2604.13260 (Bochkay & Hales, 2026) \"Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns\"\n**Family**: PEAD / NLP\n**Related**: H163 (FinBERT baseline), H174 (CONFIRMED, score≥0.18 + EPS≥0.02), H168 (NOT CONFIRMED — coverage bias)\n\n**Core idea**: Earnings call FinBERT sentiment weighted by speaker role outperforms uniform averaging. Analyst-turn sentences weight 49%, CFO prepared remarks 30%, other executives 16%, operators 5%. Monthly long-short alpha 2.03% (t=6.49), IC 0.119 vs baseline 0.081 (+46%), signal persists ~6-7 trading days. Out-of-sample validation 2023-2024 with frozen weights.\n\n**Upgrade path for H174**: Parse earnings call transcript speaker turns from EDGAR 8-K. Weight FinBERT sentence scores by speaker role rather than whole-document average. Retain H174 thresholds: weighted_score≥0.18 AND EPS_surprise≥0.02. Expect IC improvement; WR may improve above H174's 81.8%.\n\n**Blockers**: Need earnings call transcript parsing — 8-K Item 7.01 or Item 2.02 contains prepared remarks; Q&A is in full transcript (may not be in 8-K, may need separate earnings call transcript source). AlphaVantage or FMP earnings_call endpoint.\n\n**Gate**: WR > 81.8% (H174 baseline) AND n ≥ 20 OOS trades\n\n**Priority**: Medium — dependent on transcript source availability. Do not lower H174 thresholds to force coverage.\n",
+  "action": "append",
+  "apply_status": "pending",
+  "hypothesis_number": "H340",
+  "hypothesis_family": "PEAD_NLP",
+  "blocker": "Earnings call transcript data with speaker turn labels — AlphaVantage (25 req/day limit) or FMP Professional plan",
+  "next_step": "Check FMP earnings_call endpoint coverage; if available, scaffold speaker-turn parser and run 10-event pilot"
+}
