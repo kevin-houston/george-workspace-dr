@@ -8118,3 +8118,179 @@ Gate: Sharpe > 1.351 → best 0.414 ✗ (all fail)
 **Root cause:** The 2022 Federal Reserve rate-hike cycle (fastest in 40 years) devastated all bond ETFs simultaneously. No momentum window could anticipate the shift — by the time momentum turned negative, losses were severe. **Implementation note:** H045 reproduction (Variant D, OOS Sharpe 0.289) underperforms the logged benchmark of 1.351. This suggests the original H045 implementation includes a mechanism not captured here — possibly a carry component, a vol-targeting layer, or a different universe start date that excluded HYG/LQD. The H045 implementation should be reviewed before building further strategies on this foundation.
 
 **Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h335.py`. Results at `backtesting/results/h335_results.json`. H045 reproduction discrepancy flagged for review.
+
+---
+
+### H336 — 52-Week High Proximity on H198 Universe [NOT CONFIRMED]
+
+**Source:** George & Hwang (2004) "The 52-Week High and Momentum Investing" (JoF); H291 (NOT CONFIRMED on 50-stock universe); H198 (6-1m momentum, OOS 1.174 on 30-stock NASDAQ universe).
+
+**Hypothesis:** In a concentrated 30-stock NASDAQ universe, stocks whose price is closest to their 52-week high (R52 = price/52w_high) carry stronger upward momentum and outperform a pure 6-1m momentum ranking.
+
+**Results (2026-06-26):**
+
+| Variant | Signal | IS Sharpe | OOS Sharpe | MaxDD | Neg yrs | WF |
+|---------|--------|-----------|------------|-------|---------|-----|
+| A | R52 signal only | 0.972 | 0.342 | -45.1% | 3 | 0.352 |
+| B | R52 filter + momentum rank | 1.392 | 0.407 | -34.1% | 3 | 0.292 |
+| C | R52 > 0.75 filter | 1.536 | 0.811 | -36.1% | 1 | 0.528 |
+| D | R52 > 0.85 filter | 1.396 | 0.977 | -33.4% | 2 | 0.700 |
+| E | R52 percentile rank blend | 1.189 | 0.366 | -33.4% | 2 | 0.308 |
+| Baseline (H198) | — | — | 1.055 | — | — | — |
+
+Gate: Sharpe > 1.174 → best 0.977 ✗ (all fail)
+
+**Root cause:** In a 30-stock large-cap NASDAQ universe, virtually all positions are near their 52-week highs during bull markets. In 2021–2025 (the OOS period), NVDA, META, MSFT are all persistently at R52 ≥ 0.85 — the filter becomes trivially true and adds no discrimination over momentum. Same pattern found in H291 on 50-stock universe. The 52-week high signal requires cross-sectional variation (small/mid-cap or bear-market conditions) to discriminate.
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h336.py`. Results at `backtesting/results/h336_results.json`. 52-week proximity family on concentrated large-cap universe closed.
+
+---
+
+### H337 — Quality-Momentum Dual Ranking on H198 Universe [NOT CONFIRMED]
+
+**Source:** Asness et al. "Quality Minus Junk" (2019) AQR; Novy-Marx (2013) GP/A factor; H198 (6-1m momentum, OOS 1.174). Proposed adding GP/A (gross profitability) and ROE tiebreaker.
+
+**Hypothesis:** Within H198's 30 NASDAQ stocks, blending momentum with a quality score (GP/A or ROE) will produce a more robust ranking that avoids selecting lottery stocks at the momentum peak.
+
+**Results (2026-06-26):**
+
+| Variant | Signal | IS Sharpe | OOS Sharpe | MaxDD | Neg yrs | WF | Quality coverage |
+|---------|--------|-----------|------------|-------|---------|-----|-----------------|
+| A | Momentum only | 1.582 | 1.055 | -37.9% | 0 | 0.667 | — |
+| B | 0.5mom + 0.5gp/a | 1.582 | 0.802 | -39.2% | 2 | 0.507 | 6.7% |
+| C | 0.7mom + 0.3gp/a | 1.582 | 0.832 | -37.9% | 2 | 0.526 | 6.7% |
+| D | 0.5mom + 0.5roe | 1.582 | 0.792 | -40.5% | 2 | 0.500 | 6.1% |
+| E | mom + gp/a filter | 1.582 | 0.812 | -38.8% | 2 | 0.513 | 6.7% |
+| Baseline (H198) | — | — | 1.055 | — | — | — | — |
+
+Gate: Sharpe > 1.174 → best 0.832 ✗ (all fail)
+
+**Root cause:** yfinance reports GP/A for only 6.7% of the 30-stock universe. The remaining 93.3% revert to pure momentum — meaning quality is only applied to ~2 stocks per month. More critically, S&P 500 / NASDAQ 100 members are all high-quality large-caps; there is no meaningful cross-sectional variation in GP/A or ROE at this scale. Quality tiebreakers route AWAY from the momentum winner in the few cases they apply, degrading rather than improving the signal.
+
+**Next step:** H337b — expand universe to 200 stocks (full S&P 500 or Russell 1000) where quality cross-section has meaningful spread. Proposed but unresourced.
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h337.py`. Results at `backtesting/results/h337_results.json`.
+
+---
+
+### H338 — Multi-Asset Trend + Carry on Combined Bond+Equity Universe [NOT CONFIRMED]
+
+**Source:** Koijen et al. (2018) "Carry" (JFE); H026 equity momentum; H045 bond momentum. Proposed combining 17-ETF universe (H026 equity + H045 bond) with carry = dividend yield / vol.
+
+**Hypothesis:** Adding carry signal alongside momentum across a unified 17-ETF equity+bond universe creates a diversified multi-asset portfolio that outperforms H045's pure bond rotation benchmark (1.351).
+
+**Results (2026-06-26):**
+
+| Variant | w_mom | w_carry | top_k | Abs filter | IS Sharpe | OOS Sharpe | MaxDD | Neg yrs | WF |
+|---------|-------|---------|-------|------------|-----------|------------|-------|---------|-----|
+| A | 1.0 | 0.0 | 2 | No | 0.201 | 1.109 | -17.2% | 1 | 5.518 |
+| B | 0.0 | 1.0 | 2 | No | 0.954 | 0.619 | -9.5% | 2 | 0.649 |
+| C | 0.7 | 0.3 | 2 | No | 0.201 | 1.109 | -17.2% | 1 | 5.518 |
+| D | 0.5 | 0.5 | 2 | No | 0.201 | 1.109 | -17.2% | 1 | 5.518 |
+| E | 0.7 | 0.3 | 3 | No | 0.362 | 0.920 | -16.2% | 1 | 2.539 |
+| F | 0.5 | 0.5 | 2 | Yes | 0.201 | 1.109 | -17.2% | 1 | 5.518 |
+| H045 gate | — | — | — | — | — | 1.351 | — | — | — |
+
+Gate: Sharpe > 1.351 → best 1.109 ✗ (all fail)
+
+**Root cause:** Two problems. (1) Carry proxy (dividend yield / realized vol) unavailable for bond ETFs via yfinance/proxy — ETF dividend data blocked. The carry signal effectively fired randomly for bond assets. (2) Combining equity ETFs into a bond momentum universe dilutes bond momentum's primary signal: yield curve dynamics. Bond ETFs and equity sector ETFs respond to fundamentally different regime drivers; a unified universe mixes incompatible signals. Variants A/C/D/F being identical confirms the carry contribution collapsed to zero for most assets. WF ratio 5.518 confirms regime-dependent artifact.
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h338.py`. Results at `backtesting/results/h338_results.json`. Multi-asset carry+trend family closed; carry signal requires options/futures data not available via equity ETF proxies.
+
+---
+
+### H339 — Price-Based Momentum Filter Gates (proxy for LLM sentiment gate) [NOT CONFIRMED]
+
+**Source:** arXiv:2510.26228 "LLM-Augmented Stock Momentum Signals" (2025); H198 (6-1m momentum, OOS 1.174). Tests price signals as a free proxy for the LLM semantic quality filter.
+
+**Hypothesis:** Requiring positive recent short-term price momentum (1m or 3m return > 0, or acceleration: last month > 3-month average) gates out low-quality momentum signals and improves H198's OOS Sharpe above the 1.174 gate.
+
+**Results (2026-06-26):**
+
+| Variant | Filter | IS Sharpe | OOS Sharpe | MaxDD | Neg yrs | WF |
+|---------|--------|-----------|------------|-------|---------|-----|
+| A (baseline) | None | 1.582 | 1.055 | -37.9% | 0 | 0.667 |
+| B | 1m return > 0 | 1.147 | 0.615 | -37.9% | 1 | 0.536 |
+| C | 3m return > 0 | 1.521 | 0.925 | -37.9% | 0 | 0.608 |
+| D | Price acceleration > 0 | 0.968 | 0.419 | -41.9% | 2 | 0.432 |
+| E | 1m > 0 AND acceleration > 0 | 0.818 | 0.343 | -37.9% | 2 | 0.420 |
+| F | Absolute momentum > 0 | 1.582 | 1.055 | -37.9% | 0 | 0.667 |
+| G | 3m > 0 AND acceleration > 0 | 0.968 | 0.419 | -41.9% | 2 | 0.432 |
+| H198 gate | — | — | 1.174 | — | — | — |
+
+Gate: Sharpe > 1.174 → best 0.925 ✗ (all fail)
+
+**Root cause:** Price filters exclude valid momentum continuation months. In a 30-stock NASDAQ universe, strong momentum names sometimes have brief pullbacks (1m < 0) before resuming upward trends — NVDA 2022-Q4, META early recovery. Filtering these out removes the signal's best episodes. Variant F (abs momentum > 0) is trivially identical to the baseline. The LLM semantic filter in arXiv:2510.26228 is qualitatively different: it filters based on *economic plausibility of the trend*, not just price direction. H279 (true LLM semantic filter) remains the correct next step.
+
+**Status:** NOT CONFIRMED. Script at `backtesting/daily/run_h339.py`. Results at `backtesting/results/h339_results.json`. Price-based proxies exhausted; H279 (LLM semantic quality gate) queued.
+
+---
+
+### H340 — Speaker-Weighted FinBERT PEAD Upgrade [PROPOSED]
+
+**Status**: PROPOSED
+**Source**: arXiv:2604.13260 (Bochkay & Hales, 2026) "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns"
+**Family**: PEAD / NLP
+**Related**: H163 (FinBERT baseline), H174 (CONFIRMED, score≥0.18 + EPS≥0.02), H168 (NOT CONFIRMED — coverage bias)
+
+**Core idea**: Earnings call FinBERT sentiment weighted by speaker role outperforms uniform averaging. Analyst-turn sentences weight 49%, CFO prepared remarks 30%, other executives 16%, operators 5%. Monthly long-short alpha 2.03% (t=6.49), IC 0.119 vs baseline 0.081 (+46%), signal persists ~6-7 trading days. Out-of-sample validation 2023-2024 with frozen weights.
+
+**Upgrade path for H174**: Parse earnings call transcript speaker turns from EDGAR 8-K. Weight FinBERT sentence scores by speaker role rather than whole-document average. Retain H174 thresholds: weighted_score≥0.18 AND EPS_surprise≥0.02. Expect IC improvement; WR may improve above H174's 81.8%.
+
+**Blockers**: Need earnings call transcript parsing — 8-K Item 7.01 or Item 2.02 contains prepared remarks; Q&A is in full transcript (may not be in 8-K, may need separate earnings call transcript source). AlphaVantage or FMP earnings_call endpoint.
+
+**Gate**: WR > 81.8% (H174 baseline) AND n ≥ 20 OOS trades
+
+**Priority**: Medium — dependent on transcript source availability. Do not lower H174 thresholds to force coverage.
+
+---
+
+### H316 Update — Moira Benchmark Results Now Available
+
+**Status**: STUB (needs OpenAI/DeepSeek API)
+**Updated**: 2026-06-27
+**Source**: arXiv:2605.01954 "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading" (May 2026)
+
+Moira paper published full results:
+
+| Method | Ann. Return | Sharpe | Sortino | Max DD |
+|--------|-------------|--------|---------|--------|
+| Moira (full) | 59.1% | 3.791 | 9.637 | 1.70% |
+| Cointegration baseline | 21.4% | 1.218 | 1.270 | 5.11% |
+| RL baseline (no LLM selection) | -4.7% | -0.125 | -0.550 | 6.28% |
+
+**Architecture**: Two-stage hierarchical RL. High-level LLM selects pair from universe; low-level LLM manages entry/exit timing. Both use frozen DeepSeek-V3.2 with prompt-only optimization (no gradient fine-tuning). Universe: 10 liquid US mega-caps with strong news availability.
+
+**Ablation key insight**: LLM pair SELECTION is the critical innovation (removing it → Sharpe collapses to -0.125). LLM execution is secondary. For our H316 implementation: prioritize getting semantic pair selection right first.
+
+**H307 context (ETF pairs, NOT CONFIRMED)**: Moira uses equities not ETFs, and avoids statistical cointegration entirely in favor of LLM economic reasoning. This is the right direction for pairs trading — cointegration on ETFs is anti-predictive per H307.
+
+**Implementation note**: DeepSeek-V3.2 API is cost-effective alternative to GPT-4o. Moira's approach is compatible with our existing EDGAR/FMP data stack for fundamental context injection.
+
+---
+
+### H318 Update — AlphaCrafter as Architectural Blueprint
+
+**Status**: PROPOSED (not staged as script yet)
+**Updated**: 2026-06-27
+**Source**: arXiv:2605.05580 "AlphaCrafter: A Full-Stack Multi-Agent Framework for Cross-Sectional Quantitative Trading" (NJU, May 2026)
+
+AlphaCrafter provides the closest published implementation to H318's meta-agent ETF rotation selector concept:
+
+**AlphaCrafter 3-agent architecture**:
+- **Miner**: LLM discovers and expands factor pool from market data
+- **Screener**: Assesses market regime → builds regime-conditional factor ensembles
+- **Trader**: Converts ensembles to strategies with explicit risk constraints
+
+**H318 mapping**:
+- Miner → not needed (factors are our known strategies: H026, H041a, H045)
+- Screener → the key H318 component: LLM reads macro/VIX/yield-curve state → weights H026/H041a/H045
+- Trader → our existing monthly rebalancer (h112_monthly.py)
+
+**Simplification advantage**: H318 uses pre-validated strategies as fixed inputs. AlphaCrafter discovers factors online (riskier). Our approach has much tighter overfitting risk.
+
+**Key design decision from AlphaCrafter**: regime-conditional weighting (Screener role) is the highest-value component. Consistent with H249 CONFIRMED result showing +0.282 Sharpe improvement from regime-conditional weights.
+
+**Implementation priority**: H318 should come after H279 (LLM momentum filter) and H280 (MarketSenseAI) — those test LLM signal quality on simpler tasks first. H318 is highest complexity.
+
+**Reference**: Ang et al. arXiv:2604.02279 remains primary motivation; AlphaCrafter (2605.05580) is the practical architecture reference.
