@@ -194,6 +194,12 @@
       "claimToken": "7c9a3faa394a417e41385c76b21263ffb3ba9f1ddb90ec9cdda25e132b3ed288",
       "claimUrl": "https://here.now/claim?slug=saffron-gorge-ey22&token=7c9a3faa394a417e41385c76b21263ffb3ba9f1ddb90ec9cdda25e132b3ed288",
       "expiresAt": "2026-06-27T09:04:33.798Z"
+    },
+    "dapper-mirage-7qbd": {
+      "siteUrl": "https://dapper-mirage-7qbd.here.now/",
+      "claimToken": "bae6cd13a08348e00ca2ec71dd402ec10802b903b9d510ae5a967aa4a3221690",
+      "claimUrl": "https://here.now/claim?slug=dapper-mirage-7qbd&token=bae6cd13a08348e00ca2ec71dd402ec10802b903b9d510ae5a967aa4a3221690",
+      "expiresAt": "2026-06-28T09:10:19.586Z"
     }
   }
 }
