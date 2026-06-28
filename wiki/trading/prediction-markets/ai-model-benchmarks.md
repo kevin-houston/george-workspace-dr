@@ -1,6 +1,6 @@
 ---
 created: 2026-05-29
-updated: 2026-05-29
+updated: 2026-06-28
 type: research
 ---
 
@@ -123,6 +123,98 @@ This represents the ideal profile: high accuracy + highly asymmetric win/loss ou
 
 ---
 
+## PolyBench — Raw LLM Forecasting Capability (arXiv:2604.14199)
+
+**Setup:** 7 frontier LLMs evaluated on live Polymarket binary markets (Feb 6–12, 2026). 36,165 predictions under identical, timestamp-locked market states. Metrics: directional accuracy, Confidence-Weighted Return (CWR), APY, and Sharpe via realistic order-book simulation.
+
+**Key finding:** Every model failed to generate positive expected return. Even the best-performing model (GPT-5.2) achieved only marginally better-than-chance calibration on novel markets where no prior price signal existed.
+
+**Why this matters for our pipeline:** PolyBench isolates raw LLM forecasting ability from agent infrastructure (tool use, search, multi-round reasoning). The consistent failure across 7 frontier models confirms that the edge in Prediction Arena came from **agent design** (multi-round search, position sizing), not intrinsic LLM probability calibration. Structured context injection (Cleveland Fed nowcasts, XBRL financials) is what moves the needle — not asking the LLM cold.
+
+**Practical implication:** Any Kalshi/Polymarket agent George deploys must feed structured data (nowcasts, historical base rates, EDGAR filings) rather than relying on LLM world-knowledge alone. The CPI nowcasting pipeline documented in [nowcasting-playbook.md](nowcasting-playbook.md) is the right direction.
+
+**See also:** Full implementation guide in [Prediction Market Algorithmic Strategies](algorithmic-strategies.md#polybench-reality-check).
+
+---
+
+## PolySwarm — Multi-Agent Swarm for PM Trading (arXiv:2604.03888)
+
+**Overview:** PolySwarm (Barot & Borkhatariya, SUNY Binghamton, Apr 2026) deploys a **swarm of 50 diverse LLM personas** concurrently evaluating binary outcome markets, then aggregates via confidence-weighted Bayesian combination.
+
+**Architecture:**
+1. **Swarm consensus engine** — 50 agents, each with distinct analytical persona (contrarian, trend-follower, fundamentals-focused, etc.), submit probability estimates. Aggregated via KL divergence / Jensen-Shannon divergence weighting.
+2. **Market analysis engine** — detects cross-market inefficiencies by comparing swarm-implied probabilities vs market-implied probabilities.
+3. **Latency arbitrage module** — derives CEX-implied probabilities from log-normal pricing model and executes within human reaction-time window on stale Polymarket prices.
+4. **Position sizing** — quarter-Kelly (conservative fractional Kelly) for risk control.
+
+**Signal logic:**
+- If swarm consensus diverges from market price by > threshold → trade
+- Negation pair mispricing (YES + NO ≠ 1.0 on Polymarket) → arb
+- CEX-PM price discrepancy on correlated assets → latency arb
+
+**Key insights for our pipeline:**
+- The 50-persona aggregation is the core innovation: diversity reduces individual model bias, Bayesian combination weights by estimated calibration
+- Quarter-Kelly sizing is explicitly cited from Kelly criterion literature — conservative for prediction markets where edge estimation is uncertain
+- Latency arb requires real-time infrastructure (WebSocket) not compatible with our monthly backtesting pipeline, but the swarm consensus approach IS compatible
+
+**Applicability to H185 (Kalshi nowcasting):** PolySwarm's swarm consensus approach could be a Phase 2 upgrade: instead of single-model CPI nowcasting, run N=5-10 diverse LLM personas and aggregate, applying structured economic data to each. Much cheaper than 50 agents (~$0.50/run for GPT-4o-mini with 10 personas).
+
+**See also:** Full implementation code in [Prediction Market Algorithmic Strategies](algorithmic-strategies.md#polyswarm).
+
+---
+
+## PredictionMarketBench — Backtesting Framework (arXiv:2602.00133)
+
+**Source:** Arora & Malpani (Feb 2026). GitHub: [Oddpool/PredictionMarketBench](https://github.com/Oddpool/PredictionMarketBench)
+
+**What it is:** SWE-bench-style benchmark for evaluating trading agents on prediction markets via **deterministic, event-driven replay** of historical Kalshi limit-order-book data. The first framework to provide reproducible PM agent backtesting with execution-realistic simulation.
+
+**Framework components:**
+1. **Episode construction** — historical Kalshi data parsed into episodes (orderbooks, trades, lifecycle, settlement)
+2. **Execution simulator** — maker/taker fee semantics; realistically penalizes taker orders
+3. **Agent interface** — tool-calling LLM agents or classical strategy; reproducible trajectories
+
+**Baseline results (4 Kalshi episodes: crypto, weather, sports):**
+
+| Agent | Trades/ep | Total PnL | Max Drawdown | Notes |
+|---|---|---|---|---|
+| RandomAgent | ~20 | −0.13% | minimal | fee drag only |
+| GPT-4.1-nano | high freq | **−2.77%** | 36% | taker fees + settlement losses |
+| Bollinger Bands (fee-aware) | post-only | **+1.67%** | 3.18% | best in volatile BTC ep |
+
+**Critical takeaway:** The Bollinger Bands strategy (post-only limit orders) is the only profitable baseline. It beats GPT-4.1-nano not because it predicts better, but because it **avoids taker fees** via maker orders and sizes conservatively. This reinforces the Prediction Arena finding: agent infrastructure and fee management matter more than raw forecasting ability.
+
+**Why relevant to our pipeline:**
+- Provides a publicly available backtesting harness for Kalshi (no equivalent exists for our current nowcasting work)
+- Can be used to test the H185 CPI nowcasting agent before live deployment
+- Reproducibility is the explicit goal: replay from raw exchange data removes execution ambiguity
+
+**Integration path:** Clone `Oddpool/PredictionMarketBench`, run the Bollinger Bands baseline first to validate setup, then swap in H185-style CPI event-based signal. Compare agent PnL to Bollinger Bands baseline (if our agent can't beat passive mean-reversion on the same episodes, it's not ready).
+
+---
+
+## Synthesis: What the 2026 Benchmarks Tell Us
+
+Three convergent studies (Prediction Arena, PolyBench, PredictionMarketBench) now paint a clear picture:
+
+| Factor | Evidence |
+|---|---|
+| Raw LLM calibration | Near random (PolyBench: all 7 models negative expected return) |
+| Agent infrastructure | Critical (Prediction Arena: grok-4-20 won via multi-round search, not model IQ) |
+| Fee management | Decisive at small scale (PredictionMarketBench: post-only maker > taker = +1.67% vs −2.77%) |
+| Market selection | Highly sensitive (Kalshi weather-dominated = AI disadvantage; Polymarket discovery = AI advantage) |
+| Swarm aggregation | Promising (PolySwarm: diversity + Bayesian combination > single model) |
+| Structured data | Differentiating (Prediction Arena top run: weather correlation accuracy 53.3% vs 15.8% worst) |
+
+**George's PM strategy priority list (updated 2026-06-28):**
+1. Structure data injection before any live deployment (CPI nowcasts, XBRL, historical base rates)
+2. Post-only limit orders — never market taker on Kalshi (fee drag kills all LLM baselines)
+3. Polymarket preferred over Kalshi curated set for AI agents (discovery > curated weather)
+4. Use PredictionMarketBench framework to backtest before live (Kalshi replay data available)
+5. PolySwarm-style persona diversity is a Phase 2 upgrade once H185 baseline is validated
+
+---
+
 ## Source
 [Prediction Arena (arXiv:2604.07355)](../../sources/prediction-arena-2026.md)
 
@@ -130,3 +222,5 @@ This represents the ideal profile: high accuracy + highly asymmetric win/loss ou
 - [Kalshi](kalshi.md)
 - [Polymarket](polymarket.md)
 - [Prediction Market Algorithmic Strategies](algorithmic-strategies.md)
+- [Economic Nowcasting Playbook](nowcasting-playbook.md)
+- [Automated Trading Pipeline](automated-pipeline.md)

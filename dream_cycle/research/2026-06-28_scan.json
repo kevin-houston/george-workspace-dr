@@ -1,0 +1,86 @@
+{
+  "date": "2026-06-28",
+  "scan_angles": [
+    "arXiv: prediction markets + LLM agents (primary wiki expansion topic)",
+    "arXiv: pairs trading + LLM cointegration",
+    "arXiv: PEAD + post-earnings drift + NLP",
+    "arXiv: cross-sectional momentum + ML",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quant finance repos"
+  ],
+  "papers_reviewed": [
+    {
+      "id": "2604.03888",
+      "title": "PolySwarm: Multi-Agent LLM Framework for Prediction Market Trading and Latency Arbitrage",
+      "relevance_score": 9,
+      "relevance_reason": "Directly actionable on H185 (Kalshi CPI nowcasting) — multi-persona swarm consensus design, quarter-Kelly sizing, Bayesian aggregation",
+      "staged": true,
+      "staged_file": "1_polyswarm_h185_phase2.json"
+    },
+    {
+      "id": "2602.00133",
+      "title": "PredictionMarketBench: SWE-bench-Style Framework for Backtesting Trading Agents on Prediction Markets",
+      "relevance_score": 8,
+      "relevance_reason": "First Kalshi LOB replay backtesting framework; integration path for H185 pre-live validation; maker-vs-taker fee insight is immediately actionable",
+      "staged": true,
+      "staged_file": "2_predictionmarketbench_wiki.json"
+    },
+    {
+      "id": "2603.16365",
+      "title": "FactorEngine: Program-level Knowledge-Infused Factor Mining Framework for Quantitative Investment",
+      "relevance_score": 7,
+      "relevance_reason": "LLM-for-structure + BO-for-parameters paradigm relevant to H318 meta-agent design and future automated hypothesis generation",
+      "staged": true,
+      "staged_file": "3_factorengine_wiki.json",
+      "bundled_with": ["2602.14670", "2604.09601"]
+    },
+    {
+      "id": "2602.14670",
+      "title": "FactorMiner: A Self-Evolving Agent with Skills and Experience Memory for Financial Alpha Discovery",
+      "relevance_score": 7,
+      "relevance_reason": "Ralph Loop paradigm; experience memory prevents redundant alpha exploration — mirrors George's hypothesis log function",
+      "staged": true,
+      "staged_file": "3_factorengine_wiki.json",
+      "bundled_with": ["2603.16365", "2604.09601"]
+    },
+    {
+      "id": "2604.09601",
+      "title": "Hubble: LLM-Driven Agentic Framework for Safe, Diverse, and Reproducible Alpha Factor Discovery",
+      "relevance_score": 6,
+      "relevance_reason": "Diversity constraint (pairwise corr < 0.5) directly addresses H337 failure mode; safety gates add value to hypothesis vetting",
+      "staged": true,
+      "staged_file": "3_factorengine_wiki.json",
+      "bundled_with": ["2603.16365", "2602.14670"]
+    },
+    {
+      "id": "2604.14199",
+      "title": "PolyBench: Benchmarking LLM Forecasting and Trading Capabilities on Live Prediction Market Data",
+      "relevance_score": 6,
+      "relevance_reason": "Confirms raw LLM calibration near-random; structured data injection required — integrated into wiki expansion (ai-model-benchmarks.md), not staged separately",
+      "staged": false,
+      "staged_reason": "Incorporated into wiki expansion this session"
+    },
+    {
+      "id": "2605.01954",
+      "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+      "relevance_score": 5,
+      "relevance_reason": "Already documented in pairs-trading.md; H316 already staged; no new information",
+      "staged": false,
+      "staged_reason": "Already covered"
+    }
+  ],
+  "github_notable": [
+    {
+      "repo": "Oddpool/PredictionMarketBench",
+      "relevance": "HIGH — Kalshi backtesting, staged in proposal 2",
+      "stars": "early (Feb 2026)"
+    },
+    {
+      "repo": "AI4Finance-Foundation/FinRL-Trading (FinRL-X)",
+      "relevance": "MEDIUM — already covered in deep-rl-trading.md",
+      "note": "PAKDD 2026 presentation; no new wiki page needed"
+    }
+  ],
+  "proposals_staged": 3,
+  "wiki_pages_expanded": 1
+}

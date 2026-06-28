@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-27 (performance-attribution.md new)
+updated: 2026-06-28 (ai-model-benchmarks.md expanded — PolyBench+PolySwarm+PredictionMarketBench added)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -90,7 +90,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Economic Nowcasting Playbook](prediction-markets/nowcasting-playbook.md) ← new 2026-05-27 (per-release operational playbook: CPI/NFP/FOMC/PCE/GDP; Cleveland Fed + Atlanta GDPNow + NY Fed nowcast sources; shelter lag model; ADP→NFP pipeline; Brier score tracking; H185 implementation path)
   - [Other Platforms](prediction-markets/other-platforms.md) ← expanded 2026-05-02 (IBKR ForecastTrader full API, Kalshi Timeless mechanics, emerging platforms)
   - [Polymarket](prediction-markets/polymarket.md) ← 2026-04-29 (full CLOB API, Ethereum auth, order placement, WebSocket streaming, fee comparison vs Kalshi, cross-platform arb scanner)
-  - [AI Model Benchmarks](prediction-markets/ai-model-benchmarks.md) ← new 2026-05-29 (Prediction Arena arXiv:2604.07355 — 6 models with real capital; all lost money on Kalshi weather-dominated set; Polymarket better venue for AI agents; grok-4-20 only profitable prior run +10.9%)
+  - [AI Model Benchmarks](prediction-markets/ai-model-benchmarks.md) ← updated 2026-06-28 (Prediction Arena arXiv:2604.07355 — 6 models with real capital; all lost money Kalshi; grok-4-20 only profitable +10.9%; + PolyBench arXiv:2604.14199 — 7 LLMs negative expected return, raw LLM calibration near-random; + PolySwarm arXiv:2604.03888 — 50-agent swarm + KL divergence aggregation + latency arb + quarter-Kelly; + PredictionMarketBench arXiv:2602.00133 — Kalshi LOB replay backtester GitHub:Oddpool/PredictionMarketBench; fee management key: post-only +1.67% vs LLM taker -2.77%)
   - [Superforecasting Methods](prediction-markets/superforecasting-methods.md) ← new 2026-06-11 (Ten Commandments, reference class forecasting, Bayesian updating, calibration layer for LLMs, domain bias table arXiv:2602.19520, LLM benchmark landscape arXiv:2512.16030/2507.04562/2506.01578, H185 gates)
   - [Automated Trading Pipeline](prediction-markets/automated-pipeline.md) ← new 2026-06-26 (event-driven loop; ryanfrigo/OctagonAI reference repos; APScheduler vs NanoClaw schedule_task; SQLite schema; position sizing + drawdown halt; CPI nowcast→order pipeline; graduation gates; 5 known failure modes; integration checklist)
 - [Backtesting](backtesting/) — setup, results, methodology
