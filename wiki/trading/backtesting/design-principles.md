@@ -627,3 +627,45 @@ df_clean = df[is_tradable].copy()  # Apply FIRST, then compute factors
 **Performance (China A-share 2022-2024):** IS Sharpe 2.05, OOS Sharpe 1.63, Deflated Sharpe 0.978. US market transfer not yet tested.
 
 **Lesson for H217/H228 (alpha101):** The alpha101 formula library computes signals on full price history. Adding a tradability mask before computing each alpha could improve IC and reduce overfitting on illiquid/halted events.
+
+---
+
+## Prediction Market Backtesting (PredictionMarketBench)
+
+**Source**: arXiv:2602.00133 (Arora & Malpani, Feb 2026)
+**GitHub**: [Oddpool/PredictionMarketBench](https://github.com/Oddpool/PredictionMarketBench)
+
+The first SWE-bench-style framework for deterministic, event-driven replay of historical Kalshi prediction market data. Enables reproducible backtesting of trading agents before live deployment.
+
+### What it provides
+- **Episode replay**: historical Kalshi LOB data (orderbooks, trades, lifecycle, settlement) parsed into 4 episodes (crypto, weather, sports)
+- **Execution-realistic simulator**: maker/taker semantics, fee modeling (maker ~0% vs taker ~2%)
+- **Agent interface**: tool-calling LLM agents or classical strategy code; reproducible trajectories
+
+### Baseline results (4 episodes)
+
+| Agent | PnL | MaxDD | Key insight |
+|-------|-----|-------|-------------|
+| RandomAgent | −0.13% | ~0% | fee drag only |
+| GPT-4.1-nano | **−2.77%** | 36% | taker fees + wrong direction |
+| Bollinger Bands (post-only) | **+1.67%** | 3.18% | maker orders avoid fee drag |
+
+### Critical lesson
+Fee structure dominates at small scale. Taker fees on Kalshi (~2%) erode LLM agent returns even when directionally correct. The Bollinger Bands strategy wins by:
+1. Using post-only limit orders (maker, near-zero fee)
+2. Mean-reverting logic that happens to work on volatile BTC episode
+3. Conservative sizing that limits drawdown
+
+**Implication for H185**: Any Kalshi agent we deploy must use **post-only limit orders** only. Market orders (taker) on Kalshi will drain returns even if the CPI nowcast is correct. Build limit-order logic into pead_overnight.py equivalent for PM trades.
+
+### Integration with H185
+
+```bash
+git clone https://github.com/Oddpool/PredictionMarketBench
+cd PredictionMarketBench
+pip install -r requirements.txt
+# Run Bollinger Bands baseline to validate setup
+python run_agent.py --agent bollinger_bands --episodes all
+# Then swap in H185-style CPI signal agent
+python run_agent.py --agent h185_cpi --episodes crypto weather
+```

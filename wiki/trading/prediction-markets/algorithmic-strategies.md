@@ -742,3 +742,61 @@ The H185 nowcasting approach (FRED + Fed model + LLM aggregation for CPI/FOMC qu
 - Use LLM primarily as aggregator/reasoner over quantitative inputs, not as a knowledge base
 
 Raw "ask the LLM" approaches without structured inputs show zero edge per PolyBench.
+
+---
+
+## H185 Phase 2 Design: PolySwarm Swarm Consensus Upgrade
+
+**Source**: arXiv:2604.03888 (Barot & Borkhatariya, Apr 2026)
+**Status**: PROPOSED — extends H185 CPI nowcasting single-model to multi-agent swarm
+
+### Problem
+Current H185 design: single LLM call with structured CPI data → single probability estimate → Kalshi trade. PolyBench confirms single-model estimates are near-random without structured data. Even with structured data, a single model point estimate has high variance.
+
+### PolySwarm-inspired upgrade
+
+```python
+# H185 Phase 2 — Multi-persona CPI probability aggregation
+import numpy as np
+from scipy.stats import entropy
+
+PERSONAS = [
+    {"name": "Fed watcher", "focus": "FOMC signals, shelter lag, supercore trends"},
+    {"name": "Contrarian", "focus": "upside surprise risks, revision history"},
+    {"name": "Seasonality expert", "focus": "monthly seasonal adjustments, BLS methodology"},
+    {"name": "Energy economist", "focus": "gasoline/energy component transmission lag"},
+    {"name": "Housing analyst", "focus": "OER/rent convergence timing"},
+    {"name": "Labor market", "focus": "wage growth pass-through to services CPI"},
+    {"name": "Supply chain", "focus": "goods deflation vs services stickiness"},
+    {"name": "Nowcast quant", "focus": "Cleveland Fed implied prob + NY Fed model"},
+    {"name": "Base effects", "focus": "YoY base effect calendar"},
+    {"name": "Historical", "focus": "CPI surprise distribution last 36 months"},
+]
+
+def aggregate_swarm(estimates, confidences, market_prob):
+    """Confidence-weighted Bayesian combination vs market price."""
+    weights = np.array(confidences) / np.array(confidences).sum()
+    swarm_prob = np.average(estimates, weights=weights)
+    # KL divergence as disagreement metric
+    disagreement = entropy([swarm_prob, 1-swarm_prob], [market_prob, 1-market_prob])
+    # Only trade if swarm diverges meaningfully from market
+    edge = swarm_prob - market_prob
+    return {"swarm_prob": swarm_prob, "edge": edge, "disagreement": disagreement}
+
+def quarter_kelly(edge, odds, max_fraction=0.1):
+    """Quarter-Kelly sizing (conservative)."""
+    kelly = edge / odds  # simplified
+    return min(kelly * 0.25, max_fraction)
+```
+
+### Implementation gates before live
+1. Backtest on 24+ historical CPI releases using PredictionMarketBench Kalshi replay framework
+2. Swarm must generate >55% directional accuracy on held-out releases
+3. Paper trade at least 6 CPI cycles before real capital
+4. Cost cap: abort if >$1.00/release in API costs
+
+### Cost estimate (GPT-4o-mini, 10 personas)
+- Tokens per persona: ~500 prompt + 200 output = 700 tokens
+- 10 personas: 7,000 tokens per CPI release
+- Cost: 7k × $0.000150/1k input + 2k × $0.000600/1k output ≈ $0.03/release
+- Annual (12 CPI releases): ~$0.36 — effectively free

@@ -803,3 +803,67 @@ forecast = pipeline.predict(context=vol_series_tensor, prediction_length=1)
 
 **Status:** Research-stage for trading. No confirmed backtested trading Sharpe
 improvements found in literature as of 2026-06-13. Candidate for H295+ exploration.
+
+---
+
+## LLM Alpha Mining Cluster (2026)
+
+Three converging 2026 papers from Tsinghua University / Peng Cheng Lab define a new generation of automated factor discovery tools.
+
+### FactorEngine (arXiv:2603.16365, Mar 2026)
+
+**Core idea**: Cast alpha factors as Turing-complete code. LLM handles *directional* search (logic structure, variable relationships); Bayesian optimization handles *parameter* tuning. Three key separations:
+1. **Logic revision vs. parameter optimization** — LLM changes if/else branches; grid search optimizes thresholds
+2. **LLM directional search vs. Bayesian hyperparameter search** — LLM proposes new architectures, BO refines them
+3. **LLM usage vs. local computation** — LLM for creative ideation; local Python for execution/evaluation
+
+**Knowledge-infused bootstrapping**: Financial reports → LLM extraction-verification-codegen pipeline → executable factor programs. Essentially converts unstructured analyst research into evaluatable signals.
+
+**Experience knowledge base**: Stores successful patterns AND failure constraints — trajectory-aware refinement so the system doesn't rediscover dead ends.
+
+**Relevance**: The three-separation architecture solves a key problem in our pipeline: we currently write factor logic entirely by hand. FactorEngine's approach of LLM-for-structure + BO-for-parameters could automate H-number script generation for parameter variants.
+
+### FactorMiner (arXiv:2602.14670, Feb 2026)
+
+**Core idea**: Ralph Loop paradigm for iterative alpha discovery — **R**etrieve, **A**nalyze, **L**earn, **P**ropose, **H**arvest (retrieve prior experience → generate new factor → evaluate → distill insights into memory).
+
+**Modular skill architecture**: Financial evaluation steps (IC calculation, factor neutralization, turnover cost modeling) are wrapped as callable tools, enabling the LLM agent to compose evaluation pipelines rather than just generating code.
+
+**Experience memory**: Distills historical mining trials into actionable insights. As the factor library grows, experience memory prevents redundant exploration by encoding which directions are already saturated.
+
+**Key problem addressed**: As the alpha library grows, new factor discovery gets harder due to high redundancy. FactorMiner's memory layer explicitly addresses this.
+
+**Relevance**: Our hypothesis log is effectively a primitive version of this — H-numbers map to tried directions, NOT_CONFIRMED results encode failure constraints. A FactorMiner-style system could be bootstrapped from our existing 340+ hypothesis history.
+
+### Hubble (arXiv:2604.09601, Apr 2026)
+
+**Core idea**: Safe, diverse, and reproducible alpha factor discovery. Three additions over baseline:
+1. **Safety constraints** — reject factors with negative Sharpe, unstable IC, or excessive turnover before committing to the alpha library
+2. **Diversity enforcement** — pairwise correlation < 0.5 between new factor and existing library members (prevents redundant factors)
+3. **Reproducibility** — deterministic seeding, version-locked factor code storage
+
+**Relevance**: The diversity constraint (pairwise corr < 0.5) directly addresses a problem in our confirmed strategies. H337 failed because GP/A and ROE are too correlated with each other on large-caps. A Hubble-style diversity gate would have predicted this failure before running the backtest.
+
+### Integration Path for George's Pipeline
+
+The three frameworks suggest a future H343+ design:
+
+```
+Phase 1: Bootstrap experience base from hypothesis-log.md
+  - Parse all NOT_CONFIRMED results → failure constraint library
+  - Parse all CONFIRMED results → success pattern library
+
+Phase 2: FactorMiner-style Ralph Loop for new H proposals
+  - Retrieve: search failure library for anti-patterns
+  - Propose: LLM generates new factor based on gap in confirmed library
+  - Evaluate: automated run_hNNN.py execution
+  - Distill: append result to hypothesis log + update experience base
+
+Phase 3: Hubble-style diversity gate
+  - New factor must have pairwise corr < 0.5 with existing CONFIRMED strategies
+  - Automatically reject factor variants too similar to H198 raw momentum
+```
+
+This is a multi-month implementation. Short-term: use the diversity constraint conceptually when proposing new H-numbers — check whether the proposed signal is sufficiently uncorrelated with confirmed strategies before building the script.
+
+**Priority**: Document this cluster now. Revisit for implementation once H279 (LLM momentum filter) and H280 (MarketSenseAI) establish baseline LLM signal quality.
