@@ -8294,3 +8294,83 @@ AlphaCrafter provides the closest published implementation to H318's meta-agent 
 **Implementation priority**: H318 should come after H279 (LLM momentum filter) and H280 (MarketSenseAI) — those test LLM signal quality on simpler tasks first. H318 is highest complexity.
 
 **Reference**: Ang et al. arXiv:2604.02279 remains primary motivation; AlphaCrafter (2605.05580) is the practical architecture reference.
+
+---
+
+## H341 — Residual Momentum (Market-Orthogonal Signal) on H198 Universe
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-06-27
+**Source**: Blitz, Huij & Martens (2011) "Residual Momentum" (SSRN); Gutierrez & Prinsky (2007)
+**Script**: `backtesting/daily/run_h341.py`
+**Universe**: H198 30-stock S&P 500 (same survivorship bias caveat)
+**Gate**: OOS Sharpe > 1.174 (H198 raw momentum baseline)
+
+**Signal**: For each stock, OLS-regress prior 11 monthly returns against SPY (12-1m skip). Sum of OLS residuals = residual momentum. Ranks stocks by stock-specific alpha momentum, stripping out systematic market drift.
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | OOS CAGR | Neg Yrs |
+|---------|-----------|------------|-----------|----------|---------|
+| A: Top-1 residual | 0.789 | 0.531 | -60.2% | 16.5% | 1 |
+| B: Top-3 residual | 1.166 | 0.984 | -38.8% | 30.4% | 1 |
+| C: Top-1 raw (H198 repro) | 1.452 | 0.821 | -47.2% | 33.5% | 2 |
+| D: Top-1 blended rank | 1.003 | 0.535 | -66.6% | 16.1% | 2 |
+| E: Top-3 blended rank | 1.495 | 0.579 | -37.6% | 13.4% | 2 |
+| SPY | — | 0.954 | -23.9% | 14.3% | 1 |
+
+Best OOS Sharpe: 0.984 (Variant B, top-3 residual). Gate: 1.174. **NOT CONFIRMED.**
+
+Walk-forward ratios: 0.673 / 0.844 / 0.565 / 0.533 / 0.387 — all below 1.75 standard.
+
+**Key finding**: Residual orthogonalization produces *negative* SPY correlation in OOS (-0.11 to -0.21) — highly unusual. This is a data artifact: on a 30-stock large-cap universe, stripping SPY beta from momentum leaves noise rather than alpha. The market beta component of large-cap momentum IS the predictive signal; removing it destroys predictive power.
+
+**Secondary finding**: Raw top-1 H198 (Variant C, IS 1.452) reproduces H198 IS result but OOS drops to 0.821 — consistent with prior H198/H313 findings that raw 12-1 momentum on this universe has regime-dependent OOS performance.
+
+**Conclusion**: Residual momentum works on large-cap MSCI or cross-country studies (original Blitz 2011 sample) where systematic factor exposure varies across stocks. On 30 homogeneous large-caps, all stocks have similar SPY beta and the residual is pure noise. Do not pursue further on H198 universe without expanding to a more heterogeneous stock set (e.g., 200+ stocks with sector variation).
+
+---
+
+## H342 — VIX Term Structure Premium Harvest (SVXY Timing via VIX/VXV Ratio)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-06-27
+**Source**: Simon & Campasano (2014) "The VIX Futures Basis: Evidence and Trading Strategies" (JFM); Whaley (2009) "Understanding the VIX" (JPI); Eraker & Yang (2013) "The Price of Variance Risk" (JFE)
+**Script**: `backtesting/daily/run_h342.py`
+**Universe**: SVXY (-0.5x inverse VIX ETF), SPY, BIL; signal from VIX/VIX3M ratio
+**Gate**: OOS Sharpe > 1.0 (new family)
+
+**Signal**: VIX/VXV (VIX spot ÷ VIX 3-month, via ^VIX3M since ^VXV delisted):
+- < 0.90 → hold SVXY (strong contango, high roll yield)
+- 0.90–1.00 → hold SPY (mild contango)
+- ≥ 1.00 → hold BIL (backwardation, avoid SVXY)
+
+**Note**: SVXY changed from -1x to -0.5x leverage on 2018-02-28 (post-Volmageddon). Pre-2018 data reflects more aggressive instrument; creates structural break in return series.
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | OOS CAGR | Neg Yrs |
+|---------|-----------|------------|-----------|----------|---------|
+| A: SVXY/BIL (ratio<1.0) | 0.430 | 0.728 | -35.1% | 17.2% | 3 |
+| B: Three-way SVXY/SPY/BIL | 0.555 | 0.632 | -36.6% | 12.2% | 3 |
+| C: SVXY/SPY (no cash) | 0.465 | 0.783 | -32.1% | 19.0% | 3 |
+| D: SVXY/BIL + VIX<20 gate | 0.240 | 0.364 | -35.1% | 5.4% | 3 |
+| E: SPY/BIL baseline | 1.196 | 0.864 | -26.8% | 12.6% | 1 |
+| SPY | 1.105 | 0.954 | -23.9% | 14.3% | 1 |
+
+Best OOS Sharpe: 0.864 (Variant E, SPY/BIL). Gate: 1.000. **NOT CONFIRMED.**
+
+OOS regime distribution (2021-2026): 93.8% contango, 6.2% backwardation — signal barely discriminates.
+
+**Root cause analysis**:
+
+1. **Signal near-constant**: VIX/VIX3M < 1.0 occurs 92% of the time historically (94% in OOS). The term structure is almost always in contango, making this a near-static "always hold SVXY" rule rather than a timing signal. There are few backwardation switches to test.
+
+2. **SVXY leverage change**: The 2018 -1x → -0.5x restructuring creates a regime break mid-IS period. IS IS partly trained on a different product.
+
+3. **2022 drawdown**: SVXY declined ~50% in 2022 (equity+vol correlation spike). The strategy cannot escape this via the VIX/VXV ratio since equity selloffs create backwardation that triggers BIL *after* the damage is done.
+
+4. **Variant E interest**: The SPY/BIL VIX-term-structure timing (E) hits 0.864 OOS — close to SPY but not above gate. This overlaps with H296 (VIX term structure, 1.116 OOS) which used it as an overlay on ETF rotation. Consistent with H296 finding: term structure signal is most valuable as an overlay, not standalone.
+
+**Conclusion**: VIX term structure timing works best as an overlay signal (per H296 CONFIRMED) rather than a standalone SVXY timing strategy. The near-constant contango regime prevents meaningful timing. H309 (SPX dispersion, Phase 2 pending) remains the preferred volatility premium harvest path. Do not pursue SVXY standalone; consider SVXY as a satellite position in the production portfolio only if Phase 2 IV data validates the VRP.
+

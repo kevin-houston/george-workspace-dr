@@ -1,0 +1,91 @@
+{
+  "hypothesis": "H342",
+  "description": "VIX Term Structure Premium Harvest \u2014 SVXY/SPY/BIL Timing via VIX/VXV Ratio",
+  "source": "Simon & Campasano (2014) JFM; Whaley (2009) JPI; Eraker & Yang (2013) JFE",
+  "gate": 1.0,
+  "variants": {
+    "A_SVXY_BIL_contango1.0": {
+      "is": {
+        "sharpe": 0.43,
+        "cagr": -0.038,
+        "maxdd": -0.92,
+        "neg_years": 3,
+        "n": 96
+      },
+      "oos": {
+        "sharpe": 0.728,
+        "cagr": 0.172,
+        "maxdd": -0.351,
+        "neg_years": 3,
+        "n": 64
+      }
+    },
+    "B_three_way": {
+      "is": {
+        "sharpe": 0.555,
+        "cagr": 0.135,
+        "maxdd": -0.609,
+        "neg_years": 3,
+        "n": 96
+      },
+      "oos": {
+        "sharpe": 0.632,
+        "cagr": 0.122,
+        "maxdd": -0.366,
+        "neg_years": 3,
+        "n": 64
+      }
+    },
+    "C_SVXY_SPY": {
+      "is": {
+        "sharpe": 0.465,
+        "cagr": -0.02,
+        "maxdd": -0.919,
+        "neg_years": 2,
+        "n": 96
+      },
+      "oos": {
+        "sharpe": 0.783,
+        "cagr": 0.19,
+        "maxdd": -0.321,
+        "neg_years": 3,
+        "n": 64
+      }
+    },
+    "D_SVXY_BIL_VIX20": {
+      "is": {
+        "sharpe": 0.24,
+        "cagr": -0.129,
+        "maxdd": -0.92,
+        "neg_years": 4,
+        "n": 96
+      },
+      "oos": {
+        "sharpe": 0.364,
+        "cagr": 0.054,
+        "maxdd": -0.351,
+        "neg_years": 3,
+        "n": 64
+      }
+    },
+    "E_SPY_BIL_baseline": {
+      "is": {
+        "sharpe": 1.196,
+        "cagr": 0.129,
+        "maxdd": -0.149,
+        "neg_years": 1,
+        "n": 96
+      },
+      "oos": {
+        "sharpe": 0.864,
+        "cagr": 0.126,
+        "maxdd": -0.268,
+        "neg_years": 1,
+        "n": 64
+      }
+    }
+  },
+  "best_variant": "E_SPY_BIL_baseline",
+  "best_oos_sharpe": 0.864,
+  "verdict": "NOT CONFIRMED"
+}

@@ -1,0 +1,92 @@
+{
+  "hypothesis": "H341",
+  "description": "Residual Momentum (Market-Orthogonal 12-1m Signal) on H198 Universe",
+  "source": "Blitz, Huij & Martens (2011) SSRN Residual Momentum",
+  "baseline_oos_sharpe": 1.174,
+  "gate": 1.174,
+  "variants": {
+    "A_residual_top1": {
+      "is": {
+        "sharpe": 0.789,
+        "cagr": 0.264,
+        "maxdd": -0.473,
+        "neg_years": 1,
+        "n": 83
+      },
+      "oos": {
+        "sharpe": 0.531,
+        "cagr": 0.165,
+        "maxdd": -0.602,
+        "neg_years": 1,
+        "n": 63
+      }
+    },
+    "B_residual_top3": {
+      "is": {
+        "sharpe": 1.166,
+        "cagr": 0.345,
+        "maxdd": -0.235,
+        "neg_years": 0,
+        "n": 83
+      },
+      "oos": {
+        "sharpe": 0.984,
+        "cagr": 0.304,
+        "maxdd": -0.388,
+        "neg_years": 1,
+        "n": 63
+      }
+    },
+    "C_raw_top1": {
+      "is": {
+        "sharpe": 1.452,
+        "cagr": 0.935,
+        "maxdd": -0.318,
+        "neg_years": 1,
+        "n": 83
+      },
+      "oos": {
+        "sharpe": 0.821,
+        "cagr": 0.335,
+        "maxdd": -0.472,
+        "neg_years": 2,
+        "n": 63
+      }
+    },
+    "D_blend_top1": {
+      "is": {
+        "sharpe": 1.003,
+        "cagr": 0.452,
+        "maxdd": -0.293,
+        "neg_years": 1,
+        "n": 83
+      },
+      "oos": {
+        "sharpe": 0.535,
+        "cagr": 0.161,
+        "maxdd": -0.666,
+        "neg_years": 2,
+        "n": 63
+      }
+    },
+    "E_blend_top3": {
+      "is": {
+        "sharpe": 1.495,
+        "cagr": 0.445,
+        "maxdd": -0.147,
+        "neg_years": 0,
+        "n": 83
+      },
+      "oos": {
+        "sharpe": 0.579,
+        "cagr": 0.134,
+        "maxdd": -0.376,
+        "neg_years": 2,
+        "n": 63
+      }
+    }
+  },
+  "best_variant": "B_residual_top3",
+  "best_oos_sharpe": 0.984,
+  "verdict": "NOT CONFIRMED"
+}
