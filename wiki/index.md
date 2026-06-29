@@ -1,7 +1,7 @@
 ---
-updated: 2026-06-22
+updated: 2026-06-28
 sources_indexed: 4
-pages: 164
+pages: 183
 ---
 
 # Wiki Index
@@ -51,6 +51,7 @@ When answering a query:
 - [Multi-Agent LLM Trading](trading/algorithms/multi-agent-llm-trading.md) — taxonomy LLM-as-signal vs decision-maker; TradingAgents 84.9k★ bull/bear debate; HedgeAgents; Expert Investment Teams fine-grained decomp; Agent Market Arena; MadEvolve evolutionary; NautilusTrader 23.4k★; CBS cost metric; reproducibility crisis (0/19 papers fully reproducible); H274 PEAD integration; H318 meta-learner proposal ← merged 2026-06-21
 - [Time-Series Foundation Models](trading/algorithms/ts-foundation-models.md) — Chronos-2 #1 GIFT-Eval (Bolt 250× faster); TimesFM 2.5 200M params 16k context + quantile head; Moirai any-variate ICML oral trained on LOTSA 27B obs; FinTSB 15-25% over ARIMA; TS-RAG +6.51% retrieval-augmented; financial verdict: feature engineering not standalone signal; H318/H320+ integration patterns ← new 2026-06-21
 - [SPX Dispersion Trading & Variance Risk Premium](trading/algorithms/spx-dispersion-variance.md) — H309 PARTIAL; implied correlation premium 6-18pp historically; DSPX/COR3M signals; vega-neutral construction; Polygon IV integration path; dirty dispersion z1/z2/z3 thresholds ← new 2026-06-19
+- [Merger Arbitrage & Special Situations](trading/algorithms/merger-arbitrage-special-situations.md) — H310 NOT CONFIRMED (ETFs can't discriminate deal-break risk; antitrust regime artifact; 2020-2026 M&A boom inflated OOS); spread mechanics, deal-break risk, H341b FinBERT M&A design queued ← new 2026-06-25
 - [Fixed Income / Bond ETF Rotation](trading/algorithms/fixed-income-bond-rotation.md) — H045 PRODUCTION 21% portfolio; 13-ETF universe; 3m+6m+12m rank ensemble; OOS Sharpe 1.351, MaxDD -6.3%; carry FAILS (ETF dividends ≠ forward carry); SHY dominates OOS 72% of months; H314/H315 NOT CONFIRMED ← new 2026-06-20
 - [Value Factors](trading/algorithms/value-factors.md) — FCF yield signal (FMP API); COWZ ETF mechanics; H284 CONFIRMED-weak; H286 CONFIRMED Corr(SPY)=0.596; value vs momentum tension; data sources table ← new 2026-06-13
 - [Commodity Trend Following](trading/algorithms/commodity-trend-following.md) — H261/H261b/H262 CTA on GLD/SLV/DBC/USO/DBA; UNG excluded (K-1, contango, mean-reverting); H261b CONFIRMED (OOS Sharpe 0.922, Corr(SPY)=0.218, 2022 +26.7%); H262 QUEUED (Bayesian 3m/6m/12m blend) ← new 2026-06-07
@@ -78,6 +79,10 @@ When answering a query:
 - [QuantDinger](trading/tools/quantdinger-notes.md) — self-hosted AI trading platform (Docker); `quantdinger-mcp` PyPI for Claude Code integration; supports Alpaca/IBKR/Kraken/CCXT; full stack overkill given existing setup; MCP package worth testing ← new 2026-06-07
 - [QuantStats](tools/quantstats-notes.md) — Python portfolio analytics + HTML tearsheet generator; `pip install quantstats`; takes pandas returns Series → 50+ metrics + SPY benchmark + monthly heatmaps; add `qs.reports.html()` to run_hNNN.py ← new 2026-06-08
 - [Kan](tools/kan-notes.md) — self-hosted open-source kanban board (Trello alternative); AGPLv3, ~5k stars; Next.js + tRPC + Postgres; webhooks + admin API; potential task/research dashboard UI ← new 2026-06-08
+- [ByteChef](tools/bytechef-notes.md) — open-source visual AI agent orchestration + workflow automation (n8n/Zapier alternative); self-hosted, MCP support, ~839 stars; AGPLv3; AI agent step type built-in ← new 2026-06-27
+- [OpenKnowledge AI](tools/openknowledge-ai-notes.md) — agent-first notes app; productized Karpathy "LLM Wiki" concept; import papers/docs, AI queries across corpus; import from URL/PDF/text ← new 2026-06-27
+- [rust-trade](tools/rust-trade-notes.md) — Rust quant trading + backtesting system with Tauri desktop UI; MIT, ~449 stars; performance-focused alternative to Python backtesting ← new 2026-06-27
+- [/visual-plan Skill](tools/visual-plan-skill.md) — Claude Code skill; scans codebase → auto-wireframes user flow as storyboard; spotted broken/missing UI states; npx skills add ← new 2026-06-27
 - [Hyper-Extract](tools/hyper-extract-notes.md) — LLM→structured knowledge extraction; 8 formats (KG, hypergraph, temporal graph, Pydantic); 80+ YAML templates incl. Finance; MCP server; Claude-native (sonnet-4-6); `pip install hyper-extract`; ~2.5k stars ← new 2026-06-26
 - [Hitchhiker's Guide to Agentic AI](tools/hitchhikers-guide-agentic-ai.md) — practitioner survey (arXiv:2606.24937, Roitman 2026); 5-layer stack: LLM foundations → alignment → agentic systems → multi-agent (MCP/A2A) → production; impl guidance + code examples; ref for H274 multi-agent design, H319 RAG, MCP topology ← new 2026-06-26
 - [birdclaw](tools/birdclaw.md) — local-first Twitter/X workspace; SQLite archive of tweets/DMs/likes/bookmarks; AI-ranked inbox (OpenAI); full-text search FTS5; CLI + local web app; MIT; brew install; active dev/schema churn ← new 2026-06-22
@@ -91,6 +96,10 @@ When answering a query:
 - [Awesome Finance MCP](trading/tools/awesome-finance-mcp.md) — curated finance MCP servers; HIGH: Alpaca MCP + FMP MCP; already live: Massive MCP; medium: CCXT/QuantConnect/TradingView/Alpha Vantage MCPs ← new 2026-06-18
 - [QuantMind](trading/tools/quant-mind.md) — LLMQuant paper ingestion; NeurIPS 2025; semantic quant KB; ~$0.09/night ← new 2026-06-10
 - [AI-Trader](trading/tools/ai-trader.md) — HKUDS agent-native social trading; ai4trade.ai; MIT ← new 2026-06-11
+- [qf-lib — Event-Driven Python Backtester](trading/tools/qf-lib.md) — modular Python event-driven backtester; 943 stars; multi-broker integration (Alpaca/Interactive Brokers); data vendor connectors; production-focused alternative to vectorbt ← new 2026-06-24
+- [RustQuant — Rust Quantitative Finance Library](trading/tools/rust-quant.md) — QuantLib-comparable Rust library; options pricing (BSM/Heston/SABR), stochastic processes, ML, time series; Python bindings via PyO3; 1,773 stars ← new 2026-06-24
+- [whchien/ai-trader — Backtrader + MCP Backtesting](trading/tools/whchien-ai-trader.md) — config-driven Backtrader framework; 20+ built-in strategies; MCP server for natural language backtest commands; 744 stars ← new 2026-06-24
+- [smart-money-concepts — ICT Price Action Indicators](trading/tools/smart-money-concepts.md) — joshyattridge; FVG, Order Blocks, BOS/CHoCH, Liquidity, Sessions; 1,788 stars; `pip install smartmoneyconcepts`; clean vectorized pandas/numpy; no academic validation; H343 FVG momentum filter queued ← new 2026-06-28
 - [rohonchain — Polymarket Arbitrage Math](trading/tools/rohonchain-polymarket.md) — Roan @RohOnChain; Polymarket CLOB arb; Bregman+Frank-Wolfe+Kelly; $40M bot profits; low relevance to equity pipeline ← new 2026-06-24
 - [sairahul1 — AI Agent Loop Architecture](tools/sairahul1-ai-agent-loops.md) — Rahul @sairahul1; build systems that prompt themselves; memory + sub-agent split + stop conditions; applicable to dream cycle + multi-agent trading (H274/H280) ← new 2026-06-24
 - [ContestTrade](trading/tools/contesttrade.md) — FinStep-AI contest mechanism (arXiv:2508.00554); US V2.0; Apache 2.0 ← new 2026-06-11
@@ -112,11 +121,13 @@ When answering a query:
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado; GT-Score composite objective (98% generalization improvement vs Sharpe-only)
 - [Walk-Forward & CPCV](trading/backtesting/walk-forward-cpcv.md) — walk-forward variants, CPCV algorithm, purging/embargoing, DSR formulas; Python libs: timeseriescv/skfolio
 - [Transaction Cost Modeling](trading/backtesting/transaction-costs.md) — spread/impact/borrow cost models, square-root market impact, vectorbt/backtrader defaults, per-strategy calibration table
+- [Options Backtesting Methodology](trading/backtesting/options-backtesting-methodology.md) — path-dependency, vol surface evolution, 4-tier data (Tier 0 BSM free → Tier 3 ORATS $99/mo); ThetaData/QuantConnect/zipline-reloaded; H309/H266/H329 pipeline ← new 2026-06-24
+- [Strategy Blending & Correlation Management](trading/backtesting/strategy-blending-correlation.md) — production portfolio correlation matrix (OOS 2018-2026); H026/H045/IBS/BAB/TOM pairwise corr; diversification budget; when to add vs blend ← new 2026-06-23
 - [Multiple Testing & Statistical Significance](trading/backtesting/multiple-testing.md) — Bonferroni/BH corrections; deflated Sharpe ratio; p-hacking taxonomy; minimum backtest length formula ← new 2026-05-26
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H323 (frontier: H323 stub); H318 NOT CONFIRMED (meta-agent ETF selector; static 40/30/30 beats all dynamic variants; H026 dominates — Sharpe 2.52 standalone); H321/H322/H323 stubs; production portfolio H041a/H026/H045/IBS
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H342 (frontier: H342); H341 NOT CONFIRMED (residual momentum; negative OOS SPY corr on homogeneous large-cap universe); H342 NOT CONFIRMED (VIX term structure SVXY; 92% contango = barely discriminates); H318 NOT CONFIRMED (meta-agent ETF selector; static 40/30/30 beats all dynamic variants); production portfolio H041a/H026/H045/IBS
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
@@ -125,6 +136,7 @@ When answering a query:
 - [H181 Industry-Adjusted Reversal Deployment](trading/paper-trading/h181-alpaca.md) — H181 live pipeline: 30-stock equal-weight monthly reversal; started 2026-05-10
 - [Live Graduation Criteria](trading/paper-trading/live-graduation-criteria.md) — SPRT statistical test for strategy validation; minimum trade counts; regime coverage gates; performance attribution; Alpaca migration steps; graduation status by strategy ← new 2026-05-30
 - [Tax & After-Tax Return Modeling](trading/paper-trading/tax-and-after-tax-returns.md) — short/long-term cap gains, wash-sale rules, tax-loss harvesting, after-tax Sharpe adjustment; strategy-specific tax efficiency rankings ← new 2026-06-05
+- [Performance Attribution & Drawdown Analysis](trading/paper-trading/performance-attribution.md) — Brinson attribution adapted for quant sleeves; regime attribution; drawdown decomposition; rebalance decision framework ← new 2026-06-27
 - [Execution Quality & Slippage Analysis](trading/paper-trading/execution-quality.md) — fill analysis for paper→live graduation; slippage measurement; OPG vs MARKET comparison ← new 2026-06-11
 - [Risk Controls & Live Trading Monitoring](trading/paper-trading/risk-controls-and-monitoring.md) — 3-tier circuit breakers; kill switch via Alpaca close_all_positions; ATR position sizing; portfolio heat monitoring; correlation guard for PEAD entries; per-strategy risk table ← new 2026-06-17
 
@@ -134,7 +146,8 @@ When answering a query:
 - [Other Prediction Market Platforms](trading/prediction-markets/other-platforms.md) — PredictIt, Manifold, IBKR ForecastTrader (full API), Kalshi Timeless mechanics
 - [Prediction Market Algorithmic Strategies](trading/prediction-markets/algorithmic-strategies.md) — Kelly criterion, event modeling, arbitrage, NLP; cross-market arb, Timeless funding arb
 - [Nowcasting Playbook](trading/prediction-markets/nowcasting-playbook.md) — CPI/NFP/FOMC prediction market strategies; CME FedWatch implied probability extraction; signal timing; H185 design ← new 2026-05-27
-- [AI Model Benchmarks on Prediction Markets](trading/prediction-markets/ai-model-benchmarks.md) — Prediction Arena (arXiv:2604.07355); 6 models, $10k real capital, 57-day Kalshi/Polymarket eval; all lost money on Kalshi; Polymarket dramatically better (−1.1% vs −22.6%); research quantity ≠ performance ← 2026-05-29
+- [AI Model Benchmarks on Prediction Markets](trading/prediction-markets/ai-model-benchmarks.md) — Prediction Arena (arXiv:2604.07355) + PolyBench (every LLM negative return; structured data is differentiator) + PolySwarm (50-agent swarm; H185 Phase 2 analog) + PredictionMarketBench (Kalshi LOB replay; Bollinger +1.67% vs GPT-4.1-nano −2.77%; fee management dominates) ← updated 2026-06-28
+- [Prediction Market Automated Pipeline](trading/prediction-markets/automated-pipeline.md) — operational guide for live Kalshi/Polymarket pipeline; APScheduler; George infrastructure; companion to algorithmic-strategies.md and nowcasting-playbook.md ← new 2026-06-26
 - [Superforecasting Methods](trading/prediction-markets/superforecasting-methods.md) — Tetlock GJP; reference class forecasting; Bayesian updating; Brier/ECE calibration; LLM benchmarks (KalshiBench ECE 0.120 best); isotonic recalibration ← new 2026-06-11
 
 **Research Logs**
@@ -172,6 +185,13 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-06-28](trading/research-log/2026-06-28.md) — wiki: ai-model-benchmarks.md expanded (PolyBench/PolySwarm/PredictionMarketBench); dream cycle: H185 Phase 2 PolySwarm design + PredictionMarketBench wiki + FactorEngine/FactorMiner/Hubble cluster applied
+- [Research Log 2026-06-27](trading/research-log/2026-06-27.md) — wiki: performance-attribution.md new; 4 tool pages (ByteChef/OpenKnowledge/rust-trade/visual-plan); dream cycle scan
+- [Research Log 2026-06-26](trading/research-log/2026-06-26.md) — wiki: prediction-markets/automated-pipeline.md new; Hitchhiker's Guide + Hyper-Extract ingested; dream cycle: AlphaCrafter/Headroom/sairahul1 applied
+- [Research Log 2026-06-25](trading/research-log/2026-06-25.md) — wiki: merger-arbitrage-special-situations.md new; dream cycle scan; H338 NOT CONFIRMED (multi-asset trend+carry); H339 NOT CONFIRMED (price-based momentum gates)
+- [Research Log 2026-06-24](trading/research-log/2026-06-24.md) — wiki: options-backtesting-methodology.md new; qf-lib/RustQuant/whchien-ai-trader tool pages; dream cycle scan; H337 NOT CONFIRMED; H336 NOT CONFIRMED
+- [Research Log 2026-06-23](trading/research-log/2026-06-23.md) — wiki: strategy-blending-correlation.md new; dream cycle scan; H335 NOT CONFIRMED (bond momentum window); H334 NOT CONFIRMED (seasonality × momentum)
+- [Research Log 2026-06-21](trading/research-log/2026-06-21.md) — H317 NOT CONFIRMED (multi-modal PEAD); H320 PARTIAL CONFIRMED (LightGBM crash filter, WF caveat); wiki: multi-agent-llm-trading.md + ts-foundation-models.md + awesome-quant-ai.md + ATLAS new; AI model landscape updated
 - [Research Log 2026-06-20](trading/research-log/2026-06-20.md) — wiki: fixed-income-bond-rotation.md new (H045 PRODUCTION framework; carry FAILS; SHY dominates 72% OOS); dream cycle: H316 LLM pair selection, H317 multi-modal PEAD, H319 semantic network, H320 crash filter; H314/H315 NOT CONFIRMED
 - [Research Log 2026-06-19](trading/research-log/2026-06-19.md) — wiki: spx-dispersion-variance.md new (H309 PARTIAL; implied corr premium 6-18pp; DSPX/COR3M signals; vega-neutral construction; Polygon IV path)
 - [Research Log 2026-06-17](trading/research-log/2026-06-17.md) — wiki: risk-controls-and-monitoring.md new (3-tier circuit breakers; ATR sizing; correlation guard; kill switch); multi-agent-llm-trading.md (algorithms) expanded
