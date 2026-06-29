@@ -1,0 +1,166 @@
+{
+  "date": "2026-06-29",
+  "session": "nightly autonomous (7:30 AM task)",
+  "angles": [
+    {
+      "angle": 1,
+      "query": "pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "source": "arXiv:2605.01954",
+          "title": "Moira: HRL multi-agent pairs trading",
+          "relevance": "low",
+          "reason": "Already documented in wiki (H316 stub). No new information."
+        },
+        {
+          "source": "arXiv:2602.07048",
+          "title": "LLM lead-lag trading",
+          "relevance": "low",
+          "reason": "Already staged in prior dream cycle scan."
+        },
+        {
+          "source": "arXiv:2512.02436",
+          "title": "Semantic Trading: Agentic AI for Clustering",
+          "relevance": "medium",
+          "reason": "Focuses on same-outcome/different-outcome market relationships via semantic clustering. Novel angle on pair selection but no quantitative results matching our gate. Not staged."
+        },
+        {
+          "source": "arXiv:2510.11616",
+          "title": "Attention Factors for Statistical Arbitrage (Epstein, Wang, Choi, Pelger; ACM ICAIF 2025)",
+          "relevance": "high",
+          "reason": "OOS Sharpe > 4.0 on US large-cap equities over 24 years. Net of transaction costs: 2.3. 84% improvement over SOTA. Conditional latent factors via attention over firm characteristics. Industry-sector-aligned factors. STAGED as H347 proposal.",
+          "staged": true,
+          "staged_file": "1_attention_factors_stat_arb.json"
+        }
+      ]
+    },
+    {
+      "angle": 2,
+      "query": "PEAD + post-earnings drift + text signals + LLM",
+      "findings": [
+        {
+          "source": "ACL 2025 FINNLP Workshop",
+          "title": "Enhancing PEAD Measurement with LLMs",
+          "relevance": "high",
+          "reason": "FinBERT + LLM ensemble achieves 57.6-58.3% directional accuracy on earnings-day PEAD. Directly upgrades H174 confirmed pipeline (score >= 0.18 + surprise >= 0.02, WR=81.8%). STAGED as H348 proposal.",
+          "staged": true,
+          "staged_file": "2_pead_llm_enhancement.json"
+        },
+        {
+          "source": "arXiv:2602.20859",
+          "title": "FinAnchor: Multi-Modal Aligned Representations for Financial Prediction",
+          "relevance": "medium",
+          "reason": "Multi-modal (text + price + volume) aligned representation learning for financial prediction. Potentially useful for H174/H348 upgrade but requires significant ML infrastructure. Not staged — lower priority than H348."
+        },
+        {
+          "source": "arXiv:2502.15411",
+          "title": "HiFi-KPI: Hierarchical KPI Extraction from Earnings Filings",
+          "relevance": "medium",
+          "reason": "Structured KPI extraction (revenue growth, margin trends) from 10-K/10-Q filings. H174 feature engineering potential. Not staged — FMP API coverage is the primary constraint for H174, not KPI extraction methodology."
+        },
+        {
+          "source": "arXiv:2605.25894",
+          "title": "Multi-Modal Deep Learning for Earnings Day Direction Prediction",
+          "relevance": "low",
+          "reason": "Already referenced in wiki as H317. No new information."
+        }
+      ]
+    },
+    {
+      "angle": 3,
+      "query": "cross-sectional momentum + factor momentum + ML enhancement",
+      "findings": [
+        {
+          "source": "arXiv:2506.06356",
+          "title": "Deep Learning for Cross-Sectional Momentum on Chinese A-Shares",
+          "relevance": "low",
+          "reason": "Chinese A-share market specific. Different regulatory regime (daily price-move limits), different market structure. Not applicable to H198 US large-cap universe."
+        },
+        {
+          "source": "arXiv:2507.07107",
+          "title": "ML Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Portfolio Optimization with Bias Correction (Yimin Du, 2025)",
+          "relevance": "medium",
+          "reason": "Identifies 'upstream contamination' bug specific to Chinese A-share daily price limits — not applicable to US equities where this limit structure doesn't exist. The 0.44 Sharpe improvement is from fixing a China-specific data quality bug, not from a portable methodology. Has GitHub repo: initial-d/ml-quant-trading. Not staged for hypothesis but noted as code quality reference."
+        }
+      ]
+    },
+    {
+      "angle": 4,
+      "query": "arXiv multi-agent LLM trading systems portfolio optimization 2025 2026",
+      "findings": [
+        {
+          "source": "arXiv:2602.23330",
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+          "relevance": "medium",
+          "reason": "Japanese stock market focus. Fine-grained task decomposition (fundamental analysis, sentiment, valuation agents) improves risk-adjusted returns. Not staged — Japanese market structure limits US applicability; H318 (meta-agent ETF rotation selector) already covers this design space."
+        },
+        {
+          "source": "arXiv:2603.27539",
+          "title": "Toward Reliable Evaluation of LLM-Based Financial Multi-Agent Systems",
+          "relevance": "medium",
+          "reason": "Meta-paper: taxonomy + evaluation framework for LLM financial agents. References BlackRock AlphaAgents (arXiv:2508.11152). Useful reference for H318 design. Not staged — informational, not actionable hypothesis."
+        },
+        {
+          "source": "arXiv:2605.23007",
+          "title": "MadEvolve: Evolutionary Optimization of Trading Systems with Large Language Models",
+          "relevance": "medium",
+          "reason": "Multi-agent evolutionary architecture for equity portfolio construction. Overlaps significantly with QuantaAlpha (arXiv:2602.07085) which was staged. Not staged separately."
+        },
+        {
+          "source": "arXiv:2602.07085",
+          "title": "QuantaAlpha: An Evolutionary Framework for LLM-Driven Alpha Mining",
+          "relevance": "high",
+          "reason": "Open-source (GitHub: QuantaAlpha/QuantaAlpha). IC=0.1501 on CSI300 with GPT-5.2, ARR=27.75%, MDD=7.98%. S&P500 transfer: 137% cumulative excess return over 4 years. Evolutionary trajectory-level mutation/crossover. Directly usable as hypothesis GENERATION tool for H350+ using our existing H198 universe and yfinance cached data. STAGED as H349 proposal.",
+          "staged": true,
+          "staged_file": "3_quantalpha_llm_alpha_mining.json"
+        },
+        {
+          "source": "arXiv:2602.18481",
+          "title": "AlphaForgeBench: Benchmarking End-to-End Trading Strategy Design with Large Language Models",
+          "relevance": "medium",
+          "reason": "Benchmark suite for evaluating LLM trading strategy design end-to-end. Useful for comparing H349 QuantaAlpha output quality. Reference only — not staged."
+        }
+      ]
+    },
+    {
+      "angle": 5,
+      "query": "GitHub trending quantitative finance Python backtesting 2026",
+      "findings": [
+        {
+          "source": "GitHub: PlaceNL2026/best-of-algorithmic-trading",
+          "title": "best-of-algorithmic-trading: curated list 109 projects, 7 categories, ~310K combined stars",
+          "relevance": "medium",
+          "reason": "Curated 2026 list of algorithmic trading resources. No single novel tool stands out beyond what we already have (NautilusTrader, vectorbt, Lean, freqtrade). Not staged."
+        },
+        {
+          "source": "GitHub: QuantaAlpha/QuantaAlpha",
+          "title": "QuantaAlpha — LLM evolutionary alpha mining (open source)",
+          "relevance": "high",
+          "reason": "Matches arXiv:2602.07085 above. Open source, pip installable, uses OpenAI API. Already staged as H349.",
+          "staged": true,
+          "staged_file": "3_quantalpha_llm_alpha_mining.json"
+        },
+        {
+          "source": "GitHub: initial-d/ml-quant-trading",
+          "title": "ml-quant-trading: code for arXiv:2507.07107 bias correction pipeline",
+          "relevance": "low",
+          "reason": "China A-share specific. Not portable to US equities."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_findings": 15,
+    "high_relevance": 3,
+    "medium_relevance": 7,
+    "low_relevance": 5,
+    "staged_proposals": 3,
+    "staged_files": [
+      "1_attention_factors_stat_arb.json",
+      "2_pead_llm_enhancement.json",
+      "3_quantalpha_llm_alpha_mining.json"
+    ],
+    "proposed_hypotheses": ["H347", "H348", "H349"],
+    "key_insight": "Two high-signal directions from this scan: (1) Conditional latent factor models (Attention Factors, arXiv:2510.11616) achieve OOS Sharpe > 4 on US large-caps with an interpretable sector-structure — the strongest pure-quant result in the scan. (2) LLM-driven alpha mining via evolutionary search (QuantaAlpha) now has an open-source tool with S&P500 transfer validation — lowers the cost of hypothesis generation for H350+. PEAD LLM enhancement (H348) is the lowest-risk extension given H174 is already confirmed with 81.8% WR."
+  }
+}

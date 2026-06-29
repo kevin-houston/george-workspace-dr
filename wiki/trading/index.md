@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-28 (ai-model-benchmarks.md expanded — PolyBench+PolySwarm+PredictionMarketBench added)
+updated: 2026-06-29 (smart-money-concepts-ict.md new — H343/H344/H345 OB filter empirical findings; smart-money-concepts tool indexed)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -49,6 +49,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Market Timing Overlays](algorithms/market-timing-overlays.md) ← new 2026-06-15 (VIX term structure H296 CONFIRMED OOS 1.116 MaxDD -18.6%; SPY 200MA; VIX level thresholds; composite signal; rate cycle overlay; production integration guide for daily vs monthly rotation systems)
   - [Cryptocurrency Trading Strategies](algorithms/crypto-trading-strategies.md) ← new 2026-06-16 (cross-sectional momentum top-30 universe Sharpe 1.51 28d lookback; BTC 50d MA Sharpe 1.9 vs B&H 1.3; funding rate carry 6.45 full-sample but declining; Monday effect +0.51%; halving cycle positioning; ccxt/pycoingecko implementation; H302/H303 queued; max 5% portfolio allocation)
   - [Multi-Agent LLM Trading](algorithms/multi-agent-llm-trading.md) ← merged 2026-06-21 (taxonomy LLM-as-signal vs decision-maker; TradingAgents 84.9k★; HedgeAgents; Expert Investment Teams; Agent Market Arena; MadEvolve evolutionary; coordination patterns + CBS cost metric; NautilusTrader; reproducibility crisis 0/19 fully reproducible; H274 PEAD upgrade; H318 meta-learner; Self-Driving Portfolio Ang/BlackRock)
+  - [Smart Money Concepts (ICT) — Order Blocks, FVGs, BOS/CHoCH](algorithms/smart-money-concepts-ict.md) ← new 2026-06-29 (H343 CONFIRMED OOS 3.182: OB strict filter on H198 acts as implicit bear-market detector; H344 CONFIRMED 36/36 params pass; H345 CONFIRMED OOS 3.337 vs baseline 2.538 on H026 ETF rotation; FVG fails monthly large-cap — fills within days; OB persists weeks; mechanism, production params, caveats)
 - [**Shared Evaluation Checklist**](shared-eval-checklist.md) ← new 2026-06-09 (7-point standard agreed by George + Ernesto: look-ahead guard, NLP timestamp, cost model, soft OOS gate, regime coverage, survivorship bias, after-tax flag)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
@@ -64,6 +65,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Time-Series Foundation Models](algorithms/ts-foundation-models.md) ← new 2026-06-21 (Chronos-2 #1 GIFT-Eval; TimesFM 2.5 16k context + quantile head; Moirai any-variate ICML oral; FinTSB benchmark 15-25% over ARIMA; TS-RAG +6.51% via retrieval; financial verdict: feature engineering use case, not standalone signal; H318/H320+ integration patterns)
   - [qf-lib](tools/qf-lib.md) ← new 2026-06-24 (quarkfin/qf-lib 943★; event-driven Python backtester; broker + data vendor integrations; Crypto/Stocks/Futures; actively maintained 2026; alternative to backtrader with better data integration layer)
   - [RustQuant](tools/rust-quant.md) ← new 2026-06-24 (avhz/RustQuant 1773★; Rust quantitative finance library; options pricing, stochastic processes, ML; QuantLib-comparable but Rust-native; useful for fast options Greeks computation in hybrid Python/Rust workflows)
+  - [Smart Money Concepts Library](tools/smart-money-concepts.md) ← new 2026-06-28 (joshyattridge/smart-money-concepts 1,788★; FVG, OB, BOS/CHoCH, Swing Highs/Lows, Liquidity, Sessions, Retracements; ICT retail methodology; pip install smartmoneyconcepts; used in H343/H344/H345)
   - [whchien/ai-trader](tools/whchien-ai-trader.md) ← new 2026-06-24 (744★; Backtrader-powered backtesting + MCP server; `pip install ai-trader`; 20+ strategies; YAML config; US/TW/crypto/forex; MCP lets Claude run backtests via natural language; NOT the same as HKUDS/AI-Trader social platform)
   - [rohonchain — Polymarket Arbitrage Math](tools/rohonchain-polymarket.md) ← new 2026-06-24 (Roan @RohOnChain; Polymarket CLOB arb; Bregman projections + Frank-Wolfe + Kelly sizing; $40M extracted by top bots; low relevance to equity pipeline — different asset class)
   - [AI-Trader](tools/ai-trader.md) ← new 2026-06-11 (HKUDS agent-native social trading platform; signal publishing, copy-trading, collective intelligence; companion to Vibe-Trading; Polymarket paper trading live; MIT self-hostable; register George via one-message SKILL.md integration)
