@@ -1,0 +1,106 @@
+{
+  "hypothesis": "H343",
+  "description": "FVG / Order Block filter on H198 6-1m momentum",
+  "gate": 1.174,
+  "variants": {
+    "A": {
+      "name": "FVG strict (cash if <3 pass)",
+      "is": {
+        "n": 96,
+        "sharpe": 0.0,
+        "cagr": 0.0,
+        "maxdd": 0.0,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 0.0,
+        "cagr": 0.0,
+        "maxdd": 0.0,
+        "neg_yrs": 0
+      }
+    },
+    "B": {
+      "name": "FVG lenient (fill from unfiltered)",
+      "is": {
+        "n": 96,
+        "sharpe": 1.779,
+        "cagr": 0.421,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.174,
+        "cagr": 0.271,
+        "maxdd": -0.227,
+        "neg_yrs": 1
+      }
+    },
+    "C": {
+      "name": "OB strict (cash if <3 pass)",
+      "is": {
+        "n": 96,
+        "sharpe": 3.406,
+        "cagr": 0.681,
+        "maxdd": -0.055,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.182,
+        "cagr": 0.678,
+        "maxdd": -0.054,
+        "neg_yrs": 0
+      }
+    },
+    "D": {
+      "name": "OB lenient (fill from unfiltered)",
+      "is": {
+        "n": 96,
+        "sharpe": 2.633,
+        "cagr": 0.594,
+        "maxdd": -0.161,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.334,
+        "cagr": 0.573,
+        "maxdd": -0.136,
+        "neg_yrs": 0
+      }
+    },
+    "E": {
+      "name": "Baseline 6-1m (no filter)",
+      "is": {
+        "n": 96,
+        "sharpe": 1.779,
+        "cagr": 0.421,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.174,
+        "cagr": 0.271,
+        "maxdd": -0.227,
+        "neg_yrs": 1
+      }
+    }
+  },
+  "spy_is": {
+    "n": 96,
+    "sharpe": 1.105,
+    "cagr": 0.15,
+    "maxdd": -0.194,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  }
+}

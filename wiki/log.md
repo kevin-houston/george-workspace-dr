@@ -489,3 +489,13 @@ Verdict: rohonchain low relevance to equity pipeline; sairahul1 moderate relevan
 
 ## [2026-06-25] wiki expansion + dream cycle | Merger Arbitrage & Special Situations
 Pages created: 2 (merger-arbitrage-special-situations.md, research-log/2026-06-25.md). Pages updated: 1 (trading/index.md). Key content: H310 root cause documented; deal mechanics/ML features/regulatory eras; H331/H332/H333 staged. Dream cycle: 18 papers reviewed, 4 staged proposals.
+
+## [2026-06-28] lint | Health check
+Issues found: 22. Auto-fixed: 20. Needs review: 2.
+Auto-fixed: 19 index gaps (12 content pages + 7 research logs added to index.md); 2 stale index entries updated (hypothesis-log frontier H323→H342; ai-model-benchmarks entry expanded for PolyBench/PolySwarm/PredictionMarketBench); 1 index header (date + page count).
+Needs review: (1) CONTRADICTION — CLAUDE.local.md lists H318 as "PROPOSED (not yet implemented)" but hypothesis-log.md shows H318 as NOT CONFIRMED (run and failed). CLAUDE.local.md needs H318 status corrected. (2) Orphan: tools/openalice.md listed under Trading→Tools in index but file is at wiki/tools/openalice.md (wrong section — should be under General Tech tools).
+
+## [2026-06-28] ingest | smart-money-concepts (joshyattridge)
+Pages created: 1 (trading/tools/smart-money-concepts.md). Pages updated: 1 (index.md). Key entities: Josh Yattridge, ICT/Inner Circle Trader (Michael J. Huddleston). Key content: 8 indicators documented (FVG, Swing H/L, BOS/CHoCH, OB, Liquidity, Previous H/L, Sessions, Retracements); integration example with yfinance; H343/H344/H345 hypotheses sketched; assessment table. Source: Kevin via Telegram 2026-06-28.
+
+2026-06-29T03:36:39Z | ingest | H343 backtest completed — FVG/OB filter on H198 6-1m momentum. Variants C/D CONFIRMED (OOS Sharpe 3.182/2.334), A/B fail (FVGs always mitigated on large-caps). Hypothesis log entry added. Script: backtesting/daily/run_h343.py. Results: backtesting/results/h343_results.json.
