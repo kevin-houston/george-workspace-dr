@@ -499,3 +499,5 @@ Needs review: (1) CONTRADICTION — CLAUDE.local.md lists H318 as "PROPOSED (not
 Pages created: 1 (trading/tools/smart-money-concepts.md). Pages updated: 1 (index.md). Key entities: Josh Yattridge, ICT/Inner Circle Trader (Michael J. Huddleston). Key content: 8 indicators documented (FVG, Swing H/L, BOS/CHoCH, OB, Liquidity, Previous H/L, Sessions, Retracements); integration example with yfinance; H343/H344/H345 hypotheses sketched; assessment table. Source: Kevin via Telegram 2026-06-28.
 
 2026-06-29T03:36:39Z | ingest | H343 backtest completed — FVG/OB filter on H198 6-1m momentum. Variants C/D CONFIRMED (OOS Sharpe 3.182/2.334), A/B fail (FVGs always mitigated on large-caps). Hypothesis log entry added. Script: backtesting/daily/run_h343.py. Results: backtesting/results/h343_results.json.
+
+2026-06-29T04:09:27Z | ingest | H344 CONFIRMED (36/36 params pass gate): H343 OB filter robust across full parameter grid. H345 CONFIRMED (Var B OOS 3.337 vs baseline 2.538): OB filter improves H026 ETF selection. Both hypothesis log entries added.

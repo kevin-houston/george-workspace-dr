@@ -1,0 +1,627 @@
+{
+  "hypothesis": "H344",
+  "description": "OB filter sensitivity analysis on H343",
+  "gate": 1.174,
+  "reference_params": {
+    "ob_window": 30,
+    "min_filter": 3,
+    "swing_len": 5,
+    "h343_oos_sharpe": 3.182
+  },
+  "n_variants": 36,
+  "n_pass": 36,
+  "variants": [
+    {
+      "ob_window": 15,
+      "min_filter": 2,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 3.101,
+        "cagr": 0.652,
+        "maxdd": -0.096
+      },
+      "oos": {
+        "sharpe": 2.525,
+        "cagr": 0.531,
+        "maxdd": -0.175
+      },
+      "oos_cash_pct": 6.2,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 15,
+      "min_filter": 2,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 2.342,
+        "cagr": 0.642,
+        "maxdd": -0.106
+      },
+      "oos": {
+        "sharpe": 2.605,
+        "cagr": 0.535,
+        "maxdd": -0.115
+      },
+      "oos_cash_pct": 26.6,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 15,
+      "min_filter": 2,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 1.705,
+        "cagr": 0.443,
+        "maxdd": -0.141
+      },
+      "oos": {
+        "sharpe": 1.276,
+        "cagr": 0.198,
+        "maxdd": -0.152
+      },
+      "oos_cash_pct": 39.1,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 15,
+      "min_filter": 3,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 2.984,
+        "cagr": 0.635,
+        "maxdd": -0.096
+      },
+      "oos": {
+        "sharpe": 3.205,
+        "cagr": 0.567,
+        "maxdd": -0.043
+      },
+      "oos_cash_pct": 15.6,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 15,
+      "min_filter": 3,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 2.393,
+        "cagr": 0.53,
+        "maxdd": -0.106
+      },
+      "oos": {
+        "sharpe": 2.285,
+        "cagr": 0.425,
+        "maxdd": -0.115
+      },
+      "oos_cash_pct": 48.4,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 15,
+      "min_filter": 3,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 1.359,
+        "cagr": 0.237,
+        "maxdd": -0.115
+      },
+      "oos": {
+        "sharpe": 1.781,
+        "cagr": 0.193,
+        "maxdd": -0.054
+      },
+      "oos_cash_pct": 62.5,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 15,
+      "min_filter": 4,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 2.916,
+        "cagr": 0.618,
+        "maxdd": -0.067
+      },
+      "oos": {
+        "sharpe": 3.074,
+        "cagr": 0.552,
+        "maxdd": -0.043
+      },
+      "oos_cash_pct": 20.3,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 15,
+      "min_filter": 4,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 1.78,
+        "cagr": 0.302,
+        "maxdd": -0.106
+      },
+      "oos": {
+        "sharpe": 1.724,
+        "cagr": 0.258,
+        "maxdd": -0.093
+      },
+      "oos_cash_pct": 65.6,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 15,
+      "min_filter": 4,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 0.596,
+        "cagr": 0.072,
+        "maxdd": -0.115
+      },
+      "oos": {
+        "sharpe": 1.418,
+        "cagr": 0.144,
+        "maxdd": -0.054
+      },
+      "oos_cash_pct": 73.4,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 2,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 3.055,
+        "cagr": 0.627,
+        "maxdd": -0.089
+      },
+      "oos": {
+        "sharpe": 2.943,
+        "cagr": 0.564,
+        "maxdd": -0.107
+      },
+      "oos_cash_pct": 1.6,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 2,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 2.871,
+        "cagr": 0.619,
+        "maxdd": -0.154
+      },
+      "oos": {
+        "sharpe": 2.664,
+        "cagr": 0.567,
+        "maxdd": -0.085
+      },
+      "oos_cash_pct": 7.8,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 2,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 2.648,
+        "cagr": 0.552,
+        "maxdd": -0.103
+      },
+      "oos": {
+        "sharpe": 2.469,
+        "cagr": 0.422,
+        "maxdd": -0.202
+      },
+      "oos_cash_pct": 28.1,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 3,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 3.129,
+        "cagr": 0.632,
+        "maxdd": -0.073
+      },
+      "oos": {
+        "sharpe": 3.396,
+        "cagr": 0.591,
+        "maxdd": -0.056
+      },
+      "oos_cash_pct": 6.2,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 3,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 2.659,
+        "cagr": 0.576,
+        "maxdd": -0.154
+      },
+      "oos": {
+        "sharpe": 2.756,
+        "cagr": 0.565,
+        "maxdd": -0.068
+      },
+      "oos_cash_pct": 14.1,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 3,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 2.394,
+        "cagr": 0.472,
+        "maxdd": -0.103
+      },
+      "oos": {
+        "sharpe": 2.407,
+        "cagr": 0.374,
+        "maxdd": -0.091
+      },
+      "oos_cash_pct": 46.9,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 4,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 3.176,
+        "cagr": 0.631,
+        "maxdd": -0.073
+      },
+      "oos": {
+        "sharpe": 3.248,
+        "cagr": 0.566,
+        "maxdd": -0.056
+      },
+      "oos_cash_pct": 10.9,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 4,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 2.313,
+        "cagr": 0.482,
+        "maxdd": -0.154
+      },
+      "oos": {
+        "sharpe": 2.602,
+        "cagr": 0.52,
+        "maxdd": -0.068
+      },
+      "oos_cash_pct": 28.1,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 4,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 2.088,
+        "cagr": 0.382,
+        "maxdd": -0.103
+      },
+      "oos": {
+        "sharpe": 1.915,
+        "cagr": 0.245,
+        "maxdd": 0.0
+      },
+      "oos_cash_pct": 68.8,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 2,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 2.516,
+        "cagr": 0.564,
+        "maxdd": -0.194
+      },
+      "oos": {
+        "sharpe": 2.397,
+        "cagr": 0.503,
+        "maxdd": -0.091
+      },
+      "oos_cash_pct": 0.0,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 2,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 3.109,
+        "cagr": 0.659,
+        "maxdd": -0.155
+      },
+      "oos": {
+        "sharpe": 2.958,
+        "cagr": 0.661,
+        "maxdd": -0.113
+      },
+      "oos_cash_pct": 3.1,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 2,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 3.488,
+        "cagr": 0.695,
+        "maxdd": -0.043
+      },
+      "oos": {
+        "sharpe": 3.202,
+        "cagr": 0.656,
+        "maxdd": -0.042
+      },
+      "oos_cash_pct": 9.4,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 3,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 2.533,
+        "cagr": 0.566,
+        "maxdd": -0.194
+      },
+      "oos": {
+        "sharpe": 2.397,
+        "cagr": 0.503,
+        "maxdd": -0.091
+      },
+      "oos_cash_pct": 0.0,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 3,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 3.406,
+        "cagr": 0.681,
+        "maxdd": -0.055
+      },
+      "oos": {
+        "sharpe": 3.182,
+        "cagr": 0.678,
+        "maxdd": -0.054
+      },
+      "oos_cash_pct": 7.8,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 3,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 3.541,
+        "cagr": 0.7,
+        "maxdd": -0.043
+      },
+      "oos": {
+        "sharpe": 3.101,
+        "cagr": 0.633,
+        "maxdd": -0.042
+      },
+      "oos_cash_pct": 17.2,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 4,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 2.567,
+        "cagr": 0.57,
+        "maxdd": -0.194
+      },
+      "oos": {
+        "sharpe": 2.338,
+        "cagr": 0.493,
+        "maxdd": -0.103
+      },
+      "oos_cash_pct": 4.7,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 4,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 3.463,
+        "cagr": 0.683,
+        "maxdd": -0.055
+      },
+      "oos": {
+        "sharpe": 3.174,
+        "cagr": 0.671,
+        "maxdd": -0.054
+      },
+      "oos_cash_pct": 10.9,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 4,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 3.101,
+        "cagr": 0.622,
+        "maxdd": -0.039
+      },
+      "oos": {
+        "sharpe": 2.951,
+        "cagr": 0.604,
+        "maxdd": -0.042
+      },
+      "oos_cash_pct": 28.1,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 45,
+      "min_filter": 2,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 1.939,
+        "cagr": 0.463,
+        "maxdd": -0.21
+      },
+      "oos": {
+        "sharpe": 1.859,
+        "cagr": 0.406,
+        "maxdd": -0.141
+      },
+      "oos_cash_pct": 0.0,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 45,
+      "min_filter": 2,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 2.612,
+        "cagr": 0.577,
+        "maxdd": -0.119
+      },
+      "oos": {
+        "sharpe": 2.174,
+        "cagr": 0.483,
+        "maxdd": -0.126
+      },
+      "oos_cash_pct": 0.0,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 45,
+      "min_filter": 2,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 2.904,
+        "cagr": 0.62,
+        "maxdd": -0.123
+      },
+      "oos": {
+        "sharpe": 2.505,
+        "cagr": 0.544,
+        "maxdd": -0.113
+      },
+      "oos_cash_pct": 4.7,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 45,
+      "min_filter": 3,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 1.939,
+        "cagr": 0.463,
+        "maxdd": -0.21
+      },
+      "oos": {
+        "sharpe": 1.859,
+        "cagr": 0.406,
+        "maxdd": -0.141
+      },
+      "oos_cash_pct": 0.0,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 45,
+      "min_filter": 3,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 2.628,
+        "cagr": 0.579,
+        "maxdd": -0.119
+      },
+      "oos": {
+        "sharpe": 2.101,
+        "cagr": 0.465,
+        "maxdd": -0.126
+      },
+      "oos_cash_pct": 1.6,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 45,
+      "min_filter": 3,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 2.904,
+        "cagr": 0.62,
+        "maxdd": -0.123
+      },
+      "oos": {
+        "sharpe": 2.734,
+        "cagr": 0.565,
+        "maxdd": -0.07
+      },
+      "oos_cash_pct": 6.2,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 45,
+      "min_filter": 4,
+      "swing_len": 3,
+      "is": {
+        "sharpe": 1.939,
+        "cagr": 0.463,
+        "maxdd": -0.21
+      },
+      "oos": {
+        "sharpe": 1.859,
+        "cagr": 0.406,
+        "maxdd": -0.141
+      },
+      "oos_cash_pct": 0.0,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 45,
+      "min_filter": 4,
+      "swing_len": 5,
+      "is": {
+        "sharpe": 2.643,
+        "cagr": 0.581,
+        "maxdd": -0.119
+      },
+      "oos": {
+        "sharpe": 2.204,
+        "cagr": 0.478,
+        "maxdd": -0.126
+      },
+      "oos_cash_pct": 3.1,
+      "beats_gate": true
+    },
+    {
+      "ob_window": 45,
+      "min_filter": 4,
+      "swing_len": 7,
+      "is": {
+        "sharpe": 3.07,
+        "cagr": 0.63,
+        "maxdd": -0.091
+      },
+      "oos": {
+        "sharpe": 2.625,
+        "cagr": 0.535,
+        "maxdd": -0.066
+      },
+      "oos_cash_pct": 15.6,
+      "beats_gate": true
+    }
+  ]
+}
