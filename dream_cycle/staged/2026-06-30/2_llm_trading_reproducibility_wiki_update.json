@@ -1,0 +1,17 @@
+{
+  "id": "llm-trading-reproducibility-wiki-update-2026-06-30",
+  "date": "2026-06-30",
+  "source": "Xia et al. (2026) 'Agentic Trading: When LLM Agents Meet Financial Markets', arXiv:2605.19337",
+  "source_url": "https://arxiv.org/abs/2605.19337",
+  "title": "Wiki update: multi-agent-llm-trading.md — 2026 reproducibility audit (2/19 extractable protocols)",
+  "rationale": "Xia et al. (May 2026, Shenzhen University) audit 77 LLM trading studies through March 2026. Their primary empirical subset (n=19 satisfying Action Output + Closed-Loop Evaluation) finds: only 2/19 studies report time-consistent train/test splits, 1/19 reports explicit transaction costs, and execution semantics are inconsistent across papers. This extends our wiki's existing '0/19 fully reproducible' quote (from arXiv:2603.27539, the 2026-03 audit) with a more recent and larger sample finding similar patterns. The 2/19 extractable rate vs. 0/19 full reproducibility is a meaningful distinction worth capturing. Additionally, the paper reframes LLM trading agents as 'expert-system decision pipelines' with 5 components: perceive market information, retrieve context, reason about decisions, emit tradable actions, adapt under feedback. This taxonomy is cleaner than existing wiki framing and should be added to multi-agent-llm-trading.md. Key implication: H280 (MarketSenseAI 4-agent) and H274 (multi-agent PEAD debate) must use time-consistent OOS splits and explicit transaction costs to avoid joining the 94% non-reproducible majority.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_wiki_page": "algorithms/multi-agent-llm-trading.md",
+  "apply_status": "pending",
+  "wiki_changes": [
+    "Update reproducibility section: 2/19 studies extractable protocol (2026 audit, n=77 studies screened, 19 primary)",
+    "Add 5-component LLM trading agent taxonomy from Xia et al.: perceive → retrieve → reason → emit → adapt",
+    "Note: 0/19 fully reproducible (arXiv:2603.27539) vs 2/19 extractable (arXiv:2605.19337) are different metrics — both valid"
+  ]
+}

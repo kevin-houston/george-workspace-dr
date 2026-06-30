@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-30",
+  "phase1_wiki_target": "algorithms/commodity-trend-following.md",
+  "phase1_rationale": "Lowest SPY-correlated confirmed strategy (0.218), H262 queued since June 7, three 2025 papers provide coherent multi-horizon design framework",
+  "phase1_additions": [
+    "H262 Bayesian decomposition design (arXiv:2507.15876): 500-day dominant single horizon Sharpe 0.47",
+    "Barbell structure finding (arXiv:2510.23150): 125-day medium-term is REDUNDANT, remove it",
+    "Cherry-picking warning (arXiv:2504.10914): single EMA sufficient, cross-corr > 0.85 test",
+    "Python barbell_signal() implementation with EWM 60d + 500d spans",
+    "PPIACO FRED regime gate for commodity uptrend classification",
+    "Benchmark table vs AQR (Sharpe ~1.1-1.4) and QuantPedia ETF CTA proxy (Sharpe 0.67)"
+  ],
+  "phase2_angles": {
+    "pairs_LLM": "No new papers beyond H316/H319 already queued",
+    "PEAD_text": "Found Hong et al. JBF 2026: text uncertainty predicts WEAKER PEAD — staged as H350 anti-filter",
+    "momentum_factor": "Barbell CTA signal design incorporated into Phase 1 wiki expansion",
+    "multi_agent": "Xia et al. arXiv:2605.19337 (May 2026): 2/19 extractable protocols, 5-component taxonomy — staged as wiki update",
+    "github_trending": "Awesome Systematic Trading repo (June 29 2026, 97 tools) — not novel enough to stage"
+  },
+  "staged_proposals": [
+    {
+      "file": "1_pead_text_uncertainty_filter.json",
+      "hypothesis": "H350",
+      "type": "hypothesis_stub",
+      "priority": "medium",
+      "source": "JBF 2026 Hong et al."
+    },
+    {
+      "file": "2_llm_trading_reproducibility_wiki_update.json",
+      "hypothesis": "wiki_update",
+      "type": "wiki_update",
+      "priority": "low",
+      "source": "arXiv:2605.19337 Xia et al. 2026"
+    }
+  ],
+  "h262_status": "design_complete_phase1",
+  "next_action": "Write backtesting/daily/run_h262.py using barbell_signal design (60d + 500d EWM)"
+}
