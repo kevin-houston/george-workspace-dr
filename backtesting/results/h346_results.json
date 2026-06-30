@@ -1,0 +1,176 @@
+{
+  "hypothesis": "H346",
+  "description": "OB filter on H026 canonical IS 2008-2017 / OOS 2018-2026 split",
+  "gate": 1.3,
+  "h026_canonical_oos_benchmark": 1.2,
+  "param_sets": {
+    "ref": {
+      "params": {
+        "ob_window": 30,
+        "swing_len": 5
+      },
+      "variants": {
+        "A": {
+          "name": "OB strict (top-1 must have OB; else BIL)",
+          "is": {
+            "n": 72,
+            "sharpe": 2.749,
+            "cagr": 0.214,
+            "maxdd": -0.014,
+            "neg_yrs": 0
+          },
+          "oos": {
+            "n": 100,
+            "sharpe": 2.798,
+            "cagr": 0.246,
+            "maxdd": -0.04,
+            "neg_yrs": 0
+          },
+          "oos_cash_months": 0,
+          "oos_cash_pct": 0.0
+        },
+        "B": {
+          "name": "OB lenient (try top-2; BIL if neither has OB)",
+          "is": {
+            "n": 72,
+            "sharpe": 2.957,
+            "cagr": 0.249,
+            "maxdd": -0.026,
+            "neg_yrs": 0
+          },
+          "oos": {
+            "n": 100,
+            "sharpe": 3.057,
+            "cagr": 0.286,
+            "maxdd": -0.04,
+            "neg_yrs": 0
+          },
+          "oos_cash_months": 0,
+          "oos_cash_pct": 0.0
+        },
+        "C": {
+          "name": "OB gate (any top-3 has OB \u2192 enter top-1; else BIL)",
+          "is": {
+            "n": 72,
+            "sharpe": 2.794,
+            "cagr": 0.232,
+            "maxdd": -0.053,
+            "neg_yrs": 0
+          },
+          "oos": {
+            "n": 100,
+            "sharpe": 2.671,
+            "cagr": 0.257,
+            "maxdd": -0.047,
+            "neg_yrs": 0
+          },
+          "oos_cash_months": 0,
+          "oos_cash_pct": 0.0
+        },
+        "D": {
+          "name": "Baseline H026 (no OB filter)",
+          "is": {
+            "n": 72,
+            "sharpe": 2.831,
+            "cagr": 0.235,
+            "maxdd": -0.053,
+            "neg_yrs": 0
+          },
+          "oos": {
+            "n": 100,
+            "sharpe": 2.61,
+            "cagr": 0.264,
+            "maxdd": -0.067,
+            "neg_yrs": 0
+          },
+          "oos_cash_months": 0,
+          "oos_cash_pct": 0.0
+        }
+      }
+    },
+    "best": {
+      "params": {
+        "ob_window": 20,
+        "swing_len": 3
+      },
+      "variants": {
+        "A": {
+          "name": "OB strict (top-1 must have OB; else BIL)",
+          "is": {
+            "n": 72,
+            "sharpe": 2.616,
+            "cagr": 0.188,
+            "maxdd": -0.011,
+            "neg_yrs": 0
+          },
+          "oos": {
+            "n": 100,
+            "sharpe": 2.941,
+            "cagr": 0.239,
+            "maxdd": -0.029,
+            "neg_yrs": 0
+          },
+          "oos_cash_months": 0,
+          "oos_cash_pct": 0.0
+        },
+        "B": {
+          "name": "OB lenient (try top-2; BIL if neither has OB)",
+          "is": {
+            "n": 72,
+            "sharpe": 2.801,
+            "cagr": 0.206,
+            "maxdd": -0.026,
+            "neg_yrs": 0
+          },
+          "oos": {
+            "n": 100,
+            "sharpe": 3.238,
+            "cagr": 0.297,
+            "maxdd": -0.057,
+            "neg_yrs": 0
+          },
+          "oos_cash_months": 0,
+          "oos_cash_pct": 0.0
+        },
+        "C": {
+          "name": "OB gate (any top-3 has OB \u2192 enter top-1; else BIL)",
+          "is": {
+            "n": 72,
+            "sharpe": 2.845,
+            "cagr": 0.226,
+            "maxdd": -0.053,
+            "neg_yrs": 0
+          },
+          "oos": {
+            "n": 100,
+            "sharpe": 2.735,
+            "cagr": 0.261,
+            "maxdd": -0.067,
+            "neg_yrs": 0
+          },
+          "oos_cash_months": 0,
+          "oos_cash_pct": 0.0
+        },
+        "D": {
+          "name": "Baseline H026 (no OB filter)",
+          "is": {
+            "n": 72,
+            "sharpe": 2.831,
+            "cagr": 0.235,
+            "maxdd": -0.053,
+            "neg_yrs": 0
+          },
+          "oos": {
+            "n": 100,
+            "sharpe": 2.61,
+            "cagr": 0.264,
+            "maxdd": -0.067,
+            "neg_yrs": 0
+          },
+          "oos_cash_months": 0,
+          "oos_cash_pct": 0.0
+        }
+      }
+    }
+  }
+}

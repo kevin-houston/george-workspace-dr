@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-28
+updated: 2026-06-29
 sources_indexed: 4
 pages: 183
 ---
@@ -127,7 +127,7 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H342 (frontier: H342); H341 NOT CONFIRMED (residual momentum; negative OOS SPY corr on homogeneous large-cap universe); H342 NOT CONFIRMED (VIX term structure SVXY; 92% contango = barely discriminates); H318 NOT CONFIRMED (meta-agent ETF selector; static 40/30/30 beats all dynamic variants); production portfolio H041a/H026/H045/IBS
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H349 (frontier: H349 PROPOSED); H346 CONFIRMED (OB filter canonical H026 split — Var B window=20 OOS 3.238 vs baseline 2.610; canonical validation of H345); H345 CONFIRMED (OB filter H026 non-canonical — OOS 3.337 vs baseline 2.538); H343/H344 CONFIRMED (OB filter H198 stock momentum, robust across 36 param combos); production portfolio H041a/H026/H045/IBS
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
@@ -238,6 +238,8 @@ When answering a query:
 - [zenbu.js](tools/zenbu.md) — JS framework for AI-agent-customizable desktop apps; local source, git-tracked, hot-reload; alpha
 - [Dograh](tools/dograh.md) — self-hostable voice agent platform (open-source Vapi/Retell alternative); drag-and-drop workflows, bring-your-own LLM/TTS/STT, Docker deploy
 - [mermaid-skill](tools/mermaid-skill.md) — Claude Code `/mermaid` skill; 23 diagram types, bundled syntax refs, weekly auto-sync from mermaid-js upstream ← 2026-05-27
+- [Portless (vercel-labs)](tools/portless-notes.md) — replaces localhost port numbers with stable named .localhost URLs; ngrok/Tailscale/Funnel flags; designed for humans + AI agents ← new 2026-06-29
+- [aie-talks (Yohei Nakajima)](tools/aie-talks-nakajima.md) — curated AI engineering talks site by BabyAGI creator; relevant to AIEWF 2026 (June 29–July 2 SF) agent infrastructure talks ← new 2026-06-29
 - [ai-avatar-system](tools/ai-avatar-system.md) — real-time AI avatar platform; photo upload + 5s voice clone → lip-sync video; Claude/GPT-4/Llama, Whisper, MuseTalk, XTTS v2; MIT ← 2026-05-28
 
 ### AI Industry
