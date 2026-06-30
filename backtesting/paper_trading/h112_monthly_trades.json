@@ -172,5 +172,34 @@
         "submitted_at": "2026-06-26T09:47:22.869411"
       }
     ]
+  },
+  {
+    "date": "2026-06-29",
+    "equity": 5114.6353,
+    "target": {
+      "IBB": 5114.6353
+    },
+    "eff_weights": {
+      "h026": 1.0
+    },
+    "h026_scale": 1.0,
+    "signals": {
+      "h026": {
+        "top_n": [
+          "IBB"
+        ]
+      }
+    },
+    "trades": [
+      {
+        "symbol": "IBB",
+        "action": "BUY",
+        "qty": 27.144864,
+        "est_value": 5114.64,
+        "reason": "target $5,115, current $0",
+        "order_id": "34dd12f0-7325-4d08-8890-853296df9746",
+        "submitted_at": "2026-06-29T09:49:25.872878"
+      }
+    ]
   }
 ]

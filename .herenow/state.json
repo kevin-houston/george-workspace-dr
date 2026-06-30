@@ -200,6 +200,12 @@
       "claimToken": "bae6cd13a08348e00ca2ec71dd402ec10802b903b9d510ae5a967aa4a3221690",
       "claimUrl": "https://here.now/claim?slug=dapper-mirage-7qbd&token=bae6cd13a08348e00ca2ec71dd402ec10802b903b9d510ae5a967aa4a3221690",
       "expiresAt": "2026-06-28T09:10:19.586Z"
+    },
+    "cobalt-bodhi-vnwm": {
+      "siteUrl": "https://cobalt-bodhi-vnwm.here.now/",
+      "claimToken": "52669df8964aca2f3309e9eb1bec7376057af153b1c29e63787583f053eb87f7",
+      "claimUrl": "https://here.now/claim?slug=cobalt-bodhi-vnwm&token=52669df8964aca2f3309e9eb1bec7376057af153b1c29e63787583f053eb87f7",
+      "expiresAt": "2026-06-30T09:04:41.180Z"
     }
   }
 }
