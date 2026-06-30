@@ -10,7 +10,7 @@
   "target_hypothesis_id": "H350",
   "target_script": "backtesting/daily/run_h350.py",
   "gate": "OOS WR > 81.8% AND n >= 20 (H174 baselines)",
-  "apply_status": "pending",
+  "apply_status": "applied",
   "wiki_page": "algorithms/event-driven.md",
   "prior_hypothesis": "H174",
   "implementation_notes": [
@@ -18,7 +18,9 @@
     "Compute: lm_uncertainty_ratio = count(LM_uncertainty_words in 8-K text) / total_word_count",
     "Filter gate: only enter PEAD trade if lm_uncertainty_ratio < median(historical 8-K uncertainty ratios)",
     "Backtest: apply filter retroactively to all historical H174 events (n=22 OOS) and check if WR improves",
-    "Expected sample reduction: ~25-30% (top half uncertainty excluded) → n_oos ~15-16, may violate n>=20 gate",
+    "Expected sample reduction: ~25-30% (top half uncertainty excluded) \u2192 n_oos ~15-16, may violate n>=20 gate",
     "Alternative: use tercile split instead of median to keep more events"
-  ]
+  ],
+  "applied_at": "2026-06-30",
+  "applied_changes": "Added h350_status stub to hypothesis-log.md frontmatter"
 }

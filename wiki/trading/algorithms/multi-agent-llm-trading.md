@@ -252,7 +252,7 @@ At ~50 paper trades/year, even the most expensive setup costs <$100/year. Not a 
 | Agent Market Arena | 2510.11695 | 2025 | Framework > LLM backbone | High — benchmark validates architecture primacy |
 | Reliability Taxonomy | 2603.27539 | 2026 | 5 eval failures; CBS metric | Critical — apply before trusting any paper |
 | MadEvolve | 2605.23007 | 2025 | Evolutionary island model for strategy params | Low-medium — crypto only, future direction |
-| Reproducibility Audit | 2605.19337 | 2026 | 0/19 fully reproducible; 1/19 has transaction costs | Critical — validates our eval checklist |
+| Reproducibility Audit | 2605.19337 | 2026 | 2/19 extractable protocols; 0/19 fully reproducible artifacts | Critical — validates our eval checklist |
 | StockBench | 2510.02209 | 2025 | Most LLMs fail to beat buy-and-hold | High — validates signal-generator role |
 | Self-Driving Portfolio | 2604.02279 | 2026 | 50-agent diversity ensemble; meta-agent weighting | Medium — informs H318 proposal |
 
@@ -280,15 +280,31 @@ Architecture note: agents 1+2 are deterministic (existing code); agent 3 adds th
 
 ## Reproducibility Crisis (arXiv:2605.19337, May 2026)
 
-Systematic audit of 77 LLM-based trading agent studies:
-- **2/19** reported extractable, time-consistent evaluation protocols
+Systematic audit of 77 LLM-based trading agent studies (screened through 2026-03-09); primary empirical subset n=19 satisfying Action Output + Closed-Loop Evaluation:
+- **2/19** reported extractable, time-consistent evaluation protocols (extractable = train/test split clearly stated and recoverable)
 - **1/19** included realistic transaction costs
 - **1/19** addressed survivorship/universe handling
-- **0/19** achieved R3 reproducibility (full re-runnable artifacts)
+- **0/19** achieved R3 reproducibility (full re-runnable artifacts with code + data)
+
+**Distinction**: "2/19 extractable protocol" (this audit) vs "0/19 fully reproducible" (arXiv:2603.27539 May 2026 reliability taxonomy) are different metrics — an extractable protocol means the split was stated; full reproducibility means code, data, and environment are available to re-run. Both metrics converge on the same conclusion: LLM trading research is not reproducible.
+
+### 5-Component LLM Trading Agent Taxonomy (Xia et al. 2026)
+
+The paper reframes LLM trading agents as **expert-system decision pipelines** with five components:
+
+| Component | What it does | Common failure modes |
+|-----------|-------------|---------------------|
+| **Perceive** | Market data + news ingestion | Look-ahead via LLM training data |
+| **Retrieve** | Context from memory/RAG | Stale context, retrieval hallucination |
+| **Reason** | Decision logic (CoT, debate, vote) | Reasoning errors on quantitative inputs |
+| **Emit** | Tradable action output | Ambiguous sizing, missing risk limits |
+| **Adapt** | Feedback loop from outcomes | Catastrophic forgetting, overfitting to recent trades |
+
+Most papers implement Perceive+Reason+Emit only; Retrieve and Adapt are frequently omitted.
 
 **Implication for H274/H279/H280:** Reported Sharpe ratios (e.g., HedgeAgents 2.41) should be treated with extreme skepticism. Likely inflated by: (1) LLM knowledge lookahead (training data includes test period), (2) missing transaction costs, (3) cherry-picked windows.
 
-**Action:** Before implementing any LLM-as-signal hypothesis, require: (1) strict OOS data cutoff, (2) transaction cost model, (3) comparison to H312-B (OOS Sharpe 1.202) as hurdle — not SPY.
+**Action:** Before implementing any LLM-as-signal hypothesis, require: (1) strict OOS data cutoff (after LLM training cutoff), (2) transaction cost model, (3) comparison to H312-B (OOS Sharpe 1.202) as hurdle — not SPY.
 
 ---
 
