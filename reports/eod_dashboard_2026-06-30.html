@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paper Trading — 2026-06-30</title>
+<style>
+  :root{--bg:#0f172a;--s1:#1e293b;--s2:#263248;--bd:#334155;--tx:#e2e8f0;--mu:#94a3b8;--gr:#4ade80;--rd:#f87171}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.5}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1180px;margin:0 auto;padding:24px 16px}
+  header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;border-bottom:1px solid var(--bd);padding-bottom:16px}
+  header h1{font-size:1.4rem;font-weight:700}
+  .gen{color:var(--mu);font-size:0.78rem;text-align:right}
+  .error-banner{background:#7f1d1d40;border:1px solid var(--rd);border-radius:8px;padding:10px 14px;margin-bottom:18px;color:var(--rd);font-size:0.85rem}
+  /* Summary bar */
+  .summary-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:28px}
+  .sum-card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+  .sum-label{color:var(--mu);font-size:0.71rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+  .sum-val{font-size:1.3rem;font-weight:700}
+  .sum-sub{color:var(--mu);font-size:0.76rem;margin-top:2px}
+  /* Section titles */
+  .sec-title{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin:28px 0 12px;display:flex;align-items:center;gap:8px}
+  .sec-title::after{content:"";flex:1;height:1px;background:var(--bd)}
+  .sec-header{margin:28px 0 12px;font-size:1rem;padding-left:12px}
+  .subsec-label{color:var(--mu);font-size:0.71rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin:14px 0 6px}
+  /* Strategy tiles */
+  .tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:32px}
+  .tile{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
+  .tile-header{display:flex;justify-content:space-between;align-items:flex-start}
+  .tile-name{font-weight:700;font-size:0.95rem}
+  .tile-type{color:var(--mu);font-size:0.73rem;margin-top:2px}
+  .status-badge{font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
+  .status-badge.active{background:#14532d40;color:#4ade80;border:1px solid #4ade8040}
+  .status-badge.stub{background:#1e293b;color:#64748b;border:1px solid #334155}
+  /* Equity bar */
+  .equity-bar{display:flex;align-items:center;gap:10px;background:var(--s2);border-radius:8px;padding:10px 12px}
+  .eq-start,.eq-current,.eq-return{display:flex;flex-direction:column}
+  .eq-label{color:var(--mu);font-size:0.67rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+  .eq-val{font-size:1.0rem;font-weight:700}
+  .eq-arrow{color:var(--mu);font-size:1.1rem;flex-shrink:0}
+  .eq-current{flex:1}
+  /* Sharpe pair */
+  .sharpe-pair{display:flex;align-items:center;gap:8px;font-size:0.8rem}
+  .sp-label{color:var(--mu);font-size:0.7rem;text-transform:uppercase;letter-spacing:.04em}
+  .sp-val{font-weight:700;font-size:0.95rem}
+  .sp-divider{color:var(--mu);font-size:0.75rem;padding:0 2px}
+  /* Meta row */
+  .tile-meta{display:flex;gap:10px}
+  .meta-item{background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:6px 10px;flex:1}
+  .meta-label{color:var(--mu);font-size:0.65rem;text-transform:uppercase;letter-spacing:.04em;display:block}
+  .meta-val{font-weight:700;font-size:0.85rem;margin-top:1px;display:block}
+  .tile-positions{font-size:0.8rem;color:var(--mu)}
+  /* Tables */
+  table{width:100%;border-collapse:collapse;background:var(--s1);border-radius:10px;overflow:hidden;border:1px solid var(--bd)}
+  th{background:var(--s2);color:var(--mu);font-weight:600;font-size:0.71rem;text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;text-align:left}
+  td{padding:8px 12px;border-top:1px solid var(--bd);font-size:0.84rem}
+  tr:hover td{background:var(--s2)}
+  /* Stat row */
+  .stat-row{display:flex;gap:10px;flex-wrap:wrap}
+  .stat{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:9px 14px;min-width:90px}
+  .stat-label{color:var(--mu);font-size:0.68rem;text-transform:uppercase;letter-spacing:.04em}
+  .stat-val{font-size:1.05rem;font-weight:700;margin-top:2px}
+  /* Logs */
+  .log-section{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:10px}
+  .log-label{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin-bottom:6px}
+  .log-line{font-family:"SF Mono","Fira Code",monospace;font-size:0.7rem;padding:1px 0;white-space:pre-wrap;word-break:break-all}
+  .log-empty{color:var(--mu);font-size:0.8rem;font-style:italic}
+  /* Layout */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.two-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container" id="top">
+
+<header>
+  <div>
+    <h1>Paper Trading Dashboard</h1>
+    <div style="color:var(--mu);font-size:0.82rem;margin-top:2px">George · 2026-06-30</div>
+  </div>
+  <div class="gen">Generated 2026-06-30 16:30</div>
+</header>
+
+
+
+<!-- Account summary -->
+<div class="summary-bar">
+  <div class="sum-card">
+    <div class="sum-label">Alpaca Paper Equity</div>
+    <div class="sum-val">$100,992.10</div>
+    <div class="sum-sub">Total account</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">Day P&amp;L</div>
+    <div class="sum-val" style="color:#4ade80">+$2,575.03</div>
+    <div class="sum-sub" style="color:#4ade80">+2.62%</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">Buying Power</div>
+    <div class="sum-val">$261,087.82</div>
+    <div class="sum-sub">Available</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">Virtual Portfolio</div>
+    <div class="sum-val">$30,153.91</div>
+    <div class="sum-sub" style="color:#4ade80">+0.51% vs $30,000 start</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">Alpaca Positions</div>
+    <div class="sum-val">12</div>
+    <div class="sum-sub">Active orders</div>
+  </div>
+</div>
+
+<!-- Strategy tiles -->
+<div class="sec-title">Strategies — $5,000 each</div>
+<div class="tile-grid">
+
+<div class="tile" style="border-top:3px solid #3b82f6">
+  <div class="tile-header">
+    <div>
+      <div class="tile-name" style="color:#3b82f6">ETF Rotation</div>
+      <div class="tile-type">ETF Momentum · Monthly</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <span class="status-badge active">Active</span>
+      <svg width="120" height="36" viewBox="0 0 120 36"><path d="M 0.0,34.0 L 17.1,29.8 L 34.3,29.8 L 51.4,23.8 L 68.6,23.8 L 85.7,10.2 L 102.9,10.2 L 120.0,2.0" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <div class="equity-bar">
+    <div class="eq-start">
+      <div class="eq-label">Start</div>
+      <div class="eq-val">$5,000.00</div>
+    </div>
+    <div class="eq-arrow">→</div>
+    <div class="eq-current">
+      <div class="eq-label">Now</div>
+      <div class="eq-val" style="font-size:1.3rem">$5,153.91</div>
+    </div>
+    <div class="eq-return" style="color:#4ade80">
+      <div class="eq-label">Return</div>
+      <div class="eq-val" style="color:#4ade80">+3.08%</div>
+    </div>
+  </div>
+
+  <div class="sharpe-pair"><span class="sp-label">Backtest</span><span class="sp-val" style="color:#3b82f6">1.20</span><span class="sp-divider">vs</span><span class="sp-label">Live</span><span class="sp-val" style="color:#4ade80">14.08</span></div>
+
+  <div class="tile-meta">
+    <div class="meta-item">
+      <span class="meta-label">Closed Trades</span>
+      <span class="meta-val">4</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Win Rate</span>
+      <span class="meta-val">100%</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Cash</span>
+      <span class="meta-val">$5,153.91</span>
+    </div>
+  </div>
+
+  <div class="tile-positions">
+    <span class="meta-label">Holding: </span><span style="color:#475569">CASH</span>
+  </div>
+</div>
+
+<div class="tile" style="border-top:3px solid #06b6d4">
+  <div class="tile-header">
+    <div>
+      <div class="tile-name" style="color:#06b6d4">Global Equity Rotation</div>
+      <div class="tile-type">Global Equity · Monthly</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <span class="status-badge active">Active</span>
+      
+    </div>
+  </div>
+
+  <div class="equity-bar">
+    <div class="eq-start">
+      <div class="eq-label">Start</div>
+      <div class="eq-val">$5,000.00</div>
+    </div>
+    <div class="eq-arrow">→</div>
+    <div class="eq-current">
+      <div class="eq-label">Now</div>
+      <div class="eq-val" style="font-size:1.3rem">$5,000.00</div>
+    </div>
+    <div class="eq-return" style="color:#94a3b8">
+      <div class="eq-label">Return</div>
+      <div class="eq-val" style="color:#94a3b8">0.00%</div>
+    </div>
+  </div>
+
+  <div class="sharpe-pair"><span class="sp-label" style="color:#64748b">2004-2025 (production blend component)</span></div>
+
+  <div class="tile-meta">
+    <div class="meta-item">
+      <span class="meta-label">Closed Trades</span>
+      <span class="meta-val">0</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Win Rate</span>
+      <span class="meta-val">—</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Cash</span>
+      <span class="meta-val">$5,000.00</span>
+    </div>
+  </div>
+
+  <div class="tile-positions">
+    <span class="meta-label">Holding: </span><span style="color:#475569">CASH</span>
+  </div>
+</div>
+
+<div class="tile" style="border-top:3px solid #8b5cf6">
+  <div class="tile-header">
+    <div>
+      <div class="tile-name" style="color:#8b5cf6">Bond Rotation</div>
+      <div class="tile-type">Bond ETF · Monthly</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <span class="status-badge active">Active</span>
+      
+    </div>
+  </div>
+
+  <div class="equity-bar">
+    <div class="eq-start">
+      <div class="eq-label">Start</div>
+      <div class="eq-val">$5,000.00</div>
+    </div>
+    <div class="eq-arrow">→</div>
+    <div class="eq-current">
+      <div class="eq-label">Now</div>
+      <div class="eq-val" style="font-size:1.3rem">$5,000.00</div>
+    </div>
+    <div class="eq-return" style="color:#94a3b8">
+      <div class="eq-label">Return</div>
+      <div class="eq-val" style="color:#94a3b8">0.00%</div>
+    </div>
+  </div>
+
+  <div class="sharpe-pair"><span class="sp-label" style="color:#64748b">2004-2025 (production blend component)</span></div>
+
+  <div class="tile-meta">
+    <div class="meta-item">
+      <span class="meta-label">Closed Trades</span>
+      <span class="meta-val">0</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Win Rate</span>
+      <span class="meta-val">—</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Cash</span>
+      <span class="meta-val">$5,000.00</span>
+    </div>
+  </div>
+
+  <div class="tile-positions">
+    <span class="meta-label">Holding: </span><span style="color:#475569">CASH</span>
+  </div>
+</div>
+
+<div class="tile" style="border-top:3px solid #a78bfa">
+  <div class="tile-header">
+    <div>
+      <div class="tile-name" style="color:#a78bfa">IBS Mean-Reversion</div>
+      <div class="tile-type">IBS Mean-Reversion · Daily</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <span class="status-badge active">Active</span>
+      <svg width="120" height="36" viewBox="0 0 120 36"><path d="M 0.0,34.0 L 17.1,34.0 L 34.3,34.0 L 51.4,34.0 L 68.6,34.0 L 85.7,34.0 L 102.9,34.0 L 120.0,34.0" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <div class="equity-bar">
+    <div class="eq-start">
+      <div class="eq-label">Start</div>
+      <div class="eq-val">$5,000.00</div>
+    </div>
+    <div class="eq-arrow">→</div>
+    <div class="eq-current">
+      <div class="eq-label">Now</div>
+      <div class="eq-val" style="font-size:1.3rem">$5,000.00</div>
+    </div>
+    <div class="eq-return" style="color:#94a3b8">
+      <div class="eq-label">Return</div>
+      <div class="eq-val" style="color:#94a3b8">0.00%</div>
+    </div>
+  </div>
+
+  <div class="sharpe-pair"><span class="sp-label" style="color:#64748b">H112 confirmed</span></div>
+
+  <div class="tile-meta">
+    <div class="meta-item">
+      <span class="meta-label">Closed Trades</span>
+      <span class="meta-val">0</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Win Rate</span>
+      <span class="meta-val">—</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Cash</span>
+      <span class="meta-val">$5,000.00</span>
+    </div>
+  </div>
+
+  <div class="tile-positions">
+    <span class="meta-label">Holding: </span><span style="color:#475569">CASH</span>
+  </div>
+</div>
+
+<div class="tile" style="border-top:3px solid #f59e0b">
+  <div class="tile-header">
+    <div>
+      <div class="tile-name" style="color:#f59e0b">PEAD NLP</div>
+      <div class="tile-type">PEAD Earnings NLP · Daily</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <span class="status-badge active">Active</span>
+      
+    </div>
+  </div>
+
+  <div class="equity-bar">
+    <div class="eq-start">
+      <div class="eq-label">Start</div>
+      <div class="eq-val">$5,000.00</div>
+    </div>
+    <div class="eq-arrow">→</div>
+    <div class="eq-current">
+      <div class="eq-label">Now</div>
+      <div class="eq-val" style="font-size:1.3rem">$5,000.00</div>
+    </div>
+    <div class="eq-return" style="color:#94a3b8">
+      <div class="eq-label">Return</div>
+      <div class="eq-val" style="color:#94a3b8">0.00%</div>
+    </div>
+  </div>
+
+  <div class="sharpe-pair"><span class="sp-label" style="color:#64748b">OOS n=22</span></div>
+
+  <div class="tile-meta">
+    <div class="meta-item">
+      <span class="meta-label">Closed Trades</span>
+      <span class="meta-val">0</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Win Rate</span>
+      <span class="meta-val">—</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Cash</span>
+      <span class="meta-val">$5,000.00</span>
+    </div>
+  </div>
+
+  <div class="tile-positions">
+    <span class="meta-label">Holding: </span><span style="color:#475569">CASH</span>
+  </div>
+</div>
+
+<div class="tile" style="border-top:3px solid #ec4899">
+  <div class="tile-header">
+    <div>
+      <div class="tile-name" style="color:#ec4899">Inside-Bar Coiled Spring</div>
+      <div class="tile-type">Inside-Bar Coiled Spring · Daily</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+      <span class="status-badge stub">Stub</span>
+      
+    </div>
+  </div>
+
+  <div class="equity-bar">
+    <div class="eq-start">
+      <div class="eq-label">Start</div>
+      <div class="eq-val">$5,000.00</div>
+    </div>
+    <div class="eq-arrow">→</div>
+    <div class="eq-current">
+      <div class="eq-label">Now</div>
+      <div class="eq-val" style="font-size:1.3rem">$5,000.00</div>
+    </div>
+    <div class="eq-return" style="color:#94a3b8">
+      <div class="eq-label">Return</div>
+      <div class="eq-val" style="color:#94a3b8">0.00%</div>
+    </div>
+  </div>
+
+  <div class="sharpe-pair"><span class="sp-label">Backtest</span><span class="sp-val" style="color:#ec4899">1.77</span><span class="sp-divider">vs</span><span class="sp-label">Live</span><span class="sp-val" style="color:#94a3b8">—</span></div>
+
+  <div class="tile-meta">
+    <div class="meta-item">
+      <span class="meta-label">Closed Trades</span>
+      <span class="meta-val">0</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Win Rate</span>
+      <span class="meta-val">—</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Cash</span>
+      <span class="meta-val">$5,000.00</span>
+    </div>
+  </div>
+
+  <div class="tile-positions">
+    <span class="meta-label">Holding: </span><span style="color:#475569">CASH</span>
+  </div>
+</div>
+</div>
+
+<!-- H174 PEAD detail -->
+<div class="sec-title">H174 PEAD-NLP — Detail</div>
+
+<div class="stat-row" style="margin-bottom:14px">
+  <div class="stat"><div class="stat-label">Trades</div><div class="stat-val">0</div></div>
+  <div class="stat"><div class="stat-label">Win Rate</div><div class="stat-val" style="color:#f87171">0%</div></div>
+  <div class="stat"><div class="stat-label">Avg Win</div><div class="stat-val" style="color:#4ade80">+0.0%</div></div>
+  <div class="stat"><div class="stat-label">Avg Loss</div><div class="stat-val" style="color:#f87171">0.0%</div></div>
+</div>
+<div class="two-col">
+  <div>
+    <div class="subsec-label">Open Positions</div>
+    <table>
+      <thead><tr><th>Ticker</th><th>Entry Date</th><th>Held</th><th style="text-align:right">Entry Price</th><th style="text-align:right">Cost</th></tr></thead>
+      <tbody><tr><td colspan="5" style="text-align:center;color:#64748b;padding:14px">No open PEAD positions</td></tr></tbody>
+    </table>
+    <div class="subsec-label" style="margin-top:14px">Recent Closed</div>
+    <table>
+      <thead><tr><th>Ticker</th><th>Dates</th><th style="text-align:right">Prices</th><th style="text-align:right">Return</th></tr></thead>
+      <tbody><tr><td colspan="4" style="text-align:center;color:#64748b;padding:14px">No closed trades yet</td></tr></tbody>
+    </table>
+  </div>
+  <div>
+    <div class="subsec-label">Tonight's Watchlist (2026-06-29)</div>
+    <p style="color:#64748b;padding:10px 0">No candidates tonight (no earnings)</p>
+  </div>
+</div>
+
+<!-- Recent fills -->
+<div class="sec-title">Recent Filled Orders</div>
+<table>
+  <thead><tr><th>Symbol</th><th>Side</th><th style="text-align:right">Fill Price</th><th style="text-align:right">Notional</th><th>Filled At</th></tr></thead>
+  <tbody><tr><td colspan="5" style="text-align:center;color:#64748b;padding:14px">No recent fills</td></tr></tbody>
+</table>
+
+<!-- Activity logs -->
+<div class="sec-title">Activity Logs</div>
+<div class="log-section"><div class="log-label">PEAD Overnight — 11 PM scoring</div><div class="log-line" style="color:#94a3b8">[2026-06-23 23:01:53] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-23 23:01:53] PEAD overnight pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-23 23:01:53] Scanning earnings calendar…</div><div class="log-line" style="color:#94a3b8">[2026-06-23 23:02:19]   Tickers with recent earnings: none</div><div class="log-line" style="color:#94a3b8">[2026-06-23 23:02:19] No earnings tonight. Watchlist cleared.</div><div class="log-line" style="color:#94a3b8">[2026-06-24 23:01:13] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-24 23:01:13] PEAD overnight pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-24 23:01:13] Scanning earnings calendar…</div><div class="log-line" style="color:#94a3b8">[2026-06-24 23:02:23]   Tickers with recent earnings: none</div><div class="log-line" style="color:#94a3b8">[2026-06-24 23:02:23] No earnings tonight. Watchlist cleared.</div><div class="log-line" style="color:#94a3b8">[2026-06-25 23:01:36] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-25 23:01:36] PEAD overnight pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-25 23:01:36] Scanning earnings calendar…</div><div class="log-line" style="color:#94a3b8">[2026-06-25 23:02:06]   Tickers with recent earnings: none</div><div class="log-line" style="color:#94a3b8">[2026-06-25 23:02:06] No earnings tonight. Watchlist cleared.</div><div class="log-line" style="color:#94a3b8">[2026-06-26 23:01:23] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-26 23:01:23] PEAD overnight pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-26 23:01:23] Scanning earnings calendar…</div><div class="log-line" style="color:#94a3b8">[2026-06-26 23:01:47]   Tickers with recent earnings: none</div><div class="log-line" style="color:#94a3b8">[2026-06-26 23:01:47] No earnings tonight. Watchlist cleared.</div><div class="log-line" style="color:#94a3b8">[2026-06-29 23:01:43] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-29 23:01:43] PEAD overnight pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-29 23:01:43] Scanning earnings calendar…</div><div class="log-line" style="color:#94a3b8">[2026-06-29 23:02:19]   Tickers with recent earnings: none</div><div class="log-line" style="color:#94a3b8">[2026-06-29 23:02:19] No earnings tonight. Watchlist cleared.</div></div>
+<div class="log-section"><div class="log-label">PEAD Open — 9:30 AM gap detection</div><div class="log-line" style="color:#94a3b8">[2026-06-23 08:47:41] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-23 08:47:41] PEAD open pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-23 08:47:41] Candidates from overnight: ['FDX', 'MU']</div><div class="log-line" style="color:#94a3b8">[2026-06-23 08:47:41] H174 strategy equity: $5,000</div><div class="log-line" style="color:#94a3b8">[2026-06-23 08:47:44]   FDX: prior_close=328.78 current=324.12 gap=-1.4%</div><div class="log-line" style="color:#94a3b8">[2026-06-23 08:47:44]   FDX: gap -1.4% < 3% threshold — skip</div><div class="log-line" style="color:#94a3b8">[2026-06-23 08:47:45]   MU: prior_close=1211.38 current=1072.67 gap=-11.5%</div><div class="log-line" style="color:#94a3b8">[2026-06-23 08:47:45]   MU: gap -11.5% < 3% threshold — skip</div><div class="log-line" style="color:#94a3b8">[2026-06-23 08:47:45] No new positions entered today.</div><div class="log-line" style="color:#4ade80">[2026-06-23 08:47:45] Open pass complete.</div><div class="log-line" style="color:#94a3b8">[2026-06-24 08:32:22] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-24 08:32:22] PEAD open pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-24 08:32:22] No watchlist for today or stale. Nothing to do.</div><div class="log-line" style="color:#94a3b8">[2026-06-25 08:34:32] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-25 08:34:32] PEAD open pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-25 08:34:32] No watchlist for today or stale. Nothing to do.</div><div class="log-line" style="color:#94a3b8">[2026-06-26 08:32:20] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-26 08:32:20] PEAD open pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-26 08:32:20] No watchlist for today or stale. Nothing to do.</div><div class="log-line" style="color:#94a3b8">[2026-06-29 08:32:16] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-29 08:32:16] PEAD open pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-29 08:32:16] No watchlist for today or stale. Nothing to do.</div><div class="log-line" style="color:#94a3b8">[2026-06-30 08:32:19] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-30 08:32:19] PEAD open pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-30 08:32:19] No watchlist for today or stale. Nothing to do.</div></div>
+<div class="log-section"><div class="log-label">PEAD Exits — 3:45 PM MOC</div><div class="log-line" style="color:#94a3b8">[2026-06-18 14:45:06] No open PEAD positions.</div><div class="log-line" style="color:#94a3b8">[2026-06-19 14:45:08] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-19 14:45:08] PEAD exits pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-19 14:45:08] No open PEAD positions.</div><div class="log-line" style="color:#94a3b8">[2026-06-22 14:45:11] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-22 14:45:11] PEAD exits pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-22 14:45:11] No open PEAD positions.</div><div class="log-line" style="color:#94a3b8">[2026-06-23 14:45:33] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-23 14:45:33] PEAD exits pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-23 14:45:33] No open PEAD positions.</div><div class="log-line" style="color:#94a3b8">[2026-06-24 14:45:05] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-24 14:45:05] PEAD exits pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-24 14:45:05] No open PEAD positions.</div><div class="log-line" style="color:#94a3b8">[2026-06-25 17:24:09] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-25 17:24:09] PEAD exits pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-25 17:24:09] No open PEAD positions.</div><div class="log-line" style="color:#94a3b8">[2026-06-26 14:45:07] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-26 14:45:07] PEAD exits pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-26 14:45:07] No open PEAD positions.</div><div class="log-line" style="color:#94a3b8">[2026-06-29 14:45:13] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-29 14:45:13] PEAD exits pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-29 14:45:13] No open PEAD positions.</div><div class="log-line" style="color:#94a3b8">[2026-06-30 14:45:13] =======================================================</div><div class="log-line" style="color:#94a3b8">[2026-06-30 14:45:13] PEAD exits pass starting</div><div class="log-line" style="color:#94a3b8">[2026-06-30 14:45:13] No open PEAD positions.</div></div>
+
+</div>
+</body>
+</html>

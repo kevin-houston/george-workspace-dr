@@ -1,0 +1,61 @@
+{
+  "hypothesis": "H350",
+  "title": "Text Uncertainty Anti-Filter for H174 PEAD (LM uncertainty ratio)",
+  "status": "SOFT",
+  "h174_baseline": {
+    "n": 22,
+    "wr": 0.8182,
+    "mr": 0.0689
+  },
+  "is_thresholds": {
+    "V1_median": 0.016605,
+    "V2_p67": 0.019298,
+    "V3_p75": 0.020596,
+    "V4_p90": 0.025545
+  },
+  "is_lm_n": 104,
+  "oos_lm_coverage": 22,
+  "variants": {
+    "V1_median": {
+      "threshold": 0.016605278027292475,
+      "n": 18,
+      "wr": 0.8333333333333334,
+      "mr": 0.07520640477312648,
+      "wr_improved": true,
+      "n_ok": false,
+      "verdict": "soft"
+    },
+    "V2_p67": {
+      "threshold": 0.019298170340728015,
+      "n": 19,
+      "wr": 0.8421052631578947,
+      "mr": 0.07185989452890787,
+      "wr_improved": true,
+      "n_ok": false,
+      "verdict": "soft"
+    },
+    "V3_p75": {
+      "threshold": 0.020595958255819405,
+      "n": 19,
+      "wr": 0.8421052631578947,
+      "mr": 0.07185989452890787,
+      "wr_improved": true,
+      "n_ok": false,
+      "verdict": "soft"
+    },
+    "V4_p90": {
+      "threshold": 0.025545294426373395,
+      "n": 22,
+      "wr": 0.8181818181818182,
+      "mr": 0.06893128467638064,
+      "wr_improved": false,
+      "n_ok": true,
+      "verdict": "FAIL"
+    }
+  },
+  "primary_variant": "V2_p67",
+  "sources": [
+    "Hong, Kottimukkalur & Noh (2026) JBF vol.182",
+    "Loughran & McDonald (2011) JF \u2014 LM uncertainty wordlist"
+  ]
+}
