@@ -1,0 +1,14 @@
+{
+  "id": "2026-07-01-auto-alpha-wiki",
+  "date": "2026-07-01",
+  "source": "arXiv:2510.11616 + arXiv:2602.07085 + arXiv:2604.26747 + arXiv:2508.16334 + arXiv:2604.09601",
+  "source_url": "https://arxiv.org/abs/2508.16334",
+  "title": "Wiki update: new auto-alpha-discovery.md page (algorithms section)",
+  "rationale": "Five recent papers (2025-2026) on AI-driven alpha factor discovery cover H347/H349/H288/H352 design space. No wiki page existed for this topic. Page covers: Attention Factors (H347, OOS Sharpe 2.3 net, GPU required), QuantaAlpha (H349, trajectory-level evolution, pip install), Constrained DSL (H288, crypto OOS 1.55, needs equity DSL redesign), TreEvo (H352 candidate, 20 min runtime, $3-10, best for prototyping), and Hubble (AST sandbox + RAG, US 500-stock tested Jun 2025-Mar 2026). Includes implementation roadmap, survivorship bias caveats, and comparison table. Directly addresses 3 queued hypotheses and adds 1 new candidate.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/auto-alpha-discovery.md",
+  "content": "already written — file created at /workspace/agent/wiki/trading/algorithms/auto-alpha-discovery.md",
+  "action": "write",
+  "apply_status": "applied"
+}

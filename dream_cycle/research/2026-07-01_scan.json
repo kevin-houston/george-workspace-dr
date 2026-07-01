@@ -1,0 +1,175 @@
+{
+  "date": "2026-07-01",
+  "scan_angles": 5,
+  "papers_reviewed": 14,
+  "staged": 3,
+  "findings": [
+    {
+      "id": "arxiv:2510.11616",
+      "title": "Attention Factors for Statistical Arbitrage",
+      "authors": "Epstein, Wang, Choi & Pelger (Stanford)",
+      "year": 2025,
+      "angle": 4,
+      "relevance": 5,
+      "summary": "Conditional latent factors via attention over 39 firm characteristics. OOS Sharpe 2.3 net (5bp) on US 500-stock 1998-2021. Joint one-step optimization of factor structure + trading. GPU-intensive but no recurring API cost. H347 design.",
+      "action": "H347 — implement PyTorch model on H198 universe; IS 2000-2015, OOS 2016-2026",
+      "staged": false,
+      "notes": "Already in H347 queue. Wiki page auto-alpha-discovery.md written tonight covers this fully."
+    },
+    {
+      "id": "arxiv:2602.07085",
+      "title": "QuantaAlpha: Evolutionary Framework for LLM-Driven Alpha Mining",
+      "authors": "Han et al. (Tsinghua/PKU/CMU/HKUST)",
+      "year": 2026,
+      "angle": 4,
+      "relevance": 4,
+      "summary": "Trajectory-level LLM evolution for alpha factor discovery. CSI300 IC=0.1501. S&P500 transfer: 19.1% cumulative excess (4yr). pip install quantalpha. $5-20/run. H349 design.",
+      "action": "H349 — already in queue; pip install quantalpha and run on H198 30-stock IS 2016-2021",
+      "staged": false,
+      "notes": "Already in H349 queue."
+    },
+    {
+      "id": "arxiv:2604.26747",
+      "title": "From Hypotheses to Factors: Constrained LLM Agents in Cryptocurrency Markets",
+      "authors": "Huang et al. (HKUST)",
+      "year": 2026,
+      "angle": 1,
+      "relevance": 3,
+      "summary": "Reproducible LLM factor discovery via restricted DSL (no lookahead). Crypto OOS Sharpe 1.55, 44.55% annualized. Needs equity DSL redesign for US large-cap. H288 design.",
+      "action": "H288 — redesign DSL grammar for equity; test IS 2020-2022, OOS 2023+",
+      "staged": false,
+      "notes": "Already in H288 queue."
+    },
+    {
+      "id": "arxiv:2508.16334",
+      "title": "TreEvo: Tree-Structured Thought Evolution for Alpha Mining",
+      "authors": "Ren et al.",
+      "year": 2025,
+      "angle": 4,
+      "relevance": 5,
+      "summary": "Hierarchical tree-structured LLM evolution. SPX IC=0.0317, +10% over EoH. 200 evaluations in 20 min, $3-10 API cost. Eliminates positional bias in flat-prompt factor evolution. Key ablation: tree-structure = +23.98% IC gain, operators = +10.19% additional. Compatible with DeepSeek V3, Qwen3, GPT-5.1.",
+      "action": "H352 NEW — implement TreEvo loop; IS 2016-2022, OOS 2023-2026; gate: IC >= 0.025 OOS",
+      "staged": true,
+      "staged_file": "1_treevo_h352_stub.json"
+    },
+    {
+      "id": "arxiv:2604.09601",
+      "title": "Hubble: LLM-Driven Agentic Framework for Alpha Discovery",
+      "authors": "Shi et al.",
+      "year": 2026,
+      "angle": 4,
+      "relevance": 4,
+      "summary": "AST sandbox + dual-channel RAG (success + failure) + family-aware factor selection. Tested US 500-stock Jun 2025-Mar 2026. 0% crashes. Range/volatility factors positive OOS; trend factors decay. $25-50/run.",
+      "action": "wiki reference only — included in auto-alpha-discovery.md",
+      "staged": false,
+      "notes": "Covered in wiki page. Too expensive for regular nightly runs."
+    },
+    {
+      "id": "arxiv:2601.06499",
+      "title": "Cross-Market Alpha: Testing Short-Term Trading Factors in the U.S. Market via Double-Selection LASSO",
+      "authors": "Du, Walter & Ulrich",
+      "year": 2026,
+      "angle": 3,
+      "relevance": 4,
+      "summary": "17 price-volume/microstructural signals from Chinese A-share markets identified via double-selection LASSO as significant on US S&P 500 (2002-2022) after controlling for 151 established factors. Signals include: rank of delayed price-gap correlation, overnight gap return, volume-intraday correlation, and 14 others. Direct extension candidate for H198 signal set.",
+      "action": "H353 NEW — test transfer signals as H198 composite extension; IS 2013-2020, OOS 2021-2026",
+      "staged": true,
+      "staged_file": "2_cross_market_alpha_h353_stub.json"
+    },
+    {
+      "id": "arxiv:2606.29591",
+      "title": "The Bounce Has No Direction: Sign, Magnitude, and Microstructure of Equity Return Predictability",
+      "authors": "Portnaya",
+      "year": 2026,
+      "angle": 3,
+      "relevance": 2,
+      "summary": "FRI decomposition shows SPY lag-1 autocorrelation driven by magnitude (bid-ask bounce) not direction. Lag-3 directional reversal signal hidden from standard tests. Operates at intraday/daily frequency — not actionable at monthly rebalance.",
+      "action": "none — microstructure only, not applicable to monthly strategies",
+      "staged": false
+    },
+    {
+      "id": "arxiv:2604.19476",
+      "title": "Cross-Stock Predictability via LLM-Augmented Semantic Networks",
+      "authors": "Huang, Fan, Hu & Ye",
+      "year": 2026,
+      "angle": 1,
+      "relevance": 4,
+      "summary": "10-K embeddings → sparse candidate graph → LLM filters edges by economic relations → mean-reversion signals. L-S Sharpe 0.742→0.820, MaxDD -10.47%→-7.85%. S&P 500 2011-2019. H319 design already in queue.",
+      "action": "H319 — already queued; this paper confirms specific Sharpe improvement from LLM edge filtering",
+      "staged": false,
+      "notes": "Already in H319 queue. Sharpe 0.742→0.820 is modest but consistent with LLM filtering providing signal quality improvement."
+    },
+    {
+      "id": "arxiv:2602.07048",
+      "title": "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+      "authors": "unknown (2026)",
+      "year": 2026,
+      "angle": 1,
+      "relevance": 3,
+      "summary": "LLM suppresses statistically fragile lead-lag relationships in Kalshi prediction markets. ADF + Granger causality with LLM semantic filter. Kalshi data Oct 2021-Nov 2025. Relevant for H319 concept but prediction markets not equities.",
+      "action": "none — prediction markets context; concept transferred to H319",
+      "staged": false
+    },
+    {
+      "id": "acl:2025.finnlp-2.13",
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "authors": "unknown (ACL 2025 FINNLP Workshop)",
+      "year": 2025,
+      "angle": 2,
+      "relevance": 4,
+      "summary": "FinBERT + LLM ensemble achieves 57.6-58.3% directional accuracy on earnings-day PEAD. H348 design already in queue.",
+      "action": "H348 — already in queue (LLM-Ensemble PEAD score upgrade)",
+      "staged": false,
+      "notes": "Already in H348 queue."
+    },
+    {
+      "id": "arxiv:2511.03628",
+      "title": "LiveTradeBench: Seeking Real-World Alpha with Large Language Models",
+      "authors": "Yu, Li & You",
+      "year": 2025,
+      "angle": 4,
+      "relevance": 2,
+      "summary": "Benchmark of 21 LLMs on live daily trading (US stocks + Polymarket). High LMArena score ≠ superior trading. Models show distinct portfolio styles. Daily rebalancing — not applicable to monthly strategies.",
+      "action": "none — daily trading benchmark not directly applicable to monthly rebalance",
+      "staged": false
+    },
+    {
+      "id": "arxiv:2603.27539",
+      "title": "Toward Reliable Evaluation of LLM-Based Financial Multi-Agent Systems",
+      "authors": "unknown (2026)",
+      "year": 2026,
+      "angle": 4,
+      "relevance": 3,
+      "summary": "Taxonomy of 12 LLM trading systems (2023-2026). Coordination primacy finding: coordination mechanism > individual model quality. Already staged in previous dream cycle.",
+      "action": "already staged (2026-06-26 cycle)",
+      "staged": false
+    },
+    {
+      "id": "github:QuantaAlpha/QuantaAlpha",
+      "title": "QuantaAlpha GitHub Repository",
+      "authors": "QuantaAlpha team (Tsinghua/PKU/CMU/HKUST)",
+      "year": 2026,
+      "angle": 5,
+      "relevance": 4,
+      "summary": "pip install quantalpha. Founded April 2025. Evolutionary LLM alpha mining. yfinance data support for US market (inferred from S&P500 transfer results in paper). Key install: pip install quantalpha + OPENAI_API_KEY.",
+      "action": "H349 implementation — pip install quantalpha, test on H198 30-stock IS 2016-2021",
+      "staged": false
+    },
+    {
+      "id": "github:zhutoutoutousan/worldquant-miner",
+      "title": "worldquant-miner: WorldQuant API alpha signal generator",
+      "authors": "zhutoutoutousan",
+      "year": 2025,
+      "angle": 5,
+      "relevance": 2,
+      "summary": "Leverages WorldQuant API to generate alpha expressions. Requires WorldQuant account. Not directly useful without WQ subscription.",
+      "action": "none — requires WorldQuant subscription",
+      "staged": false
+    }
+  ],
+  "wiki_pages_written": [
+    "/workspace/agent/wiki/trading/algorithms/auto-alpha-discovery.md"
+  ],
+  "new_hypothesis_stubs": ["H352 (TreEvo)", "H353 (Cross-Market Alpha LASSO)"],
+  "existing_hypotheses_confirmed": ["H347", "H348", "H349", "H288", "H319"]
+}

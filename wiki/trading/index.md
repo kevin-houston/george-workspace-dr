@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-30 (commodity-trend-following.md expanded — H262 Bayesian multi-horizon CTA design; barbell structure arXiv:2510.23150; cherry-picking warning arXiv:2504.10914; Python implementation + regime gate)
+updated: 2026-07-01 (auto-alpha-discovery.md new — AI-driven alpha mining: Attention Factors H347 OOS Sharpe 2.3 net; QuantaAlpha H349 trajectory-level evolution pip install; TreEvo H352 candidate 20min $3-10 SPX IC=0.0317; Hubble AST sandbox US 500-stock OOS 2025-2026; Constrained DSL H288 equity adaptation path)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -50,6 +50,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Cryptocurrency Trading Strategies](algorithms/crypto-trading-strategies.md) ← new 2026-06-16 (cross-sectional momentum top-30 universe Sharpe 1.51 28d lookback; BTC 50d MA Sharpe 1.9 vs B&H 1.3; funding rate carry 6.45 full-sample but declining; Monday effect +0.51%; halving cycle positioning; ccxt/pycoingecko implementation; H302/H303 queued; max 5% portfolio allocation)
   - [Multi-Agent LLM Trading](algorithms/multi-agent-llm-trading.md) ← merged 2026-06-21 (taxonomy LLM-as-signal vs decision-maker; TradingAgents 84.9k★; HedgeAgents; Expert Investment Teams; Agent Market Arena; MadEvolve evolutionary; coordination patterns + CBS cost metric; NautilusTrader; reproducibility crisis 0/19 fully reproducible; H274 PEAD upgrade; H318 meta-learner; Self-Driving Portfolio Ang/BlackRock)
   - [Smart Money Concepts (ICT) — Order Blocks, FVGs, BOS/CHoCH](algorithms/smart-money-concepts-ict.md) ← new 2026-06-29 (H343 CONFIRMED OOS 3.182: OB strict filter on H198 acts as implicit bear-market detector; H344 CONFIRMED 36/36 params pass; H345 CONFIRMED OOS 3.337 vs baseline 2.538 on H026 ETF rotation; FVG fails monthly large-cap — fills within days; OB persists weeks; mechanism, production params, caveats)
+  - [AI-Driven Alpha Factor Discovery](algorithms/auto-alpha-discovery.md) ← new 2026-07-01 (H347/H349/H288/H352 design space; Attention Factors OOS Sharpe 2.3 net GPU-required; TreEvo H352 candidate 20min $3-10 SPX IC=0.0317 tree-structured evolution; QuantaAlpha pip install $5-20; Hubble AST sandbox US 500-stock 0% crashes; Constrained DSL equity adaptation path; implementation roadmap + survivorship bias caveats)
 - [**Shared Evaluation Checklist**](shared-eval-checklist.md) ← new 2026-06-09 (7-point standard agreed by George + Ernesto: look-ahead guard, NLP timestamp, cost model, soft OOS gate, regime coverage, survivorship bias, after-tax flag)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)
