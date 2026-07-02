@@ -1,0 +1,87 @@
+{
+  "A": {
+    "name": "Top-1 mom+invvol rank",
+    "is": {
+      "n": 96,
+      "sharpe": 1.445,
+      "cagr": 0.148,
+      "maxdd": -0.191,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.297,
+      "cagr": 0.144,
+      "maxdd": -0.102,
+      "neg_yrs": 0
+    }
+  },
+  "B": {
+    "name": "Top-2 equal-weight mom+invvol",
+    "is": {
+      "n": 96,
+      "sharpe": 1.551,
+      "cagr": 0.153,
+      "maxdd": -0.181,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.135,
+      "cagr": 0.117,
+      "maxdd": -0.13,
+      "neg_yrs": 1
+    }
+  },
+  "C": {
+    "name": "Top-1 pure 12m momentum",
+    "is": {
+      "n": 96,
+      "sharpe": 1.669,
+      "cagr": 0.201,
+      "maxdd": -0.189,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.735,
+      "cagr": 0.249,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    }
+  },
+  "D": {
+    "name": "SPY buy-and-hold",
+    "is": {
+      "n": 96,
+      "sharpe": 1.105,
+      "cagr": 0.15,
+      "maxdd": -0.194,
+      "neg_yrs": 1
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 0.977,
+      "cagr": 0.15,
+      "maxdd": -0.239,
+      "neg_yrs": 1
+    }
+  },
+  "E": {
+    "name": "Equal-weight all low-vol ETFs",
+    "is": {
+      "n": 96,
+      "sharpe": 0.919,
+      "cagr": 0.097,
+      "maxdd": -0.195,
+      "neg_yrs": 1
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 0.76,
+      "cagr": 0.085,
+      "maxdd": -0.158,
+      "neg_yrs": 1
+    }
+  }
+}

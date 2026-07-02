@@ -1,0 +1,146 @@
+{
+  "best_A": {
+    "name": "OB strict (both top-2 must have OB; else SHY)",
+    "params": "best",
+    "is": {
+      "n": 120,
+      "sharpe": 1.915,
+      "cagr": 0.092,
+      "maxdd": -0.014,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 114,
+      "sharpe": 1.421,
+      "cagr": 0.066,
+      "maxdd": -0.044,
+      "neg_yrs": 1
+    }
+  },
+  "best_B": {
+    "name": "OB lenient (\u22651 of top-2 has OB; fill 2nd slot)",
+    "params": "best",
+    "is": {
+      "n": 120,
+      "sharpe": 1.675,
+      "cagr": 0.09,
+      "maxdd": -0.049,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 114,
+      "sharpe": 1.522,
+      "cagr": 0.08,
+      "maxdd": -0.05,
+      "neg_yrs": 1
+    }
+  },
+  "best_C": {
+    "name": "OB gate (any of top-3 has OB \u2192 top-2; else SHY)",
+    "params": "best",
+    "is": {
+      "n": 120,
+      "sharpe": 1.596,
+      "cagr": 0.089,
+      "maxdd": -0.061,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 114,
+      "sharpe": 1.31,
+      "cagr": 0.073,
+      "maxdd": -0.083,
+      "neg_yrs": 1
+    }
+  },
+  "best_D": {
+    "name": "H045 baseline (12m top-2 EW, no filter)",
+    "params": "best",
+    "is": {
+      "n": 120,
+      "sharpe": 1.286,
+      "cagr": 0.078,
+      "maxdd": -0.088,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 114,
+      "sharpe": 1.112,
+      "cagr": 0.066,
+      "maxdd": -0.108,
+      "neg_yrs": 1
+    }
+  },
+  "ref_A": {
+    "name": "OB strict (both top-2 must have OB; else SHY)",
+    "params": "ref",
+    "is": {
+      "n": 120,
+      "sharpe": 1.813,
+      "cagr": 0.083,
+      "maxdd": -0.019,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 114,
+      "sharpe": 1.372,
+      "cagr": 0.056,
+      "maxdd": -0.068,
+      "neg_yrs": 1
+    }
+  },
+  "ref_B": {
+    "name": "OB lenient (\u22651 of top-2 has OB; fill 2nd slot)",
+    "params": "ref",
+    "is": {
+      "n": 120,
+      "sharpe": 1.755,
+      "cagr": 0.093,
+      "maxdd": -0.061,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 114,
+      "sharpe": 1.47,
+      "cagr": 0.076,
+      "maxdd": -0.075,
+      "neg_yrs": 1
+    }
+  },
+  "ref_C": {
+    "name": "OB gate (any of top-3 has OB \u2192 top-2; else SHY)",
+    "params": "ref",
+    "is": {
+      "n": 120,
+      "sharpe": 1.615,
+      "cagr": 0.089,
+      "maxdd": -0.061,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 114,
+      "sharpe": 1.399,
+      "cagr": 0.075,
+      "maxdd": -0.084,
+      "neg_yrs": 1
+    }
+  },
+  "ref_D": {
+    "name": "H045 baseline (12m top-2 EW, no filter)",
+    "params": "ref",
+    "is": {
+      "n": 120,
+      "sharpe": 1.286,
+      "cagr": 0.078,
+      "maxdd": -0.088,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 114,
+      "sharpe": 1.112,
+      "cagr": 0.066,
+      "maxdd": -0.108,
+      "neg_yrs": 1
+    }
+  }
+}
