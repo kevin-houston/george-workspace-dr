@@ -1,8 +1,8 @@
 ---
 title: Smart Money Concepts (ICT) — Order Blocks, FVGs, BOS/CHoCH as Trading Signals
 added: 2026-06-29
-updated: 2026-06-29
-hypothesis: H343 CONFIRMED (OOS 3.182), H344 CONFIRMED (36/36 params pass), H345 CONFIRMED (OOS 3.337)
+updated: 2026-07-02
+hypothesis: H343 CONFIRMED (OOS 3.182), H344 CONFIRMED (36/36 params pass), H345 CONFIRMED (OOS 3.337), H346 CONFIRMED (OOS 3.238), H355 CONFIRMED (OOS 1.522)
 source: joshyattridge/smart-money-concepts (GitHub); ICT methodology (retail; no peer review)
 ---
 
@@ -203,16 +203,65 @@ The OB filter could replace H198's entry logic in the current production portfol
 
 ---
 
+## H346: Canonical H026 Validation (CONFIRMED)
+
+H345 was tested on a non-canonical split (IS 2013-2020 / OOS 2021-2026). H346 replicated on the canonical H026 split (IS 2008-2017 / OOS 2018-2026).
+
+| Variant | IS Sharpe | OOS Sharpe | MaxDD | Cash Months |
+|---------|-----------|------------|-------|-------------|
+| B: lenient top-2 OB (window=20, swing=3) | 2.989 | **3.238** | -3.1% | 0 |
+| Baseline D: H026 no filter | 2.784 | 2.610 | -6.7% | 0 |
+
+**OOS 3.238 vs baseline 2.610** — confirms the non-canonical H345 result is not split-dependent. Production-ready: replace H026 monthly top-1 pick with OB-gated top-2 selection.
+
+Key validation: zero cash months in OOS (same as H345). OB filter on diversified ETF universe is a **selection quality enhancer**, never a regime gate.
+
+---
+
+## H355: OB Filter Confirmed on Bond ETF Universe
+
+H355 applied the OB filter to the H045 bond ETF universe (SHY, IEI, IEF, TLT, TIP, HYG, LQD).
+
+| Param / Variant | OOS Sharpe | OOS MaxDD |
+|-----------------|------------|-----------|
+| Baseline (H045, no filter) | 1.112 | -10.8% |
+| **best_B (window=20, swing=3, lenient)** | **1.522** | **-5.0%** |
+| ref_B (window=30, swing=5) | 1.470 | -8.1% |
+
+**Gate**: > 1.451. Both ref_B and best_B confirmed.
+
+**Key difference from equity ETFs**: Bond OB filter routes to SHY (cash proxy) when no bullish OBs exist — this fires during the 2022 rate shock when duration OBs get mitigated. In equity ETFs, the filter always found some sector with an active OB (0 cash months). In bonds, the uniform directional shock (all bonds falling with rates rising) hits all OBs simultaneously.
+
+---
+
+## OB Filter Universality — Cross-Asset Summary
+
+The same OB detection code with the **same best params (window=20, swing_len=3)** confirmed across three distinct asset classes:
+
+| Universe | Hypothesis | Baseline Sharpe | OB Sharpe | Improvement |
+|----------|-----------|----------------|-----------|-------------|
+| 30 large-cap stocks | H343/H344 | 1.174 | 3.182/3.396 | +2.0 Sharpe |
+| 25-asset equity ETFs | H345/H346 | 2.538 | 3.238/3.337 | +0.70 Sharpe |
+| 7-asset bond ETFs | H355 | 1.112 | 1.522 | +0.41 Sharpe |
+
+**Interpretation**: The OB pattern likely captures a fundamental market microstructure truth — institutional accumulation/distribution zones — that transcends asset class. The convergence of best params across universes substantially reduces concern that these are overfit to a specific asset class or time period.
+
+**H356 (proposed)**: Apply OB filter to low-volatility factor ETF universe (H354 — USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV). Expected behavior: in market tops, bullish OBs on low-vol ETFs get mitigated; filter routes to BIL, reducing the -11.3% MaxDD while preserving upside.
+
+---
+
 ## Related Hypothesis Pipeline
 
 | Hypothesis | Status | Description |
 |-----------|--------|-------------|
 | H343 | ✓ CONFIRMED | OB strict filter on H198 6-1m momentum. OOS 3.182. |
 | H344 | ✓ CONFIRMED | H343 sensitivity: 36/36 params pass gate. Best OOS 3.396. |
-| H345 | ✓ CONFIRMED | OB lenient on H026 ETF rotation. OOS 3.337 vs 2.538 baseline. |
+| H345 | ✓ CONFIRMED | OB lenient on H026 ETF rotation (non-canonical split). OOS 3.337 vs 2.538 baseline. |
+| H346 | ✓ CONFIRMED | OB lenient on H026 canonical IS 2008-2017/OOS 2018-2026. OOS 3.238. Production-ready. |
+| H355 | ✓ CONFIRMED | OB lenient on H045 bond ETF universe. OOS 1.522 vs 1.112 baseline. MaxDD halved. |
 | H344b (proposed) | queued | Rolling-window cross-validation of H343 Var C |
 | H345b (proposed) | queued | CHoCH as early exit for H198/H026 positions |
-| H346 (proposed) | queued | OB filter on canonical H026 IS 2008-2017 / OOS 2018-2026 split |
+| H356 (proposed) | queued | OB filter on H354 low-vol ETF universe (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV) |
 
 ---
 
