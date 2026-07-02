@@ -1,0 +1,15 @@
+{
+  "id": "2026-07-02-multimodal-pead-h357",
+  "date": "2026-07-02",
+  "source": "arXiv:2605.25894 (Noseda et al., May 2026) + arXiv:2509.24254 (Wu et al., Oct 2025)",
+  "source_url": "https://arxiv.org/abs/2605.25894",
+  "source_url_2": "https://arxiv.org/abs/2509.24254",
+  "title": "H357 stub: Multi-modal earnings direction prediction on PEAD universe",
+  "rationale": "Two complementary 2025-2026 papers upgrade the PEAD signal stack beyond our H174 FinBERT baseline. arXiv:2509.24254 (Wu et al.): 138k earnings press releases 2005-2023, BERT-based structured extraction of press release sections (headline, summary, guidance) — shows 'soft information' (text structure) is as informative as EPS surprise 'hard information'. arXiv:2605.25894 (Noseda et al.): multi-modal deep learning combining pre-announcement news sentiment + firm fundamentals + recent market dynamics (30 days prior) to predict EA-day direction (UP/DOWN/NEUTRAL). Key insight from 2605.25894: pre-announcement signals in the 30-day window before EA carry significant directional information that is distinct from the EA-day 8-K content we currently use. Current H174 only uses 8-K text + EPS surprise at announcement. H357 adds: (1) structured press release section parsing per 2509.24254, (2) 30-day pre-announcement sentiment composite per 2605.25894. Expected: higher precision on UP direction (fewer false positives), better NEUTRAL filtering.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h357_multimodal_pead.py",
+  "content": "\"\"\"\nH357 — Multi-Modal Earnings Direction Prediction (PEAD upgrade)\n================================================================\nSources:\n  arXiv:2605.25894 — Multi-modal EA direction (news + fundamentals + market dynamics)\n  arXiv:2509.24254 — Press release structure extraction (text sections as soft info)\n\nHypothesis:\n  Augmenting H174 (FinBERT score>=0.18 + EPS surprise>=0.02) with:\n  1. Structured press release section parsing (guidance/headline sentiment separately)\n  2. 30-day pre-announcement market dynamics (momentum + vol regime)\n  3. Firm fundamentals composite (ROE, revenue beat/miss)\n  improves precision on UP predictions beyond H174's WR=81.8%.\n\nUniverse: same as H174 — EDGAR 8-K filers with earnings events in H174 date range\nGate: OOS WR > 0.818 AND mean_ret > 0.069 AND n_events >= 20\n\nVariants:\n  A: H174 baseline (FinBERT + EPS surprise)\n  B: H174 + press release structure score (guidance vs headline weighting)\n  C: H174 + 30-day pre-ann market momentum signal\n  D: H174 + both structure + pre-announcement composite\n\nTODO: implement structured section parser for guidance/forward-looking language,\n      pre-announcement signal from yfinance 30-day returns,\n      run against H174 OOS set for lift measurement\n\"\"\"\n\n# STUB — implementation pending\n# See arXiv:2605.25894 and arXiv:2509.24254 for algorithm details\nprint('H357 Multi-modal PEAD stub — implementation required')\n",
+  "action": "write",
+  "apply_status": "pending"
+}

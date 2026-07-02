@@ -1,0 +1,98 @@
+{
+  "date": "2026-07-02",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + post-earnings drift + text signals",
+    "cross-sectional momentum + factor momentum",
+    "multi-agent LLM trading systems",
+    "GitHub trending quant repos"
+  ],
+  "papers_reviewed": [
+    {
+      "id": "arXiv:2605.25894",
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "date": "2026-05-25",
+      "angle": "PEAD",
+      "method": "Multi-modal DL: pre-announcement news sentiment + firm fundamentals + 30-day market dynamics → UP/DOWN/NEUTRAL prediction",
+      "relevance": 9,
+      "staged": "H357",
+      "notes": "Most actionable PEAD upgrade found — pre-announcement window (30 days prior) adds signal distinct from EA-day 8-K"
+    },
+    {
+      "id": "arXiv:2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "date": "2025-10-04",
+      "angle": "PEAD",
+      "method": "BERT-based structured extraction of press release sections (headline, guidance, body) — 138k documents 2005-2023",
+      "relevance": 9,
+      "staged": "H357 (combined with 2605.25894)",
+      "notes": "Soft information (text structure) as informative as EPS hard data; structured parsing more discriminative than FinBERT bag-of-words"
+    },
+    {
+      "id": "arXiv:2603.14288",
+      "title": "Beyond Prompting: An Autonomous Framework for Systematic Factor Investing via Agentic AI",
+      "date": "2026-03-15",
+      "angle": "factor momentum / auto-alpha",
+      "method": "3-agent loop (formulator → evaluator → memory) with regime-adaptive memory update; self-directed, no manual prompts",
+      "relevance": 8,
+      "staged": "H358",
+      "notes": "Memory-update mechanism addresses momentum crash regime — adapts signals dynamically. Extends H352/H349 into production-viable continuous loop"
+    },
+    {
+      "id": "arXiv:2602.07048",
+      "title": "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+      "date": "2026-02-27",
+      "angle": "pairs trading / prediction markets",
+      "method": "Two-stage: Granger causality candidate selection + LLM semantic plausibility filter for lead-lag pairs",
+      "relevance": 7,
+      "staged": "H359",
+      "notes": "Applied to prediction market pairs; relevant to Kalshi cross-event arbitrage pipeline. Low-cost implementation."
+    },
+    {
+      "id": "arXiv:2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Portfolio Optimization with Bias Correction",
+      "date": "2026-05-09",
+      "angle": "cross-sectional momentum",
+      "method": "EWMA rounding error correction for cross-sectional ranking; IC degradation fix (0.005 IC preserved per bias correction)",
+      "relevance": 6,
+      "staged": null,
+      "notes": "Implementation detail improvement (bias correction) rather than new alpha. Relevant for H217/H228 if IC degradation suspected."
+    },
+    {
+      "id": "arXiv:2605.19337",
+      "title": "Agentic Trading: When LLM Agents Meet Financial Markets",
+      "date": "2026-05-19",
+      "angle": "multi-agent LLM",
+      "method": "Survey/framework paper; semantic memory for regime detection, drift handling in episode retrieval",
+      "relevance": 5,
+      "staged": null,
+      "notes": "Survey rather than testable system; adds to multi-agent-llm-trading.md wiki context"
+    },
+    {
+      "id": "arXiv:2606.04574",
+      "title": "Dynamic Multi-Pair Trading Strategy in Cryptocurrency Markets with Deep Reinforcement Learning",
+      "date": "2026-06-01",
+      "angle": "pairs trading",
+      "method": "RL-based dynamic pair selection for crypto; 1-hour interval data",
+      "relevance": 3,
+      "staged": null,
+      "notes": "Crypto-specific; pairs family closed for equity per H307/H246 results"
+    }
+  ],
+  "github_repos": [
+    {
+      "repo": "PlaceNL2026/best-of-algorithmic-trading",
+      "stars": "109 projects tracked, ~310k combined stars",
+      "description": "Curated ranked list of open-source algorithmic trading projects: bots, frameworks, APIs, indicators. Updated regularly. Includes MCP section.",
+      "relevance": 6,
+      "action": "reference — scan for uncatalogued tools in next wiki lint pass"
+    }
+  ],
+  "proposals_staged": [
+    "H357 — Multi-modal PEAD (arXiv:2605.25894 + 2509.24254): pre-announcement signals + press release structure",
+    "H358 — Agentic autonomous factor investing (arXiv:2603.14288): 3-agent adaptive loop",
+    "H359 — LLM lead-lag prediction market pairs (arXiv:2602.07048): Granger + LLM semantic filter"
+  ],
+  "hypotheses_queued_before": ["H347","H348","H349","H350","H351","H352","H353","H356"],
+  "new_hypothesis_ids": ["H357","H358","H359"]
+}
