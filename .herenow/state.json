@@ -206,6 +206,12 @@
       "claimToken": "52669df8964aca2f3309e9eb1bec7376057af153b1c29e63787583f053eb87f7",
       "claimUrl": "https://here.now/claim?slug=cobalt-bodhi-vnwm&token=52669df8964aca2f3309e9eb1bec7376057af153b1c29e63787583f053eb87f7",
       "expiresAt": "2026-06-30T09:04:41.180Z"
+    },
+    "still-cedar-aaev": {
+      "siteUrl": "https://still-cedar-aaev.here.now/",
+      "claimToken": "0e7d652a028732daa95a96ded35f12ae08213f9859464cdfddad484309b85280",
+      "claimUrl": "https://here.now/claim?slug=still-cedar-aaev&token=0e7d652a028732daa95a96ded35f12ae08213f9859464cdfddad484309b85280",
+      "expiresAt": "2026-07-02T09:02:29.204Z"
     }
   }
 }
