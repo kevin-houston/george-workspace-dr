@@ -1,102 +1,210 @@
 ---
-updated: 2026-05-22
+updated: 2026-07-03
 type: research-note
 source: https://github.com/yli188/WorldQuant_alpha101_code
+related: auto-alpha-discovery.md, factor-models.md, momentum-strategies.md
 ---
 
-# WorldQuant 101 Formulaic Alphas — Overlap with Confirmed Strategies
+# WorldQuant 101 Formulaic Alphas — Confirmed Results & Signal Taxonomy
 
-The 101 alphas from Kakushadze (2015) "101 Formulaic Alphas" are intraday-data signals (OHLCV + VWAP) designed for daily cross-sectional portfolios. Mapping against our confirmed/active strategies identifies where we overlap (already covered), where we diverge (gaps worth testing), and which signals are buildable with daily OHLCV data we already have.
-
-**Data note**: ~60 of the 101 require VWAP (intraday volume-weighted average price). Alpaca free tier provides EOD OHLCV only — no intraday VWAP. Those signals are blocked unless we upgrade data feeds. The 40 OHLCV-only signals are immediately buildable.
-
----
-
-## Already Covered by Confirmed Strategies
-
-| Alpha | Signal type | Our equivalent | Status |
-|-------|-------------|----------------|--------|
-| alpha019 | 250-day momentum (long-term price return) | H198 (6-1m), H212 (vol-scaled) | CONFIRMED |
-| alpha081 | 50-day volume × correlation momentum | Partially covered by H212 vol-scaling | CONFIRMED (partial) |
-| alpha017, alpha035 | Short-term 5-day reversal | H181 (industry-adjusted 1-week reversal) | CONFIRMED (H181) |
-| alpha049, alpha051 | Binary reversal on close acceleration | Simpler variant of H181 | Covered |
-| alpha009, alpha010 | 4-5 day price min/max reversal | Subsumed by H181 | Covered |
-
-**Conclusion**: Our momentum and reversal families are well-covered. The 101 alphas don't add much in those categories beyond confirming what we already have.
+The 101 alphas from Kakushadze (2015) "101 Formulaic Alphas" are OHLCV + VWAP signals designed for
+daily cross-sectional portfolios with a 0.6–6.4 day average holding period. This page tracks:
+(1) our confirmed results from testing the WQ101 family, (2) which signals survive OOS in the
+US market per new empirical research, and (3) OHLCV-only signals buildable without paid data.
 
 ---
 
-## Gaps — High Priority (OHLCV-only, not yet tested)
+## Confirmed Results — Our Own Backtests
 
-### Volume-Price Divergence Signals (OHLCV-buildable)
+| Hypothesis | Signal | IS Sharpe | OOS Sharpe | Result |
+|-----------|--------|-----------|------------|--------|
+| **H215** | alpha101: (close−open)/(high−low), cross-sectional rank | 1.283 | **1.321** | CONFIRMED |
+| **H216** | alpha002 + alpha013 vol-price divergence blend | 0.862 | **0.823** | CONFIRMED-weak |
+| **H217** | Median of OHLCV-only alpha101 signals (ensemble) | 1.421 | **1.559** | CONFIRMED — strongest |
+| **H228** | H217 + H181 industry reversal blend (50/50) | 1.467 | **1.572** | CONFIRMED |
 
-These require only close, volume, and returns — all available from our yfinance/Alpaca data.
+**Key insight from H217 vs H215:** the single alpha101 (close-within-range) OOS Sharpe is 1.321.
+Taking the *median* of all buildable OHLCV-only signals lifts OOS to 1.559 — an ensemble gain of
++18% with no additional data cost. This is the signal to use.
 
-| Alpha | Formula sketch | Why interesting |
-|-------|----------------|-----------------|
-| **alpha002** | `−rank(delta(log(volume), 2)) × rank((close−open)/open)` | Negative correlation between volume change and price change rank — volume surge with no price move predicts reversal |
-| **alpha013** | `−rank(cov(rank(close), rank(volume), 5))` | Negative covariance of close and volume ranks over 5 days — stocks where price and volume decouple |
-| **alpha033** | `rank(−1 × (1 − open/close))` | Open-to-close ratio as a signal — bullish bar (close > open) negative signal |
-| **alpha038** | `−1 × rank(ts_rank(close, 10)) × rank(close/open)` | Combines price trend rank with open-to-close ratio |
-| **alpha043** | `ts_rank(volume/mean(volume,20), 20) × ts_rank(−delta(close,7), 8)` | Volume spike relative to 20-day avg × 7-day price reversal |
-| **alpha053** | `−1 × delta((close−low−(high−close)) / (close−low), 9)` | Change in close position within daily range — momentum of close-range positioning |
-| **alpha101** | `(close − open) / (0.001 + high − low)` | Normalized intraday close position — "where did we close within the day's range" cross-sectionally ranked |
-
-**H215 candidate**: Test alpha002 + alpha013 cross-sectional portfolio (volume-price divergence signals) on the 30-stock universe. Hypothesis: stocks where volume surges but price doesn't follow are due for reversal. Expected Sharpe 0.6–0.9 (these are weaker signals individually but may complement momentum as a diversifier).
-
-### Open-to-Close / Intraday Structure (OHLCV, buildable today)
-
-| Alpha | Signal | Relevance |
-|-------|--------|-----------|
-| **alpha033** | `−rank(1 − open/close)` | Short bullish daily bars. Contrarian |
-| **alpha038** | Price trend × (close/open) | Trend-continuation with intraday confirmation |
-| **alpha101** | `(close−open)/(high−low)` | Cross-sectional close-within-range rank |
-
-alpha101 is particularly clean: it measures where each stock closed within its daily high-low range, ranked cross-sectionally. High = closed near top of range (momentum); low = closed near bottom (reversal candidate). Buildable in 10 lines. Low correlation to our existing signals.
+**H228 blend:** adding H181 industry-adjusted short-term reversal (OOS 0.998) to H217 adds minimal
+marginal Sharpe (1.572 vs 1.559) but reduces MaxDD and improves correlation profile.
+Corr(H217, H181) ≈ −0.12 — nearly orthogonal.
 
 ---
 
-## Blocked (Require VWAP — not on free data tier)
+## Data Requirements
 
-~60 alphas require VWAP: alpha005, alpha011, alpha025, alpha041, alpha042, alpha057, alpha060, alpha061, alpha062, alpha064, alpha065, alpha066, alpha068, alpha071, alpha072, alpha073, alpha074, alpha075, alpha077, alpha078, alpha083, alpha084, alpha085, alpha086, alpha088, alpha092, alpha094, alpha095, alpha096, alpha098, alpha099 and more.
+| Data tier | Signals available | Path |
+|-----------|------------------|------|
+| EOD OHLCV (yfinance, Alpaca free) | ~40 signals | Available NOW |
+| Daily VWAP (Polygon paid $29/mo) | ~60 additional | Unlock if OHLCV signals confirm |
+| L2 order book (Polygon pro) | Microprice / AS models | Not needed for monthly rotation |
 
-**Unlock path**: Polygon.io paid tier ($29/mo) provides 1-minute intraday bars from which daily VWAP is easily computed. Worth evaluating if alpha101 OHLCV signals confirm, as the VWAP signals are more sophisticated and less widely replicated.
+**Note**: VWAP unlock is worth considering — 60+ additional signals vs. a $29/mo data cost.
+The OHLCV-only family has already confirmed (H215/H217), making the incremental bet on VWAP
+signals well-motivated.
 
 ---
 
-## Notable Absences from the 101 Alphas
+## OHLCV-Only Signal Taxonomy (40 buildable signals)
 
-The 101 alphas are pure price/volume signals. They do NOT contain:
-- **BAB / Low-beta anomaly** (our H192-D — OOS Sharpe 1.367): not in the 101
-- **PEAD / event-driven** (H174 — OOS WR 81.8%): not in the 101
-- **Calendar effects** (H201 TOM, H206 Halloween): not in the 101
-- **Idiosyncratic volatility** (H213): not in the 101
-- **Fundamental signals** (P/E, earnings growth): not in the 101
+### Group A — Close-within-Range (Intraday Positioning)
 
-This means our strongest confirmed strategies all come from outside the 101 alpha universe. The 101 are complementary, not overlapping, with our core portfolio.
+These measure where price closed within the day's range, ranked cross-sectionally.
+
+| Alpha | Formula | Interpretation | Confirmed |
+|-------|---------|----------------|-----------|
+| **alpha101** | `(close−open) / (0.001 + high−low)` | Internal Bar Score — daily close position; high = closed near top | **H215 OOS 1.321** |
+| alpha033 | `rank(−1 × (1 − open/close))` | Short bullish bars (contrarian) | H217 component |
+| alpha038 | `−rank(ts_rank(close, 10)) × rank(close/open)` | Trend × intraday confirmation | H217 component |
+| alpha053 | `−delta((close−low−(high−close)) / (close−low), 9)` | Change in close-range position over 9d | H217 component |
+
+**Production signal:** alpha101 is the single best OHLCV signal confirmed. For production, use
+the H217 ensemble (median of all Group A+B signals) for higher Sharpe.
+
+### Group B — Volume-Price Divergence
+
+Signals where volume and price move in conflicting directions — predictive of reversal.
+
+| Alpha | Formula | Interpretation | Confirmed |
+|-------|---------|----------------|-----------|
+| **alpha002** | `−rank(delta(log(volume), 2)) × rank((close−open)/open)` | Volume surge + no price move → reversal | H216 component |
+| **alpha013** | `−rank(cov(rank(close), rank(volume), 5))` | Decouple of close-rank and vol-rank over 5d | H216 component |
+| alpha043 | `ts_rank(volume/mean(volume,20), 20) × ts_rank(−delta(close,7), 8)` | Volume spike × 7d price reversal | H217 component |
+
+**H216 note:** alpha002 + alpha013 blend OOS Sharpe 0.823 — confirms the signal exists but is
+weaker than momentum-based signals. Useful as a diversifier, not a standalone.
+
+### Group C — Momentum / Trend Continuation
+
+| Alpha | Formula | Notes |
+|-------|---------|-------|
+| alpha019 | 250-day momentum | Covered by H198 (6-1m); independent lookback |
+| alpha081 | 50-day volume × correlation momentum | Partial overlap with H212 vol-scaling |
+| alpha028 | `scale(corr(adv20, low, 5), 7)` | Requires VWAP-adjacent volume avg — partially buildable |
+
+---
+
+## What the 101 Alphas Don't Cover
+
+The WQ101 are pure price/volume signals. Our strongest confirmed strategies are *outside* this
+family:
+
+| Our strategy | Type | OOS Sharpe | Not in WQ101 |
+|-------------|------|------------|--------------|
+| H174 PEAD | Event/NLP | WR 81.8% | ✓ — earnings 8-K text |
+| H192-D BAB | Low-beta L/S | 1.367 | ✓ — market beta factor |
+| H234 Inside-bar | Pattern recognition | 1.770 | ✓ — multi-day patterns |
+| H343/H346 OB filter | SMC institutional | +0.628 overlay | ✓ — order block detection |
+
+This means the 101 alphas complement our core portfolio rather than competing with it. The
+cross-sectional volume/price signals have low correlation with event-driven and SMC strategies.
+
+---
+
+## External Validation — 2025/2026 Research
+
+### Cross-Market Alpha: 17 Surviving US Signals (Jan 2026)
+
+**Source:** "Cross-Market Alpha: Testing Short-Term Trading Factors in the U.S. Market via
+Double-Selection LASSO" — Du, Walter, Ulrich; arXiv:2601.06499 (Jan 10, 2026, v2 May 2026)
+
+Tests 191 short-term, trading-based signals on the US equity market using double-selection LASSO
+to control for multiple testing. **17 distinct price-volume and microstructural signals** survive.
+
+Key findings:
+- Volume-price divergence signals are among the survivors
+- Microstructural intraday positioning signals (close-within-range family) show cross-market
+  persistence
+- Many "locally discovered" alphas collapse when subjected to proper multiple-testing correction
+- Result: the WQ101 OHLCV family is NOT redundant — it contains robust signals, but far fewer
+  than the headline 101 implies
+
+**Implication:** Our confirmed H215/H217 signals are likely within the 17 survivors given they
+passed OOS validation on a separate US universe. Cross-listing our alpha formulas against the
+full list of survivors is a future task when the full paper text is available.
+
+### ML-Enhanced Multi-Factor Quantitative Trading (May 2026)
+
+**Source:** arXiv:2507.07107
+
+Uses curated Alpha101 formulas — specifically **momentum rank, volume-intraday correlation, and
+open-volume divergence** — as input to a Transformer model.
+
+- Transformer Sharpe: **2.4 in 2023-Q1** (US equity)
+- Confirms that WQ101 OHLCV signals remain predictive even in recent 2023–2024 data
+- The "volume-intraday correlation" is an approximation of alpha013 using daily data
+- Key insight: cross-sectional ML (Transformer over raw alpha signals) outperforms single-signal
+  strategies — supports H228-style blending
+
+### AlphaMemo — Self-Evolving Memory for Alpha Mining (May 2026)
+
+**Source:** arXiv:2606.20625 — Yu, Zheng et al.
+
+Discovers new alphas by recording which *edits* to existing WQ101-style expressions succeed or
+fail in specific factor contexts (AST-diff motifs). The confidence-gated residual memory prevents
+rediscovering known losers.
+
+Tested on CSI 500 and S&P 500 — confirms that structured search memory significantly improves
+OOS performance vs. memoryless LLM alpha mining. Indirectly validates that the WQ101 formula
+space still contains undiscovered profitable edits (not fully mined).
+
+### AlphaLogics — Multi-Agent Market Logic Extraction (Mar 2026)
+
+**Source:** arXiv:2603.20247 — Weng et al.
+
+Three-stage loop: (1) extract market logic from historical alpha performance, (2) generate new
+factors guided by logic + backtesting feedback, (3) refine logic library. Tested on CSI 500 +
+S&P 500. Consistently improves predictive metrics over representative baselines.
+
+**Implication for pipeline:** the "market logic" extracted from WQ101 failures is itself a useful
+signal — knowing WHY alpha053 fails in certain regimes helps design better replacements.
+
+---
+
+## Overlap Summary
+
+| Our confirmed strategy | Best mapping in WQ101 | Substitutable? |
+|----------------------|----------------------|----------------|
+| H198 6-1m momentum | alpha019 (250d momentum) | Partial — different window |
+| H181 industry reversal | alpha017/alpha035 (5d reversal) | Partial — industry-neutral version is stronger |
+| H215 alpha101 close-within-range | alpha101 | Exact match — confirmed |
+| H217 OHLCV ensemble | All Group A+B signals | Superset — our best expression |
+
+---
+
+## Blocked Signals (Require VWAP)
+
+~60 alphas require VWAP: alpha005, 011, 025, 041, 042, 057, 060–062, 064–066, 068, 071–075,
+077–079, 083–086, 088, 092, 094–096, 098–099, and others.
+
+**Unlock path:** Polygon.io paid tier ($29/mo) provides 1-minute intraday bars → daily VWAP
+easily computed as `sum(close × volume) / sum(volume)` over minute bars. Given H217 OOS 1.559
+already confirmed, the VWAP tier unlocks ~50% more signals and is worth evaluating.
 
 ---
 
 ## Recommended Next Steps
 
-1. **Build alpha101** (close-within-range) as H215: 10-line script, OHLCV-only, test on 30-stock universe. Low effort, quick to validate.
-2. **Build alpha002 + alpha013 blend** as H216: volume-price divergence basket. Hypothesis: adds diversification to H212 momentum (vol-price divergence should be negatively correlated with momentum in crashes).
-3. **Stage for dream cycle**: alpha033 and alpha038 (open-to-close ratio signals) — simple, OHLCV, potentially uncorrelated with existing strategies.
-4. **Unlock VWAP signals**: if budget allows, $29/mo Polygon paid tier opens 60+ additional signals.
+| Priority | Action | Effort | Expected gain |
+|----------|--------|--------|--------------|
+| ✅ Done | H215 alpha101, H216 vol-price div, H217 ensemble, H228 blend | — | OOS 1.559 confirmed |
+| High | Cross-list our OHLCV alphas against Du et al. 17 survivors (full paper) | Low | Validation |
+| High | Run AlphaMemo on H217 ensemble expressions (find profitable edits) | Med | +0.1–0.3 IC |
+| Medium | Unlock VWAP tier ($29/mo Polygon) → test 60 additional signals | Low cost | New signal family |
+| Medium | H349 QuantaAlpha evolutionary session on US 500-stock universe | $5–20 | Novel factors |
+| Low | H352 TreEvo loop (20 min, $3–10) using H217 winners as seed expressions | Low | Factor refinement |
+
+**For AI-driven alpha discovery methods (QuantaAlpha, TreEvo, Hubble, Constrained DSL):**
+see [AI-Driven Alpha Factor Discovery](auto-alpha-discovery.md) — dedicated deep-dive page.
 
 ---
 
-## H215 Design Note (alpha101 — close-within-range)
+## Cross-References
 
-```python
-# alpha101 = (close - open) / (0.001 + high - low)
-# Cross-sectional rank monthly, long top-6, monthly rebalance
-# Same universe as H212 (30 large-cap stocks)
-# IS: 2013-2020, OOS: 2021-2026, confirm threshold: OOS Sharpe > 0.7
-
-def compute_alpha101(ohlcv: pd.DataFrame) -> pd.Series:
-    """Compute alpha101 for each stock on a given date."""
-    return (ohlcv["close"] - ohlcv["open"]) / (0.001 + ohlcv["high"] - ohlcv["low"])
-```
-
-**Expected**: Sharpe 0.6–0.9 OOS. Corr(H212) likely < 0.3 (intraday structure vs. intermediate momentum). If confirmed, adds a short-horizon signal to the portfolio blend.
+- [AI-Driven Alpha Factor Discovery](auto-alpha-discovery.md) — H347/H349/H288/H352 AI mining
+- [Momentum Strategies](momentum-strategies.md) — H198 6-1m baseline; H217 as momentum complement
+- [Short-Term Reversal](short-term-reversal.md) — H181 CONFIRMED industry reversal
+- [Factor Models](factor-models.md) — academic factor foundations; WQ101 as pure price-vol layer
+- [Machine Learning for Trading](../tools/ml-for-trading.md) — Transformer over WQ101 signals
