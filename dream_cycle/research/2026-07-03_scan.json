@@ -1,0 +1,186 @@
+{
+  "date": "2026-07-03",
+  "scan_angles": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "papers": [
+    {
+      "id": "arXiv:2605.01954",
+      "title": "Moira: Multi-Agent LLM-Based Semantic Pair Selection",
+      "relevance": 3,
+      "angle": "pairs trading + cointegration + LLM",
+      "disposition": "not_staged",
+      "reason": "Already staged as H316 STUB in prior session. GPT-4o semantic pair selection; needs OpenAI API. No new action needed."
+    },
+    {
+      "id": "arXiv:2602.07048",
+      "title": "LLM Lead-Lag Kalshi Signal",
+      "relevance": 3,
+      "angle": "pairs trading + cointegration + LLM",
+      "disposition": "not_staged",
+      "reason": "Already staged as H334 (prediction_markets/run_h359_leadlag_screener.py stub). No new action needed."
+    },
+    {
+      "id": "arXiv:2605.25894",
+      "title": "Multimodal PEAD: Section Parser + Pre-Announcement Dynamics",
+      "relevance": 4,
+      "angle": "PEAD + post-earnings drift + text signals",
+      "disposition": "referenced",
+      "reason": "Referenced in H357 stub (already staged 2026-07-02). Key insight incorporated into H360 design (MarketDynamicsAnalyst agent)."
+    },
+    {
+      "id": "arXiv:2509.24254",
+      "title": "Earnings Press Release Structure and PEAD Signal Quality",
+      "relevance": 4,
+      "angle": "PEAD + post-earnings drift + text signals",
+      "disposition": "referenced",
+      "reason": "Referenced in H357 (SectionParser design) and H293 prior work. Supports H360 SectionParser agent that classifies Item 2.02 vs full document."
+    },
+    {
+      "id": "arXiv:2602.20859",
+      "title": "FinAnchor: Anchored Financial LLM Retrieval",
+      "relevance": 2,
+      "angle": "PEAD + post-earnings drift + text signals",
+      "disposition": "not_staged",
+      "reason": "General RAG improvement for financial text; not specific to PEAD or our existing pipeline. Potentially useful as H319 RAG enhancement but not actionable without deeper review."
+    },
+    {
+      "id": "arXiv:2511.12490",
+      "title": "13-Sharpe Drift Regime Detection",
+      "relevance": 2,
+      "angle": "cross-sectional momentum + factor momentum",
+      "disposition": "not_staged",
+      "reason": "Extremely high reported Sharpe (13x) with no reproducibility data; filed as skeptical note, tracked as H265 prior. No new action."
+    },
+    {
+      "id": "arXiv:2507.07107",
+      "title": "ML-Enhanced Multi-Factor Quant Trading: Transformer over Alpha101",
+      "relevance": 3,
+      "angle": "cross-sectional momentum + factor momentum",
+      "disposition": "wiki_only",
+      "reason": "Transformer over WQ101 features (momentum rank, volume-intraday correlation, open-volume divergence) achieves Sharpe 2.4 on 2023-Q1. Added to alpha101-overlap.md as evidence WQ101 still predictive in recent data. Not staged as standalone hypothesis — too similar to H217 confirmed."
+    },
+    {
+      "id": "arXiv:2601.05428",
+      "title": "Dynamic Inclusion and Bounded Multi-Factor Tilts for Robust Portfolio Construction",
+      "relevance": 4,
+      "angle": "multi-agent LLM trading systems / strategy blending",
+      "disposition": "staged",
+      "staged_as": "3_dynamic_factor_tilts_wiki.json",
+      "reason": "Directly addresses H318 failure mode (meta-learner collapsed to single strategy). Bounded [10%, 60%] dynamic tilts preserve diversification while allowing regime adaptation. Proposes H361."
+    },
+    {
+      "id": "arXiv:2603.10385",
+      "title": "Diffusion Portfolio Models for Return Distribution Forecasting",
+      "relevance": 2,
+      "angle": "cross-sectional momentum + factor momentum",
+      "disposition": "not_staged",
+      "reason": "Score diffusion approach for portfolio weight generation. Interesting but no direct analogue to current strategy family. Too far from confirmed signal pipeline."
+    },
+    {
+      "id": "arXiv:2605.27887",
+      "title": "PortBench: Correlation-Aware LLM Portfolio Benchmark",
+      "relevance": 5,
+      "angle": "multi-agent LLM trading systems",
+      "disposition": "staged",
+      "staged_as": "1_multi_agent_reproducibility_wiki.json",
+      "reason": "First correlation-aware benchmark; 90% of LLM model-profile combinations fail vs equal-weight. Directly validates our multi-agent-llm-trading.md reproducibility crisis section with hard numbers."
+    },
+    {
+      "id": "arXiv:2602.23330",
+      "title": "Toward Expert Investment Teams: Fine-Grained Multi-Agent LLM Trading",
+      "relevance": 5,
+      "angle": "multi-agent LLM trading systems",
+      "disposition": "staged",
+      "staged_as": "2_h360_expert_investment_teams_pead.json",
+      "reason": "Fine-grained task decomposition outperforms coarse debate-loop design. Directly upgrades H274 PEAD 3-agent stub with 5-specialist sequential pipeline (H360)."
+    },
+    {
+      "id": "arXiv:2605.19337",
+      "title": "Agentic Trading Survey: 77 LLM Trading Studies Audited",
+      "relevance": 4,
+      "angle": "multi-agent LLM trading systems",
+      "disposition": "staged",
+      "staged_as": "1_multi_agent_reproducibility_wiki.json",
+      "reason": "Bundled with PortBench in proposal 1. 0/19 studies reach R3 reproducibility; 2/19 have time-consistent splits. Validates our research checklist rigor."
+    },
+    {
+      "id": "arXiv:2502.13165",
+      "title": "HedgeAgents: Multi-Agent Hedging via LLM Coordination",
+      "relevance": 2,
+      "angle": "multi-agent LLM trading systems",
+      "disposition": "not_staged",
+      "reason": "Already documented in multi-agent-llm-trading.md from prior session. No new action."
+    },
+    {
+      "id": "arXiv:2601.06499",
+      "title": "Cross-Market Alpha: 191 Short-Term Signals via Double-Selection LASSO",
+      "relevance": 4,
+      "angle": "cross-sectional momentum + factor momentum",
+      "disposition": "wiki_only",
+      "reason": "17 signals survive double-selection LASSO in US market; validates our confirmed OHLCV signals (H215/H217) as robust. Added to alpha101-overlap.md as independent external validation. Not staged separately — wiki coverage sufficient."
+    },
+    {
+      "id": "arXiv:2606.20625",
+      "title": "AlphaMemo: AST-Diff Memory for Self-Evolving Alpha Agents",
+      "relevance": 3,
+      "angle": "cross-sectional momentum + factor momentum",
+      "disposition": "wiki_only",
+      "reason": "Confidence-gated residual memory for alpha mining; tested CSI 500 + S&P 500. Added to alpha101-overlap.md auto-discovery section. auto-alpha-discovery.md already covers this family. Not staged separately."
+    },
+    {
+      "id": "arXiv:2603.20247",
+      "title": "AlphaLogics: Market Logic-Driven Multi-Agent Alpha Discovery",
+      "relevance": 3,
+      "angle": "cross-sectional momentum + factor momentum",
+      "disposition": "wiki_only",
+      "reason": "3-stage loop (extract market logic → generate factors → refine). Noted in alpha101-overlap.md as context. auto-alpha-discovery.md handles this family in depth."
+    },
+    {
+      "id": "arXiv:2601.22119",
+      "title": "AlphaCFG: Grammar-Guided Alpha Discovery via MCTS",
+      "relevance": 3,
+      "angle": "cross-sectional momentum + factor momentum",
+      "disposition": "wiki_only",
+      "reason": "Context-free grammar + Monte Carlo Tree Search for alpha formula generation. Noted in alpha101-overlap.md. Covered by auto-alpha-discovery.md."
+    },
+    {
+      "id": "github:PlaceNL2026/best-of-algorithmic-trading",
+      "title": "best-of-algorithmic-trading: curated GitHub quant finance list",
+      "relevance": 2,
+      "angle": "GitHub: trending quantitative finance repos",
+      "disposition": "not_staged",
+      "reason": "Curated list of quant tools; no single finding actionable at our stage. QuantStats, NautilusTrader, VectorBT already documented in wiki. No new proposals."
+    }
+  ],
+  "staged_proposals": [
+    {
+      "file": "dream_cycle/staged/2026-07-03/1_multi_agent_reproducibility_wiki.json",
+      "title": "Wiki update: multi-agent-llm-trading.md — PortBench + Agentic Trading reproducibility audit",
+      "risk_level": "low",
+      "type": "wiki_update"
+    },
+    {
+      "file": "dream_cycle/staged/2026-07-03/2_h360_expert_investment_teams_pead.json",
+      "title": "H360 — Expert Investment Teams: Fine-Grained Multi-Agent PEAD Upgrade",
+      "risk_level": "medium",
+      "type": "new_script"
+    },
+    {
+      "file": "dream_cycle/staged/2026-07-03/3_dynamic_factor_tilts_wiki.json",
+      "title": "Wiki update: strategy-blending-correlation.md — Dynamic bounded multi-factor tilts (arXiv:2601.05428)",
+      "risk_level": "low",
+      "type": "wiki_update"
+    }
+  ],
+  "wiki_only_updates": [
+    "wiki/trading/algorithms/alpha101-overlap.md — major expansion (102 → ~220 lines): confirmed results, 2026 research coverage, signal taxonomy",
+    "wiki/trading/algorithms/smart-money-concepts-ict.md — H356 CONFIRMED added, OB universality table expanded to 4 rows",
+    "wiki/trading/algorithms/low-volatility-etf-rotation.md — H356 results table + production assessment updated"
+  ],
+  "summary": "17 papers/repos reviewed. 3 proposals staged (2 wiki updates, 1 new hypothesis stub). 5 papers incorporated into wiki updates (wiki_only). PortBench and Expert Investment Teams are the highest-value finds: PortBench provides concrete numbers for the reproducibility crisis narrative; Expert Investment Teams directly upgrades H274 PEAD design. Dynamic Bounded Tilts closes the H318 meta-learner failure mode with a bounded optimizer approach."
+}
