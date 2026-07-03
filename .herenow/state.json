@@ -212,6 +212,9 @@
       "claimToken": "0e7d652a028732daa95a96ded35f12ae08213f9859464cdfddad484309b85280",
       "claimUrl": "https://here.now/claim?slug=still-cedar-aaev&token=0e7d652a028732daa95a96ded35f12ae08213f9859464cdfddad484309b85280",
       "expiresAt": "2026-07-02T09:02:29.204Z"
+    },
+    "dewy-zinnia-3jfa": {
+      "siteUrl": "https://dewy-zinnia-3jfa.here.now/"
     }
   }
 }
