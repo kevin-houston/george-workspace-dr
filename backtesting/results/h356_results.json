@@ -1,0 +1,135 @@
+{
+  "best_A": {
+    "name": "OB strict (top-1 needs OB; else BIL)",
+    "params": "best",
+    "is": {
+      "n": 96,
+      "sharpe": 2.02,
+      "cagr": 0.212,
+      "maxdd": -0.189,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.877,
+      "cagr": 0.233,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    },
+    "oos_cash_pct": 0.818
+  },
+  "best_B": {
+    "name": "OB lenient (top-1 OB\u2192hold; elif top-2 OB\u2192hold; else BIL)",
+    "params": "best",
+    "is": {
+      "n": 96,
+      "sharpe": 2.053,
+      "cagr": 0.22,
+      "maxdd": -0.193,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.92,
+      "cagr": 0.248,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    },
+    "oos_cash_pct": 0.455
+  },
+  "best_C": {
+    "name": "OB gate (any top-3 has OB \u2192 top-1; else BIL)",
+    "params": "best",
+    "is": {
+      "n": 96,
+      "sharpe": 2.024,
+      "cagr": 0.222,
+      "maxdd": -0.189,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.74,
+      "cagr": 0.231,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    },
+    "oos_cash_pct": 0.333
+  },
+  "baseline": {
+    "name": "H354-C baseline (pure 12m top-1, no filter)",
+    "params": "best",
+    "is": {
+      "n": 96,
+      "sharpe": 1.561,
+      "cagr": 0.189,
+      "maxdd": -0.189,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.339,
+      "cagr": 0.192,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    },
+    "oos_cash_pct": 0.0
+  },
+  "ref_A": {
+    "name": "OB strict (top-1 needs OB; else BIL)",
+    "params": "ref",
+    "is": {
+      "n": 96,
+      "sharpe": 2.196,
+      "cagr": 0.209,
+      "maxdd": -0.099,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 2.312,
+      "cagr": 0.262,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    },
+    "oos_cash_pct": 0.924
+  },
+  "ref_B": {
+    "name": "OB lenient (top-1 OB\u2192hold; elif top-2 OB\u2192hold; else BIL)",
+    "params": "ref",
+    "is": {
+      "n": 96,
+      "sharpe": 2.25,
+      "cagr": 0.222,
+      "maxdd": -0.102,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 2.268,
+      "cagr": 0.284,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    },
+    "oos_cash_pct": 0.591
+  },
+  "ref_C": {
+    "name": "OB gate (any top-3 has OB \u2192 top-1; else BIL)",
+    "params": "ref",
+    "is": {
+      "n": 96,
+      "sharpe": 2.151,
+      "cagr": 0.223,
+      "maxdd": -0.099,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.902,
+      "cagr": 0.245,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    },
+    "oos_cash_pct": 0.424
+  }
+}
