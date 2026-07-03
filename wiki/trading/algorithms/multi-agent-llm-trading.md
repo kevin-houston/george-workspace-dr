@@ -411,3 +411,39 @@ def get_communication_structure(ticker_a, ticker_b, sector_map):
 **Defense — FactFin**: Counterfactual perturbations at inference time force the model to reason causally rather than recall. Specifically: inject counterfactual event descriptions ('What if CPI had come in at 2.5% instead of 3.1%?') and test whether the model's conviction changes appropriately. Consistent-conviction models are memorizing; variable-conviction models are reasoning.
 
 **Key implication for H163/H174 (PEAD)**: Our OOS window is 2023-2026 for a model trained through 2024. There is potential leakage for 2023 events that fall within training data. Safest evaluation: use only 2025-2026 events as the 'clean' OOS window and re-run H174 confirmation on that subset.
+
+---
+
+## 2026 Reproducibility Audit — Expanded Evidence
+
+### PortBench: Correlation-Aware Portfolio Benchmark (May 2026)
+
+**Source:** arXiv:2605.27887 — Zhao, Chen, Su; submitted May 27, 2026
+
+First benchmark to evaluate LLM portfolio management with explicit asset correlation modeling. Spans six asset classes over a decade. Tests ten frontier LLMs.
+
+**Key finding:** 90% of model-profile combinations fail to outperform a basic equal-weight allocation.
+
+Even models that meet all procedural requirements still suffer catastrophic drawdowns under stress. Two novel metrics:
+- **Dual-layer correlation score**: measures hedging effectiveness + concentration avoidance
+- **CEPS**: tracks how reasoning errors accumulate across pipeline stages (retrieval → analysis → decision)
+
+**Implication for our pipeline**: Our 40/30/30 static blend (H026/H041a/H045) outperforms what 90% of LLM portfolio agents achieve. LLMs as *portfolio managers* are unproven; as *signal components* (H163/H174 FinBERT, H343 OB filter) they add proven value at a well-defined stage.
+
+### Agentic Trading Survey: 77 Studies Audited (May 2026)
+
+**Source:** arXiv:2605.19337 — surveyed through 2026-03-09
+
+Protocol-coded survey of 77 LLM trading studies. Only 19 meet the minimum bar (action output + closed-loop evaluation).
+
+| Criterion | Studies passing (n=19) |
+|-----------|------------------------|
+| Time-consistent data splits | 2/19 (11%) |
+| Explicit transaction cost model | 1/19 (5%) |
+| Universe/survivorship handling | 1/19 (5%) |
+| Execution timing documented | 11/19 (58%) |
+| R3 reproducibility | **0/19 (0%)** |
+
+Reframes LLM-based trading agents as expert-system decision pipelines rather than autonomous traders.
+
+**Conclusion**: Our research checklist (shared-eval-checklist.md) already requires time-consistent splits and transaction costs — this survey confirms these are rare in the academic literature, meaning our results are more rigorous than 94-95% of published work in this space.

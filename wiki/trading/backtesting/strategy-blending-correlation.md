@@ -196,6 +196,63 @@ Based on correlation analysis:
 
 ---
 
+## Dynamic Bounded Multi-Factor Tilts (Jan 2026)
+
+**Source:** arXiv:2601.05428 — "Dynamic Inclusion and Bounded Multi-Factor Tilts for Robust Portfolio Construction" (January 2026)
+
+Methodology for replacing static allocation weights with bounded dynamic tilts. Directly relevant as an alternative to the static 40/30/30 blend (H026/H041a/H045).
+
+### Core Design
+
+1. **Regime estimation**: rolling 12-month IS window → estimate conditional factor returns (bull/bear/neutral)
+2. **Bounded optimization**: maximize IC-weighted Sharpe subject to w_i ∈ [w_min, w_max]
+   - Prevents extreme bets (failure mode of H318 meta-learner)
+   - Typical bounds: w_min=10%, w_max=60% per strategy slot
+3. **Rebalance**: monthly, lag 1 month (same as current ETF rotation)
+
+### Why Bounded vs Unconstrained
+
+H318 meta-learner (NOT CONFIRMED): unconstrained → collapsed to 100% single strategy in IS → destroyed OOS diversity. Bounded tilts prevent this while still allowing meaningful dynamic adjustment.
+
+### Expected Gain vs Static Blend
+
+The paper reports consistent improvements in Sharpe and MaxDD vs both static and unconstrained dynamic weights across US equity factor portfolios. The gain over static comes primarily from regime-conditional downweighting of strategies in their worst regimes (e.g., momentum during crash months).
+
+### Implementation Sketch for H026/H041a/H045
+
+```python
+from scipy.optimize import minimize
+import numpy as np
+
+def bounded_tilt(rets_is, w_min=0.10, w_max=0.60):
+    """Optimize weights with bounds on rolling IS window."""
+    mu = rets_is.mean()
+    cov = rets_is.cov()
+    n = len(mu)
+    
+    def neg_sharpe(w):
+        r = w @ mu
+        v = np.sqrt(w @ cov @ w)
+        return -r / v if v > 0 else 0
+    
+    constraints = [{'type': 'eq', 'fun': lambda w: w.sum() - 1}]
+    bounds = [(w_min, w_max)] * n
+    w0 = np.ones(n) / n
+    
+    result = minimize(neg_sharpe, w0, bounds=bounds, constraints=constraints)
+    return result.x
+
+# Each month: use rolling 12m IS returns for H026, H041a, H045 sleeves
+# Apply w_min=0.10, w_max=0.60 bounds
+# Compare vs static 40/30/30 — track rolling Sharpe improvement
+```
+
+### Proposed Hypothesis: H361 (not yet queued)
+
+Apply bounded dynamic tilts to the 3-strategy production blend (H026/H041a/H045) and test OOS vs static 40/30/30. Gate: OOS Sharpe > 4.158 (current production) AND MaxDD < -3.60%. If confirmed, this becomes the live rebalancing logic.
+
+---
+
 ## Cross-References
 
 - [Position Sizing & Portfolio Construction](../algorithms/position-sizing.md) — Kelly sizing per strategy
