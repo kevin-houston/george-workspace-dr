@@ -1,0 +1,14 @@
+{
+  "id": "H363",
+  "title": "H363 — ML-Forecasted Asymmetric Beta as Factor Signal (arXiv:2604.22933)",
+  "description": "Use machine learning to forecast asymmetric up-beta / down-beta separately for each stock, then construct a long-short portfolio that is long stocks with low down-beta (defensive in crashes) and high up-beta (participates in rallies). arXiv:2604.22933 (Conlon, Cotter, Kynigakis; April 2026) shows that ML methods significantly outperform linear models for forecasting conditional asymmetric betas using firm characteristics. Key finding: trading frictions, intangibles, momentum, and growth are the most important drivers of future risk dynamics. Reconstructing CAPM beta from separate up/down forecasts yields a more accurate market beta — and portfolios built on these forecasts earn positive alpha.",
+  "rationale": "The BAB (Betting Against Beta) family (H192) was CONFIRMED with OOS Sharpe 1.367 on sector-neutral construction. But BAB uses a single unconditional beta estimate. Asymmetric beta splits into up-beta (sensitivity in rising markets) and down-beta (sensitivity in falling markets) — stocks with low down-beta and high up-beta have a superior risk profile that unconditional beta misses. The ML forecasting approach has two advantages over the static asymmetric beta: (1) it predicts future asymmetric beta using firm characteristics, not just historical beta; (2) it captures nonlinearities that linear cross-sectional regressions miss. Universe: H198 30-stock NASDAQ large-cap universe (same data already loaded). Firm characteristics available via yfinance + FMP: momentum 12-1m, size, volume/turnover, P/B, ROE.",
+  "risk": "medium",
+  "apply_status": "pending",
+  "target_file": "/workspace/agent/backtesting/daily/run_h363.py",
+  "source_paper": "arXiv:2604.22933",
+  "proposed_is": "2014-01-01 to 2020-12-31",
+  "proposed_oos": "2021-01-01 to 2026-06-30",
+  "gate": "OOS Sharpe > 1.367 (H192-D sector-neutral BAB baseline), Corr(SPY) < 0.70",
+  "implementation_notes": "Estimate rolling 252-day up-beta = cov(r_stock, r_spy | r_spy > 0) / var(r_spy | r_spy > 0); down-beta symmetric. Features: 12-1m momentum, 1m reversal, log-size, volume-ratio, P/B, ROE. Model: LightGBM (5-fold time-series CV). Target: next 21-day up-beta and down-beta separately. Signal = up-beta_forecast - down-beta_forecast (higher = better risk profile). Long top quintile, skip bottom; hold 1 month."
+}
