@@ -111,3 +111,6 @@ Practitioner survey on the full agentic AI stack. Noted 2026-06-26. See wiki/too
 
 ## Hyper-Extract (github.com/yifanfeng97/Hyper-Extract)
 LLM-powered knowledge extraction framework. Noted 2026-06-26. See wiki/tools/hyper-extract-notes.md. Apache-2.0, ~2.5k stars. Transforms unstructured text → 8 structured knowledge formats (collections, Pydantic models, knowledge graphs, hypergraphs, temporal/spatial graphs). 10+ extraction engines (GraphRAG, LightRAG, Hyper-RAG, KG-Gen). 80+ YAML templates including Finance domain. Has MCP server for Claude Desktop/IDE agents. Obsidian export via [[wikilinks]]. Supports Claude (sonnet-4-6, haiku-4-5, opus-4). High relevance: could auto-extract structure from arXiv papers (dream cycle), earnings 8-Ks (PEAD), and wiki ingestion. `pip install hyper-extract`.
+
+## QuantMind (github.com/LLMQuant/quant-mind)
+Finance-domain knowledge extraction + retrieval framework. Noted 2026-07-04. See wiki/tools/quant-mind-notes.md. MIT, 1.7k stars. Ingests arXiv papers, news, SEC filings → semantic knowledge graph with RAG/deep-research/NL query retrieval. Complements Hyper-Extract: QuantMind is retrieval-first (answer questions across a corpus), Hyper-Extract is structure-first (extract typed entities and graphs). High relevance: could power dream cycle arXiv scans and hypothesis ideation queries against accumulated quant literature.
