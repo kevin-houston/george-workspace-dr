@@ -1,0 +1,133 @@
+{
+  "scan_date": "2026-07-04",
+  "angles_searched": [
+    "pairs trading + LLM + cointegration",
+    "PEAD + NLP + FinBERT + 2026",
+    "cross-sectional momentum + factor + ML alpha 2026",
+    "multi-agent LLM trading 2026 new framework",
+    "GitHub trending quantitative finance 2026"
+  ],
+  "papers_reviewed": [
+    {
+      "title": "The Geometric Volatility Smile with Jumps: A Closed-Form Three-Term Decomposition",
+      "id": "SSRN:6637139",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6637139",
+      "date": "2026-04-23",
+      "relevance_score": 9,
+      "notes": "Extends Dean BSM manifold series with jump term κ_eff=κ_stochvol+κ_leverage+κ_jumps(T). Directly expands bsm-information-geometry.md. Applied in Phase 1 wiki update.",
+      "staged": false,
+      "outcome": "Applied directly in Phase 1 wiki expansion"
+    },
+    {
+      "title": "Curved Greeks: A Geometric Layer for Option P&L Adjustments",
+      "id": "arXiv:2603.14438",
+      "url": "https://arxiv.org/abs/2603.14438",
+      "date": "2026-03-15",
+      "relevance_score": 7,
+      "notes": "Coordinate-invariant second-order Greeks via covariant Hessian. Relevant to H309 dispersion and H266 iron condor. Applied in Phase 1 wiki expansion.",
+      "staged": false,
+      "outcome": "Applied directly in Phase 1 wiki expansion"
+    },
+    {
+      "title": "FactorMiner: A Self-Evolving Agent with Skills and Experience Memory for Financial Alpha Discovery",
+      "id": "arXiv:2602.14670",
+      "url": "https://arxiv.org/abs/2602.14670",
+      "date": "2026-02-16",
+      "relevance_score": 8,
+      "notes": "Ralph Loop paradigm with Experience Memory. Addresses library-scaling problem in H349/H352 auto-alpha pipeline. Staged as wiki update to auto-alpha-discovery.md.",
+      "staged": true,
+      "staged_file": "1_auto-alpha-discovery-update.json"
+    },
+    {
+      "title": "AlphaEval: A Comprehensive and Efficient Evaluation Framework for Formula Alpha Mining",
+      "id": "arXiv:2508.13174",
+      "url": "https://arxiv.org/abs/2508.13174",
+      "date": "2025-08-10 (rev 2026-06-02, KDD2026)",
+      "relevance_score": 8,
+      "notes": "5-dimension backtest-free alpha evaluation. GitHub: LeoDingggg/AlphaEval. Pre-screening layer for H288/H349/H352 sessions. Staged alongside FactorMiner.",
+      "staged": true,
+      "staged_file": "1_auto-alpha-discovery-update.json"
+    },
+    {
+      "title": "DeePM: Regime-Robust Deep Learning for Systematic Macro Portfolio Management",
+      "id": "arXiv:2601.05975",
+      "url": "https://arxiv.org/abs/2601.05975",
+      "date": "2026-01-09",
+      "relevance_score": 7,
+      "notes": "Net Sharpe ~2x trend-following on 50 futures. Architecture: Causal Sieve + Macro Graph Prior + EVaR. H366 candidate: apply to H261b commodity ETF universe.",
+      "staged": true,
+      "staged_file": "2_deepm-hypothesis.json"
+    },
+    {
+      "title": "Agentic Trading: When LLM Agents Meet Financial Markets",
+      "id": "arXiv:2605.19337",
+      "url": "https://arxiv.org/abs/2605.19337",
+      "date": "2026-05-28",
+      "relevance_score": 6,
+      "notes": "Systematic review 77 studies; 0/77 R3-level reproducibility; extends prior 0/19 audit to broader sample. Wiki update to multi-agent-llm-trading.md.",
+      "staged": true,
+      "staged_file": "3_multi-agent-llm-update.json"
+    },
+    {
+      "title": "ai-hedge-fund (GitHub)",
+      "id": "github:virattt/ai-hedge-fund",
+      "url": "https://github.com/virattt/ai-hedge-fund",
+      "date": "active 2026",
+      "relevance_score": 6,
+      "notes": "49.6k stars — most popular AI finance repo. Accuracy-weighted multi-agent aggregation pattern. Missed in prior GitHub scans. Staged in Proposal 3.",
+      "staged": true,
+      "staged_file": "3_multi-agent-llm-update.json"
+    },
+    {
+      "title": "Moira: Language-driven HRL for Pair Trading",
+      "id": "arXiv:2605.01954",
+      "url": "https://arxiv.org/pdf/2605.01954",
+      "date": "2026-05",
+      "relevance_score": 5,
+      "notes": "Already staged as H316 STUB. Skip.",
+      "staged": false,
+      "outcome": "Already covered as H316"
+    },
+    {
+      "title": "Cross-Stock Predictability via LLM-Augmented Semantic Networks",
+      "id": "arXiv:2604.19476",
+      "url": "https://arxiv.org/html/2604.19476",
+      "date": "2026-04",
+      "relevance_score": 5,
+      "notes": "Already staged as H319 STUB. Skip.",
+      "staged": false,
+      "outcome": "Already covered as H319"
+    },
+    {
+      "title": "Enhancing PEAD Measurement with LLMs (FinNLP 2025)",
+      "id": "ACL:2025.finnlp-2.13",
+      "url": "https://aclanthology.org/2025.finnlp-2.13.pdf",
+      "date": "2025",
+      "relevance_score": 4,
+      "notes": "FinBERT 57.6% classification accuracy on PEAD direction. Marginal improvement vs H174; no new methodology that would change our approach.",
+      "staged": false,
+      "outcome": "Below threshold — H174 already confirmed at WR=81.8%"
+    },
+    {
+      "title": "FactorEngine: Program-level Knowledge-Infused Factor Mining",
+      "id": "arXiv:2603.16365",
+      "url": "https://arxiv.org/abs/2603.16365",
+      "date": "2026-03",
+      "relevance_score": 5,
+      "notes": "Similar to FactorMiner; multi-agent code generation for factors. Less novel memory mechanism. Covered by FactorMiner staging.",
+      "staged": false,
+      "outcome": "Covered by Proposal 1 (FactorMiner is superior)"
+    }
+  ],
+  "staged_count": 3,
+  "staged_files": [
+    "1_auto-alpha-discovery-update.json",
+    "2_deepm-hypothesis.json",
+    "3_multi-agent-llm-update.json"
+  ],
+  "wiki_directly_updated": [
+    "wiki/trading/algorithms/bsm-information-geometry.md",
+    "wiki/trading/index.md",
+    "wiki/trading/research-log/2026-07-04.md"
+  ]
+}
