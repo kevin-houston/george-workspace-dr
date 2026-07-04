@@ -51,11 +51,12 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 ## PEAD Overnight Pass
 
 **Trigger:** ~11 PM CT nightly.
-**Run:** `python3 /workspace/agent/backtesting/paper_trading/pead_overnight.py`
+**Run:** `source /workspace/agent/venv/bin/activate && python3 /workspace/agent/backtesting/paper_trading/pead_overnight.py`
 **Output:** `backtesting/paper_trading/pead_watchlist.json`
-**Success:** Log ends with "Overnight pass complete." Watchlist written (empty is valid — no earnings tonight).
+**Success:** Log ends with "Overnight pass complete." or "No earnings tonight. Watchlist cleared." — both are valid.
 
 **Gotchas:**
+- **Must use venv** — bare `python3` lacks numpy. Always `source /workspace/agent/venv/bin/activate` first.
 - EDGAR requires `User-Agent` header with identity (real email). Fixed in commit `0a1d0f5`. If "User-Agent identity is not set" appears, the env var `EDGAR_USER_AGENT` is missing — check `.env` or set it inline.
 - FinBERT model (`ProsusAI/finbert`) is ~400MB. First run on a fresh container downloads it — allow up to 5 min. Subsequent runs use cache.
 - "No earnings tonight. Watchlist cleared." is normal — not an error. The strategy requires earnings + a qualifying 8-K.
@@ -102,6 +103,46 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 **Gotchas:**
 - "No positions to close" is valid. The strategy is intentionally patient — 20 trading days is ~4 calendar weeks.
 - Hold period is 20 *trading* days from entry, not calendar days. Script calculates correctly — don't override.
+
+---
+
+## PEAD-GAP Overnight Scan
+
+**Trigger:** 11 PM CT nightly.
+**Run:** `source /workspace/agent/venv/bin/activate && python3 /workspace/agent/backtesting/paper_trading/pead_gap_overnight.py`
+**Output:** `backtesting/paper_trading/pead_gap_watchlist.json`
+**Success:** Watchlist written (empty list is valid — no earnings tonight). No Kevin notification needed.
+
+**Gotchas:**
+- No FinBERT. Just finds earnings tickers in the universe — the gap check happens tomorrow at the open.
+- Parallel to H174 overnight pass (which runs at 11 PM too and writes `pead_watchlist.json`). Both run independently.
+
+---
+
+## PEAD-GAP Open Pass
+
+**Trigger:** 9:32 AM CT on weekdays.
+**Run:** `NO_PROXY=paper-api.alpaca.markets,api.alpaca.markets no_proxy=paper-api.alpaca.markets,api.alpaca.markets source /workspace/agent/venv/bin/activate && python3 /workspace/agent/backtesting/paper_trading/pead_gap_open.py`
+**Success:** Orders submitted for gapped-up candidates, or log confirms none qualified.
+
+**Gotchas:**
+- Reads from `pead_gap_watchlist.json` (NOT `pead_watchlist.json` — don't confuse them).
+- Alpaca orders: use NO_PROXY for paper-api.alpaca.markets to bypass OneCLI credential stripping.
+- Positions written to `pead_gap_positions.json`; strategy tracked as `PEAD_GAP` in strategy_accounts.json.
+- Only message Kevin if orders are placed.
+
+---
+
+## PEAD-GAP Exits Pass
+
+**Trigger:** 2:46 PM CT on weekdays.
+**Run:** `NO_PROXY=paper-api.alpaca.markets,api.alpaca.markets no_proxy=paper-api.alpaca.markets,api.alpaca.markets source /workspace/agent/venv/bin/activate && python3 /workspace/agent/backtesting/paper_trading/pead_gap_exits.py`
+**Success:** Log confirms positions checked; any 20-day-old positions closed via MOC.
+
+**Gotchas:**
+- Reads `pead_gap_positions.json`, NOT `pead_positions.json`.
+- Same 20 trading-day hold as H174. MOC sell → fallback to DAY market order if CLS fails.
+- Do not message Kevin unless exits are submitted.
 
 ---
 
