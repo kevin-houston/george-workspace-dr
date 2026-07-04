@@ -286,3 +286,104 @@ Production-focused pipeline combining:
 - [Factor Models](factor-models.md) — academic factor foundations (FF5, q-factor)
 - [Multi-Agent LLM Trading](multi-agent-llm-trading.md) — broader LLM trading agent landscape
 - [Machine Learning for Trading](../tools/ml-for-trading.md) — FinAgent, Alpha-GPT, LLM ideation gap
+
+---
+
+## Method 6 — FactorMiner: Self-Evolving Agent with Experience Memory (H365 candidate)
+
+**Source:** arXiv:2602.14670 | Wang et al. (Tsinghua/Peng Cheng Lab) | Feb 16, 2026  
+
+### Algorithm
+
+FactorMiner addresses a specific scaling failure in alpha mining: as the factor library grows, naive LLM generation produces increasingly redundant signals. The fix is **structured Experience Memory** that distills prior search trials into actionable constraints.
+
+**Ralph Loop paradigm:**
+1. **Retrieve** — query Experience Memory for relevant successful patterns and failed experiments
+2. **Generate** — LLM proposes new factors guided by memory priors
+3. **Evaluate** — deterministic IC/factor testing pipeline assesses generated factors
+4. **Distill** — results (both successes and failures) update Experience Memory
+
+**Memory structures:**
+- **Success patterns**: factor templates that produced IC > threshold, stored with context (market regime, universe size, lookback)
+- **Failure constraints**: factors that failed with reasons (overcrowding, data snooping, regime-dependent)
+- **Modular Skill Architecture**: encapsulates systematic evaluation as reusable tools
+
+### Key distinction from QuantaAlpha and TreEvo
+
+| Feature | QuantaAlpha | TreEvo | FactorMiner |
+|---------|-------------|--------|-------------|
+| Structure | Trajectory evolution | Tree structure | Experience Memory |
+| Anti-redundancy | Complexity penalty | Pruning | Memory-guided exclusion |
+| Session cost | $5-20 | $3-10 | ~$5-15 |
+| Wall-clock | 2-4h | 20min | 1-3h |
+
+### Fit for Our Universe
+- Tested across multiple assets and markets; "competitive performance with diverse library of high-quality factors"
+- Memory mechanism specifically addresses the H349/H352 limitation: generating varied factors after the first session is hard without explicit failure tracking
+- No GPU required; OpenAI API compatible
+
+---
+
+## Evaluation Tool — AlphaEval: Backtest-Free Alpha Screening (KDD 2026)
+
+**Source:** arXiv:2508.13174 | KDD 2026 | GitHub: https://github.com/LeoDingggg/AlphaEval  
+
+### What It Solves
+
+For all alpha mining sessions (H288/H349/H352/H365), the bottleneck is sequential backtesting: each candidate factor requires running a full return attribution before you know if it's worth keeping. AlphaEval replaces this with a parallelizable, backtest-free screening pass.
+
+### Five Evaluation Dimensions
+
+| Dimension | What it measures |
+|-----------|------------------|
+| Predictive power | IC/RankIC on holdout period |
+| Stability | IC volatility across rolling windows |
+| Robustness | Performance under market perturbations (synthetic stress) |
+| Financial logic | LLM-judged alignment with known factor premia |
+| Diversity | Pairwise factor correlation within candidate set |
+
+### Usage Pattern
+
+```python
+# Install
+# pip install (see github.com/LeoDingggg/AlphaEval for current install)
+
+# In any alpha mining session (H288/H349/H352):
+# 1. Generate N candidate factors (e.g., 20 TreEvo outputs)
+# 2. Run AlphaEval screening — parallel, ~5x faster than sequential backtest
+# 3. Keep top-K by composite score
+# 4. Run full backtests only on survivors
+
+# Example workflow
+from alphaeval import AlphaEvaluator
+
+evaluator = AlphaEvaluator(
+    universe='SPX500',        # or yfinance ticker list
+    is_window=('2015', '2022'),
+    oos_window=('2022', '2025'),
+    dimensions=['ic', 'stability', 'diversity']  # skip 'logic' for speed
+)
+
+results = evaluator.evaluate(candidate_factors)  # list of factor expressions
+top_k = results.rank('composite').head(5)
+```
+
+### Integration with Current Pipeline
+- Run AlphaEval screening after each TreEvo/QuantaAlpha session before committing to full backtests
+- Use diversity dimension to enforce low inter-factor correlation (natural anti-crowding)
+- Financial logic dimension can replace manual review for obvious failures
+
+---
+
+## Updated Comparison Summary (including FactorMiner)
+
+| Method | OOS Sharpe (Equity) | Wall-Clock | API Cost | GPU? | Fit |
+|--------|--------------------|-----------|---------|----- |----|
+| Attention Factors (H347) | 2.3 net (500-cap) | Hours | None | Required | Excellent |
+| TreEvo (H352) | 0.0317 IC on SPX | **20 min** | $3–10/run | No | Excellent |
+| QuantaAlpha (H349) | ~4.75% ann. excess | 2–4h | $5–20/run | No | Good |
+| **FactorMiner (H365)** | Competitive (multi-market) | 1–3h | $5–15/run | No | **Excellent (scaling)** |
+| Hubble | Positive OOS range/vol | 3–6h | $25–50/run | No | Excellent |
+| Constrained DSL (H288) | 1.55 Sharpe (crypto) | 4–8h | $10–30/run | No | Moderate |
+
+**AlphaEval** sits across all methods as a pre-screening layer: run after any session, before committing to full backtests.

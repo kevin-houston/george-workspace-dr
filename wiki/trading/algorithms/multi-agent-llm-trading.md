@@ -447,3 +447,43 @@ Protocol-coded survey of 77 LLM trading studies. Only 19 meet the minimum bar (a
 Reframes LLM-based trading agents as expert-system decision pipelines rather than autonomous traders.
 
 **Conclusion**: Our research checklist (shared-eval-checklist.md) already requires time-consistent splits and transaction costs — this survey confirms these are rare in the academic literature, meaning our results are more rigorous than 94-95% of published work in this space.
+
+---
+
+## Reproducibility Audit Update (2026-07-04)
+
+### Agentic Trading Survey (arXiv:2605.19337)
+
+**"Agentic Trading: When LLM Agents Meet Financial Markets"**
+- **arXiv**: 2605.19337 | Protocol-coded review through 2026-03-09
+- **Scope**: 77 studies screened; 19 primary studies meeting minimum standards for analysis
+- **Framework**: Architecture-Capability-Adaptation lens; expert-system decision pipeline characterization
+
+**Key reproducibility findings (extends prior 0/19 audit):**
+
+| Metric | Count (of 19 primary studies) |
+|--------|-------------------------------|
+| Extractable time-consistent protocols | 2 |
+| Explicitly models transaction costs | 1 |
+| R0 (lowest reproducibility) | 15 |
+| R3 (fully reproducible) | 0 |
+
+This is the largest systematic audit of LLM trading research to date. The prior finding ("0/19 fully reproducible" in the multi-agent section) now has a broader base: 77-study sample, 2026 systematic methodology, same conclusion.
+
+**Implication for our pipeline**: Any LLM trading system (H274 PEAD upgrade, H280 MarketSenseAI, H318 meta-learner) that does NOT meet minimum standards — realistic transaction costs, time-consistent signals, OOS evaluation — should not be prioritized. The CBS cost metric remains the right screening gate.
+
+---
+
+## New GitHub Reference: ai-hedge-fund (49.6k★)
+
+**Repository**: [github.com/virattt/ai-hedge-fund](https://github.com/virattt/ai-hedge-fund)  
+**Stars**: 49,600+ (most popular AI finance repo on GitHub as of 2026-07)
+
+**Architecture:**
+- Distinct investment philosophy agents: bull analyst, bear analyst, fundamentals analyst, technicals analyst, risk manager, portfolio manager
+- Agents debate investment decisions; votes weighted by **recent accuracy** (dynamic accuracy weighting, not static role weights)
+- Outcome: weighted aggregation across all views
+
+**Key difference from TradingAgents (84.9k★)**: ai-hedge-fund uses accuracy-weighted voting rather than static role hierarchy. Bull/bear research agents that have been right recently get higher weight — adaptive credibility scoring.
+
+**Practical takeaway for H274/H280**: The accuracy-weighted aggregation pattern is directly applicable to multi-agent PEAD (H274). If we run multiple scoring agents (FinBERT, GPT-4o, BART) and track each agent's realized WR per quarter, weighting by recent accuracy could improve the ensemble signal vs equal-weight averaging.
