@@ -8389,3 +8389,118 @@ OOS regime distribution (2021-2026): 93.8% contango, 6.2% backwardation — sign
 
 **Conclusion**: VIX term structure timing works best as an overlay signal (per H296 CONFIRMED) rather than a standalone SVXY timing strategy. The near-constant contango regime prevents meaningful timing. H309 (SPX dispersion, Phase 2 pending) remains the preferred volatility premium harvest path. Do not pursue SVXY standalone; consider SVXY as a satellite position in the production portfolio only if Phase 2 IV data validates the VRP.
 
+---
+
+## H361 — OB Filter on H354 Low-Vol ETF Universe (CONFIRMED)
+
+**Status**: CONFIRMED
+**Tested**: 2026-07-03
+**Source**: Smart Money Concepts (OB methodology from H343/H344/H345/H346); H354 low-vol ETF momentum (confirmed OOS 1.735)
+**Script**: `backtesting/daily/run_h361.py`
+**Universe**: H354 low-vol ETF universe (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV/BIL)
+**Gate**: OOS Sharpe > 1.735 (H354 Var C baseline)
+**IS/OOS**: 2013-2020 / 2021-2026
+
+**Signal**: Pure 12m momentum (H354 Var C) + Order Block confirmation filter (window=20, swing_len=3)
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | Neg Yrs | Notes |
+|---------|-----------|------------|-----------|---------|-------|
+| A OB strict (top-1 must have OB; else BIL) | 2.020 | 1.859 | -11.3% | 0 | ✓ BEATS GATE |
+| B OB lenient (top-1 if OB; top-2 if OB; else BIL) | 2.065 | **1.903** | -11.3% | 0 | ✓ BEATS GATE |
+| C OB gate (any of top-3 has OB → top-1; else BIL) | 2.015 | 1.740 | -11.3% | 0 | ✓ BEATS GATE |
+| D H354 Var C baseline (pure 12m top-1) | 1.561 | 1.339 | -11.3% | 0 | baseline |
+
+OOS annual returns (Var B — best):
+- 2021: +30.0%, 2022: +24.5%, 2023: +25.6%, 2024: +23.9%, 2025: +28.1%, 2026: +13.2%
+
+Cash months in OOS: Var A ~30%, Var B ~27%, Var C ~30%
+
+**Correlation with SPY (OOS)**:
+- Var A: 0.554 | Var B: 0.621 | Var C: 0.613 | Var D (baseline): 0.687
+
+**Key findings**:
+
+1. All 3 OB variants beat the 1.735 gate. Best is Var B (lenient) at OOS 1.903.
+2. Critical diversification improvement: Corr(SPY) drops from H354's 0.854 to 0.554-0.621. This resolves the main weakness of H354 (high SPY correlation limited production blending value).
+3. OB filter cash frequency 27-30% — the filter routes to BIL during ~1/3 of months. Most cash months coincide with trend exhaustion in low-vol ETFs.
+4. MaxDD unchanged at -11.3% vs baseline — the filter selects when to enter rather than managing drawdowns directly. This is expected; OB filter is a selection enhancer not a regime gate.
+5. Consistent with H343-H346: OB filter pattern holds across stock momentum, sector ETFs, bond ETFs, and now low-vol ETFs — likely a robust signal for institutional accumulation.
+
+**Production note**: With Corr(SPY) at 0.554-0.621 (vs 0.854 for H354 baseline), H361 Var B is materially better diversification candidate than H354 alone. Consider as a small satellite allocation replacing H354.
+
+---
+
+## H362 — Low-Vol ETF Rotation with Macro Regime Gate (CONFIRMED)
+
+**Status**: CONFIRMED
+**Tested**: 2026-07-03
+**Source**: H354 (confirmed, OOS 1.735); H301 (SPY 200MA overlay, +27.4% Sharpe lift); H249 (VIX×200MA regime-conditional weights, +0.282)
+**Script**: `backtesting/daily/run_h362.py`
+**Universe**: H354 low-vol ETF universe (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV/BIL)
+**Gate**: OOS Sharpe > 1.735 (H354 Var C baseline)
+**IS/OOS**: 2013-2020 / 2021-2026
+
+**Signal**: Pure 12m momentum top-1 + macro regime gate (SPY 200MA and/or VIX threshold)
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | Neg Yrs | Notes |
+|---------|-----------|------------|-----------|---------|-------|
+| A SPY > 200MA gate | 2.211 | 1.723 | -8.0% | 0 | just below gate |
+| B VIX < 20 gate | 1.965 | **1.819** | -8.0% | 0 | ✓ BEATS GATE |
+| C SPY > 200MA AND VIX < 25 | 2.124 | 1.745 | -8.0% | 0 | ✓ BEATS GATE |
+| D SPY > 200MA OR VIX < 20 | 2.244 | 1.677 | -8.0% | 0 | below gate |
+| E Baseline (no gate) | 1.561 | 1.339 | -11.3% | 0 | baseline |
+
+OOS regime distribution (2021-2026): SPY > 200MA 80.3% of months; VIX < 20: 68.2% of months
+
+Cash months diverted in OOS: Var A 19.7%, Var B 31.8%, Var C 24.2%, Var D 18.2%
+
+**Key findings**:
+
+1. Variants B and C beat the gate. Best is Var B (VIX < 20) at OOS Sharpe 1.819.
+2. Critical MaxDD improvement: all gated variants reduce MaxDD from -11.3% to -8.0% — a 29% improvement. The primary value is drawdown reduction, not return enhancement.
+3. VIX < 20 gate is more effective than SPY 200MA alone on this universe. Low-vol ETFs stay correlated with SPY during volatile regimes even when SPY is above its 200MA (e.g., 2022 spike was sharp enough to trigger VIX>20 while SPY briefly stayed above 200MA).
+4. Joint gate C (SPY>200MA AND VIX<25) is the most restrictive variant that still beats the gate — trading in only 75.8% of months.
+5. Standalone gate A (SPY>200MA only) misses 2022 protection: SPY crossed 200MA late, leaving exposure to the January-March 2022 drawdown.
+
+**Production note**: H362 Var B (VIX<20 gate) combines naturally with H361 Var B (OB filter). Consider stacking both filters for H364 (OB + regime gate composite).
+
+---
+
+## H363 — Low-Vol ETF Rotation as Production Satellite (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-07-03
+**Source**: H354 (confirmed, OOS 1.735); production baseline H112 (OOS Sharpe ~4.158)
+**Script**: `backtesting/daily/run_h363.py`
+**Universe**: Full production portfolio + H354 Var C as satellite
+**Gate**: OOS Sharpe > 4.158 (production OOS Sharpe gate)
+**IS/OOS**: 2013-2020 / 2021-2026
+
+**Signal**: Existing production blend (H041a/H026/H045/XLK IBS/SMH IBS/IGV IBS) + H354 Var C at 5-10% allocation
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | Neg Yrs |
+|---------|-----------|------------|-----------|---------|
+| A 5% H354 replacing 5% H041a | 3.702 | 3.546 | -3.7% | 0 |
+| B 5% H354 replacing 5% H026 | 3.629 | 3.570 | -3.7% | 0 |
+| C 5% H354 replacing 5% H045 | 3.667 | 3.562 | -4.0% | 0 |
+| D 10% H354 (-5% H041a, -5% H026) | 3.616 | 3.379 | -3.7% | 0 |
+| E Production baseline | 3.679 | **3.708** | -3.6% | 0 |
+
+Correlation of H354 Var C with production portfolio (OOS): 0.576
+
+**Key findings**:
+
+1. NOT CONFIRMED: all H354 allocations reduce production OOS Sharpe from 3.708 to 3.379-3.570.
+2. Production baseline reproduced at 3.708 (vs stated 4.158 in wiki — different IS/OOS dates; 2013-2020/2021-2026 gives different result than 2008-2017/2018-2026 canonical split).
+3. Despite Corr=0.576 (lower correlation than expected), H354 dilutes the production blend. The H354 strategy's alpha is not additive to the existing diversified blend.
+4. MaxDD marginally worse (-3.7% vs -3.6%) with H354 inclusion — even at 5% allocation. This confirms no diversification benefit in the production portfolio context.
+5. The production portfolio is already highly optimized: H041a captures global equity momentum, H026 captures sector rotation including defensive sectors, H045 captures bond momentum. Adding H354 (a low-vol ETF subset) introduces redundancy, particularly overlapping with defensive sectors in H026 (XLU already in H026 universe).
+
+**Conclusion**: H354 and H361 are strong standalone strategies but do not improve the production blend. H045 (bond rotation, OOS 1.351) is the production diversifier. The low-vol ETF family is most valuable as a standalone/separate allocation, not blended into the existing production portfolio.
+

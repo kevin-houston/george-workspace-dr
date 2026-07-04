@@ -1,0 +1,70 @@
+{
+  "A": {
+    "name": "OB strict (top-1 must have OB; else BIL)",
+    "is": {
+      "n": 96,
+      "sharpe": 2.02,
+      "cagr": 0.212,
+      "maxdd": -0.189,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.859,
+      "cagr": 0.231,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    }
+  },
+  "B": {
+    "name": "OB lenient (top-1 if OB; top-2 if OB; else BIL)",
+    "is": {
+      "n": 96,
+      "sharpe": 2.065,
+      "cagr": 0.221,
+      "maxdd": -0.193,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.903,
+      "cagr": 0.246,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    }
+  },
+  "C": {
+    "name": "OB gate (any of top-3 has OB \u2192 top-1; else BIL)",
+    "is": {
+      "n": 96,
+      "sharpe": 2.015,
+      "cagr": 0.222,
+      "maxdd": -0.189,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.74,
+      "cagr": 0.231,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    }
+  },
+  "D": {
+    "name": "H354 Var C baseline (pure 12m top-1)",
+    "is": {
+      "n": 96,
+      "sharpe": 1.561,
+      "cagr": 0.189,
+      "maxdd": -0.189,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.339,
+      "cagr": 0.192,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    }
+  }
+}
