@@ -1,7 +1,7 @@
 ---
-updated: 2026-06-29
+updated: 2026-07-03
 sources_indexed: 4
-pages: 183
+pages: 184
 ---
 
 # Wiki Index
@@ -248,6 +248,7 @@ When answering a query:
 - [AI Model Landscape 2026](ai-industry/model-landscape-2026.md) — frontier model snapshot: GPT-5.5/Claude Opus 4.7/Gemini 3.1/Grok 4/DeepSeek V4 (Huawei Ascend); Claude Fable 5 export-ban (June 12); SpaceXAI (xAI absorbed Feb 2026, Cursor $60B acquisition June 16); geopolitical/regulatory context ← updated 2026-06-21
 - [AI Agent Frameworks Ecosystem 2026](ai-industry/agent-frameworks-2026.md) — LangGraph (stateful/production), CrewAI (role-based multi-agent), AutoGen (maintenance mode), Agno, PydanticAI; architecture patterns; relevance to George's stack ← 2026-05-29
 - [AI Infrastructure / Compute Layer 2026](ai-industry/ai-infrastructure-2026.md) — GPU cloud providers (Lambda/CoreWeave/RunPod/Vast.ai); H100/B200 pricing; vLLM/SGLang/TGI inference servers; cost structure for production LLM apps ← 2026-05-29
+- [LLM Evaluation & Benchmarking for Finance 2026](ai-industry/llm-finance-benchmarks-2026.md) — CLQT closed-loop diagnostic benchmark; BacktestBench 18k QA pairs (LLMs fail strategy consistency); PortBench (90% fail vs equal-weight); reproducibility audit (0/19 R3); ReCAP regime-adaptive continual learning; HMM+RL allocation (Sharpe 1.68 vs 0.92 static); guidance on LLM vs deterministic split ← new 2026-07-03
 
 ---
 

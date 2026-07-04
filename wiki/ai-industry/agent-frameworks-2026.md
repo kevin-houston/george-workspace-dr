@@ -108,5 +108,6 @@ The NanoClaw platform handles agent lifecycle (scheduling, memory, messaging) so
 ## See Also
 
 - [AI Model Landscape 2026](model-landscape-2026.md)
+- [LLM Evaluation & Benchmarking for Finance 2026](llm-finance-benchmarks-2026.md) — CLQT, BacktestBench, PortBench; when to use LLMs vs deterministic rules in trading pipelines
 - [OpenAlice](../tools/openalice.md) — full-lifecycle AI trading agent built on similar agentic patterns
 - [LiveKit](../trading/tools/livekit.md) — real-time agent communication layer

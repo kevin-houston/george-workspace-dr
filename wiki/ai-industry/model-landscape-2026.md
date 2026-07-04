@@ -114,4 +114,5 @@ Two stories define the regulatory arc:
 
 - [AI Agent Frameworks Ecosystem](agent-frameworks-2026.md)
 - [AI Infrastructure / Compute Layer](ai-infrastructure-2026.md)
+- [LLM Evaluation & Benchmarking for Finance 2026](llm-finance-benchmarks-2026.md) — how frontier models perform on quantitative finance tasks; CLQT, BacktestBench, PortBench
 - [The AI Decoupling](../concepts/ai-decoupling.md) — SaaS/AI ecosystem split; MoE economics
