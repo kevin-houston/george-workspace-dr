@@ -1,14 +1,18 @@
 {
-  "id": "H362",
-  "title": "H362 — HMM + RL Regime Allocation on SPY/TLT/GLD (arXiv:2605.27848)",
-  "description": "Add a reinforcement-learning allocation policy on top of the 3-state Gaussian HMM regime detector from H251. H251 tested SPY/TLT/GLD with a 3-state HMM but used static regime-conditional weights (OOS Sharpe 0.941). arXiv:2605.27848 (Verma et al., May 2026) applies an RL policy over the same 3-state HMM on 2004-2025 SPY/TLT/GLD data and achieves Sharpe 1.68 vs static 0.92 — a 1.83× improvement. The RL policy dynamically adjusts within each regime state rather than applying fixed weights. Hypothesis: replacing H251's static regime-conditional weights with an RL-trained policy improves OOS Sharpe beyond the H311 EW-4 gate (1.532).",
-  "rationale": "H251 was CONFIRMED with OOS Sharpe 0.941 but noted the HMM behaved as near-static 80/10/10 allocation. The limitation was static weights, not the regime detector. RL policies can learn non-linear allocation rules within each regime that static weights cannot. The paper uses PPO or similar RL algorithm; our implementation can use stable-baselines3 (already installed). The 3-asset universe (SPY/TLT/GLD) matches H251 exactly — no new data infrastructure needed. Gate: OOS Sharpe > 1.532 (H311 EW-4+VIX benchmark), MaxDD < -10%.",
+  "id": "H367",
+  "title": "H367 \u2014 HMM + RL Regime Allocation on SPY/TLT/GLD (arXiv:2605.27848)",
+  "description": "Add a reinforcement-learning allocation policy on top of the 3-state Gaussian HMM regime detector from H251. H251 tested SPY/TLT/GLD with a 3-state HMM but used static regime-conditional weights (OOS Sharpe 0.941). arXiv:2605.27848 (Verma et al., May 2026) applies an RL policy over the same 3-state HMM on 2004-2025 SPY/TLT/GLD data and achieves Sharpe 1.68 vs static 0.92 \u2014 a 1.83\u00d7 improvement. The RL policy dynamically adjusts within each regime state rather than applying fixed weights. Hypothesis: replacing H251's static regime-conditional weights with an RL-trained policy improves OOS Sharpe beyond the H311 EW-4 gate (1.532).",
+  "rationale": "H251 was CONFIRMED with OOS Sharpe 0.941 but noted the HMM behaved as near-static 80/10/10 allocation. The limitation was static weights, not the regime detector. RL policies can learn non-linear allocation rules within each regime that static weights cannot. The paper uses PPO or similar RL algorithm; our implementation can use stable-baselines3 (already installed). The 3-asset universe (SPY/TLT/GLD) matches H251 exactly \u2014 no new data infrastructure needed. Gate: OOS Sharpe > 1.532 (H311 EW-4+VIX benchmark), MaxDD < -10%.",
   "risk": "medium",
-  "apply_status": "pending",
-  "target_file": "/workspace/agent/backtesting/daily/run_h362.py",
+  "apply_status": "applied",
+  "target_file": "/workspace/agent/backtesting/daily/run_h367.py",
   "source_paper": "arXiv:2605.27848",
   "proposed_is": "2004-01-01 to 2020-12-31",
   "proposed_oos": "2021-01-01 to 2026-06-30",
-  "dependencies": ["H251 (3-state HMM code)", "stable-baselines3 (PPO)"],
-  "notes": "Start with the H251 HMM regime labels as features; add daily returns, VIX, yield curve as additional state inputs. RL episode = 1 year; reward = risk-adjusted return. Train on IS; freeze policy for OOS evaluation. Do NOT re-train in OOS."
+  "dependencies": [
+    "H251 (3-state HMM code)",
+    "stable-baselines3 (PPO)"
+  ],
+  "notes": "Start with the H251 HMM regime labels as features; add daily returns, VIX, yield curve as additional state inputs. RL episode = 1 year; reward = risk-adjusted return. Train on IS; freeze policy for OOS evaluation. Do NOT re-train in OOS.",
+  "note_renumbered": "Renumbered from H362 \u2014 H362 was already confirmed as a different hypothesis"
 }

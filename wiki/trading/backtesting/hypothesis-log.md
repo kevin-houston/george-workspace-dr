@@ -8504,3 +8504,45 @@ Correlation of H354 Var C with production portfolio (OOS): 0.576
 
 **Conclusion**: H354 and H361 are strong standalone strategies but do not improve the production blend. H045 (bond rotation, OOS 1.351) is the production diversifier. The low-vol ETF family is most valuable as a standalone/separate allocation, not blended into the existing production portfolio.
 
+
+---
+
+## H367 — HMM + RL Regime Allocation on SPY/TLT/GLD (PROPOSED)
+
+**Status**: PROPOSED
+**Staged**: 2026-07-04 (renumbered from H362 conflict)
+**Source**: arXiv:2605.27848 (Verma et al., May 2026); builds on H251 (3-state HMM, OOS 0.941)
+**Script**: `backtesting/daily/run_h367.py`
+**Universe**: SPY, TLT, GLD
+**Gate**: OOS Sharpe > 1.532 (H311 EW-4+VIX benchmark), MaxDD < -10%
+**IS/OOS**: 2004-2020 / 2021-2026
+
+Replace H251's static regime-conditional weights with PPO-trained RL policy. Paper achieves Sharpe 1.68 vs static 0.92 on same universe. Features: HMM regime state probabilities + daily returns, VIX, yield curve. Train on IS; freeze for OOS.
+
+---
+
+## H368 — ML-Forecasted Asymmetric Beta as Factor Signal (PROPOSED)
+
+**Status**: PROPOSED
+**Staged**: 2026-07-04 (renumbered from H363 conflict)
+**Source**: arXiv:2604.22933 (Conlon, Cotter, Kynigakis; April 2026)
+**Script**: `backtesting/daily/run_h368.py`
+**Universe**: S&P 500 (survivorship-bias caveat)
+**Gate**: OOS Sharpe > 1.174 (H198 baseline), Corr(SPY) < 0.70
+**IS/OOS**: 2014-2020 / 2021-2026
+
+Forecast up-beta and down-beta separately per stock using LightGBM on firm characteristics. Score = predicted_up_beta − predicted_down_beta. Long top quintile (high asymmetry), short bottom. Key drivers: trading frictions, intangibles, momentum, growth.
+
+---
+
+## H369 — ReCAP: Regime-Adaptive Continual Learning for ETF Rotation (PROPOSED)
+
+**Status**: PROPOSED
+**Staged**: 2026-07-04 (renumbered from H364 conflict)
+**Source**: arXiv:2606.00143 (ReCAP framework)
+**Script**: `backtesting/daily/run_h369.py`
+**Universe**: Production portfolio (H041a/H026/H045/IBS blend)
+**Gate**: OOS Sharpe > 4.158 (production baseline) AND MaxDD better than -3.60%
+**IS/OOS**: 2004-2019 / 2020-2026
+
+Apply regime-aware continual learning to production blend. Maintain per-regime weight estimates using H249 engine. On regime transition: transfer 50% of prior regime's estimates to new regime module. Avoids catastrophic forgetting of crisis-era learning. Start with simple 50/50 blending before EWC.
