@@ -1,9 +1,9 @@
 ---
-updated: 2026-04-28
+updated: 2026-07-04
 type: paper-summary
 source: sources/ssrn-6630259-bsm-flat-limit-info-geometry.pdf
 author: Bruce H. Dean, Ph.D.
-date: April 2026 (Draft v0.18)
+date: April 2026 (Draft v0.18); updated July 2026 (jump extension + Curved Greeks)
 ssrn: 6630259
 ---
 
@@ -178,14 +178,15 @@ Theorem 2: γ_pred = -2.73  [T-independent, diffusion only]
 
 The author is building a geometric theory of markets across multiple papers using the same Čencov-Fisher manifold:
 
-| SSRN | Title | Key result |
-|------|-------|------------|
-| 5990674 | Scale Invariant Dynamics in Market Price Momentum | Temporal evolution as geodesic flow |
-| 6380118 | Scale-Dependent Dynamics in Equity Market Phase Space | Phase space structure |
-| **6565418** | **Information Geometry of Market Dynamics: Pareto Frontier from Contact Geometry** | **SDHO Pareto frontier R² = Ω²/(1+Ω²) at Ω ≈ 1.16 for liquid markets** |
-| 6630259 | **This paper** — BSM as flat limit | Smile = manifold curvature |
-| (in prep) | VIX as Thermodynamic Control Parameter | Phase transitions via curvature divergence at |ρ|→1 |
-| Working 2026 | **Phase Space Methods for Volatility Regime Classification** | VIX-based options trading practitioner framework |
+| SSRN | Title | Date | Key result |
+|------|-------|------|------------|
+| 5990674 | Scale Invariant Dynamics in Market Price Momentum | 2025 | Temporal evolution as geodesic flow |
+| 6380118 | Scale-Dependent Dynamics in Equity Market Phase Space | Mar 2026 | Phase space structure |
+| **6565418** | **Information Geometry of Market Dynamics: Pareto Frontier from Contact Geometry** | Apr 2026 | **SDHO Pareto frontier R² = Ω²/(1+Ω²) at Ω ≈ 1.16 for liquid markets** |
+| 6630259 | **BSM as Flat Limit of Information Geometry** (this page) | Apr 2026 | Smile = manifold curvature; 2-param smile formula |
+| **6637139** | **The Geometric Volatility Smile with Jumps: A Closed-Form Three-Term Decomposition** | Apr 23, 2026 | κ_eff(T) = κ_stochvol + κ_leverage + κ_jumps(T); Merton jump extension via Gram-Charlier |
+| (in prep) | VIX as Thermodynamic Control Parameter | 2026 | Phase transitions via curvature divergence at |ρ|→1 |
+| Working 2026 | **Phase Space Methods for Volatility Regime Classification** | 2026 | VIX-based options trading practitioner framework |
 
 **Key structural insight**: The Gaussian Fisher manifold has two orthogonal slices:
 - **Time direction**: Characterized by dissipation parameter Ω ≈ 1.16, giving R² = Ω²/(1+Ω²) — how markets evolve over time
@@ -195,7 +196,184 @@ Approximate algebraic duality: 1/(1-R²) = 1+Ω² ↔ 1/(1-ρ²) = 1+Ω̃²_ρ. 
 
 ---
 
-## Trading implications
+## Extension: Three-Term Decomposition with Jumps (SSRN 6637139)
+
+**"The Geometric Volatility Smile with Jumps: A Closed-Form Three-Term Decomposition"**
+- **Author**: Bruce H. Dean
+- **Date**: April 23, 2026
+- **SSRN**: [6637139](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6637139)
+- **Topics**: Merton jump-diffusion, Gram-Charlier expansion, SABR, Heston, leverage effect, compound Poisson, short-time asymptotics
+
+### What This Paper Adds
+
+The prior paper (SSRN 6630259) derived a two-term smile formula valid for the *diffusion-only* regime (T > ~15 days):
+
+```
+σ_impl(K,T)/σ_ATM(T) = 1 + γ·m + (κ_eff/2)·m² + O(m³)
+```
+
+This paper separates the effective curvature κ_eff into three independent structural contributions:
+
+```
+κ_eff(T) = κ_stochvol + κ_leverage + κ_jumps(T)
+```
+
+Where:
+- **κ_stochvol** = (2/3) × (ν/σ₀)² — pure vol-of-vol contribution (symmetric smile, T-independent)
+- **κ_leverage** = −(1/2) × ρ² × (ν/σ₀)² — leverage-correlation contribution (negative = frown pressure)
+- **κ_jumps(T)** = Gram-Charlier cumulant term from Merton compound-Poisson jumps (T-dependent)
+
+The skew term is unchanged: γ = ρν/(2σ₀).
+
+### Jump Contribution via Gram-Charlier
+
+The Merton jump model adds independent compound-Poisson jumps to the diffusion. The Gram-Charlier expansion links the jump parameters to the cumulants of the jump-size distribution:
+
+```
+κ_jumps(T) ≈ λ · T · (κ₄_jump) / (σ_total²)²  [leading order]
+```
+
+Where λ = jump arrival rate, κ₄_jump = excess kurtosis of jump sizes.
+
+**Key insight**: The jump term is **T-dependent** (grows linearly with T at leading order), unlike κ_stochvol and κ_leverage which are T-independent in the diffusion regime. This provides a way to distinguish jump risk from diffusion risk in the smile:
+
+| Regime | T-dependence | Dominant curvature term |
+|--------|-------------|------------------------|
+| Short-maturity (T < 15d) | Strong | κ_jumps(T) dominates |
+| Medium-maturity (15d–1yr) | Moderate | All three terms comparable |
+| Long-maturity (LEAPS, T > 1yr) | Weak | κ_stochvol + κ_leverage dominate (diffusion regime) |
+
+### Connection to Prior Paper's Limitation
+
+The prior paper noted: "Below ~15 days, jump contributions dominate and the diffusion-only formula is not the right prediction." This paper fills that gap by providing the Gram-Charlier jump correction that extends validity down to ~3–5 days.
+
+### Python Implementation: Three-Term Smile
+
+```python
+import numpy as np
+
+def three_term_smile(K, F, sigma_atm, sigma0, nu, rho, lam, jump_kurtosis, T):
+    """
+    Full three-term smile formula with jump correction.
+    
+    Parameters:
+    -----------
+    K           : strike price
+    F           : forward price
+    sigma_atm   : ATM implied vol (from market or model)
+    sigma0      : realized vol (SDHO stationary)
+    nu          : vol-of-vol = sqrt(252) * std(d_log_VIX)
+    rho         : leverage corr = corr(d_log_SPY, d_log_VIX)
+    lam         : Merton jump arrival rate (jumps/year; typical SPY ~3-5)
+    jump_kurtosis: excess kurtosis of jump sizes (typical ~4-8 for equity jumps)
+    T           : time to expiry in years
+    
+    Returns:
+    --------
+    sigma_impl  : implied vol at strike K
+    """
+    m = np.log(K / F)  # log-moneyness
+    
+    # Skew (T-independent)
+    gamma = rho * nu / (2 * sigma0)
+    
+    # Curvature decomposition
+    kappa_stochvol  =  (2/3) * (nu/sigma0)**2
+    kappa_leverage  = -(1/2) * rho**2 * (nu/sigma0)**2
+    
+    # Jump term (leading order Gram-Charlier)
+    sigma_total_sq = sigma0**2 + lam * T * (nu**2 / 252)  # approx total variance
+    kappa_jumps     = lam * T * jump_kurtosis / (sigma_total_sq**2)
+    
+    kappa_eff = kappa_stochvol + kappa_leverage + kappa_jumps
+    
+    return sigma_atm * (1 + gamma * m + (kappa_eff/2) * m**2)
+
+
+def estimate_spy_parameters(spy_returns, vix_closes, window=252*5):
+    """
+    Estimate the three time-series inputs from SPY + VIX data.
+    Requires recent ~5yr window (as in Dean's empirical tests).
+    """
+    sigma0 = np.std(spy_returns[-window:]) * np.sqrt(252)
+    
+    log_vix_changes = np.diff(np.log(vix_closes[-window:]))
+    nu = np.std(log_vix_changes) * np.sqrt(252)
+    
+    spy_recent = np.array(spy_returns[-window:])
+    vix_recent = log_vix_changes
+    min_len = min(len(spy_recent), len(vix_recent))
+    rho = np.corrcoef(spy_recent[-min_len:], vix_recent[-min_len:])[0, 1]
+    
+    return sigma0, nu, rho
+
+
+# Example: SPY April 2026 parameters (from Dean empirical)
+sigma0, nu, rho = 0.170, 1.22, -0.77
+
+# Two-parameter smile (no jumps, valid for T > 15d)
+gamma_2param = rho * nu / (2 * sigma0)         # -2.73
+kappa_2param = (2 - 3*rho**2)/6 * (nu/sigma0)**2  # +2.00
+
+print(f"Skew: {gamma_2param:.2f}, Curvature (diffusion): {kappa_2param:.2f}")
+
+# Three-term smile (T = 0.1 yr ~ 5 weeks; lam = 4 jumps/yr; kurtosis = 6)
+for T in [0.04, 0.1, 0.25, 1.0, 2.0]:
+    sigma_impl_atm_plus_10 = three_term_smile(
+        K=1.10, F=1.0, sigma_atm=0.17,
+        sigma0=sigma0, nu=nu, rho=rho,
+        lam=4, jump_kurtosis=6, T=T
+    )
+    print(f"T={T:.2f}yr: sigma_impl(K=1.10F) = {sigma_impl_atm_plus_10:.4f}")
+```
+
+### Bifurcation and Jump Interplay
+
+At the bifurcation locus |ρ| = √(2/3) ≈ 0.816, the diffusion curvature κ_stochvol + κ_leverage = 0. Below this (|ρ| < 0.816): smile. Above: frown. SPY sits near the boundary (ρ ≈ -0.77 to -0.84 depending on window).
+
+**Jump impact at the bifurcation**: κ_jumps(T) > 0 always (kurtosis > 0). So for short-dated options, jump kurtosis pushes the surface toward smile even when the diffusion component is in frown territory. This explains the empirical observation that very short-dated equity options have pronounced smiles (OTM puts elevated) even when ρ would suggest frown.
+
+---
+
+## Related Paper: Curved Greeks (arXiv:2603.14438)
+
+**"Curved Greeks: A Geometric Layer for Option P&L Adjustments"**
+- **Authors**: Pedro Pablo Pérez Velasco, Mengjue Lu, Daniel Arrieta
+- **Date**: March 15, 2026 (revised May 24, 2026)
+- **arXiv**: [2603.14438](https://arxiv.org/abs/2603.14438)
+
+### What This Paper Adds
+
+Traditional gamma/vanna/volga P&L decomposition depends on which coordinates you use (spot price, log-forward, etc.). The quadratic P&L estimate shifts when you change coordinate systems, creating model arbitrage in risk books.
+
+This paper makes the second-order P&L decomposition **coordinate-invariant** by replacing the ordinary Hessian with a **covariant Hessian** defined by an affine connection from differential geometry — the same geometric language as the Dean manifold series.
+
+**Curved Greeks** = standard Greeks (Δ, Γ, vega) recalculated on the curved manifold, so they don't shift when the desk changes pricing coordinates.
+
+### Why Relevant Here
+
+- Both papers operate on the same Riemannian manifold of return distributions
+- Curved Greeks directly extend the BSM flat-limit insight: once you're in the curved regime, the standard Hessian is wrong → use the covariant Hessian
+- Practical: for Kevin's H309 dispersion trading and H266 iron condor, the P&L attribution across strike/vega positions would benefit from coordinate-invariant Greeks
+
+### Case Studies
+
+Two FX barrier option case studies (EURUSD, USDTRY) demonstrate:
+- Standard vanna/volga adjustments shift with pricing coordinate choice
+- Curved Greeks remain stable across coord changes
+- "Small linear systems with clear identifiability conditions" — simple to calibrate
+
+---
+
+## Trading implications (updated with three-term model)
+
+### 0. Summary of which model to use
+
+| Option maturity | Best formula | Key parameter |
+|----------------|-------------|---------------|
+| < 15 days | Three-term (SSRN 6637139) | Jump kurtosis + arrival rate |
+| 15d – 1yr | Either; jumps matter less | T-dependent blend |
+| > 1yr (LEAPS) | Two-term (SSRN 6630259) | ρ, ν, σ₀ from time series |
 
 ### 1. LEAPS skew is T-independent (diffusion regime)
 Skew in the 1–3yr range is structurally flat across maturities (confirmed empirically: CoV = 7%). This means:
@@ -241,6 +419,16 @@ Below ~15 days, jumps dominate. Regime shift: short-dated skew is T-dependent an
 ## Prior source context
 
 The author's working paper [19] ("Phase Space Methods for Volatility Regime Classification: A Practitioner's Framework for VIX-Based Options Trading") is a direct practitioner extension. Worth tracking down — apply the geometric regime classification to VIX-based options strategies. Not yet on SSRN but referenced as "Working Paper 2026."
+
+---
+
+## Cross-References (updated 2026-07-04)
+
+- [Options Income Strategies](options-income-strategies.md) — BSM flat-limit formula applies directly to iron condor/CSP strike selection
+- [VRP (Volatility Risk Premium)](volatility-risk-premium.md) — Dean's 19% systematic underestimate of LEAPS skew = evidence of negative VRP at long maturities
+- [SPX Dispersion & Variance](spx-dispersion-variance.md) — H309; curved Greeks (arXiv:2603.14438) improve P&L attribution for dispersion trades
+- [Market Timing Overlays](market-timing-overlays.md) — bifurcation regime indicator (ρ near -0.816) as a VIX regime signal
+- [Regime Detection](regime-detection.md) — Dean's phase space classification working paper is a regime detection tool
 
 ---
 

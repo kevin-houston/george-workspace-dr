@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-03 (alpha101-overlap.md major expansion — confirmed H215/H216/H217/H228 results, new 2026 research Cross-Market Alpha 17 surviving US signals Du et al. arXiv:2601.06499, AlphaMemo AST-memory arXiv:2606.20625, ML-Enhanced Multi-Factor Transformer Sharpe 2.4 arXiv:2507.07107; smart-money-concepts-ict.md updated H356 CONFIRMED OOS 2.312 ref_A Corr(SPY) 0.854→0.559 novel: ref params best on low-vol universe reversed from prior tests; low-volatility-etf-rotation.md updated H356 CONFIRMED section + production table)
+updated: 2026-07-04 (bsm-information-geometry.md major expansion — Dean SSRN 6637139 three-term jump smile κ_eff=κ_stochvol+κ_leverage+κ_jumps(T); Curved Greeks arXiv:2603.14438 coordinate-invariant P&L; updated Dean series table; Python three-term smile implementation; maturity-model guidance table; cross-refs to VRP/dispersion/regime pages)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -27,7 +27,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Short-Term Reversal](algorithms/short-term-reversal.md) ← new 2026-05-07 (industry-adjusted reversal 0.53%/month globally; SSRN:6630998; H181 queued)
   - [Options Income Strategies](algorithms/options-income-strategies.md) ← updated 2026-05-21 (+ debit spreads: bull call/bear put setup, IV/DTE criteria, management rules, earnings play guidance; iron condor adjustment/rolling mechanics: untested-side roll, tested-side roll, BWB conversion; earnings straddle IV-expansion trade; paper trade annotations WMT/DLTR/SPY)
   - [Low-Volatility Anomaly](algorithms/low-volatility.md) ← updated 2026-05-18 (H205 design + regime-conditional BAB risk flag added; ScienceDirect May 2025 Asia study noted)
-  - [BSM & Information Geometry](algorithms/bsm-information-geometry.md) ← 2026-04-28 (Dean 2026: smile = manifold curvature; skew prediction within 19% zero free params; LEAPS trading implications)
+  - [BSM & Information Geometry](algorithms/bsm-information-geometry.md) ← updated 2026-07-04 (Dean SSRN 6630259: smile = manifold curvature; two-term formula γ+κ_eff; **NEW**: Dean SSRN 6637139 three-term jump extension κ_eff=κ_stochvol+κ_leverage+κ_jumps(T); Curved Greeks arXiv:2603.14438 coordinate-invariant Hessian; maturity regime table: jumps dominate <15d, diffusion >1yr; Python three_term_smile() implementation)
   - [Deep RL for Trading](algorithms/deep-rl-trading.md) ← new 2026-05-16 (FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued — PPO vs H198 momentum baseline)
   - [Calendar Anomalies](algorithms/calendar-anomalies.md) ← updated 2026-05-18 (Schroeder 2025 SEC disclosure mechanism for Halloween effect; H206 success gates set; H205 design note updated)
   - [Regime Detection](algorithms/regime-detection.md) ← updated 2026-05-26 (QuhiQuhihi/regime_model added — Two Sigma GMM+HMM multi-asset + GGS single-asset; runnable reference for H165 full / H205-B)
