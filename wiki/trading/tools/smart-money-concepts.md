@@ -124,6 +124,7 @@ When H198 momentum position shows bearish CHoCH on daily bars, treat as early ex
 **Recommendation:** Low-cost option to add price-action features to H198/H174 entry logic. Worth an H343 quick test (FVG filter on monthly momentum). No high expectations on standalone basis given lack of academic validation, but as a confirmation layer it's worth one sprint.
 
 ## Related Pages
+- [Smart Money Concepts — Hypothesis Results (ICT)](../algorithms/smart-money-concepts-ict.md) — H343-H346/H355/H356 all CONFIRMED; Order Blocks as regime detectors
 - [Technical Analysis Patterns](../algorithms/technical-analysis-patterns.md)
 - [Event-Driven Strategies](../algorithms/event-driven.md)
 - [Momentum Strategies](../algorithms/momentum-strategies.md)

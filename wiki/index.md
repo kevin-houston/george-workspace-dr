@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-03
+updated: 2026-07-05
 sources_indexed: 4
-pages: 184
+pages: 194
 ---
 
 # Wiki Index
@@ -59,6 +59,9 @@ When answering a query:
 - [Long-Short Equity](trading/algorithms/long-short-equity.md) — dollar-neutral L/S construction; H241/H242 NOT CONFIRMED (XGBoost 200-stock, OOS < 1.5 gate); H243 design (top/bottom quintile); short-leg survivorship bias caveats ← new 2026-05-31
 - [Volatility Risk Premium](trading/algorithms/volatility-risk-premium.md) — IV > RV ~85% of time; VRP 2–4 vol points; short-vol Sharpe ~1.0; CSP/iron condor/delta-hedged straddle; SVXY vs XIV; Volmageddon/COVID lessons; H266 queued ← new 2026-06-09
 - [Shared Strategy Evaluation Checklist](trading/shared-eval-checklist.md) — 7-point pre-production gate (George + Ernesto): look-ahead guard, NLP timestamp, cost model, soft OOS, regime coverage, survivorship bias, after-tax flag ← new 2026-06-09
+- [Smart Money Concepts (ICT) — Order Blocks, FVGs, BOS/CHoCH](trading/algorithms/smart-money-concepts-ict.md) — H343-H346/H355/H356 ALL CONFIRMED; Order Blocks as implicit regime detectors; 36/36 param combos pass gate on H198; OB filter portable across stocks, sector ETFs, bond ETFs, low-vol ETFs ← new 2026-06-29
+- [AI-Driven Alpha Factor Discovery](trading/algorithms/auto-alpha-discovery.md) — automated alpha mining via LLMs, evolutionary algorithms, and deep learning; H347 Attention Factors, H349 QuantaAlpha, H288 LLM-DSL, H352 TreEvo queued ← new 2026-07-01
+- [Low-Volatility Factor ETF Rotation](trading/algorithms/low-volatility-etf-rotation.md) — H354 CONFIRMED (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV; pure 12m top-1 OOS 1.735, zero neg years, +7.0% in 2022); H355 CONFIRMED (OB filter H045 OOS 1.522); H356 CONFIRMED (OB extension OOS 2.312) ← new 2026-07-02
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -95,7 +98,6 @@ When answering a query:
 - [fireworks-tech-graph](tools/fireworks-tech-graph.md) — Claude Code skill for SVG/PNG architecture diagrams from natural language; 8 styles, 14 types, AI/Agent domain built-ins (RAG/Multi-Agent/Tool Call patterns, 40+ product icons); MIT ← new 2026-06-10
 - [claude-code-video-toolkit](tools/claude-code-video-toolkit.md) — AI-native video production; NARRATE→SCORE→GENERATE→COMPOSE→RENDER; ElevenLabs TTS, FLUX, LTX2 video; MIT ← new 2026-06-08
 - [Awesome Finance MCP](trading/tools/awesome-finance-mcp.md) — curated finance MCP servers; HIGH: Alpaca MCP + FMP MCP; already live: Massive MCP; medium: CCXT/QuantConnect/TradingView/Alpha Vantage MCPs ← new 2026-06-18
-- [QuantMind](trading/tools/quant-mind.md) — LLMQuant paper ingestion; NeurIPS 2025; semantic quant KB; ~$0.09/night ← new 2026-06-10
 - [AI-Trader](trading/tools/ai-trader.md) — HKUDS agent-native social trading; ai4trade.ai; MIT ← new 2026-06-11
 - [qf-lib — Event-Driven Python Backtester](trading/tools/qf-lib.md) — modular Python event-driven backtester; 943 stars; multi-broker integration (Alpaca/Interactive Brokers); data vendor connectors; production-focused alternative to vectorbt ← new 2026-06-24
 - [RustQuant — Rust Quantitative Finance Library](trading/tools/rust-quant.md) — QuantLib-comparable Rust library; options pricing (BSM/Heston/SABR), stochastic processes, ML, time series; Python bindings via PyO3; 1,773 stars ← new 2026-06-24
@@ -128,7 +130,7 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H349 (frontier: H349 PROPOSED); H346 CONFIRMED (OB filter canonical H026 split — Var B window=20 OOS 3.238 vs baseline 2.610; canonical validation of H345); H345 CONFIRMED (OB filter H026 non-canonical — OOS 3.337 vs baseline 2.538); H343/H344 CONFIRMED (OB filter H198 stock momentum, robust across 36 param combos); production portfolio H041a/H026/H045/IBS
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H371 (frontier: H370/H371 STUB — NOT RUN); H346 CONFIRMED (OB filter canonical H026 split — Var B window=20 OOS 3.238 vs baseline 2.610); H345 CONFIRMED (OB filter H026 non-canonical — OOS 3.337); H361-H363 (low-vol ETF OB extensions); H370 LambdaRankIC stub (arXiv:2605.00501); H371 HMM+RL stub (arXiv:2605.27848); production portfolio H041a/H026/H045/IBS — OOS Sharpe 4.158
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
@@ -186,6 +188,13 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-07-05](trading/research-log/2026-07-05.md) — wiki: deep-rl-trading.md expanded (LambdaRankIC/FinRL-X/HMM-RL/ACM-survey; 4 x 2026 papers); dream cycle build phase: H370 LambdaRankIC stub + H371 HMM+RL stub applied; AutoRedTrader adversarial robustness wiki update
+- [Research Log 2026-07-04](trading/research-log/2026-07-04.md) — wiki: quant-mind-notes.md new (QuantMind LLM knowledge extraction); dream cycle scan: H370 LambdaRankIC + H371 HMM-RL proposals staged; H364 CONFIRMED, H366 NOT CONFIRMED, H367-H369 stubs
+- [Research Log 2026-07-03](trading/research-log/2026-07-03.md) — wiki: llm-finance-benchmarks-2026.md new (BacktestBench/PortBench/ReCAP/HMM-RL benchmarks); dream cycle scan
+- [Research Log 2026-07-02](trading/research-log/2026-07-02.md) — H354 CONFIRMED (low-vol ETF rotation USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV, pure 12m OOS 1.735, zero neg years); H355 CONFIRMED (OB filter H045 OOS 1.522, MaxDD halved); wiki: low-volatility-etf-rotation.md new
+- [Research Log 2026-07-01](trading/research-log/2026-07-01.md) — wiki: auto-alpha-discovery.md new (AI-driven factor discovery taxonomy; H347/H349/H288/H352 queued); dream cycle scan
+- [Research Log 2026-06-30](trading/research-log/2026-06-30.md) — wiki expansion + dream cycle; H362 CONFIRMED (low-vol ETF + VIX<20 gate OOS 1.819, MaxDD -8.0%); H363 NOT CONFIRMED (H354 as production satellite; all variants reduce OOS Sharpe from 3.708)
+- [Research Log 2026-06-29](trading/research-log/2026-06-29.md) — wiki expansion + dream cycle scan; smart-money-concepts-ict.md new (H343-H346 Order Block family all confirmed; OB as implicit regime detector)
 - [Research Log 2026-06-28](trading/research-log/2026-06-28.md) — wiki: ai-model-benchmarks.md expanded (PolyBench/PolySwarm/PredictionMarketBench); dream cycle: H185 Phase 2 PolySwarm design + PredictionMarketBench wiki + FactorEngine/FactorMiner/Hubble cluster applied
 - [Research Log 2026-06-27](trading/research-log/2026-06-27.md) — wiki: performance-attribution.md new; 4 tool pages (ByteChef/OpenKnowledge/rust-trade/visual-plan); dream cycle scan
 - [Research Log 2026-06-26](trading/research-log/2026-06-26.md) — wiki: prediction-markets/automated-pipeline.md new; Hitchhiker's Guide + Hyper-Extract ingested; dream cycle: AlphaCrafter/Headroom/sairahul1 applied
@@ -246,7 +255,7 @@ When answering a query:
 ### AI Industry
 
 - [The AI Decoupling](concepts/ai-decoupling.md) — vintagedata.org 2026; SaaS/AI ecosystem split; MoE economics, synthetic data moats, token pricing vs. enterprise CFO models; Chinese self-build alternative ← 2026-05-25
-- [AI Model Landscape 2026](ai-industry/model-landscape-2026.md) — frontier model snapshot: GPT-5.5/Claude Opus 4.7/Gemini 3.1/Grok 4/DeepSeek V4 (Huawei Ascend); Claude Fable 5 export-ban (June 12); SpaceXAI (xAI absorbed Feb 2026, Cursor $60B acquisition June 16); geopolitical/regulatory context ← updated 2026-06-21
+- [AI Model Landscape 2026](ai-industry/model-landscape-2026.md) — frontier model snapshot: GPT-5.5/Claude Opus 4.7/Gemini 3.1/Grok 4/DeepSeek V4 (Huawei Ascend); Claude Fable 5 export-ban lifted June 30 (restored July 1); Claude Sonnet 5 launched June 30 (63.2% SWE-bench Pro, $2/M intro); GPT-5.6 Sol/Terra/Luna in limited preview June 26; SpaceXAI/Cursor context ← updated 2026-06-21 (page needs refresh)
 - [AI Agent Frameworks Ecosystem 2026](ai-industry/agent-frameworks-2026.md) — LangGraph (stateful/production), CrewAI (role-based multi-agent), AutoGen (maintenance mode), Agno, PydanticAI; architecture patterns; relevance to George's stack ← 2026-05-29
 - [AI Infrastructure / Compute Layer 2026](ai-industry/ai-infrastructure-2026.md) — GPU cloud providers (Lambda/CoreWeave/RunPod/Vast.ai); H100/B200 pricing; vLLM/SGLang/TGI inference servers; cost structure for production LLM apps ← 2026-05-29
 - [LLM Evaluation & Benchmarking for Finance 2026](ai-industry/llm-finance-benchmarks-2026.md) — CLQT closed-loop diagnostic benchmark; BacktestBench 18k QA pairs (LLMs fail strategy consistency); PortBench (90% fail vs equal-weight); reproducibility audit (0/19 R3); ReCAP regime-adaptive continual learning; HMM+RL allocation (Sharpe 1.68 vs 0.92 static); guidance on LLM vs deterministic split ← new 2026-07-03

@@ -501,3 +501,22 @@ Pages created: 1 (trading/tools/smart-money-concepts.md). Pages updated: 1 (inde
 2026-06-29T03:36:39Z | ingest | H343 backtest completed — FVG/OB filter on H198 6-1m momentum. Variants C/D CONFIRMED (OOS Sharpe 3.182/2.334), A/B fail (FVGs always mitigated on large-caps). Hypothesis log entry added. Script: backtesting/daily/run_h343.py. Results: backtesting/results/h343_results.json.
 
 2026-06-29T04:09:27Z | ingest | H344 CONFIRMED (36/36 params pass gate): H343 OB filter robust across full parameter grid. H345 CONFIRMED (Var B OOS 3.337 vs baseline 2.538): OB filter improves H026 ETF selection. Both hypothesis log entries added.
+
+## [2026-07-05] lint | Health check
+Issues found: 13. Auto-fixed: 10. Needs review: 3.
+
+**Fixed (10 mechanical issues):**
+- INDEX GAPS (10): Added 3 missing algorithm pages (smart-money-concepts-ict.md, auto-alpha-discovery.md, low-volatility-etf-rotation.md) and 7 missing research log entries (2026-06-29 through 2026-07-05) to index.md
+- Updated index frontmatter: updated date → 2026-07-05, pages → 194
+
+**Fixed (1 duplicate):**
+- Removed duplicate QuantMind entry (`trading/tools/quant-mind.md` stub) from index; kept authoritative `tools/quant-mind-notes.md` entry
+
+**Fixed (2 stale entries):**
+- Hypothesis Log entry: updated frontier from H349 → H371 (H370/H371 STUB — NOT RUN)
+- AI Model Landscape entry: noted Fable 5 export controls lifted June 30, Sonnet 5 launch, GPT-5.6 preview
+
+**Needs review (3 items):**
+1. STALE PAGE — `wiki/ai-industry/model-landscape-2026.md` body content mentions "Fable 5 export-ban (June 12)" as current; needs a paragraph added for June 30 controls lift + Sonnet 5 + GPT-5.6 context. Last updated 2026-06-21.
+2. CROSS-REF GAP — `wiki/trading/tools/smart-money-concepts.md` (the GitHub library page) and `wiki/trading/algorithms/smart-money-concepts-ict.md` (the confirmed hypothesis page) may not link to each other. Should cross-reference.
+3. STALE PAGE — `wiki/trading/backtesting/hypothesis-log.md` index entry now updated; the page itself still says frontier H349; if there's a header in the file, it should be updated to H371.
