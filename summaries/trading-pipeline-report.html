@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Strategy Pipeline — Results to Date</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22273a;
+    --border: #2e3450;
+    --text: #e2e6f0;
+    --muted: #8892b0;
+    --accent: #64b5f6;
+    --green: #4caf82;
+    --red: #e05c6e;
+    --yellow: #f4c542;
+    --orange: #ff9966;
+    --purple: #b39ddb;
+    --font: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    --mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .header { text-align: center; margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
+  .header h1 { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .header .subtitle { color: var(--muted); font-size: 1rem; }
+  .updated { color: var(--muted); font-size: 0.85rem; margin-top: 12px; }
+
+  /* Nav */
+  .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 48px; }
+  .toc h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
+  .toc ol { padding-left: 20px; column-count: 2; column-gap: 32px; }
+  .toc li { margin-bottom: 4px; font-size: 0.9rem; }
+
+  /* Stats strip */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 48px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+  .stat-card .val { font-size: 2.2rem; font-weight: 700; line-height: 1.1; }
+  .stat-card .lbl { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 6px; }
+  .green-val { color: var(--green); }
+  .accent-val { color: var(--accent); }
+  .yellow-val { color: var(--yellow); }
+  .red-val { color: var(--red); }
+
+  /* Sections */
+  h2 { font-size: 1.5rem; font-weight: 700; margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  h2 .sec-num { color: var(--accent); margin-right: 8px; font-size: 0.9em; }
+  h3 { font-size: 1.1rem; font-weight: 600; color: var(--accent); margin: 28px 0 10px; }
+  h4 { font-size: 0.95rem; font-weight: 600; color: var(--muted); margin: 20px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  p { margin-bottom: 12px; color: var(--text); }
+  ul { padding-left: 20px; margin-bottom: 12px; }
+  ul li { margin-bottom: 4px; }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin: 16px 0 28px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th { background: var(--surface2); color: var(--muted); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.8px; padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 9px 12px; border-bottom: 1px solid rgba(46,52,80,0.6); vertical-align: top; }
+  tr:hover td { background: rgba(100,181,246,0.04); }
+  tr:last-child td { border-bottom: none; }
+  .num { font-family: var(--mono); text-align: right; }
+  .center { text-align: center; }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+  .b-confirmed { background: rgba(76,175,130,0.15); color: var(--green); border: 1px solid rgba(76,175,130,0.3); }
+  .b-partial { background: rgba(244,197,66,0.12); color: var(--yellow); border: 1px solid rgba(244,197,66,0.3); }
+  .b-not { background: rgba(224,92,110,0.12); color: var(--red); border: 1px solid rgba(224,92,110,0.3); }
+  .b-stub { background: rgba(179,157,219,0.12); color: var(--purple); border: 1px solid rgba(179,157,219,0.3); }
+  .b-production { background: rgba(100,181,246,0.15); color: var(--accent); border: 1px solid rgba(100,181,246,0.3); }
+
+  /* Portfolio card */
+  .portfolio-card { background: var(--surface); border: 1px solid rgba(100,181,246,0.3); border-radius: 10px; padding: 28px 32px; margin: 20px 0 32px; }
+  .portfolio-card h3 { margin-top: 0; margin-bottom: 20px; font-size: 1.3rem; color: var(--text); }
+  .port-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .port-stat { text-align: center; }
+  .port-stat .v { font-size: 1.8rem; font-weight: 700; }
+  .port-stat .l { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.7px; }
+  .sleeves { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .sleeve { background: var(--surface2); border-radius: 6px; padding: 14px 16px; }
+  .sleeve .sw { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+  .sleeve .sn { font-size: 0.9rem; font-weight: 600; margin: 2px 0; }
+  .sleeve .sd { font-size: 0.8rem; color: var(--muted); }
+
+  /* Phase timeline */
+  .phases { display: flex; gap: 0; margin: 20px 0 32px; }
+  .phase { flex: 1; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); font-size: 0.85rem; }
+  .phase:first-child { border-radius: 6px 0 0 6px; }
+  .phase:last-child { border-radius: 0 6px 6px 0; }
+  .phase.active { background: rgba(100,181,246,0.08); border-color: var(--accent); }
+  .phase.done { background: rgba(76,175,130,0.08); border-color: rgba(76,175,130,0.4); }
+  .phase .pnum { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
+  .phase .ptitle { font-weight: 600; margin: 2px 0; }
+  .phase .pstatus { font-size: 0.75rem; margin-top: 2px; }
+  .phase.done .pstatus { color: var(--green); }
+  .phase.active .pstatus { color: var(--yellow); }
+  .phase.pending .pstatus { color: var(--muted); }
+
+  /* Dream cycle */
+  .cycle-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin: 16px 0 28px; }
+  .cycle-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .cycle-step { background: var(--surface2); border-radius: 6px; padding: 8px 14px; font-size: 0.85rem; font-weight: 500; white-space: nowrap; }
+  .cycle-arrow { color: var(--muted); font-size: 1.1rem; }
+
+  /* Family blocks */
+  .family-block { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 20px; }
+  .family-block h3 { margin-top: 0; margin-bottom: 12px; font-size: 1rem; color: var(--text); }
+  .family-meta { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; }
+
+  /* Callout boxes */
+  .callout { border-radius: 6px; padding: 14px 18px; margin: 12px 0 24px; font-size: 0.9rem; border-left: 3px solid; }
+  .callout-insight { background: rgba(100,181,246,0.07); border-color: var(--accent); }
+  .callout-warning { background: rgba(244,197,66,0.07); border-color: var(--yellow); }
+  .callout-success { background: rgba(76,175,130,0.07); border-color: var(--green); }
+  .callout strong { display: block; margin-bottom: 4px; }
+
+  /* Code */
+  code { font-family: var(--mono); font-size: 0.85em; background: rgba(100,181,246,0.08); padding: 1px 5px; border-radius: 3px; }
+
+  /* Footer */
+  .footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.82rem; }
+
+  @media (max-width: 640px) {
+    .toc ol { column-count: 1; }
+    .phases { flex-direction: column; }
+    .phase:first-child { border-radius: 6px 6px 0 0; }
+    .phase:last-child { border-radius: 0 0 6px 6px; }
+    .cycle-flow { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>Trading Strategy Pipeline</h1>
+  <div class="subtitle">Discovery · Backtesting · Paper Trading · Production</div>
+  <div class="updated">Last updated: July 5, 2026 &nbsp;·&nbsp; George (NanoClaw Agent) for Kevin Houston</div>
+</div>
+
+<!-- Key Stats -->
+<div class="stats-grid">
+  <div class="stat-card"><div class="val green-val">4.158</div><div class="lbl">Production OOS Sharpe</div></div>
+  <div class="stat-card"><div class="val green-val">−3.6%</div><div class="lbl">Max Drawdown OOS</div></div>
+  <div class="stat-card"><div class="val accent-val">~23.5%</div><div class="lbl">Annualized CAGR</div></div>
+  <div class="stat-card"><div class="val green-val">0</div><div class="lbl">Negative Years (2004–2025)</div></div>
+  <div class="stat-card"><div class="val yellow-val">371</div><div class="lbl">Hypotheses Logged</div></div>
+  <div class="stat-card"><div class="val accent-val">57</div><div class="lbl">Hypotheses Confirmed</div></div>
+  <div class="stat-card"><div class="val accent-val">$102k</div><div class="lbl">Paper Portfolio Value</div></div>
+  <div class="stat-card"><div class="val green-val">Active</div><div class="lbl">Paper Trading Status</div></div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#overview">Project Overview</a></li>
+    <li><a href="#pipeline">The Full Pipeline</a></li>
+    <li><a href="#discovery">Discovery Engine (Dream Cycle)</a></li>
+    <li><a href="#backtesting">Backtesting Framework</a></li>
+    <li><a href="#production">Production Portfolio</a></li>
+    <li><a href="#families">Strategy Families &amp; Results</a></li>
+    <li><a href="#paper-trading">Paper Trading Status</a></li>
+    <li><a href="#lessons">Key Lessons Learned</a></li>
+    <li><a href="#queue">Research Queue</a></li>
+  </ol>
+</div>
+
+<!-- 1. Overview -->
+<h2 id="overview"><span class="sec-num">01</span> Project Overview</h2>
+
+<p>This project is building an autonomous algorithmic trading income stream. Starting from zero in April 2026, George (a NanoClaw AI agent) runs nightly research sessions, proposes testable hypotheses, backtests them against 20+ years of market data, and graduates confirmed strategies into paper trading on Alpaca. The goal is live trading of a production portfolio generating consistent after-tax income.</p>
+
+<p>The strategy is evidence-first: every assumption about alpha must be falsifiable and tested on out-of-sample data before any capital is allocated. The pipeline is deliberately skeptical — more than half of all hypotheses tested have been rejected.</p>
+
+<div class="phases">
+  <div class="phase done"><div class="pnum">Phase 1</div><div class="ptitle">Research & Wiki</div><div class="pstatus">✓ Complete</div></div>
+  <div class="phase done"><div class="pnum">Phase 2</div><div class="ptitle">Backtesting</div><div class="pstatus">✓ Active — 371 hypotheses tested</div></div>
+  <div class="phase active"><div class="pnum">Phase 3</div><div class="ptitle">Paper Trading</div><div class="pstatus">⟳ Live — $102k Alpaca account</div></div>
+  <div class="phase pending"><div class="pnum">Phase 4</div><div class="ptitle">Live Trading</div><div class="pstatus">⏳ Pending graduation gate</div></div>
+</div>
+
+<!-- 2. Pipeline -->
+<h2 id="pipeline"><span class="sec-num">02</span> The Full Pipeline</h2>
+
+<p>From idea to production, every strategy travels the same path:</p>
+
+<div class="cycle-box">
+  <div style="font-size:0.85rem;color:var(--muted);margin-bottom:8px;">Nightly autonomous cycle — no human intervention required</div>
+  <div class="cycle-flow">
+    <div class="cycle-step">arXiv / GitHub Scan</div>
+    <span class="cycle-arrow">→</span>
+    <div class="cycle-step">Hypothesis Proposal</div>
+    <span class="cycle-arrow">→</span>
+    <div class="cycle-step">Staged JSON Proposal</div>
+    <span class="cycle-arrow">→</span>
+    <div class="cycle-step">Build Phase (4 AM)</div>
+    <span class="cycle-arrow">→</span>
+    <div class="cycle-step"><code>run_hNNN.py</code> Stub Created</div>
+    <span class="cycle-arrow">→</span>
+    <div class="cycle-step">IS/OOS Backtest</div>
+    <span class="cycle-arrow">→</span>
+    <div class="cycle-step">Gate Check</div>
+    <span class="cycle-arrow">→</span>
+    <div class="cycle-step">CONFIRMED / NOT CONFIRMED</div>
+    <span class="cycle-arrow">→</span>
+    <div class="cycle-step">Paper Trading Deployment</div>
+    <span class="cycle-arrow">→</span>
+    <div class="cycle-step">Production Blend Candidate</div>
+  </div>
+</div>
+
+<h3>Evaluation Gate</h3>
+<p>Every hypothesis has a pre-specified gate before the backtest runs. Typical gate for a new strategy:</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Criterion</th><th>Minimum</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>OOS Sharpe ratio</td><td class="num">≥ 1.0</td><td>Measured on data the model never saw</td></tr>
+    <tr><td>Walk-Forward ratio</td><td class="num">≥ 1.75</td><td>OOS Sharpe / IS Sharpe — tests overfitting</td></tr>
+    <tr><td>Max Drawdown</td><td class="num">&gt; −20%</td><td>Strategy-specific; tighter for production candidates</td></tr>
+    <tr><td>Negative years OOS</td><td class="num">≤ 1</td><td>Must survive 2022 bear + 2020 COVID</td></tr>
+    <tr><td>Correlation gate (production)</td><td class="num">Corr &lt; 0.70</td><td>New strategy must add diversification, not duplication</td></tr>
+    <tr><td>Regime coverage</td><td>Pass</td><td>Must show alpha in both bull and bear regimes</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- 3. Discovery Engine -->
+<h2 id="discovery"><span class="sec-num">03</span> Discovery Engine — The Dream Cycle</h2>
+
+<p>Every night while Kevin sleeps, George runs a two-phase autonomous research cycle:</p>
+
+<h3>Phase 1: Wiki Expansion (11 PM CT)</h3>
+<p>George identifies the thinnest section of the knowledge wiki — the section with the fewest pages and least cross-linking — and expands it. This ensures the knowledge base grows systematically, not just in hot areas. The wiki now spans 50+ pages across 4 top-level sections: Algorithms, Tools, Data Sources, Prediction Markets, Backtesting, and Paper Trading.</p>
+
+<h3>Phase 2: arXiv & GitHub Scan (11 PM CT)</h3>
+<p>George runs a structured 5-angle scan across recent academic papers and open-source repositories:</p>
+<ul>
+  <li>arXiv cs.LG + q-fin: recent ML/trading papers (last 30 days)</li>
+  <li>arXiv q-fin.TR: trading-specific theoretical and empirical work</li>
+  <li>GitHub: new repos with momentum/quant/trading tags, 100+ stars</li>
+  <li>Targeted search: papers directly related to open hypothesis families (PEAD, regime detection, RL trading)</li>
+  <li>Cross-reference scan: citing papers for confirmed hypotheses</li>
+</ul>
+<p>Promising findings are staged as JSON proposal files in <code>dream_cycle/staged/YYYY-MM-DD/</code> with risk levels (low/medium/high).</p>
+
+<h3>Phase 3: Build Phase (4 AM CT)</h3>
+<p>The staged proposals are applied: low-risk changes (wiki updates) immediately; medium-risk changes (new <code>run_hNNN.py</code> stubs) with backup; high-risk changes flagged for Kevin's review. A changelog is committed to git and a session summary published to here.now.</p>
+
+<div class="callout callout-insight">
+  <strong>Scale of autonomous research</strong>
+  Since April 2026, this pipeline has reviewed 400+ academic papers, noted 80+ GitHub repositories, and generated 371 hypothesis proposals — all without human intervention between sessions.
+</div>
+
+<!-- 4. Backtesting Framework -->
+<h2 id="backtesting"><span class="sec-num">04</span> Backtesting Framework</h2>
+
+<h3>IS/OOS Split Design</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Split</th><th>In-Sample</th><th>Out-of-Sample</th><th>Used For</th></tr></thead>
+  <tbody>
+    <tr><td>Canonical</td><td>2008–2017</td><td>2018–2026</td><td>ETF rotation, multi-asset</td></tr>
+    <tr><td>Stock momentum</td><td>2013–2020</td><td>2021–2026</td><td>H198, LambdaRankIC</td></tr>
+    <tr><td>PEAD / Event-driven</td><td>2015–2020</td><td>2021–2026</td><td>H163, H174</td></tr>
+    <tr><td>RL / HMM regime</td><td>2004–2017</td><td>2018–2026</td><td>H251, H371</td></tr>
+    <tr><td>Alt OOS</td><td>2008–2017</td><td>2013–2026 (extended)</td><td>Robustness cross-check</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Infrastructure</h3>
+<ul>
+  <li><strong>Data:</strong> yfinance EOD prices (primary), Polygon.io (intraday), FRED (macro), FMP (fundamentals), SEC EDGAR (8-K filings)</li>
+  <li><strong>Framework:</strong> Pure Python + pandas + numpy; custom vectorized backtesting per strategy type</li>
+  <li><strong>Scripts:</strong> All strategies in <code>backtesting/daily/run_hNNN.py</code>; paper trading in <code>backtesting/paper_trading/</code></li>
+  <li><strong>Costs:</strong> 10bps per trade modeled; no leverage unless specified; dividends included in total return</li>
+  <li><strong>Tax modeling:</strong> All reported Sharpe ratios are pre-tax (gross); after-tax modeling documented separately; monthly-rebalancing strategies incur ~37% STCG rate → rule of thumb: 1.5–2× gross return needed to match a buy-and-hold after-tax</li>
+</ul>
+
+<h3>Key Disciplines (hard-won)</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Rule</th><th>Why it matters</th></tr></thead>
+  <tbody>
+    <tr><td>Always <code>.shift(1)</code> all signals</td><td>H256 found a 3× OOS Sharpe inflation from unlagged 12m momentum signal — the look-ahead bias trap</td></tr>
+    <tr><td>Survivorship bias flag on all stock universes</td><td>H272/H277 tech momentum confirmed but marked with survivorship caveat; requires historical constituent data for production</td></tr>
+    <tr><td>Both IS Sharpe and WF ratio must pass</td><td>H310 (merger arb) passed OOS gate at 1.678 but WF ratio was 13–19× — pure regime shift artifact</td></tr>
+    <tr><td>Dual-split validation</td><td>Strategies must look good on both canonical and alt OOS splits; one-period success ≠ edge</td></tr>
+    <tr><td>Pre-register the gate</td><td>Gates are set before running backtests; post-hoc gate adjustment is not permitted</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- 5. Production Portfolio -->
+<h2 id="production"><span class="sec-num">05</span> Production Portfolio</h2>
+
+<div class="portfolio-card">
+  <h3>Current Production Blend — OOS 2018–2026</h3>
+  <div class="port-stats">
+    <div class="port-stat"><div class="v green-val">4.158</div><div class="l">OOS Sharpe</div></div>
+    <div class="port-stat"><div class="v green-val">−3.6%</div><div class="l">Max Drawdown</div></div>
+    <div class="port-stat"><div class="v accent-val">~23.5%</div><div class="l">CAGR</div></div>
+    <div class="port-stat"><div class="v green-val">0</div><div class="l">Neg Years 2004–25</div></div>
+    <div class="port-stat"><div class="v accent-val">0.48</div><div class="l">Corr(SPY)</div></div>
+  </div>
+  <div class="sleeves">
+    <div class="sleeve"><div class="sw">27%</div><div class="sn">H026 — Sector + Alts Rotation</div><div class="sd">25-asset top-1 monthly</div></div>
+    <div class="sleeve"><div class="sw">22%</div><div class="sn">H041a — Multi-Asset Rotation</div><div class="sd">19-asset top-1 monthly</div></div>
+    <div class="sleeve"><div class="sw">21%</div><div class="sn">H045 — Bond ETF Rotation</div><div class="sd">13-asset top-2 monthly</div></div>
+    <div class="sleeve"><div class="sw">20%</div><div class="sn">XLK — IBS Mean Reversion</div><div class="sd">Daily Internal Bar Score</div></div>
+    <div class="sleeve"><div class="sw">8%</div><div class="sn">SMH — IBS Mean Reversion</div><div class="sd">Semiconductors daily</div></div>
+    <div class="sleeve"><div class="sw">2%</div><div class="sn">IGV — IBS Mean Reversion</div><div class="sd">Software ETF daily</div></div>
+  </div>
+</div>
+
+<h3>Why This Portfolio Works</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Sleeve Pair</th><th>OOS Correlation</th><th>Diversification Effect</th></tr></thead>
+  <tbody>
+    <tr><td>H026 ↔ H041a</td><td class="num">0.71</td><td>Both momentum-driven but H041a uses TLT/GLD escape</td></tr>
+    <tr><td>H026 ↔ H045</td><td class="num">0.22</td><td>Bond momentum runs on completely different signals</td></tr>
+    <tr><td>H026 ↔ IBS</td><td class="num">0.21</td><td>Daily mean-reversion orthogonal to monthly momentum</td></tr>
+    <tr><td>H045 ↔ IBS</td><td class="num">0.04</td><td>Near-zero correlation — maximum diversification</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout callout-success">
+  <strong>The IBS insight</strong>
+  The jump from Sharpe ~2.5 (H026+H041a+H045 blend) to 4.158 (full production) comes almost entirely from the IBS daily sleeve. IBS runs on intraday data (daily open/high/low/close), has Corr(H026)=0.21, and adds returns that are genuinely orthogonal to monthly momentum. This is the single most valuable diversification discovery in the project.
+</div>
+
+<h3>Safety Overlay: H301</h3>
+<p>When SPY is below its 200-day moving average at month-end, the H026 sleeve overrides its rotation pick and routes capital to BIL (cash equivalent). This confirmed overlay added +0.33 Sharpe OOS and dramatically reduces drawdown during prolonged bear markets.</p>
+
+<!-- 6. Strategy Families -->
+<h2 id="families"><span class="sec-num">06</span> Strategy Families &amp; Results</h2>
+
+<p>371 hypotheses organized into thematic families. Status definitions:</p>
+<span class="badge b-confirmed">CONFIRMED</span> &nbsp; Passed OOS gate and walk-forward test &nbsp;&nbsp;
+<span class="badge b-partial">PARTIAL</span> &nbsp; Some variants passed; not production-ready &nbsp;&nbsp;
+<span class="badge b-not">NOT CONFIRMED</span> &nbsp; Failed gate or exhibited a fatal flaw &nbsp;&nbsp;
+<span class="badge b-stub">STUB</span> &nbsp; Proposed, not yet implemented &nbsp;&nbsp;
+<span class="badge b-production">PRODUCTION</span> &nbsp; Live in portfolio
+
+<br><br>
+
+<!-- ETF Rotation -->
+<div class="family-block">
+<h3>🔄 ETF Momentum Rotation (H001–H049, H112, H149, H301)</h3>
+<div class="family-meta">Foundation family — monthly cross-sectional momentum on ETF universes. Top performers roll into production.</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hypothesis</th><th class="center">Status</th><th>OOS Sharpe</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>H026</strong> — 25-asset sector + alts top-1</td><td class="center"><span class="badge b-production">PRODUCTION</span></td><td class="num">2.520</td><td>27% of portfolio; SPY 200MA safety overlay via H301</td></tr>
+    <tr><td><strong>H041a</strong> — 19-asset multi-asset top-1</td><td class="center"><span class="badge b-production">PRODUCTION</span></td><td class="num">1.869</td><td>22% of portfolio; TLT/GLD provide bear-market refuge</td></tr>
+    <tr><td><strong>H045</strong> — 13-asset bond ETF rotation top-2</td><td class="center"><span class="badge b-production">PRODUCTION</span></td><td class="num">1.351</td><td>21% of portfolio; 3m+6m+12m ensemble rank; key diversifier</td></tr>
+    <tr><td><strong>H301</strong> — H026 + SPY 200MA overlay</td><td class="center"><span class="badge b-production">PRODUCTION</span></td><td class="num">1.529</td><td>+27.4% Sharpe over standalone; 200MA alone beats VIX+200MA combo</td></tr>
+    <tr><td><strong>H006</strong> — BIL as risk-off asset</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">—</td><td>BIL preferred over TLT in dual momentum; avoids duration risk in rate-hike cycles</td></tr>
+    <tr><td><strong>H020</strong> — 5-asset rotation (early)</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.23</td><td>Superseded by H026; WF 1.17 above threshold</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- IBS -->
+<div class="family-block">
+<h3>📊 IBS Mean-Reversion (H062–H149)</h3>
+<div class="family-meta">Internal Bar Score daily mean-reversion on individual ETFs. Highly orthogonal to monthly rotation — the hidden source of most production alpha.</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hypothesis</th><th class="center">Status</th><th>OOS Sharpe</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>XLK IBS</strong> — Tech ETF daily mean-reversion</td><td class="center"><span class="badge b-production">PRODUCTION</span></td><td class="num">~2.5+</td><td>20% of portfolio; IBS = (close−open)/(high−low); entry &lt;0.2, exit &gt;0.8</td></tr>
+    <tr><td><strong>SMH IBS</strong> — Semiconductors</td><td class="center"><span class="badge b-production">PRODUCTION</span></td><td class="num">—</td><td>8% of portfolio; strongest individual IBS Sharpe</td></tr>
+    <tr><td><strong>IGV IBS</strong> — Software ETF</td><td class="center"><span class="badge b-production">PRODUCTION</span></td><td class="num">—</td><td>2% of portfolio; high correlation to XLK but different timing</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- Smart Money / OB Filter -->
+<div class="family-block">
+<h3>🧱 Order Block (OB) Filter Family (H343–H346, H355–H356, H361–H364)</h3>
+<div class="family-meta">Smart Money Concepts (ICT) methodology: Order Blocks as technical confirmation gates. Works across ALL asset classes tested. Most consistently confirmed family after the core ETF rotation.</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hypothesis</th><th class="center">Status</th><th>OOS Sharpe</th><th>Key Result</th></tr></thead>
+  <tbody>
+    <tr><td><strong>H343</strong> — OB filter on H198 stock momentum</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">3.182</td><td>Var C best; 5.6% cash months OOS</td></tr>
+    <tr><td><strong>H344</strong> — H198 OB sensitivity test</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">3.396</td><td>36/36 param combos pass gate; best window=20, swing=3</td></tr>
+    <tr><td><strong>H345</strong> — OB on H026 non-canonical split</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">3.337</td><td>Selection enhancer, not regime gate; 0 cash months</td></tr>
+    <tr><td><strong>H346</strong> — OB on H026 canonical split</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">3.238</td><td>vs 2.610 baseline; 0 cash months; production-ready</td></tr>
+    <tr><td><strong>H355</strong> — OB filter on H045 bond rotation</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.522</td><td>vs 1.112 baseline; MaxDD halved −10.8%→−5.0%</td></tr>
+    <tr><td><strong>H356</strong> — OB on low-vol ETF universe</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">2.312</td><td>Corr(SPY)=0.559; novel params window=30/swing=5 best</td></tr>
+    <tr><td><strong>H361</strong> — OB filter on H354 low-vol ETF rotation</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.903</td><td>Corr(SPY) drops 0.854→0.621; 2022: +24.5%</td></tr>
+    <tr><td><strong>H362</strong> — Low-vol ETF + VIX&lt;20 regime gate</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.819</td><td>MaxDD −8.0% vs baseline −11.3%; 25–32% cash months</td></tr>
+    <tr><td><strong>H364</strong> — Stacked OB + VIX&lt;20 gate</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">2.173</td><td>Corr(SPY)=0.433 — lowest SPY-correlated confirmed strategy</td></tr>
+    <tr><td><strong>H363</strong> — Low-vol ETF as production satellite</td><td class="center"><span class="badge b-not">NOT CONFIRMED</span></td><td class="num">3.379–3.570</td><td>All variants reduce portfolio Sharpe from 4.158; XLU overlaps H026</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="callout callout-insight">
+  <strong>OB universality finding</strong>
+  The window=20, swing_len=3 lenient OB filter improves OOS Sharpe on every universe tested: H198 stocks (+170%), H026 ETFs (+24%), H045 bonds (+37%), low-vol ETFs (+17%). The only exception is the low-vol ETF family which uses window=30/swing=5. The OB filter appears to be a genuine, portable technical confirmation signal, not curve-fitted to a specific universe.
+</div>
+</div>
+
+<!-- Stock Momentum -->
+<div class="family-block">
+<h3>📈 Stock Momentum & Cross-Sectional Alpha (H181, H192, H198, H213–H228)</h3>
+<div class="family-meta">Cross-sectional momentum on stock universes (NASDAQ, S&amp;P 500). Highest standalone Sharpe ratios in the project — but high SPY correlation limits production blending value.</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hypothesis</th><th class="center">Status</th><th>OOS Sharpe</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>H198</strong> — 6-1m momentum, 30-stock NASDAQ</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.174</td><td>Core baseline; top-1 monthly rebalance; Corr(SPY)=0.724</td></tr>
+    <tr><td><strong>H215</strong> — Alpha101 signal on H198 universe</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.321</td><td>WorldQuant Alpha #101 outperforms simple momentum</td></tr>
+    <tr><td><strong>H217</strong> — Median alpha101 ensemble</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.559</td><td>Strongest confirmed stock signal; OOS stable 2021–2026</td></tr>
+    <tr><td><strong>H228</strong> — H217 + H181 blend</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.572</td><td>Alpha101 + industry-adjusted reversal blend</td></tr>
+    <tr><td><strong>H192-D</strong> — BAB sector-neutral</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.367</td><td>Betting Against Beta, sector-neutralized; best BAB expression</td></tr>
+    <tr><td><strong>H320</strong> — LightGBM crash filter on H198</td><td class="center"><span class="badge b-partial">PARTIAL</span></td><td class="num">1.274–1.283</td><td>MaxDD −14.4%→−8.3pp improvement; WF 0.707 below standard</td></tr>
+    <tr><td><strong>H370</strong> — LambdaRankIC on H198 universe</td><td class="center"><span class="badge b-stub">STUB</span></td><td class="num">—</td><td>Direct IC optimization via custom XGBoost; paper: +175% IC vs OLS on 60yr US dataset</td></tr>
+    <tr><td><strong>H313</strong> — Sector-neutral stock momentum</td><td class="center"><span class="badge b-not">NOT CONFIRMED</span></td><td class="num">0.97</td><td>Increases SPY correlation 0.865→0.906 on US large-cap; works globally, not on concentrated S&P</td></tr>
+    <tr><td><strong>H341</strong> — Residual momentum (market-orthogonal)</td><td class="center"><span class="badge b-not">NOT CONFIRMED</span></td><td class="num">0.984</td><td>Stripping SPY beta destroys predictive power on homogeneous large-cap universe</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- PEAD / Event-Driven -->
+<div class="family-block">
+<h3>📰 Event-Driven / PEAD — NLP on SEC Filings (H159–H179)</h3>
+<div class="family-meta">Post-Earnings Announcement Drift using FinBERT NLP on EDGAR 8-K filings. Most labor-intensive family — requires real-time EDGAR monitoring, NLP scoring, and intraday execution.</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hypothesis</th><th class="center">Status</th><th>OOS Win Rate</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>H163</strong> — FinBERT on EDGAR 8-K</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">WR ~75%</td><td>First NLP confirmation; entry at score ≥ 0.18</td></tr>
+    <tr><td><strong>H174</strong> — Dual filter: score ≥ 0.18 + surprise ≥ 0.02</td><td class="center"><span class="badge b-production">PRODUCTION</span></td><td class="num">WR 81.8%</td><td>OOS: n=22, Mean Return=6.89%; paper trading live via Alpaca</td></tr>
+    <tr><td><strong>H168</strong> — Speaker-weighted FinBERT</td><td class="center"><span class="badge b-not">NOT CONFIRMED</span></td><td class="num">WR 34.6%</td><td>Transcript availability bias skews OOS sample; only 26.5% coverage</td></tr>
+    <tr><td><strong>H175</strong> — SEC Item 2.02 + EPS surprise</td><td class="center"><span class="badge b-not">NOT CONFIRMED</span></td><td class="num">WR 68.4%</td><td>Item 2.02 text LESS discriminative than full 8-K; EPS surprise had 0% yfinance OOS coverage</td></tr>
+  </tbody>
+</table>
+</div>
+<p style="font-size:0.85rem;color:var(--muted);">H174 is live in paper trading: nightly EDGAR scan → FinBERT scoring → Alpaca overnight entry → 20-day hold → MOC exit. 5 active strategy accounts tracking performance independently.</p>
+</div>
+
+<!-- Low-Vol Factor ETF -->
+<div class="family-block">
+<h3>📉 Low-Volatility Factor ETF Rotation (H245, H270, H306, H354, H361–H364)</h3>
+<div class="family-meta">Momentum rotation on low-volatility factor ETF universe (USMV, SPLV, XLU, SPHD, EFAV, EEMV, ACWV + BIL). Strong standalone alpha; portfolio admission gated by Corr(SPY) threshold.</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hypothesis</th><th class="center">Status</th><th>OOS Sharpe</th><th>Corr(SPY)</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>H354</strong> — Pure 12m top-1 rotation</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.735</td><td class="num">0.854</td><td>0 negative years; 2022 +7.0% vs SPY −24%; Corr limits blending</td></tr>
+    <tr><td><strong>H361</strong> — H354 + OB filter</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.903</td><td class="num">0.621</td><td>2022: +24.5%; OB filter drops Corr by 23pp</td></tr>
+    <tr><td><strong>H362</strong> — H354 + VIX&lt;20 regime gate</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.819</td><td class="num">—</td><td>MaxDD −8.0% vs −11.3% baseline; 25–32% cash months</td></tr>
+    <tr><td><strong>H364</strong> — Stacked OB + VIX&lt;20</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">2.173</td><td class="num">0.433</td><td>Best Corr(SPY) of all confirmed strategies; strong standalone candidate</td></tr>
+    <tr><td><strong>H356</strong> — OB filter on low-vol universe (alt params)</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">2.312</td><td class="num">0.559</td><td>window=30/swing=5 best; supersedes H354 standalone</td></tr>
+    <tr><td><strong>H270</strong> — Low-vol anomaly dual ranking</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">—</td><td class="num">—</td><td>Foundation for H354 family</td></tr>
+    <tr><td><strong>H306</strong> — Low-vol factor ETF rotation (early)</td><td class="center"><span class="badge b-not">NOT CONFIRMED</span></td><td class="num">0.895</td><td class="num">—</td><td>Overshadowed by pure 12m; all factor ETFs highly correlated with SPY</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- Multi-Asset Diversification -->
+<div class="family-block">
+<h3>🌐 Multi-Asset Diversification (H249–H252, H311, H367–H371)</h3>
+<div class="family-meta">SPY/TLT/GLD/BIL universe. Static allocations, regime-conditional weights, and RL policy layers. Capital preservation focus rather than production alpha generation.</div>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hypothesis</th><th class="center">Status</th><th>OOS Sharpe</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>H311</strong> — EW-4 SPY/TLT/GLD/DBC + VIX&lt;20</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.532</td><td>MaxDD −6.0%; CAGR 9–12%; capital preservation use case</td></tr>
+    <tr><td><strong>H249</strong> — Regime-conditional weights (4-state)</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">+0.282</td><td>+0.282 Sharpe improvement over static; SPY 200MA × VIX + rate-hike modifier</td></tr>
+    <tr><td><strong>H251</strong> — 3-state Gaussian HMM on SPY/TLT/GLD</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">0.941</td><td>CAVEAT: HMM predicts low_vol 100% OOS — effectively static 80/10/10 SPY weights</td></tr>
+    <tr><td><strong>H250</strong> — Continuous tanh regime score</td><td class="center"><span class="badge b-not">NOT CONFIRMED</span></td><td class="num">+0.063</td><td>Gate: +0.10 Sharpe improvement. Too small; Corr with static=0.992</td></tr>
+    <tr><td><strong>H371</strong> — HMM+RL regime portfolio (4-asset BIL)</td><td class="center"><span class="badge b-stub">STUB</span></td><td class="num">—</td><td>PPO policy replaces static weights; paper: RL+HMM Sharpe 1.68 vs static 0.92 (+82%)</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- Technical Analysis -->
+<div class="family-block">
+<h3>📐 Technical Analysis / Chart Patterns (H233–H234)</h3>
+<div class="family-block" style="background:transparent;border:none;padding:0;">
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hypothesis</th><th class="center">Status</th><th>OOS Sharpe</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>H234</strong> — Inside-bar coiled-spring pattern</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.770</td><td>Strongest confirmed technical signal; breakout from multi-day inside bar consolidation</td></tr>
+    <tr><td><strong>H296</strong> — VIX term structure timing</td><td class="center"><span class="badge b-confirmed">CONFIRMED</span></td><td class="num">1.116</td><td>VIX/VXV contango signal; best as overlay layer, not standalone</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- NOT CONFIRMED families summary -->
+<div class="family-block">
+<h3>❌ Major NOT CONFIRMED Families — Key Lessons</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Family</th><th>Best OOS</th><th>Fatal Flaw</th></tr></thead>
+  <tbody>
+    <tr><td><strong>ETF Pairs Trading</strong> (H246, H271, H307)</td><td class="num">Negative</td><td>IS cointegration anti-predictive of OOS; structural breaks (SVB 2023, gold-silver decoupling)</td></tr>
+    <tr><td><strong>Merger Arbitrage</strong> (H310)</td><td class="num">1.678</td><td>WF ratio 13–19× = regime shift artifact; 2013–2019 antitrust wave killed IS, 2020 M&A boom inflated OOS</td></tr>
+    <tr><td><strong>Crypto Cross-Sectional Momentum</strong> (H303)</td><td class="num">—</td><td>Altcoin massacre 2022; survivorship bias extreme in crypto universe</td></tr>
+    <tr><td><strong>Calendar Anomalies</strong> (H201, H205–H208)</td><td class="num">0.740</td><td>TOM effect real but too weak standalone (Sharpe 0.740); VIX/regime overlay increases Sharpe but Corr(SPY) too high</td></tr>
+    <tr><td><strong>Yield Curve Timing</strong> (H300, H314, H315)</td><td class="num">0.680</td><td>2022–24 yield curve inversion = false positive; FRED BAMLH0A0HYM2 only available from June 2023 (ICE licensing)</td></tr>
+    <tr><td><strong>Global Equity / Commodity</strong> (H178, H179)</td><td class="num">—</td><td>No consistent edge vs domestic momentum; H261b commodity top-2 CONFIRMED at Sharpe 0.922 as standalone diversifier</td></tr>
+    <tr><td><strong>Dual Momentum GEM</strong> (H256)</td><td class="num">—</td><td>2022 joint bond+equity crash kills defensive shift; IMPORTANT: look-ahead bias trap found in GEM+Sector (unlagged 12m inflated Sharpe from 0.646→1.956)</td></tr>
+    <tr><td><strong>VRP Standalone</strong> (H342)</td><td class="num">0.864</td><td>VIX/VXV in contango 92% of time → signal barely discriminates; SVXY 2018 leverage change = IS regime break</td></tr>
+    <tr><td><strong>Sector Breadth / 50dMA Timing</strong> (H299)</td><td class="num">0.473</td><td>Sector ETFs too correlated with SPY; breadth timing adds noise not alpha</td></tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- 7. Paper Trading -->
+<h2 id="paper-trading"><span class="sec-num">07</span> Paper Trading Status</h2>
+
+<h3>Active Paper Strategies (Alpaca — $102k total)</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Strategy</th><th>Account</th><th>Status</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>H026 ETF Rotation</strong></td><td>$102k main</td><td><span class="badge b-production">LIVE</span></td><td>Monthly rebalance via h112_monthly.py; SPY 200MA override to BIL on trigger</td></tr>
+    <tr><td><strong>H174 PEAD</strong></td><td>$5k virtual</td><td><span class="badge b-production">LIVE</span></td><td>Nightly EDGAR scan → FinBERT → OPG entry; 20-day hold; WR 81.8% OOS</td></tr>
+    <tr><td><strong>PEAD-GAP</strong></td><td>$5k virtual</td><td><span class="badge b-production">LIVE</span></td><td>Earnings gap-up scanner; entry at open +2% gap; same 20-day hold</td></tr>
+    <tr><td><strong>H181 Industry Reversal</strong></td><td>$5k virtual</td><td><span class="badge b-production">LIVE</span></td><td>Industry-adjusted short-term reversal on 200-stock universe</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Paper → Live Graduation Gate</h3>
+<ul>
+  <li>Minimum 6 months paper trading data at consistent OOS Sharpe ≥ 1.5</li>
+  <li>Sequential Probability Ratio Test (SPRT) passed at 90% confidence</li>
+  <li>At least 20 completed round-trips per strategy</li>
+  <li>Regime coverage: performance confirmed in both bull and bear periods</li>
+  <li>Execution quality: slippage within 30% of paper-trade estimates</li>
+</ul>
+
+<!-- 8. Lessons Learned -->
+<h2 id="lessons"><span class="sec-num">08</span> Key Lessons Learned</h2>
+
+<div class="callout callout-warning">
+  <strong>The most common failure mode (seen 15+ times)</strong>
+  A strategy looks great IS but has a walk-forward ratio &lt;1.0 — meaning it was overfit to in-sample data. Strict pre-registration of gates before running backtests is the only defense.
+</div>
+
+<h4>What Works</h4>
+<ul>
+  <li><strong>Monthly cross-sectional momentum on diversified universes</strong> — The H026/H041a/H045 core has been stable across every regime since 2004.</li>
+  <li><strong>Orthogonal daily signals</strong> — IBS on tech ETFs has Corr(H026)=0.21 and is the single biggest Sharpe contributor in the production portfolio.</li>
+  <li><strong>Order Block (OB) filter as universal gate</strong> — Consistently improves Sharpe on every tested universe; robust across parameter ranges.</li>
+  <li><strong>Regime overlays for drawdown control</strong> — SPY 200MA overlay and VIX&lt;20 gate both reduce MaxDD substantially without material Sharpe loss.</li>
+  <li><strong>NLP on primary source documents</strong> — FinBERT on EDGAR 8-K filings (not curated data, not summaries) delivers genuine WR 81.8% OOS.</li>
+</ul>
+
+<h4>What Doesn't Work</h4>
+<ul>
+  <li><strong>Statistical pairs trading on ETFs</strong> — In-sample cointegration was anti-predictive of out-of-sample performance across all tested pairs.</li>
+  <li><strong>Yield curve timing overlays</strong> — 2022–24 inversion = prolonged false positive; already captured by momentum organically.</li>
+  <li><strong>Adding too many features to NLP models</strong> — Speaker weighting, item-specific text, EPS surprise filters all hurt by reducing sample size or introducing availability bias.</li>
+  <li><strong>Sector-neutral adjustments on concentrated US universes</strong> — Works globally; on concentrated S&P 500 large-cap universes, neutralization increases SPY correlation and destroys alpha.</li>
+  <li><strong>Combining strategies with Corr &gt; 0.70</strong> — No blending benefit; one strategy's capital is better deployed into the higher-Sharpe option.</li>
+</ul>
+
+<h4>Structural Findings</h4>
+<ul>
+  <li><strong>The OB universality result</strong> is the most surprising finding in the project: a single set of ICT technical parameters improves OOS Sharpe on stocks, sector ETFs, bond ETFs, and low-vol factor ETFs.</li>
+  <li><strong>Survivorship bias matters most in stock strategies</strong> (~+4.9pp returns per Ranse 2025). ETF rotation is largely immune.</li>
+  <li><strong>The 2022 bear market</strong> is the single most informative OOS test. Strategies that held up in 2022 have genuine risk-adjusted edge; strategies that failed often had hidden duration exposure or equity beta.</li>
+</ul>
+
+<!-- 9. Queue -->
+<h2 id="queue"><span class="sec-num">09</span> Research Queue</h2>
+
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Hypothesis</th><th class="center">Priority</th><th>Method</th><th>Gate to Beat</th></tr></thead>
+  <tbody>
+    <tr><td><strong>H370</strong> — LambdaRankIC on H198 universe</td><td class="center"><span class="badge b-stub">STUB</span></td><td>Custom XGBoost objective: direct Rank IC optimization via lambda gradients</td><td>OOS Sharpe &gt; 1.174 (H198) AND Rank IC &gt; 0.05</td></tr>
+    <tr><td><strong>H371</strong> — HMM+RL regime portfolio (SPY/TLT/GLD/BIL)</td><td class="center"><span class="badge b-stub">STUB</span></td><td>3-state GaussianHMM + PPO via stable-baselines3; IS 2004–2017</td><td>OOS Sharpe &gt; 1.532 (H311) AND MaxDD &lt; −10%</td></tr>
+    <tr><td><strong>H279</strong> — LLM momentum filter</td><td class="center">High</td><td>LLM semantic sentiment filter on H198 momentum signal (arXiv:2510.26228)</td><td>OOS Sharpe &gt; 1.174</td></tr>
+    <tr><td><strong>H280</strong> — MarketSenseAI 4-agent</td><td class="center">High</td><td>Multi-agent market interpretation (arXiv:2604.17327)</td><td>WR &gt; 60% AND Sharpe &gt; 1.0</td></tr>
+    <tr><td><strong>H318</strong> — Meta-agent ETF rotation selector</td><td class="center">Medium</td><td>Dynamic regime-based weighting of H026/H041a/H045</td><td>Sharpe blend &gt; 4.158 (current production)</td></tr>
+    <tr><td><strong>H309</strong> Phase 2 — SPX Dispersion</td><td class="center">Medium</td><td>Short index vol + long component vols; Polygon IV data needed</td><td>Sharpe &gt; 2.0; low SPY corr</td></tr>
+    <tr><td><strong>H357</strong> — OB filter on H041a universe</td><td class="center">Medium</td><td>Apply confirmed OB params (window=20/swing=3) to 19-asset multi-asset rotation</td><td>Sharpe &gt; 1.869 (H041a baseline)</td></tr>
+    <tr><td><strong>H274</strong> — Multi-agent PEAD upgrade</td><td class="center">Medium</td><td>3-agent debate architecture over H174 8-K scoring</td><td>WR &gt; 81.8% AND n &gt; 20 OOS</td></tr>
+    <tr><td><strong>H316</strong> — LLM semantic pairs trading</td><td class="center">Low</td><td>GPT-4o semantic pair selection replacing cointegration (Moira arXiv:2605.01954)</td><td>Sharpe &gt; 1.0; MaxDD &lt; −15%</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout callout-insight">
+  <strong>Next production addition candidates</strong>
+  H364 (stacked OB+VIX gate, Sharpe 2.173, Corr(SPY)=0.433) and H356 (OB low-vol, Sharpe 2.312, Corr(SPY)=0.559) both clear the portfolio admission gate (Corr &lt; 0.70 to all existing sleeves). Marginal Sharpe analysis is the next step before adding either to the production blend.
+</div>
+
+<div class="footer">
+  Built by George (NanoClaw AI Agent) · Autonomous research since April 2026 · Production portfolio running live on Alpaca paper account<br>
+  Generated July 5, 2026
+</div>
+
+</div>
+</body>
+</html>
