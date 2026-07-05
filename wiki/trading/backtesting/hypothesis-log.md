@@ -8621,3 +8621,41 @@ Forecast up-beta and down-beta separately per stock using LightGBM on firm chara
 Apply regime-aware continual learning to production blend. Maintain per-regime weight estimates using H249 engine. On regime transition: transfer 50% of prior regime's estimates to new regime module. Avoids catastrophic forgetting of crisis-era learning. Start with simple 50/50 blending before EWC.
 
 **Note (2026-07-04)**: Script stub only. Requires reconstructing monthly returns for each production sub-strategy (H041a, H026, H045, IBS variants) back to 2004, then wiring H249 regime engine. High implementation complexity. Best deferred to dedicated session with full production return series available.
+
+---
+
+## H370 — LambdaRankIC: Direct IC Optimization on H198 30-Stock Universe (STUB — NOT RUN)
+
+**Status**: STUB — NOT RUN
+**Staged**: 2026-07-05
+**Source**: arXiv:2605.00501 (Lin, Su & Yang, May 2026)
+**Script**: `backtesting/daily/run_h370.py` (stub — no executable code)
+**Universe**: H198 30-stock NASDAQ universe
+**Gate**: OOS Sharpe > 1.174 (H198 baseline) AND OOS Rank IC > 0.05
+**IS/OOS**: 2013-2020 / 2021-2026
+
+Replace MSE regression objective in XGBoost with a custom lambda-gradient objective that directly maximizes Spearman Rank IC across monthly cross-sections. Features: 6-1m momentum (H198 core signal) + 3m/12m momentum + 1m return (skip-month indicator) + Alpha101 signals (H217 confirmed OOS 1.559). Long top-1 predicted stock each month.
+
+**Reference results (arXiv:2605.00501)**: 60-year US equity dataset (21,396 stocks including delisted, 94 characteristics). IC=0.1148 vs OLS 0.0418 (+175%), ICIR=1.03, Sharpe=0.923. Not directly comparable to H198 30-stock universe but provides strong directional signal.
+
+**Priority**: Run before H204 (full RL) and H368/H369 stubs. LambdaRankIC has higher confidence and lower implementation risk than any queued RL hypothesis.
+
+**Note (2026-07-05)**: Script stub only. Implementation requires `lambdarankic_objective_fast()` custom XGBoost objective (see wiki/trading/algorithms/deep-rl-trading.md for full code template) and feature construction from H198 + Alpha101 signals. No GPU required. No survivorship bias concern in reference dataset.
+
+---
+
+## H371 — HMM+RL Regime Portfolio: SPY/TLT/GLD/BIL with PPO Policy Layer (STUB — NOT RUN)
+
+**Status**: STUB — NOT RUN
+**Staged**: 2026-07-05
+**Source**: arXiv:2605.27848 (Verma et al., May 2026); extends H249 (CONFIRMED) + H251 (CONFIRMED)
+**Script**: `backtesting/daily/run_h371.py` (stub — no executable code)
+**Universe**: SPY, TLT, GLD, BIL (4-asset; H367 is 3-asset version)
+**Gate**: OOS Sharpe > 1.532 (H311 EW-4+VIX<20 baseline) AND MaxDD < -10%
+**IS/OOS**: 2004-2017 / 2018-2026
+
+Replace H251's static regime-conditional weights with a PPO-trained RL policy. State: 3-state HMM regime probabilities + current portfolio weights + 20-day return history for all assets. Action: softmax-constrained portfolio weights. Reward: daily Sharpe-weighted return minus 10bps turnover cost. Train on IS 2004-2017 using stable-baselines3 PPO; freeze policy for OOS evaluation.
+
+**Reference results (arXiv:2605.27848)**: SPY/TLT/GLD daily 2004-2025, RL+HMM Sharpe 1.68 vs static HMM 0.92 (+82%). H311 EW-4+VIX<20 OOS 1.532 is the local hurdle. H249 (static regime weights) confirmed +0.282 Sharpe improvement over non-regime baseline.
+
+**Note (2026-07-05)**: Script stub only. Requires `RegimePortfolioEnv(gym.Env)` implementation (see wiki/trading/algorithms/deep-rl-trading.md for full code template), hmmlearn GaussianHMM, and stable-baselines3 PPO. Parallel track to H370 — different risk/complexity profile.

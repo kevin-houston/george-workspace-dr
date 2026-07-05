@@ -487,3 +487,50 @@ This is the largest systematic audit of LLM trading research to date. The prior 
 **Key difference from TradingAgents (84.9k★)**: ai-hedge-fund uses accuracy-weighted voting rather than static role hierarchy. Bull/bear research agents that have been right recently get higher weight — adaptive credibility scoring.
 
 **Practical takeaway for H274/H280**: The accuracy-weighted aggregation pattern is directly applicable to multi-agent PEAD (H274). If we run multiple scoring agents (FinBERT, GPT-4o, BART) and track each agent's realized WR per quarter, weighting by recent accuracy could improve the ensemble signal vs equal-weight averaging.
+
+---
+
+## Adversarial Robustness: AutoRedTrader (arXiv:2605.09185, May 2026)
+
+**Source**: "AutoRedTrader: Automated Red-Teaming for LLM-Based Trading Agents" (May 2026)
+
+First systematic adversarial robustness framework specifically for LLM trading agents. Generates synthetic misinformation (fake earnings leaks, fabricated analyst upgrades, spoofed regulatory filings) and injects it into the agent's information feed.
+
+### Key Quantitative Findings
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| Misinformation exposure rate | **69%** | Fraction of trading decisions where synthetic misinformation was present in context |
+| Attack success rate | **26.67%** | Fraction of adversarial injections that caused a wrong trade |
+| Return degradation | **2–3×** | Performance drop under adversarial vs clean conditions |
+| Best defense: RAG filtering | **46% reduction** in attack success | Source credibility scoring + retrieval filtering |
+
+### Attack Taxonomy
+
+1. **Direct injection** — fake news article in information feed; agent cites it in reasoning
+2. **Semantic camouflage** — misinformation framed as analyst commentary; bypasses keyword filters
+3. **Temporal displacement** — old, real negative news re-dated to look current
+4. **Consensus forgery** — multiple synthetic sources agree on wrong fact; social proof exploited
+
+### Defense Strategies Evaluated
+
+| Defense | Attack success reduction | Implementation cost |
+|---------|--------------------------|---------------------|
+| Source credibility scoring | ~35% | Low — add source domain reputation filter |
+| RAG-based filtering | ~46% | Medium — retrieval pipeline modification |
+| Adversarial fine-tuning | ~28% | High — requires labeled adversarial examples |
+| Multi-source consensus (majority vote) | ~22% | Medium — only effective vs direct injection |
+
+### Implications for H274 / H280
+
+**H274 (Multi-Agent PEAD)**: Our pipeline uses EDGAR 8-K filings (official SEC source) — direct injection risk is low. Primary risk is semantic camouflage in earnings call transcripts or management commentary. Mitigation: source-lock all LLM context to EDGAR URLs; reject any non-SEC content.
+
+**H280 (MarketSenseAI)**: Uses external news APIs — higher injection risk. Require source credibility score > 0.7 on all ingested news before LLM processing.
+
+**Production guardrail**: Add source-origin assertion to every LLM context block:
+```python
+context = f"[SOURCE: SEC EDGAR, filing_id={accession_number}, verified]"
+# Never pass unverified third-party content to trading agent LLMs
+```
+
+**H274 CBS implication**: The 26.67% attack success rate under adversarial conditions means multi-agent systems without source verification could underperform a single-source FinBERT baseline. The Coordination Breakeven Spread (CBS) analysis must include adversarial exposure risk, not just API cost.

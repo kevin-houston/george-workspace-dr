@@ -1,0 +1,28 @@
+{
+  "id": "prediction-market-dataset-wiki",
+  "date": "2026-07-05",
+  "source": "github.com/Jon-Becker/prediction-market-analysis",
+  "source_url": "https://github.com/Jon-Becker/prediction-market-analysis",
+  "title": "Prediction Market Dataset Wiki Update — Correct GitHub URL + pmxt Reference",
+  "rationale": "The existing other-platforms.md entry for prediction-market-analysis has a broken GitHub URL (generic topic search instead of direct repo link). The actual repo is Jon-Becker/prediction-market-analysis (~2.3k stars, 36GB Polymarket+Kalshi historical data). Also, the pmxt section has a broken GitHub URL. Both were confirmed in the 2026-07-05 dream cycle GitHub scan. Fixing these ensures wiki links are actionable. Also updating frontmatter date.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/prediction-markets/other-platforms.md",
+  "content": "---\nupdated: 2026-07-05\n---",
+  "action": "update",
+  "apply_status": "applied",
+  "patches": [
+    {
+      "old": "**GitHub:** https://github.com/topics/quantitative-finance (search: prediction-market-analysis)\n**Stars:** 2.3k | **Data size:** 36GB",
+      "new": "**GitHub:** https://github.com/Jon-Becker/prediction-market-analysis\n**Stars:** 2.3k | **Data size:** 36GB"
+    },
+    {
+      "old": "**GitHub:** https://github.com (search: pmxt)\n**Stars:** 1.2k",
+      "new": "**GitHub:** https://github.com/pmxt/pmxt\n**Stars:** 1.2k"
+    },
+    {
+      "old": "updated: 2026-05-02",
+      "new": "updated: 2026-07-05"
+    }
+  ]
+}

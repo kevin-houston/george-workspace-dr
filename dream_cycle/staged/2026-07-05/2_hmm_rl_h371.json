@@ -1,0 +1,25 @@
+{
+  "id": "h371-hmm-rl-regime-portfolio",
+  "date": "2026-07-05",
+  "source": "arXiv:2605.27848",
+  "source_url": "https://arxiv.org/abs/2605.27848",
+  "title": "H371: HMM+RL Regime Portfolio — SPY/TLT/GLD/BIL with PPO Policy Layer",
+  "rationale": "Extends confirmed H249 (+0.282 Sharpe regime overlay) and H251 (3-state HMM, OOS 0.941) with a PPO-trained RL policy layer. arXiv:2605.27848 (Verma et al., May 2026) shows 3-state Gaussian HMM detects low/transitional/high-volatility regimes; PPO policy replaces static regime-conditional weights; daily SPY/TLT/GLD rebalance 2004-2025 achieves Sharpe 1.68 vs static HMM 0.92 (+82%). Adding BIL as 4th asset preserves cash option during extreme stress. Extends H311 (EW-4+VIX<20, OOS 1.532) by replacing static weights with learned RL policy. IS: 2004-2017, OOS: 2018-2026. Note: H367 is the 3-asset stub (SPY/TLT/GLD only, staged 2026-07-04); H371 is the 4-asset BIL extension per research-log recommendation.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h371.py",
+  "content": "#!/usr/bin/env python3\n\"\"\"\nH371: HMM+RL Regime Portfolio — SPY/TLT/GLD/BIL with PPO Policy Layer\n\nHypothesis: Replacing H251's static regime-conditional weights with a\nPPO-trained RL policy improves OOS Sharpe on the SPY/TLT/GLD/BIL universe.\nAdds BIL as 4th defensive asset over the H367 3-asset design.\n\nBaseline to beat: H311 EW-4+VIX<20, OOS Sharpe 1.532\nGate: OOS Sharpe > 1.532 AND MaxDD < -10%\nIS:  2004-2017\nOOS: 2018-2026\n\nArchitecture:\n  1. 3-state Gaussian HMM on SPY daily returns → regime probs (low/trans/high vol)\n  2. State: regime_probs (3) + current_weights (4) + recent_returns (4×20 days)\n  3. Action: unconstrained R^4 → softmax → portfolio weights (sum=1, all >=0)\n  4. Reward: daily Sharpe-weighted return minus 10bps turnover cost\n  5. PPO training via stable-baselines3 on IS window\n  6. Freeze policy; evaluate OOS month-by-month\n\nReference:\n  - arXiv:2605.27848 (Verma et al., May 2026): H367/H371 source\n  - H249 CONFIRMED: regime-conditional weights OOS +0.282 Sharpe improvement\n  - H251 CONFIRMED: 3-state HMM OOS 0.941 (but static weights)\n  - H311 CONFIRMED: EW-4+VIX<20 OOS 1.532 (gate to beat)\n\nNOTE: This is a stub requiring implementation.\nSee wiki/trading/algorithms/deep-rl-trading.md for RegimePortfolioEnv code template.\n\"\"\"\n\n# TODO: Implement H371\n# 1. Download SPY/TLT/GLD/BIL daily prices (yfinance, 2004-2026)\n# 2. Fit 3-state GaussianHMM on IS SPY log-returns (hmmlearn)\n# 3. Construct RegimePortfolioEnv with BIL as 4th asset\n# 4. Train PPO (stable-baselines3) on IS data, 500k timesteps\n# 5. Evaluate frozen policy OOS 2018-2026 daily rebalance\n# 6. Compare vs H311 EW-4+VIX<20 baseline\n# 7. Report: OOS Sharpe, MaxDD, CAGR, NegYrs\n\nprint('H371 stub: HMM+RL 4-asset regime portfolio (SPY/TLT/GLD/BIL) — requires implementation')\nprint('See wiki/trading/algorithms/deep-rl-trading.md for RegimePortfolioEnv template')\nprint('Reference: arXiv:2605.27848 (Verma et al., May 2026)')\nprint('Related stubs: run_h367.py (3-asset version), run_h249.py (static regime weights)')\n",
+  "action": "write",
+  "apply_status": "pending",
+  "hypothesis_log_entry": {
+    "id": "H371",
+    "title": "HMM+RL Regime Portfolio — SPY/TLT/GLD/BIL with PPO Policy Layer",
+    "status": "STUB — NOT RUN",
+    "source": "arXiv:2605.27848 (Verma et al., May 2026)",
+    "gate": "OOS Sharpe > 1.532 (H311 EW-4+VIX<20 baseline) AND MaxDD < -10%",
+    "universe": "SPY, TLT, GLD, BIL (4-asset; H367 is 3-asset version)",
+    "is_oos": "IS 2004-2017 / OOS 2018-2026",
+    "method": "3-state Gaussian HMM for regime detection (low/transitional/high vol) → PPO policy replaces static regime-conditional weights. State: regime probs + current weights + 20-day return history. Reward: daily Sharpe-weighted return minus 10bps turnover cost. Train on IS, freeze for OOS.",
+    "reference_results": "Paper (3-asset SPY/TLT/GLD, daily 2004-2025): RL+HMM Sharpe 1.68 vs static HMM 0.92 (+82%). H311 EW-4+VIX<20 OOS 1.532 is the local hurdle. H249 (static regime weights) confirmed +0.282 Sharpe improvement — RL policy layer adds the dynamic allocation on top."
+  }
+}

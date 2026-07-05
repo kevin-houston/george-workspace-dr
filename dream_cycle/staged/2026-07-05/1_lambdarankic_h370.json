@@ -1,0 +1,25 @@
+{
+  "id": "h370-lambdarankic-momentum",
+  "date": "2026-07-05",
+  "source": "arXiv:2605.00501",
+  "source_url": "https://arxiv.org/abs/2605.00501",
+  "title": "H370: LambdaRankIC — Direct IC Optimization on H198 30-Stock Universe",
+  "rationale": "LambdaRankIC replaces MSE/regression objective in XGBoost with direct Rank IC optimization via custom lambda gradients. On 60-year US equity dataset (21,396 stocks, 94 characteristics), achieves IC=0.1148 vs OLS 0.0418 (+175%), ICIR=1.03, Sharpe=0.923. Implementation is a custom XGBoost objective compatible with existing run_h198.py infrastructure. H198 confirmed at OOS Sharpe 1.174 using simple momentum signal; LambdaRankIC could add a direct-IC optimization layer on top of or replacing the momentum score calculation. No GPU required, no survivorship bias concern on the reference dataset (21k stocks including delisted). Higher confidence than H204 full-RL approach.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h370.py",
+  "content": "#!/usr/bin/env python3\n\"\"\"\nH370: LambdaRankIC on H198 30-Stock Universe\n\nHypothesis: Replacing MSE objective with direct Rank IC optimization\n(LambdaRankIC, arXiv:2605.00501) on H198 30-stock NASDAQ universe improves\nOOS cross-sectional return prediction and Sharpe ratio.\n\nBaseline to beat: H198 6-1m momentum, OOS Sharpe 1.174\nGate: OOS Sharpe > 1.174 AND OOS Rank IC > 0.05\nIS:  2013-2020\nOOS: 2021-2026\n\nFeatures:\n  - 6-1m momentum (core H198 signal)\n  - 1m return (skip-month indicator)\n  - 3m, 12m momentum\n  - Alpha101 signals from H217 (confirmed OOS 1.559)\n\nMethod: Custom XGBoost objective (lambdarankic_objective_fast) that\nmaximizes Spearman rank correlation between predicted and realized monthly returns.\nTrain on IS monthly cross-sections; predict OOS month-by-month.\nLong top-1 stock each month (same as H198 production logic).\n\nNOTE: This is a stub requiring implementation.\nSee wiki/trading/algorithms/deep-rl-trading.md for LambdaRankIC code template.\n\"\"\"\n\n# TODO: Implement H370\n# 1. Load H198 universe (30-stock NASDAQ from run_h198.py)\n# 2. Construct feature matrix: 6-1m mom, 3m mom, 12m mom, 1m return, alpha101 signals\n# 3. Train XGBoost with lambdarankic_objective_fast custom objective\n# 4. Predict cross-sectional rankings OOS month-by-month\n# 5. Long top-1 predicted stock, rebalance monthly\n# 6. Report: OOS Sharpe, Rank IC, MaxDD, WF ratio\n# 7. Compare to H198 baseline\n\nprint('H370 stub: LambdaRankIC on H198 universe - requires implementation')\nprint('See wiki/trading/algorithms/deep-rl-trading.md for full code template')\nprint('Reference: arXiv:2605.00501 (Lin, Su & Yang, May 2026)')\n",
+  "action": "write",
+  "apply_status": "pending",
+  "hypothesis_log_entry": {
+    "id": "H370",
+    "title": "LambdaRankIC: Direct IC Optimization on H198 30-Stock Universe",
+    "status": "STUB — NOT RUN",
+    "source": "arXiv:2605.00501 (Lin, Su & Yang, May 2026)",
+    "gate": "OOS Sharpe > 1.174 (H198 baseline) AND OOS Rank IC > 0.05",
+    "universe": "H198 30-stock NASDAQ universe",
+    "is_oos": "IS 2013-2020 / OOS 2021-2026",
+    "method": "Custom XGBoost objective optimizing Rank IC directly via lambda gradients. Features: 6-1m momentum + alpha101 signals. Monthly rebalance, long top-1.",
+    "reference_results": "On 60-year US dataset (21,396 stocks, 94 chars): IC=0.1148 (+175% vs OLS), ICIR=1.03, Sharpe=0.923. Not directly comparable to H198 universe but provides strong directional signal."
+  }
+}

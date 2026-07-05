@@ -1,0 +1,149 @@
+{
+  "date": "2026-07-05",
+  "session_type": "nightly_dream_cycle",
+  "wiki_expansion_target": "wiki/trading/algorithms/deep-rl-trading.md",
+  "wiki_expansion_rationale": "Oldest non-closed algorithm page (last updated 2026-05-16, 7 weeks stale). H204 (PPO vs H198) queued with no progress for 7 weeks. Four high-quality 2026 papers found directly applicable.",
+  "scan_angles": [
+    {
+      "angle": "arXiv: pairs trading + cointegration + LLM",
+      "papers_found": [
+        {
+          "id": "arXiv:2605.01954",
+          "title": "Moira: LLM semantic pair selection replacing cointegration screening",
+          "relevance": "medium",
+          "note": "H316 STUB already exists for this. No new pairs papers beyond known set."
+        }
+      ],
+      "verdict": "No new high-value findings. H316 remains queued."
+    },
+    {
+      "angle": "arXiv: PEAD + post-earnings + text signals",
+      "papers_found": [
+        {
+          "id": "arXiv:2602.20859",
+          "title": "FinAnchor: multi-LLM alignment for earnings event detection",
+          "relevance": "low",
+          "note": "Alignment technique; no improvement above H174 confirmed WR=81.8%."
+        }
+      ],
+      "verdict": "No new breakthrough above H174 confirmed. Existing pipeline is strong."
+    },
+    {
+      "angle": "arXiv: cross-sectional momentum + factor momentum",
+      "papers_found": [
+        {
+          "id": "arXiv:2605.00501",
+          "title": "LambdaRankIC: Direct Rank IC Optimization via Custom XGBoost Objective",
+          "relevance": "HIGH",
+          "key_results": "IC=0.1148 vs OLS 0.0418 (+175%), ICIR=1.03, Sharpe=0.923 on 60-year US equity dataset (21,396 stocks, 94 characteristics, including delisted)",
+          "staged_proposal": "1_lambdarankic_h370.json",
+          "hypothesis": "H370"
+        },
+        {
+          "id": "arXiv:2605.05580",
+          "title": "AlphaCrafter: 3-Agent Miner/Screener/Trader Pipeline",
+          "relevance": "medium",
+          "key_results": "S&P500 backtest Sharpe 1.2025, live Sharpe 0.7212; CSI300 backtest Sharpe 1.5322",
+          "note": "Architecture reference; live Sharpe 0.7212 shows significant backtest/live gap. Informs H358 (Agentic Autonomous Factor Investing)."
+        },
+        {
+          "id": "arXiv:2605.15412",
+          "title": "QuantEvolver: Reinforcement Fine-Tuning LLMs for Alpha Discovery",
+          "relevance": "medium",
+          "note": "Replaces prompt-based feedback with RL fine-tuning for factor generation. No pre-trained model available. Future direction after QuantaAlpha (H349)."
+        }
+      ],
+      "verdict": "LambdaRankIC is the single highest-value finding of the night: 175% IC improvement, no GPU needed, no survivorship bias concern, direct XGBoost compatibility with existing infrastructure."
+    },
+    {
+      "angle": "arXiv: multi-agent LLM trading",
+      "papers_found": [
+        {
+          "id": "arXiv:2605.09185",
+          "title": "AutoRedTrader: Automated Red-Teaming for LLM Trading Agents",
+          "relevance": "medium",
+          "key_results": "69% misinformation exposure rate, 26.67% attack success, 2-3x return degradation; RAG filtering reduces attacks 46%",
+          "staged_proposal": "3_autoredtrader_robustness_wiki.json",
+          "note": "Adversarial robustness findings — directly applicable to H274 and H280 production design guardrails."
+        }
+      ],
+      "verdict": "AutoRedTrader findings are important reliability context. Wiki update staged."
+    },
+    {
+      "angle": "GitHub trending: quant finance",
+      "repos_found": [
+        {
+          "repo": "AI4Finance-Foundation/FinRL-Trading",
+          "stars": "N/A (active)",
+          "note": "FinRL-X production upgrade: weight-centric architecture, Sharpe 1.96 live paper trading 2026. Added to deep-rl-trading.md wiki expansion."
+        },
+        {
+          "repo": "Jon-Becker/prediction-market-analysis",
+          "stars": "2300",
+          "note": "36GB Polymarket+Kalshi historical dataset. Existing wiki entry had broken URL — staged fix as proposal #4.",
+          "staged_proposal": "4_prediction_market_dataset_wiki.json"
+        },
+        {
+          "repo": "pmxt/pmxt",
+          "stars": "1200",
+          "note": "CCXT-for-prediction-markets: unified API across Polymarket/Kalshi. Existing wiki entry had broken URL — staged fix as proposal #4."
+        },
+        {
+          "repo": "nautechsystems/hftbacktest",
+          "stars": "3900",
+          "note": "Rust HFT backtester. Already referenced in multi-agent wiki under NautilusTrader. No new wiki action needed."
+        }
+      ],
+      "verdict": "Jon-Becker dataset URL fix is the actionable finding. FinRL-X covered in wiki expansion."
+    }
+  ],
+  "staged_proposals": [
+    {
+      "file": "1_lambdarankic_h370.json",
+      "id": "H370",
+      "title": "LambdaRankIC on H198 30-Stock Universe",
+      "risk_level": "medium",
+      "priority": "HIGH — run first, ahead of H204"
+    },
+    {
+      "file": "2_hmm_rl_h371.json",
+      "id": "H371",
+      "title": "HMM+RL Regime Portfolio SPY/TLT/GLD/BIL",
+      "risk_level": "medium",
+      "priority": "medium — parallel track to H370"
+    },
+    {
+      "file": "3_autoredtrader_robustness_wiki.json",
+      "id": null,
+      "title": "AutoRedTrader adversarial robustness findings → multi-agent wiki",
+      "risk_level": "low",
+      "priority": "low — reliability reference"
+    },
+    {
+      "file": "4_prediction_market_dataset_wiki.json",
+      "id": null,
+      "title": "Fix broken GitHub URLs in prediction-markets/other-platforms.md",
+      "risk_level": "low",
+      "priority": "low — maintenance"
+    }
+  ],
+  "wiki_expansion_summary": {
+    "target_file": "wiki/trading/algorithms/deep-rl-trading.md",
+    "new_sections_added": [
+      "ACM RL Survey (arXiv:2408.10932) — 167 papers, no single algorithm dominates",
+      "FinRL-X production framework — weight-centric architecture, Sharpe 1.96 live",
+      "HMM+RL Regime Portfolio (arXiv:2605.27848) — full RegimePortfolioEnv code",
+      "LambdaRankIC (arXiv:2605.00501) — full lambdarankic_objective_fast code",
+      "Updated H204 upgrade path — H370 first, then H204/H371"
+    ],
+    "cross_references_added": [
+      "regime-detection.md",
+      "factor-models.md",
+      "momentum-strategies.md",
+      "multi-agent-llm-trading.md",
+      "ts-foundation-models.md",
+      "auto-alpha-discovery.md"
+    ]
+  },
+  "key_finding": "LambdaRankIC (arXiv:2605.00501) achieves 175% IC improvement over OLS regression on a 60-year US equity dataset including delisted stocks. Custom XGBoost objective is directly compatible with existing run_h198.py infrastructure. No GPU required. H370 should run before H204 (full RL) and H368/H369 stubs. This is the most actionable quantitative alpha finding since H343 OB filter confirmation."
+}

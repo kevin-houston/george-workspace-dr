@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-02
+updated: 2026-07-05
 ---
 
 # Other Prediction Market Platforms
@@ -159,7 +159,7 @@ Uses the same Kalshi REST API (`/trade-api/v2/timeless/` endpoint namespace). Au
 
 ## prediction-market-analysis (Historical Data)
 
-**GitHub:** https://github.com/topics/quantitative-finance (search: prediction-market-analysis)
+**GitHub:** https://github.com/Jon-Becker/prediction-market-analysis
 **Stars:** 2.3k | **Data size:** 36GB
 
 The largest publicly available prediction market historical dataset:
@@ -179,7 +179,7 @@ The largest publicly available prediction market historical dataset:
 
 ## pmxt — Unified Prediction Market API
 
-**GitHub:** https://github.com (search: pmxt)
+**GitHub:** https://github.com/pmxt/pmxt
 **Stars:** 1.2k
 
 CCXT-style unified API for multiple prediction market platforms. Key features:
