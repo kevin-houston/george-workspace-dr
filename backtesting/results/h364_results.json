@@ -1,0 +1,87 @@
+{
+  "A": {
+    "name": "OB-only (H361 Var B reproduction)",
+    "is": {
+      "n": 96,
+      "sharpe": 2.065,
+      "cagr": 0.221,
+      "maxdd": -0.193,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.903,
+      "cagr": 0.246,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    }
+  },
+  "B": {
+    "name": "VIX<20-only (H362 Var B reproduction)",
+    "is": {
+      "n": 96,
+      "sharpe": 1.965,
+      "cagr": 0.184,
+      "maxdd": -0.068,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.819,
+      "cagr": 0.185,
+      "maxdd": -0.08,
+      "neg_yrs": 0
+    }
+  },
+  "C": {
+    "name": "Stacked: OB lenient AND VIX<20 (primary)",
+    "is": {
+      "n": 96,
+      "sharpe": 2.768,
+      "cagr": 0.215,
+      "maxdd": -0.051,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 2.173,
+      "cagr": 0.208,
+      "maxdd": -0.08,
+      "neg_yrs": 0
+    }
+  },
+  "D": {
+    "name": "VIX<20 gate only \u2014 verify matches Var B",
+    "is": {
+      "n": 96,
+      "sharpe": 1.965,
+      "cagr": 0.184,
+      "maxdd": -0.068,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.819,
+      "cagr": 0.185,
+      "maxdd": -0.08,
+      "neg_yrs": 0
+    }
+  },
+  "E": {
+    "name": "H354 Var C baseline (pure 12m top-1)",
+    "is": {
+      "n": 96,
+      "sharpe": 1.561,
+      "cagr": 0.189,
+      "maxdd": -0.189,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.339,
+      "cagr": 0.192,
+      "maxdd": -0.113,
+      "neg_yrs": 0
+    }
+  }
+}

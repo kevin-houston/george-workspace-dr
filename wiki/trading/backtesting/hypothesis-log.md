@@ -8507,42 +8507,117 @@ Correlation of H354 Var C with production portfolio (OOS): 0.576
 
 ---
 
-## H367 — HMM + RL Regime Allocation on SPY/TLT/GLD (PROPOSED)
+## H364 — Stacked OB Filter + VIX<20 Regime Gate on H354 Low-Vol ETF Universe (CONFIRMED)
 
-**Status**: PROPOSED
+**Status**: CONFIRMED
+**Tested**: 2026-07-04
+**Source**: H361 (OB filter, OOS 1.903) + H362 (VIX<20 gate, OOS 1.819)
+**Script**: `backtesting/daily/run_h364.py`
+**Universe**: USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV + BIL
+**Gate**: OOS Sharpe > 1.903 (H361 Var B baseline), Corr(SPY) < 0.621
+**IS/OOS**: 2013-2020 / 2021-2026
+
+**Results**:
+
+| Var | Description                          | IS Sharpe | OOS Sharpe | MaxDD  | Neg Yrs | Corr(SPY) |
+|-----|--------------------------------------|-----------|------------|--------|---------|-----------|
+| A   | OB-only (H361 Var B repro)           | 2.065     | 1.903      | -11.3% | 0       | 0.621     |
+| B   | VIX<20-only (H362 Var B repro)       | 1.965     | 1.819      | -8.0%  | 0       | 0.448     |
+| C   | **Stacked: OB lenient AND VIX<20**   | **2.768** | **2.173**  | **-8.0%** | **0** | **0.433** |
+| D   | VIX<20 gate only (verify = Var B)    | 1.965     | 1.819      | -8.0%  | 0       | 0.448     |
+| E   | H354 Var C baseline (no filters)     | 1.561     | 1.339      | -11.3% | 0       | 0.687     |
+
+**OOS Annual (Var C)**:
+- 2021: +32.7%, 2022: +1.4%, 2023: +25.6%, 2024: +25.7%, 2025: +21.5%, 2026: +13.2%
+
+**Cash months (OOS)**: Var A 27.3%, Var B 39.4%, Var C 33.3%
+
+**Key findings**:
+
+1. Stacking IS additive. Var C (stacked) OOS 2.173 > Var A standalone (1.903) > Var B standalone (1.819). Both filters contribute independently.
+2. MaxDD improves further: -8.0% for stacked vs -11.3% for OB-only. The VIX<20 gate is responsible for MDD improvement; OB filter adds return without hurting MDD.
+3. Corr(SPY) drops dramatically: stacked Var C = 0.433 vs OB-only = 0.621. The VIX<20 gate is what drives diversification improvement (routing to BIL in volatile markets).
+4. Zero negative years in all variants.
+5. The two filters address different failure modes: OB filter prevents entering weak-momentum ETFs, VIX<20 gate prevents entering any position during high-volatility regimes. Together they are complementary, not redundant.
+6. 2022 protection: Var C routes to BIL for most of 2022 (VIX>20), yielding +1.4% vs SPY -24%.
+
+**Production note**: H364 Var C (OOS 2.173, MaxDD -8.0%, Corr=0.433) is the best standalone low-vol ETF strategy tested. As a standalone allocation, it diversifies well against the production portfolio (Corr=0.433 vs the production portfolio's SPY Corr ~0.85+). H363 showed the family doesn't blend into production, but as a separate capital allocation it remains attractive.
+
+---
+
+## H366 — DeePM Commodity ETF Universe — Phase 1 Baseline (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED (Phase 1 baseline fails gate — DeePM Phase 2 deprioritized)
+**Tested**: 2026-07-04
+**Source**: arXiv:2601.05975 (DeePM, Jan 2026); extends H261b commodity ETF momentum
+**Script**: `backtesting/daily/run_h366.py`
+**Universe**: DBC/USO/UNG/GLD/SLV/PDBC/COMT/COMB/BCI/FTGC/GUNR/MOO (12 commodity ETFs)
+**Gate**: OOS Sharpe > 1.0 AND Corr(SPY) < 0.4
+**IS/Val/OOS**: 2005-2017 / 2018-2020 / 2021-2026
+
+**Results (H261b top-2 momentum baseline)**:
+
+| Period         | Sharpe | MaxDD  | CAGR  | Corr(SPY) | Neg Yrs |
+|----------------|--------|--------|-------|-----------|---------|
+| IS 2005-2017   | 0.244  | -47.8% | 2.6%  | 0.364     | 5       |
+| Val 2018-2020  | 0.441  | -22.5% | 8.9%  | 0.508     | 1       |
+| OOS 2021-pres  | 0.738  | -38.8% | 18.9% | 0.403     | 1       |
+
+**Gate check**: OOS Sharpe 0.738 < 1.0 FAIL. Corr(SPY) 0.403 > 0.4 FAIL (marginally).
+
+**Key findings**:
+
+1. The H261b baseline does not hold on this expanded 12-ETF commodity universe with the new train/val/OOS split. IS Sharpe 0.244 is very weak — the commodity universe is noisy over 2005-2017.
+2. OOS Sharpe improved to 0.738 but MaxDD -38.8% is severe. The commodity ETF family has fat tails that momentum alone cannot control.
+3. Corr(SPY) borderline at 0.403 — slightly above gate.
+4. Prior H261b used a narrower universe and different split. Results differ materially.
+
+**Conclusion**: DeePM Phase 2 (cross-asset attention + macro features) deprioritized. The commodity ETF universe needs a fundamentally different approach than pure momentum (VIX gating, OB filtering) to control drawdowns. Revisit only with regime-gated variant.
+
+---
+
+## H367 — HMM + RL Regime Allocation on SPY/TLT/GLD (STUB — NOT RUN)
+
+**Status**: STUB — NOT RUN (script is a TODO placeholder; requires PPO/RL implementation)
 **Staged**: 2026-07-04 (renumbered from H362 conflict)
 **Source**: arXiv:2605.27848 (Verma et al., May 2026); builds on H251 (3-state HMM, OOS 0.941)
-**Script**: `backtesting/daily/run_h367.py`
+**Script**: `backtesting/daily/run_h367.py` (stub — no executable code)
 **Universe**: SPY, TLT, GLD
 **Gate**: OOS Sharpe > 1.532 (H311 EW-4+VIX benchmark), MaxDD < -10%
 **IS/OOS**: 2004-2020 / 2021-2026
 
 Replace H251's static regime-conditional weights with PPO-trained RL policy. Paper achieves Sharpe 1.68 vs static 0.92 on same universe. Features: HMM regime state probabilities + daily returns, VIX, yield curve. Train on IS; freeze for OOS.
 
+**Note (2026-07-04)**: Script stub only. Requires `stable-baselines3` PPO + full HMM training loop. Not runnable in current state. Needs full implementation before testing.
+
 ---
 
-## H368 — ML-Forecasted Asymmetric Beta as Factor Signal (PROPOSED)
+## H368 — ML-Forecasted Asymmetric Beta as Factor Signal (STUB — NOT RUN)
 
-**Status**: PROPOSED
+**Status**: STUB — NOT RUN (script is a TODO placeholder; requires LightGBM + firm characteristics data)
 **Staged**: 2026-07-04 (renumbered from H363 conflict)
 **Source**: arXiv:2604.22933 (Conlon, Cotter, Kynigakis; April 2026)
-**Script**: `backtesting/daily/run_h368.py`
+**Script**: `backtesting/daily/run_h368.py` (stub — no executable code)
 **Universe**: S&P 500 (survivorship-bias caveat)
 **Gate**: OOS Sharpe > 1.174 (H198 baseline), Corr(SPY) < 0.70
 **IS/OOS**: 2014-2020 / 2021-2026
 
 Forecast up-beta and down-beta separately per stock using LightGBM on firm characteristics. Score = predicted_up_beta − predicted_down_beta. Long top quintile (high asymmetry), short bottom. Key drivers: trading frictions, intangibles, momentum, growth.
 
+**Note (2026-07-04)**: Script stub only. Requires firm-characteristic data (B/M, intangibles ratio) not available via yfinance. FMP required for financial statement data. Not runnable without FMP screener + full LightGBM pipeline implementation.
+
 ---
 
-## H369 — ReCAP: Regime-Adaptive Continual Learning for ETF Rotation (PROPOSED)
+## H369 — ReCAP: Regime-Adaptive Continual Learning for ETF Rotation (STUB — NOT RUN)
 
-**Status**: PROPOSED
+**Status**: STUB — NOT RUN (script is a TODO placeholder; requires full production strategy return reconstruction)
 **Staged**: 2026-07-04 (renumbered from H364 conflict)
 **Source**: arXiv:2606.00143 (ReCAP framework)
-**Script**: `backtesting/daily/run_h369.py`
+**Script**: `backtesting/daily/run_h369.py` (stub — no executable code)
 **Universe**: Production portfolio (H041a/H026/H045/IBS blend)
 **Gate**: OOS Sharpe > 4.158 (production baseline) AND MaxDD better than -3.60%
 **IS/OOS**: 2004-2019 / 2020-2026
 
 Apply regime-aware continual learning to production blend. Maintain per-regime weight estimates using H249 engine. On regime transition: transfer 50% of prior regime's estimates to new regime module. Avoids catastrophic forgetting of crisis-era learning. Start with simple 50/50 blending before EWC.
+
+**Note (2026-07-04)**: Script stub only. Requires reconstructing monthly returns for each production sub-strategy (H041a, H026, H045, IBS variants) back to 2004, then wiring H249 regime engine. High implementation complexity. Best deferred to dedicated session with full production return series available.
