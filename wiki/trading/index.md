@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-04 (bsm-information-geometry.md major expansion — Dean SSRN 6637139 three-term jump smile κ_eff=κ_stochvol+κ_leverage+κ_jumps(T); Curved Greeks arXiv:2603.14438 coordinate-invariant P&L; updated Dean series table; Python three-term smile implementation; maturity-model guidance table; cross-refs to VRP/dispersion/regime pages)
+updated: 2026-07-05 (deep-rl-trading.md major expansion — ACM RL survey 167 papers; FinRL-X production framework Sharpe 1.96 live; HMM+RL regime portfolio arXiv:2605.27848 extends H249/H251; LambdaRankIC arXiv:2605.00501 IC 175% > OLS on 60yr dataset, H370 candidate; updated H204 upgrade path)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -28,7 +28,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Options Income Strategies](algorithms/options-income-strategies.md) ← updated 2026-05-21 (+ debit spreads: bull call/bear put setup, IV/DTE criteria, management rules, earnings play guidance; iron condor adjustment/rolling mechanics: untested-side roll, tested-side roll, BWB conversion; earnings straddle IV-expansion trade; paper trade annotations WMT/DLTR/SPY)
   - [Low-Volatility Anomaly](algorithms/low-volatility.md) ← updated 2026-05-18 (H205 design + regime-conditional BAB risk flag added; ScienceDirect May 2025 Asia study noted)
   - [BSM & Information Geometry](algorithms/bsm-information-geometry.md) ← updated 2026-07-04 (Dean SSRN 6630259: smile = manifold curvature; two-term formula γ+κ_eff; **NEW**: Dean SSRN 6637139 three-term jump extension κ_eff=κ_stochvol+κ_leverage+κ_jumps(T); Curved Greeks arXiv:2603.14438 coordinate-invariant Hessian; maturity regime table: jumps dominate <15d, diffusion >1yr; Python three_term_smile() implementation)
-  - [Deep RL for Trading](algorithms/deep-rl-trading.md) ← new 2026-05-16 (FinRL/stable-baselines3 framework; PPO/DDPG/TD3; gym environment design; honest OOS benchmarks; H204 queued — PPO vs H198 momentum baseline)
+  - [Deep RL for Trading](algorithms/deep-rl-trading.md) ← updated 2026-07-05 (ACM RL survey 167 papers; FinRL-X Sharpe 1.96 live; HMM+RL regime portfolio arXiv:2605.27848 extends H249/H251; LambdaRankIC arXiv:2605.00501 IC 175%>OLS on 60yr US equity dataset; H370/H371 candidates; H204 upgraded path via FinRL-X)
   - [Calendar Anomalies](algorithms/calendar-anomalies.md) ← updated 2026-05-18 (Schroeder 2025 SEC disclosure mechanism for Halloween effect; H206 success gates set; H205 design note updated)
   - [Regime Detection](algorithms/regime-detection.md) ← updated 2026-05-26 (QuhiQuhihi/regime_model added — Two Sigma GMM+HMM multi-asset + GGS single-asset; runnable reference for H165 full / H205-B)
   - [Factor Models & Cross-Sectional Alpha](algorithms/factor-models.md) ← new 2026-05-20
