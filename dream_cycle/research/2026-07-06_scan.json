@@ -1,0 +1,145 @@
+{
+  "date": "2026-07-06",
+  "scan_angles": [
+    "pairs trading + cointegration + LLM statistical arbitrage",
+    "PEAD + post-earnings drift + text NLP signals",
+    "cross-sectional momentum + factor momentum",
+    "multi-agent LLM trading systems",
+    "trending quantitative finance GitHub repos"
+  ],
+  "total_findings": 11,
+  "staged_proposals": 5,
+  "summary": {
+    "angle_1_pairs_llm": {
+      "label": "Pairs Trading + LLM",
+      "top_findings": [
+        {
+          "arxiv": "2412.09394",
+          "title": "LLMs for Time Series: an Application for Single Stocks and Statistical Arbitrage",
+          "authors": "Valeyre, S. & Aboura, S.",
+          "date": "Dec 2024 (updated Nov 2025)",
+          "relevance": "HIGH",
+          "summary": "LLM-guided factor decomposition for optimal residual extraction in pairs/stat-arb. Valeyre (2019) proved trading factor residuals is mathematically optimal. LLM updates time-varying factor loadings to minimize mean-reversion half-life. Complements Moira (HRL+LLM pair selection, arXiv:2605.01954): Moira selects pairs; Valeyre extracts optimal residual. Staged as proposal 3 (H316 design update).",
+          "action": "Staged as wiki update to pairs-trading.md H316 section"
+        },
+        {
+          "arxiv": "2606.04574",
+          "title": "Dynamic Multi-Pair Trading with DRL in Cryptocurrency Markets",
+          "authors": "Lebiedz, D.",
+          "date": "June 2026",
+          "relevance": "MEDIUM",
+          "summary": "DRL as execution overlay on cointegration-based pair signals in crypto. GitHub: damianlebiedz/pair-trading-with-rl. Applies to OOS 2025 crypto data. Less relevant to equity pairs (our H307 family closed due to structural breaks); moderate relevance for crypto extension if H276 NautilusTrader crypto strategy resumes.",
+          "action": "Not staged — crypto focus, H307 ETF pairs family closed"
+        }
+      ]
+    },
+    "angle_2_pead_text": {
+      "label": "PEAD + Post-Earnings Drift + Text",
+      "top_findings": [
+        {
+          "source": "ACL FinNLP-2025 (proceedings 2025.finnlp-2.13)",
+          "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+          "authors": "Hadlock, S. et al.",
+          "date": "November 2025",
+          "relevance": "HIGH",
+          "summary": "Compares BART, FinBERT, LLaMA 3 on PEAD prediction. FinBERT still generates strongest returns. LLaMA 3 unfinetuned underperforms. Key finding: generic LLMs don't beat FinBERT on PEAD — but none were task-finetuned. Validates H174 architecture choice. Combined with XiaomoWu/PEAD (task-finetuned Mistral), suggests next improvement is finetuning, not model size.",
+          "action": "Staged as H375 proposal (finetuned LLM PEAD)"
+        },
+        {
+          "arxiv": "2509.24254",
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+          "date": "October 2025",
+          "relevance": "HIGH",
+          "summary": "138,000 press releases 2005-2023. Structured extraction (guidance, CEO quote, revenue table, summary paragraph) with BERT outperforms flat-document BERT on EA-day and PEAD windows. AUC improvement ~0.04. Direct upgrade path for H174 which treats 8-K as flat document.",
+          "action": "Staged as H372 proposal (structure-aware press release NLP)"
+        },
+        {
+          "github": "XiaomoWu/PEAD",
+          "title": "Finetuning LLM to Predict PEAD from Earnings Call Transcripts",
+          "date": "2025",
+          "relevance": "HIGH",
+          "summary": "Finetunes Mistral 7B and LLaMA 3.1 8B on earnings call data using GradPerp algorithm to prevent gradient conflicts. Most concrete implementation for LLM-based PEAD classification. Uses Lightning + Hydra. Transcript-based (vs H174's 8-K document). Complementary: H174 uses press releases, H375 would use transcript.",
+          "action": "Staged as H375 proposal (finetuned LLM PEAD)"
+        },
+        {
+          "arxiv": "2605.25894",
+          "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+          "date": "May 2026",
+          "relevance": "MEDIUM",
+          "summary": "Multi-modal approach (price + text) for EA-day direction. Not staged — our H174 is EA-day + PEAD window, not just EA-day. Architecture is overcomplicated for our use case.",
+          "action": "Not staged"
+        }
+      ]
+    },
+    "angle_3_momentum_ml": {
+      "label": "Cross-Sectional Momentum + ML",
+      "top_findings": [
+        {
+          "source": "Tandfonline 2025 (extended sample 1963-2023)",
+          "title": "MAX Factor × Momentum Interaction: +2.5%/month Alpha Pocket",
+          "date": "2025",
+          "relevance": "HIGH",
+          "summary": "High-MAX stocks within high-momentum decile generate +2.5%/month vs +0.9% unconditional momentum. Retail herding amplifies trend in lottery-like momentum stocks. Reverses unconditional MAX underperformance (-0.55%/month). Actionable within H198 universe: tilt selection toward higher-MAX top-momentum stocks.",
+          "action": "Staged as H373 proposal (MAX-momentum tilt on H198)"
+        },
+        {
+          "source": "Pacific-Basin Finance Journal 2024",
+          "title": "A Four-Factor Model Based on Factor Momentum",
+          "date": "2024",
+          "relevance": "MEDIUM",
+          "summary": "Factor momentum (momentum of FF factors) explains stock, industry, and regional momentum but not vice versa. Four-factor model: market + size + value + factor momentum. Relevant for H318 meta-agent ETF selector (factor momentum = momentum of strategy returns). Not staged — abstract concept, no direct implementation path beyond what we already know.",
+          "action": "Not staged — conceptual input to H318 design"
+        }
+      ]
+    },
+    "angle_4_multi_agent": {
+      "label": "Multi-Agent LLM Trading",
+      "top_findings": [
+        {
+          "arxiv": "2508.13915",
+          "title": "TS-Agent: Structured Agentic Workflows for Financial Time-Series Modeling",
+          "authors": "Ang, Bao et al.",
+          "date": "August 2025",
+          "relevance": "HIGH",
+          "summary": "Modular agentic LLM framework: planner + model bank + code refinement loop + fine-tuning controller. Beats AutoML and existing agentic systems (ReAct, Reflexion) on financial time series by +12% accuracy, +0.3-0.5 Sharpe. GitHub: yinshuo-thu/TS-Agent. Architecture pattern directly applicable to H274 (multi-agent PEAD) and H318 (meta-agent ETF selector). Not a new hypothesis — design input.",
+          "action": "Staged as wiki update to multi-agent-llm-trading.md"
+        },
+        {
+          "source": "TauricResearch/TradingAgents v0.2.4 (arXiv:2412.20138)",
+          "title": "TradingAgents updated 2026",
+          "date": "Ongoing (v0.2.4 in 2026)",
+          "relevance": "KNOWN",
+          "summary": "Already in wiki at multi-agent-llm-trading.md. No new staging needed.",
+          "action": "Not staged — already documented"
+        }
+      ]
+    },
+    "angle_5_github_trending": {
+      "label": "Trending Quantitative Finance GitHub Repos",
+      "top_findings": [
+        {
+          "repo": "PlaceNL2026/best-of-algorithmic-trading",
+          "stars": "N/A (curator repo)",
+          "description": "Curated ranked list of 109 algorithmic trading open-source projects with ~310K combined GitHub stars. Updated May 2026. Good reference for finding emerging tools not yet in our wiki.",
+          "relevance": "MEDIUM",
+          "action": "Not staged — reference repo, check periodically"
+        },
+        {
+          "repo": "xujianming2017/backtrader-2026",
+          "stars": "unclear",
+          "description": "Extended backtrader fork with low/mid/high frequency support and tick data. 2026 active. Note: we use our own pandas/numpy pipeline; not a priority to switch.",
+          "relevance": "LOW",
+          "action": "Not staged"
+        }
+      ]
+    }
+  },
+  "key_meta_findings": [
+    "FinBERT remains the best-performing model for PEAD on STANDARD benchmarks (ACL FinNLP-2025) — H174 architecture is validated",
+    "Task-finetuned LLMs (XiaomoWu/PEAD) represent the credible next improvement over H174, not just larger models",
+    "MAX×Momentum interaction paper changes interpretation of H336 (52WH failed) and H337 (quality failed): behavioral signals in large-cap universes require interaction context, not standalone screening",
+    "arXiv:2509.24254 press release structure paper is directly actionable on H174's 8-K data without new data sources",
+    "TS-Agent (arXiv:2508.13915) provides the missing architecture pattern for H274 multi-agent PEAD: planner + refinement loop"
+  ],
+  "next_hypothesis_sequence": "H372 (press release structure), H373 (MAX-momentum tilt), H374 (LightGBM behavioral — proposed in wiki but not yet staged), H375 (finetuned LLM PEAD)"
+}

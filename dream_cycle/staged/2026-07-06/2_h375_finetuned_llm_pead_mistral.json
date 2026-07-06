@@ -1,0 +1,25 @@
+{
+  "id": "h375-finetuned-llm-pead",
+  "date": "2026-07-06",
+  "source": "GitHub XiaomoWu/PEAD + ACL FinNLP-2025",
+  "source_url": "https://github.com/XiaomoWu/PEAD",
+  "title": "H375: Domain-Finetuned LLM (Mistral 7B) on Earnings Calls for PEAD Prediction",
+  "rationale": "GitHub repo XiaomoWu/PEAD finetunes Mistral 7B and LLaMA 3.1 8B directly on earnings call transcripts to predict PEAD, using the GradPerp algorithm to prevent gradient conflicts between PEAD-specific and general objectives. This is more powerful than our current H174 approach (FinBERT pretrained on generic financial news), because: (1) earnings call transcripts contain forward-looking tone, analyst Q&A, management hedging language that FinBERT's training corpus underrepresents; (2) finetuning on the target task (PEAD) directly optimizes for return prediction, not just sentiment classification. ACL FinNLP-2025 benchmark confirms FinBERT still beats BART and LLaMA 3 on standard PEAD measurement — but those models were NOT finetuned on PEAD-labeled data. XiaomoWu/PEAD closes this gap. This is the H279 direction (LLM momentum filter) but applied to PEAD rather than momentum. Requires OpenAI API or local GPU for finetuning; inference only needs a quantized 4-bit Mistral 7B on CPU.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h375.py",
+  "content": "#!/usr/bin/env python3\n\"\"\"\nH375: Domain-Finetuned LLM (Mistral 7B) PEAD Predictor\n\nHypothesis: A Mistral 7B model finetuned specifically on earnings call transcripts\n(using GradPerp to align PEAD prediction with language model objective) outperforms\nFinBERT flat-document scoring (H174 baseline: OOS WR=81.8%, n=22) on PEAD event\nclassification.\n\nReference implementation: github.com/XiaomoWu/PEAD\n  - GradPerp algorithm: prevents gradient conflicts between finetuning tasks\n  - Training: earnings call transcripts with PEAD labels (abnormal return day 2-20)\n  - Models tested: Mistral 7B, LLaMA 3.1 8B\n  - Uses Lightning + Hydra for training/evaluation\n\nACL FinNLP-2025 context: FinBERT > BART > LLaMA 3 on STANDARD PEAD (no task finetuning).\nH375 tests finetuned LLM specifically optimized for PEAD classification.\n\nBaseline to beat: H174 OOS WR=81.8%, MeanRet=6.89%, n=22\nGate: WR > 81.8% at n >= 15, OR n >= 25 at WR >= 75%\n\nNOTE: This is a stub requiring:\n  1. Transcript download infrastructure (AlphaVantage or Motley Fool)\n     - AlphaVantage EARNINGS_CALL_TRANSCRIPT endpoint (25 req/day limit)\n     - See H247 (blocked on FMP 403) and H168 (transcript coverage bias)\n  2. Finetuning Mistral 7B on our PEAD-labeled event set\n     - Requires GPU (RunPod/Modal ~$5-10/run for 8B model)\n     - Or use OpenAI API for inference on non-finetuned GPT-4o-mini as Phase 1\n  3. Inference-only version: load quantized Mistral 7B-Q4 locally (8GB RAM)\n\nPhase 1 (fast, no GPU): Run zero-shot GPT-4o-mini on earnings call text,\n  compare WR vs FinBERT score at same events. Cost: ~$0.10-0.20/event.\nPhase 2 (GPU): Finetune via XiaomoWu/PEAD repo with GradPerp.\n\"\"\"\n\n# TODO: Implement H375 Phase 1\n# 1. For each H174 OOS event (n=22), download earnings call transcript\n#    via AlphaVantage EARNINGS_CALL_TRANSCRIPT or find in existing sources\n# 2. Score transcript with GPT-4o-mini: extract sentiment, guidance tone, EPS quality\n# 3. Compare GPT-4o-mini transcript score vs FinBERT 8-K score on same 22 events\n# 4. Report: WR at score >= threshold, n, correlation with H174 score\n\nprint('H375 stub: Finetuned LLM PEAD predictor - requires implementation')\nprint('Reference: github.com/XiaomoWu/PEAD (Mistral 7B + GradPerp)')\nprint('Phase 1: GPT-4o-mini zero-shot on transcripts (no finetuning needed)')\nprint('Baseline: H174 OOS WR=81.8%, n=22')\n",
+  "action": "write",
+  "apply_status": "pending",
+  "hypothesis_log_entry": {
+    "id": "H375",
+    "title": "Finetuned LLM (Mistral 7B) on Earnings Call Transcripts for PEAD",
+    "status": "STUB — NOT RUN",
+    "source": "GitHub XiaomoWu/PEAD (GradPerp finetuning) + ACL FinNLP-2025 (Hadlock et al.)",
+    "gate": "OOS WR > 81.8% at n >= 15, OR n >= 25 at WR >= 75%",
+    "universe": "H174 PEAD event set",
+    "is_oos": "OOS 2018-2026 (same as H174 split)",
+    "method": "Phase 1: GPT-4o-mini zero-shot scoring on earnings call transcripts. Phase 2: Mistral 7B finetuned via GradPerp on PEAD-labeled transcript dataset. Compare vs FinBERT on same 22 OOS events.",
+    "reference_results": "XiaomoWu/PEAD (2025): Mistral 7B finetuned with GradPerp achieves significant improvement over zero-shot LLMs on PEAD classification. ACL FinNLP-2025: FinBERT beats unfinetuned BART and LLaMA 3 — validating H174 but motivating finetuning direction."
+  }
+}

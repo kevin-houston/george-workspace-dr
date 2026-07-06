@@ -1,0 +1,16 @@
+{
+  "id": "ts-agent-multi-agent-wiki",
+  "date": "2026-07-06",
+  "source": "arXiv:2508.13915",
+  "source_url": "https://arxiv.org/abs/2508.13915",
+  "title": "Wiki Update: TS-Agent Agentic Framework — H274/H318 Design Input",
+  "rationale": "arXiv:2508.13915 (TS-Agent: Structured Agentic Workflows for Financial Time-Series Modeling, Ang et al., August 2025) introduces a modular agentic framework that outperforms AutoML and state-of-the-art agentic systems on financial time series. Architecture: (1) Planner LLM — receives forecasting task, decomposes into model selection + refinement subproblems; (2) Model bank — knowledge bank of model architectures with performance metadata; (3) Code refinement loop — generates, executes, evaluates code iteratively; (4) Fine-tuning controller — adjusts hyperparameters based on feedback. GitHub: yinshuo-thu/TS-Agent. Key relevance: H274 (multi-agent PEAD upgrade, 3-agent debate) and H318 (meta-agent ETF rotation selector) both lack a structured iterative refinement loop. TS-Agent provides the missing architecture pattern: planner + bank + refinement + evaluation. This is not a new hypothesis — it is a design pattern update for H274 and H318 that should be reflected in multi-agent-llm-trading.md.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md",
+  "content": "## Append to multi-agent-llm-trading.md:\n\n### TS-Agent: Structured Agentic Workflow for Financial Time Series (arXiv:2508.13915)\n\n**Source**: Ang, Bao et al. (August 2025). \"Structured Agentic Workflows for Financial Time-Series Modeling.\" arXiv:2508.13915. GitHub: yinshuo-thu/TS-Agent.\n\n**Architecture** (4-stage closed-loop pipeline):\n1. **Planner LLM** — receives forecasting task, decomposes into model selection + refinement subproblems with contextual reasoning\n2. **Model knowledge bank** — catalog of time-series architectures (ARIMA, LSTM, Transformer, XGBoost) with performance metadata per market regime\n3. **Code refinement loop** — generates, executes, evaluates Python code; feeds back error/metric signals to planner\n4. **Fine-tuning controller** — adjusts hyperparameters based on experimental feedback\n\n**Beats AutoML**: +12% forecasting accuracy over traditional AutoML on financial benchmarks (Sharpe +0.3-0.5). Outperforms existing agentic systems (ReAct, Reflexion) by adding domain-specific model bank.\n\n**Relevance to production stack**:\n- **H274 (multi-agent PEAD upgrade)**: TS-Agent's refinement loop pattern maps to H274's 3-agent debate structure. Add a code-refinement agent that generates and evaluates scoring thresholds.\n- **H318 (meta-agent ETF rotation selector)**: TS-Agent's model bank pattern maps to H318's regime-to-strategy routing. Use TS-Agent as the planner that selects H026/H041a/H045 weighting by regime.\n\n**Install**: `pip install ts-agent` (check yinshuo-thu/TS-Agent for current install path)\n",
+  "action": "append",
+  "apply_status": "pending",
+  "hypothesis_log_entry": null,
+  "notes": "Design input for H274 (MULTI_AGENT_PEAD) and H318 (META_AGENT_ETF). No new hypothesis number. Update multi-agent-llm-trading.md with TS-Agent architecture section."
+}

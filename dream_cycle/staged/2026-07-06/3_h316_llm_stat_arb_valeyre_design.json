@@ -1,0 +1,16 @@
+{
+  "id": "h316-llm-stat-arb-valeyre",
+  "date": "2026-07-06",
+  "source": "arXiv:2412.09394",
+  "source_url": "https://arxiv.org/abs/2412.09394",
+  "title": "H316 Design Update: LLM Statistical Arbitrage via Valeyre Optimal Factor Method",
+  "rationale": "arXiv:2412.09394 (LLMs for Time Series: an Application for Single Stocks and Statistical Arbitrage, Valeyre & Aboura, Dec 2024, updated Nov 2025) provides a concrete blueprint for LLM-based statistical arbitrage that directly informs H316 design. Key insight: LLMs are used NOT to predict price directly but to identify the optimal factor decomposition. Valeyre (2019) proved that trading the residual from factor removal (after PCA/FF/IPCA) is mathematically optimal for statistical arbitrage vs. raw L/S. The LLM's role: given price/volume/text time series for a stock pair, predict which factor loading specification minimizes the residual's mean-reversion half-life. This is a higher-signal task for an LLM than raw return prediction. Key difference from our H316 current design (Moira arXiv:2605.01954 HRL+LLM semantic pair selection): Valeyre uses LLM to improve the RESIDUAL EXTRACTION step, not the pair selection step. These are complementary. Implementation path: (1) Moira for semantic pair selection, (2) Valeyre method for residual extraction optimization. This wiki update should be reflected in pairs-trading.md.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/pairs-trading.md",
+  "content": "## Append to H316 section in pairs-trading.md:\n\n### Valeyre Factor Decomposition for Residual Extraction (arXiv:2412.09394)\n\n**Source**: Valeyre, S. and Aboura, S. (2024/2025). \"LLMs for Time Series: an Application for Single Stocks and Statistical Arbitrage.\" arXiv:2412.09394, updated November 2025.\n\nKey insight: LLM is used to identify the optimal factor loading specification that minimizes the residual's mean-reversion half-life in a pairs spread — not to predict returns directly.\n\nValeyre (2019) proved trading the factor-residual is mathematically optimal vs. raw L/S when:\n- Factor loadings are time-varying (LLM updates them dynamically)\n- Residual has shorter half-life than the raw spread\n\nComplementary to Moira (HRL+LLM semantic pair selection):\n- **Moira**: select which pairs to trade (semantic similarity via LLM embeddings)\n- **Valeyre**: optimize HOW to extract the stationary residual (LLM-guided factor decomposition)\n",
+  "action": "append",
+  "apply_status": "pending",
+  "hypothesis_log_entry": null,
+  "notes": "This is a design input for H316 (already STUB status). No new hypothesis number needed. Update pairs-trading.md H316 section to reference arXiv:2412.09394 as the residual extraction method alongside Moira for pair selection."
+}

@@ -1,0 +1,25 @@
+{
+  "id": "h372-press-release-structure-pead",
+  "date": "2026-07-06",
+  "source": "arXiv:2509.24254",
+  "source_url": "https://arxiv.org/abs/2509.24254",
+  "title": "H372: Structure-Aware Press Release NLP for 8-K EA-Day Return Prediction",
+  "rationale": "arXiv:2509.24254 (Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns) examines 138,000 earnings press releases 2005-2023, comparing bag-of-words vs BERT-based embeddings on EA-day and PEAD windows. Key insight: structured extraction of press release components (header, revenue table, guidance, CEO quote) outperforms full-document embeddings because different sections carry different predictive weight. Our H174 (FinBERT on EDGAR 8-K, OOS WR=81.8%) treats each 8-K as a flat document. Structure-aware parsing could boost score quality by up-weighting the guidance and forward-looking sections while down-weighting boilerplate. This is a targeted upgrade to H174 entry quality rather than a new strategy.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h372.py",
+  "content": "#!/usr/bin/env python3\n\"\"\"\nH372: Structure-Aware Press Release NLP for 8-K Earnings Prediction\n\nHypothesis: Parsing 8-K earnings press releases by structural section\n(header/summary, revenue tables, guidance statements, CEO quote, risk factors)\nand scoring each section separately with FinBERT produces better positive/negative\ndiscrimination than the flat full-document approach used in H163/H174.\n\nBaseline to beat: H174 OOS WR=81.8%, MeanRet=6.89%, n=22, score_thresh=0.18\nGate: OOS WR > 81.8% at same n, OR same WR with n > 22 (more coverage)\n\nMethod:\n  1. Download 8-K Item 2.02 (or full 8-K) from EDGAR for each PEAD event\n  2. Parse into sections using regex/heuristics:\n     - Summary paragraph (first 3 sentences)\n     - Revenue/EPS table rows\n     - Guidance/outlook paragraphs (\"we expect\", \"guidance\", \"outlook\")\n     - CEO statement quote block\n  3. Score each section with FinBERT (ProsusAI/finbert)\n  4. Compute weighted composite: guidance 40%, summary 35%, CEO 15%, tables 10%\n  5. Compare flat-doc score (H174) vs structured score on same event set\n\nReference: arXiv:2509.24254 — 138k press releases 2005-2023, BERT embeddings\nStructured approach outperforms flat on EA-day returns AND PEAD window.\n\nNOTE: This is a stub requiring implementation.\n\"\"\"\n\n# TODO: Implement H372\n# 1. Reuse H174 EDGAR download infrastructure (pead_overnight.py)\n# 2. Add section_parser(text) -> dict with keys: summary, tables, guidance, ceo_quote\n# 3. Score each section with FinBERT\n# 4. Compute composite: guidance*0.4 + summary*0.35 + ceo*0.15 + tables*0.10\n# 5. Compare structured_score vs flat_score on OOS H174 event set (n=22)\n# 6. Report: WR, MeanRet, n at same score threshold\n\nprint('H372 stub: Structure-Aware Press Release NLP - requires implementation')\nprint('Reference: arXiv:2509.24254 — 138k press releases 2005-2023')\nprint('Baseline to beat: H174 OOS WR=81.8%, MeanRet=6.89%, n=22')\n",
+  "action": "write",
+  "apply_status": "pending",
+  "hypothesis_log_entry": {
+    "id": "H372",
+    "title": "Structure-Aware Press Release NLP for 8-K PEAD Entry Quality",
+    "status": "STUB — NOT RUN",
+    "source": "arXiv:2509.24254 (October 2025, 138k press releases 2005-2023)",
+    "gate": "OOS WR > 81.8% at same n, OR same WR with n > 22 vs H174 baseline",
+    "universe": "H174 PEAD event set (EDGAR 8-K Item 2.02)",
+    "is_oos": "OOS 2018-2026 (same as H174 split)",
+    "method": "Weighted composite of FinBERT scores per structural section: guidance 40%, summary 35%, CEO quote 15%, revenue tables 10%. Compare vs H174 flat-document FinBERT score.",
+    "reference_results": "arXiv:2509.24254: structured extraction outperforms full-document BERT on EA-day and PEAD windows across 138k events. Improvement in AUC ~0.04 over flat BERT."
+  }
+}

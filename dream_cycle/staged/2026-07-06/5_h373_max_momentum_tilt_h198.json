@@ -1,0 +1,25 @@
+{
+  "id": "h373-max-momentum-tilt",
+  "date": "2026-07-06",
+  "source": "Tandfonline 2025 (MAX×Momentum interaction) + behavioral-finance-signals.md",
+  "source_url": "https://www.tandfonline.com/",
+  "title": "H373: MAX Factor Tilt Within H198 30-Stock Momentum Universe",
+  "rationale": "A 2025 Tandfonline paper (extended 1963-2023 sample) identifies that within high-momentum portfolios, high-MAX stocks generate +2.5%/month — far above both unconditional MAX underperformance (-0.55%/month) and unconditional momentum (+0.9%/month). Mechanism: retail herding amplifies trend continuation in lottery-like, highly volatile momentum stocks. Bali et al. (2011) found high-MAX stocks underperform unconditionally, but the 2025 paper shows the momentum interaction REVERSES this in the top momentum decile. H198 (OOS Sharpe 1.174, 30-stock NASDAQ universe, monthly top-1) selects purely on 6-1m price momentum. Augmenting H198 with a MAX tilt — within the top momentum candidates, prefer higher-MAX stocks — should select the stocks where retail amplification is active. Implementation: within H198 top-5 momentum candidates, add a MAX score component. Weight: 70% momentum rank + 30% MAX rank = composite selection score. This is a minor variant on H198 with low implementation cost: add one line to compute MAX, modify selection from pure momentum to composite. Risk: MAX also selects volatile stocks → higher drawdown. Mitigate: apply OB filter (H343 Var B) as additional gate.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h373.py",
+  "content": "#!/usr/bin/env python3\n\"\"\"\nH373: MAX Factor Tilt Within H198 30-Stock Momentum Universe\n\nHypothesis: Within H198 top momentum candidates, prefer higher-MAX stocks\n(maximum daily return over prior month). Tandfonline 2025: high-MAX ×\nhigh-momentum = +2.5%/month vs H198 plain momentum +~0.9%/month OOS.\n\nBaseline to beat: H198 OOS Sharpe 1.174, MaxDD -22.7%\nGate: OOS Sharpe > 1.174 AND MaxDD not worse than -30% (accept higher vol)\n\nVariants:\n  A: composite = 0.7 * mom_rank + 0.3 * max_rank (mild tilt)\n  B: composite = 0.5 * mom_rank + 0.5 * max_rank (equal blend)\n  C: filter: long top-1 only if MAX_rank > 0.7 (lottery threshold gate)\n  D: Var A + OB filter (H343 Var B params: window=20, swing_len=3)\n\nIS:  2013-2020 (same as H343/H344)\nOOS: 2021-2026\n\nNOTE: This is a stub requiring implementation.\nBase off run_h343.py (H198 + OB filter) or run_h198.py.\n\"\"\"\n\nimport yfinance as yf\nimport pandas as pd\nimport numpy as np\nfrom datetime import datetime\n\n# Universe: same 30-stock NASDAQ universe as H198\nUNIVERSE = [\n    'AAPL','MSFT','GOOGL','AMZN','NVDA','META','TSLA','AVGO','COST','NFLX',\n    'ASML','ADBE','AMD','QCOM','CSCO','AMAT','TXN','INTC','INTU','ISRG',\n    'BKNG','VRTX','GILD','MRNA','REGN','BIIB','ILMN','IDXX','DXCM','ALGN'\n]\n\nIS_START = '2013-01-01'\nIS_END   = '2020-12-31'\nOOS_START = '2021-01-01'\nOOS_END   = '2026-12-31'\n\ndef compute_max_factor(daily_returns, lookback=21):\n    \"\"\"MAX = max daily return over prior month.\"\"\"\n    return daily_returns.rolling(lookback).max()\n\ndef compute_momentum(monthly_close, skip=1, lookback=6):\n    \"\"\"6-1m momentum: 6m return skipping most recent month.\"\"\"\n    r = monthly_close.pct_change(lookback + skip)\n    r_skip = monthly_close.pct_change(skip)\n    return r / (1 + r_skip) - 1  # Remove skip-month return\n\n# TODO: Full H373 implementation\n# 1. Download UNIVERSE daily + monthly price data\n# 2. Compute momentum score (H198 method)\n# 3. Compute MAX score (max daily return in prior month)\n# 4. Rank both; form composite per variant\n# 5. Long top-1 composite each month, monthly rebalance\n# 6. Report Sharpe, MaxDD, WF ratio vs H198 baseline\n\nprint('H373 stub: MAX-momentum tilt within H198 - requires implementation')\nprint('Base: H198 OOS Sharpe 1.174. Gate: OOS Sharpe > 1.174')\nprint('Reference: Tandfonline 2025 — MAX×Momentum +2.5%/month pocket')\n",
+  "action": "write",
+  "apply_status": "pending",
+  "hypothesis_log_entry": {
+    "id": "H373",
+    "title": "MAX Factor Tilt Within H198 30-Stock Momentum Universe",
+    "status": "STUB — NOT RUN",
+    "source": "Tandfonline 2025 (MAX×momentum interaction, extended 1963-2023 sample)",
+    "gate": "OOS Sharpe > 1.174 (H198 baseline) AND MaxDD not worse than -30%",
+    "universe": "H198 30-stock NASDAQ universe",
+    "is_oos": "IS 2013-2020 / OOS 2021-2026",
+    "method": "Within H198 top momentum candidates, composite = w*mom_rank + (1-w)*max_rank. 4 variants: mild tilt (w=0.7), equal blend (w=0.5), MAX gate (>p70), MAX+OB filter. Long top-1 monthly.",
+    "reference_results": "Tandfonline 2025: high-MAX × high-momentum = +2.5%/month vs +0.9% unconditional momentum. Bali et al. 2011: unconditional high-MAX underperforms -0.55%/month — interaction with momentum context reverses sign."
+  }
+}
