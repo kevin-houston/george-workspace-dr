@@ -536,3 +536,8 @@ Pages updated: 2. Key themes: MAX×momentum interaction, 52WH 2025 update, LLM d
 **wiki/trading/index.md** — Updated frontmatter + behavioral-finance-signals.md entry with expansion summary
 
 New hypothesis proposals surfaced: H373 (MAX-momentum tilt within H198), H374 (LightGBM 50-factor behavioral on 200-stock universe)
+
+## [2026-07-06] dream-cycle | Scan + Stage
+Angles: pairs+LLM, PEAD+text, momentum+ML, multi-agent, GitHub trending.
+Staged: 5 proposals (H372 press release structure, H373 MAX-momentum tilt, H375 LLM PEAD finetuning, H316 design update arXiv:2412.09394, TS-Agent wiki update arXiv:2508.13915).
+Key meta: FinBERT validated by FinNLP-2025 benchmark; task-finetuning (XiaomoWu/PEAD) is credible next step; MAX×momentum 2025 paper changes behavioral signal interpretation; arXiv:2509.24254 directly actionable on H174 8-K data.
