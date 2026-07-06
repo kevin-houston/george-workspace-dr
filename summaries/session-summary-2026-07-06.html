@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Session Summary — 2026-07-06</title>
+  
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--orange:#f0883e;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.6;padding:0;}
+
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:baseline;justify-content:space-between;}
+.header-title{font-size:16px;font-weight:700;letter-spacing:.3px;}
+.header-sub{color:var(--muted);font-size:12px;}
+
+.main{padding:20px 24px;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1.1;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.muted{color:var(--muted);}
+
+/* Section card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.card-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.card-badge{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:2px 8px;color:var(--muted);}
+.card-body{padding:14px 16px;}
+
+/* Proposals */
+.proposal{padding:10px 0;border-bottom:1px solid var(--border);}
+.proposal:last-child{border-bottom:none;}
+.proposal-header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.proposal-title{font-size:13px;font-weight:600;}
+.risk-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+.risk-medium{background:rgba(210,153,34,.18);color:var(--yellow);border:1px solid rgba(210,153,34,.3);}
+.risk-high{background:rgba(248,81,73,.18);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.risk-low{background:rgba(63,185,80,.18);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.proposal-rationale{font-size:12px;color:var(--muted);margin-top:3px;}
+.proposal-target{font-size:11px;color:var(--blue);font-family:monospace;margin-top:3px;}
+
+/* Commit list */
+.commit{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;display:flex;gap:10px;}
+.commit:last-child{border-bottom:none;}
+.commit-hash{font-family:monospace;color:var(--blue);flex-shrink:0;}
+.commit-msg{color:var(--text);}
+
+/* Podcast */
+.podcast-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;}
+.podcast-dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:10px;}
+.link-btn{display:inline-block;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--blue);background:var(--surface);}
+.link-btn:hover{border-color:var(--blue);}
+
+/* Raw changelog */
+pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;overflow-x:auto;white-space:pre-wrap;color:var(--muted);margin-top:10px;}
+
+.empty{color:var(--muted);font-size:12px;padding:4px 0;}
+</style>
+
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-title">Session Summary &mdash; 2026-07-06</div>
+    </div>
+    <div class="header-sub">Generated 2026-07-06 04:04 CT</div>
+  </div>
+  <div class="main">
+    
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Proposals Applied</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Flagged</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Commits</div>
+        <div class="kpi-value blue">5</div></div>
+      <div class="kpi"><div class="kpi-label">Podcast</div>
+        <div class="kpi-value muted">—</div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Dream Cycle</span>
+        <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
+      </div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H372: Structure-Aware Press Release NLP for 8-K EA-Day Return Prediction</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2509.24254 (Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns) examines 138,000 earnings press releases 2005-2023, comparing bag-of-words vs BERT-based embeddings on EA-day and PEAD windows. Key insight: structured extraction of press release components (h…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h372.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H375: Domain-Finetuned LLM (Mistral 7B) on Earnings Calls for PEAD Prediction</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">GitHub repo XiaomoWu/PEAD finetunes Mistral 7B and LLaMA 3.1 8B directly on earnings call transcripts to predict PEAD, using the GradPerp algorithm to prevent gradient conflicts between PEAD-specific and general objectives. This is more powerful than our current H174 approach (FinBERT pretrained on …</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h375.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H316 Design Update: LLM Statistical Arbitrage via Valeyre Optimal Factor Method</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2412.09394 (LLMs for Time Series: an Application for Single Stocks and Statistical Arbitrage, Valeyre &amp; Aboura, Dec 2024, updated Nov 2025) provides a concrete blueprint for LLM-based statistical arbitrage that directly informs H316 design. Key insight: LLMs are used NOT to predict price direc…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/pairs-trading.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki Update: TS-Agent Agentic Framework — H274/H318 Design Input</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2508.13915 (TS-Agent: Structured Agentic Workflows for Financial Time-Series Modeling, Ang et al., August 2025) introduces a modular agentic framework that outperforms AutoML and state-of-the-art agentic systems on financial time series. Architecture: (1) Planner LLM — receives forecasting tas…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H373: MAX Factor Tilt Within H198 30-Stock Momentum Universe</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">A 2025 Tandfonline paper (extended 1963-2023 sample) identifies that within high-momentum portfolios, high-MAX stocks generate +2.5%/month — far above both unconditional MAX underperformance (-0.55%/month) and unconditional momentum (+0.9%/month). Mechanism: retail herding amplifies trend continuati…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h373.py</div>
+            </div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Commits</span>
+        <span class="card-badge">5 today</span>
+      </div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">3eb85dc</span><span class="commit-msg">dream cycle 2026-07-06: H372 press release NLP + H373 MAX-momentum + H375 LLM PEAD finetuning staged; H316/H274 design updates</span></div><div class="commit"><span class="commit-hash">c4c40cc</span><span class="commit-msg">wiki log: append 2026-07-06 dream cycle scan entry</span></div><div class="commit"><span class="commit-hash">8e40afc</span><span class="commit-msg">dream cycle 2026-07-06: H372 press release NLP + H373 MAX-momentum + H375 LLM PEAD finetuning staged; H316/H274 design updates</span></div><div class="commit"><span class="commit-hash">b72f832</span><span class="commit-msg">nightly research 2026-07-06: behavioral finance expansion — MAX×momentum 2025, LLM disposition bias, 213-factor ML ensemble</span></div><div class="commit"><span class="commit-hash">30af4eb</span><span class="commit-msg">nightly backup 2026-07-06</span></div></div>
+    </div>
+    
+    
+  </div>
+</body>
+</html>
