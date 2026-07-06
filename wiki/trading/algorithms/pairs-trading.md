@@ -557,3 +557,19 @@ Before running the full backtest, verify the LLM signal is genuine:
 **Key structural advantage over H152–H160**: H152 selected pairs by IS correlation/cointegration. IS cointegration was ANTI-predictive of OOS (correlation reversal at structural breaks). Semantic relatedness is durable — AAPL's relationship to AVGO (Apple's chip supplier) doesn't break when yield curves invert. The LLM is selecting on business fundamentals, not price history.
 
 **Status**: QUEUED (H316). Implementation requires ~200 company descriptions (from 10-K Item 1) + OpenAI API calls. First run estimated at $5–10 for the full description pipeline.
+
+### Valeyre Factor Decomposition for Residual Extraction (arXiv:2412.09394)
+
+**Source**: Valeyre, S. and Aboura, S. (2024/2025). "LLMs for Time Series: an Application for Single Stocks and Statistical Arbitrage." arXiv:2412.09394, updated November 2025.
+
+Key insight: LLM is used to identify the optimal factor loading specification that minimizes the residual's mean-reversion half-life in a pairs spread — not to predict returns directly.
+
+Valeyre (2019) proved trading the factor-residual is mathematically optimal vs. raw L/S when:
+- Factor loadings are time-varying (LLM updates them dynamically)
+- Residual has shorter half-life than the raw spread
+
+Complementary to Moira (HRL+LLM semantic pair selection):
+- **Moira**: select which pairs to trade (semantic similarity via LLM embeddings)
+- **Valeyre**: optimize HOW to extract the stationary residual (LLM-guided factor decomposition)
+
+Practical implementation for H316: after Moira selects a pair, run a small LLM prompt with the pair's recent price series and known factor loadings (sector, beta) to select the factor decomposition that minimizes ADF test p-value on the residual. Cost: ~$0.01 per pair per month.

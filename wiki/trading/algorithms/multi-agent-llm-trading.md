@@ -534,3 +534,23 @@ context = f"[SOURCE: SEC EDGAR, filing_id={accession_number}, verified]"
 ```
 
 **H274 CBS implication**: The 26.67% attack success rate under adversarial conditions means multi-agent systems without source verification could underperform a single-source FinBERT baseline. The Coordination Breakeven Spread (CBS) analysis must include adversarial exposure risk, not just API cost.
+
+---
+
+## TS-Agent: Structured Agentic Workflow for Financial Time Series (arXiv:2508.13915)
+
+**Source**: Ang, Bao et al. (August 2025). "Structured Agentic Workflows for Financial Time-Series Modeling." arXiv:2508.13915. GitHub: yinshuo-thu/TS-Agent.
+
+**Architecture** (4-stage closed-loop pipeline):
+1. **Planner LLM** — receives forecasting task, decomposes into model selection + refinement subproblems with contextual reasoning
+2. **Model knowledge bank** — catalog of time-series architectures (ARIMA, LSTM, Transformer, XGBoost) with performance metadata per market regime
+3. **Code refinement loop** — generates, executes, evaluates Python code; feeds back error/metric signals to planner
+4. **Fine-tuning controller** — adjusts hyperparameters based on experimental feedback
+
+**Beats AutoML**: +12% forecasting accuracy over traditional AutoML on financial benchmarks (Sharpe +0.3–0.5). Outperforms existing agentic systems (ReAct, Reflexion) by adding domain-specific model bank.
+
+**Relevance to production stack**:
+- **H274 (multi-agent PEAD upgrade)**: TS-Agent's refinement loop pattern maps to H274's 3-agent debate structure. Add a code-refinement agent that generates and evaluates scoring thresholds.
+- **H318 (meta-agent ETF rotation selector)**: TS-Agent's model bank pattern maps to H318's regime-to-strategy routing. Use TS-Agent as the planner that selects H026/H041a/H045 weighting by regime.
+
+**Install**: `pip install ts-agent` (verify current install path at yinshuo-thu/TS-Agent)

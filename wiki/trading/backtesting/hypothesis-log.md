@@ -8659,3 +8659,91 @@ Replace H251's static regime-conditional weights with a PPO-trained RL policy. S
 **Reference results (arXiv:2605.27848)**: SPY/TLT/GLD daily 2004-2025, RL+HMM Sharpe 1.68 vs static HMM 0.92 (+82%). H311 EW-4+VIX<20 OOS 1.532 is the local hurdle. H249 (static regime weights) confirmed +0.282 Sharpe improvement over non-regime baseline.
 
 **Note (2026-07-05)**: Script stub only. Requires `RegimePortfolioEnv(gym.Env)` implementation (see wiki/trading/algorithms/deep-rl-trading.md for full code template), hmmlearn GaussianHMM, and stable-baselines3 PPO. Parallel track to H370 — different risk/complexity profile.
+
+---
+
+## H372 — Structure-Aware Press Release NLP for 8-K PEAD Entry Quality (STUB — NOT RUN)
+
+**Status**: STUB — NOT RUN
+**Staged**: 2026-07-06
+**Source**: arXiv:2509.24254 (138k press releases 2005-2023)
+**Script**: `backtesting/daily/run_h372.py` (stub — no executable code)
+**Universe**: H174 PEAD event set (EDGAR 8-K Item 2.02)
+**Gate**: OOS WR > 81.8% at same n, OR same WR with n > 22 vs H174 baseline
+**IS/OOS**: OOS 2018-2026 (same as H174 split)
+
+Parse 8-K earnings press releases into structural sections (summary, revenue/EPS tables, guidance, CEO quote) and score each section separately with FinBERT. Weighted composite: guidance 40%, summary 35%, CEO quote 15%, tables 10%. Compare vs H174 flat-document score on same 22 OOS events.
+
+**Reference results (arXiv:2509.24254)**: Structured extraction outperforms full-document BERT on EA-day returns AND PEAD window across 138k events. AUC improvement ~0.04 over flat BERT. Suggests H174's boilerplate dilution problem (risk factors, legal disclaimers) is addressable by section-weighting.
+
+---
+
+## H373 — MAX Factor Tilt Within H198 30-Stock Momentum Universe (STUB — NOT RUN)
+
+**Status**: STUB — NOT RUN
+**Staged**: 2026-07-06
+**Source**: Tandfonline 2025 (MAX×momentum interaction, extended 1963-2023 sample)
+**Script**: `backtesting/daily/run_h373.py` (stub — no executable code)
+**Universe**: H198 30-stock NASDAQ universe
+**Gate**: OOS Sharpe > 1.174 (H198 baseline) AND MaxDD not worse than -30%
+**IS/OOS**: 2013-2020 / 2021-2026
+
+Within H198 top momentum candidates, composite = w*mom_rank + (1-w)*max_rank. 4 variants: mild tilt (w=0.7), equal blend (w=0.5), MAX gate (>p70), MAX+OB filter. Long top-1 monthly.
+
+**Reference results**: Tandfonline 2025: high-MAX × high-momentum = +2.5%/month vs +0.9% unconditional momentum. Bali et al. 2011: unconditional high-MAX underperforms -0.55%/month — interaction with momentum context reverses sign. H198 already captures momentum; MAX tilt selects the retail-amplified sub-pocket.
+
+---
+
+## H375 — Finetuned LLM (Mistral 7B) on Earnings Call Transcripts for PEAD (STUB — NOT RUN)
+
+**Status**: STUB — NOT RUN
+**Staged**: 2026-07-06
+**Source**: GitHub XiaomoWu/PEAD (GradPerp finetuning) + ACL FinNLP-2025 (Hadlock et al.)
+**Script**: `backtesting/daily/run_h375.py` (stub — no executable code)
+**Universe**: H174 PEAD event set
+**Gate**: OOS WR > 81.8% at n >= 15, OR n >= 25 at WR >= 75%
+**IS/OOS**: OOS 2018-2026 (same as H174 split)
+
+Phase 1: GPT-4o-mini zero-shot scoring on earnings call transcripts. Phase 2: Mistral 7B finetuned via GradPerp on PEAD-labeled transcript dataset. Compare vs FinBERT on same 22 OOS events.
+
+**Reference results**: XiaomoWu/PEAD (2025): Mistral 7B finetuned with GradPerp achieves significant improvement over zero-shot LLMs on PEAD classification. ACL FinNLP-2025: FinBERT beats unfinetuned BART and LLaMA 3 — validating H174 but motivating finetuning direction. Note: H168 (transcript coverage bias) showed only 26.5% OOS coverage — need to verify coverage before committing GPU budget to Phase 2.
+
+## H372 — Structure-Aware Press Release NLP for 8-K PEAD Entry Quality (STUB — NOT RUN)
+
+**Source**: arXiv:2509.24254 (October 2025) — 138,000 earnings press releases 2005-2023, BERT embeddings
+**Staged**: 2026-07-06 (dream cycle build phase)
+**Universe**: H174 PEAD event set (EDGAR 8-K Item 2.02)
+**IS/OOS**: OOS 2018-2026 (same as H174 split)
+**Gate**: OOS WR > 81.8% at same n, OR same WR with n > 22 vs H174 baseline
+
+arXiv:2509.24254 shows structured press release parsing (guidance section, CEO quote, revenue tables, summary paragraph) outperforms flat full-document BERT by ~AUC +0.04 on EA-day and PEAD windows. H174 treats 8-K as flat document; H372 weights sections: guidance 40%, summary 35%, CEO 15%, tables 10%.
+
+**Script**: backtesting/daily/run_h372.py (stub)
+**Note (2026-07-06)**: Stub only. Reuse H174 EDGAR download infrastructure. Implement section_parser() and weighted FinBERT composite. Compare on same 22 OOS events as H174.
+
+## H373 — MAX Factor Tilt Within H198 30-Stock Momentum Universe (STUB — NOT RUN)
+
+**Source**: Tandfonline 2025 (MAX×Momentum interaction, extended 1963-2023 sample)
+**Staged**: 2026-07-06 (dream cycle build phase)
+**Universe**: H198 30-stock NASDAQ universe
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198 baseline) AND MaxDD not worse than -30%
+
+Tandfonline 2025 finds high-MAX stocks within high-momentum decile generate +2.5%/month — far above unconditional MAX underperformance (-0.55%/month) and unconditional momentum (+0.9%/month). Within H198 top candidates, composite = w*mom_rank + (1-w)*max_rank. 4 variants: Var A (w=0.7), Var B (w=0.5), Var C (MAX gate >p70), Var D (Var A + OB filter H343 Var B params).
+
+**Reference results (Tandfonline 2025)**: High-MAX × high-momentum = +2.5%/month vs +0.9% unconditional momentum. Bali et al. 2011: unconditional high-MAX underperforms -0.55%/month — interaction reverses sign.
+**Script**: backtesting/daily/run_h373.py (stub with universe and helper functions)
+**Note (2026-07-06)**: Stub with UNIVERSE list, compute_max_factor(), compute_momentum(). Base off run_h343.py. Risk: MAX selects volatile stocks → accept higher drawdown up to -30%.
+
+## H375 — Finetuned LLM (Mistral 7B) on Earnings Call Transcripts for PEAD (STUB — NOT RUN)
+
+**Source**: GitHub XiaomoWu/PEAD (GradPerp finetuning) + ACL FinNLP-2025 (Hadlock et al., Proceedings FinNLP-2, 2025)
+**Staged**: 2026-07-06 (dream cycle build phase)
+**Universe**: H174 PEAD event set
+**IS/OOS**: OOS 2018-2026 (same as H174 split)
+**Gate**: OOS WR > 81.8% at n >= 15, OR n >= 25 at WR >= 75%
+
+ACL FinNLP-2025 confirms FinBERT > BART > LLaMA 3 on standard PEAD (unfinetuned models). XiaomoWu/PEAD closes the gap: finetunes Mistral 7B and LLaMA 3.1 8B using GradPerp algorithm on earnings call transcript dataset. Phase 1 (no GPU): GPT-4o-mini zero-shot on transcripts — compare WR vs FinBERT on same 22 H174 OOS events (~$0.10-0.20/event). Phase 2: finetuned Mistral 7B via XiaomoWu/PEAD repo.
+
+**Script**: backtesting/daily/run_h375.py (stub)
+**Note (2026-07-06)**: Phase 1 is low-cost and can run without GPU. AlphaVantage EARNINGS_CALL_TRANSCRIPT endpoint (25 req/day) for transcript sourcing. See H168 (transcript coverage bias) and H247 (FMP 403 blocked) for prior transcript attempts.
