@@ -520,3 +520,19 @@ Issues found: 13. Auto-fixed: 10. Needs review: 3.
 1. STALE PAGE — `wiki/ai-industry/model-landscape-2026.md` body content mentions "Fable 5 export-ban (June 12)" as current; needs a paragraph added for June 30 controls lift + Sonnet 5 + GPT-5.6 context. Last updated 2026-06-21.
 2. CROSS-REF GAP — `wiki/trading/tools/smart-money-concepts.md` (the GitHub library page) and `wiki/trading/algorithms/smart-money-concepts-ict.md` (the confirmed hypothesis page) may not link to each other. Should cross-reference.
 3. STALE PAGE — `wiki/trading/backtesting/hypothesis-log.md` index entry now updated; the page itself still says frontier H349; if there's a header in the file, it should be updated to H371.
+
+## [2026-07-06] research | Behavioral Finance Signals major expansion
+
+Pages updated: 2. Key themes: MAX×momentum interaction, 52WH 2025 update, LLM disposition effect.
+
+**behavioral-finance-signals.md** — Major expansion from 180 to ~370 lines:
+- Section 1 (52WH): Added 2025 update — 52WH subsumes momentum in retail-heavy/mega-cap stocks; GitHub Yan1015/Optimize-momentum-strategy; Python R52 implementation
+- Section 2 (Seasonality): Added 2026 decay warning — no new arXiv papers found; signal may be crowded
+- Section 3 (CGO/Disposition): Added corporate transparency 2025 finding (35% reduction in effect); Python CGO implementation; js-park/Disposition-effect-from-Aggregate-trading-data GitHub ref; H344/H174 PEAD connection
+- Section 4 (MAX factor): Added 2025 Tandfonline finding — high-MAX×high-momentum pocket = +2.5%/month; interaction table; Python screening function; H373 proposal
+- NEW Section 5 (LLM Sentiment): FinGPT backbone + Python snippet; arXiv:2508.04975, arXiv:2510.10526; AI agents disposition effect arXiv:2604.18373 (Stanford/Oxford); LAP lookahead bias arXiv:2512.23847
+- NEW Section 6 (Multi-Factor ML): 213-factor behavioral ensemble arXiv:2507.07107; behavioral > technical cluster; MAX top-5 SHAP; H374 LightGBM proposal
+
+**wiki/trading/index.md** — Updated frontmatter + behavioral-finance-signals.md entry with expansion summary
+
+New hypothesis proposals surfaced: H373 (MAX-momentum tilt within H198), H374 (LightGBM 50-factor behavioral on 200-stock universe)
