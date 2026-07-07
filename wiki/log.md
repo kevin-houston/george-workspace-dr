@@ -553,3 +553,23 @@ Section expanded: AI Industry (thinnest section, 4 pages → 5 pages).
 New page: wiki/ai-industry/llm-trading-agent-benchmarks-2026.md — synthesizes KTD-Fin (arXiv:2605.28359), Strat-LLM (arXiv:2605.06024), EarningsInOne (arXiv:2606.29734).
 Staged 3 additional proposals (files 6-8): H376 EarningsInOne fast/slow PEAD dual signal, H377 Network momentum lead-lag spillover (arXiv:2501.07135), wiki page proposal (8_llm_trading_benchmarks_wiki).
 Key meta: EarningsInOne speed-separation finding (qualitative ECT signal peaks next day = tradeable) directly upgrades H174 PEAD exit logic; KTD-Fin Barra attribution warning applies to all H280/H318 LLM agent backtests; network momentum (Sharpe 1.74, 64 futures) adapts to H026 ETF universe as H377.
+
+## [2026-07-07] lint | Health check
+Issues found: 8. Auto-fixed: 6. Needs review: 2.
+
+**Auto-fixed:**
+1. Broken link `wiki/trading/index.md` line 63: `tools/stock-screener.md` → moved `wiki/tools/stock-screener.md` to `wiki/trading/tools/stock-screener.md`; updated `wiki/index.md` reference from `tools/` to `trading/tools/`
+2. Index gap: added `backtesting/hypothesis-log.md` entry to `wiki/trading/index.md` (was in `wiki/index.md` but missing from trading-level index)
+3. Missing research log entries: added 7 entries (2026-07-01 through 2026-07-07) to `wiki/trading/index.md` research log section (trading index was stuck at 2026-06-30)
+4. Stale `wiki/index.md` frontmatter: `updated: 2026-07-06` → `2026-07-07`
+5. Stale hypothesis-log entry in `wiki/index.md`: updated H001–H371 → H001–H376 with H373/H376 results
+6. Duplicate entries removed from `wiki/trading/index.md` Tools section: `multi-agent-llm-trading.md` and `ts-foundation-models.md` were listed under both Algorithms (correct) and Tools (removed)
+7. `.bak` files deleted: `wiki/trading/tools/nlp-alternative-data.md.bak`, `wiki/trading/tools/ml-for-trading.md.bak`
+
+**Needs review:**
+1. **Staged file naming conflict** — `dream_cycle/staged/2026-07-07/` has both `4_portbench_llm_portfolio_wiki.json` (main session) and `4_multi_agent_trading_eval_framework.json` (background agent), both numbered "4". Build phase should renumber one to 6.
+2. **H377 naming conflict** — still unresolved: `1_h377_6m_noskip_momentum_h198.json` (tonight) + `dream_cycle/staged/2026-07-06/` has network momentum also labeled H377. Build phase should confirm 6-0m → H377, network momentum → H379.
+
+**Source gaps:**
+- `behavioral-finance-signals.md` should cross-reference `momentum-strategies.md` H376/H377 skip-month section (MAX×momentum connection)
+- `momentum-strategies.md` new skip-month section could link back to `behavioral-finance-signals.md` for the MAX factor context

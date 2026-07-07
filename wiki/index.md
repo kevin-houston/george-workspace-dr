@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-06
+updated: 2026-07-07
 sources_indexed: 4
 pages: 194
 ---
@@ -130,7 +130,7 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H371 (frontier: H370/H371 STUB — NOT RUN); H346 CONFIRMED (OB filter canonical H026 split — Var B window=20 OOS 3.238 vs baseline 2.610); H345 CONFIRMED (OB filter H026 non-canonical — OOS 3.337); H361-H363 (low-vol ETF OB extensions); H370 LambdaRankIC stub (arXiv:2605.00501); H371 HMM+RL stub (arXiv:2605.27848); production portfolio H041a/H026/H045/IBS — OOS Sharpe 4.158
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H376; H373 NOT CONFIRMED (MAX tilt H198 — tech universe kills MAX/momentum heterogeneity); H376 CONFIRMED (MAX composite H198 top-6 EW — 6-0m no-skip OOS 3.120/MaxDD -8.4%/0 neg yrs = major finding); H370 LambdaRankIC stub; H371 HMM+RL stub; production portfolio H041a/H026/H045/IBS — OOS Sharpe 4.158
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
@@ -188,6 +188,7 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-07-07](trading/research-log/2026-07-07.md) — wiki: momentum-strategies.md major expansion H376/H377 6-0m no-skip discovery (OOS 3.120/MaxDD -8.4%/0 neg yrs); dream cycle: 5 proposals staged (H377 stub, H378 SAE-FiRE PEAD, H379 network momentum, PortBench wiki, Kumar wiki)
 - [Research Log 2026-07-06](trading/research-log/2026-07-06.md) — wiki: llm-trading-agent-benchmarks-2026.md new (AI Industry expansion; KTD-Fin/Strat-LLM/EarningsInOne synthesized; H376 fast/slow PEAD + H377 network momentum staged); dream cycle scan
 - [Research Log 2026-07-05](trading/research-log/2026-07-05.md) — wiki: deep-rl-trading.md expanded (LambdaRankIC/FinRL-X/HMM-RL/ACM-survey; 4 x 2026 papers); dream cycle build phase: H370 LambdaRankIC stub + H371 HMM+RL stub applied; AutoRedTrader adversarial robustness wiki update
 - [Research Log 2026-07-04](trading/research-log/2026-07-04.md) — wiki: quant-mind-notes.md new (QuantMind LLM knowledge extraction); dream cycle scan: H370 LambdaRankIC + H371 HMM-RL proposals staged; H364 CONFIRMED, H366 NOT CONFIRMED, H367-H369 stubs
@@ -245,7 +246,7 @@ When answering a query:
 
 ### General Tech
 
-- [Stock Screener Methodology](tools/stock-screener.md) — Minervini SEPA/CANSLIM criteria; IBD industry groups (relevant to H181); market breadth indicators; MCP integration candidate ← new 2026-05-27
+- [Stock Screener Methodology](trading/tools/stock-screener.md) — Minervini SEPA/CANSLIM criteria; IBD industry groups (relevant to H181); market breadth indicators; MCP integration candidate ← new 2026-05-27
 - [zenbu.js](tools/zenbu.md) — JS framework for AI-agent-customizable desktop apps; local source, git-tracked, hot-reload; alpha
 - [Dograh](tools/dograh.md) — self-hostable voice agent platform (open-source Vapi/Retell alternative); drag-and-drop workflows, bring-your-own LLM/TTS/STT, Docker deploy
 - [mermaid-skill](tools/mermaid-skill.md) — Claude Code `/mermaid` skill; 23 diagram types, bundled syntax refs, weekly auto-sync from mermaid-js upstream ← 2026-05-27
