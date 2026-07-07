@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-05
+updated: 2026-07-06
 sources_indexed: 4
 pages: 194
 ---
@@ -188,6 +188,7 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-07-06](trading/research-log/2026-07-06.md) — wiki: llm-trading-agent-benchmarks-2026.md new (AI Industry expansion; KTD-Fin/Strat-LLM/EarningsInOne synthesized; H376 fast/slow PEAD + H377 network momentum staged); dream cycle scan
 - [Research Log 2026-07-05](trading/research-log/2026-07-05.md) — wiki: deep-rl-trading.md expanded (LambdaRankIC/FinRL-X/HMM-RL/ACM-survey; 4 x 2026 papers); dream cycle build phase: H370 LambdaRankIC stub + H371 HMM+RL stub applied; AutoRedTrader adversarial robustness wiki update
 - [Research Log 2026-07-04](trading/research-log/2026-07-04.md) — wiki: quant-mind-notes.md new (QuantMind LLM knowledge extraction); dream cycle scan: H370 LambdaRankIC + H371 HMM-RL proposals staged; H364 CONFIRMED, H366 NOT CONFIRMED, H367-H369 stubs
 - [Research Log 2026-07-03](trading/research-log/2026-07-03.md) — wiki: llm-finance-benchmarks-2026.md new (BacktestBench/PortBench/ReCAP/HMM-RL benchmarks); dream cycle scan
@@ -259,6 +260,7 @@ When answering a query:
 - [AI Agent Frameworks Ecosystem 2026](ai-industry/agent-frameworks-2026.md) — LangGraph (stateful/production), CrewAI (role-based multi-agent), AutoGen (maintenance mode), Agno, PydanticAI; architecture patterns; relevance to George's stack ← 2026-05-29
 - [AI Infrastructure / Compute Layer 2026](ai-industry/ai-infrastructure-2026.md) — GPU cloud providers (Lambda/CoreWeave/RunPod/Vast.ai); H100/B200 pricing; vLLM/SGLang/TGI inference servers; cost structure for production LLM apps ← 2026-05-29
 - [LLM Evaluation & Benchmarking for Finance 2026](ai-industry/llm-finance-benchmarks-2026.md) — CLQT closed-loop diagnostic benchmark; BacktestBench 18k QA pairs (LLMs fail strategy consistency); PortBench (90% fail vs equal-weight); reproducibility audit (0/19 R3); ReCAP regime-adaptive continual learning; HMM+RL allocation (Sharpe 1.68 vs 0.92 static); guidance on LLM vs deterministic split ← new 2026-07-03
+- [LLM Trading Agent Benchmarks 2026](ai-industry/llm-trading-agent-benchmarks-2026.md) — KTD-Fin (arXiv:2605.28359; masking reveals LLM alpha = beta recall; Barra attribution), Strat-LLM (arXiv:2605.06024; regime-mode alignment; high-win-rate trap), EarningsInOne (arXiv:2606.29734; ECT qualitative signal peaks next day = tradeable; speed separation); unified LLM-in-trading value table; H376 implication ← new 2026-07-06
 
 ---
 

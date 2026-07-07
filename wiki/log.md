@@ -541,3 +541,9 @@ New hypothesis proposals surfaced: H373 (MAX-momentum tilt within H198), H374 (L
 Angles: pairs+LLM, PEAD+text, momentum+ML, multi-agent, GitHub trending.
 Staged: 5 proposals (H372 press release structure, H373 MAX-momentum tilt, H375 LLM PEAD finetuning, H316 design update arXiv:2412.09394, TS-Agent wiki update arXiv:2508.13915).
 Key meta: FinBERT validated by FinNLP-2025 benchmark; task-finetuning (XiaomoWu/PEAD) is credible next step; MAX×momentum 2025 paper changes behavioral signal interpretation; arXiv:2509.24254 directly actionable on H174 8-K data.
+
+## [2026-07-06] dream-cycle-2 | AI Industry expansion + arXiv scan (nightly)
+Section expanded: AI Industry (thinnest section, 4 pages → 5 pages).
+New page: wiki/ai-industry/llm-trading-agent-benchmarks-2026.md — synthesizes KTD-Fin (arXiv:2605.28359), Strat-LLM (arXiv:2605.06024), EarningsInOne (arXiv:2606.29734).
+Staged 3 additional proposals (files 6-8): H376 EarningsInOne fast/slow PEAD dual signal, H377 Network momentum lead-lag spillover (arXiv:2501.07135), wiki page proposal (8_llm_trading_benchmarks_wiki).
+Key meta: EarningsInOne speed-separation finding (qualitative ECT signal peaks next day = tradeable) directly upgrades H174 PEAD exit logic; KTD-Fin Barra attribution warning applies to all H280/H318 LLM agent backtests; network momentum (Sharpe 1.74, 64 futures) adapts to H026 ETF universe as H377.
