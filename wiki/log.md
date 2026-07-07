@@ -542,6 +542,12 @@ Angles: pairs+LLM, PEAD+text, momentum+ML, multi-agent, GitHub trending.
 Staged: 5 proposals (H372 press release structure, H373 MAX-momentum tilt, H375 LLM PEAD finetuning, H316 design update arXiv:2412.09394, TS-Agent wiki update arXiv:2508.13915).
 Key meta: FinBERT validated by FinNLP-2025 benchmark; task-finetuning (XiaomoWu/PEAD) is credible next step; MAX×momentum 2025 paper changes behavioral signal interpretation; arXiv:2509.24254 directly actionable on H174 8-K data.
 
+## [2026-07-07] dream-cycle | arXiv + GitHub scan (nightly)
+Searched 5 angles: pairs trading LLM, PEAD NLP, cross-sectional momentum skip-month, multi-agent LLM trading, GitHub quant finance.
+10 papers assessed; 6 high-relevance (score >= 7). 4 proposals staged.
+Key findings: (1) arXiv:2603.27539 — Coordination Primacy + 5 evaluation failure taxonomy; (2) arXiv:2504.19476 — 10-K semantic graph LLM filtering improves L/S Sharpe 0.742→0.820 (H316 redesign); (3) arXiv:2505.14420 — SAE-FiRE sparse autoencoder outperforms FinBERT for earnings prediction (H378 proposed); (4) arXiv:2601.05975 — DeePM 2x risk-adjusted returns, code available. No academic paper found for 6-0m skip-month effect on US large-cap — H377 finding is endogenous.
+Staged: 1_h377_stub, 2_sae_fire_h378, 3_deepm_wiki, 4_multi_agent_wiki.
+
 ## [2026-07-06] dream-cycle-2 | AI Industry expansion + arXiv scan (nightly)
 Section expanded: AI Industry (thinnest section, 4 pages → 5 pages).
 New page: wiki/ai-industry/llm-trading-agent-benchmarks-2026.md — synthesizes KTD-Fin (arXiv:2605.28359), Strat-LLM (arXiv:2605.06024), EarningsInOne (arXiv:2606.29734).

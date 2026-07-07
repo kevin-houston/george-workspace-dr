@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-06 (behavioral-finance-signals.md major expansion — MAX×momentum 2.5%/month pocket 2025; 52WH subsumes momentum retail-heavy stocks; LLM sentiment AI disposition effect arXiv:2604.18373 Stanford/Oxford; LAP lookahead bias metric arXiv:2512.23847; 213-factor ML behavioral ensemble arXiv:2507.07107; H373/H374 proposals staged)
+updated: 2026-07-07 (momentum-strategies.md major expansion — H376/H377 6-0m no-skip discovery: OOS 3.120 vs 1.174 standard; skip-month convention analysis for large-cap tech; H377 full variant design)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -21,7 +21,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 
 - [Algorithms](algorithms/) — trading strategy catalog
   - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
-  - [Momentum Strategies](algorithms/momentum-strategies.md) ← updated 2026-05-14 (H198 CONFIRMED: 6-1m stock momentum OOS Sharpe 1.174; H217 CONFIRMED: median alpha101 OOS 1.559 — strongest confirmed stock signal; H228 CONFIRMED: H217+H181 blend OOS 1.572)
+  - [Momentum Strategies](algorithms/momentum-strategies.md) ← updated 2026-07-07 (H198 CONFIRMED: 6-1m stock momentum OOS Sharpe 1.174; H217 CONFIRMED: median alpha101 OOS 1.559; H228 CONFIRMED: H217+H181 blend OOS 1.572; **H376/H377 6-0m no-skip: OOS 3.120 / MaxDD -8.4% / 0 neg yrs** — major discovery; skip-month convention analysis; H377 full test pending)
   - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-06-21 (ETF+statistical pairs EXHAUSTED H152-H200; LLM SEMANTIC PAIRS new direction — H316 queued; Moira arXiv:2605.01954 HRL+LLM; LLM-Augmented Semantic Networks arXiv:2604.19476; 2-stage embedding+GPT-4o pipeline; $0.07/run for 30-stock universe; link_strength≥6 filter)
   - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-05-05 (H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)
   - [Short-Term Reversal](algorithms/short-term-reversal.md) ← new 2026-05-07 (industry-adjusted reversal 0.53%/month globally; SSRN:6630998; H181 queued)

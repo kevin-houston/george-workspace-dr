@@ -1,0 +1,114 @@
+{
+  "scan_date": "2026-07-07",
+  "scanner": "george-nightly",
+  "angles_searched": 5,
+  "papers": [
+    {
+      "id": "ssrn:5367656",
+      "title": "Momentum in Large-Cap Equities: Does the Classic 12-1 Strategy Still Work?",
+      "authors": "Darshan Sathish Kumar",
+      "year": 2026,
+      "key_finding": "S&P 500 12-1m momentum L/S: net -2.79% annualized, Sharpe -0.23. Long leg: +7.9% annualized. Short leg: catastrophic in 2009 and 2020 crashes. Long-only large-cap momentum works; L/S does not.",
+      "relevance": 8,
+      "hypothesis": "H377, H198",
+      "should_stage": true,
+      "staged_as": "5_kumar2026_largecap_momentum_wiki.json"
+    },
+    {
+      "id": "arxiv:2605.27887",
+      "title": "PortBench: A Correlation-Aware, Full-Pipeline Benchmark for LLM-Driven Portfolio Management",
+      "authors": "Wisdomchain Research",
+      "year": 2026,
+      "key_finding": "10 frontier LLMs evaluated on 183 instruments, 6 asset classes, 10 years. 90% fail to beat equal-weight. LLMs treat covariance as noise. Value is in constraint adaptation and tail-risk, not return optimization.",
+      "relevance": 8,
+      "hypothesis": "H318",
+      "should_stage": true,
+      "staged_as": "4_portbench_llm_portfolio_wiki.json"
+    },
+    {
+      "id": "arxiv:2507.15876",
+      "title": "Re-evaluating Short- and Long-Term Trend Factors in CTA Replication: A Bayesian Graphical Approach",
+      "authors": "Benhamou, Ohana, Etienne, Guez, Setrouk, Jacquot",
+      "year": 2025,
+      "key_finding": "Dynamically decomposes CTA returns into short-term trend, long-term trend, and market beta using Bayesian graphical model. Medium-term trend (6-12m) dominates risk-adjusted performance. Multiple horizons outperform single-horizon.",
+      "relevance": 6,
+      "hypothesis": "H262",
+      "should_stage": false,
+      "reason_not_staged": "H262 Bayesian barbell already documented. This provides academic confirmation but no new implementation path. The 'medium-term 125d redundant' finding from arXiv:2510.23150 remains the actionable constraint."
+    },
+    {
+      "id": "arxiv:2505.14420",
+      "title": "SAE-FiRE: Sparse Autoencoder Feature Selection for Financial Document Representation",
+      "authors": "Zhang, Liu, Zhang, He, Du",
+      "year": 2025,
+      "key_finding": "SAE decomposition of FinBERT dense representations + ANOVA feature selection significantly outperforms baseline FinBERT on earnings calls, 10Q reports, financial news. Reduces noise from pre-training redundancy.",
+      "relevance": 8,
+      "hypothesis": "H378 (PEAD upgrade)",
+      "should_stage": true,
+      "staged_as": "2_sae_fire_pead_upgrade.json (staged by dream cycle agent)"
+    },
+    {
+      "id": "arxiv:2601.05975",
+      "title": "DeePM: Regime-Robust Deep Portfolio Management",
+      "authors": "Oxford ML group",
+      "year": 2026,
+      "key_finding": "Deep learning for systematic macro portfolio on 50 diversified futures. Net risk-adjusted returns ~2x conventional approaches, ~50% improvement over Momentum Transformer. Causal Sieve + Macroeconomic Graph Prior + Distributionally Robust Objective. Code: github.com/kieranjwood/deepm.",
+      "relevance": 7,
+      "hypothesis": "H249, H318",
+      "should_stage": true,
+      "staged_as": "3_deepm_regime_portfolio.json (staged by dream cycle agent)"
+    },
+    {
+      "id": "arxiv:2605.25894",
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days",
+      "authors": "Unknown",
+      "year": 2026,
+      "key_finding": "Multi-modal earnings prediction combining textual and numerical data. Previously reviewed in H317 assessment.",
+      "relevance": 5,
+      "hypothesis": "H317",
+      "should_stage": false,
+      "reason_not_staged": "H317 already NOT CONFIRMED. Underlying approach addressed."
+    },
+    {
+      "id": "arxiv:2512.00280",
+      "title": "Retail Investor Horizon and Earnings Announcements",
+      "authors": "Vamossy",
+      "year": 2025,
+      "key_finding": "Long-horizon investor composition associated with pronounced PEAD — slow but persistent convergence toward fundamental value when patient capital is present.",
+      "relevance": 5,
+      "hypothesis": "H174",
+      "should_stage": false,
+      "reason_not_staged": "Signals that PEAD effect is structural (long-horizon institutions), not actionable as a new signal — H174 already captures the drift."
+    },
+    {
+      "id": "ssrn:5284651",
+      "title": "Post-Earnings-Announcement Drift Prediction: Leveraging Post-event Investor Responses with Multi-task Learning",
+      "authors": "Zhu, Liu, Sheng",
+      "year": 2025,
+      "key_finding": "Multi-task learning with GradPerp adaptive task weighting for PEAD prediction. Incorporates post-event investor responses as auxiliary tasks.",
+      "relevance": 6,
+      "hypothesis": "H375 (already staged)",
+      "should_stage": false,
+      "reason_not_staged": "H375 already staged using GradPerp from XiaomoWu/PEAD repo. Same algorithm family — no new information."
+    }
+  ],
+  "github_repos": [
+    {
+      "repo": "kieranjwood/deepm",
+      "stars": "~200",
+      "description": "DeePM regime-robust deep portfolio management. Oxford ML group. Code for arXiv:2601.05975.",
+      "relevance": 7,
+      "notes": "Available for H249/H318 deep learning regime work. Requires GPU for training but inference is fast."
+    }
+  ],
+  "high_relevance": ["ssrn:5367656", "arxiv:2605.27887", "arxiv:2505.14420", "arxiv:2601.05975"],
+  "staged_count": 5,
+  "staged_files": [
+    "1_h377_6m_noskip_momentum_h198.json",
+    "2_sae_fire_pead_upgrade.json",
+    "3_deepm_regime_portfolio.json",
+    "4_portbench_llm_portfolio_wiki.json",
+    "5_kumar2026_largecap_momentum_wiki.json"
+  ],
+  "naming_conflict_note": "H377 allocated to both 6-0m no-skip (tonight, 2026-07-07) and Network Momentum via lead-lag spillover (yesterday, 2026-07-06). Build phase should reconcile: 6-0m is endogenous finding from H376 (higher priority), network momentum becomes H379."
+}

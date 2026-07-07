@@ -1,0 +1,152 @@
+{
+  "scan_date": "2026-07-07",
+  "papers": [
+    {
+      "id": "arxiv:2603.27539",
+      "title": "Toward Reliable Evaluation of LLM-Based Financial Multi-Agent Systems: Taxonomy, Coordination Primacy, and Cost Awareness",
+      "year": 2026,
+      "key_finding": "Coordination protocol design is the primary driver of multi-agent trading quality (exceeds model scaling). Documents 5 pervasive evaluation failures (look-ahead, survivorship, overfitting, transaction cost neglect, regime-shift blindness) that can reverse reported return signs. Introduces Coordination Breakeven Spread (CBS) metric.",
+      "relevance": 9,
+      "hypothesis": "H274, all multi-agent",
+      "should_stage": true,
+      "staged_in": "4_multi_agent_trading_eval_framework.json"
+    },
+    {
+      "id": "arxiv:2602.23330",
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "year": 2026,
+      "key_finding": "Fine-grained task decomposition (explicit workflow steps) significantly improves risk-adjusted returns vs coarse-grained multi-agent instructions on Japanese stock backtests. Same Oxford/Zohren group as DeePM.",
+      "relevance": 8,
+      "hypothesis": "H274",
+      "should_stage": true,
+      "staged_in": "4_multi_agent_trading_eval_framework.json"
+    },
+    {
+      "id": "arxiv:2604.19476",
+      "title": "Cross-Stock Predictability via LLM-Augmented Semantic Networks",
+      "year": 2026,
+      "key_finding": "10-K embedding graph + LLM edge classification (supply chain / competitor / customer relations) improves L/S Sharpe 0.742→0.820, MaxDD -10.47%→-7.85% on S&P 500 2011-2019. Directly replaces failed cointegration pair selection (H307).",
+      "relevance": 8,
+      "hypothesis": "H316",
+      "should_stage": true,
+      "staged_in": "4_multi_agent_trading_eval_framework.json"
+    },
+    {
+      "id": "arxiv:2505.14420",
+      "title": "SAE-FiRE: Enhancing Earnings Surprise Predictions Through Sparse Autoencoder Feature Selection",
+      "year": 2025,
+      "key_finding": "Sparse Autoencoder decomposition of FinBERT dense representations + ANOVA F-test feature selection significantly outperforms baseline FinBERT on earnings call transcripts, 10Q reports, and financial news. Addresses the curse of dimensionality in 5,000+ word financial documents.",
+      "relevance": 8,
+      "hypothesis": "H372, H174 upgrade",
+      "should_stage": true,
+      "staged_in": "2_sae_fire_pead_upgrade.json"
+    },
+    {
+      "id": "arxiv:2601.05975",
+      "title": "DeePM: Regime-Robust Deep Learning for Systematic Macro Portfolio Management",
+      "year": 2026,
+      "key_finding": "Structured DL portfolio manager with Causal Sieve (ragged filtration), Macroeconomic Graph Prior, and Distributionally Robust Objective achieves ~2x net risk-adjusted returns vs conventional, ~+50% vs Momentum Transformer on 50 futures 2010-2025. Code available.",
+      "relevance": 7,
+      "hypothesis": "H249, H318",
+      "should_stage": true,
+      "staged_in": "3_deepm_regime_portfolio.json"
+    },
+    {
+      "id": "arxiv:2509.24254",
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "year": 2025,
+      "key_finding": "Structured press release parsing (guidance 40%, summary 35%, CEO quote 15%, revenue tables 10%) outperforms flat full-document FinBERT. Press release soft information = earnings surprise hard information in predictive power. 138,000+ press releases 2005-2023. Already staged 2026-07-06 as H372.",
+      "relevance": 8,
+      "hypothesis": "H372",
+      "should_stage": false,
+      "note": "Already staged 2026-07-06 in 1_h372_press_release_structure_pead.json"
+    },
+    {
+      "id": "arxiv:2602.07048",
+      "title": "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+      "year": 2026,
+      "key_finding": "Granger causality + LLM semantic re-ranking of lead-lag pairs outperforms pure Granger screening. Semantic filtering most valuable during large leader moves. Tested on Kalshi prediction markets (not traditional equities — transferability uncertain).",
+      "relevance": 7,
+      "hypothesis": "H316",
+      "should_stage": true,
+      "staged_in": "4_multi_agent_trading_eval_framework.json"
+    },
+    {
+      "id": "arxiv:2603.01820",
+      "title": "Deep Learning for Financial Time Series: A Large-Scale Benchmark of Risk-Adjusted Performance",
+      "year": 2026,
+      "key_finding": "Large-scale benchmark across LSTM, Transformer, SSM, PatchTST on daily futures 2010-2025. Models with rich temporal representations consistently outperform linear benchmarks on Sharpe optimization. Same Oxford group as DeePM. Code available.",
+      "relevance": 6,
+      "hypothesis": "H249, H370 (LambdaRankIC)",
+      "should_stage": false,
+      "note": "Supporting reference, lower priority — add to DeePM wiki page as related work"
+    },
+    {
+      "id": "arxiv:2507.15876",
+      "title": "Re-evaluating Short- and Long-Term Trend Factors in CTA Replication: A Bayesian Graphical Approach",
+      "year": 2025,
+      "key_finding": "Dynamically decomposes CTA returns into short-term trend, long-term trend, and market beta via Bayesian graphical model. Medium-term horizon (6-12m) has long been most effective. No skip-month analysis — does not directly address H377 6-0m finding.",
+      "relevance": 5,
+      "hypothesis": "H377 background",
+      "should_stage": false,
+      "note": "Useful context for H377 literature section but not actionable"
+    },
+    {
+      "id": "arxiv:2605.25894",
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "year": 2026,
+      "key_finding": "LSTM + Transformer on 15 fundamental metrics + 3 price indicators + FinBERT news sentiment. Transformer superior recall for volatile movements. LSTM higher precision (conservative safe-bet). May 2026.",
+      "relevance": 5,
+      "hypothesis": "H372, H174",
+      "should_stage": false,
+      "note": "Lower novelty — similar approach to existing H317 attempts; FinBERT news (not 8-K) is the signal source"
+    }
+  ],
+  "github_repos": [
+    {
+      "repo": "kieranjwood/deepm",
+      "stars": "unknown",
+      "description": "Code for DeePM paper (arXiv:2601.05975). Regime-robust DL macro portfolio manager. PyTorch. Oxford ML group.",
+      "relevance": 7,
+      "note": "Active companion to a high-relevance paper; worth monitoring"
+    },
+    {
+      "repo": "Adir7SK/deep_fin_benchmark",
+      "stars": "unknown",
+      "description": "Large-scale benchmarking framework for DL time-series models (LSTM, PatchTST, Mamba, xLSTM, iTransformer, TFT). Companion to arXiv:2603.01820.",
+      "relevance": 6,
+      "note": "Could be used to benchmark H377 signal quality"
+    },
+    {
+      "repo": "leoncuhk/awesome-quant-ai",
+      "stars": "unknown",
+      "description": "Curated list of AI/ML quantitative finance resources. Active 2026. Covers momentum, factor models, multi-agent, RL.",
+      "relevance": 5,
+      "note": "Good ongoing reference list; not a tool"
+    },
+    {
+      "repo": "PlaceNL2026/best-of-algorithmic-trading",
+      "stars": "unknown",
+      "description": "Algorithmic trading curated list with MCP + quantopian-style rankings. 2026 active. Includes quant finance, trading bots, backtesting, MCP integration.",
+      "relevance": 5,
+      "note": "Notable: includes MCP integration ranking which is relevant to future George trading tool integration"
+    }
+  ],
+  "high_relevance": [
+    "arxiv:2603.27539",
+    "arxiv:2602.23330",
+    "arxiv:2604.19476",
+    "arxiv:2505.14420",
+    "arxiv:2601.05975",
+    "arxiv:2602.07048"
+  ],
+  "no_new_skip_month_paper": true,
+  "skip_month_note": "No academic paper found specifically validating the 6-0m > 6-1m finding on US large-cap equities. The H376/H377 finding (OOS 3.120 on 6-0m) is endogenous to the pipeline. arXiv:2507.15876 (CTA trend factors) confirms medium-term 6-12m horizon dominance but does not address skip-month. H277 NASDAQ parallel remains the best academic parallel.",
+  "proposals_staged": 4,
+  "staged_files": [
+    "1_h377_6m_noskip_momentum_h198.json",
+    "2_sae_fire_pead_upgrade.json",
+    "3_deepm_regime_portfolio.json",
+    "4_multi_agent_trading_eval_framework.json"
+  ]
+}

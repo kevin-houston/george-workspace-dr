@@ -1,0 +1,14 @@
+{
+  "id": "2026-07-07-portbench-wiki",
+  "date": "2026-07-07",
+  "source": "arxiv:2605.27887",
+  "source_url": "https://arxiv.org/abs/2605.27887",
+  "title": "PortBench wiki update — LLMs fail at portfolio allocation (90% below equal-weight)",
+  "rationale": "PortBench (May 2026) evaluates 10 frontier LLMs on 183-instrument portfolio management over 10 years. Finding: 90% of model-profile combos fail to beat equal-weight diversification. LLMs treat covariance as noise and output near-uniform weights. Value of LLMs is in constraint adaptation and tail-risk awareness, not return generation. This directly informs H318 (meta-agent ETF rotation selector) and validates the H026/H041a/H045 approach of using momentum rules rather than LLM allocation.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "wiki/trading/algorithms/multi-agent-llm-trading.md",
+  "action": "append",
+  "content": "\n## PortBench: LLMs Fail at Portfolio Allocation (arXiv:2605.27887, May 2026)\n\n**Title**: PortBench: A Correlation-Aware, Full-Pipeline Benchmark for LLM-Driven Portfolio Management\n**Authors**: Wisdomchain Research (2026)\n**Key finding**: Evaluating 10 frontier LLMs on 183-instrument dataset (6 asset classes, 10 years), **90% of model-profile combinations fail to outperform equal-weight diversification**. Models treat covariance structures as noise and output near-uniform weights.\n\n**Why this matters for H318 and production strategy**:\n- H318 proposed using LLM meta-agents to dynamically weight H026/H041a/H045 — PortBench suggests LLMs cannot reliably optimize portfolio weights even with full data access\n- Momentum rules (H026 top-1 selection) outperform LLM allocation precisely because they exploit a structural pricing anomaly, not optimize a covariance matrix\n- LLM value: constraint adaptation (e.g., 'avoid sectors with negative TSMOM') and tail-risk awareness (e.g., 'reduce exposure when VIX>30'), NOT return-to-covariance optimization\n\n**H318 implication**: Rather than LLM-driven weight allocation, meta-learner should use momentum rules for selection (H026/H041a/H045 unchanged) and LLM as a regime-conditional *filter* or *risk manager* only.\n\n**Source**: arXiv:2605.27887 — PortBench benchmark; project page portbench.github.io\n",
+  "apply_status": "pending"
+}

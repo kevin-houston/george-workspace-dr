@@ -1,0 +1,19 @@
+{
+  "apply_status": "pending",
+  "type": "hypothesis_stub",
+  "target_file": "wiki/trading/backtesting/hypothesis-log.md",
+  "description": "H378 PROPOSED: SAE-FiRE sparse autoencoder feature selection on H174 8-K FinBERT PEAD pipeline. arXiv:2505.14420 (May 2025) shows Sparse Autoencoder decomposition of FinBERT dense representations + ANOVA/tree feature selection significantly outperforms baseline FinBERT on earnings call transcripts, 10Q reports, and financial news. Key upgrade over H174: instead of using FinBERT CLS pooling directly for score, extract SAE sparse features then select top-k discriminative dimensions via ANOVA F-test. Targets the known weakness of H174 — FinBERT embeddings include redundant dimensions from pre-training that add noise to the PEAD prediction task.",
+  "hypothesis_id": "H378",
+  "title": "H378 — SAE-FiRE Sparse Autoencoder Feature Selection on H174 FinBERT PEAD Pipeline",
+  "proposed_text": "## H378 — SAE-FiRE Sparse Autoencoder Feature Selection on H174 FinBERT PEAD Pipeline (STUB — NOT RUN)\n\n**Source**: arXiv:2505.14420 (Zhang, Liu, Zhang, He, Du — May 2025)\n**Base**: H174 (score >= 0.18 + surprise >= 0.02; OOS WR=81.8%, n=22)\n**Signal upgrade**: Replace FinBERT CLS pooling → SAE decomposition → ANOVA F-test top-k sparse features → classifier\n\n**Paper key finding**: SAE-FiRE significantly outperforms baseline FinBERT approaches on three financial datasets (earnings call transcripts, 10Q reports, financial news). Financial documents (>5,000 words) contain substantial redundancy; SAE decomposes dense representations into interpretable sparse components, then ANOVA F-tests identify only discriminative SAE dimensions.\n\n**Proposed implementation**:\n1. Extract H174 8-K FinBERT embeddings (768-dim)\n2. Train lightweight SAE (768→2048 sparse→768 reconstruct) on 8-K corpus\n3. ANOVA F-test on SAE activations vs H174 label (positive/negative PEAD outcome)\n4. Top-k features (k=50-200) as input to logistic classifier\n5. Retain H174 surprise >= 0.02 filter unchanged\n6. Gate: OOS WR > 80% AND n >= 20\n\n**Risk factors**: SAE training requires sufficient 8-K corpus (H168 had 2,086 transcripts; same data can be used). Overfitting risk on small OOS n. May not improve on H174's already-high WR=81.8%.\n\n**Complexity**: Medium. Requires torch + sparse_autoencoder or manual SAE implementation. GPU optional (SAE is small).\n\n**Script**: backtesting/daily/run_h378.py (stub)\n",
+  "risk_level": "medium",
+  "source_papers": [
+    {
+      "id": "arxiv:2505.14420",
+      "title": "SAE-FiRE: Enhancing Earnings Surprise Predictions Through Sparse Autoencoder Feature Selection",
+      "year": 2025,
+      "relevance": 8
+    }
+  ],
+  "scan_date": "2026-07-07"
+}

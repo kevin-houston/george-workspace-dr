@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-10
+updated: 2026-07-07
 type: strategy-guide
 status: production — H026 deployed on Alpaca paper trading
 ---
@@ -527,3 +527,109 @@ def adjusted_mse_loss(y_pred, y_true, sign_penalty=11.0):
 ```
 
 **Source**: arXiv:2507.07107, 'Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction' (May 2026). Reported Sharpe 2.05 synthetic / 1.63 real A-share data. Deflated Sharpe 0.978.
+
+---
+
+## H376/H377: The No-Skip-Month Discovery — 6-0m Momentum (MAJOR FINDING)
+
+**Run date**: 2026-07-06 (H376 sub-experiment; H377 full test pending)
+**Finding class**: Parameter optimization — removal of standard skip-month convention
+
+### Background: The Skip-Month Convention
+
+Standard cross-sectional momentum uses a **1-month skip** between signal formation and portfolio formation:
+
+```
+Signal window: t-7 → t-1  (6 months, skipping most recent month t)
+Portfolio holds: t → t+1 (next month)
+```
+
+The skip-month convention was introduced by Jegadeesh & Titman (1993) to avoid short-term reversal contamination — stocks with high 1-month returns tend to mean-revert in month t+1 (market microstructure: bid-ask bounce, liquidity pressure).
+
+### The H277 Finding (NASDAQ Universe, Survivorship-Bias Caveat)
+
+H277 tested NASDAQ tech momentum on a tech-heavy universe and found:
+- **6-1m (with skip)**: OOS Sharpe 1.22
+- **6-0m (no skip)**: OOS Sharpe ~1.6+ (improved)
+- **Interpretation**: On NASDAQ/tech-heavy universes, the 1-month reversal effect is ABSENT or reversed — recent-month return is momentum-continuation, not reversal.
+
+Caveat: H277 used current NASDAQ constituents (survivorship bias). The effect needed validation on a broader, bias-free universe.
+
+### H376 Extension to H198 30-Stock Large-Cap Universe
+
+H376 tested MAX factor composites on the H198 30-stock S&P500 universe. The most significant finding was the **6-0m (no skip) baseline**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | CAGR | Neg Yrs |
+|---------|-----------|------------|-----------|------|---------|
+| Baseline: 6-1m (standard skip) | — | **1.174** | -22.7% | 27.1% | 1 |
+| 6-0m pure (no MAX, no skip) | — | **3.120** | -8.4% | 76.8% | **0** |
+| Var D: 6-0m + 0.3·MAX composite | — | 2.790 | -9.1% | 72.0% | 0 |
+
+**Result: Removing the skip month nearly triples OOS Sharpe (1.174 → 3.120) and cuts MaxDD from -22.7% to -8.4% on the H198 30-stock large-cap universe. Zero negative calendar years 2021-2026.**
+
+This is the strongest finding in the H198 stock momentum family.
+
+### Why Doesn't Skip-Month Reversal Apply to Large-Cap Tech-Heavy Universes?
+
+The skip-month convention is empirically motivated by short-term reversal in **small-cap, illiquid stocks** where microstructure effects are strong. For large-cap tech-heavy universes:
+
+1. **Bid-ask bounce is negligible**: AAPL/NVDA/META have sub-1bp spreads — no meaningful bid-ask contamination
+2. **Momentum is persistent at 1-month horizon**: Tech mega-caps in bull markets exhibit momentum at 1-month frequencies (earnings momentum, institutional flows, sector rotation continuing)
+3. **Skip-month cost**: Skipping the most recent month excludes the strongest recent signals — when a stock had +30% in the prior month, excluding that signal reduces the momentum rank
+4. **Sector concentration effect**: The H198 universe is ~40% tech/communication — sector momentum is strong at sub-monthly frequencies; excluding last month introduces a systematic lag
+
+### H377 Design (Full Test Pending)
+
+H377 tests 6-0m momentum as a complete standalone hypothesis:
+
+**Universe**: H198 30-stock large-cap S&P 500  
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026  
+**Gate**: OOS Sharpe > 1.174 (H198 baseline) AND MaxDD > -30%  
+
+| Variant | Signal | Description |
+|---------|--------|-------------|
+| Baseline | 6-1m | Standard H198 (skip month) — reference |
+| A | 6-0m | No skip, plain 6-month return |
+| B | 6-0m top-1 | Concentrated top-1 (vs top-6 EW) |
+| C | 6-0m + 3-0m blend | Dual lookback, no skip on either |
+| D | 6-0m + vol target | No skip + H273 vol-targeting overlay |
+| E | 3-0m | Very short lookback — captures earnings momentum |
+
+```python
+# H377 signal construction
+sig_6m_0skip = monthly_px.pct_change(6)          # 6-0m: no skip
+sig_3m_0skip = monthly_px.pct_change(3)          # 3-0m: no skip (very short)
+sig_6m_1skip = monthly_px.shift(1) / monthly_px.shift(7) - 1  # 6-1m: standard baseline
+
+# Cross-sectional rank each signal
+rank_6m_0 = sig_6m_0skip.rank(axis=1, pct=True)
+rank_3m_0 = sig_3m_0skip.rank(axis=1, pct=True)
+
+# Var C blend
+composite_C = 0.6 * rank_6m_0 + 0.4 * rank_3m_0
+```
+
+**Expected outcome based on H376 sub-experiment**:
+- Var A (6-0m top-6): OOS ~3.12 (directly observed in H376)
+- Var B (6-0m top-1): unknown — concentration should help in bull markets, hurt in drawdowns
+- Var C (dual blend): likely degrades 6-0m purity; test to confirm
+- Var D (+ vol target): likely improvement in MaxDD; H273 confirmed vol-targeting adds +0.19 Sharpe overall
+
+**Production implications if confirmed**:
+- Would replace H198 6-1m as the stock momentum production signal
+- OOS Sharpe 3.120 would rank among production-portfolio-tier results (H026 OOS 3.007, H041a OOS 3.708)
+- Low correlation with H026 (different alpha driver) — portfolio admission candidate
+
+### Broader Skip-Month Analysis
+
+The skip-month convention should be re-tested across all H-series stock strategies:
+
+| Strategy | Current skip | Test no-skip? | Priority |
+|----------|-------------|--------------|---------|
+| H198 stock momentum | 1 month | **YES — H377** | HIGH |
+| H181 industry reversal | None (it IS 1-month reversal) | N/A | N/A |
+| H217 alpha101 | Varies by formula | MEDIUM | MEDIUM |
+| H320 LightGBM crash filter | 1 month | LOW | LOW |
+
+**Key insight**: The skip-month convention may be a 30-year-old artifact of 1993-era small-cap data. For modern large-cap, tech-heavy portfolios, removing the skip may consistently improve performance.
+
