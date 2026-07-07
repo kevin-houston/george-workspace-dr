@@ -8804,3 +8804,53 @@ ACL FinNLP-2025 confirms FinBERT > BART > LLaMA 3 on standard PEAD (unfinetuned 
 
 **Script**: backtesting/daily/run_h376.py
 **Results**: backtesting/results/h376_results.json
+
+---
+
+## H377 — 6-0m No-Skip Momentum on H198 30-Stock Large-Cap Universe (STUB — NOT RUN)
+
+**Source**: H376 Var D endogenous finding (2026-07-06); H277 NASDAQ no-skip parallel
+**Universe**: H198 30-stock large-cap S&P 500 (AAPL, MSFT, NVDA, META et al.)
+**Signal**: 6-month return WITHOUT skip month — month_t-6 to month_t (inclusive)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > -30%
+
+**Pre-result**: H376 Var D (6-0m + minor MAX composite) OOS 3.120 on pure 6-0m baseline, MaxDD -8.4%. This is the strongest single-signal result across the entire H198 family. H277 confirmed same finding on NASDAQ (skip-month hurts on tech-persistent momentum).
+
+**Variants to test**:
+- A: 6-0m top-1 (baseline replication)
+- B: 6-0m top-2 EW
+- C: 6-0m top-3 EW
+- D: 12-0m no-skip top-1
+- E: 3-0m no-skip top-1
+- F: 6-0m with H301 SPY 200MA safety overlay
+- G: 6-0m with H346 OB filter
+
+**Hypothesis**: On tech-heavy large-cap universes, the 1-month reversal effect that justifies skip-month is absent or reversed — momentum persists through month t, making 6-0m strictly superior to 6-1m.
+
+**Script**: backtesting/daily/run_h377.py (stub)
+**Note (2026-07-07)**: Dream cycle scan confirmed no external academic support for this specific parameter finding — it is an endogenous discovery. The 2025 CTA trend factor paper (arXiv:2507.15876) confirms that medium-term horizons (6-12m) dominate for equity cross-sectional momentum, but does not address skip-month on concentrated universes. H377 is original.
+
+---
+
+## H378 — SAE-FiRE Sparse Autoencoder Feature Selection on H174 FinBERT PEAD Pipeline (STUB — NOT RUN)
+
+**Source**: arXiv:2505.14420 (Zhang, Liu, Zhang, He, Du — May 2025)
+**Base**: H174 (score >= 0.18 + surprise >= 0.02; OOS WR=81.8%, n=22)
+**Signal upgrade**: Replace FinBERT CLS pooling → SAE decomposition → ANOVA F-test top-k sparse features → classifier
+
+**Paper key finding**: SAE-FiRE significantly outperforms baseline FinBERT approaches on three financial datasets (earnings call transcripts, 10Q reports, financial news). Financial documents (>5,000 words) contain substantial redundancy; SAE decomposes dense representations into interpretable sparse components, then ANOVA F-tests identify only discriminative SAE dimensions.
+
+**Proposed implementation**:
+1. Extract H174 8-K FinBERT embeddings (768-dim)
+2. Train lightweight SAE (768→2048 sparse→768 reconstruct) on 8-K corpus
+3. ANOVA F-test on SAE activations vs H174 label (positive/negative PEAD outcome)
+4. Top-k features (k=50-200) as input to logistic classifier
+5. Retain H174 surprise >= 0.02 filter unchanged
+6. Gate: OOS WR > 80% AND n >= 20
+
+**Risk factors**: SAE training requires sufficient 8-K corpus (H168 had 2,086 transcripts; same data can be used). Overfitting risk on small OOS n. May not improve on H174's already-high WR=81.8%.
+
+**Complexity**: Medium. Requires torch + sparse_autoencoder or manual SAE implementation. GPU optional (SAE is small).
+
+**Script**: backtesting/daily/run_h378.py (stub)

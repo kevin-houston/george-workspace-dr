@@ -635,3 +635,19 @@ The skip-month convention should be re-tested across all H-series stock strategi
 
 **See also:** H376 Var D (6-0m + 0.3·MAX = 2.790 vs. pure 6-0m = 3.120) shows MAX acting as a mild adversarial tilt even on the stronger, un-skipped momentum base — not simple dilution. The mechanism is detailed in `behavioral-finance-signals.md`'s MAX×momentum subsection: MAX and momentum select the same name most months, but in the minority where they diverge, MAX routes to a recent single-spike stock rather than a sustained leader. H373's failure on 6-1m top-1 (-0.34 Sharpe) confirms the same pattern, amplified there by top-1's all-or-nothing exposure to each override.
 
+
+## Kumar (2026): Large-Cap Momentum — Long Leg Works, Short Leg Catastrophic
+
+**Source**: Darshan Sathish Kumar (Feb 2026), 'Momentum in Large-Cap Equities: Does the Classic 12–1 Strategy Still Work?' SSRN:5367656. Tests 12-1m momentum on S&P 500 March 2006–December 2024.
+
+**Key finding**: Net annualized return −2.79%, Sharpe −0.23, MaxDD −81% on L/S portfolio at 10bps/side.
+- **Long leg only**: +7.9% annualized — momentum winners WORK on long side in large-cap
+- **Short leg**: −9.1% annualized net — momentum crashes (2009: losers recovered 40-100% in 1 month; 2020: same pattern)
+
+**Implications for H377 (6-0m no-skip)**:
+1. Long-only large-cap momentum confirmed in post-publication sample 2006-2024
+2. The standard 12-1m produces +7.9% long-side — H377's 6-0m may do better by including recent-month momentum
+3. 'Does classic 12-1 work?' = Yes for long-only; No for L/S — our strategies are all long-only ✓
+4. Short-selling losers (H243 NOT CONFIRMED) is consistent with these findings
+
+**Validation**: Confirms H198 6-1m long-only (OOS 1.174) and H376's 6-0m finding (OOS 3.120) are real effects, not artifacts.

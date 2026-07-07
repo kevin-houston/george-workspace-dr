@@ -573,3 +573,12 @@ Issues found: 8. Auto-fixed: 6. Needs review: 2.
 **Source gaps:**
 - `behavioral-finance-signals.md` should cross-reference `momentum-strategies.md` H376/H377 skip-month section (MAX×momentum connection)
 - `momentum-strategies.md` new skip-month section could link back to `behavioral-finance-signals.md` for the MAX factor context
+
+## [2026-07-07] build-phase | Dream cycle apply 2026-07-07
+Applied: 6. Flagged: 0. Renamed: 1 (H377 network momentum → H379).
+- H377 stub appended to hypothesis-log.md (6-0m no-skip; endogenous finding from H376)
+- H378 stub appended to hypothesis-log.md (SAE-FiRE PEAD upgrade; medium risk, backup created)
+- deepm-regime-portfolio.md created (Oxford ML DeePM arXiv:2601.05975; H249/H318 path)
+- multi-agent-llm-trading.md updated with 2026 synthesis (5 papers: fine-grained decomp, eval taxonomy, semantic graph, lead-lag, PortBench)
+- momentum-strategies.md updated with Kumar 2026 large-cap momentum academic validation
+- dream_cycle/staged/2026-07-06/7_h379_network_momentum_spillover.json renamed H377→H379 (6-0m is higher priority endogenous finding)

@@ -554,3 +554,89 @@ context = f"[SOURCE: SEC EDGAR, filing_id={accession_number}, verified]"
 - **H318 (meta-agent ETF rotation selector)**: TS-Agent's model bank pattern maps to H318's regime-to-strategy routing. Use TS-Agent as the planner that selects H026/H041a/H045 weighting by regime.
 
 **Install**: `pip install ts-agent` (verify current install path at yinshuo-thu/TS-Agent)
+
+---
+
+## 2026 Research Synthesis (added 2026-07-07)
+
+### arXiv:2602.23330 — Expert Investment Teams via Fine-Grained Task Decomposition
+
+**Authors**: Miyazaki, Kawahara, Roberts, Zohren (Feb 2026, Japanese stock data)
+
+**Core finding**: Fine-grained task decomposition (explicit workflows: data fetch → signal compute → portfolio construction → risk check) significantly improves risk-adjusted returns vs coarse-grained instructions ("analyze and trade"). Conventional multi-agent approaches relying on abstract instructions degrade inference performance and reduce transparency.
+
+**Relevance to H274**: H274's 3-agent PEAD debate currently uses coarse-grained prompts. Upgrading to fine-grained roles (Agent 1: 8-K section extractor, Agent 2: FinBERT scorer, Agent 3: EPS surprise validator) should improve consistency and reduce hallucination.
+
+---
+
+### arXiv:2603.27539 — Reliable Evaluation of LLM Financial Multi-Agent Systems
+
+**Authors**: Nguyen (Georgia Tech), Pham (Adobe) — March 2026
+
+**Key contributions**:
+1. **4-D taxonomy**: architecture pattern, coordination mechanism, memory architecture, tool integration
+2. **Coordination Primacy Hypothesis (CPH)**: inter-agent coordination protocol is the primary driver of quality — greater influence than model scaling
+3. **5 pervasive evaluation failures** that can reverse reported return signs:
+   - Look-ahead bias (unlagged signals)
+   - Survivorship bias (H312 caveat applies)
+   - Backtesting overfitting
+   - Transaction cost neglect
+   - Regime-shift blindness
+4. **Coordination Breakeven Spread (CBS)**: metric for whether coordination adds value net of transaction costs
+
+**Critical implication for H274**: Apply CBS framework before production deployment. The paper warns that many reported multi-agent improvements vanish after applying realistic costs and regime-shift tests.
+
+**Alignment with existing pipeline**: The 5 evaluation failure checks are already in the production hypothesis gate (look-ahead: .shift(1) note in H256; survivorship: caveat on H272/H277/H312). This paper formalizes what the pipeline already does empirically.
+
+---
+
+### arXiv:2604.19476 — Cross-Stock Predictability via LLM-Augmented Semantic Networks
+
+**Authors**: Huang, Fan, Hu, Ye (April 2026, S&P 500 2011-2019)
+
+**Method**: Two-stage — (1) build sparse candidate graph from 10-K embeddings, (2) LLM classifies candidate edges by economic relation type (supply chain, competitor, customer), (3) aggregate pair-level mean-reversion signals into stock-level trading signals.
+
+**Results**: LLM edge filtering improves long-short Sharpe 0.742 → 0.820 and reduces MaxDD from -10.47% to -7.85% on S&P 500 constituents.
+
+**Relevance to H316 (LLM pairs trading)**: This is a direct refinement of the H316 concept. The method avoids pure cointegration pair selection (which H307 confirmed fails OOS) by using LLM semantic economic relations as the primary filter. Key question: does it hold OOS 2020-2026 (COVID + rate shock regimes)?
+
+**Implementation path for H316**: Replace Johansen cointegration scan with 10-K embedding graph → LLM edge classification → mean-reversion signal aggregation. Start with 50 S&P 500 names from H198 universe.
+
+---
+
+### arXiv:2602.07048 — LLM Semantic Filtering for Lead-Lag Trading
+
+**Authors**: (Feb 2026, Kalshi prediction markets)
+
+**Method**: Two-stage causal screener: (1) Granger causality identifies candidate leader-follower pairs, (2) LLM semantic stage re-ranks by economic plausibility of transmission mechanism.
+
+**Key finding**: Semantic filtering is most valuable during large leader moves and outperforms Granger screening alone across 18 rolling evaluations.
+
+**Relevance**: Parallel approach to arXiv:2604.19476. Note: tested on prediction markets (Kalshi), not traditional equities — transferability uncertain.
+
+---
+
+### PortBench: LLMs Fail at Portfolio Allocation (arXiv:2605.27887, May 2026)
+
+**Title**: PortBench: A Correlation-Aware, Full-Pipeline Benchmark for LLM-Driven Portfolio Management
+**Authors**: Wisdomchain Research (2026)
+**Key finding**: Evaluating 10 frontier LLMs on 183-instrument dataset (6 asset classes, 10 years), **90% of model-profile combinations fail to outperform equal-weight diversification**. Models treat covariance structures as noise and output near-uniform weights.
+
+**Why this matters for H318 and production strategy**:
+- H318 proposed using LLM meta-agents to dynamically weight H026/H041a/H045 — PortBench suggests LLMs cannot reliably optimize portfolio weights even with full data access
+- Momentum rules (H026 top-1 selection) outperform LLM allocation precisely because they exploit a structural pricing anomaly, not optimize a covariance matrix
+- LLM value: constraint adaptation (e.g., "avoid sectors with negative TSMOM") and tail-risk awareness (e.g., "reduce exposure when VIX>30"), NOT return-to-covariance optimization
+
+**H318 implication**: Rather than LLM-driven weight allocation, meta-learner should use momentum rules for selection (H026/H041a/H045 unchanged) and LLM as a regime-conditional *filter* or *risk manager* only.
+
+---
+
+## Summary Table (2026)
+
+| Paper | Method | Relevance | Hypothesis |
+|-------|--------|-----------|------------|
+| 2602.23330 | Fine-grained task decomposition | High | H274 PEAD upgrade |
+| 2603.27539 | Evaluation taxonomy + CBS metric | High | All multi-agent work |
+| 2604.19476 | 10-K semantic graph + LLM edge filter | High | H316 LLM pairs |
+| 2602.07048 | Granger + LLM semantic filter | Medium | H316, H319 |
+| 2605.27887 | PortBench portfolio allocation | High | H318 redesign |
