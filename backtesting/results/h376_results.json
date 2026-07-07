@@ -1,0 +1,130 @@
+{
+  "hypothesis": "H376",
+  "gate": {
+    "oos_sharpe": 1.174,
+    "max_drawdown": -0.3
+  },
+  "results": {
+    "baseline": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.779,
+        "maxdd": -0.202,
+        "cagr": 0.421,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.174,
+        "maxdd": -0.227,
+        "cagr": 0.271,
+        "neg_yrs": 1
+      }
+    },
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.698,
+        "maxdd": -0.2,
+        "cagr": 0.418,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.179,
+        "maxdd": -0.217,
+        "cagr": 0.292,
+        "neg_yrs": 1
+      },
+      "desc": "6-1m: composite 0.7\u00b7mom + 0.3\u00b7max, top-6",
+      "pass_gate": true
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.721,
+        "maxdd": -0.243,
+        "cagr": 0.433,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.271,
+        "maxdd": -0.235,
+        "cagr": 0.323,
+        "neg_yrs": 1
+      },
+      "desc": "6-1m: composite 0.5\u00b7mom + 0.5\u00b7max, top-6",
+      "pass_gate": true
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.772,
+        "maxdd": -0.22,
+        "cagr": 0.431,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.079,
+        "maxdd": -0.255,
+        "cagr": 0.261,
+        "neg_yrs": 1
+      },
+      "desc": "6-1m: top-6 momentum, drop max_rank < 0.40",
+      "pass_gate": false
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.891,
+        "maxdd": -0.121,
+        "cagr": 0.689,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.79,
+        "maxdd": -0.091,
+        "cagr": 0.72,
+        "neg_yrs": 0
+      },
+      "desc": "6-0m (no skip): composite 0.7\u00b7mom + 0.3\u00b7max",
+      "pass_gate": true
+    },
+    "baseline_6m_noskip": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.983,
+        "maxdd": -0.124,
+        "cagr": 0.742,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.12,
+        "maxdd": -0.084,
+        "cagr": 0.768,
+        "neg_yrs": 0
+      }
+    }
+  },
+  "confirmed": true,
+  "spy": {
+    "is": {
+      "n": 96,
+      "sharpe": 1.105,
+      "maxdd": -0.194,
+      "cagr": 0.15,
+      "neg_yrs": 1
+    },
+    "oos": {
+      "n": 64,
+      "sharpe": 0.954,
+      "maxdd": -0.239,
+      "cagr": 0.146,
+      "neg_yrs": 1
+    }
+  }
+}

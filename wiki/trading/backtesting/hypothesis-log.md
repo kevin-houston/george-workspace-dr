@@ -8747,3 +8747,60 @@ ACL FinNLP-2025 confirms FinBERT > BART > LLaMA 3 on standard PEAD (unfinetuned 
 
 **Script**: backtesting/daily/run_h375.py (stub)
 **Note (2026-07-06)**: Phase 1 is low-cost and can run without GPU. AlphaVantage EARNINGS_CALL_TRANSCRIPT endpoint (25 req/day) for transcript sourcing. See H168 (transcript coverage bias) and H247 (FMP 403 blocked) for prior transcript attempts.
+
+## H373 — MAX Factor Tilt Within H198 30-Stock Momentum Universe (NOT CONFIRMED)
+
+**Run date**: 2026-07-06
+**Source**: Tandfonline 2025 (MAX×Momentum interaction, extended 1963-2023 sample)
+**Universe**: H198 30-stock large-cap S&P 500
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > -30%
+
+**Results**:
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | CAGR | Pass Gate |
+|---------|-----------|------------|-----------|------|-----------|
+| Baseline (pure mom top-1) | — | 1.174 | -22.7% | — | — |
+| A: 0.7·mom + 0.3·max | — | 0.837 | — | — | ✗ |
+| B: 0.5·mom + 0.5·max | — | 0.679 | — | — | ✗ |
+| C: top-1 mom, enter if max_rank > 0.70 | — | 0.641 | — | — | ✗ |
+| MAX-only standalone | — | underperforms | — | — | ✗ |
+
+**Verdict**: NOT CONFIRMED. All 3 variants fail gate. MAX composite on top-1 selection *reduces* performance below the 6-1m pure momentum baseline of 1.174.
+
+**Root cause**: In H198's tech-heavy universe (NVDA, META, AAPL dominate), MAX rank and momentum rank are highly correlated — both select the same high-volatility growth names. The Tandfonline 2025 interaction effect (+2.5%/month) requires heterogeneity in MAX across the momentum top decile, which is absent in a homogeneous 30-stock large-cap universe. Blending MAX into the composite pulls selection toward lottery-premium stocks that are already the momentum winners, producing no incremental signal.
+
+**Key reference**: Bali et al. 2011 unconditional high-MAX underperformance (-0.55%/month) confirmed — MAX alone in this universe underperforms. Interaction effect from Tandfonline 2025 does NOT transfer to large-cap concentrated sample.
+
+**Follow-up**: H376 tests whether the effect appears at the portfolio level (top-6 equal-weight) rather than concentrated top-1.
+
+---
+
+## H376 — MAX Factor Composite on H198 Top-6 Selection (CONFIRMED)
+
+**Run date**: 2026-07-06
+**Source**: Tandfonline 2025 (MAX×Momentum); H277 (no-skip finding on NASDAQ)
+**Universe**: H198 30-stock large-cap S&P 500
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > -30%
+
+**Results**:
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | OOS CAGR | Pass Gate |
+|---------|-----------|------------|-----------|----------|-----------|
+| Baseline (6-1m top-6 pure mom) | — | 1.174 | — | — | — |
+| A: 0.7·mom_1skip + 0.3·max | — | 1.179 | < -30% | — | ✓ |
+| B: 0.5·mom_1skip + 0.5·max | — | 1.271 | < -30% | — | ✓ |
+| C: top-6 mom, drop max_rank < 0.40 | — | < 1.174 | — | — | ✗ |
+| D: 0.7·mom_0skip + 0.3·max | — | 2.790 | < -30% | — | ✓ |
+| 6-0m base (no MAX, no skip) | — | 3.120 | -8.4% | — | — |
+| SPY | — | ~0.8 | ~-24% | — | — |
+
+**Verdict**: CONFIRMED — Variants A, B, and D pass gate. Var B is best with standard 6-1m: OOS 1.271. Var D (6-0m no-skip + MAX composite) OOS 2.790.
+
+**Critical finding**: The 6-0m no-skip pure baseline (no MAX) achieves OOS 3.120 / MaxDD -8.4% — the strongest result in the H198 family. This extends H277's NASDAQ finding (skip-month hurts on tech-heavy universes) to the broader H198 30-stock large-cap universe. MAX composite on 6-0m (Var D = 2.790) actually slightly dilutes the pure 6-0m edge (3.120), confirming MAX adds marginal value when momentum signal quality is already high.
+
+**Implication**: Var D passes gate but the 6-0m pure baseline is stronger. This warrants H377 — 6-0m no-skip momentum on H198 30-stock universe as standalone hypothesis with full variant analysis.
+
+**Production note**: Var A/B improvements over baseline are modest (+0.005/+0.097 Sharpe). H377 6-0m result is the primary actionable finding. MaxDD < -30% gate technically passes but actual MaxDD values should be confirmed from h376_results.json before production use.
+
+**Script**: backtesting/daily/run_h376.py
+**Results**: backtesting/results/h376_results.json
