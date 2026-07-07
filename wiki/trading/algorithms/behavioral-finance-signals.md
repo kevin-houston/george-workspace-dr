@@ -274,6 +274,8 @@ def momentum_max_screen(monthly_close, daily_returns, mom_pct=0.8, max_pct=0.6):
     return signal
 ```
 
+**See also:** H373 tested this composite directly on H198's 30-stock large-cap tech universe and found MAX tilt is *adversarial*, not neutral — top-1 selection dropped from 1.174 to 0.837 Sharpe (-0.34) when MAX rank overrode momentum rank. The Tandfonline +2.5%/month effect appears to require genuine cross-stock heterogeneity in MAX across a broad 500+ stock sample; in a concentrated 30-stock universe, MAX rank and momentum rank agree ~75-80% of months, and the divergent minority routes to single-day-spike names rather than sustained leaders. See `momentum-strategies.md`'s H376/H377 skip-month section, where the same mechanism shows up on a cleaner base signal.
+
 ---
 
 ## 5. LLM Sentiment as Behavioral Signal (2025–2026)

@@ -633,3 +633,5 @@ The skip-month convention should be re-tested across all H-series stock strategi
 
 **Key insight**: The skip-month convention may be a 30-year-old artifact of 1993-era small-cap data. For modern large-cap, tech-heavy portfolios, removing the skip may consistently improve performance.
 
+**See also:** H376 Var D (6-0m + 0.3·MAX = 2.790 vs. pure 6-0m = 3.120) shows MAX acting as a mild adversarial tilt even on the stronger, un-skipped momentum base — not simple dilution. The mechanism is detailed in `behavioral-finance-signals.md`'s MAX×momentum subsection: MAX and momentum select the same name most months, but in the minority where they diverge, MAX routes to a recent single-spike stock rather than a sustained leader. H373's failure on 6-1m top-1 (-0.34 Sharpe) confirms the same pattern, amplified there by top-1's all-or-nothing exposure to each override.
+

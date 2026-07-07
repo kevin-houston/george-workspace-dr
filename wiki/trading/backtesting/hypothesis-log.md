@@ -8767,7 +8767,7 @@ ACL FinNLP-2025 confirms FinBERT > BART > LLaMA 3 on standard PEAD (unfinetuned 
 
 **Verdict**: NOT CONFIRMED. All 3 variants fail gate. MAX composite on top-1 selection *reduces* performance below the 6-1m pure momentum baseline of 1.174.
 
-**Root cause**: In H198's tech-heavy universe (NVDA, META, AAPL dominate), MAX rank and momentum rank are highly correlated — both select the same high-volatility growth names. The Tandfonline 2025 interaction effect (+2.5%/month) requires heterogeneity in MAX across the momentum top decile, which is absent in a homogeneous 30-stock large-cap universe. Blending MAX into the composite pulls selection toward lottery-premium stocks that are already the momentum winners, producing no incremental signal.
+**Root cause**: In H198's tech-heavy universe (NVDA, META, AAPL dominate), MAX rank and momentum rank are highly correlated — both select the same high-volatility growth names. The Tandfonline 2025 interaction effect (+2.5%/month) requires heterogeneity in MAX across the momentum top decile, which is absent in a homogeneous 30-stock large-cap universe. Blending MAX into the composite pulls selection toward lottery-premium stocks that are already the momentum winners, but in the ~20-25% of months where MAX and momentum rank diverge, MAX routes selection to single-day-spike names rather than sustained leaders — this minority is adversarial, not neutral, which explains the -0.34 Sharpe drop rather than a null result.
 
 **Key reference**: Bali et al. 2011 unconditional high-MAX underperformance (-0.55%/month) confirmed — MAX alone in this universe underperforms. Interaction effect from Tandfonline 2025 does NOT transfer to large-cap concentrated sample.
 
