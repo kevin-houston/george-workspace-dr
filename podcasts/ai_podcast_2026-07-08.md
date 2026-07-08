@@ -1,163 +1,156 @@
-# AI Daily Podcast — Wednesday, July 08, 2026
+# Daily AI Insights — July 8, 2026
+## Episode: "Cleared for Takeoff"
 
-**Hosts:** Alex and Jordan
-**Date:** Wednesday, July 08, 2026
-**Segments:** 4
-**Word count target:** 1,800–2,400
+**Runtime**: ~13 minutes  
+**Hosts**: Alex (male), Jordan (female)  
+**Date**: Wednesday, July 8, 2026  
 
 ---
 
 ## INTRO
 
-**Alex:** Good morning and welcome to the AI Daily Podcast. I'm Alex.
+**Alex:** Good morning and welcome to Daily AI Insights. I'm Alex.
 
-**Jordan:** And I'm Jordan. It's Wednesday, July 8th, 2026. Today we've got four stories that I think are all genuinely interesting for practitioners: a Chinese open-weight model that's putting real pressure on the frontier providers, a legendary open-source developer's take on minimal agent design, the first US state law requiring mandatory third-party audits of AI models, and Ukraine's wartime AI sovereignty strategy that has real implications for enterprise deployments everywhere.
+**Jordan:** And I'm Jordan. It is Wednesday, July 8th, and we are recording this the night before what might be the most anticipated model launch of the year.
 
-**Alex:** Let's get into it.
+**Alex:** OpenAI's GPT-5.6 family — Sol, Terra, and Luna — goes public tomorrow. The U.S. Department of Commerce officially lifted the remaining restrictions today, giving OpenAI the all-clear for a broad launch.
 
----
+**Jordan:** That's story one. We've also got a landmark AI safety bill signed into law in Illinois, a stunning enterprise AI milestone from Salesforce, and a reality check on where all those hundreds of billions in AI infrastructure dollars are actually going.
 
-## SEGMENT 1: ZCODE AND GLM-5.2 — CHINA'S OPEN-WEIGHT CODING CHALLENGER
+**Alex:** Hint: it's not mostly chips.
 
-**Jordan:** We're going to start with something that landed July 2nd and has been making waves in developer communities this week. Z.ai — the international brand of Beijing-based Zhipu AI — launched ZCode, a free desktop coding IDE powered by their GLM-5.2 model, and the benchmark numbers are real enough to pay attention to.
-
-**Alex:** What are we talking about in terms of performance?
-
-**Jordan:** GLM-5.2 is a 753 billion parameter open-weight model released under MIT license on June 13th. On SWE-bench Pro — the benchmark that tests real-world software engineering tasks — it scored 62.1, which beats GPT-5.5 at 58.6. On FrontierSWE, which tests long-horizon task completion, it hit 74.4%, versus GPT-5.5's 72.6%. Claude Opus 4.8 leads both of those at 75.1% and 77.8% respectively, but the point is that an open-weight model from China is now genuinely competitive in long-horizon coding at a fraction of the cost.
-
-**Alex:** And what's the pricing comparison?
-
-**Jordan:** Through the Z.ai API: $1.40 per million input tokens and $4.40 per million output tokens. That's roughly one-sixth the cost of Claude Opus 4.8 and significantly cheaper than GPT-5.5. The ZCode desktop IDE is free entirely. It integrates with Claude Code, Cline, Kilo Code, and over 20 other environments through an Anthropic-compatible API endpoint.
-
-**Alex:** That's a meaningful cost differential for anyone running high-volume agentic coding workflows. So what's the catch?
-
-**Jordan:** Two things practitioners need to know before they reach for this. First, the open weights are under MIT, which sounds clean — but API access routes through Z.ai's servers in China, and that means Chinese data law applies to every call. TechTimes and others have been explicit about this: if you're working on anything sensitive — proprietary code, regulated data, customer information — the API is not appropriate and you need to run the weights locally or on your own infrastructure.
-
-**Alex:** So the weights are permissively licensed but the API adds a data residency risk.
-
-**Jordan:** Exactly. If you can self-host — and 753 billion parameters is a significant infrastructure ask — the open weights are genuinely compelling. If you're using the API for convenience, you've introduced a data handling consideration that most enterprise security teams will not approve without careful review.
-
-**Alex:** What's your overall read on the significance of this?
-
-**Jordan:** I think it's a meaningful moment for two reasons. First, it confirms that the capability gap between frontier proprietary models and open-weight models is continuing to close. GLM-5.2 isn't quite at the top of the coding leaderboard but it's close enough that the question is now "does cost and open-source access matter more than the last few percentage points of benchmark performance?" For a lot of use cases, yes. Second, the data sovereignty dimension is going to become a recurring story. We'll get to Ukraine later in the show and you'll see why that's relevant.
-
-**Alex:** GLM-5.2 and ZCode — MIT weights, strong coding benchmarks, API carries Chinese data law exposure, self-hosting is the path to full control.
+**Jordan:** Stay with us.
 
 ---
 
-## SEGMENT 2: SIMON WILLISON'S LLM-CODING-AGENT — MINIMAL AGENT DESIGN FROM A MASTER
+## SEGMENT 1 — OpenAI's GPT-5.6 Goes Public Tomorrow
 
-**Alex:** For our second story, we're going to zoom in on something that dropped on July 2nd from Simon Willison, and I want to spend some time on it because I think the *framing* is as interesting as the code.
+**Alex:** Let's start with the big news. OpenAI announced today that all three models in the GPT-5.6 family will be publicly available this Thursday, July 9th, after the U.S. Department of Commerce green-lit a broad launch.
 
-**Jordan:** Simon Willison for anyone who doesn't know — he's one of the most thoughtful and prolific open-source builders in the Python ecosystem, co-creator of Django, longtime maintainer of Datasette, and more recently the person behind the LLM command-line tool, which has quietly become one of the most useful little utilities for working with language models from a terminal.
+**Jordan:** And this rollout had an unusual path to get here. OpenAI previewed the GPT-5.6 family back on June 26th — but instead of releasing it directly, the government required them to gate it first behind a safety review with roughly twenty trusted partner organizations.
 
-**Alex:** Right. And what he released this week is llm-coding-agent 0.1a0 — a minimal coding agent built on the LLM library. The hook for me is how he describes the motivation. He says the LLM library has been evolving into more of an agent framework, and he wanted to see what a simple coding agent would look like if built with it.
+**Alex:** The reason: significant new cybersecurity capabilities. Multiple agencies were concerned enough that they wanted a classified benchmarking process before these models went public. That's a new wrinkle in frontier model releases.
 
-**Jordan:** And "simple" is the keyword here. This isn't a full-featured assistant with a UI, a browser, memory management, and a plugin ecosystem. It's deliberately minimal: tools for reading files, editing files, and executing commands. Claude Code style, as he puts it — but stripped down to the essential skeleton.
+**Jordan:** So who are Sol, Terra, and Luna? Sol is the flagship — designed for complex reasoning and agentic workloads, where you're chaining together long multi-step tasks. Terra is positioned as GPT-5.5-level performance at roughly half the cost. And Luna is the small, cheap, fast option.
 
-**Alex:** Why does that matter?
+**Alex:** On pricing: Sol is five dollars per million input tokens and thirty out. Terra is two-fifty in and fifteen out. Luna is one dollar in and six out. Those are API prices confirmed in OpenAI's preview documentation.
 
-**Jordan:** Because there's a whole category of practitioner need that the big frameworks — LangChain, CrewAI, AutoAgent — don't serve well. If you want to understand what's actually happening inside an agent loop, or you want to build something specific without a massive dependency tree, or you're trying to teach the concepts to a team, a minimal working implementation is enormously valuable.
+**Jordan:** To put that in context, Sol's output pricing is significantly higher than most competing models in the market right now. This is firmly in "use it when you need top-tier reasoning" territory — not your everyday API call.
 
-**Alex:** What's the architecture?
+**Alex:** And the timing is notable. Claude Fable 5 had just come back online July 1st after three weeks offline under export controls. Now GPT-5.6 drops the following week. There's a real competitive sprint happening at the frontier right now.
 
-**Jordan:** It's a ReAct-style loop — reason, act, observe — with the three core tools. The LLM library handles the conversation state and model calls; the agent provides the tool dispatch. The entire thing is small enough to read in an afternoon. Willison released it under his typical open-source approach: functional alpha, well-documented, accepting issues.
+**Jordan:** One thing worth watching: the "agentic workloads" framing on Sol. We keep hearing that the real frontier isn't benchmark performance anymore — it's sustained, multi-hour autonomous task completion. Does Sol actually hold up there?
 
-**Alex:** What models does it support?
+**Alex:** That's the test developers are going to run this week. And honestly, how it performs on agentic tasks may matter more than how it scores on any standard benchmark at this point.
 
-**Jordan:** Through the LLM library, essentially anything — Claude, GPT, local models via Ollama. The Anthropic-compatible API we just mentioned for GLM-5.2 would also work, which is an interesting connection given the cost question.
-
-**Alex:** I think there's a broader point here about the maturation of the agent space. A year ago, "build a coding agent" required either stitching together a bunch of unstable libraries or licensing something proprietary. Now Simon Willison can knock out a working 0.1a0 in what sounds like a long weekend.
-
-**Jordan:** That's exactly right. The primitives have stabilized enough that the interesting work is now architectural judgment — what do you include, what do you leave out, how do you handle the parts that go wrong? A minimal agent is a better teacher than a maximal one.
-
-**Alex:** llm-coding-agent 0.1a0 from Simon Willison — open source, minimal, built on the LLM library, released July 2nd. We'll link to his write-up on simonwillison.net in the show notes.
+**Jordan:** For builders: all three models launch Thursday. If you're running cost-sensitive workloads, Terra is probably the first one to benchmark — GPT-5.5 performance at half the price is a meaningful trade-off to evaluate.
 
 ---
 
-## SEGMENT 3: ILLINOIS AI SAFETY MEASURES ACT — THE FIRST MANDATORY AUDIT LAW
+## SEGMENT 2 — Illinois Sets a National AI Safety Standard
 
-**Jordan:** Third story — and this one has direct implications for anyone building or selling AI products in the United States, even if you've never done business in Illinois.
+**Alex:** Moving to regulation. On Monday, July 6th, Illinois Governor JB Pritzker signed Senate Bill 315, the AI Safety Measures Act, into law. Multiple outlets are calling it one of the most protective AI laws in the country.
 
-**Alex:** What happened?
+**Jordan:** This is a state law, but the scope is intentionally national in ambition. Here's the key stat: California, New York, and Illinois together account for roughly forty percent of the U.S. AI market. When those three states align on requirements, developers don't really have a choice about whether to comply.
 
-**Jordan:** On July 6th, Governor JB Pritzker signed SB 315, the Artificial Intelligence Safety Measures Act. Multiple outlets are describing it as the first state law in the US to require mandatory third-party audits of frontier AI models. And when you read the details, that framing holds up.
+**Alex:** So what does the law actually require? There are a few major pieces. First, any company developing what the law calls a frontier model — meaning the largest and most costly AI systems — must publish a framework explaining how they identify and assess catastrophic risk.
 
-**Alex:** Walk me through what it actually requires.
+**Jordan:** And the law defines catastrophic risk very specifically: incidents likely to cause death or serious injury to more than fifty people, or more than one million dollars in property damage.
 
-**Jordan:** The law applies to "large frontier developers" — defined as companies generating at least $500 million in yearly revenue whose products involve frontier AI models. Those companies are required to publish safety plans, identify and disclose risks, and — the novel part — submit to annual independent third-party audits of safety issues. Companies also have to report "critical safety incidents" to the state within 72 hours, or within 24 hours if the incident poses an imminent risk of death or serious physical injury.
+**Alex:** Second, there's a first-in-the-nation requirement for annual independent third-party audits of those frontier models. That's a direct accountability mechanism with real teeth.
 
-**Alex:** What are the penalties for non-compliance?
+**Jordan:** And third, the incident reporting windows are tight. Companies must report harmful incidents to the state within seventy-two hours of identifying them — and within twenty-four hours if the incident poses imminent risk of death or serious physical injury.
 
-**Jordan:** One million dollars for a first violation, three million dollars for subsequent violations. The law takes effect January 1st, 2028, giving companies about 18 months to get their processes in order.
+**Alex:** What makes this significant for builders isn't just the compliance burden for the frontier labs. It's the precedent. This is states establishing de facto national standards because federal AI legislation is stalled.
 
-**Alex:** What's the significance beyond Illinois itself?
+**Jordan:** And that creates a complicated environment for startups and enterprise developers building on top of foundation models. You may not be training the frontier model yourself, but your supply chain is now subject to these rules in a way it wasn't a year ago.
 
-**Jordan:** This is the piece I think gets undersold in coverage. Lawmakers and analysts have noted that Illinois, California, and New York collectively account for roughly 40% of the US AI market. If you're a frontier AI developer and three states representing 40% of your revenue require annual independent safety audits — you're not going to build a separate Illinois-compliant product and a non-compliant product everywhere else. You build one audited system. That's how state laws create de facto national standards.
+**Alex:** The law is explicitly modeled on similar bills from California and New York — and Illinois went further on some provisions. If California's governor signs comparable legislation this fall, you've got a three-state regulatory floor covering four in ten Americans.
 
-**Alex:** It's the California emissions standard effect applied to AI.
-
-**Jordan:** Exactly the right analogy. California set vehicle emissions standards that became the effective national standard because automakers couldn't build state-specific engines at scale. The same logic applies here. If the audit requirement sticks — and there will be legal challenges — it becomes the standard for how large frontier AI models are governed in the US, regardless of what happens at the federal level.
-
-**Alex:** What about the federal picture? There's been a lot of voluntary standards talk.
-
-**Jordan:** Still voluntary at the federal level. The Biden administration's executive order framework, the NIST AI Risk Management Framework — all advisory. Illinois just moved beyond advisory. And the timing relative to the UN Global Dialogue we covered yesterday isn't coincidental — there's clear global momentum toward accountability mechanisms with teeth, and Illinois is the first US jurisdiction to actually enact one.
-
-**Alex:** Illinois AI Safety Measures Act — signed July 6th, mandatory third-party annual audits for $500M-revenue frontier AI companies, 72-hour incident reporting, $1-3M fines, effective January 2028. Watch this one closely.
+**Jordan:** The broader story here is that the federal vacuum on AI regulation is being filled from below. 2026 is the year that dynamic crystallized.
 
 ---
 
-## SEGMENT 4: UKRAINE'S SOVEREIGN AI STRATEGY — WHAT WARTIME DEPLOYMENTS TEACH EVERYONE
+## SEGMENT 3 — Enterprise Agentic AI Hits an Inflection Point
 
-**Alex:** We're closing today with a story that's genuinely novel in the AI governance landscape, even though the underlying dynamics should sound familiar to anyone who's thought about enterprise AI risk.
+**Alex:** Let's shift to where the enterprise market actually is with agentic AI right now. Because the numbers are getting very real.
 
-**Jordan:** What's the story?
+**Jordan:** Salesforce reported this quarter that its Agentforce product has hit eight hundred million dollars in annual recurring revenue — up one hundred sixty-nine percent year over year. They closed twenty-nine thousand deals in the fourth quarter of their fiscal 2026 alone.
 
-**Alex:** Ukraine's Ministry of Digital Transformation announced on July 7th that Ukraine will favor AI systems it can run on its own servers, with a deliberate policy to avoid tools that remain under provider control. This came from Roman Kyslyi, Ukraine's Chief AI Officer, speaking to Reuters.
+**Alex:** To add some texture: Salesforce says it's processed more than twenty trillion tokens through Agentforce and converted them into two-point-four billion agentic work units. So we're talking about discrete tasks completed autonomously at scale, not chatbot conversations.
 
-**Jordan:** And the trigger for the policy announcement?
+**Jordan:** And Gartner is projecting that forty percent of enterprise applications will feature task-specific AI agents by the end of 2026 — up from less than five percent in 2025. The adoption curve is steep.
 
-**Alex:** The US government's order to Anthropic to cut access to powerful models for certain international users was cited as a policy catalyst. Ukraine wants tools that can't be switched off by decisions made in San Francisco or Washington. That's a very concrete, very real operational concern when you're running government services and military logistics on AI-assisted infrastructure during an active conflict.
+**Alex:** But there's a counterweight to the optimism in the same research: seventy percent of developers report problems integrating AI agents with existing systems. And forty-two percent of AI projects are showing zero measurable ROI — because teams failed to establish baselines and track metrics before they deployed.
 
-**Jordan:** What does the architecture actually look like?
+**Jordan:** That's the classic "we shipped it but we didn't measure it" problem. High adoption rate does not automatically mean high impact.
 
-**Alex:** Two tracks. First, Ukraine is developing its own model in partnership with Kyivstar — Ukraine's largest mobile operator — built on Google's Gemma open weights. Intended for government services, private enterprises, and military use. Expected to release in autumn 2026. Second, while they build that, the AI assistant inside Diia — Ukraine's government services app — currently runs on Google's Gemini, accessed through EU servers, with personal data stripped before queries are sent. They describe this as an "interim" solution explicitly because, in Kyslyi's words, they "don't control those models."
+**Alex:** The practitioners who are making it work seem to share a specific pattern: they pick one messy internal process, add a human review step, and then actually measure time saved or error reduction. It's unglamorous compared to the demos, but it's what's generating real returns.
 
-**Jordan:** What's the broader lesson here for practitioners outside of a wartime context?
+**Jordan:** There's also a security gap that's getting harder to ignore. The majority of chief information security officers express deep concern about AI agent risks — but only a small fraction have implemented mature safeguards. Companies are deploying agents faster than they're securing them.
 
-**Alex:** I think there are two. The first is what you might call the sovereignty stack — the layered question of who controls the model, where the inference runs, who holds the weights, and who can revoke access. Ukraine is answering all of those questions in the most demanding possible conditions, and the architecture they're landing on — open weights, self-hosted, domestically developed for long-term use — is the same architecture any highly regulated or sovereignty-sensitive deployment would land on.
+**Alex:** That gap is going to produce incidents. The question is whether those incidents happen before or after the compliance frameworks we just discussed are actually enforced.
 
-**Jordan:** So government agencies, financial regulators, healthcare systems — the same logic applies.
+**Jordan:** For developers building agentic systems: the Salesforce numbers tell you enterprise buyers have crossed from "pilot" to "actual procurement." But if you're deploying for a customer, the forty-two percent failure-to-measure rate is a real risk for your contract renewal.
 
-**Alex:** Exactly. And the second lesson is about the ZCode story we led with. The fact that GLM-5.2 weights are MIT-licensed is why they're relevant to this discussion. Open weights are the infrastructure of AI sovereignty. If you can run the model yourself, you control the inference, the data, and the availability. That changes the risk calculus for a lot of enterprise deployments.
+**Alex:** Track your baseline before you deploy. It's boring advice. Apparently nearly half of teams didn't do it.
 
-**Jordan:** It also reframes the "open source vs. closed" debate that's been running for the last few years. It's not primarily a safety debate — it's a control and resilience debate, and Ukraine is living the high-stakes version of it in real time.
+---
 
-**Alex:** Ukraine is building domestic AI infrastructure on open weights, citing provider control as a security risk. The same logic is driving enterprise on-prem strategies worldwide. Watch what wartime deployments prioritize — it tends to be what everyone needs eventually.
+## SEGMENT 4 — The $600 Billion Infrastructure Bet (and Where It's Actually Going)
+
+**Alex:** Last segment. Let's talk infrastructure, because the numbers are staggering and I think there's a widespread misconception about what they actually mean.
+
+**Jordan:** Set the stage.
+
+**Alex:** The top five hyperscalers — Amazon, Microsoft, Google, Meta, and Oracle — are projected to spend over six hundred billion dollars on infrastructure in 2026. That's a thirty-six percent increase from last year. Roughly four hundred fifty billion of it targets AI infrastructure specifically.
+
+**Jordan:** Enormous numbers. But here's what I found most striking in this week's reporting: only about twenty-five percent of that spending goes to chips.
+
+**Alex:** Right. The other seventy-five percent — roughly three hundred to three hundred fifty billion dollars — goes to the physical layer. Data centers, power systems, cooling equipment, networking hardware, and land. The unglamorous infrastructure underneath the GPUs.
+
+**Jordan:** And that reflects where the actual engineering constraints are. You can order GPUs, but if you can't power and cool them, you have expensive heat-generating equipment sitting in a warehouse.
+
+**Alex:** Power is becoming a genuine bottleneck. AI data centers are power-hungry in a way that's straining local grids, and the lead time to bring new power capacity online is years, not months.
+
+**Jordan:** There's also a memory angle that doesn't get enough attention. According to multiple analysts, up to seventy percent of all memory chips produced globally in 2026 will be consumed by AI data centers. Samsung, SK Hynix, and Micron are reallocating cleanroom capacity toward high-bandwidth memory specifically because data centers have become the dominant buyer.
+
+**Alex:** Which has downstream effects for consumer electronics, automotive, industrial — every sector that uses memory chips. One industry's AI buildout is reshaping the entire semiconductor supply chain.
+
+**Jordan:** And it's not just the U.S. South Korea announced at least eight hundred eighty billion dollars in commitments from Samsung and SK Hynix for chips and data centers — a strategic move to ensure positioning in this supply chain long-term.
+
+**Alex:** The long-range projection: nearly seven trillion dollars in global data center infrastructure investment through 2030, with more than five trillion tied to AI-specific usage. Those are decade-shaping numbers.
+
+**Jordan:** What should builders take from all of this? The hyperscalers competing to build this infrastructure are also competing to make AI compute cheaper and more accessible. That's a structural tailwind for everyone building on top of these platforms.
+
+**Alex:** Though the power and cooling constraints could create regional bottlenecks. Where your inference runs — and whether that region has power capacity — may matter more than people currently assume.
+
+**Jordan:** Worth knowing, especially if you're planning for scale.
 
 ---
 
 ## OUTRO
 
-**Jordan:** That's our show for Wednesday, July 8th. Recapping: GLM-5.2 from Z.ai beats GPT-5.5 on SWE-bench Pro, ZCode IDE is free, but API use carries Chinese data law risk — self-host the weights if this matters to your use case; Simon Willison released llm-coding-agent 0.1a0, a minimal coding agent on the LLM library that's worth reading for the architecture; Illinois signed the first mandatory third-party AI audit law in the US, effectively covering 40% of the market when combined with California and New York; and Ukraine's sovereign AI strategy — self-hosted, open weights — is a real-world stress test of the principles that matter for any high-stakes deployment.
+**Alex:** All right, let's bring it home. Four stories today: GPT-5.6 Sol, Terra, and Luna go live tomorrow after clearing a government safety gate. Illinois signs one of the country's toughest AI safety laws, establishing a framework that may function as a de facto national standard. Salesforce hits eight hundred million in Agentforce ARR as enterprise agentic AI crosses from pilot to real product at scale. And hyperscalers are spending six hundred billion on AI infrastructure — with three-quarters of it going to power, cooling, and physical infrastructure, not chips.
 
-**Alex:** Good show today. We'll be back tomorrow. I'm Alex.
+**Jordan:** The common thread today is thresholds. A government clears a model. A state legislature sets a legal floor. An enterprise product hits genuine scale. Infrastructure spending reaches levels that restructure global supply chains. Things that felt like futures a year ago are present tense now.
 
-**Jordan:** And I'm Jordan. Take care.
+**Alex:** That's it for Wednesday, July 8th. We'll be back tomorrow with whatever GPT-5.6 launch day brings. Thanks for listening to Daily AI Insights.
+
+**Jordan:** See you then.
 
 ---
 
 ## SOURCES
 
-1. GLM-5.2 benchmarks and ZCode launch — VentureBeat, July 2026
-2. ZCode data law exposure — TechTimes, July 4, 2026
-3. GLM-5.2 official docs — docs.z.ai
-4. ZCode / GLM-5.2 developer overview — NxCode.io, 2026
-5. Simon Willison llm-coding-agent 0.1a0 — simonwillison.net, July 2, 2026
-6. LLM library GitHub — github.com/simonw/llm
-7. Illinois AI Safety Measures Act signing — Gov. Pritzker newsroom, July 6, 2026
-8. Illinois AI law details — Capitol News Illinois, July 6, 2026
-9. Illinois AI law analysis — Governing.com, July 2026
-10. Illinois AI law coverage — Chicago Sun-Times, July 6, 2026
-11. Ukraine sovereign AI announcement — US News / Reuters, July 7, 2026
-12. Ukraine self-hosted AI strategy — Communications Today, July 2026
+1. OpenAI — GPT-5.6 Sol preview: https://openai.com/index/previewing-gpt-5-6-sol/
+2. Axios — Trump administration lifts GPT-5.6 restrictions, July 8 2026: https://www.axios.com/2026/07/08/openai-gpt-trump-ban-lifted
+3. Neowin — OpenAI to release GPT-5.6 Sol, Terra and Luna on July 9: https://www.neowin.net/news/openai-to-release-gpt-56-sol-terra-and-luna-on-july-9/
+4. Engadget — OpenAI gets permission to roll out GPT-5.6 on July 9: https://www.engadget.com/2210308/openai-rolls-out-gpt5-6-july-9/
+5. Capitol News Illinois — Pritzker signs landmark AI regulation bill: https://capitolnewsillinois.com/news/pritzker-signs-landmark-ai-regulation-bill-that-aims-to-mitigate-risks/
+6. CBS Chicago — Illinois law creating accountability for AI developers: https://www.cbsnews.com/chicago/news/pritzker-to-sign-illinois-bill-aimed-artificial-intelligence-accountability/
+7. WGN TV — Illinois Senate Bill 315 details: https://wgntv.com/news/illinois/gov-pritzker-puts-signature-on-senate-bill-315-one-of-toughest-ai-laws-in-country/
+8. Enterprise DNA — Agentforce reaches $800M ARR: https://enterprisedna.co/resources/news/salesforce-summer-26-agentforce-800m-arr-multi-agent-2026/
+9. Complete AI Training — Salesforce Agentforce hits $800M ARR: https://completeaitraining.com/news/salesforce-agentforce-hits-800-million-arr-as-enterprise/
+10. Fortune — Big Tech $700B AI infrastructure spending 2026: https://fortune.com/2026/04/30/big-tech-hyperscalers-will-spend-700-billion-on-ai-infrastructure-this-year-with-no-clear-end-in-sight-eye-on-ai/
+11. Intellectia — AI Data Center Investment overview: https://intellectia.ai/blog/ai-data-center-investment-2026
