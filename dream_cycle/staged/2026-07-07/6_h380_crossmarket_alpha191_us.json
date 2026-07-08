@@ -1,0 +1,10 @@
+{
+  "proposal_type": "hypothesis",
+  "hypothesis_number": "H380",
+  "title": "Cross-Market Alpha191 on US S&P500 — 17 Surviving Factors via Double-Selection LASSO",
+  "description": "Test the 17 Alpha191 short-term trading factors identified by Du, Walter & Ulrich (2026) as having statistically significant incremental explanatory power for US S&P500 cross-sectional returns (5% level after controlling for 151 established US fundamental factors). The Alpha191 library was originally developed for the Chinese A-share market (retail-dominated, high-frequency, policy-sensitive). Surviving factors span 6 domains: Volume & Flow, Mean Reversion, Trend & Momentum, Volatility & Risk, Liquidity & VWAP, Price Action. Implementation: (1) replicate all 168 usable Alpha191 signals from the paper's Appendix on our H198 30-stock universe; (2) run double-selection LASSO to identify which subset adds alpha beyond the existing H198 6-1m momentum signal; (3) form composite signal from survivors; (4) test as a tiebreaker or augmentation on top of H198 baseline. Gate: OOS Sharpe > 1.174 (H198 baseline). IS: 2013-2020, OOS: 2021-2026. Script: backtesting/daily/run_h380.py (to be written).",
+  "rationale": "Alpha191 is a well-known Chinese quant factor library. The Du et al. (2026) paper is the first systematic study of how these factors transfer to the US large-cap market using a rigorous LASSO selection that controls for the US factor zoo. 17 factors survive — primarily microstructure/volume signals that are not in our current H198 6-1m momentum formulation. The H198 universe (30 large-cap stocks, daily OHLCV) is ideal for testing these OHLCV-based signals without needing exotic data. If even 3-5 of the 17 factors add incremental IC, a composite signal could augment our momentum ranking. Key risk: the paper uses 2002-2022 US data; our OOS is 2021-2026 which partially overlaps. Need strict OOS discipline.",
+  "source_paper": "arXiv:2601.06499",
+  "risk_level": "medium",
+  "apply_status": "pending"
+}
