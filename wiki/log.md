@@ -582,3 +582,10 @@ Applied: 6. Flagged: 0. Renamed: 1 (H377 network momentum → H379).
 - multi-agent-llm-trading.md updated with 2026 synthesis (5 papers: fine-grained decomp, eval taxonomy, semantic graph, lead-lag, PortBench)
 - momentum-strategies.md updated with Kumar 2026 large-cap momentum academic validation
 - dream_cycle/staged/2026-07-06/7_h379_network_momentum_spillover.json renamed H377→H379 (6-0m is higher priority endogenous finding)
+
+## [2026-07-08] dream-cycle | Illusion Momentum scan + H385 staged
+Pages consulted: wiki/index.md, trading/algorithms/auto-alpha-discovery.md. Staged: H385 (Illusion Momentum, Iwanaga & Hirose PBFJ 2026). Scan: 5 angles, 1 high-relevance. New page created: no.
+
+## [2026-07-08] lint | Health check
+Issues found: 3. Auto-fixed: 3. Needs review: 0.
+Fixes: (1) deepm-regime-portfolio.md added to index (created 2026-07-07, orphaned); (2) auto-alpha-discovery.md index entry updated with H380-H384 methods added yesterday; (3) research-log/2026-07-08.md added to index.
