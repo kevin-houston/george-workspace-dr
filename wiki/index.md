@@ -1,7 +1,7 @@
 ---
 updated: 2026-07-08
 sources_indexed: 4
-pages: 196
+pages: 197
 ---
 
 # Wiki Index
@@ -81,6 +81,7 @@ When answering a query:
 - [awesome-quant-ai](trading/tools/awesome-quant-ai.md) — curated AI/ML quant resources; LLM agents (TradingAgents, FinRL, Vibe-Trading), TS foundation models (Chronos, TimesFM, Moirai), diffusion synthetic data, DeFi; strategy taxonomy + paradigms table; cross-refs H279–H281 staged ← new 2026-06-21
 - [ATLAS (atlas-gic)](trading/tools/atlas-gic.md) — self-improving AI trading agents; Karpathy autoresearch (prompts=weights, Sharpe=loss); 4-layer 25-agent architecture; PRISM regime cohorts; JANUS meta-layer (emergent regime detector = H318 analog); Soros reflexivity + MiroFish swarm; ~1975 stars; SaaS atlasagents.co ← new 2026-06-22
 - [QuantDinger](trading/tools/quantdinger-notes.md) — self-hosted AI trading platform (Docker); `quantdinger-mcp` PyPI for Claude Code integration; supports Alpaca/IBKR/Kraken/CCXT; full stack overkill given existing setup; MCP package worth testing ← new 2026-06-07
+- [ZVT](trading/tools/zvt.md) — Python quant platform; China A-shares primary (4136 stocks via EastMoney), US/HK secondary; unified schema API; ML machine; factor pipeline (data_df→transformer→factor_df→result_df); Dash/REST/Next.js UI; MODERATE relevance — China-focused, factor pipeline architecture useful as H382 design reference ← new 2026-07-08
 - [QuantStats](tools/quantstats-notes.md) — Python portfolio analytics + HTML tearsheet generator; `pip install quantstats`; takes pandas returns Series → 50+ metrics + SPY benchmark + monthly heatmaps; add `qs.reports.html()` to run_hNNN.py ← new 2026-06-08
 - [Kan](tools/kan-notes.md) — self-hosted open-source kanban board (Trello alternative); AGPLv3, ~5k stars; Next.js + tRPC + Postgres; webhooks + admin API; potential task/research dashboard UI ← new 2026-06-08
 - [ByteChef](tools/bytechef-notes.md) — open-source visual AI agent orchestration + workflow automation (n8n/Zapier alternative); self-hosted, MCP support, ~839 stars; AGPLv3; AI agent step type built-in ← new 2026-06-27

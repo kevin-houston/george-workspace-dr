@@ -589,3 +589,6 @@ Pages consulted: wiki/index.md, trading/algorithms/auto-alpha-discovery.md. Stag
 ## [2026-07-08] lint | Health check
 Issues found: 3. Auto-fixed: 3. Needs review: 0.
 Fixes: (1) deepm-regime-portfolio.md added to index (created 2026-07-07, orphaned); (2) auto-alpha-discovery.md index entry updated with H380-H384 methods added yesterday; (3) research-log/2026-07-08.md added to index.
+
+## [2026-07-08] ingest | ZVT (github.com/zvtvz/zvt)
+Pages created: 1 (trading/tools/zvt.md). Pages updated: 1 (index.md). Key entities: ZVT Python quant platform, China A-shares (EastMoney/JoinQuant/Sina), ML machine, factor pipeline. Cross-refs: auto-alpha-discovery.md (H382 analog), quantdinger-notes.md.
