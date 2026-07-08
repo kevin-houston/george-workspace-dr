@@ -609,7 +609,11 @@ def main():
             if t["action"] == "BUY":
                 se.open_buy(STRATEGY_ID, t["symbol"], t["qty"], price_est, order_id=t.get("order_id", ""))
             else:
-                se.close_sell(STRATEGY_ID, t["symbol"], price_est, order_id=t.get("order_id", ""))
+                # Full close (switching symbols) vs partial trim (symbol still in target)
+                if t["symbol"] in target:
+                    se.partial_sell(STRATEGY_ID, t["symbol"], t["qty"], price_est, order_id=t.get("order_id", ""))
+                else:
+                    se.close_sell(STRATEGY_ID, t["symbol"], price_est, order_id=t.get("order_id", ""))
         open_pos = se.get_open_positions(STRATEGY_ID)
         cur_prices = {s: get_latest_price(s) for s in open_pos}
         eq = se.snapshot_equity(STRATEGY_ID, cur_prices)

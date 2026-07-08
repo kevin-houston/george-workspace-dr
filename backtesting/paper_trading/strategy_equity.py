@@ -104,19 +104,57 @@ def live_sharpe(strategy_id: str) -> Optional[float]:
 
 def open_buy(strategy_id: str, symbol: str, qty: float, price: float,
              order_id: str = "", note: str = ""):
-    """Record a new long entry. Deducts cost from cash."""
+    """Record a new long entry. Deducts cost from cash. Accumulates if position exists."""
     data = load()
     s = data["strategies"][strategy_id]
     cost = qty * price
     s["cash"] = round(s["cash"] - cost, 4)
-    s["open_positions"][symbol] = {
-        "qty":         round(qty, 6),
-        "entry_price": round(price, 4),
-        "entry_date":  date.today().isoformat(),
-        "cost_basis":  round(cost, 4),
-        "order_id":    order_id,
-        "note":        note,
-    }
+    existing = s["open_positions"].get(symbol)
+    if existing:
+        # Accumulate: weighted-average entry price, summed qty and cost_basis
+        new_qty = round(existing["qty"] + qty, 6)
+        new_cost = round(existing["cost_basis"] + cost, 4)
+        s["open_positions"][symbol] = {
+            "qty":         new_qty,
+            "entry_price": round(new_cost / new_qty, 4),
+            "entry_date":  existing["entry_date"],
+            "cost_basis":  new_cost,
+            "order_id":    order_id or existing.get("order_id", ""),
+            "note":        note or existing.get("note", ""),
+        }
+    else:
+        s["open_positions"][symbol] = {
+            "qty":         round(qty, 6),
+            "entry_price": round(price, 4),
+            "entry_date":  date.today().isoformat(),
+            "cost_basis":  round(cost, 4),
+            "order_id":    order_id,
+            "note":        note,
+        }
+    save(data)
+
+
+def partial_sell(strategy_id: str, symbol: str, qty: float, price: float,
+                 order_id: str = "", reason: str = ""):
+    """Record a partial position reduction without closing it. Adds proceeds to cash."""
+    data = load()
+    s = data["strategies"][strategy_id]
+    pos = s["open_positions"].get(symbol)
+    if pos is None:
+        return
+    proceeds = qty * price
+    s["cash"] = round(s["cash"] + proceeds, 4)
+    new_qty = round(pos["qty"] - qty, 6)
+    # Reduce cost_basis proportionally
+    new_cost = round(pos["cost_basis"] * (new_qty / pos["qty"]) if pos["qty"] > 0 else 0, 4)
+    if new_qty <= 0:
+        s["open_positions"].pop(symbol)
+    else:
+        s["open_positions"][symbol] = {
+            **pos,
+            "qty":        new_qty,
+            "cost_basis": new_cost,
+        }
     save(data)
 
 
