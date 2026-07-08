@@ -1,9 +1,10 @@
 ---
 title: AI-Driven Alpha Factor Discovery
 added: 2026-07-01
+updated: 2026-07-07
 category: algorithms
 related: factor-models.md, momentum-strategies.md, multi-agent-llm-trading.md
-hypotheses: H347, H349, H288, H352
+hypotheses: H347, H349, H288, H352, H380, H381, H382
 ---
 
 # AI-Driven Alpha Factor Discovery
@@ -283,6 +284,10 @@ Production-focused pipeline combining:
 - H349 (QuantaAlpha) → `pip install quantalpha`, OpenAI API, H198 universe
 - H288 (LLM-DSL) → equity DSL adaptation of arXiv:2604.26747, IS 2020–2022
 - H352 (TreEvo) → implement arXiv:2508.16334 loop, 20 min per session, $3–10 cost
+- H380 (Cross-Market Alpha191) → 17/168 Alpha191 signals survive LASSO on S&P500 (arXiv:2601.06499, Jan 2026); augment H198 with microstructure/volume signals
+- H381 (AlphaLogics) → market-logic-driven 3-agent mining, S&P500 validated (arXiv:2603.20247, Mar 2026); initialize from hypothesis-log.md
+- H382 (FactorEngine) → program-level dual-mode LLM+BayesHPO, knowledge-infused bootstrap (arXiv:2603.16365, Mar 2026); ingest wiki as experience KB
+- [LLM Alpha Mining Systems 2026](../../ai-industry/llm-alpha-mining-systems-2026.md) — ecosystem overview, regime-adaptive methods, AlphaLogics/FactorEngine/Alpha191 transfer
 - [Factor Models](factor-models.md) — academic factor foundations (FF5, q-factor)
 - [Multi-Agent LLM Trading](multi-agent-llm-trading.md) — broader LLM trading agent landscape
 - [Machine Learning for Trading](../tools/ml-for-trading.md) — FinAgent, Alpha-GPT, LLM ideation gap

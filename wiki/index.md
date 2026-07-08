@@ -1,7 +1,7 @@
 ---
 updated: 2026-07-07
 sources_indexed: 4
-pages: 194
+pages: 195
 ---
 
 # Wiki Index
@@ -262,6 +262,7 @@ When answering a query:
 - [AI Infrastructure / Compute Layer 2026](ai-industry/ai-infrastructure-2026.md) — GPU cloud providers (Lambda/CoreWeave/RunPod/Vast.ai); H100/B200 pricing; vLLM/SGLang/TGI inference servers; cost structure for production LLM apps ← 2026-05-29
 - [LLM Evaluation & Benchmarking for Finance 2026](ai-industry/llm-finance-benchmarks-2026.md) — CLQT closed-loop diagnostic benchmark; BacktestBench 18k QA pairs (LLMs fail strategy consistency); PortBench (90% fail vs equal-weight); reproducibility audit (0/19 R3); ReCAP regime-adaptive continual learning; HMM+RL allocation (Sharpe 1.68 vs 0.92 static); guidance on LLM vs deterministic split ← new 2026-07-03
 - [LLM Trading Agent Benchmarks 2026](ai-industry/llm-trading-agent-benchmarks-2026.md) — KTD-Fin (arXiv:2605.28359; masking reveals LLM alpha = beta recall; Barra attribution), Strat-LLM (arXiv:2605.06024; regime-mode alignment; high-win-rate trap), EarningsInOne (arXiv:2606.29734; ECT qualitative signal peaks next day = tradeable; speed separation); unified LLM-in-trading value table; H376 implication ← new 2026-07-06
+- [LLM Alpha Mining Systems 2026](ai-industry/llm-alpha-mining-systems-2026.md) — AlphaLogics (arXiv:2603.20247; market-logic-driven multi-agent, S&P500 validated, H381); FactorEngine (arXiv:2603.16365; program-level dual-mode LLM+BayesHPO, knowledge-infused bootstrap, H382); Cross-Market Alpha191→US (arXiv:2601.06499; 17/168 survive LASSO on S&P500, H380); ReCAP continual learning (arXiv:2606.00143, H384); HMM+RL regime allocation (arXiv:2605.27848, H383); LLM roles in factor mining vs portfolio allocation dichotomy ← new 2026-07-07
 
 ---
 
