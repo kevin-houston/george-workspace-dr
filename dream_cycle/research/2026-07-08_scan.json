@@ -1,0 +1,90 @@
+{
+  "scan_date": "2026-07-08",
+  "scanner": "george-nightly",
+  "angles_searched": 5,
+  "papers": [
+    {
+      "id": "pbfj:10.1016/j.pacfin.2026.103063",
+      "title": "Illusion Momentum and Cross-Sectional Returns",
+      "authors": "Yasuhiro Iwanaga, Takehide Hirose",
+      "year": 2026,
+      "venue": "Pacific-Basin Finance Journal, Vol 96",
+      "key_finding": "New cross-sectional momentum signal: ILLUSION = arithmetic_sum(r) − compound_return. Gap is always ≥0 (Jensen's inequality) and grows with variance. Stocks with high illusion momentum earn superior future returns. Mechanism: investor cognitive bias — mistaking cumulative-sum for cumulative return. Confirmed in Japanese AND US markets, stronger in bear markets and large-cap. Paper is behind paywall (ScienceDirect); abstract via IDEAS/RePEC.",
+      "relevance": 9,
+      "hypothesis": "H385 (new)",
+      "should_stage": true,
+      "staged_as": "1_h385_illusion_momentum_h198.json"
+    },
+    {
+      "id": "arxiv:2502.13165",
+      "title": "HedgeAgents: A Multi-Agent Trading System with Central Fund Manager and Specialized Hedging Experts",
+      "authors": "WWW 2025 workshop",
+      "year": 2025,
+      "venue": "WWW 2025",
+      "key_finding": "Multi-agent system: central fund manager allocates budget across specialized hedging experts (momentum, mean-reversion, macro). Claims ~70% annualized return — highly suspicious and likely backtested on favorable period. No out-of-sample discipline described. Architecture is interesting but performance claims not credible without rigorous OOS validation.",
+      "relevance": 5,
+      "hypothesis": "H274 (existing multi-agent PEAD stub), H318",
+      "should_stage": false,
+      "reason_not_staged": "70% annualized return claim is a red flag — likely data-snooping or in-sample overfit. No OOS discipline described. H274 multi-agent upgrade already staged with more rigorous framework. Architecture pattern (fund manager + specialist agents) is consistent with H318 meta-agent framework already in hypothesis log."
+    },
+    {
+      "id": "arxiv:2605.01954",
+      "title": "Moira: Language-driven Hierarchical RL for Pair Trading",
+      "authors": "Unknown",
+      "year": 2026,
+      "key_finding": "LLM selects semantically coherent pairs, RL learns trading rules. H316 STUB already covers this.",
+      "relevance": 3,
+      "hypothesis": "H316",
+      "should_stage": false,
+      "reason_not_staged": "Already documented as H316 STUB. No new implementation information found."
+    },
+    {
+      "id": "arxiv:2512.02436",
+      "title": "Semantic Trading: Agentic AI for Clustering and Portfolio Management",
+      "authors": "Unknown",
+      "year": 2025,
+      "key_finding": "Agentic AI using semantic clustering for portfolio construction. 2025 paper, not actionably different from existing H319 (LLM semantic network).",
+      "relevance": 4,
+      "hypothesis": "H319",
+      "should_stage": false,
+      "reason_not_staged": "H319 (LLM semantic network arXiv:2604.19476) already covers semantic relationship discovery. This 2025 paper predates H319 and is less rigorous."
+    },
+    {
+      "id": "arxiv:2604.26747",
+      "title": "From Hypotheses to Factors: Constrained LLM Agents in Cryptocurrency Markets",
+      "authors": "Unknown",
+      "year": 2026,
+      "key_finding": "Constrained LLM agents for factor discovery in crypto markets. Implements hypothesis-to-factor pipeline with constraints on signal realism.",
+      "relevance": 5,
+      "hypothesis": "H382 (FactorEngine), H381 (AlphaLogics)",
+      "should_stage": false,
+      "reason_not_staged": "Crypto market, not equity. H382 (FactorEngine) and H381 (AlphaLogics) already staged as more rigorous equity-focused LLM factor mining approaches. Crypto universe does not transfer to H198."
+    },
+    {
+      "id": "ssrn:6630998 (confirmed in prior scan)",
+      "title": "Cross-Sectional Stock Return Predictability: A Machine Learning Approach",
+      "authors": "Stosik & Zaremba 2025",
+      "year": 2025,
+      "key_finding": "Industry-adjusted short-term reversal signal 0.53%/month globally. Already documented as H181 proposed direction in hypothesis log.",
+      "relevance": 4,
+      "hypothesis": "H181 (existing proposal)",
+      "should_stage": false,
+      "reason_not_staged": "H181 already proposed and documented. H313 (sector-neutral momentum) tested the related sector-neutral concept and was NOT CONFIRMED on US large-cap. H181 (industry-adjusted reversal) remains unrun but is in the queue."
+    }
+  ],
+  "github_repos": [
+    {
+      "repo": "LLMQuant/quant-mind (noted in CLAUDE.local.md)",
+      "stars": "~1.7k",
+      "description": "Finance knowledge graph + RAG for quant research. Already noted in CLAUDE.local.md 2026-07-04.",
+      "relevance": 6,
+      "notes": "No new developments since initial note. Potentially useful for H382 FactorEngine experience KB."
+    }
+  ],
+  "high_relevance": ["pbfj:10.1016/j.pacfin.2026.103063"],
+  "staged_count": 1,
+  "staged_files": [
+    "1_h385_illusion_momentum_h198.json"
+  ],
+  "scan_notes": "Thinner scan than 2026-07-07 (which staged 6 proposals). The main waves of LLM+alpha papers from March-May 2026 (AlphaLogics, FactorEngine, HMM+RL, ReCAP) were all caught in the prior scan. Tonight's best find is Illusion Momentum — a behaviorally-motivated, zero-cost, US-large-cap confirmed signal that is mechanically orthogonal to H377 and could form a composite. PEAD angle came up empty for new 2026 papers beyond what was staged previously (SAE-FiRE, H375 GradPerp). Multi-agent angle: HedgeAgents claim is suspicious — not worth staging without rigorous OOS evidence."
+}
