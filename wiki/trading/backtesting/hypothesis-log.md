@@ -8873,3 +8873,42 @@ ACL FinNLP-2025 confirms FinBERT > BART > LLaMA 3 on standard PEAD (unfinetuned 
 **Complexity**: Medium. Requires torch + sparse_autoencoder or manual SAE implementation. GPU optional (SAE is small).
 
 **Script**: backtesting/daily/run_h378.py (stub)
+
+---
+
+## H385 — Illusion Momentum on H198 30-Stock Large-Cap Universe (STUB — NOT RUN)
+
+**Source**: Iwanaga (2024) working paper / Iwanaga & Hirose, Pacific-Basin Finance Journal Vol 96, 2026 (DOI: 10.1016/j.pacfin.2026.103063). *Provenance: formula specifics from 2024 WP (Tamagawa Univ/Yu-cho Foundation grant); published PBFJ version not independently verified — treat as working paper until confirmed identical.*
+
+**Signal**: IMOM = MOM − SUM = [Π(1+r_t) − 1] − Σ(r_t), where r_t are monthly returns over a 6-month no-skip formation window. Compound return minus arithmetic sum.
+
+**Sign and intuition**:
+- Stock +10% then −10%: MOM = −1%, SUM = 0%, IMOM = −1% (low — round-trip, no compounding gain)
+- Stock +5% then +5%: MOM = +10.25%, SUM = +10%, IMOM = +0.25% (positive — compounding worked)
+- High IMOM = sustained directional gains. Low IMOM = volatile round-trips.
+
+**Cognitive bias mechanism**: Investors read arithmetic sum returns and underestimate the true compound return. Stocks where MOM >> SUM are systematically underpriced → predictable drift upward. Mechanism explicitly tested vs limited-attention (MAX/HTP) and rejected — this is compound-vs-sum confusion, not attention bias.
+
+**Paper findings (6M window)**:
+- Long-Short raw alpha: 1.39%/month (US market)
+- FF-adjusted alpha: 1.42%/month
+- 12M also significant (0.88% alpha) but 6M is larger
+- Formation: NO skip-month (footnote 7 confirmed; Appendix A4 shows results hold with skip too)
+- **Alpha decay by decade**: 2.62% (1990s) → 1.42% (2000s) → 0.55% (2010s+). Significant throughout but shrinking. Temper Sharpe expectations for 2021-2026 OOS window.
+- Confirmed in Japan (primary) AND US markets; stronger in bear markets and large-cap.
+
+**Relationship to H377**: Orthogonal in construction — H377 ranks on MOM (geometric return), H385 ranks on IMOM (how much MOM exceeds SUM). Both can be positive for a steadily rising stock, but they measure distinct properties: H377 = "how big was the total gain?", H385 = "how consistent/smooth were the gains?" A composite IMOM + MOM blend could improve top-bucket selection.
+
+**Proposed implementation**:
+1. Compute monthly IMOM for each H198 stock (6-month no-skip window)
+2. Variant A: standalone IMOM top-1
+3. Variant B: standalone IMOM top-2
+4. Variant C: standalone IMOM top-3
+5. Variant D: composite rank = 0.5×rank(IMOM) + 0.5×rank(H377 6-0m), top-1
+6. Variant E: IMOM top-1 + SPY 200MA overlay
+
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > −30%. Adjusted expectation given alpha decay: Sharpe 1.0–1.5 OOS would be consistent with 2010s literature trend, not a failure.
+
+**IS**: 2013-2020. **OOS**: 2021-2026.
+
+**Script**: backtesting/daily/run_h385.py (to be written)

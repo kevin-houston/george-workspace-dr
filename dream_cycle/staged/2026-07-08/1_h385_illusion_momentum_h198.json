@@ -6,5 +6,5 @@
   "rationale": "H198 30-stock large-cap universe matches the paper's US large-cap confirmation exactly. Zero cost — same monthly OHLCV data already used for H198/H377. IMOM is mechanically orthogonal to H377: H377 ranks on geometric compound return (MOM); H385 ranks on how much MOM exceeds SUM. They can co-vary (both are positive for steadily rising stocks) but measure distinct properties — IMOM captures 'how consistent were the gains' while H377 captures 'how large was the total return'. A blend of IMOM rank + H377 rank could improve selection within the top-momentum bucket. The recent alpha decay (1.42% in 2000s → 0.55% in 2010s) is a realistic expectation-setter: if OOS 2021-2026 Sharpe lands in the 1.0-1.5 range rather than a H377-level 3.0+, that's consistent with the literature trend, not a failure.",
   "source_paper": "Iwanaga (2024) working paper / Iwanaga & Hirose (2026), Pacific-Basin Finance Journal Vol 96, DOI: 10.1016/j.pacfin.2026.103063",
   "risk_level": "medium",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
