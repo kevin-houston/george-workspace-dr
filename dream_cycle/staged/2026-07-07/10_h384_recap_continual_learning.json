@@ -6,5 +6,5 @@
   "rationale": "H026 is our core 27% production allocation and has 18+ years of confirmed OOS data. The main risk to H026 is regime shifts — the 2022 rate shock, COVID (2020), GFC (2008) each represent distinct market regimes where different ETFs dominate. ReCAP's policy library approach is superior to H346's static OB filter because: (1) it adapts online as regimes evolve; (2) it avoids the IS/OOS split problem by treating every regime shift as a new task; (3) it preserves knowledge from prior regimes (catastrophic forgetting mitigation). The regime segmentation aligns with our macro regime framework (FRED data: SPY 200MA, VIX, yield curve). This is also directly relevant to the dream cycle's research challenge: our hypothesis tests use fixed IS/OOS splits that may not generalize to future regimes — ReCAP's approach suggests designing strategies that adapt to detected regime shifts rather than assuming stationarity.",
   "source_paper": "arXiv:2606.00143",
   "risk_level": "high",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

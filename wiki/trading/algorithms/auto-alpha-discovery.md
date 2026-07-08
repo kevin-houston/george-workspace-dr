@@ -1,10 +1,10 @@
 ---
 title: AI-Driven Alpha Factor Discovery
 added: 2026-07-01
-updated: 2026-07-07
+updated: 2026-07-08
 category: algorithms
 related: factor-models.md, momentum-strategies.md, multi-agent-llm-trading.md
-hypotheses: H347, H349, H288, H352, H380, H381, H382
+hypotheses: H347, H349, H288, H352, H365, H380, H381, H382, H383, H384
 ---
 
 # AI-Driven Alpha Factor Discovery
@@ -392,3 +392,269 @@ top_k = results.rank('composite').head(5)
 | Constrained DSL (H288) | 1.55 Sharpe (crypto) | 4–8h | $10–30/run | No | Moderate |
 
 **AlphaEval** sits across all methods as a pre-screening layer: run after any session, before committing to full backtests.
+
+---
+
+## Method 7 — Cross-Market Alpha Transfer: Alpha191 → S&P 500 (H380)
+
+**Source:** arXiv:2601.06499 | Du, Walter & Ulrich (KIT) | January 2026  
+**GitHub:** No official repo — Alpha191 library publicly documented; implementation via OHLCV data only  
+**Data requirement:** Daily OHLCV (yfinance sufficient — no fundamentals needed)
+
+### Background
+
+The **Alpha191 library** was originally developed for China's A-share market: 191 short-term price-volume signals targeting intraday momentum, reversal, and microstructure patterns in a retail-dominated, high-frequency environment. The signals use only OHLCV data and are computed at daily frequency.
+
+**Hypothesis:** these signals should partially transfer to US large-cap markets because the underlying microstructure phenomena (short-term liquidity dynamics, volume imbalances, intraday price pressure) are universal, even if the magnitudes differ.
+
+### Methodology
+
+Double-Selection LASSO — two-stage variable selection that identifies Alpha191 factors with **incremental** explanatory power over and above the established US factor zoo:
+
+```python
+# Stage 1: standard LASSO on Alpha191 factors alone
+# Stage 2: partial-out US fundamental factors (151 control variables)
+# Keep factors significant at 5% in both stages
+
+from sklearn.linear_model import LassoCV
+import numpy as np
+
+def double_selection_lasso(X_alpha191, X_controls, y_returns, cv=5):
+    """
+    X_alpha191: (n_months x 191) matrix of Alpha191 factor values
+    X_controls: (n_months x 151) established US factor values
+    y_returns:  (n_months,) next-month cross-sectional returns
+    Returns: mask of surviving Alpha191 factor indices
+    """
+    # Stage 1: factor selection
+    lasso1 = LassoCV(cv=cv).fit(X_alpha191, y_returns)
+    selected_1 = np.abs(lasso1.coef_) > 0
+
+    # Stage 2: incremental selection controlling for established factors
+    X_residual = X_alpha191[:, selected_1] - X_controls @ np.linalg.lstsq(
+        X_controls, X_alpha191[:, selected_1], rcond=None)[0]
+    lasso2 = LassoCV(cv=cv).fit(np.hstack([X_controls, X_residual]), y_returns)
+    n_controls = X_controls.shape[1]
+    selected_2 = np.abs(lasso2.coef_[n_controls:]) > 0
+
+    surviving_indices = np.where(selected_1)[0][selected_2]
+    return surviving_indices
+```
+
+### Key Results
+
+| Finding | Detail |
+|---------|--------|
+| Total Alpha191 factors | 191 (23 excluded: unstable time series on US data) |
+| Factors tested on S&P 500 | 168 |
+| **Survivors after double-LASSO** | **17 (at 5% significance)** |
+| Period tested | 2002–2022, US S&P 500 large-cap |
+| Surviving factor domains | Volume & Flow; Mean Reversion; Trend & Momentum; Volatility & Risk; Liquidity & VWAP; Price Action |
+
+**Critical finding:** the 17 surviving signals are primarily **microstructure-based** (volume-flow, liquidity, VWAP deviations) — NOT the obvious momentum/reversal signals. These are orthogonal to our current H198 6-1m price momentum.
+
+### Fit for H198 Universe
+
+The H198 30-stock large-cap universe (AAPL, MSFT, NVDA, etc.) has daily OHLCV data available via Polygon.io (`$POLYGON_API_KEY`) at no additional cost. The 17 surviving signals are computable from OHLCV alone. Implementation path:
+
+```python
+# Alpha191 signal construction example (general pattern)
+# All 191 signals use daily OHLCV; Alpha191 numbering convention: alpha_NNN
+
+def alpha_001(close, volume, n=5):
+    """Mean-reversion: rank(-1 * sum(rank(delta(log(volume), 1)) * rank((close/shift(close,1)-1)), n))"""
+    log_vol_change = np.log(volume).diff(1).rank(pct=True)
+    return_rank = (close / close.shift(1) - 1).rank(pct=True)
+    combined = (log_vol_change * return_rank).rolling(n).sum()
+    return -combined.rank(pct=True)
+
+# For H380: implement the 17 survivors from Du et al. appendix
+# Use as composite signal on top of H198 6-1m momentum ranking
+```
+
+**Gate**: OOS Sharpe > 1.174 (H198 baseline). IS: 2013–2020, OOS: 2021–2026.
+
+---
+
+## Method 8 — AlphaLogics: Market Logic as the Interpretability Layer (H381)
+
+**Source:** arXiv:2603.20247 | Weng, Zhang, Wang & Xia | March 2026  
+**Cost:** ~$15–40 per discovery session (OpenAI API, `$OPENAI_API_KEY` available)  
+**Wall-clock:** 2–4 hours per session
+
+### Algorithm
+
+AlphaLogics introduces the **market logic** abstraction layer — an explicit, human-readable causal hypothesis (e.g., "momentum persists because of investor underreaction to gradual information diffusion") that constrains and guides factor code generation.
+
+**Three-agent architecture:**
+
+| Agent | Role |
+|-------|------|
+| Market Logic Mining Agent | Reverse-engineers market logics from existing confirmed factors (e.g., from hypothesis-log.md: "6-0m no-skip works on large-cap tech because J-T reversal convention is inapplicable in high-persistence regimes") |
+| Factor Generation Agent | Uses market logics to propose new factor code; runs backtest-feedback loop; rejects factors that contradict their stated logic |
+| Logic Refinement Agent | Updates logic library based on factor outcomes; prunes logics whose generated factors consistently fail |
+
+**Key distinction from all other methods:** the only system that explicitly models *why* a factor should work. Factor proposals without causal rationale are rejected before backtesting — reducing the multiple-testing burden.
+
+### Implementation Sketch
+
+```python
+# AlphaLogics not yet packaged; implement from arXiv:2603.20247
+
+import openai
+
+class MarketLogicLibrary:
+    def __init__(self, hypothesis_log_path: str):
+        """Initialize from our confirmed hypothesis results."""
+        self.logics = self._extract_from_log(hypothesis_log_path)
+
+    def _extract_from_log(self, path):
+        # Parse CONFIRMED entries from hypothesis-log.md
+        # Extract: (hypothesis_number, signal, rationale, oos_sharpe)
+        # e.g., ("H198", "6-1m momentum", "cross-sectional persistence", 1.174)
+        pass
+
+    def retrieve_relevant(self, candidate_signal: str, top_k=3):
+        """Semantic search for relevant prior market logics."""
+        pass
+
+
+class AlphaLogicsSession:
+    def __init__(self, logic_library: MarketLogicLibrary, universe: list):
+        self.library = logic_library
+        self.universe = universe
+
+    def generate_and_test(self, n_rounds=3):
+        for _ in range(n_rounds):
+            logic = self._mining_agent_propose()
+            factor_code = self._generation_agent_code(logic)
+            ic = self._backtest(factor_code)
+            self._refinement_agent_update(logic, factor_code, ic)
+
+    def _mining_agent_propose(self):
+        logics = self.library.retrieve_relevant("momentum augmentation")
+        prompt = f"Given prior logics: {logics}\nPropose a new market logic for undiscovered alpha."
+        return openai.chat.completions.create(
+            model="gpt-4o", messages=[{"role": "user", "content": prompt}]
+        ).choices[0].message.content
+```
+
+### Our Fit
+
+AlphaLogics' market logic concept maps directly onto our hypothesis format — each H### entry has a `**Hypothesis**` and `**Source**` rationale. Initialization from `hypothesis-log.md` (380+ experiments) gives the mining agent a rich prior of which causal mechanisms work (6-0m > 6-1m: "tech momentum persists through current month") and which fail (MAX×momentum: "adversarial in divergent months").
+
+**Expected output:** 3–5 new candidate factor expressions per session, validated on S&P 500, with explicit economic rationale for each.
+
+---
+
+## Method 9 — FactorEngine: Program-Level Dual-Mode Factor Mining (H382)
+
+**Source:** arXiv:2603.16365 | Lin et al. (Tsinghua lineage, 10 authors) | March 2026  
+**Cost:** ~$20–50 per session (LLM proposing code fragments; evaluation runs locally)  
+**Wall-clock:** 2–6 hours
+
+### Three Orthogonal Separations
+
+FactorEngine resolves a fundamental design error in prior auto-alpha systems: conflating structural exploration with numerical optimization.
+
+| Concern | FactorEngine's solution | Prior approach |
+|---------|------------------------|----------------|
+| Logic revision | LLM proposes code structure changes | LLM changes everything |
+| Parameter tuning | Bayesian HPO (BoTorch/Ax) | LLM proposes numbers |
+| API vs local computation | LLM: code fragments only; all eval local | LLM runs everything |
+
+This separation dramatically reduces API costs (LLM only generates code *structure*; BoTorch finds optimal parameters locally) and improves reproducibility (deterministic parameter search given a code structure).
+
+### Knowledge-Infused Bootstrapping
+
+The key module that makes FactorEngine uniquely suited to our situation:
+
+```python
+# FactorEngine bootstrapping pipeline (from arXiv:2603.16365)
+
+class KnowledgeInfusedBootstrap:
+    """
+    Transforms unstructured research (wiki pages, hypothesis log)
+    into executable factor programs.
+    """
+    def __init__(self, knowledge_sources: list[str]):
+        """
+        knowledge_sources: list of file paths or text strings
+        e.g., ['hypothesis-log.md', 'momentum-strategies.md', 'factor-models.md']
+        """
+        self.sources = knowledge_sources
+
+    def bootstrap(self) -> list[str]:
+        """
+        Three-agent pipeline:
+        1. Extraction agent: parses financial concepts from knowledge sources
+        2. Verification agent: checks logical consistency + data availability
+        3. Code generation agent: writes executable factor programs
+
+        Returns: list of verified, executable factor programs
+        """
+        extracted = self._extraction_agent()     # financial logic units
+        verified  = self._verification_agent(extracted)   # feasibility check
+        code      = self._codegen_agent(verified)  # Python factor programs
+        return code
+
+    def _extraction_agent(self):
+        # For hypothesis-log.md: extract (signal_type, lookback, direction)
+        # e.g., "6-0m momentum → pct_change(6), ascending rank"
+        pass
+```
+
+**For our use case:** feed `hypothesis-log.md` as the primary knowledge source. The bootstrap agent extracts the 380+ prior factor experiments — including failure reasons (e.g., "H313 NOT CONFIRMED: sector-neutral removes cross-sectional dispersion on homogeneous large-cap universe") — to avoid re-exploring dead ends.
+
+### Experience Knowledge Base
+
+Unlike QuantaAlpha (trajectory evolution without explicit failure logging), FactorEngine maintains:
+
+```python
+class ExperienceKB:
+    """Persistent trajectory-aware factor refinement database."""
+
+    def add(self, factor_code: str, direction: str, params: dict,
+            ic: float, regime: str, failure_reason: str = None):
+        """
+        direction: the code structure (e.g., "mean-reversion on VWAP deviation")
+        params: Bayesian-optimized hyperparameters
+        failure_reason: if IC < threshold, why it failed
+        """
+        pass
+
+    def query_unexplored(self, current_direction: str) -> list[str]:
+        """Return directions not yet tried near current_direction."""
+        pass
+```
+
+This structure directly addresses the crowding problem in large hypothesis spaces: as we accumulate H380+ experiments, the KB prevents the LLM from re-proposing known-failed directions.
+
+### Updated Comparison Table (all methods)
+
+| Method | Signal Quality | Wall-Clock | API Cost | GPU? | Priority |
+|--------|---------------|------------|----------|------|----------|
+| TreEvo (H352) | IC 0.0317 SPX | **20 min** | $3–10 | No | **1** |
+| Alpha191 transfer (H380) | 17/168 signals survive | Hours (backtest only) | **$0** | No | **2** |
+| AlphaLogics (H381) | SPX validated | 2–4h | $15–40 | No | 3 |
+| FactorEngine (H382) | Multi-market | 2–6h | $20–50 | No | 3 |
+| QuantaAlpha (H349) | 4.75% ann. excess | 2–4h | $5–20 | No | 4 |
+| FactorMiner (H365) | Competitive | 1–3h | $5–15 | No | 4 |
+| Hubble | Positive OOS (range/vol) | 3–6h | $25–50 | No | 5 |
+| Attention Factors (H347) | 2.3 net Sharpe (500-cap) | Hours | None | **Required** | 6 |
+
+Alpha191 (H380) is uniquely cost-effective: zero API cost, uses only OHLCV data already in our Polygon.io subscription, and has published academic validation on the same S&P 500 universe.
+
+---
+
+## Regime-Adaptive Extensions (H383, H384)
+
+Two 2026 papers extend the alpha mining paradigm to handle the non-stationarity problem:
+
+### H383 — HMM + RL Regime-Based Allocation (arXiv:2605.27848)
+
+3-state Gaussian HMM (BIC-selected: Low-Vol, Transitional, High-Vol) combined with an RL allocation policy on SPY/TLT/GLD. The RL policy learns discrete regime-dependent allocation weights, maintaining interpretability while adapting to regime transitions. See full design in staged proposal H383 and [Regime Detection](regime-detection.md). Requires: `hmmlearn`, `stable-baselines3`.
+
+### H384 — ReCAP Continual Learning on H026 (arXiv:2606.00143)
+
+Regime-Adaptive Continual Portfolio management: change-point detection → per-regime DRL policy → policy library → rapid fine-tuning when new regime detected. Avoids catastrophic forgetting of prior regime knowledge. Risk-level HIGH — requires PyTorch + ruptures + SB3 + careful OOS discipline (filtered not smoothed HMM probabilities). See full design in staged proposal H384.

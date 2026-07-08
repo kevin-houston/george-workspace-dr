@@ -6,5 +6,5 @@
   "rationale": "This is a direct extension of H249 (regime-conditional portfolio weights, confirmed OOS +0.282) and H311 (static EW-4 diversification, confirmed OOS 1.532). The Verma et al. paper validates HMM+RL on SPY/TLT/GLD — exactly our defensive capital-preservation use case. The RL layer adds adaptability that H249's fixed regime weights lack: instead of hand-tuning SPY/TLT/GLD weights per regime (H249 found IBS weight 33-40% in bear+volatile), RL learns the optimal allocation policy from the regime state. The 3-state HMM (low-vol/transitional/high-vol) maps cleanly onto our VIX<20, 20-25, >25 threshold framework. H251 (3-state HMM confirmed OOS 0.941) showed HMM alone defaults to static; adding RL avoids this. Key risk: RL requires careful OOS discipline — any reward signal using future returns = look-ahead. Must use only filtered (not smoothed) HMM probabilities per Regime Detection Design Note in CLAUDE.local.md.",
   "source_paper": "arXiv:2605.27848",
   "risk_level": "medium",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

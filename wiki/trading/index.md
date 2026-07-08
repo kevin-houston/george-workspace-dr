@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-07 (build phase: H377/H378 stubs + DeePM new page + multi-agent 2026 synthesis + Kumar/PortBench wiki updates; H373 root-cause corrected; MAX×momentum cross-references added)
+updated: 2026-07-08 (Phase 1 wiki: auto-alpha-discovery +3 methods H380/H381/H382 Alpha191+AlphaLogics+FactorEngine; H383/H384 regime-adaptive stubs; llm-alpha-mining-systems-2026.md committed; Phase 2 dream cycle scan in progress)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -52,7 +52,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [DeePM — Regime-Robust Deep Learning Portfolio](algorithms/deepm-regime-portfolio.md) ← new 2026-07-07 (Oxford ML arXiv:2601.05975; ~2x conventional, ~+50% vs Momentum Transformer on 50 futures; Causal Sieve + Macro Graph Prior + Distributionally Robust Objective; code github.com/kieranjwood/deepm; H249/H318 long-term path)
   - [Smart Money Concepts (ICT) — Order Blocks, FVGs, BOS/CHoCH](algorithms/smart-money-concepts-ict.md) ← updated 2026-07-03 (H356 CONFIRMED OOS 2.312 low-vol ETFs; 4-universe OB universality table; novel: ref params window=30/swing=5 best on low-vol reversed from all prior; Corr(SPY) 0.854→0.559 via OB filter; H357 proposed on H041a universe)
   - [Low-Volatility Factor ETF Rotation](algorithms/low-volatility-etf-rotation.md) ← updated 2026-07-03 (H356 CONFIRMED — OB filter ref_A OOS 2.312 Corr(SPY) 0.559 clears portfolio admission gate; H354 standalone superseded by H356; ref params window=30/swing=5 best; production table H354 vs H356 side-by-side)
-  - [AI-Driven Alpha Factor Discovery](algorithms/auto-alpha-discovery.md) ← new 2026-07-01 (H347/H349/H288/H352 design space; Attention Factors OOS Sharpe 2.3 net GPU-required; TreEvo H352 candidate 20min $3-10 SPX IC=0.0317 tree-structured evolution; QuantaAlpha pip install $5-20; Hubble AST sandbox US 500-stock 0% crashes; Constrained DSL equity adaptation path; implementation roadmap + survivorship bias caveats)
+  - [AI-Driven Alpha Factor Discovery](algorithms/auto-alpha-discovery.md) ← updated 2026-07-08 (H347/H349/H288/H352/H365 existing methods; +H380 Alpha191 cross-market transfer 17/168 signals survive LASSO on S&P500 $0 cost; +H381 AlphaLogics market-logic 3-agent SPX validated $15-40; +H382 FactorEngine program-level dual-mode BayesHPO knowledge-infused bootstrap from hypothesis-log $20-50; +H383 HMM+RL regime allocation SPY/TLT/GLD; +H384 ReCAP continual learning H026 overlay)
 - [**Shared Evaluation Checklist**](shared-eval-checklist.md) ← new 2026-06-09 (7-point standard agreed by George + Ernesto: look-ahead guard, NLP timestamp, cost model, soft OOS gate, regime coverage, survivorship bias, after-tax flag)
 - [Tools](tools/) — open-source libraries (Qlib, Backtrader, Vectorbt, etc.)
   - [Qlib Deep Dive](tools/qlib.md) ← expanded 2026-04-28 (architecture, model zoo, benchmarks, RD-Agent)

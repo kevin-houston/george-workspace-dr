@@ -6,5 +6,5 @@
   "rationale": "Alpha191 is a well-known Chinese quant factor library. The Du et al. (2026) paper is the first systematic study of how these factors transfer to the US large-cap market using a rigorous LASSO selection that controls for the US factor zoo. 17 factors survive — primarily microstructure/volume signals that are not in our current H198 6-1m momentum formulation. The H198 universe (30 large-cap stocks, daily OHLCV) is ideal for testing these OHLCV-based signals without needing exotic data. If even 3-5 of the 17 factors add incremental IC, a composite signal could augment our momentum ranking. Key risk: the paper uses 2002-2022 US data; our OOS is 2021-2026 which partially overlaps. Need strict OOS discipline.",
   "source_paper": "arXiv:2601.06499",
   "risk_level": "medium",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

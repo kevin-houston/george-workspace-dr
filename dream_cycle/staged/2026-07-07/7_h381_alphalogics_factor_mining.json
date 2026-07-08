@@ -6,5 +6,5 @@
   "rationale": "AlphaLogics is explicitly validated on the S&P500 (same universe family as H198), making it a direct test candidate. The 'market logic' abstraction is philosophically aligned with our hypothesis-driven research process — the system generates hypotheses about why factors should work, then tests them. The multi-agent coordination (mining agent, generation agent, optimization agent) mirrors H274's PEAD debate architecture and H318's meta-learner design. Compared to QuantaAlpha (H349, evolutionary without explicit logic) and FactorEngine (H382/2603.16365, program-level), AlphaLogics adds the interpretable logic layer that lets us audit whether discovered factors make economic sense. OpenAI API key is available.",
   "source_paper": "arXiv:2603.20247",
   "risk_level": "medium",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

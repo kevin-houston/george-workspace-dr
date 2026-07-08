@@ -6,5 +6,5 @@
   "rationale": "FactorEngine's 'knowledge-infused bootstrapping' module is uniquely suited to our situation — we have a rich hypothesis-log with 380+ factor experiments, each with results and failure reasons. This is exactly the 'experience knowledge base' FactorEngine is designed to exploit. Rather than starting blind, it starts with the accumulated knowledge of which signals work (H376 6-0m, H343 OB filter, H215 alpha101) and which fail (H291 52w-high, H337 quality), enabling targeted exploration of adjacent promising signals. This is a direct operationalization of the dream cycle research process — automated hypothesis generation from prior results. FactorEngine is distinct from AlphaLogics (H381): FactorEngine is code/program-level with Bayesian HPO; AlphaLogics is logic/abstraction-level with LLM-guided search.",
   "source_paper": "arXiv:2603.16365",
   "risk_level": "medium",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
