@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-08 (Phase 1 wiki: auto-alpha-discovery +3 methods H380/H381/H382 Alpha191+AlphaLogics+FactorEngine; H383/H384 regime-adaptive stubs; llm-alpha-mining-systems-2026.md committed; Phase 2 dream cycle scan in progress)
+updated: 2026-07-09 (H387/H388/H390 proposed; H389 Alpha Illusion 6-test checklist wiki page created; shared-eval-checklist.md updated with LLM gate)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -49,6 +49,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Market Timing Overlays](algorithms/market-timing-overlays.md) ← new 2026-06-15 (VIX term structure H296 CONFIRMED OOS 1.116 MaxDD -18.6%; SPY 200MA; VIX level thresholds; composite signal; rate cycle overlay; production integration guide for daily vs monthly rotation systems)
   - [Cryptocurrency Trading Strategies](algorithms/crypto-trading-strategies.md) ← new 2026-06-16 (cross-sectional momentum top-30 universe Sharpe 1.51 28d lookback; BTC 50d MA Sharpe 1.9 vs B&H 1.3; funding rate carry 6.45 full-sample but declining; Monday effect +0.51%; halving cycle positioning; ccxt/pycoingecko implementation; H302/H303 queued; max 5% portfolio allocation)
   - [Multi-Agent LLM Trading](algorithms/multi-agent-llm-trading.md) ← updated 2026-07-07 (2026 synthesis added: fine-grained decomp 2602.23330; eval taxonomy+CBS 2603.27539; 10-K semantic graph 2604.19476; PortBench 90% of LLMs fail equal-weight → H318 LLM as filter not allocator; H316 implementation path via semantic graph)
+  - [Alpha Illusion — LLM Validation Checklist](algorithms/llm-alpha-validation.md) ← new 2026-07-08 (6 structural validity tests Sheng et al. arXiv:2605.16895; temporal integrity, frictions, counterfactual, calibration, execution, multi-agent disaggregation; applies to H274/H381/H382/H383/H384; integrated into shared-eval-checklist.md)
   - [DeePM — Regime-Robust Deep Learning Portfolio](algorithms/deepm-regime-portfolio.md) ← new 2026-07-07 (Oxford ML arXiv:2601.05975; ~2x conventional, ~+50% vs Momentum Transformer on 50 futures; Causal Sieve + Macro Graph Prior + Distributionally Robust Objective; code github.com/kieranjwood/deepm; H249/H318 long-term path)
   - [Smart Money Concepts (ICT) — Order Blocks, FVGs, BOS/CHoCH](algorithms/smart-money-concepts-ict.md) ← updated 2026-07-03 (H356 CONFIRMED OOS 2.312 low-vol ETFs; 4-universe OB universality table; novel: ref params window=30/swing=5 best on low-vol reversed from all prior; Corr(SPY) 0.854→0.559 via OB filter; H357 proposed on H041a universe)
   - [Low-Volatility Factor ETF Rotation](algorithms/low-volatility-etf-rotation.md) ← updated 2026-07-03 (H356 CONFIRMED — OB filter ref_A OOS 2.312 Corr(SPY) 0.559 clears portfolio admission gate; H354 standalone superseded by H356; ref params window=30/swing=5 best; production table H354 vs H356 side-by-side)

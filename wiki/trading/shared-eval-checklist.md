@@ -1,7 +1,7 @@
 ---
 title: Shared Strategy Evaluation Checklist
 description: Common standard for both George and Ernesto before any strategy advances to paper trading or production
-updated: 2026-06-09
+updated: 2026-07-08
 authors: [George, Ernesto]
 ---
 
@@ -101,6 +101,7 @@ Notes:
 | 2026-06-09 | Initial draft — 7-point checklist agreed by George and Ernesto | George |
 | 2026-06-09 | Added point 8: required bear case / steelman section (Ernesto suggestion) | George |
 | 2026-06-21 | Added LLM trading 7-dimension reproducibility audit section (arXiv:2606.08285) | George |
+| 2026-07-08 | Added Alpha Illusion 6-test gate (arXiv:2605.16895); full checklist at llm-alpha-validation.md | George |
 
 ---
 
@@ -119,3 +120,20 @@ For any LLM-based hypothesis (H279, H280, H316-H325+), verify all 7 dimensions:
 | Reproducible artifacts | Results JSON + prompt log committed | Required for H316+ LLM hypotheses |
 
 **Source:** arXiv:2606.08285, June 2026. Analyzed 30 LLM trading papers; all 7 dimensions vary widely; friction + execution timing choices material to claimed Sharpe.
+
+---
+
+## LLM Trading System — Alpha Illusion 6-Test Gate (arXiv:2605.16895)
+
+For LLM-based strategies before advancing to paper trading, additionally verify all 6 structural validity tests from Sheng et al. (2025). Full checklist: `wiki/trading/algorithms/llm-alpha-validation.md`
+
+| Test | What to Check | Common Failure |
+|------|--------------|----------------|
+| Temporal integrity | No future data in LLM context/training | Knowledge base not time-indexed |
+| Real-world frictions | 5bps+ commissions, market impact, borrow costs | Costless execution assumed |
+| Counterfactual robustness | Beats SPY buy-and-hold AND equal-weight | Cherry-picked benchmark |
+| Predictive calibration | High-confidence trades win more often | Confidence uncorrelated with outcome |
+| Numerical execution | Positions fillable at stated volume | Requires more liquidity than available |
+| Multi-agent disaggregation | Each agent contributes; ablation hurts | One agent carries all alpha |
+
+**Source:** arXiv:2605.16895. Systems audited: FinCon, FinMem, TradingAgents, FinAgent, QuantAgent, FLAG-Trader.
