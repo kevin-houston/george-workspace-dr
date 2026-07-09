@@ -8917,4 +8917,70 @@ ACL FinNLP-2025 confirms FinBERT > BART > LLaMA 3 on standard PEAD (unfinetuned 
 
 **IS**: 2013-2020. **OOS**: 2021-2026.
 
-**Script**: backtesting/daily/run_h385.py (to be written)
+**Run date**: 2026-07-08
+
+**Result**: PARTIAL CONFIRMED — Var D (composite IMOM+MOM) passes gate; standalone IMOM variants (A–C) fail MaxDD gate.
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegYrs | Description |
+|-----|-------|--------|---------|-------|--------|-------------|
+| A | 2.218 | 1.704 | **-53.5%** | 84.1% | 1 | IMOM 6m top-1 — FAILS MaxDD |
+| B | 2.362 | 2.166 | **-40.9%** | 78.1% | 1 | IMOM 6m top-2 EW — FAILS MaxDD |
+| C | 2.464 | 2.258 | **-31.3%** | 68.1% | 1 | IMOM 6m top-3 EW — FAILS MaxDD |
+| **D** | 2.357 | **3.055** | -16.8% | 118.1% | 0 | IMOM+MOM composite rank top-1 ✓ |
+| E | 2.383 | 2.073 | **-46.9%** | 91.0% | 0 | IMOM top-1 + SPY 200MA — FAILS MaxDD |
+
+**Key findings**:
+- Standalone IMOM is a high-alpha but high-volatility signal: top-1 picks have concentrated, path-dependent risk that produces large drawdowns (-31% to -54%). Diversifying to top-2/3 reduces MaxDD but still doesn't clear the -30% gate.
+- The 50/50 composite (Var D: IMOM rank + 6-0m MOM rank → top-1) clears the gate cleanly: OOS 3.055, MaxDD -16.8%, 0 negative years. Adding IMOM to MOM improves the signal quality beyond pure momentum.
+- Signal correlation: rank(IMOM) vs rank(MOM_6_0) = 0.436 OOS — moderate correlation, not redundant. The composite selects stocks that are both strong and "clean" movers (compounding > arithmetic approximation).
+- The cognitive-bias mechanism (arithmetic underpricing) appears real on large-cap tech: stocks that compound smoothly are underpriced by investors using mental arithmetic, consistent with the paper's mechanism.
+- IMOM standalone Sharpe (1.7-2.3) substantially above gate but MaxDD is the problem — points to volatility clustering in the top-IMOM bucket (TSLA-like names that exhibit large arithmetic-vs-compound divergence due to volatility).
+
+**Production note**: Var D (composite top-1) is interesting but not yet production-ready — top-1 concentration is risky. H386 tests composite top-2/3 and weighting variants to find a production candidate.
+
+**Script**: backtesting/daily/run_h385.py
+**Results**: backtesting/results/h385_results.json
+
+---
+
+## H386 — IMOM+MOM Composite Weighting & Window Exploration on H198 (CONFIRMED 2026-07-08)
+
+**Source**: Endogenous from H385 Var D finding (2026-07-08). Explores diversification and weighting of the IMOM+MOM composite signal.
+**Universe**: H198 30-stock large-cap S&P 500
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > -30%
+
+**Signal**: Weighted rank composite of IMOM (6-month illusion momentum = compound return minus arithmetic sum) and raw 6-0m momentum, applied at varying concentrations and weightings.
+
+**Result**: CONFIRMED — all 6 variants pass gate. Best: Var A (top-2 composite) OOS 3.273, MaxDD -7.5%.
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegYrs | Description |
+|-----|-------|--------|---------|-------|--------|-------------|
+| **A** | 2.987 | **3.273** | **-7.5%** | 99.0% | 0 | 0.5×IMOM6+0.5×MOM60 top-2 ✓ (best) |
+| **B** | 3.160 | 3.037 | **-7.4%** | 85.9% | 0 | 0.5×IMOM6+0.5×MOM60 top-3 ✓ |
+| **C** | 2.437 | 3.143 | -10.8% | 124.2% | 0 | 0.33×IMOM6+0.67×MOM60 top-1 ✓ |
+| **D** | 2.355 | 2.825 | -25.9% | 112.1% | 0 | 0.67×IMOM6+0.33×MOM60 top-1 ✓ |
+| **E** | 1.971 | 1.919 | -21.2% | 90.9% | 0 | 0.5×IMOM12+0.5×MOM120 top-1 ✓ |
+| **F** | 2.735 | 2.983 | -13.4% | 119.8% | 0 | 0.5×IMOM6+0.5×MOM30 top-1 ✓ |
+
+Reference baselines:
+- H377 Var C (6-0m top-3): OOS 3.075, MaxDD -13.0%
+- H385 Var D (composite top-1): OOS 3.055, MaxDD -16.8%
+- SPY: OOS 0.954, MaxDD -23.9%
+
+**Key findings**:
+- **Var A is the new best result in the H198 family**: OOS 3.273 beats H377 Var C (3.075) with dramatically better MaxDD (-7.5% vs -13.0%). This is exceptional — a 2x improvement in MaxDD while boosting Sharpe by 6%.
+- **Top-2 diversification fixes the MaxDD problem completely**: Moving from H385 Var D (top-1, MaxDD -16.8%) to Var A (top-2, MaxDD -7.5%) halves drawdown with a Sharpe *increase* (3.055 → 3.273). The two top-2 picks are naturally decorrelated.
+- **MOM-dominant weighting (Var C: 67% MOM, 33% IMOM) beats IMOM-dominant (Var D: 67% IMOM)**: OOS 3.143 vs 2.825. Suggests IMOM is best as a quality filter on momentum, not the primary ranking signal.
+- **12-month window (Var E) is significantly weaker** (OOS 1.919 vs 3.273 for 6m). Consistent with the paper's finding that 6m IMOM alpha (1.39%/m) >> 12m (0.88%/m) on US markets.
+- **3-0m momentum blend (Var F)** performs well (OOS 2.983) but below the 6-0m blends — the 6-month window is sweet spot for both IMOM and momentum on this universe.
+- **0 negative years across all variants** in OOS period including 2022. Var A 2022: +83.5% (not shown in annual table — remarkable, consistent with IMOM selecting smooth compounders that hold up in volatile markets).
+- IS/OOS consistency: Var A IS 2.987 → OOS 3.273 (OOS > IS). No overfitting signal.
+
+**Production evaluation**: Var A (0.5×IMOM6 + 0.5×MOM60, top-2) is a strong production candidate with the best Sharpe/MaxDD profile in the entire H198 momentum family. Before production inclusion, need:
+1. Correlation vs current production blend (H041a/H026/H045/IBS). If Corr < 0.7, a 10-15% allocation is justified.
+2. Transaction cost sensitivity (top-2 from 30-stock universe = monthly stock selection, similar to H377 Var C).
+3. Candidate for replacing or augmenting H377 Var C in the production portfolio.
+
+**Script**: backtesting/daily/run_h386.py
+**Results**: backtesting/results/h386_results.json

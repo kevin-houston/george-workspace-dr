@@ -1,0 +1,135 @@
+{
+  "hypothesis": "H385",
+  "gate": {
+    "oos_sharpe": 1.174,
+    "max_drawdown": -0.3
+  },
+  "confirmed": true,
+  "confirmed_variants": [
+    "D"
+  ],
+  "results": {
+    "baseline_6_1_top1": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.509,
+        "maxdd": -0.41,
+        "cagr": 0.98,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 0.575,
+        "maxdd": -0.477,
+        "cagr": 0.222,
+        "neg_yrs": 2
+      }
+    },
+    "spy": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.105,
+        "maxdd": -0.194,
+        "cagr": 0.15,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 0.954,
+        "maxdd": -0.239,
+        "cagr": 0.146,
+        "neg_yrs": 1
+      }
+    },
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.218,
+        "maxdd": -0.226,
+        "cagr": 1.352,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.704,
+        "maxdd": -0.535,
+        "cagr": 0.841,
+        "neg_yrs": 1
+      },
+      "desc": "IMOM 6m top-1",
+      "pass_gate": false
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.362,
+        "maxdd": -0.337,
+        "cagr": 1.006,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.166,
+        "maxdd": -0.409,
+        "cagr": 0.781,
+        "neg_yrs": 1
+      },
+      "desc": "IMOM 6m top-2 EW",
+      "pass_gate": false
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.464,
+        "maxdd": -0.312,
+        "cagr": 0.829,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.258,
+        "maxdd": -0.313,
+        "cagr": 0.681,
+        "neg_yrs": 1
+      },
+      "desc": "IMOM 6m top-3 EW",
+      "pass_gate": false
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.357,
+        "maxdd": -0.226,
+        "cagr": 1.402,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.055,
+        "maxdd": -0.168,
+        "cagr": 1.181,
+        "neg_yrs": 0
+      },
+      "desc": "IMOM+MOM composite rank top-1",
+      "pass_gate": true
+    },
+    "var_E": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.383,
+        "maxdd": -0.226,
+        "cagr": 1.356,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.073,
+        "maxdd": -0.469,
+        "cagr": 0.91,
+        "neg_yrs": 0
+      },
+      "desc": "IMOM 6m top-1 + SPY 200MA",
+      "pass_gate": false
+    }
+  }
+}
