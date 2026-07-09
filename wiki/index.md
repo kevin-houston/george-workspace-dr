@@ -1,7 +1,7 @@
 ---
 updated: 2026-07-08
 sources_indexed: 4
-pages: 197
+pages: 199
 ---
 
 # Wiki Index
@@ -238,6 +238,8 @@ When answering a query:
 **Concepts**
 - [Impact Investing](concepts/impact-investing.md) — definition, key characteristics, risks, market context; distinguishes from SRI and philanthropy
 - [Three-Dimensional Portfolio Framework](concepts/three-dimensional-portfolio-framework.md) — Impact/Return/Risk triangle; extends MPT; target zone, aggregate comparison
+- [Impact Investing Market Landscape 2025](concepts/impact-investing-market-2025.md) — $1.57T AUM, 21% CAGR, pension funds 35% share (47%/yr), GIIN 2025 State of the Market; ESG 37% of new products; sector focus: financial inclusion, healthcare, housing, clean energy ← new 2026-07-08
+- [Impact Measurement Standards](concepts/impact-measurement-standards.md) — IRIS+ 2000+ metrics, Core Metrics Sets; IMP 5 dimensions (What/Who/How Much/Contribution/Risk); EU SFDR Art. 8/9, UK SDR labels; additionality challenge; analogs to quant backtesting rigor ← new 2026-07-08
 
 **People**
 - [Yasemin Saltuk](people/yasemin-saltuk.md) — J.P. Morgan Social Finance lead researcher; impact investing research series

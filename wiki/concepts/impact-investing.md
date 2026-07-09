@@ -74,3 +74,5 @@ Market was characterized as early-stage / field-building in 2012, with collabora
 - [A Portfolio Approach to Impact Investment (J.P. Morgan, 2012)](../sources/jpmorgan-portfolio-approach-impact-investment-2012.md) — primary source
 - [Three-Dimensional Portfolio Framework](three-dimensional-portfolio-framework.md) — the core analytical tool
 - [J.P. Morgan Social Finance](../orgs/jpmorgan-social-finance.md)
+- [Impact Investing Market Landscape 2025](impact-investing-market-2025.md) — $1.57T AUM, GIIN survey, institutional shift
+- [Impact Measurement Standards](impact-measurement-standards.md) — IRIS+, IMP 5 dimensions, regulatory frameworks
