@@ -640,3 +640,23 @@ context = f"[SOURCE: SEC EDGAR, filing_id={accession_number}, verified]"
 | 2604.19476 | 10-K semantic graph + LLM edge filter | High | H316 LLM pairs |
 | 2602.07048 | Granger + LLM semantic filter | Medium | H316, H319 |
 | 2605.27887 | PortBench portfolio allocation | High | H318 redesign |
+
+## Reproducibility Crisis in LLM Trading Research (arXiv:2605.19337)
+
+**Source**: Xia et al. (Mar 2026 review cutoff, 77 studies) — 'Agentic Trading: When LLM Agents Meet Financial Markets'
+**Scope**: Systematic audit of ALL published LLM trading agent studies through March 2026
+
+**Findings**:
+- 77 total studies reviewed; only **19/77 met minimum evaluation criteria**
+- Of the 19 qualifying studies:
+  - **2/19** report extractable time-consistent train/test split protocols
+  - **1/19** reports an explicit transaction-cost model
+  - **1/19** documents universe construction or survivorship handling
+  - **0/19** achieved R3 (full) reproducibility — none
+- Primary bottleneck: 'comparable evaluation protocols, execution semantics, and reproducible artifacts remain the field's immediate bottlenecks'
+
+**Implication for H274/H381/H382 (multi-agent PEAD / LLM alpha discovery)**:
+- This is empirical evidence that the Alpha Illusion checklist (H389) is NECESSARY, not paranoid
+- Any LLM trading hypothesis must satisfy ALL 7 shared-eval-checklist.md criteria before being counted as confirmed
+- The H174 PEAD pipeline (FinBERT on 8-Ks) passes this bar: time-consistent split (IS 2018-2022 / OOS 2023-2026), explicit $0 commission model (fractional shares), documented universe (S&P 500 8-K filers with earnings), and published in peer-reviewed JFQA (PEAD.txt precedent)
+- H381/H382/H384 LLM-generated alpha hypotheses should be flagged as 'unconfirmed until reproducibility protocol documented'

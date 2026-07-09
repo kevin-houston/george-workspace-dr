@@ -249,3 +249,47 @@ Pollok & Robik (2026) independently confirm end-to-end E2E policy learning on 16
 - [Regime Detection](regime-detection.md) — SJM/HMM explicit detection vs DeePM's implicit graph-prior approach
 - [Factor Models](factor-models.md) — MACD and Z-score features directly overlap with WQ101 alpha signal set
 - [Multi-Agent LLM Trading](multi-agent-llm-trading.md) — Macroeconomic Graph Prior = structured alternative to LLM-based agent coordination
+
+## H392 Candidate: Lightweight E2E Transformer for ETF Rotation
+
+**Based on**: arXiv:2607.00475 (Pollok & Robik 2026) + DeePM architecture principles
+
+**Design**: Replace H026's rank-1 momentum heuristic with a small Transformer trained end-to-end on differentiable Sharpe ratio loss.
+
+**Minimal viable architecture for N=25 ETF universe**:
+```python
+import torch, torch.nn as nn
+
+class ETFPolicyNet(nn.Module):
+    def __init__(self, n_assets=25, n_features=8, d_model=32, n_heads=4, n_layers=2):
+        super().__init__()
+        self.embed = nn.Linear(n_features, d_model)
+        encoder_layer = nn.TransformerEncoderLayer(
+            d_model=d_model, nhead=n_heads, dim_feedforward=64,
+            dropout=0.1, batch_first=True
+        )
+        self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=n_layers)
+        self.out = nn.Linear(d_model, 1)
+
+    def forward(self, x):  # x: (batch, n_assets, n_features)
+        h = self.transformer(self.embed(x))  # (batch, n_assets, d_model)
+        logits = self.out(h).squeeze(-1)     # (batch, n_assets)
+        return torch.softmax(logits, dim=-1) # (batch, n_assets) — long-only weights
+
+def sharpe_loss(returns):  # returns: (batch,) portfolio returns
+    return -(returns.mean() / (returns.std() + 1e-6)) * torch.sqrt(torch.tensor(12.0))
+```
+
+**Features per asset** (8 features, monthly):
+1. Vol-norm 1m return: R_{i,t}^{(1)} / σ_{i,t}
+2. Vol-norm 3m return: R_{i,t}^{(3)} / σ_{i,t}
+3. Vol-norm 6m return: R_{i,t}^{(6)} / σ_{i,t}
+4. Vol-norm 12m return: R_{i,t}^{(12)} / σ_{i,t}
+5. MACD (1m/3m): (EWM_1 - EWM_3) / σ
+6. MACD (3m/12m): (EWM_3 - EWM_12) / σ
+7. Z-score 6m rolling
+8. Ex-ante vol (3m EWMA)
+
+**IS/OOS split**: 2004–2017 IS (same as H026), 2018–2026 OOS
+**Gate**: OOS Sharpe > 1.200 (H026 baseline) AND Max Drawdown < -3.60%
+**Hypothesis number**: H392 (proposed, not yet run)

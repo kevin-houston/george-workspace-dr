@@ -651,3 +651,25 @@ The skip-month convention should be re-tested across all H-series stock strategi
 4. Short-selling losers (H243 NOT CONFIRMED) is consistent with these findings
 
 **Validation**: Confirms H198 6-1m long-only (OOS 1.174) and H376's 6-0m finding (OOS 3.120) are real effects, not artifacts.
+
+## Microstructural Headwinds for Short-Term Momentum (arXiv:2607.01550)
+
+**Source**: Kurth, Eisler, Rej, Bouchaud (CFM, Jul 2026) — 'Is Trend Still Your Friend?: A Microstructural Account of the Demise of Short-Term Trend-Following'
+
+**Key findings** (100 liquid futures, 1995–2025):
+- Short-term trend P&L has **structurally collapsed** on small-tick (electronified) contracts post-2009
+- Performance **remains intact** on large-tick futures (less fragmented limit-order books)
+- Mechanism: HFT-dominated market making withdraws depth on predictable directional flow → the self-reinforcing momentum feedback loop breaks
+- Critical variable: **volatility-normalized tick size** — the single microstructural factor distinguishing surviving from collapsed momentum
+
+**Implications for H198 family (6-1m stock momentum)**:
+- H198 runs on large-cap NASDAQ stocks (electronified, small tick). This microstructural headwind is real.
+- The Order Block (OB) filter in H343/H344/H386 implicitly addresses this: OB entries only when price is leaving consolidation zones with volume confirmation — avoids thin, HFT-dominated phases.
+- H376/H386 6-0m no-skip showing OOS 3.120/3.273 does NOT contradict this finding — no-skip works at the monthly rebalancing horizon where the microstructural effect is less dominant.
+
+**Implication for ETF rotation (H026/H041a)**:
+- ETFs trade as large-block instruments via creation/redemption; less HFT-fragmented than individual stocks
+- Monthly rebalancing avoids the sub-day microstructural breakdown
+- Consistent with H026 OOS Sharpe remaining strong (2.610–3.238 with OB filter)
+
+**Bottom line**: Momentum is alive at monthly rebalancing horizons on liquid multi-asset universes. The structural break affects high-frequency, small-tick, intraday trend strategies. Not a production risk for the H026/H041a/H045 monthly rotation pipeline.

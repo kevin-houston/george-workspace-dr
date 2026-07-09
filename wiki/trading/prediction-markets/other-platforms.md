@@ -204,3 +204,32 @@ opportunities = arb_scanner.scan(min_edge=0.02)  # 2% minimum edge
 **Use case for George:** Cross-platform arb scanner to find the same question priced
 differently on Kalshi vs Polymarket. Historically, pricing gaps of 2-5% exist on
 non-trivial markets with lower liquidity. pmxt automates the discovery layer.
+
+## Open Datasets & Unified APIs (2026)
+
+### prediction-market-analysis (github.com/Jon-Becker/prediction-market-analysis)
+
+- **Stars**: 2.3K
+- **Dataset size**: 36GB historical data
+- **Coverage**: Both Polymarket AND Kalshi — largest public PM dataset as of 2026
+- **Granularity**: Minute-level price time series + complete order books + resolution data
+- **Format**: Parquet with DuckDB interface (fast querying without loading full 36GB into RAM)
+- **Included notebooks**: Calibration curves, Brier score analysis, market efficiency testing
+- **Use case**: Backtesting PM strategies, calibration research, liquidity analysis
+- **Relevance**: Directly enables H185 Kalshi nowcasting strategy validation with historical fill data
+
+```python
+import duckdb
+# Query without loading 36GB into RAM
+conn = duckdb.connect()
+df = conn.execute("SELECT * FROM read_parquet('kalshi/*.parquet') WHERE market_slug LIKE '%CPI%'").df()
+```
+
+### pmxt — Unified Prediction Market API (github.com/pmxt-dev/pmxt)
+
+- **Stars**: 1.2K
+- **Coverage**: Polymarket, Kalshi, Limitless, Myriad via single interface
+- **Features**: Standardized order types, cross-platform market discovery, portfolio aggregation, webhook notifications
+- **Use case**: Cross-platform arbitrage scanner; single codebase for PM automated pipeline
+- **Install**: `pip install pmxt`
+- **Relevance**: Replaces per-platform Kalshi/Polymarket auth boilerplate in automated-pipeline.md

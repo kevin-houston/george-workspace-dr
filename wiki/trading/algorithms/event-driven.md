@@ -607,3 +607,27 @@ def attribution_score(text: str) -> float:
 - attribution_score > 0 (internal attribution in positive release)
 
 **Expected effect**: Reduces trade count; improves WR. Gate: WR > 81.8% baseline.
+
+## Signal Timing: Fast Numbers vs Slow Language (arXiv:2606.29734)
+
+**Source**: Yu, Liu, Zhang, He (Jun 2026) — 'Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals'
+**Dataset**: EarningsInOne corpus — S&P 1500 companies, 2022–2025, aligning press releases, conference call transcripts, intraday + next-day prices
+
+**Clean speed separation finding**:
+
+| Signal type | When processed | Tradeable window |
+|-------------|----------------|------------------|
+| EPS/revenue surprise (quantitative) | T=0 announcement, minutes | Essentially zero by open next day |
+| Management tone, guidance, Q&A credibility (qualitative) | ECT call 30–90 min post-announcement | Peaks T+1, remains tradeable |
+
+**Implication for H174 (FinBERT on 8-K filings)**:
+- 8-Ks filed after market close contain BOTH quantitative EPS tables AND qualitative management language
+- Our T+1 OPG entry is **correctly calibrated** — it captures the qualitative drift window, not the instantly-arbed quantitative surprise
+- The `surprise ≥ 0.02` filter in H174 uses EPS surprise as a QUALITY GATE (ensures event materiality), not as a tradeable signal per se — this is validated
+- `score ≥ 0.18` FinBERT filter captures the qualitative tone signal — the durable edge
+
+**H391 candidate** (proposed, not yet run):
+- Add Q&A credibility dimension to scoring: management responses to analyst questions carry additional signal (evasiveness, hedging language, tone shifts under questioning)
+- EarningsInOne dataset provides aligned ECT + intraday data; code available at GitHub linked in submission
+- Would complement H174 without changing entry timing (Q&A text arrives in same 8-K or via transcript APIs)
+- Risk: adds complexity; H174 at WR=81.8% is already strong. Only pursue if H174 paper trade degrades.
