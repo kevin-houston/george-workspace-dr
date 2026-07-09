@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-08
+updated: 2026-07-09
 sources_indexed: 4
-pages: 199
+pages: 200
 ---
 
 # Wiki Index
@@ -91,6 +91,7 @@ When answering a query:
 - [Hyper-Extract](tools/hyper-extract-notes.md) — LLM→structured knowledge extraction; 8 formats (KG, hypergraph, temporal graph, Pydantic); 80+ YAML templates incl. Finance; MCP server; Claude-native (sonnet-4-6); `pip install hyper-extract`; ~2.5k stars ← new 2026-06-26
 - [QuantMind](tools/quant-mind-notes.md) — finance-domain knowledge extraction + retrieval; ingests arXiv/news/SEC filings → semantic knowledge graph; RAG + deep research + NL queries; MIT, 1.7k stars; complements Hyper-Extract (retrieval-first vs. structure-first) ← new 2026-07-04
 - [Hitchhiker's Guide to Agentic AI](tools/hitchhikers-guide-agentic-ai.md) — practitioner survey (arXiv:2606.24937, Roitman 2026); 5-layer stack: LLM foundations → alignment → agentic systems → multi-agent (MCP/A2A) → production; impl guidance + code examples; ref for H274 multi-agent design, H319 RAG, MCP topology ← new 2026-06-26
+- [Bilevel Autoresearch](concepts/bilevel-autoresearch.md) — meta-autoresearch: outer LLM loop generates/injects Python search mechanisms into inner loop; 5× val_bpb improvement vs inner loop alone (Qu & Lu, arXiv:2603.23420); Level 1.5 param steering adds no gain — mechanism injection does; LLM-prior bias explained; mechanism carrier concept (code/skills/prompts/memory); directly relevant to dream cycle hypothesis generation and H381/H274 ← new 2026-07-09
 - [birdclaw](tools/birdclaw.md) — local-first Twitter/X workspace; SQLite archive of tweets/DMs/likes/bookmarks; AI-ranked inbox (OpenAI); full-text search FTS5; CLI + local web app; MIT; brew install; active dev/schema churn ← new 2026-06-22
 - [hermes-gpt](tools/hermes-gpt.md) — local MCP sidecar bridging ChatGPT to Hermes Agent's local tool stack (memory, skills, files); no context stuffing → Codex quota preserved; v0.1.0 read-only by default; write/terminal opt-in ← new 2026-06-22
 - [awesome-codex-subagents](tools/awesome-codex-subagents.md) — 166+ specialized Codex subagents in .toml format; 13 categories; 5.2k stars MIT; quant-analyst agent has strong backtest review checklist (lookahead bias, OOS robustness, execution assumptions); Codex-specific but pattern transferable ← new 2026-06-22

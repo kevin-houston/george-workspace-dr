@@ -592,3 +592,9 @@ Fixes: (1) deepm-regime-portfolio.md added to index (created 2026-07-07, orphane
 
 ## [2026-07-08] ingest | ZVT (github.com/zvtvz/zvt)
 Pages created: 1 (trading/tools/zvt.md). Pages updated: 1 (index.md). Key entities: ZVT Python quant platform, China A-shares (EastMoney/JoinQuant/Sina), ML machine, factor pipeline. Cross-refs: auto-alpha-discovery.md (H382 analog), quantdinger-notes.md.
+
+## 2026-07-09 | ingest | Bilevel Autoresearch (arXiv:2603.23420)
+Pages created: 1 (concepts/bilevel-autoresearch.md). Pages updated: 1 (index.md).
+Key entities: Qu & Lu (independent researchers); Karpathy autoresearch (inner loop foundation); DeepSeek-chat (LLM used).
+Key concepts: bilevel LLM loop, mechanism injection, LLM prior bias, mechanism carriers (code/skills/prompts/memory).
+Cross-refs: multi-agent-llm-trading.md, auto-alpha-discovery.md, atlas-gic.md, llm-alpha-validation.md.
