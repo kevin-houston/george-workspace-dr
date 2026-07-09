@@ -1,0 +1,149 @@
+{
+  "scan_date": "2026-07-09",
+  "scanner": "George (claude-sonnet-4-6)",
+  "angles_searched": [
+    "arxiv: pairs trading + cointegration + LLM",
+    "arxiv: PEAD + post-earnings drift + text signals",
+    "arxiv: cross-sectional momentum + factor momentum",
+    "arxiv: multi-agent LLM trading systems",
+    "github: trending quantitative finance repos"
+  ],
+  "papers_reviewed": [
+    {
+      "id": "2607.01550",
+      "title": "Is Trend Still Your Friend?: A Microstructural Account of the Demise of Short-Term Trend-Following",
+      "authors": "Kurth, Eisler, Rej, Bouchaud (CFM)",
+      "relevance": "HIGH",
+      "summary": "100 liquid futures 1995-2025; short-term trend P&L collapsed on small-tick (electronified) contracts post-2009 but remains intact on large-tick ones. HFT market-making withdrawal is the mechanism. Validates OB filter approach and monthly ETF rotation pipeline.",
+      "staged": true,
+      "staged_file": "1_trend_demise_microstructure.json"
+    },
+    {
+      "id": "2606.29734",
+      "title": "Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals",
+      "authors": "Yu, Liu, Zhang, He",
+      "relevance": "HIGH",
+      "summary": "EarningsInOne corpus S&P 1500 2022-2025. Quantitative EPS surprise arbed away in minutes; qualitative transcript signals peak T+1 and remain tradeable. Directly validates H174 T+1 entry timing. Q&A credibility is an untapped signal layer (H391 candidate).",
+      "staged": true,
+      "staged_file": "2_fast_numbers_slow_language_pead_timing.json"
+    },
+    {
+      "id": "2607.00475",
+      "title": "End-to-End Parametric Portfolio Policies for Cross-Asset Futures Timing",
+      "authors": "Pollok, Robik",
+      "relevance": "HIGH",
+      "summary": "E2E differentiable Sharpe on 16 CME futures. Transformer > LSTM at lower turnover after costs; matches or beats equal-weight. Validates DeePM approach independently. Directly applicable to H026 ETF rotation as lightweight H392 candidate.",
+      "staged": true,
+      "staged_file": "5_e2e_parametric_policy_H392_stub.json"
+    },
+    {
+      "id": "2605.19337",
+      "title": "Agentic Trading: When LLM Agents Meet Financial Markets",
+      "authors": "Xia et al.",
+      "relevance": "HIGH",
+      "summary": "Systematic review 77 LLM trading studies through March 2026. Reproducibility crisis: only 2/19 qualifying studies have time-consistent splits, 1/19 has transaction cost model. 0/19 achieve R3 reproducibility. Validates Alpha Illusion checklist (H389).",
+      "staged": true,
+      "staged_file": "4_agentic_trading_reproducibility_crisis.json"
+    },
+    {
+      "id": "2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading",
+      "authors": "Yimin Du",
+      "relevance": "MEDIUM",
+      "summary": "Chinese A-share specific. Mask-first design for price-limit contamination. 213-factor GPU engine, Sharpe 2.05 synthetic / 1.63 A-shares. US equity relevance limited — price limits don't apply. Technique of 'mask contract' is transferable to any survivorship bias check.",
+      "staged": false,
+      "note": "A-share specific, not staged. The mask-first technique is a general backtesting discipline already covered in survivorship-bias.md"
+    },
+    {
+      "id": "2605.19337-review",
+      "title": "Agentic Trading systematic review: architecture taxonomy",
+      "authors": "Xia et al.",
+      "relevance": "MEDIUM",
+      "summary": "Proposes Architecture-Capability-Adaptation lens for LLM trading agents. Not a validated framework, but useful scaffold for categorizing H274/H381/H382/H383/H384.",
+      "staged": false,
+      "note": "Subsumed in staged proposal 4"
+    },
+    {
+      "id": "2607.05291",
+      "title": "Forecasting Realized Volatility with Time Series Foundation Models",
+      "authors": "Alessio Brini",
+      "relevance": "MEDIUM",
+      "summary": "Evaluates Chronos/TimesFM/Moirai on realized volatility forecasting. Not reviewed in depth today — already have ts-foundation-models.md. Queue for future expansion if vol forecasting becomes production need.",
+      "staged": false,
+      "note": "Low priority given existing ts-foundation-models.md coverage"
+    }
+  ],
+  "repos_reviewed": [
+    {
+      "url": "https://github.com/Jon-Becker/prediction-market-analysis",
+      "stars": 2300,
+      "relevance": "HIGH",
+      "summary": "36GB Polymarket+Kalshi historical data. Parquet+DuckDB. Pre-built calibration/Brier notebooks.",
+      "staged": true,
+      "staged_file": "3_prediction_market_dataset_github.json"
+    },
+    {
+      "url": "https://github.com/pmxt-dev/pmxt",
+      "stars": 1200,
+      "relevance": "MEDIUM-HIGH",
+      "summary": "Unified PM API: Polymarket, Kalshi, Limitless, Myriad. pip install pmxt. Relevant to automated-pipeline.md.",
+      "staged": true,
+      "staged_file": "3_prediction_market_dataset_github.json",
+      "note": "Included in same proposal as prediction-market-analysis"
+    },
+    {
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "stars": 9300,
+      "relevance": "MEDIUM",
+      "summary": "Multi-agent LLM framework simulating trading firm. 5 specialized agents + LangGraph orchestration. Already covered architecturally in multi-agent-llm-trading.md.",
+      "staged": false,
+      "note": "Architecture already documented. Not a new approach relative to H274/H381/H382 designs. Would add to tools section if needed."
+    },
+    {
+      "url": "https://github.com/PlaceNL2026/best-of-algorithmic-trading",
+      "stars": null,
+      "relevance": "LOW",
+      "summary": "Curated list 109 projects 310K combined stars. No new momentum/PEAD/LLM-specific tools. Freqtrade, Hummingbot, Lean already known. No direct production relevance.",
+      "staged": false
+    },
+    {
+      "url": "https://github.com/virattt/ai-hedge-fund",
+      "stars": 49600,
+      "relevance": "LOW",
+      "summary": "49.6K stars multi-agent hedge fund simulation. Educational/demo project. Yahoo Finance backend, no live trading. Not production-relevant.",
+      "staged": false
+    }
+  ],
+  "high_relevance_count": 4,
+  "staged_count": 5,
+  "hypothesis_stubs": [
+    {
+      "id": "H391",
+      "description": "PEAD Q&A credibility scoring — add conference call Q&A tone analysis to H174 FinBERT pipeline using EarningsInOne framework",
+      "source": "arXiv:2606.29734",
+      "status": "proposed"
+    },
+    {
+      "id": "H392",
+      "description": "E2E Transformer portfolio policy for ETF rotation (H026 universe) — differentiable Sharpe loss, no rank-1 heuristic",
+      "source": "arXiv:2607.00475 + arXiv:2601.05975",
+      "status": "stub"
+    }
+  ],
+  "wiki_expansion": {
+    "page": "deepm-regime-portfolio.md",
+    "lines_before": 54,
+    "lines_after": 220,
+    "key_additions": [
+      "Full performance benchmark table (Net Sharpe 0.93 vs TSMOM 0.45 vs MT 0.66)",
+      "Complete architecture spec (V-VSN, LSTM, Causal MHA, GAT)",
+      "Feature engineering table (MACD scales, Z-score windows, vol-norm returns)",
+      "Transaction cost model and optimal gamma=0.5 finding",
+      "Ablation study results (SoftMin = #1 driver; GAT = 21% MaxDD reduction)",
+      "Full installation guide from GitHub README",
+      "ETF adaptation table for H318/H249",
+      "H392 lightweight E2E transformer code stub",
+      "Cross-reference to concurrent arXiv:2607.00475"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "agentic-trading-reproducibility-crisis-2605.19337",
+  "date": "2026-07-09",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2605.19337",
+  "title": "Add LLM agentic trading reproducibility crisis findings to multi-agent-llm-trading.md and llm-alpha-validation.md",
+  "rationale": "arXiv:2605.19337 'Agentic Trading: When LLM Agents Meet Financial Markets' (Xia et al., systematic review through March 2026, 77 studies) finds a severe reproducibility crisis in LLM trading research. Only 19/77 studies met minimum evaluation criteria. Of those 19: only 2 report extractable time-consistent split protocols, only 1 reports an explicit transaction-cost model, only 1 documents universe/survivorship handling. NO studies achieved R3 reproducibility. This directly validates the Alpha Illusion checklist (H389/llm-alpha-validation.md) and strengthens the shared-eval-checklist.md case for requiring all 7 criteria. Should be noted in multi-agent-llm-trading.md as context for H274/H381/H382 evaluation discipline and in llm-alpha-validation.md as empirical evidence for the checklist's importance.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md",
+  "content": "## Reproducibility Crisis in LLM Trading Research (arXiv:2605.19337)\n\n**Source**: Xia et al. (Mar 2026 review cutoff, 77 studies) — 'Agentic Trading: When LLM Agents Meet Financial Markets'\n**Scope**: Systematic audit of ALL published LLM trading agent studies through March 2026\n\n**Findings**:\n- 77 total studies reviewed; only **19/77 met minimum evaluation criteria**\n- Of the 19 qualifying studies:\n  - **2/19** report extractable time-consistent train/test split protocols\n  - **1/19** reports an explicit transaction-cost model\n  - **1/19** documents universe construction or survivorship handling\n  - **0/19** achieved R3 (full) reproducibility — none\n- Primary bottleneck: 'comparable evaluation protocols, execution semantics, and reproducible artifacts remain the field's immediate bottlenecks'\n\n**Implication for H274/H381/H382 (multi-agent PEAD / LLM alpha discovery)**:\n- This is empirical evidence that the Alpha Illusion checklist (H389) is NECESSARY, not paranoid\n- Any LLM trading hypothesis must satisfy ALL 7 shared-eval-checklist.md criteria before being counted as confirmed\n- The H174 PEAD pipeline (FinBERT on 8-Ks) passes this bar: time-consistent split (IS 2018-2022 / OOS 2023-2026), explicit $0 commission model (fractional shares), documented universe (S&P 500 8-K filers with earnings), and published in peer-reviewed JFQA (PEAD.txt precedent)\n- H381/H382/H384 LLM-generated alpha hypotheses should be flagged as 'unconfirmed until reproducibility protocol documented'\n",
+  "action": "append",
+  "apply_status": "pending"
+}

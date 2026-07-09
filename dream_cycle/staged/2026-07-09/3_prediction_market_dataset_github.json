@@ -1,0 +1,14 @@
+{
+  "id": "prediction-market-analysis-dataset-github",
+  "date": "2026-07-09",
+  "source": "repo",
+  "source_url": "https://github.com/Jon-Becker/prediction-market-analysis",
+  "title": "Add prediction-market-analysis (36GB Kalshi/Polymarket dataset) to prediction markets wiki",
+  "rationale": "GitHub repo prediction-market-analysis (Jon-Becker, 2.3K stars) provides the largest public prediction market dataset: 36GB of historical data from both Polymarket AND Kalshi, cleaned and ready for analysis. Minute-level granularity, complete order books, resolution data, Parquet format with DuckDB interface. Pre-built analysis notebooks for calibration curves, Brier score analysis, and market efficiency testing. This is directly relevant to H185 (nowcasting + prediction markets pipeline) and the Superforecasting methods page. Should be added to prediction-markets/other-platforms.md or create new data source page. Also noted: pmxt (github.com/pmxt-dev/pmxt, 1.2K stars) provides unified API across Polymarket, Kalshi, Limitless, Myriad — relevant to automated-pipeline.md.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/prediction-markets/other-platforms.md",
+  "content": "## Open Datasets & Unified APIs (2026)\n\n### prediction-market-analysis (github.com/Jon-Becker/prediction-market-analysis)\n\n- **Stars**: 2.3K\n- **Dataset size**: 36GB historical data\n- **Coverage**: Both Polymarket AND Kalshi — largest public PM dataset as of 2026\n- **Granularity**: Minute-level price time series + complete order books + resolution data\n- **Format**: Parquet with DuckDB interface (fast querying without loading full 36GB into RAM)\n- **Included notebooks**: Calibration curves, Brier score analysis, market efficiency testing\n- **Use case**: Backtesting PM strategies, calibration research, liquidity analysis\n- **Relevance**: Directly enables H185 Kalshi nowcasting strategy validation with historical fill data\n\n```python\nimport duckdb\n# Query without loading 36GB into RAM\nconn = duckdb.connect()\ndf = conn.execute(\"SELECT * FROM read_parquet('kalshi/*.parquet') WHERE market_slug LIKE '%CPI%'\").df()\n```\n\n### pmxt — Unified Prediction Market API (github.com/pmxt-dev/pmxt)\n\n- **Stars**: 1.2K\n- **Coverage**: Polymarket, Kalshi, Limitless, Myriad via single interface\n- **Features**: Standardized order types, cross-platform market discovery, portfolio aggregation, webhook notifications\n- **Use case**: Cross-platform arbitrage scanner; single codebase for PM automated pipeline\n- **Install**: `pip install pmxt`\n- **Relevance**: Replaces per-platform Kalshi/Polymarket auth boilerplate in automated-pipeline.md\n",
+  "action": "append",
+  "apply_status": "pending"
+}
