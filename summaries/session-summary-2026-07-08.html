@@ -77,7 +77,7 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
     <div>
       <div class="header-title">Session Summary &mdash; 2026-07-08</div>
     </div>
-    <div class="header-sub">Generated 2026-07-08 04:04 CT</div>
+    <div class="header-sub">Generated 2026-07-09 05:08 CT</div>
   </div>
   <div class="main">
     
@@ -87,9 +87,9 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
       <div class="kpi"><div class="kpi-label">Flagged</div>
         <div class="kpi-value muted">0</div></div>
       <div class="kpi"><div class="kpi-label">Commits</div>
-        <div class="kpi-value blue">7</div></div>
+        <div class="kpi-value blue">15</div></div>
       <div class="kpi"><div class="kpi-label">Podcast</div>
-        <div class="kpi-value muted">—</div></div>
+        <div class="kpi-value green">✓</div></div>
     </div>
     
     <div class="card">
@@ -106,17 +106,63 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
               </div>
               <div class="proposal-rationale">H198 30-stock large-cap universe matches the paper's US large-cap confirmation exactly. Zero cost — same monthly OHLCV data already used for H198/H377. IMOM is mechanically orthogonal to H377: H377 ranks on geometric compound return (MOM); H385 ranks on how much MOM exceeds SUM. They can co-vary (bo…</div>
               <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wasserstein HMM Explainable Regime-Aware Portfolio Allocation on SPY/TLT/GLD</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Boukardagha (2026) arXiv:2603.04441 reports Sharpe 2.18 vs 1.59 equal-weight on a diversified daily cross-asset universe, with MaxDD of -5.43% vs -14.62% for SPY buy-and-hold. The model dynamically reduced equity exposure during the early 2025 'Liberation Day' selloff, validating real-world regime d…</div>
+              <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">PEAD Revived: Elastic Net on 12-Quarter SUE History as H174 Pre-Filter</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Kaczmarek &amp; Zaremba (Finance Research Letters, 2025, DOI:10.1016/j.frl.2025.108751) find that elastic net on 12-quarter SUE history nearly doubles Sharpe ratios vs single-quarter SUE. Gains are especially strong for large-cap stocks — exactly our H174 universe. The 12-quarter look-back means structu…</div>
+              <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Alpha Illusion — LLM Trading Agent Validation Checklist (arXiv:2605.16895)</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">The Alpha Illusion paper documents that LLM trading agent Sharpe ratios reported in literature (often &gt;2.0) routinely fail one or more of these 6 tests when examined carefully. This is directly relevant to our pipeline: H381/H382/H384 all use LLM-generated factors; H274 uses multi-agent debate. With…</div>
+              <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">OpenFinGym Multi-Task Quant Agent Evaluation on H026/H174 Tasks</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">OpenFinGym (arXiv:2606.26350, June 2026) addresses the fragmented evaluation problem in LLM quant agents — existing platforms test single tasks and overstate competence. Encoding our confirmed strategies into OpenFinGym serves two purposes: (1) validation — independent verification that H026 and H17…</div>
+              <div class="proposal-target"></div>
             </div></div>
     </div>
     
     <div class="card">
       <div class="card-header">
         <span class="card-title">Commits</span>
-        <span class="card-badge">7 today</span>
+        <span class="card-badge">15 today</span>
       </div>
-      <div class="card-body"><div class="commit"><span class="commit-hash">d32c373</span><span class="commit-msg">dream cycle: apply 2026-07-08 staged proposals (H380, H381, H382, H383, H384, H385)</span></div><div class="commit"><span class="commit-hash">2ef4a6a</span><span class="commit-msg">dream cycle: apply 2026-07-08 staged proposals (H385)</span></div><div class="commit"><span class="commit-hash">03fc5f6</span><span class="commit-msg">fix H385 staged proposal: correct IMOM formula (MOM-SUM not SUM-MOM), add decay warning + provenance note</span></div><div class="commit"><span class="commit-hash">6fe220a</span><span class="commit-msg">wiki lint 2026-07-08: fix 3 index gaps (DeePM page, auto-alpha H380-H384 entry, research log 2026-07-08)</span></div><div class="commit"><span class="commit-hash">5e6d14c</span><span class="commit-msg">nightly research 2026-07-08: H385 Illusion Momentum staged (Iwanaga &amp; Hirose PBFJ 2026)</span></div><div class="commit"><span class="commit-hash">208bc12</span><span class="commit-msg">dream cycle 2026-07-07: wiki expansion + apply H380-H384 staged proposals</span></div><div class="commit"><span class="commit-hash">6d7a703</span><span class="commit-msg">nightly backup 2026-07-08</span></div></div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">bb015b6</span><span class="commit-msg">dream cycle 2026-07-08: wiki expansion (Impact Investing) + 4 staged proposals</span></div><div class="commit"><span class="commit-hash">9276e2e</span><span class="commit-msg">nightly research 2026-07-08: Wasserstein HMM regime (2603.04441), PEAD ML-SUE (Kaczmarek/Zaremba 2025), Alpha Illusion checklist (2605.16895), OpenFinGym benchmark (2606.26350)</span></div><div class="commit"><span class="commit-hash">871e78e</span><span class="commit-msg">research: H385+H386 Illusion Momentum on H198 — new best Sharpe/MaxDD in momentum family</span></div><div class="commit"><span class="commit-hash">9c533df</span><span class="commit-msg">paper trading reset 2026-07-08: all strategies back to $5k, Alpaca positions closed, trade logs archived</span></div><div class="commit"><span class="commit-hash">2a0a9af</span><span class="commit-msg">fix strategy_equity: open_buy accumulates positions (not overwrite); add partial_sell; h112_monthly uses partial_sell for trims vs close_sell for full symbol switches</span></div><div class="commit"><span class="commit-hash">106d4f0</span><span class="commit-msg">wiki ingest 2026-07-08: ZVT Python quant platform (China A-shares, factor pipeline, ML machine)</span></div><div class="commit"><span class="commit-hash">e64f3a6</span><span class="commit-msg">nightly backup 2026-07-08</span></div><div class="commit"><span class="commit-hash">ff0c40b</span><span class="commit-msg">podcast: AI daily script for Wednesday July 08 2026</span></div><div class="commit"><span class="commit-hash">d32c373</span><span class="commit-msg">dream cycle: apply 2026-07-08 staged proposals (H380, H381, H382, H383, H384, H385)</span></div><div class="commit"><span class="commit-hash">2ef4a6a</span><span class="commit-msg">dream cycle: apply 2026-07-08 staged proposals (H385)</span></div><div class="commit"><span class="commit-hash">03fc5f6</span><span class="commit-msg">fix H385 staged proposal: correct IMOM formula (MOM-SUM not SUM-MOM), add decay warning + provenance note</span></div><div class="commit"><span class="commit-hash">6fe220a</span><span class="commit-msg">wiki lint 2026-07-08: fix 3 index gaps (DeePM page, auto-alpha H380-H384 entry, research log 2026-07-08)</span></div><div class="commit"><span class="commit-hash">5e6d14c</span><span class="commit-msg">nightly research 2026-07-08: H385 Illusion Momentum staged (Iwanaga &amp; Hirose PBFJ 2026)</span></div><div class="commit"><span class="commit-hash">208bc12</span><span class="commit-msg">dream cycle 2026-07-07: wiki expansion + apply H380-H384 staged proposals</span></div><div class="commit"><span class="commit-hash">6d7a703</span><span class="commit-msg">nightly backup 2026-07-08</span></div></div>
     </div>
     
+        <div class="card">
+          <div class="card-header"><span class="card-title">AI Podcast</span></div>
+          <div class="card-body">
+            <div class="podcast-pill">
+              <span class="podcast-dot"></span>
+              <span>Daily AI Insights — July 8, 2026</span>
+              <span style="color:var(--muted)">2,057 words</span>
+            </div>
+          </div>
+        </div>
     
   </div>
 </body>
