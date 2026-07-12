@@ -800,3 +800,36 @@ def quarter_kelly(edge, odds, max_fraction=0.1):
 - 10 personas: 7,000 tokens per CPI release
 - Cost: 7k × $0.000150/1k input + 2k × $0.000600/1k output ≈ $0.03/release
 - Annual (12 CPI releases): ~$0.36 — effectively free
+
+
+## Structural Volatility in Binary Prediction Markets (arXiv:2607.08199)
+
+**Source**: Xi, Moallemi, Pai, Want (Jul 2026) — 'Volatility in Prediction Markets: A Structural Approach'
+**Data**: Large Kalshi panel across multiple contract categories
+
+**Model components:**
+
+1. **Wright-Fisher deadline-resolution component**: Binary uncertainty must resolve to 0 or 1 by deadline. This forces variance to grow as contracts approach resolution — a structural necessity, not noise. Near resolution, ANY remaining uncertainty = concentrated volatility.
+
+2. **Glosten-Milgrom order-flow component**: Informed traders create volatility proportional to their information advantage, reflected in bid-ask spreads and volume. Analogous to Kyle's λ in equity markets.
+
+**Empirical results on Kalshi panel:**
+- Structural model dominates plain ARCH/GARCH benchmarks
+- Structural + residual GARCH hybrid gives best overall forecasts
+- **Volatility is highest near p=0.50 and near resolution deadline**
+- Category differences:
+  - Economics contracts (CPI, NFP): smooth deadline-resolution dynamics — predictable volatility curve
+  - Sports contracts: event-concentrated, jump-like — discrete news arrivals dominate
+
+**Practical implications for H185 (Kalshi nowcasting pipeline):**
+
+| Rule | Rationale |
+|------|----------|
+| Enter positions when contract price is away from 50/50 (e.g., >65% or <35%) | Lower volatility → tighter spreads → better fills |
+| Avoid new entries within 24h of resolution | Volatility peaks near deadline → spread widens → fill quality degrades |
+| Classify contract category before sizing | Economics contracts: use CPI/NFP model outputs directly. Sports: don't use structured data models |
+| Use Wright-Fisher scaling for Kelly sizing | k_t = k_base × (p - 0.5)² / σ_WF(t) — scale down as vol rises near resolution |
+| Monitor spread as vol proxy | When Glosten-Milgrom spread widens (informed trading active), reduce position until spread normalizes |
+
+**Spread interpretation (from Glosten-Milgrom component):**
+Wider spread near resolution = informed traders are active = position in the direction of order flow, not against it. This is the OPPOSITE of market-making — as a directional bettor, follow the spread-widening signal, not fade it.

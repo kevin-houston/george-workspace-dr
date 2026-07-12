@@ -658,3 +658,57 @@ Two 2026 papers extend the alpha mining paradigm to handle the non-stationarity 
 ### H384 — ReCAP Continual Learning on H026 (arXiv:2606.00143)
 
 Regime-Adaptive Continual Portfolio management: change-point detection → per-regime DRL policy → policy library → rapid fine-tuning when new regime detected. Avoids catastrophic forgetting of prior regime knowledge. Risk-level HIGH — requires PyTorch + ruptures + SB3 + careful OOS discipline (filtered not smoothed HMM probabilities). See full design in staged proposal H384.
+
+
+## MadEvolve: Evolutionary LLM Strategy Optimization (arXiv:2605.23007)
+
+**Source**: Kvasiuk, Li, Colegrove, Münchmeyer (May 2026) — 'MadEvolve: Evolutionary Optimization of Trading Systems with Large Language Models'
+**Inspired by**: DeepMind's AlphaEvolve (2025)
+
+**Architecture:**
+- **Outer loop (LLM code generation)**: LLM generates or mutates candidate trading strategy code (Python)
+- **Inner loop (automated evaluation)**: Backtester scores each candidate on Sharpe/profit metrics
+- **Evolution**: High-scoring candidates retained; used as seeds for next LLM generation cycle
+- **Multi-objective**: jointly evolves (a) feature set, (b) signal generation, (c) execution strategy
+
+**Key results on Bitcoin trading:**
+- Significant improvements on all subtasks: feature evolution, component optimization, joint evolution
+- Outperforms standalone Claude Code (agentic search baseline) on most tasks
+- P-hacking probability rigorously evaluated; results hold under Bonferroni correction
+
+**Comparison to existing H-series approaches:**
+| Approach | Mechanism | Status |
+|----------|-----------|--------|
+| H382 FactorEngine | BayesHPO + knowledge-infused bootstrap from hypothesis-log | PROPOSED |
+| H365 QuantaAlpha | Evolutionary framework with crossover + multi-agent | PROPOSED |
+| MadEvolve | AlphaEvolve-style LLM code mutation + backtester fitness | NEW |
+
+**Production path for H198 universe:**
+Seed MadEvolve with run_h386.py as the base strategy. LLM mutates: feature set (add/remove IMOM variants, window lengths, normalization), ranking logic, portfolio concentration. Backtester = H386 IS fitness. Estimated 50 candidates at $5-15 (haiku rates). Target: find a Var A+ that improves MaxDD further.
+
+---
+
+## EFS: Evolutionary Factor Search (arXiv:2507.17211)
+
+**Source**: Luo, Zhang, Liu (Jul 2025) — 'EFS: Evolutionary Factor Searching for Sparse Portfolio Optimization Using Large Language Models'
+
+**Architecture:**
+- LLM generates alpha factor code (Python expressions, like WorldQuant 101 alphas)
+- Reformulates portfolio construction as top-m ranking task
+- Evolutionary feedback loop: performance-based factor selection + LLM cross-mutation
+- Ablation validates: prompt composition, factor diversity, LLM backend choice all matter
+
+**Results (Fama-French + real markets):**
+- Significantly outperforms statistical and optimization baselines
+- Strongest edge: **larger universes** (100+ stocks) and **volatile conditions**
+- US50, HSI45, CSI300 all validated
+
+**Implication for H393+:** EFS-style LLM factor generation could directly produce candidates for the H198 30-stock universe at low cost. The evolutionary loop provides automatic overfitting control via train/test separation built into the fitness function.
+
+**Proposed pipeline:**
+1. Use H198 universe (30 large-cap NASDAQ stocks)
+2. Seed with existing confirmed factors: IMOM6, MOM60, Amihud ILLIQ
+3. LLM generates factor mutations (e.g., partial moments, skewness, downside volatility)
+4. IS (2013-2020) fitness → retain top-10 factors
+5. Combine top factors in H386-style composite, OOS test on 2021-2026
+6. Hypothesis number: H394 (if a new composite clears gate)

@@ -304,3 +304,36 @@ H179 attempted international equity rotation — and the root cause of failure m
 - Nagel, S. (2012). Evaporating liquidity. *Review of Financial Studies* 25(7), 2005–2039. [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1988706)
 - Stosik, J. & Zaremba, A. (2026). Short-term reversal persists globally — if properly measured. [SSRN:6630998](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6630998)
 - Quantpedia: [Short Term Reversal Effect in Stocks](https://quantpedia.com/strategies/short-term-reversal-in-stocks)
+
+
+## FRI Decomposition: Sign vs Magnitude in Short-Term Reversal (arXiv:2606.29591)
+
+**Source**: Portnaya (Jun 2026) — 'The Bounce Has No Direction: Sign, Magnitude, and the Microstructure of Equity Return Predictability'
+**Data**: 6 US instruments 1993–2026 + 21-instrument cross-asset panel
+
+**Fourier-Residue Identity (FRI):**
+Decomposes the scalar autocorrelation ρ̂(k) into:
+- **Sign channel** (k=2): whether yesterday's direction predicts today's direction
+- **Magnitude channel** (k=4): whether yesterday's SIZE predicts today's SIZE regardless of direction
+
+These cannot be distinguished by the standard Lo-MacKinlay variance ratio test.
+
+**Key empirical results:**
+
+| Lag | Sign channel | Magnitude channel | Interpretation |
+|-----|-------------|-------------------|----------------|
+| Lag-1 (SPY) | p = 0.11 (not sig.) | p < 10⁻¹² | Bid-ask bounce + staleness ONLY |
+| Lag-3 (SPY) | p = 0.02 (significant) | Included in full stat. | Directional partial-price-adjustment |
+
+**Cross-asset panel:**
+- Directional mean reversion: exchange-traded equities + sovereign bonds only
+- Credit ETFs, commodities, FX, crypto: indistinguishable from random walks (no reversals)
+
+**Implications for H181 (Industry-Adjusted Short-Term Reversal):**
+- H181 targets weekly (5-day) close-to-close returns. This horizon covers the lag-3 directional channel — correctly positioned.
+- The industry-adjustment (R_i − R̄_industry) removes the magnitude-dominated component (systematic bounce) and isolates the stock-specific directional signal.
+- The 0.53%/month global alpha from Stosik & Zaremba (SSRN:6630998) is therefore measuring the DIRECTIONAL channel, not the bid-ask bounce magnitude channel.
+- H181 design is theoretically validated by FRI: it targets exactly the channel that exists.
+
+**Warning for naive lag-1 reversal strategies:**
+Strategies that simply buy yesterday's losers (pure lag-1) are NOT trading directional reversal. They are trading bid-ask bounce magnitude shrinkage — which requires very precise execution timing (intraday) to monetize. At weekly or longer horizons, the magnitude channel has already mean-reverted and the directional channel at lag-3 is what remains.

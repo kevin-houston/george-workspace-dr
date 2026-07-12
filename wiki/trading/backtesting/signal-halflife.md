@@ -561,3 +561,41 @@ def fit_decay_model(ic_series: np.ndarray) -> dict:
 # momentum_ic_by_lag = [IC_1m, IC_2m, IC_3m, IC_6m, IC_12m]
 # result = fit_decay_model(np.array(momentum_ic_by_lag))
 ```
+
+
+## AI-Driven Alpha Decay: Empirical Calibration (arXiv:2605.23905)
+
+**Source**: Meng & Chen (Mar 2026) — 'AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets'
+**Data**: 99.5 million SEC Form 13F holdings, 2013–2024; institutional portfolio convergence model
+
+**Formal model:**
+Alpha half-life: h(φ) = ln 2 / [θ + δ(φ)]
+- θ = natural mean-reversion rate (decay even without AI)
+- δ(φ) = N·φ·ρ·a / λ(φ) = AI-accelerated decay component (convex-decreasing in adoption)
+- φ = AI adoption fraction among institutional investors
+- At φ ≈ 0.7 (current): **h(0.7) ≈ 18 months** vs pre-AI baseline of 5–7 years
+
+**Empirically measured factor decay:**
+| Factor | Pre-AI half-life | Post-AI half-life |
+|--------|-----------------|-------------------|
+| Momentum | ~84 months | ~12 months |
+| Value | ~72 months | ~20 months |
+| Overall signal | 60–84 months | ~18 months |
+
+**Portfolio convergence evidence:**
+- Simulated institutional convergence: +42% increase 2013–2024
+- AI-adopting funds: cross-sectional return dispersion DOWN 29% vs fundamental/human funds DOWN 10%
+
+**Four theoretical results:**
+1. Alpha half-life is convex-decreasing in AI adoption (faster adoption → faster decay)
+2. Signal extinction cascade: beyond critical threshold φ*, decay of one signal class triggers competition for remaining ones
+3. Red Queen impossibility: at monoculture equilibrium, net alpha ≡ 0 despite heavy AI investment
+4. Fragility-efficiency tradeoff: adoption level maximizing price discovery > level minimizing systemic fragility
+
+**Implications for production portfolio:**
+- H386 (IMOM+MOM): IMOM is a non-standard signal from a single 2024 working paper → low adoption → slower decay than standard momentum. Monitor from ~mid-2027.
+- H026/H041a ETF rotation: monthly rebalancing + fundamental regime logic → less algorithmic crowding than pure daily momentum
+- H174 PEAD (FinBERT 8-K): NLP signal with 8-K filing dependency → requires specific infrastructure, limits crowding
+- **Diversification across signal families with different decay profiles is the structural defense**
+
+**Practical monitoring rule:** If H386 OOS Sharpe (rolling 24-month) drops below 1.5, investigate IMOM crowding as a cause and consider retiring or re-parameterizing.
