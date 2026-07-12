@@ -9,6 +9,8 @@ authors: [George, Ernesto]
 
 Agreed standard for both George (NanoClaw) and Ernesto to apply before any strategy advances to paper trading or production. Results across both systems are only comparable when this checklist is satisfied.
 
+**See also**: [LLM Alpha Validation Checklist](algorithms/llm-alpha-validation.md) — 6-test extension for LLM-generated strategies (reproducibility audit, cost-inclusive Sharpe, cross-market transfer); applies on top of this checklist for H274/H381/H382/H383/H384.
+
 ---
 
 ## 1. Look-Ahead Guard

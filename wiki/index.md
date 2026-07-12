@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-09
+updated: 2026-07-12
 sources_indexed: 4
-pages: 200
+pages: 204
 ---
 
 # Wiki Index
@@ -61,6 +61,7 @@ When answering a query:
 - [Shared Strategy Evaluation Checklist](trading/shared-eval-checklist.md) — 7-point pre-production gate (George + Ernesto): look-ahead guard, NLP timestamp, cost model, soft OOS, regime coverage, survivorship bias, after-tax flag ← new 2026-06-09
 - [Smart Money Concepts (ICT) — Order Blocks, FVGs, BOS/CHoCH](trading/algorithms/smart-money-concepts-ict.md) — H343-H346/H355/H356 ALL CONFIRMED; Order Blocks as implicit regime detectors; 36/36 param combos pass gate on H198; OB filter portable across stocks, sector ETFs, bond ETFs, low-vol ETFs ← new 2026-06-29
 - [AI-Driven Alpha Factor Discovery](trading/algorithms/auto-alpha-discovery.md) — automated alpha mining via LLMs, evolutionary algorithms, and deep learning; H380 Alpha191→US LASSO transfer ($0 cost); H381 AlphaLogics 3-agent; H382 FactorEngine dual-mode LLM+BayesHPO; H383 HMM+RL SPY/TLT/GLD; H384 ReCAP continual learning; H347/H349/H288/H352 queued ← updated 2026-07-08
+- [LLM Alpha Validation Checklist](trading/algorithms/llm-alpha-validation.md) — 6-test pre-deployment gate for LLM-generated strategies: look-ahead audit, cost-inclusive net-Sharpe, OOS regime coverage, reproducibility/source check, cross-market transfer test, paper-trading gate; gates H274/H381/H382/H383/H384 ← new 2026-07-08
 - [DeePM — Regime-Robust Deep Portfolio Manager](trading/algorithms/deepm-regime-portfolio.md) — Oxford ML (arXiv:2601.05975); 3 innovations: Causal Sieve (ragged filtration), Macro Graph Prior, Distributionally Robust Objective; 2x net risk-adjusted vs conventional; 50 futures 2010-2025; code: github.com/kieranjwood/deepm; H249/H318 analog ← new 2026-07-07
 - [Low-Volatility Factor ETF Rotation](trading/algorithms/low-volatility-etf-rotation.md) — H354 CONFIRMED (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV; pure 12m top-1 OOS 1.735, zero neg years, +7.0% in 2022); H355 CONFIRMED (OB filter H045 OOS 1.522); H356 CONFIRMED (OB extension OOS 2.312) ← new 2026-07-02
 
@@ -191,6 +192,8 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-07-12](trading/research-log/2026-07-12.md) — wiki: market-microstructure.md expanded (FRI decomposition, OFI cross-sectional predictor); 5 dream cycle proposals applied: H393 Amihud ILLIQ stub, AI alpha decay, MadEvolve/EFS, FRI lag-1 reversal, prediction market volatility model ← new 2026-07-12
+- [Research Log 2026-07-09](trading/research-log/2026-07-09.md) — wiki: bilevel-autoresearch.md new (arXiv:2603.23420; Level 2 mechanism injection 5×; dream cycle connection); 5 dream cycle proposals applied: microstructure trend demise, fast/slow PEAD timing, PM dataset, reproducibility crisis, H392 E2E Transformer stub ← new 2026-07-09
 - [Research Log 2026-07-08](trading/research-log/2026-07-08.md) — wiki: auto-alpha-discovery.md expanded (Methods 7/8/9: Alpha191 LASSO, AlphaLogics, FactorEngine + H383/H384 stubs); llm-alpha-mining-systems-2026.md committed; dream cycle: H385 Illusion Momentum staged (Iwanaga & Hirose PBFJ 2026; arithmetic-geometric gap signal, US large-cap confirmed)
 - [Research Log 2026-07-07](trading/research-log/2026-07-07.md) — wiki: momentum-strategies.md major expansion H376/H377 6-0m no-skip discovery (OOS 3.120/MaxDD -8.4%/0 neg yrs); dream cycle: 5 proposals staged (H377 stub, H378 SAE-FiRE PEAD, H379 network momentum, PortBench wiki, Kumar wiki)
 - [Research Log 2026-07-06](trading/research-log/2026-07-06.md) — wiki: llm-trading-agent-benchmarks-2026.md new (AI Industry expansion; KTD-Fin/Strat-LLM/EarningsInOne synthesized; H376 fast/slow PEAD + H377 network momentum staged); dream cycle scan
@@ -277,4 +280,10 @@ When answering a query:
 - [DR Overview](dr/overview.md) — restore procedure, what survives, what to tell a fresh George
 - [Git Backup Setup](dr/git-backup.md) — git repo config, current status, blocked items
 - [Session Diary](dr/diary.md) — append-only log of sessions; narrative recovery layer
+
+---
+
+### Meta / Maintenance
+
+- [Wiki Activity Log](log.md) — append-only chronological record of all ingests, queries, and lint passes; session-by-session wiki change history
 

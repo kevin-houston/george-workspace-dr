@@ -7,7 +7,7 @@ status: research closed — H190–H193 completed; STORM family (H195–H196) cl
 
 Empirical finding that low-beta, low-volatility stocks earn higher *risk-adjusted* returns than high-beta stocks — directly contradicting CAPM. One of the most robust anomalies in finance; persists globally, across asset classes, and after factor adjustments.
 
-**Related pages**: [Momentum Strategies](momentum-strategies.md) | [Short-Term Reversal](short-term-reversal.md) | [Position Sizing & Portfolio Construction](position-sizing.md) | [Hypothesis Log](../backtesting/hypothesis-log.md)
+**Related pages**: [Momentum Strategies](momentum-strategies.md) | [Short-Term Reversal](short-term-reversal.md) | [Position Sizing & Portfolio Construction](position-sizing.md) | [Regime Detection](regime-detection.md) | [Hypothesis Log](../backtesting/hypothesis-log.md)
 
 ---
 

@@ -598,3 +598,16 @@ Pages created: 1 (concepts/bilevel-autoresearch.md). Pages updated: 1 (index.md)
 Key entities: Qu & Lu (independent researchers); Karpathy autoresearch (inner loop foundation); DeepSeek-chat (LLM used).
 Key concepts: bilevel LLM loop, mechanism injection, LLM prior bias, mechanism carriers (code/skills/prompts/memory).
 Cross-refs: multi-agent-llm-trading.md, auto-alpha-discovery.md, atlas-gic.md, llm-alpha-validation.md.
+
+## [2026-07-12] lint | Health check
+Issues found: 7. Auto-fixed: 7. Needs review: 0.
+Pages checked: 222 on disk, 200 indexed before pass.
+Fixes applied:
+  - index.md frontmatter: updated 2026-07-09→2026-07-12, pages 200→204
+  - Added llm-alpha-validation.md to Algorithms section in index.md
+  - Added research-log/2026-07-09.md and research-log/2026-07-12.md to Research Logs in index.md
+  - Added log.md to new Meta/Maintenance section in index.md
+  - low-volatility.md: added cross-ref to regime-detection.md
+  - shared-eval-checklist.md: added cross-ref to llm-alpha-validation.md
+No contradictions found. No dead index entries. No broken internal links.
+Source gaps noted (backlog): Execution Cost Modeling, Adaptive Rebalancing, PIT Datasets, Tax Optimization, LLM Discovery Cost Model, Prediction Markets as Equity Indicators.
