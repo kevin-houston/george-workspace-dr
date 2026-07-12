@@ -1,0 +1,111 @@
+{
+  "date": "2026-07-12",
+  "session": "nightly-dream-cycle",
+  "angles_scanned": [
+    "arXiv: Order Block improvements, microstructure-aware momentum (building on arXiv:2607.01550)",
+    "arXiv: PEAD + post-earnings drift + qualitative transcript signals (complement to arXiv:2606.29734)",
+    "arXiv: Bilevel autoresearch / LLM self-improvement applied to trading (following arXiv:2603.23420)",
+    "arXiv: Factor model improvements on momentum (H198/H386 family)",
+    "GitHub: New quantitative finance tools or datasets worth noting"
+  ],
+  "papers_reviewed": [
+    {
+      "arxiv": "2607.01377",
+      "title": "Liquidity Premium and Investment Horizons",
+      "authors": "Aldridge (Jul 2026)",
+      "relevance": "HIGH",
+      "action": "staged as proposal 1 (H393 candidate), incorporated into market-microstructure.md expansion"
+    },
+    {
+      "arxiv": "2606.29591",
+      "title": "The Bounce Has No Direction: Sign, Magnitude, and the Microstructure of Equity Return Predictability",
+      "authors": "Portnaya (Jun 2026)",
+      "relevance": "HIGH",
+      "action": "staged as proposal 4, incorporated into market-microstructure.md expansion"
+    },
+    {
+      "arxiv": "2605.23905",
+      "title": "AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets",
+      "authors": "Meng & Chen (Mar 2026)",
+      "relevance": "HIGH",
+      "action": "staged as proposal 2, incorporated into market-microstructure.md expansion"
+    },
+    {
+      "arxiv": "2605.23007",
+      "title": "MadEvolve: Evolutionary Optimization of Trading Systems with Large Language Models",
+      "authors": "Kvasiuk, Li, Colegrove, Münchmeyer (May 2026)",
+      "relevance": "MEDIUM",
+      "action": "staged as proposal 3 (auto-alpha-discovery.md update)"
+    },
+    {
+      "arxiv": "2507.17211",
+      "title": "EFS: Evolutionary Factor Searching for Sparse Portfolio Optimization Using Large Language Models",
+      "authors": "Luo, Zhang, Liu (Jul 2025)",
+      "relevance": "MEDIUM",
+      "action": "staged as proposal 3 (auto-alpha-discovery.md update, H394 candidate)"
+    },
+    {
+      "arxiv": "2512.18648",
+      "title": "Optimal Signal Extraction from Order Flow: A Matched Filter Perspective",
+      "authors": "Kang (Feb 2026)",
+      "relevance": "MEDIUM",
+      "action": "incorporated into market-microstructure.md expansion"
+    },
+    {
+      "arxiv": "2512.12924",
+      "title": "Interpretable Hypothesis-Driven Trading: A Rigorous Walk-Forward Validation Framework for Market Microstructure Signals",
+      "authors": "Deep, Deep, Lamptey (Dec 2025)",
+      "relevance": "MEDIUM",
+      "action": "incorporated into market-microstructure.md expansion"
+    },
+    {
+      "arxiv": "2607.08199",
+      "title": "Volatility in Prediction Markets: A Structural Approach",
+      "authors": "Xi, Moallemi, Pai, Want (Jul 2026)",
+      "relevance": "MEDIUM",
+      "action": "staged as proposal 5 (prediction-markets wiki update)"
+    },
+    {
+      "arxiv": "2607.01198",
+      "title": "When large trades are not news: Liquidity tail risk and price discovery",
+      "authors": "Çetin, Lin, Livieri (Jul 2026)",
+      "relevance": "LOW",
+      "action": "noted only — theoretical LOB model, no immediate actionability"
+    },
+    {
+      "arxiv": "2607.04130",
+      "title": "A Gabor-Epps uncertainty principle for traders",
+      "authors": "Gebbie (Jul 2026)",
+      "relevance": "LOW",
+      "action": "noted only — useful conceptual framework for HFT cross-asset dependence, no production relevance"
+    }
+  ],
+  "staged_proposals": [
+    "1_h393_amihud_illiq_composite_stub.json",
+    "2_ai_alpha_decay_wiki_update.json",
+    "3_madevolve_efs_auto_alpha_wiki.json",
+    "4_fri_microstructure_short_term_reversal_wiki.json",
+    "5_prediction_markets_volatility_model.json"
+  ],
+  "wiki_expansion": {
+    "file": "wiki/trading/algorithms/market-microstructure.md",
+    "lines_before": 107,
+    "lines_after": 400,
+    "sections_added": [
+      "Return Autocorrelation: Sign vs Magnitude (FRI)",
+      "Structural Decay of Short-Term Trend Following",
+      "Order Flow as Cross-Sectional Return Signal (H393 candidate)",
+      "Optimal Order Flow Normalization",
+      "Hypothesis-Driven Microstructure Signal Validation Framework",
+      "AI-Driven Alpha Decay Accelerating Microstructure Exploitation"
+    ]
+  },
+  "next_hypothesis": "H393",
+  "key_findings": [
+    "Amihud ILLIQ ratio (free from yfinance OHLCV) is a viable composite layer on H386 — no new data sources needed for H393",
+    "SPY lag-1 reversal is entirely magnitude (bid-ask bounce), not directional — validates monthly momentum horizon and weekly H181 design",
+    "AI alpha decay half-life now ~18 months for momentum at φ=0.7 adoption — IMOM obscurity provides buffer but monitor from mid-2027",
+    "MadEvolve + EFS provide low-cost ($5-15) evolutionary LLM alpha discovery pipelines directly applicable to H198 universe",
+    "Prediction market volatility peaks near 50/50 and near resolution — H185 should avoid new entries within 24h of deadline"
+  ]
+}
