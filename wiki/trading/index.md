@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-09 (H387/H388/H390 proposed; H389 Alpha Illusion 6-test checklist wiki page created; shared-eval-checklist.md updated with LLM gate; deepm-regime-portfolio.md major expansion: full architecture table, ablation results, E2E comparison, ETF adaptation path)
+updated: 2026-07-12 (market-microstructure.md major expansion: OFI signal, FRI decomposition, trend decay, AI alpha decay, H393 proposed)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -34,7 +34,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Factor Models & Cross-Sectional Alpha](algorithms/factor-models.md) ← new 2026-05-20
   - [WorldQuant 101 Alphas — Overlap Analysis](algorithms/alpha101-overlap.md) ← updated 2026-07-03 (H215/H217/H228 confirmed results table; 17 surviving US signals Cross-Market Alpha arXiv:2601.06499; AlphaMemo AST-memory arXiv:2606.20625; ML Transformer Sharpe 2.4 using WQ101 features; OHLCV signal taxonomy A/B/C groups; VWAP unlock path $29/mo)
   - [Quality Factor (QMJ)](algorithms/quality-factor.md) ← new 2026-05-24 (Piotroski F-Score 9-criteria; Novy-Marx GP/Assets; AQR QMJ datasets; FMP API implementation; H221/H222 designs; BAB correlation ~0.4–0.6 = independent alpha)
-  - [Market Microstructure & HFT](algorithms/market-microstructure.md) ← new 2026-05-25 (Microprice/Stoikov 2017; Avellaneda-Stoikov market making; not actionable without L2 order book data; future execution layer for intraday entries)
+  - [Market Microstructure & HFT](algorithms/market-microstructure.md) ← updated 2026-07-12 (major expansion: OFI cross-sectional signal free via Amihud ratio arXiv:2607.01377; sign vs magnitude decomposition FRI arXiv:2606.29591 — SPY lag-1 is magnitude-only not directional; trend decay structural break 2009 arXiv:2607.01550; AI alpha decay half-life 84m→12m arXiv:2605.23905; H393 proposed Amihud ILLIQ composite on H386)
   - [IBS Mean-Reversion](algorithms/ibs-mean-reversion.md) ← new 2026-05-28 (Internal Bar Score strategy; PRODUCTION — XLK 20%/SMH 8%/IGV 2%; formula, per-ETF params, H062–H149 hypothesis log, arxiv:2306.12434)
   - [Technical Analysis & Chart Patterns](algorithms/technical-analysis-patterns.md) ← new 2026-05-29 (H234 CONFIRMED inside-bar coiled-spring OOS 1.770 — strongest confirmed hypothesis; NR7/NR4 reference; TA-Lib vs pandas-ta-classic library guide; H233/H235 MACD+RSI+Stochastic+ROC feature pipeline; ZHAW arXiv:2208.07168 MACD 44% importance)
   - [Long/Short Equity](algorithms/long-short-equity.md) ← new 2026-06-02 (dollar-neutral L/S construction; 130/30; borrow costs ~0.75%/yr large-cap; H243 design: top/bottom quintile EW on 200-stock universe; momentum crash risk + Daniel/Moskowitz 2016; sector-neutral L/S variant; backtesting mistake table)
