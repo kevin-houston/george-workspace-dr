@@ -10,5 +10,5 @@
   "target_file": "/workspace/agent/wiki/trading/algorithms/llm-alpha-validation.md",
   "content": "\n---\n\n## Reproducibility Audit: 2026 Systematic Evidence (arXiv:2605.19337)\n\nXia et al. (May 2026) conducted a systematic review of 77 LLM-based trading agent studies screened through 2026-03-09. Of the 19 primary-subset studies (Action Output + Closed-Loop Evaluation criteria):\n\n| Criterion | Studies passing | Failure rate |\n|-----------|-----------------|-------------|\n| Time-consistent split protocol documented | 2/19 | **89%** |\n| Explicit transaction-cost model | 1/19 | **95%** |\n| Universe / survivorship handling documented | 1/19 | **95%** |\n| Execution timing documented | 11/19 | 42% |\n| Any reproducibility artifacts (R1+) | 4/19 | **79%** |\n\n**Interpretation**: The 6-item validation checklist applied in this wiki (from arXiv:2605.16895, Sheng et al.) is not merely conservative — it eliminates roughly 85–95% of published LLM trading agent claims as non-reproducible on the most basic methodological criteria. The temporal integrity test (#1) and data integrity test (#6) alone screen out nearly all published work.\n\nApply the full checklist before production consideration of: **H274, H381, H382, H383, H384, H390, H396, H397**.\n",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

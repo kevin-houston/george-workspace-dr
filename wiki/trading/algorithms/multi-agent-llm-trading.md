@@ -660,3 +660,48 @@ context = f"[SOURCE: SEC EDGAR, filing_id={accession_number}, verified]"
 - Any LLM trading hypothesis must satisfy ALL 7 shared-eval-checklist.md criteria before being counted as confirmed
 - The H174 PEAD pipeline (FinBERT on 8-Ks) passes this bar: time-consistent split (IS 2018-2022 / OOS 2023-2026), explicit $0 commission model (fractional shares), documented universe (S&P 500 8-K filers with earnings), and published in peer-reviewed JFQA (PEAD.txt precedent)
 - H381/H382/H384 LLM-generated alpha hypotheses should be flagged as 'unconfirmed until reproducibility protocol documented'
+
+---
+
+## Fine-Grained Task Decomposition (arXiv:2602.23330, Feb 2026)
+
+Miyazaki, Kawahara, Roberts & Zohren (Univ. Tokyo + Oxford) find that multi-agent trading system performance is driven by **task granularity**, not agent count. Evaluated on Japanese equity universe with financial statements, news, and macro data; leakage-controlled backtesting.
+
+**Key findings:**
+
+1. **Coarse role mimicry underperforms**: Systems assigning abstract 'analyst' and 'manager' roles reduce inference transparency and degrade returns — agents try to imitate a role without defined task boundaries.
+2. **Fine-grained decomposition wins**: Breaking the investment workflow into specific bounded sub-tasks significantly improves risk-adjusted returns. Each sub-task produces structured output consumed by the next stage.
+3. **Output alignment is load-bearing**: Intermediate outputs must explicitly encode what the next stage needs. A FinBERT score that isn't formatted for the synthesis agent is wasted computation.
+4. **Portfolio optimization compounds the gain**: Low cross-correlation among sub-task agent outputs (e.g., EPS surprise vs. 8-K sentiment vs. momentum rank) can be explicitly exploited in the final combination step.
+
+### Application to H274 (PEAD Multi-Agent Debate)
+
+H274's current 3-agent debate design (advocate / skeptic / judge) is role-based. Per arXiv:2602.23330, a task-decomposed pipeline would likely outperform:
+
+| Agent | Task | Output format |
+|-------|------|---------------|
+| Agent 1 | EPS surprise quantification | `{"eps_surprise": 0.08, "vs_consensus": "beat"}` |
+| Agent 2 | 8-K FinBERT sentiment scoring | `{"score": 0.22, "uncertainty": "low"}` |
+| Agent 3 | Pre-announcement momentum check | `{"mom_6m_rank": 0.82, "trend": "up"}` |
+| Agent 4 | Synthesis + position sizing | Buy / No-buy + conviction weight |
+
+This restructuring should be evaluated before implementing H274 in production.
+
+---
+
+## PortBench: Correlation-Aware LLM Portfolio Evaluation (arXiv:2605.27887, May 2026)
+
+Zhao, Chen & Su introduce PortBench — the first portfolio management benchmark that evaluates LLM systems on **cross-asset correlation understanding**, not just return maximization.
+
+**Dataset**: 183 instruments across 6 heterogeneous asset classes, 10 years, with stress-regime and investor-profile evaluation.
+
+**Two evaluation layers:**
+1. **Static QA** (6,269 questions, 7 task templates): Tests whether the LLM correctly answers questions about correlation structures, diversification tradeoffs, and regime-conditional volatility — without any trading.
+2. **Dynamic 5-stage pipeline**: Market scanning → Signal generation → Portfolio construction → Risk management → Execution timing. Scored by **CEPS** (Correlation-adjusted Expected Portfolio Score).
+
+**Key gap PortBench addresses**: Existing benchmarks reward concentrated high-return portfolios that are undiversified. Standard Sharpe rewards an LLM that piles into the best single asset. CEPS penalizes portfolios that ignore cross-asset correlation structure.
+
+**Application to H318 (meta-agent ETF rotation selector)**:
+- H318's known failure (NOT CONFIRMED): meta-agent selects ETFs that are all correlated with SPY — same risk, no diversification.
+- PortBench's CEPS metric would have caught this: a correlated H026/H041a/H045 blend that all decline together scores poorly on CEPS even with high individual Sharpe.
+- When H318 is revisited, use PortBench's evaluation framework: test whether the meta-agent can correctly answer correlation questions (static QA) before trusting its allocation decisions (dynamic pipeline).

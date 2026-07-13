@@ -673,3 +673,29 @@ The skip-month convention should be re-tested across all H-series stock strategi
 - Consistent with H026 OOS Sharpe remaining strong (2.610–3.238 with OB filter)
 
 **Bottom line**: Momentum is alive at monthly rebalancing horizons on liquid multi-asset universes. The structural break affects high-frequency, small-tick, intraday trend strategies. Not a production risk for the H026/H041a/H045 monthly rotation pipeline.
+
+---
+
+## Spectral Memory Decomposition: Theory for IMOM+MOM Composite (arXiv:2607.03858, July 2026)
+
+Frøseth (July 4 2026) proposes a multivariate generalisation of the Lo-MacKinlay (1988) variance ratio. Decomposes long-horizon equity returns across 5 U.S./European panel datasets into:
+
+- **Return-channel persistent memory**: slow directional drift — classic momentum
+- **Return-channel antipersistent memory**: fast noise/bounce — mean-reversion
+- **Volatility-channel memory**: multi-scale persistence in volatility clustering
+
+A 5-factor spectral model simultaneously fits FF-49 industries, FF-100 size×BtM, FF-Europe-25, and pre/post-1998 halves — the memory structure is universal across U.S. and European equity cross-sections.
+
+### Theoretical Support for H395 Equal-Weight Composite
+
+H395 IMOM + MOM + LowVol (Var C, OOS Sharpe **3.962**, the H198 family champion as of July 2026) maps cleanly onto three distinct spectral components:
+
+| Signal | Spectral Component | Why it works |
+|--------|--------------------|-------------|
+| IMOM (Illusion Momentum) | Return-channel **persistent memory** | Compound return minus arithmetic sum isolates stocks with sustained consistent gains — only possible with high persistent memory |
+| MOM (6-month no-skip) | Return-channel **directional persistence** | Cross-sectional momentum reflects intermediate-horizon persistence; the skip-month (1-month reversal) is the antipersistent component |
+| LowVol tiebreaker | Volatility-channel **noise filter** | Low realized vol = lower volatility-channel memory amplitude = less noise contaminating the directional signal |
+
+The three signals are spectral-orthogonal: IMOM captures path consistency, MOM captures direction, LowVol filters volatility noise. Equal-weighting them (H395 Var C) implicitly achieves spectral diversification.
+
+**Implication for H395+ variants**: The antipersistent return-channel component represents mean-reverting stocks. Consider a contra-signal that explicitly identifies and avoids stocks with high antipersistent loading (high short-term reversal tendency) as a 4th composite ingredient — this could be tested as H398 or H399.

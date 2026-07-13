@@ -102,3 +102,21 @@ This checklist extends `wiki/trading/shared-eval-checklist.md` for LLM-specific 
 - `wiki/trading/shared-eval-checklist.md` — shared 7-point gate + LLM reproducibility audit
 - H274 (multi-agent PEAD), H381 (AlphaLogics), H382 (FactorEngine), H383 (HMM+RL), H384 (ReCAP)
 - arXiv:2606.08285 — "7-Dimension Reproducibility Audit" for LLM trading systems (already in shared-eval-checklist.md)
+
+---
+
+## Reproducibility Audit: 2026 Systematic Evidence (arXiv:2605.19337)
+
+Xia et al. (May 2026) conducted a systematic review of 77 LLM-based trading agent studies screened through 2026-03-09. Of the 19 primary-subset studies (Action Output + Closed-Loop Evaluation criteria):
+
+| Criterion | Studies passing | Failure rate |
+|-----------|-----------------|-------------|
+| Time-consistent split protocol documented | 2/19 | **89%** |
+| Explicit transaction-cost model | 1/19 | **95%** |
+| Universe / survivorship handling documented | 1/19 | **95%** |
+| Execution timing documented | 11/19 | 42% |
+| Any reproducibility artifacts (R1+) | 4/19 | **79%** |
+
+**Interpretation**: The 6-item validation checklist applied in this wiki (from arXiv:2605.16895, Sheng et al.) is not merely conservative — it eliminates roughly 85–95% of published LLM trading agent claims as non-reproducible on the most basic methodological criteria. The temporal integrity test (#1) and data integrity test (#6) alone screen out nearly all published work.
+
+Apply the full checklist before production consideration of: **H274, H381, H382, H383, H384, H390, H396, H397**.
