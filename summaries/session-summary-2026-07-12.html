@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Session Summary — 2026-07-12</title>
+  
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--orange:#f0883e;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.6;padding:0;}
+
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:baseline;justify-content:space-between;}
+.header-title{font-size:16px;font-weight:700;letter-spacing:.3px;}
+.header-sub{color:var(--muted);font-size:12px;}
+
+.main{padding:20px 24px;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1.1;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.muted{color:var(--muted);}
+
+/* Section card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.card-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.card-badge{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:2px 8px;color:var(--muted);}
+.card-body{padding:14px 16px;}
+
+/* Proposals */
+.proposal{padding:10px 0;border-bottom:1px solid var(--border);}
+.proposal:last-child{border-bottom:none;}
+.proposal-header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.proposal-title{font-size:13px;font-weight:600;}
+.risk-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+.risk-medium{background:rgba(210,153,34,.18);color:var(--yellow);border:1px solid rgba(210,153,34,.3);}
+.risk-high{background:rgba(248,81,73,.18);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.risk-low{background:rgba(63,185,80,.18);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.proposal-rationale{font-size:12px;color:var(--muted);margin-top:3px;}
+.proposal-target{font-size:11px;color:var(--blue);font-family:monospace;margin-top:3px;}
+
+/* Commit list */
+.commit{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;display:flex;gap:10px;}
+.commit:last-child{border-bottom:none;}
+.commit-hash{font-family:monospace;color:var(--blue);flex-shrink:0;}
+.commit-msg{color:var(--text);}
+
+/* Podcast */
+.podcast-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;}
+.podcast-dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:10px;}
+.link-btn{display:inline-block;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--blue);background:var(--surface);}
+.link-btn:hover{border-color:var(--blue);}
+
+/* Raw changelog */
+pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;overflow-x:auto;white-space:pre-wrap;color:var(--muted);margin-top:10px;}
+
+.empty{color:var(--muted);font-size:12px;padding:4px 0;}
+</style>
+
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-title">Session Summary &mdash; 2026-07-12</div>
+    </div>
+    <div class="header-sub">Generated 2026-07-13 04:01 CT</div>
+  </div>
+  <div class="main">
+    
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Proposals Applied</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Flagged</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Commits</div>
+        <div class="kpi-value blue">7</div></div>
+      <div class="kpi"><div class="kpi-label">Podcast</div>
+        <div class="kpi-value muted">—</div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Dream Cycle</span>
+        <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
+      </div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H393 stub: Amihud ILLIQ composite layer on H386 (arXiv:2607.01377)</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Aldridge (Jul 2026) arXiv:2607.01377 'Liquidity Premium and Investment Horizons' shows that Kyle's lambda estimated from daily CRSP equity order flow significantly predicts the cross-section of next-month returns in Fama-MacBeth regressions. The Amihud ILLIQ ratio (|R_i,d| / DolVol_i,d) is a free yf…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h393.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Add AI-driven alpha decay findings to signal-halflife.md and market-microstructure.md</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Meng &amp; Chen (Mar 2026) arXiv:2605.23905 'AI-Driven Alpha Decay: Algorithmic Homogenization, Reflexive Signal Erosion, and the Paradox of Intelligent Markets' provides the first empirically calibrated model of how AI adoption accelerates signal decay. Key finding: at current AI adoption φ≈0.7, moment…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/backtesting/signal-halflife.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Add MadEvolve and EFS to auto-alpha-discovery.md as H393/H394 candidates</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Two new LLM evolutionary alpha discovery frameworks are production-relevant to the H382/H393 family. (1) MadEvolve (Kvasiuk et al., May 2026, arXiv:2605.23007): DeepMind AlphaEvolve-style evolutionary optimization applied to quantitative finance. Outer loop: LLM generates/modifies trading strategy c…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/auto-alpha-discovery.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Add FRI sign vs magnitude decomposition to short-term-reversal.md and event-driven.md</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Portnaya (Jun 2026) arXiv:2606.29591 'The Bounce Has No Direction: Sign, Magnitude, and the Microstructure of Equity Return Predictability' introduces the Fourier-Residue Identity (FRI), which decomposes return autocorrelation into sign (directional) and magnitude (size) channels. Key finding for tr…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/short-term-reversal.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Add structural volatility model for prediction markets to prediction-markets wiki</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Xi, Moallemi, Pai, Want (Jul 2026) arXiv:2607.08199 'Volatility in Prediction Markets: A Structural Approach' develops and estimates a volatility model tailored to binary prediction markets (bounded [0,1] probabilities, binary payoffs, known deadlines). Uses Kalshi panel data. Two components: (1) Wr…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/prediction-markets/algorithmic-strategies.md</div>
+            </div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Commits</span>
+        <span class="card-badge">7 today</span>
+      </div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">bf7d3e3</span><span class="commit-msg">H395 CONFIRMED: realized-vol tiebreaker beats H386 (OOS 3.962 vs 3.273)</span></div><div class="commit"><span class="commit-hash">1e30485</span><span class="commit-msg">H393 NOT CONFIRMED as improvement: Amihud ILLIQ composite on H386</span></div><div class="commit"><span class="commit-hash">440d102</span><span class="commit-msg">wiki: lint pass 2026-07-12 — index gaps, cross-refs, frontmatter</span></div><div class="commit"><span class="commit-hash">313b884</span><span class="commit-msg">dream cycle: apply 2026-07-12 staged proposals (H393, H394 stubs)</span></div><div class="commit"><span class="commit-hash">760e137</span><span class="commit-msg">dream cycle: stage 2026-07-12 proposals (H393 stub, alpha decay, MadEvolve/EFS, FRI, PM volatility)</span></div><div class="commit"><span class="commit-hash">f77c6d8</span><span class="commit-msg">nightly research 2026-07-12: microstructure expansion, OFI signal, FRI decomposition, AI alpha decay</span></div><div class="commit"><span class="commit-hash">5e74ea3</span><span class="commit-msg">nightly backup 2026-07-12</span></div></div>
+    </div>
+    
+    
+  </div>
+</body>
+</html>
