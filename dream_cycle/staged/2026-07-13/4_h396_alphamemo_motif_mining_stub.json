@@ -1,0 +1,14 @@
+{
+  "id": "new-hypothesis-h396-alphamemo-motif-mining",
+  "date": "2026-07-13",
+  "source": "paper",
+  "source_url": "https://arxiv.org/html/2606.20625v1",
+  "title": "H396 STUB: AlphaMemo Edit-Motif Mining from George's Hypothesis Log",
+  "rationale": "AlphaMemo (arXiv:2606.20625, June 2026, Univ. Sydney + Edinburgh) achieves better OOS factor discovery efficiency on S&P 500 by recording 'edit motifs' — reusable modification patterns extracted from AST differences between parent and child factors. Confidence-gated residual memory suppresses repeated failures and amplifies confirmed patterns. George's hypothesis-log.md contains 395+ experiments with structured outcomes — a ready-made search ledger. H396 proposes parsing the log to extract (parent_signal, modification, outcome) triples, clustering into motif categories, and using the motif library as context for H381/H382 LLM factor mining runs. This is a meta-level improvement that costs ~$5 in LLM calls to construct the motif library and should make subsequent H381/H382 runs more efficient.",
+  "risk_level": "low",
+  "type": "hypothesis_stub",
+  "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
+  "content": "h396_status: STUB (2026-07-13) — AlphaMemo-Style Edit-Motif Mining from Hypothesis Log (arXiv:2606.20625). AlphaMemo (Univ. Sydney + Edinburgh, June 2026) shows self-evolving alpha mining agents achieve better fixed-budget discovery by recording reusable 'edit motifs' (AST-level modification patterns) from parent→child factor evolution. Tested on CSI 500 and S&P 500; confidence-gated memory suppresses known failures, amplifies confirmed patterns. George's hypothesis-log.md (395+ experiments) is a ready-made search ledger with structured outcomes. H396 design: (1) Parse hypothesis-log.md to extract (parent_signal, modification, outcome) triples — e.g., ('H198 6-1m', 'add low-vol tiebreaker', 'CONFIRMED +Sharpe 2.69→3.96'), ('H198 6-1m', 'add ILLIQ tiebreaker', 'NOT CONFIRMED — large-cap homogeneous'). (2) Cluster into motif categories: tiebreaker additions, universe expansions, filter overlays, window changes, skip-month variants. (3) Build confidence-weighted motif library. (4) Use library as context window for H381 (AlphaLogics) and H382 (FactorEngine) LLM prompts: 'Motifs that work on H198: low-vol tiebreaker, no-skip momentum; Motifs that fail: ILLIQ, quality GP/A, MAX tiebreaker on large-cap'. Gate: at least one H381/H382 motif-seeded run outperforms un-seeded run on OOS Sharpe. Script: backtesting/daily/run_h396_alphamemo_motifs.py (stub). Cost: ~$5 LLM calls for motif extraction. Low risk.",
+  "action": "prepend",
+  "apply_status": "pending"
+}

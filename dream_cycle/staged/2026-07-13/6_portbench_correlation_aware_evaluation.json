@@ -1,0 +1,14 @@
+{
+  "id": "wiki-update-portbench-correlation-aware-2605.27887",
+  "date": "2026-07-13",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2605.27887",
+  "title": "Add PortBench correlation-aware portfolio evaluation framework to multi-agent-llm-trading.md",
+  "rationale": "Zhao, Chen & Su (May 2026, arXiv:2605.27887) introduce PortBench — the first benchmark evaluating LLM portfolio managers on cross-asset correlation understanding, not just return prediction. The 183-instrument dataset across 6 asset classes with stress-regime evaluation and CEPS (Correlation-adjusted Expected Portfolio Score) metric is directly relevant to evaluating H318 (meta-agent ETF selector). Current H318 evaluation only considers Sharpe; PortBench's 5-stage pipeline (market scanning → signal generation → portfolio construction → risk management → execution timing) provides a more rigorous evaluation framework. The CEPS metric penalizes undiversified concentrated portfolios — directly addressing H318's known failure mode of selecting correlated ETFs.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md",
+  "content": "\n---\n\n## PortBench: Correlation-Aware LLM Portfolio Evaluation (arXiv:2605.27887, May 2026)\n\nZhao, Chen & Su introduce PortBench — the first portfolio management benchmark that evaluates LLM systems on **cross-asset correlation understanding**, not just return maximization.\n\n**Dataset**: 183 instruments across 6 heterogeneous asset classes, 10 years, with stress-regime and investor-profile evaluation.\n\n**Two evaluation layers:**\n1. **Static QA** (6,269 questions, 7 task templates): Tests whether the LLM correctly answers questions about correlation structures, diversification tradeoffs, and regime-conditional volatility — without any trading.\n2. **Dynamic 5-stage pipeline**: Market scanning → Signal generation → Portfolio construction → Risk management → Execution timing. Scored by **CEPS** (Correlation-adjusted Expected Portfolio Score).\n\n**Key gap PortBench addresses**: Existing benchmarks reward concentrated high-return portfolios that are undiversified. Standard Sharpe rewards an LLM that piles into the best single asset. CEPS penalizes portfolios that ignore cross-asset correlation structure.\n\n**Application to H318 (meta-agent ETF rotation selector)**:\n- H318's known failure (NOT CONFIRMED): meta-agent selects ETFs that are all correlated with SPY — same risk, no diversification.\n- PortBench's CEPS metric would have caught this: a correlated H026/H041a/H045 blend that all decline together scores poorly on CEPS even with high individual Sharpe.\n- When H318 is revisited, use PortBench's evaluation framework: test whether the meta-agent can correctly answer correlation questions (static QA) before trusting its allocation decisions (dynamic pipeline).\n",
+  "action": "append",
+  "apply_status": "pending"
+}

@@ -611,3 +611,9 @@ Fixes applied:
   - shared-eval-checklist.md: added cross-ref to llm-alpha-validation.md
 No contradictions found. No dead index entries. No broken internal links.
 Source gaps noted (backlog): Execution Cost Modeling, Adaptive Rebalancing, PIT Datasets, Tax Optimization, LLM Discovery Cost Model, Prediction Markets as Equity Indicators.
+
+## [2026-07-13] research | H393 NOT CONFIRMED, H395 CONFIRMED (new H198 champion), quality-factor expansion, dream cycle scan 2
+Pages updated: 4 (quality-factor.md, trading/index.md, research-log/2026-07-12.md, hypothesis-log.md [H393+H395 entries already added]).
+Pages created: 0.
+Backtests run: H393 (Amihud ILLIQ composite on H386 — NOT CONFIRMED, all 30 large-caps equally liquid); H395 (realized vol tiebreaker — CONFIRMED, OOS Sharpe 3.962 NEW H198 FAMILY CHAMPION, Var B MaxDD -4.8% lowest in family).
+Dream cycle Phase 2: 11 papers reviewed, 6 proposals staged to dream_cycle/staged/2026-07-13/: H396 stub (AlphaMemo motif mining from hypothesis log), H397 stub (EFS evolutionary factor search on H198), 4 wiki updates (LLM validation audit, multi-agent task decomposition, spectral momentum theory, PortBench eval framework).

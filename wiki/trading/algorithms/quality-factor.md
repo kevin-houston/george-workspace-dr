@@ -1,8 +1,8 @@
 ---
 added: 2026-05-24
-updated: 2026-05-24
+updated: 2026-07-13
 category: strategy
-status: active — H221 (Piotroski F-Score) queued
+status: active — H221 (Piotroski F-Score) queued; H337 NOT CONFIRMED (large-cap universe); H337b proposed (200-stock)
 source: Asness/Frazzini/Pedersen (2019); Novy-Marx (2013); Piotroski (2000)
 ---
 
@@ -289,4 +289,75 @@ def piotroski_fscore(income: dict, balance: dict, cashflow: dict,
 3. **Correlation check**: H221 vs H192-D BAB — key for portfolio addition decision
 4. **If confirmed**: consider QMJ-BAB blend as a single "quality" allocation replacing H192-D
 
-**See also**: [Factor Models & Cross-Sectional Alpha](factor-models.md) — Fama-French RMW factor; [BAB Strategy](../backtesting/hypothesis-log.md#H192-D)
+**See also**: [Factor Models & Cross-Sectional Alpha](factor-models.md) — Fama-French RMW factor; [BAB Strategy](../backtesting/hypothesis-log.md#H192-D); [Momentum Strategies](momentum-strategies.md) — interaction with momentum on large-cap
+
+---
+
+## Confirmed Results on Our 30-Stock Universe
+
+### H337 NOT CONFIRMED — Quality Tiebreaker on H198 (June 2026)
+
+**Hypothesis**: Dual-rank by momentum + quality (GP/A or ROE) improves over pure momentum on the H198 30-stock large-cap universe.
+
+**IS**: 2013–2020, **OOS**: 2021–2026. Gate: OOS Sharpe > 1.174 (H198 baseline).
+
+| Variant | Signal | OOS Sharpe | vs baseline |
+|---------|--------|-----------|------------|
+| A | Pure momentum (reference) | 1.055 | −0.12 |
+| B | 0.5 × MOM + 0.5 × GP/A | 0.802 | −0.37 |
+| C | 0.7 × MOM + 0.3 × GP/A | 0.832 | −0.34 |
+| D | 0.5 × MOM + 0.5 × ROE | 0.792 | −0.38 |
+| E | MOM + GP/A median filter | 0.812 | −0.36 |
+
+**All variants failed gate. Quality tiebreaker made every variant worse than pure momentum.**
+
+**Root causes (three compounding problems):**
+
+1. **Low data coverage**: yfinance quarterly fundamentals only reach back 4–5 years, covering only 6.7% of the IS period. In data-sparse periods the strategy falls back to pure momentum; in data-rich periods (mostly OOS) the quality tiebreaker misfires.
+
+2. **Insufficient cross-sectional variation**: All 30 S&P 500 mega-caps are high-quality businesses. GP/A variation across AAPL, MSFT, NVDA, and SBUX is narrow — insufficient for meaningful ranking. The academic GP/A premium requires a broad universe (200–1000+ stocks) where industry laggards genuinely differ from leaders.
+
+3. **Quality works against momentum on this universe**: Momentum selects recent outperformers (e.g., NVDA in AI-driven years). Quality signals may route away from these winners — fabless semiconductor companies score differently on GP/A than consumer staples — reducing rather than refining the signal.
+
+**Script**: `backtesting/daily/run_h337.py`. **Results**: `backtesting/results/h337_results.json`.
+
+---
+
+### H337b — Proposed (200-Stock Universe)
+
+The quality premium requires broad cross-sectional variation. Next step: re-run on S&P 500 (~500 stocks) or Russell 1000 where quality spread is real:
+
+- **Small/mid-cap** companies show 5–10× variation in GP/A vs mega-cap peers
+- **Cross-sector**: Financial services and industrials at the low end vs pure-software/pharma at the high end
+- **Data source**: FMP API (fix SSL cert issue with OneCLI CA bundle) rather than yfinance for reliable fundamentals coverage
+
+**Expected outcome**: Quality premium likely reappears with >100 stocks and sector-neutral ranking. Academic evidence (Novy-Marx 2013) documents 0.53%/month premium in full S&P 500 universe — that's the environment this hypothesis needs.
+
+---
+
+## Factor Performance Context: 2024–2026
+
+Quality factor performance has been regime-dependent in recent years:
+
+| Period | Quality (QMJ) | Momentum | Notes |
+|--------|--------------|----------|-------|
+| 2022 | Outperformed | Crashed (momentum crash) | Rate hike environment favored defensive quality |
+| 2023 | Moderate | Recovered | Growth rebound hurt quality premium |
+| 2024 | Underperformed | Outperformed strongly | Mega-cap AI growth stocks (junk by quality metrics but huge winners) |
+| 2025 | "Awful year" (Oakmark 4Q25) | Dominated | High-beta speculative assets outperformed boring compounders |
+| Q1 2026 | Partial recovery | Still leading | Quality factor rebounded ~4% after −17% drawdown since July 2025 |
+
+**Mechanism (2024–2025 underperformance)**: Quality factor is long "boring compounders" (high ROE, low leverage, stable earnings). In the 2024–2025 AI bubble, the highest-returning stocks (NVDA, META, AMZN) were high-quality by some metrics but also high-vol, high-beta — the exact names that momentum picks but quality traditionally avoids. Both Momentum and Quality ETFs ended up loading similarly on the "Magnificent 7," reducing the quality factor's ability to differentiate.
+
+**Key risk**: The quality anomaly is **weakest in large-caps** (better analyst coverage, less mispricing opportunity) and further suppressed in concentrated tech-heavy environments. Both conditions apply to our 30-stock universe, explaining H337's failure.
+
+**AQR QMJ historical context** (1964–2023): QMJ annual premium 4.7%, σ 9.9%, Sharpe **0.47**. Correlation to market: −0.59. Correlation to momentum: **0.29** (low — genuinely independent alpha source at scale). Correlation to BAB: ~0.5–0.6.
+
+---
+
+## Next Steps (Updated July 2026)
+
+1. **H337b — 200-stock universe** (highest priority): Re-run quality-momentum composite on S&P 500 or Russell 1000. Fix FMP API SSL via `SSL_CERT_FILE=/tmp/onecli-combined-ca.pem`. Confirm cross-sectional GP/A spread first before running full backtest.
+2. **H221 — Piotroski F-Score standalone**: Run on current 30-stock universe as separate strategy (not tiebreaker). Even if cross-sectional variation is low, annual rebalance + F-Score could still identify deteriorating names to exclude.
+3. **H222 — GP/Assets Novy-Marx**: Simpler than F-Score, same data pipeline. Run on 200-stock universe if H337b data prep works.
+4. **Correlation check**: For any confirmed quality variant vs H192-D BAB — key for portfolio addition decision. Target: Corr < 0.50 for independent quality sleeve.

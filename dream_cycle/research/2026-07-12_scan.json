@@ -1,0 +1,37 @@
+{
+  "scan_date": "2026-07-12",
+  "staged_date": "2026-07-13",
+  "papers_reviewed": 11,
+  "repos_reviewed": 4,
+  "proposals_staged": 6,
+  "angles": [
+    "Pairs trading + LLM cointegration",
+    "PEAD + earnings NLP",
+    "Cross-sectional momentum + factor",
+    "Multi-agent LLM trading",
+    "GitHub trending quant finance"
+  ],
+  "key_finds": [
+    "arXiv:2605.19337 — systematic review of 77 LLM trading agent studies; only 2/19 have time-consistent protocols; 15/19 are R0 (no reproducibility artifacts); confirms LLM Alpha Validation Checklist eliminates ~85-95% of published claims",
+    "arXiv:2602.23330 — fine-grained task decomposition outperforms coarse role mimicry (analyst/manager) in multi-agent LLM investment systems; directly applicable to H274 PEAD multi-agent design",
+    "arXiv:2607.03858 — spectral variance ratio decomposition: IMOM captures persistent return memory, MOM captures directional persistence, LowVol filters antipersistent volatility noise — theoretical grounding for H395 equal-weight composite",
+    "arXiv:2606.20625 AlphaMemo — edit-motif memory from AST differences improves fixed-budget factor discovery on S&P 500; George's hypothesis-log (395+ experiments) is a ready-made motif library → H396 stub",
+    "arXiv:2507.17211 EFS — evolutionary LLM factor search on top-m ranking outperforms baselines on FF datasets + US50; directly testable on H198 universe → H397 stub",
+    "arXiv:2605.27887 PortBench — first correlation-aware LLM portfolio benchmark; CEPS metric penalizes undiversified allocations; relevant to H318 evaluation",
+    "AlphaAgent (KDD 2025) — 3-agent system (Idea/Factor/Eval) with AST regularization against crowding; decay-resistant on CSI500 and S&P500"
+  ],
+  "already_captured": [
+    "arXiv:2605.25894 — multi-modal PEAD (already staged as H357)",
+    "arXiv:2602.07048 — LLM lead-lag prediction markets (already staged as H359)",
+    "arXiv:2601.06499 — Cross-Market Alpha Alpha191 (already captured as H380)",
+    "arXiv:2507.07107 — ML Enhanced Multi-Factor bias correction (already in wiki/backtesting/market-microstructure.md)"
+  ],
+  "staged_proposals": [
+    "1_llm_alpha_validation_reproducibility_audit.json",
+    "2_multi_agent_fine_grained_task_decomposition.json",
+    "3_spectral_momentum_memory_h395_theory.json",
+    "4_h396_alphamemo_motif_mining_stub.json",
+    "5_h397_efs_evolutionary_factor_search_stub.json",
+    "6_portbench_correlation_aware_evaluation.json"
+  ]
+}

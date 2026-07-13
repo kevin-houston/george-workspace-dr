@@ -1,0 +1,14 @@
+{
+  "id": "new-hypothesis-h397-efs-evolutionary-factor-h198",
+  "date": "2026-07-13",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2507.17211",
+  "title": "H397 STUB: EFS Evolutionary Factor Search on H198 30-Stock Universe",
+  "rationale": "EFS (arXiv:2507.17211, Luo, Zhang & Liu, July 2025 / newly active 2026) reformulates asset selection as a top-m ranking task where LLM-generated factor expressions are refined by an evolutionary feedback loop (mutation + crossover based on realized IC). Outperforms statistical and optimization baselines especially in larger universes and volatile conditions. Tested on Fama-French benchmark datasets + US50, HSI45, CSI300. H397 tests EFS directly on the H198 30-stock large-cap universe to determine whether evolutionary LLM factor discovery can produce a composite exceeding H395 OOS Sharpe 3.962 (current family champion). Uses existing $OPENAI_API_KEY. The sparse top-m framing matches H395's top-1/top-2 design exactly.",
+  "risk_level": "low",
+  "type": "hypothesis_stub",
+  "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
+  "content": "h397_status: STUB (2026-07-13) — EFS Evolutionary Factor Search on H198 Universe (arXiv:2507.17211). Luo, Zhang & Liu reformulate asset selection as LLM-generated top-m ranking with evolutionary feedback: mutation and crossover based on realized IC across a test window. Outperforms baselines on FF datasets + US50. H397 design: (1) Seed EFS with H395 Var C formula (0.33×IMOM6 + 0.33×MOM60 + 0.33×LowVol) as starting factor. (2) Evolutionary loop: LLM generates 10-15 mutation candidates per round (e.g., add MOM12, change IMOM window, add realized skew, try momentum-of-vol). (3) Evaluate each candidate's rolling IC on IS 2013-2020. (4) Keep top-3 by IS IC; cross-breed to generate next generation (3-5 rounds). (5) Final OOS backtest on 2021-2026 with gate: OOS Sharpe > 3.962 (H395 Var C) OR novel factor expression not in existing hypothesis log. Gate rationale: evolutionary search should outperform human-designed baseline if it has real discriminative power. Cost: ~$20-35 OpenAI (moderate, ~50-70 factor evaluations). Script: backtesting/daily/run_h397_efs_mining.py (stub). Low risk.",
+  "action": "prepend",
+  "apply_status": "pending"
+}
