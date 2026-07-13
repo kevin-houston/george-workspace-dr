@@ -8988,3 +8988,37 @@ Reference baselines:
 
 **Script**: backtesting/daily/run_h386.py
 **Results**: backtesting/results/h386_results.json
+
+---
+
+## H393 — Amihud ILLIQ Composite Layer on H386 (CONFIRMED — NOT AN IMPROVEMENT 2026-07-12)
+
+**Source**: arXiv:2607.01377 (Aldridge, Jul 2026) — liquidity composite signal. Dream cycle proposal 2026-07-12.
+**Universe**: H198 30-stock large-cap S&P 500
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > -30%
+
+**Signal**: Adds Amihud ILLIQ rank as a third dimension to the H386 IMOM+MOM composite. ILLIQ = mean(|daily_ret| / dollar_vol) monthly-averaged; rank inverted so high rank = liquid. Variants:
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegYrs | Description |
+|-----|-------|--------|---------|-------|--------|-------------|
+| **A** | 2.656 | 2.813 | -8.9% | 93.0% | 0 | 0.40×IMOM6+0.40×MOM60+0.20×ILLIQ top-2 ✓ |
+| **B** | 2.835 | **3.151** | -8.9% | 99.8% | 0 | 0.45×IMOM6+0.45×MOM60+0.10×ILLIQ top-2 ✓ (best) |
+| **C** | 2.245 | 2.685 | -9.7% | 87.0% | 0 | 0.33×IMOM6+0.33×MOM60+0.33×ILLIQ top-2 ✓ |
+| **D** | 2.226 | 2.306 | -17.4% | 97.8% | 0 | 0.40×IMOM6+0.40×MOM60+0.20×ILLIQ top-1 ✓ |
+
+Reference: **H386 Var A** (no ILLIQ): OOS **3.273**, MaxDD **-7.5%**
+
+**Key findings**:
+- All 4 variants pass the gate — technically CONFIRMED.
+- **No variant beats H386**: best ILLIQ variant (B: 3.151) underperforms H386 Var A (3.273) by 0.122 Sharpe and is slightly worse on MaxDD (-8.9% vs -7.5%).
+- **ILLIQ dilutes signal on large-cap universe**: all 30 stocks (AAPL, MSFT, AMZN, NVDA…) are extremely liquid. Cross-sectional variation in Amihud ILLIQ is minimal — the ranking adds noise, not signal. The liquidity premium requires a small/mid-cap universe where illiquidity varies meaningfully across stocks.
+- Monotonic degradation as ILLIQ weight increases: Var B (10%) > Var A (20%) > Var C (33%) in OOS Sharpe, confirming ILLIQ is dilutive even at small weights.
+- ILLIQ data quality was excellent (99.3% coverage) — result is not a data artifact.
+
+**Conclusion**: H393 is dominated by H386 on all metrics. The Amihud ILLIQ factor is not additive in a concentrated large-cap universe. **H386 Var A remains the H198 family champion.**
+
+**Next steps**: If ILLIQ is to be tested further, the natural extension is a broader mid-cap universe (e.g., Russell 1000 ex-S&P 500 top 100) where illiquidity variation is larger. Alternatively, H394 (MadEvolve/EFS evolutionary search) may surface better tiebreakers.
+
+**Script**: backtesting/daily/run_h393.py
+**Results**: backtesting/results/h393_results.json

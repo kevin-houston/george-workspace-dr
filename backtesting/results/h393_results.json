@@ -1,0 +1,136 @@
+{
+  "hypothesis": "H393",
+  "gate": {
+    "oos_sharpe": 1.174,
+    "max_drawdown": -0.3
+  },
+  "confirmed": true,
+  "confirmed_variants": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "results": {
+    "baseline_6_1_top1": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.509,
+        "maxdd": -0.41,
+        "cagr": 0.98,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 0.575,
+        "maxdd": -0.477,
+        "cagr": 0.222,
+        "neg_yrs": 2
+      }
+    },
+    "spy": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.105,
+        "maxdd": -0.194,
+        "cagr": 0.15,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 0.954,
+        "maxdd": -0.239,
+        "cagr": 0.146,
+        "neg_yrs": 1
+      }
+    },
+    "h386_var_a_ref": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.987,
+        "maxdd": -0.143,
+        "cagr": 1.168,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.273,
+        "maxdd": -0.075,
+        "cagr": 0.99,
+        "neg_yrs": 0
+      }
+    },
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.656,
+        "maxdd": -0.143,
+        "cagr": 0.88,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.813,
+        "maxdd": -0.089,
+        "cagr": 0.93,
+        "neg_yrs": 0
+      },
+      "desc": "0.40\u00d7IMOM6+0.40\u00d7MOM60+0.20\u00d7ILLIQ top-2",
+      "pass_gate": true
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.835,
+        "maxdd": -0.143,
+        "cagr": 1.033,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.151,
+        "maxdd": -0.089,
+        "cagr": 0.998,
+        "neg_yrs": 0
+      },
+      "desc": "0.45\u00d7IMOM6+0.45\u00d7MOM60+0.10\u00d7ILLIQ top-2",
+      "pass_gate": true
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.245,
+        "maxdd": -0.195,
+        "cagr": 0.756,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.685,
+        "maxdd": -0.097,
+        "cagr": 0.87,
+        "neg_yrs": 0
+      },
+      "desc": "0.33\u00d7IMOM6+0.33\u00d7MOM60+0.33\u00d7ILLIQ top-2",
+      "pass_gate": true
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.226,
+        "maxdd": -0.221,
+        "cagr": 1.055,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.306,
+        "maxdd": -0.174,
+        "cagr": 0.978,
+        "neg_yrs": 0
+      },
+      "desc": "0.40\u00d7IMOM6+0.40\u00d7MOM60+0.20\u00d7ILLIQ top-1",
+      "pass_gate": true
+    }
+  }
+}
