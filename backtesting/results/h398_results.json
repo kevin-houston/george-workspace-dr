@@ -1,0 +1,118 @@
+{
+  "hypothesis": "H398",
+  "gate": {
+    "oos_sharpe_must_beat": 3.962,
+    "description": "beat H395 Var C"
+  },
+  "confirmed": true,
+  "confirmed_variants": [
+    "A"
+  ],
+  "imom12_vs_imom6_corr": 0.48443639815840994,
+  "results": {
+    "h395_var_c_ref": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.793,
+        "maxdd": -0.045,
+        "cagr": 0.528,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.962,
+        "maxdd": -0.086,
+        "cagr": 0.659,
+        "neg_yrs": 0
+      }
+    },
+    "spy": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.105,
+        "maxdd": -0.194,
+        "cagr": 0.15,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 0.954,
+        "maxdd": -0.239,
+        "cagr": 0.146,
+        "neg_yrs": 1
+      }
+    },
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.793,
+        "maxdd": -0.04,
+        "cagr": 0.591,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.068,
+        "maxdd": -0.047,
+        "cagr": 0.788,
+        "neg_yrs": 0
+      },
+      "desc": "0.25\u00d7IMOM6+0.25\u00d7MOM60+0.25\u00d7LowVol+0.25\u00d7IMOM12 top-2",
+      "beats_h395c": true
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.903,
+        "maxdd": -0.04,
+        "cagr": 0.608,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.926,
+        "maxdd": -0.046,
+        "cagr": 0.777,
+        "neg_yrs": 0
+      },
+      "desc": "0.30\u00d7IMOM6+0.30\u00d7MOM60+0.25\u00d7LowVol+0.15\u00d7IMOM12 top-2",
+      "beats_h395c": false
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.841,
+        "maxdd": -0.143,
+        "cagr": 0.7,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.599,
+        "maxdd": -0.047,
+        "cagr": 0.85,
+        "neg_yrs": 0
+      },
+      "desc": "0.20\u00d7IMOM6+0.20\u00d7MOM60+0.20\u00d7LowVol+0.40\u00d7IMOM12 top-2",
+      "beats_h395c": false
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.763,
+        "maxdd": -0.056,
+        "cagr": 0.637,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.723,
+        "maxdd": -0.063,
+        "cagr": 0.807,
+        "neg_yrs": 0
+      },
+      "desc": "0.25\u00d7IMOM6+0.25\u00d7MOM60+0.25\u00d7LowVol+0.25\u00d7IMOM12 top-1",
+      "beats_h395c": false
+    }
+  }
+}
