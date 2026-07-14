@@ -1,0 +1,15 @@
+{
+  "id": "2026-07-13-1",
+  "title": "LLM Metacognition — Wiki Page (arXiv:2607.11881)",
+  "type": "wiki_page",
+  "priority": "medium",
+  "apply_status": "applied",
+  "target_file": "wiki/tools/llm-metacognition-2026.md",
+  "description": "New wiki page covering the first comprehensive survey of LLM metacognitive capabilities (confidence calibration, knowledge boundary recognition, self-correction). Key finding: aggregate calibration ≠ individuated per-query accuracy, undermining confidence-weighted routing. Practical implications for H381/H382 multi-agent trading and dream cycle evaluation.",
+  "source": {
+    "title": "Metacognition in LLMs: Foundations, Progress, and Opportunities",
+    "arxiv": "2607.11881",
+    "date": "2026-07-13",
+    "authors": "Gabrielle Kaili-May Liu, Areeb Gani, Jacqueline Lu, Jordan Thomas, Mark Steyvers, Arman Cohan"
+  }
+}

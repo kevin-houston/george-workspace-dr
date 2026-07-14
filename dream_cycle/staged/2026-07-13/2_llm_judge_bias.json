@@ -1,0 +1,15 @@
+{
+  "id": "2026-07-13-2",
+  "title": "LLM-as-Judge Bias (Mechanistic Interpretability) — Wiki Page (arXiv:2607.11871)",
+  "type": "wiki_page",
+  "priority": "medium",
+  "apply_status": "applied",
+  "target_file": "wiki/tools/llm-judge-bias-2026.md",
+  "description": "New wiki page covering mechanistic interpretability of LLM-as-judge scoring bias. Key finding: bias is a low-dimensional subspace in activation space (not just input-output noise), enabling causal control (steering activations steers scores) and operational prediction (predicts judge failures before scoring). Relevant to dream cycle hypothesis evaluation and H274/H381 bull/bear debate architectures.",
+  "source": {
+    "title": "Inside the Unfair Judge: A Mechanistic Interpretability Account of LLM-as-Judge Bias",
+    "arxiv": "2607.11871",
+    "date": "2026-07-13",
+    "authors": "Zixiang Xu, Sixian Li, Huaxing Liu, Xiang Wang, Sauai Li, Zirui Song, Xiuying Chen"
+  }
+}

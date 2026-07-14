@@ -1,0 +1,15 @@
+{
+  "id": "2026-07-13-3",
+  "title": "Agentic Routing: Harness-Native Data Flywheel — Wiki Page (arXiv:2607.11399)",
+  "type": "wiki_page",
+  "priority": "medium",
+  "apply_status": "applied",
+  "target_file": "wiki/tools/agentic-routing-2026.md",
+  "description": "New wiki page covering step-level model routing inside agent harnesses. Key insight: routing decisions produce labeled training records automatically (harness-native data flywheel), enabling self-improving routing without human annotation. Relevant to H318 meta-learner selector, multi-agent trading architectures, and dream cycle design. OpenSquilla implementation available open-source with LightGBM cold-start ranker.",
+  "source": {
+    "title": "Agentic Routing: The Harness-Native Data Flywheel",
+    "arxiv": "2607.11399",
+    "date": "2026-07-13",
+    "authors": "Xinchen Liu, Hang Zhou, Yingjie Zong et al. (Huawei Noah's Ark Lab)"
+  }
+}
