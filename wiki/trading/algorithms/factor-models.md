@@ -731,3 +731,54 @@ def compute_factor_correlation_matrix(factor_dict: dict, start: str, end: str) -
 ```
 
 **Diversification threshold**: any new factor with pairwise correlation > 0.60 with an existing factor should be considered redundant. Use the spectral framework to identify which information channel it maps to before including it.
+
+
+---
+
+## Section 14: Characteristic-Axis Integral Diagnostic (arXiv:2607.05091, Jul 2026)
+
+This framework tests whether a factor model *genuinely explains* return variation or *artificially overcorrects* — a key distinction when validating new factors like IMOM against established benchmarks.
+
+**The problem with existing factor tests**: Standard alpha-t tests only check if abnormal returns persist after controlling for the factor. They cannot distinguish:
+- **Genuine explanation**: factor aligns with the economic source of return predictability
+- **Overcorrection**: factor model mechanically suppresses a return pattern without economic grounding (e.g., HML artificially penalizes high-momentum stocks that happen to have high B/M)
+
+**The diagnostic**: Measure the integral of the return-characteristic sorted axis (think: the area under the curve when you sort stocks by a characteristic and plot average returns). A factor that *explains* a characteristic will flatten this axis to near-zero. A factor that *overcorrects* will flip the axis negative.
+
+**FF5+MOM findings (from paper):**
+
+| Factor | Effect on characteristic axis | Interpretation |
+|--------|-------------------------------|----------------|
+| HML | Overcorrects (flips negative) | B/M premium mechanical, not economic |
+| CMA | Overcorrects (flips negative) | Investment premium over-absorbed |
+| RMW | Flattens to ~0 | Profitability correctly explained |
+| UMD (MOM) | Flattens to ~0 | Momentum correctly explained |
+
+**Implication for IMOM (H398):**
+
+IMOM is not in the Fama-French factor library. The characteristic-axis diagnostic would tell us:
+1. Does IMOM *explain* variation that MOM (UMD) misses? → If yes: IMOM is a genuine new factor, H398 is theoretically grounded
+2. Does IMOM *merely replace* MOM with a better-measured version of the same thing? → If yes: IMOM is a measurement refinement, not a new factor — still valid but no diversification benefit from both
+3. Does IMOM overcorrect? → Unlikely given H398 OOS results, but the diagnostic would confirm
+
+**How to run**:
+```python
+import numpy as np
+import pandas as pd
+
+def characteristic_axis_integral(returns: pd.Series, characteristic: pd.Series, n_deciles: int = 10) -> float:
+    """Compute integral of return-characteristic axis. Near-zero = genuine explanation; negative = overcorrection."""
+    bins = pd.qcut(characteristic, q=n_deciles, labels=False)
+    decile_returns = returns.groupby(bins).mean()
+    # Integral as trapezoid under sorted decile return curve
+    return np.trapz(decile_returns.values, dx=1.0 / n_deciles)
+
+# Usage: run before and after controlling for IMOM, compare integrals
+# before_integral = characteristic_axis_integral(raw_returns, momentum_signal)
+# after_integral = characteristic_axis_integral(imom_residuals, momentum_signal)
+# if abs(after_integral) < abs(before_integral): IMOM explains momentum variation
+```
+
+**Relevance to H398 production deployment**: Before going live with H398, run this diagnostic on IMOM6 and IMOM12 vs FF5+UMD. A near-zero after-integral confirms IMOM is theoretically grounded. An overcorrection flag would suggest IMOM is mechanically fitted to the IS period (2013-2020) and may not generalize.
+
+**See also**: Section 13 (Cross-Sectional Factor Correlation Management), Section 11 (Spectral Memory Decomposition Theory), H398 (4-factor equal-weight composite, OOS Sharpe 4.068).

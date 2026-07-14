@@ -631,3 +631,45 @@ def attribution_score(text: str) -> float:
 - EarningsInOne dataset provides aligned ECT + intraday data; code available at GitHub linked in submission
 - Would complement H174 without changing entry timing (Q&A text arrives in same 8-K or via transcript APIs)
 - Risk: adds complexity; H174 at WR=81.8% is already strong. Only pursue if H174 paper trade degrades.
+
+
+---
+
+## Analyst Belief Formation from Earnings Calls (arXiv:2511.15214, Nov 2025)
+
+This paper studies how sell-side analysts update their earnings forecasts after quarterly earnings calls — and finds systematic biases that directly explain the PEAD effect exploited by H174.
+
+**Core findings:**
+- **Over-reaction to sentiment**: Analysts update forecasts too aggressively in response to management tone (positive/negative affect in language). Stocks where management sounds upbeat get forecast upgrades that overshoot subsequent actual earnings.
+- **Under-reaction to risk/uncertainty narratives**: Analysts insufficiently discount forward-looking uncertainty language (hedging phrases, confidence intervals, range guidance). Stocks with high uncertainty language get forecast updates that undershoot the eventual dispersion of outcomes.
+
+**Why this validates H174:**
+
+H174 uses ProsusAI/finbert (a sentiment classifier) with gate `score >= 0.18 AND surprise >= 0.02`. The over-reaction channel explains why this works:
+1. Positive 8-K sentiment → analysts over-react, issue upgrades
+2. Market anchors on analyst upgrades, drifts up
+3. H174 catches this drift in the 20-day hold window (WR=81.8%)
+
+The under-reaction channel suggests untapped alpha:
+- When uncertainty language is LOW (management is specific and confident), the market ALSO under-reacts to the positive signal → stronger drift
+- When uncertainty language is HIGH, positive sentiment is less reliable → lower WR
+
+**H400 Design Implication (SAE-FiRE + Uncertainty Filter):**
+
+Combine with arXiv:2505.14420 SAE-FiRE approach:
+1. SAE extracts latent features from FinBERT hidden states
+2. **Separate SAE features into**: (a) sentiment-activating features, (b) uncertainty-activating features
+3. Entry gate: `high_sentiment_features AND low_uncertainty_features` → highest-conviction events where analyst over-reaction is not offset by uncertainty under-reaction
+4. Expected: tighter n but higher WR (>85% target)
+
+**Key Mechanism Summary:**
+
+| Signal type | Analyst reaction | Market impact | H174 implication |
+|-------------|-----------------|---------------|------------------|
+| Management sentiment (tone) | Over-react → over-upgrade | Price drifts up as upgrades land | FinBERT score captures this ✓ |
+| Risk/uncertainty language | Under-react → underestimate dispersion | Price revision smaller than it should be | Not currently captured |
+| EPS surprise magnitude | Roughly rational | Immediate jump ± noise | surprise >= 0.02 gate ✓ |
+
+**Reference for PEAD theory**: This paper provides the *mechanism* for why PEAD exists specifically in the earnings-call universe: it is a consequence of systematic analyst forecast errors driven by linguistic features of management communication — not just information diffusion speed.
+
+**See also**: H174 (PEAD FinBERT confirmation), H317 (multimodal PEAD — EPS + momentum; failed because EPS filter was redundant with FinBERT), H400 stub (SAE-FiRE PEAD upgrade, staged 2026-07-14).

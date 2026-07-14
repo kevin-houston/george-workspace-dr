@@ -573,3 +573,42 @@ Complementary to Moira (HRL+LLM semantic pair selection):
 - **Valeyre**: optimize HOW to extract the stationary residual (LLM-guided factor decomposition)
 
 Practical implementation for H316: after Moira selects a pair, run a small LLM prompt with the pair's recent price series and known factor loadings (sector, beta) to select the factor decomposition that minimizes ADF test p-value on the residual. Cost: ~$0.01 per pair per month.
+
+
+---
+
+## Attention Factors for Statistical Arbitrage (arXiv:2510.11616, Oct 2025)
+
+Epstein, Wang, Choi & Pelger (Stanford) develop a machine learning framework that replaces cointegration-based pair identification with **conditional latent factors learned from firm characteristic embeddings**.
+
+**Core innovation**: Instead of testing for statistical cointegration (which is backward-looking and structurally unstable — the root cause of H307's failure), the system learns which stocks are *similar* from their fundamental and technical characteristics. Two stocks with similar characteristics that diverge in price are identified as mispricings rather than as 'cointegrated pairs.'
+
+**Architecture:**
+1. **Attention factor learning**: Firm characteristics (size, momentum, profitability, investment, etc.) are embedded and passed through a sequence model (attention mechanism) to produce conditional latent factors
+2. **Mispricing detection**: Stocks are compared cross-sectionally within their learned factor groupings; deviation from the group constitutes the arbitrage signal
+3. **Joint optimization**: Factor identification and arbitrage strategy formation are jointly optimized, with transaction costs included in training (not as an afterthought)
+
+**Key Results (large-cap US equities, 24-year OOS period):**
+- Gross OOS Sharpe ratio: **>4.0**
+- Net-of-transaction-costs OOS Sharpe ratio: **2.3**
+- Weaker individual factors meaningfully contribute when combined — no single dominant factor
+
+**Why This Directly Addresses H307's Root Cause:**
+
+| H307 failure mode | Attention Factors approach |
+|-------------------|---------------------------|
+| Cointegration tests: IS passes, OOS fails (structural breaks) | Characteristic similarity: learned from recent data, adapts as fundamentals change |
+| Static pair identity (same pairs throughout) | Dynamic groupings: firm characteristics change → pair identity updates monthly |
+| No economic grounding for why ETF pairs should cointegrate | Characteristic embedding = economic similarity (same sector, size, profitability regime) |
+
+**H401 Candidate Design (attention-based pairs on H198):**
+- Universe: H198 30 large-cap stocks
+- Factor inputs: IMOM6, MOM60, LowVol, IMOM12 (existing confirmed signals) + fundamentals (PE, ROE, sector) from FMP
+- Method: For each stock, find the K=2 most similar stocks by characteristic embedding; trade deviation from the group
+- Expected: OOS Sharpe >1.174 (H198 baseline); Corr(SPY) lower than momentum (stat-arb is market-neutral)
+- IS: 2013-2020; OOS: 2021-2026
+- Cost: No LLM calls needed — pure ML with PyTorch; ~$0 to run
+
+**Code**: No public implementation released. Requires: PyTorch for attention layers, sklearn for characteristic preprocessing, alphalens-reloaded for factor evaluation. See `factor-models.md` for cross-sectional factor construction code.
+
+**Note**: This methodology is complementary to the semantic LLM approach (H316 Moira). Attention factors use *price/fundamental characteristics*; H316 uses *textual similarity*. The two could be combined: attention factors for initial pair grouping, LLM semantic filter for final pair confirmation.

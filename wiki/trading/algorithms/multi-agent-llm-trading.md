@@ -705,3 +705,36 @@ Zhao, Chen & Su introduce PortBench — the first portfolio management benchmark
 - H318's known failure (NOT CONFIRMED): meta-agent selects ETFs that are all correlated with SPY — same risk, no diversification.
 - PortBench's CEPS metric would have caught this: a correlated H026/H041a/H045 blend that all decline together scores poorly on CEPS even with high individual Sharpe.
 - When H318 is revisited, use PortBench's evaluation framework: test whether the meta-agent can correctly answer correlation questions (static QA) before trusting its allocation decisions (dynamic pipeline).
+
+
+---
+
+## HedgeAgents: Balanced-Aware Multi-Agent Trading with Hedging Specialists (arXiv:2502.13165, Feb 2025)
+
+Li, Zeng, Xing, Xu & Xu introduce HedgeAgents — a multi-agent LLM system specifically designed to prevent the ~20% drawdown that standard LLM trading systems suffer during volatility spikes.
+
+**Core problem it solves**: Existing LLM trading agents optimize for return but lack structured hedging logic. When the market reverses, agents continue following momentum signals because there's no dedicated loss-mitigation mechanism.
+
+**Architecture:**
+- **Central fund manager agent**: Coordinates overall allocation; receives and synthesizes reports from hedging experts; makes final position decisions
+- **Specialized hedging experts**: One per asset class (equities, bonds, commodities, FX, derivatives). Each expert independently assesses downside risk and hedging options in its domain
+- **Three-conference coordination protocol**: (1) Pre-market conference — assess overnight developments; (2) Intraday conference — real-time reallocation triggers; (3) Post-market conference — performance review and strategy update
+
+**Key Results:**
+- 70% annualized return
+- 400% total return over 3-year test period
+- Explicitly reduces catastrophic drawdown during volatility events
+- 'Investment experience comparable to human experts' (self-reported)
+
+**Application to Current Pipeline:**
+
+*H274 (multi-agent PEAD upgrade)*: The 3-stage conference mechanism maps cleanly onto the PEAD event-driven flow:
+  - Pre-earnings conference: FinBERT agent + EPS agent align on entry signal
+  - Intraday conference: momentum agent monitors post-entry drift
+  - Post-event conference: exit signal synthesis (align with H378 ECT signal)
+
+*H318 (meta-agent ETF selector)*: The central fund manager pattern directly addresses H318's known failure mode — selecting correlated ETFs — by requiring each ETF-domain specialist to independently assess correlation risk before the manager allocates.
+
+**Critique**: 70% annualized return likely includes survivorship bias and favorable test period selection. No IS/OOS split described in abstract. Treat as architecture reference, not performance benchmark.
+
+**Code**: No public release. Architecture can be replicated with Claude multi-agent via NanoClaw `create_agent` tool.
