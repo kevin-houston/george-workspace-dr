@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-08
+updated: 2026-07-14
 status: active
 sources:
   - Kenneth French Data Library (https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
@@ -530,3 +530,204 @@ Key finding: value + short-term reversal signals generate extraordinary alpha wh
 - Universe survivorship: S&P 500 constituents only (survivorship-biased upward)
 
 **H265 design:** Test drift-regime gate on our 200-stock universe (H198 base). Signal: 6-1m momentum; only hold if the stock had >60% positive days in trailing 63 trading days (3m window). Expected: fewer positions, higher Sharpe, reduced crash risk. TC: 0.10%/side, monthly rebalance.
+
+---
+
+## 10. IMOM — Illusion Momentum Factor (2026 Discovery)
+
+**Source**: Iwanaga & Hirose (2026), *Pacific-Basin Finance Journal* Vol. 96, DOI:10.1016/j.pacfin.2026.103063; working paper Iwanaga (2024).
+
+### What Is IMOM?
+
+IMOM (Illusion Momentum) captures the **quality of compounding** over a lookback window:
+
+```python
+IMOM(N) = compound_return_N_months - arithmetic_sum_N_months
+        = [Π(1 + r_t) - 1] - Σ(r_t)
+```
+
+**High IMOM** = compound return > arithmetic sum → sustained directional gains (compounding worked in the stock's favor — gains built on gains).
+
+**Low IMOM** = compound return < arithmetic sum → volatile round-trip (compounding hurt — the stock gave back gains between periods).
+
+**Key insight**: IMOM is negative for all non-trivially volatile paths. The *least negative* stocks are the consistent compounders; the *most negative* are volatile round-trippers. Cross-sectional ranking of IMOM selects the most sustained, directional momentum names.
+
+### Why It Predicts Returns
+
+Iwanaga (2024) proposes a cognitive bias mechanism: investors anchor to the **arithmetic sum** when mentally tracking performance ("this stock is up ~3% each month") and underestimate the compound return for consistent winners. This systematic underreaction to **compound consistency** creates predictable drift.
+
+Consistent with the spectral memory decomposition (see Section 11): IMOM maps to the **persistent return-memory channel**, which is orthogonal to raw directional momentum.
+
+### IMOM vs Standard Momentum: Key Statistics on H198 30-Stock Universe
+
+| Factor | Avg cross-sectional spread | Window | 
+|--------|--------------------------|--------|
+| MOM6 (no-skip) | — | 6-month |
+| IMOM6 | 0.0476 | 6-month |
+| IMOM12 | **0.1530** (3.2× IMOM6) | 12-month |
+| corr(IMOM6, IMOM12) | **0.484** | — |
+
+IMOM12 has dramatically wider cross-sectional spread because 12 months of compounding amplifies the distinction between consistent compounders and volatile round-trippers. The moderate correlation (0.484) with IMOM6 confirms they capture compounding quality at different horizons — partially independent signals.
+
+### IMOM as 5th Cross-Sectional Factor (H399 Learning)
+
+Testing MOM120 as a 5th factor (H399) showed:
+- corr(MOM60, MOM120) = 0.702
+- corr(IMOM12, MOM120) = 0.720
+
+**Key finding**: Raw 12-month momentum is highly correlated with both 6-month momentum and IMOM12. The 4-factor space (IMOM6 + MOM60 + LowVol + IMOM12) is already well-diversified. Adding raw momentum variants adds noise, not signal. A genuine 5th factor must come from a different domain: sentiment, short-interest, quality, or event-driven signals.
+
+### Python Implementation
+
+```python
+import pandas as pd
+import numpy as np
+
+def compute_imom(monthly_px: pd.DataFrame, window: int) -> pd.DataFrame:
+    """
+    IMOM = compound_return_window - arithmetic_sum_window
+    monthly_px: DataFrame with monthly close prices, columns=tickers, index=dates
+    Returns: DataFrame of IMOM values (same shape as input)
+    """
+    monthly_ret = monthly_px.pct_change()
+    compound    = monthly_px.pct_change(window)      # = Π(1+r) - 1 over window months
+    arith_sum   = monthly_ret.rolling(window).sum()  # = Σ(r) over window months
+    return compound - arith_sum
+
+# Usage
+imom_6m  = compute_imom(monthly_px, window=6)
+imom_12m = compute_imom(monthly_px, window=12)
+
+# Cross-sectional rank (higher rank = more consistent compounder)
+rank_imom6  = imom_6m.rank(axis=1, pct=True)
+rank_imom12 = imom_12m.rank(axis=1, pct=True)
+
+# Diagnostics
+corr_6_12 = imom_6m.corrwith(imom_12m, axis=1).mean()
+spread_6  = imom_6m.std(axis=1).mean()
+spread_12 = imom_12m.std(axis=1).mean()
+print(f"corr(IMOM6, IMOM12): {corr_6_12:.3f}")
+print(f"IMOM6 spread: {spread_6:.4f}  IMOM12 spread: {spread_12:.4f}")
+```
+
+---
+
+## 11. Spectral Memory Decomposition — Theory for Cross-Sectional Composites
+
+**Source**: Frøseth (July 4, 2026), arXiv:2607.03858.
+
+### Core Idea
+
+The spectral decomposition of return predictability maps observed signals to **orthogonal information channels** in the return-generating process:
+
+| Signal | Spectral Channel | What It Captures |
+|--------|-----------------|-----------------|
+| **IMOM** | Persistent return-memory | Compounders — stocks where gains build on gains consistently |
+| **MOM (no-skip)** | Directional persistence | Trending stocks — sustained price direction regardless of volatility |
+| **LowVol (LowVol Rank)** | Volatility noise filter | Filters out stocks with vol-driven returns; stabilizes the composite |
+| **Antipersistent channel** | Reversal | Stocks where compounding is consistently negative — potential short candidates |
+
+### Why Equal-Weighting Works
+
+H395 Var C (0.33×IMOM6 + 0.33×MOM60 + 0.33×LowVol, OOS Sharpe 3.962) outperformed single-factor and non-equal-weight composites because **spectral diversification** holds: each of the three signals captures an orthogonal component of the return space. Equal weighting is optimal when the signals are orthogonal with similar per-signal Sharpe ratios — which the equal-weight result validates empirically.
+
+Adding IMOM12 (H398 Var A, OOS 4.068) extends the persistent-memory channel from 6 months to 12 months, capturing compounders that need longer formation periods.
+
+### Signals Within the Spectral Framework
+
+```
+H395 Var C composite:
+  IMOM6  → persistent memory (6-month horizon)
+  MOM60  → directional persistence (6-month horizon, no-skip)
+  LowVol → volatility noise filter
+
+H398 Var A composite (champion, OOS 4.068):
+  IMOM6  → persistent memory (6-month)
+  MOM60  → directional persistence (6-month)
+  LowVol → volatility noise filter
+  IMOM12 → persistent memory (12-month) [NEW orthogonal horizon]
+```
+
+### Implications for Future Research
+
+1. **Antipersistent channel** (stocks where compounding is most negative) could serve as a contra-signal — short the most antipersistent stocks. Not yet tested on H198 universe.
+2. **Cross-signal correlation diagnostic**: before adding a 5th factor, measure its correlation with all 4 existing factors. If any pairwise correlation > 0.60, the factor adds noise, not diversification. This is why MOM120 failed (0.70 corr with MOM60, 0.72 with IMOM12).
+3. **Higher spectral harmonics**: IMOM18 or IMOM24 might capture ultra-long compounders not in IMOM12. The diminishing cross-sectional spread (as windows lengthen) argues against very long windows.
+
+---
+
+## 12. Confirmed H198 Composite Signals — Results Table
+
+H198 universe: 30 large-cap S&P stocks (AAPL/MSFT/AMZN/GOOGL/META/TSLA/NVDA/AVGO/QCOM/AMD/V/MA/BAC/WFC/JPM/UNH/LLY/PFE/JNJ/ABBV/WMT/HD/SBUX/LOW/COST/CVX/XOM/BA/CAT/IBM). IS: 2013-2020, OOS: 2021-2026, top-2 selection.
+
+| Hypothesis | Signal | OOS Sharpe | MaxDD | CAGR | Neg Yrs | Key Finding |
+|-----------|--------|-----------|-------|------|---------|-------------|
+| H198 | 6-1m momentum | 1.174 | −22.7% | ~29% | 0 | Base. Skip-month convention standard. |
+| H376 Var D | 6-0m momentum (no-skip) + MAX composite | 2.790 | −8.4% | ~47% | 0 | 6-0m no-skip dominates 6-1m |
+| H376 baseline | Pure 6-0m no-skip (standalone) | 3.120 | −8.4% | ~54% | 0 | **Strongest single-factor result** |
+| H393 | H386 + Amihud ILLIQ composite | TBD | — | — | — | Proposed |
+| H395 Var C | 0.33×IMOM6+0.33×MOM60+0.33×LowVol | 3.962 | −8.6% | ~65% | 0 | Prior champion; spectral diversification |
+| **H398 Var A** | 0.25×IMOM6+0.25×MOM60+0.25×LowVol+0.25×IMOM12 | **4.068** | **−4.7%** | ~79% | **0** | **Current H198 champion** |
+| H399 (best) | H398A + MOM120 as 5th factor | ≤4.068 | — | — | 0 | NOT CONFIRMED; MOM120 redundant |
+
+**H398 Var A annual OOS returns**: 2021 +124%, 2022 +60%, 2023 +138%, 2024 +130%, 2025 +103%, 2026 +35% (partial).
+
+### 6-0m No-Skip Discovery
+
+One of the most important signal findings: **removing the skip month (trading the most recent month's momentum) dramatically improves performance on the H198 universe**.
+
+| Convention | OOS Sharpe | MaxDD |
+|-----------|-----------|-------|
+| 6-1m momentum (skip recent month) | 1.174 | −22.7% |
+| 6-0m momentum (no skip) | 3.120 | −8.4% |
+
+This reverses the conventional wisdom (skip-month is used to avoid short-term reversal contamination). On a 30-stock large-cap tech-heavy universe, the skip-month is harmful — the most recent month's signal contains real information, not reversal noise. Theory: large-cap stocks with high analyst coverage don't exhibit the same 1-month reversal as smaller stocks; the short-term momentum channel is intact through month 0.
+
+The H277 NASDAQ finding (skip-month *hurts* on tech-heavy universe) corroborates this.
+
+### Next Directions for the H198 Factor Space
+
+Based on the spectral framework and confirmed results, the highest-potential directions for the next H-number are:
+1. **Sentiment/news signal** (H279 queued) — adds information from a completely different domain; likely low correlation with price-based IMOM/MOM composite
+2. **Short-interest signal** — heavily shorted stocks that pass the IMOM filter may have stronger alpha (short squeeze potential)
+3. **IMOM + quality gate** — filter to only buy IMOM6/IMOM12 top stocks that also have F-Score ≥ 6 (not tested; H337b's 200-stock version could validate)
+4. **Antipersistent channel short** — use the bottom IMOM12 quintile as a contra-signal to enhance the return spread
+
+---
+
+## 13. Cross-Sectional Factor Correlation Management
+
+When building composite cross-sectional signals, track pairwise correlations across the factor space to ensure diversification:
+
+```python
+def compute_factor_correlation_matrix(factor_dict: dict, start: str, end: str) -> pd.DataFrame:
+    """
+    factor_dict: {name: pd.DataFrame} of cross-sectional factor values
+    Returns: avg cross-sectional pairwise correlation matrix
+    """
+    names = list(factor_dict.keys())
+    corr_matrix = {}
+    
+    for n1 in names:
+        row = {}
+        for n2 in names:
+            if n1 == n2:
+                row[n2] = 1.0
+            else:
+                # Cross-sectional correlation at each date, then average
+                row[n2] = factor_dict[n1].corrwith(factor_dict[n2], axis=1).mean()
+        corr_matrix[n1] = row
+    
+    return pd.DataFrame(corr_matrix)
+
+# H398 factor correlation snapshot (H198 universe):
+#            IMOM6  MOM60  LowVol  IMOM12  MOM120
+# IMOM6      1.000  ?      ?       0.484   ?
+# MOM60      ?      1.000  ?       ?       0.702
+# LowVol     ?      ?      1.000   ?       ?
+# IMOM12     0.484  ?      ?       1.000   0.720
+# MOM120     ?      0.702  ?       0.720   1.000
+# → MOM120 too correlated with existing factors to add value
+```
+
+**Diversification threshold**: any new factor with pairwise correlation > 0.60 with an existing factor should be considered redundant. Use the spectral framework to identify which information channel it maps to before including it.

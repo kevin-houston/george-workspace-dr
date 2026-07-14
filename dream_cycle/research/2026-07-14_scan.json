@@ -1,0 +1,123 @@
+{
+  "date": "2026-07-14",
+  "scan_angles": [
+    "pairs_trading_llm_cointegration",
+    "pead_text_signals_earnings_nlp",
+    "cross_sectional_momentum_factor",
+    "multi_agent_llm_trading",
+    "github_trending_quant_repos"
+  ],
+  "papers_found": [
+    {
+      "id": "arXiv:2510.11616",
+      "title": "Attention Factors for Statistical Arbitrage",
+      "authors": "Epstein, Wang, Choi & Pelger (Stanford)",
+      "date": "Oct 2025",
+      "angle": "pairs_trading_llm_cointegration",
+      "relevance_score": 9,
+      "relevance_note": "Directly addresses H307 root cause (cointegration failure). OOS Sharpe >4.0 gross / 2.3 net on large-cap US equities. Actionable as H401 on H198 universe. Top priority.",
+      "staged": true,
+      "staged_file": "2_attention_factors_stat_arb_wiki.json",
+      "target_hypothesis": "H401 (new candidate)"
+    },
+    {
+      "id": "arXiv:2605.01954",
+      "title": "Moira: LLM Semantic Pairs Trading",
+      "authors": "Unknown",
+      "date": "May 2026",
+      "angle": "pairs_trading_llm_cointegration",
+      "relevance_score": 8,
+      "relevance_note": "Already in wiki as H316 stub. Not re-staged — already captured.",
+      "staged": false,
+      "reason_not_staged": "Already in wiki and hypothesis log as H316 STUB"
+    },
+    {
+      "id": "arXiv:2505.14420",
+      "title": "SAE-FiRE: Sparse Autoencoders + ANOVA F-tests for Earnings Surprise Prediction",
+      "authors": "Zhao et al.",
+      "date": "May 2025",
+      "angle": "pead_text_signals_earnings_nlp",
+      "relevance_score": 8,
+      "relevance_note": "Directly upgrades H174 FinBERT signal using SAE feature selection. Outperforms raw FinBERT on 3 financial datasets. Actionable as H400 stub — no LLM API cost.",
+      "staged": true,
+      "staged_file": "3_sae_fire_pead_stub.json",
+      "target_hypothesis": "H400 (new stub)"
+    },
+    {
+      "id": "arXiv:2511.15214",
+      "title": "Corporate Earnings Calls and Analyst Belief Formation",
+      "authors": "Unknown",
+      "date": "Nov 2025",
+      "angle": "pead_text_signals_earnings_nlp",
+      "relevance_score": 7,
+      "relevance_note": "Theoretical anchor for PEAD: analysts over-react to sentiment, under-react to uncertainty narratives. Validates H174 mechanism and suggests H400 uncertainty-filter enhancement.",
+      "staged": true,
+      "staged_file": "4_earnings_calls_analyst_beliefs_wiki.json",
+      "target_hypothesis": "H174 (theoretical validation), H400 (design input)"
+    },
+    {
+      "id": "arXiv:2607.05091",
+      "title": "Characteristic-Axis Integral Diagnostic for Factor Models",
+      "authors": "Unknown",
+      "date": "Jul 6 2026",
+      "angle": "cross_sectional_momentum_factor",
+      "relevance_score": 6,
+      "relevance_note": "Framework for testing whether IMOM is genuinely new vs absorbed by FF5+MOM. HML/CMA overcorrect; RMW/UMD correctly explain. Medium relevance — theoretical validation, not blocking near-term work.",
+      "staged": true,
+      "staged_file": "5_characteristic_axis_diagnostic_wiki.json",
+      "target_hypothesis": "H398 (theoretical validation), H401 (pre-deployment test)"
+    },
+    {
+      "id": "arXiv:2607.03858",
+      "title": "Spectral Memory Decomposition (Frøseth Jul 2026)",
+      "authors": "Frøseth",
+      "date": "Jul 2026",
+      "angle": "cross_sectional_momentum_factor",
+      "relevance_score": 9,
+      "relevance_note": "Already applied in Phase 1 wiki expansion (factor-models.md Section 11). Explains H398 equal-weighting optimality. Already captured in wiki — not re-staged.",
+      "staged": false,
+      "reason_not_staged": "Already incorporated into factor-models.md Section 11 during Phase 1 wiki expansion"
+    },
+    {
+      "id": "arXiv:2502.13165",
+      "title": "HedgeAgents: Balanced-Aware Multi-Agent Trading System",
+      "authors": "Li, Zeng, Xing, Xu & Xu",
+      "date": "Feb 2025",
+      "angle": "multi_agent_llm_trading",
+      "relevance_score": 8,
+      "relevance_note": "Addresses 20% drawdown problem in LLM trading. 3-conference coordination protocol maps directly to H274 PEAD flow and H318 meta-agent. 70% annualized / 400% 3-year results (interpret with caution — no IS/OOS split noted).",
+      "staged": true,
+      "staged_file": "1_hedgeagents_multi_agent_wiki.json",
+      "target_hypothesis": "H274 (multi-agent PEAD upgrade), H318 (meta-agent ETF selector)"
+    },
+    {
+      "id": "github_zvtvz_zvt",
+      "title": "ZVT: Quant Framework (github.com/zvtvz/zvt)",
+      "authors": "zvtvz",
+      "date": "Active 2026",
+      "angle": "github_trending_quant_repos",
+      "relevance_score": 4,
+      "relevance_note": "Python quant framework, data ingestion + factor research + backtesting. Established repo. Low relevance — existing yfinance/pandas/venv workflow is sufficient; ZVT adds infrastructure complexity without clear gain for current hypothesis pipeline.",
+      "staged": false,
+      "reason_not_staged": "Low incremental value over existing workflow. No clear gap it fills."
+    }
+  ],
+  "proposals_staged": 5,
+  "proposals_skipped": 3,
+  "new_hypothesis_candidates": ["H400 (SAE-FiRE PEAD)", "H401 (Attention Factors stat-arb)"],
+  "wiki_pages_targeted": [
+    "wiki/trading/algorithms/multi-agent-llm-trading.md",
+    "wiki/trading/algorithms/pairs-trading.md",
+    "wiki/trading/algorithms/event-driven.md",
+    "wiki/trading/algorithms/factor-models.md"
+  ],
+  "phase1_wiki_expansion": {
+    "file": "wiki/trading/algorithms/factor-models.md",
+    "sections_added": [
+      "Section 10: IMOM — Illusion Momentum Factor (with compute_imom() code)",
+      "Section 11: Spectral Memory Decomposition Theory (arXiv:2607.03858)",
+      "Section 12: Confirmed H198 Composite Signals Table (H198→H376→H395→H398→H399)",
+      "Section 13: Cross-Sectional Factor Correlation Management (with compute_factor_correlation_matrix() code)"
+    ]
+  }
+}
