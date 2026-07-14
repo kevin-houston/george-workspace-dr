@@ -1,0 +1,139 @@
+{
+  "hypothesis": "H399",
+  "gate": {
+    "oos_sharpe_must_beat": 4.068,
+    "description": "beat H398 Var A"
+  },
+  "confirmed": false,
+  "confirmed_variants": [],
+  "signal_corrs": {
+    "mom60_vs_mom120": 0.7022641757530722,
+    "imom12_vs_mom120": 0.7199542848128281
+  },
+  "results": {
+    "h395_var_c_ref": {
+      "oos": {
+        "n": 64,
+        "sharpe": 3.962,
+        "maxdd": -0.086,
+        "cagr": 0.659,
+        "neg_yrs": 0
+      }
+    },
+    "h398_var_a_ref": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.793,
+        "maxdd": -0.04,
+        "cagr": 0.591,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.068,
+        "maxdd": -0.047,
+        "cagr": 0.788,
+        "neg_yrs": 0
+      }
+    },
+    "spy": {
+      "oos": {
+        "n": 64,
+        "sharpe": 0.954,
+        "maxdd": -0.239,
+        "cagr": 0.146,
+        "neg_yrs": 1
+      }
+    },
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.836,
+        "maxdd": -0.143,
+        "cagr": 0.707,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.451,
+        "maxdd": -0.061,
+        "cagr": 0.843,
+        "neg_yrs": 0
+      },
+      "desc": "0.20\u00d7IMOM6+0.20\u00d7MOM60+0.20\u00d7LowVol+0.20\u00d7IMOM12+0.20\u00d7MOM120 top-2",
+      "beats_h398a": false
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.852,
+        "maxdd": -0.062,
+        "cagr": 0.492,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.037,
+        "maxdd": -0.262,
+        "cagr": 0.39,
+        "neg_yrs": 0
+      },
+      "desc": "0.33\u00d7IMOM6+0.33\u00d7LowVol+0.33\u00d7IMOM12 top-2  (drop both MOMs)",
+      "beats_h398a": false
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.922,
+        "maxdd": -0.04,
+        "cagr": 0.551,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.504,
+        "maxdd": -0.071,
+        "cagr": 0.679,
+        "neg_yrs": 0
+      },
+      "desc": "0.25\u00d7IMOM6+0.25\u00d7LowVol+0.25\u00d7IMOM12+0.25\u00d7MOM120 top-2  (replace MOM60)",
+      "beats_h398a": false
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.254,
+        "maxdd": -0.045,
+        "cagr": 0.607,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.956,
+        "maxdd": -0.043,
+        "cagr": 0.714,
+        "neg_yrs": 0
+      },
+      "desc": "0.25\u00d7IMOM6+0.25\u00d7MOM60+0.25\u00d7LowVol+0.25\u00d7IMOM12 top-3  (H398A, top-3)",
+      "beats_h398a": false
+    },
+    "var_E": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.793,
+        "maxdd": -0.04,
+        "cagr": 0.591,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.068,
+        "maxdd": -0.047,
+        "cagr": 0.788,
+        "neg_yrs": 0
+      },
+      "desc": "0.25\u00d7IMOM6+0.25\u00d7MOM60+0.25\u00d7LowVol+0.25\u00d7IMOM12 top-2  (H398A sanity)",
+      "beats_h398a": false
+    }
+  }
+}
