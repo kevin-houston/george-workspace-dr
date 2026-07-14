@@ -617,3 +617,13 @@ Pages updated: 4 (quality-factor.md, trading/index.md, research-log/2026-07-12.m
 Pages created: 0.
 Backtests run: H393 (Amihud ILLIQ composite on H386 — NOT CONFIRMED, all 30 large-caps equally liquid); H395 (realized vol tiebreaker — CONFIRMED, OOS Sharpe 3.962 NEW H198 FAMILY CHAMPION, Var B MaxDD -4.8% lowest in family).
 Dream cycle Phase 2: 11 papers reviewed, 6 proposals staged to dream_cycle/staged/2026-07-13/: H396 stub (AlphaMemo motif mining from hypothesis log), H397 stub (EFS evolutionary factor search on H198), 4 wiki updates (LLM validation audit, multi-agent task decomposition, spectral momentum theory, PortBench eval framework).
+
+## [2026-07-13] research | Dream cycle nightly scan — General Tech wiki expansion (3 new pages)
+
+Pages created: 3.
+- tools/llm-metacognition-2026.md — first comprehensive LLM metacognition survey (arXiv:2607.11881); calibration taxonomy; individuated vs aggregate calibration; practical implications for H381/H382 multi-agent debate architectures
+- tools/llm-judge-bias-2026.md — mechanistic interpretability of LLM-as-judge bias (arXiv:2607.11871); bias lives in activation subspace; causal steering; predicts judge failures on unseen benchmarks
+- tools/agentic-routing-2026.md — step-level model routing in agent harnesses (arXiv:2607.11399); harness-native data flywheel; OpenSquilla LightGBM cold-start ranker; H318 meta-learner analog
+Index updated: pages 204→207, updated date 2026-07-12→2026-07-13.
+Staged proposals: 3 JSON files in dream_cycle/staged/2026-07-13/ (IDs 2026-07-13-1,2,3).
+All General Tech additions cross-referenced to trading hypotheses and existing pages.

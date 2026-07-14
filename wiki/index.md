@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-12
+updated: 2026-07-13
 sources_indexed: 4
-pages: 204
+pages: 207
 ---
 
 # Wiki Index
@@ -262,6 +262,9 @@ When answering a query:
 - [Portless (vercel-labs)](tools/portless-notes.md) — replaces localhost port numbers with stable named .localhost URLs; ngrok/Tailscale/Funnel flags; designed for humans + AI agents ← new 2026-06-29
 - [aie-talks (Yohei Nakajima)](tools/aie-talks-nakajima.md) — curated AI engineering talks site by BabyAGI creator; relevant to AIEWF 2026 (June 29–July 2 SF) agent infrastructure talks ← new 2026-06-29
 - [ai-avatar-system](tools/ai-avatar-system.md) — real-time AI avatar platform; photo upload + 5s voice clone → lip-sync video; Claude/GPT-4/Llama, Whisper, MuseTalk, XTTS v2; MIT ← 2026-05-28
+- [LLM Metacognition (arXiv:2607.11881)](tools/llm-metacognition-2026.md) — comprehensive survey: confidence calibration, knowledge boundary recognition, self-correction in LLMs; individuated calibration fails (aggregate ECE ≠ per-query accuracy); RL with metacognitive feedback most promising training-time fix ← new 2026-07-13
+- [LLM-as-Judge Bias — Mechanistic Account (arXiv:2607.11871)](tools/llm-judge-bias-2026.md) — bias lives in low-dimensional activation subspace (not input-output noise); causal steering reproduces/removes bias; predicts judge failures on unseen benchmarks; 7 judges × 7 bias types × 9 benchmarks ← new 2026-07-13
+- [Agentic Routing: Harness-Native Data Flywheel (arXiv:2607.11399)](tools/agentic-routing-2026.md) — step-level model routing inside agent harnesses; routing decisions auto-generate labeled training records (flywheel); OpenSquilla: LightGBM cold-start + staged router; H318 meta-learner analog ← new 2026-07-13
 
 ### AI Industry
 
