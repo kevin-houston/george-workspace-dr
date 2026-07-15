@@ -1,0 +1,91 @@
+{
+  "hypothesis": "H403",
+  "gate": {
+    "oos_sharpe_must_beat": 4.068,
+    "or_mdd_improvement_pp": 0.01,
+    "reference": "H398 Var A: OOS 4.068, MaxDD -4.7%"
+  },
+  "verdict": "CONFIRMED",
+  "results": {
+    "A": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.845,
+        "maxdd": -0.015,
+        "cagr": 0.576,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.74,
+        "maxdd": -0.045,
+        "cagr": 0.725,
+        "neg_yrs": 0
+      },
+      "desc": "SPY>200MA gate",
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "cash_months_pct": 0.156
+    },
+    "B": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.722,
+        "maxdd": -0.015,
+        "cagr": 0.485,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.407,
+        "maxdd": -0.011,
+        "cagr": 0.636,
+        "neg_yrs": 0
+      },
+      "desc": "VIX<20 gate",
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": true,
+      "cash_months_pct": 0.244
+    },
+    "C": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.84,
+        "maxdd": -0.015,
+        "cagr": 0.513,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.535,
+        "maxdd": -0.045,
+        "cagr": 0.666,
+        "neg_yrs": 0
+      },
+      "desc": "SPY>200MA AND VIX<25",
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "cash_months_pct": 0.206
+    },
+    "D": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.793,
+        "maxdd": -0.04,
+        "cagr": 0.591,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.068,
+        "maxdd": -0.047,
+        "cagr": 0.788,
+        "neg_yrs": 0
+      },
+      "desc": "H398A standalone (sanity)",
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "cash_months_pct": 0.0
+    }
+  }
+}

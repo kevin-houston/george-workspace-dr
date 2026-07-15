@@ -1,0 +1,176 @@
+{
+  "hypothesis": "H402",
+  "gate": {
+    "oos_sharpe_must_beat": 4.158,
+    "description": "beat production baseline"
+  },
+  "verdict": "CONFIRMED",
+  "confirmed_variants": [
+    "C",
+    "D",
+    "E"
+  ],
+  "correlations": {
+    "h398a_vs_production_IS": 0.434,
+    "h398a_vs_production_OOS": 0.364,
+    "h398a_vs_spy_OOS": 0.544,
+    "diversification_note": "DIVERSIFIER (Corr < 0.70)"
+  },
+  "results": {
+    "A": {
+      "name": "5% H398A replacing 5% H041a",
+      "weights": {
+        "h041a": 0.17,
+        "h026": 0.27,
+        "h045": 0.21,
+        "XLK": 0.2,
+        "SMH": 0.08,
+        "IGV": 0.02,
+        "h398a": 0.05
+      },
+      "is": {
+        "n": 96,
+        "sharpe": 3.991,
+        "maxdd": -0.015,
+        "cagr": 0.205,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.116,
+        "maxdd": -0.025,
+        "cagr": 0.228,
+        "neg_yrs": 0
+      }
+    },
+    "B": {
+      "name": "5% H398A replacing 5% H026",
+      "weights": {
+        "h041a": 0.22,
+        "h026": 0.22,
+        "h045": 0.21,
+        "XLK": 0.2,
+        "SMH": 0.08,
+        "IGV": 0.02,
+        "h398a": 0.05
+      },
+      "is": {
+        "n": 96,
+        "sharpe": 3.919,
+        "maxdd": -0.016,
+        "cagr": 0.205,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.141,
+        "maxdd": -0.025,
+        "cagr": 0.228,
+        "neg_yrs": 0
+      }
+    },
+    "C": {
+      "name": "10% H398A (-5% H041a, -5% H026)",
+      "weights": {
+        "h041a": 0.17,
+        "h026": 0.22,
+        "h045": 0.21,
+        "XLK": 0.2,
+        "SMH": 0.08,
+        "IGV": 0.02,
+        "h398a": 0.1
+      },
+      "is": {
+        "n": 96,
+        "sharpe": 4.162,
+        "maxdd": -0.013,
+        "cagr": 0.222,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.394,
+        "maxdd": -0.021,
+        "cagr": 0.254,
+        "neg_yrs": 0
+      }
+    },
+    "D": {
+      "name": "15% H398A (-8% H041a, -7% H026)",
+      "weights": {
+        "h041a": 0.14,
+        "h026": 0.2,
+        "h045": 0.21,
+        "XLK": 0.2,
+        "SMH": 0.08,
+        "IGV": 0.02,
+        "h398a": 0.15
+      },
+      "is": {
+        "n": 96,
+        "sharpe": 4.294,
+        "maxdd": -0.011,
+        "cagr": 0.239,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.529,
+        "maxdd": -0.019,
+        "cagr": 0.281,
+        "neg_yrs": 0
+      }
+    },
+    "E": {
+      "name": "20% H398A (-10% H041a, -10% H026)",
+      "weights": {
+        "h041a": 0.12,
+        "h026": 0.17,
+        "h045": 0.21,
+        "XLK": 0.2,
+        "SMH": 0.08,
+        "IGV": 0.02,
+        "h398a": 0.2
+      },
+      "is": {
+        "n": 96,
+        "sharpe": 4.349,
+        "maxdd": -0.01,
+        "cagr": 0.256,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.573,
+        "maxdd": -0.018,
+        "cagr": 0.307,
+        "neg_yrs": 0
+      }
+    },
+    "F": {
+      "name": "Production baseline (no H398A)",
+      "weights": {
+        "h041a": 0.22,
+        "h026": 0.27,
+        "h045": 0.21,
+        "XLK": 0.2,
+        "SMH": 0.08,
+        "IGV": 0.02
+      },
+      "is": {
+        "n": 96,
+        "sharpe": 3.679,
+        "maxdd": -0.018,
+        "cagr": 0.188,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 3.708,
+        "maxdd": -0.036,
+        "cagr": 0.201,
+        "neg_yrs": 0
+      }
+    }
+  }
+}
