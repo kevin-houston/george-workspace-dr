@@ -673,3 +673,21 @@ Combine with arXiv:2505.14420 SAE-FiRE approach:
 **Reference for PEAD theory**: This paper provides the *mechanism* for why PEAD exists specifically in the earnings-call universe: it is a consequence of systematic analyst forecast errors driven by linguistic features of management communication — not just information diffusion speed.
 
 **See also**: H174 (PEAD FinBERT confirmation), H317 (multimodal PEAD — EPS + momentum; failed because EPS filter was redundant with FinBERT), H400 stub (SAE-FiRE PEAD upgrade, staged 2026-07-14).
+
+---
+
+## EarningsInOne: Fast Numbers, Slow Language (arXiv:2606.29734)
+
+Yu et al. (Jun 2026) created EarningsInOne — first corpus aligning earnings press releases, conference call transcripts, and intraday + next-day prices for SP 1500 companies (2022-2025).
+
+**Core finding:** Earnings announcements release information in two sequential waves:
+- **Fast channel (quantitative):** EPS/revenue surprise — processed within minutes via algorithmic trading, largely eliminated by next market open
+- **Slow channel (qualitative):** Conference call transcript (ECT) sentiment — peaks 30-90 minutes after call, impact carries to **next trading day**
+
+**Trading implication for H174:** H174's overnight FinBERT scoring on 8-K filings captures the slow channel — the drift from management language that algorithmic EPS traders don't exhaust. The 30-90 minute delay and next-day carryover is precisely why next-open entry (H174 design) captures alpha that intraday entry would miss.
+
+**H405 candidate:** Separate qualitative signal strategy on conference call transcripts (not 8-K press releases) with explicit next-day open entry. Prior transcript work (H168, H317) failed due to coverage bias and EPS overlap — EarningsInOne's unified corpus addresses the coverage problem.
+
+**Key difference from H317:** H317 found adding EPS surprise as filter reduced n below 20-event gate (77% of H174 events already have EPS beats). EarningsInOne suggests the correct model separates fast/slow channels rather than combining them — test ECT sentiment standalone as slow signal, EPS surprise as fast signal.
+
+**See also**: H174, H168 (NOT CONFIRMED, transcript coverage bias), H317 (NOT CONFIRMED, EPS+momentum over-filtering), arXiv:2511.15214 (analyst beliefs from earnings calls).

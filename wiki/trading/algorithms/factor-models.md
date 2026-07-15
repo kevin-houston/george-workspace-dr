@@ -782,3 +782,22 @@ def characteristic_axis_integral(returns: pd.Series, characteristic: pd.Series, 
 **Relevance to H398 production deployment**: Before going live with H398, run this diagnostic on IMOM6 and IMOM12 vs FF5+UMD. A near-zero after-integral confirms IMOM is theoretically grounded. An overcorrection flag would suggest IMOM is mechanically fitted to the IS period (2013-2020) and may not generalize.
 
 **See also**: Section 13 (Cross-Sectional Factor Correlation Management), Section 11 (Spectral Memory Decomposition Theory), H398 (4-factor equal-weight composite, OOS Sharpe 4.068).
+
+---
+
+## Why Monthly Cross-Sectional Momentum Is Immune to Trend Demise (arXiv:2607.01550)
+
+Kurth, Eisler, Rej, Bouchaud (Jul 2026, presented at Quantitative Finance Conference 2026) studied ~100 liquid futures 1995-2025. Core finding: **short-term trend-following has ceased delivering reliable returns since ~2009 on small-tick contracts across all signal horizons**. Large-tick contracts remain largely intact.
+
+**Mechanism:** Post-2008 HFT market makers withdraw liquidity in front of predictable directional flow on small-tick contracts. This breaks the feedback loop that made short-term trend signals self-reinforcing.
+
+**Why H198/H026/H398A are NOT affected:**
+1. **Cross-sectional, not time-series:** H198/H026 rank stocks relative to each other — not directional bets on absolute price continuation. Cross-sectional momentum is a different alpha source than time-series trend.
+2. **Monthly horizon:** 1-month rebalancing is far above HFT-affected intraday/daily timeframes. The demise affects signal horizons within days, not months.
+3. **Equities, not futures:** H198/H026 universe is large-cap US equities — microstructure differs from liquid futures markets. No tick-size bifurcation applies.
+
+**Implication for H198:** IMOM factors (consistent compounders) are even further immunized — they measure path quality over 6-12 months, not price continuation speed.
+
+**Caution for new hypotheses:** Any new hypothesis using short-term (daily/weekly) time-series momentum signals on liquid instruments should account for post-2009 crowding decay. This is consistent with H298 NOT CONFIRMED (weekly ETF reversal) and H339 NOT CONFIRMED (price momentum filter gates).
+
+**See also**: H198 (cross-sectional momentum, OOS 1.174), H398A (IMOM composite, OOS 4.068), H026 (ETF rotation, production), H298 (NOT CONFIRMED, weekly reversal), H339 (NOT CONFIRMED, price momentum gate).

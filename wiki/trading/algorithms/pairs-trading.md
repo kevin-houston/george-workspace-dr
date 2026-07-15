@@ -612,3 +612,24 @@ Epstein, Wang, Choi & Pelger (Stanford) develop a machine learning framework tha
 **Code**: No public implementation released. Requires: PyTorch for attention layers, sklearn for characteristic preprocessing, alphalens-reloaded for factor evaluation. See `factor-models.md` for cross-sectional factor construction code.
 
 **Note**: This methodology is complementary to the semantic LLM approach (H316 Moira). Attention factors use *price/fundamental characteristics*; H316 uses *textual similarity*. The two could be combined: attention factors for initial pair grouping, LLM semantic filter for final pair confirmation.
+
+---
+
+## ML Correlation Forecasting for Pair/Basket Selection (arXiv:2601.04602)
+
+Fanshawe, Masih, Cameron (Jan 2026) proposed a Temporal-Heterogeneous Graph Neural Network (TH-GNN) for S&P 500 equity correlation forecasting (OOS 2019-2024). The model combines:
+- **Transformer temporal encoder** — captures non-stationary time dependencies in returns
+- **Edge-aware graph attention network** — propagates cross-asset information using sector relationships
+- **Features:** Daily returns, technical indicators, sector data, previous correlations, macroeconomic signals
+- **Target:** Residual deviations from rolling historical baselines in Fisher-z space
+
+**Key results:** Out-of-sample correlation forecasting error meaningfully reduced vs rolling-window baselines. Forward-looking correlations produce "adaptable and economically meaningful baskets, particularly during periods of market stress."
+
+**Why this matters for pairs trading:**
+H246/H307 both failed because IS cointegration was INVERSELY predictive of OOS co-movement (structural breaks SVB 2023, gold-silver decoupling). The TH-GNN replaces backward-looking cointegration with forward-looking ML correlation — specifically designed to handle structural breaks via the GNN's adaptive edge-weighting.
+
+**Architecture blueprint for H401 (Attention Factors):** H401 proposed semantic embedding similarity to replace cointegration. TH-GNN offers a complementary quantitative path — sector graph structure + temporal encoder instead of semantic proximity alone.
+
+**Implementation path:** PyTorch Geometric + rolling-window training on S&P 500 daily returns. Pairs selected by top-decile predicted correlation stability (low predicted rolling correlation variance = stable pair).
+
+**See also**: H246 (NOT CONFIRMED, cointegration structural breaks), H307 (NOT CONFIRMED, Johansen cointegration ETF pairs), H401 (staged, Attention Factors stat-arb).
