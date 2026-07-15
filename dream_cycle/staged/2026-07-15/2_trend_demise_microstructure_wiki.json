@@ -1,0 +1,21 @@
+{
+  "id": "2026-07-15-002",
+  "date": "2026-07-15",
+  "source": "arXiv:2607.01550",
+  "source_url": "https://arxiv.org/abs/2607.01550",
+  "title": "Is Trend Still Your Friend?: A Microstructural Account of the Demise of Short-Term Trend-Following",
+  "authors": "Jutta G. Kurth, Zoltan Eisler, Adam Rej, Jean-Philippe Bouchaud",
+  "published": "2026-07-07",
+  "relevance_score": 7,
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "wiki/trading/algorithms/factor-models.md",
+  "action": "append_section",
+  "apply_status": "pending",
+  "rationale": "Bouchaud's group (JPM Quant) presents a 30-year study of 100 liquid futures showing short-term trend collapsed post-2009 on small-tick contracts due to HFT withdrawal of liquidity in front of predictable directional flow. Monthly cross-sectional momentum (H198, H026) is NOT affected — different mechanism (cross-sectional rank signal, not directional time-series, and monthly horizon far above HFT-affected timeframes). This finding immunizes H198/H398A from 'trend is dead' narratives by clarifying the mechanism only applies to short-term time-series trend on liquid futures. Important to document for next H26x or H198 follow-on research.",
+  "content": {
+    "section_title": "Why Monthly Cross-Sectional Momentum Is Immune to Trend Demise (arXiv:2607.01550)",
+    "section_body": "Kurth, Eisler, Rej, Bouchaud (Jul 2026) studied ~100 liquid futures 1995-2025. Core finding: **short-term trend-following has ceased delivering reliable returns since ~2009 on small-tick contracts across all signal horizons**. Large-tick contracts remain largely intact.\n\n**Mechanism:** Post-2008 HFT market makers withdraw liquidity in front of predictable directional flow on small-tick contracts. This breaks the feedback loop that made short-term trend signals self-reinforcing.\n\n**Why H198/H026/H398A are NOT affected:**\n1. **Cross-sectional, not time-series:** H198/H026 rank stocks relative to each other — not directional bets on absolute price continuation. Cross-sectional momentum is a different alpha source than time-series trend.\n2. **Monthly horizon:** 1-month rebalancing is far above HFT-affected intraday/daily timeframes. The demise affects signal horizons within days, not months.\n3. **Equities, not futures:** H198/H026 universe is large-cap US equities — microstructure differs from liquid futures markets. No tick-size bifurcation applies.\n\n**Implication for H198:** IMOM factors (consistent compounders) are even further immunized — they measure path quality over 6-12 months, not price continuation speed.\n\n**Caution for new hypotheses:** Any new hypothesis using short-term (daily/weekly) time-series momentum signals on liquid instruments should account for post-2009 crowding decay. This is consistent with H298 NOT CONFIRMED (weekly ETF reversal) and H339 NOT CONFIRMED (price momentum filter gates).",
+    "cross_refs": ["H198 (cross-sectional momentum, confirmed OOS 1.174)", "H398A (IMOM composite, OOS 4.068)", "H026 (ETF rotation, confirmed production)", "H298 (NOT CONFIRMED, weekly reversal)", "H339 (NOT CONFIRMED, price momentum gate)"]
+  }
+}

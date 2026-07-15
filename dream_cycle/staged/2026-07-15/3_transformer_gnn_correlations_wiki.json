@@ -1,0 +1,21 @@
+{
+  "id": "2026-07-15-003",
+  "date": "2026-07-15",
+  "source": "arXiv:2601.04602",
+  "source_url": "https://arxiv.org/abs/2601.04602",
+  "title": "Forecasting Equity Correlations with Hybrid Transformer Graph Neural Network",
+  "authors": "Jack Fanshawe, Rumi Masih, Alexander Cameron",
+  "published": "2026-01-08",
+  "relevance_score": 6,
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "wiki/trading/algorithms/pairs-trading.md",
+  "action": "append_section",
+  "apply_status": "pending",
+  "rationale": "Provides a non-cointegration approach to pair/basket selection via ML correlation forecasting on S&P 500 companies (OOS 2019-2024). Reduces correlation forecasting error vs rolling-window baselines; adaptable baskets during market stress. Relevant context for H246 (pairs NOT CONFIRMED), H307 (NOT CONFIRMED), and H401 (Attention Factors stat-arb). Adds a concrete architecture blueprint (Temporal-Heterogeneous GNN + Transformer) to the pairs-trading wiki for future H4xx pair-selection hypotheses. Lower priority than proposals 1-2 but fills gap in pairs-trading methodology docs.",
+  "content": {
+    "section_title": "ML Correlation Forecasting for Pair/Basket Selection (arXiv:2601.04602)",
+    "section_body": "Fanshawe, Masih, Cameron (Jan 2026) proposed a Temporal-Heterogeneous Graph Neural Network (TH-GNN) for S&P 500 equity correlation forecasting (OOS 2019-2024). The model combines:\n- **Transformer temporal encoder** — captures non-stationary time dependencies in returns\n- **Edge-aware graph attention network** — propagates cross-asset information using sector relationships\n- **Features:** Daily returns, technical indicators, sector data, previous correlations, macroeconomic signals\n- **Target:** Residual deviations from rolling historical baselines in Fisher-z space\n\n**Key results:** Out-of-sample correlation forecasting error meaningfully reduced vs rolling-window baselines. Forward-looking correlations produce 'adaptable and economically meaningful baskets, particularly during periods of market stress.'\n\n**Why this matters for pairs trading:**\nH246/H307 both failed because IS cointegration was INVERSELY predictive of OOS co-movement (structural breaks SVB 2023, gold-silver decoupling). The TH-GNN replaces backward-looking cointegration with forward-looking ML correlation — specifically designed to handle structural breaks via the GNN's adaptive edge-weighting.\n\n**Architecture blueprint for H401 (Attention Factors):** H401 proposed semantic embedding similarity to replace cointegration. TH-GNN offers a complementary quantitative path — sector graph structure + temporal encoder instead of semantic proximity alone.\n\n**Implementation path:** PyTorch Geometric + rolling-window training on S&P 500 daily returns. Pairs selected by top-decile predicted correlation stability (low predicted rolling correlation variance = stable pair).",
+    "cross_refs": ["H246 (NOT CONFIRMED, cointegration structural breaks)", "H307 (NOT CONFIRMED, Johansen cointegration ETF pairs)", "H401 (staged, Attention Factors stat-arb)", "wiki/trading/algorithms/pairs-trading.md"]
+  }
+}

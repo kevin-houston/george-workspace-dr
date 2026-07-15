@@ -1,0 +1,21 @@
+{
+  "id": "2026-07-15-001",
+  "date": "2026-07-15",
+  "source": "arXiv:2606.29734",
+  "source_url": "https://arxiv.org/abs/2606.29734",
+  "title": "Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals",
+  "authors": "Ding Yu, Zhuo Liu, Hao Zhang, Hangfeng He",
+  "published": "2026-06-29",
+  "relevance_score": 9,
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "wiki/trading/algorithms/event-driven.md",
+  "action": "append_section",
+  "apply_status": "pending",
+  "rationale": "Directly explains and validates H174 mechanism: EPS surprise (fast) processed within minutes via algo trading; qualitative ECT sentiment (slow) peaks 30-90 min later, carries over to NEXT TRADING DAY. This is why H174's next-open entry after overnight FinBERT scoring on 8-K texts works. Paper also opens H405 candidate: buy the qualitative signal (ECT sentiment) separately from EPS surprise, with next-day open entry — complementary to H174 which uses 8-K text only. SP 1500 corpus 2022-2025 aligns earnings news + transcripts + intraday/next-day prices.",
+  "content": {
+    "section_title": "EarningsInOne: Fast Numbers, Slow Language (arXiv:2606.29734)",
+    "section_body": "Yu et al. (Jun 2026) created EarningsInOne — first corpus aligning earnings press releases, conference call transcripts, and intraday + next-day prices for SP 1500 companies (2022-2025).\n\n**Core finding:** Earnings announcements release information in two sequential waves:\n- **Fast channel (quantitative):** EPS/revenue surprise — processed within minutes via algorithmic trading, largely eliminated by next market open\n- **Slow channel (qualitative):** Conference call transcript (ECT) sentiment — peaks 30-90 minutes after call, impact carries to **next trading day**\n\n**Trading implication for H174:** H174's overnight FinBERT scoring on 8-K filings captures the slow channel — the drift from management language that algorithmic EPS traders don't exhaust. The 30-90 minute delay and next-day carryover is precisely why next-open entry (H174 design) captures alpha that intraday entry would miss.\n\n**H405 candidate:** Separate qualitative signal strategy on conference call transcripts (not 8-K press releases) with explicit next-day open entry. Prior transcript work (H168, H317) failed due to coverage bias and EPS overlap — EarningsInOne's unified corpus addresses the coverage problem.\n\n**Key difference from H317:** H317 found adding EPS surprise as filter reduced n below 20-event gate (77% of H174 events already have EPS beats). EarningsInOne suggests the correct model separates fast/slow channels rather than combining them — test ECT sentiment standalone as slow signal, EPS surprise as fast signal.",
+    "cross_refs": ["H174 (confirmed, event-driven production)", "H317 (not confirmed, EPS+momentum over-filtering)", "H168 (not confirmed, transcript coverage bias)", "arXiv:2511.15214 (analyst beliefs from earnings calls, staged 2026-07-14)"]
+  }
+}

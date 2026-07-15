@@ -1,0 +1,112 @@
+{
+  "date": "2026-07-15",
+  "session": "nightly-dream-cycle",
+  "angles_scanned": [
+    "pairs-trading + LLM + cointegration",
+    "PEAD + NLP + earnings text signals",
+    "cross-sectional momentum + factor models",
+    "multi-agent LLM trading (July 2026 updates)",
+    "GitHub trending quant repos"
+  ],
+  "papers_evaluated": [
+    {
+      "arxiv": "2606.29734",
+      "title": "Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals",
+      "relevance": 9,
+      "action": "STAGED — proposal 1 (event-driven.md wiki update + H405 hint)",
+      "key_finding": "EPS surprise processed in minutes; ECT sentiment peaks 30-90 min later, next-day carryover. Validates H174 design. EarningsInOne corpus SP 1500 2022-2025."
+    },
+    {
+      "arxiv": "2607.01550",
+      "title": "Is Trend Still Your Friend?: A Microstructural Account of the Demise of Short-Term Trend-Following",
+      "relevance": 7,
+      "action": "STAGED — proposal 2 (factor-models.md wiki update)",
+      "key_finding": "Short-term trend dead since 2009 on small-tick futures. Monthly cross-sectional momentum (H198/H026) immune: different mechanism (cross-sectional rank, not time-series directional, monthly horizon)."
+    },
+    {
+      "arxiv": "2601.04602",
+      "title": "Forecasting Equity Correlations with Hybrid Transformer Graph Neural Network",
+      "relevance": 6,
+      "action": "STAGED — proposal 3 (pairs-trading.md wiki update)",
+      "key_finding": "TH-GNN reduces S&P 500 correlation forecasting error vs rolling window. Better baskets during market stress. Architecture blueprint for H401 or future pairs hypothesis."
+    },
+    {
+      "arxiv": "2605.16895",
+      "title": "The Alpha Illusion (Sheng et al.)",
+      "relevance": 9,
+      "action": "APPLIED — Phase 1 wiki expansion of llm-alpha-validation.md",
+      "key_finding": "P1-P6 protocol; TradingAgents net 0.22 / QuantAgent -1.15 after friction; 35/40 cells unmodeled."
+    },
+    {
+      "arxiv": "2602.14233",
+      "title": "Evaluating LLMs in Finance Requires Explicit Bias Consideration (Kong et al.)",
+      "relevance": 8,
+      "action": "APPLIED — Phase 1 wiki expansion",
+      "key_finding": "5-bias framework; no single bias discussed in >28% of 164 papers."
+    },
+    {
+      "arxiv": "2601.13770",
+      "title": "Look-Ahead-Bench (Benhenda)",
+      "relevance": 7,
+      "action": "APPLIED — Phase 1 wiki expansion",
+      "key_finding": "Standard LLMs (Llama/DeepSeek) show significant temporal look-ahead bias; PiT models generalize better."
+    },
+    {
+      "arxiv": "2505.07078",
+      "title": "Can LLM-based Financial Investing Strategies Outperform the Market in Long Run? (FINSABER, KDD 2026)",
+      "relevance": 7,
+      "action": "APPLIED — Phase 1 wiki expansion",
+      "key_finding": "20+ years / 100+ stocks: LLM advantages deteriorate; overly conservative in bull, aggressive in bear."
+    },
+    {
+      "arxiv": "2507.07107",
+      "title": "ML Enhanced Multi-Factor Quantitative Trading with Bias Correction (Du)",
+      "relevance": 3,
+      "action": "SKIPPED — Chinese A-shares only, price-limit bias correction not applicable to US large-cap",
+      "key_finding": "Mask-first design +0.44 Sharpe. GPU factor engine 51x speedup. Sharpe 1.63 on real data."
+    },
+    {
+      "arxiv": "2605.25894",
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "relevance": 5,
+      "action": "SKIPPED — methodology similar to H317 which already failed; no code; FinBERT + LSTM/Transformer on earnings day",
+      "key_finding": "Transformer better F1 than LSTM; news sentiment adds value consistently."
+    },
+    {
+      "arxiv": "2605.27887",
+      "title": "PortBench: Correlation-Aware Full-Pipeline Benchmark for LLM Portfolio Management",
+      "relevance": 6,
+      "action": "SKIPPED — already documented in multi-agent-llm-trading.md (updated 2026-07-07)",
+      "key_finding": "90% of LLMs fail equal-weight baseline. Correlation-aware framework."
+    }
+  ],
+  "github_angle": {
+    "repos_checked": ["PlaceNL2026/best-of-algorithmic-trading", "leoncuhk/awesome-quant-ai"],
+    "finding": "Top repos are mostly execution/crypto tools (Freqtrade 48k, CCXT 42k). No new quant research repos of high relevance to George's confirmed hypotheses. finclaw is A-shares/crypto focused.",
+    "action": "SKIPPED — no staging"
+  },
+  "proposals_staged": 3,
+  "proposals_staged_path": "dream_cycle/staged/2026-07-15/",
+  "phase1_wiki_expansion": {
+    "target": "wiki/trading/algorithms/llm-alpha-validation.md",
+    "lines_before": 122,
+    "lines_after": 240,
+    "commit": "4c39dc8",
+    "sections_added": [
+      "P1-P6 Minimum Reporting Protocol",
+      "System Audit Evidence (concrete numbers)",
+      "Recommended Modular Architecture",
+      "Five Biases Framework (Kong et al.)",
+      "Look-Ahead-Bench + FINSABER"
+    ]
+  },
+  "new_hypothesis_candidates": [
+    {
+      "id": "H405",
+      "description": "ECT (earnings conference call transcript) qualitative signal standalone strategy — buy next-day open after slow-language sentiment score, separate from EPS surprise channel. Tests whether separating fast/slow information channels improves on H174.",
+      "source": "arXiv:2606.29734",
+      "priority": "medium",
+      "prerequisite": "EarningsInOne corpus or H174 pipeline adaptation to conference call transcripts"
+    }
+  ]
+}
