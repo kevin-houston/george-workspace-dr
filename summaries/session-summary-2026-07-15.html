@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Session Summary — 2026-07-14</title>
+  <title>Session Summary — 2026-07-15</title>
   
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -75,9 +75,9 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
 <body>
   <div class="header">
     <div>
-      <div class="header-title">Session Summary &mdash; 2026-07-14</div>
+      <div class="header-title">Session Summary &mdash; 2026-07-15</div>
     </div>
-    <div class="header-sub">Generated 2026-07-15 04:01 CT</div>
+    <div class="header-sub">Generated 2026-07-15 04:03 CT</div>
   </div>
   <div class="main">
     
@@ -87,9 +87,9 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
       <div class="kpi"><div class="kpi-label">Flagged</div>
         <div class="kpi-value muted">0</div></div>
       <div class="kpi"><div class="kpi-label">Commits</div>
-        <div class="kpi-value blue">5</div></div>
+        <div class="kpi-value blue">4</div></div>
       <div class="kpi"><div class="kpi-label">Podcast</div>
-        <div class="kpi-value green">✓</div></div>
+        <div class="kpi-value muted">—</div></div>
     </div>
     
     <div class="card">
@@ -100,69 +100,41 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
       <div class="card-body">
             <div class="proposal">
               <div class="proposal-header">
-                <span class="proposal-title">Add HedgeAgents balanced-aware multi-agent trading system to multi-agent-llm-trading.md</span>
+                <span class="proposal-title">Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals</span>
                 <span class="risk-badge risk-low">low</span>
                 <span style="font-size:11px;color:var(--green)">applied</span>
               </div>
-              <div class="proposal-rationale">Li et al. (Feb 2025, arXiv:2502.13165) introduce HedgeAgents — a multi-agent system that directly addresses the ~20% loss problem in LLM trading systems during volatility. The hierarchical architecture (central fund manager + specialized hedging experts per asset class, coordinating via 3-stage conf…</div>
-              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md</div>
+              <div class="proposal-rationale">Directly explains and validates H174 mechanism: EPS surprise (fast) processed within minutes via algo trading; qualitative ECT sentiment (slow) peaks 30-90 min later, carries over to NEXT TRADING DAY. This is why H174's next-open entry after overnight FinBERT scoring on 8-K texts works. Paper also o…</div>
+              <div class="proposal-target">wiki/trading/algorithms/event-driven.md</div>
             </div>
             <div class="proposal">
               <div class="proposal-header">
-                <span class="proposal-title">Add Attention Factors for Statistical Arbitrage to pairs-trading.md</span>
+                <span class="proposal-title">Is Trend Still Your Friend?: A Microstructural Account of the Demise of Short-Term Trend-Following</span>
                 <span class="risk-badge risk-low">low</span>
                 <span style="font-size:11px;color:var(--green)">applied</span>
               </div>
-              <div class="proposal-rationale">Epstein, Wang, Choi &amp; Pelger (Oct 2025, arXiv:2510.11616, Stanford) introduce an attention-based conditional latent factor framework for statistical arbitrage achieving OOS Sharpe &gt;4 gross / 2.3 net on large-cap US equities over 24 years. This is one of the highest-quality stat-arb results on the US…</div>
-              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/pairs-trading.md</div>
+              <div class="proposal-rationale">Bouchaud's group (JPM Quant) presents a 30-year study of 100 liquid futures showing short-term trend collapsed post-2009 on small-tick contracts due to HFT withdrawal of liquidity in front of predictable directional flow. Monthly cross-sectional momentum (H198, H026) is NOT affected — different mech…</div>
+              <div class="proposal-target">wiki/trading/algorithms/factor-models.md</div>
             </div>
             <div class="proposal">
               <div class="proposal-header">
-                <span class="proposal-title">H400 stub: SAE-FiRE sparse autoencoder feature selection for PEAD FinBERT upgrade</span>
-                <span class="risk-badge risk-medium">medium</span>
-                <span style="font-size:11px;color:var(--green)">applied</span>
-              </div>
-              <div class="proposal-rationale">Zhao et al. (May 2025, arXiv:2505.14420) introduce SAE-FiRE — Sparse Autoencoders + ANOVA F-tests applied to LLM internal representations to identify which latent features drive earnings surprise prediction. Outperforms raw FinBERT baselines across 3 financial datasets. This is directly actionable a…</div>
-              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h400.py</div>
-            </div>
-            <div class="proposal">
-              <div class="proposal-header">
-                <span class="proposal-title">Add Corporate Earnings Calls + Analyst Belief Formation to event-driven.md</span>
+                <span class="proposal-title">Forecasting Equity Correlations with Hybrid Transformer Graph Neural Network</span>
                 <span class="risk-badge risk-low">low</span>
                 <span style="font-size:11px;color:var(--green)">applied</span>
               </div>
-              <div class="proposal-rationale">Nov 2025 arXiv:2511.15214 studies how analyst beliefs update after earnings calls and finds: analysts OVER-react to sentiment/tone signals (the positive/negative affect in management's language) and UNDER-react to risk and uncertainty narratives (hedging language, forward-looking uncertainty disclos…</div>
-              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/event-driven.md</div>
-            </div>
-            <div class="proposal">
-              <div class="proposal-header">
-                <span class="proposal-title">Add Characteristic-Axis Integral Diagnostic to factor-models.md</span>
-                <span class="risk-badge risk-low">low</span>
-                <span style="font-size:11px;color:var(--green)">applied</span>
-              </div>
-              <div class="proposal-rationale">arXiv:2607.05091 (Jul 6 2026) introduces a geometric diagnostic for testing whether a factor genuinely explains cross-sectional return variation vs artificially flattens the return-characteristic axis (overcorrection). Applied to FF5+MOM: HML and CMA overcorrect (reduce axis slope beyond zero), RMW …</div>
-              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/factor-models.md</div>
+              <div class="proposal-rationale">Provides a non-cointegration approach to pair/basket selection via ML correlation forecasting on S&amp;P 500 companies (OOS 2019-2024). Reduces correlation forecasting error vs rolling-window baselines; adaptable baskets during market stress. Relevant context for H246 (pairs NOT CONFIRMED), H307 (NOT CO…</div>
+              <div class="proposal-target">wiki/trading/algorithms/pairs-trading.md</div>
             </div></div>
     </div>
     
     <div class="card">
       <div class="card-header">
         <span class="card-title">Commits</span>
-        <span class="card-badge">5 today</span>
+        <span class="card-badge">4 today</span>
       </div>
-      <div class="card-body"><div class="commit"><span class="commit-hash">f496a1d</span><span class="commit-msg">nightly research 2026-07-14: H398/H399 log entries + H402 CONFIRMED + H403 NOT CONFIRMED</span></div><div class="commit"><span class="commit-hash">c4abb38</span><span class="commit-msg">nightly backup 2026-07-14</span></div><div class="commit"><span class="commit-hash">53fa850</span><span class="commit-msg">dream cycle: apply 2026-07-14 staged proposals (H400, H401)</span></div><div class="commit"><span class="commit-hash">4098c8b</span><span class="commit-msg">nightly research 2026-07-14: factor-models.md expansion + 5 dream cycle proposals staged</span></div><div class="commit"><span class="commit-hash">8c5c3cd</span><span class="commit-msg">nightly backup 2026-07-14</span></div></div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">7a43179</span><span class="commit-msg">dream cycle: apply 2026-07-15 staged proposals (EarningsInOne, TrendDemise, TH-GNN)</span></div><div class="commit"><span class="commit-hash">72f8e47</span><span class="commit-msg">dream cycle 2026-07-15: 3 proposals staged + scan summary</span></div><div class="commit"><span class="commit-hash">4c39dc8</span><span class="commit-msg">nightly research 2026-07-15: llm-alpha-validation.md major expansion</span></div><div class="commit"><span class="commit-hash">7a014c1</span><span class="commit-msg">nightly backup 2026-07-15</span></div></div>
     </div>
     
-        <div class="card">
-          <div class="card-header"><span class="card-title">AI Podcast</span></div>
-          <div class="card-body">
-            <div class="podcast-pill">
-              <span class="podcast-dot"></span>
-              <span>Daily AI Insights — July 14, 2026</span>
-              <span style="color:var(--muted)">2,051 words</span>
-            </div>
-          </div>
-        </div>
     
   </div>
 </body>
