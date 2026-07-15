@@ -53,8 +53,17 @@
       "backtest_oos_period": "H112 confirmed",
       "script": "h112_daily_ibs.py",
       "start_equity": 5000.0,
-      "cash": 5000.0,
-      "open_positions": {},
+      "cash": 3666.6417,
+      "open_positions": {
+        "SMH": {
+          "qty": 2.1898,
+          "entry_price": 608.895,
+          "entry_date": "2026-07-14",
+          "cost_basis": 1333.3583,
+          "order_id": "b387ee63-aced-4ddf-be3b-9af545e466d8",
+          "note": "IBS entry: prev_ibs 0.155 < 0.2, gap +3.974% \u2265 -0.500%"
+        }
+      },
       "closed_trades": [],
       "equity_history": [
         {
@@ -64,6 +73,10 @@
         {
           "date": "2026-07-13",
           "equity": 5000.0
+        },
+        {
+          "date": "2026-07-14",
+          "equity": 4973.8
         }
       ],
       "status": "active"
@@ -117,5 +130,5 @@
       "status": "stub"
     }
   },
-  "updated": "2026-07-13T09:45:17.646429"
+  "updated": "2026-07-14T09:45:17.851304"
 }
