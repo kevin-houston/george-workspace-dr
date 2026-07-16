@@ -1,0 +1,117 @@
+{
+  "hypothesis": "H405",
+  "gate": {
+    "oos_sharpe_must_beat": 2.665,
+    "description": "beat H026 12m baseline"
+  },
+  "confirmed": false,
+  "confirmed_variants": [],
+  "results": {
+    "spy": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.105,
+        "maxdd": -0.194,
+        "cagr": 0.15,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 0.954,
+        "maxdd": -0.239,
+        "cagr": 0.146,
+        "neg_yrs": 1
+      }
+    },
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 0.172,
+        "maxdd": -0.575,
+        "cagr": 0.058,
+        "neg_yrs": 4
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.423,
+        "maxdd": -0.676,
+        "cagr": 0.185,
+        "neg_yrs": 4
+      },
+      "desc": "3m momentum, top-1",
+      "beats_gate": false
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 0.13,
+        "maxdd": -0.45,
+        "cagr": 0.041,
+        "neg_yrs": 4
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.449,
+        "maxdd": -0.539,
+        "cagr": 0.205,
+        "neg_yrs": 1
+      },
+      "desc": "6m momentum, top-1",
+      "beats_gate": false
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 0.535,
+        "maxdd": -0.338,
+        "cagr": 0.169,
+        "neg_yrs": 2
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.038,
+        "maxdd": -0.75,
+        "cagr": 0.015,
+        "neg_yrs": 3
+      },
+      "desc": "3m+6m equal composite, top-1",
+      "beats_gate": false
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 0.429,
+        "maxdd": -0.366,
+        "cagr": 0.131,
+        "neg_yrs": 3
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.191,
+        "maxdd": -0.542,
+        "cagr": 0.077,
+        "neg_yrs": 5
+      },
+      "desc": "3m+6m+12m equal composite, top-1",
+      "beats_gate": false
+    },
+    "var_E": {
+      "is": {
+        "n": 96,
+        "sharpe": 0.306,
+        "maxdd": -0.446,
+        "cagr": 0.075,
+        "neg_yrs": 3
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.568,
+        "maxdd": -0.38,
+        "cagr": 0.248,
+        "neg_yrs": 2
+      },
+      "desc": "12m momentum, top-1 (reference)",
+      "beats_gate": false
+    }
+  }
+}

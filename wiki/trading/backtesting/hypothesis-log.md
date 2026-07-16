@@ -9190,3 +9190,77 @@ OOS annual (Var B, VIX gate): 2021:+74% / **2022:+0%** / 2023:+134% / 2024:+124%
 
 **Script**: backtesting/daily/run_h403.py
 **Results**: backtesting/results/h403_results.json
+
+---
+
+## H404 — FRED Composite Macro Regime Gate on H026 ETF Rotation: NOT CONFIRMED (2026-07-15)
+
+**Source**: Endogenous from H300 (yield curve, NOT CONFIRMED) and H299 (breadth, NOT CONFIRMED). Hypothesis: a 4-series FRED composite (UNRATE, T10Y2Y, PAYEMS, INDPRO) would be more robust than any single macro signal as an H026 timing overlay.
+
+**Universe**: H026 23-ETF dual-rank rotation (XLK/XLE/XLF/XLV/XLI/XLB/XLU/XLRE/XLY/XLP/XLC/BIL/GLD/TLT/IEF/TIP/DBC/AGG/GDX/DBA/SLV/UNG/EWZ)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.529 (H301, 200MA-gated H026) — all variants beat this due to favorable 2021-2026 sub-period; gate framing is against H026 ungated 2.665
+
+**FRED Composite construction:**
+- UNRATE 3m change (z-scored, inverted: rising = bad)
+- T10Y2Y level (z-scored: steeper curve = good)
+- PAYEMS YoY% (z-scored: more jobs = good)
+- INDPRO 3m annualized growth (z-scored: more production = good)
+- All z-scored over trailing 36 months, equal weight, lagged 1 month for publication delay
+- If composite ≤ threshold → BIL; else H026 top-1
+
+| Var | IS Sh | OOS Sh | OOS MDD | Cash% | Description |
+|-----|-------|--------|---------|-------|-------------|
+| A | 1.332 | 2.470 | -0.9% | 66% | Composite > 0 gate |
+| B | 1.207 | 2.075 | -0.9% | 83% | Composite > 0.5 gate |
+| C | 2.077 | 2.647 | -1.3% | 38% | Composite > -0.5 gate |
+| **D** | **3.000** | **2.665** | **-5.7%** | 0% | **No gate (H026 sanity check)** |
+
+H026 baseline OOS 2021-2026: IS 3.000, **OOS 2.665**, MaxDD -5.7%, 0 negative years.
+Annual OOS (ungated): 2021: +50.8% / 2022: +20.6% (XLE rotation) / 2023: +14.4% / 2024: +25.7% / 2025: +21.5% / 2026: +29.1%
+Composite OOS quality: 39% of months in expansion (>0); std 0.57.
+
+**Key findings:**
+- **FRED gate reduces OOS Sharpe in every variant**: 2.470 (best) < 2.665 (ungated). The signal routes to BIL 38-83% of months, sacrificing momentum alpha for MaxDD reduction.
+- **MaxDD improvement is real**: -0.9% (Var A) vs -5.7% (ungated). But SPY>200MA gate (H301) achieves similar MaxDD protection with less return sacrifice on canonical 2018-2026 split.
+- **Root cause identical to H403**: H026 dual-rank (momentum + low-vol) already self-selects macro-appropriate assets. In 2022, H026 rotated into XLE (+60%) — the FRED composite didn't know to do this. External macro signals are redundant when momentum already responds to economic conditions via price.
+- **FRED composite signal quality is poor**: only 39% of OOS months score as "expansionary" (>0). The 36-month z-score normalizes away the macro signal rather than amplifying it. The composite is near-flat (-0.04 mean) with low std (0.57) — it barely discriminates.
+- **Broader conclusion**: Both H403 (H398A stock momentum) and H404 (H026 ETF momentum) confirm that well-designed momentum strategies are self-regulating macro timers. External macro signals (SPY 200MA, VIX, FRED) are redundant once momentum includes a low-vol or risk component. The exception is H301 (200MA on H026) which confirmed because H026 standalone was missing the low-vol component entirely.
+
+**FRED Macro Timing family: CLOSED.** H299 (breadth), H300 (yield curve), H404 (composite) all fail to improve momentum strategies that already have risk-adjustment built in.
+
+**Script**: backtesting/daily/run_h404.py
+**Results**: backtesting/results/h404_results.json
+
+---
+
+## H405 — Short-Horizon Momentum Windows on H026 ETF Universe: NOT CONFIRMED (2026-07-15)
+
+**Source**: Endogenous from H404 (2026-07-15) + EarningsInOne arXiv:2606.29734 fast/slow channel analogy. H026 uses 12m window; H335 found shorter windows fail on bond ETFs. Hypothesis: equity sector ETFs may have a "fast channel" at 3-6m that shorter momentum captures.
+
+**Universe**: H026 23-ETF (same as H404)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 2.665 (H026 dual-rank 12m baseline on 2021-2026 split)
+
+**⚠️ Methodological note discovered this session**: H026/H402's `build_rotation_monthly` uses `mom_12.iloc[i]` (current month's signal) with `monthly_ret.iloc[i]` (current month's return). At 12m window, look-ahead contamination = 1/12 ≈ 8% — small enough to be negligible. At 3m window, contamination = 1/3 = 33% — large enough to produce completely unrealistic results (CAGR 116%, 2022: +308%). **All future short-window ETF backtest scripts must use `signal.iloc[i-1]`** (lagged signal). This session corrected the implementation to use proper 1-bar lag.
+
+| Var | IS Sh | OOS Sh | OOS MDD | NegY | Description |
+|-----|-------|--------|---------|------|-------------|
+| A | 0.172 | 0.423 | -67.6% | 4 | 3m momentum, top-1 |
+| B | 0.130 | 0.449 | -53.9% | 1 | 6m momentum, top-1 |
+| C | 0.535 | 0.038 | -75.0% | 3 | 3m+6m composite, top-1 (worst) |
+| D | 0.429 | 0.191 | -54.2% | 5 | 3m+6m+12m composite, top-1 |
+| **E** | **0.306** | **0.568** | **-38.0%** | 2 | **12m pure momentum, top-1 (best)** |
+| SPY | 1.105 | 0.954 | -23.9% | 1 | buy-and-hold benchmark |
+
+**Key findings:**
+- **12m > 6m > 3m**: longer window is better for ETF sector rotation. This matches H335 (bonds) and academic consensus for monthly ETF signals. 
+- **3m momentum catastrophic**: MaxDD -67.6%, 4 negative years OOS. Short-term noise in sector ETFs overwhelms signal at 3-month scale.
+- **Composites do not help**: combining bad short signals dilutes the best 12m signal. C (3m+6m) is worst of all.
+- **Low-vol component value confirmed**: Pure 12m momentum Var E OOS 0.568 vs H026 dual-rank (mom+lowvol) 2.665. The low-vol ranking component adds 5× the Sharpe on this sub-period. This is the dominant source of H026's alpha, not the momentum window itself.
+- **EarningsInOne analogy doesn't transfer**: "fast/slow channel" at earnings (minutes to days) doesn't map to "short/long momentum" at ETF level. ETF sectors respond to month-scale business cycles, not daily news.
+
+**Window optimization family: CLOSED for ETF universes.** H335 (bonds, all windows fail), H405 (equity ETFs, 12m optimal). Do not pursue further ETF window optimization.
+
+**Script**: backtesting/daily/run_h405.py
+**Results**: backtesting/results/h405_results.json

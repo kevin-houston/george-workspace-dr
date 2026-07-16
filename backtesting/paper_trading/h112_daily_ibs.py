@@ -234,7 +234,7 @@ def main():
 
     if not args.dry_run and not args.status:
         # Snapshot equity with current prices
-        current_prices = {s: float(fetch_ohlc(s, days=2)["close"].iloc[-1]) for s in IBS_CONFIGS}
+        current_prices = {s: float(fetch_ohlc(s, days=5)["close"].iloc[-1]) for s in IBS_CONFIGS}
         eq = se.snapshot_equity(STRATEGY_ID, current_prices)
         print(f"\nIBS equity snapshot: ${eq:,.2f}")
         if orders_placed == 0:

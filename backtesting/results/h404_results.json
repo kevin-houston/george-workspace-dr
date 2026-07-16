@@ -1,0 +1,124 @@
+{
+  "hypothesis": "H404",
+  "gate": {
+    "oos_sharpe_must_beat": 1.529,
+    "description": "beat H301 200MA-gated H026"
+  },
+  "confirmed": true,
+  "confirmed_variants": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "results": {
+    "h026_baseline": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.0,
+        "maxdd": -0.028,
+        "cagr": 0.255,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 2.665,
+        "maxdd": -0.057,
+        "cagr": 0.264,
+        "neg_yrs": 0
+      }
+    },
+    "spy": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.105,
+        "maxdd": -0.194,
+        "cagr": 0.15,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 0.954,
+        "maxdd": -0.239,
+        "cagr": 0.146,
+        "neg_yrs": 1
+      }
+    },
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.332,
+        "maxdd": -0.029,
+        "cagr": 0.069,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 2.47,
+        "maxdd": -0.009,
+        "cagr": 0.209,
+        "neg_yrs": 0
+      },
+      "desc": "Composite >  0 gate (~40% cash)",
+      "cash_fraction": 0.656,
+      "beats_h301": true
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.207,
+        "maxdd": -0.003,
+        "cagr": 0.036,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 2.075,
+        "maxdd": -0.009,
+        "cagr": 0.163,
+        "neg_yrs": 0
+      },
+      "desc": "Composite >0.5 gate (~60% cash)",
+      "cash_fraction": 0.831,
+      "beats_h301": true
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.077,
+        "maxdd": -0.028,
+        "cagr": 0.138,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 2.647,
+        "maxdd": -0.013,
+        "cagr": 0.236,
+        "neg_yrs": 0
+      },
+      "desc": "Composite >-0.5 gate (~20% cash, mild)",
+      "cash_fraction": 0.377,
+      "beats_h301": true
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.0,
+        "maxdd": -0.028,
+        "cagr": 0.255,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 2.665,
+        "maxdd": -0.057,
+        "cagr": 0.264,
+        "neg_yrs": 0
+      },
+      "desc": "No gate (H026 sanity check)",
+      "cash_fraction": 0.0,
+      "beats_h301": true
+    }
+  }
+}
