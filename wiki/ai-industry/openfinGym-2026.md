@@ -9,7 +9,7 @@ category: AI Industry
 
 **Source:** Zhang, Ge, Jiang, Yang, Langham-Lopez, Yu, Szpruch, Ni. "OpenFinGym: A Verifiable Multi-Task Gym Environment for Evaluating Quant Agents." arXiv:2606.26350. University of Edinburgh / UCL / Alan Turing Institute / Oxford. Accepted QEST+FORMATS 2026.
 
-**Related pages:** [LLM Evaluation & Benchmarking for Finance 2026](llm-finance-benchmarks-2026.md) | [LLM Trading Agent Benchmarks 2026](llm-trading-agent-benchmarks-2026.md) | [Multi-Agent LLM Trading](../trading/algorithms/multi-agent-llm-trading.md) | [Deep RL for Trading](../trading/algorithms/deep-rl-trading.md) | [What Useful Alphas (Chen & Welch)](anomaly-decay-chen-welch-2026.md)
+**Related pages:** [LLM Evaluation & Benchmarking for Finance 2026](llm-finance-benchmarks-2026.md) | [LLM Trading Agent Benchmarks 2026](llm-trading-agent-benchmarks-2026.md) | [Multi-Agent LLM Trading](../trading/algorithms/multi-agent-llm-trading.md) | [Deep RL for Trading](../trading/algorithms/deep-rl-trading.md)
 
 ---
 
@@ -65,43 +65,29 @@ This directly enables dream-cycle-style research automation: stage a paper → a
 
 H274 (staged: 3-agent debate on PEAD entries) would benefit from a verifiable eval harness. Currently tested via manual backtests in `pead_overnight.py`. OpenFinGym's event-market deferred-resolution support (matching the PEAD 20-day hold) makes it a natural evaluation wrapper.
 
-**Action:** Consider wrapping H274 agent output validation in an OpenFinGym-compatible container when moving from paper to live. This prevents the leakage that contaminated H317 multi-modal PEAD (H317 NOT CONFIRMED due to coverage bias — exactly the problem OpenFinGym addresses).
+**Action:** Consider wrapping H274 agent output validation in an OpenFinGym-compatible container when moving from paper to live. This prevents the leakage that contaminated the H317 multi-modal PEAD result (H317 NOT CONFIRMED due to coverage bias — exactly the problem OpenFinGym addresses).
 
 ### H318 Meta-Agent ETF Selector
 
-H318 proposes dynamically weighting H026/H041a/H045 by regime. OpenFinGym's multi-task architecture aligns well — each strategy becomes a "task" and the meta-agent learns to select/blend based on observable state. The containerised runtime prevents look-ahead bias that has contaminated previous meta-learner attempts in literature.
+H318 proposes dynamically weighting H026/H041a/H045 by regime. OpenFinGym's multi-task architecture aligns perfectly — each strategy becomes a "task" and the meta-agent learns to select/blend based on observable state. The containerised runtime prevents the look-ahead bias that has contaminated previous meta-learner attempts.
 
-### Dream Cycle Integration
+### Anomaly-Free Evaluation
 
-The automated task-construction pipeline (arXiv paper → executable task) is exactly what the dream cycle scan does manually: identify a paper, extract its signal, create a hypothesis stub. OpenFinGym could automate the *validation* step — once a hypothesis is staged, auto-generate an OpenFinGym task package to run the backtest in a leakage-free environment.
-
----
-
-## Comparison to Existing Benchmarks
-
-| Benchmark | Tasks | Leakage Prevention | SFT/RL | Notes |
-|---|---|---|---|---|
-| BacktestBench | QA pairs | Manual | No | Tests LLM knowledge, not execution |
-| CLQT | Full trading loop | Manual | No | Diagnostic focus, single-agent |
-| PortBench | Portfolio construction | None | No | 90% of LLMs fail vs equal-weight |
-| **OpenFinGym** | **4 domains, multistage** | **Containerised verifier** | **Yes** | Most rigorous runtime isolation |
-| FinRL-Meta | RL trading only | None | Yes | Single-task, no verification |
+Chain with [What Useful Alphas (arXiv:2607.06502)](anomaly-decay-chen-welch-2026.md): OpenFinGym's post-2005 non-micro universe filter can be set at initialization, baking Chen & Welch's finding directly into agent evaluation.
 
 ---
 
 ## Limitations
 
 - **Equities and futures focus** — options task support not documented in the preprint
-- **Academic benchmark, not production infrastructure** — designed for reproducibility research, not latency-sensitive live trading
+- **Academic benchmark, not production infrastructure** — the container runtime is designed for reproducibility research, not latency-sensitive live trading
 - **Task construction pipeline quality** — auto-extraction from papers requires manual validation; generated tasks may miss nuanced signal construction details
-- **No public code yet** — preprint; code repository status unclear as of July 2026
 
 ---
 
 ## Cross-References
 
 - [LLM Evaluation & Benchmarking for Finance 2026](llm-finance-benchmarks-2026.md) — BacktestBench, CLQT, ReCAP comparisons
-- [LLM Trading Agent Benchmarks 2026](llm-trading-agent-benchmarks-2026.md) — KTD-Fin, Strat-LLM, EarningsInOne
-- [What Useful Alphas (Chen & Welch)](anomaly-decay-chen-welch-2026.md) — why verified OOS over post-2005 non-micro is critical
+- [What Useful Alphas (Chen & Welch)](anomaly-decay-chen-welch-2026.md) — explains why verified OOS matters
 - [Multi-Agent LLM Trading](../trading/algorithms/multi-agent-llm-trading.md) — H274, H318 design
 - [Deep RL for Trading](../trading/algorithms/deep-rl-trading.md) — SFT+RL integration patterns

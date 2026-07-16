@@ -699,3 +699,52 @@ H395 IMOM + MOM + LowVol (Var C, OOS Sharpe **3.962**, the H198 family champion 
 The three signals are spectral-orthogonal: IMOM captures path consistency, MOM captures direction, LowVol filters volatility noise. Equal-weighting them (H395 Var C) implicitly achieves spectral diversification.
 
 **Implication for H395+ variants**: The antipersistent return-channel component represents mean-reverting stocks. Consider a contra-signal that explicitly identifies and avoids stocks with high antipersistent loading (high short-term reversal tendency) as a 4th composite ingredient — this could be tested as H398 or H399.
+
+## Fast/Slow Latent Momentum Model — Eccles & Lee (arXiv:2607.01705)
+
+**Source:** Eccles, Dannin J. and Lee, Roger. "Portfolio Optimization under Fast and Slow Latent Mean-Reverting and Momentum Drift." University of Chicago, Dept. of Mathematics. arXiv:2607.01705. Quantitative Finance Conference 2026.
+
+### Core Setup
+
+The risky asset's drift is driven by **two unobservable stochastic factors** at distinct time scales:
+- **Fast factor** (ε-scale): mean-reverting Ornstein-Uhlenbeck process — captures short-term noise and reversals
+- **Slow factor** (1-scale): persistent momentum drift — captures medium-term continuation
+
+The investor observes only the price process and must filter to estimate both latent factors simultaneously.
+
+### Key Result: MACD Emerges from Theory
+
+The filtered estimate of the latent mean-reversion level is driven by the **difference between fast and slow EMA-type processes** of the trailing price history — exactly a Moving Average Convergence Divergence (MACD) signal — plus a deterministic Volterra correction term.
+
+This is the first formal derivation showing MACD is the statistically optimal summary statistic for a two-scale latent factor model. The Volterra correction accounts for the interaction between the two time scales (not present in naive MACD implementations).
+
+### Optimal Strategy Forms
+
+Under three utility functions (log, power, exponential), the authors derive **candidate optimal strategies in explicit feedback form**:
+- Strategy is a linear function of the fast and slow filtered estimates
+- Weights are time-dependent and depend on the ratio of fast/slow mean-reversion speeds
+- Admissibility and verification results established (not just heuristic solutions)
+
+### Implications for H198 / H026 / Production
+
+**H406 candidate — MACD-filtered momentum:**
+The EarningsInOne paper (arXiv:2606.29734) identified fast (EPS surprise, minutes) vs slow (ECT sentiment, next-day) information channels in earnings. Eccles & Lee provide the theoretical counterpart for price signals: fast (short-term MA, noise) vs slow (long-term MA, momentum). This suggests:
+
+> **H406:** Add MACD signal (12/26 EMA cross + Volterra correction) as secondary filter on H198 top-10 picks. Select within the cross-sectional momentum winners using the MACD sign: buy when MACD > 0 (slow momentum dominant), avoid/skip when MACD < 0 (fast reversion dominant).
+
+**Connection to existing confirmed strategies:**
+- H234 (inside-bar coiled-spring, OOS 1.770): technically captures the transition from fast mean-reversion to slow momentum breakout — a discrete version of the Eccles-Lee fast/slow handoff
+- H376 (6-0m no-skip OOS 3.120): the 0-month skip (no 1m reversal exclusion) is consistent with the slow factor dominating at 6m horizon — skipping the reversal correction loses information
+- H362 (VIX<20 gate on low-vol ETF rotation): regime gate approximates switching between fast-factor-dominant (high-vol, reverting) and slow-factor-dominant (low-vol, trending) regimes
+
+### Implementation Note
+
+The Volterra correction is computable from observed prices using a discretised integral of the auto-covariance of returns at different lags. Standard MACD omits this; for H406 this correction is the theoretically meaningful addition over a naive 12/26 MACD filter.
+
+**Complexity:** Requires estimating two OU parameters (mean-reversion speeds) from rolling windows. Recommended: 126-day rolling window for fast factor, 252-day for slow factor, consistent with H198's 6-1m horizon for the slow component.
+
+### Cross-References
+- [Momentum Strategies](momentum-strategies.md) — H198 (6-1m cross-sectional, OOS 1.174), H376 (6-0m no-skip, OOS 3.120)
+- [EarningsInOne fast/slow PEAD](../../../dream_cycle/staged/2026-07-15/1_earningsinone_fast_slow_wiki.json) — fast/slow channel theory in event space
+- [IBS Mean-Reversion](ibs-mean-reversion.md) — fast factor (daily mean-reversion) separate from slow (momentum)
+- [Signal Half-Life & Alpha Decay](../../backtesting/signal-halflife.md) — formal half-life = 1/fast-factor-mean-reversion-speed in Eccles-Lee notation

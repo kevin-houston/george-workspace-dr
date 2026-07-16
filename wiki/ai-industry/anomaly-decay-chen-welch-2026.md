@@ -9,7 +9,7 @@ category: AI Industry
 
 **Source:** Chen, Andrew Y. and Welch, Ivo. "What Useful Alphas?" arXiv:2607.06502. Federal Reserve Board / UCLA. July 8, 2026.
 
-**Related pages:** [LLM Alpha Mining Systems 2026](llm-alpha-mining-systems-2026.md) | [Momentum Strategies](../trading/algorithms/momentum-strategies.md) | [Hypothesis Log](../trading/backtesting/hypothesis-log.md) | [Multiple Testing & Statistical Significance](../trading/backtesting/multiple-testing.md) | [Signal Half-Life & Alpha Decay](../trading/backtesting/signal-halflife.md)
+**Related pages:** [LLM Alpha Mining Systems 2026](llm-alpha-mining-systems-2026.md) | [Momentum Strategies](../trading/algorithms/momentum-strategies.md) | [Hypothesis Log](../trading/backtesting/hypothesis-log.md) | [Multiple Testing & Statistical Significance](../trading/backtesting/multiple-testing.md)
 
 ---
 
@@ -34,7 +34,7 @@ The 7 bp figure — approximately 0.84% annualized — is economically negligibl
 
 ### Validates the NOT CONFIRMED pattern
 
-The hypothesis log shows a high NOT CONFIRMED rate (roughly 60%) across H240–H380. This paper provides the academic explanation: most anomalies were discovered on pre-2005 data, on micro-cap stocks, or both. Strategies that rely on textbook anomalies failing OOS is not a methodology error — it is the expected result given Chen & Welch's finding.
+The hypothesis log shows a high NOT CONFIRMED rate (roughly 60%) across H240–H380. This paper provides the academic explanation: most anomalies were discovered on pre-2005 data, on micro-cap stocks, or both. Strategies that rely on textbook anomalies (GEM/PACS, factor ETFs, sector breadth timing) failing OOS is not a methodology error — it is the expected result given Chen & Welch's finding.
 
 **Specific NOT CONFIRMED hypotheses this explains:**
 - H255 (Factor ETF Momentum) — most factor ETFs contain large-cap non-micro stocks post-2005
@@ -45,7 +45,7 @@ The hypothesis log shows a high NOT CONFIRMED rate (roughly 60%) across H240–H
 
 ### Highlights what survives
 
-The paper confirms a small subset of signals **do** survive the post-2005, non-micro filter:
+The paper confirms that a small subset of signals **do** survive the post-2005, non-micro filter:
 - **Momentum** (cross-sectional, 6-12 month) — H198's 6-1m momentum is precisely the surviving anomaly family
 - **Market microstructure** — short-term reversal in liquid non-micro stocks (H181 OOS 1.138)
 - **Event-driven / information signals** — NLP-based PEAD (H163/H174) exploits announcement information, not a static factor
@@ -67,7 +67,7 @@ The authors identify three candidate explanations consistent with the data:
 
 1. **Publication and arbitrage**: after publication, institutional capital crowds the trade, eliminating the spread
 2. **Market electronification**: post-2008 electronic market structure reduced microstructure-based alpha
-3. **Survivorship in publishing**: journals over-select anomalies with large IS Sharpe — inflated by data-mining, not genuine alpha
+3. **Survivorship in publishing**: journals over-select anomalies with large IS IS Sharpe — inflated by data-mining, not genuine alpha
 
 All three likely contribute. The cross-sectional pattern (micro-cap anomalies survive longer) is most consistent with explanation 1 — arbitrageurs face higher costs in micro-cap and avoid them, letting IS anomalies persist there.
 
@@ -82,21 +82,9 @@ Cross-sectional momentum (H198, H026 ETF rotation) survives for reasons distinct
 
 ---
 
-## Connection to LLM Alpha Mining
-
-The same decay risk applies to LLM-discovered factors. [LLM Alpha Mining Systems 2026](llm-alpha-mining-systems-2026.md) documents AlphaLogics, FactorEngine, and ReCAP — all of which mine new factors automatically. Chen & Welch imply that unless these systems:
-1. Test post-2005 non-micro universes
-2. Apply realistic transaction costs
-3. Use deflated Sharpe (adjusting for multiple testing)
-
-...they will rediscover the same 200 decayed anomalies in different combinations. The LLM alpha validation checklist ([LLM Alpha Validation Checklist](../trading/algorithms/llm-alpha-validation.md)) should be updated to include an explicit "post-2005 non-micro test" as test item 7.
-
----
-
 ## Cross-References
 
 - [Multiple Testing & Statistical Significance](../trading/backtesting/multiple-testing.md) — deflated Sharpe ratio; why most published Sharpe ratios are inflated
 - [Signal Half-Life & Alpha Decay](../trading/backtesting/signal-halflife.md) — AI-driven compression of momentum half-life; consistent with post-2005 decay
 - [LLM Alpha Mining Systems 2026](llm-alpha-mining-systems-2026.md) — LLM-discovered alphas face same decay risk unless tested post-2005 non-micro
-- [Shared Strategy Evaluation Checklist](../trading/shared-eval-checklist.md) — item 3 (OOS regime coverage) should explicitly require post-2005 non-micro test
-- [Survivorship Bias & Universe Construction](../trading/backtesting/survivorship-bias.md) — companion concern: micro-cap results inflate IS anomaly returns
+- [Shared Strategy Evaluation Checklist](../trading/shared-eval-checklist.md) — item 3 (OOS regime coverage) should now explicitly require post-2005 non-micro test
