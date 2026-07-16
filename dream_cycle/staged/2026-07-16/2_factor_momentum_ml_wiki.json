@@ -1,0 +1,14 @@
+{
+  "id": "factor-momentum-ml-wiki-2026-07-16",
+  "date": "2026-07-16",
+  "source": "Journal of Portfolio Management April 2025",
+  "source_url": "https://alphaarchitect.com/predict-factor-returns/",
+  "title": "Factor momentum = only ML alpha in 242-factor study — wiki update to factor-models.md",
+  "rationale": "Cakici, Fieberg, Osorio, Poddig & Zaremba (JPM April 2025) applied 8 ML algorithms to 242 factor characteristics. Key finding: factor momentum is the MAIN driver of cross-sectional factor return variation. Once factor momentum is controlled for, NO ML portfolio generates significant alpha. This directly validates our H398A (4-factor composite IMOM6+MOM60+LowVol+IMOM12) — IMOM6 and IMOM12 are implicit factor-momentum signals on our universe. Also suggests H406: explicit inter-factor momentum signal should outperform arbitrary multi-factor composites.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/factor-models.md",
+  "content": "\n---\n\n## Factor Momentum = The Only ML Alpha in 242-Factor Study (JPM 2025)\n\n**Source**: Cakici, Fieberg, Osorio, Poddig & Zaremba — \"Picking Winners in Factorland: A Machine Learning Approach to Predicting Factor Returns\" — *Journal of Portfolio Management*, April 2025  \n**Coverage**: 242 factor characteristics, multiple ML methods (random forest, XGBoost, LASSO, neural nets, etc.)  \n\n### Key Finding\n\n> Factor momentum is the **main driver** of cross-sectional variation in anomaly returns, capturing most of the predictability that ML strategies extract. Once factor momentum is controlled for, **no long-short ML portfolio generates significant alpha**.\n\nThis is a direct empirical validation of why IMOM6/IMOM12 are the dominant signals in our H398A composite (OOS Sharpe 4.068):\n- IMOM6 = 6-month inter-stock momentum within industry group = implicit **factor momentum** on the stock momentum factor\n- IMOM12 = 12-month version of same\n- Together they comprise 2 of the 4 signals; the other 2 (MOM60 = 5-year momentum, LowVol) provide the remaining alpha\n\n### Turnover Cost Warning\n\nThe ML factor rotation strategies require substantial factor turnover: **37–66% of factors replaced each month** depending on the specific ML strategy. This is a realistic cost that erodes gross alpha for any factor-rotation approach.\n\n**Implication for H041a production**: our IMOM6+MOM60+LowVol+IMOM12 composite already implicitly contains the factor momentum signal. Adding explicit ML factor prediction on top would add 37-66% monthly factor turnover with no net alpha after costs.\n\n**H406 design implication**: explicit factor momentum signal should be tested on a *broader* factor universe (50+ signals) where cross-sectional factor variation exists — NOT on our 4-signal composite where all signals already include momentum exposure.\n",
+  "action": "append",
+  "apply_status": "pending"
+}
