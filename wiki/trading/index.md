@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-14 (factor-models.md major expansion: IMOM factor, spectral decomposition theory, H198 composite results table, correlation management; dream cycle: HedgeAgents multi-agent + Attention Factors stat-arb + SAE-FiRE PEAD + analyst beliefs staged; H400/H401 candidates identified)
+updated: 2026-07-16 (position-sizing.md major update: current production portfolio H041a/H026/H045/IBS; SALVOC vol control + SJM regime sizing + Kelly-VIX hybrid; research log 2026-07-16; H404+H405 NOT CONFIRMED — FRED macro timing + short ETF momentum windows both closed)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -20,7 +20,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 ## Wiki sections
 
 - [Algorithms](algorithms/) — trading strategy catalog
-  - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← new 2026-04-27
+  - [Position Sizing & Portfolio Construction](algorithms/position-sizing.md) ← updated 2026-07-16 (production portfolio table H041a/H026/H045/IBS; SALVOC adaptive vol control arXiv:2603.01298 — 15% target, Sharpe 0.31→0.42 MaxDD −18pp; SJM factor regime sizing arXiv:2410.14841 — IR 0.05→0.43; Kelly-VIX hybrid for options arXiv:2508.16598)
   - [Momentum Strategies](algorithms/momentum-strategies.md) ← updated 2026-07-07 (H198 CONFIRMED: 6-1m stock momentum OOS Sharpe 1.174; H217 CONFIRMED: median alpha101 OOS 1.559; H228 CONFIRMED: H217+H181 blend OOS 1.572; **H376/H377 6-0m no-skip: OOS 3.120 / MaxDD -8.4% / 0 neg yrs** — major discovery; skip-month convention analysis; H377 full test pending)
   - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-06-21 (ETF+statistical pairs EXHAUSTED H152-H200; LLM SEMANTIC PAIRS new direction — H316 queued; Moira arXiv:2605.01954 HRL+LLM; LLM-Augmented Semantic Networks arXiv:2604.19476; 2-stage embedding+GPT-4o pipeline; $0.07/run for 30-stock universe; link_strength≥6 filter)
   - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-07-14 (analyst over-reaction to sentiment + under-reaction to uncertainty narratives arXiv:2511.15214 — validates H174 mechanism; SAE-FiRE PEAD upgrade path arXiv:2505.14420 — H400 candidate; H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)

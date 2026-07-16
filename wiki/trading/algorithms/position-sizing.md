@@ -1,18 +1,34 @@
 ---
-updated: 2026-05-21
+updated: 2026-07-16
 type: guide
 relevance: all confirmed strategies; multi-strategy portfolio Phase 3
 ---
 
 # Position Sizing & Portfolio Construction
 
-How to size positions and blend our confirmed strategies. Updated for the current confirmed portfolio: H026, H174, H181, H192-D, H198, H201.
+How to size positions and blend our confirmed strategies. Updated for the current production portfolio: **H041a 22% / H026 27% / H045 21% / IBS 30%** (OOS Sharpe 4.158, MaxDD −3.60%, ~23.5% CAGR, zero negative years 2004–2025).
 
 **Related pages**: [Portfolio Optimization Libraries](../tools/portfolio-optimization.md) (PyPortfolioOpt/Riskfolio/skfolio) | [Backtesting Design Principles](../backtesting/design-principles.md) | [Walk-Forward & CPCV](../backtesting/walk-forward-cpcv.md) | [Regime Detection](regime-detection.md) (gating strategies by market state)
 
 ---
 
-## Confirmed Strategy Inventory (as of 2026-05-21)
+## Production Portfolio (as of 2026-07-16)
+
+Current live allocation in Alpaca paper account (~$102k):
+
+| Sleeve | Strategy | Alloc | OOS Sharpe | MaxDD | Frequency |
+|--------|----------|-------|-----------|-------|-----------|
+| Stock momentum | H041a (4-factor top-2: IMOM6+MOM60+LowVol+IMOM12) | 22% | 4.068 | −8.4% | Monthly |
+| ETF rotation | H026 (25-asset sector+alts dual-rank top-1) | 27% | 2.665 | −5.7% | Monthly |
+| Bond rotation | H045 (13-asset bond ETF top-2 rank ensemble) | 21% | 1.351 | −6.3% | Monthly |
+| Daily reversal | IBS (XLK/SMH/IGV Internal Bar Score) | 30% | ~2.5 standalone | est. −12% | Daily |
+| **Combined** | **Production blend** | **100%** | **4.158** | **−3.60%** | — |
+
+**Key observation**: the IBS daily sleeve is the primary source of the portfolio's Sharpe jump from ~2.5 (rotation-only) to 4.158 — it is largely uncorrelated with monthly strategies because it trades at intraday resolution on different assets. H041a and H026 are partially correlated (both momentum-based on equity ETFs vs individual stocks) but different enough to compound diversification.
+
+## Legacy Confirmed Strategy Inventory (as of 2026-05-21)
+
+These strategies are confirmed but not in the current production blend; they are candidates for future blending.
 
 | Strategy | OOS Sharpe | MaxDD | Frequency | Corr bucket |
 |----------|-----------|-------|-----------|-------------|
@@ -325,3 +341,164 @@ BEAR_REGIME_ADJUSTMENT = {
 - [ ] Check combined momentum exposure (H026 + H198 < 30%)
 - [ ] Review PEAD capacity: if earnings season thins, reduce H174 allocation
 - [ ] Log deviation between target and actual allocations
+
+---
+
+## Volatility Targeting — Adaptive Leveraged Vol Control (SALVOC)
+
+**Source**: arXiv:2603.01298 — "Single-Asset Adaptive Leveraged Volatility Control" (March 2026)  
+**Tested on**: 44 ETFs (US equities, international equities, commodities, sector funds), OOS Jan 2010–Dec 2024  
+**Target volatility**: σᵗᵃʳ = 15% annualized (0.15/√252 daily)
+
+### Results vs baseline (IVV S&P 500)
+
+| Method | Sharpe | MaxDD |
+|--------|--------|-------|
+| Unmanaged IVV | 0.31 | 55.3% |
+| Open-loop vol control | 0.33 | 38.6% |
+| **SALVOC (adaptive)** | **0.42** | **37.1%** |
+
+**MaxDD reduction: 18.2pp.** Sharpe improvement: 0.31 → 0.42 (+35%).
+
+### The proportional control formula
+
+SALVOC operates in log-space to avoid the compounding distortion of linear scaling:
+
+```python
+import numpy as np
+
+def salvoc_weight(sigma_hat: float, sigma_target: float = 0.15,
+                  kappa: float = 0.0, g: float = 0.5, theta: float = 0.8,
+                  kappa_min: float = -1.5, kappa_max: float = 1.5,
+                  L: float = 2.0) -> tuple[float, float]:
+    """
+    Single step of SALVOC proportional control.
+    sigma_hat:   realized volatility estimate (annualized)
+    sigma_target: target annualized volatility (default 15%)
+    kappa:       current control state (log-scale bias)
+    g, theta:    proportional gain and smoothing factor
+    L:           leverage cap (max weight)
+    Returns:     (weight, new_kappa)
+    """
+    e_k = np.log(sigma_hat / sigma_target)           # tracking error (log)
+    update = -g * np.clip(e_k, kappa_min, kappa_max) # proportional correction
+    kappa_new = (1 - theta) * update + theta * kappa  # exponential smoothing
+    w = min(np.exp(kappa_new) * sigma_target / sigma_hat, L)
+    return w, kappa_new
+
+# Example: rolling application on monthly ETF data
+def apply_salvoc(returns: pd.Series, sigma_target: float = 0.15,
+                 vol_window: int = 21) -> pd.Series:
+    sigma_estimates = returns.ewm(span=vol_window).std() * np.sqrt(252)
+    weights = []
+    kappa = 0.0
+    for sigma in sigma_estimates:
+        w, kappa = salvoc_weight(sigma, sigma_target, kappa)
+        weights.append(w)
+    return pd.Series(weights, index=returns.index)
+```
+
+### Practical notes for our ETF rotation strategies
+
+- Apply SALVOC at the **strategy sleeve level** (not individual ETF), e.g. on H026 monthly returns.
+- Target vol of **15%** matches momentum factor natural volatility; use **10%** for the combined portfolio (less aggressive).
+- The open-loop version (`wₖ = σᵗᵃʳ / σ̂ₖ`) is simpler and captures most of the benefit (Sharpe 0.33 vs 0.42). Use it as the default implementation.
+- Cap leverage at 1.0× (no leverage) for production; only allow up to 1.5× once live graduation criteria are met.
+- **Does not require OOS lookahead**: all σ̂ estimates use only data through t−1.
+
+---
+
+## Regime-Based Factor Allocation Sizing (SJM)
+
+**Source**: arXiv:2410.14841 — "Dynamic Factor Allocation Leveraging Regime-Switching Signals" (Oct 2024)  
+**Method**: Sparse Jump Model (SJM) — same approach as the Regime Detection wiki recommends (Shu et al. 2024)  
+**Universe**: 7 factor ETFs — PBUS (market), VLUE (value), SIZE (size), MTUM (momentum), QUAL (quality), USMV (min-vol), IWF (growth)
+
+### Performance improvement from regime-based sizing
+
+| Metric | Static EW | Dynamic SJM |
+|--------|-----------|-------------|
+| Sharpe | 0.52 | 0.60 |
+| Information Ratio vs market | ~0.05 | 0.43 |
+| MaxDD | −54.9% | −52.2% |
+| Transaction cost | 5bp/leg | 5bp/leg |
+
+### Position sizing rule
+
+The SJM identifies a bull or bear regime for each factor ETF separately. Position weights are set by the regime-specific expected active return:
+
+```python
+def regime_factor_weight(expected_active_return: float,
+                         threshold: float = 0.05) -> float:
+    """
+    Set allocation based on regime's expected annual active return vs market.
+    expected_active_return: positive = bull regime, negative = bear regime
+    threshold: dead zone around zero (5% default)
+    """
+    if expected_active_return > threshold:
+        return 1.0          # 100% long factor
+    elif expected_active_return < -threshold:
+        return -1.0         # 100% short factor (long market)
+    else:
+        # Linear interpolation in the dead zone
+        return expected_active_return / threshold
+```
+
+**Regime inputs**: RSI, stochastic oscillator, MACD, EWMA returns at 8/21/63-day windows, VIX (log-differenced), 2Y yield, yield curve slope (10Y−2Y). The SJM minimizes a joint clustering + transition-penalty objective; RSI₆₃ and %K₆₃ receive highest feature importance (~11% each) in the value factor example.
+
+**Implication for H026/H041a**: the SJM approach explains why H026's dual-rank (momentum + LowVol) outperforms pure momentum — it implicitly down-weights assets in bear regimes by assigning them low LowVol rank. The explicit SJM approach makes this regime detection transparent and tunable.
+
+---
+
+## Kelly-VIX Hybrid for Options Sleeve
+
+**Source**: arXiv:2508.16598 — "Sizing the Risk: Kelly, VIX, and Hybrid Approaches in Put-Writing on Index Options" (Aug 2025)
+
+For the options income sleeve (H266 iron condor / CSP strategy), combine Kelly sizing with VIX-rank position scaling:
+
+### VIX-rank scaling (reduce size in high-vol regimes)
+
+```python
+def vix_rank_scale(vix_current: float, vix_history: pd.Series,
+                   lookback: int = 252) -> float:
+    """
+    Scale position SIZE inversely with VIX regime.
+    High VIX percentile → smaller size (more risk per contract, need fewer).
+    """
+    vix_window = vix_history.tail(lookback)
+    percentile = (vix_window < vix_current).mean()   # VIX rank [0,1]
+    return 1.0 - percentile                           # scale: 1.0 at low VIX, 0.0 at peak
+
+def kelly_vix_contracts(portfolio_value: float, margin_per_contract: float,
+                        kelly_fraction: float, vix_current: float,
+                        vix_history: pd.Series) -> int:
+    """
+    Number of contracts = floor(portfolio_value / margin_per_contract
+                               * kelly_fraction * vix_scale)
+    """
+    vix_scale = vix_rank_scale(vix_current, vix_history)
+    return int(portfolio_value / margin_per_contract * kelly_fraction * vix_scale)
+```
+
+### Observed performance (OOS, SPX 0-DTE options)
+
+| Strategy | Return (ann.) | Vol | MaxDD |
+|----------|--------------|-----|-------|
+| Full Kelly (0 DTE, 10% OTM) | 14.4–17.2% | 8.5% | ~0% |
+| VIX-rank (5 DTE, 0% OTM) | est. high | — | 9.91% |
+| Kelly-VIX hybrid (5 DTE, 0% OTM) | 22.1–23.1% | ~18% | 9.5–10.7% |
+
+**Key finding**: Fractional Kelly reduces volatility more than it reduces expected growth — a favorable tradeoff. The VIX-rank overlay handles tail risk that pure Kelly doesn't see (Kelly assumes stationarity; VIX-rank injects regime awareness). Best blend: use half-Kelly as the base and VIX-rank as the scaling multiplier.
+
+---
+
+## Updated Quarterly Review Checklist (Production Portfolio)
+
+- [ ] Recompute EWM vols for each sleeve: H041a, H026, H045, IBS
+- [ ] Verify H026 dual-rank top-1 pick is live (check pead_open.log for current month)
+- [ ] Check IBS strategy equity vs target (target: $5k per sleeve = $30k IBS total)
+- [ ] Update correlation between IBS daily returns and monthly strategy returns (target: corr < 0.3)
+- [ ] Apply SALVOC open-loop adjustment if realized 60-day vol > 12% or < 7%
+- [ ] Check VIX for options sleeve sizing (if VIX > 25, scale down by VIX-rank factor)
+- [ ] Log combined momentum exposure: H041a + H026 should stay ≤55% (both momentum but different universes)
+- [ ] Review PEAD paper trading win rate: gate ≥75% over trailing 20 events
