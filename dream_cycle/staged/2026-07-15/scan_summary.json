@@ -1,0 +1,83 @@
+{
+  "scan_date": "2026-07-15",
+  "scan_type": "nightly_dream_cycle",
+  "thinnest_section": "AI Industry",
+  "section_page_count_before": 7,
+  "section_page_count_after": 9,
+  "papers_reviewed": [
+    {
+      "id": "arXiv:2607.06502",
+      "title": "What Useful Alphas?",
+      "authors": "Chen & Welch",
+      "published": "2026-07-08",
+      "relevance": "high"
+    },
+    {
+      "id": "arXiv:2606.26350",
+      "title": "OpenFinGym: A Verifiable Multi-Task Gym Environment for Evaluating Quant Agents",
+      "authors": "Zhang et al. (Edinburgh/UCL/Oxford/Turing)",
+      "published": "2026-06 (accepted QEST+FORMATS 2026)",
+      "relevance": "high"
+    },
+    {
+      "id": "arXiv:2607.01705",
+      "title": "Portfolio Optimization under Fast and Slow Latent Mean-Reverting and Momentum Drift",
+      "authors": "Eccles & Lee (UChicago)",
+      "published": "2026-07-02",
+      "relevance": "medium"
+    },
+    {
+      "id": "arXiv:2607.01550",
+      "title": "Is Trend Still Your Friend? A Microstructural Account of the Demise of Short-Term Trend-Following",
+      "authors": "Kurth, Eisler, Rej, Bouchaud (CFM)",
+      "published": "2026-07-07",
+      "relevance": "high",
+      "note": "Already staged as prop-2026-07-15-002 (applied)"
+    },
+    {
+      "id": "arXiv:2606.29734",
+      "title": "Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals (EarningsInOne)",
+      "authors": "Yu, Liu, Zhang, He",
+      "published": "2026-06-29",
+      "relevance": "high",
+      "note": "Already staged as prop-2026-07-15-001 (applied)"
+    }
+  ],
+  "proposals_staged": [
+    {
+      "id": "prop-2026-07-15-004",
+      "source": "arXiv:2607.06502",
+      "action": "create",
+      "target": "wiki/ai-industry/anomaly-decay-chen-welch-2026.md",
+      "apply_status": "pending",
+      "risk_level": "low"
+    },
+    {
+      "id": "prop-2026-07-15-005",
+      "source": "arXiv:2606.26350",
+      "action": "create",
+      "target": "wiki/ai-industry/openfinGym-2026.md",
+      "apply_status": "pending",
+      "risk_level": "low"
+    },
+    {
+      "id": "prop-2026-07-15-006",
+      "source": "arXiv:2607.01705",
+      "action": "append",
+      "target": "wiki/trading/algorithms/momentum-strategies.md",
+      "apply_status": "pending",
+      "risk_level": "low"
+    }
+  ],
+  "wiki_pages_created": [
+    "wiki/ai-industry/anomaly-decay-chen-welch-2026.md",
+    "wiki/ai-industry/openfinGym-2026.md"
+  ],
+  "wiki_pages_updated": [
+    "wiki/index.md",
+    "wiki/log.md",
+    "wiki/trading/research-log/2026-07-15.md"
+  ],
+  "hypothesis_stubs": ["H406 (MACD-filtered momentum on H198 universe, from Eccles & Lee)"],
+  "notes": "AI Industry section expanded from 7 to 9 pages. Proposals 001-003 from earlier in the same day were already applied (EarningsInOne, TrendDemise, TH-GNN). Props 004-006 remain pending for 4AM build phase."
+}
