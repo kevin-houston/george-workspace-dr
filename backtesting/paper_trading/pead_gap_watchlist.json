@@ -1,6 +1,11 @@
 {
-  "date": "2026-07-14",
-  "candidates": [],
+  "date": "2026-07-15",
+  "candidates": [
+    "JPM",
+    "BAC",
+    "WFC",
+    "JNJ"
+  ],
   "source": "earnings_only",
   "strategy": "PEAD_GAP"
 }

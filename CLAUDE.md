@@ -1,4 +1,4 @@
-<!-- Composed at spawn — do not edit. Edit CLAUDE.local.md for per-group content. -->
+<!-- Composed at spawn - do not edit. Standing instructions: instructions.prepend.md. Memory: memory/. -->
 @./.claude-shared.md
 @./.claude-fragments/module-agents.md
 @./.claude-fragments/module-cli.md

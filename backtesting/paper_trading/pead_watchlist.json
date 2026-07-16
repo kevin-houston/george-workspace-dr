@@ -1,6 +1,18 @@
 {
-  "date": "2026-07-14",
+  "date": "2026-07-15",
   "candidates": [],
-  "scores": {},
-  "reason": "no earnings"
+  "scores": {
+    "BAC": {
+      "score": -0.0282,
+      "surprise": -0.1045
+    },
+    "WFC": {
+      "score": -0.0018,
+      "surprise": -0.1002
+    },
+    "JNJ": {
+      "score": -0.0224,
+      "surprise": null
+    }
+  }
 }

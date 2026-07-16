@@ -454,3 +454,47 @@
 [2026-07-14 23:01:53] No earnings tonight. Watchlist cleared.
 [2026-07-14 23:02:01]   Tickers with recent earnings: none
 [2026-07-14 23:02:01] No earnings tonight. Watchlist cleared.
+[2026-07-15 23:00:57] =======================================================
+[2026-07-15 23:00:57] =======================================================
+[2026-07-15 23:00:57] PEAD overnight pass starting
+[2026-07-15 23:00:57] PEAD overnight pass starting
+[2026-07-15 23:00:57] Scanning earnings calendar…
+[2026-07-15 23:00:57] Scanning earnings calendar…
+[2026-07-15 23:01:20]   Tickers with recent earnings: ['JPM', 'BAC', 'WFC', 'JNJ']
+[2026-07-15 23:01:20]   Fetching 8-K for JPM…
+[2026-07-15 23:01:21]   Tickers with recent earnings: ['JPM', 'BAC', 'WFC', 'JNJ']
+[2026-07-15 23:01:21]   Fetching 8-K for JPM…
+[2026-07-15 23:01:57]     JPM: no 8-K Item 2.02 found
+[2026-07-15 23:01:57]     JPM: no 8-K Item 2.02 found
+[2026-07-15 23:01:57]   Fetching 8-K for BAC…
+[2026-07-15 23:01:57]   Fetching 8-K for BAC…
+[2026-07-15 23:02:06]     BAC: 12112 chars
+[2026-07-15 23:02:06]   Fetching 8-K for WFC…
+[2026-07-15 23:02:06]     BAC: 12112 chars
+[2026-07-15 23:02:06]   Fetching 8-K for WFC…
+[2026-07-15 23:02:12]     WFC: 7057 chars
+[2026-07-15 23:02:12]   Fetching 8-K for JNJ…
+[2026-07-15 23:02:12]     WFC: 7057 chars
+[2026-07-15 23:02:12]   Fetching 8-K for JNJ…
+[2026-07-15 23:02:13]     JNJ: 5042 chars
+[2026-07-15 23:02:13]     JNJ: 5042 chars
+[2026-07-15 23:03:05]   Loading ProsusAI/finbert…
+[2026-07-15 23:03:05]   Loading ProsusAI/finbert…
+[2026-07-15 23:09:12]   BAC: score=-0.028  surprise=-0.104
+[2026-07-15 23:09:12]   BAC: score=-0.028  surprise=-0.104
+[2026-07-15 23:09:15]   WFC: score=-0.002  surprise=-0.100
+[2026-07-15 23:09:15]   WFC: score=-0.002  surprise=-0.100
+[2026-07-15 23:09:17]   JNJ: score=-0.022  surprise=nan
+[2026-07-15 23:09:17]   ✗ BAC filtered out (score=-0.028, surprise=-0.1045)
+[2026-07-15 23:09:17]   ✗ WFC filtered out (score=-0.002, surprise=-0.1002)
+[2026-07-15 23:09:17]   ✗ JNJ filtered out (score=-0.022, surprise=None)
+[2026-07-15 23:09:17] Candidates for tomorrow: none
+[2026-07-15 23:09:17] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-15 23:09:17] Overnight pass complete.
+[2026-07-15 23:09:17]   JNJ: score=-0.022  surprise=nan
+[2026-07-15 23:09:17]   ✗ BAC filtered out (score=-0.028, surprise=-0.1045)
+[2026-07-15 23:09:17]   ✗ WFC filtered out (score=-0.002, surprise=-0.1002)
+[2026-07-15 23:09:17]   ✗ JNJ filtered out (score=-0.022, surprise=None)
+[2026-07-15 23:09:17] Candidates for tomorrow: none
+[2026-07-15 23:09:17] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-15 23:09:17] Overnight pass complete.
