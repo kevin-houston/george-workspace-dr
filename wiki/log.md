@@ -627,3 +627,15 @@ Pages created: 3.
 Index updated: pages 204→207, updated date 2026-07-12→2026-07-13.
 Staged proposals: 3 JSON files in dream_cycle/staged/2026-07-13/ (IDs 2026-07-13-1,2,3).
 All General Tech additions cross-referenced to trading hypotheses and existing pages.
+
+## [2026-07-15] research | Dream cycle nightly scan — AI Industry wiki expansion (2 new pages, 3 staged proposals)
+
+Pages created: 2.
+- ai-industry/anomaly-decay-chen-welch-2026.md — Chen & Welch (arXiv:2607.06502, Jul 8 2026); ~200 published anomalies collapse from 48bp/month (pre-2005, all stocks) to 7bp (post-2005, non-micro top-3000); validates the NOT CONFIRMED pattern in H240-H380; confirms momentum + info-based alpha + structural alpha as surviving signals; implications for LLM alpha mining evaluation gates
+- ai-industry/openfinGym-2026.md — Edinburgh/UCL/Oxford/Turing (arXiv:2606.26350, accepted QEST+FORMATS 2026); containerised runtime + host-side verifier prevents train-test leakage; 4 task domains (forecasting/market-gen/trading/fraud); automated arXiv→executable task pipeline; SFT+RL integration; relevant for H274 multi-agent PEAD + H318 meta-agent selector
+Index updated: pages 207→209, updated date 2026-07-13→2026-07-15.
+Staged proposals: 3 new JSON files in dream_cycle/staged/2026-07-15/ (props 4, 5, 6):
+  - prop-2026-07-15-004: wiki create for Chen & Welch anomaly decay page (risk: low)
+  - prop-2026-07-15-005: wiki create for OpenFinGym page (risk: low)
+  - prop-2026-07-15-006: wiki append to momentum-strategies.md — Eccles & Lee (arXiv:2607.01705) fast/slow latent momentum model; MACD emerges from theory; H406 candidate stub (MACD-filtered momentum on H198 universe)
+Papers reviewed: arXiv:2607.06502 (Chen & Welch "What Useful Alphas"), arXiv:2606.26350 (OpenFinGym), arXiv:2607.01705 (Eccles & Lee fast/slow portfolio), arXiv:2607.01550 (Bouchaud trend demise, already in staged as prop 002), arXiv:2606.29734 (EarningsInOne, already in staged as prop 001).
