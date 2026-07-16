@@ -801,3 +801,27 @@ Kurth, Eisler, Rej, Bouchaud (Jul 2026, presented at Quantitative Finance Confer
 **Caution for new hypotheses:** Any new hypothesis using short-term (daily/weekly) time-series momentum signals on liquid instruments should account for post-2009 crowding decay. This is consistent with H298 NOT CONFIRMED (weekly ETF reversal) and H339 NOT CONFIRMED (price momentum filter gates).
 
 **See also**: H198 (cross-sectional momentum, OOS 1.174), H398A (IMOM composite, OOS 4.068), H026 (ETF rotation, production), H298 (NOT CONFIRMED, weekly reversal), H339 (NOT CONFIRMED, price momentum gate).
+
+---
+
+## Factor Momentum = The Only ML Alpha in 242-Factor Study (JPM 2025)
+
+**Source**: Cakici, Fieberg, Osorio, Poddig & Zaremba — "Picking Winners in Factorland: A Machine Learning Approach to Predicting Factor Returns" — *Journal of Portfolio Management*, April 2025  
+**Coverage**: 242 factor characteristics, multiple ML methods (random forest, XGBoost, LASSO, neural nets, etc.)  
+
+### Key Finding
+
+> Factor momentum is the **main driver** of cross-sectional variation in anomaly returns, capturing most of the predictability that ML strategies extract. Once factor momentum is controlled for, **no long-short ML portfolio generates significant alpha**.
+
+This is a direct empirical validation of why IMOM6/IMOM12 are the dominant signals in our H398A composite (OOS Sharpe 4.068):
+- IMOM6 = 6-month inter-stock momentum within industry group = implicit **factor momentum** on the stock momentum factor
+- IMOM12 = 12-month version of same
+- Together they comprise 2 of the 4 signals; the other 2 (MOM60 = 5-year momentum, LowVol) provide the remaining alpha
+
+### Turnover Cost Warning
+
+The ML factor rotation strategies require substantial factor turnover: **37–66% of factors replaced each month** depending on the specific ML strategy. This is a realistic cost that erodes gross alpha for any factor-rotation approach.
+
+**Implication for H041a production**: our IMOM6+MOM60+LowVol+IMOM12 composite already implicitly contains the factor momentum signal. Adding explicit ML factor prediction on top would add 37-66% monthly factor turnover with no net alpha after costs.
+
+**H406 design implication**: explicit factor momentum signal should be tested on a *broader* factor universe (50+ signals) where cross-sectional factor variation exists — NOT on our 4-signal composite where all signals already include momentum exposure.

@@ -354,3 +354,39 @@ Mirror the equity strategy graduation criteria:
 - [ ] NanoClaw schedule task created (4 AM CT CPI mornings, with pre-task checking market status)
 - [ ] Daily tearsheet wired to send Kevin a message if drawdown > 10%
 - [ ] `EDGAR_KEY` credential test (for FinBERT enhancement layer; optional)
+
+---
+
+## CloddsBot — Claude-Native Multi-Market Prediction Agent
+
+**Repo**: [alsk1992/CloddsBot](https://github.com/alsk1992/CloddsBot) — Apache 2.0, self-hosted  
+**Scope**: 1000+ markets — Polymarket, Kalshi, Binance, Hyperliquid, Solana DEXs, 5 EVM chains  
+**Built on**: Claude (Anthropic) with agent commerce protocol for machine-to-machine payments  
+
+### What it does
+
+- **Edge scanning**: evaluates 1000+ active markets for mispricing vs model estimates
+- **Instant execution**: submits orders autonomously on detected edge
+- **Risk management**: position sizing and drawdown monitoring built-in
+- **M2M payments**: agent commerce protocol enables cross-agent coordination (other Claude agents can subscribe to its signals)
+
+### Integration with our H185 pipeline
+
+Our H185 CPI nowcasting produces p(CPI > X) from Cleveland Fed. CloddsBot can:
+1. Subscribe to our George agent via M2M → receive p(CPI) estimates
+2. Compare vs live Kalshi prices via its scanning loop
+3. Execute Kelly-sized bets autonomously when edge > threshold
+
+This would remove the manual step in our current H185 workflow (George checks price, manually submits via Kalshi CLI).
+
+### vs oracle3
+
+| | oracle3 | CloddsBot |
+|-|---------|----------|
+| Pricing model | Wang Transform (λ̂=0.183 calibrated) | Claude LLM-based |
+| Scope | Kalshi/Polymarket/Solana | 1000+ markets incl. crypto DEXs |
+| Open source | Yes (Apache 2.0) | Yes (Apache 2.0) |
+| Calibration | 291K resolved contracts | Not published |
+| Best for | Quantitative binary markets | Broad coverage / LLM-based edge |
+
+For quantitative H185 work: prefer oracle3's Wang Transform. For exploratory multi-market scanning: CloddsBot's broader coverage is valuable.

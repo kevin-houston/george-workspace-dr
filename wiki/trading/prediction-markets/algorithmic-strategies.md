@@ -833,3 +833,45 @@ def quarter_kelly(edge, odds, max_fraction=0.1):
 
 **Spread interpretation (from Glosten-Milgrom component):**
 Wider spread near resolution = informed traders are active = position in the direction of order flow, not against it. This is the OPPOSITE of market-making — as a directional bettor, follow the spread-widening signal, not fade it.
+
+---
+
+## oracle3 — Wang Transform Prediction Market Agent (2026)
+
+**Repo**: [YichengYang-Ethan/oracle3](https://github.com/YichengYang-Ethan/oracle3) — Apache 2.0, 633 tests  
+**Paper**: Yang (2026), "Pricing Prediction Markets: Risk Premiums, Incomplete Markets, and a Decomposition Framework" — UIUC SSRN working paper  
+**Markets**: Kalshi, Polymarket, Solana DFlow + Jito bundles  
+
+### Pricing Model: Wang Transform
+
+Prediction markets suffer systematic **favorite-longshot bias**: a true 50/50 contract typically trades near 0.57. The Wang Transform prices this distortion analytically:
+
+```python
+from scipy.stats import norm
+
+def wang_transform_price(p_true: float, lam: float = 0.183) -> float:
+    """
+    Wang Transform: converts true probability → market price.
+    lam (lambda) = 0.183 calibrated on 291,309 resolved contracts.
+    A positive lam shifts weight toward tails (risk premium).
+    """
+    return norm.cdf(norm.ppf(p_true) - lam)
+
+def wang_edge(market_price: float, estimated_p: float, lam: float = 0.183) -> float:
+    """Edge = estimated_p minus Wang-adjusted fair price."""
+    fair = wang_transform_price(estimated_p, lam)
+    return estimated_p - fair   # positive = bet is mispriced in our favor
+```
+
+**Calibration**: λ̂ = 0.183 from hierarchical MLE on 291,309 contracts across 6 platforms. Contracts pricing a true 50% event at ~57¢ systematically lose for long-biased buyers — oracle3 shorts these.
+
+### Architecture
+- **Pricing engine**: Wang Transform (calibrated λ̂=0.183) + incomplete-markets decomposition
+- **Arbitrage strategies**: 8 constraint-based strategies detecting multi-contract mispricings
+- **Position sizing**: Kelly criterion on edge estimate with drawdown guard
+- **Execution**: Kalshi CLOB, Polymarket CLOB, Solana DFlow atomic execution
+
+### Relevance to H185 (CPI nowcasting)
+Our H185 pipeline estimates p(CPI > X) from Cleveland Fed nowcast. The Wang Transform gives the fair Kalshi price for that probability estimate. If Kalshi prices the contract at p_market >> wang_transform_price(p_cleveland_fed), there is edge to short.
+
+**Implementation path**: install oracle3 → plug in Cleveland Fed / NY Fed nowcast for `estimated_p` → Kelly size the bet → submit via Kalshi API (already wired in OneCLI).
