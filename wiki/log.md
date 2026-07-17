@@ -2,6 +2,7 @@
 
 Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
+Last scan completed: 2026-07-16 (3 staged proposals, 4 new pages, DR section expanded)
 
 ---
 
