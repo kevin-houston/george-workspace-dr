@@ -633,3 +633,60 @@ H246/H307 both failed because IS cointegration was INVERSELY predictive of OOS c
 **Implementation path:** PyTorch Geometric + rolling-window training on S&P 500 daily returns. Pairs selected by top-decile predicted correlation stability (low predicted rolling correlation variance = stable pair).
 
 **See also**: H246 (NOT CONFIRMED, cointegration structural breaks), H307 (NOT CONFIRMED, Johansen cointegration ETF pairs), H401 (staged, Attention Factors stat-arb).
+
+---
+
+## Moira: Hierarchical RL + LLM for Pairs Trading (May 2026)
+
+**Source**: arXiv:2605.01954 — "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading" (May 3, 2026)
+
+### Why This Matters for H316 (LLM Pairs STUB)
+
+H307 showed that Johansen cointegration IS selection is anti-predictive of OOS performance — structural breaks destroy statistical relationships. Moira proposes an alternative: use LLMs for **semantic** pair selection based on business relationships, then RL for execution.
+
+### Architecture
+
+Two-level hierarchy:
+1. **High level (LLM as pair selector)**: Selects which assets to pair using textual reasoning about business similarity, supply chain relationships, competitive dynamics. No gradient updates — uses "prompt updates" from trajectory-level feedback.
+2. **Low level (RL executor)**: Learns entry/exit timing conditioned on the selected pair. Gets episode-level feedback for credit assignment.
+
+**Key advantage over cointegration**: LLM selection is based on durable business logic (A and B compete for the same customers) rather than historical price correlation (which breaks post-regime-change). H307's root failure was that IS cointegration has no predictive power for OOS stability.
+
+### Caveats
+- No Sharpe numbers available in abstract; paper claims "consistent improvements over traditional and LLM-based baselines"
+- Long-short execution requires margin; current paper account is long-only
+- Requires OpenAI API for LLM pair-selection step
+
+### Recommended Path for H316
+- Replace Johansen cointegration step with LLM business-similarity scoring (Moira's high-level LLM)
+- Use Moira's hierarchical structure: LLM selects pairs monthly, RL or rule-based logic handles daily entries
+- Universe: H198 30-stock NASDAQ + 30 peers from same industry group (not ETFs — ETF universe too diversified for pair logic)
+- See also H316 STUB, H307 NOT CONFIRMED (structural breaks), H401 (Attention Factors stat-arb)
+
+---
+
+## Attention Factors for Statistical Arbitrage (Oct 2025, OOS Sharpe 4.0/2.3 net)
+
+**Source**: arXiv:2510.11616 — "Attention Factors for Statistical Arbitrage" — accepted at 6th ACM ICAIF (peer-reviewed)
+
+### Method
+- Learn **conditional latent factors** from firm characteristic embeddings using attention mechanisms
+- Joint optimization of factor identification + arbitrage trading strategy
+- Apply sequence models to residual portfolios to detect pricing signals
+- Account for transaction costs explicitly in optimization objective
+
+### Key Results
+- **Gross OOS Sharpe: 4.0+** on large U.S. equities
+- **Net OOS Sharpe: 2.3** after transaction cost modeling
+- **Study horizon**: 24 years (longest empirical validation in class)
+
+### Key Insight: Weak Factors Matter
+> "Weak factors are important for arbitrage trading" — even modest predictors contribute to strategy profitability when properly attention-weighted.
+
+This validates the OB filter philosophy (H345/H346): regime-conditional signal activation turns weak unconditional factors into strong conditional ones.
+
+### Connection to Production Pipeline
+- Net Sharpe 2.3 is below our H041a/H026/H045 composite (4.158) but well above most stat-arb benchmarks
+- The firm characteristic embedding approach directly extends our alpha101 signals (H215/H217/H228)
+- Attention weighting of weak factors = principled version of IC-weighted composite idea (H406)
+- H411 concept: attention-weighted alpha101 signals on H198 universe (gate OOS Sharpe > 4.068)

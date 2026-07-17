@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-16 (position-sizing.md major update: current production portfolio H041a/H026/H045/IBS; SALVOC vol control + SJM regime sizing + Kelly-VIX hybrid; research log 2026-07-16; H404+H405 NOT CONFIRMED — FRED macro timing + short ETF momentum windows both closed)
+updated: 2026-07-17 (factor-momentum-style-rotation.md major expansion: IMOM discovery H395/H398A OOS 4.068, H376 6-0m no-skip, JPM 2025 Cakici et al. only ML alpha, H406 design stub; research log 2026-07-17; H407+H408 NOT CONFIRMED — skip-month + abs momentum floor both closed)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -38,7 +38,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [IBS Mean-Reversion](algorithms/ibs-mean-reversion.md) ← new 2026-05-28 (Internal Bar Score strategy; PRODUCTION — XLK 20%/SMH 8%/IGV 2%; formula, per-ETF params, H062–H149 hypothesis log, arxiv:2306.12434)
   - [Technical Analysis & Chart Patterns](algorithms/technical-analysis-patterns.md) ← new 2026-05-29 (H234 CONFIRMED inside-bar coiled-spring OOS 1.770 — strongest confirmed hypothesis; NR7/NR4 reference; TA-Lib vs pandas-ta-classic library guide; H233/H235 MACD+RSI+Stochastic+ROC feature pipeline; ZHAW arXiv:2208.07168 MACD 44% importance)
   - [Long/Short Equity](algorithms/long-short-equity.md) ← new 2026-06-02 (dollar-neutral L/S construction; 130/30; borrow costs ~0.75%/yr large-cap; H243 design: top/bottom quintile EW on 200-stock universe; momentum crash risk + Daniel/Moskowitz 2016; sector-neutral L/S variant; backtesting mistake table)
-  - [Factor Momentum & Style Rotation](algorithms/factor-momentum-style-rotation.md) ← new 2026-06-06 (Gupta & Kelly 2019 IS Sharpe 0.84 long-short; H255 NOT CONFIRMED long-only ETF Corr=0.89 all US equity; H256 NOT CONFIRMED GEM/PACS/GEM+Sector all < SPY OOS 2015-2025; look-ahead bias trap: unlagged 12m signal inflated OOS Sharpe 3×; multi-asset extensions with bonds+commodities queued)
+  - [Factor Momentum & Style Rotation](algorithms/factor-momentum-style-rotation.md) ← updated 2026-07-17 (Gupta & Kelly 2019 IS Sharpe 0.84 long-short; H255/H256 NOT CONFIRMED; **new 2026**: IMOM discovery (H395 Var C OOS 3.962, H398A OOS 4.068); H376 6-0m no-skip 3.120 — factor momentum within stock universe; JPM 2025 Cakici: factor momentum = ONLY ML alpha in 242 factors; H406 design stub target OOS > 4.068)
   - [Commodity Trend Following](algorithms/commodity-trend-following.md) ← updated 2026-06-30 (H261 NOT CONFIRMED UNG MaxDD -78%; H261b CONFIRMED Top-2 OOS Sharpe 0.922 Corr(SPY)=0.218; 2022 +26.7% vs SPY -18.2%; H262 design: Bayesian barbell 60d+500d — medium-term 125d is REDUNDANT per arXiv:2510.23150; single EMA warning arXiv:2504.10914; PPIACO regime gate; Python barbell signal code)
   - [Merger Arbitrage & Special Situations](algorithms/merger-arbitrage-special-situations.md) ← new 2026-06-25 (H310 root cause: antitrust regime shift; deal-break mechanics; ML feature engineering; ETF vs individual deal; H331/H333 queued)
   - [Volatility Risk Premium (VRP)](algorithms/volatility-risk-premium.md) ← new 2026-06-09

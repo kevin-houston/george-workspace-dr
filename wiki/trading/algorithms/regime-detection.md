@@ -312,3 +312,44 @@ Python implementation of two regime detection approaches, originally inspired by
 - H181 (industry reversal, OOS 1.138): applying H181 only during detected drift periods (per this paper's method) is worth testing as H181-regime variant
 
 **Caution**: OOS Sharpe 13+ is implausibly high for a general strategy; this may reflect a cherry-picked regime definition, small sample, or universe selection. Treat as design inspiration, not a benchmark target.
+
+---
+
+## Continuous Cash-Overlay Filter (Jun 2026)
+
+**Source**: arXiv:2606.09025 — "Continuous Cash-Overlay Filters for a Static Growth-Defensive Risk Sleeve: Slow-Tail Compensation, V-Shape Crash Brakes, Walk-Forward Validation, and Max-Cash Combination" (Zheli Xiong, Jun 2026)
+
+### Two-Filter Architecture
+
+**Filter 1: Slow-Tail** (macro regime)
+- Inputs: compensation signal, rate-headwind, risk-premium-compression, rate-path-stress
+- Output: continuous cash weight (0 to max-cash cap)
+- 30% trading gate (only rebalance if weight change exceeds threshold)
+
+**Filter 2: V-Shape Crash Brake** (fast tactical)
+- Inputs: VIX level, rate move, credit spread, portfolio drawdown, re-entry conditions
+- Output: binary or continuous emergency cash shift
+- Fast-acting: responds within days to crash signals
+
+### Performance (2017-2026)
+- CAGR: 19.35% vs 17.59% baseline (+1.76pp)
+- MaxDD: -22.05% vs -33.59% (-11.54pp) = 34% improvement
+- Walk-forward validated with expanding window
+
+### Connection to Our Pipeline
+
+| Existing gate | Type | Limitation | Overlay improvement |
+|---|---|---|---|
+| H362 VIX<20 on H354 | Binary | Whipsaw at threshold | Slow-tail continuous weight |
+| H301 SPY>200MA on H026 | Binary | Delayed signal | V-shape crash brake |
+| H311 VIX<20 on EW-4 | Binary | Only one variable | Multi-variable slow-tail |
+
+### Proposed H412
+Apply slow-tail + V-shape overlay as a portfolio-level cash buffer on our H026+H045 allocation:
+  - IS: 2017-2020 (parameter selection), OOS: 2021-2026
+  - Baseline: H026 + H045 combined allocation (current production weight 48%)
+  - Gate: OOS Sharpe improvement > 0.2 above H026+H045 without overlay
+  - Transaction cost model: 5bp per shift (ETF liquidity is high)
+  - Key test: does the V-shape brake add value beyond our existing SPY>200MA overlay (H301)?
+
+**Note**: Paper authors frame results as 'drawdown-control tool not return-enhancement' — consistent with our MaxDD priority for the 4.158 Sharpe production portfolio.

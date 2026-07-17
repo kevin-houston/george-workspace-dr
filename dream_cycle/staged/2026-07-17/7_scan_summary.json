@@ -1,0 +1,205 @@
+{
+  "id": "research-scan-summary-2026-07-17",
+  "date": "2026-07-17",
+  "type": "scan_summary",
+  "title": "5-Angle Research Scan Summary — 2026-07-17",
+  "angles": {
+    "angle_1_pairs_trading_llm": {
+      "query": "arXiv 2025-2026 pairs trading + LLM",
+      "papers_found": [
+        {
+          "id": "arXiv:2605.01954",
+          "title": "Moira: Language-driven Hierarchical RL for Pair Trading",
+          "date": "May 2026",
+          "relevance": "HIGH",
+          "summary": "Hierarchical RL where LLM selects pairs (high level) and RL executes (low level). Uses prompt-updates not gradient fine-tuning. Claims consistent improvements over traditional baselines. Directly relevant to H316 STUB.",
+          "action": "Wiki update (file 3) + H316 upgrade reference"
+        },
+        {
+          "id": "arXiv:2510.11616",
+          "title": "Attention Factors for Statistical Arbitrage",
+          "date": "Oct 2025",
+          "relevance": "HIGH",
+          "summary": "OOS Sharpe 4.0+ gross, 2.3 net on US large-caps over 24 years. Attention mechanism learns conditional latent factors from firm characteristics. Accepted at ACM ICAIF (peer-reviewed). 'Weak factors matter when properly weighted.'",
+          "action": "Wiki update + H411 stub (file 4)"
+        },
+        {
+          "id": "arXiv:2412.09394",
+          "title": "LLMs for Time Series: Statistical Arbitrage Application",
+          "date": "Dec 2024",
+          "relevance": "MEDIUM",
+          "summary": "Chronos model on S&P500 stocks; shows LLMs can extract alpha from near-noise time series. 'Significant room for improvement.' Not production-ready but confirms directional alpha."
+        }
+      ]
+    },
+    "angle_2_pead_llm": {
+      "query": "arXiv 2025-2026 PEAD + FinBERT/LLM",
+      "papers_found": [
+        {
+          "id": "arXiv:2606.29734",
+          "title": "Bridging Quantitative and Qualitative Earnings Signals (EarningsInOne)",
+          "date": "Jun 2026",
+          "relevance": "HIGH",
+          "summary": "SP1500 2005-2023 corpus. Clean temporal separation: EPS surprise dominant at announcement (gone by open), ECT management tone peaks NEXT trading day and is tradeable. Two-stage PEAD architecture directly applicable to H174 pipeline.",
+          "action": "H410 stub (file 2)"
+        },
+        {
+          "id": "arXiv:2509.24254",
+          "title": "Extracting Structure of Press Releases for Earnings Returns",
+          "date": "Oct 2025",
+          "relevance": "MEDIUM",
+          "summary": "138k press releases 2005-2023. FinBERT beats bag-of-words. Soft text = as informative as EPS surprise. Markets price this at open -- limited PEAD edge from press releases alone. ECT (transcript) the better delayed signal."
+        },
+        {
+          "id": "arXiv:2605.25894",
+          "title": "Stock Price Direction on Earnings Days: Multi-Modal DL",
+          "date": "May 2026",
+          "relevance": "MEDIUM",
+          "summary": "LSTM + Transformer on 15 fundamentals + 3 technicals + FinBERT news sentiment. Consistent benefit from sentiment. LSTM higher precision, Transformer higher recall on volatile moves. Focus on announcement day not drift."
+        },
+        {
+          "id": "arXiv:2510.03965",
+          "title": "FinCall-Surprise: Multi-Modal Benchmark for Earnings Surprise",
+          "date": "Oct 2025",
+          "relevance": "LOW",
+          "summary": "2688 conference calls 2019-2021, audio+text+slides. 26 models tested. High accuracy often reflects class imbalance. Audio/visual give marginal gains. Specialist financial models struggle with instruction-following. Research benchmark, not production-ready."
+        }
+      ]
+    },
+    "angle_3_factor_momentum": {
+      "query": "arXiv 2025-2026 factor momentum + IMOM + timing",
+      "papers_found": [
+        {
+          "id": "arXiv:2511.12490",
+          "title": "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability",
+          "date": "Nov 2025",
+          "relevance": "HIGH",
+          "summary": "S&P 500 2004-2024. OOS Sharpe 13.19, CAGR 158.6%, MaxDD -11.9%. Strategy: activate value (inverse price percentile) + reversal (neg 10d return z-score) ONLY when stock has >60% positive days in trailing 63-day window. 0.7/0.3 blend. Long-short market neutral. Walk-forward frozen parameters. 1000 randomization trials. Capacity $100-500M.",
+          "action": "H409 stub (file 1) - adapt to long-only on H198 universe"
+        },
+        {
+          "id": "arXiv:2507.07107",
+          "title": "ML Enhanced Multi-Factor Quantitative Trading with Bias Correction",
+          "date": "Jul 2026",
+          "relevance": "MEDIUM",
+          "summary": "213-factor PyTorch engine on A-shares. Key finding: non-executable prices (Chinese price limits) inflate IC by 18% -- 'mask-first' bias correction is single largest performance gain. OOS Sharpe 1.63 on real data (2022-2024). MIT license, code available. Main relevance: bias correction methodology for any factor backtest with price limits or execution constraints."
+        },
+        {
+          "id": "arXiv:2509.10461",
+          "title": "Momentum-integrated Multi-task Stock Recommendation (MiM-StocR)",
+          "date": "Sep 2025",
+          "relevance": "LOW",
+          "summary": "Chinese market (A-shares). Multi-task ranking + forecasting + momentum line indicator. Beats MTL baselines on SEE50/CSI100/CSI300. Limited relevance to US equity production pipeline."
+        }
+      ]
+    },
+    "angle_4_multi_agent": {
+      "query": "arXiv 2026 multi-agent LLM trading",
+      "papers_found": [
+        {
+          "id": "arXiv:2602.23330",
+          "title": "Toward Expert Investment Teams: Multi-Agent LLM with Fine-Grained Trading Tasks",
+          "date": "Feb 2026",
+          "relevance": "HIGH",
+          "summary": "Japanese equities. Fine-grained task decomposition >> coarse-grained. Intermediate agent output quality is the critical driver. Market-neutral with portfolio optimization. Validates narrow-task LLM agent design (H274 3-agent PEAD).",
+          "action": "Wiki update (file 6)"
+        },
+        {
+          "id": "arXiv:2605.27887",
+          "title": "PortBench: Correlation-Aware Full-Pipeline LLM Portfolio Benchmark",
+          "date": "May 2026",
+          "relevance": "HIGH",
+          "summary": "10 frontier LLMs, 6 asset classes, 10 years. 90% of model-profile combinations fail to beat equal-weight. Even good financial QA models fail in practice with catastrophic drawdowns under stress. Confirms: LLMs as signal generators (not portfolio managers).",
+          "action": "Wiki update (file 6)"
+        },
+        {
+          "id": "arXiv:2512.23515",
+          "title": "Alpha-R1: Alpha Screening with LLM Reasoning via RL",
+          "date": "Dec 2025",
+          "relevance": "MEDIUM",
+          "summary": "8B param RL-trained model. Evaluates factor logic + news for regime-conditional alpha activation. CSI 300 + CSI 1000 tested. Outperforms RL baselines (A2C, PPO) on zero-shot transfer. Key idea: LLM 'reasons' about whether a factor should be active given current market context. Relevant to H406 factor timing design."
+        },
+        {
+          "id": "arXiv:2605.15412",
+          "title": "QuantEvolver: RL Fine-Tuning for LLM Alpha Factor Discovery",
+          "date": "May 2026",
+          "relevance": "MEDIUM",
+          "summary": "Converts quantitative factor evaluation into policy updates. Miner LLM generates Factor DSL expressions; diversity-complementarity reward. Claims consistently higher RankIC than LLM baselines. Relevant to H406/H411 factor discovery design."
+        }
+      ]
+    },
+    "angle_5_github": {
+      "query": "GitHub trending quant finance 2026",
+      "repos_found": [
+        {
+          "name": "OpenBB",
+          "url": "https://github.com/OpenBB-finance/OpenBB",
+          "stars": "70.7k",
+          "relevance": "LOW",
+          "summary": "Open data platform for analysts, quants, AI agents. General tool, not specific to momentum/PEAD."
+        },
+        {
+          "name": "Qlib (Microsoft)",
+          "url": "https://github.com/microsoft/qlib",
+          "stars": "46.3k",
+          "relevance": "MEDIUM",
+          "summary": "AI-oriented quant investment platform. Updated Apr 2026. Has factor mining, alpha101 support, backtesting. Could be infrastructure for H406/H411."
+        },
+        {
+          "name": "Vibe-Trading",
+          "url": "https://github.com/vibe-trading",
+          "stars": "24.4k",
+          "relevance": "LOW",
+          "summary": "Personal trading agent using multi-agent + LLMs. Already integrated in our MCP stack."
+        },
+        {
+          "name": "aniketnmishra/PEAD",
+          "url": "https://github.com/aniketnmishra/PEAD",
+          "stars": "unknown",
+          "relevance": "LOW",
+          "summary": "PEAD trading in Python. Basic implementation, less sophisticated than our H174 pipeline."
+        },
+        {
+          "name": "tradermonty/claude-trading-skills",
+          "url": "https://github.com/tradermonty/claude-trading-skills",
+          "stars": "unknown",
+          "relevance": "MEDIUM",
+          "summary": "Claude Code skills for equity investors. Includes PEAD gap-up scanner. Updated Jul 16, 2026. Relevant pattern: post-earnings gap-up screening -- parallel to our pead_gap_open.py."
+        }
+      ]
+    }
+  },
+  "high_relevance_candidates": [
+    {
+      "rank": 1,
+      "paper": "arXiv:2511.12490 — Drift Regimes 13-Sharpe Factor",
+      "action": "H409 stub filed (file 1)",
+      "urgency": "HIGH -- novel regime gate principle, peer-reviewed, 20-year validation. Adapts to H198 long-only. Most actionable new hypothesis."
+    },
+    {
+      "rank": 2,
+      "paper": "arXiv:2606.29734 — EarningsInOne Two-Stage PEAD",
+      "action": "H410 stub filed (file 2)",
+      "urgency": "HIGH -- directly improves live H174 PEAD pipeline. ECT transcript layer is a real-time implementation already supported by EDGAR API."
+    },
+    {
+      "rank": 3,
+      "paper": "arXiv:2510.11616 — Attention Factors Stat Arb (Sharpe 2.3 net)",
+      "action": "Wiki update filed (file 4), H411 concept noted",
+      "urgency": "MEDIUM -- peer-reviewed, solid 24-year study, but requires PyTorch attention layer implementation on top of H215 alpha101 stack."
+    },
+    {
+      "rank": 4,
+      "paper": "arXiv:2605.01954 — Moira LLM Pairs Trading",
+      "action": "Wiki update filed (file 3)",
+      "urgency": "MEDIUM -- upgrades H316 STUB design. Long-short execution needed (not current production scope)."
+    },
+    {
+      "rank": 5,
+      "paper": "arXiv:2606.09025 — Continuous Cash-Overlay Filters",
+      "action": "Wiki update + H412 concept filed (file 5)",
+      "urgency": "LOW-MEDIUM -- MaxDD improvement relevant, but our existing VIX<20 + SPY>200MA gates already capture most of this benefit."
+    }
+  ],
+  "apply_status": "applied"
+}

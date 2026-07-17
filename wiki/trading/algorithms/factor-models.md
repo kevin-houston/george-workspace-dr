@@ -825,3 +825,41 @@ The ML factor rotation strategies require substantial factor turnover: **37–66
 **Implication for H041a production**: our IMOM6+MOM60+LowVol+IMOM12 composite already implicitly contains the factor momentum signal. Adding explicit ML factor prediction on top would add 37-66% monthly factor turnover with no net alpha after costs.
 
 **H406 design implication**: explicit factor momentum signal should be tested on a *broader* factor universe (50+ signals) where cross-sectional factor variation exists — NOT on our 4-signal composite where all signals already include momentum exposure.
+
+---
+
+## Attention Factors for Statistical Arbitrage (Oct 2025, OOS Sharpe 4.0/2.3 net)
+
+**Source**: arXiv:2510.11616 — "Attention Factors for Statistical Arbitrage" — accepted at 6th ACM ICAIF (peer-reviewed)
+
+### Method
+- Learn **conditional latent factors** from firm characteristic embeddings using attention mechanisms
+- Joint optimization of factor identification + arbitrage trading strategy
+- Apply sequence models to residual portfolios to detect pricing signals
+- Account for transaction costs explicitly in optimization objective
+
+### Key Results
+- **Gross OOS Sharpe: 4.0+** on large U.S. equities
+- **Net OOS Sharpe: 2.3** after transaction cost modeling
+- **Lookback**: 24-year empirical study (longest horizon in class)
+
+### Key Insight: Weak Factors Matter
+> "Weak factors are important for arbitrage trading" — even modest predictors contribute to strategy profitability when properly attention-weighted.
+
+This validates our OB filter philosophy: factors that appear weak unconditionally (short-term reversal, value) become strong when conditioned on regime state.
+
+### Connection to Production Pipeline
+- Net Sharpe 2.3 is below our H041a/H026/H045 composite (4.158) but well above most benchmarks
+- The firm characteristic embedding approach directly extends our alpha101 signals (H215/H217/H228)
+- Attention weighting of weak factors = principled version of our IC-weighted composite idea (H406)
+- Could be tested as H411: attention-weighted alpha101 signals on H198 universe
+
+### Proposed H411
+Apply attention-factor methodology to our H198 30-stock universe:
+  - Compute ~17 alpha101 signals as 'firm characteristics'
+  - Learn attention weights from historical IS IC performance (2013-2020)
+  - Apply OOS (2021-2026) with attention-updated weighting
+  - Compare to static equal-weight alpha101 composite (H228 baseline, OOS 1.572)
+  - Gate: OOS Sharpe > 4.068
+
+**Complexity**: requires PyTorch attention layer + 213-factor infrastructure. Medium implementation effort.

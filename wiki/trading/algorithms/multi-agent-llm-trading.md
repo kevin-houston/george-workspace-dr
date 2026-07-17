@@ -738,3 +738,40 @@ Li, Zeng, Xing, Xu & Xu introduce HedgeAgents — a multi-agent LLM system speci
 **Critique**: 70% annualized return likely includes survivorship bias and favorable test period selection. No IS/OOS split described in abstract. Treat as architecture reference, not performance benchmark.
 
 **Code**: No public release. Architecture can be replicated with Claude multi-agent via NanoClaw `create_agent` tool.
+
+---
+
+## Multi-Agent LLM Trading: 2026 State of Research
+
+### Finding 1: Fine-Grained Task Decomposition Wins (Feb 2026)
+
+**Source**: arXiv:2602.23330 — "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks"
+
+- Tested on Japanese equity market
+- Fine-grained task decomposition (concrete analyst subtasks) significantly outperforms coarse-grained designs (generic 'analyst' + 'manager' roles)
+- Key insight: **intermediate agent outputs** (what analysts hand off to decision-makers) are the critical performance driver
+- Market-neutral strategy, equal long/short positions
+- Integrates with standard portfolio optimization
+
+**Implication for H274**: our 3-agent PEAD debate (H274 proposed) should decompose into SPECIFIC tasks: (1) 8-K sentiment scorer, (2) EPS surprise calculator, (3) risk screener — NOT generic 'analyst' and 'manager' roles.
+
+### Finding 2: LLMs Fail at Portfolio Management (May 2026)
+
+**Source**: arXiv:2605.27887 — PortBench: A Correlation-Aware, Full-Pipeline Benchmark for LLM-Driven Portfolio Management
+
+- 6,269 correlation-aware QA questions across 6 asset classes, 10 years
+- **90% of model-profile combinations fail to outperform equal-weight allocation**
+- Even models scoring high on static financial QA had catastrophic drawdowns under stress
+- Gap confirmed: financial knowledge != portfolio management skill
+
+**Implication for our pipeline**: validates using LLMs as **narrow signal generators** (FinBERT on 8-K text = H174) rather than end-to-end portfolio managers. Do NOT use Claude to allocate between H026/H041a/H045 — that is better handled by our fixed production weights.
+
+### Synthesis: Where LLMs Add Value
+
+| Use case | LLM effectiveness | Our analog |
+|---|---|---|
+| Narrow NLP scoring (sentiment, tone) | HIGH | H174 FinBERT 8-K scoring |
+| Fine-grained task decomposition | HIGH | H274 3-agent debate (if implemented) |
+| Broad portfolio allocation | LOW (90% fail) | Do NOT use for H026/H041a/H045 weights |
+| Factor selection from 200+ signals | MEDIUM | H406/H411 (alpha101 attention) |
+| Earnings call transcript scoring | HIGH | H410 proposed ECT layer |

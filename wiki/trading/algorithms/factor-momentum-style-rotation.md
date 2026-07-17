@@ -1,10 +1,11 @@
 ---
 created: 2026-06-06
-updated: 2026-06-06
+updated: 2026-07-17
 status: active
-relevance: H255 (NOT CONFIRMED), H256 (NOT CONFIRMED), H026 (production sector rotation), H041a (production momentum)
+relevance: H255 (NOT CONFIRMED), H256 (NOT CONFIRMED), H026 (production sector rotation), H041a (production momentum), H395/H398A (CONFIRMED — IMOM factor momentum), H406 (design stub, factor momentum on alpha101)
 see_also:
   - wiki/trading/algorithms/momentum-strategies.md
+  - wiki/trading/algorithms/factor-models.md
   - wiki/trading/backtesting/design-principles.md
   - wiki/trading/algorithms/long-short-equity.md
 ---
@@ -278,10 +279,105 @@ The production portfolio (H026/H041a) outperforms both failed hypotheses because
 |-----------|-------------|---------------------------|
 | H257 (queued) | Multi-asset dual momentum with 20+ assets | Include commodities, credit, international; 3-6m signal |
 | H258 (queued) | Cross-asset factor timing (long+short mimics via paired ETFs) | Capture short-side premium using inverse ETFs or long-short pairs |
+| H406 (design stub) | Factor momentum on broad alpha101 universe (50+ signals) | True factor-level cross-section; not L/S, top-rank composite |
 
 **Avoid**: pure long-only single-asset-class factor rotation. Only works on paper when
 shorting the loser factors — requires either long/short construction or genuinely diverse
 multi-asset universe.
+
+---
+
+## 9. The IMOM Discovery — Factor Momentum Applied to Individual Signals (2026)
+
+The most significant evolution since H255/H256: applying the factor momentum concept **within** the stock universe rather than across factor ETFs. This sidesteps the long-only correlation trap by constructing IMOM signals directly from price paths.
+
+### IMOM (Illusion Momentum Factor)
+
+**Source**: Iwanaga & Hirose (2026), *Pacific-Basin Finance Journal* Vol. 96.
+
+```
+IMOM(N) = compound_return_N_months - arithmetic_sum_N_months
+        = [Π(1 + r_t) - 1] - Σ(r_t)
+```
+
+IMOM measures **compounding quality**: high IMOM = sustained directional gains where compounding worked in the stock's favour. Low IMOM = volatile round-trip where compounding erased gains. Cross-sectional ranking on IMOM selects consistent compounders and rejects volatile names — this is factor momentum at the individual-signal level.
+
+### Confirmed Results on H198 30-Stock Universe
+
+| Composite | Key signals | OOS Sharpe | OOS MaxDD |
+|-----------|------------|-----------|----------|
+| H376 baseline | 6-0m no-skip MOM alone | 3.120 | −8.4% |
+| H395 Var C | IMOM6 + MOM60 + LowVol (equal) | 3.962 | −8.6% |
+| **H398 Var A** | IMOM6 + MOM60 + LowVol + IMOM12 (equal) | **4.068** | **−4.7%** |
+
+Annual OOS returns for H398A (current champion): 2021 +124%, 2022 +60%, 2023 +138%, 2024 +130%, 2025 +103%, 2026 +35% (partial). Zero negative years.
+
+### Why This Is Factor Momentum
+
+Gupta & Kelly's factor momentum operates at the **style-portfolio level**: time-series momentum on factor returns. IMOM operates at the **signal level**: it captures quality of compounding in a stock's own return path — which is the same concept one level down. The JPM 2025 Cakici et al. paper (see Section 10) confirms these are the same mechanism.
+
+### H376 6-0m No-Skip Baseline
+
+Before adding IMOM, 2026 research discovered that **6-0m momentum (no skip-month) dramatically outperforms 6-1m** on the H198 30-stock universe (OOS 3.120 vs 1.174 for 6-1m). This contrasts with the academic convention of skipping the most recent month. The reason: large-cap NASDAQ tech names exhibit persistent short-term momentum with no 1-month reversal (same finding as H277 on tech). Including the most recent month *improves* the signal by 1.95 Sharpe points.
+
+**Key contrast with H255**: Factor ETFs (all US equity) have ρ=0.89 — the signal dominance is the same across all ETFs. Individual stocks in the H198 universe have genuine cross-sectional dispersion, allowing the factor momentum logic to work.
+
+---
+
+## 10. JPM 2025 — Factor Momentum Is the Sole ML Alpha
+
+**Source**: Cakici, Fieberg, Osorio, Poddig & Zaremba — "Picking Winners in Factorland: A Machine Learning Approach to Predicting Factor Returns" — *Journal of Portfolio Management*, April 2025.
+
+**Coverage**: 242 factor characteristics; ML methods tested: random forest, XGBoost, LASSO, neural nets, and others.
+
+### Key Finding
+
+> Factor momentum is the **main driver** of cross-sectional variation in anomaly returns. Once factor momentum is controlled for, **no long-short ML portfolio generates significant alpha** from any other ML signal.
+
+This is the most important independent validation of our H398A design. The Cakici et al. study searched 242 factors for ML-exploitable predictability and found:
+1. ML can predict which factors will outperform next month.
+2. The entire predictability is attributable to **factor-level time-series momentum**.
+3. No other ML signal survives after controlling for factor momentum.
+
+### Connection to H398A
+
+Our IMOM6/IMOM12 signals are implicit factor momentum:
+- IMOM6 = time-averaged 6-month compounding quality → momentum on the stock's own factor history
+- MOM60 = pure directional 5-year momentum → classic time-series momentum
+- Together they comprise the primary factor-momentum channels in the H198 universe
+
+### Turnover Warning
+
+ML factor rotation strategies require **37–66% factor replacement per month**. This is why explicit ML factor selection adds nothing after costs to our H398A composite: IMOM already captures the signal, and the additional turnover cancels any gross alpha improvement.
+
+**H406 implication**: factor momentum on a *broad* 50+ alpha101 signal universe (where genuine cross-signal variation exists) may uncover predictability that our 4-signal composite cannot. Design stub: `backtesting/daily/run_h406.py`, gate OOS Sharpe > 4.068.
+
+---
+
+## 11. H406 Design — Factor Momentum on Alpha101 Broad Universe
+
+**Status**: Design stub (2026-07-16). Implementation pending.
+
+**Hypothesis**: Apply factor-level time-series momentum to the WorldQuant 101 alpha universe. For each of 50+ alpha101 signals, compute the signal's 6-month trailing IC (information coefficient) vs forward returns. Rotate the composite weight toward recently-outperforming alpha signals.
+
+```python
+HYPOTHESIS = "H406"
+GATE_SHARPE = 4.068          # must beat H398A champion
+IS_START    = "2013-01-01"
+OOS_START   = "2021-01-01"
+UNIVERSE    = "H198_30_stock" # same as H398A for direct comparison
+```
+
+**Key design decisions**:
+- Signal IC lookback: 6 months (consistent with Gupta & Kelly's best window)
+- Factor selection: top-N alpha101 signals by trailing IC, equal-weight
+- Gate: strict OOS Sharpe > 4.068 AND MaxDD < 5%
+- Dependency: requires run_h395.py alpha101 infrastructure
+
+**Caveats**:
+- Alpha101 signals have high IC correlation — factor momentum within a correlated universe may not generate enough signal diversity
+- 37-66% monthly factor turnover cost applies here too (per Cakici et al. 2025)
+- H217 confirmed median-aggregation of alpha101 already generates OOS Sharpe 1.559; H406 tests if *time-weighted* aggregation beats that
 
 ---
 
@@ -292,6 +388,9 @@ multi-asset universe.
 - Geczy, C. & Samonov, M. (2015). "Two Centuries of Multi-Asset Momentum." [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2607730)
 - Hoffstein, C. (2019). "Fragility Case Study: Dual Momentum GEM." Newfound Research.
 - Shu, W. & Mulvey, J. (2024). "Dynamic Factor Allocation Leveraging Regime-Switching Signals." arXiv:2410.14841
+- Cakici, N., Fieberg, C., Osorio, D., Poddig, T. & Zaremba, A. (2025). "Picking Winners in Factorland." *Journal of Portfolio Management*, April 2025.
+- Iwanaga, Y. & Hirose, T. (2026). "Illusion Momentum." *Pacific-Basin Finance Journal* Vol. 96.
 - H255 empirical test: `backtesting/results/h255_results.json` (2026-06-05)
 - H256 empirical test: `backtesting/results/h256_results.json` (2026-06-05)
-- See also: `algorithms/momentum-strategies.md`, `backtesting/design-principles.md`
+- H395/H398A: `backtesting/results/h395_results.json`, `backtesting/results/h398_results.json`
+- See also: `algorithms/momentum-strategies.md`, `algorithms/factor-models.md` (Sections 10–14), `backtesting/design-principles.md`
