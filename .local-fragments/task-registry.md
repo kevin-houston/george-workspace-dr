@@ -116,6 +116,7 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 **Gotchas:**
 - No FinBERT. Just finds earnings tickers in the universe — the gap check happens tomorrow at the open.
 - Parallel to H174 overnight pass (which runs at 11 PM too and writes `pead_watchlist.json`). Both run independently.
+- **Date field is tomorrow's date** (fixed 2026-07-16): the overnight runs at 11 PM and saves `tomorrow` so the open pass (which runs next morning and checks `date == today`) finds it. Same fix applied to `pead_overnight.py`.
 
 ---
 

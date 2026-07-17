@@ -498,3 +498,55 @@
 [2026-07-15 23:09:17] Candidates for tomorrow: none
 [2026-07-15 23:09:17] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-07-15 23:09:17] Overnight pass complete.
+[2026-07-16 23:01:36] =======================================================
+[2026-07-16 23:01:36] PEAD overnight pass starting
+[2026-07-16 23:01:36] Scanning earnings calendar…
+[2026-07-16 23:02:01]   Tickers with recent earnings: ['JPM', 'BAC', 'WFC', 'JNJ', 'UNH']
+[2026-07-16 23:02:01]   Fetching 8-K for JPM…
+[2026-07-16 23:02:07] =======================================================
+[2026-07-16 23:02:07] PEAD overnight pass starting
+[2026-07-16 23:02:07] Scanning earnings calendar…
+[2026-07-16 23:02:28]   Tickers with recent earnings: ['JPM', 'BAC', 'WFC', 'JNJ', 'UNH']
+[2026-07-16 23:02:28]   Fetching 8-K for JPM…
+[2026-07-16 23:02:53]     JPM: no 8-K Item 2.02 found
+[2026-07-16 23:02:53]   Fetching 8-K for BAC…
+[2026-07-16 23:02:53]     JPM: no 8-K Item 2.02 found
+[2026-07-16 23:02:53]   Fetching 8-K for BAC…
+[2026-07-16 23:03:05]     BAC: 12112 chars
+[2026-07-16 23:03:05]   Fetching 8-K for WFC…
+[2026-07-16 23:03:05]     BAC: 12112 chars
+[2026-07-16 23:03:05]   Fetching 8-K for WFC…
+[2026-07-16 23:03:12]     WFC: 7057 chars
+[2026-07-16 23:03:12]   Fetching 8-K for JNJ…
+[2026-07-16 23:03:12]     WFC: 7057 chars
+[2026-07-16 23:03:12]   Fetching 8-K for JNJ…
+[2026-07-16 23:03:14]     JNJ: 5042 chars
+[2026-07-16 23:03:14]   Fetching 8-K for UNH…
+[2026-07-16 23:03:14]     JNJ: 5042 chars
+[2026-07-16 23:03:14]   Fetching 8-K for UNH…
+[2026-07-16 23:03:17]     UNH: 4763 chars
+[2026-07-16 23:03:17]     UNH: 4763 chars
+[2026-07-16 23:05:18]   Loading ProsusAI/finbert…
+[2026-07-16 23:05:18]   Loading ProsusAI/finbert…
+[2026-07-16 23:08:14]   BAC: score=-0.028  surprise=-0.104
+[2026-07-16 23:08:14]   BAC: score=-0.028  surprise=-0.104
+[2026-07-16 23:08:17]   WFC: score=-0.002  surprise=-0.100
+[2026-07-16 23:08:17]   WFC: score=-0.002  surprise=-0.100
+[2026-07-16 23:08:21]   JNJ: score=-0.022  surprise=nan
+[2026-07-16 23:08:22]   UNH: score=-0.028  surprise=-0.143
+[2026-07-16 23:08:22]   ✗ BAC filtered out (score=-0.028, surprise=-0.1045)
+[2026-07-16 23:08:22]   ✗ WFC filtered out (score=-0.002, surprise=-0.1002)
+[2026-07-16 23:08:22]   ✗ JNJ filtered out (score=-0.022, surprise=None)
+[2026-07-16 23:08:22]   ✗ UNH filtered out (score=-0.028, surprise=-0.1429)
+[2026-07-16 23:08:22] Candidates for tomorrow: none
+[2026-07-16 23:08:22] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-16 23:08:22] Overnight pass complete.
+[2026-07-16 23:08:28]   JNJ: score=-0.022  surprise=nan
+[2026-07-16 23:08:29]   UNH: score=-0.028  surprise=-0.143
+[2026-07-16 23:08:29]   ✗ BAC filtered out (score=-0.028, surprise=-0.1045)
+[2026-07-16 23:08:29]   ✗ WFC filtered out (score=-0.002, surprise=-0.1002)
+[2026-07-16 23:08:29]   ✗ JNJ filtered out (score=-0.022, surprise=None)
+[2026-07-16 23:08:29]   ✗ UNH filtered out (score=-0.028, surprise=-0.1429)
+[2026-07-16 23:08:29] Candidates for tomorrow: none
+[2026-07-16 23:08:29] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-16 23:08:29] Overnight pass complete.

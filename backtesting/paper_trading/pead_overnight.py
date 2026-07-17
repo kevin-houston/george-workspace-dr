@@ -147,14 +147,15 @@ def compute_surprise(ticker: str, current_score: float) -> float:
 def run():
     log("=" * 55)
     log("PEAD overnight pass starting")
-    today = date.today().isoformat()
+    # Save tomorrow's date — the open pass runs next morning and checks date == today
+    tomorrow = (date.today() + timedelta(days=1)).isoformat()
 
     # 1. Earnings today
     log("Scanning earnings calendar…")
     reporting = get_earnings_today(UNIVERSE)
     log(f"  Tickers with recent earnings: {reporting or 'none'}")
     if not reporting:
-        watchlist = {"date": today, "candidates": [], "scores": {}, "reason": "no earnings"}
+        watchlist = {"date": tomorrow, "candidates": [], "scores": {}, "reason": "no earnings"}
         WATCHLIST_PATH.write_text(json.dumps(watchlist, indent=2))
         log("No earnings tonight. Watchlist cleared.")
         return
@@ -200,7 +201,7 @@ def run():
     log(f"Candidates for tomorrow: {candidates or 'none'}")
 
     # 5. Save watchlist
-    watchlist = {"date": today, "candidates": candidates, "scores": scored}
+    watchlist = {"date": tomorrow, "candidates": candidates, "scores": scored}
     WATCHLIST_PATH.write_text(json.dumps(watchlist, indent=2))
     log(f"Watchlist saved → {WATCHLIST_PATH}")
     log("Overnight pass complete.")

@@ -81,6 +81,10 @@
         {
           "date": "2026-07-15",
           "equity": 4946.55
+        },
+        {
+          "date": "2026-07-16",
+          "equity": 4926.15
         }
       ],
       "status": "active"
@@ -116,7 +120,12 @@
       "cash": 5000.0,
       "open_positions": {},
       "closed_trades": [],
-      "equity_history": [],
+      "equity_history": [
+        {
+          "date": "2026-07-16",
+          "equity": 5000.0
+        }
+      ],
       "status": "active"
     },
     "H234": {
@@ -134,5 +143,5 @@
       "status": "stub"
     }
   },
-  "updated": "2026-07-15T09:45:48.184779"
+  "updated": "2026-07-16T09:45:56.083638"
 }

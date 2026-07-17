@@ -60,14 +60,15 @@ def get_earnings_today(universe: list[str]) -> list[str]:
 def run():
     log("=" * 55)
     log("PEAD-GAP overnight pass starting")
-    today = date.today().isoformat()
+    # Save tomorrow's date — the open pass runs next morning and checks date == today
+    tomorrow = (date.today() + timedelta(days=1)).isoformat()
 
     log("Scanning earnings calendar…")
     candidates = get_earnings_today(UNIVERSE)
     log(f"  Tickers with recent earnings: {candidates or 'none'}")
 
     watchlist = {
-        "date": today,
+        "date": tomorrow,
         "candidates": candidates,
         "source": "earnings_only",
         "strategy": "PEAD_GAP",
