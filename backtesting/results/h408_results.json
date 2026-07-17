@@ -1,0 +1,47 @@
+[
+  {
+    "variant": "A",
+    "is_sharpe": 3.0,
+    "oos_sharpe": 2.665,
+    "oos_maxdd": -0.0568,
+    "oos_neg_years": 0,
+    "cash_pct_oos": 1.6,
+    "oos_pass": false
+  },
+  {
+    "variant": "B",
+    "is_sharpe": 3.0,
+    "oos_sharpe": 2.665,
+    "oos_maxdd": -0.0568,
+    "oos_neg_years": 0,
+    "cash_pct_oos": 0.0,
+    "oos_pass": false
+  },
+  {
+    "variant": "C",
+    "is_sharpe": 3.0,
+    "oos_sharpe": 2.665,
+    "oos_maxdd": -0.0568,
+    "oos_neg_years": 0,
+    "cash_pct_oos": 0.0,
+    "oos_pass": false
+  },
+  {
+    "variant": "D",
+    "is_sharpe": 3.007,
+    "oos_sharpe": 2.607,
+    "oos_maxdd": -0.0568,
+    "oos_neg_years": 0,
+    "cash_pct_oos": 8.1,
+    "oos_pass": false
+  },
+  {
+    "variant": "E",
+    "is_sharpe": 3.0,
+    "oos_sharpe": 2.665,
+    "oos_maxdd": -0.0568,
+    "oos_neg_years": 0,
+    "cash_pct_oos": 0.0,
+    "oos_pass": false
+  }
+]

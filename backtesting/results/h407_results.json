@@ -1,0 +1,34 @@
+[
+  {
+    "variant": "A",
+    "is_sharpe": 1.823,
+    "oos_sharpe": 1.267,
+    "oos_maxdd": -0.1072,
+    "oos_neg_years": 1,
+    "oos_pass": false
+  },
+  {
+    "variant": "B",
+    "is_sharpe": -1.717,
+    "oos_sharpe": -2.154,
+    "oos_maxdd": -0.8522,
+    "oos_neg_years": 6,
+    "oos_pass": false
+  },
+  {
+    "variant": "C",
+    "is_sharpe": 0.306,
+    "oos_sharpe": 0.568,
+    "oos_maxdd": -0.3802,
+    "oos_neg_years": 2,
+    "oos_pass": false
+  },
+  {
+    "variant": "D",
+    "is_sharpe": 3.0,
+    "oos_sharpe": 2.665,
+    "oos_maxdd": -0.0568,
+    "oos_neg_years": 0,
+    "oos_pass": false
+  }
+]

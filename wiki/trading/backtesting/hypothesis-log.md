@@ -9264,3 +9264,66 @@ Composite OOS quality: 39% of months in expansion (>0); std 0.57.
 
 **Script**: backtesting/daily/run_h405.py
 **Results**: backtesting/results/h405_results.json
+
+---
+
+## H407 — Skip-Month Momentum on H026 ETF Rotation: NOT CONFIRMED (2026-07-16)
+
+**Source**: Endogenous from H405 (2026-07-15) + academic literature (Jegadeesh 1990, cross-sectional stock momentum skip-month). H026 uses full 12m momentum. Academic stock momentum uses 12-1m (skip most recent month) to avoid short-term reversal. H277 (NASDAQ tech) found skip-month HURTS for tech. Question: does skip-month matter differently for H026's heterogeneous ETF universe (bonds + commodities + sectors)?
+
+**Universe**: H026 23-ETF dual-rank rotation (same as H404/H405)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 2.665 (H026 full 12m baseline on this sub-period)
+
+| Var | IS Sh | OOS Sh | OOS MDD | NegY | Description |
+|-----|-------|--------|---------|------|-------------|
+| A | 1.823 | 1.267 | -10.7% | 1 | 12-1m skip + low vol (skip-month H026) |
+| B | -1.717 | -2.154 | -85.2% | 6 | 12m + 1m reversal bonus + low vol (catastrophic) |
+| C | 0.306 | 0.568 | -38.0% | 2 | Pure 12-1m skip, no vol ranking |
+| **D** | **3.000** | **2.665** | **-5.7%** | 0 | **Standard H026 sanity (best)** ✓ |
+
+OOS annual (Var D sanity): 2021: +50.8% / 2022: +20.6% / 2023: +14.4% / 2024: +25.7% / 2025: +21.5% / 2026: +29.1%
+
+**Key findings:**
+- **Skip-month badly hurts H026**: Var A OOS 1.267 vs 2.665 standard — a 53% Sharpe reduction. The most recent month's return is PREDICTIVE for ETF selection, not a reversal signal.
+- **1m reversal bonus is catastrophic** (Var B: OOS -2.154, MaxDD -85.2%): actively adding the 1-month reversal signal inverts the strategy. ETF short-term return continuation is strong; "fading" the prior month destroys alpha.
+- **Mechanism**: ETF sector momentum has "hot money" dynamics at 1-month scale — sectors that did well last month continue to attract flows. This is fundamentally different from individual stock momentum (where 1-month reversal = microstructure liquidity provision). ETFs don't have the same order-flow reversal pressure.
+- **H277 analogy confirmed for ETFs**: Same finding as NASDAQ tech (H277): momentum is continuous with no 1-month reversal. "Skip-month" is a stock-level microstructure correction that doesn't apply to broad ETFs.
+- **Conclusion**: H026's full 12m momentum is already the correct form. Do NOT implement skip-month on ETF universes.
+
+**Skip-month family: CLOSED for ETF universes.** H405 showed 12m > 3m > 6m windows; H407 shows skip-month degrades 12m signal. Full 12m momentum is the definitive window.
+
+**Script**: backtesting/daily/run_h407.py
+**Results**: backtesting/results/h407_results.json
+
+---
+
+## H408 — Absolute Momentum Floor on H026 ETF Top-1: NOT CONFIRMED (2026-07-16)
+
+**Source**: Endogenous from H407 (2026-07-16) + Antonacci's Dual Momentum principle. H256 (Dual Momentum GEM, NOT CONFIRMED) applied absolute momentum gate globally — but failed because 2022 crashed both equity AND bonds simultaneously. H408 tests a lighter version: only veto the H026 top-1 pick if ITS OWN 12m absolute return is negative, route to BIL.
+
+**Universe**: H026 23-ETF dual-rank rotation
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 2.665
+
+| Var | IS Sh | OOS Sh | OOS MDD | Cash% | Description |
+|-----|-------|--------|---------|-------|-------------|
+| **A** | **3.000** | **2.665** | **-5.7%** | 1.6% | Strict 12m floor (>0%) |
+| B | 3.000 | 2.665 | -5.7% | 0.0% | Lenient 12m floor (>-5%) |
+| C | 3.000 | 2.665 | -5.7% | 0.0% | Very lenient 12m floor (>-10%) |
+| D | 3.007 | 2.607 | -5.7% | 8.1% | Strict 6m floor (>0%) |
+| E | 3.000 | 2.665 | -5.7% | 0.0% | No floor (H026 sanity) |
+
+OOS annual (all equivalent): 2021: +50.8% / 2022: +20.6% / 2023: +14.4% / 2024: +25.7% / 2025: +21.5% / 2026: +29.1%
+
+**Key findings:**
+- **Absolute floor has near-zero impact on 12m variant**: Var A routes to BIL only 1.6% of OOS months; Vars B/C route to BIL 0% of months. Returns are identical to the sanity check Var E.
+- **Root cause: H026's dual-rank already handles this implicitly.** BIL is one of the 23 ETFs in the universe. BIL has: (1) zero momentum (always ≈0), but (2) LOWEST volatility of any ETF in the universe. When all equity ETFs are falling and have poor momentum, BIL's low-vol ranking pushes it to the top. The absolute momentum floor simply replicates what the dual-rank already does.
+- **6m absolute floor (Var D) slightly hurts**: routes 8.1% to BIL, reduces OOS Sharpe from 2.665 to 2.607. The 6m window picks up false negatives more often than the 12m.
+- **Comparison with H256 (NOT CONFIRMED)**: H256 failed because a global equity+bond floor created no safe haven in 2022. H408's ETF-specific floor doesn't fail for the same reason — but it also doesn't improve, because BIL is already in the selection set.
+- **Broader conclusion**: BIL inclusion in H026's universe makes separate absolute momentum floors redundant. Any strategy that includes BIL or a cash proxy in the rotation universe already has an implicit absolute momentum protection mechanism.
+
+**Absolute momentum floor family: CLOSED for universes containing BIL or cash proxy.** The dual-rank already performs Antonacci's GEM function implicitly. Adding an explicit floor adds no value.
+
+**Script**: backtesting/daily/run_h408.py
+**Results**: backtesting/results/h408_results.json
