@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Session Summary — 2026-07-16</title>
+  <title>Session Summary — 2026-07-17</title>
   
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -75,9 +75,9 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
 <body>
   <div class="header">
     <div>
-      <div class="header-title">Session Summary &mdash; 2026-07-16</div>
+      <div class="header-title">Session Summary &mdash; 2026-07-17</div>
     </div>
-    <div class="header-sub">Generated 2026-07-17 04:02 CT</div>
+    <div class="header-sub">Generated 2026-07-17 02:49 CT</div>
   </div>
   <div class="main">
     
@@ -87,9 +87,9 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
       <div class="kpi"><div class="kpi-label">Flagged</div>
         <div class="kpi-value muted">0</div></div>
       <div class="kpi"><div class="kpi-label">Commits</div>
-        <div class="kpi-value blue">10</div></div>
+        <div class="kpi-value blue">2</div></div>
       <div class="kpi"><div class="kpi-label">Podcast</div>
-        <div class="kpi-value green">✓</div></div>
+        <div class="kpi-value muted">—</div></div>
     </div>
     
     <div class="card">
@@ -100,87 +100,77 @@ pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;paddin
       <div class="card-body">
             <div class="proposal">
               <div class="proposal-header">
-                <span class="proposal-title">oracle3: Wang Transform prediction market pricing — wiki update to algorithmic-strategies.md</span>
-                <span class="risk-badge risk-low">low</span>
+                <span class="proposal-title">H409 stub: Drift-Regime-Gated Value+Reversal Factor on H198 Universe</span>
+                <span class="risk-badge risk-medium">medium</span>
                 <span style="font-size:11px;color:var(--green)">applied</span>
               </div>
-              <div class="proposal-rationale">oracle3 operationalizes a peer-reviewed pricing model (Wang Transform, Yang 2026 UIUC) calibrated on 291,309 resolved contracts across 6 platforms with λ̂=0.183. It detects and harvests favorite-longshot bias (true 50/50 trades at ~0.57) via 8 arbitrage strategies + Kelly sizing. This is a directly …</div>
-              <div class="proposal-target">/workspace/agent/wiki/trading/prediction-markets/algorithmic-strategies.md</div>
+              <div class="proposal-rationale">arXiv:2511.12490 (Nov 2025) reports OOS Sharpe 13.19 on S&amp;P 500 2004-2024 using a regime-conditional factor that activates value+short-term reversal signals ONLY when a stock has &gt;60% positive days in the trailing 63-day window. Signal = 0.7 x inverse_price_percentile + 0.3 x negated_10d_return_zsco…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h409.py</div>
             </div>
             <div class="proposal">
               <div class="proposal-header">
-                <span class="proposal-title">Factor momentum = only ML alpha in 242-factor study — wiki update to factor-models.md</span>
+                <span class="proposal-title">H410 stub: Two-Stage PEAD — Fast EPS Surprise + Delayed ECT Sentiment</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2606.29734 (Jun 2026) 'Bridging Quantitative and Qualitative Earnings Signals' introduces EarningsInOne corpus (SP1500, 2005-2023) showing a clean temporal separation: EPS/revenue surprise dominates at announcement and is 'largely eliminated by the next market open,' while earnings call transc…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/paper_trading/pead_ect_layer.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Moira LLM pairs trading — wiki update to algorithmic-strategies.md</span>
                 <span class="risk-badge risk-low">low</span>
                 <span style="font-size:11px;color:var(--green)">applied</span>
               </div>
-              <div class="proposal-rationale">Cakici, Fieberg, Osorio, Poddig &amp; Zaremba (JPM April 2025) applied 8 ML algorithms to 242 factor characteristics. Key finding: factor momentum is the MAIN driver of cross-sectional factor return variation. Once factor momentum is controlled for, NO ML portfolio generates significant alpha. This dire…</div>
+              <div class="proposal-rationale">arXiv:2605.01954 (May 2026) 'Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading' directly addresses our H316 STUB (LLM pairs trading). Moira uses hierarchical RL where an LLM selects pairs at the high level and executes at the low level, using prompt-based updates (no fine-t…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/algorithmic-strategies.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Attention Factors for Stat Arb (OOS Sharpe 4.0 net 2.3) — wiki update + H411 stub</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2510.11616 'Attention Factors for Statistical Arbitrage' achieves OOS Sharpe 4.0+ on large US equities (gross), 2.3 net of transaction costs, over 24 years. Method: learns conditional latent factors from firm characteristics using attention mechanisms, identifies mispriced asset clusters, and …</div>
               <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/factor-models.md</div>
             </div>
             <div class="proposal">
               <div class="proposal-header">
-                <span class="proposal-title">H406 stub: Factor Momentum on Broad 50+ Signal Universe</span>
+                <span class="proposal-title">H412 stub: Continuous Cash-Overlay Slow-Tail + V-Shape Crash Brake on H026/H045</span>
                 <span class="risk-badge risk-medium">medium</span>
                 <span style="font-size:11px;color:var(--green)">applied</span>
               </div>
-              <div class="proposal-rationale">JPM 2025 study on 242 factors shows factor momentum = only ML alpha. Our current H398A (IMOM6+MOM60+LowVol+IMOM12) implicitly contains factor-momentum signals but on a narrow 4-signal universe where all signals already correlate. H406 tests explicit factor momentum on a broader universe (50+ WorldQu…</div>
-              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h406.py</div>
+              <div class="proposal-rationale">arXiv:2606.09025 (Jun 2026) 'Continuous Cash-Overlay Filters for a Static Growth-Defensive Risk Sleeve' achieves 19.35% CAGR vs 17.59% for full risky sleeve OOS, with MaxDD reduced from -33.59% to -18.05%. Two modular filters: (1) Slow-Tail: VIX, rate, credit, risk-premium compression states -&gt; cont…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/regime-detection.md</div>
             </div>
             <div class="proposal">
               <div class="proposal-header">
-                <span class="proposal-title">CloddsBot: Claude-powered autonomous multi-market prediction agent — wiki update to automated-pipeline.md</span>
+                <span class="proposal-title">Multi-agent LLM trading survey — wiki update to automated-pipeline.md</span>
                 <span class="risk-badge risk-low">low</span>
                 <span style="font-size:11px;color:var(--green)">applied</span>
               </div>
-              <div class="proposal-rationale">CloddsBot is a self-hosted autonomous trading agent built on Claude that covers 1000+ markets including Polymarket, Kalshi, Binance, Hyperliquid, Solana DEXs, and 5 EVM chains. Key differentiator: Claude-native, agent commerce protocol for machine-to-machine payments, scans for edge and executes ins…</div>
-              <div class="proposal-target">/workspace/agent/wiki/trading/prediction-markets/automated-pipeline.md</div>
+              <div class="proposal-rationale">Two complementary 2026 papers bracket the current state of LLM multi-agent trading: (1) arXiv:2602.23330 'Toward Expert Investment Teams' shows fine-grained task decomposition improves risk-adjusted returns vs coarse-grained multi-agent designs, tested on Japanese equities. Key finding: intermediate…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/automated-pipeline.md</div>
             </div>
             <div class="proposal">
               <div class="proposal-header">
-                <span class="proposal-title">XALPHA: Memory-Driven AI Quant Researcher — New Wiki Page + H407 Hypothesis Stub</span>
-                <span class="risk-badge risk-low">low</span>
-                <span style="font-size:11px;color:var(--green)">applied</span>
-              </div>
-              <div class="proposal-rationale"></div>
-              <div class="proposal-target">wiki/trading/algorithms/xalpha-memory-alpha-discovery.md</div>
-            </div>
-            <div class="proposal">
-              <div class="proposal-header">
-                <span class="proposal-title">Agentic Trading Survey (arXiv:2605.19337) — AI Industry Wiki Page</span>
+                <span class="proposal-title">5-Angle Research Scan Summary — 2026-07-17</span>
                 <span class="risk-badge risk-low">low</span>
                 <span style="font-size:11px;color:var(--green)">applied</span>
               </div>
               <div class="proposal-rationale"></div>
-              <div class="proposal-target">wiki/ai-industry/agentic-trading-survey-2026.md</div>
-            </div>
-            <div class="proposal">
-              <div class="proposal-header">
-                <span class="proposal-title">Agentic Retrieval from Earnings Calls (arXiv:2507.07906) — H408 PEAD Upgrade Stub</span>
-                <span class="risk-badge risk-low">low</span>
-                <span style="font-size:11px;color:var(--green)">applied</span>
-              </div>
-              <div class="proposal-rationale"></div>
-              <div class="proposal-target">wiki/trading/algorithms/agentic-earnings-retrieval.md</div>
+              <div class="proposal-target"></div>
             </div></div>
     </div>
     
     <div class="card">
       <div class="card-header">
         <span class="card-title">Commits</span>
-        <span class="card-badge">10 today</span>
+        <span class="card-badge">2 today</span>
       </div>
-      <div class="card-body"><div class="commit"><span class="commit-hash">681a098</span><span class="commit-msg">dream cycle 2026-07-16: wiki expansion + 3 staged proposals</span></div><div class="commit"><span class="commit-hash">ec615f8</span><span class="commit-msg">nightly research 2026-07-16: XALPHA memory alpha, agentic trading survey, earnings topic PEAD</span></div><div class="commit"><span class="commit-hash">280eb9f</span><span class="commit-msg">nightly research: H407 NOT CONFIRMED, H408 NOT CONFIRMED</span></div><div class="commit"><span class="commit-hash">f70ddf0</span><span class="commit-msg">nightly backup 2026-07-16</span></div><div class="commit"><span class="commit-hash">87c9816</span><span class="commit-msg">dream cycle: apply 2026-07-16 staged proposals (H406)</span></div><div class="commit"><span class="commit-hash">e41bda8</span><span class="commit-msg">dream cycle: changelog 2026-07-15</span></div><div class="commit"><span class="commit-hash">40ccc4f</span><span class="commit-msg">dream cycle: apply 2026-07-15 staged proposals (anomaly decay, OpenFinGym, H406 MACD)</span></div><div class="commit"><span class="commit-hash">e645aa2</span><span class="commit-msg">dream cycle 2026-07-16: wiki expansion + 4 staged proposals</span></div><div class="commit"><span class="commit-hash">b00df46</span><span class="commit-msg">wiki expansion 2026-07-16: position-sizing.md major update</span></div><div class="commit"><span class="commit-hash">d9397c9</span><span class="commit-msg">nightly backup 2026-07-16</span></div></div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">2c93fbc</span><span class="commit-msg">dream cycle 2026-07-17: wiki expansion + 3 staged proposals</span></div><div class="commit"><span class="commit-hash">f6f81e1</span><span class="commit-msg">nightly backup 2026-07-17</span></div></div>
     </div>
     
-        <div class="card">
-          <div class="card-header"><span class="card-title">AI Podcast</span></div>
-          <div class="card-body">
-            <div class="podcast-pill">
-              <span class="podcast-dot"></span>
-              <span>Daily AI Insights — Thursday, July 16, 2026</span>
-              <span style="color:var(--muted)">2,199 words</span>
-            </div>
-          </div>
-        </div>
     
   </div>
 </body>
