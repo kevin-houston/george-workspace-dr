@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-15
+updated: 2026-07-16
 sources_indexed: 4
-pages: 209
+pages: 213
 ---
 
 # Wiki Index
@@ -64,6 +64,8 @@ When answering a query:
 - [LLM Alpha Validation Checklist](trading/algorithms/llm-alpha-validation.md) — 6-test pre-deployment gate for LLM-generated strategies: look-ahead audit, cost-inclusive net-Sharpe, OOS regime coverage, reproducibility/source check, cross-market transfer test, paper-trading gate; gates H274/H381/H382/H383/H384 ← new 2026-07-08
 - [DeePM — Regime-Robust Deep Portfolio Manager](trading/algorithms/deepm-regime-portfolio.md) — Oxford ML (arXiv:2601.05975); 3 innovations: Causal Sieve (ragged filtration), Macro Graph Prior, Distributionally Robust Objective; 2x net risk-adjusted vs conventional; 50 futures 2010-2025; code: github.com/kieranjwood/deepm; H249/H318 analog ← new 2026-07-07
 - [Low-Volatility Factor ETF Rotation](trading/algorithms/low-volatility-etf-rotation.md) — H354 CONFIRMED (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV; pure 12m top-1 OOS 1.735, zero neg years, +7.0% in 2022); H355 CONFIRMED (OB filter H045 OOS 1.522); H356 CONFIRMED (OB extension OOS 2.312) ← new 2026-07-02
+- [XALPHA — Memory-Driven Alpha Discovery](trading/algorithms/xalpha-memory-alpha-discovery.md) — arXiv:2607.08332 (HKU + Grace Investment Machine, July 2026); three-brain closed-loop: Macro Brain (theme planning), Micro Brain (hypothesis→code→backtest), Cross Brain (generation feedback consolidation); tri-alignment check (theory/code/plausibility); CSI300 validated; analog to George's dream cycle; H407 stub staged ← new 2026-07-16
+- [Agentic Retrieval from Earnings Calls](trading/algorithms/agentic-earnings-retrieval.md) — arXiv:2507.07906 (SIGIR 2025 FIRE Workshop); LLM-agent builds dynamic hierarchical topic ontology from quarterly earnings calls; detects novel/discontinued/strengthening topics; 78% topic evolution accuracy; H408 stub: topic novelty as PEAD pre-filter (novelty path for composite gate) ← new 2026-07-16
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -192,6 +194,7 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-07-16](trading/research-log/2026-07-16.md) — dream cycle scan: XALPHA memory-driven alpha discovery (arXiv:2607.08332, H407 stub), Agentic Trading Survey (arXiv:2605.19337), Agentic Earnings Retrieval PEAD (arXiv:2507.07906, H408 stub); DR wiki expanded with runbook-2026.md ← new 2026-07-16
 - [Research Log 2026-07-12](trading/research-log/2026-07-12.md) — wiki: market-microstructure.md expanded (FRI decomposition, OFI cross-sectional predictor); 5 dream cycle proposals applied: H393 Amihud ILLIQ stub, AI alpha decay, MadEvolve/EFS, FRI lag-1 reversal, prediction market volatility model ← new 2026-07-12
 - [Research Log 2026-07-09](trading/research-log/2026-07-09.md) — wiki: bilevel-autoresearch.md new (arXiv:2603.23420; Level 2 mechanism injection 5×; dream cycle connection); 5 dream cycle proposals applied: microstructure trend demise, fast/slow PEAD timing, PM dataset, reproducibility crisis, H392 E2E Transformer stub ← new 2026-07-09
 - [Research Log 2026-07-08](trading/research-log/2026-07-08.md) — wiki: auto-alpha-discovery.md expanded (Methods 7/8/9: Alpha191 LASSO, AlphaLogics, FactorEngine + H383/H384 stubs); llm-alpha-mining-systems-2026.md committed; dream cycle: H385 Illusion Momentum staged (Iwanaga & Hirose PBFJ 2026; arithmetic-geometric gap signal, US large-cap confirmed)
@@ -277,6 +280,7 @@ When answering a query:
 - [LLM Alpha Mining Systems 2026](ai-industry/llm-alpha-mining-systems-2026.md) — AlphaLogics (arXiv:2603.20247; market-logic-driven multi-agent, S&P500 validated, H381); FactorEngine (arXiv:2603.16365; program-level dual-mode LLM+BayesHPO, knowledge-infused bootstrap, H382); Cross-Market Alpha191→US (arXiv:2601.06499; 17/168 survive LASSO on S&P500, H380); ReCAP continual learning (arXiv:2606.00143, H384); HMM+RL regime allocation (arXiv:2605.27848, H383); LLM roles in factor mining vs portfolio allocation dichotomy ← new 2026-07-07
 - [What Useful Alphas? — Chen & Welch 2026](ai-industry/anomaly-decay-chen-welch-2026.md) — arXiv:2607.06502; ~200 published anomalies: median 48bp/month pre-2005 collapses to 7bp post-2005 non-micro; academic anomaly zoo closed for non-micro investors; validates NOT CONFIRMED pattern in H240–H380; momentum + info-based alpha + structural alpha survive ← new 2026-07-15
 - [OpenFinGym — Verifiable Multi-Task Quant Agent Evaluation](ai-industry/openfinGym-2026.md) — arXiv:2606.26350; Edinburgh/UCL/Oxford/Turing; containerised runtime + host-side verifier prevents train-test leakage; 4 task domains (forecasting/market-gen/trading/fraud); automated arXiv paper → executable task pipeline; SFT+RL integration; relevant for H274 PEAD multi-agent + H318 meta-agent ← new 2026-07-15
+- [Agentic Trading Survey 2026](ai-industry/agentic-trading-survey-2026.md) — arXiv:2605.19337; 77 LLM trading agent papers; only 19/77 satisfy closed-loop evaluation; reproducibility crisis (0/19 fully reproducible); transaction costs absent in 63%; memory mechanisms show most consistent improvement; taxonomy: Pattern A/B/C/D agent architectures; MRS reporting standard; validates LLM Alpha Validation Checklist ← new 2026-07-16
 
 ---
 
@@ -285,6 +289,7 @@ When answering a query:
 - [DR Overview](dr/overview.md) — restore procedure, what survives, what to tell a fresh George
 - [Git Backup Setup](dr/git-backup.md) — git repo config, current status, blocked items
 - [Session Diary](dr/diary.md) — append-only log of sessions; narrative recovery layer
+- [Operational Runbook 2026](dr/runbook-2026.md) — current-state restore commands, subsystem validation, common failure modes, what to tell a fresh George (2026 version) ← new 2026-07-16
 
 ---
 

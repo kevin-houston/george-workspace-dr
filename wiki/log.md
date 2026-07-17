@@ -628,6 +628,22 @@ Index updated: pages 204→207, updated date 2026-07-12→2026-07-13.
 Staged proposals: 3 JSON files in dream_cycle/staged/2026-07-13/ (IDs 2026-07-13-1,2,3).
 All General Tech additions cross-referenced to trading hypotheses and existing pages.
 
+## [2026-07-16] research | Dream cycle nightly scan — DR wiki expansion + 3 staged proposals (H407/H408 stubs + Agentic Trading Survey)
+
+Pages created: 5.
+- dr/runbook-2026.md — comprehensive operational runbook for restoring/validating George; current-state restore commands; subsystem validation checks; common failure modes with fixes; what-to-tell-fresh-George (2026 version); addresses 3-month staleness of dr/overview.md and dr/git-backup.md
+- ai-industry/agentic-trading-survey-2026.md — Xia et al. arXiv:2605.19337 (May 2026); 77 LLM trading agent papers; 4-tier evidence map (only 19/77 meet closed-loop criteria); reproducibility crisis (0/19 fully reproducible); memory mechanisms show highest consistent improvement; Pattern A/B/C/D agent taxonomy; MRS reporting standard; validates LLM Alpha Validation Checklist
+- trading/algorithms/xalpha-memory-alpha-discovery.md — Liu et al. arXiv:2607.08332 (July 2026 HKU); three-brain closed-loop: Macro Brain (theme planning), Micro Brain (hypothesis→code→backtest→iterate), Cross Brain (generation feedback consolidation); tri-alignment check (theory/code/plausibility); CSI300 validated; analog to George dream cycle; H407 stub staged
+- trading/algorithms/agentic-earnings-retrieval.md — Gupta et al. arXiv:2507.07906 (SIGIR 2025 FIRE Workshop); LLM-agent builds dynamic hierarchical topic ontology from quarterly earnings calls; detects novel/discontinued/strengthening topics; 78% topic evolution accuracy vs 38% LDA baseline; H408 stub: topic novelty as PEAD composite gate pre-filter
+- trading/research-log/2026-07-16.md — session log
+Index updated: pages 209→213, updated date 2026-07-15→2026-07-16.
+Staged proposals: 3 new JSON files in dream_cycle/staged/2026-07-16/ (props 5, 6, 7):
+  - prop-2026-07-16-005: XALPHA memory alpha discovery — wiki create + H407 stub (risk: low)
+  - prop-2026-07-16-006: Agentic Trading Survey wiki page — AI Industry expansion (risk: low)
+  - prop-2026-07-16-007: Agentic Earnings Retrieval — wiki create + H408 PEAD upgrade stub (risk: low)
+Papers reviewed: arXiv:2607.08332 (XALPHA memory-driven alpha discovery), arXiv:2605.19337 (Agentic Trading survey 77 papers), arXiv:2507.07906 (Agentic retrieval earnings calls SIGIR 2025), arXiv:2507.07107 (ML multi-factor cross-sectional with bias correction).
+DR section expanded from 3 stale pages (April 2026) to 4 pages with current operational state.
+
 ## [2026-07-15] research | Dream cycle nightly scan — AI Industry wiki expansion (2 new pages, 3 staged proposals)
 
 Pages created: 2.
