@@ -115,11 +115,61 @@ XALPHA shows what a fully automated version of this loop looks like. The tri-ali
 
 ### H407 path
 
-H407 (stub below) tests XALPHA's three-brain architecture on H198's 30-stock US large-cap universe, bootstrapped with the 400+ experiment history in `hypothesis-log.md` as pre-loaded Cross Brain memory. The key research question: does memory of prior US large-cap experiments improve discovery speed vs starting cold?
+H407 (proposed below) tests XALPHA's three-brain architecture on H198's 30-stock US large-cap universe, bootstrapped with the 400+ experiment history in `hypothesis-log.md` as pre-loaded Cross Brain memory. The key research question: does memory of prior US large-cap experiments improve discovery speed vs starting cold?
 
 ### Dream cycle integration
 
 The Cross Brain's "edit motif" concept closely parallels H396 (AlphaMemo, arXiv:2606.20625). The combination — XALPHA's three-brain loop + AlphaMemo's edit-motif library — would give George a systematic way to both generate new hypotheses AND avoid re-running confirmed failures.
+
+---
+
+## Implementation Path
+
+XALPHA is not open-sourced in the July 2026 paper. However, the architecture can be implemented with existing tools:
+
+```python
+# Pseudo-implementation sketch
+
+class MacroBrain:
+    """Plans research themes and archetype routing."""
+    def select_theme(self, memory: CrossBrainMemory, financial_reports: list) -> ResearchTheme:
+        # Prompt GPT-4o with memory summary + recent arXiv abstracts
+        # Returns: theme, archetype, N_hypotheses, exploration vs exploitation balance
+        ...
+
+class MicroBrain:
+    """Generates and validates hypothesis-to-code pipeline."""
+    def generate_factors(self, theme: ResearchTheme) -> list[Factor]:
+        ...
+    
+    def tri_align_check(self, factor: Factor) -> bool:
+        """Checks idea/code/plausibility alignment before backtesting."""
+        ...
+    
+    def backtest_and_iterate(self, factors: list[Factor]) -> list[FactorResult]:
+        ...
+
+class CrossBrain:
+    """Consolidates results into persistent memory."""
+    def consolidate(self, results: list[FactorResult], memory: CrossBrainMemory) -> CrossBrainMemory:
+        ...
+```
+
+OpenAI API cost estimate for a 3-cycle XALPHA run on H198 universe:
+- Macro Brain: ~3 GPT-4o calls per cycle = ~$0.30/cycle
+- Micro Brain: ~20 hypothesis × 3 validation steps × 3 cycles = ~$5-10
+- Cross Brain: ~3 consolidation calls = ~$0.60/cycle
+- **Total: ~$20-35 per 3-cycle run** (similar to H381/H382 estimates)
+
+---
+
+## Connections and Cross-References
+
+- [AI-Driven Alpha Factor Discovery](auto-alpha-discovery.md) — taxonomy of LLM alpha mining systems; XALPHA fits as "Method 10"
+- [LLM Alpha Validation Checklist](llm-alpha-validation.md) — XALPHA's tri-alignment check is a pre-validation variant of this checklist
+- [Bilevel Autoresearch](../concepts/bilevel-autoresearch.md) — XALPHA is an applied instance of the Level 2 mechanism injection framework
+- [Hypothesis Log](../backtesting/hypothesis-log.md) — H407 stub: XALPHA on H198 US large-cap universe
+- [Smart Money Concepts ICT](smart-money-concepts-ict.md) — H396 AlphaMemo edit motifs are a complementary mechanism to XALPHA's Cross Brain
 
 ---
 
@@ -139,14 +189,3 @@ Gate: At least 1 generated factor achieves OOS IC > 0.05 AND OOS Sharpe > 1.174 
 IS: 2013-2020, OOS: 2021-2026. API cost: ~$20-40 OpenAI.
 Script: backtesting/daily/run_h407_xalpha.py (stub).
 ```
-
----
-
-## Connections and Cross-References
-
-- [AI-Driven Alpha Factor Discovery](auto-alpha-discovery.md) — taxonomy of LLM alpha mining systems; XALPHA fits as "Method 10"
-- [LLM Alpha Validation Checklist](llm-alpha-validation.md) — XALPHA's tri-alignment check is a pre-validation variant of this checklist
-- [Bilevel Autoresearch](../../concepts/bilevel-autoresearch.md) — XALPHA is an applied instance of the Level 2 mechanism injection framework
-- [Hypothesis Log](../backtesting/hypothesis-log.md) — H407 stub: XALPHA on H198 US large-cap universe
-- [Smart Money Concepts ICT](smart-money-concepts-ict.md) — H396 AlphaMemo edit motifs are a complementary mechanism to XALPHA's Cross Brain
-- [LLM Alpha Mining Systems 2026](../../ai-industry/llm-alpha-mining-systems-2026.md) — AlphaLogics, FactorEngine, ReCAP context

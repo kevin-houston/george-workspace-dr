@@ -66,7 +66,7 @@ How the agent adapts based on outcomes:
 - **Memory update**: structured outcome stored and indexed for retrieval
 - **RL fine-tuning**: weights updated via reinforcement signal from P&L
 
-**Most papers**: implement components 1-4 but not 5. The absence of genuine feedback loops is the field's most significant architectural weakness.
+**Most papers**: implement components 1-4 but not 5. The absence of genuine feedback loops is the field's most significant architectural weakness. An agent that cannot adapt when its decisions prove wrong is closer to a sophisticated rule system than a true learning agent.
 
 ---
 
@@ -75,18 +75,18 @@ How the agent adapts based on outcomes:
 The 77 papers are classified into four evidence tiers:
 
 ### Tier 1: Closed-Loop, Cost-Realistic, Multi-Period (n=19)
-Minimum criteria: (a) Action Output — the system emits executable trading decisions, not just sentiment; (b) Closed-Loop Evaluation — decisions are evaluated against realized future prices; (c) No look-ahead: data used for decision not available at decision time in the real world.
+Minimum criteria: (a) Action Output — the system emits executable trading decisions, not just sentiment; (b) Closed-Loop Evaluation — decisions are evaluated against realized future prices, not just directional accuracy on held-out data; (c) No look-ahead: data used for decision not available at decision time in the real world.
 
-Only **19 of 77 papers** (25%) satisfy all three criteria.
+Only **19 of 77 papers** (25%) satisfy all three criteria. These are the empirical core of the survey.
 
 ### Tier 2: Partially Closed (n=28)
 Agent makes decisions that are evaluated, but: evaluation period is too short to contain regime variation; or transaction costs are absent; or look-ahead is present in data preprocessing.
 
 ### Tier 3: Signal-Level Only (n=23)
-Agent produces sentiment/directional signals. Paper reports directional accuracy or correlation with returns, not portfolio P&L. Useful for signal research but cannot directly claim trading alpha.
+Agent produces sentiment/directional signals. Paper reports directional accuracy or correlation with returns, not portfolio P&L. These are useful for signal research but cannot directly claim trading alpha.
 
 ### Tier 4: Design-Only / Simulation Without Evaluation (n=7)
-Papers that describe an architecture without empirical validation, or run simulations on synthetic data.
+Papers that describe an architecture without empirical validation, or that run simulations on synthetic data.
 
 **Practical implication**: When a paper claims "our LLM agent achieves X% annual return", the first question is which tier it falls into. Tier 1 results should be taken seriously; Tier 3/4 results describe architectures, not trading performance.
 
@@ -96,11 +96,11 @@ Papers that describe an architecture without empirical validation, or run simula
 
 ### Finding 1: Architecture Experimentation Outpaces Rigorous Evaluation
 
-The field is inventing new architectures faster than it is rigorously evaluating them. Papers introduce novel reasoning patterns (multi-agent debate, reflection, MCTS) but evaluate them on short windows (often 1-3 months) without multi-regime coverage.
+The field is inventing new architectures faster than it is rigorously evaluating them. Papers introduce novel reasoning patterns (multi-agent debate, reflection, MCTS) but evaluate them on short windows (often 1-3 months) without multi-regime coverage. The same architecture that works in 2021-2022 bull/bear cycle may fail differently in 2024-2025.
 
 ### Finding 2: Transaction Costs Are Rarely Reported Correctly
 
-Of the 19 Tier 1 papers, **only 7 (37%) report transaction costs at all**. Of those, the majority use fixed-rate assumptions (0.1% per trade) that do not reflect realistic execution. The remaining 12 papers report gross returns — making their alpha claims unverifiable from an execution standpoint.
+Of the 19 Tier 1 papers, **only 7 (37%) report transaction costs at all**. Of those, the majority use fixed-rate assumptions (0.1% per trade) that do not reflect realistic execution for institutional size or the bid-ask spread impact on small orders. The remaining 12 papers report gross returns — making their alpha claims unverifiable from an execution standpoint.
 
 This directly maps to George's [Shared Strategy Evaluation Checklist](../trading/shared-eval-checklist.md) item 3: "Net Sharpe after 5bp/trade must exceed gate."
 
@@ -112,11 +112,11 @@ Across papers, a "BUY" decision from an LLM agent can mean:
 - Buy at close of the decision bar (implicitly look-ahead if close price is in context)
 - Buy at a notional $1M position (regardless of liquidity)
 
-The survey found that **11 of 19 Tier 1 papers** had at least one ambiguous execution assumption that, if corrected, would reduce reported returns by >5%.
+This inconsistency makes cross-paper comparison impossible. The survey found that **11 of 19 Tier 1 papers** had at least one ambiguous execution assumption that, if corrected, would reduce reported returns by >5%.
 
-### Finding 4: Multi-Agent Debate Is Conditionally Valuable
+### Finding 4: Reasoning Pattern ≠ Performance Improvement (Conditionally)
 
-When controlling for market regime and time period:
+The survey found that **multi-agent debate** is the most widely studied reasoning enhancement, present in 31% of papers. However, when controlling for market regime and time period:
 - Multi-agent debate **consistently outperforms** zero-shot in high-information-asymmetry events (earnings surprises, M&A announcements, macro data releases)
 - Multi-agent debate **does not consistently outperform** in price-momentum contexts, where LLMs lack the statistical power to improve over rule-based momentum systems
 
@@ -124,7 +124,7 @@ The regime-conditional finding has direct implications for H274 (multi-agent PEA
 
 ### Finding 5: Memory Mechanisms Show the Most Promise
 
-Among LLM agent enhancements, **structured memory** showed the most consistent improvement across all evaluation windows, market regimes, and asset classes:
+Among LLM agent enhancements, **structured memory** (maintaining a database of prior decisions and outcomes) showed the most consistent improvement across all evaluation windows, market regimes, and asset classes. The improvement was:
 - +8-15% WR in event-driven strategies
 - +0.2-0.4 Sharpe in momentum strategies
 - Most robust to parameter sensitivity
@@ -145,7 +145,7 @@ The survey's most striking finding: **0 of 19 Tier 1 papers are fully reproducib
 | Model version unspecified ("GPT-4") | 12/19 | 63% |
 | Evaluation period overlaps with model training data | 7/19 | 37% |
 
-The model version issue is particularly acute: GPT-4 (gpt-4-0314), GPT-4 (gpt-4-turbo), and GPT-4 (gpt-4o) have meaningfully different financial knowledge, reasoning styles, and context lengths. Papers that say "we use GPT-4" without version pins are effectively non-reproducible.
+The model version issue is particularly acute: GPT-4 (gpt-4-0314), GPT-4 (gpt-4-turbo), and GPT-4 (gpt-4o) have meaningfully different financial knowledge, reasoning styles, and context lengths. Papers that say "we use GPT-4" without version pins are effectively non-reproducible as these models change.
 
 This directly validates the **LLM Alpha Validation Checklist** (wiki/trading/algorithms/llm-alpha-validation.md) requirements:
 - Checklist item 1: "Temporal integrity" — 37% of papers violated this
@@ -157,26 +157,26 @@ This directly validates the **LLM Alpha Validation Checklist** (wiki/trading/alg
 ## Agent Architecture Patterns
 
 ### Pattern A: Signal-to-Decision Pipeline
-Most common (41% of papers). LLM converts text input into a directional signal, passed to a rule-based execution layer. The LLM has no memory and no feedback. Simplest architecture; most interpretable.
+Most common (41% of papers). LLM converts text input (news, filings, transcripts) into a directional signal, which is then passed to a rule-based execution layer. The LLM has no memory and no feedback. Simplest architecture; most interpretable.
 
-**George's H174 pipeline** is a Signal-to-Decision pipeline: FinBERT → score filter → OPG order.
+**When to use**: NLP-heavy event-driven strategies (PEAD, earnings, M&A). George's H174 pipeline is a Signal-to-Decision pipeline: FinBERT → score filter → OPG order.
 
 ### Pattern B: Fully Autonomous Agent
-LLM perceives market state, reasons about it, emits orders, and receives feedback on outcomes. Most architecturally ambitious; most prone to compounding errors. Papers in this category report highest potential returns AND highest variance.
+LLM perceives market state, reasons about it, emits orders, and receives feedback on outcomes. Most architecturally ambitious; most prone to compounding errors. Papers in this category report highest potential returns AND highest variance (sometimes catastrophic losses in adversarial market conditions).
 
-**Relevant work**: AutoRedTrader (arXiv:2605.09185) showed that adversarial misinformation injection causes dramatic drawdowns in Pattern B agents.
+**Relevant work**: AutoRedTrader (arXiv:2605.09185) showed that adversarial misinformation injection causes dramatic drawdowns in Pattern B agents — they have no robust mechanism for detecting corrupted inputs.
 
 ### Pattern C: Multi-Agent Debate Ensemble
 N LLM agents (bull, bear, neutral stances) process the same information, debate via message passing, reach consensus. Generally improves directional accuracy on ambiguous events. Higher API cost (N× per decision).
 
-**George's H274**: PEAD multi-agent debate. Survey finding: expect +5-12% WR improvement on ambiguous 8-K texts; negligible improvement on clear strong-surprise events.
+**George's H274**: PEAD multi-agent debate. 3-agent design (bull/bear/neutral). Survey finding: expect +5-12% WR improvement on ambiguous 8-K texts; negligible improvement on clear strong-surprise events.
 
 ### Pattern D: Memory-Augmented Adaptive Agent
 Agent stores structured memory of prior decisions and outcomes, retrieves relevant context for each new decision. **Highest consistent performance improvement** per survey finding 5. The XALPHA architecture (arXiv:2607.08332) is the most developed example of this pattern.
 
 ---
 
-## Methodological Recommendations: Minimum Reporting Standard
+## Methodological Recommendations
 
 The survey proposes a **Minimum Reporting Standard (MRS)** for LLM trading papers:
 

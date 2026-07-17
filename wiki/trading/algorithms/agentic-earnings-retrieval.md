@@ -83,7 +83,7 @@ The paper evaluates on a corpus of earnings call transcripts from S&P 500 compan
 - **Topic evolution accuracy**: the system correctly identified 78% of analyst-annotated "material topic changes" across the test set
 - **Novel topic recall**: 71% of topics that analysts flagged as "new this quarter" were identified by the system (vs 38% by LDA baseline)
 
-The paper does not evaluate **trading performance** — it evaluates information extraction quality. The hypothesis that novel topics → larger PEAD is supported by:
+Importantly, the paper does not evaluate **trading performance** — it evaluates information extraction quality. The hypothesis that novel topics → larger PEAD is supported by:
 1. H317 findings (H174's 81.8% WR; 77% of events already have EPS beats → remaining variance is qualitative)
 2. EarningsInOne (arXiv:2606.29734) finding that qualitative ECT signal peaks next day = tradeable
 3. General information asymmetry theory: analyst coverage focuses on expected topics; novel topics require analysts to rebuild models from scratch
@@ -124,8 +124,8 @@ The novelty path is the key innovation: events where a company introduces a genu
 
 ### Transcript source problem
 H247 found that FMP transcript API returns 403 on the free plan. Alternatives:
+- **EDGAR full-text**: 8-K Item 7.01 (Regulation FD Disclosure) sometimes contains the transcript text or key excerpts
 - **AlphaVantage transcripts**: Available (25 req/day limit, sufficient for our H174 universe of ~20 events/year)
-- **EDGAR full-text**: 8-K Item 7.01 (Regulation FD Disclosure) sometimes contains transcript excerpts
 - **Alpaca News API**: Covers major earnings events but inconsistent format
 
 For Phase 1, use AlphaVantage transcripts (existing `$ALPHA_VANTAGE_API_KEY`) with fallback to 8-K Item 7.01 EDGAR text.
