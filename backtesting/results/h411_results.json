@@ -1,0 +1,137 @@
+{
+  "hypothesis": "H411",
+  "gate": 4.068,
+  "confirmed": true,
+  "confirmed_variants": [
+    "B",
+    "D"
+  ],
+  "results": {
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.99,
+        "maxdd": -0.045,
+        "cagr": 0.545,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.813,
+        "maxdd": -0.059,
+        "cagr": 0.724,
+        "neg_yrs": 0
+      },
+      "desc": "Pure reversal 10d, 20d drift gate",
+      "beats": false
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.94,
+        "maxdd": -0.01,
+        "cagr": 1.076,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.825,
+        "maxdd": -0.012,
+        "cagr": 1.061,
+        "neg_yrs": 0
+      },
+      "desc": "Pure value (1/P), 20d drift gate",
+      "beats": true
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.891,
+        "maxdd": -0.01,
+        "cagr": 0.782,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.836,
+        "maxdd": -0.058,
+        "cagr": 0.87,
+        "neg_yrs": 0
+      },
+      "desc": "50/50 rev+val, 20d drift gate",
+      "beats": false
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 4.212,
+        "maxdd": -0.01,
+        "cagr": 0.918,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.55,
+        "maxdd": -0.028,
+        "cagr": 1.01,
+        "neg_yrs": 0
+      },
+      "desc": "H409 Var D replication (0.70val+0.30rev), 20d gate",
+      "beats": true
+    },
+    "var_E": {
+      "is": {
+        "n": 96,
+        "sharpe": -3.272,
+        "maxdd": -0.999,
+        "cagr": -0.748,
+        "neg_yrs": 8
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": -2.708,
+        "maxdd": -0.99,
+        "cagr": -0.78,
+        "neg_yrs": 6
+      },
+      "desc": "Pure reversal 10d, NO gate [diagnostic]",
+      "beats": false
+    },
+    "var_F": {
+      "is": {
+        "n": 96,
+        "sharpe": 4.59,
+        "maxdd": -0.045,
+        "cagr": 0.629,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.985,
+        "maxdd": -0.058,
+        "cagr": 0.823,
+        "neg_yrs": 0
+      },
+      "desc": "5d reversal, 20d drift gate",
+      "beats": false
+    },
+    "var_G": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.364,
+        "maxdd": -0.062,
+        "cagr": 0.432,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.025,
+        "maxdd": -0.086,
+        "cagr": 0.484,
+        "neg_yrs": 0
+      },
+      "desc": "21d reversal, 20d drift gate",
+      "beats": false
+    }
+  }
+}

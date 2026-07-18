@@ -1,0 +1,136 @@
+{
+  "hypothesis": "H409",
+  "gate": 4.068,
+  "regime_stats": {
+    "avg_pct": 0.12135416666666667,
+    "avg_n": 3.640625
+  },
+  "confirmed": true,
+  "confirmed_variants": [
+    "D"
+  ],
+  "results": {
+    "h398a_ref": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.793,
+        "maxdd": -0.04,
+        "cagr": 0.591,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.068,
+        "maxdd": -0.047,
+        "cagr": 0.788,
+        "neg_yrs": 0
+      }
+    },
+    "spy": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.105,
+        "maxdd": -0.194,
+        "cagr": 0.15,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 0.954,
+        "maxdd": -0.239,
+        "cagr": 0.146,
+        "neg_yrs": 1
+      }
+    },
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.356,
+        "maxdd": -0.064,
+        "cagr": 0.595,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.069,
+        "maxdd": -0.108,
+        "cagr": 0.664,
+        "neg_yrs": 0
+      },
+      "desc": "Pure GATED 63d, top-2 (cash if no regime stocks)",
+      "beats": false
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.951,
+        "maxdd": -0.064,
+        "cagr": 0.669,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.753,
+        "maxdd": -0.049,
+        "cagr": 0.719,
+        "neg_yrs": 0
+      },
+      "desc": "50/50 GATED 63d + H398A momentum, top-2",
+      "beats": false
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.923,
+        "maxdd": -0.064,
+        "cagr": 0.755,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.734,
+        "maxdd": -0.108,
+        "cagr": 0.815,
+        "neg_yrs": 0
+      },
+      "desc": "H398A momentum + 63d regime FILTER (fallback=unfiltered)",
+      "beats": false
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 4.212,
+        "maxdd": -0.01,
+        "cagr": 0.918,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.55,
+        "maxdd": -0.028,
+        "cagr": 1.01,
+        "neg_yrs": 0
+      },
+      "desc": "Pure GATED 20d window, top-2",
+      "beats": true
+    },
+    "var_E": {
+      "is": {
+        "n": 96,
+        "sharpe": -1.307,
+        "maxdd": -0.968,
+        "cagr": -0.359,
+        "neg_yrs": 8
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": -0.715,
+        "maxdd": -0.674,
+        "cagr": -0.165,
+        "neg_yrs": 4
+      },
+      "desc": "Base value+reversal, no regime gate [diagnostic]",
+      "beats": false
+    }
+  }
+}
