@@ -775,3 +775,66 @@ Li, Zeng, Xing, Xu & Xu introduce HedgeAgents — a multi-agent LLM system speci
 | Broad portfolio allocation | LOW (90% fail) | Do NOT use for H026/H041a/H045 weights |
 | Factor selection from 200+ signals | MEDIUM | H406/H411 (alpha101 attention) |
 | Earnings call transcript scoring | HIGH | H410 proposed ECT layer |
+
+
+## MetaPS — Adaptive Programmatic Strategy Selection (arXiv:2606.22385)
+
+**Paper:** Chen, Luo et al. (2026), arXiv:2606.22385, submitted June 21 2026. Chinese-language team (Zenglin Xu group).
+
+**Core insight:** Instead of asking LLMs to directly generate market actions, let them *select among a library of programmatic strategies* (implemented as code modules). The selection model is trained via simulation.
+
+### Architecture
+
+1. **Strategy Library:** A fixed set of algorithmic strategies implemented as Python code modules. Each module accepts market state → outputs position/action. Examples: momentum (12-1m), mean reversion (RSI oversold), risk control (VIX>30 → cash), event-driven (earnings drift).
+
+2. **Simulation-Guided Training:**
+   - Roll out each candidate strategy in simulated/backtested markets
+   - Identify market states where each strategy leads to better future outcomes
+   - Convert (state, winning_strategy) pairs into **supervised fine-tuning (SFT) data**
+   - Fine-tune a small LLM (0.8B–9B params) on this SFT dataset
+
+3. **Inference (deployment):** No simulator needed. LLM observes current market state + strategy library descriptions → selects a strategy module → the strategy module executes and produces the final action.
+
+### Key Results
+
+| Configuration | Multi-stock Trading Sharpe | Goods-exchange Sharpe |
+|---|---|---|
+| Fixed-strategy baseline | ~0.8 | ~1.1 |
+| Direct LLM decision-making | ~0.9 | ~1.2 |
+| MetaPS (0.8B) | ~1.1 | ~1.5 |
+| MetaPS (9B) | ~1.3 | ~1.7 |
+| API-based LLM (GPT-4) baseline | ~1.0 | ~1.3 |
+
+**Key finding:** Compact fine-tuned models (9B) can match or exceed GPT-4 on strategy selection because they're fine-tuned specifically on the simulation data. "Scaling" in this domain is about domain-specific fine-tuning, not raw parameter count.
+
+### Connection to H318 Meta-Agent ETF Rotation Selector
+
+**H318 PROPOSED:** Dynamically weight H026/H041a/H045 by regime (Ang et al. arXiv:2604.02279). MetaPS suggests a concrete implementation path:
+
+1. Build a **strategy library** with three modules: H026 (sector/alts momentum), H041a (19-asset top-1), H045 (bond ETF rotation)
+2. Use the last 12 months of walk-forward backtest results to identify which market states favor each strategy
+3. Fine-tune a small LLM (or use XGBoost as a simpler substitute) to select the active strategy given current market state features (VIX, SPY 200MA, yield curve)
+4. At each monthly rebalance: LLM selects strategy → strategy executes its pick
+
+**Why MetaPS approach matters for H318:**
+- The existing XALPHA / FactorEngine approaches generate new alphas; MetaPS *selects among confirmed alphas*
+- Selection among a small confirmed library avoids overfitting risk better than generating new signals
+- The SFT data from backtests is already available (all walk-forward results in the hypothesis log)
+- Fine-tuning can be done with local models (llama.cpp or Ollama on the workspace) without OpenAI costs
+
+### Differences from TradingAgents / HedgeAgents (already in this page)
+
+| Framework | LLM role | Action type | Strategy library |
+|---|---|---|---|
+| TradingAgents | Decision-maker via debate | Direct position | None — LLM generates actions |
+| HedgeAgents | Multi-agent portfolio | Direct allocation | None |
+| **MetaPS** | **Selector** | **Picks code module** | **Fixed programmatic library** |
+| H318 design | Selector | Picks confirmed strategy | H026/H041a/H045 |
+
+MetaPS is the closest published analog to H318. The critical insight: **keeping LLMs as selectors rather than actors** dramatically improves reproducibility and cost-adjusted performance — consistent with the [Agentic Trading Survey 2026](../../ai-industry/agentic-trading-survey-2026.md) finding that only Pattern A (tool-augmented with fixed execution) shows consistent real-money results.
+
+### Practical Caution
+
+All MetaPS experiments are on simulated/backtested markets. No real-money OOS validation. The goods-exchange sandbox is synthetic. This is consistent with the reproducibility findings from the [LLM Alpha Validation Checklist](llm-alpha-validation.md): simulation results need paper-trading gate before production.
+
+For H318, the right path: implement MetaPS selection logic with XGBoost (not LLM) as the selector first — avoids LLM inference cost at monthly rebalance — then consider LLM fine-tuning only if XGBoost selector shows positive OOS lift.
