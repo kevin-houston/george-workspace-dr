@@ -1,14 +1,14 @@
 {
   "id": "quant-convergence-value-factor-2026-07-18",
   "date": "2026-07-18",
-  "source": "arXiv:2606.24575 — Jun 2026",
+  "source": "arXiv:2606.24575 \u2014 Jun 2026",
   "source_url": "https://arxiv.org/abs/2606.24575",
   "title": "Wiki note: classical value investing + modern factor models convergence (arXiv:2606.24575)",
-  "rationale": "arXiv:2606.24575 'Quant Convergence: Bridging Classical Value Investing and Modern Factor Models for Systematic Equity Selection' (Jun 2026) shows that simple price-based value metrics (like 1/P rank — the H411 champion signal) outperform complex multi-factor value composites when combined with regime conditioning. Key finding directly validates H411's result: pure 1/price-rank gated by drift regime achieves OOS Sharpe 4.825 (new H-series record) because the regime gate eliminates the value trap problem (cheap stocks can stay cheap in downtrends). Paper frames this as 'convergence' — classical value (buy cheap) + modern regime awareness (only buy cheap when trend supports it). High relevance: provides academic framing for the H409/H411 value-drift finding and suggests H416 candidate: test P/E, P/B, EV/EBITDA value metrics vs 1/P on same H198 universe with same drift gate to see if richer value metrics beat the simple price rank.",
+  "rationale": "arXiv:2606.24575 'Quant Convergence: Bridging Classical Value Investing and Modern Factor Models for Systematic Equity Selection' (Jun 2026) shows that simple price-based value metrics (like 1/P rank \u2014 the H411 champion signal) outperform complex multi-factor value composites when combined with regime conditioning. Key finding directly validates H411's result: pure 1/price-rank gated by drift regime achieves OOS Sharpe 4.825 (new H-series record) because the regime gate eliminates the value trap problem (cheap stocks can stay cheap in downtrends). Paper frames this as 'convergence' \u2014 classical value (buy cheap) + modern regime awareness (only buy cheap when trend supports it). High relevance: provides academic framing for the H409/H411 value-drift finding and suggests H416 candidate: test P/E, P/B, EV/EBITDA value metrics vs 1/P on same H198 universe with same drift gate to see if richer value metrics beat the simple price rank.",
   "risk_level": "low",
   "type": "wiki_update",
   "target_file": "/workspace/agent/wiki/trading/backtesting/hypothesis-log.md",
   "content": "<!-- H411 ADDENDUM (arXiv:2606.24575) -->\n<!-- Note: arXiv:2606.24575 'Quant Convergence' (Jun 2026) provides academic framing for H411 result: -->\n<!-- simple 1/P-rank gated by drift regime outperforms complex multi-factor value because regime gate -->\n<!-- eliminates value trap (cheap stocks can stay cheap in downtrends). H416 candidate: test P/E/P/B -->\n<!-- vs 1/P on same H198 universe with H411's 20d drift gate. -->",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

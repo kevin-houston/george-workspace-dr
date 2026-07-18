@@ -9402,3 +9402,9 @@ OOS annual (Var B): 2021: +197.3% / 2022: +177.3% / 2023: +173.5% / 2024: +114.2
 
 **Script**: backtesting/daily/run_h411.py
 **Results**: backtesting/results/h411_results.json
+
+<!-- H411 ADDENDUM (arXiv:2606.24575) -->
+<!-- Note: arXiv:2606.24575 'Quant Convergence' (Jun 2026) provides academic framing for H411 result: -->
+<!-- simple 1/P-rank gated by drift regime outperforms complex multi-factor value because regime gate -->
+<!-- eliminates value trap (cheap stocks can stay cheap in downtrends). H416 candidate: test P/E/P/B -->
+<!-- vs 1/P on same H198 universe with H411's 20d drift gate. -->
