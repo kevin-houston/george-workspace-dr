@@ -1,0 +1,12 @@
+{
+  "proposal_id": "prop8",
+  "date": "2026-07-17",
+  "title": "ESG Factor Integration — Systematic & Quantitative Approaches (Impact Investing expansion)",
+  "type": "new_page",
+  "risk": "low",
+  "target": "wiki/concepts/esg-factor-integration.md",
+  "source": "Synthesis: Lins et al. RFS 2017, Nagy et al. MSCI 2016, Giese et al. JIM 2019, Kölbel et al. 2020, AQR 2020; GIIN 2025",
+  "hypothesis": null,
+  "apply_status": "pending",
+  "content": "# ESG Factor Integration — Systematic & Quantitative Approaches\n\nBridges the Impact Investing wiki section and the Factor Models section. Covers how ESG/sustainability signals are incorporated into systematic factor portfolios, what the academic evidence says about ESG alpha, and practical implementation considerations for quant strategies.\n\nKey findings synthesized:\n- ESG *improvement momentum* (rising scores) shows mild positive alpha (0.3–0.7%/month L/S), mostly explained by quality + low-vol factors\n- Controversy signals (negative ESG events in 8-K) predict -2% drift over 60 days — structural analog to PEAD\n- Level ESG ratings show no independent alpha post-publication; they are already priced\n- ESG performance is regime-dependent (hurt in 2022 rising rates / energy rally)\n- Free data path: SEC EDGAR 10-K NLP, CDP annual reports, SASB materiality maps\n- AQR (2020): ESG tilt costs only 0–15bp/year in factor portfolios\n\nPractical implementation: Phase 1 = extend H163 FinBERT pipeline to flag ESG controversy keywords in 8-K filings; Phase 2 = SEC Item 1C climate risk language; Phase 3 = CDP data mapped to ETF holdings.\n\nSee wiki/concepts/esg-factor-integration.md for full 600-word page with data table, implementation path, key papers table, and cross-references."
+}

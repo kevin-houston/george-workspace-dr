@@ -2,7 +2,7 @@
 
 Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
-Last scan completed: 2026-07-16 (3 staged proposals, 4 new pages, DR section expanded)
+Last scan completed: 2026-07-17 (4 staged proposals, 2 new pages, Impact Investing section expanded)
 
 ---
 
@@ -656,3 +656,25 @@ Staged proposals: 3 new JSON files in dream_cycle/staged/2026-07-15/ (props 4, 5
   - prop-2026-07-15-005: wiki create for OpenFinGym page (risk: low)
   - prop-2026-07-15-006: wiki append to momentum-strategies.md — Eccles & Lee (arXiv:2607.01705) fast/slow latent momentum model; MACD emerges from theory; H406 candidate stub (MACD-filtered momentum on H198 universe)
 Papers reviewed: arXiv:2607.06502 (Chen & Welch "What Useful Alphas"), arXiv:2606.26350 (OpenFinGym), arXiv:2607.01705 (Eccles & Lee fast/slow portfolio), arXiv:2607.01550 (Bouchaud trend demise, already in staged as prop 002), arXiv:2606.29734 (EarningsInOne, already in staged as prop 001).
+
+## [2026-07-17] research | Dream cycle nightly scan — Impact Investing wiki expansion + 4 staged proposals
+
+Pages created: 2.
+- wiki/concepts/esg-factor-integration.md — new page bridging Impact Investing section with Factor Models; synthesizes 6 key academic papers (Lins et al. RFS 2017, Nagy et al. MSCI 2016, Giese et al. JIM 2019, Kölbel et al. 2020, Andersson et al. 2016, AQR 2020); ESG controversy signals as PEAD analog (-2% drift 60d from negative events); ESG momentum factor Sharpe ~0.5 globally but mostly explained by quality+low-vol factors; regime-dependence table (hurt 2022, tailwind 2021/2023); free data implementation path via SEC EDGAR NLP + CDP; H163 FinBERT pipeline extensible to controversy detection
+- wiki/trading/algorithms/e2e-portfolio-policies.md — new page for Pollok & Robik (arXiv:2607.00475, July 2026); transformer beats LSTM net of costs on 16 CME futures; LSTM 3-5x higher turnover; differentiable Sharpe loss as training objective; commodity futures: TSMOM already optimal (validates H261b); H318 design implication: transformer attention patterns as features for meta-learner, not direct policy; contrasted with DeePM and FinRL work
+
+Index updated: pages 213→215, updated date 2026-07-16→2026-07-17.
+Staged proposals: 4 new JSON files in dream_cycle/staged/2026-07-17/ (props 8–11):
+  - prop8: ESG factor integration wiki new page (Impact Investing section expansion) — risk: low
+  - prop9: Regime-conditional distributional strategy evaluation (arXiv:2606.31251, GAMLSS/ZAGA framework; 146 walk-forward folds; distributional IR* test conditioned on VIX + momentum regime covariates) — new_page backtesting — risk: low
+  - prop10: MetaPS adaptive programmatic strategy selection (arXiv:2606.22385; LLM selects among code strategy modules via simulation-guided SFT; compact 9B fine-tuned model beats GPT-4; H318 implementation path: XGBoost selector first) — wiki_update to multi-agent-llm-trading.md — risk: low
+  - prop11: End-to-end portfolio policies wiki page (arXiv:2607.00475) — new_page algorithms — risk: low
+
+Papers reviewed:
+- arXiv:2607.00475 (Pollok & Robik, July 2026 — end-to-end parametric portfolio policies)
+- arXiv:2606.31251 (Ozimek, June 2026 — GAMLSS/ZAGA regime-conditional strategy comparison)
+- arXiv:2606.22385 (Chen et al., June 2026 — MetaPS programmatic strategy selection)
+- arXiv:2606.15502 (Berg, June 2026 — GJR-GARCH neural surrogate option pricing; noted for future options work)
+- arXiv:2606.29347 (Sarkar, June 2026 — Adaptive Financial Transformer with regime-gated attention; noted)
+
+Thinnest wiki section identified: Impact Investing (8 entries vs 60+ in Trading). Expanded with esg-factor-integration.md bridging to quant factor research.

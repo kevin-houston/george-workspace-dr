@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-16
+updated: 2026-07-17
 sources_indexed: 4
-pages: 213
+pages: 215
 ---
 
 # Wiki Index
@@ -66,6 +66,7 @@ When answering a query:
 - [Low-Volatility Factor ETF Rotation](trading/algorithms/low-volatility-etf-rotation.md) — H354 CONFIRMED (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV; pure 12m top-1 OOS 1.735, zero neg years, +7.0% in 2022); H355 CONFIRMED (OB filter H045 OOS 1.522); H356 CONFIRMED (OB extension OOS 2.312) ← new 2026-07-02
 - [XALPHA — Memory-Driven Alpha Discovery](trading/algorithms/xalpha-memory-alpha-discovery.md) — arXiv:2607.08332 (HKU + Grace Investment Machine, July 2026); three-brain closed-loop: Macro Brain (theme planning), Micro Brain (hypothesis→code→backtest), Cross Brain (generation feedback consolidation); tri-alignment check (theory/code/plausibility); CSI300 validated; analog to George's dream cycle; H407 stub staged ← new 2026-07-16
 - [Agentic Retrieval from Earnings Calls](trading/algorithms/agentic-earnings-retrieval.md) — arXiv:2507.07906 (SIGIR 2025 FIRE Workshop); LLM-agent builds dynamic hierarchical topic ontology from quarterly earnings calls; detects novel/discontinued/strengthening topics; 78% topic evolution accuracy; H408 stub: topic novelty as PEAD pre-filter (novelty path for composite gate) ← new 2026-07-16
+- [End-to-End Parametric Portfolio Policies](trading/algorithms/e2e-portfolio-policies.md) — arXiv:2607.00475 (Pollok & Robik, July 2026); transformer beats LSTM net of costs on 16 CME futures (LSTM 3–5× higher turnover); transformer ≈ TSMOM net cost; differentiable Sharpe loss; commodity futures: AI adds nothing over TSMOM; H318 implication: use transformer attention as features, not direct policy ← new 2026-07-17
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -247,6 +248,7 @@ When answering a query:
 - [Three-Dimensional Portfolio Framework](concepts/three-dimensional-portfolio-framework.md) — Impact/Return/Risk triangle; extends MPT; target zone, aggregate comparison
 - [Impact Investing Market Landscape 2025](concepts/impact-investing-market-2025.md) — $1.57T AUM, 21% CAGR, pension funds 35% share (47%/yr), GIIN 2025 State of the Market; ESG 37% of new products; sector focus: financial inclusion, healthcare, housing, clean energy ← new 2026-07-08
 - [Impact Measurement Standards](concepts/impact-measurement-standards.md) — IRIS+ 2000+ metrics, Core Metrics Sets; IMP 5 dimensions (What/Who/How Much/Contribution/Risk); EU SFDR Art. 8/9, UK SDR labels; additionality challenge; analogs to quant backtesting rigor ← new 2026-07-08
+- [ESG Factor Integration](concepts/esg-factor-integration.md) — systematic ESG signals in quant portfolios; controversy signals as PEAD analog (-2% drift 60d); ESG momentum factor Sharpe ~0.5; regime-dependence (hurt 2022); free data path via SEC EDGAR NLP + CDP; bridge to H163 FinBERT pipeline ← new 2026-07-17
 
 **People**
 - [Yasemin Saltuk](people/yasemin-saltuk.md) — J.P. Morgan Social Finance lead researcher; impact investing research series

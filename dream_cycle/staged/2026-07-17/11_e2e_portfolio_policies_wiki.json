@@ -1,0 +1,12 @@
+{
+  "proposal_id": "prop11",
+  "date": "2026-07-17",
+  "title": "End-to-End Parametric Portfolio Policies — Transformer vs TSMOM on CME Futures",
+  "type": "new_page",
+  "risk": "low",
+  "target": "wiki/trading/algorithms/e2e-portfolio-policies.md",
+  "source": "arXiv:2607.00475",
+  "hypothesis": "H318",
+  "apply_status": "pending",
+  "content": "New wiki page at wiki/trading/algorithms/e2e-portfolio-policies.md covering Pollok & Robik (2026) arXiv:2607.00475.\n\nKey findings:\n- End-to-end transformer policy (market state → weights via differentiable Sharpe loss) matches or exceeds TSMOM on 16 CME futures after transaction costs\n- LSTM has higher gross Sharpe but 3-5x higher turnover, is cost-killed net\n- Transformer learns to trade infrequently — attention mechanism concentrates on durable regime signals\n- Sub-asset finding: AI models add most value on equity index futures; commodity futures already well-captured by simple TSMOM (validates H261b approach)\n- H318 implication: use transformer attention patterns as features for meta-learner, not as direct policy (sample-size too small for monthly ETF data)\n- Design note: differentiable Sharpe loss + transformer architecture is the correct template for any end-to-end trading policy work\n\nPage created at wiki/trading/algorithms/e2e-portfolio-policies.md (circa 600 words with implementation notes and cross-refs)."
+}
