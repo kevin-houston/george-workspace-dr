@@ -678,3 +678,18 @@ Papers reviewed:
 - arXiv:2606.29347 (Sarkar, June 2026 — Adaptive Financial Transformer with regime-gated attention; noted)
 
 Thinnest wiki section identified: Impact Investing (8 entries vs 60+ in Trading). Expanded with esg-factor-integration.md bridging to quant factor research.
+
+
+## [2026-07-18] research | Low-volatility wiki expansion — 2025 research updates + ETF cross-ref + H413 queue
+
+Pages updated: 1.
+- wiki/trading/algorithms/low-volatility.md — added "2025–2026 Research Updates" section with:
+  - Barroso, Detzel & Maio (2025) JFE "The Volatility Puzzle of the Beta Anomaly": BAB Sharpe highest after LOW-vol months (counter-intuitive); institutional demand-shift mechanism; Python gate code snippet
+  - Du (2025) arXiv:2507.07107 ML bias correction note (validates H192-D/H411 design)
+  - Related: Low-Volatility ETF Rotation Family table (H354/H361/H362/H363)
+  - H413 hypothesis stub: BAB × lagged realized vol regime gate, OOS > 1.5 gate
+  - Updated H205 note: still queued, not yet run
+  - References extended with Barroso 2025 and Du 2025
+
+Thinnest section identified: low-volatility.md (252 lines, last updated 2026-05-18, 7 weeks ago).
+Page grew to ~325 lines. Updated frontmatter date 2026-05-18 → 2026-07-18.

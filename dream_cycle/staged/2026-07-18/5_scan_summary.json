@@ -1,0 +1,122 @@
+{
+  "date": "2026-07-18",
+  "scan_type": "dream_cycle_nightly",
+  "wiki_expansion": {
+    "target_page": "wiki/trading/algorithms/low-volatility.md",
+    "rationale": "Thinnest algorithm page at 252 lines; last updated 2026-05-18 (7 weeks ago); missing 2025 research, ETF family cross-ref, and H413 queue entry",
+    "changes": [
+      "Added '2025-2026 Research Updates' section with Barroso et al. 2025 JFE and Du 2025 arXiv:2507.07107",
+      "Added 'Related: Low-Volatility ETF Rotation Family' table (H354/H361/H362/H363)",
+      "Added H413 hypothesis stub: BAB x lagged realized vol gate",
+      "Updated H205 note to clarify it was never run (still queued)",
+      "Extended References with Barroso 2025 and Du 2025",
+      "Updated frontmatter date 2026-05-18 → 2026-07-18"
+    ]
+  },
+  "scan_angles": [
+    {
+      "angle": "BAB/low-vol anomaly 2025 research",
+      "papers_found": [
+        {
+          "ref": "Barroso, Detzel & Maio (2025) JFE Vol. 165",
+          "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3882108",
+          "relevance": "HIGH",
+          "finding": "BAB Sharpe highest after LOW-vol months; institutional crowding mechanism; H413 concept",
+          "staged_as": "prop 1"
+        },
+        {
+          "ref": "Du (2025) arXiv:2507.07107",
+          "url": "https://arxiv.org/abs/2507.07107",
+          "relevance": "MEDIUM",
+          "finding": "Validates sector-neutral ranking + bias correction for cross-sectional factors; already noted in H411 context"
+        }
+      ]
+    },
+    {
+      "angle": "PEAD / post-earnings drift / text signals 2025-2026",
+      "papers_found": [
+        {
+          "ref": "Wu et al. (2025) arXiv:2509.24254",
+          "url": "https://arxiv.org/abs/2509.24254",
+          "relevance": "HIGH",
+          "finding": "Structured press release sections (guidance, commentary) as FinBERT input beats full-doc; soft info = hard EPS surprise; H174 upgrade candidate H414",
+          "staged_as": "prop 2"
+        },
+        {
+          "ref": "arXiv:2605.25894 (May 2026)",
+          "url": "https://arxiv.org/abs/2605.25894",
+          "relevance": "HIGH",
+          "finding": "Multi-modal fusion (text+EPS+price) ~65% accuracy on earnings announcement day direction; H415 candidate pre-filter for H174",
+          "staged_as": "prop 3"
+        },
+        {
+          "ref": "arXiv:2606.29734 EarningsInOne",
+          "url": "https://arxiv.org/abs/2606.29734",
+          "relevance": "ALREADY_STAGED",
+          "finding": "Already staged 2026-07-17 as prop 2 (H410)"
+        }
+      ]
+    },
+    {
+      "angle": "Cross-sectional momentum / factor models 2025-2026",
+      "papers_found": [
+        {
+          "ref": "arXiv:2606.24575 'Quant Convergence' (Jun 2026)",
+          "url": "https://arxiv.org/abs/2606.24575",
+          "relevance": "MEDIUM",
+          "finding": "Simple 1/P value + regime conditioning outperforms complex factor composites; validates H411 pure-value finding; H416 candidate",
+          "staged_as": "prop 4"
+        },
+        {
+          "ref": "arXiv:2510.11616 'Attention Factors for Stat Arb'",
+          "relevance": "ALREADY_STAGED",
+          "finding": "Already staged 2026-07-17 as prop 4"
+        }
+      ]
+    },
+    {
+      "angle": "Multi-agent LLM trading systems 2025-2026",
+      "papers_found": [
+        {
+          "ref": "arXiv:2412.20138 TradingAgents",
+          "url": "https://arxiv.org/abs/2412.20138",
+          "relevance": "MEDIUM",
+          "finding": "Multi-specialist LLM agents + debate + risk management; overlaps with H274 multi-agent PEAD upgrade already staged 2026-07-17"
+        },
+        {
+          "ref": "arXiv:2502.13165 HedgeAgents",
+          "relevance": "LOW",
+          "finding": "Balanced-aware multi-agent trading; similar to TradingAgents, less novel for our pipeline"
+        }
+      ]
+    },
+    {
+      "angle": "GitHub trending quant finance 2026",
+      "repos_found": [
+        {
+          "repo": "leoncuhk/awesome-quant-ai",
+          "url": "https://github.com/leoncuhk/awesome-quant-ai",
+          "relevance": "LOW",
+          "finding": "Curated list of AI quant strategies; useful reference but no specific actionable insight"
+        },
+        {
+          "repo": "PlaceNL2026/best-of-algorithmic-trading",
+          "url": "https://github.com/PlaceNL2026/best-of-algorithmic-trading",
+          "relevance": "LOW",
+          "finding": "Curated ranked list of algo trading repos; noted for awareness"
+        }
+      ]
+    }
+  ],
+  "proposals_staged": 4,
+  "hypothesis_queue_additions": ["H413 (BAB×vol-regime)", "H414 (structured press release FinBERT)", "H415 (multi-modal earnings day pre-filter)", "H416 (P/E P/B vs 1/P with drift gate)"],
+  "papers_reviewed": [
+    "Barroso, Detzel & Maio (2025) JFE Vol. 165 — volatility puzzle of BAB",
+    "Du (2025) arXiv:2507.07107 — ML bias correction cross-sectional",
+    "Wu et al. (2025) arXiv:2509.24254 — structured press release PEAD",
+    "arXiv:2605.25894 — multi-modal earnings day prediction",
+    "arXiv:2606.24575 — quant convergence value+regime",
+    "arXiv:2412.20138 TradingAgents — multi-agent LLM trading",
+    "arXiv:2602.07048 — LLM semantic filtering lead-lag"
+  ]
+}

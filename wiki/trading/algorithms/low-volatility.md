@@ -1,6 +1,6 @@
 ---
-updated: 2026-05-18
-status: research closed — H190–H193 completed; STORM family (H195–H196) closed; H205 queued (TOM overlay on BAB)
+updated: 2026-07-18
+status: research closed — H190–H193 completed; STORM family (H195–H196) closed; H205 queued (TOM overlay on BAB); H413 queued (BAB × lagged realized vol regime)
 ---
 
 # Low-Volatility Anomaly
@@ -174,6 +174,38 @@ Decay note: all figures pre-date massive ETF crowding. Current raw anomaly alpha
 
 ---
 
+## 2025–2026 Research Updates
+
+### Volatility Puzzle of BAB (Barroso, Detzel & Maio 2025 — JFE)
+
+**Paper**: "The Volatility Puzzle of the Beta Anomaly." *Journal of Financial Economics*, Vol. 165, 2025. [[SSRN]](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3882108) [[ScienceDirect]](https://www.sciencedirect.com/science/article/abs/pii/S0304405X25000029)
+
+Key finding: BAB Sharpe ratios are **highest after low-volatility months**, not high-volatility months — directly contradicting leverage-constraint theory which predicts the opposite.
+
+| Regime | BAB Performance |
+|--------|----------------|
+| Month follows below-median realized vol | High Sharpe, strong abnormal returns |
+| Month follows above-median realized vol | Weak Sharpe, near-zero alpha |
+
+**Mechanism**: Institutional investors shift demand from high- to low-beta stocks *as* volatility rises. This price impact is strongest during volatile periods, which depletes the BAB premium going *forward*. After volatility subsides, the spread is un-crowded and BAB alpha rebuilds.
+
+**Implication for production**: Conditioning H192-D (sector-neutral BAB) on *lagged* realized volatility regime could meaningfully improve OOS Sharpe. Proposed as **H413** in the hypothesis queue below.
+
+```python
+def bab_vol_regime_gate(market_returns: pd.Series, window: int = 21) -> pd.Series:
+    """True when trailing realized vol is below rolling median — favorable BAB regime."""
+    vol = market_returns.rolling(window).std() * np.sqrt(252)
+    return vol < vol.expanding().median()
+```
+
+### Du 2025 — ML Bias Correction for Cross-Sectional Factors (arXiv:2507.07107)
+
+**Paper**: "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction." [[arXiv]](https://arxiv.org/abs/2507.07107)
+
+Key finding: Sector-neutral cross-sectional ranking + bias correction are the two most impactful design choices for ML factor strategies on 500–1000 stock universes. Directly validates H192-D's sector-neutral BAB construction and the H411 pure-value design (gated 1/price rank).
+
+---
+
 ## Correlation with Other Strategies
 
 | Strategy | Expected Correlation | Notes |
@@ -224,6 +256,21 @@ Second satellite candidate: **H192-D** — best Sharpe (1.367) but only marginal
 
 H193 finding: H192-D and H181 pick almost entirely different stocks (only 14% overlap), but both are long-only so they share market beta and don't provide meaningful portfolio-level diversification when blended.
 
+### Related: Low-Volatility ETF Rotation Family
+
+The H192-D sector-neutral BAB (individual stocks) has a parallel ETF-universe research line:
+
+| H# | Strategy | OOS Sharpe | Notes |
+|----|----------|-----------|-------|
+| H354 | Low-vol ETF momentum rotation (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV) | 1.735 | CONFIRMED; 2022 +7.0% vs SPY -24% |
+| H361 | OB filter on H354 | 1.903 | CONFIRMED; SPY corr drops 0.854→0.621 |
+| H362 | H354 + macro regime gate (VIX<20) | 1.819 | CONFIRMED; MaxDD 29% improvement |
+| H363 | H354 blended with production portfolio | ~3.5 | NOT CONFIRMED as additive |
+
+These test the low-vol anomaly in the ETF universe rather than individual stocks. H192-D remains best on individual stocks; H361/H362 are the ETF-universe equivalents.
+
+---
+
 ## Hypothesis Queue
 
 All hypothesis families on the 30-stock large-cap universe are now **complete**. Research line closed 2026-05-13.
@@ -233,13 +280,35 @@ Future directions:
 - **Larger universe BAB**: test H192-D logic on S&P 500 (500 stocks, sector-neutral BAB) — different from H196 since H196 was STORM DL architecture, not simple BAB factor
 - **H191-A as second satellite**: Corr(H191-A, H181) OOS=0.342 — genuine diversification. Could deploy as 3rd strategy in paper trading alongside H181 and H112.
 
-### H205: TOM Calendar Overlay on BAB (QUEUED — backtest scheduled tonight 2026-05-18)
+### H205: TOM Calendar Overlay on BAB (QUEUED — backtest scheduled 2026-05-18, not yet run)
 
 Design: hold H192-D sector-neutral BAB positions only during TOM window (last 2 + first 2 trading days of month), hold BIL otherwise. Hypothesis: BAB alpha concentrates in TOM windows due to institutional cash flow demand pressure that temporarily elevates all stocks, with low-beta stocks benefiting disproportionately due to reduced leverage constraints. Confirm gate: OOS Sharpe > 1.5 (vs H192-D baseline 1.367).
 
 **Design validation (Du 2025, arXiv:2507.07107)**: Cross-sectional ML factor strategies on 500–1000 stocks benefit substantially from bias correction and cross-sectional sector-neutral ranking — directly validating the H205 design choice of using H192-D (sector-neutral BAB) as the base strategy. The TOM overlay adds calendar gating on top of an already well-designed signal. Additionally, QuantBuffet 2025 TOM-futures study showed 50%+ of momentum returns concentrate in the 3-day TOM window — the strongest precedent for H205's hypothesis that BAB alpha similarly concentrates in TOM windows. Economic mechanism: institutional cash flows at month-end temporarily boost all stocks; low-beta stocks benefit disproportionately from reduced leverage constraints during these windows.
 
 **Regime-conditional BAB risk flag** (ScienceDirect, May 2025 — evidence from Asia 1999-2021): BAB and related risk-based strategies work only during market downturns in Asian markets; "betting for risk" outperforms during upturns. While this is Asian evidence only (and H192-D is confirmed on US SPY-universe stocks), it motivates adding a regime-split diagnostic to the H205 backtest: check OOS Sharpe split by SPY above vs below 200-day MA. If H205 only works in bear regimes, reclassify as a risk-off overlay. This is a secondary precaution, not a disqualifier.
+
+### H413: BAB × Lagged Realized Volatility Gate (QUEUED — 2026-07-18)
+
+**Source**: Barroso, Detzel & Maio (2025) "The Volatility Puzzle of the Beta Anomaly," *Journal of Financial Economics* Vol. 165.
+
+**Design**: Condition H192-D sector-neutral BAB on lagged realized market volatility. Hold BAB positions only in months following *below-median* trailing 21-day SPY vol; route to BIL otherwise.
+
+**Hypothesis**: If BAB Sharpe is systematically higher following low-vol regimes (Barroso 2025), gating entry on lagged vol avoids the crowded post-spike periods and concentrates exposure in the alpha-rich low-vol-following months.
+
+**Confirm gate**: OOS Sharpe > 1.5 (vs H192-D baseline 1.367).
+
+**Key difference from H205**: H205 gates on *calendar* (TOM window), H413 gates on *statistical volatility regime*. These are orthogonal and could potentially be combined.
+
+```python
+# H413 gate: invest in BAB only after low-vol months
+spy = yf.download("SPY", start="2013-01-01", progress=False)["Close"]
+spy_ret = spy.pct_change()
+vol_21d = spy_ret.rolling(21).std() * np.sqrt(252)
+vol_regime = vol_21d < vol_21d.expanding().median()  # True = below-median = favorable
+# Resample to monthly; signal at month-end T gates position in month T+1
+gate = vol_regime.resample("ME").last().shift(1)  # lag 1 month to avoid look-ahead
+```
 
 ---
 
@@ -249,3 +318,5 @@ Design: hold H192-D sector-neutral BAB positions only during TOM window (last 2 
 - Frazzini, A. & Pedersen, L.H. (2014). "Betting Against Beta." *Journal of Financial Economics*. [[NBER WP]](https://www.nber.org/system/files/working_papers/w16601/w16601.pdf)
 - Baker, M., Bradley, B. & Wurgler, J. (2011). "Benchmarks as Limits to Arbitrage." *Financial Analysts Journal*.
 - Clarke, R., de Silva, H. & Thorley, S. (2006). "Minimum-Variance Portfolios in the US Equity Market." *Journal of Portfolio Management*.
+- Barroso, P., Detzel, A.L. & Maio, P.F. (2025). "The Volatility Puzzle of the Beta Anomaly." *Journal of Financial Economics*, Vol. 165. [[SSRN]](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3882108)
+- Du, Y. (2025). "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction." arXiv:2507.07107. [[arXiv]](https://arxiv.org/abs/2507.07107)

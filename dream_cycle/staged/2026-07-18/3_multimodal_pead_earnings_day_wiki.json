@@ -1,0 +1,14 @@
+{
+  "id": "multimodal-pead-earnings-day-2026-07-18",
+  "date": "2026-07-18",
+  "source": "arXiv:2605.25894 — May 2026",
+  "source_url": "https://arxiv.org/abs/2605.25894",
+  "title": "Wiki note: multi-modal deep learning for earnings announcement day prediction",
+  "rationale": "arXiv:2605.25894 'Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning' (May 2026) combines price-volume features, earnings surprise (EPS delta), and FinBERT text scores in a unified deep learning model to predict binary direction (up/down) on the announcement day. Unlike H174 which predicts post-announcement 20-day drift, this paper targets same-day direction — orthogonal application. Key finding: multi-modal fusion outperforms any single modality. Text + EPS surprise accuracy ~65% vs price-volume alone ~53%. This is an adjacent H174 application: could serve as a filter for H174 entries (only take long if multi-modal model also predicts up). Propose as H415 once H174 n≥20 gate is maintained. Wiki update: append a brief note to PEAD wiki page as upcoming research direction.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/pead.md",
+  "content": "\n## Multi-Modal Earnings Day Prediction (arXiv:2605.25894, May 2026)\n\n**Paper**: 'Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning.' arXiv:2605.25894. [[arXiv]](https://arxiv.org/abs/2605.25894)\n\n**Approach**: Fuses price-volume features, EPS surprise, and FinBERT text scores in a single deep learning model to predict binary up/down direction on the announcement day itself (not post-announcement drift).\n\n| Modality | Accuracy |\n|----------|----------|\n| Price-volume only | ~53% |\n| EPS surprise only | ~58% |\n| FinBERT text only | ~61% |\n| Multi-modal fusion | ~65% |\n\n**H415 candidate**: Use multi-modal announcement-day prediction as a pre-filter for H174 PEAD entries. Only enter drift trade if multi-modal model also predicts up-direction on announcement day. Expected: reduces n but improves WR above 81.8% current H174 gate. Design constraint: must maintain n≥20 OOS to be statistically valid.\n",
+  "action": "append",
+  "apply_status": "pending"
+}
