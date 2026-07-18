@@ -1,6 +1,6 @@
 ---
 created: 2026-06-12
-updated: 2026-06-12
+updated: 2026-07-18
 type: source_summary
 authors: Anna Yartseva (Birmingham City University)
 published: February 2025
@@ -163,6 +163,78 @@ For any growth-stock-heavy strategy:
 ...produces a confirmation-worthy alpha signal using H198/H217-style momentum execution.
 
 Data requirement: EDGAR XBRL (CompanyFacts) for FCF + EBITDA + asset history. Free 15-year history available (see `data-sources/edgar-fundamentals.md`).
+
+---
+
+## Methodology Detail (Full-Read Update — 2026-07-18)
+
+### 5-Step Modelling Sequence
+
+The paper follows a general-to-specific approach across five progressively refined models:
+
+1. **Standard FF5 pooled regression** — baseline; intercept = 83.9 (p=0.000), meaning FF5 leaves enormous unexplained alpha for this sample
+2. **Upgraded FF5 with fixed effects** — replaces market cap → TEV, B/M → P/E, operating profit → EBITDA margin; adds investment dummy; AIC/SBC improve substantially
+3. **Static panel (FE within estimator)** — Model 3 in Table 5; adds EV/sales, EV/EBITDA, earnings quality; all coefficients expected signs
+4. **Dynamic panel — difference GMM (Arellano-Bond)** — xtabond; lagged returns as RHS (momentum dynamics); N=464, T=25; Sargan/Hansen validated
+5. **Dynamic panel — system GMM (Blundell-Bond/Roodman)** — xtdpdsys + xtabond2; most efficient estimator for large-N, small-T panels; treats endogeneity fully
+
+### Key Modelling Decisions
+
+- **TEV beats market cap** as the size proxy in upgraded models
+- **EBITDA margin beats operating profit margin** in static models; **ROA beats EBITDA margin** in dynamic models (ROE and other margins NOT significant)
+- **FCF/P** beats P/E, P/B, and EV/EBITDA as a valuation predictor (P/E excluded due to negative-earnings distortion)
+- **150+ variables tested** across 7 groups (earnings growth, valuation, profitability, quality, capital allocation, solvency, technical); most eliminated via general-to-specific
+- Training: 2000–2022 (22 years); OOS evaluation: 2023–2024 (reserved)
+
+### Dynamic Variables That Became Significant
+
+| Variable | Enters Dynamic Models? | Notes |
+|---|---|---|
+| Lagged return (momentum) | Yes | Both positive (1m) and negative (3-6m) components |
+| FCF/P | Yes — largest coefficient | Granger-causes future returns |
+| B/M | Yes | Largest with FCF/P |
+| TEV (log) | Yes | Negative — size penalty |
+| ROA | Yes (replaces EBITDA margin) | Small positive coefficient |
+| Investment dummy (asset_growth > EBITDA_growth) | Yes | −4 to −11pp in dynamic; −22.8pp static |
+| Interest rate dummy (rising Fed rate) | Yes in GMM | Not significant in IV estimators; −8 to −12pp |
+| Asset growth rate | Yes in 3/7 specs | Small coefficient 0.08–0.24 |
+| Market return (S&P 500) | Yes | β range 0.54–0.93 = high CAPM beta |
+
+### Momentum Term Structure (Key New Finding)
+
+Multibagger stocks have a **distinct momentum structure**:
+- **1-month** momentum: POSITIVE coefficient (short-run continuation) — only significant in 1 model
+- **3-month** and **6-month** momentum: NEGATIVE coefficients (medium-term REVERSAL before re-rating)
+- **12-month high proximity**: NEGATIVE (closer to 52w high = lower next-year returns)
+
+This is **orthogonal to cross-sectional momentum** (H198, H217). Those signals rank stocks against each other; this finding is about *within-stock timing* — the best entry for a future multibagger is after a 3-6 month price decline, not after a 12-month breakout.
+
+### Out-of-Sample Forecasting (2023–2024)
+
+- Direction accuracy: **100% — never predicted up when market went down**
+- 2023 portfolio decline: correctly predicted
+- 2024 recovery: correctly predicted
+- **Consistent bias: models are overly pessimistic** (avg error = −6.63% across all OOS periods)
+- In rising-rate environments: error drops to −1.68% (models capture rate-sensitivity well)
+- In stable/falling rates: error rises to −9.92% (underestimates bull case)
+- Implication for investors: built-in margin of safety — models never over-optimistic
+
+### Factors That Were Tested and Found Insignificant
+
+- EPS growth (1-year, multi-year, 5-year CAGR — all forms)
+- Sales/EBITDA/FCF per share growth
+- P/E ratio (excluded due to negative earnings distortion)
+- Debt-to-equity, debt cover, EBITDA/interest
+- Altman Z-score
+- Dividend yield (significant in static, NOT in dynamic)
+- Share buybacks and new share issuance
+- R&D propensity (as % of levered FCF)
+- Analyst coverage (the "undiscovered gem" thesis is NOT supported)
+- Business cycle stage dummies
+
+### Dividends Observation
+
+Despite not being predictive, 58% of multibaggers paid dividends at entry (2009 cohort), growing to 78% by 2024. Multibagger stocks are NOT predominantly non-dividend-paying growth stocks — they provide both capital appreciation and dividend income.
 
 ---
 

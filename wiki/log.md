@@ -693,3 +693,7 @@ Pages updated: 1.
 
 Thinnest section identified: low-volatility.md (252 lines, last updated 2026-05-18, 7 weeks ago).
 Page grew to ~325 lines. Updated frontmatter date 2026-05-18 → 2026-07-18.
+
+## [2026-07-18] ingest | Yartseva (2025) — The Alchemy of Multibagger Stocks (full re-read)
+Pages updated: 1 (trading/sources/multibagger-yartseva-2025.md). Pages created: 0 (source page existed from 2026-06-12 partial ingest).
+Key update: added full methodology section — 5-step modelling sequence (FF5 → upgraded FF5 → static FE → difference GMM → system GMM), dynamic variable table, momentum term structure (1m positive, 3-6m negative), OOS forecasting results (2023-24 direction accuracy 100%), and full list of insignificant variables. FCF/P + B/M confirmed as dominant. EPS growth insignificant in all forms.

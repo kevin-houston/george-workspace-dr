@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-17
+updated: 2026-07-18
 sources_indexed: 4
 pages: 215
 ---
@@ -43,7 +43,7 @@ When answering a query:
 - [IBS Mean-Reversion](trading/algorithms/ibs-mean-reversion.md) — Internal Bar Strength daily mean-reversion on tech ETFs (XLK/SMH/IGV); H062–H112 confirmed; OOS Sharpe 2.129 (2021–2026); 30% production portfolio weight ← new 2026-05-28
 - [Market Microstructure & HFT](trading/algorithms/market-microstructure.md) — Stanford MS&E 448; order book dynamics, market impact, adverse selection, HFT strategies; Avellaneda-Stoikov MM model; context for execution cost modeling ← new 2026-05-25
 - [Strategic Trading Game — Kearns & Shi (2025)](trading/sources/kearns-shi-2025-strategic-trading.md) — arXiv:2502.07606; N-player execution game; temporary vs permanent market impact; FTPL for CCE; κ=0→potential game (spread orders), κ=2→zero-sum (front-run); relevant for institutional-scale execution ← new 2026-06-13
-- [The Alchemy of Multibagger Stocks — Yartseva (2025)](trading/sources/multibagger-yartseva-2025.md) — CAFÉ WP No. 33; FCF yield dominant for 10x returns; near-52w-low entry signal ← new 2026-06-12
+- [The Alchemy of Multibagger Stocks — Yartseva (2025)](trading/sources/multibagger-yartseva-2025.md) — CAFÉ WP No. 33; FCF yield dominant for 10x returns; near-52w-low entry signal; dynamic GMM panel; EPS growth NOT significant; momentum inverted at 3-6m ← updated 2026-07-18
 - [Technical Analysis Patterns](trading/algorithms/technical-analysis-patterns.md) — H234 inside-bar coiled-spring (OOS Sharpe 1.770, WR 63.9%); NR7/NR4 narrow range; TA feature library (MACD/RSI/Stochastic/ROC) for H233/H235; pandas-ta vs TA-Lib guide ← new 2026-05-29
 - [Behavioral Finance Signals](trading/algorithms/behavioral-finance-signals.md) — 52-week high anchoring (H291 NOT CONFIRMED); return seasonality Jul/Nov standout months (H292 CONFIRMED OOS 0.970); disposition effect CGO; lottery stock MAX factor ← new 2026-06-14
 - [Market Timing Overlays](trading/algorithms/market-timing-overlays.md) — VIX term structure (H296 CONFIRMED OOS 1.116); SPY 200d MA (H301 Variant D best, +27.4% Sharpe vs H026); yield curve (H300 NOT CONFIRMED); breadth (H299 NOT CONFIRMED); overlay vs standalone trade-off ← new 2026-06-15
