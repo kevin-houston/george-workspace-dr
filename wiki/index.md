@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-18
+updated: 2026-07-19
 sources_indexed: 4
-pages: 217
+pages: 219
 ---
 
 # Wiki Index
@@ -28,6 +28,7 @@ When answering a query:
 - [Momentum Strategies](trading/algorithms/momentum-strategies.md) — H026/H149 ETF rotation production (382×, Sharpe 3.007); H198 CONFIRMED 6-1m (OOS Sharpe 1.174); H215 CONFIRMED alpha101 (OOS 1.321); H217 CONFIRMED median alpha101 (OOS 1.559); H220 CONFIRMED ETF TSMOM (OOS 0.961); H202/H218/H219 NOT CONFIRMED
 - [Pairs Trading / Stat Arb](trading/algorithms/pairs-trading.md) — ETF pairs (H152–H160) ALL NOT CONFIRMED; family EXHAUSTED at daily frequency; cointegration breaks OOS for all tested pairs
 - [Event-Driven Strategies](trading/algorithms/event-driven.md) — PEAD: H163 CONFIRMED (FinBERT NLP on 8-K press releases, 80.8% OOS win rate), H174 CONFIRMED (dual filter deployed), H161/H162 PARTIAL; H170 0DTE iron condor partial sim
+- [PEAD — Post-Earnings Announcement Drift](trading/algorithms/pead.md) — comprehensive PEAD reference: H174 confirmed pipeline (FinBERT ≥ 0.18 + EPS surprise ≥ 2%, OOS WR=81.8%); structured press release parsing (Wu et al. 2025 section-weighting); multi-modal pre-filter design (H414/H415 stubs) ← new 2026-07-18
 - [Short-Term Reversal](trading/algorithms/short-term-reversal.md) — industry-adjusted reversal REV^IN; 0.53%/month globally; SSRN:6630998; H181 CONFIRMED (OOS Sharpe 1.138)
 - [Low-Volatility Anomaly](trading/algorithms/low-volatility.md) — H190–H196 completed; BAB H192-D sector-neutral CONFIRMED (OOS Sharpe 1.367); Low-Vol H191-C hybrid CONFIRMED (Sharpe 1.110); STORM H195 CONFIRMED (0.963); scale test H196 NOT CONFIRMED; research closed 2026-05-13; H205 TOM-BAB overlay queued
 - [Options Income Strategies](trading/algorithms/options-income-strategies.md) — iron condor, CSP/wheel, covered calls, VRP harvesting; win rates, returns, LEAN implementation notes
@@ -137,7 +138,8 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H376; H373 NOT CONFIRMED (MAX tilt H198 — tech universe kills MAX/momentum heterogeneity); H376 CONFIRMED (MAX composite H198 top-6 EW — 6-0m no-skip OOS 3.120/MaxDD -8.4%/0 neg yrs = major finding); H370 LambdaRankIC stub; H371 HMM+RL stub; production portfolio H041a/H026/H045/IBS — OOS Sharpe 4.158
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H416; H411 CONFIRMED (pure value 1/price × 20d drift gate, OOS Sharpe 4.825, new record 2026-07-17); H413 NOT CONFIRMED (BAB × lagged vol gate, best OOS 1.173); H416 CONFIRMED (drift gate robustness — top-3 picks → OOS Sharpe 5.342, NEW H-SERIES RECORD 2026-07-18); production portfolio H041a/H026/H045/IBS — OOS Sharpe 4.158
+- [Regime-Conditional Distributional Strategy Evaluation](trading/backtesting/regime-conditional-strategy-eval.md) — Ozimek (arXiv:2606.31251); GAMLSS/ZAGA distributional comparison conditioned on regime covariates; replaces point-metric Sharpe comparison with full distribution; identifies regime-robustness vs regime-opportunism trade-off ← new 2026-07-17
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
@@ -196,7 +198,10 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-07-17](trading/research-log/2026-07-17.md) — wiki: factor-momentum-style-rotation.md expanded (IMOM discovery, JPM 2025 validation, H406 design stub); dream cycle scan: H409 drift-regime stub, H410 EarningsInOne ECT layer, Moira/Attention pairs wiki updates, H412 cash-overlay stub ← new 2026-07-17
 - [Research Log 2026-07-16](trading/research-log/2026-07-16.md) — dream cycle scan: XALPHA memory-driven alpha discovery (arXiv:2607.08332, H407 stub), Agentic Trading Survey (arXiv:2605.19337), Agentic Earnings Retrieval PEAD (arXiv:2507.07906, H408 stub); DR wiki expanded with runbook-2026.md ← new 2026-07-16
+- [Research Log 2026-07-15](trading/research-log/2026-07-15.md) — wiki: llm-alpha-validation.md expanded (P1-P6 reporting protocol, Kong et al. 5-bias framework, TradingAgents/QuantAgent audit evidence, FINSABER); created anomaly-decay-chen-welch-2026.md + openfinGym-2026.md ← new 2026-07-15
+- [Research Log 2026-07-14](trading/research-log/2026-07-14.md) — wiki: factor-models.md expanded (IMOM theory, spectral memory decomposition, H398 results table, correlation management); dream cycle: H400 SAE-FiRE PEAD stub, H401 attention stat-arb, HedgeAgents wiki update ← new 2026-07-14
 - [Research Log 2026-07-12](trading/research-log/2026-07-12.md) — wiki: market-microstructure.md expanded (FRI decomposition, OFI cross-sectional predictor); 5 dream cycle proposals applied: H393 Amihud ILLIQ stub, AI alpha decay, MadEvolve/EFS, FRI lag-1 reversal, prediction market volatility model ← new 2026-07-12
 - [Research Log 2026-07-09](trading/research-log/2026-07-09.md) — wiki: bilevel-autoresearch.md new (arXiv:2603.23420; Level 2 mechanism injection 5×; dream cycle connection); 5 dream cycle proposals applied: microstructure trend demise, fast/slow PEAD timing, PM dataset, reproducibility crisis, H392 E2E Transformer stub ← new 2026-07-09
 - [Research Log 2026-07-08](trading/research-log/2026-07-08.md) — wiki: auto-alpha-discovery.md expanded (Methods 7/8/9: Alpha191 LASSO, AlphaLogics, FactorEngine + H383/H384 stubs); llm-alpha-mining-systems-2026.md committed; dream cycle: H385 Illusion Momentum staged (Iwanaga & Hirose PBFJ 2026; arithmetic-geometric gap signal, US large-cap confirmed)

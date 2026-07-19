@@ -8,7 +8,7 @@ status: active — H163 CONFIRMED (FinBERT NLP); H161/H162 PARTIAL CONFIRMED; H1
 
 Systematic exploitation of price drifts triggered by discrete corporate events: earnings releases, dividend announcements, guidance changes, index additions. The edge comes from persistent *under-reaction* — prices adjust slowly, not instantly.
 
-**Related pages**: [Options Income Strategies](options-income-strategies.md) — H162 covered-call ex-div | [Hypothesis Log](../backtesting/hypothesis-log.md) | [Momentum Strategies](momentum-strategies.md) | [NLP & Alternative Data](../tools/nlp-alternative-data.md) | [Machine Learning for Trading](../tools/ml-for-trading.md)
+**Related pages**: [PEAD Comprehensive Reference](pead.md) | [Options Income Strategies](options-income-strategies.md) — H162 covered-call ex-div | [Hypothesis Log](../backtesting/hypothesis-log.md) | [Momentum Strategies](momentum-strategies.md) | [NLP & Alternative Data](../tools/nlp-alternative-data.md) | [Machine Learning for Trading](../tools/ml-for-trading.md)
 
 ---
 

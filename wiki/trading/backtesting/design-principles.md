@@ -6,7 +6,7 @@ updated: 2026-06-16
 
 These constraints must be baked into the backtesting framework from the start, not bolted on later. Sections 1–3 are prerequisites; sections 4–7 are derived from running 163+ hypotheses through this system.
 
-**Related pages**: [Hypothesis Log](hypothesis-log.md) | [Event-Driven Strategies](../algorithms/event-driven.md) | [Momentum Strategies](../algorithms/momentum-strategies.md) | [Signal Half-Life & Alpha Decay](signal-halflife.md) | [Survivorship Bias & Universe Construction](survivorship-bias.md)
+**Related pages**: [Hypothesis Log](hypothesis-log.md) | [Regime-Conditional Strategy Evaluation](regime-conditional-strategy-eval.md) | [Event-Driven Strategies](../algorithms/event-driven.md) | [Momentum Strategies](../algorithms/momentum-strategies.md) | [Signal Half-Life & Alpha Decay](signal-halflife.md) | [Survivorship Bias & Universe Construction](survivorship-bias.md)
 
 ---
 

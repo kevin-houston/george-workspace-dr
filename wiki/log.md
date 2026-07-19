@@ -724,3 +724,21 @@ Page grew to ~325 lines. Updated frontmatter date 2026-05-18 → 2026-07-18.
 ## [2026-07-18] ingest | Yartseva (2025) — The Alchemy of Multibagger Stocks (full re-read)
 Pages updated: 1 (trading/sources/multibagger-yartseva-2025.md). Pages created: 0 (source page existed from 2026-06-12 partial ingest).
 Key update: added full methodology section — 5-step modelling sequence (FF5 → upgraded FF5 → static FE → difference GMM → system GMM), dynamic variable table, momentum term structure (1m positive, 3-6m negative), OOS forecasting results (2023-24 direction accuracy 100%), and full list of insignificant variables. FCF/P + B/M confirmed as dominant. EPS growth insignificant in all forms.
+
+## [2026-07-19] lint | Health check
+Issues found: 9. Auto-fixed: 8. Needs review: 1.
+
+**Auto-fixed:**
+1. INDEX GAP: Added `trading/algorithms/pead.md` to index under Event-Driven Strategies (new 2026-07-18).
+2. INDEX GAP: Added `trading/backtesting/regime-conditional-strategy-eval.md` to index under Backtesting (new 2026-07-17).
+3. INDEX GAP: Added research log 2026-07-17 to index.
+4. INDEX GAP: Added research log 2026-07-15 to index.
+5. INDEX GAP: Added research log 2026-07-14 to index.
+6. STALE: Updated Hypothesis Log index entry from "H001–H376 / OOS Sharpe 4.158" to "H001–H416 / OOS Sharpe 5.342" (H416 CONFIRMED 2026-07-18).
+7. ORPHAN: Added inbound link to `pead.md` from `event-driven.md` Related pages.
+8. ORPHAN: Added inbound link to `regime-conditional-strategy-eval.md` from `design-principles.md` Related pages.
+
+**Needs review:**
+1. DUPLICATE: `trading/tools/quant-mind.md` (added 2026-06-10, unindexed) vs `tools/quant-mind-notes.md` (added 2026-07-04, indexed). Same tool covered twice in different directories. Recommend reviewing and merging, or adding the trading/tools version to the index with a note.
+2. POTENTIAL CONTRADICTION: `low-volatility.md` cites H192-D OOS Sharpe 1.367; H413's baseline run shows 1.167. Likely explained by different DATA_END dates (H192-D original used a different OOS end date). Flag for H192-D author review.
+3. STALE FLAG: `ai-industry/model-landscape-2026.md` carries internal "(page needs refresh)" note. AI model landscape is volatile; page covers data as of 2026-06. Recommend a refresh before any model-selection decisions.
