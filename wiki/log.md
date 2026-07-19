@@ -2,7 +2,34 @@
 
 Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
-Last scan completed: 2026-07-17 (4 staged proposals, 2 new pages, Impact Investing section expanded)
+Last scan completed: 2026-07-18 (3 new staged proposals (prop6–prop8), 2 new wiki pages, Prediction Markets + Concepts sections expanded)
+
+---
+
+## [2026-07-18] scan | Dream cycle nightly research scan
+
+**Topics searched:** LLM prediction market forecasting methodology; supply chain textual signals and cross-sectional returns; neural surrogate options pricing; multi-agent trading RL; momentum factor + value hybrid models.
+
+**Papers found and evaluated:**
+- arXiv:2607.14051 — Hindcast: Replaying Prediction Markets to Evaluate LLM Forecasters (Jul 15 2026) → HIGH relevance, new page
+- arXiv:2607.01661 — InfoDelphi: Diverse Evidence, Better Forecasts via Multi-Agent Deliberation Under Information Asymmetry (Jul 2 2026) → HIGH relevance, combined with Hindcast into new page
+- arXiv:2606.29290 — Supply Chain Propagation of Textual Signals: LLM Embeddings and Cross-Sectional Return Predictability (Jun 28 2026) → HIGH relevance, new concepts page
+- arXiv:2606.15502 — Fast, Reliable, and Error-Bounded Option Pricing with Pretrained Neural Networks: GJR-GARCH Study (Jun 13 2026) → MEDIUM relevance, wiki_update proposal staged
+- arXiv:2606.24575 — Quant Convergence: Bridging Classical Value Investing and Modern Factor Models (Jun 23 2026) → already noted in H411 addendum from prior scan
+- arXiv:2607.09641 — Semantic Pareto-DQN for Financial Anomaly Detection (Jul 10 2026) → LOW relevance (fraud detection not trading alpha)
+
+**Pages created (2):**
+- wiki/trading/prediction-markets/llm-forecasting-methodology.md — Hindcast + InfoDelphi synthesis; H185 Phase 2 evidence partitioning design implication
+- wiki/concepts/supply-chain-textual-signals.md — network-augmented FinBERT signals; H419 stub concept; Bloomberg SPLC barrier analysis
+
+**Staged proposals (3 new, props 6–8):**
+- prop6: llm-forecasting-methodology new page (low risk)
+- prop7: supply-chain-textual-signals new page (medium risk — new file)
+- prop8: options-income-strategies.md wiki_update with neural surrogate pricing section (low risk)
+
+**Section targeted for expansion:** Prediction Markets (added 1 page, now 8 pages) and Concepts (added 1 page, now 8 pages).
+
+**Index updated:** pages 215 → 217. Two new index entries added.
 
 ---
 

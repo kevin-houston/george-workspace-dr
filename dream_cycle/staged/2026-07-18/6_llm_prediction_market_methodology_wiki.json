@@ -1,0 +1,12 @@
+{
+  "proposal_id": "prop6",
+  "date": "2026-07-18",
+  "title": "LLM Forecasting Methodology for Prediction Markets (Hindcast + InfoDelphi)",
+  "type": "new_page",
+  "risk": "medium",
+  "target": "wiki/trading/prediction-markets/llm-forecasting-methodology.md",
+  "source": "arXiv:2607.14051 (Hindcast, Jul 15 2026) + arXiv:2607.01661 (InfoDelphi, Jul 2 2026)",
+  "hypothesis": null,
+  "apply_status": "pending",
+  "content": "File already written at wiki/trading/prediction-markets/llm-forecasting-methodology.md during dream cycle scan. Covers: (1) Hindcast temporal standpoint protocol closing two evaluation leakage channels (retrieval and training cutoff drift); (2) InfoDelphi information asymmetry framework where designed private evidence partitioning eliminates deliberation collapse; (3) PolyGym results: 12-18% Brier score improvement vs single-agent. Key action item: H185 Phase 2 PolySwarm design should implement InfoDelphi-style evidence partitioning (news feeds to agent A, social media to B, base rates to C, quantitative indicators to D) before deployment. Index and log updated."
+}

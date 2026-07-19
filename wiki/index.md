@@ -1,7 +1,7 @@
 ---
 updated: 2026-07-18
 sources_indexed: 4
-pages: 215
+pages: 217
 ---
 
 # Wiki Index
@@ -159,6 +159,7 @@ When answering a query:
 - [AI Model Benchmarks on Prediction Markets](trading/prediction-markets/ai-model-benchmarks.md) — Prediction Arena (arXiv:2604.07355) + PolyBench (every LLM negative return; structured data is differentiator) + PolySwarm (50-agent swarm; H185 Phase 2 analog) + PredictionMarketBench (Kalshi LOB replay; Bollinger +1.67% vs GPT-4.1-nano −2.77%; fee management dominates) ← updated 2026-06-28
 - [Prediction Market Automated Pipeline](trading/prediction-markets/automated-pipeline.md) — operational guide for live Kalshi/Polymarket pipeline; APScheduler; George infrastructure; companion to algorithmic-strategies.md and nowcasting-playbook.md ← new 2026-06-26
 - [Superforecasting Methods](trading/prediction-markets/superforecasting-methods.md) — Tetlock GJP; reference class forecasting; Bayesian updating; Brier/ECE calibration; LLM benchmarks (KalshiBench ECE 0.120 best); isotonic recalibration ← new 2026-06-11
+- [LLM Forecasting Methodology for Prediction Markets](trading/prediction-markets/llm-forecasting-methodology.md) — Hindcast (arXiv:2607.14051, Jul 2026): temporal standpoint protocol closes retrieval + training cutoff leaks in PM evaluation; InfoDelphi (arXiv:2607.01661, Jul 2026): designed evidence asymmetry eliminates deliberation collapse (+12-18% Brier score vs single-agent on PolyGym); H185 PolySwarm evidence partitioning design ← new 2026-07-18
 
 **Research Logs**
 - [Research Log 2026-04-24](trading/research-log/2026-04-24.md) — session 1: tools and data sources
@@ -249,6 +250,7 @@ When answering a query:
 - [Impact Investing Market Landscape 2025](concepts/impact-investing-market-2025.md) — $1.57T AUM, 21% CAGR, pension funds 35% share (47%/yr), GIIN 2025 State of the Market; ESG 37% of new products; sector focus: financial inclusion, healthcare, housing, clean energy ← new 2026-07-08
 - [Impact Measurement Standards](concepts/impact-measurement-standards.md) — IRIS+ 2000+ metrics, Core Metrics Sets; IMP 5 dimensions (What/Who/How Much/Contribution/Risk); EU SFDR Art. 8/9, UK SDR labels; additionality challenge; analogs to quant backtesting rigor ← new 2026-07-08
 - [ESG Factor Integration](concepts/esg-factor-integration.md) — systematic ESG signals in quant portfolios; controversy signals as PEAD analog (-2% drift 60d); ESG momentum factor Sharpe ~0.5; regime-dependence (hurt 2022); free data path via SEC EDGAR NLP + CDP; bridge to H163 FinBERT pipeline ← new 2026-07-17
+- [Supply Chain Propagation of Textual Signals](concepts/supply-chain-textual-signals.md) — arXiv:2606.29290; FinBERT 10-K embeddings alone not predictive; network-augmented via Bloomberg SPLC supply chain → Sharpe 0.86, FF5-alpha 7.27%/yr (t=2.30); proposed H419 PEAD secondary watchlist via supply chain linkages ← new 2026-07-18
 
 **People**
 - [Yasemin Saltuk](people/yasemin-saltuk.md) — J.P. Morgan Social Finance lead researcher; impact investing research series

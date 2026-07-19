@@ -1,0 +1,12 @@
+{
+  "proposal_id": "prop7",
+  "date": "2026-07-18",
+  "title": "Supply Chain Propagation of Textual Signals — LLM Embeddings and Cross-Sectional Returns",
+  "type": "new_page",
+  "risk": "medium",
+  "target": "wiki/concepts/supply-chain-textual-signals.md",
+  "source": "arXiv:2606.29290 (Yılkı, Jun 28 2026)",
+  "hypothesis": null,
+  "apply_status": "pending",
+  "content": "File already written at wiki/concepts/supply-chain-textual-signals.md during dream cycle scan. Key finding: FinBERT embeddings of 10-K MD&A sections alone are not predictive cross-sectionally (t < 2.0), but network-augmented embeddings propagated through supply chain linkages generate Sharpe 0.86 and FF5-alpha 7.27%/yr (t=2.30) on 255 S&P500 firms 2011-2025. Barrier: Bloomberg SPLC data required for full replication. Proposed H419 concept: supply-chain-augmented PEAD watchlist expansion — after H174 qualifying event, identify top-3 downstream customers and score their 10-K embeddings for secondary drift signals. Practical path using free EDGAR supplier disclosures described. Index and log updated."
+}
