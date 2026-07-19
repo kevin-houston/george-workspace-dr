@@ -1,0 +1,85 @@
+{
+  "hypothesis": "H413",
+  "gate": 1.5,
+  "baseline_oos_sharpe": 1.167,
+  "confirmed": false,
+  "confirmed_variants": [],
+  "results": {
+    "var_A": {
+      "is": {
+        "sharpe": 1.226,
+        "maxdd": -0.069,
+        "cagr": 0.103,
+        "neg_yrs": 1,
+        "n": 96
+      },
+      "oos": {
+        "sharpe": 1.084,
+        "maxdd": -0.044,
+        "cagr": 0.073,
+        "neg_yrs": 0,
+        "n": 66
+      },
+      "oos_cash_pct": 0.636,
+      "desc": "21d vol < expanding median (lagged)",
+      "beats_gate": false
+    },
+    "var_B": {
+      "is": {
+        "sharpe": 0.993,
+        "maxdd": -0.098,
+        "cagr": 0.092,
+        "neg_yrs": 3,
+        "n": 96
+      },
+      "oos": {
+        "sharpe": 1.173,
+        "maxdd": -0.079,
+        "cagr": 0.09,
+        "neg_yrs": 1,
+        "n": 66
+      },
+      "oos_cash_pct": 0.606,
+      "desc": "63d vol < expanding median (lagged)",
+      "beats_gate": false
+    },
+    "var_C": {
+      "is": {
+        "sharpe": 1.226,
+        "maxdd": -0.069,
+        "cagr": 0.103,
+        "neg_yrs": 1,
+        "n": 96
+      },
+      "oos": {
+        "sharpe": 1.084,
+        "maxdd": -0.044,
+        "cagr": 0.073,
+        "neg_yrs": 0,
+        "n": 66
+      },
+      "oos_cash_pct": 0.636,
+      "desc": "21d vol < median AND SPY > 200d MA",
+      "beats_gate": false
+    },
+    "var_D": {
+      "is": {
+        "sharpe": 1.035,
+        "maxdd": -0.078,
+        "cagr": 0.08,
+        "neg_yrs": 1,
+        "n": 96
+      },
+      "oos": {
+        "sharpe": 0.897,
+        "maxdd": -0.029,
+        "cagr": 0.046,
+        "neg_yrs": 1,
+        "n": 66
+      },
+      "oos_cash_pct": 0.758,
+      "desc": "21d vol < 40th pct (stricter threshold)",
+      "beats_gate": false
+    }
+  }
+}

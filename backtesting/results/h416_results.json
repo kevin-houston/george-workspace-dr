@@ -1,0 +1,182 @@
+{
+  "hypothesis": "H416",
+  "gate": 4.825,
+  "h411_baseline": 4.825,
+  "confirmed": true,
+  "confirmed_variants": [
+    "I"
+  ],
+  "results": {
+    "var_A": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.94,
+        "maxdd": -0.01,
+        "cagr": 1.076,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.825,
+        "maxdd": -0.012,
+        "cagr": 1.061,
+        "neg_yrs": 0
+      },
+      "desc": "20d drift/stock > 0.60, top-2 [H411 Var B replication]",
+      "top_n": 2,
+      "beats": false
+    },
+    "var_B": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.821,
+        "maxdd": -0.17,
+        "cagr": 0.848,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.197,
+        "maxdd": -0.065,
+        "cagr": 0.696,
+        "neg_yrs": 0
+      },
+      "desc": "10d drift/stock > 0.60, top-2",
+      "top_n": 2,
+      "beats": false
+    },
+    "var_C": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.626,
+        "maxdd": -0.049,
+        "cagr": 0.948,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.58,
+        "maxdd": -0.03,
+        "cagr": 0.914,
+        "neg_yrs": 0
+      },
+      "desc": "30d drift/stock > 0.60, top-2",
+      "top_n": 2,
+      "beats": false
+    },
+    "var_D": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.127,
+        "maxdd": -0.022,
+        "cagr": 0.809,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.378,
+        "maxdd": -0.013,
+        "cagr": 1.027,
+        "neg_yrs": 0
+      },
+      "desc": "40d drift/stock > 0.60, top-2",
+      "top_n": 2,
+      "beats": false
+    },
+    "var_E": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.994,
+        "maxdd": -0.033,
+        "cagr": 1.079,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.308,
+        "maxdd": -0.041,
+        "cagr": 0.84,
+        "neg_yrs": 0
+      },
+      "desc": "20d drift/stock > 0.55, top-2 [less strict]",
+      "top_n": 2,
+      "beats": false
+    },
+    "var_F": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.775,
+        "maxdd": -0.011,
+        "cagr": 0.922,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.202,
+        "maxdd": -0.117,
+        "cagr": 1.11,
+        "neg_yrs": 0
+      },
+      "desc": "20d drift/stock > 0.65, top-2 [more strict]",
+      "top_n": 2,
+      "beats": false
+    },
+    "var_G": {
+      "is": {
+        "n": 96,
+        "sharpe": 0.968,
+        "maxdd": -0.086,
+        "cagr": 0.167,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 1.317,
+        "maxdd": -0.031,
+        "cagr": 0.141,
+        "neg_yrs": 0
+      },
+      "desc": "SPY 20d drift > 0.60 (market-level gate), top-2",
+      "top_n": 2,
+      "beats": false
+    },
+    "var_H": {
+      "is": {
+        "n": 96,
+        "sharpe": 3.829,
+        "maxdd": -0.01,
+        "cagr": 1.015,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.912,
+        "maxdd": -0.009,
+        "cagr": 0.905,
+        "neg_yrs": 0
+      },
+      "desc": "20d drift/stock > 0.60 AND SPY > 200d MA, top-2",
+      "top_n": 2,
+      "beats": false
+    },
+    "var_I": {
+      "is": {
+        "n": 96,
+        "sharpe": 4.577,
+        "maxdd": 0.0,
+        "cagr": 0.972,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 5.342,
+        "maxdd": -0.012,
+        "cagr": 1.105,
+        "neg_yrs": 0
+      },
+      "desc": "20d drift/stock > 0.60, top-3",
+      "top_n": 3,
+      "beats": true
+    }
+  }
+}
