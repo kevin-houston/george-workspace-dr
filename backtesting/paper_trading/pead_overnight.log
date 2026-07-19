@@ -582,3 +582,15 @@
 [2026-07-17 23:13:26] Candidates for tomorrow: none
 [2026-07-17 23:13:26] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-07-17 23:13:26] Overnight pass complete.
+[2026-07-18 23:01:27] =======================================================
+[2026-07-18 23:01:27] PEAD overnight pass starting
+[2026-07-18 23:01:27] Scanning earnings calendar…
+[2026-07-18 23:01:49]   Tickers with recent earnings: ['UNH']
+[2026-07-18 23:01:49]   Fetching 8-K for UNH…
+[2026-07-18 23:02:31]     UNH: 4763 chars
+[2026-07-18 23:04:44]   Loading ProsusAI/finbert…
+[2026-07-18 23:06:36]   UNH: score=-0.028  surprise=-0.143
+[2026-07-18 23:06:36]   ✗ UNH filtered out (score=-0.028, surprise=-0.1429)
+[2026-07-18 23:06:36] Candidates for tomorrow: none
+[2026-07-18 23:06:57] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-18 23:06:57] Overnight pass complete.

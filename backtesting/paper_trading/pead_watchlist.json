@@ -1,11 +1,7 @@
 {
-  "date": "2026-07-18",
+  "date": "2026-07-19",
   "candidates": [],
   "scores": {
-    "JNJ": {
-      "score": -0.0224,
-      "surprise": null
-    },
     "UNH": {
       "score": -0.0278,
       "surprise": -0.1429
