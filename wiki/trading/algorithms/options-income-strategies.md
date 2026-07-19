@@ -435,3 +435,44 @@ Quick-reference booklet covering all major option structures. Organized by two c
 **Precision** (strategies 13–25): Long/Short Butterfly, Long/Short Iron Butterfly, Long/Short Straddle, Long/Short Strangle, Ratio Call/Put Spread, Call/Put Ratio Backspread, Box/Conversion
 
 Each entry covers: when to use, profit/loss characteristics, decay characteristics, synthetics, and a pattern evolution diagram (4-month / 1-month / expiration P&L lines). Key to diagrams: purple = 4 months to expiry, gold = 1 month, green = at expiration.
+
+---
+
+## Neural Surrogate Options Pricing — Error-Bounded Fast Inference
+
+**Source:** arXiv:2606.15502 — 'Fast, Reliable, and Error-Bounded Option Pricing with Pretrained Neural Networks: A GJR-GARCH Study' by Thijs van den Berg (Jun 2026)
+
+This paper provides a principled recipe for replacing slow Monte Carlo option pricing with neural surrogates that have *quantified error guarantees* — solving the reliability problem that blocks neural options pricing from production use.
+
+### The Problem
+Many realistic volatility models (GJR-GARCH, Heston with stochastic vol-of-vol, rough volatility) have no closed-form option price. Monte Carlo simulation is accurate but slow (seconds per option, not microseconds). Prior neural surrogate approaches are fast but offer no error bounds — if the surrogate is wrong, you don't know by how much.
+
+### The Solution: Mixture Density Network + Distribution-Free Error Bound
+
+**Architecture:**
+- A **Mixture Density Network (MDN)** maps (model parameters, maturity) → terminal return density as a Gaussian mixture
+- Option prices, implied volatilities, and Greeks all follow in **closed form** from this Gaussian mixture (no Monte Carlo needed at inference)
+- The CDF-matching loss aligns training to pricing error, not density fitting per se
+
+**Error bound:**
+- A distribution-free Monte Carlo noise floor of `√(1/(6N))` quantifies the best accuracy achievable at a given simulation budget N
+- The out-of-sample error is decomposed into 4 controllable terms: approximation error, estimation error, training noise, and Monte Carlo noise floor
+- This means you can certify 'the surrogate is within X% of Monte Carlo at N=10,000 samples'
+
+**GJR-GARCH validation:**
+- Out-of-sample CDF error: **1.4 × 10⁻⁴**, within 10% of the theoretical noise floor
+- Pricing speed: **few microseconds per option on a single CPU core** (< 1 µs on GPU)
+- Comparable accuracy to 100,000-path Monte Carlo, at a 1,000× speed improvement
+
+### Relevance to Options Pipeline
+
+| Use case | Application |
+|---|---|
+| H309 dispersion trading | Fast Greeks calculation for many component legs |
+| Iron condor IV surface fitting | GJR-GARCH surrogate for smile fitting instead of flat BSM |
+| Backtesting methodology | Replace Tier 0 (BSM) with Tier 0.5 (MDN-GJR) for free, accurate pricing |
+| H266 VRP harvesting | Faster delta-hedged straddle P&L simulation with skew |
+
+**Key constraint**: The surrogate must be retrained when model parameters shift significantly (e.g., after a vol regime change). Retraining time is not reported but is bounded by the Monte Carlo simulation budget.
+
+**Code**: Not yet released publicly (paper is June 2026). The MDN architecture is standard — PyTorch implementation is ~200 lines using `torch.distributions.MixtureSameFamily`.
