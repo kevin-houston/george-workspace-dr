@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-17 (factor-momentum-style-rotation.md major expansion: IMOM discovery H395/H398A OOS 4.068, H376 6-0m no-skip, JPM 2025 Cakici et al. only ML alpha, H406 design stub; research log 2026-07-17; H407+H408 NOT CONFIRMED — skip-month + abs momentum floor both closed)
+updated: 2026-07-20 (pead.md major expansion: full academic foundation Ball&Brown→Bernard&Thomas→2026; two-stage release model EarningsInOne; analyst bias mechanism arXiv:2511.15214; H400/H410/H414/H415/H421/H422/H423 upgrade candidates; PEAD-GAP variant; PEAD×momentum confluence; decay timeline; production architecture)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -24,6 +24,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Momentum Strategies](algorithms/momentum-strategies.md) ← updated 2026-07-07 (H198 CONFIRMED: 6-1m stock momentum OOS Sharpe 1.174; H217 CONFIRMED: median alpha101 OOS 1.559; H228 CONFIRMED: H217+H181 blend OOS 1.572; **H376/H377 6-0m no-skip: OOS 3.120 / MaxDD -8.4% / 0 neg yrs** — major discovery; skip-month convention analysis; H377 full test pending)
   - [Pairs Trading / Stat Arb](algorithms/pairs-trading.md) ← updated 2026-06-21 (ETF+statistical pairs EXHAUSTED H152-H200; LLM SEMANTIC PAIRS new direction — H316 queued; Moira arXiv:2605.01954 HRL+LLM; LLM-Augmented Semantic Networks arXiv:2604.19476; 2-stage embedding+GPT-4o pipeline; $0.07/run for 30-stock universe; link_strength≥6 filter)
   - [Event-Driven Strategies](algorithms/event-driven.md) ← updated 2026-07-14 (analyst over-reaction to sentiment + under-reaction to uncertainty narratives arXiv:2511.15214 — validates H174 mechanism; SAE-FiRE PEAD upgrade path arXiv:2505.14420 — H400 candidate; H163 **CONFIRMED** — FinBERT NLP signal real; H161/H162 PARTIAL CONFIRMED; H168 IN-PROGRESS)
+  - [PEAD Comprehensive Reference](algorithms/pead.md) ← major expansion 2026-07-20 (Ball&Brown 1968 → EarningsInOne 2026; analyst bias mechanism; two-stage release model; H163-H179 failure lessons; PEAD-GAP; upgrade candidates H400/H410/H414/H415/H421/H422/H423; production architecture; PEAD×momentum confluence)
   - [Short-Term Reversal](algorithms/short-term-reversal.md) ← new 2026-05-07 (industry-adjusted reversal 0.53%/month globally; SSRN:6630998; H181 queued)
   - [Options Income Strategies](algorithms/options-income-strategies.md) ← updated 2026-05-21 (+ debit spreads: bull call/bear put setup, IV/DTE criteria, management rules, earnings play guidance; iron condor adjustment/rolling mechanics: untested-side roll, tested-side roll, BWB conversion; earnings straddle IV-expansion trade; paper trade annotations WMT/DLTR/SPY)
   - [Low-Volatility Anomaly](algorithms/low-volatility.md) ← updated 2026-05-18 (H205 design + regime-conditional BAB risk flag added; ScienceDirect May 2025 Asia study noted)

@@ -1,0 +1,102 @@
+{
+  "id": "scan-summary-2026-07-20",
+  "date": "2026-07-20",
+  "session": "nightly-research-2026-07-20",
+  "wiki_expansion": {
+    "target": "wiki/trading/algorithms/pead.md",
+    "lines_before": 85,
+    "lines_after": 430,
+    "sections_added": [
+      "Academic foundation (Ball&Brown through Bernard&Thomas)",
+      "Two-stage information release model (EarningsInOne arXiv:2606.29734)",
+      "Analyst behavioral bias mechanism (arXiv:2511.15214)",
+      "Signal taxonomy table (8 signal types with H-numbers)",
+      "SUE decay timeline with % of drift by hold period",
+      "H163-H179 failure lessons table",
+      "PEAD-GAP variant documentation",
+      "Upgrade candidates: H400/H410/H414/H415/H421/H422/H423",
+      "Production architecture ASCII diagram",
+      "PEAD x Momentum confluence hypothesis",
+      "Key references table (10 papers)",
+      "Data sources table"
+    ]
+  },
+  "scan_summary": {
+    "angles_searched": 5,
+    "papers_reviewed": 18,
+    "staged_count": 3,
+    "findings": [
+      {
+        "paper": "EarningsInOne",
+        "arxiv": "2606.29734",
+        "relevance": "high",
+        "staged": false,
+        "note": "Already known (H410 staged 2026-07-17). New: EARNINGSINONE dataset as training data for H410."
+      },
+      {
+        "paper": "MTL-PEAD",
+        "ssrn": "5284651",
+        "relevance": "high",
+        "staged": true,
+        "proposal": "7_h423_mtl_pead_hypothesis.json",
+        "note": "New H423 stub. Multi-task learning with analyst revision auxiliary signal."
+      },
+      {
+        "paper": "FinBERT2 (KDD 2025, ValueSimplex)",
+        "relevance": "high",
+        "staged": true,
+        "proposal": "6_h422_finbert2_upgrade_wiki.json",
+        "note": "H422 wiki note. Drop-in upgrade pending public HuggingFace release."
+      },
+      {
+        "paper": "Expert Investment Teams",
+        "arxiv": "2602.23330",
+        "relevance": "high",
+        "staged": true,
+        "proposal": "8_multiagent_finegrained_pead_wiki.json",
+        "note": "Fine-grained 5-agent decomposition upgrades H274 design."
+      },
+      {
+        "paper": "FinCall-Surprise",
+        "arxiv": "2510.03965",
+        "relevance": "medium",
+        "staged": false,
+        "note": "Multi-modal dataset (audio+slides). Not actionable without audio processing pipeline."
+      },
+      {
+        "paper": "Graph-based pairs matching",
+        "arxiv": "2403.07998",
+        "relevance": "medium",
+        "staged": false,
+        "note": "Scales pair selection to 500+ stocks. Useful for H316 when operationalized."
+      },
+      {
+        "paper": "FinPos position-aware agent",
+        "arxiv": "2510.27251",
+        "relevance": "medium",
+        "staged": false,
+        "note": "Architecture reference for H274 exit trigger agent."
+      },
+      {
+        "paper": "Agentic Trading framework",
+        "arxiv": "2605.19337",
+        "relevance": "medium",
+        "staged": false,
+        "note": "General architecture guide for multi-agent deployment."
+      },
+      {
+        "paper": "TradingAgents v0.2.0",
+        "github": "TauricResearch/TradingAgents",
+        "relevance": "medium",
+        "staged": false,
+        "note": "Production-ready with Claude 4.x support. H274 implementation candidate."
+      }
+    ]
+  },
+  "next_session_candidates": [
+    "H424: EarningsInOne two-window implementation (if H410 ECT layer confirmed via build phase)",
+    "H425: FinPos-style position duration agent for PEAD exit optimization",
+    "Expand multi-agent-llm-trading.md with TradingAgents v0.2.0 production patterns",
+    "H416 extensions: test on S&P 500 broader universe (30→100 stocks)"
+  ]
+}

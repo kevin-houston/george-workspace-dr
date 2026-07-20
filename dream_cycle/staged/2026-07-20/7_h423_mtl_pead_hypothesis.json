@@ -1,0 +1,21 @@
+{
+  "id": "h423-mtl-pead-2026-07-20",
+  "date": "2026-07-20",
+  "source": "Multi-Task Learning PEAD (SSRN:5284651, 2025)",
+  "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5284651",
+  "title": "H423 — MTL-PEAD: Multi-Task Learning with Analyst Revision Auxiliary Signal",
+  "rationale": "SSRN:5284651 proposes treating PEAD prediction as a primary task in a multi-task learning (MTL) framework, with analyst forecast revisions and institutional 13-F trading as auxiliary tasks. A shared encoder learns representations that generalize across tasks. The insight: teaching the model to predict analyst revision behavior forces it to internalize the forecast-revision cascade mechanism that drives PEAD. Expected improvement over H174's single-task FinBERT scoring: better generalization across companies and earnings regimes.",
+  "risk_level": "medium",
+  "type": "new_script",
+  "target_file": "/workspace/agent/backtesting/daily/run_h423.py",
+  "content": "STUB — run_h423.py to be written when analyst revision data is confirmed available via FMP API (endpoint: /analyst-estimates/{symbol}/). Three task heads: (1) PEAD direction (primary), (2) analyst EPS revision direction (auxiliary), (3) institutional 13-F net buying direction (auxiliary). Shared FinBERT encoder with task-specific linear heads. Train IS 2013-2020; OOS 2021-2026. Gate: OOS WR > 81.8% with n >= 20 OOS events. Key risk: analyst revision data availability and frequency may limit sample size.",
+  "action": "write",
+  "apply_status": "pending",
+  "hypothesis_log_entry": {
+    "h_number": "H423",
+    "title": "MTL-PEAD: Multi-Task Learning with Analyst Revision + 13-F Auxiliary Signals",
+    "status": "STUB",
+    "description": "MTL framework: PEAD prediction = primary task; analyst EPS forecast revisions + institutional 13-F net buying = auxiliary tasks. Shared FinBERT encoder. Source: SSRN:5284651. Gate: OOS WR > 81.8%, n >= 20. Data dependencies: FMP analyst estimates API + SEC 13-F filings. Script: run_h423.py (stub).",
+    "source": "SSRN:5284651 (2025)"
+  }
+}

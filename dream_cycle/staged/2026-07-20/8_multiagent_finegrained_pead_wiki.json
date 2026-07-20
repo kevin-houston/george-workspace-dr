@@ -1,0 +1,14 @@
+{
+  "id": "multiagent-finegrained-pead-wiki-2026-07-20",
+  "date": "2026-07-20",
+  "source": "Toward Expert Investment Teams (arXiv:2602.23330, Feb 2026)",
+  "source_url": "https://arxiv.org/abs/2602.23330",
+  "title": "Wiki update: Fine-Grained Multi-Agent Task Decomposition for H274 PEAD Design",
+  "rationale": "arXiv:2602.23330 shows that fine-grained task decomposition (narrow, specific tasks per agent) significantly outperforms coarse-grained abstract instructions in multi-agent LLM trading systems. This directly upgrades H274's multi-agent PEAD design (currently described as a 3-agent debate architecture). The fine-grained pattern suggests decomposing PEAD analysis into 5 narrow specialist agents rather than 3 general debating agents. Adding this finding to multi-agent-llm-trading.md cross-references H274 and H423.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md",
+  "content": "## Fine-Grained Task Decomposition for PEAD Multi-Agent (arXiv:2602.23330, Feb 2026)\n\n**Source**: 'Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks' (Submitted Feb 2026). Deployed on Japanese equities with prices, financials, news, macro data. Key finding: fine-grained task decomposition significantly improves risk-adjusted returns vs. coarse-grained designs.\n\n**Implication for H274 PEAD multi-agent design**: The current H274 architecture (3-agent debate: bull/bear/neutral) is coarse-grained. The fine-grained pattern suggests 5 specialist agents instead:\n1. **EPS Agent**: Classifies quantitative earnings surprise (magnitude, beat vs. miss, trend)\n2. **Guidance Agent**: Extracts and scores management guidance tone and specificity\n3. **Uncertainty Agent**: Weights risk/uncertainty language (analyst under-reaction target per arXiv:2511.15214)\n4. **Analyst Divergence Agent**: Checks analyst consensus spread pre/post announcement\n5. **Exit Trigger Agent**: Monitors for ECT reversal signals, hold duration, next-earnings proximity\n\nFine-grained decomposition: each agent sees a narrow slice of the problem → less hallucination, clearer accountability, easier debugging. Consensus rule: Enter if ≥ 3 of 5 agents give green signal; Exit if ≥ 2 agents give red signal.\n\n**Cross-reference**: H274 (multi-agent PEAD upgrade); H423 (MTL-PEAD auxiliary signals); arXiv:2511.15214 (analyst behavioral bias).",
+  "action": "append",
+  "apply_status": "pending"
+}

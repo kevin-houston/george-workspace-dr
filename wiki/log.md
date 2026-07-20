@@ -742,3 +742,11 @@ Issues found: 9. Auto-fixed: 8. Needs review: 1.
 1. DUPLICATE: `trading/tools/quant-mind.md` (added 2026-06-10, unindexed) vs `tools/quant-mind-notes.md` (added 2026-07-04, indexed). Same tool covered twice in different directories. Recommend reviewing and merging, or adding the trading/tools version to the index with a note.
 2. POTENTIAL CONTRADICTION: `low-volatility.md` cites H192-D OOS Sharpe 1.367; H413's baseline run shows 1.167. Likely explained by different DATA_END dates (H192-D original used a different OOS end date). Flag for H192-D author review.
 3. STALE FLAG: `ai-industry/model-landscape-2026.md` carries internal "(page needs refresh)" note. AI model landscape is volatile; page covers data as of 2026-06. Recommend a refresh before any model-selection decisions.
+
+## 2026-07-20 | wiki expansion | pead.md
+
+Pages updated: 1 (pead.md 85→430 lines). Pages created: 1 (research-log/2026-07-20.md). Index updated.
+
+Key additions: Ball&Brown 1968 → EarningsInOne 2026 two-stage release model; analyst behavioral bias (arXiv:2511.15214 over-react sentiment / under-react uncertainty); signal taxonomy (8 types, H163→H423); H163-H179 failure lessons; PEAD-GAP variant documented; 7 upgrade candidates (H400/H410/H414/H415/H421/H422/H423); production architecture diagram; PEAD×momentum confluence analysis.
+
+Dream cycle: 18 papers reviewed, 3 proposals staged (H422 FinBERT2, H423 MTL-PEAD, fine-grained multi-agent wiki).
