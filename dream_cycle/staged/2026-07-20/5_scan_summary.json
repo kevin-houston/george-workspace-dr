@@ -1,0 +1,84 @@
+{
+  "proposal_id": "scan_summary",
+  "date": "2026-07-19",
+  "type": "metadata",
+  "title": "Dream Cycle Scan Summary — 2026-07-19",
+  "target": null,
+  "source": "arXiv q-fin list July 2026 (176 papers scanned)",
+  "hypothesis": null,
+  "risk": "low",
+  "content": {
+    "scan_date": "2026-07-19",
+    "papers_scanned": 176,
+    "papers_deep_read": 8,
+    "thinnest_section": "AI Industry (10 pages, least cross-linked relative to depth of recent papers)",
+    "expansion_target": "wiki/ai-industry/base-rate-trap-llm-trading-2026.md",
+    "proposals_generated": 4,
+    "next_hypothesis": "H422 (MACD-parameterized momentum overlay — design note only, no script yet)",
+    "papers_actioned": [
+      {
+        "id": "arXiv:2607.00883",
+        "title": "Tail Risk Management with Puts and Trend Following: A CVaR Framework",
+        "authors": "Noguer I Alonso & Al Fallouji",
+        "action": "H420 stub script (new_script proposal #1)",
+        "rationale": "Direct application to production portfolio MaxDD protection. Already at -3.60% MaxDD but provides formal CVaR framework for evaluating whether puts add value."
+      },
+      {
+        "id": "arXiv:2607.14174",
+        "title": "How Much of a 10-K Matters? Aggregation-Dependent Value of Full-Text versus Risk-Factor Sentiment",
+        "authors": "Sanggyu Sean Choi",
+        "action": "H421 stub script (new_script proposal #2)",
+        "rationale": "Item 1A text beats full 10-K at firm level for returns AND volatility prediction. PEAD pipeline improvement: pre-filter H174 universe using annual 10-K risk factor sentiment before earnings event."
+      },
+      {
+        "id": "arXiv:2607.12248",
+        "title": "When Directional Accuracy Lies: Base-Rate-Honest Benchmark for LoRA-Adapted TimesFM",
+        "authors": "Taizhen Cheung",
+        "action": "New wiki page (new_page proposal #3 — AI Industry expansion)",
+        "rationale": "Critical methodological finding: LLM directional accuracy claims systematically inflated by bull-market base rates. Full honest-benchmark protocol documented. Directly informs H381/H382 LLM alpha proposals."
+      },
+      {
+        "id": "arXiv:2607.01705",
+        "title": "Portfolio Optimization under Fast and Slow Latent Mean-Reverting and Momentum Drift",
+        "authors": "Eccles & Lee",
+        "action": "Wiki update to market-timing-overlays.md (wiki_update proposal #4)",
+        "rationale": "Provides theoretical justification that MACD = optimal latent factor estimator. Explains WHY H301 (200d MA) + H362 (VIX<20) + H296 (VIX TS) are jointly powerful — dual timescale information-theoretic optimality."
+      }
+    ],
+    "papers_noted_not_actioned": [
+      {
+        "id": "arXiv:2607.05291",
+        "title": "Forecasting Realized Volatility with Time Series Foundation Models",
+        "authors": "Brini",
+        "reason": "Key finding (foundation models barely beat Log-HAR) already reflected in existing ts-foundation-models.md wiki page. TTM + Log-HAR ensemble worth noting but no new hypothesis or page warranted."
+      },
+      {
+        "id": "arXiv:2607.06117",
+        "title": "Relief-Gated Relative Rotation for QQQ-DIA Allocation",
+        "authors": "Zheli Xiong",
+        "reason": "354-506% annual turnover makes it impractical. Walk-forward validation methodology interesting but result not directly applicable to monthly-rebalance production system."
+      },
+      {
+        "id": "arXiv:2607.08500",
+        "title": "Estimating the Stochastic Discount Factor from Option Prices and Predicting the Equity Premium",
+        "authors": "Shiraya, Yamakami, Yamazaki",
+        "reason": "Requires SPX options data (Polygon paid tier). H309 dispersion trading already in pipeline for options. SDF prediction is institutional-level allocation, not actionable at our scale."
+      },
+      {
+        "id": "arXiv:2607.13968",
+        "title": "Measuring Sentiment News with Transformer-Based Language Models",
+        "authors": "Mavillonio et al.",
+        "reason": "Validates FinBERT methodology we already use. No new signal — confirmation of existing approach. News sentiment (vs 8-K press releases) already covered in alternative-data.md."
+      },
+      {
+        "id": "arXiv:2607.11054",
+        "title": "When and Why Naive Diversification Works: A Simple Diagnostic Strategy",
+        "authors": "Feng, Huang, Wang, Zhang",
+        "reason": "Horizon-dependent equal-weighting guidance interesting but production portfolio is top-1 momentum (not equal-weight optimization problem). 1/N diagnostic useful if we revisit portfolio blending in H318."
+      }
+    ],
+    "wiki_expansion_summary": "AI Industry section expanded with new page: base-rate-trap-llm-trading-2026.md. This synthesizes arXiv:2607.12248 (TimesFM base-rate trap), arXiv:2607.05291 (vol foundation models vs Log-HAR), with existing pages on KTD-Fin (momentum beta disguised as LLM alpha), Agentic Trading Survey (reproducibility crisis), and Chen & Welch 2026 (anomaly decay). Provides actionable checklist for all future LLM alpha proposals.",
+    "research_log_entry": "wiki/trading/research-log/2026-07-19.md"
+  },
+  "apply_status": "pending"
+}
