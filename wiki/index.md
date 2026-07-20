@@ -1,7 +1,7 @@
 ---
 updated: 2026-07-19
 sources_indexed: 4
-pages: 219
+pages: 221
 ---
 
 # Wiki Index
@@ -198,6 +198,7 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-07-19](trading/research-log/2026-07-19.md) — wiki: base-rate-trap-llm-trading-2026.md new (AI Industry expansion; TimesFM base-rate trap, vol foundation model benchmarks, 5-baseline honest protocol); market-timing-overlays.md updated (MACD = optimal latent factor, theoretical backing for dual-timescale signals, H422 design); H420/H421 stubs staged ← new 2026-07-19
 - [Research Log 2026-07-17](trading/research-log/2026-07-17.md) — wiki: factor-momentum-style-rotation.md expanded (IMOM discovery, JPM 2025 validation, H406 design stub); dream cycle scan: H409 drift-regime stub, H410 EarningsInOne ECT layer, Moira/Attention pairs wiki updates, H412 cash-overlay stub ← new 2026-07-17
 - [Research Log 2026-07-16](trading/research-log/2026-07-16.md) — dream cycle scan: XALPHA memory-driven alpha discovery (arXiv:2607.08332, H407 stub), Agentic Trading Survey (arXiv:2605.19337), Agentic Earnings Retrieval PEAD (arXiv:2507.07906, H408 stub); DR wiki expanded with runbook-2026.md ← new 2026-07-16
 - [Research Log 2026-07-15](trading/research-log/2026-07-15.md) — wiki: llm-alpha-validation.md expanded (P1-P6 reporting protocol, Kong et al. 5-bias framework, TradingAgents/QuantAgent audit evidence, FINSABER); created anomaly-decay-chen-welch-2026.md + openfinGym-2026.md ← new 2026-07-15
@@ -290,6 +291,7 @@ When answering a query:
 - [What Useful Alphas? — Chen & Welch 2026](ai-industry/anomaly-decay-chen-welch-2026.md) — arXiv:2607.06502; ~200 published anomalies: median 48bp/month pre-2005 collapses to 7bp post-2005 non-micro; academic anomaly zoo closed for non-micro investors; validates NOT CONFIRMED pattern in H240–H380; momentum + info-based alpha + structural alpha survive ← new 2026-07-15
 - [OpenFinGym — Verifiable Multi-Task Quant Agent Evaluation](ai-industry/openfinGym-2026.md) — arXiv:2606.26350; Edinburgh/UCL/Oxford/Turing; containerised runtime + host-side verifier prevents train-test leakage; 4 task domains (forecasting/market-gen/trading/fraud); automated arXiv paper → executable task pipeline; SFT+RL integration; relevant for H274 PEAD multi-agent + H318 meta-agent ← new 2026-07-15
 - [Agentic Trading Survey 2026](ai-industry/agentic-trading-survey-2026.md) — arXiv:2605.19337; 77 LLM trading agent papers; only 19/77 satisfy closed-loop evaluation; reproducibility crisis (0/19 fully reproducible); transaction costs absent in 63%; memory mechanisms show most consistent improvement; taxonomy: Pattern A/B/C/D agent architectures; MRS reporting standard; validates LLM Alpha Validation Checklist ← new 2026-07-16
+- [The Base-Rate Trap in LLM Trading Signals](ai-industry/base-rate-trap-llm-trading-2026.md) — arXiv:2607.12248 (Cheung Jul 2026): LoRA-adapted TimesFM 80% accuracy = naive "always-up" base rate; honest benchmark requires 5 baselines + McNemar + DM test + BH FDR; arXiv:2607.05291 (Brini): vol foundation models barely beat Log-HAR; synthesis with KTD-Fin/Agentic Survey; checklist for H381/H382 LLM alpha proposals ← new 2026-07-19
 
 ---
 
