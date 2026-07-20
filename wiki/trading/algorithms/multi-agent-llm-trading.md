@@ -838,3 +838,20 @@ MetaPS is the closest published analog to H318. The critical insight: **keeping 
 All MetaPS experiments are on simulated/backtested markets. No real-money OOS validation. The goods-exchange sandbox is synthetic. This is consistent with the reproducibility findings from the [LLM Alpha Validation Checklist](llm-alpha-validation.md): simulation results need paper-trading gate before production.
 
 For H318, the right path: implement MetaPS selection logic with XGBoost (not LLM) as the selector first — avoids LLM inference cost at monthly rebalance — then consider LLM fine-tuning only if XGBoost selector shows positive OOS lift.
+
+---
+
+## Fine-Grained Task Decomposition for PEAD Multi-Agent (arXiv:2602.23330, Feb 2026)
+
+**Source**: 'Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks' (Submitted Feb 2026). Deployed on Japanese equities with prices, financials, news, macro data. Key finding: fine-grained task decomposition significantly improves risk-adjusted returns vs. coarse-grained designs.
+
+**Implication for H274 PEAD multi-agent design**: The current H274 architecture (3-agent debate: bull/bear/neutral) is coarse-grained. The fine-grained pattern suggests 5 specialist agents instead:
+1. **EPS Agent**: Classifies quantitative earnings surprise (magnitude, beat vs. miss, trend)
+2. **Guidance Agent**: Extracts and scores management guidance tone and specificity
+3. **Uncertainty Agent**: Weights risk/uncertainty language (analyst under-reaction target per arXiv:2511.15214)
+4. **Analyst Divergence Agent**: Checks analyst consensus spread pre/post announcement
+5. **Exit Trigger Agent**: Monitors for ECT reversal signals, hold duration, next-earnings proximity
+
+Fine-grained decomposition: each agent sees a narrow slice of the problem → less hallucination, clearer accountability, easier debugging. Consensus rule: Enter if ≥ 3 of 5 agents give green signal; Exit if ≥ 2 agents give red signal.
+
+**Cross-reference**: H274 (multi-agent PEAD upgrade); H423 (MTL-PEAD auxiliary signals); arXiv:2511.15214 (analyst behavioral bias).
