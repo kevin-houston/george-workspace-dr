@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Session Summary — 2026-07-20</title>
+  
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--orange:#f0883e;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.6;padding:0;}
+
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:baseline;justify-content:space-between;}
+.header-title{font-size:16px;font-weight:700;letter-spacing:.3px;}
+.header-sub{color:var(--muted);font-size:12px;}
+
+.main{padding:20px 24px;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1.1;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.muted{color:var(--muted);}
+
+/* Section card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.card-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.card-badge{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:2px 8px;color:var(--muted);}
+.card-body{padding:14px 16px;}
+
+/* Proposals */
+.proposal{padding:10px 0;border-bottom:1px solid var(--border);}
+.proposal:last-child{border-bottom:none;}
+.proposal-header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.proposal-title{font-size:13px;font-weight:600;}
+.risk-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+.risk-medium{background:rgba(210,153,34,.18);color:var(--yellow);border:1px solid rgba(210,153,34,.3);}
+.risk-high{background:rgba(248,81,73,.18);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.risk-low{background:rgba(63,185,80,.18);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.proposal-rationale{font-size:12px;color:var(--muted);margin-top:3px;}
+.proposal-target{font-size:11px;color:var(--blue);font-family:monospace;margin-top:3px;}
+
+/* Commit list */
+.commit{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;display:flex;gap:10px;}
+.commit:last-child{border-bottom:none;}
+.commit-hash{font-family:monospace;color:var(--blue);flex-shrink:0;}
+.commit-msg{color:var(--text);}
+
+/* Podcast */
+.podcast-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;}
+.podcast-dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:10px;}
+.link-btn{display:inline-block;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--blue);background:var(--surface);}
+.link-btn:hover{border-color:var(--blue);}
+
+/* Raw changelog */
+pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;overflow-x:auto;white-space:pre-wrap;color:var(--muted);margin-top:10px;}
+
+.empty{color:var(--muted);font-size:12px;padding:4px 0;}
+</style>
+
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-title">Session Summary &mdash; 2026-07-20</div>
+    </div>
+    <div class="header-sub">Generated 2026-07-20 04:07 CT</div>
+  </div>
+  <div class="main">
+    
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Proposals Applied</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Flagged</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Commits</div>
+        <div class="kpi-value blue">5</div></div>
+      <div class="kpi"><div class="kpi-label">Podcast</div>
+        <div class="kpi-value muted">—</div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Dream Cycle</span>
+        <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
+      </div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H420 stub: Convex Tail Overlay — Puts + Trend-Following on Production Portfolio</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H421 stub: 10-K Item 1A (Risk Factors) as PEAD Secondary Filter</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">The Base-Rate Trap in LLM Trading Signals (arXiv:2607.12248 + synthesis)</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">MACD as Optimal Latent Factor Estimator — Theoretical Foundation (arXiv:2607.01705)</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Dream Cycle Scan Summary — 2026-07-19</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target"></div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H422 — FinBERT2 Model Upgrade for H174 PEAD Pipeline</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">FinBERT2 (KDD 2025, 32B finance-specific tokens) dominates ProsusAI/FinBERT across a meta-analysis of 681 financial NLP papers from 2022–2025. As a drop-in replacement in pead_overnight.py, it could improve the sentiment scoring accuracy above the current H174 threshold (OOS WR=81.8%). The model mus…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/pead.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H423 — MTL-PEAD: Multi-Task Learning with Analyst Revision Auxiliary Signal</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">SSRN:5284651 proposes treating PEAD prediction as a primary task in a multi-task learning (MTL) framework, with analyst forecast revisions and institutional 13-F trading as auxiliary tasks. A shared encoder learns representations that generalize across tasks. The insight: teaching the model to predi…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h423.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki update: Fine-Grained Multi-Agent Task Decomposition for H274 PEAD Design</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2602.23330 shows that fine-grained task decomposition (narrow, specific tasks per agent) significantly outperforms coarse-grained abstract instructions in multi-agent LLM trading systems. This directly upgrades H274's multi-agent PEAD design (currently described as a 3-agent debate architectur…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title"></span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target"></div>
+            </div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Commits</span>
+        <span class="card-badge">5 today</span>
+      </div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">1dbfa9f</span><span class="commit-msg">dream cycle: apply 2026-07-20 staged proposals (H420, H421, H423, multi-agent PEAD)</span></div><div class="commit"><span class="commit-hash">2ef6ecb</span><span class="commit-msg">dream cycle: changelog 2026-07-20</span></div><div class="commit"><span class="commit-hash">6d3e577</span><span class="commit-msg">dream cycle: apply 2026-07-20 staged proposals (H420, H421, H422, H423 stubs)</span></div><div class="commit"><span class="commit-hash">73ac5df</span><span class="commit-msg">nightly research 2026-07-20: pead.md major expansion + 3 staged proposals (H422/H423/multi-agent)</span></div><div class="commit"><span class="commit-hash">afc7007</span><span class="commit-msg">nightly backup 2026-07-20</span></div></div>
+    </div>
+    
+    
+  </div>
+</body>
+</html>
