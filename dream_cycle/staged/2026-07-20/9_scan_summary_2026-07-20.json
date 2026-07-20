@@ -97,6 +97,7 @@
     "H424: EarningsInOne two-window implementation (if H410 ECT layer confirmed via build phase)",
     "H425: FinPos-style position duration agent for PEAD exit optimization",
     "Expand multi-agent-llm-trading.md with TradingAgents v0.2.0 production patterns",
-    "H416 extensions: test on S&P 500 broader universe (30→100 stocks)"
-  ]
+    "H416 extensions: test on S&P 500 broader universe (30\u2192100 stocks)"
+  ],
+  "apply_status": "applied"
 }
