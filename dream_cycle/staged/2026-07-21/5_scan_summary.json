@@ -2,7 +2,7 @@
   "proposal_id": "scan_summary",
   "date": "2026-07-20",
   "type": "metadata",
-  "title": "Dream Cycle Scan Summary — 2026-07-20",
+  "title": "Dream Cycle Scan Summary \u2014 2026-07-20",
   "target": null,
   "source": null,
   "hypothesis": null,
@@ -17,45 +17,50 @@
         "type": "new_script",
         "hypothesis": "H424",
         "source": "arXiv:2511.12490 (Singha 2025)",
-        "one_liner": "Drift-Regime x Value+Reversal on S&P 500 — independent replication/extension of 13-Sharpe paper mechanism to broader universe and monthly rebalancing"
+        "one_liner": "Drift-Regime x Value+Reversal on S&P 500 \u2014 independent replication/extension of 13-Sharpe paper mechanism to broader universe and monthly rebalancing"
       },
       {
         "file": "2_agentic_factor_investing_h425.json",
         "type": "new_script",
         "hypothesis": "H425",
         "source": "arXiv:2603.14288 (Huang & Fan 2026)",
-        "one_liner": "Agentic AI factor discovery on H198 universe — GPT-4o-mini autonomous symbolic factor generation with OOS IC validation, US equity Sharpe 3.11 claimed"
+        "one_liner": "Agentic AI factor discovery on H198 universe \u2014 GPT-4o-mini autonomous symbolic factor generation with OOS IC validation, US equity Sharpe 3.11 claimed"
       },
       {
         "file": "3_lookahead_formal_verification_wiki.json",
         "type": "new_page",
         "hypothesis": null,
         "source": "arXiv:2607.04958 (Fonseca 2026)",
-        "one_liner": "Formal computer-science treatment of look-ahead bias as temporal non-interference — linear-time type-and-effect checker catches leaks that statistical detectors miss; new backtesting section page"
+        "one_liner": "Formal computer-science treatment of look-ahead bias as temporal non-interference \u2014 linear-time type-and-effect checker catches leaks that statistical detectors miss; new backtesting section page"
       },
       {
         "file": "4_multimemory_factor_model_wiki.json",
         "type": "new_page",
         "hypothesis": null,
-        "source": "arXiv:2607.03858 (Frøseth 2026)",
-        "one_liner": "Five-factor spectral memory model of US equity returns — 1988 volatility regime shift, return/volatility channel decoupling; theoretical grounding for H198/H411/IBS signal windows"
+        "source": "arXiv:2607.03858 (Fr\u00f8seth 2026)",
+        "one_liner": "Five-factor spectral memory model of US equity returns \u2014 1988 volatility regime shift, return/volatility channel decoupling; theoretical grounding for H198/H411/IBS signal windows"
       }
     ],
-    "thinnest_section_targeted": "backtesting (12 pages, last addition 2026-07-17) — added 2 new pages",
+    "thinnest_section_targeted": "backtesting (12 pages, last addition 2026-07-17) \u2014 added 2 new pages",
     "wiki_expansion_notes": "Two new pages added to wiki/trading/backtesting/: lookahead-formal-verification.md and multi-memory-factor-model-equity.md. Both directly support the integrity and theoretical grounding of the H-series hypothesis pipeline.",
     "papers_reviewed": [
-      "arXiv:2511.12490 — Discovery of a 13-Sharpe OOS Factor (Singha 2025) — STRONG: independent validation of H411/H416 drift-regime mechanism on S&P500 with value+reversal composite",
-      "arXiv:2603.14288 — Beyond Prompting: Agentic Factor Investing (Huang & Fan 2026) — MODERATE: Sharpe 3.11 US equity, agentic system, project homepage with code",
-      "arXiv:2607.04958 — Look-Ahead-Freedom as Temporal Non-Interference (Fonseca 2026) — STRONG: formal verification of backtesting pipelines, directly addresses H256 incident pattern",
-      "arXiv:2607.03858 — Spectral Variance Ratio Multi-Memory Factor Model (Frøseth 2026) — MODERATE: theoretical grounding for signal window choices across H-series, 1988 regime shift finding",
-      "arXiv:2507.07107 — ML Enhanced Multi-Factor Trading (Du 2026) — LOW: China A-share, mask-first architecture, US market not validated",
-      "arXiv:2606.29194 — AI Trading Alpha Singularity (Li et al. 2026) — LOW: CSI 1000, single-seed run, no code",
-      "arXiv:2607.06117 — Relief-Gated Relative Rotation QQQ-DIA (Xiong 2026) — LOW: high turnover 354-506% annualized, not monthly rebalancing compatible",
-      "arXiv:2607.01705 — Portfolio Optimization Fast/Slow Drift (Eccles & Lee 2026) — LOW: pure theory, no empirical results",
-      "arXiv:2607.05091 — Overshooting the Coordinate (Shin 2026) — LOW: factor diagnostic tool, no trading strategy",
-      "arXiv:2509.24254 — Press Release Structure for Earnings Prediction (Wu et al. 2025) — already covered by H174/H421 design"
+      "arXiv:2511.12490 \u2014 Discovery of a 13-Sharpe OOS Factor (Singha 2025) \u2014 STRONG: independent validation of H411/H416 drift-regime mechanism on S&P500 with value+reversal composite",
+      "arXiv:2603.14288 \u2014 Beyond Prompting: Agentic Factor Investing (Huang & Fan 2026) \u2014 MODERATE: Sharpe 3.11 US equity, agentic system, project homepage with code",
+      "arXiv:2607.04958 \u2014 Look-Ahead-Freedom as Temporal Non-Interference (Fonseca 2026) \u2014 STRONG: formal verification of backtesting pipelines, directly addresses H256 incident pattern",
+      "arXiv:2607.03858 \u2014 Spectral Variance Ratio Multi-Memory Factor Model (Fr\u00f8seth 2026) \u2014 MODERATE: theoretical grounding for signal window choices across H-series, 1988 regime shift finding",
+      "arXiv:2507.07107 \u2014 ML Enhanced Multi-Factor Trading (Du 2026) \u2014 LOW: China A-share, mask-first architecture, US market not validated",
+      "arXiv:2606.29194 \u2014 AI Trading Alpha Singularity (Li et al. 2026) \u2014 LOW: CSI 1000, single-seed run, no code",
+      "arXiv:2607.06117 \u2014 Relief-Gated Relative Rotation QQQ-DIA (Xiong 2026) \u2014 LOW: high turnover 354-506% annualized, not monthly rebalancing compatible",
+      "arXiv:2607.01705 \u2014 Portfolio Optimization Fast/Slow Drift (Eccles & Lee 2026) \u2014 LOW: pure theory, no empirical results",
+      "arXiv:2607.05091 \u2014 Overshooting the Coordinate (Shin 2026) \u2014 LOW: factor diagnostic tool, no trading strategy",
+      "arXiv:2509.24254 \u2014 Press Release Structure for Earnings Prediction (Wu et al. 2025) \u2014 already covered by H174/H421 design"
     ],
-    "already_staged_skipped": ["H420 (tail CVaR overlay)", "H421 (10-K Item 1A PEAD)", "H422 (FinBERT2 upgrade)", "H423 (MTL-PEAD)"]
+    "already_staged_skipped": [
+      "H420 (tail CVaR overlay)",
+      "H421 (10-K Item 1A PEAD)",
+      "H422 (FinBERT2 upgrade)",
+      "H423 (MTL-PEAD)"
+    ]
   },
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
