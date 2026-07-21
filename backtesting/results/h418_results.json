@@ -2,43 +2,41 @@
   "hypothesis": "H418",
   "gate": 4.825,
   "h416_i_record": 5.342,
-  "confirmed": true,
-  "confirmed_variants": [
-    "A"
-  ],
+  "confirmed": false,
+  "confirmed_variants": [],
   "results": {
     "var_A": {
       "is": {
         "n": 96,
-        "sharpe": 4.577,
-        "maxdd": 0.0,
-        "cagr": 0.972,
+        "sharpe": 1.545,
+        "maxdd": -0.087,
+        "cagr": 0.275,
         "neg_yrs": 0
       },
       "oos": {
         "n": 66,
-        "sharpe": 5.328,
-        "maxdd": -0.012,
-        "cagr": 1.155,
-        "neg_yrs": 0
+        "sharpe": 0.8,
+        "maxdd": -0.229,
+        "cagr": 0.21,
+        "neg_yrs": 2
       },
       "desc": "1/price rank \u00d7 drift gate [H416-I baseline]",
-      "beats": true
+      "beats": false
     },
     "var_B": {
       "is": {
         "n": 96,
-        "sharpe": 1.109,
-        "maxdd": -0.481,
-        "cagr": 0.35,
-        "neg_yrs": 1
+        "sharpe": 1.879,
+        "maxdd": -0.21,
+        "cagr": 0.567,
+        "neg_yrs": 0
       },
       "oos": {
         "n": 66,
-        "sharpe": 0.605,
-        "maxdd": -0.45,
-        "cagr": 0.144,
-        "neg_yrs": 2
+        "sharpe": 1.175,
+        "maxdd": -0.284,
+        "cagr": 0.28,
+        "neg_yrs": 1
       },
       "desc": "1/price rank ONLY (no gate)",
       "beats": false
@@ -46,17 +44,17 @@
     "var_C": {
       "is": {
         "n": 96,
-        "sharpe": 4.409,
-        "maxdd": -0.113,
-        "cagr": 0.935,
+        "sharpe": 1.558,
+        "maxdd": -0.184,
+        "cagr": 0.313,
         "neg_yrs": 0
       },
       "oos": {
         "n": 66,
-        "sharpe": 4.497,
-        "maxdd": -0.045,
-        "cagr": 1.212,
-        "neg_yrs": 0
+        "sharpe": 0.603,
+        "maxdd": -0.306,
+        "cagr": 0.156,
+        "neg_yrs": 3
       },
       "desc": "Drift fraction rank ONLY (no price filter)",
       "beats": false
@@ -64,17 +62,17 @@
     "var_D": {
       "is": {
         "n": 96,
-        "sharpe": 4.091,
-        "maxdd": 0.0,
-        "cagr": 0.923,
+        "sharpe": 1.436,
+        "maxdd": -0.145,
+        "cagr": 0.244,
         "neg_yrs": 0
       },
       "oos": {
         "n": 66,
-        "sharpe": 4.513,
-        "maxdd": -0.012,
-        "cagr": 1.103,
-        "neg_yrs": 0
+        "sharpe": 0.452,
+        "maxdd": -0.39,
+        "cagr": 0.123,
+        "neg_yrs": 3
       },
       "desc": "12-1m momentum rank \u00d7 drift gate",
       "beats": false
@@ -82,16 +80,16 @@
     "var_E": {
       "is": {
         "n": 96,
-        "sharpe": 3.795,
-        "maxdd": -0.113,
-        "cagr": 0.941,
+        "sharpe": 1.772,
+        "maxdd": -0.183,
+        "cagr": 0.477,
         "neg_yrs": 0
       },
       "oos": {
         "n": 66,
-        "sharpe": 3.542,
-        "maxdd": -0.126,
-        "cagr": 0.855,
+        "sharpe": 1.565,
+        "maxdd": -0.158,
+        "cagr": 0.321,
         "neg_yrs": 0
       },
       "desc": "avg(1/price rank, drift rank), no gate",

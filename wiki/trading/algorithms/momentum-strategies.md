@@ -751,11 +751,18 @@ The Volterra correction is computable from observed prices using a discretised i
 
 ---
 
-## H411/H416/H417/H418: The Cheap-Stock × Drift Gate Family — NEW H-SERIES RECORD
+## H411/H416/H417/H418: The Cheap-Stock × Drift Gate Family
 
-**Run dates**: H411 (2026-06); H416–H418 (2026-07-19/20)  
-**Status**: H411 CONFIRMED, H416 CONFIRMED (champion Var I), H417 CONFIRMED (all variants), H418 PARTIAL CONFIRMED  
-**New record**: H417 Var C — OOS Sharpe **5.855**, MaxDD −1.2%, CAGR 110%, **0 negative calendar years 2021–2026**
+**Run dates**: H411 (2026-06); H416–H418 (2026-07-19/20); corrected re-run 2026-07-21  
+**Status**: ALL NOT CONFIRMED — look-ahead bias invalidated original results  
+**Best corrected result**: H418 Var E — OOS Sharpe **1.565**, MaxDD −15.8%, 0 negative years (avg rank, no binary gate)
+
+> **⚠ LOOK-AHEAD BIAS CORRECTION (2026-07-21)**  
+> The original H411–H418 results (OOS Sharpe 4.825–5.855) were inflated by a backtest bug: the 20d drift
+> gate was computed from daily returns *within* month T and used to select stocks that earned month T's return.
+> Since stocks with >60% positive days in month T almost certainly had positive T returns, this is
+> selection-on-the-outcome, not prediction. Fix: `backtest(monthly_px, sig.shift(1), top_n=n)` — use
+> last month's gate to predict this month. Corrected results below. Flagged by dreamcycle-2026-05-29, 2026-07-21.
 
 This family departs from return-based momentum entirely. The signal combines:
 1. **1/price rank** (cheapness within the universe — not small-cap, but relatively cheap large-cap)  
@@ -813,66 +820,56 @@ def backtest_h416(signal: pd.DataFrame, monthly_px: pd.DataFrame,
     return s
 ```
 
-### H411 — First Confirmation
+### H411 — Original Result (look-ahead inflated; not re-run separately)
 
-Tested 1/price rank with various drift gates on H198 30-stock NASDAQ large-cap universe:
+| Variant | Gate | Top-N | Original OOS Sh | Notes |
+|---------|------|-------|-----------------|-------|
+| Var A (no gate) | None | 2 | 0.6 | Not affected by drift look-ahead |
+| Var B (original "champion") | 20d > 0.60 | 2 | ~~4.825~~ (look-ahead) | Not corrected separately |
 
-| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | Top-N | Gate |
-|---------|-----------|------------|-----------|-------|------|
-| Var B (champion) | — | **4.825** | −1.9% | 2 | 20d drift > 0.60 |
-| Var A (no gate) | — | 0.6 | −45%+ | 2 | None |
+H411 shares the same backtest template as H416. The H416 corrected run (Var A = H411 replication) gives **OOS 0.900**, so H411's claimed 4.825 is look-ahead inflated. H411: **NOT CONFIRMED**.
 
-**Key finding**: Without the gate, 1/price rank is a **disaster** (cheap stocks are cheap for a reason — value traps). With the 20d drift gate, OOS Sharpe 4.825 — a new H-series record at the time.
+### H416 — Drift Gate Robustness (Corrected, 9 Variants)
 
-### H416 — Drift Gate Robustness (9 Variants)
+| Variant | Gate | Top-N | OOS Sharpe | OOS MaxDD | Notes |
+|---------|------|-------|------------|-----------|-------|
+| A (H411 replication) | 20d > 0.60 | 2 | 0.900 | −28.8% | |
+| B | 10d > 0.60 | 2 | 0.983 | −30.5% | |
+| C | 30d > 0.60 | 2 | 0.719 | −38.1% | |
+| **D** | **40d > 0.60** | **2** | **1.326** | **−26.1%** | Best |
+| E | 20d > 0.55 | 2 | 1.087 | −28.1% | |
+| F | 20d > 0.65 | 2 | 1.028 | −26.2% | |
+| G | SPY 20d > 0.60 | 2 | 0.305 | −7.0% | Market-level gate |
+| H | 20d > 0.60 + SPY>200MA | 2 | 0.975 | −33.5% | |
+| I | 20d > 0.60 | 3 | 0.879 | −22.9% | |
 
-Confirmed that the 20d/0.60 specification is not uniquely calibrated:
+Gate: OOS Sharpe > 4.825 (original inflated threshold). **NOT CONFIRMED** — best Var D 1.326.
 
-| Variant | Gate | Top-N | OOS Sharpe | Notes |
-|---------|------|-------|------------|-------|
-| A (baseline) | 20d > 0.60 | 2 | 4.825 | H411 replication |
-| B | 10d > 0.60 | 2 | 4.751 | Shorter window |
-| C | 30d > 0.60 | 2 | 4.890 | Longer window |
-| D | 40d > 0.60 | 2 | 4.802 | Even longer |
-| E | 20d > 0.55 | 2 | 4.688 | Less strict |
-| F | 20d > 0.65 | 2 | 4.712 | More strict |
-| G | SPY 20d > 0.60 | 2 | 3.1 | Market-level gate |
-| H | 20d > 0.60 + SPY>200MA | 2 | 4.614 | Composite gate |
-| **I (champion)** | 20d > 0.60 | **3** | **5.342** | More positions |
+### H417 — Universe Sensitivity (Corrected)
 
-**Critical result**: Var I (same signal, top-3 instead of top-2) → OOS Sharpe **5.342**, MaxDD −1.2%. Increasing concentration from top-2 to top-3 improves performance. Gate threshold and window are robust (all variants 4.68–5.34).
+| Variant | Universe | N | OOS Sharpe | MaxDD | CAGR |
+|---------|----------|---|------------|-------|------|
+| **A** | NASDAQ 30 (H198) | 30 | **0.800** | −22.9% | 21% |
+| B | S&P 500 non-tech 30 | 30 | **−0.088** | −43.3% | −2% |
+| C | Combined 60-stock | 60 | **0.383** | −46.9% | 8% |
 
-### H417 — Universe Sensitivity (ALL 3 VARIANTS CONFIRMED)
+**NOT CONFIRMED** — all below gate; non-tech S&P500 is *negative* OOS (−0.088). The claimed universality was entirely look-ahead artifact. Original Var B "5.352" and Var C "5.855" are invalid.
 
-Tests whether the signal is NASDAQ-specific or general:
+### H418 — Signal Decomposition (Corrected)
 
-| Variant | Universe | N stocks | OOS Sharpe | MaxDD | CAGR |
-|---------|----------|----------|------------|-------|------|
-| A | NASDAQ 30 (H198 original) | 30 | 5.328 | −1.2% | 108% |
-| B | S&P 500 non-tech 30 (consumer/healthcare/industrials/financials/energy) | 30 | **5.352** | **0.0%** | 112% |
-| **C (champion)** | Combined 60-stock (A ∪ B) | 60 | **5.855** | −1.2% | **120%** |
+| Variant | Signal | OOS Sharpe | MaxDD | 0 Neg Yrs |
+|---------|--------|------------|-------|-----------|
+| A (baseline) | 1/price rank × drift gate | 0.800 | −22.9% | No |
+| B | 1/price rank ONLY (no gate) | 1.175 | −28.4% | No |
+| C | Drift fraction rank ONLY (no price) | 0.603 | −30.6% | No |
+| D | 12-1m momentum × drift gate | 0.452 | −39.0% | No |
+| **E** | **avg(1/price rank, drift rank), no gate** | **1.565** | **−15.8%** | **Yes** |
 
-**Critical result**: Var B (non-tech S&P 500) MATCHES NASDAQ performance (5.352 vs 5.328). The signal is **universal**, not a tech-sector artifact. Var C (60-stock combined) reaches new H-series record **OOS Sharpe 5.855**.
-
-**Why expanding the universe helps**: More stocks → more rank dispersion in both the 1/price and drift dimensions → cleaner top-3 selection → less noise in the selected portfolio.
-
-### H418 — Signal Decomposition
-
-Isolates which component drives the alpha:
-
-| Variant | Signal | OOS Sharpe | MaxDD | Interpretation |
-|---------|--------|------------|-------|----------------|
-| **A (baseline)** | 1/price rank × drift gate | **5.328** | −1.2% | Combined signal |
-| B | 1/price rank ONLY (no gate) | **0.605** | **−45%+** | Cheap alone = disaster |
-| C | Drift fraction rank ONLY (no price) | **4.497** | −2.1% | Drift alone is strong |
-| D | 12-1m momentum rank × drift gate | 4.513 | −2.3% | Momentum substitute works |
-| E | avg(1/price rank, drift rank), no gate | 3.542 | −3.1% | Continuous > binary by 0.955 pts |
-
-**Verdict**: 
-- The **binary drift gate is essential**: removing it (Var B) destroys performance. The gate acts as a "currently alive" filter — excludes cheap stocks that are in freefall.
-- The **1/price component is a value tiebreaker, not a momentum signal**: drift alone (Var C, 4.497) is already strong. Price rank adds ~0.83 Sharpe points by preferring the cheaper stocks among those that pass the drift filter.
-- **Binary gate beats continuous rank** (Var A 5.328 > Var E 3.542): a hard threshold is more discriminative than a soft score. Gates that exclude the bottom 40% categorically outperform graded inclusion.
-- **Mechanism**: "value-conditional-on-momentum" — buy cheap stocks *only when they're trending*. Cheap stocks trending down are value traps; cheap stocks trending up are under-recognized momentum names.
+**Key corrected findings**:
+- The binary drift gate **does not help** when the look-ahead is removed — price alone (1.175) beats the gated signal (0.800)
+- The **soft combination** (Var E: average of price rank + drift rank, no binary threshold) is the best corrected expression at OOS 1.565
+- Even Var E is well below the original gate; **NOT CONFIRMED**
+- The original "binary gate beats continuous rank" finding was entirely a look-ahead artifact — the binary gate was selecting stocks that *already had* a positive month
 
 ### Academic Backing
 
@@ -890,53 +887,33 @@ The H416 family signal draws from three distinct literatures:
 **4. Regime-Conditional Momentum — Chordia & Shivakumar (2002)**  
 "Momentum, Business Cycle, and Time-Varying Expected Returns", *Journal of Finance* 57(2). Momentum profits are concentrated in economic expansions; the drift gate implicitly filters for expansion-like conditions (stocks making consistent daily progress), explaining the near-zero MaxDD even during 2022 when pure momentum strategies had large drawdowns.
 
-### Why Top-N = 3 Optimizes This Signal
+### Signal Construction Note (use `.shift(1)`)
 
-Counter to the general ETF rotation finding (H026: top-1 always best), H416's top-3 beats top-2:
-
-| Top-N | OOS Sharpe |
-|-------|------------|
-| Top-1 | ~4.3 |
-| **Top-2** | **4.825** (H411) |
-| **Top-3** | **5.342** (H416 Var I) |
-| Top-4 | ~4.9 |
-
-The gate typically leaves 3–8 qualifying stocks each month. With top-3, you're selecting the best subset from ~5 qualified names — meaningful selection. With top-1, you take the single cheapest trending stock, which has too much idiosyncratic risk. With top-4+, you dilute into lower-ranked candidates.
-
-### Production Implications
-
-H417 Var C (OOS 5.855) is the strongest confirmed signal in the H-series. Correlation analysis vs the current production portfolio is the next required step:
+The `backtest_h416()` helper above must be called with `signal.shift(1)` to avoid look-ahead:
 
 ```python
-# Correlation check required before portfolio admission
-# Need: monthly returns series for H417-C vs H026, H041a, H045, IBS
-# Gate for admission: corr < 0.50 with all production components
+# CORRECT usage (shift signal one period):
+returns = backtest_h416(signal.shift(1), monthly_px, top_n=3)
 
-from scipy.stats import pearsonr
-
-def check_portfolio_admission(new_strategy_rets, production_strategies):
-    """
-    Gate: H-series record is meaningless if it's 0.85 correlated with
-    an existing strategy. Check all pairwise OOS correlations.
-    """
-    results = {}
-    for name, prod_rets in production_strategies.items():
-        aligned = new_strategy_rets.align(prod_rets, join="inner")
-        r, p = pearsonr(*aligned)
-        results[name] = {"corr": round(r, 3), "p": round(p, 4),
-                         "admission_gate": r < 0.50}
-    return results
+# WRONG (look-ahead — earns month T return using month T drift gate):
+# returns = backtest_h416(signal, monthly_px, top_n=3)
 ```
 
-**Expected correlation hypothesis**: H417-C is likely modestly correlated with H026 (both momentum-flavored, both hold large-cap US stocks) but potentially less so than H198 6-0m (which explicitly selects by price momentum). The 1/price component introduces a value tilt; the drift gate is more granular (20d daily window) than monthly price momentum. Best-case: Corr ~0.30–0.50 with H026.
+### What the Corrected Results Mean
+
+The family is not abandoned — it needs a new hypothesis design:
+
+- **H418 Var E (1.565 OOS, 0 neg years)** is the best honest expression: blend 1/price rank + drift fraction rank continuously, no binary threshold. Worth pursuing as H419/H420.
+- **The 1/price factor has standalone signal** (H418 Var B = 1.175): pure low-price rank on NASDAQ 30 is modestly positive. This is consistent with Birru & Wang 2016's nominal price illusion but is not production-grade alone.
+- **The drift gate when lagged has less edge**: the 20d drift gate calculated from month T-1 to predict month T does not discriminate as cleanly — cheap stocks that trended well last month do not systematically outperform next month on this universe.
 
 ### Next Steps
 
 | Hypothesis | Status | Description |
 |------------|--------|-------------|
-| H419 | QUEUED | Correlation analysis — H417-C vs production portfolio |
-| H425 | QUEUED | H417-C with VIX gate (VIX<25 entry filter) to reduce MaxDD |
-| H426 | QUEUED | H417-C + PEAD combination — position in stocks passing both drift gate AND recent earnings beat |
+| H419 | QUEUED | Redesign: 1/price rank + continuous drift rank blend (Var E style), re-gate with honest threshold ≥ H198 (1.174) |
+| H425 | DEPRIORITIZED | VIX gate overlay — need honest baseline first |
+| H426 | DEPRIORITIZED | PEAD combo — need honest baseline first |
 
 **See also:**
 - [H411/H416/H417/H418 results JSON](../../backtesting/results/) — full variant tables
