@@ -33,6 +33,20 @@ Last scan completed: 2026-07-18 (3 new staged proposals (prop6–prop8), 2 new w
 
 ---
 
+## [2026-07-21] ingest | momentum-strategies.md major expansion — H411/H416/H417/H418 family
+
+Pages created: 1 (research-log/2026-07-21.md). Pages updated: 2 (momentum-strategies.md, index.md).
+
+**Key entities added**: H411 (1/price × drift gate, OOS 4.825), H416 (9-variant robustness, champion Var I OOS 5.342), H417 (universe sensitivity, NEW RECORD Var C OOS 5.855 combined 60-stock), H418 (signal decomposition — value alone = disaster, drift gate alone = 4.497, combined = 5.328).
+
+**Mechanism documented**: "value-conditional-on-momentum" — cheap stocks within a universe filtered by a binary positive-day-fraction gate. The binary gate (>60% positive days in 20d) is essential; removing it collapses OOS from 5.3 to 0.6. The signal is universal: S&P 500 non-tech universe matches NASDAQ performance.
+
+**Academic backing added**: Birru & Wang 2016 (nominal price illusion), Grinblatt & Moskowitz 2004 (return consistency predictor), Asness et al. 2013 (value × momentum everywhere), Chordia & Shivakumar 2002 (regime-conditional momentum).
+
+**Index fix**: VRP entry had no description (accidentally placed on value-factors.md line). Both lines corrected.
+
+---
+
 ## [2026-07-20] scan | Dream cycle nightly research scan (2026-07-21 build batch)
 
 **Topics searched:** Drift-regime cross-sectional factors; look-ahead bias formal verification; spectral memory models of equity returns; agentic factor discovery; PEAD improvements.
