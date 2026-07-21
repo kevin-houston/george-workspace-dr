@@ -33,6 +33,38 @@ Last scan completed: 2026-07-18 (3 new staged proposals (prop6–prop8), 2 new w
 
 ---
 
+## [2026-07-20] scan | Dream cycle nightly research scan (2026-07-21 build batch)
+
+**Topics searched:** Drift-regime cross-sectional factors; look-ahead bias formal verification; spectral memory models of equity returns; agentic factor discovery; PEAD improvements.
+
+**Papers found and evaluated (10 total):**
+- arXiv:2511.12490 — "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability" (Singha 2025) → HIGH: independent validation of H411/H416 mechanism on S&P 500 with 63d/60% params; H424 staged
+- arXiv:2607.04958 — "Look-Ahead-Freedom as Temporal Non-Interference" (Fonseca Jul 2026) → HIGH: formal CS verification of look-ahead bias, linear-time checker; new backtesting page
+- arXiv:2607.03858 — "Spectral Generalisation of Variance Ratio: Multi-Memory Factor Model" (Frøseth Jul 2026) → MEDIUM: five-factor memory decomposition, 1988 regime shift, return/vol decoupling; new backtesting page
+- arXiv:2603.14288 — "Beyond Prompting: Agentic Factor Investing" (Huang & Fan Mar 2026) → MEDIUM: US equity Sharpe 3.11, autonomous symbolic factor generation; H425 staged
+- arXiv:2507.07107 (Du): China A-share, low relevance
+- arXiv:2606.29194 (Li et al.): CSI 1000, single seed, no code, low
+- arXiv:2607.06117 (Xiong): 354-506% annual turnover, not monthly compatible, low
+- arXiv:2607.01705 (Eccles & Lee): Pure theory, MACD derivation, no results, low
+- arXiv:2607.05091 (Shin): Factor diagnostic, not trading strategy, low
+- arXiv:2509.24254 (Wu et al.): Press release structure for PEAD — already covered by H421
+
+**Pages created (2):**
+- wiki/trading/backtesting/lookahead-formal-verification.md — formal temporal non-interference framework; H256 incident formalized; agentic retrieval coverage
+- wiki/trading/backtesting/multi-memory-factor-model-equity.md — five-factor spectral memory model; 1988 volatility regime shift; return/vol channel decoupling for signal design
+
+**Staged proposals (4 new, props 1–4 in 2026-07-21/ folder):**
+- prop1: H424 new_script — drift-regime × value+reversal on S&P 500 (medium risk)
+- prop2: H425 new_script — agentic factor investing GPT-4o-mini loop on H198 (medium risk)
+- prop3: lookahead-formal-verification.md new_page (low risk)
+- prop4: multi-memory-factor-model-equity.md new_page (low risk)
+
+**Section targeted for expansion:** Backtesting (12 → 14 pages).
+
+**Index updated:** pages 221 → 223. Two new backtesting index entries. Hypothesis log reference updated to H418.
+
+---
+
 ## [2026-04-24] init | Wiki initialized
 
 Wiki created. Sources: 0. Pages: 0.

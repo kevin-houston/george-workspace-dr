@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-19
+updated: 2026-07-20
 sources_indexed: 4
-pages: 221
+pages: 223
 ---
 
 # Wiki Index
@@ -138,8 +138,10 @@ When answering a query:
 - [Regime Detection Signals — Practical Data Guide](trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX threshold (FRED VIXCLS), yield curve (T10Y2Y, DGS10) signals; look-ahead rules; continuous score (Xiong 2026); H249 production pipeline ← new 2026-06-04
 - [Signal Half-Life & Alpha Decay](trading/backtesting/signal-halflife.md) — IC decay curves, half-life estimation, AI-driven compression (momentum 84m→12m per arXiv:2605.23905); IS window sizing; H261b insulation argument ← new 2026-05-31
 - [Survivorship Bias & Universe Construction](trading/backtesting/survivorship-bias.md) — delisting bias, S&P 500 backfill, CRSP vs point-in-time; impact on H243 short-leg; mitigation strategies ← new 2026-06-03
-- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H416; H411 CONFIRMED (pure value 1/price × 20d drift gate, OOS Sharpe 4.825, new record 2026-07-17); H413 NOT CONFIRMED (BAB × lagged vol gate, best OOS 1.173); H416 CONFIRMED (drift gate robustness — top-3 picks → OOS Sharpe 5.342, NEW H-SERIES RECORD 2026-07-18); production portfolio H041a/H026/H045/IBS — OOS Sharpe 4.158
+- [Hypothesis Log](trading/backtesting/hypothesis-log.md) — H001–H418; H416 CONFIRMED (drift gate robustness top-3 picks OOS Sharpe 5.342, H-series record 2026-07-18); H417 CONFIRMED (universe sensitivity, Sharpe 5.328 OOS); H418 PARTIAL CONFIRMED (signal decomposition: 1/price dominant over drift standalone); next staged: H424 (S&P500 drift-regime) H425 (agentic factor discovery); production portfolio H041a/H026/H045/IBS — OOS Sharpe 4.158
 - [Regime-Conditional Distributional Strategy Evaluation](trading/backtesting/regime-conditional-strategy-eval.md) — Ozimek (arXiv:2606.31251); GAMLSS/ZAGA distributional comparison conditioned on regime covariates; replaces point-metric Sharpe comparison with full distribution; identifies regime-robustness vs regime-opportunism trade-off ← new 2026-07-17
+- [Look-Ahead-Freedom as Temporal Non-Interference](trading/backtesting/lookahead-formal-verification.md) — Fonseca (arXiv:2607.04958, Jul 2026); formal CS treatment of look-ahead bias as temporal non-interference; linear-time type-and-effect checker catches indirect leaks missed by statistical detectors; covers agentic retrieval, point-in-time joins, vintage reads; H256 incident pattern formalized ← new 2026-07-20
+- [Multi-Memory Factor Model of US Equity Returns](trading/backtesting/multi-memory-factor-model-equity.md) — Frøseth (arXiv:2607.03858, Jul 2026); spectral variance ratio eigendecomposition → 5 memory factors (F1-F5: persistent 4yr, antipersistent 6-18m, momentum 1-6m, short reversal 1-4wk, noise); 1988 volatility regime shift (not 1998); return/volatility channels structurally decoupled → additive signal design > multiplicative; grounding for H198/H411/IBS windows ← new 2026-07-20
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
