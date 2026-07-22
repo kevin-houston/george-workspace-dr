@@ -1,0 +1,68 @@
+{
+  "proposal_id": "scan_summary",
+  "date": "2026-07-22",
+  "type": "metadata",
+  "title": "Dream Cycle Scan Summary — 2026-07-22",
+  "target": null,
+  "source": null,
+  "hypothesis": null,
+  "risk": "low",
+  "content": {
+    "scan_date": "2026-07-22",
+    "build_date": "2026-07-22",
+    "next_hypothesis": "H429",
+    "proposals": [
+      {
+        "file": "1_findpo_pead_h426.json",
+        "type": "new_script",
+        "hypothesis": "H426",
+        "source": "arXiv:2507.18417 (Iacovides, Zhou & Mandic, Jul 2025)",
+        "one_liner": "FinDPO DPO-aligned Llama-3-8B as H174 8-K scorer — preference optimization avoids SFT memorization artifacts; GPT-4o-mini zero-shot Phase 1; gate OOS WR > 81.8%"
+      },
+      {
+        "file": "2_8k_event_taxonomy_h427.json",
+        "type": "new_script",
+        "hypothesis": "H427",
+        "source": "arXiv:2607.08346 (Dolphin et al., Jul 2026)",
+        "one_liner": "Fine-grained 8-K event taxonomy (119 types, 96% precision) filter for H174 PEAD — classify events, exclude noise (M&A/legal), require earnings-relevant type; gate OOS WR > 81.8%"
+      },
+      {
+        "file": "3_fri_ibs_timing_h428.json",
+        "type": "new_script",
+        "hypothesis": "H428",
+        "source": "arXiv:2606.29591 (Portnaya, Jun 2026)",
+        "one_liner": "FRI magnitude-only mean reversion: add |prior_return| > threshold filter to IBS entries (XLK/SMH/IGV) — theoretically grounded by FRI sign/magnitude decomposition; gate OOS Sharpe > 2.129"
+      }
+    ],
+    "wiki_pages_written": [
+      {
+        "path": "wiki/trading/backtesting/fri-magnitude-mean-reversion.md",
+        "title": "FRI Decomposition — Magnitude vs Direction in Equity Mean Reversion",
+        "summary": "Portnaya (2026) FRI decomposition: SPY lag-1 autocorrelation entirely magnitude-driven (p<1e-12), sign channel not significant (p=0.11). Validates IBS mechanism, grounds H428 filter design, establishes where NOT to apply mean reversion (credit/commodities/crypto)."
+      },
+      {
+        "path": "wiki/trading/tools/dpo-aligned-financial-nlp.md",
+        "title": "DPO-Aligned LLMs for Financial Sentiment and PEAD Scoring",
+        "summary": "FinDPO (arXiv:2507.18417): DPO preference alignment on Llama-3-8B for financial sentiment; avoids SFT memorization; 3-phase H174 upgrade path (GPT-4o-mini proxy → FinDPO checkpoint → domain DPO on PEAD events). Also covers 8-K taxonomy filter (H427 complement)."
+      }
+    ],
+    "thinnest_section_targeted": "backtesting (12 pages) — added FRI decomposition page; tools/NLP (thin on post-FinBERT landscape) — added DPO-aligned NLP page",
+    "papers_reviewed": [
+      "arXiv:2507.18417 — FinDPO: DPO-Aligned LLM for Financial Sentiment (Iacovides et al. Jul 2025) — STRONG: direct H174 scorer upgrade path; DPO generalization benefit well-documented; GPT-4o-mini proxy executable immediately",
+      "arXiv:2607.08346 — Grounded Event Extraction from SEC 8-K Filings with Fine-Grained Taxonomy (Dolphin et al. Jul 2026) — STRONG: 119-type taxonomy, 96% precision at high quality, 292k filings 2022-2026; complementary to H426 (event type filter vs scorer upgrade)",
+      "arXiv:2606.29591 — The Bounce Has No Direction: FRI Decomposition (Portnaya Jun 2026) — STRONG: direct theoretical validation of IBS mean-reversion mechanism; magnitude channel drives all SPY autocorrelation; actionable as H428 filter design",
+      "arXiv:2503.11499 — Tactical Asset Allocation with Macroeconomic Regime Detection — already covered by H383/H387 regime family; LOW novelty",
+      "arXiv:2605.25894 — Predicting Stock Price Direction on Earnings Days using Multi-modal DL — already covered by H357 (multi-modal PEAD); LOW novelty",
+      "arXiv:2412.18029 — Same Company, Same Signal: Identity in Earnings Call Transcripts — coverage bias issue (same as H168 finding); LOW actionability"
+    ],
+    "already_staged_skipped": [
+      "H420 (tail CVaR overlay)",
+      "H421 (10-K Item 1A PEAD)",
+      "H422 (FinBERT2 upgrade — overlaps H426)",
+      "H423 (MTL-PEAD)",
+      "H424 (drift-regime S&P500)",
+      "H425 (agentic factor discovery)"
+    ]
+  },
+  "apply_status": "pending"
+}
