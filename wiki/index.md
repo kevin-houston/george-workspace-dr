@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-20
+updated: 2026-07-22
 sources_indexed: 4
-pages: 223
+pages: 225
 ---
 
 # Wiki Index
@@ -76,6 +76,7 @@ When answering a query:
 - [LEAN / QuantConnect](trading/tools/lean-quantconnect.md) — open-source backtesting + live trading engine; best for options; requires Docker (pending install)
 - [Kraken CLI](trading/tools/kraken-cli.md) — official Kraken AI-native CLI; 151 MCP tools, paper trading built-in, crypto/forex/xStocks
 - [NLP & Alternative Data](trading/tools/nlp-alternative-data.md) — FinBERT, financial NLP models, EDGAR 8-K pipeline, AlphaVantage transcripts; H163/H168/H171 tooling
+- [DPO-Aligned LLMs for Financial Sentiment and PEAD Scoring](trading/tools/dpo-aligned-financial-nlp.md) — FinDPO (arXiv:2507.18417); DPO preference optimization on Llama-3-8B avoids SFT memorization; 3-phase H174 scorer upgrade path (GPT-4o-mini proxy → FinDPO → domain-PEAD DPO); 8-K taxonomy filter (H427 complement); H426/H427 staged 2026-07-22 ← new 2026-07-22
 - [Machine Learning for Trading](trading/tools/ml-for-trading.md) — LightGBM/XGBoost cross-sectional prediction, ModernFinBERT (H176 upgrade), Alphalens-Reloaded IC/ICIR, TA-Lib, skfolio CPCV, mlfinlab license warning
 - [OpenAlgo](trading/tools/openalgo.md) — open-source algo trading platform; India-only now, US broker support on 2026 roadmap
 - [LiveKit](trading/tools/livekit.md) — open-source real-time voice/video/data framework for AI agents; WebRTC media server + agent SDK + cloud hosting; relevant for voice trading interface and agent-to-agent comms
@@ -142,6 +143,7 @@ When answering a query:
 - [Regime-Conditional Distributional Strategy Evaluation](trading/backtesting/regime-conditional-strategy-eval.md) — Ozimek (arXiv:2606.31251); GAMLSS/ZAGA distributional comparison conditioned on regime covariates; replaces point-metric Sharpe comparison with full distribution; identifies regime-robustness vs regime-opportunism trade-off ← new 2026-07-17
 - [Look-Ahead-Freedom as Temporal Non-Interference](trading/backtesting/lookahead-formal-verification.md) — Fonseca (arXiv:2607.04958, Jul 2026); formal CS treatment of look-ahead bias as temporal non-interference; linear-time type-and-effect checker catches indirect leaks missed by statistical detectors; covers agentic retrieval, point-in-time joins, vintage reads; H256 incident pattern formalized ← new 2026-07-20
 - [Multi-Memory Factor Model of US Equity Returns](trading/backtesting/multi-memory-factor-model-equity.md) — Frøseth (arXiv:2607.03858, Jul 2026); spectral variance ratio eigendecomposition → 5 memory factors (F1-F5: persistent 4yr, antipersistent 6-18m, momentum 1-6m, short reversal 1-4wk, noise); 1988 volatility regime shift (not 1998); return/volatility channels structurally decoupled → additive signal design > multiplicative; grounding for H198/H411/IBS windows ← new 2026-07-20
+- [FRI Decomposition — Magnitude vs Direction in Equity Mean Reversion](trading/backtesting/fri-magnitude-mean-reversion.md) — Portnaya (arXiv:2606.29591, Jun 2026); FRI sign/magnitude decomposition; SPY lag-1 autocorrelation entirely magnitude-driven (p<10⁻¹², sign p=0.11); validates IBS mechanism theoretically; mean reversion absent from credit/commodities/crypto; H428 filter design ← new 2026-07-22
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules

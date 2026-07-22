@@ -2,7 +2,7 @@
 
 Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
-Last scan completed: 2026-07-18 (3 new staged proposals (prop6–prop8), 2 new wiki pages, Prediction Markets + Concepts sections expanded)
+Last scan completed: 2026-07-22 (3 staged proposals H426–H428, 2 new wiki pages, Backtesting + Tools/NLP sections expanded)
 
 ---
 
@@ -26,6 +26,29 @@ Last scan completed: 2026-07-18 (3 new staged proposals (prop6–prop8), 2 new w
 - prop6: llm-forecasting-methodology new page (low risk)
 - prop7: supply-chain-textual-signals new page (medium risk — new file)
 - prop8: options-income-strategies.md wiki_update with neural surrogate pricing section (low risk)
+
+## [2026-07-22] scan | Dream cycle nightly research scan
+
+**Topics searched:** DPO-aligned LLMs for financial sentiment (PEAD upgrade path); 8-K event taxonomy for earnings classification; microstructure of equity mean reversion (FRI decomposition); short-term reversal theory; earnings call NLP 2026.
+
+**Papers found and evaluated:**
+- arXiv:2507.18417 — FinDPO: Financial Sentiment Analysis via DPO Preference Optimization (Iacovides, Zhou & Mandic, Jul 2025) → HIGH relevance, H426 staged + new wiki page (dpo-aligned-financial-nlp.md)
+- arXiv:2607.08346 — Grounded Event Extraction from SEC 8-K Filings with Fine-Grained Taxonomy (Dolphin et al., Jul 2026) → HIGH relevance, H427 staged (119-type taxonomy, 96% precision)
+- arXiv:2606.29591 — The Bounce Has No Direction: FRI Sign/Magnitude Decomposition (Portnaya, Jun 2026) → HIGH relevance, H428 staged + new wiki page (fri-magnitude-mean-reversion.md)
+- arXiv:2503.11499 — Tactical Asset Allocation with Macroeconomic Regime Detection → LOW novelty (already covered by H383/H387 family)
+- arXiv:2412.18029 — Same Company, Same Signal: Identity in Earnings Call Transcripts → LOW actionability (coverage bias same as H168 finding)
+- arXiv:2605.25894 — Predicting Stock Price Direction using Multi-modal DL → LOW novelty (already covered by H357)
+
+**Pages created (2):**
+- wiki/trading/backtesting/fri-magnitude-mean-reversion.md — FRI decomposition: magnitude-only mean reversion validated; IBS mechanism grounded; H428 filter design; cross-reference to Frøseth multi-memory model
+- wiki/trading/tools/dpo-aligned-financial-nlp.md — FinDPO vs FinBERT comparison; 3-phase H174 upgrade path; 8-K taxonomy complement (H427); full NLP scorer evolution table
+
+**Staged proposals (3 new, H426–H428):**
+- H426: FinDPO DPO-aligned Llama-3-8B as H174 scorer (medium risk, GPT-4o-mini Phase 1 executable immediately)
+- H427: 8-K event taxonomy filter for H174 PEAD entries (medium risk, 119 types, 96% precision)
+- H428: FRI magnitude-filtered IBS entries on XLK/SMH/IGV (medium risk, theoretically grounded)
+
+**Index updated:** pages 223 → 225; updated: 2026-07-22
 
 **Section targeted for expansion:** Prediction Markets (added 1 page, now 8 pages) and Concepts (added 1 page, now 8 pages).
 
