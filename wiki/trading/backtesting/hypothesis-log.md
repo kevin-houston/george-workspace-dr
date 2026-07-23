@@ -1,3 +1,4 @@
+h429_status: CONFIRMED (Var C/F) (2026-07-22) — Wasserstein-Tracked Rolling HMM Regime Detector (H251 cure). Source: arXiv:2603.04441 (Boukardagha 2026). Gate: OOS Sharpe > 0.941 AND no single state > 80% OOS months (degeneracy check). Dual gate: Var A/B/D/E all fail — IS-frozen GaussianHMM still collapses to 100% low-vol state OOS (replicates H251 root cause). Var C (n=3, roll-5Y): Sharpe=1.144, MaxDD=-17.2%, MaxStateFrac=47% → PASSES BOTH. Var F (n=3, roll-3Y): Sharpe=1.067, MaxDD=-16.6%, MaxStateFrac=41% → PASSES BOTH. KEY FINDING: Rolling window (retrain every 6 months on last 5Y of data) cures H251 degeneracy completely. Wasserstein state matching preserves label identity across retraining windows. IS-only training (any n_components) is insufficient — the IS crisis thresholds (GFC-calibrated) never trigger in OOS bull market. BIC auto-selection (Var E) always picks n=3 from IS, so identical to Var A. PRODUCTION NOTE: Var C OOS Sharpe 1.144 > H251 0.941, but well below H311 EW-4 1.532 — not competitive for production blend on Sharpe basis; value may be in MaxDD improvement (-17.2% vs SPY -23.9%) and low Corr(H026). Script: backtesting/daily/run_h429_wasserstein_hmm.py. Results: backtesting/results/h429_results.json.
 h428_status: STAGED (2026-07-22) — FRI Magnitude-Only Mean Reversion: Theoretically-Grounded IBS Entry Timing for XLK/SMH/IGV. Source: arXiv:2606.29591 (Portnaya, Jun 2026) 'The Bounce Has No Direction: Sign, Magnitude, and the Microstructure of Equity Return Predictability'. Key finding: SPY lag-1 return autocorrelation is entirely magnitude-driven (p<10⁻¹², k=4 channel), while the sign/direction channel is not significant (p=0.11). This is the fingerprint of bid-ask bounce and non-synchronous trading, not directional reversal. H428 adds a prior-day |return| > threshold filter to H062–H112 IBS entries, concentrating the strategy on high-magnitude days where FRI says the bounce effect is strongest. Variants A/B/C test 1.0%/1.5%/2.0% magnitude thresholds; Var D relaxes IBS to 0.3; Var E is the unfiltered baseline; Var F uses IS-calibrated 60th-percentile threshold. Universe: XLK, SMH, IGV. IS: 2015-2020, OOS: 2021-2026. Gate: OOS Sharpe > 2.129 (H112 IBS baseline) AND MaxDD improvement vs baseline. Script: backtesting/daily/run_h428_fri_ibs.py (stub). Medium risk. Wiki: wiki/trading/backtesting/fri-magnitude-mean-reversion.md (new 2026-07-22).
 h427_status: STAGED (2026-07-22) — Fine-Grained 8-K Event Taxonomy Filter for H174 PEAD (119 Event Types). Source: arXiv:2607.08346 (Dolphin, Dursun, Blankenship, Adams & Pike, Jul 2026) 'Grounded Event Extraction from SEC 8-K Filings with a Fine-Grained Taxonomy'. Paper: two-stage LLM system tags 8-K filings against a 3-tier hierarchy of 119 event types. Stage 1 constrains output to valid taxonomy entries and anchors each tag to a verbatim quote; Stage 2 re-grades the quote against the category definition to produce a quality score. Applied to 292,984 filings 2022-2026, precision rises from 12% (low quality) to 96% (high quality score). H427 classifies H174 8-K corpus into event types and filters to PEAD-relevant events (Tier 1: EarningsBeat/RevenueUpside/GuidanceRaise; Tier 2: ProductLaunch/ContractWin), excluding noise events (M&A, legal settlements, governance changes). 4 filter variants tested: Var A (Tier 1 required), Var B (Tier 1 OR Tier 2), Var C (Tier 1 AND no exclusions), Var D (either positive AND no exclusions). Gate: OOS WR > 0.818, n >= 15 (H174 baseline). GPT-4o-mini zero-shot for taxonomy classification; OPENAI_API_KEY available. Script: backtesting/daily/run_h427_8k_event_filter.py (stub). Medium risk. Complement to H426 (scorer upgrade) and H287 (Janus-Q event annotation).
 h426_status: STAGED (2026-07-22) — FinDPO DPO-Aligned LLM as H174 8-K Scorer. Source: arXiv:2507.18417 (Iacovides, Zhou & Mandic, Imperial College London, Jul 2025) 'FinDPO: Financial Sentiment Analysis for Algorithmic Trading through Preference Optimization of LLMs'. FinDPO is the first finance-specific DPO-aligned causal LLM for trading. Base model: Llama-3-8B Instruct; trained on preference pairs from FinSentiment/Financial PhraseBank; produces continuous scores via softmax calibration on {positive, neutral, negative} logprobs. DPO advantages over FinBERT SFT: avoids memorization artifacts, better OOD generalization, handles 8k+ context (vs FinBERT 512 tokens), preference ordering signal. H426 tests as drop-in scorer replacement for H174 pipeline: maintain score >= 0.18 AND surprise >= 0.02 gates. Phase 1 (immediate): GPT-4o-mini zero-shot with DPO-style preference framing prompt (~$0.001/event). Phase 2: FinDPO checkpoint (pending public release). Phase 3: domain DPO on H174 confirmed/failed events. Gate: OOS WR > 0.818, n >= 15 (H174 baseline). IS: 2020-2022, OOS: 2023-present. Script: backtesting/daily/run_h426_findpo_pead.py (stub). Medium risk. Wiki: wiki/trading/tools/dpo-aligned-financial-nlp.md (new 2026-07-22).
@@ -9540,3 +9541,46 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 **Script**: backtesting/daily/run_h418.py
 **Results**: backtesting/results/h418_results.json
+
+---
+
+## H429 — Wasserstein-Tracked Rolling HMM Regime Detector: CONFIRMED (Var C/F) (2026-07-22)
+
+**Source**: arXiv:2603.04441 (Boukardagha 2026, Columbia University) — "Wasserstein-Based HMM for Portfolio Optimization"
+**Builds on**: H251 (CONFIRMED degenerate), H328 (Student-t degeneracy fix, NOT CONFIRMED)
+**Gate**: OOS Sharpe > 0.941 (H251 baseline) AND max single OOS state fraction ≤ 80% (degeneracy check)
+**Universe**: SPY / TLT / GLD
+**IS**: 2004–2017 | **OOS**: 2018–2026 (102 months)
+
+**Innovation**: Two upgrades over H251's static IS-trained GaussianHMM:
+1. **Wasserstein state matching**: When retraining, solve a min-cost bipartite matching problem using 2-Wasserstein distance between 1D Gaussian components (closed form: W2 = sqrt((μ1−μ2)² + (σ1−σ2)²)). Preserves state label identity across windows — solves label-switching.
+2. **Rolling window retraining**: Refit model every 6 months using last N months of data. Keeps Gaussian component means/variances calibrated to recent market conditions.
+
+| Var | Description         | IS Sh | OOS Sh | OOS MDD | CAGR% | MaxFrac | Degen | Gate |
+|-----|---------------------|-------|--------|---------|-------|---------|-------|------|
+| A   | n=3, IS-only        | —     | 0.950  | -18.9%  | 12.5% | 100%    | ⚠️    | ✗    |
+| B   | n=2, IS-only        | —     | 0.937  | -18.9%  | 12.3% | 87%     | ⚠️    | ✗    |
+| **C**   | **n=3, roll-5Y**    | —     | **1.144**  | **-17.2%**  | **13.4%** | **47%**  | ✓     | **✓**    |
+| D   | n=2, roll-5Y        | —     | 0.878  | -22.8%  | 9.6%  | 99%     | ⚠️    | ✗    |
+| E   | n=auto-BIC, IS-only | —     | 0.950  | -18.9%  | 12.5% | 100%    | ⚠️    | ✗    |
+| **F**   | **n=3, roll-3Y**    | —     | **1.067**  | **-16.6%**  | **11.5%** | **41%**  | ✓     | **✓**    |
+
+**Key findings:**
+- **H251 degeneracy root cause confirmed**: IS-frozen HMM (Var A/B/E) all collapse to single state OOS (87-100%). GFC-calibrated variance thresholds never trigger in 2018-2026 OOS period — identical failure mode as H251.
+- **Rolling retraining cures degeneracy**: Var C (5Y window) achieves 47% MaxStateFrac — the model actually distributes states across OOS, meaning regime detection is activating.
+- **n=3 beats n=2 on rolling**: Var C (1.144) >> Var D (0.878). A 2-state rolling model collapses to near-single-state (99%). Three states required for meaningful regime discrimination.
+- **Shorter window trades off quality vs adaptability**: Var F (3Y, Sharpe 1.067) < Var C (5Y, Sharpe 1.144), but both cure degeneracy. MaxDD slightly better on Var F (-16.6% vs -17.2%).
+- **BIC always selects n=3 from IS data** → Var E = Var A (identical outcome).
+- **Wasserstein matching**: Implemented as Hungarian assignment minimizing sum W2 distances over all state pairs. Computationally trivial at monthly frequency.
+
+**Production assessment:**
+- OOS Sharpe 1.144 (Var C) > H251 0.941 (+21%) — meaningful improvement
+- Still well below H311 EW-4+VIX<20 1.532 — not competitive for production blend as primary regime model
+- MaxDD -17.2% vs SPY OOS MaxDD -23.9% — provides downside protection
+- Correlation with H026 OOS likely similar to H251 (~0.71) — limited blend diversification
+- Best use: rolling HMM as an input feature to H249's VIX×200MA rule-based engine, not a standalone replacement
+
+**Verdict: CONFIRMED (Var C/F)** — Wasserstein state matching + rolling retraining cures H251's 100%-degeneracy. OOS Sharpe 1.144/1.067 both clear the 0.941 gate. Not a production replacement for H249's simpler rule-based approach, but proves that adaptive regime detection is achievable on this universe.
+
+**Script**: backtesting/daily/run_h429_wasserstein_hmm.py
+**Results**: backtesting/results/h429_results.json

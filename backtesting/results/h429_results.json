@@ -1,0 +1,80 @@
+{
+  "hypothesis": "H429",
+  "date": "2026-07-22",
+  "source": "arXiv:2603.04441 (Boukardagha 2026)",
+  "gate": "OOS Sharpe > 0.941 AND max_state_frac <= 0.80",
+  "results": [
+    {
+      "variant": "A: n=3, IS-only",
+      "sharpe": 0.95,
+      "maxdd": -0.189,
+      "cagr": 12.5,
+      "n_months": 102,
+      "max_state_frac": 1.0,
+      "degenerate": true,
+      "pass_sharpe": true,
+      "pass_degen": false,
+      "gate_pass": false
+    },
+    {
+      "variant": "B: n=2, IS-only",
+      "sharpe": 0.937,
+      "maxdd": -0.189,
+      "cagr": 12.3,
+      "n_months": 102,
+      "max_state_frac": 0.87,
+      "degenerate": true,
+      "pass_sharpe": false,
+      "pass_degen": false,
+      "gate_pass": false
+    },
+    {
+      "variant": "C: n=3, roll-5Y",
+      "sharpe": 1.144,
+      "maxdd": -0.172,
+      "cagr": 13.4,
+      "n_months": 102,
+      "max_state_frac": 0.47,
+      "degenerate": false,
+      "pass_sharpe": true,
+      "pass_degen": true,
+      "gate_pass": true
+    },
+    {
+      "variant": "D: n=2, roll-5Y",
+      "sharpe": 0.878,
+      "maxdd": -0.228,
+      "cagr": 9.6,
+      "n_months": 102,
+      "max_state_frac": 0.99,
+      "degenerate": true,
+      "pass_sharpe": false,
+      "pass_degen": false,
+      "gate_pass": false
+    },
+    {
+      "variant": "E: n=auto-BIC, IS",
+      "sharpe": 0.95,
+      "maxdd": -0.189,
+      "cagr": 12.5,
+      "n_months": 102,
+      "max_state_frac": 1.0,
+      "degenerate": true,
+      "pass_sharpe": true,
+      "pass_degen": false,
+      "gate_pass": false
+    },
+    {
+      "variant": "F: n=3, roll-3Y",
+      "sharpe": 1.067,
+      "maxdd": -0.166,
+      "cagr": 11.5,
+      "n_months": 102,
+      "max_state_frac": 0.41,
+      "degenerate": false,
+      "pass_sharpe": true,
+      "pass_degen": true,
+      "gate_pass": true
+    }
+  ]
+}
