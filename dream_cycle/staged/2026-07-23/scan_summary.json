@@ -1,0 +1,65 @@
+{
+  "proposal_id": "scan_summary",
+  "date": "2026-07-23",
+  "type": "metadata",
+  "title": "Dream Cycle Scan Summary — 2026-07-23",
+  "target": null,
+  "source": null,
+  "hypothesis": null,
+  "risk": "low",
+  "content": {
+    "scan_date": "2026-07-23",
+    "build_date": "2026-07-23",
+    "next_hypothesis": "H435",
+    "proposals": [
+      {
+        "file": "h432_text_enhanced_regime_detection.json",
+        "type": "new_script",
+        "hypothesis": "H432",
+        "source": "arXiv:2605.30363 (Yi, Mehra, Chen & Cartlidge, May 2026)",
+        "one_liner": "Text-enhanced regime gate on H045 bond rotation — LLM on Fed FOMC statements detects Treasury regime shifts 2-4 weeks before price signal; hawk/dove/neutral EMA pipeline; gate OOS Sharpe > 1.522"
+      },
+      {
+        "file": "h433_10k_sentiment_volatility.json",
+        "type": "new_script",
+        "hypothesis": "H433",
+        "source": "arXiv:2607.14174 (Choi, Jul 2026)",
+        "one_liner": "10-K Item 1A risk-factor LM sentiment as volatility-regime gate for H198 momentum — firm-level noise, portfolio-level signal; Nasdaq-100 2006-2023; gate OOS Sharpe > 1.174"
+      },
+      {
+        "file": "h434_mrc_multi_agent_etf.json",
+        "type": "new_script",
+        "hypothesis": "H434",
+        "source": "arXiv:2605.24490 (Pei, Ge, Zheng & Cartlidge, May 2026)",
+        "one_liner": "MRC Shapley-weighted blend of 3 deterministic agents (Momentum/Macro/OB) on H026 ETF universe; credit assignment via Shapley values across regime contexts; gate OOS Sharpe > 3.238"
+      }
+    ],
+    "wiki_pages_written": [
+      {
+        "path": "wiki/trading/algorithms/trend-following-theory.md",
+        "title": "Trend-Following System Theory — Frequency Domain, Autocorrelation, and ARFIMA",
+        "summary": "Sepp & Lucic (2026) unified TF theory: European/American/TSMOM taxonomy; Poisson-kernel spectral profitability formula (E[PnL] = integral of H(f)*S_rr(f)); ARFIMA long-memory; explains H376 no-skip discovery and IBS orthogonality to momentum."
+      },
+      {
+        "path": "wiki/trading/backtesting/retail-signal-failure-anatomy.md",
+        "title": "Retail Signal Failure — Anatomy of Popular Rule Failure Under Rigorous Gates",
+        "summary": "Darmanin (2026) three-gate viability: BY multiplicity correction + cost model + ruin analysis. Only calendar rules pass all 3 gates. Validates our H-series OOS Sharpe+MaxDD gates; adds exposure-matched benchmark and bootstrap CI recommendations."
+      }
+    ],
+    "thinnest_section_targeted": "algorithms/ (trend-following theory gap) + backtesting/ (signal validation methodology gap)",
+    "papers_reviewed": [
+      "arXiv:2605.30363 — Text-Enhanced Regime Detection Treasury Market (Yi et al. May 2026) — STRONG: LLM text signal 2-4 weeks before price; direct H045 upgrade path; actionable with OPENAI_API_KEY",
+      "arXiv:2607.14174 — 10-K Risk-Factor Sentiment as Volatility Gate (Choi Jul 2026) — STRONG: Item 1A → vol-regime signal; portfolio-level signal on Nasdaq-100; complement to H421",
+      "arXiv:2605.24490 — MRC Shapley Multi-Agent Credit Assignment (Pei et al. May 2026) — STRONG: deterministic agents + Shapley = tractable; direct H026 blend upgrade; novel production architecture",
+      "arXiv:2607.19497 — TF System Science (Sepp & Lucic Jul 2026) — MEDIUM: theoretical validation of existing strategies; wiki page created; no new backtest",
+      "arXiv:2607.20093 — Retail Signal Failure Anatomy (Darmanin Jul 2026) — MEDIUM: methodological validation; BY correction + ruin analysis; wiki page created"
+    ],
+    "already_staged_skipped": [
+      "H426 (FinDPO — applied 2026-07-22)",
+      "H427 (8-K taxonomy — applied 2026-07-22)",
+      "H428 (FRI-IBS — applied 2026-07-22)",
+      "H429 (Wasserstein HMM — CONFIRMED 2026-07-22)"
+    ]
+  },
+  "apply_status": "pending"
+}
