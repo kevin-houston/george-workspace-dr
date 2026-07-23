@@ -1,6 +1,10 @@
 {
-  "date": "2026-07-22",
-  "candidates": [],
+  "date": "2026-07-23",
+  "candidates": [
+    "GOOGL",
+    "TSLA",
+    "IBM"
+  ],
   "source": "earnings_only",
   "strategy": "PEAD_GAP"
 }

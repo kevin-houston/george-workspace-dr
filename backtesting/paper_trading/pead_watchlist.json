@@ -1,6 +1,18 @@
 {
-  "date": "2026-07-22",
+  "date": "2026-07-23",
   "candidates": [],
-  "scores": {},
-  "reason": "no earnings"
+  "scores": {
+    "GOOGL": {
+      "score": -0.0542,
+      "surprise": -0.2188
+    },
+    "TSLA": {
+      "score": -0.014,
+      "surprise": -0.2941
+    },
+    "IBM": {
+      "score": -0.026,
+      "surprise": -0.4565
+    }
+  }
 }

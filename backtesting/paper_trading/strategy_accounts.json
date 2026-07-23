@@ -53,25 +53,8 @@
       "backtest_oos_period": "H112 confirmed",
       "script": "h112_daily_ibs.py",
       "start_equity": 5000.0,
-      "cash": 327.4093,
-      "open_positions": {
-        "XLK": {
-          "qty": 18.2322,
-          "entry_price": 179.56,
-          "entry_date": "2026-07-21",
-          "cost_basis": 3273.7738,
-          "order_id": "ea085830-c574-4205-9f89-6ebb643aad05",
-          "note": "IBS entry: prev_ibs 0.060 < 0.15, gap +2.191% \u2265 -1.000%"
-        },
-        "SMH": {
-          "qty": 2.254,
-          "entry_price": 580.96,
-          "entry_date": "2026-07-21",
-          "cost_basis": 1309.4839,
-          "order_id": "5d576963-2754-46bf-8907-d2790c608b67",
-          "note": "IBS entry: prev_ibs 0.102 < 0.2, gap +3.960% \u2265 -0.500%"
-        }
-      },
+      "cash": 4863.3943,
+      "open_positions": {},
       "closed_trades": [
         {
           "symbol": "SMH",
@@ -84,6 +67,30 @@
           "return": -0.066998,
           "reason": "time exit: held 6d \u2265 6",
           "order_id": "17b3d8f1-ed1e-4d80-a53a-e42e6487c5c0"
+        },
+        {
+          "symbol": "XLK",
+          "entry_date": "2026-07-21",
+          "exit_date": "2026-07-22",
+          "entry_price": 179.56,
+          "exit_price": 178.155,
+          "qty": 18.2322,
+          "pnl": -25.62,
+          "return": -0.007825,
+          "reason": "IBS exit: prev_ibs 0.916 > 0.9",
+          "order_id": "9b62e8cd-3de4-4f38-891a-0f9d7d32558c"
+        },
+        {
+          "symbol": "SMH",
+          "entry_date": "2026-07-21",
+          "exit_date": "2026-07-22",
+          "entry_price": 580.96,
+          "exit_price": 571.352,
+          "qty": 2.254,
+          "pnl": -21.66,
+          "return": -0.016538,
+          "reason": "IBS exit: prev_ibs 0.862 > 0.75",
+          "order_id": "4787fac1-e881-40c5-9dbc-271bab78dda8"
         }
       ],
       "equity_history": [
@@ -118,6 +125,10 @@
         {
           "date": "2026-07-21",
           "equity": 4911.07
+        },
+        {
+          "date": "2026-07-22",
+          "equity": 4863.39
         }
       ],
       "status": "active"
@@ -180,5 +191,5 @@
       "status": "stub"
     }
   },
-  "updated": "2026-07-21T09:45:08.328479"
+  "updated": "2026-07-22T09:45:12.435398"
 }
