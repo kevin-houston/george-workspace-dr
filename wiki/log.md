@@ -2,7 +2,31 @@
 
 Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
-Last scan completed: 2026-07-22 (3 staged proposals H426–H428, 2 new wiki pages, Backtesting + Tools/NLP sections expanded)
+Last scan completed: 2026-07-23 (3 staged proposals H432–H434, 2 new wiki pages, Algorithms + Backtesting sections expanded)
+
+---
+
+## [2026-07-23] scan | Dream cycle nightly research scan
+
+**Topics searched:** trend-following theory (frequency domain / ARFIMA); retail signal failure / multiplicity correction; LLM-enhanced regime detection on Treasury market; 10-K risk factor sentiment for volatility prediction; multi-agent Shapley credit assignment (MRC).
+
+**Papers found and evaluated:**
+- arXiv:2607.19497 — "The Science and Practice of Trend-Following Systems" (Sepp & Lucic, Jul 21 2026) → HIGH relevance; unified frequency-domain TF theory; new wiki page
+- arXiv:2607.20093 — "Retail Trader's Ruin: An Anatomy of Popular Signal Failure" (Darmanin, Jul 22 2026) → HIGH relevance; 3-gate viability framework validates H-series approach; new wiki page
+- arXiv:2605.30363 — "Enhancing Regime Shift Detection Using Unstructured Data: A Study on the Treasury Market" (Yi, Mehra, Chen & Cartlidge, May 17 2026) → HIGH relevance; LLM on FOMC text detects regime shifts 2-4 weeks ahead of prices; H429 proposed
+- arXiv:2607.14174 — "How Much of a 10-K Matters? Aggregation-Dependent Value of Full-Text versus Risk-Factor Sentiment" (Choi, Jul 15 2026) → HIGH relevance; Item 1A risk factors predict volatility at sector/portfolio level; H430 proposed
+- arXiv:2605.24490 — "Market Regime Council for Dynamic Credit Assignment in Multi-Agent LLM Decision Systems" (Pei, Ge, Zheng & Cartlidge, May 23 2026) → HIGH relevance; Shapley credit assignment across specialist agents; H431 proposed
+
+**Pages created (2):**
+- wiki/trading/algorithms/trend-following-theory.md — Sepp & Lucic unified TF theory; Poisson-kernel spectral formula; ARFIMA long-memory; connection to H198 no-skip (H376), IBS (F4 spectral), H045 rate-shock, H429 justification
+- wiki/trading/backtesting/retail-signal-failure-anatomy.md — Darmanin 3-gate framework; BY multiplicity correction; exposure-matched benchmarks; equivalence tests; calendar rule exception; bootstrap CI recommendation for borderline strategies
+
+**Staged proposals (3):**
+- H432: Text-Enhanced Regime Shift Detection for H045 Bond Rotation (arXiv:2605.30363)
+- H433: 10-K Risk-Factor Sentiment as Volatility-Regime Gate for H198 (arXiv:2607.14174)
+- H434: Market Regime Council Shapley-Weighted Multi-Agent ETF Rotation (arXiv:2605.24490)
+
+**Thinnest section identified:** `dr/` with 4 pages (support section). Content gaps filled in algorithms (trend-following theory) and backtesting (signal validation methodology).
 
 ---
 

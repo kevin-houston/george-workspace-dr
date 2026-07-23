@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-22
+updated: 2026-07-23
 sources_indexed: 4
-pages: 225
+pages: 227
 ---
 
 # Wiki Index
@@ -68,6 +68,7 @@ When answering a query:
 - [XALPHA — Memory-Driven Alpha Discovery](trading/algorithms/xalpha-memory-alpha-discovery.md) — arXiv:2607.08332 (HKU + Grace Investment Machine, July 2026); three-brain closed-loop: Macro Brain (theme planning), Micro Brain (hypothesis→code→backtest), Cross Brain (generation feedback consolidation); tri-alignment check (theory/code/plausibility); CSI300 validated; analog to George's dream cycle; H407 stub staged ← new 2026-07-16
 - [Agentic Retrieval from Earnings Calls](trading/algorithms/agentic-earnings-retrieval.md) — arXiv:2507.07906 (SIGIR 2025 FIRE Workshop); LLM-agent builds dynamic hierarchical topic ontology from quarterly earnings calls; detects novel/discontinued/strengthening topics; 78% topic evolution accuracy; H408 stub: topic novelty as PEAD pre-filter (novelty path for composite gate) ← new 2026-07-16
 - [End-to-End Parametric Portfolio Policies](trading/algorithms/e2e-portfolio-policies.md) — arXiv:2607.00475 (Pollok & Robik, July 2026); transformer beats LSTM net of costs on 16 CME futures (LSTM 3–5× higher turnover); transformer ≈ TSMOM net cost; differentiable Sharpe loss; commodity futures: AI adds nothing over TSMOM; H318 implication: use transformer attention as features, not direct policy ← new 2026-07-17
+- [Trend-Following System Theory](trading/algorithms/trend-following-theory.md) — arXiv:2607.19497 (Sepp & Lucic, Jul 2026); unified frequency-domain treatment: European/American/TSMOM taxonomy; Poisson-kernel spectral profitability formula; ARFIMA long-memory; explains H198 no-skip discovery (H376), IBS orthogonality, H045 rate-shock regime breaks; H429 text-regime theoretical grounding ← new 2026-07-23
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -144,6 +145,7 @@ When answering a query:
 - [Look-Ahead-Freedom as Temporal Non-Interference](trading/backtesting/lookahead-formal-verification.md) — Fonseca (arXiv:2607.04958, Jul 2026); formal CS treatment of look-ahead bias as temporal non-interference; linear-time type-and-effect checker catches indirect leaks missed by statistical detectors; covers agentic retrieval, point-in-time joins, vintage reads; H256 incident pattern formalized ← new 2026-07-20
 - [Multi-Memory Factor Model of US Equity Returns](trading/backtesting/multi-memory-factor-model-equity.md) — Frøseth (arXiv:2607.03858, Jul 2026); spectral variance ratio eigendecomposition → 5 memory factors (F1-F5: persistent 4yr, antipersistent 6-18m, momentum 1-6m, short reversal 1-4wk, noise); 1988 volatility regime shift (not 1998); return/volatility channels structurally decoupled → additive signal design > multiplicative; grounding for H198/H411/IBS windows ← new 2026-07-20
 - [FRI Decomposition — Magnitude vs Direction in Equity Mean Reversion](trading/backtesting/fri-magnitude-mean-reversion.md) — Portnaya (arXiv:2606.29591, Jun 2026); FRI sign/magnitude decomposition; SPY lag-1 autocorrelation entirely magnitude-driven (p<10⁻¹², sign p=0.11); validates IBS mechanism theoretically; mean reversion absent from credit/commodities/crypto; H428 filter design ← new 2026-07-22
+- [Retail Signal Failure — Anatomy of Popular Rule Families](trading/backtesting/retail-signal-failure-anatomy.md) — arXiv:2607.20093 (Darmanin, Jul 2026); 3-gate practical viability (BY multiplicity correction + cost model + ruin analysis); 5 signal families; only calendar rules pass all 3 gates; validates our OOS Sharpe + MaxDD + cost gates; exposure-matched benchmark lesson; bootstrap CI recommendation for borderline Sharpe 1.0-1.3 cases ← new 2026-07-23
 
 **Paper Trading**
 - [Paper Trading Index](trading/paper-trading/index.md) — active strategies, open positions, iron condor rules
