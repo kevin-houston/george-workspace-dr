@@ -3,15 +3,15 @@
   "date": "2026-07-24",
   "source": "arXiv",
   "source_url": "https://arxiv.org/abs/2604.04264",
-  "title": "H439 — Agentic RAG architecture for PEAD NLP signal generation",
+  "title": "H439 \u2014 Agentic RAG architecture for PEAD NLP signal generation",
   "rationale": "arXiv:2604.04264 'Decoding market's pulse: Agentic Retrieval-Augmented Generation for financial document analysis' (2026). 3-agent pipeline: (1) Retriever agent identifies relevant passages from SEC filings, (2) Analyst agent synthesizes sentiment and earnings quality signals, (3) Trader agent converts to entry/exit recommendations. Paper reports outperformance of GPT-4o single-agent baseline on earnings reaction prediction. Directly compatible with H274 (multi-agent PEAD debate) and H163/H174 production pipeline (FinBERT single-model). The agentic RAG approach could improve WR above 81.8% by using more context per filing and structured reasoning across agents. Estimated cost: ~$0.15/event with gpt-4o-mini at scale.",
   "risk_level": "medium",
   "type": "new_script",
   "target_file": "/workspace/agent/backtesting/daily/run_h439.py",
   "content": "Design stub: 3-agent pipeline using OpenAI API. Agent 1 (Retriever): pulls relevant paragraphs from EDGAR 8-K text by section (Item 2.02 + surrounding context). Agent 2 (Analyst): scores sentiment, earnings quality, surprise magnitude. Agent 3 (Trader): generates +1/0/-1 signal with confidence. Backtest: apply to H174 OOS events (n=22, WR=81.8%) and compare. Gate: WR > 81.8% AND n >= 15 events. Requires $OPENAI_API_KEY (already in env).",
   "action": "write",
-  "apply_status": "pending",
-  "notes": "Medium risk — new script only; does not touch existing PEAD production pipeline until confirmed",
+  "apply_status": "applied",
+  "notes": "Medium risk \u2014 new script only; does not touch existing PEAD production pipeline until confirmed",
   "hypothesis_number": "H439",
   "hypothesis_status": "PROPOSED",
   "design": {
@@ -23,6 +23,6 @@
     ],
     "gate": "OOS WR > 81.8% (H174 baseline), n >= 15",
     "estimated_cost_per_run": "$0.10-0.20 with gpt-4o-mini",
-    "implementation_path": "run_h439.py → H174 event list → OpenAI API → signal DataFrame → eval vs H174 WR"
+    "implementation_path": "run_h439.py \u2192 H174 event list \u2192 OpenAI API \u2192 signal DataFrame \u2192 eval vs H174 WR"
   }
 }

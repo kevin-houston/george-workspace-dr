@@ -461,3 +461,6 @@ Crypto is 3–5× more volatile than equities. A 20% BTC drawdown in a week is r
 - [Market Timing Overlays](market-timing-overlays.md) — SPY 200MA overlay can gate crypto allocation
 - [Calendar Anomalies](calendar-anomalies.md) — Monday effect analogue in equities
 - [IBS Mean-Reversion](ibs-mean-reversion.md) — crypto equivalent would be intraday BTC IBS
+
+
+Add section at bottom of crypto-trading-strategies.md: '## LLM as signal not allocator (PortBench 2026)\n\nPortBench benchmark (arXiv:2604.14199, 2026): 90% of LLMs fail to beat equal-weight portfolio allocation across asset classes including crypto. Key implication for crypto strategy design: use LLMs as filter/signal layer (e.g. regime detection, narrative sentiment) rather than as direct allocation agents. H318 (meta-agent ETF rotation selector) uses LLM as filter with fixed-weight allocation for this reason. Cross-reference: [Multi-Agent LLM Trading](multi-agent-llm-trading.md).'

@@ -3,15 +3,15 @@
   "date": "2026-07-24",
   "source": "arXiv + prior wiki synthesis",
   "source_url": "https://arxiv.org/abs/2604.14199",
-  "title": "H440 — PortBench crypto allocation failure mode: LLM-as-filter wiki update",
+  "title": "H440 \u2014 PortBench crypto allocation failure mode: LLM-as-filter wiki update",
   "rationale": "PortBench (2026) benchmark found that 90% of LLMs fail to beat equal-weight allocation in portfolio construction tasks, including crypto. This finding is already noted in multi-agent-llm-trading.md but the implication for H318 (meta-agent ETF rotation selector) and crypto strategy design needs to be more explicit: LLMs should function as signal generators and filters, not as allocators. The wiki note on PortBench in multi-agent-llm-trading.md currently lacks a cross-reference to crypto-trading-strategies.md and algorithms/factor-models.md where the LLM-as-filter pattern should be reinforced.",
   "risk_level": "low",
   "type": "wiki_update",
   "target_file": "/workspace/agent/wiki/trading/algorithms/crypto-trading-strategies.md",
   "content": "Add section at bottom of crypto-trading-strategies.md: '## LLM as signal not allocator (PortBench 2026)\\n\\nPortBench benchmark (arXiv:2604.14199, 2026): 90% of LLMs fail to beat equal-weight portfolio allocation across asset classes including crypto. Key implication for crypto strategy design: use LLMs as filter/signal layer (e.g. regime detection, narrative sentiment) rather than as direct allocation agents. H318 (meta-agent ETF rotation selector) uses LLM as filter with fixed-weight allocation for this reason. Cross-reference: [Multi-Agent LLM Trading](multi-agent-llm-trading.md).'",
   "action": "append",
-  "apply_status": "pending",
-  "notes": "Low risk — pure wiki addition. Reinforces architecture decision already made for H318.",
+  "apply_status": "applied",
+  "notes": "Low risk \u2014 pure wiki addition. Reinforces architecture decision already made for H318.",
   "hypothesis_number": "H440",
-  "hypothesis_status": "PROPOSED — wiki update only, not a backtest"
+  "hypothesis_status": "PROPOSED \u2014 wiki update only, not a backtest"
 }
