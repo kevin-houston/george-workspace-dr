@@ -1,0 +1,149 @@
+{
+  "hypothesis": "H437",
+  "title": "Beta-Adjusted Alpha + Trailing Sharpe Rotation on H026 ETF Universe",
+  "gate_oos_sharpe": 1.2,
+  "universe": [
+    "XLK",
+    "XLE",
+    "XLF",
+    "XLV",
+    "XLI",
+    "XLB",
+    "XLU",
+    "XLRE",
+    "XLY",
+    "XLP",
+    "XLC",
+    "GLD",
+    "TLT",
+    "IEF",
+    "TIP",
+    "DBC",
+    "AGG",
+    "GDX",
+    "DBA",
+    "SLV",
+    "UNG",
+    "EWZ",
+    "IBB",
+    "XME"
+  ],
+  "is_period": "2008-01-01 \u2013 2017-12-31",
+  "oos_period": "2018-01-01 \u2013 2026-07-01",
+  "variants": {
+    "Var_A": {
+      "description": "Pure alpha (12m ETF - beta\u00d7SPY_12m) top-1",
+      "is": {
+        "n": 120,
+        "sharpe": -0.115,
+        "maxdd": -0.718,
+        "cagr": -0.038,
+        "neg_yrs": 6
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.507,
+        "maxdd": -0.442,
+        "cagr": 0.205,
+        "neg_yrs": 4
+      },
+      "wf_ratio": 0.0,
+      "passed_gate": false
+    },
+    "Var_B": {
+      "description": "Alpha top-1 + positive alpha filter",
+      "is": {
+        "n": 120,
+        "sharpe": -0.115,
+        "maxdd": -0.718,
+        "cagr": -0.038,
+        "neg_yrs": 6
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.507,
+        "maxdd": -0.442,
+        "cagr": 0.205,
+        "neg_yrs": 4
+      },
+      "wf_ratio": 0.0,
+      "passed_gate": false
+    },
+    "Var_C": {
+      "description": "50/50 combo: rank(alpha)+rank(12m)",
+      "is": {
+        "n": 120,
+        "sharpe": 0.106,
+        "maxdd": -0.618,
+        "cagr": 0.035,
+        "neg_yrs": 4
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.498,
+        "maxdd": -0.407,
+        "cagr": 0.186,
+        "neg_yrs": 4
+      },
+      "wf_ratio": 4.698,
+      "passed_gate": false
+    },
+    "Var_D": {
+      "description": "Trailing 12m Sharpe ranking top-1",
+      "is": {
+        "n": 120,
+        "sharpe": 0.319,
+        "maxdd": -0.353,
+        "cagr": 0.065,
+        "neg_yrs": 4
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.246,
+        "maxdd": -0.504,
+        "cagr": 0.055,
+        "neg_yrs": 4
+      },
+      "wf_ratio": 0.771,
+      "passed_gate": false
+    },
+    "Var_E": {
+      "description": "Alpha+inv_vol dual rank",
+      "is": {
+        "n": 120,
+        "sharpe": 0.247,
+        "maxdd": -0.324,
+        "cagr": 0.029,
+        "neg_yrs": 5
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.434,
+        "maxdd": -0.251,
+        "cagr": 0.064,
+        "neg_yrs": 2
+      },
+      "wf_ratio": 1.757,
+      "passed_gate": false
+    },
+    "Var_F": {
+      "description": "H026 canonical: 12m+inv_vol top-1 (baseline)",
+      "is": {
+        "n": 120,
+        "sharpe": 0.507,
+        "maxdd": -0.24,
+        "cagr": 0.071,
+        "neg_yrs": 4
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.785,
+        "maxdd": -0.222,
+        "cagr": 0.127,
+        "neg_yrs": 3
+      },
+      "wf_ratio": 1.548,
+      "passed_gate": false
+    }
+  }
+}

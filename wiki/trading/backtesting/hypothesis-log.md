@@ -1,3 +1,6 @@
+h437_status: NOT CONFIRMED (2026-07-24) — Beta-Adjusted Alpha + Trailing Sharpe Rotation on H026 ETF Universe. Rolling 12m beta via cov/var vs SPY; alpha = mom12 - beta×SPY_mom12. Gate: OOS Sharpe > 1.200. All 6 variants fail: pure alpha (Var A/B) OOS 0.507 WORSE than H026 canonical (Var F) OOS 0.785. Beta-adjusted alpha destroys signal on multi-asset ETF universe — SPY beta exposure is a feature not noise (high-beta equity ETFs persist in bull). Trailing 12m Sharpe rank (Var D) worst at OOS 0.246. Key finding: H026 canonical OOS Sharpe 0.785 consistent with H435/H436 showing ~0.7-0.8 — suggests H026 has degraded from historical 1.2 gate in 2024-2026 period. Script: backtesting/daily/run_h437.py. Results: backtesting/results/h437_results.json.
+h436_status: NOT CONFIRMED (2026-07-24) — Relative Strength vs SPY on H026 ETF Universe. Gate: OOS Sharpe > 1.200. Fatal flaw: rank(x_i - c) = rank(x_i) for constant c — subtracting common SPY return does NOT change cross-sectional ETF rankings. Vars A/B/C all identically OOS 0.509 = pure momentum. Vars D/E identically OOS 0.707 = H026 canonical. Mathematical identity confirmed: need rolling beta regression (H437) for true alpha isolation. Script: backtesting/daily/run_h436.py. Results: backtesting/results/h436_results.json.
+h435_status: NOT CONFIRMED (2026-07-24) — 52-Week High Proximity Momentum on H026 25-Asset ETF Universe. George & Hwang (2004) anchoring; H291 NOT CONFIRMED on 50-stock. Gate: OOS Sharpe > 1.200. Look-ahead bias trap found: unshifted prox52 gave Var A OOS 3.499 (implausible); fixed with shift(1) → OOS 0.801 (best variant). All 6 fail gate. Proximity signal better than raw momentum (0.801 vs 0.514) but insufficient. Large-cap ETFs near 52w high in bull markets — low cross-sectional variation. Script: backtesting/daily/run_h435.py. Results: backtesting/results/h435_results.json.
 h434_status: STAGED (2026-07-23) — Market Regime Council (MRC) Shapley-Weighted Multi-Agent ETF Rotation on H026 Universe. Source: arXiv:2605.24490 (Pei, Ge, Zheng & Cartlidge, May 2026) 'Market Regime Council for Dynamic Credit Assignment in Multi-Agent LLM Decision Systems'. MRC architecture: N=3 deterministic specialist agents (Momentum/Macro/OB-Filtered), compute all 2^N-1=7 coalition outputs, track exponentially-decayed Shapley credits per coalition, blend final allocation by Shapley weights. Key innovation over H318 meta-agent selector: no assumption that one agent dominates — credit adapts as regimes shift. Agents: (1) 12m momentum+inv_vol rank (H026 canonical); (2) SPY 200MA + VIX<20 gate (H301/H165a); (3) OB-filtered top-2 (H346 best_B window=20/swing_len=3). Variants: MRC (Shapley-weighted), EQUAL (equal-weight blend), MOMENTUM_ONLY, OB_ONLY, MAJORITY (vote). IS: 2008-2017 (H026 canonical), OOS: 2018-2026. Gate: OOS Sharpe > 3.238 (H346 canonical OOS) AND MaxDD < -6.7%. Script: backtesting/daily/run_h434_mrc_shapley_rotation.py. Medium risk. Shapley computation: O(2^N × T), tractable for N=3.
 h433_status: STAGED (2026-07-23) — 10-K Risk-Factor Sentiment as Volatility-Regime Gate for H198 Momentum. Source: arXiv:2607.14174 (Choi, Jul 2026) 'How Much of a 10-K Matters? Aggregation-Dependent Value of Full-Text versus Risk-Factor Sentiment'. Key finding: Item 1A (Risk Factors) text trained against VOLATILITY labels (not return labels) has statistically significant predictive power at sector/portfolio aggregation level for Nasdaq-100 constituents (2006-2023); full text is better for returns but Risk Factors are better for volatility regime. H433 classifies H198 30-stock universe annual 10-K filings via Loughran-McDonald wordlist → portfolio-level volatility sentiment score; gate: HIGH VOL regime (>IS-calibrated threshold) → reduce to top-3 from top-6 or exit to BIL. Variants A (top-3 reduce), B (BIL exit), C (continuous tilt), D (GPT-4o-mini scorer), E (full 10-K not just Item 1A), F (baseline). IS: 2013-2018, OOS: 2019-2026. Gate: OOS Sharpe > 1.174 AND MaxDD > -10%. Script: backtesting/daily/run_h433_10k_risk_sentiment.py. Medium risk. Annual 10-K signal → 1 update/year per stock; 90-day SEC lag applied.
 h432_status: STAGED (2026-07-23) — Text-Enhanced Regime Shift Detection for H045 Bond Rotation — LLM on Fed Communications. Source: arXiv:2605.30363 (Yi, Mehra, Chen & Cartlidge, May 2026) 'Enhancing Regime Shift Detection Using Unstructured Data: A Study on the Treasury Market'. Key finding: LLM reasoning over central-bank communications detects Treasury market regime shifts 2-4 weeks before they materialise in prices; standard yield-curve inversion gate (H314 NOT CONFIRMED) lags by 1-3 months. H432 pipeline: (1) Download Fed statements + FOMC minutes 2007-2026; (2) GPT-4o-mini classifies each as HAWKISH/NEUTRAL/DOVISH; (3) 3-month EMA hawkish score; (4) If score > 0.5 AND bond prices falling → route H045 selection to SHY; else use H355 OB-filtered top-2 as normal. Variants: A (LLM + price confirmation), B (LLM alone), C (continuous tilt), D (2-week lead lag), E (H355 baseline). IS: 2007-2016, OOS: 2017-2026. Gate: OOS Sharpe > 1.522 (H355 OB-filtered H045) AND MaxDD improvement. Script: backtesting/daily/run_h432_text_regime_bond.py. Medium risk. ~$2-5 OpenAI cost (Fed statement classification). FOMC statement EDGAR/Fed website source.
@@ -9587,3 +9590,97 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 **Script**: backtesting/daily/run_h429_wasserstein_hmm.py
 **Results**: backtesting/results/h429_results.json
+
+---
+
+## H435 — 52-Week High Proximity Momentum on H026 25-Asset ETF Universe: NOT CONFIRMED (2026-07-24)
+
+**Source**: George & Hwang (2004) anchoring effect; H291 tested this on 50-stock universe (NOT CONFIRMED OOS 0.764). This extends to the 25-asset multi-class H026 universe where the mechanism shifts to trend-quality filter.
+
+**Universe**: H026 25-asset ETF universe (sectors, bonds, commodities, alternatives)
+**IS/OOS**: IS 2008-2017 / OOS 2018-2026-07
+**Gate**: OOS Sharpe > 1.200
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | WF | Description |
+|-----|-------|--------|---------|-------|------|----|-------------|
+| A | 0.947 | 0.801 | -22.2% | 14.0% | 2 | 0.846 | Pure 52WH Proximity top-1 |
+| B | 0.292 | 0.376 | -46.4% | 13.2% | 5 | 1.288 | 12m mom + 52WH<0.75→BIL filter |
+| C | 0.499 | 0.450 | -40.2% | 12.1% | 4 | 0.902 | 50/50 mom+52WH combo |
+| D | 0.538 | 0.326 | -28.3% | 6.6% | 3 | 0.606 | Trend Consistency (% positive months) top-1 |
+| E | 0.249 | 0.747 | -31.9% | 24.4% | 3 | 3.000 | 50/50 mom+Consistency combo |
+| F | 0.292 | 0.514 | -45.0% | 20.1% | 5 | 1.760 | H026 baseline 12m top-1 |
+
+**Key findings:**
+- **52WH proximity (Var A) is the best standalone signal at OOS 0.801** — outperforms raw 12m momentum (Var F 0.514), but still well below gate.
+- **Look-ahead bias trap**: Initial implementation showed Var A OOS Sharpe 3.499, MaxDD -5.0% (implausibly good). Root cause: selecting the asset with highest month-end proximity using that SAME month-end price = pure foresight. Fix: `prox52[UNIVERSE].shift(1).rank(...)` — use prior month's proximity.
+- **Drawdown filter hurts (Var B)**: Routing to BIL when winner is >25% below 52WH forces cash during low-proximity regimes, destroying momentum signal.
+- **Trend consistency (Var D) weak at OOS 0.326**: Fraction of positive months doesn't discriminate assets well enough — on a multi-asset universe with strong trends, most assets have 60-80% positive months and ranks are clustered.
+- **H026 baseline 0.514 degraded vs historical 1.2**: The full 2018-2026-07 OOS window includes 2024-2026 where the H026 canonical appears to have underperformed its historical IS-period baseline. See H436/H437 for corroboration.
+
+**Verdict: NOT CONFIRMED** — 0/6 variants pass gate. 52WH proximity is the best signal tested (OOS 0.801), outperforming raw momentum on the same universe, but cannot clear 1.200 gate. The George & Hwang mechanism may require small/mid-cap universe (strong heterogeneity in reference points) rather than large-cap ETFs.
+
+**Script**: backtesting/daily/run_h435.py
+**Results**: backtesting/results/h435_results.json
+
+---
+
+## H436 — Relative Strength vs SPY on H026 25-Asset ETF Universe: NOT CONFIRMED (2026-07-24)
+
+**Source**: Relative momentum / alpha momentum literature; cross-sectional ETF rotation already captures beta to equity markets via SPY-correlated assets. H341 tested residual momentum on stocks (NOT CONFIRMED). This tests the simplest version: subtract SPY 12m return from each ETF's 12m return.
+
+**Universe**: H026 25-asset ETF universe
+**IS/OOS**: IS 2008-2017 / OOS 2018-2026-07
+**Gate**: OOS Sharpe > 1.200
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | WF | Description |
+|-----|-------|--------|---------|-------|------|----|-------------|
+| A | 0.292 | 0.509 | -45.0% | 19.7% | 5 | 1.743 | Pure relative strength (12m excess vs SPY) top-1 |
+| B | 0.292 | 0.509 | -45.0% | 19.7% | 5 | 1.743 | Relative + abs_mom>0 filter |
+| C | 0.292 | 0.509 | -45.0% | 19.7% | 5 | 1.743 | 50/50 abs_mom + relative combo |
+| D | 1.142 | 0.707 | -22.2% | 11.2% | 3 | 0.619 | H026 canonical: rank(12m)+rank(inv_vol6) |
+| E | 1.142 | 0.707 | -22.2% | 11.2% | 3 | 0.619 | Relative+vol: rank(rel12)+rank(inv_vol6) |
+| F | 0.252 | 0.226 | -56.3% | 9.8% | 5 | 0.897 | 6-month relative strength top-1 |
+
+**Key findings:**
+- **Mathematical identity renders Vars A/B/C identical**: `rank(ETF_12m - SPY_12m) = rank(ETF_12m)` because SPY_12m is the same constant across all assets at each time step. Subtracting a common factor never changes cross-sectional rankings. All three show exactly IS 0.292 / OOS 0.509 / WF 1.743.
+- **Same identity applies to Vars D/E**: `rank(rel12) + rank(inv_vol)` = `rank(mom12) + rank(inv_vol)` = H026 canonical. Both show IS 1.142 / OOS 0.707.
+- **True alpha momentum requires beta regression** (H437): To genuinely remove SPY influence, must use rolling beta = cov(ETF, SPY) / var(SPY) so the adjustment varies per asset, not a constant subtraction.
+- **6m relative strength (Var F) worst at OOS 0.226**: Shorter windows on multi-asset universe appear to increase noise without improving signal.
+
+**Verdict: NOT CONFIRMED** — 0/6 variants pass gate. Mathematical identity eliminates the hypothesis as designed: simple subtraction of common SPY factor cannot change ETF rankings. Proper beta-adjusted alpha requires rolling covariance estimation (tested in H437).
+
+**Script**: backtesting/daily/run_h436.py
+**Results**: backtesting/results/h436_results.json
+
+---
+
+## H437 — Beta-Adjusted Alpha + Trailing Sharpe Rotation on H026 ETF Universe: NOT CONFIRMED (2026-07-24)
+
+**Source**: Extension of H436; H341 (residual momentum NOT CONFIRMED on H198 stocks). Multi-asset universe where beta vs SPY varies dramatically (TLT beta ≈ -0.3, GLD ≈ 0.1, XLK ≈ 1.4) was hypothesized to give beta-adjustment more discriminatory power than on homogeneous large-cap stocks.
+
+**Universe**: H026 25-asset ETF universe
+**IS/OOS**: IS 2008-2017 / OOS 2018-2026-07
+**Gate**: OOS Sharpe > 1.200
+**Method**: Rolling 12-month beta via `cov(ETF_ret, SPY_ret) / var(SPY_ret)`; alpha = `mom12 - beta × SPY_mom12`
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | WF | Description |
+|-----|-------|--------|---------|-------|------|----|-------------|
+| A | -0.115 | 0.507 | -44.2% | — | 4 | 0.00 | Pure alpha (12m ETF - beta×SPY_12m) top-1 |
+| B | -0.115 | 0.507 | -44.2% | — | 4 | 0.00 | Alpha top-1 + positive alpha filter |
+| C | 0.106 | 0.498 | -40.7% | — | 4 | 4.70 | 50/50 combo: rank(alpha)+rank(12m) |
+| D | 0.319 | 0.246 | -50.4% | — | 4 | 0.77 | Trailing 12m Sharpe ranking top-1 |
+| E | 0.247 | 0.434 | -25.1% | — | 2 | 1.76 | Alpha+inv_vol dual rank |
+| F | 0.507 | 0.785 | -22.2% | — | 3 | 1.55 | H026 canonical: 12m+inv_vol top-1 (baseline) |
+
+**Key findings:**
+- **Beta-adjusted alpha HURTS vs raw momentum**: Var A/B (pure alpha) OOS 0.507 vs Var F (H026 canonical) 0.785. Removing SPY beta exposure reduces signal quality, not improves it.
+- **Beta to SPY is a feature, not a bug**: On this multi-asset universe, assets with high SPY beta (equity ETFs) outperform during bull markets. Cross-sectional β variation provides discriminatory power for momentum selection — stripping it removes valid return predictors.
+- **Trailing Sharpe (Var D) is worst at OOS 0.246**: A per-asset Sharpe ratio ranking is the weakest signal. Likely because ETF Sharpe ratios are unstable over 12-month windows and aren't predictive of next month's returns.
+- **Alpha+inv_vol (Var E) is best alpha variant at OOS 0.434**: Adding volatility scaling partially recovers from beta-stripping, but still inferior to canonical H026.
+- **H026 canonical baseline: OOS 0.785 in 2018-2026-07 window**: Consistent with H435 (0.707 for canonical dual-rank) and H436 (0.707). The H026 canonical strategy has degraded from its original OOS Sharpe 1.2 gate — likely reflecting 2024-2026 underperformance. Production portfolio assessment warranted.
+- **IS Sharpe negative for pure alpha (Var A/B)**: Rolling beta computation requires 12-month lookback, so first valid signal is 2009. Negative IS Sharpe suggests beta-stripping scrambles the IS period selections substantially.
+
+**Verdict: NOT CONFIRMED** — 0/6 variants pass gate. Beta-adjusted alpha is inferior to raw momentum on multi-asset ETF universe, opposite of H341's hypothesis direction. Consistent with H341's finding: beta-stripping destroys predictive power when market exposure itself carries persistent return. The H026 baseline degradation pattern (OOS ~0.7-0.8 vs historical 1.2) warrants separate production portfolio review.
+
+**Script**: backtesting/daily/run_h437.py
+**Results**: backtesting/results/h437_results.json

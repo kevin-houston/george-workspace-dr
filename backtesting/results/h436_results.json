@@ -1,0 +1,149 @@
+{
+  "hypothesis": "H436",
+  "title": "Relative Strength vs SPY on H026 25-Asset ETF Universe",
+  "gate_oos_sharpe": 1.2,
+  "universe": [
+    "XLK",
+    "XLE",
+    "XLF",
+    "XLV",
+    "XLI",
+    "XLB",
+    "XLU",
+    "XLRE",
+    "XLY",
+    "XLP",
+    "XLC",
+    "GLD",
+    "TLT",
+    "IEF",
+    "TIP",
+    "DBC",
+    "AGG",
+    "GDX",
+    "DBA",
+    "SLV",
+    "UNG",
+    "EWZ",
+    "IBB",
+    "XME"
+  ],
+  "is_period": "2008-01-01 \u2013 2017-12-31",
+  "oos_period": "2018-01-01 \u2013 2026-07-01",
+  "variants": {
+    "Var_A": {
+      "description": "Pure relative strength (12m excess vs SPY) top-1",
+      "is": {
+        "n": 120,
+        "sharpe": 0.292,
+        "maxdd": -0.438,
+        "cagr": 0.068,
+        "neg_yrs": 3
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.509,
+        "maxdd": -0.45,
+        "cagr": 0.197,
+        "neg_yrs": 5
+      },
+      "wf_ratio": 1.743,
+      "passed_gate": false
+    },
+    "Var_B": {
+      "description": "Relative strength + abs_mom>0 filter",
+      "is": {
+        "n": 120,
+        "sharpe": 0.292,
+        "maxdd": -0.438,
+        "cagr": 0.068,
+        "neg_yrs": 3
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.509,
+        "maxdd": -0.45,
+        "cagr": 0.197,
+        "neg_yrs": 5
+      },
+      "wf_ratio": 1.743,
+      "passed_gate": false
+    },
+    "Var_C": {
+      "description": "50/50 abs_mom+relative combo",
+      "is": {
+        "n": 120,
+        "sharpe": 0.292,
+        "maxdd": -0.438,
+        "cagr": 0.068,
+        "neg_yrs": 3
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.509,
+        "maxdd": -0.45,
+        "cagr": 0.197,
+        "neg_yrs": 5
+      },
+      "wf_ratio": 1.743,
+      "passed_gate": false
+    },
+    "Var_D": {
+      "description": "H026 canonical: rank(12m)+rank(inv_vol6) top-1",
+      "is": {
+        "n": 120,
+        "sharpe": 1.142,
+        "maxdd": -0.084,
+        "cagr": 0.119,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.707,
+        "maxdd": -0.222,
+        "cagr": 0.112,
+        "neg_yrs": 3
+      },
+      "wf_ratio": 0.619,
+      "passed_gate": false
+    },
+    "Var_E": {
+      "description": "Relative+vol: rank(rel12)+rank(inv_vol6)",
+      "is": {
+        "n": 120,
+        "sharpe": 1.142,
+        "maxdd": -0.084,
+        "cagr": 0.119,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.707,
+        "maxdd": -0.222,
+        "cagr": 0.112,
+        "neg_yrs": 3
+      },
+      "wf_ratio": 0.619,
+      "passed_gate": false
+    },
+    "Var_F": {
+      "description": "6-month relative strength top-1",
+      "is": {
+        "n": 120,
+        "sharpe": 0.252,
+        "maxdd": -0.366,
+        "cagr": 0.063,
+        "neg_yrs": 5
+      },
+      "oos": {
+        "n": 102,
+        "sharpe": 0.226,
+        "maxdd": -0.563,
+        "cagr": 0.098,
+        "neg_yrs": 5
+      },
+      "wf_ratio": 0.897,
+      "passed_gate": false
+    }
+  }
+}

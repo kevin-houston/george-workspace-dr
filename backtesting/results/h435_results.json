@@ -1,0 +1,149 @@
+{
+  "hypothesis": "H435",
+  "title": "52-Week High Proximity Momentum on H026 25-Asset ETF Universe",
+  "gate_oos_sharpe": 1.2,
+  "universe": [
+    "XLK",
+    "XLE",
+    "XLF",
+    "XLV",
+    "XLI",
+    "XLB",
+    "XLU",
+    "XLRE",
+    "XLY",
+    "XLP",
+    "XLC",
+    "GLD",
+    "TLT",
+    "IEF",
+    "TIP",
+    "DBC",
+    "AGG",
+    "GDX",
+    "DBA",
+    "SLV",
+    "UNG",
+    "EWZ",
+    "IBB",
+    "XME"
+  ],
+  "is_period": "2008-01-01 \u2013 2017-12-31",
+  "oos_period": "2018-01-01 \u2013 2026-07-01",
+  "variants": {
+    "Var_A": {
+      "description": "Pure 52WH Proximity top-1",
+      "is": {
+        "n": 84,
+        "sharpe": 0.947,
+        "maxdd": -0.209,
+        "cagr": 0.104,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 0.801,
+        "maxdd": -0.222,
+        "cagr": 0.14,
+        "neg_yrs": 2
+      },
+      "wf_ratio": 0.846,
+      "passed_gate": false
+    },
+    "Var_B": {
+      "description": "12m mom top-1 + 52WH<0.75\u2192BIL",
+      "is": {
+        "n": 84,
+        "sharpe": 0.292,
+        "maxdd": -0.438,
+        "cagr": 0.068,
+        "neg_yrs": 3
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 0.376,
+        "maxdd": -0.464,
+        "cagr": 0.132,
+        "neg_yrs": 5
+      },
+      "wf_ratio": 1.288,
+      "passed_gate": false
+    },
+    "Var_C": {
+      "description": "50/50 mom+52WH combo",
+      "is": {
+        "n": 84,
+        "sharpe": 0.499,
+        "maxdd": -0.268,
+        "cagr": 0.075,
+        "neg_yrs": 2
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 0.45,
+        "maxdd": -0.402,
+        "cagr": 0.121,
+        "neg_yrs": 4
+      },
+      "wf_ratio": 0.902,
+      "passed_gate": false
+    },
+    "Var_D": {
+      "description": "Trend Consistency top-1",
+      "is": {
+        "n": 84,
+        "sharpe": 0.538,
+        "maxdd": -0.356,
+        "cagr": 0.08,
+        "neg_yrs": 3
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 0.326,
+        "maxdd": -0.283,
+        "cagr": 0.066,
+        "neg_yrs": 3
+      },
+      "wf_ratio": 0.606,
+      "passed_gate": false
+    },
+    "Var_E": {
+      "description": "50/50 mom+Consistency combo",
+      "is": {
+        "n": 84,
+        "sharpe": 0.249,
+        "maxdd": -0.433,
+        "cagr": 0.046,
+        "neg_yrs": 4
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 0.747,
+        "maxdd": -0.319,
+        "cagr": 0.244,
+        "neg_yrs": 3
+      },
+      "wf_ratio": 3.0,
+      "passed_gate": false
+    },
+    "Var_F": {
+      "description": "H026 baseline (12m top-1)",
+      "is": {
+        "n": 84,
+        "sharpe": 0.292,
+        "maxdd": -0.438,
+        "cagr": 0.068,
+        "neg_yrs": 3
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 0.514,
+        "maxdd": -0.45,
+        "cagr": 0.201,
+        "neg_yrs": 5
+      },
+      "wf_ratio": 1.76,
+      "passed_gate": false
+    }
+  }
+}
