@@ -140,3 +140,39 @@
 [2026-07-22 09:32:55] =======================================================
 [2026-07-22 09:32:55] PEAD-GAP open pass starting
 [2026-07-22 09:32:55] Watchlist empty — no earnings candidates today.
+[2026-07-23 09:32:09] =======================================================
+[2026-07-23 09:32:09] PEAD-GAP open pass starting
+[2026-07-23 09:32:09] Earnings candidates: ['GOOGL', 'TSLA', 'IBM']
+[2026-07-23 09:32:09] PEAD_GAP strategy equity: $5,000
+[2026-07-23 09:32:11]   GOOGL: prior_close=342.09 current=318.51 gap=-6.9%
+[2026-07-23 09:32:11]   GOOGL: gap -6.9% < 3% — skip
+[2026-07-23 09:32:12]   TSLA: prior_close=374.01 current=323.84 gap=-13.4%
+[2026-07-23 09:32:12]   TSLA: gap -13.4% < 3% — skip
+[2026-07-23 09:32:13]   IBM: prior_close=205.77 current=205.80 gap=0.0%
+[2026-07-23 09:32:13]   IBM: gap 0.0% < 3% — skip
+[2026-07-23 09:32:13] No new positions entered today.
+[2026-07-23 09:32:13] Open pass complete.
+[2026-07-23 09:33:30] =======================================================
+[2026-07-23 09:33:30] PEAD-GAP open pass starting
+[2026-07-23 09:33:30] Earnings candidates: ['GOOGL', 'TSLA', 'IBM']
+[2026-07-23 09:33:30] PEAD_GAP strategy equity: $5,000
+[2026-07-23 09:33:33]   GOOGL: prior_close=342.09 current=317.67 gap=-7.1%
+[2026-07-23 09:33:33]   GOOGL: gap -7.1% < 3% — skip
+[2026-07-23 09:33:34]   TSLA: prior_close=374.01 current=323.50 gap=-13.5%
+[2026-07-23 09:33:34]   TSLA: gap -13.5% < 3% — skip
+[2026-07-23 09:33:35]   IBM: prior_close=205.77 current=205.74 gap=-0.0%
+[2026-07-23 09:33:35]   IBM: gap -0.0% < 3% — skip
+[2026-07-23 09:33:35] No new positions entered today.
+[2026-07-23 09:33:35] Open pass complete.
+[2026-07-23 09:45:44] =======================================================
+[2026-07-23 09:45:44] PEAD-GAP open pass starting
+[2026-07-23 09:45:44] Earnings candidates: ['GOOGL', 'TSLA', 'IBM']
+[2026-07-23 09:45:44] PEAD_GAP strategy equity: $5,000
+[2026-07-23 09:45:50]   GOOGL: prior_close=342.09 current=318.61 gap=-6.9%
+[2026-07-23 09:45:50]   GOOGL: gap -6.9% < 3% — skip
+[2026-07-23 09:45:50]   TSLA: prior_close=374.01 current=324.17 gap=-13.3%
+[2026-07-23 09:45:50]   TSLA: gap -13.3% < 3% — skip
+[2026-07-23 09:45:51]   IBM: prior_close=205.77 current=205.44 gap=-0.2%
+[2026-07-23 09:45:51]   IBM: gap -0.2% < 3% — skip
+[2026-07-23 09:45:51] No new positions entered today.
+[2026-07-23 09:45:51] Open pass complete.

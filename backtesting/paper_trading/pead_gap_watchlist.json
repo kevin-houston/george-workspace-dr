@@ -1,8 +1,9 @@
 {
-  "date": "2026-07-23",
+  "date": "2026-07-24",
   "candidates": [
     "GOOGL",
     "TSLA",
+    "INTC",
     "IBM"
   ],
   "source": "earnings_only",

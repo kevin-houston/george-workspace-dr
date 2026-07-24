@@ -1,5 +1,5 @@
 {
-  "date": "2026-07-23",
+  "date": "2026-07-24",
   "candidates": [],
   "scores": {
     "GOOGL": {
@@ -9,6 +9,10 @@
     "TSLA": {
       "score": -0.014,
       "surprise": -0.2941
+    },
+    "INTC": {
+      "score": -0.0151,
+      "surprise": -0.0602
     },
     "IBM": {
       "score": -0.026,
