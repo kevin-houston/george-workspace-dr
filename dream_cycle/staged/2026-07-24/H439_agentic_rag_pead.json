@@ -24,5 +24,6 @@
     "gate": "OOS WR > 81.8% (H174 baseline), n >= 15",
     "estimated_cost_per_run": "$0.10-0.20 with gpt-4o-mini",
     "implementation_path": "run_h439.py \u2192 H174 event list \u2192 OpenAI API \u2192 signal DataFrame \u2192 eval vs H174 WR"
-  }
+  },
+  "apply_note": "Script stub written to backtesting/daily/run_h439.py."
 }

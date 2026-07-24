@@ -13,5 +13,6 @@
   "apply_status": "applied",
   "notes": "Low risk \u2014 pure wiki addition. Reinforces architecture decision already made for H318.",
   "hypothesis_number": "H440",
-  "hypothesis_status": "PROPOSED \u2014 wiki update only, not a backtest"
+  "hypothesis_status": "PROPOSED \u2014 wiki update only, not a backtest",
+  "apply_note": "PortBench section appended to wiki/trading/algorithms/crypto-trading-strategies.md (fixed malformed prior append)."
 }
