@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-21 (momentum-strategies.md: H411/H416/H417/H418 new H-series record OOS 5.855; VRP index entry fixed; 2 new backtesting pages: lookahead-formal-verification.md + multi-memory-factor-model-equity.md)
+updated: 2026-07-24 (free-data.md: major expansion — OpenBB Platform, IEX Cloud sunset, yfinance deprecated, Stooq, corrected rate limits; see research-log/2026-07-24.md)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -82,7 +82,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
   - [Alpaca Markets — Complete Reference](data-sources/alpaca.md) ← new 2026-05-12 (full SDK reference: order types, TIF, WebSocket streams, PDT/IDTBP update, Phase 3→4 checklist)
   - [Alpaca Automation Guide](data-sources/alpaca-automation.md) ← new 2026-04-27 (Phase 3 foundation)
   - [Polygon.io](data-sources/polygon.md) ← expanded 2026-04-28 (API endpoints, WebSocket, pricing, vs Alpaca)
-  - [Free / Low-Cost Sources](data-sources/free-data.md) ← expanded 2026-04-28 (Tiingo, EDGAR, Finnhub, FRED, yfinance status)
+  - [Free / Low-Cost Sources](data-sources/free-data.md) ← major expansion 2026-07-24 (OpenBB Platform — 100+ providers unified API, pip install openbb, MCP server, May 2026; IEX Cloud DEAD — shut down retail API 2025; yfinance EFFECTIVELY DEPRECATED — Feb 2025 Yahoo redesign; Stooq — no-key decades of history via pandas-datareader; corrected Alpha Vantage 25 req/day; Finnhub 20-min delay; Twelve Data 4-hour delay; updated recommended stack; dead/avoid table)
   - [Crypto Data Sources](data-sources/crypto-data-sources.md) ← new 2026-06-08 (yfinance crypto reliability + SOL gap; CoinGecko pycoingecko; ccxt unified 107-exchange API; Binance public REST; Kraken asset codes; migration path for H264b)
   - [Sector & Industry Classification](data-sources/sector-classification.md) ← new 2026-05-08 (GICS/SIC sources for H181; SEC EDGAR SIC, GitHub S&P 500 CSV, yfinance caveats, practical build_sector_cache() for 100-500 stocks)
   - [Options Data Sources](data-sources/options-data.md) ← 2026-05-01 (ThetaData/ORATS/FlashAlpha pricing; Alpaca indicative feed; vollib/py_vollib/QuantLib; IV surface + SVI fitting; free EOD options data on GitHub)
@@ -123,6 +123,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Sources](sources/) — ingested papers and working papers
   - [The Alchemy of Multibagger Stocks](sources/multibagger-yartseva-2025.md) ← new 2026-06-12 (Yartseva 2025; FCF/P = #1 factor; EPS growth NOT sig; small-cap +37.7% vs large +9.7%; asset_growth>EBITDA_growth −22.8pp; near-12m-low entry signal; rate-hike −8-12pp; H285 proposed)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-07-24](research-log/2026-07-24.md) — wiki: free-data.md major expansion (OpenBB Platform, IEX Cloud shutdown, yfinance deprecated, Stooq, corrected rate limits); nightly research: H435/H436/H437 NOT CONFIRMED (H026 canonical degradation 2024-2026); dream cycle: 3 proposals staged (OpenBB MCP data layer, agentic RAG PEAD, PortBench crypto findings)
   - [2026-07-14](research-log/2026-07-14.md) — wiki: factor-models.md major expansion (IMOM, spectral theory, H198 composite table, correlation mgmt); dream cycle: 5 proposals staged — HedgeAgents multi-agent (arXiv:2502.13165), Attention Factors stat-arb (arXiv:2510.11616), SAE-FiRE PEAD H400 stub (arXiv:2505.14420), analyst beliefs event-driven (arXiv:2511.15214), characteristic-axis diagnostic (arXiv:2607.05091); H400/H401 candidates
   - [2026-07-12](research-log/2026-07-12.md) — wiki: market-microstructure.md major expansion (OFI signal, FRI decomposition, trend decay, AI alpha decay, H393 proposed)
   - [2026-07-09](research-log/2026-07-09.md) — wiki: deepm-regime-portfolio.md major expansion (54→220 lines; Net Sharpe 0.93 vs TSMOM 0.45; full architecture+ablation+ETF adapt); dream cycle: trend microstructure decay (CFM arXiv:2607.01550); PEAD fast-slow language split (arXiv:2606.29734); PM 36GB dataset; LLM trading reproducibility crisis (2605.19337); H391/H392 stubs

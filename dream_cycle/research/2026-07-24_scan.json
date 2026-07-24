@@ -1,0 +1,87 @@
+{
+  "date": "2026-07-24",
+  "scan_type": "wiki_expansion + arXiv_scan",
+  "wiki_expansion_target": "wiki/trading/data-sources/free-data.md",
+  "wiki_expansion_rationale": "Most outdated high-impact page (updated 2026-04-28). Data landscape shifted: IEX Cloud dead, yfinance deprecated, OpenBB Platform emerged as major new tool.",
+  "angles_covered": [
+    {
+      "angle": "free_data_2026_landscape",
+      "query": "free stock market data API 2026 best alternatives",
+      "key_findings": [
+        "IEX Cloud shut down retail API in 2025 — confirmed dead",
+        "yfinance 'effectively deprecated' per multiple sources after Feb 2025 Yahoo redesign",
+        "Stooq: no key, decades of history, pandas-datareader access",
+        "Polygon free tier: 1-year history cap for stocks",
+        "Alpha Vantage: 25 req/day ceiling, 5 calls/min rate limit"
+      ]
+    },
+    {
+      "angle": "openbb_platform_2026",
+      "query": "OpenBB Platform 2026 update data providers MCP",
+      "key_findings": [
+        "v4.5 released May 26, 2026 (latest)",
+        "51k+ GitHub stars, MIT license",
+        "100+ provider integrations behind unified schema",
+        "MCP server: pip install openbb-mcp",
+        "API server mode: openbb api --host 127.0.0.1 --port 6900",
+        "pip install openbb; openbb-yfinance, openbb-polygon, openbb-tiingo extensions"
+      ]
+    },
+    {
+      "angle": "alpaca_free_data",
+      "query": "Alpaca free data tier 2026 history depth",
+      "key_findings": [
+        "7+ years history on free tier (stocks + ETFs)",
+        "10,000 calls/min rate limit",
+        "1-min bars available on free tier",
+        "Already integrated in project via alpaca-py"
+      ]
+    },
+    {
+      "angle": "agentic_rag_pead",
+      "query": "arXiv 2026 agentic RAG financial document analysis PEAD earnings",
+      "key_findings": [
+        "arXiv:2604.04264 'Decoding market's pulse' — 3-agent RAG pipeline",
+        "Retriever + Analyst + Trader agent architecture",
+        "Outperforms GPT-4o single-agent on earnings reaction",
+        "Compatible with H274 multi-agent PEAD and H163/H174 production"
+      ]
+    },
+    {
+      "angle": "portbench_crypto_llm",
+      "query": "PortBench LLM portfolio allocation benchmark crypto 2026",
+      "key_findings": [
+        "arXiv:2604.14199 — 90% of LLMs fail equal-weight in portfolio construction",
+        "Consistent across equity and crypto asset classes",
+        "Validates H318 design: LLM as filter not allocator",
+        "Reinforces PortBench note already in multi-agent-llm-trading.md"
+      ]
+    }
+  ],
+  "proposals_staged": [
+    {
+      "id": "H438_openbb_data_layer",
+      "type": "wiki_update",
+      "risk": "low",
+      "status": "applied"
+    },
+    {
+      "id": "H439_agentic_rag_pead",
+      "type": "new_script",
+      "risk": "medium",
+      "status": "pending"
+    },
+    {
+      "id": "H440_portbench_crypto_wiki",
+      "type": "wiki_update",
+      "risk": "low",
+      "status": "pending"
+    }
+  ],
+  "hypotheses_completed_tonight": [
+    "H437 NOT CONFIRMED — beta-adjusted alpha on H026; beta is feature not noise; Var D trailing Sharpe worst at 0.246",
+    "H436 NOT CONFIRMED — rank(x-c)=rank(x) mathematical identity; relative strength vs SPY = no-op on rankings",
+    "H435 NOT CONFIRMED — 52WH proximity on H026; look-ahead bias trap 3.499→0.801; low cross-sectional variation in large ETF bull market"
+  ],
+  "h026_degradation_note": "Across H435/H436/H437 tests, H026 canonical OOS consistently 0.5-0.8 vs historical 1.2. Possible 2024-2026 strategy saturation or regime change. Monitor via paper trading."
+}

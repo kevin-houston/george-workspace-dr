@@ -1,0 +1,18 @@
+{
+  "id": "H438_openbb_data_layer",
+  "date": "2026-07-24",
+  "source": "github + web research",
+  "source_url": "https://github.com/OpenBB-finance/OpenBB",
+  "title": "H438 — OpenBB Platform as unified data abstraction layer",
+  "rationale": "OpenBB Platform v4.5 (May 2026, 51k+ GitHub stars) provides a single API over 100+ data providers. Writing against OpenBB's schema rather than individual providers means yfinance breakages, IEX Cloud shutdowns, and Polygon tier changes can be handled by swapping a provider argument rather than rewriting data pipelines. Free, open-source, has MCP server support for Claude Code integration. IEX Cloud shut down retail API in 2025; yfinance is effectively deprecated after Feb 2025 Yahoo redesign. OpenBB is the correct long-term foundation.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/data-sources/free-data.md",
+  "content": "Wiki update already applied (2026-07-24 expansion). Next step when medium-risk migration is approved: install openbb + openbb-tiingo in venv and update run_hNNN.py scripts to use obb.equity.price.historical instead of yf.download.",
+  "action": "append",
+  "apply_status": "applied",
+  "notes": "wiki_update already written; medium-risk script migration is a separate proposal requiring Kevin review",
+  "hypothesis_number": "H438",
+  "hypothesis_status": "PROPOSED",
+  "next_step": "Install openbb in venv; run pilot migration on run_h026.py or run_h041a.py; confirm parity with yfinance output before full migration"
+}
