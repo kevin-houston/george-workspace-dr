@@ -1,6 +1,6 @@
 {
   "proposal_id": "H447",
-  "apply_status": "pending",
+  "apply_status": "applied",
   "risk": "medium",
   "target_file": "backtesting/daily/run_h447_wasserstein_hmm_regime.py",
   "source": "arXiv:2603.04441",
