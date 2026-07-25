@@ -1,0 +1,61 @@
+{
+  "strategy": "H428",
+  "run_date": "2026-07-24T23:02:48.806574",
+  "universe": [
+    "XLK",
+    "SMH",
+    "IGV"
+  ],
+  "is_period": "2015-01-01 to 2020-12-31",
+  "oos_period": "2021-01-01 to 2026-07-21",
+  "gate_oos_sharpe": 2.129,
+  "summary": {
+    "Var_A": {
+      "is_sharpe": 1.173,
+      "oos_sharpe": 0.483,
+      "oos_maxdd": -0.172,
+      "in_market_pct": 0.102,
+      "passes_gate": "False"
+    },
+    "Var_B": {
+      "is_sharpe": 1.058,
+      "oos_sharpe": 0.418,
+      "oos_maxdd": -0.175,
+      "in_market_pct": 0.074,
+      "passes_gate": "False"
+    },
+    "Var_C": {
+      "is_sharpe": 0.977,
+      "oos_sharpe": 0.168,
+      "oos_maxdd": -0.129,
+      "in_market_pct": 0.046,
+      "passes_gate": "False"
+    },
+    "Var_D": {
+      "is_sharpe": 1.135,
+      "oos_sharpe": 0.533,
+      "oos_maxdd": -0.209,
+      "in_market_pct": 0.149,
+      "passes_gate": "False"
+    },
+    "Var_E": {
+      "is_sharpe": 1.396,
+      "oos_sharpe": 0.636,
+      "oos_maxdd": -0.186,
+      "in_market_pct": 0.201,
+      "passes_gate": "False"
+    },
+    "Var_F": {
+      "is_sharpe": 1.226,
+      "oos_sharpe": 0.646,
+      "oos_maxdd": -0.147,
+      "in_market_pct": 0.144,
+      "passes_gate": "False"
+    }
+  },
+  "best_variant": "Var_F",
+  "best_oos_sharpe": 0.646,
+  "confirmed": "False",
+  "verdict": "NOT CONFIRMED",
+  "fri_theory_validation": "Magnitude filter (Var B or C) outperforming baseline (Var E) would validate FRI prediction that magnitude drives IBS profitability."
+}
