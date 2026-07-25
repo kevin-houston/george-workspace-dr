@@ -707,3 +707,51 @@
 [2026-07-23 23:14:52] Candidates for tomorrow: none
 [2026-07-23 23:14:52] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-07-23 23:14:52] Overnight pass complete.
+[2026-07-24 23:01:23] =======================================================
+[2026-07-24 23:01:23] =======================================================
+[2026-07-24 23:01:23] PEAD overnight pass starting
+[2026-07-24 23:01:23] PEAD overnight pass starting
+[2026-07-24 23:01:23] Scanning earnings calendar…
+[2026-07-24 23:01:23] Scanning earnings calendar…
+[2026-07-24 23:01:45]   Tickers with recent earnings: ['GOOGL', 'TSLA', 'INTC', 'IBM']
+[2026-07-24 23:01:45]   Fetching 8-K for GOOGL…
+[2026-07-24 23:01:53]   Tickers with recent earnings: ['GOOGL', 'TSLA', 'INTC', 'IBM']
+[2026-07-24 23:01:53]   Fetching 8-K for GOOGL…
+[2026-07-24 23:02:03]     GOOGL: 8780 chars
+[2026-07-24 23:02:03]   Fetching 8-K for TSLA…
+[2026-07-24 23:02:03]     GOOGL: 8780 chars
+[2026-07-24 23:02:03]   Fetching 8-K for TSLA…
+[2026-07-24 23:02:05]     TSLA: 3909 chars
+[2026-07-24 23:02:05]   Fetching 8-K for INTC…
+[2026-07-24 23:02:05]     TSLA: 3909 chars
+[2026-07-24 23:02:05]   Fetching 8-K for INTC…
+[2026-07-24 23:02:06]     INTC: 5391 chars
+[2026-07-24 23:02:06]   Fetching 8-K for IBM…
+[2026-07-24 23:02:06]     INTC: 5391 chars
+[2026-07-24 23:02:06]   Fetching 8-K for IBM…
+[2026-07-24 23:02:08]     IBM: 8657 chars
+[2026-07-24 23:02:08]     IBM: 8657 chars
+[2026-07-24 23:03:42]   Loading ProsusAI/finbert…
+[2026-07-24 23:03:42]   Loading ProsusAI/finbert…
+[2026-07-24 23:10:03]   GOOGL: score=-0.054  surprise=-0.219
+[2026-07-24 23:10:03]   GOOGL: score=-0.054  surprise=-0.219
+[2026-07-24 23:10:05]   TSLA: score=-0.014  surprise=-0.294
+[2026-07-24 23:10:06]   TSLA: score=-0.014  surprise=-0.294
+[2026-07-24 23:10:07]   INTC: score=-0.015  surprise=-0.060
+[2026-07-24 23:10:07]   INTC: score=-0.015  surprise=-0.060
+[2026-07-24 23:10:09]   IBM: score=-0.026  surprise=-0.456
+[2026-07-24 23:10:09]   ✗ GOOGL filtered out (score=-0.054, surprise=-0.2188)
+[2026-07-24 23:10:09]   ✗ TSLA filtered out (score=-0.014, surprise=-0.2941)
+[2026-07-24 23:10:09]   ✗ INTC filtered out (score=-0.015, surprise=-0.0602)
+[2026-07-24 23:10:09]   ✗ IBM filtered out (score=-0.026, surprise=-0.4565)
+[2026-07-24 23:10:09] Candidates for tomorrow: none
+[2026-07-24 23:10:09]   IBM: score=-0.026  surprise=-0.456
+[2026-07-24 23:10:09]   ✗ GOOGL filtered out (score=-0.054, surprise=-0.2188)
+[2026-07-24 23:10:09]   ✗ TSLA filtered out (score=-0.014, surprise=-0.2941)
+[2026-07-24 23:10:09]   ✗ INTC filtered out (score=-0.015, surprise=-0.0602)
+[2026-07-24 23:10:09]   ✗ IBM filtered out (score=-0.026, surprise=-0.4565)
+[2026-07-24 23:10:09] Candidates for tomorrow: none
+[2026-07-24 23:10:09] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-24 23:10:09] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-24 23:10:09] Overnight pass complete.
+[2026-07-24 23:10:09] Overnight pass complete.
