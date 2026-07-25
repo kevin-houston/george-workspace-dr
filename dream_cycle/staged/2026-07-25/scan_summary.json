@@ -9,7 +9,8 @@
       "year": 2026,
       "relevance": "HIGH",
       "summary": "Wasserstein-HMM with dynamic BIC model-order selection and TC-MVO allocation. Sharpe 2.18 vs 1.18 for SPX B&H, MaxDD -5.43% on cross-asset universe. Directly extends H429.",
-      "proposal": "H444"
+      "proposal": "H447",
+      "note": " (renumbered from H444 \u2014 H444 taken by realized-vol gate confirmed 2026-07-24)"
     },
     {
       "arxiv_id": "2606.23492",
@@ -40,7 +41,11 @@
       "note": "China-specific; bias correction patterns already well-covered in our IS/OOS design principles. No new hypothesis needed."
     }
   ],
-  "proposals_staged": ["H444", "H445", "H446"],
+  "proposals_staged": [
+    "H444",
+    "H445",
+    "H446"
+  ],
   "wiki_expansion": {
     "section": "Impact Investing",
     "reason": "Thinnest section: 12 entries vs 210 for Trading. Almost no cross-links to trading strategies or production portfolio. ESG factor signals and impact-quant bridge are missing.",
@@ -49,5 +54,10 @@
       "wiki/concepts/impact-market-landscape-2026.md (expanded from 2025 page)"
     ]
   },
-  "apply_status": "pending"
+  "apply_status": "pending",
+  "staged_proposals": [
+    "H447",
+    "H445",
+    "H446"
+  ]
 }

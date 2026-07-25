@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-24 (free-data.md: major expansion — OpenBB Platform, IEX Cloud sunset, yfinance deprecated, Stooq, corrected rate limits; see research-log/2026-07-24.md)
+updated: 2026-07-25 (regime-detection-2026-papers.md new + regime-conditional-esg-momentum.md new; H428 NOT CONFIRMED, H444 CONFIRMED; H447/H445/H446 staged; see research-log/2026-07-25.md)
 status: active
 phase: 2→3 — backtesting complete, paper trading active
 ---
@@ -123,6 +123,7 @@ Goal: establish an income stream for Kevin via algorithmic securities trading an
 - [Sources](sources/) — ingested papers and working papers
   - [The Alchemy of Multibagger Stocks](sources/multibagger-yartseva-2025.md) ← new 2026-06-12 (Yartseva 2025; FCF/P = #1 factor; EPS growth NOT sig; small-cap +37.7% vs large +9.7%; asset_growth>EBITDA_growth −22.8pp; near-12m-low entry signal; rate-hike −8-12pp; H285 proposed)
 - [Research Log](research-log/) — nightly research summaries
+  - [2026-07-25](research-log/2026-07-25.md) — wiki: regime-detection-2026-papers.md new (BIC K-selection, Wasserstein tracking, TC-MVO, Student-t emissions, Python code); regime-conditional-esg-momentum.md new concept page; nightly research: H428 NOT CONFIRMED (FRI magnitude filter IBS), H444 CONFIRMED (realized-vol gate H198, OOS 1.275); dream cycle: 3 proposals staged (H447 Wasserstein cross-asset, H445 heavy-tail VaR, H446 supply chain FinBERT)
   - [2026-07-24](research-log/2026-07-24.md) — wiki: free-data.md major expansion (OpenBB Platform, IEX Cloud shutdown, yfinance deprecated, Stooq, corrected rate limits); nightly research: H435/H436/H437 NOT CONFIRMED (H026 canonical degradation 2024-2026); dream cycle: 3 proposals staged (OpenBB MCP data layer, agentic RAG PEAD, PortBench crypto findings)
   - [2026-07-14](research-log/2026-07-14.md) — wiki: factor-models.md major expansion (IMOM, spectral theory, H198 composite table, correlation mgmt); dream cycle: 5 proposals staged — HedgeAgents multi-agent (arXiv:2502.13165), Attention Factors stat-arb (arXiv:2510.11616), SAE-FiRE PEAD H400 stub (arXiv:2505.14420), analyst beliefs event-driven (arXiv:2511.15214), characteristic-axis diagnostic (arXiv:2607.05091); H400/H401 candidates
   - [2026-07-12](research-log/2026-07-12.md) — wiki: market-microstructure.md major expansion (OFI signal, FRI decomposition, trend decay, AI alpha decay, H393 proposed)
