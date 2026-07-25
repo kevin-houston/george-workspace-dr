@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-23
+updated: 2026-07-25
 sources_indexed: 4
-pages: 227
+pages: 229
 ---
 
 # Wiki Index
@@ -69,6 +69,7 @@ When answering a query:
 - [Agentic Retrieval from Earnings Calls](trading/algorithms/agentic-earnings-retrieval.md) — arXiv:2507.07906 (SIGIR 2025 FIRE Workshop); LLM-agent builds dynamic hierarchical topic ontology from quarterly earnings calls; detects novel/discontinued/strengthening topics; 78% topic evolution accuracy; H408 stub: topic novelty as PEAD pre-filter (novelty path for composite gate) ← new 2026-07-16
 - [End-to-End Parametric Portfolio Policies](trading/algorithms/e2e-portfolio-policies.md) — arXiv:2607.00475 (Pollok & Robik, July 2026); transformer beats LSTM net of costs on 16 CME futures (LSTM 3–5× higher turnover); transformer ≈ TSMOM net cost; differentiable Sharpe loss; commodity futures: AI adds nothing over TSMOM; H318 implication: use transformer attention as features, not direct policy ← new 2026-07-17
 - [Trend-Following System Theory](trading/algorithms/trend-following-theory.md) — arXiv:2607.19497 (Sepp & Lucic, Jul 2026); unified frequency-domain treatment: European/American/TSMOM taxonomy; Poisson-kernel spectral profitability formula; ARFIMA long-memory; explains H198 no-skip discovery (H376), IBS orthogonality, H045 rate-shock regime breaks; H429 text-regime theoretical grounding ← new 2026-07-23
+- [Regime Detection 2026 Papers — Wasserstein-HMM and Heavy-Tail Emissions](trading/algorithms/regime-detection-2026-papers.md) — arXiv:2603.04441 (Boukardagha; dynamic BIC K-selection, 2-Wasserstein state tracking, TC-MVO; Sharpe 2.18 MaxDD -5.43% on SPY/TLT/GLD/DBC); arXiv:2606.23492 (Alswaidan et al.; Student-t/Laplace/GE emissions; regime-conditional VaR passes coverage tests; Laplace analytical VaR formula); H444/H445 design basis ← new 2026-07-25
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -262,6 +263,7 @@ When answering a query:
 - [Impact Investing Market Landscape 2025](concepts/impact-investing-market-2025.md) — $1.57T AUM, 21% CAGR, pension funds 35% share (47%/yr), GIIN 2025 State of the Market; ESG 37% of new products; sector focus: financial inclusion, healthcare, housing, clean energy ← new 2026-07-08
 - [Impact Measurement Standards](concepts/impact-measurement-standards.md) — IRIS+ 2000+ metrics, Core Metrics Sets; IMP 5 dimensions (What/Who/How Much/Contribution/Risk); EU SFDR Art. 8/9, UK SDR labels; additionality challenge; analogs to quant backtesting rigor ← new 2026-07-08
 - [ESG Factor Integration](concepts/esg-factor-integration.md) — systematic ESG signals in quant portfolios; controversy signals as PEAD analog (-2% drift 60d); ESG momentum factor Sharpe ~0.5; regime-dependence (hurt 2022); free data path via SEC EDGAR NLP + CDP; bridge to H163 FinBERT pipeline ← new 2026-07-17
+- [Regime-Conditional ESG Momentum](concepts/regime-conditional-esg-momentum.md) — quantitative implementation guide: Δ-ESG signal construction, NLP controversy via H174 pipeline, H446 supply chain network propagation analog, regime weight layer (VIX+200MA gate), TC-MVO integration; H447 design stub; free data path (SEC 10-K Item 1C, CDP); cross-bridge to trading algorithms and regime detection ← new 2026-07-25
 - [Supply Chain Propagation of Textual Signals](concepts/supply-chain-textual-signals.md) — arXiv:2606.29290; FinBERT 10-K embeddings alone not predictive; network-augmented via Bloomberg SPLC supply chain → Sharpe 0.86, FF5-alpha 7.27%/yr (t=2.30); proposed H419 PEAD secondary watchlist via supply chain linkages ← new 2026-07-18
 
 **People**

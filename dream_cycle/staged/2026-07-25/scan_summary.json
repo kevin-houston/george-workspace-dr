@@ -1,0 +1,53 @@
+{
+  "date": "2026-07-25",
+  "scan_type": "nightly_dream_cycle",
+  "papers_reviewed": [
+    {
+      "arxiv_id": "2603.04441",
+      "title": "Explainable Regime-Aware Investing",
+      "author": "Amine Boukardagha (Columbia University)",
+      "year": 2026,
+      "relevance": "HIGH",
+      "summary": "Wasserstein-HMM with dynamic BIC model-order selection and TC-MVO allocation. Sharpe 2.18 vs 1.18 for SPX B&H, MaxDD -5.43% on cross-asset universe. Directly extends H429.",
+      "proposal": "H444"
+    },
+    {
+      "arxiv_id": "2606.23492",
+      "title": "Continuous Hidden Markov Models for Equity Returns: Heavy-Tail Emission Families and Regime-Conditional Value-at-Risk",
+      "author": "Alswaidan, Jin, Varner",
+      "year": 2026,
+      "relevance": "HIGH",
+      "summary": "Student-t/Laplace/GE emissions unified under shared forward-backward recursions. Regime-conditional VaR passes conditional coverage tests. On daily US equities, interpretable Markov model with heavy tails suffices.",
+      "proposal": "H445"
+    },
+    {
+      "arxiv_id": "2606.29290",
+      "title": "Supply Chain Propagation of Textual Signals: LLM Embeddings and Cross-Sectional Return Predictability",
+      "author": "Alswaidan et al.",
+      "year": 2026,
+      "relevance": "HIGH",
+      "summary": "FinBERT 10-K MD&A embeddings propagated via Bloomberg SPLC supply chain graph. Sharpe 0.86, FF5-alpha 7.27%/yr, NW t=-2.64 on 255 S&P 500 firms 2011-2025. Connects to H419 supply chain PEAD secondary watchlist.",
+      "proposal": "H446"
+    },
+    {
+      "arxiv_id": "2507.07107",
+      "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+      "author": "Yimin Du",
+      "year": 2025,
+      "relevance": "MEDIUM",
+      "summary": "AdjMSE bias correction for rolling-window factor pipelines on Chinese A-shares. 53.8% sign accuracy vs 51.2% for MSE. Mask-first design for non-tradable prices. China-focused but bias correction pattern transferable.",
+      "proposal": null,
+      "note": "China-specific; bias correction patterns already well-covered in our IS/OOS design principles. No new hypothesis needed."
+    }
+  ],
+  "proposals_staged": ["H444", "H445", "H446"],
+  "wiki_expansion": {
+    "section": "Impact Investing",
+    "reason": "Thinnest section: 12 entries vs 210 for Trading. Almost no cross-links to trading strategies or production portfolio. ESG factor signals and impact-quant bridge are missing.",
+    "new_pages": [
+      "wiki/concepts/esg-quant-signal-bridge.md",
+      "wiki/concepts/impact-market-landscape-2026.md (expanded from 2025 page)"
+    ]
+  },
+  "apply_status": "pending"
+}

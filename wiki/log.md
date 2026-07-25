@@ -6,6 +6,29 @@ Last scan completed: 2026-07-23 (3 staged proposals H432–H434, 2 new wiki page
 
 ---
 
+## [2026-07-25] scan | Dream cycle nightly research scan
+
+**Topics searched:** Wasserstein-HMM explainable regime investing; heavy-tail HMM emission families for equity VaR; supply chain network momentum via FinBERT 10-K embeddings; ML multi-factor bias correction (China A-shares); ESG regime-conditional momentum implementation.
+
+**Papers found and evaluated:**
+- arXiv:2603.04441 — "Explainable Regime-Aware Investing" (Boukardagha, Columbia, Feb 2026) → HIGH relevance; Wasserstein-HMM with BIC K-selection + TC-MVO; Sharpe 2.18 vs 1.18 SPX; MaxDD -5.43%; direct extension of H429; H444 proposed
+- arXiv:2606.23492 — "Continuous HMMs for Equity Returns: Heavy-Tail Emission Families and Regime-Conditional VaR" (Alswaidan, Jin, Varner, Jun 2026) → HIGH relevance; Student-t/Laplace/GE emissions unified under shared forward-backward recursions; regime-conditional VaR passes coverage tests; VaR-based position scaling design; H445 proposed
+- arXiv:2606.29290 — "Supply Chain Propagation of Textual Signals: LLM Embeddings and Cross-Sectional Return Predictability" (Alswaidan et al., Jun 2026) → HIGH relevance; FinBERT 10-K MD&A + SPLC supply chain graph; Sharpe 0.86, FF5-alpha 7.27%/yr, NW t=-2.64; H446 proposed; ESG network propagation analog noted
+- arXiv:2507.07107 — "ML Enhanced Multi-Factor Quantitative Trading: Bias Correction" (Du, Jul 2025) → MEDIUM relevance; China A-shares price limit mask-first design; 53.8% sign accuracy vs 51.2%; bias correction patterns transferable but no new George hypothesis needed
+
+**Pages created (2):**
+- wiki/trading/algorithms/regime-detection-2026-papers.md — consolidates both regime papers; BIC K-selection, 2-Wasserstein state tracking, TC-MVO design; heavy-tail emission families; analytical Laplace VaR; GMMHMM Student-t approximation code; relationship to H429 and H165a
+- wiki/concepts/regime-conditional-esg-momentum.md — quantitative bridge: Δ-ESG signal construction; NLP controversy pipeline extending H174; supply chain ESG propagation (H446 analog); regime weight layer code; H447 design stub; free data sources (SEC 10-K Item 1C, CDP); full cross-reference network
+
+**Staged proposals (3):**
+- H444: Wasserstein-Tracked Explainable Regime-Aware Investing on SPY/TLT/GLD/DBC (arXiv:2603.04441)
+- H445: Heavy-Tail HMM Regime-Conditional VaR Overlay on H026 (arXiv:2606.23492)
+- H446: Supply Chain Network Momentum via FinBERT 10-K Embeddings (arXiv:2606.29290)
+
+**Thinnest section identified:** Impact Investing (12 entries vs 210 for Trading). Expanded with new page (regime-conditional-esg-momentum.md) creating 8 new cross-references between Impact Investing and the trading algorithms/regime-detection/PEAD sections.
+
+---
+
 ## [2026-07-23] scan | Dream cycle nightly research scan
 
 **Topics searched:** trend-following theory (frequency domain / ARFIMA); retail signal failure / multiplicity correction; LLM-enhanced regime detection on Treasury market; 10-K risk factor sentiment for volatility prediction; multi-agent Shapley credit assignment (MRC).
