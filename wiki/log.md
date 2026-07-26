@@ -2,7 +2,30 @@
 
 Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
-Last scan completed: 2026-07-23 (3 staged proposals H432–H434, 2 new wiki pages, Algorithms + Backtesting sections expanded)
+Last scan completed: 2026-07-26 (3 staged proposals H448–H450, 2 new wiki pages, DR section expanded)
+
+---
+
+## [2026-07-26] scan | Dream cycle nightly research scan
+
+**Topics searched:** Options implied volatility surface forecasting (diffusion models, shallow NN representation); variance risk premium cross-section signals; multi-specialist regime ensemble for ETF rotation; PEAD NLP upgrades; disaster recovery wiki expansion.
+
+**Papers found and evaluated:**
+- arXiv:2511.07571 — "Forecasting implied volatility surface with generative diffusion models" (Jin & Agarwal, Nov 2025, revised May 2026) → HIGH relevance; DDPM conditioned on EWMA IV surfaces + VIX; arbitrage-free SPX IV forecasting via SNR-weighted penalty; outperforms GANs; tractable EWM approximation captures 80% of benefit; H448 proposed
+- arXiv:2603.17151 — "Shallow Representation of Option Implied Information" (Lin, Mar 2026) → HIGH relevance; single-hidden-layer NN sufficient for IV density/vol; deeper/wider = more noise; shallow IV moments as cross-section factor signals; H449 proposed
+- arXiv:2604.17327 — "Signal or Noise in Multi-Agent LLM-based Stock Recommendations?" → MEDIUM relevance; specialist contributions rotate with market regime (Fundamentals→S&P500, Macro→S&P100, Dynamics=momentum); motivates deterministic recency-weighted meta-ensemble; H450 proposed
+- arXiv:2605.19337 — "Agentic Trading: When LLM Agents Meet Financial Markets" (survey, May 2026) → already in wiki; confirmed specialist-rotation finding as corroborating evidence for H450 design
+
+**Pages created (2):**
+- wiki/trading/algorithms/iv-surface-forecasting-2026.md — consolidates both IV papers; DDPM conditioning design; shallow NN justification; IV data source comparison (VIX family proxies / Polygon / ThetaData / ORATS); arbitrage-free surface checks; H448/H449 design table; cross-references to H309 dispersion and H266 VRP
+- wiki/dr/strategy-reconstruction.md — semantic reconstruction guide for all 6 production strategies (H026/H041a/H045/XLK+SMH+IGV IBS/PEAD H174); core logic, critical parameters, look-ahead pitfall references, blending weights; structured for use when git restore fails but wiki survives
+
+**Staged proposals (3):**
+- H448: Diffusion IV Surface VRP Signal on SPX — DDPM-forecast IV as cleaner VRP proxy; 4 variants; gate OOS Sharpe ≥ 1.0, MaxDD ≤ 25%
+- H449: Shallow IV Representation Cross-Section Factor — IVSKEW + IVKURT composite; long-only and dollar-neutral variants; gate OOS Sharpe ≥ 1.0
+- H450: Recency-Weighted Multi-Specialist Regime Ensemble for H026 — deterministic (no LLM) meta-agent with trailing Sharpe weights; 4 variants; gate OOS Sharpe ≥ 0.8
+
+**Thinnest section identified:** Disaster Recovery (4 pages vs 41 for Trading algorithms). Expanded with new Strategy Reconstruction page (5th DR page), adding cross-references to 8 algorithm pages. Index updated to 231 pages.
 
 ---
 

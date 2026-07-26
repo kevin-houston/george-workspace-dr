@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-25
+updated: 2026-07-26
 sources_indexed: 4
 pages: 229
 ---
@@ -70,6 +70,7 @@ When answering a query:
 - [End-to-End Parametric Portfolio Policies](trading/algorithms/e2e-portfolio-policies.md) — arXiv:2607.00475 (Pollok & Robik, July 2026); transformer beats LSTM net of costs on 16 CME futures (LSTM 3–5× higher turnover); transformer ≈ TSMOM net cost; differentiable Sharpe loss; commodity futures: AI adds nothing over TSMOM; H318 implication: use transformer attention as features, not direct policy ← new 2026-07-17
 - [Trend-Following System Theory](trading/algorithms/trend-following-theory.md) — arXiv:2607.19497 (Sepp & Lucic, Jul 2026); unified frequency-domain treatment: European/American/TSMOM taxonomy; Poisson-kernel spectral profitability formula; ARFIMA long-memory; explains H198 no-skip discovery (H376), IBS orthogonality, H045 rate-shock regime breaks; H429 text-regime theoretical grounding ← new 2026-07-23
 - [Regime Detection 2026 Papers — Wasserstein-HMM and Heavy-Tail Emissions](trading/algorithms/regime-detection-2026-papers.md) — arXiv:2603.04441 (Boukardagha; dynamic BIC K-selection, 2-Wasserstein state tracking, TC-MVO; Sharpe 2.18 MaxDD -5.43% on SPY/TLT/GLD/DBC); arXiv:2606.23492 (Alswaidan et al.; Student-t/Laplace/GE emissions; regime-conditional VaR passes coverage tests; Laplace analytical VaR formula); H444/H445 design basis ← new 2026-07-25
+- [Diffusion IV Surface Forecasting & Shallow IV Representation (2025-2026)](trading/algorithms/iv-surface-forecasting-2026.md) — arXiv:2511.07571 (Jin & Agarwal; DDPM conditioned on EWMA surfaces + VIX; arbitrage-free SPX IV surface; outperforms GANs; H448 design basis); arXiv:2603.17151 (Lin; shallow single-hidden-layer NN sufficient for IV density/vol representation; deeper = more noise; H449 cross-section design basis) ← new 2026-07-26
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -309,6 +310,7 @@ When answering a query:
 - [Git Backup Setup](dr/git-backup.md) — git repo config, current status, blocked items
 - [Session Diary](dr/diary.md) — append-only log of sessions; narrative recovery layer
 - [Operational Runbook 2026](dr/runbook-2026.md) — current-state restore commands, subsystem validation, common failure modes, what to tell a fresh George (2026 version) ← new 2026-07-16
+- [Strategy Reconstruction Guide](dr/strategy-reconstruction.md) — semantic reconstruction of all 6 production strategies (H026/H041a/H045/IBS/PEAD) from first principles if git restore fails; core logic, critical parameters, look-ahead pitfalls, blending weights ← new 2026-07-26
 
 ---
 
