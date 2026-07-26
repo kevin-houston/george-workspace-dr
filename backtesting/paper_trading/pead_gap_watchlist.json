@@ -1,10 +1,7 @@
 {
-  "date": "2026-07-25",
+  "date": "2026-07-26",
   "candidates": [
-    "GOOGL",
-    "TSLA",
-    "INTC",
-    "IBM"
+    "INTC"
   ],
   "source": "earnings_only",
   "strategy": "PEAD_GAP"

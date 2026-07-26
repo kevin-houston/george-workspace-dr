@@ -755,3 +755,15 @@
 [2026-07-24 23:10:09] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-07-24 23:10:09] Overnight pass complete.
 [2026-07-24 23:10:09] Overnight pass complete.
+[2026-07-25 23:01:06] =======================================================
+[2026-07-25 23:01:06] PEAD overnight pass starting
+[2026-07-25 23:01:06] Scanning earnings calendar…
+[2026-07-25 23:01:31]   Tickers with recent earnings: ['INTC']
+[2026-07-25 23:01:31]   Fetching 8-K for INTC…
+[2026-07-25 23:01:43]     INTC: 5391 chars
+[2026-07-25 23:03:26]   Loading ProsusAI/finbert…
+[2026-07-25 23:06:05]   INTC: score=-0.015  surprise=-0.060
+[2026-07-25 23:06:05]   ✗ INTC filtered out (score=-0.015, surprise=-0.0602)
+[2026-07-25 23:06:05] Candidates for tomorrow: none
+[2026-07-25 23:06:05] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-25 23:06:05] Overnight pass complete.
