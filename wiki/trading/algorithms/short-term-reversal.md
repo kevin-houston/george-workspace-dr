@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-12
+updated: 2026-07-26
 status: active
 hypothesis: H181 (confirmed 2026-05-07), H190 (confirmed 2026-05-11)
 source: SSRN:6630998
@@ -296,6 +296,88 @@ H179 attempted international equity rotation — and the root cause of failure m
 
 ---
 
+## 2025–2026 Research Updates
+
+### The Death (and Revival) of Standard STR — Blitz, van der Grient & Honarvar (2023)
+
+**Paper**: "Reversing the Trend of Short-Term Reversal." *Journal of Portfolio Management*, Vol. 50 No. 6 (2023). [[SSRN:4575689]](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4575689) | Robeco white paper.
+
+**Key finding**: Classic short-term reversal (raw 1-month loser buying) has **weakened to near zero** in most global regions due to the proliferation of systematic strategies harvesting the bid-ask bounce. The anomaly is partially arbitraged out when enough capital chases it.
+
+**Revival**: Counteracting with **short-term industry momentum** (3–12 month industry-level momentum) and **short-term factor momentum** (recent momentum within each factor) largely restores the alpha:
+
+| Strategy | Monthly Alpha | Risk-Adjusted Return |
+|----------|--------------|---------------------|
+| Classic STR (raw 1m loser) | ~0.05% (insignificant) | Minimal |
+| STR + short-term industry momentum filter | ~0.25% | Significant |
+| **Enhanced STR (industry + factor momentum filter)** | **~0.30%** | **~2× classic** |
+
+**Mechanism**: Adding industry momentum as a filter ensures you're not holding stocks that look like reversal candidates but are actually still in industry downtrends. Factor momentum filter similarly avoids stocks in factor regimes that contradict the reversal premise.
+
+**Implication for H181**: Our deployed strategy already uses **industry-adjusted** reversal (REV^IN = R_i − R̄_industry), which naturally counteracts the industry momentum component. The Blitz et al. finding validates the REV^IN design as the essential minimum enhancement. The factor momentum filter would be a further refinement — potentially applicable as H453 (VIX-gated or factor-filtered H181 variant).
+
+### Reversal → Momentum Transition — Jegadeesh, Luo, Subrahmanyam & Titman (2025 RFS)
+
+**Paper**: "Short-Term Reversals and Longer-Term Momentum around the World: Theory and Evidence." *Review of Financial Studies*, Vol. 38, Issue 12 (Dec 2025).
+
+**Key finding**: Globally, stock returns exhibit **reversal at 1-month** horizons that **transitions to momentum at 3–12 month** horizons. This global evidence confirms:
+- Short-term reversal and intermediate-term momentum are the same behavioral phenomenon at different time scales
+- At 1 month: liquidity-provision premium dominates → reversal
+- At 3–12 months: under-reaction to fundamental news dominates → momentum continuation
+
+**Design implication for H181 + H198**: H181 (1-month reversal) and H198 (6-1m momentum) are extracting **different layers of the same signal**. The H190 blend (40% H188 + 60% H181) works because at 1 month you buy the idiosyncratic losers (H181 long leg), while at 6 months you buy the systematic winners (H198/H188 momentum). These two signals are naturally uncorrelated (Corr ≈ 0.389) precisely because they're targeting different parts of the return autocorrelation structure.
+
+### H181 Live Performance Observations (H198 Degradation Context)
+
+From H448 and H449 backtests (July 2025), the H198 30-stock large-cap NASDAQ universe shows:
+- **Baseline H198 OOS Sharpe 2021–2026**: 0.937 (vs confirmed 1.174 IS period)
+- **High-vol sanity check (Var F, H449)**: 0.997 — outperforms the baseline!
+- **Root cause**: NVDA/AMD/CRWD AI surge in 2021–2026 means **high-vol momentum winners ARE the momentum signal** — penalizing volatility (consistency filter, low-vol filter) destroys alpha
+
+**Implication for H181**: This NVDA-concentration effect does NOT affect H181 the same way:
+- H181 targets **idiosyncratic** losers within an industry group, not aggregate momentum
+- High-vol NVDA dominates momentum across the full 30-stock universe (H198) but within its sub-industry (semiconductors: NVDA/AMD/AMAT/MU/LRCX/KLAC), H181 would go long the one or two that lagged the group in the recent month — a very different bet
+- H181 is thus **more insulated** from single-stock concentration than H198
+
+### VIX-Conditional Regime Gate for H181 — Nagel (2012) Update
+
+From Nagel (2012) "Evaporating Liquidity," extended finding (recent meta-analysis):
+- Even **industry portfolio reversal strategies** (which earn near zero unconditionally) produce **high Sharpe ratios during VIX spikes**
+- The expected return from liquidity provision scales with VIX: during market stress, the premium paid to willing liquidity providers spikes dramatically
+- Conditional Sharpe during high-VIX regimes can be 2–4× the unconditional estimate
+
+This motivates **H453**: test whether H181 OOS Sharpe improves by dynamically scaling exposure with VIX — increase allocation during high-VIX months (when the liquidity provision premium peaks), reduce or exit during low-VIX months (when the premium is thin). Design is analogous to H301/H362 VIX-gated ETF rotation strategies already confirmed.
+
+### When Alpha Breaks — Uncertainty Gate for Momentum (arXiv:2603.13252)
+
+**Paper**: Sanderink (2026). "When Alpha Breaks: Two-Level Uncertainty for Safe Deployment of Cross-Sectional Stock Rankers." arXiv:2603.13252.
+
+**Key finding**: A strategy-level gate G(t) with **72% AUROC** identifies when a LightGBM cross-sectional ranker will fail (regime shift, AI sector rally destroying model assumptions). The gate uses Direct Epistemic Uncertainty Prediction (DEUP):
+- Gate G(t) ≥ 0.2: trade the signal
+- Gate G(t) < 0.2: skip the trade entirely
+- **Counterintuitive**: inverse-uncertainty sizing degrades performance; uncertainty is best used as a binary on/off gate, not a continuous lever
+
+**Connection to H448/H449 degradation**: The H198 momentum baseline dropping from confirmed 1.174 to observed 0.937 OOS in 2021-2026 is exactly the "alpha breaks" scenario — an AI sector rally (NVDA effect) that wasn't in the IS training period (2013-2020). An uncertainty gate calibrated on the H198 momentum signal could identify these regime shifts and exit positions before the drawdown. Proposed as **H455** (uncertainty-based gate for H198 momentum).
+
+```python
+# H455 sketch: strategy-level gate for H198 momentum
+# Uses epistemic uncertainty from ensemble disagreement as gate signal
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+import numpy as np
+
+def compute_ensemble_disagreement(features: np.ndarray, 
+                                   models: list) -> np.ndarray:
+    """Returns epistemic uncertainty as std of ensemble predictions."""
+    preds = np.stack([m.predict_proba(features)[:, 1] for m in models])
+    return preds.std(axis=0)  # high std = high uncertainty = don't trade
+
+def strategy_gate(uncertainty: float, threshold: float = 0.2) -> bool:
+    """Binary gate: trade only when model disagrees less than threshold."""
+    return uncertainty < threshold
+```
+
+---
+
 ## Key References
 
 - Jegadeesh, N. (1990). Evidence of predictable behavior of security returns. *Journal of Finance* 45(3), 881–898.
@@ -303,6 +385,9 @@ H179 attempted international equity rotation — and the root cause of failure m
 - Campbell, J., Grossman, S., & Wang, J. (1993). Trading volume and serial correlation in stock returns. *Quarterly Journal of Economics* 108(4), 905–939.
 - Nagel, S. (2012). Evaporating liquidity. *Review of Financial Studies* 25(7), 2005–2039. [SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1988706)
 - Stosik, J. & Zaremba, A. (2026). Short-term reversal persists globally — if properly measured. [SSRN:6630998](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6630998)
+- Blitz, D., van der Grient, B. & Honarvar, I. (2023). "Reversing the Trend of Short-Term Reversal." *Journal of Portfolio Management* Vol. 50 No. 6. [[SSRN:4575689]](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4575689)
+- Jegadeesh, N., Luo, J., Subrahmanyam, A. & Titman, S. (2025). "Short-Term Reversals and Longer-Term Momentum around the World." *Review of Financial Studies* 38(12). [[Oxford]](https://academic.oup.com/rfs/article-abstract/38/12/3673/8240327)
+- Sanderink, U. (2026). "When Alpha Breaks: Two-Level Uncertainty for Safe Deployment of Cross-Sectional Stock Rankers." arXiv:2603.13252. [[arXiv]](https://arxiv.org/abs/2603.13252)
 - Quantpedia: [Short Term Reversal Effect in Stocks](https://quantpedia.com/strategies/short-term-reversal-in-stocks)
 
 

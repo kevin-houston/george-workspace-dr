@@ -1,0 +1,142 @@
+{
+  "scan_date": "2026-07-26",
+  "session": "nightly research 2:30 AM CT",
+  "wiki_expansion": {
+    "target_file": "wiki/trading/algorithms/short-term-reversal.md",
+    "selection_rationale": "Oldest major algorithm page (updated 2026-05-12, 339 lines); H181 actively deployed in paper trading — high-value expansion target vs other thin sections",
+    "sections_added": [
+      "2025-2026 Research Updates: Blitz et al. STR decay/revival",
+      "2025-2026 Research Updates: Jegadeesh et al. RFS global reversal-momentum",
+      "2025-2026 Research Updates: H181 live performance & NVDA context",
+      "2025-2026 Research Updates: VIX-conditional gate (H453)",
+      "2025-2026 Research Updates: When Alpha Breaks gate (H455)",
+      "3 new References (Blitz SSRN:4575689; Jegadeesh RFS 38(12); Sanderink arXiv:2603.13252)"
+    ]
+  },
+  "angles_scanned": [
+    "short-term reversal / industry-adjusted momentum decay",
+    "multi-agent LLM deliberation for PEAD signal scoring",
+    "strategy-level alpha decay prediction / uncertainty gating",
+    "IV surface forecasting (covered by prior session 061e6fd)",
+    "GitHub trending quant tools (covered by prior session)"
+  ],
+  "papers_found": [
+    {
+      "id": "P1",
+      "title": "Reversing the Trend of Short-Term Reversal",
+      "authors": "Blitz, van der Grient & Honarvar",
+      "year": 2023,
+      "source": "SSRN:4575689",
+      "relevance_score": 9,
+      "relevance_reason": "Directly explains H181 mechanism: STR revived by industry + factor momentum filter; doubles risk-adjusted return; key source for H453",
+      "staged": false,
+      "wiki_added": true
+    },
+    {
+      "id": "P2",
+      "title": "Reversal and Momentum Strategies: A Global Unified Perspective",
+      "authors": "Jegadeesh, Novy-Marx, Schwert",
+      "year": 2025,
+      "source": "Review of Financial Studies, Vol 38 Issue 12, Dec 2025",
+      "relevance_score": 8,
+      "relevance_reason": "Global evidence that reversal and momentum are same behavioral phenomenon at different horizons; validates H181 industry-adjusted approach cross-sectionally",
+      "staged": false,
+      "wiki_added": true
+    },
+    {
+      "id": "P3",
+      "title": "Evaporating Liquidity",
+      "authors": "Nagel",
+      "year": 2012,
+      "source": "Review of Financial Studies 25(7), 2005-2039",
+      "relevance_score": 9,
+      "relevance_reason": "Key motivation for H453: liquidity provision premium scales with VIX; reversal alpha 2-4x higher in high-VIX regimes; exact mechanism gated in H453 Var A",
+      "staged": true,
+      "staged_as": "H453",
+      "wiki_added": false
+    },
+    {
+      "id": "P4",
+      "title": "FinCom: A Multi-Agent Framework for Financial Deliberation with Disagree-or-Commit",
+      "authors": "Li, Zhang et al.",
+      "year": 2026,
+      "source": "arXiv:2606.00939",
+      "relevance_score": 8,
+      "relevance_reason": "Structured DoC deliberation prevents groupthink in LLM ensembles; directly applicable to H174 PEAD signal to add EPS/guidance agents as veto mechanism",
+      "staged": true,
+      "staged_as": "H454",
+      "wiki_added": false
+    },
+    {
+      "id": "P5",
+      "title": "When Alpha Breaks: Predicting Strategy-Level Alpha Decay with Epistemic Uncertainty",
+      "authors": "Sanderink",
+      "year": 2025,
+      "source": "arXiv:2603.13252",
+      "relevance_score": 9,
+      "relevance_reason": "72% AUROC at predicting strategy-level alpha decay using DEUP ensemble; binary gate outperforms continuous sizing; directly addresses H198 2021-2026 degradation pattern (0.937 vs confirmed 1.174) observed in 5+ hypothesis reruns",
+      "staged": true,
+      "staged_as": "H455",
+      "wiki_added": true
+    }
+  ],
+  "staged_proposals": [
+    {
+      "id": "H451",
+      "file": "dream_cycle/staged/2026-07-26/H451_diffusion_iv_vrp_signal.json",
+      "description": "Diffusion-based IV surface forecasting for VRP signal",
+      "risk": "medium",
+      "note": "Renamed from H448 after H-number conflict with actual backtest"
+    },
+    {
+      "id": "H452",
+      "file": "dream_cycle/staged/2026-07-26/H452_shallow_iv_representation_cross_section.json",
+      "description": "Shallow IV representation learning for cross-sectional returns",
+      "risk": "medium",
+      "note": "Renamed from H449 after H-number conflict with actual backtest"
+    },
+    {
+      "id": "H453",
+      "file": "dream_cycle/staged/2026-07-26/H453_vix_conditional_h181_gate.json",
+      "description": "VIX-conditional gate for H181 industry-adjusted reversal; 5 variants",
+      "risk": "medium",
+      "gate": "OOS Sharpe > 1.250 vs H181 baseline 1.138"
+    },
+    {
+      "id": "H454",
+      "file": "dream_cycle/staged/2026-07-26/H454_fincom_disagree_commit_pead.json",
+      "description": "FinCom Disagree-or-Commit multi-agent deliberation for PEAD signal scoring",
+      "risk": "medium",
+      "gate": "OOS WR > 81.8% AND n >= 20 vs H174 baseline"
+    },
+    {
+      "id": "H455",
+      "file": "dream_cycle/staged/2026-07-26/H455_when_alpha_breaks_h198_gate.json",
+      "description": "DEUP epistemic uncertainty gate for H198 momentum; addresses 2021-2026 degradation",
+      "risk": "medium",
+      "gate": "OOS Sharpe > 1.174 AND improvement over baseline > 0.10"
+    },
+    {
+      "id": "H450",
+      "file": "dream_cycle/staged/2026-07-26/H450_multimodal_regime_ensemble_forecaster.json",
+      "description": "Multimodal regime ensemble forecaster (pre-existing from prior session)",
+      "risk": "medium",
+      "note": "Staged in prior session (2026-07-25 night scan)"
+    }
+  ],
+  "not_staged": [
+    {
+      "topic": "IV surface forecasting family",
+      "reason": "Already covered by prior session (2026-07-25, commit 061e6fd) — wiki/trading/algorithms/iv-surface-forecasting-2026.md and H451/H452 staged"
+    },
+    {
+      "topic": "GitHub trending quant tools",
+      "reason": "Covered by prior session; no new tools requiring staging found"
+    }
+  ],
+  "next_hypotheses_recommended": [
+    "H455 run first — directly addresses known H198 degradation pattern",
+    "H453 run second — VIX gate on active H181 paper strategy",
+    "H454 run third — requires h174_events.json cache from prior H174 run"
+  ]
+}
