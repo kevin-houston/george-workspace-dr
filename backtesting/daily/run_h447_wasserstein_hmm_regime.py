@@ -42,8 +42,9 @@ ROLL_YEARS   = 3          # rolling re-fit window
 TC_LAMBDA    = 0.001      # L2 turnover penalty coefficient
 MIN_WEIGHT   = 0.05       # minimum per-asset weight
 MAX_WEIGHT   = 0.60       # maximum per-asset weight
-N_FITS       = 5          # HMM re-fits per window for robustness
+N_FITS       = 3          # HMM re-fits per window for robustness
 RANDOM_SEED  = 42
+REFIT_FREQ   = 21         # re-fit HMM every N trading days (monthly)
 
 
 # ---------------------------------------------------------------------------
@@ -219,56 +220,65 @@ def rolling_regime_allocation(returns, roll_years=ROLL_YEARS, variant='A'):
     prev_model = None
     prev_w = np.ones(n_assets) / n_assets
 
+    last_refit = roll_days  # force first refit at start
+    current_w = prev_w.copy()
+
     for t in range(roll_days, len(dates)):
-        window = returns.iloc[t - roll_days:t]
+        # Re-fit HMM only every REFIT_FREQ days
+        if t == roll_days or (t - last_refit) >= REFIT_FREQ:
+            window = returns.iloc[t - roll_days:t]
 
-        # Fit HMM
-        if variant in ('A', 'C'):
-            model = fit_hmm_fixed_k(window, k=2)
-        else:  # B, D
-            model, k_sel, _ = fit_hmm_best_k(window, k_range=(2, 4))
+            # Fit HMM
+            if variant in ('A', 'C'):
+                model = fit_hmm_fixed_k(window, k=2)
+            else:  # B, D
+                model, k_sel, _ = fit_hmm_best_k(window, k_range=(2, 4))
 
-        if model is None:
-            weights.iloc[t] = prev_w
-            continue
+            if model is None:
+                weights.iloc[t] = current_w
+                last_refit = t
+                continue
 
-        # Match states to previous fit if available
-        if prev_model is not None and prev_model.n_components == model.n_components:
+            # Match states to previous fit if available
+            if prev_model is not None and prev_model.n_components == model.n_components:
+                try:
+                    perm = match_states_wasserstein(prev_model, model)
+                    model.means_ = model.means_[perm]
+                    model.covars_ = model.covars_[perm]
+                    model.transmat_ = model.transmat_[np.ix_(perm, perm)]
+                    model.startprob_ = model.startprob_[perm]
+                except Exception:
+                    pass
+
+            # Get current regime (filtered, causal — use last day of window)
             try:
-                perm = match_states_wasserstein(prev_model, model)
-                # Reorder current model states
-                model.means_ = model.means_[perm]
-                model.covars_ = model.covars_[perm]
-                model.transmat_ = model.transmat_[np.ix_(perm, perm)]
-                model.startprob_ = model.startprob_[perm]
+                state_seq = model.predict(window.values)
+                current_state = state_seq[-1]
             except Exception:
-                pass
+                weights.iloc[t] = current_w
+                last_refit = t
+                continue
 
-        # Get current regime (filtered, causal — use last day of window)
-        try:
-            state_seq = model.predict(window.values)
-            current_state = state_seq[-1]
-        except Exception:
-            weights.iloc[t] = prev_w
-            continue
+            # Regime-conditional expected return and covariance
+            regime_returns = window[state_seq == current_state]
+            if len(regime_returns) < 10:
+                regime_returns = window
 
-        # Regime-conditional expected return and covariance
-        regime_returns = window[state_seq == current_state]
-        if len(regime_returns) < 10:
-            regime_returns = window  # fallback to full window
+            mu_reg = regime_returns.mean().values * 252
+            Sigma_reg = regime_returns.cov().values * 252
 
-        mu_reg = regime_returns.mean().values * 252
-        Sigma_reg = regime_returns.cov().values * 252
+            # Allocation
+            if variant in ('A', 'B'):
+                new_w = tc_mvo(mu_reg, Sigma_reg, current_w)
+            else:
+                new_w = np.ones(n_assets) / n_assets
 
-        # Allocation
-        if variant in ('A', 'B'):
-            w = tc_mvo(mu_reg, Sigma_reg, prev_w)
-        else:  # C, D — equal weight per regime
-            w = np.ones(n_assets) / n_assets
+            current_w = new_w.copy()
+            prev_w = new_w.copy()
+            prev_model = model
+            last_refit = t
 
-        weights.iloc[t] = w
-        prev_w = w.copy()
-        prev_model = model
+        weights.iloc[t] = current_w
 
     # Fill early rows
     weights = weights.ffill().bfill()
@@ -335,11 +345,13 @@ def main():
     results = {}
     for var in ('A', 'B', 'C', 'D'):
         print(f"--- Variant {var} ---")
-        # Fit on full data for rolling (roll window provides IS/OOS separation)
         all_weights = rolling_regime_allocation(returns, roll_years=ROLL_YEARS, variant=var)
+        is_weights  = all_weights.loc[:IS_END]
         oos_weights = all_weights.loc[OOS_START:]
+        is_port  = backtest(is_ret,  is_weights,  label=f'H447-{var}-IS')
         oos_port = backtest(oos_ret, oos_weights, label=f'H447-{var}')
-        metrics = compute_metrics(oos_port, f'H447 Var {var}')
+        compute_metrics(is_port,  f'H447 Var {var} IS ')
+        metrics = compute_metrics(oos_port, f'H447 Var {var} OOS')
         results[var] = metrics
 
     print()
