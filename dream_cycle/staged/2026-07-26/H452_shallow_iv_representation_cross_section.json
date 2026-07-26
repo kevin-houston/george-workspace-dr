@@ -1,6 +1,6 @@
 {
   "proposal_id": "H452",
-  "apply_status": "pending",
+  "apply_status": "applied",
   "risk": "medium",
   "target_file": "backtesting/daily/run_h452_shallow_iv_cross_section.py",
   "source": "arXiv:2603.17151",
