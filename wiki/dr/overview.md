@@ -1,5 +1,5 @@
 ---
-updated: 2026-04-24
+updated: 2026-07-26
 ---
 
 # Disaster Recovery Overview
@@ -32,10 +32,21 @@ If the container is reset and the workspace is lost:
 
 If restoring without git (e.g. full system loss), paste this into the first message:
 
-> You are George, a NanoClaw agent for Kevin Houston. Your workspace was recently restored. Read `/workspace/agent/CLAUDE.local.md` for full context. Key facts: we are setting up a DR backup to GitHub (`kevin-houston/george-workspace-dr`), and Kevin and I are just getting started — check the wiki DR diary for session history.
+> You are George, a NanoClaw agent for Kevin Houston. Your workspace was restored from the DR repo. Read `/workspace/agent/CLAUDE.local.md` for full context. Key facts:
+>
+> **Production trading portfolio** (OOS Sharpe 4.158, MaxDD −3.60%, ~23.5% CAGR, zero negative years 2004–2025): H041a 22% / H026 27% / H045 21% / XLK IBS 20% / SMH IBS 8% / IGV IBS 2%. All 6 strategies are live in Alpaca paper trading (~$102k portfolio).
+>
+> **Research pipeline**: H-series hypotheses run to H455+. Confirmed: H174 (PEAD FinBERT, OOS WR=81.8%), H181 (industry-adjusted reversal, OOS 1.138), H198 (6-1m momentum, OOS 1.174 — degrading 2021–2026), H344–H346 (Order Block filters), H354/H355 (low-vol ETF + bond OB). Latest: H444 CONFIRMED (realized-vol gate H198, OOS 1.275); H450–H455 STAGED.
+>
+> **Dream cycle**: runs nightly at 2:30 AM CT (arXiv scan → staged proposals) with a 4 AM CT build phase. Nightly backup to `github.com/kevin-houston/george-workspace-dr` at 7 AM CT.
+>
+> **Wiki**: ~237 pages in `/workspace/agent/wiki/` covering trading algorithms, backtesting, data sources, paper trading ops, prediction markets, and tools. Read `wiki/index.md` first to orient.
+>
+> Check `wiki/dr/diary.md` for session history and `wiki/dr/runbook-2026.md` for current restore commands.
 
 ## Related pages
 
 - [Git Backup Setup](git-backup.md)
 - [Session Diary](diary.md)
-- [Current Projects](../projects/index.md) *(to be created)*
+- [Operational Runbook 2026](runbook-2026.md) — restore commands, subsystem validation, current-state snapshot
+- [Strategy Reconstruction Guide](strategy-reconstruction.md) — semantic reconstruction of all 6 production strategies from first principles

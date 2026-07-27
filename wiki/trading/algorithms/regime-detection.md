@@ -1,6 +1,6 @@
 ---
 created: 2026-05-19
-updated: 2026-05-27
+updated: 2026-07-26
 status: active
 relevance: H165 (VIX gate QUEUED), H205-B (bear-regime BAB), all momentum/BAB strategies
 ---
@@ -353,3 +353,9 @@ Apply slow-tail + V-shape overlay as a portfolio-level cash buffer on our H026+H
   - Key test: does the V-shape brake add value beyond our existing SPY>200MA overlay (H301)?
 
 **Note**: Paper authors frame results as 'drawdown-control tool not return-enhancement' — consistent with our MaxDD priority for the 4.158 Sharpe production portfolio.
+
+---
+
+## See Also
+
+- [Regime Detection 2026 Papers — Wasserstein-HMM and Heavy-Tail Emissions](regime-detection-2026-papers.md) — H444/H445 design basis; BIC K-selection, 2-Wasserstein state tracking, Student-t/Laplace emissions

@@ -1,10 +1,6 @@
 {
-  "date": "2026-07-26",
+  "date": "2026-07-27",
   "candidates": [],
-  "scores": {
-    "INTC": {
-      "score": -0.0151,
-      "surprise": -0.0602
-    }
-  }
+  "scores": {},
+  "reason": "no earnings"
 }
