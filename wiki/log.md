@@ -2,7 +2,30 @@
 
 Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
-Last scan completed: 2026-07-26 (3 staged proposals H448–H450, 2 new wiki pages, DR section expanded)
+Last scan completed: 2026-07-27 (5 staged proposals H456–H460, 1 new wiki page)
+
+## [2026-07-27] dream-cycle | arXiv scan + wiki expansion
+Pages created: 1 (trading/algorithms/attention-cross-sectional-factor-models.md). Pages updated: 2 (index, hypothesis-log). Hypotheses staged: 5 (H456–H460). Sources: arXiv:2606.29347 (AFT regime-gated attention), arXiv:2605.13407 (PRISM-VQ discrete latent factors, IJCAI 2026), arXiv:2606.06190 (Multi-Scale MS-GARCH), arXiv:2512.00280 (retail investor horizon PEAD), arXiv:2507.07107 (bias-corrected multi-factor). Wiki expansion target: trading/algorithms/ — new page on attention and vector quantization for cross-sectional factor models (gap between ts-foundation-models.md and factor-models.md). Index page count: 237 → 238.
+
+## [2026-07-26] update | Fix 3 review items from lint pass
+Pages updated: 4. QuantMind pages merged (trading/tools/quant-mind.md → tools/quant-mind-notes.md; old file becomes redirect stub). dr/overview.md "fresh George" blurb fully rewritten to reflect production state (4.158 Sharpe portfolio, H455+ pipeline, dream cycle, DR runbook). ai-industry/model-landscape-2026.md updated with July 2026 releases (Claude Opus 5 FrontierBench 43.3%, GPT-5.6 Sol ExploitGym incident, Grok 4.5, Kimi K3 2.8T, DeepSeek $0.14/M floor). Index entries updated.
+
+## [2026-07-26] lint | Health check
+Issues found: 12. Auto-fixed: 9. Needs review: 3.
+
+**Auto-fixed:**
+- Added 7 missing research log entries to index (2026-07-20 through 2026-07-26)
+- Added `trading/tools/quant-mind.md` to index (flagged as merge candidate)
+- Updated Hypothesis Log index entry (stale "H001–H418" → current H449+/H444 CONFIRMED/H450-H455 STAGED)
+- Added cross-reference: `regime-detection.md` → `regime-detection-2026-papers.md` (new July 25)
+- Added cross-references: `dr/overview.md` → `runbook-2026.md` + `strategy-reconstruction.md` (new July 26); removed stale `projects/index.md` dead link
+- Updated page count: 229 → 237
+- Updated `regime-detection.md` frontmatter date (2026-05-27 → 2026-07-26)
+
+**Needs review (not auto-fixed):**
+- `trading/tools/quant-mind.md` (141 lines, June 2026) and `tools/quant-mind-notes.md` (55 lines, July 2026) cover the same tool — recommend merging into one richer page
+- `dr/overview.md` "What to tell a fresh George" section is outdated (says "just getting started" — the project is now deep into production trading)
+- `ai-industry/model-landscape-2026.md` has a "(page needs refresh)" note in the index — model landscape has advanced significantly since June 21 update
 
 ---
 

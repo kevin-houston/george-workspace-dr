@@ -1,0 +1,20 @@
+{
+  "hypothesis_number": "H458",
+  "short_name": "multiscale-msgarch-h026-regime-gate",
+  "title": "Multi-Scale Markov-Switching GARCH Volatility Regime Gate for H026 ETF Portfolio",
+  "source": "arXiv:2606.06190 (Chaudhary, Jun 2026) — \"Multi-Scale Markov Switching GARCH: Volatility Regime Detection in EUR/USD\"",
+  "target_file": "backtesting/daily/run_h458_multiscale_msgarch_h026.py",
+  "risk": "medium",
+  "apply_status": "pending",
+  "summary": "Chaudhary's triple-timeframe MS-GARCH framework operates simultaneously across Daily (macro), Weekly (meso), and Monthly (micro) scales, each using AR(1)-MS-GARCH with three hidden Calm/Turbulent/Crisis states. The outer-product of per-scale regime probabilities forms a 27-state cross-scale tensor; the paper proves this approach significantly outperforms single-timescale GARCH on volatility forecasting (Diebold-Mariano DM=+4.70, p=1.28e-6). H458 adapts this for the H026 25-ETF universe: fit a simplified two-scale (daily + weekly) MS-GARCH on the H026 equal-weight portfolio return, derive a composite Crisis probability, and use it as a position-sizing gate: full top-1 in Calm, top-2 in Turbulent, BIL in Crisis. Tractable implementation uses hmmlearn for each scale with GARCH-like variance features as emissions.",
+  "variants": [
+    "Var A: Two-scale (daily+weekly) MS-GARCH gate — BIL when Crisis prob > 0.5, top-1 otherwise",
+    "Var B: Single-scale daily MS-GARCH — Calm/Turbulent/Crisis 3-state gate (comparison to H445)",
+    "Var C: Two-scale composite — top-2 in Turbulent, top-1 in Calm, BIL in Crisis",
+    "Var D: Crisis probability as continuous weight — scale position by (1 - crisis_prob), min weight 0",
+    "Var E: H026 H346 baseline (OB-gated top-2) — sanity check"
+  ],
+  "gate": "OOS Sharpe >= 3.238 (H346 canonical) AND MaxDD improvement vs -5.7% baseline",
+  "is_period": "2008-2017",
+  "oos_period": "2018-2026"
+}

@@ -1,0 +1,20 @@
+{
+  "hypothesis_number": "H460",
+  "short_name": "bias-corrected-multifactor-h198",
+  "title": "Bias-Corrected Multi-Factor Pipeline for H198: Mask-First Design and Alpha101 Factor Engineering",
+  "source": "arXiv:2507.07107 (Du, May 2026) — \"Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction\"",
+  "target_file": "backtesting/daily/run_h460_bias_corrected_multifactor.py",
+  "risk": "low",
+  "apply_status": "pending",
+  "summary": "Du identifies 'upstream contamination' in rolling factor pipelines: non-tradable days (thin volume, halts, earnings blackout windows) silently propagate into downstream moving averages and ranks, inflating apparent IC by ~18% while reducing realized Sharpe by 0.44 points. The fix is a mask-first design: construct a tradability mask from volume data at load time and thread it through every operator so no window reads a non-tradable price. H460 applies this to H198: (1) build a daily volume mask (days where any stock in H198 universe trades < 20th percentile volume = suspect), (2) recompute 6-1m momentum and IMOM signals with mask applied, (3) additionally test a curated set of Alpha101 factors that survive the bias-correction filter on US large-cap data. Gate: if masked momentum OOS Sharpe > unmasked baseline, record as bias-corrected champion.",
+  "variants": [
+    "Var A: Mask-corrected 6-1m momentum top-6 (volume mask at 20th pct threshold)",
+    "Var B: Mask-corrected 6-1m momentum top-6 (volume mask at 10th pct threshold, stricter)",
+    "Var C: Mask-corrected IMOM6 signal top-6 (illusion momentum with contamination removed)",
+    "Var D: Alpha101 factor #001 (1-day reversal) with mask — cross-sectional test on H198",
+    "Var E: H198 baseline unmasked 6-1m momentum top-6 (sanity check)"
+  ],
+  "gate": "OOS Sharpe >= 1.174 (H198 baseline) — any improvement in Sharpe or MaxDD via masking is informative",
+  "is_period": "2013-2020",
+  "oos_period": "2021-2026"
+}
