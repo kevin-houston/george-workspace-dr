@@ -1,0 +1,17 @@
+{
+  "hypothesis_number": "H461",
+  "short_name": "trusttrade-selective-consensus-h274",
+  "title": "TrustTrade Selective Consensus Gate for H274 Multi-Agent PEAD Debate",
+  "source": "arXiv:2603.22567 (Zhong et al., Mar 2026) — \"TrustTrade: Human-Inspired Selective Consensus Reduces Decision Uncertainty in LLM Trading Agents\"",
+  "target_file": "wiki/trading/algorithms/multi-agent-llm-trading.md",
+  "risk": "low",
+  "apply_status": "pending",
+  "summary": "TrustTrade identifies a fundamental flaw in all prior multi-agent LLM trading systems: 'uniform trust' — the tendency to weight all agent signals equally regardless of inter-agent consistency. The fix: aggregate only signals where multiple agents show high semantic and numerical agreement; divergent or weakly grounded agent signals are discounted. The system incorporates deterministic temporal signals and reflective memory that adjusts risk preferences without retraining. Backtested in high-noise conditions (2024 Q1 and 2026 Q1) showing calibration toward 'mid-risk/mid-return' profile vs extreme-regime LLM behavior. Relevance to our pipeline: H274 is a 3-agent PEAD debate (bear/bull/devil's advocate). TrustTrade's selective consensus mechanism can gate H274 entry: only enter PEAD trades when ≥2/3 agents agree on direction AND their reasoning embeddings have cosine similarity > 0.7. Low-consensus cases (agents disagree or reasoning diverges) route to 'skip trade' — reducing the false positive rate that likely drives H174's 18.2% WR on low-confidence events. This is a design note + wiki update, not a new backtest. Implementation path: (1) extend H274 agent debate output to include per-agent stance + confidence score, (2) add consensus gate: cosine sim of agent reasoning embeddings using OpenAI text-embedding-3-small, (3) only pass to Alpaca order logic when consensus_score > 0.70. Expected effect: reduces trade count from H174 baseline of 22/year to ~12-15 high-confidence events, with higher WR and MeanRet.",
+  "variants": [
+    "Design note only — wiki update to multi-agent-llm-trading.md + add to H274 design spec",
+    "Future implementation: consensus gate (cosine sim > 0.70) on H274 agent reasoning"
+  ],
+  "gate": "Wiki update only. Backtest gate for H274 implementation: OOS WR >= 85% at N >= 10 events/year",
+  "is_period": "N/A (design note)",
+  "oos_period": "N/A (design note)"
+}

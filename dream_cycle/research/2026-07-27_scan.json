@@ -1,0 +1,81 @@
+{
+  "date": "2026-07-27",
+  "session": "nightly-research",
+  "wiki_expansion": {
+    "target": "wiki/trading/algorithms/options-income-strategies.md",
+    "rationale": "Oldest major active section (last updated 2026-05-21). Priority:high per Kevin's explicit options focus. Gap: 0DTE options entirely absent despite representing ~60% of SPX volume as of 2025-2026.",
+    "added": "Strategy 6 — 0DTE SPX Iron Condor (new section, ~200 lines): gamma dynamics (Gamma proportional to 1/sqrt(T)), pin score framework (FlashAlpha composite 0-100), entry window 1-2:44pm ET, 0.2% OTM $5-wide SPXW parameters, 65.6% close-within-0.2%-of-2pm-level statistic, VRP z-score entry filter, GEX dealer risk gate (< 50), hard 3:30pm close rule, Python entry filter code, 0DTE vs 45-DTE comparison table, data sources for intraday backtesting, capital requirements and position sizing."
+  },
+  "scan_angles": [
+    {
+      "angle": "PEAD + text + LLM",
+      "papers_reviewed": [
+        "Siano 2025 (Management Science) — LLM methods on earnings call text; SUE.txt PEAD magnitude 2x traditional SUE",
+        "Taraj & Wahlstrom 2026 (JBFA) — Narratives contextualizing numeric disclosures in earnings calls",
+        "arXiv:2509.24254 — Press release structure for PEAD returns (already referenced in H293 queue)"
+      ],
+      "action": "No new proposals — PEAD angle well-covered (H274, H293, H400, H446 already staged)"
+    },
+    {
+      "angle": "Cross-sectional momentum + factor ML",
+      "papers_reviewed": [
+        "JPM April 2025 — Picking Winners in Factorland: factor momentum drives cross-sectional ML variation; once controlled, no ML alpha remains",
+        "arXiv:2507.07107 — Du ML bias correction (already staged as H460)",
+        "arXiv:2601.19504 — Hybrid AI trading technical + ML + sentiment (ComSIA 2026)"
+      ],
+      "action": "Key finding: factor momentum (H376/H395/IMOM family) IS the ML signal on equities. No new hypothesis needed — validates current H-series strategy."
+    },
+    {
+      "angle": "Multi-agent LLM trading",
+      "papers_reviewed": [
+        "arXiv:2603.22567 (TrustTrade, Mar 2026) — selective consensus reduces LLM decision uncertainty; 2024 Q1 and 2026 Q1 backtesting",
+        "arXiv:2501.00826 — LLM multi-agent crypto portfolio management",
+        "arXiv:2510.23032 — P1GPT multi-modal financial analysis workflow"
+      ],
+      "action": "H461 staged — TrustTrade selective consensus design note for H274 multi-agent PEAD upgrade"
+    },
+    {
+      "angle": "Pairs trading + cointegration + LLM",
+      "papers_reviewed": [
+        "arXiv:2512.02436 (Semantic Trading, Dec 2025) — LLM semantic clustering on Polymarket; 60-70% accuracy, 20% avg returns/week",
+        "arXiv:2605.01954 (Moira) — already staged as H316",
+        "2026 SSRN survey — statistical arbitrage pairs; distance/cointegration/stochastic control methods"
+      ],
+      "action": "H463 staged — Semantic prediction market arbitrage design note (Polymarket CLOB + embeddings)"
+    },
+    {
+      "angle": "Options systematic + 0DTE",
+      "papers_reviewed": [
+        "CBOE Insights 2026 (Henry Schwartz) — 0DTE SPX iron condor design; 62% of SPX volume is 0DTE",
+        "Option Alpha 180-day empirical (2024) — 65.6% SPX-within-0.2%-of-2pm-level; $36 EV/trade",
+        "FlashAlpha GEX/pin risk research (2025) — gamma ∝ 1/sqrt(T); dealer flow regime classification",
+        "FlashAlpha VRP guide (2026) — put-side VRP 2-5x call-side; z-score sizing table",
+        "ApexVol iron condor analysis — 65-70% WR at 15-20 delta; 80% WR with 50% profit management"
+      ],
+      "action": "H462 staged — systematic 0DTE SPX iron condor synthetic BSM backtest. Wiki already updated."
+    }
+  ],
+  "proposals_staged": [
+    {
+      "id": "H461",
+      "file": "dream_cycle/staged/2026-07-27/h461_trusttrade_selective_consensus_pead.json",
+      "risk": "low",
+      "type": "design note + wiki update"
+    },
+    {
+      "id": "H462",
+      "file": "dream_cycle/staged/2026-07-27/h462_0dte_spx_iron_condor_synthetic.json",
+      "risk": "medium",
+      "type": "new backtest hypothesis"
+    },
+    {
+      "id": "H463",
+      "file": "dream_cycle/staged/2026-07-27/h463_semantic_polymarket_pairs.json",
+      "risk": "low",
+      "type": "design note + wiki update"
+    }
+  ],
+  "existing_proposals_tonight": ["H456", "H457", "H458", "H459", "H460"],
+  "total_staged_tonight": 8,
+  "key_insight": "Factor momentum IS the ML alpha signal on US equities (JPM 2025 finding). H376/H395/IMOM family already confirmed — validates current H-series direction. 0DTE options space now large enough (~60% SPX volume) to warrant systematic backtest via H462."
+}

@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-26
+updated: 2026-07-27
 focus: income generation + directional defined-risk
 priority: high (Kevin's explicit focus: equities + options)
 ---
@@ -421,6 +421,171 @@ if actual_move_pct < implied_move * 0.7:
 All require options data beyond Polygon free tier. Start with QuantConnect's built-in data for LEAN backtesting, then purchase ThetaData for production-grade research.
 
 **Active paper trades reference:** IC-2026-04-26-001 (SPY condor, 47 DTE at entry), WMT-CS-2026-04-27 (bull call $130/$140, deep OTM post-earnings — close), DLTR-CS-2026-04-27 (bull call $100/$115, earnings ~Jun 2–3), DLTR-RR-2026-04-27 (risk reversal, put leg approaching $95 assignment threshold).
+
+---
+
+## Strategy 6: 0DTE (Zero Days to Expiration) Iron Condor
+
+**The fastest-growing segment of index options — systematic premium collection using same-day expiry SPX/SPXW contracts.**
+
+### Market Context (2025–2026)
+
+0DTE options now represent **~60% of total SPX options volume** (CBOE data, 2025), up from near-zero in 2021. Approximately 50% of 0DTE activity originates from retail traders. This structural shift creates systematic opportunities but also concentrated gamma risk:
+
+- SPX and SPXW have expirations every weekday (Mon–Fri), enabling daily premium collection
+- Monday/Wednesday/Friday use SPXW (weekly); Tuesday/Thursday use standard SPX
+- **Same-day settlement** — cash-settled at close; no assignment risk overnight (European-style)
+
+### Gamma Dynamics — The Core Risk
+
+The fundamental physics of 0DTE: gamma ∝ 1/√T, meaning gamma magnitude escalates exponentially as expiration approaches.
+
+| Time Remaining | Gamma Level (vs 7-DTE equivalent) | Risk Level |
+|---|---|---|
+| 4+ hours (open–11am) | 1–2× | Low |
+| 2–4 hours (11am–2pm) | 3–5× | Moderate |
+| 1 hour (2–3pm) | 5–10× | High |
+| < 30 min (3:30pm+) | 10×+ | Extreme — gamma spike |
+
+**Theta acceleration profile**: morning decay is slow; by 2 PM decay doubles hourly; by 3:30 PM it is 4–5× the morning rate. This creates an asymmetric P&L window: enter after 2 PM to capture the steepest theta without holding through the extreme gamma hour unless the position is safely OTM.
+
+**Dealer positioning cascade**: When 0DTE contracts represent >50% of total market gamma exposure, intraday price dynamics are driven by dealer hedging of these contracts — not longer-dated technical levels. Dealers long gamma from selling 0DTEs buy weakness/sell strength (dampening). Dealers short gamma amplify moves.
+
+### Pin Risk — Strike Magnetism
+
+Near expiration, open interest concentration at specific strikes creates a "magnetic" pull:
+
+```python
+# FlashAlpha Pin Score composite (0-100)
+pin_score = (
+    0.30 * oi_concentration_top3_strikes   # OI concentrated at 3 strikes
+  + 0.25 * distance_to_highest_gamma       # proximity to peak-gamma strike
+  + 0.25 * (1 - time_remaining / 4)        # proximity to close (0=4hr+ remaining)
+  + 0.20 * gamma_magnitude_percentile       # absolute gamma level
+)
+# Pin score > 70 with < 2 hours remaining → strong magnet to nearest strike
+# Exogenous news catalyst overrides; max pain mechanics apply in calm sessions
+```
+
+### Entry Parameters (Systematic Approach)
+
+The optimal premium-selling window for a 0DTE iron condor:
+
+| Parameter | Recommendation | Rationale |
+|---|---|---|
+| **Entry time** | 1:00–2:44 PM ET | Captures steepest theta decay; gamma still manageable |
+| **Expiry** | Same-day (0DTE) | Cash-settled; no overnight risk |
+| **Structure** | Iron condor (4-leg spread) | Defined risk; collects premium both sides |
+| **Short strike OTM** | 0.20–0.32% OTM | SPX closes within 0.2% of 2pm price 65.6% of the time |
+| **Spread width** | $5 wide (SPXW) | Margin efficient; ~$196 premium on $304 max loss (64.4% R/R) |
+| **Short delta** | ~0.10–0.15 each side | Aggressive; higher probability than 45-DTE 16-delta |
+| **Premium target** | $1.00–$2.00 per spread | At least $196 total; avoid if spread <$0.80 |
+
+**Key probability finding (Option Alpha, 180-day sample)**: SPX closes within 0.2% of its 2pm level 65.6% of the time. A 0.2% OTM iron condor entered at 2:44pm therefore has ~68% historical max-profit probability. At 64.4% risk-reward, this yields a positive expected value of ~$36/trade.
+
+### Management Rules
+
+| Trigger | Action |
+|---|---|
+| Profit hits 50% of max credit | Close — do not hold to expiry; gamma risk increases too fast |
+| Underlying approaching short strike (delta ≥ 0.30) | Roll untested side in, close tested side; or close entirely |
+| Dealer GEX risk score > 75 (negative gamma regime) | **Do not enter** — dealer flows amplify adverse moves |
+| Last 30 min (3:30–4pm ET) | Close any open position; extreme gamma spike window |
+| Strong trending day (gap up/down >0.5% from 2pm level) | Skip the day — directional momentum kills condors |
+
+### VRP Context for 0DTE
+
+0DTE options capture the shortest end of the volatility term structure. The VRP (IV minus realized vol) is structurally present in short-dated options:
+
+- **Realized-vs-implied spread**: 0DTE implied vol typically 2–5% above same-day realized vol in calm regimes
+- **Put side asymmetry**: Put-side VRP is 2–5× larger than call-side VRP in ~80% of environments → selling symmetric condors underutilizes the put premium; some practitioners run asymmetric structures (wider/deeper put spread)
+- **VRP z-score filter**: Only enter when VIX IV minus 20d realized vol > 1.5% (z > 0.5 threshold). In low-VRP environments the theta collection doesn't compensate for gamma risk
+
+```python
+# 0DTE entry filter: VRP check
+import numpy as np
+
+def vrp_z_score(vix: float, spy_returns: pd.Series, window: int = 20) -> float:
+    """Compute VRP as VIX/sqrt(252) - trailing realized daily vol (annualized)."""
+    realized_vol = spy_returns.rolling(window).std().iloc[-1] * np.sqrt(252) * 100
+    vrp = vix - realized_vol                    # positive = IV > RV = premium environment
+    vrp_hist = vix - spy_returns.rolling(window).std() * np.sqrt(252) * 100
+    return (vrp - vrp_hist.mean()) / vrp_hist.std()
+
+# Enter 0DTE condor only if:
+# vrp_z_score(vix, spy_ret) > 0.5 AND current GEX dealer risk < 50
+```
+
+### Performance Data
+
+| Study | Period | Strategy | Win Rate | Notes |
+|---|---|---|---|---|
+| CBOE / Schwartz (2026) | Current market | 0DTE SPX IC, $5 wide | N/A | 62% of SPX volume is 0DTE; structural shift |
+| Option Alpha (2024) | 180 days | 0.2% OTM 2pm entry | ~68% | Max profit probability; $36 EV/trade |
+| ApexVol research | 2013–2025 | Iron condor 15–20 delta | 65–70% | 80% WR with 50% profit management |
+| Degese backtest (2024) | 1 year | 0DTE SPY condor, 11am entry | Positive | SPY daily; 0.32% OTM $5 wide |
+
+**Key caveat**: All 0DTE backtests require intraday options data at ≥5-minute granularity. Monthly-snapshot approaches miss the critical gamma dynamics. ORATS, CBOE DataShop, or ThetaData intraday feed required for production-grade backtesting.
+
+### Risk Profile — What Kills 0DTE Condors
+
+| Risk | Trigger | Frequency | Impact |
+|---|---|---|---|
+| Gap move >0.5% after entry | Fed surprise, CPI shock, geopolitical event | ~15 trading days/year | Full max loss or worse if gamma amplifies |
+| Slow trending day | SPX grinds 0.4% to one side over 2 hours | ~20% of trading days | Partial loss; need to manage tested side |
+| Negative GEX regime | Dealers short gamma; moves amplify | Volatile regimes | Positive-feedback loops; stop logic critical |
+| 3:30pm gamma spike | Random end-of-day liquidity event | Rare but devastating | Always close by 3:30pm |
+
+### Capital Requirements & Position Sizing
+
+- **Buying power**: Each $5 wide SPX 0DTE IC requires ~$304 per spread (defined risk)
+- **Scaling**: Run 1–3 condors per $10k of portfolio risk capital; never exceed 15% of notional in all short-vol positions combined
+- **Account type**: Cash-settled SPX contracts avoid pattern day trader rules for accounts <$25k (treated as index options, not pattern-day-trader equity trades)
+
+### Implementation Checklist
+
+```
+Pre-entry (2pm ET daily):
+□ Check SPX 0DTE IV / 7DTE IV ratio > 1.0 (intraday event premium present)
+□ Compute VRP z-score > 0.5
+□ Verify dealer GEX risk score < 50 (FlashAlpha or equivalent)
+□ Confirm no scheduled FOMC/CPI/NFP release in final 2 hours
+□ Select short strikes 0.20-0.32% OTM each side
+
+Entry (2:00–2:44pm ET):
+□ Enter 4-leg IC; collect ≥ $196 net credit on $5 wide SPXW
+□ Set automatic close at 50% of max credit (GTC)
+□ Set automatic close at 150% of max loss (stop loss)
+
+Exit:
+□ Close all positions by 3:30pm regardless of P&L (gamma spike window)
+□ Never hold to expiry
+```
+
+### Data Sources for 0DTE Backtesting
+
+| Source | Cost | Granularity | Notes |
+|---|---|---|---|
+| **CBOE DataShop** | Per-request pricing | 1-min intraday | Authoritative source; expensive for full history |
+| **ThetaData** | $80/mo (starter) | 1-min Greeks | 2005+; best value for systematic research |
+| **ORATS** | ~$100/trial | EOD + intraday | IV surface parameterized; good for surface research |
+| **0DTESPX.com** | Freemium | Simulation | SPX-specific simulator + paper trading |
+| **FlashAlpha API** | $239–$1,199/mo | Real-time | GEX/dealer flow; useful for live filtering |
+
+### Why 0DTE Is Different From 45-DTE Condors
+
+| Dimension | 45-DTE Iron Condor | 0DTE Iron Condor |
+|---|---|---|
+| **Theta collection** | Slow and steady | Explosive in final 2–3 hours |
+| **Gamma risk** | Manageable (20–30 DTE peak) | Extreme near expiry |
+| **Backtesting data** | EOD data sufficient | Needs intraday (≥5min) |
+| **Capital per trade** | $304–$1,000 typical | $304–$500 (SPX $5 wide) |
+| **Regime sensitivity** | Moderate | High — dangerous in trending/vol-spike days |
+| **Pattern day trader rules** | Applies to SPY options | **Not applicable** to SPX (cash-settled index) |
+| **Max trades/year** | ~10–12 (cycle-based) | Up to 252 (daily) |
+| **Compounding** | Monthly reinvestment | Daily — but premium is small |
+
+**Bottom line**: 0DTE condors offer a structurally sound premium-collection mechanism with daily compounding potential, but require intraday monitoring, strict exit rules, and a VRP/gamma filter for entry. Do NOT hold to expiry. The primary edge is the same VRP that drives 45-DTE condors, compressed into a single day — with proportionally higher gamma risk that demands active management.
 
 ---
 
