@@ -2,13 +2,13 @@
   "hypothesis_number": "H459",
   "short_name": "retail-investor-horizon-pead-filter",
   "title": "Retail Investor Holding Horizon Signal as H174 PEAD Pre-Filter via Social Media",
-  "source": "arXiv:2512.00280 (Vamossy, Dec 2025) — \"Retail Investor Horizon and Earnings Announcements\"",
+  "source": "arXiv:2512.00280 (Vamossy, Dec 2025) \u2014 \"Retail Investor Horizon and Earnings Announcements\"",
   "target_file": "backtesting/daily/run_h459_retail_horizon_pead.py",
   "risk": "medium",
-  "apply_status": "pending",
+  "apply_status": "applied",
   "summary": "Vamossy shows via StockTwits data (2010-2021) that long-horizon retail investors (hold language: 'buying for the long term', 'will hold') experience pronounced PEAD with slow drift convergence, while short-horizon traders (day-trading language) create noisy price pressure that partly cancels the drift. A zero-cost strategy sorting stocks by long-horizon retail investor dominance yields 0.43%/month risk-adjusted alpha. H459 adds a retail horizon proxy as a 4th filter to H174 (on top of FinBERT score >= 0.18 + EPS surprise >= 0.02): use ApeWisdom Reddit momentum API (free, no auth required) to assess the balance of long-term vs. short-term retail sentiment around each earnings event; filter to events where long-horizon language dominates. Gate maintains H174 WR >= 0.818 at n >= 15.",
   "variants": [
-    "Var A: ApeWisdom 7-day mention momentum pre-announcement as horizon proxy — high rank = retail attention; filter top-tercile",
+    "Var A: ApeWisdom 7-day mention momentum pre-announcement as horizon proxy \u2014 high rank = retail attention; filter top-tercile",
     "Var B: Reddit r/investing post ratio as long-horizon proxy (r/investing:r/wallstreetbets ratio > 2.0)",
     "Var C: Inverse short-interest as horizon proxy (low short interest = long-horizon dominant) via FMP free",
     "Var D: H174 baseline (score >= 0.18 + surprise >= 0.02, no horizon filter)"

@@ -836,6 +836,82 @@ Wider spread near resolution = informed traders are active = position in the dir
 
 ---
 
+## Semantic Polymarket Pair Arbitrage (arXiv:2512.02436, Dec 2025)
+
+**Source**: "Semantic Trading: Agentic AI for Clustering and Trading of Prediction Markets" (Dec 2025)
+
+**Strategy**: Two-stage LLM pipeline for Polymarket pair arbitrage via implicit logical relationships:
+1. Embed all active contract descriptions using `text-embedding-3-small` (or similar)
+2. Cluster contracts by cosine similarity; contracts with sim > 0.80 are same-outcome candidates
+3. Within each same-outcome pair, identify price divergence (|price_A - price_B| > 5%)
+4. Buy the cheaper leg (underpriced contract) with Kelly sizing; hold until convergence or resolution
+
+**Performance (paper)**: 60–70% accuracy in predicting relational patterns; ~20% average returns over week-long horizons on resolved Polymarket contracts.
+
+**Key insight**: LLMs discover *implicit* same-outcome links that price history alone cannot identify. Examples:
+- "Will the Fed cut rates in March?" and "Will the 2Y yield drop below 4% by April?" → same macro bet
+- "Will NVIDIA beat Q3 earnings?" and "Will AI chip demand exceed 2024 levels?" → correlated resolution
+
+This is fundamentally different from cointegration: semantic clustering identifies economic logic, not price history. H307 (ETF cointegration) confirmed pure price-based cointegration fails OOS; semantic linking may be more durable.
+
+```python
+import numpy as np
+from openai import OpenAI
+
+client = OpenAI()
+
+def embed_contracts(titles: list[str]) -> np.ndarray:
+    resp = client.embeddings.create(model="text-embedding-3-small", input=titles)
+    return np.array([d.embedding for d in resp.data])
+
+def find_same_outcome_pairs(titles: list[str], prices: list[float],
+                            sim_threshold: float = 0.80,
+                            price_gap: float = 0.05) -> list[dict]:
+    """Find mispriced contract pairs via semantic similarity."""
+    embs = embed_contracts(titles)
+    norms = np.linalg.norm(embs, axis=1, keepdims=True)
+    normed = embs / norms
+    sim_matrix = normed @ normed.T
+
+    pairs = []
+    n = len(titles)
+    for i in range(n):
+        for j in range(i + 1, n):
+            sim = sim_matrix[i, j]
+            if sim >= sim_threshold:
+                gap = abs(prices[i] - prices[j])
+                if gap >= price_gap:
+                    cheaper = i if prices[i] < prices[j] else j
+                    pairs.append({
+                        'idx_cheap': cheaper,
+                        'idx_exp': j if cheaper == i else i,
+                        'sim': float(sim),
+                        'price_gap': float(gap),
+                        'title_cheap': titles[cheaper],
+                        'title_exp': titles[j if cheaper == i else i],
+                    })
+    return sorted(pairs, key=lambda x: -x['price_gap'])
+```
+
+**Implementation path for H463** (design note — not yet a backtest):
+1. Pull active Polymarket contracts via [CLOB API](https://clob.polymarket.com) (`py-clob-client`)
+2. Embed contract descriptions using `text-embedding-3-small` (~$0.01 per nightly batch)
+3. Identify same-outcome pairs: cosine sim > 0.80
+4. Filter to pairs where |price_A - price_B| > 5%
+5. Buy cheaper leg with Kelly sizing; track resolution outcomes
+
+**Cost**: ~$5–10/month OpenAI embedding API for nightly batch of ~500 active contracts.
+
+**Key risks to validate:**
+- Different resolution dates: a same-outcome pair with different deadlines may not converge
+- Liquidity mismatch: buying the cheaper leg may require crossing a wide spread
+- False same-outcome: "Will Tech outperform?" and "Will NVIDIA beat?" are similar but not identical
+- Requires ≥ 30 resolved contracts with WR ≥ 65% in paper trading before real capital
+
+**Cross-references**: [Polymarket](polymarket.md) | [LLM Semantic Networks arXiv:2604.19476] | [H307 ETF cointegration failure] | oracle3 Wang Transform (below)
+
+---
+
 ## oracle3 — Wang Transform Prediction Market Agent (2026)
 
 **Repo**: [YichengYang-Ethan/oracle3](https://github.com/YichengYang-Ethan/oracle3) — Apache 2.0, 633 tests  

@@ -2,16 +2,16 @@
   "hypothesis_number": "H457",
   "short_name": "prism-vq-cross-sectional-h198",
   "title": "PRISM-VQ Vector-Quantized Discrete Latent Factors for Cross-Sectional H198 Stock Ranking",
-  "source": "arXiv:2605.13407 (Kim & Song, IJCAI 2026) — \"Vector-Quantized Discrete Latent Factors Meet Financial Priors: Dynamic Cross-Sectional Stock Ranking Prediction for Portfolio Construction\"",
+  "source": "arXiv:2605.13407 (Kim & Song, IJCAI 2026) \u2014 \"Vector-Quantized Discrete Latent Factors Meet Financial Priors: Dynamic Cross-Sectional Stock Ranking Prediction for Portfolio Construction\"",
   "target_file": "backtesting/daily/run_h457_prism_vq_cross_sectional.py",
   "risk": "medium",
-  "apply_status": "pending",
+  "apply_status": "applied",
   "summary": "PRISM-VQ combines three components: (1) expert prior factors from the confirmed hypothesis library (6-1m momentum, IMOM, low-vol), (2) a vector-quantized discrete latent factor layer learned from cross-sectional structure that acts as an information bottleneck suppressing noise, and (3) a structure-conditioned Mixture-of-Experts generating time-varying factor loadings. The VQ codebook entries capture regime-like discrete market states. Paper validates on both CSI 300 and S&P 500. H457 implements a tractable PyTorch version on the H198 30-stock universe with expert priors from H395/H398 (IMOM6 + MOM60 + LowVol + IMOM12) and a small VQ codebook (K=8 codes). Code available at github.com/finxlab/PRISM-VQ.",
   "variants": [
-    "Var A: Full PRISM-VQ — VQ codebook K=8 + MoE time-varying loadings on H398 expert priors, top-6",
-    "Var B: VQ only no MoE — VQ regime routing selects fixed per-regime weight blend, top-6",
-    "Var C: MoE only no VQ — continuous gating without discrete bottleneck, top-6",
-    "Var D: Expert priors only — H398 equal-weight composite (0.25 IMOM6 + 0.25 MOM60 + 0.25 LowVol + 0.25 IMOM12), top-6 baseline"
+    "Var A: Full PRISM-VQ \u2014 VQ codebook K=8 + MoE time-varying loadings on H398 expert priors, top-6",
+    "Var B: VQ only no MoE \u2014 VQ regime routing selects fixed per-regime weight blend, top-6",
+    "Var C: MoE only no VQ \u2014 continuous gating without discrete bottleneck, top-6",
+    "Var D: Expert priors only \u2014 H398 equal-weight composite (0.25 IMOM6 + 0.25 MOM60 + 0.25 LowVol + 0.25 IMOM12), top-6 baseline"
   ],
   "gate": "OOS Sharpe >= 4.068 (H398 champion) AND IC > 0.05 in OOS; or OOS Sharpe >= 1.174 if VQ regime insight is novel",
   "is_period": "2013-2020",

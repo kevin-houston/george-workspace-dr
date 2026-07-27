@@ -5,7 +5,7 @@
   "source": "CBOE Insights 2026 (Henry Schwartz), Option Alpha empirical study (180-day, 2024), FlashAlpha VRP/GEX research (2025-2026)",
   "target_file": "backtesting/daily/run_h462_0dte_condor.py",
   "risk": "medium",
-  "apply_status": "pending",
+  "apply_status": "applied",
   "summary": "0DTE (zero days to expiration) SPX options now represent ~60% of SPX options volume (CBOE 2025-2026). Option Alpha's 180-day empirical sample shows SPX closes within 0.2% of its 2pm price 65.6% of the time. A 0.2% OTM $5-wide SPXW iron condor entered at 2:44pm generates ~$196 net credit on $304 max loss (64.4% R/R), yielding ~$36 expected value per trade at 68% historical max-profit probability. H462 tests a synthetic Tier-0 BSM backtest of this strategy on SPX daily from 2015-2026 using end-of-day vol surface approximation. Mechanism: collect daily time-decay premium (no overnight risk, cash-settled) in calm regimes; skip on high-vol or strongly trending days. Entry filter: VRP z-score > 0.5 (VIX > trailing 20d realized vol by meaningful margin). Exit filter: hard close at 3:30pm ET (gamma spike window). Risk gate: maximum 1 condor per day; position size = 1% of notional. Key question: does the structural VRP edge at the short end of the vol term structure produce a positive Sharpe after realistic transaction costs (56% of bid-ask width, 4-leg spread), especially when filtered by a VRP z-score entry gate? Note: this is a SYNTHETIC backtest (Tier 0 BSM). ThetaData intraday subscription ($80/mo) would be required for a Tier 1 production backtest. The synthetic approach establishes whether the mechanism is plausible before investing in data.",
   "variants": [
     "Var A: 0.2% OTM, no VRP filter, hard 3:30pm close (baseline)",

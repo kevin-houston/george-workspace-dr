@@ -841,6 +841,72 @@ For H318, the right path: implement MetaPS selection logic with XGBoost (not LLM
 
 ---
 
+## TrustTrade: Selective Consensus Gate for H274 (arXiv:2603.22567, Mar 2026)
+
+**Source**: Zhong et al. (Mar 2026) — "TrustTrade: Human-Inspired Selective Consensus Reduces Decision Uncertainty in LLM Trading Agents"
+
+**Core finding**: Prior multi-agent trading systems apply *uniform trust* — all agent signals equally weighted regardless of inter-agent agreement. TrustTrade fixes this with **selective consensus**: aggregate only when agents show high semantic AND numerical agreement; route divergent signals to a no-trade decision rather than forcing a synthetic average.
+
+**Additional components:**
+- Deterministic temporal signals anchor each agent's reasoning to calendar context
+- Reflective memory adjusts risk preferences based on recent outcome history (without retraining)
+- Tested on high-noise periods (2024 Q1 and 2026 Q1); shows "mid-risk/mid-return" calibration vs extreme-regime behavior common in vanilla multi-agent systems
+
+**Application to H274 (3-agent PEAD debate):**
+
+H274 currently produces majority-vote signals from 3 agents (bear/bull/devil's advocate). TrustTrade's selective consensus pattern extends this:
+
+1. Each agent outputs stance + reasoning text
+2. Embed reasoning texts via `text-embedding-3-small` (OpenAI)
+3. Compute pairwise cosine similarity between all reasoning pairs
+4. **Entry gate**: only enter PEAD trade when ≥ 2/3 agents agree on direction AND mean cosine similarity > 0.70
+5. High-divergence cases (cosine sim ≤ 0.70) → skip trade
+
+```python
+from openai import OpenAI
+import numpy as np
+
+client = OpenAI()
+
+def get_embedding(text: str) -> list[float]:
+    resp = client.embeddings.create(model="text-embedding-3-small", input=text)
+    return resp.data[0].embedding
+
+def selective_consensus_gate(agent_stances: list[str], agent_reasonings: list[str],
+                             min_agreement: float = 0.70) -> tuple[str, float]:
+    """
+    Returns (decision, consensus_score).
+    decision: 'enter' | 'skip'
+    """
+    embeddings = [get_embedding(r) for r in agent_reasonings]
+    emb = np.array(embeddings)
+    # Pairwise cosine similarities
+    norms = np.linalg.norm(emb, axis=1, keepdims=True)
+    normed = emb / norms
+    sim_matrix = normed @ normed.T
+    # Mean off-diagonal similarity
+    n = len(embeddings)
+    off_diag = [(sim_matrix[i, j]) for i in range(n) for j in range(n) if i != j]
+    mean_sim = float(np.mean(off_diag))
+
+    positive_votes = sum(1 for s in agent_stances if s.lower() in ('buy', 'long', 'bullish'))
+    majority_direction = 'buy' if positive_votes >= 2 else 'skip'
+
+    if majority_direction == 'buy' and mean_sim >= min_agreement:
+        return 'enter', mean_sim
+    return 'skip', mean_sim
+```
+
+**Expected effect on H274**: reduces trade count from ~22/year (H174 baseline) to ~12–15 high-confidence events; should raise WR above 81.8% baseline by filtering low-consensus false positives.
+
+**Implementation path**: (1) extend H274 agent debate to log per-agent stance + reasoning text, (2) add embedding-based consensus gate above, (3) backtest on H174's 22 OOS events, gate: OOS WR ≥ 85% at n ≥ 10/year.
+
+**Cost**: `text-embedding-3-small` is $0.02/MTok. Three reasoning texts × ~300 tokens each = 0.9k tokens per event. At 22 events/year: ~$0.0002/year — negligible.
+
+**Cross-references**: [H274 multi-agent PEAD], [H454 FinCom DoC], multi-agent-llm-trading.md#integration-with-h274
+
+---
+
 ## Fine-Grained Task Decomposition for PEAD Multi-Agent (arXiv:2602.23330, Feb 2026)
 
 **Source**: 'Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks' (Submitted Feb 2026). Deployed on Japanese equities with prices, financials, news, macro data. Key finding: fine-grained task decomposition significantly improves risk-adjusted returns vs. coarse-grained designs.
