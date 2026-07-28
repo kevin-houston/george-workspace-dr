@@ -1,0 +1,37 @@
+{
+  "strategy": "H460",
+  "run_date": "2026-07-27",
+  "oos_stats": {
+    "A": {
+      "sharpe": 0.787,
+      "cagr": 0.233,
+      "maxdd": -0.449,
+      "neg_years": 1
+    },
+    "B": {
+      "sharpe": 0.907,
+      "cagr": 0.288,
+      "maxdd": -0.457,
+      "neg_years": 1
+    },
+    "C": {
+      "sharpe": 0.0,
+      "cagr": 0.0,
+      "maxdd": 0.0,
+      "neg_years": 0
+    },
+    "D": {
+      "sharpe": 0.606,
+      "cagr": 0.14,
+      "maxdd": -0.351,
+      "neg_years": 2
+    },
+    "E": {
+      "sharpe": 0.888,
+      "cagr": 0.256,
+      "maxdd": -0.465,
+      "neg_years": 2
+    }
+  },
+  "confirmed_variants": []
+}

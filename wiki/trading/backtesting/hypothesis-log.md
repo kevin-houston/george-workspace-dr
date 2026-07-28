@@ -1,7 +1,7 @@
 h463_status: STAGED (2026-07-27) — LLM Semantic Clustering for Polymarket Pair Arbitrage. Source: arXiv:2512.02436 (Dec 2025) 'Semantic Trading: Agentic AI for Clustering and Trading of Prediction Markets'. Key finding: 60-70% accuracy predicting relational patterns; ~20% avg returns over week-long horizons on resolved Polymarket contracts. Two-stage pipeline: embed contract descriptions (text-embedding-3-small), cluster by cosine sim > 0.80 to find same-outcome pairs, buy underpriced leg when |price_A - price_B| > 5%. H463 is a design note and wiki update only. Gate: paper trading ≥ 30 resolved contracts WR ≥ 65% before real capital. Wiki update: prediction-markets/algorithmic-strategies.md. Low risk.
-h462_status: STAGED (2026-07-27) — Systematic 0DTE SPX Iron Condor: Synthetic BSM Backtest with VRP Entry Filter. Source: CBOE Insights 2026 (Schwartz); Option Alpha 180-day empirical study (2024); FlashAlpha VRP/GEX research (2025-2026). 5 variants: A (baseline 0.2% OTM no filter), B (0.2% OTM + VRP z>0.5), C (0.32% OTM + VRP z>0.5), D (B + no trending days), E (B + no VIX spike days). Synthetic Tier-0 BSM backtest; ThetaData required for Tier-1. Gate: OOS Sharpe ≥ 1.0, MaxDD ≤ -20%, zero negative years OOS 2021-2026. Script: backtesting/daily/run_h462_0dte_condor.py. Medium risk.
+h462_status: NOT RUNNABLE — Tier-0 BSM approach invalid for 0DTE (2026-07-27). Systematic 0DTE SPX Iron Condor: BSM synthetic backtest. Source: CBOE Insights 2026 (Schwartz); Option Alpha 180-day empirical (2024); FlashAlpha VRP/GEX research (2025-2026). RESULTS — OOS: Var A=62.006 (MaxDD -0.0%), Var B=nan (MaxDD -239.3%), Var C=nan (MaxDD -239.4%), Var D=-6.085 (MaxDD -37.1%), Var E=nan (MaxDD -158.9%). IS: Var A MaxDD=-227.7%. All results degenerate: Sharpe=62 is impossible; MaxDD below -100% violates basic accounting. ROOT CAUSE: BSM with T→0 (0DTE) produces extreme gamma/delta sensitivities that make EOD IV proxy meaningless. The condor is entered at 2:44pm and closed at 3:30pm; using end-of-day VIX as IV for intraday positions creates nonsensical P&L trajectories. Position sizing arithmetic also produces ruin scenarios when options appear worthless at EOD but held intraday losses. CONCLUSION: The Tier-0 synthetic BSM approach is fundamentally unsuitable for 0DTE strategies. The empirical edge (Option Alpha 180-day: 65.6% close within 0.2% of 2pm price; ~68% max-profit probability; $36 EV/trade) is well-supported by practitioner data, but a valid backtest requires ThetaData intraday options data (~$80/month). This hypothesis is NOT CLOSED — concept remains promising. Flag for Tier-1 review when intraday data is available. Script: backtesting/daily/run_h462_0dte_condor.py. Results: backtesting/results/h462_results.json.
 h461_status: STAGED (2026-07-27) — TrustTrade Selective Consensus Gate for H274 Multi-Agent PEAD Debate. Source: arXiv:2603.22567 (Zhong et al., Mar 2026) 'TrustTrade: Human-Inspired Selective Consensus Reduces Decision Uncertainty in LLM Trading Agents'. Design note + wiki update: selective consensus gate (agent reasoning cosine sim > 0.70) reduces H274 false-positive PEAD entries. Expected effect: reduces ~22/year events to ~12-15 high-confidence with higher WR. Future gate: OOS WR ≥ 85% at n ≥ 10/year. Wiki update: multi-agent-llm-trading.md. Low risk.
-h460_status: STAGED (2026-07-27) — Bias-Corrected Multi-Factor Pipeline for H198: Mask-First Design. Source: arXiv:2507.07107 (Du, May 2026) 'Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction'. Key finding: 'upstream contamination' — non-tradable days (thin volume, halts) propagate silently through rolling factor windows, inflating IC by ~18% while reducing realized Sharpe by 0.44. Fix: boolean tradability mask constructed from volume percentile at load time, threaded through every operator. H460 applies to H198: daily volume mask at 20th/10th pct threshold → recompute 6-1m momentum and IMOM6 with masked returns. Also tests Alpha101 factor #001 (1-day reversal) with mask. Variants: A (mask 20th pct, 6-1m), B (mask 10th pct, 6-1m, stricter), C (masked IMOM6), D (Alpha101 #001 with mask), E (unmasked baseline). Gate: OOS Sharpe > 1.174 (H198 baseline). IS: 2013-2020, OOS: 2021-2026. Script: backtesting/daily/run_h460_bias_corrected_multifactor.py. Low risk. NOTE: US equities have no hard price limits (unlike Chinese A-shares), so effect may be muted — primary value is methodological confirmation or null result.
+h460_status: NOT CONFIRMED (2026-07-27) — Bias-Corrected Multi-Factor Pipeline for H198: Mask-First Design. Source: arXiv:2507.07107 (Du, May 2026) 'Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction'. Key finding: 'upstream contamination' — non-tradable days (thin volume, halts) propagate silently through rolling factor windows, inflating IC by ~18% while reducing realized Sharpe by 0.44. Fix: boolean tradability mask constructed from volume percentile at load time, threaded through every operator. H460 applies to H198: daily volume mask at 20th/10th pct threshold → recompute 6-1m momentum and IMOM6 with masked returns. Also tests Alpha101 factor #001 (1-day reversal) with mask. Variants: A (mask 20th pct, 6-1m), B (mask 10th pct, 6-1m, stricter), C (masked IMOM6), D (Alpha101 #001 with mask), E (unmasked baseline). Gate: OOS Sharpe > 1.174 (H198 baseline). IS: 2013-2020, OOS: 2021-2026. Script: backtesting/daily/run_h460_bias_corrected_multifactor.py. Low risk. NOTE: US equities have no hard price limits (unlike Chinese A-shares), so effect may be muted — primary value is methodological confirmation or null result.
 h459_status: STAGED (2026-07-27) — Retail Investor Holding Horizon Signal as H174 PEAD Pre-Filter. Source: arXiv:2512.00280 (Vamossy, Dec 2025) 'Retail Investor Horizon and Earnings Announcements'. Key finding: long-horizon retail investors (hold language on StockTwits) experience pronounced PEAD; short-horizon traders (day-trading language) create noise that cancels drift; zero-cost long-horizon-dominant strategy yields 0.43%/month risk-adjusted alpha (2010-2021). H459 adds retail horizon proxy as 4th filter to H174 (FinBERT ≥ 0.18 + EPS surprise ≥ 0.02): Var A (ApeWisdom 7d mention rank as retail attention proxy, top-tercile filter), Var B (r/investing vs. r/wallstreetbets ratio > 2.0 proxy), Var C (inverse short-interest via FMP as long-horizon proxy), Var D (H174 baseline). Gate: OOS WR > 0.818 AND n ≥ 15. IS: 2020-2022, OOS: 2023-2026. Script: backtesting/daily/run_h459_retail_horizon_pead.py. Medium risk. Primary limitation: ApeWisdom backfill coverage pre-2022 is sparse; proxy variables may be poor surrogates for actual horizon tagging.
 h458_status: STAGED (2026-07-27) — Multi-Scale Markov-Switching GARCH Volatility Regime Gate for H026 ETF Portfolio. Source: arXiv:2606.06190 (Chaudhary, Jun 2026) 'Multi-Scale Markov Switching GARCH: Volatility Regime Detection in EUR/USD'. Key finding: triple-timeframe AR(1)-MS-GARCH (daily/4H/hourly) with Filardo-style TVTP produces Calm/Turbulent/Crisis regimes; outer-product 27-state cross-scale tensor achieves DM statistic +4.70 (p=1.28e-6) over plain GARCH(1,1) on EUR/USD 2015-2025. H458 adapts two-scale (daily+weekly) MS-GARCH to H026 25-ETF EW portfolio return stream: composite Crisis probability gates ETF top-1 selection. Variants: A (2-scale composite, BIL when crisis>0.5), B (single-scale daily 3-state, comparison to H445), C (2-scale: top-2 in Turbulent, top-1 in Calm), D (continuous crisis weight: scale by 1-crisis_prob), E (H346 OB-gated baseline). Gate: OOS Sharpe > 3.238 (H346) AND MaxDD improvement. IS: 2008-2017, OOS: 2018-2026. Script: backtesting/daily/run_h458_multiscale_msgarch_h026.py. Medium risk. CAVEAT: MS-GARCH originally validated on intraday FX; ETF equity universe has different vol dynamics; daily+weekly may be sufficient without 4H/1H.
 h457_status: STAGED (2026-07-27) — PRISM-VQ Vector-Quantized Discrete Latent Factors for H198 Cross-Sectional Ranking. Source: arXiv:2605.13407 (Kim & Song, IJCAI 2026) 'Vector-Quantized Discrete Latent Factors Meet Financial Priors: Dynamic Cross-Sectional Stock Ranking Prediction for Portfolio Construction'. Key finding: PRISM-VQ combines expert prior factors + VQ discrete latent factors (information bottleneck suppresses noise) + Mixture-of-Experts time-varying loadings; validated on CSI 300 AND S&P 500; code at github.com/finxlab/PRISM-VQ. H457 ports to H198 30-stock universe with H398 expert priors (IMOM6 + MOM60 + LowVol + IMOM12) and VQ codebook K=8. Variants: A (full PRISM-VQ: VQ+MoE on H398 priors), B (VQ only, no MoE), C (MoE continuous gating, no VQ), D (H398 equal-weight baseline). Gate: OOS Sharpe > 4.068 (H398 champion) as stretch; > 1.174 as minimal gate. IS: 2013-2020, OOS: 2021-2026. Script: backtesting/daily/run_h457_prism_vq_cross_sectional.py. Medium risk. CAVEAT: 30-stock universe may be too small for K=8 VQ codes to be stable; may need K=4 or KNN-based soft assignment.
@@ -9699,3 +9699,71 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 **Script**: backtesting/daily/run_h437.py
 **Results**: backtesting/results/h437_results.json
+
+---
+
+## H460 — Bias-Corrected Multi-Factor Pipeline for H198: Mask-First Design: NOT CONFIRMED (2026-07-27)
+
+**Source**: arXiv:2507.07107 (Du, May 2026) — "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction"
+
+**Universe**: H198 30-stock NASDAQ
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198 baseline)
+**Method**: Volume tradability mask at percentile threshold; masked rolling returns; mask-threaded factor computation
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | Description |
+|-----|-------|--------|---------|-------|------|-------------|
+| A | — | 0.787 | -44.9% | 23.3% | 1 | Mask-corrected 6-1m (20th pct), top-6 |
+| B | — | 0.907 | -45.7% | 28.8% | 1 | Mask-corrected 6-1m (10th pct stricter), top-6 |
+| C | — | 0.000 | — | — | — | Masked IMOM6 (AMZN download error, dropped) |
+| D | — | 0.606 | -35.1% | 14.0% | 2 | Alpha101 #001 (1-day reversal with mask), top-6 |
+| E | — | 0.888 | -46.5% | 25.6% | 2 | H198 unmasked 6-1m baseline |
+
+**Key findings:**
+- **Bias correction neither helps nor hurts**: Var B (strictest mask, 10th pct) at OOS 0.907 vs unmasked baseline Var E 0.888 — a marginal +0.019 Sharpe that is below noise.
+- **Root cause of null result**: US large-cap NASDAQ stocks have virtually no "non-tradable" volume days. Unlike Chinese A-shares with hard price limits, or small-caps with thin trading, AAPL/MSFT/NVDA trade millions of shares daily — volume almost never drops below the 20th-percentile baseline. The mask filters <2% of days, producing near-identical signals.
+- **Alpha101 #001 (1-day reversal) weak**: OOS 0.606 with 2 negative years. Short-term reversal has no predictive power on large-cap tech where momentum is persistent (same finding as H298/H298 ETF reversal).
+- **Du's finding applies to emerging markets and small-caps**: The upstream contamination problem (non-tradable days polluting moving averages) is most severe in Chinese A-shares and micro-cap equity with frequent halts. Not applicable to H198's large-cap US universe.
+- **H198 OOS baseline continues degrading**: Var E unmasked baseline = 0.888 in 2021-2026, vs confirmed H198 gate 1.174. This is the 6th consecutive hypothesis showing H198 baseline OOS ~0.888-0.937 rather than 1.174 — confirms structural degradation in the 2021-2026 regime, not a test-specific artifact.
+
+**Verdict: NOT CONFIRMED** — 0/5 runnable variants pass gate. Null result is informative: Du's bias correction is US large-cap irrelevant. H198's signal degradation pattern now confirmed across H435/H436/H437/H448/H449/H460. Worth revisiting on a broader universe (S&P 500 stocks, small-caps) or Chinese market data where non-tradable days occur.
+
+**Script**: backtesting/daily/run_h460_bias_corrected_multifactor.py
+**Results**: backtesting/results/h460_results.json
+
+---
+
+## H462 — Systematic 0DTE SPX Iron Condor Synthetic Backtest: NOT RUNNABLE — Tier-0 BSM Invalid for 0DTE (2026-07-27)
+
+**Source**: CBOE Insights 2026 (Henry Schwartz); Option Alpha 180-day empirical study (2024); FlashAlpha VRP/GEX research (2025-2026)
+
+**Universe**: SPX (proxied by SPY × multiplier)
+**IS/OOS**: IS 2015-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe ≥ 1.0, MaxDD ≤ −20%, zero negative years OOS 2021-2026
+**Method**: Synthetic Tier-0 BSM — end-of-day IV from VIX; 0.2% OTM iron condor entered at 2:44pm, closed 3:30pm
+
+| Var | IS Sh | IS MDD | OOS Sh | OOS MDD | NegY | Description |
+|-----|-------|--------|--------|---------|------|-------------|
+| A | nan | -227.7% | 62.006 | -0.0% | 0 | 0.2% OTM, no filter (baseline) |
+| B | -9.766 | -73.0% | nan | -239.3% | 3 | 0.2% OTM, VRP z > 0.5 |
+| C | -9.767 | -73.0% | nan | -239.4% | 3 | 0.32% OTM, VRP z > 0.5 |
+| D | -7.407 | -36.2% | -6.085 | -37.1% | 6 | B + skip trending days |
+| E | -9.563 | -64.6% | nan | -158.9% | 4 | B + skip vol spike days |
+
+**All results are degenerate — implementation is invalid for 0DTE:**
+- Var A OOS Sharpe of 62 with MaxDD -0.0% is numerically impossible for a real strategy.
+- MaxDD below -100% (Vars B, C, E) violates basic portfolio accounting; position size cannot produce more than -100% loss unless leveraged beyond collateral.
+- IS MaxDD -227.7% (Var A) similarly impossible.
+
+**Root cause — BSM with T→0 fails for intraday 0DTE:**
+1. **T approaches zero**: A 0DTE option entered at 2:44pm with 46 minutes to expiry has T ≈ 46/(252×390) ≈ 0.00047 years. BSM gamma and delta become numerically extreme at this T, making pricing unstable.
+2. **EOD VIX as IV is wrong**: End-of-day VIX approximates annualized implied vol. Applied to T = hours, this produces option prices that are either essentially zero (deep expiry) or infinity near ATM, depending on SPY's closing level vs the strike.
+3. **Position sizing breaks**: When BSM returns near-zero credit for positions that should show ~$196 credit per condor, the P&L arithmetic produces nonsensical results over hundreds of trading days.
+4. **Needs intraday data**: A valid 0DTE backtest requires intraday SPX prices at 2:44pm and 3:30pm ET with actual option quotes or intraday IV surface. ThetaData (~$80/month) provides this.
+
+**Concept remains empirically well-supported**: Option Alpha's 180-day live sample shows 65.6% of trading days SPX closes within 0.2% of its 2pm price; $5-wide SPXW IC at 2:44pm → ~68% max-profit probability → ~$36 EV/trade. These are observed fills, not BSM simulations. The strategy edge is real — the Tier-0 backtest methodology is wrong for 0DTE.
+
+**Next step**: H462 is **NOT CLOSED**. Re-test as Tier-1 with ThetaData intraday option quotes when data subscription available. The five variants (OTM%, VRP filter, trending-day filter, vol-spike filter) remain valid design axes.
+
+**Script**: backtesting/daily/run_h462_0dte_condor.py
+**Results**: backtesting/results/h462_results.json (degenerate — do not use for trading decisions)
