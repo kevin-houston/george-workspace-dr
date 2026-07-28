@@ -1,0 +1,22 @@
+{
+  "hypothesis_number": "H469",
+  "short_name": "hifi-kpi-xbrl-structured-pead-filter",
+  "title": "HiFi-KPI Structured iXBRL KPI Extraction as H174 Signal Layer \u2014 Quantitative Magnitude Filter",
+  "source": "arXiv:2502.15411 (Feb 2026, v3) \u2014 \"HiFi-KPI: A Dataset for Hierarchical KPI Extraction from Earnings Filings\"",
+  "target_file": "backtesting/daily/run_h469_hifi_kpi_xbrl_pead.py",
+  "risk": "medium",
+  "apply_status": "applied",
+  "summary": "HiFi-KPI provides 1.65M paragraphs and 198K unique hierarchically organized KPI labels linked to iXBRL XBRL taxonomies from SEC filings. Encoder-based models achieve 0.906 macro-F1 on KPI classification; LLMs reach 0.440 F1 on structured extraction. The key asset is the structured iXBRL linkage: every KPI tag in SEC XBRL filings (EPS, revenue, gross margin, guidance) is already machine-readable via the SEC EDGAR XBRL API \u2014 no LLM extraction needed. H469 uses a different signal than H427 (event taxonomy type) or H471 (unstructured call transcripts): it reads the XBRL-tagged quantitative KPIs directly from EDGAR CompanyFacts API and uses the EPS/revenue magnitude beat vs. consensus as a continuous signal. Specifically: compute KPI_magnitude = (actual_eps - consensus_eps) / abs(consensus_eps) for top H174 events; add as multiplicative scaling to hold size (scale position by min(2.0, 1.0 + KPI_magnitude)). This is cheaper than LLM extraction ($0 beyond existing EDGAR API calls) and more precise (structured XML). Gate: OOS MeanRet improvement vs H174's 6.89% baseline, WR >= 0.818 at n >= 15.",
+  "variants": [
+    "Var A: H174 base + KPI_magnitude scaling: position size = min(2.0, 1.0 + EPS_beat_pct) \u2014 bigger beat \u2192 bigger position",
+    "Var B: H174 base + KPI gate: EPS_beat_pct > 0.05 (5% beat required, binary filter)",
+    "Var C: H174 base + revenue KPI filter: rev_beat_pct > 0.0 (any revenue beat required)",
+    "Var D: H174 base + composite KPI: (EPS_beat + rev_beat) / 2 as continuous multiplier",
+    "Var E: H174 baseline (FinBERT >= 0.18 + EPS surprise >= 0.02) \u2014 sanity check"
+  ],
+  "gate": "OOS WR >= 0.818 AND OOS MeanRet >= 6.89% (H174 baseline) at n >= 15",
+  "is_period": "2022-2023",
+  "oos_period": "2024-2026",
+  "data_requirements": "EDGAR CompanyFacts API (free, no key needed, $EDGAR_KEY for identity header) provides XBRL-tagged EPS and revenue as structured JSON. FMP earnings_surprises endpoint ($FMP_API_KEY) provides consensus EPS and actual as pair. Both already used in pead_overnight.py flow. No LLM cost \u2014 purely structured data. Complement to H427 (event taxonomy) and H471 (call KPIs); stack ordering: H427 event type filter \u2192 H469 KPI magnitude weight \u2192 H471 call KPI direction boost.",
+  "implementation_notes": "Key difference from EPS surprise already in H174: H174 uses raw EPS surprise >= 0.02; H469 uses the RELATIVE beat percentage (actual/consensus - 1) as a continuous multiplier rather than a binary gate. A 10% EPS beat should produce larger expected PEAD than a 2% beat at the same FinBERT score \u2014 this is the new signal dimension. XBRL data quality caveat: some companies report non-GAAP EPS in XBRL incorrectly; cross-check with FMP consensus when EDGAR XBRL EPS seems implausible (> 300% beat). H469 complements H427 (event TYPE) + H471 (call qualitative KPIs) = full three-layer structured/unstructured KPI pipeline."
+}

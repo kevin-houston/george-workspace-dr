@@ -1,3 +1,6 @@
+h471_status: STAGED (2026-07-28) — KPI Extraction from Earnings Calls as H174 Signal Boost. Source: arXiv:2605.03147 (May 2026, ACL 2026 Industry Track) 'Effective Performance Measurement: Challenges and Opportunities in KPI Extraction from Earnings Calls'. Three benchmarks: SEC Filings Benchmark (SECB), Earnings Calls Benchmark (ECB), ECB-A (2,460 expert annotation groups); LLM-based open-ended KPI extraction at 79.7% precision. H471 adds KPI direction score as 4th H174 signal layer: extract quantitative KPIs (revenue growth, EPS outlook, margin guidance) from call transcripts; KPI_direction = fraction of extracted KPIs with positive guidance; adjusted_score = finbert_score + 0.05 * KPI_direction; maintain thresholds: adjusted_score >= 0.18 + EPS surprise >= 0.02. Variants: A (continuous KPI boost), B (binary KPI gate direction > 0.5), C (KPI replaces EPS surprise check), D (H174 baseline). IS: 2022-2023, OOS: 2024-2026. Gate: OOS WR >= 0.818 AND n >= 15. Transcript source: FMP earnings_call_transcript ($FMP_API_KEY — ~65% S&P500 coverage). CRITICAL: Must check coverage rate first — H168 failed at 26.5% coverage. Report fraction of H174 events with available transcripts before running full OOS. Script: backtesting/daily/run_h471_kpi_earnings_call_pead.py. Medium risk.
+h470_status: STAGED (2026-07-28) — ML Design Choice Momentum: Monthly Best-Variant Selection Across H198 Strategy Family. Source: SSRN:5031755 (Chen, Hanauer, Kalsbach, Feb 2026) 'Design choices, machine learning, and the cross-section of stock returns'. Key finding: ML model design choices exhibit momentum — going long trailing-3/6/12-month best-performing configurations delivers statistically significant returns. H470 applies as meta-selector: each month pick the best-performing variant from {H198 baseline (OOS 1.174), H376 6-0m no-skip (OOS 3.120), H411/H418 1/price×drift (OOS 5.855), H217 alpha101 (OOS 1.559)} by trailing Sharpe, run that variant's signal next month. Variants: A (3m trailing Sharpe selector), B (6m selector), C (12m selector), D (ensemble: EW top-2 by trailing Sharpe), E (H376 static baseline). IS: 2013-2020, OOS: 2021-2026. Gate: OOS Sharpe >= 3.120 (H376 static) AND MaxDD improvement vs -8.4%. CAVEAT: SSRN paper validates at daily frequency (3m = ~60 obs); monthly strategy signal (3m = 3 obs) may be insufficient — expect Var C/D more robust. If all fail gate, report null and note frequency mismatch. Script: backtesting/daily/run_h470_design_choice_momentum_h198.py. Low risk.
+h469_status: STAGED (2026-07-28) — HiFi-KPI Structured iXBRL KPI Extraction as H174 Signal Layer. Source: arXiv:2502.15411 (Feb 2026) 'HiFi-KPI: A Dataset for Hierarchical KPI Extraction from Earnings Filings'. Dataset: 1.65M paragraphs, 198K unique hierarchically organized KPI labels linked to iXBRL taxonomies; encoder models achieve 0.906 macro-F1 on classification. Key insight for H469: SEC EDGAR XBRL API already provides machine-readable EPS and revenue figures — no LLM extraction needed ($0 cost). H469 upgrades H174's binary EPS surprise gate to a continuous magnitude multiplier: KPI_magnitude = (actual_eps - consensus_eps) / abs(consensus_eps); position_size = min(2.0, 1.0 + KPI_magnitude). Bigger beat → bigger position, proportional to drift expectation. Variants: A (EPS magnitude scaling), B (binary EPS beat > 5% gate), C (revenue beat > 0% gate), D (composite EPS+rev average), E (H174 baseline). IS: 2022-2023, OOS: 2024-2026. Gate: OOS WR >= 0.818 AND OOS MeanRet >= 6.89% at n >= 15. COMPLEMENT TO: H427 (event taxonomy TYPE), H471 (unstructured call KPIs) — three different signal axes on same PEAD events. Script: backtesting/daily/run_h469_hifi_kpi_xbrl_pead.py. Medium risk.
 h463_status: STAGED (2026-07-27) — LLM Semantic Clustering for Polymarket Pair Arbitrage. Source: arXiv:2512.02436 (Dec 2025) 'Semantic Trading: Agentic AI for Clustering and Trading of Prediction Markets'. Key finding: 60-70% accuracy predicting relational patterns; ~20% avg returns over week-long horizons on resolved Polymarket contracts. Two-stage pipeline: embed contract descriptions (text-embedding-3-small), cluster by cosine sim > 0.80 to find same-outcome pairs, buy underpriced leg when |price_A - price_B| > 5%. H463 is a design note and wiki update only. Gate: paper trading ≥ 30 resolved contracts WR ≥ 65% before real capital. Wiki update: prediction-markets/algorithmic-strategies.md. Low risk.
 h462_status: NOT RUNNABLE — Tier-0 BSM approach invalid for 0DTE (2026-07-27). Systematic 0DTE SPX Iron Condor: BSM synthetic backtest. Source: CBOE Insights 2026 (Schwartz); Option Alpha 180-day empirical (2024); FlashAlpha VRP/GEX research (2025-2026). RESULTS — OOS: Var A=62.006 (MaxDD -0.0%), Var B=nan (MaxDD -239.3%), Var C=nan (MaxDD -239.4%), Var D=-6.085 (MaxDD -37.1%), Var E=nan (MaxDD -158.9%). IS: Var A MaxDD=-227.7%. All results degenerate: Sharpe=62 is impossible; MaxDD below -100% violates basic accounting. ROOT CAUSE: BSM with T→0 (0DTE) produces extreme gamma/delta sensitivities that make EOD IV proxy meaningless. The condor is entered at 2:44pm and closed at 3:30pm; using end-of-day VIX as IV for intraday positions creates nonsensical P&L trajectories. Position sizing arithmetic also produces ruin scenarios when options appear worthless at EOD but held intraday losses. CONCLUSION: The Tier-0 synthetic BSM approach is fundamentally unsuitable for 0DTE strategies. The empirical edge (Option Alpha 180-day: 65.6% close within 0.2% of 2pm price; ~68% max-profit probability; $36 EV/trade) is well-supported by practitioner data, but a valid backtest requires ThetaData intraday options data (~$80/month). This hypothesis is NOT CLOSED — concept remains promising. Flag for Tier-1 review when intraday data is available. Script: backtesting/daily/run_h462_0dte_condor.py. Results: backtesting/results/h462_results.json.
 h461_status: STAGED (2026-07-27) — TrustTrade Selective Consensus Gate for H274 Multi-Agent PEAD Debate. Source: arXiv:2603.22567 (Zhong et al., Mar 2026) 'TrustTrade: Human-Inspired Selective Consensus Reduces Decision Uncertainty in LLM Trading Agents'. Design note + wiki update: selective consensus gate (agent reasoning cosine sim > 0.70) reduces H274 false-positive PEAD entries. Expected effect: reduces ~22/year events to ~12-15 high-confidence with higher WR. Future gate: OOS WR ≥ 85% at n ≥ 10/year. Wiki update: multi-agent-llm-trading.md. Low risk.
@@ -9767,3 +9770,137 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 **Script**: backtesting/daily/run_h462_0dte_condor.py
 **Results**: backtesting/results/h462_results.json (degenerate — do not use for trading decisions)
+
+---
+
+## H463 — Semantic Polymarket Pairs Trading: STAGED (2026-07-27)
+
+**Source**: arXiv:2607.13854 (staged 2026-07-27)
+
+**Status**: STAGED — awaiting implementation. Pairs trading using Polymarket semantic similarity for spread selection.
+
+**Script**: backtesting/daily/run_h463_semantic_polymarket_pairs.py
+
+---
+
+## H464 — STN-TGAT Graph Attention Network for H198 Cross-Sectional Stock Ranking: STAGED (2026-07-28)
+
+**Source**: arXiv:2607.19385 (Guo, Lu & Zhang, Jul 2026) — *STN-TGAT: Top-K Portfolio Construction via Prior-Guided Graph Attention with Learnable Soft-Threshold Sparsification*
+
+**Universe**: H198 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198 minimal), stretch > 4.068 (H398 champion)
+**Method**: Soft-Threshold NMI-prior Transformer-GAT. NMI-based prior graph from 60-day lagged correlations; soft-threshold sparsification (70th-pct NMI cutoff); Transformer for temporal dynamics; GAT for cross-sectional relational modeling; top-6 equal-weight selection.
+
+**Variants**: A (full STN-TGAT), B (Transformer-only ablation), C (GAT-only ablation), D (NMI prior, uniform attention), E (H398 champion baseline)
+
+**Status**: STAGED — requires PyTorch Geometric infrastructure before running. Key caution: NMI prior graph must use strictly lagged data. Static GICS sector adjacency is a viable lightweight proxy.
+
+**Script**: backtesting/daily/run_h464_stn_tgat_h198.py
+
+---
+
+## H465 — LLM-Finetuned Merger Arbitrage Outcome Forecaster (H310 Revival): STAGED (2026-07-28)
+
+**Source**: arXiv:2607.09921 (Jajal et al., Jul 2026) — *Global Merger-Arbitrage Forecasting with Language Models*
+
+**Universe**: US M&A deals $500M+ EV from EDGAR 14D-9/SC TO filings (2015-2025)
+**IS/OOS**: IS 2015-2021 / OOS 2022-2025
+**Gate**: OOS Sharpe > 1.678 (MRGR ETF OOS from H310) AND WF ratio 0.75-2.5
+**Method**: GPT-4o-mini deal outcome forecaster; long target when P(close_at_terms)>0.75; Kelly position sizing; deal corpus from EDGAR free filings.
+
+**Key paper result**: Finetuned LLM Brier score 0.151 = 24% better than market-implied probabilities on 400+ global deals.
+
+**Status**: STAGED — H310 NOT CONFIRMED root cause was ETF-level prediction. H465 moves to individual deal-level. Data pipeline (EDGAR 14D-9 corpus) not yet built.
+
+**Script**: backtesting/daily/run_h465_llm_merger_arb.py
+
+---
+
+## H466 — Quant Convergence: Graham Value Rules as ML Noise Filter on H198: STAGED (2026-07-28)
+
+**Source**: arXiv:2606.24575 (Yamazaki & Garrido-Lestache, Jun 2026) — *Quant Convergence: Bridging Classical Value Investing and Modern Factor Models*
+
+**Universe**: H198 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198 baseline) AND MaxDD improvement
+**Method**: Graham P/E/P/B/EPS filters from FMP API applied as pre-filter before 6-1m momentum ranking. Variants from strict (P/E<15) to relaxed (P/E<35) thresholds.
+
+**Key paper result**: Graham Random Forest 232.13% return (2022-2026), Calmar 1.38 — best risk-adjusted of all models; acts as 'low-pass filter' on momentum noise.
+
+**Expected challenge**: Strict Graham filters will eliminate most NASDAQ large-cap stocks (same root cause as H337 quality factor failure). Relaxed thresholds (Var B) are the primary test.
+
+**Status**: STAGED — FMP API available; implementation requires quarterly fundamental data fetch with 90-day lag.
+
+**Script**: backtesting/daily/run_h466_graham_ml_filter.py
+
+---
+
+## H467 — MacroLens Multi-Modal Signal Benchmark: WIKI UPDATE (2026-07-28)
+
+**Source**: arXiv:2606.24950 (Trirat et al., Jun 2026)
+
+**Type**: Wiki update — added MacroLens section to `wiki/ai-industry/llm-finance-benchmarks-2026.md`.
+
+**Key finding**: Four-signal framework (price + fundamentals + macro + text) — gradient-boosted models beat zero-shot LLMs on return forecasting, but LLMs excel at scenario-conditioned macro reasoning. MacroLens highlights that H174 already implements 3/4 signal types; explicit FRED macro regime conditioning (signal 3) is the identified gap.
+
+---
+
+## H468 — FinBench Calibration Benchmark: WIKI PAGE (2026-07-28)
+
+**Source**: arXiv:2607.16229 (Ghosh & Devarakonda, Jul 2026)
+
+**Type**: Wiki page created — `wiki/ai-industry/finbench-calibration-2026.md`.
+
+**Key finding**: Confidence-competence gap is a critical failure mode for financial LLMs — overconfident models generate negative Kelly-fraction growth even with positive accuracy edge. FinBench introduces proper scoring rules (Brier, log-loss) and regime-separated calibration curves as correct evaluation framework for H174/H185 signals.
+
+---
+
+## H469 — HIFI KPI/XBRL PEAD Upgrade: STAGED (2026-07-28)
+
+**Source**: arXiv:2607.08346 (Jul 2026) — Grounded 8-K Event Taxonomy paper
+
+**Universe**: H174 PEAD universe (S&P 500 earnings events)
+**IS/OOS**: IS 2022-2023 / OOS 2024-2026
+**Gate**: OOS WR ≥ 0.818 AND n ≥ 12
+**Method**: Fine-grained 8-K event taxonomy (119 types, 3 tiers) as third filter on H174. High-quality (score≥0.7) Tier-1/2 earnings-positive event tags (revenue-beat, guidance-raised, margin-expansion) added as gate. Two-stage LLM system achieves 96% precision at quality threshold.
+
+**Status**: STAGED — gpt-4o-mini event tagger to be built; taxonomy prompt from paper's 3-tier structure.
+
+**Script**: backtesting/daily/run_h469_grounded_8k_taxonomy_pead.py
+
+---
+
+## H470 — ML Design Choice Momentum: Monthly Best-Variant Selector on H198 Family: STAGED (2026-07-28)
+
+**Source**: SSRN:5031755 (Chen, Hanauer, Kalsbach, Feb 2026) — *Design choices, machine learning, and the cross-section of stock returns*
+
+**Universe**: H198 strategy family (H198, H376, H411, H217)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe ≥ 3.120 (H376 static baseline) AND MaxDD improvement
+**Method**: Monthly meta-selector picking the best-performing H198 variant over trailing 3/6/12 months. Implements 'design-choice momentum' — going long the ML configuration with the best recent performance.
+
+**Key paper finding**: ML design choices exhibit momentum; going long the best-performing variant over trailing 3-12 months generates statistically significant positive returns.
+
+**Expected challenge**: Monthly rebalancing frequency + only 4 candidate strategies = very short estimation window. Overfitting risk is high; Var C (12m) or Var D (top-2 ensemble) expected to be most robust.
+
+**Status**: STAGED — all underlying strategy signal series already computed; implementation is pure signal combination.
+
+**Script**: backtesting/daily/run_h470_design_choice_momentum_h198.py
+
+---
+
+## H471 — KPI Extraction from Earnings Calls as H174 Signal Boost: STAGED (2026-07-28)
+
+**Source**: arXiv:2605.03147 (May 2026, ACL Industry Track) — *Effective Performance Measurement: Challenges and Opportunities in KPI Extraction from Earnings Calls*
+
+**Universe**: H174 PEAD universe
+**IS/OOS**: IS 2022-2023 / OOS 2024-2026
+**Gate**: OOS WR ≥ 0.818 AND n ≥ 15 (H174 parity)
+**Method**: Open-ended KPI extraction from earnings call transcripts (79.7% precision, ACL 2026). KPI_direction score = fraction of extracted KPIs with positive guidance. Boost FinBERT score: adjusted_score = finbert_score + 0.05 × KPI_direction. FMP/AV transcript pipeline.
+
+**Critical risk**: H168 NOT CONFIRMED was partly a coverage failure (26.5% OOS transcript availability). H471 must track coverage first; proceed only if ≥50% for OOS test set.
+
+**Status**: STAGED — transcript download pipeline not yet built; FMP API available.
+
+**Script**: backtesting/daily/run_h471_kpi_earnings_call_pead.py

@@ -1,6 +1,6 @@
 ---
 created: 2026-07-03
-updated: 2026-07-03
+updated: 2026-07-28
 type: concept
 category: AI Industry
 ---
@@ -181,6 +181,45 @@ From CLQT + BacktestBench synthesis, three checks most commonly missed in publis
 
 ---
 
+---
+
+## MacroLens — Multi-Task Multi-Modal Financial Benchmark (2026)
+
+**Source**: arXiv:2606.24950 (Trirat, Kwak, Heo, Lee & Hwang, Jun 2026)
+
+### What It Is
+MacroLens covers 4,416 US small/micro-cap equities over 2021-2026 with four jointly evaluated signal types:
+1. **Price history** — OHLCV time series
+2. **XBRL fundamentals** — 46.8M accounting facts with point-in-time dating
+3. **Macroeconomic regimes** — 53 FRED series, 1,130 macro events across 49 types
+4. **Filing text** — 295,860 SEC filings + 215,882 news articles (gated by publication date)
+
+Seven tasks: contextual return forecasting, public/private valuation, statement generation, scenario-conditioned returns, real-estate valuation.
+
+### Key Findings from 19-Method Evaluation
+- **Gradient-boosted baseline + price features outperforms zero-shot LLMs** on return forecasting
+- **LLMs excel at scenario-conditioned return prediction** — qualitative reasoning over macro events (Fed rate hikes, earnings surprises)
+- **Text + fundamentals jointly > either alone** — confirmed by five-step ablation on frontier LLMs
+- **Macro regime series (FRED) add incremental lift** beyond price + fundamentals on medium-horizon tasks
+- **Look-ahead discipline** is the critical challenge: text must be gated by SEC publication date, fundamentals by reporting date + lag
+
+### Implications for Production Pipeline
+- **H026** (signal type 1 only — pure price momentum) is theoretically improvable with macro regime overlay
+- **H174** (types 1+2+4 — price gap + EPS surprise + FinBERT 8-K) already implements three of four signal types. The gap: no explicit macro regime conditioning (type 3)
+- H444's realized-vol gate is an implicit macro regime proxy (type 3 approximation)
+- MacroLens focuses on small/micro-cap; H198/H026 are large-cap — results may not transfer directly
+
+### Design Note: H174 Macro Regime Gate
+H174 MacroLens-style four-signal composite:
+- Signal 1 (price): gap-up filter (production)
+- Signal 2 (fundamental): EPS surprise ≥ 0.02 (production)
+- Signal 3 (macro): VIX<25 + SPY>200MA gate (H301/H165a-style)
+- Signal 4 (text): FinBERT 8-K score ≥ 0.18 (production)
+
+Hypothesis: adding an explicit macro regime gate (signal 3) would improve H174 OOS win rate from 81.8% by filtering earnings-beat entries in bear markets where PEAD is empirically weakened.
+
+---
+
 ## See Also
 
 - [AI Model Landscape 2026](model-landscape-2026.md) — frontier model snapshot
@@ -190,3 +229,4 @@ From CLQT + BacktestBench synthesis, three checks most commonly missed in publis
 - [Backtesting Design Principles](../trading/backtesting/design-principles.md) — IS/OOS framework
 - [Regime Detection](../trading/algorithms/regime-detection.md) — HMM, VJM, Statistical Jump Model
 - [Regime Detection Signals — Practical Data Guide](../trading/backtesting/regime-detection-signals.md) — SPY 200MA, VIX, yield curve
+- [FinBench — Calibration Benchmarking](finbench-calibration-2026.md) — probabilistic uncertainty for financial LLMs
