@@ -2,7 +2,10 @@
 
 Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
-Last scan completed: 2026-07-27 (5 staged proposals H456–H460, 1 new wiki page)
+Last scan completed: 2026-07-27 (5 staged proposals H464–H468, 5 new wiki pages)
+
+## [2026-07-27] dream-cycle | arXiv scan + wiki expansion (second pass)
+Pages created: 5 (concepts/blended-finance.md, concepts/green-bonds-sustainability-finance.md, concepts/quant-convergence-value-factor.md, trading/algorithms/stn-tgat-graph-attention.md, ai-industry/finbench-calibration-2026.md). Pages updated: 1 (index). Hypotheses staged: 5 (H464–H468). Sources: arXiv:2607.19385 (STN-TGAT graph attention portfolio), arXiv:2607.09921 (LLM merger arbitrage, Brier 0.151), arXiv:2606.24575 (Quant Convergence, Graham RF 232%), arXiv:2607.16229 (FinBench calibration), arXiv:2606.24950 (MacroLens 4-signal benchmark). Wiki expansion target: Impact Investing — thinnest section (was 7 concept/source pages); added Blended Finance and Green Bonds pages to expand to 9. Also added 3 cross-section/AI pages. Index page count: 238 → 244.
 
 ## [2026-07-27] dream-cycle | arXiv scan + wiki expansion
 Pages created: 1 (trading/algorithms/attention-cross-sectional-factor-models.md). Pages updated: 2 (index, hypothesis-log). Hypotheses staged: 5 (H456–H460). Sources: arXiv:2606.29347 (AFT regime-gated attention), arXiv:2605.13407 (PRISM-VQ discrete latent factors, IJCAI 2026), arXiv:2606.06190 (Multi-Scale MS-GARCH), arXiv:2512.00280 (retail investor horizon PEAD), arXiv:2507.07107 (bias-corrected multi-factor). Wiki expansion target: trading/algorithms/ — new page on attention and vector quantization for cross-sectional factor models (gap between ts-foundation-models.md and factor-models.md). Index page count: 237 → 238.

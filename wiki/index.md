@@ -1,7 +1,7 @@
 ---
 updated: 2026-07-27
 sources_indexed: 4
-pages: 238
+pages: 244
 ---
 
 # Wiki Index
@@ -72,6 +72,7 @@ When answering a query:
 - [Regime Detection 2026 Papers — Wasserstein-HMM and Heavy-Tail Emissions](trading/algorithms/regime-detection-2026-papers.md) — arXiv:2603.04441 (Boukardagha; dynamic BIC K-selection, 2-Wasserstein state tracking, TC-MVO; Sharpe 2.18 MaxDD -5.43% on SPY/TLT/GLD/DBC); arXiv:2606.23492 (Alswaidan et al.; Student-t/Laplace/GE emissions; regime-conditional VaR passes coverage tests; Laplace analytical VaR formula); H444/H445 design basis ← new 2026-07-25
 - [Diffusion IV Surface Forecasting & Shallow IV Representation (2025-2026)](trading/algorithms/iv-surface-forecasting-2026.md) — arXiv:2511.07571 (Jin & Agarwal; DDPM conditioned on EWMA surfaces + VIX; arbitrage-free SPX IV surface; outperforms GANs; H448 design basis); arXiv:2603.17151 (Lin; shallow single-hidden-layer NN sufficient for IV density/vol representation; deeper = more noise; H449 cross-section design basis) ← new 2026-07-26
 - [Attention Mechanisms and Vector Quantization for Cross-Sectional Factor Models](trading/algorithms/attention-cross-sectional-factor-models.md) — AFT regime-gated attention (arXiv:2606.29347; 11-category features, Market Regime Encoder + Adaptive Gate, look-ahead correction; H456); PRISM-VQ discrete latent factors (arXiv:2605.13407, IJCAI 2026; VQ information bottleneck + MoE time-varying loadings; S&P 500 validated; H457); comparison to HMM/SJM regime detection and FactorEngine alpha mining ← new 2026-07-27
+- [STN-TGAT: Graph Attention Networks for Cross-Sectional Portfolio Construction](trading/algorithms/stn-tgat-graph-attention.md) — arXiv:2607.19385 (Guo et al., Jul 2026); Soft-Threshold NMI-prior Transformer GAT; joint temporal (Transformer) + cross-sectional (GAT) modeling; NMI-based prior graph + soft-threshold sparsification reduces noisy correlations; Top-5 from S&P 500 Top-50 with TC adjustment; H464 design basis ← new 2026-07-27
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -275,6 +276,11 @@ When answering a query:
 - [ESG Factor Integration](concepts/esg-factor-integration.md) — systematic ESG signals in quant portfolios; controversy signals as PEAD analog (-2% drift 60d); ESG momentum factor Sharpe ~0.5; regime-dependence (hurt 2022); free data path via SEC EDGAR NLP + CDP; bridge to H163 FinBERT pipeline ← new 2026-07-17
 - [Regime-Conditional ESG Momentum](concepts/regime-conditional-esg-momentum.md) — quantitative implementation guide: Δ-ESG signal construction, NLP controversy via H174 pipeline, H446 supply chain network propagation analog, regime weight layer (VIX+200MA gate), TC-MVO integration; H447 design stub; free data path (SEC 10-K Item 1C, CDP); cross-bridge to trading algorithms and regime detection ← new 2026-07-25
 - [Supply Chain Propagation of Textual Signals](concepts/supply-chain-textual-signals.md) — arXiv:2606.29290; FinBERT 10-K embeddings alone not predictive; network-augmented via Bloomberg SPLC supply chain → Sharpe 0.86, FF5-alpha 7.27%/yr (t=2.30); proposed H419 PEAD secondary watchlist via supply chain linkages ← new 2026-07-18
+- [Blended Finance — Catalytic Capital and Concessional Structures](concepts/blended-finance.md) — DFI first-loss/junior tranche mechanics; $4-7 mobilization ratio; TA facilities, guarantees, concessional co-investment; additionality tests; macro signals for quant (green bond issuance → sector ETF leading indicator) ← new 2026-07-27
+- [Green Bonds and Sustainability Finance](concepts/green-bonds-sustainability-finance.md) — ICMA GBP / EU-GBS / CBI standards; greenium -3 to -12 bps evidence; SLB coupon step-up mechanics; CSRD-driven free ESG data; greenium arbitrage feasibility; H045 bond rotation connection; CSRD NLP signal path ← new 2026-07-27
+
+**Concepts (General Trading)**
+- [Quant Convergence — Classical Value Investing and Modern Factor Models](concepts/quant-convergence-value-factor.md) — arXiv:2606.24575 (Yamazaki 2026); Graham RF 232% return / Calmar 1.38 best risk-adjusted; AutoGluon 222% but -40% MaxDD; Combined RF (mom+Graham) lowest MaxDD; margin of safety as ML regularizer; H466 design basis; explains H337/H448 NOT CONFIRMED (no Graham variation in H198 large-cap universe) ← new 2026-07-27
 
 **People**
 - [Yasemin Saltuk](people/yasemin-saltuk.md) — J.P. Morgan Social Finance lead researcher; impact investing research series
@@ -310,6 +316,7 @@ When answering a query:
 - [OpenFinGym — Verifiable Multi-Task Quant Agent Evaluation](ai-industry/openfinGym-2026.md) — arXiv:2606.26350; Edinburgh/UCL/Oxford/Turing; containerised runtime + host-side verifier prevents train-test leakage; 4 task domains (forecasting/market-gen/trading/fraud); automated arXiv paper → executable task pipeline; SFT+RL integration; relevant for H274 PEAD multi-agent + H318 meta-agent ← new 2026-07-15
 - [Agentic Trading Survey 2026](ai-industry/agentic-trading-survey-2026.md) — arXiv:2605.19337; 77 LLM trading agent papers; only 19/77 satisfy closed-loop evaluation; reproducibility crisis (0/19 fully reproducible); transaction costs absent in 63%; memory mechanisms show most consistent improvement; taxonomy: Pattern A/B/C/D agent architectures; MRS reporting standard; validates LLM Alpha Validation Checklist ← new 2026-07-16
 - [The Base-Rate Trap in LLM Trading Signals](ai-industry/base-rate-trap-llm-trading-2026.md) — arXiv:2607.12248 (Cheung Jul 2026): LoRA-adapted TimesFM 80% accuracy = naive "always-up" base rate; honest benchmark requires 5 baselines + McNemar + DM test + BH FDR; arXiv:2607.05291 (Brini): vol foundation models barely beat Log-HAR; synthesis with KTD-Fin/Agentic Survey; checklist for H381/H382 LLM alpha proposals ← new 2026-07-19
+- [FinBench — Calibration and Uncertainty Benchmarking for Financial LLMs](ai-industry/finbench-calibration-2026.md) — arXiv:2607.16229 (Ghosh & Devarakonda, Jul 2026); confidence-competence gap: overconfident-but-slightly-better-than-chance LLM → negative Kelly growth; proper scoring rules (Brier/log-loss) under strict time-gating; implications for H174 FinBERT score calibration + H185 Kalshi sizing; H426 FinDPO calibration path ← new 2026-07-27
 
 ---
 
