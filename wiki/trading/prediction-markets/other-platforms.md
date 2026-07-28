@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-05
+updated: 2026-07-28
 ---
 
 # Other Prediction Market Platforms
@@ -19,6 +19,66 @@ updated: 2026-07-05
 - Play money (Mana) only — no cash value since March 2025 (Sweepcash model sunset)
 - No financial risk; good sandbox for learning prediction market dynamics
 - **Verdict**: Educational only
+
+---
+
+## Limitless Exchange (Base)
+
+Launched 2024; by mid-2026 the leading prediction market on Base (Coinbase L2). Focuses on fast-settling crypto and macro markets with same-day resolution.
+
+- **Chain**: Base (Coinbase L2) — low gas fees (~$0.001/trade), fast finality
+- **Market types**: Crypto price bets (BTC, ETH, SOL), macro events, same-day short-expiry markets
+- **Volume**: $1B+ traded to date
+- **API**: REST + WebSocket; covers market data, order books, OHLCV candles, and order placement
+- **Auth**: On-chain via wallet signature (no centralized account required)
+- **Settlement**: Instant on-chain resolution; no withdrawal delay
+
+### MCP integration
+
+GitHub `joinQuantish/limitless-mcp` provides a self-hosted MCP server for trading Limitless from Claude Code agents — direct tool calls for market data, order placement, position monitoring.
+
+```python
+# Base connection via web3.py
+from web3 import Web3
+
+w3 = Web3(Web3.HTTPProvider("https://mainnet.base.org"))
+# limitless-sdk wraps contract calls into Python-friendly methods
+# pip install limitless-sdk
+from limitless import LimitlessClient
+client = LimitlessClient(private_key=os.getenv("WALLET_KEY"), chain="base")
+markets = client.get_markets(category="crypto", active=True)
+```
+
+**Verdict**: Best for short-horizon crypto/macro bets where Kalshi's economic contracts aren't available. No USD fiat ramp — requires on-chain USDC.
+
+---
+
+## Opinion (BNB Chain)
+
+Third-largest prediction market by volume as of mid-2026. Distinguishes from Polymarket/Kalshi via an AI-powered oracle that handles both market creation and resolution.
+
+- **Chain**: BNB Chain
+- **Volume rank**: #3 globally by trading volume
+- **AI oracle**: LLM-based automated market creation and resolution; reduces admin overhead but introduces oracle risk
+- **Market types**: Macro events, crypto, and culture markets; strength in non-US geopolitical questions
+- **Python SDK**: `opinion-clob-sdk` (PyPI, released February 2026)
+- **API**: CLOB-based REST + WebSocket
+
+```bash
+pip install opinion-clob-sdk
+```
+
+```python
+from opinion_clob import OpinionClient
+
+client = OpinionClient(api_key=os.getenv("OPINION_KEY"))
+markets = client.get_markets(status="open")
+book = client.get_orderbook(market_id="BTCUSD-WEEK")
+# Place limit order
+client.place_order(market_id="BTCUSD-WEEK", side="YES", price=0.62, size=100)
+```
+
+**Verdict**: Useful for markets Kalshi doesn't list (non-US political, international events). AI oracle risk: resolution occasionally disputed on ambiguous questions.
 
 ---
 
@@ -144,68 +204,131 @@ Uses the same Kalshi REST API (`/trade-api/v2/timeless/` endpoint namespace). Au
 
 ---
 
-## Emerging platforms (2025–2026)
+## Cross-Platform Arbitrage (Kalshi × Polymarket)
 
-| Platform | Launch | Notes |
-|----------|--------|-------|
-| OG Markets | Feb 2026 | Multi-outcome contracts; Gen-Z positioning; early stage |
-| FanDuel Predicts | Dec 2025 | All 50 states; sports-focused; Flutter Entertainment |
-| DraftKings Predictions | Dec 2025 | 38 states; DFS ecosystem integration |
+The same binary event is listed on both platforms with different implied probabilities — a guaranteed-profit opportunity if prices diverge beyond combined fees.
 
-**Assessment**: All emerging platforms are retail-focused with limited/no trading APIs. Kalshi and Polymarket remain the only institutional-grade options for algorithmic strategies. IBKR ForecastTrader is institutional-grade but requires the IBKR account setup overhead.
+### Mechanics
 
+If `Kalshi_YES + Polymarket_NO < $1.00`, buy both sides and collect $1.00 on resolution regardless of outcome. Profit = $1.00 − (cost_YES + cost_NO) − fees.
 
----
+### Fee structure (2026)
 
-## prediction-market-analysis (Historical Data)
+**Kalshi** — tiered by monthly volume, charged as % of profit:
+| Monthly volume | Fee rate |
+|---------------|----------|
+| < $50K | 7% of profit |
+| $50K–$250K | 5% |
+| $250K–$1M | 3% |
+| > $1M | 1% |
 
-**GitHub:** https://github.com/Jon-Becker/prediction-market-analysis
-**Stars:** 2.3k | **Data size:** 36GB
+**Polymarket Global** — no direct fee; gas costs ~$0.001–$0.01/trade on Polygon. Sports/politics markets: some markets now charge 1–2% maker fee. Geopolitics markets: **zero fee** (strictly dominant for arb).
 
-The largest publicly available prediction market historical dataset:
-- Full order book history for Polymarket and Kalshi markets
-- Resolution data (actual outcomes) for calibration research
-- Pre-built analysis notebooks: calibration curves, liquidity analysis, market efficiency tests
-- Cleaned format suitable for pandas/polars
+### Minimum edge required
 
-**Use cases for George:**
-- Backtest Kalshi CPI nowcasting strategy (H185) on historical data instead of paper-trading forward
-- Test cross-platform arb between Polymarket and Kalshi on historical overlapping markets
-- Calibration validation for LLM-based prediction (PolyBench H213 baseline)
+At 7% Kalshi fee tier: need **~5%+ gross edge** after fees. At 3% tier: **~2.5%+ gross edge**. A 3% raw spread evaporates entirely at the highest Kalshi fee tier.
 
-**Download:** Requires ~40GB free disk. Consider subset download by market category.
+**Practical threshold**: For retail arbers at the 7% tier, only spreads ≥ 5 cents per dollar contract are worth executing.
 
----
+### Typical spread sizes
 
-## pmxt — Unified Prediction Market API
+| Market type | Typical spread | Notes |
+|------------|----------------|-------|
+| Major elections | 0.5–2% | Closes within minutes |
+| NBA/NFL outcomes | 1–3% | More persistent |
+| Crypto price bets | 2–5% | Kalshi BTCC vs Polymarket crypto |
+| Thin sports | 3–8% | Lower volume, wider spreads |
 
-**GitHub:** https://github.com/pmxt/pmxt
-**Stars:** 1.2k
+### Execution requirements
 
-CCXT-style unified API for multiple prediction market platforms. Key features:
-- Single interface for Polymarket, Kalshi, and other platforms
-- Cross-platform order book aggregation
-- Unified position tracking and P&L
-- WebSocket streaming for real-time price feeds
+Detection latency must be **< 25ms** to capture spreads before they close on high-liquidity markets. Both platforms expose WebSocket order books for real-time monitoring.
 
-**Python example:**
 ```python
-import pmxt
+import asyncio, websockets, json
 
-# Connect to both platforms
-kalshi = pmxt.Kalshi(api_key=...)
-poly   = pmxt.Polymarket()
+async def monitor_kalshi_orderbook(market_ticker: str, on_update):
+    url = f"wss://api.elections.kalshi.com/trade-api/ws/v2"
+    async with websockets.connect(url, extra_headers={"Authorization": f"Bearer {TOKEN}"}) as ws:
+        await ws.send(json.dumps({"id": 1, "cmd": "subscribe", "params": {
+            "channels": ["orderbook_delta"],
+            "market_tickers": [market_ticker],
+        }}))
+        async for msg in ws:
+            data = json.loads(msg)
+            await on_update(data)
 
-# Find arbitrage: same event on both platforms
-arb_scanner = pmxt.ArbScanner([kalshi, poly])
-opportunities = arb_scanner.scan(min_edge=0.02)  # 2% minimum edge
+# Run both WebSockets concurrently; trigger arb logic when YES_kalshi + NO_poly < 0.95
+# Use asyncio.gather(monitor_kalshi(...), monitor_polymarket(...))
 ```
 
-**Use case for George:** Cross-platform arb scanner to find the same question priced
-differently on Kalshi vs Polymarket. Historically, pricing gaps of 2-5% exist on
-non-trivial markets with lower liquidity. pmxt automates the discovery layer.
+**Key constraint**: Pre-fund both platforms. Polymarket requires on-chain USDC (bridging from Ethereum). Kalshi uses USD bank transfer (ACH, 1–3 days) or wire.
 
-## Open Datasets & Unified APIs (2026)
+### Turnkey tools
+
+- **pmxt** (`pip install pmxt`) — unified Python SDK for Polymarket + Kalshi + Limitless + Opinion. Cross-platform arb scanner built in: `pmxt.ArbScanner([kalshi, poly]).scan(min_edge=0.025)`
+- **Claw Arbs** (`clawarbs.com`) — commercial subscription service; 25ms detection WebSocket feeds already built out
+
+---
+
+## AI Trading Agents (2026)
+
+Prediction markets have become a proving ground for autonomous AI agents. As of mid-2026, **14 of the top 20 most profitable Polymarket wallets are bots**, and AI agents represent over 30% of wallet activity. Retail traders pick the right side more often than bots — the bot advantage is microstructure: earlier entry at better prices.
+
+### Platform overview
+
+| Platform | Venues | Model | Notes |
+|----------|--------|-------|-------|
+| **Turbine Studio** | Kalshi + Polymarket | Natural-language strategy builder + cloud execution | Handles API version migrations; Pro tier required for cross-platform arb |
+| **Simmer** | Kalshi + Polymarket | SDK-first; user writes strategy code | Built-in risk rails: $100/trade, $500/day defaults |
+| **Polystrat (Olas/Pearl)** | Polymarket only | Autonomous NLP-driven agent; self-custodial Safe wallet | 4,200+ trades in first month; 37%+ positive P&L vs 7–13% for humans |
+| **OctoBot PM Module** | Polymarket | Rule-based; GPL-3.0 self-hosted Docker | No LLM; good for pure arb rules |
+| **PredictEngine** | Polymarket only | Cloud; $0–$99/mo; server-side key (exportable) | Simple NLP signals |
+| **Polymarket Agents** | Polymarket | Archived May 2026 | No longer maintained |
+
+### Polystrat implementation
+
+Polystrat runs via Pearl's local agent runtime. Key features:
+- Uses NLP to let users set high-level goals in plain text ("maximize profit on crypto markets with max 2% per-trade risk")
+- Selects markets autonomously across sports, politics, economics
+- Runs locally via Pearl on user's machine; funds controlled by self-custodial Safe account
+- Full audit trail on-chain
+
+```bash
+# Install Pearl and run Polystrat locally
+# https://www.pearl.you/polystrat
+pip install olas-pearl
+pearl start polystrat --config polystrat_config.yaml
+```
+
+### Bot performance context (2026)
+
+- 37%+ of Polystrat agents show positive P&L vs 7–13% of human traders on the same platform
+- Bot advantage is speed and consistency, not superior forecasting accuracy
+- A single automated bot reportedly earned ~$150K executing 8,894 trades on short-term crypto contracts
+- **Strategic implication**: If building a Kalshi nowcasting strategy (H185), the human-vs-bot performance gap suggests that price discovery in liquid markets already reflects LLM-level forecasting. Edge must come from niche markets, data sources unavailable to bots, or execution quality rather than pure prediction accuracy.
+
+---
+
+## Emerging Platforms 2025–2026
+
+| Platform | Chain | Launch | Notes |
+|----------|-------|--------|-------|
+| OG Markets | Polygon | Feb 2026 | Multi-outcome (non-binary) contracts; Gen-Z positioning |
+| FanDuel Predicts | Off-chain | Dec 2025 | All 50 states; sports-focused; Flutter Entertainment |
+| DraftKings Predictions | Off-chain | Dec 2025 | 38 states; DFS ecosystem integration |
+| ADI Predictstreet | Off-chain | Jun 2026 | Official FIFA World Cup 2026 partner; near real-time in-game settlement |
+| Phantom-Kalshi integration | Solana | Dec 2025 | Phantom wallet native Kalshi access |
+| Jupiter-Polymarket integration | Solana | Jan 2026 | Jupiter DEX aggregator + Polymarket liquidity |
+| Inframarkets | Solana | Feb 2026 | Solana-native prediction market |
+| Epoch | Solana | Feb 2026 | Short-duration Solana prediction markets |
+
+**Solana trend**: A cluster of Solana-native and wallet-integrated prediction market products launched Dec 2025–Feb 2026, reflecting the broader AI-agent activity on Solana where gas costs are minimal.
+
+**Assessment**: All sports-focused platforms (FanDuel, DraftKings, DraftKings, ADI) have no trading APIs. Solana-native platforms have early liquidity and wide spreads — arb opportunities exist but execution infrastructure not yet mature. Kalshi and Polymarket remain the only institutional-grade options for systematic algorithmic strategies.
+
+---
+
+## Open Datasets & Unified APIs
 
 ### prediction-market-analysis (github.com/Jon-Becker/prediction-market-analysis)
 
@@ -228,8 +351,26 @@ df = conn.execute("SELECT * FROM read_parquet('kalshi/*.parquet') WHERE market_s
 ### pmxt — Unified Prediction Market API (github.com/pmxt-dev/pmxt)
 
 - **Stars**: 1.2K
-- **Coverage**: Polymarket, Kalshi, Limitless, Myriad via single interface
-- **Features**: Standardized order types, cross-platform market discovery, portfolio aggregation, webhook notifications
-- **Use case**: Cross-platform arbitrage scanner; single codebase for PM automated pipeline
+- **Coverage**: Polymarket, Kalshi, Limitless, Opinion, and 8+ more venues via single interface
+- **Data model**: Event → Market → Outcome hierarchy unified across platforms
+- **Features**: Standardized order types, cross-platform market discovery, portfolio aggregation, webhook notifications, built-in ArbScanner
 - **Install**: `pip install pmxt`
-- **Relevance**: Replaces per-platform Kalshi/Polymarket auth boilerplate in automated-pipeline.md
+- **Key benefit**: Swap exchange backends without refactoring business logic
+
+```python
+import pmxt
+
+kalshi = pmxt.Kalshi(api_key=os.getenv("KALSHI_KEY"))
+poly   = pmxt.Polymarket()
+
+# Find arbitrage: same event on both platforms
+arb_scanner = pmxt.ArbScanner([kalshi, poly])
+opportunities = arb_scanner.scan(min_edge=0.02)  # 2% minimum gross edge
+
+# Switch venue without changing strategy code
+for venue in [kalshi, poly]:
+    markets = venue.get_markets(category="economics", active=True)
+    book    = venue.get_orderbook(markets[0].id)
+```
+
+**Relevance**: Replaces per-platform Kalshi/Polymarket auth boilerplate; enables cross-platform strategies in automated-pipeline.md with one SDK.
