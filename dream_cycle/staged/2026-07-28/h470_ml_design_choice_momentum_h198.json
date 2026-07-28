@@ -1,0 +1,22 @@
+{
+  "hypothesis_number": "H470",
+  "short_name": "ml-design-choice-momentum-h198-meta",
+  "title": "ML Design Choice Momentum: Monthly Best-Variant Selection Across H198 Strategy Family",
+  "source": "SSRN:5031755 (Chen, Hanauer, Kalsbach, Feb 2026) — \"Design choices, machine learning, and the cross-section of stock returns\"",
+  "target_file": "backtesting/daily/run_h470_design_choice_momentum_h198.py",
+  "risk": "low",
+  "apply_status": "pending",
+  "summary": "Chen et al. document that ML model design choices exhibit momentum: going long the configurations that performed best over trailing 3–12 months delivers statistically significant positive returns. Applied to the H198 stock momentum family: we have confirmed multiple variants — H376 (6-0m no-skip OOS 3.120), H411/H418 (1/price × drift gate OOS 5.855), H217 (alpha101 OOS 1.559), H198 baseline (OOS 1.174). H470 implements a meta-selector that each month picks the best-performing variant over the trailing 3 months and runs that variant's signal for the coming month. This is the stock-universe equivalent of 'time-series momentum on model configurations'. Low-risk because: (a) all underlying strategies are already confirmed, (b) implementation requires only ranking trailing Sharpe of existing signal series, (c) no new data sources needed. Gate: OOS Sharpe > 3.120 (H376 baseline — the meta-selector must beat the static best-variant to justify complexity).",
+  "variants": [
+    "Var A: 3-month trailing Sharpe meta-selector across {H198, H376, H411, H217} — pick highest trailing Sharpe each month",
+    "Var B: 6-month trailing Sharpe meta-selector (same candidate pool, longer lookback)",
+    "Var C: 12-month trailing Sharpe meta-selector",
+    "Var D: Ensemble: equal-weight top-2 trailing-Sharpe variants each month",
+    "Var E: H376 static baseline (6-0m no-skip OOS 3.120) — sanity check"
+  ],
+  "gate": "OOS Sharpe >= 3.120 (H376 static baseline) AND MaxDD improvement vs H376 baseline -8.4%",
+  "is_period": "2013-2020",
+  "oos_period": "2021-2026",
+  "data_requirements": "All signal series already computed in prior H-series backtests. Only requires loading monthly returns from h376, h411/h418, h217, h198 result files and computing trailing Sharpe rank. No new data fetch needed.",
+  "implementation_notes": "Key challenge: overfitting risk. 3-month trailing Sharpe on ~7 signals with monthly data = very short estimation window. Likely that Var C (12-month) or Var D (ensemble top-2) will be more robust than Var A. SSRN paper uses daily ML strategy returns which have much shorter effective estimation window than our monthly signals — the effect may be weaker or absent at monthly frequency. If all meta-selectors fail gate, report as null result and note that design-choice momentum may require daily/weekly rebalance to be effective."
+}

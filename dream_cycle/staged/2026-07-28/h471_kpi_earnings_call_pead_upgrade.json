@@ -1,0 +1,21 @@
+{
+  "hypothesis_number": "H471",
+  "short_name": "kpi-earnings-call-pead-upgrade",
+  "title": "KPI Extraction from Earnings Calls as H174 Signal Boost — Quantitative Guidance Overlay",
+  "source": "arXiv:2605.03147 (May 2026, ACL Industry Track) — \"Effective Performance Measurement: Challenges and Opportunities in KPI Extraction from Earnings Calls\"",
+  "target_file": "backtesting/daily/run_h471_kpi_earnings_call_pead.py",
+  "risk": "medium",
+  "apply_status": "pending",
+  "summary": "ACL 2026 paper proposes open-ended KPI extraction from earnings call transcripts using LLMs verified by human evaluation (79.7% precision). Introduces SEC Filings Benchmark (SECB), Earnings Calls Benchmark (ECB), and ECB-A (2,460 expert annotation groups). Unlike FinBERT sentiment (tone), KPI extraction captures quantitative guidance: revenue growth rate, EPS beat magnitude, margin guidance. H471 adds a KPI score as a fourth signal to H174: extract 3–5 quantitative KPIs from each earnings call transcript and compute a KPI_direction score (fraction of extracted KPIs with positive guidance). Apply as a continuous boost: adjusted_score = finbert_score + 0.05 * KPI_direction. Maintain existing thresholds: adjusted_score ≥ 0.18 + EPS surprise ≥ 0.02. Gate: WR ≥ 0.818 at n ≥ 15. If KPI extraction unavailable (transcripts missing), fall back to H174 base. Implementation: use ApeWisdom/EDGAR transcript pipeline from H459 planning. Call transcripts available via FMP or AlphaVantage ($ALPHA_VANTAGE_API_KEY) — 25 req/day AV limit is the binding constraint.",
+  "variants": [
+    "Var A: H174 + KPI direction score boost (+ 0.05 * KPI_direction); gpt-4o-mini transcript extraction",
+    "Var B: H174 + KPI filter gate (KPI_direction > 0.5 required; binary, not continuous)",
+    "Var C: H174 + KPI_direction as standalone tertiary filter replacing EPS surprise check",
+    "Var D: H174 baseline (FinBERT ≥ 0.18 + EPS surprise ≥ 0.02) — sanity check"
+  ],
+  "gate": "OOS WR >= 0.818 AND n >= 15 (H174 baseline parity)",
+  "is_period": "2022-2023",
+  "oos_period": "2024-2026",
+  "data_requirements": "Earnings call transcripts: (1) AlphaVantage earnings_call_transcript endpoint — 25 req/day; best for S&P 500 companies back to 2019. (2) FMP earnings_call_transcript — $FMP_API_KEY present. Transcripts download to sources/transcripts/ once and cache. gpt-4o-mini extraction: ~$0.001/transcript. Target: ~60-100 transcripts for OOS test. Known risk: transcript coverage gap — H168 found only 26.5% OOS coverage when AV was primary source. FMP has better coverage (~65% for S&P 500).",
+  "implementation_notes": "H168 NOT CONFIRMED was a prior attempt at transcript-based PEAD enhancement — critical lesson: transcript availability bias is the dominant failure mode, not model quality. H471 must (a) track coverage rate before running full OOS, (b) exclude events where transcript is unavailable from both numerator and denominator of WR, (c) report coverage-conditional WR alongside overall. If coverage < 50%, the result is inconclusive."
+}

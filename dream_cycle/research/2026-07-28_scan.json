@@ -1,0 +1,48 @@
+{
+  "scan_date": "2026-07-28",
+  "scan_time_utc": "~07:30",
+  "angles_searched": 5,
+  "papers_reviewed": 22,
+  "staged": 3,
+  "staged_hypotheses": ["H469", "H470", "H471"],
+  "scan_summary": {
+    "angle_1_pairs_llm": {
+      "query": "arXiv pairs trading cointegration LLM semantic similarity",
+      "papers_found": ["arXiv:2604.19476 (already staged H316/H319)", "arXiv:2605.01954 Moira (already staged)", "arXiv:2510.11616 Attention Factors (staged H456)", "arXiv:2512.02436 Semantic Trading PM"],
+      "staged": "none — all relevant papers already processed or outside equity scope",
+      "note": "arXiv:2512.02436 is prediction-market specific (not equity pairs) — no new equity pairs candidate found"
+    },
+    "angle_2_pead_nlp": {
+      "query": "arXiv PEAD NLP LLM earnings drift alpha 2026",
+      "papers_found": ["arXiv:2607.08346 Grounded 8-K Event Taxonomy (Jul 2026)", "arXiv:2502.15411 HiFi-KPI (Feb 2026)", "arXiv:2605.03147 KPI Earnings Calls ACL 2026"],
+      "staged": "H469 (arXiv:2607.08346), H471 (arXiv:2605.03147)",
+      "note": "HiFi-KPI (arXiv:2502.15411) folded into H471 as secondary reference — KPI extraction from filings overlaps with calls extraction"
+    },
+    "angle_3_cross_sectional_momentum": {
+      "query": "arXiv 2026 cross-sectional momentum ML stock selection",
+      "papers_found": ["SSRN:5031755 Design Choice Momentum (Feb 2026)", "arXiv:2506.24575 Quant Convergence (already staged H466)", "arXiv:2507.07107 Du bias-corrected (already tested H460)"],
+      "staged": "H470 (SSRN:5031755 design choice meta-selector)",
+      "note": "Design choice momentum is genuinely novel framing — applying Chen et al.'s finding that ML design choices exhibit momentum to H198 family of stock-selection variants"
+    },
+    "angle_4_multi_agent_llm": {
+      "query": "arXiv 2026 multi-agent LLM trading ensemble forecast equity",
+      "papers_found": ["arXiv:2602.23330 (already in wiki)", "arXiv:2603.27539 (already in wiki)", "arXiv:2412.20138 TradingAgents (known)", "arXiv:2604.17327 Signal or Noise (already processed)"],
+      "staged": "none — all high-relevance papers already in wiki or staged",
+      "note": "Multi-agent LLM trading family well-covered in wiki/multi-agent-llm-trading.md. No genuinely new paper found tonight."
+    },
+    "angle_5_github_trending": {
+      "query": "GitHub trending quantitative finance 2026 new repos",
+      "papers_found": ["various quant repos — no specific new breakthrough"],
+      "staged": "none",
+      "note": "GitHub scan returned generic results. Most interesting repos (QuantMuse, qf-lib, RustQuant, ai-trader) already in wiki. Bot-dominated prediction market landscape documented in wiki expansion instead."
+    }
+  },
+  "key_finding": "SEC 8-K grounded event extraction (arXiv:2607.08346, July 2026) is the highest-priority finding tonight — 300K+ filing coverage, 119 event types, quality score gates precision to 96%. Directly actionable on existing H174 PEAD pipeline with $5 LLM cost. ML design-choice momentum (SSRN:5031755) is an interesting meta-strategy that could squeeze more signal from the existing confirmed H198 family without new data.",
+  "wiki_expansion": {
+    "file": "prediction-markets/other-platforms.md",
+    "type": "major expansion",
+    "lines_before": 236,
+    "lines_after": 380,
+    "key_additions": ["Limitless Exchange (Base)", "Opinion (BNB Chain)", "Cross-platform arb mechanics", "AI agent bot landscape 2026", "Solana platform cluster Dec25-Feb26"]
+  }
+}
