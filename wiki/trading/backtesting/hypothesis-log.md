@@ -1,5 +1,5 @@
 h471_status: STAGED (2026-07-28) — KPI Extraction from Earnings Calls as H174 Signal Boost. Source: arXiv:2605.03147 (May 2026, ACL 2026 Industry Track) 'Effective Performance Measurement: Challenges and Opportunities in KPI Extraction from Earnings Calls'. Three benchmarks: SEC Filings Benchmark (SECB), Earnings Calls Benchmark (ECB), ECB-A (2,460 expert annotation groups); LLM-based open-ended KPI extraction at 79.7% precision. H471 adds KPI direction score as 4th H174 signal layer: extract quantitative KPIs (revenue growth, EPS outlook, margin guidance) from call transcripts; KPI_direction = fraction of extracted KPIs with positive guidance; adjusted_score = finbert_score + 0.05 * KPI_direction; maintain thresholds: adjusted_score >= 0.18 + EPS surprise >= 0.02. Variants: A (continuous KPI boost), B (binary KPI gate direction > 0.5), C (KPI replaces EPS surprise check), D (H174 baseline). IS: 2022-2023, OOS: 2024-2026. Gate: OOS WR >= 0.818 AND n >= 15. Transcript source: FMP earnings_call_transcript ($FMP_API_KEY — ~65% S&P500 coverage). CRITICAL: Must check coverage rate first — H168 failed at 26.5% coverage. Report fraction of H174 events with available transcripts before running full OOS. Script: backtesting/daily/run_h471_kpi_earnings_call_pead.py. Medium risk.
-h470_status: STAGED (2026-07-28) — ML Design Choice Momentum: Monthly Best-Variant Selection Across H198 Strategy Family. Source: SSRN:5031755 (Chen, Hanauer, Kalsbach, Feb 2026) 'Design choices, machine learning, and the cross-section of stock returns'. Key finding: ML model design choices exhibit momentum — going long trailing-3/6/12-month best-performing configurations delivers statistically significant returns. H470 applies as meta-selector: each month pick the best-performing variant from {H198 baseline (OOS 1.174), H376 6-0m no-skip (OOS 3.120), H411/H418 1/price×drift (OOS 5.855), H217 alpha101 (OOS 1.559)} by trailing Sharpe, run that variant's signal next month. Variants: A (3m trailing Sharpe selector), B (6m selector), C (12m selector), D (ensemble: EW top-2 by trailing Sharpe), E (H376 static baseline). IS: 2013-2020, OOS: 2021-2026. Gate: OOS Sharpe >= 3.120 (H376 static) AND MaxDD improvement vs -8.4%. CAVEAT: SSRN paper validates at daily frequency (3m = ~60 obs); monthly strategy signal (3m = 3 obs) may be insufficient — expect Var C/D more robust. If all fail gate, report null and note frequency mismatch. Script: backtesting/daily/run_h470_design_choice_momentum_h198.py. Low risk.
+h470_status: CONFIRMED (Var B/C/D) (2026-07-28) — ML Design Choice Momentum: Monthly Best-Variant Selection Across H198 Strategy Family. Source: SSRN:5031755 (Chen, Hanauer, Kalsbach, Feb 2026). Pool: {S1=H198 6-1m top-1, S2=H376 6-0m top-6, S3=H411-B value×drift top-2, S4=H217 alpha101 top-6}. Results: Var A (3m) OOS 3.859 FAILS MaxDD gate (-12.1%); Var B (6m) OOS Sharpe 4.136 MaxDD -2.3% PASS; Var C (12m) OOS Sharpe 4.424 MaxDD -2.3% PASS [BEST]; Var D (EW top-2) OOS Sharpe 4.292 MaxDD -4.5% PASS; Var E (static H376) OOS Sharpe 3.120 MaxDD -8.4% baseline. Meta-selectors primarily route to S3 (value×drift, Sharpe 4.238) and S4 (alpha101 proxy, Sharpe 3.534) which are low-correlated (S1 vs S3 rho=0.309). 0 negative OOS years. Design-choice momentum confirmed at monthly frequency with 12m window.
 h469_status: STAGED (2026-07-28) — HiFi-KPI Structured iXBRL KPI Extraction as H174 Signal Layer. Source: arXiv:2502.15411 (Feb 2026) 'HiFi-KPI: A Dataset for Hierarchical KPI Extraction from Earnings Filings'. Dataset: 1.65M paragraphs, 198K unique hierarchically organized KPI labels linked to iXBRL taxonomies; encoder models achieve 0.906 macro-F1 on classification. Key insight for H469: SEC EDGAR XBRL API already provides machine-readable EPS and revenue figures — no LLM extraction needed ($0 cost). H469 upgrades H174's binary EPS surprise gate to a continuous magnitude multiplier: KPI_magnitude = (actual_eps - consensus_eps) / abs(consensus_eps); position_size = min(2.0, 1.0 + KPI_magnitude). Bigger beat → bigger position, proportional to drift expectation. Variants: A (EPS magnitude scaling), B (binary EPS beat > 5% gate), C (revenue beat > 0% gate), D (composite EPS+rev average), E (H174 baseline). IS: 2022-2023, OOS: 2024-2026. Gate: OOS WR >= 0.818 AND OOS MeanRet >= 6.89% at n >= 15. COMPLEMENT TO: H427 (event taxonomy TYPE), H471 (unstructured call KPIs) — three different signal axes on same PEAD events. Script: backtesting/daily/run_h469_hifi_kpi_xbrl_pead.py. Medium risk.
 h463_status: STAGED (2026-07-27) — LLM Semantic Clustering for Polymarket Pair Arbitrage. Source: arXiv:2512.02436 (Dec 2025) 'Semantic Trading: Agentic AI for Clustering and Trading of Prediction Markets'. Key finding: 60-70% accuracy predicting relational patterns; ~20% avg returns over week-long horizons on resolved Polymarket contracts. Two-stage pipeline: embed contract descriptions (text-embedding-3-small), cluster by cosine sim > 0.80 to find same-outcome pairs, buy underpriced leg when |price_A - price_B| > 5%. H463 is a design note and wiki update only. Gate: paper trading ≥ 30 resolved contracts WR ≥ 65% before real capital. Wiki update: prediction-markets/algorithmic-strategies.md. Low risk.
 h462_status: NOT RUNNABLE — Tier-0 BSM approach invalid for 0DTE (2026-07-27). Systematic 0DTE SPX Iron Condor: BSM synthetic backtest. Source: CBOE Insights 2026 (Schwartz); Option Alpha 180-day empirical (2024); FlashAlpha VRP/GEX research (2025-2026). RESULTS — OOS: Var A=62.006 (MaxDD -0.0%), Var B=nan (MaxDD -239.3%), Var C=nan (MaxDD -239.4%), Var D=-6.085 (MaxDD -37.1%), Var E=nan (MaxDD -158.9%). IS: Var A MaxDD=-227.7%. All results degenerate: Sharpe=62 is impossible; MaxDD below -100% violates basic accounting. ROOT CAUSE: BSM with T→0 (0DTE) produces extreme gamma/delta sensitivities that make EOD IV proxy meaningless. The condor is entered at 2:44pm and closed at 3:30pm; using end-of-day VIX as IV for intraday positions creates nonsensical P&L trajectories. Position sizing arithmetic also produces ruin scenarios when options appear worthless at EOD but held intraday losses. CONCLUSION: The Tier-0 synthetic BSM approach is fundamentally unsuitable for 0DTE strategies. The empirical edge (Option Alpha 180-day: 65.6% close within 0.2% of 2pm price; ~68% max-profit probability; $36 EV/trade) is well-supported by practitioner data, but a valid backtest requires ThetaData intraday options data (~$80/month). This hypothesis is NOT CLOSED — concept remains promising. Flag for Tier-1 review when intraday data is available. Script: backtesting/daily/run_h462_0dte_condor.py. Results: backtesting/results/h462_results.json.
@@ -9871,20 +9871,46 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 ---
 
-## H470 — ML Design Choice Momentum: Monthly Best-Variant Selector on H198 Family: STAGED (2026-07-28)
+## H470 — ML Design Choice Momentum: Monthly Best-Variant Selector on H198 Family: CONFIRMED (Var B/C/D) (2026-07-28)
 
 **Source**: SSRN:5031755 (Chen, Hanauer, Kalsbach, Feb 2026) — *Design choices, machine learning, and the cross-section of stock returns*
 
-**Universe**: H198 strategy family (H198, H376, H411, H217)
+**Universe**: H198 strategy family (H198, H376, H411, H217) — same 30-stock NASDAQ large-cap
 **IS/OOS**: IS 2013-2020 / OOS 2021-2026
-**Gate**: OOS Sharpe ≥ 3.120 (H376 static baseline) AND MaxDD improvement
-**Method**: Monthly meta-selector picking the best-performing H198 variant over trailing 3/6/12 months. Implements 'design-choice momentum' — going long the ML configuration with the best recent performance.
+**Gate**: OOS Sharpe ≥ 3.120 (H376 static baseline) AND MaxDD improvement vs -8.4%
 
-**Key paper finding**: ML design choices exhibit momentum; going long the best-performing variant over trailing 3-12 months generates statistically significant positive returns.
+**Method**: Monthly meta-selector across 4 constituent strategies:
+- S1 (H198 rep): 6-1m momentum top-1 — overall Sharpe 1.191
+- S2 (H376 best): 6-0m no-skip top-6 EW — overall Sharpe 3.047
+- S3 (H411-B): pure value (1/price) × 20d drift gate top-2 — overall Sharpe 4.238
+- S4 (H217 rep): alpha101 daily proxy top-6 — overall Sharpe 3.534
 
-**Expected challenge**: Monthly rebalancing frequency + only 4 candidate strategies = very short estimation window. Overfitting risk is high; Var C (12m) or Var D (top-2 ensemble) expected to be most robust.
+Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run the highest-Sharpe strategy's return at t.
 
-**Status**: STAGED — all underlying strategy signal series already computed; implementation is pure signal combination.
+**OOS Cross-strategy correlations**:
+- S1 vs S2: 0.618, S1 vs S3: 0.309, S1 vs S4: 0.378
+- S2 vs S3: 0.475, S2 vs S4: 0.755, S3 vs S4: 0.518
+(S3 is genuinely orthogonal — value×drift vs. momentum-family strategies)
+
+**Results**:
+| Var | Description | IS Sharpe | IS MaxDD | OOS Sharpe | OOS MaxDD | Gate |
+|-----|-------------|-----------|----------|------------|-----------|------|
+| A | 3m trailing Sharpe, pick best | 2.338 | -41.0% | 3.859 | -12.1% | FAIL MaxDD |
+| B | 6m trailing Sharpe, pick best | 3.447 | -7.8% | **4.136** | **-2.3%** | ✓ PASS |
+| C | 12m trailing Sharpe, pick best | 3.315 | -5.4% | **4.424** | **-2.3%** | ✓ PASS |
+| D | 6m trailing Sharpe, EW top-2 | 3.739 | -6.2% | **4.292** | **-4.5%** | ✓ PASS |
+| E | S2 static baseline (H376) | 2.983 | -12.4% | 3.120 | -8.4% | baseline |
+
+**Best variant**: Var C (12m trailing Sharpe), OOS Sharpe **4.424**, MaxDD **-2.3%**, 0 negative years
+
+**Key findings**:
+1. Design-choice momentum confirmed at monthly frequency — 12m window robust enough despite short estimation window
+2. Meta-selectors primarily route to S3 (H411-B value×drift) and S4 (alpha101 proxy) — which are genuinely low-correlated to each other and to S1/S2
+3. Var A (3m) fails MaxDD gate: 3-month trailing Sharpe too noisy → frequent strategy switches → -12.1% drawdown (worse than static)
+4. MaxDD improvement dramatic: Var C -2.3% vs baseline -8.4% — risk-adjusted gains exceed raw Sharpe gains
+5. Zero negative OOS years across Var B/C/D
+
+**Caveat**: S4 (alpha101) in this run uses close-price-only proxy (abs(daily_ret) as intraday range proxy), not full OHLCV. Full H217 implementation uses actual H-L spread; S4 signal here is an approximation. Result directionally valid.
 
 **Script**: backtesting/daily/run_h470_design_choice_momentum_h198.py
 

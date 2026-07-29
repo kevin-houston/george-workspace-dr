@@ -1,0 +1,23 @@
+{
+  "hypothesis_number": "H472",
+  "short_name": "sciphy-rl-etf-portfolio-hjb",
+  "title": "SciPhy Reinforcement Learning for ETF Portfolio Optimization via HJB-PINN",
+  "source": "arXiv:2607.15195 (Jul 2026) — \"SciPhy Reinforcement Learning for Portfolio Optimization\" (Halperin & Itkin)",
+  "target_file": "backtesting/daily/run_h472_sciphy_rl_etf_portfolio.py",
+  "risk": "medium",
+  "apply_status": "pending",
+  "type": "new_script",
+  "description": "Apply Scientific Physics-Informed Reinforcement Learning (SciPhyRL) to the H026/H045 production ETF universes. Key innovation: reduces portfolio optimization to solving an HJB equation projected onto observed data trajectories (pathwise Hamilton-Jacobi equation), solved via PINN in a single offline sweep — no iterative value/policy iteration. Authors validated on 14-asset ETF universe achieving substantial OOS Sharpe improvements over static and myopic baselines.",
+  "content_summary": "Paper proposes SciPhyRL: (1) continuous-time formulation over extended state space including cumulative transaction costs; (2) HJB equation projected onto historical paths as pathwise HJ equation, solved with physics-informed neural network (PINN) in one offline pass; (3) control variable recast from continuous trading rate to discrete target holding for implementability; (4) execution costs evaluated against microstructure-grounded quadratic price impact model. On 14-asset ETF universe with oracle signal: Gibbs policy achieves substantial OOS Sharpe improvement over static and myopic baselines. Key adaptation to our stack: replace oracle signal with H026 canonical momentum signal and apply SciPhyRL as the portfolio construction layer (replacing simple top-1 selection). Expected challenge: PINN training requires careful regularization; 25-asset H026 universe is larger than paper's 14-asset test; computational cost. Var A: SciPhyRL on H026 25-asset universe using 12m momentum as input signal; Var B: SciPhyRL on H045 13-asset bond universe; Var C: SciPhyRL on combined H041a 19-asset universe; Var D: simple myopic MV baseline (sanity check). Gate: OOS Sharpe > 3.708 (H026 + H041a production baseline) with MaxDD improvement.",
+  "variants": [
+    "Var A: SciPhyRL on H026 25-asset universe with 12m momentum signal",
+    "Var B: SciPhyRL on H045 13-asset bond universe with TSMOM signal",
+    "Var C: SciPhyRL on H041a 19-asset universe",
+    "Var D: Myopic mean-variance baseline (control)"
+  ],
+  "gate": "OOS Sharpe > 2.5 (above H026 standalone ~2.6) AND MaxDD not worse than -5%",
+  "is_period": "2008-2017",
+  "oos_period": "2018-2026",
+  "data_requirements": "yfinance ETF price data already used in H026/H041a/H045. PyTorch for PINN training. Paper's GitHub not yet released — implementation from paper's algorithm description. Quadratic price impact model: use H026 transaction cost estimates from backtesting/design-principles.md.",
+  "implementation_notes": "SciPhyRL core idea: treat portfolio weights w(t) as the control variable in an HJB PDE. Project HJB onto historical paths to get a regression problem solvable by PINN without environment simulation. Key difference from FinRL/PPO: no env.step() loop, no online rollouts — purely offline from historical price series. Two challenges: (1) adapting discrete monthly rebalancing to continuous-time formulation — use delta=1/12 year time steps; (2) PINN overfitting — use 80/20 IS/val split within training window for PINN regularization. Alternative simpler adaptation: use SciPhyRL-derived optimal weights as a soft blend (20% SciPhyRL weight + 80% H026 top-1 weight) for first test."
+}

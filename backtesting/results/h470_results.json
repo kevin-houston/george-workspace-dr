@@ -1,0 +1,105 @@
+{
+  "hypothesis": "H470",
+  "gate": {
+    "sharpe": 3.12,
+    "maxdd_ref": -0.084
+  },
+  "confirmed": true,
+  "confirmed_variants": [
+    "B",
+    "C",
+    "D"
+  ],
+  "results": {
+    "var_A": {
+      "is": {
+        "n": 93,
+        "sharpe": 2.338,
+        "maxdd": -0.41,
+        "cagr": 0.798,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.859,
+        "maxdd": -0.121,
+        "cagr": 0.945,
+        "neg_yrs": 0
+      },
+      "desc": "3m trailing Sharpe, pick best",
+      "beats": false
+    },
+    "var_B": {
+      "is": {
+        "n": 90,
+        "sharpe": 3.447,
+        "maxdd": -0.078,
+        "cagr": 0.912,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.136,
+        "maxdd": -0.023,
+        "cagr": 0.954,
+        "neg_yrs": 0
+      },
+      "desc": "6m trailing Sharpe, pick best",
+      "beats": true
+    },
+    "var_C": {
+      "is": {
+        "n": 84,
+        "sharpe": 3.315,
+        "maxdd": -0.054,
+        "cagr": 0.921,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.424,
+        "maxdd": -0.023,
+        "cagr": 1.001,
+        "neg_yrs": 0
+      },
+      "desc": "12m trailing Sharpe, pick best",
+      "beats": true
+    },
+    "var_D": {
+      "is": {
+        "n": 90,
+        "sharpe": 3.739,
+        "maxdd": -0.062,
+        "cagr": 0.843,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.292,
+        "maxdd": -0.045,
+        "cagr": 0.859,
+        "neg_yrs": 0
+      },
+      "desc": "6m trailing Sharpe, EW top-2",
+      "beats": true
+    },
+    "var_E": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.983,
+        "maxdd": -0.124,
+        "cagr": 0.742,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.12,
+        "maxdd": -0.084,
+        "cagr": 0.768,
+        "neg_yrs": 0
+      },
+      "desc": "S2 static baseline (H376 6-0m top-6)",
+      "beats": false
+    }
+  }
+}

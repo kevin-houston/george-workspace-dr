@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-27
+updated: 2026-07-28
 sources_indexed: 4
-pages: 244
+pages: 246
 ---
 
 # Wiki Index
@@ -73,6 +73,7 @@ When answering a query:
 - [Diffusion IV Surface Forecasting & Shallow IV Representation (2025-2026)](trading/algorithms/iv-surface-forecasting-2026.md) — arXiv:2511.07571 (Jin & Agarwal; DDPM conditioned on EWMA surfaces + VIX; arbitrage-free SPX IV surface; outperforms GANs; H448 design basis); arXiv:2603.17151 (Lin; shallow single-hidden-layer NN sufficient for IV density/vol representation; deeper = more noise; H449 cross-section design basis) ← new 2026-07-26
 - [Attention Mechanisms and Vector Quantization for Cross-Sectional Factor Models](trading/algorithms/attention-cross-sectional-factor-models.md) — AFT regime-gated attention (arXiv:2606.29347; 11-category features, Market Regime Encoder + Adaptive Gate, look-ahead correction; H456); PRISM-VQ discrete latent factors (arXiv:2605.13407, IJCAI 2026; VQ information bottleneck + MoE time-varying loadings; S&P 500 validated; H457); comparison to HMM/SJM regime detection and FactorEngine alpha mining ← new 2026-07-27
 - [STN-TGAT: Graph Attention Networks for Cross-Sectional Portfolio Construction](trading/algorithms/stn-tgat-graph-attention.md) — arXiv:2607.19385 (Guo et al., Jul 2026); Soft-Threshold NMI-prior Transformer GAT; joint temporal (Transformer) + cross-sectional (GAT) modeling; NMI-based prior graph + soft-threshold sparsification reduces noisy correlations; Top-5 from S&P 500 Top-50 with TC adjustment; H464 design basis ← new 2026-07-27
+- [SciPhy RL and Neural Black-Litterman: Physics-Informed Portfolio Construction (2026)](trading/algorithms/sciphy-rl-neural-bl-portfolio.md) — arXiv:2607.15195 (Halperin & Itkin; SciPhyRL: HJB→pathwise Hamilton-Jacobi→PINN offline solver; 14-asset ETF OOS Sharpe improvement; avoids RL simulation loop; H472 design basis); arXiv:2607.20533 (Florencio; neural predicates replace subjective BL views; predicate confidence→Omega uncertainty; data-driven BL shrinkage; H473 design basis) ← new 2026-07-28
 
 **Tools**
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
@@ -93,6 +94,7 @@ When answering a query:
 - [ATLAS (atlas-gic)](trading/tools/atlas-gic.md) — self-improving AI trading agents; Karpathy autoresearch (prompts=weights, Sharpe=loss); 4-layer 25-agent architecture; PRISM regime cohorts; JANUS meta-layer (emergent regime detector = H318 analog); Soros reflexivity + MiroFish swarm; ~1975 stars; SaaS atlasagents.co ← new 2026-06-22
 - [QuantDinger](trading/tools/quantdinger-notes.md) — self-hosted AI trading platform (Docker); `quantdinger-mcp` PyPI for Claude Code integration; supports Alpaca/IBKR/Kraken/CCXT; full stack overkill given existing setup; MCP package worth testing ← new 2026-06-07
 - [ZVT](trading/tools/zvt.md) — Python quant platform; China A-shares primary (4136 stocks via EastMoney), US/HK secondary; unified schema API; ML machine; factor pipeline (data_df→transformer→factor_df→result_df); Dash/REST/Next.js UI; MODERATE relevance — China-focused, factor pipeline architecture useful as H382 design reference ← new 2026-07-08
+- [Variant Switcher](tools/variant-switcher.md) — prototype picker harness; floating pill + sliding highlight + keyboard shortcuts + `?v=N` URL sharing; rewrite of @emilkowalski/skills/prototype spec; `lib/variant-switcher.js` ← new 2026-07-28
 - [QuantStats](tools/quantstats-notes.md) — Python portfolio analytics + HTML tearsheet generator; `pip install quantstats`; takes pandas returns Series → 50+ metrics + SPY benchmark + monthly heatmaps; add `qs.reports.html()` to run_hNNN.py ← new 2026-06-08
 - [Kan](tools/kan-notes.md) — self-hosted open-source kanban board (Trello alternative); AGPLv3, ~5k stars; Next.js + tRPC + Postgres; webhooks + admin API; potential task/research dashboard UI ← new 2026-06-08
 - [ByteChef](tools/bytechef-notes.md) — open-source visual AI agent orchestration + workflow automation (n8n/Zapier alternative); self-hosted, MCP support, ~839 stars; AGPLv3; AI agent step type built-in ← new 2026-06-27
@@ -284,6 +286,7 @@ When answering a query:
 
 **People**
 - [Yasemin Saltuk](people/yasemin-saltuk.md) — J.P. Morgan Social Finance lead researcher; impact investing research series
+- [Igor Halperin](people/igor-halperin.md) — NYU / J.P. Morgan quant researcher; SciPhyRL (HJB-PINN portfolio optimization, H472); QLBS offline RL options pricing; physics-informed ML approach to portfolio construction ← new 2026-07-28
 
 **Organizations**
 - [J.P. Morgan Social Finance](orgs/jpmorgan-social-finance.md) — JPM unit est. 2007; proprietary capital + advisory + research

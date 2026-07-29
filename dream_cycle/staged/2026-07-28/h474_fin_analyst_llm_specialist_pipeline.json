@@ -1,0 +1,23 @@
+{
+  "hypothesis_number": "H474",
+  "short_name": "fin-analyst-llm-specialist-pipeline-pead",
+  "title": "8-Specialist LLM Pipeline (Fin-Analyst Architecture) as PEAD Pre-Filter",
+  "source": "arXiv:2607.12233 (Jul 2026) — \"Fin-Analyst at FinMMEval 2026 Task 3: A Live Hybrid Trading Agent with LLM Specialists and Rule-Based Signals\" (Rashid et al.)",
+  "target_file": "backtesting/daily/run_h474_fin_analyst_pead_prefilter.py",
+  "risk": "medium",
+  "apply_status": "pending",
+  "type": "new_script",
+  "description": "Port the Fin-Analyst 8-specialist LLM pipeline architecture to the H174 PEAD stack. Fin-Analyst uses parallel specialist agents (news, SEC filings, fundamentals, analyst forecasts, technical indicators, social sentiment, macro, options) aggregated by a Meta-Agent, achieving TSLA +13.51% return (+28.33pp vs buy-and-hold, Sharpe 4.10, 88% win rate) in live FinMMEval 2026 deployment. Key insight: specialist decomposition distributes context budget and parallelizes extraction, avoiding the single-LLM context-saturation problem in PEAD scoring.",
+  "content_summary": "Paper details Fin-Analyst, winner of FinMMEval 2026 Task 3 (live trading benchmark). Key architecture: 8 parallel LLM specialists each focused on one data modality, outputs aggregated by a Meta-Agent that weights specialist signals by recent calibrated accuracy. Results: TSLA +13.51% OOS (Jul 2026), 88% win rate, Sharpe 4.10. Bitcoin leg: lightweight 3-signal rule-based vote. Adaptation path to H174 PEAD: (1) Replace single FinBERT scorer with 3-specialist pipeline: Specialist-1 (8-K press release NLP, analogous to H174's FinBERT), Specialist-2 (earnings call QA tone via H471 KPI extraction), Specialist-3 (analyst revision signal from FMP). Meta-Agent: weighted average of 3 specialist scores. Gate: composite_score >= 0.18 (same threshold). Expected benefit: Specialist-2 and -3 provide orthogonal signals to FinBERT; Meta-Agent dynamically upweights whichever specialist has been most accurate lately (continual calibration). Key risk: GPT-4o-mini API cost per event (est. $0.02/event × 100 events/year = $2/year — negligible). H474 is lighter than full 8-specialist; 3-specialist is the minimum viable architecture given our data availability.",
+  "variants": [
+    "Var A: 3-specialist (8-K FinBERT + earnings call KPI + analyst revision) with equal Meta-Agent weights",
+    "Var B: 3-specialist with Meta-Agent dynamically reweighting by rolling 6m specialist accuracy",
+    "Var C: 2-specialist (8-K FinBERT + analyst revision only, no call transcript) — tests cost/benefit of transcript",
+    "Var D: H174 baseline (FinBERT only) — sanity check"
+  ],
+  "gate": "OOS WR >= 0.818 AND n >= 15 AND MeanRet >= 6.89% (H174 parity on all metrics)",
+  "is_period": "2022-2023",
+  "oos_period": "2024-2026",
+  "data_requirements": "FinBERT: already in pead_overnight.py. Earnings call KPIs: FMP transcript API ($FMP_API_KEY, Professional plan caveat from H247). Analyst revisions: FMP upgrades-downgrades endpoint (available on Starter plan). GPT-4o-mini for Meta-Agent scoring: $OPENAI_API_KEY present. Coverage risk: H168 showed 26.5% transcript OOS coverage — Var C avoids this by skipping transcript specialist. EDGAR 8-K: already used.",
+  "implementation_notes": "Specialist-1 (8-K): existing FinBERT pipeline from pead_overnight.py, outputs score in [0,1]. Specialist-2 (call KPI): FMP transcript → KPI extraction prompt → KPI direction ratio in [0,1]. Specialist-3 (analyst revision): FMP analyst changes in 5d around announcement → fraction of upgrades in [0,1]. Meta-Agent aggregation: composite = w1*s1 + w2*s2 + w3*s3, where Var A uses w=[1/3, 1/3, 1/3] and Var B updates w using rolling 6m Brier score per specialist (lower Brier → higher weight). Implementation order: (1) build analyst revision specialist first (simplest, no transcript dependency); (2) integrate Meta-Agent scoring; (3) add call KPI specialist (Var A only if coverage >= 50%). Connection to H274 PEAD multi-agent debate (3-agent): H474 is specialist-aggregation, H274 is adversarial debate — different paradigms, both worth testing."
+}
