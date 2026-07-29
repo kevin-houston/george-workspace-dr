@@ -1,6 +1,10 @@
 {
-  "date": "2026-07-28",
+  "date": "2026-07-29",
   "candidates": [],
-  "scores": {},
-  "reason": "no earnings"
+  "scores": {
+    "V": {
+      "score": -0.0273,
+      "surprise": -0.2355
+    }
+  }
 }

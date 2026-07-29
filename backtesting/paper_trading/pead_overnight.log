@@ -782,3 +782,27 @@
 [2026-07-27 23:02:11] No earnings tonight. Watchlist cleared.
 [2026-07-27 23:02:19]   Tickers with recent earnings: none
 [2026-07-27 23:02:19] No earnings tonight. Watchlist cleared.
+[2026-07-28 23:01:13] =======================================================
+[2026-07-28 23:01:13] PEAD overnight pass starting
+[2026-07-28 23:01:13] Scanning earnings calendar…
+[2026-07-28 23:01:20] =======================================================
+[2026-07-28 23:01:20] PEAD overnight pass starting
+[2026-07-28 23:01:20] Scanning earnings calendar…
+[2026-07-28 23:01:37]   Tickers with recent earnings: ['V']
+[2026-07-28 23:01:37]   Fetching 8-K for V…
+[2026-07-28 23:01:42]   Tickers with recent earnings: ['V']
+[2026-07-28 23:01:42]   Fetching 8-K for V…
+[2026-07-28 23:01:42]     V: 5014 chars
+[2026-07-28 23:01:44]     V: 5014 chars
+[2026-07-28 23:03:21]   Loading ProsusAI/finbert…
+[2026-07-28 23:03:21]   Loading ProsusAI/finbert…
+[2026-07-28 23:10:36]   V: score=-0.027  surprise=-0.236
+[2026-07-28 23:10:36]   V: score=-0.027  surprise=-0.236
+[2026-07-28 23:10:38]   ✗ V filtered out (score=-0.027, surprise=-0.2355)
+[2026-07-28 23:10:38]   ✗ V filtered out (score=-0.027, surprise=-0.2355)
+[2026-07-28 23:10:38] Candidates for tomorrow: none
+[2026-07-28 23:10:38] Candidates for tomorrow: none
+[2026-07-28 23:10:39] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-28 23:10:39] Overnight pass complete.
+[2026-07-28 23:10:39] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-28 23:10:39] Overnight pass complete.
