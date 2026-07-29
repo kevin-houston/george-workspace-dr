@@ -1,0 +1,14 @@
+{
+  "id": "2026-07-29-janus-q-h331",
+  "date": "2026-07-29",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2602.19919",
+  "title": "Janus-Q HGRM architecture as H331 design blueprint",
+  "rationale": "Janus-Q (arXiv:2602.19919, HKUST 2026) is an end-to-end event-driven LLM trading framework that achieved +102% Sharpe improvement and +17.5% direction accuracy over strong baselines. It treats financial news events as primary decision units (not auxiliary signals), using a Hierarchical Gated Reward Model (HGRM) to align LLM reasoning with multi-objective trading goals. H331 proposes applying FinBERT to M&A announcement 8-K filings to classify deal-break risk — Janus-Q's 10 fine-grained event types and HGRM reward structure are a direct architectural blueprint. Specifically: (1) encode M&A 8-K text with FinBERT, (2) classify into event sub-types (hostile/PE/strategic/cross-border), (3) use HGRM-style reward = f(completion_probability × gross_spread − break_probability × loss_on_break), (4) RL fine-tuning on historical M&A outcomes. This upgrades H331 from a simple FinBERT scorer to a full decision-oriented agent.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/merger-arbitrage-special-situations.md",
+  "content": "Janus-Q section already added to merger-arbitrage-special-situations.md in tonight's wiki expansion (2026-07-29). H331 design note in Production Path section updated with HGRM architecture reference. See also event-driven.md for PEAD analogy.",
+  "action": "append",
+  "apply_status": "applied"
+}

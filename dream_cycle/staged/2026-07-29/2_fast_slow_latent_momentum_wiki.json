@@ -1,0 +1,14 @@
+{
+  "id": "2026-07-29-fast-slow-macd-theory",
+  "date": "2026-07-29",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2607.01705",
+  "title": "Fast/slow latent factor proof that MACD signals emerge from optimal portfolio theory",
+  "rationale": "Eccles & Lee (arXiv:2607.01705, July 2026) prove mathematically that when asset drift is governed by two latent stochastic factors at different time scales (fast mean-reverting + slow momentum), the optimal portfolio strategy is a MACD-type signal — specifically, a filtered estimate of the latent drift level driven by fast-EMA minus slow-EMA with a Volterra correction. This is directly relevant to: (1) H198 6-1m skip-month momentum (fast mean-reversion at 1m, slow momentum at 6m), (2) IBS strategy (fast intraday mean-reversion), (3) H376 6-0m no-skip momentum baseline. The paper provides theoretical grounding for why the 6-1 skip month window works — the 1-month skip captures fast mean-reversion, the 6-month lookback captures slow momentum. Should be added to momentum-strategies.md and factor-models.md as theoretical anchor for signal window choices.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/momentum-strategies.md",
+  "content": "## Theoretical Grounding: Fast/Slow Latent Factor Model (Eccles & Lee, July 2026)\n\n**arXiv:2607.01705** proves that when asset drift has two latent stochastic factors — one fast mean-reverting and one slow momentum — the optimal portfolio strategy takes the form of a MACD-type signal: the filtered estimate of the latent drift level is driven by `fast_EMA − slow_EMA + Volterra_correction`.\n\n**Relevance to our pipeline:**\n- H198 6-1m skip-month: the 1-month skip *is* the fast mean-reversion component; the 6m lookback captures slow momentum drift. The skip month is not arbitrary — it's theoretically optimal.\n- IBS strategy: captures the fast intraday mean-reversion component of the same framework.\n- H376 6-0m no-skip (OOS 3.120): slightly dominates on the 30-stock NASDAQ universe — the fast reversal is weaker there, so skipping less helps.\n- The Volterra correction in Eccles & Lee would correspond to the drift-gate filter in H416/H418 (20d positive-day fraction > 0.60).\n\nThis paper bridges technical analysis with formal mathematical finance — MACD signals are not ad-hoc; they emerge endogenously from optimal filtering of multi-scale latent drift processes.",
+  "action": "append",
+  "apply_status": "pending"
+}

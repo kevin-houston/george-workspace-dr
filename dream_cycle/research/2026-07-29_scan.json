@@ -1,0 +1,131 @@
+{
+  "date": "2026-07-29",
+  "scan_angles": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + NLP",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "papers_reviewed": [
+    {
+      "id": "arXiv:2605.01954",
+      "title": "Moira: Language-driven Hierarchical RL for Pair Trading",
+      "relevance": 0.6,
+      "staged": false,
+      "notes": "Already documented as H316 candidate in wiki. DeepSeek-V3.2 LLM + HRL. No new staging needed."
+    },
+    {
+      "id": "arXiv:2512.02436",
+      "title": "Semantic Trading: Agentic AI for Clustering",
+      "relevance": 0.5,
+      "staged": false,
+      "notes": "AI agent semantic clustering for pairs selection. Low novelty over existing H316/H319 designs."
+    },
+    {
+      "id": "arXiv:2602.07048",
+      "title": "LLM as Risk Manager: Semantic Filtering Lead-Lag Prediction Markets",
+      "relevance": 0.5,
+      "staged": false,
+      "notes": "Already staged previously. Kalshi lead-lag trading. Prediction market angle, not equity PEAD."
+    },
+    {
+      "id": "arXiv:2505.14420",
+      "title": "SAE-FiRE: Sparse Autoencoder Feature Selection for Earnings Surprise",
+      "relevance": 0.8,
+      "staged": false,
+      "notes": "Already staged as H400 candidate. No re-staging needed."
+    },
+    {
+      "id": "arXiv:2602.20859",
+      "title": "FinAnchor: Aligned Multi-Model Representations for Financial Prediction",
+      "relevance": 0.5,
+      "staged": false,
+      "notes": "Multi-modal aligned representations for financial prediction. Interesting but no specific PEAD application demonstrated. LOW priority."
+    },
+    {
+      "id": "arXiv:2602.19919",
+      "title": "Janus-Q: End-to-End Event-Driven Trading via HGRM",
+      "relevance": 0.9,
+      "staged": true,
+      "staged_file": "1_janus_q_h331_architecture.json",
+      "notes": "+102% Sharpe vs baseline, +17.5% direction accuracy. HGRM reward model is direct H331 architecture blueprint. Applied to merger-arbitrage page in tonight's wiki expansion."
+    },
+    {
+      "id": "arXiv:2607.01705",
+      "title": "Portfolio Optimization under Fast and Slow Latent Mean-Reverting and Momentum Drift",
+      "relevance": 0.85,
+      "staged": true,
+      "staged_file": "2_fast_slow_latent_momentum_wiki.json",
+      "notes": "Mathematical proof that MACD signals emerge from optimal filtering of bi-scale latent drift. Directly explains H198 skip-month mechanism and H376 no-skip divergence. Add to momentum-strategies.md."
+    },
+    {
+      "id": "arXiv:2607.00883",
+      "title": "Tail Risk Management with Puts and Trend Following: CVaR Framework",
+      "relevance": 0.75,
+      "staged": true,
+      "staged_file": "3_tail_risk_puts_trend_following_wiki.json",
+      "notes": "Puts provide convex crash protection; trend following provides drawdown protection during sustained bear markets. Complementary, not competing. Relevant to production portfolio gap and H266 options design."
+    },
+    {
+      "id": "arXiv:2603.14288",
+      "title": "Beyond Prompting: Autonomous Factor Investing via Agentic AI",
+      "relevance": 0.8,
+      "staged": true,
+      "staged_file": "4_autonomous_factor_investing_wiki.json",
+      "notes": "BH FDR correction + OOS decay evaluation = missing piece in our hypothesis pipeline. With 475+ hypotheses, multiple testing adjustment is needed. Add to auto-alpha-discovery.md and cross-ref multiple-testing.md."
+    },
+    {
+      "id": "arXiv:2604.17327",
+      "title": "Signal or Noise in Multi-Agent LLM Stock Recommendations?",
+      "relevance": 0.65,
+      "staged": false,
+      "notes": "ICIR +0.489, p=0.024 on S&P 500. Agent contributions rotate by regime. Already referenced in multi-agent wiki. No new staging needed."
+    },
+    {
+      "id": "arXiv:2605.05580",
+      "title": "AlphaCrafter: Full-Stack Multi-Agent Cross-Sectional Trading",
+      "relevance": 0.7,
+      "staged": false,
+      "notes": "Already staged as H382 reference. No new staging needed."
+    },
+    {
+      "id": "arXiv:2607.20533",
+      "title": "Grounding Investor Views: Neural Predicates in Black-Litterman",
+      "relevance": 0.4,
+      "staged": false,
+      "notes": "Neural predicates for view generation in BL model. No quantitative results in abstract. Low priority — theoretical paper without demonstrated trading alpha."
+    },
+    {
+      "id": "arXiv:2110.09315",
+      "title": "Predicting Pre/Post M&A Deals via ML and Deep Learning",
+      "relevance": 0.7,
+      "staged": false,
+      "notes": "Already incorporated into merger-arbitrage wiki expansion tonight. kNN→PCA→LSTM architecture. Applied."
+    },
+    {
+      "id": "arXiv:2404.07298",
+      "title": "TDIN: Temporal Dynamic Industry Networks for M&A Prediction",
+      "relevance": 0.6,
+      "staged": false,
+      "notes": "Already incorporated into merger-arbitrage wiki expansion tonight. Industry peer effects for M&A prediction. Applied."
+    },
+    {
+      "id": "github.com/eisenjimmy/Quant",
+      "title": "Quant Desktop Market Terminal",
+      "relevance": 0.65,
+      "staged": false,
+      "notes": "Noted by Kevin this session. Full assessment in wiki/tools/quant-terminal-notes.md. Kronos probabilistic forecast, 2-session regime persistence, decision journal. Not staged as hypothesis — more a tool reference."
+    }
+  ],
+  "total_reviewed": 15,
+  "high_relevance_staged": 4,
+  "staged_files": [
+    "1_janus_q_h331_architecture.json",
+    "2_fast_slow_latent_momentum_wiki.json",
+    "3_tail_risk_puts_trend_following_wiki.json",
+    "4_autonomous_factor_investing_wiki.json"
+  ],
+  "wiki_expanded": "algorithms/merger-arbitrage-special-situations.md (214→423 lines)",
+  "research_log": "wiki/trading/research-log/2026-07-29.md"
+}

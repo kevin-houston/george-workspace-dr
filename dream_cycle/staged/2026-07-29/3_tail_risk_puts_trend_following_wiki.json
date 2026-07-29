@@ -1,0 +1,14 @@
+{
+  "id": "2026-07-29-tail-risk-puts-trend",
+  "date": "2026-07-29",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2607.00883",
+  "title": "CVaR framework: puts + trend following as complementary tail risk tools",
+  "rationale": "arXiv:2607.00883 (July 2026) develops a CVaR framework showing that put options and trend following protect against *different phases* of market stress: (1) puts provide immediate convex insurance on abrupt crashes and volatility repricing; (2) trend following responds more slowly but strengthens during sustained drawdowns without ongoing premium cost. Hybrid allocations reduced terminal CVaR vs either single-sleeve approach. Directly relevant to: (a) production portfolio which currently lacks explicit tail protection; (b) the IBS strategy which is effectively a short-put on intraday moves; (c) H266 iron condor design (VRP + options income strategies); (d) H309 dispersion trading. Proposal: add a 'Tail Risk Management' section to options-income-strategies.md or position-sizing.md documenting the puts+trend complementarity and how our existing trend-following sleeve (H026/H041a) already provides some delayed tail protection while our VRP/IBS sleeve is put-like.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/options-income-strategies.md",
+  "content": "## Puts + Trend Following: Complementary Tail Risk (arXiv:2607.00883, July 2026)\n\nEccles et al. develop a CVaR framework for combining two distinct forms of tail protection:\n\n**Different phases of stress:**\n- **Put options**: immediate convex insurance — reprices within hours of a crash or volatility spike. Best for abrupt events (March 2020 style).\n- **Trend following**: slow to engage (signal must cross zero) but strengthens during sustained drawdowns without requiring additional premium. Best for drawn-out bear markets (2022 style).\n\n**Portfolio interpretation:**\n- Our IBS strategy (XLK/SMH/IGV, 30% of production portfolio) is structurally similar to writing puts — positive carry in normal markets, sharp losses in crashes.\n- Our H026/H041a momentum rotation (49% of portfolio) provides delayed trend-following tail protection — it routes to BIL when momentum deteriorates, but with a 1-month signal lag.\n- A small explicit put hedge (1-2% of portfolio budget in OTM SPY puts, ~10% OTM, 3-month tenor) would provide the missing convex crash protection that trend following cannot.\n\n**Gate for H266 design:** Only sell options (iron condors, CSPs) when VRP z-score > 0 AND trend-following sleeve is in defensive mode OR put protection is active. This separates VRP harvesting from crash risk.",
+  "action": "append",
+  "apply_status": "pending"
+}
