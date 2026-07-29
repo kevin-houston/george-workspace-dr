@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Variant Switcher Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0d0d0d;
+      color: #e5e5e5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding-bottom: 80px; /* clear the picker */
+    }
+
+    #stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* ---- Variant: Quiet ---- */
+    .card-quiet {
+      width: 340px;
+      padding: 24px;
+      background: #1c1c1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      animation: fadeUp 200ms ease-out both;
+    }
+    .card-quiet .title  { font-size: 18px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .card-quiet .body   { font-size: 14px; color: #777; line-height: 1.6; }
+    .card-quiet .btn    {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: #fff;
+      color: #000;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ---- Variant: Editorial ---- */
+    .card-editorial {
+      width: 420px;
+      padding: 40px 36px;
+      background: #111;
+      border-top: 3px solid #fff;
+      animation: slideDown 220ms ease-out both;
+    }
+    .card-editorial .eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #555; margin-bottom: 16px; }
+    .card-editorial .title   { font-size: 28px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 12px; }
+    .card-editorial .body    { font-size: 14px; color: #666; line-height: 1.7; }
+    .card-editorial .btn     {
+      margin-top: 28px;
+      display: inline-block;
+      padding: 10px 20px;
+      background: #fff;
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ---- Variant: Playful ---- */
+    .card-playful {
+      width: 320px;
+      padding: 28px;
+      background: linear-gradient(135deg, #1a0a2e, #0e1a3a);
+      border: 1px solid rgba(130, 100, 255, .3);
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(100,80,255,.12);
+      animation: popIn 240ms cubic-bezier(.34,1.56,.64,1) both;
+    }
+    .card-playful .badge  {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(130,100,255,.25);
+      color: #a58bff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      margin-bottom: 14px;
+    }
+    .card-playful .title  { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .card-playful .body   { font-size: 14px; color: #7a7095; line-height: 1.6; }
+    .card-playful .btn    {
+      margin-top: 22px;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7b5cf0, #4f8ef7);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .card-quiet, .card-editorial, .card-playful { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="stage"></div>
+
+<script src="variant-switcher.js"></script>
+<script>
+  const quiet = () => `
+    <div class="card-quiet">
+      <div class="title">PEAD Signal: NVDA</div>
+      <div class="body">FinBERT score 0.31 · EPS surprise +4.2%.<br>Entry window opens at tomorrow's open.</div>
+      <button class="btn">View Position</button>
+    </div>`;
+
+  const editorial = () => `
+    <div class="card-editorial">
+      <div class="eyebrow">Signal Alert</div>
+      <div class="title">Earnings drift detected on NVDA</div>
+      <div class="body">FinBERT scored this filing at 0.31 — well above the 0.18 threshold. Combined with a 4.2% EPS surprise, the model flags a high-conviction post-announcement drift opportunity.</div>
+      <button class="btn">Open Position →</button>
+    </div>`;
+
+  const playful = () => `
+    <div class="card-playful">
+      <div class="badge">⚡ High confidence</div>
+      <div class="title">NVDA fired the signal</div>
+      <div class="body">FinBERT 0.31 · EPS beat +4.2% · PEAD drift expected. Entry opens tomorrow at market open.</div>
+      <button class="btn">Take position</button>
+    </div>`;
+
+  VariantSwitcher.init({
+    stage: document.getElementById('stage'),
+    hasMotion: true,
+    variants: [
+      { name: 'Quiet',     render: quiet },
+      { name: 'Editorial', render: editorial },
+      { name: 'Playful',   render: playful },
+    ],
+  });
+</script>
+</body>
+</html>
