@@ -920,3 +920,16 @@ The family is not abandoned — it needs a new hypothesis design:
 - [Hypothesis Log](../backtesting/hypothesis-log.md) — H411–H418 entries
 - [Factor Models](factor-models.md) — spectral theory for why value×momentum is joint
 - [Volatility Risk Premium](volatility-risk-premium.md) — VRP and IBS synergy at elevated vol
+---
+
+## Theoretical Grounding: Fast/Slow Latent Factor Model (Eccles & Lee, July 2026)
+
+**arXiv:2607.01705** proves that when asset drift has two latent stochastic factors — one fast mean-reverting and one slow momentum — the optimal portfolio strategy takes the form of a MACD-type signal: the filtered estimate of the latent drift level is driven by `fast_EMA − slow_EMA + Volterra_correction`.
+
+**Relevance to our pipeline:**
+- H198 6-1m skip-month: the 1-month skip *is* the fast mean-reversion component; the 6m lookback captures slow momentum drift. The skip month is not arbitrary — it's theoretically optimal.
+- IBS strategy: captures the fast intraday mean-reversion component of the same framework.
+- H376 6-0m no-skip (OOS 3.120): slightly dominates on the 30-stock NASDAQ universe — the fast reversal is weaker there, so skipping less helps.
+- The Volterra correction in Eccles & Lee would correspond to the drift-gate filter in H416/H418 (20d positive-day fraction > 0.60).
+
+This paper bridges technical analysis with formal mathematical finance — MACD signals are not ad-hoc; they emerge endogenously from optimal filtering of multi-scale latent drift processes.

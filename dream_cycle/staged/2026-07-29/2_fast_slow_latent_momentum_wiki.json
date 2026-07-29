@@ -10,5 +10,5 @@
   "target_file": "/workspace/agent/wiki/trading/algorithms/momentum-strategies.md",
   "content": "## Theoretical Grounding: Fast/Slow Latent Factor Model (Eccles & Lee, July 2026)\n\n**arXiv:2607.01705** proves that when asset drift has two latent stochastic factors — one fast mean-reverting and one slow momentum — the optimal portfolio strategy takes the form of a MACD-type signal: the filtered estimate of the latent drift level is driven by `fast_EMA − slow_EMA + Volterra_correction`.\n\n**Relevance to our pipeline:**\n- H198 6-1m skip-month: the 1-month skip *is* the fast mean-reversion component; the 6m lookback captures slow momentum drift. The skip month is not arbitrary — it's theoretically optimal.\n- IBS strategy: captures the fast intraday mean-reversion component of the same framework.\n- H376 6-0m no-skip (OOS 3.120): slightly dominates on the 30-stock NASDAQ universe — the fast reversal is weaker there, so skipping less helps.\n- The Volterra correction in Eccles & Lee would correspond to the drift-gate filter in H416/H418 (20d positive-day fraction > 0.60).\n\nThis paper bridges technical analysis with formal mathematical finance — MACD signals are not ad-hoc; they emerge endogenously from optimal filtering of multi-scale latent drift processes.",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }

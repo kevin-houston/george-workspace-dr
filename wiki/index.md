@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-28
+updated: 2026-07-29
 sources_indexed: 4
 pages: 246
 ---
@@ -95,6 +95,7 @@ When answering a query:
 - [QuantDinger](trading/tools/quantdinger-notes.md) — self-hosted AI trading platform (Docker); `quantdinger-mcp` PyPI for Claude Code integration; supports Alpaca/IBKR/Kraken/CCXT; full stack overkill given existing setup; MCP package worth testing ← new 2026-06-07
 - [ZVT](trading/tools/zvt.md) — Python quant platform; China A-shares primary (4136 stocks via EastMoney), US/HK secondary; unified schema API; ML machine; factor pipeline (data_df→transformer→factor_df→result_df); Dash/REST/Next.js UI; MODERATE relevance — China-focused, factor pipeline architecture useful as H382 design reference ← new 2026-07-08
 - [Variant Switcher](tools/variant-switcher.md) — prototype picker harness; floating pill + sliding highlight + keyboard shortcuts + `?v=N` URL sharing; rewrite of @emilkowalski/skills/prototype spec; `lib/variant-switcher.js` ← new 2026-07-28
+- [Quant Desktop Market Terminal](tools/quant-terminal-notes.md) — Electron/TypeScript market terminal; MIT 230★; Kronos 30-path local probabilistic forecast (24hr horizon); 5-state regime engine with 2-session persistence anti-whipsaw; decision journal; signal desk; borrowable: Kronos for PEAD intraday timing, 2-session rule for H249 gate, journal schema for paper trades ← new 2026-07-29
 - [QuantStats](tools/quantstats-notes.md) — Python portfolio analytics + HTML tearsheet generator; `pip install quantstats`; takes pandas returns Series → 50+ metrics + SPY benchmark + monthly heatmaps; add `qs.reports.html()` to run_hNNN.py ← new 2026-06-08
 - [Kan](tools/kan-notes.md) — self-hosted open-source kanban board (Trello alternative); AGPLv3, ~5k stars; Next.js + tRPC + Postgres; webhooks + admin API; potential task/research dashboard UI ← new 2026-06-08
 - [ByteChef](tools/bytechef-notes.md) — open-source visual AI agent orchestration + workflow automation (n8n/Zapier alternative); self-hosted, MCP support, ~839 stars; AGPLv3; AI agent step type built-in ← new 2026-06-27

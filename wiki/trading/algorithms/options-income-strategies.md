@@ -641,3 +641,39 @@ Many realistic volatility models (GJR-GARCH, Heston with stochastic vol-of-vol, 
 **Key constraint**: The surrogate must be retrained when model parameters shift significantly (e.g., after a vol regime change). Retraining time is not reported but is bounded by the Monte Carlo simulation budget.
 
 **Code**: Not yet released publicly (paper is June 2026). The MDN architecture is standard — PyTorch implementation is ~200 lines using `torch.distributions.MixtureSameFamily`.
+
+---
+
+## Puts + Trend Following: Complementary Tail Risk (arXiv:2607.00883, July 2026)
+
+Eccles et al. develop a CVaR framework for combining two distinct forms of tail protection:
+
+**Different phases of stress:**
+- **Put options**: immediate convex insurance — reprices within hours of a crash or volatility spike. Best for abrupt events (March 2020 style).
+- **Trend following**: slow to engage (signal must cross zero) but strengthens during sustained drawdowns without requiring additional premium. Best for drawn-out bear markets (2022 style).
+
+**Portfolio interpretation:**
+- Our IBS strategy (XLK/SMH/IGV, 30% of production portfolio) is structurally similar to writing puts — positive carry in normal markets, sharp losses in crashes.
+- Our H026/H041a momentum rotation (49% of portfolio) provides delayed trend-following tail protection — it routes to BIL when momentum deteriorates, but with a 1-month signal lag.
+- A small explicit put hedge (1-2% of portfolio budget in OTM SPY puts, ~10% OTM, 3-month tenor) would provide the missing convex crash protection that trend following cannot.
+
+**Gate for H266 design:** Only sell options (iron condors, CSPs) when VRP z-score > 0 AND trend-following sleeve is in defensive mode OR put protection is active. This separates VRP harvesting from crash risk.
+
+**Cross-ref:** [H309 SPX Dispersion](../algorithms/multi-agent-llm-trading.md), [H362 Macro Gate](../algorithms/regime-detection.md), [Backtesting Design Principles](../backtesting/design-principles.md)
+
+---
+
+## Puts + Trend Following: Complementary Tail Risk (arXiv:2607.00883, July 2026)
+
+Eccles et al. develop a CVaR framework for combining two distinct forms of tail protection:
+
+**Different phases of stress:**
+- **Put options**: immediate convex insurance — reprices within hours of a crash or volatility spike. Best for abrupt events (March 2020 style).
+- **Trend following**: slow to engage (signal must cross zero) but strengthens during sustained drawdowns without requiring additional premium. Best for drawn-out bear markets (2022 style).
+
+**Portfolio interpretation:**
+- Our IBS strategy (XLK/SMH/IGV, 30% of production portfolio) is structurally similar to writing puts — positive carry in normal markets, sharp losses in crashes.
+- Our H026/H041a momentum rotation (49% of portfolio) provides delayed trend-following tail protection — it routes to BIL when momentum deteriorates, but with a 1-month signal lag.
+- A small explicit put hedge (1-2% of portfolio budget in OTM SPY puts, ~10% OTM, 3-month tenor) would provide the missing convex crash protection that trend following cannot.
+
+**Gate for H266 design:** Only sell options (iron condors, CSPs) when VRP z-score > 0 AND trend-following sleeve is in defensive mode OR put protection is active. This separates VRP harvesting from crash risk.

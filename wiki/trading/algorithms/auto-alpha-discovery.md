@@ -712,3 +712,39 @@ Seed MadEvolve with run_h386.py as the base strategy. LLM mutates: feature set (
 4. IS (2013-2020) fitness → retain top-10 factors
 5. Combine top factors in H386-style composite, OOS test on 2021-2026
 6. Hypothesis number: H394 (if a new composite clears gate)
+
+---
+
+## Autonomous Factor Investing via Agentic AI (arXiv:2603.14288, March 2026)
+
+**'Beyond Prompting'** (allenh16.github.io/agentic-factor-investing/) — autonomous pipeline for systematic factor investing with three components:
+
+1. **LLM hypothesis generation**: Agents propose factor hypotheses from financial literature and market reasoning (no manual coding).
+2. **Rigorous multiple testing**: Applies BH FDR correction and Deflated Sharpe Ratio (DSR) from Harvey-Liu-Zhu — specifically designed to combat the 'factor zoo' overfitting problem that plagues automated search.
+3. **OOS signal decay evaluation**: Tracks alpha decay rate post-publication/post-discovery as a quality gate.
+
+**Relevance to our pipeline:**
+- H382 (FactorEngine design) should adopt this three-phase structure: generate → test with FDR → evaluate OOS decay.
+- Our dream cycle already generates hypotheses (Phase 1) and stages them (Phase 2). Missing: FDR correction across the H-series. With 475+ hypotheses tested, the expected false discovery rate at p<0.05 without correction is ~24 false positives.
+- **Action**: Add BH FDR correction to the batch evaluation step when multiple variants of the same hypothesis are tested in the same session (e.g., H411-H418 all tested together = multiple testing family).
+- **OOS decay gate**: Add signal_halflife check before promoting any hypothesis to production.
+
+**Cross-ref**: [Multiple Testing & Statistical Significance](../backtesting/multiple-testing.md), [Signal Half-Life](../backtesting/signal-halflife.md), [AlphaCrafter](https://arxiv.org/abs/2605.05580)
+
+---
+
+## Autonomous Factor Investing via Agentic AI (arXiv:2603.14288, March 2026)
+
+**'Beyond Prompting'** (allenh16.github.io/agentic-factor-investing/) — autonomous pipeline for systematic factor investing with three components:
+
+1. **LLM hypothesis generation**: Agents propose factor hypotheses from financial literature and market reasoning (no manual coding).
+2. **Rigorous multiple testing**: Applies BH FDR correction and Deflated Sharpe Ratio (DSR) from Harvey-Liu-Zhu — specifically designed to combat the 'factor zoo' overfitting problem that plagues automated search.
+3. **OOS signal decay evaluation**: Tracks alpha decay rate post-publication/post-discovery as a quality gate.
+
+**Relevance to our pipeline:**
+- H382 (FactorEngine design) should adopt this three-phase structure: generate → test with FDR → evaluate OOS decay.
+- Our dream cycle already generates hypotheses (Phase 1) and stages them (Phase 2). Missing: FDR correction across the H-series. With 475+ hypotheses tested, the expected false discovery rate at p<0.05 without correction is ~24 false positives.
+- **Action**: Add BH FDR correction to the batch evaluation step when multiple variants of the same hypothesis are tested in the same session (e.g., H411-H418 all tested together = multiple testing family).
+- **OOS decay gate**: Add signal_halflife check (wiki/trading/backtesting/signal-halflife.md) before promoting any hypothesis to production.
+
+**Cross-ref**: [Multiple Testing & Statistical Significance](../backtesting/multiple-testing.md), [Signal Half-Life](../backtesting/signal-halflife.md), [AlphaCrafter](https://arxiv.org/abs/2605.05580) (similar multi-agent approach).
