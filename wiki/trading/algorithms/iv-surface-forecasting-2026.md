@@ -317,3 +317,17 @@ For any IV surface snapshot, check:
 ### Reference GitHub repos
 - https://github.com/Austinjinc/diffusion-paper-code — DDPM IV forecasting code (Paper 1)
 - https://github.com/XanderRobbins/Arbitrage-Free-Volatility-Surface — SVI + Heston Python toolkit
+
+---
+
+## Negative Result: Time Series Foundation Models for Realized Volatility
+
+**arXiv:2607.05291** — "Forecasting Realized Volatility with Time Series Foundation Models" (July 2026). Evaluates 9 zero-shot TSFMs (including Tiny Time Mixers TTM) against 8 econometric benchmarks on the VOLARE dataset (50 assets: equities, forex, futures).
+
+**Finding:** TSFMs provide no reliable improvement over Log-HAR for realized volatility forecasting. Only TTM beats Log-HAR by a narrow margin; the short-horizon advantage reflects better forecast *scaling* rather than better dynamics prediction. "Foundation models do not deliver a uniform gain — the advantage is concentrated in a few outlier assets."
+
+**Implication for H448:** The RV leg of the VRP signal (IV_forecast − RV_realized) should use **RV22d (22-day rolling realized vol)**, not a TSFM. TSFM complexity adds engineering overhead with negligible signal improvement.
+
+**Best practice for H448:** VRP = VIX − RV22d (simple, fast, tested). Only upgrade RV estimator if Garman-Klass or Yang-Zhang intraday estimators show material improvement — they better capture overnight jumps without adding ML complexity.
+
+**What TSFMs ARE good for:** Cross-sectional return prediction where training data is large and diverse. NOT recommended for univariate vol-of-vol forecasting where HAR already captures the relevant persistence structure.

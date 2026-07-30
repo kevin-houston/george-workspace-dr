@@ -3,38 +3,38 @@
   "date": "2026-07-30",
   "source": "paper",
   "source_url": "https://arxiv.org/abs/2606.29734",
-  "title": "H464: Two-stage PEAD with EarningsInOne — numeric surprise + qualitative ECT signal",
-  "rationale": "arXiv:2606.29734 'Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals' (Ding Yu et al., June 2026) introduces EARNINGSINONE — the first corpus aligning earnings news, ECTs, and intraday/next-day prices for S&P 1500 (2022-2025). Key finding: 'a clean speed separation' — numeric EPS/revenue surprise peaks at announcement and diminishes by next market open, while qualitative ECT sentiment peaks the FOLLOWING trading day and remains tradeable. This is a direct upgrade to H174 (FinBERT + EPS surprise gate, OOS WR=81.8%). H174's current design conflates both timing layers: it scores the 8-K at announcement and enters the next morning, capturing some of both signals but not optimally. H464 proposes two explicitly timed entry layers: Layer 1 (numeric) = EPS beat ≥ 0.02 → enter at announcement via OPG, hold 1 day; Layer 2 (qualitative) = FinBERT score ≥ 0.18 on ECT → enter next morning, hold 20 trading days. Code and data from EARNINGSINONE publicly available on GitHub. This directly resolves H174's timing ambiguity and could improve WR and reduce drawdown by routing numeric-only plays to short holds and qualitative-confirming plays to 20-day holds.",
+  "title": "H464: Two-stage PEAD with EarningsInOne \u2014 numeric surprise + qualitative ECT signal",
+  "rationale": "arXiv:2606.29734 'Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals' (Ding Yu et al., June 2026) introduces EARNINGSINONE \u2014 the first corpus aligning earnings news, ECTs, and intraday/next-day prices for S&P 1500 (2022-2025). Key finding: 'a clean speed separation' \u2014 numeric EPS/revenue surprise peaks at announcement and diminishes by next market open, while qualitative ECT sentiment peaks the FOLLOWING trading day and remains tradeable. This is a direct upgrade to H174 (FinBERT + EPS surprise gate, OOS WR=81.8%). H174's current design conflates both timing layers: it scores the 8-K at announcement and enters the next morning, capturing some of both signals but not optimally. H464 proposes two explicitly timed entry layers: Layer 1 (numeric) = EPS beat \u2265 0.02 \u2192 enter at announcement via OPG, hold 1 day; Layer 2 (qualitative) = FinBERT score \u2265 0.18 on ECT \u2192 enter next morning, hold 20 trading days. Code and data from EARNINGSINONE publicly available on GitHub. This directly resolves H174's timing ambiguity and could improve WR and reduce drawdown by routing numeric-only plays to short holds and qualitative-confirming plays to 20-day holds.",
   "risk_level": "low",
   "type": "hypothesis",
   "target_file": "/workspace/agent/backtesting/daily/run_h464.py",
   "hypothesis_log_entry": {
     "id": "H464",
     "status": "PROPOSED",
-    "title": "Two-Stage PEAD — Numeric Surprise at Open + Qualitative ECT at Next-Day Open",
+    "title": "Two-Stage PEAD \u2014 Numeric Surprise at Open + Qualitative ECT at Next-Day Open",
     "source": "arXiv:2606.29734 (Ding Yu et al., June 2026)",
     "mechanism": "Earnings announcements release two serially independent signals: numeric EPS/revenue surprise is processed immediately (algorithmic), while ECT qualitative tone is processed over the next 24-48 hours (behavioral lag). Combining them with explicit timing layers should capture more alpha than H174's single-entry approach.",
     "design": {
       "universe": "S&P 500 stocks with earnings events (same as H174/H163)",
       "layer_1": {
-        "entry": "EPS surprise >= 0.02 → market open day-of-earnings (OPG order)",
+        "entry": "EPS surprise >= 0.02 \u2192 market open day-of-earnings (OPG order)",
         "hold": "1 trading day (numeric surprise decays by next close)",
         "signal": "eps_surprise_pct >= 0.02"
       },
       "layer_2": {
-        "entry": "FinBERT score >= 0.18 on 8-K OR ECT → next morning open",
+        "entry": "FinBERT score >= 0.18 on 8-K OR ECT \u2192 next morning open",
         "hold": "20 trading days (H174 baseline)",
         "signal": "finbert_score >= 0.18 AND eps_surprise >= 0.02",
         "note": "Only enter L2 if L1 also fired (both numeric AND qualitative)"
       },
       "variants": {
-        "A": "L1 only (numeric surprise, 1d hold) — fast PEAD",
-        "B": "L2 only (qualitative, 20d hold) — same as H174",
+        "A": "L1 only (numeric surprise, 1d hold) \u2014 fast PEAD",
+        "B": "L2 only (qualitative, 20d hold) \u2014 same as H174",
         "C": "L1 + L2 sequential: enter at open (1d), extend to 20d if ECT confirms",
         "D": "L1 AND L2 gate: only enter 20d position if BOTH numeric >= 0.02 AND FinBERT >= 0.18"
       }
     },
-    "gate": "OOS WR > 81.8% (H174 baseline) AND mean_ret > 6.89% (H174) — must beat on BOTH metrics",
+    "gate": "OOS WR > 81.8% (H174 baseline) AND mean_ret > 6.89% (H174) \u2014 must beat on BOTH metrics",
     "data_needed": [
       "EDGAR 8-K files (existing H174 pipeline)",
       "EPS surprise from FMP API ($FMP_API_KEY, existing)",
@@ -44,5 +44,5 @@
     "prior_art": "H174 CONFIRMED (OOS WR=81.8%, mean_ret=6.89%, n=22); H163 CONFIRMED (FinBERT 8-K, OOS WR=76.9%); H400 PROPOSED (SAE-FiRE PEAD upgrade)"
   },
   "action": "propose_hypothesis",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
