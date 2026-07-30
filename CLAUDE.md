@@ -1,4 +1,5 @@
 <!-- Composed at spawn - do not edit. Standing instructions: instructions.prepend.md. Memory: memory/. -->
+@./.claude-fragments/persona.md
 @./.claude-shared.md
 @./.claude-fragments/module-agents.md
 @./.claude-fragments/module-cli.md

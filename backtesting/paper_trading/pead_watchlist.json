@@ -1,10 +1,18 @@
 {
-  "date": "2026-07-29",
+  "date": "2026-07-30",
   "candidates": [],
   "scores": {
+    "META": {
+      "score": -0.0101,
+      "surprise": -0.1544
+    },
     "V": {
       "score": -0.0273,
       "surprise": -0.2355
+    },
+    "QCOM": {
+      "score": -0.0168,
+      "surprise": -0.0918
     }
   }
 }

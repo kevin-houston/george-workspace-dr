@@ -230,3 +230,27 @@
 [2026-07-28 09:33:09] =======================================================
 [2026-07-28 09:33:09] PEAD-GAP open pass starting
 [2026-07-28 09:33:09] Watchlist empty — no earnings candidates today.
+[2026-07-29 09:32:11] =======================================================
+[2026-07-29 09:32:11] PEAD-GAP open pass starting
+[2026-07-29 09:32:11] Earnings candidates: ['V']
+[2026-07-29 09:32:11] PEAD_GAP strategy equity: $5,000
+[2026-07-29 09:32:13]   V: prior_close=366.59 current=369.14 gap=0.7%
+[2026-07-29 09:32:13]   V: gap 0.7% < 3% — skip
+[2026-07-29 09:32:13] No new positions entered today.
+[2026-07-29 09:32:13] Open pass complete.
+[2026-07-29 09:33:19] =======================================================
+[2026-07-29 09:33:19] PEAD-GAP open pass starting
+[2026-07-29 09:33:19] Earnings candidates: ['V']
+[2026-07-29 09:33:19] PEAD_GAP strategy equity: $5,000
+[2026-07-29 09:33:21]   V: prior_close=366.59 current=369.24 gap=0.7%
+[2026-07-29 09:33:21]   V: gap 0.7% < 3% — skip
+[2026-07-29 09:33:21] No new positions entered today.
+[2026-07-29 09:33:21] Open pass complete.
+[2026-07-29 09:46:13] =======================================================
+[2026-07-29 09:46:13] PEAD-GAP open pass starting
+[2026-07-29 09:46:13] Earnings candidates: ['V']
+[2026-07-29 09:46:13] PEAD_GAP strategy equity: $5,000
+[2026-07-29 09:46:16]   V: prior_close=366.59 current=369.53 gap=0.8%
+[2026-07-29 09:46:16]   V: gap 0.8% < 3% — skip
+[2026-07-29 09:46:16] No new positions entered today.
+[2026-07-29 09:46:16] Open pass complete.

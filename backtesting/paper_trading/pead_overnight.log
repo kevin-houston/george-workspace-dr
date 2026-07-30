@@ -806,3 +806,43 @@
 [2026-07-28 23:10:39] Overnight pass complete.
 [2026-07-28 23:10:39] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-07-28 23:10:39] Overnight pass complete.
+[2026-07-29 23:01:40] =======================================================
+[2026-07-29 23:01:40] =======================================================
+[2026-07-29 23:01:41] PEAD overnight pass starting
+[2026-07-29 23:01:41] PEAD overnight pass starting
+[2026-07-29 23:01:41] Scanning earnings calendar…
+[2026-07-29 23:01:41] Scanning earnings calendar…
+[2026-07-29 23:02:03]   Tickers with recent earnings: ['META', 'V', 'QCOM']
+[2026-07-29 23:02:03]   Fetching 8-K for META…
+[2026-07-29 23:02:03]   Tickers with recent earnings: ['META', 'V', 'QCOM']
+[2026-07-29 23:02:03]   Fetching 8-K for META…
+[2026-07-29 23:02:19]     META: 5346 chars
+[2026-07-29 23:02:19]   Fetching 8-K for V…
+[2026-07-29 23:02:19]     META: 5346 chars
+[2026-07-29 23:02:19]   Fetching 8-K for V…
+[2026-07-29 23:02:21]     V: 5014 chars
+[2026-07-29 23:02:21]   Fetching 8-K for QCOM…
+[2026-07-29 23:02:21]     V: 5014 chars
+[2026-07-29 23:02:21]   Fetching 8-K for QCOM…
+[2026-07-29 23:02:24]     QCOM: 4657 chars
+[2026-07-29 23:02:24]     QCOM: 4657 chars
+[2026-07-29 23:04:00]   Loading ProsusAI/finbert…
+[2026-07-29 23:04:00]   Loading ProsusAI/finbert…
+[2026-07-29 23:09:11]   META: score=-0.010  surprise=-0.154
+[2026-07-29 23:09:12]   V: score=-0.027  surprise=-0.236
+[2026-07-29 23:09:13]   QCOM: score=-0.017  surprise=-0.092
+[2026-07-29 23:09:13]   ✗ META filtered out (score=-0.010, surprise=-0.1544)
+[2026-07-29 23:09:13]   ✗ V filtered out (score=-0.027, surprise=-0.2355)
+[2026-07-29 23:09:13]   ✗ QCOM filtered out (score=-0.017, surprise=-0.0918)
+[2026-07-29 23:09:13] Candidates for tomorrow: none
+[2026-07-29 23:09:14] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-29 23:09:14] Overnight pass complete.
+[2026-07-29 23:15:04]   META: score=-0.010  surprise=-0.154
+[2026-07-29 23:15:07]   V: score=-0.027  surprise=-0.236
+[2026-07-29 23:15:08]   QCOM: score=-0.017  surprise=-0.092
+[2026-07-29 23:15:08]   ✗ META filtered out (score=-0.010, surprise=-0.1544)
+[2026-07-29 23:15:08]   ✗ V filtered out (score=-0.027, surprise=-0.2355)
+[2026-07-29 23:15:08]   ✗ QCOM filtered out (score=-0.017, surprise=-0.0918)
+[2026-07-29 23:15:08] Candidates for tomorrow: none
+[2026-07-29 23:15:08] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-29 23:15:08] Overnight pass complete.
