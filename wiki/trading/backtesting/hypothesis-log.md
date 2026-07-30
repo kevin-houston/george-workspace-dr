@@ -9942,3 +9942,172 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 **Status**: STAGED — transcript download pipeline not yet built; FMP API available.
 
 **Script**: backtesting/daily/run_h471_kpi_earnings_call_pead.py
+
+
+---
+
+## H478 — Golden Criterion Adaptive Equal-Weight for H026 ETF Rotation: STAGED (2026-07-30)
+
+**Source**: arXiv:2607.11054 (Feng, Huang, Wang, Zhang, Jul 2026) — "When and Why Naive Diversification Works: A Simple Diagnostic Strategy"
+
+**Universe**: H026 25-ETF universe (sectors + alts)
+**IS/OOS**: IS 2008-2017 / OOS 2018-2026
+**Gate**: OOS Sharpe > 2.610 (H346 OB-gated baseline) AND MaxDD improvement vs -5%
+
+**Method**: Equal weighting (1/N) is minimum-variance optimal when the forecast-error covariance matrix has uniform eigenstructure ("Golden Criterion"). Distance metric D = std(λ)/mean(λ) where λ are eigenvalues of trailing 12m monthly return covariance of top-5 ETFs by momentum rank. When D < IS-calibrated threshold → EW top-3; when D ≥ threshold → top-1.
+
+**Variants**:
+| Var | Description |
+|-----|-------------|
+| A | Golden Criterion gate — top-1 when D > D_threshold, EW top-3 when D ≤ D_threshold |
+| B | Var A but D threshold at 50th IS percentile (more aggressive switching) |
+| C | Always EW top-3 (ignoring criterion, diversification benchmark) |
+| D | Always EW top-5 (more diversified) |
+| E | H026 canonical top-1 baseline |
+
+**Implementation note**: D = np.std(lambdas)/np.mean(lambdas) where lambdas = np.linalg.eigvalsh(trailing_12m_cov). Use Ledoit-Wolf regularization for stability. IS-calibrate D_threshold as median D over 2008-2017.
+
+**Status**: STAGED — addresses H026 OOS degradation (IS 1.2 vs OOS 0.785) with principled signal-quality detection.
+
+**Script**: backtesting/daily/run_h478_golden_criterion_h026.py
+
+---
+
+## H479 — Split-Session Cluster GARCH Overnight Tail Gate on IBS: STAGED (2026-07-30)
+
+**Source**: arXiv:2607.03669 (Chen, Hansen, Tong, Jul 2026) — "Split-Session Cluster GARCH for Overnight and Intraday Returns: The Role of Tail Heterogeneity"
+
+**Universe**: XLK/SMH/IGV (H112 IBS production assets)
+**IS/OOS**: IS 2015-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 2.129 (H112 IBS baseline) AND MaxDD improvement vs -18%
+
+**Method**: Overnight returns have structurally heavier tails (ν ≈ 3.8) than intraday (ν ≈ 5.2). Fat-tail overnight days generate trend continuation, not mean-reversion. IBS entries should be suppressed (or scaled) when overnight realized variance is in the top 80th percentile.
+
+**Signal**: overnight_rv = (log(open_t / close_{t-1}))². overnight_rv_rank = rolling 252d percentile. Entry condition: IBS < 0.2 AND overnight_rv_rank < 0.80.
+
+**Variants**:
+| Var | Description |
+|-----|-------------|
+| A | Binary gate: skip IBS entry when overnight_rv_rank > 0.80 |
+| B | Continuous: scale IBS position by (1 - overnight_rv_rank) |
+| C | Anti-contrarian: enter ONLY when overnight_rv_rank < 0.20 (thin-tail = high reversal) |
+| D | H112 IBS baseline (unfiltered, sanity check) |
+
+**Status**: STAGED — medium risk. Note: this proposal was originally labeled H476 in the dream cycle scan session; renumbered H479 as H476 is already a completed NOT CONFIRMED experiment (OB H417 60-stock, 2026-07-29).
+
+**Script**: backtesting/daily/run_h479_split_session_garch_ibs.py
+
+---
+
+## H480 — Network-Herding Momentum-Reversal Streak Filter on H198: STAGED (2026-07-30)
+
+**Source**: arXiv:2607.27063 (Jul 2026) — "Herding, Momentum, and Reversal in China's A-Share Market: An Agent-Based Network Model with Information Diffusion"
+
+**Universe**: H198 30-stock NASDAQ universe
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198 baseline) AND MaxDD improvement
+
+**Method**: Local herding creates momentum (3-9 months); as information diffuses fully through the network, herding saturates and reversal begins (9-18 months). Momentum streak counter tracks consecutive months each stock has ranked in top-6 by 6-1m momentum. Old-momentum stocks (6+ months in top-6) are near network saturation and approaching reversal.
+
+**Variants**:
+| Var | Description |
+|-----|-------------|
+| A | Exclude stocks with 6+ consecutive months in top-6 momentum rank |
+| B | Penalize score: adj_score = raw_score × (1 - 0.05 × min(streak, 6)) |
+| C | Overweight NEW entrants to top-6 (first month in top-6): double weight vs incumbents |
+| D | Momentum reversal gate: route to short if stock in top-6 for 9+ months |
+| E | H198 baseline 6-1m top-6 (sanity check) |
+
+**Implementation note**: streak[stock] += 1 if in top-6 last month, else 0. Test streak thresholds 3, 4, 5, 6 in IS. Monitor concentration if universe shrinks after exclusions.
+
+**Status**: STAGED — medium risk. Note: originally labeled H477 in dream cycle scan session; renumbered H480 as H477 is already a completed NOT CONFIRMED experiment (H417 sensitivity, 2026-07-29).
+
+**Script**: backtesting/daily/run_h480_herding_momentum_reversal.py
+
+---
+
+## H481 — Two-Stage PEAD with EarningsInOne Corpus — Numeric + Qualitative Timing: STAGED (2026-07-30)
+
+**Source**: arXiv:2606.29734 (Ding Yu et al., Jun 2026) — "Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals"
+
+**Universe**: S&P 500 stocks with earnings events (same as H174/H163)
+**IS/OOS**: IS 2022-2023 / OOS 2024-2026
+**Gate**: OOS WR > 81.8% (H174 baseline) AND mean_ret > 6.89% — must beat on BOTH metrics
+
+**Method**: EarningsInOne corpus proves a "clean speed separation": numeric EPS/revenue surprise peaks at announcement and diminishes by next market open, while qualitative ECT text sentiment peaks the FOLLOWING trading day and remains tradeable. H174's current design conflates both timing layers. H481 separates them explicitly.
+
+**Design**:
+- **Layer 1** (numeric): EPS surprise ≥ 0.02 → OPG entry at announcement open, hold 1 trading day
+- **Layer 2** (qualitative): FinBERT score ≥ 0.18 on 8-K/ECT → next morning open, hold 20 trading days
+
+**Variants**:
+| Var | Description |
+|-----|-------------|
+| A | L1 only (numeric surprise, 1d hold) — fast PEAD |
+| B | L2 only (qualitative, 20d hold) — same as H174 |
+| C | L1 + L2 sequential: enter at open (1d), extend to 20d if ECT confirms |
+| D | L1 AND L2 gate: only enter 20d position if BOTH numeric ≥ 0.02 AND FinBERT ≥ 0.18 |
+
+**Data needed**: EDGAR 8-K files (existing H174 pipeline), EPS surprise from FMP API, ECT transcript timing from EARNINGSINONE corpus or FMP earnings call transcript, Alpaca paper trading.
+
+**Status**: STAGED — low risk. Note: originally labeled H464 in nightly research; renumbered H481 as H464 was already taken by a 2026-07-28 staged hypothesis (STN-TGAT Graph Attention Network).
+
+**Script**: backtesting/daily/run_h481_earningsinone_two_stage_pead.py
+
+---
+
+## H482 — FinDPO Continuous Sentiment Scoring Upgrade for H174 PEAD Pipeline: STAGED (2026-07-30)
+
+**Source**: arXiv:2507.18417 (Jul 2026) — "FinDPO: Financial Sentiment Analysis for Algorithmic Trading through Preference Optimization of LLMs"
+
+**Universe**: H174 PEAD universe (S&P 500 earnings events)
+**IS/OOS**: IS 2022-2023 / OOS 2024-2026
+**Gate**: OOS WR > 81.8% AND mean_ret > 6.89% AND n ≥ 20 events
+
+**Method**: DPO-aligned LLMs produce better-calibrated continuous sentiment scores than FinBERT's supervised fine-tuning. FinDPO's logit-to-score conversion gives a continuous [0,1] signal vs FinBERT's discrete {positive, negative, neutral}. Key results: 11% accuracy improvement over supervised fine-tuned models; Sharpe 2.0 under 5bp transaction costs.
+
+**Variants**:
+| Var | Description |
+|-----|-------------|
+| A | FinBERT score × FinDPO score (ensemble) — gate: product > 0.05 |
+| B | FinDPO score alone ≥ 0.25 (higher threshold than FinBERT 0.18) |
+| C | FinDPO continuous score → position sizing (size proportional to score) |
+| D | FinBERT gate (≥ 0.18) + FinDPO score > 0.50 (double-filter) |
+
+**Implementation note**: Verify FinDPO package on PyPI before pip install (hallusquatting defense). Run pip-audit after install. Verify training data — FinDPO may not have been trained specifically on earnings 8-K filings.
+
+**Status**: STAGED — medium risk. Note: originally labeled H465 in nightly research; renumbered H482 as H465 was already taken by a 2026-07-28 staged hypothesis (LLM-Finetuned Merger Arbitrage).
+
+**Script**: backtesting/daily/run_h482_findpo_sentiment_upgrade.py
+
+---
+
+## H483 — OB Filter on H411 Var B — Order Block Applied to True H-Series Champion (4.825): STAGED (2026-07-30)
+
+**Source**: Internal — follows H344 (OB+H198: 1.174→3.396) and H476 (OB+H417: 0.383→1.929) pattern
+
+**Universe**: NASDAQ_30 (same 30 stocks as H411/H198)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 4.825 (H411 Var B baseline) AND MaxDD improvement ≥ 0.5pp
+
+**Method**: SMC Order Block filter selects stocks with bullish unmitigated order blocks from top candidates generated by H411 Var B signal (1/price rank × 20d drift gate >0.60, top-2). OB filter has confirmed consistent improvement on NASDAQ momentum strategies: H343, H344, H345, H346, H476 all confirmed. H411 Var B is the strongest baseline, so improvement should be at least proportional. Analogous to H344 which doubled H198 Sharpe (1.174→3.396, +189%).
+
+**Signal**: H411 Var B: rank(1/monthly_price) × drift_mask(window=20, threshold=0.60), shift(1), top-2. OB filter from candidate_n=5 top stocks selects those with bullish unmitigated order blocks.
+
+**OB parameter grid**:
+| ob_window | min_filter | swing_len |
+|-----------|------------|-----------|
+| 20 | 1 | 3 |
+| 20 | 1 | 5 |
+| 20 | 2 | 3 |
+| 20 | 2 | 5 |
+| 30 | 1 | 3 |
+| 30 | 1 | 5 |
+| 30 | 2 | 3 |
+| 30 | 2 | 5 |
+
+**Prior art**: H411 Var B CONFIRMED OOS 4.825; H344 CONFIRMED OB+H198 3.396; H476 NOT CONFIRMED (gate issue — inflated 5.855 gate, but OB still lifted 5×: 0.383→1.929).
+
+**Status**: STAGED — highest priority backtest in current queue. Note: originally labeled H478 in nightly research; renumbered H483 as H478 is taken by Golden Criterion (scan session 2026-07-30).
+
+**Script**: backtesting/daily/run_h483_ob_filter_h411_varb.py
