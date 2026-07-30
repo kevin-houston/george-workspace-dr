@@ -1,0 +1,45 @@
+{
+  "scan_date": "2026-07-30",
+  "scan_type": "nightly_dream_cycle",
+  "papers_reviewed": 18,
+  "papers_staged": 3,
+  "proposals": [
+    {
+      "id": "H476",
+      "file": "h476_split_session_garch_ibs_overnight.json",
+      "source": "arXiv:2607.03669",
+      "title": "Split-Session Cluster GARCH Overnight/Intraday Tail Decomposition as IBS Entry Filter",
+      "relevance": "high — directly targets IBS strategy (30% production portfolio) with overnight/intraday tail heterogeneity gate"
+    },
+    {
+      "id": "H477",
+      "file": "h477_herding_momentum_reversal_network.json",
+      "source": "arXiv:2607.27063",
+      "title": "Network-Herding Momentum-Reversal Transition Signal on H198 Stock Universe",
+      "relevance": "medium — theoretical grounding for momentum age/streak signal on H198; addresses momentum saturation problem"
+    },
+    {
+      "id": "H478",
+      "file": "h478_golden_criterion_naive_diversification_h026.json",
+      "source": "arXiv:2607.11054",
+      "title": "Golden Criterion Adaptive Equal-Weight vs Optimized Blend for H026 ETF Rotation",
+      "relevance": "high — directly addresses H026 OOS degradation (0.785 vs 1.2 IS) via principled adaptive concentration metric"
+    }
+  ],
+  "papers_noted_low_relevance": [
+    {"id": "arXiv:2607.13929", "title": "VAIOM Continuous-Input Discrete-Output Financial Sequence Modeling", "reason": "FX 1-hour bars; not monthly rebalancing"},
+    {"id": "arXiv:2607.09702", "title": "AI Compute Asset Pricing", "reason": "compute futures pricing — macro interest but not immediately actionable as backtest hypothesis"},
+    {"id": "arXiv:2607.03082", "title": "Portfolio Optimization and Tail-Risk Analytics of Actively Managed ETFs", "reason": "focuses on 30 actively managed ETFs 2020-2025 only; limited OOS window"},
+    {"id": "arXiv:2607.03669", "title": "Split-Session Cluster GARCH", "reason": "STAGED as H476"},
+    {"id": "arXiv:2606.09104", "title": "Bayesian VAR Elliptical Black-Litterman", "reason": "already covered by H473 neural predicates BL path"}
+  ],
+  "wiki_expansion": {
+    "target_section": "Concepts (General Trading)",
+    "reason": "thinnest section with only 1 page (quant-convergence-value-factor.md) and minimal cross-linking",
+    "pages_created": 2,
+    "new_pages": [
+      "wiki/concepts/overnight-intraday-decomposition.md",
+      "wiki/concepts/herding-momentum-reversal-network-theory.md"
+    ]
+  }
+}

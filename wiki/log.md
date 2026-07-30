@@ -2,7 +2,10 @@
 
 Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
-Last scan completed: 2026-07-27 (5 staged proposals H464–H468, 5 new wiki pages)
+Last scan completed: 2026-07-30 (3 staged proposals H476–H478, 2 new wiki pages)
+
+## [2026-07-30] dream-cycle | arXiv scan + wiki expansion
+Pages created: 2 (concepts/overnight-intraday-decomposition.md, concepts/herding-momentum-reversal-network-theory.md). Pages updated: 1 (index). Hypotheses staged: 3 (H476–H478). Sources: arXiv:2607.03669 (Split-Session Cluster GARCH overnight/intraday tail heterogeneity), arXiv:2607.27063 (Herding-Momentum-Reversal network model, China A-shares), arXiv:2607.11054 (Golden Criterion naive diversification). Papers reviewed: 18. Wiki expansion target: Concepts (General Trading) — thinnest section (was 1 page); added overnight-intraday decomposition and herding network theory pages. Index page count: 246 → 248.
 
 ## [2026-07-27] dream-cycle | arXiv scan + wiki expansion (second pass)
 Pages created: 5 (concepts/blended-finance.md, concepts/green-bonds-sustainability-finance.md, concepts/quant-convergence-value-factor.md, trading/algorithms/stn-tgat-graph-attention.md, ai-industry/finbench-calibration-2026.md). Pages updated: 1 (index). Hypotheses staged: 5 (H464–H468). Sources: arXiv:2607.19385 (STN-TGAT graph attention portfolio), arXiv:2607.09921 (LLM merger arbitrage, Brier 0.151), arXiv:2606.24575 (Quant Convergence, Graham RF 232%), arXiv:2607.16229 (FinBench calibration), arXiv:2606.24950 (MacroLens 4-signal benchmark). Wiki expansion target: Impact Investing — thinnest section (was 7 concept/source pages); added Blended Finance and Green Bonds pages to expand to 9. Also added 3 cross-section/AI pages. Index page count: 238 → 244.

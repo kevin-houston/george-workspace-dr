@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-29
+updated: 2026-07-30
 sources_indexed: 4
-pages: 246
+pages: 248
 ---
 
 # Wiki Index
@@ -284,6 +284,8 @@ When answering a query:
 
 **Concepts (General Trading)**
 - [Quant Convergence — Classical Value Investing and Modern Factor Models](concepts/quant-convergence-value-factor.md) — arXiv:2606.24575 (Yamazaki 2026); Graham RF 232% return / Calmar 1.38 best risk-adjusted; AutoGluon 222% but -40% MaxDD; Combined RF (mom+Graham) lowest MaxDD; margin of safety as ML regularizer; H466 design basis; explains H337/H448 NOT CONFIRMED (no Graham variation in H198 large-cap universe) ← new 2026-07-27
+- [Overnight-Intraday Return Decomposition](concepts/overnight-intraday-decomposition.md) — Chen, Hansen & Tong (arXiv:2607.03669, Jul 2026); Split-Session Cluster GARCH; overnight tail index ~3.8 (heavier) vs intraday ~5.2; news-arrival days (fat overnight) generate trend continuation not IBS reversal; H476 overnight gate design; integrates with FRI magnitude mechanism and IBS OOS Sharpe 2.129 production strategy ← new 2026-07-30
+- [Herding, Momentum, and Reversal — Network Information Diffusion Theory](concepts/herding-momentum-reversal-network-theory.md) — arXiv:2607.27063 (Jul 2026); agent-based network model; local herding creates momentum (1-9m), information diffusion saturation creates reversal (9-24m); momentum streak signal: stocks in top-N momentum rank for 6+ consecutive months face reversal risk; H477 design basis for H198 30-stock universe ← new 2026-07-30
 
 **People**
 - [Yasemin Saltuk](people/yasemin-saltuk.md) — J.P. Morgan Social Finance lead researcher; impact investing research series
