@@ -1,0 +1,37 @@
+{
+  "id": "2026-07-30-findpo-h465",
+  "date": "2026-07-30",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2507.18417",
+  "title": "H465: FinDPO continuous sentiment scoring as FinBERT upgrade in H174 pipeline",
+  "rationale": "arXiv:2507.18417 'FinDPO: Financial Sentiment Analysis for Algorithmic Trading through Preference Optimization of LLMs' (July 2026) introduces the first DPO-aligned financial LLM with a logit-to-score conversion that produces CONTINUOUS sentiment probabilities rather than FinBERT's discrete {positive, negative, neutral} classification. Key results: 11% accuracy improvement over supervised fine-tuned models; Sharpe ratio 2.0 under 5bp transaction costs. H174 uses FinBERT with a binary threshold (score >= 0.18 = positive) — this is crude: FinBERT probability 0.19 is treated the same as 0.95. FinDPO's continuous scoring could: (1) improve position sizing (scale by score magnitude), (2) raise WR by using higher threshold, (3) provide a better filter when combined with H464's two-stage framework. H465 tests whether replacing FinBERT with FinDPO (or using FinDPO score alongside FinBERT) improves H174 OOS WR above 81.8%.",
+  "risk_level": "medium",
+  "type": "hypothesis",
+  "target_file": "/workspace/agent/backtesting/daily/run_h465.py",
+  "hypothesis_log_entry": {
+    "id": "H465",
+    "status": "PROPOSED",
+    "title": "FinDPO Continuous Sentiment Scoring Upgrade for H174 PEAD Pipeline",
+    "source": "arXiv:2507.18417 (July 2026)",
+    "mechanism": "DPO-aligned LLMs produce better-calibrated continuous sentiment scores than supervised fine-tuning (FinBERT). In financial NLP, calibration matters: a barely-positive score should carry less weight than a strongly-positive score. FinDPO's 'logit-to-score' conversion creates a signal that can be used as a continuous weight or higher-confidence gate.",
+    "design": {
+      "variants": {
+        "A": "FinBERT score multiplied by FinDPO score (ensemble) — gate stays at product > 0.05",
+        "B": "FinDPO score alone >= 0.25 (higher threshold than FinBERT 0.18)",
+        "C": "FinDPO continuous score → position sizing (size proportional to score)",
+        "D": "FinBERT gate (>= 0.18) + FinDPO score > 0.50 (double-filter)"
+      },
+      "gate": "OOS WR > 81.8% AND mean_ret > 6.89% AND n >= 20 events"
+    },
+    "implementation_notes": [
+      "FinDPO model needs to be pulled from HuggingFace — verify package name on PyPI first (hallusquatting defense)",
+      "Run pip-audit after installing any new model package",
+      "Evaluate on same H174 OOS events (21+ confirmable events) to allow direct comparison",
+      "Caution: FinDPO may not have been trained specifically on earnings 8-K filings — verify training data before assuming transfer"
+    ],
+    "priority": "MEDIUM — after H464 which has stronger theoretical backing and public data",
+    "prior_art": "H174 CONFIRMED; H163 CONFIRMED; H168 NOT CONFIRMED (speaker-weighted FinBERT); H317 NOT CONFIRMED (FinBERT + EPS filter reduces n below gate)"
+  },
+  "action": "propose_hypothesis",
+  "apply_status": "pending"
+}

@@ -1,0 +1,90 @@
+{
+  "date": "2026-07-30",
+  "scan_type": "nightly_dream_cycle",
+  "angles_searched": [
+    "PEAD + text signals + earnings LLM (arXiv q-fin July 2026)",
+    "Cross-sectional momentum + factor signals (arXiv July 2026)",
+    "Multi-agent LLM portfolio management (arXiv 2026)",
+    "Options volatility + IV surface + GARCH (arXiv 2026)",
+    "GitHub quant repos + ML trading open source"
+  ],
+  "papers_reviewed": [
+    {
+      "arxiv": "2606.29734",
+      "title": "Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals",
+      "relevance": "HIGH",
+      "outcome": "staged as H464 proposal"
+    },
+    {
+      "arxiv": "2507.18417",
+      "title": "FinDPO: Financial Sentiment Analysis through Preference Optimization of LLMs",
+      "relevance": "MEDIUM",
+      "outcome": "staged as H465 proposal"
+    },
+    {
+      "arxiv": "2607.05291",
+      "title": "Forecasting Realized Volatility with Time Series Foundation Models",
+      "relevance": "MEDIUM",
+      "outcome": "staged as wiki update (negative result — TSFMs don't beat HAR reliably)"
+    },
+    {
+      "arxiv": "2507.07107",
+      "title": "ML Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Optimization with Bias Correction",
+      "relevance": "LOW-MEDIUM",
+      "outcome": "not staged — A-share specific; bias correction finding (upstream contamination inflates IC 18%) is useful checklist item but not a new hypothesis for US equities"
+    },
+    {
+      "arxiv": "2607.05320",
+      "title": "Causal Separation, Conditional Risk, and Projected Markowitz Portfolios",
+      "relevance": "LOW",
+      "outcome": "not staged — purely theoretical framework without empirical trading results"
+    },
+    {
+      "arxiv": "2607.08907",
+      "title": "Herding and Liquidity in Order-Book Markets",
+      "relevance": "LOW",
+      "outcome": "not staged — agent-based microstructure model; not actionable as trading signal"
+    },
+    {
+      "arxiv": "2509.01743",
+      "title": "Controllable Generation of Implied Volatility Surfaces with Variational Autoencoders",
+      "relevance": "MEDIUM",
+      "outcome": "incorporated into iv-surface-forecasting-2026.md wiki expansion (Phase 1)"
+    },
+    {
+      "arxiv": "2603.21892",
+      "title": "Discovering parametrizations of implied volatility with symbolic regression",
+      "relevance": "MEDIUM",
+      "outcome": "incorporated into iv-surface-forecasting-2026.md wiki expansion (Phase 1)"
+    }
+  ],
+  "internal_proposals": [
+    {
+      "id": "H478",
+      "title": "OB Filter on H411 Var B (actual H-series champion 4.825)",
+      "source": "internal — follows H344/H476 OB filter pattern",
+      "outcome": "staged as H478 proposal — highest priority backtest"
+    }
+  ],
+  "proposals_staged": 4,
+  "proposals_files": [
+    "dream_cycle/staged/2026-07-30/1_earningsinone_two_stage_pead_h464.json",
+    "dream_cycle/staged/2026-07-30/2_findpo_sentiment_upgrade_h465.json",
+    "dream_cycle/staged/2026-07-30/3_tsfm_realized_vol_negative_result_wiki.json",
+    "dream_cycle/staged/2026-07-30/4_h478_ob_filter_h411_varB.json"
+  ],
+  "key_findings": [
+    "EarningsInOne corpus (arXiv:2606.29734) provides clean proof of two-speed PEAD: numeric surprise decays by next open, qualitative ECT text remains tradeable +1 day. Direct H174 upgrade path.",
+    "TSFMs (arXiv:2607.05291) offer negligible improvement over Log-HAR for RV forecasting — keep VRP = VIX - RV22d simple for H448.",
+    "FinDPO continuous scoring (arXiv:2507.18417) could improve H174 threshold calibration — Sharpe 2.0 with 5bp costs, 11% accuracy gain.",
+    "H478 (OB filter on H411 Var B 4.825) is the single highest-priority backtest — analogous to H344 which doubled H198 Sharpe.",
+    "H417 baseline was inflated in CLAUDE.local.md (claims 5.855 but corrected OOS is 0.383). Real H-series record is H411 Var B 4.825."
+  ],
+  "phase1_wiki": {
+    "target": "iv-surface-forecasting-2026.md",
+    "expansion": "93 lines → ~230 lines",
+    "papers_added": ["arXiv:2603.21892", "arXiv:2509.01743", "SSRN:4531181", "JFM-Duan-2026"],
+    "code_added": ["VIX proxy VRP", "SVI calibration", "IV moment extraction from Polygon", "surface arb check"],
+    "commit": "4b5fbea"
+  }
+}

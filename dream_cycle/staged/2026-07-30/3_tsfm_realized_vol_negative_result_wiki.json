@@ -1,0 +1,14 @@
+{
+  "id": "2026-07-30-tsfm-realized-vol-negative",
+  "date": "2026-07-30",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2607.05291",
+  "title": "Wiki update: time series foundation models barely beat HAR for realized vol — negative result for H448 Var C path",
+  "rationale": "arXiv:2607.05291 'Forecasting Realized Volatility with Time Series Foundation Models' (July 2026) evaluates 9 zero-shot TSFMs (including Tiny Time Mixers TTM) against 8 econometric benchmarks on the VOLARE dataset (50 assets: equities, forex, futures). Sobering finding: 'Foundation models do not deliver a uniform gain. Pooled losses favor them, but the advantage is concentrated in a few outlier assets.' Only TTM consistently beat Log-HAR, and by a narrow margin. The short-horizon advantage 'reflects better-scaled forecasts rather than better prediction of volatility dynamics.' This is an important NEGATIVE RESULT for our H448 design: if TSFMs don't reliably beat HAR for realized volatility forecasting, using them to compute the RV leg of the VRP signal (predicted IV − RV) adds complexity without improving signal quality. The simpler RV22d (22-day rolling realized vol) is adequate. Update iv-surface-forecasting-2026.md and volatility-risk-premium.md with this finding.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/iv-surface-forecasting-2026.md",
+  "content": "## Time Series Foundation Models for Realized Vol: Negative Result\n\n**arXiv:2607.05291** 'Forecasting Realized Volatility with Time Series Foundation Models' (July 2026) evaluates 9 zero-shot TSFMs vs 8 econometric benchmarks on 50 assets.\n\n**Finding:** TSFMs provide no reliable improvement over Log-HAR for realized volatility forecasting. Only TTM beats Log-HAR by a narrow margin; much of the short-horizon advantage reflects better forecast scaling rather than better dynamics prediction.\n\n**Implication for H448:** The RV leg of the VRP signal (IV_forecast − RV_realized) should use **RV22d (22-day rolling realized vol)** not a TSFM. Adding TSFM complexity to the RV computation adds engineering overhead with negligible signal improvement.\n\n**What TSFMs ARE good for:** Cross-sectional return prediction where training data is large and diverse; NOT for univariate vol-of-vol forecasting where HAR captures the relevant persistence structure already.\n\n**Best practice for H448:** VRP = VIX − RV22d (simple, fast, tested). Only upgrade RV estimator if Garman-Klass or Yang-Zhang intraday estimators show improvement — they better capture overnight jumps without adding ML complexity.",
+  "action": "append",
+  "apply_status": "pending"
+}
