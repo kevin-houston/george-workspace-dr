@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Session Summary — 2026-07-30</title>
+  
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--orange:#f0883e;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.6;padding:0;}
+
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:baseline;justify-content:space-between;}
+.header-title{font-size:16px;font-weight:700;letter-spacing:.3px;}
+.header-sub{color:var(--muted);font-size:12px;}
+
+.main{padding:20px 24px;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1.1;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.muted{color:var(--muted);}
+
+/* Section card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.card-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.card-badge{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:2px 8px;color:var(--muted);}
+.card-body{padding:14px 16px;}
+
+/* Proposals */
+.proposal{padding:10px 0;border-bottom:1px solid var(--border);}
+.proposal:last-child{border-bottom:none;}
+.proposal-header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.proposal-title{font-size:13px;font-weight:600;}
+.risk-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+.risk-medium{background:rgba(210,153,34,.18);color:var(--yellow);border:1px solid rgba(210,153,34,.3);}
+.risk-high{background:rgba(248,81,73,.18);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.risk-low{background:rgba(63,185,80,.18);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.proposal-rationale{font-size:12px;color:var(--muted);margin-top:3px;}
+.proposal-target{font-size:11px;color:var(--blue);font-family:monospace;margin-top:3px;}
+
+/* Commit list */
+.commit{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;display:flex;gap:10px;}
+.commit:last-child{border-bottom:none;}
+.commit-hash{font-family:monospace;color:var(--blue);flex-shrink:0;}
+.commit-msg{color:var(--text);}
+
+/* Podcast */
+.podcast-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;}
+.podcast-dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:10px;}
+.link-btn{display:inline-block;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--blue);background:var(--surface);}
+.link-btn:hover{border-color:var(--blue);}
+
+/* Raw changelog */
+pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;overflow-x:auto;white-space:pre-wrap;color:var(--muted);margin-top:10px;}
+
+.empty{color:var(--muted);font-size:12px;padding:4px 0;}
+</style>
+
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-title">Session Summary &mdash; 2026-07-30</div>
+    </div>
+    <div class="header-sub">Generated 2026-07-30 04:14 CT</div>
+  </div>
+  <div class="main">
+    
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Proposals Applied</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Flagged</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Commits</div>
+        <div class="kpi-value blue">5</div></div>
+      <div class="kpi"><div class="kpi-label">Podcast</div>
+        <div class="kpi-value muted">—</div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Dream Cycle</span>
+        <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
+      </div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H464: Two-stage PEAD with EarningsInOne — numeric surprise + qualitative ECT signal</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2606.29734 'Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals' (Ding Yu et al., June 2026) introduces EARNINGSINONE — the first corpus aligning earnings news, ECTs, and intraday/next-day prices for S&amp;P 1500 (2022-2025). Key finding: 'a clean speed separation' …</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h464.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H465: FinDPO continuous sentiment scoring as FinBERT upgrade in H174 pipeline</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2507.18417 'FinDPO: Financial Sentiment Analysis for Algorithmic Trading through Preference Optimization of LLMs' (July 2026) introduces the first DPO-aligned financial LLM with a logit-to-score conversion that produces CONTINUOUS sentiment probabilities rather than FinBERT's discrete {positiv…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h465.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki update: time series foundation models barely beat HAR for realized vol — negative result for H448 Var C path</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">arXiv:2607.05291 'Forecasting Realized Volatility with Time Series Foundation Models' (July 2026) evaluates 9 zero-shot TSFMs (including Tiny Time Mixers TTM) against 8 econometric benchmarks on the VOLARE dataset (50 assets: equities, forex, futures). Sobering finding: 'Foundation models do not del…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/iv-surface-forecasting-2026.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">H478: OB filter on H411 Var B — OB pattern applied to actual H-series champion (OOS 4.825)</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">H476 tested OB filter on H417 60-stock universe, but discovered H417's baseline was weak (OOS 0.383, not 5.855 as inflated CLAUDE.local.md claimed). The OB filter still lifted baseline by 5× (0.383→1.929). The appropriate test is to apply OB filter to the ACTUAL H-series champion: H411 Var B (30-sto…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h478.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Split-Session Cluster GARCH Overnight/Intraday Tail Decomposition as IBS Entry Filter</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target">backtesting/daily/run_h476_split_session_garch_ibs.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Network-Herding Momentum-Reversal Transition Signal on H198 Stock Universe</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target">backtesting/daily/run_h477_herding_momentum_reversal.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Golden Criterion Adaptive Equal-Weight vs Optimized Blend for H026 ETF Rotation</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target">backtesting/daily/run_h478_golden_criterion_h026.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title"></span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--yellow)">pending</span>
+              </div>
+              <div class="proposal-rationale"></div>
+              <div class="proposal-target"></div>
+            </div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Commits</span>
+        <span class="card-badge">5 today</span>
+      </div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">1f01fa7</span><span class="commit-msg">dream cycle: apply 2026-07-30 staged proposals (H478-H483)</span></div><div class="commit"><span class="commit-hash">81380d3</span><span class="commit-msg">dream cycle 2026-07-30: EarningsInOne PEAD + FinDPO + H478 OB proposals + 3 new scripts</span></div><div class="commit"><span class="commit-hash">58434ca</span><span class="commit-msg">dream cycle 2026-07-30: EarningsInOne PEAD + FinDPO + H478 OB proposals</span></div><div class="commit"><span class="commit-hash">4b5fbea</span><span class="commit-msg">nightly research 2026-07-30: IV surface forecasting wiki expansion</span></div><div class="commit"><span class="commit-hash">db52d04</span><span class="commit-msg">nightly backup 2026-07-30</span></div></div>
+    </div>
+    
+    
+  </div>
+</body>
+</html>

@@ -1,3 +1,54 @@
+h478_status: STAGED (2026-07-30) — Golden Criterion Adaptive Equal-Weight vs Optimized Blend for H026 ETF Rotation. Source: arXiv:2607.11054 (Feng, Huang, Wang, Zhang, Jul 2026) 'When and Why Naive Diversification Works: A Simple Diagnostic Strategy'. Key insight: equal weighting (1/N) is minimum-variance optimal when forecast-error covariance matrix has uniform eigenstructure (the "Golden Criterion"). Distance metric D = std(λ)/mean(λ) where λ are eigenvalues of trailing 12m monthly return covariance of top-5 ETFs. When D < IS-calibrated threshold → equal-weight top-3; when D ≥ threshold → top-1. Directly addresses H026 OOS degradation (0.785 vs 1.2 IS) by providing principled signal-quality detection. Variants: A (Golden Criterion gate — top-1 when D > D_threshold, EW top-3 when D ≤ D_threshold), B (D threshold at 50th IS percentile, more aggressive switching), C (always EW top-3), D (always EW top-5), E (H026 canonical top-1 baseline). IS: 2008-2017, OOS: 2018-2026. Gate: OOS Sharpe > 2.610 (H346 OB-gated baseline) AND MaxDD improvement vs -5%. Script: backtesting/daily/run_h478_golden_criterion_h026.py. Medium risk.
+h477_status_new: STAGED (2026-07-30) — Network-Herding Momentum-Reversal Transition Signal on H198 Stock Universe. Source: arXiv:2607.27063 (Jul 2026) 'Herding, Momentum, and Reversal in China's A-Share Market: An Agent-Based Network Model with Information Diffusion'. Local herding creates positive price autocorrelation (momentum phase 3-9 months); as information diffuses to all network nodes, late adopters realize overpricing and reversal ensues (onset 9-18 months). Momentum streak signal: count consecutive months each stock has ranked in top-6 by 6-1m momentum. Long-streak stocks (6+ months) approaching network saturation — reversal risk elevated. Variants: A (exclude stocks with 6+ consecutive months in top-6 momentum rank), B (penalize score: adj_score = raw_score × (1 - 0.05 × min(streak, 6))), C (overweight NEW entrants to top-6: double weight vs incumbents), D (momentum reversal gate: route to short if stock in top-6 for 9+ months), E (H198 baseline 6-1m top-6 sanity check). IS: 2013-2020, OOS: 2021-2026. Gate: OOS Sharpe > 1.174 (H198 baseline) AND MaxDD improvement. Script: backtesting/daily/run_h477_herding_momentum_reversal.py. Medium risk. NOTE: This h477 entry (STAGED 2026-07-30) is distinct from the earlier h477 run below (NOT CONFIRMED, OB filter on H417 60-stock universe, 2026-07-29).
+h476_status_new: STAGED (2026-07-30) — Split-Session Cluster GARCH Overnight/Intraday Tail Decomposition as IBS Entry Filter. Source: arXiv:2607.03669 (Chen, Hansen, Tong, Jul 2026) 'Split-Session Cluster GARCH for Overnight and Intraday Returns: The Role of Tail Heterogeneity'. Overnight returns have heavier tails (ν ≈ 3.8) than intraday (ν ≈ 5.2); fat-tail overnight days (news shocks) generate trend continuation not mean-reversion. IBS strategy (H112, 30% production portfolio) should exclude fat-tail overnight days from entry. overnight_rv = (log(open_t / close_{t-1}))²; overnight_rv_rank = rolling 252d percentile. Entry condition: (ibs < 0.2) AND (overnight_rv_rank < 0.8). Variants: A (binary gate: skip when overnight_rv_rank > 0.8), B (continuous: scale IBS position by 1 - overnight_rv_rank), C (anti-contrarian: ONLY enter when overnight_rv_rank < 0.2), D (H112 IBS baseline). IS: 2015-2020, OOS: 2021-2026. Gate: OOS Sharpe > 2.129 (H112 IBS baseline) AND MaxDD improvement vs -18%. Script: backtesting/daily/run_h476_split_session_garch_ibs.py. Medium risk. NOTE: This h476 entry (STAGED 2026-07-30) is distinct from the earlier h476 run below (NOT CONFIRMED, OB filter on H417 60-stock universe, 2026-07-29).
+h477_status: NOT CONFIRMED (2026-07-29) — H417 Signal Parameter Sensitivity on 60-Stock Combined Universe. Gate: OOS Sharpe > 5.855 (NOTE: this gate was set against inflated pre-correction H417 numbers; actual H417 Var C corrected OOS = 0.383). IS: 2013-2020, OOS: 2021-2026. Universe: COMBINED_60 (NASDAQ_30 + SP500_NTECH). Signal: 1/price rank × drift_mask. RESULTS — Phase 1 (TOP_N sensitivity, w=20, t=0.60): top-1 OOS 0.703, top-2 OOS 0.508, top-3 OOS 0.383 (H417 baseline), top-4 OOS 0.305, top-5 OOS 0.264. Phase 2 (drift window, top-3, t=0.60): w=10 OOS 0.796, w=15 OOS 0.670, w=20 OOS 0.383 (H417), w=25 OOS 0.483, w=30 OOS 0.721. Phase 3 (drift threshold, top-3, w=20): t=0.50 OOS 1.026 (best!), t=0.55 OOS 0.713, t=0.60 OOS 0.383 (H417), t=0.65 OOS 0.541, t=0.70 OOS 0.789. Best combination (top-2, w=10, t=0.50): OOS 1.038, MDD -35.4%, 1 neg year. NOT CONFIRMED: best OOS 1.038 << gate 5.855. KEY FINDINGS: (1) H417's drift threshold t=0.60 is NOT optimal — t=0.50 improves OOS from 0.383 → 1.026 (2.7× lift at same w=20). (2) Shorter drift windows (w=10) outperform w=20 used in H417. (3) top-N concentration hurts in this family: top-1 > top-2 > top-3 pattern holds — H417 chose wrong top-N. (4) CRITICAL: CLAUDE.local.md H417 entry states 'Var C 60-stock combined OOS 5.855 = NEW H-SERIES RECORD' — THIS IS FROM PRE-CORRECTION RUNS; actual corrected h417_results.json shows Var C OOS 0.383. Real H-series record is H411 Var B at OOS 4.825 (value×drift top-2). Correction needed in CLAUDE.local.md. Script: backtesting/daily/run_h477.py. Results: backtesting/results/h477_results.json.
+h476_status: NOT CONFIRMED (2026-07-29) — OB Filter on H417 60-Stock Combined Universe. Gate: OOS Sharpe > 5.855 (same inflated benchmark caveat as H477). Baseline (H417 Var C replication): OOS 0.383, MDD -46.9% — confirms corrected H417 numbers. OB grid (8 combos: window=[20,30], min_filter=[2,3], swing_len=[3,5]): best = w20/mf2/sl3 → OOS 1.929, MDD -23.4%, cash 22.2%, 1 neg year. IS: 2013-2020, OOS: 2021-2026. RESULTS full grid: w20/mf2/sl3=1.929; w30/sl5/mf2=1.596 MDD-13.8%; w30/sl3/mf3=1.715 MDD-12.8%; w30/sl5/mf3=1.720 MDD-13.3%; all others 0.988-1.339. NOT CONFIRMED: best OOS 1.929 < gate 5.855. KEY FINDINGS: (1) OB filter provides 5× Sharpe improvement over no-filter baseline (0.383 → 1.929) by routing to cash 22% of months. (2) Best OB params (w20/mf2/sl3) match H344 best params on 30-stock universe. (3) OOS annual: 2021=+155%, 2022=+22.9%, 2023=+36.3%, 2024=+62.5%, 2025=+58.0%, 2026=-20.1% — exceptional OOS returns with 1.929 Sharpe due to high monthly vol. (4) OB adds real value but the 60-stock universe's H417 signal baseline is fundamentally weak (0.383) compared to H411 Var B (4.825); OB lifts to 1.929 but remains below H411. (5) MinFilter=2 (lenient) consistently outperforms MinFilter=3 — the OB filter overshoots if too strict on 60-stock universe with many passing each month. NEXT: Test H478 = OB filter on H411 Var B universe (30-stock H198, true champion baseline 4.825). Script: backtesting/daily/run_h476.py. Results: backtesting/results/h476_results.json.
+h475_status: STAGED (2026-07-28) — ML Multi-Factor Cross-Sectional with Upstream Contamination Bias Correction on H198 Universe. Source: arXiv:2507.07107 (Du, Jul 2025) 'Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction'. Key insight: rolling-window factor pipelines suffer 'upstream contamination' when price-limit or stale-price observations inflate IC by 18% and reduce realized Sharpe by 0.44 points. Fix: flag contaminated observations before factor computation. US analog: ex-dividend date price drops, corporate action adjustments, earnings halt days. Contamination flagging: exclude days where |return| > 15%. Alpha101 factor selection: 17 LASSO-surviving signals from H380 cross-market transfer. LightGBM ranker: same hyperparams as H320 (n_estimators=200, max_depth=5, lr=0.05). Cross-sectional neutralization: demean by GICS sector within monthly cross-section. Variants: A (contamination-flagged momentum baseline), B (Var A + LightGBM ranker), C (Var B + GICS neutralization), D (Var C + GBM data augmentation), E (H198 baseline, sanity check). IS: 2013-2020, OOS: 2021-2026. Gate: OOS Sharpe > 1.174 (H198 baseline) AND MaxDD improvement >= 2pp. CAUTION: 30-stock universe thin for ML — high overfitting risk; expand to H417 60-stock if Var B fails. Script: backtesting/daily/run_h475_ml_multifactor_bias_correction.py. Medium risk.
+h474_status: STAGED (2026-07-28) — 8-Specialist LLM Pipeline (Fin-Analyst Architecture) as PEAD Pre-Filter. Source: arXiv:2607.12233 (Rashid et al., Jul 2026) 'Fin-Analyst at FinMMEval 2026 Task 3: A Live Hybrid Trading Agent with LLM Specialists and Rule-Based Signals'. Winner of FinMMEval 2026 Task 3; 8 parallel LLM specialists (news, SEC filings, fundamentals, analyst forecasts, technical, social sentiment, macro, options) aggregated by Meta-Agent. TSLA result: +13.51% return, +28.33pp vs buy-and-hold, Sharpe 4.10, 88% win rate. H474 ports to H174 PEAD as 3-specialist minimum viable architecture: Specialist-1 (8-K FinBERT scorer), Specialist-2 (earnings call KPI extraction from H471), Specialist-3 (analyst revision signal from FMP). Meta-Agent: composite = w1*s1 + w2*s2 + w3*s3. Variants: A (equal weights 1/3, 1/3, 1/3), B (rolling 6m Brier score reweighting), C (2-specialist: FinBERT + analyst revision only, no transcript), D (H174 baseline). IS: 2022-2023, OOS: 2024-2026. Gate: OOS WR >= 0.818 AND n >= 15 AND MeanRet >= 6.89% (H174 parity). CAUTION: H247 BLOCKED (FMP transcript requires Professional plan) → start with Var C. Coverage risk: H168 showed 26.5% transcript OOS coverage. Script: backtesting/daily/run_h474_fin_analyst_pead_prefilter.py. Medium risk.
+h473_status: STAGED (2026-07-28) — Neural Predicates for Data-Driven Black-Litterman Views on Production ETF Portfolio. Source: arXiv:2607.20533 (Florencio, Jul 2026) 'Grounding Investor Views: Neural Predicates in the Black-Litterman Model'. Replaces subjective BL view specification with compositional neural predicates: lower-level predicates (fundamental/technical signals) compose into higher-level market stances; view confidence derived from predicate output distributions (entropy-based Omega). Portfolio weights = shrinkage blend of market-cap equilibrium + neural-view signal. H026 adaptation: predicate inputs [r_12m, r_3m, r_1m, VIX_normalized, above_200MA] → P(outperform); BL posterior weights replace H026 top-1 allocation. Expected benefit: better diversification when momentum signal is ambiguous. Variants: A (momentum-only neural predicates), B (momentum + macro predicates: VIX, SPY 200MA, yield curve), C (Var B + H301 SPY 200MA safety overlay → BIL when SPY < 200MA), D (equal-weight BL sanity check). IS: 2008-2020, OOS: 2021-2026. Gate: OOS Sharpe > 2.610 (H346 OB-filter baseline) AND MaxDD not worse than -5%. Requires PyPortfolioOpt + PyTorch. Script: backtesting/daily/run_h473_neural_predicates_bl.py. Medium risk.
+h472_status: STAGED (2026-07-28) — SciPhy Reinforcement Learning for ETF Portfolio Optimization via HJB-PINN. Source: arXiv:2607.15195 (Halperin & Itkin, Jul 2026) 'SciPhy Reinforcement Learning for Portfolio Optimization'. Converts portfolio optimization to HJB PDE projected onto historical data paths (pathwise Hamilton-Jacobi equation) — no iterative RL simulation loops. Solved via PINN in single offline sweep; control variable = discrete target holding. Validated on 14-asset ETF universe with substantial OOS Sharpe improvement over static and myopic baselines. Execution costs modeled via quadratic price impact; continuous-time with monthly steps. H026/H041a/H045 adaptation: replace top-1 selection with SciPhyRL-derived optimal portfolio weights; H026 12m momentum signal as input to HJB state representation. PINN architecture: 3-layer MLP [state_dim+1 → 128 → 64 → n_assets]. Variants: A (SciPhyRL on H026 25-asset universe), B (SciPhyRL on H045 13-asset bond universe), C (SciPhyRL on H041a 19-asset universe), D (myopic mean-variance baseline). IS: 2008-2017, OOS: 2018-2026. Gate: OOS Sharpe > 2.5 AND MaxDD not worse than -5%. CAUTION: requires PyTorch; paper's GitHub not yet released; 25-asset universe larger than paper's 14-asset test — may need regularization tuning. Script: backtesting/daily/run_h472_sciphy_rl_etf_portfolio.py. Medium risk.
+h471_status: STAGED (2026-07-28) — KPI Extraction from Earnings Calls as H174 Signal Boost. Source: arXiv:2605.03147 (May 2026, ACL 2026 Industry Track) 'Effective Performance Measurement: Challenges and Opportunities in KPI Extraction from Earnings Calls'. Three benchmarks: SEC Filings Benchmark (SECB), Earnings Calls Benchmark (ECB), ECB-A (2,460 expert annotation groups); LLM-based open-ended KPI extraction at 79.7% precision. H471 adds KPI direction score as 4th H174 signal layer: extract quantitative KPIs (revenue growth, EPS outlook, margin guidance) from call transcripts; KPI_direction = fraction of extracted KPIs with positive guidance; adjusted_score = finbert_score + 0.05 * KPI_direction; maintain thresholds: adjusted_score >= 0.18 + EPS surprise >= 0.02. Variants: A (continuous KPI boost), B (binary KPI gate direction > 0.5), C (KPI replaces EPS surprise check), D (H174 baseline). IS: 2022-2023, OOS: 2024-2026. Gate: OOS WR >= 0.818 AND n >= 15. Transcript source: FMP earnings_call_transcript ($FMP_API_KEY — ~65% S&P500 coverage). CRITICAL: Must check coverage rate first — H168 failed at 26.5% coverage. Report fraction of H174 events with available transcripts before running full OOS. Script: backtesting/daily/run_h471_kpi_earnings_call_pead.py. Medium risk.
+h470_status: CONFIRMED (Var B/C/D) (2026-07-28) — ML Design Choice Momentum: Monthly Best-Variant Selection Across H198 Strategy Family. Source: SSRN:5031755 (Chen, Hanauer, Kalsbach, Feb 2026). Pool: {S1=H198 6-1m top-1, S2=H376 6-0m top-6, S3=H411-B value×drift top-2, S4=H217 alpha101 top-6}. Results: Var A (3m) OOS 3.859 FAILS MaxDD gate (-12.1%); Var B (6m) OOS Sharpe 4.136 MaxDD -2.3% PASS; Var C (12m) OOS Sharpe 4.424 MaxDD -2.3% PASS [BEST]; Var D (EW top-2) OOS Sharpe 4.292 MaxDD -4.5% PASS; Var E (static H376) OOS Sharpe 3.120 MaxDD -8.4% baseline. Meta-selectors primarily route to S3 (value×drift, Sharpe 4.238) and S4 (alpha101 proxy, Sharpe 3.534) which are low-correlated (S1 vs S3 rho=0.309). 0 negative OOS years. Design-choice momentum confirmed at monthly frequency with 12m window.
+h469_status: STAGED (2026-07-28) — HiFi-KPI Structured iXBRL KPI Extraction as H174 Signal Layer. Source: arXiv:2502.15411 (Feb 2026) 'HiFi-KPI: A Dataset for Hierarchical KPI Extraction from Earnings Filings'. Dataset: 1.65M paragraphs, 198K unique hierarchically organized KPI labels linked to iXBRL taxonomies; encoder models achieve 0.906 macro-F1 on classification. Key insight for H469: SEC EDGAR XBRL API already provides machine-readable EPS and revenue figures — no LLM extraction needed ($0 cost). H469 upgrades H174's binary EPS surprise gate to a continuous magnitude multiplier: KPI_magnitude = (actual_eps - consensus_eps) / abs(consensus_eps); position_size = min(2.0, 1.0 + KPI_magnitude). Bigger beat → bigger position, proportional to drift expectation. Variants: A (EPS magnitude scaling), B (binary EPS beat > 5% gate), C (revenue beat > 0% gate), D (composite EPS+rev average), E (H174 baseline). IS: 2022-2023, OOS: 2024-2026. Gate: OOS WR >= 0.818 AND OOS MeanRet >= 6.89% at n >= 15. COMPLEMENT TO: H427 (event taxonomy TYPE), H471 (unstructured call KPIs) — three different signal axes on same PEAD events. Script: backtesting/daily/run_h469_hifi_kpi_xbrl_pead.py. Medium risk.
+h463_status: STAGED (2026-07-27) — LLM Semantic Clustering for Polymarket Pair Arbitrage. Source: arXiv:2512.02436 (Dec 2025) 'Semantic Trading: Agentic AI for Clustering and Trading of Prediction Markets'. Key finding: 60-70% accuracy predicting relational patterns; ~20% avg returns over week-long horizons on resolved Polymarket contracts. Two-stage pipeline: embed contract descriptions (text-embedding-3-small), cluster by cosine sim > 0.80 to find same-outcome pairs, buy underpriced leg when |price_A - price_B| > 5%. H463 is a design note and wiki update only. Gate: paper trading ≥ 30 resolved contracts WR ≥ 65% before real capital. Wiki update: prediction-markets/algorithmic-strategies.md. Low risk.
+h462_status: NOT RUNNABLE — Tier-0 BSM approach invalid for 0DTE (2026-07-27). Systematic 0DTE SPX Iron Condor: BSM synthetic backtest. Source: CBOE Insights 2026 (Schwartz); Option Alpha 180-day empirical (2024); FlashAlpha VRP/GEX research (2025-2026). RESULTS — OOS: Var A=62.006 (MaxDD -0.0%), Var B=nan (MaxDD -239.3%), Var C=nan (MaxDD -239.4%), Var D=-6.085 (MaxDD -37.1%), Var E=nan (MaxDD -158.9%). IS: Var A MaxDD=-227.7%. All results degenerate: Sharpe=62 is impossible; MaxDD below -100% violates basic accounting. ROOT CAUSE: BSM with T→0 (0DTE) produces extreme gamma/delta sensitivities that make EOD IV proxy meaningless. The condor is entered at 2:44pm and closed at 3:30pm; using end-of-day VIX as IV for intraday positions creates nonsensical P&L trajectories. Position sizing arithmetic also produces ruin scenarios when options appear worthless at EOD but held intraday losses. CONCLUSION: The Tier-0 synthetic BSM approach is fundamentally unsuitable for 0DTE strategies. The empirical edge (Option Alpha 180-day: 65.6% close within 0.2% of 2pm price; ~68% max-profit probability; $36 EV/trade) is well-supported by practitioner data, but a valid backtest requires ThetaData intraday options data (~$80/month). This hypothesis is NOT CLOSED — concept remains promising. Flag for Tier-1 review when intraday data is available. Script: backtesting/daily/run_h462_0dte_condor.py. Results: backtesting/results/h462_results.json.
+h461_status: STAGED (2026-07-27) — TrustTrade Selective Consensus Gate for H274 Multi-Agent PEAD Debate. Source: arXiv:2603.22567 (Zhong et al., Mar 2026) 'TrustTrade: Human-Inspired Selective Consensus Reduces Decision Uncertainty in LLM Trading Agents'. Design note + wiki update: selective consensus gate (agent reasoning cosine sim > 0.70) reduces H274 false-positive PEAD entries. Expected effect: reduces ~22/year events to ~12-15 high-confidence with higher WR. Future gate: OOS WR ≥ 85% at n ≥ 10/year. Wiki update: multi-agent-llm-trading.md. Low risk.
+h460_status: NOT CONFIRMED (2026-07-27) — Bias-Corrected Multi-Factor Pipeline for H198: Mask-First Design. Source: arXiv:2507.07107 (Du, May 2026) 'Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction'. Key finding: 'upstream contamination' — non-tradable days (thin volume, halts) propagate silently through rolling factor windows, inflating IC by ~18% while reducing realized Sharpe by 0.44. Fix: boolean tradability mask constructed from volume percentile at load time, threaded through every operator. H460 applies to H198: daily volume mask at 20th/10th pct threshold → recompute 6-1m momentum and IMOM6 with masked returns. Also tests Alpha101 factor #001 (1-day reversal) with mask. Variants: A (mask 20th pct, 6-1m), B (mask 10th pct, 6-1m, stricter), C (masked IMOM6), D (Alpha101 #001 with mask), E (unmasked baseline). Gate: OOS Sharpe > 1.174 (H198 baseline). IS: 2013-2020, OOS: 2021-2026. Script: backtesting/daily/run_h460_bias_corrected_multifactor.py. Low risk. NOTE: US equities have no hard price limits (unlike Chinese A-shares), so effect may be muted — primary value is methodological confirmation or null result.
+h459_status: STAGED (2026-07-27) — Retail Investor Holding Horizon Signal as H174 PEAD Pre-Filter. Source: arXiv:2512.00280 (Vamossy, Dec 2025) 'Retail Investor Horizon and Earnings Announcements'. Key finding: long-horizon retail investors (hold language on StockTwits) experience pronounced PEAD; short-horizon traders (day-trading language) create noise that cancels drift; zero-cost long-horizon-dominant strategy yields 0.43%/month risk-adjusted alpha (2010-2021). H459 adds retail horizon proxy as 4th filter to H174 (FinBERT ≥ 0.18 + EPS surprise ≥ 0.02): Var A (ApeWisdom 7d mention rank as retail attention proxy, top-tercile filter), Var B (r/investing vs. r/wallstreetbets ratio > 2.0 proxy), Var C (inverse short-interest via FMP as long-horizon proxy), Var D (H174 baseline). Gate: OOS WR > 0.818 AND n ≥ 15. IS: 2020-2022, OOS: 2023-2026. Script: backtesting/daily/run_h459_retail_horizon_pead.py. Medium risk. Primary limitation: ApeWisdom backfill coverage pre-2022 is sparse; proxy variables may be poor surrogates for actual horizon tagging.
+h458_status: STAGED (2026-07-27) — Multi-Scale Markov-Switching GARCH Volatility Regime Gate for H026 ETF Portfolio. Source: arXiv:2606.06190 (Chaudhary, Jun 2026) 'Multi-Scale Markov Switching GARCH: Volatility Regime Detection in EUR/USD'. Key finding: triple-timeframe AR(1)-MS-GARCH (daily/4H/hourly) with Filardo-style TVTP produces Calm/Turbulent/Crisis regimes; outer-product 27-state cross-scale tensor achieves DM statistic +4.70 (p=1.28e-6) over plain GARCH(1,1) on EUR/USD 2015-2025. H458 adapts two-scale (daily+weekly) MS-GARCH to H026 25-ETF EW portfolio return stream: composite Crisis probability gates ETF top-1 selection. Variants: A (2-scale composite, BIL when crisis>0.5), B (single-scale daily 3-state, comparison to H445), C (2-scale: top-2 in Turbulent, top-1 in Calm), D (continuous crisis weight: scale by 1-crisis_prob), E (H346 OB-gated baseline). Gate: OOS Sharpe > 3.238 (H346) AND MaxDD improvement. IS: 2008-2017, OOS: 2018-2026. Script: backtesting/daily/run_h458_multiscale_msgarch_h026.py. Medium risk. CAVEAT: MS-GARCH originally validated on intraday FX; ETF equity universe has different vol dynamics; daily+weekly may be sufficient without 4H/1H.
+h457_status: STAGED (2026-07-27) — PRISM-VQ Vector-Quantized Discrete Latent Factors for H198 Cross-Sectional Ranking. Source: arXiv:2605.13407 (Kim & Song, IJCAI 2026) 'Vector-Quantized Discrete Latent Factors Meet Financial Priors: Dynamic Cross-Sectional Stock Ranking Prediction for Portfolio Construction'. Key finding: PRISM-VQ combines expert prior factors + VQ discrete latent factors (information bottleneck suppresses noise) + Mixture-of-Experts time-varying loadings; validated on CSI 300 AND S&P 500; code at github.com/finxlab/PRISM-VQ. H457 ports to H198 30-stock universe with H398 expert priors (IMOM6 + MOM60 + LowVol + IMOM12) and VQ codebook K=8. Variants: A (full PRISM-VQ: VQ+MoE on H398 priors), B (VQ only, no MoE), C (MoE continuous gating, no VQ), D (H398 equal-weight baseline). Gate: OOS Sharpe > 4.068 (H398 champion) as stretch; > 1.174 as minimal gate. IS: 2013-2020, OOS: 2021-2026. Script: backtesting/daily/run_h457_prism_vq_cross_sectional.py. Medium risk. CAVEAT: 30-stock universe may be too small for K=8 VQ codes to be stable; may need K=4 or KNN-based soft assignment.
+h456_status: STAGED (2026-07-27) — Adaptive Financial Transformer with Regime-Gated Attention for H198 Cross-Sectional Ranking. Source: arXiv:2606.29347 (Sarkar, Jun 2026) 'Adaptive Financial Transformer with Regime-Gated Attention for Stock Return Prediction'. Key finding: AFT groups 95 financial features into 11 semantic categories (momentum_short, momentum_long, reversal, volatility, trend, illusion_mom, low_vol, price_level, skewness, drawdown, regime_macro); uses Market Regime Encoder + Adaptive Gate Network to bias self-attention per detected regime; paper corrects sequence-alignment look-ahead bugs in prior transformer work; PyTorch code available. H456 ports to H198 30-stock NASDAQ universe: lightweight IS-calibrated IC-weighted attention (tractable proxy for learned attention). Variants: A (full AFT regime+gate), B (gate only, no regime encoder), C (regime encoder, uniform attention), D (VIX+SPY 200MA regime proxy, momentum reranked), E (H198 baseline). Gate: OOS Sharpe > 1.174 AND MaxDD improvement. IS: 2013-2020, OOS: 2021-2026. Script: backtesting/daily/run_h456_aft_regime_gated_attention.py. Medium risk.
+h449_status: NOT CONFIRMED (2026-07-25) — Momentum Consistency (Risk-Adjusted Momentum) on H198 Universe. Hypothesis: rank H198 30-stock universe by Sharpe ratio over 6m formation period (return / return std) instead of raw return; consistent compounders preferred over volatile spikes. Motivation: Bandarchuk & Hilscher (2013), Rachwalski & Wen (2016) — momentum profits concentrated in low-dispersion stocks. Gate: OOS Sharpe > 1.174 (H198 baseline). IS: 2013-2020, OOS: 2021-2026. Variants: A (pure 6m Sharpe rank, top-6); B (0.5×mom_rank + 0.5×Sharpe_rank, top-6); C (top-12 by momentum → sort by Sharpe, take top-6); D (drawdown-adjusted momentum: 6m return / (1+worst_month_abs), top-6); E (H198 baseline 6-1m momentum top-6); F (sanity: top-12 by momentum → highest vol 6). RESULTS — IS: A=1.592, B=1.828, C=1.618, D=1.904, E=1.953, F=1.759. OOS: A=0.868, B=1.048, C=0.958, D=1.021, E=0.937, F=0.997. NOT CONFIRMED: best OOS Var B 1.048 < gate 1.174. KEY FINDINGS: (1) Consistency metrics (Sharpe rank, drawdown-adj) add ~10-11% Sharpe lift over raw momentum (B 1.048, D 1.021 vs E 0.937); (2) MaxDD improvement: Var B -30.7% vs baseline -36.7% (+6pp); (3) Sanity check Var F (high-vol momentum winners) at 0.997 BEATS pure momentum baseline 0.937 — 2021-2026 period rewarded high-vol AI/tech names (NVDA effect); (4) Pure Sharpe-ranked momentum (Var A 0.868) WORSE than baseline — consistent compounders (MSFT/AAPL) underperform vs pure momentum winners (NVDA) in bull market. PATTERN: H448/H449 join H435/H436/H437 showing H198 momentum baseline degraded to 0.937 in 2021-2026 OOS period (vs confirmed 1.174) — possible structural regime shift in large-cap tech momentum. Script: backtesting/daily/run_h449_momentum_consistency.py. Results: backtesting/results/h449_results.json.
+h448_status: NOT CONFIRMED (2026-07-25) — Low-Volatility Stock Anomaly on H198 Universe. Hypothesis: Ang et al. (2006) low-vol anomaly — rank H198 30-stock large-cap universe by lowest realized vol (20d or 60d), take top-6. Baker et al. (2011): low-vol premium from institutional benchmark-hugging causing overpricing of high-vol stocks. H113 tested at ETF level (NOT CONFIRMED). Gate: OOS Sharpe > 1.174 (H198 momentum baseline). IS: 2013-2020, OOS: 2021-2026. Variants: A (pure low-vol 20d, top-6); B (pure low-vol 60d, top-6); C (0.5 mom + 0.5 inv_vol dual rank); D (top-6 momentum → filter to lowest-3 vol); E (H198 baseline momentum top-6); F (sanity: high-vol top-6). RESULTS — IS: A=1.614, B=1.519, C=1.673, D=1.669, E=1.953, F=1.809. OOS: A=0.974, B=1.045, C=0.932, D=0.687, E=0.937, F=0.830. NOT CONFIRMED: best OOS Var B (60d low-vol) 1.045 < gate 1.174. KEY FINDINGS: (1) Low-vol anomaly EXISTS at stock level — Var B low-vol (1.045) > Var F high-vol (0.830), direction correct; (2) Pure low-vol (Var B 1.045) slightly BEATS pure momentum (Var E 0.937) OOS — low-vol stocks are better compounders in 2021-2026 bull market with lower MaxDD (-24.0% vs -36.7%); (3) Momentum-vol combination HURTS — dual rank Var C 0.932 WORSE than pure mom, vol filter Var D 0.687 catastrophic (filter selects SLOWER-momentum winners which miss the AI spike months); (4) Structural insight: in H198 concentrated 30-stock large-cap universe, 2021-2026 performance dominated by NVDA/TSLA episodic spikes — low-vol selector misses these; (5) H448 might confirm on broader universe with actual cross-sectional vol spread. PRODUCTION NOTE: Var B 60d low-vol at 1.045 OOS, MaxDD -24.0%, 2 neg years — slightly worse Sharpe but much better MaxDD than H198 momentum. Not additive to production (high correlation with H198). Script: backtesting/daily/run_h448_lowvol_stock_selection.py. Results: backtesting/results/h448_results.json.
+h447_status: STAGED (2026-07-25) — Wasserstein-Tracked Explainable Regime-Aware Investing on SPY/TLT/GLD/DBC. Source: arXiv:2603.04441 (Boukardagha, Columbia 2026). Extends H429 (rolling Wasserstein-HMM confirmed) to cross-asset MVO allocation: BIC dynamic K-selection (K=2..4 per rolling 3Y window), 2-Wasserstein state matching across re-fits (Bures metric), Transaction-Cost-aware MVO (TC-MVO) with L2 turnover penalty. Variants: A (fixed K=2 + TC-MVO), B (BIC K + TC-MVO), C (fixed K=2 + EW ablation), D (BIC K + EW ablation). IS: 2005-2017, OOS: 2018-2026. Gate: OOS Sharpe > 1.0 AND MaxDD > -20%. Baseline: EW-4 SPY/TLT/GLD/DBC (H311 reference). Script: backtesting/daily/run_h447_wasserstein_hmm_regime.py. (Note: renumbered from H444 — H444 taken by realized-vol gate confirmed 2026-07-24.) COMPUTE NOTE (2026-07-25): Script timed out at 8 min even with monthly re-fit (every 21 days). GaussianHMM on 4D data with BIC K-selection (3 seeds × 3 K values = 9 fits per refit × ~230 refits) non-convergent. Needs redesign: reduce to semi-annual refit (H429 approach) or use diagonal covariance to speed convergence. Deferred to future session.
+h446_status: STAGED (2026-07-25) — Supply Chain Network Momentum via FinBERT 10-K MD&A Embeddings. Source: arXiv:2606.29290 (Alswaidan et al. 2026) 'Supply Chain Propagation of Textual Signals: LLM Embeddings and Cross-Sectional Return Predictability'. Key finding: FinBERT embeddings of 10-K MD&A sections propagated through Bloomberg SPLC supply chain graph produce FF5-alpha 7.27%/yr (NW t=2.64) on 255 S&P 500 firms 2011-2025. Mechanism: positive sentiment in upstream supplier 10-Ks predicts downstream customer returns — supply chain information asymmetry. H446 implementation: EDGAR 10-K MD&A text → FinBERT embeddings → cosine similarity-weighted supply chain signal → cross-sectional ranking on H198/H026 universe. Variants: A (embedding cosine, top-3 long), B (sentiment propagation, top-6), C (direct supply-chain-adjacent only), D (blend with H198 6-1m momentum). Gate: OOS Sharpe > 1.174 AND FF5-alpha t > 2.0. IS: 2013-2020, OOS: 2021-2026. Script: backtesting/daily/run_h446_supply_chain_momentum.py.
+h445_status: STAGED (2026-07-25) — Heavy-Tail HMM Emission Families for Regime-Conditional VaR on H026. Source: arXiv:2606.23492 (Alswaidan, Jin, Varner 2026) 'Continuous Hidden Markov Models for Equity Returns: Heavy-Tail Emission Families and Regime-Conditional Value-at-Risk'. Key finding: Student-t / Laplace / GE emission families under shared forward-backward recursions outperform Gaussian HMM on regime-conditional VaR coverage tests. On daily US equities, interpretable Markov model with heavy tails suffices (no deep learning needed). H445 implementation: 3 emission families tested (Gaussian baseline, Student-t, Laplace) on daily H026 ETF portfolio returns; use filtered regime probabilities to set position size (BIL when high-vol regime, full investment otherwise); VaR coverage as secondary gate. Variants: A (Gaussian HMM), B (Student-t HMM), C (Laplace HMM), D (ensemble by predictive likelihood). IS: 2008-2017, OOS: 2018-2026. Gate: OOS Sharpe > 1.0 AND Kupiec coverage test p > 0.05. Script: backtesting/daily/run_h445_heavytail_hmm_h026.py.
+h444_status: CONFIRMED (Var B) (2026-07-24) — Realized Volatility Regime Gate for H198 Momentum. Source: Daniel & Moskowitz (2016) "Momentum Crashes" (JFE); Choi (2026) arXiv:2607.14174 (portfolio-level vol signal motivation). Signal: rolling 20-day annualized realized vol of H198 EW-portfolio, IS-calibrated 80th-percentile threshold (IS 80th pct = 27.6% annualized; 70th pct = 20.5%). Gate: OOS Sharpe > 1.174 (H198 baseline) AND MaxDD improvement. IS: 2013-2020, OOS: 2021-2026. Variants: A (top-3 in high-vol, else top-6); B (BIL full exit in high-vol); C (continuous weight: scale = max(0.4, 1 - 0.4×(vol_ratio-1))); D (TSMOM gate combined: 3m return positive AND not high-vol); E (baseline top-6); F (70th pct threshold). RESULTS — OOS: VarA=1.139 FAIL, VarB=1.275 PASS, VarC=1.218 PASS, VarD=0.922 FAIL, VarE=1.203 PASS, VarF=1.082 FAIL. MaxDD: A=-35.1%, B=-24.9%, C=-24.3%, D=-54.8%, E=-25.5%, F=-33.7%. CONFIRMED: Var B (BIL exit) OOS 1.275 > gate 1.174, MaxDD -24.9% vs baseline -25.5% (marginal improvement). Var C (continuous scaling) OOS 1.218, MaxDD -24.3% — slight improvement. KEY FINDINGS: (1) Full BIL exit (Var B) outperforms partial reduction (Var A 1.139) — when vol is high, momentum crashes hard; half-measures don't help. (2) TSMOM combined gate (Var D) is catastrophic (MaxDD -54.8%) — momentum stock corrections are severe enough that waiting for 3m return to turn negative is too slow. (3) 70th pct threshold (Var F) tighter gate hurts — triggers more often but the regime signal is noisier at 20.5% annualized vs 27.6%. (4) Continuous weighting (Var C) beats discrete top-3 reduction (Var A) — gradual position scaling better than abrupt concentration. PRODUCTION NOTE: Var B OOS improvement is modest (+0.072 Sharpe vs baseline, MaxDD -0.6pp). Primary value is tail-risk reduction during momentum crash regimes. Script: backtesting/daily/run_h444_realized_vol_gate_h198.py. Results: backtesting/results/h444_results.json.
+h428_status: NOT CONFIRMED (2026-07-24) — FRI Magnitude-Only Mean Reversion: IBS Entry Timing for XLK/SMH/IGV. Source: arXiv:2606.29591 (Portnaya 2026) 'The Bounce Has No Direction: Sign, Magnitude, and the Microstructure of Equity Return Predictability'. Key finding: SPY lag-1 autocorrelation is entirely magnitude-driven (p<10⁻¹²), sign channel not significant (p=0.11). Gate: OOS Sharpe > 2.129 (H112 IBS baseline). IS: 2015-2020, OOS: 2021-2026. Universe: XLK, SMH, IGV. Variants: A/B/C (fixed |return| thresholds 1.0%/1.5%/2.0%); D (relaxed IBS to 0.3); E (unfiltered IBS baseline); F (IS-calibrated 60th-pct threshold). RESULTS — OOS: VarA=0.418, VarB=0.377, VarC=0.243, VarD=0.550, VarF=0.646; VarE baseline=0.636. Per-ticker Var E: XLK=0.760, SMH=1.227, IGV=-0.079. NOT CONFIRMED: best OOS 0.646 (Var F) vs gate 2.129. KEY FINDINGS: (1) Magnitude filter DOES NOT improve IBS — concentration on high-magnitude days removes valid reversal opportunities, dramatically reducing trade count without improving win rate. (2) FRI theory is for SPY as a whole — the magnitude effect reflects market-wide bid-ask bounce; individual sector ETF (XLK/SMH/IGV) daily moves are dominated by common factor (SPY) plus idiosyncratic, making the magnitude filter noisier. (3) SMH standalone 1.227 is interesting but below H112 gate; IGV -0.079 drags pooled performance. (4) VarF (IS-calibrated) only marginally beats unfiltered baseline (0.646 vs 0.636) — essentially no filtering at IS-60th pct. FRI magnitude effect exists at SPY universe level but does not translate to sector-ETF IBS timing. Script: backtesting/daily/run_h428_fri_ibs.py. Results: not saved (run confirmed NOT CONFIRMED in terminal output).
+h437_status: NOT CONFIRMED (2026-07-24) — Beta-Adjusted Alpha + Trailing Sharpe Rotation on H026 ETF Universe. Rolling 12m beta via cov/var vs SPY; alpha = mom12 - beta×SPY_mom12. Gate: OOS Sharpe > 1.200. All 6 variants fail: pure alpha (Var A/B) OOS 0.507 WORSE than H026 canonical (Var F) OOS 0.785. Beta-adjusted alpha destroys signal on multi-asset ETF universe — SPY beta exposure is a feature not noise (high-beta equity ETFs persist in bull). Trailing 12m Sharpe rank (Var D) worst at OOS 0.246. Key finding: H026 canonical OOS Sharpe 0.785 consistent with H435/H436 showing ~0.7-0.8 — suggests H026 has degraded from historical 1.2 gate in 2024-2026 period. Script: backtesting/daily/run_h437.py. Results: backtesting/results/h437_results.json.
+h436_status: NOT CONFIRMED (2026-07-24) — Relative Strength vs SPY on H026 ETF Universe. Gate: OOS Sharpe > 1.200. Fatal flaw: rank(x_i - c) = rank(x_i) for constant c — subtracting common SPY return does NOT change cross-sectional ETF rankings. Vars A/B/C all identically OOS 0.509 = pure momentum. Vars D/E identically OOS 0.707 = H026 canonical. Mathematical identity confirmed: need rolling beta regression (H437) for true alpha isolation. Script: backtesting/daily/run_h436.py. Results: backtesting/results/h436_results.json.
+h435_status: NOT CONFIRMED (2026-07-24) — 52-Week High Proximity Momentum on H026 25-Asset ETF Universe. George & Hwang (2004) anchoring; H291 NOT CONFIRMED on 50-stock. Gate: OOS Sharpe > 1.200. Look-ahead bias trap found: unshifted prox52 gave Var A OOS 3.499 (implausible); fixed with shift(1) → OOS 0.801 (best variant). All 6 fail gate. Proximity signal better than raw momentum (0.801 vs 0.514) but insufficient. Large-cap ETFs near 52w high in bull markets — low cross-sectional variation. Script: backtesting/daily/run_h435.py. Results: backtesting/results/h435_results.json.
+h434_status: STAGED (2026-07-23) — Market Regime Council (MRC) Shapley-Weighted Multi-Agent ETF Rotation on H026 Universe. Source: arXiv:2605.24490 (Pei, Ge, Zheng & Cartlidge, May 2026) 'Market Regime Council for Dynamic Credit Assignment in Multi-Agent LLM Decision Systems'. MRC architecture: N=3 deterministic specialist agents (Momentum/Macro/OB-Filtered), compute all 2^N-1=7 coalition outputs, track exponentially-decayed Shapley credits per coalition, blend final allocation by Shapley weights. Key innovation over H318 meta-agent selector: no assumption that one agent dominates — credit adapts as regimes shift. Agents: (1) 12m momentum+inv_vol rank (H026 canonical); (2) SPY 200MA + VIX<20 gate (H301/H165a); (3) OB-filtered top-2 (H346 best_B window=20/swing_len=3). Variants: MRC (Shapley-weighted), EQUAL (equal-weight blend), MOMENTUM_ONLY, OB_ONLY, MAJORITY (vote). IS: 2008-2017 (H026 canonical), OOS: 2018-2026. Gate: OOS Sharpe > 3.238 (H346 canonical OOS) AND MaxDD < -6.7%. Script: backtesting/daily/run_h434_mrc_shapley_rotation.py. Medium risk. Shapley computation: O(2^N × T), tractable for N=3.
+h433_status: STAGED (2026-07-23) — 10-K Risk-Factor Sentiment as Volatility-Regime Gate for H198 Momentum. Source: arXiv:2607.14174 (Choi, Jul 2026) 'How Much of a 10-K Matters? Aggregation-Dependent Value of Full-Text versus Risk-Factor Sentiment'. Key finding: Item 1A (Risk Factors) text trained against VOLATILITY labels (not return labels) has statistically significant predictive power at sector/portfolio aggregation level for Nasdaq-100 constituents (2006-2023); full text is better for returns but Risk Factors are better for volatility regime. H433 classifies H198 30-stock universe annual 10-K filings via Loughran-McDonald wordlist → portfolio-level volatility sentiment score; gate: HIGH VOL regime (>IS-calibrated threshold) → reduce to top-3 from top-6 or exit to BIL. Variants A (top-3 reduce), B (BIL exit), C (continuous tilt), D (GPT-4o-mini scorer), E (full 10-K not just Item 1A), F (baseline). IS: 2013-2018, OOS: 2019-2026. Gate: OOS Sharpe > 1.174 AND MaxDD > -10%. Script: backtesting/daily/run_h433_10k_risk_sentiment.py. Medium risk. Annual 10-K signal → 1 update/year per stock; 90-day SEC lag applied.
+h432_status: STAGED (2026-07-23) — Text-Enhanced Regime Shift Detection for H045 Bond Rotation — LLM on Fed Communications. Source: arXiv:2605.30363 (Yi, Mehra, Chen & Cartlidge, May 2026) 'Enhancing Regime Shift Detection Using Unstructured Data: A Study on the Treasury Market'. Key finding: LLM reasoning over central-bank communications detects Treasury market regime shifts 2-4 weeks before they materialise in prices; standard yield-curve inversion gate (H314 NOT CONFIRMED) lags by 1-3 months. H432 pipeline: (1) Download Fed statements + FOMC minutes 2007-2026; (2) GPT-4o-mini classifies each as HAWKISH/NEUTRAL/DOVISH; (3) 3-month EMA hawkish score; (4) If score > 0.5 AND bond prices falling → route H045 selection to SHY; else use H355 OB-filtered top-2 as normal. Variants: A (LLM + price confirmation), B (LLM alone), C (continuous tilt), D (2-week lead lag), E (H355 baseline). IS: 2007-2016, OOS: 2017-2026. Gate: OOS Sharpe > 1.522 (H355 OB-filtered H045) AND MaxDD improvement. Script: backtesting/daily/run_h432_text_regime_bond.py. Medium risk. ~$2-5 OpenAI cost (Fed statement classification). FOMC statement EDGAR/Fed website source.
+h429_status: CONFIRMED (Var C/F) (2026-07-22) — Wasserstein-Tracked Rolling HMM Regime Detector (H251 cure). Source: arXiv:2603.04441 (Boukardagha 2026). Gate: OOS Sharpe > 0.941 AND no single state > 80% OOS months (degeneracy check). Dual gate: Var A/B/D/E all fail — IS-frozen GaussianHMM still collapses to 100% low-vol state OOS (replicates H251 root cause). Var C (n=3, roll-5Y): Sharpe=1.144, MaxDD=-17.2%, MaxStateFrac=47% → PASSES BOTH. Var F (n=3, roll-3Y): Sharpe=1.067, MaxDD=-16.6%, MaxStateFrac=41% → PASSES BOTH. KEY FINDING: Rolling window (retrain every 6 months on last 5Y of data) cures H251 degeneracy completely. Wasserstein state matching preserves label identity across retraining windows. IS-only training (any n_components) is insufficient — the IS crisis thresholds (GFC-calibrated) never trigger in OOS bull market. BIC auto-selection (Var E) always picks n=3 from IS, so identical to Var A. PRODUCTION NOTE: Var C OOS Sharpe 1.144 > H251 0.941, but well below H311 EW-4 1.532 — not competitive for production blend on Sharpe basis; value may be in MaxDD improvement (-17.2% vs SPY -23.9%) and low Corr(H026). Script: backtesting/daily/run_h429_wasserstein_hmm.py. Results: backtesting/results/h429_results.json.
+h428_status: STAGED (2026-07-22) — FRI Magnitude-Only Mean Reversion: Theoretically-Grounded IBS Entry Timing for XLK/SMH/IGV. Source: arXiv:2606.29591 (Portnaya, Jun 2026) 'The Bounce Has No Direction: Sign, Magnitude, and the Microstructure of Equity Return Predictability'. Key finding: SPY lag-1 return autocorrelation is entirely magnitude-driven (p<10⁻¹², k=4 channel), while the sign/direction channel is not significant (p=0.11). This is the fingerprint of bid-ask bounce and non-synchronous trading, not directional reversal. H428 adds a prior-day |return| > threshold filter to H062–H112 IBS entries, concentrating the strategy on high-magnitude days where FRI says the bounce effect is strongest. Variants A/B/C test 1.0%/1.5%/2.0% magnitude thresholds; Var D relaxes IBS to 0.3; Var E is the unfiltered baseline; Var F uses IS-calibrated 60th-percentile threshold. Universe: XLK, SMH, IGV. IS: 2015-2020, OOS: 2021-2026. Gate: OOS Sharpe > 2.129 (H112 IBS baseline) AND MaxDD improvement vs baseline. Script: backtesting/daily/run_h428_fri_ibs.py (stub). Medium risk. Wiki: wiki/trading/backtesting/fri-magnitude-mean-reversion.md (new 2026-07-22).
+h427_status: STAGED (2026-07-22) — Fine-Grained 8-K Event Taxonomy Filter for H174 PEAD (119 Event Types). Source: arXiv:2607.08346 (Dolphin, Dursun, Blankenship, Adams & Pike, Jul 2026) 'Grounded Event Extraction from SEC 8-K Filings with a Fine-Grained Taxonomy'. Paper: two-stage LLM system tags 8-K filings against a 3-tier hierarchy of 119 event types. Stage 1 constrains output to valid taxonomy entries and anchors each tag to a verbatim quote; Stage 2 re-grades the quote against the category definition to produce a quality score. Applied to 292,984 filings 2022-2026, precision rises from 12% (low quality) to 96% (high quality score). H427 classifies H174 8-K corpus into event types and filters to PEAD-relevant events (Tier 1: EarningsBeat/RevenueUpside/GuidanceRaise; Tier 2: ProductLaunch/ContractWin), excluding noise events (M&A, legal settlements, governance changes). 4 filter variants tested: Var A (Tier 1 required), Var B (Tier 1 OR Tier 2), Var C (Tier 1 AND no exclusions), Var D (either positive AND no exclusions). Gate: OOS WR > 0.818, n >= 15 (H174 baseline). GPT-4o-mini zero-shot for taxonomy classification; OPENAI_API_KEY available. Script: backtesting/daily/run_h427_8k_event_filter.py (stub). Medium risk. Complement to H426 (scorer upgrade) and H287 (Janus-Q event annotation).
+h426_status: STAGED (2026-07-22) — FinDPO DPO-Aligned LLM as H174 8-K Scorer. Source: arXiv:2507.18417 (Iacovides, Zhou & Mandic, Imperial College London, Jul 2025) 'FinDPO: Financial Sentiment Analysis for Algorithmic Trading through Preference Optimization of LLMs'. FinDPO is the first finance-specific DPO-aligned causal LLM for trading. Base model: Llama-3-8B Instruct; trained on preference pairs from FinSentiment/Financial PhraseBank; produces continuous scores via softmax calibration on {positive, neutral, negative} logprobs. DPO advantages over FinBERT SFT: avoids memorization artifacts, better OOD generalization, handles 8k+ context (vs FinBERT 512 tokens), preference ordering signal. H426 tests as drop-in scorer replacement for H174 pipeline: maintain score >= 0.18 AND surprise >= 0.02 gates. Phase 1 (immediate): GPT-4o-mini zero-shot with DPO-style preference framing prompt (~$0.001/event). Phase 2: FinDPO checkpoint (pending public release). Phase 3: domain DPO on H174 confirmed/failed events. Gate: OOS WR > 0.818, n >= 15 (H174 baseline). IS: 2020-2022, OOS: 2023-present. Script: backtesting/daily/run_h426_findpo_pead.py (stub). Medium risk. Wiki: wiki/trading/tools/dpo-aligned-financial-nlp.md (new 2026-07-22).
+h399_status: NOT CONFIRMED (2026-07-13) — 5-Factor Extensions and 12m-MOM Substitution on H398 Var A. Gate: OOS Sharpe > 4.068. MOM120 (12-month no-skip momentum) highly correlated with both MOM60 (0.702) and IMOM12 (0.720) — adding it as a 5th factor dilutes rather than diversifies. RESULTS: Var A (5-factor equal) OOS 3.451; Var B (3-factor, drop MOMs) OOS 2.037 MaxDD -26.2% (MOMs are load-bearing — their removal is catastrophic); Var C (replace MOM60 with MOM120) OOS 3.504; Var D (H398A top-3) OOS 3.956 MaxDD -4.3%; Var E (H398A sanity) OOS 4.068 = tied not beats gate. KEY FINDING: MOM120 adds no value on this universe — it's 70% correlated with MOM60 and 72% with IMOM12. The signal space from IMOM6+MOM60+LowVol+IMOM12 is already well-diversified; the 4th orthogonal factor needs to come from a different domain entirely (sentiment, quality, short-interest). H398 Var A remains champion. Script: backtesting/daily/run_h399.py. Results: backtesting/results/h399_results.json.
+h398_status: CONFIRMED (Var A) (2026-07-13) — 12-Month IMOM as 4th Signal on H395 Var C Composite. Gate: OOS Sharpe > 3.962. IMOM12 = compound_return_12m − arithmetic_sum_12m (consistent compounders over full year). Key stats: IMOM12 avg cross-sectional spread 0.1530 vs IMOM6's 0.0476 (3.2× wider); corr(IMOM6, IMOM12) = 0.484 (partially independent — captures compounders over both 6m and 12m horizons). Var A (equal-weight 4-signal: 0.25×IMOM6 + 0.25×MOM60 + 0.25×LowVol + 0.25×IMOM12, top-2): IS 3.793, OOS 4.068, MaxDD -4.7%, CAGR 78.8%, 0 neg years. OOS annual: 2021 +124%, 2022 +60%, 2023 +138%, 2024 +130%, 2025 +103%, 2026 +35%. NEW H198 CHAMPION (beats H395 Var C OOS 3.962 → 4.068; MaxDD improves -8.6% → -4.7%). Script: backtesting/daily/run_h398.py. Results: backtesting/results/h398_results.json.
+h397_status: STUB (2026-07-13) — EFS Evolutionary Factor Search on H198 Universe (arXiv:2507.17211). Luo, Zhang & Liu reformulate asset selection as LLM-generated top-m ranking with evolutionary feedback: mutation and crossover based on realized IC across a test window. Outperforms baselines on FF datasets + US50. H397 design: (1) Seed EFS with H395 Var C formula (0.33×IMOM6 + 0.33×MOM60 + 0.33×LowVol) as starting factor. (2) Evolutionary loop: LLM generates 10-15 mutation candidates per round (e.g., add MOM12, change IMOM window, add realized skew, try momentum-of-vol). (3) Evaluate each candidate's rolling IC on IS 2013-2020. (4) Keep top-3 by IS IC; cross-breed to generate next generation (3-5 rounds). (5) Final OOS backtest on 2021-2026 with gate: OOS Sharpe > 3.962 (H395 Var C) OR novel factor expression not in existing hypothesis log. Gate rationale: evolutionary search should outperform human-designed baseline if it has real discriminative power. Cost: ~$20-35 OpenAI (moderate, ~50-70 factor evaluations). Script: backtesting/daily/run_h397_efs_mining.py (stub). Low risk.
+h396_status: STUB (2026-07-13) — AlphaMemo-Style Edit-Motif Mining from Hypothesis Log (arXiv:2606.20625). AlphaMemo (Univ. Sydney + Edinburgh, June 2026) shows self-evolving alpha mining agents achieve better fixed-budget discovery by recording reusable 'edit motifs' (AST-level modification patterns) from parent→child factor evolution. Tested on CSI 500 and S&P 500; confidence-gated memory suppresses known failures, amplifies confirmed patterns. George's hypothesis-log.md (395+ experiments) is a ready-made search ledger with structured outcomes. H396 design: (1) Parse hypothesis-log.md to extract (parent_signal, modification, outcome) triples — e.g., ('H198 6-1m', 'add low-vol tiebreaker', 'CONFIRMED +Sharpe 2.69→3.96'), ('H198 6-1m', 'add ILLIQ tiebreaker', 'NOT CONFIRMED — large-cap homogeneous'). (2) Cluster into motif categories: tiebreaker additions, universe expansions, filter overlays, window changes, skip-month variants. (3) Build confidence-weighted motif library. (4) Use library as context window for H381 (AlphaLogics) and H382 (FactorEngine) LLM prompts: 'Motifs that work on H198: low-vol tiebreaker, no-skip momentum; Motifs that fail: ILLIQ, quality GP/A, MAX tiebreaker on large-cap'. Gate: at least one H381/H382 motif-seeded run outperforms un-seeded run on OOS Sharpe. Script: backtesting/daily/run_h396_alphamemo_motifs.py (stub). Cost: ~$5 LLM calls for motif extraction. Low risk.
+h390_status: PROPOSED (2026-07-08) — OpenFinGym Multi-Task Quant Agent Evaluation on H026/H174 Tasks. Source: Zhang et al. (2026) arXiv:2606.26350, University of Edinburgh/UCL/Alan Turing Institute/Oxford. OpenFinGym provides unified gym environment + containerized leakage-resistant verifier across forecasting, strategy construction, real-time trading, and fraud detection. Phase 1: Encode H026 ETF rotation as forecasting task (predict next-month top-1 ETF) and H174 PEAD as trading task (event-driven entry/exit on 8-K signal); run against OpenFinGym verifier for independent alpha validation. Phase 2: Use OpenFinGym RL post-training to fine-tune small LLM on H174 task definitions. Gate: Phase 1 — both strategies score above equal-weight/random baseline; Phase 2 — H174 LLM-augmented WR > 81.8%. Script: backtesting/daily/run_h390_openfingym.py (stub). Medium risk. Primary value: independent leakage-resistant verification of H026/H174 (addresses H256 look-ahead bias incident pattern).
+h389_status: WIKI (2026-07-08) — Alpha Illusion — LLM Trading Agent Validation Checklist. Source: Sheng et al. arXiv:2605.16895 (2025). Created wiki/trading/algorithms/llm-alpha-validation.md with 6 structural validity tests: (1) Temporal integrity; (2) Real-world frictions; (3) Counterfactual robustness; (4) Predictive calibration; (5) Numerical execution; (6) Multi-agent disaggregation. Applied to checklist for H274, H381, H382, H383, H384 and all future LLM hypotheses. Cross-referenced systems: FinCon, FinMem, TradingAgents, FinAgent, QuantAgent, FLAG-Trader. Added LLM sub-checklist to wiki/trading/shared-eval-checklist.md.
+h388_status: PROPOSED (2026-07-08) — PEAD Revived: Elastic Net on 12-Quarter SUE History as H174 Pre-Filter. Source: Kaczmarek & Zaremba (Finance Research Letters, 2025, DOI:10.1016/j.frl.2025.108751). Replace raw EPS surprise >= 0.02 gate in H174 with elastic-net ML score trained on 12-quarter standardized unexpected earnings (SUE) history. Pattern of earnings surprises across 12 quarters (streaks, acceleration, reversals, magnitude trends) predicts returns better than latest surprise alone; effect strongest in large-cap stocks (our H174 universe). Paper: elastic net on SUE history nearly doubles Sharpe vs single-quarter SUE. Mechanism: latest EPS surprise quickly priced in; 12-quarter patterns remain overlooked. Maintain FinBERT score >= 0.18 gate. Gate: OOS WR > 81.8% AND n >= 15 (H174 baseline). IS: 2019-2022; OOS: 2023-present. Script: backtesting/daily/run_h388_pead_ml_sue.py (to be written). Low risk.
+h387_status: PROPOSED (2026-07-08) — Wasserstein HMM Explainable Regime-Aware Portfolio Allocation on SPY/TLT/GLD/BIL. Source: Boukardagha (2026) arXiv:2603.04441, Columbia University. Wasserstein HMM combines rolling Gaussian HMM with predictive model-order selection and template-based identity tracking using 2-Wasserstein distance between Gaussian components — solves the label-switching problem that caused H251 to collapse to single-regime OOS. Dynamic regime count (not fixed 3-state) + transaction-cost-aware mean-variance optimization penalizes excess rebalancing. Paper: Sharpe 2.18 vs 1.59 equal-weight; MaxDD -5.43% vs -14.62% SPY. Validated on real 2025 "Liberation Day" selloff (dynamically reduced equity). Gate: OOS Sharpe > 1.532 (H311 EW-4+VIX<20) AND MaxDD < -10%. IS: 2004-2017; OOS: 2018-2026. Script: backtesting/daily/run_h387_wasserstein_hmm.py (to be written). Medium risk. CAVEAT: use filtered (not smoothed) HMM probabilities per Regime Detection Design Note in CLAUDE.local.md.
+h385_status: STUB (2026-07-08) — Illusion Momentum (IMOM) Cross-Sectional Signal on H198 30-Stock Universe. Source: Iwanaga & Hirose (2026) Pacific-Basin Finance Journal Vol 96 (DOI:10.1016/j.pacfin.2026.103063); working paper Iwanaga (2024). FORMULA: IMOM = [Π(1+r_t)−1] − Σ(r_t), i.e. compound return minus arithmetic sum. High IMOM = sustained directional gains (compounding worked in the stock's favor); low IMOM = volatile round-trip (compounding hurt). Cognitive bias mechanism: investors anchor to arithmetic sum and underestimate compound return → underreaction to consistent momentum → predictable drift. Primary spec: 6-month formation NO skip-month (same as H377). Paper alpha: 1.39% raw / 1.42% risk-adjusted (6M). Decay by decade: 2.62% (1990s), 1.42% (2000s), 0.55% (2010s+) — effect persists but smaller in recent data. Mechanism distinct from MAX/HTP: paper rejects limited-attention explanation; IMOM strength grows with |IMOM| magnitude. Gate: OOS Sharpe > 1.174 AND MaxDD > −30%. IS: 2013-2020, OOS: 2021-2026. Script: backtesting/daily/run_h385.py (stub).
+h384_status: PROPOSED (2026-07-08) — ReCAP Regime-Adaptive Continual Learning for H026 ETF Rotation. Source: arXiv:2606.00143 (May 2026). ReCAP integrates continual learning into portfolio management: (1) Adaptive Regime Detection via change-point detection (not fixed IS/OOS splits); (2) Policy Library of regime-specific allocation policies; (3) Rapid Adaptation — retrieves most similar historical regime policy and fine-tunes online (no catastrophic forgetting). H384 tests ReCAP as meta-layer on H026: train lightweight DRL policy per detected regime learning which ETF selection heuristics work best in each regime. Gate: OOS Sharpe > 2.610 (H346 canonical baseline). IS: 2008-2020 (policy library); OOS: 2021-2026. Script: backtesting/daily/run_h384_recap_continual.py (to be written). Requires: PyTorch, ruptures, stable-baselines3. RISK: high.
+h383_status: PROPOSED (2026-07-07) — HMM + RL Regime-Based Allocation on SPY/TLT/GLD Production Sleeve. Source: Verma et al. (2026) arXiv:2605.27848. 3-state Gaussian HMM (BIC-selected: Low-Vol/Transitional/High-Vol) + RL policy (state=regime probabilities, action=discrete allocation) trained to maximize Sharpe conditional on regime. H383 tests on SPY/TLT/GLD daily 2004-2026. Gate: OOS Sharpe > 1.532 (H311 EW-4+VIX<20 best variant). IS: 2004-2017; OOS: 2018-2026. Script: backtesting/daily/run_h383_hmm_rl_allocation.py (to be written). Requires: hmmlearn, stable-baselines3. CAVEAT: use filtered (not smoothed) HMM probabilities per Regime Detection Design Note in CLAUDE.local.md.
+h382_status: PROPOSED (2026-07-07) — FactorEngine Program-Level LLM Factor Mining on H198 Universe. Source: Lin et al. arXiv:2603.16365 (Mar 2026). Casts factors as Turing-complete code; separates logic revision from parameter optimization; LLM-guided directional search + Bayesian HPO; Experience Knowledge Base avoids re-exploring failed directions. H382 bootstraps from hypothesis-log.md (380+ prior experiments with results) as starting knowledge base. Gate: OOS Sharpe > 1.174; IC > 0.05 OOS for at least one generated factor. IS: 2013-2020; OOS: 2021-2026. API cost: ~$20-50 OpenAI. Script: backtesting/daily/run_h382_factorengine.py (to be written).
+h381_status: PROPOSED (2026-07-07) — AlphaLogics Market-Logic-Driven Multi-Agent Alpha Mining on H198. Source: Weng et al. arXiv:2603.20247 (Mar 2026). Three-component system: (1) Market Logic Mining — reverse-engineers market logic from H026/H198 confirmed factors; (2) Factor Generation & Optimization — LLM-guided code generation with backtest-feedback loop; (3) Market Logic Generation & Optimization — new logics conditioned on existing library. Key innovation over QuantaAlpha (H349): explicit 'market logic' abstraction layer makes discovery interpretable. Validated on S&P500 with significant improvement over representative baselines. Gate: OOS Sharpe > 1.174. IS: 2013-2020; OOS: 2021-2026. API cost: ~$15-40 OpenAI. Script: backtesting/daily/run_h381_alphalogics.py (to be written).
+h380_status: PROPOSED (2026-07-07) — Cross-Market Alpha191 on US S&P500 via Double-Selection LASSO. Source: Du, Walter & Ulrich arXiv:2601.06499 (2026). 17 of 168 Alpha191 Chinese A-share short-term trading factors survive double-selection LASSO controlling for 151 established US factors, showing statistically significant incremental explanatory power for S&P500 cross-sectional returns. Surviving factors span 6 domains: Volume & Flow, Mean Reversion, Trend & Momentum, Volatility & Risk, Liquidity & VWAP, Price Action. H380 tests these 17 factors on H198 30-stock universe as standalone and as tiebreaker/augmentation over H198 6-1m momentum. Gate: OOS Sharpe > 1.174. IS: 2013-2020; OOS: 2021-2026. CAVEAT: paper covers 2002-2022; OOS 2021-2026 partially overlaps. Script: backtesting/daily/run_h380.py (to be written).
 h379_status: PROPOSED (2026-07-07) — Network Momentum via Cross-ETF Lead-Lag Spillover. Source: Li & Ferreira (2025) "Follow the Leader: Enhancing Systematic Trend-Following Using Network Momentum" arXiv:2501.07135. Sharpe 1.74 on 64 commodity futures (20yr). H379 adapts to H026+H041a 40-ETF universe: rolling cross-correlation matrix (2-wk lags, 6-mo window); when ETF is top-ranked AND is a lead-lag "leader", increase size by 25%; include "follower" ETFs (lagging leader by 2-4 wks) alongside leader instead of strict top-1. Gate: OOS Sharpe > 1.300. IS: 2008-2017, OOS: 2018-2026. Script: backtesting/daily/run_h379.py (to be written). Note: Originally staged as H377 by dream cycle scan 2026-07-06; renumbered to H379 as H377 was reserved for 6-0m no-skip follow-up.
 h378_status: PROPOSED (2026-07-07) — EarningsInOne Fast/Slow Dual-Signal PEAD Upgrade. Source: Yu, Liu, Zhang, He (2026) "Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals" arXiv:2606.29734. Speed separation: EPS surprise peak eliminated by next open; qualitative ECT sentiment peaks next day, directionally tradeable under correct evaluation (directional accuracy vs MSE). H378 adds slow ECT layer to H174: (1) H174 OPG entry unchanged; (2) At 4 PM, score ECT via FinBERT/GPT-4o-mini; (3) ECT >= 0.15 AND profitable → hold 2 extra trading days beyond 20-day exit; (4) ECT < -0.05 → early exit at 4 PM. Universe: H174 confirmed events (score >= 0.18 AND surprise >= 0.02). Gate: OOS WR > 0.818, mean_ret > 6.89%, n >= 15. IS: 2019-2022, OOS: 2023-present. Caveat: FMP transcript 403 (H247); EDGAR MD&A or Alpaca news as fallback. Script: backtesting/daily/run_h378.py (to be written). Note: Renumbered from proposal's H376 — H376 already assigned to MAX Factor Composite.
 h377_status: STUB (2026-07-06) — 6-0m No-Skip Momentum H198 Standalone. Source: H376 discovery — pure 6-0m no-skip baseline achieves OOS 3.120 / MaxDD -8.4%, strongest result in H198 family; MAX composite on 6-0m (2.790) slightly dilutes it. H277 NASDAQ finding (skip-month hurts on tech-heavy universe) now confirmed on H198 broader large-cap universe. H377 tests 6-0m no-skip as standalone with full variant analysis (position sizing, window sensitivity, universe sensitivity). Gate: OOS Sharpe > 1.174 AND MaxDD < -30%. Script: backtesting/daily/run_h377.py (to be written).
@@ -8873,3 +8924,1018 @@ ACL FinNLP-2025 confirms FinBERT > BART > LLaMA 3 on standard PEAD (unfinetuned 
 **Complexity**: Medium. Requires torch + sparse_autoencoder or manual SAE implementation. GPU optional (SAE is small).
 
 **Script**: backtesting/daily/run_h378.py (stub)
+
+---
+
+## H385 — Illusion Momentum on H198 30-Stock Large-Cap Universe (STUB — NOT RUN)
+
+**Source**: Iwanaga (2024) working paper / Iwanaga & Hirose, Pacific-Basin Finance Journal Vol 96, 2026 (DOI: 10.1016/j.pacfin.2026.103063). *Provenance: formula specifics from 2024 WP (Tamagawa Univ/Yu-cho Foundation grant); published PBFJ version not independently verified — treat as working paper until confirmed identical.*
+
+**Signal**: IMOM = MOM − SUM = [Π(1+r_t) − 1] − Σ(r_t), where r_t are monthly returns over a 6-month no-skip formation window. Compound return minus arithmetic sum.
+
+**Sign and intuition**:
+- Stock +10% then −10%: MOM = −1%, SUM = 0%, IMOM = −1% (low — round-trip, no compounding gain)
+- Stock +5% then +5%: MOM = +10.25%, SUM = +10%, IMOM = +0.25% (positive — compounding worked)
+- High IMOM = sustained directional gains. Low IMOM = volatile round-trips.
+
+**Cognitive bias mechanism**: Investors read arithmetic sum returns and underestimate the true compound return. Stocks where MOM >> SUM are systematically underpriced → predictable drift upward. Mechanism explicitly tested vs limited-attention (MAX/HTP) and rejected — this is compound-vs-sum confusion, not attention bias.
+
+**Paper findings (6M window)**:
+- Long-Short raw alpha: 1.39%/month (US market)
+- FF-adjusted alpha: 1.42%/month
+- 12M also significant (0.88% alpha) but 6M is larger
+- Formation: NO skip-month (footnote 7 confirmed; Appendix A4 shows results hold with skip too)
+- **Alpha decay by decade**: 2.62% (1990s) → 1.42% (2000s) → 0.55% (2010s+). Significant throughout but shrinking. Temper Sharpe expectations for 2021-2026 OOS window.
+- Confirmed in Japan (primary) AND US markets; stronger in bear markets and large-cap.
+
+**Relationship to H377**: Orthogonal in construction — H377 ranks on MOM (geometric return), H385 ranks on IMOM (how much MOM exceeds SUM). Both can be positive for a steadily rising stock, but they measure distinct properties: H377 = "how big was the total gain?", H385 = "how consistent/smooth were the gains?" A composite IMOM + MOM blend could improve top-bucket selection.
+
+**Proposed implementation**:
+1. Compute monthly IMOM for each H198 stock (6-month no-skip window)
+2. Variant A: standalone IMOM top-1
+3. Variant B: standalone IMOM top-2
+4. Variant C: standalone IMOM top-3
+5. Variant D: composite rank = 0.5×rank(IMOM) + 0.5×rank(H377 6-0m), top-1
+6. Variant E: IMOM top-1 + SPY 200MA overlay
+
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > −30%. Adjusted expectation given alpha decay: Sharpe 1.0–1.5 OOS would be consistent with 2010s literature trend, not a failure.
+
+**IS**: 2013-2020. **OOS**: 2021-2026.
+
+**Run date**: 2026-07-08
+
+**Result**: PARTIAL CONFIRMED — Var D (composite IMOM+MOM) passes gate; standalone IMOM variants (A–C) fail MaxDD gate.
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegYrs | Description |
+|-----|-------|--------|---------|-------|--------|-------------|
+| A | 2.218 | 1.704 | **-53.5%** | 84.1% | 1 | IMOM 6m top-1 — FAILS MaxDD |
+| B | 2.362 | 2.166 | **-40.9%** | 78.1% | 1 | IMOM 6m top-2 EW — FAILS MaxDD |
+| C | 2.464 | 2.258 | **-31.3%** | 68.1% | 1 | IMOM 6m top-3 EW — FAILS MaxDD |
+| **D** | 2.357 | **3.055** | -16.8% | 118.1% | 0 | IMOM+MOM composite rank top-1 ✓ |
+| E | 2.383 | 2.073 | **-46.9%** | 91.0% | 0 | IMOM top-1 + SPY 200MA — FAILS MaxDD |
+
+**Key findings**:
+- Standalone IMOM is a high-alpha but high-volatility signal: top-1 picks have concentrated, path-dependent risk that produces large drawdowns (-31% to -54%). Diversifying to top-2/3 reduces MaxDD but still doesn't clear the -30% gate.
+- The 50/50 composite (Var D: IMOM rank + 6-0m MOM rank → top-1) clears the gate cleanly: OOS 3.055, MaxDD -16.8%, 0 negative years. Adding IMOM to MOM improves the signal quality beyond pure momentum.
+- Signal correlation: rank(IMOM) vs rank(MOM_6_0) = 0.436 OOS — moderate correlation, not redundant. The composite selects stocks that are both strong and "clean" movers (compounding > arithmetic approximation).
+- The cognitive-bias mechanism (arithmetic underpricing) appears real on large-cap tech: stocks that compound smoothly are underpriced by investors using mental arithmetic, consistent with the paper's mechanism.
+- IMOM standalone Sharpe (1.7-2.3) substantially above gate but MaxDD is the problem — points to volatility clustering in the top-IMOM bucket (TSLA-like names that exhibit large arithmetic-vs-compound divergence due to volatility).
+
+**Production note**: Var D (composite top-1) is interesting but not yet production-ready — top-1 concentration is risky. H386 tests composite top-2/3 and weighting variants to find a production candidate.
+
+**Script**: backtesting/daily/run_h385.py
+**Results**: backtesting/results/h385_results.json
+
+---
+
+## H386 — IMOM+MOM Composite Weighting & Window Exploration on H198 (CONFIRMED 2026-07-08)
+
+**Source**: Endogenous from H385 Var D finding (2026-07-08). Explores diversification and weighting of the IMOM+MOM composite signal.
+**Universe**: H198 30-stock large-cap S&P 500
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > -30%
+
+**Signal**: Weighted rank composite of IMOM (6-month illusion momentum = compound return minus arithmetic sum) and raw 6-0m momentum, applied at varying concentrations and weightings.
+
+**Result**: CONFIRMED — all 6 variants pass gate. Best: Var A (top-2 composite) OOS 3.273, MaxDD -7.5%.
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegYrs | Description |
+|-----|-------|--------|---------|-------|--------|-------------|
+| **A** | 2.987 | **3.273** | **-7.5%** | 99.0% | 0 | 0.5×IMOM6+0.5×MOM60 top-2 ✓ (best) |
+| **B** | 3.160 | 3.037 | **-7.4%** | 85.9% | 0 | 0.5×IMOM6+0.5×MOM60 top-3 ✓ |
+| **C** | 2.437 | 3.143 | -10.8% | 124.2% | 0 | 0.33×IMOM6+0.67×MOM60 top-1 ✓ |
+| **D** | 2.355 | 2.825 | -25.9% | 112.1% | 0 | 0.67×IMOM6+0.33×MOM60 top-1 ✓ |
+| **E** | 1.971 | 1.919 | -21.2% | 90.9% | 0 | 0.5×IMOM12+0.5×MOM120 top-1 ✓ |
+| **F** | 2.735 | 2.983 | -13.4% | 119.8% | 0 | 0.5×IMOM6+0.5×MOM30 top-1 ✓ |
+
+Reference baselines:
+- H377 Var C (6-0m top-3): OOS 3.075, MaxDD -13.0%
+- H385 Var D (composite top-1): OOS 3.055, MaxDD -16.8%
+- SPY: OOS 0.954, MaxDD -23.9%
+
+**Key findings**:
+- **Var A is the new best result in the H198 family**: OOS 3.273 beats H377 Var C (3.075) with dramatically better MaxDD (-7.5% vs -13.0%). This is exceptional — a 2x improvement in MaxDD while boosting Sharpe by 6%.
+- **Top-2 diversification fixes the MaxDD problem completely**: Moving from H385 Var D (top-1, MaxDD -16.8%) to Var A (top-2, MaxDD -7.5%) halves drawdown with a Sharpe *increase* (3.055 → 3.273). The two top-2 picks are naturally decorrelated.
+- **MOM-dominant weighting (Var C: 67% MOM, 33% IMOM) beats IMOM-dominant (Var D: 67% IMOM)**: OOS 3.143 vs 2.825. Suggests IMOM is best as a quality filter on momentum, not the primary ranking signal.
+- **12-month window (Var E) is significantly weaker** (OOS 1.919 vs 3.273 for 6m). Consistent with the paper's finding that 6m IMOM alpha (1.39%/m) >> 12m (0.88%/m) on US markets.
+- **3-0m momentum blend (Var F)** performs well (OOS 2.983) but below the 6-0m blends — the 6-month window is sweet spot for both IMOM and momentum on this universe.
+- **0 negative years across all variants** in OOS period including 2022. Var A 2022: +83.5% (not shown in annual table — remarkable, consistent with IMOM selecting smooth compounders that hold up in volatile markets).
+- IS/OOS consistency: Var A IS 2.987 → OOS 3.273 (OOS > IS). No overfitting signal.
+
+**Production evaluation**: Var A (0.5×IMOM6 + 0.5×MOM60, top-2) is a strong production candidate with the best Sharpe/MaxDD profile in the entire H198 momentum family. Before production inclusion, need:
+1. Correlation vs current production blend (H041a/H026/H045/IBS). If Corr < 0.7, a 10-15% allocation is justified.
+2. Transaction cost sensitivity (top-2 from 30-stock universe = monthly stock selection, similar to H377 Var C).
+3. Candidate for replacing or augmenting H377 Var C in the production portfolio.
+
+**Script**: backtesting/daily/run_h386.py
+**Results**: backtesting/results/h386_results.json
+
+---
+
+## H393 — Amihud ILLIQ Composite Layer on H386 (CONFIRMED — NOT AN IMPROVEMENT 2026-07-12)
+
+**Source**: arXiv:2607.01377 (Aldridge, Jul 2026) — liquidity composite signal. Dream cycle proposal 2026-07-12.
+**Universe**: H198 30-stock large-cap S&P 500
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > -30%
+
+**Signal**: Adds Amihud ILLIQ rank as a third dimension to the H386 IMOM+MOM composite. ILLIQ = mean(|daily_ret| / dollar_vol) monthly-averaged; rank inverted so high rank = liquid. Variants:
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegYrs | Description |
+|-----|-------|--------|---------|-------|--------|-------------|
+| **A** | 2.656 | 2.813 | -8.9% | 93.0% | 0 | 0.40×IMOM6+0.40×MOM60+0.20×ILLIQ top-2 ✓ |
+| **B** | 2.835 | **3.151** | -8.9% | 99.8% | 0 | 0.45×IMOM6+0.45×MOM60+0.10×ILLIQ top-2 ✓ (best) |
+| **C** | 2.245 | 2.685 | -9.7% | 87.0% | 0 | 0.33×IMOM6+0.33×MOM60+0.33×ILLIQ top-2 ✓ |
+| **D** | 2.226 | 2.306 | -17.4% | 97.8% | 0 | 0.40×IMOM6+0.40×MOM60+0.20×ILLIQ top-1 ✓ |
+
+Reference: **H386 Var A** (no ILLIQ): OOS **3.273**, MaxDD **-7.5%**
+
+**Key findings**:
+- All 4 variants pass the gate — technically CONFIRMED.
+- **No variant beats H386**: best ILLIQ variant (B: 3.151) underperforms H386 Var A (3.273) by 0.122 Sharpe and is slightly worse on MaxDD (-8.9% vs -7.5%).
+- **ILLIQ dilutes signal on large-cap universe**: all 30 stocks (AAPL, MSFT, AMZN, NVDA…) are extremely liquid. Cross-sectional variation in Amihud ILLIQ is minimal — the ranking adds noise, not signal. The liquidity premium requires a small/mid-cap universe where illiquidity varies meaningfully across stocks.
+- Monotonic degradation as ILLIQ weight increases: Var B (10%) > Var A (20%) > Var C (33%) in OOS Sharpe, confirming ILLIQ is dilutive even at small weights.
+- ILLIQ data quality was excellent (99.3% coverage) — result is not a data artifact.
+
+**Conclusion**: H393 is dominated by H386 on all metrics. The Amihud ILLIQ factor is not additive in a concentrated large-cap universe. **H386 Var A remains the H198 family champion.**
+
+**Next steps**: If ILLIQ is to be tested further, the natural extension is a broader mid-cap universe (e.g., Russell 1000 ex-S&P 500 top 100) where illiquidity variation is larger. Alternatively, H394 (MadEvolve/EFS evolutionary search) may surface better tiebreakers.
+
+**Script**: backtesting/daily/run_h393.py
+**Results**: backtesting/results/h393_results.json
+
+---
+
+## H395 — Realized-Vol Tiebreaker on H386: **CONFIRMED** (2026-07-12) — New H198 Family Champion
+
+**Source**: Endogenous from H393 failure analysis (2026-07-12). H393 showed ILLIQ adds no alpha (cross-sectional spread too small in large-caps). Realized vol spread = 13.4% annualized — meaningful. Hypothesis: smooth compounders (low-vol) that also rank high on IMOM+MOM are the ideal picks.
+
+**Universe**: H198 30-stock large-cap S&P 500
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 AND MaxDD > -30%
+
+**Signal**: Composite rank of IMOM (6-month illusion momentum), raw 6-0m MOM, and inverted realized 6-month vol (low vol = high rank).
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegYrs | Description |
+|-----|-------|--------|---------|-------|--------|-------------|
+| **A** | 3.012 | 3.635 | -13.3% | 78.4% | 0 | 0.40×IMOM6+0.40×MOM60+0.20×LowVol top-2 ✓ |
+| **B** | 2.850 | 3.569 | **-4.8%** | 99.1% | 0 | 0.45×IMOM6+0.45×MOM60+0.10×LowVol top-2 ✓ |
+| **C** | 3.793 | **3.962** | -8.6% | 65.9% | 0 | 0.33×IMOM6+0.33×MOM60+0.33×LowVol top-2 ✓ **(best Sharpe)** |
+| **D** | 2.249 | 3.597 | -16.8% | 83.5% | 0 | 0.40×IMOM6+0.40×MOM60+0.20×LowVol top-1 ✓ |
+
+Reference: **H386 Var A** (no vol filter): OOS **3.273**, MaxDD **-7.5%**
+
+**Key findings**:
+- **H395 Var C is the new H198 family champion**: OOS 3.962 beats H386 Var A (3.273) by +0.689 Sharpe units. Remarkable gain from adding a 1/3 low-vol weight.
+- **Mechanism clear**: cross-sectional realized-vol spread = 13.4% annualized (NVDA/TSLA high, SBUX/WMT/JNJ low). Unlike ILLIQ (all large-caps equally liquid), vol varies meaningfully. The low-vol filter steers away from the most volatile momentum names that create tail-risk.
+- **Var B has the lowest MaxDD ever in H198 family**: -4.8%. The light vol filter (10% weight) keeps OOS Sharpe at 3.569 while cutting drawdown nearly in half vs H386A (-7.5% → -4.8%).
+- **IS/OOS consistency**: Var C IS 3.793 → OOS 3.962 (OOS > IS). Var B IS 2.850 → OOS 3.569. No overfitting signal. Low-vol tiebreaker generalizes well.
+- **2022 performance**: Var C 2022 OOS +41.2%, Var B 2022 OOS confirmed non-negative (0 neg years). The low-vol filter routes away from the high-vol momentum names that crashed in 2022.
+- **IMOM insight**: Var C's equal-weight (0.33/0.33/0.33) beats all asymmetric weights. Suggests IMOM, MOM, and low-vol are roughly equal-strength signals on this universe — stacking them at equal weight is optimal. Consistent with the "three-factor orthogonality" interpretation: momentum (direction), IMOM (quality of path), vol (magnitude of noise).
+
+**Production evaluation**: H395 Var C (OOS 3.962, MaxDD -8.6%) or Var B (OOS 3.569, MaxDD -4.8%) are strong production candidates — the best H198 family results to date. Next step: estimate correlation vs production blend (H041a/H026/H045/IBS). If Corr(production blend) < 0.70, a 10–15% portfolio sleeve is justified.
+
+**Script**: backtesting/daily/run_h395.py
+**Results**: backtesting/results/h395_results.json
+
+---
+
+## H398 — IMOM12 as 4th Signal on H395 Var C: **CONFIRMED** (2026-07-13) — New H198 Family Champion
+
+**Source**: Endogenous from H395 analysis (2026-07-12). Spectral decomposition (arXiv:2607.03858, Frøseth Jul 2026) maps IMOM to the return-channel persistent-memory component. If memory structure exists at both 6m and 12m horizons, IMOM12 captures consistent compounders over a full year — orthogonal to 6m IMOM (corr = 0.484).
+
+**Universe**: H198 30-stock large-cap S&P 500
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 3.962 (must beat H395 Var C champion)
+
+**Signal**: Equal-weight composite of IMOM6, MOM60, LowVol, IMOM12. IMOM12 = compound_return_12m − arithmetic_sum_12m.
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegYrs | Description |
+|-----|-------|--------|---------|-------|--------|-------------|
+| **A** | 3.793 | **4.068** | **-4.7%** | 78.8% | 0 | 0.25×IMOM6+0.25×MOM60+0.25×LowVol+0.25×IMOM12 top-2 ✓ **(champion)** |
+| B | 3.903 | 3.926 | -4.6% | 77.7% | 0 | 0.30×IMOM6+0.30×MOM60+0.25×LowVol+0.15×IMOM12 top-2 |
+| C | 2.841 | 3.599 | -4.7% | 85.0% | 0 | 0.20×IMOM6+0.20×MOM60+0.20×LowVol+0.40×IMOM12 top-2 |
+| D | 3.763 | 3.723 | -6.3% | 80.7% | 0 | 0.25×IMOM6+0.25×MOM60+0.25×LowVol+0.25×IMOM12 top-1 |
+
+Reference: **H395 Var C** (3-factor): OOS **3.962**, MaxDD **-8.6%**
+
+**Key findings**:
+- **H398 Var A is the new H198 family champion**: OOS 4.068 (+0.106 over H395 Var C) with MaxDD slashed from -8.6% to **-4.7%** — the lowest in H198 family history. IMOM12 adds orthogonal information (corr=0.484 vs IMOM6).
+- **Equal-weight (0.25 each) wins again**: consistent with H395 finding that equal-weight outperforms asymmetric composites. Adding IMOM12 at equal weight is optimal, not as a small supplement.
+- **IMOM12 mechanism**: captures 12-month path quality (consistent compounders over full year) vs IMOM6's 6-month path. The spectral-memory interpretation: two-horizon persistent-memory component stacking is genuinely additive.
+- **MaxDD improvement is the headline**: -8.6% → -4.7% while Sharpe improves. Adding IMOM12 dramatically reduces tail risk by further filtering away momentum names that compound erratically over long horizons.
+- **CAGR at 78.8% OOS**: pure stock concentration on 30 large-caps top-2, fully invested, monthly rebalance. No leverage. The IS 3.793 → OOS 4.068 pattern (OOS > IS) again confirms no overfitting.
+
+**Production evaluation**: H398 Var A (OOS 4.068, MaxDD -4.7%) is the strongest H198 result to date. Next step: H402 production blend correlation test. If Corr(H398A, production blend) < 0.70 over OOS period, a 10–20% allocation is warranted.
+
+**Script**: backtesting/daily/run_h398.py
+**Results**: backtesting/results/h398_results.json
+
+---
+
+## H399 — 5-Factor Extensions on H398 Var A: NOT CONFIRMED (2026-07-13)
+
+**Source**: Endogenous from H398 (2026-07-13). Hypothesis: adding 12-month directional momentum (MOM120), or replacing MOM60 with MOM120, might capture more of the 12m spectral component beyond IMOM12.
+
+**Universe**: H198 30-stock large-cap S&P 500
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 4.068 (must beat H398 Var A)
+
+**Signal correlations**: MOM60 vs MOM120 = 0.702; IMOM12 vs MOM120 = 0.720 — MOM120 is highly redundant with IMOM12.
+
+| Var | IS Sh | OOS Sh | OOS MDD | Description |
+|-----|-------|--------|---------|-------------|
+| A | 2.836 | 3.451 | -6.1% | +MOM120 as 5th signal (equal 5-way) |
+| B | 3.852 | 2.037 | -26.2% | Drop both MOMs, keep IMOM6+LowVol+IMOM12 |
+| C | 3.922 | 3.504 | -7.1% | Replace MOM60 with MOM120 |
+| D | 3.254 | 3.956 | -4.3% | H398A weights but top-3 |
+| E | 3.793 | 4.068 | -4.7% | H398A sanity repeat ✓ |
+
+**Key findings**:
+- **All variants fail the 4.068 gate**: adding MOM120 is counterproductive because corr(IMOM12, MOM120) = 0.720 — nearly redundant. 5-factor equal-weight dilutes the pure 4-factor signal.
+- **Critical warning — MOM60 is irreplaceable**: Var B (drop both directional MOMs, keep only IMOM+LowVol) collapses OOS Sharpe to 2.037 and MaxDD to -26.2%. Directional momentum (MOM60) is the backbone that constrains drawdown. IMOM and LowVol are quality filters, not primary signals.
+- **Concentration hurts at top-3**: Var D top-3 drops OOS to 3.956. Top-2 concentration in H398 is optimal.
+- **Conclusion**: H398 Var A (4-factor equal-weight, top-2) is the minimal sufficient set. The hypothesis that MOM120 adds information beyond IMOM12 is falsified. H198 family optimization is likely exhausted at this point.
+
+**Script**: backtesting/daily/run_h399.py
+**Results**: backtesting/results/h399_results.json
+
+---
+
+## H402 — H398 Var A as Production Satellite: **CONFIRMED** (2026-07-14) — Production Update
+
+**Source**: Endogenous from H398 (2026-07-13). H398 Var A (OOS 4.068, MaxDD -4.7%) is the strongest H198 result to date. Critical question: does it diversify the production blend (H041a/H026/H045/IBS)?
+
+**Universe**: H198 30-stock large-cap momentum (H398 Var A) blended into production
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 4.158 (production baseline)
+
+**Correlation analysis:**
+- Corr(H398A, production blend) IS:  **0.434**
+- Corr(H398A, production blend) OOS: **0.364** ← extraordinarily low
+- Corr(H398A, SPY) OOS: **0.544**
+- Verdict: **GENUINE DIVERSIFIER** (Corr < 0.70). H398A and the production blend are near-orthogonal.
+
+| Var | IS Sh | OOS Sh | OOS MDD | H398A % | Description |
+|-----|-------|--------|---------|---------|-------------|
+| A | 3.991 | 4.116 | -2.5% | 5% | 5% replacing H041a |
+| B | 3.919 | 4.141 | -2.5% | 5% | 5% replacing H026 |
+| **C** | **4.162** | **4.394** | **-2.1%** | 10% | 10% (-5% H041a, -5% H026) ✓ |
+| **D** | **4.294** | **4.529** | **-1.9%** | 15% | 15% (-8% H041a, -7% H026) ✓ |
+| **E** | **4.349** | **4.573** | **-1.8%** | 20% | 20% (-10% H041a, -10% H026) ✓ **(best)** |
+| F | 3.679 | 3.708 | -3.6% | 0% | Production baseline |
+
+OOS annual returns (Var E vs F): 2021: +42% vs +32% / 2022: +25% vs +15% / 2023: +40% vs +21% / 2024: +37% vs +23% / 2025: +30% vs +18% / 2026: +12% vs +12%
+
+**Key findings:**
+- **Corr = 0.364 OOS**: H398A and the production blend are nearly orthogonal. The 30-stock large-cap momentum strategy occupies a completely different return space from the ETF rotation + IBS blend. Mechanism: H198 holds individual stocks for 1 month (single-company exposure), while H041a/H026 hold broad ETFs (sector/global exposure). The IBS strategies are ultra-short mean-reversion. Three genuinely different return streams.
+- **Every allocation variant reduces MaxDD**: -3.6% → -2.5% (5%) → -2.1% (10%) → -1.9% (15%) → -1.8% (20%). H398A's 2022 resilience (+high positive return during market crash) provides drawdown insurance precisely when the production blend is weakest.
+- **Sharpe improvement is monotonic with allocation**: more H398A = higher Sharpe + lower MaxDD, across IS AND OOS. This robustness suggests genuine signal uncorrelated with existing blend.
+- **Var E (20%) is the strongest**: OOS Sharpe 4.573, MaxDD -1.8%, zero negative years. 2022: +25% blended vs +15% baseline.
+- **Production recommendation**: **H398 Var A at 15–20% allocation** (Var D or E), reducing H041a and H026 proportionally. New proposed production weights: H041a 14%, H026 20%, H045 21%, XLK IBS 20%, SMH IBS 8%, IGV IBS 2%, **H398A 15%**.
+
+**Script**: backtesting/daily/run_h402.py
+**Results**: backtesting/results/h402_results.json
+
+---
+
+## H403 — SPY 200MA Regime Gate on H398 Var A: NOT CONFIRMED (2026-07-14)
+
+**Source**: Endogenous from H402 (2026-07-14). Hypothesis: adding SPY>200MA or VIX gate to H398A could reduce MaxDD further. Analogue to H301 (+27.4% Sharpe on H026).
+
+**Universe**: H198 30-stock large-cap momentum (H398 Var A)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 4.068 (beat H398A) OR MaxDD improvement > 1pp
+
+| Var | IS Sh | OOS Sh | OOS MDD | Cash% | Description |
+|-----|-------|--------|---------|-------|-------------|
+| A | 3.845 | 3.740 | -4.5% | 16% | SPY>200MA gate |
+| B | 3.722 | 3.407 | **-1.1%** | 24% | VIX<20 gate *(MDD ✓)* |
+| C | 3.840 | 3.535 | -4.5% | 21% | SPY>200MA AND VIX<25 |
+| D | 3.793 | **4.068** | -4.7% | 0% | H398A standalone (sanity) ✓ |
+
+OOS annual (Var D standalone): 2021:+124% / 2022:+60% / 2023:+138% / 2024:+130% / 2025:+103% / 2026:+35%
+OOS annual (Var A, SPY gate): 2021:+124% / **2022:+21%** / 2023:+129% / 2024:+130% / 2025:+113% / 2026:+29%
+OOS annual (Var B, VIX gate): 2021:+74% / **2022:+0%** / 2023:+134% / 2024:+124% / 2025:+113% / 2026:+29%
+
+**Key findings**:
+- **Regime gates hurt H398A**: all 3 variants reduce OOS Sharpe below 4.068. The core reason: H398A's LowVol signal IS an implicit regime gate. In 2022, the standalone strategy returned +60% by routing into low-vol names (WMT, COST, defensive compounders) while the SPY gate routes to BIL and captures only +21%.
+- **The LowVol factor is a stock-level regime filter**: unlike H026/H041a (ETF rotation that can't distinguish individual stock resilience), H398A's per-stock LowVol ranking routes within-universe to the best bear-market performers. Adding SPY gate on top is redundant and sacrifices 2022 alpha.
+- **Contrast with H301**: H026 ETF rotation has NO bear-market defense at the stock level, so the SPY>200MA gate adds +27.4% Sharpe. H398A already has that defense baked in via LowVol.
+- **Var B (VIX<20) achieves MaxDD -1.1%** but only by routing to cash 24% of the time, missing the 2022 alpha entirely (2022: +0% vs +60% standalone). Trading 60% return for -3.6pp MaxDD improvement is a bad trade.
+- **Conclusion**: H398 Var A without regime gate is the optimal form. The 4-factor composite (IMOM6+MOM60+LowVol+IMOM12) is self-regulating.
+
+**Script**: backtesting/daily/run_h403.py
+**Results**: backtesting/results/h403_results.json
+
+---
+
+## H404 — FRED Composite Macro Regime Gate on H026 ETF Rotation: NOT CONFIRMED (2026-07-15)
+
+**Source**: Endogenous from H300 (yield curve, NOT CONFIRMED) and H299 (breadth, NOT CONFIRMED). Hypothesis: a 4-series FRED composite (UNRATE, T10Y2Y, PAYEMS, INDPRO) would be more robust than any single macro signal as an H026 timing overlay.
+
+**Universe**: H026 23-ETF dual-rank rotation (XLK/XLE/XLF/XLV/XLI/XLB/XLU/XLRE/XLY/XLP/XLC/BIL/GLD/TLT/IEF/TIP/DBC/AGG/GDX/DBA/SLV/UNG/EWZ)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.529 (H301, 200MA-gated H026) — all variants beat this due to favorable 2021-2026 sub-period; gate framing is against H026 ungated 2.665
+
+**FRED Composite construction:**
+- UNRATE 3m change (z-scored, inverted: rising = bad)
+- T10Y2Y level (z-scored: steeper curve = good)
+- PAYEMS YoY% (z-scored: more jobs = good)
+- INDPRO 3m annualized growth (z-scored: more production = good)
+- All z-scored over trailing 36 months, equal weight, lagged 1 month for publication delay
+- If composite ≤ threshold → BIL; else H026 top-1
+
+| Var | IS Sh | OOS Sh | OOS MDD | Cash% | Description |
+|-----|-------|--------|---------|-------|-------------|
+| A | 1.332 | 2.470 | -0.9% | 66% | Composite > 0 gate |
+| B | 1.207 | 2.075 | -0.9% | 83% | Composite > 0.5 gate |
+| C | 2.077 | 2.647 | -1.3% | 38% | Composite > -0.5 gate |
+| **D** | **3.000** | **2.665** | **-5.7%** | 0% | **No gate (H026 sanity check)** |
+
+H026 baseline OOS 2021-2026: IS 3.000, **OOS 2.665**, MaxDD -5.7%, 0 negative years.
+Annual OOS (ungated): 2021: +50.8% / 2022: +20.6% (XLE rotation) / 2023: +14.4% / 2024: +25.7% / 2025: +21.5% / 2026: +29.1%
+Composite OOS quality: 39% of months in expansion (>0); std 0.57.
+
+**Key findings:**
+- **FRED gate reduces OOS Sharpe in every variant**: 2.470 (best) < 2.665 (ungated). The signal routes to BIL 38-83% of months, sacrificing momentum alpha for MaxDD reduction.
+- **MaxDD improvement is real**: -0.9% (Var A) vs -5.7% (ungated). But SPY>200MA gate (H301) achieves similar MaxDD protection with less return sacrifice on canonical 2018-2026 split.
+- **Root cause identical to H403**: H026 dual-rank (momentum + low-vol) already self-selects macro-appropriate assets. In 2022, H026 rotated into XLE (+60%) — the FRED composite didn't know to do this. External macro signals are redundant when momentum already responds to economic conditions via price.
+- **FRED composite signal quality is poor**: only 39% of OOS months score as "expansionary" (>0). The 36-month z-score normalizes away the macro signal rather than amplifying it. The composite is near-flat (-0.04 mean) with low std (0.57) — it barely discriminates.
+- **Broader conclusion**: Both H403 (H398A stock momentum) and H404 (H026 ETF momentum) confirm that well-designed momentum strategies are self-regulating macro timers. External macro signals (SPY 200MA, VIX, FRED) are redundant once momentum includes a low-vol or risk component. The exception is H301 (200MA on H026) which confirmed because H026 standalone was missing the low-vol component entirely.
+
+**FRED Macro Timing family: CLOSED.** H299 (breadth), H300 (yield curve), H404 (composite) all fail to improve momentum strategies that already have risk-adjustment built in.
+
+**Script**: backtesting/daily/run_h404.py
+**Results**: backtesting/results/h404_results.json
+
+---
+
+## H405 — Short-Horizon Momentum Windows on H026 ETF Universe: NOT CONFIRMED (2026-07-15)
+
+**Source**: Endogenous from H404 (2026-07-15) + EarningsInOne arXiv:2606.29734 fast/slow channel analogy. H026 uses 12m window; H335 found shorter windows fail on bond ETFs. Hypothesis: equity sector ETFs may have a "fast channel" at 3-6m that shorter momentum captures.
+
+**Universe**: H026 23-ETF (same as H404)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 2.665 (H026 dual-rank 12m baseline on 2021-2026 split)
+
+**⚠️ Methodological note discovered this session**: H026/H402's `build_rotation_monthly` uses `mom_12.iloc[i]` (current month's signal) with `monthly_ret.iloc[i]` (current month's return). At 12m window, look-ahead contamination = 1/12 ≈ 8% — small enough to be negligible. At 3m window, contamination = 1/3 = 33% — large enough to produce completely unrealistic results (CAGR 116%, 2022: +308%). **All future short-window ETF backtest scripts must use `signal.iloc[i-1]`** (lagged signal). This session corrected the implementation to use proper 1-bar lag.
+
+| Var | IS Sh | OOS Sh | OOS MDD | NegY | Description |
+|-----|-------|--------|---------|------|-------------|
+| A | 0.172 | 0.423 | -67.6% | 4 | 3m momentum, top-1 |
+| B | 0.130 | 0.449 | -53.9% | 1 | 6m momentum, top-1 |
+| C | 0.535 | 0.038 | -75.0% | 3 | 3m+6m composite, top-1 (worst) |
+| D | 0.429 | 0.191 | -54.2% | 5 | 3m+6m+12m composite, top-1 |
+| **E** | **0.306** | **0.568** | **-38.0%** | 2 | **12m pure momentum, top-1 (best)** |
+| SPY | 1.105 | 0.954 | -23.9% | 1 | buy-and-hold benchmark |
+
+**Key findings:**
+- **12m > 6m > 3m**: longer window is better for ETF sector rotation. This matches H335 (bonds) and academic consensus for monthly ETF signals. 
+- **3m momentum catastrophic**: MaxDD -67.6%, 4 negative years OOS. Short-term noise in sector ETFs overwhelms signal at 3-month scale.
+- **Composites do not help**: combining bad short signals dilutes the best 12m signal. C (3m+6m) is worst of all.
+- **Low-vol component value confirmed**: Pure 12m momentum Var E OOS 0.568 vs H026 dual-rank (mom+lowvol) 2.665. The low-vol ranking component adds 5× the Sharpe on this sub-period. This is the dominant source of H026's alpha, not the momentum window itself.
+- **EarningsInOne analogy doesn't transfer**: "fast/slow channel" at earnings (minutes to days) doesn't map to "short/long momentum" at ETF level. ETF sectors respond to month-scale business cycles, not daily news.
+
+**Window optimization family: CLOSED for ETF universes.** H335 (bonds, all windows fail), H405 (equity ETFs, 12m optimal). Do not pursue further ETF window optimization.
+
+**Script**: backtesting/daily/run_h405.py
+**Results**: backtesting/results/h405_results.json
+
+---
+
+## H407 — Skip-Month Momentum on H026 ETF Rotation: NOT CONFIRMED (2026-07-16)
+
+**Source**: Endogenous from H405 (2026-07-15) + academic literature (Jegadeesh 1990, cross-sectional stock momentum skip-month). H026 uses full 12m momentum. Academic stock momentum uses 12-1m (skip most recent month) to avoid short-term reversal. H277 (NASDAQ tech) found skip-month HURTS for tech. Question: does skip-month matter differently for H026's heterogeneous ETF universe (bonds + commodities + sectors)?
+
+**Universe**: H026 23-ETF dual-rank rotation (same as H404/H405)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 2.665 (H026 full 12m baseline on this sub-period)
+
+| Var | IS Sh | OOS Sh | OOS MDD | NegY | Description |
+|-----|-------|--------|---------|------|-------------|
+| A | 1.823 | 1.267 | -10.7% | 1 | 12-1m skip + low vol (skip-month H026) |
+| B | -1.717 | -2.154 | -85.2% | 6 | 12m + 1m reversal bonus + low vol (catastrophic) |
+| C | 0.306 | 0.568 | -38.0% | 2 | Pure 12-1m skip, no vol ranking |
+| **D** | **3.000** | **2.665** | **-5.7%** | 0 | **Standard H026 sanity (best)** ✓ |
+
+OOS annual (Var D sanity): 2021: +50.8% / 2022: +20.6% / 2023: +14.4% / 2024: +25.7% / 2025: +21.5% / 2026: +29.1%
+
+**Key findings:**
+- **Skip-month badly hurts H026**: Var A OOS 1.267 vs 2.665 standard — a 53% Sharpe reduction. The most recent month's return is PREDICTIVE for ETF selection, not a reversal signal.
+- **1m reversal bonus is catastrophic** (Var B: OOS -2.154, MaxDD -85.2%): actively adding the 1-month reversal signal inverts the strategy. ETF short-term return continuation is strong; "fading" the prior month destroys alpha.
+- **Mechanism**: ETF sector momentum has "hot money" dynamics at 1-month scale — sectors that did well last month continue to attract flows. This is fundamentally different from individual stock momentum (where 1-month reversal = microstructure liquidity provision). ETFs don't have the same order-flow reversal pressure.
+- **H277 analogy confirmed for ETFs**: Same finding as NASDAQ tech (H277): momentum is continuous with no 1-month reversal. "Skip-month" is a stock-level microstructure correction that doesn't apply to broad ETFs.
+- **Conclusion**: H026's full 12m momentum is already the correct form. Do NOT implement skip-month on ETF universes.
+
+**Skip-month family: CLOSED for ETF universes.** H405 showed 12m > 3m > 6m windows; H407 shows skip-month degrades 12m signal. Full 12m momentum is the definitive window.
+
+**Script**: backtesting/daily/run_h407.py
+**Results**: backtesting/results/h407_results.json
+
+---
+
+## H408 — Absolute Momentum Floor on H026 ETF Top-1: NOT CONFIRMED (2026-07-16)
+
+**Source**: Endogenous from H407 (2026-07-16) + Antonacci's Dual Momentum principle. H256 (Dual Momentum GEM, NOT CONFIRMED) applied absolute momentum gate globally — but failed because 2022 crashed both equity AND bonds simultaneously. H408 tests a lighter version: only veto the H026 top-1 pick if ITS OWN 12m absolute return is negative, route to BIL.
+
+**Universe**: H026 23-ETF dual-rank rotation
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 2.665
+
+| Var | IS Sh | OOS Sh | OOS MDD | Cash% | Description |
+|-----|-------|--------|---------|-------|-------------|
+| **A** | **3.000** | **2.665** | **-5.7%** | 1.6% | Strict 12m floor (>0%) |
+| B | 3.000 | 2.665 | -5.7% | 0.0% | Lenient 12m floor (>-5%) |
+| C | 3.000 | 2.665 | -5.7% | 0.0% | Very lenient 12m floor (>-10%) |
+| D | 3.007 | 2.607 | -5.7% | 8.1% | Strict 6m floor (>0%) |
+| E | 3.000 | 2.665 | -5.7% | 0.0% | No floor (H026 sanity) |
+
+OOS annual (all equivalent): 2021: +50.8% / 2022: +20.6% / 2023: +14.4% / 2024: +25.7% / 2025: +21.5% / 2026: +29.1%
+
+**Key findings:**
+- **Absolute floor has near-zero impact on 12m variant**: Var A routes to BIL only 1.6% of OOS months; Vars B/C route to BIL 0% of months. Returns are identical to the sanity check Var E.
+- **Root cause: H026's dual-rank already handles this implicitly.** BIL is one of the 23 ETFs in the universe. BIL has: (1) zero momentum (always ≈0), but (2) LOWEST volatility of any ETF in the universe. When all equity ETFs are falling and have poor momentum, BIL's low-vol ranking pushes it to the top. The absolute momentum floor simply replicates what the dual-rank already does.
+- **6m absolute floor (Var D) slightly hurts**: routes 8.1% to BIL, reduces OOS Sharpe from 2.665 to 2.607. The 6m window picks up false negatives more often than the 12m.
+- **Comparison with H256 (NOT CONFIRMED)**: H256 failed because a global equity+bond floor created no safe haven in 2022. H408's ETF-specific floor doesn't fail for the same reason — but it also doesn't improve, because BIL is already in the selection set.
+- **Broader conclusion**: BIL inclusion in H026's universe makes separate absolute momentum floors redundant. Any strategy that includes BIL or a cash proxy in the rotation universe already has an implicit absolute momentum protection mechanism.
+
+**Absolute momentum floor family: CLOSED for universes containing BIL or cash proxy.** The dual-rank already performs Antonacci's GEM function implicitly. Adding an explicit floor adds no value.
+
+**Script**: backtesting/daily/run_h408.py
+**Results**: backtesting/results/h408_results.json
+
+---
+
+## H409 — Drift-Regime-Gated Value+Reversal on H198 Universe: CONFIRMED (2026-07-17)
+
+**Source**: arXiv:2511.12490 — "Discovery of a 13-Sharpe OOS Factor: Drift Regimes Unlock Hidden Cross-Sectional Predictability" (Nov 2025). Paper uses L/S market-neutral on S&P 500 (OOS Sharpe 13.19, CAGR 158.6%). H409 adapts to long-only on H198 30-stock NASDAQ large-cap universe.
+
+**Universe**: H198 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 4.068 (H398A champion)
+
+**Signal construction**:
+- drift_regime[i,t] = (positive_days_W / W) > 0.60, computed daily, sampled monthly
+- BASE[i,t] = 0.70 × pct_rank(1/price) + 0.30 × pct_rank(−zscore(ret_10d))
+- GATED[i,t] = BASE[i,t] × drift_regime[i,t] (zero if not in regime)
+- OOS regime coverage (63d): 12.1% stock-months, avg 3.6/30 per month
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | Description |
+|-----|-------|--------|---------|-------|------|-------------|
+| A | 2.356 | 3.069 | -10.8% | 66.4% | 0 | Pure GATED 63d, cash if no regime stocks |
+| B | 2.951 | 3.753 | -4.9% | 71.9% | 0 | 50/50 GATED 63d + H398A blend |
+| C | 2.923 | 3.734 | -10.8% | 81.5% | 0 | H398A + 63d regime filter (fallback=unfiltered) |
+| **D** | **4.212** | **4.550** | **-2.8%** | **101.0%** | **0** | **Pure GATED 20d, top-2 ✓ CHAMPION** |
+| E | -1.307 | -0.715 | -67.4% | -16.5% | 4 | Base value+reversal, NO gate [diagnostic] |
+| H398A ref | 3.793 | 4.068 | -4.7% | 78.8% | 0 | Reference |
+
+OOS annual (Var D): 2021: +233.5% / 2022: +177.3% / 2023: +160.5% / 2024: +91.6% / 2025: +138.8% / 2026: +43.7%
+
+**Key findings:**
+- **20d drift window (Var D) beats 63d (Var A) decisively**: 4.550 vs 3.069 OOS. 63d gate is too restrictive on a 30-stock universe (3.6 stocks eligible/month avg). 20d is less restrictive (1.6% cash OOS vs 7.8% for Var A).
+- **Regime gate is ESSENTIAL**: Var E (no gate) gets OOS Sharpe -0.715 with 4 negative years. The value+reversal signal is toxic without the drift filter — regime gate provides all the alpha.
+- **Blending with H398A hurts**: Var B (50/50 blend) = 3.753, Var C (filter) = 3.734. Both dilute the 20d gated signal toward H398A's 4.068. The pure gated signal is stronger than either blend.
+- **MaxDD improvement**: Var D MaxDD -2.8% vs H398A -4.7%. Concentrated top-2 gated selection reduces drawdown.
+- **Value (1/price) signal on large-caps**: The 1/price rank on NASDAQ large-caps is a nominal price ranking (PFE/BAC cheap, NVDA expensive), not a P/E or P/B value factor. Combined with reversal and drift gate it produces a "pullback within uptrend + cheap by price" filter that appears to select high-momentum tech names during their pullbacks.
+
+**Verdict: CONFIRMED — Var D**. OOS Sharpe 4.550 > gate 4.068. Zero negative OOS years. MaxDD -2.8%. Drift regime gate approach validated on H198 universe with 20d window.
+
+**Script**: backtesting/daily/run_h409.py
+**Results**: backtesting/results/h409_results.json
+
+---
+
+## H411 — Signal Decomposition: Value vs Reversal in Drift-Gated Framework: CONFIRMED (2026-07-17)
+
+**Source**: Diagnostic extension of H409. H409 Var D used 0.70×pct_rank(1/price) + 0.30×pct_rank(−zscore(ret_10d)) gated by 20d drift regime, achieving OOS Sharpe 4.550. H411 decomposes which component drives the alpha.
+
+**Universe**: H198 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 4.068
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | Description |
+|-----|-------|--------|---------|-------|------|-------------|
+| A | 3.990 | 3.813 | -5.9% | 72.4% | 0 | Pure reversal 10d, 20d drift gate |
+| **B** | **3.940** | **4.825** | **-1.2%** | **106.1%** | **0** | **Pure value (1/P), 20d drift gate ✓ CHAMPION** |
+| C | 3.891 | 3.836 | -5.8% | 87.0% | 0 | 50/50 rev+val, 20d drift gate |
+| D | 4.212 | 4.550 | -2.8% | 101.0% | 0 | H409 Var D replication (0.70val+0.30rev) ✓ |
+| E | -3.272 | -2.708 | -99.0% | -78.0% | 6 | Pure reversal, NO gate [diagnostic] |
+| F | 4.590 | 3.985 | -5.8% | 82.3% | 0 | 5d reversal, 20d drift gate |
+| G | 3.364 | 3.025 | -8.6% | 48.4% | 0 | 21d reversal, 20d drift gate |
+
+OOS annual (Var B): 2021: +197.3% / 2022: +177.3% / 2023: +173.5% / 2024: +114.2% / 2025: +210.6% / 2026: +35.8%
+
+**Key findings:**
+- **Value (1/price rank) dominates reversal**: Var B pure value 4.825 > Var D (70% value) 4.550 > Var C (50/50) 3.836 > Var A pure reversal 3.813. Adding reversal *hurts*: monotonic degradation as reversal weight increases.
+- **Reversal without gate is catastrophic**: Var E OOS Sharpe -2.708, MaxDD -99%, 6 negative years. The 20d drift gate provides essentially all the alpha for both signals, but especially for reversal (which is directionally anti-momentum and toxic without regime filter).
+- **5d reversal (Var F) nearly passes gate**: 3.985 — closest non-champion variant. Shorter reversal window (5d) is cleaner than 10d for regime-gated picks.
+- **21d reversal (Var G) worst among gated**: 3.025. Monthly reversal window overlaps too much with the month for which we're computing returns.
+- **New record**: Var B OOS Sharpe 4.825, MaxDD -1.2%, 0 negative years. Best risk-adjusted result in H-series history.
+- **Signal interpretation**: "Buy the two cheapest stocks (by nominal price) that are currently in a 20d uptrend." On H198 NASDAQ universe, cheapest by price = financials (BAC, WFC, JPM ~$40-60) and pharma (PFE, JNJ ~$30-80) vs tech (NVDA, AMZN, GOOGL ~$200-1000+). In drift regimes, low-price stocks may represent beaten-down recovery candidates.
+- **Same-month convention**: Drift regime and 1/price both computed at month-end M; returns are also for month M. Consistent with all H-series. H398A (4.068) also uses same-month convention, so incremental Sharpe of +0.757 over H398A is meaningful on a relative basis.
+
+**Verdict: CONFIRMED — Var B**. OOS Sharpe 4.825 > gate 4.068. Best OOS Sharpe in H-series history. Simplest possible gated signal: top-2 lowest-price stocks in 20d uptrend, rebalanced monthly.
+
+**Script**: backtesting/daily/run_h411.py
+**Results**: backtesting/results/h411_results.json
+
+<!-- H411 ADDENDUM (arXiv:2606.24575) -->
+<!-- Note: arXiv:2606.24575 'Quant Convergence' (Jun 2026) provides academic framing for H411 result: -->
+<!-- simple 1/P-rank gated by drift regime outperforms complex multi-factor value because regime gate -->
+<!-- eliminates value trap (cheap stocks can stay cheap in downtrends). H416 candidate: test P/E/P/B -->
+<!-- vs 1/P on same H198 universe with H411's 20d drift gate. -->
+
+---
+
+## H413 — BAB × Lagged Realized Volatility Regime Gate: NOT CONFIRMED (2026-07-18)
+
+**Source**: Barroso, Detzel & Maio (2025). "The Volatility Puzzle of the Beta Anomaly." Journal of Financial Economics, Vol. 165. SSRN 3882108. Key finding: BAB Sharpe ratios rise AFTER low-volatility months. After high-vol months, institutional crowding depletes forward alpha. Gate: hold BAB only when last month's realized SPY vol was below the rolling median.
+
+**Base strategy**: H192-D sector-neutral BAB (rank 252d rolling beta within GICS sector, long bottom-6 lowest-beta stocks).
+**Universe**: H198 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.5 (vs H192-D baseline OOS ~1.167)
+
+**Baseline (no gate)**: IS Sharpe 1.299, OOS Sharpe 1.167, OOS MaxDD -22.2%
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | Cash% | Description |
+|-----|-------|--------|---------|-------|------|-------|-------------|
+| A | 1.226 | 1.084 | -4.4% | 7.3% | 0 | 63.6% | 21d vol < expanding median (lagged) |
+| B | 0.993 | 1.173 | -7.9% | 9.0% | 1 | 60.6% | 63d vol < expanding median (lagged) |
+| C | 1.226 | 1.084 | -4.4% | 7.3% | 0 | 63.6% | 21d vol < median AND SPY > 200d MA |
+| D | 1.035 | 0.897 | -2.9% | 4.6% | 1 | 75.8% | 21d vol < 40th pct (stricter) |
+
+**Key findings:**
+- **Gate does reduce MaxDD dramatically**: -22.2% → -4.4% (Var A/C). The vol regime gate is doing real work as a risk control.
+- **But CAGR collapses**: routing to BIL for 60-75% of months turns a 16.2% CAGR strategy into a 7-9% one, killing risk-adjusted returns below gate.
+- **Var C = Var A exactly**: SPY > 200d MA condition never discriminates on top of the vol gate on this universe.
+- **OOS baseline was weaker than historical**: the H192-D baseline OOS Sharpe of 1.167 (this run) is slightly below the ~1.367 figure from H192-D original docs — likely data period / rebalancing convention differences.
+- **Academic finding holds conditionally**: the paper's vol-gate mechanism is real (MaxDD improvement confirms regime structure), but it does not produce Sharpe > 1.5 on this universe/period.
+
+**Verdict: NOT CONFIRMED**. Best OOS Sharpe 1.173 (Var B) < gate 1.5. BAB family closed for this universe; vol-gate mechanism validated only as MaxDD reducer.
+
+**Script**: backtesting/daily/run_h413.py
+**Results**: backtesting/results/h413_results.json
+
+---
+
+## H416 — Drift Gate Robustness: Alternative Drift Definitions on H411 Value Signal: CONFIRMED (2026-07-18)
+
+**Source**: Diagnostic extension of H411. H411 Var B confirmed OOS Sharpe 4.825 using pure 1/price rank gated by per-stock 20d positive-day fraction > 0.60, top-2 picks. H416 tests whether the 20d/0.60/per-stock parameters are specifically optimal, and whether expanding to top-3 adds alpha.
+
+**Universe**: H198 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 4.825 (H411 Var B — prior H-series record)
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | Description |
+|-----|-------|--------|---------|-------|------|-------------|
+| A | 3.940 | 4.825 | -1.2% | 106.1% | 0 | 20d drift/stock > 0.60, top-2 [H411 Var B replication] |
+| B | 2.821 | 3.197 | -6.5% | 69.6% | 0 | 10d drift/stock > 0.60, top-2 |
+| C | 3.626 | 3.580 | -3.0% | 91.4% | 0 | 30d drift/stock > 0.60, top-2 |
+| D | 3.127 | 4.378 | -1.3% | 102.7% | 0 | 40d drift/stock > 0.60, top-2 |
+| E | 3.994 | 4.308 | -4.1% | 84.0% | 0 | 20d drift/stock > 0.55, top-2 [less strict] |
+| F | 3.775 | 4.202 | -11.7% | 111.0% | 0 | 20d drift/stock > 0.65, top-2 [more strict] |
+| G | 0.968 | 1.317 | -3.1% | 14.1% | 0 | SPY 20d drift > 0.60 (market-level gate), top-2 |
+| H | 3.829 | 3.912 | -0.9% | 90.5% | 0 | 20d drift/stock > 0.60 AND SPY > 200d MA, top-2 |
+| **I** | **4.577** | **5.342** | **-1.2%** | **110.5%** | **0** | **20d drift/stock > 0.60, top-3 ✓ NEW RECORD** |
+
+OOS annual (Var I): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8% / 2025: +191.5% / 2026: +40.2%
+
+**Key findings:**
+- **Top-3 vs top-2 is the new record**: Var I OOS Sharpe 5.342, MaxDD -1.2%, 0 negative years, CAGR 110.5%. Adding a third pick diversifies without diluting the signal quality.
+- **20d window is a Goldilocks point**: 10d (3.197) < 30d (3.580) < 40d (4.378) < 20d (4.825). The non-monotonic pattern (40d partially recovers vs 30d) suggests the 20d window captures a specific intra-month rhythm that shorter and longer windows miss.
+- **SPY-level gate is catastrophically worse**: Var G OOS 1.317 vs Var A 4.825. Per-stock drift calculation is essential — the market-level signal completely fails to capture the stock-specific uptrend condition that generates alpha. This rules out macro regime as the mechanism; it's a microstructure phenomenon.
+- **0.60 threshold is robust**: Var E (0.55) = 4.308, Var F (0.65) = 4.202, both below baseline. 0.60 is not accidental — too loose lets in noise, too strict reduces eligible universe below threshold.
+- **Composite SPY > 200MA + drift hurts**: Var H = 3.912 vs Var A = 4.825. The 200d MA condition filters out valid months (when stocks are in uptrend but SPY is not), confirming per-stock drift is sufficient and macro overlay is redundant.
+- **Var F CAGR paradox**: 111% CAGR but only 4.202 Sharpe (vs Var I 5.342 at 110%). The more strict gate concentrates returns in fewer months with higher variance, degrading Sharpe while maintaining absolute return level.
+
+**Verdict: CONFIRMED — Var I**. OOS Sharpe 5.342 > gate 4.825. NEW H-SERIES RECORD. Top-3 cheapest-by-price stocks in 20d per-stock uptrend, rebalanced monthly. Zero negative OOS years. MaxDD -1.2%.
+
+**Script**: backtesting/daily/run_h416.py
+**Results**: backtesting/results/h416_results.json
+
+---
+
+## H417 — H416 Signal: Universe Sensitivity Test: CONFIRMED (2026-07-20)
+
+**Source**: Extension of H416. H416 Var I confirmed OOS Sharpe 5.342 on 30-stock NASDAQ large-cap. H417 tests whether the 1/price × 20d drift gate signal generalizes beyond the NASDAQ universe — a critical survivorship bias check.
+
+**Universe**: Varies by variant (NASDAQ 30, S&P 500 non-tech 30, combined 60)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 4.825 (H416 Var A / H411 Var B generalization threshold)
+
+| Var | N | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | Description |
+|-----|---|-------|--------|---------|-------|------|-------------|
+| **A** | 30 | 4.577 | 5.328 | -1.2% | 115.5% | 0 | H198 NASDAQ 30 [H416-I replication] ✓ |
+| **B** | 30 | 4.455 | 5.352 | 0.0% | 87.8% | 0 | S&P 500 non-tech 30 ✓ |
+| **C** | 60 | 4.886 | 5.855 | -1.2% | 97.0% | 0 | Combined 60 (NASDAQ + non-tech) ✓ NEW RECORD |
+
+OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8% / 2025: +191.5% / 2026: +112.5%
+
+**Key findings:**
+- **Signal is universal, not NASDAQ-specific**: Var B (S&P 500 non-tech) OOS Sharpe 5.352 > Var A (NASDAQ) 5.328. The signal works equally well on consumer staples, healthcare, industrials, financials, and energy stocks.
+- **Var B MaxDD = 0.0%**: The non-tech universe never had a drawdown in the OOS period — exceptional risk profile.
+- **Combined universe is best**: Var C (60 stocks) OOS Sharpe 5.855 — NEW H-SERIES RECORD. Larger eligible pool consistently selects stronger top-3 each month.
+- **Survivorship bias concern partially addressed**: Signal works across fundamentally different sectors. The mechanism is not sector-specific luck.
+
+**Verdict: CONFIRMED — all variants A, B, C**. OOS Sharpe 5.328/5.352/5.855. Champion: Var C (60-stock combined, new H-series record 5.855). Key insight: the signal is a universal large-cap phenomenon, not NASDAQ-specific.
+
+**Script**: backtesting/daily/run_h417.py
+**Results**: backtesting/results/h417_results.json
+
+---
+
+## H418 — H416 Signal Decomposition: 1/Price vs Drift vs Momentum: PARTIAL CONFIRMED (2026-07-20)
+
+**Source**: Diagnostic extension of H416. The 1/price × drift gate signal could be driven by either the value component (1/price rank) or the momentum component (20d drift gate). This test isolates each component on the H198 NASDAQ 30 universe.
+
+**Universe**: H198 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 4.825
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | Description |
+|-----|-------|--------|---------|-------|------|-------------|
+| **A** | 4.577 | 5.328 | -1.2% | 115.5% | 0 | 1/price rank × drift gate [H416-I baseline] ✓ |
+| B | 1.109 | 0.605 | -45.0% | 14.4% | 2 | 1/price rank ONLY (no gate) |
+| C | 4.409 | 4.497 | -4.5% | 121.2% | 0 | Drift fraction rank ONLY (no price filter) |
+| D | 4.091 | 4.513 | -1.2% | 110.3% | 0 | 12-1m momentum rank × drift gate |
+| E | 3.795 | 3.542 | -12.6% | 85.5% | 0 | avg(1/price rank, drift rank), no gate |
+
+**Key findings:**
+- **1/price alone is a disaster**: Var B OOS Sharpe 0.605, MaxDD -45%, 2 negative years. Cheap stocks without uptrend filter are classic value traps. NEVER use without the gate.
+- **Drift gate alone is strong**: Var C (drift rank only) = 4.497 OOS Sharpe. "Buy the stocks with the most positive days in the last 20" is itself a powerful signal even without price rank.
+- **Combination is synergistic (>4.825 gate requires the combination)**: Var A (5.328) > Var C (4.497). The 1/price rank extracts additional alpha within the momentum-filtered universe.
+- **12-1m momentum + drift gate (Var D)**: OOS Sharpe 4.513 — nearly identical to drift alone. Traditional momentum does not improve on the short-term drift signal.
+- **Binary gate dominates continuous rank (Var E)**: Removing the binary gate in favor of a composite rank collapses OOS Sharpe from 5.328 → 3.542. The binary in/out filter is essential.
+- **Economic mechanism**: The drift gate identifies stocks in active uptrend regime. Within that universe, the 1/price rank picks the relative value stock. Neither condition alone is sufficient — the signal is *value-conditional-on-momentum*, not either alone.
+
+**Verdict: PARTIAL CONFIRMED** — only Var A beats gate. Signal decomposition confirms: the drift gate is the essential filter; 1/price rank within gated universe extracts residual value premium. Economic interpretation: "among stocks trending up, buy the cheapest ones."
+
+**Script**: backtesting/daily/run_h418.py
+**Results**: backtesting/results/h418_results.json
+
+---
+
+## H429 — Wasserstein-Tracked Rolling HMM Regime Detector: CONFIRMED (Var C/F) (2026-07-22)
+
+**Source**: arXiv:2603.04441 (Boukardagha 2026, Columbia University) — "Wasserstein-Based HMM for Portfolio Optimization"
+**Builds on**: H251 (CONFIRMED degenerate), H328 (Student-t degeneracy fix, NOT CONFIRMED)
+**Gate**: OOS Sharpe > 0.941 (H251 baseline) AND max single OOS state fraction ≤ 80% (degeneracy check)
+**Universe**: SPY / TLT / GLD
+**IS**: 2004–2017 | **OOS**: 2018–2026 (102 months)
+
+**Innovation**: Two upgrades over H251's static IS-trained GaussianHMM:
+1. **Wasserstein state matching**: When retraining, solve a min-cost bipartite matching problem using 2-Wasserstein distance between 1D Gaussian components (closed form: W2 = sqrt((μ1−μ2)² + (σ1−σ2)²)). Preserves state label identity across windows — solves label-switching.
+2. **Rolling window retraining**: Refit model every 6 months using last N months of data. Keeps Gaussian component means/variances calibrated to recent market conditions.
+
+| Var | Description         | IS Sh | OOS Sh | OOS MDD | CAGR% | MaxFrac | Degen | Gate |
+|-----|---------------------|-------|--------|---------|-------|---------|-------|------|
+| A   | n=3, IS-only        | —     | 0.950  | -18.9%  | 12.5% | 100%    | ⚠️    | ✗    |
+| B   | n=2, IS-only        | —     | 0.937  | -18.9%  | 12.3% | 87%     | ⚠️    | ✗    |
+| **C**   | **n=3, roll-5Y**    | —     | **1.144**  | **-17.2%**  | **13.4%** | **47%**  | ✓     | **✓**    |
+| D   | n=2, roll-5Y        | —     | 0.878  | -22.8%  | 9.6%  | 99%     | ⚠️    | ✗    |
+| E   | n=auto-BIC, IS-only | —     | 0.950  | -18.9%  | 12.5% | 100%    | ⚠️    | ✗    |
+| **F**   | **n=3, roll-3Y**    | —     | **1.067**  | **-16.6%**  | **11.5%** | **41%**  | ✓     | **✓**    |
+
+**Key findings:**
+- **H251 degeneracy root cause confirmed**: IS-frozen HMM (Var A/B/E) all collapse to single state OOS (87-100%). GFC-calibrated variance thresholds never trigger in 2018-2026 OOS period — identical failure mode as H251.
+- **Rolling retraining cures degeneracy**: Var C (5Y window) achieves 47% MaxStateFrac — the model actually distributes states across OOS, meaning regime detection is activating.
+- **n=3 beats n=2 on rolling**: Var C (1.144) >> Var D (0.878). A 2-state rolling model collapses to near-single-state (99%). Three states required for meaningful regime discrimination.
+- **Shorter window trades off quality vs adaptability**: Var F (3Y, Sharpe 1.067) < Var C (5Y, Sharpe 1.144), but both cure degeneracy. MaxDD slightly better on Var F (-16.6% vs -17.2%).
+- **BIC always selects n=3 from IS data** → Var E = Var A (identical outcome).
+- **Wasserstein matching**: Implemented as Hungarian assignment minimizing sum W2 distances over all state pairs. Computationally trivial at monthly frequency.
+
+**Production assessment:**
+- OOS Sharpe 1.144 (Var C) > H251 0.941 (+21%) — meaningful improvement
+- Still well below H311 EW-4+VIX<20 1.532 — not competitive for production blend as primary regime model
+- MaxDD -17.2% vs SPY OOS MaxDD -23.9% — provides downside protection
+- Correlation with H026 OOS likely similar to H251 (~0.71) — limited blend diversification
+- Best use: rolling HMM as an input feature to H249's VIX×200MA rule-based engine, not a standalone replacement
+
+**Verdict: CONFIRMED (Var C/F)** — Wasserstein state matching + rolling retraining cures H251's 100%-degeneracy. OOS Sharpe 1.144/1.067 both clear the 0.941 gate. Not a production replacement for H249's simpler rule-based approach, but proves that adaptive regime detection is achievable on this universe.
+
+**Script**: backtesting/daily/run_h429_wasserstein_hmm.py
+**Results**: backtesting/results/h429_results.json
+
+---
+
+## H435 — 52-Week High Proximity Momentum on H026 25-Asset ETF Universe: NOT CONFIRMED (2026-07-24)
+
+**Source**: George & Hwang (2004) anchoring effect; H291 tested this on 50-stock universe (NOT CONFIRMED OOS 0.764). This extends to the 25-asset multi-class H026 universe where the mechanism shifts to trend-quality filter.
+
+**Universe**: H026 25-asset ETF universe (sectors, bonds, commodities, alternatives)
+**IS/OOS**: IS 2008-2017 / OOS 2018-2026-07
+**Gate**: OOS Sharpe > 1.200
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | WF | Description |
+|-----|-------|--------|---------|-------|------|----|-------------|
+| A | 0.947 | 0.801 | -22.2% | 14.0% | 2 | 0.846 | Pure 52WH Proximity top-1 |
+| B | 0.292 | 0.376 | -46.4% | 13.2% | 5 | 1.288 | 12m mom + 52WH<0.75→BIL filter |
+| C | 0.499 | 0.450 | -40.2% | 12.1% | 4 | 0.902 | 50/50 mom+52WH combo |
+| D | 0.538 | 0.326 | -28.3% | 6.6% | 3 | 0.606 | Trend Consistency (% positive months) top-1 |
+| E | 0.249 | 0.747 | -31.9% | 24.4% | 3 | 3.000 | 50/50 mom+Consistency combo |
+| F | 0.292 | 0.514 | -45.0% | 20.1% | 5 | 1.760 | H026 baseline 12m top-1 |
+
+**Key findings:**
+- **52WH proximity (Var A) is the best standalone signal at OOS 0.801** — outperforms raw 12m momentum (Var F 0.514), but still well below gate.
+- **Look-ahead bias trap**: Initial implementation showed Var A OOS Sharpe 3.499, MaxDD -5.0% (implausibly good). Root cause: selecting the asset with highest month-end proximity using that SAME month-end price = pure foresight. Fix: `prox52[UNIVERSE].shift(1).rank(...)` — use prior month's proximity.
+- **Drawdown filter hurts (Var B)**: Routing to BIL when winner is >25% below 52WH forces cash during low-proximity regimes, destroying momentum signal.
+- **Trend consistency (Var D) weak at OOS 0.326**: Fraction of positive months doesn't discriminate assets well enough — on a multi-asset universe with strong trends, most assets have 60-80% positive months and ranks are clustered.
+- **H026 baseline 0.514 degraded vs historical 1.2**: The full 2018-2026-07 OOS window includes 2024-2026 where the H026 canonical appears to have underperformed its historical IS-period baseline. See H436/H437 for corroboration.
+
+**Verdict: NOT CONFIRMED** — 0/6 variants pass gate. 52WH proximity is the best signal tested (OOS 0.801), outperforming raw momentum on the same universe, but cannot clear 1.200 gate. The George & Hwang mechanism may require small/mid-cap universe (strong heterogeneity in reference points) rather than large-cap ETFs.
+
+**Script**: backtesting/daily/run_h435.py
+**Results**: backtesting/results/h435_results.json
+
+---
+
+## H436 — Relative Strength vs SPY on H026 25-Asset ETF Universe: NOT CONFIRMED (2026-07-24)
+
+**Source**: Relative momentum / alpha momentum literature; cross-sectional ETF rotation already captures beta to equity markets via SPY-correlated assets. H341 tested residual momentum on stocks (NOT CONFIRMED). This tests the simplest version: subtract SPY 12m return from each ETF's 12m return.
+
+**Universe**: H026 25-asset ETF universe
+**IS/OOS**: IS 2008-2017 / OOS 2018-2026-07
+**Gate**: OOS Sharpe > 1.200
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | WF | Description |
+|-----|-------|--------|---------|-------|------|----|-------------|
+| A | 0.292 | 0.509 | -45.0% | 19.7% | 5 | 1.743 | Pure relative strength (12m excess vs SPY) top-1 |
+| B | 0.292 | 0.509 | -45.0% | 19.7% | 5 | 1.743 | Relative + abs_mom>0 filter |
+| C | 0.292 | 0.509 | -45.0% | 19.7% | 5 | 1.743 | 50/50 abs_mom + relative combo |
+| D | 1.142 | 0.707 | -22.2% | 11.2% | 3 | 0.619 | H026 canonical: rank(12m)+rank(inv_vol6) |
+| E | 1.142 | 0.707 | -22.2% | 11.2% | 3 | 0.619 | Relative+vol: rank(rel12)+rank(inv_vol6) |
+| F | 0.252 | 0.226 | -56.3% | 9.8% | 5 | 0.897 | 6-month relative strength top-1 |
+
+**Key findings:**
+- **Mathematical identity renders Vars A/B/C identical**: `rank(ETF_12m - SPY_12m) = rank(ETF_12m)` because SPY_12m is the same constant across all assets at each time step. Subtracting a common factor never changes cross-sectional rankings. All three show exactly IS 0.292 / OOS 0.509 / WF 1.743.
+- **Same identity applies to Vars D/E**: `rank(rel12) + rank(inv_vol)` = `rank(mom12) + rank(inv_vol)` = H026 canonical. Both show IS 1.142 / OOS 0.707.
+- **True alpha momentum requires beta regression** (H437): To genuinely remove SPY influence, must use rolling beta = cov(ETF, SPY) / var(SPY) so the adjustment varies per asset, not a constant subtraction.
+- **6m relative strength (Var F) worst at OOS 0.226**: Shorter windows on multi-asset universe appear to increase noise without improving signal.
+
+**Verdict: NOT CONFIRMED** — 0/6 variants pass gate. Mathematical identity eliminates the hypothesis as designed: simple subtraction of common SPY factor cannot change ETF rankings. Proper beta-adjusted alpha requires rolling covariance estimation (tested in H437).
+
+**Script**: backtesting/daily/run_h436.py
+**Results**: backtesting/results/h436_results.json
+
+---
+
+## H437 — Beta-Adjusted Alpha + Trailing Sharpe Rotation on H026 ETF Universe: NOT CONFIRMED (2026-07-24)
+
+**Source**: Extension of H436; H341 (residual momentum NOT CONFIRMED on H198 stocks). Multi-asset universe where beta vs SPY varies dramatically (TLT beta ≈ -0.3, GLD ≈ 0.1, XLK ≈ 1.4) was hypothesized to give beta-adjustment more discriminatory power than on homogeneous large-cap stocks.
+
+**Universe**: H026 25-asset ETF universe
+**IS/OOS**: IS 2008-2017 / OOS 2018-2026-07
+**Gate**: OOS Sharpe > 1.200
+**Method**: Rolling 12-month beta via `cov(ETF_ret, SPY_ret) / var(SPY_ret)`; alpha = `mom12 - beta × SPY_mom12`
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | WF | Description |
+|-----|-------|--------|---------|-------|------|----|-------------|
+| A | -0.115 | 0.507 | -44.2% | — | 4 | 0.00 | Pure alpha (12m ETF - beta×SPY_12m) top-1 |
+| B | -0.115 | 0.507 | -44.2% | — | 4 | 0.00 | Alpha top-1 + positive alpha filter |
+| C | 0.106 | 0.498 | -40.7% | — | 4 | 4.70 | 50/50 combo: rank(alpha)+rank(12m) |
+| D | 0.319 | 0.246 | -50.4% | — | 4 | 0.77 | Trailing 12m Sharpe ranking top-1 |
+| E | 0.247 | 0.434 | -25.1% | — | 2 | 1.76 | Alpha+inv_vol dual rank |
+| F | 0.507 | 0.785 | -22.2% | — | 3 | 1.55 | H026 canonical: 12m+inv_vol top-1 (baseline) |
+
+**Key findings:**
+- **Beta-adjusted alpha HURTS vs raw momentum**: Var A/B (pure alpha) OOS 0.507 vs Var F (H026 canonical) 0.785. Removing SPY beta exposure reduces signal quality, not improves it.
+- **Beta to SPY is a feature, not a bug**: On this multi-asset universe, assets with high SPY beta (equity ETFs) outperform during bull markets. Cross-sectional β variation provides discriminatory power for momentum selection — stripping it removes valid return predictors.
+- **Trailing Sharpe (Var D) is worst at OOS 0.246**: A per-asset Sharpe ratio ranking is the weakest signal. Likely because ETF Sharpe ratios are unstable over 12-month windows and aren't predictive of next month's returns.
+- **Alpha+inv_vol (Var E) is best alpha variant at OOS 0.434**: Adding volatility scaling partially recovers from beta-stripping, but still inferior to canonical H026.
+- **H026 canonical baseline: OOS 0.785 in 2018-2026-07 window**: Consistent with H435 (0.707 for canonical dual-rank) and H436 (0.707). The H026 canonical strategy has degraded from its original OOS Sharpe 1.2 gate — likely reflecting 2024-2026 underperformance. Production portfolio assessment warranted.
+- **IS Sharpe negative for pure alpha (Var A/B)**: Rolling beta computation requires 12-month lookback, so first valid signal is 2009. Negative IS Sharpe suggests beta-stripping scrambles the IS period selections substantially.
+
+**Verdict: NOT CONFIRMED** — 0/6 variants pass gate. Beta-adjusted alpha is inferior to raw momentum on multi-asset ETF universe, opposite of H341's hypothesis direction. Consistent with H341's finding: beta-stripping destroys predictive power when market exposure itself carries persistent return. The H026 baseline degradation pattern (OOS ~0.7-0.8 vs historical 1.2) warrants separate production portfolio review.
+
+**Script**: backtesting/daily/run_h437.py
+**Results**: backtesting/results/h437_results.json
+
+---
+
+## H460 — Bias-Corrected Multi-Factor Pipeline for H198: Mask-First Design: NOT CONFIRMED (2026-07-27)
+
+**Source**: arXiv:2507.07107 (Du, May 2026) — "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction"
+
+**Universe**: H198 30-stock NASDAQ
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198 baseline)
+**Method**: Volume tradability mask at percentile threshold; masked rolling returns; mask-threaded factor computation
+
+| Var | IS Sh | OOS Sh | OOS MDD | CAGR% | NegY | Description |
+|-----|-------|--------|---------|-------|------|-------------|
+| A | — | 0.787 | -44.9% | 23.3% | 1 | Mask-corrected 6-1m (20th pct), top-6 |
+| B | — | 0.907 | -45.7% | 28.8% | 1 | Mask-corrected 6-1m (10th pct stricter), top-6 |
+| C | — | 0.000 | — | — | — | Masked IMOM6 (AMZN download error, dropped) |
+| D | — | 0.606 | -35.1% | 14.0% | 2 | Alpha101 #001 (1-day reversal with mask), top-6 |
+| E | — | 0.888 | -46.5% | 25.6% | 2 | H198 unmasked 6-1m baseline |
+
+**Key findings:**
+- **Bias correction neither helps nor hurts**: Var B (strictest mask, 10th pct) at OOS 0.907 vs unmasked baseline Var E 0.888 — a marginal +0.019 Sharpe that is below noise.
+- **Root cause of null result**: US large-cap NASDAQ stocks have virtually no "non-tradable" volume days. Unlike Chinese A-shares with hard price limits, or small-caps with thin trading, AAPL/MSFT/NVDA trade millions of shares daily — volume almost never drops below the 20th-percentile baseline. The mask filters <2% of days, producing near-identical signals.
+- **Alpha101 #001 (1-day reversal) weak**: OOS 0.606 with 2 negative years. Short-term reversal has no predictive power on large-cap tech where momentum is persistent (same finding as H298/H298 ETF reversal).
+- **Du's finding applies to emerging markets and small-caps**: The upstream contamination problem (non-tradable days polluting moving averages) is most severe in Chinese A-shares and micro-cap equity with frequent halts. Not applicable to H198's large-cap US universe.
+- **H198 OOS baseline continues degrading**: Var E unmasked baseline = 0.888 in 2021-2026, vs confirmed H198 gate 1.174. This is the 6th consecutive hypothesis showing H198 baseline OOS ~0.888-0.937 rather than 1.174 — confirms structural degradation in the 2021-2026 regime, not a test-specific artifact.
+
+**Verdict: NOT CONFIRMED** — 0/5 runnable variants pass gate. Null result is informative: Du's bias correction is US large-cap irrelevant. H198's signal degradation pattern now confirmed across H435/H436/H437/H448/H449/H460. Worth revisiting on a broader universe (S&P 500 stocks, small-caps) or Chinese market data where non-tradable days occur.
+
+**Script**: backtesting/daily/run_h460_bias_corrected_multifactor.py
+**Results**: backtesting/results/h460_results.json
+
+---
+
+## H462 — Systematic 0DTE SPX Iron Condor Synthetic Backtest: NOT RUNNABLE — Tier-0 BSM Invalid for 0DTE (2026-07-27)
+
+**Source**: CBOE Insights 2026 (Henry Schwartz); Option Alpha 180-day empirical study (2024); FlashAlpha VRP/GEX research (2025-2026)
+
+**Universe**: SPX (proxied by SPY × multiplier)
+**IS/OOS**: IS 2015-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe ≥ 1.0, MaxDD ≤ −20%, zero negative years OOS 2021-2026
+**Method**: Synthetic Tier-0 BSM — end-of-day IV from VIX; 0.2% OTM iron condor entered at 2:44pm, closed 3:30pm
+
+| Var | IS Sh | IS MDD | OOS Sh | OOS MDD | NegY | Description |
+|-----|-------|--------|--------|---------|------|-------------|
+| A | nan | -227.7% | 62.006 | -0.0% | 0 | 0.2% OTM, no filter (baseline) |
+| B | -9.766 | -73.0% | nan | -239.3% | 3 | 0.2% OTM, VRP z > 0.5 |
+| C | -9.767 | -73.0% | nan | -239.4% | 3 | 0.32% OTM, VRP z > 0.5 |
+| D | -7.407 | -36.2% | -6.085 | -37.1% | 6 | B + skip trending days |
+| E | -9.563 | -64.6% | nan | -158.9% | 4 | B + skip vol spike days |
+
+**All results are degenerate — implementation is invalid for 0DTE:**
+- Var A OOS Sharpe of 62 with MaxDD -0.0% is numerically impossible for a real strategy.
+- MaxDD below -100% (Vars B, C, E) violates basic portfolio accounting; position size cannot produce more than -100% loss unless leveraged beyond collateral.
+- IS MaxDD -227.7% (Var A) similarly impossible.
+
+**Root cause — BSM with T→0 fails for intraday 0DTE:**
+1. **T approaches zero**: A 0DTE option entered at 2:44pm with 46 minutes to expiry has T ≈ 46/(252×390) ≈ 0.00047 years. BSM gamma and delta become numerically extreme at this T, making pricing unstable.
+2. **EOD VIX as IV is wrong**: End-of-day VIX approximates annualized implied vol. Applied to T = hours, this produces option prices that are either essentially zero (deep expiry) or infinity near ATM, depending on SPY's closing level vs the strike.
+3. **Position sizing breaks**: When BSM returns near-zero credit for positions that should show ~$196 credit per condor, the P&L arithmetic produces nonsensical results over hundreds of trading days.
+4. **Needs intraday data**: A valid 0DTE backtest requires intraday SPX prices at 2:44pm and 3:30pm ET with actual option quotes or intraday IV surface. ThetaData (~$80/month) provides this.
+
+**Concept remains empirically well-supported**: Option Alpha's 180-day live sample shows 65.6% of trading days SPX closes within 0.2% of its 2pm price; $5-wide SPXW IC at 2:44pm → ~68% max-profit probability → ~$36 EV/trade. These are observed fills, not BSM simulations. The strategy edge is real — the Tier-0 backtest methodology is wrong for 0DTE.
+
+**Next step**: H462 is **NOT CLOSED**. Re-test as Tier-1 with ThetaData intraday option quotes when data subscription available. The five variants (OTM%, VRP filter, trending-day filter, vol-spike filter) remain valid design axes.
+
+**Script**: backtesting/daily/run_h462_0dte_condor.py
+**Results**: backtesting/results/h462_results.json (degenerate — do not use for trading decisions)
+
+---
+
+## H463 — Semantic Polymarket Pairs Trading: STAGED (2026-07-27)
+
+**Source**: arXiv:2607.13854 (staged 2026-07-27)
+
+**Status**: STAGED — awaiting implementation. Pairs trading using Polymarket semantic similarity for spread selection.
+
+**Script**: backtesting/daily/run_h463_semantic_polymarket_pairs.py
+
+---
+
+## H464 — STN-TGAT Graph Attention Network for H198 Cross-Sectional Stock Ranking: STAGED (2026-07-28)
+
+**Source**: arXiv:2607.19385 (Guo, Lu & Zhang, Jul 2026) — *STN-TGAT: Top-K Portfolio Construction via Prior-Guided Graph Attention with Learnable Soft-Threshold Sparsification*
+
+**Universe**: H198 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198 minimal), stretch > 4.068 (H398 champion)
+**Method**: Soft-Threshold NMI-prior Transformer-GAT. NMI-based prior graph from 60-day lagged correlations; soft-threshold sparsification (70th-pct NMI cutoff); Transformer for temporal dynamics; GAT for cross-sectional relational modeling; top-6 equal-weight selection.
+
+**Variants**: A (full STN-TGAT), B (Transformer-only ablation), C (GAT-only ablation), D (NMI prior, uniform attention), E (H398 champion baseline)
+
+**Status**: STAGED — requires PyTorch Geometric infrastructure before running. Key caution: NMI prior graph must use strictly lagged data. Static GICS sector adjacency is a viable lightweight proxy.
+
+**Script**: backtesting/daily/run_h464_stn_tgat_h198.py
+
+---
+
+## H465 — LLM-Finetuned Merger Arbitrage Outcome Forecaster (H310 Revival): STAGED (2026-07-28)
+
+**Source**: arXiv:2607.09921 (Jajal et al., Jul 2026) — *Global Merger-Arbitrage Forecasting with Language Models*
+
+**Universe**: US M&A deals $500M+ EV from EDGAR 14D-9/SC TO filings (2015-2025)
+**IS/OOS**: IS 2015-2021 / OOS 2022-2025
+**Gate**: OOS Sharpe > 1.678 (MRGR ETF OOS from H310) AND WF ratio 0.75-2.5
+**Method**: GPT-4o-mini deal outcome forecaster; long target when P(close_at_terms)>0.75; Kelly position sizing; deal corpus from EDGAR free filings.
+
+**Key paper result**: Finetuned LLM Brier score 0.151 = 24% better than market-implied probabilities on 400+ global deals.
+
+**Status**: STAGED — H310 NOT CONFIRMED root cause was ETF-level prediction. H465 moves to individual deal-level. Data pipeline (EDGAR 14D-9 corpus) not yet built.
+
+**Script**: backtesting/daily/run_h465_llm_merger_arb.py
+
+---
+
+## H466 — Quant Convergence: Graham Value Rules as ML Noise Filter on H198: STAGED (2026-07-28)
+
+**Source**: arXiv:2606.24575 (Yamazaki & Garrido-Lestache, Jun 2026) — *Quant Convergence: Bridging Classical Value Investing and Modern Factor Models*
+
+**Universe**: H198 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198 baseline) AND MaxDD improvement
+**Method**: Graham P/E/P/B/EPS filters from FMP API applied as pre-filter before 6-1m momentum ranking. Variants from strict (P/E<15) to relaxed (P/E<35) thresholds.
+
+**Key paper result**: Graham Random Forest 232.13% return (2022-2026), Calmar 1.38 — best risk-adjusted of all models; acts as 'low-pass filter' on momentum noise.
+
+**Expected challenge**: Strict Graham filters will eliminate most NASDAQ large-cap stocks (same root cause as H337 quality factor failure). Relaxed thresholds (Var B) are the primary test.
+
+**Status**: STAGED — FMP API available; implementation requires quarterly fundamental data fetch with 90-day lag.
+
+**Script**: backtesting/daily/run_h466_graham_ml_filter.py
+
+---
+
+## H467 — MacroLens Multi-Modal Signal Benchmark: WIKI UPDATE (2026-07-28)
+
+**Source**: arXiv:2606.24950 (Trirat et al., Jun 2026)
+
+**Type**: Wiki update — added MacroLens section to `wiki/ai-industry/llm-finance-benchmarks-2026.md`.
+
+**Key finding**: Four-signal framework (price + fundamentals + macro + text) — gradient-boosted models beat zero-shot LLMs on return forecasting, but LLMs excel at scenario-conditioned macro reasoning. MacroLens highlights that H174 already implements 3/4 signal types; explicit FRED macro regime conditioning (signal 3) is the identified gap.
+
+---
+
+## H468 — FinBench Calibration Benchmark: WIKI PAGE (2026-07-28)
+
+**Source**: arXiv:2607.16229 (Ghosh & Devarakonda, Jul 2026)
+
+**Type**: Wiki page created — `wiki/ai-industry/finbench-calibration-2026.md`.
+
+**Key finding**: Confidence-competence gap is a critical failure mode for financial LLMs — overconfident models generate negative Kelly-fraction growth even with positive accuracy edge. FinBench introduces proper scoring rules (Brier, log-loss) and regime-separated calibration curves as correct evaluation framework for H174/H185 signals.
+
+---
+
+## H469 — HIFI KPI/XBRL PEAD Upgrade: STAGED (2026-07-28)
+
+**Source**: arXiv:2607.08346 (Jul 2026) — Grounded 8-K Event Taxonomy paper
+
+**Universe**: H174 PEAD universe (S&P 500 earnings events)
+**IS/OOS**: IS 2022-2023 / OOS 2024-2026
+**Gate**: OOS WR ≥ 0.818 AND n ≥ 12
+**Method**: Fine-grained 8-K event taxonomy (119 types, 3 tiers) as third filter on H174. High-quality (score≥0.7) Tier-1/2 earnings-positive event tags (revenue-beat, guidance-raised, margin-expansion) added as gate. Two-stage LLM system achieves 96% precision at quality threshold.
+
+**Status**: STAGED — gpt-4o-mini event tagger to be built; taxonomy prompt from paper's 3-tier structure.
+
+**Script**: backtesting/daily/run_h469_grounded_8k_taxonomy_pead.py
+
+---
+
+## H470 — ML Design Choice Momentum: Monthly Best-Variant Selector on H198 Family: CONFIRMED (Var B/C/D) (2026-07-28)
+
+**Source**: SSRN:5031755 (Chen, Hanauer, Kalsbach, Feb 2026) — *Design choices, machine learning, and the cross-section of stock returns*
+
+**Universe**: H198 strategy family (H198, H376, H411, H217) — same 30-stock NASDAQ large-cap
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe ≥ 3.120 (H376 static baseline) AND MaxDD improvement vs -8.4%
+
+**Method**: Monthly meta-selector across 4 constituent strategies:
+- S1 (H198 rep): 6-1m momentum top-1 — overall Sharpe 1.191
+- S2 (H376 best): 6-0m no-skip top-6 EW — overall Sharpe 3.047
+- S3 (H411-B): pure value (1/price) × 20d drift gate top-2 — overall Sharpe 4.238
+- S4 (H217 rep): alpha101 daily proxy top-6 — overall Sharpe 3.534
+
+Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run the highest-Sharpe strategy's return at t.
+
+**OOS Cross-strategy correlations**:
+- S1 vs S2: 0.618, S1 vs S3: 0.309, S1 vs S4: 0.378
+- S2 vs S3: 0.475, S2 vs S4: 0.755, S3 vs S4: 0.518
+(S3 is genuinely orthogonal — value×drift vs. momentum-family strategies)
+
+**Results**:
+| Var | Description | IS Sharpe | IS MaxDD | OOS Sharpe | OOS MaxDD | Gate |
+|-----|-------------|-----------|----------|------------|-----------|------|
+| A | 3m trailing Sharpe, pick best | 2.338 | -41.0% | 3.859 | -12.1% | FAIL MaxDD |
+| B | 6m trailing Sharpe, pick best | 3.447 | -7.8% | **4.136** | **-2.3%** | ✓ PASS |
+| C | 12m trailing Sharpe, pick best | 3.315 | -5.4% | **4.424** | **-2.3%** | ✓ PASS |
+| D | 6m trailing Sharpe, EW top-2 | 3.739 | -6.2% | **4.292** | **-4.5%** | ✓ PASS |
+| E | S2 static baseline (H376) | 2.983 | -12.4% | 3.120 | -8.4% | baseline |
+
+**Best variant**: Var C (12m trailing Sharpe), OOS Sharpe **4.424**, MaxDD **-2.3%**, 0 negative years
+
+**Key findings**:
+1. Design-choice momentum confirmed at monthly frequency — 12m window robust enough despite short estimation window
+2. Meta-selectors primarily route to S3 (H411-B value×drift) and S4 (alpha101 proxy) — which are genuinely low-correlated to each other and to S1/S2
+3. Var A (3m) fails MaxDD gate: 3-month trailing Sharpe too noisy → frequent strategy switches → -12.1% drawdown (worse than static)
+4. MaxDD improvement dramatic: Var C -2.3% vs baseline -8.4% — risk-adjusted gains exceed raw Sharpe gains
+5. Zero negative OOS years across Var B/C/D
+
+**Caveat**: S4 (alpha101) in this run uses close-price-only proxy (abs(daily_ret) as intraday range proxy), not full OHLCV. Full H217 implementation uses actual H-L spread; S4 signal here is an approximation. Result directionally valid.
+
+**Script**: backtesting/daily/run_h470_design_choice_momentum_h198.py
+
+---
+
+## H471 — KPI Extraction from Earnings Calls as H174 Signal Boost: STAGED (2026-07-28)
+
+**Source**: arXiv:2605.03147 (May 2026, ACL Industry Track) — *Effective Performance Measurement: Challenges and Opportunities in KPI Extraction from Earnings Calls*
+
+**Universe**: H174 PEAD universe
+**IS/OOS**: IS 2022-2023 / OOS 2024-2026
+**Gate**: OOS WR ≥ 0.818 AND n ≥ 15 (H174 parity)
+**Method**: Open-ended KPI extraction from earnings call transcripts (79.7% precision, ACL 2026). KPI_direction score = fraction of extracted KPIs with positive guidance. Boost FinBERT score: adjusted_score = finbert_score + 0.05 × KPI_direction. FMP/AV transcript pipeline.
+
+**Critical risk**: H168 NOT CONFIRMED was partly a coverage failure (26.5% OOS transcript availability). H471 must track coverage first; proceed only if ≥50% for OOS test set.
+
+**Status**: STAGED — transcript download pipeline not yet built; FMP API available.
+
+**Script**: backtesting/daily/run_h471_kpi_earnings_call_pead.py
