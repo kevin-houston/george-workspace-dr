@@ -846,3 +846,83 @@
 [2026-07-29 23:15:08] Candidates for tomorrow: none
 [2026-07-29 23:15:08] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-07-29 23:15:08] Overnight pass complete.
+[2026-07-30 23:01:45] =======================================================
+[2026-07-30 23:01:45] =======================================================
+[2026-07-30 23:01:45] PEAD overnight pass starting
+[2026-07-30 23:01:45] PEAD overnight pass starting
+[2026-07-30 23:01:45] Scanning earnings calendar…
+[2026-07-30 23:01:45] Scanning earnings calendar…
+[2026-07-30 23:02:07]   Tickers with recent earnings: ['AAPL', 'MSFT', 'META', 'AMZN', 'SBUX', 'V', 'MA', 'QCOM']
+[2026-07-30 23:02:07]   Fetching 8-K for AAPL…
+[2026-07-30 23:02:14]   Tickers with recent earnings: ['AAPL', 'MSFT', 'META', 'AMZN', 'SBUX', 'V', 'MA', 'QCOM']
+[2026-07-30 23:02:14]   Fetching 8-K for AAPL…
+[2026-07-30 23:02:40]     AAPL: 4862 chars
+[2026-07-30 23:02:40]   Fetching 8-K for MSFT…
+[2026-07-30 23:02:40]     AAPL: 4862 chars
+[2026-07-30 23:02:40]   Fetching 8-K for MSFT…
+[2026-07-30 23:02:41]     MSFT: 4230 chars
+[2026-07-30 23:02:41]   Fetching 8-K for META…
+[2026-07-30 23:02:42]     MSFT: 4230 chars
+[2026-07-30 23:02:42]   Fetching 8-K for META…
+[2026-07-30 23:02:43]     META: 5346 chars
+[2026-07-30 23:02:43]   Fetching 8-K for AMZN…
+[2026-07-30 23:02:43]     META: 5346 chars
+[2026-07-30 23:02:43]   Fetching 8-K for AMZN…
+[2026-07-30 23:02:46]     AMZN: 5943 chars
+[2026-07-30 23:02:46]   Fetching 8-K for SBUX…
+[2026-07-30 23:02:46]     AMZN: 5943 chars
+[2026-07-30 23:02:46]   Fetching 8-K for SBUX…
+[2026-07-30 23:02:49]     SBUX: 3761 chars
+[2026-07-30 23:02:49]   Fetching 8-K for V…
+[2026-07-30 23:02:49]     SBUX: 3761 chars
+[2026-07-30 23:02:49]   Fetching 8-K for V…
+[2026-07-30 23:02:53]     V: 5014 chars
+[2026-07-30 23:02:53]   Fetching 8-K for MA…
+[2026-07-30 23:02:53]     V: 5014 chars
+[2026-07-30 23:02:53]   Fetching 8-K for MA…
+[2026-07-30 23:02:54]     MA: 7453 chars
+[2026-07-30 23:02:54]   Fetching 8-K for QCOM…
+[2026-07-30 23:02:55]     MA: 7453 chars
+[2026-07-30 23:02:55]   Fetching 8-K for QCOM…
+[2026-07-30 23:02:57]     QCOM: 4657 chars
+[2026-07-30 23:02:57]     QCOM: 4657 chars
+[2026-07-30 23:04:43]   Loading ProsusAI/finbert…
+[2026-07-30 23:04:43]   Loading ProsusAI/finbert…
+[2026-07-30 23:10:07]   AAPL: score=-0.033  surprise=-0.146
+[2026-07-30 23:10:09]   MSFT: score=-0.023  surprise=-0.151
+[2026-07-30 23:10:12]   META: score=-0.010  surprise=-0.154
+[2026-07-30 23:10:13]   AMZN: score=-0.040  surprise=-0.356
+[2026-07-30 23:10:14]   SBUX: score=-0.015  surprise=-0.160
+[2026-07-30 23:10:15]   V: score=-0.027  surprise=-0.236
+[2026-07-30 23:10:16]   MA: score=-0.061  surprise=-0.248
+[2026-07-30 23:10:17]   QCOM: score=-0.017  surprise=-0.092
+[2026-07-30 23:10:17]   ✗ AAPL filtered out (score=-0.033, surprise=-0.1456)
+[2026-07-30 23:10:17]   ✗ MSFT filtered out (score=-0.022, surprise=-0.1506)
+[2026-07-30 23:10:17]   ✗ META filtered out (score=-0.010, surprise=-0.1544)
+[2026-07-30 23:10:17]   ✗ AMZN filtered out (score=-0.040, surprise=-0.356)
+[2026-07-30 23:10:17]   ✗ SBUX filtered out (score=-0.015, surprise=-0.1598)
+[2026-07-30 23:10:17]   ✗ V filtered out (score=-0.027, surprise=-0.2355)
+[2026-07-30 23:10:17]   ✗ MA filtered out (score=-0.061, surprise=-0.2485)
+[2026-07-30 23:10:17]   ✗ QCOM filtered out (score=-0.017, surprise=-0.0918)
+[2026-07-30 23:10:17] Candidates for tomorrow: none
+[2026-07-30 23:10:17] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-30 23:10:17] Overnight pass complete.
+[2026-07-30 23:10:19]   AAPL: score=-0.033  surprise=-0.146
+[2026-07-30 23:10:20]   MSFT: score=-0.023  surprise=-0.151
+[2026-07-30 23:10:21]   META: score=-0.010  surprise=-0.154
+[2026-07-30 23:10:23]   AMZN: score=-0.040  surprise=-0.356
+[2026-07-30 23:10:24]   SBUX: score=-0.015  surprise=-0.160
+[2026-07-30 23:10:25]   V: score=-0.027  surprise=-0.236
+[2026-07-30 23:10:26]   MA: score=-0.061  surprise=-0.248
+[2026-07-30 23:10:27]   QCOM: score=-0.017  surprise=-0.092
+[2026-07-30 23:10:27]   ✗ AAPL filtered out (score=-0.033, surprise=-0.1456)
+[2026-07-30 23:10:27]   ✗ MSFT filtered out (score=-0.022, surprise=-0.1506)
+[2026-07-30 23:10:27]   ✗ META filtered out (score=-0.010, surprise=-0.1544)
+[2026-07-30 23:10:27]   ✗ AMZN filtered out (score=-0.040, surprise=-0.356)
+[2026-07-30 23:10:27]   ✗ SBUX filtered out (score=-0.015, surprise=-0.1598)
+[2026-07-30 23:10:27]   ✗ V filtered out (score=-0.027, surprise=-0.2355)
+[2026-07-30 23:10:27]   ✗ MA filtered out (score=-0.061, surprise=-0.2485)
+[2026-07-30 23:10:27]   ✗ QCOM filtered out (score=-0.017, surprise=-0.0918)
+[2026-07-30 23:10:27] Candidates for tomorrow: none
+[2026-07-30 23:10:27] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-30 23:10:27] Overnight pass complete.

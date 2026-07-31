@@ -53,8 +53,25 @@
       "backtest_oos_period": "H112 confirmed",
       "script": "h112_daily_ibs.py",
       "start_equity": 5000.0,
-      "cash": 4868.2416,
-      "open_positions": {},
+      "cash": 324.5439,
+      "open_positions": {
+        "XLK": {
+          "qty": 18.7807,
+          "entry_price": 172.81,
+          "entry_date": "2026-07-30",
+          "cost_basis": 3245.4927,
+          "order_id": "30ca81eb-9b8f-4542-9810-e4e354ad17f1",
+          "note": "IBS entry: prev_ibs 0.018 < 0.15, gap +3.746% \u2265 -1.000%"
+        },
+        "SMH": {
+          "qty": 2.4501,
+          "entry_price": 529.858,
+          "entry_date": "2026-07-30",
+          "cost_basis": 1298.205,
+          "order_id": "293207bd-ad26-49eb-8e15-f4e5c3a28eb7",
+          "note": "IBS entry: prev_ibs 0.021 < 0.2, gap +5.085% \u2265 -0.500%"
+        }
+      },
       "closed_trades": [
         {
           "symbol": "SMH",
@@ -161,6 +178,10 @@
         {
           "date": "2026-07-29",
           "equity": 4868.24
+        },
+        {
+          "date": "2026-07-30",
+          "equity": 4941.52
         }
       ],
       "status": "active"
@@ -216,6 +237,10 @@
         {
           "date": "2026-07-29",
           "equity": 5000.0
+        },
+        {
+          "date": "2026-07-30",
+          "equity": 5000.0
         }
       ],
       "status": "active"
@@ -235,5 +260,5 @@
       "status": "stub"
     }
   },
-  "updated": "2026-07-29T09:46:16.107836"
+  "updated": "2026-07-30T09:45:41.564568"
 }

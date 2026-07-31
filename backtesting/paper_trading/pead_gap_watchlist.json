@@ -1,8 +1,13 @@
 {
-  "date": "2026-07-30",
+  "date": "2026-07-31",
   "candidates": [
+    "AAPL",
+    "MSFT",
     "META",
+    "AMZN",
+    "SBUX",
     "V",
+    "MA",
     "QCOM"
   ],
   "source": "earnings_only",

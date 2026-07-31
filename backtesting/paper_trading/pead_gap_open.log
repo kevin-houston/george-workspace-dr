@@ -254,3 +254,39 @@
 [2026-07-29 09:46:16]   V: gap 0.8% < 3% — skip
 [2026-07-29 09:46:16] No new positions entered today.
 [2026-07-29 09:46:16] Open pass complete.
+[2026-07-30 09:32:09] =======================================================
+[2026-07-30 09:32:09] PEAD-GAP open pass starting
+[2026-07-30 09:32:09] Earnings candidates: ['META', 'V', 'QCOM']
+[2026-07-30 09:32:09] PEAD_GAP strategy equity: $5,000
+[2026-07-30 09:32:11]   META: prior_close=585.61 current=530.51 gap=-9.4%
+[2026-07-30 09:32:11]   META: gap -9.4% < 3% — skip
+[2026-07-30 09:32:12]   V: prior_close=368.73 current=363.18 gap=-1.5%
+[2026-07-30 09:32:12]   V: gap -1.5% < 3% — skip
+[2026-07-30 09:32:12]   QCOM: prior_close=155.68 current=150.76 gap=-3.2%
+[2026-07-30 09:32:12]   QCOM: gap -3.2% < 3% — skip
+[2026-07-30 09:32:12] No new positions entered today.
+[2026-07-30 09:32:12] Open pass complete.
+[2026-07-30 09:32:45] =======================================================
+[2026-07-30 09:32:45] PEAD-GAP open pass starting
+[2026-07-30 09:32:45] Earnings candidates: ['META', 'V', 'QCOM']
+[2026-07-30 09:32:45] PEAD_GAP strategy equity: $5,000
+[2026-07-30 09:32:47]   META: prior_close=585.61 current=530.69 gap=-9.4%
+[2026-07-30 09:32:47]   META: gap -9.4% < 3% — skip
+[2026-07-30 09:32:48]   V: prior_close=368.73 current=362.82 gap=-1.6%
+[2026-07-30 09:32:48]   V: gap -1.6% < 3% — skip
+[2026-07-30 09:32:48]   QCOM: prior_close=155.68 current=151.42 gap=-2.7%
+[2026-07-30 09:32:48]   QCOM: gap -2.7% < 3% — skip
+[2026-07-30 09:32:48] No new positions entered today.
+[2026-07-30 09:32:48] Open pass complete.
+[2026-07-30 09:45:38] =======================================================
+[2026-07-30 09:45:38] PEAD-GAP open pass starting
+[2026-07-30 09:45:38] Earnings candidates: ['META', 'V', 'QCOM']
+[2026-07-30 09:45:38] PEAD_GAP strategy equity: $5,000
+[2026-07-30 09:45:40]   META: prior_close=585.61 current=532.77 gap=-9.0%
+[2026-07-30 09:45:40]   META: gap -9.0% < 3% — skip
+[2026-07-30 09:45:40]   V: prior_close=368.73 current=361.77 gap=-1.9%
+[2026-07-30 09:45:40]   V: gap -1.9% < 3% — skip
+[2026-07-30 09:45:41]   QCOM: prior_close=155.68 current=150.30 gap=-3.5%
+[2026-07-30 09:45:41]   QCOM: gap -3.5% < 3% — skip
+[2026-07-30 09:45:41] No new positions entered today.
+[2026-07-30 09:45:41] Open pass complete.
