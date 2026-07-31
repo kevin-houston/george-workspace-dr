@@ -123,12 +123,13 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 ## PEAD-GAP Open Pass
 
 **Trigger:** 9:32 AM CT on weekdays.
-**Run:** `NO_PROXY=paper-api.alpaca.markets,api.alpaca.markets no_proxy=paper-api.alpaca.markets,api.alpaca.markets source /workspace/agent/venv/bin/activate && python3 /workspace/agent/backtesting/paper_trading/pead_gap_open.py`
+**Run:** `NO_PROXY=paper-api.alpaca.markets,api.alpaca.markets no_proxy=paper-api.alpaca.markets,api.alpaca.markets REQUESTS_CA_BUNDLE=/tmp/onecli-combined-ca.pem SSL_CERT_FILE=/tmp/onecli-combined-ca.pem bash -c "source /workspace/agent/venv/bin/activate && python3 /workspace/agent/backtesting/paper_trading/pead_gap_open.py"`
 **Success:** Orders submitted for gapped-up candidates, or log confirms none qualified.
 
 **Gotchas:**
 - Reads from `pead_gap_watchlist.json` (NOT `pead_watchlist.json` — don't confuse them).
 - Alpaca orders: use NO_PROXY for paper-api.alpaca.markets to bypass OneCLI credential stripping.
+- **SSL error when a real order tries to submit** (`self-signed certificate in certificate chain`): NO_PROXY alone isn't enough once a qualifying gap actually triggers an order POST — Python's `requests`/alpaca-py stack needs `REQUESTS_CA_BUNDLE=/tmp/onecli-combined-ca.pem` explicitly; `SSL_CERT_FILE` is already set container-wide but `requests` doesn't read that var (only curl/OpenSSL do). GET-only calls (gap price checks) work fine without it, which is why this can go unnoticed until a real entry fires. Found 2026-07-31 when AMZN gapped 15% and the order failed until both env vars were added. Same fix likely needed for `pead_open.py`, `pead_exits.py`, `pead_gap_exits.py`, and `h112_monthly.py` if they ever hit this path.
 - Positions written to `pead_gap_positions.json`; strategy tracked as `PEAD_GAP` in strategy_accounts.json.
 - Only message Kevin if orders are placed.
 
