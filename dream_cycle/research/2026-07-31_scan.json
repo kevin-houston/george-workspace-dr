@@ -1,0 +1,113 @@
+{
+  "scan_date": "2026-07-31",
+  "angles_searched": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "papers_reviewed": [
+    {
+      "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+      "arxiv": "2605.01954",
+      "angle": "pairs trading + LLM",
+      "relevance": "low",
+      "notes": "Already known and staged as H316 (2026-06-20). No new information found this pass.",
+      "staged": false
+    },
+    {
+      "title": "Various crypto copula/cointegration pairs trading papers (2026)",
+      "arxiv": "multiple (2109.10662, 2305.06961, 2606.04574, frontiersin 2026.1749337)",
+      "angle": "pairs trading + cointegration",
+      "relevance": "low",
+      "notes": "Crypto-asset focused, not equities; ETF/equity pairs family already CLOSED per H307/H246 (structural breaks dominate). No actionable new equity method found.",
+      "staged": false
+    },
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting PEAD",
+      "arxiv": "2509.24254",
+      "angle": "PEAD + text signals",
+      "relevance": "low",
+      "notes": "Already known/staged (H293, 2026-06-13 research log). No new info.",
+      "staged": false
+    },
+    {
+      "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+      "source": "ACL FinNLP 2025 (Hadlock, Roberts, Lee)",
+      "url": "https://aclanthology.org/2025.finnlp-2.13/",
+      "angle": "PEAD + text signals",
+      "relevance": "medium",
+      "notes": "Could not extract methodology or quantitative results via WebFetch (PDF returned as raw binary/font stream, HTML abstract page had no results). Flagged for a future session with a PDF-capable read tool rather than staged as a hypothesis — insufficient detail to design a backtest.",
+      "staged": false
+    },
+    {
+      "title": "FinAnchor: Aligned Multi-Model Representations for Financial Prediction",
+      "arxiv": "2602.20859",
+      "angle": "PEAD + text signals (adjacent: multi-LLM sentiment ensembling)",
+      "relevance": "medium",
+      "notes": "Anchor-embedding ensemble of multiple LLMs without fine-tuning; claims to beat single-model baselines and standard ensembles on financial NLP tasks. No concrete numbers extractable from abstract. Directly relevant to our single-FinBERT-model sentiment pipeline (H163/H168/H174/H481/H482). Staged as a wiki research-lead note, not a hypothesis, pending full-text read.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-07-31/1_financhor_multi_llm_ensemble_wiki.json"
+    },
+    {
+      "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+      "arxiv": "2605.25894",
+      "angle": "PEAD + text signals",
+      "relevance": "low",
+      "notes": "Already known/staged (H317 NOT CONFIRMED / referenced in H331 research 2026-06-25). No new info this pass.",
+      "staged": false
+    },
+    {
+      "title": "Factor Momentum Analysis (72-factor replication)",
+      "arxiv": "2009.04824",
+      "angle": "cross-sectional / factor momentum",
+      "relevance": "low",
+      "notes": "Older paper, foundational result already incorporated into factor-momentum-style-rotation.md (Gupta & Kelly 2019 synthesis).",
+      "staged": false
+    },
+    {
+      "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay",
+      "arxiv": "2512.11913",
+      "angle": "cross-sectional / factor momentum",
+      "relevance": "low",
+      "notes": "Already in wiki (signal-halflife.md / execution-quality.md dream cycle entry 2026-06-11). Momentum shown to have OPPOSITE crowding-crash relationship vs other factors (crowded momentum = lower crash risk) — already effectively covered by H320 LightGBM crash filter design rationale.",
+      "staged": false
+    },
+    {
+      "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "arxiv": "2602.23330",
+      "angle": "multi-agent LLM trading",
+      "relevance": "low (already known)",
+      "notes": "Already synthesized in multi-agent-llm-trading.md (updated 2026-07-07).",
+      "staged": false
+    },
+    {
+      "title": "LiveTradeBench: Seeking Real-World Alpha with Large Language Models",
+      "arxiv": "2511.03628",
+      "angle": "multi-agent LLM trading",
+      "relevance": "medium",
+      "notes": "Live-data (not static) benchmark, 21 LLMs, 50-day periods, US stocks + Polymarket. Confirms static-benchmark-performance does not predict live trading success. Consistent with, not novel beyond, PortBench/FINSABER/Prediction Arena already in wiki. Staged as a minor wiki addendum reinforcing the established thesis.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-07-31/2_livetradebench_wiki.json"
+    },
+    {
+      "title": "LLM-Powered Multi-Agent System for Automated Crypto Portfolio Management",
+      "arxiv": "2501.00826",
+      "angle": "multi-agent LLM trading",
+      "relevance": "low",
+      "notes": "Crypto-only scope; out of current equities/options focus. Not staged.",
+      "staged": false
+    },
+    {
+      "title": "GitHub trending quant repos (awesome-systematic-trading, cloudQuant/backtrader fork, awesome-quant-ai forks)",
+      "angle": "GitHub trending",
+      "relevance": "low",
+      "notes": "No genuinely new tools found beyond what's already cataloged in tools/quant-firm-repos.md and tools/awesome-quant-ai.md. Two high-star repos (8.7k/8.5k) noted as 'trending' in search results but titles/URLs weren't resolvable to specific new projects distinct from already-known backtrader/vectorbt/zipline family.",
+      "staged": false
+    }
+  ],
+  "staged_count": 2,
+  "staged_summary": "No HIGH-relevance, gate-comparable findings this pass — both staged items are LOW-risk wiki research-lead notes (FinAnchor multi-LLM ensemble, LiveTradeBench) rather than new hypotheses, since neither had extractable quantitative results to design a backtest against. This is a deliberately conservative night: prior sessions' scans found 3-8 stageable items; tonight's 5-angle sweep surfaced mostly already-catalogued work (Moira, TradingAgents-family, alpha decay, factor momentum literature) with only two genuinely new-to-wiki papers, both needing a full-text read before hypothesis design.",
+  "note_for_build_phase": "The two staged items are 'append' wiki_update actions targeting llm-alpha-validation.md — both low risk, auto-apply per STAGED_SCHEMA.md build policy. No medium/high risk items to flag for Kevin."
+}

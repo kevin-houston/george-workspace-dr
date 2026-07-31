@@ -1,0 +1,14 @@
+{
+  "id": "2026-07-31-livetradebench-wiki",
+  "date": "2026-07-31",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2511.03628",
+  "title": "Wiki note: LiveTradeBench — live LLM trading benchmark reinforces static-benchmark-to-real-world gap already documented",
+  "rationale": "arXiv:2511.03628 'LiveTradeBench' is a live-data evaluation environment for LLM trading agents across US stocks and Polymarket prediction markets (21 LLMs, 50-day live periods, live data streaming to prevent leakage). Key finding: high performance on static benchmarks does not translate to live trading success, and different models show distinct risk preferences. This is CONSISTENT with, not novel beyond, what is already documented in this wiki (PortBench 90% of LLMs fail equal-weight, FINSABER no persistent LLM edge over 20+ years/100+ stocks, Prediction Arena all-but-one model lost money). Staging as a minor low-risk wiki addition — one more data point for the 'raw LLM judgment is not a tradeable edge without a validation gate' thesis, not a new hypothesis or actionable design.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/llm-alpha-validation.md",
+  "content": "\n---\n\n## Additional Evidence: LiveTradeBench (arXiv:2511.03628, flagged 2026-07-31)\n\nA live-data (not static-backtest) evaluation environment for LLM trading agents across US stocks and Polymarket prediction markets — 21 LLMs tested over 50-day live periods with live data streaming to prevent information leakage. Agents observe prices, news, and portfolio status, then output allocation percentages.\n\n**Finding**: high performance on standard/static LLM benchmarks does NOT translate to live trading success; models show distinct risk preferences and reasoning patterns; a few models adapt successfully using live signals but most don't.\n\n**This adds one more data point to an already-established pattern in this wiki** — consistent with PortBench (90% of LLMs fail to beat equal-weight), FINSABER (no persistent LLM edge over 20+ years/100+ stocks, KDD 2026), and Prediction Arena (all but one of 6 models lost real money on Kalshi). The consistent lesson across every LLM-trading benchmark reviewed to date: raw LLM judgment is not a tradeable edge on its own — value only appears when LLM output is wrapped in a hard quantitative validation gate (the shared-eval-checklist.md approach this pipeline already follows).",
+  "action": "append",
+  "apply_status": "pending"
+}
