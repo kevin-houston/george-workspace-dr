@@ -222,3 +222,25 @@ Xia et al. (May 2026) conducted a systematic review of 77 LLM-based trading agen
 **Interpretation**: The 6-item validation checklist applied in this wiki (from arXiv:2605.16895, Sheng et al.) is not merely conservative — it eliminates roughly 85–95% of published LLM trading agent claims as non-reproducible on the most basic methodological criteria. The temporal integrity test (#1) and data integrity test (#6) alone screen out nearly all published work.
 
 Apply the full checklist before production consideration of: **H274, H381, H382, H383, H384, H390, H396, H397**.
+
+---
+
+## Research Lead: FinAnchor Multi-LLM Embedding Ensemble (arXiv:2602.20859, flagged 2026-07-31)
+
+**Not yet fully read — WebFetch could not extract quantitative results from the abstract page, only the qualitative claim below. Read the full paper before designing a hypothesis.**
+
+FinAnchor (Feb 2026) ensembles embeddings from multiple LLMs without fine-tuning: selects one model's embedding space as an anchor, learns linear mappings to project other models' embeddings into it, and combines the aligned representations for prediction. Claimed to 'consistently outperform strong single-model baselines and standard ensemble methods' on financial NLP tasks — no concrete accuracy/Sharpe/WR numbers were extractable from the public abstract.
+
+**Why it matters here**: our entire NLP sentiment pipeline (H163 CONFIRMED, H168 NOT CONFIRMED, H174 CONFIRMED, H481/H482 STAGED) runs on a single FinBERT model. If FinAnchor's ensemble genuinely beats single-model baselines, it's a candidate low-cost upgrade layered on top of H481 (EarningsInOne two-stage) and H482 (FinDPO continuous scoring) rather than a replacement for either — an anchor-ensemble of FinBERT + FinDPO + a general embedding model could plausibly reduce classification noise at the WR=81.8% margin H174 currently sits at.
+
+**Action needed before staging a hypothesis**: fetch and read the full arXiv:2602.20859 PDF/HTML (not just the abstract) to extract actual benchmark numbers and confirm the financial-NLP tasks tested include anything PEAD-adjacent (sentiment classification, surprise prediction) rather than unrelated NLP tasks (e.g. NER, QA).
+
+---
+
+## Additional Evidence: LiveTradeBench (arXiv:2511.03628, flagged 2026-07-31)
+
+A live-data (not static-backtest) evaluation environment for LLM trading agents across US stocks and Polymarket prediction markets — 21 LLMs tested over 50-day live periods with live data streaming to prevent information leakage. Agents observe prices, news, and portfolio status, then output allocation percentages.
+
+**Finding**: high performance on standard/static LLM benchmarks does NOT translate to live trading success; models show distinct risk preferences and reasoning patterns; a few models adapt successfully using live signals but most don't.
+
+**This adds one more data point to an already-established pattern in this wiki** — consistent with PortBench (90% of LLMs fail to beat equal-weight), FINSABER (no persistent LLM edge over 20+ years/100+ stocks, KDD 2026), and Prediction Arena (all but one of 6 models lost real money on Kalshi). The consistent lesson across every LLM-trading benchmark reviewed to date: raw LLM judgment is not a tradeable edge on its own — value only appears when LLM output is wrapped in a hard quantitative validation gate (the shared-eval-checklist.md approach this pipeline already follows).
