@@ -13,6 +13,17 @@ import warnings
 from datetime import date
 from pathlib import Path
 
+# Bypass OneCLI proxy for Alpaca calls — must be set before any HTTP client
+# is constructed. Do not rely on shell-level env prefixes: `VAR=val source x
+# && python3 y` only scopes VAR to `source`, not to `python3`. NO_PROXY alone
+# is insufficient once a real order POST fires — `requests` needs
+# REQUESTS_CA_BUNDLE explicitly (it ignores SSL_CERT_FILE), confirmed 2026-07-31
+# when the AMZN gap-up order failed with a self-signed-cert error until both were set.
+os.environ["NO_PROXY"] = "paper-api.alpaca.markets,api.alpaca.markets"
+os.environ["no_proxy"] = "paper-api.alpaca.markets,api.alpaca.markets"
+os.environ["REQUESTS_CA_BUNDLE"] = "/tmp/onecli-combined-ca.pem"
+os.environ["SSL_CERT_FILE"] = "/tmp/onecli-combined-ca.pem"
+
 import pandas as pd
 import yfinance as yf
 
