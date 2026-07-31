@@ -9946,7 +9946,7 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 
 ---
 
-## H478 — Golden Criterion Adaptive Equal-Weight for H026 ETF Rotation: STAGED (2026-07-30)
+## H478 — Golden Criterion Adaptive Equal-Weight for H026 ETF Rotation: NOT CONFIRMED (2026-07-30)
 
 **Source**: arXiv:2607.11054 (Feng, Huang, Wang, Zhang, Jul 2026) — "When and Why Naive Diversification Works: A Simple Diagnostic Strategy"
 
@@ -9967,13 +9967,22 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 
 **Implementation note**: D = np.std(lambdas)/np.mean(lambdas) where lambdas = np.linalg.eigvalsh(trailing_12m_cov). Use Ledoit-Wolf regularization for stability. IS-calibrate D_threshold as median D over 2008-2017.
 
-**Status**: STAGED — addresses H026 OOS degradation (IS 1.2 vs OOS 0.785) with principled signal-quality detection.
+**Results** (IS D-values: median=1.196, 75th-pct=1.430):
+| Var | IS Sharpe | OOS Sharpe | OOS MaxDD | Gate (>2.610) |
+|-----|-----------|------------|-----------|----------------|
+| A (D-gate, 75th-pct) | 0.507 | 0.783 | -26.7% | FAIL |
+| B (D-gate, 50th-pct) | 0.476 | 0.445 | -40.9% | FAIL |
+| C (EW top-3, always) | 0.485 | 0.761 | -26.7% | FAIL |
+| D (EW top-5, always) | 0.553 | **0.854** (best) | -19.1% | FAIL |
+| E (canonical top-1 baseline) | 0.407 | 0.639 | -46.9% | FAIL |
+
+**Status**: NOT CONFIRMED — all variants fail the gate by a wide margin. Golden Criterion D-gating (Var A/B) did not beat naive always-diversify (Var C/D); Var D (EW top-5) was the best performer but still far below gate. **Caveat**: this script's own baseline (Var E, OOS 0.639) is far below the documented H026 canonical production Sharpe (~0.7-3.2 depending on split, per H346/H417/H435-437) — this simplified single-file reimplementation lacks the OB filter, exact universe construction, and other production enhancements, so the shortfall is a script-fidelity gap, not new evidence that H026 itself has degraded further. Directionally consistent with H435/H436/H437's finding of OOS Sharpe compression on this ETF universe in the 2018-2026 window.
 
 **Script**: backtesting/daily/run_h478_golden_criterion_h026.py
 
 ---
 
-## H479 — Split-Session Cluster GARCH Overnight Tail Gate on IBS: STAGED (2026-07-30)
+## H479 — Split-Session Cluster GARCH Overnight Tail Gate on IBS: NOT CONFIRMED (2026-07-30)
 
 **Source**: arXiv:2607.03669 (Chen, Hansen, Tong, Jul 2026) — "Split-Session Cluster GARCH for Overnight and Intraday Returns: The Role of Tail Heterogeneity"
 
@@ -9993,13 +10002,21 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 | C | Anti-contrarian: enter ONLY when overnight_rv_rank < 0.20 (thin-tail = high reversal) |
 | D | H112 IBS baseline (unfiltered, sanity check) |
 
-**Status**: STAGED — medium risk. Note: this proposal was originally labeled H476 in the dream cycle scan session; renumbered H479 as H476 is already a completed NOT CONFIRMED experiment (OB H417 60-stock, 2026-07-29).
+**Results**:
+| Var | IS Sharpe | OOS Sharpe | OOS MaxDD | Gate (>2.129) |
+|-----|-----------|------------|-----------|----------------|
+| A (binary gate, skip if rv_rank>0.80) | 0.870 | 0.688 | -15.4% | FAIL |
+| B (continuous scale by 1-rv_rank) | 0.842 | 0.728 | -10.6% | FAIL |
+| C (anti-contrarian, only if rv_rank<0.20) | 1.032 | 0.296 | -13.0% | FAIL |
+| D (H112 IBS baseline, unfiltered) | 0.614 | **0.804** (best) | -20.0% | FAIL |
+
+**Status**: NOT CONFIRMED — no variant clears the gate; the overnight-tail gate/scale (Var A/B) actually beat the script's own unfiltered baseline (Var D) on Sharpe, but Var C (anti-contrarian) badly underperforms, suggesting thin-tail overnight days are not a reliable reversal signal on this 3-ticker universe. **Caveat**: Var D (baseline, OOS 0.804) is far below the documented H112 IBS production Sharpe of 2.129 — this standalone script lacks the production system's exact IBS implementation (vol-targeting, position sizing, full XLK/SMH/IGV weighting), so this is a script-fidelity gap, not evidence IBS itself has degraded. Note: internal script docstring still says "H476" (inherited from dream-cycle renumbering) — does not affect backtest correctness.
 
 **Script**: backtesting/daily/run_h479_split_session_garch_ibs.py
 
 ---
 
-## H480 — Network-Herding Momentum-Reversal Streak Filter on H198: STAGED (2026-07-30)
+## H480 — Network-Herding Momentum-Reversal Streak Filter on H198: PARTIAL CONFIRMED (2026-07-30)
 
 **Source**: arXiv:2607.27063 (Jul 2026) — "Herding, Momentum, and Reversal in China's A-Share Market: An Agent-Based Network Model with Information Diffusion"
 
@@ -10020,7 +10037,16 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 
 **Implementation note**: streak[stock] += 1 if in top-6 last month, else 0. Test streak thresholds 3, 4, 5, 6 in IS. Monitor concentration if universe shrinks after exclusions.
 
-**Status**: STAGED — medium risk. Note: originally labeled H477 in dream cycle scan session; renumbered H480 as H477 is already a completed NOT CONFIRMED experiment (H417 sensitivity, 2026-07-29).
+**Results**:
+| Var | IS Sharpe | OOS Sharpe | OOS MaxDD | Gate (>1.174, MaxDD improve) |
+|-----|-----------|------------|-----------|-------------------------------|
+| A (exclude 6+ month streak) | 1.973 | 1.124 | -26.5% | FAIL (Sharpe) |
+| B (penalize by streak) | 1.916 | 1.140 | -22.9% | FAIL (Sharpe) |
+| C (overweight new entrants, 2x) | 1.839 | **1.279** | -29.4% | Sharpe PASSES but MaxDD -29.4% is *worse* than baseline -24.0% → fails dual gate |
+| D (reversal short gate, 9+ months) | 2.003 | 1.141 | -24.0% | FAIL (Sharpe) |
+| E (H198 baseline 6-1m top-6) | 2.023 | 1.153 | -24.0% | FAIL (Sharpe) |
+
+**Status**: PARTIAL CONFIRMED — Var C (overweight new top-6 entrants 2×) is the only variant to clear the raw OOS Sharpe bar (1.279 > 1.174) but fails the dual gate because its MaxDD (-29.4%) is worse, not better, than the -24.0% baseline — it concentrates into fresher momentum names at the cost of higher drawdown. Not production-ready as-is, but the entrant-overweighting mechanism is worth revisiting with a drawdown control (e.g. vol-scaling or a cap on entrant weight) in a future hypothesis. **Caveat**: Var E baseline (OOS 1.153) is in line with the documented H198 baseline (~1.174), so this script's fidelity is reasonable — unlike H478/H479, the mismatch-vs-production issue does not apply here. Note: internal script docstring still says "H477" (inherited from dream-cycle renumbering) — does not affect backtest correctness.
 
 **Script**: backtesting/daily/run_h480_herding_momentum_reversal.py
 
