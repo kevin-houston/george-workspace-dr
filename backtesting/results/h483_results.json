@@ -1,0 +1,218 @@
+{
+  "hypothesis": "H483",
+  "description": "OB filter on H411 Var B (rank(1/price) x 20d drift gate, top-2)",
+  "gate_sharpe": 4.825,
+  "gate_mdd_improvement_pp": 0.5,
+  "h411_varb_baseline_replication": {
+    "is": {
+      "n": 96,
+      "sharpe": 3.94,
+      "maxdd": -0.01,
+      "cagr": 1.076,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 64,
+      "sharpe": 4.825,
+      "maxdd": -0.012,
+      "cagr": 1.061,
+      "neg_yrs": 0
+    }
+  },
+  "n_variants": 8,
+  "n_pass_both_gates": 1,
+  "variants": [
+    {
+      "ob_window": 20,
+      "min_filter": 1,
+      "swing_len": 3,
+      "is": {
+        "n": 96,
+        "sharpe": 4.02,
+        "maxdd": 0.0,
+        "cagr": 1.026,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.821,
+        "maxdd": -0.009,
+        "cagr": 1.142,
+        "neg_yrs": 0
+      },
+      "oos_cash_pct": 6.2,
+      "mdd_improvement_pp": 0.3,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 1,
+      "swing_len": 5,
+      "is": {
+        "n": 96,
+        "sharpe": 3.724,
+        "maxdd": -0.045,
+        "cagr": 0.912,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.443,
+        "maxdd": -0.044,
+        "cagr": 1.084,
+        "neg_yrs": 0
+      },
+      "oos_cash_pct": 12.5,
+      "mdd_improvement_pp": -3.2,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 2,
+      "swing_len": 3,
+      "is": {
+        "n": 96,
+        "sharpe": 3.655,
+        "maxdd": 0.0,
+        "cagr": 0.969,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.461,
+        "maxdd": 0.0,
+        "cagr": 1.101,
+        "neg_yrs": 0
+      },
+      "oos_cash_pct": 15.6,
+      "mdd_improvement_pp": 1.2,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": true,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 2,
+      "swing_len": 5,
+      "is": {
+        "n": 96,
+        "sharpe": 2.942,
+        "maxdd": -0.045,
+        "cagr": 0.713,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.454,
+        "maxdd": 0.0,
+        "cagr": 0.866,
+        "neg_yrs": 0
+      },
+      "oos_cash_pct": 35.9,
+      "mdd_improvement_pp": 1.2,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": true,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 1,
+      "swing_len": 3,
+      "is": {
+        "n": 96,
+        "sharpe": 4.2,
+        "maxdd": -0.01,
+        "cagr": 1.124,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 5.25,
+        "maxdd": -0.009,
+        "cagr": 1.158,
+        "neg_yrs": 0
+      },
+      "oos_cash_pct": 4.7,
+      "mdd_improvement_pp": 0.3,
+      "beats_sharpe_gate": true,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 1,
+      "swing_len": 5,
+      "is": {
+        "n": 96,
+        "sharpe": 4.233,
+        "maxdd": 0.0,
+        "cagr": 1.085,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 5.098,
+        "maxdd": -0.009,
+        "cagr": 1.108,
+        "neg_yrs": 0
+      },
+      "oos_cash_pct": 9.4,
+      "mdd_improvement_pp": 0.3,
+      "beats_sharpe_gate": true,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 2,
+      "swing_len": 3,
+      "is": {
+        "n": 96,
+        "sharpe": 3.695,
+        "maxdd": -0.01,
+        "cagr": 1.043,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.874,
+        "maxdd": 0.0,
+        "cagr": 1.123,
+        "neg_yrs": 0
+      },
+      "oos_cash_pct": 12.5,
+      "mdd_improvement_pp": 1.2,
+      "beats_sharpe_gate": true,
+      "beats_mdd_gate": true,
+      "beats_both_gates": true
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 2,
+      "swing_len": 5,
+      "is": {
+        "n": 96,
+        "sharpe": 3.462,
+        "maxdd": 0.0,
+        "cagr": 0.949,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 4.633,
+        "maxdd": 0.0,
+        "cagr": 1.055,
+        "neg_yrs": 0
+      },
+      "oos_cash_pct": 18.8,
+      "mdd_improvement_pp": 1.2,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": true,
+      "beats_both_gates": false
+    }
+  ]
+}

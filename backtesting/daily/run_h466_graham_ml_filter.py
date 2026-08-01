@@ -38,6 +38,16 @@ CAUTION:
 - Cross-ref H337 NOT CONFIRMED: quality factor (GP/A, ROE) on H198 also failed
   Root cause: 30-stock large-cap NASDAQ universe has minimal cross-sectional quality variation
 - Primary interest: Var B and C — can relaxed Graham improve risk profile without killing alpha?
+
+VERDICT (2026-07-31): NOT RUNNABLE. FMP /stable/key-metrics and /stable/ratios are
+reachable (HTTP 200) but hard-capped to the 5 most recent ANNUAL periods on the
+current subscription tier: period=quarter -> 402, limit>5 -> 402, and year/from/to
+filters are silently ignored (always returns the same 5 most recent rows, e.g.
+2021-2025 for AAPL). No historical fundamentals reach back to the IS window
+(2013-2020). Legacy /api/v3/key-metrics/{ticker} is fully decommissioned (403).
+See wiki/trading/backtesting/hypothesis-log.md H466 entry for full detail.
+Revisit only with an upgraded FMP plan or a free EDGAR-XBRL-based fundamentals
+pipeline (unbuilt, out of scope for this pass).
 """
 
 import os

@@ -1,0 +1,63 @@
+{
+  "hypothesis": "H481",
+  "note": "Adapted: EarningsInOne corpus unavailable (404); FMP EPS surprise substitutes for Layer-1 numeric signal.",
+  "gate_wr": 0.818,
+  "gate_mr": 0.0689,
+  "gate_n": 15,
+  "results": {
+    "A": {
+      "is": {
+        "n": 126,
+        "wr": 0.5793650793650794,
+        "mr": 0.0045903773719794755
+      },
+      "oos": {
+        "n": 146,
+        "wr": 0.4931506849315068,
+        "mr": 0.0006188017704279825
+      },
+      "desc": "L1 numeric surprise >= 0.02, 1d hold from announcement open"
+    },
+    "B": {
+      "is": {
+        "n": 30,
+        "wr": 0.5333333333333333,
+        "mr": 0.004627849513915483
+      },
+      "oos": {
+        "n": 38,
+        "wr": 0.7105263157894737,
+        "mr": 0.03268802941189234
+      },
+      "desc": "L2 FinBERT score >= 0.18, 20d hold (H174-equivalent)"
+    },
+    "C": {
+      "is": {
+        "n": 53,
+        "wr": 0.5849056603773585,
+        "mr": 0.0030662555546055056
+      },
+      "oos": {
+        "n": 66,
+        "wr": 0.6818181818181818,
+        "mr": 0.020119594726432932
+      },
+      "desc": "L1+L2 sequential: 1d L1 leg, +20d L2 leg if L2 also confirms"
+    },
+    "D": {
+      "is": {
+        "n": 21,
+        "wr": 0.47619047619047616,
+        "mr": -0.007247719026120602
+      },
+      "oos": {
+        "n": 18,
+        "wr": 0.8333333333333334,
+        "mr": 0.06477098791079985
+      },
+      "desc": "L1 AND L2 dual gate, 20d hold on L2 leg"
+    }
+  },
+  "confirmed_variants": [],
+  "verdict": "NOT CONFIRMED"
+}

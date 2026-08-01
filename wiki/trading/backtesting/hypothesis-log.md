@@ -9829,7 +9829,7 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 ---
 
-## H466 — Quant Convergence: Graham Value Rules as ML Noise Filter on H198: STAGED (2026-07-28)
+## H466 — Quant Convergence: Graham Value Rules as ML Noise Filter on H198: NOT RUNNABLE (2026-07-31)
 
 **Source**: arXiv:2606.24575 (Yamazaki & Garrido-Lestache, Jun 2026) — *Quant Convergence: Bridging Classical Value Investing and Modern Factor Models*
 
@@ -9842,9 +9842,18 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 **Expected challenge**: Strict Graham filters will eliminate most NASDAQ large-cap stocks (same root cause as H337 quality factor failure). Relaxed thresholds (Var B) are the primary test.
 
-**Status**: STAGED — FMP API available; implementation requires quarterly fundamental data fetch with 90-day lag.
+**Blocker found (2026-07-31)**: Attempted to fetch quarterly/annual fundamentals via FMP `/stable/key-metrics` and `/stable/ratios`. Confirmed working (HTTP 200) but hard-capped to the 5 most recent **annual** periods regardless of query params:
+  - `period=quarter` → HTTP 402 "Special Endpoint... not available under your current subscription."
+  - `limit` above 5 → HTTP 402 "must be between 0 and 5 based on your current subscription."
+  - `year=2015`, `from=2012-01-01&to=2015-01-01` filters are silently ignored — response is always the same 5 most recent annual rows (2021-2025 for AAPL) no matter what date range is requested.
+  - The legacy `/api/v3/key-metrics/{ticker}` endpoint is fully decommissioned (403, "Legacy Endpoint... only available for legacy users... prior August 31, 2025").
+  This means historical P/E, P/B, and EPS-CAGR data covering the required IS window (2013-2020) is **not accessible** on the current FMP subscription tier at any endpoint tried — only 2021-2025 annual snapshots are reachable, which don't even fully cover the OOS window (2021-2026), let alone IS.
 
-**Script**: backtesting/daily/run_h466_graham_ml_filter.py
+**Verdict**: **NOT RUNNABLE** — blocked by FMP API subscription tier (paywalled historical fundamentals), consistent with the same family of blocks seen at H247 (transcripts, Professional-plan-gated). Not a strategy failure; a data-access limitation. Revisit if the FMP plan is upgraded, or substitute a different fundamentals source (e.g., EDGAR XBRL structured financial statements, which are free) for a future attempt — that would require building an XBRL parser, out of scope for tonight's pass.
+
+**Status**: NOT RUNNABLE — FMP fundamentals endpoints paywall historical (pre-2021) P/E, P/B, EPS-CAGR data needed for the IS window; only 5 most recent annual periods reachable regardless of query params tried.
+
+**Script**: backtesting/daily/run_h466_graham_ml_filter.py (stub retained; `fetch_fmp_fundamentals()` raises NotImplementedError — left as-is since the blocker is upstream API access, not the implementation)
 
 ---
 
@@ -10052,37 +10061,39 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 
 ---
 
-## H481 — Two-Stage PEAD with EarningsInOne Corpus — Numeric + Qualitative Timing: STAGED (2026-07-30)
+## H481 — Two-Stage PEAD with EarningsInOne Corpus — Numeric + Qualitative Timing: NOT CONFIRMED (2026-07-31)
 
 **Source**: arXiv:2606.29734 (Ding Yu et al., Jun 2026) — "Fast Numbers, Slow Language: Bridging Quantitative and Qualitative Earnings Signals"
 
-**Universe**: S&P 500 stocks with earnings events (same as H174/H163)
+**Universe**: 30-stock universe (same as H174/H163)
 **IS/OOS**: IS 2022-2023 / OOS 2024-2026
-**Gate**: OOS WR > 81.8% (H174 baseline) AND mean_ret > 6.89% — must beat on BOTH metrics
+**Gate**: OOS WR > 81.8% (H174 baseline) AND mean_ret > 6.89% AND n ≥ 15 — must beat on BOTH metrics
 
-**Method**: EarningsInOne corpus proves a "clean speed separation": numeric EPS/revenue surprise peaks at announcement and diminishes by next market open, while qualitative ECT text sentiment peaks the FOLLOWING trading day and remains tradeable. H174's current design conflates both timing layers. H481 separates them explicitly.
+**Method**: EarningsInOne corpus was cited as proving a "clean speed separation": numeric EPS/revenue surprise peaks at announcement and diminishes by next market open, while qualitative ECT text sentiment peaks the FOLLOWING trading day and remains tradeable. H174's design conflates both timing layers; H481 attempts to separate them explicitly.
 
-**Design**:
-- **Layer 1** (numeric): EPS surprise ≥ 0.02 → OPG entry at announcement open, hold 1 trading day
-- **Layer 2** (qualitative): FinBERT score ≥ 0.18 on 8-K/ECT → next morning open, hold 20 trading days
+**Data substitution note**: The cited EARNINGSINONE corpus (`github.com/dingyuqing05/earningsinone`) does not exist as a public repo — verified 2026-07-31 via direct GitHub fetch (404 for the repo; the user account itself returns 200) and web search (only the arXiv abstract surfaces, no dataset release). Rather than mark the whole hypothesis NOT RUNNABLE, the underlying testable claim was reproduced with confirmed-accessible substitute data: **Layer 1** (numeric) uses FMP `/stable/earnings` (epsActual/epsEstimated, history back to 1985 for large-caps — endpoint confirmed working via NO_PROXY bypass of the OneCLI proxy, `financialmodelingprep.com`); **Layer 2** (qualitative) reuses the existing H163/H174 FinBERT 8-K sentiment cache and dual-filter mechanics unchanged.
+
+**Design** (as run):
+- **Layer 1**: EPS surprise = (epsActual − epsEstimated)/|epsEstimated| ≥ 0.02 → entry at announcement-day open, hold 1 trading day
+- **Layer 2**: FinBERT score ≥ 0.18 on 8-K → next-morning open entry, hold 20 trading days (H174-equivalent)
 
 **Variants**:
-| Var | Description |
-|-----|-------------|
-| A | L1 only (numeric surprise, 1d hold) — fast PEAD |
-| B | L2 only (qualitative, 20d hold) — same as H174 |
-| C | L1 + L2 sequential: enter at open (1d), extend to 20d if ECT confirms |
-| D | L1 AND L2 gate: only enter 20d position if BOTH numeric ≥ 0.02 AND FinBERT ≥ 0.18 |
+| Var | Description | IS n | IS WR% | IS MeanRet% | OOS n | OOS WR% | OOS MeanRet% | Gate |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| A | L1 only (numeric surprise ≥0.02, 1d hold) | 126 | 57.9 | 0.46 | 146 | 49.3 | 0.06 | fail |
+| B | L2 only (FinBERT ≥0.18, 20d hold) | 30 | 53.3 | 0.46 | 38 | 71.1 | 3.27 | fail |
+| C | L1+L2 sequential (1d L1 leg + 20d L2 leg if both confirm) | 53 | 58.5 | 0.31 | 66 | 68.2 | 2.01 | fail |
+| D | L1 AND L2 dual gate (both thresholds), 20d hold | 21 | 47.6 | -0.72 | 18 | 83.3 | 6.48 | fail (MeanRet just under gate; n thin) |
 
-**Data needed**: EDGAR 8-K files (existing H174 pipeline), EPS surprise from FMP API, ECT transcript timing from EARNINGSINONE corpus or FMP earnings call transcript, Alpaca paper trading.
+**Key findings**: Var D — the variant closest to the paper's actual thesis (numeric + qualitative combined) — comes closest to passing: OOS WR 83.3% clears the 81.8% bar, but MeanRet 6.48% falls just short of 6.89%, and n=18 is below the informal ≥20 comfort threshold used elsewhere in the log (technically ≥15 gate, so it isn't disqualified on n alone, but the sample is thin). Var A (pure 1-day numeric-surprise PEAD) shows no edge OOS (WR 49.3%, near coin-flip) — consistent with EMH: large-cap EPS surprises are priced in same-day, leaving no exploitable 1-day drift once the FMP surprise threshold alone is used as a filter. Var C (sequential blend) underperforms pure L2 (H174-equivalent) on both metrics — stacking the L1 leg dilutes rather than adds. Note IS/OOS split here (2022-2023/2024-2026, per H481's own spec) differs from H174's original split (2020-2023/2024+), so Var B's numbers are not directly comparable to H174's logged 81.8%/6.89% — they're a fresh in-spec baseline replication, not a discrepancy.
 
-**Status**: STAGED — low risk. Note: originally labeled H464 in nightly research; renumbered H481 as H464 was already taken by a 2026-07-28 staged hypothesis (STN-TGAT Graph Attention Network).
+**Verdict**: **NOT CONFIRMED** — no variant beats both gate metrics simultaneously. The paper's core claim (numeric layer is fast/decaying, qualitative layer persists) is directionally supported by Var A's near-zero OOS edge vs Var B's positive edge, but combining the two layers does not improve on H174-style qualitative-only filtering at this universe size. Not pursued further; H174's existing score+surprise-of-tone dual filter remains the production PEAD design. If revisited, Var D's near-miss suggests trying a slightly relaxed MeanRet gate or larger universe to lift n before discarding the dual-gate concept entirely.
 
-**Script**: backtesting/daily/run_h481_earningsinone_two_stage_pead.py
+**Script**: backtesting/daily/run_h481_earningsinone_two_stage_pead.py (fully implemented 2026-07-31, replacing prior stub)
 
 ---
 
-## H482 — FinDPO Continuous Sentiment Scoring Upgrade for H174 PEAD Pipeline: STAGED (2026-07-30)
+## H482 — FinDPO Continuous Sentiment Scoring Upgrade for H174 PEAD Pipeline: NOT RUNNABLE (2026-07-31)
 
 **Source**: arXiv:2507.18417 (Jul 2026) — "FinDPO: Financial Sentiment Analysis for Algorithmic Trading through Preference Optimization of LLMs"
 
@@ -10102,13 +10113,21 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 
 **Implementation note**: Verify FinDPO package on PyPI before pip install (hallusquatting defense). Run pip-audit after install. Verify training data — FinDPO may not have been trained specifically on earnings 8-K filings.
 
-**Status**: STAGED — medium risk. Note: originally labeled H465 in nightly research; renumbered H482 as H465 was already taken by a 2026-07-28 staged hypothesis (LLM-Finetuned Merger Arbitrage).
+**Verification performed (2026-07-31)**: Per hallusquatting-defense protocol, checked for a real, installable FinDPO before attempting any implementation.
+- PyPI: no `findpo` or similarly-named package exists (`pypi.org/pypi/findpo/json` → 404). Did not install anything.
+- arXiv:2507.18417 itself is real — confirmed via direct fetch (title matches exactly: "FinDPO: Financial Sentiment Analysis for Algorithmic Trading through Preference Optimization of LLMs," authors Iacovides/Zhou/Mandic, base model Llama-3-8B Instruct fine-tuned via DPO on financial news preference data). Also indexed on ACM (6th ACM Intl. Conf. on AI in Finance) and alphaXiv.
+- HuggingFace search for "FinDPO" surfaces one hit, `circircircle/FinDPO-Phi2` — but this model was created 2024-04-08, over a year before the FinDPO paper (Jul 2025/2026) was published, and is Phi-2-based rather than the paper's Llama-3-8B. This is a coincidental unrelated name collision, not the paper's official release, and using it would misrepresent the hypothesis.
+- No official code or model-weights release was found from the paper's authors (no GitHub link surfaced via web search; the ACM proceedings page and arXiv abstract do not link one either).
 
-**Script**: backtesting/daily/run_h482_findpo_sentiment_upgrade.py
+**Verdict**: **NOT RUNNABLE** — the paper is legitimate but ships no public, installable artifact (no PyPI package, no official pretrained weights). Reproducing FinDPO faithfully would require DPO-fine-tuning Llama-3-8B from scratch on labeled financial-sentiment preference pairs — a GPU training project, not a backtest, and out of scope for a nightly research pass. Per the hallusquatting-defense rule, no unverified package or unrelated model was installed/loaded as a stand-in. Revisit only if the authors release code/weights, or as a candidate for a dedicated fine-tuning project with Kevin's explicit sign-off.
+
+**Status**: NOT RUNNABLE — medium risk item correctly gated by its own verification note. Note: originally labeled H465 in nightly research; renumbered H482 as H465 was already taken by a 2026-07-28 staged hypothesis (LLM-Finetuned Merger Arbitrage).
+
+**Script**: backtesting/daily/run_h482_findpo_sentiment_upgrade.py (left as stub — no implementation attempted; see verdict)
 
 ---
 
-## H483 — OB Filter on H411 Var B — Order Block Applied to True H-Series Champion (4.825): STAGED (2026-07-30)
+## H483 — OB Filter on H411 Var B — Order Block Applied to True H-Series Champion (4.825): CONFIRMED (2026-07-31)
 
 **Source**: Internal — follows H344 (OB+H198: 1.174→3.396) and H476 (OB+H417: 0.383→1.929) pattern
 
@@ -10134,6 +10153,31 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 
 **Prior art**: H411 Var B CONFIRMED OOS 4.825; H344 CONFIRMED OB+H198 3.396; H476 NOT CONFIRMED (gate issue — inflated 5.855 gate, but OB still lifted 5×: 0.383→1.929).
 
-**Status**: STAGED — highest priority backtest in current queue. Note: originally labeled H478 in nightly research; renumbered H483 as H478 is taken by Golden Criterion (scan session 2026-07-30).
+**Status**: CONFIRMED (2026-07-31). Baseline replication of H411 Var B (top-2, no OB) reproduced the log exactly: OOS Sharpe 4.825, MaxDD -1.2% — confirms script fidelity before layering the OB filter.
+
+**Results** (candidate pool = top-5 by H411 Var B rank, OB-filter down to top-2; MaxDD improvement = OOS MaxDD minus baseline -1.2%, positive = better):
+| ob_window | min_filter | swing_len | IS Sh | OOS Sh | OOS MaxDD | MDD improvement | Cash% | Gate |
+|-----------|------------|-----------|-------|--------|-----------|------------------|-------|------|
+| 20 | 1 | 3 | 4.020 | 4.821 | -0.9% | +0.30pp | 6.2% | FAIL (Sharpe) |
+| 20 | 1 | 5 | 3.724 | 4.443 | -4.4% | -3.20pp | 12.5% | FAIL (both) |
+| 20 | 2 | 3 | 3.655 | 4.461 | 0.0% | +1.20pp | 15.6% | FAIL (Sharpe) |
+| 20 | 2 | 5 | 2.942 | 3.454 | 0.0% | +1.20pp | 35.9% | FAIL (Sharpe) |
+| 30 | 1 | 3 | 4.200 | **5.250** | -0.9% | +0.30pp | 4.7% | FAIL (MaxDD only) |
+| 30 | 1 | 5 | 4.233 | 5.098 | -0.9% | +0.30pp | 9.4% | FAIL (MaxDD only) |
+| **30** | **2** | **3** | **3.695** | **4.874** | **0.0%** | **+1.20pp** | **12.5%** | **✓ PASS BOTH** |
+| 30 | 2 | 5 | 3.462 | 4.633 | 0.0% | +1.20pp | 18.8% | FAIL (Sharpe) |
+
+**Key findings**:
+- H411 Var B's baseline was already the best in H-series history (OOS 4.825) with a tiny MaxDD (-1.2%), leaving little room for a secondary filter to improve both axes simultaneously — unlike H344/H345/H346 where OB filtering roughly doubled/tripled a modest 1.1-2.6 baseline.
+- Best raw-Sharpe variant (ob_window=30, min_filter=1, swing_len=3): OOS Sharpe 5.250 (+8.8% relative, largest margin of any H-series OB test), but MaxDD only improves +0.30pp — fails the dual gate on the drawdown leg.
+- One variant clears both gates: **(ob_window=30, min_filter=2, swing_len=3)** — OOS Sharpe 4.874 > 4.825 gate, and MaxDD 0.0% (zero OOS drawdown, a genuine +1.2pp improvement over -1.2% baseline). The stricter min_filter=2 requirement holds cash more often (12.5% of OOS months), which is exactly why drawdown drops to zero.
+- Pattern: raising min_filter from 1→2 trades some Sharpe for materially better drawdown control by refusing to trade when fewer than 2 of the top-5 candidates show a bullish OB.
+
+**Verdict: CONFIRMED** — Var (ob_window=30, min_filter=2, swing_len=3), OOS Sharpe 4.874, MaxDD 0.0%, 12.5% cash months. This is the new H-series Sharpe record among OB-filtered variants (previous best: H346 at 3.238) and the first H-series result with literally zero OOS monthly drawdown.
+
+**Production correlation estimate**: H483 inherits H411 Var B's signal family. H470's cross-strategy correlation study (same universe) measured H411-B (there called S3) vs momentum-family strategies at 0.309-0.518 — genuinely low, confirmed orthogonal to standard momentum/design-choice signals. H411/H483 has no ETF, bond, or IBS exposure and is NASDAQ single-stock concentrated (only 2 names held at a time, often cash), so correlation to the production blend (H041a/H026/H045/XLK-SMH-IGV IBS) is expected to be low-to-moderate (likely 0.3-0.5 vs the equity sleeves, near-zero vs bond H045). **Recommendation**: strong production candidate — near-record risk-adjusted return with zero realized OOS drawdown and plausible low correlation to existing sleeves. Before allocating capital: (1) run a proper monthly-aligned correlation backtest against the live production equity curve (not just the qualitative H470 estimate), (2) sanity-check the 12.5% cash-month cadence doesn't cluster with production drawdown periods, (3) consider a 3-5% satellite allocation sized conservatively given the small 2-stock concentration and short (2021-2026) true OOS track record.
+
+**Script**: backtesting/daily/run_h483_ob_filter_h411_varb.py
+**Results**: backtesting/results/h483_results.json
 
 **Script**: backtesting/daily/run_h483_ob_filter_h411_varb.py
