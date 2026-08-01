@@ -1,7 +1,7 @@
 ---
-updated: 2026-07-30
+updated: 2026-08-01
 sources_indexed: 4
-pages: 248
+pages: 249
 ---
 
 # Wiki Index
@@ -308,6 +308,7 @@ When answering a query:
 - [LLM Metacognition (arXiv:2607.11881)](tools/llm-metacognition-2026.md) — comprehensive survey: confidence calibration, knowledge boundary recognition, self-correction in LLMs; individuated calibration fails (aggregate ECE ≠ per-query accuracy); RL with metacognitive feedback most promising training-time fix ← new 2026-07-13
 - [LLM-as-Judge Bias — Mechanistic Account (arXiv:2607.11871)](tools/llm-judge-bias-2026.md) — bias lives in low-dimensional activation subspace (not input-output noise); causal steering reproduces/removes bias; predicts judge failures on unseen benchmarks; 7 judges × 7 bias types × 9 benchmarks ← new 2026-07-13
 - [Agentic Routing: Harness-Native Data Flywheel (arXiv:2607.11399)](tools/agentic-routing-2026.md) — step-level model routing inside agent harnesses; routing decisions auto-generate labeled training records (flywheel); OpenSquilla: LightGBM cold-start + staged router; H318 meta-learner analog ← new 2026-07-13
+- [SkillsGate](tools/skillsgate-notes.md) — visual skill manager (desktop + TUI) for Claude Code/Cursor/20+ agents; browses skills.sh catalog, per-agent install; George already installs via `npx skills add` (same skills.sh ecosystem); low fit for headless George, possible fit for Kevin's own local agents ← new 2026-08-01
 
 ### AI Industry
 

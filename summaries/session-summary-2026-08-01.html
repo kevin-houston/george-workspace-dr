@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Session Summary — 2026-08-01</title>
+  
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--orange:#f0883e;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.6;padding:0;}
+
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:baseline;justify-content:space-between;}
+.header-title{font-size:16px;font-weight:700;letter-spacing:.3px;}
+.header-sub{color:var(--muted);font-size:12px;}
+
+.main{padding:20px 24px;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1.1;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.muted{color:var(--muted);}
+
+/* Section card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.card-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.card-badge{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:2px 8px;color:var(--muted);}
+.card-body{padding:14px 16px;}
+
+/* Proposals */
+.proposal{padding:10px 0;border-bottom:1px solid var(--border);}
+.proposal:last-child{border-bottom:none;}
+.proposal-header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.proposal-title{font-size:13px;font-weight:600;}
+.risk-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+.risk-medium{background:rgba(210,153,34,.18);color:var(--yellow);border:1px solid rgba(210,153,34,.3);}
+.risk-high{background:rgba(248,81,73,.18);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.risk-low{background:rgba(63,185,80,.18);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.proposal-rationale{font-size:12px;color:var(--muted);margin-top:3px;}
+.proposal-target{font-size:11px;color:var(--blue);font-family:monospace;margin-top:3px;}
+
+/* Commit list */
+.commit{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;display:flex;gap:10px;}
+.commit:last-child{border-bottom:none;}
+.commit-hash{font-family:monospace;color:var(--blue);flex-shrink:0;}
+.commit-msg{color:var(--text);}
+
+/* Podcast */
+.podcast-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;}
+.podcast-dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:10px;}
+.link-btn{display:inline-block;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--blue);background:var(--surface);}
+.link-btn:hover{border-color:var(--blue);}
+
+/* Raw changelog */
+pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;overflow-x:auto;white-space:pre-wrap;color:var(--muted);margin-top:10px;}
+
+.empty{color:var(--muted);font-size:12px;padding:4px 0;}
+</style>
+
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-title">Session Summary &mdash; 2026-08-01</div>
+    </div>
+    <div class="header-sub">Generated 2026-08-01 04:01 CT</div>
+  </div>
+  <div class="main">
+    
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Proposals Applied</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Flagged</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Commits</div>
+        <div class="kpi-value blue">5</div></div>
+      <div class="kpi"><div class="kpi-label">Podcast</div>
+        <div class="kpi-value muted">—</div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Dream Cycle</span>
+        <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
+      </div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki note: Grounded Event Extraction from 8-Ks with a fine-grained taxonomy — candidate refinement for H174 filter</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Dolphin, Dursun, Blankenship, Adams &amp; Pike, arXiv:2607.08346 (Jul 2026) build a two-stage LLM pipeline that classifies 8-K disclosures into a 119-event, 3-tier taxonomy, grounding every tag to a verbatim quote plus a quality-scored re-check pass. Applied to 292,984 filings (2022-2026) -&gt; 601,088 tag…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/pead.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki note: Beyond Sentiment structured extraction — verified evidence FinBERT score alone leaves signal on the table</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Zhu, Ge, Wang, Chen, Hou, Wan &amp; Qin, arXiv:2607.28496 (Jul 2026) use LLaMA-3.1-70B to extract 6 structured dimensions beyond sentiment (event type, impact scope, temporal horizon, semantic confidence, etc.) from financial news, tested on 41,618 news-stock pairs (FNSPID dataset). Verified numbers fro…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/pead.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki note: Profit Mirage — information-leakage warning for LLM-scored backtests, recommend an audit of our own FinBERT pipeline</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Li, Zeng, Xing, Xu &amp; Xu, arXiv:2510.07920 (Oct 2025) show that LLM-based trading backtests can suffer from information leakage: models may memorize historical price outcomes from pretraining rather than learning causal drivers, so backtested returns 'evaporate' once evaluated on data past the model'…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/llm-alpha-validation.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Wiki note: Retail investor holding-horizon PEAD signal — orthogonal overlay candidate for H174</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Domonkos F. Vamossy, arXiv:2512.00280 (Nov 2025, rev. Dec 2025) uses StockTwits self-reported holding periods (2010-2021) to split retail investors into long- vs. short-horizon cohorts around earnings announcements. Long-horizon investors underreact, producing strong PEAD; short-horizon investors ov…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/pead.md</div>
+            </div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Commits</span>
+        <span class="card-badge">5 today</span>
+      </div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">af4195d</span><span class="commit-msg">dream cycle: changelog 2026-08-01</span></div><div class="commit"><span class="commit-hash">fad3f1e</span><span class="commit-msg">dream cycle: apply 2026-08-01 staged proposals (8-K taxonomy, structured extraction, Profit Mirage audit, retail-horizon PEAD)</span></div><div class="commit"><span class="commit-hash">0b1e23a</span><span class="commit-msg">dream cycle: scan 2026-08-01 — 4 low-risk wiki notes staged (8-K taxonomy, structured extraction, Profit Mirage leakage audit, retail-horizon PEAD)</span></div><div class="commit"><span class="commit-hash">5335a29</span><span class="commit-msg">wiki: add pead-llm-architecture-comparison-2025.md source (EMNLP-2025 FinNLP)</span></div><div class="commit"><span class="commit-hash">757b281</span><span class="commit-msg">nightly backup 2026-08-01</span></div></div>
+    </div>
+    
+    
+  </div>
+</body>
+</html>

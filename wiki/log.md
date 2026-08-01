@@ -918,3 +918,7 @@ Pages updated: 1 (pead.md 85→430 lines). Pages created: 1 (research-log/2026-0
 Key additions: Ball&Brown 1968 → EarningsInOne 2026 two-stage release model; analyst behavioral bias (arXiv:2511.15214 over-react sentiment / under-react uncertainty); signal taxonomy (8 types, H163→H423); H163-H179 failure lessons; PEAD-GAP variant documented; 7 upgrade candidates (H400/H410/H414/H415/H421/H422/H423); production architecture diagram; PEAD×momentum confluence analysis.
 
 Dream cycle: 18 papers reviewed, 3 proposals staged (H422 FinBERT2, H423 MTL-PEAD, fine-grained multi-agent wiki).
+
+## 2026-08-01 — Tool note: SkillsGate
+
+Kevin flagged @tom_doerr tweet about SkillsGate (visual skill manager for AI agent skills, skills.sh ecosystem). Created tools/skillsgate-notes.md, added index entry. Assessment: low fit for headless George (already installs via `npx skills add`), possible fit for Kevin managing his own local agent setups. No wiki restructuring, single-page note.
