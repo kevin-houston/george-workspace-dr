@@ -318,3 +318,58 @@ This suggests a confluence strategy: enter H174 PEAD on stocks that also satisfy
 | Earnings call transcripts | FMP Transcripts (Professional plan, $299/mo) or EDGAR if in exhibit | Paid |
 | FinBERT model | HuggingFace `ProsusAI/finbert` | Free |
 | Historical PEAD events | `backtesting/paper_trading/pead_watchlist.json` (current session) | Internal |
+
+---
+
+## Research Lead: Fine-Grained 8-K Event Taxonomy (arXiv:2607.08346, flagged 2026-08-01)
+
+Dolphin et al. (Jul 2026) build a two-stage LLM pipeline classifying 8-K disclosures into a 119-event, 3-tier taxonomy, grounding every tag to a verbatim quote from the filing plus a quality-scored re-check pass. Applied to 292,984 filings (2022-2026) -> 601,088 tagged events. On a 5,125-filing stratified sample, precision on the extracted event tags rose from 12% (low quality-score bucket) to 96% (high quality-score bucket) as the quality filter tightened; unsupported tags fell to near-zero at the high end. Their event-study on abnormal returns shows the fine-grained taxonomy separates economically distinct events that the SEC's coarse Item-code buckets (e.g. our own Item 2.02) conflate.
+
+**Why it matters here**: H163/H174's FinBERT score>=0.18 filter treats all Item 2.02 earnings-release text as one bucket. If distinct sub-event types within that bucket (e.g. guidance revision vs. one-time charge vs. restructuring commentary bundled into the same earnings release) have different drift magnitudes, an event-type-conditioned filter could sharpen H174 without changing its entry threshold. No ready-to-use package exists for their taxonomy -- this would require reimplementing a comparable classification+grounding pipeline before it becomes testable. Flagging as a design lead, not a confirmed improvement.
+
+**Action needed before staging a hypothesis**: read the full paper's taxonomy definitions (which of the 119 event types map onto our Item 2.02 earnings-release corpus) and estimate the LLM-call cost of classifying our existing 8-K corpus before committing to a build.
+---
+
+## Research Lead: Structured Extraction Beyond Sentiment (arXiv:2607.28496, flagged 2026-08-01)
+
+Zhu et al. (Jul 2026) extract 6 structured dimensions beyond sentiment (event type, impact scope, temporal horizon, semantic confidence, etc.) from financial news via LLaMA-3.1-70B, tested on 41,618 news-stock pairs (FNSPID dataset). Verified results: FinBERT-alone F1=0.576; FinBERT + structured features -> F1=0.600 (p<0.0001); structural dimensions alone contribute +0.019 F1 in ablation; **53.5% disagreement rate** between the sentiment signal and the structured signal, meaning the two are largely orthogonal rather than redundant.
+
+**Why it matters here**: this is concrete, verified evidence (not just an abstract claim) that a FinBERT sentiment score used alone leaves real signal on the table. H174's current gate is score>=0.18 AND EPS surprise>=0.02 -- a sentiment dimension plus a fundamental-surprise dimension, but no *event-structure* dimension (impact scope, temporal horizon). Adding a structured-extraction second filter alongside the existing FinBERT score, in the spirit of this paper, is a candidate refinement distinct from the fine-grained-taxonomy lead (arXiv:2607.08346) filed the same night -- that one reclassifies event *type*, this one adds orthogonal structured *dimensions* on top of any event type.
+
+**Caveat**: source domain is financial news, not 8-K filings -- our corpus and event-timing characteristics differ, so the F1 deltas here should be read as directional evidence for the general "sentiment alone is incomplete" claim, not as a number transferable to our own pipeline.
+---
+
+## Research Lead: Retail Investor Horizon as an Orthogonal PEAD Overlay (arXiv:2512.00280, flagged 2026-08-01)
+
+Vamossy (Nov 2025, rev. Dec 2025) splits retail investors into long- vs. short-horizon cohorts using StockTwits self-reported holding periods (2010-2021). Long-horizon investors underreact to earnings news -> strong PEAD; short-horizon investors overreact then mean-revert. Verified alpha from the abstract: a long-short portfolio (stocks favored by long-horizon investors minus stocks favored by short-horizon investors) earns **0.43%/month (~5.16% annualized)**.
+
+**Why it matters here**: this signal is investor-composition-based, not text- or fundamentals-based -- structurally orthogonal to H174's FinBERT-score + EPS-surprise gate. It could plausibly serve as a *third* independent filter dimension (alongside sentiment and surprise) rather than a competing PEAD mechanism, similar in spirit to how H418's drift gate is orthogonal to value in the momentum family.
+
+**Blocker before this becomes testable**: we do not currently ingest StockTwits holding-period/investor-composition data. Would need to confirm API access and historical coverage before designing a hypothesis (working title: H-TBD retail-horizon PEAD overlay).
+---
+
+## Research Lead: Fine-Grained 8-K Event Taxonomy (arXiv:2607.08346, flagged 2026-08-01)
+
+Dolphin et al. (Jul 2026) build a two-stage LLM pipeline classifying 8-K disclosures into a 119-event, 3-tier taxonomy, grounding every tag to a verbatim quote from the filing plus a quality-scored re-check pass. Applied to 292,984 filings (2022-2026) -> 601,088 tagged events. On a 5,125-filing stratified sample, precision on the extracted event tags rose from 12% (low quality-score bucket) to 96% (high quality-score bucket) as the quality filter tightened; unsupported tags fell to near-zero at the high end. Their event-study on abnormal returns shows the fine-grained taxonomy separates economically distinct events that the SEC's coarse Item-code buckets (e.g. our own Item 2.02) conflate.
+
+**Why it matters here**: H163/H174's FinBERT score>=0.18 filter treats all Item 2.02 earnings-release text as one bucket. If distinct sub-event types within that bucket (e.g. guidance revision vs. one-time charge vs. restructuring commentary bundled into the same earnings release) have different drift magnitudes, an event-type-conditioned filter could sharpen H174 without changing its entry threshold. No ready-to-use package exists for their taxonomy -- this would require reimplementing a comparable classification+grounding pipeline before it becomes testable. Flagging as a design lead, not a confirmed improvement.
+
+**Action needed before staging a hypothesis**: read the full paper's taxonomy definitions (which of the 119 event types map onto our Item 2.02 earnings-release corpus) and estimate the LLM-call cost of classifying our existing 8-K corpus before committing to a build.
+---
+
+## Research Lead: Structured Extraction Beyond Sentiment (arXiv:2607.28496, flagged 2026-08-01)
+
+Zhu et al. (Jul 2026) extract 6 structured dimensions beyond sentiment (event type, impact scope, temporal horizon, semantic confidence, etc.) from financial news via LLaMA-3.1-70B, tested on 41,618 news-stock pairs (FNSPID dataset). Verified results: FinBERT-alone F1=0.576; FinBERT + structured features -> F1=0.600 (p<0.0001); structural dimensions alone contribute +0.019 F1 in ablation; **53.5% disagreement rate** between the sentiment signal and the structured signal, meaning the two are largely orthogonal rather than redundant.
+
+**Why it matters here**: this is concrete, verified evidence (not just an abstract claim) that a FinBERT sentiment score used alone leaves real signal on the table. H174's current gate is score>=0.18 AND EPS surprise>=0.02 -- a sentiment dimension plus a fundamental-surprise dimension, but no *event-structure* dimension (impact scope, temporal horizon). Adding a structured-extraction second filter alongside the existing FinBERT score, in the spirit of this paper, is a candidate refinement distinct from the fine-grained-taxonomy lead (arXiv:2607.08346) filed the same night -- that one reclassifies event *type*, this one adds orthogonal structured *dimensions* on top of any event type.
+
+**Caveat**: source domain is financial news, not 8-K filings -- our corpus and event-timing characteristics differ, so the F1 deltas here should be read as directional evidence for the general "sentiment alone is incomplete" claim, not as a number transferable to our own pipeline.
+---
+
+## Research Lead: Retail Investor Horizon as an Orthogonal PEAD Overlay (arXiv:2512.00280, flagged 2026-08-01)
+
+Vamossy (Nov 2025, rev. Dec 2025) splits retail investors into long- vs. short-horizon cohorts using StockTwits self-reported holding periods (2010-2021). Long-horizon investors underreact to earnings news -> strong PEAD; short-horizon investors overreact then mean-revert. Verified alpha from the abstract: a long-short portfolio (stocks favored by long-horizon investors minus stocks favored by short-horizon investors) earns **0.43%/month (~5.16% annualized)**.
+
+**Why it matters here**: this signal is investor-composition-based, not text- or fundamentals-based -- structurally orthogonal to H174's FinBERT-score + EPS-surprise gate. It could plausibly serve as a *third* independent filter dimension (alongside sentiment and surprise) rather than a competing PEAD mechanism, similar in spirit to how H418's drift gate is orthogonal to value in the momentum family.
+
+**Blocker before this becomes testable**: we do not currently ingest StockTwits holding-period/investor-composition data. Would need to confirm API access and historical coverage before designing a hypothesis (working title: H-TBD retail-horizon PEAD overlay).

@@ -3,12 +3,12 @@
   "date": "2026-08-01",
   "source": "paper",
   "source_url": "https://arxiv.org/abs/2512.00280",
-  "title": "Wiki note: Retail investor holding-horizon PEAD signal — orthogonal overlay candidate for H174",
+  "title": "Wiki note: Retail investor holding-horizon PEAD signal \u2014 orthogonal overlay candidate for H174",
   "rationale": "Domonkos F. Vamossy, arXiv:2512.00280 (Nov 2025, rev. Dec 2025) uses StockTwits self-reported holding periods (2010-2021) to split retail investors into long- vs. short-horizon cohorts around earnings announcements. Long-horizon investors underreact, producing strong PEAD; short-horizon investors overreact then reverse. Verified result from the abstract: long-short (long-horizon-favored stocks minus short-horizon-favored stocks) alpha of 0.43%/month (~5.16% annualized). This is an investor-composition-based signal, structurally independent of our FinBERT text score and EPS-surprise gate -- a genuinely orthogonal PEAD overlay candidate rather than a variant of the same mechanism. Requires StockTwits holding-period data we do not currently ingest. Staging as a LOW-risk wiki note / future overlay candidate, not a script -- data availability needs to be confirmed first (StockTwits API access, historical holding-period tags).",
   "risk_level": "low",
   "type": "wiki_update",
   "target_file": "/workspace/agent/wiki/trading/algorithms/pead.md",
   "content": "\n---\n\n## Research Lead: Retail Investor Horizon as an Orthogonal PEAD Overlay (arXiv:2512.00280, flagged 2026-08-01)\n\nVamossy (Nov 2025, rev. Dec 2025) splits retail investors into long- vs. short-horizon cohorts using StockTwits self-reported holding periods (2010-2021). Long-horizon investors underreact to earnings news -> strong PEAD; short-horizon investors overreact then mean-revert. Verified alpha from the abstract: a long-short portfolio (stocks favored by long-horizon investors minus stocks favored by short-horizon investors) earns **0.43%/month (~5.16% annualized)**.\n\n**Why it matters here**: this signal is investor-composition-based, not text- or fundamentals-based -- structurally orthogonal to H174's FinBERT-score + EPS-surprise gate. It could plausibly serve as a *third* independent filter dimension (alongside sentiment and surprise) rather than a competing PEAD mechanism, similar in spirit to how H418's drift gate is orthogonal to value in the momentum family.\n\n**Blocker before this becomes testable**: we do not currently ingest StockTwits holding-period/investor-composition data. Would need to confirm API access and historical coverage before designing a hypothesis (working title: H-TBD retail-horizon PEAD overlay).",
   "action": "append",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
