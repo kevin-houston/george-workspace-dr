@@ -1,0 +1,218 @@
+{
+  "date": "2026-08-01",
+  "angles_scanned": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "papers_reviewed": [
+    {
+      "title": "Supply Chain Propagation of Textual Signals",
+      "arxiv_id": "2606.29290",
+      "date": "2026-06",
+      "angle": "pairs/stat-arb",
+      "relevance": 7,
+      "verified_numbers": "Long-short Sharpe 0.86, FF5 alpha 7.27%/yr (t=2.30), 255 S&P 500 firms 2011-2025",
+      "staged": false,
+      "reason_not_staged": "Cross-sectional factor investing via supply-chain graph propagation, not classical pairs/cointegration; modest numbers; overlaps conceptually with existing H319 semantic-network queue. Filed as background, not staged tonight to keep the batch focused on the strongest new leads."
+    },
+    {
+      "title": "Pairs Trading — Selection via Scoring Systems",
+      "source": "Finance Research Letters, Feb 2026",
+      "angle": "pairs/stat-arb",
+      "relevance": 5,
+      "verified_numbers": "Not extractable from search alone",
+      "staged": false,
+      "reason_not_staged": "No LLM component, no verified Sharpe numbers accessible; classical-method refinement only, ETF pairs family already closed (H307/H246)."
+    },
+    {
+      "title": "Attention Factors for Statistical Arbitrage",
+      "arxiv_id": "2510.11616",
+      "angle": "pairs/stat-arb",
+      "relevance": 3,
+      "staged": false,
+      "reason_not_staged": "Already known/cited in wiki factor-models.md; no NLP/LLM or pairs framing."
+    },
+    {
+      "title": "LLMs for Time Series: Single Stocks and Statistical Arbitrage",
+      "arxiv_id": "2412.09394",
+      "angle": "pairs/stat-arb",
+      "relevance": 3,
+      "staged": false,
+      "reason_not_staged": "Single-stock forecasting, not pairs/cointegration; no extractable results tables."
+    },
+    {
+      "title": "Latent Structural Similarity Networks",
+      "arxiv_id": "2601.18803",
+      "angle": "pairs/stat-arb",
+      "relevance": 2,
+      "staged": false,
+      "reason_not_staged": "General time-series methods paper, no finance-specific results."
+    },
+    {
+      "title": "Grounded Event Extraction from SEC 8-K Filings with a Fine-Grained Taxonomy",
+      "arxiv_id": "2607.08346",
+      "date": "2026-07-09",
+      "angle": "PEAD/text signals",
+      "relevance": 8,
+      "verified_numbers": "292,984 filings tagged, precision 12%->96% across quality-score buckets, 5,125-filing stratified sample",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-01/1_grounded_8k_event_taxonomy_wiki.json"
+    },
+    {
+      "title": "Beyond Sentiment: Structured Information Extraction from Financial News",
+      "arxiv_id": "2607.28496",
+      "date": "2026-07-30",
+      "angle": "PEAD/text signals",
+      "relevance": 7,
+      "verified_numbers": "FinBERT-alone F1=0.576; +structured LLM features F1=0.600 (p<0.0001); +0.019 F1 ablation; 53.5% sentiment/structure disagreement rate",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-01/2_structured_extraction_beyond_sentiment_wiki.json"
+    },
+    {
+      "title": "Fin-Analyst at FinMMEval 2026 (Task 3 system paper)",
+      "arxiv_id": "2607.12233",
+      "date": "2026-07-14",
+      "angle": "PEAD/text signals",
+      "relevance": 6,
+      "verified_numbers": "TSLA +13.51% return, Sharpe 4.10, 88% win rate, 1st place leaderboard; ablation shows 8-K/event specialist most influential, 10-K/fundamentals specialists hurt daily-horizon performance",
+      "staged": false,
+      "reason_not_staged": "Corroborates existing design choice (8-K/event text > annual filings) rather than introducing a new actionable mechanism; noted as supporting evidence, not staged as its own item."
+    },
+    {
+      "title": "FinCall-Surprise benchmark",
+      "arxiv_id": "2510.03965",
+      "angle": "PEAD/text signals",
+      "relevance": 5,
+      "staged": false,
+      "reason_not_staged": "Cautionary benchmark (accuracy often an artifact of class imbalance) — useful methodological warning, no new signal to act on. Overlaps with Profit Mirage caveat already staged."
+    },
+    {
+      "title": "FinAnchor",
+      "arxiv_id": "2602.20859",
+      "angle": "PEAD/text signals",
+      "relevance": 4,
+      "staged": false,
+      "reason_not_staged": "Already flagged and staged as a research lead in last night's 2026-07-31 scan; no new information to add tonight."
+    },
+    {
+      "title": "Retail Investor Horizon and Earnings Announcements",
+      "arxiv_id": "2512.00280",
+      "date": "2025-11-29 (rev. 2025-12-04)",
+      "angle": "momentum/PEAD overlay",
+      "relevance": 6,
+      "verified_numbers": "Long-short alpha 0.43%/month (~5.16% annualized)",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-01/4_retail_horizon_pead_wiki.json"
+    },
+    {
+      "title": "Not All Factors Crowd Equally (alpha decay / crowding)",
+      "arxiv_id": "2512.11913",
+      "angle": "momentum",
+      "relevance": 4,
+      "verified_numbers": "Momentum decay R^2=0.65 vs linear 0.51; crowding-timing Sharpe 0.22 vs factor-momentum benchmark 0.39 (underperforms); 0.38x lower crash risk (p=0.006)",
+      "staged": false,
+      "reason_not_staged": "Paper WITHDRAWN 2025-12-27 for insufficient empirical validation; own numbers show crowding-timing hurts returns (useful only as a crash-risk caveat, not alpha). Treated with explicit skepticism, not staged."
+    },
+    {
+      "title": "Liquidity Premium and Investment Horizons",
+      "arxiv_id": "2607.01377",
+      "angle": "momentum",
+      "relevance": 3,
+      "staged": false,
+      "reason_not_staged": "Mechanism study (Kyle's-lambda price impact), no actionable parameters or verifiable return numbers."
+    },
+    {
+      "title": "Adaptive Financial Transformer with Regime-Gated Attention",
+      "arxiv_id": "2606.29347",
+      "angle": "momentum",
+      "relevance": 2,
+      "staged": false,
+      "reason_not_staged": "Architecture-only, no disclosed backtest Sharpe/return numbers."
+    },
+    {
+      "title": "Profit Mirage",
+      "arxiv_id": "2510.07920",
+      "date": "2025-10",
+      "angle": "multi-agent LLM trading",
+      "relevance": 8,
+      "verified_numbers": "None extractable for FactFin's improvement from the abstract — flagged as methodological, not a performance claim",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-01/3_profit_mirage_leakage_audit_wiki.json"
+    },
+    {
+      "title": "Designing Agentic AI-Based Screening for Portfolio Investment",
+      "arxiv_id": "2603.23300",
+      "date": "2026-03",
+      "angle": "multi-agent LLM trading",
+      "relevance": 7,
+      "verified_numbers": "Claims 'superior Sharpe ratios' vs baselines on S&P 500 2020-2024 — no specific Sharpe values disclosed in abstract",
+      "staged": false,
+      "reason_not_staged": "Resembles a testable debate-gate overlay on H198/H026, but no verified quantitative results available to justify a design commitment tonight. Noted as a candidate for a future session once full-text numbers can be confirmed."
+    },
+    {
+      "title": "Toward Reliable Evaluation of LLM-Based Financial Multi-Agent Systems",
+      "arxiv_id": "2603.27539",
+      "angle": "multi-agent LLM trading",
+      "relevance": 6,
+      "staged": false,
+      "reason_not_staged": "Methodology/critique paper (4D taxonomy, Coordination Primacy Hypothesis, Coordination Breakeven Spread metric) — useful checklist for evaluating H274/H461-style designs, not itself an overlay to implement."
+    },
+    {
+      "title": "LLM-Powered Multi-Agent Crypto Portfolio Management",
+      "arxiv_id": "2501.00826",
+      "date": "rev. 2026-06",
+      "angle": "multi-agent LLM trading",
+      "relevance": 5,
+      "verified_numbers": "Hierarchical (Skill) config: cumulative return 133.52%, Sharpe 1.502, 52-week 2025 crypto backtest",
+      "staged": false,
+      "reason_not_staged": "Crypto-only scope, outside current equities/options focus. Key qualitative finding (hierarchical coordination beat debate mode) noted as a data point against over-investing in debate architectures for H274, but not staged as its own item."
+    },
+    {
+      "title": "Agentic Trading survey",
+      "arxiv_id": "2605.19337",
+      "angle": "multi-agent LLM trading",
+      "relevance": 4,
+      "verified_numbers": "Audited 77 studies; only 19 meet minimal empirical standards, none reach top reproducibility tier",
+      "staged": false,
+      "reason_not_staged": "Background context only (reinforces general skepticism toward multi-agent trading claims), not itself actionable."
+    },
+    {
+      "title": "skfolio",
+      "url": "https://github.com/skfolio/skfolio",
+      "angle": "GitHub trending tools",
+      "relevance": 7,
+      "staged": false,
+      "reason_not_staged": "ALREADY DOCUMENTED in wiki/trading/tools/portfolio-optimization.md (v0.20.1, Apr 2026 entry already present with install/comparison table). Confirmed via grep before staging — duplicate, not a new finding."
+    },
+    {
+      "title": "AlphaSuite",
+      "url": "https://github.com/rsandx/AlphaSuite",
+      "angle": "GitHub trending tools",
+      "relevance": 5,
+      "staged": false,
+      "reason_not_staged": "Overlaps with existing H320 LightGBM crash-filter approach; single-maintainer, low star count (82) — reference implementation only, not adopted as a dependency."
+    },
+    {
+      "title": "alpha-gfn",
+      "url": "https://github.com/nshen7/alpha-gfn",
+      "angle": "GitHub trending tools",
+      "relevance": 4,
+      "staged": false,
+      "reason_not_staged": "GFlowNet-based automated alpha factor discovery — interesting research pointer vs. our manual H-series approach, but low adoption/unproven."
+    },
+    {
+      "title": "QRAFTI",
+      "arxiv_id": "2604.18500",
+      "angle": "GitHub trending tools",
+      "relevance": 6,
+      "staged": false,
+      "reason_not_staged": "No public GitHub repo / installable code — design reference only (relevant to our own Claude-Code MCP research-loop architecture), not adoption-ready."
+    }
+  ],
+  "staged_count": 4,
+  "staged_summary": "4 low-risk wiki_update notes staged, all with verified quantitative numbers extracted from full text/abstract (no fabricated figures): (1) fine-grained 8-K event taxonomy as a candidate H174 filter refinement, (2) structured extraction beyond sentiment as verified evidence FinBERT-alone leaves signal on the table, (3) Profit Mirage information-leakage methodological warning recommending a future audit of our own FinBERT pipeline, (4) retail investor holding-horizon PEAD as a structurally orthogonal overlay candidate (blocked on StockTwits data access). No medium/high-risk items and nothing to flag for Kevin tonight.",
+  "not_new_or_out_of_scope_note": "Several previously-known items were correctly excluded from re-reporting per the scan prompts: H316 Moira, H319 LLM semantic networks, H280 MarketSenseAI, H281 macro-LLM ETF tilt, H274/H461 TrustTrade, FinAnchor (staged 2026-07-31), and the Hadlock/Roberts/Lee PEAD-LLM architecture paper (added to wiki as a Sources page earlier tonight, in Phase 1)."
+}
