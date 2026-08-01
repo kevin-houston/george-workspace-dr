@@ -1,5 +1,5 @@
 {
-  "date": "2026-07-31",
+  "date": "2026-08-01",
   "candidates": [],
   "scores": {
     "AAPL": {
@@ -18,21 +18,21 @@
       "score": -0.0401,
       "surprise": -0.356
     },
+    "CVX": {
+      "score": -0.0203,
+      "surprise": -0.0921
+    },
     "SBUX": {
       "score": -0.015,
       "surprise": -0.1598
-    },
-    "V": {
-      "score": -0.0273,
-      "surprise": -0.2355
     },
     "MA": {
       "score": -0.0607,
       "surprise": -0.2485
     },
-    "QCOM": {
-      "score": -0.0168,
-      "surprise": -0.0918
+    "ABBV": {
+      "score": -0.035,
+      "surprise": -0.2052
     }
   }
 }

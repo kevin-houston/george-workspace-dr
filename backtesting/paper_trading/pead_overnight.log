@@ -926,3 +926,91 @@
 [2026-07-30 23:10:27] Candidates for tomorrow: none
 [2026-07-30 23:10:27] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-07-30 23:10:27] Overnight pass complete.
+[2026-07-31 23:00:45] =======================================================
+[2026-07-31 23:00:45] =======================================================
+[2026-07-31 23:00:45] PEAD overnight pass starting
+[2026-07-31 23:00:45] PEAD overnight pass starting
+[2026-07-31 23:00:45] Scanning earnings calendar…
+[2026-07-31 23:00:45] Scanning earnings calendar…
+[2026-07-31 23:01:14]   Tickers with recent earnings: ['AAPL', 'MSFT', 'META', 'AMZN', 'XOM', 'CVX', 'SBUX', 'MA', 'ABBV', 'QCOM']
+[2026-07-31 23:01:14]   Fetching 8-K for AAPL…
+[2026-07-31 23:01:14]   Tickers with recent earnings: ['AAPL', 'MSFT', 'META', 'AMZN', 'XOM', 'CVX', 'SBUX', 'MA', 'ABBV', 'QCOM']
+[2026-07-31 23:01:14]   Fetching 8-K for AAPL…
+[2026-07-31 23:01:23]     AAPL: 4862 chars
+[2026-07-31 23:01:23]   Fetching 8-K for MSFT…
+[2026-07-31 23:01:23]     AAPL: 4862 chars
+[2026-07-31 23:01:23]   Fetching 8-K for MSFT…
+[2026-07-31 23:01:24]     MSFT: 4230 chars
+[2026-07-31 23:01:24]   Fetching 8-K for META…
+[2026-07-31 23:01:24]     MSFT: 4230 chars
+[2026-07-31 23:01:24]   Fetching 8-K for META…
+[2026-07-31 23:01:25]     META: 5346 chars
+[2026-07-31 23:01:25]   Fetching 8-K for AMZN…
+[2026-07-31 23:01:25]     META: 5346 chars
+[2026-07-31 23:01:25]   Fetching 8-K for AMZN…
+[2026-07-31 23:01:26]     AMZN: 5943 chars
+[2026-07-31 23:01:26]   Fetching 8-K for XOM…
+[2026-07-31 23:01:26]     AMZN: 5943 chars
+[2026-07-31 23:01:26]   Fetching 8-K for XOM…
+[2026-07-31 23:01:27]     XOM: no 8-K Item 2.02 found
+[2026-07-31 23:01:27]   Fetching 8-K for CVX…
+[2026-07-31 23:01:27]     XOM: no 8-K Item 2.02 found
+[2026-07-31 23:01:27]   Fetching 8-K for CVX…
+[2026-07-31 23:01:28]     CVX: 4465 chars
+[2026-07-31 23:01:28]   Fetching 8-K for SBUX…
+[2026-07-31 23:01:28]     CVX: 4465 chars
+[2026-07-31 23:01:28]   Fetching 8-K for SBUX…
+[2026-07-31 23:01:29]     SBUX: 3761 chars
+[2026-07-31 23:01:29]   Fetching 8-K for MA…
+[2026-07-31 23:01:29]     SBUX: 3761 chars
+[2026-07-31 23:01:29]   Fetching 8-K for MA…
+[2026-07-31 23:01:30]     MA: 7453 chars
+[2026-07-31 23:01:30]   Fetching 8-K for ABBV…
+[2026-07-31 23:01:30]     MA: 7453 chars
+[2026-07-31 23:01:30]   Fetching 8-K for ABBV…
+[2026-07-31 23:01:32]     ABBV: 4582 chars
+[2026-07-31 23:01:32]   Fetching 8-K for QCOM…
+[2026-07-31 23:01:32]     ABBV: 4582 chars
+[2026-07-31 23:01:32]   Fetching 8-K for QCOM…
+[2026-07-31 23:01:33]     QCOM: no 8-K Item 2.02 found
+[2026-07-31 23:01:33]     QCOM: no 8-K Item 2.02 found
+[2026-07-31 23:02:37]   Loading ProsusAI/finbert…
+[2026-07-31 23:02:37]   Loading ProsusAI/finbert…
+[2026-07-31 23:07:23]   AAPL: score=-0.033  surprise=-0.146
+[2026-07-31 23:07:23]   AAPL: score=-0.033  surprise=-0.146
+[2026-07-31 23:07:25]   MSFT: score=-0.023  surprise=-0.151
+[2026-07-31 23:07:25]   MSFT: score=-0.023  surprise=-0.151
+[2026-07-31 23:07:27]   META: score=-0.010  surprise=-0.154
+[2026-07-31 23:07:27]   META: score=-0.010  surprise=-0.154
+[2026-07-31 23:07:29]   AMZN: score=-0.040  surprise=-0.356
+[2026-07-31 23:07:29]   AMZN: score=-0.040  surprise=-0.356
+[2026-07-31 23:07:30]   CVX: score=-0.020  surprise=-0.092
+[2026-07-31 23:07:30]   CVX: score=-0.020  surprise=-0.092
+[2026-07-31 23:07:32]   SBUX: score=-0.015  surprise=-0.160
+[2026-07-31 23:07:32]   SBUX: score=-0.015  surprise=-0.160
+[2026-07-31 23:07:34]   MA: score=-0.061  surprise=-0.248
+[2026-07-31 23:07:34]   MA: score=-0.061  surprise=-0.248
+[2026-07-31 23:07:36]   ABBV: score=-0.035  surprise=-0.205
+[2026-07-31 23:07:36]   ✗ AAPL filtered out (score=-0.033, surprise=-0.1456)
+[2026-07-31 23:07:36]   ✗ MSFT filtered out (score=-0.022, surprise=-0.1506)
+[2026-07-31 23:07:36]   ✗ META filtered out (score=-0.010, surprise=-0.1544)
+[2026-07-31 23:07:36]   ✗ AMZN filtered out (score=-0.040, surprise=-0.356)
+[2026-07-31 23:07:36]   ✗ CVX filtered out (score=-0.020, surprise=-0.0921)
+[2026-07-31 23:07:36]   ✗ SBUX filtered out (score=-0.015, surprise=-0.1598)
+[2026-07-31 23:07:36]   ✗ MA filtered out (score=-0.061, surprise=-0.2485)
+[2026-07-31 23:07:36]   ✗ ABBV filtered out (score=-0.035, surprise=-0.2052)
+[2026-07-31 23:07:36] Candidates for tomorrow: none
+[2026-07-31 23:07:36]   ABBV: score=-0.035  surprise=-0.205
+[2026-07-31 23:07:37]   ✗ AAPL filtered out (score=-0.033, surprise=-0.1456)
+[2026-07-31 23:07:37]   ✗ MSFT filtered out (score=-0.022, surprise=-0.1506)
+[2026-07-31 23:07:37]   ✗ META filtered out (score=-0.010, surprise=-0.1544)
+[2026-07-31 23:07:37]   ✗ AMZN filtered out (score=-0.040, surprise=-0.356)
+[2026-07-31 23:07:37]   ✗ CVX filtered out (score=-0.020, surprise=-0.0921)
+[2026-07-31 23:07:37]   ✗ SBUX filtered out (score=-0.015, surprise=-0.1598)
+[2026-07-31 23:07:37]   ✗ MA filtered out (score=-0.061, surprise=-0.2485)
+[2026-07-31 23:07:37]   ✗ ABBV filtered out (score=-0.035, surprise=-0.2052)
+[2026-07-31 23:07:37] Candidates for tomorrow: none
+[2026-07-31 23:07:37] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-31 23:07:37] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-07-31 23:07:37] Overnight pass complete.
+[2026-07-31 23:07:37] Overnight pass complete.

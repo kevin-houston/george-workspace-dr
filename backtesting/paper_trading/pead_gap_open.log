@@ -290,3 +290,115 @@
 [2026-07-30 09:45:41]   QCOM: gap -3.5% < 3% — skip
 [2026-07-30 09:45:41] No new positions entered today.
 [2026-07-30 09:45:41] Open pass complete.
+[2026-07-31 09:32:07] =======================================================
+[2026-07-31 09:32:07] PEAD-GAP open pass starting
+[2026-07-31 09:32:07] Earnings candidates: ['AAPL', 'MSFT', 'META', 'AMZN', 'SBUX', 'V', 'MA', 'QCOM']
+[2026-07-31 09:32:07] PEAD_GAP strategy equity: $5,000
+[2026-07-31 09:32:10]   AAPL: prior_close=333.43 current=302.33 gap=-9.3%
+[2026-07-31 09:32:10]   AAPL: gap -9.3% < 3% — skip
+[2026-07-31 09:32:10]   MSFT: prior_close=451.10 current=453.10 gap=0.4%
+[2026-07-31 09:32:10]   MSFT: gap 0.4% < 3% — skip
+[2026-07-31 09:32:11]   META: prior_close=539.03 current=547.30 gap=1.5%
+[2026-07-31 09:32:11]   META: gap 1.5% < 3% — skip
+[2026-07-31 09:32:11]   AMZN: prior_close=235.50 current=270.86 gap=15.0%
+[2026-07-31 09:32:11]   ✓ AMZN: gap 15.0% >= 3% — entering
+[2026-07-31 09:32:12]   ORDER FAILED: AMZN — HTTPSConnectionPool(host='paper-api.alpaca.markets', port=443): Max retries exceeded with url: /v2/orders (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:992)')))
+[2026-07-31 09:32:12]   SBUX: prior_close=105.85 current=105.58 gap=-0.3%
+[2026-07-31 09:32:12]   SBUX: gap -0.3% < 3% — skip
+[2026-07-31 09:32:13]   V: prior_close=366.27 current=364.39 gap=-0.5%
+[2026-07-31 09:32:13]   V: gap -0.5% < 3% — skip
+[2026-07-31 09:32:13]   MA: prior_close=577.35 current=569.48 gap=-1.4%
+[2026-07-31 09:32:13]   MA: gap -1.4% < 3% — skip
+[2026-07-31 09:32:14]   QCOM: prior_close=151.60 current=148.51 gap=-2.0%
+[2026-07-31 09:32:14]   QCOM: gap -2.0% < 3% — skip
+[2026-07-31 09:32:14] No new positions entered today.
+[2026-07-31 09:32:14] Open pass complete.
+[2026-07-31 09:32:43] =======================================================
+[2026-07-31 09:32:43] PEAD-GAP open pass starting
+[2026-07-31 09:32:43] Earnings candidates: ['AAPL', 'MSFT', 'META', 'AMZN', 'SBUX', 'V', 'MA', 'QCOM']
+[2026-07-31 09:32:43] PEAD_GAP strategy equity: $5,000
+[2026-07-31 09:32:44]   AAPL: prior_close=333.43 current=302.40 gap=-9.3%
+[2026-07-31 09:32:44]   AAPL: gap -9.3% < 3% — skip
+[2026-07-31 09:32:45]   MSFT: prior_close=451.10 current=453.30 gap=0.5%
+[2026-07-31 09:32:45]   MSFT: gap 0.5% < 3% — skip
+[2026-07-31 09:32:46]   META: prior_close=539.03 current=546.99 gap=1.5%
+[2026-07-31 09:32:46]   META: gap 1.5% < 3% — skip
+[2026-07-31 09:32:46]   AMZN: prior_close=235.50 current=271.14 gap=15.1%
+[2026-07-31 09:32:46]   ✓ AMZN: gap 15.1% >= 3% — entering
+[2026-07-31 09:32:47]   ORDER FAILED: AMZN — HTTPSConnectionPool(host='paper-api.alpaca.markets', port=443): Max retries exceeded with url: /v2/orders (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:992)')))
+[2026-07-31 09:32:47]   SBUX: prior_close=105.85 current=105.53 gap=-0.3%
+[2026-07-31 09:32:47]   SBUX: gap -0.3% < 3% — skip
+[2026-07-31 09:32:48]   V: prior_close=366.27 current=364.42 gap=-0.5%
+[2026-07-31 09:32:48]   V: gap -0.5% < 3% — skip
+[2026-07-31 09:32:49]   MA: prior_close=577.35 current=569.13 gap=-1.4%
+[2026-07-31 09:32:49]   MA: gap -1.4% < 3% — skip
+[2026-07-31 09:32:50]   QCOM: prior_close=151.60 current=148.38 gap=-2.1%
+[2026-07-31 09:32:50]   QCOM: gap -2.1% < 3% — skip
+[2026-07-31 09:32:50] No new positions entered today.
+[2026-07-31 09:32:50] Open pass complete.
+[2026-07-31 09:33:03] =======================================================
+[2026-07-31 09:33:03] PEAD-GAP open pass starting
+[2026-07-31 09:33:03] Earnings candidates: ['AAPL', 'MSFT', 'META', 'AMZN', 'SBUX', 'V', 'MA', 'QCOM']
+[2026-07-31 09:33:03] PEAD_GAP strategy equity: $5,000
+[2026-07-31 09:33:03]   AAPL: prior_close=333.43 current=302.67 gap=-9.2%
+[2026-07-31 09:33:03]   AAPL: gap -9.2% < 3% — skip
+[2026-07-31 09:33:04]   MSFT: prior_close=451.10 current=453.11 gap=0.4%
+[2026-07-31 09:33:04]   MSFT: gap 0.4% < 3% — skip
+[2026-07-31 09:33:04]   META: prior_close=539.03 current=547.39 gap=1.6%
+[2026-07-31 09:33:04]   META: gap 1.6% < 3% — skip
+[2026-07-31 09:33:05]   AMZN: prior_close=235.50 current=271.53 gap=15.3%
+[2026-07-31 09:33:05]   ✓ AMZN: gap 15.3% >= 3% — entering
+[2026-07-31 09:33:05]   ORDER SUBMITTED: AMZN notional=$250 id=a3b0854a-b91f-4606-98ab-1eabfcd9f707
+[2026-07-31 09:33:05]   AMZN: position logged, exit=2026-08-28
+[2026-07-31 09:33:05]   SBUX: prior_close=105.85 current=105.57 gap=-0.3%
+[2026-07-31 09:33:05]   SBUX: gap -0.3% < 3% — skip
+[2026-07-31 09:33:06]   V: prior_close=366.27 current=364.32 gap=-0.5%
+[2026-07-31 09:33:06]   V: gap -0.5% < 3% — skip
+[2026-07-31 09:33:06]   MA: prior_close=577.35 current=568.86 gap=-1.5%
+[2026-07-31 09:33:06]   MA: gap -1.5% < 3% — skip
+[2026-07-31 09:33:06]   QCOM: prior_close=151.60 current=148.65 gap=-1.9%
+[2026-07-31 09:33:06]   QCOM: gap -1.9% < 3% — skip
+[2026-07-31 09:33:06] Logged 1 new position(s). Total open: 1
+[2026-07-31 09:33:07] Open pass complete.
+[2026-07-31 09:33:11] =======================================================
+[2026-07-31 09:33:11] PEAD-GAP open pass starting
+[2026-07-31 09:33:11] Earnings candidates: ['AAPL', 'MSFT', 'META', 'AMZN', 'SBUX', 'V', 'MA', 'QCOM']
+[2026-07-31 09:33:11] PEAD_GAP strategy equity: $5,000
+[2026-07-31 09:33:11]   AAPL: prior_close=333.43 current=302.95 gap=-9.1%
+[2026-07-31 09:33:11]   AAPL: gap -9.1% < 3% — skip
+[2026-07-31 09:33:12]   MSFT: prior_close=451.10 current=452.96 gap=0.4%
+[2026-07-31 09:33:12]   MSFT: gap 0.4% < 3% — skip
+[2026-07-31 09:33:12]   META: prior_close=539.03 current=547.33 gap=1.5%
+[2026-07-31 09:33:12]   META: gap 1.5% < 3% — skip
+[2026-07-31 09:33:12]   AMZN: already in positions, skipping
+[2026-07-31 09:33:13]   SBUX: prior_close=105.85 current=105.51 gap=-0.3%
+[2026-07-31 09:33:13]   SBUX: gap -0.3% < 3% — skip
+[2026-07-31 09:33:13]   V: prior_close=366.27 current=364.12 gap=-0.6%
+[2026-07-31 09:33:13]   V: gap -0.6% < 3% — skip
+[2026-07-31 09:33:13]   MA: prior_close=577.35 current=568.80 gap=-1.5%
+[2026-07-31 09:33:13]   MA: gap -1.5% < 3% — skip
+[2026-07-31 09:33:14]   QCOM: prior_close=151.60 current=148.65 gap=-1.9%
+[2026-07-31 09:33:14]   QCOM: gap -1.9% < 3% — skip
+[2026-07-31 09:33:14] No new positions entered today.
+[2026-07-31 09:33:14] Open pass complete.
+[2026-07-31 09:45:51] =======================================================
+[2026-07-31 09:45:51] PEAD-GAP open pass starting
+[2026-07-31 09:45:51] Earnings candidates: ['AAPL', 'MSFT', 'META', 'AMZN', 'SBUX', 'V', 'MA', 'QCOM']
+[2026-07-31 09:45:51] PEAD_GAP strategy equity: $5,000
+[2026-07-31 09:45:53]   AAPL: prior_close=333.43 current=302.52 gap=-9.3%
+[2026-07-31 09:45:53]   AAPL: gap -9.3% < 3% — skip
+[2026-07-31 09:45:53]   MSFT: prior_close=451.10 current=456.06 gap=1.1%
+[2026-07-31 09:45:53]   MSFT: gap 1.1% < 3% — skip
+[2026-07-31 09:45:54]   META: prior_close=539.03 current=549.18 gap=1.9%
+[2026-07-31 09:45:54]   META: gap 1.9% < 3% — skip
+[2026-07-31 09:45:54]   AMZN: already in positions, skipping
+[2026-07-31 09:45:55]   SBUX: prior_close=105.85 current=105.18 gap=-0.6%
+[2026-07-31 09:45:55]   SBUX: gap -0.6% < 3% — skip
+[2026-07-31 09:45:55]   V: prior_close=366.27 current=365.10 gap=-0.3%
+[2026-07-31 09:45:55]   V: gap -0.3% < 3% — skip
+[2026-07-31 09:45:56]   MA: prior_close=577.35 current=571.12 gap=-1.1%
+[2026-07-31 09:45:56]   MA: gap -1.1% < 3% — skip
+[2026-07-31 09:45:56]   QCOM: prior_close=151.60 current=148.85 gap=-1.8%
+[2026-07-31 09:45:56]   QCOM: gap -1.8% < 3% — skip
+[2026-07-31 09:45:56] No new positions entered today.
+[2026-07-31 09:45:57] Open pass complete.

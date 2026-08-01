@@ -1,0 +1,15 @@
+[
+  {
+    "ticker": "AMZN",
+    "strategy": "PEAD_GAP",
+    "order_id": "a3b0854a-b91f-4606-98ab-1eabfcd9f707",
+    "entry_date": "2026-07-31",
+    "exit_date": "2026-08-28",
+    "notional": 250.0,
+    "ref_price": 271.5299987792969,
+    "prior_close": 235.5,
+    "gap_pct": 0.153,
+    "stop_price": 244.38,
+    "hold_days": 20
+  }
+]
