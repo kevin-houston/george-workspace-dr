@@ -294,13 +294,13 @@ def generate_html(d):
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Session Summary — {target_date}</title>
+  <title>George — Session Summary — {target_date}</title>
   {STYLE}
 </head>
 <body>
   <div class="header">
     <div>
-      <div class="header-title">Session Summary &mdash; {target_date}</div>
+      <div class="header-title">George &mdash; Session Summary &mdash; {target_date}</div>
     </div>
     <div class="header-sub">Generated {generated_at}</div>
   </div>
