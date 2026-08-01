@@ -211,10 +211,7 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 - Changelog commit: `"dream cycle: changelog YYYY-MM-DD"`. Proposal commit: `"dream cycle: apply YYYY-MM-DD staged proposals (H###, H###)"`.
 - Do NOT message Kevin for routine low/medium runs. Only flag high-risk items.
 - **After committing**, run the session summary script and text Kevin the URL (see Nightly Session Summary below).
-
----
-
-## Nightly Session Summary
+- **Duplicate concurrent execution can double-append wiki content** (found 2026-08-01): a compaction-interrupted build-phase run resumed and re-executed the append step, but the pre-compaction portion of the *same* session had already applied all 4 proposals and committed (`fad3f1e`) before the resume's own append ran — landing two copies of each `## Research Lead: ...` section in `pead.md`/`llm-alpha-validation.md` inside that same commit. Same failure class as the documented PEAD-GAP duplicate-open-pass race. Before appending, `grep -c` the target file for the proposal's own section heading — if count >= 1, the content is already applied; skip the append and just verify/fix `apply_status`. Fixed by truncating the file back to one copy of each section and committing the cleanup separately (do not amend).
 
 **Trigger:** End of Dream Cycle Build Phase (4 AM CT).
 **Run:** `python3 /workspace/agent/generate_session_summary.py YYYY-MM-DD`
