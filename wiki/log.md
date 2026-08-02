@@ -4,6 +4,9 @@ Append-only chronological record of all wiki activity.
 Parse with: `grep "^## \[" wiki/log.md | tail -10`
 Last scan completed: 2026-07-30 (3 staged proposals H476–H478, 2 new wiki pages)
 
+## [2026-08-02] ingest | MeiGen-AI-Design-MCP tool note
+Pages created: 1 (tools/meigen-ai-design-mcp-notes.md). Pages updated: 1 (index). Source: https://github.com/jau123/MeiGen-AI-Design-MCP, shared by Kevin. MCP server for AI image/video generation (GPT Image 2, Seedance, Veo 3.1, Grok Imagine via paid MeiGen Cloud, or free local ComfyUI); 1,634★ MIT TypeScript, solo maintainer, organic commit history — legitimate small OSS project, no hallusquatting signals. Not trading-related; logged for reference only. Index page count: 252 → 253.
+
 ## [2026-07-30] dream-cycle | arXiv scan + wiki expansion
 Pages created: 2 (concepts/overnight-intraday-decomposition.md, concepts/herding-momentum-reversal-network-theory.md). Pages updated: 1 (index). Hypotheses staged: 3 (H476–H478). Sources: arXiv:2607.03669 (Split-Session Cluster GARCH overnight/intraday tail heterogeneity), arXiv:2607.27063 (Herding-Momentum-Reversal network model, China A-shares), arXiv:2607.11054 (Golden Criterion naive diversification). Papers reviewed: 18. Wiki expansion target: Concepts (General Trading) — thinnest section (was 1 page); added overnight-intraday decomposition and herding network theory pages. Index page count: 246 → 248.
 
