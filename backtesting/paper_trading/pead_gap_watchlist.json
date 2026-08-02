@@ -1,16 +1,12 @@
 {
-  "date": "2026-08-01",
+  "date": "2026-08-02",
   "candidates": [
     "AAPL",
-    "MSFT",
-    "META",
     "AMZN",
     "XOM",
     "CVX",
-    "SBUX",
     "MA",
-    "ABBV",
-    "QCOM"
+    "ABBV"
   ],
   "source": "earnings_only",
   "strategy": "PEAD_GAP"

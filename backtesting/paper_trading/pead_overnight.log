@@ -1014,3 +1014,33 @@
 [2026-07-31 23:07:37] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-07-31 23:07:37] Overnight pass complete.
 [2026-07-31 23:07:37] Overnight pass complete.
+[2026-08-01 23:01:22] =======================================================
+[2026-08-01 23:01:22] PEAD overnight pass starting
+[2026-08-01 23:01:22] Scanning earnings calendar…
+[2026-08-01 23:01:52]   Tickers with recent earnings: ['AAPL', 'AMZN', 'XOM', 'CVX', 'MA', 'ABBV']
+[2026-08-01 23:01:52]   Fetching 8-K for AAPL…
+[2026-08-01 23:02:19]     AAPL: 4862 chars
+[2026-08-01 23:02:19]   Fetching 8-K for AMZN…
+[2026-08-01 23:02:21]     AMZN: 5943 chars
+[2026-08-01 23:02:21]   Fetching 8-K for XOM…
+[2026-08-01 23:02:22]     XOM: no 8-K Item 2.02 found
+[2026-08-01 23:02:22]   Fetching 8-K for CVX…
+[2026-08-01 23:02:23]     CVX: 4465 chars
+[2026-08-01 23:02:23]   Fetching 8-K for MA…
+[2026-08-01 23:02:24]     MA: 7453 chars
+[2026-08-01 23:02:24]   Fetching 8-K for ABBV…
+[2026-08-01 23:02:27]     ABBV: 4582 chars
+[2026-08-01 23:03:11]   Loading ProsusAI/finbert…
+[2026-08-01 23:04:10]   AAPL: score=-0.033  surprise=-0.146
+[2026-08-01 23:04:11]   AMZN: score=-0.040  surprise=-0.356
+[2026-08-01 23:04:12]   CVX: score=-0.020  surprise=-0.092
+[2026-08-01 23:04:14]   MA: score=-0.061  surprise=-0.248
+[2026-08-01 23:04:15]   ABBV: score=-0.035  surprise=-0.205
+[2026-08-01 23:04:15]   ✗ AAPL filtered out (score=-0.033, surprise=-0.1456)
+[2026-08-01 23:04:15]   ✗ AMZN filtered out (score=-0.040, surprise=-0.356)
+[2026-08-01 23:04:15]   ✗ CVX filtered out (score=-0.020, surprise=-0.0921)
+[2026-08-01 23:04:15]   ✗ MA filtered out (score=-0.061, surprise=-0.2485)
+[2026-08-01 23:04:15]   ✗ ABBV filtered out (score=-0.035, surprise=-0.2052)
+[2026-08-01 23:04:15] Candidates for tomorrow: none
+[2026-08-01 23:04:15] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-08-01 23:04:15] Overnight pass complete.

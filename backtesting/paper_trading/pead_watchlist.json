@@ -1,18 +1,10 @@
 {
-  "date": "2026-08-01",
+  "date": "2026-08-02",
   "candidates": [],
   "scores": {
     "AAPL": {
       "score": -0.0328,
       "surprise": -0.1456
-    },
-    "MSFT": {
-      "score": -0.0225,
-      "surprise": -0.1506
-    },
-    "META": {
-      "score": -0.0101,
-      "surprise": -0.1544
     },
     "AMZN": {
       "score": -0.0401,
@@ -21,10 +13,6 @@
     "CVX": {
       "score": -0.0203,
       "surprise": -0.0921
-    },
-    "SBUX": {
-      "score": -0.015,
-      "surprise": -0.1598
     },
     "MA": {
       "score": -0.0607,
