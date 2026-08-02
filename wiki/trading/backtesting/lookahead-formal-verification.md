@@ -140,3 +140,13 @@ The OpenFinGym framework (arXiv:2606.26350; see [OpenFinGym](../../ai-industry/o
 - [OpenFinGym (H390)](../../ai-industry/openfinGym-2026.md) — containerized independent verifier
 - [LLM Alpha Validation Checklist](../algorithms/llm-alpha-validation.md) — agentic pipeline integrity
 - [Regime-Conditional Distributional Strategy Evaluation](regime-conditional-strategy-eval.md) — formal distributional comparison
+
+---
+
+## Research Lead: Mask-First Tradability Design Pattern (arXiv:2507.07107, flagged 2026-08-02)
+
+A 2026 Chinese A-share ML factor study ("Machine Learning Enhanced Multi-Factor Quantitative Trading," arXiv:2507.07107) documents a specific look-ahead bug class worth generalizing: non-tradable closing prices (in their market, daily price-limit halts) leaking into rolling-window factor calculations *before* any tradability filter is applied -- the model then learns predictive patterns on prices it could never have actually traded on. Their fix, a "mask-first design," constructs a Boolean tradability mask at data-load time and threads it through every downstream window calculation, rather than filtering only at final portfolio construction. In their own ablation, removing the mask alone cost -0.44 realized Sharpe (2.05 synthetic-panel Sharpe vs. 1.63 real A-share Sharpe with the mask in place) and inflated their in-sample information coefficient by 18% relative to the masked version -- i.e. the unmasked pipeline looked better exactly because it was cheating.
+
+**Why it matters here**: US large-cap equities don't have China's price-limit halt mechanism, but the same bug class applies to any `run_hNNN.py` script computing rolling-window signals (12m momentum, IBS z-scores, drift-fraction gates, etc.) over a price series that includes halted trading, delisted tickers mid-window, or thinly-traded days where the "close" wasn't really achievable at scale. `survivorship-bias.md` covers delisting at the universe-construction level; this pattern is a complementary check at the signal-computation level -- worth an explicit "is every price in this rolling window one we could have actually traded at" audit pass on the existing hypothesis scripts, not just at entry/exit.
+
+**Action needed before staging a hypothesis**: audit 2-3 existing high-conviction production scripts (h112_monthly.py, h181_monthly.py) for whether any rolling-window signal calculation could include a non-tradable price point given our data sources (yfinance/Alpaca), before deciding whether this is a real gap or already handled implicitly by using adjusted-close from a survivorship-bias-free source.

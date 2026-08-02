@@ -510,3 +510,15 @@ print(creds.api_key, creds.api_secret, creds.api_passphrase)  # store these
 1. **Cross-platform arbitrage scanner**: monitor Polymarket for divergences vs. Kalshi on Fed/CPI/unemployment markets
 2. **Non-economic event exposure**: political/sports/crypto events not available on Kalshi
 3. **Calibration reference**: Polymarket's larger volume can validate Kalshi prices for nowcasting strategies
+
+---
+
+## Research Lead: PolySwarm Multi-Agent LLM Trading Terminal (arXiv:2604.03888, flagged 2026-08-02)
+
+PolySwarm (arXiv:2604.03888, April 2026) is described as a production-ready multi-agent LLM framework for real-time Polymarket trading and latency arbitrage, deploying 50 diverse LLM personas coordinated via an asynchronous execution pipeline, with both paper-trading and live-trading modes documented architecturally.
+
+**Why it matters here**: this is a second concrete, fully-described multi-agent-LLM trading architecture (alongside TradingAgents, arXiv:2412.20138) worth studying as a design reference for H274 (STAGED multi-agent PEAD upgrade, 3-agent debate architecture) -- specifically the 50-persona diversity approach and the async execution pipeline pattern, which differs from H274's smaller fixed-role debate structure. Also fills a gap in the Prediction Markets section, which currently has no multi-agent-LLM-specific page despite covering Kalshi/Polymarket mechanics, nowcasting, and superforecasting methods individually.
+
+**Caveat**: no concrete Sharpe/PnL/win-rate figures were available from the abstract-level search pass -- this is an architecture reference only, not a validated performance claim. Full-paper read needed before treating any specific number as fact.
+
+**Action needed before staging a hypothesis**: none currently planned -- flagging as a design reference for whenever H274's multi-agent debate architecture is revisited or expanded.
