@@ -1,6 +1,6 @@
 ---
-updated: 2026-07-18
-status: research closed — H190–H193 completed; STORM family (H195–H196) closed; H205 queued (TOM overlay on BAB); H413 queued (BAB × lagged realized vol regime)
+updated: 2026-08-02
+status: research closed — H190–H193 completed; STORM family (H195–H196) closed; H205 queued (TOM overlay on BAB); H413 NOT CONFIRMED (BAB × lagged realized vol regime — best OOS Sharpe 1.173 < gate 1.5, see hypothesis-log)
 ---
 
 # Low-Volatility Anomaly
@@ -288,7 +288,7 @@ Design: hold H192-D sector-neutral BAB positions only during TOM window (last 2 
 
 **Regime-conditional BAB risk flag** (ScienceDirect, May 2025 — evidence from Asia 1999-2021): BAB and related risk-based strategies work only during market downturns in Asian markets; "betting for risk" outperforms during upturns. While this is Asian evidence only (and H192-D is confirmed on US SPY-universe stocks), it motivates adding a regime-split diagnostic to the H205 backtest: check OOS Sharpe split by SPY above vs below 200-day MA. If H205 only works in bear regimes, reclassify as a risk-off overlay. This is a secondary precaution, not a disqualifier.
 
-### H413: BAB × Lagged Realized Volatility Gate (QUEUED — 2026-07-18)
+### H413: BAB × Lagged Realized Volatility Gate (NOT CONFIRMED — 2026-07-18)
 
 **Source**: Barroso, Detzel & Maio (2025) "The Volatility Puzzle of the Beta Anomaly," *Journal of Financial Economics* Vol. 165.
 
@@ -309,6 +309,8 @@ vol_regime = vol_21d < vol_21d.expanding().median()  # True = below-median = fav
 # Resample to monthly; signal at month-end T gates position in month T+1
 gate = vol_regime.resample("ME").last().shift(1)  # lag 1 month to avoid look-ahead
 ```
+
+**Result: NOT CONFIRMED.** Best OOS Sharpe 1.173 (Var B, 63d vol < expanding median) < gate 1.5. The vol-gate mechanism is real as a *risk control* — MaxDD improves dramatically (-22.2% → -4.4% on Var A/C) — but CAGR collapses because the gate routes to BIL for 60-75% of months, killing risk-adjusted returns net of the drag. Note: this run's H192-D baseline OOS Sharpe (1.167, IS 2013-2020/OOS 2021-2026 split) is lower than the ~1.367 figure quoted earlier in this page — the original H192-D figure used a different data period/rebalancing convention; both are internally consistent within their own backtest, not a contradiction. Full detail: [Hypothesis Log § H413](../backtesting/hypothesis-log.md).
 
 ---
 

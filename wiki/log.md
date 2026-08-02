@@ -925,3 +925,24 @@ Dream cycle: 18 papers reviewed, 3 proposals staged (H422 FinBERT2, H423 MTL-PEA
 ## 2026-08-01 — Tool note: SkillsGate
 
 Kevin flagged @tom_doerr tweet about SkillsGate (visual skill manager for AI agent skills, skills.sh ecosystem). Created tools/skillsgate-notes.md, added index entry. Assessment: low fit for headless George (already installs via `npx skills add`), possible fit for Kevin managing his own local agent setups. No wiki restructuring, single-page note.
+
+## [2026-08-02] lint | Health check
+
+Issues found: 4. Auto-fixed: 4. Needs review: 0.
+
+**Auto-fixed:**
+1. INDEX GAP: Added 3 unlinked pages to `index.md` — `trading/sources/dynamic-inclusion-bounded-tilts-2026.md`, `trading/sources/pead-llm-architecture-comparison-2025.md`, `trading/paper-trading/dynamic-strategy-allocation.md`.
+2. INDEX GAP: Inserted 7 missing Research Log entries (2026-07-27 through 2026-08-02) that existed on disk under `trading/research-log/` but were never linked from `index.md`.
+3. STALE: `low-volatility.md` status line + H413 section header still read "queued" / "QUEUED — 2026-07-18" though `hypothesis-log.md` shows H413 resolved NOT CONFIRMED the same day. Updated both to the resolved verdict and appended the actual result summary (best OOS Sharpe 1.173 < gate 1.5, MaxDD improves to -4.4% but CAGR collapses from BIL routing) with a link to the full hypothesis-log entry.
+4. `pages:` frontmatter counter in `index.md` corrected from stale 253 to actual 283 (raw `.md` file count excluding `index.md`/`log.md`).
+
+**Resolved from prior (2026-07-19) needs-review list — all 3 now closed:**
+1. DUPLICATE quant-mind — confirmed already merged (2026-07-26), redirect note in place, index entry canonical.
+2. STALE `model-landscape-2026.md` — confirmed already refreshed (2026-07-26), no lingering stale marker.
+3. POTENTIAL CONTRADICTION (H192-D 1.367 vs H413 baseline 1.167) — read the full H413 hypothesis-log entry; it self-documents the cause ("OOS baseline was weaker than historical... likely data period/rebalancing convention differences"). Not a genuine contradiction — both figures are internally consistent within their own backtest windows. Folded the explanation into `low-volatility.md` directly (auto-fix #3) so it's no longer implicit-only in the hypothesis log.
+
+**Checks with no issues found:**
+- True orphan-page sweep (zero inbound links from ANY other wiki page, not just `index.md`): full backlink scan across all 283 pages — 0 orphans.
+- Contradictions: none found beyond the one resolved above.
+- Source gaps: none flagged — recent dream-cycle runs (2026-07-27 through 2026-08-02) have been organically self-selecting thin sections (0DTE options, prediction-markets/other-platforms, merger-arbitrage, iv-surface-forecasting-2026, sources/, paper-trading).
+- Missing cross-references: not exhaustively swept this pass (would need a semantic per-entity pass, not just mechanical link-checking) — left to normal ingest-time cross-referencing.

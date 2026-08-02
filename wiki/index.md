@@ -1,7 +1,7 @@
 ---
 updated: 2026-08-02
 sources_indexed: 4
-pages: 253
+pages: 283
 ---
 
 # Wiki Index
@@ -45,6 +45,8 @@ When answering a query:
 - [Market Microstructure & HFT](trading/algorithms/market-microstructure.md) — Stanford MS&E 448; order book dynamics, market impact, adverse selection, HFT strategies; Avellaneda-Stoikov MM model; context for execution cost modeling ← new 2026-05-25
 - [Strategic Trading Game — Kearns & Shi (2025)](trading/sources/kearns-shi-2025-strategic-trading.md) — arXiv:2502.07606; N-player execution game; temporary vs permanent market impact; FTPL for CCE; κ=0→potential game (spread orders), κ=2→zero-sum (front-run); relevant for institutional-scale execution ← new 2026-06-13
 - [The Alchemy of Multibagger Stocks — Yartseva (2025)](trading/sources/multibagger-yartseva-2025.md) — CAFÉ WP No. 33; FCF yield dominant for 10x returns; near-52w-low entry signal; dynamic GMM panel; EPS growth NOT significant; momentum inverted at 3-6m ← updated 2026-07-18
+- [Dynamic Inclusion and Bounded Multi-Factor Tilts (2026)](trading/sources/dynamic-inclusion-bounded-tilts-2026.md) — arXiv:2601.05428; PIT-safe liquidity/history eligibility gate; bounded multiplicative tilt on an equal-weight base (clip prevents discrete regime-switch cliff edges); construction-mechanism paper, no published Sharpe/CAGR; flagged as a candidate next iteration on H478's failed binary D-threshold switch ← new 2026-07-31
+- [PEAD LLM Architecture Comparison (2025)](trading/sources/pead-llm-architecture-comparison-2025.md) — Hadlock, Roberts & Lee, EMNLP-2025 FinNLP; BART vs FinBERT vs LLaMA-3.2-3B on 10-Q MD&A text (2,628 NYSE firms 2010-2024); FinBERT wins classification, BART's BHAR edge not portfolio-level significant; 3-day-return text-injection technique improves all 3 models significantly at stock+portfolio level; new design candidate distinct from H317 ← new 2026-08-01
 - [Technical Analysis Patterns](trading/algorithms/technical-analysis-patterns.md) — H234 inside-bar coiled-spring (OOS Sharpe 1.770, WR 63.9%); NR7/NR4 narrow range; TA feature library (MACD/RSI/Stochastic/ROC) for H233/H235; pandas-ta vs TA-Lib guide ← new 2026-05-29
 - [Behavioral Finance Signals](trading/algorithms/behavioral-finance-signals.md) — 52-week high anchoring (H291 NOT CONFIRMED); return seasonality Jul/Nov standout months (H292 CONFIRMED OOS 0.970); disposition effect CGO; lottery stock MAX factor ← new 2026-06-14
 - [Market Timing Overlays](trading/algorithms/market-timing-overlays.md) — VIX term structure (H296 CONFIRMED OOS 1.116); SPY 200d MA (H301 Variant D best, +27.4% Sharpe vs H026); yield curve (H300 NOT CONFIRMED); breadth (H299 NOT CONFIRMED); overlay vs standalone trade-off ← new 2026-06-15
@@ -169,6 +171,7 @@ When answering a query:
 - [Performance Attribution & Drawdown Analysis](trading/paper-trading/performance-attribution.md) — Brinson attribution adapted for quant sleeves; regime attribution; drawdown decomposition; rebalance decision framework ← new 2026-06-27
 - [Execution Quality & Slippage Analysis](trading/paper-trading/execution-quality.md) — fill analysis for paper→live graduation; slippage measurement; OPG vs MARKET comparison ← new 2026-06-11
 - [Risk Controls & Live Trading Monitoring](trading/paper-trading/risk-controls-and-monitoring.md) — 3-tier circuit breakers; kill switch via Alpaca close_all_positions; ATR position sizing; portfolio heat monitoring; correlation guard for PEAD entries; per-strategy risk table ← new 2026-06-17
+- [Dynamic / Adaptive Multi-Strategy Capital Allocation](trading/paper-trading/dynamic-strategy-allocation.md) — complements static Brinson attribution; Online Portfolio Selection via `universal-portfolios` (20+ algorithms, Cover's Universal Portfolio family) vs. multi-armed bandits (Thompson Sampling) for reweighting across strategy sleeves by realized performance ← new 2026-08-02
 
 **Prediction Markets**
 - [Kalshi](trading/prediction-markets/kalshi.md) — primary prediction market platform; CFTC-regulated, economic events, RSA-PSS auth, CPI/NFP strategies live
@@ -216,6 +219,13 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-08-02](trading/research-log/2026-08-02.md) — wiki: paper-trading/dynamic-strategy-allocation.md new (OPS `universal-portfolios` + multi-armed bandit traditions for adaptive sleeve reweighting) ← new 2026-08-02
+- [Research Log 2026-08-01](trading/research-log/2026-08-01.md) — wiki: sources/pead-llm-architecture-comparison-2025.md new (EMNLP-2025 FinNLP; BART/FinBERT/LLaMA-3.2-3B on 10-Q MD&A; 3-day-return text-injection technique) ← new 2026-08-01
+- [Research Log 2026-07-31](trading/research-log/2026-07-31.md) — wiki: sources/dynamic-inclusion-bounded-tilts-2026.md new (arXiv:2601.05428; bounded multiplicative tilt construction mechanism, candidate H478 follow-up); fixed index gap for kearns-shi-2025-strategic-trading.md ← new 2026-07-31
+- [Research Log 2026-07-30](trading/research-log/2026-07-30.md) — wiki: iv-surface-forecasting-2026.md expanded 93→~230 lines (4 new papers: symbolic-regression IV parametrization, VAE controllable IV surfaces, deep learning from IV surfaces, SABR/SVI+NN hybrid correction) ← new 2026-07-30
+- [Research Log 2026-07-29](trading/research-log/2026-07-29.md) — wiki: algorithms/merger-arbitrage-special-situations.md expanded (InsideArbitrage, AllianceBernstein 2025 outlook, Mitchell & Pulvino 2001, Brown & Raymond 1986 spread-widening signal, ArbLens, ML deal-outcome papers) ← new 2026-07-29
+- [Research Log 2026-07-28](trading/research-log/2026-07-28.md) — wiki: prediction-markets/other-platforms.md expanded 236→~380 lines (fixed duplicate content block; added Limitless Exchange on Base, Opinion on BNB Chain) ← new 2026-07-28
+- [Research Log 2026-07-27](trading/research-log/2026-07-27.md) — wiki: algorithms/options-income-strategies.md expanded (Strategy 6: 0DTE Iron Condor; CBOE 2025-2026 0DTE volume stats, no-assignment/no-PDT mechanics) ← new 2026-07-27
 - [Research Log 2026-07-26](trading/research-log/2026-07-26.md) — wiki: short-term-reversal.md major expansion (Blitz STR decay/revival, Jegadeesh RFS 38:12 global evidence); H450–H455 staged (multimodal regime ensemble, diffusion IV VRP, shallow IV cross-section, VIX-conditional H181 gate, FinCom DoC PEAD, DEUP uncertainty gate H198) ← new 2026-07-26
 - [Research Log 2026-07-25](trading/research-log/2026-07-25.md) — wiki: regime-detection-2026-papers.md new (Wasserstein-HMM BIC K-selection, H444/H445); concepts/regime-conditional-esg-momentum.md new (H447 design stub); H445/H446/H447 staged ← new 2026-07-25
 - [Research Log 2026-07-24](trading/research-log/2026-07-24.md) — H428 NOT CONFIRMED (FRI IBS filter), H435/H436/H437 NOT CONFIRMED (H026 52WH/relative-strength/beta-alpha); H444 CONFIRMED Var B (realized-vol regime gate H198, OOS 1.275, MaxDD -24.9%); H026 canonical OOS ~0.785 in 2024-2026 window ← new 2026-07-24
