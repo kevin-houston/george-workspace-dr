@@ -1,0 +1,131 @@
+{
+  "date": "2026-08-02",
+  "angles_scanned": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "note_on_task_prompt": "Task instructions referenced 'H157/H158' as current momentum work-in-progress -- checked hypothesis-log.md and confirmed this reference is stale (same class of issue as the 'H113' stale reference caught in an earlier nightly task). Current hypothesis frontier is H485 (last confirmed 2026-08-01). Cross-sectional/factor-momentum angle was scanned generally rather than tied to the stale H157/H158 numbers.",
+  "findings": [
+    {
+      "topic": "pairs trading / cointegration / LLM",
+      "items": [
+        {
+          "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+          "url": "https://arxiv.org/pdf/2605.01954",
+          "relevance": "already known — this is the paper backing our own queued H316 stub (LLM semantic pairs selection). No new information found tonight beyond what's already in pairs-trading.md.",
+          "relevance_score": 2,
+          "staged": false
+        },
+        {
+          "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+          "url": "https://arxiv.org/abs/2403.07998",
+          "relevance": "graph-based pair selection via weighted cointegration graph — conceptually adjacent to our closed ETF-pairs family (H152/H154/H155/H200), but doesn't address the root-cause finding (Kalman filter self-defeat / short spread half-life) that closed the family. Not staged — would need strong evidence it escapes the same structural-break problem before revisiting.",
+          "relevance_score": 3,
+          "staged": false
+        }
+      ],
+      "summary": "No new HIGH-relevance finding. ETF pairs/stat-arb family remains conclusively CLOSED per prior sessions; only open thread remains H316 (LLM semantic pairs, still a stub, needs $OPENAI_API_KEY, not implemented)."
+    },
+    {
+      "topic": "PEAD / post-earnings drift / text signals",
+      "items": [
+        {
+          "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+          "url": "https://arxiv.org/abs/2605.25894",
+          "relevance": "multi-modal (fundamentals+technicals+FinBERT) earnings-day direction classifier, LSTM vs Transformer. Directionally corroborates our own H163/H174 FinBERT confirmation, but abstract discloses no concrete accuracy/Sharpe numbers or backtest universe -- thinner evidence than our own confirmed results. Staged as a low-risk awareness note only.",
+          "relevance_score": 6,
+          "staged": true,
+          "staged_file": "dream_cycle/staged/2026-08-02/2_multimodal_earnings_direction_wiki.json"
+        },
+        {
+          "title": "FinAnchor: Aligned Multi-Model Representations for Financial Prediction",
+          "url": "https://arxiv.org/pdf/2602.20859",
+          "relevance": "generic multi-model representation alignment paper, no PEAD-specific framing found in the abstract-level search result. Not staged — insufficient specificity to our pipeline.",
+          "relevance_score": 2,
+          "staged": false
+        }
+      ],
+      "summary": "One thin-but-corroborating multi-modal earnings-day paper staged as an awareness note. No paper found tonight that changes the H174 filter design or resolves the H317 (EPS surprise cuts n below gate) tradeoff."
+    },
+    {
+      "topic": "cross-sectional momentum / factor momentum",
+      "items": [
+        {
+          "title": "Interpretable Factor Decomposition for Decision Intelligence in Large-Scale Financial Markets: Evidence from China's A-Share Market",
+          "url": "https://arxiv.org/abs/2606.12843",
+          "relevance": "XGBoost + TreeSHAP attribution on 3,632 China A-share stocks; behavioral signals (turnover + momentum) account for 58.2% of predictive attribution vs 10.7% for valuation ratios. Corroborates our own repeated finding across H198/H217/H228/H411-H418 that momentum dominates other factor families on the strategies we've tested, but is a China A-share study (different market microstructure, T+1 settlement, price limits) — not staged as an actionable proposal, just noted here for the record. Below the bar for a wiki note since it doesn't add a new mechanism, only corroborates an already well-established wiki finding.",
+          "relevance_score": 4,
+          "staged": false
+        },
+        {
+          "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+          "url": "https://arxiv.org/abs/2507.07107",
+          "relevance": "documents a 'mask-first' tradability-bias fix (non-tradable price contamination in rolling-window factor calcs) with a quantified -0.44 Sharpe / +18% inflated-IC impact when the mask is absent. Generalizable look-ahead-bias hygiene lesson beyond its China-specific price-limit context — staged as a methodology audit lead for our own run_hNNN.py scripts.",
+          "relevance_score": 6,
+          "staged": true,
+          "staged_file": "dream_cycle/staged/2026-08-02/1_tradability_mask_lookahead_wiki.json"
+        }
+      ],
+      "summary": "No new factor-momentum alpha signal found. One general backtest-hygiene lesson (tradability masking) staged as a methodology note on lookahead-formal-verification.md."
+    },
+    {
+      "topic": "multi-agent LLM trading systems",
+      "items": [
+        {
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+          "url": "https://arxiv.org/abs/2602.23330",
+          "relevance": "fine-grained task decomposition (vs. coarse-grained instructions) improves risk-adjusted returns in a multi-agent LLM trading framework. Conceptually relevant to H274 (STAGED multi-agent PEAD upgrade) but abstract-level detail didn't surface concrete numbers or an architecture specific enough to act on tonight. Not staged — flagged for a deeper read if H274 is picked back up.",
+          "relevance_score": 5,
+          "staged": false
+        },
+        {
+          "title": "PolySwarm: A Multi-Agent Large Language Model Framework for Prediction Market Trading and Latency Arbitrage",
+          "url": "https://arxiv.org/html/2604.03888v1",
+          "relevance": "production multi-agent LLM framework for Polymarket, 50-persona architecture, full async pipeline + paper/live modes documented. Fills a genuine gap (Prediction Markets section has no multi-agent-LLM page) and is a second concrete architecture reference for H274 design work beyond TradingAgents. Staged as a low-risk wiki note.",
+          "relevance_score": 6,
+          "staged": true,
+          "staged_file": "dream_cycle/staged/2026-08-02/3_polyswarm_multiagent_prediction_markets_wiki.json"
+        }
+      ],
+      "summary": "One architecture-reference paper staged (PolySwarm) for the Prediction Markets section and as H274 design context."
+    },
+    {
+      "topic": "GitHub trending quant finance repos",
+      "items": [
+        {
+          "title": "backtesting.py (~22.6k stars, updated Jul 30 2026)",
+          "url": "https://github.com/topics/backtest",
+          "relevance": "well-known, already effectively superseded by our own custom run_hNNN.py infrastructure which handles multi-asset/regime-aware backtests the generic library doesn't. Not staged.",
+          "relevance_score": 2,
+          "staged": false
+        },
+        {
+          "title": "Machine Learning for Trading (3rd edition) code repo, ~19.3k stars",
+          "url": "https://github.com/topics/quantitative-finance",
+          "relevance": "reference/textbook code repo, broad coverage but not a new tool or data source. Not staged — general knowledge, nothing new found.",
+          "relevance_score": 2,
+          "staged": false
+        },
+        {
+          "title": "RQAlpha (~6.3k stars, updated Jul 23 2026)",
+          "url": "https://github.com/topics/quantitative-finance",
+          "relevance": "generic algo backtest/trading framework, no unique feature identified over our existing infra. Not staged.",
+          "relevance_score": 1,
+          "staged": false
+        }
+      ],
+      "summary": "No new GitHub tool found this pass that adds capability beyond what's already in the wiki (universal-portfolios, covered in tonight's Phase 1 wiki expansion, was actually the most relevant GitHub find of the night but surfaced via the capital-allocation research angle, not this GitHub-trending angle)."
+    }
+  ],
+  "staged_count": 4,
+  "staged_summary": [
+    "1_tradability_mask_lookahead_wiki.json — low risk, wiki note on lookahead-formal-verification.md (mask-first tradability design pattern, arXiv:2507.07107)",
+    "2_multimodal_earnings_direction_wiki.json — low risk, wiki note on pead.md (multi-modal earnings-day direction paper, arXiv:2605.25894, thin evidence flagged explicitly)",
+    "3_polyswarm_multiagent_prediction_markets_wiki.json — low risk, wiki note on polymarket.md (PolySwarm 50-persona multi-agent architecture, arXiv:2604.03888)",
+    "4_h486_dynamic_allocation_stub.json — medium risk, new_script stub for H486 (universal-portfolios OLS backtest vs static production blend, follows directly from tonight's Phase 1 wiki page)"
+  ],
+  "not_staged_reason": "Pairs/cointegration/LLM angle and pure cross-sectional-momentum angle produced no HIGH-relevance new finding beyond what's already logged in the wiki — both summarized above with relevance scores 2-4, below the staging bar used on prior nights (roughly 5+)."
+}
