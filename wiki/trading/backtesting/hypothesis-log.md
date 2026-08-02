@@ -10181,3 +10181,88 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 **Results**: backtesting/results/h483_results.json
 
 **Script**: backtesting/daily/run_h483_ob_filter_h411_varb.py
+
+---
+
+## H484 — OB Filter on H192-D Sector-Neutral BAB — Order Block Applied to Low-Vol Anomaly Family: CONFIRMED (2026-08-01)
+
+**Source**: Internal — nightly autonomous research task (new strategy families: Low-Vol Anomaly / ETF Pairs / Stock Momentum). Session task noted "Start at H113" as stale; actual latest hypothesis was H483, so numbering resumes at H484 per the task's own PROCESS instruction (read hypothesis-log.md → find latest H-number).
+
+**Universe**: Same 30-stock / 8-GICS-sector universe as H192 (AAPL/MSFT/AMZN/GOOGL/META/TSLA/NVDA/AVGO/QCOM/AMD/V/MA/BAC/WFC/JPM/UNH/LLY/PFE/JNJ/ABBV/WMT/HD/SBUX/LOW/COST/CVX/XOM/BA/CAT/IBM)
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026 (2026-06-30 cutoff)
+**Gate**: OOS Sharpe > 1.367 (canonical H192-D) AND MaxDD improvement ≥ 0.5pp vs -17.1%
+
+**Method**: H192-D (sector-neutral Betting-Against-Beta, Frazzini & Pedersen 2014) is the strongest confirmed variant in the low-vol-anomaly family (OOS Sharpe 1.367, MaxDD -17.1%, Cumul 2.518x) but had never had the OB filter applied, despite the filter's consistent record on momentum (H343/H344/H345/H346/H476/H483), bonds (H355), and low-vol ETFs (H361). Candidate pool = bottom-10 lowest sector-neutral-beta-rank stocks (instead of the canonical bottom-6), filtered to those showing a bullish unmitigated SMC order block as of month-end, final selection = bottom-6 of OB survivors by original beta rank. Holds cash if fewer than `min_filter` survive.
+
+**OB parameter grid**: (window, min_filter, swing_len) ∈ {(20,2,3), (20,3,3), (20,3,5), (30,2,3), (30,3,3), (30,3,5)}
+
+**Status**: CONFIRMED. Baseline replication of H192-D (bottom-6, no OB): IS Sharpe 1.505, OOS Sharpe 1.200, OOS MaxDD -17.5% — some drift vs the canonical log values (OOS 1.367, MaxDD -17.1%), likely from a later `DATA_END` (2026-06-30 vs the original run's cache) and a fresh price download rather than the original cached series. Gate was still evaluated against the stricter canonical 1.367, and results cleared it comfortably regardless.
+
+**Results**:
+| ob_window | min_filter | swing_len | IS Sh | OOS Sh | OOS MaxDD | MDD improvement | Cash% | Gate |
+|-----------|------------|-----------|-------|--------|-----------|------------------|-------|------|
+| 20 | 2 | 3 | 2.898 | 3.550 | -8.5% | +8.60pp | 0.0% | ✓ PASS BOTH |
+| 20 | 3 | 3 | 3.122 | **3.664** | -6.0% | +11.10pp | 6.1% | ✓ PASS BOTH |
+| 20 | 3 | 5 | 3.067 | 2.175 | -10.5% | +6.60pp | 31.8% | ✓ PASS BOTH |
+| 30 | 2 | 3 | 2.294 | 3.109 | -10.1% | +7.00pp | 0.0% | ✓ PASS BOTH |
+| 30 | 3 | 3 | 2.317 | 3.025 | -10.1% | +7.00pp | 1.5% | ✓ PASS BOTH |
+| 30 | 3 | 5 | 3.184 | 3.088 | -9.9% | +7.20pp | 4.5% | ✓ PASS BOTH |
+
+**Key findings**:
+- All 6/6 grid variants clear both gates — the strongest hit rate of any OB-filter test run so far in the H-series (previous best hit rates: H344 36/36 param combos but smaller effect size; H483 1/8).
+- Best: **(ob_window=20, min_filter=3, swing_len=3)** → OOS Sharpe 3.664 (+3.05x over the canonical 1.200 baseline), MaxDD -6.0% (vs -17.5% baseline, +11.1pp improvement), only 6.1% of OOS months held cash.
+- Pattern consistent with prior OB-filter wins: the filter doesn't just add alpha, it materially cuts drawdown by refusing entries into low-beta stocks that lack institutional accumulation confirmation — i.e., "low beta because nobody wants it" vs "low beta with smart money already in."
+- This is the first time the OB filter has been validated on a stock-level factor signal outside momentum/reversal (BAB is a risk-factor sort, not a return-chasing signal), suggesting the OB pattern generalizes across signal families, not just price-momentum-adjacent ones.
+
+**Production correlation estimate**: Computed via 66-month OOS (2021-01 to 2026-06) monthly-return correlation of the best variant (20/3/3) against the H026 canonical equity curve and SPY: **Corr(H484, H026) = 0.660, Corr(H484, SPY) = 0.659**. This is moderate, not low — H484 is not a strong diversifier in the way H181 (Corr H026=0.293) is. However, its absolute risk-adjusted profile (OOS Sharpe 3.664, MaxDD only -6.0%) is strong enough on a standalone basis that it may still be worth a small satellite allocation rather than a pure diversification play. **Recommendation**: promising but not a diversification-driven addition — if added to production, treat as a return/Sharpe enhancer with the caveat that it will still drawdown somewhat in sync with the existing equity sleeves. Validate with a longer OOS window and a proper blended-portfolio simulation (not just pairwise correlation) before allocating capital.
+
+**Script**: backtesting/daily/run_h484_ob_filter_h192d_bab.py
+**Results**: backtesting/results/h484_results.json
+
+---
+
+## H485 — OB Filter on H181 Industry-Adjusted Reversal — Order Block Applied to Stock Reversal Family: CONFIRMED (weak) (2026-08-01)
+
+**Source**: Internal — same nightly session as H484, second family in the task's priority order (Stock Momentum §3.1, reversal sub-family).
+
+**Universe**: Same 30-stock universe as H181/H192
+**IS/OOS**: IS 2013-2020 / OOS 2021-2026
+**Gate**: OOS Sharpe > 1.138 (canonical H181) AND MaxDD improvement ≥ 0.5pp vs -18.4%
+
+**Method**: H181 (industry-adjusted short-term reversal: monthly return minus equal-weight sector-mean return, long bottom-6 most-oversold-vs-peers) is CONFIRMED and low-correlation with H026 (0.293), but had never had the OB filter applied. Candidate pool = bottom-10 most negative industry-adjusted-return stocks, filtered to bullish unmitigated OB as of month-end, final selection = bottom-6 of OB survivors by original signal rank.
+
+**OB parameter grid**: (window, min_filter, swing_len) ∈ {(20,2,3), (20,3,3), (20,3,5), (30,2,3), (30,3,3), (30,3,5)}
+
+**Status**: CONFIRMED (weak — 1/6 variants). Baseline replication of H181 matched the canonical log closely: IS Sharpe 1.381 (exact match), OOS Sharpe 1.150 vs log 1.138, OOS MaxDD -18.4% (exact match) — high-fidelity replication, unlike H484's.
+
+**Results**:
+| ob_window | min_filter | swing_len | IS Sh | OOS Sh | OOS MaxDD | MDD improvement | Cash% | Gate |
+|-----------|------------|-----------|-------|--------|-----------|------------------|-------|------|
+| 20 | 2 | 3 | 1.165 | 0.299 | -43.5% | -25.10pp | 12.1% | FAIL (both) |
+| 20 | 3 | 3 | 1.108 | 0.263 | -40.6% | -22.20pp | 24.2% | FAIL (both) |
+| 20 | 3 | 5 | 0.620 | 0.556 | -24.8% | -6.40pp | 45.5% | FAIL (both) |
+| 30 | 2 | 3 | 1.085 | 1.037 | -21.7% | -3.30pp | 3.0% | FAIL (both) |
+| 30 | 3 | 3 | 1.084 | 1.035 | -21.7% | -3.30pp | 7.6% | FAIL (both) |
+| **30** | **3** | **5** | 0.820 | **1.225** | -17.1% | +1.30pp | 22.7% | ✓ PASS BOTH |
+
+**Key findings**:
+- Unlike H484's clean 6/6 sweep, the OB filter *hurts* H181 badly on 5 of 6 parameter combinations — OOS Sharpe collapses to 0.26-0.56 and MaxDD blows out to -40%+ on the shorter/looser window=20 settings. Only the most selective setting (window=30, swing_len=5 — the longest lookback and strictest swing-pivot requirement) marginally clears both gates.
+- Economic read: reversal candidates are stocks that just got hit hard. Requiring a bullish OB (institutional accumulation already visible) at month-end on a 20-day lookback is often too strict — it filters out genuine still-in-freefall reversal candidates *and* lets through stocks where the "OB" signal is really just noise from a small, recent sample. Only the longer 30-day window with a stricter 5-bar swing pivot avoids this whipsaw.
+- The single passing variant still runs 22.7% cash months (the strategy sits out nearly a quarter of the time), and the MaxDD improvement is a thin +1.3pp — a much more fragile confirm than H484's.
+
+**Production correlation estimate**: 66-month OOS correlation of the passing variant (30/3/5) against H026 and SPY: **Corr(H485, H026) = 0.501, Corr(H485, SPY) = 0.706**. Both notably higher than the underlying H181's own reported Corr(H026)=0.293 — the OB filter, by restricting entries to only the most "OB-confirmed" reversal setups, appears to correlate the strategy's timing more tightly with broad-market conditions (fewer, more market-following trades) rather than preserving H181's original idiosyncratic-reversal character. **Recommendation**: do not add to production. The confirm is fragile (1/6 variants, thin margin, high cash%) and it degrades the one property (low correlation) that made H181 attractive in the first place. H181 unfiltered remains the better production candidate if this family is revisited.
+
+**Script**: backtesting/daily/run_h485_ob_filter_h181_reversal.py
+**Results**: backtesting/results/h485_results.json
+
+---
+
+## ETF Pairs Trading Family — Reviewed, No New Hypothesis Run (2026-08-01)
+
+**Context**: Per the nightly research task's priority order, ETF Pairs Trading (§3.8) was the second family scheduled for review this session. Rather than force a low-probability backtest, the existing evidence was re-checked for any genuinely untested angle.
+
+**Finding**: The family is conclusively closed at the cointegration/statistical-arbitrage level. H152 (GDX/SIL), H154 (TLT/IEF static OLS), H155 (TLT/IEF Kalman filter), and H200 (2026-05-15) are all NOT CONFIRMED — every tested pair and hedge-ratio method (static OLS, rolling OLS, Kalman filter via `pykalman`) fails OOS. The Kalman filter result is structurally informative, not just a data-fit failure: a Kalman filter that continuously re-estimates the hedge ratio "explains away" the very spread persistence a pairs strategy needs to trade, collapsing measured half-life to 0.7-2.1 days — too fast to trade profitably after costs. `wiki/trading/algorithms/pairs-trading.md` documents this closure explicitly in its frontmatter status line.
+
+**Decision**: No new `run_hNNN.py` was written for this family this session. The one remaining open thread is H316 (LLM semantic pairs selection, arXiv:2605.01954 — using GPT-4o to select pairs by semantic/fundamental similarity rather than historical cointegration), which is a stub requiring `$OPENAI_API_KEY` and has not yet been implemented. That remains the only credible next step for this family; a further daily-cointegration test would just re-confirm the closure already established by H152/H154/H155/H200.
+
+**Verdict**: FAMILY CLOSED (statistical arbitrage level). No hypothesis number consumed. Next step if revisited: implement H316 (LLM semantic pairs) rather than another cointegration variant.
