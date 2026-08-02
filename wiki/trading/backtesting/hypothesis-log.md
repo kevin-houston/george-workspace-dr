@@ -10266,3 +10266,18 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 **Decision**: No new `run_hNNN.py` was written for this family this session. The one remaining open thread is H316 (LLM semantic pairs selection, arXiv:2605.01954 — using GPT-4o to select pairs by semantic/fundamental similarity rather than historical cointegration), which is a stub requiring `$OPENAI_API_KEY` and has not yet been implemented. That remains the only credible next step for this family; a further daily-cointegration test would just re-confirm the closure already established by H152/H154/H155/H200.
 
 **Verdict**: FAMILY CLOSED (statistical arbitrage level). No hypothesis number consumed. Next step if revisited: implement H316 (LLM semantic pairs) rather than another cointegration variant.
+
+---
+
+### H486 — Dynamic Multi-Strategy Capital Allocation via Online Portfolio Selection [STUB — not yet run]
+
+**Source:** universal-portfolios (Marigold, github.com/Marigold/universal-portfolios, 858 stars); dream cycle scan 2026-08-02
+
+**Hypothesis:** Replace the current static target-weight blend across production sleeves (H026 27% / H041a 22% / H045 21% / XLK IBS 20% / SMH IBS 8% / IGV IBS 2%) with an Online Portfolio Selection algorithm (OLMAR, CRP) applied to sleeve NAV series instead of individual asset prices — testing whether dynamic reweighting across strategies beats static weights the same way OPS algorithms beat static weights across assets.
+
+**Design:** Build `nav_df` from each sleeve's own OOS equity curve (resampled to common frequency). Reproduce static blend as baseline (OOS Sharpe 4.158, MaxDD -3.60%) as a sanity check. Run `OLMAR(window=5, eps=10)` and `CRP()` from `universal.algos` against `nav_df`.
+**Gate:** OOS Sharpe > 4.158 AND MaxDD not worse than -5.00%
+
+**Known risk:** OPS algorithms assume free daily rebalancing; production sleeves have mismatched native cadences (monthly/daily/event-driven). A pass on paper would need a follow-up check that the achievable rebalance frequency doesn't erode the improvement via turnover/transaction costs.
+
+**Status:** Script scaffold at `backtesting/daily/run_h486_dynamic_allocation.py`. Not yet implemented — see `wiki/trading/paper-trading/dynamic-strategy-allocation.md` for full research context.
