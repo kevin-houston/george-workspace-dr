@@ -114,3 +114,6 @@ LLM-powered knowledge extraction framework. Noted 2026-06-26. See wiki/tools/hyp
 
 ## QuantMind (github.com/LLMQuant/quant-mind)
 Finance-domain knowledge extraction + retrieval framework. Noted 2026-07-04. See wiki/tools/quant-mind-notes.md. MIT, 1.7k stars. Ingests arXiv papers, news, SEC filings → semantic knowledge graph with RAG/deep-research/NL query retrieval. Complements Hyper-Extract: QuantMind is retrieval-first (answer questions across a corpus), Hyper-Extract is structure-first (extract typed entities and graphs). High relevance: could power dream cycle arXiv scans and hypothesis ideation queries against accumulated quant literature.
+
+## Job Seek (github.com/colophon-group/jobseek)
+Self-hosted job aggregator. Noted 2026-08-02. See wiki/tools/jobseek-notes.md. Code MIT / data CC BY-NC 4.0, 115 stars. Scrapes 4,400+ company career pages directly (Greenhouse/Lever/Workday/JSON-LD/generic DOM) instead of pulling from LinkedIn/Indeed — new postings surface within hours. Next.js 16 + TypeScript web app, Python/Playwright crawler, Postgres+Redis+Typesense. Notable: ships a `ws` CLI that walks a coding agent through onboarding a new company's career page — a concrete agent-as-contributor pattern. Not trading-related; no immediate action, logged for reference.

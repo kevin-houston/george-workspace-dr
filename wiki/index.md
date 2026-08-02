@@ -1,7 +1,7 @@
 ---
-updated: 2026-08-01
+updated: 2026-08-02
 sources_indexed: 4
-pages: 249
+pages: 250
 ---
 
 # Wiki Index
@@ -116,6 +116,7 @@ When answering a query:
 - [fireworks-tech-graph](tools/fireworks-tech-graph.md) — Claude Code skill for SVG/PNG architecture diagrams from natural language; 8 styles, 14 types, AI/Agent domain built-ins (RAG/Multi-Agent/Tool Call patterns, 40+ product icons); MIT ← new 2026-06-10
 - [claude-code-video-toolkit](tools/claude-code-video-toolkit.md) — AI-native video production; NARRATE→SCORE→GENERATE→COMPOSE→RENDER; ElevenLabs TTS, FLUX, LTX2 video; MIT ← new 2026-06-08
 - [Awesome Finance MCP](trading/tools/awesome-finance-mcp.md) — curated finance MCP servers; HIGH: Alpaca MCP + FMP MCP; already live: Massive MCP; medium: CCXT/QuantConnect/TradingView/Alpha Vantage MCPs ← new 2026-06-18
+- [Job Seek](tools/jobseek-notes.md) — self-hosted job aggregator scraping 4,400+ company career pages directly (no LinkedIn/Indeed); Next.js 16 + Python/Playwright crawler; MIT code, CC BY-NC 4.0 data; 115★; agent-driven `ws` CLI for onboarding new companies; not trading-related ← new 2026-08-02
 - [AI-Trader](trading/tools/ai-trader.md) — HKUDS agent-native social trading; ai4trade.ai; MIT ← new 2026-06-11
 - [qf-lib — Event-Driven Python Backtester](trading/tools/qf-lib.md) — modular Python event-driven backtester; 943 stars; multi-broker integration (Alpaca/Interactive Brokers); data vendor connectors; production-focused alternative to vectorbt ← new 2026-06-24
 - [RustQuant — Rust Quantitative Finance Library](trading/tools/rust-quant.md) — QuantLib-comparable Rust library; options pricing (BSM/Heston/SABR), stochastic processes, ML, time series; Python bindings via PyO3; 1,773 stars ← new 2026-06-24
