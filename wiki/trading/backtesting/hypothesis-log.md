@@ -10281,3 +10281,70 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 **Known risk:** OPS algorithms assume free daily rebalancing; production sleeves have mismatched native cadences (monthly/daily/event-driven). A pass on paper would need a follow-up check that the achievable rebalance frequency doesn't erode the improvement via turnover/transaction costs.
 
 **Status:** Script scaffold at `backtesting/daily/run_h486_dynamic_allocation.py`. Not yet implemented — see `wiki/trading/paper-trading/dynamic-strategy-allocation.md` for full research context.
+
+---
+
+## H487 — Idiosyncratic Volatility Anomaly, 200-Stock Universe (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-02
+**Source**: H213 (idiosyncratic vol on 30-stock mega-cap universe — HIGH IVOL outperformed, opposite of Ang, Hodrick, Xing, Zhang JF 2006); H245/H248 (total-vol and beta/BABB signals both retested at 200-stock scale and NOT CONFIRMED). IVOL specifically had not been retested at 200-stock scale — this closes that gap, following the "retest 30-stock finding at 200-stock scale" pattern used by H241/H243/H245/H248.
+**Script**: `backtesting/daily/run_h487_ivol_200stock.py`
+**Universe**: H241 200-stock S&P 500 large-cap universe (195 tickers available)
+**Signal**: IVOL_i(t) = std of residuals from OLS of stock monthly returns on SPY monthly returns, trailing 3-month window (same formula/window as H213)
+**IS/OOS**: 2013-2020 / 2021-2026
+**Gate**: OOS Sharpe >= 1.5
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | Neg Yrs | Notes |
+|---------|-----------|------------|-----------|---------|-------|
+| A bottom quintile (40) low-IVOL, EW | 1.150 | 0.973 | -16.6% | 0 | Ang et al. direction |
+| B bottom decile (20) low-IVOL, EW | 1.117 | 1.011 | -14.3% | 0 | Ang et al. direction, concentrated |
+| C top quintile (40) high-IVOL, EW | 1.061 | **1.214** | -14.7% | 0 | H213 direction — best variant, still below gate |
+| D low-IVOL + high-mom blend | 1.339 | 0.935 | -21.1% | 1 | worst MaxDD and only variant with a negative year |
+| SPY B&H | — | 1.010 | -23.9% | — | benchmark |
+
+Corr(best variant H487-C, H241-A 200-stock momentum) OOS: 0.769
+
+**Key findings**:
+
+1. H213's directional finding replicates at 200-stock scale: high-IVOL (Var C) beats low-IVOL (Var A/B) on OOS Sharpe, consistent with a lottery-demand/retail-overpricing mechanism rather than the Ang et al. risk-based IVOL discount — but the effect is weaker at scale and does not clear the 200-stock family's 1.5 gate.
+2. Unlike H245 (total vol, OOS 0.626) and H248 (beta/BABB, OOS 0.641), IVOL is the strongest-performing low-vol-family signal retested at 200-stock scale so far — all three fail the gate, but IVOL fails by the smallest margin, suggesting idiosyncratic (stock-specific) risk carries more genuine information than systematic vol/beta once diversified across 200 names.
+3. Blending low-IVOL with momentum (Var D) is actively harmful here — it inherits low-IVOL's weaker return profile without avoiding low-IVOL's underperformance, and introduces the family's only negative year. Do not pursue an IVOL-momentum blend further without revisiting the blend weights.
+4. Corr(H487-C, H241-A momentum) = 0.769 is well above the ~0.80 correlation ceiling generally used as a diversification cutoff for production blending — moot here since the strategy doesn't confirm, but noted for future reference: high-IVOL is not a meaningfully distinct return stream from momentum at 200-stock scale.
+
+**Verdict**: NOT CONFIRMED. Best OOS Sharpe 1.214 (Var C) < gate 1.5. Low-volatility-anomaly family has now been retested at 200-stock scale across all three natural signal variants (total vol H245, beta H248, idiosyncratic vol H487) — none clear the gate. See H488 for a follow-up macro-gate attempt on the best (Var C) sub-signal.
+
+---
+
+## H488 — High-IVOL (200-stock) with Macro Regime Gate (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-02
+**Source**: H487 (best variant H487-C, high-IVOL long, OOS Sharpe 1.214 — close to but below the 1.5 gate, MaxDD-limited); H362 (CONFIRMED — VIX/SPY-200MA gate lifted a near-miss low-vol ETF rotation from OOS 1.339 to 1.819, primarily via drawdown reduction). Hypothesis: the same gate pattern might push H487-C over its gate.
+**Script**: `backtesting/daily/run_h488_ivol_macro_gate.py`
+**Universe/signal**: H487-C (200-stock universe, long top-quintile high-IVOL, EW, monthly rebalance), gated to BIL cash proxy in unfavorable regimes
+**IS/OOS**: 2013-2020 / 2021-2026
+**Gate**: OOS Sharpe > 1.5; secondary: MaxDD improvement vs H487-C baseline (-14.7%)
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | Neg Yrs | Notes |
+|---------|-----------|------------|-----------|---------|-------|
+| A SPY > 200MA gate | 1.218 | 1.035 | -13.4% | 1 | below baseline |
+| B VIX < 20 gate | 0.953 | 0.973 | -10.5% | 0 | best MaxDD, worst Sharpe |
+| C SPY > 200MA AND VIX < 25 (joint) | 1.170 | 0.799 | -14.2% | 1 | worst variant |
+| D SPY > 200MA OR VIX < 20 (either) | 1.152 | 1.126 | -13.4% | 1 | best gated variant, still below baseline |
+| E Baseline (no gate = H487-C) | 1.061 | **1.214** | -14.7% | 0 | ✓ best of all five, and the only variant with 0 negative years |
+
+OOS regime distribution: SPY > 200MA 79.7% of months; VIX < 20 67.2% of months
+
+**Key findings**:
+
+1. Every gated variant underperforms the ungated baseline — the opposite of H362's result on low-vol ETFs. The gate pattern does not generalize to this signal.
+2. Root cause: unlike H354's defensive low-vol ETFs (which genuinely do nothing useful during risk-off regimes, so routing to cash is a pure drawdown cut), high-IVOL stocks' *entire edge* is concentrated in exactly the volatile/rally months the gate filters out — e.g. 2021's +43.7% (the single best OOS year across every variant) occurs during a high-vol post-COVID melt-up. Gating on VIX or SPY-200MA removes the alpha-generating regime along with the risk, rather than removing risk while preserving alpha.
+3. MaxDD is only modestly improved (best gated MaxDD -10.5% Var B vs baseline -14.7%, a 4.2pp cut) — much smaller than H362's 29% MaxDD improvement — because the ungated baseline had zero negative years to begin with; there wasn't much tail risk left to cut.
+4. General lesson for future macro-gate work: the H362 pattern (macro gate improves a near-miss defensive/rotation strategy) does not transfer to a signal whose return source *is* elevated volatility itself. Apply regime gates only to signals whose expected edge is regime-independent or defensive in nature — check the annual-return distribution for concentration in high-vol years before attempting a gate.
+
+**Verdict**: NOT CONFIRMED. All four gated variants underperform baseline; best is Var D at OOS Sharpe 1.126, still below both the 1.5 gate and the H487-C ungated baseline (1.214). Low-volatility-anomaly family (H245/H248/H487/H488) is now exhausted at 200-stock scale via both raw signals and a macro-gate refinement — no further 200-stock-scale variant is proposed; next step for this family would require either a different universe (e.g. mid-cap, where cross-sectional vol dispersion is larger) or moving to family #2/#3 per the priority order (ETF pairs trading — already closed 2026-08-01; stock momentum — largely explored, remaining gap is a genuine ADDV-based top-200 NASDAQ universe rather than the S&P-membership-based universe used throughout H241/H245/H248/H487/H488).
