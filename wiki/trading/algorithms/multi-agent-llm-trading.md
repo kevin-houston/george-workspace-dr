@@ -921,3 +921,18 @@ def selective_consensus_gate(agent_stances: list[str], agent_reasonings: list[st
 Fine-grained decomposition: each agent sees a narrow slice of the problem → less hallucination, clearer accountability, easier debugging. Consensus rule: Enter if ≥ 3 of 5 agents give green signal; Exit if ≥ 2 agents give red signal.
 
 **Cross-reference**: H274 (multi-agent PEAD upgrade); H423 (MTL-PEAD auxiliary signals); arXiv:2511.15214 (analyst behavioral bias).
+
+---
+
+## Research Lead: RAPTOR — Black-Litterman Aggregation of Agent Debate Views (CEUR-WS/OpenReview 2025, flagged 2026-08-03)
+
+"RAPTOR: Reasoned Agentic Portfolio Trading with Orchestrated Rebalancing" (CEUR-WS/OpenReview 2025 workshop paper -- not core arXiv) proposes per-asset agent threads (analyst/researcher/risk-manager roles) that communicate via a schema-constrained JSON blackboard and debate bull/bear theses into confidence-scored BUY/HOLD/SELL views. The distinguishing contribution vs. TradingAgents (already in this page) and the H274 PEAD debate design: instead of a facilitator agent picking a single winning thesis per position, RAPTOR feeds every agent's confidence-scored view into a **Black-Litterman optimizer** as the model's 'investor views' input, blended with market-equilibrium priors to produce final portfolio weights across the whole book at once.
+
+**Why this is a distinct lever, not a competing architecture**: H274 and TradingAgents both solve "what should agents conclude about position X" (a signal-generation problem). RAPTOR solves "how do N per-asset agent conclusions become a coherent set of portfolio weights" (a portfolio-construction/aggregation problem) -- it could in principle sit downstream of H274's PEAD debate output rather than replacing it, using Black-Litterman instead of e.g. equal-weighting all debate-approved PEAD candidates.
+
+**Evidence caveats (why this is logged as awareness-only, not staged as a hypothesis)**:
+- Workshop venue (CEUR-WS/OpenReview), not peer-reviewed or core arXiv -- lower vetting bar than most sources in this wiki
+- No disclosed backtest Sharpe/return numbers found in the accessible material
+- Black-Litterman itself requires a market-equilibrium prior (typically CAPM-implied) and a view-confidence-to-uncertainty-matrix mapping -- both are nontrivial design choices the paper's abstract doesn't specify in enough detail to replicate directly
+
+**Action needed before staging a hypothesis**: locate the full paper text (not just abstract) to extract the confidence-to-uncertainty mapping method, and check whether `skfolio` or `Riskfolio-Lib` (both already have Black-Litterman implementations per their documentation) could serve as the aggregation-layer backend rather than hand-rolling BL math -- would turn this into a much smaller build if pursued.

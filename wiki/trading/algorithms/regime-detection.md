@@ -359,3 +359,19 @@ Apply slow-tail + V-shape overlay as a portfolio-level cash buffer on our H026+H
 ## See Also
 
 - [Regime Detection 2026 Papers — Wasserstein-HMM and Heavy-Tail Emissions](regime-detection-2026-papers.md) — H444/H445 design basis; BIC K-selection, 2-Wasserstein state tracking, Student-t/Laplace emissions
+
+---
+
+## Research Lead: Real Statistical Jump Model Implementation Found (jump-models, 2026-08-03)
+
+Method 4 above (line 149) has flagged since this page's creation that 'no dedicated Python library yet' exists for the Shu/Yu/Mulvey (2024) Statistical Jump Model, forcing the `hmmlearn + smooth_regime_labels` approximation used throughout H165/H205-B/H251/H429. Tonight's dream-cycle scan found a direct reference implementation:
+
+- **Repo**: [Yizhan-Oliver-Shu/jump-models](https://github.com/Yizhan-Oliver-Shu/jump-models) — 157 stars, Apache-2.0, sklearn-style `fit`/`predict` API with pandas DataFrame I/O
+- Implements discrete JM, continuous JM, and sparse JM (feature-selecting variant) — i.e. the exact three variants described across the arXiv:2402.05272 paper family, not a partial or reinterpreted version
+- Single-author project (bus-factor risk — watch for maintenance lapses before depending on it in a scheduled/production script) but code maps directly onto the paper already cited at line 151
+
+**Why this matters**: the `smooth_regime_labels(min_duration=5)` post-processing hack (line 162-180) approximates JM's core innovation — a persistence penalty baked into the *fitting* objective (λ × transition count) — by bolting a fixed-window smoother onto HMM's *output* after the fact. These are not equivalent: HMM+smoothing can still fit noisy short-lived states during training (the smoother only cleans up the label sequence afterward), while true JM never fits those states in the first place because the penalty is inside the optimization. H429's finding that IS-frozen HMM variants degenerate to a single dominant state (replicating the H251 root cause) is exactly the kind of instability a real jump-penalty objective is designed to avoid.
+
+**Suggested next step**: swap `jump-models`' discrete-JM class in for the `hmmlearn GaussianHMM` step in a follow-up to H429 (Wasserstein-Tracked Rolling HMM), keeping the same 5Y rolling-window retraining + Wasserstein state-matching wrapper that made H429's Var C/F pass gate, and compare OOS Sharpe/MaxDD/MaxStateFrac against the existing HMM-based Var C (1.144 / -17.2% / 47%) and Var F (1.067 / -16.6% / 41%). See a staged new_script proposal (H489 stub) filed alongside this wiki update for a concrete build plan.
+
+**Caveat**: not yet installed or run — per standing off-hours install-security rule, this is a wiki note flagging the find, not a live pip install. Verify on PyPI (if published) or install from GitHub source with `pip-audit` run afterward before using in any scheduled script.
