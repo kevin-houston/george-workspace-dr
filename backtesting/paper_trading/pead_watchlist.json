@@ -1,22 +1,10 @@
 {
-  "date": "2026-08-02",
+  "date": "2026-08-03",
   "candidates": [],
   "scores": {
-    "AAPL": {
-      "score": -0.0328,
-      "surprise": -0.1456
-    },
-    "AMZN": {
-      "score": -0.0401,
-      "surprise": -0.356
-    },
     "CVX": {
       "score": -0.0203,
       "surprise": -0.0921
-    },
-    "MA": {
-      "score": -0.0607,
-      "surprise": -0.2485
     },
     "ABBV": {
       "score": -0.035,

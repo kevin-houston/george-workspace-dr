@@ -1044,3 +1044,21 @@
 [2026-08-01 23:04:15] Candidates for tomorrow: none
 [2026-08-01 23:04:15] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-08-01 23:04:15] Overnight pass complete.
+[2026-08-02 23:01:51] =======================================================
+[2026-08-02 23:01:51] PEAD overnight pass starting
+[2026-08-02 23:01:51] Scanning earnings calendar…
+[2026-08-02 23:02:20]   Tickers with recent earnings: ['XOM', 'CVX', 'ABBV']
+[2026-08-02 23:02:20]   Fetching 8-K for XOM…
+[2026-08-02 23:02:45]     XOM: no 8-K Item 2.02 found
+[2026-08-02 23:02:45]   Fetching 8-K for CVX…
+[2026-08-02 23:02:51]     CVX: 4465 chars
+[2026-08-02 23:02:51]   Fetching 8-K for ABBV…
+[2026-08-02 23:02:52]     ABBV: 4582 chars
+[2026-08-02 23:03:44]   Loading ProsusAI/finbert…
+[2026-08-02 23:05:17]   CVX: score=-0.020  surprise=-0.092
+[2026-08-02 23:05:18]   ABBV: score=-0.035  surprise=-0.205
+[2026-08-02 23:05:18]   ✗ CVX filtered out (score=-0.020, surprise=-0.0921)
+[2026-08-02 23:05:18]   ✗ ABBV filtered out (score=-0.035, surprise=-0.2052)
+[2026-08-02 23:05:18] Candidates for tomorrow: none
+[2026-08-02 23:05:18] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-08-02 23:05:18] Overnight pass complete.
