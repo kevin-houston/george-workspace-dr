@@ -1,0 +1,230 @@
+{
+  "date": "2026-08-03",
+  "note": "Task prompt referenced 'H157/H158' as current momentum work; confirmed stale (actual frontier is H487/H488, completed 2026-08-02) -- same staleness pattern already documented in the 2026-08-02 research log. Scanned the momentum angle generally rather than tying findings to those specific numbers.",
+  "angles": [
+    {
+      "angle": "1. arXiv: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Attention Factors for Statistical Arbitrage",
+          "id": "arXiv:2510.11616",
+          "relevance_score": 8,
+          "summary": "Learns conditional latent factors from firm-characteristic embeddings via attention, jointly optimized with the trading strategy instead of a separate cointegration/distance pair-selection step. Backtest: largest US equities, 24yr period, gross Sharpe >4, net 2.3 after costs.",
+          "staged": false,
+          "reason_not_staged": "Already in wiki/trading/algorithms/pairs-trading.md ('Key Insight: Weak Factors Matter' section, Net OOS Sharpe 2.3) -- confirmed via grep before drafting a proposal. Not a duplicate scan error; the paper was independently found again tonight but was already ingested (date of original ingest not confirmed, predates tonight)."
+        },
+        {
+          "title": "Statistical arbitrage in multi-pair trading via graph clustering algorithms in US equities",
+          "id": "arXiv:2406.10695",
+          "relevance_score": 6,
+          "summary": "Uses graph clustering (not correlation/cointegration screening) to form candidate pairs, ML classifier ensemble filters signals, novel time-varying stop-loss/Kelly sizing.",
+          "staged": false,
+          "reason_not_staged": "Predates the 2025-2026 preference window (June 2024) and no Sharpe/return numbers surfaced from the abstract-level fetch; below staging bar without concrete evidence."
+        },
+        {
+          "title": "Hierarchical Deep Learning Framework for Pair Trading with Attention and Graph Networks",
+          "id": "Elsevier ESWA 2025, DOI 10.1016/j.eswa.2025.128496",
+          "relevance_score": 4,
+          "summary": "GAT-based pair selection layer + DRL execution layer, DRL performance as supervisory signal for the selector.",
+          "staged": false,
+          "reason_not_staged": "No arXiv preprint, publisher-paywalled, no numbers accessible."
+        }
+      ],
+      "angle_summary": "No new HIGH-relevance finding beyond what's already logged. Best candidate (Attention Factors, 2510.11616) turned out to already be in pairs-trading.md. No new cointegration-test-statistic paper found beyond the already-known copula literature."
+    },
+    {
+      "angle": "2. arXiv: PEAD + post-earnings drift + text signals",
+      "findings": [
+        {
+          "title": "From Text to Alpha: Can LLMs Track Evolving Signals in Corporate Disclosures?",
+          "id": "arXiv:2510.03195",
+          "relevance_score": 9,
+          "summary": "Embedding-based semantic drift in disclosed-metric emphasis quarter-over-quarter (not single-document sentiment). >2x risk-adjusted alpha vs. NER baseline, S&P 100 2010-2024.",
+          "staged": false,
+          "reason_not_staged": "Already in wiki (nlp-alternative-data.md and hypothesis-log.md reference arXiv:2510.03195) -- confirmed via grep."
+        },
+        {
+          "title": "The Language of Evasion: How Semantic Similarity Between Questions and Answers Predicts Stock Returns",
+          "id": "Journal of Investment Management 2026, DOI 10.1080/15427560.2026.2657322",
+          "relevance_score": 8,
+          "summary": "LLM-embedding cosine similarity between analyst Q&A pairs on earnings calls as a directness/evasion signal, validated against 1,642 human-labeled pairs; 3.9% annual alpha for direct-answer executives.",
+          "staged": true,
+          "proposal_file": "dream_cycle/staged/2026-08-03/2_earnings_call_evasion_signal_wiki.json"
+        },
+        {
+          "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models",
+          "id": "FinNLP 2025 workshop, ACL Anthology 2025.finnlp-2.13",
+          "relevance_score": 4,
+          "summary": "Compares BART vs FinBERT, tests adding pre-announcement price signals to text classification. FinBERT text-only 57.6-58.3% accuracy.",
+          "staged": false,
+          "reason_not_staged": "Close to the already-rejected H317 multi-modal combo pattern; PDF extraction failed so multi-signal benefit vs. FinBERT-alone could not be confirmed."
+        },
+        {
+          "title": "PEAD.txt / 'sentiment surprise' earnings-call NLP (QuantPedia writeup)",
+          "id": "https://quantpedia.com/how-to-improve-post-earnings-announcement-drift-with-nlp-analysis/",
+          "relevance_score": 6,
+          "summary": "Signal = deviation of current-call sentiment from firm's own trailing-quarter sentiment mean (not absolute level), split by call section. Optimized variant CAGR 5.89%, Sharpe 0.76.",
+          "staged": false,
+          "reason_not_staged": "Sharpe well below H174's live gate; built on earnings-call transcripts, same coverage-bias risk H168 already found fatal. 'Surprise relative to own history' framing noted as a genuinely different signal-design idea even though this specific implementation is weak -- worth remembering if a future transcript-coverage fix is found."
+        },
+        {
+          "title": "FinCall-Surprise: A Large-Scale Multi-modal Benchmark for Earning Surprise Prediction",
+          "id": "arXiv:2510.03965",
+          "relevance_score": 3,
+          "summary": "Eval benchmark adding audio/visual modalities from earnings calls; no strategy-level Sharpe disclosed.",
+          "staged": false,
+          "reason_not_staged": "Benchmark not a strategy; infeasible near-term (no audio/video pipeline)."
+        },
+        {
+          "title": "FinAnchor: Aligned Multi-Model Representations for Financial Prediction",
+          "id": "arXiv:2602.20859",
+          "relevance_score": 3,
+          "summary": "Aligns LLM text embeddings with tabular financial features into a unified representation space.",
+          "staged": false,
+          "reason_not_staged": "No disclosed backtest numbers in accessible excerpt; underspecified for implementation."
+        }
+      ],
+      "angle_summary": "One genuinely new, well-evidenced, differentiated finding staged (Language of Evasion). Best other candidate (From Text to Alpha) already in wiki. Field-level observation: the frontier has moved from 'better single-document sentiment' (FinBERT successors -- none found) to 'cross-document/temporal or dialogue-structure signals' -- noted in the staged proposal's rationale."
+    },
+    {
+      "angle": "3. arXiv: cross-sectional momentum + factor momentum",
+      "findings": [
+        {
+          "title": "Revisiting Factor Momentum: A One-month Lag Perspective",
+          "id": "SSRN 5333744 / Applied Economics Letters 2025",
+          "relevance_score": 6,
+          "summary": "Momentum-of-factor-returns (not stock returns) using a 1-month formation window instead of standard 12-month; significant alpha, robust to established factors.",
+          "staged": false,
+          "reason_not_staged": "Conceptually distinct angle (rotate H026/H041a/H045/H198 sleeves by their own recent momentum -- related to the already-PROPOSED H318 meta-agent rotation idea) but paywalled (SSRN/journal, not free arXiv) with no disclosed Sharpe/return numbers to evaluate against the staging bar. Logged here so it isn't lost, but not actionable without the full methodology."
+        },
+        {
+          "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading (tradability masking)",
+          "id": "arXiv:2507.07107",
+          "relevance_score": 2,
+          "summary": "Mask-first tradability filter preventing limit-move/suspension contamination of rolling-window factor calcs, A-share specific (+-10%/+-20% price limits).",
+          "staged": false,
+          "reason_not_staged": "Problem (limit-up/down contamination) doesn't apply to US large-cap universe already used."
+        },
+        {
+          "title": "Winners vs. Losers -- ESG regime-switching momentum",
+          "id": "arXiv:2505.24250",
+          "relevance_score": 2,
+          "summary": "State-dependent long-short momentum via Bellman equation across ESG sentiment regimes.",
+          "staged": false,
+          "reason_not_staged": "Long-short construction is exactly the leg already rejected in H243/H271 (short side loses on our universe)."
+        },
+        {
+          "title": "Refining and Robust Backtesting of a Century of Profitable Industry Trends",
+          "id": "arXiv:2412.14361",
+          "relevance_score": 1,
+          "summary": "100-year industry-momentum backtest; paper's own conclusion is that it fails to hold up on modern data after rigorous walk-forward testing.",
+          "staged": false,
+          "reason_not_staged": "Negative result, pre-2025 window."
+        }
+      ],
+      "angle_summary": "No HIGH-relevance staged finding -- effectively a 'nothing materially new' result for this angle, consistent with how thoroughly the momentum family has already been explored (H198/H241/H243/H271/H291/H313/H336/H337/H341/H417/H418/H435-437). The two established momentum-crash fixes (Barroso-Santa-Clara vol-scaling, Daniel-Moskowitz dynamic momentum) remain state of the art; nothing found supersedes them. Transformer/attention-based cross-sectional rankers surfaced during the scan overlap with the already-ingested spatio-temporal-momentum-2023.md (arXiv:2302.10175) family rather than extending it, and were not separately reported."
+    },
+    {
+      "angle": "4. arXiv: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "TradingAgents",
+          "id": "arXiv:2412.20138",
+          "relevance_score": 9,
+          "summary": "Full trading-firm simulation: analyst agents -> bull/bear researcher debate -> trader -> 3-profile risk-team second debate -> fund-manager finalizer. Backtest (AAPL/GOOGL/AMZN, Jan-Mar 2024): Sharpe 5.60-8.21 vs best baseline 3.53.",
+          "staged": false,
+          "reason_not_staged": "Already in wiki/trading/algorithms/multi-agent-llm-trading.md -- confirmed via grep."
+        },
+        {
+          "title": "LLM-Powered Multi-Agent System for Automated Crypto Portfolio Management",
+          "id": "arXiv:2501.00826",
+          "relevance_score": 7,
+          "summary": "3 modality-specialized agents (Crypto/News/Trading), ablates hierarchical vs collaborative vs debate topologies x 4 capability configs. Best: Hierarchical+Skill, 133.52% cumulative return, Sharpe 1.502, top-15 L1 tokens 2025.",
+          "staged": false,
+          "reason_not_staged": "Genuinely not yet in wiki (grep confirmed no match), but crypto-specific -- crypto momentum family (H302/H303) is already NOT CONFIRMED and deprioritized on this pipeline; the topology ablation (hierarchical beats debate/collaborative) is the one transferable insight, noted here rather than staged as a full proposal given the crypto mismatch."
+        },
+        {
+          "title": "RAPTOR: Reasoned Agentic Portfolio Trading with Orchestrated Rebalancing",
+          "id": "CEUR-WS/OpenReview 2025",
+          "relevance_score": 6,
+          "summary": "Per-asset agent debate feeds a Black-Litterman optimizer as investor-views input, blended with equilibrium priors -- aggregation-layer pattern distinct from H274/TradingAgents' facilitator-picks-a-thesis pattern.",
+          "staged": true,
+          "proposal_file": "dream_cycle/staged/2026-08-03/3_raptor_black_litterman_agent_aggregation_wiki.json"
+        },
+        {
+          "title": "Toward Expert Investment Teams: Fine-Grained Trading Tasks",
+          "id": "arXiv:2602.23330",
+          "relevance_score": 4,
+          "summary": "Argues fine-grained task decomposition beats coarse-grained analyst/manager role mimicry; tested on Japanese equities.",
+          "staged": false,
+          "reason_not_staged": "Already in wiki/trading/algorithms/multi-agent-llm-trading.md ('Fine-Grained Task Decomposition' section) -- confirmed via grep."
+        },
+        {
+          "title": "Agentic Trading survey (reproducibility audit)",
+          "id": "arXiv:2605.19337",
+          "relevance_score": 3,
+          "summary": "Reproducibility audit finding only 2/19 studies in the space are reproducible.",
+          "staged": false,
+          "reason_not_staged": "Useful caveat context for evaluating all other multi-agent claims (including tonight's), not itself an architecture or finding to stage."
+        }
+      ],
+      "angle_summary": "One new finding staged (RAPTOR's Black-Litterman aggregation pattern) plus one noted-not-staged (crypto multi-agent topology ablation). Two of the five candidates found were already in the wiki, confirming this angle has been well-covered on prior nights."
+    },
+    {
+      "angle": "5. GitHub: trending quantitative finance repos",
+      "findings": [
+        {
+          "title": "skfolio",
+          "id": "github.com/skfolio/skfolio",
+          "relevance_score": 8,
+          "summary": "Portfolio optimization/risk management as a scikit-learn extension (fit/predict, Pipelines, GridSearchCV). HRP, NCO, risk budgeting, DRO, factor models.",
+          "staged": false,
+          "reason_not_staged": "Already in wiki/trading/tools/portfolio-optimization.md -- confirmed via grep."
+        },
+        {
+          "title": "Riskfolio-Lib",
+          "id": "github.com/dcajasn/Riskfolio-Lib",
+          "relevance_score": 6,
+          "summary": "Broader/older portfolio-optimization library, strategic asset allocation, Black-Litterman, exotic risk measures (CVaR/CDaR/EVaR/Ulcer).",
+          "staged": false,
+          "reason_not_staged": "Already in wiki/trading/tools/portfolio-optimization.md and position-sizing.md -- confirmed via grep. Its Black-Litterman module is cross-referenced in tonight's RAPTOR proposal (item 3 above) as a possible aggregation-layer backend."
+        },
+        {
+          "title": "jump-models (Statistical Jump Models)",
+          "id": "github.com/Yizhan-Oliver-Shu/jump-models",
+          "relevance_score": 9,
+          "summary": "Direct reference implementation (discrete/continuous/sparse JM) of Shu et al. 2024 (arXiv:2402.05272), sklearn-style API. 157 stars, Apache-2.0.",
+          "staged": true,
+          "proposal_file": "dream_cycle/staged/2026-08-03/1_jump_models_reference_impl_wiki.json (wiki note) + dream_cycle/staged/2026-08-03/4_h489_sjm_regime_stub.json (H489 hypothesis stub)"
+        },
+        {
+          "title": "FactorLab",
+          "id": "github.com/systamental/factorlab",
+          "relevance_score": 4,
+          "summary": "Transforms raw price/fundamental data into alpha/risk factors; originally digital-asset-focused, general-purpose now.",
+          "staged": false,
+          "reason_not_staged": "Star count/traction not confirmed, thin on documented novelty vs. existing factor construction already in the H-series pipeline."
+        },
+        {
+          "title": "TradingAgents (repo)",
+          "id": "github.com/TauricResearch/TradingAgents",
+          "relevance_score": 5,
+          "summary": "80k+ star LangGraph-orchestrated multi-agent trading-desk framework, LLM-agnostic.",
+          "staged": false,
+          "reason_not_staged": "Same paper/repo as angle 4 finding #1, already in wiki. Viral growth trajectory flagged as a hype-vs-substance risk if ever considered for direct adoption."
+        }
+      ],
+      "angle_summary": "One genuinely new, high-value finding staged (jump-models -- directly closes a gap explicitly flagged in both regime-detection.md and CLAUDE.local.md's design note). Filtered out a long tail of low-star single-contributor 'statistical-arbitrage'/'pairs-trading' boilerplate repos with no IS/OOS rigor (not individually listed -- explicitly noting the filtering here per no-silent-truncation practice)."
+    }
+  ],
+  "staged_summary": {
+    "total_proposals": 4,
+    "proposals": [
+      "1_jump_models_reference_impl_wiki.json (low risk, wiki_update, regime-detection.md)",
+      "2_earnings_call_evasion_signal_wiki.json (low risk, wiki_update, pead.md)",
+      "3_raptor_black_litterman_agent_aggregation_wiki.json (low risk, wiki_update, multi-agent-llm-trading.md)",
+      "4_h489_sjm_regime_stub.json (medium risk, new_script, run_h489_sjm_regime.py -- H489 hypothesis stub)"
+    ]
+  },
+  "cross_note": "Angle 3 (cross-sectional/factor momentum) overlaps with tonight's Phase 1 wiki expansion (sources/spatio-temporal-momentum-2023.md, arXiv:2302.10175) -- that paper and its proposed hypothesis are already fully written up in Phase 1 and not re-staged here to avoid duplication."
+}
