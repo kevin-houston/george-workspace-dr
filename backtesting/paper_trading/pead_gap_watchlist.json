@@ -1,10 +1,6 @@
 {
-  "date": "2026-08-03",
-  "candidates": [
-    "XOM",
-    "CVX",
-    "ABBV"
-  ],
+  "date": "2026-08-04",
+  "candidates": [],
   "source": "earnings_only",
   "strategy": "PEAD_GAP"
 }

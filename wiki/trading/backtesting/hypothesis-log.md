@@ -10348,3 +10348,40 @@ OOS regime distribution: SPY > 200MA 79.7% of months; VIX < 20 67.2% of months
 4. General lesson for future macro-gate work: the H362 pattern (macro gate improves a near-miss defensive/rotation strategy) does not transfer to a signal whose return source *is* elevated volatility itself. Apply regime gates only to signals whose expected edge is regime-independent or defensive in nature — check the annual-return distribution for concentration in high-vol years before attempting a gate.
 
 **Verdict**: NOT CONFIRMED. All four gated variants underperform baseline; best is Var D at OOS Sharpe 1.126, still below both the 1.5 gate and the H487-C ungated baseline (1.214). Low-volatility-anomaly family (H245/H248/H487/H488) is now exhausted at 200-stock scale via both raw signals and a macro-gate refinement — no further 200-stock-scale variant is proposed; next step for this family would require either a different universe (e.g. mid-cap, where cross-sectional vol dispersion is larger) or moving to family #2/#3 per the priority order (ETF pairs trading — already closed 2026-08-01; stock momentum — largely explored, remaining gap is a genuine ADDV-based top-200 NASDAQ universe rather than the S&P-membership-based universe used throughout H241/H245/H248/H487/H488).
+
+---
+
+## H490 — True ADDV-Based Dynamic Top-200 NASDAQ Momentum Universe (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-03
+**Source**: H488's closing note flagged the remaining gap in the stock-momentum family — every prior test (H198, H241-H243, H245, H248, H277, H336, H487, H488) used either a static 30-stock NASDAQ mega-cap list or a static ~200-stock S&P-membership-based list, never a true Average Daily Dollar Volume (ADDV) ranking recomputed monthly, which is the actual §3.1 "151 Trading Strategies" construction (Task B priority #3: "Top-200 NASDAQ stocks by ADDV. 12-1 month signal, monthly rebalance. Needs universe management.").
+**Script**: `backtesting/daily/run_h490_addv_nasdaq_momentum.py`
+**Universe**: ~230-candidate current-day NASDAQ superset spanning mega- through mid-cap tech, biotech, consumer, fintech, communications, industrials (197 tickers had usable price history; 197/230 returned data, 9 delisted/renamed since 2010, e.g. HOLX/JNPR/EXAS/ANSS since removed via M&A). Trailing 3-month ADDV computed monthly (no lookahead — uses months t-3..t-1), top 200 by ADDV re-selected every month. Var C uses a single static top-200 snapshot fixed as of 2020-12 (last IS month) instead of monthly re-ranking, isolating the value of dynamic reselection.
+**Signal**: 6-1m and 12-1m skip-month momentum, standard H241-style monthly-lagged panel
+**IS/OOS**: 2013-2020 / 2021-2026 (matches H241/H487/H488 split)
+**Gate**: OOS Sharpe > 1.174 (H198's confirmed 30-stock NASDAQ 6-1m baseline, used here as the comparison bar since this family has no standing 200-stock-scale momentum confirmation)
+
+**Results**:
+
+| Variant | Universe construction | Top-N | IS Sharpe | OOS Sharpe | OOS MaxDD | Neg Yrs | Corr(OOS,SPY) |
+|---------|------------------------|-------|-----------|------------|-----------|---------|----------------|
+| A | Dynamic ADDV top-200, 6-1m | 20 | 1.917 | **1.044** | -37.8% | 1 | -0.083 |
+| B | Dynamic ADDV top-200, 12-1m | 20 | 1.531 | 0.862 | -40.6% | 2 | -0.109 |
+| C | Static ADDV top-200 (fixed 2020-12), 6-1m | 20 | 1.917 | 0.973 | -33.1% | 1 | -0.119 |
+| D | Dynamic ADDV top-200, 6-1m (diversification diagnostic) | 40 | 1.892 | 0.928 | -36.5% | 2 | -0.085 |
+| SPY B&H | — | — | — | 0.977 | -23.9% | — | 1.000 |
+| QQQ B&H | — | — | — | 0.890 | -32.6% | — | — |
+
+Avg eligible universe size per month: ~160-162 (of the 197-name candidate pool, after requiring both trailing ADDV and forward-return data).
+
+**Key findings**:
+
+1. Dynamic monthly ADDV re-ranking (Var A) beats a one-time static ADDV snapshot (Var C) — 1.044 vs 0.973 OOS Sharpe — confirming that continuous liquidity-based reselection does add real value over picking a liquidity-informed universe once and holding it, the specific mechanism this hypothesis targeted. But the improvement (+0.071 Sharpe) is modest, not large enough to clear the gate on its own.
+2. 6-1m (Var A, 1.044) clearly beats 12-1m (Var B, 0.862) on this universe, consistent with every prior momentum family result in this log (H198, H241, H272, H277) — skip-month medium-horizon momentum remains the better lookback choice.
+3. Var D (widening from top-20 to top-40, i.e. decile→quintile) made results *worse*, not better (0.928 vs Var A's 1.044) — ruling out "over-concentration in 20 volatile tech names" as the cause of the gate miss. The strategy's problem is not idiosyncratic single-name risk; diversifying within the same signal doesn't help.
+4. All variants show the same signature: a sharply negative or flat 2021 (-14.6% to -8.1%), a rough 2022, then very strong 2023-2026 (+30% to +70% annually) — a growth/AI-momentum-concentrated return pattern. MaxDD (-33% to -41%) is materially worse than SPY's -23.9% throughout, and this asymmetric drawdown profile (not raw CAGR — cumulative OOS return of 4.15x for Var A comfortably beats SPY's 2.13x) is what keeps Sharpe below gate despite strong absolute returns.
+5. Corr(OOS, SPY) is slightly negative (-0.08 to -0.12) across all variants — this reads as a genuine artifact of return concentration in a handful of extreme divergent months (2021 down while SPY was +28%; 2023-2026 up sharply in months SPY was comparatively flat) on a 66-month sample, not a stable negative-beta relationship. Flagged for anyone reusing this correlation figure — do not treat it as a durable diversification property without a longer sample.
+
+**Verdict**: NOT CONFIRMED. Best variant (A, dynamic ADDV top-200, 6-1m, top-20) OOS Sharpe 1.044 < gate 1.174. This closes the "genuine ADDV-based dynamic universe" gap flagged at the end of H488/H488's own closing note — dynamic reselection is real and adds value over a static snapshot, but the signal itself (skip-month cross-sectional momentum on a liquidity-filtered NASDAQ-heavy universe) does not clear the bar, similarly to every other 200-stock-scale momentum/factor variant tested this quarter (H241, H245, H248, H487, H488). High absolute cumulative return (4.15x OOS) but poor risk-adjusted return (Sharpe, MaxDD) is the recurring theme — this universe/signal combination is not a Sharpe improvement over SPY buy-and-hold despite handily beating it on raw return, and would not be recommended for production blending given both the gate miss and the current-day-listing survivorship bias in the 230-candidate superset (a name that delisted/was acquired before 2026 and would have ranked top-200 by ADDV in, say, 2015 is absent from the candidate pool entirely — same caveat class as H272/H277/H336). Stock Momentum family (§3.1, priority #3) is now explored at both the static-S&P (H241/H245/H248/H487/H488) and dynamic-ADDV-NASDAQ (H490) construction levels; no further 200-stock-scale variant is proposed without a genuine survivorship-bias-free historical constituent dataset.
+

@@ -1,14 +1,6 @@
 {
-  "date": "2026-08-03",
+  "date": "2026-08-04",
   "candidates": [],
-  "scores": {
-    "CVX": {
-      "score": -0.0203,
-      "surprise": -0.0921
-    },
-    "ABBV": {
-      "score": -0.035,
-      "surprise": -0.2052
-    }
-  }
+  "scores": {},
+  "reason": "no earnings"
 }

@@ -1,0 +1,65 @@
+[
+  {
+    "date": "2026-08-03",
+    "symbol": "EEM",
+    "action": "buy",
+    "qty": 178.8123,
+    "est_price": 63.955,
+    "est_value": 11435.94,
+    "order_id": "d5e194bd-5567-4e74-a0d3-5ca027ac7f41"
+  },
+  {
+    "date": "2026-08-03",
+    "symbol": "EFA",
+    "action": "buy",
+    "qty": 107.9168,
+    "est_price": 105.97,
+    "est_value": 11435.94,
+    "order_id": "cb488970-a094-4f06-acbd-745767ea496e"
+  },
+  {
+    "date": "2026-08-03",
+    "symbol": "HYG",
+    "action": "buy",
+    "qty": 137.7169,
+    "est_price": 79.265,
+    "est_value": 10916.13,
+    "order_id": "b19c1a10-4eee-46ed-a99e-4101a7796285"
+  },
+  {
+    "date": "2026-08-03",
+    "symbol": "SHY",
+    "action": "buy",
+    "qty": 133.487,
+    "est_price": 81.7767,
+    "est_value": 10916.13,
+    "order_id": "a9ca26a0-d51b-4a18-8b14-673f29c37281"
+  },
+  {
+    "date": "2026-08-03",
+    "symbol": "XLB",
+    "action": "buy",
+    "qty": 184.4408,
+    "est_price": 50.73,
+    "est_value": 9356.68,
+    "order_id": "36c696f1-3ef7-488e-aab2-3a34a04d471d"
+  },
+  {
+    "date": "2026-08-03",
+    "symbol": "XLF",
+    "action": "buy",
+    "qty": 163.2082,
+    "est_price": 57.3297,
+    "est_value": 9356.68,
+    "order_id": "224f619b-cbeb-499b-88ae-ec5986c75ff6"
+  },
+  {
+    "date": "2026-08-03",
+    "symbol": "XLV",
+    "action": "buy",
+    "qty": 57.7163,
+    "est_price": 162.115,
+    "est_value": 9356.68,
+    "order_id": "bed1cb2f-ba50-4f2e-9890-ac60b9ed4690"
+  }
+]

@@ -402,3 +402,39 @@
 [2026-07-31 09:45:56]   QCOM: gap -1.8% < 3% — skip
 [2026-07-31 09:45:56] No new positions entered today.
 [2026-07-31 09:45:57] Open pass complete.
+[2026-08-03 09:32:18] =======================================================
+[2026-08-03 09:32:18] PEAD-GAP open pass starting
+[2026-08-03 09:32:18] Earnings candidates: ['XOM', 'CVX', 'ABBV']
+[2026-08-03 09:32:18] PEAD_GAP strategy equity: $5,000
+[2026-08-03 09:32:24]   XOM: prior_close=155.44 current=155.00 gap=-0.3%
+[2026-08-03 09:32:24]   XOM: gap -0.3% < 3% — skip
+[2026-08-03 09:32:25]   CVX: prior_close=196.83 current=194.40 gap=-1.2%
+[2026-08-03 09:32:25]   CVX: gap -1.2% < 3% — skip
+[2026-08-03 09:32:26]   ABBV: prior_close=250.94 current=246.02 gap=-2.0%
+[2026-08-03 09:32:26]   ABBV: gap -2.0% < 3% — skip
+[2026-08-03 09:32:26] No new positions entered today.
+[2026-08-03 09:32:26] Open pass complete.
+[2026-08-03 09:32:43] =======================================================
+[2026-08-03 09:32:43] PEAD-GAP open pass starting
+[2026-08-03 09:32:43] Earnings candidates: ['XOM', 'CVX', 'ABBV']
+[2026-08-03 09:32:43] PEAD_GAP strategy equity: $5,000
+[2026-08-03 09:32:47]   XOM: prior_close=155.44 current=155.02 gap=-0.3%
+[2026-08-03 09:32:47]   XOM: gap -0.3% < 3% — skip
+[2026-08-03 09:32:47]   CVX: prior_close=196.83 current=194.46 gap=-1.2%
+[2026-08-03 09:32:47]   CVX: gap -1.2% < 3% — skip
+[2026-08-03 09:32:48]   ABBV: prior_close=250.94 current=246.11 gap=-1.9%
+[2026-08-03 09:32:48]   ABBV: gap -1.9% < 3% — skip
+[2026-08-03 09:32:48] No new positions entered today.
+[2026-08-03 09:32:49] Open pass complete.
+[2026-08-03 09:45:43] =======================================================
+[2026-08-03 09:45:43] PEAD-GAP open pass starting
+[2026-08-03 09:45:43] Earnings candidates: ['XOM', 'CVX', 'ABBV']
+[2026-08-03 09:45:43] PEAD_GAP strategy equity: $5,000
+[2026-08-03 09:45:46]   XOM: prior_close=155.44 current=154.63 gap=-0.5%
+[2026-08-03 09:45:46]   XOM: gap -0.5% < 3% — skip
+[2026-08-03 09:45:47]   CVX: prior_close=196.83 current=194.20 gap=-1.3%
+[2026-08-03 09:45:47]   CVX: gap -1.3% < 3% — skip
+[2026-08-03 09:45:48]   ABBV: prior_close=250.94 current=245.12 gap=-2.3%
+[2026-08-03 09:45:48]   ABBV: gap -2.3% < 3% — skip
+[2026-08-03 09:45:48] No new positions entered today.
+[2026-08-03 09:45:48] Open pass complete.

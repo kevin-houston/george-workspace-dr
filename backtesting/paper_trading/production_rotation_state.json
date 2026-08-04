@@ -1,0 +1,162 @@
+{
+  "last_rebalance": "2026-08-03",
+  "holdings": {
+    "H041a": {
+      "holdings": [
+        "EFA",
+        "EEM"
+      ],
+      "alloc_usd": 22871.88,
+      "per_pos": 11435.94,
+      "detail": {
+        "SPY": {
+          "score": 7.0,
+          "selected": false,
+          "price": 754.55
+        },
+        "QQQ": {
+          "score": 5.0,
+          "selected": false,
+          "price": 694.94
+        },
+        "TLT": {
+          "score": 7.0,
+          "selected": false,
+          "price": 82.335
+        },
+        "GLD": {
+          "score": 8.0,
+          "selected": false,
+          "price": 370.21
+        },
+        "IEF": {
+          "score": 9.0,
+          "selected": false,
+          "price": 92.83
+        },
+        "EFA": {
+          "score": 11.0,
+          "selected": true,
+          "price": 105.97
+        },
+        "EEM": {
+          "score": 9.0,
+          "selected": true,
+          "price": 63.95
+        }
+      }
+    },
+    "H026": {
+      "holdings": [
+        "XLV",
+        "XLB",
+        "XLF"
+      ],
+      "alloc_usd": 28070.04,
+      "per_pos": 9356.68,
+      "detail": {
+        "XLK": {
+          "score": 11.0,
+          "selected": false,
+          "price": 176.51
+        },
+        "XLE": {
+          "score": 13.0,
+          "selected": false,
+          "price": 58.98
+        },
+        "XLF": {
+          "score": 15.0,
+          "selected": true,
+          "price": 57.3297
+        },
+        "XLV": {
+          "score": 17.0,
+          "selected": true,
+          "price": 162.08
+        },
+        "XLI": {
+          "score": 11.0,
+          "selected": false,
+          "price": 182.5
+        },
+        "XLB": {
+          "score": 16.0,
+          "selected": true,
+          "price": 50.74
+        },
+        "XLU": {
+          "score": 7.0,
+          "selected": false,
+          "price": 44.51
+        },
+        "XLRE": {
+          "score": 13.0,
+          "selected": false,
+          "price": 45.18
+        },
+        "XLY": {
+          "score": 8.0,
+          "selected": false,
+          "price": 118.28
+        },
+        "XLP": {
+          "score": 9.0,
+          "selected": false,
+          "price": 85.325
+        },
+        "XLC": {
+          "score": 12.0,
+          "selected": false,
+          "price": 110.84
+        }
+      }
+    },
+    "H045": {
+      "holdings": [
+        "HYG",
+        "SHY"
+      ],
+      "alloc_usd": 21832.25,
+      "per_pos": 10916.13,
+      "detail": {
+        "SHY": {
+          "score": 13.0,
+          "selected": true,
+          "price": 81.7767
+        },
+        "IEI": {
+          "score": 9.0,
+          "selected": false,
+          "price": 116.23
+        },
+        "IEF": {
+          "score": 4.0,
+          "selected": false,
+          "price": 92.83
+        },
+        "TLT": {
+          "score": 2.0,
+          "selected": false,
+          "price": 82.335
+        },
+        "TIP": {
+          "score": 9.0,
+          "selected": false,
+          "price": 106.935
+        },
+        "HYG": {
+          "score": 13.0,
+          "selected": true,
+          "price": 79.265
+        },
+        "LQD": {
+          "score": 6.0,
+          "selected": false,
+          "price": 106.145
+        }
+      }
+    }
+  },
+  "equity_at_rebalance": 103963.11
+}
