@@ -2,6 +2,7 @@
 title: FinBench — Calibration and Uncertainty Benchmarking for Agentic Financial Forecasting
 tags: ai-industry, llm-benchmarks, calibration, uncertainty, financial-forecasting, kelly, proper-scoring
 added: 2026-07-27
+updated: 2026-08-04
 category: AI Industry
 ---
 
@@ -110,3 +111,4 @@ Both are needed for a complete evaluation framework. MacroLens tells you *if* th
 - [AI Model Benchmarks on Prediction Markets](../trading/prediction-markets/ai-model-benchmarks.md) — Kalshi/Polymarket calibration context
 - [LLM Evaluation & Benchmarking for Finance 2026](llm-finance-benchmarks-2026.md) — broader benchmark landscape
 - [Superforecasting Methods](../trading/prediction-markets/superforecasting-methods.md) — isotonic recalibration methods
+- [QuantSightBench — Prediction-Interval Calibration for LLM Numeric Forecasting](quantsightbench-interval-calibration-2026.md) — complementary finding for continuous-quantity forecasts (prediction intervals) rather than categorical/classification confidence ← new 2026-08-04

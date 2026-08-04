@@ -1,7 +1,7 @@
 ---
-updated: 2026-08-02
+updated: 2026-08-04
 sources_indexed: 4
-pages: 283
+pages: 284
 ---
 
 # Wiki Index
@@ -219,6 +219,7 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-08-04](trading/research-log/2026-08-04.md) — wiki: ai-industry/quantsightbench-interval-calibration-2026.md new (arXiv:2604.15859 LLM numeric prediction-interval calibration, complements finbench-calibration-2026.md); dream cycle: 3 proposals staged (execution-assumptions checklist, QuantSightBench note, agent-framework landscape refresh) ← new 2026-08-04
 - [Research Log 2026-08-02](trading/research-log/2026-08-02.md) — wiki: paper-trading/dynamic-strategy-allocation.md new (OPS `universal-portfolios` + multi-armed bandit traditions for adaptive sleeve reweighting) ← new 2026-08-02
 - [Research Log 2026-08-01](trading/research-log/2026-08-01.md) — wiki: sources/pead-llm-architecture-comparison-2025.md new (EMNLP-2025 FinNLP; BART/FinBERT/LLaMA-3.2-3B on 10-Q MD&A; 3-day-return text-injection technique) ← new 2026-08-01
 - [Research Log 2026-07-31](trading/research-log/2026-07-31.md) — wiki: sources/dynamic-inclusion-bounded-tilts-2026.md new (arXiv:2601.05428; bounded multiplicative tilt construction mechanism, candidate H478 follow-up); fixed index gap for kearns-shi-2025-strategic-trading.md ← new 2026-07-31
@@ -337,7 +338,8 @@ When answering a query:
 - [OpenFinGym — Verifiable Multi-Task Quant Agent Evaluation](ai-industry/openfinGym-2026.md) — arXiv:2606.26350; Edinburgh/UCL/Oxford/Turing; containerised runtime + host-side verifier prevents train-test leakage; 4 task domains (forecasting/market-gen/trading/fraud); automated arXiv paper → executable task pipeline; SFT+RL integration; relevant for H274 PEAD multi-agent + H318 meta-agent ← new 2026-07-15
 - [Agentic Trading Survey 2026](ai-industry/agentic-trading-survey-2026.md) — arXiv:2605.19337; 77 LLM trading agent papers; only 19/77 satisfy closed-loop evaluation; reproducibility crisis (0/19 fully reproducible); transaction costs absent in 63%; memory mechanisms show most consistent improvement; taxonomy: Pattern A/B/C/D agent architectures; MRS reporting standard; validates LLM Alpha Validation Checklist ← new 2026-07-16
 - [The Base-Rate Trap in LLM Trading Signals](ai-industry/base-rate-trap-llm-trading-2026.md) — arXiv:2607.12248 (Cheung Jul 2026): LoRA-adapted TimesFM 80% accuracy = naive "always-up" base rate; honest benchmark requires 5 baselines + McNemar + DM test + BH FDR; arXiv:2607.05291 (Brini): vol foundation models barely beat Log-HAR; synthesis with KTD-Fin/Agentic Survey; checklist for H381/H382 LLM alpha proposals ← new 2026-07-19
-- [FinBench — Calibration and Uncertainty Benchmarking for Financial LLMs](ai-industry/finbench-calibration-2026.md) — arXiv:2607.16229 (Ghosh & Devarakonda, Jul 2026); confidence-competence gap: overconfident-but-slightly-better-than-chance LLM → negative Kelly growth; proper scoring rules (Brier/log-loss) under strict time-gating; implications for H174 FinBERT score calibration + H185 Kalshi sizing; H426 FinDPO calibration path ← new 2026-07-27
+- [FinBench — Calibration and Uncertainty Benchmarking for Financial LLMs](ai-industry/finbench-calibration-2026.md) — arXiv:2607.16229 (Ghosh & Devarakonda, Jul 2026); confidence-competence gap: overconfident-but-slightly-better-than-chance LLM → negative Kelly growth; proper scoring rules (Brier/log-loss) under strict time-gating; implications for H174 FinBERT score calibration + H185 Kalshi sizing; H426 FinDPO calibration path ← updated 2026-08-04
+- [QuantSightBench — Prediction-Interval Calibration for LLM Numeric Forecasting](ai-industry/quantsightbench-interval-calibration-2026.md) — arXiv:2604.15859 (Qin & Andriushchenko, Apr 2026); 11 frontier/open-weight models systematically overconfident on numeric prediction intervals (best 79.1% coverage vs 90% target); coverage degrades sharply at scale (<65% at 100K+ magnitude); complements FinBench's categorical-calibration finding for continuous-quantity forecasts; no George hypothesis yet uses LLM numeric intervals — logged as a prior for future H279-H281-family proposals ← new 2026-08-04
 
 ---
 
