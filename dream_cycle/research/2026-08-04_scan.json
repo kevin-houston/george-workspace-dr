@@ -1,0 +1,52 @@
+{
+  "date": "2026-08-04",
+  "note": "Retrospective scan summary. The Phase 1 wiki expansion and Phase 2 arXiv/web scan for this task both completed and were committed (f9e8723 for Phase 1; dream_cycle/staged/2026-08-04/*.json for Phase 2) prior to this file being written -- a concurrent/duplicate trigger of the same 'Nightly trading research session' task ran and finished the actual research work, but the scan-summary JSON deliverable was never written before that session's context ended. This file reconstructs the summary from the completed research-log entry (wiki/trading/research-log/2026-08-04.md) and the 3 staged proposal JSONs, without re-running the search, per task-registry guidance against duplicate scans.",
+  "scope": "Searched arXiv/web across the trading wiki's core themes (momentum, PEAD, LLM trading agents, regime detection, portfolio construction), explicitly avoiding jump models, earnings-call NLP, and Black-Litterman aggregation since those were already covered as of the 2026-08-03 scan.",
+  "findings": [
+    {
+      "title": "Beyond Agent Architecture: Execution Assumptions and Reproducibility in LLM-Based Trading Systems",
+      "id": "arXiv:2606.08285",
+      "authors": "Yao & Zheng",
+      "submitted": "2026-06-06",
+      "relevance_score": 8,
+      "summary": "Direct one-month follow-on to the reproducibility-crisis survey (arXiv:2605.19337) already in the wiki. Widens the audited sample from 19 to 30 studies and converts the diagnosis into an explicit 7-dimension coded evidence matrix (data provenance, temporal split discipline, execution timing, turnover treatment, transaction-cost modeling, point-in-time controls, universe/artifact release), plus a 10-equity worked example quantifying how much friction/timing choices alone move reported performance.",
+      "staged": true,
+      "proposal_file": "dream_cycle/staged/2026-08-04/1_execution_assumptions_reproducibility_checklist_wiki.json",
+      "target": "wiki/ai-industry/agentic-trading-survey-2026.md",
+      "risk_level": "low"
+    },
+    {
+      "title": "QuantSightBench",
+      "id": "arXiv:2604.15859",
+      "authors": "Qin & Andriushchenko (ELLIS/Max Planck)",
+      "submitted": "2026-04",
+      "relevance_score": 9,
+      "summary": "Tests whether LLMs produce well-calibrated prediction intervals for continuous numeric quantities (vs. FinBench's categorical/classification confidence). 11 frontier/open-weight models; best (Gemini 3.1 Pro) hit only 79.1% coverage vs. 90% target; coverage falls below 65% at 100K+ magnitude. No George hypothesis yet has an LLM output a numeric estimate with an uncertainty band -- logged as a calibration prior for any future H279/H280/H281-family proposal.",
+      "staged": true,
+      "proposal_file": "dream_cycle/staged/2026-08-04/2_quantsightbench_prediction_interval_calibration_wiki.json",
+      "target": "wiki/ai-industry/finbench-calibration-2026.md",
+      "note": "Also directly drove a full new wiki page created during Phase 1 (ai-industry/quantsightbench-interval-calibration-2026.md, committed in f9e8723), since the finding warranted a dedicated page rather than just an in-page note. The staged proposal is the companion cross-reference note.",
+      "risk_level": "low"
+    },
+    {
+      "title": "Agent framework ecosystem update (LangGraph production-adoption lead; CrewAI token-overhead benchmark)",
+      "id": "web (langchain.com/resources/ai-agent-frameworks + 2026 industry benchmarking reports)",
+      "relevance_score": 6,
+      "summary": "Refreshes agent-frameworks-2026.md (unchanged since 2026-05-29). As of March 2026, LangGraph holds an estimated 40% production-deployment lead over competing frameworks and surpassed CrewAI in GitHub stars. CrewAI 1.14 (May-June 2026) shipped pluggable backends; an independently reported benchmark found CrewAI crews carry ~18% higher token overhead than an equivalent LangGraph implementation on a comparable 3-agent task.",
+      "staged": true,
+      "proposal_file": "dream_cycle/staged/2026-08-04/3_agent_framework_landscape_2026_update_wiki.json",
+      "target": "wiki/ai-industry/agent-frameworks-2026.md",
+      "risk_level": "low"
+    }
+  ],
+  "staged_summary": {
+    "total_proposals": 3,
+    "proposals": [
+      "1_execution_assumptions_reproducibility_checklist_wiki.json (low risk, wiki_update, agentic-trading-survey-2026.md)",
+      "2_quantsightbench_prediction_interval_calibration_wiki.json (low risk, wiki_update, finbench-calibration-2026.md)",
+      "3_agent_framework_landscape_2026_update_wiki.json (low risk, wiki_update, agent-frameworks-2026.md)"
+    ],
+    "all_apply_status": "pending, awaiting 4 AM build phase"
+  },
+  "cross_note": "No new PEAD, regime-detection, or portfolio-construction angle cleared the staging bar this cycle beyond what was already logged or explicitly excluded by instruction (jump models, earnings-call NLP, Black-Litterman aggregation -- all covered 2026-08-03). Scan concentrated on LLM-agent-evaluation and calibration angles, which is also why the Phase 1 wiki expansion (AI Industry) and Phase 2 staged proposals ended up thematically aligned."
+}
