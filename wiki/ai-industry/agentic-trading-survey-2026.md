@@ -200,3 +200,30 @@ Papers lacking any MRS element should be treated as architecture proposals, not 
 - [AI-Driven Alpha Factor Discovery](../trading/algorithms/auto-alpha-discovery.md) — LLM alpha mining context; different from decision-making agents but overlapping architecture
 - [OpenFinGym](openfinGym-2026.md) — independent verifiable evaluation framework; would solve many of this survey's reproducibility issues if adopted as standard
 - [Event-Driven Strategies](../trading/algorithms/event-driven.md) — H174/H274 PEAD context; Pattern A/C agents most relevant
+
+---
+
+## Research Lead: Execution-Assumptions Audit Checklist (Yao & Zheng, arXiv:2606.08285, flagged 2026-08-04)
+
+"Beyond Agent Architecture: Execution Assumptions and Reproducibility in LLM-Based Trading Systems" (Junyi Yao & Zihao Zheng, submitted 2026-06-06, one month after the Agentic Trading survey above) is a direct follow-on to the reproducibility crisis this page already documents. Where the May 2026 survey diagnoses the problem across 19 Tier-1 papers (0/19 fully reproducible, only 7/19 report transaction costs), this paper widens the sample to **30 studies** and converts the diagnosis into an explicit, reusable **7-dimension coded evidence matrix**:
+
+1. Data provenance
+2. Temporal split discipline
+3. Execution timing choices (e.g. signal-at-close vs. fill-at-next-open)
+4. Turnover treatment
+5. Transaction-cost modeling
+6. Point-in-time controls / held-out evaluation practices
+7. Universe definition and artifact release
+
+**Headline finding**: "architecture reporting is generally clearer than the evaluation assumptions needed to judge whether a trading result is economically interpretable or reproducible" — i.e. papers spend paragraphs on agent design (which sub-agent does what) and a footnote on execution mechanics (which is what actually determines whether the backtested return is real). The paper includes a **10-equity worked example** demonstrating that friction and timing-assumption choices alone can materially change reported performance, without touching the strategy logic at all.
+
+**Why this matters for George's pipeline**: this maps almost one-to-one onto the existing [Shared Strategy Evaluation Checklist](../trading/shared-eval-checklist.md) (7-point gate: look-ahead guard, NLP timestamp, cost model, soft OOS, regime coverage, survivorship bias, after-tax flag) and the [LLM Alpha Validation Checklist](../trading/algorithms/llm-alpha-validation.md) (6-test gate: look-ahead audit, cost-inclusive net-Sharpe, OOS regime coverage, reproducibility/source check, cross-market transfer, paper-trading gate). The overlap is not coincidental — both of George's existing gates were built to catch exactly the failure modes this paper formalizes across the wider literature. Worth a light cross-check: does George's own dimension-6 (point-in-time controls) get exercised as rigorously as this paper's coding scheme implies it should, given the H256 look-ahead-bias incident already on record (see [Look-Ahead-Freedom as Temporal Non-Interference](../trading/backtesting/lookahead-formal-verification.md))?
+
+**Not staged as a new hypothesis** — this is a methodology/reporting-standards paper, not a new alpha signal. Logged as a reference upgrade to the existing evaluation-checklist pages.
+
+## See Also
+
+- [Agentic Trading Survey 2026](#) (this page, above) — the May 2026 survey this paper directly follows up on
+- [LLM Alpha Validation Checklist](../trading/algorithms/llm-alpha-validation.md)
+- [Shared Strategy Evaluation Checklist](../trading/shared-eval-checklist.md)
+- [Look-Ahead-Freedom as Temporal Non-Interference](../trading/backtesting/lookahead-formal-verification.md)

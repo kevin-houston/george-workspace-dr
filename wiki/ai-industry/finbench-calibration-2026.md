@@ -112,3 +112,27 @@ Both are needed for a complete evaluation framework. MacroLens tells you *if* th
 - [LLM Evaluation & Benchmarking for Finance 2026](llm-finance-benchmarks-2026.md) — broader benchmark landscape
 - [Superforecasting Methods](../trading/prediction-markets/superforecasting-methods.md) — isotonic recalibration methods
 - [QuantSightBench — Prediction-Interval Calibration for LLM Numeric Forecasting](quantsightbench-interval-calibration-2026.md) — complementary finding for continuous-quantity forecasts (prediction intervals) rather than categorical/classification confidence ← new 2026-08-04
+
+---
+
+## Research Lead: QuantSightBench — Prediction-Interval Calibration for Numeric Forecasts (Qin & Andriushchenko, arXiv:2604.15859, flagged 2026-08-04)
+
+The FinBench finding above (confidence-competence gap, negative Kelly growth from overconfident-but-slightly-better-than-chance LLM outputs) is about **categorical/classification** confidence. QuantSightBench (Jeremy Qin & Maksym Andriushchenko, ELLIS Institute Tübingen / Max Planck Institute / Tübingen AI Center, submitted 2026-04, arXiv:2604.15859) tests the complementary case: can LLMs produce well-calibrated **prediction intervals for continuous numeric quantities**? 1,000 forecasting questions across 8 domains (business/finance, economics, public health, demographics, sports, science), evaluated under three settings — zero-shot, background-context prompt, and agentic (retrieval-augmented).
+
+**Three evaluation axes**: (1) Calibration/Coverage — does the stated X% interval actually contain the true value X% of the time; (2) Sharpness (Mean Log Interval Score) — narrower is better *if* coverage holds; (3) Scale Awareness — does performance hold across magnitude ranges (fractional to 100K+).
+
+**Headline result — systematic overconfidence, even in frontier models**: 11 models tested (GPT-5.4, GPT-5.1, Claude Opus 4.5, Claude Sonnet 4.5, Gemini 3.1 Pro, Grok 4, DeepSeek v3.2, GLM-4.7, Kimi). None hit the target 90% coverage at the 90% confidence level. Best performer Gemini 3.1 Pro reached only 79.1% coverage; Grok 4 76.4%; GPT-5.4 75.3% — all 10+ points short of nominal.
+
+**Scale degradation is the sharpest finding**: in the 1–10 magnitude range, most models cleared 80% coverage; by the 100K+ range, most models fell **below 65% coverage**. Intervals get systematically too narrow exactly where the numbers get big — i.e. exactly where a trading application (large notional price targets, large-cap market-cap estimates, aggregate volume/flow forecasts) would be using them.
+
+**Agentic/retrieval nuance**: open-weight models (DeepSeek, GLM, Kimi) showed larger calibration improvement from retrieval access than frontier models did — suggesting their gap is more about information access than reasoning quality, while frontier models' overconfidence is closer to an intrinsic calibration defect that more context doesn't fix as cleanly.
+
+**Why this matters for George**: no hypothesis in the H-series has yet asked an LLM to directly output a numeric estimate with an uncertainty band (as opposed to a classification score like FinBERT's sentiment, or a binary/discrete signal). If any future proposal in the H279/H280/H281 queue (or a new one) leans on an LLM to produce, say, an expected-EPS-surprise magnitude or a volatility-forecast interval rather than a bounded [0,1] score, this paper is the first citation to check against — and its scale-degradation finding specifically warns against trusting LLM-generated intervals on large-magnitude numeric targets without independent calibration correction (e.g. conformal prediction wrapping, which neither this paper nor finbench-calibration-2026.md tests but which is the standard fix for exactly this failure mode).
+
+**Not staged as a new hypothesis** — this is a capability-limitation finding relevant to future LLM-numeric-forecast proposals, not a signal to backtest today. Logged so any future numeric-interval LLM proposal starts from 'assume ~65-80% actual coverage on stated 90% intervals, worse at large magnitude' rather than discovering it the hard way.
+
+## See Also
+
+- [FinBench — Calibration and Uncertainty Benchmarking for Financial LLMs](#) (this page, above) — categorical/classification calibration counterpart
+- [LLM Alpha Validation Checklist](../trading/algorithms/llm-alpha-validation.md)
+- [The Base-Rate Trap in LLM Trading Signals](base-rate-trap-llm-trading-2026.md) — related honest-benchmark discipline for LLM forecasting claims

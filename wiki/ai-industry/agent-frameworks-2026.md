@@ -111,3 +111,20 @@ The NanoClaw platform handles agent lifecycle (scheduling, memory, messaging) so
 - [LLM Evaluation & Benchmarking for Finance 2026](llm-finance-benchmarks-2026.md) — CLQT, BacktestBench, PortBench; when to use LLMs vs deterministic rules in trading pipelines
 - [OpenAlice](../tools/openalice.md) — full-lifecycle AI trading agent built on similar agentic patterns
 - [LiveKit](../trading/tools/livekit.md) — real-time agent communication layer
+
+---
+
+## Update: Production Adoption and Cost Data (2026-08-04)
+
+Two concrete data points refresh the framework comparison above, current as of early-to-mid 2026 industry reporting (this page was last updated 2026-05-29):
+
+**LangGraph's production lead is now quantified.** As of March 2026, LangGraph holds an estimated 40% edge in production deployments over competing frameworks, and has surpassed CrewAI in GitHub stars — driven by enterprise adoption of its graph-based architecture, which maps cleanly onto requirements like audit trails and rollback points that regulated/enterprise deployments need. This sharpens (without changing) the existing recommendation above: LangGraph for production-grade stateful workflows was already the framework deep-dive's conclusion; this adds a market-adoption number behind it.
+
+**CrewAI has a measured token-overhead cost.** CrewAI 1.14 (May–June 2026) shipped pluggable backends. Independently reported 2026 benchmarking found a 3-agent CrewAI crew handling ticket triage/resolution required **~18% more tokens** than a comparable LangGraph implementation of the same task. This is the first concrete runtime-cost comparison available for this page — worth noting for any future George sub-agent orchestration decision where token cost is a first-order constraint (e.g. a scheduled multi-agent task run via `create_agent` or the `Agent` tool, where cost scales with call volume).
+
+**Practical takeaway for George's stack**: unchanged from the existing recommendation — NanoClaw already handles agent lifecycle, so LangGraph/CrewAI would only matter for sub-agent orchestration *within* a task (e.g. a multi-step backtest pipeline, or an H274-style PEAD multi-agent debate). The new data suggests that if such orchestration is ever built, LangGraph's now-larger production track record and CrewAI's now-measured ~18% token tax are both worth weighing explicitly rather than picking on architecture-pattern fit alone.
+
+## See Also (updated)
+
+- [AI Model Landscape 2026](model-landscape-2026.md)
+- [Multi-Agent LLM Trading](../trading/algorithms/multi-agent-llm-trading.md) — TradingAgents/HedgeAgents architectures that would sit atop a framework choice like this
