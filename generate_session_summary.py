@@ -340,19 +340,22 @@ def ensure_deps():
         file_stub.chmod(0o755)
 
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+
+
 def ensure_skill():
-    skill_path = Path.home() / ".agents/skills/here-now"
+    skill_path = SCRIPT_DIR / ".agents/skills/here-now"
     if not skill_path.exists():
         subprocess.run(
             "npx skills add heredotnow/skill@here-now -y -g",
-            shell=True, capture_output=True
+            shell=True, capture_output=True, cwd=SCRIPT_DIR
         )
 
 
 def publish(html_path: Path):
     ensure_deps()
     ensure_skill()
-    skill_publish = Path.home() / ".agents/skills/here-now/scripts/publish.sh"
+    skill_publish = SCRIPT_DIR / ".agents/skills/here-now/scripts/publish.sh"
     env_path = "PATH=/tmp:" + __import__("os").environ.get("PATH", "/usr/bin")
     result = subprocess.run(
         f'{env_path} bash {skill_publish} {html_path.parent}',
