@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-26
+updated: 2026-08-04
 ---
 
 # Disaster Recovery Overview
@@ -44,9 +44,44 @@ If restoring without git (e.g. full system loss), paste this into the first mess
 >
 > Check `wiki/dr/diary.md` for session history and `wiki/dr/runbook-2026.md` for current restore commands.
 
+## Theoretical Grounding: The Always-On Agents Framework (Ding et al., arXiv:2606.30306, added 2026-08-04)
+
+"Always-On Agents: A Survey of Persistent Memory, State, and Governance in LLM Agents" (Tianyu Ding, Aditya Nannapaneni, Bingfan Liu, Ling Zhang; submitted 2026-06-29) reviews 435 works on LLM agent systems where "future behavior depends on durable state accumulated across earlier interactions" — retrievable memories, task records, permissions, credentials, audit trails, externally committed effects. This is George's own architecture, described from the outside.
+
+### Six diagnostic axes
+
+The paper's core contribution is a framework for classifying any piece of persistent agent state along six axes:
+
+1. **Authority** — who/what can write or invalidate this state?
+2. **Scope** — how broadly does this state apply (single session, all sessions, cross-agent)?
+3. **Mutability** — can it change, and under what write-conflict rules?
+4. **Provenance** — can we trace where this state came from and verify it?
+5. **Recoverability** — can it be reconstructed or rolled back after loss/corruption?
+6. **Actionability** — does this state directly drive future decisions, or is it inert record-keeping?
+
+### Mapped onto George's DR layers
+
+| George's state layer | Authority | Scope | Recoverability (current) |
+|---|---|---|---|
+| `CLAUDE.local.md` / memory | Kevin edits, George reads | Cross-session | Git-backed, single source of truth |
+| `wiki/` knowledge base | George writes, Kevin can edit | Cross-session, cross-query | Git-backed; index.md + log.md as internal consistency check |
+| `dream_cycle/staged/` proposals | George writes (scan), George applies (build phase) | Time-boxed (date-scoped folders) | Git-backed; `apply_status` field tracks lifecycle explicitly — this is unusually good provenance/mutability discipline by the paper's own standard |
+| Scheduled tasks (`ncl tasks`) | NanoClaw infra | Cross-session | **Not git-backed** — explicitly flagged as "Managed by NanoClaw" in the table above; this is the weakest recoverability link per the paper's framework, since it's the one state layer this DR section cannot independently reconstruct |
+| Paper trading state (`strategy_accounts.json`, positions) | George writes | Cross-session | Git-backed but **high mutation frequency** — the paper's "mutability" axis flags this as the layer most likely to have write races (already documented empirically in `.local-fragments/task-registry.md`'s PEAD-GAP duplicate-open-pass and dream-cycle git-add race gotchas) |
+
+### Literature-gap finding, applied
+
+The survey's headline finding — that agent research "concentrates more heavily on accumulating and retrieving state than on governing, recovering, or relinquishing it" — is a good diagnostic prompt for this DR section specifically. George's DR pages document restore *procedure* well (git clone, re-seed credentials, verify wiki integrity) but have no page addressing **relinquishing** state — e.g. is there a policy for when a stale hypothesis stub, an abandoned tool note, or a superseded strategy log should be pruned rather than accumulated indefinitely? The wiki has grown to ~284 pages with no pruning mechanism; per this paper's framework that's an unaddressed axis, not just a scale curiosity.
+
+### Always-On Evaluation Protocol (AOEP-v0)
+
+The paper proposes grading agent systems on state-mutation and recovery obligations rather than answer quality alone. A lightweight version of this for George: next time [runbook-2026.md](runbook-2026.md) is refreshed, consider adding a row per state layer scoring it on the six axes above — turns the DR section from a procedure list into a structured self-audit, consistent with how the trading side already runs the Shared Strategy Evaluation Checklist and LLM Alpha Validation Checklist as structured gates rather than prose.
+
 ## Related pages
 
 - [Git Backup Setup](git-backup.md)
 - [Session Diary](diary.md)
 - [Operational Runbook 2026](runbook-2026.md) — restore commands, subsystem validation, current-state snapshot
 - [Strategy Reconstruction Guide](strategy-reconstruction.md) — semantic reconstruction of all 6 production strategies from first principles
+- [Bilevel Autoresearch](../concepts/bilevel-autoresearch.md) — related agent-architecture theory (mechanism injection vs. state governance are complementary concerns)
+- [Hitchhiker's Guide to Agentic AI](../tools/hitchhikers-guide-agentic-ai.md) — broader agentic-stack survey; the Always-On Agents paper above is the state/memory-layer deep dive that guide only touches briefly
