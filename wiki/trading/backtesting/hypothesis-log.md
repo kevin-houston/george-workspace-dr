@@ -9877,7 +9877,9 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 ---
 
-## H469 — HIFI KPI/XBRL PEAD Upgrade: STAGED (2026-07-28)
+## H427 — Fine-Grained 8-K Event Taxonomy Filter for H174 PEAD (119 Event Types): STAGED (2026-07-22)
+
+**CORRECTION (2026-08-04)**: This entry was previously mislabeled "## H469" (a dream-cycle staging error — the heading and body content did not match: the title said "HiFi-KPI/XBRL" but the body described the Grounded 8-K Event Taxonomy paper, which is actually H427 per the `h427_status` header stub). Relabeled to H427; script path corrected. The real H469 (HiFi-KPI/XBRL EPS/revenue magnitude scaling) is logged separately below with its own run results.
 
 **Source**: arXiv:2607.08346 (Jul 2026) — Grounded 8-K Event Taxonomy paper
 
@@ -9888,7 +9890,38 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 **Status**: STAGED — gpt-4o-mini event tagger to be built; taxonomy prompt from paper's 3-tier structure.
 
-**Script**: backtesting/daily/run_h469_grounded_8k_taxonomy_pead.py
+**Script**: backtesting/daily/run_h427_8k_event_filter.py
+
+---
+
+## H469 — HiFi-KPI Structured EPS/Revenue Magnitude Layer on H174 PEAD: PARTIAL CONFIRMED (marginal) (2026-08-04)
+
+**Source**: arXiv:2502.15411 (Feb 2026) — "HiFi-KPI: A Dataset for Hierarchical KPI Extraction from Earnings Filings"
+
+**Universe**: H174 PEAD universe (30-stock, same as H163/H174)
+**IS/OOS**: IS 2020-2023 / OOS 2024-2026 (H174's own split)
+**Gate**: OOS WR ≥ 0.818 AND OOS MeanRet ≥ 6.89% (H174 baseline) at n ≥ 15
+
+**Method**: Reconstructed H174's exact confirmed dual-filter event set (score≥0.18 AND surprise≥0.02) via `run_h174.py`'s own pipeline — reproduced n=17 IS / n=22 OOS with OOS WR=81.8%/MeanRet=6.89%, exactly matching the logged H174 baseline (validates the reconstruction). Sourced EPS/revenue actual vs. consensus per event from FMP `/stable/earnings?symbol=…` (NOT `/api/v3/earnings-surprises`, which is deprecated post-2025-08-31 on this plan tier), matched to nearest report date within ±5 days. Tested position-size scaling by EPS/revenue beat magnitude as an upgrade to H174's binary gate.
+
+**Data note**: OneCLI proxy intercepts `financialmodelingprep.com` and returns `credential_not_found` — required `NO_PROXY=financialmodelingprep.com` bypass (same pattern as the documented Alpaca workaround). 4/17 tickers (IBM, LLY, LOW, MA) returned HTTP 402 (plan restriction) — overall OOS EPS-beat match coverage 72.7% (16/22 events); uncovered events default to neutral weight 1.0 in the sizing variants.
+
+**Variants**: A (size = clip(1+eps_beat_pct, 0.5, 2.0)), B (binary gate: eps_beat_pct > 5%), C (binary gate: rev_beat_pct > 0%), D (composite: size = clip(1+avg(eps_beat, rev_beat), 0.5, 2.0)), E (H174 baseline, unchanged, sanity check).
+
+| Var | Description | IS n | IS WR% | IS MeanRet% | OOS n | OOS WR% | OOS MeanRet% | Gate |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| A | EPS magnitude size | 17 | 58.8 | 3.44 | 22 | 81.8 | 6.95 | PASS (marginal) |
+| B | EPS beat>5% gate | 12 | 50.0 | 2.95 | 7 | 100.0 | 14.17 | fail (n<15) |
+| C | Rev beat>0% gate | 13 | 53.8 | 3.41 | 10 | 80.0 | 6.78 | fail (n<15) |
+| D | Composite EPS+rev size | 17 | 58.8 | 2.84 | 22 | 81.8 | 6.96 | PASS (marginal) |
+| E | H174 baseline | 17 | 58.8 | 3.02 | 22 | 81.8 | 6.89 | baseline |
+
+**Key findings**: Variants A and D technically clear the OOS gate (MeanRet 6.95%/6.96% vs. 6.89% baseline), but the margin (+0.06–0.07pp) is well within noise and driven almost entirely by the 27% of events with no FMP match defaulting to neutral weight=1.0 — i.e. A/D are statistically indistinguishable from unweighted H174. The variant with a real, large effect is B (binary EPS beat>5% gate): OOS WR=100%, MeanRet=14.17%, more than 2× baseline — but n drops to 7 (below the 15-event gate, further thinned by the 72.7% FMP coverage), too small to trust per the log's standing sample-size convention. IS results don't corroborate a clean magnitude effect either (D's IS MeanRet 2.84% is *below* the 3.02% baseline).
+
+**Verdict**: **PARTIAL CONFIRMED (marginal)** — A/D pass the letter of the gate but add no real economic signal at current coverage; B hints at a genuine EPS-magnitude effect but is underpowered. Not adopted as a production change to H174 — the existing binary score≥0.18 + surprise≥0.02 dual filter remains the live PEAD design (per task registry: entry thresholds must not be altered). Follow-up: widen the FMP match window or extend the universe to lift n on Variant B before treating the magnitude-gate finding as real; H174 remains not a listed production-portfolio sleeve (tracked separately via paper trading / `strategy_accounts.json`), so no correlation-to-production-blend estimate applies here.
+
+**Script**: backtesting/daily/run_h469_hifi_kpi_xbrl_pead.py (fully implemented 2026-08-04, replacing prior stub)
+**Results**: backtesting/results/h469_results.json
 
 ---
 
