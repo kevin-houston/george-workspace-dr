@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>George — Session Summary — 2026-08-05</title>
+  
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--orange:#f0883e;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.6;padding:0;}
+
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:baseline;justify-content:space-between;}
+.header-title{font-size:16px;font-weight:700;letter-spacing:.3px;}
+.header-sub{color:var(--muted);font-size:12px;}
+
+.main{padding:20px 24px;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1.1;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.muted{color:var(--muted);}
+
+/* Section card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.card-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.card-badge{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:2px 8px;color:var(--muted);}
+.card-body{padding:14px 16px;}
+
+/* Proposals */
+.proposal{padding:10px 0;border-bottom:1px solid var(--border);}
+.proposal:last-child{border-bottom:none;}
+.proposal-header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.proposal-title{font-size:13px;font-weight:600;}
+.risk-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+.risk-medium{background:rgba(210,153,34,.18);color:var(--yellow);border:1px solid rgba(210,153,34,.3);}
+.risk-high{background:rgba(248,81,73,.18);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.risk-low{background:rgba(63,185,80,.18);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.proposal-rationale{font-size:12px;color:var(--muted);margin-top:3px;}
+.proposal-target{font-size:11px;color:var(--blue);font-family:monospace;margin-top:3px;}
+
+/* Commit list */
+.commit{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;display:flex;gap:10px;}
+.commit:last-child{border-bottom:none;}
+.commit-hash{font-family:monospace;color:var(--blue);flex-shrink:0;}
+.commit-msg{color:var(--text);}
+
+/* Podcast */
+.podcast-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;}
+.podcast-dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:10px;}
+.link-btn{display:inline-block;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--blue);background:var(--surface);}
+.link-btn:hover{border-color:var(--blue);}
+
+/* Raw changelog */
+pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;overflow-x:auto;white-space:pre-wrap;color:var(--muted);margin-top:10px;}
+
+.empty{color:var(--muted);font-size:12px;padding:4px 0;}
+</style>
+
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-title">George &mdash; Session Summary &mdash; 2026-08-05</div>
+    </div>
+    <div class="header-sub">Generated 2026-08-05 04:06 CT</div>
+  </div>
+  <div class="main">
+    
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Proposals Applied</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Flagged</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Commits</div>
+        <div class="kpi-value blue">5</div></div>
+      <div class="kpi"><div class="kpi-label">Podcast</div>
+        <div class="kpi-value muted">—</div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Dream Cycle</span>
+        <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
+      </div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Always-On Agents: A Survey of Persistent Memory, State, and Governance in LLM Agents (Ding, Nannapaneni, Liu &amp; Zhang, Jun 2026) — six-axis framework for reasoning about agent state recoverability, direct fit for the DR wiki section</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">The DR (Disaster Recovery) wiki section is the thinnest and stalest in the whole index: 5 pages, 624 total lines, last touched 2026-07-27, and its content is entirely operational (restore commands, backup mechanics) with no conceptual/theoretical grounding for *why* the current DR design (git backup…</div>
+              <div class="proposal-target">/workspace/agent/wiki/dr/overview.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Multi-Agent Debate Strategies: Survey, Taxonomy, and Challenges (Motger, Oriol, Marco &amp; Franch, Jul 2026) — 141-study review finds the field has converged on one narrow debate pattern by convention, not evidence; directly relevant to H274's 3-agent PEAD debate design</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">H274 (multi-agent PEAD upgrade, 3-agent debate) is STAGED and referenced across at least 6 wiki pages (multi-agent-llm-trading.md, quant-terminal-notes.md, hitchhikers-guide-agentic-ai.md, sairahul1-ai-agent-loops.md, fireworks-tech-graph.md, agentic-routing-2026.md) but has not yet been implemented…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Detecting Lookahead Bias in LLM Forecasts (Gao, Jiang &amp; Yan, Dec 2025 / rev. Jun 2026) — statistical Lookahead Propensity (LAP) metric for detecting when an LLM has memorized realized outcomes; concrete audit technique for the H163/H174 FinBERT PEAD pipeline</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">lookahead-formal-verification.md already covers Fonseca's type-and-effect formal-verification approach to look-ahead bias (arXiv:2607.04958) and explicitly flags 'agentic retrieval where LLM knowledge cutoff isn't enforced' as a leak category that formal verification handles but statistical detector…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/backtesting/lookahead-formal-verification.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">FinSMART: Financial Sentiment Analysis via Market-Aligned RL (Iacovides, Zhou &amp; Mandic, Jul 2026) — RL-trained sentiment scorer as an alternative to FinBERT's static classifier</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">FinSMART trains a sentiment scoring model directly against realized market returns (idiosyncratic + market components) via RL, using an asymmetric reward that requires two market conditions before reinforcing a signal, rather than training against static human-labeled sentiment the way FinBERT does.…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/pead.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Koijen &amp; Levy (NBER WP w35431 / SSRN 6474601, ~Jun 2026) — agentic AI systems explain 17-20% of same-day earnings-announcement price variance vs 5-8% for EPS-surprise-only measures</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">High-pedigree (Chicago Booth, NBER working paper) live OOS benchmark on ~2,000 real 2025 earnings announcements, using agentic AI to extract structured signals from transcripts + announcement text. The headline number -- optimized agentic systems explain roughly 2-3x more same-day price variance tha…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/llm-alpha-validation.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Dikhit — 'The Informational Role of the Most Recent Month in Industry-Level Momentum Strategies' (Zenodo preprint, Jan 2026) — skip-month is not universally beneficial; carries signal conditional on last month's return</span>
+                <span class="risk-badge risk-medium">medium</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Tests 12-1 vs 12-0 momentum on Fama-French 48 industries, 1975-2024. Finds the skip-month (conventionally excluded to dodge short-term reversal) actually carries signal: when the most recent month's return was above-average, subsequent momentum performance was stronger, contradicting the standard re…</div>
+              <div class="proposal-target">/workspace/agent/backtesting/daily/run_h491_conditional_skip_momentum.py</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">TradeLens — 'Can Agentic Trading Systems Pay for Their Own Intelligence?' (Duan, Li, Wang, Zhang et al., Jul 2026) — diagnostic toolkit for attributing agentic-trading P&amp;L to specific agent decisions and auditing inference-cost-to-profit conversion</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Not another multi-agent architecture proposal -- a diagnostic toolkit that reconstructs trading trajectories to attribute P&amp;L to specific agent decisions and asks whether LLM inference cost is actually justified by incremental profit. Flags concrete model-specific failure modes (e.g. one model fails…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/algorithms/multi-agent-llm-trading.md</div>
+            </div>
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">cvxportfolio (Stanford CVXGRP / Boyd group) — convex-optimization portfolio construction with a cost-aware backtester built in, 1,246 stars, GPL-3.0, actively maintained</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">Existing wiki tools coverage (PyPortfolioOpt, Riskfolio-Lib, skfolio) handles convex/risk-parity portfolio optimization only -- none of them combine that with a cost-aware backtest loop that bakes in transaction costs and market impact directly into the optimization objective, rather than applying c…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/tools/portfolio-optimization.md</div>
+            </div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Commits</span>
+        <span class="card-badge">5 today</span>
+      </div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">c123317</span><span class="commit-msg">dream cycle: changelog 2026-08-05</span></div><div class="commit"><span class="commit-hash">325637a</span><span class="commit-msg">dream cycle: apply 2026-08-05 staged proposals (H491 stub)</span></div><div class="commit"><span class="commit-hash">61e1936</span><span class="commit-msg">dream cycle 2026-08-05: 5-angle scan + 5 staged proposals (H491 stub, FinSMART, Koijen/Levy, TradeLens, cvxportfolio)</span></div><div class="commit"><span class="commit-hash">1c1729f</span><span class="commit-msg">wiki: prediction markets gets backtesting frameworks + agent trading tools page</span></div><div class="commit"><span class="commit-hash">46caed1</span><span class="commit-msg">nightly backup 2026-08-05</span></div></div>
+    </div>
+    
+    
+  </div>
+</body>
+</html>
