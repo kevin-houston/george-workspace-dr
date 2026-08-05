@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-16
+updated: 2026-08-05
 type: reference
 ---
 
@@ -302,3 +302,30 @@ def cvar_loss(weights, returns_matrix, alpha=0.05):
 - **Prerequisite:** PyTorch installed (already in venv); sentence-transformers as proxy.
 
 **Related:** [Position Sizing & Portfolio Construction](../algorithms/position-sizing.md), H228 (current best blend)
+
+---
+
+## cvxportfolio — Cost-Aware Convex Optimization Backtesting (added 2026-08-05)
+
+`github.com/cvxgrp/cvxportfolio` -- Stanford CVXGRP (Boyd optimization group), 1,246 stars, GPL-3.0, actively maintained (last push 2026-04-27).
+
+**What it fills**: The existing coverage above (PyPortfolioOpt, Riskfolio-Lib, skfolio) handles convex/risk-parity portfolio *optimization* only. None of them combine that with a **cost-aware backtest loop** -- cvxportfolio bakes transaction costs and market impact directly into the optimization objective at each rebalance, rather than applying costs as a post-hoc haircut on top of optimizer output the way our current backtests do.
+
+```bash
+pip install cvxportfolio
+```
+
+```python
+import cvxportfolio as cvx
+
+# Define cost-aware objective: mean-variance minus transaction cost minus holding cost
+objective = cvx.ReturnsForecast() - 0.5 * cvx.FullCovariance() - cvx.StocksTransactionCost() - cvx.StocksHoldingCost()
+constraints = [cvx.LeverageLimit(1)]
+policy = cvx.SinglePeriodOptimization(objective, constraints)
+
+simulator = cvx.StockMarketSimulator(universe=["SPY", "TLT", "GLD", "DBC"])
+result = simulator.backtest(policy, start_time="2013-01-01", end_time="2026-01-01")
+print(result.sharpe_ratio, result.max_drawdown)
+```
+
+**Relevance to production strategies**: Directly testable against the current top-1/top-2 monthly rotation logic in H026 (25-asset sector+alts), H045 (13-asset bonds), and H041a (19-asset) -- would answer whether a convex-optimized weight vector with in-loop transaction costs beats simple top-N selection once realistic costs are modeled at the optimization stage rather than estimated afterward. Not yet backtested against our universes; logged as a tool to evaluate, not a confirmed improvement.

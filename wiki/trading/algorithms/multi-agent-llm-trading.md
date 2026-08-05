@@ -1,6 +1,6 @@
 ---
 added: 2026-06-10
-updated: 2026-06-21
+updated: 2026-08-05
 category: algorithms
 status: active research area — important reliability caveats
 ---
@@ -936,3 +936,44 @@ Fine-grained decomposition: each agent sees a narrow slice of the problem → le
 - Black-Litterman itself requires a market-equilibrium prior (typically CAPM-implied) and a view-confidence-to-uncertainty-matrix mapping -- both are nontrivial design choices the paper's abstract doesn't specify in enough detail to replicate directly
 
 **Action needed before staging a hypothesis**: locate the full paper text (not just abstract) to extract the confidence-to-uncertainty mapping method, and check whether `skfolio` or `Riskfolio-Lib` (both already have Black-Litterman implementations per their documentation) could serve as the aggregation-layer backend rather than hand-rolling BL math -- would turn this into a much smaller build if pursued.
+
+---
+
+## Design Input for H274: Multi-Agent Debate Strategies Survey (Motger et al., arXiv:2607.26212, added 2026-08-04)
+
+"Multi-Agent Debate Strategies: Survey, Taxonomy, and Challenges" (Quim Motger, Marc Oriol, Jordi Marco, Xavier Franch; submitted 2026-07-28) systematically reviews 141 multi-agent-debate studies and finds the field has converged on one dominant pattern largely by convention:
+
+> Static, fully connected topologies, verbatim exchange, short-term memory, and voting-based agreement protocols
+
+— adopted across most reviewed systems without rigorous head-to-head comparison against alternatives. The paper explicitly notes "promising alternatives remain marginal" and calls for future cost-aware benchmarking and automated tuning, neither of which the field has produced yet.
+
+### Taxonomy: three axes for designing H274's debate
+
+1. **Participants** — who's in the debate, and are roles symmetric or asymmetric? (H274's design intent, per cross-references in quant-terminal-notes.md and fireworks-tech-graph.md, is a 3-agent structure — the paper's survey implies this should have deliberately *asymmetric* roles, e.g. a bull case, a bear case, and an evidence-auditor, rather than three symmetric agents voting.)
+2. **Interaction mechanism** — how do agents exchange information? Default is verbatim full-text exchange (expensive, unstructured); the paper flags structured/constrained exchange formats as an underexplored alternative — relevant given the Quant Desktop Market Terminal's "Signal Desk evidence model" (already cross-referenced for H274) is exactly this kind of structured-evidence alternative to verbatim debate.
+3. **Agreement protocol** — how does the debate resolve to a decision? Default is majority/plurality voting; the paper implies voting can mask disagreement that a scoring/weighting protocol would preserve as useful signal (e.g. a PEAD debate that ends 2-1 bullish contains different information than one that ends unanimous, and a pure vote discards that distinction).
+
+### Actionable takeaway for H274
+
+Before implementing H274, explicitly decide participants/interaction/agreement rather than defaulting to the convention this paper documents as unexamined. Concretely: (a) consider asymmetric roles (e.g. bull / bear / FinBERT-evidence-auditor) instead of three generic debaters; (b) consider structured evidence objects (score + citation + confidence, analogous to the Signal Desk journal schema already noted for H274) instead of free-text exchange, which also reduces token cost — directly relevant given the CrewAI ~18% token-overhead finding logged in agent-frameworks-2026.md; (c) preserve the vote split as a feature (e.g. confidence-weighted signal) rather than collapsing to a binary decision, consistent with how H174's FinBERT score is used continuously (≥ 0.18 threshold) rather than binarized.
+
+**Not a new hypothesis number** — this is a design-input paper for the already-staged H274, filed so H274's eventual implementation starts from a deliberate protocol choice instead of the field's unexamined default.
+
+## See Also
+
+- [Quant Desktop Market Terminal](../../tools/quant-terminal-notes.md) — Signal Desk evidence model as a structured-exchange alternative to verbatim debate
+- [Agentic Routing: Harness-Native Data Flywheel](../../tools/agentic-routing-2026.md) — H274/H318 routing analogy
+- [Hitchhiker's Guide to Agentic AI](../../tools/hitchhikers-guide-agentic-ai.md) — Layer 4 multi-agent topology guidance
+- [Agent Framework Ecosystem 2026](../../ai-industry/agent-frameworks-2026.md) — CrewAI token-overhead finding relevant to debate-exchange cost
+
+---
+
+## Research Lead: TradeLens — Agent Cost-Attribution Diagnostic (2026-08-05)
+
+**Source**: Duan, Li, Wang, Zhang et al., "Can Agentic Trading Systems Pay for Their Own Intelligence?" arXiv:2607.10286, Jul 11 2026.
+
+A diagnostic toolkit, not another architecture proposal: reconstructs trading trajectories to attribute P&L to specific agent decisions, then asks whether LLM inference cost is actually justified by incremental profit ("intelligence-to-profit conversion"). Flags concrete model-specific failure modes -- in the paper's tests, one model fails specifically at asset selection while another fails at timing, meaning cost-justification failures are not uniform across the pipeline but localized to specific agent roles.
+
+**Why it matters here**: This maps directly onto the wiki's existing Coordination Breakeven Spread (CBS) metric already defined in this page -- TradeLens is effectively a more rigorous, trace-level version of the same cost-justification question CBS asks at a coarser grain. Directly applicable to auditing **H274** (the staged 3-agent PEAD debate design) once it goes live: per-agent-role attribution would answer whether each of the three debating agents is earning its token cost, or whether (as TradeLens found elsewhere) the failure is concentrated in one role.
+
+**Caveat**: Abstract discloses no Sharpe/return/cost numbers -- this is a methodology/tooling paper, not evidence of alpha. Adopt the attribution technique when H274 is instrumented for live/paper trading; not a source of a new hypothesis on its own.

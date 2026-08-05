@@ -3,7 +3,7 @@ type: algorithm
 title: Post-Earnings Announcement Drift (PEAD)
 tags: pead, earnings, nlp, finbert, event-driven
 added: 2026-07-18
-updated: 2026-07-20
+updated: 2026-08-05
 category: Algorithms
 ---
 
@@ -367,3 +367,15 @@ Vamossy (Nov 2025, rev. Dec 2025) splits retail investors into long- vs. short-h
 **Shared blocker with H168**: this needs full earnings-call Q&A transcript text, not just the 8-K filing H174 currently uses. H168's post-mortem found transcript availability itself introduces coverage bias into the OOS sample (only 26.5% of H163/H174-qualifying events had a matching transcript, and that 26.5% scored *worse* than baseline, WR=34.6%, suggesting the transcripts that exist are systematically different from the ones that don't). Any hypothesis built on this signal must budget for confirming transcript coverage rate on the current H174 event universe *before* backtesting, and should explicitly test whether the coverage-bias problem recurs -- if it does, this signal has the same practical ceiling as H168 regardless of its cleaner theoretical differentiation.
 
 **Action needed before staging a hypothesis**: confirm transcript source/coverage (the HuggingFace dataset used for H168 ingestion is a candidate reuse target -- see H168 entry in hypothesis-log.md) and build a lightweight embedding-similarity scorer (any small sentence-embedding model, e.g. an already-available OpenAI embeddings call via `$OPENAI_API_KEY`, is sufficient -- no need for a dedicated FinBERT-scale model) before committing to a full IS/OOS hypothesis run.
+
+---
+
+## Research Lead: FinSMART — RL-Trained Sentiment Scoring (2026-08-05)
+
+**Source**: Iacovides, Zhou & Mandic, "FinSMART: Financial Sentiment Analysis via Market-Aligned RL," arXiv:2607.28127, Jul 30 2026.
+
+Trains a sentiment scorer via reinforcement learning directly against realized market returns (idiosyncratic + market components), using an asymmetric reward that requires two market conditions to align before reinforcing a signal -- a structurally different training target from FinBERT's static human-labeled sentiment classification that H163/H174 currently use. Reports +220% cumulative return over the strongest baseline in the paper's own benchmark; no Sharpe or win-rate disclosed at abstract level, and OOS methodology detail is unverified pending full-text read.
+
+**Why it matters here**: H174 (score>=0.18 + surprise>=0.02 dual filter, OOS WR=81.8% n=22) has proven hard to beat by adding filters on top (H175 EPS magnitude, H317 multi-modal, H469 HiFi-KPI magnitude layer -- all NOT CONFIRMED or marginal). FinSMART targets a different lever: replacing the sentiment *scorer itself* rather than adding filters downstream of it. This is a parallel track to H481 (FinDPO), which also proposes swapping FinBERT's training objective.
+
+**Status**: Research lead only, not yet a hypothesis. Needs full-text read to confirm OOS methodology and whether numbers are reproducible on our EDGAR 8-K corpus before scoping a backtest.

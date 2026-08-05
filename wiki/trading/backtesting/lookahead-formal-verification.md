@@ -3,7 +3,7 @@ type: backtesting-methodology
 title: Look-Ahead-Freedom as Temporal Non-Interference
 description: Formal computer-science treatment of look-ahead bias detection in backtesting and agentic trading pipelines. Linear-time type-and-effect checker catches leaks that statistical detectors miss.
 tags: [backtesting, look-ahead-bias, formal-verification, agentic-trading, pipeline-integrity]
-updated: 2026-07-20
+updated: 2026-08-05
 ---
 
 # Look-Ahead-Freedom as Temporal Non-Interference
@@ -150,3 +150,46 @@ A 2026 Chinese A-share ML factor study ("Machine Learning Enhanced Multi-Factor 
 **Why it matters here**: US large-cap equities don't have China's price-limit halt mechanism, but the same bug class applies to any `run_hNNN.py` script computing rolling-window signals (12m momentum, IBS z-scores, drift-fraction gates, etc.) over a price series that includes halted trading, delisted tickers mid-window, or thinly-traded days where the "close" wasn't really achievable at scale. `survivorship-bias.md` covers delisting at the universe-construction level; this pattern is a complementary check at the signal-computation level -- worth an explicit "is every price in this rolling window one we could have actually traded at" audit pass on the existing hypothesis scripts, not just at entry/exit.
 
 **Action needed before staging a hypothesis**: audit 2-3 existing high-conviction production scripts (h112_monthly.py, h181_monthly.py) for whether any rolling-window signal calculation could include a non-tradable price point given our data sources (yfinance/Alpaca), before deciding whether this is a real gap or already handled implicitly by using adjusted-close from a survivorship-bias-free source.
+---
+
+## Research Lead: Lookahead Propensity (LAP) — A Concrete Statistical Test for LLM Memorization Leaks (arXiv:2512.23847, flagged 2026-08-04)
+
+"Detecting Lookahead Bias in LLM Forecasts" (Zhenyu Gao, Wenxi Jiang, Yutong Yan; submitted Dec 2025, revised Jun 2026) fills a specific gap this page already names but doesn't resolve: Fonseca's formal type-and-effect checker (above) explicitly addresses agentic retrieval and knowledge-cutoff leaks in principle, but implementing a full type-and-effect verifier is a heavier lift than George's pipeline currently has. This paper offers a lighter-weight, immediately runnable statistical test for exactly one leak category: **has an LLM silently memorized the realized outcome of a specific firm-date pair from its training data, rather than genuinely inferring it from the input text?**
+
+### The method
+
+1. **Lookahead Propensity (LAP)**: a per-(firm, date) score estimating how likely it is the LLM's training corpus contained information about the *realized* outcome (not just the input text being scored). Measured via date-only recall queries -- asking the model what it "knows" about a firm/date without revealing the outcome, and checking whether it leaks post-hoc information.
+2. **Regression test**: run `forecast_accuracy ~ LAP + LLM_forecast + LAP*LLM_forecast`. A significant positive interaction term means forecast accuracy is inflated specifically on high-LAP pairs -- i.e., the model does better exactly where it's more likely to have memorized the answer.
+3. **Temporal validation**: the diagnostic signature of genuine contamination is that this interaction effect is large during the training period and **collapses to approximately zero immediately after the training-data cutoff**. If accuracy on high-LAP pairs stays elevated post-cutoff, that's evidence of real signal, not memorization.
+
+Tested on two applications directly analogous to George's own pipeline: news headlines predicting stock returns, and **earnings call transcripts predicting capital expenditures** -- functionally the same task shape as H163/H174's 8-K text scoring for PEAD.
+
+### Direct applicability to H163/H174
+
+The FinBERT model (`ProsusAI/finbert`) used in `pead_overnight.py`/`pead_intraday.py` has a fixed, known training cutoff. This gives George a concrete, cheap audit to run against the existing H174 track record (81.8% OOS win rate, n=22):
+
+- Split H174's confirmed events into pre-cutoff and post-cutoff subsets relative to FinBERT's training data cutoff date.
+- If win rate / mean return is concentrated in the pre-cutoff subset and degrades toward the post-cutoff subset, that's the LAP contamination signature -- meaning some of H174's apparent edge may be the model recognizing rather than analyzing specific 8-Ks it saw in training.
+- If win rate is stable (or improves) across the cutoff boundary, that's a genuine positive finding this page doesn't currently have: independent evidence H174's edge is real text-based signal, not memorization. n=22 is thin for a clean split, but it's the right test to run before scaling H174 further or before H274's agentic debate design pulls in a more capable general-purpose LLM (which has a *much* larger and more recent training corpus, and correspondingly higher LAP risk than a narrow FinBERT classifier).
+
+### Why this is lower risk for H274 than for H174
+
+H174 uses FinBERT, a relatively narrow sentiment classifier with a specific, dated training cutoff and no general world-knowledge memorization incentive. H274's proposed multi-agent debate design (see multi-agent-llm-trading.md) would likely use general-purpose LLMs with much broader training corpora and more recent cutoffs -- exactly the profile this paper flags as higher-LAP-risk. **Any H274 implementation should budget a LAP-style audit before going to paper trading**, not just the existing look-ahead formal-verification checklist items (EDGAR filed-date gating, `.shift(1)` discipline), since those catch pipeline-structural leaks but not model-memorization leaks.
+
+### Practical protocol (approximate, pending full LAP implementation)
+
+```python
+# Cheap proxy check before a full LAP implementation:
+# 1. Identify the LLM's training cutoff date
+# 2. Split historical signal-generation events into pre/post cutoff
+# 3. Compare OOS win rate / mean return across the split
+# Large pre-cutoff outperformance that vanishes post-cutoff = contamination signature
+```
+
+**Not staged as a new hypothesis** -- this is an audit methodology for existing (H174) and proposed (H274) LLM-based strategies, not a new alpha signal. Filed as a pre-requisite check: run before H274 implementation, and as a retroactive sanity check on H174's existing track record.
+
+## See Also (LAP addition)
+
+- [LLM Alpha Validation Checklist](../algorithms/llm-alpha-validation.md) — natural home for a LAP-audit step alongside the existing look-ahead audit test
+- [PEAD — Post-Earnings Announcement Drift](../algorithms/pead.md) — H174 pipeline this audit would run against
+- [Multi-Agent LLM Trading](../algorithms/multi-agent-llm-trading.md) — H274 design, higher LAP risk than H174 per above

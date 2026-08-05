@@ -2,7 +2,7 @@
 title: Alpha Illusion — LLM Trading Agent Validation Checklist
 description: 6 structural validity tests + P1-P6 reporting protocol + five-bias framework from 2025-2026 research; required before LLM trading alpha claims are considered deployment evidence
 added: 2026-07-08
-updated: 2026-07-15
+updated: 2026-08-05
 category: llm-trading
 source_paper: arXiv:2605.16895
 ---
@@ -254,3 +254,15 @@ Li et al. (Oct 2025) identify that LLM-based trading backtests can suffer from i
 **Why it matters here**: our FinBERT-based scoring in H163/H174 (CONFIRMED) and the staged H481-483 evaluations run on real 8-K text of well-known public companies -- the same risk class this paper describes applies in principle: if the base FinBERT model (or any future LLM scorer, e.g. the FinDPO/EarningsInOne direction explored in H481/H482) has implicitly memorized how a given company's stock reacted to a given historical earnings event, apparent predictive skill could partly reflect memorization rather than a live-tradable signal. H174's OOS test window (2018-present per our IS/OOS framework) reduces but does not eliminate this risk if the underlying FinBERT checkpoint's training data extends into that period.
 
 **Recommended action (not yet done)**: a future research session should audit whether ProsusAI/finbert's training corpus/cutoff overlaps materially with our own OOS evaluation window, and consider whether FinLake-Bench's leakage-robust evaluation methodology could be applied as a sanity check on H174 before further scaling. This is a caveat/audit lead, not a code change.
+
+---
+
+## Research Lead: Koijen & Levy — Agentic AI Earnings-Signal Variance (2026-08-05)
+
+**Source**: Koijen (Chicago Booth) & Levy, "Assessing the Benefits of Optimized Agentic AI Systems for Asset Pricing," NBER Working Paper w35431 / SSRN 6474601, ~Jun 30 2026.
+
+Live OOS benchmark on ~2,000 real 2025 earnings announcements. Agentic AI extracts structured signals from transcripts and announcement text, then measures same-day price-variance explained. Headline finding: optimized agentic systems explain **~17-20% of same-day earnings-announcement price variance**, vs **~5-8% for EPS-surprise-only measures** -- roughly 2-3x improvement.
+
+**Why it matters here**: This corroborates the core thesis behind H163/H174 (FinBERT text signal adds real predictive value beyond raw EPS surprise) but at a different task -- same-day price-variance explained, not multi-week forward drift magnitude, which is what H174's 20-trading-day PEAD hold actually trades. High-pedigree source (Chicago Booth, NBER) lends credibility even though it targets a related-but-distinct question.
+
+**Caveat**: Paywalled beyond abstract/press coverage. Full methodology (what "agentic AI system" concretely means, how signals are extracted, exact evaluation window) is unverified. Treat as corroborating context for the general "text beats surprise-alone" thesis, not as a source of a new backtestable hypothesis until full text is available.

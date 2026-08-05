@@ -10418,3 +10418,16 @@ Avg eligible universe size per month: ~160-162 (of the 197-name candidate pool, 
 
 **Verdict**: NOT CONFIRMED. Best variant (A, dynamic ADDV top-200, 6-1m, top-20) OOS Sharpe 1.044 < gate 1.174. This closes the "genuine ADDV-based dynamic universe" gap flagged at the end of H488/H488's own closing note — dynamic reselection is real and adds value over a static snapshot, but the signal itself (skip-month cross-sectional momentum on a liquidity-filtered NASDAQ-heavy universe) does not clear the bar, similarly to every other 200-stock-scale momentum/factor variant tested this quarter (H241, H245, H248, H487, H488). High absolute cumulative return (4.15x OOS) but poor risk-adjusted return (Sharpe, MaxDD) is the recurring theme — this universe/signal combination is not a Sharpe improvement over SPY buy-and-hold despite handily beating it on raw return, and would not be recommended for production blending given both the gate miss and the current-day-listing survivorship bias in the 230-candidate superset (a name that delisted/was acquired before 2026 and would have ranked top-200 by ADDV in, say, 2015 is absent from the candidate pool entirely — same caveat class as H272/H277/H336). Stock Momentum family (§3.1, priority #3) is now explored at both the static-S&P (H241/H245/H248/H487/H488) and dynamic-ADDV-NASDAQ (H490) construction levels; no further 200-stock-scale variant is proposed without a genuine survivorship-bias-free historical constituent dataset.
 
+---
+
+### H491 — Conditional Skip-Month Momentum [STUB — not yet run]
+
+**Source:** Dikhit, "The Informational Role of the Most Recent Month in Industry-Level Momentum Strategies" (Zenodo preprint, Jan 2026); dream cycle scan 2026-08-05
+
+**Hypothesis:** Unconditional skip-month (12-1) momentum discards signal that H277/H336/H487/H488/H490 already flagged as sometimes costly. Dikhit finds (Fama-French 48 industries, 1975-2024) the most recent month carries momentum-continuation signal when it was itself above the stock's own trailing average — skip only when the recent month underperformed the trailing average, otherwise include it (12-0). Lower-tier source (Zenodo preprint, not peer-reviewed/arXiv) — treat as directional pending replication on our own universes.
+
+**Design:** For each month t, compute `recent_month_return = r[t-1]` and `trailing_avg = mean(r[t-13:t-1])` per stock. If `recent_month_return >= trailing_avg`, use 12-0 (include most recent month); else use 12-1 (skip it, standard). Rank monthly by the resulting conditional-window return. Universe TBD (H198 30-stock, H417 60-stock, or H490 ADDV-ranked NASDAQ superset — pick whichever gives cleanest A/B against an existing confirmed baseline).
+**Gate:** OOS Sharpe > whichever baseline the chosen universe uses (H198 1.174 / H417 Var C 5.855 / H490 Var A 1.044), for a fair like-for-like comparison.
+
+**Status:** Script stub at `backtesting/daily/run_h491_conditional_skip_momentum.py` (raises `NotImplementedError`). Not yet implemented — needs universe choice and conditional-window logic before a real run. See `dream_cycle/staged/2026-08-05/6_dikhit_skipmonth_momentum.json` for the full plan.
+
