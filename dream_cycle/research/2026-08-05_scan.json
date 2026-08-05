@@ -1,0 +1,189 @@
+{
+  "date": "2026-08-05",
+  "angles_scanned": [
+    "arxiv: pairs trading + cointegration + LLM",
+    "arxiv: PEAD + post-earnings drift + text signals",
+    "arxiv: cross-sectional momentum + factor momentum",
+    "arxiv: multi-agent LLM trading systems",
+    "github: trending quantitative finance repos"
+  ],
+  "method": "5 parallel research agents, one per angle, each doing WebSearch + WebFetch and grep-checking the existing wiki before treating a finding as new",
+  "findings": [
+    {
+      "angle": "pairs trading + cointegration + LLM",
+      "title": "Dynamic Multi-Pair Trading Strategy in Cryptocurrency Markets with Deep RL",
+      "authors": "Lebiedz & Slepaczuk",
+      "source_url": "https://arxiv.org/abs/2606.04574",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "reason_not_staged": "Only hit 10% significance via circular block bootstrap (missed 5% threshold); crypto-only universe. Filter-then-Rank selection stage is conceptually interesting but weak evidence."
+    },
+    {
+      "angle": "pairs trading + cointegration + LLM",
+      "title": "Pairs Trading — Selection via Scoring Systems",
+      "authors": "Reichmann",
+      "source_url": "Finance Research Letters 93(C), 2026 (paywalled)",
+      "relevance": "LOW-MEDIUM",
+      "staged": false,
+      "reason_not_staged": "No numbers disclosed in open abstract; paywalled; conceptually overlaps with already-exhausted H200 pairs-trading line."
+    },
+    {
+      "angle": "pairs trading + cointegration + LLM",
+      "title": "Statistical Arbitrage in Polish Equities Market Using Deep Learning",
+      "authors": "Adamczyk & Dabrowski",
+      "source_url": "https://arxiv.org/abs/2512.02037",
+      "relevance": "LOW",
+      "staged": false,
+      "reason_not_staged": "Non-US market, dated regime data (2017-2020), small OOS sample not comparable to our gate criteria."
+    },
+    {
+      "angle": "pairs trading + cointegration + LLM",
+      "title": "From Hypotheses to Factors: Constrained LLM Agents in Cryptocurrency Markets",
+      "source_url": "https://arxiv.org/abs/2604.26747",
+      "relevance": "LOW for pairs line",
+      "staged": false,
+      "reason_not_staged": "Not pairs-specific; LLM hypothesis-search meta-agent framework, tangentially adjacent to H318 (already in wiki, not re-staged)."
+    },
+    {
+      "angle": "PEAD + text signals",
+      "title": "FinSMART: Financial Sentiment Analysis via Market-Aligned RL",
+      "authors": "Iacovides, Zhou & Mandic",
+      "source_url": "https://arxiv.org/abs/2607.28127",
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_as": "dream_cycle/staged/2026-08-05/4_finsmart_rl_sentiment_pead.json"
+    },
+    {
+      "angle": "PEAD + text signals",
+      "title": "Assessing the Benefits of Optimized Agentic AI Systems for Asset Pricing",
+      "authors": "Koijen & Levy",
+      "source_url": "https://www.nber.org/papers/w35431",
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_as": "dream_cycle/staged/2026-08-05/5_koijen_levy_agentic_earnings_signal.json",
+      "caveat": "Paywalled beyond abstract; full methodology unverified"
+    },
+    {
+      "angle": "PEAD + text signals",
+      "title": "FinAnchor",
+      "source_url": "https://arxiv.org/abs/2602.20859",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "reason_not_staged": "Already staged 2026-07-31, logged in llm-alpha-validation.md"
+    },
+    {
+      "angle": "PEAD + text signals",
+      "title": "Effective Performance Measurement: KPI Extraction from Earnings Calls",
+      "source_url": "https://arxiv.org/abs/2605.03147",
+      "relevance": "LOW",
+      "staged": false,
+      "reason_not_staged": "Transcript-focused, same coverage-bias problem H168 already identified; no numbers in abstract"
+    },
+    {
+      "angle": "cross-sectional/factor momentum",
+      "title": "The Informational Role of the Most Recent Month in Industry-Level Momentum Strategies",
+      "authors": "Dikhit",
+      "source_url": "Zenodo preprint, Jan 2026",
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_as": "dream_cycle/staged/2026-08-05/6_dikhit_skipmonth_momentum.json",
+      "caveat": "Zenodo preprint, not peer-reviewed or arXiv; staged as medium-risk new_script stub requiring manual build-out, not auto-apply"
+    },
+    {
+      "angle": "cross-sectional/factor momentum",
+      "title": "Measuring Strategy-Decay Risk: Minimum Regime Performance",
+      "authors": "Alexander & Fabozzi",
+      "source_url": "https://arxiv.org/abs/2604.08356",
+      "relevance": "already ingested",
+      "staged": false,
+      "reason_not_staged": "Already in design-principles.md and performance-attribution.md"
+    },
+    {
+      "angle": "cross-sectional/factor momentum",
+      "title": "Overreaction as an indicator for momentum (AAPL, sentiment features)",
+      "authors": "Lis, Slepaczuk & Sakowski",
+      "source_url": "https://arxiv.org/abs/2602.18912",
+      "relevance": "MEDIUM/LOW",
+      "staged": false,
+      "reason_not_staged": "Single-ticker, HFT-adjacent (10-min bars), requires social sentiment feed we don't have; not transferable to monthly-rebalance cross-sectional framework"
+    },
+    {
+      "angle": "cross-sectional/factor momentum",
+      "title": "Regime-Dependent Predictive Structure Between Equity Factors",
+      "authors": "Lee",
+      "source_url": "https://arxiv.org/abs/2601.10732",
+      "relevance": "LOW",
+      "staged": false,
+      "reason_not_staged": "Authors explicitly state findings do not yield trading profits; doesn't cover momentum specifically"
+    },
+    {
+      "angle": "multi-agent LLM trading",
+      "title": "TradeLens: Can Agentic Trading Systems Pay for Their Own Intelligence?",
+      "authors": "Duan, Li, Wang, Zhang et al.",
+      "source_url": "https://arxiv.org/abs/2607.10286",
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_as": "dream_cycle/staged/2026-08-05/7_tradelens_agent_cost_audit.json"
+    },
+    {
+      "angle": "multi-agent LLM trading",
+      "title": "PolySwarm",
+      "source_url": "https://arxiv.org/abs/2604.03888",
+      "relevance": "MEDIUM",
+      "staged": false,
+      "reason_not_staged": "Prediction-market-specific (Polymarket-style latency arb), not verified for numbers yet; secondary candidate for prediction-markets section if pursued later, not staged tonight"
+    },
+    {
+      "angle": "multi-agent LLM trading",
+      "title": "FinCom (Disagree-or-Commit)",
+      "source_url": "https://arxiv.org/abs/2606.00939",
+      "relevance": "already ingested",
+      "staged": false,
+      "reason_not_staged": "Already covered as H454 design note, research-log/2026-07-26.md"
+    },
+    {
+      "angle": "github: trending quant finance repos",
+      "title": "cvxportfolio",
+      "source_url": "https://github.com/cvxgrp/cvxportfolio",
+      "stars": 1246,
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_as": "dream_cycle/staged/2026-08-05/8_cvxportfolio_cost_aware_optimization.json"
+    },
+    {
+      "angle": "github: trending quant finance repos",
+      "title": "ArturSepp/OptimalPortfolios",
+      "source_url": "https://github.com/ArturSepp/OptimalPortfolios",
+      "stars": 84,
+      "relevance": "MEDIUM",
+      "staged": false,
+      "reason_not_staged": "Single-maintainer, low-star; ROSAA robust-portfolio companion repo worth watching, not adopting yet"
+    },
+    {
+      "angle": "github: trending quant finance repos",
+      "title": "francescodemarte/regime-detection",
+      "source_url": "https://github.com/francescodemarte/regime-detection",
+      "stars": 1,
+      "relevance": "LOW",
+      "staged": false,
+      "reason_not_staged": "Near-zero stars, no license"
+    },
+    {
+      "angle": "github: trending quant finance repos",
+      "title": "jeff3388/awesome-financial-data-apis",
+      "source_url": "https://github.com/jeff3388/awesome-financial-data-apis",
+      "stars": 3,
+      "relevance": "LOW-MEDIUM",
+      "staged": false,
+      "reason_not_staged": "Curated list only, unverified claims, low stars, no license"
+    }
+  ],
+  "summary": {
+    "total_papers_repos_evaluated": 19,
+    "high_relevance": 5,
+    "staged_count": 5,
+    "staged_low_risk_wiki_updates": 4,
+    "staged_medium_risk_new_script_stubs": 1,
+    "notable_pattern": "Pairs/cointegration and multi-agent angles are heavily pre-scouted from prior dream cycle nights -- most hits were already ingested. PEAD and momentum angles each produced one genuinely new HIGH-relevance item plus one corroborating-but-paywalled high-pedigree item (Koijen/Levy). GitHub scan's one clean win (cvxportfolio) fills a real gap: none of the existing portfolio-optimization tools (PyPortfolioOpt/Riskfolio-Lib/skfolio) combine convex optimization with a cost-aware backtest loop."
+  }
+}
