@@ -1,7 +1,7 @@
 ---
-updated: 2026-08-05
+updated: 2026-08-06
 sources_indexed: 4
-pages: 285
+pages: 286
 ---
 
 # Wiki Index
@@ -325,6 +325,7 @@ When answering a query:
 - [Agentic Routing: Harness-Native Data Flywheel (arXiv:2607.11399)](tools/agentic-routing-2026.md) — step-level model routing inside agent harnesses; routing decisions auto-generate labeled training records (flywheel); OpenSquilla: LightGBM cold-start + staged router; H318 meta-learner analog ← new 2026-07-13
 - [SkillsGate](tools/skillsgate-notes.md) — visual skill manager (desktop + TUI) for Claude Code/Cursor/20+ agents; browses skills.sh catalog, per-agent install; George already installs via `npx skills add` (same skills.sh ecosystem); low fit for headless George, possible fit for Kevin's own local agents ← new 2026-08-01
 - [dev-browser](tools/dev-browser-notes.md) — sandboxed (QuickJS WASM) browser automation for AI coding agents; full Playwright API, pixel + DOM toolsets; 6.5k★ MIT, legit; overlaps with George's existing agent-browser skill, sandboxing is the differentiator ← new 2026-08-05
+- [diagram-design](tools/diagram-design-notes.md) — Claude Code skill; 27 editorial diagram types as self-contained HTML+SVG (architecture, flowchart, ER, Gantt, etc.); brand-onboarding flow extracts site palette/fonts; 2.9k★ MIT, legit; possible fit for here.now dashboard polish, no current adoption ← new 2026-08-06
 
 ### AI Industry
 
