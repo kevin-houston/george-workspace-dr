@@ -1,0 +1,118 @@
+{
+  "hypothesis": "H492",
+  "universe": "H198 30-stock",
+  "gate": 1.174,
+  "walk_forward_folds": [
+    {
+      "fold": 1,
+      "start": "2013-01-31",
+      "end": "2015-08-31",
+      "sharpe_12_0": 3.11,
+      "sharpe_12_1": 1.93,
+      "12_0_wins": true
+    },
+    {
+      "fold": 2,
+      "start": "2015-09-30",
+      "end": "2018-04-30",
+      "sharpe_12_0": 3.012,
+      "sharpe_12_1": 1.866,
+      "12_0_wins": true
+    },
+    {
+      "fold": 3,
+      "start": "2018-05-31",
+      "end": "2020-12-31",
+      "sharpe_12_0": 2.246,
+      "sharpe_12_1": 1.362,
+      "12_0_wins": true
+    },
+    {
+      "fold": 4,
+      "start": "2021-01-31",
+      "end": "2023-08-31",
+      "sharpe_12_0": 2.752,
+      "sharpe_12_1": 0.585,
+      "12_0_wins": true
+    },
+    {
+      "fold": 5,
+      "start": "2023-09-30",
+      "end": "2026-04-30",
+      "sharpe_12_0": 2.311,
+      "sharpe_12_1": 1.521,
+      "12_0_wins": true
+    }
+  ],
+  "wf_12_0_wins": 5,
+  "wf_n_folds": 5,
+  "reversed_split": {
+    "test_2013_2020": {
+      "12_0": {
+        "label": "12-0 rev",
+        "n": 96,
+        "sharpe": 2.635,
+        "cagr": 0.616,
+        "cumul": 100.8284,
+        "maxdd": -0.137,
+        "neg_yrs": 0
+      },
+      "12_1": {
+        "label": "12-1 rev",
+        "n": 96,
+        "sharpe": 1.603,
+        "cagr": 0.374,
+        "cumul": 15.5723,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      }
+    },
+    "test_2021_2026": {
+      "12_0": {
+        "label": "12-0 fwd",
+        "n": 64,
+        "sharpe": 2.479,
+        "cagr": 0.593,
+        "cumul": 19.1153,
+        "maxdd": -0.147,
+        "neg_yrs": 0
+      },
+      "12_1": {
+        "label": "12-1 fwd",
+        "n": 64,
+        "sharpe": 1.096,
+        "cagr": 0.256,
+        "cumul": 3.3756,
+        "maxdd": -0.226,
+        "neg_yrs": 1
+      }
+    }
+  },
+  "tc_sensitivity": {
+    "0": {
+      "12_0_sharpe": 2.479,
+      "12_1_sharpe": 1.096,
+      "12_0_avg_turnover": 0.219,
+      "12_1_avg_turnover": 0.216
+    },
+    "10": {
+      "12_0_sharpe": 2.469,
+      "12_1_sharpe": 1.085,
+      "12_0_avg_turnover": 0.219,
+      "12_1_avg_turnover": 0.216
+    },
+    "25": {
+      "12_0_sharpe": 2.454,
+      "12_1_sharpe": 1.069,
+      "12_0_avg_turnover": 0.219,
+      "12_1_avg_turnover": 0.216
+    },
+    "50": {
+      "12_0_sharpe": 2.429,
+      "12_1_sharpe": 1.041,
+      "12_0_avg_turnover": 0.219,
+      "12_1_avg_turnover": 0.216
+    }
+  },
+  "verdict": "CONFIRMED"
+}

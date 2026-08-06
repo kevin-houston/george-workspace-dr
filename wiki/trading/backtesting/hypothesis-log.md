@@ -10420,14 +10420,119 @@ Avg eligible universe size per month: ~160-162 (of the 197-name candidate pool, 
 
 ---
 
-### H491 — Conditional Skip-Month Momentum [STUB — not yet run]
+## H491 — Conditional Skip-Month Momentum (NOT CONFIRMED)
 
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-05
 **Source:** Dikhit, "The Informational Role of the Most Recent Month in Industry-Level Momentum Strategies" (Zenodo preprint, Jan 2026); dream cycle scan 2026-08-05
 
-**Hypothesis:** Unconditional skip-month (12-1) momentum discards signal that H277/H336/H487/H488/H490 already flagged as sometimes costly. Dikhit finds (Fama-French 48 industries, 1975-2024) the most recent month carries momentum-continuation signal when it was itself above the stock's own trailing average — skip only when the recent month underperformed the trailing average, otherwise include it (12-0). Lower-tier source (Zenodo preprint, not peer-reviewed/arXiv) — treat as directional pending replication on our own universes.
+**Hypothesis:** Unconditional skip-month (12-1) momentum discards signal that H277/H336/H487/H488/H490 already flagged as sometimes costly. Dikhit finds (Fama-French 48 industries, 1975-2024) the most recent month carries momentum-continuation signal when it was itself above the stock's own trailing average — skip only when the recent month underperformed the trailing average, otherwise include it (12-0). Lower-tier source (Zenodo preprint, not peer-reviewed/arXiv) — treated as directional.
 
-**Design:** For each month t, compute `recent_month_return = r[t-1]` and `trailing_avg = mean(r[t-13:t-1])` per stock. If `recent_month_return >= trailing_avg`, use 12-0 (include most recent month); else use 12-1 (skip it, standard). Rank monthly by the resulting conditional-window return. Universe TBD (H198 30-stock, H417 60-stock, or H490 ADDV-ranked NASDAQ superset — pick whichever gives cleanest A/B against an existing confirmed baseline).
-**Gate:** OOS Sharpe > whichever baseline the chosen universe uses (H198 1.174 / H417 Var C 5.855 / H490 Var A 1.044), for a fair like-for-like comparison.
+**Design:** For each month t and stock, `recent_month_return = r[t-1]`, `trailing_avg = mean(r[t-13:t-1])`. If `recent_month_return >= trailing_avg`, use the 12-0 window (include most recent month) for that stock's ranking signal that month; else use the standard 12-1 window (skip it). Rank monthly, long top-6 (quintile), equal-weight — same construction as H198.
+**Script**: `backtesting/daily/run_h491_conditional_skip_momentum.py`
+**Universe**: H198 30-stock mega-cap universe (reused cache/parquets)
+**IS/OOS**: 2013-2020 / 2021-2026 (identical split to H198)
+**Gate:** OOS Sharpe > 1.174 (H198 confirmed 6-1m baseline on this exact universe/split)
 
-**Status:** Script stub at `backtesting/daily/run_h491_conditional_skip_momentum.py` (raises `NotImplementedError`). Not yet implemented — needs universe choice and conditional-window logic before a real run. See `dream_cycle/staged/2026-08-05/6_dikhit_skipmonth_momentum.json` for the full plan.
+**Results**:
+
+| Variant | IS Sharpe | IS Cumul | OOS Sharpe | OOS Cumul | OOS MaxDD | Neg Yrs | Corr(SPY) |
+|---------|-----------|----------|------------|-----------|-----------|---------|-----------|
+| A unconditional 12-1 (standard) | 1.603 | 15.57x | 1.096 | 3.376x | -22.6% | 1 | 0.746 |
+| B unconditional 12-0 (always include recent month) | 2.635 | 100.83x | **2.479** | **19.115x** | -14.7% | 0 | 0.720 |
+| C Dikhit conditional (per-stock 12-0/12-1 switch) | 1.643 | 16.61x | 0.886 | 2.629x | -28.7% | 1 | 0.728 |
+| H198 6-1m (reference, on file) | 1.779 | 22.30x | 1.174 | 3.656x | -22.7% | 1 | — |
+| SPY B&H | 1.105 | 3.07x | 0.954 | 2.044x | -23.9% | 1 | 1.000 |
+
+Conditional strategy's 12-0 usage rate: IS avg 45.7% of selected names/month, OOS avg 38.8% — confirms the conditional switch is materially active, not degenerating to one fixed window.
+
+**Key findings**:
+
+1. The Dikhit conditional switch (Var C) does NOT confirm: OOS Sharpe 0.886, below both the 1.174 gate and the plain unconditional 12-1 baseline (1.096) it was designed to improve on. The per-stock switching rule actively hurts relative to just always skipping the last month.
+2. The standout, unplanned finding is Variant B: **unconditional 12-0 (always including the most recent month, i.e. plain 12-month momentum with NO skip) dramatically outperforms both 12-1 and the conditional variant** — OOS Sharpe 2.479 vs 1.096 (12-1) and 0.886 (conditional), IS Sharpe 2.635, zero negative OOS years, and better MaxDD (-14.7% vs -22.6%/-28.7%). This is the best single-signal-family result on the H198 30-stock universe recorded in this log to date.
+3. This directly contradicts the premise of both H198's original "skip-month avoids short-term reversal contamination" design note and Dikhit's proposed refinement — on this specific 30-stock mega-cap NASDAQ/S&P universe over 2013-2026, the most recent month is not a reversal-contaminated month to be conditionally excluded; it is informative momentum-continuation signal that should always be included. The traditional Jegadeesh-Titman skip-month rationale (avoiding 1-month microstructure reversal, originally documented on broad CRSP cross-sections) does not transfer cleanly to a concentrated 30-name mega-cap tech/growth-tilted universe where recent-month momentum itself continues.
+4. Economic read on why the *conditional* rule underperforms the *simple* 12-0 rule: the conditional logic switches to 12-1 (skip) precisely when recent momentum was weak — i.e., exactly the subset of stock-months where Var B's edge (recent-month continuation) would have been smaller anyway, but Var C also loses the diversification/smoothing benefit of a fixed methodology and effectively creates a noisier, regime-flip-prone hybrid signal. Simple and consistent beats conditionally clever here — a recurring theme in this log (c.f. H336, H341, H334 finding that added conditionality/filters frequently underperform the plain baseline they're meant to refine).
+5. Var B was not the hypothesis under test and needs independent replication before being treated as a standing result — it surfaced as a side-effect baseline in this script. Flagging as a candidate for a dedicated follow-up hypothesis (12-0 vs 12-1 head-to-head, properly gated and walk-forward tested) rather than accepting it here.
+
+**Verdict**: NOT CONFIRMED (H491 as specified). The Dikhit conditional-window rule underperforms both its own unconditional-12-1 comparison point and the gate. However, the unconditional 12-0 sub-result (Var B, OOS Sharpe 2.479) is a strong, unplanned finding that warrants a dedicated follow-up hypothesis to properly validate (walk-forward ratio, wider universe, transaction-cost sensitivity) before any production consideration — see H492.
+
+**Results file**: `backtesting/results/h491_results.json`
+
+---
+
+## H492 — Unskipped (12-0) Momentum Walk-Forward Validation (CONFIRMED)
+
+**Status**: CONFIRMED
+**Tested**: 2026-08-05
+**Source**: Opportunistic finding from H491 — unconditional 12-0 momentum (12-month trailing return with NO skip month) beat both the standard 12-1 skip-month baseline and the Dikhit conditional switch by a wide margin (OOS Sharpe 2.479 vs 1.096/0.886) on a single IS/OOS split. This hypothesis subjects that finding to the robustness checks it hadn't yet received before being treated as a standing result.
+
+**Design**: Same H198 30-stock universe, long top-6 (quintile), equal-weight, monthly rebalance. Three checks: (1) 5-fold non-overlapping walk-forward split across the full 2013-2026 sample, comparing 12-0 vs 12-1 fold-by-fold; (2) split reversal — evaluate both windows on the *original IS period as test data* (2013-2020) as well as the original OOS (2021-2026); (3) transaction-cost sensitivity at 0/10/25/50bps one-way, tracking realized monthly turnover for both variants.
+**Script**: `backtesting/daily/run_h492_unskipped_momentum_wf.py`
+**Gate**: CONFIRMED requires 12-0 beats 12-1 in ≥4/5 walk-forward folds AND in both directions of the reversed-split check AND 12-0 OOS Sharpe > 1.174 (H198 baseline) net of 25bps one-way costs.
+
+**Results**:
+
+| Check | Result |
+|-------|--------|
+| Walk-forward folds (12-0 vs 12-1 Sharpe) | Fold1: 3.110 vs 1.930 · Fold2: 3.012 vs 1.866 · Fold3: 2.246 vs 1.362 · Fold4: 2.752 vs 0.585 · Fold5: 2.311 vs 1.521 — **12-0 wins 5/5 folds** |
+| Reversed split (test=2013-2020) | 12-0 Sharpe 2.635 vs 12-1 Sharpe 1.603 — 12-0 still wins |
+| Forward split (test=2021-2026) | 12-0 Sharpe 2.479 vs 12-1 Sharpe 1.096 — 12-0 still wins |
+| TC=0bps (OOS) | 12-0: 2.479 (turnover 21.9%/mo) · 12-1: 1.096 (turnover 21.6%/mo) |
+| TC=25bps (OOS) | 12-0: 2.454 · 12-1: 1.069 |
+| TC=50bps (OOS) | 12-0: 2.429 · 12-1: 1.041 |
+
+**Key findings**:
+
+1. All three robustness checks pass cleanly. 12-0 beats 12-1 in every one of 5 walk-forward folds spanning 2013-2026 (not just the original single IS/OOS split), in both directions of the reversed train/test split, and the advantage survives realistic transaction costs — 12-0 remains more than double 12-1's Sharpe at 50bps one-way costs.
+2. Turnover is nearly identical between the two windows (12-0: 21.9%/mo, 12-1: 21.6%/mo OOS) — the concern that including the most recent month would create a noisier, higher-churn signal (raised in H491's key findings) is not borne out. The 12-0 edge is not a transaction-cost or turnover artifact.
+3. This is a genuine, robust finding: on this 30-stock mega-cap NASDAQ/S&P universe over 2013-2026, the traditional Jegadeesh-Titman skip-month convention (excluding the most recent month to avoid short-term reversal contamination) actively costs Sharpe rather than protecting it. The most recent month's return is itself informative momentum-continuation signal on this universe, not reversal noise. This is consistent with, and provides the robust validation for, the directional insight H491's Dikhit conditional test was reaching for — but the *simple* always-include-recent-month rule outperforms Dikhit's *conditional* rule, which H491 showed underperforms even plain 12-1.
+4. Caveat: this result is specific to a concentrated 30-name mega-cap growth/tech-tilted universe (same survivorship-bias caveat as H198/H241/etc. — current S&P 500 large caps only). It should not be assumed to generalize to broader or smaller-cap universes, where 1-month reversal is a more established, replicated effect (Lehmann 1990, Jegadeesh 1990) — c.f. H298 (weekly ETF reversal, NOT CONFIRMED on diversified ETFs) as a reminder that reversal-family effects are universe-dependent in this log.
+5. Practical implication: H198's own headline confirmed variant is 6-1m (OOS 1.174), not 12-1m. This result specifically concerns the 12-month lookback family and does not by itself supersede H198's 6-1m production reference — a direct 6-0m vs 6-1m follow-up (already partially covered by H376 in the family) would be needed to know if the same skip-month reversal applies at the shorter 6-month horizon before treating this as a change to the standing production momentum signal.
+
+**Production correlation estimate**: Corr(12-0 OOS returns, SPY) = 0.720 (computed in H491 as Variant B) — similar correlation profile to standard momentum (12-1 Corr(SPY)=0.746), so no material diversification improvement vs existing momentum sleeves (H041a/H417/H411 family), but the absolute Sharpe improvement (2.479 vs H198's confirmed 6-1m 1.174) makes this a strong candidate to replace or supplement the 12-1/6-1 lookback choice used in the existing NASDAQ-momentum backtests (H198, H417, H411 family) — worth a dedicated H493-class follow-up applying the 12-0 window to the actual production-adjacent universes (H417 60-stock, H411 value×drift) rather than committing to production from the 30-stock reference universe alone.
+
+**Verdict**: CONFIRMED. 12-0 (unskipped 12-month momentum) robustly and substantially outperforms both the standard 12-1 skip-month convention and H491's Dikhit conditional variant on the H198 universe, across walk-forward folds, split reversal, and realistic transaction costs. Recommend a follow-up applying this window choice to the higher-Sharpe production-adjacent momentum families (H411/H417) before any production change.
+
+**Results file**: `backtesting/results/h492_results.json`
+
+---
+
+## H493 — Unskipped (12-0) Momentum Generalization: 60-Stock Combined Universe (CONFIRMED)
+
+**Status**: CONFIRMED
+**Tested**: 2026-08-05
+**Source**: Direct follow-up to H492 (CONFIRMED). H492's key finding #4 explicitly flagged that its 12-0-beats-12-1 result "should not be assumed to generalize... to broader or smaller-cap universes" given the H198 universe's concentrated mega-cap tech/growth tilt. This hypothesis tests generalization on H417's 60-stock combined universe, which was specifically built to be sector-diverse (NASDAQ_30 = H198's tech-tilted set, plus SP500_NTECH_30 = 30 non-tech names spanning consumer staples, healthcare, industrials, financials, energy, consumer discretionary).
+
+**Design**: Pure cross-sectional 12-month momentum (not H417's own 1/price×drift signal), long top quintile, equal-weight, monthly rebalance, run on 3 universes: NASDAQ_30 (H198 replication), SP500_NTECH_30 (non-tech), and COMBINED_60. Each tested at both 12-1 (standard skip-month) and 12-0 (unskipped) windows.
+**Script**: `backtesting/daily/run_h493_unskipped_momentum_60stock.py`
+**IS/OOS**: 2013-2020 / 2021-2026 (same split as H198/H417/H492)
+**Gate**: CONFIRMED requires 12-0 beats 12-1 on all 3 universes AND combined-60 12-0 OOS Sharpe > 1.174 (H198 baseline gate)
+
+**Results**:
+
+| Universe | Top-N | Window | IS Sharpe | OOS Sharpe | OOS MaxDD | Neg Yrs |
+|----------|-------|--------|-----------|------------|-----------|---------|
+| NASDAQ_30 (H198 replication) | 6 | 12-1 | 1.603 | 1.096 | -22.6% | 1 |
+| NASDAQ_30 (H198 replication) | 6 | 12-0 | 2.635 | **2.479** | -14.7% | 0 |
+| SP500_NTECH_30 | 6 | 12-1 | 0.735 | 0.822 | -19.9% | 1 |
+| SP500_NTECH_30 | 6 | 12-0 | 2.129 | **2.699** | -8.8% | 0 |
+| COMBINED_60 | 12 | 12-1 | 1.503 | 1.157 | -13.4% | 0 |
+| COMBINED_60 | 12 | 12-0 | 2.753 | **3.178** | -5.9% | 0 |
+| SPY B&H | — | — | — | 0.954 | -23.9% | 1 |
+
+Corr(COMBINED_60 12-0, SPY) full sample = 0.767.
+
+**Key findings**:
+
+1. The 12-0 (unskipped) advantage over standard 12-1 skip-month momentum generalizes cleanly: it holds on all three universes tested, including the non-tech-only universe (SP500_NTECH_30: OOS Sharpe 2.699 vs 0.822, more than triple) which has no overlap with H198's tech/growth tilt. This directly answers H492's open caveat — the effect is not an artifact of the H198 universe's composition.
+2. The combined-60 universe is the best performer of all three (OOS Sharpe 3.178, MaxDD only -5.9%, zero negative OOS years) — larger, more diverse eligible pools consistently produce a stronger top-decile momentum portfolio each month, the same "bigger pool helps" pattern already documented in H417's own universe-sensitivity finding (there for a different signal).
+3. Non-tech stocks (SP500_NTECH_30) show an even larger relative 12-0 vs 12-1 gap (2.699 vs 0.822 = +228%) than NASDAQ tech (2.479 vs 1.096 = +126%) — the skip-month convention appears to cost *more*, not less, on traditionally "boring" large caps in this sample period, contrary to any prior assumption that reversal effects would be stronger outside high-momentum growth names.
+4. MaxDD improves monotonically with 12-0 across all three universes (e.g. combined-60: -13.4% → -5.9%), reinforcing H492's finding that this is a clean risk-adjusted-return improvement, not a return-chasing artifact that trades better absolute return for worse drawdown.
+5. Corr(SPY) = 0.767 for the combined-60 12-0 variant is in the same range as other confirmed momentum-family results in this log (H198 6-1m ~0.7-0.75) — no special diversification benefit vs. existing momentum sleeves, but a materially higher risk-adjusted return within the momentum family itself.
+
+**Production correlation estimate**: Corr(SPY)=0.767 places this alongside other momentum-family strategies already represented indirectly in the production blend's H041a (22%) sleeve — not a new source of diversification, but a candidate to improve the momentum sleeve's own risk-adjusted return if H041a/H417/H411's underlying lookback-window choice were revisited. Given the magnitude of improvement (combined-60 OOS Sharpe 3.178 vs the ~1.1-1.2 range typical of standard 12-1 or 6-1 skip-month momentum on comparable universes), this and H492 together constitute the strongest actionable lead to come out of the momentum family in recent sessions — recommend a dedicated production-integration review (not a blind swap) that checks (a) whether H041a's actual 19-asset universe and current lookback windows show the same 12-0 advantage, and (b) transaction-cost/capacity impact at live position sizes, before touching the production H041a signal.
+
+**Verdict**: CONFIRMED. Unskipped 12-month (12-0) momentum beats standard 12-1 skip-month momentum on all three universes tested — NASDAQ tech-tilted, non-tech S&P 500, and the combined 60-stock pool — with the combined universe reaching OOS Sharpe 3.178 (MaxDD -5.9%, zero negative years). This generalizes and substantially strengthens H492's finding beyond a single concentrated universe. Together, H491/H492/H493 close out this session's momentum-window investigation: **do not skip the most recent month** on these large-cap universes over 2013-2026 — the traditional Jegadeesh-Titman skip-month convention, and Dikhit's conditional refinement of it, both underperform the simplest alternative (always include the most recent month).
+
+**Results file**: `backtesting/results/h493_results.json`
 

@@ -1,0 +1,148 @@
+{
+  "hypothesis": "H493",
+  "gate": 1.174,
+  "results": {
+    "NASDAQ_30 (H198)": {
+      "12-1": {
+        "is": {
+          "label": "12-1",
+          "n": 96,
+          "sharpe": 1.603,
+          "cagr": 0.374,
+          "cumul": 15.5723,
+          "maxdd": -0.202,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "label": "12-1",
+          "n": 64,
+          "sharpe": 1.096,
+          "cagr": 0.256,
+          "cumul": 3.3756,
+          "maxdd": -0.226,
+          "neg_yrs": 1
+        }
+      },
+      "12-0": {
+        "is": {
+          "label": "12-0",
+          "n": 96,
+          "sharpe": 2.635,
+          "cagr": 0.616,
+          "cumul": 100.8284,
+          "maxdd": -0.137,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "label": "12-0",
+          "n": 64,
+          "sharpe": 2.479,
+          "cagr": 0.593,
+          "cumul": 19.1153,
+          "maxdd": -0.147,
+          "neg_yrs": 0
+        }
+      }
+    },
+    "SP500_NTECH_30": {
+      "12-1": {
+        "is": {
+          "label": "12-1",
+          "n": 96,
+          "sharpe": 0.735,
+          "cagr": 0.118,
+          "cumul": 2.307,
+          "maxdd": -0.268,
+          "neg_yrs": 2
+        },
+        "oos": {
+          "label": "12-1",
+          "n": 64,
+          "sharpe": 0.822,
+          "cagr": 0.164,
+          "cumul": 2.1601,
+          "maxdd": -0.199,
+          "neg_yrs": 1
+        }
+      },
+      "12-0": {
+        "is": {
+          "label": "12-0",
+          "n": 96,
+          "sharpe": 2.129,
+          "cagr": 0.351,
+          "cumul": 14.417,
+          "maxdd": -0.12,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "label": "12-0",
+          "n": 64,
+          "sharpe": 2.699,
+          "cagr": 0.532,
+          "cumul": 14.6371,
+          "maxdd": -0.088,
+          "neg_yrs": 0
+        }
+      }
+    },
+    "COMBINED_60": {
+      "12-1": {
+        "is": {
+          "label": "12-1",
+          "n": 96,
+          "sharpe": 1.503,
+          "cagr": 0.263,
+          "cumul": 7.1511,
+          "maxdd": -0.199,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "label": "12-1",
+          "n": 64,
+          "sharpe": 1.157,
+          "cagr": 0.215,
+          "cumul": 2.8578,
+          "maxdd": -0.134,
+          "neg_yrs": 0
+        }
+      },
+      "12-0": {
+        "is": {
+          "label": "12-0",
+          "n": 96,
+          "sharpe": 2.753,
+          "cagr": 0.497,
+          "cumul": 43.6688,
+          "maxdd": -0.111,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "label": "12-0",
+          "n": 64,
+          "sharpe": 3.178,
+          "cagr": 0.586,
+          "cumul": 19.5617,
+          "maxdd": -0.059,
+          "neg_yrs": 0
+        }
+      }
+    }
+  },
+  "spy_oos": {
+    "label": "SPY",
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "cumul": 2.0444,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "corr_combined60_12_0_spy": 0.767,
+  "wins_12_0_over_12_1": {
+    "NASDAQ_30 (H198)": true,
+    "SP500_NTECH_30": true,
+    "COMBINED_60": true
+  },
+  "verdict": "CONFIRMED"
+}

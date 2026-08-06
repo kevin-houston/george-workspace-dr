@@ -1,0 +1,113 @@
+{
+  "hypothesis": "H491",
+  "universe": "H198 30-stock",
+  "gate": 1.174,
+  "variants": {
+    "A_12-1": {
+      "is": {
+        "label": "A_12-1",
+        "n": 96,
+        "sharpe": 1.603,
+        "cagr": 0.374,
+        "cumul": 15.5723,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "A_12-1",
+        "n": 64,
+        "sharpe": 1.096,
+        "cagr": 0.256,
+        "cumul": 3.3756,
+        "maxdd": -0.226,
+        "neg_yrs": 1
+      }
+    },
+    "B_12-0": {
+      "is": {
+        "label": "B_12-0",
+        "n": 96,
+        "sharpe": 2.635,
+        "cagr": 0.616,
+        "cumul": 100.8284,
+        "maxdd": -0.137,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "B_12-0",
+        "n": 64,
+        "sharpe": 2.479,
+        "cagr": 0.593,
+        "cumul": 19.1153,
+        "maxdd": -0.147,
+        "neg_yrs": 0
+      }
+    },
+    "C_conditional": {
+      "is": {
+        "label": "C_conditional",
+        "n": 96,
+        "sharpe": 1.643,
+        "cagr": 0.382,
+        "cumul": 16.6132,
+        "maxdd": -0.222,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "label": "C_conditional",
+        "n": 64,
+        "sharpe": 0.886,
+        "cagr": 0.209,
+        "cumul": 2.6289,
+        "maxdd": -0.287,
+        "neg_yrs": 1
+      }
+    }
+  },
+  "h198_6_1m_ref": {
+    "is": {
+      "label": "6-1m",
+      "n": 96,
+      "sharpe": 1.779,
+      "cagr": 0.421,
+      "cumul": 22.302,
+      "maxdd": -0.202,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "label": "6-1m",
+      "n": 64,
+      "sharpe": 1.174,
+      "cagr": 0.271,
+      "cumul": 3.6563,
+      "maxdd": -0.227,
+      "neg_yrs": 1
+    }
+  },
+  "spy_is": {
+    "label": "SPY",
+    "n": 96,
+    "sharpe": 1.105,
+    "cagr": 0.15,
+    "cumul": 3.0697,
+    "maxdd": -0.194,
+    "neg_yrs": 1
+  },
+  "spy_oos": {
+    "label": "SPY",
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "cumul": 2.0444,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "corr_spy": {
+    "A_12-1": 0.746,
+    "B_12-0": 0.72,
+    "C_conditional": 0.728
+  },
+  "frac_12_0_is_avg": 0.4566,
+  "frac_12_0_oos_avg": 0.388,
+  "verdict": "NOT CONFIRMED"
+}
