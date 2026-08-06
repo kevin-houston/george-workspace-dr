@@ -1,0 +1,14 @@
+{
+  "id": "memtxn-transaction-boundary-dr-wiki",
+  "date": "2026-08-05",
+  "source": "arxiv",
+  "source_url": "https://arxiv.org/abs/2607.27834",
+  "title": "MemTxn (Cui, Tang, Yao, Meng, Ma & Jia, Jul 2026) — transaction boundary for writable agent memory: source-grounded write validation, conflict-version resolution, durable snapshot-journal recovery",
+  "rationale": "The existing Always-On Agents section in wiki/dr/overview.md (added 2026-08-04) flags 'recoverability' as a diagnostic axis and specifically calls out paper trading state (strategy_accounts.json, positions files) as the layer most likely to have write races, citing the task registry's documented PEAD-GAP duplicate-open-pass and dream-cycle git-add race gotchas. MemTxn (arXiv:2607.27834, submitted 2026-07-30) is a direct, concrete answer to that gap: it proposes a transaction-boundary layer for writable agent memory with three components (Ordered PatchTest for source-grounded write validation, a Temporal Resolver for conflict-version selection, and a durable snapshot journal for fault recovery without needing to diagnose the physical write set). Reported results: 60/60 source-supported writes accepted and 179/179 unsupported hard-negative writes correctly rejected in an audit task; full state restoration on LongMemEval-S and LoCoMo after injected multi-key faults; 17-24 F1 point improvement over a dense-retrieval baseline on MemoryAgentBench FactConsolidation. This maps cleanly onto George's own documented incidents: the task registry's dream-cycle git-add race (2026-08-01), cross-session commit sweep (2026-08-03), and PEAD-GAP quadruple-invocation (2026-07-31) are all cases of a human/agent manually performing MemTxn's Temporal Resolver and snapshot-journal job after the fact, rather than George having a designed recovery path. Not a call to build a full implementation -- git + apply_status + the task registry's documented gotchas work well enough in practice -- but proposes one narrow, cheap adoption: a monotonic version/timestamp field checked before writing the two highest write-frequency files (strategy_accounts.json and pead_positions.json/pead_gap_positions.json), so a stale concurrent write fails loudly instead of silently overwriting newer state.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/dr/overview.md",
+  "action": "append",
+  "content": "\n---\n\nNOTE: This proposal's content was already applied directly to wiki/dr/overview.md and wiki/dr/runbook-2026.md during the 2026-08-05 dream cycle scan session (see '## MemTxn: A Transaction Boundary for Agent Memory' section in overview.md and the cross-link in runbook-2026.md Section 3). This staged file is kept for pipeline consistency / build-phase changelog visibility only -- no further append action is needed.\n",
+  "apply_status": "applied"
+}

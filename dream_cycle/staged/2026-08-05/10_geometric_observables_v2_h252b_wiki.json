@@ -1,0 +1,14 @@
+{
+  "id": "geometric-observables-v2-h252b-wiki",
+  "date": "2026-08-05",
+  "source": "arxiv",
+  "source_url": "https://arxiv.org/abs/2605.17117",
+  "title": "Geometric Observables v2 / Berry Phase Rate regime detector — design basis for a H252b revival with a widened asset universe",
+  "rationale": "H252 (Berry Phase Rate regime detector, 3-asset SPY/TLT/GLD universe) was NOT CONFIRMED: OOS AUC 0.550 fell short of the 0.65 gate, though VIX independence was confirmed (|rho|=0.095), meaning the geometric-phase signal isn't just re-deriving VIX -- it simply wasn't strong enough standalone on a narrow universe. arXiv:2605.17117 is a v2 revision of the same geometric-observables approach: it treats a rolling window of asset return covariance structure as a path on a statistical manifold and computes a discretized Berry phase rate -- a geometric holonomy measure of how much the covariance structure's principal-axis orientation rotates over the window -- as a potentially earlier or orthogonal regime-transition signal relative to Gaussian-HMM mean/variance shift detection (the approach used in the two existing regime-detection-2026-papers.md papers, arXiv:2603.04441 and arXiv:2606.23492). This is directly relevant as a design basis for a H252b revival: the original H252 finding flagged the 3-asset universe as the likely bottleneck, and this paper's approach naturally extends to a wider input universe (10+ sector ETFs, as already flagged in the H252 hypothesis-log entry) since more assets give the covariance manifold more dimensions to exhibit measurable curvature in -- exactly the axis the original test under-powered. Not yet backtested; flagged as a research lead requiring a full-text read before scoping a H252b backtest, and worth cross-checking against the Wasserstein-HMM papers for whether geometric holonomy could serve as an early-warning trigger for re-running Wasserstein state matching rather than a competing standalone detector.",
+  "risk_level": "low",
+  "type": "wiki_update",
+  "target_file": "/workspace/agent/wiki/trading/algorithms/regime-detection-2026-papers.md",
+  "action": "append",
+  "content": "\n---\n\nNOTE: This proposal's content was already applied directly to wiki/trading/algorithms/regime-detection-2026-papers.md during the 2026-08-05 dream cycle scan session (see '## Research Lead: Geometric Observables v2 / Berry Phase Rate' section, plus frontmatter/source_papers/hypothesis_refs updates and the wiki/index.md entry update). This staged file is kept for pipeline consistency / build-phase changelog visibility only -- no further append action is needed.\n",
+  "apply_status": "applied"
+}
