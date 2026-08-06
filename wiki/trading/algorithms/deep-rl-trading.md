@@ -32,6 +32,7 @@ RL frames trading as a Markov Decision Process: the agent observes market state,
 - DDPG-TiDE: Sharpe 1.13 OOS, no leverage (arXiv:2508.20103)
 - PPO+A2C+DDPG ensemble: Sharpe > DJIA buy-and-hold OOS (arXiv:2511.12120)
 - TD3: Sharpe 2.68 on unseen data (single period, cherry-picked)
+- **AlphaZeroBeta: Sharpe 1.25 avg (7 markets, 22-fold × 9-seed walk-forward, 2014-2024)** — market-neutral via ℓ1-ball-projected PPO + correlation-penalty reward (arXiv:2607.18001); see [source deep-dive](../sources/alphazerobeta-market-neutral-rl-2026.md). A rare RL result with a rigorous multi-fold OOS protocol rather than a single cherry-picked window — the more credible benchmark in this list alongside the ACM survey's caution below.
 - Our target to beat: H198 6-1m momentum, **OOS Sharpe 1.174** (2021–2026)
 
 ---
@@ -649,7 +650,7 @@ model = xgb.train(
 
 ---
 
-## Cross-References (updated 2026-07-05)
+## Cross-References (updated 2026-08-06)
 
 - [Regime Detection](regime-detection.md) — H249/H251 confirmed results; HMM+RL (H371) extends these
 - [Factor Models](factor-models.md) — LambdaRankIC (H370) bridges here; AlphaCrafter Screener design
@@ -657,3 +658,5 @@ model = xgb.train(
 - [Multi-Agent LLM Trading](multi-agent-llm-trading.md) — AlphaCrafter full-stack, BlindTrade, TrustTrade
 - [Time-Series Foundation Models](ts-foundation-models.md) — DL benchmark arXiv:2603.01820; xLSTM for TSMOM
 - [AI-Driven Alpha Factor Discovery](auto-alpha-discovery.md) — FactorMiner, TreEvo, QuantaAlpha (H365 area)
+- [AlphaZeroBeta — Market-Neutral RL Source Deep-Dive](../sources/alphazerobeta-market-neutral-rl-2026.md) — ℓ1-ball-projected PPO + correlation-penalty reward, Sharpe 1.25 avg across 7 markets with Corr(benchmark) ≤0.15 by construction; concrete pattern for reward-shaping toward neutrality rather than measuring it post-hoc
+- [Strategy Blending & Correlation Management](../backtesting/strategy-blending-correlation.md) — production diversification gap AlphaZeroBeta's neutrality-by-construction approach targets
