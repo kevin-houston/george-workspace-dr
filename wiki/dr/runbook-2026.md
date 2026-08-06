@@ -1,5 +1,5 @@
 ---
-updated: 2026-07-16
+updated: 2026-08-05
 status: CURRENT
 ---
 
@@ -232,6 +232,8 @@ print('Note: virtual tracks per-strategy P&L, not Alpaca account directly')
 ```
 
 The virtual accounts track per-strategy allocation; Alpaca holds the actual shares. They're not expected to be exactly equal.
+
+**Concurrent-write incidents (recurring failure class)**: This section's fixes are all reactive/manual. See [DR Overview — MemTxn](overview.md#memtxn-a-transaction-boundary-for-agent-memory-cui-et-al-arxiv260727834-added-2026-08-05) for the recurring pattern behind these incidents (dream-cycle git-add race, PEAD-GAP quadruple-invocation, cross-session commit sweep) and a proposed lightweight fix — a version/timestamp check on the highest write-frequency files before overwriting.
 
 ---
 

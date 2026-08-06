@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-04
+updated: 2026-08-05
 ---
 
 # Disaster Recovery Overview
@@ -77,11 +77,43 @@ The survey's headline finding — that agent research "concentrates more heavily
 
 The paper proposes grading agent systems on state-mutation and recovery obligations rather than answer quality alone. A lightweight version of this for George: next time [runbook-2026.md](runbook-2026.md) is refreshed, consider adding a row per state layer scoring it on the six axes above — turns the DR section from a procedure list into a structured self-audit, consistent with how the trading side already runs the Shared Strategy Evaluation Checklist and LLM Alpha Validation Checklist as structured gates rather than prose.
 
+## MemTxn: A Transaction Boundary for Agent Memory (Cui et al., arXiv:2607.27834, added 2026-08-05)
+
+The Always-On Agents section above flags **recoverability** as an axis and specifically calls out paper trading state (`strategy_accounts.json`, positions files) as "the layer most likely to have write races" — citing the documented PEAD-GAP duplicate-open-pass and dream-cycle git-add race gotchas in the task registry. MemTxn (Hanshuai Cui, Zhiqing Tang, Zhi Yao, Fanshuai Meng, Qianli Ma, Weijia Jia; submitted 2026-07-30) is a direct answer to that gap: it proposes exactly the missing governance layer.
+
+### What it does
+
+MemTxn sits outside the answer model as a **transaction boundary** for writable agent memory, addressing the failure mode where "errors in writable memory can persist and corrupt future behavior." Three components:
+
+1. **Ordered PatchTest** — validates whether a proposed memory update is actually supported by its cited source before accepting the write (source-grounding check, not just format validation).
+2. **Temporal Resolver** — when facts conflict (e.g. two sessions write different values for the same key), selects which version is authoritative rather than silently overwriting or duplicating.
+3. **Durable snapshot journal** — a versioned log that lets the system restore the last-known-good "declared active map" after a fault, without needing to know the actual physical write set that caused the corruption.
+
+### Reported results
+
+- Audit task: accepted all 60 source-supported writes, correctly rejected all 179 unsupported "hard negative" writes (zero false accepts in the reported setup).
+- Fault recovery: fully restored the declared active state on LongMemEval-S and LoCoMo benchmark states after injected multi-key faults.
+- On MemoryAgentBench FactConsolidation, outperformed a dense-retrieval baseline by 17–24 F1 points across five settings.
+
+### Why this matters for George's DR posture specifically
+
+George's current recovery mechanism for concurrent-write corruption is **manual and after-the-fact**: the task registry documents multiple incidents (dream-cycle git-add race 2026-08-01, cross-session commit sweep 2026-08-03, PEAD-GAP quadruple-invocation 2026-07-31) where the fix was "notice the anomaly, `git reset --soft`, hand-restore the correct file set." That's forensic reconstruction, not a designed recovery path — every incident report in the task registry is effectively a human/agent doing MemTxn's Temporal Resolver and snapshot-journal job by hand, after something already went wrong.
+
+MemTxn's specific mechanisms map onto concrete George gaps:
+
+| MemTxn mechanism | George's current equivalent | Gap |
+|---|---|---|
+| Ordered PatchTest (source-grounding before write) | None — dream cycle proposals write to wiki files based on `apply_status` field with no independent verification the JSON's cited source actually supports the claim | A staged proposal with a fabricated or misread source would be applied as-is |
+| Temporal Resolver (conflict version selection) | None — "last write wins" via git; conflicts are discovered post-hoc via `git show --stat` diffing (documented practice in task registry) | No principled way to pick the "right" version when two sessions write conflicting `strategy_accounts.json` state, only after-the-fact detection |
+| Durable snapshot journal (restore without knowing physical write set) | Git history — but only if the corrupting commit is identified and manually isolated; no automatic "restore active map" primitive | Recovery requires a human/agent to correctly diagnose which files were unintentionally swept into a commit before it can be fixed |
+
+This isn't a call to build a full MemTxn implementation — git + `apply_status` + the task registry's documented gotchas are working well enough in practice. But the highest-leverage narrow adoption would be a lightweight **Temporal Resolver convention** for the two highest write-frequency files (`strategy_accounts.json` and `pead_positions.json`/`pead_gap_positions.json`): a monotonic version/timestamp field checked before write, so a stale concurrent write fails loudly instead of silently overwriting newer state. That's the one piece of MemTxn's design that's cheap to adopt without a dependency and directly targets the failure mode already observed twice this month.
+
 ## Related pages
 
 - [Git Backup Setup](git-backup.md)
 - [Session Diary](diary.md)
-- [Operational Runbook 2026](runbook-2026.md) — restore commands, subsystem validation, current-state snapshot
+- [Operational Runbook 2026](runbook-2026.md) — restore commands, subsystem validation, current-state snapshot; Section 3 documents the concurrent-write incidents MemTxn's design targets
 - [Strategy Reconstruction Guide](strategy-reconstruction.md) — semantic reconstruction of all 6 production strategies from first principles
 - [Bilevel Autoresearch](../concepts/bilevel-autoresearch.md) — related agent-architecture theory (mechanism injection vs. state governance are complementary concerns)
 - [Hitchhiker's Guide to Agentic AI](../tools/hitchhikers-guide-agentic-ai.md) — broader agentic-stack survey; the Always-On Agents paper above is the state/memory-layer deep dive that guide only touches briefly

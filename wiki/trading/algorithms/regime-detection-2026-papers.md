@@ -1,12 +1,14 @@
 ---
 title: Regime Detection 2026 — Wasserstein-HMM and Heavy-Tail Emission Papers
-tags: regime-detection, HMM, Wasserstein, heavy-tail, portfolio-allocation
+tags: regime-detection, HMM, Wasserstein, heavy-tail, portfolio-allocation, geometric-observables
 added: 2026-07-25
+updated: 2026-08-05
 category: Trading / Algorithms
 source_papers:
   - arXiv:2603.04441 (Boukardagha 2026, Columbia)
   - arXiv:2606.23492 (Alswaidan, Jin, Varner 2026)
-hypothesis_refs: H444, H445
+  - arXiv:2605.17117 (Geometric Observables v2 / Berry Phase Rate)
+hypothesis_refs: H444, H445, H252 (H252b candidate)
 ---
 
 # Regime Detection 2026 — Wasserstein-HMM and Heavy-Tail Emissions
@@ -189,6 +191,43 @@ def w2_distance_gaussians(mu1, S1, mu2, S2) -> float:
 4. **Cross-asset vs. single-asset regime estimation**: Both papers use multi-asset return vectors
    for HMM estimation. H445 uses SPY returns only (univariate HMM). Joint SPY/TLT/GLD estimation
    for H026 overlay could improve state discrimination.
+
+---
+
+## Research Lead: Geometric Observables v2 / Berry Phase Rate (arXiv:2605.17117, added 2026-08-05)
+
+H252 (Berry Phase Rate regime detector) was NOT CONFIRMED on its original 3-asset
+SPY/TLT/GLD universe — OOS AUC 0.550 fell short of the 0.65 gate, and the finding at the
+time was that the universe was likely too narrow to give the geometric-phase estimator
+enough cross-sectional structure to detect regime transitions reliably (VIX independence
+was confirmed, |ρ|=0.095, so the signal isn't just re-deriving VIX — it just wasn't
+strong enough standalone). This paper is a v2 revision of the same geometric-observables
+approach and is the natural design basis for a **H252b** revival.
+
+### Core idea
+
+Treats a rolling window of asset return covariance structure as a path on a statistical
+manifold and computes a discretized **Berry phase rate** — a geometric holonomy measure
+of how much the covariance structure's principal-axis orientation rotates over the
+window, rather than a purely statistical (HMM/BIC) state-transition detector. The
+claim is that regime transitions manifest as measurable geometric curvature/rotation in
+the return-covariance manifold before they show up as a clean shift in mean/variance
+that a Gaussian HMM would pick up — i.e. a potentially earlier or orthogonal detection
+signal to the Wasserstein-HMM approach in the two papers above.
+
+### Relevance to H252b
+
+The original H252 finding flagged the 3-asset universe as the likely bottleneck, not the
+geometric method itself. This v2 paper's design is a candidate blueprint for widening
+the input universe to 10+ sector ETFs (as flagged in the H252 hypothesis-log entry) —
+more assets give the covariance manifold more dimensions to exhibit measurable curvature
+in, which is exactly the axis the original test under-powered. Not yet backtested; this
+is a design-basis note for whoever picks up H252b, not a confirmed result. Should be
+read in full (only abstract/summary reviewed so far) before scoping the H252b backtest,
+and cross-checked against the Boukardagha and Alswaidan/Jin/Varner papers above for
+whether geometric holonomy and Wasserstein state-tracking could be combined (e.g. use
+Berry phase rate as an early-warning trigger for when to re-run the Wasserstein state
+matching) rather than treated as competing standalone detectors.
 
 ---
 

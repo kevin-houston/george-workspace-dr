@@ -1,7 +1,7 @@
 ---
-updated: 2026-08-04
+updated: 2026-08-05
 sources_indexed: 4
-pages: 284
+pages: 285
 ---
 
 # Wiki Index
@@ -71,7 +71,7 @@ When answering a query:
 - [Agentic Retrieval from Earnings Calls](trading/algorithms/agentic-earnings-retrieval.md) — arXiv:2507.07906 (SIGIR 2025 FIRE Workshop); LLM-agent builds dynamic hierarchical topic ontology from quarterly earnings calls; detects novel/discontinued/strengthening topics; 78% topic evolution accuracy; H408 stub: topic novelty as PEAD pre-filter (novelty path for composite gate) ← new 2026-07-16
 - [End-to-End Parametric Portfolio Policies](trading/algorithms/e2e-portfolio-policies.md) — arXiv:2607.00475 (Pollok & Robik, July 2026); transformer beats LSTM net of costs on 16 CME futures (LSTM 3–5× higher turnover); transformer ≈ TSMOM net cost; differentiable Sharpe loss; commodity futures: AI adds nothing over TSMOM; H318 implication: use transformer attention as features, not direct policy ← new 2026-07-17
 - [Trend-Following System Theory](trading/algorithms/trend-following-theory.md) — arXiv:2607.19497 (Sepp & Lucic, Jul 2026); unified frequency-domain treatment: European/American/TSMOM taxonomy; Poisson-kernel spectral profitability formula; ARFIMA long-memory; explains H198 no-skip discovery (H376), IBS orthogonality, H045 rate-shock regime breaks; H429 text-regime theoretical grounding ← new 2026-07-23
-- [Regime Detection 2026 Papers — Wasserstein-HMM and Heavy-Tail Emissions](trading/algorithms/regime-detection-2026-papers.md) — arXiv:2603.04441 (Boukardagha; dynamic BIC K-selection, 2-Wasserstein state tracking, TC-MVO; Sharpe 2.18 MaxDD -5.43% on SPY/TLT/GLD/DBC); arXiv:2606.23492 (Alswaidan et al.; Student-t/Laplace/GE emissions; regime-conditional VaR passes coverage tests; Laplace analytical VaR formula); H444/H445 design basis ← new 2026-07-25
+- [Regime Detection 2026 Papers — Wasserstein-HMM and Heavy-Tail Emissions](trading/algorithms/regime-detection-2026-papers.md) — arXiv:2603.04441 (Boukardagha; dynamic BIC K-selection, 2-Wasserstein state tracking, TC-MVO; Sharpe 2.18 MaxDD -5.43% on SPY/TLT/GLD/DBC); arXiv:2606.23492 (Alswaidan et al.; Student-t/Laplace/GE emissions; regime-conditional VaR passes coverage tests; Laplace analytical VaR formula); arXiv:2605.17117 (Geometric Observables v2 / Berry Phase Rate; H252b design basis for widened-universe revival); H444/H445 design basis ← updated 2026-08-05
 - [Diffusion IV Surface Forecasting & Shallow IV Representation (2025-2026)](trading/algorithms/iv-surface-forecasting-2026.md) — arXiv:2511.07571 (Jin & Agarwal; DDPM conditioned on EWMA surfaces + VIX; arbitrage-free SPX IV surface; outperforms GANs; H448 design basis); arXiv:2603.17151 (Lin; shallow single-hidden-layer NN sufficient for IV density/vol representation; deeper = more noise; H449 cross-section design basis) ← new 2026-07-26
 - [Attention Mechanisms and Vector Quantization for Cross-Sectional Factor Models](trading/algorithms/attention-cross-sectional-factor-models.md) — AFT regime-gated attention (arXiv:2606.29347; 11-category features, Market Regime Encoder + Adaptive Gate, look-ahead correction; H456); PRISM-VQ discrete latent factors (arXiv:2605.13407, IJCAI 2026; VQ information bottleneck + MoE time-varying loadings; S&P 500 validated; H457); comparison to HMM/SJM regime detection and FactorEngine alpha mining ← new 2026-07-27
 - [STN-TGAT: Graph Attention Networks for Cross-Sectional Portfolio Construction](trading/algorithms/stn-tgat-graph-attention.md) — arXiv:2607.19385 (Guo et al., Jul 2026); Soft-Threshold NMI-prior Transformer GAT; joint temporal (Transformer) + cross-sectional (GAT) modeling; NMI-based prior graph + soft-threshold sparsification reduces noisy correlations; Top-5 from S&P 500 Top-50 with TC adjustment; H464 design basis ← new 2026-07-27
@@ -324,6 +324,7 @@ When answering a query:
 - [LLM-as-Judge Bias — Mechanistic Account (arXiv:2607.11871)](tools/llm-judge-bias-2026.md) — bias lives in low-dimensional activation subspace (not input-output noise); causal steering reproduces/removes bias; predicts judge failures on unseen benchmarks; 7 judges × 7 bias types × 9 benchmarks ← new 2026-07-13
 - [Agentic Routing: Harness-Native Data Flywheel (arXiv:2607.11399)](tools/agentic-routing-2026.md) — step-level model routing inside agent harnesses; routing decisions auto-generate labeled training records (flywheel); OpenSquilla: LightGBM cold-start + staged router; H318 meta-learner analog ← new 2026-07-13
 - [SkillsGate](tools/skillsgate-notes.md) — visual skill manager (desktop + TUI) for Claude Code/Cursor/20+ agents; browses skills.sh catalog, per-agent install; George already installs via `npx skills add` (same skills.sh ecosystem); low fit for headless George, possible fit for Kevin's own local agents ← new 2026-08-01
+- [dev-browser](tools/dev-browser-notes.md) — sandboxed (QuickJS WASM) browser automation for AI coding agents; full Playwright API, pixel + DOM toolsets; 6.5k★ MIT, legit; overlaps with George's existing agent-browser skill, sandboxing is the differentiator ← new 2026-08-05
 
 ### AI Industry
 
@@ -345,10 +346,10 @@ When answering a query:
 
 ### Disaster Recovery
 
-- [DR Overview](dr/overview.md) — restore procedure, what survives, what to tell a fresh George
+- [DR Overview](dr/overview.md) — restore procedure, what survives, what to tell a fresh George; Always-On Agents framework (6 diagnostic axes) + MemTxn transaction-boundary design (source-grounded writes, conflict resolution, snapshot-journal recovery) mapped onto George's documented concurrent-write incidents ← updated 2026-08-05
 - [Git Backup Setup](dr/git-backup.md) — git repo config, current status, blocked items
 - [Session Diary](dr/diary.md) — append-only log of sessions; narrative recovery layer
-- [Operational Runbook 2026](dr/runbook-2026.md) — current-state restore commands, subsystem validation, common failure modes, what to tell a fresh George (2026 version) ← new 2026-07-16
+- [Operational Runbook 2026](dr/runbook-2026.md) — current-state restore commands, subsystem validation, common failure modes, what to tell a fresh George (2026 version); cross-linked to MemTxn concurrent-write analysis ← updated 2026-08-05
 - [Strategy Reconstruction Guide](dr/strategy-reconstruction.md) — semantic reconstruction of all 6 production strategies (H026/H041a/H045/IBS/PEAD) from first principles if git restore fails; core logic, critical parameters, look-ahead pitfalls, blending weights ← new 2026-07-26
 
 ---
