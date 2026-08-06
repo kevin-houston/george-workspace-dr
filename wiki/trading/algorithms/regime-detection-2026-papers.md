@@ -7,7 +7,7 @@ category: Trading / Algorithms
 source_papers:
   - arXiv:2603.04441 (Boukardagha 2026, Columbia)
   - arXiv:2606.23492 (Alswaidan, Jin, Varner 2026)
-  - arXiv:2605.17117 (Geometric Observables v2 / Berry Phase Rate)
+  - arXiv:2605.17117 (Hammond, Geometric Observables for Financial Regime Detection / Berry Phase Rate)
 hypothesis_refs: H444, H445, H252 (H252b candidate)
 ---
 
@@ -194,15 +194,17 @@ def w2_distance_gaussians(mu1, S1, mu2, S2) -> float:
 
 ---
 
-## Research Lead: Geometric Observables v2 / Berry Phase Rate (arXiv:2605.17117, added 2026-08-05)
+## Research Lead: Geometric Observables for Financial Regime Detection / Berry Phase Rate (arXiv:2605.17117, Hammond, added 2026-08-05)
 
 H252 (Berry Phase Rate regime detector) was NOT CONFIRMED on its original 3-asset
 SPY/TLT/GLD universe — OOS AUC 0.550 fell short of the 0.65 gate, and the finding at the
 time was that the universe was likely too narrow to give the geometric-phase estimator
 enough cross-sectional structure to detect regime transitions reliably (VIX independence
 was confirmed, |ρ|=0.095, so the signal isn't just re-deriving VIX — it just wasn't
-strong enough standalone). This paper is a v2 revision of the same geometric-observables
-approach and is the natural design basis for a **H252b** revival.
+strong enough standalone). This paper (Hammond, "Geometric Observables for Financial
+Regime Detection" — no "v2" in the actual title, corrected 2026-08-05 after peer
+citation check) covers the Berry Phase Rate plus 3 other geometric observables, with
+d=0.72 OOS on regime detection, and is the natural design basis for a **H252b** revival.
 
 ### Core idea
 
