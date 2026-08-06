@@ -1,6 +1,14 @@
 {
-  "date": "2026-08-05",
+  "date": "2026-08-06",
   "candidates": [],
-  "scores": {},
-  "reason": "no earnings"
+  "scores": {
+    "PFE": {
+      "score": -0.0203,
+      "surprise": -0.2891
+    },
+    "MRK": {
+      "score": -0.0348,
+      "surprise": null
+    }
+  }
 }
