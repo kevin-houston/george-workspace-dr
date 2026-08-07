@@ -1,7 +1,7 @@
 ---
-updated: 2026-08-06
+updated: 2026-08-07
 sources_indexed: 4
-pages: 287
+pages: 288
 ---
 
 # Wiki Index
@@ -220,6 +220,7 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
+- [Research Log 2026-08-07](trading/research-log/2026-08-07.md) — wiki: data-sources/point-in-time-constituents.md new (fja05680/sp500 vs Norgate/Sharadar/CRSP provider comparison, unblocks H158/H167/H277); dream cycle: FinCAD (arXiv:2605.24564) + HindsightBench (arXiv:2607.18867) look-ahead-bias tooling staged, hyperbolic-alpha-decay lead flagged withdrawn by peer review — note: this cycle's research was actually performed 2026-08-06 23:15 CT, this entry backfills the log-write step ← new 2026-08-07
 - [Research Log 2026-08-04](trading/research-log/2026-08-04.md) — wiki: ai-industry/quantsightbench-interval-calibration-2026.md new (arXiv:2604.15859 LLM numeric prediction-interval calibration, complements finbench-calibration-2026.md); dream cycle: 3 proposals staged (execution-assumptions checklist, QuantSightBench note, agent-framework landscape refresh) ← new 2026-08-04
 - [Research Log 2026-08-02](trading/research-log/2026-08-02.md) — wiki: paper-trading/dynamic-strategy-allocation.md new (OPS `universal-portfolios` + multi-armed bandit traditions for adaptive sleeve reweighting) ← new 2026-08-02
 - [Research Log 2026-08-01](trading/research-log/2026-08-01.md) — wiki: sources/pead-llm-architecture-comparison-2025.md new (EMNLP-2025 FinNLP; BART/FinBERT/LLaMA-3.2-3B on 10-Q MD&A; 3-day-return text-injection technique) ← new 2026-08-01

@@ -1,0 +1,42 @@
+{
+  "date": "2026-08-07",
+  "note": "This scan was actually performed 2026-08-06 23:15-23:18 CT by a task run under the same recurring job that fired again at the normal 2:30 AM slot. That earlier run staged 3 proposals under dream_cycle/staged/2026-08-07/ (tomorrow-dated per the standing build-phase convention) and edited the wiki, but never wrote a scan-summary JSON. This file backfills that summary from the already-staged proposal content rather than re-running WebSearch/WebFetch against the 5 angles listed in tonight's task prompt (pairs trading+LLM, PEAD+text signals, momentum, multi-agent LLM trading, GitHub trending repos) -- re-scanning would duplicate the API/token cost of research already done and risks staging conflicting/duplicate proposals per the standing duplicate-scan gotcha. The 3 findings below came from whatever angle set the 23:15 run actually used (not necessarily an exact match to tonight's 5-angle list); closest overlap is angle 3 (momentum) for the hyperbolic-decay lead, and general look-ahead-bias/LLM-validation tooling (adjacent to angle 4, multi-agent LLM trading) for FinCAD/HindsightBench.",
+  "findings": [
+    {
+      "title": "FinCAD -- Mitigating Look-Ahead Bias in Financial Backtesting with LLMs (Context-Aware Decoding)",
+      "authors": "Li, Wang & Ma (University of Edinburgh)",
+      "source_url": "https://arxiv.org/abs/2605.24564",
+      "submitted": "2026-05-23",
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-07/1_fincad_lookahead_bias_mitigation.json",
+      "target_wiki_page": "trading/backtesting/lookahead-formal-verification.md",
+      "reason": "First proposal in the look-ahead-bias line to offer a fix (decoding-time penalty suppressing memorized-outcome tokens) rather than just a detection method. Cuts in-sample returns on memorized dates up to -67.1% while leaving OOS Sharpe within ~0.10 of baseline. Caveat noted in the staged proposal: needs decoding-time logit access, not directly usable against George's frontier closed-model API calls (GPT-4o-class, Claude) without a black-box workaround -- see HindsightBench below."
+    },
+    {
+      "title": "HindsightBench -- Black-Box Behavioral Audit Protocol for Parametric Hindsight in Time-Indexed LLM Decision Tasks",
+      "authors": "Haozhe Jia (University College Dublin)",
+      "source_url": "https://arxiv.org/abs/2607.18867",
+      "submitted": "2026-07-21",
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-07/2_hindsightbench_black_box_audit.json",
+      "target_wiki_page": "trading/algorithms/llm-alpha-validation.md",
+      "reason": "Black-box companion to FinCAD -- detects parametric hindsight using only API access (no logprobs), matching George's actual access level to frontier models. ~$19-30/audit row. Gives the LLM Alpha Validation Checklist's look-ahead audit step a concrete runnable protocol instead of a manual judgment call; direct pre-flight gate for H185/H381-H384/H408-style LLM-in-the-loop hypotheses."
+    },
+    {
+      "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay (hyperbolic decay from factor crowding)",
+      "authors": "unattributed in staged proposal",
+      "source_url": "https://arxiv.org/abs/2512.11913",
+      "submitted": "2025-12-11",
+      "relevance": "MEDIUM (downgraded from initial HIGH after peer review)",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-07/3_hyperbolic_alpha_decay_factor_crowding.json",
+      "target_wiki_page": "trading/backtesting/signal-halflife.md",
+      "reason": "Offers a candidate mechanism (crowding-equilibrium hyperbolic decay, momentum-specific, accelerating post-2015) for the previously-unexplained H198/H435-H437 momentum degradation. IMPORTANT: paper is WITHDRAWN on arXiv as of 2025-12-27 pending major revisions -- flagged by dreamcycle-2026-05-29 peer review before the build phase applied it. Staged content was rewritten to frame this explicitly as an unvalidated hypothesis, not a confirmed result."
+    }
+  ],
+  "staged_count": 3,
+  "not_staged_count": 0,
+  "apply_status_all": "pending, awaiting 2026-08-07 04:00 CT build phase"
+}
