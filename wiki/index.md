@@ -1,7 +1,7 @@
 ---
 updated: 2026-08-07
-sources_indexed: 4
-pages: 288
+sources_indexed: 5
+pages: 289
 ---
 
 # Wiki Index
@@ -78,6 +78,7 @@ When answering a query:
 - [SciPhy RL and Neural Black-Litterman: Physics-Informed Portfolio Construction (2026)](trading/algorithms/sciphy-rl-neural-bl-portfolio.md) — arXiv:2607.15195 (Halperin & Itkin; SciPhyRL: HJB→pathwise Hamilton-Jacobi→PINN offline solver; 14-asset ETF OOS Sharpe improvement; avoids RL simulation loop; H472 design basis); arXiv:2607.20533 (Florencio; neural predicates replace subjective BL views; predicate confidence→Omega uncertainty; data-driven BL shrinkage; H473 design basis) ← new 2026-07-28
 
 **Tools**
+- [Awesome Systematic Trading](trading/tools/awesome-systematic-trading.md) — paperswithbacktest curated list; 97 libraries, 40+ strategies, 55 books; 12.8k stars; reference index for hypothesis sourcing and library/broker/data-source lookups ← new 2026-08-07
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
 - [Backtrader vs Vectorbt](trading/tools/backtrader-vs-vectorbt.md) — framework comparison; H116 ETF rotation implementations for both; Vectorbt v1.0 (2026-04-22)
 - [OpenAlice](tools/openalice.md) — full-lifecycle AI trading agent; UTA (CCXT+Alpaca+IBKR), Trading-as-Git, Workspace+MCP, Telegram; TypeScript, 4.4k stars ← 2026-05-28
