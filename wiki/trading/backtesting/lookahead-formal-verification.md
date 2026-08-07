@@ -3,7 +3,7 @@ type: backtesting-methodology
 title: Look-Ahead-Freedom as Temporal Non-Interference
 description: Formal computer-science treatment of look-ahead bias detection in backtesting and agentic trading pipelines. Linear-time type-and-effect checker catches leaks that statistical detectors miss.
 tags: [backtesting, look-ahead-bias, formal-verification, agentic-trading, pipeline-integrity]
-updated: 2026-08-05
+updated: 2026-08-07
 ---
 
 # Look-Ahead-Freedom as Temporal Non-Interference
@@ -193,3 +193,30 @@ H174 uses FinBERT, a relatively narrow sentiment classifier with a specific, dat
 - [LLM Alpha Validation Checklist](../algorithms/llm-alpha-validation.md) — natural home for a LAP-audit step alongside the existing look-ahead audit test
 - [PEAD — Post-Earnings Announcement Drift](../algorithms/pead.md) — H174 pipeline this audit would run against
 - [Multi-Agent LLM Trading](../algorithms/multi-agent-llm-trading.md) — H274 design, higher LAP risk than H174 per above
+
+---
+
+## Research Lead: FinCAD — Inference-Time Mitigation for Parametric Look-Ahead Bias (2026-08-06)
+
+**Source**: Li, Wang & Ma (University of Edinburgh), "Summoning the Oracle to Slay It: Mitigating Look-Ahead Bias in Financial Backtesting with Large Language Models," arXiv:2605.24564, submitted May 23 2026.
+
+Where this page's Fonseca formalization (arXiv:2607.04958) treats look-ahead bias as a temporal-non-interference property to *detect* via a type-and-effect checker on data pipelines, FinCAD addresses a distinct sub-class this page hadn't yet covered: **parametric look-ahead bias** -- an LLM's pretraining corpus already contains the realized outcome of a historical event (e.g. "AAPL rose 8% after its Q3 2019 earnings beat"), so any backtest asking that LLM to forecast or score that same historical event risks the model silently recalling the answer rather than reasoning from the point-in-time inputs it's given. This leak lives inside model parameters, not the data pipeline -- so pipeline-level point-in-time joins and embargo windows (this page's usual toolkit) cannot catch it.
+
+### The fix, not just the diagnosis
+
+FinCAD is an inference-time adaptation of Context-Aware Decoding: it pairs (1) an adversarial bias-discovery pipeline that learns a model-specific "memory-activating" prior prompt per (entity, date), with (2) a decoding-time penalty that suppresses tokens consistent with the memorized outcome, scaled by how much that specific (entity, date) pair appears memorized, and decaying to zero for genuinely out-of-sample dates.
+
+**Reported results** (5 open-weight 7-14B LLMs × 5 mega-cap equities): in-sample backtest returns on memorized dates cut by up to -67.1%; true 2025 OOS returns and Sharpe left within ~0.10 of an uncorrected baseline; general-purpose reasoning benchmarks preserved within 1.7 points.
+
+### Relevance to George's LLM-alpha pipeline
+
+Every hypothesis that puts an LLM in the forecast/scoring loop over historical data is exposed to this failure mode, and none of the existing gates catch it directly:
+
+- **H174 PEAD FinBERT scorer** — lower risk: FinBERT is a small BERT-class classifier fine-tuned on sentiment labels, not a generative LLM with broad pretraining recall of specific stock-move outcomes, but the general concern (does the model's score reflect the text, or a memorized prior about that company/date?) is the same class of question.
+- **H185 Kalshi/Polymarket LLM forecasting** (queued, PolySwarm Phase 2) — high risk: if backtested against resolved historical markets, a frontier LLM may already "know" how many of them resolved.
+- **H381-H384 LLM alpha-mining agents** (AlphaLogics, FactorEngine, HMM+RL, ReCAP) — the Agentic Trading Survey (arXiv:2605.19337, already in wiki) flags exactly this class of leak as part of the reproducibility crisis; FinCAD is a concrete tool to add to the LLM Alpha Validation Checklist's look-ahead audit step.
+- **H408 agentic earnings retrieval** — any backtest over historical earnings-call transcripts with a generative LLM in the loop shares the same exposure.
+
+### Caveat
+
+Tested only on open-weight 7-14B models where CAD needs decoding-time logit access. George's stack primarily calls frontier closed-weight models (GPT-4o-class via `$OPENAI_API_KEY`, Claude) through standard chat-completion APIs that do not expose the sampling internals FinCAD's penalty operates on -- so FinCAD as implemented is **not directly applicable** to George's current LLM-alpha designs without either (a) an open-weight model substitution for the backtest-scoring step, or (b) a black-box analog. See HindsightBench (companion research lead, this same 2026-08-06 scan) for a black-box detection method that doesn't require logit access -- useful as a cheaper first gate even where FinCAD's fix can't be applied directly.

@@ -1,6 +1,7 @@
 ---
 title: Signal Half-Life & Alpha Decay Measurement
 added: 2026-05-31
+updated: 2026-08-07
 category: backtesting / methodology
 ---
 
@@ -599,3 +600,36 @@ Alpha half-life: h(φ) = ln 2 / [θ + δ(φ)]
 - **Diversification across signal families with different decay profiles is the structural defense**
 
 **Practical monitoring rule:** If H386 OOS Sharpe (rolling 24-month) drops below 1.5, investigate IMOM crowding as a cause and consider retiring or re-parameterizing.
+
+---
+
+## Research Lead: Hyperbolic Alpha Decay from Factor Crowding (2026-08-06) — ⚠️ PAPER WITHDRAWN, UNVALIDATED HYPOTHESIS ONLY
+
+**Source**: "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay," arXiv:2512.11913, submitted Dec 11 2025. **WITHDRAWN by the author as of 2025-12-27, "pending major revisions."** The author's withdrawal note states the theoretical functional form (below) stands, but the empirical validation needs more work and the results have unresolved global-applicability limitations. Treat everything below as an unvalidated research lead / hypothesis-generating mechanism, not a confirmed empirical finding -- do not cite the R^2 comparison or crowding-correlation numbers as settled results. Revisit if/when a revised version is posted (flagged by dreamcycle-2026-05-29 peer review, 2026-08-06, before this entry was applied to the wiki).
+
+The half-life framework above (Section 1) treats decay as a single scalar -- the lag at which IC falls to 50% of its initial value -- without committing to a specific decay *shape*. This paper derives a specific functional form from a game-theoretic equilibrium model of factor crowding: **hyperbolic decay**, alpha(t) = K / (1 + lambda*t), where K is initial alpha and lambda is a crowding-rate parameter. Tested against linear and exponential decay curves across a panel of common factors.
+
+### Key finding: momentum fits hyperbolic decay best
+
+Momentum shows R²=0.65 for hyperbolic decay vs. 0.51 (linear) and 0.61 (exponential) -- the equilibrium-crowding model wins. Practically, hyperbolic decay means alpha erodes *fastest early* and the decay rate itself slows over time (rather than constant-rate exponential decay or straight-line linear decay) -- a signal that looked strong in early backtests can lose a disproportionate share of its edge quickly, then plateau at a smaller but more durable residual.
+
+**Taxonomy split**: 'mechanical' factors (momentum, reversal) fit the crowding-equilibrium model well; 'judgment-based' factors (value, quality) do not -- consistent with the idea that factors requiring subjective interpretation of fundamentals crowd differently (or more slowly/unpredictably) than factors computable directly from price/volume that any quant desk can replicate identically once discovered.
+
+**Crowding accelerated post-2015**, correlated (ρ=-0.63) with factor ETF AUM growth -- i.e. the more capital that flows into factor ETFs replicating a given signal, the faster that signal's alpha decays, consistent with more capital chasing the same edge compressing it faster.
+
+**Out-of-sample caveat**: the model's own OOS test *over-predicted* remaining alpha (predicted 0.30 vs. actual 0.15 realized) -- even this more rigorous decay model runs optimistic. Worth internalizing as a general caution, not just for this specific model.
+
+### Relevance to George's momentum degradation findings
+
+This gives a candidate *mechanism*, not just an observation, for two things already flagged elsewhere in the wiki without an explanation:
+
+- **H198** (6-1m stock momentum, confirmed OOS Sharpe 1.174 on 2026-05-14) has been separately noted as degrading across the 2021-2026 window in later hypothesis-log entries.
+- **H435-H437** (H026 ETF rotation family) explicitly note H026's canonical OOS Sharpe sitting at ~0.7-0.8 in 2024-2026 vs. a historical ~1.2 -- previously logged as "possible 2024-2026 strategy degradation" without a proposed cause.
+
+If momentum crowding is accelerating post-2015 and specifically fits hyperbolic decay, that's consistent with -- though not proof of -- the degradation pattern George has independently observed in both the stock-level (H198) and ETF-level (H026) momentum implementations. It argues for treating the degradation as a structural crowding trend rather than noise that should mean-revert, which has a direct portfolio-construction implication: momentum sleeve capital allocation (H198/H026 weighting in the production blend) may warrant a downward-drifting glide path rather than a fixed weight, re-evaluated periodically against a hyperbolic-fit trend line rather than a single rolling-window Sharpe check.
+
+### Caveat
+
+**This paper is withdrawn (arXiv, as of 2025-12-27, "pending major revisions")** -- the author's note says the hyperbolic functional form alpha(t)=K/(1+lambda*t) stands as a theoretical proposal but the empirical validation needs more work, with unresolved global-applicability limitations. Everything above should be read as a candidate mechanism to investigate, not a validated result -- hold on treating the R^2/crowding-correlation figures as reliable until a revised version is posted. Submitted Dec 2025, also outside this scan's usual 1-2 month recency preference; included regardless for direct relevance to an open question already in the hypothesis log. Not yet backtested against George's own H198/H026 return series; if a revised version lands, the natural next step (not yet scoped as a hypothesis number) would be to fit alpha(t) = K/(1+lambda*t) directly against H198's own OOS IC time series and see if lambda matches the paper's post-2015 crowding-acceleration finding.
+
+See also: [Momentum Strategies](../algorithms/momentum-strategies.md) -- H198/H026 production detail; [Hypothesis Log](hypothesis-log.md) -- H435-H437 degradation notes.

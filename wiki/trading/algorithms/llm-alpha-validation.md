@@ -2,7 +2,7 @@
 title: Alpha Illusion — LLM Trading Agent Validation Checklist
 description: 6 structural validity tests + P1-P6 reporting protocol + five-bias framework from 2025-2026 research; required before LLM trading alpha claims are considered deployment evidence
 added: 2026-07-08
-updated: 2026-08-05
+updated: 2026-08-07
 category: llm-trading
 source_paper: arXiv:2605.16895
 ---
@@ -266,3 +266,37 @@ Live OOS benchmark on ~2,000 real 2025 earnings announcements. Agentic AI extrac
 **Why it matters here**: This corroborates the core thesis behind H163/H174 (FinBERT text signal adds real predictive value beyond raw EPS surprise) but at a different task -- same-day price-variance explained, not multi-week forward drift magnitude, which is what H174's 20-trading-day PEAD hold actually trades. High-pedigree source (Chicago Booth, NBER) lends credibility even though it targets a related-but-distinct question.
 
 **Caveat**: Paywalled beyond abstract/press coverage. Full methodology (what "agentic AI system" concretely means, how signals are extracted, exact evaluation window) is unverified. Treat as corroborating context for the general "text beats surprise-alone" thesis, not as a source of a new backtestable hypothesis until full text is available.
+
+---
+
+## Research Lead: HindsightBench — Black-Box Parametric Hindsight Audit (2026-08-06)
+
+**Source**: Haozhe Jia (University College Dublin), "HindsightBench: A Black-Box Behavioral Audit Protocol for Parametric Hindsight in Time-Indexed LLM Decision Tasks," arXiv:2607.18867, submitted Jul 21 2026.
+
+This page's look-ahead audit gate has so far been a qualitative checkpoint: has the pipeline been checked for training-data leakage into the LLM's forecast/score on historical events? HindsightBench turns that into a concrete, runnable protocol that matches George's actual access level -- **black-box API calls only**, no logprobs, no backtest infrastructure, no training-corpus visibility. This is the detection-side complement to FinCAD (arXiv:2605.24564, this same scan's other research lead, filed on lookahead-formal-verification.md): FinCAD fixes parametric hindsight via decoding-time intervention that needs logit access George's frontier-model API calls don't expose; HindsightBench detects it first, cheaply, with the access level George actually has -- making it the more directly adoptable of the two for a pre-flight check on any new LLM-in-the-loop hypothesis.
+
+### Protocol
+
+Four-arm date-manipulation matrix testing the model's behavior when a historical decision task is presented with:
+1. **Revealed** — true date and entity, as normal
+2. **Date-only** — true date, entity masked/genericized
+3. **Masked** — date masked, entity revealed
+4. **Transplanted** — a real entity's data spliced onto a different (often later) date
+
+Crossed with two memory probes -- date recovery (can the model infer/state the true date from context alone?) and outcome recall (does the model's forecast match the *actual* realized outcome suspiciously well, even when it shouldn't be inferable from the given inputs?) -- yielding six per-model metrics: trigger strength, transplant effect, post-cutoff placebo, recoverability, a behaviorally effective knowledge cutoff estimate, and a recall-accuracy dissociation coefficient.
+
+### Cost and practicality
+
+Reported ~$19-30 per full audit row for a mid-tier commercial model at 2026 API list prices. Cheap enough to run once per model-plus-task-domain combination before committing to a full hypothesis build — e.g. run once against GPT-4o-mini or Claude on the specific historical earnings-call / news-headline domain a PEAD or Kalshi hypothesis would use, rather than discovering parametric hindsight after a full IS/OOS backtest already looked suspiciously good.
+
+### Where this plugs into George's pipeline
+
+- **Pre-flight gate for H185** (Kalshi/Polymarket LLM forecasting, queued) — run before backtesting against any resolved historical market.
+- **Pre-flight gate for H381-H384** (LLM alpha-mining family) and **H408** (agentic earnings retrieval) — same exposure class as flagged in the FinCAD lead.
+- **Complements, doesn't replace, the existing look-ahead audit step** — HindsightBench profiles the *model*; the existing checklist step (and Fonseca's formal pipeline-level treatment) still needs to separately verify the *data pipeline* has no point-in-time leaks. A model can pass a data-pipeline audit and still fail a HindsightBench audit if it recalls outcomes from pretraining alone.
+
+### Caveat
+
+Newly published, no independent replication seen yet. The six-metric protocol is non-trivial to reimplement purely from the abstract/HTML — treat this as a research lead requiring a full methodology read before scoping a build, not a ready-to-use library or script.
+
+See also: [Look-Ahead-Freedom as Temporal Non-Interference](../backtesting/lookahead-formal-verification.md) — pipeline-level formal treatment; this page's FinCAD research lead — the fix-side companion to this detection-side lead.
