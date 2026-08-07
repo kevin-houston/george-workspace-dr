@@ -450,3 +450,33 @@
 [2026-08-05 09:33:12] =======================================================
 [2026-08-05 09:33:12] PEAD-GAP open pass starting
 [2026-08-05 09:33:12] Watchlist empty — no earnings candidates today.
+[2026-08-06 09:32:09] =======================================================
+[2026-08-06 09:32:09] PEAD-GAP open pass starting
+[2026-08-06 09:32:09] Earnings candidates: ['PFE', 'MRK']
+[2026-08-06 09:32:09] PEAD_GAP strategy equity: $5,000
+[2026-08-06 09:32:16]   PFE: prior_close=25.81 current=25.81 gap=0.0%
+[2026-08-06 09:32:16]   PFE: gap 0.0% < 3% — skip
+[2026-08-06 09:32:17]   MRK: prior_close=128.33 current=128.03 gap=-0.2%
+[2026-08-06 09:32:17]   MRK: gap -0.2% < 3% — skip
+[2026-08-06 09:32:17] No new positions entered today.
+[2026-08-06 09:32:17] Open pass complete.
+[2026-08-06 09:32:28] =======================================================
+[2026-08-06 09:32:28] PEAD-GAP open pass starting
+[2026-08-06 09:32:28] Earnings candidates: ['PFE', 'MRK']
+[2026-08-06 09:32:28] PEAD_GAP strategy equity: $5,000
+[2026-08-06 09:32:30]   PFE: prior_close=25.81 current=25.98 gap=0.6%
+[2026-08-06 09:32:30]   PFE: gap 0.6% < 3% — skip
+[2026-08-06 09:32:31]   MRK: prior_close=128.33 current=128.01 gap=-0.3%
+[2026-08-06 09:32:31]   MRK: gap -0.3% < 3% — skip
+[2026-08-06 09:32:31] No new positions entered today.
+[2026-08-06 09:32:31] Open pass complete.
+[2026-08-06 09:45:26] =======================================================
+[2026-08-06 09:45:26] PEAD-GAP open pass starting
+[2026-08-06 09:45:26] Earnings candidates: ['PFE', 'MRK']
+[2026-08-06 09:45:26] PEAD_GAP strategy equity: $5,000
+[2026-08-06 09:45:27]   PFE: prior_close=25.81 current=25.99 gap=0.7%
+[2026-08-06 09:45:27]   PFE: gap 0.7% < 3% — skip
+[2026-08-06 09:45:28]   MRK: prior_close=128.33 current=128.62 gap=0.2%
+[2026-08-06 09:45:28]   MRK: gap 0.2% < 3% — skip
+[2026-08-06 09:45:28] No new positions entered today.
+[2026-08-06 09:45:29] Open pass complete.

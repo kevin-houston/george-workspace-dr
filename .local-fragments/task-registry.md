@@ -84,10 +84,11 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 ## PEAD Open Pass
 
 **Trigger:** 9:32 AM CT on weekdays (market open + 2min).
-**Run:** `python3 /workspace/agent/backtesting/paper_trading/pead_open.py`
+**Run:** `source /workspace/agent/venv/bin/activate && python3 /workspace/agent/backtesting/paper_trading/pead_open.py`
 **Success:** Orders submitted for watchlist candidates, or log confirms watchlist was empty.
 
 **Gotchas:**
+- **Must use venv** — bare `python3` lacks pandas (`ModuleNotFoundError: No module named 'pandas'`, found 2026-08-06). Always `source /workspace/agent/venv/bin/activate` first, same as the overnight pass.
 - Check `pead_watchlist.json` first. If empty (`[]`), the open pass is a no-op — that's correct behavior.
 - Alpaca credentials flow through OneCLI proxy. Auth failures → `/onecli-gateway`.
 - Paper account base URL is `https://paper-api.alpaca.markets` — do NOT use live endpoint.

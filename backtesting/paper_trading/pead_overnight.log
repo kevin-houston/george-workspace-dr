@@ -1114,3 +1114,51 @@
 [2026-08-05 23:10:04] Candidates for tomorrow: none
 [2026-08-05 23:10:04] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-08-05 23:10:04] Overnight pass complete.
+[2026-08-06 23:02:02] =======================================================
+[2026-08-06 23:02:02] =======================================================
+[2026-08-06 23:02:02] PEAD overnight pass starting
+[2026-08-06 23:02:02] PEAD overnight pass starting
+[2026-08-06 23:02:02] Scanning earnings calendar…
+[2026-08-06 23:02:02] Scanning earnings calendar…
+[2026-08-06 23:02:31]   Tickers with recent earnings: ['PFE', 'MRK', 'LLY', 'AMD']
+[2026-08-06 23:02:31]   Fetching 8-K for PFE…
+[2026-08-06 23:02:31]   Tickers with recent earnings: ['PFE', 'MRK', 'LLY', 'AMD']
+[2026-08-06 23:02:31]   Fetching 8-K for PFE…
+[2026-08-06 23:02:41]     PFE: 6005 chars
+[2026-08-06 23:02:41]   Fetching 8-K for MRK…
+[2026-08-06 23:02:41]     PFE: 6005 chars
+[2026-08-06 23:02:41]   Fetching 8-K for MRK…
+[2026-08-06 23:02:42]     MRK: 5024 chars
+[2026-08-06 23:02:42]   Fetching 8-K for LLY…
+[2026-08-06 23:02:42]     MRK: 5024 chars
+[2026-08-06 23:02:42]   Fetching 8-K for LLY…
+[2026-08-06 23:02:43]     LLY: 5364 chars
+[2026-08-06 23:02:43]   Fetching 8-K for AMD…
+[2026-08-06 23:02:43]     LLY: 5364 chars
+[2026-08-06 23:02:43]   Fetching 8-K for AMD…
+[2026-08-06 23:02:44]     AMD: 5530 chars
+[2026-08-06 23:02:44]     AMD: 5530 chars
+[2026-08-06 23:03:30]   Loading ProsusAI/finbert…
+[2026-08-06 23:03:30]   Loading ProsusAI/finbert…
+[2026-08-06 23:05:38]   PFE: score=-0.020  surprise=-0.289
+[2026-08-06 23:05:38]   PFE: score=-0.020  surprise=-0.289
+[2026-08-06 23:05:41]   MRK: score=-0.035  surprise=nan
+[2026-08-06 23:05:41]   MRK: score=-0.035  surprise=nan
+[2026-08-06 23:05:43]   LLY: score=-0.046  surprise=-0.274
+[2026-08-06 23:05:43]   LLY: score=-0.046  surprise=-0.274
+[2026-08-06 23:05:45]   AMD: score=-0.011  surprise=-0.129
+[2026-08-06 23:05:45]   ✗ PFE filtered out (score=-0.020, surprise=-0.2891)
+[2026-08-06 23:05:45]   ✗ MRK filtered out (score=-0.035, surprise=None)
+[2026-08-06 23:05:45]   ✗ LLY filtered out (score=-0.046, surprise=-0.2736)
+[2026-08-06 23:05:45]   ✗ AMD filtered out (score=-0.011, surprise=-0.1291)
+[2026-08-06 23:05:45] Candidates for tomorrow: none
+[2026-08-06 23:05:45] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-08-06 23:05:45] Overnight pass complete.
+[2026-08-06 23:05:45]   AMD: score=-0.011  surprise=-0.129
+[2026-08-06 23:05:45]   ✗ PFE filtered out (score=-0.020, surprise=-0.2891)
+[2026-08-06 23:05:45]   ✗ MRK filtered out (score=-0.035, surprise=None)
+[2026-08-06 23:05:45]   ✗ LLY filtered out (score=-0.046, surprise=-0.2736)
+[2026-08-06 23:05:45]   ✗ AMD filtered out (score=-0.011, surprise=-0.1291)
+[2026-08-06 23:05:45] Candidates for tomorrow: none
+[2026-08-06 23:05:45] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-08-06 23:05:45] Overnight pass complete.

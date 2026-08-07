@@ -1,8 +1,10 @@
 {
-  "date": "2026-08-06",
+  "date": "2026-08-07",
   "candidates": [
     "PFE",
-    "MRK"
+    "MRK",
+    "LLY",
+    "AMD"
   ],
   "source": "earnings_only",
   "strategy": "PEAD_GAP"
