@@ -371,3 +371,7 @@ For H181 US stock reversal backtest on ~100 large-caps (2019-2026):
 4. **Code**: Use `build_sector_cache()` above → `industry_adjusted_reversal()` monthly
 
 This avoids the Compustat/CRSP requirement of the original paper while maintaining acceptable accuracy for US large-caps.
+
+## Related Pages
+
+- [Point-in-Time Constituent & Vintage Data Sources](point-in-time-constituents.md) — pairs with this page's PIT SIC lookups for the *membership* half of a point-in-time sector-neutral universe (H158/H181) ← new 2026-08-06

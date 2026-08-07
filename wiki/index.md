@@ -1,7 +1,7 @@
 ---
 updated: 2026-08-06
 sources_indexed: 4
-pages: 286
+pages: 287
 ---
 
 # Wiki Index
@@ -143,6 +143,7 @@ When answering a query:
 - [SEC EDGAR Fundamentals](trading/data-sources/edgar-fundamentals.md) — XBRL financial statement extraction; bulk downloads vs API; financial ratios (P/E, P/B, ROE) for quality/value factors; H221/H222 data pipeline ← new 2026-05-25
 - [Alternative Data Sources](trading/data-sources/alternative-data.md) — NewsAPI/Finnhub/ApeWisdom/Congressional/pytrends/Wikipedia; Quiver Quantitative ($30/mo); H279/H280/H281/PEAD signal taxonomy ← new 2026-06-12
 - [Crypto Data Sources](trading/data-sources/crypto-data-sources.md) — yfinance→CoinGecko→ccxt migration path; Binance public REST; Kraken asset codes ← new 2026-06-08
+- [Point-in-Time Constituent & Vintage Data Sources](trading/data-sources/point-in-time-constituents.md) — fja05680/sp500 vs Norgate vs Sharadar vs CRSP provider comparison; decision framework for when free PIT data is sufficient; unblocks H158/H167/H277 data gap ← new 2026-08-06
 
 **Backtesting**
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado; GT-Score composite objective (98% generalization improvement vs Sharpe-only)

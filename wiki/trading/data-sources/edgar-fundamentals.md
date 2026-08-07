@@ -320,3 +320,4 @@ r = requests.get("https://data.sec.gov/api/xbrl/companyfactsarchive.zip",
 - [Free / Low-Cost Sources](free-data.md) — yfinance, Tiingo, FRED
 - [Quality Factor (QMJ)](../algorithms/quality-factor.md) — H222 uses EDGAR fundamentals
 - [Earnings Calendar & Corporate Events](earnings-events.md) — EDGAR 8-K and XBRL EPS
+- [Point-in-Time Constituent & Vintage Data Sources](point-in-time-constituents.md) — this page's `filed`-date dedup logic is already vintage-aware fundamentals; see the provider table for point-in-time *index membership* to pair with it ← new 2026-08-06
