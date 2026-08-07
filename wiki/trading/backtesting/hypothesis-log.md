@@ -10536,3 +10536,44 @@ Corr(COMBINED_60 12-0, SPY) full sample = 0.767.
 
 **Results file**: `backtesting/results/h493_results.json`
 
+---
+
+## H494 — LLM Semantic Momentum Filter: True LLM Implementation of H279 (NOT CONFIRMED, directionally positive)
+
+**Status**: NOT CONFIRMED (best variant improves over baseline but still misses the strict gate)
+**Tested**: 2026-08-06
+**Source**: arXiv:2510.26228 (LLM-enhanced momentum filter). Direct follow-up to H339 (NOT CONFIRMED, 2026-06-26), which tested hardcoded price-threshold PROXIES for the paper's LLM sentiment/plausibility gate and explicitly queued the "true" LLM version as H279: *"The LLM semantic filter in arXiv:2510.26228 is qualitatively different: it filters based on economic plausibility of the trend, not just price direction. H279 (true LLM semantic filter) remains the correct next step."* H318's notes also flagged H279 as a prerequisite sanity check before attempting more complex multi-agent designs (H280, H318).
+
+**Constraint carried forward from H339**: NewsAPI's free tier has no usable historical depth, so a literal news-headline-sentiment replication cannot be backtested honestly over 2013-2026 (same blocker noted in H289, H339). This run instead gives GPT-4o-mini the same point-in-time, look-ahead-safe price/volatility statistics H339 used for its rule-based proxies (1m/3m/6-1m/12m returns, trailing 12m annualized vol, distance from 252-day high) and asks it to render a holistic qualitative "trend plausibility score" (0-100: durable business-driven move vs. overextended/speculative spike likely to mean-revert) — rather than applying a hardcoded threshold rule. This isolates the paper's actual mechanism (LLM reasoning over trend character) from the separate, still-unresolved news-sourcing problem. It is a partial, not full, replication of the paper's news-sentiment design — documented explicitly as a caveat, not a silent scope-narrowing.
+
+**Design**: Same H198/H339 30-stock S&P 500 universe (survivorship-bias caveat carries over), 6-1m momentum top-1 pick, monthly rebalance. At each month-end, GPT-4o-mini (temperature=0) scores the top-ranked stock 0-100 given only its point-in-time trailing price/vol statistics; enter the position if score ≥ threshold, else hold BIL (cash). Four thresholds tested: 40/50/60/70. Responses cached by (date, ticker) to `backtesting/results/h494_llm_cache.json` (160 unique LLM calls total, ~100s wall time, fully reproducible without re-hitting the API).
+**Script**: `backtesting/daily/run_h494_llm_semantic_momentum_filter.py`
+**IS/OOS**: 2013-2020 / 2021-2026 (same split as H339)
+**Gate**: OOS Sharpe > 1.174 (H198 canonical baseline, per H339 lineage — note the baseline reproduced by this exact script/data vintage is 1.055, the same discrepancy H339 also carried; both figures are reported below for consistency with prior entries in this family)
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | Neg Yrs | WF | Corr(baseline) | Corr(SPY) | Gate (>1.174) |
+|---|---|---|---|---|---|---|---|---|---|
+| A (baseline, no filter) | 1.582 | 1.055 | 50.0% | -37.9% | 0 | 0.667 | 1.000 | 0.423 | fail |
+| B (LLM score ≥40) | 1.673 | 1.132 | 54.9% | -37.9% | 0 | 0.676 | 0.992 | 0.436 | fail |
+| B (LLM score ≥50) | 1.673 | 1.132 | 54.9% | -37.9% | 0 | 0.676 | 0.992 | 0.436 | fail |
+| B (LLM score ≥60) | 1.652 | 1.132 | 54.9% | -37.9% | 0 | 0.685 | 0.992 | 0.436 | fail |
+| B (LLM score ≥70) | 1.652 | 1.132 | 54.9% | -37.9% | 0 | 0.685 | 0.992 | 0.436 | fail |
+
+OOS LLM score distribution: min=30, max=85, mean=73.8, median=75.0 (n=64 unique month/ticker scorings in OOS window; 160 total across IS+OOS).
+
+**Key findings**:
+
+1. **This is the first filter variant in the H291/H336/H337/H339 "add a gate to H198 momentum" lineage that improves over the raw momentum baseline OOS Sharpe rather than degrading it.** H339's best price-rule proxy (3m>0 gate) scored OOS 0.925, *worse* than its own 1.055 baseline; H336 (52w-high filter) and H337 (quality filter) both underperformed their baselines too. The LLM-scored filter moves OOS Sharpe from 1.055 → 1.132 (+7.3%), with IS also improving 1.582 → 1.673 — a directionally consistent effect, not IS-only overfitting.
+2. It still misses the stated gate of 1.174 by a clear margin (1.132 best case), so the strict verdict is NOT CONFIRMED — this is not a production-ready result.
+3. Root cause of the modest effect size: the OOS score distribution is heavily right-skewed (median 75, min only 30) — on this already-momentum-prescreened top-1 pick, the LLM rarely judges the trend implausible, so all four thresholds (40/50/60/70) produce nearly identical behavior (same MaxDD, same NegYrs, OOS Sharpe differing only in the third decimal between 60/70 vs 40/50 on IS). The filter only binds in a small number of extreme months, which is exactly why the effect is small but also why it doesn't show H339's overfitting-to-noise pattern — it's a rare, high-conviction skip rather than a frequently-triggered rule.
+4. Correlation with the unfiltered baseline (0.992) confirms this is a minor refinement of the same underlying momentum signal, not a distinct source of returns — consistent with expectations for any filter layered on top of an existing signal.
+5. Honest scope limitation: because no historical news source was available, this LLM is reasoning over the *same numeric inputs* H339's hardcoded rules used, just synthesizing them more flexibly than a fixed threshold. That it still beats H339's best price-rule variant (0.925) suggests genuine value in LLM-style holistic reasoning over multiple signals simultaneously, but it is not evidence that the paper's core mechanism — reading actual news/text for economic plausibility — would perform any better or worse. A true test of that mechanism still requires a paid historical news/text API (NewsAPI historical tier, or reusing the EDGAR 8-K pipeline already built for PEAD/H174 as a text source) and remains undone.
+
+**Production correlation estimate**: Corr(SPY)=0.436, Corr(unfiltered H198 baseline)=0.992 — far too correlated with the existing momentum family (H041a/H417/H411/H198) to add as a standalone sleeve; at best a refinement to an existing momentum signal's entry rule, not a new diversification source. Not a candidate for a new production allocation.
+
+**Verdict**: NOT CONFIRMED against the strict 1.174 gate, but notable as the first "add a filter to H198 momentum" attempt in this log to actually beat its own unfiltered baseline (1.132 vs 1.055, both IS and OOS improving together). Recommend closing out H279 as "attempted with available data, partial positive signal, full replication blocked on historical news/text access" rather than re-queuing it as-is. If revisited, the highest-value next step is substituting the EDGAR 8-K text already fetched for H163/H174 (PEAD) as the LLM's input in place of point-in-time price statistics, since that pipeline already solves the historical-text-availability problem this run could not.
+
+**Results file**: `backtesting/results/h494_results.json`
+
