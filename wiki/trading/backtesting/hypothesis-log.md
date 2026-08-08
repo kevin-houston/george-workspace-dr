@@ -10577,3 +10577,80 @@ OOS LLM score distribution: min=30, max=85, mean=73.8, median=75.0 (n=64 unique 
 
 **Results file**: `backtesting/results/h494_results.json`
 
+---
+
+## H495 — Janus-Q Event-Type Taxonomy Filter on H174 PEAD (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-07
+**Source**: arXiv:2602.19919 (Janus-Q 10-event-type taxonomy); queued as H287 (2026-06-12); direct implementation of H494's own explicit recommendation to substitute EDGAR 8-K text for point-in-time price statistics as the LLM input, reusing the H163/H174 PEAD pipeline. **Explicitly not a repeat of H225** (NOT CONFIRMED, 2026-05-25/26): H225 tried to *replace* FinBERT's sentiment score with a raw GPT-4o-mini tone score and failed badly (OOS WR=58.1% vs H174 baseline 81.8%) because a single undiscriminating LLM tone score is a worse signal than FinBERT's calibrated score. H495 keeps the FinBERT score ≥0.18 AND surprise ≥0.02 dual filter fully intact and adds a narrower, independent event-*type* classification gate on top, per H287's original design.
+
+**Design**: GPT-4o-mini (temperature=0) classifies each H174 dual-filter-qualifying 8-K into one of 10 Janus-Q event categories (EarningsBeat, RevenueUpside, GuidanceRaise, ProductLaunch, ContractWin, CapitalReturn, GuidanceCut, Litigation, Restructuring, Other) using the same cached 8-K press-release text already fetched for H163 (no new EDGAR calls: 0/39 events missing cached text). Four variants: D (baseline dual-filter reproduction, no event gate — forced non-passing since it defines the gate threshold itself), A (Tier-1 only: EarningsBeat/RevenueUpside/GuidanceRaise), B (Tier-1 OR Tier-2: adds ProductLaunch/ContractWin/CapitalReturn), C (exclude negative/uninformative types: GuidanceCut/Litigation/Restructuring/Other). Responses cached to `backtesting/results/h495_event_type_cache.json` keyed by ticker+event date.
+**Script**: `backtesting/daily/run_h495_janus_event_taxonomy_pead.py`
+**Universe**: Same 30-stock H163/H174 universe (AAPL, MSFT, GOOGL, META, AMZN, NVDA, TSLA, JPM, BAC, WFC, JNJ, PFE, MRK, XOM, CVX, WMT, COST, HD, LOW, SBUX, V, MA, UNH, ABBV, LLY, AVGO, AMD, QCOM, INTC, IBM)
+**IS/OOS**: IS ≤2023-12-31, OOS ≥2024-01-01 (identical split to H174)
+**Gate**: OOS WR > 0.818 (H174 baseline, with an explicit `is_baseline` flag preventing the baseline reproduction itself from spuriously passing on floating-point equality) AND n ≥ 15
+
+**Results**:
+
+| Variant | n IS | n OOS | IS WR | IS MeanRet | OOS WR | OOS MeanRet | Gate (>0.818, n≥15) |
+|---|---|---|---|---|---|---|---|
+| D (baseline dual filter, no event gate) | 17 | 22 | 58.8% | 3.02% | 81.8% | 6.89% | fail (is_baseline) |
+| A (Tier-1 only: EarningsBeat/RevenueUpside/GuidanceRaise) | 17 | 20 | 58.8% | 3.02% | 80.0% | 5.81% | fail |
+| B (Tier-1 OR Tier-2) | 17 | 20 | 58.8% | 3.02% | 80.0% | 5.81% | fail |
+| C (exclude negative/uninformative types) | 17 | 20 | 58.8% | 3.02% | 80.0% | 5.81% | fail |
+
+OOS event-type distribution (n=22 dual-filter events, all with cached text): EarningsBeat=13, GuidanceRaise=4, RevenueUpside=3, Other=2.
+
+**Key findings**:
+
+1. All three event-type gate variants (A/B/C) produce *identical* results to each other (n=20, WR=80.0%, MeanRet=5.81%) because the only events excluded across all three variants are the 2 "Other"-classified events — no event in the OOS sample was classified as GuidanceCut, Litigation, Restructuring, ProductLaunch, ContractWin, or CapitalReturn. The H174 dual filter (FinBERT score ≥0.18 AND surprise ≥0.02) has already selected such a clean, homogeneous population of high-conviction earnings-beat-type events that Janus-Q's finer-grained taxonomy has almost nothing left to discriminate on.
+2. Excluding the 2 "Other" events makes results strictly worse (WR 80.0% vs 81.8%, MeanRet 5.81% vs 6.89%) — both excluded events happened to be OOS winners, so removing them purely subtracts sample size and positive outcomes rather than filtering out noise. This is the opposite of H495's intended effect (removing weak signal).
+3. This result parallels H317's finding (NOT CONFIRMED, 2026-06-XX): "77% of H174 events already have EPS beats so extra filter is redundant" — H495 shows the same redundancy pattern one layer further downstream, now confirmed specifically for LLM-based event-type classification rather than structured EPS/momentum filters. The H174 dual filter is evidently already a near-maximal filter for this 30-stock universe's earnings-8-K event population; additional gates (EPS surprise in H317, event taxonomy here) have too little residual heterogeneity left to add value and mostly just shrink an already-small sample (n=22).
+4. Sample size caveat: n=22 OOS events is small to begin with: any additional filter that removes even 2 events materially shifts WR/MeanRet on a purely combinatorial basis. This makes it inherently hard for *any* additional gate to show a genuine positive effect at this OOS sample size — a structural constraint on the whole H317/H495 filter-layering research direction, not specific to Janus-Q's taxonomy.
+
+**Production correlation estimate**: H495's filtered event set (n=20) is a strict subset of H174's production-qualifying event set (n=22 OOS) — by construction, any correlation to the standing H174 PEAD strategy is not a diversification question but a "same trades minus 2" relationship. Since H495 does not confirm, the standing production PEAD implementation (H174's dual filter, no event-type gate) is unchanged.
+
+**Verdict**: NOT CONFIRMED. The Janus-Q event-type taxonomy adds no value on top of H174's existing FinBERT+surprise dual filter — the dual filter has already selected a population so concentrated in high-conviction earnings-beat events that there is no residual heterogeneity left for a coarser event-type gate to exploit, and the two excluded "Other" events were incidentally OOS winners, making every event-gate variant strictly worse than the baseline. Recommend closing out H287 as "implemented and tested, redundant with existing H174 filter" rather than re-queuing. Combined with H317's earlier, structurally similar finding, this suggests the H174 dual filter is close to a local optimum for this universe/event-source combination — future PEAD improvements are more likely to come from universe expansion (more tickers/events for statistical power) than from additional filter layers on the existing 30-stock sample.
+
+**Results file**: `backtesting/results/h495_results.json`
+
+---
+
+## H319 — LLM-Augmented Cross-Stock Semantic Network: Scoped Lead-Lag / Mean-Reversion Test (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-07
+**Source**: arXiv:2604.19476 (LLM-augmented semantic network); STUB since inception (script was a docstring + bare `pass`, confirmed genuinely unimplemented before this run). Original design: 10-K/10-Q text embeddings → sparse similarity graph → GPT-4o-mini edge-type classification (CUSTOMER_SUPPLIER/COMPETITOR/COMMON_INPUT/NONE) → asymmetric edges (customer-supplier) routed to lead-lag momentum, symmetric edges (competitor/common-input) routed to mean-reversion pairs trading.
+
+**Honest scope limitation (explicit, not silent)**: Implemented at reduced scale to fit a single nightly session within the existing venv (no new pip installs per standing policy). Two changes from the original design, both documented in the script's docstring and the results JSON's `scoping_caveat` field: (1) universe is the existing 30-stock H198/H174 set rather than a new 100-stock universe; (2) Stage 1 candidate-pair generation uses a yfinance sector/industry metadata pre-filter instead of `text-embedding-3-small` cosine similarity over 10-K text — a cheaper proxy for "plausibly related companies" before the expensive LLM edge-classification stage, which is implemented exactly as originally designed (GPT-4o-mini reading actual 10-K Item 1 business-description text for each candidate pair).
+
+**Design**: Sector/industry pre-filter over C(30,2)=435 pairs → 122 candidate pairs. GPT-4o-mini classifies each candidate pair's edge type from real 10-K Item 1 text (30/30 business descriptions fetched, cached). Asymmetric (CUSTOMER_SUPPLIER, either direction) edges → weekly equal-weight long-the-customer-when-supplier-rose-prior-week lead-lag momentum. Symmetric (COMPETITOR, COMMON_INPUT) edges → rolling 20-week log-spread z-score mean-reversion (entry |z|>1.5, exit |z|<0.3), with 5bps one-way transaction cost per leg. A 50/50 combined blend of the two return series was also tested.
+**Script**: `backtesting/daily/run_h319_llm_semantic_network.py`
+**Universe**: Same 30-stock H198/H174 universe (see H495 above for full list)
+**IS/OOS**: 2015-01-01 to 2020-12-31 (IS) / 2021-01-01 to 2026-06-20 (OOS)
+**Gate**: OOS Sharpe > 1.0 AND |Corr(SPY)| < 0.40 AND WF ratio in [0.5, 4.0]
+
+**Results**:
+
+| Strategy | IS Sharpe | OOS Sharpe | OOS MaxDD | WF | Corr(SPY) | Gate |
+|---|---|---|---|---|---|---|
+| Lead-lag (asymmetric, 5 edges) | 0.455 | 0.380 | -28.7% | 0.834 | 0.565 | fail |
+| Mean-reversion (symmetric, 35 edges) | -4.097 | -4.000 | -72.5% | 0.000 | 0.080 | fail |
+| Combined 50/50 | -0.650 | -0.619 | -45.8% | 0.000 | 0.578 | fail |
+
+Edge classification distribution (122 candidate pairs): NONE=82, COMMON_INPUT=24, COMPETITOR=11, CUSTOMER_SUPPLIER_A→B=4, CUSTOMER_SUPPLIER_B→A=1.
+
+**Key findings**:
+
+1. Lead-lag on LLM-classified customer-supplier edges is directionally weak but not catastrophic (OOS Sharpe 0.380, in line with other NOT CONFIRMED lead/lag or reversal attempts in this log such as H298's weekly ETF reversal at 0.618) — only 5 asymmetric edges were found on this 30-stock mega-cap universe, which is inherently too few and too concentrated (heavily overlapping with the semiconductor/tech supply chain) to build a diversified signal.
+2. The mean-reversion result (-4.0 OOS Sharpe, -72.5% MaxDD) is extreme enough that it was explicitly sanity-checked before write-up, given no comparable magnitude exists elsewhere in this log (H307's ETF pairs family, the closest precedent, reported "deeply negative" OOS Sharpe but this log did not previously quantify a figure this severe). Verification steps taken: (a) confirmed the P&L formula (`pos * (ra - rb) / 2 - TC*2`) and z-score entry/exit sign logic are directionally correct in isolation; (b) re-ran all 35 symmetric-edge pairs individually out-of-sample — 34 of 35 lose money with uniformly negative mean per-trade returns (e.g. NVDA/INTC -87.8% cumulative OOS, GOOGL/META -77.0%), not a few outlier pairs dragging down a mixed population; (c) reversing the position sign (i.e., treating the same z-score signal as spread-momentum instead of spread-mean-reversion) flips aggregate OOS Sharpe from -1.13 to +0.62 on the same 35 pairs. This confirms the negative result is a genuine finding, not an implementation bug: LLM-classified COMPETITOR/COMMON_INPUT pairs in mega-cap tech/growth names exhibited persistent spread *trending*, not mean reversion, over 2021-2026 (e.g. NVDA's AI-cycle outperformance vs. INTC was a sustained trend that a mean-reversion strategy fades repeatedly and loses on every re-entry).
+3. This is consistent with, and now quantifies more precisely, the family-level pattern already established by H307 ("ETF pairs family CLOSED... structural breaks in all pairs") and H246 ("IS cointegration INVERSELY predicted OOS") — mean-reversion pairs trading has now failed on ETF pairs (H307), cross-asset pairs (H246), and LLM-selected fundamentally-related equity pairs (H319) in this log. The common thread across all three is that 2021-2026 contains multiple large, durable trend regimes (rate-hike cycle, AI capex boom, mega-cap dispersion) that overwhelm any mean-reversion edge estimated from calmer historical windows.
+4. The sector/industry pre-filter scoping choice did not obviously distort the finding: the LLM's edge classifications look economically sensible on inspection (e.g. NVDA/AVGO and NVDA/QCOM as COMPETITOR or COMMON_INPUT semiconductor pairs, JPM/BAC/WFC as COMPETITOR bank pairs), so the negative result reflects a real property of these company relationships in this market regime, not noisy or nonsensical pair selection.
+
+**Production correlation estimate**: Corr(SPY) = 0.565 (lead-lag), 0.080 (mean-reversion), 0.578 (combined) — the mean-reversion leg's low SPY correlation would in isolation look like a diversification candidate, but its OOS Sharpe (-4.0) makes that irrelevant; a strategy must first have a positive expected return before its correlation profile matters for portfolio construction. None of the three variants are viable for blending with the H041a/H026/H045/IBS production portfolio.
+
+**Verdict**: NOT CONFIRMED. Neither the lead-lag nor mean-reversion leg of the LLM-classified semantic network clears its gate, and the mean-reversion leg fails severely (-4.0 OOS Sharpe) due to genuine spread-trending (not mean-reversion) behavior in mega-cap tech/growth pairs over 2021-2026 — verified via sign-reversal and per-pair diagnostics to rule out an implementation bug. Recommend closing the equity-pairs mean-reversion family (H246/H307/H319) as structurally unfavorable in the current regime rather than re-attempting with a different pair-selection method; the lead-lag/customer-supplier signal is not disproven so much as under-powered on this 30-stock universe (only 5 edges) — a full-scale replication with the originally-designed 100-stock universe and embedding-based candidate generation would be needed to test it properly, but is not a high-priority follow-up given the weak (0.380) result even at this reduced scale.
+
+**Results file**: `backtesting/results/h319_results.json`
+

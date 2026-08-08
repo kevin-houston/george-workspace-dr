@@ -1,0 +1,82 @@
+{
+  "hypothesis": "H319",
+  "description": "LLM-augmented cross-stock semantic network (scoped: 30-stock H198 universe, sector/industry pre-filter replacing embedding stage, GPT-4o-mini edge-type classification from 10-K Item 1 text, asymmetric->lead-lag / symmetric->mean-reversion routing)",
+  "source": "arXiv:2604.19476 (Huang, Fan, Hu, Ye, April 2026)",
+  "model": "gpt-4o-mini",
+  "universe": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "META",
+    "AMZN",
+    "NVDA",
+    "TSLA",
+    "JPM",
+    "BAC",
+    "WFC",
+    "JNJ",
+    "PFE",
+    "MRK",
+    "XOM",
+    "CVX",
+    "WMT",
+    "COST",
+    "HD",
+    "LOW",
+    "SBUX",
+    "V",
+    "MA",
+    "UNH",
+    "ABBV",
+    "LLY",
+    "AVGO",
+    "AMD",
+    "QCOM",
+    "INTC",
+    "IBM"
+  ],
+  "n_candidate_pairs": 122,
+  "n_desc_available": 30,
+  "edge_type_distribution": {
+    "NONE": 82,
+    "COMMON_INPUT": 24,
+    "COMPETITOR": 11,
+    "CUSTOMER_SUPPLIER_A_SUPPLIES_B": 4,
+    "CUSTOMER_SUPPLIER_B_SUPPLIES_A": 1
+  },
+  "n_asymmetric_edges": 5,
+  "n_symmetric_edges": 35,
+  "is_start": "2015-01-01",
+  "is_end": "2020-12-31",
+  "oos_start": "2021-01-01",
+  "oos_end": "2026-06-20",
+  "gate": "OOS Sharpe > 1.0 AND |Corr(SPY)| < 0.4 AND WF in [0.5,4.0]",
+  "results": {
+    "asymmetric_leadlag": {
+      "is_sharpe": 0.455,
+      "oos_sharpe": 0.38,
+      "oos_maxdd": -0.287,
+      "wf_ratio": 0.834,
+      "corr_spy": 0.565,
+      "pass_gate": false
+    },
+    "symmetric_meanrev": {
+      "is_sharpe": -4.097,
+      "oos_sharpe": -4.0,
+      "oos_maxdd": -0.725,
+      "wf_ratio": 0.0,
+      "corr_spy": 0.08,
+      "pass_gate": false
+    },
+    "combined_50_50": {
+      "is_sharpe": -0.65,
+      "oos_sharpe": -0.619,
+      "oos_maxdd": -0.458,
+      "wf_ratio": 0.0,
+      "corr_spy": 0.578,
+      "pass_gate": false
+    }
+  },
+  "verdict": "NOT CONFIRMED",
+  "scoping_caveat": "Narrowed from original 100-stock/embedding-based stub to 30-stock H198 universe with sector/industry metadata pre-filter replacing the embedding-similarity candidate generation stage. LLM edge-type classification (Stage 2) implemented as originally designed."
+}

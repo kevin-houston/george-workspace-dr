@@ -1,0 +1,92 @@
+{
+  "hypothesis": "H495",
+  "description": "Janus-Q (arXiv:2602.19919) event-type taxonomy classification via GPT-4o-mini as a third filter layer on top of H174's FinBERT+surprise dual filter (implements H287's queued design)",
+  "source": "arXiv:2602.19919 (Janus-Q); queued as H287 (2026-06-12); direct follow-up to H494's explicit recommendation to use EDGAR 8-K text (not price stats) as LLM input",
+  "model": "gpt-4o-mini",
+  "universe": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "META",
+    "AMZN",
+    "NVDA",
+    "TSLA",
+    "JPM",
+    "BAC",
+    "WFC",
+    "JNJ",
+    "PFE",
+    "MRK",
+    "XOM",
+    "CVX",
+    "WMT",
+    "COST",
+    "HD",
+    "LOW",
+    "SBUX",
+    "V",
+    "MA",
+    "UNH",
+    "ABBV",
+    "LLY",
+    "AVGO",
+    "AMD",
+    "QCOM",
+    "INTC",
+    "IBM"
+  ],
+  "is_end": "2023-12-31",
+  "oos_start": "2024-01-01",
+  "score_thresh": 0.18,
+  "surprise_thresh": 0.02,
+  "h174_baseline_oos_wr": 0.818,
+  "h174_baseline_oos_meanret": 0.0689,
+  "gate": "OOS WR > 0.818 AND n >= 15",
+  "n_events_classified": 39,
+  "n_missing_cached_text": 0,
+  "oos_event_type_distribution": {
+    "EarningsBeat": 13,
+    "GuidanceRaise": 4,
+    "RevenueUpside": 3,
+    "Other": 2
+  },
+  "variants": {
+    "D_baseline_dual_filter": {
+      "n_is": 17,
+      "n_oos": 22,
+      "is_wr": 0.588,
+      "is_mean_ret": 0.0302,
+      "oos_wr": 0.818,
+      "oos_mean_ret": 0.0689,
+      "pass_gate": false
+    },
+    "A_tier1_only": {
+      "n_is": 17,
+      "n_oos": 20,
+      "is_wr": 0.588,
+      "is_mean_ret": 0.0302,
+      "oos_wr": 0.8,
+      "oos_mean_ret": 0.0581,
+      "pass_gate": false
+    },
+    "B_tier1_or_tier2": {
+      "n_is": 17,
+      "n_oos": 20,
+      "is_wr": 0.588,
+      "is_mean_ret": 0.0302,
+      "oos_wr": 0.8,
+      "oos_mean_ret": 0.0581,
+      "pass_gate": false
+    },
+    "C_exclude_negative_types": {
+      "n_is": 17,
+      "n_oos": 20,
+      "is_wr": 0.588,
+      "is_mean_ret": 0.0302,
+      "oos_wr": 0.8,
+      "oos_mean_ret": 0.0581,
+      "pass_gate": false
+    }
+  },
+  "verdict": "NOT CONFIRMED"
+}
