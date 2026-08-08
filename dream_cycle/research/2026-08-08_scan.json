@@ -1,0 +1,57 @@
+{
+  "date": "2026-08-08",
+  "note": "This scan was actually performed 2026-08-07 23:08-23:09 CT by a task run under the same recurring dream-cycle job that fired again at the normal 2:30 AM slot. That earlier run staged 3 proposals under dream_cycle/staged/2026-08-08/ (tomorrow-dated per the standing build-phase convention), applied them directly to new wiki source pages, and wrote wiki/trading/research-log/2026-08-08.md and the git commit e60460e (\"dream cycle: stage 2026-08-08 proposals\"), but never wrote a scan-summary JSON. This file backfills that summary from the already-staged proposal content rather than re-running WebSearch/WebFetch against the 5 angles listed in tonight's task prompt (pairs trading+LLM+cointegration, PEAD+text signals, cross-sectional/factor momentum, multi-agent LLM trading, GitHub trending quant repos) -- re-scanning would duplicate the API/token cost of research already done and risks staging conflicting/duplicate proposals per the standing duplicate-scan gotcha (see task-registry.md). The 3 findings below came from whatever angle set the 23:08 run actually used; closest overlap with tonight's 5-angle list is angle 3 (factor momentum peripherally, via the point-in-time-factor-DSL governance angle) and angle 4 (multi-agent/LLM trading, via the LLM-agent crypto factor paper and the ChatGPT-snapshot price-discovery paper). None of the 3 findings map to angle 1 (pairs trading+cointegration+LLM), angle 2 (PEAD text signals), or angle 5 (GitHub trending repos) -- those angles were not covered by the 23:08 run and remain open for a future session if still relevant.",
+  "findings": [
+    {
+      "title": "ChatGPT as a Time Capsule: The Limits of Price Discovery",
+      "authors": "Lehner & Lopez-Lira",
+      "source_url": "https://arxiv.org/abs/2604.21433",
+      "submitted": "2026-04",
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-08/1_chatgpt_time_capsule_price_discovery.json",
+      "target_wiki_page": "trading/sources/chatgpt-time-capsule-price-discovery-2026.md",
+      "reason": "Frozen ChatGPT snapshots 2021-2025 used as a point-in-time-safe historical text-information proxy; LLM outlook score predicts 1-month cross-sectional returns (t=6.02); mechanism argued to be aggregation cost, not investor inattention. Distinct from H174's single-document FinBERT scoring -- proposes a multi-document synthesis score as a complementary, not competing, signal. Applied directly to wiki (low risk, wiki_update)."
+    },
+    {
+      "title": "From Hypotheses to Factors: Constrained LLM Agents in Cryptocurrency Markets",
+      "authors": "Huang, Fan, Hu & Ye",
+      "source_url": "https://arxiv.org/abs/2604.26747",
+      "submitted": "2026-04",
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-08/2_hypotheses_to_factors_llm_crypto.json",
+      "target_wiki_page": "trading/sources/hypotheses-to-factors-llm-crypto-2026.md",
+      "reason": "Governance-layer paper, not a new discovery algorithm: point-in-time factor DSL makes look-ahead bias structurally inexpressible, plus an append-only experiment log. Crypto ridge portfolio trained 2020-2022, OOS 2024-2026 44.55% annualized, Sharpe 1.55 net 5bp. Concrete transferable idea flagged in the wiki page: a PITSeries.shift(1)-enforcing wrapper class that would have structurally caught the H256 unlagged-signal incident. Applied directly to wiki (low risk, wiki_update)."
+    },
+    {
+      "title": "Tail Risk Management with Puts and Trend Following: A CVaR Framework for Crashes and Drawdowns",
+      "authors": "Noguer i Alonso & Al Fallouji",
+      "source_url": "https://arxiv.org/abs/2607.00883",
+      "submitted": "2026-07",
+      "relevance": "HIGH",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-08/3_tail_risk_puts_trend_following_cvar.json",
+      "target_wiki_page": "trading/sources/tail-risk-puts-trend-following-cvar-2026.md",
+      "reason": "HJB CVaR framework blending OTM puts (instant protection on a jump) with trend-following overlays (lags the first shock, compounds defensive through a persistent drawdown). Filed as a Phase-2 tail-hedge overlay design candidate distinct from H273 (vol-targeting) and H320 (crash filter). Applied directly to wiki (low risk, wiki_update)."
+    }
+  ],
+  "rejected_as_already_covered": [
+    {
+      "title": "Enhancing PEAD Measurement with LLMs",
+      "reason": "Same FinNLP-2025 paper as the already-indexed pead-llm-architecture-comparison-2025.md"
+    },
+    {
+      "title": "From Knowing to Doing (arXiv:2605.28359)",
+      "reason": "Already cited as KTD-Fin in wiki/trading/ai-industry/llm-trading-agent-benchmarks-2026.md"
+    }
+  ],
+  "angles_not_covered_this_run": [
+    "pairs trading + cointegration + LLM",
+    "PEAD + text signals (FinBERT improvements, transcript NLP)",
+    "GitHub trending quant repos"
+  ],
+  "staged_count": 3,
+  "not_staged_count": 0,
+  "apply_status_all": "pending, awaiting 2026-08-08 04:00 CT build phase"
+}
