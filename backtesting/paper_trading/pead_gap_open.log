@@ -480,3 +480,45 @@
 [2026-08-06 09:45:28]   MRK: gap 0.2% < 3% — skip
 [2026-08-06 09:45:28] No new positions entered today.
 [2026-08-06 09:45:29] Open pass complete.
+[2026-08-07 09:32:17] =======================================================
+[2026-08-07 09:32:17] PEAD-GAP open pass starting
+[2026-08-07 09:32:17] Earnings candidates: ['PFE', 'MRK', 'LLY', 'AMD']
+[2026-08-07 09:32:17] PEAD_GAP strategy equity: $5,000
+[2026-08-07 09:32:22]   PFE: prior_close=26.20 current=26.39 gap=0.7%
+[2026-08-07 09:32:22]   PFE: gap 0.7% < 3% — skip
+[2026-08-07 09:32:23]   MRK: prior_close=128.37 current=126.77 gap=-1.2%
+[2026-08-07 09:32:23]   MRK: gap -1.2% < 3% — skip
+[2026-08-07 09:32:24]   LLY: prior_close=1191.94 current=1188.64 gap=-0.3%
+[2026-08-07 09:32:24]   LLY: gap -0.3% < 3% — skip
+[2026-08-07 09:32:24]   AMD: prior_close=489.28 current=480.55 gap=-1.8%
+[2026-08-07 09:32:24]   AMD: gap -1.8% < 3% — skip
+[2026-08-07 09:32:24] No new positions entered today.
+[2026-08-07 09:32:25] Open pass complete.
+[2026-08-07 09:32:35] =======================================================
+[2026-08-07 09:32:35] PEAD-GAP open pass starting
+[2026-08-07 09:32:35] Earnings candidates: ['PFE', 'MRK', 'LLY', 'AMD']
+[2026-08-07 09:32:35] PEAD_GAP strategy equity: $5,000
+[2026-08-07 09:32:38]   PFE: prior_close=26.20 current=26.40 gap=0.7%
+[2026-08-07 09:32:38]   PFE: gap 0.7% < 3% — skip
+[2026-08-07 09:32:39]   MRK: prior_close=128.37 current=126.72 gap=-1.3%
+[2026-08-07 09:32:39]   MRK: gap -1.3% < 3% — skip
+[2026-08-07 09:32:41]   LLY: prior_close=1191.94 current=1188.61 gap=-0.3%
+[2026-08-07 09:32:41]   LLY: gap -0.3% < 3% — skip
+[2026-08-07 09:32:41]   AMD: prior_close=489.28 current=480.42 gap=-1.8%
+[2026-08-07 09:32:41]   AMD: gap -1.8% < 3% — skip
+[2026-08-07 09:32:41] No new positions entered today.
+[2026-08-07 09:32:42] Open pass complete.
+[2026-08-07 09:45:30] =======================================================
+[2026-08-07 09:45:30] PEAD-GAP open pass starting
+[2026-08-07 09:45:30] Earnings candidates: ['PFE', 'MRK', 'LLY', 'AMD']
+[2026-08-07 09:45:30] PEAD_GAP strategy equity: $5,000
+[2026-08-07 09:45:36]   PFE: prior_close=26.20 current=26.51 gap=1.2%
+[2026-08-07 09:45:36]   PFE: gap 1.2% < 3% — skip
+[2026-08-07 09:45:37]   MRK: prior_close=128.37 current=127.35 gap=-0.8%
+[2026-08-07 09:45:37]   MRK: gap -0.8% < 3% — skip
+[2026-08-07 09:45:38]   LLY: prior_close=1191.94 current=1190.91 gap=-0.1%
+[2026-08-07 09:45:38]   LLY: gap -0.1% < 3% — skip
+[2026-08-07 09:45:39]   AMD: prior_close=489.28 current=477.17 gap=-2.5%
+[2026-08-07 09:45:39]   AMD: gap -2.5% < 3% — skip
+[2026-08-07 09:45:39] No new positions entered today.
+[2026-08-07 09:45:40] Open pass complete.

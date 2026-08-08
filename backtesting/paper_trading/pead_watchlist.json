@@ -1,22 +1,10 @@
 {
-  "date": "2026-08-07",
+  "date": "2026-08-08",
   "candidates": [],
   "scores": {
-    "PFE": {
-      "score": -0.0203,
-      "surprise": -0.2891
-    },
-    "MRK": {
-      "score": -0.0348,
-      "surprise": null
-    },
     "LLY": {
       "score": -0.0456,
       "surprise": -0.2736
-    },
-    "AMD": {
-      "score": -0.0114,
-      "surprise": -0.1291
     }
   }
 }

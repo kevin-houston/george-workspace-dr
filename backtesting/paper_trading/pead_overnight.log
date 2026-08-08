@@ -1162,3 +1162,27 @@
 [2026-08-06 23:05:45] Candidates for tomorrow: none
 [2026-08-06 23:05:45] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-08-06 23:05:45] Overnight pass complete.
+[2026-08-07 23:01:26] =======================================================
+[2026-08-07 23:01:26] PEAD overnight pass starting
+[2026-08-07 23:01:26] Scanning earnings calendar…
+[2026-08-07 23:01:30] =======================================================
+[2026-08-07 23:01:30] PEAD overnight pass starting
+[2026-08-07 23:01:30] Scanning earnings calendar…
+[2026-08-07 23:01:55]   Tickers with recent earnings: ['LLY']
+[2026-08-07 23:01:55]   Fetching 8-K for LLY…
+[2026-08-07 23:01:55]   Tickers with recent earnings: ['LLY']
+[2026-08-07 23:01:55]   Fetching 8-K for LLY…
+[2026-08-07 23:02:06]     LLY: 5364 chars
+[2026-08-07 23:02:06]     LLY: 5364 chars
+[2026-08-07 23:02:52]   Loading ProsusAI/finbert…
+[2026-08-07 23:02:52]   Loading ProsusAI/finbert…
+[2026-08-07 23:04:13]   LLY: score=-0.046  surprise=-0.274
+[2026-08-07 23:04:13]   LLY: score=-0.046  surprise=-0.274
+[2026-08-07 23:04:15]   ✗ LLY filtered out (score=-0.046, surprise=-0.2736)
+[2026-08-07 23:04:15]   ✗ LLY filtered out (score=-0.046, surprise=-0.2736)
+[2026-08-07 23:04:15] Candidates for tomorrow: none
+[2026-08-07 23:04:15] Candidates for tomorrow: none
+[2026-08-07 23:04:15] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-08-07 23:04:15] Overnight pass complete.
+[2026-08-07 23:04:16] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-08-07 23:04:16] Overnight pass complete.
