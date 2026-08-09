@@ -1,7 +1,7 @@
 ---
-updated: 2026-04-29
+updated: 2026-08-09
 type: platform
-regulatory: CFTC DCM (intermediated US access since Dec 2025)
+regulatory: CFTC DCM (intermediated US access since Dec 2025); self-certified US market rules March 2026
 status: active — secondary platform; cross-platform arbitrage vs. Kalshi
 ---
 
@@ -22,6 +22,18 @@ World's largest decentralized prediction market by volume. Blockchain-based, glo
 - State-level challenge: Nevada Gaming Control Board (January 2026) — CFTC preempts state gaming law
 - **Practical status for US traders**: accessible via broker intermediaries; direct offshore access still available internationally
 
+### 2026 update: how Polymarket got back into the US (verified 2026-08-09)
+
+- Polymarket's original Jan 2022 US ban stemmed from a $1.4M CFTC settlement over unregistered event-based binary options (classified as swaps).
+- **July 2025**: Polymarket acquired **QCEX** — a CFTC-licensed Designated Contract Market plus its affiliated derivatives clearing organization, QC Clearing LLC (Boca Raton, FL) — for **$112 million**, giving it a pre-existing regulated US market/clearing shell rather than seeking a license from scratch.
+- **Nov 25, 2025**: the Amended Order of Designation above formally confirmed QCEX (operating as Polymarket's US venue) as the DCM behind this "intermediated" access model.
+- **Dec 2, 2025**: US relaunch as an invite-only sports prediction app.
+- **March 2026**: Polymarket self-certified new US market rules with the CFTC — coverage describes this as the first on-chain prediction market formally integrated into the US regulatory framework this way.
+- **May 2026**: waitlist dropped; **iOS app** opened to all US users. Android and web access remained pending as of the sources checked (Aug 2026) — worth re-verifying before assuming full US web/API access exists.
+- Unverified/lower-confidence: some coverage references a new CFTC probe opening around June 2026 amid broader prediction-market regulatory reviews — flagged as a watch item, not corroborated to the same standard as the above.
+
+See also: kalshi.md's "Regulatory Risk: State Felony Bans vs. Federal Preemption" section for the shared 2026 state-vs-federal legal landscape (Minnesota/Utah/CFTC v. Arizona-Connecticut-Illinois) that affects both platforms.
+
 ## Technical structure
 
 - **Blockchain**: Polygon PoS (Ethereum sidechain), chain ID 137
@@ -29,7 +41,7 @@ World's largest decentralized prediction market by volume. Blockchain-based, glo
 - **Settlement**: UMA oracle — smart contract finality, ~1–2 hour oracle voting window on major events
 - **Order matching**: Off-chain CLOB (centralized backend, sub-second); settlement on-chain (2–3 second block confirmation)
 - **Gas costs**: ~$0.002/transaction (negligible)
-- **V2 upgrade** (announced): 50% latency reduction, new Polymarket USD collateral token, reduced bridging friction
+- **V2 upgrade** (LIVE since April 28, 2026, 11:00 UTC): introduced **pUSD**, a new collateral/settlement token on Polygon that replaces USDC.e as the standard settlement asset, plus faster order matching and smart contract wallet support. The API surface is now **23 REST endpoints + 2 WebSocket endpoints**, no longer geoblocked for API access in the US, with production-ready **Python and TypeScript SDKs**. (Previously listed here as "announced" — confirmed live as of this 2026-08-09 update.)
 
 ---
 
@@ -294,12 +306,14 @@ Polymarket taker fees are lower in absolute terms but:
 
 | Metric | Polymarket | Kalshi |
 |--------|-----------|--------|
-| Monthly volume | $8–12B | $4.5B |
+| Monthly volume | $8–12B (last confirmed figure; no directly comparable June 2026 number found as of this update — see note below) | **$31B (June 2026)**, up from ~$4.5B/month in early 2026 |
 | Bid-ask spread | 0.5–2% (major markets) | 0.1–0.5% (economic markets) |
 | Asset breadth | Crypto, politics, sports, culture, anything | Economics, politics, crypto, corporate |
 | Economic markets depth | Thin vs. Kalshi | Deep — institutional MMs |
 | Settlement finality | 1–2h oracle delay | Instant (official data) |
 | Geographic reach | Global | US-focused |
+
+**Note (2026-08-09)**: Kalshi's June 2026 volume figure ($31B, World Cup-driven — see kalshi.md) is well-sourced, but a directly comparable Polymarket monthly figure for the same period was not found during this research pass; the $8–12B Polymarket figure predates the World Cup surge and should not be treated as current. Industry-wide (all platforms combined) monthly volume did exceed $50B in June 2026, implying Polymarket's own volume also grew materially, but the split is unconfirmed. Flagging as a follow-up: run a targeted search for "Polymarket monthly volume June 2026" before citing a specific Polymarket number.
 
 **Key insight**: Polymarket dominates in volume and breadth, but Kalshi has tighter spreads on economic events (CPI, Fed, unemployment). For nowcasting strategies, **Kalshi is the primary execution venue**; Polymarket is best for cross-platform arbitrage or non-economic events.
 

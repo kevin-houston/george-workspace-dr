@@ -1,7 +1,7 @@
 ---
-updated: 2026-04-29
+updated: 2026-08-09
 type: platform
-regulatory: CFTC-regulated DCM
+regulatory: CFTC-regulated DCM; state-level felony bans in some states as of Aug 2026 (see Regulatory Risk section)
 status: active — recommended primary prediction market platform
 ---
 
@@ -26,6 +26,30 @@ CFTC-regulated prediction market exchange. The institutional-grade option for US
 - ~$52 billion in event contracts outstanding
 - ~$4.5 billion monthly trading volume (up from $1B earlier in 2025)
 - $867M total volume in 2025 (32× growth from $27M in 2024)
+
+## Scale update: 2026 FIFA World Cup surge (June–July 2026)
+
+The World Cup (kicked off June 11, 2026) drove the largest volume spike in Kalshi's history — a useful data point for liquidity/capacity planning around major scheduled events:
+
+- **June 2026 monthly volume: $31 billion** — up 70%+ from May's $17.9B, and roughly 6.9× the "early 2026" $4.5B/month baseline above
+- **World-Cup-specific volume on Kalshi alone: $22.42 billion**
+- Kalshi sustained **>$1 billion in daily volume** every day since the tournament began
+- **~3 million new users** added during the tournament window
+- Industry-wide (Kalshi + Polymarket + others) prediction market volume **exceeded $50 billion in June 2026**, reportedly surpassing traditional sportsbook handle for the same event for the first time
+- Takeaway for capacity planning: liquidity/spread quality on sports contracts is event-driven and can spike 6-7x baseline during major tournaments — worth building a "scheduled mega-event" flag into any market-scanning code rather than assuming steady-state volume
+
+## Regulatory Risk: State Felony Bans vs. Federal Preemption (as of Aug 2026)
+
+Kalshi's CFTC status does not currently guarantee it is *legally risk-free to trade in every state* — this is an active, unsettled fight as of August 2026, relevant to any algo build that assumes a single uniform national ruleset:
+
+- **CFTC v. Arizona, Connecticut, Illinois** (filed April 2, 2026) — CFTC sued these states seeking permanent injunctions against state-level enforcement actions targeting prediction markets, asserting federal preemption under the Commodity Exchange Act.
+- **Minnesota**: a state statute making it a **felony to create, operate, manage, or control a prediction market platform** was set to take effect in August 2026; Kalshi and Polymarket sued to block it.
+- **Utah**: a federal judge ruled (early Aug 2026) that Kalshi's *sports* event contracts remain subject to Utah's anti-gambling statute (online betting = third-degree felony in Utah) — i.e. the CFTC DCM wrapper did not automatically preempt Utah gambling law for sports-specific contracts. Non-sports contracts (economic/political) were not addressed by this ruling.
+- Reporting as of early July 2026 counted **17 states** where some enforcement risk exists for platform operators or, in a few cases, participants — this number is fluid and litigation-dependent, not a settled list.
+- Prediction markets themselves were pricing (per trader positioning cited in coverage) roughly a **64% probability that SCOTUS accepts a sports-event-contract case by year-end 2026** — i.e. the market expects this to eventually require Supreme Court resolution.
+- **Practical implication for this project**: economic/political/crypto contracts (the categories `pead`/nowcasting strategies actually use) are on firmer federal-preemption footing than *sports* contracts specifically, since the Utah ruling targeted sports contracts. Continue treating Kalshi as the primary venue for CPI/Fed/jobs nowcasting; do not extend into sports-contract strategies without re-checking state law, since that's the specific category under state-level legal pressure.
+
+Sources: [CoinDesk — prediction markets $50B World Cup breakout](https://www.coindesk.com/business/2026/07/14/prediction-markets-just-crushed-traditional-sportsbooks-in-a-massive-usd50-billion-world-cup-breakout), [CNBC — World Cup boosts prediction market volumes](https://www.cnbc.com/2026/07/04/2026-fifa-world-cup-boosts-prediction-market-volumes.html), [Courthouse News — Kalshi/Polymarket fight Minnesota ban](https://www.courthousenews.com/kalshi-polymarket-fight-to-block-minnesota-ban-on-prediction-markets/), [Deseret News — Utah judge ruling on Kalshi sports contracts](https://www.deseret.com/utah/2026/08/04/kalshi-sports-betting-federal-judge-rule-utah-anti-gamblng-law-apply-prediction-market/)
 
 ## Markets offered
 
