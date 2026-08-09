@@ -139,3 +139,5 @@ For our 25-asset H026 ETF universe:
 - [Deep RL for Trading](deep-rl-trading.md) — FinRL/PPO context for why SciPhy avoids simulation loop
 - [H472 Staged Proposal](../../dream_cycle/staged/2026-07-28/h472_sciphy_rl_etf_portfolio.json)
 - [H473 Staged Proposal](../../dream_cycle/staged/2026-07-28/h473_neural_predicates_black_litterman.json)
+- [Foundations of Reinforcement Learning with Applications in Finance (Rao & Jelvis)](../sources/rl-for-finance-book-rao-jelvis.md) — derives the HJB equation from the discrete Bellman equation from first principles, the exact PDE machinery SciPhyRL's PINN solves ← new 2026-08-09
+- [MDP / Bellman Equations / HJB — Concept Reference](../../concepts/mdp-bellman-equations.md) ← new 2026-08-09

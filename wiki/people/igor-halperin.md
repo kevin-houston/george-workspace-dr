@@ -48,3 +48,5 @@ Earlier work on portfolio construction using information ratio as the optimizati
 - [Position Sizing & Portfolio Construction](../trading/algorithms/position-sizing.md)
 - [H472](../../dream_cycle/staged/2026-07-28/h472_sciphy_rl_etf_portfolio.json) — SciPhyRL application to H026
 - [From Text to Alpha (2026)](../trading/data-sources/from-text-to-alpha-disclosure-tracking-2026.md) — co-authored (13-author team) LLM disclosure-tracking paper, arXiv:2510.03195 ← new 2026-08-08
+- [Foundations of Reinforcement Learning with Applications in Finance (Rao & Jelvis)](../sources/rl-for-finance-book-rao-jelvis.md) — book's Ch.9 derives the MDP formalization of option hedging that QLBS is built on top of ← new 2026-08-09
+- [MDP / Bellman Equations / HJB — Concept Reference](../concepts/mdp-bellman-equations.md) ← new 2026-08-09

@@ -660,3 +660,5 @@ model = xgb.train(
 - [AI-Driven Alpha Factor Discovery](auto-alpha-discovery.md) — FactorMiner, TreEvo, QuantaAlpha (H365 area)
 - [AlphaZeroBeta — Market-Neutral RL Source Deep-Dive](../sources/alphazerobeta-market-neutral-rl-2026.md) — ℓ1-ball-projected PPO + correlation-penalty reward, Sharpe 1.25 avg across 7 markets with Corr(benchmark) ≤0.15 by construction; concrete pattern for reward-shaping toward neutrality rather than measuring it post-hoc
 - [Strategy Blending & Correlation Management](../backtesting/strategy-blending-correlation.md) — production diversification gap AlphaZeroBeta's neutrality-by-construction approach targets
+- [Foundations of Reinforcement Learning with Applications in Finance (Rao & Jelvis)](../sources/rl-for-finance-book-rao-jelvis.md) — theoretical substrate (MDP/Bellman/HJB) underlying every RL-trading benchmark on this page ← new 2026-08-09
+- [MDP / Bellman Equations / HJB — Concept Reference](../../concepts/mdp-bellman-equations.md) ← new 2026-08-09

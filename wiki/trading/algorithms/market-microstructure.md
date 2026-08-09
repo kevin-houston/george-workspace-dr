@@ -283,3 +283,5 @@ The OB filter in H343/H344/H346/H356/H386 shows the same regime-dependence patte
 - [Signal Half-Life & Alpha Decay](../backtesting/signal-halflife.md) — AI-driven decay model (arXiv:2605.23905)
 - [Smart Money Concepts / Order Blocks](smart-money-concepts-ict.md) — OB filter H343–H346 validated as microstructure-aware selection
 - [AI-Driven Alpha Factor Discovery](auto-alpha-discovery.md) — H393 design, order flow signal generation
+- [Foundations of Reinforcement Learning with Applications in Finance (Rao & Jelvis)](../sources/rl-for-finance-book-rao-jelvis.md) — Ch.10 derives the Avellaneda-Stoikov model above from an HJB PDE, and the linear-impact optimal execution result N*_t=R_t/(T-t) (TWAP is exactly optimal, not just a heuristic) ← new 2026-08-09
+- [MDP / Bellman Equations / HJB — Concept Reference](../../concepts/mdp-bellman-equations.md) ← new 2026-08-09

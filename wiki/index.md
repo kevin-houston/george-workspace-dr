@@ -1,7 +1,7 @@
 ---
-updated: 2026-08-08
-sources_indexed: 8
-pages: 296
+updated: 2026-08-09
+sources_indexed: 9
+pages: 299
 ---
 
 # Wiki Index
@@ -81,6 +81,7 @@ When answering a query:
 - [Attention Mechanisms and Vector Quantization for Cross-Sectional Factor Models](trading/algorithms/attention-cross-sectional-factor-models.md) — AFT regime-gated attention (arXiv:2606.29347; 11-category features, Market Regime Encoder + Adaptive Gate, look-ahead correction; H456); PRISM-VQ discrete latent factors (arXiv:2605.13407, IJCAI 2026; VQ information bottleneck + MoE time-varying loadings; S&P 500 validated; H457); comparison to HMM/SJM regime detection and FactorEngine alpha mining ← new 2026-07-27
 - [STN-TGAT: Graph Attention Networks for Cross-Sectional Portfolio Construction](trading/algorithms/stn-tgat-graph-attention.md) — arXiv:2607.19385 (Guo et al., Jul 2026); Soft-Threshold NMI-prior Transformer GAT; joint temporal (Transformer) + cross-sectional (GAT) modeling; NMI-based prior graph + soft-threshold sparsification reduces noisy correlations; Top-5 from S&P 500 Top-50 with TC adjustment; H464 design basis ← new 2026-07-27
 - [SciPhy RL and Neural Black-Litterman: Physics-Informed Portfolio Construction (2026)](trading/algorithms/sciphy-rl-neural-bl-portfolio.md) — arXiv:2607.15195 (Halperin & Itkin; SciPhyRL: HJB→pathwise Hamilton-Jacobi→PINN offline solver; 14-asset ETF OOS Sharpe improvement; avoids RL simulation loop; H472 design basis); arXiv:2607.20533 (Florencio; neural predicates replace subjective BL views; predicate confidence→Omega uncertainty; data-driven BL shrinkage; H473 design basis) ← new 2026-07-28
+- [Foundations of Reinforcement Learning with Applications in Finance (Rao & Jelvis)](sources/rl-for-finance-book-rao-jelvis.md) — 538-page MDP/Bellman/HJB textbook; derives Merton's Portfolio Problem, American option MDP, and the Avellaneda-Stoikov market-making + linear-impact optimal execution (N*_t=R_t/(T-t)) results from first principles; theoretical substrate for SciPhyRL, deep-rl-trading, market-microstructure pages ← new 2026-08-09
 
 **Tools**
 - [Awesome Systematic Trading](trading/tools/awesome-systematic-trading.md) — paperswithbacktest curated list; 97 libraries, 40+ strategies, 55 books; 12.8k stars; reference index for hypothesis sourcing and library/broker/data-source lookups ← new 2026-08-07
@@ -316,10 +317,12 @@ When answering a query:
 - [Quant Convergence — Classical Value Investing and Modern Factor Models](concepts/quant-convergence-value-factor.md) — arXiv:2606.24575 (Yamazaki 2026); Graham RF 232% return / Calmar 1.38 best risk-adjusted; AutoGluon 222% but -40% MaxDD; Combined RF (mom+Graham) lowest MaxDD; margin of safety as ML regularizer; H466 design basis; explains H337/H448 NOT CONFIRMED (no Graham variation in H198 large-cap universe) ← new 2026-07-27
 - [Overnight-Intraday Return Decomposition](concepts/overnight-intraday-decomposition.md) — Chen, Hansen & Tong (arXiv:2607.03669, Jul 2026); Split-Session Cluster GARCH; overnight tail index ~3.8 (heavier) vs intraday ~5.2; news-arrival days (fat overnight) generate trend continuation not IBS reversal; H476 overnight gate design; integrates with FRI magnitude mechanism and IBS OOS Sharpe 2.129 production strategy ← new 2026-07-30
 - [Herding, Momentum, and Reversal — Network Information Diffusion Theory](concepts/herding-momentum-reversal-network-theory.md) — arXiv:2607.27063 (Jul 2026); agent-based network model; local herding creates momentum (1-9m), information diffusion saturation creates reversal (9-24m); momentum streak signal: stocks in top-N momentum rank for 6+ consecutive months face reversal risk; H477 design basis for H198 30-stock universe ← new 2026-07-30
+- [MDP / Bellman Equations / HJB — Concept Reference](concepts/mdp-bellman-equations.md) — Markov Decision Process framework, Bellman equation recursion, DP-vs-RL as two solutions to the same equation, continuous-time HJB limit; extracted from Rao & Jelvis; underlies SciPhyRL, Avellaneda-Stoikov, and Merton's Portfolio Problem ← new 2026-08-09
 
 **People**
 - [Yasemin Saltuk](people/yasemin-saltuk.md) — J.P. Morgan Social Finance lead researcher; impact investing research series
 - [Igor Halperin](people/igor-halperin.md) — NYU / J.P. Morgan quant researcher; SciPhyRL (HJB-PINN portfolio optimization, H472); QLBS offline RL options pricing; physics-informed ML approach to portfolio construction ← new 2026-07-28
+- [Ashwin Rao](people/ashwin-rao.md) — Stanford RL-for-finance instructor; co-author (with Tikhon Jelvis) of Foundations of Reinforcement Learning with Applications in Finance; derives Avellaneda-Stoikov and linear-impact optimal execution from first principles ← new 2026-08-09
 
 **Organizations**
 - [J.P. Morgan Social Finance](orgs/jpmorgan-social-finance.md) — JPM unit est. 2007; proprietary capital + advisory + research
