@@ -47,3 +47,4 @@ Earlier work on portfolio construction using information ratio as the optimizati
 - [Deep RL for Trading](../trading/algorithms/deep-rl-trading.md) — broader RL in finance context
 - [Position Sizing & Portfolio Construction](../trading/algorithms/position-sizing.md)
 - [H472](../../dream_cycle/staged/2026-07-28/h472_sciphy_rl_etf_portfolio.json) — SciPhyRL application to H026
+- [From Text to Alpha (2026)](../trading/data-sources/from-text-to-alpha-disclosure-tracking-2026.md) — co-authored (13-author team) LLM disclosure-tracking paper, arXiv:2510.03195 ← new 2026-08-08
