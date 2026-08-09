@@ -1,0 +1,105 @@
+{
+  "date": "2026-08-09",
+  "angles_searched": [
+    {
+      "angle": "1: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Moira: LLM-driven semantic pairs trading",
+          "source_url": "arXiv:2605.01954",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already logged as H316 STUB in trading hypothesis registry; needs OpenAI API, not yet run. No new information found tonight beyond what's already staged."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "2: PEAD + post-earnings drift + text signals",
+      "findings": [
+        {
+          "title": "Multi-modal PEAD (FinBERT + EPS surprise + pre-momentum)",
+          "source_url": "arXiv:2605.25894",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Already run as H317 NOT CONFIRMED (2026 hypothesis log) — adding EPS/momentum filters reduces n below the 20-event gate; H174 remains best filter. No new variant found tonight."
+        },
+        {
+          "title": "PEAD.txt aclanthology transcript-NLP paper",
+          "source_url": "aclanthology (already ingested)",
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "Already cross-referenced in wiki/trading/algorithms/llm-alpha-validation.md and related to closed H168/H171 lines (transcript coverage bias)."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "3: cross-sectional momentum + factor momentum",
+      "findings": [
+        {
+          "title": "\"Toward Expert Investment Teams\" — spatio-temporal / multi-factor momentum agents",
+          "source_url": "arXiv:2602.23330",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Already referenced against the still-open H180 spatio-temporal momentum NN line; nothing new to add tonight."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "4: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "LiveTradeBench: live-market LLM trading benchmark (US stocks + Polymarket)",
+          "source_url": "arXiv:2511.03628",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Confirmed present in wiki/trading/algorithms/llm-alpha-validation.md under '## Additional Evidence: LiveTradeBench (arXiv:2511.03628, flagged 2026-07-31)' — already ingested with its key finding (LMArena benchmark scores don't predict live trading performance) written up in a prior session. No new development to layer on top tonight."
+        },
+        {
+          "title": "PolySwarm multi-agent LLM trading terminal",
+          "source_url": "arXiv:2604.03888",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Already covered in wiki/trading/prediction-markets/polymarket.md under '## Research Lead: PolySwarm Multi-Agent LLM Trading Terminal' — left untouched this session, still current."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "5: GitHub trending quant finance repos",
+      "findings": [
+        {
+          "title": "ai-hedge-fund (virattt/ai-hedge-fund, 49.6k stars) — accuracy-weighted multi-agent voting",
+          "source_url": "https://github.com/virattt/ai-hedge-fund",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Confirmed present in wiki/trading/algorithms/multi-agent-llm-trading.md under '## New GitHub Reference: ai-hedge-fund (49.6k★)', including the accuracy-weighted voting vs. TradingAgents static-hierarchy comparison and the H274/H280 practical takeaway (weight FinBERT/GPT-4o/BART scoring agents by recent realized WR). Already fully synthesized in a prior session."
+        },
+        {
+          "title": "NoFx (NoFxAiOS/nofx, 11.2k stars) — automated AI trading assistant with consecutive-loss safety mode",
+          "source_url": "https://github.com/NoFxAiOS/nofx",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Referenced alongside ai-hedge-fund in prior research-log entries (2026-07-04 to 2026-07-09 range); no new capability or release found tonight to warrant a fresh proposal."
+        },
+        {
+          "title": "prediction-market-analysis (36GB dataset repo) / pmxt",
+          "source_url": "GitHub (unspecified — already logged)",
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "Already noted in prior dream-cycle scans; no update found."
+        }
+      ],
+      "new_staged": 0
+    }
+  ],
+  "wiki_expansion_this_session": {
+    "section": "Prediction Markets (kalshi.md, polymarket.md)",
+    "commit": "f2c3610",
+    "summary": "Refreshed both pages from stale 2026-04-29 baseline: Kalshi's $31B June 2026 World Cup volume surge + new state regulatory-risk section; Polymarket's QCEX acquisition backstory + confirmed-live V2/pUSD upgrade + liquidity table update."
+  },
+  "staged_proposals_created": 0,
+  "conclusion": "No new HIGH-relevance findings across any of the 5 angles tonight — every candidate surfaced by WebSearch was already ingested and synthesized into the wiki in a prior session (verified via targeted Grep against the specific target files, not just broad keyword matches). Dream cycle scan complete with zero staged proposals; 4 AM build phase has nothing pending from tonight's Phase 2 beyond the already-committed Phase 1 wiki refresh."
+}
