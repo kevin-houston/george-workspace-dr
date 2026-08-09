@@ -84,5 +84,5 @@ The AI/Agent domain patterns are directly applicable: can render the H274 multi-
 ## Cross-references
 
 - [Multi-Agent LLM Trading Systems](../trading/tools/multi-agent-llm-trading.md) — H274 PEAD upgrade; diagram candidate
-- [QuantMind](../trading/tools/quant-mind.md) — paper ingestion pipeline; diagram candidate
+- [QuantMind](quant-mind-notes.md) — paper ingestion pipeline; diagram candidate
 - [Mermaid Skill](mermaid-skill.md) — lighter-weight diagramming via Mermaid syntax (already in wiki)

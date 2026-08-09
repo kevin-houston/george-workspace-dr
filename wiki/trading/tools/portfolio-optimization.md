@@ -329,3 +329,5 @@ print(result.sharpe_ratio, result.max_drawdown)
 ```
 
 **Relevance to production strategies**: Directly testable against the current top-1/top-2 monthly rotation logic in H026 (25-asset sector+alts), H045 (13-asset bonds), and H041a (19-asset) -- would answer whether a convex-optimized weight vector with in-loop transaction costs beats simple top-N selection once realistic costs are modeled at the optimization stage rather than estimated afterward. Not yet backtested against our universes; logged as a tool to evaluate, not a confirmed improvement.
+
+**See also**: [Performance Attribution](../paper-trading/performance-attribution.md) — where these optimizer outputs get monitored and evaluated live.

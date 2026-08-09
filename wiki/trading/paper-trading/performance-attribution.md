@@ -301,3 +301,4 @@ Pause condition (ANY of):
 - [Live Graduation Criteria & Performance Attribution](live-graduation-criteria.md) — SPRT test, trade count gates
 - [Risk Controls & Live Trading Monitoring](risk-controls-and-monitoring.md) — circuit breakers, kill switch
 - [Execution Quality & Slippage Analysis](execution-quality.md) — slippage budget per strategy
+- [Portfolio Optimization Tools](../tools/portfolio-optimization.md) — Riskfolio-Lib/skfolio construction methods feeding this attribution layer
