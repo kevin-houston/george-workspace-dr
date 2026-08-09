@@ -1,7 +1,7 @@
 ---
 updated: 2026-08-08
 sources_indexed: 8
-pages: 293
+pages: 296
 ---
 
 # Wiki Index
@@ -150,6 +150,9 @@ When answering a query:
 - [Alternative Data Sources](trading/data-sources/alternative-data.md) — NewsAPI/Finnhub/ApeWisdom/Congressional/pytrends/Wikipedia; Quiver Quantitative ($30/mo); H279/H280/H281/PEAD signal taxonomy ← new 2026-06-12
 - [Crypto Data Sources](trading/data-sources/crypto-data-sources.md) — yfinance→CoinGecko→ccxt migration path; Binance public REST; Kraken asset codes ← new 2026-06-08
 - [Point-in-Time Constituent & Vintage Data Sources](trading/data-sources/point-in-time-constituents.md) — fja05680/sp500 vs Norgate vs Sharadar vs CRSP provider comparison; decision framework for when free PIT data is sufficient; unblocks H158/H167/H277 data gap ← new 2026-08-06
+- [Grounded Event Extraction from SEC 8-K Filings (2026)](trading/data-sources/sec-8k-event-taxonomy-2026.md) — arXiv:2607.08346; 119-event-type taxonomy, fuzzy n-gram source grounding, 601k tagged events from 293k filings; explains H175 NOT CONFIRMED (Item 2.02 conflates distinct event types); design candidate for H174 categorical pre-filter ← new 2026-08-08
+- [The Stanford EDGAR Filings Dataset (2026)](trading/data-sources/stanford-edgar-filings-dataset-2026.md) — arXiv:2606.18192; bulk EDGAR corpus as layout-faithful MultiMarkdown, 152B tokens released (550B full archive), 18.5M filings, <0.1% Common Crawl overlap; EDGAR-Forecast/EDGAR-OCR benchmarks; backfill path for H174 small-sample OOS ← new 2026-08-08
+- [From Text to Alpha (2026)](trading/data-sources/from-text-to-alpha-disclosure-tracking-2026.md) — arXiv:2510.03195; Choi et al. incl. Halperin & Lopez-Lira; "LLM as extractor, embedding as ruler" period-over-period disclosure-shift signal, >2x risk-adjusted alpha vs NER baseline; distinct inter-period mechanism vs H163/H174 single-document scoring ← new 2026-08-08
 
 **Backtesting**
 - [Backtesting Design Principles](trading/backtesting/design-principles.md) — IS/OOS framework, bias taxonomy, confirmation criteria, deflated Sharpe, López de Prado; GT-Score composite objective (98% generalization improvement vs Sharpe-only)
@@ -226,7 +229,7 @@ When answering a query:
 - [Research Log 2026-06-03](trading/research-log/2026-06-03.md) — wiki: survivorship-bias.md new; H245 NOT CONFIRMED (low-vol OOS 0.626); H246 NOT CONFIRMED (ETF pairs, structural breaks); dream cycle scan
 - [Research Log 2026-06-05](trading/research-log/2026-06-05.md) — wiki: tax-and-after-tax-returns.md new; dream cycle: H253/H254 staged
 - [Research Log 2026-06-06](trading/research-log/2026-06-06.md) — wiki: factor-momentum-style-rotation.md new; H255/H256 NOT CONFIRMED (factor ETF / GEM all underperform SPY OOS); dream cycle: H257/H258/H259/H260 staged
-- [Research Log 2026-08-08](trading/research-log/2026-08-08.md) — wiki: sources/chatgpt-time-capsule-price-discovery-2026.md, hypotheses-to-factors-llm-crypto-2026.md, tail-risk-puts-trend-following-cvar-2026.md new (3 verified arXiv papers: 2604.21433, 2604.26747, 2607.00883); fixed index gaps for 2026-08-03/05/06 research logs; dream cycle: 3 proposals staged ← new 2026-08-08
+- [Research Log 2026-08-08](trading/research-log/2026-08-08.md) — wiki: sources/chatgpt-time-capsule-price-discovery-2026.md, hypotheses-to-factors-llm-crypto-2026.md, tail-risk-puts-trend-following-cvar-2026.md new (3 verified arXiv papers: 2604.21433, 2604.26747, 2607.00883); fixed index gaps for 2026-08-03/05/06 research logs; dream cycle: 3 proposals staged; second (nightly) session: data-sources/sec-8k-event-taxonomy-2026.md, stanford-edgar-filings-dataset-2026.md, from-text-to-alpha-disclosure-tracking-2026.md new (3 more verified arXiv papers: 2607.08346, 2606.18192, 2510.03195); 3 more dream cycle proposals staged ← new 2026-08-08
 - [Research Log 2026-08-07](trading/research-log/2026-08-07.md) — wiki: data-sources/point-in-time-constituents.md new (fja05680/sp500 vs Norgate/Sharadar/CRSP provider comparison, unblocks H158/H167/H277); dream cycle: FinCAD (arXiv:2605.24564) + HindsightBench (arXiv:2607.18867) look-ahead-bias tooling staged, hyperbolic-alpha-decay lead flagged withdrawn by peer review — note: this cycle's research was actually performed 2026-08-06 23:15 CT, this entry backfills the log-write step ← new 2026-08-07
 - [Research Log 2026-08-06](trading/research-log/2026-08-06.md) — wiki: sources/alphazerobeta-market-neutral-rl-2026.md new (arXiv:2607.18001; CNN-GRU+Recurrent PPO with ℓ1-ball projection + correlation-penalty reward for market-neutral RL portfolios; Sharpe 1.25 avg across 7 indices, 198-run walk-forward); dream cycle: zero new proposals (clean scan, all candidates already covered) ← new 2026-08-08 (index gap fixed)
 - [Research Log 2026-08-05](trading/research-log/2026-08-05.md) — wiki: prediction-markets/backtesting-frameworks.md new (4 OSS PM backtest/agent-framework repos); dr/overview.md + dr/runbook-2026.md expanded (MemTxn arXiv:2607.27834); regime-detection-2026-papers.md expanded (Berry Phase Rate v2, H252b lead); dream cycle: 7 proposals staged across 3 phases (FinSMART RL sentiment, Koijen/Levy earnings variance, H491 conditional skip-momentum stub, TradeLens cost-attribution, cvxportfolio, MemTxn, Berry Phase Rate v2) ← new 2026-08-08 (index gap fixed)
