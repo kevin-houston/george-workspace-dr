@@ -99,12 +99,13 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 ## PEAD Exits Pass
 
 **Trigger:** 2:46 PM CT on weekdays.
-**Run:** `python3 /workspace/agent/backtesting/paper_trading/pead_exits.py`
+**Run:** `source /workspace/agent/venv/bin/activate && python3 /workspace/agent/backtesting/paper_trading/pead_exits.py`
 **Success:** Log confirms positions checked; any 20-day-old positions closed.
 
 **Gotchas:**
 - "No positions to close" is valid. The strategy is intentionally patient — 20 trading days is ~4 calendar weeks.
 - Hold period is 20 *trading* days from entry, not calendar days. Script calculates correctly — don't override.
+- **Must use venv** — bare `python3` lacks pandas (`ModuleNotFoundError: No module named 'pandas'`, found 2026-08-10). Same fix as the open pass: always `source /workspace/agent/venv/bin/activate` first.
 
 ---
 
