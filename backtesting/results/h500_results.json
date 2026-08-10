@@ -1,0 +1,33 @@
+{
+  "variants": {
+    "A_baseline_both_12-0 (production)": {
+      "oos_sharpe": 4.094,
+      "altoos_sharpe": 4.0196,
+      "oos_maxdd": -0.036,
+      "wf_min": 3.0243
+    },
+    "B_H026_12-1_only": {
+      "oos_sharpe": 3.5061,
+      "altoos_sharpe": 3.4017,
+      "oos_maxdd": -0.036,
+      "wf_min": 1.9352
+    },
+    "C_H041a_12-1_only": {
+      "oos_sharpe": 3.3858,
+      "altoos_sharpe": 3.4028,
+      "oos_maxdd": -0.0398,
+      "wf_min": 2.468
+    },
+    "D_both_12-1": {
+      "oos_sharpe": 2.7755,
+      "altoos_sharpe": 2.7607,
+      "oos_maxdd": -0.0398,
+      "wf_min": 1.4724
+    }
+  },
+  "base_oos": 4.094,
+  "base_ao": 4.0196,
+  "base_wf": 3.0243,
+  "confirmed": false,
+  "winners": []
+}

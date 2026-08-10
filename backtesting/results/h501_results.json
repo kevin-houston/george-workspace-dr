@@ -1,0 +1,50 @@
+{
+  "spy_oos": 0.8624,
+  "spy_ao": 1.0358,
+  "variants": {
+    "A_H026_within_universe": {
+      "oos": {
+        "cagr": -0.1408,
+        "sharpe": -0.4666,
+        "max_drawdown": -0.8237,
+        "n_months": 100
+      },
+      "altoos": {
+        "cagr": -0.0635,
+        "sharpe": -0.2227,
+        "max_drawdown": -0.8497,
+        "n_months": 160
+      }
+    },
+    "B_H041a_within_universe": {
+      "oos": {
+        "cagr": -0.1285,
+        "sharpe": -0.5734,
+        "max_drawdown": -0.7509,
+        "n_months": 100
+      },
+      "altoos": {
+        "cagr": -0.0739,
+        "sharpe": -0.3741,
+        "max_drawdown": -0.7509,
+        "n_months": 160
+      }
+    },
+    "C_FactorETF_long_vs_H026_short": {
+      "oos": {
+        "cagr": -0.0844,
+        "sharpe": -0.3154,
+        "max_drawdown": -0.7074,
+        "n_months": 100
+      },
+      "altoos": {
+        "cagr": 0.0164,
+        "sharpe": 0.0631,
+        "max_drawdown": -0.7074,
+        "n_months": 160
+      }
+    }
+  },
+  "confirmed": false,
+  "winners": []
+}

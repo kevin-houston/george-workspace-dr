@@ -10789,3 +10789,63 @@ Edge classification distribution (122 candidate pairs): NONE=82, COMMON_INPUT=24
 
 **Results file**: not produced (both attempts terminated before any variant completed)
 
+---
+
+## H500 — Skip-Month vs Unskipped Momentum on Actual Production H026/H041a Signals (NOT CONFIRMED — production already optimal)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-09
+**Source**: Internal — nightly autonomous research task (new strategy families session). H492 and H493 (both CONFIRMED) found unskipped 12-month (12-0) momentum robustly beats the traditional Jegadeesh-Titman skip-month (12-1) convention on H198 (30-stock) and 60-stock toy universes, and both explicitly recommended checking whether the actual production H041a/H026 signal construction already captures this before touching production.
+**Design**: Code inspection of `run_h112.py`'s `build_rotation_monthly()` showed production already computes `mom_12 = monthly_px / monthly_px.shift(12) - 1` — i.e., unskipped 12-0, not 12-1. This hypothesis made that empirical: rebuilt the actual H026 (23-asset) and H041a (19-asset) production rank-ensemble scoring (`rank(mom_12) + rank(inv_vol_6m)`, identical to production), and tested swapping in a 12-1 skip-month variant on each leg individually and combined, inside the full 6-component production blend (H041a/H026/H045/XLK-IBS/SMH-IBS/IGV-IBS, PROD_W weights).
+**Script**: `backtesting/daily/run_h500_skipmonth_production_check.py`
+**Universe**: H041A_FULL (19 assets), H026_BASE (23 assets), full production blend
+**IS/OOS/AltOOS**: 2008-2017 / 2018-2026 / 2013-2026
+**Gate**: beats production baseline (OOS Sharpe > 4.0940 AND AltOOS Sharpe > 4.0196) AND WF worst-fold ≥ 1.75
+
+**Results**:
+
+| Variant | OOS Sharpe | AltOOS Sharpe | MaxDD | WF worst | Beats baseline |
+|---|---|---|---|---|---|
+| A_baseline_both_12-0 (production) | 4.0940 | 4.0196 | -3.60% | 3.024 | — |
+| B_H026_12-1_only | 3.5061 | 3.4017 | -3.60% | 1.935 | ✗ |
+| C_H041a_12-1_only | 3.3858 | 3.4028 | -3.98% | 2.468 | ✗ |
+| D_both_12-1 | 2.7755 | 2.7607 | -3.98% | 1.472 | ✗ |
+
+Baseline figures (OOS 4.0940, AltOOS 4.0196, WF 3.024) exactly replicate `run_h112.py`'s own documented reference, confirming correct script replication.
+
+**Key findings**: All three skip-month variants underperform the current production design on every metric — OOS Sharpe, AltOOS Sharpe, and walk-forward robustness. Skipping the most recent month discards genuinely predictive signal on both the H026 and H041a legs; the degradation compounds when both legs are skip-monthed (Variant D, WF worst-fold 1.472 — would fail the 1.75 gate outright).
+
+**Production correlation estimate**: N/A — no variant confirms, no change to production is recommended.
+
+**Verdict**: NOT CONFIRMED. Production's existing unskipped (12-0) momentum construction is already optimal; there is no skip-month gap to close. This closes the open recommendation from H492/H493 with a definitive answer: `mom_12 = monthly_px / monthly_px.shift(12) - 1` in `run_h112.py`/`h112_monthly.py` should NOT be changed.
+
+**Results file**: `backtesting/results/h500_results.json`
+
+---
+
+## H501 — True Long-Short Low-Vol-Minus-High-Vol Spread (§3.4, Kakushadze & Serur) (NOT CONFIRMED — catastrophic short-leg losses)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-09
+**Source**: Kakushadze & Serur §3.4, via nightly autonomous research task Priority #1 ("Long low-vol, short/avoid high-vol ETFs"). H113 (2026-04-28, NOT CONFIRMED) tested this signal but only as a long-only pure inverse-vol rank ("avoid" branch), which degenerated to always picking BIL and earning ~T-bill returns. H113 never built an actual short leg, so the literal "long low-vol, SHORT high-vol" spread trade was still untested.
+**Design**: Dollar-neutral long-short spread: each month, rank the universe by trailing 6-month annualized realized vol, go long the 3 lowest-vol assets (equal weight) and short the 3 highest-vol assets (equal weight), monthly rebalance. Var A: within H026 universe (23 sector/alt ETFs). Var B: within H041a universe (19 global assets). Var C: factor low-vol ETFs (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV, per H354) as the long leg vs. H026 highest-vol assets as the short leg — the literal "factor ETF universe" framing from H113's original hypothesis text.
+**Script**: `backtesting/daily/run_h501_lowvol_highvol_longshort.py`
+**Universe**: H026_BASE, H041A_FULL, FACTOR_LOWVOL (USMV, SPLV, XLU, SPHD, EFAV, EEMV, ACWV)
+**IS/OOS/AltOOS**: 2008-2017 / 2018-2026 / 2013-2026
+**Gate**: standalone diversifier convention (per H298/H311/H354 precedent) — OOS Sharpe > SPY buy-and-hold OOS Sharpe (0.8624) AND AltOOS Sharpe > SPY AltOOS Sharpe (1.0358)
+
+**Results**:
+
+| Variant | OOS Sharpe | AltOOS Sharpe | MaxDD | Beats SPY |
+|---|---|---|---|---|
+| A_H026_within_universe | -0.4666 | -0.2227 | -82.37% | ✗ |
+| B_H041a_within_universe | -0.5734 | -0.3741 | -75.09% | ✗ |
+| C_FactorETF_long_vs_H026_short | -0.3154 | 0.0631 | -70.74% | ✗ |
+
+**Key findings**: All three variants fail decisively, with catastrophic drawdowns (-71% to -82%) far beyond anything else in this log. The short leg is the problem: the highest-realized-vol assets in both H026 (GDX, SLV, UNG, EWZ, XLE) and H041a (EEM, EWY, EWT) are exactly the assets that produce the largest positive returns during commodity/EM rallies and vol-regime unwinds — shorting them means shorting the market's biggest winners, not a genuine risk premium capture. This is consistent with the earlier finding (H113) that low-vol has real long-only value at the ETF level, but confirms the *short* side of a naive vol-based long-short spread is actively destructive on this universe: high realized vol at the ETF/asset-class level correlates with high *momentum*, not systematic overpricing, so shorting it fights the trend rather than harvesting a premium. Var C (factor ETF long leg) is the least-bad variant (AltOOS turns slightly positive at 0.0631) because its long leg captures the true low-vol factor premium — the short leg still overwhelms it.
+**Production correlation estimate**: N/A — no variant confirms, no addition to production is recommended.
+
+**Verdict**: NOT CONFIRMED. Closes the literal §3.4 "long low-vol, short high-vol" framing left open by H113. Combined with H113, this definitively closes the Low-Volatility-as-long-short-spread family at the ETF/asset-class level: the anomaly exists and has value long-only (H354/H361/H362 confirmed low-vol *rotation*, which is a fundamentally different long-only relative-ranking mechanism, not a short-the-high-vol spread), but naively shorting high-vol ETFs is a losing trade because vol and momentum are positively linked at this level.
+
+**Results file**: `backtesting/results/h501_results.json`
+
