@@ -30,6 +30,7 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 - Filename date must match today (`date +%Y-%m-%d`). A mismatch causes the audio task to fail silently.
 - Newsworthiness check: articles more than 3 days old do not count as "breaking." Drop or clearly date them.
 - **Always get the day of the week from the shell** (`date +%A`) — never rely on the LLM to calculate it. Kevin noticed June 5 was written as "Thursday" when it was Friday. Run `date +"%A, %B %d, %Y"` at script-writing time and hardcode the result.
+- **Duplicate 6 AM trigger observed 2026-08-10**: two sessions both ran the script-generation task for the same slot; the first finished and wrote `ai_podcast_2026-08-10.md` at 06:03:34 CT, the second (this one) started research independently and only noticed the file already existed once it went to write. Same failure class as the documented PEAD-GAP duplicate-open-pass race. **Before doing any research, check whether today's file already exists first** (`ls /workspace/agent/podcasts/ai_podcast_$(date +%Y-%m-%d).md`) — if it does and looks complete (4 segments, word count in range, dated correctly), skip regeneration entirely rather than overwriting; a second full write mid-generation could race with the 6:10 AM audio task reading a partial file.
 
 ---
 
