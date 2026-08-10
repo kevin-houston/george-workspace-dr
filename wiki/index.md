@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-09
+updated: 2026-08-10
 sources_indexed: 9
 pages: 301
 ---
@@ -346,6 +346,7 @@ When answering a query:
 - [SkillsGate](tools/skillsgate-notes.md) — visual skill manager (desktop + TUI) for Claude Code/Cursor/20+ agents; browses skills.sh catalog, per-agent install; George already installs via `npx skills add` (same skills.sh ecosystem); low fit for headless George, possible fit for Kevin's own local agents ← new 2026-08-01
 - [dev-browser](tools/dev-browser-notes.md) — sandboxed (QuickJS WASM) browser automation for AI coding agents; full Playwright API, pixel + DOM toolsets; 6.5k★ MIT, legit; overlaps with George's existing agent-browser skill, sandboxing is the differentiator ← new 2026-08-05
 - [diagram-design](tools/diagram-design-notes.md) — Claude Code skill; 27 editorial diagram types as self-contained HTML+SVG (architecture, flowchart, ER, Gantt, etc.); brand-onboarding flow extracts site palette/fonts; 2.9k★ MIT, legit; possible fit for here.now dashboard polish, no current adoption ← new 2026-08-06
+- [MOSS-TTS-Nano](tools/moss-tts-nano-notes.md) — OpenMOSS/MOSI.AI; 0.1B-param multilingual TTS, realtime on CPU only, no GPU; 4,085★, Apache 2.0; possible fix for edge-tts's per-restart reinstall + OneCLI SSL-cert gotchas on the Lithuanian phrase and podcast audio pipelines; untested, no quality/latency comparison done yet ← new 2026-08-10
 
 ### AI Industry
 
