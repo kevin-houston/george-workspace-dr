@@ -197,21 +197,13 @@ net_alpha, cost_drag = coordination_breakeven_spread(0.05, 0.50, 5000, 50)
 
 ## NautilusTrader — Production Execution Engine
 
-**GitHub**: https://github.com/nautechsystems/nautilus_trader | **Stars**: 23.4k | **License**: LGPL-3.0 | **Language**: Python (API) + Rust (core)
+**GitHub**: https://github.com/nautechsystems/nautilus_trader | **Stars**: 25.4k | **License**: LGPL-3.0 | **Language**: Rust core + Python control plane
 
-Not an LLM framework — the most relevant **production execution engine** for running strategies at scale with nanosecond-resolution backtesting.
+Not an LLM framework — the most relevant **production execution engine** for running strategies at scale with nanosecond-resolution backtesting. Full deep-dive (installation, adapter list, pricing, working backtest code, verdict) now at [tools/nautilus-trader.md](../tools/nautilus-trader.md) — updated 2026-08-10.
 
-| Feature | NautilusTrader | Vectorbt | Backtrader |
-|---------|---------------|----------|------------|
-| Core | Rust | Python/Numba | Python |
-| Backtest resolution | Nanosecond (tick) | Bar | Bar |
-| Live trading | 20+ venues | ✗ | Limited |
-| Research→prod | Same code | ✗ | ✗ |
-| Crypto | 10+ native | ✗ | ✗ |
+**Supported venues:** Binance, Coinbase, Kraken, Bybit, OKX, Deribit, Hyperliquid, dYdX, IBKR, Betfair, Polymarket. No native Alpaca adapter.
 
-**Supported venues:** Binance, Coinbase, Kraken, Bybit, OKX, Deribit, Hyperliquid, dYdX, IBKR, Betfair, Polymarket.
-
-**Relevance:** If/when moving beyond Alpaca to IBKR or crypto execution. For Alpaca paper trading today, vectorbt + custom scripts remains simpler.
+**Relevance:** If/when moving beyond Alpaca to IBKR or crypto execution — see tools/nautilus-trader.md for the H276/Kraken and Polymarket-backtester specifics. For Alpaca paper trading today, vectorbt + custom scripts remains simpler.
 
 ---
 
