@@ -3,6 +3,7 @@ title: Impact Measurement Standards
 aka: IRIS+, IMP, impact metrics, impact KPIs
 tags: impact-investing, measurement, standards, GIIN, IRIS
 added: 2026-07-08
+updated: 2026-08-09
 category: Impact Investing
 ---
 
@@ -92,7 +93,7 @@ The impact measurement landscape has been significantly shaped by regulation:
 
 **Attribution**: impact outcomes are causally complex. A microfinance borrower's income increase is caused by the loan, the borrower's effort, market conditions, family support, and many other factors. Impact investors typically use "theory of change" narratives rather than rigorous causal inference.
 
-**Counterfactual difficulty**: True additionality requires knowing what would have happened without the investment — inherently unobservable. Most reporting uses industry baseline comparisons rather than randomized control trials.
+**Counterfactual difficulty**: True additionality requires knowing what would have happened without the investment — inherently unobservable. Most reporting uses industry baseline comparisons rather than randomized control trials. A 2025 proposal, [Impact IRR](../sources/impact-irr-modern-portfolio-theory-2025.md) (Soliman, arXiv:2509.22600), attempts to convert this qualitative "Contribution" dimension into a single MPT-derived scalar metric — still baseline-comparison-based rather than RCT-grade, but a step toward the quantitative rigor this section identifies as missing.
 
 **Data collection burden**: investees (especially early-stage ventures in emerging markets) face significant overhead reporting impact KPIs quarterly. This can distort incentives — companies optimize for reported metrics, not underlying outcomes.
 
@@ -121,5 +122,6 @@ Both domains have evolved from idiosyncratic measurement practices toward standa
 - [Impact Investing](impact-investing.md) — definition, risks, key characteristics
 - [Impact Investing Market Landscape 2025](impact-investing-market-2025.md) — market size, institutional trends
 - [Three-Dimensional Portfolio Framework](three-dimensional-portfolio-framework.md) — Impact/Return/Risk graph (J.P. Morgan 2012)
+- [Impact IRR (Soliman, 2025)](../sources/impact-irr-modern-portfolio-theory-2025.md) — MPT-derived scalar metric attempting to quantify the Contribution/additionality dimension
 - [Shared Strategy Evaluation Checklist](../trading/shared-eval-checklist.md) — trading analog for standardized evaluation
 - [Multiple Testing & Statistical Significance](../trading/backtesting/multiple-testing.md) — addresses the "attribution" problem in backtesting

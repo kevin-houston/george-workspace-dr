@@ -1,7 +1,7 @@
 ---
 updated: 2026-08-09
 sources_indexed: 9
-pages: 299
+pages: 301
 ---
 
 # Wiki Index
@@ -297,6 +297,7 @@ When answering a query:
 
 **Sources**
 - [A Portfolio Approach to Impact Investment (J.P. Morgan, 2012)](sources/jpmorgan-portfolio-approach-impact-investment-2012.md) — 3D Impact/Return/Risk portfolio framework; practical guide for institutional investors; Saltuk & El Idrissi
+- [Impact IRR — Modern Portfolio Theory for Impact Investing (Soliman, arXiv:2509.22600, 2025)](sources/impact-irr-modern-portfolio-theory-2025.md) — MPT-derived scalar IRR-style metric for the impact dimension; alternative to visual triangle comparison ← new 2026-08-09
 
 **Trading Sources**
 - [Phynance — Kakushadze (arXiv:1405.1948, 2014)](sources/phynance-kakushadze-2014.md) — PhD lecture notes: stochastic calculus, Itô/Girsanov/path-integral formulation, BSM full derivation, Greeks, interest rate models (Vasicek/CIR/HJM/BGM), quant interview problems
@@ -307,11 +308,12 @@ When answering a query:
 - [Three-Dimensional Portfolio Framework](concepts/three-dimensional-portfolio-framework.md) — Impact/Return/Risk triangle; extends MPT; target zone, aggregate comparison
 - [Impact Investing Market Landscape 2025](concepts/impact-investing-market-2025.md) — $1.57T AUM, 21% CAGR, pension funds 35% share (47%/yr), GIIN 2025 State of the Market; ESG 37% of new products; sector focus: financial inclusion, healthcare, housing, clean energy ← new 2026-07-08
 - [Impact Measurement Standards](concepts/impact-measurement-standards.md) — IRIS+ 2000+ metrics, Core Metrics Sets; IMP 5 dimensions (What/Who/How Much/Contribution/Risk); EU SFDR Art. 8/9, UK SDR labels; additionality challenge; analogs to quant backtesting rigor ← new 2026-07-08
-- [ESG Factor Integration](concepts/esg-factor-integration.md) — systematic ESG signals in quant portfolios; controversy signals as PEAD analog (-2% drift 60d); ESG momentum factor Sharpe ~0.5; regime-dependence (hurt 2022); free data path via SEC EDGAR NLP + CDP; bridge to H163 FinBERT pipeline ← new 2026-07-17
+- [ESG Factor Integration](concepts/esg-factor-integration.md) — systematic ESG signals in quant portfolios; controversy signals as PEAD analog (-2% drift 60d); ESG momentum factor Sharpe ~0.5; regime-dependence (hurt 2022); free data path via SEC EDGAR NLP + CDP; bridge to H163 FinBERT pipeline; updated 2026-08-09 with stress-conditional resilience finding (Hu et al. 2026) and ESGAgent multi-agent LLM analysis (arXiv:2601.08676) ← updated 2026-08-09
 - [Regime-Conditional ESG Momentum](concepts/regime-conditional-esg-momentum.md) — quantitative implementation guide: Δ-ESG signal construction, NLP controversy via H174 pipeline, H446 supply chain network propagation analog, regime weight layer (VIX+200MA gate), TC-MVO integration; H447 design stub; free data path (SEC 10-K Item 1C, CDP); cross-bridge to trading algorithms and regime detection ← new 2026-07-25
 - [Supply Chain Propagation of Textual Signals](concepts/supply-chain-textual-signals.md) — arXiv:2606.29290; FinBERT 10-K embeddings alone not predictive; network-augmented via Bloomberg SPLC supply chain → Sharpe 0.86, FF5-alpha 7.27%/yr (t=2.30); proposed H419 PEAD secondary watchlist via supply chain linkages ← new 2026-07-18
 - [Blended Finance — Catalytic Capital and Concessional Structures](concepts/blended-finance.md) — DFI first-loss/junior tranche mechanics; $4-7 mobilization ratio; TA facilities, guarantees, concessional co-investment; additionality tests; macro signals for quant (green bond issuance → sector ETF leading indicator) ← new 2026-07-27
 - [Green Bonds and Sustainability Finance](concepts/green-bonds-sustainability-finance.md) — ICMA GBP / EU-GBS / CBI standards; greenium -3 to -12 bps evidence; SLB coupon step-up mechanics; CSRD-driven free ESG data; greenium arbitrage feasibility; H045 bond rotation connection; CSRD NLP signal path ← new 2026-07-27
+- [ESG Tail-Risk / Stress Resilience (Hu et al., arXiv:2606.05631, 2026)](concepts/esg-tail-risk-stress-resilience-2026.md) — DML re-test of ESG crisis-insurance claim; effect is stress-conditional not static (returns/volatility/liquidity/cofragility all improve only during market stress); liquidity channel identified as mechanism; regime-gate design candidate alongside H165/H249/H301/H362 ← new 2026-08-09
 
 **Concepts (General Trading)**
 - [Quant Convergence — Classical Value Investing and Modern Factor Models](concepts/quant-convergence-value-factor.md) — arXiv:2606.24575 (Yamazaki 2026); Graham RF 232% return / Calmar 1.38 best risk-adjusted; AutoGluon 222% but -40% MaxDD; Combined RF (mom+Graham) lowest MaxDD; margin of safety as ML regularizer; H466 design basis; explains H337/H448 NOT CONFIRMED (no Graham variation in H198 large-cap universe) ← new 2026-07-27

@@ -1,6 +1,7 @@
 ---
 aka: impact investment, social finance, ESG investing (adjacent)
 tags: impact-investing, social-finance, ESG, institutional-investing
+updated: 2026-08-09
 ---
 
 # Impact Investing
@@ -76,3 +77,6 @@ Market was characterized as early-stage / field-building in 2012, with collabora
 - [J.P. Morgan Social Finance](../orgs/jpmorgan-social-finance.md)
 - [Impact Investing Market Landscape 2025](impact-investing-market-2025.md) — $1.57T AUM, GIIN survey, institutional shift
 - [Impact Measurement Standards](impact-measurement-standards.md) — IRIS+, IMP 5 dimensions, regulatory frameworks
+- [Impact IRR (Soliman, 2025)](../sources/impact-irr-modern-portfolio-theory-2025.md) — MPT-derived scalar impact-performance metric
+- [ESG Factor Integration](esg-factor-integration.md) — systematic/quantitative ESG signal construction
+- [ESG Tail-Risk / Stress Resilience (Hu et al. 2026)](esg-tail-risk-stress-resilience-2026.md) — ESG as regime-conditional crisis resilience, not static premium

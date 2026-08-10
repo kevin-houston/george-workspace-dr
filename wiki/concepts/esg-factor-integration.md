@@ -2,6 +2,7 @@
 title: ESG Factor Integration — Systematic & Quantitative Approaches
 tags: impact-investing, ESG, factor-models, quantitative-finance
 added: 2026-07-17
+updated: 2026-08-09
 category: Impact Investing
 ---
 
@@ -90,6 +91,44 @@ Long stocks with improving ESG scores, short stocks with declining scores. Docum
 
 ---
 
+## 2026 Update: ESG as Stress-Conditional Resilience, Not a Static Premium
+
+A June 2026 paper — [Stress Amplified Resilience: ESG and Joint Fragility in Equity
+Markets](../concepts/esg-tail-risk-stress-resilience-2026.md) (Hu, Yi, Chen, Sun &
+Zhan, arXiv:2606.05631) — re-tests the Lins-Servaes-Tamayo "ESG as crisis insurance"
+finding above on a fresher 2014-2025 S&P 500 sample using Double Machine Learning.
+Result: ESG's return/volatility benefit is **concentrated specifically in market-
+stress periods**, not present as an unconditional premium; the most persistent channel
+is **liquidity** (ESG firms trade better during deteriorating conditions); a
+one-std-dev ESG increase cuts stress-period severe-cofragility probability by ~9%
+relative to baseline. This sharpens the "ESG and Macro Regimes" table below into an
+explicit design implication: an ESG tilt is better implemented as a **regime-gated
+overlay** (active only when VIX/stress indicators are elevated, mirroring H301/H362's
+macro-gate pattern) than as an always-on static factor position.
+
+## Expert-Level LLM Agents for ESG Analysis (ESGAgent, 2026)
+
+[Advancing ESG Intelligence](https://arxiv.org/abs/2601.08676) (Zhao, Zhang, Xiao,
+Zheng, Liu & Lim, arXiv:2601.08676, Jan 2026) introduces **ESGAgent**, a hierarchical
+multi-agent LLM system for ESG analysis — retrieval augmentation + web search +
+domain-specific tools, benchmarked against 310 corporate sustainability reports across
+three evaluation tiers. Reports 84.15% accuracy on atomic ESG question-answering,
+beating closed-source frontier-LLM baselines, and strong performance generating
+professional reports with charts and verifiable source references.
+
+Relevance: this is the ESG-domain instance of the same multi-agent-LLM-for-finance
+pattern already tracked on the trading side of the wiki (see
+[Multi-Agent LLM Trading](../trading/algorithms/multi-agent-llm-trading.md) — the
+taxonomy of LLM-as-signal vs. decision-maker architectures, and the "reproducibility
+crisis" caveat that 0/19 surveyed papers were fully reproducible). ESGAgent's
+retrieval-augmented, tool-using architecture over unstructured sustainability report
+text is a plausible cheaper/faster substitute for the "Phase 1 NLP controversy" and
+"Phase 2 SEC climate" implementation steps sketched below — instead of hand-building
+keyword/FinBERT extraction, an ESGAgent-style tool-using agent could ingest 10-K Item
+1C and CDP filings directly. No numbered hypothesis yet; same reproducibility caveats
+from the LLM Alpha Validation Checklist apply before treating its 84.15% accuracy
+figure as production-ready without independent replication.
+
 ## ESG and Macro Regimes
 
 ESG performance is regime-dependent:
@@ -162,8 +201,11 @@ For ESG integration in George's pipeline without paid data:
 - [Impact Investing](impact-investing.md) — definition and key characteristics
 - [Impact Investing Market Landscape 2025](impact-investing-market-2025.md) — $1.57T AUM, ESG 37% of new products
 - [Impact Measurement Standards](impact-measurement-standards.md) — IRIS+, IMP 5 dimensions, SFDR
+- [ESG Tail-Risk / Stress Resilience (Hu et al. 2026)](esg-tail-risk-stress-resilience-2026.md) — DML re-test of crisis-insurance claim; liquidity mechanism; regime-gate design implication
 - [Factor Models & Cross-Sectional Alpha](../trading/algorithms/factor-models.md) — Fama-French, Fama-MacBeth
 - [Quality Factor (QMJ, Piotroski, GP/Assets)](../trading/algorithms/quality-factor.md) — high-quality screens overlap with ESG
 - [Low-Volatility Factor ETF Rotation](../trading/algorithms/low-volatility-etf-rotation.md) — ESG exclusion portfolios often low-vol biased
 - [Event-Driven Strategies](../trading/algorithms/event-driven.md) — H163/H174 FinBERT pipeline extensible to controversy signals
 - [NLP & Alternative Data](../trading/tools/nlp-alternative-data.md) — FinBERT tooling
+- [Multi-Agent LLM Trading](../trading/algorithms/multi-agent-llm-trading.md) — ESGAgent is the ESG-domain instance of this same multi-agent-LLM pattern
+- [Regime Detection](../trading/algorithms/regime-detection.md) — infrastructure a stress-conditional ESG overlay would reuse

@@ -1,7 +1,8 @@
 ---
 added: 2026-06-15
+updated: 2026-08-09
 category: algorithms / timing
-related: [regime-detection.md, volatility-risk-premium.md, factor-momentum-style-rotation.md]
+related: [regime-detection.md, volatility-risk-premium.md, factor-momentum-style-rotation.md, esg-tail-risk-stress-resilience-2026.md]
 ---
 
 # Market Timing Overlays

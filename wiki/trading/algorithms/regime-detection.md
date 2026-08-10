@@ -359,6 +359,7 @@ Apply slow-tail + V-shape overlay as a portfolio-level cash buffer on our H026+H
 ## See Also
 
 - [Regime Detection 2026 Papers — Wasserstein-HMM and Heavy-Tail Emissions](regime-detection-2026-papers.md) — H444/H445 design basis; BIC K-selection, 2-Wasserstein state tracking, Student-t/Laplace emissions
+- [ESG Tail-Risk / Stress Resilience (Hu et al. 2026)](../../concepts/esg-tail-risk-stress-resilience-2026.md) — 2026 paper finding ESG's crisis-resilience effect is stress-conditional, not static; candidate use case for this page's regime-gate infrastructure applied outside the core H165/H249/H301 stack
 
 ---
 

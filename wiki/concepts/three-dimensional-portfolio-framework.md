@@ -2,6 +2,7 @@
 aka: Impact/Return/Risk Triangle, 3D Portfolio Graph, Target Portfolio Graph
 origin: J.P. Morgan Social Finance (Saltuk & El Idrissi, 2012)
 tags: impact-investing, portfolio-theory, visualization, framework
+updated: 2026-08-09
 ---
 
 # Three-Dimensional Portfolio Framework (Impact / Return / Risk)
@@ -79,6 +80,13 @@ Result: a hexagon rather than triangle. Useful when the portfolio warrants finer
 | Sharpe ratio as summary statistic | No single summary statistic — visual comparison |
 
 The 3D framework does not replace MPT; it extends it for the specific context where a non-financial performance dimension (impact) is a genuine portfolio objective, not just a constraint.
+
+**2025 update:** [Impact IRR](../sources/impact-irr-modern-portfolio-theory-2025.md)
+(Soliman, arXiv:2509.22600) is a more recent attempt to add back a single summary
+statistic — an MPT-derived internal-rate-of-return analog for the impact dimension —
+13 years after this framework explicitly chose visual/triangle comparison over a
+scalar metric. Worth reading alongside this page as the two live options (visual
+multi-axis vs. scalar IRR-style) for summarizing impact performance.
 
 ---
 
