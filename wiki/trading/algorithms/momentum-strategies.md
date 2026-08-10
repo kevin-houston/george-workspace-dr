@@ -933,3 +933,21 @@ The family is not abandoned — it needs a new hypothesis design:
 - The Volterra correction in Eccles & Lee would correspond to the drift-gate filter in H416/H418 (20d positive-day fraction > 0.60).
 
 This paper bridges technical analysis with formal mathematical finance — MACD signals are not ad-hoc; they emerge endogenously from optimal filtering of multi-scale latent drift processes.
+
+## Sector as Signal, Not Noise: LSTM Sector Embeddings (arXiv:2608.05755, Aug 2026)
+
+**Döbelt, Aug 6 2026.** Extends S&P 500 cross-sectional LSTM return prediction with **learnable sector embeddings** — the network learns a per-sector latent representation rather than treating sector as noise to remove — combined with two explicit factors: **short-term reversal** and **industry momentum**. Builds a long-short portfolio (long expected outperformers vs. cross-sectional median, short expected underperformers). Reported to outperform basic LSTM, Random Forest, and buy-and-hold benchmarks on "key risk and return metrics" (abstract does not disclose numeric Sharpe/CAGR — full 31-page paper has 7 tables of results not yet pulled).
+
+**Why this matters here — independent confirmation of an existing finding, via the opposite mechanism:**
+
+| Hypothesis | Approach to sector | Result |
+|---|---|---|
+| H199 (this page, line ~370) | Demean sector drift out of the momentum signal | NOT CONFIRMED — OOS Sharpe worsens, MaxDD widens to -37.9%. "Sector drift is the signal for momentum, not noise." |
+| H313 (Stosik & Zaremba replication) | Sector-neutral adjustment on 86-stock S&P 500 universe | NOT CONFIRMED — *increases* SPY correlation instead of reducing it; works on global universes, not this concentrated one |
+| arXiv:2608.05755 | **Keep** sector as a modeled feature (learned embedding) + explicit industry-momentum factor | Reported to beat non-sector-aware LSTM baselines |
+
+H199 and H313 both tested *removing* sector effects (subtraction/demeaning) and both found that hurts performance — sector is where the signal lives, not something to strip away. This paper arrives at the same conclusion from the opposite direction: instead of subtracting sector out, it models sector explicitly (as a learned embedding feature) and reports that helps. That's mechanism-level triangulation on the same underlying finding from an independent group, using a completely different toolset (deep sequence model vs. our linear-rank/demeaning approach).
+
+**Not staged as a numbered hypothesis tonight** — a faithful test would require a from-scratch, sector-parameterized LSTM (meaningfully heavier than the vectorized-pandas approach that runs the rest of the H-series), and the paper's own quantitative results aren't available from the abstract. Logged here as a design candidate: if a future hypothesis revisits sector-aware momentum, the direction implied by H199 + H313 + this paper is "model sector as a feature," not "neutralize it away" — the neutralization branch of this idea is now closed on three independent tests.
+
+**See also:** H198 (raw 12-1 cross-sectional momentum, the current best expression on this universe, unmodified by any sector treatment), H313 in `wiki/trading/backtesting/hypothesis-log.md`.
