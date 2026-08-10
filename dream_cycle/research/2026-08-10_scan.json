@@ -1,0 +1,108 @@
+{
+  "date": "2026-08-10",
+  "angles_searched": [
+    {
+      "angle": "1: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Moira: Language-driven Hierarchical RL for Pair Trading",
+          "source_url": "arXiv:2605.01954",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already logged as H316 STUB per CLAUDE.local.md — needs OpenAI API, not yet run. No new development tonight."
+        },
+        {
+          "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+          "source_url": "arXiv:2403.07998",
+          "relevance": "low",
+          "already_known": false,
+          "reason_excluded": "2024 paper (not 2026), surfaced only because it ranks well for the query terms. Graph-matching pair selection is a plausible design idea but not tied to any open wiki gap or hypothesis tonight; ETF pairs family is explicitly CLOSED per H307/H246 (structural breaks made IS cointegration anti-predictive of OOS). Not staged."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "2: PEAD + post-earnings drift + text signals",
+      "findings": [
+        {
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings-Day Returns (Wu, Akin, Martineau, Gregoire, Veneris)",
+          "source_url": "arXiv:2509.24254",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Extensively already staged/applied: H175 (sec-parser Item 2.02 + EPS surprise gate), H372 stub (section-weighted FinBERT composite), H357 (multi-modal PEAD upgrade combining this + arXiv:2605.25894). Confirmed via grep across wiki/ and dream_cycle/ before drafting anything — 5+ prior references. No new angle to add."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "3: cross-sectional momentum + factor momentum (H157/H158 context)",
+      "findings": [
+        {
+          "title": "Cross-Sectional Heterogeneity in LSTM Networks for Financial Time Series (Julius Dobelt)",
+          "source_url": "arXiv:2608.05755",
+          "relevance": "high",
+          "already_known": false,
+          "reason_excluded": null,
+          "staged": true,
+          "staged_proposal": "dream_cycle/staged/2026-08-10/1_lstm_sector_embedding_momentum_wiki.json",
+          "note": "Zero prior hits in wiki/ or dream_cycle/ (checked via grep for the arXiv ID, author name, and 'sector embedding'). Learnable sector embeddings + explicit industry-momentum and short-term-reversal factors in an LSTM long-short S&P 500 strategy, reported to beat basic-LSTM/RF/buy-and-hold baselines. Directly relevant because it independently arrives -- via the opposite mechanism (model sector as a feature vs. strip it out) -- at the same conclusion H199 and H313 already reached on this wiki: sector is signal, not noise. Staged as a wiki research note (low risk) on momentum-strategies.md, not a new hypothesis number -- a faithful test needs a from-scratch sector-parameterized LSTM, out of scope for tonight, and the abstract doesn't disclose numeric Sharpe."
+        }
+      ],
+      "new_staged": 1
+    },
+    {
+      "angle": "4: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks (Miyazaki, Kawahara, Roberts, Zohren)",
+          "source_url": "arXiv:2602.23330",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Extensively already staged: H360 (expert investment teams PEAD), H240 (PEAD fine-grained decomposition), multiple wiki updates in multi-agent-llm-trading.md, referenced as design input to H274 (STAGED per CLAUDE.local.md). Confirmed via grep, 10+ prior references across wiki/log.md, hypothesis-log.md, and dream_cycle staged history back to 2026-05-22."
+        },
+        {
+          "title": "Fin-Analyst at FinMMEval 2026 Task 3: Live Hybrid Trading Agent with LLM Specialists + Rule-Based Signals",
+          "source_url": "arXiv:2607.12233",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already staged as H474 (2026-07-28) and referenced in the 2026-08-01 scan. TSLA result (+13.51% return, Sharpe 4.10, 88% WR vs Buy-and-Hold) already captured in that proposal."
+        },
+        {
+          "title": "Agentic Trading: When LLM Agents Meet Financial Markets (survey)",
+          "source_url": "arXiv:2605.19337",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Already extensively ingested into wiki/ai-industry/agentic-trading-survey-2026.md and cross-referenced from base-rate-trap-llm-trading-2026.md and llm-finance-benchmarks-2026.md. No new content found tonight."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "5: GitHub trending quantitative finance repos",
+      "findings": [
+        {
+          "title": "Qlib (Microsoft, ~37k stars), FinRL (~14k stars), Jesse (~7.4k stars), hftbacktest",
+          "source_url": "various github.com",
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "All four already have dedicated wiki pages (tools/qlib.md and others confirmed via grep across wiki/trading/tools/) from prior sessions. Nothing new surfaced in this pass beyond the already-catalogued set (awesome-quant-ai.md, quantmuse.md, zvt.md, backtrader-vs-vectorbt.md, investing-algorithm-framework.md, nexttrade.md, ml-for-trading.md)."
+        },
+        {
+          "title": "QuantGPT (rnikitin/QuantGPT) — AI copilot wrapping vectorbt PRO docs",
+          "source_url": "https://github.com/rnikitin/QuantGPT",
+          "relevance": "low",
+          "already_known": false,
+          "reason_excluded": "Thin project (single-purpose docs copilot for a paid product, vectorbt PRO, which the pipeline doesn't use); not tied to any open wiki gap or hypothesis. Not staged."
+        }
+      ],
+      "new_staged": 0
+    }
+  ],
+  "wiki_expansion_this_session": {
+    "section": "Tools (least-recently-touched: last dedicated addition 2026-06-28)",
+    "commit": "b819408",
+    "summary": "New deep-dive page tools/nautilus-trader.md (installation, full stable-adapter table, working BacktestEngine code, pricing, verdict); updated algorithms/multi-agent-llm-trading.md's existing short mention to point to it and correct the star count; tied to H276 crypto POC via the Kraken adapter."
+  },
+  "staged_proposals_created": 1,
+  "conclusion": "4 of 5 angles found only findings already fully ingested/staged in prior sessions (dedup confirmed via targeted grep against the actual wiki/dream_cycle content, not just keyword matching) -- the multi-agent-LLM-trading and PEAD-text-signal literatures in particular are heavily mined at this point in the project. One genuinely new, zero-prior-hits finding on angle 3 (arXiv:2608.05755, LSTM sector embeddings) was staged as a low-risk wiki research note: it independently corroborates the wiki's existing H199/H313 'sector is signal, not noise' finding via the opposite mechanism (model sector explicitly vs. neutralize it away), and is logged as a design candidate for any future sector-aware momentum hypothesis rather than a numbered hypothesis itself. 1 staged proposal total for the 4 AM build phase; no high-risk items to flag for Kevin."
+}
