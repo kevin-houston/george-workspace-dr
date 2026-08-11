@@ -404,7 +404,37 @@ def run_insample_mcpt(df, optimize_fn, n_permutations=1000):
 - IS/OOS split + Sharpe threshold + Deflated Sharpe Ratio is our current framework.
 - MCPT would be a stronger secondary validation, especially for strategies with many optimized parameters.
 - IAF (Investing Algorithm Framework) has Monte Carlo permutation testing built in — potential integration point.
-- **Queued action**: apply MCPT to all confirmed strategies as a retrospective audit.
+- **Queued action, revised below**: the 2026-08 evidence casts doubt on MCPT's *predictive* value for path-dependent metrics specifically — read the caveat before spending compute on a blanket retrospective audit.
+
+---
+
+## MCPT Predictive Validity — 2026 Update (important caveat)
+
+**Source**: Daniel Gatto, "Predictive Value of Within-Strategy Permutation Tests for Forward Selection: Evidence from Over 6 Billion Strategy-Level Permutations Across Three Asset Classes" — SSRN, March 2026 (`papers.ssrn.com/sol3/papers.cfm?abstract_id=6636018`)
+
+This is the largest empirical study yet on whether within-strategy MCPT (shuffling a strategy's own realized trade sequence, as in the "Monte Carlo Equity Curve Simulation" section below) actually improves forward/live selection — not just whether it produces a defensible p-value.
+
+**Scale**: 437,911 strategy configurations across 9 instruments in 3 asset classes (4 crypto perpetual futures, 3 forex pairs, 2 commodities), 160 walk-forward windows, 6,629,125 strategy-window observations, 6+ billion total permutations run.
+
+**Findings**:
+1. For genuinely path-dependent statistics — **Max Drawdown, Calmar, Ulcer Index** — the realized trade ordering in most strategies is statistically indistinguishable from a random reshuffle of the same trades. Filtering candidate strategies on "did this stat beat its own permutation distribution" adds **at most a fraction of a percentage point of OOS profitability** over a simple in-sample-profitability gate. In other words: passing an MCPT smoothness test on these metrics is close to noise, not signal.
+2. At the **portfolio level** (blending multiple strategies), the MC test *does* detect genuine path-dependence — smooth-vs-choppy equity curves are real, not an artifact. But a true forward test shows this has **no positive predictive content**: portfolios whose in-sample equity curve looked smoothest under MCPT **underperformed OOS by −3.48pp** relative to portfolios that looked less smooth. The mechanism argued: an unusually smooth in-sample curve is itself evidence of in-sample luck/overfitting to that specific trade sequence, so selecting on smoothness selects for overfitting.
+
+**Why this matters for our queued MCPT audit**: our design-principles.md queued action was "apply MCPT to all confirmed strategies as a retrospective audit," implicitly treating a MCPT pass/fail on drawdown-family stats as informative. Gatto's evidence says: don't use MCPT on MaxDD/Calmar/Ulcer as a *selection* filter — it doesn't forward-predict. The **in-sample vs. permuted-data profit distribution test** (the original `run_insample_mcpt` p-value above, testing profit factor / total return, not smoothness) is a different, better-supported use case and is not what this paper challenges.
+
+**Revised recommendation**: keep IS-profitability MCPT (does the strategy's *return*, not its curve shape, beat noise) as planned. Drop plans to gate on drawdown-family MCPT p-values specifically — that filter has been shown empirically not to add OOS edge and can actively select for overfit-smooth curves.
+
+### Related caveat — permutation count is not free power
+
+**Source**: Cha, Lee, Schrab & Kim, "More Permutations Do Not Always Increase Power: Non-monotonicity in Monte Carlo Permutation Tests" — arXiv:2605.03886 (2026)
+
+Counterintuitive result: statistical power of a permutation test is **not monotonically increasing** in the number of permutations run. Because the rejection threshold (critical value) shifts in discrete steps as the permutation count changes, there exist specific permutation-count ranges where *adding more shuffles reduces* the test's power to detect a real effect, before eventually recovering at much larger counts. Practical implication: don't assume `n_permutations=10000` is strictly safer than `n_permutations=1000` — if in doubt, plot power/p-value stability across a range of permutation counts for your specific test statistic rather than picking one number and trusting it.
+
+### Reference implementation showing honest failure reporting
+
+**Source**: "Interpretable Hypothesis-Driven Trading: A Rigorous Walk-Forward Validation Framework for Market Microstructure Signals" — arXiv:2512.12924 (2026)
+
+Useful not for its strategy (results were weak: Sharpe 0.33, 34 walk-forward folds 2015-2024, MCPT p=0.98 — the authors correctly conclude the strategy is statistically indistinguishable from random and report it as such) but as a **methodology template**: 10,000-shuffle MCPT run alongside parametric t-tests and bootstrap CIs, 252-day train / 63-day test / 63-day step walk-forward protocol, $1 + 5bp cost model, code on GitHub + Zenodo. Good reference for what a fully-specified, pre-registered validation pipeline looks like when it's applied honestly (i.e., the authors didn't retune after seeing p=0.98 — the failure was reported, not hidden).
 
 ---
 

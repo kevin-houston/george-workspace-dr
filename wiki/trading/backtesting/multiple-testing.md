@@ -268,6 +268,8 @@ def reality_check(excess_returns_matrix, n_boot=999, block_len=None):
 | **Bootstrap CI** | Always on confirmed hypotheses before going live | `arch.StationaryBootstrap` → Sharpe 95% CI; reject if lower bound ≤ 0 |
 | **MinTRL** | After each live paper trading month | `pypbo.min_track_record_length` — tracks when paper trading crosses significance |
 
+**Caveat (2026-08 update)**: don't add within-strategy MCPT on drawdown-family stats (MaxDD/Calmar/Ulcer) to this table as a selection filter — Gatto (SSRN, March 2026, 6B+ permutations across 437,911 configs) found it forward-predicts close to nothing over a simple IS-profitability gate, and at the portfolio level the smoothest-looking IS equity curves actually underperformed OOS by −3.48pp. See [Design Principles § MCPT Predictive Validity — 2026 Update](design-principles.md#mcpt-predictive-validity--2026-update-important-caveat) for the full writeup. IS-profitability MCPT (testing return/profit-factor, not curve shape) is unaffected by this caveat.
+
 ### H174 DSR check (example)
 
 H174 tested ~8 threshold combinations. Monthly Sharpe of selected config ≈ 0.24 (annualized 0.83). With 22 OOS monthly observations:
