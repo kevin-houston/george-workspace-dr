@@ -1,0 +1,133 @@
+{
+  "date": "2026-08-11",
+  "angles_searched": [
+    {
+      "angle": "1: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Moira: Language-driven Hierarchical RL for Pair Trading",
+          "source_url": "arXiv:2605.01954",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already logged as H316 STUB — needs OpenAI API, not yet run. Resurfaced again tonight; no new development."
+        },
+        {
+          "title": "Adaptive copula-based pairs trading with market overlay (crypto)",
+          "source_url": "https://www.aimspress.com/article/doi/10.3934/QFE.2026016",
+          "relevance": "low",
+          "already_known": false,
+          "reason_excluded": "Not arXiv, crypto-only universe, no code/data release found. ETF pairs family is explicitly CLOSED per H307/H246 (structural breaks made IS cointegration anti-predictive of OOS); nothing here changes that finding. Not staged."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "2: PEAD + post-earnings drift + text signals",
+      "findings": [
+        {
+          "title": "PEAD.txt: Post-Earnings-Announcement Drift Using Text (SUE.txt measure)",
+          "source_url": "Cambridge JFQA (Meursault, Ren, Chan)",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already referenced as a rigor precedent in hypothesis-log.md's H174 discussion. Nothing new to extract tonight."
+        },
+        {
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns (Wu et al.)",
+          "source_url": "arXiv:2509.24254",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Extremely well covered already: H175, H293, H357, H372, H227, H184 all trace to this paper across 20+ prior wiki/log references. Confirmed via grep before drafting anything."
+        },
+        {
+          "title": "Do earnings call transcripts predict post-announcement returns? (Molinaro)",
+          "source_url": "SSRN 6695758",
+          "relevance": "medium",
+          "already_known": false,
+          "reason_excluded": "Genuinely new (zero prior hits for 'Molinaro' or '6695758' in wiki/). However SSRN blocks WebFetch (403, same block hit during Phase 1 research) and WebSearch snippets returned no concrete methodology or numbers -- only publication metadata (30 Apr 2026). Not enough substance to stage as actionable; also H168 already found earnings-call-transcript scoring underperforms OOS on this pipeline due to an availability-bias sample (26 events, WR=34.6%), so a new paper on the same data type needs a real result to justify reopening that line. Logged here as a watch item -- worth a full-text pull attempt (Google Scholar mirror or direct author copy) on a future pass if the SSRN block persists."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "3: cross-sectional momentum + factor momentum (H157/H158 context)",
+      "findings": [
+        {
+          "title": "Is Factor Momentum More than Stock Momentum? / Spatio-Temporal Momentum (survey-level results, no single new 2026 paper)",
+          "source_url": "arXiv:2009.04824, arXiv:2302.10175",
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "Both pre-2026, already the standard references cross-linked from momentum-strategies.md. Search returned no new 2026 cross-sectional/factor-momentum paper distinct from what's already staged (H157/H158/H313/H341 already probe this space directly)."
+        },
+        {
+          "title": "Attention Factors for Statistical Arbitrage",
+          "source_url": "arXiv:2510.11616",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already logged (factor-models.md / pairs-trading.md / auto-alpha-discovery.md all reference it, plus 6+ research-log entries since 2026-06-29). No new content tonight."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "4: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+          "source_url": "arXiv:2602.23330",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "This is the direct source paper for H274 (STAGED, 3-agent PEAD debate) per CLAUDE.local.md. No new development tonight."
+        },
+        {
+          "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+          "source_url": "arXiv:2412.20138",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Also a direct H274 design input, extensively cross-referenced in multi-agent-llm-trading.md."
+        },
+        {
+          "title": "PolySwarm: Multi-Agent LLM Framework for Prediction Market Trading and Latency Arbitrage",
+          "source_url": "arXiv:2604.03888",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Already ingested (polymarket.md, algorithmic-strategies.md reference it). No new content."
+        },
+        {
+          "title": "LiveTradeBench: Seeking Real-World Alpha with Large Language Models",
+          "source_url": "arXiv:2511.03628",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Already ingested (llm-forecasting-methodology.md, ai-model-benchmarks.md). No new content."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "5: GitHub trending quantitative finance repos",
+      "findings": [
+        {
+          "title": "backtrader_next (smalinin/backtrader_next) -- ~4.5x faster fork of backtrader",
+          "source_url": "https://github.com/smalinin/backtrader_next",
+          "relevance": "low",
+          "already_known": false,
+          "reason_excluded": "Genuinely new repo, but a performance fork of a backtesting engine George doesn't currently use (backtrader isn't in the pipeline -- run_hNNN.py scripts use pandas/numpy/yfinance directly). No open wiki gap or hypothesis this addresses. Not staged; noted in case a future engine-migration hypothesis needs a faster backtrader-compatible option."
+        },
+        {
+          "title": "Awesome-quant, awesome-systematic-trading, EliteQuant curated lists",
+          "source_url": "various github.com",
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "All previously catalogued via tools/awesome-quant-ai.md and prior scans. Nothing new surfaced."
+        }
+      ],
+      "new_staged": 0
+    }
+  ],
+  "wiki_expansion_this_session": {
+    "section": "Backtesting (least-recently-touched: last dedicated addition 2026-07-21)",
+    "commit": "66d7e2a",
+    "summary": "New subsection 'MCPT Predictive Validity -- 2026 Update' on design-principles.md synthesizing Gatto SSRN (6B+ permutation study: within-strategy MCPT on drawdown-family stats forward-predicts ~nothing, smoothest-IS portfolios underperform OOS by -3.48pp), Cha/Lee/Schrab/Kim arXiv:2605.03886 (permutation-count non-monotonicity), and arXiv:2512.12924 (honest-failure-reporting reference implementation). Revises the prior 'apply MCPT to all confirmed strategies' queued action. Cross-linked from multiple-testing.md. Also fixed a real Sources-section index gap (3 pages from 2026-08-08 never added to wiki/trading/index.md despite that day's research log claiming the fix)."
+  },
+  "staged_proposals_created": 0,
+  "conclusion": "All 5 angles searched; every high-relevance finding traced back to an already-staged/applied hypothesis or existing wiki page via targeted grep dedup (not just keyword overlap) -- this project's hypothesis pipeline (H001-H494+) has now absorbed nearly all directly-actionable recent literature across pairs-trading/LLM, PEAD-text, cross-sectional momentum, and multi-agent-trading angles; searches on these well-trodden angles are increasingly returning the project's own prior work rather than new ground. One genuinely new item (Molinaro SSRN 6695758, earnings-call-transcript PEAD) was found but couldn't be verified with enough substance to stage -- SSRN blocked WebFetch and WebSearch snippets lacked methodology/numbers; logged as a watch item for a future pass. One new-but-irrelevant GitHub repo (backtrader_next) noted for reference only. Zero staged proposals for the 4 AM build phase tonight; no high-risk items to flag for Kevin. Suggests future scans may get more mileage from narrower/newer angles (e.g. specific still-open items H180/H280/H281/H318/H319) rather than the current 5 broad recurring categories."
+}
