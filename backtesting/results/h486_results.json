@@ -1,0 +1,56 @@
+{
+  "hypothesis": "H486",
+  "phase2_baseline_replication": {
+    "cagr": 0.2311,
+    "sharpe": 4.094,
+    "max_drawdown": -0.036,
+    "n_months": 100
+  },
+  "phase2_documented_reference": {
+    "sharpe": 4.158,
+    "max_drawdown": -0.036
+  },
+  "results": {
+    "OLMAR_w5_eps10": {
+      "cagr": 0.16,
+      "sharpe": 2.2017,
+      "max_drawdown": -0.055,
+      "n_months": 100,
+      "turnover": 0.3216
+    },
+    "OLMAR_w10_eps10": {
+      "cagr": 0.1428,
+      "sharpe": 1.8586,
+      "max_drawdown": -0.0612,
+      "n_months": 100,
+      "turnover": 0.1933
+    },
+    "OLMAR_w5_eps3": {
+      "cagr": 0.1589,
+      "sharpe": 2.1954,
+      "max_drawdown": -0.0545,
+      "n_months": 100,
+      "turnover": 0.315
+    },
+    "Uniform_CRP": {
+      "cagr": 0.2255,
+      "sharpe": 3.653,
+      "max_drawdown": -0.0276,
+      "n_months": 100
+    },
+    "Static_PROD_W_baseline": {
+      "cagr": 0.2311,
+      "sharpe": 4.094,
+      "max_drawdown": -0.036,
+      "n_months": 100
+    }
+  },
+  "gate": {
+    "oos_sharpe": 4.158,
+    "max_drawdown": -0.05
+  },
+  "confirmed": false,
+  "winners": [],
+  "best_olmar_variant": "OLMAR_w5_eps10",
+  "corr_best_olmar_vs_static": 0.495
+}

@@ -8685,23 +8685,31 @@ Apply regime-aware continual learning to production blend. Maintain per-regime w
 
 ---
 
-## H370 — LambdaRankIC: Direct IC Optimization on H198 30-Stock Universe (STUB — NOT RUN)
+## H370 — LambdaRankIC: Direct IC Optimization on H198 30-Stock Universe (NOT CONFIRMED)
 
-**Status**: STUB — NOT RUN
-**Staged**: 2026-07-05
+**Run date**: 2026-08-10
 **Source**: arXiv:2605.00501 (Lin, Su & Yang, May 2026)
-**Script**: `backtesting/daily/run_h370.py` (stub — no executable code)
+**Script**: `backtesting/daily/run_h370.py`
 **Universe**: H198 30-stock NASDAQ universe
-**Gate**: OOS Sharpe > 1.174 (H198 baseline) AND OOS Rank IC > 0.05
 **IS/OOS**: 2013-2020 / 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198 baseline) AND OOS Rank IC > 0.05
 
-Replace MSE regression objective in XGBoost with a custom lambda-gradient objective that directly maximizes Spearman Rank IC across monthly cross-sections. Features: 6-1m momentum (H198 core signal) + 3m/12m momentum + 1m return (skip-month indicator) + Alpha101 signals (H217 confirmed OOS 1.559). Long top-1 predicted stock each month.
+Replaced MSE regression objective in XGBoost with a custom lambda-gradient objective approximating LambdaRankIC — pairwise gradient pushing predictions toward maximizing Spearman rank correlation with realized next-month returns. Features: 6-1m momentum (skip-month), 3m/12m momentum, 1m return, Alpha101 signal (monthly-median aggregated, H217). Expanding-window monthly walk-forward: refit through t-1, predict month t. Long top-1 (matches H198 production logic) and top-3 (lower concentration) variants, both compared against a raw 6-1m momentum top-1 baseline computed on the identical feature panel.
 
-**Reference results (arXiv:2605.00501)**: 60-year US equity dataset (21,396 stocks including delisted, 94 characteristics). IC=0.1148 vs OLS 0.0418 (+175%), ICIR=1.03, Sharpe=0.923. Not directly comparable to H198 30-stock universe but provides strong directional signal.
+**Results**:
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | OOS CAGR | OOS Rank IC | Pass Gate |
+|---------|-----------|------------|-----------|----------|-------------|-----------|
+| LambdaRankIC top-1 | 1.637 | 1.094 | -52.0% | 61.8% | 0.0518 | ✗ (Sharpe) |
+| LambdaRankIC top-3 | 1.701 | 0.758 | -58.8% | 27.4% | 0.0518 | ✗ (Sharpe) |
+| Momentum baseline top-1 (same panel) | 1.479 | 0.788 | -45.9% | 38.4% | 0.0518 | — |
 
-**Priority**: Run before H204 (full RL) and H368/H369 stubs. LambdaRankIC has higher confidence and lower implementation risk than any queued RL hypothesis.
+**Verdict**: NOT CONFIRMED. Rank IC clears the 0.05 gate (0.0518, both variants — the model's cross-sectional predictions are mildly informative), but neither variant clears the OOS Sharpe 1.174 hurdle. LambdaRankIC top-1 does beat the in-panel momentum baseline (1.094 vs 0.788 Sharpe, +39%) but concentrates into a materially worse drawdown (-52.0% vs -45.9%) — the rank objective improves selection on average while occasionally picking single-month blowups that plain 6-1m momentum avoids. Top-3 diversification makes both Sharpe and MaxDD worse, not better, implying the model's edge is concentrated in its single best pick rather than spread across its top ranks.
 
-**Note (2026-07-05)**: Script stub only. Implementation requires `lambdarankic_objective_fast()` custom XGBoost objective (see wiki/trading/algorithms/deep-rl-trading.md for full code template) and feature construction from H198 + Alpha101 signals. No GPU required. No survivorship bias concern in reference dataset.
+**Key finding**: The paper's IC=0.1148 (vs OLS 0.0418) was measured on a 21,396-stock/60-year universe; on H198's homogeneous 30-stock large-cap NASDAQ panel the achievable IC ceiling is much lower (0.0518, barely above gate) — same cross-sectional-homogeneity failure mode already documented in H313 (sector-neutral momentum) and H337 (quality-momentum) on this universe. Directionally useful but not enough signal to overcome plain momentum's lower drawdown on this specific stock set.
+
+**Production correlation**: Not applicable — fails standalone gate, not a production candidate.
+
+**Results file**: `backtesting/results/h370_results.json`
 
 ---
 
@@ -10302,18 +10310,37 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 
 ---
 
-### H486 — Dynamic Multi-Strategy Capital Allocation via Online Portfolio Selection [STUB — not yet run]
+## H486 — Dynamic Multi-Strategy Capital Allocation via Online Portfolio Selection (NOT CONFIRMED — static blend already near-optimal)
 
-**Source:** universal-portfolios (Marigold, github.com/Marigold/universal-portfolios, 858 stars); dream cycle scan 2026-08-02
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-10
+**Source**: universal-portfolios (Marigold, github.com/Marigold/universal-portfolios, 858 stars); dream cycle scan 2026-08-02. Originally staged as a STUB (design/gate specced, not implemented).
+**Design**: Replace the current static target-weight blend across production sleeves (H026 27% / H041a 22% / H045 21% / XLK IBS 20% / SMH IBS 8% / IGV IBS 2%, i.e. `PROD_W`) with an Online Portfolio Selection algorithm applied to sleeve NAV series instead of individual asset prices. Phase 1 rebuilt the 6 sleeve monthly return series by reusing H500's exact production-blend reconstruction (`build_rotation_monthly`, `ibs_equity_curve` for H026/H041a/H045/XLK/SMH/IGV legs) rather than re-deriving universes/params from scratch. H174 PEAD excluded — event-driven, no continuous monthly NAV series, and not part of the documented static `PROD_W` blend. Phase 2 reproduced the static `PROD_W` blend via a Constant Rebalanced Portfolio (CRP) as a sanity check against the documented reference. Phase 3 ran OLMAR (Online Moving Average Reversion, Li & Hoi 2012) in 3 parameter variants plus a uniform 1/N CRP, all implemented directly in numpy (no `universal-portfolios` PyPI install, per standing package-security policy — avoids unreviewed nightly installs) against the 6-sleeve NAV panel.
+**Script**: `backtesting/daily/run_h486_dynamic_allocation.py`
+**Universe**: 6 production sleeves (H041a 19-asset, H026 23-asset, H045 13-asset rotations; XLK/SMH/IGV IBS legs), `PROD_W` weights
+**IS/OOS**: full panel 2003-2026 (267 months common history); OOS 2018-2026 (100 months)
+**Gate**: OOS Sharpe > 4.158 AND MaxDD not worse than -5.00%
 
-**Hypothesis:** Replace the current static target-weight blend across production sleeves (H026 27% / H041a 22% / H045 21% / XLK IBS 20% / SMH IBS 8% / IGV IBS 2%) with an Online Portfolio Selection algorithm (OLMAR, CRP) applied to sleeve NAV series instead of individual asset prices — testing whether dynamic reweighting across strategies beats static weights the same way OPS algorithms beat static weights across assets.
+**Results**:
 
-**Design:** Build `nav_df` from each sleeve's own OOS equity curve (resampled to common frequency). Reproduce static blend as baseline (OOS Sharpe 4.158, MaxDD -3.60%) as a sanity check. Run `OLMAR(window=5, eps=10)` and `CRP()` from `universal.algos` against `nav_df`.
-**Gate:** OOS Sharpe > 4.158 AND MaxDD not worse than -5.00%
+| Variant | OOS Sharpe | OOS MaxDD | CAGR | Turnover (monthly) | Pass Gate |
+|---|---|---|---|---|---|
+| Static PROD_W baseline (CRP) | 4.094 | -3.60% | 23.11% | 0% (fixed) | — |
+| Documented production reference | 4.158 | -3.60% | ~23.5% | — | — |
+| OLMAR w5/eps10 | 2.202 | -5.50% | 16.00% | 32.2% | ✗ |
+| OLMAR w10/eps10 | 1.859 | -6.12% | 14.28% | 19.3% | ✗ |
+| OLMAR w5/eps3 | 2.195 | -5.45% | 15.89% | 31.5% | ✗ |
+| Uniform CRP (1/N) | 3.653 | -2.76% | 22.55% | 0% (fixed) | ✗ |
 
-**Known risk:** OPS algorithms assume free daily rebalancing; production sleeves have mismatched native cadences (monthly/daily/event-driven). A pass on paper would need a follow-up check that the achievable rebalance frequency doesn't erode the improvement via turnover/transaction costs.
+Phase 2 baseline replication (Sharpe 4.094, MaxDD -3.60%) closely matches the documented production reference (Sharpe 4.158, MaxDD -3.60%), validating the sleeve reconstruction as faithful before trusting the Phase 3 comparison.
 
-**Status:** Script scaffold at `backtesting/daily/run_h486_dynamic_allocation.py`. Not yet implemented — see `wiki/trading/paper-trading/dynamic-strategy-allocation.md` for full research context.
+**Key findings**: All OPS variants underperform the static blend, both on absolute Sharpe and (for OLMAR) on MaxDD — OLMAR's MA-reversion predictor treats sleeve NAV *drawdowns* as a buy signal ("reversion"), which is exactly wrong for trend-following rotation sleeves (H026/H041a/H045) that are drawing down because their underlying trend broke, not because they're due to mean-revert. This misspecification shows up directly as worse MaxDD than even the naive static blend. High monthly turnover (19-32%) on the OLMAR variants would erode returns further under realistic transaction costs, which weren't even modeled here — a second strike against production viability. Uniform 1/N CRP is the closest OPS-family competitor (Sharpe 3.653, best MaxDD of any variant at -2.76%) but still falls short of the hand-tuned static weights, indicating `PROD_W` already captures most of the achievable diversification benefit across these 6 sleeves.
+
+**Production correlation estimate**: N/A — no variant confirms, no change to production is recommended. For reference, best OLMAR variant (w5/eps10) OOS return correlation vs. the static PROD_W baseline was computed directly at 0.495 — meaningfully differentiated but not diversifying enough to offset its Sharpe/MaxDD shortfall.
+
+**Verdict**: NOT CONFIRMED. The static `PROD_W` blend remains superior to dynamic OPS reweighting on this 6-sleeve panel. Mean-reversion-style OPS algorithms are a poor conceptual fit for a blend of trend-following rotation sleeves — reversion logic fights the underlying strategies' own signal rather than complementing it. Momentum-following OPS variants (e.g. Anticor's antagonistic pairing, or an EG/Exponential-Gradient variant that leans into recent winners rather than losers) would be a more theoretically sound follow-up if this family is revisited, but given the static blend's OOS Sharpe of ~4.1 is already close to the ceiling implied by the individual sleeve Sharpes, expected headroom is limited.
+
+**Results file**: `backtesting/results/h486_results.json`
 
 ---
 

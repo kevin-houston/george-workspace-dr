@@ -1,0 +1,64 @@
+{
+  "hypothesis": "H370",
+  "description": "LambdaRankIC direct IC optimization on H198 30-stock universe",
+  "gate": {
+    "oos_sharpe": 1.174,
+    "oos_rank_ic": 0.05
+  },
+  "results": {
+    "LambdaRankIC_top1": {
+      "is": {
+        "n": 72,
+        "sharpe": 1.637,
+        "cagr": 1.114,
+        "maxdd": -0.298,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 1.094,
+        "cagr": 0.618,
+        "maxdd": -0.52,
+        "neg_yrs": 1
+      },
+      "oos_rank_ic": 0.0518
+    },
+    "LambdaRankIC_top3": {
+      "is": {
+        "n": 72,
+        "sharpe": 1.701,
+        "cagr": 0.719,
+        "maxdd": -0.298,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.758,
+        "cagr": 0.274,
+        "maxdd": -0.588,
+        "neg_yrs": 1
+      },
+      "oos_rank_ic": 0.0518
+    },
+    "momentum_baseline_top1": {
+      "is": {
+        "n": 72,
+        "sharpe": 1.479,
+        "cagr": 1.029,
+        "maxdd": -0.439,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.788,
+        "cagr": 0.384,
+        "maxdd": -0.459,
+        "neg_yrs": 1
+      },
+      "oos_rank_ic": 0.0518
+    }
+  },
+  "confirmed_variants": [],
+  "verdict": "NOT CONFIRMED",
+  "n_months_predicted": 138
+}
