@@ -985,3 +985,6 @@ Issues found: 38. Auto-fixed: 3. Needs review: 35.
 
 ## [2026-08-10] ingest | MOSS-TTS-Nano (Tom Dörr tweet)
 Pages created: 1 (tools/moss-tts-nano-notes.md). Pages updated: 1 (index.md). Kevin shared https://x.com/tom_doerr/status/2086777084953641295 with "Note this" — 0.1B-param CPU-only multilingual TTS from OpenMOSS, 4,085★ Apache-2.0, verified via fxtwitter mirror + GitHub API (not a hallusquat). Flagged as higher-than-usual relevance: a real candidate to remove the recurring edge-tts reinstall/SSL-cert gotchas on the Lithuanian phrase and podcast audio pipelines, pending an actual quality/latency eval.
+
+## [2026-08-12] ingest | Diverse Approaches to Optimal Execution Schedule Generation (de Witt & Pakkanen, 2026)
+Pages created: 1 (trading/sources/de-witt-pakkanen-2026-map-elites-execution.md). Pages updated: 2 (index.md, trading/backtesting/hypothesis-log.md — H504 STUB entry). Kevin shared arXiv:2601.22113 with "Note and test this." PPO-CNN execution-scheduling RL paper, not a signal/alpha paper — same "not relevant at our trade sizes, we're price-takers" conclusion already on record for Kearns & Shi (2025). Logged as H504 (scope-mismatch stub, no backtest run) with a scoped-down empirical-slippage-check alternative offered instead of building a disproportionate RL infrastructure project.

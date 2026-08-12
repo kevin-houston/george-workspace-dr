@@ -10940,3 +10940,22 @@ Baseline figures (OOS 4.0940, AltOOS 4.0196, WF 3.024) exactly replicate `run_h1
 
 **Results file**: `backtesting/results/h503_results.json`
 
+---
+
+## H504 — RL/MAP-Elites Optimal Execution Scheduling (de Witt & Pakkanen, 2026) (STUB — scope mismatch, not a signal hypothesis)
+
+**Status**: STUB (not run, not testable in current form)
+**Tested**: 2026-08-12
+**Source**: arXiv:2601.22113 (de Witt & Pakkanen, Imperial College London / Bank of America Securities, Feb 2026), "Diverse Approaches to Optimal Execution Schedule Generation." Kevin shared the link directly with instruction "note and test this." Full read and wiki page: `wiki/trading/sources/de-witt-pakkanen-2026-map-elites-execution.md`.
+**What it is**: PPO (MLP and CNN architectures) trained in a custom Gymnasium execution environment (GEO) calibrated on 400 US equities' 2022 minute-bar data with a transient market-impact model, to schedule child-order trading within a fixed horizon and minimize arrival slippage. A second contribution (MAP-Elites) evolves regime-specialist policies indexed by volatility×liquidity behavioral cells. Results: PPO-CNN achieves 2.13 bps arrival slippage vs. 5.23 bps VWAP / 7.01 bps TWAP (59%/70% improvement) on 4,900 OOS orders averaging ~$4.3M notional each ($21B total). MAP-Elites specialists mixed: 3/9 cells beat baseline PPO by 8-10%, one cell degraded -30.2%, grid average -2.4% below baseline.
+
+**Why this doesn't fit the H-series framework**: every prior hypothesis in this log tests a cross-sectional or time-series *signal* (what to buy) via the standard IS/OOS backtest harness. This paper is an *execution-scheduling* result (how to fill an order you've already decided to place) — a different problem entirely, requiring a calibrated market-impact simulator and RL training infrastructure, not `run_h112.py`'s rank-ensemble/vectorbt-style framework. Building a comparable GEO-style environment from scratch (minute-bar impact calibration + Gymnasium RL loop + PPO training) would be a multi-week project disproportionate to what it could return.
+
+**Why it doesn't apply at current portfolio scale**: the paper's test set averages ~$4.3M per parent order against liquid mid/large-cap names. This portfolio places ~$3-4k clips (see H112 IBS entries from 2026-08-11: $3,360 XLK, $1,344 SMH) — three orders of magnitude smaller, and always in ETFs or large-caps with deep liquidity relative to order size. At this scale we are price-takers: bid-ask spread dominates any residual market-impact cost, and neither VWAP-vs-market-order nor RL-scheduled execution would move realized returns measurably. This is the same conclusion already on record for the Kearns & Shi (2025) execution-game paper (`wiki/trading/sources/kearns-shi-2025-strategic-trading.md`) — see that page's "Practical Implications" section for the prior precedent.
+
+**Verdict**: STUB / NOT APPLICABLE AT CURRENT SCALE. Not run as a backtest — there is no signal here to backtest. Logged for reference in case portfolio size scales into single-name equity positions in the $1M+ range, where PPO-CNN-style scheduling would become directly actionable.
+
+**Proposed scoped-down alternative** (not yet run, offered to Kevin rather than assumed): rather than building the full RL execution stack, pull actual Alpaca paper-trading fill prices vs. mid-price-at-signal-time across existing H174/H112/H026 order history and measure realized slippage empirically. Expected to be near-zero given order size vs. ADV on names like XLK/SMH/SPY-class ETFs, which would definitively close this line without further research spend. Only worth doing if Kevin wants the empirical confirmation; skipped by default since the qualitative conclusion (price-taker at this scale) is already well-supported by two independent execution-theory papers now in the wiki.
+
+**Results file**: none (no backtest run)
+
