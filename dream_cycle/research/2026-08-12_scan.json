@@ -1,0 +1,135 @@
+{
+  "date": "2026-08-12",
+  "angles_searched": [
+    {
+      "angle": "1: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "When Agents Trade: Live Multi-Market Trading Benchmark for LLM Agents (Agent Market Arena)",
+          "source_url": "arXiv:2510.11695",
+          "relevance": "medium",
+          "already_known": false,
+          "reason_excluded": "Genuinely new to this wiki (no prior grep hits). However it is an evaluation benchmark (lifelong live-market leaderboard comparing agent architectures like InvestorAgent/TradeAgent/HedgeFundAgent/DeepFundAgent across crypto+equities), not a tradable signal or strategy design — nothing to backtest or stage as a hypothesis. Logged here for reference only; could be a future citation if H274's multi-agent PEAD debate work needs an evaluation-methodology precedent."
+        },
+        {
+          "title": "Moira: Language-driven Hierarchical RL for Pair Trading",
+          "source_url": "arXiv:2605.01954",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already logged as H316 STUB (needs OpenAI API, not yet run). Third consecutive night this resurfaces in search results with no new development. Recommend removing from the standing angle-1 query rotation, or checking specifically for H316 implementation status instead of re-searching for the same source paper."
+        },
+        {
+          "title": "Attention Factors for Statistical Arbitrage",
+          "source_url": "arXiv:2510.11616",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already extensively cross-referenced (factor-models.md, pairs-trading.md, auto-alpha-discovery.md, 6+ research-log entries since 2026-06-29)."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "2: PEAD + post-earnings drift + text signals",
+      "findings": [
+        {
+          "title": "Beyond the last surprise: Reviving PEAD with machine learning and historical earnings",
+          "source_url": "Finance Research Letters, DOI:10.1016/j.frl.2025.108751 (Kaczmarek & Zaremba)",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "This is the exact source paper already staged as H388 PROPOSED (2026-07-08) in hypothesis-log.md line 47 -- 'PEAD Revived: Elastic Net on 12-Quarter SUE History as H174 Pre-Filter', same DOI, same elastic-net/12-quarter-SUE mechanism, same near-doubled-Sharpe finding. Confirmed via grep before drafting anything. H388 has no script yet (backtesting/daily/run_h388_pead_ml_sue.py does not exist) -- it is queued for a future backtest research session, not something this scan session builds or re-proposes. Surfacing again tonight via WebSearch (SUE.txt/PEAD text query) confirms the paper is a strong, real finding, but staging a duplicate JSON for an already-tracked hypothesis would just create index confusion for the build phase."
+        },
+        {
+          "title": "PEAD.txt: Post-Earnings-Announcement Drift Using Text (SUE.txt)",
+          "source_url": "Cambridge JFQA (Meursault, Ren, Chan)",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already a standing rigor precedent referenced in the H174 discussion. No new content."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "3: cross-sectional / factor momentum",
+      "findings": [
+        {
+          "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Portfolio Optimization with Bias Correction",
+          "source_url": "arXiv:2507.07107",
+          "relevance": "low",
+          "already_known": false,
+          "reason_excluded": "New to wiki but tested exclusively on China A-share data with no methodology detail beyond 'momentum rank shows persistent IC' -- too thin and not obviously transferable to the existing S&P 500/ETF universes used across H198/H313/H341/H492/H493. Not staged; would need a full-text pull to assess further, not attempted (low relevance score didn't justify it)."
+        },
+        {
+          "title": "From Hypotheses to Factors: Constrained LLM Agents in Cryptocurrency Markets",
+          "source_url": "arXiv:2604.26747",
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "Already ingested (sources/hypotheses-to-factors-llm-crypto-2026.md exists, added 2026-08-08). No new content."
+        },
+        {
+          "title": "Spatio-Temporal Momentum (survey reference)",
+          "source_url": "arXiv:2302.10175",
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "Pre-2026, already the standard cross-link from momentum-strategies.md. No new 2026 cross-sectional/factor-momentum paper distinct from what's already tracked (H157/H158/H313/H341/H492/H493 already probe this space directly)."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "4: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+          "source_url": "arXiv:2602.23330",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Direct source paper for H274 (STAGED, 3-agent PEAD debate). No new development."
+        },
+        {
+          "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+          "source_url": "arXiv:2412.20138",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Also a direct H274 design input, extensively cross-referenced in multi-agent-llm-trading.md."
+        },
+        {
+          "title": "PolySwarm: Multi-Agent LLM Framework for Prediction Market Trading and Latency Arbitrage",
+          "source_url": "arXiv:2604.03888",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Already ingested (polymarket.md, algorithmic-strategies.md)."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "5: GitHub trending quant finance repos",
+      "findings": [
+        {
+          "title": "hftbacktest (nkaz001/hftbacktest)",
+          "source_url": "https://github.com/nkaz001/hftbacktest",
+          "relevance": "low",
+          "already_known": false,
+          "reason_excluded": "Legitimate, active HFT/market-making backtester (Python+Rust, full L2 tick data, queue-position modeling, crypto market-making examples on Binance Futures). Not staged: this project trades ETFs/large-caps in $3-4k clips (per H504's conclusion, logged 2026-08-12 same day), not HFT/market-making scale -- queue-position and latency modeling isn't a relevant problem class here. Logged for reference only in case a future crypto/Kraken microstructure project needs a backtester."
+        },
+        {
+          "title": "je-suis-tm/quant-trading",
+          "source_url": "https://github.com/je-suis-tm/quant-trading",
+          "relevance": "low",
+          "already_known": false,
+          "reason_excluded": "Curated collection of 17 classic strategy implementations (Pattern Recognition, Pairs Trading, Bollinger, MACD, Heikin-Ashi, etc). All are textbook technical strategies already covered at more depth and with actual IS/OOS backtests in the hypothesis log (e.g. H181 industry reversal, H198 momentum family, H355/H361 order-block filters). No new signal or methodology to extract; a well-organized reference repo, not a novel finding."
+        },
+        {
+          "title": "best-of-algorithmic-trading (PlaceNL2026)",
+          "source_url": "https://github.com/PlaceNL2026/best-of-algorithmic-trading",
+          "relevance": "low",
+          "already_known": false,
+          "reason_excluded": "Curated 'awesome list' aggregator, not a strategy or tool itself. No individual project surfaced from it warranted a follow-up beyond hftbacktest/RustQuant already assessed above."
+        }
+      ],
+      "new_staged": 0
+    }
+  ],
+  "total_new_staged": 0,
+  "summary": "Zero staged proposals -- the strongest lead each angle produced was either already tracked (H316 Moira, H388 Kaczmarek-Zaremba PEAD-ML-SUE both re-surfaced verbatim from prior sessions), out of scope for the current portfolio's execution scale (hftbacktest, and the same day's H504 stub reached an identical price-taker conclusion for a different execution paper), or a benchmark/aggregator rather than a tradable signal (Agent Market Arena, best-of-algorithmic-trading). This continues the pipeline-saturation pattern noted in the 2026-08-11 dream cycle scan commit message ('0 new staged proposals') -- the 5 standing search angles are increasingly returning the same small set of papers night over night. Worth considering a angle rotation refresh in a future session (e.g. swapping angle 3's generic 'cross-sectional momentum' query for something more specific like 'earnings call transcript embeddings' or 'options market microstructure ETF' to surface less-picked-over material) rather than reusing the identical 5 queries indefinitely."
+}
