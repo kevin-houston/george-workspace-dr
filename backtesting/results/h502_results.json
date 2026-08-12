@@ -1,0 +1,43 @@
+{
+  "variants": {
+    "A_baseline (production)": {
+      "oos_sharpe": 4.094,
+      "altoos_sharpe": 4.0196,
+      "oos_maxdd": -0.036,
+      "wf_min": 3.0243
+    },
+    "B_H026_LGBM_gated": {
+      "oos_sharpe": 4.094,
+      "altoos_sharpe": 4.0196,
+      "oos_maxdd": -0.036,
+      "wf_min": 3.0243
+    },
+    "C_H041a_LGBM_gated": {
+      "oos_sharpe": 4.094,
+      "altoos_sharpe": 4.0196,
+      "oos_maxdd": -0.036,
+      "wf_min": 3.0243
+    },
+    "D_both_LGBM_gated": {
+      "oos_sharpe": 4.094,
+      "altoos_sharpe": 4.0196,
+      "oos_maxdd": -0.036,
+      "wf_min": 3.0243
+    }
+  },
+  "base_oos": 4.094,
+  "base_ao": 4.0196,
+  "base_wf": 3.0243,
+  "confirmed": false,
+  "winners": [],
+  "h026_gate_months": [],
+  "h041_gate_months": [],
+  "h026_probs_stats": {
+    "mean": 0.0004960761872595907,
+    "max": 0.017346835097879335
+  },
+  "h041_probs_stats": {
+    "mean": 0.0022130381550683315,
+    "max": 0.3084727045564584
+  }
+}

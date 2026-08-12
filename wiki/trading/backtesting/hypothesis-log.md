@@ -10876,3 +10876,67 @@ Baseline figures (OOS 4.0940, AltOOS 4.0196, WF 3.024) exactly replicate `run_h1
 
 **Results file**: `backtesting/results/h501_results.json`
 
+---
+
+## H502 — LightGBM Momentum-Crash Filter Applied to H026/H041a Rotation Legs (NOT CONFIRMED — classifier never fires)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-11
+**Source**: Internal follow-up to H320 (PARTIAL CONFIRMED, 2026-07-xx) — a rolling-retrained LightGBM classifier on 6 macro/technical features (SPY/MA200, VIX level, VIX 20d change, momentum-portfolio vol, momentum-portfolio 6m return, T10Y3M yield curve slope) cut H198 stock-momentum's 2022 drawdown from -10.2% to +5.7% while preserving OOS Sharpe (1.274 vs 1.207). That mechanism had only ever been tested on the H198 30-stock cross-sectional momentum universe. This session applied it, unmodified, to the H026 and H041a ETF-rotation legs inside the actual production blend — both sleeves have shown some OOS Sharpe degradation vs historical levels (H435-437) and are structurally the same "long-only trend, exposed to sharp reversal" risk class H320 targets.
+**Design**: Same 6-feature set and rolling 60-month LightGBM training window as H320 (widened from H320's 24-month window because ETF rotation legs generate far fewer extreme-return training examples than 30-stock cross-sectional momentum). Trained independently on H026's and H041a's own monthly return series (production 12-0 momentum + inverse-vol rank construction, identical to `run_h112.py`/H500). Target: monthly sleeve return < -5%. Gated (P_crash >= 0.35) months are zeroed for that leg only; the other 5 production sleeves continue at their normal static `PROD_W` weight (money is not redistributed — this isolates the effect of removing the crash-flagged leg's own bad month, not a total-exposure timing call).
+**Script**: `backtesting/daily/run_h502_lgbm_crash_filter_h026_h041a.py`
+**Universe**: H026_BASE (23 ETFs), H041A_FULL (19 assets), full 6-sleeve production blend
+**IS/OOS/AltOOS**: 2008-2017 / 2018-2026 / 2013-2026
+**Gate**: production-beat convention (matches H500) — OOS Sharpe > 4.094 AND AltOOS Sharpe > 4.020 AND WF worst-fold >= 1.75
+
+**Results**:
+
+| Variant | OOS Sharpe | AltOOS Sharpe | MaxDD | WF min | Beats baseline |
+|---|---|---|---|---|---|
+| A_baseline (production) | 4.0940 | 4.0196 | -3.60% | 3.024 | — |
+| B_H026_LGBM_gated | 4.0940 | 4.0196 | -3.60% | 3.024 | ✗ (identical) |
+| C_H041a_LGBM_gated | 4.0940 | 4.0196 | -3.60% | 3.024 | ✗ (identical) |
+| D_both_LGBM_gated | 4.0940 | 4.0196 | -3.60% | 3.024 | ✗ (identical) |
+
+**Key findings**: All three gated variants are numerically **identical** to the baseline — the LightGBM classifier never once crossed the 0.35 gate threshold for H026 (max predicted P_crash = 0.017 across 201 months) and only once approached it for H041a (max P_crash = 0.308, still under gate). Zero months were gated for either leg. Root cause: H026's rank(momentum)+rank(inv-vol) construction, selecting the single best-ranked ETF each month from a 23-asset universe, produced **zero** months with return < -5% across the full 2008-2026 history used for feature/label construction — there is no positive training class for the classifier to learn from. H041a had a handful of bad months but still not enough for the model to confidently predict >35% crash probability. This is a direct, informative negative result: the H320 crash-filter mechanism's precondition (a "genuine positive rate of crash months in the training window") does not hold for diversified single-pick rank-selected ETF rotation legs, in contrast to the 30-stock cross-sectional momentum book H320 was built on, where 2022 alone contributed several -5%+ months.
+**Production correlation estimate**: N/A — no variant differs from baseline, so no change to production is recommended either way.
+
+**Verdict**: NOT CONFIRMED. The mechanism doesn't transfer as-is because H026/H041a's monthly-rebalanced, best-of-N rank-selection construction is too smooth (no crash-class training examples) for this classifier design. This closes the naive "reuse H320 crash-gate for H026/H041a" question; a meaningful adaptation would need either a finer time granularity (weekly rebalance) or a lower/different crash-definition threshold calibrated to each sleeve's own volatility, not attempted here to avoid retroactively lowering the established -5%/0.35 convention from H320.
+
+**Results file**: `backtesting/results/h502_results.json`
+
+---
+
+## H503 — LightGBM Momentum-Crash Filter Applied to XLK/SMH/IGV IBS Legs (CONFIRMED, weak/marginal — Var B only)
+
+**Status**: CONFIRMED (weak)
+**Tested**: 2026-08-11
+**Source**: Internal follow-up to H502 (same session, NOT CONFIRMED) — H502 found the H320-style LightGBM crash filter never fires on H026/H041a because monthly rotation-leg returns almost never drop below -5%. The other 3 production sleeves (XLK/SMH/IGV, short-hold IBS mean-reversion strategies) are structurally different: a direct check of cached monthly-aggregated IBS equity curves found real crash-class incidence (XLK 10/279 months < -5%, SMH 21/279, IGV 9/279), so the H320 mechanism has a genuine positive class to train on here, unlike H502.
+**Design**: Same 6-feature set and rolling 60-month LightGBM window as H502/H320, trained on each IBS leg's own monthly-aggregated return series (single-day IBS entries/exits are the wrong granularity for a macro-feature classifier, so features/labels are built at monthly frequency exactly as in H502). Gated (P_crash >= 0.35) months zero that leg's return; other 5 sleeves hold their normal `PROD_W` weight.
+**Script**: `backtesting/daily/run_h503_lgbm_crash_filter_ibs_legs.py`
+**Universe**: XLK/SMH/IGV IBS legs, full 6-sleeve production blend
+**IS/OOS/AltOOS**: 2008-2017 / 2018-2026 / 2013-2026
+**Gate**: production-beat convention (matches H500/H502) — OOS Sharpe > 4.094 AND AltOOS Sharpe > 4.020 AND WF worst-fold >= 1.75
+
+**Results**:
+
+| Variant | OOS Sharpe | AltOOS Sharpe | MaxDD | WF min | Beats baseline |
+|---|---|---|---|---|---|
+| A_baseline (production) | 4.0940 | 4.0196 | -3.60% | 3.024 | — |
+| B_XLK_LGBM_gated | **4.1119** | **4.0343** | -3.60% | 3.024 | ✓ |
+| C_SMH_LGBM_gated | 4.0754 | 4.0010 | -3.60% | 2.970 | ✗ |
+| D_IGV_LGBM_gated | 4.0915 | 4.0185 | -3.60% | 3.024 | ✗ |
+| E_all3_LGBM_gated | 4.0903 | 4.0143 | -3.60% | 2.970 | ✗ |
+
+**Key findings**: Only Variant B (gating XLK, the largest IBS sleeve at 20% `PROD_W`) technically clears the production-beat gate: OOS Sharpe +0.43% (4.094→4.112), AltOOS +0.37% (4.020→4.034), WF unchanged (3.024, both above 1.75 threshold). However this is a **thin, low-conviction result that should not be overstated**:
+1. Portfolio-level **MaxDD is completely unchanged** at -3.60% in every variant, including the "winning" B — the classifier gates months that reduce return variance/improve Sharpe marginally but the actual tail-risk profile of the blended portfolio is untouched. This is not the "cut the crash, keep the upside" pattern H320 found on H198 (where MaxDD improved by 7-8pp); it's a small return-smoothing effect.
+2. Only **4 of XLK's 6 lifetime-gated months fall in the OOS window** (2018-03, 2018-04, 2018-05, 2019-06 — the March-May 2018 volpocalypse aftermath and a single 2019 month); the other 2 (2009-04, 2010-02) are pre-OOS. A ~0.43% Sharpe improvement resting on 4 gated months out of ~100 OOS months is a small-sample result, not a robust structural edge.
+3. SMH and IGV gating both make things *worse* (Sharpe and WF both decline for C and E) — the mechanism is not uniformly beneficial even within the same IBS-leg family, which further weakens confidence that Variant B's edge is a real, transferable pattern rather than a specific-months artifact.
+4. Directionally consistent with H502's finding: IBS legs are the one production sleeve family where crash-class training examples exist in enough quantity for the classifier to fire at all (XLK/SMH/IGV combined had 6-10 OOS+IS gate events each vs 0 for H026), so the mechanism is at least *mechanically* functional here even though its net benefit is marginal.
+
+**Production correlation estimate**: Variant B's return stream differs from baseline in only 4 OOS months out of ~100 — correlation to the existing static-blend equity curve would be >0.99. This is not a diversification argument; it is at best a very minor tweak to the existing XLK IBS leg's own entry logic.
+
+**Verdict**: CONFIRMED on the letter of the production-beat gate (Variant B passes all three conditions), but flagged as **weak/marginal and NOT recommended for production deployment as-is**. The improvement is small (<0.5% Sharpe), driven by a handful of months, doesn't improve MaxDD at all, and the same mechanism actively hurts when applied to the other two IBS legs — this pattern (passes numerically, fails a common-sense robustness read) is a caution flag rather than an actionable signal. If pursued further, would need a walk-forward stability check across multiple random seeds/train-window lengths before being considered for `h112_monthly.py`; not implemented this session per the standing rule against touching production scripts during research sessions.
+
+**Results file**: `backtesting/results/h503_results.json`
+
