@@ -247,3 +247,21 @@
 [2026-08-11 14:46:57] Exits submitted: 0. Remaining open: 1
 [2026-08-11 14:46:58] Exits pass complete.
 [2026-08-11 14:46:59] Exits pass complete.
+[2026-08-12 14:46:09] =======================================================
+[2026-08-12 14:46:09] PEAD-GAP exits pass starting
+[2026-08-12 14:46:09] Open positions: ['AMZN']
+[2026-08-12 14:46:09]   AMZN: exit_date=2026-08-28, holding
+[2026-08-12 14:46:09] Exits submitted: 0. Remaining open: 1
+[2026-08-12 14:46:11] Exits pass complete.
+[2026-08-12 14:46:40] =======================================================
+[2026-08-12 14:46:40] PEAD-GAP exits pass starting
+[2026-08-12 14:46:40] Open positions: ['AMZN']
+[2026-08-12 14:46:40]   AMZN: exit_date=2026-08-28, holding
+[2026-08-12 14:46:40] Exits submitted: 0. Remaining open: 1
+[2026-08-12 14:46:40] =======================================================
+[2026-08-12 14:46:40] PEAD-GAP exits pass starting
+[2026-08-12 14:46:40] Open positions: ['AMZN']
+[2026-08-12 14:46:40]   AMZN: exit_date=2026-08-28, holding
+[2026-08-12 14:46:40] Exits submitted: 0. Remaining open: 1
+[2026-08-12 14:46:41] Exits pass complete.
+[2026-08-12 14:46:42] Exits pass complete.
