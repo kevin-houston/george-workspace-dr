@@ -9419,6 +9419,8 @@ OOS annual (Var D): 2021: +233.5% / 2022: +177.3% / 2023: +160.5% / 2024: +91.6%
 
 ## H411 — Signal Decomposition: Value vs Reversal in Drift-Gated Framework: CONFIRMED (2026-07-17)
 
+> **⚠️ CORRECTED 2026-08-13 (see H506): the Var B champion figures below (OOS Sharpe 4.825, MaxDD -1.2%) are RETRACTED — look-ahead bias in the shared `backtest()` helper (no `.shift(1)` on the signal). Corrected Var B OOS Sharpe is 0.900, MaxDD -28.8%, below the H198 baseline gate. See H506 for full audit, root cause, and blast radius (also affects H416/H417/H418/H470/H483/H484).**
+
 **Source**: Diagnostic extension of H409. H409 Var D used 0.70×pct_rank(1/price) + 0.30×pct_rank(−zscore(ret_10d)) gated by 20d drift regime, achieving OOS Sharpe 4.550. H411 decomposes which component drives the alpha.
 
 **Universe**: H198 30-stock NASDAQ large-cap
@@ -9529,6 +9531,8 @@ OOS annual (Var I): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 ---
 
 ## H417 — H416 Signal: Universe Sensitivity Test: CONFIRMED (2026-07-20)
+
+> **⚠️ CORRECTED 2026-08-13 (see H506): the figures below (Var C OOS Sharpe 5.855 "NEW H-SERIES RECORD") are RETRACTED — look-ahead bias, same root cause as H411. `run_h417_corrected.py` (already in repo) gives Var C OOS Sharpe 0.383. This was partially caught by `h477_status` (2026-07-29) but never used to edit this entry. CLAUDE.local.md's "H417 CONFIRMED... 5.855" summary line is also stale and should be corrected. See H506 for full audit.**
 
 **Source**: Extension of H416. H416 Var I confirmed OOS Sharpe 5.342 on 30-stock NASDAQ large-cap. H417 tests whether the 1/price × 20d drift gate signal generalizes beyond the NASDAQ universe — a critical survivorship bias check.
 
@@ -10958,4 +10962,55 @@ Baseline figures (OOS 4.0940, AltOOS 4.0196, WF 3.024) exactly replicate `run_h1
 **Proposed scoped-down alternative** (not yet run, offered to Kevin rather than assumed): rather than building the full RL execution stack, pull actual Alpaca paper-trading fill prices vs. mid-price-at-signal-time across existing H174/H112/H026 order history and measure realized slippage empirically. Expected to be near-zero given order size vs. ADV on names like XLK/SMH/SPY-class ETFs, which would definitively close this line without further research spend. Only worth doing if Kevin wants the empirical confirmation; skipped by default since the qualitative conclusion (price-taker at this scale) is already well-supported by two independent execution-theory papers now in the wiki.
 
 **Results file**: none (no backtest run)
+
+---
+
+## H506 — CRITICAL: Look-Ahead Bias Audit of the H411/H416/H417/H418/H470/H483/H484 "Value × Drift-Gate" Family (BUG CONFIRMED — H411 record retracted)
+
+**Status**: BUG CONFIRMED — retracts H411's headline record and flags H416(original)/H418/H470/H483/H484 as built on the same defect
+**Tested**: 2026-08-13 (catch-up run for the missed 2026-08-12 23:00 CT nightly slot — Kevin's account hit a usage limit ~4pm CT 2026-08-12, task never executed until now)
+**Trigger**: This session set out to run a genuinely open follow-up flagged by both H492 and H493 (CONFIRMED, 2026-08-05) — apply their "12-0 unskipped momentum beats 12-1 skip-month" finding to the higher-Sharpe production-adjacent H411/H417 drift-gated value signal family, since both hypotheses explicitly recommended this as the next step rather than assuming the 30-stock standalone result would transfer. Priorities 1 (low-vol ETF) and 2 (ETF pairs) were checked first and confirmed saturated/closed per H354/H361-364/H501 and H246/H271/H307 respectively — see session notes. Priority 3 (stock momentum) was likewise found saturated for the literal "top-200 NASDAQ by ADDV" framing (H490, NOT CONFIRMED, explicitly closes that exact angle), which is why the H492/H493 follow-up recommendation was pursued instead as the genuinely open thread.
+
+**What happened**: Building the H505 follow-up script (`run_h505_unskipped_momentum_drift_gate_combined60.py`), replication of the existing `run_h417.py` (unmodified) reproduced its logged OOS Sharpe 5.855 for Var C exactly. But `run_h417_corrected.py` — already present in the repo, evidently written during an earlier session but never used to update this log — reproduces a dramatically different Var C OOS Sharpe of only 0.383. Diffing the two files: the only change is `signal.shift(1)` inserted before `backtest()`. (Separately, `h477_status`, logged 2026-07-29, had already caught the H417-specific instance of this — "Gate: OOS Sharpe > 5.855 (NOTE: this gate was set against inflated pre-correction H417 numbers; actual H417 Var C corrected OOS = 0.383)" — and pointed at H411 Var B (4.825) as "the real H-series record" instead. **That correction did not go far enough: H411 itself has the identical bug**, and this was never checked.)
+
+**Root cause**: The shared `backtest()` helper across this signal family selects names via `signal.loc[month_end]`, where `signal` (1/price rank, drift-gate fraction, or both) is computed from `monthly_px.loc[month_end]` — that month's own closing price / that month's own trailing-20-day price path ending at that close. The same `month_end` is then used to look up `monthly_ret.iloc[loc]`, i.e. the return realized getting TO that close. The strategy is effectively told "this stock is cheap / in a 20d uptrend as of the close of month M" and is awarded month M's return for having "known" that at the start of month M — but the signal is only computable once month M has already closed. This is textbook look-ahead bias, not a subtler p-hacking or overfitting issue — it's a mechanical off-by-one in the backtest loop.
+
+**Verification** (`backtesting/daily/run_h506_h411_lookahead_bias_audit.py`, H411's original 7-variant grid on the H198 30-stock universe, IS 2013-2020 / OOS 2021-2026):
+
+| Var | Description | Original (unshifted) OOS Sharpe | Corrected (shift(1)) OOS Sharpe |
+|-----|---|---|---|
+| A | Pure reversal 10d, 20d drift gate | 3.813 | 0.411 |
+| **B** | **Pure value (1/P), 20d drift gate — H411 CHAMPION** | **4.825** | **0.900** |
+| C | 50/50 rev+val, 20d drift gate | 3.836 | 0.402 |
+| D | H409 Var D replication (0.70val+0.30rev) | 4.550 | 0.545 |
+| E | Pure reversal, NO gate | -2.708 | 0.912 |
+| F | 5d reversal, 20d drift gate | 3.985 | 0.674 |
+| G | 21d reversal, 20d drift gate | 3.025 | 0.613 |
+
+Every single variant collapses by 70-90%+ once the look-ahead is removed. **H411's headline record (Var B, "best OOS Sharpe in H-series history," OOS 4.825, MaxDD -1.2%) corrects to OOS Sharpe 0.900, MaxDD -28.8%** — below the H198 baseline gate (1.174) it was never even required to clear because it was compared only against the (also potentially inflated) H398A gate of 4.068.
+
+**Confirmed blast radius** (checked each script's `backtest()`/signal-indexing code directly, not just its logged numbers):
+- **H411** (2026-07-17): BUG CONFIRMED. `run_h411.py` has no `.shift(1)`. Headline Var B record (4.825) retracted → corrected 0.900.
+- **H416** original (2026-07-18): BUG CONFIRMED in `run_h416.py` (no shift). A `run_h416_corrected.py` already exists in the repo with the fix applied — but the hypothesis-log entry (Var I, OOS 5.342, "NEW H-SERIES RECORD") was never updated to the corrected number. Not re-run this session (out of scope budget) but flagged for correction using the same methodology as this audit.
+- **H417** (2026-07-20): BUG CONFIRMED and **already partially caught** by `h477_status` (2026-07-29) and `run_h417_corrected.py` — but the main H417 log entry above (line ~9531) was never edited to reflect it, so it still reads "CONFIRMED... OOS Sharpe 5.855... NEW H-SERIES RECORD" at a casual read. CLAUDE.local.md's running summary also still cites this uncorrected figure. **Recommend editing the H417 entry directly to add a correction banner** (not done in this pass — flagging for the build/apply phase or next session to avoid further scope creep in an already-large audit).
+- **H418** (2026-07-20): BUG CONFIRMED. `run_h418.py` has no `.shift(1)`. Var A ("H416-I baseline," OOS 5.328) and Var D (12-1m momentum × drift gate, OOS 4.513) both inherit the bug; the decomposition's qualitative conclusion ("drift gate is the essential filter, 1/price adds residual value within it") may still hold directionally post-correction, but the specific Sharpe figures do not.
+- **H470** (2026-07-28, CONFIRMED "ML Design Choice Momentum"): Pool component S3 is explicitly "H411-B value×drift top-2" — the meta-strategy's headline confirmation (Var C, OOS Sharpe 4.424) was partly built on a biased sub-strategy return stream. The meta-selector's qualitative finding (that S3 is low-correlated with momentum-family S1/S2/S4) is a separate, likely still-valid claim, but the absolute Sharpe figures for any variant that routes significant weight to S3 need re-verification.
+- **H483** (2026-07-31, CONFIRMED "OB Filter on H411 Var B"): Despite its own method line claiming `shift(1)` was applied, the actual code in `run_h483_ob_filter_h411_varb.py` (checked directly: `h411_var_b.loc[month_end]` with no `.shift`) has the same bug — its baseline-replication check "reproducing the log exactly at 4.825" is not independent verification, it's reproducing the same bug. The OB-filtered champion (OOS 4.874, MaxDD 0.0%) is very likely built on an inflated, look-ahead-biased base signal and needs a full re-run with the fix before its "strong production candidate" recommendation can be trusted.
+- **H484** (2026-08-01, CONFIRMED "OB Filter on H192-D BAB"): Checked directly — same `rank_df.loc[month_end]` pattern with no `.shift(1)` in `run_h484_ob_filter_h192d_bab.py`. **However H484's base signal is H192-D (sector-neutral BAB via 252d rolling beta rank), a completely different signal family from H411's value×drift** — it shares only the vulnerable `backtest()` loop structure, not the specific 1/price-at-month-end mechanism that makes H411 so exploitable. Needs its own dedicated shift(1) correction check before being trusted, but is not assumed guilty by association — flagged, not retracted.
+- **H479 status note** (staged 2026-07-30 for "OB filter on H411 Var B"): superseded/renumbered before ever running (the actual H479 slot was used for a different hypothesis, Split-Session GARCH). No wasted compute, but the staged note's premise ("H411 Var B is the actual H-series OOS champion at 4.825 Sharpe... highest-priority backtest in pipeline") is now known-false and should not be revived without the correction.
+- **Not affected**: H409, H398/H398A, H492, H493 use different backtest helpers with their own indexing (H492/H493 checked directly this session, confirmed no `.loc[month_end]`-without-shift pattern — they use `pct_change(window)` composed with an explicit walk-forward loop). Not exhaustively re-audited beyond direct code inspection; flagged as lower-risk based on structural difference, not proven bug-free.
+
+**Why this went unnoticed for ~3.5 weeks**: `run_h416_corrected.py` and `run_h417_corrected.py` exist in the repo, meaning at least one prior session identified and partially fixed the bug for those two files specifically — but never (a) traced it back to H411 (the actual originating hypothesis both H416 and H417 build on), (b) re-ran H411/H418 with the fix, or (c) edited the hypothesis-log prose to retract the affected headline numbers rather than just leaving a corrected script sitting next to the original. Meanwhile H470/H483/H484 were built in the following two weeks directly on top of the still-uncorrected H411 log entry, compounding the error into three more "CONFIRMED" results.
+
+**Verdict**: BUG CONFIRMED, high severity, moderate-to-wide blast radius. This is not a new alpha discovery — it is a data-integrity correction. No production action needed (H411/H483/H484/H470's S3 component were never live; production portfolio is H041a/H026/H045/XLK-SMH-IGV IBS, which use different, independently-verified backtest scripts per H500). But the wiki's running hypothesis summary (CLAUDE.local.md) currently states "H417 CONFIRMED (H416 universe sensitivity; Var C 60-stock combined OOS 5.855 = NEW H-SERIES RECORD)" — **this claim is false and should be corrected** to reflect the 0.383 corrected figure and this audit. H411's "best OOS Sharpe in H-series history" framing (still standing in its own log entry and referenced by H470/H483/H484) needs the same correction.
+
+**Recommended follow-up (not done this session, scope discipline)**:
+1. Edit the H411, H416, H417, H418 log entries directly to add correction banners pointing here, rather than leaving readers to find this entry by chance.
+2. Re-run H416 and H418 with `.shift(1)` to get their corrected numbers (only H411 was re-run this session, as the root/originating hypothesis).
+3. Re-run H483 (OB+H411) and H470 (design-choice meta-strategy) with the corrected S3/H411-B signal to see whether their qualitative conclusions (OB filter still helps; S3 is still low-correlated with momentum) survive even if the absolute Sharpe figures drop.
+4. Audit H484 specifically for the same bug pattern in isolation (different base signal, same vulnerable loop structure).
+5. Update CLAUDE.local.md's hypothesis summary to remove/correct the false H417 5.855 claim.
+
+**Scripts**: `backtesting/daily/run_h506_h411_lookahead_bias_audit.py` (verification), `backtesting/daily/run_h505_unskipped_momentum_drift_gate_combined60.py` (the follow-up that surfaced the bug; not independently meaningful until H411/H417's underlying signal is corrected — left in repo as the H492/H493 follow-up but its own results are downstream of the same corrected-baseline question and should be re-read against the corrected numbers, not the original 5.855 gate it was written against)
+**Results files**: `backtesting/results/h506_results.json`, `backtesting/results/h505_results.json`
 

@@ -1,0 +1,103 @@
+{
+  "hypothesis": "H505",
+  "primary_gate_h417_champion": 5.855,
+  "secondary_gate_production": 4.094,
+  "signal_family": "1/price value rank x drift/momentum gate, combined-60 universe",
+  "confirmed_vs_h417": false,
+  "confirmed_variants": [],
+  "best_variant": "B_value_x_mom12_0_gate",
+  "best_oos_sharpe": 0.715,
+  "corr_spy_oos_best": 0.6248007075207941,
+  "results": {
+    "A_H417_replication": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.471,
+        "maxdd": -0.185,
+        "cagr": 0.267,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.383,
+        "maxdd": -0.469,
+        "cagr": 0.084,
+        "neg_yrs": 3
+      },
+      "beats_h417": false,
+      "beats_prod": false
+    },
+    "B_value_x_mom12_0_gate": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.589,
+        "maxdd": -0.23,
+        "cagr": 0.447,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.715,
+        "maxdd": -0.413,
+        "cagr": 0.189,
+        "neg_yrs": 2
+      },
+      "beats_h417": false,
+      "beats_prod": false
+    },
+    "C_value_x_stacked_gate": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.372,
+        "maxdd": -0.165,
+        "cagr": 0.236,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.281,
+        "maxdd": -0.432,
+        "cagr": 0.059,
+        "neg_yrs": 3
+      },
+      "beats_h417": false,
+      "beats_prod": false
+    },
+    "D_blended_rank_x_drift": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.164,
+        "maxdd": -0.22,
+        "cagr": 0.196,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.497,
+        "maxdd": -0.416,
+        "cagr": 0.113,
+        "neg_yrs": 3
+      },
+      "beats_h417": false,
+      "beats_prod": false
+    },
+    "E_mom_rank_x_drift": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.189,
+        "maxdd": -0.2,
+        "cagr": 0.205,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.327,
+        "maxdd": -0.413,
+        "cagr": 0.083,
+        "neg_yrs": 3
+      },
+      "beats_h417": false,
+      "beats_prod": false
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "hypothesis": "H506",
+  "type": "look_ahead_bias_audit",
+  "affected_hypotheses": [
+    "H411",
+    "H416",
+    "H417",
+    "H418"
+  ],
+  "root_cause": "backtest() indexes signal.loc[month_end] without shift(1); signal computed from monthly_px.loc[month_end] which is the same close used to compute the return being awarded that month.",
+  "h411_var_b_original_oos_sharpe": 4.825,
+  "h411_var_b_corrected_oos_sharpe": 0.9,
+  "results": {
+    "A": {
+      "desc": "Pure reversal 10d, 20d drift gate",
+      "original_unshifted": {
+        "is": {
+          "n": 96,
+          "sharpe": 3.99,
+          "maxdd": -0.045,
+          "cagr": 0.545,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 3.813,
+          "maxdd": -0.059,
+          "cagr": 0.724,
+          "neg_yrs": 0
+        }
+      },
+      "corrected_shift1": {
+        "is": {
+          "n": 96,
+          "sharpe": 1.045,
+          "maxdd": -0.19,
+          "cagr": 0.221,
+          "neg_yrs": 2
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 0.411,
+          "maxdd": -0.441,
+          "cagr": 0.115,
+          "neg_yrs": 3
+        }
+      }
+    },
+    "B": {
+      "desc": "Pure value (1/P), 20d drift gate  [H411 ORIGINAL CHAMPION]",
+      "original_unshifted": {
+        "is": {
+          "n": 96,
+          "sharpe": 3.94,
+          "maxdd": -0.01,
+          "cagr": 1.076,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 4.825,
+          "maxdd": -0.012,
+          "cagr": 1.061,
+          "neg_yrs": 0
+        }
+      },
+      "corrected_shift1": {
+        "is": {
+          "n": 96,
+          "sharpe": 1.517,
+          "maxdd": -0.117,
+          "cagr": 0.338,
+          "neg_yrs": 1
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 0.9,
+          "maxdd": -0.288,
+          "cagr": 0.261,
+          "neg_yrs": 2
+        }
+      }
+    },
+    "C": {
+      "desc": "50/50 rev+val, 20d drift gate",
+      "original_unshifted": {
+        "is": {
+          "n": 96,
+          "sharpe": 3.891,
+          "maxdd": -0.01,
+          "cagr": 0.782,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 3.836,
+          "maxdd": -0.058,
+          "cagr": 0.87,
+          "neg_yrs": 0
+        }
+      },
+      "corrected_shift1": {
+        "is": {
+          "n": 96,
+          "sharpe": 1.457,
+          "maxdd": -0.143,
+          "cagr": 0.341,
+          "neg_yrs": 1
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 0.402,
+          "maxdd": -0.294,
+          "cagr": 0.1,
+          "neg_yrs": 3
+        }
+      }
+    },
+    "D": {
+      "desc": "H409 Var D replication (0.70val+0.30rev), 20d gate",
+      "original_unshifted": {
+        "is": {
+          "n": 96,
+          "sharpe": 4.212,
+          "maxdd": -0.01,
+          "cagr": 0.918,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 4.55,
+          "maxdd": -0.028,
+          "cagr": 1.01,
+          "neg_yrs": 0
+        }
+      },
+      "corrected_shift1": {
+        "is": {
+          "n": 96,
+          "sharpe": 1.311,
+          "maxdd": -0.138,
+          "cagr": 0.296,
+          "neg_yrs": 1
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 0.545,
+          "maxdd": -0.259,
+          "cagr": 0.144,
+          "neg_yrs": 3
+        }
+      }
+    },
+    "E": {
+      "desc": "Pure reversal 10d, NO gate [diagnostic]",
+      "original_unshifted": {
+        "is": {
+          "n": 96,
+          "sharpe": -3.272,
+          "maxdd": -0.999,
+          "cagr": -0.748,
+          "neg_yrs": 8
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": -2.708,
+          "maxdd": -0.99,
+          "cagr": -0.78,
+          "neg_yrs": 6
+        }
+      },
+      "corrected_shift1": {
+        "is": {
+          "n": 96,
+          "sharpe": 0.861,
+          "maxdd": -0.463,
+          "cagr": 0.251,
+          "neg_yrs": 1
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 0.912,
+          "maxdd": -0.257,
+          "cagr": 0.281,
+          "neg_yrs": 1
+        }
+      }
+    },
+    "F": {
+      "desc": "5d reversal, 20d drift gate",
+      "original_unshifted": {
+        "is": {
+          "n": 96,
+          "sharpe": 4.59,
+          "maxdd": -0.045,
+          "cagr": 0.629,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 3.985,
+          "maxdd": -0.058,
+          "cagr": 0.823,
+          "neg_yrs": 0
+        }
+      },
+      "corrected_shift1": {
+        "is": {
+          "n": 96,
+          "sharpe": 1.012,
+          "maxdd": -0.167,
+          "cagr": 0.204,
+          "neg_yrs": 2
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 0.674,
+          "maxdd": -0.323,
+          "cagr": 0.177,
+          "neg_yrs": 2
+        }
+      }
+    },
+    "G": {
+      "desc": "21d reversal, 20d drift gate",
+      "original_unshifted": {
+        "is": {
+          "n": 96,
+          "sharpe": 3.364,
+          "maxdd": -0.062,
+          "cagr": 0.432,
+          "neg_yrs": 0
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 3.025,
+          "maxdd": -0.086,
+          "cagr": 0.484,
+          "neg_yrs": 0
+        }
+      },
+      "corrected_shift1": {
+        "is": {
+          "n": 96,
+          "sharpe": 1.325,
+          "maxdd": -0.179,
+          "cagr": 0.22,
+          "neg_yrs": 1
+        },
+        "oos": {
+          "n": 64,
+          "sharpe": 0.613,
+          "maxdd": -0.366,
+          "cagr": 0.151,
+          "neg_yrs": 3
+        }
+      }
+    }
+  }
+}
