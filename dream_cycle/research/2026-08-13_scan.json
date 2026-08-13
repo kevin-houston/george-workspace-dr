@@ -1,0 +1,114 @@
+{
+  "date": "2026-08-13",
+  "note": "Catch-up run for the missed 2026-08-12 dream-cycle scan slot (Kevin's Claude account hit a usage limit ~4pm CT 2026-08-12; scheduled task never fired). Ran for real ~5-6am CT 2026-08-13, alongside Phase 1 wiki expansion (Alpaca mleg options docs, commit 7a300c3) and a separate concurrent background session that independently surfaced a critical look-ahead bias bug (H506) in the H411/H416/H417/H418/H470/H483/H484 family -- unrelated to this scan, not duplicated here.",
+  "angles_searched": [
+    {
+      "angle": "1: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Moira: Language-driven Hierarchical RL for Pair Trading",
+          "source_url": "arXiv:2605.01954",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already logged as H316 STUB. Needs OpenAI API, not yet run. No new development."
+        },
+        {
+          "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+          "source_url": "arXiv:2403.07998",
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "Already implemented and tested as H200 (CONFIRMED per wiki/trading/algorithms/pairs-trading.md, OOS Sharpe 1.23 for graphical matching selection). Not a new finding -- this is a fully-run hypothesis, further along than the 2026-08-10 scan's initial 'low relevance, not staged' note suggested. Confirmed via grep of pairs-trading.md lines 303-336."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "2: PEAD + post-earnings drift + text signals",
+      "findings": [
+        {
+          "title": "FinCall-Surprise: Multi-modal earnings call dataset (2,688 calls, audio+slides)",
+          "source_url": "arXiv:2510.03965",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Already cited in pead.md line 305 (comparison table) and flagged in the 2026-08-01 scan as 'cautionary, overlaps Profit Mirage caveat.' Same shared blocker as H168: needs full earnings-call transcript/audio, and H168's post-mortem already found transcript-availability coverage bias (26.5% coverage, WR=34.6% on the covered subset -- worse than baseline). No new angle."
+        },
+        {
+          "title": "FinAnchor: Multi-LLM Embedding Ensemble (anchor-space alignment, no fine-tuning)",
+          "source_url": "arXiv:2602.20859",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Already staged 2026-07-31 (dream_cycle/staged/2026-07-31/1_financhor_multi_llm_ensemble_wiki.json) and written up as a Research Lead in llm-alpha-validation.md. Action item (fetch full text for concrete numbers) still outstanding but is the existing staged item's job, not a new one."
+        },
+        {
+          "title": "Multi-Modal Earnings Announcement Direction Prediction",
+          "source_url": "arXiv:2605.25894",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Extremely well covered: cited in H244/H305/H317/H357/H415, event-driven.md, pead.md (2 sections), index.md. No new content to add."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "3: cross-sectional momentum + factor momentum (H157/H158 context)",
+      "findings": [
+        {
+          "title": "No new 2026 papers surfaced beyond what 2026-08-10's scan already found and staged (Cross-Sectional Heterogeneity in LSTM Networks, arXiv:2608.05755, staged 2026-08-10)",
+          "source_url": null,
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "H157/H158 direct search terms return the same recurring set of factor-momentum survey papers already cited across momentum-strategies.md and the H198/H313/H336/H341 family. No unindexed candidate found this pass."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "4: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+          "source_url": "arXiv:2602.23330",
+          "relevance": "high",
+          "already_known": true,
+          "reason_excluded": "Extensively already staged/applied: H360, H240, 8+ references across multi-agent-llm-trading.md, dedicated section '## Fine-Grained Task Decomposition (arXiv:2602.23330, Feb 2026)'. Confirmed via direct grep of multi-agent-llm-trading.md."
+        },
+        {
+          "title": "Reliability Taxonomy & Evaluation Failures in Agentic Trading Systems",
+          "source_url": "arXiv:2603.27539",
+          "relevance": "medium",
+          "already_known": true,
+          "reason_excluded": "Already has a dedicated section in multi-agent-llm-trading.md ('## Reliability taxonomy & evaluation failures (arXiv:2603.27539, 2026)'). No new content."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "5: GitHub trending quantitative finance repos",
+      "findings": [
+        {
+          "title": "No genuinely new repo found this pass",
+          "source_url": null,
+          "relevance": "low",
+          "already_known": true,
+          "reason_excluded": "GitHub trending quant-finance results this pass were dominated by tools already documented (skfolio, backtesting.py-family repos, qlib forks) or low-adoption/no-installable-code projects in the same class as AlphaSuite/alpha-gfn/QRAFTI already filed as low-priority references on 2026-08-01. No candidate cleared the bar for a new wiki page or staged proposal."
+        }
+      ],
+      "new_staged": 0
+    },
+    {
+      "angle": "out-of-scope note",
+      "findings": [
+        {
+          "title": "LLM-driven crypto portfolio management",
+          "source_url": "arXiv:2501.00826",
+          "relevance": "low",
+          "already_known": false,
+          "reason_excluded": "Crypto is out of current project scope -- H302/H303 (crypto momentum/MA trend) both NOT CONFIRMED and the crypto line of work is deprioritized in favor of equities/options per CLAUDE.local.md. Logged here only to document it was seen and consciously excluded, not staged."
+        }
+      ],
+      "new_staged": 0
+    }
+  ],
+  "total_new_staged": 0,
+  "conclusion": "Pipeline saturation continues -- 6th consecutive scan (2026-08-08 through 2026-08-13, accounting for this catch-up run) to converge on 0 new staged proposals. Every high-relevance hit across all 5 angles resolved to something already staged, already implemented as an H-numbered hypothesis, or already logged as a Research Lead awaiting a full-text follow-up. No duplicates were staged. Recommend the next scan try a 6th angle or explicitly search for full-text access to already-flagged-but-abstract-only leads (FinAnchor arXiv:2602.20859 full PDF, Agentic AI Screening arXiv:2603.23300 full PDF) rather than continuing to re-run the same 5 angles against arXiv's recency window."
+}
