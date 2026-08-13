@@ -1,0 +1,101 @@
+{
+  "hypothesis": "H470",
+  "gate": {
+    "sharpe": 3.12,
+    "maxdd_ref": -0.084
+  },
+  "confirmed": false,
+  "confirmed_variants": [],
+  "results": {
+    "var_A": {
+      "is": {
+        "n": 93,
+        "sharpe": 2.036,
+        "maxdd": -0.41,
+        "cagr": 0.64,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 2.943,
+        "maxdd": -0.119,
+        "cagr": 0.697,
+        "neg_yrs": 0
+      },
+      "desc": "3m trailing Sharpe, pick best",
+      "beats": false
+    },
+    "var_B": {
+      "is": {
+        "n": 90,
+        "sharpe": 2.732,
+        "maxdd": -0.124,
+        "cagr": 0.669,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.037,
+        "maxdd": -0.131,
+        "cagr": 0.686,
+        "neg_yrs": 0
+      },
+      "desc": "6m trailing Sharpe, pick best",
+      "beats": false
+    },
+    "var_C": {
+      "is": {
+        "n": 84,
+        "sharpe": 2.949,
+        "maxdd": -0.103,
+        "cagr": 0.697,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.463,
+        "maxdd": -0.089,
+        "cagr": 0.714,
+        "neg_yrs": 0
+      },
+      "desc": "12m trailing Sharpe, pick best",
+      "beats": false
+    },
+    "var_D": {
+      "is": {
+        "n": 90,
+        "sharpe": 3.084,
+        "maxdd": -0.083,
+        "cagr": 0.704,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.134,
+        "maxdd": -0.099,
+        "cagr": 0.69,
+        "neg_yrs": 0
+      },
+      "desc": "6m trailing Sharpe, EW top-2",
+      "beats": false
+    },
+    "var_E": {
+      "is": {
+        "n": 96,
+        "sharpe": 2.983,
+        "maxdd": -0.124,
+        "cagr": 0.742,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 64,
+        "sharpe": 3.12,
+        "maxdd": -0.084,
+        "cagr": 0.768,
+        "neg_yrs": 0
+      },
+      "desc": "S2 static baseline (H376 6-0m top-6)",
+      "beats": false
+    }
+  }
+}

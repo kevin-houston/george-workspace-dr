@@ -9495,6 +9495,8 @@ OOS annual (Var B): 2021: +197.3% / 2022: +177.3% / 2023: +173.5% / 2024: +114.2
 
 ## H416 — Drift Gate Robustness: Alternative Drift Definitions on H411 Value Signal: CONFIRMED (2026-07-18)
 
+> **⚠️ CORRECTED 2026-08-13 (see H506): the figures below (Var I OOS Sharpe 5.342 "NEW H-SERIES RECORD") are RETRACTED — look-ahead bias, same root cause as H411 (shared `backtest()` helper indexes `signal.loc[month_end]` with no `.shift(1)`, letting the strategy "see" month M's own close-based signal when picking month M's winners). `run_h416_corrected.py` (already in repo, re-run 2026-08-13) gives Var I corrected OOS Sharpe **0.879**, MaxDD -22.9% — FAILS the 4.825 gate. Every variant collapses similarly (Var A 4.825→0.900, Var D 4.378→1.326, best corrected variant is Var D at 1.326). CLAUDE.local.md's summary line is updated to reflect this. See H506 for full audit and blast radius.**
+
 **Source**: Diagnostic extension of H411. H411 Var B confirmed OOS Sharpe 4.825 using pure 1/price rank gated by per-stock 20d positive-day fraction > 0.60, top-2 picks. H416 tests whether the 20d/0.60/per-stock parameters are specifically optimal, and whether expanding to top-3 adds alpha.
 
 **Universe**: H198 30-stock NASDAQ large-cap
@@ -9562,6 +9564,8 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 ---
 
 ## H418 — H416 Signal Decomposition: 1/Price vs Drift vs Momentum: PARTIAL CONFIRMED (2026-07-20)
+
+> **⚠️ CORRECTED 2026-08-13 (see H506): the figures below are RETRACTED — same look-ahead bias root cause as H411/H416/H417 (`backtest()` indexes `signal.loc[month_end]` with no `.shift(1)`). `run_h418_corrected.py` (already present in repo, re-run 2026-08-13 with the `.shift(1)` fix) gives corrected results: Var A (H416-I baseline) OOS Sharpe **0.800** (was 5.328), Var D (12-1m momentum × drift gate) OOS Sharpe **0.452** (was 4.513). ALL variants now fail the 4.825 gate — best corrected variant is Var E (avg rank, no gate) at OOS 1.565. The qualitative claim "drift gate alone is strong" also weakens: corrected Var C (drift-only) is only 0.603, well below corrected Var A — the synergy/decomposition story does not survive correction in its original form. See H506 for full audit.**
 
 **Source**: Diagnostic extension of H416. The 1/price × drift gate signal could be driven by either the value component (1/price rank) or the momentum component (20d drift gate). This test isolates each component on the H198 NASDAQ 30 universe.
 
@@ -9939,6 +9943,8 @@ OOS annual (Var C): 2021: +237.3% / 2022: +178.1% / 2023: +180.1% / 2024: +137.8
 
 ## H470 — ML Design Choice Momentum: Monthly Best-Variant Selector on H198 Family: CONFIRMED (Var B/C/D) (2026-07-28)
 
+> **⚠️ CORRECTED 2026-08-13 (see H506): pool component S3 (H411-B value×drift) was built on the same look-ahead-biased signal as H411/H416/H417/H418 (`signal.loc[month_end]` with no `.shift(1)`). `run_h470_corrected.py` (new script, S3 signal shift(1)'d, re-run 2026-08-13) gives: Var B OOS Sharpe 3.037/MaxDD -13.1% (was 4.136/-2.3%, now FAILS), Var C (champion) OOS Sharpe **3.463**/MaxDD **-8.9%** (was 4.424/-2.3%, now FAILS the dual gate — Sharpe alone clears 3.120 but MaxDD -8.9% no longer beats the -8.4% reference), Var D OOS Sharpe 3.134/MaxDD -9.9% (was 4.292/-4.5%, now FAILS). **All three previously-confirmed variants now fail** — corrected verdict is NOT CONFIRMED, best variant (C) roughly ties the static H376 baseline (Var E, OOS 3.120) rather than beating it. The qualitative low-correlation claim about S3 survives and is actually *stronger* post-correction: corrected OOS correlations S3-vs-S1/S2/S4 are 0.182/0.277/0.249 (all lower than the original biased 0.309/0.475/0.518) — S3 remains genuinely orthogonal to the momentum-family strategies, it's just no longer strong enough on its own merits to make the meta-selector beat static H376. See H506 for full audit.**
+
 **Source**: SSRN:5031755 (Chen, Hanauer, Kalsbach, Feb 2026) — *Design choices, machine learning, and the cross-section of stock returns*
 
 **Universe**: H198 strategy family (H198, H376, H411, H217) — same 30-stock NASDAQ large-cap
@@ -10174,6 +10180,8 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 
 ## H483 — OB Filter on H411 Var B — Order Block Applied to True H-Series Champion (4.825): CONFIRMED (2026-07-31)
 
+> **⚠️ CORRECTED 2026-08-13 (see H506): BUG CONFIRMED for H483 after direct audit (H506 had flagged, not confirmed, this one — the script's own comments claimed care was taken, but no actual `.shift(1)` existed). `backtest_ob()` indexed `h411_signal.loc[month_end]` with no shift AND called `has_bullish_ob(daily_data[ticker], month_end, ...)` using the current month_end instead of the prior one — the same look-ahead mechanism as H411/H416/H417/H418/H470/H484. New `run_h483_corrected.py` shifts the H411 Var B signal by one month and moves the OB "as of" date to the prior month-end. Corrected results: **0/8 variants pass** (was 1/8). The claimed champion (ob_window=30, min_filter=2, swing_len=3) corrects from OOS Sharpe 4.874 / MaxDD 0.0% to OOS Sharpe **0.671** / MaxDD **-34.3%** (mdd_improvement -33.1pp vs the claimed +1.2pp). Best corrected variant across the grid is only OOS Sharpe 0.727 (window=30, min_filter=2, swing_len=5), MaxDD -44.6% — every OB-filtered variant now performs far worse than even the corrected H411 Var B baseline (0.900, see H411 log entry). The underlying H411 Var B baseline-replication sanity-check loop in this script was intentionally left unshifted (reproduces the original ~4.825 log number by design, for script-fidelity comparison only — it is NOT the corrected baseline). The "new H-series Sharpe record... first result with literally zero OOS monthly drawdown" claim does not survive correction — verdict flips to NOT CONFIRMED. See H506 for full audit.**
+
 **Source**: Internal — follows H344 (OB+H198: 1.174→3.396) and H476 (OB+H417: 0.383→1.929) pattern
 
 **Universe**: NASDAQ_30 (same 30 stocks as H411/H198)
@@ -10230,6 +10238,8 @@ Each month: compute trailing Sharpe over [t-window, t-1] for each strategy, run 
 ---
 
 ## H484 — OB Filter on H192-D Sector-Neutral BAB — Order Block Applied to Low-Vol Anomaly Family: CONFIRMED (2026-08-01)
+
+> **⚠️ CORRECTED 2026-08-13 (see H506): BUG CONFIRMED for H484 specifically after direct audit (H506 had flagged, not confirmed, this one). `run_h484_ob_filter_h192d_bab.py`'s beta-rank computation (`hist_rets = daily_rets[daily_rets.index <= month_end]`, feeding the 252d rolling beta) AND its OB detection (`has_bullish_ob(daily_data[ticker], month_end, ...)`) both use data through month_end's own close, then award that same month_end's return — an identical look-ahead mechanism to H411/H416/H417/H418/H470, just on a different base signal (rolling beta rank instead of value×drift). New `run_h484_corrected.py` shifts both the beta-rank lookup and the OB "as of" date to the PRIOR month-end. Corrected results: **0/6 variants pass** (was 6/6), best corrected variant (window=30, min_filter=3, swing_len=3) OOS Sharpe **1.063**, MaxDD -20.6% (was OOS Sharpe 3.664, MaxDD -6.0% for the champion 20/3/3 variant — that variant corrects to OOS 0.930, MaxDD -30.6%). The claimed "strongest hit rate of any OB-filter test... first time OB filter validated on a risk-factor sort outside momentum" finding does not survive correction — verdict flips to NOT CONFIRMED. Note: the H192-D baseline-replication sanity check in this script was left unshifted (reproduces the original H192-D log number by design); H192-D itself was not audited in this pass and may have the same underlying issue — flagged as a candidate for a future dedicated audit, out of scope here. See H506 for full audit.**
 
 **Source**: Internal — nightly autonomous research task (new strategy families: Low-Vol Anomaly / ETF Pairs / Stock Momentum). Session task noted "Start at H113" as stale; actual latest hypothesis was H483, so numbering resumes at H484 per the task's own PROCESS instruction (read hypothesis-log.md → find latest H-number).
 

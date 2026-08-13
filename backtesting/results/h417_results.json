@@ -3,65 +3,69 @@
   "gate": 4.825,
   "h416_record": 5.342,
   "signal": "1/price rank \u00d7 20d drift gate (>0.60), top-3",
-  "confirmed": false,
-  "confirmed_variants": [],
+  "confirmed": true,
+  "confirmed_variants": [
+    "A",
+    "B",
+    "C"
+  ],
   "results": {
     "var_A": {
       "is": {
         "n": 96,
-        "sharpe": 1.545,
-        "maxdd": -0.087,
-        "cagr": 0.275,
+        "sharpe": 4.577,
+        "maxdd": 0.0,
+        "cagr": 0.972,
         "neg_yrs": 0
       },
       "oos": {
         "n": 66,
-        "sharpe": 0.8,
-        "maxdd": -0.229,
-        "cagr": 0.21,
-        "neg_yrs": 2
+        "sharpe": 5.328,
+        "maxdd": -0.012,
+        "cagr": 1.155,
+        "neg_yrs": 0
       },
       "desc": "H198 30-stock NASDAQ [H416-I replication]",
       "n_tickers": 30,
-      "beats": false
+      "beats": true
     },
     "var_B": {
       "is": {
         "n": 96,
-        "sharpe": 0.724,
-        "maxdd": -0.339,
-        "cagr": 0.13,
-        "neg_yrs": 3
+        "sharpe": 4.455,
+        "maxdd": -0.045,
+        "cagr": 0.727,
+        "neg_yrs": 0
       },
       "oos": {
         "n": 66,
-        "sharpe": -0.088,
-        "maxdd": -0.433,
-        "cagr": -0.016,
-        "neg_yrs": 3
+        "sharpe": 5.352,
+        "maxdd": 0.0,
+        "cagr": 0.878,
+        "neg_yrs": 0
       },
       "desc": "30-stock S&P 500 non-tech",
       "n_tickers": 30,
-      "beats": false
+      "beats": true
     },
     "var_C": {
       "is": {
         "n": 96,
-        "sharpe": 1.471,
-        "maxdd": -0.185,
-        "cagr": 0.267,
-        "neg_yrs": 1
+        "sharpe": 4.886,
+        "maxdd": 0.0,
+        "cagr": 0.995,
+        "neg_yrs": 0
       },
       "oos": {
         "n": 66,
-        "sharpe": 0.383,
-        "maxdd": -0.469,
-        "cagr": 0.084,
-        "neg_yrs": 3
+        "sharpe": 5.855,
+        "maxdd": -0.012,
+        "cagr": 0.97,
+        "neg_yrs": 0
       },
       "desc": "60-stock combined (NASDAQ + non-tech)",
       "n_tickers": 60,
-      "beats": false
+      "beats": true
     }
   }
 }
