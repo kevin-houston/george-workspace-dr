@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-17
+updated: 2026-08-13
 status: active
 ---
 
@@ -77,6 +77,7 @@ _(none yet)_
 - **Stop loss**: debit to close = 2× initial credit (Tastytrade rule)
 - **DTE exit**: 21 DTE if neither target nor stop triggered
 - **Pricing**: BSM model (VIX as flat-term IV); real market prices used when Massive has data
+- **Execution path note (2026-08-13)**: this position was entered via synthetic BSM pricing, not a real Alpaca order — likely because at the time it wasn't clear how to submit a 4-leg spread as a single atomic order. Alpaca paper accounts support this natively via `order_class=OrderClass.MLEG` with a `legs` array of up to 4 `OptionLegRequest` objects (available since Jan 2025, Level 3 default-enabled in paper). See [Alpaca — Multi-leg (mleg) orders](../data-sources/alpaca.md#multi-leg-mleg-orders--spreads-iron-condors-straddlesstrangles) for the working code path — next iron condor entry (H266 design) should go through real `submit_order(MLEG)` rather than the BSM-priced tracking used for IC-2026-04-26-001, so paper fills reflect real combo-order pricing/slippage instead of a model price.
 
 ---
 

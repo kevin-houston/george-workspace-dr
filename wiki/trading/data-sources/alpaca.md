@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-12
+updated: 2026-08-13
 type: data-source + broker
 access: Kevin has paper account; API keys in OneCLI vault
 related: alpaca-automation.md (production patterns), paper-trading/pead-nlp-alpaca.md (live pipeline)
@@ -285,6 +285,62 @@ call_order = tc.submit_order(OptionOrderRequest(
 ))
 ```
 
+### Options levels
+
+| Level | Unlocks |
+|---|---|
+| 0 | Options trading disabled |
+| 1 | Sell covered call, sell cash-secured put |
+| 2 | + Buy call, buy put |
+| 3 | + Buy call spread, buy put spread (and via `mleg` order_class: iron condors, straddles, strangles, iron butterflies — any 2-4 leg combination) |
+
+Paper accounts get **Level 3 by default** — no application needed, can be disabled per-account from the dashboard. Live accounts require a separate level-upgrade API request through Apex Clearing (unlike paper, this is not automatic).
+
+### Multi-leg (mleg) orders — spreads, iron condors, straddles/strangles
+
+Since **January 2025**, Alpaca's paper environment supports **Level 3 multi-leg orders** submitted as a single combined order (not separately-legged), executed atomically so all legs fill together — this is the mechanism the wiki's 0DTE iron condor design (`algorithms/options-income-strategies.md`, H266) needs and did not previously have a documented implementation path for.
+
+Mechanics:
+- Set `order_class=OrderClass.MLEG` (string `"mleg"` in raw REST)
+- Legs go in a `legs` array of `OptionLegRequest` objects, each with `symbol` (OCC format), `side` (`buy`/`sell`), and `ratio_qty` (must be in lowest terms — GCD across all legs must be 1)
+- **2 to 4 legs** per order (hard limit — an iron condor's 4 legs is the practical max for a single spread structure)
+- Only `limit` orders are demonstrated in Alpaca's own examples (net debit/credit `limit_price` for the whole combo); `time_in_force` typically `DAY`
+- Equity + option legs cannot be mixed in one mleg order — options only
+- All legs must be "covered" as a combined position — Alpaca computes margin via a universal spread rule: `cost_basis = maintenance_margin + (net_price × option_multiplier)`, not by summing each leg's margin independently, so a defined-risk structure like an iron condor requires far less buying power than the equivalent naked legs
+
+Working example (short iron condor, from Alpaca's own `alpaca-py` repo, `examples/options/options-iron-condor.ipynb`):
+
+```python
+from alpaca.trading.requests import MarketOrderRequest, OptionLegRequest
+from alpaca.trading.enums import OrderSide, OrderClass, TimeInForce
+
+# iron_condor_order_legs = [short_put, long_put, short_call, long_call] contract dicts
+order_legs = [
+    OptionLegRequest(symbol=iron_condor_order_legs[0]["symbol"], side=OrderSide.SELL, ratio_qty=1),  # short put
+    OptionLegRequest(symbol=iron_condor_order_legs[1]["symbol"], side=OrderSide.BUY,  ratio_qty=1),  # long put
+    OptionLegRequest(symbol=iron_condor_order_legs[2]["symbol"], side=OrderSide.SELL, ratio_qty=1),  # short call
+    OptionLegRequest(symbol=iron_condor_order_legs[3]["symbol"], side=OrderSide.BUY,  ratio_qty=1),  # long call
+]
+
+req = MarketOrderRequest(
+    qty=1,
+    order_class=OrderClass.MLEG,
+    time_in_force=TimeInForce.DAY,
+    legs=order_legs,
+)
+res = tc.submit_order(req)
+```
+
+Note: despite the class name `MarketOrderRequest`, Alpaca's own notebook submits mleg combos this way for a net-price-agnostic entry; for production use prefer explicit `LimitOrderRequest`-style construction with a `limit_price` set to the target net credit, since a "market" mleg order on illiquid strikes can fill at a worse net price than intended — the individual-leg NBBO doesn't guarantee a good combo price.
+
+### Assignment & exercise handling
+
+- Alpaca **auto-exercises ITM contracts at expiry** by default (no action needed, but also no way to let something expire worthless if it's even $0.01 ITM without manually closing first)
+- If buying power is insufficient to cover an exercise, Alpaca auto-sells the position within the last hour before expiry
+- **Assignments are NOT pushed via WebSocket** — must poll REST (`GET /v2/account/activities/FILL` or similar) to detect assignment activity; relevant for any automated exit logic that assumes a fill event will arrive
+
+Full docs: [Options Orders](https://docs.alpaca.markets/docs/options-orders), [Options Level 3 Trading](https://docs.alpaca.markets/docs/options-level-3-trading), [alpaca-py iron condor example](https://github.com/alpacahq/alpaca-py/blob/master/examples/options/options-iron-condor.ipynb).
+
 For options data (IV surface, chains): see [Options Data Sources](options-data.md).
 
 ---
@@ -310,6 +366,8 @@ For Phase 3 → Phase 4 (live trading):
 - **IEX data gaps**: IEX misses ~98% of tape. Don't use IEX for gap detection (PEAD `pead_open.py` must use SIP or Polygon for accurate open-price gap calculation).
 - **PDT in paper**: Paper account enforces PDT detection even on simulated positions — you'll get blocked from day trading if < $25k equity and make 4+ day trades in 5 days.
 - **Options approval**: Paper account approves all options levels automatically. Live account requires a separate application with Apex Clearing.
+- **Mleg orders need a real GCD-simplified ratio_qty**: submitting `ratio_qty=2` on every leg of an iron condor (instead of `1`) is rejected — Alpaca requires the leg ratios to already be in lowest terms, not just internally consistent.
+- **Mleg market orders on wide/illiquid strikes**: a `MarketOrderRequest` with `order_class=MLEG` fills at "best available combo price," which can differ meaningfully from the sum of individual-leg NBBO midpoints on 0DTE strikes with wide spreads — use a `limit_price` net credit/debit target for anything beyond tiny size.
 - **Cancel/replace latency**: Order replacements have a ~200ms round-trip. For MOO/MOC orders, modifications must be submitted > 5 min before auction.
 - **`unrealized_pl` vs `unrealized_plpc`**: `unrealized_pl` is dollar P&L; `unrealized_plpc` is percentage. Both are available on `Position` objects.
 
