@@ -393,6 +393,8 @@ This filters out the "same industry, different business model" false positives t
 
 **Relevance to H316/H319**: Provides a richer pair taxonomy than Moira's binary "related/not-related." Asymmetric links → lead-lag (momentum-like); symmetric links → mean-reversion (pairs-like). Could drive two sub-strategies from the same LLM edge classification step.
 
+**Caution from a 2025 EMH test** ([Is All the Information in the Price? — Wang, Johnson, Hybinette & Balch 2025](../sources/llm-embeddings-vs-price-stock-clustering-2025.md), arXiv:2509.01590): clustering stocks by *news-headline* LLM embeddings alone loses to plain price-correlation K-means by ~15% RMSE on out-of-sample return prediction — text similarity is not a standalone substitute for price co-movement as a stock-grouping signal. This is consistent with, not contradictory to, 2604.19476's design: that paper uses price/text co-occurrence to build the *candidate* graph first and only uses the LLM to *filter* candidates (removing false positives), rather than clustering on embeddings alone. Any H316/H319 implementation should follow the filter-not-primary-signal pattern — use LLM text similarity to prune a price/cointegration-derived candidate list, not to generate candidates from scratch.
+
 ---
 
 ### Paper 3: LLM as Risk Manager — Semantic Filtering for Lead-Lag (arXiv:2602.07048)
