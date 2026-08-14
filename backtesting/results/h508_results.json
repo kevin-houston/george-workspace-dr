@@ -1,0 +1,114 @@
+{
+  "hypothesis": "H508",
+  "description": "Macro regime gate (VIX/SPY-200MA) on H448 Var B stock-level low-vol (60d vol, bottom-6)",
+  "gate_sharpe": 1.174,
+  "gate_mdd_improvement_pp": 0.5,
+  "variants": {
+    "A_SPY200MA": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.517,
+        "maxdd": -0.138,
+        "cagr": 0.222,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.787,
+        "maxdd": -0.239,
+        "cagr": 0.138,
+        "neg_yrs": 3
+      },
+      "oos_cash_pct": 19.7,
+      "mdd_improvement_pp": 2.0,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": true,
+      "beats_both_gates": false
+    },
+    "B_VIXlt20": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.327,
+        "maxdd": -0.206,
+        "cagr": 0.178,
+        "neg_yrs": 2
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.661,
+        "maxdd": -0.231,
+        "cagr": 0.098,
+        "neg_yrs": 3
+      },
+      "oos_cash_pct": 33.3,
+      "mdd_improvement_pp": 2.8,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": true,
+      "beats_both_gates": false
+    },
+    "C_JOINT_AND": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.432,
+        "maxdd": -0.138,
+        "cagr": 0.19,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.645,
+        "maxdd": -0.239,
+        "cagr": 0.111,
+        "neg_yrs": 3
+      },
+      "oos_cash_pct": 24.2,
+      "mdd_improvement_pp": 2.0,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": true,
+      "beats_both_gates": false
+    },
+    "D_EITHER_OR": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.555,
+        "maxdd": -0.184,
+        "cagr": 0.235,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.826,
+        "maxdd": -0.239,
+        "cagr": 0.145,
+        "neg_yrs": 3
+      },
+      "oos_cash_pct": 18.2,
+      "mdd_improvement_pp": 2.0,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": true,
+      "beats_both_gates": false
+    },
+    "E_NOGATE": {
+      "is": {
+        "n": 96,
+        "sharpe": 1.669,
+        "maxdd": -0.147,
+        "cagr": 0.278,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 1.028,
+        "maxdd": -0.259,
+        "cagr": 0.224,
+        "neg_yrs": 1
+      },
+      "oos_cash_pct": 0.0,
+      "mdd_improvement_pp": 0.0,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    }
+  },
+  "n_pass_both_gates": 0
+}

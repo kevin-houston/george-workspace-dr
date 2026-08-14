@@ -1,0 +1,170 @@
+{
+  "hypothesis": "H507",
+  "description": "OB filter on H448 Var B stock-level low-vol (bottom-12 candidate pool by 60d vol -> OB filter -> bottom-6)",
+  "gate_sharpe": 1.174,
+  "gate_mdd_improvement_pp": 0.5,
+  "h448_baseline_replication": {
+    "is": {
+      "n": 96,
+      "sharpe": 1.669,
+      "maxdd": -0.147,
+      "cagr": 0.278,
+      "neg_yrs": 0
+    },
+    "oos": {
+      "n": 66,
+      "sharpe": 1.028,
+      "maxdd": -0.259,
+      "cagr": 0.224,
+      "neg_yrs": 1
+    }
+  },
+  "n_variants": 6,
+  "n_pass_both_gates": 0,
+  "variants": [
+    {
+      "ob_window": 20,
+      "min_filter": 2,
+      "swing_len": 3,
+      "is": {
+        "n": 96,
+        "sharpe": 1.495,
+        "maxdd": -0.148,
+        "cagr": 0.249,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.688,
+        "maxdd": -0.404,
+        "cagr": 0.157,
+        "neg_yrs": 2
+      },
+      "oos_cash_pct": 4.5,
+      "mdd_improvement_pp": -16.4,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 3,
+      "swing_len": 3,
+      "is": {
+        "n": 96,
+        "sharpe": 1.433,
+        "maxdd": -0.148,
+        "cagr": 0.238,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.69,
+        "maxdd": -0.337,
+        "cagr": 0.151,
+        "neg_yrs": 2
+      },
+      "oos_cash_pct": 9.1,
+      "mdd_improvement_pp": -9.7,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 20,
+      "min_filter": 3,
+      "swing_len": 5,
+      "is": {
+        "n": 96,
+        "sharpe": 0.929,
+        "maxdd": -0.188,
+        "cagr": 0.121,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.189,
+        "maxdd": -0.502,
+        "cagr": 0.041,
+        "neg_yrs": 2
+      },
+      "oos_cash_pct": 27.3,
+      "mdd_improvement_pp": -26.2,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 2,
+      "swing_len": 3,
+      "is": {
+        "n": 96,
+        "sharpe": 1.743,
+        "maxdd": -0.14,
+        "cagr": 0.292,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.908,
+        "maxdd": -0.269,
+        "cagr": 0.205,
+        "neg_yrs": 1
+      },
+      "oos_cash_pct": 1.5,
+      "mdd_improvement_pp": -2.9,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 3,
+      "swing_len": 3,
+      "is": {
+        "n": 96,
+        "sharpe": 1.72,
+        "maxdd": -0.147,
+        "cagr": 0.288,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.887,
+        "maxdd": -0.269,
+        "cagr": 0.2,
+        "neg_yrs": 1
+      },
+      "oos_cash_pct": 3.0,
+      "mdd_improvement_pp": -2.9,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    },
+    {
+      "ob_window": 30,
+      "min_filter": 3,
+      "swing_len": 5,
+      "is": {
+        "n": 96,
+        "sharpe": 1.634,
+        "maxdd": -0.177,
+        "cagr": 0.261,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.377,
+        "maxdd": -0.42,
+        "cagr": 0.082,
+        "neg_yrs": 2
+      },
+      "oos_cash_pct": 10.6,
+      "mdd_improvement_pp": -18.0,
+      "beats_sharpe_gate": false,
+      "beats_mdd_gate": false,
+      "beats_both_gates": false
+    }
+  ]
+}

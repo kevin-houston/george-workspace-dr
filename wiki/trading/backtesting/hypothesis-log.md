@@ -11024,3 +11024,79 @@ Every single variant collapses by 70-90%+ once the look-ahead is removed. **H411
 **Scripts**: `backtesting/daily/run_h506_h411_lookahead_bias_audit.py` (verification), `backtesting/daily/run_h505_unskipped_momentum_drift_gate_combined60.py` (the follow-up that surfaced the bug; not independently meaningful until H411/H417's underlying signal is corrected — left in repo as the H492/H493 follow-up but its own results are downstream of the same corrected-baseline question and should be re-read against the corrected numbers, not the original 5.855 gate it was written against)
 **Results files**: `backtesting/results/h506_results.json`, `backtesting/results/h505_results.json`
 
+---
+
+## H507 — OB Filter on H448 Stock-Level Low-Volatility Anomaly: NOT CONFIRMED (2026-08-13)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-13 (nightly autonomous research session)
+**Source**: Task priority list — Low-Vol Anomaly (#1), ETF Pairs (#2), Stock Momentum top-200 ADDV (#3). All three literal framings were confirmed saturated before writing any code: ETF pairs closed at H246/H271/H307; low-vol anomaly extensively explored at ETF level (H245/H255/H278/H282/H285/H306/H354/H355/H361/H362/H363/H364/H501) and at both 30-stock (H191/H192/H213/H448) and 200-stock (H245/H248/H487/H488) scale for every natural signal variant (total vol, beta, IVOL); stock momentum top-200-ADDV explicitly closed by H490 (NOT CONFIRMED, "no further 200-stock-scale variant is proposed without a genuine survivorship-bias-free historical constituent dataset"). The one genuinely open gap: H448's stock-level low-vol signal (30-stock universe, best Var B 60d-vol OOS Sharpe 1.045, just below the 1.174 gate) never received the Order-Block confirmation filter that turned marginal ETF-level low-vol (H354, OOS 1.339) into a strong confirmed result (H361, OOS 1.903; H364 stacked, OOS 2.173) and, post-correction, still helped a stock-level risk-factor sort (H484-corrected BAB: OOS 0.930→1.063). This closes that gap.
+**Script**: `backtesting/daily/run_h507_ob_filter_h448_lowvol_stock.py`
+**Universe**: H198/H448 30-stock large-cap NASDAQ-heavy universe
+**Signal**: bottom-12 candidates by 60-day realized vol (ascending) → filter to bullish unmitigated SMC order block as of prior month-end → bottom-6 of survivors by original vol rank; cash if fewer than `min_filter` survive
+**IS/OOS**: 2013-2020 / 2021-2026
+**Gate**: OOS Sharpe > 1.174 (H198/H448 canonical gate) AND MaxDD improvement ≥ 0.5pp vs H448 Var B baseline
+
+**Look-ahead bias check**: Explicitly verified before running. Vol-rank signal for month M uses only data through month M-1's close (`.shift(1)` on the monthly-resampled 60d-vol series, matching H448's own construction). The OB "as of" date is set to `month_ends[i-1]` (prior month-end), not the current month_end whose return is being awarded — this is the exact fix pattern H506 identified was missing from the original (retracted) H411/H416/H417/H418/H470/H483/H484 family. Baseline replication (IS Sharpe 1.669, OOS Sharpe 1.028, OOS MaxDD -25.9%) closely matches H448's logged Var B numbers (OOS 1.045, MaxDD -24.0%), confirming correct signal construction.
+
+**Results**:
+
+| ob_window | min_filter | swing_len | IS Sh | OOS Sh | OOS MaxDD | MDD improvement | Cash% |
+|---|---|---|---|---|---|---|---|
+| 20 | 2 | 3 | 1.495 | 0.688 | -40.4% | -16.40pp | 4.5% |
+| 20 | 3 | 3 | 1.433 | 0.690 | -33.7% | -9.70pp | 9.1% |
+| 20 | 3 | 5 | 0.929 | 0.189 | -50.2% | -26.20pp | 27.3% |
+| 30 | 2 | 3 | 1.743 | **0.908** | -26.9% | -2.90pp | 1.5% |
+| 30 | 3 | 3 | 1.720 | 0.887 | -26.9% | -2.90pp | 3.0% |
+| 30 | 3 | 5 | 1.634 | 0.377 | -42.0% | -18.00pp | 10.6% |
+| Baseline (no filter) | — | — | 1.669 | 1.028 | -25.9% | — | 0.0% |
+
+**Key findings**:
+
+1. Every OB-filtered variant is WORSE than the unfiltered baseline (best filtered 0.908 vs baseline 1.028) — the opposite direction from every prior OB-filter application in this project (H343/H344/H345/H346/H355/H361/H364/H483-corrected/H484-corrected all showed the filter helping or being neutral, never actively hurting this badly).
+2. MaxDD gets materially worse under filtering (-26.9% to -50.2% vs -25.9% baseline) rather than better — the opposite of the filter's usual drawdown-control benefit (e.g. H343 cut MaxDD from -22.7% to -5.4%).
+3. Root cause: low-vol stock selection is inherently a "calm compounder" signal (MSFT, AAPL, COST, JNJ-style names) — these stocks by construction rarely show large, sharp SMC order-block-style institutional accumulation patterns; requiring one either (a) filters out the very names the low-vol signal wants to hold, forcing entry into the *remaining* candidates in the bottom-12 pool that are lower quality low-vol picks, or (b) triggers cash frequently at the wrong times. This is a mechanism mismatch: OB filter detects momentum-style institutional buying pressure, which is close to orthogonal (or mildly anti-correlated) with the low-vol factor's selection logic, unlike momentum/BAB signals where "recent buying pressure" is coherent with the underlying signal.
+4. This is the first OB-filter application in the H-series that actively degrades both Sharpe and MaxDD simultaneously across the entire parameter grid (0/6 variants improve on either dimension) — a genuinely new negative finding, not just a gate miss.
+
+**Verdict**: NOT CONFIRMED. Best variant (window=30, min_filter=2, swing_len=3) OOS Sharpe 0.908 < gate 1.174, and MaxDD is worse than baseline on every variant. The OB-filter-improves-everything pattern established across momentum, bonds, low-vol ETFs, and (post-correction) stock-level BAB does NOT generalize to stock-level low-vol/realized-vol selection — closes this specific gap in the low-vol-anomaly family with a clean negative result. See H508 for the macro-regime-gate alternative on the same base signal.
+
+**Results file**: `backtesting/results/h507_results.json`
+
+---
+
+## H508 — Macro Regime Gate on H448 Stock-Level Low-Volatility Anomaly: NOT CONFIRMED (2026-08-13)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-13 (nightly autonomous research session, same session as H507)
+**Source**: H507 (this session) showed the OB filter fails on H448's stock-level low-vol signal. H362 (CONFIRMED) showed a different filter — a VIX/SPY-200MA macro regime gate — took H354's marginal ETF-level low-vol rotation from OOS 1.339 to OOS 1.819-2.173. That mechanism (route to cash during high-vol/bear regimes) had never been tested on the stock-level low-vol signal specifically, only the ETF-level one — this closes that remaining gap.
+**Script**: `backtesting/daily/run_h508_regime_gate_h448_lowvol_stock.py`
+**Universe**: H198/H448 30-stock universe + SPY (200d MA) + ^VIX
+**Signal**: H448 Var B (bottom-6 by 60d realized vol) held only when the regime gate (evaluated on the PRIOR month-end's SPY/VIX close) is true; cash otherwise
+**IS/OOS**: 2013-2020 / 2021-2026
+**Gate**: OOS Sharpe > 1.174 AND MaxDD improvement ≥ 0.5pp vs H448 Var B baseline (-25.9% this session's replication)
+
+**Look-ahead bias check**: Explicitly verified. The vol-rank signal is shifted identically to H507 (verified working — baseline replication reproduces H507's own 1.028 OOS Sharpe exactly, same underlying signal code path). The regime gate is evaluated on `month_ends[i-1]` (prior month-end SPY close vs its 200d MA, and prior month-end VIX close), never the current month_end — a month M gate decision is knowable before month M's return is realized.
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS MaxDD | MDD improvement | Cash% |
+|---|---|---|---|---|---|
+| A SPY>200MA only | 1.517 | 0.787 | -23.9% | +2.00pp | 19.7% |
+| B VIX<20 only | 1.327 | 0.661 | -23.1% | +2.80pp | 33.3% |
+| C SPY>200MA AND VIX<25 | 1.432 | 0.645 | -23.9% | +2.00pp | 24.2% |
+| D SPY>200MA OR VIX<20 | 1.555 | 0.826 | -23.9% | +2.00pp | 18.2% |
+| E No gate (baseline) | 1.669 | **1.028** | -25.9% | — | 0.0% |
+
+**Key findings**:
+
+1. Unlike H362 (ETF-level low-vol), every regime-gated variant here is WORSE on Sharpe than the ungated baseline (best gated 0.826 vs baseline 1.028) — again the opposite direction from the ETF-level result.
+2. MaxDD does improve modestly (+2.0 to +2.8pp) under gating, confirming the gate mechanically does what it's supposed to (avoid some drawdown exposure), but the return given up by sitting in cash during 18-33% of OOS months costs more Sharpe than the drawdown reduction buys back.
+3. Root cause, consistent with H507: this 30-stock universe is concentrated tech/growth mega-caps (NVDA, AVGO, MSFT, AAPL, etc.), where even the "low-vol" cohort (MSFT, COST, ADBE-style names) still participates meaningfully in the broad 2023-2025 AI-led bull run. Sitting out SPY<200MA or VIX>20 months misses real recovery-phase gains for this specific stock cohort, unlike the ETF-level low-vol universe (USMV/SPLV/XLU-style, genuinely defensive sector composition) where the gate's cash months were disproportionately loss-avoiding rather than gain-forgoing.
+4. Both H507 (OB filter) and H508 (regime gate) — the two filter mechanisms that reliably rescue marginal signals elsewhere in this project — fail on the identical base signal (H448 Var B). This is a coherent, mechanistically-explained double-negative: stock-level low-vol selection in a mega-cap-tech-heavy universe behaves differently from both ETF-level low-vol and stock-level momentum/BAB, and neither of this project's two standard filter tools transfers to it.
+
+**Production correlation estimate**: N/A — no variant confirms in either H507 or H508; no addition to production is recommended.
+
+**Verdict**: NOT CONFIRMED. Best gated variant (D, SPY>200MA OR VIX<20) OOS Sharpe 0.826 < gate 1.174, and even the best-MaxDD variant only improves 2.8pp while giving up 0.2-0.4 Sharpe. Combined with H507, this closes the "apply this project's two proven filter techniques to H448's stock-level low-vol anomaly" question with a clean, informative double-negative: the OB-filter-and-regime-gate-stacking playbook (H354→H361→H362→H364) that worked so well at the ETF level does not transfer to a concentrated mega-cap-tech stock universe's low-vol signal. No further filter-stacking variant is recommended for this specific base signal without a fundamentally different universe (e.g. a broader/less-tech-concentrated stock set), which H245 (200-stock total-vol, NOT CONFIRMED, OOS 0.574-0.626) already suggests would not help either — the low-volatility-anomaly family at the individual-US-stock level is now considered closed pending a genuinely novel angle.
+
+**Results file**: `backtesting/results/h508_results.json`
+
