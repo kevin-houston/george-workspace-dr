@@ -1,0 +1,141 @@
+{
+  "date": "2026-08-14",
+  "phase": "2 - arXiv/GitHub scan",
+  "summary": "5-angle scan run. Every finding scored either already-documented-in-wiki (verified via grep) or already-tried-and-rejected (per CLAUDE.local.md hypothesis log). Zero new staged proposals tonight — a valid outcome given how mature the wiki/hypothesis-log coverage has become on these 5 angles. Phase 1 (wiki expansion, committed separately as 5b47838) already captured the one genuinely novel item found across the whole scan (arXiv:2509.01590), which surfaced during angle 1 research and was filed as a Sources page rather than a staged proposal since it's memory/wiki-only content with no proposed backtest.",
+  "angles": [
+    {
+      "angle": "1. arXiv: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Is All the Information in the Price? LLM Embeddings vs EMH in Stock Clustering",
+          "arxiv": "2509.01590",
+          "relevance": "high",
+          "disposition": "applied_in_phase1",
+          "reasoning": "Zero prior wiki hits (grep -rl confirmed). Direct EMH test relevant to H316/H319 LLM-pairs design. Added as new Sources page + cross-linked into pairs-trading.md in Phase 1 (commit 5b47838), not staged separately since it's a pure wiki/memory update with no proposed script."
+        },
+        {
+          "title": "Moira: Language-driven Hierarchical RL for Pair Trading",
+          "arxiv": "2605.01954",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already extensively documented in pairs-trading.md (H316 design section, 'Paper 1' full writeup, 'Moira: Hierarchical RL + LLM' section). H316 already queued/stubbed."
+        },
+        {
+          "title": "Cross-Stock Predictability via LLM-Augmented Semantic Networks",
+          "arxiv": "2604.19476",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already fully documented in pairs-trading.md ('Paper 2' writeup, H316/H319 relevance section). H319 already stubbed."
+        }
+      ]
+    },
+    {
+      "angle": "2. arXiv: PEAD + post-earnings drift + text signals",
+      "findings": [
+        {
+          "title": "Quantpedia BLMECT sentiment-surprise strategy",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already documented in algorithms/event-driven.md ('QuantPedia BLMECT design parameters' section, confirmed via grep)."
+        },
+        {
+          "title": "FinAnchor",
+          "arxiv": "2602.20859",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already referenced in llm-alpha-validation.md, pead.md, hypothesis-log.md, and multiple research-log entries."
+        },
+        {
+          "title": "HiFi-KPI",
+          "arxiv": "2502.15411",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already referenced in the same set of files as FinAnchor."
+        }
+      ]
+    },
+    {
+      "angle": "3. arXiv: cross-sectional momentum + factor momentum",
+      "findings": [
+        {
+          "title": "Not All Factors Crowd Equally: Modeling, Measuring, and Trading on Alpha Decay",
+          "arxiv": "2512.11913",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already fully documented in algorithms/factor-models.md under '## Factor Crowding Risk (arXiv:2512.11913, Dec 2025)' with full writeup including MTUM AUM crowding-proxy note. Also cross-referenced in signal-halflife.md, momentum-strategies.md, long-short-equity.md, and 6+ research-log entries."
+        },
+        {
+          "title": "Cross-Sectional Heterogeneity in LSTM Networks for Financial Time Series (Dobelt)",
+          "arxiv": "2608.05755",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already staged and applied 2026-08-10 (dream_cycle/staged/2026-08-10/1_lstm_sector_embedding_momentum_wiki.json, apply_status: applied) into momentum-strategies.md. Confirmed via the example file read this session."
+        },
+        {
+          "title": "From Hypotheses to Factors",
+          "arxiv": "2604.26747",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already in wiki per earlier-session grep check."
+        },
+        {
+          "title": "Time-Varying Factor-Augmented Models for Volatility Forecasting",
+          "arxiv": "2508.01880",
+          "relevance": "low",
+          "disposition": "skipped",
+          "reasoning": "Vol-forecasting overlay, not a new alpha signal. Doesn't map to an open hypothesis or wiki gap; deprioritized versus already-closed vol-regime work (H249/H250/H252)."
+        }
+      ]
+    },
+    {
+      "angle": "4. arXiv: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "Toward Expert Investment Teams (fine-grained multi-agent task decomposition)",
+          "arxiv": "2602.23330",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already summarized in algorithms/multi-agent-llm-trading.md's 2026-07-07 synthesis entry and has its own dedicated section ('## Fine-Grained Task Decomposition (arXiv:2602.23330, Feb 2026)')."
+        }
+      ]
+    },
+    {
+      "angle": "5. GitHub: trending quantitative finance repos",
+      "findings": [
+        {
+          "title": "AI Hedge Fund (multi-role bull/bear/fundamentals/technicals/risk agents)",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Already documented in multi-agent-llm-trading.md under '## New GitHub Reference: ai-hedge-fund (49.6k★)'."
+        },
+        {
+          "title": "quant-wiki (knowledge base repo)",
+          "relevance": "low",
+          "disposition": "skipped",
+          "reasoning": "General reference repo, no concrete backtest-actionable content; not worth a wiki entry on its own."
+        },
+        {
+          "title": "AlphaGen (RL framework for formulaic alpha factors)",
+          "relevance": "low",
+          "disposition": "skipped",
+          "reasoning": "Overlaps heavily with already-documented Qlib/RD-Agent tooling (tools/qlib.md); no clear incremental capability over what's already catalogued, and no open hypothesis calls for a new RL-factor-mining framework right now."
+        },
+        {
+          "title": "Alpha Skills (AI skills for quant factor research, A-share/HK/US)",
+          "relevance": "low",
+          "disposition": "skipped",
+          "reasoning": "Zero prior wiki hits but thin/generic tooling with A-share/HK market focus, low direct applicability to George's US-equity/ETF universe. Not worth a standalone page; noted here for future reference only."
+        },
+        {
+          "title": "RD-Agent(Q) (Microsoft LLM-based autonomous quant R&D agent, Qlib-based)",
+          "relevance": "none (duplicate)",
+          "disposition": "skipped",
+          "reasoning": "Same underlying project as RD-Agent, already documented in tools/qlib.md ('## RD-Agent — LLM-driven factor discovery' section with GitHub link, paper arXiv:2505.15155, and recommended use-case writeup). '(Q)' denotes the quant-mode variant of the same tool, not a separate project."
+        }
+      ]
+    }
+  ],
+  "staged_count": 0,
+  "phase1_wiki_additions": 1,
+  "notes": "Wiki/hypothesis-log coverage across all 5 standing scan angles is now quite mature — this is the first dream-cycle session in recent memory where the arXiv/GitHub scan itself produced zero new staged proposals. The one genuinely novel finding of the night (2509.01590) was captured in Phase 1 as a wiki-only addition rather than Phase 2 staging, which is the correct disposition per the schema (risk_level: low, memory/wiki update, no proposed script) - it was applied directly rather than staged+queued since Phase 1 changes commit immediately, not through the staged/build-phase pipeline. No high-risk items to flag for Kevin."
+}
