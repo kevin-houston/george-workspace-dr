@@ -1,6 +1,6 @@
 ---
 created: 2026-06-11
-updated: 2026-06-11
+updated: 2026-08-15
 category: prediction-markets
 relevance: H185 (PolySwarm/Kalshi nowcasting), calibration framework, LLM forecasting pipeline
 ---
@@ -285,53 +285,108 @@ trading_prob = layer.calibrate(raw_llm_estimate)
 
 ## Domain-Specific Market Biases (Actionable)
 
-Source: arXiv:2602.19520 (Feb 2026) — 292M trades, 327K contracts on Kalshi + Polymarket.
+Source: arXiv:2602.19520, "Decomposing Crowd Wisdom: Domain-Specific Calibration Dynamics in
+Prediction Markets" (Nam Anh Le; submitted Feb 2026, **revised Aug 2026** — the Aug revision
+expanded the sample from the 292M/327K figures originally cited here to **353M trades across
+429,000 binary contracts** on Kalshi + Polymarket combined, and added the explicit horizon
+function and recalibration formula below. This section was rewritten 2026-08-15 against the
+revised v2 paper; the original 4-domain qualitative table has been superseded by the full
+6-domain quantitative slope table.).
 
-The four components explaining 87.3% of calibration variance:
-1. Universal horizon effect
-2. Domain-specific biases
-3. Domain × horizon interactions
-4. Trade-size scale effect
+**Method**: logistic recalibration at the cell level (domain × horizon-bucket × trade-size-bucket),
+decomposing the calibration slope `b̂` in `p* = σ(â + b̂ · logit(p))` — i.e. how much a raw market
+price needs to be pushed away from (slope > 1) or toward (slope < 1) 0.5 to match the true
+resolution frequency in that cell. A Bayesian measurement-error model handles estimation
+uncertainty; robustness checked via market-clustered and event-clustered bootstraps.
 
-### Domain Biases Table
+The four components explaining 87.3% of calibration variance in-sample on Kalshi (71.5% OOS):
+1. **Universal horizon effect** — 30.2% of variance alone
+2. **Domain-specific biases**
+3. **Domain × horizon interactions**
+4. **Trade-size scale effect**
 
-| Domain | Bias Direction | Magnitude | Trading Implication |
+### Universal horizon effect μ(τ)
+
+Underconfidence common to *every* domain grows with time-to-resolution — prices drift toward the
+favorite-longshot pattern the further out you are from settlement:
+
+| Horizon | μ(τ) (slope multiplier) |
+|---|---|
+| 0–1 hour | 0.99 (≈ no bias) |
+| 1–48 hours | ~1.05–1.15 |
+| 1 week – 1 month | ~1.15–1.25 |
+| 1 month+ | 1.32 |
+
+### Domain Biases Table (full 6-domain slope ranges)
+
+| Domain | Pattern | Slope range (b̂) | Trading Implication |
 |--------|---------------|-----------|---------------------|
-| **Political markets** | Underconfidence | Large (price compresses toward 50%) | Bid the favorite — true probability higher than price suggests |
-| **Weather** | Overconfidence at short horizons | Moderate | Fade extreme weather contracts in the last 1–2 hours |
-| **Sports** | Well-calibrated | Small | Minimal structural edge; hard to beat |
-| **Economics** | Mostly well-calibrated | Small | Edge comes from model quality, not market bias |
+| **Politics** | Persistent underconfidence, strongest & most consistent across all horizons | 0.93–1.83 | Bid the favorite; true probability is further from 50% than price suggests, especially near resolution |
+| **Sports** | Near-calibrated short-term, extreme long-term | 0.90–1.10 (0–48h); **1.74** (1mo+) | Trust short-horizon prices; apply horizon correction only on markets opened far in advance |
+| **Crypto** | Mild underconfidence | 0.99–1.36 | Modest favorite-side edge, less than politics |
+| **Finance** | Mixed | 0.82–1.42 | No uniform direction — check horizon bucket before trading the bias |
+| **Weather** | Overconfidence at short horizons (the one domain that goes the *other* way) | 0.69–0.97 (within 48h) | Fade extreme weather contracts in the final 1–2 hours — price is *too* extreme, not too centered |
+| **Entertainment** | Mild overconfidence | 0.81–1.11 | Small fade-the-extreme edge, low priority |
 
-**Political market mechanics**: Prices cluster at 50% due to bilateral partisan betting canceling out. Large trades amplify this effect on Kalshi (0.53 effect size) but NOT on Polymarket (0.11) — suggesting Kalshi political contracts may be more systematically mispriced.
+**Political market mechanics**: Prices cluster toward 50% due to bilateral partisan betting
+canceling out. On Kalshi, large political trades (>100 contracts) show a materially higher slope
+than single-contract trades — **1.74 vs. 1.19, a +0.53 gap** — surviving both market-clustered
+`[0.14, 1.32]` and event-clustered `[0.12, 1.80]` bootstrap CIs. The same comparison on Polymarket
+is much weaker (+0.28) and **loses significance under clustering** — the large-trade compression
+effect looks Kalshi-specific, not a general prediction-market property. The paper flags the
+mechanism as unresolved ("a diagnostic fact requiring institutional explanation") — plausibly
+Kalshi's smaller retail base means large orders are more likely to be informed/institutional and
+therefore closer to true probability, but this is not confirmed causally.
 
-**Practical workflow for political contracts on Kalshi**:
+**Scale of the underlying data**: Kalshi political contracts saw 4.9M trades vs. Polymarket's
+45.7M (9.3× more volume on Polymarket) in the sample, yet median trade size was nearly identical
+(45 vs. 43.5 contracts) and mean political-market slope was comparable (~1.45 both venues) — so
+the *volume* difference does not explain the *scale-effect* difference between the two platforms.
+
+**Practical workflow — logistic recalibration** (replaces an earlier additive-compression heuristic
+that was a rougher approximation of this same paper, before the Aug 2026 revision published the
+actual formula and full 6-domain × horizon-bucket slope table):
+
 ```python
-def political_bias_adjustment(raw_market_price: float, 
-                               horizon_days: int, 
-                               is_large_trade_dominated: bool = True) -> float:
+import math
+
+def logit(p: float) -> float:
+    p = min(max(p, 1e-6), 1 - 1e-6)
+    return math.log(p / (1 - p))
+
+def sigmoid(x: float) -> float:
+    return 1 / (1 + math.exp(-x))
+
+# Approximate slope lookup (b_hat) from arXiv:2602.19520's domain x horizon table.
+# For production use, request the paper's full 216-cell supplementary calibration
+# matrix rather than these coarse midpoint approximations.
+SLOPE_TABLE = {
+    # domain: {horizon_bucket: b_hat}
+    "politics":      {"0-48h": 1.10, "1w-1mo": 1.45, "1mo+": 1.83},
+    "sports":        {"0-48h": 1.00, "1w-1mo": 1.20, "1mo+": 1.74},
+    "crypto":        {"0-48h": 1.05, "1w-1mo": 1.20, "1mo+": 1.36},
+    "finance":       {"0-48h": 0.95, "1w-1mo": 1.15, "1mo+": 1.42},
+    "weather":       {"0-48h": 0.83, "1w-1mo": 0.90, "1mo+": 0.97},  # only domain with b_hat < 1 short-term
+    "entertainment": {"0-48h": 0.90, "1w-1mo": 1.00, "1mo+": 1.11},
+}
+
+def recalibrate_price(raw_market_price: float, domain: str, horizon_bucket: str,
+                       a_hat: float = 0.0) -> float:
     """
-    Adjust Kalshi political market prices for systematic underconfidence.
-    
-    Prices near 50% are systematically too close to 50% — push away from center.
-    Magnitude scales with dominance of large partisan bets.
-    
-    Raw price: 0.45 → your true probability estimate: ~0.52
-    Raw price: 0.60 → your true probability estimate: ~0.63
-    Raw price: 0.50 → no adjustment (symmetric)
+    p* = sigmoid(a_hat + b_hat * logit(p))   — arXiv:2602.19520 eq. form.
+    a_hat (cell-level intercept) defaults to 0; the paper found intercepts near
+    zero for most cells, so slope (b_hat) alone captures most of the correction.
+
+    Example: 0.70 in politics at 1w-1mo horizon (b_hat=1.45) -> ~0.83
     """
-    if raw_market_price == 0.5:
-        return 0.5
-    
-    # Bias correction: push away from 0.5
-    # Conservative estimate: ~5-8 pp compression at 20+ day horizon
-    compression = 0.06 if is_large_trade_dominated else 0.03
-    compression *= min(horizon_days / 30, 1.0)  # scales with horizon
-    
-    if raw_market_price > 0.5:
-        return min(0.99, raw_market_price + compression)
-    else:
-        return max(0.01, raw_market_price - compression)
+    b_hat = SLOPE_TABLE[domain][horizon_bucket]
+    return sigmoid(a_hat + b_hat * logit(raw_market_price))
 ```
+
+**Kalshi political large-trade adjustment**: if order flow in a political contract is dominated by
+>100-contract trades, add the Kalshi-specific scale effect on top by nudging `b_hat` toward 1.74
+(vs. the ~1.19 single-contract baseline) before applying `recalibrate_price` — but do **not** apply
+this scale bump on Polymarket, where the effect isn't robust to clustering.
 
 ---
 
@@ -416,7 +471,7 @@ What separates a superforecaster from an average predictor, translated to system
 | Paper / Resource | Key Finding |
 |-----------------|------------|
 | Tetlock, *Superforecasting* (2015) | Foundational methodology; Ten Commandments; GJP tournament results |
-| arXiv:2602.19520 (Feb 2026) | 292M trades: political markets underconfident; sports best-calibrated; domain × horizon table |
+| arXiv:2602.19520 (Feb 2026, rev. Aug 2026) | 353M trades, 429K contracts: universal horizon effect μ(τ) 0.99→1.32; 6-domain slope table (politics strongest bias 0.93–1.83, weather uniquely overconfident 0.69–0.97); Kalshi-specific large-trade compression effect (+0.53, not robust on Polymarket); logistic recalibration formula `p*=σ(â+b̂·logit(p))` |
 | arXiv:2512.16030 (Dec 2025, KalshiBench) | Best LLM ECE = 0.120; most LLMs worse than base rates on 300 Kalshi questions |
 | arXiv:2604.14199 (Apr 2026, PolyBench) | LLMs near-random on general questions; +6% only on economic data with FRED context |
 | arXiv:2507.04562 (Jul 2026) | Frontier LLMs > human crowd on Metaculus; still < expert forecasters |
