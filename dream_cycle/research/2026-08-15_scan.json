@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-15",
+  "phase": "2 (arXiv/GitHub scan)",
+  "summary": "5 angles searched. 1 staged (LLM semantic lead-lag filtering on Kalshi Economics contracts, arXiv:2602.07048) -- a genuinely new causal-trading mechanism not covered anywhere in prediction-markets/algorithmic-strategies.md. Every other candidate across all 5 angles checked out as already covered (some 3-5x over) in the wiki and/or prior dream_cycle staged proposals. One candidate (arXiv:2607.06368, factor-augmented ML panel regressions) was found genuinely novel but judged too econometrically abstract -- pure asymptotic theory for panel estimators, no trading application or empirical results -- to be actionable, so not staged.",
+  "angles": [
+    {
+      "angle": "1. Pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "LLM Semantic Network for lead-lag vs mean-reversion routing",
+          "arxiv": "2604.19476",
+          "relevance": "high (already actioned)",
+          "disposition": "duplicate -- already covered in wiki/trading/algorithms/pairs-trading.md, cross-linked again in the 2026-08-14 wiki expansion session against the LLM-embeddings-vs-price EMH paper",
+          "reasoning": "Confirmed via grep -- extensive existing coverage, no new content in this version of the search"
+        },
+        {
+          "title": "Moira: LLM-driven pairs selection replacing cointegration",
+          "arxiv": "2605.01954",
+          "relevance": "medium (already actioned)",
+          "disposition": "duplicate -- H316 stub already references this exact paper",
+          "reasoning": "Confirmed via grep against hypothesis-log.md H316 entry"
+        },
+        {
+          "title": "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+          "arxiv": "2602.07048",
+          "relevance": "high",
+          "disposition": "STAGED -- dream_cycle/staged/2026-08-15/1_llm_lead_lag_causal_filtering_wiki.json",
+          "reasoning": "Zero hits anywhere in wiki/ or dream_cycle/ for the arXiv ID, 'lead-lag', 'Granger causality', or 'risk manager' in a prediction-markets context. Two-stage screener (Granger causality on Kalshi Economics probability paths, then LLM semantic-plausibility filtering) is mechanistically distinct from every existing PM strategy on the page (cross-platform arbitrage, single-contract Wang-transform mispricing, semantic pair-equivalence matching across platforms). Reported results: 18 rolling evals, win rate 51.4%->54.5%, avg losing trade $649->$347, total PnL >2x at 7-day horizon, framed explicitly as downside-risk reduction rather than raw alpha. Staged as a wiki research note (risk_level low) rather than a hypothesis spec, since replicating it needs historical Kalshi Economics probability-path time series broader than what the H185 pipeline currently pulls, plus the full PDF for LLM/threshold/contract-universe details not recoverable from the abstract."
+        }
+      ]
+    },
+    {
+      "angle": "2. PEAD + text signals",
+      "findings": [
+        {
+          "title": "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns",
+          "arxiv": "2604.13260",
+          "relevance": "high (already actioned repeatedly)",
+          "disposition": "duplicate -- staged/covered at least 5 separate times since 2026-05-04 (1_pead_speaker_weighted_finbert, H229, H247, H324 variants) and directly informed H168's NOT CONFIRMED verdict on speaker-weighted FinBERT (transcript-coverage bias)",
+          "reasoning": "Confirmed via grep across wiki/trading/tools/nlp-alternative-data.md, hypothesis-log.md, and 5 separate dream_cycle staged files. No new angle -- this exact paper has already shaped a closed hypothesis."
+        },
+        {
+          "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+          "arxiv": "2605.25894",
+          "relevance": "medium (already actioned)",
+          "disposition": "duplicate -- covered in wiki/trading/algorithms/pead.md and event-driven.md, staged multiple times (H305, H317, H322, H357 stub)",
+          "reasoning": "Confirmed via grep. Multimodal PEAD is a well-trodden angle in this wiki already."
+        }
+      ]
+    },
+    {
+      "angle": "3. Cross-sectional / factor momentum",
+      "findings": [
+        {
+          "title": "AlphaCrafter: Harnessing Multi-Agent Workflows for Cross-Sectional Quantitative Trading",
+          "arxiv": "2605.05580",
+          "relevance": "high (already actioned extensively)",
+          "disposition": "duplicate -- staged 8+ times since 2026-05-17 (H209 twice, wiki updates x3, H435), deeply covered in wiki/trading/algorithms/auto-alpha-discovery.md, factor-models.md, deep-rl-trading.md",
+          "reasoning": "Confirmed via grep -- one of the most-referenced papers in dream_cycle history. Nothing new to add."
+        },
+        {
+          "title": "Factor-Augmented Machine Learning Panel Regressions",
+          "arxiv": "2607.06368",
+          "relevance": "low",
+          "disposition": "not staged -- considered and rejected",
+          "reasoning": "Confirmed genuinely new via grep (zero hits anywhere). Authors Babii/Barbaglia/Ghysels/Striaukas develop asymptotic theory for a factor-augmented sparse-group LASSO estimator combining MIDAS aggregation with latent factors for high-dimensional panels with cross-sectionally dependent errors. This is pure econometric estimator theory (econ.EM/math.ST/stat.ME/stat.ML cross-listed) -- no empirical trading application, no backtested strategy, no dataset applied to equities/ETFs. Judged not directly actionable for the hypothesis pipeline without a concrete signal-construction proposal layered on top, which the paper itself doesn't provide. Noted here rather than staged per the 'directly actionable, not just interesting' bar in tonight's task instructions."
+        }
+      ]
+    },
+    {
+      "angle": "4. Multi-agent LLM trading",
+      "findings": [
+        {
+          "title": "Agentic Trading (survey)",
+          "arxiv": "2605.19337",
+          "relevance": "high (already actioned extensively)",
+          "disposition": "duplicate -- dedicated wiki page wiki/ai-industry/agentic-trading-survey-2026.md plus references across 15+ research-log entries and 15+ dream_cycle staged files",
+          "reasoning": "Confirmed via grep -- this is one of the most heavily-covered papers in the entire wiki."
+        },
+        {
+          "title": "Toward Expert Investment Teams (fine-grained multi-agent decomposition)",
+          "arxiv": "2602.23330",
+          "relevance": "high (already actioned)",
+          "disposition": "duplicate -- explicitly called out as already covered in the 2026-08-14 research log itself",
+          "reasoning": "Confirmed via grep and cross-referenced against yesterday's log entry"
+        },
+        {
+          "title": "TradingAgents",
+          "arxiv": "2412.20138",
+          "relevance": "medium (already actioned)",
+          "disposition": "duplicate -- long-established reference, covered since original ingestion",
+          "reasoning": "Confirmed via grep"
+        },
+        {
+          "title": "LiveTradeBench: Seeking Real-World Alpha with Large Language Models",
+          "arxiv": "2511.03628",
+          "relevance": "high (already actioned)",
+          "disposition": "duplicate -- covered in wiki/ai-industry/openfinGym-2026.md and wiki/trading/algorithms/llm-alpha-validation.md, staged 2026-07-31",
+          "reasoning": "Confirmed via grep -- already integrated into the LLM alpha validation framework page"
+        }
+      ]
+    },
+    {
+      "angle": "5. GitHub trending quant repos",
+      "findings": [
+        {
+          "title": "(no specific new repo surfaced)",
+          "arxiv": null,
+          "relevance": "none",
+          "disposition": "not staged -- search too generic",
+          "reasoning": "The 'github trending quantitative finance backtesting python 2026' query returned only large, already-known libraries (established backtesting frameworks, GitHub Topics index pages) with no clear specific new trending repo identified. This angle needs a more targeted re-search next time this angle comes up in rotation (e.g. a GitHub search API query scoped to 'created:>2026-07-01' with star-velocity sort, rather than a generic web search) rather than repeating the same broad query, which just re-surfaces already-known projects (many already logged in wiki/trading/tools/)."
+        }
+      ]
+    }
+  ]
+}
