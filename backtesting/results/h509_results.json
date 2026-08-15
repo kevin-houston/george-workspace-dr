@@ -1,0 +1,154 @@
+{
+  "hypothesis": "H509",
+  "audit_of": [
+    "H492",
+    "H493"
+  ],
+  "gate": 1.174,
+  "results": {
+    "NASDAQ_30 (H198/H492)": {
+      "original_12_0_is": {
+        "label": "orig 12-0 IS",
+        "n": 96,
+        "sharpe": 2.635,
+        "cagr": 0.616,
+        "maxdd": -0.137,
+        "neg_yrs": 0
+      },
+      "original_12_0_oos": {
+        "label": "orig 12-0 OOS",
+        "n": 64,
+        "sharpe": 2.479,
+        "cagr": 0.593,
+        "maxdd": -0.147,
+        "neg_yrs": 0
+      },
+      "original_12_1_is": {
+        "label": "orig 12-1 IS",
+        "n": 96,
+        "sharpe": 1.603,
+        "cagr": 0.374,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "original_12_1_oos": {
+        "label": "orig 12-1 OOS",
+        "n": 64,
+        "sharpe": 1.096,
+        "cagr": 0.256,
+        "maxdd": -0.226,
+        "neg_yrs": 1
+      },
+      "corrected_12_0_is": {
+        "label": "corr 12-0 IS",
+        "n": 96,
+        "sharpe": 1.603,
+        "cagr": 0.374,
+        "maxdd": -0.202,
+        "neg_yrs": 0
+      },
+      "corrected_12_0_oos": {
+        "label": "corr 12-0 OOS",
+        "n": 64,
+        "sharpe": 1.096,
+        "cagr": 0.256,
+        "maxdd": -0.226,
+        "neg_yrs": 1
+      },
+      "corrected_12_1_is": {
+        "label": "corr 12-1 IS",
+        "n": 96,
+        "sharpe": 1.596,
+        "cagr": 0.355,
+        "maxdd": -0.243,
+        "neg_yrs": 1
+      },
+      "corrected_12_1_oos": {
+        "label": "corr 12-1 OOS",
+        "n": 64,
+        "sharpe": 1.075,
+        "cagr": 0.246,
+        "maxdd": -0.22,
+        "neg_yrs": 1
+      }
+    },
+    "COMBINED_60 (H493)": {
+      "original_12_0_is": {
+        "label": "orig 12-0 IS",
+        "n": 96,
+        "sharpe": 2.753,
+        "cagr": 0.497,
+        "maxdd": -0.111,
+        "neg_yrs": 0
+      },
+      "original_12_0_oos": {
+        "label": "orig 12-0 OOS",
+        "n": 64,
+        "sharpe": 3.178,
+        "cagr": 0.586,
+        "maxdd": -0.059,
+        "neg_yrs": 0
+      },
+      "original_12_1_is": {
+        "label": "orig 12-1 IS",
+        "n": 96,
+        "sharpe": 1.503,
+        "cagr": 0.263,
+        "maxdd": -0.199,
+        "neg_yrs": 0
+      },
+      "original_12_1_oos": {
+        "label": "orig 12-1 OOS",
+        "n": 64,
+        "sharpe": 1.157,
+        "cagr": 0.215,
+        "maxdd": -0.134,
+        "neg_yrs": 0
+      },
+      "corrected_12_0_is": {
+        "label": "corr 12-0 IS",
+        "n": 96,
+        "sharpe": 1.503,
+        "cagr": 0.263,
+        "maxdd": -0.199,
+        "neg_yrs": 0
+      },
+      "corrected_12_0_oos": {
+        "label": "corr 12-0 OOS",
+        "n": 64,
+        "sharpe": 1.157,
+        "cagr": 0.215,
+        "maxdd": -0.134,
+        "neg_yrs": 0
+      },
+      "corrected_12_1_is": {
+        "label": "corr 12-1 IS",
+        "n": 96,
+        "sharpe": 1.45,
+        "cagr": 0.249,
+        "maxdd": -0.238,
+        "neg_yrs": 1
+      },
+      "corrected_12_1_oos": {
+        "label": "corr 12-1 OOS",
+        "n": 64,
+        "sharpe": 0.998,
+        "cagr": 0.188,
+        "maxdd": -0.149,
+        "neg_yrs": 0
+      }
+    }
+  },
+  "spy_oos": {
+    "label": "SPY",
+    "n": 64,
+    "sharpe": 0.954,
+    "cagr": 0.146,
+    "maxdd": -0.239,
+    "neg_yrs": 1
+  },
+  "bug_confirmed": true,
+  "corrected_12_0_beats_12_1_n30": true,
+  "corrected_12_0_beats_12_1_c60": true,
+  "corrected_passes_gate_c60": false
+}
