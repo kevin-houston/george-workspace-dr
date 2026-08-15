@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-13
+updated: 2026-08-15
 ---
 
 # Algorithmic Strategies for Prediction Markets
@@ -951,3 +951,35 @@ def wang_edge(market_price: float, estimated_p: float, lam: float = 0.183) -> fl
 Our H185 pipeline estimates p(CPI > X) from Cleveland Fed nowcast. The Wang Transform gives the fair Kalshi price for that probability estimate. If Kalshi prices the contract at p_market >> wang_transform_price(p_cleveland_fed), there is edge to short.
 
 **Implementation path**: install oracle3 → plug in Cleveland Fed / NY Fed nowcast for `estimated_p` → Kelly size the bet → submit via Kalshi API (already wired in OneCLI).
+
+## LLM-Filtered Lead-Lag Trading Across Related Contracts (arXiv:2602.07048, LinqAlpha/MIT/Kalshi, rev. Feb 2026)
+
+A different trade shape from every other strategy on this page: instead of arbitraging the *same* event across venues (sections 1-2) or a single contract's fair value (oracle3), this trades the **causal lag between two distinct, related Kalshi Economics contracts** -- e.g. one economic-release market's probability path tending to move ahead of a correlated one.
+
+### Two-stage causal screener
+
+1. **Statistical stage**: run Granger causality on pairs of market-implied probability time series within the Kalshi Economics category to find candidate leader/follower pairs (does contract A's probability path predict contract B's, beyond B's own history?).
+2. **LLM semantic-filtering stage**: for each statistically-flagged pair, an LLM reads both contracts' event descriptions and re-ranks/prunes candidates by whether the proposed lead-lag direction has a *plausible economic transmission mechanism* (e.g. "ADP payrolls beating consensus plausibly leads nonfarm payrolls surprise" is coherent; a same-magnitude but economically nonsensical pairing gets filtered out even if it Granger-passes).
+
+### Results (18 rolling evaluations, Kalshi Economics markets, 7-day holding horizon)
+
+| Metric | Granger only | + LLM semantic filter |
+|---|---|---|
+| Win rate | 51.4% | 54.5% |
+| Avg losing-trade size | $649 | $347 |
+| Total PnL | baseline | >2x |
+
+**Key framing from the authors**: the LLM's value-add is almost entirely **downside-risk reduction** -- it kills statistically-fragile Granger links prone to large losses -- rather than a raw win-rate/accuracy lift. That's a different mechanism than most LLM-filter results already logged on this page and in `superforecasting-methods.md` (which mostly report calibration or Sharpe improvements). The authors frame this explicitly as "LLM as risk manager," not "LLM as alpha source."
+
+### Why this doesn't overlap existing sections
+
+- Sections 1-2 (cross-platform/cross-derivative arbitrage): same event, different venue/instrument. This: different events, causal relationship.
+- oracle3 (Wang Transform): single-contract fair-value mispricing. This: cross-contract lag signal.
+- Semantic Polymarket Pair Arbitrage (arXiv:2512.02436, below): matches *semantically equivalent* contracts across platforms. This: matches *causally related but distinct* contracts on one platform.
+- H185 nowcasting pipeline: single-market probability estimation from external macro data (Cleveland Fed, etc). This: probability-path-to-probability-path lag between two Kalshi contracts, no external nowcast needed.
+
+### Implementation gap (why this is a wiki note, not a hypothesis yet)
+
+Replicating this needs (1) historical tick/time-series data for Kalshi Economics contract *probability paths*, not just point-in-time prices -- broader than what H185's current data pipeline pulls -- and (2) the full paper (this note is built from the abstract + a WebFetch summary; the specific LLM used, the semantic-plausibility scoring threshold, and the exact contract universe/date range weren't recoverable from the abstract alone). Candidate next step if pursued: pull the full PDF, identify 2-3 concrete Kalshi Economics contract pairs with an obvious real-world lag (e.g. ADP -> NFP, CPI -> Fed rate-decision contracts) as a manual pilot before building a general Granger-screening pipeline.
+
+**See also**: H185 (CPI nowcasting, `algorithmic-strategies.md` section 3), oracle3 Wang Transform section (above), Semantic Polymarket Pair Arbitrage section (arXiv:2512.02436, above).
