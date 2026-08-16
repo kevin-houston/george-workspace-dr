@@ -1,0 +1,382 @@
+{
+  "hypothesis": "H513",
+  "audit_of": "H355",
+  "gate": 1.451,
+  "results": {
+    "baseline_D": {
+      "variant": "D",
+      "name": "H045 baseline (12m top-2 EW, no filter)",
+      "is": {
+        "n": 120,
+        "sharpe": 1.286,
+        "cagr": 0.078,
+        "maxdd": -0.088,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 1.112,
+        "cagr": 0.066,
+        "maxdd": -0.108,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.028,
+        "cagr": 0.064,
+        "maxdd": -0.108,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.865,
+      "beats_gate": false
+    },
+    "best_A_original": {
+      "variant": "A",
+      "params": "best",
+      "name": "OB strict (both top-2 must have OB; else SHY)",
+      "as_of": "original",
+      "is": {
+        "n": 120,
+        "sharpe": 1.915,
+        "cagr": 0.092,
+        "maxdd": -0.014,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 1.421,
+        "cagr": 0.066,
+        "maxdd": -0.044,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.451,
+        "cagr": 0.069,
+        "maxdd": -0.044,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.742,
+      "beats_gate": false
+    },
+    "best_A_corrected": {
+      "variant": "A",
+      "params": "best",
+      "name": "OB strict (both top-2 must have OB; else SHY)",
+      "as_of": "corrected",
+      "is": {
+        "n": 120,
+        "sharpe": 0.783,
+        "cagr": 0.032,
+        "maxdd": -0.065,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 0.705,
+        "cagr": 0.029,
+        "maxdd": -0.11,
+        "neg_yrs": 2
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.579,
+        "cagr": 0.024,
+        "maxdd": -0.11,
+        "neg_yrs": 3
+      },
+      "wf_ratio": 0.9,
+      "beats_gate": false
+    },
+    "best_B_original": {
+      "variant": "B",
+      "params": "best",
+      "name": "OB lenient (>=1 of top-2 has OB; fill 2nd slot)",
+      "as_of": "original",
+      "is": {
+        "n": 120,
+        "sharpe": 1.675,
+        "cagr": 0.09,
+        "maxdd": -0.049,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 1.522,
+        "cagr": 0.08,
+        "maxdd": -0.05,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.399,
+        "cagr": 0.077,
+        "maxdd": -0.05,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.909,
+      "beats_gate": true
+    },
+    "best_B_corrected": {
+      "variant": "B",
+      "params": "best",
+      "name": "OB lenient (>=1 of top-2 has OB; fill 2nd slot)",
+      "as_of": "corrected",
+      "is": {
+        "n": 120,
+        "sharpe": 1.091,
+        "cagr": 0.063,
+        "maxdd": -0.062,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 0.967,
+        "cagr": 0.055,
+        "maxdd": -0.131,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.916,
+        "cagr": 0.055,
+        "maxdd": -0.131,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.886,
+      "beats_gate": false
+    },
+    "best_C_original": {
+      "variant": "C",
+      "params": "best",
+      "name": "OB gate (any of top-3 has OB -> top-2; else SHY)",
+      "as_of": "original",
+      "is": {
+        "n": 120,
+        "sharpe": 1.596,
+        "cagr": 0.089,
+        "maxdd": -0.061,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 1.31,
+        "cagr": 0.073,
+        "maxdd": -0.083,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.203,
+        "cagr": 0.071,
+        "maxdd": -0.083,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.821,
+      "beats_gate": false
+    },
+    "best_C_corrected": {
+      "variant": "C",
+      "params": "best",
+      "name": "OB gate (any of top-3 has OB -> top-2; else SHY)",
+      "as_of": "corrected",
+      "is": {
+        "n": 120,
+        "sharpe": 1.144,
+        "cagr": 0.067,
+        "maxdd": -0.082,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 1.028,
+        "cagr": 0.059,
+        "maxdd": -0.111,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.974,
+        "cagr": 0.059,
+        "maxdd": -0.111,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.899,
+      "beats_gate": false
+    },
+    "ref_A_original": {
+      "variant": "A",
+      "params": "ref",
+      "name": "OB strict (both top-2 must have OB; else SHY)",
+      "as_of": "original",
+      "is": {
+        "n": 120,
+        "sharpe": 1.813,
+        "cagr": 0.083,
+        "maxdd": -0.019,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 1.372,
+        "cagr": 0.056,
+        "maxdd": -0.068,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.466,
+        "cagr": 0.065,
+        "maxdd": -0.068,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.757,
+      "beats_gate": false
+    },
+    "ref_A_corrected": {
+      "variant": "A",
+      "params": "ref",
+      "name": "OB strict (both top-2 must have OB; else SHY)",
+      "as_of": "corrected",
+      "is": {
+        "n": 120,
+        "sharpe": 0.723,
+        "cagr": 0.03,
+        "maxdd": -0.082,
+        "neg_yrs": 3
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 0.822,
+        "cagr": 0.036,
+        "maxdd": -0.063,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.674,
+        "cagr": 0.032,
+        "maxdd": -0.082,
+        "neg_yrs": 3
+      },
+      "wf_ratio": 1.137,
+      "beats_gate": false
+    },
+    "ref_B_original": {
+      "variant": "B",
+      "params": "ref",
+      "name": "OB lenient (>=1 of top-2 has OB; fill 2nd slot)",
+      "as_of": "original",
+      "is": {
+        "n": 120,
+        "sharpe": 1.755,
+        "cagr": 0.093,
+        "maxdd": -0.061,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 1.47,
+        "cagr": 0.076,
+        "maxdd": -0.075,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.431,
+        "cagr": 0.078,
+        "maxdd": -0.075,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.838,
+      "beats_gate": true
+    },
+    "ref_B_corrected": {
+      "variant": "B",
+      "params": "ref",
+      "name": "OB lenient (>=1 of top-2 has OB; fill 2nd slot)",
+      "as_of": "corrected",
+      "is": {
+        "n": 120,
+        "sharpe": 1.062,
+        "cagr": 0.051,
+        "maxdd": -0.091,
+        "neg_yrs": 2
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 0.994,
+        "cagr": 0.057,
+        "maxdd": -0.128,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.942,
+        "cagr": 0.055,
+        "maxdd": -0.128,
+        "neg_yrs": 2
+      },
+      "wf_ratio": 0.936,
+      "beats_gate": false
+    },
+    "ref_C_original": {
+      "variant": "C",
+      "params": "ref",
+      "name": "OB gate (any of top-3 has OB -> top-2; else SHY)",
+      "as_of": "original",
+      "is": {
+        "n": 120,
+        "sharpe": 1.615,
+        "cagr": 0.089,
+        "maxdd": -0.061,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 1.399,
+        "cagr": 0.075,
+        "maxdd": -0.084,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.381,
+        "cagr": 0.077,
+        "maxdd": -0.084,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.866,
+      "beats_gate": false
+    },
+    "ref_C_corrected": {
+      "variant": "C",
+      "params": "ref",
+      "name": "OB gate (any of top-3 has OB -> top-2; else SHY)",
+      "as_of": "corrected",
+      "is": {
+        "n": 120,
+        "sharpe": 1.11,
+        "cagr": 0.06,
+        "maxdd": -0.091,
+        "neg_yrs": 2
+      },
+      "oos": {
+        "n": 114,
+        "sharpe": 1.032,
+        "cagr": 0.06,
+        "maxdd": -0.127,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.927,
+        "cagr": 0.055,
+        "maxdd": -0.127,
+        "neg_yrs": 2
+      },
+      "wf_ratio": 0.93,
+      "beats_gate": false
+    }
+  }
+}

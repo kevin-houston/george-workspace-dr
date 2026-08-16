@@ -1,0 +1,407 @@
+{
+  "hypothesis": "H514",
+  "audit_of": "H356",
+  "gate_primary": 1.735,
+  "gate_secondary": 1.535,
+  "results": {
+    "baseline_D": {
+      "variant": "D",
+      "name": "H354-C baseline (pure 12m top-1, no filter)",
+      "is": {
+        "n": 96,
+        "sharpe": 1.561,
+        "cagr": 0.189,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 1.339,
+        "cagr": 0.192,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.461,
+        "cagr": 0.19,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.858,
+      "beats_gate_primary": false
+    },
+    "best_A_original": {
+      "variant": "A",
+      "params": "best",
+      "name": "OB strict (top-1 needs OB; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 96,
+        "sharpe": 2.02,
+        "cagr": 0.212,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 1.877,
+        "cagr": 0.233,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.954,
+        "cagr": 0.221,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.929,
+      "oos_cash_pct": 0.818,
+      "beats_gate_primary": true,
+      "beats_gate_secondary_partial": true
+    },
+    "best_A_corrected": {
+      "variant": "A",
+      "params": "best",
+      "name": "OB strict (top-1 needs OB; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 96,
+        "sharpe": 0.84,
+        "cagr": 0.091,
+        "maxdd": -0.189,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.804,
+        "cagr": 0.098,
+        "maxdd": -0.207,
+        "neg_yrs": 2
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.825,
+        "cagr": 0.094,
+        "maxdd": -0.207,
+        "neg_yrs": 3
+      },
+      "wf_ratio": 0.957,
+      "oos_cash_pct": 0.803,
+      "beats_gate_primary": false,
+      "beats_gate_secondary_partial": false
+    },
+    "best_B_original": {
+      "variant": "B",
+      "params": "best",
+      "name": "OB lenient (top-1 OB->hold; elif top-2 OB->hold; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 96,
+        "sharpe": 2.053,
+        "cagr": 0.22,
+        "maxdd": -0.193,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 1.92,
+        "cagr": 0.248,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.99,
+        "cagr": 0.232,
+        "maxdd": -0.193,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.935,
+      "oos_cash_pct": 0.455,
+      "beats_gate_primary": true,
+      "beats_gate_secondary_partial": true
+    },
+    "best_B_corrected": {
+      "variant": "B",
+      "params": "best",
+      "name": "OB lenient (top-1 OB->hold; elif top-2 OB->hold; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 96,
+        "sharpe": 0.968,
+        "cagr": 0.108,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.937,
+        "cagr": 0.128,
+        "maxdd": -0.166,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.952,
+        "cagr": 0.116,
+        "maxdd": -0.189,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.968,
+      "oos_cash_pct": 0.485,
+      "beats_gate_primary": false,
+      "beats_gate_secondary_partial": false
+    },
+    "best_C_original": {
+      "variant": "C",
+      "params": "best",
+      "name": "OB gate (any top-3 has OB -> top-1; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 96,
+        "sharpe": 2.024,
+        "cagr": 0.222,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 1.74,
+        "cagr": 0.231,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.893,
+        "cagr": 0.226,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.86,
+      "oos_cash_pct": 0.333,
+      "beats_gate_primary": true,
+      "beats_gate_secondary_partial": true
+    },
+    "best_C_corrected": {
+      "variant": "C",
+      "params": "best",
+      "name": "OB gate (any top-3 has OB -> top-1; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 96,
+        "sharpe": 1.306,
+        "cagr": 0.151,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 1.227,
+        "cagr": 0.171,
+        "maxdd": -0.153,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.269,
+        "cagr": 0.159,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.94,
+      "oos_cash_pct": 0.318,
+      "beats_gate_primary": false,
+      "beats_gate_secondary_partial": false
+    },
+    "ref_A_original": {
+      "variant": "A",
+      "params": "ref",
+      "name": "OB strict (top-1 needs OB; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 96,
+        "sharpe": 2.196,
+        "cagr": 0.209,
+        "maxdd": -0.099,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 2.312,
+        "cagr": 0.262,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 2.241,
+        "cagr": 0.23,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.053,
+      "oos_cash_pct": 0.924,
+      "beats_gate_primary": true,
+      "beats_gate_secondary_partial": true
+    },
+    "ref_A_corrected": {
+      "variant": "A",
+      "params": "ref",
+      "name": "OB strict (top-1 needs OB; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 96,
+        "sharpe": 0.676,
+        "cagr": 0.069,
+        "maxdd": -0.198,
+        "neg_yrs": 2
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.773,
+        "cagr": 0.091,
+        "maxdd": -0.237,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.719,
+        "cagr": 0.078,
+        "maxdd": -0.237,
+        "neg_yrs": 3
+      },
+      "wf_ratio": 1.143,
+      "oos_cash_pct": 1.015,
+      "beats_gate_primary": false,
+      "beats_gate_secondary_partial": false
+    },
+    "ref_B_original": {
+      "variant": "B",
+      "params": "ref",
+      "name": "OB lenient (top-1 OB->hold; elif top-2 OB->hold; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 96,
+        "sharpe": 2.25,
+        "cagr": 0.222,
+        "maxdd": -0.102,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 2.268,
+        "cagr": 0.284,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 2.243,
+        "cagr": 0.248,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.008,
+      "oos_cash_pct": 0.591,
+      "beats_gate_primary": true,
+      "beats_gate_secondary_partial": true
+    },
+    "ref_B_corrected": {
+      "variant": "B",
+      "params": "ref",
+      "name": "OB lenient (top-1 OB->hold; elif top-2 OB->hold; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 96,
+        "sharpe": 0.675,
+        "cagr": 0.077,
+        "maxdd": -0.198,
+        "neg_yrs": 1
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 0.907,
+        "cagr": 0.119,
+        "maxdd": -0.181,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 0.777,
+        "cagr": 0.094,
+        "maxdd": -0.198,
+        "neg_yrs": 2
+      },
+      "wf_ratio": 1.344,
+      "oos_cash_pct": 0.561,
+      "beats_gate_primary": false,
+      "beats_gate_secondary_partial": false
+    },
+    "ref_C_original": {
+      "variant": "C",
+      "params": "ref",
+      "name": "OB gate (any top-3 has OB -> top-1; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 96,
+        "sharpe": 2.151,
+        "cagr": 0.223,
+        "maxdd": -0.099,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 1.902,
+        "cagr": 0.245,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 2.03,
+        "cagr": 0.232,
+        "maxdd": -0.113,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.884,
+      "oos_cash_pct": 0.424,
+      "beats_gate_primary": true,
+      "beats_gate_secondary_partial": true
+    },
+    "ref_C_corrected": {
+      "variant": "C",
+      "params": "ref",
+      "name": "OB gate (any top-3 has OB -> top-1; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 96,
+        "sharpe": 1.168,
+        "cagr": 0.136,
+        "maxdd": -0.189,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 66,
+        "sharpe": 1.027,
+        "cagr": 0.135,
+        "maxdd": -0.203,
+        "neg_yrs": 1
+      },
+      "alt_oos": {
+        "n": 162,
+        "sharpe": 1.108,
+        "cagr": 0.136,
+        "maxdd": -0.203,
+        "neg_yrs": 1
+      },
+      "wf_ratio": 0.879,
+      "oos_cash_pct": 0.379,
+      "beats_gate_primary": false,
+      "beats_gate_secondary_partial": false
+    }
+  }
+}

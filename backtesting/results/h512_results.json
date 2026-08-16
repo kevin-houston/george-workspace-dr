@@ -1,0 +1,382 @@
+{
+  "hypothesis": "H512",
+  "audit_of": "H346",
+  "gate": 1.3,
+  "results": {
+    "baseline_D": {
+      "variant": "D",
+      "name": "Baseline H026 (no OB filter)",
+      "is": {
+        "n": 72,
+        "sharpe": 2.831,
+        "cagr": 0.235,
+        "maxdd": -0.053,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.61,
+        "cagr": 0.264,
+        "maxdd": -0.067,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.821,
+        "cagr": 0.265,
+        "maxdd": -0.067,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.922,
+      "beats_gate": true
+    },
+    "ref_A_original": {
+      "variant": "A",
+      "params": "ref",
+      "name": "OB strict (top-1 must have OB; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 72,
+        "sharpe": 2.749,
+        "cagr": 0.214,
+        "maxdd": -0.014,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.798,
+        "cagr": 0.246,
+        "maxdd": -0.04,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.845,
+        "cagr": 0.242,
+        "maxdd": -0.04,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.018,
+      "beats_gate": true
+    },
+    "ref_A_corrected": {
+      "variant": "A",
+      "params": "ref",
+      "name": "OB strict (top-1 must have OB; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 72,
+        "sharpe": 1.907,
+        "cagr": 0.13,
+        "maxdd": -0.057,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.191,
+        "cagr": 0.171,
+        "maxdd": -0.051,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.213,
+        "cagr": 0.162,
+        "maxdd": -0.051,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.149,
+      "beats_gate": true
+    },
+    "ref_B_original": {
+      "variant": "B",
+      "params": "ref",
+      "name": "OB lenient (try top-2; BIL if neither has OB)",
+      "as_of": "original",
+      "is": {
+        "n": 72,
+        "sharpe": 2.957,
+        "cagr": 0.249,
+        "maxdd": -0.026,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 3.057,
+        "cagr": 0.286,
+        "maxdd": -0.04,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 3.031,
+        "cagr": 0.275,
+        "maxdd": -0.04,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.034,
+      "beats_gate": true
+    },
+    "ref_B_corrected": {
+      "variant": "B",
+      "params": "ref",
+      "name": "OB lenient (try top-2; BIL if neither has OB)",
+      "as_of": "corrected",
+      "is": {
+        "n": 72,
+        "sharpe": 1.947,
+        "cagr": 0.153,
+        "maxdd": -0.057,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.236,
+        "cagr": 0.205,
+        "maxdd": -0.058,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.244,
+        "cagr": 0.194,
+        "maxdd": -0.058,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.148,
+      "beats_gate": true
+    },
+    "ref_C_original": {
+      "variant": "C",
+      "params": "ref",
+      "name": "OB gate (any of top-3 has OB -> enter top-1; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 72,
+        "sharpe": 2.794,
+        "cagr": 0.232,
+        "maxdd": -0.053,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.671,
+        "cagr": 0.257,
+        "maxdd": -0.047,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.884,
+        "cagr": 0.261,
+        "maxdd": -0.047,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.956,
+      "beats_gate": true
+    },
+    "ref_C_corrected": {
+      "variant": "C",
+      "params": "ref",
+      "name": "OB gate (any of top-3 has OB -> enter top-1; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 72,
+        "sharpe": 2.48,
+        "cagr": 0.189,
+        "maxdd": -0.057,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.335,
+        "cagr": 0.222,
+        "maxdd": -0.08,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.532,
+        "cagr": 0.222,
+        "maxdd": -0.08,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.942,
+      "beats_gate": true
+    },
+    "best_A_original": {
+      "variant": "A",
+      "params": "best",
+      "name": "OB strict (top-1 must have OB; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 72,
+        "sharpe": 2.616,
+        "cagr": 0.188,
+        "maxdd": -0.011,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.941,
+        "cagr": 0.239,
+        "maxdd": -0.029,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.823,
+        "cagr": 0.223,
+        "maxdd": -0.029,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.124,
+      "beats_gate": true
+    },
+    "best_A_corrected": {
+      "variant": "A",
+      "params": "best",
+      "name": "OB strict (top-1 must have OB; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 72,
+        "sharpe": 1.882,
+        "cagr": 0.13,
+        "maxdd": -0.053,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.228,
+        "cagr": 0.205,
+        "maxdd": -0.058,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.205,
+        "cagr": 0.184,
+        "maxdd": -0.058,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.184,
+      "beats_gate": true
+    },
+    "best_B_original": {
+      "variant": "B",
+      "params": "best",
+      "name": "OB lenient (try top-2; BIL if neither has OB)",
+      "as_of": "original",
+      "is": {
+        "n": 72,
+        "sharpe": 2.801,
+        "cagr": 0.206,
+        "maxdd": -0.026,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 3.238,
+        "cagr": 0.297,
+        "maxdd": -0.057,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 3.024,
+        "cagr": 0.262,
+        "maxdd": -0.057,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.156,
+      "beats_gate": true
+    },
+    "best_B_corrected": {
+      "variant": "B",
+      "params": "best",
+      "name": "OB lenient (try top-2; BIL if neither has OB)",
+      "as_of": "corrected",
+      "is": {
+        "n": 72,
+        "sharpe": 2.06,
+        "cagr": 0.145,
+        "maxdd": -0.053,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.144,
+        "cagr": 0.221,
+        "maxdd": -0.091,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.169,
+        "cagr": 0.199,
+        "maxdd": -0.091,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 1.041,
+      "beats_gate": true
+    },
+    "best_C_original": {
+      "variant": "C",
+      "params": "best",
+      "name": "OB gate (any of top-3 has OB -> enter top-1; else BIL)",
+      "as_of": "original",
+      "is": {
+        "n": 72,
+        "sharpe": 2.845,
+        "cagr": 0.226,
+        "maxdd": -0.053,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.735,
+        "cagr": 0.261,
+        "maxdd": -0.067,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.914,
+        "cagr": 0.259,
+        "maxdd": -0.067,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.961,
+      "beats_gate": true
+    },
+    "best_C_corrected": {
+      "variant": "C",
+      "params": "best",
+      "name": "OB gate (any of top-3 has OB -> enter top-1; else BIL)",
+      "as_of": "corrected",
+      "is": {
+        "n": 72,
+        "sharpe": 2.518,
+        "cagr": 0.207,
+        "maxdd": -0.053,
+        "neg_yrs": 0
+      },
+      "oos": {
+        "n": 100,
+        "sharpe": 2.503,
+        "cagr": 0.246,
+        "maxdd": -0.089,
+        "neg_yrs": 0
+      },
+      "alt_oos": {
+        "n": 160,
+        "sharpe": 2.644,
+        "cagr": 0.242,
+        "maxdd": -0.089,
+        "neg_yrs": 0
+      },
+      "wf_ratio": 0.994,
+      "beats_gate": true
+    }
+  }
+}

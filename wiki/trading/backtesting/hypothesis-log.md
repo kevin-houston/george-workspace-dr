@@ -59,22 +59,22 @@ h376_status: CONFIRMED (Variants A/B/D) (2026-07-06) — MAX Factor Composite on
 h375_status: STUB (2026-07-06) — Finetuned LLM (Mistral 7B) PEAD Predictor. Source: github.com/XiaomoWu/PEAD + ACL FinNLP-2025 GradPerp. Phase 1: GPT-4o-mini zero-shot on earnings call transcripts (~$0.10-0.20/event, no GPU). Phase 2: Mistral 7B finetuned with GradPerp gradient alignment (GPU required). Gate: OOS WR > 81.8% at n >= 15 OR n >= 25 at WR >= 75%. Caveats: H247 (FMP transcript 403 on free plan), H168 (transcript coverage bias). Script: backtesting/daily/run_h375.py.
 h373_status: NOT CONFIRMED (2026-07-06) — MAX Factor Tilt Within H198 Top-1 Momentum Selection. Source: Tandfonline 2025 (Bali et al. 2011 MAX factor). Composite = w·mom_rank + (1-w)·max_rank, top-1 selection. Variants A (0.7/0.3 OOS 0.837), B (0.5/0.5 OOS 0.679), C (filter max_rank>0.70 OOS 0.641) all fail gate 1.174. Root cause: MAX and momentum rank highly correlated in tech-heavy H198 universe; Tandfonline interaction effect requires cross-sectional MAX heterogeneity absent in 30-stock large-cap universe. Follow-up: H376 (top-6 EW) where interaction is mildly positive. Script: backtesting/daily/run_h373.py.
 h372_status: STUB (2026-07-06) — Structure-Aware Press Release NLP for 8-K PEAD Entry Quality. Source: arXiv:2509.24254 (138k press releases 2005-2023). Section-weighted FinBERT composite: guidance 40%, summary 35%, CEO 15%, tables 10%. Gate: OOS WR > 81.8% vs H174 baseline at same n OR same WR with n > 22. Script: backtesting/daily/run_h372.py.
-h356_retraction_note: ⚠️ FLAGGED 2026-08-14 — see H510. h356 reuses the same has_bullish_ob(daily_data[ticker], month_end, ...) as-of-date bug identified in H343/H344 (as_of should be the prior month-end, not the current holding month's own close). Not yet re-run/corrected directly (H510 only re-tested H343's/H344's own scripts) — treat h356's OOS numbers as unverified pending a dedicated correction run.
+h356_retraction_note: ⚠️ RETRACTED 2026-08-15 — see H514. CONFIRMED via a live re-run: same has_bullish_ob(daily_data[ticker], month_end, ...) as-of-date bug as H343/H344. Corrected as_of=prior-month-end re-run of ALL SIX variants FAILS both the 1.735 primary and 1.535 partial gate (best corrected: best_C OOS 1.227, was 1.740; headline ref_A collapses from OOS 2.312 to 0.773). The "MaxDD unchanged at -11.3%" claim reverses — corrected MaxDD worsens to -15.3% to -23.7%. The "ref params reversed pattern, larger window suits low-vol" claim also does not survive. See H514 for the full corrected backtest and script.
 h356_status: CONFIRMED (2026-07-03) — OB Filter on H354 Low-Volatility ETF Universe. Hypothesis: the Order Block confirmation filter that improved H026 ETFs (H345/H346) and H045 bonds (H355) also improves H354 low-vol ETF momentum rotation. Universe: USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV + BIL. Signal: pure 12m momentum top-1 (H354-C formula). OB params: 'best' (window=20, swing_len=3) and 'ref' (window=30, swing_len=5). IS: 2013-2020, OOS: 2021-2026. Gate: OOS Sharpe > 1.735 (H354-C). RESULTS — Baseline (H354-C, no filter): IS 1.561, OOS 1.339, MaxDD -11.3%, NegYrs=0. [Note: baseline here differs from H354's confirmed 1.735 — likely data alignment difference between runs; OB variants still clearly beat 1.735 gate.] best_A (top-1 needs OB; else BIL): OOS 1.877, MaxDD -11.3%. best_B (top-1 OB→hold; elif top-2 OB→hold; else BIL): OOS 1.920, MaxDD -11.3%. best_C (any of top-3 has OB → top-1; else BIL): OOS 1.740, MaxDD -11.3%. ref_A: OOS 2.312, MaxDD -11.3%. ref_B: OOS 2.268. ref_C: OOS 1.902. ALL 6 OB variants CONFIRMED (>1.735). BEST: ref_A (window=30, swing_len=5, strict) OOS Sharpe 2.312. Annual returns ref_A: 2021 +29.8%, 2022 +27.6%, 2023 +25.0%, 2024 +31.9%, 2025 +24.6%, 2026 +17.9% (all years positive). Corr(ref_A, SPY) = 0.559 — significantly lower than H354-C's Corr 0.854. KEY FINDING 1 — MaxDD unchanged: OB filter improves Sharpe (+0.5 to +0.97) but does NOT reduce MaxDD (-11.3% across all variants). Unlike bonds (H355 halved MaxDD) or stocks (H343 cut MaxDD from -22.7% to -5.4%), low-vol ETFs intra-year drawdowns are not captured by OB filter at monthly rebalance frequency. KEY FINDING 2 — NOVEL: ref params (window=30, swing_len=5) are BEST on low-vol ETFs. REVERSED from all prior OB tests (H343/H344/H346/H355) where best params (window=20, swing_len=3) dominated. Larger OB detection window suits slower-moving low-vol instruments — their OBs form over longer time horizons than fast-moving stocks or sector ETFs. KEY FINDING 3 — Corr(SPY) drops from 0.854 (H354-C) to 0.559 (H356 ref_A). OB filter selects months with active institutional accumulation, which are systematically different from SPY's monthly returns. Strong blending case: H354-C was marginal due to high SPY correlation; H356 ref_A is a candidate for portfolio addition. PRODUCTION NOTE: ref_A (strict) vs best_B (lenient) tradeoff — ref_A has higher Sharpe (2.312 vs 1.920) but 0-cash-months data suspect (see caveat). Cash% column in output has a known bug (IS+OOS cash months divided by OOS count — inflates the ratio); actual OOS cash behavior needs direct inspection. Script: backtesting/daily/run_h356.py. Results: backtesting/results/h356_results.json.
 h359_status: STAGED (2026-07-02) — LLM Semantic Lead-Lag Screener for Prediction Market Pairs. Source: arXiv:2602.07048 (Feb 2026). Two-stage: Granger causality + LLM semantic plausibility filter for cross-event lead-lag pairs on Kalshi markets. Gate: profitability > 2%/trade after fees. Stub at prediction_markets/run_h359_leadlag_screener.py.
 h358_status: STAGED (2026-07-02) — Agentic Autonomous Factor Investing. Source: arXiv:2603.14288 (Mar 2026). Self-directed 3-agent loop (formulator→evaluator→memory) with regime-adaptive memory update. Gate: OOS Sharpe > 1.559 (H217 baseline). Stub at backtesting/daily/run_h358_agentic_factor.py.
 h357_status: STAGED (2026-07-02) — Multi-Modal Earnings Direction Prediction (PEAD upgrade). Sources: arXiv:2605.25894 (May 2026) + arXiv:2509.24254 (Oct 2025). Adds pre-announcement 30-day market signals + press release structural parsing to H174 stack. Gate: OOS WR > 0.818, n >= 20. Stub at backtesting/daily/run_h357_multimodal_pead.py.
-h355_retraction_note: ⚠️ FLAGGED 2026-08-14 — see H510. Same has_bullish_ob(..., month_end, ...) as-of-date bug as H343/H344 (as_of should be the prior month-end). Not yet re-run/corrected — treat h355's OOS numbers as unverified pending a dedicated correction run.
+h355_retraction_note: ⚠️ RETRACTED 2026-08-15 — see H513. CONFIRMED via a live re-run: same has_bullish_ob(daily_data[ticker], month_end, ...) as-of-date bug as H343/H344. Corrected as_of=prior-month-end re-run of ALL SIX variants FAILS the 1.451 gate (both previously-confirmed variants collapse: best_B OOS 1.522→0.967, ref_B OOS 1.470→0.994). The "MaxDD halved to -5.0%" claim reverses — corrected best_B MaxDD is -13.1%, WORSE than the -10.8% baseline. See H513 for the full corrected backtest and script.
 h355_status: CONFIRMED (2026-07-02) — OB Filter on H045 Bond ETF Universe. Hypothesis: the Order Block confirmation filter that dramatically improved H026 ETF rotation (H345/H346) also improves H045 bond ETF momentum rotation. Universe: SHY/IEI/IEF/TLT/TIP/HYG/LQD. Signal: 12m momentum top-2 EW (H045 canonical). OB params tested: 'best' (window=20, swing_len=3) and 'ref' (window=30, swing_len=5). IS: 2007-2016, OOS: 2017-2026. Gate: OOS Sharpe > 1.451 (H045 1.351 + 0.10). RESULTS — Baseline (no filter): OOS 1.112, MaxDD -10.8%, NegYrs=1. best_A (both top-2 need OB; else SHY): OOS 1.421, MaxDD -4.4%. best_B (≥1 of top-2 has OB; fill 2nd slot): OOS 1.522, MaxDD -5.0%. best_C (any of top-3 has OB → top-2; else SHY): OOS 1.310. ref_A: OOS 1.372. ref_B: OOS 1.470. ref_C: OOS 1.399. CONFIRMED: best_B beats gate (1.522 > 1.451). ref_B also confirmed (1.470 > 1.451). KEY FINDING — OB filter works on bond ETFs with same 'window=20, swing_len=3' best params as equity ETFs (H344/H346). Mechanism: bullish OBs form on bond ETFs before rate-cut-driven rallies; during 2022 rate-hike cycle OBs don't hold → filter routes to SHY (short-term safe haven). MaxDD halved: -10.8% baseline → -5.0% best_B. Lenient-B variant (fill 2nd slot from unfiltered) works better than strict (both need OB) — same pattern as H345/H346 on equity ETFs. Sharpe improvement: +37% over baseline (1.112 → 1.522). Note: baseline OOS 1.112 differs from H045 canonical 1.351 because OOS period here is 2017-2026 (includes 2022 rate shock) vs H045's canonical split. The OB filter substantially mitigates the 2022 impact. Script: backtesting/daily/run_h355.py. Results: backtesting/results/h355_results.json.
 h354_status: CONFIRMED (2026-07-02) — Low-Volatility Factor ETF Momentum Rotation. Hypothesis: rotating among low-vol factor ETFs (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV) using 12m momentum outperforms SPY and delivers defensive characteristics. IS: 2013-2020, OOS: 2021-2026. Gate: OOS Sharpe > 1.000. RESULTS — Var A (top-1 mom+invvol dual rank): IS 1.445, OOS 1.297, MaxDD -10.2%, NegYrs=0. Var B (top-2 EW dual rank): IS 1.551, OOS 1.135, MaxDD -13.0%, NegYrs=1. Var C (top-1 pure 12m momentum): IS 1.669, OOS 1.735, MaxDD -11.3%, NegYrs=0. Var D (SPY benchmark): OOS 0.977. Var E (EW all low-vol ETFs): OOS 0.760. All A/B/C beat gate. Best: Var C OOS 1.735. OOS annual (Var C): 2021 +29.4%, 2022 +7.0%, 2023 +24.9%, 2024 +27.5%, 2025 +35.7%, 2026 +23.0%. Corr(SPY) Var C = 0.854. KEY FINDING — Pure 12m momentum dominates dual-rank on low-vol ETF universe. Unlike H026/H198 where vol-normalization adds value, here ALL ETFs are already low-vol by construction — the inv_vol tiebreaker routes AWAY from momentum winners. The 2022 +7.0% return (vs SPY -24%) is the key: 12m momentum pointed to SPHD (energy-heavy in 2022), which was the only low-vol ETF with positive 2022 return. Zero negative years in OOS for Var A and C. PRODUCTION ASSESSMENT: Corr(SPY)=0.854 limits blending value with existing H026/H041a production slots. Highest standalone Sharpe of any single ETF rotation strategy tested (1.735). Could replace one H026 production slot if correlation with blended equity curve is acceptable. Survivorship bias caveat: all ETFs in universe are still active. Script: backtesting/daily/run_h354.py. Results: backtesting/results/h354_results.json.
 h351_status: NOT CONFIRMED (2026-06-30) — Commodity Trend CTA: EWM Barbell Signal (span-60 + span-500). Sources: arXiv:2507.15876 (Tanneau & Simonian 2025, 500d EWM best single horizon Sharpe 0.47) + arXiv:2510.23150 (Sandhu & Garg 2025, medium-term 125d redundant; optimal barbell = 60d + 500d) + arXiv:2504.10914 (Valeyre cherry-pick guard). Universe: GLD/SLV/DBC/USO/DBA (H261b universe, no UNG). Signal: sig_barbell = 0.5*(Close/EMA60-1) + 0.5*(Close/EMA500-1), month-end resample, shift 1m. Selection: Top-2 where combined>0; Top-1 if 1 positive; BIL if none. Var A (barbell, PRIMARY): IS=0.033, OOS=0.896, MaxDD=-26.4%, NegYrs=1, Corr(SPY)=0.278. Var B (long500): OOS=0.749. Var C (short60): OOS=0.839. FAIL: OOS Sharpe 0.896 < gate 0.922; IS Sharpe 0.033 < gate 0.50. Barbell > each single signal (A>C>B) confirms academic theory, but H261b endpoint 6m (0.922) still superior. Root cause: 500d EWM slow to exit 2014-2016 commodity bear vs endpoint calculation; IS commodity bear (2010-2017) remains structural weakness for all commodity CTA designs. Script: backtesting/daily/run_h351.py. Results: backtesting/results/h351_results.json.
 h350_status: SOFT CONFIRM (2026-06-30) — Text Uncertainty Anti-Filter for H174 PEAD Entries. Source: Hong, Kottimukkalur & Noh (2026) "Uncertain Text and Price Reactions to Earnings Releases" (JBF vol.182). Finding: high LM uncertainty ratio in 8-K text → weaker post-earnings drift. Mechanism: uncertainty language attracts institutional attention → faster price discovery → PEAD reduced. Implementation: compute Loughran-McDonald uncertainty word ratio (~180 core words) from 8-K text; IS threshold from all 2020-2023 8-K texts (not just H174-confirmed, to avoid leakage); third filter: lm_ratio < IS_percentile_threshold. H174 filters maintained (score >= 0.18 AND surprise >= 0.02). V1 (IS p50 median): n=20, WR=80.0%, MeanRet=6.42% — WR marginally lower, fails directional gate. V2 (IS p67): n=19, WR=84.2%, MeanRet=7.19% — best WR, n<20 gate not met. V3 (IS p75): n=19, WR=84.2%, MeanRet=7.19% — same as V2. V4 (IS p90): n=22, WR=81.8%, MeanRet=6.89% — identical to H174 baseline. Baseline H174: n=22, WR=81.8%, MeanRet=6.89%. SOFT CONFIRM: V2/V3 directionally support Hong et al. (WR 81.8%→84.2% by excluding 3 high-uncertainty events) but n=19 fails pre-specified n>=20 gate. Excluded events at V2: AMD 2024-07-31 (ret=-0.2%), INTC 2024-11-01 (ret=+4.6%), WMT 2025-11-20 (ret=+10.7%) — includes 2 profitable events, indicating filter is too aggressive at p67. DEPLOYMENT: Use V4 (IS p90, n=22) for paper trading; revisit V2 when n>=30 OOS events available. Script: backtesting/daily/run_h350.py. Results: backtesting/results/h350_results.json.
-h346_retraction_note: ⚠️ FLAGGED 2026-08-14 — see H510. Same has_bullish_ob(..., month_end, ...) as-of-date bug as H343/H344 (as_of should be the prior month-end). Not yet re-run/corrected — treat h346's OOS numbers as unverified pending a dedicated correction run.
+h346_retraction_note: ⚠️ CORRECTED 2026-08-15 — see H512. CONFIRMED via a live re-run: same has_bullish_ob(daily_data[ticker], month_end, ...) as-of-date bug as H343/H344. All 6 corrected variants still beat the 1.300 gate (range OOS 2.144-2.503) — NOT a full retraction — but every corrected variant now sits AT OR BELOW the unfiltered baseline D (2.610), reversing the original "+24.1% Sharpe improvement" claim (best_B corrects from OOS 3.238 to 2.144, a decline vs baseline). MaxDD also worsens post-correction (best_B: -5.7%→-9.1%, now worse than baseline's -6.7%, not better). See H512 for the full corrected backtest and script.
 h346_status: CONFIRMED (2026-06-29) — OB Filter on H026 ETF Rotation — Canonical IS/OOS Validation. Hypothesis: retest H345 OB filter on canonical H026 split (IS 2008-2017, OOS 2018-2026) to verify H345 result holds beyond its non-canonical split. Universe: same 25-asset H026 expanded. Two OB param sets: 'ref' (window=30, swing_len=5, H345 defaults) and 'best' (window=20, swing_len=3, H344 best). Gate: OOS Sharpe > 1.300. RESULTS — Baseline D (no OB filter): OOS 2.610, IS 2.831, MaxDD -6.7%. Variant B ref params: OOS 3.057, IS 2.957, MaxDD -4.0%, WF=1.034. Variant B best params: OOS 3.238, IS 2.801, MaxDD -5.7%, WF=1.156. All 8 variants (4 per param set) beat gate. Zero negative years, zero cash months in OOS for all variants. CONFIRMED. KEY FINDING — OB filter improvement is ROBUST across splits. Canonical baseline (D) 2.610 is higher than historically quoted H026 OOS ~1.200 because the 25-asset expanded universe (with TLT, GLD, DBC, BIL alternatives) dramatically outperforms the original 11-sector ETF H026. Best Variant B (window=20, swing_len=3) takes baseline 2.610 → 3.238 (+24.1% Sharpe improvement, MaxDD -5.7% vs -6.7%). Zero cash months confirms OB filter acts as selection enhancer not regime gate on ETF universe. PRODUCTION IMPLICATION: Variant B (lenient, try top-2; BIL if neither has OB) with window=20/swing_len=3 is validated for direct integration into H026 monthly selection logic — replace current top-1 pick with OB-gated top-2 selection. H345's non-canonical result (OOS 3.337) is now corroborated by canonical OOS 3.238. Script: backtesting/daily/run_h346.py. Results: backtesting/results/h346_results.json.
 h349_status: PROPOSED (2026-06-29) — QuantaAlpha LLM-Driven Alpha Mining (Evolutionary Factor Discovery). Source: arXiv:2602.07085, GitHub: QuantaAlpha/QuantaAlpha. Open-source evolutionary framework (pip install quantalpha) using LLM trajectory-level mutation/crossover to auto-discover alpha factors. IC=0.1501 on CSI300, ARR=27.75%, MDD=7.98%. S&P500 transfer: 137% cumulative excess return over 4 years. Implementation plan: run on H198 30-stock universe with OpenAI API (~$10-30 cost), generate top-5 factor expressions as H350+ candidate stubs. Script: backtesting/daily/run_h349_quantalpha_mining.py (to be written).
 h348_status: PROPOSED (2026-06-29) — LLM-Ensemble PEAD Score Upgrade (H174 Extension). Source: ACL 2025 FINNLP Workshop "Enhancing PEAD Measurement with LLMs". FinBERT + LLM ensemble achieves 57.6-58.3% directional accuracy on earnings-day PEAD — improvement over standalone FinBERT. Direct H174 extension: add GPT-4o-mini scoring on earnings call transcript alongside 8-K text; ensemble score = 0.5×finbert_score + 0.5×llm_score; maintain thresholds score ≥ 0.18 AND surprise ≥ 0.02. Gate: OOS WR ≥ 81.8% (H174 baseline) with n ≥ 15 events. $OPENAI_API_KEY available. FMP transcript API caveat: H247 returned 403 on free plan; EDGAR MD&A section as fallback. Script: backtesting/daily/run_h348.py (to be written).
 h347_status: PROPOSED (2026-06-29) — Attention Factors for Statistical Arbitrage (Conditional Latent Factor Model). Source: arXiv:2510.11616, Epstein/Wang/Choi/Pelger (Stanford), accepted ACM ICAIF 2025. OOS Sharpe > 4.0 on US large-cap equities over 24 years; 2.3 net of transaction costs; 84% improvement over SOTA stat arb. Conditional latent factors learned via attention over firm characteristics; industry-sector-aligned loadings (interpretable); 'weak factors' detect temporal mispricing analogous to H343 OB regime mechanism. Universe overlap: same US large-cap universe as H198. Implementation: PyTorch attention model, firm characteristics from yfinance + FRED, IS 2000-2015, OOS 2016-2026. Gate: OOS Sharpe > 2.0 net of costs, MaxDD < 15%. Caveat: DL on 30 stocks = high overfitting risk; regularization + rolling-window CV required. Script: backtesting/daily/run_h347.py (to be written).
-h345_retraction_note: ⚠️ FLAGGED 2026-08-14 — see H510. Same has_bullish_ob(..., month_end, ...) as-of-date bug as H343/H344 (as_of should be the prior month-end). Not yet re-run/corrected — treat h345's OOS numbers as unverified pending a dedicated correction run.
+h345_retraction_note: ⚠️ CORRECTED 2026-08-15 — see H511. CONFIRMED via a live re-run: same has_bullish_ob(daily_data[ticker], month_end, ...) as-of-date bug as H343/H344. All 3 corrected variants still beat the 1.300 gate (range OOS 1.983-2.341) — NOT a full retraction — but every corrected variant now sits BELOW the unfiltered baseline D (2.538), reversing the original claim that the OB filter substantially improves on baseline (best corrected variant B: OOS 3.337→2.033, now below D not above it). MaxDD also worsens post-correction (all variants: -2.9%/-4.7%→-5.1%/-5.8%/-8.0%). See H511 for the full corrected backtest and script.
 h345_status: CONFIRMED (2026-06-28) — OB Filter on H026 Sector ETF Rotation. Source: H343 OB mechanism generalization test. Hypothesis: apply the same Order Block strict/lenient filter to H026 ETF rotation — at month-end, only enter the top-ranked ETF if it has an unmitigated bullish OB; else try next-ranked or hold BIL. Universe: 25-asset H026/H112 confirmed (11 sector ETFs + BIL, GLD, TLT, IEF, TIP, DBC, AGG, GDX, DBA, SLV, UNG, EWZ, IBB, XME). Signal: 12m momentum + inv_6m_vol rank composite. OB check: 30-day window, swing_length=5 (H343 reference params). IS: 2013-2020, OOS: 2021-2026. Gate: OOS Sharpe > 1.300. Script: backtesting/daily/run_h345.py. RESULTS — A (OB strict, top-1 must have OB; else BIL): IS=2.810, OOS=2.901, MaxDD=-2.9%, NegYrs=0, CashMonths=0. B (OB lenient, try top-2; BIL if neither): IS=2.825, OOS=3.337, MaxDD=-2.9%, NegYrs=0, CashMonths=0. C (OB gate, any of top-3 has OB → enter top-1; else BIL): IS=3.030, OOS=2.738, MaxDD=-4.7%, NegYrs=0, CashMonths=0. D (baseline H026 top-1 no filter): IS=3.113, OOS=2.538, MaxDD=-6.7%, NegYrs=0. WF ratios: A=1.033, B=1.181, C=0.904, D=0.815. All variants BEAT gate. CONFIRMED. KEY FINDING — OB filter on ETF rotation NEVER triggers cash (0 cash months for all variants). This contrasts with H343 (stocks) where cash triggered 5.6% of OOS months. Mechanism difference: sector ETFs are diversified instruments — even in corrections, some sectors (GLD, TLT, energy) have active bullish OBs. Rather than regime-gating (H343 stock mechanism), the OB filter here acts as SELECTION ENHANCER: among ranked ETFs, choose the one with active institutional accumulation. Best variant B (OB lenient) achieves OOS 3.337 vs baseline 2.538 (+0.8 improvement, WF=1.181). CAUTION: This IS/OOS split (2013-2020 / 2021-2026) differs from canonical H026 (2008-2017 / 2018-2026). Baseline D (2.538) is not comparable to production H026 (1.35 canonical OOS). The relative improvement (+0.8 Sharpe) is meaningful but needs replication on canonical IS/OOS before production deployment. PRODUCTION IMPLICATION: if improvement holds on canonical H026 split, Variant B (OB lenient top-2 selection) would be a direct replacement for H026's monthly selection logic — same ETF universe, same momentum ranking, add OB confirmation before entry. Results: backtesting/results/h345_results.json.
 h344_retraction_note: ⚠️ RETRACTED 2026-08-14 — see H510. CONFIRMED via a live re-run: `has_bullish_ob(daily_data[ticker], month_end, ob_window, swing_len)` passes the current holding month's own closing date as `as_of`, letting the OB detector see the entire holding month's price action before deciding whether to include a stock. Corrected as_of=prior-month-end re-run of the "best" grid params (window=20, min_filter=3, swing_len=3) collapses OOS Sharpe from 3.396 to 0.760 — below the 1.174 gate. The claimed "36/36 variants pass, robust across the grid" finding does not survive; do not use these numbers. See H510 for the corrected backtest.
 h344_status: CONFIRMED (2026-06-28) — H343 OB Filter Sensitivity Analysis (robustness check). Source: H343 returned extraordinary OOS Sharpe 3.182; this script tests whether the result is robust to parameter choices. Parameters varied: OB_WINDOW ∈ {15, 20, 30, 45}, MIN_FILTER ∈ {2, 3, 4}, SWING_LEN ∈ {3, 5, 7}. 36 total variants. Universe: H198 30-stock large-cap. IS: 2013-2020, OOS: 2021-2026. Gate: OOS Sharpe > 1.174. Script: backtesting/daily/run_h344.py. RESULTS — 36/36 variants pass the gate. OOS Sharpe range: 1.276 (worst, window=15, min_filter=2, swing_len=7) to 3.396 (best, window=20, min_filter=3, swing_len=3). H343 reference (window=30, min_filter=3, swing_len=5) → OOS 3.182. MaxDD range: -17.5% to 0.0%. Cash% range: 0% to 73.4%. WF: mostly 0.7–1.2 (all reasonable; no IS >> OOS degradation). CONFIRMED: H343 OB filter is NOT a knife-edged parameter artifact. The signal works across the full parameter grid. PARAMETER PATTERNS — (1) Shorter windows (15-20d) with short swing_len (3) give highest Sharpe but more cash months; (2) Longer windows (30-45d) have near-zero cash and more stable MaxDD; (3) Very high cash% (>50%) from aggressive (short swing_len + high min_filter) reduces Sharpe toward gate but still passes; (4) OB_WINDOW=20, MIN_FILTER=3, SWING_LEN=3 → best OOS 3.396 (vs H343's 30/3/5 → 3.182). RECOMMENDED PRODUCTION PARAMS: window=20, min_filter=3, swing_len=3 (best OOS 3.396, IS 3.129, MaxDD -5.6%, 6.2% cash months in OOS). Results: backtesting/results/h344_results.json.
@@ -11204,4 +11204,199 @@ The "original" rows reproduce H343's and H344's logged numbers almost exactly (3
 3. Given the "test 2-4 hypotheses maximum" session budget, this session stops at H509+H510 (both critical bug retractions, arguably higher-value than a routine new confirm/not-confirm) rather than pursuing the H345/H346/H355/H356 correction runs tonight.
 
 **Results file**: `backtesting/results/h510_results.json`
+
+
+## H511 — Look-Ahead Bias Audit: OB Filter `as_of` Date in H345 (H026 Sector ETF Rotation) (BUG CONFIRMED — narrowed, not retracted)
+
+**Status**: BUG CONFIRMED — corrected variants still pass gate, narrowed
+**Tested**: 2026-08-15
+**Trigger**: H510's key finding #4 — the `has_bullish_ob(daily_data[ticker], month_end, ...)` as_of-date bug is inherited by H345/H346/H355/H356, none individually re-run at the time. This is the dedicated correction run for H345.
+
+**Script**: `backtesting/daily/run_h511_h345_ob_asof_audit.py`
+**Universe**: 25-asset H026/H112 expanded universe (11 sector ETFs + BIL, GLD, TLT, IEF, TIP, DBC, AGG, GDX, DBA, SLV, UNG, EWZ, IBB, XME)
+**Signal**: 12m momentum + inv_6m_vol rank composite → OB confirmation filter (ranking unaffected; only OB as_of corrected)
+**IS/OOS**: 2013-2020 / 2021-2026 (H345's own non-canonical split, not H026 canonical); AltOOS 2013-2026 also computed
+**Gate**: OOS Sharpe > 1.300 (H345's own gate)
+
+**Look-ahead bias self-check**: Automated assertion run before any results were computed — `ob_as_of_corrected = idx[loc-1]` (prior month-end) strictly precedes `month_end` for every holding month tested. Printed "Look-ahead self-check PASSED" before backtesting.
+
+**Results**:
+
+| Variant | as_of | IS Sharpe | OOS Sharpe | AltOOS Sharpe | WF | OOS MaxDD |
+|---|---|---|---|---|---|---|
+| A (OB strict) | original (buggy) | 2.810 | 2.901 | 2.845 | 1.032 | -2.9% |
+| A (OB strict) | corrected | 2.400 | 1.983 | 2.213 | 0.826 | -5.1% |
+| B (OB lenient) | original (buggy) | 2.825 | 3.337 | 3.031 | 1.181 | -2.9% |
+| B (OB lenient) | corrected | 2.457 | 2.033 | 2.244 | 0.827 | -5.8% |
+| C (OB gate) | original (buggy) | 3.030 | 2.738 | 2.884 | 0.904 | -4.7% |
+| C (OB gate) | corrected | 2.759 | 2.341 | 2.532 | 0.848 | -8.0% |
+| D (baseline, no filter) | n/a (invariant) | 3.113 | 2.538 | 2.821 | 0.815 | -6.7% |
+
+The "original" rows reproduce H345's logged numbers exactly (A=2.901, B=3.337, C=2.738, D=2.538), confirming this script correctly replicates the original buggy logic before showing the fix.
+
+**Key findings**:
+1. **Bug confirmed but does not fully retract H345.** All three corrected OB variants (A/B/C: OOS 1.983/2.033/2.341) still clear the 1.300 gate — unlike H343/H344, the effect here is a narrowing, not a collapse.
+2. **Corrected OB variants now sit BELOW the unfiltered baseline D (2.538) except Variant C (2.341, still below D).** This is a materially different conclusion than the original claim: the original (buggy) numbers showed all three OB variants beating baseline D by a wide margin (2.7-3.3 vs 2.538); corrected, NONE of them beat D. **The OB filter, once look-ahead is removed, provides no demonstrated value over the plain momentum baseline on this universe/split** — it merely still clears the pass/fail gate because the underlying momentum signal itself is strong.
+3. **MaxDD uniformly worsens post-correction** (A: -2.9%→-5.1%, B: -2.9%→-5.8%, C: -4.7%→-8.0%), consistent with H510's finding that the OB filter's apparent drawdown-cutting behavior is itself partly a look-ahead artifact (the filter could "see" the bad month coming).
+4. **Walk-forward ratios also drop** (A: 1.032→0.826, B: 1.181→0.827, C: 0.904→0.848) — all remain in a normal/healthy range, just further from the originally claimed strength.
+
+**Production correlation estimate**: H345 is not itself in the production blend, but it shares the exact universe and base momentum signal with H026, which is 27% of the production portfolio. Since corrected Variant B (best of the three, OOS 2.033) still sits below the unfiltered baseline D, there is **no case for replacing H026's production selection logic with this OB filter** — it would very likely be highly correlated with existing H026 exposure (same universe, same ranking, filter narrows rather than diversifies the selection) while adding no measured Sharpe benefit. Correlation was not computed numerically since the strategy has no standalone case for production inclusion regardless of correlation value.
+
+**Verdict**: BUG CONFIRMED, narrowed not retracted. Gate-pass survives (best corrected: B at OOS 2.033 > 1.300), but the deeper claim — "OB filter meaningfully improves the sector-ETF momentum baseline" — does NOT survive correction. Original headline numbers (OOS 2.9-3.3) are invalid; do not use them. Corrected range is OOS 1.98-2.34, all below the unfiltered baseline of 2.538.
+
+**Recommended follow-up**: See H512-H514 for the companion corrections of H346 (canonical split of this same hypothesis), H355 (bonds), H356 (low-vol ETFs) run in the same session.
+
+**Results file**: `backtesting/results/h511_results.json`
+
+
+## H512 — Look-Ahead Bias Audit: OB Filter `as_of` Date in H346 (H026 Canonical Split Validation) (BUG CONFIRMED — narrowed, not retracted)
+
+**Status**: BUG CONFIRMED — corrected variants still pass gate, narrowed
+**Tested**: 2026-08-15
+**Trigger**: H510's key finding #4, companion to H511 — dedicated correction run for H346, which re-tested H345's OB filter on H026's canonical IS/OOS split.
+
+**Script**: `backtesting/daily/run_h512_h346_ob_asof_audit.py`
+**Universe**: Same 25-asset H026 expanded universe as H345
+**Signal**: Same composite momentum rank → OB confirmation filter, two OB param sets: `ref` (window=30, swing_len=5) and `best` (window=20, swing_len=3)
+**IS/OOS**: 2008-2017 / 2018-2026 (H026 canonical split); AltOOS 2013-2026 also computed
+**Gate**: OOS Sharpe > 1.300 (H346's own gate)
+
+**Look-ahead bias self-check**: Automated assertion run before any results were computed, identical pattern to H510/H511 — printed "Look-ahead self-check PASSED" before backtesting.
+
+**Results**:
+
+| Params | Variant | as_of | IS Sharpe | OOS Sharpe | AltOOS Sharpe | WF | OOS MaxDD |
+|---|---|---|---|---|---|---|---|
+| — | D (baseline) | n/a | 2.831 | 2.610 | 2.821 | 0.922 | -6.7% |
+| ref | A | original (buggy) | 2.749 | 2.798 | 2.845 | 1.018 | -4.0% |
+| ref | A | corrected | 1.907 | 2.191 | 2.213 | 1.149 | -5.1% |
+| ref | B | original (buggy) | 2.957 | 3.057 | 3.031 | 1.034 | -4.0% |
+| ref | B | corrected | 1.947 | 2.236 | 2.244 | 1.148 | -5.8% |
+| ref | C | original (buggy) | 2.794 | 2.671 | 2.884 | 0.956 | -4.7% |
+| ref | C | corrected | 2.480 | 2.335 | 2.532 | 0.942 | -8.0% |
+| best | A | original (buggy) | 2.616 | 2.941 | 2.823 | 1.124 | -2.9% |
+| best | A | corrected | 1.882 | 2.228 | 2.205 | 1.184 | -5.8% |
+| best | B | original (buggy) | 2.801 | 3.238 | 3.024 | 1.156 | -5.7% |
+| best | B | corrected | 2.060 | 2.144 | 2.169 | 1.041 | -9.1% |
+| best | C | original (buggy) | 2.845 | 2.735 | 2.914 | 0.961 | -6.7% |
+| best | C | corrected | 2.518 | 2.503 | 2.644 | 0.994 | -8.9% |
+
+The "original" rows reproduce H346's logged numbers exactly (D=2.610, best_B=3.238, ref_B=3.057), confirming this script correctly replicates the original buggy logic before showing the fix.
+
+**Key findings**:
+1. **Bug confirmed but does not retract H346.** All six corrected OB variants (range OOS 2.144-2.503) still clear the 1.300 gate.
+2. **All six corrected variants now sit at or below the unfiltered baseline D (2.610)**, mirroring H511's finding exactly. Best-performing corrected variant is best_C at OOS 2.503 — still below D. The originally claimed "+24.1% Sharpe improvement over baseline" (best_B: 2.610→3.238) does not survive — corrected, best_B is 2.610→2.144, a **decline**, not an improvement.
+3. **MaxDD worsens substantially post-correction**, most severely for the lenient variant B: ref_B -4.0%→-5.8%, best_B -5.7%→-9.1%. The claimed MaxDD *improvement* from the OB filter (D -6.7% vs best_B -5.7%) reverses post-correction (D -6.7% vs best_B corrected -9.1% — now WORSE than baseline).
+4. **Canonical-split result corroborates H511's non-canonical-split finding**: both splits show the same qualitative pattern (gate technically clears, but filter adds no value over baseline and MaxDD gets worse), strengthening confidence this is a general property of the OB filter on this universe/signal rather than a split-specific artifact.
+5. **"Zero cash months, zero negative years" claims remain true** post-correction (unaffected by the as_of bug — cash/negative-year counts were already computed correctly).
+
+**Production correlation estimate**: Same reasoning as H511 — H346 is a canonical-split validation of the identical H026 universe/signal that is 27% of the production portfolio. Since every corrected variant sits at or below the unfiltered baseline, and MaxDD is uniformly worse, there is **no case for production adoption of this OB filter**, so no separate correlation estimate is warranted (would only demonstrate high correlation to existing H026 exposure with no offsetting benefit).
+
+**Verdict**: BUG CONFIRMED, narrowed not retracted. Gate-pass survives on all 6 variants, but "OB filter improves the H026 canonical baseline" is corrected from a claimed +24% Sharpe gain to a roughly flat-to-negative effect once look-ahead is removed, with drawdown getting meaningfully worse rather than better. H345's "canonical result corroborates non-canonical result" framing in the original entry is technically still true post-correction (both splits behave the same way), but the direction of that corroborated finding has flipped from positive to negative.
+
+**Recommended follow-up**: See H513/H514 for H355 (bonds) and H356 (low-vol ETFs) corrections. Given H511+H512 both show the OB filter underperforming its own unfiltered baseline once corrected, any future OB-filter work on the H026 ETF universe specifically should be treated as closed pending a genuinely different filter design — simply re-tuning window/swing_len parameters within the current `has_bullish_ob` mechanism is unlikely to recover the originally claimed edge.
+
+**Results file**: `backtesting/results/h512_results.json`
+
+
+## H513 — Look-Ahead Bias Audit: OB Filter `as_of` Date in H355 (H045 Bond ETF Universe) (BUG CONFIRMED — RETRACTED)
+
+**Status**: BUG CONFIRMED — H355 RETRACTED
+**Tested**: 2026-08-15
+**Trigger**: H510's key finding #4, dedicated correction run for H355 (bond ETF universe).
+
+**Script**: `backtesting/daily/run_h513_h355_ob_asof_audit.py`
+**Universe**: 7-asset H045 bond universe (SHY/IEI/IEF/TLT/TIP/HYG/LQD)
+**Signal**: 12m momentum top-2 EW (H045 canonical) → OB confirmation filter, two OB param sets: `best` (window=20, swing_len=3) and `ref` (window=30, swing_len=5)
+**IS/OOS**: 2007-2016 / 2017-2026 (H355's own split); AltOOS 2013-2026 also computed
+**Gate**: OOS Sharpe > 1.451 (H045 1.351 + 0.10, H355's own gate)
+
+**Look-ahead bias self-check**: Automated assertion run before any results were computed, identical pattern to H510/H511/H512 — printed "Look-ahead self-check PASSED" before backtesting.
+
+**Results**:
+
+| Params | Variant | as_of | IS Sharpe | OOS Sharpe | AltOOS Sharpe | WF | OOS MaxDD |
+|---|---|---|---|---|---|---|---|
+| — | D (baseline) | n/a | 1.286 | 1.112 | 1.028 | 0.865 | -10.8% |
+| best | A | original (buggy) | 1.915 | 1.421 | 1.451 | 0.742 | -4.4% |
+| best | A | corrected | 0.783 | 0.705 | 0.579 | 0.900 | -11.0% |
+| best | B | original (buggy) | 1.675 | 1.522 | 1.399 | 0.909 | -5.0% |
+| best | B | corrected | 1.091 | 0.967 | 0.916 | 0.886 | -13.1% |
+| best | C | original (buggy) | 1.596 | 1.310 | 1.203 | 0.821 | -8.3% |
+| best | C | corrected | 1.144 | 1.028 | 0.974 | 0.899 | -11.1% |
+| ref | A | original (buggy) | 1.813 | 1.372 | 1.466 | 0.757 | -6.8% |
+| ref | A | corrected | 0.723 | 0.822 | 0.674 | 1.137 | -6.3% |
+| ref | B | original (buggy) | 1.755 | 1.470 | 1.431 | 0.838 | -7.5% |
+| ref | B | corrected | 1.062 | 0.994 | 0.942 | 0.936 | -12.8% |
+| ref | C | original (buggy) | 1.615 | 1.399 | 1.381 | 0.866 | -8.4% |
+| ref | C | corrected | 1.110 | 1.032 | 0.927 | 0.930 | -12.7% |
+
+The "original" rows reproduce H355's logged numbers exactly (D=1.112, best_B=1.522, ref_B=1.470), confirming this script correctly replicates the original buggy logic before showing the fix.
+
+**Key findings**:
+1. **Bug confirmed, full retraction.** ALL SIX corrected OB variants fail the 1.451 gate (range OOS 0.705-1.032). Both previously-CONFIRMED variants collapse: best_B 1.522→0.967 (-36%), ref_B 1.470→0.994 (-32%).
+2. **Corrected variants also fall below the unfiltered baseline D (1.112)** in 5 of 6 cases (best_C at 1.028 and ref_C at 1.032 come closest but still miss both gate and baseline). The originally claimed "+37% Sharpe improvement over baseline" is fully reversed — corrected best_B (0.967) is actually WORSE than baseline D (1.112).
+3. **MaxDD claim inverts completely.** Original claim: "MaxDD halved: -10.8% baseline → -5.0% best_B." Corrected: best_B MaxDD is -13.1%, WORSE than the -10.8% baseline, not better. This is the same mechanism H510 identified for H343/H344 — the OB filter's apparent drawdown protection was an artifact of seeing the bad month's own price action before deciding whether to hold cash.
+4. **Negative-year count worsens for the strict variant**: best_A corrected shows 2 negative years (vs 1 for baseline and vs 1 originally claimed for best_A itself) — the strict filter is actively harmful during the 2022 bond rate-shock period once look-ahead is removed, the opposite of the original claim that "OBs don't hold during rate hikes → filter routes to SHY."
+5. **This is a full retraction pattern, matching H343/H344 rather than H345/H346.** Of the four hypotheses in this correction batch, H355 (bonds) is the closest analog to the original H343/H344 stock-momentum bug in terms of magnitude of collapse.
+
+**Production correlation estimate**: N/A — no corrected variant passes the gate, so there is no candidate strategy to estimate production correlation for. H045 (21% of production portfolio) continues to run its original unfiltered top-2 momentum selection, which is unaffected by this bug (the bug is confined to H355's OB filter add-on, never adopted into production).
+
+**Verdict**: BUG CONFIRMED. H355 RETRACTED IN FULL. Every previously-reported number (best_B OOS 1.522, ref_B OOS 1.470, and the "MaxDD halved" / "+37% Sharpe" claims) is invalid. Corrected numbers show the OB filter provides no benefit and materially worse drawdown control on the H045 bond universe once look-ahead is removed.
+
+**Recommended follow-up**: Do not reapply the current `has_bullish_ob` OB filter mechanism to bond ETFs without a fundamentally different signal design — window/swing_len re-tuning within this batch already covered both of H355's original param sets and both failed. See H514 for the low-vol ETF (H356) correction.
+
+**Results file**: `backtesting/results/h513_results.json`
+
+
+## H514 — Look-Ahead Bias Audit: OB Filter `as_of` Date in H356 (H354 Low-Volatility ETF Universe) (BUG CONFIRMED — RETRACTED)
+
+**Status**: BUG CONFIRMED — H356 RETRACTED
+**Tested**: 2026-08-15
+**Trigger**: H510's key finding #4, dedicated correction run for H356 (low-vol ETF universe) — last of the four flagged hypotheses.
+
+**Script**: `backtesting/daily/run_h514_h356_ob_asof_audit.py`
+**Universe**: 8-asset H354 low-vol ETF universe (USMV/SPLV/XLU/SPHD/EFAV/EEMV/ACWV + BIL)
+**Signal**: Pure 12m momentum top-1 (H354-C formula) → OB confirmation filter, two OB param sets: `best` (window=20, swing_len=3) and `ref` (window=30, swing_len=5)
+**IS/OOS**: 2013-2020 / 2021-2026 (H356's own split); AltOOS 2013-2026 also computed
+**Gate**: OOS Sharpe > 1.735 (primary, H354-C canonical) / partial credit at > 1.535 with MaxDD improving ≥2pp (H356's own dual-gate structure)
+
+**Look-ahead bias self-check**: Automated assertion run before any results were computed, identical pattern to H510-H513 — printed "Look-ahead self-check PASSED" before backtesting.
+
+**Results**:
+
+| Params | Variant | as_of | IS Sharpe | OOS Sharpe | AltOOS Sharpe | WF | OOS MaxDD | Neg Yrs |
+|---|---|---|---|---|---|---|---|---|
+| — | D (baseline) | n/a | 1.561 | 1.339 | 1.461 | 0.858 | -11.3% | 0 |
+| best | A | original (buggy) | 2.020 | 1.877 | 1.954 | 0.929 | -11.3% | 0 |
+| best | A | corrected | 0.840 | 0.804 | 0.825 | 0.957 | -20.7% | 2 |
+| best | B | original (buggy) | 2.053 | 1.920 | 1.990 | 0.935 | -11.3% | 0 |
+| best | B | corrected | 0.968 | 0.937 | 0.952 | 0.968 | -16.6% | 1 |
+| best | C | original (buggy) | 2.024 | 1.740 | 1.893 | 0.860 | -11.3% | 0 |
+| best | C | corrected | 1.306 | 1.227 | 1.269 | 0.940 | -15.3% | 0 |
+| ref | A | original (buggy) | 2.196 | 2.312 | 2.241 | 1.053 | -11.3% | 0 |
+| ref | A | corrected | 0.676 | 0.773 | 0.719 | 1.143 | -23.7% | 1 |
+| ref | B | original (buggy) | 2.250 | 2.268 | 2.243 | 1.008 | -11.3% | 0 |
+| ref | B | corrected | 0.675 | 0.907 | 0.777 | 1.344 | -18.1% | 1 |
+| ref | C | original (buggy) | 2.151 | 1.902 | 2.030 | 0.884 | -11.3% | 0 |
+| ref | C | corrected | 1.168 | 1.027 | 1.108 | 0.879 | -20.3% | 1 |
+
+The "original" rows reproduce H356's logged numbers exactly (D=1.339, ref_A=2.312, best_B=1.920), confirming this script correctly replicates the original buggy logic before showing the fix.
+
+**Key findings**:
+1. **Bug confirmed, full retraction — the most severe collapse of the four hypotheses in this batch.** ALL SIX corrected OB variants fail both the primary (1.735) and partial (1.535) gates by a wide margin (range OOS 0.773-1.227). The headline claimed result (ref_A OOS 2.312) corrects to 0.773 — a 66% collapse.
+2. **All six corrected variants fall well below the unfiltered baseline D (1.339)**, the same pattern as H355. There is no remaining case that the OB filter adds value on this universe once look-ahead is removed.
+3. **MaxDD claim inverts, and severely so.** Original entry's KEY FINDING 1 explicitly stated "MaxDD unchanged: OB filter improves Sharpe but does NOT reduce MaxDD (-11.3% across all variants)." Corrected, MaxDD gets dramatically WORSE, not merely unchanged: ref_A -11.3%→-23.7%, best_A -11.3%→-20.7%. The filter's apparent neutrality on MaxDD in the original (buggy) run was itself concealing a look-ahead effect that, once corrected, actively hurts drawdown.
+4. **Negative-year counts appear where the original claimed zero**: best_A corrected shows 2 negative years, ref_A/ref_B/ref_C corrected each show 1 — versus 0 for baseline and 0 originally claimed for every variant.
+5. **The original entry's KEY FINDING 2 ("ref params reversed from all prior OB tests, larger window suits slower low-vol instruments") does not survive.** Both param sets collapse similarly post-correction; there is no evidence the `ref` params (window=30) are genuinely better-suited to this universe — the original apparent edge for `ref_A` (2.312 vs best_A's 1.877) was itself inflated by more look-ahead exposure from the larger window, not a real structural fit.
+6. **The original entry's KEY FINDING 3 (Corr(SPY) drops from 0.854 to 0.559 for ref_A) was not re-verified in this correction** — SPY correlation was not recomputed for corrected variants since no corrected variant passes gate, making the diversification claim moot regardless of its correlation value.
+7. **Note on the original entry's own logged caveat**: H356's original entry already flagged its own baseline-D-vs-H354-canonical discrepancy (1.339 vs 1.735) as unresolved. That discrepancy is orthogonal to the as_of bug (baseline D never calls `has_bullish_ob`) and remains unresolved here — flagged for a future dedicated audit of H354/H356 baseline alignment, out of scope for this correction run.
+
+**Production correlation estimate**: N/A — no corrected variant passes either gate, so there is no candidate strategy to estimate production correlation for. H354 (not itself in the production blend, but philosophically adjacent to the low-vol family) is unaffected since its own canonical run does not use the OB filter.
+
+**Verdict**: BUG CONFIRMED. H356 RETRACTED IN FULL. Every previously-reported number (ref_A OOS 2.312, "MaxDD unchanged," "ref params reversed pattern," "Corr(SPY) drops to 0.559") is invalid or unverifiable post-correction. This is the most severe collapse of the four H345/H346/H355/H356 corrections — consistent with H356 also having used the largest OB windows (up to 30 days) relative to its monthly rebalance frequency, maximizing the look-ahead window's exposure to the holding month's own price action.
+
+**Recommended follow-up**: Low-vol ETF family's OB-filter angle is now closed (matches the broader H507/H508 "stock-level low-vol anomaly + OB filter" closure precedent, though via a different bug). With H511/H512 (H026: narrowed, no baseline-beating value), H513 (H045: retracted), and H514 (H354: retracted) all complete, the full blast radius flagged in H510 is resolved. Overall pattern across the six hypotheses now audited for this bug class (H343/H344/H355/H356 fully retracted; H345/H346 narrowed but not retracted): the OB `as_of` bug's damage correlates with how large the OB detection window is relative to the rebalance frequency, and with how much of the originally claimed edge depended on drawdown-avoidance (MaxDD claims are the most consistently reversed finding across all six).
+
+**Results file**: `backtesting/results/h514_results.json`
 
