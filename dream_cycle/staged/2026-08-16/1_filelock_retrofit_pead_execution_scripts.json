@@ -10,5 +10,5 @@
   "target_file": "/workspace/agent/backtesting/paper_trading/pead_gap_open.py",
   "content": "Proposed change (applies the same pattern to 5 files — flagging for Kevin review rather than auto-applying since these are live order-submission and build-phase scripts):\n\n1. pead_gap_open.py, pead_open.py, pead_exits.py, pead_gap_exits.py: wrap the entire run body in `from filelock import FileLock, Timeout; lock = FileLock(SCRIPT_DIR / '.<name>.lock', timeout=5)` and run the existing logic inside `with lock:`; on `Timeout`, log 'lock held by another process, skipping this run' and exit 0 rather than proceeding. Requires `pip install filelock` in venv/ first (not done yet — verify PyPI existence already done, install requires either an interactive session or explicit Kevin approval per the off-hours install policy).\n2. Dream-cycle build phase (whatever script/task runner executes staged-proposal application): wrap the apply-loop in the same FileLock pattern, combined with the existing grep-c idempotency check already documented in task-registry.md, so a compaction-resumed session can't re-enter the append step mid-run.\n\nFull design rationale and code example: wiki/trading/paper-trading/idempotency-concurrency-control.md (Pattern 1).",
   "action": "patch",
-  "apply_status": "pending"
+  "apply_status": "flagged"
 }
