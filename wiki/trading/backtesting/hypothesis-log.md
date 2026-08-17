@@ -11475,4 +11475,32 @@ The "original" rows reproduce H356's logged numbers exactly (D=1.339, ref_A=2.31
 
 **Recommended follow-up**: Rebuild `backtest_pair_pctile()`'s P&L calculation using actual leg notional (long/short $1 of leg A vs `beta_t` $ of leg B, mark-to-market both legs' price changes) instead of the Kalman-residual-delta proxy, then re-run before this graduates past PARTIAL. If the dollar-P&L version still clears the gate with plausible MaxDD, this is the strongest ETF-pairs candidate of the whole H246/H271/H307/H515/H516 line and worth a genuine production-correlation study.
 
+---
+
+## H517 — OPT LLM Sentiment Scoring Upgrade for H174 PEAD Pipeline: PROPOSED (2026-08-17)
+
+**Source**: arXiv:2412.19245 (Kirtac & Germano) — *Sentiment Trading with Large Language Models*
+
+**Mechanism**: The paper benchmarks FinBERT, BERT, OPT, and the Loughran-McDonald dictionary on 965,375 US financial news articles (2010-2023) for next-day return prediction. OPT scored highest on both classification accuracy (74.4% vs FinBERT's 72.2%) and long-short strategy Sharpe (3.05 vs FinBERT's 2.07) — a 47% Sharpe improvement over the exact scorer H163/H174 currently use.
+
+**Universe / gate**: Same H163/H174 30-stock 8-K event set. Gate: OOS WR > 81.8% AND MeanRet > 6.89% AND n >= 20 events (H174's existing gate).
+
+**Variants**:
+- A: OPT sentiment score alone, threshold re-calibrated to OPT's score distribution
+- B: OPT score replacing FinBERT in H174's dual filter (OPT >= threshold AND surprise >= 0.02)
+- C: FinBERT x OPT ensemble (product or average of both scores)
+- D: OPT score >= threshold AND FinDPO score >= 0.50 (three-way comparison once H481/FinDPO is built)
+
+**Caveat**: The paper's dataset is general financial news, not EDGAR 8-K press releases — H163/H174's domain is narrower, so the reported 3.05 Sharpe is a reason to test, not a result to cite directly; transfer needs validation on the same OOS event set.
+
+**Distinct from H481 (FinDPO)**: H481 targets calibration (continuous vs binary scores from a DPO-aligned LLM); H517 targets raw signal quality via a different base model architecture (OPT) scoring higher on the same sentiment-classification task. Complementary upgrade paths, not competing.
+
+**Implementation notes**: Verify exact OPT model name/checkpoint on HuggingFace before install (hallusquatting defense per standing instructions); run `pip-audit` after any new model install; if both H481 and H517 get built, run a single 3-way bake-off (FinBERT baseline vs FinDPO vs OPT) rather than two isolated backtests.
+
+**Prior art**: H174 CONFIRMED; H163 CONFIRMED (FinBERT baseline); H481 STAGED (FinDPO continuous scoring, complementary); H168 NOT CONFIRMED (speaker-weighted FinBERT); H317 NOT CONFIRMED (FinBERT + EPS filter reduces n below gate).
+
+**Status**: PROPOSED — data pipeline and OPT model integration not yet built.
+
+**Script**: backtesting/daily/run_h517.py
+
 **Results file**: `backtesting/results/h516_results.json`
