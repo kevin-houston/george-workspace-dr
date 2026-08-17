@@ -1,10 +1,10 @@
 ---
 added: 2026-06-20
-updated: 2026-07-02
+updated: 2026-08-16 (retraction sync — H355 section)
 category: algorithms
 status: active
 production: H045 (21% of portfolio)
-related_hypotheses: H045 PRODUCTION, H355 CONFIRMED (OB filter), H283 NOT CONFIRMED, H314 NOT CONFIRMED, H315 NOT CONFIRMED
+related_hypotheses: H045 PRODUCTION, H355 RETRACTED 2026-08-15 (see H513; OB filter), H283 NOT CONFIRMED, H314 NOT CONFIRMED, H315 NOT CONFIRMED
 ---
 
 # Fixed Income / Bond ETF Rotation
@@ -166,44 +166,48 @@ The 2022 exception (positive correlation during rate shocks) is the known failur
 
 ---
 
-## H355 — OB Filter on Bond ETF Universe (2026-07-02, CONFIRMED)
+## H355 — OB Filter on Bond ETF Universe (2026-07-02; RETRACTED 2026-08-15, see H513)
 
-The same Order Block mechanism that improved equity ETF rotation (H345/H346) was applied to the H045 bond universe. **CONFIRMED** — OOS Sharpe improved from 1.112 to 1.522, with MaxDD halved.
+> **⚠ RETRACTED 2026-08-15 (see H513).** This section used the same OB `as_of` look-ahead bug as H343/H510 (`has_bullish_ob(daily_data[ticker], month_end, ...)` sees the whole holding month before the strategy decides whether to include the ticker). Corrected re-run: **all 6 variants fail the 1.451 gate.** best_B corrects OOS 1.522→0.967 and ref_B corrects OOS 1.470→0.994. The "MaxDD halved to -5.0%" claim reverses to **-13.1% corrected — worse than the -10.8% baseline**, not an improvement. Do not deploy the production path below; table and code left as historical record only.
+
+The same Order Block mechanism that improved equity ETF rotation (H345/H346) was applied to the H045 bond universe. **Originally claimed CONFIRMED** — OOS Sharpe improved from 1.112 to 1.522, with MaxDD halved. **This does not survive correction — see banner above.**
 
 ### H355 Results
 
 | Param / Variant | OOS Sharpe | OOS MaxDD | Notes |
 |-----------------|------------|-----------|-------|
 | Baseline D (H045, no filter) | 1.112 | -10.8% | — |
-| best_A (window=20, strict: both top-2 must pass) | 1.418 | -5.0% | Below gate |
-| **best_B (window=20, lenient: ≥1 of top-2 passes)** | **1.522** | **-5.0%** | **CONFIRMED** |
-| best_C (gate: any of top-3 → top-2) | 1.391 | -7.2% | Below gate |
-| ref_B (window=30, swing=5, lenient) | 1.470 | -8.1% | CONFIRMED |
+| ~~best_A (window=20, strict: both top-2 must pass)~~ | ~~1.418~~ | ~~-5.0%~~ | Below gate (orig.) |
+| ~~best_B (window=20, lenient: ≥1 of top-2 passes)~~ | ~~1.522~~ | ~~-5.0%~~ | ~~CONFIRMED~~ (orig., invalid) |
+| ~~best_C (gate: any of top-3 → top-2)~~ | ~~1.391~~ | ~~-7.2%~~ | Below gate (orig.) |
+| ~~ref_B (window=30, swing=5, lenient)~~ | ~~1.470~~ | ~~-8.1%~~ | ~~CONFIRMED~~ (orig., invalid) |
 
-**Gate**: OOS Sharpe > 1.451 (H045 baseline 1.351 + 0.10 improvement)
+**Corrected (H513, `as_of`=prior-month-end): best_B OOS 1.522→0.967, ref_B OOS 1.470→0.994 — all 6 variants fail the 1.451 gate. MaxDD corrects to -13.1%, worse than the -10.8% baseline, not halved.**
 
-### Why OB Works on Bond Universe
+**Gate**: OOS Sharpe > 1.451 (H045 baseline 1.351 + 0.10 improvement) — not cleared by any corrected variant.
 
-The mechanism differs from equity ETFs:
+### Why OB Was Believed To Work on Bond Universe (original reasoning, now moot)
 
-- **Bull market environment**: Bond OBs form when institutions accumulate duration ahead of rate cuts. Active OBs on TLT/IEF signal a rally phase — lenient filter picks the best OB-confirmed bond.
-- **2022 rate shock**: Rising rates "mitigate" OBs on long-duration ETFs as price breaks below institutional accumulation zones. The filter routes to SHY (the safe haven proxy) instead of following momentum into still-falling bonds.
-- **MaxDD halved (-10.8% → -5.0%)**: OB filter fires before the full duration drawdown accumulates; equity ETF OB filter's zero-cash behavior is replaced here by SHY routing during rate stress.
+The reasoning below described the *original, invalidated* results and is kept only to show why the uncorrected finding looked plausible at the time:
 
-### H355 vs H345/H346 Comparison
+- ~~**Bull market environment**: Bond OBs form when institutions accumulate duration ahead of rate cuts. Active OBs on TLT/IEF signal a rally phase — lenient filter picks the best OB-confirmed bond.~~
+- ~~**2022 rate shock**: Rising rates "mitigate" OBs on long-duration ETFs as price breaks below institutional accumulation zones. The filter routes to SHY (the safe haven proxy) instead of following momentum into still-falling bonds.~~
+- ~~**MaxDD halved (-10.8% → -5.0%)**: OB filter fires before the full duration drawdown accumulates; equity ETF OB filter's zero-cash behavior is replaced here by SHY routing during rate stress.~~ Corrected: MaxDD is *worse* than baseline (-13.1% vs -10.8%) — the opposite of this claim.
 
-| Feature | H345/H346 (Equity ETFs) | H355 (Bond ETFs) |
+### H355 vs H345/H346 Comparison (ORIGINAL — invalidated)
+
+| Feature | H345/H346 (Equity ETFs, original) | H355 (Bond ETFs, original) |
 |---------|--------------------------|------------------|
 | Best params | window=20, swing_len=3 | window=20, swing_len=3 |
 | Filter behavior | Selection enhancer (0 cash months) | Routes to SHY during stress |
-| MaxDD improvement | -6.7% → -2.9% | -10.8% → -5.0% |
-| OOS Sharpe gain | 2.538 → 3.238 (+28%) | 1.112 → 1.522 (+37%) |
+| MaxDD improvement | ~~-6.7% → -2.9%~~ | ~~-10.8% → -5.0%~~ |
+| OOS Sharpe gain | ~~2.538 → 3.238 (+28%)~~ | ~~1.112 → 1.522 (+37%)~~ |
 
-**Same best params (window=20, swing_len=3) across all three asset classes** (stocks H344, equity ETFs H346, bond ETFs H355) — suggests a universal market microstructure signature rather than universe-specific tuning.
+~~**Same best params (window=20, swing_len=3) across all three asset classes** (stocks H344, equity ETFs H346, bond ETFs H355) — suggests a universal market microstructure signature rather than universe-specific tuning.~~ **This claim does not survive correction.** All three families (H344; H345/H346; H355/H356) share the same OB `as_of` look-ahead bug, not a genuine universal signature — see H511/H512/H513/H514 corrected figures: H345/H346 sit at or below their unfiltered baselines post-correction, and H355 (like H356) fails its gate outright. The "same params across asset classes" observation reflects a shared bug artifact, not a validated cross-asset pattern.
 
-### Production Path
+### Production Path (NOT VALID — see retraction banner above)
 
-H355 best_B is production-ready as an **upgrade to the H045 monthly rebalancer**:
+~~H355 best_B is production-ready as an **upgrade to the H045 monthly rebalancer**~~ — this path is retracted; H045's existing monthly rebalancer (no OB filter) remains the production version:
 1. At each month-end, run OB detection on the top-2 momentum picks
 2. If ≥1 has a bullish OB: enter those (with unfiltered fill for 2nd slot)
 3. If 0 pass OB: hold SHY (already in universe as cash proxy)

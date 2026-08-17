@@ -988,3 +988,24 @@ Pages created: 1 (tools/moss-tts-nano-notes.md). Pages updated: 1 (index.md). Ke
 
 ## [2026-08-12] ingest | Diverse Approaches to Optimal Execution Schedule Generation (de Witt & Pakkanen, 2026)
 Pages created: 1 (trading/sources/de-witt-pakkanen-2026-map-elites-execution.md). Pages updated: 2 (index.md, trading/backtesting/hypothesis-log.md — H504 STUB entry). Kevin shared arXiv:2601.22113 with "Note and test this." PPO-CNN execution-scheduling RL paper, not a signal/alpha paper — same "not relevant at our trade sizes, we're price-takers" conclusion already on record for Kearns & Shi (2025). Logged as H504 (scope-mismatch stub, no backtest run) with a scoped-down empirical-slippage-check alternative offered instead of building a disproportionate RL infrastructure project.
+
+## [2026-08-16] lint | Health check
+Issues found: 15. Auto-fixed: 13. Needs review: 2 (plus a carryover set from the 2026-08-09 lint pass above, still unresolved).
+
+**Orphan pages**: 0. Cross-linking discipline holds — 326 pages, every one reachable via inbound links.
+
+**Index gaps (13, all auto-fixed)**: `wiki/index.md`'s Research Logs section was missing dedicated entries for 5 fully-uncatalogued dates (2026-08-11/13/14/15/16) and had only indirect (inline-tag) coverage for 3 more (2026-08-09/10/12, left as-is — the inline tags already provide discoverability). Also missing: `trading/data-sources/options-flow-positioning-data.md`, `trading/paper-trading/idempotency-concurrency-control.md`, `trading/prediction-markets/backtesting-frameworks.md`, `trading/sources/llm-embeddings-vs-price-stock-clustering-2025.md`, `tools/nautilus-trader.md`. All 13 added with one-line summaries in their correct sections.
+
+**Contradiction / stale-content [live production-risk bug, highest priority] — auto-fixed, not just flagged**: the 2026-08-13/14/15 look-ahead-bias retraction chain (H509-H514, root cause: `has_bullish_ob(daily_data[ticker], month_end, ...)` passes the current holding month's own close as `as_of`) was fully documented in `trading/backtesting/hypothesis-log.md` and `CLAUDE.local.md` but had NOT propagated to 4 downstream pages Kevin/George would actually consult for production decisions — all 4 still presented retracted/corrected hypotheses as CONFIRMED with the original inflated numbers:
+1. `trading/index.md` — H411/H416/H417/H418 cheap-stock family (stale "OOS 5.855" claim) and H355 (stale "1.112→1.522, MaxDD halved" claim).
+2. `trading/algorithms/smart-money-concepts-ict.md` — all 6 affected hypotheses (H343/H344/H345/H346/H355/H356); added a retraction-notice banner, corrected the H346 section header, and rewrote the "look-ahead note" that had incorrectly claimed the filter was not look-ahead biased.
+3. `trading/algorithms/low-volatility-etf-rotation.md` — H356 section and Production Assessment table still showed the original OOS 2.312/MaxDD -11.3%-unchanged claim; added retraction banner with corrected OOS 0.773 / MaxDD -15.3% to -23.7%, struck through the invalidated comparison-table figures.
+4. `trading/algorithms/fixed-income-bond-rotation.md` — H355 results table, mechanism explanation, and the "H355 vs H345/H346 Comparison" table's "universal market microstructure signature" claim; corrected figures added, invalidated claims struck through, comparison-table claim explicitly noted as not surviving correction (all three families share the same bug, not a genuine cross-asset pattern).
+
+Given this was a mechanical propagate-the-already-established-correction fix (not a judgment call about which of two numbers is right), treated as auto-fix rather than flag-for-review, per the skill's "mechanical issues... fix immediately" guidance.
+
+**Needs review (flagged for Kevin)**:
+1. `people/yasemin-saltuk.md` has 2012-era contact info (phone/email) with no `updated:` frontmatter date — minor PII-retention question, not auto-resolved.
+2. Thin non-trading coverage: `orgs/` (1 page), `people/` (3 pages); 5 arXiv papers cited inline in concept pages (`esg-tail-risk-stress-resilience-2026.md` et al.) without dedicated `sources/` summary pages of their own.
+
+**Not re-litigated this pass**: the large "Needs review" list from the 2026-08-09 lint entry above (H417/H418 hypothesis-log staleness — since further compounded by the 2026-08-16 fix above but the log's canonical entry itself is a separate, older bug; production-portfolio description staleness in paper-trading pages; H026 Sharpe/MaxDD 3-way conflict; Kalshi/Alpaca/IEX/FMP numeric contradictions; model-version staleness; duplicate hypothesis-number assignment; DR/backup doc inconsistencies) remains open — none of those were touched this session; flagging their continued open status rather than re-describing them.

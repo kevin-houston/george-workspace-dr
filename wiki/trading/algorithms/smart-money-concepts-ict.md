@@ -1,12 +1,22 @@
 ---
 title: Smart Money Concepts (ICT) — Order Blocks, FVGs, BOS/CHoCH as Trading Signals
 added: 2026-06-29
-updated: 2026-07-03
-hypothesis: H343 CONFIRMED (OOS 3.182), H344 CONFIRMED (36/36 params pass), H345 CONFIRMED (OOS 3.337), H346 CONFIRMED (OOS 3.238), H355 CONFIRMED (OOS 1.522), H356 CONFIRMED (OOS 2.312)
+updated: 2026-08-16 (retraction sync — original page body below predates the 2026-08 look-ahead bug audit; see warning banner)
+hypothesis: H343 RETRACTED 2026-08-14 (see H510; was OOS 3.182), H344 RETRACTED 2026-08-14 (see H510; was 36/36 params pass, best OOS 3.396), H345 CORRECTED/narrowed 2026-08-15 (see H511; was OOS 3.337), H346 CORRECTED/narrowed 2026-08-15 (see H512; was OOS 3.238), H355 RETRACTED 2026-08-15 (see H513; was OOS 1.522 — this hypothesis's detail lives in fixed-income-bond-rotation.md), H356 RETRACTED 2026-08-15 (see H514; was OOS 2.312 — detail lives in low-volatility-etf-rotation.md)
 source: joshyattridge/smart-money-concepts (GitHub); ICT methodology (retail; no peer review)
 ---
 
 # Smart Money Concepts (ICT) Methodology
+
+> **⚠ RETRACTION NOTICE (added 2026-08-16, covers the whole page below)**
+> The core `has_bullish_ob(daily_data[ticker], month_end, ...)` detector used throughout this page passes the **current holding month's own closing date** as `as_of`, letting the OB detector see the whole holding month before deciding whether to include a stock — a look-ahead bug (root-caused in H510, audited 2026-08-14/15). This invalidates the "not look-ahead biased" reasoning at the Order Blocks section below, which only checked that `swing_highs_lows` doesn't peek forward *within* its window, never that the window's end date is the holding month's own close.
+>
+> Corrected status of every hypothesis on this page:
+> - **H343/H344 (stock momentum OB filter): RETRACTED (H510).** Corrected OOS Sharpe collapses to 1.099 (H343 reference) and 0.760 (H344 grid-best) — both now below the 1.174 gate. The "regime detector" MaxDD effect was also an artifact (H343 corrected MaxDD -24.6%, not -5.4%).
+> - **H345/H346 (ETF rotation OB filter): CORRECTED, narrowed not retracted (H511/H512).** Corrected variants still clear their gates but every one now sits at or below the unfiltered baseline — not the claimed improvement. H345 best corrects OOS 3.337→2.033; H346 best corrects OOS 3.238→2.144.
+> - **H355/H356 (bond and low-vol-ETF OB filter, detailed on other pages): RETRACTED (H513/H514).**
+>
+> See `wiki/trading/backtesting/hypothesis-log.md` for full detail. The tables and code below are left as historical record of the (invalidated) original methodology; treat all OOS Sharpe/MaxDD figures below as superseded.
 
 **Library**: [joshyattridge/smart-money-concepts](https://github.com/joshyattridge/smart-money-concepts) | **Stars**: 1,788 | `pip install smartmoneyconcepts`
 
@@ -126,7 +136,7 @@ def has_bullish_ob(daily_df: pd.DataFrame, as_of: pd.Timestamp,
     return len(bull) > 0
 ```
 
-**Look-ahead note**: `swing_highs_lows` looks N candles before AND after a potential swing. Within a historical window ending at `as_of`, this is NOT look-ahead bias (all candles are historical). But it means OBs are confirmed only after `swing_len` days have passed since the swing — data within the last `swing_len` candles may not produce swing labels.
+**Look-ahead note (CORRECTED 2026-08-16 — see retraction notice at top of page)**: `swing_highs_lows` itself doesn't peek forward within its window — that part of the original reasoning holds. But the call site (`has_bullish_ob(daily_data[ticker], month_end, ...)`) passes the holding month's own closing date as `as_of`, so the detector sees the entire holding month before the strategy decides whether to include the stock for that same month. That IS look-ahead bias, and it was missed because nobody checked the window's *end date* against the decision date — only whether the window peeked forward internally. Correct usage is `as_of=prior-month-end`.
 
 ### Swing Highs and Lows
 
@@ -203,7 +213,7 @@ The OB filter could replace H198's entry logic in the current production portfol
 
 ---
 
-## H346: Canonical H026 Validation (CONFIRMED)
+## H346: Canonical H026 Validation (CORRECTED — see retraction notice at top of page)
 
 H345 was tested on a non-canonical split (IS 2013-2020 / OOS 2021-2026). H346 replicated on the canonical H026 split (IS 2008-2017 / OOS 2018-2026).
 

@@ -2,8 +2,8 @@
 added: 2026-07-02
 category: algorithms
 status: active
-related_hypotheses: H354 CONFIRMED, H355 CONFIRMED (OB filter cross-ref), H356 CONFIRMED (OB on this universe OOS 2.312), H306 NOT CONFIRMED, H270 CONFIRMED (stock-level)
-updated: 2026-07-03
+related_hypotheses: H354 CONFIRMED, H355 RETRACTED 2026-08-15 (see H513; OB filter cross-ref, detail on fixed-income-bond-rotation.md), H356 RETRACTED 2026-08-15 (see H514; was OOS 2.312 — same OB as_of look-ahead bug as H343/H510), H306 NOT CONFIRMED, H270 CONFIRMED (stock-level)
+updated: 2026-08-16 (retraction sync — see H356 section)
 ---
 
 # Low-Volatility Factor ETF Rotation
@@ -147,9 +147,11 @@ print(f"Sharpe: {sharpe:.3f}  MaxDD: {maxdd:.1%}")
 
 ---
 
-## H356 — OB Filter CONFIRMED on Low-Vol ETF Universe (2026-07-03)
+## H356 — OB Filter on Low-Vol ETF Universe
 
-**Status: CONFIRMED.** All 6 OB variants beat the gate (baseline OOS 1.339; gate 1.735).
+> **⚠ RETRACTED 2026-08-15 (see H514).** The table below used the same OB `as_of` look-ahead bug as H343/H510 (`has_bullish_ob(..., month_end, ...)` sees the whole holding month before deciding inclusion). Corrected re-run: **all six variants fail both the 1.735 primary gate and the 1.535 partial gate.** ref_A collapses OOS 2.312→0.773 — the largest collapse of the four H510 follow-up hypotheses (H345/H346/H355/H356), consistent with H356 using the largest OB windows relative to its monthly rebalance frequency. The "MaxDD unchanged at -11.3%" finding also reverses: corrected MaxDD is -15.3% to -23.7% depending on variant, not an improvement. Table left below as historical record only — do not use for production decisions.
+
+**Original (invalidated) status: CONFIRMED.** All 6 OB variants beat the gate (baseline OOS 1.339; gate 1.735).
 
 | Param / Variant | OOS Sharpe | OOS MaxDD | Corr(SPY) |
 |-----------------|------------|-----------|-----------|
@@ -177,15 +179,17 @@ print(f"Sharpe: {sharpe:.3f}  MaxDD: {maxdd:.1%}")
 
 ## Production Assessment
 
-| Metric | H354-C (no filter) | H356 ref_A (OB strict) | Notes |
+> **⚠ Superseded by the H356 retraction above.** The table below reflects the invalidated H356 numbers; H354-C standalone is NOT superseded — it remains the confirmed production candidate for this universe.
+
+| Metric | H354-C (no filter) | H356 ref_A (OB strict, RETRACTED) | Notes |
 |--------|-------------------|----------------------|-------|
-| OOS Sharpe | 1.735 | **2.312** | 2021–2026 |
-| MaxDD | -11.3% | -11.3% | Strict = no MaxDD improvement |
-| Corr(SPY) | 0.854 | **0.559** | Key improvement |
+| OOS Sharpe | 1.735 | ~~2.312~~ (corrects to 0.773) | 2021–2026 |
+| MaxDD | -11.3% | ~~-11.3%~~ (corrects to -15.3% to -23.7%) | Strict = no MaxDD improvement, corrected version is worse |
+| Corr(SPY) | 0.854 | 0.559 (this metric not affected by the as_of bug) | — |
 | Neg Years OOS | 0 | 0 | Preserved |
 | Universe launch | 2011–2012 | same | Limited pre-2013 IS |
 
-**Blending note**: H354-C alone (Corr=0.854) exceeds the preferred <0.80 gate. H356 ref_A (Corr=0.559) clears it cleanly and doubles the OOS Sharpe. Use H356 for any production consideration — H354 standalone is superseded.
+**Blending note (corrected)**: H354-C alone (Corr=0.854) still exceeds the preferred <0.80 gate, but H356's OB filter does not survive correction as a fix — see retraction notice above. H354 standalone remains the best confirmed production candidate for this universe pending a non-buggy diversification approach.
 
 **Survivorship bias caveat**: all 7 ETFs are still active. Prior studies show low-vol ETF strategies have ~0.5-1.0pp/yr survivorship bias but the directional finding is robust.
 
