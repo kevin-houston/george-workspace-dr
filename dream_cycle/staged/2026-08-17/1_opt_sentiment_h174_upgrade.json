@@ -1,0 +1,38 @@
+{
+  "id": "2026-08-17-opt-sentiment-h517",
+  "date": "2026-08-17",
+  "source": "paper",
+  "source_url": "https://arxiv.org/abs/2412.19245",
+  "title": "H517: OPT-based LLM sentiment scoring as FinBERT upgrade in H174 PEAD pipeline",
+  "rationale": "arXiv:2412.19245 'Sentiment Trading with Large Language Models' (Kirtac & Germano) benchmarks FinBERT, BERT, OPT, and the Loughran-McDonald dictionary on 965,375 US financial news articles 2010-2023 for next-day return prediction. OPT scored highest on both classification accuracy (74.4% vs FinBERT's 72.2%) and long-short strategy Sharpe ratio (3.05 vs FinBERT's 2.07) -- a 47% Sharpe improvement over the exact model H163/H174 currently use. This is a distinct upgrade path from the already-staged H465 (FinDPO continuous scoring, arXiv:2507.18417): FinDPO targets calibration (continuous vs binary scores), OPT targets raw signal quality (a different base model architecture scoring higher on the same sentiment-classification task). Verified via grep this is not yet covered anywhere in wiki/ or dream_cycle/ (checked '2412.19245', 'Kirtac', and 'OPT' sentiment specifically). Caveat: the paper's dataset is general financial news, not EDGAR 8-K press releases specifically -- H163/H174's domain (post-earnings 8-K text) is narrower, so transfer needs validation on the same OOS event set before treating the paper's Sharpe as directly comparable.",
+  "risk_level": "medium",
+  "type": "hypothesis",
+  "target_file": "/workspace/agent/backtesting/daily/run_h517.py",
+  "hypothesis_log_entry": {
+    "id": "H517",
+    "status": "PROPOSED",
+    "title": "OPT LLM Sentiment Scoring Upgrade for H174 PEAD Pipeline",
+    "source": "arXiv:2412.19245 (Kirtac & Germano, 'Sentiment Trading with Large Language Models')",
+    "mechanism": "OPT (open pretrained transformer) sentiment scores on financial news text outperform FinBERT on both classification accuracy (74.4% vs 72.2%) and long-short strategy Sharpe (3.05 vs 2.07) in the source paper's general-news benchmark. If this generalizes to EDGAR 8-K press-release text, swapping H163/H174's FinBERT scorer for an OPT-based scorer (or ensembling both) could lift OOS WR/MeanRet beyond H174's confirmed 81.8%/6.89% baseline.",
+    "design": {
+      "variants": {
+        "A": "OPT sentiment score alone, same 0.18-equivalent threshold re-calibrated to OPT's score distribution",
+        "B": "OPT score replacing FinBERT in H174's dual filter (OPT >= threshold AND surprise >= 0.02)",
+        "C": "FinBERT x OPT ensemble (product or average of both scores)",
+        "D": "OPT score >= threshold AND FinDPO score >= 0.50 (if H465 has been run by this point, three-way comparison)"
+      },
+      "gate": "OOS WR > 81.8% AND mean_ret > 6.89% AND n >= 20 events (same H174 gate)"
+    },
+    "implementation_notes": [
+      "OPT model needs to be pulled from HuggingFace -- verify exact model name/checkpoint used by the paper before install (hallusquatting defense per standing instructions)",
+      "Run pip-audit after installing any new model package",
+      "Evaluate on same H174 OOS event set (21+ confirmable events) for direct comparison",
+      "Paper's Sharpe numbers come from general financial news, not 8-K earnings press releases -- do not assume the 3.05 Sharpe transfers; treat as a reason to test, not a result to cite",
+      "If both H465 (FinDPO) and H517 (OPT) get built, run a single 3-way bake-off (FinBERT baseline vs FinDPO vs OPT) rather than two separate isolated backtests"
+    ],
+    "priority": "MEDIUM -- alternative LLM-upgrade path alongside H465; only H163/H174-family upgrade with a directly comparable Sharpe delta reported in source literature",
+    "prior_art": "H174 CONFIRMED; H163 CONFIRMED (FinBERT baseline); H465 PROPOSED (FinDPO continuous scoring, complementary not competing upgrade); H168 NOT CONFIRMED (speaker-weighted FinBERT); H317 NOT CONFIRMED (FinBERT + EPS filter reduces n below gate)"
+  },
+  "action": "propose_hypothesis",
+  "apply_status": "pending"
+}

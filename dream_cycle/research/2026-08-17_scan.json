@@ -1,0 +1,90 @@
+{
+  "date": "2026-08-17",
+  "phase": "dream_cycle_phase2",
+  "angles_searched": [
+    {
+      "angle": "1. arXiv: pairs trading + cointegration + LLM",
+      "candidates": [
+        {
+          "id": "arXiv:2403.07998",
+          "title": "Graphical Matching Pairs Trading (maximum weighted matching for pair selection)",
+          "relevance_initial": "high",
+          "verdict": "duplicate -- already tested as H200",
+          "notes": "H200 NOT CONFIRMED 2026-05-15, real OOS backtest Sharpe=-1.143, directly contradicting the paper's claimed Sharpe=1.23. No new information to add; not restaged."
+        }
+      ],
+      "staged": 0
+    },
+    {
+      "angle": "2. arXiv: PEAD + post-earnings drift + text signals",
+      "candidates": [
+        {
+          "id": "arXiv:2412.19245",
+          "title": "Sentiment Trading with Large Language Models (Kirtac & Germano)",
+          "relevance_initial": "high",
+          "verdict": "NEW -- staged as H517",
+          "notes": "OPT sentiment model beats FinBERT on both accuracy (74.4% vs 72.2%) and long-short Sharpe (3.05 vs 2.07) on 965k US financial news articles 2010-2023. Verified via grep not previously covered in wiki/ or dream_cycle/. Distinct from already-staged H465 (FinDPO, arXiv:2507.18417) -- that upgrade targets calibration/continuous scoring, this one targets swapping the base model architecture. Staged at dream_cycle/staged/2026-08-17/1_opt_sentiment_h174_upgrade.json, risk_level medium, as H517 PROPOSED in hypothesis-log convention."
+        },
+        {
+          "id": "2025.finnlp-2.13 (PEAD.txt / SUE.txt corpus)",
+          "relevance_initial": "medium",
+          "verdict": "duplicate -- already covered",
+          "notes": "Multiple staged proposals from May-June 2026 already reference this corpus (H375, H376, H421, H426, H454 family)."
+        }
+      ],
+      "staged": 1
+    },
+    {
+      "angle": "3. arXiv: cross-sectional momentum + factor momentum",
+      "candidates": [
+        {
+          "id": "arXiv:2302.10175",
+          "title": "Spatio-Temporal Momentum (deep learning cross-sectional + time-series momentum)",
+          "relevance_initial": "medium",
+          "verdict": "duplicate -- already tracked as open item H180",
+          "notes": "H180 remains open per the CLAUDE.local.md still-open list; nothing new found this pass to change its status or add detail."
+        }
+      ],
+      "staged": 0
+    },
+    {
+      "angle": "4. arXiv: multi-agent LLM trading systems",
+      "candidates": [
+        {
+          "id": "arXiv:2602.23330",
+          "title": "Fine-grained task decomposition for multi-agent trading",
+          "relevance_initial": "high",
+          "verdict": "duplicate -- already built into H274/H461",
+          "notes": "Extensive existing coverage in wiki/trading/algorithms/multi-agent-llm-trading.md (lines 110, 243, 269, 554-560, 630, 658-740, 902), directly tied to the H274 multi-agent PEAD debate upgrade design and H461 TrustTrade Selective Consensus Gate. No new angle to add."
+        }
+      ],
+      "staged": 0
+    },
+    {
+      "angle": "5. GitHub: trending quantitative finance repos",
+      "candidates": [
+        {
+          "id": "awesome-quant / general trending lists",
+          "relevance_initial": "low",
+          "verdict": "no new actionable tool found",
+          "notes": "Vibe-Trading (30.9k stars) is already an integrated MCP server (22 tools live). No comparably significant new repo surfaced this pass."
+        }
+      ],
+      "staged": 0
+    }
+  ],
+  "additional_thread_investigated": {
+    "id": "arXiv:2508.14762",
+    "title": "Statistical Arbitrage in Options Markets by Graph Learning and Synthetic Long Positions (Hong & Klabjan)",
+    "relevance_initial": "medium",
+    "verdict": "assessed, not staged",
+    "notes": "Distinct paper from the already-covered H347 (arXiv:2510.11616, 'Attention Factors for Statistical Arbitrage' -- similar title, different arXiv ID, confirmed via grep of pairs-trading.md and hypothesis-log.md line 76). This paper (RNConv graph model + SLSA position construction) reports a modest average P&L information ratio of 0.1627 -- not a Sharpe, and not a strong number relative to this project's ~1.3-4.0 gate thresholds. Validated only on KOSPI 200 (Korean) index options, a market this project has no existing infrastructure for. Mechanistically targets options-market arbitrage rather than the equity-pairs-cointegration family H152-H200 already exhausted. Judged insufficiently actionable to stage: weak headline metric, foreign-market validation only, and would require building a graph-learning model plus options-chain data pipeline from scratch. Logged here for future reference rather than staged."
+  },
+  "summary": {
+    "total_candidates_reviewed": 8,
+    "duplicates_confirmed": 5,
+    "assessed_not_staged": 1,
+    "staged": 1,
+    "staged_ids": ["H517"]
+  }
+}
