@@ -1,0 +1,73 @@
+{
+  "hypothesis": "H515",
+  "title": "Kalman-Filter Adaptive-Beta ETF Pairs + Rolling ADF Cointegration Gate",
+  "candidate_pairs": [
+    "GDX/SIL",
+    "XLE/OIH",
+    "XLK/QQQ",
+    "LQD/HYG",
+    "EWJ/EFA",
+    "GLD/IAU",
+    "XLF/KBE",
+    "XLV/IBB"
+  ],
+  "qualified_pairs_count": 3,
+  "is_period": "2008-01-01 to 2017-12-31",
+  "oos_period": "2018-01-01 to 2026-06-13",
+  "gate": "OOS Sharpe > 0.8",
+  "confirmed": false,
+  "best_oos_sharpe": 10.377,
+  "pair_results": {
+    "GDX/SIL": {
+      "trace": 15.68,
+      "varA_no_adf_gate": {
+        "sharpe": 1.259,
+        "cagr": 0.0489,
+        "maxdd": -0.0027
+      },
+      "varB_with_adf_gate": {
+        "sharpe": 1.259,
+        "cagr": 0.0489,
+        "maxdd": -0.0027
+      },
+      "adf_pass_pct_of_oos_days": 1.0
+    },
+    "LQD/HYG": {
+      "trace": 27.51,
+      "varA_no_adf_gate": {
+        "sharpe": 2.528,
+        "cagr": 0.0289,
+        "maxdd": -0.0034
+      },
+      "varB_with_adf_gate": {
+        "sharpe": 10.377,
+        "cagr": 0.0252,
+        "maxdd": -0.0021
+      },
+      "adf_pass_pct_of_oos_days": 0.998
+    },
+    "XLF/KBE": {
+      "trace": 23.69,
+      "varA_no_adf_gate": {
+        "sharpe": 10.377,
+        "cagr": 0.0252,
+        "maxdd": -0.0021
+      },
+      "varB_with_adf_gate": {
+        "sharpe": 10.377,
+        "cagr": 0.0252,
+        "maxdd": -0.0021
+      },
+      "adf_pass_pct_of_oos_days": 1.0
+    }
+  },
+  "composite_varC": {
+    "sharpe": 2.446,
+    "cagr": 0.0335,
+    "maxdd": -0.0018
+  },
+  "verdict": "NOT CONFIRMED \u2014 degenerate cash-parking artifact for 2 of 3 qualified pairs",
+  "diagnostic_note": "best_oos_sharpe=10.377 (XLF/KBE varA, and LQD/HYG varB) is NOT a real pairs-trading result. Diagnostic check: standalone BIL OOS Sharpe over the same 2018-01-01..2026-06-13 window is 10.385 (ann_ret=0.0252, ann_vol=0.00243) \u2014 matches the XLF/KBE headline almost exactly. XLF/KBE never crosses the ENTRY_Z=1.5 Kalman-innovation z-score threshold in 2123 OOS days (max|z|=1.155, frac>1.5=0.0000): the strategy is 100% parked in BIL cash the entire OOS period and is just measuring BIL risk-free Sharpe. LQD/HYG crosses the threshold on only 0.05% of days (max|z|=1.799) \u2014 same degeneracy, less extreme. Only GDX/SIL trades meaningfully (frac|z|>1.5=0.0019, max|z|=3.553) and produces a real, non-degenerate OOS Sharpe of 1.259. Root cause hypothesis: the Kalman filter online-adapts both beta and observation-noise variance, which shrinks the innovation z-score scale over time for tightly-cointegrated pairs \u2014 the adaptive fix for H307's frozen-beta problem overcorrects and absorbs the tradeable divergence into parameter drift for XLF/KBE and LQD/HYG, leaving GDX/SIL (loosest-fitting pair) as the only one that still generates a genuine signal.",
+  "honest_best_oos_sharpe": 1.259,
+  "honest_best_pair": "GDX/SIL"
+}

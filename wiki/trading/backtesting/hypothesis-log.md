@@ -11400,3 +11400,79 @@ The "original" rows reproduce H356's logged numbers exactly (D=1.339, ref_A=2.31
 
 **Results file**: `backtesting/results/h514_results.json`
 
+
+
+## H515 — Kalman-Filter Adaptive-Beta ETF Pairs + Rolling ADF Cointegration Gate (NOT CONFIRMED — degenerate signal)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-16
+**Trigger**: Nightly autonomous research session (Task B). Named priority families (low-vol long/short, ADDV NASDAQ momentum, ETF pairs) were all already closed (H501, H490, H246/H271/H307) — this session picked a genuine methodological advance on ETF pairs rather than re-testing closed ground. H307 (NOT CONFIRMED) named its own failure mode explicitly: frozen IS-only OLS beta plus a stale binary Johansen cointegration screen. H515 replaces both: a causal Kalman filter recursively adapts the hedge ratio day-by-day, and a rolling 252-day ADF test re-checks that cointegration is still holding rather than trusting a one-time IS screen for the whole OOS period.
+
+**Script**: `backtesting/daily/run_h515_kalman_pairs.py`
+**Universe**: Same 8 candidate pairs as H307 (GDX/SIL, XLE/OIH, XLK/QQQ, LQD/HYG, EWJ/EFA, GLD/IAU, XLF/KBE, XLV/IBB). IS Johansen screen qualified 3: GDX/SIL (trace 15.68), LQD/HYG (27.51), XLF/KBE (23.69), all exceeding the 15.49 critical value.
+**Signal**: 2-state Kalman filter (alpha, beta; random-walk state transition, `delta=1e-4`) on log prices, innovation z-score vs online-adapted observation-noise std. Entry |z|>1.5, exit |z|<0.5. Long-only adaptation (no shorting): "long spread" = buy leg A, "short spread" = buy leg B, cash parked in BIL otherwise. Variant A: no ADF gate. Variant B: rolling 252-day ADF p<0.10 gate, flattens to cash when cointegration breaks down. Variant C: equal-weight composite of Variant B equity curves across the 3 qualified pairs.
+**IS/OOS**: 2008-2017 / 2018-2026-06-13 (matches H307's split)
+**Gate**: OOS Sharpe > 0.8
+
+**Self-caught bug during development**: initial implementation decided position state using `z[i]` (today's close-derived signal) and credited that same day's `spread_diff[i]` return in the same step — a same-day decide+credit look-ahead pattern, the exact bug class this codebase has repeatedly found and retracted (H411-family, H492/H493, H343-H346/H355/H356 via H509-H514). Rewrote `backtest_pair()` as a causal two-pass design: pass 1 decides `position_series[i]` using information through day i's close; pass 2 applies day i's equity return using `position_series[i-1]` (yesterday's decided position) against day i's realized move, with costs charged on the prior day's trade-change flag. Fixing this bug barely moved the headline number (10.396→10.377), which was itself the tell that a second, deeper problem existed.
+
+**Results**:
+
+| Pair | Trace | Var A (no ADF gate) OOS Sharpe | Var B (ADF gate) OOS Sharpe | max\|z\| in OOS | frac \|z\|>1.5 |
+|---|---|---|---|---|---|
+| GDX/SIL | 15.68 | 1.259 | 1.259 | 3.553 | 0.0019 |
+| LQD/HYG | 27.51 | 2.528 | 10.377 | 1.799 | 0.0005 |
+| XLF/KBE | 23.69 | 10.377 | 10.377 | 1.155 | 0.0000 |
+| Composite (Var C) | — | — | 2.446 | — | — |
+| BIL standalone (same OOS window) | — | **10.385** (ann_ret=0.0252, ann_vol=0.00243) | — | — | — |
+
+**Key findings**:
+1. **The headline "confirmed" OOS Sharpe of 10.377 is a spurious cash-parking artifact, not a pairs-trading result.** XLF/KBE's Kalman-innovation z-score never crosses the ENTRY_Z=1.5 threshold anywhere in 2123 OOS days (max|z|=1.155) — the strategy stays 100% parked in BIL the entire OOS period. Its Sharpe (10.377) is statistically indistinguishable from standalone BIL's own OOS Sharpe (10.385) over the identical window, computed as a direct check. LQD/HYG's Var B result (also 10.377, only 0.05% of days above threshold) is the same degeneracy — the ADF gate additionally flattens what few trades Var A found, converging it onto the same all-cash number.
+2. **Only GDX/SIL — the loosest-fitting of the 3 qualified pairs (lowest trace stat, 15.68 vs the 15.49 critical value)** — shows genuine, non-degenerate trading activity (0.19% of OOS days above threshold, max|z|=3.553) and produces a real OOS Sharpe of 1.259, which does clear the 0.8 gate on its own.
+3. **Root cause (working hypothesis, not fully isolated)**: the Kalman filter online-adapts both the hedge ratio and the observation-noise variance used to standardize the innovation. For tightly-cointegrated pairs, this adaptation shrinks the effective z-score scale over time, absorbing the tradeable divergence into parameter drift rather than leaving it as a detectable residual spike. The fix for H307's named problem (frozen beta) overcorrects into a new problem: too-adaptive a filter can erase the very signal a pairs strategy needs to detect. This is the opposite failure mode from H307's, but lands in the same place — no reliable edge.
+4. **This is a genuine methodological finding, not a bug this time.** The look-ahead audit (see above) was checked and fixed first; the degenerate result persisted after that fix, and the BIL-Sharpe match is direct confirming evidence of a real (if boring) cause — near-zero trading activity — rather than a residual timing bug.
+
+**Production correlation estimate**: N/A — no variant produces a trustworthy, non-degenerate confirmation. GDX/SIL's OOS Sharpe 1.259 clears the numeric gate but n=1 pair is too thin a basis to recommend for production blending without further validation (e.g. a wider/rolling-percentile threshold that gives LQD/HYG and XLF/KBE a fair chance to trade, or testing GDX/SIL specifically against H041a/H026/H045 correlation once a larger multi-pair sample exists).
+
+**Verdict**: NOT CONFIRMED as a family-level result. The reported "CONFIRMED, best_oos_sharpe=10.377" in the original results JSON was corrected post-hoc (see `diagnostic_note` field in `backtesting/results/h515_results.json`) — that number never represented real pairs-trading activity. GDX/SIL alone shows a real, gate-clearing signal (OOS Sharpe 1.259) but is not enough on its own to confirm the family. ETF pairs trading (§3.8) remains effectively closed pending either a fairer entry-threshold design (percentile-based rather than fixed 1.5σ, since the Kalman-adapted residual scale shrinks over time and a fixed absolute threshold may simply be miscalibrated) or a different mean-reversion signal construction entirely.
+
+**Recommended follow-up**: Retest with a rolling-percentile (e.g. 90th/10th percentile of trailing 252-day innovation z-scores) entry threshold instead of a fixed ENTRY_Z=1.5, to check whether LQD/HYG and XLF/KBE simply need a threshold that adapts alongside the Kalman filter's own shrinking noise estimate, before concluding the family is fully dead.
+
+**Results file**: `backtesting/results/h515_results.json`
+
+
+## H516 — Kalman Pairs, Rolling-Percentile Entry Threshold (PARTIAL — flagged, not production-comparable)
+
+**Status**: PARTIAL (non-degenerate signal confirmed; P&L methodology needs rebuilding before trusting the Sharpe number)
+**Tested**: 2026-08-16
+**Trigger**: H515's recommended follow-up — its fixed ENTRY_Z=1.5 threshold almost never fired for XLF/KBE (0.00% of OOS days) and LQD/HYG (0.05%) because the Kalman filter's online-adapted noise estimate shrinks the innovation z-score scale over time; both pairs' "confirmed" 10.377 Sharpe was really just standalone BIL cash-parking Sharpe (10.385) in disguise.
+
+**Script**: `backtesting/daily/run_h516_kalman_pairs_pctile.py`
+**Universe**: The 3 pairs H515 already Johansen-qualified (GDX/SIL, LQD/HYG, XLF/KBE) — no new IS screen run.
+**Signal**: Same causal Kalman filter as H515. Entry/exit levels are now rolling 252-day percentiles of the pair's own z-score distribution (entry at 90th/10th percentile, exit at 60th/40th), recalibrated daily instead of a fixed absolute z-level, so the threshold adapts alongside the Kalman filter's own shrinking noise scale.
+**OOS**: 2018-01-01 to 2026-06-13 (same as H515)
+**Gate**: OOS Sharpe > 0.8, degeneracy-filtered (a result only counts if trade_frac > 2% of OOS days AND |Sharpe − BIL standalone OOS Sharpe| > 0.5, to prevent H515's exact failure mode from re-appearing silently)
+
+**Results**:
+
+| Pair | Var A Sharpe | Var A trade_frac | Var B Sharpe | Var B trade_frac | Var B MaxDD |
+|---|---|---|---|---|---|
+| GDX/SIL | 4.460 | 25.1% | 4.460 | 25.1% | -2.4% |
+| LQD/HYG | 2.774 | 24.3% | 2.872 | 24.2% | -1.6% |
+| XLF/KBE | 4.646 | 24.6% | 4.646 | 24.6% | -1.5% |
+| Composite (Var C) | — | — | 6.237 | — | -1.2% |
+| BIL standalone OOS (degeneracy check) | — | — | **10.385** | — | — |
+
+**Key findings**:
+1. **The percentile threshold fix works as intended — the degeneracy is gone.** All 3 pairs now trade 24-25% of OOS days (vs 0.00-0.19% under H515's fixed threshold), and no result sits anywhere near the 10.385 BIL cash-parking Sharpe. This confirms H515's diagnosis was correct: the fixed ENTRY_Z=1.5 was miscalibrated to the Kalman filter's own shrinking noise scale, not a fundamental problem with Kalman-adaptive hedge ratios.
+2. **Diagnostic checks run before trusting the headline numbers** (same discipline as H515's self-caught bug and the broader H509-H514 audit history — any Sharpe this high demands a root-cause check): `spread_diff` OOS P&L stream has near-zero mean (0.000002), std 0.0096, skew -0.04, and only 3.3% of total absolute P&L comes from its 10 largest single-day moves — ruling out both single-event luck and the H515 cash-parking artifact.
+3. **However, a different, more fundamental methodology concern surfaced instead**: `spread_diff` is the day-over-day change in the Kalman filter's own residual (model fit error), scaled by an arbitrary 0.5x notional factor. This is a convenient P&L *proxy*, not a realistic dollar-neutral P&L model of an actual tradeable pairs position — a real trade should size each leg using `beta_t` at entry and each leg's price level, not difference the abstract model residual. Sharpe 4.6-6.2 with MaxDD under 2.5% is high enough, and the P&L model abstract enough, that this should not be treated as production-comparable without rebuilding the backtest on true leg-level dollar P&L.
+4. Composite (Var C, equal-weight across all 3 pairs) reaches OOS Sharpe 6.237 / MaxDD -1.2%, i.e. stacking the pairs further smooths the (still P&L-proxy-based) curve — expected, not independently informative given finding #3.
+
+**Production correlation estimate**: Not computed — the P&L proxy caveat (finding #3) means any correlation estimate against H041a/H026/H045 computed from this equity curve is not obviously the correlation of a real tradeable strategy. Deferred until a dollar-P&L rebuild exists.
+
+**Verdict**: PARTIAL. The rolling-percentile threshold successfully fixes H515's degenerate cash-parking failure — this is a real, reusable methodological fix for adaptive-Kalman pairs trading in general, worth keeping. But the resulting Sharpe numbers (4.6-6.2) should not be reported as "CONFIRMED" or compared against other H-series gates until the P&L calculation is rebuilt on realistic leg-level dollar terms (buy/sell actual leg A and leg B notional sized by `beta_t`, not difference the Kalman residual itself) — this codebase's repeated bug-retraction history (H509-H514, H506 family) is exactly why a result this good gets a caveat instead of a checkmark on the same day it's found.
+
+**Recommended follow-up**: Rebuild `backtest_pair_pctile()`'s P&L calculation using actual leg notional (long/short $1 of leg A vs `beta_t` $ of leg B, mark-to-market both legs' price changes) instead of the Kalman-residual-delta proxy, then re-run before this graduates past PARTIAL. If the dollar-P&L version still clears the gate with plausible MaxDD, this is the strongest ETF-pairs candidate of the whole H246/H271/H307/H515/H516 line and worth a genuine production-correlation study.
+
+**Results file**: `backtesting/results/h516_results.json`

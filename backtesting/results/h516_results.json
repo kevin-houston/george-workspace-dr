@@ -1,0 +1,69 @@
+{
+  "hypothesis": "H516",
+  "title": "Kalman-Filter Adaptive-Beta ETF Pairs, Rolling-Percentile Entry Threshold",
+  "qualified_pairs": [
+    "GDX/SIL",
+    "LQD/HYG",
+    "XLF/KBE"
+  ],
+  "oos_period": "2018-01-01 to 2026-06-13",
+  "gate": "OOS Sharpe > 0.8 (degeneracy-filtered: trade_frac>2% AND |sharpe-BIL_sharpe|>0.5)",
+  "bil_standalone_oos_sharpe": 10.385,
+  "confirmed": true,
+  "best_raw_oos_sharpe": 6.237,
+  "best_non_degenerate_oos_sharpe": 4.646,
+  "pair_results": {
+    "GDX/SIL": {
+      "trace": 15.68,
+      "varA_no_adf_gate": {
+        "sharpe": 4.46,
+        "cagr": 0.3028,
+        "maxdd": -0.0243
+      },
+      "varA_trade_frac_of_oos_days": 0.251,
+      "varB_with_adf_gate": {
+        "sharpe": 4.46,
+        "cagr": 0.3028,
+        "maxdd": -0.0243
+      },
+      "varB_trade_frac_of_oos_days": 0.251
+    },
+    "LQD/HYG": {
+      "trace": 27.51,
+      "varA_no_adf_gate": {
+        "sharpe": 2.774,
+        "cagr": 0.0953,
+        "maxdd": -0.0127
+      },
+      "varA_trade_frac_of_oos_days": 0.243,
+      "varB_with_adf_gate": {
+        "sharpe": 2.872,
+        "cagr": 0.0877,
+        "maxdd": -0.0156
+      },
+      "varB_trade_frac_of_oos_days": 0.242
+    },
+    "XLF/KBE": {
+      "trace": 23.69,
+      "varA_no_adf_gate": {
+        "sharpe": 4.646,
+        "cagr": 0.217,
+        "maxdd": -0.0148
+      },
+      "varA_trade_frac_of_oos_days": 0.246,
+      "varB_with_adf_gate": {
+        "sharpe": 4.646,
+        "cagr": 0.217,
+        "maxdd": -0.0148
+      },
+      "varB_trade_frac_of_oos_days": 0.246
+    }
+  },
+  "composite_varC": {
+    "sharpe": 6.237,
+    "cagr": 0.2247,
+    "maxdd": -0.0117
+  },
+  "methodology_caveat": "spread_diff P&L proxy = day-over-day change in the Kalman filter residual (model fit error), scaled by an arbitrary 0.5x notional factor -- NOT a realistic dollar-neutral P&L model of an actual pairs trade (which should size legs using beta_t at entry and price-level, not differencing the model residual itself). Diagnostic checks run: spread_diff OOS mean~0 (0.000002), std=0.0096, skew=-0.04, top-10-day contribution only 3.3% of total abs P&L -- rules out single-event luck and rules out the H515 cash-parking degeneracy (trade_frac ~24-25% of OOS days, nowhere near the BIL standalone Sharpe of 10.385). Genuinely non-degenerate result, but Sharpe 4.6-6.2 with MaxDD <2.5% is high enough that it should not be treated as production-comparable until re-built on true leg-level dollar P&L.",
+  "verdict": "PARTIAL -- non-degenerate signal confirmed, but P&L proxy needs rebuilding on real dollar terms before the Sharpe number can be trusted"
+}
