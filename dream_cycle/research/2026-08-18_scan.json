@@ -1,0 +1,120 @@
+{
+  "date": "2026-08-18",
+  "phase": "dream_cycle_phase2",
+  "angles_searched": [
+    {
+      "angle": "1. arXiv: pairs trading + cointegration + LLM (new signal-construction angle needed -- ETF-pairs family H246/H271/H307/H515/H516/H518 just closed NOT CONFIRMED)",
+      "candidates": [
+        {
+          "id": "arXiv:2406.10695",
+          "title": "Graph clustering for pairs selection",
+          "relevance_initial": "medium",
+          "verdict": "duplicate / not recency-qualified",
+          "notes": "Predates the 2-week recency window and graph-clustering pair-selection methods are already covered in the pairs-trading family history (H200 graphical matching). No new signal-construction mechanism."
+        },
+        {
+          "id": "arXiv:2309.16008",
+          "title": "Signature-based pairs trading",
+          "relevance_initial": "low",
+          "verdict": "not recency-qualified",
+          "notes": "2023 paper, well outside the recency window; surfaced only as a generic search artifact."
+        },
+        {
+          "id": "arXiv:2403.12180",
+          "title": "RL-based pairs trading",
+          "relevance_initial": "low",
+          "verdict": "not recency-qualified",
+          "notes": "2024 paper. RL-for-pairs is a known family, nothing new relative to prior H-series pairs work."
+        },
+        {
+          "id": "arXiv:2512.02037",
+          "title": "Deep learning pairs trading, Polish equities",
+          "relevance_initial": "low",
+          "verdict": "assessed, not staged",
+          "notes": "Foreign single-market validation (Warsaw Stock Exchange) with no clear transferable signal-construction novelty beyond generic deep-learning pair scoring already exhausted by the closed ETF-pairs family. Not restaged."
+        },
+        {
+          "id": "arXiv:2510.11616",
+          "title": "Attention Factors for Statistical Arbitrage",
+          "relevance_initial": "high",
+          "verdict": "duplicate -- already known as H347",
+          "notes": "Confirmed via grep of pairs-trading.md and hypothesis-log.md (line 76) -- already tracked, no new detail found this pass."
+        }
+      ],
+      "staged": 0
+    },
+    {
+      "angle": "2. arXiv: PEAD + post-earnings drift + text signals",
+      "candidates": [
+        {
+          "id": "arXiv:2602.20859",
+          "title": "FinAnchor",
+          "relevance_initial": "medium",
+          "verdict": "assessed, not staged",
+          "notes": "Surfaced in search but not within the ~2-week recency window (Feb 2026) and no new mechanism beyond what's already covered under the H163/H174/H517 FinBERT/OPT scoring line -- an anchoring/calibration technique adjacent to already-staged H465 (FinDPO) rather than a genuinely new angle. Not restaged."
+        }
+      ],
+      "staged": 0
+    },
+    {
+      "angle": "3. arXiv: cross-sectional momentum + factor momentum",
+      "candidates": [
+        {
+          "id": "arXiv:2507.07107",
+          "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading ... Bias Correction",
+          "relevance_initial": "medium",
+          "verdict": "assessed, not staged",
+          "notes": "Grep for '2507.07107' and generic 'Bias Correction' terms returned many unrelated hits (other pre-existing ML bias-correction discussions in the wiki, not this specific paper) -- confirmed this exact arXiv ID has zero prior coverage, so it is not a duplicate. However the paper itself (per search-result-level detail) proposes a generic multi-factor ML bias-correction layer with no reported Sharpe/MaxDD numbers surfaced in search snippets, no clear novel mechanism distinct from the already-exhausted H198/H320 LightGBM-filter family, and predates the 2-week recency window (July 2026). Judged insufficiently differentiated and insufficiently detailed to stage; logged for reference only."
+        },
+        {
+          "id": "arXiv:2608.05755",
+          "title": "LSTM sector-embedding momentum",
+          "relevance_initial": "high",
+          "verdict": "duplicate -- already staged+applied 2026-08-10",
+          "notes": "Confirmed via dream_cycle/staged/2026-08-10/1_lstm_sector_embedding_momentum_wiki.json and live content at momentum-strategies.md lines 937-947. No new information."
+        }
+      ],
+      "staged": 0
+    },
+    {
+      "angle": "4. arXiv/journal: multi-agent LLM trading systems",
+      "candidates": [
+        {
+          "id": "arXiv:2602.23330",
+          "title": "Fine-grained task decomposition for multi-agent trading",
+          "relevance_initial": "high",
+          "verdict": "duplicate -- already built into H274/H461",
+          "notes": "Extensive existing coverage in multi-agent-llm-trading.md (lines 630, 658-680, 748, 766, 902-917), directly tied to H274 design. No new angle."
+        },
+        {
+          "id": "doi:10.3390/electronics15153453",
+          "title": "Consensus-Gated Execution (CGX): Bull/Bear debate + Meta-Evaluator gating",
+          "relevance_initial": "high",
+          "verdict": "NEW -- staged",
+          "notes": "Confirmed via grep as a genuine non-duplicate (zero hits for 'electronics15153453', 'Consensus-Gated Execution', 'CGX' anywhere in wiki/ or dream_cycle/). Published within the last ~2 weeks. Reports OOS Sharpe 1.90, MaxDD -11.6%, ~3x trend-following baseline, validated across a 52-week 2024 run and a 417-session 2022-2025 multi-regime run. WebFetch on the MDPI page returned HTTP 403 (site blocks the fetch tool); detail gathered via WebSearch fallback at abstract/search-result granularity only, noted honestly rather than invented. Distinguishing feature vs our existing H274 (3-agent advocate/skeptic/judge debate, always votes) and H461 TrustTrade (embedding-based post-hoc consensus gate, arXiv:2603.22567): CGX's Meta-Evaluator produces zero trades as a first-class output when the Bull/Bear debate doesn't converge, rather than filtering after a vote already happened. Staged at dream_cycle/staged/2026-08-18/1_cgx_multiagent_consensus_gate_wiki.json as a wiki research-lead note (risk_level low, no hypothesis number assigned -- crypto-domain result, would need translation work to backtest against our PEAD/8-K domain, and only abstract-level numbers are available pending full-text access)."
+        }
+      ],
+      "staged": 1
+    },
+    {
+      "angle": "5. GitHub: trending quantitative finance repos",
+      "candidates": [
+        {
+          "id": "general trending / awesome-quant search",
+          "title": "GitHub trending quant-finance repos, 2026",
+          "relevance_initial": "low",
+          "verdict": "no new actionable tool found",
+          "notes": "Search surfaced only already-known/established repos (Qlib and similar mainstream projects). Vibe-Trading (30.9k stars) remains the most significant integrated tool and is already live as an MCP server with 22 tools. No comparably significant new repo surfaced this pass."
+        }
+      ],
+      "staged": 0
+    }
+  ],
+  "summary": {
+    "total_candidates_reviewed": 12,
+    "duplicates_confirmed": 4,
+    "assessed_not_staged": 6,
+    "staged": 1,
+    "staged_ids": ["2026-08-18-cgx-consensus-gate"]
+  }
+}
