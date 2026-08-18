@@ -204,6 +204,7 @@ This checklist extends `wiki/trading/shared-eval-checklist.md` for LLM-specific 
 - arXiv:2601.13770 — Look-Ahead-Bench: alpha decay measurement + Point-in-Time LLMs
 - arXiv:2505.07078 — FINSABER: LLM trading over 20+ years / 100+ stocks (KDD 2026)
 - arXiv:2602.18481 — AlphaForgeBench: extreme run-to-run variance in LLM factor generation
+- arXiv:2608.12283 — Kargarzadeh et al. small-cap LLM sentiment trading: single-year (2025) OOS only, boutique/non-academic affiliation — a live example to run through this checklist's skepticism criteria before any pure-alpha/pure-beta hypothesis is staged from it (see [Sources](../sources/llm-sentiment-risk-decomposition-smallcap-2026.md))
 
 ---
 

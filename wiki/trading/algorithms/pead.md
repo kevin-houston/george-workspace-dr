@@ -379,3 +379,15 @@ Trains a sentiment scorer via reinforcement learning directly against realized m
 **Why it matters here**: H174 (score>=0.18 + surprise>=0.02 dual filter, OOS WR=81.8% n=22) has proven hard to beat by adding filters on top (H175 EPS magnitude, H317 multi-modal, H469 HiFi-KPI magnitude layer -- all NOT CONFIRMED or marginal). FinSMART targets a different lever: replacing the sentiment *scorer itself* rather than adding filters downstream of it. This is a parallel track to H481 (FinDPO), which also proposes swapping FinBERT's training objective.
 
 **Status**: Research lead only, not yet a hypothesis. Needs full-text read to confirm OOS methodology and whether numbers are reproducible on our EDGAR 8-K corpus before scoping a backtest.
+
+---
+
+## Research Lead: Pure-Alpha / Pure-Beta Event Split (arXiv:2608.12283, flagged 2026-08-18)
+
+**Source**: Kargarzadeh, Khaledian, Parvini & Khaledian, "Large Language Model-Driven Small-Capitalization Trading," arXiv:2608.12283, Aug 12 2026. Full writeup: [Sources — LLM Sentiment & Risk Decomposition, Small-Cap](../sources/llm-sentiment-risk-decomposition-smallcap-2026.md).
+
+This Russell 2000 sentiment-trading paper splits stock-selection triggers into **pure-alpha** (the stock itself moved on a return z-score threshold, with no coincident macro-indicator trigger) vs. **pure-beta** (a macro indicator moved and the stock's rolling beta to it is elevated, but the stock hasn't reacted yet) vs. an intersection regime — and finds the intersection **consistently underperforms** requiring only one or the other to fire. Best OOS cell (pure-beta, GPT-4o mini sentiment, 40-day hold, risk-parity allocator) reaches Sharpe 2.33 at 100bp costs, though this is single-year (2025) OOS only and should not be taken as an established number.
+
+**Why this is relevant to H174**: our current pipeline pools every qualifying 8-K/earnings event (score>=0.18, surprise>=0.02) identically regardless of whether the surprise coincided with a broader sector/macro move that day. This paper's finding suggests splitting the 22 confirmed H174 OOS events into "pure-alpha" (surprise with no same-day sector co-mover) vs. "pure-beta" (surprise riding a broader move) subgroups and checking whether win rate/mean return differs materially between them — a cheap re-slice of existing H174 event data, not a new data pipeline.
+
+**Action needed before staging a hypothesis**: define the same-day "macro co-mover" threshold precisely (this paper uses a 58-indicator panel with |Z|>=2; H174's universe is much smaller so a simpler sector-ETF or SPY co-move threshold would need to be chosen), then re-slice the existing 22-event H174 OOS sample — note n will likely drop well below the usual n>=20 gate once split into two groups, so this may only be viable as a qualitative check rather than a formal gated hypothesis until more H174 events accumulate.

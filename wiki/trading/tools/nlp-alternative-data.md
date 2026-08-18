@@ -702,3 +702,7 @@ Not: `Raw text → LLM → trade signal`
 **H312 hypothesis seed:** Run H163/H174 PEAD backtest replacing ProsusAI/finbert with FinBERT2 (if English model weights available). Gate: OOS win rate ≥ 83% (current H174 = 81.8%). If Chinese-only: treat as negative result and document.
 
 **Model weights:** Check Hugging Face for `FinBERT2` or `finbert2` — not confirmed available as of 2026-06-19. Monitor KDD 2026 proceedings for code release.
+
+## News De-Duplication via Embedding Clustering (arXiv:2608.12283, flagged 2026-08-18)
+
+Kargarzadeh et al. (see [Sources](../sources/llm-sentiment-risk-decomposition-smallcap-2026.md)) de-duplicate near-identical/syndicated news articles before sentiment scoring: single-linkage agglomerative clustering on embedding cosine distance (0.90 threshold, 30-day trailing window), keeping only the article nearest each cluster centroid. This is a small, portable fix our H163/H174/H517 pipeline currently lacks — each 8-K/news item is scored independently with no check for multiple wire services reporting the same event, which could inflate apparent signal strength/confidence without adding real information. Worth a lightweight implementation check the next time the FinBERT/OPT scoring pipeline (pead_overnight.py) is touched.
