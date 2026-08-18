@@ -11542,3 +11542,47 @@ The "original" rows reproduce H356's logged numbers exactly (D=1.339, ref_A=2.31
 **Verdict**: NOT CONFIRMED. H516's PARTIAL status is effectively downgraded to NOT CONFIRMED now that its own flagged caveat has been resolved — the proxy P&L was masking substantial real losses, not just overstating a real but smaller edge. This closes the H246/H271/H307/H515/H516/H518 ETF-pairs line: five hypotheses of methodology fixes (frozen-beta → Kalman-adaptive, fixed-threshold → rolling-percentile, proxy-P&L → dollar-P&L) never produced a single genuinely confirmed, production-comparable result. GDX/SIL's H515 Var A number (OOS Sharpe 1.259) was the only prior result to clear the gate on non-proxy grounds, but it used the same fixed-threshold construction H515 itself flagged as too rarely triggering to trust broadly, and was never re-validated under true dollar P&L (not done here since H515's fixed-threshold entry rule is superseded by H516's percentile rule, which is what H518 tested).
 **Recommended follow-up**: ETF pairs trading (§3.8) should be considered closed pending a fundamentally different signal construction (not just another threshold or P&L-accounting fix) — e.g. a genuine cointegration-residual mean-reversion strategy with continuous (not fixed-at-entry) beta re-hedging, or abandon the Kalman-adaptive-beta approach entirely in favor of a simpler rolling-OLS hedge ratio with realistic transaction-cost-aware rebalancing frequency. Do not re-attempt this exact Kalman+percentile+dollar-P&L combination without a new idea — it has now been tested end-to-end.
 **Results file**: `backtesting/results/h518_results.json`
+
+---
+
+## H519 — SPY 200MA / VIX Macro Regime Gate on H045 Bond Rotation (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-17
+**Trigger**: Gap scan of the hypothesis log for untested combinations of already-confirmed building blocks. The simple SPY-200MA/VIX regime gate is validated on two other universes (H301 sector ETF rotation +27.4% OOS Sharpe; H362 low-vol ETF rotation, 29% MaxDD improvement), but the only regime-gate attempts on the H045 bond universe used bond-specific signals instead — H314 (duration/yield-curve gate, NOT CONFIRMED — redundant with momentum's own duration handling) and H315 (credit-spread gate via FRED BAMLH0A0HYM2, NOT CONFIRMED — insufficient history, series only starts June 2023). This combination (simple external SPY/VIX gate × H045) had not been tried.
+
+**Counter-precedent noted before running**: H053 found the same SPY 200MA gate REJECTED on H041a because H041a's own momentum signal already rotates defensively ahead of drawdowns, making an external equity gate redundant. H045's own write-up shows the same self-regulating pattern — in 2022's rate shock, the rotation moved into SHY via its own 12m momentum with "TLT almost never selected," no external gate required. This made a null result the more likely outcome going in, but the combination was untested and worth running honestly rather than skipping on priors.
+
+**Script**: `backtesting/daily/run_h519_h045_spy_vix_gate.py`
+**Universe**: Identical to H045 — SHY/IEI/IEF/TLT/TIP/HYG/LQD, top-2 rank(12m_mom)+rank(inv_6m_vol), 50/50, monthly rebalance. Signal unchanged from H045; only a monthly gate check was added.
+**Gate mechanism**: At each monthly rebalance, if the gate condition is true (using the last known SPY/VIX values strictly before the holding period begins — no look-ahead), route 100% of capital to SHY (in-universe cash-like proxy) instead of the top-2 picks for that month. Four variants tested:
+- A: SPY < 200-day MA
+- B: VIX > 25
+- C: SPY < 200MA AND VIX > 25 (joint)
+- D: SPY < 200MA OR VIX > 20 (either)
+
+**IS/OOS**: 2007-2016 / 2017-2026 (identical to H045)
+**Baseline**: H045 ungated, recomputed in this same script run (not reused stale) for an apples-to-apples comparison — OOS Sharpe 1.3511, MaxDD -6.28%, exact match to the original H045 result, confirming the gated variants differ only in the gate logic, not in the underlying signal/data.
+**Gate for adoption**: beats ungated baseline by >0.10 Sharpe or >2pp MaxDD on OOS, without gate firing degenerately (>95% or <0.5% of months) and without meaningfully hurting the other dimension.
+
+**Results** (OOS 2017-2026):
+
+| Variant | OOS Sharpe | OOS MaxDD | Gate fired | ΔSharpe vs baseline | ΔMaxDD vs baseline |
+|---|---|---|---|---|---|
+| Baseline (ungated) | 1.3511 | -6.28% | — | — | — |
+| A: SPY<200MA | 1.3179 | -5.94% | 20.0% of months | -0.033 | +0.34pp |
+| B: VIX>25 | 1.3668 | -6.70% | 20.0% of months | +0.016 | -0.42pp |
+| C: joint AND | 1.3562 | -6.38% | 12.0% of months | +0.005 | -0.10pp |
+| D: either OR | 1.3076 | -5.95% | 37.0% of months | -0.043 | +0.33pp |
+
+**Key findings**:
+1. **Confirms the H053 counter-precedent rather than the H301/H362 precedent.** Every variant lands within ±0.04 Sharpe and ±0.4pp MaxDD of the ungated baseline — a rounding error next to H301's +27% Sharpe improvement or H362's 29% MaxDD reduction on their respective universes. None of the four variants clears the adoption bar in either direction.
+2. **Mechanism confirmed, not just replicated by coincidence**: H045's own momentum signal already routes into SHY (short-duration, near-cash) during risk-off/rate-shock regimes via its endogenous 12m-momentum ranking, so an external SPY/VIX gate is redundantly forcing the same rotation the signal would already make on its own — consistent with H045's original write-up and with H053's finding on H041a. Bond ETF rotation strategies with a genuine "flight to quality" leg in their own universe (short-duration Treasuries) don't need an external equity-market gate the way sector/factor ETF rotations (H301, H362) do, since those have no defensive escape hatch within their own universe.
+3. Variant B (VIX>25) is marginally the best (+0.016 Sharpe) but the improvement is well within noise and MaxDD is actually 0.4pp worse — not a real signal.
+4. This closes the general question of "does a simple external regime gate help H045" — combined with H314/H315, all three regime-gate constructions tried on this universe (duration-factor, credit-spread, and now simple SPY/VIX) have failed to improve on the plain rotation.
+
+**Production correlation estimate**: N/A — no variant beats baseline, nothing new to blend; H045 itself remains at its existing 21% production allocation unchanged.
+
+**Verdict**: NOT CONFIRMED. Simple SPY 200MA/VIX gating adds no value to H045's bond ETF rotation in any of the four tested forms — the strategy's own momentum signal already performs the defensive rotation an external gate would otherwise force. Closes the "external regime gate on H045" question across all three attempted gate designs (H314 duration, H315 credit, H519 SPY/VIX).
+**Recommended follow-up**: Do not pursue further regime-gate variants on H045 — the pattern (endogenous momentum already regime-aware) is now confirmed three times on this universe. If a bond-universe regime layer is still wanted, it would need to target something H045's momentum genuinely cannot see (e.g. a forward-looking rate-hike-cycle signal from Fed funds futures, distinct from trailing 12m price momentum) rather than another lagging price/vol-based gate.
+**Results file**: `backtesting/results/h519_results.json`

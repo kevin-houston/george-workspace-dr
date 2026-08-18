@@ -1,0 +1,159 @@
+{
+  "strategy": "H519 \u2014 SPY 200MA / VIX Macro Regime Gate on H045 Bond Rotation",
+  "universe": [
+    "SHY",
+    "IEI",
+    "IEF",
+    "TLT",
+    "TIP",
+    "HYG",
+    "LQD"
+  ],
+  "gate_variants": [
+    "A_spy200ma",
+    "B_vix25",
+    "C_joint_and",
+    "D_either_or"
+  ],
+  "baseline": {
+    "is": {
+      "label": "H045 baseline IS",
+      "cagr": 0.0548,
+      "sharpe": 1.6807,
+      "max_drawdown": -0.0218,
+      "calmar": 2.5197,
+      "ann_vol": 0.0326,
+      "n_months": 107,
+      "start": "2008-02-29",
+      "end": "2016-12-31"
+    },
+    "oos": {
+      "label": "H045 baseline OOS",
+      "cagr": 0.046,
+      "sharpe": 1.3511,
+      "max_drawdown": -0.0628,
+      "calmar": 0.7327,
+      "ann_vol": 0.034,
+      "n_months": 99,
+      "start": "2018-02-28",
+      "end": "2026-04-30"
+    }
+  },
+  "variants": {
+    "A_spy200ma": {
+      "is": {
+        "label": "A_spy200ma IS",
+        "cagr": 0.0405,
+        "sharpe": 1.4839,
+        "max_drawdown": -0.0218,
+        "calmar": 1.8637,
+        "ann_vol": 0.0273,
+        "n_months": 107,
+        "start": "2008-02-29",
+        "end": "2016-12-31"
+      },
+      "oos": {
+        "label": "A_spy200ma OOS",
+        "cagr": 0.0385,
+        "sharpe": 1.3179,
+        "max_drawdown": -0.0594,
+        "calmar": 0.6483,
+        "ann_vol": 0.0292,
+        "n_months": 99,
+        "start": "2018-02-28",
+        "end": "2026-04-30"
+      },
+      "gate_fire_frac_is": 0.2778,
+      "gate_fire_frac_oos": 0.2,
+      "sharpe_delta_oos": -0.0332,
+      "maxdd_delta_oos_pp": 0.34
+    },
+    "B_vix25": {
+      "is": {
+        "label": "B_vix25 IS",
+        "cagr": 0.0381,
+        "sharpe": 1.3932,
+        "max_drawdown": -0.0218,
+        "calmar": 1.7491,
+        "ann_vol": 0.0273,
+        "n_months": 107,
+        "start": "2008-02-29",
+        "end": "2016-12-31"
+      },
+      "oos": {
+        "label": "B_vix25 OOS",
+        "cagr": 0.0402,
+        "sharpe": 1.3668,
+        "max_drawdown": -0.067,
+        "calmar": 0.6011,
+        "ann_vol": 0.0294,
+        "n_months": 99,
+        "start": "2018-02-28",
+        "end": "2026-04-30"
+      },
+      "gate_fire_frac_is": 0.2407,
+      "gate_fire_frac_oos": 0.2,
+      "sharpe_delta_oos": 0.0157,
+      "maxdd_delta_oos_pp": -0.42
+    },
+    "C_joint_and": {
+      "is": {
+        "label": "C_joint_and IS",
+        "cagr": 0.0438,
+        "sharpe": 1.564,
+        "max_drawdown": -0.0218,
+        "calmar": 2.012,
+        "ann_vol": 0.028,
+        "n_months": 107,
+        "start": "2008-02-29",
+        "end": "2016-12-31"
+      },
+      "oos": {
+        "label": "C_joint_and OOS",
+        "cagr": 0.0423,
+        "sharpe": 1.3562,
+        "max_drawdown": -0.0638,
+        "calmar": 0.6626,
+        "ann_vol": 0.0312,
+        "n_months": 99,
+        "start": "2018-02-28",
+        "end": "2026-04-30"
+      },
+      "gate_fire_frac_is": 0.1759,
+      "gate_fire_frac_oos": 0.12,
+      "sharpe_delta_oos": 0.0051,
+      "maxdd_delta_oos_pp": -0.1
+    },
+    "D_either_or": {
+      "is": {
+        "label": "D_either_or IS",
+        "cagr": 0.0376,
+        "sharpe": 1.5788,
+        "max_drawdown": -0.0218,
+        "calmar": 1.7263,
+        "ann_vol": 0.0238,
+        "n_months": 107,
+        "start": "2008-02-29",
+        "end": "2016-12-31"
+      },
+      "oos": {
+        "label": "D_either_or OOS",
+        "cagr": 0.0341,
+        "sharpe": 1.3076,
+        "max_drawdown": -0.0595,
+        "calmar": 0.5731,
+        "ann_vol": 0.0261,
+        "n_months": 99,
+        "start": "2018-02-28",
+        "end": "2026-04-30"
+      },
+      "gate_fire_frac_is": 0.4352,
+      "gate_fire_frac_oos": 0.37,
+      "sharpe_delta_oos": -0.0435,
+      "maxdd_delta_oos_pp": 0.33
+    }
+  },
+  "best_variant": "B_vix25",
+  "verdict": "NOT CONFIRMED",
+  "run_date": "2026-08-17"
+}
