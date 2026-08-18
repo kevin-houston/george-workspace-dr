@@ -140,6 +140,7 @@ When answering a query:
 - [ContestTrade](trading/tools/contesttrade.md) — FinStep-AI contest mechanism (arXiv:2508.00554); US V2.0; Apache 2.0 ← new 2026-06-11
 - [QuantMuse](trading/tools/quantmuse.md) — FactorCalculator/FactorScreener/BacktestEngine; C++ execution; MIT ← new 2026-06-11
 - [NautilusTrader — Production Backtest + Live Execution Engine](tools/nautilus-trader.md) — Rust core + Python control plane; 25.4k stars, LGPL-3.0; Kraken/Polymarket/IBKR adapters map onto H276 crypto POC, backtesting-frameworks.md's Polymarket lead, and a possible Alpaca-alternative path; deep-dive companion to the multi-agent-llm-trading.md comparison table ← new 2026-08-10 (index gap fixed)
+- [public-apis — Curated Free API Directory](tools/public-apis-notes.md) — ~464k★ curated list of free public APIs across ~60 categories; MIT; Finance category standouts CongressInvests (congressional trade disclosures) and Dino.markets (cross-venue Kalshi/Polymarket spreads) not in our current stack; reference directory, not adopted ← new 2026-08-18
 
 **Data Sources**
 - [Polygon.io](trading/data-sources/polygon.md) — market data (free: EOD only; paid: options, ticks, Greeks)
