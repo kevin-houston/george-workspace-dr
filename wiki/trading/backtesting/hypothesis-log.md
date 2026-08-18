@@ -11504,3 +11504,41 @@ The "original" rows reproduce H356's logged numbers exactly (D=1.339, ref_A=2.31
 **Script**: backtesting/daily/run_h517.py
 
 **Results file**: `backtesting/results/h516_results.json`
+
+---
+
+## H518 — Kalman Pairs, True Leg-Level Dollar P&L Rebuild (NOT CONFIRMED — proxy P&L was masking large losses)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-17
+**Trigger**: H516's own recommended follow-up. H516 fixed H515's degenerate fixed-threshold problem (rolling-percentile entry/exit) but flagged its P&L as a proxy — the day-over-day change in the Kalman filter's own residual (model fit error) scaled by an arbitrary 0.5x factor, not real leg-level dollar P&L — and explicitly said the reported OOS Sharpe 4.6-6.2 "should not be reported as CONFIRMED... until the P&L calculation is rebuilt on realistic leg-level dollar terms."
+
+**Script**: `backtesting/daily/run_h518_kalman_pairs_dollar_pnl.py`
+**Universe**: Same 3 Johansen-qualified pairs as H515/H516 (GDX/SIL, LQD/HYG, XLF/KBE) — no new IS screen run.
+**Signal**: Identical Kalman filter + rolling-percentile entry/exit thresholds as H516 (90th/10th percentile entry, 60th/40th percentile exit, 252-day rolling window) — unchanged, since that part of H516 was already validated as the correct fix for H515's degeneracy. Only the P&L calculation changed: at trade open, size long $1 notional of leg A vs short `beta_t` dollars of leg B (or the inverse for short_spread), where `beta_t` is the Kalman filter's own online-adapted hedge ratio at the moment of entry (clipped to [0.1, 10] to bound degenerate ratios). Both legs mark-to-market daily using their own actual simple price returns (not the abstract Kalman residual delta). Beta is fixed for the life of each trade (no intra-trade re-hedging, to avoid unrealistic daily turnover). Return on capital = leg P&L in dollars / (1 + beta_open), i.e. total dollar notional deployed across both legs.
+**IS/OOS**: 2008-2017 / 2018-2026-06-13 (unchanged from H515/H516)
+**Gate**: OOS Sharpe > 0.8, degeneracy-filtered (trade_frac > 2% AND |Sharpe − BIL standalone OOS Sharpe| > 0.5)
+
+**Sanity checks performed before trusting the result** (given how large the reversal is): (1) BIL standalone OOS Sharpe recomputed at 10.384, matching H515/H516's 10.385/10.384 almost exactly — confirms the data pipeline, date window, and everything except the P&L formula is unchanged. (2) Spot-checked the sign convention on GDX/SIL's highest-z day in the OOS window (2020-03-19, z=1.61, short_spread signal): next-day leg A (GDX) fell -3.4%, leg B (SIL) rose +2.7%, residual dropped sharply (real mean reversion happened) — and the short_spread formula `-ret_A + beta_open*ret_B` correctly nets a gain (+6.2%) on that specific reversion day, confirming the trade-direction logic is not sign-flipped.
+
+**Results**:
+
+| Pair | Var A Sharpe | Var A trade_frac | Var B Sharpe | Var B trade_frac | Var B MaxDD |
+|---|---|---|---|---|---|
+| GDX/SIL | -1.753 | 25.1% | -1.753 | 25.1% | -55.3% |
+| LQD/HYG | -2.361 | 24.3% | -2.456 | 24.2% | -49.9% |
+| XLF/KBE | -2.089 | 24.6% | -2.089 | 24.6% | -50.7% |
+| Composite (Var C) | — | — | -3.550 | — | -51.8% |
+| BIL standalone OOS (degeneracy check) | — | — | **10.384** | — | — |
+
+**Key findings**:
+1. **The true dollar P&L result is dramatically worse than H516's proxy — not just a smaller edge, a strongly negative one.** All 3 pairs flip from OOS Sharpe 2.8-4.6 (H516 proxy) to -1.75 to -2.46 (true dollar P&L), and MaxDD balloons from under -2.5% to roughly -50% across the board. This is not a marginal correction — the entire "PARTIAL, promising" verdict from H516 does not survive contact with real position economics.
+2. **Root cause: the H516 proxy P&L (Kalman residual delta × 0.5) implicitly measures the model's own tracking error, which is small and mean-reverting by construction** — the Kalman filter is specifically designed to shrink its innovation over time as it adapts. Real leg-level dollar P&L instead exposes full leg-level price volatility, including periods where `beta_t` (measured at trade open, fixed for the trade's duration) lags a genuine regime shift in the true price relationship, leaving a large uncompensated net directional exposure for the life of the trade. The proxy was, in effect, backtesting the Kalman filter's internal consistency rather than a tradeable position.
+3. **This generalizes the same lesson H515 already taught once (fixed-threshold degeneracy) and H509-H514 taught repeatedly (as_of look-ahead bugs): an unusually good result built on an abstracted/proxy quantity, rather than realistic position mechanics, does not survive being rebuilt on the real thing.** Three separate corrections in this same short pairs-trading sub-thread (H515 cash-parking artifact, H516 flagged proxy, now H518 confirming the proxy was hiding large losses) is a strong signal this specific Kalman-pairs construction is not close to a real edge, not just under-engineered.
+4. All 3 pairs fail in the same direction and rough magnitude (Sharpe -1.75 to -2.46, MaxDD -50 to -55%) rather than one outlier — this is a systematic problem with the fixed-beta-at-entry, mark-to-market approach, not a single pair's idiosyncratic failure.
+
+**Production correlation estimate**: N/A — result fails the gate outright (negative Sharpe), no correlation study warranted.
+
+**Verdict**: NOT CONFIRMED. H516's PARTIAL status is effectively downgraded to NOT CONFIRMED now that its own flagged caveat has been resolved — the proxy P&L was masking substantial real losses, not just overstating a real but smaller edge. This closes the H246/H271/H307/H515/H516/H518 ETF-pairs line: five hypotheses of methodology fixes (frozen-beta → Kalman-adaptive, fixed-threshold → rolling-percentile, proxy-P&L → dollar-P&L) never produced a single genuinely confirmed, production-comparable result. GDX/SIL's H515 Var A number (OOS Sharpe 1.259) was the only prior result to clear the gate on non-proxy grounds, but it used the same fixed-threshold construction H515 itself flagged as too rarely triggering to trust broadly, and was never re-validated under true dollar P&L (not done here since H515's fixed-threshold entry rule is superseded by H516's percentile rule, which is what H518 tested).
+**Recommended follow-up**: ETF pairs trading (§3.8) should be considered closed pending a fundamentally different signal construction (not just another threshold or P&L-accounting fix) — e.g. a genuine cointegration-residual mean-reversion strategy with continuous (not fixed-at-entry) beta re-hedging, or abandon the Kalman-adaptive-beta approach entirely in favor of a simpler rolling-OLS hedge ratio with realistic transaction-cost-aware rebalancing frequency. Do not re-attempt this exact Kalman+percentile+dollar-P&L combination without a new idea — it has now been tested end-to-end.
+**Results file**: `backtesting/results/h518_results.json`

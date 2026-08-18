@@ -1,0 +1,68 @@
+{
+  "hypothesis": "H518",
+  "title": "Kalman Pairs, True Leg-Level Dollar P&L Rebuild",
+  "qualified_pairs": [
+    "GDX/SIL",
+    "LQD/HYG",
+    "XLF/KBE"
+  ],
+  "oos_period": "2018-01-01 to 2026-06-13",
+  "gate": "OOS Sharpe > 0.8 (degeneracy-filtered: trade_frac>2% AND |sharpe-BIL_sharpe|>0.5)",
+  "bil_standalone_oos_sharpe": 10.384,
+  "confirmed": false,
+  "best_raw_oos_sharpe": -1.753,
+  "best_non_degenerate_oos_sharpe": -1.753,
+  "pair_results": {
+    "GDX/SIL": {
+      "trace": 15.68,
+      "varA_no_adf_gate": {
+        "sharpe": -1.753,
+        "cagr": -0.0902,
+        "maxdd": -0.553
+      },
+      "varA_trade_frac_of_oos_days": 0.251,
+      "varB_with_adf_gate": {
+        "sharpe": -1.753,
+        "cagr": -0.0902,
+        "maxdd": -0.553
+      },
+      "varB_trade_frac_of_oos_days": 0.251
+    },
+    "LQD/HYG": {
+      "trace": 27.51,
+      "varA_no_adf_gate": {
+        "sharpe": -2.361,
+        "cagr": -0.0808,
+        "maxdd": -0.5083
+      },
+      "varA_trade_frac_of_oos_days": 0.243,
+      "varB_with_adf_gate": {
+        "sharpe": -2.456,
+        "cagr": -0.0788,
+        "maxdd": -0.4994
+      },
+      "varB_trade_frac_of_oos_days": 0.242
+    },
+    "XLF/KBE": {
+      "trace": 23.69,
+      "varA_no_adf_gate": {
+        "sharpe": -2.089,
+        "cagr": -0.0802,
+        "maxdd": -0.5073
+      },
+      "varA_trade_frac_of_oos_days": 0.246,
+      "varB_with_adf_gate": {
+        "sharpe": -2.089,
+        "cagr": -0.0802,
+        "maxdd": -0.5073
+      },
+      "varB_trade_frac_of_oos_days": 0.246
+    }
+  },
+  "composite_varC": {
+    "sharpe": -3.55,
+    "cagr": -0.083,
+    "maxdd": -0.518
+  },
+  "methodology_note": "P&L is now true leg-level dollar terms: long $1 leg A vs short beta_t $ leg B (or inverse for short_spread), beta_t = Kalman filter's own online-adapted hedge ratio at trade open (clipped [0.1,10]), marked to market using actual daily price returns of both legs (not the H516 Kalman-residual-delta proxy). Beta fixed at trade-open value for the life of the trade (no intra-trade re-hedging)."
+}
