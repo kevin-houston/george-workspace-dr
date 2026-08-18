@@ -1,6 +1,6 @@
 ---
 added: 2026-06-10
-updated: 2026-08-05
+updated: 2026-08-18
 category: algorithms
 status: active research area — important reliability caveats
 ---
@@ -967,26 +967,6 @@ Before implementing H274, explicitly decide participants/interaction/agreement r
 A diagnostic toolkit, not another architecture proposal: reconstructs trading trajectories to attribute P&L to specific agent decisions, then asks whether LLM inference cost is actually justified by incremental profit ("intelligence-to-profit conversion"). Flags concrete model-specific failure modes -- in the paper's tests, one model fails specifically at asset selection while another fails at timing, meaning cost-justification failures are not uniform across the pipeline but localized to specific agent roles.
 
 **Why it matters here**: This maps directly onto the wiki's existing Coordination Breakeven Spread (CBS) metric already defined in this page -- TradeLens is effectively a more rigorous, trace-level version of the same cost-justification question CBS asks at a coarser grain. Directly applicable to auditing **H274** (the staged 3-agent PEAD debate design) once it goes live: per-agent-role attribution would answer whether each of the three debating agents is earning its token cost, or whether (as TradeLens found elsewhere) the failure is concentrated in one role.
-
-## Research Lead: CGX — Consensus-Gated Execution, Bull/Bear Debate + Zero-Trade Meta-Evaluator (MDPI Electronics 15(15):3453, flagged 2026-08-18)
-
-**Source:** https://doi.org/10.3390/electronics15153453 (MDPI *Electronics*, published ~early August 2026). WebFetch blocked with HTTP 403 on the MDPI page; the summary below is abstract/search-result level detail only, not full-text -- noted honestly rather than invented, consistent with this wiki's practice for fetch-blocked sources (cf. market-making.md's arXiv:2607.17991 entry).
-
-**What it is:** A crypto-trading multi-agent architecture: two debating agents (Bull, Bear) argue a position, and a separate **Meta-Evaluator** agent gates execution -- critically, the Meta-Evaluator can produce **zero trades** when the Bull/Bear debate fails to reach sufficient convergence, rather than falling back to a majority-vote signal.
-
-**Reported results (abstract-level, unverified against full text):**
-- OOS Sharpe 1.90, MaxDD -11.6%
-- ~3x the Sharpe of a trend-following baseline
-- Validated in two experiments: a 52-week 2024 aggregation run, and a four-year 2022-2025 multi-regime run spanning 417 biweekly sessions
-
-**How this differs from our existing designs:**
-- **H274** (3-agent PEAD debate: advocate/skeptic/judge) always resolves to a signal via majority vote.
-- **H461** (TrustTrade Selective Consensus Gate, arXiv:2603.22567) adds an embedding-based similarity gate on top of H274's vote, filtering low-consensus events, but still ultimately votes rather than abstains as a first-class agent output.
-- **CGX's distinguishing feature** is that "produce no trade" is an explicit, first-class Meta-Evaluator output, not a downstream filter applied after a vote already happened. This is architecturally cleaner: the abstain decision is made by an agent with visibility into *why* the debate didn't converge, rather than a post-hoc embedding-distance threshold.
-
-**Relevance / possible future direction (not staged as a hypothesis tonight):** If H274 is ever built out, consider whether the Meta-Evaluator's explicit-abstain pattern is a better fit than H461's post-hoc consensus gate -- it may reduce false-positive low-consensus trades earlier in the pipeline rather than filtering them after the fact. This is a crypto-domain result; translating the Bull/Bear + Meta-Evaluator pattern to 8-K/PEAD text signals and defining an equivalent "insufficient convergence" criterion for our domain is unscoped work, and the reported numbers are abstract-level only pending full-text verification. No hypothesis number assigned -- logged as a design reference only, same treatment as the 2026-08-03 RAPTOR and 2026-08-04 Motger et al. survey entries above.
-
-**Cross-references:** [H274 multi-agent PEAD], [H461 TrustTrade Selective Consensus Gate], multi-agent-llm-trading.md#trusttrade-selective-consensus-gate-for-h274-arxiv260322567-mar-2026
 
 **Caveat**: Abstract discloses no Sharpe/return/cost numbers -- this is a methodology/tooling paper, not evidence of alpha. Adopt the attribution technique when H274 is instrumented for live/paper trading; not a source of a new hypothesis on its own.
 
