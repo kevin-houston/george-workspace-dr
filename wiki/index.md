@@ -88,6 +88,7 @@ When answering a query:
 - [Awesome Systematic Trading](trading/tools/awesome-systematic-trading.md) — paperswithbacktest curated list; 97 libraries, 40+ strategies, 55 books; 12.8k stars; reference index for hypothesis sourcing and library/broker/data-source lookups ← new 2026-08-07
 - [Qlib](trading/tools/qlib.md) — Microsoft's AI quant platform; ML strategies, production-grade
 - [Backtrader vs Vectorbt](trading/tools/backtrader-vs-vectorbt.md) — framework comparison; H116 ETF rotation implementations for both; Vectorbt v1.0 (2026-04-22)
+- [cloudQuant/backtrader](trading/tools/cloudquant-backtrader-notes.md) — maintained backtrader fork; 45%+ speed claim over upstream; ships backtrader-mcp + backtrader-skills AI-native workflow bundle; infrastructure awareness only, no current gap it fills ← new 2026-08-19
 - [OpenAlice](tools/openalice.md) — full-lifecycle AI trading agent; UTA (CCXT+Alpaca+IBKR), Trading-as-Git, Workspace+MCP, Telegram; TypeScript, 4.4k stars ← 2026-05-28
 - [LEAN / QuantConnect](trading/tools/lean-quantconnect.md) — open-source backtesting + live trading engine; best for options; requires Docker (pending install)
 - [Kraken CLI](trading/tools/kraken-cli.md) — official Kraken AI-native CLI; 151 MCP tools, paper trading built-in, crypto/forex/xStocks
