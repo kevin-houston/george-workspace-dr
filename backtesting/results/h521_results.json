@@ -1,0 +1,58 @@
+{
+  "hypothesis": "H521 \u2014 Scoped MarketSenseAI 4-Agent Stock Selector",
+  "strategy": {
+    "is": {
+      "cagr": 0.2069,
+      "sharpe": 1.0556,
+      "max_drawdown": -0.1405,
+      "n_months": 96
+    },
+    "oos": {
+      "cagr": 0.391,
+      "sharpe": 1.8555,
+      "max_drawdown": -0.0405,
+      "n_months": 67
+    }
+  },
+  "baseline_equal_weight_universe": {
+    "is": {
+      "cagr": 0.2582,
+      "sharpe": 1.7016,
+      "max_drawdown": -0.1647,
+      "n_months": 96
+    },
+    "oos": {
+      "cagr": 0.226,
+      "sharpe": 1.4263,
+      "max_drawdown": -0.2072,
+      "n_months": 67
+    }
+  },
+  "delta_sharpe_oos": 0.4292,
+  "delta_maxdd_oos_pp": 16.67,
+  "avg_qualifying_per_month": 1.28,
+  "degeneracy_checks": [
+    {
+      "agent": "macro",
+      "std": 1.142,
+      "frac_strong_buy": 0.0,
+      "degenerate": true
+    },
+    {
+      "agent": "fundamentals",
+      "std": 0.0,
+      "frac_strong_buy": 0.0,
+      "degenerate": true
+    },
+    {
+      "agent": "dynamics_proxy",
+      "std": 2.5405,
+      "frac_strong_buy": 0.3934,
+      "degenerate": false
+    }
+  ],
+  "any_agent_degenerate": true,
+  "gate_pass_raw_numeric": true,
+  "gate_pass_final": false,
+  "n_llm_calls_cached": 163
+}

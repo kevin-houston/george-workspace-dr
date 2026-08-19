@@ -11586,3 +11586,84 @@ The "original" rows reproduce H356's logged numbers exactly (D=1.339, ref_A=2.31
 **Verdict**: NOT CONFIRMED. Simple SPY 200MA/VIX gating adds no value to H045's bond ETF rotation in any of the four tested forms — the strategy's own momentum signal already performs the defensive rotation an external gate would otherwise force. Closes the "external regime gate on H045" question across all three attempted gate designs (H314 duration, H315 credit, H519 SPY/VIX).
 **Recommended follow-up**: Do not pursue further regime-gate variants on H045 — the pattern (endogenous momentum already regime-aware) is now confirmed three times on this universe. If a bond-universe regime layer is still wanted, it would need to target something H045's momentum genuinely cannot see (e.g. a forward-looking rate-hike-cycle signal from Fed funds futures, distinct from trailing 12m price momentum) rather than another lagging price/vol-based gate.
 **Results file**: `backtesting/results/h519_results.json`
+
+---
+
+## H520 — Macro-LLM Tilt on H026 Canonical ETF Rotation (NOT CONFIRMED — degenerate LLM agents)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-19
+**Trigger**: Execution of staged proposal `dream_cycle/staged/2026-06-11/3_h281_macro_llm_etf_rotation.json` (arXiv:2606.08283, "Macro Economists in the Machine," Wang/Dai/Ma Jun 2026), which had been staged since June but never actually implemented as runnable code — the target file did not exist prior to this run. The paper claims Hawkish/Dovish/Debate LLM agents, given identical FRED macro z-score inputs as a deterministic Rule Agent, still add Sharpe over the Rule Agent (Hawkish +0.044, Debate +0.040, p<0.10), with the Debate agent's edge attributed to bias-correction rather than new information. This session independently re-verified H318 (an earlier, differently-numbered meta-agent ETF rotation attempt) and H319 (LLM semantic network) were both already closed/NOT CONFIRMED and are conceptually distinct from H281's design (regime-tilt on top of an existing momentum signal, not a standalone selector), so this was treated as a genuinely open angle rather than a re-run.
+
+**Script**: `backtesting/daily/run_h520_macro_llm_etf_tilt.py`
+**Universe**: H026 canonical 25-asset universe (11 sector ETFs + BIL, GLD, TLT, IEF, TIP, DBC, AGG, GDX, DBA, SLV, UNG, EWZ, IBB, XME), per H345/H346/H510-H512 usage — NOT the older 11-ETF-only or 23-asset pre-IBB/XME versions used in some earlier scripts.
+**Signal**: Base signal unchanged from H026 canonical (rank(12m momentum) + rank(inv 6m vol), top-1, monthly rebalance). Macro layer: monthly FRED z-scores (FEDFUNDS, CPIAUCSL YoY, UNRATE, T10Y2Y, VIXCLS vs trailing 24m mean/std, `.shift(1)` lagged so only pre-rebalance-date data is used) fed to three gpt-4o-mini agents (Hawkish, Dovish, Debate — Debate sees both other agents' outputs) plus a deterministic Rule Agent (composite z-score vs threshold, the paper's own baseline comparator). Each agent outputs a scalar tilt score in [-1, +1]; when an agent's tilt score falls below -0.3 that month, capital routes to BIL instead of the base signal's pick.
+**IS/OOS**: 2008-2017 / 2018-2026 (H026 canonical split, for consistency with H345/H346/H510-512 rather than the staged stub's own non-canonical 2018-2021/2022-2024 window)
+**Baseline**: H026 canonical ungated, recomputed in this run for apples-to-apples comparison — OOS Sharpe 2.7938, MaxDD -5.68% (differs slightly from H512's replication OOS Sharpe 2.610/-6.7% MaxDD, likely due to a later data cutoff and/or minor universe-membership timing differences; both are the same canonical construction and same order of magnitude, not a discrepancy worth chasing further here).
+**Gate for adoption**: best LLM agent's OOS Sharpe beats the canonical unfiltered baseline by >0.10 Sharpe AND does not degrade OOS MaxDD by more than 2pp AND the LLM agent must beat the deterministic Rule Agent (otherwise the paper's central "LLM adds value beyond a rule" claim is not actually being tested).
+
+**Results** (OOS 2018-2026):
+
+| Agent | OOS Sharpe | OOS MaxDD | Gate fired (months) | ΔSharpe vs baseline |
+|---|---|---|---|---|
+| Baseline (unfiltered) | 2.7938 | -5.68% | — | — |
+| Hawkish | 4.4993 | -0.16% | **100.0%** | +1.706 |
+| Dovish | 2.7938 | -5.68% | **0.0%** | +0.000 |
+| Debate | 2.7938 | -5.68% | **0.0%** | +0.000 |
+| Rule (deterministic) | 2.3687 | -5.68% | 29.1% | -0.425 |
+
+**Key findings**:
+1. **The headline "Hawkish passes gate" result is an artifact of degenerate LLM outputs, not genuine macro-conditional reasoning — this hypothesis is NOT CONFIRMED despite the raw gate check technically passing.** Inspecting the full 271-month cached response distribution: Hawkish's tilt score *never once* exceeded -0.5 across the entire 2004-2026 sample (range -0.8 to -0.5, values: -0.5 ×143, -0.75 ×74, -0.6 ×20, -0.7 ×20, -0.8 ×14) — meaning it fired the -0.3 threshold in literally every month regardless of whether the macro z-scores described 2008's GFC, 2020's COVID crash, 2022's hiking cycle, or a calm 2019. That is not a "tilt," it is Hawkish permanently routing 100% of capital to BIL for the entire sample. The apparent "OOS Sharpe 4.50" and "MaxDD -0.16%" are simply BIL's own cash-like return series (IS CAGR 0.22%, OOS CAGR 2.53% — consistent with T-bill yields, not with any equity rotation), not a validated macro-timing signal.
+2. **Dovish and Debate show the mirror-image failure**: Dovish's tilt score never dropped below +0.2 across the same 271 months (range 0.2-0.5), so it never fired the gate even once — its result is byte-identical to the unfiltered baseline because it never once overrode the base signal. Debate clustered overwhelmingly at +0.1 (251 of 271 months), also never firing.
+3. **None of the three agents actually discriminated across macro regimes.** A genuine macro-conditional signal should show materially different tilt scores between, say, March 2020 (VIX z-score deeply elevated, unemployment spiking) and a calm mid-cycle month — instead each agent collapsed to a narrow ~0.3-wide band and stayed there for the entire 22-year sample. gpt-4o-mini at temperature 0.0, given only 5 numeric z-scores and a role-play prompt, appears to anchor on the *framing* of the prompt (a "hawkish strategist" defaults to a fairly-but-not-maximally negative number; a "dovish strategist" defaults to a fairly-but-not-maximally positive number) rather than genuinely conditioning its output on the input values.
+4. **The deterministic Rule Agent — the paper's own comparator — behaves exactly as it should**: fires 29.1% of OOS months (a plausible, regime-varying frequency, not 0% or 100%), but underperforms the ungated baseline (-0.425 Sharpe), consistent with H519's and H053's established finding that external regime gates tend to fight rather than help an already-regime-aware momentum signal on this style of universe. This is a legitimate, non-degenerate null result.
+5. **This does not replicate the arXiv:2606.08283 paper's core finding** (LLM agents modestly beating a Rule Agent, +0.04 Sharpe). The setup here produced either a degenerate always-on/always-off gate or, when working as intended (Rule Agent), a result consistent with H519's prior finding that gates don't help this style of endogenously-adaptive signal. The gap is most plausibly explained by weaker prompt engineering / a cheaper, less capable model (gpt-4o-mini vs whatever backbone the paper used) than a genuine finding that LLM-macro-tilt doesn't work — worth flagging as inconclusive-on-the-LLM-question rather than a clean rejection of the paper's claim.
+
+**Production correlation estimate**: N/A — no variant passes the gate on its merits (Hawkish's apparent pass is a same-as-100%-cash artifact, not a validated signal; Dovish/Debate are literally identical to the already-in-production H026 baseline; Rule underperforms). Nothing here is a candidate for production blending.
+
+**Verdict**: NOT CONFIRMED. All three LLM agents failed to produce a genuine macro-conditional signal — two collapsed to permanently-off, one collapsed to permanently-on, and the "pass" that technically cleared the pre-stated gate (Hawkish) is an artifact of that saturation, not evidence of macro-timing skill. The deterministic Rule Agent comparator worked correctly but underperformed baseline, consistent with H519.
+**Recommended follow-up**: If this direction is revisited, (a) use a stronger backbone (gpt-4o or better, not gpt-4o-mini) and/or few-shot examples with target-range diversity to reduce anchoring collapse, (b) add an explicit distributional sanity check *inside* the script before backtesting (e.g. assert each agent's output std-dev across the sample exceeds some minimum, and assert firing frequency isn't within a few points of 0% or 100%) so a degenerate agent is caught and flagged before wasting a full backtest run rather than after, and (c) note this reduces the priority of H280 (MarketSenseAI 4-agent) somewhat, since it shares the same "LLM agent conditioned on structured inputs" pattern and the same failure mode (prompt-anchoring collapse) is plausible there too — H280 should include the same pre-backtest degeneracy check from the start.
+**Results file**: `backtesting/results/h520_results.json`
+
+---
+
+## H521 — Scoped MarketSenseAI 4-Agent Stock Selector (NOT CONFIRMED — 2/3 agents degenerate)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-19
+**Trigger**: Execution of staged proposal `dream_cycle/staged/2026-06-11/2_h280_marketsenseai_replication.json` (arXiv:2604.17327, Fatouros & Metaxas, "Signal or Noise in Multi-Agent LLM-based Stock Recommendations?"), staged since June but never implemented as runnable code prior to this run. Original paper design: 4 specialist agents (News, Fundamentals, Dynamics, Macro) + a synthesis agent issue monthly BUY/HOLD/SELL theses; strong-buy equal-weight portfolio beat passive S&P 500 in the paper's 19-month live study.
+
+**Scoping decisions** (documented explicitly, not silent narrowing):
+1. News agent substituted with a "Dynamics-proxy" agent reasoning over point-in-time price/volatility stats (1m/3m/6-1m/12m returns, trailing vol, distance from 252d high) — literal historical news-sentiment backtesting is blocked by NewsAPI's free-tier lack of historical depth (established blocker, see H339/H289/H509).
+2. Universe: H174's existing 30-stock large-cap universe (data availability already validated), not the paper's S&P 100.
+3. IS/OOS: 2013-2020 / 2021-2026, consistent with other H198-family stock hypotheses (H320, H339), rather than the paper's narrow 2023-2025 window — chosen for a larger OOS sample including a down year (2022).
+
+**Script**: `backtesting/daily/run_h521_marketsenseai_scoped.py`
+**Universe**: H174 30-stock large-cap universe
+**Signal**: 3 LLM agents (score 0-10, gpt-4o-mini, temp 0.0) — Fundamentals (FMP key-metrics: FCF yield, ROE, revenue growth, D/E trend), Dynamics-proxy (price/volume momentum stats, News-substitute), Macro (FRED regime z-scores, reused from H520, `.shift(1)` lagged). Synthesis = average of the 3 scores; `strong_buy` if avg ≥ 7.0. Portfolio: equal-weight top-5 strong_buy stocks/month (fewer if <5 qualify; BIL/cash if none). Built-in degeneracy self-check added directly per H520's own recommended follow-up: each agent's score std-dev and strong_buy firing frequency are asserted non-degenerate *before* the gate can pass.
+**IS/OOS**: 2013-2020 / 2021-2026
+**Baseline**: Equal-weight buy-and-hold across the full 30-stock universe
+**Gate for adoption**: OOS Sharpe beats equal-weight baseline by >0.15 AND OOS MaxDD not worse by more than 3pp AND no agent flagged degenerate.
+
+**Results** (OOS 2021-2026, 67 months):
+
+| | IS Sharpe | OOS Sharpe | OOS MaxDD | OOS CAGR |
+|---|---|---|---|---|
+| Strategy (top-5 strong_buy) | 1.056 | 1.856 | -4.05% | 39.1% |
+| Baseline (EW 30-stock) | 1.702 | 1.426 | -20.72% | 22.6% |
+
+ΔSharpe OOS: +0.429. ΔMaxDD OOS: +16.67pp (better). Raw numeric gate: PASS. Avg qualifying stocks/month: 1.3/30.
+
+Degeneracy checks: Macro agent std=1.142, frac_strong_buy=0.0% → **DEGENERATE** (never once said strong-buy). Fundamentals agent std=0.000, frac_strong_buy=0.0% → **DEGENERATE** (constant output, zero variance). Dynamics-proxy agent std=2.541, frac_strong_buy=39.3% → OK, genuinely discriminating.
+
+**Key findings**:
+1. **Final gate: FAIL**, despite the raw numeric comparison passing — 2 of 3 agents (Macro, Fundamentals) are degenerate, same failure mode H520 flagged in gpt-4o-mini agents reasoning over structured numeric inputs at temperature 0.0. The self-check added specifically to catch this (per H520's recommended follow-up) worked as intended on its first real use.
+2. **The apparent "beats baseline" numeric result is not attributable to the LLM synthesis working as designed.** With Macro contributing a constant low score and Fundamentals a literal zero-variance constant, effectively only the Dynamics-proxy agent (price/volume momentum) is doing any real discriminating — the "4-agent synthesis" degenerates to a thin momentum/quality filter selecting ~1.3 stocks/month, which is a much more concentrated (and differently-risked) portfolio than the paper's design implies. The Sharpe/MaxDD improvement over a 30-stock equal-weight baseline is unsurprising for any reasonably-selective momentum screen on this universe (cf. H198/H272/H313) and doesn't validate the multi-agent LLM premise.
+3. Only ~1.3 stocks/month qualify as strong_buy on average — a very sparse, concentrated signal, most likely an artifact of averaging in two near-constant low agent scores that rarely push the composite ≥7.0, not evidence of a highly selective genuine signal.
+4. Same root cause as H520: gpt-4o-mini at temperature 0.0, given structured numeric inputs and a role-scored 0-10 prompt, tends to anchor on the framing/prompt template rather than genuinely conditioning output on input values. This is now the second consecutive LLM-agent hypothesis (H520, H521) to hit this exact failure mode — worth treating as a pattern, not a one-off.
+
+**Production correlation estimate**: N/A — gate fails on the degeneracy check; not a candidate for production blending regardless of the raw numeric Sharpe.
+
+**Verdict**: NOT CONFIRMED. Final gate fails because 2 of 3 constituent LLM agents (Macro, Fundamentals) produce degenerate near-constant output rather than genuine signal — the same collapse-to-constant failure mode identified in H520. The raw numeric outperformance vs. baseline is real but attributable to the one non-degenerate agent (Dynamics-proxy momentum), not to the multi-agent LLM synthesis the hypothesis was testing.
+**Recommended follow-up**: (a) This is now 2/2 LLM-agent-on-structured-numeric-input hypotheses (H520, H521) failing via the identical degeneracy pattern with gpt-4o-mini at temp 0.0 — before attempting a third (e.g. H280's full un-scoped version, or H319), test whether a stronger backbone (gpt-4o) or non-zero temperature with multiple samples averaged resolves the anchoring collapse, ideally as a small isolated diagnostic rather than a full hypothesis cycle. (b) If the pattern persists on a stronger model too, this suggests structured-numeric-input LLM agents are systematically weak in this codebase's exact prompt style and future hypotheses in this family should be deprioritized in favor of the remaining genuinely-open non-LLM angles (H180 spatio-temporal momentum NN, H318 meta-agent rotation selector without LLM agents, H319 LLM semantic network — though H319 shares some risk of the same failure mode if it also feeds structured numeric context).
+**Results file**: `backtesting/results/h521_results.json`

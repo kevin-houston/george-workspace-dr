@@ -1,0 +1,92 @@
+{
+  "hypothesis": "H520 \u2014 Macro-LLM Tilt on H026 Canonical ETF Rotation",
+  "baseline": {
+    "is": {
+      "cagr": 0.239,
+      "sharpe": 2.5634,
+      "max_drawdown": -0.0814,
+      "n_months": 120
+    },
+    "oos": {
+      "cagr": 0.2827,
+      "sharpe": 2.7938,
+      "max_drawdown": -0.0568,
+      "n_months": 103
+    }
+  },
+  "variants": {
+    "hawk": {
+      "is": {
+        "cagr": 0.0022,
+        "sharpe": 0.8043,
+        "max_drawdown": -0.0042,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.0253,
+        "sharpe": 4.4993,
+        "max_drawdown": -0.0016,
+        "n_months": 103
+      },
+      "gate_fired_frac_oos": 1.0,
+      "delta_sharpe_oos": 1.7055,
+      "delta_maxdd_oos_pp": 5.52
+    },
+    "dove": {
+      "is": {
+        "cagr": 0.239,
+        "sharpe": 2.5634,
+        "max_drawdown": -0.0814,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.2827,
+        "sharpe": 2.7938,
+        "max_drawdown": -0.0568,
+        "n_months": 103
+      },
+      "gate_fired_frac_oos": 0.0,
+      "delta_sharpe_oos": 0.0,
+      "delta_maxdd_oos_pp": 0.0
+    },
+    "debate": {
+      "is": {
+        "cagr": 0.239,
+        "sharpe": 2.5634,
+        "max_drawdown": -0.0814,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.2827,
+        "sharpe": 2.7938,
+        "max_drawdown": -0.0568,
+        "n_months": 103
+      },
+      "gate_fired_frac_oos": 0.0,
+      "delta_sharpe_oos": 0.0,
+      "delta_maxdd_oos_pp": 0.0
+    },
+    "rule": {
+      "is": {
+        "cagr": 0.1519,
+        "sharpe": 1.7271,
+        "max_drawdown": -0.1033,
+        "n_months": 120
+      },
+      "oos": {
+        "cagr": 0.2328,
+        "sharpe": 2.3687,
+        "max_drawdown": -0.0568,
+        "n_months": 103
+      },
+      "gate_fired_frac_oos": 0.2913,
+      "delta_sharpe_oos": -0.4251,
+      "delta_maxdd_oos_pp": 0.0
+    }
+  },
+  "best_llm_agent": "hawk",
+  "llm_beats_rule_agent": "True",
+  "gate_pass": "True",
+  "tilt_threshold": -0.3,
+  "n_llm_calls_cached": 813
+}
