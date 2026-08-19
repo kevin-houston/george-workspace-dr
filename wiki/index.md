@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-10
+updated: 2026-08-19
 sources_indexed: 9
 pages: 301
 ---
@@ -380,10 +380,10 @@ When answering a query:
 
 ### Disaster Recovery
 
-- [DR Overview](dr/overview.md) — restore procedure, what survives, what to tell a fresh George; Always-On Agents framework (6 diagnostic axes) + MemTxn transaction-boundary design (source-grounded writes, conflict resolution, snapshot-journal recovery) mapped onto George's documented concurrent-write incidents ← updated 2026-08-05
+- [DR Overview](dr/overview.md) — restore procedure, what survives, what to tell a fresh George; Always-On Agents framework (6 diagnostic axes) + MemTxn transaction-boundary design (source-grounded writes, conflict resolution, snapshot-journal recovery) + DFAH-Bench decision-replayability benchmark (DAR/TAR metrics for observable execution fidelity under replay) mapped onto George's documented concurrent-write and duplicate-build-phase incidents ← updated 2026-08-19
 - [Git Backup Setup](dr/git-backup.md) — git repo config, current status, blocked items
 - [Session Diary](dr/diary.md) — append-only log of sessions; narrative recovery layer
-- [Operational Runbook 2026](dr/runbook-2026.md) — current-state restore commands, subsystem validation, common failure modes, what to tell a fresh George (2026 version); cross-linked to MemTxn concurrent-write analysis ← updated 2026-08-05
+- [Operational Runbook 2026](dr/runbook-2026.md) — current-state restore commands, subsystem validation, common failure modes, what to tell a fresh George (2026 version); cross-linked to MemTxn concurrent-write analysis; wiki page count corrected to 301 (was stale at 209) ← updated 2026-08-19
 - [Strategy Reconstruction Guide](dr/strategy-reconstruction.md) — semantic reconstruction of all 6 production strategies (H026/H041a/H045/IBS/PEAD) from first principles if git restore fails; core logic, critical parameters, look-ahead pitfalls, blending weights ← new 2026-07-26
 
 ---

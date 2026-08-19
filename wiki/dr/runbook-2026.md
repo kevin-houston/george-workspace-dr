@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-05
+updated: 2026-08-19
 status: CURRENT
 ---
 
@@ -31,7 +31,7 @@ The [DR Overview](overview.md) and [Git Backup](git-backup.md) pages were writte
 | Dream cycle scan | LIVE | ~11 PM CT nightly (background Agent tool) |
 | Dream cycle build | LIVE | 4 AM CT daily scheduled task |
 | Nightly session summary | LIVE | After dream cycle build; here.now URL to Kevin |
-| Wiki knowledge base | LIVE | 209 pages as of 2026-07-16 |
+| Wiki knowledge base | LIVE | 301 pages as of 2026-08-10 (was 209 as of 2026-07-16; count corrected 2026-08-19) |
 | QuantMind, Hyper-Extract | AVAILABLE | pip installable; not in venv permanently |
 | Vibe-Trading MCP | LIVE | 22 tools via `mcp__vibe-trading__*` |
 | Kraken CLI | INSTALLED | `/home/node/.cargo/bin/kraken`; MCP server pending |

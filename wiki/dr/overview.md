@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-05
+updated: 2026-08-19
 ---
 
 # Disaster Recovery Overview
@@ -108,6 +108,34 @@ MemTxn's specific mechanisms map onto concrete George gaps:
 | Durable snapshot journal (restore without knowing physical write set) | Git history — but only if the corrupting commit is identified and manually isolated; no automatic "restore active map" primitive | Recovery requires a human/agent to correctly diagnose which files were unintentionally swept into a commit before it can be fixed |
 
 This isn't a call to build a full MemTxn implementation — git + `apply_status` + the task registry's documented gotchas are working well enough in practice. But the highest-leverage narrow adoption would be a lightweight **Temporal Resolver convention** for the two highest write-frequency files (`strategy_accounts.json` and `pead_positions.json`/`pead_gap_positions.json`): a monotonic version/timestamp field checked before write, so a stale concurrent write fails loudly instead of silently overwriting newer state. That's the one piece of MemTxn's design that's cheap to adopt without a dependency and directly targets the failure mode already observed twice this month.
+
+## DFAH-Bench: Benchmarking Observable Agent Instability in Financial Decision-Making (arXiv:2607.20491, added 2026-08-19)
+
+The Always-On Agents and MemTxn sections above both target **state corruption/write-race recoverability** — what happens when concurrent writes to `strategy_accounts.json` or `pead_positions.json` conflict. DFAH-Bench targets a related but distinct failure mode: **decision replayability** — whether re-running the same agent decision under nominally the same conditions produces the same *observable execution path* (same tools called, same order, same arguments), not just the same final answer.
+
+**Source detail level:** gathered via WebSearch at abstract/methodology granularity; full-text has not been independently fetched/verified in this pass, so treat specific numbers below as reported-by-abstract, not independently confirmed.
+
+### What it measures
+
+DFAH-Bench operationalizes a "Determinism-Faithfulness Assurance Harness" (DFAH), where **faithfulness means fidelity of observable execution under replay, not answer correctness**. The key insight: a financial AI agent can reach the *same decision* twice while using different tools, a different call order, or different recorded arguments/results to get there — and outcome-only evaluation (did it get the right answer?) misses this variation entirely, even though it matters for replay, audit, and change control.
+
+Two metrics: **Decision Agreement Rate (DAR)** — do repeated runs reach the same decision? — and **Tool-path Agreement Rate (TAR)** — do repeated runs use the same sequence of tools/arguments to get there?
+
+### Reported findings (abstract-level)
+
+- Across 4,157 retrospective episodes (719 synthetic compliance/financial DataOps groups) plus a 570-episode/190-group argument-aware prospective extension: decisions agree 94.2–95.1% of the time, but exact tool-name paths agree only 66.9–69.4% — a 25.8–27.3 point gap between "got the same answer" and "got there the same way."
+- Argument-and-result agreement (did the tool calls use the same arguments and get the same results, not just the same tool names) falls further, to 45.0–51.5%.
+- Small models (7–20B) show near-perfect determinism through rigid pattern matching, but at the cost of accuracy (20–42%). Frontier models show moderate determinism (50–96%) with better accuracy. **No model tested achieves both high determinism and high accuracy** — these appear to trade off against each other.
+
+### Why this matters for George's DR posture specifically
+
+The task registry's documented dream-cycle duplication incidents (2026-08-16, 2026-08-17) are exactly a DAR/TAR gap in miniature: two independent sessions reached the *same decision* (flag the same staged proposal, write the same changelog) via *different execution paths* (different tool-call sequences, different session contexts) at the same 4 AM trigger slot. High DAR (both sessions converged on the correct action) combined with unverifiable TAR (no record of *how* each session got there, only that a `git diff` after the fact showed identical output) is precisely the failure DFAH-Bench is built to detect and quantify, rather than leaving it to manual `git log`/`git diff` forensics as the task registry's detection pattern currently does.
+
+**Practical implication, not yet actioned:** George's existing detection pattern ("before writing anything in the build phase, `git log`/`git diff HEAD` — if a commit already touched the file today, verify contents match and stop") is a *DAR-only* check — it confirms the final decision matches, but has no visibility into *how* the other session got there. A DFAH-style TAR record (a lightweight log of which tools/steps were taken to reach a build-phase decision, not just the final commit) would let a future session distinguish "the other session did the same reasoning correctly" from "the other session got lucky/took a shortcut that happened to converge" — a distinction that matters more as build-phase logic grows more complex. No hypothesis or action item assigned here; this is a design-reference note logged the same way the Always-On Agents and MemTxn sections were, for future runbook refinement.
+
+### Related work note
+
+A companion paper surfaced in the same search, "Harness as an Asset: Enforcing Determinism via the Convergent AI Agent Framework (CAAF)" (arXiv:2604.17025), proposes an enforcement-side answer to the same problem DFAH-Bench measures — not yet reviewed in depth, flagged here for a possible follow-up pass.
 
 ## Related pages
 
