@@ -1,5 +1,6 @@
 ---
 added: 2026-06-14
+updated: 2026-08-19
 category: algorithms / fundamental / value
 ---
 
@@ -226,7 +227,78 @@ silently and excludes financials correctly (no FCF signal there). EDGAR XBRL cov
 
 ---
 
-## 10. Hypothesis Log
+## 10. 2026 Research Update: Value-Momentum Intersection & FCF Yield Ranking
+
+**Researched 2026-08-19** (nightly wiki rotation — Algorithms section, thinnest by
+genuine-new-page recency: last touched 2026-07-29, vs. every other top-level trading
+section touched within the prior 9 days).
+
+### FCF yield's standing among valuation ratios
+
+Alpha Architect's 40-year backtest (1971–2010) ranking every major single-factor
+valuation ratio found **FCF Yield placed 2nd-best**, delivering ~16.6% average annual
+return to the top decile — trailing only EBITDA/EV in that study, and ahead of
+book-to-market, E/P, and dividend yield individually. This corroborates the wiki's
+existing §2 recommendation (FCF Yield / EV-EBITDA over B/M in a modern universe) with
+an explicit long-sample ranking rather than a qualitative claim.
+
+### The value + momentum intersection — concrete magnitude
+
+Directly actionable against **Open question #4** below (previously speculative,
+"reduces universe to ~5–8 stocks but higher precision"): a 2026 Quant Investing /
+Alpha Architect-style analysis quantifies the effect. Restricting the investable
+universe to stocks in the **top 20% by FCF yield AND top 20% by trailing 12-month
+price return** (a pure intersection filter, no scoring/blend) produced a **506.3%**
+higher cumulative return over the sample period than holding the top-20%-FCF-yield
+decile alone. This is the sharpest documented magnitude yet for the value/momentum
+combo referenced qualitatively in §8 (AQR combo, Asness/Moskowitz/Pedersen 2013) —
+prior wiki coverage had the *mechanism* (negative value/momentum correlation → natural
+diversification) but not this *intersection-filter* magnitude.
+
+Mechanism note: this is a **conjunctive AND filter**, not a rank-blend. It differs from
+H286 (COWZ/SPY cross-momentum, a value-timing signal) and from AQR's separate-sleeves
+approach — it directly narrows the value universe to only "cheap stocks that are
+already recovering," which the existing wiki text flags (§8.2) as the more
+precision-oriented of the three blending approaches but had not yet quantified.
+
+### Quality-value reinforcement
+
+Multiple 2026 sources restate the standard finding that combining quality screens
+(profitability, low accruals — see [quality-factor.md](quality-factor.md)) with
+valuation avoids the classic "value trap" (cheap because deteriorating, not because
+mispriced). No new magnitude beyond what quality-factor.md already documents via
+Piotroski F-Score / Novy-Marx GP/A — noted here only to confirm the 2026 literature
+still treats quality as the standard value-trap filter, not a newer alternative.
+
+### H522 proposed: FCF-yield × 12-1 momentum intersection filter
+
+Builds directly on Open question #4 (below) with the Alpha Architect-style magnitude
+as prior justification for expecting a real effect, not just a plausible mechanism:
+
+- **Universe**: existing 50-stock FMP-covered universe from H284 (excluding
+  financials, per H284's documented bank-FCF-distortion caveat)
+- **Filter**: top quartile FCF yield (FMP `key-metrics`) AND top quartile 12-1m
+  momentum (skip most recent month, per H198's confirmed skip-month convention)
+  — intersection, not rank-sum
+- **Rebalance**: monthly (vs. H284's quarterly-only cadence — momentum leg needs
+  monthly refresh even though the FCF leg is still annual-lagged)
+- **IS/OOS**: same split as H284 (IS Apr 2022–Mar 2024 / OOS Apr 2024–present) for
+  direct comparability; note this window is short (H284's own caveat: "only 4 annual
+  rebalances") and a confirmation here should be treated as directional, not final
+- **Gate**: OOS Sharpe > 1.297 (H284 baseline) AND intersection universe ≥ 5 names/month
+  (avoid over-concentration from a double-restrictive filter)
+- **Key risk carried over from H284**: FMP free-tier ~40% silent coverage gap will bite
+  harder once a second filter (momentum) is applied on top of the already-reduced FCF
+  universe — worth an explicit qualifying-names-per-month diagnostic in the script,
+  not just a final Sharpe number
+
+Staged as a low-risk research-lead in tonight's dream-cycle proposals (see Phase 2 scan
+summary) rather than run directly — this needs the H284 script as a base and a
+qualifying-universe-size sanity check before a full backtest is worth the run time.
+
+---
+
+## 11. Hypothesis Log
 
 | H# | Signal | Verdict | OOS Sharpe | Key Caveat |
 |----|--------|---------|-----------|-----------|
@@ -240,7 +312,9 @@ silently and excludes financials correctly (no FCF signal there). EDGAR XBRL cov
 2. **H293 candidate:** EV/EBITDA cross-section on 50-stock universe (SEC EDGAR quarterly)
 3. **COWZ vs SCHD:** Test dividend-growth (SCHD) as alternative FCF-proxy ETF
 4. **Value + momentum combo:** Long FCF top-quartile AND momentum top-quartile stocks
-   (intersection filter, reduces universe to ~5–8 stocks but higher precision)
+   (intersection filter, reduces universe to ~5–8 stocks but higher precision) —
+   **quantified 2026-08-19, see §10**: a 2026 analysis reports +506.3% cumulative
+   return from this exact intersection filter vs. FCF-yield-alone; staged as H522
 
 ---
 
