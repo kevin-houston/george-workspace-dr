@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paper vs Backtest — 2026-08-18</title>
+<style>
+:root{--bg:#0f172a;--s1:#1e293b;--s2:#263248;--bd:#334155;--tx:#e2e8f0;--mu:#94a3b8;--gr:#4ade80;--rd:#f87171;--bl:#60a5fa;--yl:#fbbf24}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 16px}
+h1{font-size:1.3rem;font-weight:700}
+.gen{color:var(--mu);font-size:0.78rem}
+header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:20px}
+.bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:28px}
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+.clabel{color:var(--mu);font-size:0.7rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.cval{font-size:1.25rem;font-weight:700}
+.csub{color:var(--mu);font-size:0.76rem;margin-top:3px}
+.sec{font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+.sec::after{content:"";flex:1;height:1px;background:var(--bd)}
+table{width:100%;border-collapse:collapse;background:var(--s1);border-radius:10px;overflow:hidden;border:1px solid var(--bd);margin-bottom:20px}
+th{background:var(--s2);color:var(--mu);font-size:0.7rem;text-transform:uppercase;letter-spacing:.05em;padding:9px 12px;text-align:left}
+td{padding:9px 12px;border-top:1px solid var(--bd);font-size:0.84rem}
+tr:hover td{background:var(--s2)}
+.gr{color:var(--gr);font-weight:600}
+.rd{color:var(--rd);font-weight:600}
+.yl{color:var(--yl);font-weight:600}
+.mu{color:var(--mu)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.scard{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.scard h3{font-size:0.9rem;font-weight:700;margin-bottom:4px}
+.scard .sdesc{color:var(--mu);font-size:0.76rem;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--bd);font-size:0.83rem}
+.row:last-child{border-bottom:none}
+.flag{background:#7f1d1d40;border:1px solid var(--rd);border-radius:8px;padding:10px 14px;margin-bottom:14px;color:var(--rd);font-size:0.83rem}
+.info{background:#1e3a5f40;border:1px solid var(--bl);border-radius:8px;padding:10px 14px;margin-bottom:14px;color:var(--bl);font-size:0.83rem}
+.spark{background:var(--s1);border:1px solid var(--bd);border-radius:10px;padding:16px;margin-bottom:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>Paper Trading vs Backtest</h1>
+    <div style="color:var(--mu);font-size:0.78rem">2026-05-14 → 2026-08-18 &nbsp;|&nbsp; 96 calendar days &nbsp;|&nbsp; 66 EOD samples</div>
+  </div>
+  <div class="gen">Generated 2026-08-18 16:31 CT</div>
+</header>
+
+<div class='info'>IBS: no closed round-trips yet. Win rate comparison pending.</div>
+
+<div class="bar">
+  <div class="card"><div class="clabel">Portfolio Equity</div>
+    <div class="cval">$105,187</div>
+    <div class="csub">Alpaca paper account</div></div>
+  <div class="card"><div class="clabel">Total Return</div>
+    <div class="cval gr">+1.4%</div>
+    <div class="csub">Since 2026-05-14</div></div>
+  <div class="card"><div class="clabel">Live Sharpe (ann.)</div>
+    <div class="cval gr">0.36</div>
+    <div class="csub">SE ±2.01 &nbsp;|&nbsp; H026 bm: 1.2</div></div>
+  <div class="card"><div class="clabel">Max Drawdown</div>
+    <div class="cval">-12.0%</div>
+    <div class="csub">EOD-to-EOD peak-to-trough</div></div>
+  <div class="card"><div class="clabel">Ann. CAGR</div>
+    <div class="cval">+5.5%</div>
+    <div class="csub">Extrapolated from 66d</div></div>
+  <div class="card"><div class="clabel">SPY Same Period</div>
+    <div class="cval">+2.8%</div>
+    <div class="csub">Total return benchmark</div></div>
+</div>
+
+<div class="sec">Portfolio-Level Comparison</div>
+<table>
+  <thead><tr><th>Metric</th><th>Live (paper)</th><th>Benchmark</th><th>vs BM</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Sharpe (ann.)</td><td><span class='gr'>0.36</span></td><td>1.20</td><td><span class='rd'>-0.84</span> vs benchmark</td><td class='mu' style='font-size:0.78rem'>H026 OOS 2020–2026. SE large with n<60.</td></tr>
+    <tr><td>H301 overlay gate</td><td><span class='gr'>0.36</span></td><td>1.53</td><td><span class='rd'>-1.17</span> vs benchmark</td><td class='mu' style='font-size:0.78rem'>H026+SPY 200MA overlay. Applies if SPY>200MA at month-end.</td></tr>
+    <tr><td>Ann. CAGR</td><td><span class='gr'>+5.5%</span></td><td>+23.5%</td><td><span class='rd'>-18.0%</span> vs benchmark</td><td class='mu' style='font-size:0.78rem'>vs full production portfolio target (H041a+H026+H045+IBS).</td></tr>
+    <tr><td>Max Drawdown</td><td><span class='gr'>-12.0%</span></td><td>-3.6%</td><td><span class='gr'>-8.4%</span> vs benchmark</td><td class='mu' style='font-size:0.78rem'>vs production portfolio OOS -3.60% MaxDD.</td></tr>
+    <tr><td>Total Return</td><td><span class='gr'>+1.4%</span></td><td>+2.8%</td><td><span class='rd'>-1.4%</span> vs benchmark</td><td class='mu' style='font-size:0.78rem'>vs SPY +2.8% same window.</td></tr>
+  </tbody>
+</table>
+
+<div class="sec">H026 Monthly Rotation — Signal History</div>
+<div class="info" style="margin-bottom:10px">Paper account has been in H026 signal since 2026-04-28. Signal: top-1 momentum
+ from 25-asset universe. Benchmark: OOS Sharpe 1.200 (2020–2026).</div>
+<table>
+  <thead><tr><th>Rebalance Date</th><th>H026 Top Pick</th><th>Equity at Rebalance</th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<div class="sec">IBS Mean-Reversion — Round Trips</div>
+<div class="grid2">
+  <div class="scard">
+    <h3>Live results</h3>
+    <div class="sdesc">XLK (20%) + SMH (8%) + IGV (2%) | Entry IBS &lt; threshold, Exit IBS &gt; threshold or max hold</div>
+    <div class="row"><span>Closed trades</span><span><strong>0</strong></span></div>
+    <div class="row"><span>Open trades</span><span><strong>0</strong></span></div>
+    <div class="row"><span>Win rate</span><span class="mu"><strong>—</strong></span></div>
+    <div class="row"><span>Avg return/trade</span><span><strong>—</strong></span></div>
+  </div>
+  <div class="scard">
+    <h3>Backtest reference</h3>
+    <div class="sdesc">IBS mean-reversion backtested per-ETF. Exact Sharpe not stored in hypothesis log; parameters confirmed OOS.</div>
+    <div class="row"><span>Win rate (expected)</span><span class="mu">&gt;60% typical mean-reversion</span></div>
+    <div class="row"><span>Avg hold</span><span class="mu">3–6 trading days</span></div>
+    <div class="row"><span>Signal frequency</span><span class="mu">~1–3 trades/month/ETF</span></div>
+    <div class="row"><span>Statistical power</span><span class="yl">Low — need ≥20 closed trades</span></div>
+  </div>
+</div>
+<table>
+  <thead><tr><th>Symbol</th><th>Entry</th><th>Exit</th><th>Entry Px</th><th>Exit Px</th><th>Return</th><th>Held</th></tr></thead>
+  <tbody><tr><td colspan='7' class='mu' style='text-align:center'>No closed trades yet</td></tr></tbody>
+</table>
+
+<div class="sec">PEAD (H174) — Waiting for First Trade</div>
+<div class="scard" style="margin-bottom:20px">
+  <h3>H174 FinBERT dual-filter PEAD</h3>
+  <div class="sdesc">Score ≥ 0.18 + EPS surprise ≥ 2% + gap-up ≥ 3%. 5% equity per position, 20-day hold.</div>
+  <div class="row"><span>Live trades (paper)</span><span class="mu"><strong>0</strong> — no qualifying events yet</span></div>
+  <div class="row"><span>Backtest OOS win rate</span><span class="gr"><strong>+81.8%</strong> (n=22)</span></div>
+  <div class="row"><span>Backtest OOS avg return</span><span class="gr"><strong>+6.9%</strong> per trade</span></div>
+  <div class="row"><span>Status</span><span class="yl">Watchlist empty on recent nights — low earnings volume or no qualifying 8-Ks</span></div>
+</div>
+
+<div class="sec">Equity Curve</div>
+<div class="spark"><svg viewBox="0 0 900 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:80px">
+  <polyline points="4.0,23.1 17.5,28.2 31.0,31.4 44.5,27.3 58.1,33.2 71.6,22.5 85.1,22.6 98.6,21.7 112.1,31.1 125.6,26.1 139.2,18.8 152.7,8.9 166.2,4.0 179.7,6.8 193.2,19.6 206.7,9.9 220.2,27.7 233.8,29.2 247.3,34.8 260.8,47.6 274.3,33.3 287.8,31.6 301.3,25.8 314.8,42.7 328.4,52.5 341.9,41.2 355.4,41.9 368.9,37.6 382.4,60.0 395.9,57.4 409.5,76.0 423.0,68.9 436.5,53.4 450.0,38.4 463.5,30.8 477.0,19.0 490.5,17.5 504.1,17.2 517.6,7.7 531.1,12.5 544.6,21.4 558.1,21.4 571.6,21.4 585.2,21.5 598.7,21.8 612.2,22.0 625.7,21.9 639.2,21.6 652.7,21.8 666.2,21.8 679.8,21.8 693.3,21.7 706.8,21.8 720.3,21.8 733.8,21.7 747.3,21.9 760.8,20.8 774.4,16.9 787.9,15.3 801.4,17.1 814.9,14.3 828.4,13.8 841.9,13.5 855.5,11.5 869.0,12.0 882.5,12.1 896.0,15.0" fill="none" stroke="#4ade80" stroke-width="2"/>
+  <text x="4" y="79" font-size="10" fill="#94a3b8">$103.7k  2026-05-14</text>
+  <text x="896" y="79" font-size="10" fill="#94a3b8" text-anchor="end">2026-08-18  $105.2k</text>
+</svg></div>
+
+<div style="color:var(--mu);font-size:0.76rem;margin-top:20px;border-top:1px solid var(--bd);padding-top:12px">
+  <strong>Caveats:</strong> 66 EOD samples (96 calendar days). Sharpe SE ≈ 2.01 —
+  reliable comparison requires ≥60 samples. IBS: 0 closed trades — need ≥20 for win rate confidence.
+  PEAD: n=0. Production portfolio full blend (H041a+H026+H045+IBS) not yet live; paper account runs H026+IBS only.
+  Paper fills ≠ live fills; slippage and PDT rules not applied.
+</div>
+</div>
+</body>
+</html>

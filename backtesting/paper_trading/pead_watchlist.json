@@ -1,6 +1,10 @@
 {
-  "date": "2026-08-18",
+  "date": "2026-08-19",
   "candidates": [],
-  "scores": {},
-  "reason": "no earnings"
+  "scores": {
+    "HD": {
+      "score": -0.0448,
+      "surprise": -0.0439
+    }
+  }
 }

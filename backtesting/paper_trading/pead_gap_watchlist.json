@@ -1,6 +1,8 @@
 {
-  "date": "2026-08-18",
-  "candidates": [],
+  "date": "2026-08-19",
+  "candidates": [
+    "HD"
+  ],
   "source": "earnings_only",
   "strategy": "PEAD_GAP"
 }
