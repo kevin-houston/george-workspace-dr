@@ -1,0 +1,86 @@
+{
+  "date": "2026-08-19",
+  "phase": "Phase 2 — dream cycle arXiv/GitHub scan",
+  "note": "Run from the 2:30 AM nightly trading research task, in addition to (not a duplicate of) the separate ~11 PM Dream Cycle Scan task which already staged 1_dfah_bench_agent_replay_determinism_wiki.json and 2_f2agent_multimodal_fusion_wiki.json in this same dream_cycle/staged/2026-08-19/ folder.",
+  "angles": [
+    {
+      "angle": "1. arXiv: pairs trading + cointegration + LLM",
+      "findings": [
+        {
+          "title": "Moira",
+          "arxiv_id": "2605.01954",
+          "date": "2026-05",
+          "relevance_score": 5,
+          "status": "already known / queued as H316, not new"
+        },
+        {
+          "title": "LLM as a Risk Manager: LLM Semantic Filtering for Lead-Lag Trading in Prediction Markets",
+          "arxiv_id": "2602.07048",
+          "date": "2026-02",
+          "relevance_score": 4,
+          "status": "outside freshness window (~1 month); different asset class (prediction markets, not equity pairs); not staged"
+        }
+      ],
+      "verdict": "no new qualifying finding this cycle"
+    },
+    {
+      "angle": "2. arXiv: PEAD + text signals / earnings call NLP / 8-K analysis",
+      "findings": [
+        {
+          "title": "Decoding the Market's Pulse: Context-Enriched Agentic RAG for Predicting Post-Earnings Price Shocks (CARAG)",
+          "arxiv_id": "EACL 2026 (no arXiv ID captured)",
+          "date": "2026-03",
+          "relevance_score": 6,
+          "status": "outside freshness window; genuinely different mechanism (multi-agent RAG + Causal-Temporal Knowledge Graph vs. George's FinBERT sentiment-score approach in H163/H174); worth a revisit in a future cycle if it resurfaces within the freshness window, not staged tonight"
+        }
+      ],
+      "verdict": "no new qualifying finding this cycle; CARAG flagged for possible future revisit"
+    },
+    {
+      "angle": "3. arXiv: cross-sectional momentum + factor momentum",
+      "findings": [
+        {
+          "title": "CTA trend-factor replication study",
+          "arxiv_id": "2507.15876",
+          "date": "2026-07",
+          "relevance_score": 3,
+          "status": "already-covered territory (H198/H277/H313/H336 family is extensive); not staged"
+        }
+      ],
+      "verdict": "no new qualifying finding this cycle — momentum family already deeply covered"
+    },
+    {
+      "angle": "4. arXiv: multi-agent LLM trading systems",
+      "findings": [
+        {
+          "title": "ContestTrade",
+          "arxiv_id": "2508.00554",
+          "date": "first submitted 2025-08, latest revision 2026-07-08",
+          "relevance_score": 6,
+          "status": "outside freshness window; mechanistically distinct twist (internal contest/auction mechanism, agents scored and reallocated decision authority only after realized market outcomes, not predicted ones) vs. debate-based frameworks already logged (TradingAgents, HedgeAgents, CGX) and vs. H280/H521 MarketSenseAI (already tested, NOT CONFIRMED due to LLM agent degeneracy); not staged, logged for possible future revisit"
+        }
+      ],
+      "verdict": "no new qualifying finding this cycle; ContestTrade flagged for possible future revisit"
+    },
+    {
+      "angle": "5. GitHub: trending quantitative finance repos",
+      "findings": [
+        {
+          "title": "cloudQuant/backtrader",
+          "url": "https://github.com/cloudquant/backtrader",
+          "relevance_score": 7,
+          "status": "genuine new finding — staged",
+          "staged_as": "dream_cycle/staged/2026-08-19/3_cloudquant_backtrader_mcp_wiki.json"
+        }
+      ],
+      "verdict": "one genuine finding, staged as a low-risk wiki tools note"
+    }
+  ],
+  "summary": {
+    "total_findings_reviewed": 6,
+    "staged_count": 1,
+    "not_staged_count": 5,
+    "not_staged_reasons": "4 findings fell outside the ~1-month freshness bar (Feb/Mar/May/Jul 2026 submissions surfaced by keyword search rather than a true August 2026 crop); 1 finding (momentum family) was relevant but already extensively covered by the existing H198/H277/H313/H336 hypothesis family",
+    "methodology_note": "Keyword-based WebSearch appears weighted toward highly-cited/older results rather than true chronological recency for arXiv angles 1-4. A follow-up cycle using arXiv listing-page browsing (e.g. arxiv.org/list/q-fin.TR/2608) instead of keyword search may surface a better crop of genuinely-this-week submissions."
+  }
+}
