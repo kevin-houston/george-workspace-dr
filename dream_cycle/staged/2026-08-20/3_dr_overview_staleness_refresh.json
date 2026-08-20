@@ -3,12 +3,12 @@
   "date": "2026-08-19",
   "source": "internal-audit",
   "source_url": "",
-  "title": "DR overview.md 'what to tell a fresh George' brief — staleness refresh",
+  "title": "DR overview.md 'what to tell a fresh George' brief \u2014 staleness refresh",
   "rationale": "Per-section page-count audit confirmed Disaster Recovery remains the wiki's thinnest section (5 files / ~721 lines vs. 12+ files / 1700+ lines in every other top-level category), consistent with the prior two nights' expansion target. Rather than add a fourth consecutive theory-section bolt-on to wiki/dr/overview.md, this pass instead fixed stale operational facts in the 'what to tell a fresh George' disaster-recovery brief -- the block a restored/fresh George instance is meant to paste in as first-message context. Found stale: hypothesis pipeline description said 'H-series hypotheses run to H455+' (actual: H520+) and omitted the entire H510-H514 look-ahead-bias correction wave (which retracted H343/H344/H355/H356 and narrowed H345/H346 -- a fresh George trusting pre-correction Sharpe numbers for any OB-filter hypothesis would be working from invalidated figures); dream cycle timing said '2:30 AM CT' (actual: ~11 PM CT scan / 4 AM CT build, per task-registry.md); wiki page count said '~237 pages' (actual: 301+ per wiki/index.md frontmatter) and '~284 pages' in a second location later in the same file. All four corrected in-place with source citations to wiki/index.md frontmatter and .local-fragments/task-registry.md for the timing/duplication-risk facts.",
   "risk_level": "low",
   "type": "wiki_update",
   "target_file": "/workspace/agent/wiki/dr/overview.md",
   "content": "Applied inline as a direct edit (not an append) -- see git commit 'nightly research 2026-08-19' for the full diff. Summary of changes: (1) replaced the 'what to tell a fresh George' quoted block's Research pipeline / Dream cycle / Wiki paragraphs with corrected figures (H520+, H510-H514 correction wave note, ~11 PM CT dream cycle timing, 301+ pages); (2) fixed a second stale '~284 pages' reference later in the file to '301+ pages (per wiki/index.md frontmatter, 2026-08-19)'.",
   "action": "write",
-  "apply_status": "pending"
+  "apply_status": "applied"
 }
