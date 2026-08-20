@@ -1,6 +1,7 @@
 ---
 title: cloudQuant/backtrader — Assessment Notes
 added: 2026-08-19
+updated: 2026-08-19
 category: tools
 url: https://github.com/cloudquant/backtrader
 ---
@@ -29,3 +30,12 @@ Same event-driven `next()`/`on_bar`-style strategy architecture as upstream back
 
 ### Bottom line
 Logged as infrastructure awareness only. Revisit if the existing custom pipeline or vibe-trading MCP ever needs a faster/more standardized backtest engine underneath it — no action needed now.
+
+## Related: Backtrader-Bench reliability evidence (2026-08-19)
+
+A separate paper, [Backtrader-Bench (arXiv:2608.11232)](../../ai-industry/llm-finance-benchmarks-2026.md#backtrader-bench--llm-coding-agents-on-algorithmic-trading-via-self-generated-mcqs-arxiv260811232-aug-2026), evaluates LLM coding agents specifically on the `backtrader` framework's output — tool-augmented agents (executing code) reach 90.0% accuracy on backtest-result questions vs. 73.0% for the best no-tools baseline. It's not about this cloudQuant fork specifically, but it's directly relevant evidence for whether an agent using `backtrader-mcp`'s typed tools (noted above) would actually be more reliable than one reasoning about backtrader output in free text — the answer per this benchmark is yes, substantially.
+
+## Related pages
+
+- [LLM Evaluation & Benchmarking for Finance 2026](../../ai-industry/llm-finance-benchmarks-2026.md) — Backtrader-Bench, PortBench, CLQT, BacktestBench
+- [Quant Desktop Market Terminal](quant-terminal-notes.md)

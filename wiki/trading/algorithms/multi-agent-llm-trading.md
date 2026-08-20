@@ -1,6 +1,6 @@
 ---
 added: 2026-06-10
-updated: 2026-08-18
+updated: 2026-08-19
 category: algorithms
 status: active research area — important reliability caveats
 ---
@@ -1003,3 +1003,17 @@ A diagnostic toolkit, not another architecture proposal: reconstructs trading tr
 **Relevance / possible future direction (not staged as a hypothesis tonight):** If a future PEAD or momentum hypothesis wants to blend multiple signal modalities (e.g. H174's FinBERT text score + a technical momentum score + a macro regime gate) rather than picking one dominant filter, F2Agent's adaptive-fusion framing is a candidate design reference distinct from anything currently cited in [Attention Mechanisms and Vector Quantization](attention-cross-sectional-factor-models.md) or [E2E Portfolio Policies](e2e-portfolio-policies.md), both of which are single-modality (price/factor) architectures. No hypothesis number assigned; logged as a design reference only, same treatment as the 2026-08-18 CGX entry above.
 
 **Cross-references:** [CGX — Consensus-Gated Execution], [Agentic Trading Survey 2026](../../ai-industry/agentic-trading-survey-2026.md), [Shared Evaluation Checklist](../shared-eval-checklist.md)
+
+## Research Lead: CoffeeBench — Idle-Drift Failure Mode in Long-Horizon Heterogeneous Multi-Agent Economies (arXiv:2606.16613, flagged 2026-08-19)
+
+**Source:** Sakana AI (Ishida et al.), "CoffeeBench: Benchmarking Long-Horizon LLM Agents in Heterogeneous Multi-Agent Economies," submitted 2026-06-15, accepted FAGEN @ ICML 2026. Code and results released (`SakanaAI/CoffeeBench`). Detail gathered via WebSearch at abstract/project-page level; full paper not independently fetched in this pass.
+
+**What it is:** Unlike the debate-architecture papers already covered on this page (TradingAgents, HedgeAgents, CGX, F2Agent — all single decision-maker vs. a passive market), CoffeeBench evaluates an LLM agent embedded in a **persistent, heterogeneous, multi-firm economy**: two coffee farmers, two roasters, and two retailers run a 90-day simulation, each maximizing their own cumulative net income while communicating and transacting with the others. The evaluated model controls one roaster; every other firm is a fixed reference agent. This is closer to George's own dream-cycle-vs-scheduled-task interaction pattern (multiple autonomous processes with their own objectives sharing a workspace/economy over an extended horizon) than to a single-session trading-decision benchmark.
+
+**Reported finding — the "idle-drift" failure mode:** Higher-capability models (GPT-5.5, Claude Opus 4.7) communicate more actively with counterparties and earn more. But **Claude Haiku 4.5 exhibits a distinct failure mode**: it maintains internally coherent reasoning traces (its logged rationale reads as sensible) yet repeatedly *chooses to wait rather than act*, producing prolonged operational inactivity and low net income — a failure that looks like caution in the trace but is actually value-destroying paralysis, and one that outcome-only grading would likely miss if it only checked "did the agent's reasoning make sense" rather than "did the agent's inaction cost money."
+
+**Relevance to George's own architecture:** This is a directly recognizable pattern against a different failure class already documented at length in `.local-fragments/task-registry.md` — most of that registry's incidents are about *too much* concurrent action (duplicate dream-cycle runs, duplicate PEAD-GAP opens, git-add races). Idle-drift is the mirror-image risk: a scheduled task or companion agent that reasons coherently every wakeup but defers action indefinitely (e.g. a task that keeps concluding "not enough signal yet, wait" past the point where waiting itself has a cost — a stale watchlist, a missed entry window). None of George's current scheduled tasks (PEAD passes, H112 rebalancer, dream cycle) have an explicit "flag if N consecutive wakeups produced no action" check; this paper's finding is a concrete argument for adding one, at least as a monitoring signal, rather than assuming a coherent-sounding "skip this cycle" decision is automatically a correct one.
+
+**Not staged as a new hypothesis** — this is a multi-agent reliability/evaluation finding, not a trading signal. Logged as a design-reference note in the same style as the CGX and F2Agent entries above; the actionable idea (idle-drift monitoring on scheduled tasks) belongs in a future DR/runbook pass, not the trading hypothesis pipeline.
+
+**Cross-references:** [CGX — Consensus-Gated Execution], [F2Agent — Modality-Aware Adaptive Fusion], [DR Operational Runbook 2026](../../dr/runbook-2026.md) — Section 3 common-failures catalog is the natural home for an idle-drift check if one is ever added

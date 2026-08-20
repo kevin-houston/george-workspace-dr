@@ -1,6 +1,6 @@
 ---
 created: 2026-07-03
-updated: 2026-07-28
+updated: 2026-08-19
 type: concept
 category: AI Industry
 ---
@@ -220,11 +220,32 @@ Hypothesis: adding an explicit macro regime gate (signal 3) would improve H174 O
 
 ---
 
+## Backtrader-Bench — LLM Coding Agents on Algorithmic Trading via Self-Generated MCQs (arXiv:2608.11232, Aug 2026)
+
+**Source**: Zhao et al., "Backtrader-Bench: Benchmarking LLM Agents on Algorithmic Trading with Self-Generated MCQs," submitted 2026-08-14, accepted FinLLM Workshop @ IJCAI 2026. Detail gathered via WebSearch at abstract/README level; the paper's full text has not been independently fetched in this pass, so treat specifics below as reported, not independently verified.
+
+### What it does differently
+
+Existing LLM-trading benchmarks (BacktestBench, CLQT, PortBench — all already cited above) evaluate whether an LLM's *trading decisions* are good. Backtrader-Bench instead evaluates whether an LLM *coding agent* can correctly answer quantitative questions about a backtest's own numerical output — e.g. "what was the Sharpe ratio of variant X after changing parameter Y" — where getting the right answer strictly requires actually running the code, not pattern-matching from training data. This sidesteps the data-contamination risk that plagues static benchmarks: a deterministic multiple-choice pipeline generates questions from real backtest configurations (5 strategies, 33 templates, 3 difficulty tiers), and a **generator-solver filtering pipeline** discards any question a no-tool solver can already answer without executing code — so the retained question set specifically targets code-execution-dependent reasoning, not memorized facts.
+
+### Reported results
+
+- 11 models evaluated without tools (10 runs each) plus 4 tool-augmented configurations on a 30-question curated set.
+- **Tool-augmented agents reach 90.0% accuracy** (best: GPT-5.5 and Claude Opus 4.7), a wide margin over the **best no-tools baseline at 73.0%** — i.e. actually executing the backtest code, rather than reasoning about it in the abstract, is worth roughly 17 percentage points.
+- Full question sets (160-question and a balanced 30-question set) and code released on GitHub (`rzhao999/Backtrader-Bench`).
+
+### Relevance to George's pipeline
+
+This is a direct evidentiary counterpart to the [cloudQuant/backtrader tooling note](../trading/tools/cloudquant-backtrader-notes.md) logged the previous night (2026-08-19): that note flagged an MCP server exposing typed tools for building/running backtrader strategies from an agent session but took no position on whether an agent using such tools is actually more reliable than one reasoning without them. Backtrader-Bench supplies exactly that evidence for the `backtrader` framework specifically (17pp accuracy gap, tools vs. no tools) — reinforcing the wiki's existing "LLM-as-filter-not-allocator" pattern (PortBench above) with an adjacent, code-execution-specific finding: even for questions with a single verifiable numeric answer, an LLM without the ability to execute code is a meaningfully worse source of truth than one that can. For any future work wiring an LLM agent to read `run_hNNN.py` backtest results (e.g. summarizing a hypothesis run, or a natural-language interface over `hypothesis-log.md`), this argues for tool-executed verification over free-text LLM summary whenever a specific number is being reported, not just narrative interpretation.
+
+**Not staged as a new hypothesis** — this is a benchmark/tooling-reliability finding, not a trading signal. Logged as a design-reference note alongside the existing BacktestBench/CLQT/PortBench entries above.
+
 ## See Also
 
 - [AI Model Landscape 2026](model-landscape-2026.md) — frontier model snapshot
 - [AI Agent Frameworks Ecosystem](agent-frameworks-2026.md) — LangGraph, CrewAI, PydanticAI
 - [Multi-Agent LLM Trading](../trading/algorithms/multi-agent-llm-trading.md) — PortBench + reproducibility crisis
+- [cloudQuant/backtrader Notes](../trading/tools/cloudquant-backtrader-notes.md) — MCP-native backtest tooling; Backtrader-Bench is the reliability evidence for agent-executed backtests
 - [Shared Strategy Evaluation Checklist](../trading/shared-eval-checklist.md) — 7-point pre-production gate
 - [Backtesting Design Principles](../trading/backtesting/design-principles.md) — IS/OOS framework
 - [Regime Detection](../trading/algorithms/regime-detection.md) — HMM, VJM, Statistical Jump Model

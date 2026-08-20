@@ -36,11 +36,11 @@ If restoring without git (e.g. full system loss), paste this into the first mess
 >
 > **Production trading portfolio** (OOS Sharpe 4.158, MaxDD −3.60%, ~23.5% CAGR, zero negative years 2004–2025): H041a 22% / H026 27% / H045 21% / XLK IBS 20% / SMH IBS 8% / IGV IBS 2%. All 6 strategies are live in Alpaca paper trading (~$102k portfolio).
 >
-> **Research pipeline**: H-series hypotheses run to H455+. Confirmed: H174 (PEAD FinBERT, OOS WR=81.8%), H181 (industry-adjusted reversal, OOS 1.138), H198 (6-1m momentum, OOS 1.174 — degrading 2021–2026), H344–H346 (Order Block filters), H354/H355 (low-vol ETF + bond OB). Latest: H444 CONFIRMED (realized-vol gate H198, OOS 1.275); H450–H455 STAGED.
+> **Research pipeline**: H-series hypotheses run to H520+. Confirmed: H174 (PEAD FinBERT, OOS WR=81.8%), H181 (industry-adjusted reversal, OOS 1.138), H198 (6-1m momentum, OOS 1.174 — degrading 2021–2026), H344/H346 (Order Block filters, narrowed after a look-ahead-bias correction — see next line), H354 (low-vol ETF). **Important 2026-08 correction wave**: H510 found a systematic `as_of` look-ahead bug in the Order Block filter's date handling; the blast-radius audit (H511-H514) re-ran every affected variant — H343/H344/H355/H356 fully RETRACTED, H345/H346 narrowed (still pass gate but no longer beat baseline). Always check `wiki/trading/backtesting/hypothesis-log.md` for a retraction marker before trusting a pre-2026-08-13 Sharpe figure for anything OB-filter-related. Latest: H519-H521 macro-LLM tilt work, NOT CONFIRMED.
 >
-> **Dream cycle**: runs nightly at 2:30 AM CT (arXiv scan → staged proposals) with a 4 AM CT build phase. Nightly backup to `github.com/kevin-houston/george-workspace-dr` at 7 AM CT.
+> **Dream cycle**: runs nightly around 11 PM CT (arXiv scan → staged proposals, `dream_cycle/staged/YYYY-MM-DD/`) with a 4 AM CT build phase that applies them. Nightly git backup to `github.com/kevin-houston/george-workspace-dr` at 7 AM CT. Concurrent-session duplication at these shared trigger times is a recurring, documented failure mode — see `.local-fragments/task-registry.md` for the detection pattern before assuming missing output means work didn't happen.
 >
-> **Wiki**: ~237 pages in `/workspace/agent/wiki/` covering trading algorithms, backtesting, data sources, paper trading ops, prediction markets, and tools. Read `wiki/index.md` first to orient.
+> **Wiki**: 301+ pages in `/workspace/agent/wiki/` as of 2026-08-19 (grew from ~237 in early August) covering trading algorithms, backtesting, data sources, paper trading ops, prediction markets, and tools. Read `wiki/index.md` first to orient — its frontmatter `pages:` count is the authoritative live figure, likely higher than this paragraph's number by the time you're reading it.
 >
 > Check `wiki/dr/diary.md` for session history and `wiki/dr/runbook-2026.md` for current restore commands.
 
@@ -71,7 +71,7 @@ The paper's core contribution is a framework for classifying any piece of persis
 
 ### Literature-gap finding, applied
 
-The survey's headline finding — that agent research "concentrates more heavily on accumulating and retrieving state than on governing, recovering, or relinquishing it" — is a good diagnostic prompt for this DR section specifically. George's DR pages document restore *procedure* well (git clone, re-seed credentials, verify wiki integrity) but have no page addressing **relinquishing** state — e.g. is there a policy for when a stale hypothesis stub, an abandoned tool note, or a superseded strategy log should be pruned rather than accumulated indefinitely? The wiki has grown to ~284 pages with no pruning mechanism; per this paper's framework that's an unaddressed axis, not just a scale curiosity.
+The survey's headline finding — that agent research "concentrates more heavily on accumulating and retrieving state than on governing, recovering, or relinquishing it" — is a good diagnostic prompt for this DR section specifically. George's DR pages document restore *procedure* well (git clone, re-seed credentials, verify wiki integrity) but have no page addressing **relinquishing** state — e.g. is there a policy for when a stale hypothesis stub, an abandoned tool note, or a superseded strategy log should be pruned rather than accumulated indefinitely? The wiki has grown to 301+ pages (per `wiki/index.md` frontmatter, 2026-08-19) with no pruning mechanism; per this paper's framework that's an unaddressed axis, not just a scale curiosity.
 
 ### Always-On Evaluation Protocol (AOEP-v0)
 
