@@ -11,5 +11,18 @@
     "gap_pct": 0.153,
     "stop_price": 244.38,
     "hold_days": 20
+  },
+  {
+    "ticker": "HD",
+    "strategy": "PEAD_GAP",
+    "order_id": "9630baed-581a-40f3-80a7-70beab4e7072",
+    "entry_date": "2026-08-19",
+    "exit_date": "2026-09-16",
+    "notional": 249.99999855000002,
+    "ref_price": 348.4700012207031,
+    "prior_close": 337.489990234375,
+    "gap_pct": 0.0325,
+    "stop_price": 313.62,
+    "hold_days": 20
   }
 ]

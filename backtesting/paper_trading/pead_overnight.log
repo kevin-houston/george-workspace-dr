@@ -1285,3 +1285,35 @@
 [2026-08-18 23:35:24] Candidates for tomorrow: none
 [2026-08-18 23:35:24] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-08-18 23:35:24] Overnight pass complete.
+[2026-08-19 23:01:19] =======================================================
+[2026-08-19 23:01:19] =======================================================
+[2026-08-19 23:01:19] PEAD overnight pass starting
+[2026-08-19 23:01:19] PEAD overnight pass starting
+[2026-08-19 23:01:19] Scanning earnings calendar…
+[2026-08-19 23:01:19] Scanning earnings calendar…
+[2026-08-19 23:01:47]   Tickers with recent earnings: ['HD', 'LOW']
+[2026-08-19 23:01:47]   Fetching 8-K for HD…
+[2026-08-19 23:01:48]   Tickers with recent earnings: ['HD', 'LOW']
+[2026-08-19 23:01:48]   Fetching 8-K for HD…
+[2026-08-19 23:02:16]     HD: 4320 chars
+[2026-08-19 23:02:16]   Fetching 8-K for LOW…
+[2026-08-19 23:02:16]     HD: 4320 chars
+[2026-08-19 23:02:16]   Fetching 8-K for LOW…
+[2026-08-19 23:02:19]     LOW: 4772 chars
+[2026-08-19 23:02:19]     LOW: 4772 chars
+[2026-08-19 23:04:15]   Loading ProsusAI/finbert…
+[2026-08-19 23:04:15]   Loading ProsusAI/finbert…
+[2026-08-19 23:30:06]   HD: score=-0.045  surprise=-0.044
+[2026-08-19 23:30:10]   LOW: score=-0.025  surprise=-0.173
+[2026-08-19 23:30:10]   ✗ HD filtered out (score=-0.045, surprise=-0.0439)
+[2026-08-19 23:30:10]   ✗ LOW filtered out (score=-0.025, surprise=-0.1735)
+[2026-08-19 23:30:10] Candidates for tomorrow: none
+[2026-08-19 23:30:12] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-08-19 23:30:12] Overnight pass complete.
+[2026-08-19 23:30:19]   HD: score=-0.045  surprise=-0.044
+[2026-08-19 23:30:22]   LOW: score=-0.025  surprise=-0.173
+[2026-08-19 23:30:22]   ✗ HD filtered out (score=-0.045, surprise=-0.0439)
+[2026-08-19 23:30:22]   ✗ LOW filtered out (score=-0.025, surprise=-0.1735)
+[2026-08-19 23:30:22] Candidates for tomorrow: none
+[2026-08-19 23:30:22] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
+[2026-08-19 23:30:22] Overnight pass complete.

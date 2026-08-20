@@ -265,6 +265,10 @@
         {
           "date": "2026-08-18",
           "equity": 5052.34
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 5052.34
         }
       ],
       "status": "active"
@@ -297,7 +301,7 @@
       "backtest_oos_period": "live paper test started 2026-07-03",
       "script": "pead_gap_open.py",
       "start_equity": 5000.0,
-      "cash": 4750.0023,
+      "cash": 4500.0099,
       "open_positions": {
         "AMZN": {
           "qty": 0.9207,
@@ -305,6 +309,14 @@
           "entry_date": "2026-07-31",
           "cost_basis": 249.9977,
           "order_id": "a3b0854a-b91f-4606-98ab-1eabfcd9f707",
+          "note": ""
+        },
+        "HD": {
+          "qty": 0.7174,
+          "entry_price": 348.47,
+          "entry_date": "2026-08-19",
+          "cost_basis": 249.9924,
+          "order_id": "9630baed-581a-40f3-80a7-70beab4e7072",
           "note": ""
         }
       },
@@ -385,6 +397,10 @@
         {
           "date": "2026-08-18",
           "equity": 4989.25
+        },
+        {
+          "date": "2026-08-19",
+          "equity": 4991.45
         }
       ],
       "status": "active"
@@ -404,5 +420,5 @@
       "status": "stub"
     }
   },
-  "updated": "2026-08-18T14:46:33.823562"
+  "updated": "2026-08-19T14:46:38.803247"
 }

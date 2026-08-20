@@ -138,6 +138,7 @@ Living reference for all recurring tasks. Each section: trigger → success crit
 - **Duplicate execution observed 2026-07-31**: 4 separate invocations of the open pass ran within one 65-second window (09:32:07–09:33:11 CT) around the AMZN entry — likely two overlapping trigger sources (task scheduler + a second session) racing on the same 9:32 AM slot. Only one order was placed (Alpaca confirmed a single filled AMZN order, `pead_gap_positions.json` has exactly one entry) because the "already in positions" guard in `pead_gap_open.py` correctly no-op'd the later runs. No harm done, but worth watching for — if this recurs with tighter timing it could plausibly race past the guard.
 - Positions written to `pead_gap_positions.json`; strategy tracked as `PEAD_GAP` in strategy_accounts.json.
 - Only message Kevin if orders are placed.
+- **Second duplicate-execution instance, 2026-08-19 (HD)**: two invocations of the 9:32 AM open pass ran 61s apart (09:32:13 and 09:33:14 CT). The first entered HD (gap 3.3%, order `9630baed-581a-40f3-80a7-70beab4e7072`); the second correctly no-op'd via the "already in positions" guard. Same pattern as 2026-07-31 — guard held, no duplicate order — confirms this is a recurring scheduler behavior rather than a one-off. When a run logs "already in positions" for a ticker you don't recognize, read `pead_gap_positions.json` directly to confirm what happened before assuming it's stale state.
 
 ---
 

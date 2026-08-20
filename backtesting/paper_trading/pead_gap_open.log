@@ -564,3 +564,27 @@
 [2026-08-18 09:33:10] =======================================================
 [2026-08-18 09:33:10] PEAD-GAP open pass starting
 [2026-08-18 09:33:10] Watchlist empty — no earnings candidates today.
+[2026-08-19 09:32:13] =======================================================
+[2026-08-19 09:32:13] PEAD-GAP open pass starting
+[2026-08-19 09:32:13] Earnings candidates: ['HD']
+[2026-08-19 09:32:13] PEAD_GAP strategy equity: $5,000
+[2026-08-19 09:32:16]   HD: prior_close=337.49 current=348.47 gap=3.3%
+[2026-08-19 09:32:16]   ✓ HD: gap 3.3% >= 3% — entering
+[2026-08-19 09:32:18]   ORDER SUBMITTED: HD notional=$250 id=9630baed-581a-40f3-80a7-70beab4e7072
+[2026-08-19 09:32:18]   HD: position logged, exit=2026-09-16
+[2026-08-19 09:32:18] Logged 1 new position(s). Total open: 2
+[2026-08-19 09:32:19] Open pass complete.
+[2026-08-19 09:33:14] =======================================================
+[2026-08-19 09:33:14] PEAD-GAP open pass starting
+[2026-08-19 09:33:14] Earnings candidates: ['HD']
+[2026-08-19 09:33:14] PEAD_GAP strategy equity: $5,000
+[2026-08-19 09:33:14]   HD: already in positions, skipping
+[2026-08-19 09:33:14] No new positions entered today.
+[2026-08-19 09:33:16] Open pass complete.
+[2026-08-19 09:47:22] =======================================================
+[2026-08-19 09:47:22] PEAD-GAP open pass starting
+[2026-08-19 09:47:22] Earnings candidates: ['HD']
+[2026-08-19 09:47:22] PEAD_GAP strategy equity: $5,000
+[2026-08-19 09:47:22]   HD: already in positions, skipping
+[2026-08-19 09:47:22] No new positions entered today.
+[2026-08-19 09:47:34] Open pass complete.
