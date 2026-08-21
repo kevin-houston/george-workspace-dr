@@ -11743,3 +11743,70 @@ Best variant (A, no turnover reg) @ 5bp: OOS Sharpe = 1.185. Gate 1.5: **FAIL**.
 **Verdict**: NOT CONFIRMED. The ML regime selector does not clear the +0.20 OOS Sharpe improvement gate vs. the static blend (actual: +0.070), even though it modestly outperforms an honestly-lagged version of H249's own hand-coded rule table. The more significant outcome of this hypothesis is the discovery that H249's original CONFIRMED result appears to rest on the same as-of-date look-ahead bug class that retracted the entire OB-filter hypothesis family — flagged explicitly rather than silently fixed, since correcting H249 in place was out of this session's scope.
 **Recommended follow-up**: (a) **Highest priority**: stage a dedicated H249 correction hypothesis (bug-audit re-run, analogous to H510-H514's blast-radius corrections of the OB-filter bug) to formally confirm/retract H249 using the honestly-lagged regime signal — this session's side-by-side check (OOS Sharpe 1.103 unlagged vs. 0.769 lag-fixed, now below the 0.839 static baseline) strongly suggests H249 will not survive correction, but a dedicated re-run with the full IS/OOS table (matching the rigor of H511-H514) should make that a formal record rather than a footnote in H523. (b) This closes H318 as a direction — the "meta-agent selector, no LLM" premise was tested cleanly and did not clear its gate on this feature set/classifier; if revisited, addressing the severe IS class imbalance (e.g. binary bull/bear-only classification, or SMOTE-style rebalancing) before adding more classes would be the highest-value next step, not a fundamentally different architecture. (c) H319 (LLM semantic network) remains deprioritized per H520/H521's established LLM-degeneracy pattern and was not attempted this session.
 **Results file**: `backtesting/results/h523_results.json`
+
+## H524 — VIX-Regime-Conditioned Momentum Lookback (NOT CONFIRMED — fails WF gate on all 4 variants)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-20
+**Trigger**: Kevin shared https://alphaarchitect.com/vix-trend-following-out-of-sample/ ("Note and test this"). The article's core claim (2017 original + 2026 out-of-sample follow-up) is that shortening a trend-following lookback window when the VIX is elevated — trading faster in turbulent regimes, slower in calm ones — improves risk-adjusted trend-following performance vs. a fixed lookback. **Sourcing caveat**: the primary URL is Cloudflare-protected (JS challenge, blocked both plain curl and `agent-browser`); the 2017 original's figures were sourced from a full-text Yahoo Finance syndication mirror, but the 2026 follow-up's own quantitative figures could only be sourced via WebSearch snippets (weaker sourcing — not independently verified against full text). H524 tests the mechanism directly on our own universe/costs rather than relying on the article's own reported numbers.
+**Script**: `backtesting/daily/run_h524_vix_regime_trend.py`
+**Universe**: SPY / VXF / EFA / AGG, with BIL as cash-proxy fallback for any leg with negative momentum.
+**Signal**: FRED VIXCLS, 20-day SMA, mapped to 3 lookback regimes — Green (VIX≤18) → 10-month lookback, Yellow (18–32) → 3-month, Red (≥32) → 1-month. Monthly top-1 and top-2 momentum rotation within each regime's lookback window. Baseline is a static 10-month lookback with no regime switching. **Look-ahead bug found and fixed before any results were reported**: the initial draft computed each month's momentum signal using `monthly_px.iloc[i]` where `i` also indexed the end of that same month's holding period — i.e. the signal used to pick what to hold during a month partly depended on that month's own closing price, the same as-of-date bug class that retracted the H343/H509/H510-family OB filters and the H249 regime-weight bug surfaced in H523. Fixed by strictly separating the decision date (month t-1's close, known in advance) from the holding period (month t), and by reading the VIX regime as-of the decision date rather than the holding month's end. Pre-fix results were inflated (OOS Sharpe up to ~2.0, CAGR up to ~29% for regime-Top1) and were never logged or reported to Kevin.
+**IS/OOS**: 2008-01-01 to 2017-12-31 (IS) / 2018-01-01 to present (OOS); AltOOS 2013-01-01 to present.
+**Baseline**: static fixed 10-month lookback, same universe, no VIX-regime lookback switching.
+**Gate for adoption**: OOS Sharpe improvement over the static baseline > 0.10 AND walk-forward worst-fold Sharpe ≥ 1.75 gate ratio; OR MaxDD improvement > 2pp without losing more than 0.10 Sharpe.
+
+**Results** (post-fix, look-ahead-safe):
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS post-tax CAGR est. | AltOOS Sharpe | WF worst fold |
+|---|---|---|---|---|---|---|---|
+| Regime-conditional Top1 | 0.633 | 0.843 | 11.24% | -10.78% | 7.08% | 0.808 | **-0.415** |
+| Static Top1 (baseline) | 0.342 | 0.673 | 8.30% | -13.19% | 5.23% | 0.755 | **-0.202** |
+| Regime-conditional Top2 | 0.880 | 0.761 | 9.08% | -14.14% | 5.72% | 0.861 | **-0.684** |
+| Static Top2 (baseline) | 0.541 | 0.789 | 9.24% | -18.01% | 5.82% | 0.891 | **-0.747** |
+
+Top1 gate check: ΔOOS Sharpe (regime − static) = +0.170 (clears the 0.10 threshold on its own) but walk-forward worst fold is deeply negative (-0.415), so the combined gate **FAILs**. Top2 gate check: ΔOOS Sharpe = **-0.029** (regime-conditioning is actually slightly worse), walk-forward worst fold also deeply negative (-0.747); **FAILs** outright.
+
+**Key findings**:
+1. **A look-ahead bias bug in the first draft inflated results dramatically** (OOS Sharpe ~2.0 pre-fix vs. 0.673–0.843 post-fix) — caught and corrected before any numbers were shared or logged, same bug class (current period's own closing price leaking into that period's own allocation decision) documented extensively in the H343/H509/H510 OB-filter family and H249's regime-weight table (H523). No retraction needed since this was caught pre-publication, but it reinforces that this bug class is easy to reintroduce even when writing a brand-new script with the bug pattern explicitly in mind.
+2. **Both regime-conditional variants fail the walk-forward gate badly** — worst-fold Sharpe is deeply negative for all 4 variants (Top1 regime -0.415, Top1 static -0.202, Top2 regime -0.684, Top2 static -0.747), meaning at least one 2-year fold each strategy tested lost money on a risk-adjusted basis. Even variants that clear the OOS-Sharpe-improvement bar do not clear the walk-forward stability bar.
+3. **The regime-conditioning effect is inconsistent across variants** — Top1 shows a modest positive OOS Sharpe edge for regime-conditioning vs. static (+0.170), but Top2 shows a small negative edge (-0.029). A genuinely robust "shorten lookback in high-VIX regimes" effect should show the same sign across both top-1 and top-2 concentration levels; it doesn't here, suggesting the observed Top1 edge is more likely noise from the specific momentum window boundaries than a real regime-timing effect on this universe.
+4. **Sourcing caveat carries through to the verdict**: the 2026 follow-up article's own claimed OOS results (available only via WebSearch snippets, not full text) could not be independently reproduced or checked against this backtest's methodology — it's possible the article's universe, cost assumptions, or regime-threshold calibration materially differ from what was tested here. This result should be read as "the mechanism as we understood and implemented it does not confirm on our universe," not as a refutation of the article's own reported figures.
+
+**Production correlation estimate**: N/A — gate fails on all 4 variants; not a candidate for production blending.
+**Recommended follow-up**: If revisited, (a) obtain the article's full text (browser session past the Cloudflare challenge, or an alternate mirror) to check whether its universe/thresholds differ meaningfully from this implementation; (b) test on a broader/more volatility-sensitive universe than SPY/VXF/EFA/AGG, since large diversified ETFs may not show enough regime-conditional momentum dispersion for a lookback-switching signal to matter; (c) the walk-forward failure pattern (deeply negative worst folds across all variants, not just regime ones) suggests this 4-asset universe/monthly-rebalance combination may be too concentrated for stable walk-forward performance regardless of the lookback-switching mechanism — worth checking against a wider baseline universe (e.g. H026's 11-sector-ETF set) before concluding the VIX-regime idea itself is dead.
+**Results file**: `backtesting/results/h524_results.json`
+
+## H525 — Low-Volatility Anomaly on Broader 200-Stock Universe (NOT CONFIRMED — closes H448's follow-up)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-20
+**Trigger**: Nightly autonomous research session, new-strategy-family direction. H448 tested the Ang/Baker low-vol anomaly on the H198 30-stock mega-cap tech universe and came close but failed the gate (best OOS Sharpe 1.045 vs gate 1.174), and its own key-finding #5 explicitly speculated "H448 might confirm on broader universe with actual cross-sectional vol spread" — the 30-stock universe is concentrated mega-cap tech, where vol dispersion is compressed relative to a true market-wide cross-section. H525 tests the same signal construction on H241's ~200-stock, 11-GICS-sector universe, which has genuine cross-sectional vol spread (utilities/staples vs. energy/tech).
+**Script**: `backtesting/daily/run_h525_lowvol_broad_universe.py`
+**Universe**: H241's cached ~200-stock, 11-GICS-sector monthly price panel (186 tickers survived after dropping >20% missing history).
+**Signal**: 6 variants — A: pure low-vol top-20 (bottom 10% by trailing 12m monthly-return vol); B: pure low-vol top-20, trailing 3m vol; C: momentum × low-vol dual rank (0.5 mom_6-1 + 0.5 inv_vol12m, normalized ranks); D: top-40 momentum → filter to lowest-20 vol; E: baseline top-20 by 6-1m momentum (H241-style, no low-vol component); F: sanity check, high-vol top-20 (should lose to E if the anomaly is real).
+**IS/OOS**: 2013-01-01 to 2020-12-31 (IS) / 2021-01-01 to present (OOS).
+**Gate**: OOS Sharpe > 1.174 (H198/H448 baseline gate, for direct cross-universe comparability); secondary informal comparison vs. 1.500 (H241's own gate).
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD |
+|---|---|---|---|---|
+| A: pure low-vol, 12m | 1.052 | 0.376 | 4.4% | -15.7% |
+| B: pure low-vol, 3m | 1.331 | 0.454 | 5.9% | -22.1% |
+| C: momentum × low-vol dual rank | 1.286 | 0.541 | 6.6% | -22.1% |
+| D: top-40 momentum → lowest-20 vol | 1.139 | 0.727 | 10.4% | -24.8% |
+| E: baseline, top-20 momentum (no vol) | 1.478 | **1.303** | 26.2% | -15.1% |
+| F: sanity check, high-vol top-20 | 1.153 | 1.265 | 34.8% | -23.4% |
+
+The script's own naive gate-check logic (any variant beating 1.174 ⇒ "CONFIRMED") technically flags E and F as passing, but neither of those is a low-vol-anomaly variant — E is the plain momentum baseline and F is the explicit high-vol sanity check, which should lose to the anomaly if it were real and instead nearly matches it. The actual hypothesis under test — that a broader universe would let low-vol variants A-D clear the gate — **fails outright**: all 4 pure/hybrid low-vol variants underperform both the momentum baseline and the high-vol control by a wide margin.
+
+**Key findings**:
+1. **Broadening the universe made the anomaly worse, not better, directly refuting H448's own speculative follow-up.** On the concentrated 30-stock mega-cap universe, low-vol got within 0.13 Sharpe of the gate (H448 Var B: 1.045). On the 186-stock, 11-sector universe, the best low-vol variant (D, momentum-then-vol-filtered) only reaches 0.727 — further from the gate, not closer. Cross-sectional vol spread alone does not rescue the signal.
+2. **The high-vol sanity check nearly matches the momentum baseline OOS (1.265 vs. 1.303)** — a genuine low-vol anomaly should show a clear low-vol > high-vol return spread; here it's essentially flat to inverted. Most likely driver: the 2021-2026 OOS window was dominated by high-vol, high-momentum AI/tech names across many of the 11 sectors (not confined to one sector), so "high vol" in this broad universe correlates heavily with "the stuff that went up a lot," rather than with idiosyncratic risk investors shun.
+3. **Momentum remains the strongest signal on this universe by a wide margin** (OOS Sharpe 1.303, matching/exceeding H241's own baseline) — low-vol and momentum×low-vol blends (C, D) both dilute rather than enhance the pure momentum signal, consistent with the pattern seen in H278 (vol-parity weighting) and H306 (low-vol factor ETF rotation) elsewhere in the H-series.
+4. This closes the follow-up H448 itself proposed. Combined with H507/H508 (OB filter and regime gate on H448, both NOT CONFIRMED) and H448 itself, the stock-level total-vol low-vol-anomaly family is now closed on every angle tested so far except idiosyncratic vol (queued as H526).
+
+**Production correlation estimate**: N/A — gate fails; not a candidate for production blending.
+**Recommended follow-up**: H526 (in progress) tests idiosyncratic (CAPM-residual) vol rather than total vol, per the original Ang, Hodrick, Xing & Zhang (2006) construction, on H448's own 30-stock universe for direct comparability.
+**Results file**: `backtesting/results/h525_results.json`
