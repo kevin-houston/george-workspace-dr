@@ -1,0 +1,79 @@
+{
+  "date": "2026-08-21",
+  "angles_scanned": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "summary": "Broad sweep across all 5 angles (8 WebSearch queries total, including 3 follow-up date-narrowed queries after the first round kept resurfacing already-tracked material) found no genuinely new HIGH-relevance items -- every substantive finding cross-checked as an existing duplicate already logged somewhere in wiki/ or dream_cycle/. This is a plausible, not a failed, outcome: the wiki/hypothesis pipeline has run dense nightly scans across these same 5 angles for ~4 months, so the marginal new find rate on unchanged search angles is expected to decay. One proposal was staged anyway, self-generated from tonight's own Phase 1 wiki finding (PyBroker bootstrap-CI methodology) rather than from the arXiv/GitHub sweep -- see staged/2026-08-21/1_bootstrap_sharpe_ci_pybroker_retrofit.json.",
+  "findings": [
+    {
+      "angle": "pairs trading + cointegration + LLM",
+      "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+      "source_url": "https://arxiv.org/pdf/2605.01954",
+      "relevance": "high_but_duplicate",
+      "note": "Already tracked as H316 STUB in CLAUDE.local.md hypothesis registry (needs OpenAI API, not yet run). Not restaged."
+    },
+    {
+      "angle": "pairs trading + cointegration + LLM",
+      "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+      "source_url": "https://arxiv.org/abs/2403.07998",
+      "relevance": "duplicate",
+      "note": "Already referenced in wiki/trading/algorithms/pairs-trading.md and multiple research-log entries (2026-05-24, 2026-06-17)."
+    },
+    {
+      "angle": "PEAD + text signals",
+      "title": "Which Voices Move Markets? Speaker Identity and the Cross-Section of Post-Earnings Returns",
+      "source_url": "https://arxiv.org/html/2604.13260",
+      "relevance": "duplicate",
+      "note": "FinBERT speaker-weighted sentiment on 16,428 transcripts, OOS Spearman IC 0.142, monthly alpha 2.03%. Already covered in wiki/trading/tools/nlp-alternative-data.md and research-log/2026-06-23.md, and connects to already-closed H168 (speaker-weighted FinBERT NOT CONFIRMED due to coverage bias)."
+    },
+    {
+      "angle": "cross-sectional / factor momentum",
+      "title": "Spatio-Temporal Momentum: Jointly Learning Time-Series and Cross-Sectional Strategies",
+      "source_url": "https://ar5iv.labs.arxiv.org/html/2302.10175",
+      "relevance": "duplicate_already_tested",
+      "note": "This is the exact paper H522 (STMOM-SLP) tested against the H241 200-stock universe this session cycle -- NOT CONFIRMED, closes H180. Already resolved, not a new lead."
+    },
+    {
+      "angle": "cross-sectional / factor momentum",
+      "title": "One Factor to Bind the Cross-Section of Returns",
+      "source_url": "https://arxiv.org/pdf/2404.08129",
+      "relevance": "low",
+      "note": "Zero hits in wiki/dream_cycle grep -- genuinely not yet logged, but this is an asset-pricing-theory paper (factor-zoo consolidation, not a tradeable signal or actionable methodology) and dated 2024, not new. Not staged -- no concrete action it would produce."
+    },
+    {
+      "angle": "multi-agent LLM trading",
+      "title": "Macro Economists in the Machine: Multi-Agent LLM Framework for Commodity-Related ETF Portfolio Construction",
+      "source_url": "https://arxiv.org/pdf/2606.08283",
+      "relevance": "duplicate_already_tested",
+      "note": "Per CLAUDE.local.md, this is H281's source paper, already tested as H520. Stale reference already flagged for cleanup in the hypothesis registry note."
+    },
+    {
+      "angle": "multi-agent LLM trading",
+      "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+      "source_url": "https://arxiv.org/abs/2412.20138",
+      "relevance": "duplicate",
+      "note": "Already covered in wiki/ai-industry/agentic-trading-survey-2026.md and agent-frameworks-2026.md."
+    },
+    {
+      "angle": "trending GitHub quant repos",
+      "title": "Vibe-Trading (30.9k stars)",
+      "source_url": null,
+      "relevance": "not_applicable",
+      "note": "This is the MCP server already integrated and live (mcp__vibe-trading__* tools) -- not a new find."
+    },
+    {
+      "angle": "trending GitHub quant repos",
+      "title": "FinceptTerminal",
+      "source_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+      "relevance": "flagged_suspicious_not_staged",
+      "note": "Search surfaced FIVE separate repos with byte-identical descriptions across unrelated orgs/owners (twoliness/finceptterminal, Fincept-Terminal/FinceptTerminal, Fincept-Corporation/FinceptTerminal, ymys/FinceptTerminal-crypto-trading, INJprotocol/finceptterminal) -- the last two names belong to a crypto-trading fork and an Injective Protocol-branded fork respectively. Identical boilerplate descriptions across multiple orgs including a crypto-protocol org is a star-farming / repo-cloning pattern, not necessarily malicious but not a legitimate signal of organic trending either. Consistent with the persona.md hallusquatting-defense mindset even though no package install was involved here (this is a full desktop app, not a pip/npm dependency) -- treating with skepticism rather than recommending. Not staged for wiki inclusion; noting the pattern here for anyone reviewing this scan later."
+    }
+  ],
+  "staged_this_scan": [
+    "1_bootstrap_sharpe_ci_pybroker_retrofit.json (medium risk, new_script, source: reflection -- not from the 5-angle sweep, self-generated from tonight's Phase 1 wiki finding, written + functionally tested this session)"
+  ]
+}
