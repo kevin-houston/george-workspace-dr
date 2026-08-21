@@ -1,6 +1,6 @@
 ---
 created: 2026-05-19
-updated: 2026-07-26
+updated: 2026-08-20
 status: active
 relevance: H165 (VIX gate QUEUED), H205-B (bear-regime BAB), all momentum/BAB strategies
 ---
@@ -376,3 +376,17 @@ Method 4 above (line 149) has flagged since this page's creation that 'no dedica
 **Suggested next step**: swap `jump-models`' discrete-JM class in for the `hmmlearn GaussianHMM` step in a follow-up to H429 (Wasserstein-Tracked Rolling HMM), keeping the same 5Y rolling-window retraining + Wasserstein state-matching wrapper that made H429's Var C/F pass gate, and compare OOS Sharpe/MaxDD/MaxStateFrac against the existing HMM-based Var C (1.144 / -17.2% / 47%) and Var F (1.067 / -16.6% / 41%). See a staged new_script proposal (H489 stub) filed alongside this wiki update for a concrete build plan.
 
 **Caveat**: not yet installed or run — per standing off-hours install-security rule, this is a wiki note flagging the find, not a live pip install. Verify on PyPI (if published) or install from GitHub source with `pip-audit` run afterward before using in any scheduled script.
+
+## Research Lead: Autoencoder-Gated Dual-Node Transformer Regime Detection (arXiv:2603.19136, flagged 2026-08-20)
+
+**Source:** Mohammad Al Ridhawi, Mahtab Haj Ali, Hussein Al Osman, "Adaptive Regime-Aware Stock Price Prediction Using Autoencoder-Gated Dual Node Transformers with Reinforcement Learning Control," submitted 2026-03-19 to Applied Intelligence (Springer), not yet accepted.
+
+**What it is:** A three-component regime-aware price-prediction architecture, distinct from every regime-detection approach already on this page (HMM, SJM, VIX/200MA composite, Berry Phase Rate): (1) an **autoencoder trained only on normal-market conditions** flags regime shifts via reconstruction error -- high error means "this doesn't look like normal market behavior," a fully unsupervised anomaly-detection framing rather than a labeled or mixture-model state classification; (2) **dual node transformer networks**, one specialized for stable conditions and one for event-driven/volatile conditions, with the autoencoder's anomaly score routing data between them; (3) a **Soft Actor-Critic RL controller** that adaptively tunes both the regime-detection threshold and the blending weight between the two transformer pathways based on live prediction-performance feedback, rather than using a fixed threshold set once at training time.
+
+**Results reported:** 20 S&P 500 stocks, 1982-2025. One-day-ahead MAPE 0.80% (baseline single transformer) -> 0.68% (dual-node, no RL controller) -> 0.59% (full system with RL controller). Directional accuracy 72% with the complete framework. Note this is a point-prediction/MAPE study, not a portfolio backtest -- no Sharpe, MaxDD, or transaction-cost figures are reported, so it cannot be directly compared to this wiki's hypothesis-log gate thresholds without first converting predictions into a tradeable signal and running it through the standard IS/OOS backtest harness.
+
+**Relevance to George's regime-detection line:** The wiki's existing approach (per the CLAUDE.local.md standing design note) is Statistical Jump Model as an SJM-approximation via hmmlearn GaussianHMM + smoothed labels, validated against a VIX<25 + SPY>200MA composite baseline. This paper's autoencoder-reconstruction-error approach is a genuinely different detection mechanism -- unsupervised anomaly scoring rather than a state-transition model -- and could in principle serve as a third detector to ensemble against HMM/SJM and the VIX/200MA composite the way H429's Wasserstein-tracked rolling HMM was validated against a static baseline. The RL-tuned adaptive threshold is the most novel piece relative to anything currently on this page: every existing regime gate here (VIX<20, VIX<25, SPY 200MA) uses a fixed, hand-set threshold.
+
+**Not staged as a new hypothesis** -- point-prediction accuracy (MAPE, directional accuracy) is not the same evaluation frame as this wiki's portfolio-level Sharpe/MaxDD/WF-ratio gates; a hypothesis attempt would first need to define how autoencoder reconstruction error becomes a position-sizing or regime-gate signal, closer in spirit to H429/H523 than a direct replication. Logged as a design-reference note pending a scoping pass.
+
+**Cross-references:** [Regime Detection](../algorithms/regime-detection.md) -- HMM/SJM/VIX-composite methods this autoencoder approach would sit alongside as a third detection mechanism, [Hypothesis Log](../backtesting/hypothesis-log.md) -- H429 (Wasserstein-Tracked Rolling HMM, CONFIRMED) and H523 (ML regime selector, NOT CONFIRMED) as the nearest prior art for how a new regime detector would need to be validated here

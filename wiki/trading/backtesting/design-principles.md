@@ -1,5 +1,5 @@
 ---
-updated: 2026-06-16
+updated: 2026-08-20
 ---
 
 # Backtesting Design Principles
@@ -699,3 +699,17 @@ python run_agent.py --agent bollinger_bands --episodes all
 # Then swap in H185-style CPI signal agent
 python run_agent.py --agent h185_cpi --episodes crypto weather
 ```
+
+## Research Lead: Spurious Predictability in Financial Machine Learning (arXiv:2604.15531, flagged 2026-08-20)
+
+**Source:** Sotirios D. Nikolopoulos (Dept. of Accounting and Finance, University of Peloponnese), "Spurious Predictability in Financial Machine Learning," submitted 2026-04-16. 49 pages, 10 figures. QuantAudit R package + replication scripts promised on journal publication (not yet independently verified here).
+
+**What it is:** A falsification-audit framework for backtests, distinct from any single trading strategy. The core finding: adaptive specification search (trying many feature/model/hyperparameter combinations and reporting the best) generates statistically significant-looking walk-forward backtests **even when the underlying process is a pure martingale difference** (i.e. genuinely unpredictable). The audit tests complete predictive workflows against synthetic reference classes -- zero-predictability environments and microstructure placebos -- and flags any workflow that still produces "significant" walk-forward evidence against those known-null environments as falsified. For workflows that pass, the paper proposes quantifying selection-induced performance inflation as an absolute magnitude gap between optimized in-sample evidence and disjoint walk-forward realizations, adjusted for effective multiplicity (i.e. how many specifications were effectively tried, not just how many were reported).
+
+**Why this lands directly on this wiki's own history:** This session's DR diary catch-up entry documents that a single `as_of` date bug (OB/FVG filter reading the current holding month's own close instead of the prior month's) silently inflated Sharpe ratios across at least 8 "confirmed" hypotheses (H343-H346, H355-H356, H411/H416-H418, H470, H483-H484, H492-H493, H509-H510) before being caught by a manual audit. Nikolopoulos's paper describes exactly the class of systematic check that would surface this kind of artifact proactively rather than reactively: running the *exact* backtest pipeline (including whatever selection/optimization steps produced the reported parameters) against a synthetic series with known-zero predictability, and treating any "significant" result on that synthetic series as proof the pipeline itself -- not the market -- is generating the signal.
+
+**Concrete, actionable idea for this wiki's process:** Add a standing pre-hypothesis-confirmation step: before marking any hypothesis CONFIRMED, re-run its exact signal-generation and backtest code on a randomly-permuted or fully synthetic (e.g. GBM with matched volatility, zero drift) version of the same price series. If the "strategy" still shows a materially positive OOS Sharpe on the synthetic null, the bug is in the pipeline, not a real edge -- this is a cheap, mechanical check that doesn't require spotting the bug by inspection (as the OB `as_of` bug eventually was) and could have flagged the H343 family earlier.
+
+**Not staged as a new hypothesis** -- this is a backtesting-methodology/audit paper, not a trading signal. The actionable idea (synthetic-null falsification pass) belongs in the standing hypothesis-confirmation checklist, not the H-numbered pipeline.
+
+**Cross-references:** [Design Principles](../backtesting/design-principles.md), [Alpha Illusion — LLM Trading Agent Validation Checklist](../algorithms/llm-alpha-validation.md) -- its existing 6 structural validity tests (Temporal Integrity, Real-World Frictions, Counterfactual Robustness, Predictive Calibration, Numerical Execution, Multi-Agent Disaggregation) are a natural home for a 7th: synthetic-null falsification, [Hypothesis Log](../backtesting/hypothesis-log.md) -- H343/H344/H355/H356/H411/H509/H510 family this paper's method would have targeted

@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-19
+updated: 2026-08-20
 sources_indexed: 9
 pages: 301
 ---
@@ -55,7 +55,7 @@ When answering a query:
 - [Diverse Approaches to Optimal Execution Schedule Generation — de Witt & Pakkanen (2026)](trading/sources/de-witt-pakkanen-2026-map-elites-execution.md) — arXiv:2601.22113; PPO-CNN execution scheduling beats VWAP by 59%/TWAP by 70% on arrival slippage (2.13 vs 5.23/7.01 bps) on $4.3M-avg institutional orders; MAP-Elites regime-specialists mixed (+10.3% best cell, -30.2% worst, -2.4% grid avg); not relevant at our ~$100k/few-$k-per-trade scale — same conclusion as Kearns & Shi (2025); H504 logged as scope-mismatch stub ← new 2026-08-12
 - [Technical Analysis Patterns](trading/algorithms/technical-analysis-patterns.md) — H234 inside-bar coiled-spring (OOS Sharpe 1.770, WR 63.9%); NR7/NR4 narrow range; TA feature library (MACD/RSI/Stochastic/ROC) for H233/H235; pandas-ta vs TA-Lib guide ← new 2026-05-29
 - [Behavioral Finance Signals](trading/algorithms/behavioral-finance-signals.md) — 52-week high anchoring (H291 NOT CONFIRMED); return seasonality Jul/Nov standout months (H292 CONFIRMED OOS 0.970); disposition effect CGO; lottery stock MAX factor ← new 2026-06-14
-- [Market Timing Overlays](trading/algorithms/market-timing-overlays.md) — VIX term structure (H296 CONFIRMED OOS 1.116); SPY 200d MA (H301 Variant D best, +27.4% Sharpe vs H026); yield curve (H300 NOT CONFIRMED); breadth (H299 NOT CONFIRMED); overlay vs standalone trade-off ← new 2026-06-15
+- [Market Timing Overlays](trading/algorithms/market-timing-overlays.md) — VIX term structure (H296 CONFIRMED OOS 1.116); SPY 200d MA (H301 Variant D best, +27.4% Sharpe vs H026); yield curve (H300 NOT CONFIRMED); breadth (H299 NOT CONFIRMED); overlay vs standalone trade-off; VIX-regime-conditioned lookback (H524 NOT CONFIRMED, fails WF gate) ← updated 2026-08-20
 - [Cryptocurrency Trading Strategies](trading/algorithms/crypto-trading-strategies.md) — cross-sectional momentum Sharpe 1.51 (28d lookback, top-30 universe); BTC 50d MA Sharpe 1.9 vs B&H 1.3; funding carry declining (6.45→negative 2025); Monday effect +0.51%; halving cycle positioning; ccxt/pycoingecko implementation; H302/H303 queued ← new 2026-06-16
 - [Multi-Agent LLM Trading](trading/algorithms/multi-agent-llm-trading.md) — taxonomy LLM-as-signal vs decision-maker; TradingAgents 84.9k★ bull/bear debate; HedgeAgents; Expert Investment Teams fine-grained decomp; Agent Market Arena; MadEvolve evolutionary; NautilusTrader 23.4k★; CBS cost metric; reproducibility crisis (0/19 papers fully reproducible); CGX consensus-gated execution; F2Agent modality fusion; CoffeeBench idle-drift failure mode (Sakana AI, long-horizon multi-firm economy); H274 PEAD integration; H318 meta-learner proposal ← updated 2026-08-20
 - [Time-Series Foundation Models](trading/algorithms/ts-foundation-models.md) — Chronos-2 #1 GIFT-Eval (Bolt 250× faster); TimesFM 2.5 200M params 16k context + quantile head; Moirai any-variate ICML oral trained on LOTSA 27B obs; FinTSB 15-25% over ARIMA; TS-RAG +6.51% retrieval-augmented; financial verdict: feature engineering not standalone signal; H318/H320+ integration patterns ← new 2026-06-21
@@ -382,8 +382,8 @@ When answering a query:
 ### Disaster Recovery
 
 - [DR Overview](dr/overview.md) — restore procedure, what survives, what to tell a fresh George; Always-On Agents framework (6 diagnostic axes) + MemTxn transaction-boundary design (source-grounded writes, conflict resolution, snapshot-journal recovery) + DFAH-Bench decision-replayability benchmark (DAR/TAR metrics for observable execution fidelity under replay) mapped onto George's documented concurrent-write and duplicate-build-phase incidents; "what to tell a fresh George" brief refreshed (H520+, wiki 301+ pages, H510-H514 OB-filter correction wave, corrected dream cycle timing) — was stale at H455+/237 pages/2:30 AM ← updated 2026-08-20
-- [Git Backup Setup](dr/git-backup.md) — git repo config, current status, blocked items
-- [Session Diary](dr/diary.md) — append-only log of sessions; narrative recovery layer
+- [Git Backup Setup](dr/git-backup.md) — git repo config, current NO_PROXY/CA-bundle credential mechanism (supersedes the original credential-helper plan), nightly push history; corrected from an April-24 setup-day snapshot that still described GitHub auth as blocked ← updated 2026-08-20
+- [Session Diary](dr/diary.md) — append-only log of sessions; narrative recovery layer; added a compressed four-month catch-up entry (Session 1 was the only entry until today) covering the look-ahead-bias audit wave, production portfolio go-live, and dream-cycle buildout ← updated 2026-08-20
 - [Operational Runbook 2026](dr/runbook-2026.md) — current-state restore commands, subsystem validation, common failure modes, what to tell a fresh George (2026 version); cross-linked to MemTxn concurrent-write analysis; wiki page count corrected to 301 (was stale at 209) ← updated 2026-08-19
 - [Strategy Reconstruction Guide](dr/strategy-reconstruction.md) — semantic reconstruction of all 6 production strategies (H026/H041a/H045/IBS/PEAD) from first principles if git restore fails; core logic, critical parameters, look-ahead pitfalls, blending weights ← new 2026-07-26
 
