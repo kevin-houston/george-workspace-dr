@@ -11810,3 +11810,37 @@ The script's own naive gate-check logic (any variant beating 1.174 ⇒ "CONFIRME
 **Production correlation estimate**: N/A — gate fails; not a candidate for production blending.
 **Recommended follow-up**: H526 (in progress) tests idiosyncratic (CAPM-residual) vol rather than total vol, per the original Ang, Hodrick, Xing & Zhang (2006) construction, on H448's own 30-stock universe for direct comparability.
 **Results file**: `backtesting/results/h525_results.json`
+
+## H526 — Idiosyncratic-Volatility Low-Vol Anomaly on H448's Universe (NOT CONFIRMED — closes low-vol-anomaly family)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-21
+**Trigger**: Direct follow-up to H448/H525. Ang, Hodrick, Xing & Zhang (2006, JF) define the low-vol anomaly using IDIOSYNCRATIC volatility (CAPM-residual std), not total realized volatility. H448 tested total vol and came close to the gate (best OOS Sharpe 1.045) but failed; H525 showed broadening the universe made total-vol worse, not better. H526 tests whether isolating idiosyncratic risk (stripping out market beta) rescues the signal on H448's original 30-stock mega-cap tech universe, where high-beta names (NVDA, TSLA) may have been penalized by total-vol screens for beta exposure rather than genuine idiosyncratic risk.
+**Script**: `backtesting/daily/run_h526_idiovol_h448_universe.py`
+**Universe**: Identical to H448 — 30-stock mega-cap tech-heavy set (AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, AVGO, COST, NFLX, AMD, QCOM, ADBE, INTU, CSCO, TXN, AMAT, MU, LRCX, KLAC, PANW, CDNS, SNPS, MRVL, FTNT, CRWD, WDAY, DXCM, TEAM, ZS) + SPY benchmark.
+**Signal**: Rolling CAPM one-factor regression (vectorized via rolling cov/var) of each stock's monthly return on SPY; residual std = idiosyncratic vol, annualized. 6 variants — A: pure idio-vol top-6, 12m trailing window; B: pure idio-vol top-6, 24m trailing window (more stable beta estimate); C: idio-vol × momentum dual rank (0.5 mom + 0.5 inv_idiovol); D: top-6 momentum → filter to lowest-3 idio-vol; E: baseline, 6-1m momentum top-6 EW (same as H448); F: sanity check, high idio-vol top-6 (should lose if anomaly real).
+**IS/OOS**: 2013-01-01 to 2020-12-31 (IS) / 2021-01-01 to present (OOS).
+**Gate**: OOS Sharpe > 1.174 (same H198/H448 baseline gate, for direct comparability with H448's total-vol result of 1.045).
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS NegYrs |
+|---|---|---|---|---|---|
+| A: idio-vol top-6, 12m | 1.631 | 0.755 | 14.4% | -25.6% | 1 |
+| B: idio-vol top-6, 24m | 1.420 | **1.086** | 20.5% | -25.7% | 1 |
+| C: idio-vol × momentum dual rank | 1.306 | 0.997 | 22.4% | -20.8% | 1 |
+| D: top-6 momentum → lowest-3 idio-vol | 1.411 | 0.555 | 13.7% | -35.1% | 2 |
+| E: baseline, 6-1m momentum top-6 | 1.940 | 0.937 | 30.7% | -36.7% | 1 |
+| F: sanity check, high idio-vol top-6 | 1.853 | 1.049 | 39.2% | -42.8% | 1 |
+
+All 6 variants fail the 1.174 gate. 0/6 CONFIRMED.
+
+**Key findings**:
+1. **Idiosyncratic vol modestly outperforms total vol but still fails the gate.** Best variant (B, 24m window) reaches OOS Sharpe 1.086 vs. H448's best total-vol result of 1.045 — a small (+0.041) improvement, consistent with the CAPM-stripping hypothesis directionally, but nowhere near closing the 0.129 gap to the 1.174 gate.
+2. **The high-idio-vol sanity check (F, OOS 1.049) nearly matches the best genuine low-vol variant (B, OOS 1.086)** — same pattern as H525's high-vol sanity check nearly matching its momentum baseline. On this mega-cap tech universe over 2021-2026, both low- and high-idiosyncratic-risk stocks did well; idio-vol simply isn't cleanly separating winners from losers in a market dominated by a concentrated AI/tech rally that lifted both camps.
+3. **The plain momentum baseline (E) actually has the worst risk-adjusted OOS Sharpe of all 6 variants (0.937)** despite the highest CAGR (30.7%) — its MaxDD (-36.7%) is also the second-worst, only beaten (i.e. worsened) by the high-idio-vol sanity check. This mega-cap tech universe was simply volatile OOS across every signal construction tested; low-vol framing modestly dampens drawdown (A/B/C all show shallower MaxDD than E) without doing enough to lift risk-adjusted Sharpe past the gate.
+4. **Closes the low-vol-anomaly family for now.** Between H448 (total vol, stock-level, tech universe — NOT CONFIRMED, close), H507 (OB filter — NOT CONFIRMED, actively hurts), H508 (regime gate — NOT CONFIRMED, worse than ungated), H525 (broader universe, total vol — NOT CONFIRMED, worse than concentrated), and now H526 (idiosyncratic vol, original universe — NOT CONFIRMED, best result of the group but still short), every reasonable angle on the stock-level low-vol anomaly has now been tested and failed the gate. The ETF-level version (H354/H361/H362, all CONFIRMED) remains the only production-viable expression of this factor family. No further stock-level low-vol follow-ups are queued.
+
+**Production correlation estimate**: N/A — gate fails; not a candidate for production blending.
+**Recommended follow-up**: None queued for stock-level low-vol. Family considered closed; next research should move to a genuinely different factor family per Task B's priority list (ETF pairs trading is separately closed per H307; stock momentum extensively covered — consider quality/profitability factors or a fresh angle outside the original three-family list).
+**Results file**: `backtesting/results/h526_results.json`
