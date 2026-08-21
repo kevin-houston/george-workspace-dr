@@ -1,7 +1,11 @@
 {
-  "date": "2026-08-20",
+  "date": "2026-08-21",
   "candidates": [],
   "scores": {
+    "WMT": {
+      "score": -0.0136,
+      "surprise": -0.1719
+    },
     "HD": {
       "score": -0.0448,
       "surprise": -0.0439

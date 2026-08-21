@@ -1,6 +1,6 @@
 ---
 added: 2026-06-15
-updated: 2026-08-09
+updated: 2026-08-20
 category: algorithms / timing
 related: [regime-detection.md, volatility-risk-premium.md, factor-momentum-style-rotation.md, esg-tail-risk-stress-resilience-2026.md]
 ---
@@ -294,6 +294,55 @@ An explicit **MACD-parameterized momentum overlay** on H026/H041a ETF rotation:
 Theoretical prediction: MACD outperforms the 200d MA because it is the *optimal*
 estimator of the dual-timescale drift. Would compare vs. H301 (SPY 200d MA,
 +27.4% Sharpe improvement). Log as H422 when ready for implementation.
+
+---
+
+## 10. VIX-Regime-Conditioned Trend-Following Lookback (H524 NOT CONFIRMED, 2026-08-20)
+
+*Source: Alpha Architect, "VIX Trend Following: Out of Sample" — 2017 original + a
+2026 follow-up. Sourcing note: the article page is Cloudflare-protected and could
+not be fetched directly (plain curl and a headless-browser session were both
+blocked by the JS challenge). The 2017 original's figures below come from a
+full-text Yahoo Finance syndication mirror; the 2026 follow-up's own figures were
+only accessible via search-result snippets and were not independently verified
+against full text — treat those specifically with lower confidence.*
+
+### Mechanism (as summarized from available sourcing)
+
+The article's premise: a trend-following signal's optimal lookback window is not
+fixed — it should shorten when volatility (VIX) is elevated, since price trends move
+faster and reverse more often in turbulent regimes, and lengthen when VIX is calm,
+since slower trends are more stable and less noisy. The 2017 original tested this
+concept on SPY-based trend signals; the 2026 follow-up reportedly extended the
+out-of-sample window and reported the effect held up, though (per the sourcing
+caveat above) those specific follow-up figures are unverified here.
+
+### H524 test on our own universe
+
+We implemented this directly rather than relying on the article's own reported
+numbers: FRED `VIXCLS` (20-day SMA) maps to 3 regimes — Green (VIX≤18) → 10-month
+momentum lookback, Yellow (18–32) → 3-month, Red (≥32) → 1-month — applied to
+monthly top-1/top-2 rotation across SPY/VXF/EFA/AGG (BIL cash fallback). Full
+detail in `wiki/trading/backtesting/hypothesis-log.md` § H524.
+
+**Notable methodological finding**: the first draft of the test script had a
+look-ahead bias bug — the monthly signal computation used that same month's own
+closing price as part of deciding what to hold during that month, the same
+as-of-date bug class that has retracted numerous other hypotheses in this log
+(H343/H509/H510 family, and the H249 regime-weight bug surfaced by H523). This was
+caught and fixed before any numbers were reported; the pre-fix (buggy) results were
+substantially inflated (OOS Sharpe ~2.0 vs. ~0.7–0.8 after the fix).
+
+**Result: NOT CONFIRMED.** Post-fix OOS Sharpe ranged 0.673–0.843 across 4 variants
+(regime-conditional and static baseline, Top1 and Top2), and all 4 failed the
+walk-forward stability gate with deeply negative worst-fold Sharpe (-0.20 to -0.75).
+The regime-conditioning effect itself was inconsistent — a modest positive edge for
+Top1 (+0.170 OOS Sharpe vs. static) but a negative edge for Top2 (-0.029) — which is
+not the signature of a robust effect. On this 4-asset diversified-ETF universe, the
+VIX-regime-conditioned lookback idea did not translate into a usable production
+signal. See H524 in the hypothesis log for full results tables and follow-up
+recommendations (broader/more volatility-sensitive universe, full-text article
+verification).
 
 ---
 
