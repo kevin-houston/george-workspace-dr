@@ -11844,3 +11844,67 @@ All 6 variants fail the 1.174 gate. 0/6 CONFIRMED.
 **Production correlation estimate**: N/A — gate fails; not a candidate for production blending.
 **Recommended follow-up**: None queued for stock-level low-vol. Family considered closed; next research should move to a genuinely different factor family per Task B's priority list (ETF pairs trading is separately closed per H307; stock momentum extensively covered — consider quality/profitability factors or a fresh angle outside the original three-family list).
 **Results file**: `backtesting/results/h526_results.json`
+
+## H527 — Amihud Illiquidity Premium as Primary Signal on H241's 200-Stock Universe (CONFIRMED — marginal, Variant C only)
+
+**Status**: CONFIRMED
+**Tested**: 2026-08-21
+**Trigger**: H393 tested Amihud (2002) ILLIQ (mean of |daily return|/dollar volume) only as a secondary tiebreaker layered on an already-strong momentum composite on H386's 30-stock ultra-liquid mega-cap universe, and found it purely dilutive — that write-up attributed the failure to insufficient cross-sectional ILLIQ variation among mega-caps and recommended re-testing as a PRIMARY signal on a broader universe with genuine liquidity spread. H527 does that: standalone ILLIQ as the primary cross-sectional ranking signal on H241's 195-stock broad-sector universe, which spans small/mid float-adjusted names (HRL, CPB, JNPR, ZBH) alongside mega-caps — genuine liquidity dispersion the H386 universe lacked. New factor family for this log (liquidity premium), per Task B's directive to move beyond exhausted low-vol/momentum/ETF-pairs families.
+**Script**: `backtesting/daily/run_h527_illiquidity_h241_universe.py`
+**Universe**: H241's 195-stock universe (11 GICS sectors, same list used by H522/H525/H526).
+**Signal**: Amihud ILLIQ, trailing 21-trading-day mean(|daily_ret|/dollar_vol), formed strictly at month-end t-1 and applied to the month t→t+1 holding period (one full month of lag between signal date and credited return — same lag structure as H526, verified via explicit index arithmetic in `build_panel()`, no look-ahead). 5 variants — A: pure ILLIQ top-20 (long least-liquid names); B: pure ILLIQ top-20 inverse (long most-liquid, sanity check); C: ILLIQ × momentum dual rank (0.5 rank(illiq) + 0.5 rank(mom_6_1)); D: momentum top-40 → filter to most-illiquid 20; E: baseline, plain 6-1m momentum top-20 (H241-A style).
+**IS/OOS**: 2013-01-01 to 2020-12-31 (IS) / 2021-01-01 to present (OOS).
+**Gate**: OOS Sharpe > 1.174 (H198/H241/H526-family baseline for this universe).
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS NegYrs | Worst 3-fold OOS Sharpe |
+|---|---|---|---|---|---|---|
+| A: pure ILLIQ top-20 (least liquid) | 1.368 | 1.108 | 19.3% | -15.6% | 0 | 0.885 |
+| B: pure ILLIQ top-20 inverse (most liquid) | 1.242 | 1.104 | 20.4% | -29.9% | 1 | 0.228 |
+| C: ILLIQ × momentum dual rank | 1.296 | **1.205** | 22.2% | -13.1% | 0 | 1.033 |
+| D: momentum top-40 → illiquid-20 filter | 1.158 | 1.135 | 20.2% | -14.2% | 0 | 1.036 |
+| E: baseline, plain 6-1m momentum top-20 | 1.544 | 1.061 | 21.3% | -15.1% | 0 | 0.946 |
+
+Only Variant C clears the 1.174 gate (OOS 1.205). 1/5 CONFIRMED — a marginal pass (+0.031 over gate, +0.144 over the E baseline).
+
+**Key findings**:
+1. **The dual-rank composite (C), not pure ILLIQ (A), is what clears the gate.** Pure illiquidity-tilt (A) reaches OOS 1.108 — better than H393's dilutive result on the narrow mega-cap universe, confirming genuine liquidity dispersion helps, but still short of the gate on its own. Blending ILLIQ with momentum (C) is what pushes it over, and also gives the best worst-fold walk-forward Sharpe (1.033) and shallowest MaxDD (-13.1%) of the whole grid — the two signals appear to filter each other's tail risk rather than one dominating.
+2. **The direction confirms illiquidity premium theory but weakly**: A (least-liquid) beats B (most-liquid) on OOS Sharpe (1.108 vs 1.104) but the gap is tiny and B's MaxDD is much worse (-29.9% vs -15.6%) — a naive "buy the least liquid names" strategy is not obviously better than its inverse on Sharpe alone; the value only shows up combined with momentum.
+3. **This is a marginal pass, not a robust one.** OOS Sharpe 1.205 clears the 1.174 gate by 0.031 — well within the kind of noise this log has seen invalidated by methodology bugs elsewhere (see H509-H514, H343-H346). No look-ahead bug found on inspection (explicit `i-1`/`i+1` index separation, same pattern as the already-audited H526), but given the thin margin this should be treated as a candidate for confirmation, not a settled result, before any production consideration.
+
+**Production correlation estimate**: Not yet computed. Variant C combines momentum with a liquidity tilt on the same 195-stock universe already sampled by H522/H525/H526 and by H241/H198 in production — likely to have moderate-to-high correlation with the existing momentum sleeves (H041a/H026) given it's half a momentum signal on overlapping tickers. Should be estimated directly against the blended production equity curve before any allocation is considered.
+**Recommended follow-up**: Given the marginal gate pass, treat as NOT production-ready pending (a) a walk-forward re-verification on a held-out period, (b) an explicit production-correlation calculation, and (c) a robustness check across a couple of ILLIQ window lengths (only 21 trading days was tested) before further investment. Do not add to the production blend on this single marginal pass alone.
+**Results file**: `backtesting/results/h527_results.json`
+
+## H528 — Overnight vs. Intraday Return Decomposition as a Cross-Sectional Factor on H241's 200-Stock Universe (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-21
+**Trigger**: Lou, Polk & Skouras (2019, JFE) "A Tug of War: Overnight versus Intraday Expected Returns" document a persistent cross-sectional anomaly: cumulative overnight returns (close_{t-1}→open_t) predict future returns positively (informed/institutional buying concentrates near the open; retail-driven momentum-chasing concentrates intraday). This log has used overnight-vs-intraday decomposition before only as a volatility/tail-risk gate for the IBS strategy (H476/H479, NOT CONFIRMED as an entry filter) — never as a standalone cross-sectional ranking signal. Mechanism (order-flow timing) is distinct from momentum, low-vol, or liquidity (H527), making it a genuinely separate factor family. Companion test to H527 on the identical universe for direct comparability.
+**Script**: `backtesting/daily/run_h528_overnight_return_h241_universe.py`
+**Universe**: Identical to H527 — H241's 195-stock universe (11 GICS sectors).
+**Signal**: Trailing 21-trading-day cumulative overnight return, overnight_daily = open_t/close_{t-1} - 1, compounded over the window, formed strictly at month-end t-1 and applied to the month t→t+1 holding period (identical lag structure to H527, verified in `build_panel()`). 5 variants — A: pure overnight-return top-20 (long highest cumulative overnight return, the LPS "buy overnight winners" direction); B: pure overnight-return top-20 inverse (long lowest, sanity check); C: overnight × momentum dual rank; D: momentum top-40 → filter to top-20 by overnight return; E: baseline, plain 6-1m momentum top-20 (identical construction to H527's Var E).
+**IS/OOS**: 2013-01-01 to 2020-12-31 (IS) / 2021-01-01 to present (OOS).
+**Gate**: OOS Sharpe > 1.174 (H198/H241/H526/H527-family baseline).
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS NegYrs | Worst 3-fold OOS Sharpe |
+|---|---|---|---|---|---|---|
+| A: pure overnight-return top-20 (highest) | 1.118 | 0.641 | 10.3% | -25.6% | 0 | 0.141 |
+| B: pure overnight-return top-20 inverse (lowest) | 0.922 | **1.095** | 24.8% | -16.4% | 0 | 0.418 |
+| C: overnight × momentum dual rank | 1.219 | 0.557 | 9.1% | -28.2% | 2 | 0.236 |
+| D: momentum top-40 → overnight-return filter | 1.341 | 0.724 | 12.4% | -28.4% | 2 | 0.313 |
+| E: baseline, plain 6-1m momentum top-20 | 1.544 | 1.061 | 21.3% | -15.1% | 0 | 0.946 |
+
+0/5 variants clear the 1.174 gate. Best variant (B) reaches OOS 1.095, still below both the gate and, notably, below the plain momentum baseline it was meant to improve on only by a hair (1.095 vs 1.061) — not a meaningful edge once transaction costs and the worst-fold check (0.418) are considered.
+
+**Key findings**:
+1. **The LPS "buy overnight winners" direction does not replicate on this universe — the opposite direction does marginally better.** Variant A (long highest cumulative overnight return, the paper's documented direction) is the WORST variant in the whole grid (OOS 0.641, worst-fold 0.141). Variant B (its inverse) is the best (OOS 1.095) but still fails gate. This is a direct contradiction of the LPS mechanism on this 195-stock large/mid-cap universe over 2021-2026 — either the informed-trader overnight-buying effect doesn't hold at this cap range/period, or 21-day cumulative overnight return is too noisy a proxy without the paper's full open-to-close intraday reversal construction.
+2. **Blending with momentum (C, D) actively hurts rather than helps**, unlike H527 where the ILLIQ×momentum blend was the only variant to pass. Both C and D land below the plain momentum baseline (E) and below their respective single-signal counterparts — the overnight-return signal appears to be adding noise, not complementary information, when combined with momentum on this universe.
+3. **Companion result to H527 sharpens the comparison**: same universe, same lag structure, same baseline (E, OOS 1.061 in both scripts, exact match confirming reproducibility) — liquidity premium (H527) found a real (if marginal) signal, overnight-return decomposition (H528) did not. This is useful negative evidence that not every academically-documented anomaly transfers to this backtest universe/period, and that a companion-hypothesis design that reuses the identical baseline is a good pattern for future paired tests.
+
+**Production correlation estimate**: N/A — gate fails; not a candidate for production blending.
+**Recommended follow-up**: None queued. Consider whether a genuine open-to-close intraday-return-based construction (rather than the trailing 21-day cumulative overnight-only proxy tested here) would better replicate LPS's original methodology, but this is a low-priority revisit given the effect reversed direction rather than merely falling short.
+**Results file**: `backtesting/results/h528_results.json`
