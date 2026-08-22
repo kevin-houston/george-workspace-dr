@@ -1,5 +1,5 @@
 ---
-updated: 2026-05-07
+updated: 2026-08-22
 type: methodology
 status: active
 ---
@@ -167,7 +167,7 @@ Practical impact of multiple testing:
 | 1.5 | ~0.98 | ~0.88 | ~0.70 | ~0.50 |
 | 2.0 | ~0.99+ | ~0.96 | ~0.85 | ~0.68 |
 
-*Approximate DSR scores. Use mlfinlab's exact implementation.*
+*Approximate DSR scores. For exact computation, use `purgedcv`'s `deflated_sharpe_ratio()` (see Python Libraries below) — mlfinlab is proprietary and no longer recommended as the reference implementation.*
 
 ### Connection to Our Pipeline
 
@@ -221,25 +221,56 @@ cv = CombinatorialPurgedCV(
 
 GitHub: https://github.com/skfolio/skfolio | License: BSD-3 | ~1k stars
 
-### mlfinlab (full financial ML toolkit)
+### mlfinlab (full financial ML toolkit) — ⚠️ NOT open source
+
+**Correction (2026-08-22):** this page previously described mlfinlab as simply
+"production-ready." Verified against the project's own `LICENSE.txt`/`license.rst`
+on GitHub: mlfinlab is **all rights reserved**, not open source, and requires a
+paid commercial license from Hudson & Thames for any commercial use. `pip install
+mlfinlab` still resolves, but the package is unusable beyond personal
+research/education without a license purchase. Separately, spot-checking the
+public repo's `combinatorial.py` found `CombinatorialPurgedKFoldCV`/
+`StackedCombinatorialPurgedKFold` split methods reduced to `pass`-only stubs with
+no evident PBO computation in that file — unconfirmed whether that's the whole
+story (real implementation elsewhere, or gated behind the paid tier) or a sign
+the public mirror is deliberately incomplete. Treat any mlfinlab-based DSR/PBO
+numbers with caution until re-verified against a licensed install.
 
 ```
-pip install mlfinlab
+pip install mlfinlab   # resolves, but functionality gated behind a commercial license
+```
+
+GitHub: https://github.com/hudson-and-thames/mlfinlab | License: proprietary (all rights reserved) | Use `purgedcv` below instead for open-source projects
+
+### purgedcv (open-source mlfinlab alternative — recommended)
+
+Fills the gap left by mlfinlab's proprietary license: sklearn-compatible
+purge/embargo/CPCV splitters *plus* the PSR/DSR/PBO metric functions in one
+MIT-licensed package, positioned by its own author as a direct replacement now
+that mlfinlab has gone closed-source.
+
+```
+pip install purgedcv
 ```
 
 ```python
-from mlfinlab.cross_validation.combinatorial import CombinatorialPurgedKFoldCV
+from purgedcv import CombinatorialPurgedCV, probabilistic_sharpe_ratio, deflated_sharpe_ratio
 
-cv = CombinatorialPurgedKFoldCV(
-    n_splits=10,
-    n_test_splits=2,
-    pct_embargo=0.05,
+cv = CombinatorialPurgedCV(
+    n_splits=10,          # N = number of groups
+    n_test_groups=2,      # k = test groups per path
+    prediction_times=t_pred,
+    evaluation_times=t_eval,
+    embargo_pct=0.05,
 )
-for train, test in cv.split(X):
-    ...
+
+paths = cv.backtest_paths(model, X, y)  # returns distribution of C(N,k) Sharpe ratios
+
+psr = probabilistic_sharpe_ratio(returns, benchmark_sharpe=0.0)
+dsr = deflated_sharpe_ratio(returns, n_trials=M)
 ```
 
-GitHub: https://github.com/hudson-and-thames/mlfinlab | Production-ready, integrates DSR
+GitHub: https://github.com/eslazarev/purged-cross-validation | License: MIT | PyPI + conda-forge | Has a JOSS paper with empirical validation results
 
 ---
 
@@ -301,4 +332,5 @@ Practical mitigation: each path is embarrassingly parallel — use `joblib.Paral
 - arXiv:2512.12924 — Interpretable walk-forward framework for microstructure signals (2025)
 - https://github.com/sam31415/timeseriescv — Lightweight CPCV (MIT)
 - https://github.com/skfolio/skfolio — Portfolio-focused CPCV (BSD-3)
-- https://github.com/hudson-and-thames/mlfinlab — Full toolkit with DSR integration
+- https://github.com/hudson-and-thames/mlfinlab — Full toolkit, but proprietary/all-rights-reserved as of 2026-08-22 verification
+- https://github.com/eslazarev/purged-cross-validation — Open-source (MIT) purge/embargo/CPCV + PSR/DSR/PBO metrics, recommended mlfinlab alternative
