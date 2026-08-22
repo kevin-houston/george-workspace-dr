@@ -1,0 +1,139 @@
+{
+  "date": "2026-08-22",
+  "angles_searched": [
+    {
+      "angle": "pairs trading + cointegration + LLM",
+      "papers_found": [
+        {
+          "title": "Moira: Language-driven Hierarchical Reinforcement Learning for Pair Trading",
+          "url": "https://arxiv.org/pdf/2605.01954",
+          "relevance": "medium",
+          "staged": false,
+          "note": "Already known and queued as H316 (LLM semantic pairs, not yet run). No new information found tonight beyond what's already in wiki/trading/algorithms/pairs-trading.md."
+        },
+        {
+          "title": "Pairs Trading Using a Novel Graphical Matching Approach",
+          "url": "https://arxiv.org/abs/2403.07998",
+          "relevance": "low",
+          "staged": false,
+          "note": "Non-LLM graph-matching pair selection, older (2024), not text/LLM-driven. Skipped."
+        },
+        {
+          "title": "Adaptive copula-based pairs trading with market overlay (cryptocurrency)",
+          "url": "https://www.aimspress.com/article/doi/10.3934/QFE.2026016?viewType=HTML",
+          "relevance": "low",
+          "staged": false,
+          "note": "Crypto-focused, cointegration+copula not LLM. Our ETF/stock pairs-trading family was already closed (H307, H246) on structural-break grounds; not pursuing crypto pairs currently. Skipped."
+        }
+      ]
+    },
+    {
+      "angle": "PEAD + post-earnings drift + text signals",
+      "papers_found": [
+        {
+          "title": "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models (Hadlock, Roberts & Lee, FinNLP 2025)",
+          "url": "https://aclanthology.org/2025.finnlp-2.13/",
+          "relevance": "high",
+          "staged": true,
+          "staged_file": "dream_cycle/staged/2026-08-22/1_pead_finbert_vs_bart_early_signal.json",
+          "note": "FinBERT-vs-BART comparison + 3-day early price signal. Validates our existing FinBERT model choice (H163/H174) and surfaces a candidate new feature (early price signal) not currently in our PEAD gate. Full PDF could not be parsed via WebFetch (binary decode failure) -- staged proposal explicitly flags this as abstract/snippet-level only."
+        },
+        {
+          "title": "Predicting Stock Price Direction on Earnings Announcement Days using Multi-modal Deep Learning",
+          "url": "https://arxiv.org/pdf/2605.25894",
+          "relevance": "medium",
+          "staged": false,
+          "note": "Multi-modal (not clear if transcript/text specific vs. generic price+volume); not fetched in depth tonight given the stronger, more directly-comparable FinBERT/BART paper above. Candidate for a future session."
+        },
+        {
+          "title": "SSRN 6591063 -- Lookahead Bias in Alpha Factor Models: A Systematic Audit Framework",
+          "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6591063",
+          "relevance": "high (methodology, not PEAD-specific)",
+          "staged": false,
+          "note": "Found during Phase 1 backtesting-section research, not this PEAD search. WebFetch returned 403 Forbidden -- SSRN blocks fetch and content beyond title/author (Igor Merlini) is unknown. NOT staged since content is unverified; flagged here only so a future session with SSRN access can revisit. Directly relevant to this pipeline's own recurring H509-H514/H343-H346 look-ahead-bias bug family."
+        }
+      ]
+    },
+    {
+      "angle": "cross-sectional momentum + factor momentum (H157/H158-adjacent)",
+      "papers_found": [
+        {
+          "title": "Cross-Sectional Heterogeneity in LSTM Networks for Financial Time Series",
+          "url": "https://arxiv.org/abs/2608.05755",
+          "relevance": "high",
+          "staged": true,
+          "staged_file": "dream_cycle/staged/2026-08-22/2_cross_sectional_lstm_sector_embeddings.json",
+          "note": "Learnable sector embeddings as implicit industry momentum + short-term reversal, on S&P 500 long-short. Mechanically different from our two prior failed hand-crafted industry-adjustment attempts (H313 sector-neutral rank, H341 OLS residual momentum) -- worth testing as a genuinely distinct approach. Only abstract-level detail available (no Sharpe numbers); staged proposal flags this and recommends a full paper read before implementation."
+        },
+        {
+          "title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: Cross-Sectional Portfolio Optimization with Bias Correction",
+          "url": "https://arxiv.org/html/2507.07107",
+          "relevance": "medium",
+          "staged": false,
+          "note": "Transformer vs MLP sector-rotation claim (Sharpe 2.4 vs 1.8, Q1 2023 window) reads as a narrow/cherry-picked backtest window from the search snippet; not compelling enough to stage without a fuller read. Candidate for a future skeptical follow-up."
+        },
+        {
+          "title": "Momentum-integrated Multi-task Stock Recommendation with Converge-based Optimization",
+          "url": "https://arxiv.org/abs/2509.10461",
+          "relevance": "low",
+          "staged": false,
+          "note": "Recommendation-system framing (multi-task stock picking), not a portable cross-sectional signal methodology. Skipped."
+        }
+      ]
+    },
+    {
+      "angle": "multi-agent LLM trading systems",
+      "papers_found": [
+        {
+          "title": "Toward Expert Investment Teams: A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+          "url": "https://arxiv.org/html/2602.23330v1",
+          "relevance": "medium",
+          "staged": false,
+          "note": "Another entrant in the TradingAgents/FinCon lineage. Given this pipeline's own H520/H521 finding of LLM multi-agent 'degeneracy' (agents converging to trivial/correlated outputs) and H523's closure of the meta-agent regime-selector direction, a new multi-agent framework needs a concrete mitigation for that specific failure mode to be worth staging -- this paper's abstract-level description doesn't address it. Not staged; logged for awareness only."
+        },
+        {
+          "title": "PolySwarm: Multi-Agent LLM Framework for Prediction Market Trading and Latency Arbitrage",
+          "url": "https://arxiv.org/html/2604.03888v1",
+          "relevance": "low",
+          "staged": false,
+          "note": "Prediction-market/latency-arbitrage focus, not equities trading. Out of scope for current hypothesis pipeline. Skipped."
+        },
+        {
+          "title": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+          "url": "https://arxiv.org/abs/2412.20138",
+          "relevance": "low",
+          "staged": false,
+          "note": "Already well-known baseline in this space (2024), referenced in prior H274/H520/H521 work. No new information tonight."
+        }
+      ]
+    },
+    {
+      "angle": "trending GitHub quant-finance repos",
+      "papers_found": [
+        {
+          "title": "cloudQuant/backtrader fork -- AI-assisted strategy tooling (MCP server, skills, agent, web platform)",
+          "url": "https://github.com/cloudQuant/backtrader",
+          "relevance": "low",
+          "staged": false,
+          "note": "Interesting AI-tooling angle on a very mature backtesting engine, but we already have a working `backtesting/daily/run_hNNN.py` pipeline plus PyBroker/timeseriescv/skfolio/purgedcv noted elsewhere in the wiki. Migrating engines is not currently a bottleneck. Skipped."
+        },
+        {
+          "title": "paperswithbacktest/awesome-systematic-trading, wilsonfreitas/awesome-quant",
+          "url": "https://github.com/paperswithbacktest/awesome-systematic-trading",
+          "relevance": "low",
+          "staged": false,
+          "note": "Curated lists, not individual tools -- useful as a periodic sweep source but nothing single actionable item surfaced tonight beyond what's already logged in wiki/trading/tools/."
+        }
+      ]
+    }
+  ],
+  "staged_count": 2,
+  "staged_summary": [
+    "1_pead_finbert_vs_bart_early_signal.json -- validates FinBERT choice, flags 3-day early price signal as untested PEAD gate feature",
+    "2_cross_sectional_lstm_sector_embeddings.json -- learnable sector embeddings as a mechanically distinct alternative to our 2 failed hand-crafted industry-adjustment attempts (H313, H341)"
+  ],
+  "not_staged_but_notable": [
+    "SSRN 6591063 (Igor Merlini, look-ahead bias audit framework) -- directly relevant to this pipeline's recurring bug family, but WebFetch returned 403; content unverified beyond title/author, so not staged pending future SSRN access.",
+    "arXiv:2602.23330 (multi-agent LLM investment teams) -- logged for awareness; not staged absent a concrete answer to the H520/H521 degeneracy failure mode."
+  ]
+}
