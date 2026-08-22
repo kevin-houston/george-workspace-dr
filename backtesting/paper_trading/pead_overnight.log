@@ -1371,3 +1371,11 @@
 [2026-08-21 00:22:40] Candidates for tomorrow: none
 [2026-08-21 00:22:40] Watchlist saved → /workspace/agent/backtesting/paper_trading/pead_watchlist.json
 [2026-08-21 00:22:40] Overnight pass complete.
+[2026-08-21 23:03:21] =======================================================
+[2026-08-21 23:03:21] PEAD overnight pass starting
+[2026-08-21 23:03:21] Scanning earnings calendar…
+[2026-08-21 23:04:33]   Tickers with recent earnings: ['WMT', 'LOW']
+[2026-08-21 23:04:33]   Fetching 8-K for WMT…
+[2026-08-21 23:06:06]     WMT: 6078 chars
+[2026-08-21 23:06:06]   Fetching 8-K for LOW…
+[2026-08-21 23:06:07]     LOW: 4772 chars

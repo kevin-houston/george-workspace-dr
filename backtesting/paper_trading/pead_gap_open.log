@@ -615,3 +615,36 @@
 [2026-08-20 09:45:41]   LOW: gap -0.9% < 3% — skip
 [2026-08-20 09:45:41] No new positions entered today.
 [2026-08-20 09:45:42] Open pass complete.
+[2026-08-21 09:32:09] =======================================================
+[2026-08-21 09:32:09] PEAD-GAP open pass starting
+[2026-08-21 09:32:09] Earnings candidates: ['WMT', 'HD', 'LOW']
+[2026-08-21 09:32:09] PEAD_GAP strategy equity: $5,000
+[2026-08-21 09:32:13]   WMT: prior_close=103.84 current=102.49 gap=-1.3%
+[2026-08-21 09:32:13]   WMT: gap -1.3% < 3% — skip
+[2026-08-21 09:32:13]   HD: already in positions, skipping
+[2026-08-21 09:32:13]   LOW: prior_close=217.34 current=217.95 gap=0.3%
+[2026-08-21 09:32:13]   LOW: gap 0.3% < 3% — skip
+[2026-08-21 09:32:13] No new positions entered today.
+[2026-08-21 09:32:14] Open pass complete.
+[2026-08-21 09:33:23] =======================================================
+[2026-08-21 09:33:23] PEAD-GAP open pass starting
+[2026-08-21 09:33:23] Earnings candidates: ['WMT', 'HD', 'LOW']
+[2026-08-21 09:33:23] PEAD_GAP strategy equity: $5,000
+[2026-08-21 09:33:26]   WMT: prior_close=103.84 current=102.53 gap=-1.3%
+[2026-08-21 09:33:26]   WMT: gap -1.3% < 3% — skip
+[2026-08-21 09:33:26]   HD: already in positions, skipping
+[2026-08-21 09:33:27]   LOW: prior_close=217.34 current=217.97 gap=0.3%
+[2026-08-21 09:33:27]   LOW: gap 0.3% < 3% — skip
+[2026-08-21 09:33:27] No new positions entered today.
+[2026-08-21 09:33:28] Open pass complete.
+[2026-08-21 09:48:03] =======================================================
+[2026-08-21 09:48:03] PEAD-GAP open pass starting
+[2026-08-21 09:48:03] Earnings candidates: ['WMT', 'HD', 'LOW']
+[2026-08-21 09:48:03] PEAD_GAP strategy equity: $5,000
+[2026-08-21 09:48:08]   WMT: prior_close=103.84 current=102.41 gap=-1.4%
+[2026-08-21 09:48:08]   WMT: gap -1.4% < 3% — skip
+[2026-08-21 09:48:08]   HD: already in positions, skipping
+[2026-08-21 09:48:09]   LOW: prior_close=217.34 current=217.44 gap=0.0%
+[2026-08-21 09:48:09]   LOW: gap 0.0% < 3% — skip
+[2026-08-21 09:48:09] No new positions entered today.
+[2026-08-21 09:48:10] Open pass complete.
