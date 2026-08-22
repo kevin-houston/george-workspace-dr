@@ -391,3 +391,16 @@ This Russell 2000 sentiment-trading paper splits stock-selection triggers into *
 **Why this is relevant to H174**: our current pipeline pools every qualifying 8-K/earnings event (score>=0.18, surprise>=0.02) identically regardless of whether the surprise coincided with a broader sector/macro move that day. This paper's finding suggests splitting the 22 confirmed H174 OOS events into "pure-alpha" (surprise with no same-day sector co-mover) vs. "pure-beta" (surprise riding a broader move) subgroups and checking whether win rate/mean return differs materially between them — a cheap re-slice of existing H174 event data, not a new data pipeline.
 
 **Action needed before staging a hypothesis**: define the same-day "macro co-mover" threshold precisely (this paper uses a 58-indicator panel with |Z|>=2; H174's universe is much smaller so a simpler sector-ETF or SPY co-move threshold would need to be chosen), then re-slice the existing 22-event H174 OOS sample — note n will likely drop well below the usual n>=20 gate once split into two groups, so this may only be viable as a qualitative check rather than a formal gated hypothesis until more H174 events accumulate.
+
+## Research Lead: 3-day early price signal as a PEAD.txt feature (2026-08-22)
+
+Hadlock, Roberts & Lee, "Enhancing Post Earnings Announcement Drift Measurement with Large Language Models," FinNLP 2025 (ACL Anthology 2025.finnlp-2.13) compare encoder-decoder (BART) vs. encoder-only (FinBERT) architectures for PEAD text-signal prediction, and test whether adding a 3-day early market price signal improves textual PEAD measurement.
+
+**Findings (abstract/search-snippet level only -- full PDF could not be parsed, needs a full read before acting on details):**
+- FinBERT has the highest classification accuracy among architectures tested (57.6% positive-group, 58.3% negative-group) -- this validates our existing H163/H174 model choice rather than suggesting a change.
+- BART (encoder-decoder) shows superior individual-stock drift-*magnitude* detection, but the authors flag portfolio-level implementation as unresolved.
+- A 3-day early price signal folded in alongside the text signal is the paper's genuinely new element versus prior PEAD.txt work.
+
+**Candidate follow-up hypothesis (next open slot, H529+):** add a trailing 3-day pre-8K-filing price-drift feature to the existing FinBERT-score + EPS-surprise dual-filter gate (score>=0.18 AND surprise>=0.02, per H174) and re-test on the H174 event set -- does it tighten win rate or n, or is it redundant with the already-required EPS surprise (H317 found 77% of H174 events already have EPS beats, so a naive early-price feature may be similarly redundant)? Low-cost test: no new data source needed, EDGAR 8-K timestamps + existing Alpaca/yfinance daily bars suffice.
+
+**Caveat:** this entry is based on abstract/search-snippet claims only. WebFetch of the full PDF failed (binary parse error). Before implementing, do a full read of the PDF via curl+Read per the wiki skill's source-acquisition rule.

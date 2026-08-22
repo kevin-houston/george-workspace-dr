@@ -422,3 +422,14 @@ These cannot be distinguished by the standard Lo-MacKinlay variance ratio test.
 
 **Warning for naive lag-1 reversal strategies:**
 Strategies that simply buy yesterday's losers (pure lag-1) are NOT trading directional reversal. They are trading bid-ask bounce magnitude shrinkage — which requires very precise execution timing (intraday) to monetize. At weekly or longer horizons, the magnitude channel has already mean-reverted and the directional channel at lag-3 is what remains.
+
+## Research Lead: learnable sector embeddings for industry-momentum + reversal (2026-08-22)
+
+arXiv:2608.05755, "Cross-Sectional Heterogeneity in LSTM Networks for Financial Time Series" (Aug 2026), proposes an LSTM with learnable sector embeddings that function as an implicit industry-momentum factor, combined with a temporal short-term-reversal signal, tested on S&P 500 long-short cross-sectional portfolios. Reported to outperform a plain LSTM, Random Forest, and buy-and-hold baseline (no specific Sharpe/return numbers surfaced at abstract level).
+
+**Why this is a different angle from our two prior industry-adjustment failures:**
+- H313 (sector-neutral rank adjustment, hand-crafted) INCREASED SPY correlation 0.865->0.906 on our large-cap universe -- adjustment hurt rather than helped.
+- H341 (OLS residual-vs-SPY momentum, hand-crafted) destroyed predictive power -- stripping beta on a homogeneous large-cap universe removes signal, not noise.
+- Both prior attempts used a hand-crafted linear/rank adjustment. This paper's mechanism is a *learned* embedding inside a neural sequence model, which is mechanically different (it can learn a nonlinear, data-driven notion of "sector effect" rather than assuming linear residualization is the right adjustment). Worth testing as a genuinely distinct hypothesis rather than dismissed as "we already tried industry adjustment and it failed."
+
+**Candidate follow-up hypothesis (next open slot, H529+):** implement a small LSTM with learnable per-GICS-sector embedding vectors concatenated to price/volume features, on the existing H241 195-stock universe, predicting cross-sectional rank of forward return; compare OOS Sharpe against the plain H198/H241 momentum baseline (gate 1.174) and against H313/H341's failed results. Needs a full paper read first (only the HTML abstract was fetched, no architecture/hyperparameter/quantitative detail available yet) -- flag for a dedicated research session before committing engineering time, given the family's track record of 2/2 failures on hand-crafted variants.
