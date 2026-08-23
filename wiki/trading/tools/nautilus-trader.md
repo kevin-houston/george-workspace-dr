@@ -55,7 +55,7 @@ Available extras: `betfair`, `docker`, `ib`, `polymarket`, `visualization`.
 | Crypto DEX | Derive, dYdX, Hyperliquid, Lighter |
 | Traditional / multi-venue | AX Exchange (derivatives), **Interactive Brokers** |
 | Betting / prediction markets | Betfair, **Polymarket** |
-| Data providers | Databento, Tardis, Blockchain (on-chain/DeFi) |
+| Data providers | Databento ([full evaluation](../data-sources/databento.md)), Tardis, Blockchain (on-chain/DeFi) |
 
 Each adapter normalizes to a unified domain model: venue-native symbols get mapped internally, all timestamps are UNIX epoch nanoseconds. Adapters support historical data requests, live streaming, execution-state reconciliation, and standard order submission/modification/cancellation where the venue itself allows it — coverage varies per venue for exotic order types.
 
