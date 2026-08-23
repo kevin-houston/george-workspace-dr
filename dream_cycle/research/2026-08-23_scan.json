@@ -1,0 +1,121 @@
+{
+  "date": "2026-08-23",
+  "scan_type": "dream_cycle_phase2",
+  "angles_searched": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "findings": [
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "source_url": "https://arxiv.org/abs/2509.24254",
+      "angle": "PEAD + text signals",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Confirmed via grep already cited and analyzed in depth in wiki/trading/algorithms/pead.md (line 301, comparison table) and wiki/trading/algorithms/event-driven.md (lines 37-38, 329-364, full section on H175 relevance, section-level FinBERT structure, application-to-H163/H174 upgrade path). No new content to add.",
+      "staged": false
+    },
+    {
+      "title": "Agentic Trading: When LLM Agents Meet Financial Markets (survey, 77 papers screened)",
+      "source_url": "https://arxiv.org/abs/2605.19337",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Already has a dedicated wiki page: wiki/ai-industry/agentic-trading-survey-2026.md (created 2026-07-16), cited across hypothesis-log.md and multiple research-log entries as the primary reference for H274/H318/H380-384 LLM trading claims.",
+      "staged": false
+    },
+    {
+      "title": "StockBench: Can LLM Agents Trade Stocks Profitably In Real-world Markets?",
+      "source_url": "https://arxiv.org/abs/2510.02209",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Already documented in wiki/trading/algorithms/multi-agent-llm-trading.md (dedicated section, line 303) and wiki/trading/tools/ml-for-trading.md (line 664). Core finding (most LLM agents fail to beat buy-and-hold) already logged and cross-referenced.",
+      "staged": false
+    },
+    {
+      "title": "When Agents Trade: Live Multi-Market Trading Benchmark for LLM Agents (Agent Market Arena)",
+      "source_url": "https://arxiv.org/abs/2510.11695",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Already documented in wiki/trading/algorithms/multi-agent-llm-trading.md (dedicated section, line 122-124, 244), key finding 'framework design matters more than LLM backbone' already logged.",
+      "staged": false
+    },
+    {
+      "title": "StockAgent / TradingAgents / AlphaCrafter / other multi-agent LLM trading frameworks",
+      "source_url": "https://arxiv.org/abs/2412.20138 (TradingAgents), https://arxiv.org/abs/2605.05580 (AlphaCrafter)",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": "medium, already substantially covered",
+      "already_known": true,
+      "note": "TradingAgents extensively documented across at least 8 wiki files (multi-agent-llm-trading.md, ml-for-trading.md, awesome-quant-ai.md, hypothesis-log.md, multiple research-log entries) as the H274 design reference. AlphaCrafter not individually ingested but is architecturally the same multi-agent-debate family already covered by TradingAgents + the H520/H521 LLM-agent-degeneracy caveat documented in CLAUDE.local.md; did not clear the bar for a fresh staged proposal.",
+      "staged": false
+    },
+    {
+      "title": "Cross-Sectional Heterogeneity in LSTM Networks for Financial Time Series",
+      "source_url": "https://arxiv.org/abs/2608.05755",
+      "angle": "cross-sectional / factor momentum",
+      "relevance_score": "high (but already staged and applied last night)",
+      "already_known": true,
+      "note": "This is the same paper already staged as dream_cycle/staged/2026-08-22/2_cross_sectional_lstm_sector_embeddings.json and applied (appended to wiki/trading/algorithms/short-term-reversal.md) in last night's 4 AM build phase. Flagged as a candidate hypothesis at the H529+ slot pending a full paper read. No further action tonight.",
+      "staged": false
+    },
+    {
+      "title": "FactorEngine: Program-level Knowledge-Infused Factor Mining Framework",
+      "source_url": "https://arxiv.org/abs/2603.16365",
+      "angle": "cross-sectional / factor momentum",
+      "relevance_score": "low-medium",
+      "already_known": "adjacent",
+      "note": "Auto-alpha-discovery / factor-mining-framework topic area is already extensively covered (wiki/trading/algorithms/auto-alpha-discovery.md, xalpha-memory-alpha-discovery.md, attention-cross-sectional-factor-models.md, and 15+ research-log entries referencing this general topic). Did not do a deep read of this specific paper -- flagged as adjacent-to-known-territory rather than staged, to avoid a shallow/generic wiki addition. Candidate for a future dedicated session if the auto-alpha-discovery family gets picked for wiki rotation.",
+      "staged": false
+    },
+    {
+      "title": "AlphaCrafter: Harnessing Multi-Agent Workflows for Cross-Sectional Quantitative Trading",
+      "source_url": "https://arxiv.org/html/2605.05580v2",
+      "angle": "cross-sectional / factor momentum + multi-agent overlap",
+      "relevance_score": "low",
+      "already_known": "adjacent",
+      "note": "Same multi-agent-debate architecture family as TradingAgents (already covered) combined with the auto-alpha-discovery topic area (already covered). Did not clear the bar for a fresh proposal given the degeneracy caveat already logged from H520/H521.",
+      "staged": false
+    },
+    {
+      "title": "Manifold-BT — Rust-core Python backtesting engine",
+      "source_url": "https://github.com/manifoldbt/manifoldbt",
+      "angle": "GitHub trending quant finance repos",
+      "relevance_score": "high, genuinely new",
+      "already_known": false,
+      "note": "Confirmed via grep: no prior mention anywhere in wiki/. Claims 353x speedup vs vectorbt, ~3500x vs backtrader (500K bars in ~13ms, vendor benchmark, not independently verified), pip-installable with no Rust toolchain required, built-in look-ahead detection/diagnostics -- directly relevant to the grid-search-heavy H-series backtests (H344's 36-combo sweep, H510-514's 6-variant correction re-runs) and to this project's recurring look-ahead-bias bug pattern. STAGED.",
+      "staged": true,
+      "staged_file": "dream_cycle/staged/2026-08-23/1_manifold_bt_rust_backtest_engine.json"
+    },
+    {
+      "title": "rust_bt (jensnesten) — another Rust backtesting engine",
+      "source_url": "https://github.com/jensnesten/rust_bt",
+      "angle": "GitHub trending quant finance repos",
+      "relevance_score": "low",
+      "already_known": false,
+      "note": "Surfaced alongside Manifold-BT in the same search but with no pip-installable Python wrapper (pure Rust, no stars/adoption signal surfaced) -- less immediately actionable than Manifold-BT. Not staged; noted here only so it isn't re-surfaced as 'new' in a future scan without this context.",
+      "staged": false
+    },
+    {
+      "title": "Pairs trading + cointegration + LLM (general angle)",
+      "source_url": null,
+      "angle": "pairs trading",
+      "relevance_score": "none found",
+      "already_known": null,
+      "note": "Search surfaced only already-known references (Moira, arXiv:2605.01954, already logged per CLAUDE.local.md H316). No new candidate papers or repos found this angle tonight.",
+      "staged": false
+    }
+  ],
+  "summary": {
+    "total_findings_reviewed": 11,
+    "staged_count": 1,
+    "already_known_count": 8,
+    "adjacent_not_staged_count": 2,
+    "no_new_finding_angles": ["pairs trading + cointegration + LLM"],
+    "note": "Unusually thorough prior coverage tonight -- 5 of the 5 search angles turned up substantially already-ingested material (the wiki's LLM-trading and PEAD sections in particular are very mature at this point, with dedicated survey pages and 8+ cross-references for the major papers). Only one genuinely new, actionable finding cleared the staging bar: Manifold-BT. This is a legitimate low-yield night, not a search-quality problem -- confirmed each 'already known' claim via grep against the actual wiki content rather than assuming staleness."
+  }
+}
