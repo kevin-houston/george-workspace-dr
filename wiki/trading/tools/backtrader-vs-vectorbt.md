@@ -1,5 +1,5 @@
 ---
-updated: 2026-04-29
+updated: 2026-08-23
 type: tool
 ---
 
@@ -309,3 +309,17 @@ For current H116 work, the custom engine is sufficient and already optimized. Ve
 GPU acceleration via PyTorch/CUDA makes rolling-window factor computation 10–50× faster than pandas for large universes. Relevant when expanding beyond the current 30-stock universe for H167 (LightGBM cross-sectional) or low-vol decile studies (H191–H193) across full S&P 500.
 
 **When to evaluate**: When current yfinance + pandas pipeline takes >10 minutes per backtest run — that's the crossover point where GPU setup overhead pays off.
+
+## Research Lead: Manifold-BT — Rust-core backtesting engine (2026-08-23)
+
+GitHub: https://github.com/manifoldbt/manifoldbt | Site: https://www.manifoldbt.com/
+
+A third option beyond backtrader and vectorbt: Manifold-BT is a Python backtesting library with a Rust core. Strategies are written in a fluent Python DSL, compiled to a vectorized Rust expression graph, then run through a sequential fill simulation with realistic fees, slippage, funding, and built-in look-ahead protection/diagnostics.
+
+**Claimed performance** (vendor benchmark, not independently verified): 500K bars in ~13ms -- 353x faster than vectorbt, ~3,500x faster than backtrader.
+
+**Installation**: `pip install` only, Python 3.9+, no Rust toolchain needed despite the Rust core (ships as a compiled wheel). 30+ built-in indicators, conditional logic, cross-asset references in the DSL. Also ships Monte Carlo, walk-forward, and parameter-sweep tooling out of the box.
+
+**Why relevant here**: our H-series pipeline runs entirely on vectorbt/pandas today (see comparison table above). Grid-search-heavy hypotheses (H344's 36-param-combo OB filter sweep, the H510-514 blast-radius correction re-runs across 6 variants each) are exactly the workload a 300x+ speedup would compress from hours to seconds, if the claims hold on our actual daily-bar multi-asset data shapes rather than the vendor's own benchmark data. The built-in look-ahead detection is also directly relevant given this project's long track record of finding and correcting look-ahead bugs after the fact (the entire H343->H514 OB-filter `as_of` bug family, the H411-H470-H483-H484 shared-helper bug, the H492/H493/H509 skip-month bug) -- a backtest engine that flags this class of bug at the framework level rather than relying on manual code review is worth a real evaluation, not just a wiki note.
+
+**Status**: not yet installed, not yet benchmarked against a real H-series script. Flagged for a dedicated evaluation session: install in venv, port one existing hypothesis (a good stress test candidate is H344's 36-combo grid, since it's both compute-heavy and already has known-correct baseline numbers to check reproducibility against), and compare wall-clock time and result parity against the vectorbt version before considering any migration.
