@@ -1,8 +1,6 @@
 {
-  "date": "2026-08-23",
-  "candidates": [
-    "WMT"
-  ],
+  "date": "2026-08-24",
+  "candidates": [],
   "source": "earnings_only",
   "strategy": "PEAD_GAP"
 }

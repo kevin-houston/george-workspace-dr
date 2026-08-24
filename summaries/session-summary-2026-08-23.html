@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>George — Session Summary — 2026-08-23</title>
+  
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2128;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--orange:#f0883e;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;line-height:1.6;padding:0;}
+
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:baseline;justify-content:space-between;}
+.header-title{font-size:16px;font-weight:700;letter-spacing:.3px;}
+.header-sub{color:var(--muted);font-size:12px;}
+
+.main{padding:20px 24px;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:16px;}
+
+/* KPI row */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;}
+.kpi-value{font-size:26px;font-weight:700;line-height:1.1;}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-value.yellow{color:var(--yellow);}
+.kpi-value.red{color:var(--red);}
+.kpi-value.muted{color:var(--muted);}
+
+/* Section card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.card-header{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);}
+.card-badge{font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:2px 8px;color:var(--muted);}
+.card-body{padding:14px 16px;}
+
+/* Proposals */
+.proposal{padding:10px 0;border-bottom:1px solid var(--border);}
+.proposal:last-child{border-bottom:none;}
+.proposal-header{display:flex;align-items:baseline;gap:8px;margin-bottom:4px;}
+.proposal-title{font-size:13px;font-weight:600;}
+.risk-badge{font-size:10px;font-weight:600;padding:1px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;}
+.risk-medium{background:rgba(210,153,34,.18);color:var(--yellow);border:1px solid rgba(210,153,34,.3);}
+.risk-high{background:rgba(248,81,73,.18);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.risk-low{background:rgba(63,185,80,.18);color:var(--green);border:1px solid rgba(63,185,80,.3);}
+.proposal-rationale{font-size:12px;color:var(--muted);margin-top:3px;}
+.proposal-target{font-size:11px;color:var(--blue);font-family:monospace;margin-top:3px;}
+
+/* Commit list */
+.commit{padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;display:flex;gap:10px;}
+.commit:last-child{border-bottom:none;}
+.commit-hash{font-family:monospace;color:var(--blue);flex-shrink:0;}
+.commit-msg{color:var(--text);}
+
+/* Podcast */
+.podcast-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;}
+.podcast-dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:10px;}
+.link-btn{display:inline-block;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;border:1px solid var(--border);color:var(--blue);background:var(--surface);}
+.link-btn:hover{border-color:var(--blue);}
+
+/* Raw changelog */
+pre{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:12px;font-size:11px;overflow-x:auto;white-space:pre-wrap;color:var(--muted);margin-top:10px;}
+
+.empty{color:var(--muted);font-size:12px;padding:4px 0;}
+</style>
+
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="header-title">George &mdash; Session Summary &mdash; 2026-08-23</div>
+    </div>
+    <div class="header-sub">Generated 2026-08-23 04:02 CT</div>
+  </div>
+  <div class="main">
+    
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Proposals Applied</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Flagged</div>
+        <div class="kpi-value muted">0</div></div>
+      <div class="kpi"><div class="kpi-label">Commits</div>
+        <div class="kpi-value blue">4</div></div>
+      <div class="kpi"><div class="kpi-label">Podcast</div>
+        <div class="kpi-value muted">—</div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Dream Cycle</span>
+        <span class="card-badge">0 applied · 0 flagged · 0 skipped</span>
+      </div>
+      <div class="card-body">
+            <div class="proposal">
+              <div class="proposal-header">
+                <span class="proposal-title">Manifold-BT — Rust-core Python backtesting library, claims 353x faster than vectorbt / ~3500x faster than backtrader</span>
+                <span class="risk-badge risk-low">low</span>
+                <span style="font-size:11px;color:var(--green)">applied</span>
+              </div>
+              <div class="proposal-rationale">The H-series backtesting pipeline (run_hNNN.py scripts, wiki/trading/tools/backtrader-vs-vectorbt.md) is entirely vectorbt/pandas-based today. Manifold-BT is a genuinely new tool not previously logged anywhere in the wiki (confirmed via grep across wiki/ before staging) that targets exactly this bot…</div>
+              <div class="proposal-target">/workspace/agent/wiki/trading/tools/backtrader-vs-vectorbt.md</div>
+            </div></div>
+    </div>
+    
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Commits</span>
+        <span class="card-badge">4 today</span>
+      </div>
+      <div class="card-body"><div class="commit"><span class="commit-hash">7c7c8ca</span><span class="commit-msg">dream cycle: apply 2026-08-23 staged proposals</span></div><div class="commit"><span class="commit-hash">8a88077</span><span class="commit-msg">dream cycle scan 2026-08-23: 1 staged proposal (Manifold-BT Rust backtest engine)</span></div><div class="commit"><span class="commit-hash">13a90b1</span><span class="commit-msg">wiki: Data Sources section — new page databento.md (institutional-grade direct-exchange-feed API, odd-lot coverage, comparison vs Polygon/Alpaca)</span></div><div class="commit"><span class="commit-hash">93d95cc</span><span class="commit-msg">nightly backup 2026-08-23</span></div></div>
+    </div>
+    
+    
+  </div>
+</body>
+</html>
