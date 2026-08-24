@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-24",
+  "scan_type": "dream_cycle_phase2",
+  "angles_searched": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "findings": [
+    {
+      "title": "Moira: LLM-driven semantic pairs selection for statistical arbitrage",
+      "source_url": "https://arxiv.org/abs/2605.01954",
+      "angle": "pairs trading + cointegration + LLM",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Confirmed via grep: ~25 wiki files already reference this paper, including a dedicated 'Why This Matters for H316 (LLM Pairs STUB)' section in wiki/trading/algorithms/pairs-trading.md covering its full architecture. H316 remains a STUB pending OpenAI API budget, not a knowledge gap.",
+      "staged": false
+    },
+    {
+      "title": "Attention Factors for Statistical Arbitrage",
+      "source_url": "https://arxiv.org/abs/2510.11616",
+      "angle": "pairs trading + cointegration + LLM",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Already has a dedicated section in wiki/trading/algorithms/pairs-trading.md, cross-referenced to H401 and to the H347 hypothesis-log backlog entry ('Attention Factors for Stat Arb'). No new content to add.",
+      "staged": false
+    },
+    {
+      "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+      "source_url": "https://arxiv.org/abs/2509.24254",
+      "angle": "PEAD + text signals",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Confirmed via grep: cited in wiki/trading/algorithms/pead.md and wiki/trading/algorithms/event-driven.md, plus wiki/log.md and ~20 research-log entries. Same finding this angle surfaced on 2026-08-23 -- no new content since.",
+      "staged": false
+    },
+    {
+      "title": "PEAD.txt / SUE.txt -- text-based earnings surprise measures (incl. FinNLP FinBERT-vs-BART comparison, Philadelphia Fed writeup)",
+      "source_url": "https://aclanthology.org/2025.finnlp-2.13/",
+      "angle": "PEAD + text signals",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "wiki/trading/algorithms/event-driven.md already has multiple dedicated sections: 'PEAD.txt -- Text-Based Earnings Surprise (JFQA 2022)', 'Earnings Call Transcript Analysis -- H174 Enhancement Candidate', and 'SUE.txt -- LLM-Derived Earnings Surprise Signal' with a proposed composite formula. pead.md separately covers a 2026-08-22 3-day-early-signal refinement. WebFetch on the aclanthology PDF returned only binary metadata (could not extract full text); fell back to the WebSearch snippet (57.6%/58.3% directional accuracy figures), which matched what's already logged.",
+      "staged": false
+    },
+    {
+      "title": "Toward Expert Investment Teams: fine-grained multi-agent decomposition for equity research",
+      "source_url": "https://arxiv.org/abs/2602.23330",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Confirmed via grep: ~28 wiki files reference this arXiv ID, including multi-agent-llm-trading.md and hypothesis-log.md. Already the primary reference for the multi-agent-decomposition angle on H274.",
+      "staged": false
+    },
+    {
+      "title": "CGX (Consensus-Gated Execution) / F2Agent (Modality-Aware Adaptive Fusion, arXiv:2608.05668) / CoffeeBench (idle-drift failure mode, arXiv:2606.16613, Sakana AI)",
+      "source_url": "https://arxiv.org/abs/2608.05668",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "All three already have dedicated 'Research Lead' entries in wiki/trading/algorithms/multi-agent-llm-trading.md, cross-referenced to H274/H461. No new multi-agent LLM trading papers surfaced beyond this already-mature set.",
+      "staged": false
+    },
+    {
+      "title": "Cross-sectional factor-momentum-by-formation-period (Applied Economics Letters angle)",
+      "source_url": null,
+      "angle": "cross-sectional / factor momentum",
+      "relevance_score": "medium (but already fully ingested)",
+      "already_known": true,
+      "note": "Confirmed via grep: 'multiple formation periods' angle already covered across hypothesis-log.md, research-log/2026-05-31.md, crypto-trading-strategies.md, momentum-strategies.md, factor-models.md, trend-following-theory.md. wiki/trading/algorithms/factor-momentum-style-rotation.md already cites Gupta & Kelly (2019) 'Factor Momentum Everywhere' and Cakici et al. (2025) with H255/H256/H395/H398A empirical cross-references.",
+      "staged": false
+    },
+    {
+      "title": "MT5 prop-firm reconciliation-gated backtester",
+      "source_url": null,
+      "angle": "GitHub trending quant finance repos",
+      "relevance_score": "low",
+      "already_known": false,
+      "note": "Forex/prop-firm-account focused, not applicable to this project's US-equities/ETF strategy stack. Not staged.",
+      "staged": false
+    },
+    {
+      "title": "TurboQuant vector index",
+      "source_url": null,
+      "angle": "GitHub trending quant finance repos",
+      "relevance_score": "low",
+      "already_known": false,
+      "note": "General-purpose vector-search infrastructure, not trading-strategy-relevant despite the 'Quant' branding. Not staged.",
+      "staged": false
+    },
+    {
+      "title": "cloudQuant / backtrader MCP fork",
+      "source_url": null,
+      "angle": "GitHub trending quant finance repos",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "wiki/trading/tools/cloudquant-backtrader-notes.md already exists (created 2026-08-19) with a full assessment (154 stars/39 forks, AI-native MCP/skills/web bundle) and conclusion 'worth a closer look, not urgent'. No change to that conclusion.",
+      "staged": false
+    }
+  ],
+  "summary": {
+    "total_findings_reviewed": 10,
+    "staged_count": 0,
+    "already_known_count": 8,
+    "not_relevant_count": 2,
+    "no_new_finding_angles": [
+      "pairs trading + cointegration + LLM",
+      "PEAD + post-earnings drift + text signals",
+      "cross-sectional momentum + factor momentum",
+      "multi-agent LLM trading systems"
+    ],
+    "note": "A genuinely dry night, verified rather than assumed -- every candidate across 4 of the 5 mandated angles was checked with a direct grep against wiki/ and confirmed already present in depth (in several cases with dedicated sections and 20+ cross-references), not just superficially mentioned. The GitHub angle surfaced two items but neither was relevant to this project's US-equities/ETF stack (forex prop-firm tooling, generic vector search), and the one relevant GitHub finding (cloudQuant/backtrader) was already logged 2026-08-19. Consistent with the task-registry.md 'no silent caps' principle: zero proposals staged tonight, but every checked candidate and its disposition is recorded above rather than silently omitted. This follows a string of prior nights (2026-08-23, and per that scan's own summary, a pattern of 'unusually thorough prior coverage') where the dream-cycle hypothesis and wiki backlog has grown deep enough that the 5 standard search angles are approaching saturation on generic web/arXiv search terms -- a future session may want to try more targeted queries (specific arXiv category+date listing pages, GitHub topic/trending pages by date) rather than broad topic search, to keep surfacing genuinely new material."
+  }
+}
