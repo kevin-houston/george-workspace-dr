@@ -1,5 +1,5 @@
 ---
-updated: 2026-08-13
+updated: 2026-08-24
 status: active
 ---
 
@@ -83,6 +83,7 @@ _(none yet)_
 
 ## Notes
 
+- 2026-08-24: [Corporate Actions Handling](corporate-actions-handling.md) — Alpaca Corporate Actions API reference + reconciliation gap analysis for dividends/splits/symbol changes across all paper-trading sleeves. Not yet implemented — flagged as a scoped follow-up.
 - 2026-04-28: Paper account launched with old H122 triple-strategy (H041a 22% + H026 27% + H045 21%).
 - 2026-04-30: Production code updated to H149 (100% H026). First H149 rebalance: May 1.
 - 2026-04-26: IC-2026-04-26-001 entered. Massive free tier BSM-priced; real prices will populate ~60 DTE out.
