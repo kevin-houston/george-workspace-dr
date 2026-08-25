@@ -1,0 +1,80 @@
+{
+  "date": "2026-08-25",
+  "scan_type": "dream_cycle_phase2",
+  "angles_searched": [
+    "arXiv: pairs trading + cointegration + LLM",
+    "arXiv: PEAD + post-earnings drift + text signals",
+    "arXiv: cross-sectional momentum + factor momentum",
+    "arXiv: multi-agent LLM trading systems",
+    "GitHub: trending quantitative finance repos"
+  ],
+  "findings": [
+    {
+      "title": "Moira: Language-driven Hierarchical RL for Pair Trading",
+      "source_url": "https://arxiv.org/abs/2605.01954",
+      "angle": "pairs trading + cointegration + LLM",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Resurfaced again tonight as the top hit for this angle. Already has a dedicated section in wiki/trading/algorithms/pairs-trading.md tied to H316 (STUB, blocked on OpenAI API budget, not a knowledge gap). No new content.",
+      "staged": false
+    },
+    {
+      "title": "Attention Factors for Statistical Arbitrage",
+      "source_url": "https://arxiv.org/abs/2510.11616",
+      "angle": "pairs trading + cointegration + LLM",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "Already documented in pairs-trading.md, cross-referenced to H401/H347. Same result as 2026-08-24 scan.",
+      "staged": false
+    },
+    {
+      "title": "PEAD.txt/SUE.txt text-based earnings surprise (Cambridge Core / JFQA) + press-release structure paper (arXiv:2509.24254) + FinAnchor multi-model alignment (arXiv:2602.20859)",
+      "source_url": "https://arxiv.org/abs/2602.20859",
+      "angle": "PEAD + text signals",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "PEAD.txt/SUE.txt and the press-release structure paper are already deeply covered in event-driven.md/pead.md. FinAnchor specifically was checked via grep -- already staged and applied 2026-07-31 (dream_cycle/staged/2026-07-31/1_financhor_multi_llm_ensemble_wiki.json). No new content on this angle.",
+      "staged": false
+    },
+    {
+      "title": "Cross-sectional/factor momentum: interday cross-sectional momentum (Schlie & Zhou, SSRN 2026), factor momentum by formation period (Applied Econ Letters 2025)",
+      "source_url": null,
+      "angle": "cross-sectional / factor momentum",
+      "relevance_score": "medium (but already fully ingested)",
+      "already_known": true,
+      "note": "Both angles (multi-formation-period factor momentum, cross-sectional momentum determinants) already covered in factor-momentum-style-rotation.md and momentum-strategies.md with H255/H256/H395/H398A cross-references. Schlie & Zhou's specific 'last-half-hour' intraday timing wrinkle is new phrasing but not a new actionable angle -- our momentum hypotheses (H198/H241 family) already operate on monthly-close signals, not intraday timing, so this doesn't change any open hypothesis.",
+      "staged": false
+    },
+    {
+      "title": "LiveTradeBench (arXiv:2511.03628), Toward Expert Investment Teams (arXiv:2602.23330), TradingAgents, ai-hedge-fund (virattt, 49.6k-62.7k stars)",
+      "source_url": "https://arxiv.org/abs/2511.03628",
+      "angle": "multi-agent LLM trading",
+      "relevance_score": "high (but already fully ingested)",
+      "already_known": true,
+      "note": "LiveTradeBench already staged+applied 2026-07-31 (dream_cycle/staged/2026-07-31/2_livetradebench_wiki.json). Expert Investment Teams referenced ~28x across the wiki. Checked virattt/ai-hedge-fund specifically since it didn't appear in earlier dream-cycle scan histories by name -- confirmed via Read of wiki/trading/algorithms/multi-agent-llm-trading.md lines 469-482: already has a full 'New GitHub Reference: ai-hedge-fund (49.6k star)' section (added prior session) covering architecture, accuracy-weighted voting, and H274/H280 implications. No new content.",
+      "staged": false
+    },
+    {
+      "title": "High-frequency statistical arbitrage repos: noterminusgit/statarb (production-grade, 20+ alpha strategies, PCA/Barra), bradleyboyuyang/Statistical-Arbitrage, gregzanotti/dlsa-public",
+      "source_url": "https://github.com/noterminusgit/statarb",
+      "angle": "GitHub trending quant finance repos",
+      "relevance_score": "medium",
+      "already_known": false,
+      "note": "None of these three appear anywhere in wiki/ or dream_cycle/ (confirmed via grep). statarb (noterminusgit) is the most feature-complete -- PCA decomposition + Barra risk models + realistic TC modeling across ~1,400 US equities -- structurally similar to our H198/H241 momentum universe scale, but star count could not be confirmed this session (WebSearch did not surface it) and its true novelty vs. our existing vectorbt-based pipeline (H510-514 OB-filter family, H198 grid sweeps) is unclear without a deeper read. Not staged tonight -- flagging as a candidate for a future session to verify star count/activity via GitHub API and assess whether its Barra-style risk decomposition offers anything our current per-hypothesis Sharpe/MaxDD gate doesn't, rather than writing a wiki entry on an unverified repo.",
+      "staged": false
+    }
+  ],
+  "summary": {
+    "total_findings_reviewed": 6,
+    "staged_count": 0,
+    "already_known_count": 5,
+    "not_relevant_count": 0,
+    "no_new_finding_angles": [
+      "pairs trading + cointegration + LLM",
+      "PEAD + post-earnings drift + text signals",
+      "cross-sectional momentum + factor momentum",
+      "multi-agent LLM trading systems"
+    ],
+    "note": "Second consecutive dry night on all 5 angles, consistent with 2026-08-24's own note that broad topic-search saturation had been reached. Every high-relevance-looking hit across 4 of 5 angles was checked via grep against wiki/ and dream_cycle/ and confirmed already ingested (in several cases, e.g. ai-hedge-fund, with a full dedicated section already written by a prior session). The GitHub angle surfaced one genuinely-not-yet-logged item (noterminusgit/statarb) but it was deliberately NOT staged: risk_level would require either a 'medium' wiki_update (acceptable) but the repo's actual novelty vs. our stack is unverified -- writing it up without confirming star count/license/activity would violate this project's verification discipline (the same GitHub-API-first practice used for Homerun in tonight's Phase 1 wiki page). Flagged in this finding's note for a future session to verify properly before writing. Reinforces 2026-08-24's suggestion: future scans should use more targeted queries (arXiv category+date listing pages, GitHub topic pages sorted by recent push) rather than broad topic search, which is now surfacing mostly repeat hits across this maturing wiki."
+  }
+}
