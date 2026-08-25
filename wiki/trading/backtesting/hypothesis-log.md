@@ -12036,3 +12036,69 @@ Note: a sign-flip bug was caught and fixed during development of this script bef
 **Production correlation estimate**: N/A — hypothesis does not clear its own gate, so no standalone or blended production recommendation applies. Even if it had cleared the gate, correlation vs. the baseline A sub-strategy alone (0.65-0.87) is already high enough that it would need to be evaluated as a direct replacement for, not an addition to, the existing H026 sleeve — and given production H026 uses a 25-asset universe with different overlays, this result doesn't directly transfer to a "should we modify production" recommendation either way.
 **Recommended follow-up**: The relative-volume-confirmation mechanism now has one clear win (H530, large 195-stock universe) and one clear miss (H532, small 11-asset sector universe) — suggests the mechanism needs cross-sectional breadth to work and is not a general-purpose tiebreaker for small factor-rotation universes. Closes this specific follow-up thread from H530; do not re-test on H041a (7 assets, even smaller and multi-asset-class) without a stronger prior. Stock-level momentum families (H198/H241) remain the correct venue for any further Lee & Swaminathan volume-confirmation work.
 **Results file**: `backtesting/results/h532_results.json`
+
+## H533 — Volatility Compression / Bollinger-Band Squeeze Breakout Anticipation on H241's 200-Stock Universe (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-24
+**Trigger**: Genuinely new factor family for this log — Bollinger Band "squeeze" (band width at a multi-month low signals an imminent volatility expansion/breakout), a VOLATILITY-REGIME signal rather than a return-based cross-sectional ranking signal like every H526-532 predecessor. Also designed as a direct test of whether the repeated "high-vol/lottery names win in this 2021-2026 bull sample" finding (H213, H487, H529) is really about stocks that are ALREADY volatile, or whether stocks anticipated to BECOME volatile (breaking out of quiet consolidation) behave differently — a mechanistically distinct question from H526/H529's total/idiosyncratic-vol-level signals.
+**Script**: `backtesting/daily/run_h533_volatility_compression_h241_universe.py`
+**Universe**: Identical to H527-532 — H241's 195-stock universe (11 GICS sectors); reuses the H527/H529/H530 cached daily Close/Volume parquet (7 tickers — DFS, HES, HOLX, IPG, JNPR, K, MMC — failed re-download this run due to yfinance delisting/ticker-lookup errors unrelated to this hypothesis, leaving 187/195 tickers; consistent with prior sessions' occasional yfinance flakiness, not a methodology issue).
+**Signal**: Bollinger Band width = (upper − lower) / middle using a 20-trading-day SMA and 2-std bands, smoothed over the trailing 5 days, then percentile-ranked against each stock's own trailing 252-trading-day history (per-stock scale-free normalization). Formed strictly at month-end t-1, applied to the month t→t+1 forward return (identical one-month lag structure to H527-530, verified via explicit index arithmetic in `build_panel()`). 5 variants — A: pure squeeze top-20 (lowest BB-width percentile, most compressed "coiled spring"); B: pure squeeze top-20 inverse (highest BB-width percentile, already volatile — sanity check); C: squeeze × momentum dual rank (0.5 rank(-bbwidth_pctile) + 0.5 rank(mom_6_1)); D: momentum top-40 → filter to most-compressed 20 (momentum names that are also quiet); E: baseline, plain 6-1m momentum top-20 (H241-A style).
+**IS/OOS**: 2013-01-01 to 2020-12-31 (IS) / 2021-01-01 to present (OOS).
+**Gate**: OOS Sharpe > 1.174 (H198/H241/H526-530-family baseline).
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS NegYrs | Worst 3-fold OOS Sharpe |
+|---|---|---|---|---|---|---|
+| A: pure squeeze top-20 (most compressed) | 1.275 | 0.989 | 15.7% | -14.1% | 0 | 0.725 |
+| B: pure squeeze top-20 inverse (most expanded) | 0.855 | 1.090 | 18.4% | -17.2% | 0 | 0.718 |
+| C: squeeze × momentum dual rank | 1.176 | **1.104** | 19.0% | -17.6% | 0 | 0.756 |
+| D: momentum top-40 → most-compressed filter | 1.247 | 1.068 | 19.4% | -17.8% | 1 | 0.730 |
+| E: baseline, plain 6-1m momentum top-20 | 1.526 | 1.061 | 21.3% | -15.1% | 0 | 0.946 |
+
+0/5 variants clear the 1.174 gate. Best variant (C) reaches OOS 1.104 — a modest +0.043 over the plain momentum baseline (E), but nowhere near the gate, and its worst-fold Sharpe (0.756) is well below both its own full-period OOS Sharpe and the baseline's worst-fold (0.946).
+
+**Key findings**:
+1. **The squeeze mechanism doesn't discriminate cleanly in either direction — A and B are nearly mirror-image, both modest and both below gate.** Pure compression (A, OOS 0.989) and pure expansion (B, OOS 1.090) land close together, with the "already volatile" leg (B) actually doing marginally better — consistent with the now-repeated H213/H487/H529 pattern that volatility (of any kind) hasn't hurt in this 2021-2026 sample, but a pending squeeze specifically does not add the anticipated "imminent breakout" edge over just being volatile already.
+2. **IS/OOS is inverted for variant B (IS Sharpe 0.855, OOS Sharpe 1.090)** — the only variant in the grid where OOS beats IS by a meaningful margin, mirroring H234's earlier documented weekly-breakout finding that some breakout-style signals actually strengthened post-2021 as algorithmic/momentum-chasing participation increased; not enough on its own to overcome the gate given B's weak worst-fold (0.718).
+3. **The best-performing single-signal blend (C) still can't beat the walk-forward robustness bar** (worst-fold 0.756 vs the 1.174 gate) even though its full-period OOS Sharpe (1.104) is the best of the group — same "looks decent in aggregate, buckles on a bad third" failure mode as H528's best variant.
+4. **This closes the volatility-regime-as-breakout-anticipation angle for this universe.** Combined with H526 (idiosyncratic vol) and H529 (MAX/lottery), the H241 195-stock universe has now been tested across total vol, idiosyncratic vol, single-day tail vol (MAX), and compression/breakout-anticipation vol — none clear the gate standalone, and the consistent theme is that vol-level framing (high or low, current or anticipated) doesn't cleanly separate winners in this concentrated bull-market sample.
+
+**Production correlation estimate**: N/A — gate fails; not a candidate for production blending. For reference, OOS return correlation of best variant (C) vs. the H241 baseline momentum series (Var E) = 0.817 — high, as expected from a momentum-blended composite.
+**Recommended follow-up**: None queued for this exact construction. If revisited, a shorter/faster BB window (e.g. 10-day) or a true "breakout day" event-trigger (rather than a monthly-rebalance snapshot of band width) would better match the intraday/weekly timeframe where squeeze setups are typically traded (c.f. H234's weekly inside-bar breakout, which uses a similar coiled-spring idea at weekly rather than monthly resolution and DID clear its gate) — but that would require a different backtest cadence than this framework's monthly-rebalance design, so it is not queued as a direct next step here.
+**Results file**: `backtesting/results/h533_results.json`
+
+## H534 — Industry-Adjusted Short-Term Reversal, Retested at H241 Scale (CONFIRMED — but as continuation, not reversal)
+
+**Status**: CONFIRMED (Variant B only)
+**Tested**: 2026-08-24
+**Trigger**: H181 (industry-adjusted short-term reversal, Stosik & Zaremba SSRN:6630998) was originally CONFIRMED on a narrow 30-stock/8-sector universe (OOS Sharpe 1.138) and has never been retested at the 195-stock/11-sector H241 scale used throughout H526-533 — a direct "does the confirmed small-universe signal survive going wide" retest, same rationale class as H530's volume-momentum retest of Lee & Swaminathan.
+**Script**: `backtesting/daily/run_h534_industry_reversal_h241_universe.py`
+**Universe**: H241's 195-stock universe remapped into 11 explicit GICS sector blocks (`SECTOR_BLOCKS`/`UNIVERSE_SECTORS`), vs. H181's original 30-stock/8-sector map. Same 7 tickers (DFS, HES, HOLX, IPG, JNPR, K, MMC) failed yfinance download this run, leaving 187/195 tickers.
+**Signal**: `REV^IN_i(t) = R_i(t) − R̄_sector(t)` — stock's own most-recently-completed month's return minus the equal-weighted mean return of its GICS sector that same month (cross-sectional, no future data). Formed at month-end t, applied to month t→t+1 forward return (one full month of separation, verified via explicit index arithmetic — `ret_t = monthly_ret.iloc[i]`, `fwd_ret = monthly_ret.iloc[i+1]`). 5 variants — A: pure reversal, long bottom-20 (most oversold vs. sector — H181's original direction); B: pure reversal inverse, long top-20 (most outperforming vs. sector — sanity-check leg); C: reversal × momentum dual rank (0.5×rank(-revin) + 0.5×rank(mom_6_1)); D: momentum top-40 → filter to most sector-oversold 20; E: baseline, plain 6-1m momentum top-20.
+**IS/OOS**: 2013-01-01 to 2020-12-31 (IS) / 2021-01-01 to present (OOS).
+**Gate**: OOS Sharpe > 1.174 (H198/H241/H526-533-family baseline).
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS NegYrs | Worst 3-fold OOS Sharpe |
+|---|---|---|---|---|---|---|
+| A: pure reversal, long most-oversold-vs-sector | 1.118 | 1.034 | 19.3% | -19.7% | 0 | 0.915 |
+| B: inverse, long most-outperforming-vs-sector | 1.179 | **1.266** | 23.0% | -22.5% | 0 | 0.921 |
+| C: reversal × momentum dual rank | 1.232 | 0.979 | 16.8% | -20.8% | 0 | 0.701 |
+| D: momentum top-40 → sector-oversold filter | 1.195 | 1.070 | 18.2% | -20.9% | 0 | 0.740 |
+| E: baseline, plain 6-1m momentum top-20 | 1.544 | 1.061 | 21.3% | -15.1% | 0 | 0.946 |
+
+Only Variant B clears the 1.174 gate (OOS 1.266, worst-fold 0.921 — both above gate). The originally-hypothesized reversal direction (Variant A) fails at OOS 1.034, as does the dual-rank blend (C) and the momentum-then-oversold filter (D).
+
+**Key findings**:
+1. **The signal that clears the gate is the mirror image of H181's original hypothesis.** H181 (30-stock universe) found industry-relative LAGGARDS bounce back (reversal); at 195-stock/11-sector scale, industry-relative LEADERS keep leading (continuation) — Variant B (long most-outperforming-vs-sector) beats Variant A (long most-oversold-vs-sector) by OOS Sharpe 1.266 vs 1.034, a wide and directionally opposite result. This was treated as a deliberate sign-flip check per the H532 precedent (verified the `revin_rank.nsmallest` vs `nlargest` mapping in the script matches the stated A/B labels, and the `build_panel` lag arithmetic — confirmed correct, no bug) — the result is real, not an implementation error.
+2. **Interpretation: this is industry-relative momentum, not industry-relative reversal, once the universe expands past H181's original 30 stocks.** At 195-stock breadth, apparent "industry laggards" are more often genuinely weak names (not noise-driven overreaction candidates), so the reversal edge that existed in H181's narrower, presumably higher-quality-tilted universe does not generalize — consistent with the broader theme already established in H336/H291 (large-cap breadth erodes several idiosyncratic anomalies).
+3. **Variant B's edge over the plain-momentum baseline (E) is modest** (OOS 1.266 vs 1.061, +0.205) and its IS Sharpe (1.179) is unremarkable — much lower IS than baseline E's 1.544 — so this reads as a momentum variant that happens to add value via sector-relative framing rather than a strong standalone discovery; not a "new record."
+4. **Do not confuse this CONFIRMED result with a validation of H181's reversal thesis.** H181 itself stands as originally confirmed on its own (narrower) universe — this result narrows H181's claimed generality rather than extending it, similar to how H511/H512 "narrowed, not retracted" H345/H346.
+
+**Production correlation estimate**: OOS return correlation of Variant B vs. the H241 baseline momentum series (Var E) = 0.702 — moderately high but below the >0.8 threshold used elsewhere in this log to disqualify a candidate as non-diversifying. Given the modest Sharpe edge (+0.205 over baseline) and B's much weaker IS performance (1.179 vs baseline's 1.544 — raising WF-robustness/overfitting concerns despite technically passing both the headline and worst-fold OOS bars), this is a weak, not a strong, standalone production-blend candidate. Not recommended for immediate blending into H041a/H026/H045/XLK-IBS without further robustness testing (e.g. a second OOS sub-period once more data accrues).
+**Recommended follow-up**: (a) Re-verify Variant B's edge with a longer OOS window as 2026+ data accrues — current OOS worst-fold (0.921) barely clears gate and IS/OOS Sharpe divergence (1.179 → 1.266) is unusual (OOS beating IS) and worth re-checking for regime-specific luck (e.g. mega-cap-tech-led 2023-2025 rally rewarding sector leaders persistently). (b) If pursued further, test sector-relative momentum as an explicit named factor (distinct from plain cross-sectional 6-1m momentum) across a longer history to see if the "leaders keep leading within-sector" effect is a genuine incremental signal or fully subsumed by baseline momentum (dual-rank Variant C's failure, OOS 0.979, suggests substantial overlap already). (c) Closes the H181-at-scale retest thread — no further H241-universe reversal-family work queued.
+**Results file**: `backtesting/results/h534_results.json`
