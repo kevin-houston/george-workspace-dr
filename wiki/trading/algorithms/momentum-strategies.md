@@ -951,3 +951,18 @@ H199 and H313 both tested *removing* sector effects (subtraction/demeaning) and 
 **Not staged as a numbered hypothesis tonight** — a faithful test would require a from-scratch, sector-parameterized LSTM (meaningfully heavier than the vectorized-pandas approach that runs the rest of the H-series), and the paper's own quantitative results aren't available from the abstract. Logged here as a design candidate: if a future hypothesis revisits sector-aware momentum, the direction implied by H199 + H313 + this paper is "model sector as a feature," not "neutralize it away" — the neutralization branch of this idea is now closed on three independent tests.
 
 **See also:** H198 (raw 12-1 cross-sectional momentum, the current best expression on this universe, unmodified by any sector treatment), H313 in `wiki/trading/backtesting/hypothesis-log.md`.
+
+## Research Lead: Drift-Regime Conditioning Factor — Skeptical Bug-Hunt Flag, Not a Build Recommendation (2026-08-26)
+
+**Source**: arXiv:2511.12490 — proposes a "drift-regime" conditioning factor layered on cross-sectional equity momentum.
+
+**Headline claim**: reports a backtested Sharpe ratio of approximately **13** for the conditioned momentum strategy.
+
+**Why this is flagged rather than recommended**: a Sharpe of ~13 is far outside the range of any credible, audited equity factor result. For scale, George's own best-ever *production* result across 500+ hypotheses is the full blended portfolio at OOS Sharpe ~4.16 (H041a/H026/H045/IBS blend), and single-strategy OOS Sharpes above ~3 have a poor track record in this pipeline specifically — every one of the following was originally reported in the 3-5.9 Sharpe range and was later found to be driven by a look-ahead/as-of-date bug once corrected: H343 (3.182→1.099), H344 (3.396→0.760), H411 (4.825→0.900), H416 (5.342→0.879), H417 (5.855→0.383), H418 (5.328→0.800), H470 (4.424→3.463, survived partially), H483 (4.874→0.671), H492/H493 (2.479-3.178→1.096-1.157), H510-H514 (2.31-3.66→0.77-2.14 across six variants). A claimed Sharpe of ~13 is roughly 2-4x more extreme than any of those pre-correction numbers, which is a *stronger* red flag, not a weaker one — this pipeline's own history says the more extraordinary the claim, the more likely an as-of-date or unshifted-signal bug is inflating it.
+
+**Relevance to the open H157/H158 gap**: H156 (PARTIAL, 54-stock survivorship-biased NASDAQ universe, 12-1m momentum) flagged "H157" as the logical next step — a bias-free broader universe or sector-neutral cross-sectional ranking — but no H157 or H158 hypothesis has actually been run yet. This paper's drift-regime idea is a plausible input to that eventual hypothesis, but it must not be adopted at face value.
+
+**Recommended handling for a future backtesting session** (not done by this task — no code written, no hypothesis-log entry made): treat this as a candidate for adversarial replication under the H157/H158 umbrella. Before trusting any reproduced number:
+1. Verify the drift-regime label at any given decision date is computed using only information available strictly *before* the return period it is scored against (the exact as-of-date check that caught H510's OB filter bug and seven downstream retractions).
+2. Check whether the reported Sharpe survives a walk-forward split matching George's standard IS/OOS convention rather than the paper's own (possibly in-sample-heavy) evaluation window.
+3. If a corrected Sharpe still clears the standard momentum-family gate (~1.174, per H320/H341), it is worth pursuing under an H157/H158 number; if it collapses toward baseline like every prior extraordinary claim in this family, log it as a bug-class confirmation rather than pursuing further.
