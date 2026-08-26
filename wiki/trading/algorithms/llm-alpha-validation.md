@@ -46,7 +46,7 @@ The paper documents that LLM trading agent Sharpe ratios reported in literature 
 - [ ] Strategy outperforms a **random selection** baseline (run 1000 random seeds)
 - [ ] Ablation: does removing the LLM component (using a simple rule instead) degrade performance? If not, the LLM is redundant
 
-*Failure mode:* Agent beats a cherry-picked comparison but loses to the 60/40 portfolio. FINSABER (Li et al., KDD 2026) tested 20+ years / 100+ stocks and found LLM advantages reported in prior literature "deteriorate significantly under broader cross-section."
+*Failure mode:* Agent beats a cherry-picked comparison but loses to the 60/40 portfolio. FINSABER (Li et al., KDD 2026; full writeup: [FINSABER — LLM Investing Benchmark](../sources/finsaber-llm-investing-benchmark-2026.md)) tested 20+ years / 100+ stocks and found LLM advantages reported in prior literature "deteriorate significantly under broader cross-section," with a specific mechanism: excessive conservatism in bull markets, overtrading in bear markets.
 
 ### 4. Predictive Calibration
 
