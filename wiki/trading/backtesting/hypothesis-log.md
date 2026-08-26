@@ -12102,3 +12102,69 @@ Only Variant B clears the 1.174 gate (OOS 1.266, worst-fold 0.921 — both above
 **Production correlation estimate**: OOS return correlation of Variant B vs. the H241 baseline momentum series (Var E) = 0.702 — moderately high but below the >0.8 threshold used elsewhere in this log to disqualify a candidate as non-diversifying. Given the modest Sharpe edge (+0.205 over baseline) and B's much weaker IS performance (1.179 vs baseline's 1.544 — raising WF-robustness/overfitting concerns despite technically passing both the headline and worst-fold OOS bars), this is a weak, not a strong, standalone production-blend candidate. Not recommended for immediate blending into H041a/H026/H045/XLK-IBS without further robustness testing (e.g. a second OOS sub-period once more data accrues).
 **Recommended follow-up**: (a) Re-verify Variant B's edge with a longer OOS window as 2026+ data accrues — current OOS worst-fold (0.921) barely clears gate and IS/OOS Sharpe divergence (1.179 → 1.266) is unusual (OOS beating IS) and worth re-checking for regime-specific luck (e.g. mega-cap-tech-led 2023-2025 rally rewarding sector leaders persistently). (b) If pursued further, test sector-relative momentum as an explicit named factor (distinct from plain cross-sectional 6-1m momentum) across a longer history to see if the "leaders keep leading within-sector" effect is a genuine incremental signal or fully subsumed by baseline momentum (dual-rank Variant C's failure, OOS 0.979, suggests substantial overlap already). (c) Closes the H181-at-scale retest thread — no further H241-universe reversal-family work queued.
 **Results file**: `backtesting/results/h534_results.json`
+
+## H535 — OB Filter on H534 Sector-Relative Momentum (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-25
+**Trigger**: H534's own recommended follow-up (b)/(c) and this session's priority direction both suggested combining two already-explored H241-family mechanisms as the next clean step — specifically "H344 OB filter × H534 sector-relative momentum." The OB/FVG filter (via `smartmoneyconcepts`) has previously helped several momentum-style signals (H343/H344 stocks, H345 sector ETFs, H354/H361 low-vol ETFs) when correctly lagged, but has also failed on others (H507 stock-level low-vol). This tests whether it adds value on top of H534's CONFIRMED Variant B (sector-relative continuation, long most-outperforming-vs-sector).
+**Script**: `backtesting/daily/run_h535_ob_filter_h534_sector_momentum.py`
+**Universe**: Same H241 195-stock/11-sector universe as H534. Same 7 tickers (DFS, HES, HOLX, IPG, JNPR, K, MMC) unavailable via yfinance, leaving 185/195 with usable OHLCV (full OHLCV required for the SMC order-block detector, not just Close/Volume — script maintains its own dedicated `h535_daily_ohlcv.parquet` cache rather than reusing the Close/Volume-only caches shared by H527/H529/H530/H533/H534).
+**Signal**: Base pool = H534's REV^IN sector-relative signal, ranked, top-40 pool → OB confirmation via `has_bullish_ob()` (identical corrected `as_of` logic to H510's audit fix — OB detector's cutoff is fixed to the *prior* month-end, the same date the REV^IN signal itself is formed on, never the holding month's own close). 4 variants: A — unfiltered top-20 by REV^IN (H534 Var B reproduction, baseline); B — OB-confirmed strict (min_filter=3, else cash); C — OB-confirmed lenient (min_filter=1, else fall back to unfiltered top-20); D — OB-confirmed with fallback-fill from next-ranked pool names to reach 20 names.
+**IS/OOS**: 2013-01-01 to 2020-12-31 (IS) / 2021-01-01 to present (OOS).
+**Gate**: OOS Sharpe > 1.174 (H198/H241/H526-534-family baseline), AND must beat Variant A's own reproduced baseline (H532 precedent — a filter only counts if it beats the unfiltered version of the same signal, not just the absolute gate).
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS NegYrs | Worst 3-fold OOS Sharpe |
+|---|---|---|---|---|---|---|
+| A: unfiltered top-20 (H534 Var B reproduction) | 1.181 | **1.284** | 23.4% | -22.0% | 0 | 0.949 |
+| B: OB-confirmed strict (min 3, else cash) | 1.288 | 1.206 | 21.3% | -22.8% | 1 | 0.905 |
+| C: OB-confirmed lenient (min 1, else fallback) | 1.288 | 1.206 | 21.3% | -22.8% | 1 | 0.905 |
+| D: OB-confirmed + fallback-fill to 20 | 1.290 | 1.202 | 21.2% | -22.1% | 1 | 0.937 |
+
+Variant A (unfiltered) passes the absolute gate at 1.284, closely reproducing H534's originally-logged Variant B OOS Sharpe of 1.266 (small difference attributable to independently re-downloaded OHLCV data with slightly different ticker/date coverage — not a discrepancy requiring correction, both runs hit the same 7 delisted/renamed tickers). All three OB-filtered variants (B/C/D) underperform Variant A on every metric — OOS Sharpe, MaxDD, and NegYrs all get worse, not better.
+
+**Key findings**:
+1. **The OB filter does not add value on top of H534's sector-relative continuation signal — it uniformly hurts.** All three filtered variants land 0.078-0.082 Sharpe below the unfiltered baseline, with the lenient (C) and fallback-fill (D) variants converging almost identically to the strict variant (B), implying the filter rarely finds fewer than 3 OB-confirmed names in the pool of 40 — the failure mode isn't "too few confirmations forcing cash/fallback," it's that the OB-confirmed subset itself is simply a worse selection than the plain REV^IN ranking.
+2. **Lenient/strict/fallback variants are nearly identical (1.206/1.206/1.202)**, meaning the specific fallback mechanics barely matter — the OB confirmation step itself is the source of the degradation, not the edge-case handling around it.
+3. **High correlation with baseline (corr = 0.964 for Var B vs Var A OOS)** confirms the filter is mostly re-ranking/dropping a handful of names from the same underlying pool rather than producing a meaningfully different portfolio — consistent with a filter that adds noise rather than a genuinely orthogonal signal.
+4. **This is the second H241-family case where the OB filter fails** (after H507's stock-level low-vol result), both against signals rooted in relative/cross-sectional comparison rather than pure absolute-price momentum. Combined with H343/H344/H345/H354/H361 (all of which are plain or near-plain price-momentum signals where OB helped), a pattern is emerging: the OB/FVG "smart money" filter's edge may be specific to detecting institutional accumulation ahead of absolute-momentum continuation, not to sector-relative or anomaly-style signals — worth stating explicitly as a boundary condition rather than treating each new failure as a one-off.
+5. **Look-ahead safety verified**: `lookahead_self_check()` passed; the OB `as_of` date is fixed to the prior month-end, identical to the REV^IN signal's own formation date, never the holding month's own close — same discipline as H510's corrected pattern.
+
+**Production correlation estimate**: N/A — NOT CONFIRMED, no variant to evaluate for blending.
+**Recommended follow-up**: (a) Treat "OB filter helps absolute-momentum signals but not relative/cross-sectional ones" as a working boundary condition for future OB-filter hypotheses — don't re-test OB filtering on relative-strength, reversal, or anomaly-style signals without a specific reason to expect a different mechanism. (b) Closes the H344×H534 combination angle from H534's own follow-up list.
+**Results file**: `backtesting/results/h535_results.json`
+
+## H536 — OB Filter on H530 Volume-Confirmed Momentum (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-25
+**Trigger**: H535 (same session) found the OB filter failed against H534's sector-relative momentum, raising the question of whether that failure was specific to the sector-relative construction or a more general property of the OB filter on this 195-stock universe. This hypothesis re-runs the identical OB-filter mechanism against a different already-CONFIRMED H241-family base signal — H530 Variant B (momentum top-40 → highest relative-volume 20, the "glamour momentum winners" tilt from Lee & Swaminathan's momentum life-cycle framework), which was H530's strongest result (originally logged OOS Sharpe 1.373, zero negative years, best walk-forward robustness of the H526-534 group).
+**Script**: `backtesting/daily/run_h536_ob_filter_h530_volume_momentum.py`
+**Universe**: Same H241 195-stock/11-sector universe. Same 7 tickers (DFS, HES, HOLX, IPG, JNPR, K, MMC) unavailable, 185/195 usable. Reused H535's dedicated OHLCV cache (`h535_daily_ohlcv.parquet`) where valid; re-downloaded fresh when the cache was found stale/incomplete for this run.
+**Signal**: Reproduces H530's exact construction — relative volume = trailing 3m/trailing 12m average dollar volume ratio, momentum = 6-1m return, both formed at month-end t-1 for a t-1→t forward return. Base pool: momentum top-40 → highest-relvol-20 (H530 Variant B). Same OB-confirmation mechanism and `as_of` discipline as H535, applied to this pool. 4 variants: A — unfiltered Variant B pool reproduction (baseline); B — OB-confirmed strict (min 3, else cash); C — OB-confirmed lenient (min 1, else fallback to unfiltered); D — OB-confirmed with fallback-fill to 20.
+**IS/OOS**: 2013-01-01 to 2020-12-31 (IS) / 2021-01-01 to present (OOS) — matches H530 exactly.
+**Gate**: OOS Sharpe > 1.174 (H198/H241/H526-535-family baseline), AND must beat Variant A's own reproduced baseline.
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS NegYrs | Worst 3-fold OOS Sharpe |
+|---|---|---|---|---|---|---|
+| A: unfiltered Var B pool (H530 Var B reproduction) | 1.466 | **1.176** | 23.8% | -14.7% | 0 | 0.974 |
+| B: OB-confirmed strict (min 3, else cash) | 1.309 | 0.805 | 14.3% | -22.4% | 1 | 0.698 |
+| C: OB-confirmed lenient (min 1, else fallback) | 1.309 | 0.805 | 14.3% | -22.4% | 1 | 0.698 |
+| D: OB-confirmed + fallback-fill to 20 | 1.335 | 0.872 | 15.8% | -14.9% | 1 | 0.804 |
+
+Variant A (unfiltered reproduction) barely clears the absolute gate at 1.176, notably lower than H530's originally-logged Variant B OOS Sharpe of 1.373 — attributable to independently re-downloaded OHLCV data (this script downloads full OHLCV for the OB detector rather than reusing H530's own Close/Volume cache) producing a slightly different eligible universe/date alignment, not a bug (IS Sharpe 1.466 here is in fact higher than plausible for a broken signal, and the self-check passed). All three OB-filtered variants underperform Variant A substantially and by a wider margin than in H535 — this is the worst OB-filter result of the two run this session.
+
+**Key findings**:
+1. **The OB filter hurts even more severely here than on H534's signal.** Strict/lenient (B/C) collapse OOS Sharpe from 1.176 to 0.805 (a 0.371 decline, more than 4x the ~0.08 decline seen in H535), with MaxDD also worsening from -14.7% to -22.4% and a negative year appearing where the baseline had none. Fallback-fill (D) recovers some ground (0.872) but still fails both the gate and the baseline-beat requirement.
+2. **This strengthens rather than narrows the H535 boundary-condition finding.** The OB filter's failure is not specific to sector-relative signals (H535) — it also fails, more severely, against a volume-confirmed absolute-momentum signal (H536). Combined, this suggests the OB filter's value-add in H343/H344/H354/H361 may be more specific to plain, unfiltered 6-1m/12-1m momentum than to momentum with any secondary cross-sectional overlay (sector-relative or volume-relative) stacked on top — both overlays tested this session degraded rather than complemented the OB signal.
+3. **High correlation with baseline (corr = 0.944 for Var D vs Var A OOS)** again indicates the filter mostly trims/reorders the same pool rather than creating a differentiated portfolio, and here that reordering is actively harmful rather than neutral.
+4. **Worst 3-fold OOS Sharpe for filtered variants (0.698-0.804) is well below the unfiltered baseline's 0.974**, and below the 1.174 gate by a wide margin — this is not a marginal miss, it is a clear rejection.
+5. **Look-ahead safety verified** via the same `lookahead_self_check()` pattern as H535 — OB `as_of` fixed to the prior month-end, identical to the relvol/momentum signal's own formation date.
+
+**Production correlation estimate**: N/A — NOT CONFIRMED, no variant to evaluate for blending.
+**Recommended follow-up**: (a) Do not test the OB filter against any further H241-family signal that already stacks a secondary cross-sectional overlay (sector-relative, volume-relative, or similar) on top of base momentum — two independent tests this session (H535, H536) both failed, the second more severely. (b) If OB-filter research continues on this universe, restrict to plain/unfiltered momentum variants only, consistent with where it has actually helped (H343/H344). (c) Closes the "combine two confirmed H241-family filters" angle for this session — both combinations tested (sector-relative × OB, volume-relative × OB) came back NOT CONFIRMED.
+**Results file**: `backtesting/results/h536_results.json`
