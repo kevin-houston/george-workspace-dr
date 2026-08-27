@@ -212,6 +212,7 @@ For H245 (Low-Vol Anomaly), survivorship bias cuts the other way: the true low-v
 - `algorithms/long-short-equity.md` — borrow cost and short-leg considerations (H243)
 - `data-sources/free-data.md` — yfinance, Polygon free tier limitations
 - [Point-in-Time Constituent & Vintage Data Sources](../data-sources/point-in-time-constituents.md) — provider comparison table (fja05680 vs Norgate vs Sharadar vs CRSP) and decision framework for when free PIT data is/isn't sufficient; consolidates the data-sourcing side of this page's bias-mechanism coverage ← new 2026-08-06
+- [backtest-bias (Tools)](../tools/backtest-bias.md) — automated survivorship/identity/universe checks (`check_survivorship`, `check_identity`, `check_universe`) that could quantify the qualitative "large caps rarely delist mid-index" argument made above instead of asserting it; v0.3 roadmap targets the same as-of-date look-ahead class as H509–H514 ← new 2026-08-27
 
 
 ---
