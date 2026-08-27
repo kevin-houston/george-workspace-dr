@@ -966,3 +966,22 @@ H199 and H313 both tested *removing* sector effects (subtraction/demeaning) and 
 1. Verify the drift-regime label at any given decision date is computed using only information available strictly *before* the return period it is scored against (the exact as-of-date check that caught H510's OB filter bug and seven downstream retractions).
 2. Check whether the reported Sharpe survives a walk-forward split matching George's standard IS/OOS convention rather than the paper's own (possibly in-sample-heavy) evaluation window.
 3. If a corrected Sharpe still clears the standard momentum-family gate (~1.174, per H320/H341), it is worth pursuing under an H157/H158 number; if it collapses toward baseline like every prior extraordinary claim in this family, log it as a bug-class confirmation rather than pursuing further.
+
+## Research Lead: TS vs CS Momentum Head-to-Head + Volatility-Scaling Overlay (2026-08-27)
+
+**Source**: "The Performance Comparison Between Time-Series and Cross-Sectional Momentum Strategies in Taiwan Stock Market," International Journal of Financial Studies (MDPI), June 2026.
+
+**Design**: 80 time-series (TS) momentum strategy specifications vs. 80 cross-sectional (CS) momentum strategy specifications, varying lookback and holding periods, on 1,169 Taiwan-market firms (**listed AND delisted** -- explicit survivorship-bias-aware sample) from January 1993 to December 2025. Evaluated via annualized excess returns, certainty-equivalent returns, CAPM alpha, and Fama-French 3-factor alpha.
+
+**Key findings**:
+1. TS strategies generate higher average returns and superior risk-adjusted performance than CS strategies in this market.
+2. Volatility-scaled variants of BOTH strategy types significantly outperform their unscaled conventional counterparts.
+3. Momentum profits are driven primarily by the LONG leg; the SHORT leg only matters during market-crash periods.
+
+**Why finding (3) matters here**: this directly echoes [H243](../backtesting/hypothesis-log.md) (L/S cross-sectional momentum on this project's own universe) -- the short leg lost money OOS in H243 too, and long-leg-only Sharpe (1.273) was found to be the best available momentum expression on that universe. Independent confirmation, on a completely different market and 30+ year sample, of the same long-leg-dominance pattern strengthens confidence that H243's finding is a structural feature of momentum, not an artifact of the specific US universe tested.
+
+**Why finding (2) is a concrete, actionable gap**: George's production momentum sleeves (H041a, H026, H045, H198-family) are long-only CS rank strategies with no volatility-scaling position-sizing overlay. Note this is distinct from [H278](../backtesting/hypothesis-log.md) (vol-PARITY weighting across multiple ranked assets simultaneously, which underperformed concentrated top-1) -- vol-SCALING as described here means adjusting the SIZE of a single top-ranked position inversely to its own trailing realized volatility, which has not been tested in this wiki.
+
+**Candidate future hypothesis** (not yet numbered, not yet run): apply a volatility-scaling position-size overlay (e.g. target 15% annualized vol per position, scaled by trailing 3-6mo realized vol) on top of the existing H026/H041a top-1 momentum signal, holding the *ranking* logic unchanged, and compare against the current unscaled baseline (OOS Sharpe ~0.7-0.8 per H435/436/437). Success criterion: Sharpe improvement clears whatever delta gate is set (propose +0.10 minimum, consistent with H250's precedent gate for incremental overlay improvements) without introducing excess turnover/cost drag. Also worth a lightweight standalone test of pure TS momentum (each asset vs. its own history, absolute-momentum sign) as a diversifying sleeve alongside the existing CS rotation, given finding (1).
+
+**Related**: [Hypothesis Log — H243](../backtesting/hypothesis-log.md) (L/S momentum short-leg failure), [H278](../backtesting/hypothesis-log.md) (vol-parity weighting, different question), [H435/436/437](../backtesting/hypothesis-log.md) (current H026 baseline OOS Sharpe reference).
