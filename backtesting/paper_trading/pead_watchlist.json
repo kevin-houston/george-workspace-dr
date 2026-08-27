@@ -1,6 +1,14 @@
 {
-  "date": "2026-08-26",
+  "date": "2026-08-27",
   "candidates": [],
-  "scores": {},
-  "reason": "no earnings"
+  "scores": {
+    "NVDA": {
+      "score": -0.0025,
+      "surprise": -0.3386
+    },
+    "CRM": {
+      "score": -0.0653,
+      "surprise": null
+    }
+  }
 }

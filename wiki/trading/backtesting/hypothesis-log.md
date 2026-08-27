@@ -12168,3 +12168,73 @@ Variant A (unfiltered reproduction) barely clears the absolute gate at 1.176, no
 **Production correlation estimate**: N/A — NOT CONFIRMED, no variant to evaluate for blending.
 **Recommended follow-up**: (a) Do not test the OB filter against any further H241-family signal that already stacks a secondary cross-sectional overlay (sector-relative, volume-relative, or similar) on top of base momentum — two independent tests this session (H535, H536) both failed, the second more severely. (b) If OB-filter research continues on this universe, restrict to plain/unfiltered momentum variants only, consistent with where it has actually helped (H343/H344). (c) Closes the "combine two confirmed H241-family filters" angle for this session — both combinations tested (sector-relative × OB, volume-relative × OB) came back NOT CONFIRMED.
 **Results file**: `backtesting/results/h536_results.json`
+
+## H537 — Credit Spread Regime Rotation, HY-vs-IG Price-Based Relative Strength (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-26
+**Trigger**: Nightly research task flagged the standing priority list (low-vol anomaly, ETF pairs, stock momentum top-200) as stale/exhausted and asked for a genuinely fresh strategy family. Credit-spread/HY-vs-IG rotation has been attempted twice before by different specific mechanisms and failed both times for reasons unrelated to the core idea: H283 (bond carry via dividend yield — yfinance dividend data was empty) and H315 (FRED BAMLH0A0HYM2 credit-spread gate — series only available from June 2023, insufficient history, zero stress months triggered). This hypothesis uses a third, independent construction: pure price-based relative strength between HYG (high yield) and LQD (investment grade) — no dividend data, no FRED dependency — to test whether the credit cycle itself carries information distinct from H045's own same-axis 12m momentum ranking of all bond ETFs together.
+**Script**: `backtesting/daily/run_h537_credit_spread_regime_rotation.py`
+**Universe**: HYG, LQD, IEF, SHY, TLT (5 bond ETFs, all with full history from ~2007).
+**Signal**: `credit_spread_mom = hyg_3m_return - lqd_3m_return` (3-month relative strength of high-yield vs investment-grade credit, formed at month-end t using only data through t). 5 variants: A — binary HYG-if-positive/IEF-if-negative; B — three-way HYG (csm>0.5%) / SHY (csm<-0.5%) / LQD (else); C — continuous tilt between HYG and IEF scaled by csm; D — binary HYG-if-positive/TLT-if-negative (duration overlay on the risk-off leg); E — baseline, pure single-asset 12m momentum HYG-vs-SHY (sanity check, no credit-spread signal).
+**IS/OOS**: 2008-01-01 to 2017-12-31 (IS) / 2018-01-01 to present (OOS) — H045 canonical split.
+**Gate**: OOS Sharpe > 1.351 (H045 canonical baseline).
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS NegYrs | Worst 3-fold OOS Sharpe |
+|---|---|---|---|---|---|---|
+| A: binary HYG/IEF | 1.097 | 0.337 | 2.0% | -22.0% | 3 | -0.526 |
+| B: three-way HYG/SHY/LQD | 1.053 | 0.349 | 1.8% | -17.7% | 4 | -0.444 |
+| C: continuous tilt HYG/IEF | 0.974 | **0.494** | 2.8% | -16.7% | 2 | -0.463 |
+| D: binary HYG/TLT | 0.933 | 0.182 | 1.3% | -27.9% | 4 | -0.675 |
+| E: baseline HYG/SHY 12m momentum | 0.757 | 0.458 | 2.4% | -12.9% | 3 | -0.138 |
+
+All 5 variants fail the 1.351 gate by a wide margin — best OOS Sharpe (Var C, 0.494) is barely above a third of the gate. Every variant's worst 3-fold walk-forward Sharpe is negative, confirming genuine OOS instability rather than a near-miss.
+
+**Key findings**:
+1. **IS Sharpes (0.75-1.10) look reasonable but do not transfer OOS at all** — this is a textbook overfit-to-regime pattern: the 2008-2017 IS window contains the 2008-09 GFC credit crisis, where HY-vs-IG relative strength was a strong, clean signal (credit spreads blew out sharply and stayed wide through the recovery). No comparably clean, sustained credit-stress regime recurred in the 2018-2026 OOS window in a form this monthly 3-month-relative-strength signal could exploit — 2020's COVID crash was too fast (V-shaped, over within weeks) and 2022's stress was a rate shock that hit IG duration-heavy LQD and HY together rather than differentiating them.
+2. **The duration overlay (Var D, routing to TLT instead of IEF/SHY on the risk-off leg) is the worst-performing variant** (OOS 0.182, worst 3-fold -0.675) — adding duration risk to the defensive leg compounds losses during exactly the rate-shock-driven risk-off episodes (2022) where this signal already struggles, echoing H314's finding that duration overlays are redundant-to-harmful on bond momentum.
+3. **The pure single-asset momentum baseline (Var E) outperforms every credit-spread variant except C** — reinforces H045's own existing full-universe 12m momentum ranking as a better bond signal than an explicit two-asset credit-spread construction.
+4. **Best variant (C, continuous tilt) has near-zero correlation with IEF buy-and-hold OOS (corr = -0.083)** — while this variant fails the gate, the low correlation is a data point that credit-spread-tilt return streams are NOT simply a levered/inverse version of plain bond duration exposure; the failure is a signal-quality problem, not a redundancy problem.
+5. **Look-ahead safety verified**: `lookahead_self_check()` passed — 3-month relative-strength signal at index i reads only `month_end.iloc[i]` and `month_end.iloc[i-3]`; credited forward return is strictly `monthly_ret.iloc[i+1]`.
+6. This is now the third failed attempt at a credit-cycle/HY-vs-IG signal (H283, H315, H537), each via a genuinely different mechanism (dividend carry, FRED spread gate, price-based relative strength). Recommend treating "credit spread as a standalone rotation signal on H045" as closed pending a fundamentally different data source (e.g., actual OAS levels from a paid data vendor with full history, rather than a price-based proxy).
+
+**Production correlation estimate**: N/A — NOT CONFIRMED, no variant to evaluate for blending.
+**Recommended follow-up**: (a) Close the credit-spread-rotation angle on H045 pending access to a full-history OAS series (FRED's BAMLH0A0HYM2 only goes back to June 2023 per H315 — a paid vendor would be needed for pre-2023 coverage). (b) Do not attempt a 4th mechanism (e.g., options-implied credit skew) without a specific reason to expect the underlying signal-quality problem (IS overfitting to the single 2008-09 GFC episode) would be resolved by a different construction.
+**Results file**: `backtesting/results/h537_results.json`
+
+## H538 — REIT Sub-Sector Momentum Rotation (NOT CONFIRMED)
+
+**Status**: NOT CONFIRMED
+**Tested**: 2026-08-26
+**Trigger**: Same nightly session as H537, continuing the search for a genuinely fresh strategy family. Real estate/REIT exposure has only ever appeared in this log as a single component INSIDE broader multi-asset alt sleeves (H026's alts candidates include VNQ; H257's "real assets module" is GLD/DBC/VNQ/PDBC/IAU) — REIT property-type sub-sector dispersion (industrial/data-center vs. office/retail vs. residential vs. mortgage REITs) has never been tested as its own standalone cross-sectional rotation universe, despite being a well-documented real-estate factor, especially post-2020 (e-commerce boom for industrial REITs, remote-work drag on office REITs, 2022 rate shock hitting mortgage REITs hardest).
+**Script**: `backtesting/daily/run_h538_reit_subsector_rotation.py`
+**Universe**: VNQ (broad REIT benchmark), REZ (residential), REM (mortgage), ICF (large-cap REIT), USRT (broad market-cap REIT), RWR (Dow Jones REIT), plus BIL as the defensive/cash leg. Excluded SCHH (near-duplicate of VNQ/USRT) and MORT (near-duplicate of REM) as non-differentiated after a data-availability check; all 7 tickers used have full coverage from 2011.
+**Signal**: 6-month momentum (`mom_6 = price[t]/price[t-6] - 1`) across the 6 rotation candidates, formed at month-end t. Absolute-momentum overlay routes to BIL when the top-ranked candidate's own mom_6 <= 0. 5 variants: A — top-1 momentum, BIL-gated; B — top-2 equal-weight, BIL-gated; C — top-1 momentum, no cash gate (always fully invested); D — inverse-volatility-weighted top-3, BIL-gated; E — baseline, VNQ buy-and-hold.
+**IS/OOS**: 2013-01-01 to 2020-12-31 (IS, covers 2013 taper tantrum + 2020 COVID crash) / 2021-01-01 to present (OOS, covers the 2022 REIT rate-shock bear market).
+**Gate**: OOS Sharpe > 1.174 (H198/H241-family generic equity-analog baseline — REIT ETFs are equity-like total-return instruments, not treated as part of the H045 bond family).
+
+**Results**:
+
+| Variant | IS Sharpe | OOS Sharpe | OOS CAGR | OOS MaxDD | OOS NegYrs | Worst 3-fold OOS Sharpe |
+|---|---|---|---|---|---|---|
+| A: top-1 momentum, BIL-gated | 0.145 | 0.494 | 6.4% | -28.1% | 2 | 0.184 |
+| B: top-2 equal-weight, BIL-gated | 0.230 | 0.614 | 8.0% | -25.0% | 2 | 0.396 |
+| C: top-1 momentum, no gate | 0.308 | 0.360 | 5.3% | -34.1% | 2 | 0.050 |
+| D: inverse-vol top-3, BIL-gated | 0.280 | **0.622** | 8.0% | -23.8% | 2 | 0.444 |
+| E: baseline VNQ buy-and-hold | 0.516 | 0.438 | 6.6% | -32.8% | 2 | 0.323 |
+
+All 5 variants fail the 1.174 gate. IS Sharpes are weak across the board (0.15-0.52) — an early warning sign the family lacks discriminative power even before checking OOS. The best OOS variant (D) only modestly beats plain VNQ buy-and-hold (0.622 vs 0.438), and the rotation baseline itself (VNQ, Var E) actually has the best IS Sharpe of all 5 variants, meaning the rotation signal added value IS but not OOS.
+
+**Key findings**:
+1. **REIT sub-sector ETFs have too little cross-sectional dispersion for momentum rotation to earn a durable edge.** Unlike sector equity ETFs (H026) or bond duration buckets (H045), REIT sub-sectors are all dominated by a common rate-sensitivity factor — when rates moved sharply in 2022, essentially every REIT sub-sector fell together (all 5 variants show 2 negative years and deep MaxDDs of -24% to -34% OOS), leaving little room for rotation to add value by picking relative winners.
+2. **The absolute-momentum/BIL cash gate helps but not enough** — comparing C (no gate) to A (same top-1 signal, gated) shows the gate improves OOS Sharpe from 0.360 to 0.494, consistent with prior findings across H045/H354 that a cash overlay adds value on trend-following signals — but even with the gate, the family still falls far short of the 1.174 bar.
+3. **Inverse-volatility weighting across top-3 (Var D) is the best variant, but only by diversifying momentum risk, not by finding a better signal** — its edge over Var A (top-1) is modest and its worst 3-fold Sharpe (0.444) is still deeply sub-gate.
+4. **High correlation between the best variant and plain VNQ buy-and-hold (corr = 0.743)** — even before considering the failed gate, this confirms REIT sub-sector rotation would not be a diversifier against a passive REIT allocation, let alone against the existing H026/H041a/H045 production blend (which already holds real-estate-adjacent sector exposure via H026's alts sleeve).
+5. **Look-ahead safety verified**: `lookahead_self_check()` passed — 6-month momentum at index i reads only `month_end.iloc[i]` and `month_end.iloc[i-6]`; credited forward return is strictly the next month's return.
+6. Combined with H537, this closes two independent fresh-family attempts this session (credit-spread rotation, REIT sub-sector rotation) both NOT CONFIRMED — neither the bond-market credit cycle nor real-estate property-type dispersion currently supports a rotation strategy that clears its respective gate.
+
+**Production correlation estimate**: N/A — NOT CONFIRMED, no variant to evaluate for blending.
+**Recommended follow-up**: (a) Close the REIT sub-sector rotation angle — the underlying dispersion problem (common rate-sensitivity factor dominating property-type differences) is structural, not a parameter-tuning issue, so further variants (different lookback windows, different sub-sector combinations) are unlikely to help without a fundamentally different signal (e.g., a fundamentals-based REIT factor like FFO growth or occupancy rates, which would require a paid REIT-specific data source not currently available). (b) Do not add VNQ or REIT sub-sector ETFs to the H026 alts candidate pool expecting rotation alpha — plain buy-and-hold captured most of the available Sharpe in this test.
+**Results file**: `backtesting/results/h538_results.json`

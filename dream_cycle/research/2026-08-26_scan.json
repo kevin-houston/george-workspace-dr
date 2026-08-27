@@ -1,0 +1,95 @@
+{
+  "date": "2026-08-26",
+  "scan_type": "Phase 2 dream cycle - 5-angle research sweep (arXiv pairs/cointegration, arXiv PEAD, arXiv cross-sectional momentum, arXiv multi-agent LLM trading, GitHub trending quant repos)",
+  "angles": [
+    {
+      "angle": "1_pairs_trading_cointegration_llm",
+      "status": "dry",
+      "findings": [],
+      "note": "No new papers found beyond what is already logged in wiki/trading/algorithms/pairs-trading.md (H152-H160/H200 exhausted family; H316 Moira arXiv:2605.01954 queued; H319 LLM semantic network stub; H401 design references Attention Factors arXiv:2510.11616 and TH-GNN arXiv:2601.04602; Valeyre arXiv:2412.09394 logged). Angle considered saturated for now — cointegration-based pairs trading is a mature, heavily-mined area and this pipeline has already surveyed the recent LLM-augmented variants."
+    },
+    {
+      "angle": "2_pead_post_earnings_drift_text_signals",
+      "status": "2 findings",
+      "findings": [
+        {
+          "title": "Extracting the Structure of Press Releases for Predicting Earnings Announcement Returns",
+          "authors": "Wu, Akin, Martineau, Grégoire, Veneris",
+          "venue": "ICAIF 2025",
+          "url": "https://arxiv.org/abs/2509.24254",
+          "finding": "138,797 EDGAR 8-K press releases 2005-2023; FinBERT best of text-embedding methods tested; structurally-aggregated multi-section 'SoftMean' sentiment score beats whole-document scalar score, same-day return spread +4.58%/-5.06%; soft info content comparable to numeric EPS surprise.",
+          "relevance_score": "HIGH",
+          "staged": true,
+          "staged_id": "dc-2026-08-26-1",
+          "staging_rationale": "Direct, low-effort refinement candidate for confirmed production strategy H174 (same FinBERT-on-8-K pipeline family, same event type). Not adopted/implemented — staged as a wiki research-lead note for a future backtesting session to evaluate section-level sentiment aggregation against the current single-scalar-score baseline."
+        },
+        {
+          "title": "(unnamed companion paper on 8-K text feature engineering surveyed but not independently novel)",
+          "url": "n/a",
+          "finding": "Sub-agent flagged a second, more incremental paper on 8-K linguistic feature engineering (readability/tone metrics) that substantially overlaps with H163/H168/H172/H175's already-exhausted FinBERT/readability feature space with no new mechanism.",
+          "relevance_score": "MEDIUM",
+          "staged": false,
+          "staging_rationale": "Redundant with already-exhausted H163/H168/H172/H175 findings (transcript coverage bias root cause, FinBERT CLS embedding tested and NOT CONFIRMED, readability features not previously beating whole-document FinBERT score). No new angle to stage."
+        }
+      ]
+    },
+    {
+      "angle": "3_cross_sectional_momentum_factor_momentum",
+      "status": "1 finding (flagged, not endorsed) + confirmed open gap",
+      "findings": [
+        {
+          "title": "Drift-regime conditioning factor on cross-sectional momentum",
+          "url": "https://arxiv.org/abs/2511.12490",
+          "finding": "Claims a backtested Sharpe ratio of approximately 13 for a drift-regime-conditioned momentum strategy — far outside the range of any credible or previously-audited result in this pipeline (best-ever production blend Sharpe is 4.158; every single-strategy OOS Sharpe above ~3 in this pipeline's history has subsequently been found look-ahead-bias-driven per the H343/H344/H345/H346/H355/H356/H411/H416/H417/H418/H470/H483/H484/H492/H493/H509/H510-H514 retraction family).",
+          "relevance_score": "HIGH (but treated as a bug-hunt candidate, not an endorsement)",
+          "staged": true,
+          "staged_id": "dc-2026-08-26-2",
+          "staging_rationale": "Genuinely new-to-wiki information relevant to the still-open H157/H158 gap (broad-universe/sector-neutral cross-sectional momentum, referenced since H156 PARTIAL but never formally run), but staged explicitly as a skeptical bug-hunt flag rather than a build recommendation, given the extreme Sharpe claim and this pipeline's own extensive track record of such claims collapsing on as-of-date audit."
+        }
+      ],
+      "gap_check": "Confirmed via grep across hypothesis-log.md, factor-models.md, momentum-strategies.md: H157 and H158 do not exist as run hypotheses despite being referenced as the logical next step after H156 (PARTIAL, 54-stock survivorship-biased NASDAQ universe, best n=20 OOS Sharpe 0.866-1.295, doesn't beat QQQ). This remains a genuinely open gap; no paper found tonight filled it outright, but finding #1 above (2511.12490) is a candidate input for a future H157/H158 run, conditional on bug-auditing its methodology first."
+    },
+    {
+      "angle": "4_multiagent_llm_trading_systems",
+      "status": "dry / saturated as expected",
+      "findings": [],
+      "note": "No new papers beyond FINSABER (arXiv:2505.07078), which was already ingested as its own wiki source page earlier today (2026-08-26) by the separate wiki-rotation task (wiki/trading/sources/finsaber-llm-investing-benchmark-2026.md) — confirmed via direct read, correctly not re-flagged. This angle is now well-covered by four independent skepticism-cluster citations (H520/H521 own replication, Sheng et al. Alpha Illusion arXiv:2605.16895, LLM-embeddings-vs-price EMH test arXiv:2509.01590, and FINSABER at-scale benchmark) all pointing to the same conclusion: LLM trading-agent alpha claims do not survive scale, longer horizons, or honest cost/bias accounting. H280/H281/H319 remain correctly deprioritized. No action needed."
+    },
+    {
+      "angle": "5_github_trending_quant_finance_repos",
+      "status": "2 findings, both verified real and staged as one combined tools note",
+      "findings": [
+        {
+          "title": "ArturSepp/OptimalPortfolios",
+          "url": "https://github.com/ArturSepp/OptimalPortfolios",
+          "finding": "92 stars, MIT license, created 2023-07-08, last pushed 2026-08-24. Python library for portfolio optimization: max-Sharpe, min-variance, risk-parity, robust/shrinkage-covariance variants. Verified real via direct GitHub API call (not just search snippet).",
+          "relevance_score": "HIGH (borderline — tooling not a signal)",
+          "staged": true,
+          "staged_id": "dc-2026-08-26-3"
+        },
+        {
+          "title": "ArturSepp/factorlasso",
+          "url": "https://github.com/ArturSepp/factorlasso",
+          "finding": "24 stars, GPL-3.0 license, created 2026-03-22, last pushed 2026-08-23. LASSO-based factor selection to distinguish genuine return drivers from redundant/collinear noise. Verified real via direct GitHub API call.",
+          "relevance_score": "HIGH (borderline — tooling not a signal)",
+          "staged": true,
+          "staged_id": "dc-2026-08-26-3",
+          "staging_rationale": "Combined with OptimalPortfolios into a single wiki tools page (same author/ecosystem, complementary use cases — portfolio construction vs. factor diagnostics). Both relevant to formalizing the hand-tuned production blend weighting and the ad hoc cross-strategy correlation checks scattered across H241/H313/H354/H361/H362/H470. Reference/tools note only, no adoption action, no install performed."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_findings_surveyed": 6,
+    "staged_count": 3,
+    "not_staged_count": 3,
+    "staged_ids": ["dc-2026-08-26-1", "dc-2026-08-26-2", "dc-2026-08-26-3"],
+    "not_staged_reasons": [
+      "Angle 1 (pairs/cointegration): dry, no new findings — area saturated per existing wiki coverage",
+      "Angle 2 secondary finding: redundant with already-exhausted H163/H168/H172/H175 FinBERT/readability feature work",
+      "Angle 4 (multi-agent LLM): dry, only candidate (FINSABER) already ingested by the parallel wiki-rotation task earlier the same day"
+    ],
+    "duplicate_check_performed": "Confirmed via reads of wiki/trading/index.md, wiki/trading/algorithms/pairs-trading.md, wiki/trading/algorithms/multi-agent-llm-trading.md, wiki/trading/sources/finsaber-llm-investing-benchmark-2026.md, and research-log entries for 2026-08-22 through 2026-08-25 that none of tonight's 3 staged findings duplicate prior nights' dream-cycle output.",
+    "verification_performed": "All 3 staged findings independently verified as real/legitimate before staging: arXiv:2509.24254 and arXiv:2511.12490 confirmed via direct arXiv HTML fetch + citation-meta-tag grep; ArturSepp/OptimalPortfolios and ArturSepp/factorlasso confirmed via direct GitHub API calls (stars, license, push dates) rather than trusting agent-reported search snippets, per the standing hallusquatting-defense instruction."
+  }
+}
